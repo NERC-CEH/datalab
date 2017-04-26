@@ -1,1 +1,19 @@
 ansible_python_interpreter: /usr/bin/python3
+
+root_password: "{{ vault_root_password }}"
+deploy_user: deploy
+deploy_password: "{{ vault_deploy_password }}"
+logwatch_email: "gareth.lloyd@stfc.ac.uk"
+
+deploy_public_keys:
+  - gary_rsa.pub
+  - josh_rsa.pub
+
+base_packages:
+  - aptitude
+  - ufw
+  - fail2ban
+  - unattended-upgrades
+  - logwatch
+
+ssh_port: 22

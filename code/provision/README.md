@@ -62,3 +62,17 @@ ansible <host> -m ping -u <user>
 ```
 
 where ```user``` is the user to connect as. This will be ```root``` for new machines but initial provisioning will add a new ```deploy``` user and remove the root access.
+
+## Executing Ansible scripts
+
+Note that server locations may change and the inventory may need to be updated prior to execution until we have dynamic inventory
+
+### Secure Server
+
+The secure server script currently targets any servers in the insecure inventory group. Once they have been secured they should be moved. While ansible is idempotent the script currently executes as the root user and its last step is to remove root SSH. This means that a second execution is unable to connect. This is still a work in progress.
+
+To execute:
+
+```
+~/playbooks$ ansible-playbook secure-server.yml -u root
+```
