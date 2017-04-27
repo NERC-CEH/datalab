@@ -74,5 +74,5 @@ The secure server script currently targets any servers in the insecure inventory
 To execute:
 
 ```
-~/playbooks$ ansible-playbook secure-server.yml -u root
+~/playbooks$ ansible-playbook --ssh-common-args="-o StrictHostKeyChecking=no" secure-server.yml
 ```

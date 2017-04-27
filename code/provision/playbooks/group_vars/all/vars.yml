@@ -17,3 +17,8 @@ base_packages:
   - logwatch
 
 ssh_port: 22
+
+management_ip_addresses:
+  - 130.246.189.181
+  - 130.246.188.101
+  - 212.140.132.200
