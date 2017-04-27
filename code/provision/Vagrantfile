@@ -2,12 +2,13 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+  config.ssh.forward_agent = true
+
   config.vm.define "control" do |control|
     control.vm.box = "ubuntu/xenial64"
     control.vm.hostname = "datalab-control"
     control.vm.network "private_network", ip: "192.168.33.2"
     control.vm.synced_folder "playbooks", "/home/ubuntu/playbooks"
-    control.vm.synced_folder "~/.ssh", "/home/ubuntu/keys"
     control.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
     end

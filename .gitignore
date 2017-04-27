@@ -1,3 +1,4 @@
+*.log
 
 code/provision/.vagrant
 code/provision/playbooks/vault-password.txt
