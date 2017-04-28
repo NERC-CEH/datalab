@@ -1,0 +1,25 @@
+---
+- name: Playbook to perform initial configuration of a new secure-server
+  hosts: localhost
+
+  tasks:
+    - name: Send Slack notification that build is starting
+      slack:
+        token: "{{ slack_token }}"
+        msg: 'New server build starting on {{ inventory_hostname}}'
+        color: good
+      delegate_to: localhost
+
+- include: secure-server.yml
+- include: base-configuration.yml
+
+- name: Notify that new server build is complete
+  hosts: localhost
+
+  tasks:
+    - name: Send Slack notification that build is complete
+      slack:
+        token: "{{ slack_token }}"
+        msg: 'New server build complete on {{ inventory_hostname}}'
+        color: good
+      delegate_to: localhost
