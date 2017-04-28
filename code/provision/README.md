@@ -67,7 +67,15 @@ where ```user``` is the user to connect as. This will be ```root``` for new mach
 
 Note that server locations may change and the inventory may need to be updated prior to execution until we have dynamic inventory
 
-### Secure Server
+### New Server
+
+This combines scripts in order:
+
+* Notify Slack for start
+* Secure Server
+* Base Configuration
+
+### Secure Server (secure-server.yml)
 
 The secure server script currently targets any servers in the insecure inventory group. Once they have been secured they should be moved. While ansible is idempotent the script currently executes as the root user and its last step is to remove root SSH. This means that a second execution is unable to connect. This is still a work in progress.
 
@@ -75,4 +83,18 @@ To execute:
 
 ```
 ~/playbooks$ ansible-playbook --ssh-common-args="-o StrictHostKeyChecking=no" secure-server.yml
+```
+
+### Base Configuration (base-configuration.yml)
+
+This playbook:
+
+* Installs some core packages
+* Configures SSH firewall rules
+* Installs and configures logwatch and postfix
+
+To execute:
+
+```
+~/playbooks$ ansible-playbook base-configuration.yml
 ```
