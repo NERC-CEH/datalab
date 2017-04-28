@@ -34,7 +34,7 @@
       ufw:
         rule: allow
         port: "{{ ssh_port }}"
-        from_ip: 
+        from_ip: "{{ item }}"
         proto: tcp
       with_items: "{{ management_ip_addresses }}"
 

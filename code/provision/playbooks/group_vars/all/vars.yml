@@ -1,8 +1,9 @@
 ansible_python_interpreter: /usr/bin/python3
+ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
 
-root_password: "{{ vault_root_password }}"
+root_password_crypted: "{{ vault_root_password_crypted }}"
 deploy_user: deploy
-deploy_password: "{{ vault_deploy_password }}"
+deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
 logwatch_email: "gareth.lloyd@stfc.ac.uk"
 
 deploy_public_keys:
