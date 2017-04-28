@@ -3,49 +3,65 @@
   user: root
 
   tasks:
-    - name: Change root password
-      user: 
-        name: root
-        password: "{{ root_password_crypted }}"
+    - block:
+      - name: Change root password
+        user: 
+          name: root
+          password: "{{ root_password_crypted }}"
 
-    - name: Add deploy user
-      user:
-        name: "{{ deploy_user }}"
-        password: "{{ deploy_password_crypted }}"
-        shell: /bin/bash
+      - name: Add deploy user
+        user:
+          name: "{{ deploy_user }}"
+          password: "{{ deploy_password_crypted }}"
+          shell: /bin/bash
 
-    - name: Add authorized keys for deploy user
-      authorized_key:
-        user: "{{ deploy_user }}"
-        key: "{{ lookup('file', './keys/{{item}}') }}"
-      with_items: "{{ deploy_public_keys }}"
+      - name: Add authorized keys for deploy user
+        authorized_key:
+          user: "{{ deploy_user }}"
+          key: "{{ lookup('file', './keys/{{item}}') }}"
+        with_items: "{{ deploy_public_keys }}"
 
-    - name: Add deploy user to sudoers
-      lineinfile: dest=/etc/sudoers
-                  regexp="{{ deploy_user }} ALL"
-                  line="{{ deploy_user }} ALL=(ALL) ALL"
-                  state=present
+      - name: Add deploy user to sudoers
+        lineinfile: dest=/etc/sudoers
+                    regexp="{{ deploy_user }} ALL"
+                    line="{{ deploy_user }} ALL=(ALL) ALL"
+                    state=present
 
-    - name: Change ssh port
-      lineinfile: dest=/etc/ssh/sshd_config
-                  regexp="^Port\s"
-                  line="Port {{ ssh_port }}"
-                  state=present
-      notify: Restart ssh
+      - name: Change ssh port
+        lineinfile: dest=/etc/ssh/sshd_config
+                    regexp="^Port\s"
+                    line="Port {{ ssh_port }}"
+                    state=present
+        notify: Restart ssh
 
-    - name: Disallow password authentication
-      lineinfile: dest=/etc/ssh/sshd_config
-                  regexp="^PasswordAuthentication"
-                  line="PasswordAuthentication no"
-                  state=present
-      notify: Restart ssh
+      - name: Disallow password authentication
+        lineinfile: dest=/etc/ssh/sshd_config
+                    regexp="^PasswordAuthentication"
+                    line="PasswordAuthentication no"
+                    state=present
+        notify: Restart ssh
 
-    - name: Disallow root SSH access
-      lineinfile: dest=/etc/ssh/sshd_config
-                  regexp="^PermitRootLogin"
-                  line="PermitRootLogin no"
-                  state=present
-      notify: Restart ssh
+      - name: Disallow root SSH access
+        lineinfile: dest=/etc/ssh/sshd_config
+                    regexp="^PermitRootLogin"
+                    line="PermitRootLogin no"
+                    state=present
+        notify: Restart ssh
+
+      - name: Send Slack notification that server is secured
+        slack:
+          token: "{{ slack_token }}"
+          msg: 'Initial security configuration applied to {{ inventory_hostname}} server'
+          color: good
+        delegate_to: localhost
+
+      rescue:
+        - name: Send Slack notification that playbook failed
+          slack:
+            token: "{{ slack_token }}"
+            msg: 'Failed to secure {{ inventory_hostname}}'
+            color: danger
+          delegate_to: localhost
 
   handlers:
     - name: Restart ssh
