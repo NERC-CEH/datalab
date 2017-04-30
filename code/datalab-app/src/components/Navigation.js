@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import NavMenu from './NavMenu';
+import menuActions from '../actions/menuActions';
 
-class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { open: false };
-    this.toggleDraw = this.toggleDraw.bind(this);
-  }
+const Navigation = ({ isMenuOpen, actions: { showMenu, hideMenu } }) => (
+  <div>
+    <AppBar title="Data Labs" onLeftIconButtonTouchTap={showMenu} />
+    <Drawer open={isMenuOpen} docked={false} onRequestChange={hideMenu}>
+      <NavMenu />
+    </Drawer>
+  </div>
+);
 
-  toggleDraw() {
-    this.setState({ open: !this.state.open });
-  }
-
-  render() {
-    return (
-      <div>
-        <AppBar title="Data Labs" onLeftIconButtonTouchTap={this.toggleDraw} />
-        <Drawer open={this.state.open} docked={false} onRequestChange={this.toggleDraw}>
-          <MenuItem>Home</MenuItem>
-          <MenuItem>About</MenuItem>
-        </Drawer>
-      </div>
-      );
-  }
+function mapStateToProps(state) {
+  return state.menu;
 }
 
-export default Navigation;
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators({ ...menuActions }, dispatch) };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
