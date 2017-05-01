@@ -10,7 +10,7 @@ const Navigation = ({ isMenuOpen, actions: { showMenu, hideMenu } }) => (
   <div>
     <AppBar title="Data Labs" onLeftIconButtonTouchTap={showMenu} />
     <Drawer open={isMenuOpen} docked={false} onRequestChange={hideMenu}>
-      <NavMenu />
+      <NavMenu hideMenu={hideMenu} />
     </Drawer>
   </div>
 );
