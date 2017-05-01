@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import NavMenu from './NavMenu';
-import menuActions from '../actions/menuActions';
+import menuActions from '../../actions/menuActions';
 
 const Navigation = ({ isMenuOpen, actions: { showMenu, hideMenu } }) => (
   <div>
