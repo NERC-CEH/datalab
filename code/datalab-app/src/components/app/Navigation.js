@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AppBar from 'material-ui/AppBar';
@@ -14,6 +15,15 @@ const Navigation = ({ isMenuOpen, actions: { showMenu, hideMenu } }) => (
     </Drawer>
   </div>
 );
+
+Navigation.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+    showMenu: PropTypes.func.isRequired,
+    hideMenu: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
 
 function mapStateToProps(state) {
   return state.menu;

@@ -9,7 +9,7 @@ const App = ({ children }) => (
   </div>
 );
 
-App.PropTypes = {
+App.propTypes = {
   children: PropTypes.element,
 };
 
