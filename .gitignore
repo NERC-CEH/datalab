@@ -1,4 +1,9 @@
 *.log
+yarn.lock
+
+code/datalab-app/coverage/
+code/datalab-app/build/
+node_modules/
 
 code/provision/.vagrant
 code/provision/playbooks/vault-password.txt

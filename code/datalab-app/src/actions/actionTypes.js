@@ -1,0 +1,3 @@
+export const PROMISE_TYPE_PENDING = 'PENDING';
+export const PROMISE_TYPE_SUCCESS = 'SUCCESS';
+export const PROMISE_TYPE_FAILURE = 'FAILURE';
