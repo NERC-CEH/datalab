@@ -12,7 +12,7 @@ export default function configureStore(initialState) {
     composeEnhancers(applyMiddleware(...middleware, logger))
   );
 
-    if (module.hot) {
+  if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
       const nextReducer = require('../reducers').default; // eslint-disable-line global-require
