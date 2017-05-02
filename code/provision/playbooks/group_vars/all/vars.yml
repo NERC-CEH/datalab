@@ -1,9 +1,14 @@
 ansible_python_interpreter: /usr/bin/python3
+
+ssh_port: 22
+bastion_ip_address: 192.171.139.118
+bastion_internal_ip_address: 192.168.3.2
+deploy_user: deploy
 ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
 
 root_password_crypted: "{{ vault_root_password_crypted }}"
-deploy_user: deploy
 deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
+
 logwatch_email: "gareth.lloyd@stfc.ac.uk"
 slack_token: "{{ vault_slack_token }}"
 
@@ -17,10 +22,3 @@ base_packages:
   - fail2ban
   - unattended-upgrades
   - logwatch
-
-ssh_port: 22
-
-management_ip_addresses:
-  - 130.246.189.181
-  - 130.246.188.101
-  - 212.140.132.200

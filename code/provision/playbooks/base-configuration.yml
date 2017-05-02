@@ -1,5 +1,5 @@
 ---
-- hosts: insecure
+- hosts: bastion
   user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
@@ -31,7 +31,7 @@
           state: enabled
           policy: deny
 
-      - name: Lock down ssh traffic
+      - name: Allow ssh traffic from machines allowed to manage this node
         ufw:
           rule: allow
           port: "{{ ssh_port }}"
@@ -65,6 +65,6 @@
         - name: Send Slack notification that base build failed
           slack:
             token: "{{ slack_token }}"
-            msg: 'Base build filed on {{ inventory_hostname}}'
+            msg: 'Base build failed on {{ inventory_hostname}}'
             color: danger
           delegate_to: localhost
