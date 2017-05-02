@@ -1,0 +1,26 @@
+ansible_python_interpreter: /usr/bin/python3
+ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
+
+root_password_crypted: "{{ vault_root_password_crypted }}"
+deploy_user: deploy
+deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
+logwatch_email: "gareth.lloyd@stfc.ac.uk"
+slack_token: "{{ vault_slack_token }}"
+
+deploy_public_keys:
+  - gary_rsa.pub
+  - josh_rsa.pub
+
+base_packages:
+  - aptitude
+  - ufw
+  - fail2ban
+  - unattended-upgrades
+  - logwatch
+
+ssh_port: 22
+
+management_ip_addresses:
+  - 130.246.189.181
+  - 130.246.188.101
+  - 212.140.132.200
