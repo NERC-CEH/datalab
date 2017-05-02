@@ -37,7 +37,7 @@ Download from the [Vagrant](https://www.vagrantup.com/downloads.html) website.
 Install using ```rpm```
 
 ```
-sudo rpm -i <package-name>
+sudo yum install <package-name>.rpm
 ```
 
 ### Create Ansible control VM
