@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
+import { Route, Switch } from 'react-router-dom';
+import browserHistory from './store/browserHistory';
 import App from './pages/App';
 import HomePage from './pages/HomePage';
 import ExamplePage from './pages/ExamplePage';
@@ -7,7 +9,7 @@ import NotFoundPage from './pages/NotFoundPage';
 
 
 const router = () => (
-  <BrowserRouter>
+  <ConnectedRouter history={browserHistory} >
     <div>
       <Route component={App}/>
       <Switch>
@@ -16,7 +18,7 @@ const router = () => (
         <Route component={NotFoundPage} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </ConnectedRouter>
 );
 
 export default router;
