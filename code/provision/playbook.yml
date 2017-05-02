@@ -1,0 +1,6 @@
+---
+# Vagrant is able to provision Ansible into a new VM but requires a playbook 
+# to be supplied as a parameter.
+# Given we don't actually want to provision any software into the control 
+# VM at the current time we aer just supplying an emtpy playbook
+- hosts: localhost
