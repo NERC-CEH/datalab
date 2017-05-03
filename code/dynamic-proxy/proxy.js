@@ -11,5 +11,7 @@ const options = {
   path: 'redbird'
 }
 
-//Initialise proxy with ETCD Backend
-new EtcdBackend(proxy, options);
+export default function startProxy() {
+  //Initialise proxy with ETCD Backend
+  new EtcdBackend(proxy, options);
+}
