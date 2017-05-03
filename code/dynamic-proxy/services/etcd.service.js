@@ -25,6 +25,12 @@ export class EtcdService {
     return this.connection.delAsync(source)
       .then(response => response);
   }
+
+  deleteAllRoutes() {
+    return this.connection.delAsync(`${etcdRedbirdDir}/`, { recursive: true })
+      .then(() => this.connection.mkdirAsync(etcdRedbirdDir))
+      .then(response => response);
+  }
 }
 
 export default new EtcdService();

@@ -13,7 +13,7 @@ function addRoute(req, res, next) {
     })
     .catch((error) => {
       res.status(500);
-      res.send({ message: `Error adding a route: ${error}`})
+      res.send({ message: `Error adding a route: ${error}`});
     });
 }
 
@@ -24,8 +24,19 @@ function deleteRoute(req, res, next) {
     })
     .catch((error) => {
       res.status(500);
-      res.send({ message: `Error adding a route: ${error}`})
+      res.send({ message: `Error deleting route ${req.body.source}: ${error}`});
     });
 }
 
-export { listRoutes, addRoute, deleteRoute };
+function deleteAllRoutes(req, res, next) {
+  etcdService.deleteAllRoutes()
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((error) => {
+      res.status(500);
+      res.send({ message: `Error delecting all routes: ${error}`})
+    });
+}
+
+export { listRoutes, addRoute, deleteRoute, deleteAllRoutes };
