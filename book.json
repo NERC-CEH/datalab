@@ -1,3 +1,6 @@
 {
-    "root": "./docs"
+  "root": "./docs",
+  "styles": {
+    "website": "styles/website.css"
+  }
 }
