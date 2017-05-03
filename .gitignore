@@ -1,8 +1,9 @@
 *.log
-yarn.lock
+datalab-app.iml
 
 code/datalab-app/coverage/
 code/datalab-app/build/
+.idea/
 node_modules/
 
 code/provision/.vagrant
