@@ -1,9 +1,11 @@
 *.log
-datalab-app.iml
+*.iml
+
+_book/
+.idea/
 
 code/datalab-app/coverage/
 code/datalab-app/build/
-.idea/
 node_modules/
 
 code/provision/.vagrant
