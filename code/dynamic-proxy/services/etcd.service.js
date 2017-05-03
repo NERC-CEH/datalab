@@ -1,9 +1,10 @@
 import Etcd from 'node-etcd'
 import Promise from 'bluebird'
+import config from '../config';
 
-const etcdHost = 'localhost';
-const etcdPort = 2379;
-const etcdRedbirdDir = 'redbird';
+const etcdHost = config.get('etcdHost');
+const etcdPort = config.get('etcdPort');
+const etcdRedbirdDir = config.get('redbirdEtcdKey');
 
 export class EtcdService {
   constructor() {

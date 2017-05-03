@@ -1,14 +1,15 @@
 import redbird from 'redbird';
 import { EtcdBackend } from './etcd-backend';
+import config from './config';
 
 const proxy = redbird({
-  port:8080
+  port: config.get('proxyPort')
 });
 
 const options = {
-  hosts: 'localhost',
-  port: 2379,
-  path: 'redbird'
+  hosts: config.get('etcdHost'),
+  port: config.get('etcdPort'),
+  path: config.get('redbirdEtcdKey')
 }
 
 export default function startProxy() {

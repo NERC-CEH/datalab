@@ -6,7 +6,7 @@ export class EtcdBackend {
     this.proxy = proxy;
     this.log = this.proxy.log;
     this.connection = Promise.promisifyAll(new Etcd(options.hosts, options.port, options.ssloptions));
-    this.etcdDir = options.path ? options.path : "redbird";
+    this.etcdDir = options.path;
 
     this.loadExistingConfiguration()
       .then(this.createWatcher());
