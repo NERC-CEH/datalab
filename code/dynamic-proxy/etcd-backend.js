@@ -63,7 +63,7 @@ export class EtcdBackend {
 
   cleanEtcdDir(str) {
     let dirWithoutKey = str.replace(this.etcdDir, '').replace(/^\/+|\/+$/g, '');
-    let decodedDir = decodeURIComponent(dirWithoutKey);
+    let decodedDir = dirWithoutKey.replace('-', '/');
     return decodedDir
   }
 }

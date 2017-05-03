@@ -17,12 +17,14 @@ export class EtcdService {
   }
 
   addRoute(source, target) {
-    return this.connection.setAsync(source, target)
+    const path = this.createEtcdPath(source);
+    console.log(path);
+    return this.connection.setAsync(this.createEtcdPath(source), target)
       .then(response => response);
   }
 
   deleteRoute(source) {
-    return this.connection.delAsync(source)
+    return this.connection.delAsync(this.createEtcdPath(source))
       .then(response => response);
   }
 
@@ -30,6 +32,11 @@ export class EtcdService {
     return this.connection.delAsync(`${etcdRedbirdDir}/`, { recursive: true })
       .then(() => this.connection.mkdirAsync(etcdRedbirdDir))
       .then(response => response);
+  }
+
+  createEtcdPath(source) {
+    const encodedPath = source.replace('/', '-');
+    return `${etcdRedbirdDir}/${encodedPath}`;
   }
 }
 
