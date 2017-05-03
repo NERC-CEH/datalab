@@ -1,8 +1,10 @@
-# datalab-app
+# Data Lab Web Application
 
 ## Create local development environment 
+The instructions shown below are for CentOS 7.
+
 ### Install node.js and npm
-Install `node.js` and `npm` package manager. The instructions shown below are for CentOS 7.
+Install `node.js` and `npm` package manager.
 
 `sudo yum install nodejs npm`
 
@@ -28,15 +30,32 @@ includes some additional functionality.
 The following instruction will install the required modules for both production and
 development.
 
-`yarn install`
+```
+# within the code/datalab-app folder
+yarn install
+```
 
 ### Start local development environment
 The following line will build and serve `datalab-app`. The application will rebuild if
 the files are modified.
 
-`yarn start`
+```
+# within the code/datalab-app folder
+yarn start
+```
 
 ### Run unit tests locally
-The following instruction will start an interactive console to run the unit tests.
+The following instruction will start an interactive console to run the unit tests. Running
+this interactive console with an IDE or text editor open with active file watchers can
+cause the test environment to crash, see section below for solution.
 
-`yarn test`
+```
+# within the code/datalab-app folder
+yarn test
+```
+### Increase number of file watchers permitted in linux
+The instuctions below will resolve crashes resultsing from multiple application using
+file watches. More information can be found
+[here](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers).
+
+`echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
