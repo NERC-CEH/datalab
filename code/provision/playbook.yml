@@ -1,6 +1,39 @@
 ---
-# Vagrant is able to provision Ansible into a new VM but requires a playbook 
+# Vagrant is able to provision Ansible into a new VM but requires a playbook
 # to be supplied as a parameter.
-# Given we don't actually want to provision any software into the control 
+# Given we don't actually want to provision any software into the control
 # VM at the current time we aer just supplying an emtpy playbook
-- hosts: localhost
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Generate en_GB locale
+      locale_gen:
+        name: en_GB.UTF-8
+        state: present
+
+    - name: Install libxml2-dev
+      apt:
+        name: libxml2-dev
+        state: present
+
+    - name: Install libxslt-dev
+      apt:
+        name: libxslt-dev
+        state: present
+
+    - name: Install python-dev
+      apt:
+        name: python-dev
+        state: present
+
+    - name: Install python-pip
+      apt:
+        name: python-pip
+        state: present
+
+    - name: Install pyvcloud
+      pip: name=pyvcloud
+
+    - name: Install xmltodict
+      pip: name=xmltodict
