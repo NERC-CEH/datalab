@@ -17,7 +17,7 @@ var config = convict({
   apiPort: {
     doc: "The port for the API service.",
     format: "port",
-    default: 3000,
+    default: 8081,
     env: "PROXY_API_PORT",
   },
   etcdHost: {
