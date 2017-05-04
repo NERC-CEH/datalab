@@ -1,0 +1,16 @@
+version: '3'
+services:
+  etcd:
+    image: 'quay.io/coreos/etcd:latest'
+    volumes:
+      - /tmp/etcd-data:/etcd-data
+    command: /usr/local/bin/etcd
+    network_mode: 'host'
+    environment:
+      - ETCD_DATA_DIR=/etcd-data
+      - ETCD_NAME=proxy-etcd
+      - ETCD_INITIAL_CLUSTER=proxy-etcd=http://0.0.0.0:2380
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
