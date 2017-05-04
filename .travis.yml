@@ -20,7 +20,7 @@ script:
   - cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn install && yarn test
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" = "travis-app-build" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
       yarn global add gitbook-cli;
       cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn build && docker build -t nerc/datalab-app .;
       cd $TRAVIS_BUILD_DIR/docs/ && gitbook build && docker build -t nerc/docs .;
