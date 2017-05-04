@@ -16,5 +16,5 @@ COPY package.json /usr/src/app/
 RUN yarn install --silent --production && yarn cache clean
 COPY . /usr/src/app
 
-EXPOSE 3000
+EXPOSE 8080 8081
 CMD [ "yarn", "start" ]
