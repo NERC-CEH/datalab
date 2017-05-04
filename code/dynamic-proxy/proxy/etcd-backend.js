@@ -1,4 +1,4 @@
-import etcdService from './services/etcd.service.js';
+import etcdService from '../services/etcd.service.js';
 
 export class EtcdBackend {
   constructor(proxy) {

@@ -1,6 +1,9 @@
 import Etcd from 'node-etcd'
 import Promise from 'bluebird'
 import config from '../config';
+import bunyan from 'bunyan';
+
+const logger = bunyan.createLogger({name: 'etcd.service'});
 
 const etcdHost = config.get('etcdHost');
 const etcdPort = config.get('etcdPort');
@@ -18,7 +21,6 @@ export class EtcdService {
 
   addRoute(source, target) {
     const path = this.createEtcdPath(source);
-    console.log(path);
     return this.connection.setAsync(this.createEtcdPath(source), target)
       .then(response => response);
   }
@@ -29,6 +31,7 @@ export class EtcdService {
   }
 
   deleteAllRoutes() {
+    logger.info('Deleting Redbird directory');
     return this.connection.delAsync(`${etcdRedbirdDir}/`, { recursive: true })
       .then(this.createDirectory)
       .then(response => response);
@@ -39,10 +42,12 @@ export class EtcdService {
     return this.connection.getAsync(etcdRedbirdDir)
       .then((response) => {
         etcdDirExists = true;
+        logger.info('Redbird directory exists, loading routes');
         return this.extractRoutes(response);
       })
       .catch((error) => {
         if (!etcdDirExists) {
+          logger.info('Creating Redbird directory');
           return this.createDirectory()
             .then(() => []);
         }

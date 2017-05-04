@@ -1,6 +1,6 @@
 import redbird from 'redbird';
 import { EtcdBackend } from './etcd-backend';
-import config from './config';
+import config from '../config';
 
 const proxy = redbird({
   port: config.get('proxyPort')

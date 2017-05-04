@@ -1,5 +1,5 @@
 import express from 'express';
-import * as etcdController from '../controllers/etcd.controller';
+import * as etcdController from './etcd.controller';
 
 const router = express.Router();
 
