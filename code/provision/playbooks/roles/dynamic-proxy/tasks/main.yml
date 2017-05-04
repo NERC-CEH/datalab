@@ -1,0 +1,8 @@
+---
+- name: Download dynamic-proxy compose file
+  get_url:
+    url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/dynamic-proxy/docker-compose.yml
+    dest: /home/deploy/docker-compose.yml
+
+- name: Start dynamic-proxy
+  shell: docker-compose up -d
