@@ -1,39 +1,22 @@
-import Etcd from 'node-etcd'
-import Promise from 'bluebird'
+import etcdService from './services/etcd.service.js';
 
 export class EtcdBackend {
-  constructor(proxy, options) {
+  constructor(proxy) {
     this.proxy = proxy;
     this.log = this.proxy.log;
-    this.connection = Promise.promisifyAll(new Etcd(options.hosts, options.port, options.ssloptions));
-    this.etcdDir = options.path;
 
-    this.loadExistingConfiguration()
-      .then(this.createWatcher());
+    this.initialiseBackend();
   }
 
-  loadExistingConfiguration() {
-    let etcdDirExists = false;
-    return this.connection.getAsync(this.etcdDir)
-      .then((response) => {
-        etcdDirExists = true;
-        this.log.info(`Skipping ETCD directory creation as ${this.etcdDir} already exists`);
-        if (response.node.nodes) {
-          this.registerRoutes(response.node.nodes)
-        }
-      })
-      .catch((error) => {
-        if (!etcdDirExists) {
-          this.log.info(`Creating ETCD directory ${this.etcdDir}`);
-          return this.connection.mkdirAsync(this.etcdDir);
-        }
-        this.log.error(error);
-      });
+  initialiseBackend() {
+    etcdService.getOrCreateDirectory()
+      .then(this.registerRoutes)
+      .then(this.createWatcher);
   }
 
   createWatcher() {
     // Watch etcd directory
-    const watcher = this.connection.watcher(this.etcdDir, null, {recursive:true});
+    const watcher = etcdService.createWatcher();
 
     // On Add/Update
     watcher.on("change", (body) => this.registerRoute(body.node));

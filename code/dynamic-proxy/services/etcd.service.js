@@ -13,8 +13,7 @@ export class EtcdService {
 
   getRoutes() {
     return this.connection.getAsync(etcdRedbirdDir)
-      .then(response => response.node.nodes.map(({ key, value }) => ({ key, value })))
-      .catch(error => []);
+      .then(this.extractRoutes);
   }
 
   addRoute(source, target) {
@@ -31,8 +30,39 @@ export class EtcdService {
 
   deleteAllRoutes() {
     return this.connection.delAsync(`${etcdRedbirdDir}/`, { recursive: true })
-      .then(() => this.connection.mkdirAsync(etcdRedbirdDir))
+      .then(this.createDirectory)
       .then(response => response);
+  }
+
+  getOrCreateDirectory() {
+    let etcdDirExists = false;
+    return this.connection.getAsync(etcdRedbirdDir)
+      .then((response) => {
+        etcdDirExists = true;
+        return this.extractRoutes(response);
+      })
+      .catch((error) => {
+        if (!etcdDirExists) {
+          return this.createDirectory()
+            .then(() => []);
+        }
+      });
+  }
+
+  createDirectory() {
+    return this.connection.mkdirAsync(etcdRedbirdDir);
+  }
+
+  createWatcher() {
+    return this.connection.watcher(etcdRedbirdDir, null, {recursive:true});
+  }
+
+  extractRoutes(response) {
+    if (response.node.nodes) {
+      return response.node.nodes.map(({ key, value }) => ({ key, value }));
+    } else {
+      return [];
+    }
   }
 
   createEtcdPath(source) {
