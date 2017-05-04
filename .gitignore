@@ -1,8 +1,9 @@
 *.log
 *.iml
 
-_book/
 .idea/
+
+docs/_book
 
 code/datalab-app/coverage/
 code/datalab-app/build/
