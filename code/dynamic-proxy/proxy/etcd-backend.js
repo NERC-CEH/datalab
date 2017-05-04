@@ -2,7 +2,7 @@ import etcdService from '../services/etcd.service.js';
 import bunyan from 'bunyan';
 import config from '../config';
 
-const logger = bunyan.createLogger({name: 'etcd.backend'});
+const logger = bunyan.createLogger({ name: 'etcd.backend' });
 
 function startEtcdBackend(proxy) {
   etcdService.getOrCreateDirectory()

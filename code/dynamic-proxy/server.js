@@ -5,7 +5,7 @@ import startProxy from './proxy/proxy.js';
 import config from './config';
 import bunyan from 'bunyan';
 
-const logger = bunyan.createLogger({name: 'proxy.api'});
+const logger = bunyan.createLogger({ name: 'proxy.api' });
 
 const app = express();
 

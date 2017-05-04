@@ -3,7 +3,7 @@ import Promise from 'bluebird'
 import config from '../config';
 import bunyan from 'bunyan';
 
-const logger = bunyan.createLogger({name: 'etcd.service'});
+const logger = bunyan.createLogger({ name: 'etcd.service' });
 
 const etcdHost = config.get('etcdHost');
 const etcdPort = config.get('etcdPort');

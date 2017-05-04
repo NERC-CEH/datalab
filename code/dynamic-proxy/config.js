@@ -1,7 +1,7 @@
 import convict from 'convict';
 
 // Define a schema
-var config = convict({
+const config = convict({
   env: {
     doc: "The applicaton environment.",
     format: ["production", "development", "test"],
