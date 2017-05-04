@@ -1,0 +1,48 @@
+---
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Install ca-certificates
+  apt:
+    name: ca-certificates
+    state: present
+
+- name: Install curl
+  apt:
+    name: curl
+    state: present
+
+- name: Install software-properties-common
+  apt:
+    name: software-properties-common
+    state: present
+
+- apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    # id: 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
+    state: present
+
+- apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: Update repositories cache and install docker
+  apt:
+    name: docker-ce
+    update_cache: yes
+
+- name: Download docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: ugo+x
+
+- group:
+    name: docker
+    state: present
+
+- user:
+    name: deploy
+    group: docker
