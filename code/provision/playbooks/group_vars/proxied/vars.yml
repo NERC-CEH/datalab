@@ -1,0 +1,4 @@
+ansible_ssh_common_args: '-o ForwardAgent=yes -o ProxyCommand="ssh -W %h:%p -q {{ deploy_user }}@{{ bastion_ip_address }}"'
+
+management_ip_addresses:
+  - "{{ bastion_internal_ip_address }}"

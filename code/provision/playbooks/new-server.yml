@@ -6,7 +6,7 @@
     - name: Send Slack notification that build is starting
       slack:
         token: "{{ slack_token }}"
-        msg: 'New server build starting on {{ inventory_hostname}}'
+        msg: 'New server build starting'
         color: good
       delegate_to: localhost
 
@@ -20,6 +20,6 @@
     - name: Send Slack notification that build is complete
       slack:
         token: "{{ slack_token }}"
-        msg: 'New server build complete on {{ inventory_hostname}}'
+        msg: 'New server build complete'
         color: good
       delegate_to: localhost
