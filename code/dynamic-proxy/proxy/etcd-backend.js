@@ -1,53 +1,49 @@
 import etcdService from '../services/etcd.service.js';
+import bunyan from 'bunyan';
+import config from '../config';
 
-export class EtcdBackend {
-  constructor(proxy) {
-    this.proxy = proxy;
-    this.log = this.proxy.log;
+const logger = bunyan.createLogger({name: 'etcd.backend'});
 
-    this.initialiseBackend();
-  }
+function startEtcdBackend(proxy) {
+  etcdService.getOrCreateDirectory()
+    .then(registerRoutes)
+    .then(createWatcher);
 
-  initialiseBackend() {
-    etcdService.getOrCreateDirectory()
-      .then(this.registerRoutes)
-      .then(this.createWatcher);
-  }
-
-  createWatcher() {
+  function createWatcher() {
     // Watch etcd directory
     const watcher = etcdService.createWatcher();
 
     // On Add/Update
-    watcher.on("change", (body) => this.registerRoute(body.node));
+    watcher.on("change", (body) => registerRoute(body.node));
 
     // On Delete
-    watcher.on("delete", (body) => this.unregisterRoute(body.node));
+    watcher.on("delete", (body) => unregisterRoute(body.node));
 
     // Handle Errors
-    watcher.on("error", (err) => this.log.error(err, 'etcd backend error'));
+    watcher.on("error", (err) => logger.error(err, 'etcd backend error'));
   }
 
-  registerRoutes(routes) {
-    routes.map((route) => this.registerRoute(route));
+  function registerRoutes(routes) {
+    routes.map((route) => registerRoute(route));
   }
 
-  registerRoute(route) {
+  function registerRoute(route) {
     if(route.key && route.value){
-      this.proxy.register(this.cleanEtcdDir(route.key), route.value);
+      proxy.register(cleanEtcdDir(route.key), route.value);
     }
   }
 
-  unregisterRoute(route) {
+  function unregisterRoute(route) {
     if(route.key){
-      this.proxy.unregister(this.cleanEtcdDir(route.key));
+      proxy.unregister(cleanEtcdDir(route.key));
     }
-  }
-
-  cleanEtcdDir(str) {
-    let dirWithoutKey = str.replace(this.etcdDir, '').replace(/^\/+|\/+$/g, '');
-    let decodedDir = dirWithoutKey.replace('-', '/');
-    return decodedDir
   }
 }
 
+function cleanEtcdDir(str) {
+  let dirWithoutKey = str.replace(config.get('redbirdEtcdKey'), '').replace(/^\/+|\/+$/g, '');
+  let decodedDir = dirWithoutKey.replace('-', '/');
+  return decodedDir
+}
+
+export default startEtcdBackend;
