@@ -10,14 +10,17 @@ language: node_js
 
 node_js: 6
 
-env: DATALAB_APP_DIR=$TRAVIS_BUILD_DIR/code/datalab-app/
+services: docker
 
 cache:
   yarn: true
-  directories:
-  - node_modules
+  directories: node_modules
 
-script: cd $DATALAB_APP_DIR && yarn install && yarn test
+install: yarn global add gitbook-cli
+
+script:
+  - cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn install && yarn test && yarn build && echo "built app"
+  - cd $TRAVIS_BUILD_DIR/docs/ && gitbook build && echo "built docs"
 
 notifications:
   email: false
