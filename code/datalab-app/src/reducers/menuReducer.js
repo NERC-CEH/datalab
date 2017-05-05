@@ -6,6 +6,6 @@ const initialState = {
 };
 
 export default typeToReducer({
-  [MENU_SHOW_ACTION]: (state) => ({ ...initialState, isMenuOpen: true }),
+  [MENU_SHOW_ACTION]: state => ({ ...initialState, isMenuOpen: true }),
   [MENU_HIDE_ACTION]: () => initialState,
 }, initialState);

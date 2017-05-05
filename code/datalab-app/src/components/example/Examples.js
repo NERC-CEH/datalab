@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Counter from './Counter';
 import Ping from './Ping';
 
@@ -9,5 +10,17 @@ const Examples = ({ counterValue, incrementCounter, ping, performPing }) => (
     <Ping {...ping} performPing={performPing} />
   </div>
 );
+
+Examples.propTypes = {
+  counterValue: PropTypes.number,
+  incrementCounter: PropTypes.func.isRequired,
+  ping: PropTypes.number,
+  performPing: PropTypes.func.isRequired,
+};
+
+Examples.defaultProps = {
+  counterValue: null,
+  ping: null,
+};
 
 export default Examples;

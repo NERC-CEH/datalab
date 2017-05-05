@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navigation from '../components/app/Navigation'
+import Navigation from '../components/app/Navigation';
 
 const App = ({ children }) => (
   <div>
@@ -11,6 +11,10 @@ const App = ({ children }) => (
 
 App.propTypes = {
   children: PropTypes.element,
+};
+
+App.defaultProps = {
+  children: null,
 };
 
 export default App;

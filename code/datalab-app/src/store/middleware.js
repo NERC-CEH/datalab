@@ -1,6 +1,6 @@
 import { routerMiddleware } from 'react-router-redux';
 import promise from 'redux-promise-middleware';
-import browserHistory from './browserHistory'
+import browserHistory from './browserHistory';
 
 import {
   PROMISE_TYPE_PENDING,
