@@ -1,8 +1,10 @@
 # Provisioning
 
-This document describes how to create and use Ansible control environment. A number of tools are used in this process including VirtualBox, Vagrant and Ansible.
+This document describes how to create and use Ansible control environment.
+A number of tools are used in this process including VirtualBox, Vagrant and Ansible.
 
-The current development environment is CentOS 7 and instructions have only been tested in this environment.
+The current development environment is CentOS 7 and instructions have only 
+been tested in this environment.
 
 ## Machine setup
 
@@ -42,7 +44,8 @@ sudo yum install <package-name>.rpm
 
 ### Create Ansible control VM
 
-Create the Ansible control VM by executing ```vagrant up``` in the ```code/provision``` directory.
+Create the Ansible control VM by executing ```vagrant up``` in
+the ```code/provision``` directory.
 
 ## Using Ansible control VM
 
@@ -61,11 +64,14 @@ Check that Ansible is correctly provisioned by executing
 ansible <host> -m ping -u <user>
 ```
 
-where ```user``` is the user to connect as. This will be ```root``` for new machines but initial provisioning will add a new ```deploy``` user and remove the root access.
+where ```user``` is the user to connect as. This will be ```root``` for new
+machines but initial provisioning will add a new ```deploy``` user and remove
+the root access.
 
 ## Executing Ansible scripts
 
-Note that server locations may change and the inventory may need to be updated prior to execution until we have dynamic inventory
+Note that server locations may change and the inventory may need to be updated
+prior to execution until we have dynamic inventory
 
 ### New Server
 
@@ -77,7 +83,11 @@ This combines scripts in order:
 
 ### Secure Server (secure-server.yml)
 
-The secure server script currently targets any servers in the insecure inventory group. Once they have been secured they should be moved. While ansible is idempotent the script currently executes as the root user and its last step is to remove root SSH. This means that a second execution is unable to connect. This is still a work in progress.
+The secure server script currently targets any servers in the insecure
+inventory group. Once they have been secured they should be moved. While
+ansible is idempotent the script currently executes as the root user and
+its last step is to remove root SSH. This means that a second execution
+is unable to connect. This is still a work in progress.
 
 To execute:
 
