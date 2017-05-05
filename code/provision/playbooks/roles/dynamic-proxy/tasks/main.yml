@@ -14,3 +14,17 @@
 
 - name: Start dynamic-proxy
   shell: docker-compose up -d
+
+- name: Start documentation
+  docker_container:
+    name: docs
+    image: nerc/docs
+    ports:
+      - "9000:80"
+
+- name: Start managment application
+  docker_container:
+    name: datalab-app
+    image: nerc/datalab-app
+    ports:
+      - "9001:80"
