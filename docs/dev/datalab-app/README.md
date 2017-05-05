@@ -31,7 +31,7 @@ than `npm` and includes some additional functionality.
 
 `npm install -g yarn`
 
-### Install required modules.
+### Install required modules
 
 The following instruction will install the required modules for both
 production and development.
@@ -69,4 +69,6 @@ The instuctions below will resolve crashes resultsing from multiple
 application using file watches. More information can be found
 [here](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers).
 
+```
 `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+```
