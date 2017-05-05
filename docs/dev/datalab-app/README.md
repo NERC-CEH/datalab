@@ -39,7 +39,7 @@ production and development.
 ```
 # within the code/datalab-app directory
 yarn install
-``
+```
 
 ### Start local development environment
 

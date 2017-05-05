@@ -3,7 +3,7 @@
 This document describes how to create and use Ansible control environment.
 A number of tools are used in this process including VirtualBox, Vagrant and Ansible.
 
-The current development environment is CentOS 7 and instructions have only 
+The current development environment is CentOS 7 and instructions have only
 been tested in this environment.
 
 ## Machine setup
