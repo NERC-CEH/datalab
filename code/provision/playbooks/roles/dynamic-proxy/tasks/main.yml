@@ -4,5 +4,13 @@
     url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/dynamic-proxy/docker-compose.yml
     dest: /home/deploy/docker-compose.yml
 
+- name: Open Firewall ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    from_ip: any
+    proto: tcp
+  with_items: "{{ proxy_ports }}"
+
 - name: Start dynamic-proxy
   shell: docker-compose up -d
