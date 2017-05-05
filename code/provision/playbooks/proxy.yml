@@ -1,0 +1,9 @@
+---
+- hosts: proxy
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker
+    - dynamic-proxy
