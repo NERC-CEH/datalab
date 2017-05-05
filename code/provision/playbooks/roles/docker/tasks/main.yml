@@ -1,4 +1,5 @@
 ---
+# Install pre requisites for Docker installation
 - name: Install apt-transport-https
   apt:
     name: apt-transport-https
@@ -19,6 +20,7 @@
     name: software-properties-common
     state: present
 
+# Install docker
 - apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
     id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
@@ -33,12 +35,7 @@
     name: docker-ce
     update_cache: yes
 
-- name: Download docker-compose
-  get_url:
-    url: https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Linux-x86_64
-    dest: /usr/local/bin/docker-compose
-    mode: ugo+x
-
+# Docker post installation steps
 - name: Create Docker group
   group:
     name: docker
@@ -54,3 +51,20 @@
     name: docker
     state: started
     enabled: yes
+
+# Install docker-compose to allow management of groups of containers
+- name: Download docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: ugo+x
+
+# docker-py is required on the host to allow ansible to manage containers
+- name: Install python-pip
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Install docker-py
+  pip:
+    name: docker-py
