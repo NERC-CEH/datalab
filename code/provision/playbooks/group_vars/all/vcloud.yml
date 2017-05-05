@@ -1,0 +1,18 @@
+vcloud_user: ansible_deploy
+vcloud_user_password: "{{ vault_vcloud_user_password }}"
+vcloud_api_host: https://vcloud.jasmin.ac.uk
+vcloud_catalog_name: DataLab
+vcloud_template_name: Ubuntu-16.04-LTS-x86-64-20170110
+vcloud_vdc_name: nerc-datalab-U-std-compute
+vcloud_vcloud_org: nerc-datalab-U
+vcloud_network_name: nerc-datalab-U-NERvSE
+vcloud_gateway_name: nerc-datalab-U-NERCvSE
+
+public_servers:
+  - name: bastion
+    public_ip: 192.171.139.117
+    internal_ip: 192.168.3.2
+  - name: external-proxy
+    public_ip: 192.171.139.116
+    internal_ip: 192.168.3.3
+    firewall_destination: 192.171.139.116:Any
