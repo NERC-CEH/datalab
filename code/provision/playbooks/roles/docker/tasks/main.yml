@@ -39,10 +39,18 @@
     dest: /usr/local/bin/docker-compose
     mode: ugo+x
 
-- group:
+- name: Create Docker group
+  group:
     name: docker
     state: present
 
-- user:
+- name: Add docker user to docker group
+  user:
     name: deploy
     group: docker
+
+- name: Ensure docker service is running and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
