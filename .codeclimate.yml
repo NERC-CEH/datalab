@@ -1,0 +1,19 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  markdownlint:
+    enabled: true
+ratings:
+  paths:
+  - "code/datalab-app/**"
+  - "code/dynamic-proxy/**"
+  - "**.md"
+exclude_paths:
+- "code/provision/**/*"
