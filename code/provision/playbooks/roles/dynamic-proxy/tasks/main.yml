@@ -12,6 +12,15 @@
     proto: tcp
   with_items: "{{ proxy_ports }}"
 
+- name: Add IP Table rule to allow traffic on port 80
+  iptables:
+    table: nat
+    chain: PREROUTING
+    protocol: tcp
+    destination_port: 80
+    jump: REDIRECT
+    to_ports: 8080
+
 - name: Start dynamic-proxy
   shell: docker-compose up -d
 
