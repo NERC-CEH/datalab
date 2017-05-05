@@ -17,7 +17,7 @@ cache:
   directories: node_modules
 
 script:
-  - cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn install && yarn test
+  - cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn install && yarn test && yarn lint
 
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
