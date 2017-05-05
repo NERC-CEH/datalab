@@ -31,7 +31,7 @@ The following instruction will install the required modules for both production 
 development.
 
 ```
-# within the code/datalab-app folder
+# within the code/datalab-app directory
 yarn install
 ```
 
@@ -40,7 +40,7 @@ The following line will build and serve `datalab-app`. The application will rebu
 the files are modified.
 
 ```
-# within the code/datalab-app folder
+# within the code/datalab-app directory
 yarn start
 ```
 
@@ -50,7 +50,7 @@ this interactive console with an IDE or text editor open with active file watche
 cause the test environment to crash, see section below for solution.
 
 ```
-# within the code/datalab-app folder
+# within the code/datalab-app directory
 yarn test
 ```
 ### Increase number of file watchers permitted in linux

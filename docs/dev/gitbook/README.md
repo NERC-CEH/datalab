@@ -13,7 +13,7 @@ The following instruction will build the manual as static web pages within the '
 directory.
 
 ```
-# within the datalab root directory
+# within the docs directory
 gitbook build
 ```
 
@@ -24,6 +24,6 @@ the server to crash. See _Increase number of file watchers permitted in linux_ i
 [Data Lab Web Application](../datalab-app/README.md).
 
 ```
-# within the datalab root directory
+# within the docs directory
 gitbook serve
 ```
