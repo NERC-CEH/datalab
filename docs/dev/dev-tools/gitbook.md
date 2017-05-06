@@ -15,7 +15,7 @@ Install GitBook globally using npm.
 The following instruction will build the manual as static web pages within the '_book/'
 directory.
 
-```
+```bash
 # within the docs directory
 gitbook build
 ```
@@ -27,7 +27,7 @@ Serving a GitBook with an IDE or text editor open with active file watchers can 
 the server to crash. See _Increase number of file watchers permitted in linux_ in
 [Data Lab Web Application](../datalab-app/README.md).
 
-```
+```bash
 # within the docs directory
 gitbook serve
 ```

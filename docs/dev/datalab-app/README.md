@@ -16,7 +16,7 @@ sub-folder. In CentOS, globally installation requires elevated privileges
 home directory. Instructions followed from
 [here](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
-```
+```bash
 mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
 ```
@@ -36,7 +36,7 @@ than `npm` and includes some additional functionality.
 The following instruction will install the required modules for both
 production and development.
 
-```
+```bash
 # within the code/datalab-app directory
 yarn install
 ```
@@ -46,7 +46,7 @@ yarn install
 The following line will build and serve `datalab-app`. The application will rebuild if
 the files are modified.
 
-```
+```bash
 # within the code/datalab-app directory
 yarn start
 ```
@@ -58,7 +58,7 @@ tests. Running this interactive console with an IDE or text editor open with
 active file watchers can cause the test environment to crash, see section
 below for solution.
 
-```
+```bash
 # within the code/datalab-app directory
 yarn test
 ```
@@ -69,6 +69,6 @@ The instuctions below will resolve crashes resultsing from multiple
 application using file watches. More information can be found
 [here](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers).
 
-```
-`echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```

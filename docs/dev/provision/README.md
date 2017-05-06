@@ -14,20 +14,18 @@ Instructions followed from [here](https://wiki.centos.org/HowTos/Virtualization/
 
 Add the repo
 
-```
+```bash
 cd /etc/yum.repos.d
 wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
 ```
 
 Install DKMS (Dynamic Kernel Module Support)
 
-```
-yum --enablerepo=epel install dkms
-```
+`yum --enablerepo=epel install dkms`
 
 Search for available packages and install the selected version
 
-```
+```bash
 yum search VirtualBox
 sudo yum install VirtualBox-5.1.x86_64
 ```
@@ -38,9 +36,7 @@ Download from the [Vagrant](https://www.vagrantup.com/downloads.html) website.
 
 Install using ```rpm```
 
-```
-sudo yum install <package-name>.rpm
-```
+`sudo yum install <package-name>.rpm`
 
 ### Create Ansible control VM
 
@@ -53,16 +49,14 @@ SSH onto the ansible control machine using ```vagrant ssh```.
 
 Start an SSH agent to avoid having to continually supply the SSH key password.
 
-```
+```bash
 ssh-agent bash
 ssh-add ~/keys/<ssh_key>
 ```
 
 Check that Ansible is correctly provisioned by executing
 
-```
-ansible <host> -m ping -u <user>
-```
+`ansible <host> -m ping -u <user>`
 
 where ```user``` is the user to connect as. This will be ```root``` for new
 machines but initial provisioning will add a new ```deploy``` user and remove
@@ -91,9 +85,7 @@ is unable to connect. This is still a work in progress.
 
 To execute:
 
-```
-~/playbooks$ ansible-playbook --ssh-common-args="-o StrictHostKeyChecking=no" secure-server.yml
-```
+`~/playbooks$ ansible-playbook --ssh-common-args="-o StrictHostKeyChecking=no" secure-server.yml`
 
 ### Base Configuration (base-configuration.yml)
 
@@ -105,6 +97,4 @@ This playbook:
 
 To execute:
 
-```
-~/playbooks$ ansible-playbook base-configuration.yml
-```
+`~/playbooks$ ansible-playbook base-configuration.yml`
