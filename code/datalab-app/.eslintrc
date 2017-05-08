@@ -1,15 +1,13 @@
 {
   "extends": [
-    "airbnb",
+    "airbnb-base",
     "react-app"
   ],
   "env": {
     "node": true
   },
   "rules": {
-    "linebreak-style": [
-      "off"
-    ],
+    "linebreak-style": "off",
     "max-len": [
       "error",
       200,
@@ -19,9 +17,7 @@
         "ignoreComments": false
       }
     ],
-    "no-console": [
-      "off"
-    ],
+    "no-console": "off",
     "no-multiple-empty-lines": [
       "error",
       {
@@ -29,12 +25,12 @@
         "maxEOF": 1
       }
     ],
-    "no-use-before-define": [
-      "off"
-    ],
-    "react/jsx-filename-extension": [
-      "off"
-    ]
+    "import/no-named-default": "off",
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-tag-spacing": "off",
+    "react/no-array-index-key": "off",
+    "react/require-default-props": "off"
   },
   "parserOptions": {
     "ecmaFeatures": {
