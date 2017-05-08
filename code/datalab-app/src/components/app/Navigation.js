@@ -24,7 +24,6 @@ Navigation.propTypes = {
   }).isRequired,
 };
 
-
 function mapStateToProps(state) {
   return state.menu;
 }

@@ -2,7 +2,7 @@ import typeToReducer from 'type-to-reducer';
 import {
   PROMISE_TYPE_PENDING,
   PROMISE_TYPE_SUCCESS,
-  PROMISE_TYPE_FAILURE
+  PROMISE_TYPE_FAILURE,
 } from '../actions/actionTypes';
 import { PING_ACTION } from '../actions/pingActions';
 

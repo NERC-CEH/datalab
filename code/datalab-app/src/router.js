@@ -7,14 +7,13 @@ import HomePage from './pages/HomePage';
 import ExamplePage from './pages/ExamplePage';
 import NotFoundPage from './pages/NotFoundPage';
 
-
 const router = () => (
   <ConnectedRouter history={browserHistory} >
     <div>
-      <Route component={App}/>
+      <Route component={App} />
       <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route exact path="/example" component={ExamplePage}/>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/example" component={ExamplePage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
