@@ -7,13 +7,17 @@ k8s-worker-2    ansible_host=192.168.3.8
 [bastions]
 bastion
 
-[proxied]
-proxy
+[proxy]
+external-proxy
+
+[k8s-cluster]
 k8s-master
 k8s-worker-1
 k8s-worker-2
 
-[insecure]
+[proxied:children]
+proxy
+k8s-cluster
+
+[new]
 k8s-master
-k8s-worker-1
-k8s-worker-2

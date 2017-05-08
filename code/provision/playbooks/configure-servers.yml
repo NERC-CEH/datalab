@@ -1,0 +1,15 @@
+---
+- hosts: new
+  user: root
+  gather_facts: False
+
+  roles:
+    - secure-server
+
+- hosts: new
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  roles:
+    - base-configuration
