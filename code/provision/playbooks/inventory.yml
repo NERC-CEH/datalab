@@ -1,8 +1,19 @@
+bastion         ansible_host=192.171.139.117
+external-proxy  ansible_host=192.168.3.3
+k8s-master      ansible_host=192.168.3.6
+k8s-worker-1    ansible_host=192.168.3.7
+k8s-worker-2    ansible_host=192.168.3.8
+
 [bastions]
-bastion    ansible_host=192.171.139.117
+bastion
 
 [proxied]
-proxy      ansible_host=192.168.3.3
+proxy
+k8s-master
+k8s-worker-1
+k8s-worker-2
 
 [insecure]
-proxy
+k8s-master
+k8s-worker-1
+k8s-worker-2
