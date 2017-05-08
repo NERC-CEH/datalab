@@ -18,7 +18,7 @@ describe('NavMenu component', () => {
 
     // Assert
     expect(menuItems.length).toBe(2);
-    menuItems.forEach(item => {
+    menuItems.forEach((item) => {
       expect(item.type()).toBe(MenuItem);
       expect(item.prop('onTouchTap')).toBe(expectedHideMenu);
     });

@@ -1,6 +1,9 @@
 engines:
   eslint:
     enabled: true
+    channel: "eslint-3"
+    config:
+      config: "code/datalab-app/.eslintrc"
   csslint:
     enabled: true
   duplication:
