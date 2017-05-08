@@ -1,4 +1,14 @@
 engines:
+  eslint:
+    enabled: true
+    channel: "eslint-3"
+    config:
+      config: "code/datalab-app/.eslintrc"
+    checks:
+      import/no-unresolved:
+        enabled: false
+      import/extensions:
+        enabled: false
   csslint:
     enabled: true
   duplication:
