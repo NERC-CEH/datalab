@@ -1,68 +1,114 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Creates new public servers
-      vapp:
-        api_version: 5.5
-        service_type: vcd
-        host: "{{ vcloud_api_host }}"
-        username: "{{ vcloud_user }}"
-        password: "{{ vcloud_user_password }}"
-        org: "{{ vcloud_vcloud_org }}"
-        vdc_name: "{{ vcloud_vdc_name }}"
-        verify_certs: false
-        catalog_name: "{{ vcloud_catalog_name }}"
-        template_name: "{{ vcloud_template_name }}"
-        state: present
-        operation: poweron
-        vm_name: "{{ item.name }}"
-        network_ip: "{{ item.internal_ip }}"
-        network_name: "{{ vcloud_network_name }}"
-        script: "./scripts/init_vm.sh"
-      register: myvm
-      with_items: "{{ public_servers }}"
+    - block:
+      - name: Combine SSH keys to single local file
+        assemble:
+          src: keys
+          dest: /tmp/ssh_key_file
 
-    - debug: var=myvm
+      - set_fact:
+          admin_ssh_public_keys: "{{ lookup('file', '/tmp/ssh_key_file') }}"
 
-    - name: Create NAT entries for public servers
-      vnat:
-        api_version: 5.5
-        service_type: vcd
-        host: "{{ vcloud_api_host }}"
-        username: "{{ vcloud_user }}"
-        password: "{{ vcloud_user_password }}"
-        org: "{{ vcloud_vcloud_org }}"
-        vdc_name: "{{ vcloud_vdc_name }}"
-        verify_certs: false
-        gateway_name: "{{ vcloud_gateway_name }}"
-        state: 'present'
-        nat_rules:
-          - rule_type: SNAT
-            original_ip: "{{ item.internal_ip }}"
-            translated_ip: "{{ item.public_ip }}"
-          - rule_type: DNAT
-            original_ip: "{{ item.public_ip }}"
-            translated_ip: "{{ item.internal_ip }}"
-      with_items: "{{ public_servers }}"
+      - name: Create init file from template using the combined keys
+        template:
+          src: templates/init_vm.sh.j2
+          dest: /tmp/init_vm.sh
+      tags:
+        - prepare-keys
 
-    - name: Add firewall rules for public servers
-      vfw:
-        api_version: 5.5
-        service_type: vcd
-        host: "{{ vcloud_api_host }}"
-        username: "{{ vcloud_user }}"
-        password: "{{ vcloud_user_password }}"
-        org: "{{ vcloud_vcloud_org }}"
-        vdc_name: "{{ vcloud_vdc_name }}"
-        verify_certs: false
-        gateway_name: "{{ vcloud_gateway_name }}"
-        state: 'present'
-        fw_rules:
-          - description: "Public facing IP"
-            source_ip: "Any"
-            source_port: "Any"
-            dest_ip: "{{ item.public_ip }}"
-            dest_port: "Any"
-            protocol: "Any"
-            enable_logging: "true"
-      with_items: "{{ public_servers }}"
+    - block:
+      - name: Creates new public servers
+        vapp:
+          api_version: 5.5
+          service_type: vcd
+          host: "{{ vcloud_api_host }}"
+          username: "{{ vcloud_user }}"
+          password: "{{ vcloud_user_password }}"
+          org: "{{ vcloud_vcloud_org }}"
+          vdc_name: "{{ vcloud_vdc_name }}"
+          verify_certs: false
+          catalog_name: "{{ vcloud_catalog_name }}"
+          template_name: "{{ vcloud_template_name }}"
+          state: present
+          operation: poweron
+          vm_name: "{{ item.name }}"
+          network_ip: "{{ item.internal_ip }}"
+          network_name: "{{ vcloud_network_name }}"
+          script: "/tmp/init_vm.sh"
+        register: myvm
+        with_items: "{{ public_servers }}"
+
+      - debug: var=myvm
+
+      - name: Create NAT entries for public servers
+        vnat:
+          api_version: 5.5
+          service_type: vcd
+          host: "{{ vcloud_api_host }}"
+          username: "{{ vcloud_user }}"
+          password: "{{ vcloud_user_password }}"
+          org: "{{ vcloud_vcloud_org }}"
+          vdc_name: "{{ vcloud_vdc_name }}"
+          verify_certs: false
+          gateway_name: "{{ vcloud_gateway_name }}"
+          state: 'present'
+          nat_rules:
+            - rule_type: SNAT
+              original_ip: "{{ item.internal_ip }}"
+              translated_ip: "{{ item.public_ip }}"
+            - rule_type: DNAT
+              original_ip: "{{ item.public_ip }}"
+              translated_ip: "{{ item.internal_ip }}"
+        with_items: "{{ public_servers }}"
+
+      - name: Add firewall rules for public servers
+        vfw:
+          api_version: 5.5
+          service_type: vcd
+          host: "{{ vcloud_api_host }}"
+          username: "{{ vcloud_user }}"
+          password: "{{ vcloud_user_password }}"
+          org: "{{ vcloud_vcloud_org }}"
+          vdc_name: "{{ vcloud_vdc_name }}"
+          verify_certs: false
+          gateway_name: "{{ vcloud_gateway_name }}"
+          state: 'present'
+          fw_rules:
+            - description: "Public facing IP"
+              source_ip: "Any"
+              source_port: "Any"
+              dest_ip: "{{ item.public_ip }}"
+              dest_port: "Any"
+              protocol: "Any"
+              enable_logging: "true"
+        with_items: "{{ public_servers }}"
+      tags:
+        - public
+
+    - block:
+      - name: Creates new private servers
+        vapp:
+          api_version: 5.5
+          service_type: vcd
+          host: "{{ vcloud_api_host }}"
+          username: "{{ vcloud_user }}"
+          password: "{{ vcloud_user_password }}"
+          org: "{{ vcloud_vcloud_org }}"
+          vdc_name: "{{ vcloud_vdc_name }}"
+          verify_certs: false
+          catalog_name: "{{ vcloud_catalog_name }}"
+          template_name: "{{ vcloud_template_name }}"
+          state: present
+          operation: poweron
+          vm_name: "{{ item.name }}"
+          network_ip: "{{ item.internal_ip }}"
+          network_name: "{{ vcloud_network_name }}"
+          script: "/tmp/init_vm.sh"
+        register: myvm
+        with_items: "{{ private_servers }}"
+
+      - debug: var=myvm
+
+      tags:
+        - private
