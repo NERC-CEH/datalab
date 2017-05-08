@@ -18,7 +18,7 @@ describe('NavMenu component', () => {
 
     // Assert
     expect(menuItems.length).toBe(2);
-    menuItems.map(item => {
+    menuItems.forEach(item => {
       expect(item.type()).toBe(MenuItem);
       expect(item.prop('onTouchTap')).toBe(expectedHideMenu);
     });
@@ -30,7 +30,7 @@ describe('NavMenu component', () => {
 
     // Assert
     const links = menuItems.map(item => item.childAt(0));
-    links.map(link => expect(link.type()).toBe(Link));
+    links.forEach(link => expect(link.type()).toBe(Link));
   });
 
   it('has correct links', () => {
