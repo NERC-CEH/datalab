@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "1.17.1",
+    "express": "4.15.2",
+    "graphql": "0.9.6",
+    "graphql-server-express": "0.7.2",
     "history": "4.6.1",
     "material-ui": "0.17.4",
     "prop-types": "15.5.8",
@@ -18,6 +22,9 @@
     "type-to-reducer": "1.0.3"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-es2015": "6.24.1",
+    "concurrently": "3.4.0",
     "enzyme": "2.8.2",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
@@ -27,9 +34,15 @@
     "eslint-watch": "3.1.0",
     "husky": "0.13.3",
     "lint-staged": "3.4.1",
+    "nodemon": "1.11.0",
     "react-scripts": "0.9.5",
     "react-test-renderer": "15.5.4",
     "redux-devtools": "3.4.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,6 +50,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "esw src",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "api": "nodemon --exec babel-node src/api/api.js",
+    "app": "react-scripts start",
+    "dev": "concurrently  \"npm run api\" \"npm run app\""
   }
 }
