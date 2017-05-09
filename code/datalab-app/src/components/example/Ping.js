@@ -17,7 +17,7 @@ Ping.propTypes = {
   fetching: PropTypes.bool.isRequired,
   value: PropTypes.number,
   error: PropTypes.number,
-  performPing: PropTypes.funct.isRequired,
+  performPing: PropTypes.func.isRequired,
 };
 
 Ping.defaultProps = {
