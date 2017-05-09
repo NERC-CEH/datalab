@@ -7,3 +7,4 @@
   * [Dev Tools](dev/dev-tools/README.md)
     * [Code Climate](dev/dev-tools/code-climate.md)
     * [GitBook Manual](dev/dev-tools/gitbook.md)
+    * [Git Hooks](dev/dev-tools/githooks.md)

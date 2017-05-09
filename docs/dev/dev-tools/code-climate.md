@@ -3,7 +3,7 @@
 [Code climate](https://codeclimate.com/github/NERC-CEH/datalab) is used to track the code
 quality in the data labs code base. Rule sets are applied for:
 
-* ESLint
+* ~~ESLint~~ (Currently assessed via TravisCI)
 * CSS
 * Markdown
 * Code Duplication
