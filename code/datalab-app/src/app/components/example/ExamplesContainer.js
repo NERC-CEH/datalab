@@ -12,7 +12,7 @@ const ExamplesContainer = ({ counterValue, ping, actions: { incrementCounter, pe
 
 ExamplesContainer.propTypes = {
   counterValue: PropTypes.number,
-  ping: PropTypes.number,
+  ping: PropTypes.object,
   actions: PropTypes.shape({
     incrementCounter: PropTypes.func.isRequired,
     performPing: PropTypes.func.isRequired,
