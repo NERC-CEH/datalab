@@ -5,6 +5,7 @@ import browserHistory from './store/browserHistory';
 import App from './pages/App';
 import HomePage from './pages/HomePage';
 import ExamplePage from './pages/ExamplePage';
+import ApiExamplePage from './pages/ApiExamplePage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const router = () => (
@@ -14,6 +15,7 @@ const router = () => (
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/example" component={ExamplePage} />
+        <Route exact path="/apiExample" component={ApiExamplePage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

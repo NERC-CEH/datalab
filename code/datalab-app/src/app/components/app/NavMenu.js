@@ -7,6 +7,7 @@ const NavMenu = ({ hideMenu }) => (
   <div>
     <MenuItem onTouchTap={hideMenu}><Link to="/">Home Page</Link></MenuItem>
     <MenuItem onTouchTap={hideMenu}><Link to="/example">Example Page</Link></MenuItem>
+    <MenuItem onTouchTap={hideMenu}><Link to="/apiExample">API Example Page</Link></MenuItem>
   </div>
 );
 
