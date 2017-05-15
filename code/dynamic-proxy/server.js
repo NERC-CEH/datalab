@@ -1,9 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import bunyan from 'bunyan';
 import etcdRoutes from './api/etcd.routes';
 import startProxy from './proxy/proxy.js';
 import config from './config';
-import bunyan from 'bunyan';
 
 const logger = bunyan.createLogger({ name: 'proxy.api' });
 

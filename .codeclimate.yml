@@ -27,3 +27,4 @@ ratings:
 exclude_paths:
 - "code/provision/**/*"
 - "docs/styles/website.css"
+- "**/node_modules/**"

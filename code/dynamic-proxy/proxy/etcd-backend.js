@@ -1,6 +1,6 @@
-import etcdService from '../services/etcd.service.js';
 import bunyan from 'bunyan';
 import config from '../config';
+import etcdService from '../services/etcd.service';
 
 const logger = bunyan.createLogger({ name: 'etcd.backend' });
 
@@ -14,36 +14,36 @@ function startEtcdBackend(proxy) {
     const watcher = etcdService.createWatcher();
 
     // On Add/Update
-    watcher.on("change", (body) => registerRoute(body.node));
+    watcher.on('change', body => registerRoute(body.node));
 
     // On Delete
-    watcher.on("delete", (body) => unregisterRoute(body.node));
+    watcher.on('delete', body => unregisterRoute(body.node));
 
     // Handle Errors
-    watcher.on("error", (err) => logger.error(err, 'etcd backend error'));
+    watcher.on('error', err => logger.error(err, 'etcd backend error'));
   }
 
   function registerRoutes(routes) {
-    routes.map((route) => registerRoute(route));
+    routes.map(route => registerRoute(route));
   }
 
   function registerRoute(route) {
-    if(route.key && route.value){
+    if (route.key && route.value) {
       proxy.register(cleanEtcdDir(route.key), route.value);
     }
   }
 
   function unregisterRoute(route) {
-    if(route.key){
+    if (route.key) {
       proxy.unregister(cleanEtcdDir(route.key));
     }
   }
 }
 
 function cleanEtcdDir(str) {
-  let dirWithoutKey = str.replace(config.get('redbirdEtcdKey'), '').replace(/^\/+|\/+$/g, '');
-  let decodedDir = dirWithoutKey.replace('-', '/');
-  return decodedDir
+  const dirWithoutKey = str.replace(config.get('redbirdEtcdKey'), '').replace(/^\/+|\/+$/g, '');
+  const decodedDir = dirWithoutKey.replace('-', '/');
+  return decodedDir;
 }
 
 export default startEtcdBackend;
