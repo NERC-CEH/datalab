@@ -42,7 +42,7 @@
     "react-test-renderer": "15.5.4",
     "redux-devtools": "3.4.0",
     "shx": "0.2.2",
-    "webpack": "2.5.1",
+    "webpack": "1.14.0",
     "webpack-node-externals": "1.6.0"
   },
   "babel": {

@@ -18,6 +18,8 @@ export default {
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
   ],
   module: {
