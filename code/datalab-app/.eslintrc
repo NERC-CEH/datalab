@@ -25,6 +25,17 @@
         "maxEOF": 1
       }
     ],
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": [
+          "tools/**/*.js",
+          "src/**/*.test.js",
+          "src/**/*.spec.js",
+          "**/*.config.dev.js",
+          "**/*.config.prod.js"
+        ],
+      }
+    ],
     "import/no-named-default": "off",
     "no-use-before-define": "off",
     "react/jsx-filename-extension": "off",
