@@ -16,9 +16,10 @@ public_servers:
     public_ip: 192.171.139.116
     internal_ip: 192.168.3.3
 
+k8s_master_ip: 192.168.3.6
 private_servers:
   - name: k8s-master
-    internal_ip: 192.168.3.6
+    internal_ip: "{{ k8s_master_ip }}"
   - name: k8s-worker-1
     internal_ip: 192.168.3.7
   - name: k8s-worker-2

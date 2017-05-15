@@ -15,9 +15,14 @@ k8s-master
 k8s-worker-1
 k8s-worker-2
 
+[k8s-workers]
+k8s-worker-1
+k8s-worker-2
+
 [proxied:children]
 proxy
 k8s-cluster
 
 [new]
-k8s-master
+k8s-worker-1
+k8s-worker-2
