@@ -22,9 +22,9 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
       yarn global add gitbook-cli;
-      cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn build && docker build -t nerc/datalab-app .;
+      cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn build && docker build -f app.Dockerfile -t nerc/datalab-app . && docker build -f api.Dockerfile -t nerc/datalab-api .;
       cd $TRAVIS_BUILD_DIR/docs/ && gitbook build && docker build -t nerc/docs .;
-      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push nerc/datalab-app && docker push nerc/docs;
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push nerc/datalab-app && docker push nerc/datalab-api && docker push nerc/docs;
     fi
 
 notifications:
