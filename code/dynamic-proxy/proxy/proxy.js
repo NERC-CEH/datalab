@@ -3,11 +3,11 @@ import startEtcdBackend from './etcd-backend';
 import config from '../config';
 
 const proxy = redbird({
-  port: config.get('proxyPort')
+  port: config.get('proxyPort'),
 });
 
 function startProxy() {
-  //Initialise proxy with ETCD Backend
+  // Initialise proxy with ETCD Backend
   startEtcdBackend(proxy);
 }
 

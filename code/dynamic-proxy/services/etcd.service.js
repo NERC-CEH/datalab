@@ -1,7 +1,7 @@
-import Etcd from 'node-etcd'
-import Promise from 'bluebird'
-import config from '../config';
+import Etcd from 'node-etcd';
+import Promise from 'bluebird';
 import bunyan from 'bunyan';
+import config from '../config';
 
 const logger = bunyan.createLogger({ name: 'etcd.service' });
 
@@ -20,7 +20,6 @@ export class EtcdService {
   }
 
   addRoute(source, target) {
-    const path = this.createEtcdPath(source);
     return this.connection.setAsync(this.createEtcdPath(source), target)
       .then(response => response);
   }
@@ -51,6 +50,7 @@ export class EtcdService {
           return this.createDirectory()
             .then(() => []);
         }
+        return [];
       });
   }
 
@@ -59,18 +59,17 @@ export class EtcdService {
   }
 
   createWatcher() {
-    return this.connection.watcher(etcdRedbirdDir, null, {recursive:true});
+    return this.connection.watcher(etcdRedbirdDir, null, { recursive: true });
   }
 
-  extractRoutes(response) {
+  static extractRoutes(response) {
     if (response.node.nodes) {
       return response.node.nodes.map(({ key, value }) => ({ key, value }));
-    } else {
-      return [];
     }
+    return [];
   }
 
-  createEtcdPath(source) {
+  static createEtcdPath(source) {
     const encodedPath = source.replace('/', '-');
     return `${etcdRedbirdDir}/${encodedPath}`;
   }
