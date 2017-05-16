@@ -50,6 +50,7 @@ export class EtcdService {
           return this.createDirectory()
             .then(() => []);
         }
+        return [];
       });
   }
 
