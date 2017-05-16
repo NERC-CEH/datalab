@@ -12,6 +12,8 @@ COPY ./package.json /usr/src/api
 
 RUN npm install --production
 
+ENV PORT=8000
+
 EXPOSE 8000
 
 CMD ["node", "server.js"]

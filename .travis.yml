@@ -16,6 +16,10 @@ cache:
   yarn: true
   directories: node_modules
 
+env:
+  global:
+    - REACT_APP_API_URL="http://localhost:8000/api"
+
 script:
   - cd $TRAVIS_BUILD_DIR/code/datalab-app/ && yarn install && yarn test && yarn lint
 
