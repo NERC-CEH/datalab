@@ -10,9 +10,7 @@ COPY ./dist/api /usr/src/api
 
 COPY ./package.json /usr/src/api
 
-RUN npm install --production
-
-ENV PORT=8000
+RUN yarn install --production
 
 EXPOSE 8000
 
