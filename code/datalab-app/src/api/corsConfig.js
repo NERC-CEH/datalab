@@ -1,3 +1,12 @@
+/**
+ * This code inspects a config parameter to determine which origins are allowed. A '*'
+ * means any domain is allowed and we should return a wildcard CORS header. For all other
+ * values we should inspect the origin of the request and if it contains the domain
+ * specified then the origin of the request should be returned.
+ *
+ * @param app the app object to add the cors routes to
+ */
+
 import config from './config';
 
 function configureCorsHeaders(app) {
