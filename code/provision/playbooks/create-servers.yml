@@ -39,8 +39,6 @@
         register: myvm
         with_items: "{{ public_servers }}"
 
-      - debug: var=myvm
-
       - name: Create NAT entries for public servers
         vnat:
           api_version: 5.5
