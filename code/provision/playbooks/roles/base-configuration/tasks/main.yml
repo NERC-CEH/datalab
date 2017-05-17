@@ -1,5 +1,18 @@
 ---
 - block:
+  - name: Force new machine id
+    shell: rm /etc/machine-id /var/lib/dbus/machine-id && systemd-machine-id-setup
+    args:
+      warn: no
+      creates: /root/.ansible-machine-id
+
+  - name: Create .ansible-machine-id file
+    copy:
+      content: "Created {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+      dest: /root/.ansible-machine-id
+      mode: "u=rw,g=,o="
+      force: no
+
   - name: Update APT package cache
     apt:
       update_cache: yes
@@ -19,19 +32,6 @@
     copy:
       src: config/apt_periodic
       dest: /etc/apt/apt.conf.d/10periodic
-
-  - name: Setup ufw
-    ufw:
-      state: enabled
-      policy: deny
-
-  - name: Allow ssh traffic from machines allowed to manage this node
-    ufw:
-      rule: allow
-      port: "{{ ssh_port }}"
-      from_ip: "{{ item }}"
-      proto: tcp
-    with_items: "{{ management_ip_addresses }}"
 
   - name: Set up Postfix to relay mail
     debconf: name=postfix

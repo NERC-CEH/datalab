@@ -12,4 +12,5 @@
   become_method: sudo
 
   roles:
+    - setup-networking
     - base-configuration

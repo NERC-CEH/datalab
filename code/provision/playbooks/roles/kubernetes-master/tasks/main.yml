@@ -33,10 +33,3 @@
     from_ip: "{{ bastion_internal_ip_address }}"
     proto: tcp
 
-- name: Open firewall for API server access fom workers
-  ufw:
-    rule: allow
-    port: "{{ k8s_api_port }}"
-    from_ip: "{{ item.internal_ip }}"
-    proto: tcp
-  with_items: "{{ private_servers }}"
