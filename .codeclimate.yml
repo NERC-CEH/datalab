@@ -6,7 +6,7 @@ engines:
     config:
       languages:
         javascript:
-          mass_threshold: 45
+          mass_threshold: 70
   markdownlint:
     enabled: true
 ratings:
