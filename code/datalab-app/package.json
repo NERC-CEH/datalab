@@ -3,7 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "0.16.1",
+    "body-parser": "1.17.1",
+    "convict": "3.0.0",
+    "express": "4.15.2",
+    "graphql": "0.9.6",
+    "graphql-server-express": "0.7.2",
     "history": "4.6.1",
+    "lodash": "4.17.4",
     "material-ui": "0.17.4",
     "prop-types": "15.5.8",
     "react": "15.5.4",
@@ -18,6 +25,10 @@
     "type-to-reducer": "1.0.3"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-es2015": "6.24.1",
+    "chalk": "1.1.3",
+    "concurrently": "3.4.0",
     "enzyme": "2.8.2",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
@@ -27,16 +38,33 @@
     "eslint-watch": "3.1.0",
     "husky": "0.13.3",
     "lint-staged": "3.4.1",
+    "nodemon": "1.11.0",
     "react-scripts": "0.9.5",
     "react-test-renderer": "15.5.4",
-    "redux-devtools": "3.4.0"
+    "redux-devtools": "3.4.0",
+    "shx": "0.2.2",
+    "webpack": "1.14.0",
+    "webpack-node-externals": "1.6.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "esw src",
-    "precommit": "lint-staged"
-  }
+    "precommit": "lint-staged",
+    "start": "concurrently -p \"[{name}]\" -n \"API,APP\" -c \"bgBlue.bold,bgMagenta.bold\"  \"npm run api\" \"npm run app\"",
+    "api": "nodemon --exec babel-node src/api/api.js",
+    "app": "react-scripts start",
+    "prebuild": "npm run dist-remove && npm run dist-create",
+    "build": "concurrently -p \"[{name}]\" -n \"API,APP\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run build-api\" \"npm run build-app\"",
+    "dist-remove": "shx rm -rf ./build ./dist",
+    "dist-create": "shx mkdir -p ./build ./dist/api ./dist/app",
+    "build-api": "babel-node tools/build-api.js",
+    "build-app": "react-scripts build && shx cp -r ./build/* ./dist/app/"
+  },
+  "proxy": "http://localhost:8000/"
 }

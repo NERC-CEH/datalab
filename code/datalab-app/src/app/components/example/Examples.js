@@ -14,7 +14,7 @@ const Examples = ({ counterValue, incrementCounter, ping, performPing }) => (
 Examples.propTypes = {
   counterValue: PropTypes.number,
   incrementCounter: PropTypes.func.isRequired,
-  ping: PropTypes.number,
+  ping: PropTypes.object,
   performPing: PropTypes.func.isRequired,
 };
 

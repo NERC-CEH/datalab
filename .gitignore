@@ -9,6 +9,7 @@ docs/_book
 
 code/datalab-app/coverage/
 code/datalab-app/build/
+code/datalab-app/dist/
 node_modules/
 
 code/provision/.vagrant
