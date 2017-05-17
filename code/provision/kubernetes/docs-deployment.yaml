@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: docs-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: docs
+    spec:
+      containers:
+        - name: docs
+          image: nerc/docs
+          ports:
+            - containerPort: 80

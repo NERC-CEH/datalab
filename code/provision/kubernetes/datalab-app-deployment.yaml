@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: datalab-app-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: datalab-app
+    spec:
+      containers:
+        - name: datalab-app
+          image: nerc/datalab-app
+          ports:
+            - containerPort: 80
