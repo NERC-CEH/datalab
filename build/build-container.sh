@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+GIT_DESCRIBE=`git describe --tags --always`
+
 if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)$ ]]; then
   case "$1" in
   docs)
@@ -23,7 +25,8 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)
     ;;
   esac
   echo "Generating docker image..."
-  docker build -f $DOCKERFILE -t nerc/$IMAGE .
+  docker build -f $DOCKERFILE -t nerc/$IMAGE:latest .
+  docker tag nerc/$IMAGE:latest nerc/$IMAGE:$GIT_DESCRIBE
   if [ "$#" -eq 2 ]; then
     echo "Attempting to push image..."
     docker push nerc/$IMAGE
