@@ -11,28 +11,28 @@ const etcdRedbirdDir = config.get('redbirdEtcdKey');
 
 export class EtcdService {
   constructor() {
-    this.connection = Promise.promisifyAll(new Etcd(etcdHost, etcdPort));
+    this.connection = Promise.promisifyAll(new Etcd(`${etcdHost}:${etcdPort}`));
   }
 
   getRoutes() {
     return this.connection.getAsync(etcdRedbirdDir)
-      .then(this.extractRoutes);
+      .then(EtcdService.extractRoutes);
   }
 
   addRoute(source, target) {
-    return this.connection.setAsync(this.createEtcdPath(source), target)
+    return this.connection.setAsync(EtcdService.createEtcdPath(source), target)
       .then(response => response);
   }
 
   deleteRoute(source) {
-    return this.connection.delAsync(this.createEtcdPath(source))
+    return this.connection.delAsync(EtcdService.createEtcdPath(source))
       .then(response => response);
   }
 
   deleteAllRoutes() {
     logger.info('Deleting Redbird directory');
-    return this.connection.delAsync(`${etcdRedbirdDir}/`, { recursive: true })
-      .then(this.createDirectory)
+    return this.connection.delAsync(`/${etcdRedbirdDir}/`, { recursive: true })
+      .then(() => this.createDirectory())
       .then(response => response);
   }
 
@@ -44,7 +44,7 @@ export class EtcdService {
         logger.info('Redbird directory exists, loading routes');
         return this.extractRoutes(response);
       })
-      .catch((error) => {
+      .catch(() => {
         if (!etcdDirExists) {
           logger.info('Creating Redbird directory');
           return this.createDirectory()

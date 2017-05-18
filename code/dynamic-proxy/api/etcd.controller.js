@@ -1,15 +1,15 @@
 import etcdService from '../services/etcd.service';
 
-function listRoutes(req, res, next) {
+function listRoutes(req, res) {
   etcdService.getRoutes()
     .then(routes => res.send(routes))
-    .catch((error) => {
+    .catch(() => {
       res.status(500);
       res.send({ message: 'Error loading routes' });
     });
 }
 
-function addRoute(req, res, next) {
+function addRoute(req, res) {
   etcdService.addRoute(req.body.source, req.body.target)
     .then((response) => {
       res.status(201);
@@ -21,7 +21,7 @@ function addRoute(req, res, next) {
     });
 }
 
-function deleteRoute(req, res, next) {
+function deleteRoute(req, res) {
   etcdService.deleteRoute(req.body.source)
     .then(response => res.send(response))
     .catch((error) => {
@@ -30,7 +30,7 @@ function deleteRoute(req, res, next) {
     });
 }
 
-function deleteAllRoutes(req, res, next) {
+function deleteAllRoutes(req, res) {
   etcdService.deleteAllRoutes()
     .then(response => res.send(response))
     .catch((error) => {
