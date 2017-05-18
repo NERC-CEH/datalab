@@ -20,7 +20,7 @@ ansible-playbook --tags=workers kubernetes-cluster.yml
 ## Kubectl
 
 Kubernetes cluster management is done with the ```kubectl``` tool. This is installed by
-default on all nodes but only configured to ru on the master. In order for it to pick up
+default on all nodes but only configured to run on the master. In order for it to pick up
 the config file it is necessary to set an environment variable.
 
 ```bash
@@ -28,7 +28,7 @@ export KUBECONFIG=$HOME/admin.conf
 kubectl get nodes
 ```
 
-## Locel Kubectl
+## Local Kubectl
 
 By design, the Kubernetes cluster is protected behind a bastion server. This means that
 an SSH tunnel is required to allow a local instance of kubectl to connect to the server.

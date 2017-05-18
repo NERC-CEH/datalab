@@ -23,5 +23,4 @@ base_packages:
   - unattended-upgrades
   - logwatch
 
-
 k8s_api_port: 6443
