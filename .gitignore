@@ -14,3 +14,5 @@ node_modules/
 
 code/provision/.vagrant
 code/provision/playbooks/vault-password.txt
+
+code/provision/playbooks/.artifacts/

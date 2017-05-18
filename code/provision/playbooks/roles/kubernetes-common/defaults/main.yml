@@ -1,0 +1,3 @@
+---
+# The ID of the APT key for the Kubernetes repository
+kubernetes_apt_key_id: 3746C208A7317B0F

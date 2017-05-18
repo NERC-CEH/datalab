@@ -1,0 +1,61 @@
+---
+- name: Initialise Kubernetes control plane components
+  command: kubeadm init --apiserver-advertise-address={{ k8s_master_ip }}
+  args:
+    creates: /etc/kubernetes/kubelet.conf
+  register: kubeadm_init
+
+- name: Copy kubectl config to deploy user home directory
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: "/home/{{ deploy_user }}"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    remote_src: True
+
+- name: Install WeaveNet pod network
+  command: kubectl apply -f https://git.io/weave-kube-1.6
+
+- name: Install Kubernetes Dashboard
+  command: kubectl create -f https://git.io/kube-dashboard
+
+- name: Get kubeadm token
+  shell: kubeadm token list | sed -n 2p | awk '{ print $1 };'
+  register: kubeadm_token
+  tags: always
+
+- name: Set kubeadm_token fact for use in later playbooks run in the same context
+  set_fact:
+    kubeadm_token: "{{ kubeadm_token.stdout }}"
+  tags: always
+
+- name: Open firewall for API server access fom bastion
+  ufw:
+    rule: allow
+    port: "{{ k8s_api_port }}"
+    from_ip: "{{ bastion_internal_ip_address }}"
+    proto: tcp
+
+- name: Make local artifacts directory
+  file:
+    path: "{{ playbook_dir }}/.artifacts"
+    state: directory
+  delegate_to: 127.0.0.1
+
+- name: Retrieve kubectl binary and Kubernetes admin config
+  fetch:
+    src: "{{ item.src }}"
+    dest: "{{ playbook_dir }}/.artifacts/{{ item.dest }}"
+    flat: yes
+  with_items:
+    - src: /usr/bin/kubectl
+      dest: kubectl
+    - src: /etc/kubernetes/admin.conf
+      dest: kubernetes-admin.conf
+
+- name: Update config file to use master host name
+  replace:
+    path: "{{ playbook_dir }}/.artifacts/kubernetes-admin.conf"
+    regexp: 'https:.*'
+    replace: 'https://k8s-master:6443'
+  delegate_to: 127.0.0.1

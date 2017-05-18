@@ -1,0 +1,4 @@
+#!/bin/sh
+if [ x$1 = x"postcustomization" ]; then
+  /usr/local/bin/activator.sh "{{ admin_ssh_public_keys }}" "nerc-datalab-U" "UBUNTUSERVER" "8a109e7b32a04fbb8f0c042f34ee0512"
+fi

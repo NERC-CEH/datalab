@@ -1,0 +1,64 @@
+---
+- block:
+  - name: Force new machine id
+    shell: rm /etc/machine-id /var/lib/dbus/machine-id && systemd-machine-id-setup
+    args:
+      warn: no
+      creates: /root/.ansible-machine-id
+
+  - name: Create .ansible-machine-id file
+    copy:
+      content: "Created {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+      dest: /root/.ansible-machine-id
+      mode: "u=rw,g=,o="
+      force: no
+
+  - name: Update APT package cache
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Install required packages
+    apt:
+      state: installed
+      pkg: "{{ item }}"
+    with_items: "{{ base_packages }}"
+
+  - name: Upgrade APT to the latest packages
+    apt:
+      upgrade: safe
+
+  - name: Adjust APT update intervals
+    copy:
+      src: config/apt_periodic
+      dest: /etc/apt/apt.conf.d/10periodic
+
+  - name: Set up Postfix to relay mail
+    debconf: name=postfix
+             question='{{ item.question }}'
+             value='{{ item.value }}'
+             vtype='{{ item.vtype }}'
+    with_items:
+      - { question: 'postfix/mailname', value: '{{ ansible_fqdn }}', vtype: 'string' }
+      - { question: 'postfix/main_mailer_type', value: 'Internet Site', vtype: 'string' }
+
+  - name: Email log summary daily
+    lineinfile: dest=/etc/cron.daily/00logwatch
+                regexp="^/usr/sbin/logwatch"
+                line="/usr/sbin/logwatch --output mail --mailto {{ logwatch_email }} --detail high"
+                state=present create=yes
+
+  - name: Send Slack notification that base build is complete
+    slack:
+      token: "{{ slack_token }}"
+      msg: 'Base build complete on {{ inventory_hostname}}'
+      color: good
+    delegate_to: localhost
+
+  rescue:
+    - name: Send Slack notification that base build failed
+      slack:
+        token: "{{ slack_token }}"
+        msg: 'Base build failed on {{ inventory_hostname}}'
+        color: danger
+      delegate_to: localhost

@@ -15,4 +15,12 @@ public_servers:
   - name: external-proxy
     public_ip: 192.171.139.116
     internal_ip: 192.168.3.3
-    firewall_destination: 192.171.139.116:Any
+
+k8s_master_ip: 192.168.3.6
+private_servers:
+  - name: k8s-master
+    internal_ip: "{{ k8s_master_ip }}"
+  - name: k8s-worker-1
+    internal_ip: 192.168.3.7
+  - name: k8s-worker-2
+    internal_ip: 192.168.3.8

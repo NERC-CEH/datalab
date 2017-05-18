@@ -1,0 +1,7 @@
+---
+- name: Join Kubernetes cluster
+  # Note the reference to the hostvars of the k8s-master to retrieve the token. This value must have
+  # been set during this playbook execution context as it isn't defined in variables.
+  command: kubeadm join --token={{ hostvars['k8s-master']['kubeadm_token'] }} {{ k8s_master_ip }}:{{ k8s_api_port }}
+  args:
+    creates: /etc/kubernetes/kubelet.conf

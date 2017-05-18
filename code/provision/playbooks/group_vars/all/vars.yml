@@ -22,3 +22,5 @@ base_packages:
   - fail2ban
   - unattended-upgrades
   - logwatch
+
+k8s_api_port: 6443
