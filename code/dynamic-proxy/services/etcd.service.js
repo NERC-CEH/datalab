@@ -55,7 +55,6 @@ export class EtcdService {
   }
 
   createDirectory() {
-    console.log('Creating DIR');
     return this.connection.mkdirAsync(etcdRedbirdDir);
   }
 

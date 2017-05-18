@@ -13,11 +13,6 @@
     "body-parser": "1.17.1",
     "bunyan": "1.8.10",
     "convict": "3.0.0",
-    "eslint": "3.19.0",
-    "eslint-config-airbnb": "14.1.0",
-    "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-jsx-a11y": "4.0.0",
-    "eslint-watch": "3.1.0",
     "express": "4.15.2",
     "node-etcd": "5.0.3",
     "redbird": "0.6.15"
@@ -28,6 +23,11 @@
     "start": "babel-node --presets es2015 server.js"
   },
   "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-watch": "3.1.0",
     "nodemon": "1.11.0"
   }
 }
