@@ -1,7 +1,8 @@
 import request from 'axios';
 import { get } from 'lodash';
+import apiUtils from './apiUtils';
 
-const apiURL = process.env.REACT_APP_API_URL || '/api';
+const apiURL = `${apiUtils.getApiBase()}/api`;
 
 function getCount() {
   return request.post(apiURL, { query: '{ count }' })

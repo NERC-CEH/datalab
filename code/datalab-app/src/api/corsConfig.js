@@ -16,6 +16,11 @@ function configureCorsHeaders(app) {
     response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     next();
   });
+
+  app.options('/*', (request, response) => {
+    // Required to process the preflight requests and only when Origins/CorOrigin match.
+    response.send(204);
+  });
 }
 
 function getCorsOrigin(request) {
