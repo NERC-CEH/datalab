@@ -16,6 +16,9 @@
 - name: Install WeaveNet pod network
   command: kubectl apply -f https://git.io/weave-kube-1.6
 
+- name: Install Kubernetes Dashboard
+  command: kubectl create -f https://git.io/kube-dashboard
+
 - name: Get kubeadm token
   shell: kubeadm token list | sed -n 2p | awk '{ print $1 };'
   register: kubeadm_token
