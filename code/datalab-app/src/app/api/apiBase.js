@@ -8,4 +8,4 @@ function getApiBase() {
   return `http://${host}`;
 }
 
-export default { getApiBase };
+export default `${getApiBase()}`;

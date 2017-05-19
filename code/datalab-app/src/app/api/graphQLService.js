@@ -1,8 +1,8 @@
 import request from 'axios';
 import { get } from 'lodash';
-import apiUtils from './apiUtils';
+import apiBase from './apiBase';
 
-const apiURL = `${apiUtils.getApiBase()}/api`;
+const apiURL = `${apiBase}/api`;
 
 function getCount() {
   return request.post(apiURL, { query: '{ count }' })
