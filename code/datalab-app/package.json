@@ -67,6 +67,5 @@
     "build-app": "npm run version-app && react-scripts build && shx cp -r ./build/* ./dist/app/",
     "version-api": "bash ../../build/version.sh ../../build/template/version.js.template ./src/api/version.js",
     "version-app": "bash ../../build/version.sh ../../build/template/version.js.template ./src/app/version.js"
-  },
-  "proxy": "http://localhost:8000/"
+  }
 }

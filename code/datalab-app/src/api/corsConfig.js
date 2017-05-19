@@ -19,7 +19,7 @@ function configureCorsHeaders(app) {
 
   app.options('/*', (request, response) => {
     // Required to process the preflight requests and only when Origins/CorOrigin match.
-    response.send(204);
+    response.sendStatus(204);
   });
 }
 
