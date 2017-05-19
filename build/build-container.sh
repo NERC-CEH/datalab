@@ -7,7 +7,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)
   case "$1" in
   docs)
     echo "Starting to build documents..."
-    cd ./docs && gitbook build
+    ./build/version.sh ./build/template/version.md.template ./docs/version.md && cd ./docs && gitbook build
     DOCKERFILE="Dockerfile"
     IMAGE="docs"
     ;;

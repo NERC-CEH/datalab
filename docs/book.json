@@ -1,4 +1,5 @@
 {
+  "plugins": ["-sharing"],
   "styles": {
     "website": "styles/website.css"
   }

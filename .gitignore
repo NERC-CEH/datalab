@@ -6,10 +6,13 @@ yarn.lock
 .idea/
 
 docs/_book
+docs/version.md
 
 code/datalab-app/coverage/
 code/datalab-app/build/
 code/datalab-app/dist/
+code/datalab-app/src/api/version.js
+code/datalab-app/src/app/version.js
 node_modules/
 
 code/provision/.vagrant
