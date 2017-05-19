@@ -10,11 +10,11 @@ vcloud_gateway_name: nerc-datalab-U-NERCvSE
 
 public_servers:
   - name: bastion
-    public_ip: 192.171.139.117
-    internal_ip: 192.168.3.2
+    public_ip: "{{ bastion_ip_address }}"
+    internal_ip: "{{ bastion_internal_ip_address }}"
   - name: external-proxy
     public_ip: 192.171.139.116
-    internal_ip: 192.168.3.3
+    internal_ip: "{{ external_proxy_internal_ip_address }}"
 
 k8s_master_ip: 192.168.3.6
 private_servers:

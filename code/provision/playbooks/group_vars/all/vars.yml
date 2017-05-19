@@ -1,8 +1,12 @@
 ansible_python_interpreter: /usr/bin/python3
 
+datalabs_domain: datalabs.nerc.ac.uk
+dynamic_proxy_api: "http://{{ external_proxy_internal_ip_address }}:8081"
+
 ssh_port: 22
 bastion_ip_address: 192.171.139.117
 bastion_internal_ip_address: 192.168.3.2
+external_proxy_internal_ip_address: 192.168.3.3
 deploy_user: deploy
 ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
 

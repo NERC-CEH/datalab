@@ -1,0 +1,28 @@
+---
+- name: Deploy kubernetes service from deployment file
+  shell: kubectl apply -f {{ github_url }}/{{ item.deployment }}
+  with_items: "{{ services }}"
+
+# Get the ports assigned to the new services from Kubernetes and create dynamic proxy entries for them
+# This section is a bit strange as Ansible variable handling is poor.
+# The first task queries kubernetes and uses a go template to strip out just the port value. This is iterated
+# to register the ports for all services onto the port_info variable. By a quirk of ansible iteration, this
+# data object also has an object called item attached to it that contains the original item. This means that
+# the whole structure can be used in the iteration for the registration of the services against the dynamic
+# proxy.
+- name: Get node ports for services
+  shell: kubectl get service {{ item.name }}-service -o go-template --template '{% raw %}{{ range .spec.ports }}{{ .nodePort }}{{ end }}{% endraw %}'
+  register: port_info
+  with_items: "{{ services }}"
+
+- name: Get routes
+  uri:
+    url: "{{ dynamic_proxy_api }}/routes"
+    method: POST
+    status_code: 201
+    body_format: json
+    body:
+      source: "{{ item.item.external_url }}"
+      target: "http://{{ k8s_master_ip }}:{{ item.stdout }}"
+  register: routes
+  with_items: "{{ port_info.results }}"
