@@ -16,6 +16,13 @@ function configureCorsHeaders(app) {
     response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     next();
   });
+
+  app.options('/*', (request, response) => {
+    // Options required to process the preflight requests.
+    // Respond with (403) forbidden if origins don't match.
+    const status = getCorsOrigin(request) ? 204 : 403;
+    response.sendStatus(status);
+  });
 }
 
 function getCorsOrigin(request) {

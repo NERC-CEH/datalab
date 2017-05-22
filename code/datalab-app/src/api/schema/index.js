@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLInt,
 } from 'graphql';
+import version from '../version';
 
 let count = 0;
 
@@ -14,7 +15,7 @@ const RootQueryType = new GraphQLObjectType({
     status: {
       description: 'Returns simple string to confirm GraphQL server is running.',
       type: GraphQLString,
-      resolve: () => 'GraphQL server is alive!',
+      resolve: () => `GraphQL server is ${version ? `running version ${version}` : 'is alive!'}`,
     },
     count: {
       description: 'Returns the current count value.',

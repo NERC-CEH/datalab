@@ -63,8 +63,9 @@
     "build": "concurrently -p \"[{name}]\" -n \"API,APP\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run build-api\" \"npm run build-app\"",
     "dist-remove": "shx rm -rf ./build ./dist",
     "dist-create": "shx mkdir -p ./build ./dist/api ./dist/app",
-    "build-api": "babel-node tools/build-api.js",
-    "build-app": "react-scripts build && shx cp -r ./build/* ./dist/app/"
-  },
-  "proxy": "http://localhost:8000/"
+    "build-api": "npm run version-api && babel-node tools/build-api.js",
+    "build-app": "npm run version-app && react-scripts build && shx cp -r ./build/* ./dist/app/",
+    "version-api": "bash ../../build/version.sh ../../build/template/version.js.template ./src/api/version.js",
+    "version-app": "bash ../../build/version.sh ../../build/template/version.js.template ./src/app/version.js"
+  }
 }

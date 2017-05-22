@@ -1,4 +1,4 @@
-import graphQLService from '../services/graphQLService';
+import graphQLService from '../api/graphQLService';
 
 export const GET_COUNT_ACTION = 'GET_COUNT';
 export const INCREMENT_COUNT_ACTION = 'INCREMENT_COUNT_ACTION';
