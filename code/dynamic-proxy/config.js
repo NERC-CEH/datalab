@@ -38,6 +38,20 @@ const config = convict({
     default: 'redbird',
     env: 'PROXY_REDBIRD_ETCD_KEY',
   },
+  ssl: {
+    key: {
+      doc: 'Private SSL Key',
+      format: String,
+      default: '/etc/ssl/private/datalabskey.pem',
+      env: 'PROXY_SSL_KEY',
+    },
+    cert: {
+      doc: 'Certificate Chain',
+      format: String,
+      default: '/etc/ssl/certs/datalabs.pem',
+      env: 'PROXY_SSL_CERT',
+    },
+  },
 });
 
 export default config;
