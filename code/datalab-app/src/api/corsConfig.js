@@ -18,8 +18,10 @@ function configureCorsHeaders(app) {
   });
 
   app.options('/*', (request, response) => {
-    // Required to process the preflight requests and only when Origins/CorOrigin match.
-    response.sendStatus(204);
+    // Options required to process the preflight requests.
+    // Respond with (403) forbidden if origins don't match.
+    const status = getCorsOrigin(request) ? 204 : 403;
+    response.sendStatus(status);
   });
 }
 
