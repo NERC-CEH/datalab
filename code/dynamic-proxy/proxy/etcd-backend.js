@@ -29,7 +29,7 @@ function startEtcdBackend(proxy) {
 
   function registerRoute(route) {
     if (route.key && route.value) {
-      proxy.register(cleanEtcdDir(route.key), route.value);
+      proxy.register(cleanEtcdDir(route.key), route.value, { ssl: true });
     }
   }
 

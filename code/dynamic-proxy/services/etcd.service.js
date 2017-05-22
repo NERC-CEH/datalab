@@ -42,7 +42,7 @@ export class EtcdService {
       .then((response) => {
         etcdDirExists = true;
         logger.info('Redbird directory exists, loading routes');
-        return this.extractRoutes(response);
+        return EtcdService.extractRoutes(response);
       })
       .catch(() => {
         if (!etcdDirExists) {

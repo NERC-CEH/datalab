@@ -21,19 +21,14 @@
     jump: REDIRECT
     to_ports: 8080
 
+- name: Add IP Table rule to allow traffic on port 443
+  iptables:
+    table: nat
+    chain: PREROUTING
+    protocol: tcp
+    destination_port: 443
+    jump: REDIRECT
+    to_ports: 8443
+
 - name: Start dynamic-proxy
   shell: docker-compose up -d
-
-- name: Start documentation
-  docker_container:
-    name: docs
-    image: nerc/docs
-    ports:
-      - "9000:80"
-
-- name: Start managment application
-  docker_container:
-    name: datalab-app
-    image: nerc/datalab-app
-    ports:
-      - "9001:80"

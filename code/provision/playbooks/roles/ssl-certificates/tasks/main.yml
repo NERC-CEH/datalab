@@ -1,0 +1,17 @@
+---
+- name: Create server SSL certificate
+  copy:
+    content: '{{ ssl_certificate }}'
+    dest: /etc/ssl/certs/datalabs.pem
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create server SSL private key
+  copy:
+    content: '{{ ssl_private_key }}'
+    dest: /etc/ssl/private/datalabskey.pem
+    owner: root
+    group: root
+    mode: 0600
+  no_log: true
