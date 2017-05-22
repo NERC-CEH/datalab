@@ -3,9 +3,7 @@ function getApiBase() {
     return 'http://localhost:8000';
   }
 
-  const host = window.location.hostname.replace('mydatalab', 'api');
-
-  return `http://${host}`;
+  return `http://api.${window.location.hostname}`;
 }
 
-export default `${getApiBase()}`;
+export default getApiBase();
