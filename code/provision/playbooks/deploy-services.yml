@@ -1,0 +1,24 @@
+---
+- hosts: k8s-master
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  vars:
+    github_url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/provision/kubernetes
+    datalab_name: datalab.{{ datalabs_domain }}
+    services:
+      - name: datalab-api
+        deployment: datalab-api-deployment.yml
+        external_url: "api.{{ datalab_name }}"
+      - name: datalab-app
+        deployment: datalab-app-deployment.yml
+        external_url: "{{ datalab_name }}"
+      - name: docs
+        deployment: docs-deployment.yml
+        external_url: "docs.{{ datalab_name }}"
+  roles:
+    - deploy-public-services
+
+  environment:
+    KUBECONFIG: /etc/kubernetes/admin.conf
