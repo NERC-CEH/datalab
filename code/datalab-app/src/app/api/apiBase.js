@@ -3,7 +3,7 @@ function getApiBase() {
     return 'http://localhost:8000';
   }
 
-  return `http://api.${window.location.hostname}`;
+  return `${window.location.protocol}//api.${window.location.hostname}`;
 }
 
 export default getApiBase();
