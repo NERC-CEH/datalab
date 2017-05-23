@@ -20,6 +20,7 @@
   "scripts": {
     "lint": "esw .",
     "test": "jest",
+    "test-watch": "jest --watch",
     "dev": "nodemon server.js --exec babel-node --presets es2015",
     "start": "babel-node --presets es2015 server.js"
   },
