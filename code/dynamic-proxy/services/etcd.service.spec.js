@@ -23,15 +23,16 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
-test('get routes returns an empty array when directory is empty', () => {
+test('get routes returns an empty array when directory is empty', (done) => {
   mockGet.mockReturnValue(Promise.resolve({}));
 
   return service.getRoutes().then((data) => {
     expect(data).toEqual([]);
+    done();
   });
 });
 
-test('get routes maps an etcd response to simple route objects', () => {
+test('get routes maps an etcd response to simple route objects', (done) => {
   mockGet.mockReturnValue(Promise.resolve(createEtcdResponse()));
 
   return service.getRoutes().then((data) => {
@@ -45,10 +46,11 @@ test('get routes maps an etcd response to simple route objects', () => {
         value: 'http://localhost:7002',
       },
     ]);
+    done();
   });
 });
 
-test('add route sets correct key', () => {
+test('add route sets correct key', (done) => {
   const source = 'test.route.ac.uk';
   const target = 'http://localhost:8000';
 
@@ -58,10 +60,11 @@ test('add route sets correct key', () => {
     .then((data) => {
       expect(mockSet).toBeCalledWith(`redbird/${source}`, target);
       expect(data).toEqual(etcdResponse);
+      done();
     });
 });
 
-test('add route converts sub paths to -', () => {
+test('add route converts sub paths to -', (done) => {
   const source = 'test.route.ac.uk/api';
   const target = 'http://localhost:8000';
 
@@ -71,10 +74,11 @@ test('add route converts sub paths to -', () => {
     .then((data) => {
       expect(mockSet).toBeCalledWith('redbird/test.route.ac.uk-api', target);
       expect(data).toEqual(etcdResponse);
+      done();
     });
 });
 
-test('delete route deletes correct key', () => {
+test('delete route deletes correct key', (done) => {
   const source = 'test.route.ac.uk';
 
   const etcdResponse = { message: 'Etcd Response' };
@@ -83,10 +87,11 @@ test('delete route deletes correct key', () => {
     .then((data) => {
       expect(mockDel).toBeCalledWith('redbird/test.route.ac.uk');
       expect(data).toEqual(etcdResponse);
+      done();
     });
 });
 
-test('delete all routes deletes directory and recreates', () => {
+test('delete all routes deletes directory and recreates', (done) => {
   const etcdResponse = { message: 'Etcd Response' };
   mockDel.mockReturnValueOnce(Promise.resolve(etcdResponse));
   mockMkdir.mockReturnValueOnce(Promise.resolve(etcdResponse));
@@ -95,10 +100,11 @@ test('delete all routes deletes directory and recreates', () => {
       expect(mockDel).toBeCalledWith('/redbird/', { recursive: true });
       expect(mockMkdir).toBeCalledWith('redbird');
       expect(data).toEqual(etcdResponse);
+      done();
     });
 });
 
-test('get or create directory creates directory if it does not exist', () => {
+test('get or create directory creates directory if it does not exist', (done) => {
   const etcdResponse = { message: 'Etcd Response' };
   mockGet.mockReturnValueOnce(Promise.reject());
   mockMkdir.mockReturnValueOnce(Promise.resolve(etcdResponse));
@@ -107,16 +113,18 @@ test('get or create directory creates directory if it does not exist', () => {
       expect(mockGet).toBeCalledWith('redbird');
       expect(mockMkdir).toBeCalledWith('redbird');
       expect(data).toEqual([]);
+      done();
     });
 });
 
-test('get or create directory returns routes if directory exists', () => {
+test('get or create directory returns routes if directory exists', (done) => {
   mockGet.mockReturnValueOnce(Promise.resolve(createEtcdResponse()));
   return service.getOrCreateDirectory()
     .then((data) => {
       expect(mockGet).toBeCalledWith('redbird');
       expect(mockMkdir).not.toHaveBeenCalled();
       expect(data.length).toEqual(2);
+      done();
     });
 });
 
