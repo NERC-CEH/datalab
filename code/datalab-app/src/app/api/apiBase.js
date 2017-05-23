@@ -1,9 +1,12 @@
-function getApiBase() {
-  if (window.location.hostname === 'localhost') {
+function getApiBase(location) {
+  if (location.hostname === 'localhost') {
     return 'http://localhost:8000';
   }
 
-  return `${window.location.protocol}//api.${window.location.hostname}`;
+  const subdomain = location.hostname.split('.')[0];
+  const domain = location.hostname.substring(subdomain.length + 1, location.hostname.length);
+  return `${location.protocol}//${subdomain}-api.${domain}`;
 }
 
-export default getApiBase();
+export { getApiBase };
+export default getApiBase(window.location);
