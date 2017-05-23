@@ -1,7 +1,7 @@
 import etcdService from '../services/etcd.service.instance';
 
 function listRoutes(req, res) {
-  etcdService.getRoutes()
+  return etcdService.getRoutes()
     .then(routes => res.send(routes))
     .catch(() => {
       res.status(500);
@@ -10,7 +10,7 @@ function listRoutes(req, res) {
 }
 
 function addRoute(req, res) {
-  etcdService.addRoute(req.body.source, req.body.target)
+  return etcdService.addRoute(req.body.source, req.body.target)
     .then((response) => {
       res.status(201);
       res.send(response);
@@ -22,7 +22,7 @@ function addRoute(req, res) {
 }
 
 function deleteRoute(req, res) {
-  etcdService.deleteRoute(req.body.source)
+  return etcdService.deleteRoute(req.body.source)
     .then(response => res.send(response))
     .catch((error) => {
       res.status(500);
@@ -31,11 +31,11 @@ function deleteRoute(req, res) {
 }
 
 function deleteAllRoutes(req, res) {
-  etcdService.deleteAllRoutes()
+  return etcdService.deleteAllRoutes()
     .then(response => res.send(response))
     .catch((error) => {
       res.status(500);
-      res.send({ message: `Error delecting all routes: ${error}` });
+      res.send({ message: `Error deleting all routes: ${error}` });
     });
 }
 
