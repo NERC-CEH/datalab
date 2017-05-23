@@ -3,6 +3,7 @@
   get_url:
     url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/dynamic-proxy/docker-compose.yml
     dest: /home/deploy/docker-compose.yml
+    force: yes
 
 - name: Open Firewall ports
   ufw:
@@ -29,6 +30,9 @@
     destination_port: 443
     jump: REDIRECT
     to_ports: 8443
+
+- name: Ensure defined images in use
+  shell: docker-compose pull
 
 - name: Start dynamic-proxy
   shell: docker-compose up -d
