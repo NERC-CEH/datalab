@@ -28,11 +28,7 @@
     "import/no-extraneous-dependencies": [
       "error", {
         "devDependencies": [
-          "tools/**/*.js",
-          "src/**/*.test.js",
-          "src/**/*.spec.js",
-          "**/*.config.dev.js",
-          "**/*.config.prod.js"
+          "**/*.spec.js",
         ],
       }
     ],
