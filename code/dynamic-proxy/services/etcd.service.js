@@ -70,7 +70,7 @@ export class EtcdService {
   }
 
   static createEtcdPath(source) {
-    const encodedPath = source.replace('/', '-');
+    const encodedPath = source.replace('/', '$');
     return `${etcdRedbirdDir}/${encodedPath}`;
   }
 }
