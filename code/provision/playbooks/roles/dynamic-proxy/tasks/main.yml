@@ -31,5 +31,8 @@
     jump: REDIRECT
     to_ports: 8443
 
+- name: Ensure defined images in use
+  shell: docker-compose pull
+
 - name: Start dynamic-proxy
   shell: docker-compose up -d
