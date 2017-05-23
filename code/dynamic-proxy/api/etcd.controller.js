@@ -1,4 +1,4 @@
-import etcdService from '../services/etcd.service';
+import etcdService from '../services/etcd.service.instance';
 
 function listRoutes(req, res) {
   etcdService.getRoutes()

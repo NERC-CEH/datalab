@@ -1,6 +1,6 @@
 import bunyan from 'bunyan';
 import config from '../config';
-import etcdService from '../services/etcd.service';
+import etcdService from '../services/etcd.service.instance';
 
 const logger = bunyan.createLogger({ name: 'etcd.backend' });
 

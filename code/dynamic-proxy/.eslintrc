@@ -3,7 +3,8 @@
     "airbnb-base"
   ],
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
   "rules": {
     "linebreak-style": "off",
