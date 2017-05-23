@@ -1,11 +1,31 @@
 version: '3'
 services:
+  proxy:
+    image: 'node:6.10.3'
+    ports:
+      - '8081:8081'
+      - '8080:8080'
+      - '8443:8443'
+    volumes:
+      - ${PWD}:/usr/src/app
+      - ${PWD}/certs/local.example.com.key:/etc/ssl/private/datalabskey.pem
+      - ${PWD}/certs/local.example.com.key.crt:/etc/ssl/certs/datalabs.pem
+    environment:
+      - PROXY_ETCD_IP_ADDRESS=etcd
+    links:
+      - testservice
+      - etcd
+    working_dir: /usr/src/app
+    command: [ "yarn", "dev" ]
+
   etcd:
     image: 'quay.io/coreos/etcd:latest'
+    ports:
+      - '2379:2379'
+      - '2380:2380'
     volumes:
       - /tmp/etcd-data:/etcd-data
     command: /usr/local/bin/etcd
-    network_mode: 'host'
     environment:
       - ETCD_DATA_DIR=/etcd-data
       - ETCD_NAME=proxy-etcd
@@ -14,3 +34,6 @@ services:
       - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
       - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+
+  testservice:
+    image: 'nginx'
