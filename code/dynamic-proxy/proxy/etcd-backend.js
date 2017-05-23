@@ -5,7 +5,7 @@ import etcdService from '../services/etcd.service.instance';
 const logger = bunyan.createLogger({ name: 'etcd.backend' });
 
 function startEtcdBackend(proxy) {
-  etcdService.getOrCreateDirectory()
+  return etcdService.getOrCreateDirectory()
     .then(registerRoutes)
     .then(createWatcher);
 
