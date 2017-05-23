@@ -3,6 +3,7 @@
   get_url:
     url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/dynamic-proxy/docker-compose.yml
     dest: /home/deploy/docker-compose.yml
+    force: yes
 
 - name: Open Firewall ports
   ufw:
