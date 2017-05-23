@@ -29,8 +29,8 @@
       "error", {
         "devDependencies": [
           "tools/**/*.js",
-          "src/**/*.test.js",
-          "src/**/*.spec.js",
+          "**/*.test.js",
+          "**/*.spec.js",
           "**/*.config.dev.js",
           "**/*.config.prod.js"
         ],
