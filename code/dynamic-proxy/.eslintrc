@@ -3,7 +3,8 @@
     "airbnb-base"
   ],
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
   "rules": {
     "linebreak-style": "off",
@@ -27,11 +28,7 @@
     "import/no-extraneous-dependencies": [
       "error", {
         "devDependencies": [
-          "tools/**/*.js",
-          "src/**/*.test.js",
-          "src/**/*.spec.js",
-          "**/*.config.dev.js",
-          "**/*.config.prod.js"
+          "**/*.spec.js"
         ],
       }
     ],

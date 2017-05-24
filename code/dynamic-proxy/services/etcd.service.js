@@ -1,17 +1,12 @@
-import Etcd from 'node-etcd';
-import Promise from 'bluebird';
 import bunyan from 'bunyan';
 import config from '../config';
 
 const logger = bunyan.createLogger({ name: 'etcd.service' });
-
-const etcdHost = config.get('etcdHost');
-const etcdPort = config.get('etcdPort');
 const etcdRedbirdDir = config.get('redbirdEtcdKey');
 
 export class EtcdService {
-  constructor() {
-    this.connection = Promise.promisifyAll(new Etcd(`${etcdHost}:${etcdPort}`));
+  constructor(connection) {
+    this.connection = connection;
   }
 
   getRoutes() {
@@ -63,7 +58,7 @@ export class EtcdService {
   }
 
   static extractRoutes(response) {
-    if (response.node.nodes) {
+    if (response && response.node && response.node.nodes) {
       return response.node.nodes.map(({ key, value }) => ({ key, value }));
     }
     return [];
@@ -75,4 +70,4 @@ export class EtcdService {
   }
 }
 
-export default new EtcdService();
+export default EtcdService;

@@ -17,6 +17,8 @@ engines:
       languages:
         javascript:
           mass_threshold: 70
+    exclude_paths:
+    - "**/**.spec.js"
   markdownlint:
     enabled: true
 ratings:

@@ -19,8 +19,13 @@
   },
   "scripts": {
     "lint": "esw .",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "dev": "nodemon server.js --exec babel-node --presets es2015",
     "start": "babel-node --presets es2015 server.js"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "eslint": "3.19.0",
@@ -28,6 +33,8 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-watch": "3.1.0",
+    "jest-cli": "20.0.3",
+    "node-mocks-http": "1.6.2",
     "nodemon": "1.11.0"
   }
 }

@@ -28,8 +28,8 @@
     "import/no-extraneous-dependencies": [
       "error", {
         "devDependencies": [
-          "tools/**/*.js",
-          "**/*.spec.js",
+          "**/datalab-app/tools/*.js",
+          "**/**.spec.js",
           "**/*.config.dev.js",
           "**/*.config.prod.js"
         ],
