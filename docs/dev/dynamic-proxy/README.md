@@ -13,13 +13,13 @@ In order to make development easier a docker-compose file has been added that br
 the dynamic proxy using the current code along with an ETCD container and an nginx
 container as a test target.
 
-```
+```bash
 docker-compose -f docker-compose-dev.yml up -d
 ```
 
 To populate a test rule for the nginx container run:
 
-```
+```bash
 curl -H "Content-Type: application/json" \
   --data '{"source":"localhost","target":"http://testservice"}' \
   http://localhost:8081/routes
