@@ -14,6 +14,12 @@ const config = convict({
     default: 8080,
     env: 'PROXY_PORT',
   },
+  proxySecurePort: {
+    doc: 'The secure port for the Proxy service.',
+    format: 'port',
+    default: 8443,
+    env: 'PROXY_SECURE_PORT',
+  },
   apiPort: {
     doc: 'The port for the API service.',
     format: 'port',

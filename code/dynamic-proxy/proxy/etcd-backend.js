@@ -42,7 +42,7 @@ function startEtcdBackend(proxy) {
 
 function cleanEtcdDir(str) {
   const dirWithoutKey = str.replace(config.get('redbirdEtcdKey'), '').replace(/^\/+|\/+$/g, '');
-  const decodedDir = dirWithoutKey.replace('-', '/');
+  const decodedDir = dirWithoutKey.replace('$', '/');
   return decodedDir;
 }
 
