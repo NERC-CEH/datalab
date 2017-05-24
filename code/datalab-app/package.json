@@ -55,6 +55,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "esw src",
+    "lint-api": "esw src/api",
+    "lint-app": "esw src/app",
     "precommit": "lint-staged",
     "start": "concurrently -p \"[{name}]\" -n \"API,APP\" -c \"bgBlue.bold,bgMagenta.bold\"  \"npm run api\" \"npm run app\"",
     "api": "nodemon --exec babel-node src/api/api.js",

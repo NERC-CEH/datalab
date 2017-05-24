@@ -3,7 +3,7 @@ set -e
 
 GIT_DESCRIBE=`git describe --tags --always`
 
-if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)$ ]]; then
+if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|proxy)$ ]]; then
   case "$1" in
   docs)
     echo "Starting to build documents..."
@@ -22,6 +22,12 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)
     cd ./code/datalab-app && yarn dist-create && yarn build-app
     DOCKERFILE="app.Dockerfile"
     IMAGE="datalab-app"
+    ;;
+  proxy)
+    echo "Starting to build dynamic-proxy..."
+    cd ./code/dynamic-proxy
+    DOCKERFILE="Dockerfile"
+    IMAGE="dynamic-proxy"
     ;;
   esac
   echo "Generating docker image..."

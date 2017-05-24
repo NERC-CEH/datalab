@@ -64,7 +64,7 @@ it('add route sets correct key', (done) => {
     });
 });
 
-it('add route converts sub paths to -', (done) => {
+it('add route converts sub paths to $', (done) => {
   const source = 'test.route.ac.uk/api';
   const target = 'http://localhost:8000';
 
@@ -72,7 +72,7 @@ it('add route converts sub paths to -', (done) => {
   mockSet.mockReturnValue(Promise.resolve(etcdResponse));
   return service.addRoute(source, target)
     .then((data) => {
-      expect(mockSet).toBeCalledWith('redbird/test.route.ac.uk-api', target);
+      expect(mockSet).toBeCalledWith('redbird/test.route.ac.uk$api', target);
       expect(data).toEqual(etcdResponse);
       done();
     });

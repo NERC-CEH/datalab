@@ -10,7 +10,7 @@ COPY ./dist/api /usr/src/api
 
 COPY ./package.json /usr/src/api
 
-RUN yarn install --production
+RUN yarn install --silent --production && yarn cache clean
 
 EXPOSE 8000
 
