@@ -25,7 +25,7 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test('list routes returns routes and 200 if successful', (done) => {
+it('list routes returns routes and 200 if successful', (done) => {
   const returnedRoutes = [{ source: 'source', target: 'target' }];
 
   mockGetRoutes.mockReturnValue(Promise.resolve(returnedRoutes));
@@ -39,7 +39,7 @@ test('list routes returns routes and 200 if successful', (done) => {
     });
 });
 
-test('list routes returns routes a 500 if look up fails', (done) => {
+it('list routes returns routes a 500 if look up fails', (done) => {
   mockGetRoutes.mockReturnValueOnce(Promise.reject());
   const request = httpMocks.createRequest();
 
@@ -50,7 +50,7 @@ test('list routes returns routes a 500 if look up fails', (done) => {
   });
 });
 
-test('add route returns 201 if successful', (done) => {
+it('add route returns 201 if successful', (done) => {
   const returnedData = [{ message: 'Content from ETCD' }];
 
   mockAddRoute.mockReturnValue(Promise.resolve(returnedData));
@@ -63,7 +63,7 @@ test('add route returns 201 if successful', (done) => {
     });
 });
 
-test('add route returns 500 if add fails', (done) => {
+it('add route returns 500 if add fails', (done) => {
   mockAddRoute.mockReturnValueOnce(Promise.reject('error'));
 
   controller.addRoute(createRequest(), response).then(() => {
@@ -73,7 +73,7 @@ test('add route returns 500 if add fails', (done) => {
   });
 });
 
-test('delete route returns 200 if successful', (done) => {
+it('delete route returns 200 if successful', (done) => {
   const returnedData = [{ message: 'Content from ETCD' }];
 
   mockDeleteRoute.mockReturnValue(Promise.resolve(returnedData));
@@ -87,7 +87,7 @@ test('delete route returns 200 if successful', (done) => {
     });
 });
 
-test('delete route returns 500 if delete fails', (done) => {
+it('delete route returns 500 if delete fails', (done) => {
   mockDeleteRoute.mockReturnValueOnce(Promise.reject('error'));
 
   controller.deleteRoute(createRequest(), response).then(() => {
@@ -98,7 +98,7 @@ test('delete route returns 500 if delete fails', (done) => {
   });
 });
 
-test('delete all routes returns 200 if successful', (done) => {
+it('delete all routes returns 200 if successful', (done) => {
   const returnedData = [{ message: 'Content from ETCD' }];
 
   mockDeleteAllRoutes.mockReturnValue(Promise.resolve(returnedData));
@@ -112,7 +112,7 @@ test('delete all routes returns 200 if successful', (done) => {
     });
 });
 
-test('delete all routes returns 500 if delete fails', (done) => {
+it('delete all routes returns 500 if delete fails', (done) => {
   mockDeleteAllRoutes.mockReturnValueOnce(Promise.reject('error'));
   const request = httpMocks.createRequest();
 

@@ -23,7 +23,7 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
-test('get routes returns an empty array when directory is empty', (done) => {
+it('get routes returns an empty array when directory is empty', (done) => {
   mockGet.mockReturnValue(Promise.resolve({}));
 
   return service.getRoutes().then((data) => {
@@ -32,7 +32,7 @@ test('get routes returns an empty array when directory is empty', (done) => {
   });
 });
 
-test('get routes maps an etcd response to simple route objects', (done) => {
+it('get routes maps an etcd response to simple route objects', (done) => {
   mockGet.mockReturnValue(Promise.resolve(createEtcdResponse()));
 
   return service.getRoutes().then((data) => {
@@ -50,7 +50,7 @@ test('get routes maps an etcd response to simple route objects', (done) => {
   });
 });
 
-test('add route sets correct key', (done) => {
+it('add route sets correct key', (done) => {
   const source = 'test.route.ac.uk';
   const target = 'http://localhost:8000';
 
@@ -64,7 +64,7 @@ test('add route sets correct key', (done) => {
     });
 });
 
-test('add route converts sub paths to -', (done) => {
+it('add route converts sub paths to -', (done) => {
   const source = 'test.route.ac.uk/api';
   const target = 'http://localhost:8000';
 
@@ -78,7 +78,7 @@ test('add route converts sub paths to -', (done) => {
     });
 });
 
-test('delete route deletes correct key', (done) => {
+it('delete route deletes correct key', (done) => {
   const source = 'test.route.ac.uk';
 
   const etcdResponse = { message: 'Etcd Response' };
@@ -91,7 +91,7 @@ test('delete route deletes correct key', (done) => {
     });
 });
 
-test('delete all routes deletes directory and recreates', (done) => {
+it('delete all routes deletes directory and recreates', (done) => {
   const etcdResponse = { message: 'Etcd Response' };
   mockDel.mockReturnValueOnce(Promise.resolve(etcdResponse));
   mockMkdir.mockReturnValueOnce(Promise.resolve(etcdResponse));
@@ -104,7 +104,7 @@ test('delete all routes deletes directory and recreates', (done) => {
     });
 });
 
-test('get or create directory creates directory if it does not exist', (done) => {
+it('get or create directory creates directory if it does not exist', (done) => {
   const etcdResponse = { message: 'Etcd Response' };
   mockGet.mockReturnValueOnce(Promise.reject());
   mockMkdir.mockReturnValueOnce(Promise.resolve(etcdResponse));
@@ -117,7 +117,7 @@ test('get or create directory creates directory if it does not exist', (done) =>
     });
 });
 
-test('get or create directory returns routes if directory exists', (done) => {
+it('get or create directory returns routes if directory exists', (done) => {
   mockGet.mockReturnValueOnce(Promise.resolve(createEtcdResponse()));
   return service.getOrCreateDirectory()
     .then((data) => {
@@ -128,7 +128,7 @@ test('get or create directory returns routes if directory exists', (done) => {
     });
 });
 
-test('create watcher correctly builds watcher', () => {
+it('create watcher correctly builds watcher', () => {
   const returnedWatcher = {};
   mockWatcher.mockReturnValueOnce(returnedWatcher);
 

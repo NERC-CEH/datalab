@@ -17,7 +17,7 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test('test start registers routes', (done) => {
+it('test start registers routes', (done) => {
   const mockRegister = jest.fn();
   const mockOn = jest.fn().mockImplementation(() => {
     // console.log('On Mock called')
