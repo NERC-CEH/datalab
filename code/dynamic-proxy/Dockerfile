@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-RUN yarn install --silent --production
+RUN yarn install --silent --production && yarn cache clean
 
 EXPOSE 8080 8081
 
