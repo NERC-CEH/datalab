@@ -1,0 +1,10 @@
+{
+  "name": "docs",
+  "version": "0.1.0",
+  "devDependencies": {
+    "markdownlint-cli": "0.3.1"
+  },
+  "scripts": {
+    "lint": "npm bash ./build/validate-build.sh "
+  }
+}
