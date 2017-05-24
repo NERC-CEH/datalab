@@ -1,11 +1,11 @@
 import bunyan from 'bunyan';
 import config from '../config';
-import etcdService from '../services/etcd.service';
+import etcdService from '../services/etcd.service.instance';
 
 const logger = bunyan.createLogger({ name: 'etcd.backend' });
 
 function startEtcdBackend(proxy) {
-  etcdService.getOrCreateDirectory()
+  return etcdService.getOrCreateDirectory()
     .then(registerRoutes)
     .then(createWatcher);
 
@@ -42,7 +42,7 @@ function startEtcdBackend(proxy) {
 
 function cleanEtcdDir(str) {
   const dirWithoutKey = str.replace(config.get('redbirdEtcdKey'), '').replace(/^\/+|\/+$/g, '');
-  const decodedDir = dirWithoutKey.replace('-', '/');
+  const decodedDir = dirWithoutKey.replace('$', '/');
   return decodedDir;
 }
 

@@ -6,17 +6,17 @@
 
   vars:
     github_url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/provision/kubernetes
-    datalab_name: datalab.{{ datalabs_domain }}
+    datalab_name: datalab
     services:
       - name: datalab-api
         deployment: datalab-api-deployment.yml
-        external_url: "api.{{ datalab_name }}"
+        external_url: "{{ datalab_name }}-api.{{ datalabs_domain }}"
       - name: datalab-app
         deployment: datalab-app-deployment.yml
-        external_url: "{{ datalab_name }}"
+        external_url: "{{ datalab_name }}.{{ datalabs_domain }}"
       - name: docs
         deployment: docs-deployment.yml
-        external_url: "docs.{{ datalab_name }}"
+        external_url: "{{ datalab_name }}-docs.{{ datalabs_domain }}"
   roles:
     - deploy-public-services
 
