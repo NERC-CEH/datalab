@@ -93,12 +93,27 @@ Host k8s-tunnel
   ControlMaster=auto
   IdentityFile ~/.ssh/id_rsa_jasmin
   LocalForward 6443 <k8s_master_internal_ip>:6443
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
 ```
 
 Then, to open the tunnel simply run
 
 ```bash
 ssh -f -N k8s-tunnel
+```
+
+The tunnel can often die if running like this and has to be killed and restarted. An
+easier option is to use [autossh](https://www.everythingcli.org/ssh-tunnelling-for-fun-and-profit-autossh/). First install autossh
+
+```bash
+sudo yum install autossh
+```
+
+Then to start tunnel run:
+
+```bash
+autossh -M 0 -f -T -N k8s-tunnel
 ```
 
 ### Configure kubectl
