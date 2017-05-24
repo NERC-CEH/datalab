@@ -104,7 +104,9 @@ ssh -f -N k8s-tunnel
 ```
 
 The tunnel can often die if running like this and has to be killed and restarted. An
-easier option is to use [autossh](https://www.everythingcli.org/ssh-tunnelling-for-fun-and-profit-autossh/). First install autossh
+easier option is to use [autossh](https://www.everythingcli.org/ssh-tunnelling-for-fun-and-profit-autossh/).
+
+First install autossh:
 
 ```bash
 sudo yum install autossh
