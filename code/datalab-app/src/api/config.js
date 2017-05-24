@@ -10,7 +10,7 @@ const config = convict({
   corsOrigin: {
     doc: 'The allowed origin for CORS',
     format: String,
-    default: 'https://datalabs.nerc.ac.uk',
+    default: 'datalabs.nerc.ac.uk',
     env: 'CORS_ORIGIN',
   },
 });
