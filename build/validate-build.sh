@@ -13,7 +13,7 @@ if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|proxy)$ ]]; then
       cd ./code/datalab-app && yarn install && yarn lint-app && CI=true yarn test
       ;;
     proxy)
-      cd ./code/dynamic-proxy && yarn install && yarn lint # Add "&& yarn test" once created
+      cd ./code/dynamic-proxy && yarn install && yarn lint && yarn test
       ;;
   esac
 else
