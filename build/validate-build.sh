@@ -4,7 +4,7 @@ set -e
 if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|proxy)$ ]]; then
   case "$1" in
     docs)
-      echo "No lints or test defined"
+      cd ./docs && yarn install && yarn lint
       ;;
     api)
       cd ./code/datalab-app && yarn install && yarn lint-api && CI=true yarn test
