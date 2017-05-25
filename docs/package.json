@@ -2,9 +2,13 @@
   "name": "docs",
   "version": "0.1.0",
   "devDependencies": {
+    "gitbook-cli": "2.3.0",
     "markdownlint-cli": "0.3.1"
   },
   "scripts": {
-    "lint": "bash ../build/markdown-linter.sh"
+    "build": "npm run version-docs && gitbook build",
+    "lint": "bash ../build/markdown-linter.sh",
+    "start": "gitbook serve",
+    "version-docs": "bash ../build/version.sh ../build/template/version.md.template ./version.md"
   }
 }
