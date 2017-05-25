@@ -6,9 +6,13 @@ user/developer guides are stored in the `docs/` directory.
 
 ## Install GitBook
 
-Install GitBook globally using npm.
+Git can be installed using `npm` or `yarn`. Follow the instruction for installing
+`node.js` and `npm`, see [Data Lab Web Application](../datalab-app/README.md).
 
-`npm install gitbook-cli -g`
+```bash
+# within the docs directory
+yarn install
+```
 
 ## Build static pages
 
@@ -17,7 +21,7 @@ directory.
 
 ```bash
 # within the docs directory
-gitbook build
+yarn build
 ```
 
 ## Build and serve static pages
@@ -29,5 +33,5 @@ the server to crash. See _Increase number of file watchers permitted in linux_ i
 
 ```bash
 # within the docs directory
-gitbook serve
+yarn start
 ```
