@@ -4,6 +4,7 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import configureCorsHeaders from './corsConfig';
 import schema from './schema/index';
 import config from './config';
+import status from './status';
 
 const port = config.get('apiPort');
 
@@ -16,6 +17,7 @@ configureCorsHeaders(app);
 app.use(bodyParser.json());
 
 app.use('/api', api);
+app.get('/status', status.get);
 
 if (process.env.NODE_ENV !== 'production') {
   app.use('/graphiql', graphiql);
