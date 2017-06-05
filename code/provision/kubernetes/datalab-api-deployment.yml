@@ -12,8 +12,15 @@ spec:
       containers:
         - name: datalab-api
           image: nerc/datalab-api
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
