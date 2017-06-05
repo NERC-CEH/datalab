@@ -42,6 +42,12 @@
     proto: any
   with_items: "{{ private_servers }}"
 
+- name: Open all ports for access fom localhost
+  ufw:
+    rule: allow
+    from_ip: 10.32.0.0/12
+    proto: any
+
 - name: Add cluster IPs on correct interface to /etc/hosts
   lineinfile:
     dest: /etc/hosts
