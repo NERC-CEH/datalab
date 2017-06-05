@@ -34,7 +34,7 @@ NERCDL-9 Provision Docker and Proxy using ansible
 
 No incomplete stories in this sprint
 
-## Investigations
+## Investigation Stories
 
 * NERCDL-28 Investigate Auth0 for user administration/SSO
 * NERCDL-24 Investigate storage options for k8s
@@ -43,7 +43,7 @@ No incomplete stories in this sprint
 
 ### API Demo
 
-**(NERCDL-21, NERCDL-22)**
+#### (NERCDL-21, NERCDL-22)
 
 * Discuss GraphQL
 * Show GraphiQL endpoint
@@ -52,7 +52,7 @@ No incomplete stories in this sprint
 
 ### Kubernetes Cluster
 
-**(NERCDL-10, NERCDL-11, NERCDL-12)**
+#### (NERCDL-10, NERCDL-11, NERCDL-12)
 
 * Discuss Ansible scripts
 * Show kubectl connection
@@ -64,7 +64,7 @@ Discuss missing pieces:
 
 ### Deployment to Kubernetes
 
-**(NERC-9, NERCDL-23, NERCDL-19, NERCDL-20, NERCDL-29)**
+#### (NERC-9, NERCDL-23, NERCDL-19, NERCDL-20, NERCDL-29)
 
 Show Application served over HTTPS with API link
 
@@ -76,12 +76,11 @@ Show documentation served over HTTPS
 
 Discuss change to URL scheme
 
-
 ## Investigations
 
 ### Authentication
 
-**(NERCDL-28)**
+#### (NERCDL-28)
 
 * Details are in the Story
 * Discuss options
@@ -89,7 +88,7 @@ Discuss change to URL scheme
 
 ### Kubernetes Storage
 
-**(NERCDL-24)**
+#### (NERCDL-24)
 
 In Progress. Three options:
 
