@@ -19,3 +19,5 @@ code/provision/.vagrant
 code/provision/playbooks/vault-password.txt
 
 code/provision/playbooks/.artifacts/
+
+code/docker/spark/spark-2\.1\.0-bin-hadoop2\.7\.tgz
