@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: spark-master
+  name: spark-master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: spark-master
+    spec:
+      containers:
+      - name : spark-master
+        image: nerc/spark:2.1.0
+        imagePullPolicy: "Always"
+        name: spark-master
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 7077
+          protocol: TCP
+        env:
+        - name: SPARK_ROLE
+          value: MASTER
