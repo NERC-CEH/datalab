@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: zeppelin-deployment
+  name: zeppelin-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: zeppelin-master
+    spec:
+      containers:
+      - image: nerc/zeppelin:0.7.1
+        imagePullPolicy : "IfNotPresent"
+        name:  zeppelin-master
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: MASTER
+          value: spark://spark-master:7077

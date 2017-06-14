@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: zeppelin-service
+spec:
+  ports:
+    - name: zeppelin-web-ui
+      port: 80
+      targetPort: 8080
+  selector:
+    name: zeppelin-master
+  type: NodePort

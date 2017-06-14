@@ -42,7 +42,7 @@
     proto: any
   with_items: "{{ private_servers }}"
 
-- name: Open all ports for access fom localhost
+- name: Open all ports for access fom weave network
   ufw:
     rule: allow
     from_ip: 10.32.0.0/12

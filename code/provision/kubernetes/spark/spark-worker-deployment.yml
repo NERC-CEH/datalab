@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: spark-worker
+  name: spark-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: spark-worker
+    spec:
+      containers:
+      - image: nerc/spark:2.1.0
+        imagePullPolicy : "Always"
+        name: spark-worker
+        ports:
+        - containerPort: 7078
+          protocol: TCP
+        env:
+        - name: SPARK_ROLE
+          value: WORKER
