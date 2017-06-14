@@ -5,7 +5,6 @@
   "author": "Joshua D. Foster",
   "license": "GPL-3.0",
   "dependencies": {
-    "bluebird": "^3.5.0",
     "bunyan": "^1.8.10",
     "mongoose": "^4.10.5"
   },
