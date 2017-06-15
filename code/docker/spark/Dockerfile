@@ -16,9 +16,9 @@ ADD start.sh /usr/local/bin
 ENV PATH $PATH:/opt/spark/bin
 ENV SPARK_NO_DAEMONIZE 1
 
-# Add R-core for use with SparkR
+# Add R-core for use with SparkR (stable: R version 3.1.1, backport: newer: 3.3.3)
 RUN apt-get update
-RUN apt-get -y install r-base
+RUN apt-get -y -t jessie-backports install "r-base"
 
 # # Expose ports for monitoring.
 # # SparkContext web UI on 4040 -- only available for the duration of the application.
