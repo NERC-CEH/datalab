@@ -16,6 +16,10 @@ ADD start.sh /usr/local/bin
 ENV PATH $PATH:/opt/spark/bin
 ENV SPARK_NO_DAEMONIZE 1
 
+# Add R-core for use with SparkR
+RUN apt-get update
+RUN apt-get -y install r-base
+
 # # Expose ports for monitoring.
 # # SparkContext web UI on 4040 -- only available for the duration of the application.
 # # Spark master’s web UI on 8080.

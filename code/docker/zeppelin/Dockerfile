@@ -8,12 +8,15 @@ ENV ZEPPELIN_HOME=/opt/zeppelin \
     PATH=$PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
 
 RUN apk update && apk add --upgrade bash curl jq openjdk8 && \
+    apk add R R-dev build-base gcc && \
     mkdir -p ${ZEPPELIN_HOME} && \
     curl ${DIST_MIRROR}/zeppelin-${VERSION}/zeppelin-${VERSION}-bin-all.tgz | tar xvz -C ${ZEPPELIN_HOME} && \
     mv ${ZEPPELIN_HOME}/zeppelin-${VERSION}-bin-all/* ${ZEPPELIN_HOME} && \
     rm -rf ${ZEPPELIN_HOME}/zeppelin-${VERSION}-bin-all && \
     rm -rf *.tgz && \
     rm -rf /var/cache/apk/*
+
+RUN R -e "install.packages('knitr', repo='https://cloud.r-project.org/')"
 
 EXPOSE 8080 8443
 
