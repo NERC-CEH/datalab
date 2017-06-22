@@ -22,3 +22,4 @@ code/provision/playbooks/.artifacts/
 
 code/docker/spark/spark-2\.1\.0-bin-hadoop2\.7\.tgz
 code/docker/zeppelin/zeppelin-0\.7\.1-bin-all.tgz
+code/docker/zeppelin/zeppelin-0\.7\.2-bin-all.tgz

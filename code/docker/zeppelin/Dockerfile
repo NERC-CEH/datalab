@@ -2,7 +2,7 @@ FROM java:openjdk-8-jdk
 
 LABEL maintainer "gareth.lloyd@stfc.ac.uk"
 
-ENV ZEPPELIN_VER 0.7.1
+ENV ZEPPELIN_VER 0.7.2
 
 RUN mkdir -p /opt
 
@@ -18,6 +18,10 @@ RUN apt-get -y -t jessie-backports install "r-base"
 
 # Add KnitR for R html rendering with Zeppelin
 RUN R -e "install.packages('knitr', repo='https://cloud.r-project.org/')"
+
+# Additional packages for plots and command piping
+RUN R -e "install.packages('ggplot2', repo='https://cloud.r-project.org/')"
+RUN R -e "install.packages('magrittr', repo='https://cloud.r-project.org/')"
 
 EXPOSE 8080 8443
 
