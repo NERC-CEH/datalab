@@ -108,9 +108,3 @@ s3cmd get s3://rookbucket/rookObj ./rookObj-download --no-ssl --host=${AWS_ENDPO
 
 https://databricks.gitbooks.io/databricks-spark-reference-applications/content/logs_analyzer/chapter2/s3.html
 https://gist.github.com/tobilg/e03dbc474ba976b9f235
-
-User ID:        rook-user
-Display Name:   Rook user
-Email:
-Access Key:     KGF2SZ8M5JYX79FD3H9I
-Secret Key:     E0rYcePooO68B5jP51cArQVdYb41C5TC4arHy61i
