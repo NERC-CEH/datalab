@@ -16,6 +16,14 @@ ADD start.sh /usr/local/bin
 ENV PATH $PATH:/opt/spark/bin
 ENV SPARK_NO_DAEMONIZE 1
 
+# Add R-core for use with SparkR (stable: R version 3.1.1, backport: newer: 3.3.3)
+RUN apt-get update
+RUN apt-get -y -t jessie-backports install "r-base"
+
+# Patch SparkR to fix issue -- https://issues.apache.org/jira/browse/SPARK-21093
+ADD daemon.R.patch /opt/spark/R/lib/SparkR/worker
+RUN patch -b /opt/spark/R/lib/SparkR/worker/daemon.R /opt/spark/R/lib/SparkR/worker/daemon.R.patch
+
 # # Expose ports for monitoring.
 # # SparkContext web UI on 4040 -- only available for the duration of the application.
 # # Spark master’s web UI on 8080.

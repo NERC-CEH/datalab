@@ -1,19 +1,27 @@
-FROM  alpine:3.6
+FROM java:openjdk-8-jdk
+
 LABEL maintainer "gareth.lloyd@stfc.ac.uk"
 
-ARG DIST_MIRROR=http://archive.apache.org/dist/zeppelin
-ARG VERSION=0.7.1
-ENV ZEPPELIN_HOME=/opt/zeppelin \
-    JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
-    PATH=$PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
+ENV ZEPPELIN_VER 0.7.2
 
-RUN apk update && apk add --upgrade bash curl jq openjdk8 && \
-    mkdir -p ${ZEPPELIN_HOME} && \
-    curl ${DIST_MIRROR}/zeppelin-${VERSION}/zeppelin-${VERSION}-bin-all.tgz | tar xvz -C ${ZEPPELIN_HOME} && \
-    mv ${ZEPPELIN_HOME}/zeppelin-${VERSION}-bin-all/* ${ZEPPELIN_HOME} && \
-    rm -rf ${ZEPPELIN_HOME}/zeppelin-${VERSION}-bin-all && \
-    rm -rf *.tgz && \
-    rm -rf /var/cache/apk/*
+RUN mkdir -p /opt
+
+#ADD http://archive.apache.org/dist/zeppelin/zeppelin-${ZEPPELIN_VER}/zeppelin-${ZEPPELIN_VER}-bin-all.tgz
+ADD zeppelin-${ZEPPELIN_VER}-bin-all.tgz /opt
+RUN ln -s /opt/zeppelin-${ZEPPELIN_VER}-bin-all /opt/zeppelin
+
+ENV ZEPPELIN_HOME=/opt/zeppelin
+
+# Add R-core for use with SparkR (stable: R version 3.1.1, backport: newer: 3.3.3)
+RUN apt-get update
+RUN apt-get -y -t jessie-backports install "r-base"
+
+# Add KnitR for R html rendering with Zeppelin
+RUN R -e "install.packages('knitr', repo='https://cloud.r-project.org/')"
+
+# Additional packages for plots and command piping
+RUN R -e "install.packages('ggplot2', repo='https://cloud.r-project.org/')"
+RUN R -e "install.packages('magrittr', repo='https://cloud.r-project.org/')"
 
 EXPOSE 8080 8443
 
