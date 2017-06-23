@@ -1,0 +1,8 @@
+---
+- name: Install Rook dependencies
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - ceph-common
