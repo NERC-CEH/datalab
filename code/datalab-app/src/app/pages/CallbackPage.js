@@ -1,9 +1,6 @@
 import React from 'react';
+import CallbackContainer from '../components/app/CallbackContainer';
 
-const Callback = () => (
-  <div>
-    <p>Redirecting....</p>
-  </div>
-);
+const CallbackPage = props => (<CallbackContainer {...props} />);
 
-export default Callback;
+export default CallbackPage;

@@ -1,57 +1,60 @@
 import auth0 from 'auth0-js';
-import { EventEmitter } from 'events';
-import history from '../store/browserHistory';
 import authConfig from './authConfig';
 
-export default class Auth extends EventEmitter {
-  auth0 = new auth0.WebAuth(authConfig);
+const localStorageFields = {
+  access_token: 'accessToken',
+  expires_at: 'expiresAt',
+  id_token: 'idToken',
+};
 
-  constructor() {
-    super();
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
-  }
+const authZeroInit = new auth0.WebAuth(authConfig);
 
-  login() {
-    this.auth0.authorize();
-  }
+export function login() {
+  const state = JSON.stringify({ appRedirect: window.location.pathname });
+  authZeroInit.authorize({ state });
+}
 
-  handleAuthentication() {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-        console.log('handle auth funct');
-        history.replace('/'); // demo path
-      } else if (err) {
-        history.replace('/');  // demo path
-        console.log(err); // User notification
-      }
-    });
-  }
+export function logout() {
+  clearSession();
+}
 
-  setSession(authResult) { // eslint-disable-line class-methods-use-this
-    if (authResult && authResult.accessToken && authResult.idToken) {
-      const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-      localStorage.setItem('access_token', authResult.accessToken);
-      localStorage.setItem('id_token', authResult.idToken);
-      localStorage.setItem('expires_at', expiresAt);
-      console.log('set session');
-      history.replace('/'); // demo path
+export function handleAuthentication() {
+  return new Promise((resolve, reject) => authZeroInit.parseHash((err, authResponse) => {
+    if (authResponse && authResponse.accessToken && authResponse.idToken) {
+      const unpackedResponse = processResponse(authResponse);
+      setSession(unpackedResponse);
+      resolve(unpackedResponse);
+    } else if (err) {
+      reject(err);
     }
-  }
+  }));
+}
 
-  logout() { // eslint-disable-line class-methods-use-this
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    console.log('logout funct');
-    history.replace('/');  // demo path
-  }
+export function isAuthenticated() {
+  const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+  return new Date().getTime() < expiresAt;
+}
 
-  isAuthenticated() { // eslint-disable-line class-methods-use-this
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
-  }
+function processResponse(authResponse) {
+  const unpackedState = JSON.parse(authResponse.state);
+  return {
+    ...authResponse,
+    appRedirect: unpackedState.appRedirect,
+    expiresAt: expiresAtCalculator(authResponse.expiresIn),
+    state: unpackedState,
+  };
+}
+
+function expiresAtCalculator(expiresIn) {
+  return JSON.stringify((expiresIn * 1000) + new Date().getTime());
+}
+
+function setSession(authResponse) {
+  Object.entries(localStorageFields)
+    .map(([key, value]) => localStorage.setItem(key, authResponse[value]));
+}
+
+function clearSession() {
+  Object.keys(localStorageFields)
+    .map(key => localStorage.removeItem(key));
 }
