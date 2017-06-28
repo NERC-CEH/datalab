@@ -15,7 +15,7 @@ export function login() {
 }
 
 export function logout() {
-  clearSession();
+  return new Promise(resolve => resolve(clearSession()));
 }
 
 export function handleAuthentication() {
@@ -30,8 +30,7 @@ export function handleAuthentication() {
   }));
 }
 
-export function isAuthenticated() {
-  const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+export function isAuthenticated(expiresAt) {
   return new Date().getTime() < expiresAt;
 }
 

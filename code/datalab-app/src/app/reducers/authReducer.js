@@ -1,5 +1,5 @@
 import typeToReducer from 'type-to-reducer';
-import { USER_LOGIN } from '../actions/authActions';
+import { USER_LOGIN, USER_LOGOUT } from '../actions/authActions';
 
 const initialState = {
   user: null,
@@ -7,6 +7,7 @@ const initialState = {
 
 export default typeToReducer({
   [USER_LOGIN]: (state, action) => ({ ...initialState, user: processUser(action.payload) }),
+  [USER_LOGOUT]: () => initialState,
 }, initialState);
 
 function processUser(authResponse) {
