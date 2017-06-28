@@ -5,7 +5,7 @@ import { replace } from 'react-router-redux';
 import { handleAuthentication } from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
-class CallbackContainer extends Component {
+class AuthCallback extends Component {
   componentWillMount() {
     if (/access_token|id_token|error/.test(this.props.urlHash)) {
       handleAuthentication().then((authResponse) => {
@@ -38,4 +38,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CallbackContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthCallback);
