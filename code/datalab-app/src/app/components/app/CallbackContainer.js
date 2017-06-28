@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { replace } from 'react-router-redux';
-import { handleAuthentication } from '../../auth/Auth';
+import { handleAuthentication } from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
 class CallbackContainer extends Component {
@@ -13,17 +13,13 @@ class CallbackContainer extends Component {
         this.props.actions.routeTo(authResponse.appRedirect);
       });
     }
+    // Redirect to home page if auth fails
+    this.props.actions.routeTo('/');
   }
 
   render() {
-    // Redirect to home page if auth fails
-    this.props.actions.routeTo('/');
-
-    return (
-      <div>
-        <p>Redirecting...</p>
-      </div>
-    );
+    // Callback never renders
+    return null;
   }
 }
 

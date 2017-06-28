@@ -1,6 +1,6 @@
 import React from 'react';
 import { RaisedButton } from 'material-ui';
-import { login, logout, isAuthenticated } from '../auth/Auth';
+import { login, logout, isAuthenticated } from '../auth/auth';
 import version from '../version';
 
 const HomePage = () => (
