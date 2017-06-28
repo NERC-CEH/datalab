@@ -1,11 +1,17 @@
 import React from 'react';
-import HomePageContainer from '../components/authExample/HomePageContainer';
+import { connect } from 'react-redux';
+import { isAuthenticated } from '../auth/auth';
 
-const HomePage = () => (
+const HomePage = ({ user }) => (
   <div>
     <h1>Home Page</h1>
-    <HomePageContainer />
+    <p>This is the data lab home page.</p>
+    <p>{`You are ${isAuthenticated(user) ? 'logged in.' : 'not logged in.'}`}</p>
   </div>
 );
 
-export default HomePage;
+function mapStateToProps({ authentication: { user } }) {
+  return { user };
+}
+
+export default connect(mapStateToProps)(HomePage);

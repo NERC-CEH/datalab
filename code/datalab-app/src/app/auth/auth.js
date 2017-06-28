@@ -30,8 +30,8 @@ export function handleAuthentication() {
   }));
 }
 
-export function isAuthenticated(expiresAt) {
-  return new Date().getTime() < expiresAt;
+export function isAuthenticated(user) {
+  return user && user.expiresAt && new Date().getTime() < user.expiresAt;
 }
 
 function processResponse(authResponse) {
