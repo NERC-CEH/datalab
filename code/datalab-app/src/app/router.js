@@ -12,7 +12,7 @@ import CallbackPage from './pages/CallbackPage';
 const router = () => (
   <ConnectedRouter history={browserHistory} >
     <div>
-      <Route component={App} />
+      <App>
       <Switch>
         <Route exact path="/" component={HomePage} />} />
         <Route exact path="/callback" component={CallbackPage} />
@@ -20,6 +20,7 @@ const router = () => (
         <Route exact path="/apiExample" component={ApiExamplePage} />
         <Route component={NotFoundPage} />
       </Switch>
+      </App>
     </div>
   </ConnectedRouter>
 );
