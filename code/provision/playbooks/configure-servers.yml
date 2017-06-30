@@ -5,12 +5,18 @@
 
   roles:
     - secure-server
+  tags:
+    - secure
 
 - hosts: new
   user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
+  vars:
+    disks_query: "[?name=='{{ inventory_hostname }}'].disks"
+    disks: "{{ private_servers | json_query(disks_query) }}"
 
   roles:
     - setup-networking
     - base-configuration
+    - mount-drives
