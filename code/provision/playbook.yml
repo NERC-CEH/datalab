@@ -55,3 +55,6 @@
 
     - name: Install xmltodict
       pip: name=xmltodict
+
+    - name: Install jmespath
+      pip: name=jmespath
