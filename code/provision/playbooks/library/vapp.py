@@ -431,10 +431,12 @@ def vapp_attach_net(module=None, vca=None, vapp=None):
     module.fail_json(msg="Seems like network_name is not found in the vdc, please check Available networks as above", Available_networks=nets)
 
 def create_vm(vca=None, module=None):
+    vdc_name       = module.params.get('vdc_name')
     vm_name        = module.params.get('vm_name')
     operation      = module.params.get('operation')
     vm_cpus        = module.params.get('vm_cpus')
     vm_memory      = module.params.get('vm_memory')
+    vm_disks       = module.params.get('vm_disks')
     catalog_name   = module.params.get('catalog_name')
     template_name  = module.params.get('template_name')
     vdc_name       = module.params.get('vdc_name')
@@ -491,6 +493,22 @@ def create_vm(vca=None, module=None):
             module.fail_json(msg="Error adding memory", error=vapp.resonse.contents)
         if not vca.block_until_completed(task):
             module.fail_json(msg="Failure in waiting for modifying memory", error=vapp.response.content)
+
+    if vm_disks:
+        vapp = vca.get_vapp(vdc, vapp_name)
+        for disk in vm_disks:
+            matching_disks = filter(lambda existing_disk: disk['name'] == existing_disk.get_name(), vca.get_diskRefs(vdc))
+            if len(matching_disks) > 1:
+                module.fail_json(msg = "The vapp seems to have more than one disk with same name,\
+                                        unable to mount volume")
+            elif len(matching_disks) == 0:
+                module.fail_json(msg="Disk to mount does not exist, this module does not yet support dynamic creation")
+            else:
+                task = vapp.attach_disk_to_vm(vm_name, matching_disks[0])
+                if not task:
+                  module.fail_json(msg="Error adding disks", error=vapp.response)
+                if not vca.block_until_completed(task):
+                  module.fail_json(msg="Failure in waiting for disk add", error=vapp.response.content)
 
     if admin_pass:
         vapp = vca.get_vapp(vdc, vapp_name)
@@ -675,6 +693,7 @@ def main():
             vdc_name            = dict(default=None),
             vm_name             = dict(default='default_ansible_vm1'),
             vm_cpus             = dict(default=None, type='int'),
+            vm_disks            = dict(default=None, type='list'),
             verify_certs        = dict(default=True, type='bool'),
             vm_memory           = dict(default=None, type='int'),
             admin_password      = dict(default=None),
