@@ -33,8 +33,11 @@
           state: present
           operation: poweron
           vm_name: "{{ item.name }}"
+          vm_cpus: "{{ item.cpus }}"
+          vm_memory: "{{ item.memory }}"
           network_ip: "{{ item.internal_ip }}"
           network_name: "{{ vcloud_network_name }}"
+          network_mode: "manual"
           script: "/tmp/init_vm.sh"
         register: myvm
         with_items: "{{ public_servers }}"
@@ -85,6 +88,17 @@
         - public
 
     - block:
+      - name: Creates required volumes
+        vdrive:
+          volume_info: "{{ item.disks }}"
+          host: "{{ vcloud_api_host }}"
+          username: "{{ vcloud_user }}"
+          password: "{{ vcloud_user_password }}"
+          org: "{{ vcloud_vcloud_org }}"
+          vdc_name: "{{ vcloud_vdc_name }}"
+          verify_certs: false
+        with_items: "{{ private_servers }}"
+
       - name: Creates new private servers
         vapp:
           api_version: 5.5
@@ -100,8 +114,12 @@
           state: present
           operation: poweron
           vm_name: "{{ item.name }}"
+          vm_cpus: "{{ item.cpus }}"
+          vm_memory: "{{ item.memory }}"
+          vm_disks: "{{ item.disks }}"
           network_ip: "{{ item.internal_ip }}"
           network_name: "{{ vcloud_network_name }}"
+          network_mode: "manual"
           script: "/tmp/init_vm.sh"
         register: myvm
         with_items: "{{ private_servers }}"

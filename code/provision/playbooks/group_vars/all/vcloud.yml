@@ -12,15 +12,48 @@ public_servers:
   - name: bastion
     public_ip: "{{ bastion_ip_address }}"
     internal_ip: "{{ bastion_internal_ip_address }}"
+    cpus: 1
+    memory: 4096
   - name: external-proxy
     public_ip: 192.171.139.116
     internal_ip: "{{ external_proxy_internal_ip_address }}"
+    cpus: 1
+    memory: 4096
 
 k8s_master_ip: 192.168.3.6
 private_servers:
   - name: k8s-master
     internal_ip: "{{ k8s_master_ip }}"
+    cpus: 4
+    memory: 16384
+    disks:
+      - name: k8s-master-disk1
+        size: 100
   - name: k8s-worker-1
     internal_ip: 192.168.3.7
+    cpus: 4
+    memory: 16384
+    disks:
+      - name: k8s-worker-1-disk1
+        size: 100
   - name: k8s-worker-2
     internal_ip: 192.168.3.8
+    cpus: 4
+    memory: 16384
+    disks:
+      - name: k8s-worker-2-disk1
+        size: 100
+  - name: k8s-worker-3
+    internal_ip: 192.168.3.9
+    cpus: 4
+    memory: 16384
+    disks:
+      - name: k8s-worker-3-disk1
+        size: 100
+  - name: k8s-worker-4
+    internal_ip: 192.168.3.10
+    cpus: 4
+    memory: 16384
+    disks:
+      - name: k8s-worker-4-disk1
+        size: 100
