@@ -12,6 +12,21 @@
         name: en_GB.UTF-8
         state: present
 
+    - name: Install build-essential
+      apt:
+        name: build-essential
+        state: present
+
+    - name: Install libffi-dev
+      apt:
+        name: libffi-dev
+        state: present
+
+    - name: Install libssl-dev
+      apt:
+        name: libssl-dev
+        state: present
+
     - name: Install libxml2-dev
       apt:
         name: libxml2-dev
@@ -34,6 +49,9 @@
 
     - name: Install pyvcloud
       pip: name=pyvcloud
+
+    - name: Install vca-cli
+      pip: name=vca-cli
 
     - name: Install xmltodict
       pip: name=xmltodict
