@@ -100,7 +100,7 @@ options:
     network_ip:
       version_added: "2.0"
       description:
-        - The ip address that should be assigned to vm when the ip assignment type is static
+        - The ip address that should be assigned to vm when the ip assignment type is manual
       required: false
       default: None
     network_mode:
@@ -109,7 +109,7 @@ options:
         - The network mode in which the ip should be allocated.
       required: false
       default: pool
-      choices: [ "pool", "dhcp", 'static' ]
+      choices: [ "pool", "dhcp", 'manual' ]
     instance_id::
       version_added: "2.0"
       description:
@@ -391,7 +391,7 @@ def vapp_attach_net(module=None, vca=None, vapp=None):
     service_type        = module.params.get('service_type')
     vdc_name            = module.params.get('vdc_name')
     mode                = module.params.get('network_mode')
-    if mode.upper() == 'STATIC':
+    if mode.upper() == 'MANUAL':
         network_ip  = module.params.get('network_ip')
     else:
         network_ip = None
@@ -686,7 +686,7 @@ def main():
             template_name       = dict(default=None, required=True),
             network_name        = dict(default=None),
             network_ip          = dict(default=None),
-            network_mode        = dict(default='pool', choices=['dhcp', 'static', 'pool']),
+            network_mode        = dict(default='pool', choices=['dhcp', 'manual', 'pool']),
             instance_id         = dict(default=None),
             wait                = dict(default=True, type='bool'),
             wait_timeout        = dict(default=250, type='int'),
@@ -717,9 +717,9 @@ def main():
     if not HAS_PYVCLOUD:
         module.fail_json(msg="python module pyvcloud is needed for this module")
 
-    if network_mode.upper() == 'STATIC':
+    if network_mode.upper() == 'MANUAL':
         if not network_ip:
-            module.fail_json(msg="if network_mode is STATIC, network_ip is mandatory")
+            module.fail_json(msg="if network_mode is MANUAL, network_ip is mandatory")
 
     if service_type == 'vca':
         if not instance_id:
