@@ -1,0 +1,22 @@
+---
+- name: Format the disks
+  filesystem:
+    fstype: ext4
+    dev: "{{ item.block_device }}"
+  with_items: "{{ disks }}"
+
+- name: Create the mount points for the disks
+  file:
+    path: "{{ item.mount_point }}"
+    owner: "{{ deploy_user }}"
+    group: '{{ deploy_user }}'
+    state: directory
+  with_items: "{{ disks }}"
+
+- name: Mount device
+  mount:
+    path: "{{ item.mount_point }}"
+    src: "{{ item.block_device }}"
+    fstype: ext4
+    state: mounted
+  with_items: "{{ disks }}"
