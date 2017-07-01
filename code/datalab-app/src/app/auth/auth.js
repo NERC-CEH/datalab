@@ -1,11 +1,6 @@
 import auth0 from 'auth0-js';
 import authConfig from './authConfig';
-
-const localStorageFields = {
-  access_token: 'accessToken',
-  expires_at: 'expiresAt',
-  id_token: 'idToken',
-};
+import { setSession, clearSession } from '../core/sessionUtil';
 
 const authZeroInit = new auth0.WebAuth(authConfig);
 
@@ -46,14 +41,4 @@ function processResponse(authResponse) {
 
 function expiresAtCalculator(expiresIn) {
   return JSON.stringify((expiresIn * 1000) + new Date().getTime());
-}
-
-function setSession(authResponse) {
-  Object.entries(localStorageFields)
-    .map(([key, value]) => localStorage.setItem(key, authResponse[value]));
-}
-
-function clearSession() {
-  Object.keys(localStorageFields)
-    .map(key => localStorage.removeItem(key));
 }
