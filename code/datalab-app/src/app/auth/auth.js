@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import moment from 'moment';
 import authConfig from './authConfig';
 import { setSession, clearSession } from '../core/sessionUtil';
 
@@ -28,7 +29,11 @@ export function handleAuthentication() {
 }
 
 export function isAuthenticated(expiresAt) {
-  return new Date().getTime() < expiresAt;
+  const expiresAtMoment = moment(expiresAt, 'x');
+  if (!expiresAtMoment.isValid()) {
+    throw new Error('Auth token expiresAt value is invalid.');
+  }
+  return moment.utc().isBefore(moment(expiresAt, 'x'));
 }
 
 function processResponse(authResponse) {
@@ -42,5 +47,5 @@ function processResponse(authResponse) {
 }
 
 function expiresAtCalculator(expiresIn) {
-  return JSON.stringify((expiresIn * 1000) + new Date().getTime());
+  return moment.utc().add(expiresIn, 's').format('x');
 }
