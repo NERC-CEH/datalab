@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { RaisedButton } from 'material-ui';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux';
-import authActions from '../../actions/authActions';
 import { login, logout, isAuthenticated } from '../../auth/auth';
 
 class HomePageContainer extends Component {
@@ -19,7 +16,7 @@ class HomePageContainer extends Component {
 
   userLoginLogout() {
     if (this.userLoggedIn()) {
-      logout().then(() => this.props.actions.userLogsOut());
+      logout();
     } else {
       // Not promise as user will be redirected away from page.
       login();
@@ -43,13 +40,4 @@ function mapStateToProps({ authentication: { user } }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      ...authActions,
-      routeTo: push,
-    }, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePageContainer);
+export default connect(mapStateToProps)(HomePageContainer);

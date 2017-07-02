@@ -10,7 +10,9 @@ export function login() {
 }
 
 export function logout() {
-  return new Promise(resolve => resolve(clearSession()));
+  // User redirected to home page on logout
+  clearSession();
+  authZeroInit.logout();
 }
 
 export function handleAuthentication() {
