@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { RaisedButton } from 'material-ui';
 import { connect } from 'react-redux';
-import { login, logout, isAuthenticated } from '../../auth/auth';
+import auth from '../../auth/auth';
 
 class HomePageContainer extends Component {
   constructor(props, context) {
@@ -11,15 +11,14 @@ class HomePageContainer extends Component {
   }
 
   userLoggedIn() {
-    return this.props.user && isAuthenticated(this.props.user.expiresAt);
+    return this.props.user && auth.isAuthenticated(this.props.user.expiresAt);
   }
 
   userLoginLogout() {
     if (this.userLoggedIn()) {
-      logout();
+      auth.logout();
     } else {
-      // Not promise as user will be redirected away from page.
-      login();
+      auth.login();
     }
   }
 

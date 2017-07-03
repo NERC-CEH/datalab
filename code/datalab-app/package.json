@@ -5,6 +5,7 @@
   "dependencies": {
     "auth0-js": "8.8.0",
     "axios": "0.16.1",
+    "bluebird": "3.5.0",
     "body-parser": "1.17.1",
     "convict": "3.0.0",
     "express": "4.15.2",
