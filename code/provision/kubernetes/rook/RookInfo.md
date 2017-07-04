@@ -60,6 +60,26 @@ Various Rook tools are packaged into the rook-tools pod. Create by running
 kubectl create -f rook-tools.yaml
 ```
 
+### Connect to Rook Tools
+
+### Deleting default pool
+
+By default Rook creates an rdb pool with 2048 PGs ([Github Issue](https://github.com/rook/rook/issues/554)). This exceeds the capacity of our
+cluster and results in warnings in the status report. The solution is to delete the
+default pool and create a new one. To delete:
+
+```
+kubectl -n rook exec -it rook-tools -- bash
+ceph tell mon.* injectargs -- --mon-allow-pool-delete
+ceph osd pool rm rbd rbd --yes-i-really-really-mean-it
+```
+
+To create a new pool:
+
+```
+ceph osd pool create datalabs 200 200
+```
+
 ### Test Object store (from cluster)
 
 Connect to tools pod and run
