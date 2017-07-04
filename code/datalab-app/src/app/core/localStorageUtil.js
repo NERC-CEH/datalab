@@ -19,3 +19,10 @@ export function removeFromLocalStorage(fieldName) {
     throw new Error(`Unknown localStorage field name: ${fieldName}.`);
   }
 }
+
+export function getFromLocalStorage(fieldName) {
+  if (knownFields.includes(fieldName)) {
+    return localStorage.getItem(fieldName);
+  }
+  throw new Error(`Unknown localStorage field name: ${fieldName}.`);
+}

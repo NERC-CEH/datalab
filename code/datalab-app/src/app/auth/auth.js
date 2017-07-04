@@ -2,7 +2,7 @@ import moment from 'moment';
 import Promise from 'bluebird';
 import auth0 from 'auth0-js';
 import authConfig from './authConfig';
-import { setSession, clearSession } from '../core/sessionUtil';
+import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
 class Auth {
   constructor(authZeroInit, promisifyAuthZeroInit) {
@@ -12,6 +12,7 @@ class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getCurrentSession = this.getCurrentSession.bind(this);
   }
 
   login() {
@@ -38,22 +39,33 @@ class Auth {
       });
   }
 
-  isAuthenticated(expiresAt) {
-    const expiresAtMoment = moment(expiresAt, 'x');
-    if (!expiresAtMoment.isValid()) {
-      throw new Error('Auth token expiresAt value is invalid.');
+  isAuthenticated(session) {
+    if (session && session.expiresAt) {
+      const expiresAtMoment = moment(session.expiresAt, 'x');
+      if (!expiresAtMoment.isValid()) {
+        throw new Error('Auth token expiresAt value is invalid.');
+      }
+      return moment.utc().isBefore(moment(session.expiresAt, 'x'));
     }
-    return moment.utc().isBefore(moment(expiresAt, 'x'));
+    return false;
+  }
+
+  getCurrentSession() {
+    const currentSession = getSession();
+    return currentSession && processResponse(currentSession);
   }
 }
 
 function processResponse(authResponse) {
-  const unpackedState = JSON.parse(authResponse.state);
+  const state = authResponse.state ? JSON.parse(authResponse.state) : undefined;
+  const appRedirect = state ? state.appRedirect : undefined;
+  const expiresAt = authResponse.expiresAt ? authResponse.expiresAt : expiresAtCalculator(authResponse.expiresIn);
+
   return {
     ...authResponse,
-    appRedirect: unpackedState.appRedirect,
-    expiresAt: expiresAtCalculator(authResponse.expiresIn),
-    state: unpackedState,
+    appRedirect,
+    expiresAt,
+    state,
   };
 }
 
