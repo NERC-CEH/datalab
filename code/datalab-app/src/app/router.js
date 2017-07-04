@@ -16,7 +16,7 @@ const router = () => (
     <div>
       <App>
       <Switch>
-        <Route exact path="/" component={HomePage} />} />
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/callback" component={CallbackPage} />
         <Route exact path="/example" component={ExamplePage} />
         <Route exact path="/apiExample" component={ApiExamplePage} />

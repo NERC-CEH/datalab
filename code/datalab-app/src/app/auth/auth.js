@@ -1,37 +1,50 @@
+import moment from 'moment';
+import Promise from 'bluebird';
 import auth0 from 'auth0-js';
 import authConfig from './authConfig';
+import { setSession, clearSession } from '../core/sessionUtil';
 
-const localStorageFields = {
-  access_token: 'accessToken',
-  expires_at: 'expiresAt',
-  id_token: 'idToken',
-};
+class Auth {
+  constructor(authZeroInit, promisifyAuthZeroInit) {
+    this.authZeroInit = authZeroInit;
+    this.authZeroAsync = promisifyAuthZeroInit;
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
+  }
 
-const authZeroInit = new auth0.WebAuth(authConfig);
+  login() {
+    // User redirected to Auth0 login page
+    const state = JSON.stringify({ appRedirect: window.location.pathname });
+    this.authZeroInit.authorize({ state });
+  }
 
-export function login() {
-  const state = JSON.stringify({ appRedirect: window.location.pathname });
-  authZeroInit.authorize({ state });
-}
+  logout() {
+    // User redirected to home page on logout
+    clearSession();
+    this.authZeroInit.logout();
+  }
 
-export function logout() {
-  return new Promise(resolve => resolve(clearSession()));
-}
+  handleAuthentication() {
+    return this.authZeroAsync.parseHashAsync()
+      .then((authResponse) => {
+        if (authResponse && authResponse.accessToken && authResponse.idToken) {
+          const unpackedResponse = processResponse(authResponse);
+          setSession(unpackedResponse);
+          return unpackedResponse;
+        }
+        return null;
+      });
+  }
 
-export function handleAuthentication() {
-  return new Promise((resolve, reject) => authZeroInit.parseHash((err, authResponse) => {
-    if (authResponse && authResponse.accessToken && authResponse.idToken) {
-      const unpackedResponse = processResponse(authResponse);
-      setSession(unpackedResponse);
-      resolve(unpackedResponse);
-    } else if (err) {
-      reject(err);
+  isAuthenticated(expiresAt) {
+    const expiresAtMoment = moment(expiresAt, 'x');
+    if (!expiresAtMoment.isValid()) {
+      throw new Error('Auth token expiresAt value is invalid.');
     }
-  }));
-}
-
-export function isAuthenticated(user) {
-  return user && user.expiresAt && new Date().getTime() < user.expiresAt;
+    return moment.utc().isBefore(moment(expiresAt, 'x'));
+  }
 }
 
 function processResponse(authResponse) {
@@ -45,15 +58,10 @@ function processResponse(authResponse) {
 }
 
 function expiresAtCalculator(expiresIn) {
-  return JSON.stringify((expiresIn * 1000) + new Date().getTime());
+  return moment.utc().add(expiresIn, 's').format('x');
 }
 
-function setSession(authResponse) {
-  Object.entries(localStorageFields)
-    .map(([key, value]) => localStorage.setItem(key, authResponse[value]));
-}
-
-function clearSession() {
-  Object.keys(localStorageFields)
-    .map(key => localStorage.removeItem(key));
-}
+const AuthZero = new auth0.WebAuth(authConfig);
+const PromisifyAuthZero = Promise.promisifyAll(AuthZero);
+export default new Auth(AuthZero, PromisifyAuthZero);
+export { Auth as PureAuth }; // export for testing
