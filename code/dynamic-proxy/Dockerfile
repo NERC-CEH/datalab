@@ -1,4 +1,4 @@
-FROM node:7.10.0
+FROM node:8.1.2
 
 LABEL maintainer "gareth.lloyd@stfc.ac.uk"
 
