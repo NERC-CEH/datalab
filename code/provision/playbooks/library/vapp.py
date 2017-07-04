@@ -100,7 +100,7 @@ options:
     network_ip:
       version_added: "2.0"
       description:
-        - The ip address that should be assigned to vm when the ip assignment type is static
+        - The ip address that should be assigned to vm when the ip assignment type is manual
       required: false
       default: None
     network_mode:
@@ -109,7 +109,7 @@ options:
         - The network mode in which the ip should be allocated.
       required: false
       default: pool
-      choices: [ "pool", "dhcp", 'static' ]
+      choices: [ "pool", "dhcp", 'manual' ]
     instance_id::
       version_added: "2.0"
       description:
@@ -391,7 +391,7 @@ def vapp_attach_net(module=None, vca=None, vapp=None):
     service_type        = module.params.get('service_type')
     vdc_name            = module.params.get('vdc_name')
     mode                = module.params.get('network_mode')
-    if mode.upper() == 'STATIC':
+    if mode.upper() == 'MANUAL':
         network_ip  = module.params.get('network_ip')
     else:
         network_ip = None
@@ -431,10 +431,12 @@ def vapp_attach_net(module=None, vca=None, vapp=None):
     module.fail_json(msg="Seems like network_name is not found in the vdc, please check Available networks as above", Available_networks=nets)
 
 def create_vm(vca=None, module=None):
+    vdc_name       = module.params.get('vdc_name')
     vm_name        = module.params.get('vm_name')
     operation      = module.params.get('operation')
     vm_cpus        = module.params.get('vm_cpus')
     vm_memory      = module.params.get('vm_memory')
+    vm_disks       = module.params.get('vm_disks')
     catalog_name   = module.params.get('catalog_name')
     template_name  = module.params.get('template_name')
     vdc_name       = module.params.get('vdc_name')
@@ -491,6 +493,22 @@ def create_vm(vca=None, module=None):
             module.fail_json(msg="Error adding memory", error=vapp.resonse.contents)
         if not vca.block_until_completed(task):
             module.fail_json(msg="Failure in waiting for modifying memory", error=vapp.response.content)
+
+    if vm_disks:
+        vapp = vca.get_vapp(vdc, vapp_name)
+        for disk in vm_disks:
+            matching_disks = filter(lambda existing_disk: disk['name'] == existing_disk.get_name(), vca.get_diskRefs(vdc))
+            if len(matching_disks) > 1:
+                module.fail_json(msg = "The vapp seems to have more than one disk with same name,\
+                                        unable to mount volume")
+            elif len(matching_disks) == 0:
+                module.fail_json(msg="Disk to mount does not exist, this module does not yet support dynamic creation")
+            else:
+                task = vapp.attach_disk_to_vm(vm_name, matching_disks[0])
+                if not task:
+                  module.fail_json(msg="Error adding disks", error=vapp.response)
+                if not vca.block_until_completed(task):
+                  module.fail_json(msg="Failure in waiting for disk add", error=vapp.response.content)
 
     if admin_pass:
         vapp = vca.get_vapp(vdc, vapp_name)
@@ -668,13 +686,14 @@ def main():
             template_name       = dict(default=None, required=True),
             network_name        = dict(default=None),
             network_ip          = dict(default=None),
-            network_mode        = dict(default='pool', choices=['dhcp', 'static', 'pool']),
+            network_mode        = dict(default='pool', choices=['dhcp', 'manual', 'pool']),
             instance_id         = dict(default=None),
             wait                = dict(default=True, type='bool'),
             wait_timeout        = dict(default=250, type='int'),
             vdc_name            = dict(default=None),
             vm_name             = dict(default='default_ansible_vm1'),
             vm_cpus             = dict(default=None, type='int'),
+            vm_disks            = dict(default=None, type='list'),
             verify_certs        = dict(default=True, type='bool'),
             vm_memory           = dict(default=None, type='int'),
             admin_password      = dict(default=None),
@@ -698,9 +717,9 @@ def main():
     if not HAS_PYVCLOUD:
         module.fail_json(msg="python module pyvcloud is needed for this module")
 
-    if network_mode.upper() == 'STATIC':
+    if network_mode.upper() == 'MANUAL':
         if not network_ip:
-            module.fail_json(msg="if network_mode is STATIC, network_ip is mandatory")
+            module.fail_json(msg="if network_mode is MANUAL, network_ip is mandatory")
 
     if service_type == 'vca':
         if not instance_id:

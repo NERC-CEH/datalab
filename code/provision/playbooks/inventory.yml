@@ -3,6 +3,8 @@ external-proxy  ansible_host=192.168.3.3
 k8s-master      ansible_host=192.168.3.6
 k8s-worker-1    ansible_host=192.168.3.7
 k8s-worker-2    ansible_host=192.168.3.8
+k8s-worker-3    ansible_host=192.168.3.9
+k8s-worker-4    ansible_host=192.168.3.10
 
 [bastions]
 bastion
@@ -14,16 +16,23 @@ external-proxy
 k8s-master
 k8s-worker-1
 k8s-worker-2
+k8s-worker-3
+k8s-worker-4
 
 [k8s-workers]
 k8s-worker-1
 k8s-worker-2
+k8s-worker-3
+k8s-worker-4
 
 [proxied:children]
 proxy
 k8s-cluster
 
 [new]
+external-proxy
 k8s-master
 k8s-worker-1
 k8s-worker-2
+k8s-worker-3
+k8s-worker-4

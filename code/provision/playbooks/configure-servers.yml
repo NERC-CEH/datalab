@@ -5,6 +5,8 @@
 
   roles:
     - secure-server
+  tags:
+    - secure
 
 - hosts: new
   user: "{{ deploy_user }}"
