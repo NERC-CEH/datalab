@@ -7,25 +7,31 @@ import RaisedButton from 'material-ui/RaisedButton';
 import NavMenu from './NavMenu';
 import menuActions from '../../actions/menuActions';
 import authActions from '../../actions/authActions';
-import { login, logout, isAuthenticated } from '../../auth/auth';
+import auth from '../../auth/auth';
 
 class Navigation extends Component {
   constructor(props, context) {
     super(props, context);
-    this.userLoggedIn = this.userLoggedIn.bind(this);
+    this.isUserLoggedIn = this.isUserLoggedIn.bind(this);
     this.userLoginLogout = this.userLoginLogout.bind(this);
   }
 
-  userLoggedIn() {
-    return isAuthenticated(this.props.user);
+  componentWillMount() {
+    const currentSession = auth.getCurrentSession();
+    if (currentSession) {
+      this.props.actions.userLogsIn(currentSession);
+    }
+  }
+
+  isUserLoggedIn() {
+    return this.props.user && auth.isAuthenticated(this.props.user);
   }
 
   userLoginLogout() {
-    if (this.userLoggedIn()) {
-      logout().then(() => this.props.actions.userLogsOut());
+    if (this.isUserLoggedIn()) {
+      auth.logout();
     } else {
-      // Not promise as user will be redirected away from page.
-      login();
+      auth.login();
     }
   }
 
@@ -38,7 +44,7 @@ class Navigation extends Component {
           onRightIconButtonTouchTap={this.userLoginLogout}
           iconElementRight={
             <RaisedButton
-              label={this.userLoggedIn() ? 'Logout' : 'Login'}
+              label={this.isUserLoggedIn() ? 'Logout' : 'Login'}
               secondary
             />}
         />

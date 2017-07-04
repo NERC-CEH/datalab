@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { PureAuth } from './auth';
-import { setSession, clearSession } from '../core/sessionUtil';
+import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
 jest.mock('../core/sessionUtil');
 
@@ -84,7 +84,7 @@ describe('auth', () => {
     const expiresAt = '1496271600000';
 
     // Act/Assert
-    expect(auth.isAuthenticated(expiresAt)).toBe(false);
+    expect(auth.isAuthenticated({ expiresAt })).toBe(false);
   });
 
   it('isAuthenticated returns true for future date-time', () => {
@@ -92,7 +92,20 @@ describe('auth', () => {
     const expiresAt = JSON.stringify(Date.now() + 30000);
 
     // Act/Assert
-    expect(auth.isAuthenticated(expiresAt)).toBe(true);
+    expect(auth.isAuthenticated({ expiresAt })).toBe(true);
+  });
+
+  it('isAuthenticated throws false for "null" user', () => {
+    // Act/Assert
+    expect(auth.isAuthenticated(null)).toBe(false);
+  });
+
+  it('isAuthenticated throws false for user object without expiresAt', () => {
+    // Arrange
+    const userObject = { accessToken: 'accessToken', idToken: 'idToken' };
+
+    // Act/Assert
+    expect(auth.isAuthenticated(userObject)).toBe(false);
   });
 
   it('isAuthenticated throws error for incorrectly formatted expiresAt', () => {
@@ -100,7 +113,37 @@ describe('auth', () => {
     const expiresAt = 'not date';
 
     // Act/Assert
-    expect(() => auth.isAuthenticated(expiresAt))
+    expect(() => auth.isAuthenticated({ expiresAt }))
       .toThrow('Auth token expiresAt value is invalid.');
+  });
+
+  it('getCurrentSession calls getSession', () => {
+    // Act
+    auth.getCurrentSession();
+
+    // Assert
+    expect(getSession.mock.calls.length).toBe(1);
+  });
+
+  it('getCurrentSession returns undefined if no session available', () => {
+    // Act/Assert
+    expect(getSession()).toBe(undefined);
+  });
+
+  it('getCurrentSession if session found returns correctly formatted authResponse', () => {
+    // Arrange
+    getSession.mockReturnValue({
+      accessToken: 'expectedAccessToken',
+      expiresAt: 'expectedExpiresAt',
+      idToken: 'expectedIdToken',
+    });
+
+    // Act
+    const output = getSession();
+
+    // Assert
+    expect(output.accessToken).toBe('expectedAccessToken');
+    expect(output.expiresAt).toBe('expectedExpiresAt');
+    expect(output.idToken).toBe('expectedIdToken');
   });
 });

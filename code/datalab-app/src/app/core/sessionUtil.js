@@ -1,11 +1,14 @@
-import { entries } from 'lodash';
-import { addToLocalStorage, removeFromLocalStorage } from './localStorageUtil';
+import { entries, values, isEqual } from 'lodash';
+import { addToLocalStorage, removeFromLocalStorage, getFromLocalStorage } from './localStorageUtil';
 
 const localStorageFields = {
   access_token: 'accessToken',
   expires_at: 'expiresAt',
   id_token: 'idToken',
 };
+
+const localStorageFieldsKeys = Object.keys(localStorageFields);
+const sessionFieldKeys = values(localStorageFields);
 
 export function setSession(newSessionEntries) {
   const newSessionNames = Object.keys(newSessionEntries);
@@ -15,6 +18,23 @@ export function setSession(newSessionEntries) {
 }
 
 export function clearSession() {
-  Object.keys(localStorageFields)
+  localStorageFieldsKeys
     .forEach(localStorageName => removeFromLocalStorage(localStorageName));
+}
+
+export function getSession() {
+  const currentSession = localStorageFieldsKeys
+    .map(localStorageName => [localStorageName, getFromLocalStorage(localStorageName)])
+    .reduce((previous, [key, value]) => {
+      if (value) {
+        return Object.assign(previous, { [localStorageFields[key]]: value });
+      }
+      return previous;
+    }, {});
+
+  if (isEqual(sessionFieldKeys, Object.keys(currentSession))) {
+    return currentSession;
+  }
+
+  return null;
 }

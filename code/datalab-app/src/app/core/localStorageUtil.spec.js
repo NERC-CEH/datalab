@@ -1,5 +1,5 @@
 import LocalStorageMock from './LocalStorageMock';
-import { addToLocalStorage, removeFromLocalStorage } from './localStorageUtil';
+import { addToLocalStorage, removeFromLocalStorage, getFromLocalStorage } from './localStorageUtil';
 
 describe('localStorageUtil', () => {
   beforeEach(() => {
@@ -55,5 +55,18 @@ describe('localStorageUtil', () => {
     expect(localStorage.store.id_token).toBe('three');
     removeFromLocalStorage('id_token');
     expect(localStorage.store.id_token).toBe(undefined);
+  });
+
+  it('getCurrentSession gets expected items from localStorage', () => {
+    // Arrange
+    localStorage.store = {
+      access_token: 'one',
+      expires_at: 'two',
+      id_token: 'three',
+    };
+
+    expect(getFromLocalStorage('access_token')).toBe('one');
+    expect(getFromLocalStorage('expires_at')).toBe('two');
+    expect(getFromLocalStorage('id_token')).toBe('three');
   });
 });

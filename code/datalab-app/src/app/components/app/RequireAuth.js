@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { isAuthenticated } from '../../auth/auth';
+import auth from '../../auth/auth';
 
 const RequireAuth = ({ user, component: Component, ...rest }) => (
-  isAuthenticated(user) ? (
+  auth.isAuthenticated(user) ? (
     <Route {...rest} render={props => <Component {...props} />} />
   ) : (
     <div>
