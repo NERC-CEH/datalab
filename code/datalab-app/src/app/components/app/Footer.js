@@ -1,11 +1,12 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import version from '../../version';
 
 const Footer = () => (
-  <div>
+  <Container>
     <br/><hr/>
     {`Version: ${version || 'pre-release'}`}
-  </div>
+  </Container>
 );
 
 export default Footer;

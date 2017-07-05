@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import RaisedButton from 'material-ui/RaisedButton';
+import { push } from 'react-router-redux';
 import NavMenu from './NavMenu';
-import menuActions from '../../actions/menuActions';
 import authActions from '../../actions/authActions';
 import auth from '../../auth/auth';
 
@@ -37,29 +34,23 @@ class Navigation extends Component {
 
   render() {
     return (
-      <div>
-        <AppBar
-          title="Data Labs"
-          onLeftIconButtonTouchTap={this.props.actions.showMenu}
-          onRightIconButtonTouchTap={this.userLoginLogout}
-          iconElementRight={
-            <RaisedButton
-              label={this.isUserLoggedIn() ? 'Logout' : 'Login'}
-              secondary
-            />}
-        />
-        <Drawer open={this.props.menu.isMenuOpen} docked={false} onRequestChange={this.props.actions.hideMenu}>
-          <NavMenu hideMenu={this.props.actions.hideMenu} />
-        </Drawer>
-      </div>
+      <NavMenu
+        routePathname={this.props.routePathname}
+        routeTo={this.props.actions.routeTo}
+        isUserLoggedIn={this.isUserLoggedIn}
+        userLoginLogout={this.userLoginLogout}
+        inverted
+        pointing
+        secondary
+      />
     );
   }
 }
 
-function mapStateToProps({ menu, authentication: { user } }) {
+function mapStateToProps({ authentication: { user }, router: { location: { pathname } } }) {
   return {
-    menu,
     user,
+    routePathname: pathname,
   };
 }
 
@@ -67,7 +58,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       ...authActions,
-      ...menuActions,
+      routeTo: push,
     }, dispatch),
   };
 }

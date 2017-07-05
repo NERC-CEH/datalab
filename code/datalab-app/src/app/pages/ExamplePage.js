@@ -3,7 +3,7 @@ import ExamplesContainer from '../components/example/ExamplesContainer';
 
 const ExamplePage = () => (
   <div>
-    <h1>Example Page</h1>
+    <h1>Redux Example Page</h1>
     <ExamplesContainer />
   </div>
 );

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RaisedButton } from 'material-ui';
+import { Button } from 'semantic-ui-react';
 
 const Counter = ({ value, increment }) => (
   <div>
-    <RaisedButton label={value || 'Click Counter'} primary onClick={increment} />
+    <Button primary onClick={increment}>{value || 'Click Counter'}</Button>
   </div>
 );
 
