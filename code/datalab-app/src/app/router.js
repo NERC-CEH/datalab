@@ -13,8 +13,7 @@ import PrivatePage from './pages/PrivatePage';
 
 const router = () => (
   <ConnectedRouter history={browserHistory} >
-    <div>
-      <App>
+    <App>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/callback" component={CallbackPage} />
@@ -23,8 +22,7 @@ const router = () => (
         <RequireAuth exact path="/private" component={PrivatePage} />
         <Route component={NotFoundPage} />
       </Switch>
-      </App>
-    </div>
+    </App>
   </ConnectedRouter>
 );
 

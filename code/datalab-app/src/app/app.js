@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Container } from 'semantic-ui-react';
 import configureStore from './store/configureStore';
 import Router from './router';
 
 const store = configureStore();
 
 ReactDOM.render(
-  <Container>
+  <div>
     <Provider store={store}>
       <Router />
     </Provider>
-  </Container>,
+  </div>,
   document.getElementById('root'),
 );

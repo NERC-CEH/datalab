@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
 import Navigation from '../components/app/Navigation';
 import Footer from '../components/app/Footer';
 
 const App = ({ children }) => (
   <div>
     <Navigation />
-    <div id="page-container">{children}</div>
+    <Container>{children}</Container>
     <Footer />
   </div>
 );
