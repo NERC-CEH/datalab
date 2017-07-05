@@ -7,10 +7,8 @@ import Router from './router';
 const store = configureStore();
 
 ReactDOM.render(
-  <div>
-    <Provider store={store}>
-      <Router />
-    </Provider>
-  </div>,
+  <Provider store={store}>
+    <Router />
+  </Provider>,
   document.getElementById('root'),
 );
