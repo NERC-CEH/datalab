@@ -6,10 +6,10 @@ import DecribeDatalabs from '../components/welcome/DescribeDatalabs';
 
 const WelcomePage = () => (
   <div>
-  <Segment inverted vertical textAlign="center">
-    <NavBar/>
-    <HeroBar/>
-  </Segment>
+    <Segment inverted vertical textAlign="center">
+      <NavBar/>
+      <HeroBar/>
+    </Segment>
     <DecribeDatalabs/>
   </div>
 );

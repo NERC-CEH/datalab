@@ -31,7 +31,8 @@
           "**/datalab-app/tools/*.js",
           "**/**.spec.js",
           "**/*.config.dev.js",
-          "**/*.config.prod.js"
+          "**/*.config.prod.js",
+          "**/datalab-app/src/setupTests.js"
         ]
       }
     ],
