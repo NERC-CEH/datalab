@@ -24,7 +24,7 @@ class Auth {
   logout() {
     // User redirected to home page on logout
     clearSession();
-    this.authZeroInit.logout();
+    this.authZeroInit.logout({ returnTo: authConfig.returnTo });
   }
 
   handleAuthentication() {

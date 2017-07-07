@@ -55,6 +55,14 @@ describe('auth', () => {
     expect(clearSession.mock.calls.length).toBe(1);
   });
 
+  it('logout calls auth0 logout with returnTo url', () => {
+    // Act
+    auth.logout();
+
+    // Assert
+    expect(logoutMock).toBeCalledWith({ returnTo: 'http://localhost:3000/' });
+  });
+
   it('handleAuthentication processes response when hash has expected elements', () => {
     // Act/Assert
     auth.handleAuthentication().then((response) => {
