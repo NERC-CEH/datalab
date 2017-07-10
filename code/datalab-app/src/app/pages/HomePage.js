@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button, Header, Segment } from 'semantic-ui-react';
 import auth from '../auth/auth';
 
 const HomePage = ({ user }) => (
-  <div>
-    <h1>Home Page</h1>
+  <Segment basic>
+    <Header as="h1">Home Page</Header>
     <p>This is the data lab home page.</p>
     <p>{`You are ${auth.isAuthenticated(user) ? 'logged in.' : 'not logged in.'}`}</p>
-  </div>
+    <Button primary onClick={() => auth.logout()}>Logout</Button>
+  </Segment>
 );
 
 function mapStateToProps({ authentication: { user } }) {

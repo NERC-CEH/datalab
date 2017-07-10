@@ -6,11 +6,14 @@ import WelcomePage from './pages/WelcomePage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import CallbackPage from './pages/CallbackPage';
+import RequireAuth from './components/app/RequireAuth';
+import HomePage from './pages/HomePage';
 
 const router = () => (
-  <ConnectedRouter history={browserHistory} >
+  <ConnectedRouter history={browserHistory}>
     <Switch>
-      <Route exact path="/" component={WelcomePage} />
+      <RequireAuth exact path="/" PublicComponent={WelcomePage} PrivateComponent={HomePage} />
+      <RequireAuth exact path="/private" PrivateComponent={HomePage} />
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/callback" component={CallbackPage} />
       <Route component={NotFoundPage} />
