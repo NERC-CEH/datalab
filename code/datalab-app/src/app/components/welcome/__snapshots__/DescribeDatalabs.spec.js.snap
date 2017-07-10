@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescribeDatalabs renders correct snapshot 1`] = `
+<Segment
+  padded="very"
+  vertical={true}
+>
+  <Grid
+    textAlign="center"
+  >
+    <Grid
+      columns={3}
+    >
+      <DescribeElement
+        description="Datalabs provides you with access to a large number of datasets."
+        iconName="cube"
+        secondColor="blue"
+        title="Access to Datasets"
+      />
+      <DescribeElement
+        description="Datalabs provides you with access to JASMIN services."
+        iconName="computer"
+        secondColor="blue"
+        title="Access to JASMIN Services"
+      />
+      <DescribeElement
+        description="Datalabs provides you with access to Zeppelin notebooks."
+        iconName="book"
+        secondColor="blue"
+        title="Access to Notebooks"
+      />
+    </Grid>
+  </Grid>
+</Segment>
+`;

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar renders correct snapshot 1`] = `
+<Container>
+  <Menu
+    inverted={true}
+    pointing={true}
+    secondary={true}
+  >
+    <NavLink
+      activeClassName="active"
+      className="item"
+      exact={true}
+      to="/"
+    >
+      DataLabs
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      className="item"
+      exact={true}
+      to="/about"
+    >
+      About
+    </NavLink>
+    <MenuMenu
+      position="right"
+    >
+      <Button
+        as="button"
+        onClick={[Function]}
+        primary={true}
+      >
+        Login
+      </Button>
+    </MenuMenu>
+  </Menu>
+</Container>
+`;
