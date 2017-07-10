@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomePage renders correct snapshot 1`] = `
+<div>
+  <Segment
+    inverted={true}
+    textAlign="center"
+    vertical={true}
+  >
+    <PublicNavBarContent />
+  </Segment>
+  <Segment
+    basic={true}
+  >
+    <Header
+      as="h1"
+    >
+      About DataLabs
+    </Header>
+    <p>
+      A project to build a data analysis lab for scientists.
+    </p>
+    <Divider />
+    <p>
+      Created by the Centre for Ecology and Hydrology
+    </p>
+    <Image
+      as="img"
+      size="medium"
+      src="ceh_logo.svg"
+      ui={true}
+    />
+    <Divider
+      hidden={true}
+    />
+    <Image
+      as="img"
+      size="medium"
+      src="nerc-logo.svg"
+      ui={true}
+    />
+    <Divider />
+    <p>
+      Developed by Tessella
+    </p>
+    <Image
+      as="img"
+      size="medium"
+      src="tessella_logo.svg"
+      ui={true}
+    />
+  </Segment>
+</div>
+`;
