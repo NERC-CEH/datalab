@@ -12,6 +12,16 @@ auth.getCurrentSession = getCurrentSessionMock;
 
 describe('RequireAuth', () => {
   describe('is a connected component which', () => {
+    function shallowRenderConnected(store) {
+      const props = {
+        store,
+        PrivateComponent: () => {},
+        PublicComponent: () => {},
+      };
+
+      return shallow(<RequireAuth {...props} />);
+    }
+
     it('extracts the correct props from the redux state', () => {
       // Arrange
       const user = { token: 'expectedUserToken' };
@@ -20,7 +30,7 @@ describe('RequireAuth', () => {
       });
 
       // Act
-      const output = shallow(<RequireAuth PrivateComponent={() => {}} store={store} />);
+      const output = shallowRenderConnected(store);
 
       expect(output.prop('user')).toBe(user);
       expect(Object.keys(output.prop('actions'))).toEqual(['userLogsIn']);
@@ -33,7 +43,7 @@ describe('RequireAuth', () => {
       });
 
       // Act
-      const output = shallow(<RequireAuth PrivateComponent={() => {}} store={store} />);
+      const output = shallowRenderConnected(store);
 
       // Assert
       expect(store.getActions().length).toBe(0);
@@ -94,37 +104,6 @@ describe('RequireAuth', () => {
 
       // Arrange
       expect(mount(output()).find('span')).toHaveText('expectedPublicComponent');
-    });
-
-    it('renders unauthorised page if public component is not set and user is not logged in', () => {
-      // Arrange
-      const props = {
-        ...generateProps(),
-        PublicComponent: undefined,
-      };
-      isAuthenticatedMock.mockReturnValue(false);
-
-      // Act
-      const output = shallowRenderPure(props).find('Route').prop('render');
-
-      // Arrange
-      expect(mount(output()).find('MessageHeader')).toHaveText('Unauthorised Access');
-    });
-
-    it('renders unauthorised page if public component is not set and user prop is undefined', () => {
-      // Arrange
-      const props = {
-        ...generateProps(),
-        PublicComponent: undefined,
-        user: undefined,
-      };
-      isAuthenticatedMock.mockReturnValue(false);
-
-      // Act
-      const output = shallowRenderPure(props).find('Route').prop('render');
-
-      // Arrange
-      expect(mount(output()).find('MessageHeader')).toHaveText('Unauthorised Access');
     });
 
     it('passes Route component props down to the rendered child', () => {

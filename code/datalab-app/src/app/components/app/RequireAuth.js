@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import auth from '../../auth/auth';
 import authActions from '../../actions/authActions';
-import UnauthorisedPage from '../../pages/UnauthorisedPage';
 
 class RequireAuth extends Component {
   constructor(props, context) {
@@ -31,10 +30,8 @@ class RequireAuth extends Component {
 
     if (this.isUserLoggedIn()) {
       return props => (<PrivateComponent {...props} />);
-    } else if (PublicComponent) {
-      return props => (<PublicComponent {...props} />);
     }
-    return () => (<UnauthorisedPage/>);
+    return props => (<PublicComponent {...props} />);
   }
 
   render() {
@@ -50,7 +47,7 @@ class RequireAuth extends Component {
 
 RequireAuth.propTypes = {
   PrivateComponent: PropTypes.func.isRequired,
-  PublicComponent: PropTypes.func,
+  PublicComponent: PropTypes.func.isRequired,
   user: PropTypes.object,
   path: PropTypes.string,
   exact: PropTypes.bool,
