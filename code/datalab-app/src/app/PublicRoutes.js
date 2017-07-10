@@ -3,13 +3,17 @@ import { Route, Switch } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
+import Footer from './components/app/Footer';
 
 const PublicRoutes = () => (
-  <Switch>
-    <Route exact path="/" component={WelcomePage} />
-    <Route exact path="/about" component={AboutPage} />
-    <Route component={NotFoundPage} />
-  </Switch>
+  <div>
+    <Switch>
+      <Route exact path="/" component={WelcomePage} />
+      <Route exact path="/about" component={AboutPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
+    <Route component={Footer} />
+  </div>
 );
 
 export default PublicRoutes;
