@@ -42,6 +42,12 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
+          livenessProbe:
+            httpGet:
+              path: /minio
+              port: 9000
+            initialDelaySeconds: 5
+            periodSeconds: 10
           volumeMounts:
           - name: minio-persistent-storage
             mountPath: /export
