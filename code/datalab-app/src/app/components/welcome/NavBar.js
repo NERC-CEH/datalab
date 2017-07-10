@@ -13,7 +13,7 @@ const PublicNavBarContent = () => (
     <Menu inverted pointing secondary>
       {publicNavLinks.map(props => (<NavLink className="item" exact={props.exact} key={props.label} to={props.path}>{props.label}</NavLink>))}
       <Menu.Menu position="right">
-      <Button primary onClick={auth.login} >Login</Button>
+      <Button primary onClick={auth.login}>Login</Button>
       </Menu.Menu>
     </Menu>
   </Container>

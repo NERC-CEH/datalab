@@ -8,19 +8,19 @@ import tessellaLogo from '../../assests/images/tessella_logo.svg';
 const AboutPage = () => (
   <div>
     <Segment inverted vertical textAlign="center">
-    <NavBar/>
+      <NavBar/>
     </Segment>
     <Segment basic >
-    <Header as="h1">About DataLabs</Header>
-    <p>A project to build a data analysis lab for scientists.</p>
-    <Divider/>
-    <p>Created by the Centre for Ecology and Hydrology</p>
-    <Image src={cegLogo} size="medium"/>
-    <Divider hidden/>
-    <Image src={nercLogo} size="medium"/>
-    <Divider/>
-    <p>Developed by Tessella</p>
-    <Image src={tessellaLogo} size="medium" />
+      <Header as="h1">About DataLabs</Header>
+      <p>A project to build a data analysis lab for scientists.</p>
+      <Divider/>
+      <p>Created by the Centre for Ecology and Hydrology</p>
+      <Image src={cegLogo} size="medium"/>
+      <Divider hidden/>
+      <Image src={nercLogo} size="medium"/>
+      <Divider/>
+      <p>Developed by Tessella</p>
+      <Image src={tessellaLogo} size="medium" />
     </Segment>
   </div>
 );

@@ -2,10 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import DescribeElement from './DescribeElement';
 
-function setup(props) {
-  return shallow(<DescribeElement {...props} />);
-}
-
 it('DescribeElement renders correct snapshot', () => {
   // Arrange
   const props = {
@@ -16,5 +12,5 @@ it('DescribeElement renders correct snapshot', () => {
   };
 
   // Act/Assert
-  expect(setup(props)).toMatchSnapshot();
+  expect(shallow(<DescribeElement {...props} />)).toMatchSnapshot();
 });
