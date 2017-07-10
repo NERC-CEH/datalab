@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -47,6 +48,18 @@ class RequireAuth extends Component {
   }
 }
 
+RequireAuth.propTypes = {
+  PrivateComponent: PropTypes.func.isRequired,
+  PublicComponent: PropTypes.func,
+  user: PropTypes.object,
+  path: PropTypes.string,
+  exact: PropTypes.bool,
+  strict: PropTypes.bool,
+  actions: PropTypes.shape({
+    userLogsIn: PropTypes.func.isRequired,
+  }),
+};
+
 function mapStateToProps({ authentication: { user } }) {
   return {
     user,
@@ -61,4 +74,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+export { RequireAuth as PureRequireAuth }; // export for testing
 export default connect(mapStateToProps, mapDispatchToProps)(RequireAuth);
