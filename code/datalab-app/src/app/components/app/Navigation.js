@@ -1,66 +1,32 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux';
-import NavMenu from './NavMenu';
-import authActions from '../../actions/authActions';
-import auth from '../../auth/auth';
+import React from 'react';
+import SideBar from './SideBar';
+import TopBar from './TopBar';
 
-class Navigation extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.isUserLoggedIn = this.isUserLoggedIn.bind(this);
-    this.userLoginLogout = this.userLoginLogout.bind(this);
-  }
+const sidebarStyle = {
+  height: '100%',
+  position: 'fixed',
+  width: 250,
+  background: '#1B1C1D',
+};
 
-  componentWillMount() {
-    const currentSession = auth.getCurrentSession();
-    if (currentSession) {
-      this.props.actions.userLogsIn(currentSession);
-    }
-  }
+const mainWindowStyle = {
+  marginLeft: 250,
+};
 
-  isUserLoggedIn() {
-    return this.props.user && auth.isAuthenticated(this.props.user);
-  }
+const topBarStyle = {
+  minHeight: '64px',
+};
 
-  userLoginLogout() {
-    if (this.isUserLoggedIn()) {
-      auth.logout();
-    } else {
-      auth.login();
-    }
-  }
+const Navigation = ({ children }) => (
+  <div>
+    <div style={sidebarStyle}>
+      <SideBar topBarStyle={topBarStyle} />
+    </div>
+    <div style={mainWindowStyle}>
+      <TopBar topBarStyle={topBarStyle} />
+      {children}
+    </div>
+  </div>
+);
 
-  render() {
-    return (
-      <NavMenu
-        routePathname={this.props.routePathname}
-        routeTo={this.props.actions.routeTo}
-        isUserLoggedIn={this.isUserLoggedIn}
-        userLoginLogout={this.userLoginLogout}
-        inverted
-        pointing
-        secondary
-      />
-    );
-  }
-}
-
-function mapStateToProps({ authentication: { user }, router: { location: { pathname } } }) {
-  return {
-    user,
-    routePathname: pathname,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      ...authActions,
-      routeTo: push,
-    }, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default Navigation;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Topbar correctly renders correct snapshot 1`] = `
+<Segment
+  basic={true}
+  inverted={true}
+  textAlign="right"
+>
+  <Button
+    as="button"
+    onClick={[Function]}
+    primary={true}
+  >
+    Logout
+  </Button>
+</Segment>
+`;

@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar correctly renders correct snapshot 1`] = `
+<div>
+  <Segment
+    basic={true}
+    inverted={true}
+  >
+    <Header
+      as="h2"
+      color="teal"
+    >
+      DataLabs
+    </Header>
+  </Segment>
+  <Menu
+    attached={true}
+    fluid={true}
+    inverted={true}
+    vertical={true}
+  >
+    <NavLink
+      activeClassName="active"
+      className="item"
+      exact={true}
+      to="/"
+    >
+      Dashboard
+    </NavLink>
+    <SubMenu
+      menuItems={
+        Array [
+          Array [
+            [Function],
+            Object {
+              "onClick": [Function],
+            },
+            "Storage",
+          ],
+        ]
+      }
+      menuTitle="Data"
+    />
+    <SubMenu
+      menuItems={
+        Array [
+          Array [
+            [Function],
+            Object {
+              "onClick": [Function],
+            },
+            "Storage",
+          ],
+        ]
+      }
+      menuTitle="Zeppelin Notebook"
+    />
+    <MenuItem
+      header={true}
+      name="Help"
+      onClick={[Function]}
+    />
+  </Menu>
+</div>
+`;

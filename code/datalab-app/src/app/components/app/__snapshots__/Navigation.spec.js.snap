@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescribeDatalabs renders correct snapshot 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "background": "#1B1C1D",
+        "height": "100%",
+        "position": "fixed",
+        "width": 250,
+      }
+    }
+  >
+    <SideBar
+      topBarStyle={
+        Object {
+          "minHeight": "64px",
+        }
+      }
+    />
+  </div>
+  <div
+    style={
+      Object {
+        "marginLeft": 250,
+      }
+    }
+  >
+    <TopBar
+      topBarStyle={
+        Object {
+          "minHeight": "64px",
+        }
+      }
+    />
+  </div>
+</div>
+`;

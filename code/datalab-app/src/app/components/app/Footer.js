@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
+import { Divider, Segment } from 'semantic-ui-react';
 import version from '../../version';
 
 const Footer = () => (
-  <Container>
-    <br/><hr/>
+  <Segment basic>
+    <Divider/>
     {`Version: ${version || 'pre-release'}`}
-  </Container>
+  </Segment>
 );
 
 export default Footer;
