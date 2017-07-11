@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Menu, Segment } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
+import SubMenu from './SubMenu';
 
 const SideBar = ({ topBarStyle }) => (
   <div>
@@ -9,24 +10,18 @@ const SideBar = ({ topBarStyle }) => (
     </Segment>
     <Menu vertical fluid inverted attached>
       <NavLink className="item" to="/" exact>Dashboard</NavLink>
-      <Menu.Item>
-        <Menu.Header>Data</Menu.Header>
-        <Menu.Menu>
-          <Menu.Item
-            name="Storage"
-            onClick={() => window.open('https://datalab-minio.datalabs.nerc.ac.uk/minio/login', '_blank')}
-          />
-        </Menu.Menu>
-      </Menu.Item>
-      <Menu.Item>
-        <Menu.Header>Analysis</Menu.Header>
-        <Menu.Menu>
-          <Menu.Item
-            name="Zeppelin Notebook"
-            onClick={() => window.open('https://datalab-zeppelin.datalabs.nerc.ac.uk/', '_blank')}
-          />
-        </Menu.Menu>
-      </Menu.Item>
+      <SubMenu
+        menuTitle="Data"
+        menuItems={[
+          [Menu.Item, { onClick: () => window.open('https://datalab-minio.datalabs.nerc.ac.uk/minio/login', '_blank') }, 'Storage'],
+        ]}
+      />
+      <SubMenu
+        menuTitle="Zeppelin Notebook"
+        menuItems={[
+          [Menu.Item, { onClick: () => window.open('https://datalab-zeppelin.datalabs.nerc.ac.uk/', '_blank') }, 'Storage'],
+        ]}
+      />
       <Menu.Item
         header
         name="Help"

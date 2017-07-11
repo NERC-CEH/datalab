@@ -27,28 +27,34 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     >
       Dashboard
     </NavLink>
-    <MenuItem>
-      <MenuHeader>
-        Data
-      </MenuHeader>
-      <MenuMenu>
-        <MenuItem
-          name="Storage"
-          onClick={[Function]}
-        />
-      </MenuMenu>
-    </MenuItem>
-    <MenuItem>
-      <MenuHeader>
-        Analysis
-      </MenuHeader>
-      <MenuMenu>
-        <MenuItem
-          name="Zeppelin Notebook"
-          onClick={[Function]}
-        />
-      </MenuMenu>
-    </MenuItem>
+    <SubMenu
+      menuItems={
+        Array [
+          Array [
+            [Function],
+            Object {
+              "onClick": [Function],
+            },
+            "Storage",
+          ],
+        ]
+      }
+      menuTitle="Data"
+    />
+    <SubMenu
+      menuItems={
+        Array [
+          Array [
+            [Function],
+            Object {
+              "onClick": [Function],
+            },
+            "Storage",
+          ],
+        ]
+      }
+      menuTitle="Zeppelin Notebook"
+    />
     <MenuItem
       header={true}
       name="Help"
