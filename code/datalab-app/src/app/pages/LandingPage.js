@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Header, Segment } from 'semantic-ui-react';
 import auth from '../auth/auth';
 
-const HomePage = ({ user }) => (
+const LandingPage = ({ user }) => (
   <Segment basic>
     <Header as="h1">Home Page</Header>
     <p>This is the data lab home page.</p>
@@ -15,4 +15,4 @@ function mapStateToProps({ authentication: { user } }) {
   return { user };
 }
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(LandingPage);
