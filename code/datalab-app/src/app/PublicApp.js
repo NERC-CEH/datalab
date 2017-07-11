@@ -5,7 +5,7 @@ import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Footer from './components/app/Footer';
 
-const PublicRoutes = () => (
+const PublicApp = () => (
   <div>
     <Switch>
       <Route exact path="/" component={WelcomePage} />
@@ -16,4 +16,4 @@ const PublicRoutes = () => (
   </div>
 );
 
-export default PublicRoutes;
+export default PublicApp;

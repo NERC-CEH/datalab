@@ -5,7 +5,7 @@ import PrivatePage from './pages/PrivatePage';
 import NotFoundPage from './pages/NotFoundPage';
 import Footer from './components/app/Footer';
 
-const PrivateRoutes = () => (
+const PrivateApp = () => (
   <div>
     <Switch>
       <Route exact path="/" component={HomePage} />
@@ -16,4 +16,4 @@ const PrivateRoutes = () => (
   </div>
 );
 
-export default PrivateRoutes;
+export default PrivateApp;
