@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Header, Menu, Segment } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import SubMenu from './SubMenu';
@@ -13,13 +14,17 @@ const SideBar = ({ topBarStyle }) => (
       <SubMenu
         menuTitle="Data"
         menuItems={[
-          [Menu.Item, { onClick: () => window.open('https://datalab-minio.datalabs.nerc.ac.uk/minio/login', '_blank') }, 'Storage'],
+          { Component: Menu.Item,
+            props: { onClick: () => window.open('https://datalab-minio.datalabs.nerc.ac.uk/minio/login', '_blank') },
+            children: 'Storage' },
         ]}
       />
       <SubMenu
         menuTitle="Zeppelin Notebook"
         menuItems={[
-          [Menu.Item, { onClick: () => window.open('https://datalab-zeppelin.datalabs.nerc.ac.uk/', '_blank') }, 'Storage'],
+          { Component: Menu.Item,
+            props: { onClick: () => window.open('https://datalab-zeppelin.datalabs.nerc.ac.uk/', '_blank') },
+            children: 'Storage' },
         ]}
       />
       <Menu.Item
@@ -30,5 +35,9 @@ const SideBar = ({ topBarStyle }) => (
     </Menu>
   </div>
 );
+
+SideBar.propTypes = {
+  topBarStyle: PropTypes.object,
+};
 
 export default SideBar;

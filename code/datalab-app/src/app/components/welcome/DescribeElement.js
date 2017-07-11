@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Header, Icon, Reveal } from 'semantic-ui-react';
 
 const DescribeElement = ({ iconName, title, description, secondColor }) => (
@@ -15,5 +16,12 @@ const DescribeElement = ({ iconName, title, description, secondColor }) => (
     {description}
   </Grid.Column>
 );
+
+DescribeElement.propTypes = {
+  iconName: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  secondColor: PropTypes.string.isRequired,
+};
 
 export default DescribeElement;

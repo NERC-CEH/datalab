@@ -34,6 +34,9 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
         }
       }
     />
+    <span>
+      Content
+    </span>
   </div>
 </div>
 `;
