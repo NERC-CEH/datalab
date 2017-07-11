@@ -30,13 +30,13 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     <SubMenu
       menuItems={
         Array [
-          Array [
-            [Function],
-            Object {
+          Object {
+            "Component": [Function],
+            "children": "Storage",
+            "props": Object {
               "onClick": [Function],
             },
-            "Storage",
-          ],
+          },
         ]
       }
       menuTitle="Data"
@@ -44,13 +44,13 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     <SubMenu
       menuItems={
         Array [
-          Array [
-            [Function],
-            Object {
+          Object {
+            "Component": [Function],
+            "children": "Storage",
+            "props": Object {
               "onClick": [Function],
             },
-            "Storage",
-          ],
+          },
         ]
       }
       menuTitle="Zeppelin Notebook"

@@ -10,10 +10,10 @@ describe('SubMenu', () => {
   }
 
   const generateItems = () => [
-    [Menu.Item, { expectedProps: 'firstExpectedProps' }, 'firstExpectedChildren'],
-    [Menu.Item, { expectedProps: 'secondExpectedProps' }, 'secondExpectedChildren'],
-    [NavLink, { to: '/', expectedProps: 'thirdExpectedProps' }, 'thirdExpectedChildren'],
-    [NavLink, { to: '/', expectedProps: 'fourthExpectedProps' }, 'fourthExpectedChildren'],
+    { Component: Menu.Item, props: { expectedProps: 'firstExpectedProps' }, children: 'firstExpectedChildren' },
+    { Component: Menu.Item, props: { expectedProps: 'secondExpectedProps' }, children: 'secondExpectedChildren' },
+    { Component: NavLink, props: { to: '/', expectedProps: 'thirdExpectedProps' }, children: 'thirdExpectedChildren' },
+    { Component: NavLink, props: { to: '/', expectedProps: 'fourthExpectedProps' }, chilren: 'fourthExpectedChildren' },
   ];
 
   it('render menu title', () => {
@@ -45,7 +45,7 @@ describe('SubMenu', () => {
     const output = shallowRender('expectedTitle', menuItems).find('MenuMenu');
 
     // Assert
-    menuItems.forEach(([Component, props, children], index) => {
+    menuItems.forEach(({ Component, props, children }, index) => {
       const renderedProps = output.childAt(index).props();
       const actualKeys = Object.keys(props);
 
@@ -61,7 +61,7 @@ describe('SubMenu', () => {
     const output = shallowRender('expectedTitle', menuItems).find('MenuMenu');
 
     // Assert
-    menuItems.forEach(([Component, props, children], index) => {
+    menuItems.forEach(({ Component, props, children }, index) => {
       const renderedProps = output.childAt(index).props();
 
       expect(renderedProps.children).toBe(children);

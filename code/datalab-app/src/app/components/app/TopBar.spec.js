@@ -12,6 +12,6 @@ describe('Topbar', () => {
   });
 
   it('style is passed to child segment', () => {
-    expect(shallowRender({ topBarStyle: 'expectedTopBarStyle' }).find('Segment').prop('style')).toBe('expectedTopBarStyle');
+    expect(shallowRender({ topBarStyle: { element: 'expectedTopBarStyle' } }).find('Segment').prop('style')).toEqual({ element: 'expectedTopBarStyle' });
   });
 });

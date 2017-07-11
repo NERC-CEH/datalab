@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SideBar from './SideBar';
 import TopBar from './TopBar';
 
@@ -28,5 +29,12 @@ const Navigation = ({ children }) => (
     </div>
   </div>
 );
+
+Navigation.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+};
 
 export default Navigation;
