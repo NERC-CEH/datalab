@@ -1,0 +1,17 @@
+---
+glusterfs_ppa_version: "3.11"
+gluster_tcp_ports:
+  # Ports from https://www.jamescoyle.net/how-to/457-glusterfs-firewall-rules
+  - 111
+  # Gluster Daemon
+  - 24007
+  # Gluster Brick Ports (one per brick starting at 49152)
+  - 49152
+  - 49153
+  - 49154
+  # Gluster NFS service (38465-38476)
+  - 38465
+  - 38466
+  - 38467
+gluster_udp_ports:
+  - 111
