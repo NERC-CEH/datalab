@@ -1,50 +1,85 @@
+import { find } from 'lodash';
 import {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
+  GraphQLEnumType,
   GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString,
 } from 'graphql';
 import version from '../version';
 
-let count = 0;
+const exampleStorage = [
+  { id: 1, name: 'disk 1', storageType: 1, capacityTotal: 1, capacityUsed: 1, linkToStorage: 'here' },
+  { id: 2, name: 'disk 2', storageType: 1, capacityTotal: 1, capacityUsed: 1, linkToStorage: 'here' },
+];
 
-const RootQueryType = new GraphQLObjectType({
-  name: 'RootQueryType',
-  description: 'Query methods for server status and count values.',
-  fields: {
-    status: {
-      description: 'Returns simple string to confirm GraphQL server is running.',
-      type: GraphQLString,
-      resolve: () => `GraphQL server is ${version ? `running version ${version}` : 'is alive!'}`,
-    },
-    count: {
-      description: 'Returns the current count value.',
-      type: GraphQLInt,
-      resolve: () => count,
+const StorageType = new GraphQLEnumType({
+  name: 'StorageType',
+  description: 'Data store classes within DataLabs',
+  values: {
+    nfs: {
+      description: 'Network File System (NFS) share.',
+      value: 1,
     },
   },
 });
 
-const RootMutationType = new GraphQLObjectType({
-  name: 'RootMutationType',
-  description: 'Methods to mutate the count value.',
+const DataStoreType = new GraphQLObjectType({
+  name: 'DataStore',
+  description: 'DataLabs data store type.',
   fields: {
-    incrementCount: {
-      description: 'Mutate method to increment the count value.',
+    id: {
       type: GraphQLInt,
-      resolve: () => { count += 1; return count; },
     },
-    resetCount: {
-      description: 'Mutate method to reset the count value to 0.',
+    name: {
+      type: GraphQLString,
+    },
+    storageType: {
+      type: StorageType,
+    },
+    capacityTotal: {
       type: GraphQLInt,
-      resolve: () => { count = 0; return count; },
+    },
+    capacityUsed: {
+      type: GraphQLInt,
+    },
+    linkToStorage: {
+      type: GraphQLString,
+    },
+  },
+});
+
+const RootQueryType = new GraphQLObjectType({
+  name: 'RootQueryType',
+  description: 'Root query methods for DataLabs.',
+  fields: {
+    status: {
+      description: 'Status string to confirm GraphQL server is running.',
+      type: GraphQLString,
+      resolve: () => `GraphQL server is ${version ? `running version ${version}` : 'is alive!'}`,
+    },
+    dataStorage: {
+      description: 'List of currently provisioned DataLabs data storage.',
+      type: new GraphQLList(DataStoreType),
+      resolve: () => exampleStorage,
+    },
+    dataStore: {
+      description: 'Details of a single Datalabs data store.',
+      type: DataStoreType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLInt),
+        },
+      },
+      resolve: (parent, { id }) => find(exampleStorage, { id }),
     },
   },
 });
 
 const schema = new GraphQLSchema({
   query: RootQueryType,
-  mutation: RootMutationType,
 });
 
 export default schema;
