@@ -15,3 +15,4 @@ gluster_tcp_ports:
   - 38467
 gluster_udp_ports:
   - 111
+gluster_server: True

@@ -18,32 +18,27 @@
     url: "https://download.gluster.org/pub/gluster/glusterfs/{{ glusterfs_ppa_version }}/rsa.pub"
     state: present
 
-- name: Add PPA for GlusterFS.
+- name: Add PPA for GlusterFS
   apt_repository:
     repo: 'ppa:gluster/glusterfs-{{ glusterfs_ppa_version }}'
     state: present
     update_cache: yes
   register: glusterfs_ppa_added
 
-- name: Ensure GlusterFS will reinstall if the PPA was just added.
+- name: Ensure GlusterFS client is installed
   apt:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-    - glusterfs-server
-    - glusterfs-client
-  when: glusterfs_ppa_added.changed
-
-- name: Ensure GlusterFS is installed.
-  apt:
-    name: "{{ item }}"
+    name: glusterfs-client
     state: installed
-  with_items:
-    - glusterfs-server
-    - glusterfs-client
 
-- name: Ensure GlusterFS is started and enabled at boot.
+- name: Ensure GlusterFS server is installed if required
+  apt:
+    name: glusterfs-server
+    state: installed
+  when: gluster_server
+
+- name: Ensure GlusterFS is started and enabled at boot
   service:
     name: glusterfs-server
     state: started
     enabled: yes
+  when: gluster_server
