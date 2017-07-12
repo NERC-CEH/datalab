@@ -1,0 +1,58 @@
+- hosts: gluster-cluster
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  roles:
+    - glusterfs
+
+  tasks:
+    - name: Create a partition on the mounted drive
+      parted:
+        device: /dev/sdb
+        number: 1
+        state: present
+
+    - name: Create filesystem
+      filesystem:
+        fstype: xfs
+        dev: /dev/sdb1
+        opts: -i size=512 -n size=8192
+
+    - name: Create Mount directory
+      file:
+        path: /data
+        state: directory
+        mode: 0775
+
+    - name: Mount Drive
+      mount:
+        path: /data
+        src: /dev/sdb1
+        fstype: xfs
+        state: mounted
+
+    - name: Create Brick Directory
+      file:
+        path: /data/brick1
+        state: directory
+        mode: 0775
+
+    - name: Create Volume Directory
+      file:
+        path: /data/brick1/datalab
+        state: directory
+        mode: 0775
+
+    - name: Configure Gluster volume
+      gluster_volume:
+        state: present
+        name: datalab
+        brick: /data/brick1/datalab
+        replicas: 3
+        cluster:
+          - 192.168.3.20
+          - 192.168.3.21
+          - 192.168.3.22
+        host: "{{ inventory_hostname }}"
+      run_once: true

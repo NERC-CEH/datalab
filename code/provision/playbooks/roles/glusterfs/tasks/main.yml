@@ -1,0 +1,44 @@
+---
+- name: Allow glusterfs TCPtraffic
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items: "{{ gluster_tcp_ports }}"
+
+- name: Allow glusterfs UDP traffic
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: udp
+  with_items: "{{ gluster_udp_ports }}"
+
+- name: Add Signing key
+  apt_key:
+    url: "https://download.gluster.org/pub/gluster/glusterfs/{{ glusterfs_ppa_version }}/rsa.pub"
+    state: present
+
+- name: Add PPA for GlusterFS
+  apt_repository:
+    repo: 'ppa:gluster/glusterfs-{{ glusterfs_ppa_version }}'
+    state: present
+    update_cache: yes
+  register: glusterfs_ppa_added
+
+- name: Ensure GlusterFS client is installed
+  apt:
+    name: glusterfs-client
+    state: installed
+
+- name: Ensure GlusterFS server is installed if required
+  apt:
+    name: glusterfs-server
+    state: installed
+  when: gluster_server
+
+- name: Ensure GlusterFS is started and enabled at boot
+  service:
+    name: glusterfs-server
+    state: started
+    enabled: yes
+  when: gluster_server

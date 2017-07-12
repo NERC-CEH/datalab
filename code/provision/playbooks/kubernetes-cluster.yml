@@ -10,6 +10,7 @@
   roles:
     - kubernetes-common
     - rook-common
+    - { role: glusterfs, gluster_server: False }
 
 - name: Configure Master
   hosts: k8s-master
