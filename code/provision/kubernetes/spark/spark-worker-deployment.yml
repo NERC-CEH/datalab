@@ -5,7 +5,7 @@ metadata:
     name: spark-worker
   name: spark-worker
 spec:
-  replicas: 1
+  replicas: 4
   template:
     metadata:
       labels:
@@ -21,3 +21,14 @@ spec:
         env:
         - name: SPARK_ROLE
           value: WORKER
+        - name: spark.executor.memory
+          value: 8G
+        volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: datalab
+            readOnly: false
