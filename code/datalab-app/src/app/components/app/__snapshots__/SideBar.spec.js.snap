@@ -46,14 +46,14 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         Array [
           Object {
             "Component": [Function],
-            "children": "Storage",
+            "children": "Zeppelin Notebooks",
             "props": Object {
               "onClick": [Function],
             },
           },
         ]
       }
-      menuTitle="Zeppelin Notebook"
+      menuTitle="Notebooks"
     />
     <MenuItem
       header={true}
