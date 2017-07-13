@@ -14,8 +14,8 @@ const SideBar = ({ topBarStyle }) => (
       <SubMenu
         menuTitle="Data"
         menuItems={[
-          { Component: Menu.Item,
-            props: { onClick: () => window.open('https://datalab-minio.datalabs.nerc.ac.uk/minio/login', '_blank') },
+          { Component: NavLink,
+            props: { className: 'item', to: '/storage', exact: true },
             children: 'Storage' },
         ]}
       />
