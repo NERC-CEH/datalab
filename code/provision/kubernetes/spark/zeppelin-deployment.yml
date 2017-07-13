@@ -12,7 +12,7 @@ spec:
         name: zeppelin-master
     spec:
       containers:
-      - image: nerc/zeppelin:0.7.1
+      - image: nerc/zeppelin:0.7.2
         imagePullPolicy : "IfNotPresent"
         name:  zeppelin-master
         ports:
@@ -21,3 +21,12 @@ spec:
         env:
         - name: MASTER
           value: spark://spark-master:7077
+        volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: datalab
+            readOnly: false

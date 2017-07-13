@@ -11,20 +11,6 @@ spec:
     app: minio
   type: NodePort
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: minio-pv-claim
-  labels:
-    app: minio
-spec:
-  storageClassName: rook-block
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 50Gi
----
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -42,17 +28,14 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
-          livenessProbe:
-            httpGet:
-              path: /minio
-              port: 9000
-            initialDelaySeconds: 5
-            periodSeconds: 10
+          args: ["server", "/mnt/glusterfs"]
           volumeMounts:
-          - name: minio-persistent-storage
-            mountPath: /export
-          args: ["server", "/export"]
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
       volumes:
-      - name: minio-persistent-storage
-        persistentVolumeClaim:
-          claimName: minio-pv-claim
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: datalab
+            readOnly: false
+
