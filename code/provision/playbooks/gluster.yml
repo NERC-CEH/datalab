@@ -48,7 +48,7 @@
     - name: Configure Gluster volume
       gluster_volume:
         state: present
-        name: datalab
+        name: "{{ item }}"
         brick: "{{ brick_directory }}/{{ item }}"
         replicas: 3
         cluster:
