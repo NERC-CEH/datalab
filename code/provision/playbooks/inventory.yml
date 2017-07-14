@@ -28,7 +28,7 @@ k8s-worker-2
 k8s-worker-3
 k8s-worker-4
 
-[gluster-cluster]
+[gluster]
 gluster-1
 gluster-2
 gluster-3
@@ -36,7 +36,7 @@ gluster-3
 [proxied:children]
 proxy
 k8s-cluster
-gluster-cluster
+gluster
 
 [new]
 gluster-1
