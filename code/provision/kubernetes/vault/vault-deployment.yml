@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vault-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+        - name: vault
+          image: vault:0.7.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8200
+          env:
+            - name: VAULT_LOCAL_CONFIG
+              value:
+                  storage "file" {
+                    path = "/vault/data/vault-1"
+                  }
+
+                  listener "tcp" {
+                    address     = "127.0.0.1:8200"
+                    tls_disable = 1
+                  }
+                  disable_mlock = true
+          args:
+            - server
+          securityContext:
+            capabilities:
+              add:
+                - IPC_LOCK
+          volumeMounts:
+            - mountPath: /vault/data
+              name: vault-volume-1
+      volumes:
+        - name: vault-volume-1
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: datalab-internal
+            readOnly: false
