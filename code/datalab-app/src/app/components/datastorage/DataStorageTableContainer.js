@@ -28,4 +28,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+export { DataStorageTableContainer as PureDataStorageTableContainer }; // export for testing
 export default connect(mapStateToProps, mapDispatchToProps)(DataStorageTableContainer);

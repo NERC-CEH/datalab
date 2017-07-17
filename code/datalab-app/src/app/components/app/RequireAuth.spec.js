@@ -32,6 +32,7 @@ describe('RequireAuth', () => {
       // Act
       const output = shallowRenderConnected(store);
 
+      // Assert
       expect(output.prop('user')).toBe(user);
       expect(Object.keys(output.prop('actions'))).toEqual(['userLogsIn']);
     });

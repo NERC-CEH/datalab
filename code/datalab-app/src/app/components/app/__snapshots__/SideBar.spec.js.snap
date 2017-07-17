@@ -34,7 +34,9 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
             "Component": [Function],
             "children": "Storage",
             "props": Object {
-              "onClick": [Function],
+              "className": "item",
+              "exact": true,
+              "to": "/storage",
             },
           },
         ]

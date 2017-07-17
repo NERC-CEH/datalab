@@ -30,4 +30,12 @@ describe('Sidebar', () => {
     // Assert
     expect(output.find('a.active.item')).toHaveText('Dashboard');
   });
+
+  it('renders "Storage" label as active when on /storage route', () => {
+    // Arrange/Act
+    const output = fullRender(['/storage']);
+
+    // Assert
+    expect(output.find('a.active.item')).toHaveText('Storage');
+  });
 });
