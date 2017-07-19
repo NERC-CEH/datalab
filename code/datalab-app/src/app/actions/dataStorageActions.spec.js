@@ -6,7 +6,7 @@ jest.mock('../api/dataStorageService');
 describe('dataStorageActions', () => {
   beforeEach(() => jest.resetAllMocks());
 
-  describe('extracts correct service for', () => {
+  describe('calls correct service for', () => {
     it('loadDataStorage', () => {
       // Arrange
       const loadDataStorageMock = jest.fn().mockReturnValue('expectedDataStoragePayload');
@@ -21,7 +21,7 @@ describe('dataStorageActions', () => {
       expect(output.payload).toBe('expectedDataStoragePayload');
     });
 
-    it('loadDataStorage', () => {
+    it('loadDataStore', () => {
       // Arrange
       const loadDataStoreMock = jest.fn().mockReturnValue('expectedDataStorePayload');
       dataStorageService.loadDataStore = loadDataStoreMock;
