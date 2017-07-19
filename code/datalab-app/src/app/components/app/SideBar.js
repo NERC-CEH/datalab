@@ -14,17 +14,17 @@ const SideBar = ({ topBarStyle }) => (
       <SubMenu
         menuTitle="Data"
         menuItems={[
-          { Component: Menu.Item,
-            props: { onClick: () => window.open('https://datalab-minio.datalabs.nerc.ac.uk/minio/login', '_blank') },
+          { Component: NavLink,
+            props: { className: 'item', to: '/storage', exact: true },
             children: 'Storage' },
         ]}
       />
       <SubMenu
-        menuTitle="Zeppelin Notebook"
+        menuTitle="Notebooks"
         menuItems={[
           { Component: Menu.Item,
             props: { onClick: () => window.open('https://datalab-zeppelin.datalabs.nerc.ac.uk/', '_blank') },
-            children: 'Storage' },
+            children: 'Zeppelin Notebooks' },
         ]}
       />
       <Menu.Item

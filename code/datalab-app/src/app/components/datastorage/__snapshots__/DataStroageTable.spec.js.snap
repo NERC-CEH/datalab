@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataStorageTable renders correct snapshot 1`] = `
+<Table
+  as="table"
+  celled={true}
+>
+  <TableHeader
+    as="thead"
+  >
+    <TableRow
+      as="tr"
+      cellAs="td"
+    >
+      <TableHeaderCell
+        as="th"
+      >
+        Name
+      </TableHeaderCell>
+      <TableHeaderCell
+        as="th"
+      >
+        Capacity Used
+      </TableHeaderCell>
+      <TableHeaderCell
+        as="th"
+      >
+        Capacity Total
+      </TableHeaderCell>
+      <TableHeaderCell
+        as="th"
+      >
+        Type
+      </TableHeaderCell>
+      <TableHeaderCell
+        as="th"
+      >
+        Link
+      </TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody
+    as="tbody"
+  >
+    <DataStorageTableRow
+      dataStore={
+        Object {
+          "capacityTotal": "111",
+          "capacityUsed": 222,
+          "linkToStorage": "expectedLink",
+          "name": "expectedName",
+          "storageType": "expectedType",
+        }
+      }
+    />
+  </TableBody>
+</Table>
+`;

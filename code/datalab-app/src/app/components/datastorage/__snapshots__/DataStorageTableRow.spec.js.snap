@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataStorageTableRow renders correct snapshot 1`] = `
+<TableRow
+  as="tr"
+  cellAs="td"
+>
+  <TableCell
+    as="td"
+  >
+    expectedName
+  </TableCell>
+  <TableCell
+    as="td"
+  >
+    222
+  </TableCell>
+  <TableCell
+    as="td"
+  >
+    111
+  </TableCell>
+  <TableCell
+    as="td"
+  >
+    expectedType
+  </TableCell>
+  <TableCell
+    as="td"
+  >
+    expectedLink
+  </TableCell>
+</TableRow>
+`;
