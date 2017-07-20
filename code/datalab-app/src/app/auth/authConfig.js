@@ -1,7 +1,7 @@
 const sharedAuthConfig = {
   domain: 'mjbr.eu.auth0.com',
   clientID: 'pz7ZUKi-bL79M6ADP7SWGauOiivdf6Hd',
-  audience: 'https://mjbr.eu.auth0.com/userinfo',
+  audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
   responseType: 'token id_token',
   scope: 'openid',
 };
