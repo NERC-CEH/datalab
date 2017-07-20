@@ -21,7 +21,7 @@ class RequireAuth extends Component {
   }
 
   isUserLoggedIn() {
-    return this.props.user && auth.isAuthenticated(this.props.user);
+    return this.props.user !== null;
   }
 
   switchContent() {
