@@ -54,7 +54,7 @@ RequireAuth.propTypes = {
   strict: PropTypes.bool,
   actions: PropTypes.shape({
     userLogsIn: PropTypes.func.isRequired,
-  }),
+  }).isRequired,
 };
 
 function mapStateToProps({ authentication: { user } }) {

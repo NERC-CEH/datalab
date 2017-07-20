@@ -45,7 +45,7 @@ exports[`DataStorageTable renders correct snapshot 1`] = `
     <DataStorageTableRow
       dataStore={
         Object {
-          "capacityTotal": "111",
+          "capacityTotal": 111,
           "capacityUsed": 222,
           "linkToStorage": "expectedLink",
           "name": "expectedName",

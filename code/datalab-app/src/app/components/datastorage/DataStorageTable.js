@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 import DataStorageTableRow from './DataStorageTableRow';
 
@@ -18,6 +19,10 @@ const DataStorageTable = ({ dataStorage }) => (
     </Table.Body>
   </Table>
 );
+
+DataStorageTable.propTypes = {
+  dataStorage: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default DataStorageTable;
 
