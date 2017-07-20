@@ -7,11 +7,13 @@ class DataStorageRepository {
     this.getById = this.getById.bind(this);
   }
 
-  getAll() {
+  getAll(user) {
+    // filter data storage using user attributes
     return dataStorage;
   }
 
-  getById(id) {
+  getById(user, id) {
+    // filter by user attributes and data store id
     return find(dataStorage, { id });
   }
 }
