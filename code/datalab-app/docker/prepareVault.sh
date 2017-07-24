@@ -4,7 +4,12 @@ VAULT_ADDR=http://localhost:8200
 
 curl -X POST \
   -H "X-Vault-Token:$VAULT_TOKEN" \
-  -d '{"type":"approle"}' \
+  --data @config/vault/policies/datalab-policy.json \
+  $VAULT_ADDR/v1/sys/policy/datalab-policy
+
+curl -X POST \
+  -H "X-Vault-Token:$VAULT_TOKEN" \
+  -d '{"type":"approle", "policies":"datalab-policy"}' \
   $VAULT_ADDR/v1/sys/auth/approle
 
 curl -X POST \
