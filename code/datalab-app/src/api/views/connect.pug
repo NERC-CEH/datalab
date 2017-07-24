@@ -1,0 +1,10 @@
+doctype html
+
+head
+    title Cross Storage Hub
+body
+    script(type="text/javascript" src="../public/lib/hub.js")
+script.
+    CrossStorageHub.init([
+        { origin: /.#{origin}$/, allow: #{actions} }
+    ]);

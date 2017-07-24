@@ -15,6 +15,7 @@
     "lodash": "4.17.4",
     "moment": "2.18.1",
     "prop-types": "15.5.8",
+    "pug": "2.0.0-rc.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-redux": "5.0.4",

@@ -5,8 +5,10 @@ import configureCorsHeaders from './corsConfig';
 import schema from './schema/index';
 import config from './config';
 import status from './status';
+import connect from './connect';
 
 const port = config.get('apiPort');
+const connectPort = config.get('connectPort');
 
 const api = graphqlExpress({ schema });
 const graphiql = graphiqlExpress({ endpointURL: '/api' });
@@ -24,3 +26,5 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.listen(port, () => console.log(`App listening on port ${port}.`));
+
+connect.configureConnectEndpoint(['set'], connectPort);
