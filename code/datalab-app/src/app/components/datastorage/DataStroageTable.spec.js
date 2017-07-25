@@ -11,7 +11,7 @@ describe('DataStorageTable', () => {
     // Arrange
     const dataStorage = [
       {
-        capacityTotal: '111',
+        capacityTotal: 111,
         capacityUsed: 222,
         linkToStorage: 'expectedLink',
         name: 'expectedName',

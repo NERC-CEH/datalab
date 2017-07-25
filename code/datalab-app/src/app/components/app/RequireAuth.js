@@ -21,7 +21,7 @@ class RequireAuth extends Component {
   }
 
   isUserLoggedIn() {
-    return this.props.user && auth.isAuthenticated(this.props.user);
+    return this.props.user !== null;
   }
 
   switchContent() {
@@ -54,7 +54,7 @@ RequireAuth.propTypes = {
   strict: PropTypes.bool,
   actions: PropTypes.shape({
     userLogsIn: PropTypes.func.isRequired,
-  }),
+  }).isRequired,
 };
 
 function mapStateToProps({ authentication: { user } }) {

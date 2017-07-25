@@ -68,6 +68,7 @@ describe('RequireAuth', () => {
       PrivateComponent: expectedPrivateComponent,
       PublicComponent: expectedPublicComponent,
       user: { token: 'expectedUserToken' },
+      actions: { userLogsIn: () => {} },
     });
 
     beforeEach(() => jest.resetAllMocks());
@@ -98,7 +99,7 @@ describe('RequireAuth', () => {
     it('renders public content if user is not logged in', () => {
       // Arrange
       const props = generateProps();
-      isAuthenticatedMock.mockReturnValue(false);
+      props.user = null;
 
       // Act
       const output = shallowRenderPure(props).find('Route').prop('render');
