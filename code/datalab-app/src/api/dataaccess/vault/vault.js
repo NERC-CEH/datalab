@@ -3,6 +3,13 @@ import logger from 'winston';
 import config from '../../config';
 
 const vaultBaseUrl = config.get('vaultApi');
+const vaultAppRole = config.get('vaultAppRole');
+
+function requestStorageKeys(datalab, storage) {
+  const keyPath = `${datalab}/storage/${storage.name}`;
+  logger.info('Requesting vault secrets from path: %s', keyPath);
+  return requestPath(keyPath);
+}
 
 function requestPath(path) {
   return requestVaultToken()
@@ -15,8 +22,12 @@ function requestPath(path) {
 }
 
 function requestVaultToken() {
+  if (!vaultAppRole) {
+    logger.error(`VAULT_APP_ROLE has not been set. Vault authentication will fail!`);
+  }
+
   const data = {
-    role_id: config.get('vaultAppRole'),
+    role_id: vaultAppRole,
   };
 
   return axios.post(getAppRoleLoginUrl(), data);
@@ -31,11 +42,13 @@ const requestSecret = path => (response) => {
 };
 
 function getAppRoleLoginUrl() {
+  logger.debug(`Vault login url: ${vaultBaseUrl}/v1/auth/approle/login`);
   return `${vaultBaseUrl}/v1/auth/approle/login`;
 }
 
 function getSecretUrl(path) {
+  logger.debug(`Vault secret url: ${vaultBaseUrl}/v1/secret/${path}`);
   return `${vaultBaseUrl}/v1/secret/${path}`;
 }
 
-export default { requestPath };
+export default { requestPath, requestStorageKeys };
