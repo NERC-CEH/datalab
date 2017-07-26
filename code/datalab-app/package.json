@@ -16,6 +16,7 @@
     "jwks-rsa": "1.2.0",
     "lodash": "4.17.4",
     "moment": "2.18.1",
+    "moxios": "0.4.0",
     "prop-types": "15.5.8",
     "pug": "2.0.0-rc.2",
     "react": "15.5.4",
@@ -28,7 +29,8 @@
     "redux-promise-middleware": "4.2.0",
     "semantic-ui-css": "2.2.10",
     "semantic-ui-react": "0.70.0",
-    "type-to-reducer": "1.0.3"
+    "type-to-reducer": "1.0.3",
+    "winston": "2.3.1"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
