@@ -18,66 +18,74 @@ const secretPath = 'datalab/files/files1';
 const loginUrl = `${config.get('vaultApi')}/v1/auth/approle/login`;
 const secretUrl = `${config.get('vaultApi')}/v1/secret/`;
 
-test('that a token request calls the correct endpoint', () => {
-  moxios.stubRequest(loginUrl, {
-    status: 200,
-    response: getSuccessfulLoginResponse(),
-  });
-  moxios.stubRequest(secretUrl + secretPath, {
-    status: 200,
-    response: getSuccessfulSecretResponse(),
-  });
-
-  return vault.requestPath(secretPath)
-    .then((response) => {
-      expect(response).toEqual({
-        access_key: 'accesskey1',
-        secret_key: 'secretkey1',
-      });
+describe('vault backend service', () => {
+  it('should request tokens from the correct endpoint', () => {
+    moxios.stubRequest(loginUrl, {
+      status: 200,
+      response: getSuccessfulLoginResponse(),
     });
-});
-
-test('that a login error is handled', () => {
-  moxios.stubRequest(loginUrl, {
-    status: 400,
-    response: getFailedLoginResponse(),
-  });
-
-  return vault.requestPath(secretPath)
-    .then((response) => {
-      expect(response).toEqual({
-        message: 'Unable to retrieve secret',
-      });
-      expect(logger.getMessages()).toEqual([{
-        message: 'Error retrieving secret %s: ',
-        data: secretPath,
-        metadata: getFailedLoginResponse(),
-      }]);
+    moxios.stubRequest(secretUrl + secretPath, {
+      status: 200,
+      response: getSuccessfulSecretResponse(),
     });
-});
 
-test('that a failed key request is handled', () => {
-  moxios.stubRequest(loginUrl, {
-    status: 200,
-    response: getSuccessfulLoginResponse(),
-  });
+    return vault.requestPath(secretPath)
+      .then((response) => {
+        const requests = moxios.requests.__items; // eslint-disable-line no-underscore-dangle
 
-  moxios.stubRequest(secretUrl + secretPath, {
-    status: 404,
-    response: getMissingKeyResponse(),
-  });
+        expect(requests.length).toEqual(2);
+        expect(requests[0].config.data).toEqual(JSON.stringify({ role_id: 'undefinedrole' }));
+        expect(requests[1].headers['X-Vault-Token']).toEqual('05d4a901-6353-33bd-b8f8-7e42f507ae6b');
 
-  return vault.requestPath(secretPath)
-    .then((response) => {
-      expect(response).toEqual({
-        message: 'Unable to retrieve secret',
+        expect(response).toEqual({
+          access_key: 'accesskey1',
+          secret_key: 'secretkey1',
+        });
       });
-      expect(logger.getMessages()).toEqual([{
-        message: 'Error retrieving secret %s: ',
-        data: secretPath,
-        metadata: getMissingKeyResponse(),
-      }]);
+  });
+
+  it('should handle a login failure', () => {
+    moxios.stubRequest(loginUrl, {
+      status: 400,
+      response: getFailedLoginResponse(),
     });
+
+    return vault.requestPath(secretPath)
+      .then((response) => {
+        expect(response).toEqual({
+          message: 'Unable to retrieve secret',
+        });
+        expect(logger.getMessages()).toEqual([{
+          message: 'Error retrieving secret %s: ',
+          data: secretPath,
+          metadata: getFailedLoginResponse(),
+        }]);
+      });
+  });
+
+  it('should handle a key request failure', () => {
+    moxios.stubRequest(loginUrl, {
+      status: 200,
+      response: getSuccessfulLoginResponse(),
+    });
+
+    moxios.stubRequest(secretUrl + secretPath, {
+      status: 404,
+      response: getMissingKeyResponse(),
+    });
+
+    return vault.requestPath(secretPath)
+      .then((response) => {
+        expect(response).toEqual({
+          message: 'Unable to retrieve secret',
+        });
+        expect(logger.getMessages()).toEqual([{
+          message: 'Error retrieving secret %s: ',
+          data: secretPath,
+          metadata: getMissingKeyResponse(),
+        }]);
+      });
+  });
 });
 
 function getSuccessfulLoginResponse() {

@@ -22,7 +22,7 @@ const config = convict({
   vaultAppRole: {
     doc: 'The Vault app role for the API',
     format: 'String',
-    default: '29fd4305-e856-fe04-6c59-65e3d4936e34',
+    default: 'undefinedrole',
     env: 'VAULT_APP_ROLE',
   },
 });
