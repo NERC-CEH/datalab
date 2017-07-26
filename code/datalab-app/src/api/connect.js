@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import logger from 'winston';
 
 function configureConnectEndpoint(actions, port) {
   const app = express();
@@ -10,7 +11,7 @@ function configureConnectEndpoint(actions, port) {
 
   app.get('/', renderConnectPage(actions));
 
-  app.listen(port, () => console.log(`App listening on port ${port}.`));
+  app.listen(port, () => logger.info(`App listening on port ${port}.`));
 }
 
 const renderConnectPage = actions => (req, res) => {
