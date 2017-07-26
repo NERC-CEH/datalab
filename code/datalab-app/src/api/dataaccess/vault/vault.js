@@ -23,7 +23,7 @@ function requestPath(path) {
 
 function requestVaultToken() {
   if (!vaultAppRole) {
-    logger.error(`VAULT_APP_ROLE has not been set. Vault authentication will fail!`);
+    logger.error('VAULT_APP_ROLE has not been set. Vault authentication will fail!');
   }
 
   const data = {
