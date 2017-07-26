@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minioTokenService should return undefined and log error if keys are not returned 1`] = `
+Array [
+  Object {
+    "data": "disk-1",
+    "message": "Error logging in to minio: ",
+    "metadata": [Error: access_key or secret_key not defined],
+  },
+]
+`;
+
+exports[`minioTokenService should return undefined and log error if login fails 1`] = `
+Array [
+  Object {
+    "data": "disk-1",
+    "message": "Error logging in to minio: ",
+    "metadata": [Error: Minio login failed The access key ID you provided does not exist in our records],
+  },
+]
+`;
