@@ -7,6 +7,7 @@ import {
   GraphQLString,
 } from 'graphql';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
+import minioTokenService from '../dataaccess/minioTokenService';
 
 const StorageType = new GraphQLEnumType({
   name: 'StorageType',
@@ -40,6 +41,10 @@ const DataStoreType = new GraphQLObjectType({
     },
     linkToStorage: {
       type: GraphQLString,
+    },
+    accessKey: {
+      type: GraphQLString,
+      resolve: (obj, args, { user }) => minioTokenService.requestMinioToken(obj, user),
     },
   },
 });
