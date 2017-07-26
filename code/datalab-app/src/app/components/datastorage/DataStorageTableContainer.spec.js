@@ -20,9 +20,10 @@ describe('DataStorageTableContainer', () => {
       return shallow(<DataStorageTableContainer {...props} />);
     }
 
+    const dataStorage = { fetching: false, value: ['expectedArray'] };
+
     it('extracts the correct props from the redux state', () => {
       // Arrange
-      const dataStorage = { expectedProp: 'expectedPropValue' };
       const store = createStore()({
         dataStorage,
       });
@@ -37,7 +38,7 @@ describe('DataStorageTableContainer', () => {
     it('binds correct actions', () => {
       // Arrange
       const store = createStore()({
-        dataStorage: [],
+        dataStorage,
       });
 
       // Act
@@ -50,7 +51,7 @@ describe('DataStorageTableContainer', () => {
     it('loadDataStorage function dispatch correct action', () => {
       // Arrange
       const store = createStore()({
-        dataStorage: [],
+        dataStorage,
       });
 
       // Act
@@ -71,11 +72,14 @@ describe('DataStorageTableContainer', () => {
       return shallow(<PureDataStorageTableContainer {...props} />);
     }
 
-    const dataStorage = { value: ['expectedPropValue'] };
+    const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
 
     const generateProps = () => ({
       dataStorage,
-      actions: { loadDataStorage: loadDataStorageMock },
+      actions: {
+        loadDataStorage: loadDataStorageMock,
+        loadDataStore: () => {},
+      },
     });
 
     beforeEach(() => jest.resetAllMocks());

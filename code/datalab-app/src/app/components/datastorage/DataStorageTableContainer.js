@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dataStorageActions from '../../actions/dataStorageActions';
@@ -15,6 +16,18 @@ class DataStorageTableContainer extends Component {
     );
   }
 }
+
+DataStorageTableContainer.propTypes = {
+  dataStorage: PropTypes.shape({
+    error: PropTypes.any,
+    fetching: PropTypes.bool.isRequired,
+    value: PropTypes.array.isRequired,
+  }).isRequired,
+  actions: PropTypes.shape({
+    loadDataStorage: PropTypes.func.isRequired,
+    loadDataStore: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 function mapStateToProps({ dataStorage }) {
   return { dataStorage };

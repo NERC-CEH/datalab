@@ -1,5 +1,5 @@
-import request from 'axios';
 import { get } from 'lodash';
+import request from '../auth/secureRequest';
 import apiBase from './apiBase';
 
 const apiURL = `${apiBase}/api`;

@@ -47,7 +47,7 @@ const DataStoreType = new GraphQLObjectType({
 export const dataStorage = {
   description: 'List of currently provisioned DataLabs data storage.',
   type: new GraphQLList(DataStoreType),
-  resolve: () => dataStorageRepository.getAll(),
+  resolve: (obj, args, { user }) => dataStorageRepository.getAll(user),
 };
 
 export const dataStore = {
@@ -58,5 +58,5 @@ export const dataStore = {
       type: new GraphQLNonNull(GraphQLInt),
     },
   },
-  resolve: (_, { id }) => dataStorageRepository.getById(id),
+  resolve: (obj, { id }, { user }) => dataStorageRepository.getById(user, id),
 };
