@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import logger from 'winston';
+import { URL } from 'url';
 
 function configureConnectEndpoint(actions, port) {
   const app = express();
@@ -15,9 +16,16 @@ function configureConnectEndpoint(actions, port) {
 }
 
 const renderConnectPage = actions => (req, res) => {
-  const requestOrigin = req.get('host');
+  const requestOrigin = getConnectOrigin(req.headers);
   const actionsString = `['${actions.join('\',\'')}']`;
   res.render('connect', { origin: requestOrigin, actions: actionsString });
 };
+
+function getConnectOrigin(headers) {
+  if (headers.referer) {
+    return new URL(headers.referer).host;
+  }
+  return 'localhost';
+}
 
 export default { configureConnectEndpoint };
