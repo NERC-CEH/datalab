@@ -24,8 +24,6 @@ spec:
         env:
         - name: SPARK_ROLE
           value: MASTER
-        - name: spark.executor.memory
-          value: 8G
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
