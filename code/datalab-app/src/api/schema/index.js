@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import status from './status';
 import { dataStorage, dataStore } from './dataStorage';
+import notebooks from './notebooks';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -9,6 +10,7 @@ const RootQueryType = new GraphQLObjectType({
     status,
     dataStorage,
     dataStore,
+    notebooks,
   },
 });
 
