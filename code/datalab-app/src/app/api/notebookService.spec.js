@@ -3,7 +3,7 @@ import notebookService from './notebookService';
 
 jest.mock('axios');
 
-describe('dataStorageService', () => {
+describe('notebookService', () => {
   beforeEach(() => jest.resetAllMocks());
 
   const createResolvedResponse = data => Promise.resolve({ data: { data } });
