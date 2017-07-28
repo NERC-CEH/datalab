@@ -3,8 +3,9 @@ import { shallow } from 'enzyme';
 import DataStorageTable from './DataStorageTable';
 
 describe('DataStorageTable', () => {
-  function shallowRender(dataStorage) {
-    return shallow(<DataStorageTable dataStorage={dataStorage} />);
+  function shallowRender(dataStorage, openStorageAction) {
+    return shallow(<DataStorageTable
+      dataStorage={dataStorage} openStorageAction={openStorageAction} />);
   }
 
   it('renders correct snapshot', () => {
@@ -16,11 +17,13 @@ describe('DataStorageTable', () => {
         linkToStorage: 'expectedLink',
         name: 'expectedName',
         storageType: 'expectedType',
+        accessKey: 'token',
       },
     ];
+    const openStorageAction = 'mockAction';
 
     // Act/Assert
-    expect(shallowRender(dataStorage)).toMatchSnapshot();
+    expect(shallowRender(dataStorage, openStorageAction)).toMatchSnapshot();
   });
 
   it('inserts correct number of rows', () => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 import DataStorageTableRow from './DataStorageTableRow';
 
-const DataStorageTable = ({ dataStorage }) => (
+const DataStorageTable = ({ dataStorage, openStorageAction }) => (
   <Table celled>
     <Table.Header>
       <Table.Row>
@@ -15,7 +15,12 @@ const DataStorageTable = ({ dataStorage }) => (
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {dataStorage.map((dataStore, index) => (<DataStorageTableRow key={index} dataStore={dataStore} />))}
+      {dataStorage.map((dataStore, index) => (
+        <DataStorageTableRow
+          key={index}
+          dataStore={dataStore}
+          openStorageAction={openStorageAction} />
+      ))}
     </Table.Body>
   </Table>
 );

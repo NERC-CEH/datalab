@@ -10,8 +10,13 @@ it('DataStorageTableRow renders correct snapshot', () => {
     linkToStorage: 'expectedLink',
     name: 'expectedName',
     storageType: 'expectedType',
+    accessKey: 'accessKey',
   };
+  const openStorageAction = 'mockAction';
 
   // Act/Assert
-  expect(shallow(<DataStorageTableRow dataStore={dataStore} />)).toMatchSnapshot();
+  const renderedComponent = shallow(<DataStorageTableRow
+    dataStore={dataStore}
+    openStorageAction={openStorageAction}/>);
+  expect(renderedComponent).toMatchSnapshot();
 });

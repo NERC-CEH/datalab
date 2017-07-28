@@ -8,6 +8,7 @@
     "bluebird": "3.5.0",
     "body-parser": "1.17.1",
     "convict": "3.0.0",
+    "cross-storage": "1.0.0",
     "express": "4.15.2",
     "express-jwt": "5.3.0",
     "graphql": "0.10.3",
