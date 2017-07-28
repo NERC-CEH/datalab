@@ -21,6 +21,7 @@ DataStorageTableRow.propTypes = {
     linkToStorage: PropTypes.string,
     name: PropTypes.string,
     storageType: PropTypes.string,
+    accessKey: PropTypes.string,
   }),
 };
 

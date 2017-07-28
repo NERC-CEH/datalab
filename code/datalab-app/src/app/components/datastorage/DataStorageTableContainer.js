@@ -28,6 +28,7 @@ DataStorageTableContainer.propTypes = {
   actions: PropTypes.shape({
     loadDataStorage: PropTypes.func.isRequired,
     loadDataStore: PropTypes.func.isRequired,
+    openMinioDataStore: PropTypes.func.isRequired,
   }).isRequired,
 };
 

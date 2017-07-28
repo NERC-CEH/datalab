@@ -74,12 +74,13 @@ describe('DataStorageTableContainer', () => {
 
     const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
 
+    const openMinioDataStoreFn = () => {};
     const generateProps = () => ({
       dataStorage,
       actions: {
         loadDataStorage: loadDataStorageMock,
         loadDataStore: () => {},
-        openMinioDataStore: 'mockAction',
+        openMinioDataStore: openMinioDataStoreFn,
       },
     });
 
@@ -106,7 +107,7 @@ describe('DataStorageTableContainer', () => {
       // Assert
       expect(output.props()).toEqual({
         dataStorage: dataStorage.value,
-        openStorageAction: 'mockAction',
+        openStorageAction: openMinioDataStoreFn,
       });
     });
   });
