@@ -3,7 +3,7 @@ services:
   proxy:
     image: 'traefik'
     ports:
-      - '8080:8080'
+      - '8081:8080'
       - '80:80'
     volumes:
       - ${PWD}/config/traefik/traefik.toml:/etc/traefik/traefik.toml
@@ -32,3 +32,10 @@ services:
     environment:
       MINIO_ACCESS_KEY: VXL8C2ITGFBVMHKV2EV6
       MINIO_SECRET_KEY: iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI
+
+  zeppelin:
+    image: nerc/zeppelin:0.7.2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${PWD}/config/zeppelin/shiro.ini:/opt/zeppelin/conf/shiro.ini
