@@ -12,8 +12,8 @@ spec:
         name: spark-worker
     spec:
       containers:
-      - image: nerc/spark:2.1.0
-        imagePullPolicy : "Always"
+      - image: nerc/spark:2.1.0.1
+        imagePullPolicy : "IfNotPresent"
         name: spark-worker
         ports:
         - containerPort: 7078
