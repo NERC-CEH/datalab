@@ -7,11 +7,16 @@ const vaultAppRole = config.get('vaultAppRole');
 
 function requestStorageKeys(datalab, storage) {
   const keyPath = `${datalab}/storage/${storage.name}`;
-  logger.info('Requesting vault secrets from path: %s', keyPath);
+  return requestPath(keyPath);
+}
+
+function requestZeppelinKeys(datalab, notebook) {
+  const keyPath = `${datalab}/notebooks/${notebook.name}`;
   return requestPath(keyPath);
 }
 
 function requestPath(path) {
+  logger.info('Requesting vault secrets from path: %s', path);
   return requestVaultToken()
     .then(requestSecret(path))
     .then(response => response.data.data)
@@ -51,4 +56,4 @@ function getSecretUrl(path) {
   return `${vaultBaseUrl}/v1/secret/${path}`;
 }
 
-export default { requestPath, requestStorageKeys };
+export default { requestPath, requestStorageKeys, requestZeppelinKeys };
