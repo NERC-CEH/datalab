@@ -27,6 +27,13 @@ spec:
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
       volumes:
         - name: glusterfsvol
           glusterfs:
