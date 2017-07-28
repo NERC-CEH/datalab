@@ -12,8 +12,8 @@ spec:
         name: spark-worker
     spec:
       containers:
-      - image: nerc/spark:2.1.0
-        imagePullPolicy : "Always"
+      - image: nerc/spark:2.1.0.1
+        imagePullPolicy : "IfNotPresent"
         name: spark-worker
         ports:
         - containerPort: 7078
@@ -21,11 +21,16 @@ spec:
         env:
         - name: SPARK_ROLE
           value: WORKER
-        - name: spark.executor.memory
-          value: 8G
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
       volumes:
         - name: glusterfsvol
           glusterfs:
