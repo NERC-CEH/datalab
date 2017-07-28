@@ -5,7 +5,7 @@ import apiBase from './apiBase';
 const apiURL = `${apiBase}/api`;
 
 function loadDataStorage() {
-  return request.post(apiURL, { query: '{ dataStorage { capacityTotal capacityUsed linkToStorage name storageType } }' })
+  return request.post(apiURL, { query: '{ dataStorage { capacityTotal capacityUsed linkToStorage name storageType accessKey } }' })
     .then(res => get(res, 'data.data.dataStorage'));
 }
 

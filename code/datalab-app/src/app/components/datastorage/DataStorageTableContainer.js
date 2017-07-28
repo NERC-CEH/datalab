@@ -12,7 +12,9 @@ class DataStorageTableContainer extends Component {
 
   render() {
     return (
-      <DataStorageTable dataStorage={this.props.dataStorage.value} />
+      <DataStorageTable
+        dataStorage={this.props.dataStorage.value}
+        openStorageAction={this.props.actions.openMinioDataStore} />
     );
   }
 }
@@ -26,6 +28,7 @@ DataStorageTableContainer.propTypes = {
   actions: PropTypes.shape({
     loadDataStorage: PropTypes.func.isRequired,
     loadDataStore: PropTypes.func.isRequired,
+    openMinioDataStore: PropTypes.func.isRequired,
   }).isRequired,
 };
 

@@ -5,7 +5,7 @@ describe('dataStorageRepository', () => {
     expect(dataStorageRepository.getAll('user')).toMatchSnapshot();
   });
 
-  it('getById returns epexted snapshot', () => {
+  it('getById returns expected snapshot', () => {
     expect(dataStorageRepository.getById('user', 1)).toMatchSnapshot();
   });
 });

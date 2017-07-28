@@ -1,5 +1,13 @@
 version: '3'
 services:
+  proxy:
+    image: 'traefik'
+    ports:
+      - '8080:8080'
+      - '80:80'
+    volumes:
+      - ${PWD}/config/traefik/traefik.toml:/etc/traefik/traefik.toml
+
   vault:
     image: 'vault'
     ports:
@@ -11,3 +19,16 @@ services:
       - IPC_LOCK
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=root
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+    volumes:
+      - /tmp/minio/data:/export
+    command:
+      - server
+      - /export
+    environment:
+      MINIO_ACCESS_KEY: VXL8C2ITGFBVMHKV2EV6
+      MINIO_SECRET_KEY: iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI

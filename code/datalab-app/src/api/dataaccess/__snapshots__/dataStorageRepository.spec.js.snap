@@ -6,28 +6,28 @@ Array [
     "capacityTotal": 1,
     "capacityUsed": 1,
     "id": 1,
-    "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio/login",
-    "name": "disk 1",
+    "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
+    "name": "disk-1",
     "storageType": 1,
   },
   Object {
     "capacityTotal": 1,
     "capacityUsed": 1,
     "id": 2,
-    "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio/login",
-    "name": "disk 2",
+    "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
+    "name": "disk-2",
     "storageType": 1,
   },
 ]
 `;
 
-exports[`dataStorageRepository getById returns epexted snapshot 1`] = `
+exports[`dataStorageRepository getById returns expected snapshot 1`] = `
 Object {
   "capacityTotal": 1,
   "capacityUsed": 1,
   "id": 1,
-  "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio/login",
-  "name": "disk 1",
+  "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
+  "name": "disk-1",
   "storageType": 1,
 }
 `;

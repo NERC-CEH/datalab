@@ -28,7 +28,13 @@ exports[`DataStorageTableRow renders correct snapshot 1`] = `
   <TableCell
     as="td"
   >
-    expectedLink
+    <Button
+      as="button"
+      onClick={[Function]}
+      primary={true}
+    >
+      Open
+    </Button>
   </TableCell>
 </TableRow>
 `;

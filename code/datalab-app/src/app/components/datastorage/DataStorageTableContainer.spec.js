@@ -45,7 +45,7 @@ describe('DataStorageTableContainer', () => {
       const output = shallowRenderConnected(store).prop('actions');
 
       // Assert
-      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadDataStorage', 'loadDataStore']));
+      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadDataStorage', 'loadDataStore', 'openMinioDataStore']));
     });
 
     it('loadDataStorage function dispatch correct action', () => {
@@ -74,11 +74,13 @@ describe('DataStorageTableContainer', () => {
 
     const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
 
+    const openMinioDataStoreFn = () => {};
     const generateProps = () => ({
       dataStorage,
       actions: {
         loadDataStorage: loadDataStorageMock,
         loadDataStore: () => {},
+        openMinioDataStore: openMinioDataStoreFn,
       },
     });
 
@@ -95,7 +97,7 @@ describe('DataStorageTableContainer', () => {
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
     });
 
-    it('passes dataStorage prop to dataStorageTable', () => {
+    it('passes correct props to dataStorageTable', () => {
       // Arrange
       const props = generateProps();
 
@@ -103,7 +105,10 @@ describe('DataStorageTableContainer', () => {
       const output = shallowRenderPure(props).find('DataStorageTable');
 
       // Assert
-      expect(output.props()).toEqual({ dataStorage: dataStorage.value });
+      expect(output.props()).toEqual({
+        dataStorage: dataStorage.value,
+        openStorageAction: openMinioDataStoreFn,
+      });
     });
   });
 });

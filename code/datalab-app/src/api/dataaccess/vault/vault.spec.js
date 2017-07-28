@@ -55,7 +55,7 @@ describe('vault backend service', () => {
         expect(response).toEqual({
           message: 'Unable to retrieve secret',
         });
-        expect(logger.getMessages()).toEqual([{
+        expect(logger.getErrorMessages()).toEqual([{
           message: 'Error retrieving secret %s: ',
           data: secretPath,
           metadata: getFailedLoginResponse(),
@@ -79,7 +79,7 @@ describe('vault backend service', () => {
         expect(response).toEqual({
           message: 'Unable to retrieve secret',
         });
-        expect(logger.getMessages()).toEqual([{
+        expect(logger.getErrorMessages()).toEqual([{
           message: 'Error retrieving secret %s: ',
           data: secretPath,
           metadata: getMissingKeyResponse(),

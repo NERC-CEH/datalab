@@ -1,0 +1,33 @@
+# traefik.toml
+logLevel = "DEBUG"
+accessLogsFile = "/logs/access.log"
+defaultEntryPoints = ["http"]
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+[web]
+address = ":8080"
+
+[file]
+
+# rules
+[backends]
+  [backends.files]
+    [backends.files.servers.server1]
+    url = "http://minio:9000"
+    weight = 1
+  [backends.files-connect]
+    [backends.files-connect.servers.server1]
+    url = "http://10.1.24.116:8001"
+    weight = 1
+
+[frontends]
+  [frontends.files]
+  backend = "files"
+    [frontends.files.routes.test_1]
+    rule = "Host:localhost"
+  [frontends.files-connect]
+  backend = "files-connect"
+    [frontends.files-connect.routes.test_1]
+    rule = "Host:localhost;Path:/connect/;PathStrip:/connect/"

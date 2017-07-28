@@ -45,6 +45,7 @@ exports[`DataStorageTable renders correct snapshot 1`] = `
     <DataStorageTableRow
       dataStore={
         Object {
+          "accessKey": "token",
           "capacityTotal": 111,
           "capacityUsed": 222,
           "linkToStorage": "expectedLink",
@@ -52,6 +53,7 @@ exports[`DataStorageTable renders correct snapshot 1`] = `
           "storageType": "expectedType",
         }
       }
+      openStorageAction="mockAction"
     />
   </TableBody>
 </Table>
