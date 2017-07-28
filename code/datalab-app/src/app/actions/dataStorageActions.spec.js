@@ -1,7 +1,13 @@
-import dataStorageActions, { LOAD_DATASTORAGE_ACTION, LOAD_DATASTORE_ACTION } from './dataStorageActions';
+import dataStorageActions, {
+  LOAD_DATASTORAGE_ACTION,
+  LOAD_DATASTORE_ACTION,
+  OPEN_MINIO_DATASTORE_ACTION,
+} from './dataStorageActions';
 import dataStorageService from '../api/dataStorageService';
+import minioService from '../api/minioService';
 
 jest.mock('../api/dataStorageService');
+jest.mock('../api/minioService');
 
 describe('dataStorageActions', () => {
   beforeEach(() => jest.resetAllMocks());
@@ -33,6 +39,21 @@ describe('dataStorageActions', () => {
       expect(loadDataStoreMock).toHaveBeenCalledTimes(1);
       expect(loadDataStoreMock).toHaveBeenCalledWith(123);
       expect(output.type).toBe('LOAD_DATASTORE');
+      expect(output.payload).toBe('expectedDataStorePayload');
+    });
+
+    it('openMinioDataStore', () => {
+      // Arrange
+      const minioMock = jest.fn().mockReturnValue('expectedDataStorePayload');
+      minioService.openStorage = minioMock;
+
+      // Act
+      const output = dataStorageActions.openMinioDataStore('url', 'token');
+
+      // Assert
+      expect(minioMock).toHaveBeenCalledTimes(1);
+      expect(minioMock).toHaveBeenCalledWith('url', 'token');
+      expect(output.type).toBe(OPEN_MINIO_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedDataStorePayload');
     });
   });
