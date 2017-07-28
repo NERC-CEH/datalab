@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import logger from 'winston';
 import { URL } from 'url';
 
@@ -8,7 +7,6 @@ function configureConnectEndpoint(actions, port) {
 
   app.set('view engine', 'pug');
   app.set('views', './src/api/views');
-  app.use('/public', express.static(path.join(__dirname, '/public')));
 
   app.get('/', renderConnectPage(actions));
 
