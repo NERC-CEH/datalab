@@ -22,9 +22,9 @@ const SideBar = ({ topBarStyle }) => (
       <SubMenu
         menuTitle="Notebooks"
         menuItems={[
-          { Component: Menu.Item,
-            props: { onClick: () => window.open('https://datalab-zeppelin.datalabs.nerc.ac.uk/', '_blank') },
-            children: 'Zeppelin Notebooks' },
+          { Component: NavLink,
+            props: { className: 'item', to: '/notebooks', exact: true },
+            children: 'Notebooks' },
         ]}
       />
       <Menu.Item
