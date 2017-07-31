@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "zeppelin",
+    "url": "http://datalabs-zeppelin.datalabs.nerc.ac.uk"
+  },
+  {
+    "id": 2,
+    "name": "jupyter",
+    "url": "http://datalabs-jupyter.datalabs.nerc.ac.uk"
+  }
+]

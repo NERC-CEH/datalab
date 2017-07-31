@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebooksContainer is a container which passes correct props to NotebookButton 1`] = `
+<div>
+  <NotebookButton
+    notebook={
+      Object {
+        "props": "value1",
+      }
+    }
+    openNotebookAction={[Function]}
+  />
+  <NotebookButton
+    notebook={
+      Object {
+        "props": "value2",
+      }
+    }
+    openNotebookAction={[Function]}
+  />
+</div>
+`;

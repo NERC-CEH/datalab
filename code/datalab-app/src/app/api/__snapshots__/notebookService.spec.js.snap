@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notebookService loadNotebooks call submits post request with correct body 1`] = `
+Array [
+  Array [
+    "http://localhost:8000/api",
+    Object {
+      "query": "{ notebooks { name url cookie } }",
+    },
+  ],
+]
+`;

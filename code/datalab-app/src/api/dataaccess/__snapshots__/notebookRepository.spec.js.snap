@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notebookRepository getAll returns expected snapshot 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "name": "zeppelin",
+    "url": "http://datalabs-zeppelin.datalabs.nerc.ac.uk",
+  },
+  Object {
+    "id": 2,
+    "name": "jupyter",
+    "url": "http://datalabs-jupyter.datalabs.nerc.ac.uk",
+  },
+]
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebookButton renders correct snapshot 1`] = `
+<Button
+  as="button"
+  onClick={[Function]}
+  primary={true}
+>
+  expectedName
+</Button>
+`;
