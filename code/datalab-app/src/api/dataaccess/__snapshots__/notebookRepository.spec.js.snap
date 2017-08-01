@@ -6,13 +6,13 @@ Array [
     "id": 1,
     "internalEndpoint": "http://zeppelin-service",
     "name": "zeppelin",
-    "url": "http://datalabs-zeppelin.datalabs.nerc.ac.uk",
+    "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
   },
   Object {
     "id": 2,
     "internalEndpoint": "http://zeppelin-service",
     "name": "jupyter",
-    "url": "http://datalabs-jupyter.datalabs.nerc.ac.uk",
+    "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
   },
 ]
 `;

@@ -2,13 +2,13 @@
   {
     "id": 1,
     "name": "zeppelin",
-    "url": "http://datalabs-zeppelin.datalabs.nerc.ac.uk",
+    "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
     "internalEndpoint": "http://zeppelin-service"
   },
   {
     "id": 2,
     "name": "jupyter",
-    "url": "http://datalabs-jupyter.datalabs.nerc.ac.uk",
+    "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
     "internalEndpoint": "http://zeppelin-service"
   }
 ]
