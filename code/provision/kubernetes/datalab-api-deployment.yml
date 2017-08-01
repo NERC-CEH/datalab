@@ -11,10 +11,18 @@ spec:
     spec:
       containers:
         - name: datalab-api
-          image: nerc/datalab-api
+          image: nerc/datalab-api:0.5.0-104-gc857701
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
+          env:
+            - name: VAULT_APP_ROLE
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: vaultAppRole
+            - name: VAULT_API
+              value: http://vault-service:8200
           livenessProbe:
             httpGet:
               path: /status

@@ -1,4 +1,4 @@
-- hosts: gluster-cluster
+- hosts: gluster
   user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
@@ -34,21 +34,22 @@
 
     - name: Create Brick Directory
       file:
-        path: /data/brick1
+        path: "{{ brick_directory }}"
         state: directory
         mode: 0775
 
     - name: Create Volume Directory
       file:
-        path: /data/brick1/datalab
+        path: "{{ brick_directory }}/{{ item }}"
         state: directory
         mode: 0775
+      with_items: "{{ volumes }}"
 
     - name: Configure Gluster volume
       gluster_volume:
         state: present
-        name: datalab
-        brick: /data/brick1/datalab
+        name: "{{ item }}"
+        brick: "{{ brick_directory }}/{{ item }}"
         replicas: 3
         cluster:
           - 192.168.3.20
@@ -56,3 +57,4 @@
           - 192.168.3.22
         host: "{{ inventory_hostname }}"
       run_once: true
+      with_items: "{{ volumes }}"
