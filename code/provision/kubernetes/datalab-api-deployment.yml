@@ -15,6 +15,14 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
+          env:
+            - name: VAULT_APP_ROLE
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: vaultAppRole
+            - name: VAULT_API
+              value: http://vault-service:8200
           livenessProbe:
             httpGet:
               path: /status
