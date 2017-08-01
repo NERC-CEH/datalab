@@ -4,6 +4,7 @@
     "capacityUsed": 1,
     "id": 1,
     "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
+    "internalEndpoint": "http://minio-service/minio",
     "name": "disk-1",
     "storageType": 1
   },
@@ -12,6 +13,7 @@
     "capacityUsed": 1,
     "id": 2,
     "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
+    "internalEndpoint": "http://minio-service/minio",
     "name": "disk-2",
     "storageType": 1
   }
