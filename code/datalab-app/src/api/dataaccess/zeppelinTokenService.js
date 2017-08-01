@@ -22,7 +22,7 @@ const zeppelinLogin = notebook => (credentials) => {
 };
 
 function getZeppelinLoginUrl(notebook) {
-  const zeppelinUrl = `${notebook.url}/api/login`;
+  const zeppelinUrl = `${notebook.internalEndpoint}/api/login`;
   logger.info(`Request log in cookie from Zeppelin at: ${zeppelinUrl}`);
   return zeppelinUrl;
 }

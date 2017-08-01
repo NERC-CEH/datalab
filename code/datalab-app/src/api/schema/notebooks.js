@@ -20,6 +20,9 @@ const NotebookType = new GraphQLObjectType({
     url: {
       type: GraphQLString,
     },
+    internalEndpoint: {
+      type: GraphQLString,
+    },
     cookie: {
       type: GraphQLString,
       resolve: (obj, args, { user }) => zeppelinTokenService.requestZeppelinCookie(obj, user),
