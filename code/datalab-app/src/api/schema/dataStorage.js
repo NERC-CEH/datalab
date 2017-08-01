@@ -42,6 +42,9 @@ const DataStoreType = new GraphQLObjectType({
     linkToStorage: {
       type: GraphQLString,
     },
+    internalEndpoint: {
+      type: GraphQLString,
+    },
     accessKey: {
       type: GraphQLString,
       resolve: (obj, args, { user }) => minioTokenService.requestMinioToken(obj, user),

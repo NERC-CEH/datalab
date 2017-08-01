@@ -19,9 +19,9 @@ afterEach(() => {
 
 const storage = {
   name: 'disk-1',
-  linkToStorage: 'http://files/minio',
+  internalEndpoint: 'http://files/minio',
 };
-const loginUrl = `${storage.linkToStorage}/webrpc`;
+const loginUrl = `${storage.internalEndpoint}/webrpc`;
 
 describe('minioTokenService', () => {
   it('should request login token from minio', () => {

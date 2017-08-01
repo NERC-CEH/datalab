@@ -21,7 +21,7 @@ const minioLogin = storage => (accessKeys) => {
 };
 
 function getMinioLoginUrl(storage) {
-  const minioApiUrl = `${storage.linkToStorage}/webrpc`;
+  const minioApiUrl = `${storage.internalEndpoint}/webrpc`;
   logger.debug(`Request log in token from Minio at: ${minioApiUrl}`);
   return minioApiUrl;
 }
