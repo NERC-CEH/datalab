@@ -19,9 +19,9 @@ afterEach(() => {
 
 const notebook = {
   name: 'zeppelin',
-  url: 'http://zeppelin',
+  internalEndpoint: 'http://zeppelin',
 };
-const loginUrl = `${notebook.url}/api/login`;
+const loginUrl = `${notebook.internalEndpoint}/api/login`;
 
 describe('zeppelinTokenService', () => {
   it('should request login cookie from zeppelin', () => {
