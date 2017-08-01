@@ -21,6 +21,8 @@ spec:
         env:
         - name: MASTER
           value: spark://spark-master:7077
+        - name: ZEPPELIN_NOTEBOOK_DIR
+          value: /data/notebooks/zeppelin
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
