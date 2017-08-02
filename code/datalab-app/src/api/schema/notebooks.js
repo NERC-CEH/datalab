@@ -5,7 +5,7 @@ import {
   GraphQLString,
 } from 'graphql';
 import notebookRepository from '../dataaccess/notebookRepository';
-import zeppelinTokenService from '../dataaccess/zeppelinTokenService';
+import notebookTokenService from '../dataaccess/notebookTokenService';
 
 const NotebookType = new GraphQLObjectType({
   name: 'Notebook',
@@ -17,15 +17,18 @@ const NotebookType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
+    type: {
+      type: GraphQLString,
+    },
     url: {
       type: GraphQLString,
     },
     internalEndpoint: {
       type: GraphQLString,
     },
-    cookie: {
+    token: {
       type: GraphQLString,
-      resolve: (obj, args, { user }) => zeppelinTokenService.requestZeppelinCookie(obj, user),
+      resolve: (obj, args, { user }) => notebookTokenService(obj, user),
     },
   },
 });

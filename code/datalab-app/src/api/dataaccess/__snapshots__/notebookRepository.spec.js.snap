@@ -5,13 +5,15 @@ Array [
   Object {
     "id": 1,
     "internalEndpoint": "http://zeppelin-service",
-    "name": "zeppelin",
+    "name": "Zeppelin",
+    "type": "zeppelin",
     "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
   },
   Object {
     "id": 2,
-    "internalEndpoint": "http://zeppelin-service",
-    "name": "jupyter",
+    "internalEndpoint": "http://jupyter-service",
+    "name": "Jupyter",
+    "type": "jupyter",
     "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
   },
 ]
