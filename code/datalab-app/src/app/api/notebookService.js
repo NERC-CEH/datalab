@@ -5,7 +5,7 @@ import apiBase from './apiBase';
 const apiURL = `${apiBase}/api`;
 
 function loadNotebooks() {
-  return request.post(apiURL, { query: '{ notebooks { name url cookie } }' })
+  return request.post(apiURL, { query: '{ notebooks { name url token } }' })
     .then(res => get(res, 'data.data.notebooks'));
 }
 
