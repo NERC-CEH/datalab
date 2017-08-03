@@ -2,11 +2,12 @@ import axios from 'axios';
 import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
+import { JUPYTER, ZEPPELIN } from '../../shared/notebookTypes';
 
 export default function notebookTokenService(notebook, user) {
-  if (notebook.type === 'zeppelin') {
+  if (notebook.type === ZEPPELIN) {
     return requestZeppelinCookie(notebook, user);
-  } else if (notebook.type === 'jupyter') {
+  } else if (notebook.type === JUPYTER) {
     return requestJupyterToken(notebook, user);
   }
   return undefined;
