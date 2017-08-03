@@ -10,7 +10,7 @@ function requestStorageKeys(datalab, storage) {
   return requestPath(keyPath);
 }
 
-function requestZeppelinKeys(datalab, notebook) {
+function requestNotebookKeys(datalab, notebook) {
   const keyPath = `${datalab}/notebooks/${notebook.name}`;
   return requestPath(keyPath);
 }
@@ -56,4 +56,4 @@ function getSecretUrl(path) {
   return `${vaultBaseUrl}/v1/secret/${path}`;
 }
 
-export default { requestPath, requestStorageKeys, requestZeppelinKeys };
+export default { requestPath, requestStorageKeys, requestNotebookKeys };

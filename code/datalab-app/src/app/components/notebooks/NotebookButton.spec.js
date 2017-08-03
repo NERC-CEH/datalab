@@ -2,18 +2,38 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import NotebookButton from './NotebookButton';
 
-it('NotebookButton renders correct snapshot', () => {
-  // Arrange
+describe('NotebookButton', () => {
+  function shallowRender(props) {
+    return shallow(<NotebookButton {...props} />);
+  }
+
   const notebook = {
     name: 'expectedName',
     url: 'notebookurl',
+    token: 'expectedToken',
   };
-  const openNotebookFn = () => {};
+  it('renders correct snapshot', () => {
+    // Arrange
+    const noop = () => {};
 
-  // Act/Assert
-  const renderedComponent = shallow(<NotebookButton
-    notebook={notebook}
-    openNotebookAction={openNotebookFn}/>);
+    // Act
+    const renderedComponent = shallowRender({ notebook, openNotebookAction: noop });
 
-  expect(renderedComponent).toMatchSnapshot();
+    // Assert
+    expect(renderedComponent).toMatchSnapshot();
+  });
+
+  it('onClick calls openNotebookAction with correct props', () => {
+    // Arrange
+    const openNotebookMock = jest.fn();
+
+    // Act
+    const renderedComponent = shallowRender({ notebook, openNotebookAction: openNotebookMock });
+    const onClick = renderedComponent.prop('onClick');
+
+    expect(openNotebookMock).not.toHaveBeenCalled();
+    onClick();
+    expect(openNotebookMock).toHaveBeenCalledTimes(1);
+    expect(openNotebookMock).toHaveBeenCalledWith('notebookurl', 'expectedToken');
+  });
 });

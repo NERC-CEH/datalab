@@ -40,6 +40,14 @@ services:
     volumes:
       - ${PWD}/config/zeppelin/shiro.ini:/opt/zeppelin/conf/shiro.ini
 
+  jupyter:
+    image: jupyter/base-notebook:b4dd11e16ae4
+    ports:
+      - "8888:8888"
+    command:
+      - start-notebook.sh
+      - --NotebookApp.token=jupyterToken
+
   minio-connect:
     image: nerc/connect:latest
     ports:
