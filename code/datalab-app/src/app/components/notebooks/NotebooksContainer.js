@@ -15,18 +15,24 @@ class NotebooksContainer extends Component {
   }
 
   openNotebook(notebook) {
+    let notebookUrl = notebook.url;
+
     if (notebook.type === 'zeppelin') {
-      this.props.actions.openNotebook(notebook.url, notebook.token);
-    } else if (notebook.type === 'jupyter') {
-      window.open(`${notebook.url}/tree/?token=${notebook.token}`);
+      this.props.actions.setNotebookCookie(notebook.url, notebook.token);
     }
+
+    if (notebook.type === 'jupyter') {
+      notebookUrl = `${notebook.url}/tree/?token=${notebook.token}`;
+    }
+
+    this.props.actions.openNotebook(notebookUrl);
   }
 
   render() {
     return (
       <div>
         { this.props.notebooks.value.map((notebook, index) => (
-          <NotebookButton key={index} notebook={notebook} openNotebookAction={this.openNotebook} />
+          <NotebookButton key={index} notebook={notebook} openNotebook={this.openNotebook} />
         ))}
       </div>
     );
@@ -41,6 +47,7 @@ NotebooksContainer.propTypes = {
   }).isRequired,
   actions: PropTypes.shape({
     loadNotebooks: PropTypes.func.isRequired,
+    setNotebookCookie: PropTypes.func.isRequired,
     openNotebook: PropTypes.func.isRequired,
   }).isRequired,
 };

@@ -8,32 +8,33 @@ describe('NotebookButton', () => {
   }
 
   const notebook = {
-    name: 'expectedName',
-    url: 'notebookurl',
+    displayName: 'expectedName',
+    url: 'notebookUrl',
     token: 'expectedToken',
+    type: 'expectedType',
   };
   it('renders correct snapshot', () => {
     // Arrange
     const noop = () => {};
 
     // Act
-    const renderedComponent = shallowRender({ notebook, openNotebookAction: noop });
+    const renderedComponent = shallowRender({ notebook, openNotebook: noop });
 
     // Assert
     expect(renderedComponent).toMatchSnapshot();
   });
 
-  it('onClick calls openNotebookAction with correct props', () => {
+  it('onClick calls openNotebook with correct props', () => {
     // Arrange
     const openNotebookMock = jest.fn();
 
     // Act
-    const renderedComponent = shallowRender({ notebook, openNotebookAction: openNotebookMock });
+    const renderedComponent = shallowRender({ notebook, openNotebook: openNotebookMock });
     const onClick = renderedComponent.prop('onClick');
 
     expect(openNotebookMock).not.toHaveBeenCalled();
     onClick();
     expect(openNotebookMock).toHaveBeenCalledTimes(1);
-    expect(openNotebookMock).toHaveBeenCalledWith('notebookurl', 'expectedToken');
+    expect(openNotebookMock).toHaveBeenCalledWith(notebook);
   });
 });
