@@ -2,14 +2,29 @@ import axios from 'axios';
 import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
+import { JUPYTER, ZEPPELIN } from '../../shared/notebookTypes';
 
-function requestZeppelinCookie(notebook) {
-  return vault.requestZeppelinKeys('datalab', notebook)
+export default function notebookTokenService(notebook, user) {
+  if (notebook.type === ZEPPELIN) {
+    return requestZeppelinCookie(notebook, user);
+  } else if (notebook.type === JUPYTER) {
+    return requestJupyterToken(notebook, user);
+  }
+  return undefined;
+}
+
+export function requestZeppelinCookie(notebook, user) {
+  return vault.requestNotebookKeys('datalab', notebook)
     .then(zeppelinLogin(notebook))
     .catch((error) => {
       logger.error('Error logging in to zeppelin: ', notebook.name, error);
       return undefined;
     });
+}
+
+function requestJupyterToken(notebook, user) {
+  return vault.requestNotebookKeys('datalab', notebook)
+    .then(response => response.token);
 }
 
 const zeppelinLogin = notebook => (credentials) => {
@@ -40,5 +55,3 @@ function processLoginResponse(loginResponse) {
   const sessionCookie = findLast(headers['set-cookie'], header => header.indexOf('JSESSIONID') > -1);
   return sessionCookie.split(';')[0].split('=')[1];
 }
-
-export default { requestZeppelinCookie };

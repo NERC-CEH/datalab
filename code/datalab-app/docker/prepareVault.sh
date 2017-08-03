@@ -14,7 +14,7 @@ curl -X POST \
 
 curl -X POST \
   -H "X-Vault-Token:$VAULT_TOKEN" \
-  -d '{"policies":"datalab-policy", "bound_cidr_list": "172.18.0.1/32", "bind_secret_id":"false"}' \
+  -d '{"policies":"datalab-policy", "bound_cidr_list": "172.0.0.0/8", "bind_secret_id":"false"}' \
   $VAULT_ADDR/v1/auth/approle/role/datalab
 
 VAULT_APP_ROLE=$(curl -s -X GET -H "X-Vault-Token:$VAULT_TOKEN" http://127.0.0.1:8200/v1/auth/approle/role/datalab/role-id | jq .data.role_id)
@@ -24,3 +24,4 @@ echo export VAULT_APP_ROLE=${VAULT_APP_ROLE}
 # Add default keys
 curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"access_key":"VXL8C2ITGFBVMHKV2EV6","secret_key":"iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI"}' http://127.0.0.1:8200/v1/secret/datalab/storage/disk-1
 curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"username":"datalab","password":"password"}' http://127.0.0.1:8200/v1/secret/datalab/notebooks/zeppelin
+curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"token":"jupyterToken"}' http://127.0.0.1:8200/v1/secret/datalab/notebooks/jupyter
