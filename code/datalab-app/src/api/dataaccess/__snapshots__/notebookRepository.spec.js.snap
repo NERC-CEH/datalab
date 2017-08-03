@@ -3,16 +3,18 @@
 exports[`notebookRepository getAll returns expected snapshot 1`] = `
 Array [
   Object {
+    "displayName": "Zeppelin",
     "id": 1,
     "internalEndpoint": "http://zeppelin-service",
-    "name": "Zeppelin",
+    "name": "zeppelin",
     "type": "zeppelin",
     "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
   },
   Object {
+    "displayName": "Jupyter",
     "id": 2,
     "internalEndpoint": "http://jupyter-service",
-    "name": "Jupyter",
+    "name": "jupyter",
     "type": "jupyter",
     "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
   },
