@@ -96,6 +96,22 @@ describe('notebookTokenService', () => {
           expect(token).toEqual('expectedToken');
         });
     });
+
+    it('returns undefined if vault response has not token', () => {
+      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+        props: 'noToken',
+      })));
+
+      moxios.stubRequest(loginUrl, {
+        status: 200,
+        response: { message: 'message' },
+      });
+
+      return notebookTokenService(notebook, 'user')
+        .then((token) => {
+          expect(token).toBeUndefined();
+        });
+    });
   });
 });
 
