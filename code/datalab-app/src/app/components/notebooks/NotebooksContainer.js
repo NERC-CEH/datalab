@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import notebookActions from '../../actions/notebookActions';
 import NotebookButton from './NotebookButton';
-import { JUPYTER, ZEPPELIN } from '../../../shared/notebookTypes';
 
 class NotebooksContainer extends Component {
   constructor(props, context) {
@@ -16,17 +15,7 @@ class NotebooksContainer extends Component {
   }
 
   openNotebook(notebook) {
-    let notebookUrl = notebook.url;
-
-    if (notebook.type === ZEPPELIN) {
-      this.props.actions.setNotebookCookie(notebook.url, notebook.token);
-    }
-
-    if (notebook.type === JUPYTER) {
-      notebookUrl = `${notebook.url}/tree/?token=${notebook.token}`;
-    }
-
-    this.props.actions.openNotebook(notebookUrl);
+    this.props.actions.openNotebook(notebook.redirectUrl);
   }
 
   render() {
@@ -48,7 +37,6 @@ NotebooksContainer.propTypes = {
   }).isRequired,
   actions: PropTypes.shape({
     loadNotebooks: PropTypes.func.isRequired,
-    setNotebookCookie: PropTypes.func.isRequired,
     openNotebook: PropTypes.func.isRequired,
   }).isRequired,
 };

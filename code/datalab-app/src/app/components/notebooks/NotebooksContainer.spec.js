@@ -113,12 +113,13 @@ describe('NotebooksContainer', () => {
       expect(shallowRenderPure(props)).toMatchSnapshot();
     });
 
-    it('calls sets cookie and opens new tab for Zeppelin', () => {
+    it('opens new tab', () => {
       // Arrange
       const props = generateProps();
       const notebook = {
+        type: 'Zeppelin',
         url: 'expectedUrl',
-        token: 'expectedToken',
+        redirectUrl: 'redirectUrl',
       };
 
       // Act
@@ -126,34 +127,10 @@ describe('NotebooksContainer', () => {
       const openNotebook = output.childAt(0).prop('openNotebook');
 
       // Assert
-      expect(setNotebookCookieMock).not.toHaveBeenCalled();
       expect(openNotebookMock).not.toHaveBeenCalled();
-      openNotebook({ ...notebook, type: 'zeppelin' });
-      expect(setNotebookCookieMock).toHaveBeenCalledTimes(1);
-      expect(setNotebookCookieMock).toBeCalledWith('expectedUrl', 'expectedToken');
+      openNotebook(notebook);
       expect(openNotebookMock).toHaveBeenCalledTimes(1);
-      expect(openNotebookMock).toBeCalledWith('expectedUrl');
-    });
-
-    it('calls sets cookie and opens new tab for Jupyter', () => {
-      // Arrange
-      const props = generateProps();
-      const notebook = {
-        url: 'expectedUrl',
-        token: 'expectedToken',
-      };
-
-      // Act
-      const output = shallowRenderPure(props);
-      const openNotebook = output.childAt(0).prop('openNotebook');
-
-      // Assert
-      expect(setNotebookCookieMock).not.toHaveBeenCalled();
-      expect(openNotebookMock).not.toHaveBeenCalled();
-      openNotebook({ ...notebook, type: 'jupyter' });
-      expect(setNotebookCookieMock).not.toHaveBeenCalled();
-      expect(openNotebookMock).toHaveBeenCalledTimes(1);
-      expect(openNotebookMock).toBeCalledWith('expectedUrl/tree/?token=expectedToken');
+      expect(openNotebookMock).toBeCalledWith('redirectUrl');
     });
   });
 });

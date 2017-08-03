@@ -27,7 +27,7 @@ address = ":8080"
     weight = 1
   [backends.zeppelin-connect]
     [backends.zeppelin-connect.servers.server1]
-    url = "http://zeppelin-connect"
+    url = "http://zeppelin-connect:8000"
     weight = 1
   [backends.jupyter]
       [backends.jupyter.servers.server1]

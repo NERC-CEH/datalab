@@ -1,5 +1,4 @@
 import notebookService from '../api/notebookService';
-import zeppelinService from '../api/zeppelinService';
 
 export const LOAD_NOTEBOOKS_ACTION = 'LOAD_NOTEBOOKS';
 export const SET_COOKIE_ACTION = 'SET_NOTEBOOK_COOKIE';
@@ -10,11 +9,6 @@ const loadNotebooks = () => ({
   payload: notebookService.loadNotebooks(),
 });
 
-const setNotebookCookie = (notebookUrl, cookie) => ({
-  type: SET_COOKIE_ACTION,
-  payload: zeppelinService.setCookie(notebookUrl, cookie),
-});
-
 const openNotebook = notebookUrl => ({
   type: OPEN_NOTEBOOK_ACTION,
   payload: window.open(notebookUrl),
@@ -22,6 +16,5 @@ const openNotebook = notebookUrl => ({
 
 export default {
   loadNotebooks,
-  setNotebookCookie,
   openNotebook,
 };
