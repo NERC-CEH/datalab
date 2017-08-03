@@ -33,6 +33,13 @@ services:
       MINIO_ACCESS_KEY: VXL8C2ITGFBVMHKV2EV6
       MINIO_SECRET_KEY: iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI
 
+  zeppelin:
+    image: nerc/zeppelin:0.7.2
+    ports:
+      - 8080:8080
+    volumes:
+      - ${PWD}/config/zeppelin/shiro.ini:/opt/zeppelin/conf/shiro.ini
+
   minio-connect:
     image: nerc/connect:latest
     ports:
@@ -41,9 +48,5 @@ services:
       ORIGIN: minio.docker.localhost
       ACTIONS: "['set']"
 
-  zeppelin:
-    image: nerc/zeppelin:0.7.2
-    ports:
-      - 8080:8080
-    volumes:
-      - ${PWD}/config/zeppelin/shiro.ini:/opt/zeppelin/conf/shiro.ini
+  zeppelin-connect:
+    image: nerc/zeppelin-connect

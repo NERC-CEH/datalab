@@ -25,6 +25,10 @@ address = ":8080"
     [backends.zeppelin.servers.server1]
     url = "http://zeppelin:8080"
     weight = 1
+  [backends.zeppelin-connect]
+    [backends.zeppelin-connect.servers.server1]
+    url = "http://10.1.24.75:8003"
+    weight = 1
 
 [frontends]
   [frontends.files]
@@ -36,6 +40,10 @@ address = ":8080"
     [frontends.files-connect.routes.test_1]
     rule = "Host:testlab-files.datalabs.local;Path:/connect/;PathStrip:/connect/"
   [frontends.zeppelin]
-    backend = "zeppelin"
-      [frontends.zeppelin.routes.test_1]
-      rule = "Host:zeppelin.docker.localhost"
+  backend = "zeppelin"
+    [frontends.zeppelin.routes.test_1]
+    rule = "Host:testlab-zeppelin.datalabs.local"
+  [frontends.zeppelin-connect]
+  backend = "zeppelin-connect"
+    [frontends.zeppelin-connect.routes.test_1]
+    rule = "Host:testlab-zeppelin.datalabs.local;Path:/connect/;PathStrip:/connect/"
