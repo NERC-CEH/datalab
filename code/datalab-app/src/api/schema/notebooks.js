@@ -17,6 +17,9 @@ const NotebookType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
+    displayName: {
+      type: GraphQLString,
+    },
     type: {
       type: GraphQLString,
     },

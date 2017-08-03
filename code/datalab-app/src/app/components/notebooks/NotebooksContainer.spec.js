@@ -72,14 +72,23 @@ describe('NotebooksContainer', () => {
       return shallow(<PureNotebooksContainer {...props} />);
     }
 
-    const notebooks = { fetching: false, value: [{ props: 'value1' }, { props: 'value2' }] };
+    const notebooks = {
+      fetching: false,
+      value: [
+        { displayName: 'name1', url: 'url1', token: 'token1', type: 'type1' },
+        { displayName: 'name2', url: 'url2', token: 'token2', type: 'type2' },
+      ],
+    };
 
-    const openNotebookFn = () => {};
+    const setNotebookCookieMock = jest.fn();
+    const openNotebookMock = jest.fn();
+
     const generateProps = () => ({
       notebooks,
       actions: {
         loadNotebooks: loadNotebooksMock,
-        openNotebook: openNotebookFn,
+        setNotebookCookie: setNotebookCookieMock,
+        openNotebook: openNotebookMock,
       },
     });
 
@@ -102,6 +111,49 @@ describe('NotebooksContainer', () => {
 
       // Act
       expect(shallowRenderPure(props)).toMatchSnapshot();
+    });
+
+    it('calls sets cookie and opens new tab for Zeppelin', () => {
+      // Arrange
+      const props = generateProps();
+      const notebook = {
+        url: 'expectedUrl',
+        token: 'expectedToken',
+      };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const openNotebook = output.childAt(0).prop('openNotebook');
+
+      // Assert
+      expect(setNotebookCookieMock).not.toHaveBeenCalled();
+      expect(openNotebookMock).not.toHaveBeenCalled();
+      openNotebook({ ...notebook, type: 'zeppelin' });
+      expect(setNotebookCookieMock).toHaveBeenCalledTimes(1);
+      expect(setNotebookCookieMock).toBeCalledWith('expectedUrl', 'expectedToken');
+      expect(openNotebookMock).toHaveBeenCalledTimes(1);
+      expect(openNotebookMock).toBeCalledWith('expectedUrl');
+    });
+
+    it('calls sets cookie and opens new tab for Jupyter', () => {
+      // Arrange
+      const props = generateProps();
+      const notebook = {
+        url: 'expectedUrl',
+        token: 'expectedToken',
+      };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const openNotebook = output.childAt(0).prop('openNotebook');
+
+      // Assert
+      expect(setNotebookCookieMock).not.toHaveBeenCalled();
+      expect(openNotebookMock).not.toHaveBeenCalled();
+      openNotebook({ ...notebook, type: 'jupyter' });
+      expect(setNotebookCookieMock).not.toHaveBeenCalled();
+      expect(openNotebookMock).toHaveBeenCalledTimes(1);
+      expect(openNotebookMock).toBeCalledWith('expectedUrl/tree/?token=expectedToken');
     });
   });
 });
