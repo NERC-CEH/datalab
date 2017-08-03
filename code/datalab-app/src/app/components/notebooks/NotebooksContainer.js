@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import notebookActions from '../../actions/notebookActions';
 import NotebookButton from './NotebookButton';
+import { JUPYTER, ZEPPELIN } from '../../../shared/notebookTypes';
 
 class NotebooksContainer extends Component {
   constructor(props, context) {
@@ -17,11 +18,11 @@ class NotebooksContainer extends Component {
   openNotebook(notebook) {
     let notebookUrl = notebook.url;
 
-    if (notebook.type === 'zeppelin') {
+    if (notebook.type === ZEPPELIN) {
       this.props.actions.setNotebookCookie(notebook.url, notebook.token);
     }
 
-    if (notebook.type === 'jupyter') {
+    if (notebook.type === JUPYTER) {
       notebookUrl = `${notebook.url}/tree/?token=${notebook.token}`;
     }
 
