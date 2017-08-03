@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
 
 const NotebookButton = ({ notebook, openNotebookAction }) => (
-  <Button primary onClick={() => openNotebookAction(notebook.url, notebook.token)} >
-    {notebook.name}
+  <Button primary onClick={() => openNotebookAction(notebook)} >
+    {notebook.displayName}
   </Button>
 );
 

@@ -6,15 +6,27 @@ import notebookActions from '../../actions/notebookActions';
 import NotebookButton from './NotebookButton';
 
 class NotebooksContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.openNotebook = this.openNotebook.bind(this);
+  }
   componentWillMount() {
     this.props.actions.loadNotebooks();
+  }
+
+  openNotebook(notebook) {
+    if (notebook.type === 'zeppelin') {
+      this.props.actions.openNotebook(notebook.url, notebook.token);
+    } else if (notebook.type === 'jupyter') {
+      window.open(`${notebook.url}/tree/?token=${notebook.token}`);
+    }
   }
 
   render() {
     return (
       <div>
         { this.props.notebooks.value.map((notebook, index) => (
-          <NotebookButton key={index} notebook={notebook} openNotebookAction={this.props.actions.openNotebook} />
+          <NotebookButton key={index} notebook={notebook} openNotebookAction={this.openNotebook} />
         ))}
       </div>
     );
