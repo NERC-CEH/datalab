@@ -4,16 +4,22 @@ import { findLast } from 'lodash';
 import vault from './vault/vault';
 import { JUPYTER, ZEPPELIN } from '../../shared/notebookTypes';
 
-export default function notebookTokenService(notebook, user) {
+export default function notebookUrlService(notebook, user) {
   if (notebook.type === ZEPPELIN) {
-    return requestZeppelinCookie(notebook, user);
+    return requestZeppelinToken(notebook, user)
+      .then(createZeppelinUrl(notebook));
   } else if (notebook.type === JUPYTER) {
-    return requestJupyterToken(notebook, user);
+    return requestJupyterToken(notebook, user)
+      .then(createJupyterUrl(notebook));
   }
   return undefined;
 }
 
-export function requestZeppelinCookie(notebook, user) {
+const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
+
+const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?token=${token}` : undefined);
+
+function requestZeppelinToken(notebook, user) {
   return vault.requestNotebookKeys('datalab', notebook)
     .then(zeppelinLogin(notebook))
     .catch((error) => {

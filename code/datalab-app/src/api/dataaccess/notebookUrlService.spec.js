@@ -1,6 +1,6 @@
 import moxios from 'moxios';
 import logger from 'winston';
-import notebookTokenService from './notebookTokenService';
+import notebookUrlService from './notebookUrlService';
 import vault from './vault/vault';
 
 jest.mock('winston');
@@ -17,11 +17,12 @@ afterEach(() => {
   logger.clearMessages();
 });
 
-describe('notebookTokenService', () => {
+describe('notebookUrlService', () => {
   describe('processes zeppelin notebooks', () => {
     const notebook = {
       name: 'Zeppelin',
       type: 'zeppelin',
+      url: 'http://zeppelin.datalab',
       internalEndpoint: 'http://zeppelin',
     };
     const loginUrl = `${notebook.internalEndpoint}/api/login`;
@@ -38,16 +39,16 @@ describe('notebookTokenService', () => {
         headers: getSuccessfulLoginResponse(),
       });
 
-      return notebookTokenService(notebook, 'user')
-        .then((token) => {
-          expect(token).toEqual('8214bf3f-3988-45f2-a33c-58d4be09f02b');
+      return notebookUrlService(notebook, 'user')
+        .then((url) => {
+          expect(url).toEqual('http://zeppelin.datalab/connect?token=8214bf3f-3988-45f2-a33c-58d4be09f02b');
         });
     });
 
     it('to return undefined and log error if keys are not returned', () => {
       vaultMock.mockImplementationOnce(() => (Promise.resolve({})));
 
-      return notebookTokenService(notebook, 'user')
+      return notebookUrlService(notebook, 'user')
         .then((token) => {
           expect(token).toBeUndefined();
           expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -65,7 +66,7 @@ describe('notebookTokenService', () => {
         response: getFailedLoginResponse(),
       });
 
-      return notebookTokenService(notebook, 'user')
+      return notebookUrlService(notebook, 'user')
         .then((token) => {
           expect(token).toBeUndefined();
           expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -77,6 +78,7 @@ describe('notebookTokenService', () => {
     const notebook = {
       name: 'Jupyter',
       type: 'jupyter',
+      url: 'http://jupyter.datalab',
       internalEndpoint: 'http://jupyter',
     };
     const loginUrl = `${notebook.internalEndpoint}/api/login`;
@@ -91,9 +93,9 @@ describe('notebookTokenService', () => {
         response: { message: 'message' },
       });
 
-      return notebookTokenService(notebook, 'user')
-        .then((token) => {
-          expect(token).toEqual('expectedToken');
+      return notebookUrlService(notebook, 'user')
+        .then((url) => {
+          expect(url).toEqual('http://jupyter.datalab/tree/?token=expectedToken');
         });
     });
 
@@ -107,7 +109,7 @@ describe('notebookTokenService', () => {
         response: { message: 'message' },
       });
 
-      return notebookTokenService(notebook, 'user')
+      return notebookUrlService(notebook, 'user')
         .then((token) => {
           expect(token).toBeUndefined();
         });
