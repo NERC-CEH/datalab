@@ -8,7 +8,7 @@ Array [
     "internalEndpoint": "http://zeppelin-service",
     "name": "zeppelin",
     "type": "zeppelin",
-    "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
+    "url": "https://datalab-zeppelin.datalabs.nerc.ac.uk",
   },
   Object {
     "displayName": "Jupyter",
@@ -16,7 +16,7 @@ Array [
     "internalEndpoint": "http://jupyter-service",
     "name": "jupyter",
     "type": "jupyter",
-    "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
+    "url": "https://datalab-jupyter.datalabs.nerc.ac.uk",
   },
 ]
 `;
