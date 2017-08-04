@@ -80,8 +80,6 @@ describe('NotebooksContainer', () => {
       ],
     };
 
-    const openNotebookMock = jest.fn();
-
     const generateProps = () => ({
       notebooks,
       actions: {
