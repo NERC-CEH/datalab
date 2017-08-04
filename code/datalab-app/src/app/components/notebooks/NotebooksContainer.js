@@ -3,28 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import notebookActions from '../../actions/notebookActions';
-import NotebookButton from './NotebookButton';
+import NotebookCards from './NotebookCards';
 
 class NotebooksContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.openNotebook = this.openNotebook.bind(this);
-  }
   componentWillMount() {
     this.props.actions.loadNotebooks();
   }
 
-  openNotebook(notebook) {
-    this.props.actions.openNotebook(notebook.redirectUrl);
-  }
-
   render() {
     return (
-      <div>
-        { this.props.notebooks.value.map((notebook, index) => (
-          <NotebookButton key={index} notebook={notebook} openNotebook={this.openNotebook} />
-        ))}
-      </div>
+      <NotebookCards notebooks={this.props.notebooks.value} openNotebook={this.props.actions.openNotebook} />
     );
   }
 }
