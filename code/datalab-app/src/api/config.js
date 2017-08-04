@@ -31,12 +31,6 @@ const config = convict({
     default: 'undefinedrole',
     env: 'VAULT_APP_ROLE',
   },
-  connectPort: {
-    doc: 'The port for the connect endpoint',
-    format: 'port',
-    default: 8001,
-    env: 'CONNECT_PORT',
-  },
 });
 
 export default config;

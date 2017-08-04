@@ -7,10 +7,8 @@ import authMiddleware from './auth/authMiddleware';
 import schema from './schema/index';
 import config from './config';
 import status from './status';
-import connect from './connect';
 
 const port = config.get('apiPort');
-const connectPort = config.get('connectPort');
 
 const api = graphqlExpress(request => ({ schema, context: { user: request.user } }));
 const graphiql = graphiqlExpress({ endpointURL: '/graphiqlApi' });
@@ -31,5 +29,3 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.listen(port, () => logger.info(`App listening on port ${port}.`));
-
-connect.configureConnectEndpoint(['set'], connectPort);
