@@ -4,7 +4,7 @@
     "name": "zeppelin",
     "displayName": "Zeppelin",
     "type": "zeppelin",
-    "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
+    "url": "https://datalab-zeppelin.datalabs.nerc.ac.uk",
     "internalEndpoint": "http://zeppelin-service"
   },
   {
@@ -12,7 +12,7 @@
     "name": "jupyter",
     "displayName": "Jupyter",
     "type": "jupyter",
-    "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
+    "url": "https://datalab-jupyter.datalabs.nerc.ac.uk",
     "internalEndpoint": "http://jupyter-service"
   }
 ]
