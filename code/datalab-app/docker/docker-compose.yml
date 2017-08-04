@@ -43,7 +43,7 @@ services:
   jupyter:
     image: jupyter/base-notebook:b4dd11e16ae4
     ports:
-      - "8888:8888"
+      - 8888:8888
     command:
       - start-notebook.sh
       - --NotebookApp.token=jupyterToken
@@ -58,3 +58,5 @@ services:
 
   zeppelin-connect:
     image: nerc/zeppelin-connect
+    ports:
+      - 8083:8000

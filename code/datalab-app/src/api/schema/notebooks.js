@@ -5,7 +5,7 @@ import {
   GraphQLString,
 } from 'graphql';
 import notebookRepository from '../dataaccess/notebookRepository';
-import notebookTokenService from '../dataaccess/notebookTokenService';
+import notebookUrlService from '../dataaccess/notebookUrlService';
 
 const NotebookType = new GraphQLObjectType({
   name: 'Notebook',
@@ -29,9 +29,9 @@ const NotebookType = new GraphQLObjectType({
     internalEndpoint: {
       type: GraphQLString,
     },
-    token: {
+    redirectUrl: {
       type: GraphQLString,
-      resolve: (obj, args, { user }) => notebookTokenService(obj, user),
+      resolve: (obj, args, { user }) => notebookUrlService(obj, user),
     },
   },
 });

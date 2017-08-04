@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`notebookTokenService processes zeppelin notebooks to return undefined and log error if keys are not returned 1`] = `
+exports[`notebookUrlService processes zeppelin notebooks to return undefined and log error if keys are not returned 1`] = `
 Array [
   Object {
     "data": "Zeppelin",
@@ -10,7 +10,7 @@ Array [
 ]
 `;
 
-exports[`notebookTokenService processes zeppelin notebooks to return undefined and log error if login fails 1`] = `
+exports[`notebookUrlService processes zeppelin notebooks to return undefined and log error if login fails 1`] = `
 Array [
   Object {
     "data": "Zeppelin",

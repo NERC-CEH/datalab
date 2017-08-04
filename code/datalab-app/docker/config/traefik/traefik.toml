@@ -27,8 +27,12 @@ address = ":8080"
     weight = 1
   [backends.zeppelin-connect]
     [backends.zeppelin-connect.servers.server1]
-    url = "http://10.1.24.75:8003"
+    url = "http://zeppelin-connect:8000"
     weight = 1
+  [backends.jupyter]
+      [backends.jupyter.servers.server1]
+      url = "http://jupyter:8888"
+      weight = 1
 
 [frontends]
   [frontends.files]
@@ -47,3 +51,7 @@ address = ":8080"
   backend = "zeppelin-connect"
     [frontends.zeppelin-connect.routes.test_1]
     rule = "Host:testlab-zeppelin.datalabs.local;Path:/connect/;PathStrip:/connect/"
+  [frontends.jupyter]
+    backend = "jupyter"
+      [frontends.jupyter.routes.test_1]
+      rule = "Host:testlab-jupyter.datalabs.local"
