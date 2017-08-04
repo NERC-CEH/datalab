@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "zeppelin",
-    "displayName": "Zeppelin",
+    "displayName": "Land Cover Map",
     "type": "zeppelin",
     "url": "http://datalab-zeppelin.datalabs.nerc.ac.uk",
     "internalEndpoint": "http://zeppelin-service"
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "name": "jupyter",
-    "displayName": "Jupyter",
+    "displayName": "Biodiversity",
     "type": "jupyter",
     "url": "http://datalab-jupyter.datalabs.nerc.ac.uk",
     "internalEndpoint": "http://jupyter-service"
