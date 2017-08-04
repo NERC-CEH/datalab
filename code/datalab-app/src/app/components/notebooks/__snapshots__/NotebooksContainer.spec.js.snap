@@ -1,28 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotebooksContainer is a container which passes correct props to NotebookButton 1`] = `
-<div>
-  <NotebookButton
-    notebook={
+exports[`NotebooksContainer is a container which passes correct props to NotebookCards 1`] = `
+<NotebookCards
+  notebooks={
+    Array [
       Object {
-        "displayName": "name1",
-        "token": "token1",
-        "type": "type1",
-        "url": "url1",
-      }
-    }
-    openNotebook={[Function]}
-  />
-  <NotebookButton
-    notebook={
+        "prop": "prop1",
+      },
       Object {
-        "displayName": "name2",
-        "token": "token2",
-        "type": "type2",
-        "url": "url2",
-      }
-    }
-    openNotebook={[Function]}
-  />
-</div>
+        "prop": "prop2",
+      },
+    ]
+  }
+  openNotebook={[Function]}
+/>
 `;

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = `
+<CardGroup>
+  <NotebookCard
+    notebook={
+      Object {
+        "displayName": "name1",
+        "redirectUrl": "url1",
+        "type": "type1",
+      }
+    }
+    openNotebook={[Function]}
+  />
+  <NotebookCard
+    notebook={
+      Object {
+        "displayName": "name2",
+        "redirectUrl": "url2",
+        "type": "type2",
+      }
+    }
+    openNotebook={[Function]}
+  />
+  <NotebookCard
+    notebook={
+      Object {
+        "displayName": "name3",
+        "redirectUrl": "url3",
+        "type": "type3",
+      }
+    }
+    openNotebook={[Function]}
+  />
+</CardGroup>
+`;
+
+exports[`NotebookCards creates correct snapshot for an empty array 1`] = `<CardGroup />`;

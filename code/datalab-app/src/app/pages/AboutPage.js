@@ -1,9 +1,9 @@
 import React from 'react';
 import { Divider, Header, Image, Segment } from 'semantic-ui-react';
 import NavBar from '../components/welcome/NavBar';
-import cegLogo from '../../assests/images/ceh_logo.svg';
-import nercLogo from '../../assests/images/nerc-logo.svg';
-import tessellaLogo from '../../assests/images/tessella_logo.svg';
+import cegLogo from '../../assets/images/ceh_logo.svg';
+import nercLogo from '../../assets/images/nerc-logo.svg';
+import tessellaLogo from '../../assets/images/tessella_logo.svg';
 
 const AboutPage = () => (
   <div>

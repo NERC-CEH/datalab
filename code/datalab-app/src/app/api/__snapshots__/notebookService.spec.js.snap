@@ -5,7 +5,7 @@ Array [
   Array [
     "http://localhost:8000/api",
     Object {
-      "query": "{ notebooks { displayName type url redirectUrl } }",
+      "query": "{ notebooks { displayName type redirectUrl } }",
     },
   ],
 ]
