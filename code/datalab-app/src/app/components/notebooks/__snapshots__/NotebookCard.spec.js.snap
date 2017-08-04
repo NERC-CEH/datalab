@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebookCard creates correct snapshot for Jupyer notebook type 1`] = `
+<Card>
+  <CardContent>
+    <Image
+      as="img"
+      floated="right"
+      size="tiny"
+      src="jupyter-logo.svg"
+      ui={true}
+    />
+    <CardHeader>
+      name1
+    </CardHeader>
+    <CardMeta>
+      Jupyter
+    </CardMeta>
+    <CardDescription>
+      Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+    </CardDescription>
+  </CardContent>
+  <CardContent
+    extra={true}
+  >
+    <Button
+      as="button"
+      fluid={true}
+      onClick={[Function]}
+      primary={true}
+    >
+      Open
+    </Button>
+  </CardContent>
+</Card>
+`;
+
+exports[`NotebookCard creates correct snapshot for Zeppelin notebook type 1`] = `
+<Card>
+  <CardContent>
+    <Image
+      as="img"
+      floated="right"
+      size="tiny"
+      src="zeppelin-logo.svg"
+      ui={true}
+    />
+    <CardHeader>
+      name1
+    </CardHeader>
+    <CardMeta>
+      Zeppelin
+    </CardMeta>
+    <CardDescription>
+      Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
+    </CardDescription>
+  </CardContent>
+  <CardContent
+    extra={true}
+  >
+    <Button
+      as="button"
+      fluid={true}
+      onClick={[Function]}
+      primary={true}
+    >
+      Open
+    </Button>
+  </CardContent>
+</Card>
+`;
