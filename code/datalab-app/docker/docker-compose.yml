@@ -11,7 +11,7 @@ services:
   vault:
     image: 'vault'
     ports:
-      - '8200:8200'
+      - 8200:8200
     command:
       - server
       - -dev
@@ -23,7 +23,7 @@ services:
   minio:
     image: minio/minio
     ports:
-      - "9000:9000"
+      - 9000:9000
     volumes:
       - /tmp/minio/data:/export
     command:
@@ -36,7 +36,7 @@ services:
   zeppelin:
     image: nerc/zeppelin:0.7.2
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
       - ${PWD}/config/zeppelin/shiro.ini:/opt/zeppelin/conf/shiro.ini
 
@@ -47,3 +47,14 @@ services:
     command:
       - start-notebook.sh
       - --NotebookApp.token=jupyterToken
+
+  minio-connect:
+    image: nerc/connect:latest
+    ports:
+      - 9001:80
+    environment:
+      ORIGIN: minio.docker.localhost
+      ACTIONS: "['set']"
+
+  zeppelin-connect:
+    image: nerc/zeppelin-connect

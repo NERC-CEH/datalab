@@ -1,7 +1,7 @@
 # traefik.toml
 logLevel = "DEBUG"
 accessLogsFile = "/logs/access.log"
-defaultEntryPoints = ["http"]
+defaultEntryPoints = ["http", "https"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
@@ -19,15 +19,31 @@ address = ":8080"
     weight = 1
   [backends.files-connect]
     [backends.files-connect.servers.server1]
-    url = "http://10.1.24.116:8001"
+    url = "http://minio-connect"
+    weight = 1
+  [backends.zeppelin]
+    [backends.zeppelin.servers.server1]
+    url = "http://zeppelin:8080"
+    weight = 1
+  [backends.zeppelin-connect]
+    [backends.zeppelin-connect.servers.server1]
+    url = "http://10.1.24.75:8003"
     weight = 1
 
 [frontends]
   [frontends.files]
   backend = "files"
     [frontends.files.routes.test_1]
-    rule = "Host:localhost"
+    rule = "Host:testlab-files.datalabs.local"
   [frontends.files-connect]
   backend = "files-connect"
     [frontends.files-connect.routes.test_1]
-    rule = "Host:localhost;Path:/connect/;PathStrip:/connect/"
+    rule = "Host:testlab-files.datalabs.local;Path:/connect/;PathStrip:/connect/"
+  [frontends.zeppelin]
+  backend = "zeppelin"
+    [frontends.zeppelin.routes.test_1]
+    rule = "Host:testlab-zeppelin.datalabs.local"
+  [frontends.zeppelin-connect]
+  backend = "zeppelin-connect"
+    [frontends.zeppelin-connect.routes.test_1]
+    rule = "Host:testlab-zeppelin.datalabs.local;Path:/connect/;PathStrip:/connect/"
