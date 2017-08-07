@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dataStorageActions from '../../actions/dataStorageActions';
 import DataStorageTable from './DataStorageTable';
+import PromisedContentWrapper from '../common/PromisedContentWrapper';
 
 class DataStorageTableContainer extends Component {
   componentWillMount() {
@@ -12,9 +13,11 @@ class DataStorageTableContainer extends Component {
 
   render() {
     return (
-      <DataStorageTable
-        dataStorage={this.props.dataStorage.value}
-        openStorageAction={this.props.actions.openMinioDataStore} />
+      <PromisedContentWrapper promise={this.props.dataStorage}>
+        <DataStorageTable
+          dataStorage={this.props.dataStorage.value}
+          openStorageAction={this.props.actions.openMinioDataStore} />
+      </PromisedContentWrapper>
     );
   }
 }
