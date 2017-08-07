@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Loader } from 'semantic-ui-react';
 
 const PromisedContentWrapper = ({ children, promise }) => {
-  const isFetching = checkIfFetching(promise);
+  const isFetching = promise.fetching;
   return (
     <div>
-      <Loader active={isFetching !== undefined} inline='centered' />
+      <Loader active={isFetching} inline='centered' />
       {isFetching ? null : children}
     </div>
   );
@@ -20,12 +20,5 @@ PromisedContentWrapper.propTypes = {
     value: PropTypes.any.isRequired,
   }).isRequired,
 };
-
-function checkIfFetching({ fetching }) {
-  if (fetching) {
-    return 'LOADING';
-  }
-  return undefined;
-}
 
 export default PromisedContentWrapper;
