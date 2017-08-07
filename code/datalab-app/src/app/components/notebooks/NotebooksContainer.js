@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import notebookActions from '../../actions/notebookActions';
 import NotebookCards from './NotebookCards';
+import PromisedContentWrapper from '../common/PromisedContentWrapper';
 
 class NotebooksContainer extends Component {
   componentWillMount() {
@@ -12,7 +13,11 @@ class NotebooksContainer extends Component {
 
   render() {
     return (
-      <NotebookCards notebooks={this.props.notebooks.value} openNotebook={this.props.actions.openNotebook} />
+      <PromisedContentWrapper promise={this.props.notebooks}>
+        <NotebookCards
+          notebooks={this.props.notebooks.value}
+          openNotebook={this.props.actions.openNotebook} />
+      </PromisedContentWrapper>
     );
   }
 }
