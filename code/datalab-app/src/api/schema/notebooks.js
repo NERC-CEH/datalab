@@ -1,6 +1,7 @@
 import {
   GraphQLInt,
   GraphQLList,
+  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
@@ -36,8 +37,19 @@ const NotebookType = new GraphQLObjectType({
   },
 });
 
-export default {
+export const notebooks = {
   description: 'List of currently provisioned DataLabs Notebooks.',
   type: new GraphQLList(NotebookType),
   resolve: (obj, args, { user }) => notebookRepository.getAll(user),
+};
+
+export const notebook = {
+  description: 'Details of a single currently provisioned DataLab Notebook.',
+  type: NotebookType,
+  args: {
+    id: {
+      type: new GraphQLNonNull(GraphQLInt),
+    },
+  },
+  resolve: (obj, { id }, { user }) => notebookRepository.getById(user, id),
 };
