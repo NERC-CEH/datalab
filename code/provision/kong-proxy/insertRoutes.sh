@@ -28,12 +28,12 @@ curl -i -X POST \
   --data 'upstream_url=http://192.168.3.6:32441' \
   --data 'https_only=true'
 
-# jupyter - 30810
+# jupyter - 30329
 curl -i -X POST \
   --url http://localhost:8001/apis \
   --data 'name=datalab-jupyter' \
   --data 'hosts=datalab-jupyter.datalabs.nerc.ac.uk' \
-  --data 'upstream_url=http://192.168.3.6:30810' \
+  --data 'upstream_url=http://192.168.3.6:30329' \
   --data 'preserve_host=true' \
   --data 'https_only=true'
 
