@@ -1,0 +1,26 @@
+version: '3'
+services:
+  kong-database:
+    image: postgres:9.4
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER=kong
+      - POSTGRES_DB=kong
+
+  kong:
+    image: kong:latest
+    restart: always
+    links:
+      - kong-database:kong-database
+    ports:
+      - 80:8000
+      - 443:8443
+      - 8001:8001
+    expose:
+      - 7946
+      - 7946/udp
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+
