@@ -50,4 +50,58 @@ describe('notebookService', () => {
       output.catch(response => expect(response).toBe('expectedBadRequest'));
     });
   });
+
+  describe('getUrl', () => {
+    it('should submit a post request for the url and unpack response', () => {
+      // Arrange
+      const postMock = jest.fn()
+        .mockReturnValue(createResolvedResponse({ notebook: { redirectUrl: 'expectedUrl' } }));
+      axios.post = postMock;
+
+      // Act
+      const output = notebookService.getUrl(1);
+
+      // Assert
+      output.then(response => expect(response.redirectUrl).toBe('expectedUrl'));
+    });
+
+    it('should throw an error if returned Url is missing', () => {
+      // Arrange
+      const postMock = jest.fn()
+        .mockReturnValue(createResolvedResponse({ notebook: { redirectUrl: null } }));
+      axios.post = postMock;
+
+      // Act
+      const output = notebookService.getUrl(1);
+
+      // Assert
+      output.catch(response => expect(response).toMatchSnapshot());
+    });
+
+    it('calls request with correct body', () => {
+      // Arrange
+      const postMock = jest.fn()
+        .mockReturnValue(createResolvedResponse({ notebook: { redirectUrl: 'expectedUrl' } }));
+      axios.post = postMock;
+
+      // Act
+      notebookService.getUrl(1);
+
+      // Assert
+      expect(postMock.mock.calls).toMatchSnapshot();
+    });
+
+    it('should throw error if post fails', () => {
+      // Arrange
+      const postMock = jest.fn()
+        .mockReturnValue(createRejectedResponse('expectedBadRequest'));
+      axios.post = postMock;
+
+      // Act
+      const output = notebookService.getUrl(1);
+
+      // Assert
+      output.catch(response => expect(response).toBe('expectedBadRequest'));
+    });
+  });
 });

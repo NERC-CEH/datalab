@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import NotebooksContainer, { PureNotebooksContainer } from './NotebooksContainer';
 import notebookService from '../../api/notebookService';
+import notify from '../common/notify';
 
 jest.mock('../../api/notebookService');
 const loadNotebooksMock = jest.fn().mockReturnValue('expectedPayload');
@@ -80,12 +81,15 @@ describe('NotebooksContainer', () => {
       ],
     };
 
+    const generateActions = () => ({
+      loadNotebooks: loadNotebooksMock,
+      getUrl: () => {},
+      openNotebook: () => {},
+    });
+
     const generateProps = () => ({
       notebooks,
-      actions: {
-        loadNotebooks: loadNotebooksMock,
-        openNotebook: () => {},
-      },
+      actions: generateActions(),
     });
 
     beforeEach(() => jest.resetAllMocks());
@@ -107,6 +111,67 @@ describe('NotebooksContainer', () => {
 
       // Act
       expect(shallowRenderPure(props)).toMatchSnapshot();
+    });
+
+    it('openNotebook method calls openNotebook action on resolved getUrl', () => {
+      // Arrange
+      const getUrlMock = jest.fn()
+        .mockReturnValue(Promise.resolve({ value: { redirectUrl: 'expectedUrl' } }));
+
+      const openNotebookMock = jest.fn();
+
+      const props = {
+        ...generateProps(),
+        actions: {
+          ...generateActions(),
+          getUrl: getUrlMock,
+          openNotebook: openNotebookMock,
+        },
+      };
+
+      const output = shallowRenderPure(props);
+      const openNotebook = output.childAt(0).prop('openNotebook');
+
+      // Act/Assert
+      expect(getUrlMock).not.toHaveBeenCalled();
+      expect(openNotebookMock).not.toHaveBeenCalled();
+      openNotebook(1000).then(() => {
+        expect(getUrlMock).toHaveBeenCalledTimes(1);
+        expect(getUrlMock).toHaveBeenCalledWith(1000);
+        expect(openNotebookMock).toHaveBeenCalledTimes(1);
+        expect(openNotebookMock).toHaveBeenCalledWith('expectedUrl');
+      });
+    });
+
+    it('openNotebook method calls toastr  on resolved getUrl', () => {
+      // Arrange
+      jest.mock('../common/notify');
+      const toastrErrorMock = jest.fn();
+      notify.error = toastrErrorMock;
+
+      const getUrlMock = jest.fn()
+        .mockReturnValue(Promise.reject('no url'));
+
+      const props = {
+        ...generateProps(),
+        actions: {
+          ...generateActions(),
+          getUrl: getUrlMock,
+        },
+      };
+
+      const output = shallowRenderPure(props);
+      const openNotebook = output.childAt(0).prop('openNotebook');
+
+      // Act/Assert
+      expect(getUrlMock).not.toHaveBeenCalled();
+      expect(toastrErrorMock).not.toHaveBeenCalled();
+      openNotebook(1000).then(() => {
+        expect(getUrlMock).toHaveBeenCalledTimes(1);
+        expect(getUrlMock).toHaveBeenCalledWith(1000);
+        expect(toastrErrorMock).toHaveBeenCalledTimes(1);
+        expect(toastrErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
+      });
     });
   });
 });

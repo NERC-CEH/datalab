@@ -20,3 +20,5 @@ Array [
   },
 ]
 `;
+
+exports[`notebookRepository getById returns expected snapshot 1`] = `undefined`;
