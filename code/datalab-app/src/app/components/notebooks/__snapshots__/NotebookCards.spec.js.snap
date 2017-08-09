@@ -6,7 +6,7 @@ exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = 
     notebook={
       Object {
         "displayName": "name1",
-        "redirectUrl": "url1",
+        "id": 1,
         "type": "type1",
       }
     }
@@ -16,7 +16,7 @@ exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = 
     notebook={
       Object {
         "displayName": "name2",
-        "redirectUrl": "url2",
+        "id": 2,
         "type": "type2",
       }
     }
@@ -26,7 +26,7 @@ exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = 
     notebook={
       Object {
         "displayName": "name3",
-        "redirectUrl": "url3",
+        "id": 3,
         "type": "type3",
       }
     }

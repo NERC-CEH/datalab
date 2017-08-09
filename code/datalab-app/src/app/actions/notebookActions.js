@@ -1,7 +1,7 @@
 import notebookService from '../api/notebookService';
 
 export const LOAD_NOTEBOOKS_ACTION = 'LOAD_NOTEBOOKS';
-export const LOAD_NOTEBOOK_ACTION = 'LOAD_NOTEBOOK';
+export const GET_NOTEBOOK_URL_ACTION = 'GET_NOTEBOOK_URL';
 export const OPEN_NOTEBOOK_ACTION = 'OPEN_NOTEBOOK';
 
 const loadNotebooks = () => ({
@@ -10,7 +10,7 @@ const loadNotebooks = () => ({
 });
 
 const getUrl = id => ({
-  type: LOAD_NOTEBOOK_ACTION,
+  type: GET_NOTEBOOK_URL_ACTION,
   payload: notebookService.getUrl(id),
 });
 

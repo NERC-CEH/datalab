@@ -1,6 +1,6 @@
 import notebookActions, {
   LOAD_NOTEBOOKS_ACTION,
-  LOAD_NOTEBOOK_ACTION,
+  GET_NOTEBOOK_URL_ACTION,
   OPEN_NOTEBOOK_ACTION,
 } from './notebookActions';
 import notebookService from '../api/notebookService';
@@ -35,7 +35,7 @@ describe('notebookActions', () => {
 
       // Assert
       expect(getUrlMock).toHaveBeenCalledTimes(1);
-      expect(output.type).toBe('LOAD_NOTEBOOK');
+      expect(output.type).toBe('GET_NOTEBOOK_URL');
       expect(output.payload).toBe('expectedUrlPayload');
     });
 
@@ -56,8 +56,8 @@ describe('notebookActions', () => {
       expect(LOAD_NOTEBOOKS_ACTION).toBe('LOAD_NOTEBOOKS');
     });
 
-    it('LOAD_NOTEBOOK_ACTION', () => {
-      expect(LOAD_NOTEBOOK_ACTION).toBe('LOAD_NOTEBOOK');
+    it('GET_NOTEBOOK_URL_ACTION', () => {
+      expect(GET_NOTEBOOK_URL_ACTION).toBe('GET_NOTEBOOK_URL');
     });
 
     it('OPEN_NOTEBOOK_ACTION', () => {
