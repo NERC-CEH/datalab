@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import notebookActions from '../../actions/notebookActions';
 import NotebookCards from './NotebookCards';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
+import notify from '../common/notify';
 
 class NotebooksContainer extends Component {
   constructor(props, context) {
@@ -13,9 +14,9 @@ class NotebooksContainer extends Component {
   }
 
   openNotebook(id) {
-    this.props.actions.getUrl(id)
+    return this.props.actions.getUrl(id)
       .then(payload => this.props.actions.openNotebook(payload.value.redirectUrl))
-      .catch(err => console.log(err.message, 'error'));
+      .catch(err => notify.error('Unable to open Notebook'));
   }
 
   componentWillMount() {
