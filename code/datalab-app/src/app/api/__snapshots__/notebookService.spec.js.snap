@@ -1,11 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`notebookService getUrl calls request with correct body 1`] = `
+Array [
+  Array [
+    "http://localhost:8000/api",
+    Object {
+      "query": "{ notebook(id: 1) { redirectUrl } }",
+    },
+  ],
+]
+`;
+
+exports[`notebookService getUrl should throw an error if returned Url is missing 1`] = `[Error: Missing notebook URL]`;
+
 exports[`notebookService loadNotebooks call submits post request with correct body 1`] = `
 Array [
   Array [
     "http://localhost:8000/api",
     Object {
-      "query": "{ notebooks { displayName type redirectUrl } }",
+      "query": "{ notebooks { id, displayName, type } }",
     },
   ],
 ]

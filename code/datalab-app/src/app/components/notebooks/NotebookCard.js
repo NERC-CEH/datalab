@@ -22,7 +22,7 @@ const NotebookCard = ({ notebook, openNotebook }) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Button primary fluid onClick={() => openNotebook(notebook.redirectUrl)}>
+        <Button primary fluid onClick={() => openNotebook(notebook.id)}>
           Open
         </Button>
       </Card.Content>
@@ -32,8 +32,8 @@ const NotebookCard = ({ notebook, openNotebook }) => {
 
 NotebookCard.propTypes = {
   notebook: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     displayName: PropTypes.string.isRequired,
-    redirectUrl: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
   openNotebook: PropTypes.func.isRequired,

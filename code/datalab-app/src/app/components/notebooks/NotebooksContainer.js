@@ -5,8 +5,20 @@ import { bindActionCreators } from 'redux';
 import notebookActions from '../../actions/notebookActions';
 import NotebookCards from './NotebookCards';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
+import notify from '../common/notify';
 
 class NotebooksContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.openNotebook = this.openNotebook.bind(this);
+  }
+
+  openNotebook(id) {
+    return this.props.actions.getUrl(id)
+      .then(payload => this.props.actions.openNotebook(payload.value.redirectUrl))
+      .catch(err => notify.error('Unable to open Notebook'));
+  }
+
   componentWillMount() {
     this.props.actions.loadNotebooks();
   }
@@ -16,7 +28,7 @@ class NotebooksContainer extends Component {
       <PromisedContentWrapper promise={this.props.notebooks}>
         <NotebookCards
           notebooks={this.props.notebooks.value}
-          openNotebook={this.props.actions.openNotebook} />
+          openNotebook={this.openNotebook} />
       </PromisedContentWrapper>
     );
   }
@@ -30,6 +42,7 @@ NotebooksContainer.propTypes = {
   }).isRequired,
   actions: PropTypes.shape({
     loadNotebooks: PropTypes.func.isRequired,
+    getUrl: PropTypes.func.isRequired,
     openNotebook: PropTypes.func.isRequired,
   }).isRequired,
 };

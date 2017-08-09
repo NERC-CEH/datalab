@@ -1,12 +1,13 @@
 import notebookActions, {
   LOAD_NOTEBOOKS_ACTION,
+  LOAD_NOTEBOOK_ACTION,
   OPEN_NOTEBOOK_ACTION,
 } from './notebookActions';
 import notebookService from '../api/notebookService';
 
 jest.mock('../api/notebookService');
 
-describe('dataStorageActions', () => {
+describe('notebookActions', () => {
   beforeEach(() => jest.resetAllMocks());
 
   describe('calls correct service for', () => {
@@ -24,6 +25,20 @@ describe('dataStorageActions', () => {
       expect(output.payload).toBe('expectedNotebooksPayload');
     });
 
+    it('getUrl', () => {
+      // Arrange
+      const getUrlMock = jest.fn().mockReturnValue('expectedUrlPayload');
+      notebookService.getUrl = getUrlMock;
+
+      // Act
+      const output = notebookActions.getUrl();
+
+      // Assert
+      expect(getUrlMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe('LOAD_NOTEBOOK');
+      expect(output.payload).toBe('expectedUrlPayload');
+    });
+
     it('openNotebook', () => {
       // Arrange
       global.open = jest.fn();
@@ -39,6 +54,10 @@ describe('dataStorageActions', () => {
   describe('exports correct values for', () => {
     it('LOAD_NOTEBOOKS_ACTION', () => {
       expect(LOAD_NOTEBOOKS_ACTION).toBe('LOAD_NOTEBOOKS');
+    });
+
+    it('LOAD_NOTEBOOK_ACTION', () => {
+      expect(LOAD_NOTEBOOK_ACTION).toBe('LOAD_NOTEBOOK');
     });
 
     it('OPEN_NOTEBOOK_ACTION', () => {

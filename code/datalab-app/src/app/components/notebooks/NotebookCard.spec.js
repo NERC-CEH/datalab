@@ -11,8 +11,8 @@ describe('NotebookCard', () => {
 
   const generateProps = type => ({
     notebook: {
+      id: 100,
       displayName: 'name1',
-      redirectUrl: 'url1',
       type,
     },
     openNotebook: openNotebookMock,
@@ -54,6 +54,6 @@ describe('NotebookCard', () => {
     expect(openNotebookMock).not.toHaveBeenCalled();
     onClick();
     expect(openNotebookMock).toHaveBeenCalledTimes(1);
-    expect(openNotebookMock).toHaveBeenCalledWith('url1');
+    expect(openNotebookMock).toHaveBeenCalledWith(100);
   });
 });

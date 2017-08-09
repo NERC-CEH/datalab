@@ -16,7 +16,7 @@ engines:
     config:
       languages:
         javascript:
-          mass_threshold: 70
+          mass_threshold: 125
     exclude_paths:
     - "**/**.spec.js"
   markdownlint:
