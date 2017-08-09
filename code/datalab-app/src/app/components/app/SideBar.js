@@ -20,17 +20,21 @@ const SideBar = ({ topBarStyle }) => (
         ]}
       />
       <SubMenu
-        menuTitle="Notebooks"
+        menuTitle="Analysis"
         menuItems={[
           { Component: NavLink,
             props: { className: 'item', to: '/notebooks', exact: true },
             children: 'Notebooks' },
+          { Component: Menu.Item,
+            props: { name: 'Dask', onClick: () => window.open('https://datalab-dask.datalabs.nerc.ac.uk/') } },
+          { Component: Menu.Item,
+            props: { name: 'Spark', onClick: () => window.open('https://datalab-spark.datalabs.nerc.ac.uk/') } },
         ]}
       />
       <Menu.Item
         header
         name="Help"
-        onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/', '_blank')}
+        onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/')}
       />
     </Menu>
   </div>
