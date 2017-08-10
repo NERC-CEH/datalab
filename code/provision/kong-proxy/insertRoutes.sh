@@ -2,7 +2,7 @@
 curl -i -X POST http://localhost:8001/certificates \
     -F "cert=@/etc/ssl/certs/datalabs.pem" \
     -F "key=@/etc/ssl/private/datalabskey.pem" \
-    -F "snis=datalab.datalabs.nerc.ac.uk,datalab-api.datalabs.nerc.ac.uk,datalab-docs.datalabs.nerc.ac.uk,datalab-minio.datalabs.nerc.ac.uk,datalab-jupyter.datalabs.nerc.ac.uk,datalab-zeppelin.datalabs.nerc.ac.uk,datalab-dask.datalabs.nerc.ac.uk"
+    -F "snis=datalab.datalabs.nerc.ac.uk,datalab-api.datalabs.nerc.ac.uk,datalab-docs.datalabs.nerc.ac.uk,datalab-minio.datalabs.nerc.ac.uk,datalab-jupyter.datalabs.nerc.ac.uk,datalab-zeppelin.datalabs.nerc.ac.uk,datalab-dask.datalabs.nerc.ac.uk,datalab-spark.datalabs.nerc.ac.uk"
 
 # api - 32706
 curl -i -X POST \
@@ -53,13 +53,22 @@ curl -i -X POST \
   --data 'upstream_url=http://192.168.3.6:32548' \
   --data 'https_only=true'
 
-# dask - 32168
+# dask - 30306
 curl -i -X POST \
   --url http://localhost:8001/apis \
   --data 'name=datalab-dask' \
   --data 'hosts=datalab-dask.datalabs.nerc.ac.uk' \
-  --data 'upstream_url=http://192.168.3.6:32168' \
+  --data 'upstream_url=http://192.168.3.6:30306' \
   --data 'https_only=true'
+
+# spark dashboard - 30318
+curl -i -X POST \
+  --url http://localhost:8001/apis \
+  --data 'name=datalab-spark' \
+  --data 'hosts=datalab-spark.datalabs.nerc.ac.uk' \
+  --data 'upstream_url=http://192.168.3.6:30318' \
+  --data 'https_only=true'
+
 
 # zeppelin-connect - 31947
 curl -i -X POST \
