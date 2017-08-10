@@ -55,9 +55,23 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
               "to": "/notebooks",
             },
           },
+          Object {
+            "Component": [Function],
+            "props": Object {
+              "name": "Dask",
+              "onClick": [Function],
+            },
+          },
+          Object {
+            "Component": [Function],
+            "props": Object {
+              "name": "Spark",
+              "onClick": [Function],
+            },
+          },
         ]
       }
-      menuTitle="Notebooks"
+      menuTitle="Analysis"
     />
     <MenuItem
       header={true}
