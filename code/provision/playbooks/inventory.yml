@@ -8,12 +8,14 @@ k8s-worker-4    ansible_host=192.168.3.10
 gluster-1       ansible_host=192.168.3.20
 gluster-2       ansible_host=192.168.3.21
 gluster-3       ansible_host=192.168.3.22
+test-proxy      ansible_host=192.168.3.30
 
 [bastions]
 bastion
 
 [proxy]
 external-proxy
+test-proxy
 
 [k8s-cluster]
 k8s-master
@@ -39,6 +41,4 @@ k8s-cluster
 gluster
 
 [new]
-gluster-1
-gluster-2
-gluster-3
+test-proxy

@@ -19,6 +19,11 @@ public_servers:
     internal_ip: "{{ external_proxy_internal_ip_address }}"
     cpus: 1
     memory: 4096
+  - name: test-proxy
+    public_ip: 192.171.139.118
+    internal_ip: "{{ test_proxy_internal_ip_address }}"
+    cpus: 1
+    memory: 4096
 
 k8s_master_ip: 192.168.3.6
 private_servers:
