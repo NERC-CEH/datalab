@@ -13,8 +13,10 @@ test-proxy      ansible_host=192.168.3.30
 [bastions]
 bastion
 
-[proxy]
+[prod-proxies]
 external-proxy
+
+[test-proxies]
 test-proxy
 
 [k8s-cluster]
@@ -36,7 +38,8 @@ gluster-2
 gluster-3
 
 [proxied:children]
-proxy
+prod-proxies
+test-proxies
 k8s-cluster
 gluster
 
