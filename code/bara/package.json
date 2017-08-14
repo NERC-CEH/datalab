@@ -6,7 +6,9 @@
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {
-    "kubernetes-client": "3.14.0",
+    "fs-extra-promise": "1.0.1",
+    "mustache": "2.3.0",
+    "yamljs": "0.3.0",
     "yargs": "8.0.2"
   },
   "devDependencies": {

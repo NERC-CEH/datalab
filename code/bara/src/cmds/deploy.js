@@ -1,4 +1,5 @@
 import yargs from 'yargs';
+import kubernetesService from '../kubernetes/kubernetesService';
 
 export const command = 'deploy [k8s_manifest]';
 export const describe = 'Deploy a kubernetes manifest';
@@ -10,7 +11,10 @@ export const builder = () => yargs.usage('Usage: $0 deploy -t <template> -c <con
   .alias('?', 'help')
   .argv;
 
-export const handler = (argv) => {
-  console.log(argv);
+export const handler = ({ template, config }) => {
+  console.log(`Using template: ${template}`);
+  console.log(`Using config: ${config}`);
+
+  kubernetesService(template, config);
 };
 
