@@ -25,3 +25,5 @@ code/docker/zeppelin/zeppelin-0\.7\.1-bin-all.tgz
 code/docker/zeppelin/zeppelin-0\.7\.2-bin-all.tgz
 
 code/bara/.bara/
+bara-*.tgz
+code/bara/lib/

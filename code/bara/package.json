@@ -5,6 +5,9 @@
   "main": "bara.js",
   "license": "GPL-3.0",
   "private": true,
+  "bin": {
+    "bara": "./lib/bara.js"
+  },
   "dependencies": {
     "chalk": "2.1.0",
     "del": "3.0.0",
@@ -27,6 +30,7 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "start": "babel-node src/bara.js"
+    "start": "babel-node src/bara.js",
+    "prepare": "./node_modules/.bin/babel src --out-dir lib"
   }
 }
