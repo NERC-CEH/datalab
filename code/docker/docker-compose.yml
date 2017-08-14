@@ -1,26 +1,95 @@
 version: '3'
 services:
-  spark-master:
-    image: 'nerc/spark:2.1.0'
+  minio:
+    image: nerc/minio
     ports:
-      - '8081:8080'
-      - '7077:7077'
+      - 9000:9000
     environment:
-      - SPARK_ROLE=MASTER
+      MINIO_ACCESS_KEY: VXL8C2ITGFBVMHKV2EV6
+      MINIO_SECRET_KEY: iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI
+      MINIO_UID: 1000 # default datalab UID
+      MINIO_GID: 100 # datalab GID
+    command:
+      - server
+      - /export
+    volumes:
+      - ${PWD}/mountable:/export
+    user: root
 
-  spark-worker:
-    image: 'nerc/spark:2.1.0'
+  jupyter:
+    image: jupyter/base-notebook
     ports:
-      - '4040:4040'
-      - '7078:7078'
+      - 8888:8888
     environment:
-      - SPARK_ROLE=WORKER
-    links:
-      - spark-master
+      NB_UID: 1000 # default datalab UID
+      NB_GID: 100 # datalab GID
+      GRANT_SUDO: "yes"
+    command:
+      - start-notebook.sh
+      - --NotebookApp.token=jupyterToken
+    # volumes:
+    #   - ${PWD}/mountable:/data
+    user: root
 
   zeppelin:
-    image: 'nerc/zeppelin:0.7.2'
+    image: nerc/zeppelin
     ports:
-      - '8080:8080'
+      - 8080:8080
     environment:
-      - MASTER=spark://spark-master:7077
+      MASTER: spark://spark-master:7077
+      ZEPPELIN_UID: 1000 # default datalab UID
+      ZEPPELIN_GID: 100 # datalab GID
+      GRANT_SUDO: "yes"
+    # volumes:
+    #   - ${PWD}/mountable:/data
+    user: root
+
+  spark-master:
+    image: nerc/spark
+    ports:
+      - 8081:8080
+      - 7077:7077
+    environment:
+      SPARK_ROLE: MASTER
+      SPARK_UID: 1000 # default datalab UID
+      SPARK_GID: 100 # datalab GID
+    # volumes:
+    #   - ${PWD}/mountable:/data
+    user: root
+
+  spark-worker:
+    image: nerc/spark
+    ports:
+      - 4040:4040
+      - 7078:7078
+    environment:
+      SPARK_ROLE: WORKER
+      SPARK_UID: 1000 # default datalab UID
+      SPARK_GID: 100 # datalab GID
+    links:
+      - spark-master
+    # volumes:
+    #   - ${PWD}/mountable:/data
+    user: root
+
+  dask-scheduler:
+    image: nerc/dask
+    ports:
+      - 8786:8786
+      - 8787:8787
+    environment:
+      DASK_ROLE: SCHEDULER
+      DASK_UID: 1000 # default datalab UID
+      DASK_GID: 100 # datalab GID
+    user: root
+
+  dask-worker:
+    image: nerc/dask
+    environment:
+      SCHEDULER: dask-scheduler:8786
+      DASK_ROLE: WORKER
+      DASK_UID: 1000 # default datalab UID
+      DASK_GID: 100 # datalab GID
+    links:
+      - dask-scheduler
+    user: root
