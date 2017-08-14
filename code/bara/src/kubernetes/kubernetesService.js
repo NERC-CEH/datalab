@@ -1,4 +1,5 @@
 import fs from 'fs-extra-promise';
+import chalk from 'chalk';
 import path from 'path';
 import { render } from 'mustache';
 import util from 'util';
@@ -18,7 +19,7 @@ function deployManifest(templatePath, configPath) {
     .then(template => render(template, properties))
     .then(renderedTemplate => fs.writeFileAsync(targetFilename, renderedTemplate))
     .then(() => execAsync(`kubectl apply -f ${targetFilename}`))
-    .then(console.log)
+    .then(processResponse)
     .catch(console.error);
 }
 
@@ -30,6 +31,14 @@ function prepareWorkingSpace() {
 
 function getTargetFileName(sourcePath) {
   return `${executionDir}/${path.basename(sourcePath)}`;
+}
+
+function processResponse(response) {
+  if (response.stdout) {
+    console.log(chalk.green(response.stdout));
+  } else {
+    console.log(chalk.red(response.stderr));
+  }
 }
 
 export default deployManifest;
