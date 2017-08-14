@@ -10,19 +10,42 @@ import YAML from 'yamljs';
 const execAsync = util.promisify(exec);
 const executionDir = '.bara';
 
-function deployManifest(templatePath, configPath) {
+function deployManifests(templatePath, configPath) {
   prepareWorkingSpace();
+  const manifests = buildManifestList(templatePath);
+  const promises = manifests.map(manifest => deployManifest(manifest, configPath));
+
+  Promise.all(promises)
+    .then(tidyUp)
+    .catch(console.error);
+}
+
+function buildManifestList(templatePath) {
+  const manifests = [];
+  if (fs.lstatSync(templatePath).isDirectory()) {
+    console.log(chalk.blue(`Executing on template directory ${templatePath}`));
+    fs.readdirSync(templatePath).forEach((file) => {
+      if (file.includes('.template') > -1) {
+        manifests.push(`${templatePath}/${file}`);
+      }
+    });
+  } else {
+    console.log(chalk.blue(`Executing on single template ${templatePath}`));
+    manifests.push(templatePath);
+  }
+  return manifests;
+}
+
+function deployManifest(templatePath, configPath) {
   const properties = YAML.load(configPath);
   const targetFilename = getTargetFileName(templatePath);
 
-  fs.readFileAsync(templatePath)
+  return fs.readFileAsync(templatePath)
     .then(data => data.toString())
     .then(template => render(template, properties))
     .then(writeRenderedTemplate(targetFilename))
     .then(executeKubectl(targetFilename))
-    .then(processResponse)
-    .then(tidyUp)
-    .catch(console.error);
+    .then(processResponse);
 }
 
 function prepareWorkingSpace() {
@@ -69,4 +92,4 @@ function tidyUp() {
   }
 }
 
-export default deployManifest;
+export default { deployManifests };

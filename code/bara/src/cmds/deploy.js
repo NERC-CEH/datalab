@@ -16,6 +16,6 @@ export const handler = ({ template, config }) => {
   console.log(chalk.blue(`Using template: ${template}`));
   console.log(chalk.blue(`Using config: ${config}`));
 
-  kubernetesService(template, config);
+  kubernetesService.deployManifests(template, config);
 };
 
