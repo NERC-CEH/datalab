@@ -7,3 +7,6 @@ brick_directory: /data/brick1
 volumes:
   - datalab
   - datalab-internal
+  - datalab-monitoring
+  - testlab
+  - testlab-internal
