@@ -17,7 +17,7 @@ function deployManifests(templatePath, configPath) {
 
   Promise.all(promises)
     .then(tidyUp)
-    .catch(console.error);
+    .catch(logError);
 }
 
 function buildManifestList(templatePath) {
@@ -25,7 +25,7 @@ function buildManifestList(templatePath) {
   if (fs.lstatSync(templatePath).isDirectory()) {
     console.log(chalk.blue(`Executing on template directory ${templatePath}`));
     fs.readdirSync(templatePath).forEach((file) => {
-      if (file.includes('.template') > -1) {
+      if (file.includes('.template.yml')) {
         manifests.push(`${templatePath}/${file}`);
       }
     });
@@ -81,8 +81,12 @@ function processResponse(response) {
   if (response.stdout) {
     console.log(chalk.green(response.stdout));
   } else {
-    console.log(chalk.red(response.stderr));
+    logError(response.stderr);
   }
+}
+
+function logError(error) {
+  console.log(chalk.red(error));
 }
 
 function tidyUp() {
