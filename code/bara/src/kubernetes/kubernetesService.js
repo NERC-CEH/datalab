@@ -45,7 +45,8 @@ function deployManifest(templatePath, configPath) {
     .then(template => render(template, properties))
     .then(writeRenderedTemplate(targetFilename))
     .then(executeKubectl(targetFilename))
-    .then(processResponse);
+    .then(processResponse)
+    .catch(logError);
 }
 
 function prepareWorkingSpace() {
@@ -81,8 +82,12 @@ function processResponse(response) {
   if (response.stdout) {
     console.log(chalk.green(response.stdout));
   } else {
-    console.log(chalk.red(response.stderr));
+    logError(response.stderr);
   }
+}
+
+function logError(error) {
+  console.log(chalk.red(error));
 }
 
 function tidyUp() {
