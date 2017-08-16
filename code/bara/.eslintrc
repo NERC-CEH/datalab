@@ -27,21 +27,13 @@
     "import/no-extraneous-dependencies": [
       "error", {
         "devDependencies": [
-          "**/datalab-app/tools/*.js",
-          "**/**.spec.js",
-          "**/*.config.dev.js",
-          "**/*.config.prod.js",
-          "**/datalab-app/src/setupTests.js"
+          "**/**.spec.js"
         ]
       }
     ],
     "class-methods-use-this": "off",
     "import/no-named-default": "off",
-    "no-use-before-define": "off",
-    "react/jsx-filename-extension": "off",
-    "react/jsx-tag-spacing": "off",
-    "react/no-array-index-key": "off",
-    "react/require-default-props": "off"
+    "no-use-before-define": "off"
   },
   "parserOptions": {
     "ecmaFeatures": {
