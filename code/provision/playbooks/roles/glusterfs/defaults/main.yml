@@ -5,7 +5,7 @@ gluster_tcp_ports:
   - 111
   # Gluster Daemon
   - 24007
-  # Gluster Brick Ports (one per brick starting at 49152)
+  # Gluster Volume Ports (one per volume starting at 49152)
   - 49152
   - 49153
   - 49154
