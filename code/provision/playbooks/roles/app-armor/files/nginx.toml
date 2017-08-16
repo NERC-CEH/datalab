@@ -1,0 +1,60 @@
+Name = "nginx"
+
+[Filesystem]
+ReadOnlyPaths = [
+    "/bin/**",
+    "/boot/**",
+    "/dev/**",
+    "/etc/**",
+    "/home/**",
+    "/lib/**",
+    "/lib64/**",
+    "/media/**",
+    "/mnt/**",
+    "/opt/**",
+    "/proc/**",
+    "/root/**",
+    "/sbin/**",
+    "/srv/**",
+    "/tmp/**",
+    "/sys/**",
+    "/usr/**",
+]
+
+LogOnWritePaths = [
+    "/**"
+]
+
+WritablePaths = [
+    "/var/run/nginx.pid",
+    "/var/log/nginx/**",
+]
+
+AllowExec = [
+    "/usr/sbin/nginx",
+]
+
+DenyExec = [
+    "/bin/*",
+    "/sbin/*",
+    "/usr/bin/*",
+    "/usr/sbin/*[^nginx]",
+]
+
+[Capabilities]
+Allow = [
+    "chown",
+    "dac_override",
+    "setuid",
+    "setgid",
+    "net_bind_service",
+]
+
+[Network]
+Raw = false
+Packet = false
+Protocols = [
+    "tcp",
+    "udp",
+    "icmp",
+]
