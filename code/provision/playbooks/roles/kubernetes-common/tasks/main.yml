@@ -45,7 +45,7 @@
 - name: Open all ports for access fom weave network
   ufw:
     rule: allow
-    from_ip: 10.32.0.0/12
+    from_ip: 10.0.0.0/8
     proto: any
 
 - name: Add cluster IPs on correct interface to /etc/hosts
