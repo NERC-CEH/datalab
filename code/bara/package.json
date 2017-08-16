@@ -1,0 +1,36 @@
+{
+  "name": "bara",
+  "version": "1.0.0",
+  "description": "Bara (\"Wave\") the first daughter of Aegir the Norse god of the sea. Tool to support kubernetes deployments",
+  "main": "bara.js",
+  "license": "GPL-3.0",
+  "private": true,
+  "bin": {
+    "bara": "./lib/bara.js"
+  },
+  "dependencies": {
+    "chalk": "2.1.0",
+    "del": "3.0.0",
+    "fs-extra-promise": "1.0.1",
+    "mustache": "2.3.0",
+    "yamljs": "0.3.0",
+    "yargs": "8.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-es2015": "6.24.1",
+    "eslint": "4.4.1",
+    "eslint-config-airbnb-base": "11.3.1",
+    "eslint-plugin-import": "2.7.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "start": "babel-node src/bara.js",
+    "prepare": "./node_modules/.bin/babel src --out-dir lib"
+  }
+}
