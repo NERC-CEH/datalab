@@ -17,7 +17,7 @@ function deployManifests(templatePath, configPath) {
 
   Promise.all(promises)
     .then(tidyUp)
-    .catch(console.error);
+    .catch(logError);
 }
 
 function buildManifestList(templatePath) {
@@ -25,7 +25,7 @@ function buildManifestList(templatePath) {
   if (fs.lstatSync(templatePath).isDirectory()) {
     console.log(chalk.blue(`Executing on template directory ${templatePath}`));
     fs.readdirSync(templatePath).forEach((file) => {
-      if (file.includes('.template') > -1) {
+      if (file.includes('.template')) {
         manifests.push(`${templatePath}/${file}`);
       }
     });
@@ -45,8 +45,7 @@ function deployManifest(templatePath, configPath) {
     .then(template => render(template, properties))
     .then(writeRenderedTemplate(targetFilename))
     .then(executeKubectl(targetFilename))
-    .then(processResponse)
-    .catch(logError);
+    .then(processResponse);
 }
 
 function prepareWorkingSpace() {
