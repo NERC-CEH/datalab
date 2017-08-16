@@ -25,7 +25,7 @@ function buildManifestList(templatePath) {
   if (fs.lstatSync(templatePath).isDirectory()) {
     console.log(chalk.blue(`Executing on template directory ${templatePath}`));
     fs.readdirSync(templatePath).forEach((file) => {
-      if (file.includes('.template')) {
+      if (file.includes('.template.yml')) {
         manifests.push(`${templatePath}/${file}`);
       }
     });
