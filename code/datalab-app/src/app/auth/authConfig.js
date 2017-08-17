@@ -4,14 +4,8 @@ const sharedAuthConfig = {
   audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
   responseType: 'token id_token',
   scope: 'openid',
+  redirectUri: `${window.location.origin}/callback`,
+  returnTo: `${window.location.origin}/`,
 };
 
-let envAuthConfig = {};
-
-if (process.env.NODE_ENV === 'production') {
-  envAuthConfig = require('./authConfig.prod'); // eslint-disable-line global-require
-} else {
-  envAuthConfig = require('./authConfig.dev'); // eslint-disable-line global-require
-}
-
-module.exports = { ...sharedAuthConfig, ...envAuthConfig.default };
+export default sharedAuthConfig;
