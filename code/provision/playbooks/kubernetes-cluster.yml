@@ -11,6 +11,7 @@
     - kubernetes-common
     - rook-common
     - { role: glusterfs, gluster_server: False }
+    - app-armor
 
 - name: Configure Master
   hosts: k8s-master

@@ -1,0 +1,3 @@
+bane_templates:
+  - nginx.toml
+  - node-alpine.toml
