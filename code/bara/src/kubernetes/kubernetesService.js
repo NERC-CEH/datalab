@@ -73,7 +73,7 @@ function writeRenderedTemplate(targetFilename) {
 function executeKubectl(targetFilename, dryrun) {
   return () => {
     if (dryrun) {
-      console.log(chalk.yellow(`Dry Run - Skipping template : ${targetFilename}`));
+      console.log(chalk.yellow(`Dry Run - Skipping deployment : ${targetFilename}`));
       return { stdout: 'Template skipped' };
     }
 
