@@ -10,13 +10,13 @@ import YAML from 'yamljs';
 const execAsync = util.promisify(exec);
 const executionDir = '.bara';
 
-function deployManifests(templatePath, configPath) {
+function deployManifests(templatePath, configPath, dryrun) {
   prepareWorkingSpace();
   const manifests = buildManifestList(templatePath);
-  const promises = manifests.map(manifest => deployManifest(manifest, configPath));
+  const promises = manifests.map(manifest => deployManifest(manifest, configPath, dryrun));
 
   Promise.all(promises)
-    .then(tidyUp)
+    .then(tidyUp(dryrun))
     .catch(logError);
 }
 
@@ -36,7 +36,7 @@ function buildManifestList(templatePath) {
   return manifests;
 }
 
-function deployManifest(templatePath, configPath) {
+function deployManifest(templatePath, configPath, dryrun) {
   const properties = YAML.load(configPath);
   const targetFilename = getTargetFileName(templatePath);
 
@@ -44,7 +44,7 @@ function deployManifest(templatePath, configPath) {
     .then(data => data.toString())
     .then(template => render(template, properties))
     .then(writeRenderedTemplate(targetFilename))
-    .then(executeKubectl(targetFilename))
+    .then(executeKubectl(targetFilename, dryrun))
     .then(processResponse);
 }
 
@@ -70,8 +70,13 @@ function writeRenderedTemplate(targetFilename) {
   };
 }
 
-function executeKubectl(targetFilename) {
+function executeKubectl(targetFilename, dryrun) {
   return () => {
+    if (dryrun) {
+      console.log(chalk.yellow(`Dry Run - Skipping deployment : ${targetFilename}`));
+      return { stdout: 'Template skipped' };
+    }
+
     console.log(chalk.blue(`Executing kubectl for template : ${targetFilename}`));
     return execAsync(`kubectl apply -f ${targetFilename}`);
   };
@@ -89,11 +94,13 @@ function logError(error) {
   console.log(chalk.red(error));
 }
 
-function tidyUp() {
-  if (fs.existsSync(executionDir)) {
-    console.log(chalk.blue(`Tidy up ${executionDir} directory`));
-    del.sync(executionDir);
-  }
+function tidyUp(dryrun) {
+  return () => {
+    if (!dryrun && fs.existsSync(executionDir)) {
+      console.log(chalk.blue(`Tidy up ${executionDir} directory`));
+      del.sync(executionDir);
+    }
+  };
 }
 
 export default { deployManifests };
