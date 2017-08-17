@@ -4,8 +4,8 @@ const sharedAuthConfig = {
   audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
   responseType: 'token id_token',
   scope: 'openid',
-  redirectUri: `${window.location.href}callback`,
-  returnTo: window.location.href,
+  redirectUri: `${window.location.origin}/callback`,
+  returnTo: `${window.location.origin}/`,
 };
 
 export default sharedAuthConfig;
