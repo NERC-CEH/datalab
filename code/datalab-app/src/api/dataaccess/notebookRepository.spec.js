@@ -1,5 +1,6 @@
 import notebookRepository from './notebookRepository';
 import database from '../config/database';
+import databaseMock from './testUtil/databaseMock';
 
 jest.mock('../config/database');
 
@@ -7,7 +8,7 @@ const testNotebooks = [
   { name: 'Notebook 1' },
   { name: 'Notebook 2' },
 ];
-database.getModel = createDatabaseMock(testNotebooks);
+database.getModel = databaseMock(testNotebooks);
 
 describe('notebookRepository', () => {
   it('getAll returns expected snapshot', () => {
@@ -22,10 +23,3 @@ describe('notebookRepository', () => {
     });
   });
 });
-
-function createDatabaseMock(notebooks) {
-  return () => ({
-    find: () => ({ exec: () => Promise.resolve(notebooks) }),
-    findOne: queryObject => ({ exec: () => Promise.resolve(notebooks[0]) }),
-  });
-}

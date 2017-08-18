@@ -3,34 +3,16 @@
 exports[`dataStorageRepository getAll returns expected snapshot 1`] = `
 Array [
   Object {
-    "capacityTotal": 1,
-    "capacityUsed": 1,
-    "id": 1,
-    "internalEndpoint": "http://minio-service/minio",
-    "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
-    "name": "disk-1",
-    "storageType": 1,
+    "name": "Storage 1",
   },
   Object {
-    "capacityTotal": 1,
-    "capacityUsed": 1,
-    "id": 2,
-    "internalEndpoint": "http://minio-service/minio",
-    "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
-    "name": "disk-2",
-    "storageType": 1,
+    "name": "Storage 2",
   },
 ]
 `;
 
 exports[`dataStorageRepository getById returns expected snapshot 1`] = `
 Object {
-  "capacityTotal": 1,
-  "capacityUsed": 1,
-  "id": 1,
-  "internalEndpoint": "http://minio-service/minio",
-  "linkToStorage": "https://datalab-minio.datalabs.nerc.ac.uk/minio",
-  "name": "disk-1",
-  "storageType": 1,
+  "name": "Storage 1",
 }
 `;
