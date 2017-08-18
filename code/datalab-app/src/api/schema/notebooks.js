@@ -1,5 +1,5 @@
 import {
-  GraphQLInt,
+  GraphQLID,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
@@ -13,7 +13,7 @@ const NotebookType = new GraphQLObjectType({
   description: 'Type to represent online notebooks',
   fields: {
     id: {
-      type: GraphQLInt,
+      type: GraphQLID,
     },
     name: {
       type: GraphQLString,
@@ -48,7 +48,7 @@ export const notebook = {
   type: NotebookType,
   args: {
     id: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLID),
     },
   },
   resolve: (obj, { id }, { user }) => notebookRepository.getById(user, id),

@@ -32,7 +32,7 @@ const NotebookCard = ({ notebook, openNotebook }) => {
 
 NotebookCard.propTypes = {
   notebook: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,

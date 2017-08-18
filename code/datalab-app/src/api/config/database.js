@@ -1,0 +1,37 @@
+import mongoose from 'mongoose';
+import bluebird from 'bluebird';
+import logger from 'winston';
+import { readdirSync } from 'fs';
+import { join } from 'path';
+import config from '../config';
+
+const models = join(__dirname, '../models');
+
+/* This call registers the models the first tim the database module is imported.
+ * The reason for this is to allow the repository modules to import the models when
+ * they are initialised as this keeps that code cleaner.
+ */
+registerModels();
+
+function registerModels() {
+  readdirSync(models)
+    .filter(file => file.includes('.model.js'))
+    .forEach(file => registerModel(file));
+}
+
+function getModel(modelName) {
+  return mongoose.model(modelName);
+}
+
+function createConnection() {
+  mongoose.Promise = bluebird;
+  const options = { useMongoClient: true, promiseLibrary: bluebird, keepAlive: true };
+  return mongoose.connect(`mongodb://${config.get('databaseHost')}/datalab`, options);
+}
+
+function registerModel(modelName) {
+  logger.info(`Register model: ${modelName}`);
+  require(join(models, modelName)); // eslint-disable-line
+}
+
+export default { createConnection, getModel };

@@ -11,7 +11,7 @@ describe('NotebookCard', () => {
 
   const generateProps = type => ({
     notebook: {
-      id: 100,
+      id: '100',
       displayName: 'name1',
       type,
     },
@@ -54,6 +54,6 @@ describe('NotebookCard', () => {
     expect(openNotebookMock).not.toHaveBeenCalled();
     onClick();
     expect(openNotebookMock).toHaveBeenCalledTimes(1);
-    expect(openNotebookMock).toHaveBeenCalledWith(100);
+    expect(openNotebookMock).toHaveBeenCalledWith('100');
   });
 });

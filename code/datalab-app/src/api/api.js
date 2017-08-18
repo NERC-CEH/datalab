@@ -1,31 +1,27 @@
 import express from 'express';
+import chalk from 'chalk';
 import bodyParser from 'body-parser';
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import logger from 'winston';
 import configureCorsHeaders from './corsConfig';
-import authMiddleware from './auth/authMiddleware';
-import schema from './schema/index';
 import config from './config';
-import status from './status';
+import database from './config/database';
+import graphql from './config/graphql';
 
 const port = config.get('apiPort');
 
-const api = graphqlExpress(request => ({ schema, context: { user: request.user } }));
-const graphiql = graphiqlExpress({ endpointURL: '/graphiqlApi' });
 const app = express();
+configureCorsHeaders(app);
+app.use(bodyParser.json());
+graphql.configureGraphQL(app);
 
 logger.level = config.get('logLevel');
 
-configureCorsHeaders(app);
+const connection = database.createConnection();
 
-app.use(bodyParser.json());
+connection.on('error', error => logger.error(chalk.red(`Error connecting to the database ${error}`)))
+  .on('disconnected', error => logger.info(`Disconnected: ${error}`))
+  .once('open', listen);
 
-app.use('/api', authMiddleware, api);
-app.get('/status', status.get);
-
-if (process.env.NODE_ENV !== 'production') {
-  app.use('/graphiqlApi', api);
-  app.use('/graphiql', graphiql);
+function listen() {
+  app.listen(port, () => logger.info(`App listening on port ${port}.`));
 }
-
-app.listen(port, () => logger.info(`App listening on port ${port}.`));
