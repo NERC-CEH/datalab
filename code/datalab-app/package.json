@@ -65,13 +65,12 @@
       "es2015"
     ]
   },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
+    "test-api": "yarn test-api-ci -- --watch",
+    "test-app": "yarn test-app-ci -- --watch",
+    "test-api-ci": "jest --config tools/api-jest-config.json",
+    "test-app-ci": "jest --config tools/app-jest-config.json",
     "eject": "react-scripts eject",
     "lint": "esw src",
     "lint-api": "esw src/api",
