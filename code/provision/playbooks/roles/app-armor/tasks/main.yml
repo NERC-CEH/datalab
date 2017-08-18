@@ -1,0 +1,24 @@
+---
+- name: Download Bane binary
+  get_url:
+    url: https://github.com/jessfraz/bane/releases/download/v0.2.2/bane-linux-amd64
+    dest: /usr/local/bin/bane
+    mode: ugo+x
+
+- name: Copy AppArmor Bane templates
+  copy:
+    src: "files/{{ item }}"
+    dest: /tmp/AppArmor/
+    force: true
+  with_items: "{{ bane_templates }}"
+
+- name: Install AppArmor profiles with Bane
+  command: "bane {{ item }}"
+  args:
+    chdir: /tmp/AppArmor
+  with_items: "{{ bane_templates }}"
+
+- name: Remove Bane templates
+  file:
+    path: /tmp/AppArmor
+    state: absent

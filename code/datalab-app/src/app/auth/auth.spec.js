@@ -60,7 +60,7 @@ describe('auth', () => {
     auth.logout();
 
     // Assert
-    expect(logoutMock).toBeCalledWith({ returnTo: 'http://localhost:3000/' });
+    expect(logoutMock).toBeCalledWith({ returnTo: 'http://localhost/' });
   });
 
   it('handleAuthentication processes response when hash has expected elements', () => {

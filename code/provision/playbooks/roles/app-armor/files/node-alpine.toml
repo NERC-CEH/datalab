@@ -1,0 +1,45 @@
+Name = "node-alpine"
+
+[Filesystem]
+ReadOnlyPaths = [
+    "/bin/**",
+    "/boot/**",
+    "/dev/**",
+    "/etc/**",
+    "/home/**",
+    "/lib/**",
+    "/lib64/**",
+    "/media/**",
+    "/mnt/**",
+    "/opt/**",
+    "/proc/**",
+    "/root/**",
+    "/sbin/**",
+    "/srv/**",
+    "/tmp/**",
+    "/sys/**",
+    "/usr/**",
+    "/*"
+]
+
+AllowExec = [
+    "/usr/local/bin/*",
+]
+
+DenyExec = [
+    "/bin/*",
+    "/sbin/*",
+    "/usr/bin/*",
+    "/usr/local/lib/**",
+    "/usr/sbin/*",
+    "/opt/**",
+]
+
+[Network]
+Raw = false
+Packet = false
+Protocols = [
+    "tcp",
+    "udp",
+    "icmp",
+]
