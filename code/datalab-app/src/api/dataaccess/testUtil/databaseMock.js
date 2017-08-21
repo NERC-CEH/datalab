@@ -1,8 +1,17 @@
 
-function createDatabaseMock(notebooks) {
+function createDatabaseMock(items) {
+  let lastQuery;
   return () => ({
-    find: () => ({ exec: () => Promise.resolve(notebooks) }),
-    findOne: queryObject => ({ exec: () => Promise.resolve(notebooks[0]) }),
+    find: (query) => {
+      lastQuery = query;
+      return { exec: () => Promise.resolve(items) };
+    },
+    findOne: (query) => {
+      lastQuery = query;
+      return { exec: () => Promise.resolve(items[0]) };
+    },
+    query: () => lastQuery,
+    clearQuery: () => { lastQuery = undefined; return undefined; },
   });
 }
 
