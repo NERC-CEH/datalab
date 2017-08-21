@@ -9,7 +9,7 @@ services:
       - ${PWD}/config/traefik/traefik.toml:/etc/traefik/traefik.toml
 
   mongodb:
-    image: mongo:3.5
+    image: mongo:3.4
     ports:
       - 27017:27017
 
