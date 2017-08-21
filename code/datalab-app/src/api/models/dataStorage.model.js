@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const DataStorageSchema = new Schema({
   name: String,
-  storageType: String,
+  storageType: Number,
   capacityTotal: String,
   capacityUsed: String,
   linkToStorage: String,
