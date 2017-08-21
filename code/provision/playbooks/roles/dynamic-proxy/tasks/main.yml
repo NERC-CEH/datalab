@@ -1,4 +1,8 @@
 ---
+- name: Install Httpie
+  apt:
+    state: installed
+    pkg: httpie
 - name: Download dynamic-proxy compose file
   get_url:
     url: https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/provision/kong-proxy/docker-compose.yml
