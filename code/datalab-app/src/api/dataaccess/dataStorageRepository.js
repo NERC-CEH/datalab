@@ -5,12 +5,12 @@ function DataStorage() {
 }
 
 function getAll(user) {
-  // return Notebook.find({ users: user.sub }).exec();
+  // return DataStorage.find({ users: user.sub }).exec();
   return DataStorage().find({}).exec();
 }
 
 function getById(user, id) {
-  // return Notebook.findOne({ users: user.sub, _id: id });
+  // return DataStorage.findOne({ users: user.sub, _id: id });
   return DataStorage().findOne({ _id: id }).exec();
 }
 
