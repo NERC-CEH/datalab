@@ -1,0 +1,11 @@
+[
+  {
+    "capacityTotal" : 1,
+    "capacityUsed" : 1,
+    "id" : 1,
+    "linkToStorage" : "http://testlab-files.datalabs.local/minio",
+    "internalEndpoint" : "http://testlab-files.datalabs.local/minio",
+    "name" : "disk-1",
+    "storageType" : 1
+  }
+]

@@ -1,4 +1,5 @@
 import {
+  GraphQLID,
   GraphQLEnumType,
   GraphQLInt,
   GraphQLList,
@@ -25,7 +26,7 @@ const DataStoreType = new GraphQLObjectType({
   description: 'DataLabs data store type.',
   fields: {
     id: {
-      type: GraphQLInt,
+      type: GraphQLID,
     },
     name: {
       type: GraphQLString,
@@ -63,7 +64,7 @@ export const dataStore = {
   type: DataStoreType,
   args: {
     id: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLID),
     },
   },
   resolve: (obj, { id }, { user }) => dataStorageRepository.getById(user, id),

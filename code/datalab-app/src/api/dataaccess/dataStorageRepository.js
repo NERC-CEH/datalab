@@ -1,21 +1,17 @@
-import { find } from 'lodash';
-import dataStorage from './dataStorage.json';
+import database from '../config/database';
 
-class DataStorageRepository {
-  constructor() {
-    this.getAll = this.getAll.bind(this);
-    this.getById = this.getById.bind(this);
-  }
-
-  getAll(user) {
-    // filter data storage using user attributes
-    return dataStorage;
-  }
-
-  getById(user, id) {
-    // filter by user attributes and data store id
-    return find(dataStorage, { id });
-  }
+function DataStorage() {
+  return database.getModel('DataStorage');
 }
 
-export default new DataStorageRepository();
+function getAll(user) {
+  // return DataStorage.find({ users: user.sub }).exec();
+  return DataStorage().find({}).exec();
+}
+
+function getById(user, id) {
+  // return DataStorage.findOne({ users: user.sub, _id: id });
+  return DataStorage().findOne({ _id: id }).exec();
+}
+
+export default { getAll, getById };

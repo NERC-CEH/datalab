@@ -19,6 +19,12 @@ const config = convict({
     default: 'datalabs.nerc.ac.uk',
     env: 'CORS_ORIGIN',
   },
+  databaseHost: {
+    doc: 'The database hostname',
+    format: String,
+    default: 'localhost',
+    env: 'DATABASE_HOST',
+  },
   vaultApi: {
     doc: 'The endpoint for Vault',
     format: 'url',

@@ -10,7 +10,7 @@ function loadNotebooks() {
 }
 
 function getUrl(id) {
-  return request.post(apiURL, { query: `{ notebook(id: ${id}) { redirectUrl } }` })
+  return request.post(apiURL, { query: `{ notebook(id: "${id}") { redirectUrl } }` })
     .then(res => get(res, 'data.data.notebook'))
     .then((notebook) => {
       if (!notebook.redirectUrl) {

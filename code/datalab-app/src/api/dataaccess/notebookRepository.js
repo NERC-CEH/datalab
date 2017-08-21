@@ -1,20 +1,17 @@
-import { find } from 'lodash';
-import notebooks from './notebooks.json';
+import database from '../config/database';
 
-class NotebookRepository {
-  constructor() {
-    this.getAll = this.getAll.bind(this);
-  }
-
-  getAll(user) {
-    // filter notebooks using user attributes
-    return notebooks;
-  }
-
-  getById(user, id) {
-    // filter by user attributes and notebook id
-    return find(notebooks, { id });
-  }
+function Notebook() {
+  return database.getModel('Notebook');
 }
 
-export default new NotebookRepository();
+function getAll(user) {
+  // return Notebook.find({ users: user.sub }).exec();
+  return Notebook().find({}).exec();
+}
+
+function getById(user, id) {
+  // return Notebook.findOne({ users: user.sub, _id: id });
+  return Notebook().findOne({ _id: id }).exec();
+}
+
+export default { getAll, getById };

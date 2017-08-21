@@ -1,0 +1,19 @@
+[
+  {
+    "name" : "jupyter",
+    "displayName" : "Biodiversity",
+    "type" : "jupyter",
+    "url" : "http://testlab-jupyter.datalabs.local",
+    "internalEndpoint" : "http://testlab-jupyter.datalabs.local"
+  },
+  {
+    "name" : "zeppelin",
+    "displayName" : "Land Cover Map",
+    "type" : "zeppelin",
+    "url" : "http://testlab-zeppelin.datalabs.local",
+    "internalEndpoint" : "http://testlab-zeppelin.datalabs.local",
+    "users" : [
+      "auth0|595f40a25caf4344b2e0e678"
+    ]
+  }
+]

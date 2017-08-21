@@ -9,9 +9,9 @@ describe('NotebookCards', () => {
 
   const generateProps = () => ({
     notebooks: [
-      { displayName: 'name1', id: 1, type: 'type1' },
-      { displayName: 'name2', id: 2, type: 'type2' },
-      { displayName: 'name3', id: 3, type: 'type3' },
+      { displayName: 'name1', id: '1', type: 'type1' },
+      { displayName: 'name2', id: '2', type: 'type2' },
+      { displayName: 'name3', id: '3', type: 'type3' },
     ],
     openNotebook: () => {},
   });
