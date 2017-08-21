@@ -23,8 +23,8 @@ describe('dataStorageRepository', () => {
     }));
 
   it('getById returns expected snapshot', () =>
-    dataStorageRepository.getById(undefined, 1).then((storage) => {
-      expect(mockDatabase().query()).toEqual({ _id: 1 });
+    dataStorageRepository.getById(undefined, '599aa983bdd5430daedc8eec').then((storage) => {
+      expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
       expect(storage).toMatchSnapshot();
     }));
 });

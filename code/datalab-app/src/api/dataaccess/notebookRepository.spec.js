@@ -23,8 +23,8 @@ describe('notebookRepository', () => {
     }));
 
   it('getById returns expected snapshot', () =>
-    notebookRepository.getById(undefined, 1).then((notebook) => {
-      expect(mockDatabase().query()).toEqual({ _id: 1 });
+    notebookRepository.getById(undefined, '599aa983bdd5430daedc8eec').then((notebook) => {
+      expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
       expect(notebook).toMatchSnapshot();
     }));
 });
