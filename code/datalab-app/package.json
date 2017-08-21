@@ -49,6 +49,7 @@
     "eslint-plugin-react": "6.10.3",
     "eslint-watch": "3.1.0",
     "husky": "0.13.3",
+    "jest": "20.0.4",
     "jest-enzyme": "3.4.0",
     "lint-staged": "3.4.1",
     "moxios": "0.4.0",
