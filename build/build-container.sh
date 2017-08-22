@@ -23,6 +23,12 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)
     DOCKERFILE="app.Dockerfile"
     IMAGE="datalab-app"
     ;;
+  infrastructure)
+    echo "Starting to build infrastructure-api..."
+    cd ./code/infrastructure-api && yarn dist
+    DOCKERFILE="Dockerfile"
+    IMAGE="infrastructure-api"
+    ;;
   esac
   echo "Generating docker image..."
   docker build -f $DOCKERFILE -t nerc/$IMAGE:latest .
