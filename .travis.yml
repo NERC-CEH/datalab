@@ -20,6 +20,7 @@ env:
   - CONTAINER=api
   - CONTAINER=app
   - CONTAINER=docs
+  - CONTAINER=infrastructure
 
 script:
   - $TRAVIS_BUILD_DIR/build/validate-build.sh $CONTAINER

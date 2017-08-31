@@ -12,6 +12,9 @@ if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app)$ ]]; then
     app)
       cd ./code/datalab-app && yarn install && yarn lint-app && yarn test-api-ci
       ;;
+    infrastructure)
+      cd ./code/infrastructure-api && yarn install && yarn lint && yarn test-ci
+      ;;
   esac
 else
   echo "Bad Args"
