@@ -3,7 +3,7 @@ set -e
 
 GIT_DESCRIBE=`git describe --tags --always`
 
-if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app)$ ]]; then
+if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure)$ ]]; then
   case "$1" in
   docs)
     echo "Starting to build documents..."
