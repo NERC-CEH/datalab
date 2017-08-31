@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app)$ ]]; then
+if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure)$ ]]; then
   case "$1" in
     docs)
       cd ./docs && yarn install && yarn lint
