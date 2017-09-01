@@ -13,6 +13,18 @@ const config = convict({
     default: 8000,
     env: 'PORT',
   },
+  vaultApi: {
+    doc: 'The endpoint for Vault',
+    format: 'url',
+    default: 'http://localhost:8200',
+    env: 'VAULT_API',
+  },
+  vaultAppRole: {
+    doc: 'The Vault app role for the API',
+    format: 'String',
+    default: 'undefinedrole',
+    env: 'VAULT_APP_ROLE',
+  },
 });
 
 export default config;
