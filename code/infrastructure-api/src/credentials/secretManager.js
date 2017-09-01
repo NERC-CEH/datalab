@@ -1,12 +1,14 @@
 import vault from './vault';
 import tokenGenerator from './tokenGenerator';
 
-function createNewJupyterCredentials(datalab, id) {
-  const jupyterSecret = {
+function createNewJupyterCredentials() {
+  return {
     token: tokenGenerator.generateUUID(),
   };
-
-  return vault.storeSecret(`${datalab}/notebooks/${id}`, jupyterSecret);
 }
 
-export default { createNewJupyterCredentials };
+function storeCredentialsInVault(datalab, id, secret) {
+  return vault.storeSecret(`${datalab}/notebooks/${id}`, secret);
+}
+
+export default { createNewJupyterCredentials, storeCredentialsInVault };
