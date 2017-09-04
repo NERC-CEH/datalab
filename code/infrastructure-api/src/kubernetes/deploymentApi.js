@@ -38,8 +38,7 @@ function updateDeployment(name, manifest) {
 }
 
 function handleError(error) {
-  console.log('Error');
   throw new Error(`Unable to create kubernetes deployment ${error.response.data.message}`);
 }
 
-export default { createOrUpdateDeployment };
+export default { getDeployment, createDeployment, updateDeployment, createOrUpdateDeployment };
