@@ -7,7 +7,7 @@ function createNotebook(datalabName, notebookId, notebookType) {
   const notebookCredentials = secretManager.createNewJupyterCredentials();
 
   return secretManager.storeCredentialsInVault(datalabName, notebookId, notebookCredentials)
-    .then(() => k8sSecretApi.createSecret(`jupyter-${notebookId}`, notebookCredentials));
+    .then(() => k8sSecretApi.createOrUpdateSecret(`jupyter-${notebookId}`, notebookCredentials));
 }
 
 export default { createNotebook };
