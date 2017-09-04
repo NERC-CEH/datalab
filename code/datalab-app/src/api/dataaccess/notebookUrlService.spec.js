@@ -1,7 +1,10 @@
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import notebookUrlService from './notebookUrlService';
 import vault from './vault/vault';
+
+const mock = new MockAdapter(axios);
 
 jest.mock('winston');
 
@@ -9,12 +12,15 @@ const vaultMock = jest.fn();
 vault.requestNotebookKeys = vaultMock;
 
 beforeEach(() => {
-  moxios.install();
+  mock.reset();
 });
 
 afterEach(() => {
-  moxios.uninstall();
   logger.clearMessages();
+});
+
+afterAll(() => {
+  mock.restore();
 });
 
 describe('notebookUrlService', () => {
@@ -33,11 +39,7 @@ describe('notebookUrlService', () => {
         password: 'password',
       })));
 
-      moxios.stubRequest(loginUrl, {
-        status: 200,
-        response: { message: 'message' },
-        headers: getSuccessfulLoginResponse(),
-      });
+      mock.onPost(loginUrl).reply(200, { message: 'message' }, getSuccessfulLoginResponse());
 
       return notebookUrlService(notebook, 'user')
         .then((url) => {
@@ -61,10 +63,7 @@ describe('notebookUrlService', () => {
         password: 'password',
       })));
 
-      moxios.stubRequest(loginUrl, {
-        status: 403,
-        response: getFailedLoginResponse(),
-      });
+      mock.onPost(loginUrl).reply(403, getFailedLoginResponse());
 
       return notebookUrlService(notebook, 'user')
         .then((token) => {
@@ -88,10 +87,7 @@ describe('notebookUrlService', () => {
         token: 'expectedToken',
       })));
 
-      moxios.stubRequest(loginUrl, {
-        status: 200,
-        response: { message: 'message' },
-      });
+      mock.onPost(loginUrl).reply(200, { message: 'message' });
 
       return notebookUrlService(notebook, 'user')
         .then((url) => {
@@ -104,10 +100,7 @@ describe('notebookUrlService', () => {
         props: 'noToken',
       })));
 
-      moxios.stubRequest(loginUrl, {
-        status: 200,
-        response: { message: 'message' },
-      });
+      mock.onPost(loginUrl).reply(200, { message: 'message' });
 
       return notebookUrlService(notebook, 'user')
         .then((token) => {

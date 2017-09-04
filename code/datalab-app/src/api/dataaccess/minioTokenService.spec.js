@@ -1,7 +1,10 @@
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import minioTokenService from './minioTokenService';
 import vault from './vault/vault';
+
+const mock = new MockAdapter(axios);
 
 jest.mock('winston');
 
@@ -9,12 +12,15 @@ const vaultMock = jest.fn();
 vault.requestStorageKeys = vaultMock;
 
 beforeEach(() => {
-  moxios.install();
+  mock.reset();
 });
 
 afterEach(() => {
-  moxios.uninstall();
   logger.clearMessages();
+});
+
+afterAll(() => {
+  mock.restore();
 });
 
 const storage = {
@@ -30,10 +36,7 @@ describe('minioTokenService', () => {
       secret_key: 'secretKey',
     })));
 
-    moxios.stubRequest(loginUrl, {
-      status: 200,
-      response: getSuccessfulLoginResponse(),
-    });
+    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
 
     return minioTokenService.requestMinioToken(storage)
       .then((token) => {
@@ -57,10 +60,7 @@ describe('minioTokenService', () => {
       secret_key: 'secretKey',
     })));
 
-    moxios.stubRequest(loginUrl, {
-      status: 200,
-      response: getFailedLoginResponse(),
-    });
+    mock.onPost(loginUrl).reply(200, getFailedLoginResponse());
 
     return minioTokenService.requestMinioToken(storage)
       .then((token) => {
