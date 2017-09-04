@@ -1,6 +1,10 @@
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+
 import config from '../config/config';
 import secretApi from './secretApi';
+
+const mock = new MockAdapter(axios);
 
 const API_BASE = config.get('kubernetesApi');
 const NAMESPACE = config.get('podNamespace');
@@ -9,44 +13,29 @@ const SECRET_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/secrets`;
 const SECRET_NAME = 'test';
 describe('Kubernetes Secret API', () => {
   beforeEach(() => {
-    moxios.install();
-  });
-
-  afterEach(() => {
-    moxios.uninstall();
+    mock.reset();
   });
 
   describe('createOrUpdate secret', () => {
     it('should CREATE if secret does not exist', () => {
       const secret = createSecret();
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 404,
-      });
-
-      moxios.stubRequest(SECRET_URL, {
-        status: 204,
-      });
+      mock.onGet(`${SECRET_URL}/${SECRET_NAME}`).reply(404);
+      mock.onPost().reply(204, secret);
 
       return secretApi.createOrUpdateSecret('test', 'testvalue')
         .then((response) => {
-          expect(JSON.parse(response.config.data)).toEqual(secret);
+          expect(response.data).toEqual(secret);
         });
     });
 
     it('should UPDATE if secret exists', () => {
       const secret = createSecret();
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 200,
-        response: secret,
-      });
-
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 204,
-      });
+      mock.onGet(`${SECRET_URL}/${SECRET_NAME}`).reply(200, secret);
+      mock.onPut().reply(204, secret);
 
       return secretApi.createOrUpdateSecret('test', 'testvalue')
         .then((response) => {
-          expect(JSON.parse(response.config.data)).toEqual(secret);
+          expect(response.data).toEqual(secret);
         });
     });
   });
@@ -54,10 +43,7 @@ describe('Kubernetes Secret API', () => {
   describe('get secret', () => {
     it('should return the secret if it exists', () => {
       const secret = createSecret();
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 200,
-        response: secret,
-      });
+      mock.onGet(`${SECRET_URL}/${SECRET_NAME}`).reply(200, secret);
 
       return secretApi.getSecret('test')
         .then((response) => {
@@ -67,10 +53,7 @@ describe('Kubernetes Secret API', () => {
 
     it('should return undefined it the secret does not exist', () => {
       const secret = createSecret();
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 404,
-        response: secret,
-      });
+      mock.onGet(`${SECRET_URL}/${SECRET_NAME}`).reply(404, secret);
 
       return secretApi.getSecret('test')
         .then((response) => {
@@ -82,25 +65,16 @@ describe('Kubernetes Secret API', () => {
   describe('create secret', () => {
     it('should POST payload to bare resource URL', () => {
       const secret = createSecret();
-      moxios.stubRequest(SECRET_URL, {
-        status: 204,
-        response: secret,
-      });
+      mock.onPost(SECRET_URL, secret).reply(204, secret);
 
       return secretApi.createSecret('test', 'testvalue')
         .then((response) => {
-          const request = moxios.requests.mostRecent();
-          expect(request.config.method).toBe('post');
-          expect(JSON.parse(request.config.data)).toEqual(secret);
-          expect(JSON.parse(response.config.data)).toEqual(secret);
+          expect(response.data).toEqual(secret);
         });
     });
 
     it('should return an error if creation fails', () => {
-      moxios.stubRequest(SECRET_URL, {
-        status: 400,
-        response: { message: 'error-message' },
-      });
+      mock.onPost(SECRET_URL).reply(400, { message: 'error-message' });
 
       return secretApi.createSecret('test', 'testvalue')
         .catch((error) => {
@@ -112,25 +86,16 @@ describe('Kubernetes Secret API', () => {
   describe('update secret', () => {
     it('should PUT payload to resource URL', () => {
       const secret = createSecret();
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 204,
-        response: secret,
-      });
+      mock.onPut(`${SECRET_URL}/${SECRET_NAME}`, secret).reply(204, secret);
 
       return secretApi.updateSecret('test', 'testvalue')
         .then((response) => {
-          const request = moxios.requests.mostRecent();
-          expect(request.config.method).toBe('put');
-          expect(JSON.parse(request.config.data)).toEqual(secret);
-          expect(JSON.parse(response.config.data)).toEqual(secret);
+          expect(response.data).toEqual(secret);
         });
     });
 
     it('should return an error if creation fails', () => {
-      moxios.stubRequest(`${SECRET_URL}/${SECRET_NAME}`, {
-        status: 400,
-        response: { message: 'error-message' },
-      });
+      mock.onPut(`${SECRET_URL}/${SECRET_NAME}`).reply(400, { message: 'error-message' });
 
       return secretApi.updateSecret('test', 'testvalue')
         .catch((error) => {
