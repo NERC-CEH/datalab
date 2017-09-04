@@ -1,17 +1,23 @@
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import vault from './vault';
 import config from '../../config';
 
+const mock = new MockAdapter(axios);
+
 jest.mock('winston');
 
 beforeEach(() => {
-  moxios.install();
+  mock.reset();
 });
 
 afterEach(() => {
-  moxios.uninstall();
   logger.clearMessages();
+});
+
+afterAll(() => {
+  mock.restore();
 });
 
 const secretPath = 'datalab/files/files1';
@@ -20,23 +26,15 @@ const secretUrl = `${config.get('vaultApi')}/v1/secret/`;
 
 describe('vault backend service', () => {
   it('should request tokens from the correct endpoint', () => {
-    moxios.stubRequest(loginUrl, {
-      status: 200,
-      response: getSuccessfulLoginResponse(),
-    });
-    moxios.stubRequest(secretUrl + secretPath, {
-      status: 200,
-      response: getSuccessfulSecretResponse(),
-    });
+    mock.onPost(loginUrl, { role_id: 'undefinedrole' }).reply(200, getSuccessfulLoginResponse());
+    mock.onGet(secretUrl + secretPath)
+      .reply((requestConfig) => {
+        expect(requestConfig.headers['X-Vault-Token']).toEqual('05d4a901-6353-33bd-b8f8-7e42f507ae6b');
+        return [200, getSuccessfulSecretResponse()];
+      });
 
     return vault.requestPath(secretPath)
       .then((response) => {
-        const requests = moxios.requests.__items; // eslint-disable-line no-underscore-dangle
-
-        expect(requests.length).toEqual(2);
-        expect(requests[0].config.data).toEqual(JSON.stringify({ role_id: 'undefinedrole' }));
-        expect(requests[1].headers['X-Vault-Token']).toEqual('05d4a901-6353-33bd-b8f8-7e42f507ae6b');
-
         expect(response).toEqual({
           access_key: 'accesskey1',
           secret_key: 'secretkey1',
@@ -45,10 +43,7 @@ describe('vault backend service', () => {
   });
 
   it('should handle a login failure', () => {
-    moxios.stubRequest(loginUrl, {
-      status: 400,
-      response: getFailedLoginResponse(),
-    });
+    mock.onPost(loginUrl).reply(400, getFailedLoginResponse());
 
     return vault.requestPath(secretPath)
       .then((response) => {
@@ -64,15 +59,8 @@ describe('vault backend service', () => {
   });
 
   it('should handle a key request failure', () => {
-    moxios.stubRequest(loginUrl, {
-      status: 200,
-      response: getSuccessfulLoginResponse(),
-    });
-
-    moxios.stubRequest(secretUrl + secretPath, {
-      status: 404,
-      response: getMissingKeyResponse(),
-    });
+    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+    mock.onGet(secretUrl + secretPath).reply(404, getMissingKeyResponse());
 
     return vault.requestPath(secretPath)
       .then((response) => {
