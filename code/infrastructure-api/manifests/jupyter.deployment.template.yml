@@ -1,0 +1,52 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name }}
+  namespace: {{ namespace }}
+spec:
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+        environment: {{ environment }}
+    spec:
+      securityContext:
+        runAsUser: 0
+      containers:
+      - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
+        imagePullPolicy : "IfNotPresent"
+        name: {{ name }}
+        command: ["tini", "--", "start.sh",
+          "jupyter", "notebook",
+          "--NotebookApp.token='$(JUPYTER_TOKEN)'",
+          "--NotebookApp.allow_origin='{{ domain }}'",
+          "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
+        ports:
+        - containerPort: 8888
+          protocol: TCP
+        env:
+        - name: JUPYTER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ name }}
+              key: token
+        - name: GRANT_SUDO
+          value: "{{ grantSudo }}"
+        volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: {{ datalabVolume }}
+            readOnly: false

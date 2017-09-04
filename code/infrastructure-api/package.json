@@ -13,6 +13,8 @@
     "convict": "4.0.0",
     "express": "4.15.4",
     "express-validator": "4.1.0",
+    "fs-extra-promise": "1.0.1",
+    "mustache": "2.3.0",
     "uuid": "3.1.0",
     "winston": "2.3.1"
   },
