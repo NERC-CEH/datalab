@@ -25,6 +25,18 @@ const config = convict({
     default: 'undefinedrole',
     env: 'VAULT_APP_ROLE',
   },
+  kubernetesApi: {
+    doc: 'The endpoint for Kubernetes',
+    format: 'url',
+    default: 'http://localhost:8001',
+    env: 'KUBERNETES_API',
+  },
+  podNamespace: {
+    doc: 'The namespace for the pod',
+    format: 'String',
+    default: 'test',
+    env: 'KUBERNETES_NAMESPACE',
+  },
 });
 
 export default config;
