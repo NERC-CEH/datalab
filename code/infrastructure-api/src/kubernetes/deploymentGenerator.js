@@ -1,12 +1,10 @@
-import fs from 'fs-extra-promise';
-import { render } from 'mustache';
+import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manifestGenerator';
 
 const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
 const JUPYTER_VERSION = '0.1.0';
-const JUPYTER_TEMPLATE = 'manifests/jupyter.deployment.template.yml';
 
 function createJupyterDeployment(datalab, deploymentName, notebookName) {
-  const properties = {
+  const context = {
     name: deploymentName,
     grantSudo: true,
     datalabVolume: datalab.volume,
@@ -17,9 +15,12 @@ function createJupyterDeployment(datalab, deploymentName, notebookName) {
     },
   };
 
-  return fs.readFileAsync(JUPYTER_TEMPLATE)
-    .then(data => data.toString())
-    .then(template => render(template, properties));
+  return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-export default { createJupyterDeployment };
+function createJupyterService(notebookName) {
+  const context = { name: notebookName };
+  return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
+}
+
+export default { createJupyterDeployment, createJupyterService };

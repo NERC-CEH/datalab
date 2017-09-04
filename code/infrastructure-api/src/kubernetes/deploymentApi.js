@@ -6,7 +6,7 @@ const NAMESPACE = config.get('podNamespace');
 
 const DEPLOYMENT_URL = `${API_BASE}/apis/apps/v1beta1/namespaces/${NAMESPACE}/deployments`;
 
-const YAML_CONTENT = { headers: { 'Content-Type': 'application/yaml' } };
+const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
 function createOrUpdateDeployment(name, manifest) {
   return getDeployment(name, manifest)
@@ -28,12 +28,12 @@ function getDeployment(name) {
 }
 
 function createDeployment(manifest) {
-  return axios.post(DEPLOYMENT_URL, manifest, YAML_CONTENT)
+  return axios.post(DEPLOYMENT_URL, manifest, YAML_CONTENT_HEADER)
     .catch(handleError);
 }
 
 function updateDeployment(name, manifest) {
-  return axios.put(`${DEPLOYMENT_URL}/${name}`, manifest, YAML_CONTENT)
+  return axios.put(`${DEPLOYMENT_URL}/${name}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleError);
 }
 
