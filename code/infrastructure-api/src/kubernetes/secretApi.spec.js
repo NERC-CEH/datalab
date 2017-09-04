@@ -11,9 +11,14 @@ const NAMESPACE = config.get('podNamespace');
 
 const SECRET_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/secrets`;
 const SECRET_NAME = 'test';
+
 describe('Kubernetes Secret API', () => {
   beforeEach(() => {
     mock.reset();
+  });
+
+  afterAll(() => {
+    mock.restore();
   });
 
   describe('createOrUpdate secret', () => {

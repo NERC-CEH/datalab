@@ -1,17 +1,19 @@
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import vault from './vault';
 import config from '../config/config';
 
+const mock = new MockAdapter(axios);
+
 jest.mock('winston');
 
 beforeEach(() => {
-  moxios.install();
+  mock.reset();
 });
 
-afterEach(() => {
-  moxios.uninstall();
-  logger.clearMessages();
+afterAll(() => {
+  mock.restore();
 });
 
 const secretPath = 'datalab/notebooks/newnotebook';
@@ -21,25 +23,17 @@ const secret = { token: 'secret-token' };
 
 describe('vault service', () => {
   it('should store secrets at the specified path', () => {
-    moxios.stubRequest(loginUrl, {
-      status: 200,
-      response: getSuccessfulLoginResponse(),
-    });
-    moxios.stubRequest(secretUrl + secretPath, { status: 204 });
+    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+    mock.onPost(secretUrl + secretPath).reply(204);
 
     return vault.storeSecret(secretPath, secret)
       .then((response) => {
         expect(response.status).toBe(204);
-        const requestSent = moxios.requests.mostRecent();
-        expect(requestSent.config.method).toEqual('post');
       });
   });
 
   it('should handle a login failure', () => {
-    moxios.stubRequest(loginUrl, {
-      status: 400,
-      response: getFailedLoginResponse(),
-    });
+    mock.onPost(loginUrl).reply(400, getFailedLoginResponse());
 
     return vault.storeSecret(secretPath, secret)
       .then((response) => {
