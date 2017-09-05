@@ -19,10 +19,12 @@ afterAll(() => {
   mock.restore();
 });
 
+const manifest = createManifest();
+const deployment = createDeployment();
+
 describe('Kubernetes Deployment API', () => {
   describe('get deployment', () => {
     it('should return the deployment if it exists', () => {
-      const deployment = createDeployment();
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(200, deployment);
 
       return deploymentApi.getDeployment(DEPLOYMENT_NAME)
@@ -32,7 +34,6 @@ describe('Kubernetes Deployment API', () => {
     });
 
     it('should return undefined it the deployment does not exist', () => {
-      const deployment = createDeployment();
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404, deployment);
 
       return deploymentApi.getDeployment(DEPLOYMENT_NAME)
@@ -44,8 +45,6 @@ describe('Kubernetes Deployment API', () => {
 
   describe('create deployment', () => {
     it('should POST manifest to bare resource URL', () => {
-      const manifest = createManifest();
-      const deployment = createDeployment();
       mock.onPost(DEPLOYMENT_URL, manifest).reply((requestConfig) => {
         expect(requestConfig.headers['Content-Type']).toBe('application/yaml');
         return [200, deployment];
@@ -58,8 +57,6 @@ describe('Kubernetes Deployment API', () => {
     });
 
     it('should return an error if creation fails', () => {
-      const manifest = createManifest();
-
       mock.onPost(DEPLOYMENT_URL).reply(400, { message: 'error-message' });
 
       return deploymentApi.createDeployment(manifest)
@@ -71,9 +68,6 @@ describe('Kubernetes Deployment API', () => {
 
   describe('update secret', () => {
     it('should PUT payload to resource URL', () => {
-      const manifest = createManifest();
-      const deployment = createDeployment();
-
       mock.onPut(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`, manifest).reply((requestConfig) => {
         expect(requestConfig.headers['Content-Type']).toBe('application/yaml');
         return [200, deployment];
@@ -86,7 +80,6 @@ describe('Kubernetes Deployment API', () => {
     });
 
     it('should return an error if creation fails', () => {
-      const manifest = createManifest();
       mock.onPut(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(400, { message: 'error-message' });
 
       return deploymentApi.updateDeployment(DEPLOYMENT_NAME, manifest)
@@ -98,9 +91,6 @@ describe('Kubernetes Deployment API', () => {
 
   describe('createOrUpdate secret', () => {
     it('should CREATE if secret does not exist', () => {
-      const manifest = createManifest();
-      const deployment = createDeployment();
-
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404);
       mock.onPost().reply(204, deployment);
 
@@ -111,9 +101,7 @@ describe('Kubernetes Deployment API', () => {
     });
 
     it('should UPDATE if secret exists', () => {
-      const manifest = createManifest();
-      const deployment = createDeployment();
-      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(200, { data: deployment });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(200, deployment);
       mock.onPut().reply(204, deployment);
 
       return deploymentApi.createOrUpdateDeployment(DEPLOYMENT_NAME, manifest)
