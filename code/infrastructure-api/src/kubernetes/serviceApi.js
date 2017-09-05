@@ -34,11 +34,16 @@ function createService(manifest) {
 }
 
 function updateService(name, manifest, existingService) {
+  const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
+  return axios.put(`${SERVICE_URL}/${name}`, jsonManifest)
+    .catch(handleError);
+}
+
+function copyRequiredFieldsToJsonManfiest(manifest, existingService) {
   const jsonManifest = yaml.load(manifest);
   jsonManifest.spec.clusterIP = existingService.spec.clusterIP;
   jsonManifest.metadata.resourceVersion = existingService.metadata.resourceVersion;
-  return axios.put(`${SERVICE_URL}/${name}`, jsonManifest)
-    .catch(handleError);
+  return jsonManifest;
 }
 
 function handleError(error) {
