@@ -10,7 +10,7 @@ VAULT_ADDR=http://localhost:8200
 
 curl -X POST \
   -H "X-Vault-Token:$VAULT_TOKEN" \
-  --data @config/vault/policies/secret-admin-policy.json \
+  --data @config/vault/secret-admin-policy.json \
   $VAULT_ADDR/v1/sys/policy/secret-admin-policy
 
 curl -X POST \
