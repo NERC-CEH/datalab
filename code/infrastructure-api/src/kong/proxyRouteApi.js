@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'winston';
 import config from '../config/config';
 
 const API_BASE = config.get('kongApi');
@@ -31,7 +32,7 @@ function createOrUpdateRoute(name, datalab, k8sPort) {
 
 function getSni(sni) {
   return axios.get(`${SNI_URL}/${sni}`)
-    .then(response => response.data.data)
+    .then(response => response.data)
     .catch(() => undefined);
 }
 
@@ -59,6 +60,7 @@ const filterSnis = datalabDomain => (snis) => {
 };
 
 const createSni = sni => (certificateId) => {
+  logger.info(`Creating SNI: ${sni}`);
   const payload = {
     name: sni,
     ssl_certificate_id: certificateId,
@@ -77,9 +79,11 @@ const createOrUpdateApi = (apiName, requestedSni, k8sPort) => (existingApi) => {
   const payload = createPayload(apiName, requestedSni, k8sPort);
 
   if (existingApi) {
+    logger.info(`Updating route: ${apiName}`);
     return axios.patch(`${API_URL}/${existingApi.id}`, payload);
   }
 
+  logger.info(`Creating route: ${apiName}`);
   return axios.post(API_URL, payload);
 };
 
