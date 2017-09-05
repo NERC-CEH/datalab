@@ -87,24 +87,24 @@ describe('Kubernetes Service API', () => {
     });
   });
 
-  describe('createOrUpdate secret', () => {
-    it('should CREATE if secret does not exist', () => {
+  describe('createOrUpdate service', () => {
+    it('should CREATE if service does not exist', () => {
       mock.onGet(`${SERVICE_URL}/${SERVICE_NAME}`).reply(404);
       mock.onPost().reply(204, service);
 
       return serviceApi.createOrUpdateService(SERVICE_NAME, manifest)
         .then((response) => {
-          expect(response.data).toEqual(service);
+          expect(response).toEqual(service);
         });
     });
 
-    it('should UPDATE if secret exists', () => {
+    it('should UPDATE if service exists', () => {
       mock.onGet(`${SERVICE_URL}/${SERVICE_NAME}`).reply(200, service);
       mock.onPut().reply(204, service);
 
       return serviceApi.createOrUpdateService(SERVICE_NAME, manifest)
         .then((response) => {
-          expect(response.data).toEqual(service);
+          expect(response).toEqual(service);
         });
     });
   });

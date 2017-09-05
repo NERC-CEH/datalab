@@ -11,7 +11,8 @@ const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
 function createOrUpdateService(name, manifest) {
   return getService(name)
-    .then(createOrReplace(name, manifest));
+    .then(createOrReplace(name, manifest))
+    .then(response => response.data);
 }
 
 const createOrReplace = (name, manifest) => (existingService) => {
