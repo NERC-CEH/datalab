@@ -9,12 +9,14 @@ import graphql from './config/graphql';
 
 const port = config.get('apiPort');
 
+logger.level = config.get('logLevel');
+logger.remove(logger.transports.Console);
+logger.add(logger.transports.Console, { timestamp: true, colorize: true });
+
 const app = express();
 configureCorsHeaders(app);
 app.use(bodyParser.json());
 graphql.configureGraphQL(app);
-
-logger.level = config.get('logLevel');
 
 const connection = database.createConnection();
 
