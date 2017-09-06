@@ -12,10 +12,10 @@ function createNotebook(request, response) {
   }
 
   // Build request params
-  const { datalabName, notebookId, notebookType } = matchedData(request);
+  const { datalabInfo, notebookId, notebookType } = matchedData(request);
 
   // Handle request
-  return notebookManager.createNotebook(datalabName, notebookId, notebookType)
+  return notebookManager.createNotebook(datalabInfo, notebookId, notebookType)
     .then(() => {
       response.status(201);
       response.send({ message: 'OK' });
@@ -32,7 +32,9 @@ const handleError = (res, notebookId) => (error) => {
 };
 
 const createNotebookValidator = [
-  check('datalabName').exists().withMessage('datalabName must be specified'),
+  check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
+  check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified'),
+  check('datalabInfo.volume').exists().withMessage('datalabInfo.volume must be specified'),
   check('notebookId').exists().withMessage('notebookId must be specified'),
   check('notebookType').exists().withMessage('notebookType must be specified'),
 ];

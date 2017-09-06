@@ -6,26 +6,20 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import proxyRouteApi from '../kong/proxyRouteApi';
 
-function createNotebook(datalabName, notebookName, notebookType) {
-  logger.info(`Creating new ${notebookType} notebook with id: ${notebookName} for datalab: ${datalabName}`);
+function createNotebook(datalabInfo, notebookName, notebookType) {
+  logger.info(`Creating new ${notebookType} notebook with id: ${notebookName} for datalab: ${datalabInfo.name}`);
   const notebookCredentials = secretManager.createNewJupyterCredentials();
 
-  return secretManager.storeCredentialsInVault(datalabName, notebookName, notebookCredentials)
+  return secretManager.storeCredentialsInVault(datalabInfo.name, notebookName, notebookCredentials)
     .then(() => k8sSecretApi.createOrUpdateSecret(`jupyter-${notebookName}`, notebookCredentials))
-    .then(createNotebookDeployment(notebookName))
+    .then(createNotebookDeployment(notebookName, datalabInfo))
     .then(createNotebookService(notebookName))
-    .then(createProxyRoute(notebookName));
+    .then(createProxyRoute(notebookName, datalabInfo));
 }
 
-const createNotebookDeployment = notebookName => () => {
-  const datalab = {
-    name: 'testlab',
-    domain: 'test-datalabs.nerc.ac.uk',
-    volume: 'testlab',
-  };
+const createNotebookDeployment = (notebookName, datalabInfo) => () => {
   const deploymentName = `jupyter-${notebookName}`;
-
-  return deploymentGenerator.createJupyterDeployment(datalab, deploymentName, notebookName)
+  return deploymentGenerator.createJupyterDeployment(datalabInfo, deploymentName, notebookName)
     .then((manifest) => {
       logger.info(`Deploying Notebook with manifest: ${deploymentName}`);
       logger.debug(manifest.toString());
@@ -43,14 +37,10 @@ const createNotebookService = notebookName => () => {
     });
 };
 
-const createProxyRoute = notebookName => (service) => {
-  const datalab = {
-    name: 'testlab',
-    domain: 'test-datalabs.nerc.ac.uk',
-  };
+const createProxyRoute = (notebookName, datalabInfo) => (service) => {
   const k8sPort = service.spec.ports[0].nodePort;
   logger.info(`Creating Proxy Route for: '${notebookName}' for k8s port: ${k8sPort}`);
-  return proxyRouteApi.createOrUpdateRoute(notebookName, datalab, k8sPort);
+  return proxyRouteApi.createOrUpdateRoute(notebookName, datalabInfo, k8sPort);
 };
 
 export default { createNotebook };
