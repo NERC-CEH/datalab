@@ -1,5 +1,6 @@
 import axios from 'axios';
 import logger from 'winston';
+import has from 'lodash/has';
 import config from '../config/config';
 
 const vaultBaseUrl = config.get('vaultApi');
@@ -9,10 +10,7 @@ function storeSecret(path, value) {
   logger.info('Storing secrets in vault path: %s', path);
   return requestVaultToken()
     .then(storeVaultSecret(path, value))
-    .catch((error) => {
-      logger.error('Error retrieving secret %s: ', path, error.response.data);
-      return { message: 'Unable to retrieve secret' };
-    });
+    .catch(handleError(path));
 }
 
 const storeVaultSecret = (path, value) => (response) => {
@@ -44,5 +42,14 @@ function getSecretUrl(path) {
   logger.debug(`Vault secret url: ${vaultBaseUrl}/v1/secret/${path}`);
   return `${vaultBaseUrl}/v1/secret/${path}`;
 }
+
+const handleError = path => (error) => {
+  if (has(error, 'response.data')) {
+    logger.error('Error retrieving secret %s: ', path, error.response.data);
+  } else {
+    logger.error('Error retrieving secret %s: ', path, error);
+  }
+  return { message: 'Unable to retrieve secret' };
+};
 
 export default { storeSecret };

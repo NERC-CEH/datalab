@@ -1,4 +1,5 @@
 import axios from 'axios';
+import has from 'lodash/has';
 import config from '../config/config';
 
 const API_BASE = config.get('kubernetesApi');
@@ -45,7 +46,10 @@ function createPayload(name, value) {
 }
 
 function handleError(error) {
-  throw new Error(`Unable to create kubernetes secret ${error.response.data.message}`);
+  if (has(error, 'response.data.message')) {
+    throw new Error(`Unable to create kubernetes secret ${error.response.data.message}`);
+  }
+  throw new Error(`Unable to create kubernetes secret ${error}`);
 }
 
 export default { getSecret, createSecret, updateSecret, createOrUpdateSecret };
