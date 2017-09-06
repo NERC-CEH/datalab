@@ -8,7 +8,7 @@ function createNewJupyterCredentials() {
 }
 
 function storeCredentialsInVault(datalab, id, secret) {
-  return vault.storeSecret(`${datalab}/notebooks/${id}`, secret);
+  return vault.ensureSecret(`${datalab}/notebooks/${id}`, secret);
 }
 
 export default { createNewJupyterCredentials, storeCredentialsInVault };

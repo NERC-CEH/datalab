@@ -6,20 +6,41 @@ import config from '../config/config';
 const vaultBaseUrl = config.get('vaultApi');
 const vaultAppRole = config.get('vaultAppRole');
 
-function storeSecret(path, value) {
+function ensureSecret(path, strategy) {
   logger.info('Storing secrets in vault path: %s', path);
   return requestVaultToken()
-    .then(storeVaultSecret(path, value))
+    .then(processRequest(path, strategy, strategy))
     .catch(handleError(path));
 }
 
-const storeVaultSecret = (path, value) => (response) => {
-  const params = {
-    headers: { 'X-Vault-Token': response.data.auth.client_token },
-  };
-
-  return axios.post(getSecretUrl(path), value, params);
+const processRequest = (path, strategy) => (token) => {
+  const authHeader = createAuthenticationHeader(token);
+  const secretUrl = getSecretUrl(path);
+  return retrieveSecret(secretUrl, authHeader)
+    .then(createSecretIfRequired(secretUrl, strategy, authHeader));
 };
+
+function retrieveSecret(secretUrl, authHeader) {
+  return axios.get(secretUrl, authHeader)
+    .then(response => response.data)
+    .catch(() => undefined);
+}
+
+const createSecretIfRequired = (secretUrl, strategy, authHeader) => (secret) => {
+  if (!secret) {
+    logger.debug(`Secret does not exist, creating using strategy ${strategy.name}`);
+    const newSecret = strategy();
+    return storeVaultSecret(secretUrl, newSecret, authHeader);
+  }
+  logger.debug('Secret already exists, returning for later use');
+  return Promise.resolve(secret.data);
+};
+
+function storeVaultSecret(secretUrl, value, authHeader) {
+  logger.debug(`Storing Vault secret at: ${secretUrl}`);
+  return axios.post(secretUrl, value, authHeader)
+    .then(() => value);
+}
 
 function requestVaultToken() {
   if (!vaultAppRole) {
@@ -30,7 +51,12 @@ function requestVaultToken() {
     role_id: vaultAppRole,
   };
 
-  return axios.post(getAppRoleLoginUrl(), data);
+  return axios.post(getAppRoleLoginUrl(), data)
+    .then(response => response.data.auth.client_token);
+}
+
+function createAuthenticationHeader(token) {
+  return { headers: { 'X-Vault-Token': token } };
 }
 
 function getAppRoleLoginUrl() {
@@ -52,4 +78,4 @@ const handleError = path => (error) => {
   return { message: 'Unable to retrieve secret' };
 };
 
-export default { storeSecret };
+export default { ensureSecret };
