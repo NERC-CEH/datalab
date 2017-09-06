@@ -1,0 +1,35 @@
+version: '3'
+services:
+  vault:
+    image: 'vault'
+    ports:
+      - 8200:8200
+    command:
+      - server
+      - -dev
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=root
+
+  kong-database:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_USER=kong
+      - POSTGRES_DB=kong
+
+  kong:
+    image: kong:latest
+    restart: always
+    links:
+      - kong-database:kong-database
+    ports:
+      - 80:8000
+      - 443:8443
+      - 8002:8001
+    expose:
+      - 7946
+      - 7946/udp
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
