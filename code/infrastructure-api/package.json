@@ -41,7 +41,7 @@
     "lint": "eslint src",
     "start": "nodemon --exec babel-node src/server.js",
     "clean": "shx rm -rf ./dist",
-    "build": "babel src --out-dir dist",
+    "build": "babel src --ignore spec.js,__mocks__ --out-dir dist",
     "dist": "yarn clean && yarn build && yarn update-version",
     "test": "yarn test-ci -- --watch",
     "test-ci": "jest",

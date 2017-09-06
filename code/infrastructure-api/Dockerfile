@@ -12,6 +12,8 @@ RUN yarn install --silent --production && yarn cache clean
 
 COPY ./dist /usr/src/api
 
+COPY ./manifests /usr/src/api/manifests
+
 EXPOSE 8000
 
 CMD ["node", "server.js"]
