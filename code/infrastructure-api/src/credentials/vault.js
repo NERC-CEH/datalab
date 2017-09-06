@@ -9,7 +9,7 @@ const vaultAppRole = config.get('vaultAppRole');
 function ensureSecret(path, strategy) {
   logger.info('Storing secrets in vault path: %s', path);
   return requestVaultToken()
-    .then(processRequest(path, strategy, strategy))
+    .then(processRequest(path, strategy))
     .catch(handleError(path));
 }
 
