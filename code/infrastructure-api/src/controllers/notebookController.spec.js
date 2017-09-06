@@ -65,7 +65,11 @@ describe('Notebook Controller', () => {
 
 function createRequestBody() {
   return {
-    datalabName: 'datalab',
+    datalabInfo: {
+      name: 'testlab',
+      domain: 'test-datalabs.nerc.ac.uk',
+      volume: 'volume',
+    },
     notebookId: 'notebookId',
     notebookType: 'jupyter',
   };
