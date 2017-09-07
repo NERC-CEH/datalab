@@ -8,10 +8,10 @@ import proxyRouteApi from '../kong/proxyRouteApi';
 
 function createNotebook(datalabInfo, notebookName, notebookType) {
   logger.info(`Creating new ${notebookType} notebook with id: ${notebookName} for datalab: ${datalabInfo.name}`);
-  const notebookCredentials = secretManager.createNewJupyterCredentials();
+  const secretStrategy = secretManager.createNewJupyterCredentials;
 
-  return secretManager.storeCredentialsInVault(datalabInfo.name, notebookName, notebookCredentials)
-    .then(() => k8sSecretApi.createOrUpdateSecret(`jupyter-${notebookName}`, notebookCredentials))
+  return secretManager.storeCredentialsInVault(datalabInfo.name, notebookName, secretStrategy)
+    .then(secret => k8sSecretApi.createOrUpdateSecret(`jupyter-${notebookName}`, secret))
     .then(createNotebookDeployment(notebookName, datalabInfo))
     .then(createNotebookService(notebookName))
     .then(createProxyRoute(notebookName, datalabInfo));

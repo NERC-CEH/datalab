@@ -21,21 +21,37 @@ const loginUrl = `${config.get('vaultApi')}/v1/auth/approle/login`;
 const secretUrl = `${config.get('vaultApi')}/v1/secret/`;
 const secret = { token: 'secret-token' };
 
-describe('vault service', () => {
-  it('should store secrets at the specified path', () => {
-    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
-    mock.onPost(secretUrl + secretPath).reply(204);
+function secretStrategy() {
+  return secret;
+}
 
-    return vault.storeSecret(secretPath, secret)
-      .then((response) => {
-        expect(response.status).toBe(204);
+describe('vault service', () => {
+  it('should store create a secret using the strategy if one does not exist', () => {
+    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+    mock.onGet(secretUrl + secretPath).reply(404);
+    mock.onPost(secretUrl + secretPath).reply(204, secret);
+
+    return vault.ensureSecret(secretPath, secretStrategy)
+      .then((token) => {
+        expect(token).toEqual(secret);
+      });
+  });
+
+  it('should return the existing secret if one exists', () => {
+    const existingSecret = { token: 'existing-secret' };
+    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+    mock.onGet(secretUrl + secretPath).reply(200, { data: existingSecret });
+
+    return vault.ensureSecret(secretPath, secretStrategy)
+      .then((token) => {
+        expect(token).toEqual(existingSecret);
       });
   });
 
   it('should handle a login failure', () => {
     mock.onPost(loginUrl).reply(400, getFailedLoginResponse());
 
-    return vault.storeSecret(secretPath, secret)
+    return vault.ensureSecret(secretPath, secret)
       .then((response) => {
         expect(response).toEqual({
           message: 'Unable to retrieve secret',
