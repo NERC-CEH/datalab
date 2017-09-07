@@ -7,7 +7,7 @@ function createNotebook(request, response) {
   // Parse request for errors
   const errors = validationResult(request);
   if (!errors.isEmpty()) {
-    logger.error(`Invalid notebook creation request: ${request.body}`);
+    logger.error(`Invalid notebook creation request: ${JSON.stringify(request.body)}`);
     return response.status(400).json({ errors: errors.mapped() });
   }
 
