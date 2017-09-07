@@ -1,6 +1,12 @@
 import convict from 'convict';
 
 const config = convict({
+  datalabName: {
+    doc: 'The name of the datalab',
+    format: 'String',
+    default: 'testlab',
+    env: 'DATALAB_NAME',
+  },
   logLevel: {
     doc: 'The logging level',
     format: 'String',
@@ -36,6 +42,12 @@ const config = convict({
     format: 'String',
     default: 'undefinedrole',
     env: 'VAULT_APP_ROLE',
+  },
+  infrastructureApi: {
+    doc: 'The endpoint for the infrastructure management service',
+    format: 'url',
+    default: 'http://localhost:8003',
+    env: 'INFRASTRUCTURE_API',
   },
 });
 
