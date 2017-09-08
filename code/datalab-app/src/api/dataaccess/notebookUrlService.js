@@ -3,6 +3,9 @@ import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
 import { JUPYTER, ZEPPELIN } from '../../shared/notebookTypes';
+import config from '../config';
+
+const DATALAB_NAME = config.get('datalabName');
 
 export default function notebookUrlService(notebook, user) {
   if (notebook.type === ZEPPELIN) {
@@ -29,7 +32,7 @@ function requestZeppelinToken(notebook, user) {
 }
 
 function requestJupyterToken(notebook, user) {
-  return vault.requestNotebookKeys('datalab', notebook)
+  return vault.requestNotebookKeys(DATALAB_NAME, notebook)
     .then(response => response.token);
 }
 
