@@ -5,6 +5,7 @@ import axiosErrorHandler from '../util/errorHandlers';
 import datalabRepository from '../dataaccess/datalabRepository';
 import notebookRepository from '../dataaccess/notebookRepository';
 
+const DATALAB_NAME = config.get('datalabName');
 const NOTEBOOK_CREATION_URL = `${config.get('infrastructureApi')}/notebooks`;
 const ERROR_MESSAGE = 'Unable to create Notebook';
 
@@ -20,7 +21,7 @@ const storeAndCreateNotebook = (user, notebookName, notebookType) => (datalabInf
     name: notebookName,
     displayName: notebookName,
     type: notebookType,
-    url: `https://datalab-${notebookName}.datalabs.nerc.ac.uk`,
+    url: `https://${DATALAB_NAME}-${notebookName}.datalabs.nerc.ac.uk`,
     internalEndpoint: `http://jupyter-${notebookName}`,
   };
 
