@@ -3,6 +3,7 @@ import status from './status';
 import { dataStorage, dataStore } from './dataStorage';
 import { notebook, notebooks } from './notebooks';
 import { datalab, datalabs } from './datalabs';
+import createNotebook from './createNotebook';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -18,8 +19,17 @@ const RootQueryType = new GraphQLObjectType({
   },
 });
 
+const RootMutationType = new GraphQLObjectType({
+  name: 'RootMutationType',
+  description: 'Root mutation methods for Datalabs.',
+  fields: {
+    createNotebook,
+  },
+});
+
 const schema = new GraphQLSchema({
   query: RootQueryType,
+  mutation: RootMutationType,
 });
 
 export default schema;

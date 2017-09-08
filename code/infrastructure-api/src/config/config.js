@@ -10,8 +10,8 @@ const config = convict({
   apiPort: {
     doc: 'The port for the API service',
     format: 'port',
-    default: 8000,
-    env: 'PORT',
+    default: 8003,
+    env: 'INFRASTRUCTURE_API_PORT',
   },
   vaultApi: {
     doc: 'The endpoint for Vault',

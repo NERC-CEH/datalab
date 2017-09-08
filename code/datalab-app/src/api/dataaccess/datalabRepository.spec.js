@@ -13,7 +13,7 @@ database.getModel = mockDatabase;
 
 describe('datalabRepository', () => {
   beforeEach(() => {
-    mockDatabase().clearQuery();
+    mockDatabase().clear();
   });
 
   it('getAll returns expected snapshot', () =>
