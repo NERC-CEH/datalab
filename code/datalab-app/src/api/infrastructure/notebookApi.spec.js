@@ -17,7 +17,7 @@ notebookRepository.createOrUpdate = mockCreateNotebook;
 const NOTEBOOK_CREATION_URL = `${config.get('infrastructureApi')}/notebooks`;
 
 const httpMock = new MockAdapter(axios);
-const datalabInfo = { name: 'testlab' };
+const datalabInfo = { name: 'testlab', domain: 'test-datalabs.nerc.ac.uk' };
 const notebookName = 'notebookName';
 const notebookType = 'jupyter';
 
