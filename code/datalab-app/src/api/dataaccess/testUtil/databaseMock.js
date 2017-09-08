@@ -1,17 +1,25 @@
 
 function createDatabaseMock(items) {
-  let lastQuery;
+  let lastInvocation;
+
   return () => ({
     find: (query) => {
-      lastQuery = query;
+      lastInvocation = { query };
       return { exec: () => Promise.resolve(items) };
     },
     findOne: (query) => {
-      lastQuery = query;
+      lastInvocation = { query };
       return { exec: () => Promise.resolve(items[0]) };
     },
-    query: () => lastQuery,
-    clearQuery: () => { lastQuery = undefined; return undefined; },
+    findOneAndUpdate: (query, entity, params) => {
+      lastInvocation = { query, entity, params };
+      return Promise.resolve(entity);
+    },
+    invocation: () => lastInvocation,
+    query: () => lastInvocation.query,
+    entity: () => lastInvocation.entity,
+    params: () => lastInvocation.params,
+    clear: () => { lastInvocation = undefined; },
   });
 }
 

@@ -13,7 +13,7 @@ database.getModel = mockDatabase;
 
 describe('dataStorageRepository', () => {
   beforeEach(() => {
-    mockDatabase().clearQuery();
+    mockDatabase().clear();
   });
 
   it('getAll returns expected snapshot', () =>

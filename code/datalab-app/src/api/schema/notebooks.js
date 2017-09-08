@@ -2,40 +2,9 @@ import {
   GraphQLID,
   GraphQLList,
   GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
 } from 'graphql';
+import { NotebookType } from '../types/notebookTypes';
 import notebookRepository from '../dataaccess/notebookRepository';
-import notebookUrlService from '../dataaccess/notebookUrlService';
-
-const NotebookType = new GraphQLObjectType({
-  name: 'Notebook',
-  description: 'Type to represent online notebooks',
-  fields: {
-    id: {
-      type: GraphQLID,
-    },
-    name: {
-      type: GraphQLString,
-    },
-    displayName: {
-      type: GraphQLString,
-    },
-    type: {
-      type: GraphQLString,
-    },
-    url: {
-      type: GraphQLString,
-    },
-    internalEndpoint: {
-      type: GraphQLString,
-    },
-    redirectUrl: {
-      type: GraphQLString,
-      resolve: (obj, args, { user }) => notebookUrlService(obj, user),
-    },
-  },
-});
 
 export const notebooks = {
   description: 'List of currently provisioned DataLabs Notebooks.',

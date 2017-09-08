@@ -13,7 +13,7 @@ database.getModel = mockDatabase;
 
 describe('notebookRepository', () => {
   beforeEach(() => {
-    mockDatabase().clearQuery();
+    mockDatabase().clear();
   });
 
   it('getAll returns expected snapshot', () =>
@@ -27,4 +27,13 @@ describe('notebookRepository', () => {
       expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
       expect(notebook).toMatchSnapshot();
     }));
+
+  it('createOrUpdate should query for notebooks with same name', () => {
+    const notebook = { name: 'Notebook', type: 'jupyter' };
+    notebookRepository.createOrUpdate(undefined, notebook).then((createdNotebook) => {
+      expect(mockDatabase().query()).toEqual({ name: createdNotebook.name });
+      expect(mockDatabase().entity()).toEqual(createdNotebook);
+      expect(mockDatabase().params()).toEqual({ upsert: true, setDefaultsOnInsert: true });
+    });
+  });
 });

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notebook API create notebook should handle api errors 1`] = `
+Object {
+  "displayName": "notebookName",
+  "internalEndpoint": "http://jupyter-notebookName",
+  "name": "notebookName",
+  "type": "jupyter",
+  "url": "https://datalab-notebookName.datalabs.nerc.ac.uk",
+}
+`;
+
+exports[`Notebook API create notebook should handle api errors 2`] = `[Error: Unable to create Notebook Error: Request failed with status code 400]`;
