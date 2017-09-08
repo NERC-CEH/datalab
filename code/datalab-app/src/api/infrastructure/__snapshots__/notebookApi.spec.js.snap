@@ -6,7 +6,7 @@ Object {
   "internalEndpoint": "http://jupyter-notebookName",
   "name": "notebookName",
   "type": "jupyter",
-  "url": "https://testlab-notebookName.datalabs.nerc.ac.uk",
+  "url": "https://testlab-notebookName.test-datalabs.nerc.ac.uk",
 }
 `;
 
