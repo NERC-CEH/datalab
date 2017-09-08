@@ -20,7 +20,14 @@ function getUrl(id) {
     });
 }
 
+function createNotebook(notebook) {
+  const mutation = { query: `mutation { createNotebook(notebook: { name: "${notebook.name}", notebookType: ${notebook.type}}) { name } }` };
+  return request.post(apiURL, mutation)
+    .then(res => get(res, 'data.data.notebook'));
+}
+
 export default {
   loadNotebooks,
   getUrl,
+  createNotebook,
 };
