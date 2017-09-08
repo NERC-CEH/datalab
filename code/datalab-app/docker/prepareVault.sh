@@ -34,6 +34,6 @@ echo APP export VAULT_APP_ROLE=${VAULT_APP_ROLE}
 echo INFRASTRUCTURE export VAULT_APP_ROLE=${INFRASTRUCTURE_APP_ROLE}
 
 # Add default keys
-curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"access_key":"VXL8C2ITGFBVMHKV2EV6","secret_key":"iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI"}' http://127.0.0.1:8200/v1/secret/datalab/storage/disk-1
-curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"username":"datalab","password":"password"}' http://127.0.0.1:8200/v1/secret/datalab/notebooks/zeppelin
-curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"token":"jupyterToken"}' http://127.0.0.1:8200/v1/secret/datalab/notebooks/jupyter
+curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"access_key":"VXL8C2ITGFBVMHKV2EV6","secret_key":"iUOhbVYNRxJS2X+5Ukpvsk01TsVWxbdERaNGf5kI"}' http://127.0.0.1:8200/v1/secret/testlab/storage/disk-1
+curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"username":"datalab","password":"password"}' http://127.0.0.1:8200/v1/secret/testlab/notebooks/zeppelin
+curl -X POST -H "X-Vault-Token:$VAULT_TOKEN" -d '{"token":"jupyterToken"}' http://127.0.0.1:8200/v1/secret/testlab/notebooks/jupyter
