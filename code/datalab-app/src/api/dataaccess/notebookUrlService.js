@@ -23,7 +23,7 @@ const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect
 const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?token=${token}` : undefined);
 
 function requestZeppelinToken(notebook, user) {
-  return vault.requestNotebookKeys('datalab', notebook)
+  return vault.requestNotebookKeys(DATALAB_NAME, notebook)
     .then(zeppelinLogin(notebook))
     .catch((error) => {
       logger.error('Error logging in to zeppelin: ', notebook.name, error);
