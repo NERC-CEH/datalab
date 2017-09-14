@@ -1,47 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 import { Button, Form } from 'semantic-ui-react';
+import { renderTextField, renderDropdownField } from '../common/form/controls';
 
-class CreateNotebookForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: '' };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const notebookTypes = [
+  { key: 'jupyter', text: 'Jupyter', value: 'jupyter' },
+  { key: 'zeppelin', text: 'Zeppelin', value: 'zeppelin' },
+];
 
-  handleChange(event) {
-    this.setState({ name: event.target.value });
-  }
-
-  handleSubmit(event) {
-    const notebook = {
-      name: this.state.name,
-      type: 'jupyter',
-    };
-    this.props.createNotebook(notebook);
-    this.setState({ name: '' });
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <div style={{ width: '400px' }}>
-        <h3>Create Notebook</h3>
-        <Form>
-          <Form.Field>
-            <label>Name</label>
-            <input placeholder='Notebook Name' value={this.state.value} onChange={this.handleChange} />
-          </Form.Field>
-          <Button type='submit' primary onClick={this.handleSubmit}>Submit</Button>
-        </Form>
-      </div>
-    );
-  }
-}
-
-CreateNotebookForm.propTypes = {
-  createNotebook: PropTypes.func.isRequired,
+const PureCreateNotebookForm = (props) => {
+  const { handleSubmit } = props;
+  return (
+    <Form onSubmit={ handleSubmit }>
+      <Field name="name" label="Name" component={renderTextField} placeholder='Notebook Name' />
+      <Field name="displayName" label="Display Name" component={renderTextField} placeholder='Display Name' />
+      <Field name="type" label="Notebook Type" component={renderDropdownField} options={notebookTypes} placeholder='Notebook Type'/>
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
 };
 
+const CreateNotebookForm = reduxForm({
+  form: 'createNotebook',
+})(PureCreateNotebookForm);
+
 export default CreateNotebookForm;
+
+CreateNotebookForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
