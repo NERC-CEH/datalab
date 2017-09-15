@@ -8,13 +8,11 @@ import notebookActions from '../../actions/notebookActions';
 import notify from '../common/notify';
 
 class CreateNotebookContainer extends Component {
-  createNotebook = (notebook) => {
-    console.log(notebook);
-    return this.props.actions.createNotebook(notebook)
+  createNotebook = notebook =>
+    this.props.actions.createNotebook(notebook)
       .then(this.props.actions.loadNotebooks)
       .then(() => notify.success('Notebook created'))
       .catch(err => notify.error('Unable to create Notebook'));
-  };
 
   render() {
     return (
@@ -48,5 +46,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { CreateNotebookContainer as PureCreateNotebooksContainer }; // export for testing
+export { CreateNotebookContainer as PureCreateNotebookContainer }; // export for testing
 export default connect(mapStateToProps, mapDispatchToProps)(CreateNotebookContainer);
