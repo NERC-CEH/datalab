@@ -25,6 +25,7 @@ exports[`NotebookCard creates correct snapshot for Jupyer notebook type 1`] = `
   >
     <Button
       as="button"
+      disabled={false}
       fluid={true}
       onClick={[Function]}
       primary={true}
@@ -60,6 +61,46 @@ exports[`NotebookCard creates correct snapshot for Zeppelin notebook type 1`] = 
   >
     <Button
       as="button"
+      disabled={false}
+      fluid={true}
+      onClick={[Function]}
+      primary={true}
+    >
+      Open
+    </Button>
+  </CardContent>
+</Card>
+`;
+
+exports[`NotebookCard should provide defaults and disable the open button if no notebook is provided 1`] = `
+<Card>
+  <CardContent>
+    <Icon
+      as="i"
+      name="question circle"
+      size="big"
+      style={
+        Object {
+          "float": "right",
+        }
+      }
+    />
+    <CardHeader>
+      Display Name
+    </CardHeader>
+    <CardMeta>
+      Notebook type
+    </CardMeta>
+    <CardDescription>
+      A description of the notebook purpose
+    </CardDescription>
+  </CardContent>
+  <CardContent
+    extra={true}
+  >
+    <Button
+      as="button"
+      disabled={true}
       fluid={true}
       onClick={[Function]}
       primary={true}

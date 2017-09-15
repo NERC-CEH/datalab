@@ -1,8 +1,11 @@
 import React from 'react';
-import { Input, Dropdown, Form } from 'semantic-ui-react';
+import { Input, TextArea, Dropdown, Form } from 'semantic-ui-react';
 
 export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) =>
   <Form.Field control={Input} label={label} {...input} {...custom} />;
+
+export const renderTextArea = ({ input, label, meta: { touched, error }, ...custom }) =>
+  <Form.Field control={TextArea} label={label} {...input} {...custom} />;
 
 export const renderDropdownField = ({ input, label, meta: { touched, error }, ...custom }) =>
   <Form.Field>

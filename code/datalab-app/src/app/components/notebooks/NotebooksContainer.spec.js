@@ -131,7 +131,7 @@ describe('NotebooksContainer', () => {
       };
 
       const output = shallowRenderPure(props);
-      const openNotebook = output.childAt(0).childAt(0).prop('openNotebook');
+      const openNotebook = output.childAt(0).prop('openNotebook');
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
@@ -162,7 +162,7 @@ describe('NotebooksContainer', () => {
       };
 
       const output = shallowRenderPure(props);
-      const openNotebook = output.childAt(0).childAt(0).prop('openNotebook');
+      const openNotebook = output.childAt(0).prop('openNotebook');
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();

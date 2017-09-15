@@ -2,30 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Form } from 'semantic-ui-react';
-import { renderTextField, renderDropdownField } from '../common/form/controls';
+import { renderTextField, renderTextArea, renderDropdownField } from '../common/form/controls';
+import renderUrlTextField from '../common/form/urlTextField';
 
 const notebookTypes = [
-  { key: 'jupyter', text: 'Jupyter', value: 'jupyter' },
-  { key: 'zeppelin', text: 'Zeppelin', value: 'zeppelin' },
+  { text: 'Jupyter', value: 'jupyter' },
+  { text: 'Zeppelin', value: 'zeppelin' },
 ];
 
-const PureCreateNotebookForm = (props) => {
+const CreateNotebookForm = (props) => {
   const { handleSubmit } = props;
   return (
     <Form onSubmit={ handleSubmit }>
-      <Field name="name" label="Name" component={renderTextField} placeholder='Notebook Name' />
-      <Field name="displayName" label="Display Name" component={renderTextField} placeholder='Display Name' />
-      <Field name="type" label="Notebook Type" component={renderDropdownField} options={notebookTypes} placeholder='Notebook Type'/>
-      <Button type="submit">Submit</Button>
+      <Field name='displayName' label='Display Name' component={renderTextField} placeholder='Display Name' />
+      <Field name='type' label='Notebook Type' component={renderDropdownField} options={notebookTypes} placeholder='Notebook Type'/>
+      <Field name='name' label='URL Name' component={renderUrlTextField} placeholder='Notebook Name for URLs' />
+      <Field name='description' label='Description' component={renderTextArea} placeholder='Description' />
+      <Button type='submit' primary>Create</Button>
     </Form>
   );
 };
 
-const CreateNotebookForm = reduxForm({
+const CreateNotebookReduxForm = reduxForm({
   form: 'createNotebook',
-})(PureCreateNotebookForm);
+})(CreateNotebookForm);
 
-export default CreateNotebookForm;
+export { CreateNotebookForm as PureCreateNotebookForm };
+export default CreateNotebookReduxForm;
 
 CreateNotebookForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
