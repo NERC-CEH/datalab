@@ -1,4 +1,4 @@
-import validate from './newNotebookFormValidator';
+import { syncValidate } from './newNotebookFormValidator';
 
 describe('New Notebook Form Validator', () => {
   it('should return empty errors object for valid form', () => {
@@ -9,12 +9,12 @@ describe('New Notebook Form Validator', () => {
       description: 'The notebook description',
     };
 
-    expect(validate(values)).toBeUndefined();
+    expect(syncValidate(values)).toBeUndefined();
   });
 
   it('should return correct errors for empty form', () => {
     const values = {};
 
-    expect(validate(values)).toMatchSnapshot();
+    expect(syncValidate(values)).toMatchSnapshot();
   });
 });
