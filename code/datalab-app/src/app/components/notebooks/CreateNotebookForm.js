@@ -11,7 +11,7 @@ const notebookTypes = [
 ];
 
 const CreateNotebookForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, cancel } = props;
   return (
     <Form onSubmit={ handleSubmit }>
       <Field name='displayName' label='Display Name' component={renderTextField} placeholder='Display Name' />
@@ -19,12 +19,14 @@ const CreateNotebookForm = (props) => {
       <Field name='name' label='URL Name' component={renderUrlTextField} placeholder='Notebook Name for URLs' />
       <Field name='description' label='Description' component={renderTextArea} placeholder='Description' />
       <Button type='submit' primary>Create</Button>
+      <Button type='button' onClick={cancel}>Cancel</Button>
     </Form>
   );
 };
 
 const CreateNotebookReduxForm = reduxForm({
   form: 'createNotebook',
+  destroyOnUnmount: false,
 })(CreateNotebookForm);
 
 export { CreateNotebookForm as PureCreateNotebookForm };
@@ -32,4 +34,5 @@ export default CreateNotebookReduxForm;
 
 CreateNotebookForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
 };

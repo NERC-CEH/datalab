@@ -8,9 +8,11 @@ describe('CreateNotebookForm', () => {
   }
 
   const onSubmitMock = jest.fn();
+  const onCancelMock = jest.fn();
 
   const generateProps = () => ({
     onSubmit: onSubmitMock,
+    cancel: onCancelMock,
   });
 
   beforeEach(() => jest.resetAllMocks());
