@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { reset } from 'redux-form';
 import { Grid, Modal } from 'semantic-ui-react';
 import CreateNotebookForm from './CreateNotebookForm';
 import NotebookCard from './NotebookCard';
@@ -13,6 +14,7 @@ class CreateNotebookContainer extends Component {
   createNotebook = notebook =>
     Promise.resolve(this.props.actions.closeModalDialog())
       .then(() => this.props.actions.createNotebook(notebook))
+      .then(this.props.actions.resetForm)
       .then(this.props.actions.loadNotebooks)
       .then(() => notify.success('Notebook created'))
       .catch(err => notify.error('Unable to create Notebook'));
@@ -21,15 +23,15 @@ class CreateNotebookContainer extends Component {
     return (
       <div className='ui card'>
         <NewNotebookButton onClick={this.props.actions.openModalDialog} />
-        <Modal dimmer='blurring' open={this.props.dialogOpen}>
+        <Modal size='large' dimmer='blurring' open={this.props.dialogOpen}>
           <Modal.Header>Create a Notebook</Modal.Header>
           <Modal.Content>
-            <Grid columns={2} divided>
+            <Grid divided>
               <Grid.Row>
-                <Grid.Column>
+                <Grid.Column width={10}>
                   <CreateNotebookForm onSubmit={this.createNotebook} cancel={this.props.actions.closeModalDialog} />
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={6}>
                   <h2>Notebook Preview</h2>
                   <NotebookCard notebook={this.props.notebook} />
                 </Grid.Column>
@@ -59,6 +61,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       ...notebookActions,
       ...modalDialogActions,
+      resetForm: () => reset('createNotebook'),
     }, dispatch),
   };
 }
