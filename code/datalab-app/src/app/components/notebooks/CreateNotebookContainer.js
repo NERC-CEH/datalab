@@ -6,36 +6,28 @@ import CreateNotebookForm from './CreateNotebookForm';
 import NotebookCard from './NotebookCard';
 import NewNotebookButton from './NewNotebookButton';
 import notebookActions from '../../actions/notebookActions';
+import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../common/notify';
 
 class CreateNotebookContainer extends Component {
-  constructor() {
-    super();
-    this.state = { open: false };
-  }
-
-  close = () => this.setState({ open: false });
-  open = () => this.setState({ open: true });
-
   createNotebook = notebook =>
-    Promise.resolve(this.close())
+    Promise.resolve(this.props.actions.closeModalDialog())
       .then(() => this.props.actions.createNotebook(notebook))
       .then(this.props.actions.loadNotebooks)
       .then(() => notify.success('Notebook created'))
       .catch(err => notify.error('Unable to create Notebook'));
 
   render() {
-    const { open } = this.state;
     return (
       <div className='ui card'>
-        <NewNotebookButton onClick={this.open} />
-        <Modal dimmer='blurring' open={open}>
+        <NewNotebookButton onClick={this.props.actions.openModalDialog} />
+        <Modal dimmer='blurring' open={this.props.dialogOpen}>
           <Modal.Header>Create a Notebook</Modal.Header>
           <Modal.Content>
             <Grid columns={2} divided>
               <Grid.Row>
                 <Grid.Column>
-                  <CreateNotebookForm onSubmit={this.createNotebook} cancel={this.close} />
+                  <CreateNotebookForm onSubmit={this.createNotebook} cancel={this.props.actions.closeModalDialog} />
                 </Grid.Column>
                 <Grid.Column>
                   <h2>Notebook Preview</h2>
@@ -50,17 +42,23 @@ class CreateNotebookContainer extends Component {
   }
 }
 
-function mapStateToProps({ form }) {
+function mapStateToProps({ form, modalDialog }) {
+  let notebook = {};
+
   if (form && form.createNotebook && form.createNotebook.values) {
-    return { notebook: form.createNotebook.values };
+    notebook = form.createNotebook.values;
   }
-  return { notebook: {} };
+  return {
+    notebook,
+    dialogOpen: modalDialog.open,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       ...notebookActions,
+      ...modalDialogActions,
     }, dispatch),
   };
 }

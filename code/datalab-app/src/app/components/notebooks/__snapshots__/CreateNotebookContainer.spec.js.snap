@@ -11,7 +11,7 @@ exports[`NotebooksContainer is a container which passes correct props to Noteboo
     closeOnDimmerClick={true}
     closeOnDocumentClick={false}
     dimmer="blurring"
-    open={false}
+    open={true}
   >
     <ModalHeader>
       Create a Notebook
