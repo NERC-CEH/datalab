@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Notebook Form Validator should return correct errors for empty form 1`] = `
+Object {
+  "description": "Description can't be blank",
+  "displayName": "Display name can't be blank",
+  "name": "Name can't be blank",
+  "type": "Type can't be blank",
+}
+`;
