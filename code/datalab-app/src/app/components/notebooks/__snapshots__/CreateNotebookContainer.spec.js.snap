@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebooksContainer is a container which passes correct props to NotebookCard 1`] = `
+<Grid
+  columns={2}
+  divided={true}
+>
+  <GridRow>
+    <GridColumn>
+      <ReduxForm
+        onSubmit={[Function]}
+      />
+    </GridColumn>
+    <GridColumn>
+      <h2>
+        Notebook Preview
+      </h2>
+      <NotebookCard
+        notebook={
+          Object {
+            "name": "Name",
+          }
+        }
+      />
+    </GridColumn>
+  </GridRow>
+</Grid>
+`;

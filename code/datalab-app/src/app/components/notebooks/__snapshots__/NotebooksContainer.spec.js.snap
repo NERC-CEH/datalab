@@ -1,39 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotebooksContainer is a container which passes correct props to NotebookCards 1`] = `
-<div>
-  <PromisedContentWrapper
-    promise={
-      Object {
-        "fetching": false,
-        "value": Array [
-          Object {
-            "prop": "prop1",
-          },
-          Object {
-            "prop": "prop2",
-          },
-        ],
-      }
+<PromisedContentWrapper
+  promise={
+    Object {
+      "fetching": false,
+      "value": Array [
+        Object {
+          "prop": "prop1",
+        },
+        Object {
+          "prop": "prop2",
+        },
+      ],
     }
-  >
-    <NotebookCards
-      notebooks={
-        Array [
-          Object {
-            "prop": "prop1",
-          },
-          Object {
-            "prop": "prop2",
-          },
-        ]
-      }
-      openNotebook={[Function]}
-    />
-  </PromisedContentWrapper>
-  <Divider />
-  <CreateNotebookForm
-    createNotebook={[Function]}
+  }
+>
+  <NotebookCards
+    notebooks={
+      Array [
+        Object {
+          "prop": "prop1",
+        },
+        Object {
+          "prop": "prop2",
+        },
+      ]
+    }
+    openNotebook={[Function]}
   />
-</div>
+</PromisedContentWrapper>
 `;

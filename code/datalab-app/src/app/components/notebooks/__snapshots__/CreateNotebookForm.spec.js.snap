@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`] = `
+<Form
+  as="form"
+>
+  <Field
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+    placeholder="Display Name"
+  />
+  <Field
+    component={[Function]}
+    label="Notebook Type"
+    name="type"
+    options={
+      Array [
+        Object {
+          "text": "Jupyter",
+          "value": "jupyter",
+        },
+        Object {
+          "text": "Zeppelin",
+          "value": "zeppelin",
+        },
+      ]
+    }
+    placeholder="Notebook Type"
+  />
+  <Field
+    component={[Function]}
+    label="URL Name"
+    name="name"
+    placeholder="Notebook Name for URLs"
+  />
+  <Field
+    component={[Function]}
+    label="Description"
+    name="description"
+    placeholder="Description"
+  />
+  <Button
+    as="button"
+    primary={true}
+    type="submit"
+  >
+    Create
+  </Button>
+</Form>
+`;

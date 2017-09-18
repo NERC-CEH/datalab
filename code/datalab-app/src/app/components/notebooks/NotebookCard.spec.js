@@ -56,4 +56,15 @@ describe('NotebookCard', () => {
     expect(openNotebookMock).toHaveBeenCalledTimes(1);
     expect(openNotebookMock).toHaveBeenCalledWith('100');
   });
+
+  it('should provide defaults and disable the open button if no notebook is provided', () => {
+    // Arrange
+    const props = { notebook: {} };
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
 });
