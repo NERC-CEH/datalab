@@ -1,3 +1,3 @@
-path "secret/datalab/*" {
+path "secret/testlab/*" {
  capabilities = ["read", "list"]
 }
