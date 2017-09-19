@@ -21,7 +21,11 @@ function getUrl(id) {
 }
 
 function createNotebook(notebook) {
-  const mutation = { query: `mutation { createNotebook(notebook: { name: "${notebook.name}", notebookType: ${notebook.type}}) { name } }` };
+  const mutation = { query: `mutation { createNotebook(notebook: { 
+    name: "${notebook.name}", 
+    displayName: "${notebook.displayName}", 
+    description: "${notebook.description}",
+    type: ${notebook.type}}) { name } }` };
   return request.post(apiURL, mutation)
     .then(res => get(res, 'data.data.notebook'));
 }

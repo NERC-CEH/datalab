@@ -51,11 +51,17 @@ export const NotebookCreationType = new GraphQLInputObjectType({
   name: 'NotebookCreationRequest',
   description: 'Type to describe the mutation for creating a new Notebook.',
   fields: {
+    displayName: {
+      type: GraphQLString,
+    },
     name: {
       type: GraphQLString,
     },
-    notebookType: {
+    type: {
       type: NotebookTypeEnum,
+    },
+    description: {
+      type: GraphQLString,
     },
   },
 });

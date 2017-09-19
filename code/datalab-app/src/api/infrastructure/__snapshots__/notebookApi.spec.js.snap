@@ -2,11 +2,8 @@
 
 exports[`Notebook API create notebook should handle api errors 1`] = `
 Object {
-  "displayName": "notebookName",
-  "internalEndpoint": "http://jupyter-notebookName",
   "name": "notebookName",
-  "type": "jupyter",
-  "url": "https://testlab-notebookName.test-datalabs.nerc.ac.uk",
+  "notebookType": "jupyter",
 }
 `;
 

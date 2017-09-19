@@ -8,32 +8,36 @@ import notebookRepository from '../dataaccess/notebookRepository';
 const NOTEBOOK_CREATION_URL = `${config.get('infrastructureApi')}/notebooks`;
 const ERROR_MESSAGE = 'Unable to create Notebook';
 
-function createNotebook(user, datalabName, { name, notebookType }) {
-  logger.info(`Requesting notebook creation for ${notebookType} called '${name}'`);
+/* Notebook creation API
+ * This performs the following steps:
+ * - Loads information about the datalab
+ * - Creates or updates any existing notebook
+ * - Sends creation request to the infrastructure service
+ */
+function createNotebook(user, datalabName, notebook) {
+  logger.info(`Requesting notebook creation for ${notebook.type} called '${notebook.name}'`);
   return datalabRepository.getByName(user, datalabName)
-    .then(storeAndCreateNotebook(user, name, notebookType))
+    .then(storeAndCreateNotebook(user, notebook))
     .catch(axiosErrorHandler(ERROR_MESSAGE));
 }
 
-const storeAndCreateNotebook = (user, notebookName, notebookType) => (datalabInfo) => {
-  const notebook = {
-    name: notebookName,
-    displayName: notebookName,
-    type: notebookType,
-    url: `https://${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
-    internalEndpoint: `http://jupyter-${notebookName}`,
+const storeAndCreateNotebook = (user, notebook) => (datalabInfo) => {
+  const notebookRequest = {
+    ...notebook,
+    url: `https://${datalabInfo.name}-${notebook.name}.${datalabInfo.domain}`,
+    internalEndpoint: `http://jupyter-${notebook.name}`,
   };
 
-  return notebookRepository.createOrUpdate(user, notebook)
-    .then(sendCreationRequest(notebookName, notebookType, datalabInfo))
+  return notebookRepository.createOrUpdate(user, notebookRequest)
+    .then(sendCreationRequest(notebookRequest, datalabInfo))
     .then(() => notebook);
 };
 
-const sendCreationRequest = (notebookName, notebookType, datalabInfo) => () => {
+const sendCreationRequest = (notebookRequest, datalabInfo) => () => {
   const payload = {
     datalabInfo,
-    notebookId: notebookName,
-    notebookType,
+    notebookId: notebookRequest.name,
+    notebookType: notebookRequest.type,
   };
   logger.debug(`Creation Request Url: ${NOTEBOOK_CREATION_URL} payload ${JSON.stringify(payload)}`);
   return axios.post(NOTEBOOK_CREATION_URL, payload)
