@@ -47,5 +47,12 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
   >
     Create
   </Button>
+  <Button
+    as="button"
+    onClick={[Function]}
+    type="button"
+  >
+    Cancel
+  </Button>
 </Form>
 `;

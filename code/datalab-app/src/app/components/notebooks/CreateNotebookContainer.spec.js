@@ -8,6 +8,31 @@ import notify from '../common/notify';
 const notebook = { name: 'Name' };
 
 describe('NotebooksContainer', () => {
+  function createDefaultStore() {
+    return createStore()({
+      modalDialog: { open: false },
+      form: { createNotebook: { values: notebook } },
+    });
+  }
+
+  const createNotebookMock = jest.fn();
+  const loadNotebooksMock = jest.fn();
+
+  function createProps() {
+    return {
+      notebook,
+      dialogOpen: false,
+      actions: {
+        createNotebook: createNotebookMock,
+        loadNotebooks: loadNotebooksMock,
+        openModalDialog: () => {
+        },
+        closeModalDialog: () => {
+        },
+      },
+    };
+  }
+
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
@@ -20,7 +45,9 @@ describe('NotebooksContainer', () => {
     }
 
     it('extracts the form values from the redux state', () => {
-      const store = createStore()({});
+      const store = createStore()({
+        modalDialog: { open: false },
+      });
 
       const output = shallowRenderConnected(store);
 
@@ -28,9 +55,7 @@ describe('NotebooksContainer', () => {
     });
 
     it('provides empty notebook if the form does not yet exist in the redux state', () => {
-      const store = createStore()({
-        form: { createNotebook: { values: notebook } },
-      });
+      const store = createDefaultStore();
 
       const output = shallowRenderConnected(store);
 
@@ -39,7 +64,9 @@ describe('NotebooksContainer', () => {
 
     it('binds correct actions', () => {
       // Arrange
-      const store = createStore()({});
+      const store = createStore()({
+        modalDialog: { open: false },
+      });
 
       // Act
       const output = shallowRenderConnected(store).prop('actions');
@@ -64,7 +91,14 @@ describe('NotebooksContainer', () => {
 
     it('passes correct props to NotebookCard', () => {
       // Arrange
-      const props = { notebook };
+      const props = {
+        notebook,
+        dialogOpen: true,
+        actions: {
+          openModalDialog: () => {},
+          closeModalDialog: () => {},
+        },
+      };
 
       // Act
       expect(shallowRenderPure(props)).toMatchSnapshot();
@@ -72,16 +106,10 @@ describe('NotebooksContainer', () => {
 
     it('createNotebook method calls load notebooks action on successful creation', () => {
       // Arrange
-      const createNotebookMock = jest.fn().mockReturnValue(Promise.resolve('success'));
-      const loadNotebooksMock = jest.fn().mockReturnValue(Promise.resolve('success'));
+      createNotebookMock.mockReturnValue(Promise.resolve('success'));
+      loadNotebooksMock.mockReturnValue(Promise.resolve('success'));
 
-      const props = {
-        notebook,
-        actions: {
-          createNotebook: createNotebookMock,
-          loadNotebooks: loadNotebooksMock,
-        },
-      };
+      const props = createProps();
 
       const output = shallowRenderPure(props);
       const createNotebookForm = output.find(CreateNotebookForm);
@@ -98,16 +126,9 @@ describe('NotebooksContainer', () => {
 
     it('openNotebook method calls toastr  on resolved getUrl', () => {
       // Arrange
-      const createNotebookMock = jest.fn().mockReturnValue(Promise.reject('failed'));
-      const loadNotebooksMock = jest.fn();
+      createNotebookMock.mockReturnValue(Promise.reject('failed'));
 
-      const props = {
-        notebook,
-        actions: {
-          createNotebook: createNotebookMock,
-          loadNotebooks: loadNotebooksMock,
-        },
-      };
+      const props = createProps();
 
       const output = shallowRenderPure(props);
       const createNotebookForm = output.find(CreateNotebookForm);
