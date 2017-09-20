@@ -12,23 +12,27 @@ exports[`NotebooksContainer is a container which passes correct props to Noteboo
     closeOnDocumentClick={false}
     dimmer="blurring"
     open={true}
+    size="large"
   >
     <ModalHeader>
       Create a Notebook
     </ModalHeader>
     <ModalContent>
       <Grid
-        columns={2}
         divided={true}
       >
         <GridRow>
-          <GridColumn>
+          <GridColumn
+            width={10}
+          >
             <ReduxForm
               cancel={[Function]}
               onSubmit={[Function]}
             />
           </GridColumn>
-          <GridColumn>
+          <GridColumn
+            width={6}
+          >
             <h2>
               Notebook Preview
             </h2>

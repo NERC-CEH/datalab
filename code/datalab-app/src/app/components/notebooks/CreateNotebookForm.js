@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Form } from 'semantic-ui-react';
 import { renderTextField, renderTextArea, renderDropdownField } from '../common/form/controls';
 import renderUrlTextField from '../common/form/urlTextField';
+import validateFn from './newNotebookFormValidator';
 
 const notebookTypes = [
   { text: 'Jupyter', value: 'jupyter' },
@@ -11,14 +12,14 @@ const notebookTypes = [
 ];
 
 const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel } = props;
+  const { handleSubmit, cancel, submitting } = props;
   return (
     <Form onSubmit={ handleSubmit }>
       <Field name='displayName' label='Display Name' component={renderTextField} placeholder='Display Name' />
       <Field name='type' label='Notebook Type' component={renderDropdownField} options={notebookTypes} placeholder='Notebook Type'/>
       <Field name='name' label='URL Name' component={renderUrlTextField} placeholder='Notebook Name for URLs' />
       <Field name='description' label='Description' component={renderTextArea} placeholder='Description' />
-      <Button type='submit' primary>Create</Button>
+      <Button type='submit' disabled={submitting} primary>Create</Button>
       <Button type='button' onClick={cancel}>Cancel</Button>
     </Form>
   );
@@ -26,6 +27,7 @@ const CreateNotebookForm = (props) => {
 
 const CreateNotebookReduxForm = reduxForm({
   form: 'createNotebook',
+  validate: validateFn,
   destroyOnUnmount: false,
 })(CreateNotebookForm);
 

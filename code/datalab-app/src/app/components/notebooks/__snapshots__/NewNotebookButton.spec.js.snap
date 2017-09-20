@@ -17,6 +17,7 @@ exports[`New Notebook Button creates correct snapshot 1`] = `
     style={
       Object {
         "margin": "auto",
+        "marginBottom": "50px",
         "marginTop": "50px",
         "width": "50%",
       }
