@@ -1,24 +1,19 @@
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
-import gql from 'graphql-tag';
-import auth from '../auth/auth';
+import { get } from 'lodash';
+import request from '../auth/secureRequest';
 import apiBase from './apiBase';
 
 const apiURL = `${apiBase}/api`;
-const networkInterface = createNetworkInterface({ uri: apiURL });
 
-networkInterface.use([{
-  applyMiddleware(req, next) {
-    if (!req.options.headers) {
-      req.options.headers = {};  // Create the header object if needed.
-    }
+export const gqlQuery = (query, variables) => {
+  const options = { headers: { 'Content-Type': 'application/json' } };
+  const payload = JSON.stringify({ query: `query ${query}`, variables });
+  return request.post(apiURL, payload, options)
+    .then(res => get(res, 'data'));
+};
 
-    req.options.headers.Authorization = `Bearer ${auth.getCurrentSession().accessToken}`;
-    next();
-  },
-}]);
-
-export const client = new ApolloClient({ networkInterface, connectToDevTools: true });
-
-export const gqlQuery = (query, variables) => client.query({ query: gql`query ${query}`, variables, fetchPolicy: 'network-only' });
-
-export const gqlMutation = (mutation, variables) => client.mutate({ mutation: gql`mutation ${mutation}`, variables });
+export const gqlMutation = (mutation, variables) => {
+  const options = { headers: { 'Content-Type': 'application/json' } };
+  const payload = JSON.stringify({ query: `mutation ${mutation}`, variables });
+  return request.post(apiURL, payload, options)
+    .then(res => get(res, 'data'));
+};
