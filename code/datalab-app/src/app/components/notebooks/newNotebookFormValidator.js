@@ -1,4 +1,5 @@
 import validate from 'validate.js';
+import notebookActions from '../../actions/notebookActions';
 
 const constraints = {
   displayName: {
@@ -27,6 +28,13 @@ function errorReducer(accumulator, error) {
   return accumulator;
 }
 
-const validateObject = values => validate(values, constraints, { format: 'reduxForm' });
+export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
 
-export default validateObject;
+export const asyncValidate = (values, dispatch) =>
+  dispatch(notebookActions.checkNotebookName(values.name))
+    .then((response) => {
+      if (response.value) {
+        return Promise.reject({ name: 'Notebook already exists. Name must be unique' });
+      }
+      return Promise.resolve();
+    });

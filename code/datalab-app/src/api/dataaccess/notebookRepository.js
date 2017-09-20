@@ -14,9 +14,13 @@ function getById(user, id) {
   return Notebook().findOne({ _id: id }).exec();
 }
 
+function getByName(user, name) {
+  return Notebook().findOne({ name }).exec();
+}
+
 function createOrUpdate(user, notebook) {
   const query = { name: notebook.name };
   return Notebook().findOneAndUpdate(query, notebook, { upsert: true, setDefaultsOnInsert: true });
 }
 
-export default { getAll, getById, createOrUpdate };
+export default { getAll, getById, getByName, createOrUpdate };

@@ -2,6 +2,7 @@ import {
   GraphQLID,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLString,
 } from 'graphql';
 import { NotebookType } from '../types/notebookTypes';
 import notebookRepository from '../dataaccess/notebookRepository';
@@ -21,4 +22,15 @@ export const notebook = {
     },
   },
   resolve: (obj, { id }, { user }) => notebookRepository.getById(user, id),
+};
+
+export const checkNotebookName = {
+  description: 'Details of a single currently provisioned DataLab Notebook.',
+  type: NotebookType,
+  args: {
+    name: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  },
+  resolve: (obj, { name }, { user }) => notebookRepository.getByName(user, name),
 };

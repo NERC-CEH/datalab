@@ -28,6 +28,12 @@ describe('notebookRepository', () => {
       expect(notebook).toMatchSnapshot();
     }));
 
+  it('getByName returns expected snapshot', () =>
+    notebookRepository.getByName(undefined, 'Notebook 1').then((notebook) => {
+      expect(mockDatabase().query()).toEqual({ name: 'Notebook 1' });
+      expect(notebook).toMatchSnapshot();
+    }));
+
   it('createOrUpdate should query for notebooks with same name', () => {
     const notebook = { name: 'Notebook', type: 'jupyter' };
     notebookRepository.createOrUpdate(undefined, notebook).then((createdNotebook) => {

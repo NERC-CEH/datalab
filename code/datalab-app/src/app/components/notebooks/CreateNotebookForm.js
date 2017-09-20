@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Form } from 'semantic-ui-react';
 import { renderTextField, renderTextArea, renderDropdownField } from '../common/form/controls';
 import renderUrlTextField from '../common/form/urlTextField';
-import validateFn from './newNotebookFormValidator';
+import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 
 const notebookTypes = [
   { text: 'Jupyter', value: 'jupyter' },
@@ -27,7 +27,9 @@ const CreateNotebookForm = (props) => {
 
 const CreateNotebookReduxForm = reduxForm({
   form: 'createNotebook',
-  validate: validateFn,
+  validate: syncValidate,
+  asyncValidate,
+  asyncBlurFields: ['name'],
   destroyOnUnmount: false,
 })(CreateNotebookForm);
 
