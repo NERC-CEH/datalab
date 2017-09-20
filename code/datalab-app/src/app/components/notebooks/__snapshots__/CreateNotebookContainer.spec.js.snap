@@ -1,28 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotebooksContainer is a container which passes correct props to NotebookCard 1`] = `
-<Grid
-  columns={2}
-  divided={true}
+<div
+  className="ui card"
 >
-  <GridRow>
-    <GridColumn>
-      <ReduxForm
-        onSubmit={[Function]}
-      />
-    </GridColumn>
-    <GridColumn>
-      <h2>
-        Notebook Preview
-      </h2>
-      <NotebookCard
-        notebook={
-          Object {
-            "name": "Name",
-          }
-        }
-      />
-    </GridColumn>
-  </GridRow>
-</Grid>
+  <NewNotebookButton
+    onClick={[Function]}
+  />
+  <Modal
+    closeOnDimmerClick={true}
+    closeOnDocumentClick={false}
+    dimmer="blurring"
+    open={true}
+    size="large"
+  >
+    <ModalHeader>
+      Create a Notebook
+    </ModalHeader>
+    <ModalContent>
+      <Grid
+        divided={true}
+      >
+        <GridRow>
+          <GridColumn
+            width={10}
+          >
+            <ReduxForm
+              cancel={[Function]}
+              onSubmit={[Function]}
+            />
+          </GridColumn>
+          <GridColumn
+            width={6}
+          >
+            <h2>
+              Notebook Preview
+            </h2>
+            <NotebookCard
+              notebook={
+                Object {
+                  "name": "Name",
+                }
+              }
+            />
+          </GridColumn>
+        </GridRow>
+      </Grid>
+    </ModalContent>
+  </Modal>
+</div>
 `;

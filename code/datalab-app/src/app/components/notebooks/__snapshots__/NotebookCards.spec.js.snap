@@ -32,7 +32,12 @@ exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = 
     }
     openNotebook={[Function]}
   />
+  <Connect(CreateNotebookContainer) />
 </CardGroup>
 `;
 
-exports[`NotebookCards creates correct snapshot for an empty array 1`] = `<CardGroup />`;
+exports[`NotebookCards creates correct snapshot for an empty array 1`] = `
+<CardGroup>
+  <Connect(CreateNotebookContainer) />
+</CardGroup>
+`;

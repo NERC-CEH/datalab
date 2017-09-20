@@ -5,12 +5,14 @@ import authentication from './authReducer';
 import dataStorage from './dataStorageReducer';
 import dataStore from './dataStoreReducer';
 import notebooks from './notebooksReducer';
+import modalDialog from './modelDialogReducer';
 
 const rootReducer = combineReducers({
   authentication,
   dataStorage,
   dataStore,
   notebooks,
+  modalDialog,
   router: routerReducer,
   form: formReducer,
 });

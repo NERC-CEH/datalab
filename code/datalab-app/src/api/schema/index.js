@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import status from './status';
 import { dataStorage, dataStore } from './dataStorage';
-import { notebook, notebooks } from './notebooks';
+import { notebook, notebooks, checkNotebookName } from './notebooks';
 import { datalab, datalabs } from './datalabs';
 import createNotebook from './createNotebook';
 
@@ -14,6 +14,7 @@ const RootQueryType = new GraphQLObjectType({
     dataStore,
     notebook,
     notebooks,
+    checkNotebookName,
     datalab,
     datalabs,
   },

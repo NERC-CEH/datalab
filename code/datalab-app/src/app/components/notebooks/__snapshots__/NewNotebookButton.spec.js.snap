@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Notebook Button creates correct snapshot 1`] = `
+<div
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "grey",
+      "color": "white",
+      "cursor": "pointer",
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "margin": "auto",
+        "marginBottom": "50px",
+        "marginTop": "50px",
+        "width": "50%",
+      }
+    }
+  >
+    <Image
+      as="img"
+      centered={true}
+      size="tiny"
+      src="plus.svg"
+      ui={true}
+    />
+    <h3>
+      Create Notebook
+    </h3>
+  </div>
+</div>
+`;

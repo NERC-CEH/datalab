@@ -16,3 +16,9 @@ Object {
   "name": "Notebook 1",
 }
 `;
+
+exports[`notebookRepository getByName returns expected snapshot 1`] = `
+Object {
+  "name": "Notebook 1",
+}
+`;
