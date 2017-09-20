@@ -30,10 +30,11 @@ function errorReducer(accumulator, error) {
 
 export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
 
-export const asyncValidate = (values, dispatch) => dispatch(notebookActions.checkNotebookName(values.name))
-  .then((response) => {
-    if (response.value) {
-      return Promise.reject({ name: 'Notebook already exists. Name must be unique' });
-    }
-    return undefined;
-  });
+export const asyncValidate = (values, dispatch) =>
+  dispatch(notebookActions.checkNotebookName(values.name))
+    .then((response) => {
+      if (response.value) {
+        return Promise.reject({ name: 'Notebook already exists. Name must be unique' });
+      }
+      return Promise.resolve();
+    });
