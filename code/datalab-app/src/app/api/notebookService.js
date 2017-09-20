@@ -1,17 +1,27 @@
 import { get } from 'lodash';
-import request from '../auth/secureRequest';
-import apiBase from './apiBase';
-
-const apiURL = `${apiBase}/api`;
+import { gqlMutation, gqlQuery } from './graphqlClient';
 
 function loadNotebooks() {
-  return request.post(apiURL, { query: '{ notebooks { id, displayName, type } }' })
-    .then(res => get(res, 'data.data.notebooks'));
+  const query = `
+      Notebooks {
+        notebooks {
+          id, displayName, type
+        }
+      }`;
+
+  return gqlQuery(query).then(res => get(res, 'data.notebooks'));
 }
 
 function getUrl(id) {
-  return request.post(apiURL, { query: `{ notebook(id: "${id}") { redirectUrl } }` })
-    .then(res => get(res, 'data.data.notebook'))
+  const query = `
+      GetUrl($id: ID!) {
+        notebook(id: $id) {
+          redirectUrl
+        }
+      }`;
+
+  return gqlQuery(query, { id })
+    .then(res => get(res, 'data.notebook'))
     .then((notebook) => {
       if (!notebook.redirectUrl) {
         throw new Error('Missing notebook URL');
@@ -21,13 +31,14 @@ function getUrl(id) {
 }
 
 function createNotebook(notebook) {
-  const mutation = { query: `mutation { createNotebook(notebook: { 
-    name: "${notebook.name}", 
-    displayName: "${notebook.displayName}", 
-    description: "${notebook.description}",
-    type: ${notebook.type}}) { name } }` };
-  return request.post(apiURL, mutation)
-    .then(res => get(res, 'data.data.notebook'));
+  const mutation = `
+    CreateNotebook($notebook: NotebookCreationRequest) {
+      createNotebook(notebook: $notebook) {
+        name
+      }
+    }`;
+
+  return gqlMutation(mutation, { notebook }).then(res => get(res, 'data.notebook'));
 }
 
 export default {

@@ -1,94 +1,49 @@
-import axios from 'axios';
+import mockClient from './graphqlClient';
 import dataStorageService from './dataStorageService';
 
-jest.mock('axios');
+jest.mock('./graphqlClient');
 
 describe('dataStorageService', () => {
-  beforeEach(() => jest.resetAllMocks());
-
-  const createResolvedResponse = data => Promise.resolve({ data: { data } });
-
-  const createRejectedResponse = error => Promise.reject(error);
+  beforeEach(() => mockClient.clearResult());
 
   describe('loadDataStorage', () => {
-    it('should submit a post request for the data storage and unpack response', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse({ dataStorage: 'expectedDataStoragePayload' }));
-      axios.post = postMock;
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ dataStorage: 'expectedValue' });
 
-      // Act
-      const output = dataStorageService.loadDataStorage();
-
-      // Assert
-      output.then(response => expect(response).toBe('expectedDataStoragePayload'));
+      return dataStorageService.loadDataStorage().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
     });
 
-    it('call submits post request with correct body', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse());
-      axios.post = postMock;
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
 
-      // Act
-      dataStorageService.loadDataStorage();
-
-      // Assert
-      expect(postMock.mock.calls).toMatchSnapshot();
-    });
-
-    it('should throw error if post fails', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createRejectedResponse('expectedBadRequest'));
-      axios.post = postMock;
-
-      // Act
-      const output = dataStorageService.loadDataStorage();
-
-      // Assert
-      output.catch(response => expect(response).toBe('expectedBadRequest'));
+      return dataStorageService.loadDataStorage().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
     });
   });
 
   describe('loadDataStore', () => {
-    it('should submit a post request for the data storage and unpack response', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse({ dataStore: 'expectedDataStorePayload' }));
-      axios.post = postMock;
+    it('should build the correct query and return the data store', () => {
+      const data = { dataStorage: { name: 'expectedName' } };
+      const queryParams = { dataStoreId: 'id' };
+      mockClient.prepareSuccess(data);
 
-      // Act
-      const output = dataStorageService.loadDataStore(123);
-
-      // Assert
-      output.then(response => expect(response).toBe('expectedDataStorePayload'));
+      return dataStorageService.loadDataStore(queryParams.dataStoreId).then((response) => {
+        expect(response).toEqual(data.dataStorage);
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(queryParams);
+      });
     });
 
-    it('call submits post request with correct body', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse());
-      axios.post = postMock;
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
 
-      // Act
-      dataStorageService.loadDataStore(123);
-
-      // Assert
-      expect(postMock.mock.calls).toMatchSnapshot();
-    });
-
-    it('should throw error if post fails', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createRejectedResponse('expectedBadRequest'));
-      axios.post = postMock;
-
-      // Act
-      const output = dataStorageService.loadDataStore(123);
-
-      // Assert
-      output.catch(response => expect(response).toBe('expectedBadRequest'));
+      return dataStorageService.loadDataStore().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
     });
   });
 });
