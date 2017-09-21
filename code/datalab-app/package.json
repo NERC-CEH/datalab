@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "apollo-client": "1.9.2",
     "auth0-js": "8.8.0",
     "axios": "0.16.1",
     "bluebird": "3.5.0",
