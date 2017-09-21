@@ -42,8 +42,13 @@ function createNotebook(notebook) {
 }
 
 function checkNotebookName(notebookName) {
-  return request.post(apiURL, { query: `{ checkNotebookName(name: "${notebookName}") { id } }` })
-    .then(response => get(response, 'data.data.checkNotebookName'));
+  const query = `CheckNotebookName($notebookName: String!) {
+    checkNotebookName(name: $notebookName) { 
+      id 
+    }
+  }`;
+
+  return gqlQuery(query, { notebookName }).then(res => get(res, 'data.checkNotebookName'));
 }
 
 export default {
