@@ -1,107 +1,72 @@
-import axios from 'axios';
+import mockClient from './graphqlClient';
 import notebookService from './notebookService';
 
-jest.mock('axios');
+jest.mock('./graphqlClient');
 
 describe('notebookService', () => {
-  beforeEach(() => jest.resetAllMocks());
-
-  const createResolvedResponse = data => Promise.resolve({ data: { data } });
-
-  const createRejectedResponse = error => Promise.reject(error);
+  beforeEach(() => mockClient.clearResult());
 
   describe('loadNotebooks', () => {
-    it('should submit a post request for the data storage and unpack response', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse({ notebooks: 'expectedNotebooksPayload' }));
-      axios.post = postMock;
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ notebooks: 'expectedValue' });
 
-      // Act
-      const output = notebookService.loadNotebooks();
-
-      // Assert
-      output.then(response => expect(response).toBe('expectedNotebooksPayload'));
+      return notebookService.loadNotebooks().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
     });
 
-    it('call submits post request with correct body', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse());
-      axios.post = postMock;
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
 
-      // Act
-      notebookService.loadNotebooks();
-
-      // Assert
-      expect(postMock.mock.calls).toMatchSnapshot();
-    });
-
-    it('should throw error if post fails', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createRejectedResponse('expectedBadRequest'));
-      axios.post = postMock;
-
-      // Act
-      const output = notebookService.loadNotebooks();
-
-      // Assert
-      output.catch(response => expect(response).toBe('expectedBadRequest'));
+      return notebookService.loadNotebooks().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
     });
   });
 
   describe('getUrl', () => {
-    it('should submit a post request for the url and unpack response', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse({ notebook: { redirectUrl: 'expectedUrl' } }));
-      axios.post = postMock;
+    it('should build the correct query and return the url', () => {
+      const data = { notebook: { redirectUrl: 'expectedUrl' } };
+      const queryParams = { id: 'id' };
+      mockClient.prepareSuccess(data);
 
-      // Act
-      const output = notebookService.getUrl(1);
-
-      // Assert
-      output.then(response => expect(response.redirectUrl).toBe('expectedUrl'));
+      return notebookService.getUrl(queryParams.id).then((response) => {
+        expect(response).toEqual(data.notebook);
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(queryParams);
+      });
     });
 
-    it('should throw an error if returned Url is missing', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse({ notebook: { redirectUrl: null } }));
-      axios.post = postMock;
+    it('should throw an error if no url is specified', () => {
+      const data = { notebook: { name: 'name' } };
+      mockClient.prepareSuccess(data);
 
-      // Act
-      const output = notebookService.getUrl(1);
+      return notebookService.getUrl().catch((error) => {
+        expect(error.message).toEqual('Missing notebook URL');
+      });
+    });
+  });
 
-      // Assert
-      output.catch(response => expect(response).toMatchSnapshot());
+  describe('createNotebook', () => {
+    it('should build the correct mutation and unpack the results', () => {
+      const data = { notebook: { name: 'name' } };
+      mockClient.prepareSuccess(data);
+
+      return notebookService.createNotebook(data.notebook).then((response) => {
+        expect(response).toEqual(data.notebook);
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
     });
 
-    it('calls request with correct body', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createResolvedResponse({ notebook: { redirectUrl: 'expectedUrl' } }));
-      axios.post = postMock;
+    it('should throw an error if the mutation fails', () => {
+      const data = { notebook: { name: 'name' } };
+      mockClient.prepareFailure('error');
 
-      // Act
-      notebookService.getUrl(1);
-
-      // Assert
-      expect(postMock.mock.calls).toMatchSnapshot();
-    });
-
-    it('should throw error if post fails', () => {
-      // Arrange
-      const postMock = jest.fn()
-        .mockReturnValue(createRejectedResponse('expectedBadRequest'));
-      axios.post = postMock;
-
-      // Act
-      const output = notebookService.getUrl(1);
-
-      // Assert
-      output.catch(response => expect(response).toBe('expectedBadRequest'));
+      return notebookService.createNotebook(data.notebook).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
     });
   });
 });

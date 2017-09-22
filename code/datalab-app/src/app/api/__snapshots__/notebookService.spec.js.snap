@@ -1,25 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`notebookService getUrl calls request with correct body 1`] = `
-Array [
-  Array [
-    "http://localhost:8000/api",
-    Object {
-      "query": "{ notebook(id: \\"1\\") { redirectUrl } }",
-    },
-  ],
-]
+exports[`notebookService createNotebook should build the correct mutation and unpack the results 1`] = `
+"
+    CreateNotebook($notebook: NotebookCreationRequest) {
+      createNotebook(notebook: $notebook) {
+        name
+      }
+    }"
 `;
 
-exports[`notebookService getUrl should throw an error if returned Url is missing 1`] = `[Error: Missing notebook URL]`;
+exports[`notebookService getUrl should build the correct query and return the url 1`] = `
+"
+      GetUrl($id: ID!) {
+        notebook(id: $id) {
+          redirectUrl
+        }
+      }"
+`;
 
-exports[`notebookService loadNotebooks call submits post request with correct body 1`] = `
-Array [
-  Array [
-    "http://localhost:8000/api",
-    Object {
-      "query": "{ notebooks { id, displayName, type } }",
-    },
-  ],
-]
+exports[`notebookService loadNotebooks should build the correct query and unpack the results 1`] = `
+"
+      Notebooks {
+        notebooks {
+          id, displayName, type
+        }
+      }"
 `;

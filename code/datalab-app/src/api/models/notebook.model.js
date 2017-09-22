@@ -10,6 +10,7 @@ const NotebookSchema = new Schema({
   name: String,
   displayName: String,
   type: String,
+  description: String,
   url: String,
   internalEndpoint: String,
   users: [String],

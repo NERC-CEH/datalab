@@ -1,17 +1,26 @@
 import { get } from 'lodash';
-import request from '../auth/secureRequest';
-import apiBase from './apiBase';
-
-const apiURL = `${apiBase}/api`;
+import { gqlQuery } from './graphqlClient';
 
 function loadDataStorage() {
-  return request.post(apiURL, { query: '{ dataStorage { capacityTotal capacityUsed linkToStorage name storageType accessKey } }' })
-    .then(res => get(res, 'data.data.dataStorage'));
+  const query = `
+      DataStorage {
+        dataStorage {
+          capacityTotal capacityUsed linkToStorage name storageType accessKey
+        }
+      }`;
+
+  return gqlQuery(query).then(res => get(res, 'data.dataStorage'));
 }
 
 function loadDataStore(dataStoreId) {
-  return request.post(apiURL, { query: `{ dataStore(id: ${dataStoreId}) { capacityTotal capacityUsed linkToStorage name storageType } }` })
-    .then(res => get(res, 'data.data.dataStore'));
+  const query = `
+      GetDataStore($dataStoreId: ID!) {
+        dataStore(id: $dataStoreId) {
+          capacityTotal capacityUsed linkToStorage name storageType
+        }
+      }`;
+
+  return gqlQuery(query, { dataStoreId }).then(res => get(res, 'data.dataStorage'));
 }
 
 export default {

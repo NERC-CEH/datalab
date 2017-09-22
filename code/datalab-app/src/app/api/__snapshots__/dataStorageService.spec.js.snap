@@ -1,23 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dataStorageService loadDataStorage call submits post request with correct body 1`] = `
-Array [
-  Array [
-    "http://localhost:8000/api",
-    Object {
-      "query": "{ dataStorage { capacityTotal capacityUsed linkToStorage name storageType accessKey } }",
-    },
-  ],
-]
+exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
+"
+      DataStorage {
+        dataStorage {
+          capacityTotal capacityUsed linkToStorage name storageType accessKey
+        }
+      }"
 `;
 
-exports[`dataStorageService loadDataStore call submits post request with correct body 1`] = `
-Array [
-  Array [
-    "http://localhost:8000/api",
-    Object {
-      "query": "{ dataStore(id: 123) { capacityTotal capacityUsed linkToStorage name storageType } }",
-    },
-  ],
-]
+exports[`dataStorageService loadDataStore should build the correct query and return the data store 1`] = `
+"
+      GetDataStore($dataStoreId: ID!) {
+        dataStore(id: $dataStoreId) {
+          capacityTotal capacityUsed linkToStorage name storageType
+        }
+      }"
 `;

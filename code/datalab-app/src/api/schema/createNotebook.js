@@ -6,7 +6,7 @@ const DATALAB_NAME = config.get('datalabName');
 
 const createNotebook = {
   type: NotebookType,
-  description: 'Create a new article',
+  description: 'Create a new notebook',
   args: {
     notebook: { type: NotebookCreationType },
   },
