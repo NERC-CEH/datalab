@@ -23,6 +23,26 @@ function createNotebook(request, response) {
     .catch(handleError(response, notebookId));
 }
 
+function deleteNotebook(request, response) {
+  // Parse request for errors
+  const errors = validationResult(request);
+  if (!errors.isEmpty()) {
+    logger.error(`Invalid notebook deletion request: ${JSON.stringify(request.body)}`);
+    return response.status(400).json({ errors: errors.mapped() });
+  }
+
+  // Build request params
+  const { datalabInfo, notebookId, notebookType } = matchedData(request);
+
+  // Handle request
+  return notebookManager.deleteNotebook(datalabInfo, notebookId, notebookType)
+    .then(() => {
+      response.status(204);
+      response.send({ message: 'OK' });
+    })
+    .catch(handleError(response, notebookId));
+}
+
 const handleError = (res, notebookId) => (error) => {
   logger.error(error);
   res.status(500);
@@ -39,4 +59,4 @@ const createNotebookValidator = [
   check('notebookType').exists().withMessage('notebookType must be specified'),
 ];
 
-export default { createNotebookValidator, createNotebook };
+export default { createNotebookValidator, createNotebook, deleteNotebook };

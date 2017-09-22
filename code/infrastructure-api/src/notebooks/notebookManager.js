@@ -11,10 +11,16 @@ function createNotebook(datalabInfo, notebookName, notebookType) {
   const secretStrategy = secretManager.createNewJupyterCredentials;
 
   return secretManager.storeCredentialsInVault(datalabInfo.name, notebookName, secretStrategy)
-    .then(secret => k8sSecretApi.createOrUpdateSecret(`jupyter-${notebookName}`, secret))
+    .then(secret => k8sSecretApi.createOrUpdateSecret(`${notebookType}-${notebookName}`, secret))
     .then(createNotebookDeployment(notebookName, datalabInfo))
     .then(createNotebookService(notebookName))
     .then(createProxyRoute(notebookName, datalabInfo));
+}
+
+function deleteNotebook(datalabInfo, notebookName, notebookType) {
+  logger.info(`Deleting notebook ${notebookName} for datalab: ${datalabInfo.name}`);
+
+  return k8sSecretApi.deleteSecret(`${notebookType}-${notebookName}`);
 }
 
 const createNotebookDeployment = (notebookName, datalabInfo) => () => {
@@ -43,4 +49,4 @@ const createProxyRoute = (notebookName, datalabInfo) => (service) => {
   return proxyRouteApi.createOrUpdateRoute(notebookName, datalabInfo, k8sPort);
 };
 
-export default { createNotebook };
+export default { createNotebook, deleteNotebook };
