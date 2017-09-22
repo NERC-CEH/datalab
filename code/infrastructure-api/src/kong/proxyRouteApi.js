@@ -1,5 +1,6 @@
 import axios from 'axios';
 import logger from 'winston';
+import { has, get } from 'lodash';
 import config from '../config/config';
 
 const API_BASE = config.get('kongApi');
@@ -8,7 +9,19 @@ const API_URL = `${API_BASE}/apis`;
 const KUBERNETES_MASTER_URL = config.get('kubernetesMasterUrl');
 
 /**
- * This module idempotently creates a Kong proxy route
+ * This function deletes a Kong proxy route and matching SNI.
+ * It performs no checks before issuing the delete as the Kong API returns a 404
+ * if the route is not found. This is logged and the function returns success.
+ * Any other errors are logged with a failure response.
+ */
+function deleteRoute(name, datalab) {
+  const routeInfo = createRouteInfo(name, datalab);
+  return deleteApi(routeInfo.apiName)
+    .then(() => deleteSni(routeInfo.requestedSni));
+}
+
+/**
+ * This function idempotently creates a Kong proxy route
  * To do this it performs the following steps
  * - Get the existing SNI if it exists
  * - Create a new SNI if one does not exist
@@ -20,14 +33,20 @@ const KUBERNETES_MASTER_URL = config.get('kubernetesMasterUrl');
  * @param k8sPort the kubernetes port the service is located at
  */
 function createOrUpdateRoute(name, datalab, k8sPort) {
-  const apiName = `${datalab.name}-${name}`;
-  const requestedSni = `${datalab.name}-${name}.${datalab.domain}`;
-  const baseSni = `${datalab.name}.${datalab.domain}`;
+  const routeInfo = createRouteInfo(name, datalab);
 
-  return getSni(requestedSni)
-    .then(createSniIfRequired(requestedSni, baseSni))
-    .then(() => getApi(apiName))
-    .then(createOrUpdateApi(apiName, requestedSni, k8sPort));
+  return getSni(routeInfo.requestedSni)
+    .then(createSniIfRequired(routeInfo.requestedSni, routeInfo.baseSni))
+    .then(() => getApi(routeInfo.apiName))
+    .then(createOrUpdateApi(routeInfo.apiName, routeInfo.requestedSni, k8sPort));
+}
+
+function createRouteInfo(name, datalab) {
+  return {
+    apiName: `${datalab.name}-${name}`,
+    requestedSni: `${datalab.name}-${name}.${datalab.domain}`,
+    baseSni: `${datalab.name}.${datalab.domain}`,
+  };
 }
 
 function getSni(sni) {
@@ -87,6 +106,30 @@ const createOrUpdateApi = (apiName, requestedSni, k8sPort) => (existingApi) => {
   return axios.post(API_URL, payload);
 };
 
+function deleteSni(sniName) {
+  logger.info(`Deleting SNI: ${sniName}`);
+  return axios.delete(`${SNI_URL}/${sniName}`)
+    .then(response => response.data)
+    .catch(handleDeleteError('SNI', sniName));
+}
+
+function deleteApi(apiName) {
+  logger.info(`Deleting API: ${apiName}`);
+  return axios.delete(`${API_URL}/${apiName}`)
+    .then(response => response.data)
+    .catch(handleDeleteError('API', apiName));
+}
+
+const handleDeleteError = (type, name) => (error) => {
+  if (has(error, 'response.status') && get(error, 'response.status') === 404) {
+    logger.warn(`Could not find ${type}: ${name} to delete it`);
+    return Promise.resolve();
+  }
+
+  logger.error(`Error deleting ${type}: ${name}`);
+  throw new Error(`Kong API error: ${error.message}`);
+};
+
 function createPayload(apiName, requestedSni, k8sPort) {
   return {
     name: apiName,
@@ -97,4 +140,4 @@ function createPayload(apiName, requestedSni, k8sPort) {
   };
 }
 
-export default { createOrUpdateRoute };
+export default { createOrUpdateRoute, deleteRoute };
