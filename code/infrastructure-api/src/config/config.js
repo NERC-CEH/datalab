@@ -46,7 +46,7 @@ const config = convict({
   podNamespace: {
     doc: 'The namespace for the pod',
     format: 'String',
-    default: 'test',
+    default: 'devtest',
     env: 'KUBERNETES_NAMESPACE',
   },
 });
