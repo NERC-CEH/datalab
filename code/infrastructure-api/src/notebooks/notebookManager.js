@@ -20,7 +20,12 @@ function createNotebook(datalabInfo, notebookName, notebookType) {
 function deleteNotebook(datalabInfo, notebookName, notebookType) {
   logger.info(`Deleting notebook ${notebookName} for datalab: ${datalabInfo.name}`);
 
-  return k8sSecretApi.deleteSecret(`${notebookType}-${notebookName}`);
+  const k8sName = `${notebookType}-${notebookName}`;
+  return proxyRouteApi.deleteRoute(notebookName, datalabInfo)
+    .then(() => serviceApi.deleteService(k8sName))
+    .then(() => deploymentApi.deleteDeployment(k8sName))
+    .then(() => k8sSecretApi.deleteSecret(k8sName))
+    .then(() => secretManager.deleteSecret(datalabInfo.name, notebookName));
 }
 
 const createNotebookDeployment = (notebookName, datalabInfo) => () => {

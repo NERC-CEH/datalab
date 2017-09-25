@@ -10,7 +10,7 @@ export const handleCreateError = (type, name) => (error) => {
 
 export const handleDeleteError = (type, name) => (error) => {
   if (has(error, 'response.status') && get(error, 'response.status') === 404) {
-    logger.warn(`Kubernetes API error: Could not find ${type}: ${name} to delete it`);
+    logger.warn(`Kubernetes API: Could not find ${type}: ${name} to delete it`);
     return Promise.resolve();
   }
 
@@ -19,5 +19,5 @@ export const handleDeleteError = (type, name) => (error) => {
 };
 
 function createError(message) {
-  return new Error(`Kubernetes API error: ${message}`);
+  return new Error(`Kubernetes API: ${message}`);
 }
