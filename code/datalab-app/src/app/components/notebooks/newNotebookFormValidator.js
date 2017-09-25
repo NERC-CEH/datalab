@@ -11,6 +11,10 @@ const constraints = {
   },
   name: {
     presence: true,
+    format: {
+      pattern: '^[a-z]*$',
+      message: 'must be lower case characters without a space',
+    },
     length: {
       minimum: 4,
       maximum: 12,

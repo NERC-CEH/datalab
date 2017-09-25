@@ -20,6 +20,28 @@ describe('New Notebook Form Validator', () => {
     expect(syncValidate(values)).toMatchSnapshot();
   });
 
+  it('should return correct error for short name', () => {
+    const values = {
+      displayName: 'Display Name',
+      type: 'jupyter',
+      name: 'abc',
+      description: 'The notebook description',
+    };
+
+    expect(syncValidate(values)).toMatchSnapshot();
+  });
+
+  it('should return correct error for name with symbol', () => {
+    const values = {
+      displayName: 'Display Name',
+      type: 'jupyter',
+      name: 'abc!',
+      description: 'The notebook description',
+    };
+
+    expect(syncValidate(values)).toMatchSnapshot();
+  });
+
   it('should return a resolved promise when no async errors', () => {
     const values = { name: 'validName' };
     const dispatch = () => Promise.resolve({});

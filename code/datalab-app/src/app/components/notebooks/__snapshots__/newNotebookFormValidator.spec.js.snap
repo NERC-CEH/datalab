@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`New Notebook Form Validator should return correct error for name with symbol 1`] = `
+Object {
+  "name": "Name must be lower case characters without a space",
+}
+`;
+
+exports[`New Notebook Form Validator should return correct error for short name 1`] = `
+Object {
+  "name": "Name is too short (minimum is 4 characters)",
+}
+`;
+
 exports[`New Notebook Form Validator should return correct errors for empty form 1`] = `
 Object {
   "description": "Description can't be blank",
