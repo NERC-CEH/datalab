@@ -6,9 +6,10 @@ const messages = {
 };
 
 function clearMessages() {
-  messages.info.length = 0;
-  messages.error.length = 0;
   messages.debug.length = 0;
+  messages.info.length = 0;
+  messages.debug.length = 0;
+  messages.error.length = 0;
 }
 
 function getDebugMessages() {

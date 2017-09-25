@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/config';
+import { handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 const NAMESPACE = config.get('podNamespace');
@@ -37,8 +38,14 @@ function updateDeployment(name, manifest) {
     .catch(handleError);
 }
 
+function deleteDeployment(name) {
+  return axios.delete(`${DEPLOYMENT_URL}/${name}`)
+    .then(response => response.data)
+    .catch(handleDeleteError('deployment', name));
+}
+
 function handleError(error) {
   throw new Error(`Unable to create kubernetes deployment ${error.response.data.message}`);
 }
 
-export default { getDeployment, createDeployment, updateDeployment, createOrUpdateDeployment };
+export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment };

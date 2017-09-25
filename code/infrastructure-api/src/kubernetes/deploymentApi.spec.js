@@ -110,6 +110,27 @@ describe('Kubernetes Deployment API', () => {
         });
     });
   });
+
+  describe('delete service', () => {
+    it('should DELETE resource URL', () => {
+      mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(204);
+
+      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME)).resolves.toBeUndefined();
+    });
+
+    it('should return successfully if deployment does not exist', () => {
+      mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404);
+
+      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME)).resolves.toBeUndefined();
+    });
+
+    it('should return error if server errors', () => {
+      mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(500, { message: 'error-message' });
+
+      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME))
+        .rejects.toEqual(new Error('Kubernetes API error: Request failed with status code 500'));
+    });
+  });
 });
 
 function createDeployment() {

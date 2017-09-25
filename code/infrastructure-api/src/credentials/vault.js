@@ -1,6 +1,6 @@
 import axios from 'axios';
 import logger from 'winston';
-import has from 'lodash/has';
+import { has, get } from 'lodash';
 import config from '../config/config';
 
 const vaultBaseUrl = config.get('vaultApi');
@@ -9,11 +9,18 @@ const vaultAppRole = config.get('vaultAppRole');
 function ensureSecret(path, strategy) {
   logger.info('Storing secrets in vault path: %s', path);
   return requestVaultToken()
-    .then(processRequest(path, strategy))
+    .then(processCreateRequest(path, strategy))
     .catch(handleError(path));
 }
 
-const processRequest = (path, strategy) => (token) => {
+function deleteSecret(path) {
+  logger.info('Deleting secret at vault path: %s', path);
+  return requestVaultToken()
+    .then(processDeleteRequest(path))
+    .catch(handleDeleteError(path));
+}
+
+const processCreateRequest = (path, strategy) => (token) => {
   const authHeader = createAuthenticationHeader(token);
   const secretUrl = getSecretUrl(path);
   return retrieveSecret(secretUrl, authHeader)
@@ -41,6 +48,13 @@ function storeVaultSecret(secretUrl, value, authHeader) {
   return axios.post(secretUrl, value, authHeader)
     .then(() => value);
 }
+
+const processDeleteRequest = path => (token) => {
+  const authHeader = createAuthenticationHeader(token);
+  const secretUrl = getSecretUrl(path);
+  return axios.delete(secretUrl, authHeader)
+    .then(response => response.data);
+};
 
 function requestVaultToken() {
   if (!vaultAppRole) {
@@ -78,4 +92,13 @@ const handleError = path => (error) => {
   return { message: 'Unable to retrieve secret' };
 };
 
-export default { ensureSecret };
+const handleDeleteError = path => (error) => {
+  if (has(error, 'response.status') && get(error, 'response.status') === 404) {
+    logger.warn('Could not find vault secret: %s to delete it', path);
+    return Promise.resolve();
+  }
+  logger.error('Error deleting vault secret: %s', path, error.response.data);
+  return { message: 'Unable to delete secret' };
+};
+
+export default { ensureSecret, deleteSecret };

@@ -58,7 +58,7 @@ describe('Notebook Controller', () => {
     return notebookController.createNotebook(request, response)
       .then(() => {
         expect(response.statusCode).toBe(500);
-        expect(response._getData()).toEqual({ error: 'error', message: 'Error creating notebook notebookId' }); // eslint-disable-line no-underscore-dangle
+        expect(response._getData()).toEqual({ error: 'error', message: 'Error creating notebook: notebookId' }); // eslint-disable-line no-underscore-dangle
       });
   });
 });

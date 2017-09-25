@@ -1,6 +1,6 @@
 import axios from 'axios';
-import has from 'lodash/has';
 import config from '../config/config';
+import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 const NAMESPACE = config.get('podNamespace');
@@ -28,12 +28,12 @@ function getSecret(name) {
 
 function createSecret(name, value) {
   return axios.post(SECRET_URL, createPayload(name, value))
-    .catch(handleError);
+    .catch(handleCreateError('secret', name));
 }
 
 function updateSecret(name, value) {
   return axios.put(`${SECRET_URL}/${name}`, createPayload(name, value))
-    .catch(handleError);
+    .catch(handleCreateError('secret', name));
 }
 
 function createPayload(name, value) {
@@ -45,11 +45,10 @@ function createPayload(name, value) {
   };
 }
 
-function handleError(error) {
-  if (has(error, 'response.data.message')) {
-    throw new Error(`Unable to create kubernetes secret ${error.response.data.message}`);
-  }
-  throw new Error(`Unable to create kubernetes secret ${error}`);
+function deleteSecret(name) {
+  return axios.delete(`${SECRET_URL}/${name}`)
+    .then(response => response.data)
+    .catch(handleDeleteError('secret', name));
 }
 
-export default { getSecret, createSecret, updateSecret, createOrUpdateSecret };
+export default { getSecret, deleteSecret, createSecret, updateSecret, createOrUpdateSecret };

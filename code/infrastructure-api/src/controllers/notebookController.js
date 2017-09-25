@@ -1,35 +1,39 @@
-import logger from 'winston';
-import { check, validationResult } from 'express-validator/check';
+import { check } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
+import controllerHelper from './controllerHelper';
 import notebookManager from '../notebooks/notebookManager';
 
-function createNotebook(request, response) {
-  // Parse request for errors
-  const errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    logger.error(`Invalid notebook creation request: ${JSON.stringify(request.body)}`);
-    return response.status(400).json({ errors: errors.mapped() });
-  }
+const TYPE = 'notebook';
 
+function createNotebook(request, response) {
+  const errorMessage = 'Invalid notebook creation request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, createNotebookExec);
+}
+
+function deleteNotebook(request, response) {
+  const errorMessage = 'Invalid notebook deletion request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, deleteNotebookExec);
+}
+
+function createNotebookExec(request, response) {
   // Build request params
   const { datalabInfo, notebookId, notebookType } = matchedData(request);
 
   // Handle request
   return notebookManager.createNotebook(datalabInfo, notebookId, notebookType)
-    .then(() => {
-      response.status(201);
-      response.send({ message: 'OK' });
-    })
-    .catch(handleError(response, notebookId));
+    .then(controllerHelper.sendSuccessfulCreation(response))
+    .catch(controllerHelper.handleError(response, 'creating', TYPE, notebookId));
 }
 
-const handleError = (res, notebookId) => (error) => {
-  logger.error(error);
-  res.status(500);
-  res.send({
-    message: `Error creating notebook ${notebookId}`,
-    error: error.message });
-};
+function deleteNotebookExec(request, response) {
+  // Build request params
+  const { datalabInfo, notebookId, notebookType } = matchedData(request);
+
+  // Handle request
+  return notebookManager.deleteNotebook(datalabInfo, notebookId, notebookType)
+    .then(controllerHelper.sendSuccessfulDeletion(response))
+    .catch(controllerHelper.handleError(response, 'deleting', TYPE, notebookId));
+}
 
 const createNotebookValidator = [
   check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
@@ -39,4 +43,4 @@ const createNotebookValidator = [
   check('notebookType').exists().withMessage('notebookType must be specified'),
 ];
 
-export default { createNotebookValidator, createNotebook };
+export default { createNotebookValidator, createNotebook, deleteNotebook };

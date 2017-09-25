@@ -51,7 +51,7 @@ describe('Kubernetes Service API', () => {
         return [200, service];
       });
 
-      return serviceApi.createService(manifest)
+      return serviceApi.createService(SERVICE_NAME, manifest)
         .then((response) => {
           expect(response.data).toEqual(service);
         });
@@ -60,9 +60,9 @@ describe('Kubernetes Service API', () => {
     it('should return an error if creation fails', () => {
       mock.onPost(SERVICE_URL).reply(400, { message: 'error-message' });
 
-      return serviceApi.createService(manifest)
+      return serviceApi.createService(SERVICE_NAME, manifest)
         .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes service error-message');
+          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes service \'test-service\' - error-message');
         });
     });
   });
@@ -82,7 +82,7 @@ describe('Kubernetes Service API', () => {
 
       return serviceApi.updateService(SERVICE_NAME, manifest, service)
         .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes service error-message');
+          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes service \'test-service\' - error-message');
         });
     });
   });
@@ -106,6 +106,27 @@ describe('Kubernetes Service API', () => {
         .then((response) => {
           expect(response).toEqual(service);
         });
+    });
+  });
+
+  describe('delete service', () => {
+    it('should DELETE resource URL', () => {
+      mock.onDelete(`${SERVICE_URL}/${SERVICE_NAME}`).reply(204);
+
+      return expect(serviceApi.deleteService(SERVICE_NAME)).resolves.toBeUndefined();
+    });
+
+    it('should return successfully if service does not exist', () => {
+      mock.onDelete(`${SERVICE_URL}/${SERVICE_NAME}`).reply(404);
+
+      return expect(serviceApi.deleteService(SERVICE_NAME)).resolves.toBeUndefined();
+    });
+
+    it('should return error if server errors', () => {
+      mock.onDelete(`${SERVICE_URL}/${SERVICE_NAME}`).reply(500, { message: 'error-message' });
+
+      return expect(serviceApi.deleteService(SERVICE_NAME))
+        .rejects.toEqual(new Error('Kubernetes API error: Request failed with status code 500'));
     });
   });
 });
