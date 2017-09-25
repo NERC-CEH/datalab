@@ -36,47 +36,80 @@ describe('Kong Proxy API', () => {
     mock.restore();
   });
 
-  it('should create an SNI and route if the do not exist', () => {
-    const newSni = createSniPayload();
-    const newRoute = createRoutePayload();
+  describe('createOrUpdateRoute', () => {
+    it('should create an SNI and route if the do not exist', () => {
+      const newSni = createSniPayload();
+      const newRoute = createRoutePayload();
 
-    mock.onGet(`${SNI_URL}/${requestedSni}`).reply(404); // SNI not found
-    mock.onGet(SNI_URL).reply(200, { data: snis }); // List SNIs
-    mock.onPost(SNI_URL, newSni).reply(201); // Create new SNI
-    mock.onGet(`${API_URL}/${apiName}`).reply(404); // Route not found
-    mock.onPost(API_URL, newRoute).reply(200, { message: 'OK' }); // Successful route creation
+      mock.onGet(`${SNI_URL}/${requestedSni}`).reply(404); // SNI not found
+      mock.onGet(SNI_URL).reply(200, { data: snis }); // List SNIs
+      mock.onPost(SNI_URL, newSni).reply(201); // Create new SNI
+      mock.onGet(`${API_URL}/${apiName}`).reply(404); // Route not found
+      mock.onPost(API_URL, newRoute).reply(200, { message: 'OK' }); // Successful route creation
 
-    return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
-      .then((response) => {
-        expect(response.data).toEqual({ message: 'OK' });
-      });
+      return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
+        .then((response) => {
+          expect(response.data).toEqual({ message: 'OK' });
+        });
+    });
+
+    it('should not create an SNI if one exists', () => {
+      const newRoute = createRoutePayload();
+
+      mock.onGet(`${SNI_URL}/${requestedSni}`).reply(200, { data: snis[0] }); // SNI exists
+      mock.onGet(`${API_URL}/${apiName}`).reply(404);
+      mock.onPost(API_URL, newRoute).reply(200, { message: 'OK' });
+
+      return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
+        .then((response) => {
+          expect(response.data).toEqual({ message: 'OK' });
+        });
+    });
+
+    it('should not PATCH the route if one exists', () => {
+      const newRoute = createRoutePayload();
+      const existingRoute = { id: '123' };
+
+      mock.onGet(`${SNI_URL}/${requestedSni}`).reply(200, { data: snis[0] }); // SNI exists
+      mock.onGet(`${API_URL}/${apiName}`).reply(200, existingRoute);
+      mock.onPatch(`${API_URL}/${existingRoute.id}`, newRoute).reply(200, { message: 'OK' });
+
+      return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
+        .then((response) => {
+          expect(response.data).toEqual({ message: 'OK' });
+        });
+    });
   });
 
-  it('should not create an SNI if one exists', () => {
-    const newRoute = createRoutePayload();
+  describe('deleteRoute', () => {
+    it('should delete sni and api', () => {
+      // expect.assertions(1);
+      mock.onDelete(`${API_URL}/${apiName}`).reply(204);
+      mock.onDelete(`${SNI_URL}/${requestedSni}`).reply(204);
 
-    mock.onGet(`${SNI_URL}/${requestedSni}`).reply(200, { data: snis[0] }); // SNI exists
-    mock.onGet(`${API_URL}/${apiName}`).reply(404);
-    mock.onPost(API_URL, newRoute).reply(200, { message: 'OK' });
+      return expect(proxyRouteApi.deleteRoute(apiName, datalab)).resolves.toBeUndefined();
+    });
 
-    return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
-      .then((response) => {
-        expect(response.data).toEqual({ message: 'OK' });
-      });
-  });
+    it('should return a resolved promise for api 404', () => {
+      mock.onDelete(`${API_URL}/${apiName}`).reply(404);
+      mock.onDelete(`${SNI_URL}/${requestedSni}`).reply(204);
 
-  it('should not PATCH the route if one exists', () => {
-    const newRoute = createRoutePayload();
-    const existingRoute = { id: '123' };
+      return expect(proxyRouteApi.deleteRoute(apiName, datalab)).resolves.toBeUndefined();
+    });
 
-    mock.onGet(`${SNI_URL}/${requestedSni}`).reply(200, { data: snis[0] }); // SNI exists
-    mock.onGet(`${API_URL}/${apiName}`).reply(200, existingRoute);
-    mock.onPatch(`${API_URL}/${existingRoute.id}`, newRoute).reply(200, { message: 'OK' });
+    it('should return a resolved promise for sni 404', () => {
+      mock.onDelete(`${API_URL}/${apiName}`).reply(204);
+      mock.onDelete(`${SNI_URL}/${requestedSni}`).reply(404);
 
-    return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
-      .then((response) => {
-        expect(response.data).toEqual({ message: 'OK' });
-      });
+      return expect(proxyRouteApi.deleteRoute(apiName, datalab)).resolves.toBeUndefined();
+    });
+
+    it('should return a rejected promise for a server error', () => {
+      mock.onDelete(`${API_URL}/${apiName}`).reply(500);
+
+      return expect(proxyRouteApi.deleteRoute(serviceName, datalab))
+        .rejects.toEqual(new Error('Kong API error: Request failed with status code 500'));
+    });
   });
 });
 
