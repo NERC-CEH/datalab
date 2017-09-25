@@ -62,7 +62,7 @@ describe('Kubernetes Service API', () => {
 
       return serviceApi.createService(SERVICE_NAME, manifest)
         .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes service \'test-service\' - error-message');
+          expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
         });
     });
   });
@@ -82,7 +82,7 @@ describe('Kubernetes Service API', () => {
 
       return serviceApi.updateService(SERVICE_NAME, manifest, service)
         .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes service \'test-service\' - error-message');
+          expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
         });
     });
   });
@@ -126,7 +126,7 @@ describe('Kubernetes Service API', () => {
       mock.onDelete(`${SERVICE_URL}/${SERVICE_NAME}`).reply(500, { message: 'error-message' });
 
       return expect(serviceApi.deleteService(SERVICE_NAME))
-        .rejects.toEqual(new Error('Kubernetes API error: Request failed with status code 500'));
+        .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
 });

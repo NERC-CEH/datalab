@@ -50,7 +50,7 @@ describe('Kubernetes Deployment API', () => {
         return [200, deployment];
       });
 
-      return deploymentApi.createDeployment(manifest)
+      return deploymentApi.createDeployment(DEPLOYMENT_NAME, manifest)
         .then((response) => {
           expect(response.data).toEqual(deployment);
         });
@@ -59,7 +59,7 @@ describe('Kubernetes Deployment API', () => {
     it('should return an error if creation fails', () => {
       mock.onPost(DEPLOYMENT_URL).reply(400, { message: 'error-message' });
 
-      return deploymentApi.createDeployment(manifest)
+      return deploymentApi.createDeployment(DEPLOYMENT_NAME, manifest)
         .catch((error) => {
           expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
         });
@@ -128,7 +128,7 @@ describe('Kubernetes Deployment API', () => {
       mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(500, { message: 'error-message' });
 
       return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME))
-        .rejects.toEqual(new Error('Kubernetes API error: Request failed with status code 500'));
+        .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
 });

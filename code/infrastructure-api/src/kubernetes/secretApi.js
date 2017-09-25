@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'winston';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 
@@ -27,11 +28,13 @@ function getSecret(name) {
 }
 
 function createSecret(name, value) {
+  logger.info('Creating secret: %s', name);
   return axios.post(SECRET_URL, createPayload(name, value))
     .catch(handleCreateError('secret', name));
 }
 
 function updateSecret(name, value) {
+  logger.info('Updating secret: %s', name);
   return axios.put(`${SECRET_URL}/${name}`, createPayload(name, value))
     .catch(handleCreateError('secret', name));
 }
@@ -46,6 +49,7 @@ function createPayload(name, value) {
 }
 
 function deleteSecret(name) {
+  logger.info('Deleting secret: %s', name);
   return axios.delete(`${SECRET_URL}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('secret', name));

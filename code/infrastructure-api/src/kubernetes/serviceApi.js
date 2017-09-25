@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'winston';
 import yaml from 'js-yaml';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
@@ -31,17 +32,20 @@ function getService(name) {
 }
 
 function createService(name, manifest) {
+  logger.info('Creating service: %s', name);
   return axios.post(SERVICE_URL, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError('service', name));
 }
 
 function updateService(name, manifest, existingService) {
+  logger.info('Updating service: %s', name);
   const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
   return axios.put(`${SERVICE_URL}/${name}`, jsonManifest)
     .catch(handleCreateError('service', name));
 }
 
 function deleteService(name) {
+  logger.info('Deleting service: %s', name);
   return axios.delete(`${SERVICE_URL}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('service', name));

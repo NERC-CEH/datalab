@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'winston';
 import config from '../config/config';
 import { handleDeleteError } from './core';
 
@@ -19,7 +20,7 @@ const createOrReplace = (name, manifest) => (existingDeployment) => {
     return updateDeployment(name, manifest);
   }
 
-  return createDeployment(manifest);
+  return createDeployment(name, manifest);
 };
 
 function getDeployment(name) {
@@ -28,17 +29,20 @@ function getDeployment(name) {
     .catch(() => undefined);
 }
 
-function createDeployment(manifest) {
+function createDeployment(name, manifest) {
+  logger.info('Creating deployment: %s', name);
   return axios.post(DEPLOYMENT_URL, manifest, YAML_CONTENT_HEADER)
     .catch(handleError);
 }
 
 function updateDeployment(name, manifest) {
+  logger.info('Updating deployment: %s', name);
   return axios.put(`${DEPLOYMENT_URL}/${name}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleError);
 }
 
 function deleteDeployment(name) {
+  logger.info('Deleting deployment: %s', name);
   return axios.delete(`${DEPLOYMENT_URL}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('deployment', name));
