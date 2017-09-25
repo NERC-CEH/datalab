@@ -1,52 +1,36 @@
-import logger from 'winston';
-import { check, validationResult } from 'express-validator/check';
+import { check } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
+import controllerHelper from './controllerHelper';
 import proxyRouteApi from '../kong/proxyRouteApi';
 
-function createRoute(request, response) {
-  // Parse request for errors
-  const errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    logger.error(`Invalid route creation request: ${request.body}`);
-    return response.status(400).json({ errors: errors.mapped() });
-  }
+const TYPE = 'route';
 
+function createRoute(request, response) {
+  const errorMessage = 'Invalid route creation request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, createRouteExec);
+}
+
+function deleteRoute(request, response) {
+  const errorMessage = 'Invalid route deletion request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, deleteRouteExec);
+}
+
+function createRouteExec(request, response) {
   // Build request params
   const { name, datalab, port } = matchedData(request);
 
   return proxyRouteApi.createOrUpdateRoute(name, datalab, port)
-    .then(() => {
-      response.status(201);
-      response.send({ message: 'OK' });
-    })
-    .catch(handleError(response, 'creating', name));
+    .then(controllerHelper.sendSuccessfulCreation(response))
+    .catch(controllerHelper.handleError(response, 'creating', TYPE, name));
 }
 
-function deleteRoute(request, response) {
-  // Parse request for errors
-  const errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    logger.error(`Invalid route creation request: ${request.body}`);
-    return response.status(400).json({ errors: errors.mapped() });
-  }
-
+function deleteRouteExec(request, response) {
   // Build request params
   const { name, datalab } = matchedData(request);
   return proxyRouteApi.deleteRoute(name, datalab)
-    .then(() => {
-      response.status(204);
-      response.send({ message: 'OK' });
-    })
-    .catch(handleError(response, 'deleting', name));
+    .then(controllerHelper.sendSuccessfulDeletion(response))
+    .catch(controllerHelper.handleError(response, 'deleting', TYPE, name));
 }
-
-const handleError = (response, action, name) => (error) => {
-  logger.error(error);
-  response.status(500);
-  response.send({
-    message: `Error ${action} route: ${name}`,
-    error: error.message });
-};
 
 const createProxyRouteValidator = [
   check('name').exists().withMessage('name must be specified'),
