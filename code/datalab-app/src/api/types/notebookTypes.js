@@ -65,3 +65,16 @@ export const NotebookCreationType = new GraphQLInputObjectType({
     },
   },
 });
+
+export const NotebookDeletionType = new GraphQLInputObjectType({
+  name: 'NotebookDeletionRequest',
+  description: 'Type to describe the mutation for deleting a new Notebook.',
+  fields: {
+    name: {
+      type: GraphQLString,
+    },
+    type: {
+      type: NotebookTypeEnum,
+    },
+  },
+});

@@ -3,7 +3,7 @@ import status from './status';
 import { dataStorage, dataStore } from './dataStorage';
 import { notebook, notebooks, checkNotebookName } from './notebooks';
 import { datalab, datalabs } from './datalabs';
-import createNotebook from './createNotebook';
+import { createNotebook, deleteNotebook } from './mutateNotebook';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -25,6 +25,7 @@ const RootMutationType = new GraphQLObjectType({
   description: 'Root mutation methods for Datalabs.',
   fields: {
     createNotebook,
+    deleteNotebook,
   },
 });
 
