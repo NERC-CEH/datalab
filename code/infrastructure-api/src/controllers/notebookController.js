@@ -1,5 +1,5 @@
 import { check } from 'express-validator/check';
-import { matchedData } from 'express-validator/filter';
+import { matchedData, sanitize } from 'express-validator/filter';
 import controllerHelper from './controllerHelper';
 import notebookManager from '../notebooks/notebookManager';
 
@@ -36,11 +36,18 @@ function deleteNotebookExec(request, response) {
 }
 
 const createNotebookValidator = [
+  sanitize('*').trim(),
   check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
   check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified'),
   check('datalabInfo.volume').exists().withMessage('datalabInfo.volume must be specified'),
-  check('notebookId').exists().withMessage('notebookId must be specified'),
-  check('notebookType').exists().withMessage('notebookType must be specified'),
+  check('notebookId')
+    .exists()
+    .withMessage('Name must be specified')
+    .isAscii()
+    .withMessage('Name must only use the characters a-z')
+    .isLength({ min: 4, max: 12 })
+    .withMessage('Name must be 4-12 characters long'),
+  check('notebookType').exists().withMessage('Name must be specified'),
 ];
 
 export default { createNotebookValidator, createNotebook, deleteNotebook };

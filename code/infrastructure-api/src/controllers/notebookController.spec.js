@@ -1,5 +1,6 @@
 import httpMocks from 'node-mocks-http';
 import Promise from 'bluebird';
+import { validationResult } from 'express-validator/check';
 import notebookController from './notebookController';
 import notebookManager from '../notebooks/notebookManager';
 
@@ -61,6 +62,26 @@ describe('Notebook Controller', () => {
         expect(response._getData()).toEqual({ error: 'error', message: 'Error creating notebook: notebookId' }); // eslint-disable-line no-underscore-dangle
       });
   });
+
+  it('should validate the name field exists', () => {
+    const requestBody = createRequestBody();
+    requestBody.notebookId = '';
+    return checkNameValidation(requestBody, 'Name must only use the characters a-z');
+  });
+
+  it('should validate the name field is at least 4 characters', () => {
+    const requestBody = createRequestBody();
+    requestBody.notebookId = 'abc';
+    return checkNameValidation(requestBody, 'Name must be 4-12 characters long');
+  });
+
+  function checkNameValidation(body, expectedMessage) {
+    request = httpMocks.createRequest({ method: 'GET', body });
+    const validators = notebookController.createNotebookValidator.map(createValidationPromise(request));
+    return Promise.all(validators).then(() => {
+      expect(validationResult(request).mapped().notebookId.msg).toEqual(expectedMessage);
+    });
+  }
 });
 
 function createRequestBody() {
