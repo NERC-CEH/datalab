@@ -10,6 +10,7 @@ jest.mock('winston');
 
 beforeEach(() => {
   mock.reset();
+  logger.clearMessages();
 });
 
 afterAll(() => {
@@ -26,42 +27,76 @@ function secretStrategy() {
 }
 
 describe('vault service', () => {
-  it('should store create a secret using the strategy if one does not exist', () => {
-    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
-    mock.onGet(secretUrl + secretPath).reply(404);
-    mock.onPost(secretUrl + secretPath).reply(204, secret);
+  describe('create secret', () => {
+    it('should store create a secret using the strategy if one does not exist', () => {
+      mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+      mock.onGet(secretUrl + secretPath).reply(404);
+      mock.onPost(secretUrl + secretPath).reply(204, secret);
 
-    return vault.ensureSecret(secretPath, secretStrategy)
-      .then((token) => {
-        expect(token).toEqual(secret);
-      });
-  });
-
-  it('should return the existing secret if one exists', () => {
-    const existingSecret = { token: 'existing-secret' };
-    mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
-    mock.onGet(secretUrl + secretPath).reply(200, { data: existingSecret });
-
-    return vault.ensureSecret(secretPath, secretStrategy)
-      .then((token) => {
-        expect(token).toEqual(existingSecret);
-      });
-  });
-
-  it('should handle a login failure', () => {
-    mock.onPost(loginUrl).reply(400, getFailedLoginResponse());
-
-    return vault.ensureSecret(secretPath, secret)
-      .then((response) => {
-        expect(response).toEqual({
-          message: 'Unable to retrieve secret',
+      return vault.ensureSecret(secretPath, secretStrategy)
+        .then((token) => {
+          expect(token).toEqual(secret);
         });
-        expect(logger.getErrorMessages()).toEqual([{
-          message: 'Error retrieving secret %s: ',
-          data: secretPath,
-          metadata: getFailedLoginResponse(),
-        }]);
-      });
+    });
+
+    it('should return the existing secret if one exists', () => {
+      const existingSecret = { token: 'existing-secret' };
+      mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+      mock.onGet(secretUrl + secretPath).reply(200, { data: existingSecret });
+
+      return vault.ensureSecret(secretPath, secretStrategy)
+        .then((token) => {
+          expect(token).toEqual(existingSecret);
+        });
+    });
+
+    it('should handle a login failure', () => {
+      mock.onPost(loginUrl).reply(400, getFailedLoginResponse());
+
+      return vault.ensureSecret(secretPath, secret)
+        .then((response) => {
+          expect(response).toEqual({
+            message: 'Unable to retrieve secret',
+          });
+          expect(logger.getErrorMessages()).toEqual([{
+            message: 'Error retrieving secret %s: ',
+            data: secretPath,
+            metadata: getFailedLoginResponse(),
+          }]);
+        });
+    });
+  });
+
+  describe('delete secret', () => {
+    it('should delete a secret if it exists', () => {
+      mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+      mock.onDelete(secretUrl + secretPath).reply(204);
+
+      return expect(vault.deleteSecret(secretPath)).resolves.toBeUndefined();
+    });
+
+    it('should return silently if the secret does not exists', () => {
+      mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
+      mock.onDelete(secretUrl + secretPath).reply(404);
+
+      return expect(vault.deleteSecret(secretPath)).resolves.toBeUndefined();
+    });
+
+    it('should handle a login failure', () => {
+      mock.onPost(loginUrl).reply(400, getFailedLoginResponse());
+
+      return vault.deleteSecret(secretPath)
+        .then((response) => {
+          expect(response).toEqual({
+            message: 'Unable to delete secret',
+          });
+          expect(logger.getErrorMessages()).toEqual([{
+            message: 'Error deleting vault secret: %s',
+            data: secretPath,
+            metadata: getFailedLoginResponse(),
+          }]);
+        });
+    });
   });
 });
 
