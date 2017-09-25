@@ -83,7 +83,7 @@ describe('Kubernetes Secret API', () => {
 
       return secretApi.createSecret('test', 'testvalue')
         .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes secret error-message');
+          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes secret \'test\' - error-message');
         });
     });
   });
@@ -104,7 +104,7 @@ describe('Kubernetes Secret API', () => {
 
       return secretApi.updateSecret('test', 'testvalue')
         .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes secret error-message');
+          expect(error.toString()).toEqual('Error: Kubernetes API error: Unable to create kubernetes secret \'test\' - error-message');
         });
     });
   });
@@ -125,7 +125,7 @@ describe('Kubernetes Secret API', () => {
     it('should return error if server errors', () => {
       mock.onDelete(`${SECRET_URL}/${SECRET_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(secretApi.deleteSecret('test'))
+      return expect(secretApi.deleteSecret(SECRET_NAME))
         .rejects.toEqual(new Error('Kubernetes API error: Request failed with status code 500'));
     });
   });

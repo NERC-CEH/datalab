@@ -3,9 +3,9 @@ import { has, get } from 'lodash';
 
 export const handleCreateError = (type, name) => (error) => {
   if (has(error, 'response.data.message')) {
-    throw createError(`Unable to create kubernetes ${type} ${name} ${error.response.data.message}`);
+    throw createError(`Unable to create kubernetes ${type} '${name}' - ${error.response.data.message}`);
   }
-  throw createError(`unable to create kubernetes ${type} ${name} ${error}`);
+  throw createError(`unable to create kubernetes ${type} '${name}' - ${error}`);
 };
 
 export const handleDeleteError = (type, name) => (error) => {
