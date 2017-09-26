@@ -5,17 +5,17 @@ import { MODAL_TYPE_CREATE_NOTEBOOK } from '../constants/modaltypes';
 describe('modalDialogReducer', () => {
   it('should return the initial state', () => {
     // Act/Assert
-    expect(modalDialogReducer(undefined, {})).toEqual({ type: null, props: {} });
+    expect(modalDialogReducer(undefined, {})).toEqual({ modalType: null, props: {} });
   });
 
   it('should handle OPEN_MODAL_DIALOG_ACTION', () => {
     // Arrange
     const type = OPEN_MODAL_DIALOG_ACTION;
-    const payload = { type: MODAL_TYPE_CREATE_NOTEBOOK, props: { value: 'test' } };
+    const payload = { modalType: MODAL_TYPE_CREATE_NOTEBOOK, props: { value: 'test' } };
     const action = { type, payload };
 
     // Act
-    const nextstate = modalDialogReducer({ type: null }, action);
+    const nextstate = modalDialogReducer({ modalType: null }, action);
 
     // Assert
     expect(nextstate).toEqual(payload);
@@ -27,9 +27,9 @@ describe('modalDialogReducer', () => {
     const action = { type };
 
     // Act
-    const nextstate = modalDialogReducer({ type: MODAL_TYPE_CREATE_NOTEBOOK, props: { value: 'test' } }, action);
+    const nextstate = modalDialogReducer({ modalType: MODAL_TYPE_CREATE_NOTEBOOK, props: { value: 'test' } }, action);
 
     // Assert
-    expect(nextstate).toEqual({ type: null, props: {} });
+    expect(nextstate).toEqual({ modalType: null, props: {} });
   });
 });

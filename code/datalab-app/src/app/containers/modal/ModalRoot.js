@@ -11,12 +11,12 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_CONFIRMATION]: Confirmation,
 };
 
-const ModalRoot = ({ type, props }) => {
-  if (!type) {
+const ModalRoot = ({ modalType, props }) => {
+  if (!modalType) {
     return null;
   }
 
-  const ModalComponent = MODAL_COMPONENTS[type];
+  const ModalComponent = MODAL_COMPONENTS[modalType];
   return <ModalComponent {...props} />;
 };
 
