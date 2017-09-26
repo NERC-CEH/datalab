@@ -5,10 +5,11 @@ import {
 } from '../actions/modalDialogActions';
 
 const initialState = {
-  open: false,
+  type: null,
+  props: {},
 };
 
 export default typeToReducer({
-  [OPEN_MODAL_DIALOG_ACTION]: (state, action) => ({ ...initialState, open: true }),
+  [OPEN_MODAL_DIALOG_ACTION]: (state, action) => ({ ...initialState, type: action.payload.type, props: action.payload.props }),
   [CLOSE_MODAL_DIALOG_ACTION]: (state, action) => ({ ...initialState, open: false }),
 }, initialState);

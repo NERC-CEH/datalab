@@ -3,6 +3,7 @@
 exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = `
 <CardGroup>
   <NotebookCard
+    deleteNotebook={[Function]}
     notebook={
       Object {
         "displayName": "name1",
@@ -13,6 +14,7 @@ exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = 
     openNotebook={[Function]}
   />
   <NotebookCard
+    deleteNotebook={[Function]}
     notebook={
       Object {
         "displayName": "name2",
@@ -23,6 +25,7 @@ exports[`NotebookCards creates correct snapshot for an array of notebooks 1`] = 
     openNotebook={[Function]}
   />
   <NotebookCard
+    deleteNotebook={[Function]}
     notebook={
       Object {
         "displayName": "name3",

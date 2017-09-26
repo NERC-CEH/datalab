@@ -11,7 +11,7 @@ exports[`notebookService createNotebook should build the correct mutation and un
 
 exports[`notebookService deleteNotebook should build the correct mutation and unpack the results 1`] = `
 "
-    mutation DeleteNotebook($notebook: NotebookDeletionRequest) {
+    DeleteNotebook($notebook: NotebookDeletionRequest) {
       deleteNotebook(notebook: $notebook) {
         name
       }
@@ -32,7 +32,7 @@ exports[`notebookService loadNotebooks should build the correct query and unpack
 "
       Notebooks {
         notebooks {
-          id, displayName, type
+          id, displayName, name, type
         }
       }"
 `;

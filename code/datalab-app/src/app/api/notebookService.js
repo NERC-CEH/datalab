@@ -5,7 +5,7 @@ function loadNotebooks() {
   const query = `
       Notebooks {
         notebooks {
-          id, displayName, type
+          id, displayName, name, type
         }
       }`;
 
@@ -53,7 +53,7 @@ function createNotebook(notebook) {
 
 function deleteNotebook(notebook) {
   const mutation = `
-    mutation DeleteNotebook($notebook: NotebookDeletionRequest) {
+    DeleteNotebook($notebook: NotebookDeletionRequest) {
       deleteNotebook(notebook: $notebook) {
         name
       }

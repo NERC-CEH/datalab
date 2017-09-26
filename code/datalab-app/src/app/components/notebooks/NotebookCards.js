@@ -4,10 +4,11 @@ import { Card } from 'semantic-ui-react';
 import NotebookCard from './NotebookCard';
 import CreateNotebookContainer from './CreateNotebookContainer';
 
-const NotebookCards = ({ notebooks, openNotebook }) => (
+const NotebookCards = ({ notebooks, openNotebook, deleteNotebook }) => (
   <Card.Group>
     {notebooks.map((notebook, index) => (
-      <NotebookCard key={index} notebook={notebook} openNotebook={openNotebook} />
+      <NotebookCard key={index} notebook={notebook}
+                    openNotebook={openNotebook} deleteNotebook={deleteNotebook} />
     ))}
     <CreateNotebookContainer />
   </Card.Group>
@@ -16,6 +17,7 @@ const NotebookCards = ({ notebooks, openNotebook }) => (
 NotebookCards.propTypes = {
   notebooks: PropTypes.arrayOf(PropTypes.object).isRequired,
   openNotebook: PropTypes.func.isRequired,
+  deleteNotebook: PropTypes.func.isRequired,
 };
 
 export default NotebookCards;

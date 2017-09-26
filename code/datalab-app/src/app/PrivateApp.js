@@ -6,6 +6,7 @@ import Footer from './components/app/Footer';
 import LandingPage from './pages/LandingPage';
 import DataStorageTablePage from './pages/DataStorageTablePage';
 import NotebooksPage from './pages/NotebooksPage';
+import ModalRoot from './containers/modal/ModalRoot';
 
 const PrivateApp = () => (
   <Navigation>
@@ -16,6 +17,7 @@ const PrivateApp = () => (
       <Route component={NotFoundPage} />
     </Switch>
     <Route component={Footer} />
+    <ModalRoot />
   </Navigation>
 );
 

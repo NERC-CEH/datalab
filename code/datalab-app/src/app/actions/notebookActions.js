@@ -5,6 +5,7 @@ export const GET_NOTEBOOK_URL_ACTION = 'GET_NOTEBOOK_URL';
 export const OPEN_NOTEBOOK_ACTION = 'OPEN_NOTEBOOK';
 export const CREATE_NOTEBOOK_ACTION = 'CREATE_NOTEBOOK';
 export const CHECK_NOTEBOOK_NAME_ACTION = 'CHECK_NOTEBOOK_NAME';
+export const DELETE_NOTEBOOK_ACTION = 'DELETE_NOTEBOOK';
 
 const loadNotebooks = () => ({
   type: LOAD_NOTEBOOKS_ACTION,
@@ -31,10 +32,19 @@ const checkNotebookName = notebookName => ({
   payload: notebookService.checkNotebookName(notebookName),
 });
 
+const deleteNotebook = (notebook) => {
+  const { name, type } = notebook;
+  return {
+    type: DELETE_NOTEBOOK_ACTION,
+    payload: notebookService.deleteNotebook({ name, type }),
+  };
+};
+
 export default {
   loadNotebooks,
   getUrl,
   openNotebook,
   createNotebook,
   checkNotebookName,
+  deleteNotebook,
 };

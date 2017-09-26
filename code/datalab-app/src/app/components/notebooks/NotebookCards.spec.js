@@ -14,6 +14,7 @@ describe('NotebookCards', () => {
       { displayName: 'name3', id: '3', type: 'type3' },
     ],
     openNotebook: () => {},
+    deleteNotebook: () => {},
   });
 
   it('creates correct snapshot for an array of notebooks', () => {
