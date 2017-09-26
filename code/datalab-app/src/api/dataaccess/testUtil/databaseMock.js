@@ -15,6 +15,10 @@ function createDatabaseMock(items) {
       lastInvocation = { query, entity, params };
       return Promise.resolve(entity);
     },
+    remove: (query) => {
+      lastInvocation = { query };
+      return { exec: () => Promise.resolve() };
+    },
     invocation: () => lastInvocation,
     query: () => lastInvocation.query,
     entity: () => lastInvocation.entity,

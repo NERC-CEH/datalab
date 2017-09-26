@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { Button, Card, Image, Icon } from 'semantic-ui-react';
 import notebookDescriptions from './notebookDescriptions';
 
-const NotebookCard = ({ notebook, openNotebook }) =>
+const iconStyle = { marginLeft: '5px', cursor: 'pointer' };
+
+const NotebookCard = ({ notebook, openNotebook, deleteNotebook }) =>
   <Card>
     <Card.Content>
       {getImage(notebook)}
       <Card.Header>
         {getDisplayName(notebook)}
+        <Icon style={iconStyle} size='small' color='blue' name='trash outline' onClick={() => deleteNotebook(notebook)}/>
       </Card.Header>
       <Card.Meta>
         {getNotebookType(notebook)}
@@ -17,11 +20,9 @@ const NotebookCard = ({ notebook, openNotebook }) =>
         {getDescription(notebook)}
       </Card.Description>
     </Card.Content>
-    <Card.Content extra>
-      <Button primary fluid disabled={!openNotebook} onClick={() => openNotebook(notebook.id)}>
-        Open
-      </Button>
-    </Card.Content>
+    <Button primary fluid disabled={!openNotebook} onClick={() => openNotebook(notebook.id)}>
+      Open
+    </Button>
   </Card>;
 
 NotebookCard.propTypes = {

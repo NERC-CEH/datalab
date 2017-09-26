@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import CreateNotebookContainer, { PureCreateNotebookContainer } from './CreateNotebookContainer';
-import CreateNotebookForm from './CreateNotebookForm';
+import NewNotebookButton from './NewNotebookButton';
 import notify from '../common/notify';
 
 const notebook = { name: 'Name' };
@@ -17,6 +17,7 @@ describe('NotebooksContainer', () => {
 
   const createNotebookMock = jest.fn();
   const loadNotebooksMock = jest.fn();
+  const openModalDialogMock = jest.fn();
 
   function createProps() {
     return {
@@ -25,10 +26,8 @@ describe('NotebooksContainer', () => {
       actions: {
         createNotebook: createNotebookMock,
         loadNotebooks: loadNotebooksMock,
-        openModalDialog: () => {
-        },
-        closeModalDialog: () => {
-        },
+        openModalDialog: openModalDialogMock,
+        closeModalDialog: () => {},
       },
     };
   }
@@ -97,6 +96,7 @@ describe('NotebooksContainer', () => {
         actions: {
           openModalDialog: () => {},
           closeModalDialog: () => {},
+          deleteNotebook: () => {},
         },
       };
 
@@ -106,39 +106,17 @@ describe('NotebooksContainer', () => {
 
     it('createNotebook method calls load notebooks action on successful creation', () => {
       // Arrange
-      createNotebookMock.mockReturnValue(Promise.resolve('success'));
-      loadNotebooksMock.mockReturnValue(Promise.resolve('success'));
+      openModalDialogMock.mockReturnValue(Promise.resolve('success'));
 
       const props = createProps();
 
       const output = shallowRenderPure(props);
-      const createNotebookForm = output.find(CreateNotebookForm);
-      const submit = createNotebookForm.prop('onSubmit');
+      const newNotebookButton = output.find(NewNotebookButton);
+      const openDialog = newNotebookButton.prop('onClick');
 
       // Act/Assert
-      submit(notebook).then(() => {
-        expect(createNotebookMock).toHaveBeenCalledTimes(1);
-        expect(createNotebookMock).toHaveBeenCalledWith(notebook);
-        expect(loadNotebooksMock).toHaveBeenCalledTimes(1);
-        expect(toastrSuccessMock).toHaveBeenCalledTimes(1);
-      });
-    });
-
-    it('openNotebook method calls toastr  on resolved getUrl', () => {
-      // Arrange
-      createNotebookMock.mockReturnValue(Promise.reject('failed'));
-
-      const props = createProps();
-
-      const output = shallowRenderPure(props);
-      const createNotebookForm = output.find(CreateNotebookForm);
-      const submit = createNotebookForm.prop('onSubmit');
-
-      // Act/Assert
-      submit(notebook).then(() => {
-        expect(createNotebookMock).toHaveBeenCalledTimes(1);
-        expect(loadNotebooksMock).not.toHaveBeenCalled();
-        expect(toastrErrorMock).toHaveBeenCalledTimes(1);
+      openDialog(notebook).then(() => {
+        expect(openModalDialogMock).toHaveBeenCalledTimes(1);
       });
     });
   });

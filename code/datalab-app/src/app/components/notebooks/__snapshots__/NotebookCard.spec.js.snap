@@ -12,6 +12,19 @@ exports[`NotebookCard creates correct snapshot for Jupyer notebook type 1`] = `
     />
     <CardHeader>
       name1
+      <Icon
+        as="i"
+        color="blue"
+        name="trash outline"
+        onClick={[Function]}
+        size="small"
+        style={
+          Object {
+            "cursor": "pointer",
+            "marginLeft": "5px",
+          }
+        }
+      />
     </CardHeader>
     <CardMeta>
       Jupyter
@@ -20,19 +33,15 @@ exports[`NotebookCard creates correct snapshot for Jupyer notebook type 1`] = `
       Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
     </CardDescription>
   </CardContent>
-  <CardContent
-    extra={true}
+  <Button
+    as="button"
+    disabled={false}
+    fluid={true}
+    onClick={[Function]}
+    primary={true}
   >
-    <Button
-      as="button"
-      disabled={false}
-      fluid={true}
-      onClick={[Function]}
-      primary={true}
-    >
-      Open
-    </Button>
-  </CardContent>
+    Open
+  </Button>
 </Card>
 `;
 
@@ -48,6 +57,19 @@ exports[`NotebookCard creates correct snapshot for Zeppelin notebook type 1`] = 
     />
     <CardHeader>
       name1
+      <Icon
+        as="i"
+        color="blue"
+        name="trash outline"
+        onClick={[Function]}
+        size="small"
+        style={
+          Object {
+            "cursor": "pointer",
+            "marginLeft": "5px",
+          }
+        }
+      />
     </CardHeader>
     <CardMeta>
       Zeppelin
@@ -56,19 +78,15 @@ exports[`NotebookCard creates correct snapshot for Zeppelin notebook type 1`] = 
       Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
     </CardDescription>
   </CardContent>
-  <CardContent
-    extra={true}
+  <Button
+    as="button"
+    disabled={false}
+    fluid={true}
+    onClick={[Function]}
+    primary={true}
   >
-    <Button
-      as="button"
-      disabled={false}
-      fluid={true}
-      onClick={[Function]}
-      primary={true}
-    >
-      Open
-    </Button>
-  </CardContent>
+    Open
+  </Button>
 </Card>
 `;
 
@@ -87,6 +105,19 @@ exports[`NotebookCard should provide defaults and disable the open button if no 
     />
     <CardHeader>
       Display Name
+      <Icon
+        as="i"
+        color="blue"
+        name="trash outline"
+        onClick={[Function]}
+        size="small"
+        style={
+          Object {
+            "cursor": "pointer",
+            "marginLeft": "5px",
+          }
+        }
+      />
     </CardHeader>
     <CardMeta>
       Notebook type
@@ -95,18 +126,14 @@ exports[`NotebookCard should provide defaults and disable the open button if no 
       A description of the notebook purpose
     </CardDescription>
   </CardContent>
-  <CardContent
-    extra={true}
+  <Button
+    as="button"
+    disabled={true}
+    fluid={true}
+    onClick={[Function]}
+    primary={true}
   >
-    <Button
-      as="button"
-      disabled={true}
-      fluid={true}
-      onClick={[Function]}
-      primary={true}
-    >
-      Open
-    </Button>
-  </CardContent>
+    Open
+  </Button>
 </Card>
 `;

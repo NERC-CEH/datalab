@@ -23,4 +23,8 @@ function createOrUpdate(user, notebook) {
   return Notebook().findOneAndUpdate(query, notebook, { upsert: true, setDefaultsOnInsert: true });
 }
 
-export default { getAll, getById, getByName, createOrUpdate };
+function deleteByName(user, name) {
+  return Notebook().remove({ name }).exec();
+}
+
+export default { getAll, getById, getByName, createOrUpdate, deleteByName };

@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reset } from 'redux-form';
-import { Grid, Modal } from 'semantic-ui-react';
-import CreateNotebookForm from './CreateNotebookForm';
-import NotebookCard from './NotebookCard';
 import NewNotebookButton from './NewNotebookButton';
 import notebookActions from '../../actions/notebookActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../common/notify';
+import { MODAL_TYPE_CREATE_NOTEBOOK } from '../../constants/modaltypes';
 
 class CreateNotebookContainer extends Component {
   createNotebook = notebook =>
@@ -19,32 +17,21 @@ class CreateNotebookContainer extends Component {
       .then(() => notify.success('Notebook created'))
       .catch(err => notify.error('Unable to create Notebook'));
 
+  openCreationForm = () => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_NOTEBOOK, {
+    title: 'Create a Notebook',
+    onSubmit: this.createNotebook,
+    onCancel: this.props.actions.closeModalDialog,
+    notebook: this.props.notebook,
+  });
+
   render() {
     return (
-      <div className='ui card'>
-        <NewNotebookButton onClick={this.props.actions.openModalDialog} />
-        <Modal size='large' dimmer='blurring' open={this.props.dialogOpen}>
-          <Modal.Header>Create a Notebook</Modal.Header>
-          <Modal.Content>
-            <Grid divided>
-              <Grid.Row>
-                <Grid.Column width={10}>
-                  <CreateNotebookForm onSubmit={this.createNotebook} cancel={this.props.actions.closeModalDialog} />
-                </Grid.Column>
-                <Grid.Column width={6}>
-                  <h2>Notebook Preview</h2>
-                  <NotebookCard notebook={this.props.notebook} />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Modal.Content>
-        </Modal>
-      </div>
+      <NewNotebookButton onClick={this.openCreationForm} />
     );
   }
 }
 
-function mapStateToProps({ form, modalDialog }) {
+function mapStateToProps({ form }) {
   let notebook = {};
 
   if (form && form.createNotebook && form.createNotebook.values) {
@@ -52,7 +39,6 @@ function mapStateToProps({ form, modalDialog }) {
   }
   return {
     notebook,
-    dialogOpen: modalDialog.open,
   };
 }
 

@@ -42,4 +42,11 @@ describe('notebookRepository', () => {
       expect(mockDatabase().params()).toEqual({ upsert: true, setDefaultsOnInsert: true });
     });
   });
+
+  it('deleteByName should query for notebooks with same name', () => {
+    const name = 'Notebook';
+    notebookRepository.deleteByName(undefined, name).then((createdNotebook) => {
+      expect(mockDatabase().query()).toEqual({ name });
+    });
+  });
 });

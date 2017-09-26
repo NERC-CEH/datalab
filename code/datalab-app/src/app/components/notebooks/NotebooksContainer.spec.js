@@ -86,6 +86,7 @@ describe('NotebooksContainer', () => {
       getUrl: () => {},
       openNotebook: () => {},
       createNotebook: () => {},
+      deleteNotebook: () => {},
     });
 
     const generateProps = () => ({

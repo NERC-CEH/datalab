@@ -17,6 +17,7 @@ exports[`NotebooksContainer is a container which passes correct props to Noteboo
   }
 >
   <NotebookCards
+    deleteNotebook={[Function]}
     notebooks={
       Array [
         Object {
