@@ -9,6 +9,16 @@ exports[`notebookService createNotebook should build the correct mutation and un
     }"
 `;
 
+exports[`notebookService deleteNotebook should build the correct mutation and unpack the results 1`] = `
+"
+    mutation DeleteNotebook($notebook: NotebookDeletionRequest) {
+      deleteNotebook(notebook: $notebook) {
+        name
+      }
+    }
+  "
+`;
+
 exports[`notebookService getUrl should build the correct query and return the url 1`] = `
 "
       GetUrl($id: ID!) {

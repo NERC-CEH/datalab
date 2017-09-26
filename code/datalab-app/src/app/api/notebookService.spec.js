@@ -69,4 +69,26 @@ describe('notebookService', () => {
       });
     });
   });
+
+  describe('deleteNotebook', () => {
+    it('should build the correct mutation and unpack the results', () => {
+      const data = { notebook: { name: 'name' } };
+      mockClient.prepareSuccess(data);
+
+      return notebookService.deleteNotebook(data.notebook).then((response) => {
+        expect(response).toEqual(data.notebook);
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      const data = { notebook: { name: 'name' } };
+      mockClient.prepareFailure('error');
+
+      return notebookService.deleteNotebook(data.notebook).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
 });

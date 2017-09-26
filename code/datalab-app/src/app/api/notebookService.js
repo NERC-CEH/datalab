@@ -30,6 +30,16 @@ function getUrl(id) {
     });
 }
 
+function checkNotebookName(notebookName) {
+  const query = `CheckNotebookName($notebookName: String!) {
+    checkNotebookName(name: $notebookName) { 
+      id 
+    }
+  }`;
+
+  return gqlQuery(query, { notebookName }).then(res => get(res, 'data.checkNotebookName'));
+}
+
 function createNotebook(notebook) {
   const mutation = `
     CreateNotebook($notebook: NotebookCreationRequest) {
@@ -41,19 +51,22 @@ function createNotebook(notebook) {
   return gqlMutation(mutation, { notebook }).then(res => get(res, 'data.notebook'));
 }
 
-function checkNotebookName(notebookName) {
-  const query = `CheckNotebookName($notebookName: String!) {
-    checkNotebookName(name: $notebookName) { 
-      id 
+function deleteNotebook(notebook) {
+  const mutation = `
+    mutation DeleteNotebook($notebook: NotebookDeletionRequest) {
+      deleteNotebook(notebook: $notebook) {
+        name
+      }
     }
-  }`;
+  `;
 
-  return gqlQuery(query, { notebookName }).then(res => get(res, 'data.checkNotebookName'));
+  return gqlMutation(mutation, { notebook }).then(res => get(res, 'data.notebook'));
 }
 
 export default {
   loadNotebooks,
   getUrl,
-  createNotebook,
   checkNotebookName,
+  createNotebook,
+  deleteNotebook,
 };
