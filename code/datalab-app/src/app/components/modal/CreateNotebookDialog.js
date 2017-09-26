@@ -4,7 +4,7 @@ import { Grid, Modal } from 'semantic-ui-react';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 import NotebookCard from '../notebooks/NotebookCard';
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, notebook }) => (
+const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
     <Modal size='large' dimmer='blurring' open={true}>
       <Modal.Header>{title}</Modal.Header>
       <Modal.Content>

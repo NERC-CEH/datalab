@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
+<DatalabModal
+  body="Body"
+  title="Title"
+>
+  <Button
+    as="button"
+    content="No"
+    negative={true}
+    onClick={[Function]}
+  />
+  <Button
+    as="button"
+    content="Yes"
+    icon="checkmark"
+    labelPosition="right"
+    onClick={[Function]}
+    positive={true}
+  />
+</DatalabModal>
+`;

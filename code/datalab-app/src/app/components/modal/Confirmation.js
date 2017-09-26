@@ -5,9 +5,7 @@ import DatalabModal from './DatalabModal';
 
 const Confirmation = ({ title, body, onSubmit, onCancel }) => (
   <DatalabModal title={title} body={body}>
-    <Button negative onClick={onCancel}>
-      No
-    </Button>
+    <Button negative onClick={onCancel} content='No' />
     <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={onSubmit}/>
   </DatalabModal>
 );
