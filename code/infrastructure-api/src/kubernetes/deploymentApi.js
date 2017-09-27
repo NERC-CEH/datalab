@@ -43,7 +43,13 @@ function updateDeployment(name, manifest) {
 
 function deleteDeployment(name) {
   logger.info('Deleting deployment: %s', name);
-  return axios.delete(`${DEPLOYMENT_URL}/${name}`)
+  const deleteOptions = {
+    kind: 'DeleteOptions',
+    apiVersion: 'v1',
+    propagationPolicy: 'Foreground',
+  };
+
+  return axios.delete(`${DEPLOYMENT_URL}/${name}`, { data: deleteOptions })
     .then(response => response.data)
     .catch(handleDeleteError('deployment', name));
 }
