@@ -19,7 +19,7 @@ spec:
       - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
         imagePullPolicy : "IfNotPresent"
         name: {{ name }}
-        command: ["tini", "--", "start.sh",
+        command: ["start.sh",
           "jupyter", "notebook",
           "--NotebookApp.token='$(JUPYTER_TOKEN)'",
           "--NotebookApp.allow_origin='{{ domain }}'",
