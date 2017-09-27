@@ -11,7 +11,7 @@ const NotebookCard = ({ notebook, openNotebook, deleteNotebook }) =>
       {getImage(notebook)}
       <Card.Header>
         {getDisplayName(notebook)}
-        <Icon style={iconStyle} size='small' color='blue' name='trash outline' onClick={() => deleteNotebook(notebook)}/>
+        {deleteNotebook ? <Icon style={iconStyle} size='small' color='blue' name='trash outline' onClick={() => deleteNotebook(notebook)} /> : undefined}
       </Card.Header>
       <Card.Meta>
         {getNotebookType(notebook)}
