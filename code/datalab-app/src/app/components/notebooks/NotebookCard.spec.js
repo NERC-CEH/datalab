@@ -8,6 +8,7 @@ describe('NotebookCard', () => {
   }
 
   const openNotebookMock = jest.fn();
+  const deleteNotebookMock = jest.fn();
 
   const generateProps = type => ({
     notebook: {
@@ -16,6 +17,7 @@ describe('NotebookCard', () => {
       type,
     },
     openNotebook: openNotebookMock,
+    deleteNotebook: deleteNotebookMock,
   });
 
   beforeEach(() => jest.resetAllMocks());

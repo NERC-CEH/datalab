@@ -105,19 +105,6 @@ exports[`NotebookCard should provide defaults and disable the open button if no 
     />
     <CardHeader>
       Display Name
-      <Icon
-        as="i"
-        color="blue"
-        name="trash outline"
-        onClick={[Function]}
-        size="small"
-        style={
-          Object {
-            "cursor": "pointer",
-            "marginLeft": "5px",
-          }
-        }
-      />
     </CardHeader>
     <CardMeta>
       Notebook type

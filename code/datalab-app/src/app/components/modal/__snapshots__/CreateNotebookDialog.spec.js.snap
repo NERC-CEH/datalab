@@ -30,7 +30,7 @@ exports[`Confirmation creates correct snapshot for create notebook dialog 1`] = 
           <h2>
             Notebook Preview
           </h2>
-          <NotebookCard
+          <Connect(PreviewNotebookCard)
             notebook={
               Object {
                 "displayName": "Name",
