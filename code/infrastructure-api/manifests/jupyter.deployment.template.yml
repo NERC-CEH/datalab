@@ -35,6 +35,8 @@ spec:
               key: token
         - name: GRANT_SUDO
           value: "{{ grantSudo }}"
+        - name: R_LIBS_USER
+          value: "/data/packages/R/%p/%v"
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
