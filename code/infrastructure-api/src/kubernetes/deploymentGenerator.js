@@ -3,6 +3,9 @@ import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manif
 const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
 const JUPYTER_VERSION = '0.1.0';
 
+const RSTUDIO_IMAGE = 'rocker/rstudio';
+const RSTUDIO_VERSION = '3.4.0';
+
 function createJupyterDeployment(datalab, deploymentName, notebookName) {
   const context = {
     name: deploymentName,
@@ -18,9 +21,27 @@ function createJupyterDeployment(datalab, deploymentName, notebookName) {
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
+function createRStudioDeployment(datalab, deploymentName) {
+  const context = {
+    name: deploymentName,
+    datalabVolume: datalab.volume,
+    rstudio: {
+      imageName: RSTUDIO_IMAGE,
+      version: RSTUDIO_VERSION,
+    },
+  };
+
+  return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
+}
+
 function createJupyterService(notebookName) {
   const context = { name: notebookName };
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
 }
 
-export default { createJupyterDeployment, createJupyterService };
+function createRStudioService(name) {
+  const context = { name };
+  return generateManifest(context, ServiceTemplates.RSTUDIO_SERVICE);
+}
+
+export default { createJupyterDeployment, createRStudioDeployment, createRStudioService, createJupyterService };

@@ -3,8 +3,11 @@ import { has, get } from 'lodash';
 
 export const handleCreateError = (type, name) => (error) => {
   if (has(error, 'response.data.message')) {
+    logger.error(`Kubernetes API: Unable to create ${type}: '${name}' - ${error.response.data.message}`);
     throw createError(`Unable to create kubernetes ${type} '${name}' - ${error.response.data.message}`);
   }
+
+  logger.error(`unable to create kubernetes ${type} '${name}' - ${error}`);
   throw createError(`unable to create kubernetes ${type} '${name}' - ${error}`);
 };
 

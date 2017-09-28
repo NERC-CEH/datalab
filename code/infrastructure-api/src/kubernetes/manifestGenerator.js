@@ -3,10 +3,12 @@ import { render } from 'mustache';
 
 const ServiceTemplates = Object.freeze({
   JUPYTER_SERVICE: 'jupyter.service.template.yml',
+  RSTUDIO_SERVICE: 'rstudio.service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
   JUPYTER_DEPLOYMENT: 'jupyter.deployment.template.yml',
+  RSTUDIO_DEPLOYMENT: 'rstudio.deployment.template.yml',
 });
 
 function generateManifest(context, template) {

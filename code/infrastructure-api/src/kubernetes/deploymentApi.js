@@ -1,7 +1,7 @@
 import axios from 'axios';
 import logger from 'winston';
 import config from '../config/config';
-import { handleDeleteError } from './core';
+import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 const NAMESPACE = config.get('podNamespace');
@@ -32,13 +32,13 @@ function getDeployment(name) {
 function createDeployment(name, manifest) {
   logger.info('Creating deployment: %s', name);
   return axios.post(DEPLOYMENT_URL, manifest, YAML_CONTENT_HEADER)
-    .catch(handleError);
+    .catch(handleCreateError);
 }
 
 function updateDeployment(name, manifest) {
   logger.info('Updating deployment: %s', name);
   return axios.put(`${DEPLOYMENT_URL}/${name}`, manifest, YAML_CONTENT_HEADER)
-    .catch(handleError);
+    .catch(handleCreateError);
 }
 
 function deleteDeployment(name) {
@@ -46,10 +46,6 @@ function deleteDeployment(name) {
   return axios.delete(`${DEPLOYMENT_URL}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('deployment', name));
-}
-
-function handleError(error) {
-  throw new Error(`Unable to create kubernetes deployment ${error.response.data.message}`);
 }
 
 export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment };
