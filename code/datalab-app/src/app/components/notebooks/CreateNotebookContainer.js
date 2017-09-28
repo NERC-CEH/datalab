@@ -31,17 +31,6 @@ class CreateNotebookContainer extends Component {
   }
 }
 
-function mapStateToProps({ form }) {
-  let notebook = {};
-
-  if (form && form.createNotebook && form.createNotebook.values) {
-    notebook = form.createNotebook.values;
-  }
-  return {
-    notebook,
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
@@ -53,4 +42,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export { CreateNotebookContainer as PureCreateNotebookContainer }; // export for testing
-export default connect(mapStateToProps, mapDispatchToProps)(CreateNotebookContainer);
+export default connect(undefined, mapDispatchToProps)(CreateNotebookContainer);

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Modal } from 'semantic-ui-react';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
-import NotebookCard from '../notebooks/NotebookCard';
+import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
 const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
     <Modal size='large' dimmer='blurring' open={true}>
@@ -15,7 +15,7 @@ const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
             </Grid.Column>
             <Grid.Column width={6}>
               <h2>Notebook Preview</h2>
-              <NotebookCard notebook={notebook} />
+              <PreviewNotebookCard notebook={notebook} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

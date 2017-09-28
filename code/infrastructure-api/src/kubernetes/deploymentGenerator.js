@@ -1,7 +1,7 @@
 import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manifestGenerator';
 
 const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
-const JUPYTER_VERSION = '0.1.0';
+const JUPYTER_VERSION = '0.1.3';
 
 const RSTUDIO_IMAGE = 'rocker/rstudio';
 const RSTUDIO_VERSION = '3.4.0';
