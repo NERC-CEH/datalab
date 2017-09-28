@@ -11,7 +11,6 @@ spec:
     metadata:
       labels:
         name: {{ name }}
-        environment: {{ environment }}
     spec:
       containers:
       - image: {{ &rstudio.imageName }}:{{ rstudio.version }}
