@@ -20,6 +20,9 @@ export const NotebookType = new GraphQLObjectType({
     displayName: {
       type: GraphQLString,
     },
+    description: {
+      type: GraphQLString,
+    },
     type: {
       type: GraphQLString,
     },

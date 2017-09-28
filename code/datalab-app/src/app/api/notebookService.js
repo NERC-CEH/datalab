@@ -5,7 +5,7 @@ function loadNotebooks() {
   const query = `
       Notebooks {
         notebooks {
-          id, displayName, name, type
+          id, displayName, name, type, description
         }
       }`;
 

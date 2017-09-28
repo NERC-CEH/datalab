@@ -32,7 +32,7 @@ exports[`notebookService loadNotebooks should build the correct query and unpack
 "
       Notebooks {
         notebooks {
-          id, displayName, name, type
+          id, displayName, name, type, description
         }
       }"
 `;
