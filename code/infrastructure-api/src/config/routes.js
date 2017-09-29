@@ -1,11 +1,11 @@
 import status from '../controllers/status';
-import notebook from '../controllers/notebookController';
+import stack from '../controllers/stackController';
 import proxy from '../controllers/proxyController';
 
 function configureRoutes(app) {
   app.get('/status', status.status);
-  app.post('/notebooks', notebook.createNotebookValidator, notebook.createNotebook);
-  app.delete('/notebooks', notebook.createNotebookValidator, notebook.deleteNotebook);
+  app.post('/stacks', stack.createStackValidator, stack.createStack);
+  app.delete('/stacks', stack.createStackValidator, stack.deleteStack);
   app.post('/routes', proxy.createProxyRouteValidator, proxy.createRoute);
   app.delete('/routes', proxy.deleteProxyRouteValidator, proxy.deleteRoute);
 }
