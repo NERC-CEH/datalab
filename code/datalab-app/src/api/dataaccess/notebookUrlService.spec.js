@@ -108,6 +108,20 @@ describe('notebookUrlService', () => {
         });
     });
   });
+
+  describe('Unknown types', () => {
+    it('returns url for unknown types', () => {
+      const notebook = {
+        name: 'RStudio',
+        type: 'rstudio',
+        url: 'http://rstudio.datalab',
+        internalEndpoint: 'http://rstudio',
+      };
+
+      return notebookUrlService(notebook, 'user')
+        .then(url => expect(url).toEqual(notebook.url));
+    });
+  });
 });
 
 function getSuccessfulLoginResponse() {
