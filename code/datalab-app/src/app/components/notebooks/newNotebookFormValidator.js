@@ -7,7 +7,7 @@ const constraints = {
   },
   type: {
     presence: true,
-    inclusion: ['jupyter', 'zeppelin'],
+    inclusion: ['jupyter', 'rstudio'],
   },
   name: {
     presence: true,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Promise from 'bluebird';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reset } from 'redux-form';
@@ -13,9 +14,9 @@ class CreateNotebookContainer extends Component {
     Promise.resolve(this.props.actions.closeModalDialog())
       .then(() => this.props.actions.createNotebook(notebook))
       .then(this.props.actions.resetForm)
-      .then(this.props.actions.loadNotebooks)
       .then(() => notify.success('Notebook created'))
-      .catch(err => notify.error('Unable to create Notebook'));
+      .catch(err => notify.error('Unable to create Notebook'))
+      .finally(this.props.actions.loadNotebooks);
 
   openCreationForm = () => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_NOTEBOOK, {
     title: 'Create a Notebook',

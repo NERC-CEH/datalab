@@ -8,7 +8,7 @@ import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 
 const notebookTypes = [
   { text: 'Jupyter', value: 'jupyter' },
-  { text: 'Zeppelin', value: 'zeppelin' },
+  { text: 'RStudio', value: 'rstudio' },
 ];
 
 const CreateNotebookForm = (props) => {
