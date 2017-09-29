@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,9 +26,9 @@ class NotebooksContainer extends Component {
   deleteNotebook = notebook =>
     Promise.resolve(this.props.actions.closeModalDialog())
       .then(() => this.props.actions.deleteNotebook(notebook))
-      .then(this.props.actions.loadNotebooks)
       .then(() => notify.success('Notebook deleted'))
-      .catch(err => notify.error('Unable to delete Notebook'));
+      .catch(err => notify.error('Unable to delete Notebook'))
+      .finally(this.props.actions.loadNotebooks);
 
   confirmDeleteNotebook(notebook) {
     this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {

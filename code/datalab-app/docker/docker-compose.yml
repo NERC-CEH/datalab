@@ -1,12 +1,26 @@
 version: '3'
 services:
-  proxy:
-    image: 'traefik'
+  kong-database:
+      image: postgres:9.4
+      environment:
+        - POSTGRES_USER=kong
+        - POSTGRES_DB=kong
+
+  kong:
+    image: kong:0.10.3
+    restart: always
+    links:
+      - kong-database:kong-database
     ports:
-      - '8081:8080'
-      - '80:80'
-    volumes:
-      - ${PWD}/config/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - 80:8000
+      - 443:8443
+      - 8002:8001
+    expose:
+      - 7946
+      - 7946/udp
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
 
   mongodb:
     image: mongo:3.4

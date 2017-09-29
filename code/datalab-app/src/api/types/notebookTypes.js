@@ -44,6 +44,10 @@ export const NotebookTypeEnum = new GraphQLEnumType({
       description: 'A Jupyter Notebook',
       value: 'jupyter',
     },
+    rstudio: {
+      description: 'An RStudio Server',
+      value: 'rstudio',
+    },
   },
 });
 

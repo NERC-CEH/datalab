@@ -48,7 +48,7 @@ function createNotebook(notebook) {
       }
     }`;
 
-  return gqlMutation(mutation, { notebook }).then(res => get(res, 'data.notebook'));
+  return gqlMutation(mutation, { notebook }).then(handleMutationErrors);
 }
 
 function deleteNotebook(notebook) {
@@ -60,7 +60,14 @@ function deleteNotebook(notebook) {
     }
   `;
 
-  return gqlMutation(mutation, { notebook }).then(res => get(res, 'data.notebook'));
+  return gqlMutation(mutation, { notebook }).then(handleMutationErrors);
+}
+
+function handleMutationErrors(response) {
+  if (response.errors) {
+    throw new Error(response.errors[0]);
+  }
+  return get(response, 'data.notebook');
 }
 
 export default {
