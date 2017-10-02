@@ -1,5 +1,5 @@
 import logger from 'winston';
-import has from 'lodash/has';
+import { has } from 'lodash';
 
 const axiosErrorHandler = message => (error) => {
   if (has(error, 'response.data.message')) {
