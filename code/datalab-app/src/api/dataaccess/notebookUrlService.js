@@ -15,7 +15,7 @@ export default function notebookUrlService(notebook, user) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterUrl(notebook));
   }
-  return undefined;
+  return Promise.resolve(notebook.url);
 }
 
 const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
