@@ -9,11 +9,12 @@ const rstudioLogin = notebook => (credentials) => {
     return Promise.reject(new Error('username or password not defined'));
   }
 
-  return getRStudioCertificateUrl(notebook)
+  return getRStudioCertificate(notebook)
     .then(login(notebook, credentials));
 };
 
 const login = (notebook, credentials) => (response) => {
+  logger.debug(`Logging in to RStudio instance at: ${notebook.internalUrl}`);
   const certificateParts = response.data.split(':');
   const userPayload = `${credentials.username}\n${credentials.password}`;
   const exp = certificateParts[0];
@@ -36,6 +37,7 @@ const login = (notebook, credentials) => (response) => {
 
   return axios.post(getRStudioLoginUrl(notebook), payload, options)
     .then((loginResponse) => {
+      logger.debug('Processing successful login response cookies');
       const cookies = loginResponse.headers['set-cookie'];
       return rstudioCookieHandler(cookies);
     })
@@ -44,7 +46,8 @@ const login = (notebook, credentials) => (response) => {
     });
 };
 
-function getRStudioCertificateUrl(notebook) {
+function getRStudioCertificate(notebook) {
+  logger.debug(`Requesting RStudio certificate from ${notebook.internalEndpoint}/auth-public-key`);
   return axios.get(`${notebook.internalEndpoint}/auth-public-key`)
     .catch((error) => {
       throw new Error(`Unable to retrieve RStudio certificate: ${error.message}`);
