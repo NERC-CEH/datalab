@@ -81,6 +81,11 @@ services:
       - start-notebook.sh
       - --NotebookApp.token=jupyterToken
 
+  rstudio:
+    image: rocker/rstudio
+    ports:
+      - 8787:8787
+
   minio-connect:
     image: nerc/connect:latest
     ports:
@@ -90,6 +95,15 @@ services:
       ACTIONS: "['set']"
 
   zeppelin-connect:
-    image: nerc/zeppelin-connect
+    image: nerc/zeppelin-connect:1.1.0
     ports:
       - 8083:8000
+    environment:
+      CONNECT_TYPE: ZEPPELIN
+
+  rstudio-connect:
+    image: nerc/zeppelin-connect:1.1.0
+    ports:
+      - 8084:8000
+    environment:
+      CONNECT_TYPE: RSTUDIO
