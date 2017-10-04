@@ -7,7 +7,7 @@ function createNewJupyterCredentials() {
   };
 }
 
-function createNewRStudioCredentials() {
+function createNewUserCredentials() {
   return {
     username: 'datalab',
     password: tokenGenerator.generateUUID(),
@@ -22,4 +22,4 @@ function deleteSecret(datalab, id) {
   return vault.deleteSecret(`${datalab}/notebooks/${id}`);
 }
 
-export default { createNewJupyterCredentials, createNewRStudioCredentials, storeCredentialsInVault, deleteSecret };
+export default { createNewJupyterCredentials, createNewUserCredentials, storeCredentialsInVault, deleteSecret };
