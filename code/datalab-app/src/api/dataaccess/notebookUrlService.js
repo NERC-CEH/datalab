@@ -7,6 +7,7 @@ import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
 
 const DATALAB_NAME = config.get('datalabName');
+const RSTUDIO_USERNAME = 'datalab';
 
 export default function notebookUrlService(notebook, user) {
   if (notebook.type === ZEPPELIN) {
@@ -26,7 +27,8 @@ const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect
 
 const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?token=${token}` : undefined);
 
-const createRStudioUrl = notebook => tokens => (tokens ? `${notebook.url}/connect?expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}` : undefined);
+const createRStudioUrl = notebook => tokens =>
+  (tokens ? `${notebook.url}/connect?username=${RSTUDIO_USERNAME}&expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}` : undefined);
 
 function requestZeppelinToken(notebook, user) {
   return vault.requestNotebookKeys(DATALAB_NAME, notebook)
