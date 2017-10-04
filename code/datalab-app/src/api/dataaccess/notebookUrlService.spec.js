@@ -1,6 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
+import rstudioTokenService from './login/rstudioTokenService';
 import notebookUrlService from './notebookUrlService';
 import vault from './vault/vault';
 
@@ -10,6 +11,9 @@ jest.mock('winston');
 
 const vaultMock = jest.fn();
 vault.requestNotebookKeys = vaultMock;
+
+const rstudioTokenServiceMock = jest.fn();
+rstudioTokenService.rstudioLogin = rstudioTokenServiceMock;
 
 beforeEach(() => {
   mock.reset();
@@ -95,7 +99,7 @@ describe('notebookUrlService', () => {
         });
     });
 
-    it('returns undefined if vault response has not token', () => {
+    it('returns undefined if vault response has no token', () => {
       vaultMock.mockImplementationOnce(() => (Promise.resolve({
         props: 'noToken',
       })));
@@ -109,13 +113,48 @@ describe('notebookUrlService', () => {
     });
   });
 
+  describe('processes rstudio notebooks', () => {
+    const notebook = {
+      name: 'RStudio',
+      type: 'rstudio',
+      url: 'http://rstudio.datalab',
+      internalEndpoint: 'http://rstudio',
+    };
+
+    it('returns the rstudio notebook token', () => {
+      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+        username: 'datalab',
+        password: 'password',
+      })));
+
+      const tokens = { expires: 'e', token: 't', csrfToken: 'c' };
+      rstudioTokenServiceMock.mockImplementationOnce(inputNotebook => credentials => Promise.resolve(tokens));
+
+      return notebookUrlService(notebook, 'user')
+        .then((url) => {
+          expect(url).toEqual('http://rstudio.datalab/connect?expires=e&token=t&csrfToken=c');
+        });
+    });
+
+    it('returns undefined if vault response has no token', () => {
+      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+        props: 'noToken',
+      })));
+
+      rstudioTokenServiceMock.mockImplementationOnce(inputNotebook => credentials => Promise.reject(undefined));
+
+      return notebookUrlService(notebook, 'user')
+        .then(token => expect(token).toBeUndefined());
+    });
+  });
+
   describe('Unknown types', () => {
     it('returns url for unknown types', () => {
       const notebook = {
-        name: 'RStudio',
-        type: 'rstudio',
-        url: 'http://rstudio.datalab',
-        internalEndpoint: 'http://rstudio',
+        name: 'Unknown',
+        type: 'unknown',
+        url: 'http://unknown.datalab',
+        internalEndpoint: 'http://unknown',
       };
 
       return notebookUrlService(notebook, 'user')

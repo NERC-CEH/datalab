@@ -22,6 +22,7 @@
     "mongoose": "4.11.7",
     "moxios": "0.4.0",
     "prop-types": "15.5.8",
+    "querystring": "0.2.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-redux": "5.0.4",
@@ -66,8 +67,12 @@
     "webpack-node-externals": "1.6.0"
   },
   "babel": {
-    "presets": ["es2015"],
-    "plugins": ["transform-object-rest-spread"]
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",

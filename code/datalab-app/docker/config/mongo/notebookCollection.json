@@ -15,5 +15,15 @@
     "users" : [
       "auth0|595f40a25caf4344b2e0e678"
     ]
+  },
+  {
+    "name" : "rstudio",
+    "displayName" : "RStudio",
+    "type" : "rstudio",
+    "url" : "http://testlab-rstudio.datalabs.local",
+    "internalEndpoint" : "http://testlab-rstudio.datalabs.local",
+    "users" : [
+      "auth0|595f40a25caf4344b2e0e678"
+    ]
   }
 ]

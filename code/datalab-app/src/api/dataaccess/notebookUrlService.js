@@ -2,8 +2,9 @@ import axios from 'axios';
 import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
-import { JUPYTER, ZEPPELIN } from '../../shared/notebookTypes';
+import { JUPYTER, ZEPPELIN, RSTUDIO } from '../../shared/notebookTypes';
 import config from '../config';
+import rstudioTokenService from './login/rstudioTokenService';
 
 const DATALAB_NAME = config.get('datalabName');
 
@@ -14,6 +15,9 @@ export default function notebookUrlService(notebook, user) {
   } else if (notebook.type === JUPYTER) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterUrl(notebook));
+  } else if (notebook.type === RSTUDIO) {
+    return requestRStudioToken(notebook, user)
+      .then(createRStudioUrl(notebook));
   }
   return Promise.resolve(notebook.url);
 }
@@ -21,6 +25,8 @@ export default function notebookUrlService(notebook, user) {
 const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
 
 const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?token=${token}` : undefined);
+
+const createRStudioUrl = notebook => tokens => (tokens ? `${notebook.url}/connect?expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}` : undefined);
 
 function requestZeppelinToken(notebook, user) {
   return vault.requestNotebookKeys(DATALAB_NAME, notebook)
@@ -34,6 +40,15 @@ function requestZeppelinToken(notebook, user) {
 function requestJupyterToken(notebook, user) {
   return vault.requestNotebookKeys(DATALAB_NAME, notebook)
     .then(response => response.token);
+}
+
+function requestRStudioToken(notebook, user) {
+  return vault.requestNotebookKeys(DATALAB_NAME, notebook)
+    .then(rstudioTokenService.rstudioLogin(notebook))
+    .catch((error) => {
+      logger.error('Error logging in to RStudio: ', notebook.name, error);
+      return undefined;
+    });
 }
 
 const zeppelinLogin = notebook => (credentials) => {
