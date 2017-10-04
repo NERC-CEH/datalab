@@ -43,6 +43,9 @@ spec:
         ports:
         - containerPort: 8000
           protocol: TCP
+        env:
+        - name: CONNECT_TYPE
+          value: RSTUDIO
         livenessProbe:
           httpGet:
             path: /status
