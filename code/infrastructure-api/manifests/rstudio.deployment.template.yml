@@ -13,12 +13,20 @@ spec:
         name: {{ name }}
     spec:
       containers:
-      - image: {{ &rstudio.imageName }}:{{ rstudio.version }}
-        imagePullPolicy : "IfNotPresent"
-        name: {{ name }}
+      - name: {{ name }}
+        image: {{ &rstudio.imageName }}:{{ rstudio.version }}
+        imagePullPolicy : IfNotPresent
         ports:
         - containerPort: 8787
           protocol: TCP
+        env:
+        - name: USER
+          value: datalab
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ name }}
+              key: password
         volumeMounts:
         - name: glusterfsvol
           mountPath: /data
@@ -29,9 +37,21 @@ spec:
           limits:
             cpu: 2
             memory: 4Gi
+      - name: {{ name }}-connect
+        image: {{ &rstudio.connectImageName }}:{{ rstudio.connectVersion }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
       volumes:
-        - name: glusterfsvol
-          glusterfs:
-            endpoints: glusterfs-cluster
-            path: {{ datalabVolume }}
-            readOnly: false
+      - name: glusterfsvol
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: {{ datalabVolume }}
+          readOnly: false
