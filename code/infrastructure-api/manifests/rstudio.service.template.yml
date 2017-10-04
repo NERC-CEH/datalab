@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - name: {{ name }}-web-ui
-      port: 8787
+      port: 80
       targetPort: 8787
     - name: {{ name }}-connect
       port: 8000
