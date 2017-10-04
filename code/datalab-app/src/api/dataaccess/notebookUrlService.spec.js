@@ -132,7 +132,7 @@ describe('notebookUrlService', () => {
 
       return notebookUrlService(notebook, 'user')
         .then((url) => {
-          expect(url).toEqual('http://rstudio.datalab/connect?expires=e&token=t&csrfToken=c');
+          expect(url).toEqual('http://rstudio.datalab/connect?username=datalab&expires=e&token=t&csrfToken=c');
         });
     });
 
