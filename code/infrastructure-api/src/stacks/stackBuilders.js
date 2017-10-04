@@ -24,8 +24,17 @@ export const createService = (name, type, generator) => () => {
     });
 };
 
-export const createProxyRoute = (notebookName, datalabInfo) => (service) => {
+export const createProxyRoute = (name, datalabInfo) => (service) => {
   const k8sPort = service.spec.ports[0].nodePort;
-  logger.info(`Creating Proxy Route for: '${notebookName}' for k8s port: ${k8sPort}`);
-  return proxyRouteApi.createOrUpdateRoute(notebookName, datalabInfo, k8sPort);
+  logger.info(`Creating Proxy Route for: '${name}' for k8s port: ${k8sPort}`);
+  return proxyRouteApi.createOrUpdateRoute(name, datalabInfo, k8sPort);
+};
+
+export const createProxyRouteWithConnect = (name, datalabInfo) => (service) => {
+  const k8sServicePort = service.spec.ports[0].nodePort;
+  const k8sConnectPort = service.spec.ports[1].nodePort;
+
+  logger.info(`Creating Proxy Routes for: '${name}' for k8s port: ${k8sServicePort} and connect port: ${k8sConnectPort}`);
+  return proxyRouteApi.createOrUpdateRoute(name, datalabInfo, k8sServicePort)
+    .then(() => proxyRouteApi.createOrUpdateRoute(name, datalabInfo, k8sConnectPort, true));
 };

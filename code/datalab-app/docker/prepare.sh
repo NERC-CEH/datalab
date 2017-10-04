@@ -40,19 +40,19 @@ curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-jupyter' -
 
 # Configure Proxy Routes for Zeppelin
 curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-zeppelin' --data 'hosts=testlab-zeppelin.datalabs.local' \
-    --data 'upstream_url=http://zeppelin:8080' --data 'strip_uri=true' --data 'preserve_host=true'
+    --data 'upstream_url=http://zeppelin:8080' --data 'preserve_host=true'
 curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-zeppelin-connect' --data 'hosts=testlab-zeppelin.datalabs.local' \
     --data 'upstream_url=http://zeppelin-connect:8000' --data 'uris=/connect' --data 'strip_uri=true'
 
 # Configure Proxy Routes for RStudio
 curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-rstudio' --data 'hosts=testlab-rstudio.datalabs.local' \
-    --data 'upstream_url=http://rstudio:8787' --data 'strip_uri=true' --data 'preserve_host=true'
+    --data 'upstream_url=http://rstudio:8787' --data 'preserve_host=true'
 curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-rstudio-connect' --data 'hosts=testlab-rstudio.datalabs.local' \
     --data 'upstream_url=http://rstudio-connect:8000' --data 'uris=/connect' --data 'strip_uri=true'
 
 # Configure Proxy Routes for Minio
 curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-minio' --data 'hosts=testlab-minio.datalabs.local' \
-    --data 'upstream_url=http://minio:9000' --data 'strip_uri=true' --data 'preserve_host=true'
+    --data 'upstream_url=http://minio:9000' --data 'preserve_host=true'
 curl -i -X POST --url http://localhost:8002/apis --data 'name=testlab-minio-connect' --data 'hosts=testlab-minio.datalabs.local' \
     --data 'upstream_url=http://minio-connect' --data 'uris=/connect' --data 'strip_uri=true'
 

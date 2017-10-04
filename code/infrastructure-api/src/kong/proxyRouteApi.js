@@ -21,6 +21,20 @@ function deleteRoute(name, datalab) {
 }
 
 /**
+ * This function deletes a Kong proxy route, connect route and matching SNI.
+ * It performs no checks before issuing the delete as the Kong API returns a 404
+ * if the route is not found. This is logged and the function returns success.
+ * Any other errors are logged with a failure response.
+ */
+function deleteRouteWithConnect(name, datalab) {
+  const routeInfo = createRouteInfo(name, datalab);
+  const connectRouteInfo = createRouteInfo(name, datalab, true);
+  return deleteApi(routeInfo.apiName)
+    .then(() => deleteApi(connectRouteInfo.apiName))
+    .then(() => deleteSni(routeInfo.requestedSni));
+}
+
+/**
  * This function idempotently creates a Kong proxy route
  * To do this it performs the following steps
  * - Get the existing SNI if it exists
@@ -32,18 +46,23 @@ function deleteRoute(name, datalab) {
  * @param datalab information about the datalab hosting the service
  * @param k8sPort the kubernetes port the service is located at
  */
-function createOrUpdateRoute(name, datalab, k8sPort) {
-  const routeInfo = createRouteInfo(name, datalab);
+function createOrUpdateRoute(name, datalab, k8sPort, connectRoute = false) {
+  const routeInfo = createRouteInfo(name, datalab, connectRoute);
 
   return getSni(routeInfo.requestedSni)
     .then(createSniIfRequired(routeInfo.requestedSni, routeInfo.baseSni))
     .then(() => getApi(routeInfo.apiName))
-    .then(createOrUpdateApi(routeInfo.apiName, routeInfo.requestedSni, k8sPort));
+    .then(createOrUpdateApi(routeInfo.apiName, routeInfo.requestedSni, k8sPort, connectRoute));
 }
 
-function createRouteInfo(name, datalab) {
+function createRouteInfo(name, datalab, connectRoute) {
+  let apiName = `${datalab.name}-${name}`;
+  if (connectRoute) {
+    apiName = `${apiName}-connect`;
+  }
+
   return {
-    apiName: `${datalab.name}-${name}`,
+    apiName,
     requestedSni: `${datalab.name}-${name}.${datalab.domain}`,
     baseSni: `${datalab.name}.${datalab.domain}`,
   };
@@ -94,8 +113,8 @@ function getApi(apiName) {
     .catch(() => undefined);
 }
 
-const createOrUpdateApi = (apiName, requestedSni, k8sPort) => (existingApi) => {
-  const payload = createPayload(apiName, requestedSni, k8sPort);
+const createOrUpdateApi = (apiName, requestedSni, k8sPort, connectRoute) => (existingApi) => {
+  const payload = createPayload(apiName, requestedSni, k8sPort, connectRoute);
 
   if (existingApi) {
     logger.info(`Updating route: ${apiName}`);
@@ -130,14 +149,24 @@ const handleDeleteError = (type, name) => (error) => {
   throw new Error(`Kong API error: ${error.message}`);
 };
 
-function createPayload(apiName, requestedSni, k8sPort) {
-  return {
+function createPayload(apiName, requestedSni, k8sPort, connectRoute) {
+  const basePayload = {
     name: apiName,
     hosts: requestedSni,
     upstream_url: `${KUBERNETES_MASTER_URL}:${k8sPort}`,
     preserve_host: true,
     https_only: true,
   };
+
+  if (connectRoute) {
+    return {
+      ...basePayload,
+      strip_uri: true,
+      uris: '/connect',
+    };
+  }
+
+  return basePayload;
 }
 
-export default { createOrUpdateRoute, deleteRoute };
+export default { createOrUpdateRoute, deleteRoute, deleteRouteWithConnect };

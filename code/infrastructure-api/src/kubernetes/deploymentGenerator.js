@@ -5,6 +5,8 @@ const JUPYTER_VERSION = '0.1.3';
 
 const RSTUDIO_IMAGE = 'rocker/rstudio';
 const RSTUDIO_VERSION = '3.4.0';
+const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
+const RSTUDIO_CONNECT_VERSION = '1.1.0';
 
 function createJupyterDeployment(datalab, deploymentName, notebookName) {
   const context = {
@@ -28,6 +30,8 @@ function createRStudioDeployment(datalab, deploymentName) {
     rstudio: {
       imageName: RSTUDIO_IMAGE,
       version: RSTUDIO_VERSION,
+      connectImageName: RSTUDIO_CONNECT_IMAGE,
+      connectVersion: RSTUDIO_CONNECT_VERSION,
     },
   };
 

@@ -37,7 +37,7 @@ describe('Kong Proxy API', () => {
   });
 
   describe('createOrUpdateRoute', () => {
-    it('should create an SNI and route if the do not exist', () => {
+    it('should create an SNI and route if they do not exist', () => {
       const newSni = createSniPayload();
       const newRoute = createRoutePayload();
 
@@ -75,6 +75,22 @@ describe('Kong Proxy API', () => {
       mock.onPatch(`${API_URL}/${existingRoute.id}`, newRoute).reply(200, { message: 'OK' });
 
       return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port)
+        .then((response) => {
+          expect(response.data).toEqual({ message: 'OK' });
+        });
+    });
+
+    it('should create a connect route if requested', () => {
+      const newSni = createSniPayload();
+      const newRoute = createConnectRoutePayload();
+
+      mock.onGet(`${SNI_URL}/${requestedSni}`).reply(404); // SNI not found
+      mock.onGet(SNI_URL).reply(200, { data: snis }); // List SNIs
+      mock.onPost(SNI_URL, newSni).reply(201); // Create new SNI
+      mock.onGet(`${API_URL}/${apiName}`).reply(404); // Route not found
+      mock.onPost(API_URL, newRoute).reply(200, { message: 'OK' }); // Successful route creation
+
+      return proxyRouteApi.createOrUpdateRoute(serviceName, datalab, port, true)
         .then((response) => {
           expect(response.data).toEqual({ message: 'OK' });
         });
@@ -127,5 +143,17 @@ function createRoutePayload() {
     upstream_url: `${KUBERNETES_MASTER_URL}:${port}`,
     preserve_host: true,
     https_only: true,
+  };
+}
+
+function createConnectRoutePayload() {
+  return {
+    name: `${apiName}-connect`,
+    hosts: requestedSni,
+    upstream_url: `${KUBERNETES_MASTER_URL}:${port}`,
+    preserve_host: true,
+    https_only: true,
+    strip_uri: true,
+    uris: '/connect',
   };
 }
