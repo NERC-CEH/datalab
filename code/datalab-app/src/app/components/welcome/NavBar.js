@@ -17,8 +17,8 @@ const publicNavLinks = [
 ];
 
 const styles = theme => ({
-  root: {
-    boxShadow: 'none',
+  appBar: {
+    // boxShadow: 'none',
   },
   toolbar: {
     paddingLeft: '8%',
@@ -54,7 +54,7 @@ const styles = theme => ({
 });
 
 const PublicNavBarContent = ({ classes }) => (
-  <AppBar className={classes.root} position="fixed">
+  <AppBar className={classes.appBar} position="fixed">
     <Toolbar className={classes.toolbar}>
       <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
       <div className={classes.spacer} />
