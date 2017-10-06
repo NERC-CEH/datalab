@@ -21,6 +21,10 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
           "value": "jupyter",
         },
         Object {
+          "text": "Zeppelin",
+          "value": "zeppelin",
+        },
+        Object {
           "text": "RStudio",
           "value": "rstudio",
         },

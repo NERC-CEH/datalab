@@ -51,6 +51,10 @@ export const NotebookTypeEnum = new GraphQLEnumType({
       description: 'An RStudio Server',
       value: 'rstudio',
     },
+    zeppelin: {
+      description: 'A Zeppelin Notebook',
+      value: 'zeppelin',
+    },
   },
 });
 
