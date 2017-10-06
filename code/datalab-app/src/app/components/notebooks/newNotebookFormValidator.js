@@ -1,5 +1,6 @@
 import validate from 'validate.js';
 import notebookActions from '../../actions/notebookActions';
+import { getNotebookKeys } from '../../../shared/notebookTypes';
 
 const constraints = {
   displayName: {
@@ -7,7 +8,7 @@ const constraints = {
   },
   type: {
     presence: true,
-    inclusion: ['jupyter', 'zeppelin', 'rstudio'],
+    inclusion: getNotebookKeys(),
   },
   name: {
     presence: true,
