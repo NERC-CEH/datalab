@@ -1,4 +1,4 @@
-import { keys, keyBy, capitalize } from 'lodash';
+import { keyBy, capitalize } from 'lodash';
 
 export const JUPYTER = 'jupyter';
 export const ZEPPELIN = 'zeppelin';
