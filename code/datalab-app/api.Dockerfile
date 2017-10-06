@@ -4,9 +4,9 @@ LABEL maintainer "joshua.foster@stfc.ac.uk"
 
 RUN mkdir -p /usr/src/api
 
-COPY ./package.json /usr/src/api
+COPY ./package.json /usr/src
 
-WORKDIR /usr/src/api
+WORKDIR /usr/src
 
 RUN yarn install --silent --production && yarn cache clean
 
@@ -16,4 +16,4 @@ COPY ./dist/shared /usr/src/shared
 
 EXPOSE 8000
 
-CMD ["node", "api.js"]
+CMD ["node", "api/api.js"]
