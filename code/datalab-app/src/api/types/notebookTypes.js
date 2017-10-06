@@ -6,6 +6,7 @@ import {
   GraphQLInputObjectType,
 } from 'graphql';
 import notebookUrlService from '../dataaccess/notebookUrlService';
+import { getNotebookTypes } from '../../shared/notebookTypes';
 
 export const NotebookType = new GraphQLObjectType({
   name: 'Notebook',
@@ -42,16 +43,7 @@ export const NotebookType = new GraphQLObjectType({
 export const NotebookTypeEnum = new GraphQLEnumType({
   name: 'NotebookType',
   description: 'Notebook types within DataLabs',
-  values: {
-    jupyter: {
-      description: 'A Jupyter Notebook',
-      value: 'jupyter',
-    },
-    rstudio: {
-      description: 'An RStudio Server',
-      value: 'rstudio',
-    },
-  },
+  values: getNotebookTypes(),
 });
 
 export const NotebookCreationType = new GraphQLInputObjectType({
