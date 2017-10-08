@@ -17,22 +17,22 @@ function deleteStack(request, response) {
 
 function createStackExec(request, response) {
   // Build request params
-  const { datalabInfo, name, type } = matchedData(request);
+  const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(datalabInfo, name, type)
+  return stackManager.createStack(params)
     .then(controllerHelper.sendSuccessfulCreation(response))
-    .catch(controllerHelper.handleError(response, 'creating', TYPE, name));
+    .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
 
 function deleteStackExec(request, response) {
   // Build request params
-  const { datalabInfo, name, type } = matchedData(request);
+  const params = matchedData(request);
 
   // Handle request
-  return stackManager.deleteStack(datalabInfo, name, type)
+  return stackManager.deleteStack(params)
     .then(controllerHelper.sendSuccessfulDeletion(response))
-    .catch(controllerHelper.handleError(response, 'deleting', TYPE, name));
+    .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
 const createStackValidator = [

@@ -9,7 +9,7 @@ import proxyRouteApi from '../kong/proxyRouteApi';
 
 import { createDeployment, createService, createProxyRouteWithConnect } from './stackBuilders';
 
-function createZeppelinStack(datalabInfo, name, type) {
+function createZeppelinStack({ datalabInfo, name, type }) {
   const secretStrategy = secretManager.createNewUserCredentials;
 
   return secretManager.storeCredentialsInVault(datalabInfo.name, name, secretStrategy)
@@ -20,7 +20,7 @@ function createZeppelinStack(datalabInfo, name, type) {
     .then(createProxyRouteWithConnect(name, datalabInfo));
 }
 
-function deleteZeppelinStack(datalabInfo, name, type) {
+function deleteZeppelinStack({ datalabInfo, name, type }) {
   const k8sName = `${type}-${name}`;
   return proxyRouteApi.deleteRouteWithConnect(name, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))

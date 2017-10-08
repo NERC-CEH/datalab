@@ -1,7 +1,8 @@
 import logger from 'winston';
 import getStack from './stacks';
 
-function createStack(datalabInfo, name, type) {
+function createStack(params) {
+  const { datalabInfo, name, type } = params;
   const stack = getStack(type);
 
   if (!stack) {
@@ -10,10 +11,11 @@ function createStack(datalabInfo, name, type) {
   }
 
   logger.info(`Creating new ${type} stack with name: ${name} for datalab: ${datalabInfo.name}`);
-  return stack.create(datalabInfo, name, type);
+  return stack.create(params);
 }
 
-function deleteStack(datalabInfo, name, type) {
+function deleteStack(params) {
+  const { datalabInfo, name, type } = params;
   const stack = getStack(type);
 
   if (!stack) {
@@ -22,7 +24,7 @@ function deleteStack(datalabInfo, name, type) {
   }
 
   logger.info(`Deleting stack ${name} for datalab: ${datalabInfo.name}`);
-  return stack.delete(datalabInfo, name, type);
+  return stack.delete(params);
 }
 
 export default { createStack, deleteStack };
