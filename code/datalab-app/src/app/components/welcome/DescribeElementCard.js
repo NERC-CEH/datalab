@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-import Card, { CardContent } from 'material-ui/Card';
+import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Icon from 'material-ui/Icon';
 import Typography from 'material-ui/Typography';
 
@@ -9,8 +9,12 @@ const cardStyle = {
   height: '100%',
 };
 
-const bodyStyle = {
+const bodyText = {
   fontSize: 'larger',
+  fontWeight: 'lighter',
+};
+
+const cardTitle = {
   fontWeight: 'lighter',
 };
 
@@ -20,46 +24,61 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary[50],
   },
   invertCard: cardStyle,
-  cardTitle: {
+  cardTitle,
+  iconCardTitle: {
+    ...cardTitle,
     marginLeft: 35,
-    fontWeight: 'lighter',
   },
   icon: {
     color: theme.palette.error[900],
     float: 'left',
     paddingTop: 3,
   },
-  body: bodyStyle,
-  quoteBody: {
-    ...bodyStyle,
+  bodyText,
+  quoteBodyText: {
+    ...bodyText,
     fontStyle: 'italic',
+  },
+  cardImage: {
+    height: 90,
+    marginBottom: 8,
   },
 });
 
-function DescribeElementCard({ classes, description, invert, quote }) {
-  const title = (
+function DescribeElementCard({ classes, icon, title, content, invert, quote, media }) {
+  const banner = (
     <CardContent key="card-title">
-      <Icon className={classes.icon}>{description.icon}</Icon>
-      <Typography className={classes.cardTitle} type="headline">{description.title}</Typography>
+      {icon ? <Icon className={classes.icon}>{icon}</Icon> : undefined}
+      <Typography className={icon ? classes.iconCardTitle : classes.cardTitle} type="headline">
+        {title}
+      </Typography>
     </CardContent>
   );
 
-  const body = (
+  const generateTextBody = textContent => (
     <CardContent key="card-body">
-        <Typography className={quote ? classes.quoteBody : classes.body} type="body1">{description.supportingText}</Typography>
+      <Typography className={quote ? classes.quoteBodyText : classes.bodyText} type="body1">
+        {textContent}
+      </Typography>
     </CardContent>
   );
 
-  let content = [title, body];
+  const generateMediaBody = mediaContent => (
+    <CardMedia className={classes.cardImage} key="card-body" image={mediaContent} />
+  );
+
+  const body = media ? generateMediaBody(content) : generateTextBody(content);
+
+  let cardContent = [banner, body];
 
   if (quote) {
-    content = content.reverse();
+    cardContent = cardContent.reverse();
   }
 
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card className={invert ? classes.invertCard : classes.card} square>
-        {content}
+        {cardContent}
       </Card>
     </Grid>
   );
