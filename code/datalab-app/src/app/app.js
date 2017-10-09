@@ -8,7 +8,7 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router />
+      <Router />
   </Provider>,
   document.getElementById('root'),
 );
