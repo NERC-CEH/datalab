@@ -16,12 +16,13 @@ const DescribeElement = ({ classes, title, descriptions, invert, quote, media })
   <DescribeElementSegment invert={invert}>
     <Typography className={classes.title} type="display1">{title}</Typography>
     <Grid container align="stretch">
-      {descriptions.map(({ icon, title: cardTitle, content: cardContent }, idx) => (
+      {descriptions.map(({ icon, title: cardTitle, content: cardContent, links }, idx) => (
         <DescribeElementCard
           key={`card-${idx}`}
           icon={icon}
           title={cardTitle}
           content={cardContent}
+          links={links}
           invert={invert}
           quote={quote}
           media={media}

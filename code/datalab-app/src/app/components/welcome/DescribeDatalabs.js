@@ -23,11 +23,13 @@ const datalabStories = [
 ];
 /* eslint-enable max-len */
 
+/* eslint-disable max-len */
 const datalabCommunity = [
-  { title: 'Join Us on Slack', content: slackLogo },
-  { title: 'Contribute to Our Projects', content: gitHubLogo },
-  { title: 'Join Our Discourse Forum', content: discourseLogo },
+  { title: 'Join Us on Slack', content: slackLogo, links: [{ name: 'Slack', href: 'http://slack.com/' }] },
+  { title: 'Contribute to Our Projects', content: gitHubLogo, links: [{ name: 'Github', href: 'https://github.com/orgs/NERC-CEH/teams/nerc-data-lab/repositories' }, { name: 'Docker Hub', href: 'https://hub.docker.com/u/nerc/' }] },
+  { title: 'Join Our Discourse Forum', content: discourseLogo, links: [{ name: 'Discourse', href: '' }] },
 ];
+/* eslint-enable max-len */
 
 const DescribeDatalabs = () => (
   <div>
