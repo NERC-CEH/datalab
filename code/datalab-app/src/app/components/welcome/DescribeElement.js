@@ -1,27 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Grid, Header, Icon, Reveal } from 'semantic-ui-react';
+import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
+import DescribeElementSegment from './DescribeElementSegment';
+import DescribeElementCard from './DescribeElementCard';
 
-const DescribeElement = ({ iconName, title, description, secondColor }) => (
-  <Grid.Column>
-    <Reveal animated="small fade">
-      <Reveal.Content visible>
-        <Icon name={iconName} size="massive" />
-      </Reveal.Content>
-      <Reveal.Content hidden>
-        <Icon name={iconName} size="massive" color={secondColor} />
-      </Reveal.Content>
-    </Reveal>
-    <Header content={title} as="h3" />
-    {description}
-  </Grid.Column>
+const styles = theme => ({
+  title: {
+    paddingTop: 28,
+    paddingBottom: 28,
+  },
+});
+
+const DescribeElement = ({ classes, title, descriptions, invert, quote, media }) => (
+  <DescribeElementSegment invert={invert}>
+    <Typography className={classes.title} type="display1">{title}</Typography>
+    <Grid container align="stretch">
+      {descriptions.map(({ icon, title: cardTitle, content: cardContent }, idx) => (
+        <DescribeElementCard
+          key={`card-${idx}`}
+          icon={icon}
+          title={cardTitle}
+          content={cardContent}
+          invert={invert}
+          quote={quote}
+          media={media}
+        />
+      ))}
+    </Grid>
+  </DescribeElementSegment>
 );
 
-DescribeElement.propTypes = {
-  iconName: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  secondColor: PropTypes.string.isRequired,
-};
-
-export default DescribeElement;
+export default withStyles(styles)(DescribeElement);
