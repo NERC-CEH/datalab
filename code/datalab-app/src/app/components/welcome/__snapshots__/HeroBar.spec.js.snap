@@ -1,45 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeroBar renders correct snapshot 1`] = `
-<Container
-  style={
+<HeroBar
+  classes={
     Object {
-      "minHeight": "350px",
+      "bar": "HeroBar-bar-1",
+      "button": "HeroBar-button-4",
+      "logo": "HeroBar-logo-2",
+      "tagLine": "HeroBar-tagLine-3",
     }
   }
-  text={true}
->
-  <Header
-    as="h1"
-    inverted={true}
-    style={
-      Object {
-        "paddingTop": "120px",
-      }
-    }
-  >
-    Welcome to DataLabs
-  </Header>
-  <Button
-    animated={true}
-    as="button"
-    onClick={[Function]}
-    primary={true}
-  >
-    <ButtonContent
-      visible={true}
-    >
-      Get Started!
-    </ButtonContent>
-    <ButtonContent
-      hidden={true}
-    >
-      <Icon
-        as="i"
-        name="arrow right"
-      />
-      Login
-    </ButtonContent>
-  </Button>
-</Container>
+/>
 `;
