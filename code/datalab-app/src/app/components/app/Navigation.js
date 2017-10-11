@@ -1,31 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import SideBar from './SideBar';
 import TopBar from './TopBar';
 
-const sidebarStyle = {
-  height: '100%',
-  position: 'fixed',
-  width: 250,
-  background: '#1B1C1D',
-};
+const topbarHeight = 64;
 
-const mainWindowStyle = {
-  marginLeft: 250,
-};
+const styles = theme => ({
+  container: {
+    width: '100%',
+  },
+  appFrame: {
+    position: 'relative',
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+    zIndex: 1,
+  },
+  content: {
+    width: '100%',
+    height: `calc(100% - ${topbarHeight}px)`,
+    marginTop: topbarHeight,
+  },
+});
 
-const topBarStyle = {
-  minHeight: '64px',
-};
-
-const Navigation = ({ children }) => (
-  <div>
-    <div style={sidebarStyle}>
-      <SideBar topBarStyle={topBarStyle} />
-    </div>
-    <div style={mainWindowStyle}>
-      <TopBar topBarStyle={topBarStyle} />
-      {children}
+const Navigation = ({ classes, children }) => (
+  <div className={classes.container}>
+    <div className={classes.appFrame}>
+      <TopBar/>
+      <SideBar/>
+      <main className={classes.content}>
+        {children}
+      </main>
     </div>
   </div>
 );
@@ -37,4 +43,4 @@ Navigation.propTypes = {
   ]).isRequired,
 };
 
-export default Navigation;
+export default withStyles(styles)(Navigation);

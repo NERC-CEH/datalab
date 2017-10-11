@@ -1,16 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, Segment } from 'semantic-ui-react';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import Menu, { MenuItem } from 'material-ui/Menu';
 import auth from '../../auth/auth';
 
-const TopBar = ({ topBarStyle }) => (
-  <Segment basic inverted textAlign="right" style={topBarStyle}>
-    <Button primary onClick={() => auth.logout()}>Logout</Button>
-  </Segment>
+const TopBar = () => (
+  <AppBar position="fixed">
+    <Toolbar>
+      <div style={{ flex: 1 }} />
+      <Button color="primary" raised onClick={auth.logout}>Logout</Button>
+    </Toolbar>
+  </AppBar>
 );
-
-TopBar.propTypes = {
-  topBarStyle: PropTypes.object,
-};
 
 export default TopBar;

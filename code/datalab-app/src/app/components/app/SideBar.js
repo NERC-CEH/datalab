@@ -1,47 +1,44 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Header, Menu, Segment } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
-import SubMenu from './SubMenu';
+import { withStyles } from 'material-ui/styles';
+import Drawer from 'material-ui/Drawer';
+import List from 'material-ui/List';
+import ListSubheader from 'material-ui/List/ListSubheader';
+import datalabsLogo from '../../../assets/images/datalabs-hori.png';
+import NavLink from './NavLink';
 
-const SideBar = ({ topBarStyle }) => (
-  <div>
-    <Segment basic inverted style={topBarStyle}>
-      <Header as="h2" color="teal">DataLabs</Header>
-    </Segment>
-    <Menu vertical fluid inverted attached>
-      <NavLink className="item" to="/" exact>Dashboard</NavLink>
-      <SubMenu
-        menuTitle="Data"
-        menuItems={[
-          { Component: NavLink,
-            props: { className: 'item', to: '/storage', exact: true },
-            children: 'Storage' },
-        ]}
-      />
-      <SubMenu
-        menuTitle="Analysis"
-        menuItems={[
-          { Component: NavLink,
-            props: { className: 'item', to: '/notebooks', exact: true },
-            children: 'Notebooks' },
-          { Component: Menu.Item,
-            props: { name: 'Dask', onClick: () => window.open('https://datalab-dask.datalabs.nerc.ac.uk/') } },
-          { Component: Menu.Item,
-            props: { name: 'Spark', onClick: () => window.open('https://datalab-spark.datalabs.nerc.ac.uk/') } },
-        ]}
-      />
-      <Menu.Item
-        header
-        name="Help"
-        onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/')}
-      />
-    </Menu>
-  </div>
+const drawerWidth = 240;
+
+const styles = theme => ({
+  header: {
+    ...theme.mixins.toolbar,
+    padding: 16,
+    backgroundColor: theme.palette.secondary[900],
+  },
+  drawerPaper: {
+    position: 'relative',
+    height: '100%',
+    width: drawerWidth,
+    backgroundColor: theme.palette.secondary[800],
+    borderWidth: 0,
+  },
+  logo: {
+    width: 140,
+  },
+});
+
+const SideBar = ({ classes }) => (
+  <Drawer classes={{ paper: classes.drawerPaper }} type="permanent">
+    <header className={classes.header}>
+      <img className={classes.logo} src={datalabsLogo} alt="datalabs-logo" />
+    </header>
+    <List>
+      <NavLink to="/" label="Dashboard" icon="dashboard" />
+      <ListSubheader>Data</ListSubheader>
+      <NavLink to="/storage" label="Storage" icon="storage" />
+      <ListSubheader>Analysis</ListSubheader>
+      <NavLink to="/notebooks" label="Notebooks" icon="book" />
+    </List>
+  </Drawer>
 );
 
-SideBar.propTypes = {
-  topBarStyle: PropTypes.object,
-};
-
-export default SideBar;
+export default withStyles(styles)(SideBar);
