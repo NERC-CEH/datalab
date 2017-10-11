@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: shiny-server-service
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: {{ name }}-web-ui
+      port: 80
+      targetPort: 3838
+  selector:
+    name: {{ name }}
+  type: NodePort

@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+    spec:
+      containers:
+      - image: {{ &shiny.imageName }}:{{ shiny.version }}
+        imagePullPolicy : "IfNotPresent"
+        name:  {{ name }}
+        ports:
+        - containerPort: 3838
+          protocol: TCP
+        volumeMounts:
+          - name: glusterfsvol
+            mountPath: /srv/shiny-server
+            subPath: {{ appPath }}
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 2Gi
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: {{ datalabVolume }}
+            readOnly: false
