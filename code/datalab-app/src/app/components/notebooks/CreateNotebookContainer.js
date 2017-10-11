@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reset } from 'redux-form';
 import NewNotebookButton from './NewNotebookButton';
-import notebookActions from '../../actions/notebookActions';
+import stackActions from '../../actions/stackActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../common/notify';
 import { MODAL_TYPE_CREATE_NOTEBOOK } from '../../constants/modaltypes';
@@ -12,11 +12,11 @@ import { MODAL_TYPE_CREATE_NOTEBOOK } from '../../constants/modaltypes';
 class CreateNotebookContainer extends Component {
   createNotebook = notebook =>
     Promise.resolve(this.props.actions.closeModalDialog())
-      .then(() => this.props.actions.createNotebook(notebook))
+      .then(() => this.props.actions.createStack(notebook))
       .then(this.props.actions.resetForm)
       .then(() => notify.success('Notebook created'))
       .catch(err => notify.error('Unable to create Notebook'))
-      .finally(this.props.actions.loadNotebooks);
+      .finally(this.props.actions.loadStacks);
 
   openCreationForm = () => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_NOTEBOOK, {
     title: 'Create a Notebook',
@@ -35,7 +35,7 @@ class CreateNotebookContainer extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      ...notebookActions,
+      ...stackActions,
       ...modalDialogActions,
       resetForm: () => reset('createNotebook'),
     }, dispatch),

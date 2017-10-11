@@ -1,9 +1,9 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import status from './status';
 import { dataStorage, dataStore } from './dataStorage';
-import { notebook, notebooks, checkNotebookName } from './notebooks';
+import { stack, stacks, checkStackName } from './stacks';
 import { datalab, datalabs } from './datalabs';
-import { createNotebook, deleteNotebook } from './mutateNotebook';
+import { createStack, deleteStack } from './mutateStack';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -12,9 +12,9 @@ const RootQueryType = new GraphQLObjectType({
     status,
     dataStorage,
     dataStore,
-    notebook,
-    notebooks,
-    checkNotebookName,
+    stack,
+    stacks,
+    checkStackName,
     datalab,
     datalabs,
   },
@@ -24,8 +24,8 @@ const RootMutationType = new GraphQLObjectType({
   name: 'RootMutationType',
   description: 'Root mutation methods for Datalabs.',
   fields: {
-    createNotebook,
-    deleteNotebook,
+    createStack,
+    deleteStack,
   },
 });
 

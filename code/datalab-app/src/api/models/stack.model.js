@@ -6,7 +6,7 @@ export const REQUESTED = 'requested';
 export const CREATING = 'creating';
 const states = [REQUESTED, CREATING];
 
-const NotebookSchema = new Schema({
+const StackSchema = new Schema({
   name: String,
   displayName: String,
   type: String,
@@ -18,4 +18,4 @@ const NotebookSchema = new Schema({
   created: { type: Date, default: Date.now },
 });
 
-mongoose.model('Notebook', NotebookSchema);
+mongoose.model('Stack', StackSchema);

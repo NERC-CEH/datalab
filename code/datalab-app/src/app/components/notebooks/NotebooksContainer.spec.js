@@ -2,12 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import NotebooksContainer, { PureNotebooksContainer } from './NotebooksContainer';
-import notebookService from '../../api/notebookService';
+import notebookService from '../../api/stackService';
 import notify from '../common/notify';
 
-jest.mock('../../api/notebookService');
-const loadNotebooksMock = jest.fn().mockReturnValue('expectedPayload');
-notebookService.loadNotebooks = loadNotebooksMock;
+jest.mock('../../api/stackService');
+const loadStacksMock = jest.fn().mockReturnValue('expectedPayload');
+notebookService.loadStacks = loadStacksMock;
 
 describe('NotebooksContainer', () => {
   describe('is a connected component which', () => {
@@ -46,7 +46,7 @@ describe('NotebooksContainer', () => {
       const output = shallowRenderConnected(store).prop('actions');
 
       // Assert
-      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadNotebooks', 'openNotebook']));
+      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadStacks', 'openStack']));
     });
 
     it('loadNotebooks function dispatches correct action', () => {
@@ -60,9 +60,9 @@ describe('NotebooksContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadNotebooks();
+      output.prop('actions').loadStacks();
       expect(store.getActions()[0]).toEqual({
-        type: 'LOAD_NOTEBOOKS',
+        type: 'LOAD_STACKS',
         payload: 'expectedPayload',
       });
     });
@@ -82,11 +82,11 @@ describe('NotebooksContainer', () => {
     };
 
     const generateActions = () => ({
-      loadNotebooks: loadNotebooksMock,
+      loadStacks: loadStacksMock,
       getUrl: () => {},
-      openNotebook: () => {},
-      createNotebook: () => {},
-      deleteNotebook: () => {},
+      openStack: () => {},
+      createStack: () => {},
+      deleteStack: () => {},
     });
 
     const generateProps = () => ({
@@ -104,7 +104,7 @@ describe('NotebooksContainer', () => {
       shallowRenderPure(props);
 
       // Assert
-      expect(loadNotebooksMock).toHaveBeenCalledTimes(1);
+      expect(loadStacksMock).toHaveBeenCalledTimes(1);
     });
 
     it('passes correct props to NotebookCards', () => {
@@ -120,14 +120,14 @@ describe('NotebooksContainer', () => {
       const getUrlMock = jest.fn()
         .mockReturnValue(Promise.resolve({ value: { redirectUrl: 'expectedUrl' } }));
 
-      const openNotebookMock = jest.fn();
+      const openStackMock = jest.fn();
 
       const props = {
         ...generateProps(),
         actions: {
           ...generateActions(),
           getUrl: getUrlMock,
-          openNotebook: openNotebookMock,
+          openStack: openStackMock,
         },
       };
 
@@ -136,12 +136,12 @@ describe('NotebooksContainer', () => {
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
-      expect(openNotebookMock).not.toHaveBeenCalled();
+      expect(openStackMock).not.toHaveBeenCalled();
       openNotebook(1000).then(() => {
         expect(getUrlMock).toHaveBeenCalledTimes(1);
         expect(getUrlMock).toHaveBeenCalledWith(1000);
-        expect(openNotebookMock).toHaveBeenCalledTimes(1);
-        expect(openNotebookMock).toHaveBeenCalledWith('expectedUrl');
+        expect(openStackMock).toHaveBeenCalledTimes(1);
+        expect(openStackMock).toHaveBeenCalledWith('expectedUrl');
       });
     });
 
