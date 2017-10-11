@@ -2,8 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: shiny-server-service
-  namespace: {{ namespace }}
+  name: {{ name }}
 spec:
   ports:
     - name: {{ name }}-web-ui

@@ -13,7 +13,7 @@ spec:
         name: {{ name }}
     spec:
       containers:
-      - image: {{ &shiny.imageName }}:{{ shiny.version }}
+      - image: {{ &rshiny.imageName }}:{{ rshiny.version }}
         imagePullPolicy : "IfNotPresent"
         name:  {{ name }}
         ports:
