@@ -2,6 +2,7 @@ import { find } from 'lodash';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
+import rshinyStack from './rshinyStack';
 
 const STACKS = Object.freeze({
   JUPYTER: {
@@ -18,6 +19,11 @@ const STACKS = Object.freeze({
     name: 'rstudio',
     create: rstudioStack.createRStudioStack,
     delete: rstudioStack.deleteRStudioStack,
+  },
+  RSHINY: {
+    name: 'rshiny',
+    create: rshinyStack.createRShinyStack,
+    delete: rshinyStack.deleteRShinyStack,
   },
 });
 
