@@ -91,7 +91,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
           "title": "Contribute to Our Projects",
         },
         Object {
-          "content": "discourse-hoir.png",
+          "content": "discourse-hori.png",
           "links": Array [
             Object {
               "displayName": "Discourse",

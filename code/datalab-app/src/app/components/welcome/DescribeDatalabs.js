@@ -2,7 +2,7 @@ import React from 'react';
 import DescribeElement from './DescribeElement';
 import slackLogo from '../../../assets/images/slack-hori.png';
 import gitHubLogo from '../../../assets/images/github-hori.png';
-import discourseLogo from '../../../assets/images/discourse-hoir.png';
+import discourseLogo from '../../../assets/images/discourse-hori.png';
 import { datalabLinks } from './NavBar';
 
 /* eslint-disable max-len */
