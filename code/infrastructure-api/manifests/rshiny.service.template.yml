@@ -1,0 +1,13 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ name }}
+spec:
+  ports:
+    - name: {{ name }}-web-ui
+      port: 80
+      targetPort: 3838
+  selector:
+    name: {{ name }}
+  type: NodePort

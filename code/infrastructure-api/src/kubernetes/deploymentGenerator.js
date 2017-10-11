@@ -13,15 +13,18 @@ const RSTUDIO_VERSION = '3.4.0';
 const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
 const RSTUDIO_CONNECT_VERSION = '1.1.1';
 
+const RSHINY_IMAGE = 'nerc/rshiny';
+const RSHINY_VERSION = '0.1.1';
+
 const SPARK_MASTER_ADDRESS = 'spark://spark-master:7077';
 const SHARED_R_LIBS = '/data/packages/R/%p/%v';
 
-function createJupyterDeployment(datalab, deploymentName, notebookName) {
+function createJupyterDeployment({ datalabInfo, deploymentName, notebookName }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    datalabVolume: datalab.volume,
-    domain: `${datalab.name}-${notebookName}.${datalab.domain}`,
+    datalabVolume: datalabInfo.volume,
+    domain: `${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
     jupyter: {
       imageName: JUPYTER_IMAGE,
       version: JUPYTER_VERSION,
@@ -31,11 +34,11 @@ function createJupyterDeployment(datalab, deploymentName, notebookName) {
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createZeppelinDeployment(datalab, deploymentName) {
+function createZeppelinDeployment({ datalabInfo, deploymentName }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    datalabVolume: datalab.volume,
+    datalabVolume: datalabInfo.volume,
     sparkMasterAddress: SPARK_MASTER_ADDRESS,
     sharedRLibs: SHARED_R_LIBS,
     zeppelin: {
@@ -49,10 +52,10 @@ function createZeppelinDeployment(datalab, deploymentName) {
   return generateManifest(context, DeploymentTemplates.ZEPPELIN_DEPLOYMENT);
 }
 
-function createRStudioDeployment(datalab, deploymentName) {
+function createRStudioDeployment({ datalabInfo, deploymentName }) {
   const context = {
     name: deploymentName,
-    datalabVolume: datalab.volume,
+    datalabVolume: datalabInfo.volume,
     rstudio: {
       imageName: RSTUDIO_IMAGE,
       version: RSTUDIO_VERSION,
@@ -62,6 +65,20 @@ function createRStudioDeployment(datalab, deploymentName) {
   };
 
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
+}
+
+function createRShinyDeployment({ datalabInfo, deploymentName, path }) {
+  const context = {
+    name: deploymentName,
+    datalabVolume: datalabInfo.volume,
+    appPath: path,
+    rshiny: {
+      imageName: RSHINY_IMAGE,
+      version: RSHINY_VERSION,
+    },
+  };
+
+  return generateManifest(context, DeploymentTemplates.RSHINY_DEPLOYMENT);
 }
 
 function createJupyterService(notebookName) {
@@ -79,11 +96,18 @@ function createRStudioService(name) {
   return generateManifest(context, ServiceTemplates.RSTUDIO_SERVICE);
 }
 
+function createRShinyService(name) {
+  const context = { name };
+  return generateManifest(context, ServiceTemplates.RSHINY_SERVICE);
+}
+
 export default {
   createJupyterDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
+  createRShinyDeployment,
   createJupyterService,
   createZeppelinService,
   createRStudioService,
+  createRShinyService,
 };

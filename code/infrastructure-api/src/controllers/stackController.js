@@ -2,6 +2,7 @@ import { check } from 'express-validator/check';
 import { matchedData, sanitize } from 'express-validator/filter';
 import controllerHelper from './controllerHelper';
 import stackManager from '../stacks/stackManager';
+import { STACKS } from '../stacks/stacks';
 
 const TYPE = 'stack';
 
@@ -17,22 +18,22 @@ function deleteStack(request, response) {
 
 function createStackExec(request, response) {
   // Build request params
-  const { datalabInfo, name, type } = matchedData(request);
+  const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(datalabInfo, name, type)
+  return stackManager.createStack(params)
     .then(controllerHelper.sendSuccessfulCreation(response))
-    .catch(controllerHelper.handleError(response, 'creating', TYPE, name));
+    .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
 
 function deleteStackExec(request, response) {
   // Build request params
-  const { datalabInfo, name, type } = matchedData(request);
+  const params = matchedData(request);
 
   // Handle request
-  return stackManager.deleteStack(datalabInfo, name, type)
+  return stackManager.deleteStack(params)
     .then(controllerHelper.sendSuccessfulDeletion(response))
-    .catch(controllerHelper.handleError(response, 'deleting', TYPE, name));
+    .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
 const createStackValidator = [
@@ -48,6 +49,20 @@ const createStackValidator = [
     .isLength({ min: 4, max: 12 })
     .withMessage('Name must be 4-12 characters long'),
   check('type').exists().withMessage('Type must be specified'),
+  check('path', 'path must be specified for publication request')
+    .custom((value, { req }) => {
+      if (req.body.type === STACKS.RSHINY.name) {
+        return value;
+      }
+      return true;
+    }),
+  check('isPublic', 'isPublic boolean must be specified for publication request')
+    .custom((value, { req }) => {
+      if (req.body.type === STACKS.RSHINY.name) {
+        return value === 'true' || value === 'false';
+      }
+      return true;
+    }),
 ];
 
 export default { createStackValidator, createStack, deleteStack };
