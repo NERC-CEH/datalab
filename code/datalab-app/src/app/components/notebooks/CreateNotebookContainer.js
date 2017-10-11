@@ -22,7 +22,6 @@ class CreateNotebookContainer extends Component {
     title: 'Create a Notebook',
     onSubmit: this.createNotebook,
     onCancel: this.props.actions.closeModalDialog,
-    notebook: this.props.notebook,
   });
 
   render() {
