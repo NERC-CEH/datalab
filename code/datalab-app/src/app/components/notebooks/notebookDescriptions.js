@@ -1,4 +1,4 @@
-import { JUPYTER, ZEPPELIN, RSTUDIO } from '../../../shared/notebookTypes';
+import { JUPYTER, ZEPPELIN, RSTUDIO } from '../../../shared/stackTypes';
 import jupyerLogo from '../../../assets/images/jupyter-logo.svg';
 import zeppelinLogo from '../../../assets/images/zeppelin-logo.svg';
 import rstudioLogo from '../../../assets/images/rstudio-logo.png';

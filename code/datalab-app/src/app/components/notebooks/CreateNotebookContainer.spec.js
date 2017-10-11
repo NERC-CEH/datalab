@@ -8,16 +8,16 @@ import notify from '../common/notify';
 const notebook = { name: 'Name' };
 
 describe('NotebooksContainer', () => {
-  const createNotebookMock = jest.fn();
-  const loadNotebooksMock = jest.fn();
+  const createStackMock = jest.fn();
+  const loadStacksMock = jest.fn();
   const openModalDialogMock = jest.fn();
 
   function createProps() {
     return {
       notebook,
       actions: {
-        createNotebook: createNotebookMock,
-        loadNotebooks: loadNotebooksMock,
+        createStack: createStackMock,
+        loadStacks: loadStacksMock,
         openModalDialog: openModalDialogMock,
         closeModalDialog: () => {},
       },
@@ -45,7 +45,7 @@ describe('NotebooksContainer', () => {
       const output = shallowRenderConnected(store).prop('actions');
 
       // Assert
-      expect(Object.keys(output)).toEqual(expect.arrayContaining(['createNotebook', 'loadNotebooks']));
+      expect(Object.keys(output)).toEqual(expect.arrayContaining(['createStack', 'loadStacks']));
     });
   });
 
