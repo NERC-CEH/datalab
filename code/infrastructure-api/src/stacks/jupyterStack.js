@@ -6,12 +6,13 @@ import serviceApi from '../kubernetes/serviceApi';
 import proxyRouteApi from '../kong/proxyRouteApi';
 import { createDeployment, createService, createProxyRoute } from './stackBuilders';
 
-function createJupyterNotebook({ datalabInfo, name, type }) {
+function createJupyterNotebook(params) {
+  const { datalabInfo, name, type } = params;
   const secretStrategy = secretManager.createNewJupyterCredentials;
 
   return secretManager.storeCredentialsInVault(datalabInfo.name, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
-    .then(createDeployment(datalabInfo, name, type, deploymentGenerator.createJupyterDeployment))
+    .then(createDeployment(params, deploymentGenerator.createJupyterDeployment))
     .then(createService(name, type, deploymentGenerator.createJupyterService))
     .then(createProxyRoute(name, datalabInfo));
 }

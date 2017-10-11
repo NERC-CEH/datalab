@@ -4,8 +4,9 @@ import serviceApi from '../kubernetes/serviceApi';
 import proxyRouteApi from '../kong/proxyRouteApi';
 import { createDeployment, createService, createProxyRoute } from './stackBuilders';
 
-function createRShinyStack({ datalabInfo, name, type }) {
-  return createDeployment(datalabInfo, name, type, deploymentGenerator.createRShinyDeployment)()
+function createRShinyStack(params) {
+  const { datalabInfo, name, type } = params;
+  return createDeployment(params, deploymentGenerator.createRShinyDeployment)()
     .then(createService(name, type, deploymentGenerator.createRShinyService))
     .then(createProxyRoute(name, datalabInfo));
 }

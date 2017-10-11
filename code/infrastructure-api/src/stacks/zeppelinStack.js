@@ -9,13 +9,14 @@ import proxyRouteApi from '../kong/proxyRouteApi';
 
 import { createDeployment, createService, createProxyRouteWithConnect } from './stackBuilders';
 
-function createZeppelinStack({ datalabInfo, name, type }) {
+function createZeppelinStack(params) {
+  const { datalabInfo, name, type } = params;
   const secretStrategy = secretManager.createNewUserCredentials;
 
   return secretManager.storeCredentialsInVault(datalabInfo.name, name, secretStrategy)
     .then(generateNewShiroIni)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
-    .then(createDeployment(datalabInfo, name, type, deploymentGenerator.createZeppelinDeployment))
+    .then(createDeployment(params, deploymentGenerator.createZeppelinDeployment))
     .then(createService(name, type, deploymentGenerator.createZeppelinService))
     .then(createProxyRouteWithConnect(name, datalabInfo));
 }

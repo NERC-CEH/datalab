@@ -6,12 +6,13 @@ import serviceApi from '../kubernetes/serviceApi';
 import proxyRouteApi from '../kong/proxyRouteApi';
 import { createDeployment, createService, createProxyRouteWithConnect } from './stackBuilders';
 
-function createRStudioStack({ datalabInfo, name, type }) {
+function createRStudioStack(params) {
+  const { datalabInfo, name, type } = params;
   const secretStrategy = secretManager.createNewUserCredentials;
 
   return secretManager.storeCredentialsInVault(datalabInfo.name, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
-    .then(createDeployment(datalabInfo, name, type, deploymentGenerator.createRStudioDeployment))
+    .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(name, type, deploymentGenerator.createRStudioService))
     .then(createProxyRouteWithConnect(name, datalabInfo));
 }

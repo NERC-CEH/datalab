@@ -4,9 +4,11 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import proxyRouteApi from '../kong/proxyRouteApi';
 
-export const createDeployment = (datalabInfo, name, type, generator) => () => {
+export const createDeployment = (params, generator) => () => {
+  const { name, type } = params;
   const deploymentName = `${type}-${name}`;
-  return generator(datalabInfo, deploymentName, name)
+
+  return generator({ ...params, deploymentName })
     .then((manifest) => {
       logger.info(`Creating deployment ${chalk.blue(deploymentName)} with manifest:`);
       logger.debug(manifest.toString());
