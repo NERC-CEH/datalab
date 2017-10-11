@@ -7,11 +7,18 @@ import NavBarLinkButton from './NavBarLinkButton';
 import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import auth from '../../auth/auth';
 
+export const datalabLinks = {
+  discourse: { displayName: 'Discourse', href: 'https://www.discourse.org/' },
+  dockerHub: { displayName: 'Docker Hub', href: 'https://hub.docker.com/u/nerc/' },
+  github: { displayName: 'GitHub', href: 'https://github.com/orgs/NERC-CEH/teams/nerc-data-lab/repositories' },
+  slack: { displayName: 'Slack', href: 'http://slack.com/' },
+};
+
 const publicNavLinks = [
-  { name: 'Slack' },
-  { name: 'Discourse' },
-  { name: 'GitHub' },
-  { name: 'DockerHub' },
+  datalabLinks.slack,
+  datalabLinks.discourse,
+  datalabLinks.github,
+  datalabLinks.dockerHub,
 ];
 
 const styles = theme => ({
@@ -29,8 +36,8 @@ const PublicNavBarContent = ({ classes }) => (
     <Toolbar>
       <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
       <div className={classes.spacer} />
-      {publicNavLinks.map(props => <NavBarLinkButton key={props.name}>{props.name}</NavBarLinkButton>)}
-      <Button color="primary" raised>Log In</Button>
+      {publicNavLinks.map(({ displayName, href }) => <NavBarLinkButton key={displayName} onClick={() => window.open(href)}>{displayName}</NavBarLinkButton>)}
+      <Button color="primary" raised onClick={auth.login}>Log In</Button>
     </Toolbar>
   </AppBar>
 );

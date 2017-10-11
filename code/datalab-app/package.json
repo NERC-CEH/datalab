@@ -18,7 +18,7 @@
     "history": "4.6.1",
     "jwks-rsa": "1.2.0",
     "lodash": "4.17.4",
-    "material-ui": "^1.0.0-beta.13",
+    "material-ui": "^1.0.0-beta.16",
     "moment": "2.18.1",
     "mongoose": "4.11.7",
     "moxios": "0.4.0",

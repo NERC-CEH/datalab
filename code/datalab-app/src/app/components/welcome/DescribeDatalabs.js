@@ -2,7 +2,8 @@ import React from 'react';
 import DescribeElement from './DescribeElement';
 import slackLogo from '../../../assets/images/slack-hori.png';
 import gitHubLogo from '../../../assets/images/github-hori.png';
-import discourseLogo from '../../../assets/images/discourse-hoir.png';
+import discourseLogo from '../../../assets/images/discourse-hori.png';
+import { datalabLinks } from './NavBar';
 
 /* eslint-disable max-len */
 const datalabDescriptions = [
@@ -23,16 +24,18 @@ const datalabStories = [
 ];
 /* eslint-enable max-len */
 
+/* eslint-disable max-len */
 const datalabCommunity = [
-  { title: 'Join Us on Slack', content: slackLogo },
-  { title: 'Contribute to Our Projects', content: gitHubLogo },
-  { title: 'Join Our Discourse Forum', content: discourseLogo },
+  { title: 'Join Us on Slack', content: slackLogo, links: [datalabLinks.slack] },
+  { title: 'Contribute to Our Projects', content: gitHubLogo, links: [datalabLinks.github, datalabLinks.dockerHub] },
+  { title: 'Join Our Discourse Forum', content: discourseLogo, links: [datalabLinks.discourse] },
 ];
+/* eslint-enable max-len */
 
 const DescribeDatalabs = () => (
   <div>
     <DescribeElement title="How DataLabs can enhance your research" descriptions={datalabDescriptions} />
-    <DescribeElement title="Sucess stories" descriptions={datalabStories} invert quote/>
+    <DescribeElement title="Sucess stories" descriptions={datalabStories} invert quote />
     <DescribeElement title="How you can join the DataLabs community" descriptions={datalabCommunity} media />
   </div>
 );
