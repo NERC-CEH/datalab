@@ -7,7 +7,7 @@ import notify from '../common/notify';
 
 jest.mock('../../api/stackService');
 const loadStacksMock = jest.fn().mockReturnValue('expectedPayload');
-notebookService.loadStacks = loadStacksMock;
+notebookService.loadStacksByCategory = loadStacksMock;
 
 describe('NotebooksContainer', () => {
   describe('is a connected component which', () => {
@@ -60,9 +60,9 @@ describe('NotebooksContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadStacks();
+      output.prop('actions').loadStacksByCategory();
       expect(store.getActions()[0]).toEqual({
-        type: 'LOAD_STACKS',
+        type: 'LOAD_STACKS_BY_CATEGORY',
         payload: 'expectedPayload',
       });
     });
@@ -82,7 +82,7 @@ describe('NotebooksContainer', () => {
     };
 
     const generateActions = () => ({
-      loadStacks: loadStacksMock,
+      loadStacksByCategory: loadStacksMock,
       getUrl: () => {},
       openStack: () => {},
       createStack: () => {},

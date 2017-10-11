@@ -41,7 +41,7 @@ class NotebooksContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadStacks();
+    this.props.actions.loadStacksByCategory('analysis');
   }
 
   render() {
@@ -63,7 +63,7 @@ NotebooksContainer.propTypes = {
     value: PropTypes.array.isRequired,
   }).isRequired,
   actions: PropTypes.shape({
-    loadStacks: PropTypes.func.isRequired,
+    loadStacksByCategory: PropTypes.func.isRequired,
     getUrl: PropTypes.func.isRequired,
     openStack: PropTypes.func.isRequired,
     deleteStack: PropTypes.func.isRequired,

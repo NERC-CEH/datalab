@@ -9,6 +9,10 @@ function getAll(user) {
   return Stack().find({}).exec();
 }
 
+function getByCategory(user, category) {
+  return Stack().find({ category }).exec();
+}
+
 function getById(user, id) {
   // return Stack.findOne({ users: user.sub, _id: id });
   return Stack().findOne({ _id: id }).exec();
@@ -27,4 +31,4 @@ function deleteByName(user, name) {
   return Stack().remove({ name }).exec();
 }
 
-export default { getAll, getById, getByName, createOrUpdate, deleteByName };
+export default { getAll, getByCategory, getById, getByName, createOrUpdate, deleteByName };

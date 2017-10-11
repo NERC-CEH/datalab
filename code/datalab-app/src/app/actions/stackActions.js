@@ -1,6 +1,7 @@
 import stackService from '../api/stackService';
 
 export const LOAD_STACKS_ACTION = 'LOAD_STACKS';
+export const LOAD_STACKS_BY_CATEGORY_ACTION = 'LOAD_STACKS_BY_CATEGORY';
 export const GET_STACK_URL_ACTION = 'GET_STACK_URL';
 export const OPEN_STACK_ACTION = 'OPEN_STACK';
 export const CREATE_STACK_ACTION = 'CREATE_STACK';
@@ -10,6 +11,11 @@ export const DELETE_STACK_ACTION = 'DELETE_STACK';
 const loadStacks = () => ({
   type: LOAD_STACKS_ACTION,
   payload: stackService.loadStacks(),
+});
+
+const loadStacksByCategory = category => ({
+  type: LOAD_STACKS_BY_CATEGORY_ACTION,
+  payload: stackService.loadStacksByCategory(category),
 });
 
 const getUrl = id => ({
@@ -42,6 +48,7 @@ const deleteStack = (notebook) => {
 
 export default {
   loadStacks,
+  loadStacksByCategory,
   getUrl,
   openStack,
   createStack,

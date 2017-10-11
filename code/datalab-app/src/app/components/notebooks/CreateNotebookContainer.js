@@ -16,7 +16,7 @@ class CreateNotebookContainer extends Component {
       .then(this.props.actions.resetForm)
       .then(() => notify.success('Notebook created'))
       .catch(err => notify.error('Unable to create Notebook'))
-      .finally(this.props.actions.loadStacks);
+      .finally(this.props.actions.loadStacksByCategory('analysis'));
 
   openCreationForm = () => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_NOTEBOOK, {
     title: 'Create a Notebook',
