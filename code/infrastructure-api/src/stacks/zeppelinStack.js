@@ -21,8 +21,10 @@ function createZeppelinStack(params) {
     .then(createProxyRouteWithConnect(name, datalabInfo));
 }
 
-function deleteZeppelinStack({ datalabInfo, name, type }) {
+function deleteZeppelinStack(params) {
+  const { datalabInfo, name, type } = params;
   const k8sName = `${type}-${name}`;
+
   return proxyRouteApi.deleteRouteWithConnect(name, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))

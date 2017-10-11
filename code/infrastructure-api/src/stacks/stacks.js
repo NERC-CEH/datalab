@@ -4,7 +4,7 @@ import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
 import rshinyStack from './rshinyStack';
 
-const STACKS = Object.freeze({
+export const STACKS = Object.freeze({
   JUPYTER: {
     name: 'jupyter',
     create: jupyterStack.createJupyterNotebook,

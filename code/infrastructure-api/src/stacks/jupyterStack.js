@@ -17,13 +17,15 @@ function createJupyterNotebook(params) {
     .then(createProxyRoute(name, datalabInfo));
 }
 
-function deleteJupyterNotebook({ datalabInfo, notebookName, notebookType }) {
-  const k8sName = `${notebookType}-${notebookName}`;
-  return proxyRouteApi.deleteRoute(notebookName, datalabInfo)
+function deleteJupyterNotebook(params) {
+  const { datalabInfo, name, type } = params;
+  const k8sName = `${type}-${name}`;
+
+  return proxyRouteApi.deleteRoute(name, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))
     .then(() => k8sSecretApi.deleteSecret(k8sName))
-    .then(() => secretManager.deleteSecret(datalabInfo.name, notebookName));
+    .then(() => secretManager.deleteSecret(datalabInfo.name, name));
 }
 
 export default { createJupyterNotebook, deleteJupyterNotebook };

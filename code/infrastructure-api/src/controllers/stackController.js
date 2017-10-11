@@ -2,6 +2,7 @@ import { check } from 'express-validator/check';
 import { matchedData, sanitize } from 'express-validator/filter';
 import controllerHelper from './controllerHelper';
 import stackManager from '../stacks/stackManager';
+import { STACKS } from '../stacks/stacks';
 
 const TYPE = 'stack';
 
@@ -50,14 +51,14 @@ const createStackValidator = [
   check('type').exists().withMessage('Type must be specified'),
   check('path', 'path must be specified for publication request')
     .custom((value, { req }) => {
-      if (req.body.type === 'rshiny') {
+      if (req.body.type === STACKS.RSHINY.name) {
         return value;
       }
       return true;
     }),
   check('isPublic', 'isPublic boolean must be specified for publication request')
     .custom((value, { req }) => {
-      if (req.body.type === 'rshiny') {
+      if (req.body.type === STACKS.RSHINY.name) {
         return value === 'true' || value === 'false';
       }
       return true;

@@ -6,13 +6,16 @@ import { createDeployment, createService, createProxyRoute } from './stackBuilde
 
 function createRShinyStack(params) {
   const { datalabInfo, name, type } = params;
+
   return createDeployment(params, deploymentGenerator.createRShinyDeployment)()
     .then(createService(name, type, deploymentGenerator.createRShinyService))
     .then(createProxyRoute(name, datalabInfo));
 }
 
-function deleteRShinyStack({ datalabInfo, name, type }) {
+function deleteRShinyStack(params) {
+  const { datalabInfo, name, type } = params;
   const k8sName = `${type}-${name}`;
+
   return proxyRouteApi.deleteRoute(name, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName));
