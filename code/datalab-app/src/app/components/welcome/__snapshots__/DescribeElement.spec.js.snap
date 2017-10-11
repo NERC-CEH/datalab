@@ -1,34 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElement renders correct snapshot 1`] = `
-<GridColumn>
-  <Reveal
-    animated="small fade"
-  >
-    <RevealContent
-      visible={true}
-    >
-      <Icon
-        as="i"
-        name="bug"
-        size="massive"
-      />
-    </RevealContent>
-    <RevealContent
-      hidden={true}
-    >
-      <Icon
-        as="i"
-        color="teal"
-        name="bug"
-        size="massive"
-      />
-    </RevealContent>
-  </Reveal>
-  <Header
-    as="h3"
-    content="expectedTitle"
-  />
-  expectedDescription
-</GridColumn>
+<DescribeElement
+  classes={
+    Object {
+      "title": "DescribeElement-title-1",
+    }
+  }
+  description="expectedDescription"
+  iconName="bug"
+  secondColor="teal"
+  title="expectedTitle"
+/>
 `;

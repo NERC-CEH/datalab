@@ -1,17 +1,40 @@
 import React from 'react';
-import { Segment } from 'semantic-ui-react';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui';
+import { blueGrey, teal } from 'material-ui/colors';
 import NavBar from '../components/welcome/NavBar';
 import HeroBar from '../components/welcome/HeroBar';
 import DecribeDatalabs from '../components/welcome/DescribeDatalabs';
+import Footer from '../components/welcome/Footer';
+
+const generateTheme = (primary, secondary) => createMuiTheme({
+  palette: {
+    primary,
+    secondary,
+  },
+  overrides: {
+    MuiAppBar: {
+      root: {
+        padding: 0,
+      },
+      colorPrimary: {
+        backgroundColor: secondary[900],
+      },
+    },
+  },
+});
+
+const theme = generateTheme(teal, blueGrey);
 
 const WelcomePage = () => (
-  <div>
-    <Segment inverted vertical textAlign="center">
+  <MuiThemeProvider theme={theme}>
+    <div>
       <NavBar/>
       <HeroBar/>
-    </Segment>
-    <DecribeDatalabs/>
-  </div>
+      <DecribeDatalabs/>
+      <Footer invert/>
+    </div>
+  </MuiThemeProvider>
+
 );
 
 export default WelcomePage;

@@ -1,30 +1,38 @@
 import React from 'react';
-import { Button, Container, Header, Icon } from 'semantic-ui-react';
+import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import datalabsLogo from '../../../assets/images/datalabs-vert.png';
 import auth from '../../auth/auth';
 
-const segmentStyle = {
-  minHeight: '350px',
-};
+const styles = theme => ({
+  bar: {
+    paddingTop: 62,
+    backgroundColor: theme.palette.secondary[900],
+    textAlign: 'center',
+  },
+  logo: {
+    height: 300,
+    marginTop: 60,
+  },
+  tagLine: {
+    color: theme.palette.secondary[50],
+    padding: 20,
+  },
+  button: {
+    margin: 20,
+  },
+});
 
-const headerStyle = {
-  paddingTop: '120px',
-};
+const tagLine = 'DataLabs provides you with tools to power your research and share the results';
 
-const HeroBar = () => (
-  <Container text style={segmentStyle}>
-    <Header inverted as="h1" style={headerStyle}>
-      Welcome to DataLabs
-    </Header>
-    <Button primary animated onClick={auth.login}>
-      <Button.Content visible>
-        Get Started!
-      </Button.Content>
-      <Button.Content hidden>
-        <Icon name="arrow right"/>
-        Login
-      </Button.Content>
-    </Button>
-  </Container>
+const HeroBar = ({ classes }) => (
+  <div className={classes.bar}>
+    <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
+    <Typography className={classes.tagLine} type="title">{tagLine}</Typography>
+    <Button className={classes.button} color="primary" raised disabled>Sign Up</Button>
+    <Button className={classes.button} color="primary" raised onClick={auth.login}> Log In</Button>
+  </div>
 );
 
-export default HeroBar;
+export default withStyles(styles)(HeroBar);
