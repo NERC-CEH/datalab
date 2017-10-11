@@ -66,21 +66,34 @@ describe('Notebook Controller', () => {
   it('should validate the name field exists', () => {
     const requestBody = createRequestBody();
     requestBody.name = '';
-    return checkNameValidation(requestBody, 'Name must only use the characters a-z');
+    return executeValidator(requestBody)
+      .then(() => expectValidationError('name', 'Name must only use the characters a-z'));
   });
 
   it('should validate the name field is at least 4 characters', () => {
     const requestBody = createRequestBody();
     requestBody.name = 'abc';
-    return checkNameValidation(requestBody, 'Name must be 4-12 characters long');
+    return executeValidator(requestBody)
+      .then(() => expectValidationError('name', 'Name must be 4-12 characters long'));
   });
 
-  function checkNameValidation(body, expectedMessage) {
+  it('should validate the additional fields for rshiny', () => {
+    const requestBody = createRequestBody();
+    requestBody.type = 'rshiny';
+    return executeValidator(requestBody).then(() => {
+      expectValidationError('path', 'path must be specified for publication request');
+      expectValidationError('isPublic', 'isPublic boolean must be specified for publication request');
+    });
+  });
+
+  function executeValidator(body) {
     request = httpMocks.createRequest({ method: 'GET', body });
     const validators = stackController.createStackValidator.map(createValidationPromise(request));
-    return Promise.all(validators).then(() => {
-      expect(validationResult(request).mapped().name.msg).toEqual(expectedMessage);
-    });
+    return Promise.all(validators);
+  }
+
+  function expectValidationError(fieldName, expectedMessage) {
+    expect(validationResult(request).mapped()[fieldName].msg).toEqual(expectedMessage);
   }
 });
 

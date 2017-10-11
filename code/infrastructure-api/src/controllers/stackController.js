@@ -48,6 +48,20 @@ const createStackValidator = [
     .isLength({ min: 4, max: 12 })
     .withMessage('Name must be 4-12 characters long'),
   check('type').exists().withMessage('Type must be specified'),
+  check('path', 'path must be specified for publication request')
+    .custom((value, { req }) => {
+      if (req.body.type === 'rshiny') {
+        return value;
+      }
+      return true;
+    }),
+  check('isPublic', 'isPublic boolean must be specified for publication request')
+    .custom((value, { req }) => {
+      if (req.body.type === 'rshiny') {
+        return value === 'true' || value === 'false';
+      }
+      return true;
+    }),
 ];
 
 export default { createStackValidator, createStack, deleteStack };
