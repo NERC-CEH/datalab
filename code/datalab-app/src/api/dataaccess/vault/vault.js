@@ -10,8 +10,8 @@ function requestStorageKeys(datalab, storage) {
   return requestPath(keyPath);
 }
 
-function requestNotebookKeys(datalab, notebook) {
-  const keyPath = `${datalab}/notebooks/${notebook.name}`;
+function requestStackKeys(datalab, stack) {
+  const keyPath = `${datalab}/stacks/${stack.name}`;
   return requestPath(keyPath);
 }
 
@@ -56,4 +56,4 @@ function getSecretUrl(path) {
   return `${vaultBaseUrl}/v1/secret/${path}`;
 }
 
-export default { requestPath, requestStorageKeys, requestNotebookKeys };
+export default { requestPath, requestStorageKeys, requestStackKeys };

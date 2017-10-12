@@ -1,16 +1,16 @@
 import mockClient from './graphqlClient';
-import notebookService from './notebookService';
+import stackService from './stackService';
 
 jest.mock('./graphqlClient');
 
-describe('notebookService', () => {
+describe('stackService', () => {
   beforeEach(() => mockClient.clearResult());
 
-  describe('loadNotebooks', () => {
+  describe('loadStacks', () => {
     it('should build the correct query and unpack the results', () => {
-      mockClient.prepareSuccess({ notebooks: 'expectedValue' });
+      mockClient.prepareSuccess({ stacks: 'expectedValue' });
 
-      return notebookService.loadNotebooks().then((response) => {
+      return stackService.loadStacks().then((response) => {
         expect(response).toEqual('expectedValue');
         expect(mockClient.lastQuery()).toMatchSnapshot();
       });
@@ -19,7 +19,7 @@ describe('notebookService', () => {
     it('should throw an error if the query fails', () => {
       mockClient.prepareFailure('error');
 
-      return notebookService.loadNotebooks().catch((error) => {
+      return stackService.loadStacks().catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });
@@ -27,66 +27,66 @@ describe('notebookService', () => {
 
   describe('getUrl', () => {
     it('should build the correct query and return the url', () => {
-      const data = { notebook: { redirectUrl: 'expectedUrl' } };
+      const data = { stack: { redirectUrl: 'expectedUrl' } };
       const queryParams = { id: 'id' };
       mockClient.prepareSuccess(data);
 
-      return notebookService.getUrl(queryParams.id).then((response) => {
-        expect(response).toEqual(data.notebook);
+      return stackService.getUrl(queryParams.id).then((response) => {
+        expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(queryParams);
       });
     });
 
     it('should throw an error if no url is specified', () => {
-      const data = { notebook: { name: 'name' } };
+      const data = { stack: { name: 'name' } };
       mockClient.prepareSuccess(data);
 
-      return notebookService.getUrl().catch((error) => {
-        expect(error.message).toEqual('Missing notebook URL');
+      return stackService.getUrl().catch((error) => {
+        expect(error.message).toEqual('Missing stack URL');
       });
     });
   });
 
-  describe('createNotebook', () => {
+  describe('createStack', () => {
     it('should build the correct mutation and unpack the results', () => {
-      const data = { notebook: { name: 'name' } };
+      const data = { stack: { name: 'name' } };
       mockClient.prepareSuccess(data);
 
-      return notebookService.createNotebook(data.notebook).then((response) => {
-        expect(response).toEqual(data.notebook);
+      return stackService.createStack(data.stack).then((response) => {
+        expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
     it('should throw an error if the mutation fails', () => {
-      const data = { notebook: { name: 'name' } };
+      const data = { stack: { name: 'name' } };
       mockClient.prepareFailure('error');
 
-      return notebookService.createNotebook(data.notebook).catch((error) => {
+      return stackService.createStack(data.stack).catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });
   });
 
-  describe('deleteNotebook', () => {
+  describe('deleteStack', () => {
     it('should build the correct mutation and unpack the results', () => {
-      const data = { notebook: { name: 'name' } };
+      const data = { stack: { name: 'name' } };
       mockClient.prepareSuccess(data);
 
-      return notebookService.deleteNotebook(data.notebook).then((response) => {
-        expect(response).toEqual(data.notebook);
+      return stackService.deleteStack(data.stack).then((response) => {
+        expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
     it('should throw an error if the mutation fails', () => {
-      const data = { notebook: { name: 'name' } };
+      const data = { stack: { name: 'name' } };
       mockClient.prepareFailure('error');
 
-      return notebookService.deleteNotebook(data.notebook).catch((error) => {
+      return stackService.deleteStack(data.stack).catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });

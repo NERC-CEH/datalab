@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import rstudioTokenService from './login/rstudioTokenService';
-import notebookUrlService from './notebookUrlService';
+import stackUrlService from './stackUrlService';
 import vault from './vault/vault';
 
 const mock = new MockAdapter(axios);
@@ -10,7 +10,7 @@ const mock = new MockAdapter(axios);
 jest.mock('winston');
 
 const vaultMock = jest.fn();
-vault.requestNotebookKeys = vaultMock;
+vault.requestStackKeys = vaultMock;
 
 const rstudioTokenServiceMock = jest.fn();
 rstudioTokenService.rstudioLogin = rstudioTokenServiceMock;
@@ -27,15 +27,15 @@ afterAll(() => {
   mock.restore();
 });
 
-describe('notebookUrlService', () => {
+describe('stackUrlService', () => {
   describe('processes zeppelin notebooks', () => {
-    const notebook = {
+    const stack = {
       name: 'Zeppelin',
       type: 'zeppelin',
       url: 'http://zeppelin.datalab',
       internalEndpoint: 'http://zeppelin',
     };
-    const loginUrl = `${notebook.internalEndpoint}/api/login`;
+    const loginUrl = `${stack.internalEndpoint}/api/login`;
 
     it('to request login cookie from zeppelin', () => {
       vaultMock.mockImplementationOnce(() => (Promise.resolve({
@@ -45,7 +45,7 @@ describe('notebookUrlService', () => {
 
       mock.onPost(loginUrl).reply(200, { message: 'message' }, getSuccessfulLoginResponse());
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(stack, 'user')
         .then((url) => {
           expect(url).toEqual('http://zeppelin.datalab/connect?token=8214bf3f-3988-45f2-a33c-58d4be09f02b');
         });
@@ -54,7 +54,7 @@ describe('notebookUrlService', () => {
     it('to return undefined and log error if keys are not returned', () => {
       vaultMock.mockImplementationOnce(() => (Promise.resolve({})));
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(stack, 'user')
         .then((token) => {
           expect(token).toBeUndefined();
           expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -69,7 +69,7 @@ describe('notebookUrlService', () => {
 
       mock.onPost(loginUrl).reply(403, getFailedLoginResponse());
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(stack, 'user')
         .then((token) => {
           expect(token).toBeUndefined();
           expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -78,13 +78,13 @@ describe('notebookUrlService', () => {
   });
 
   describe('processes jupyter notebooks', () => {
-    const notebook = {
+    const stack = {
       name: 'Jupyter',
       type: 'jupyter',
       url: 'http://jupyter.datalab',
       internalEndpoint: 'http://jupyter',
     };
-    const loginUrl = `${notebook.internalEndpoint}/api/login`;
+    const loginUrl = `${stack.internalEndpoint}/api/login`;
 
     it('returns the jupyter notebook token', () => {
       vaultMock.mockImplementationOnce(() => (Promise.resolve({
@@ -93,7 +93,7 @@ describe('notebookUrlService', () => {
 
       mock.onPost(loginUrl).reply(200, { message: 'message' });
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(stack, 'user')
         .then((url) => {
           expect(url).toEqual('http://jupyter.datalab/tree/?token=expectedToken');
         });
@@ -106,7 +106,7 @@ describe('notebookUrlService', () => {
 
       mock.onPost(loginUrl).reply(200, { message: 'message' });
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(stack, 'user')
         .then((token) => {
           expect(token).toBeUndefined();
         });
@@ -130,7 +130,7 @@ describe('notebookUrlService', () => {
       const tokens = { expires: 'e', token: 't', csrfToken: 'c' };
       rstudioTokenServiceMock.mockImplementationOnce(inputNotebook => credentials => Promise.resolve(tokens));
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(notebook, 'user')
         .then((url) => {
           expect(url).toEqual('http://rstudio.datalab/connect?username=datalab&expires=e&token=t&csrfToken=c');
         });
@@ -143,7 +143,7 @@ describe('notebookUrlService', () => {
 
       rstudioTokenServiceMock.mockImplementationOnce(inputNotebook => credentials => Promise.reject(undefined));
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(notebook, 'user')
         .then(token => expect(token).toBeUndefined());
     });
   });
@@ -157,7 +157,7 @@ describe('notebookUrlService', () => {
         internalEndpoint: 'http://unknown',
       };
 
-      return notebookUrlService(notebook, 'user')
+      return stackUrlService(notebook, 'user')
         .then(url => expect(url).toEqual(notebook.url));
     });
   });

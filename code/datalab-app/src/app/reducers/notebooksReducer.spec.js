@@ -1,6 +1,6 @@
 import notebooksReducer from './notebooksReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
-import { LOAD_NOTEBOOKS_ACTION } from '../actions/notebookActions';
+import { LOAD_STACKS_ACTION } from '../actions/stackActions';
 
 describe('notebooksReducer', () => {
   it('should return the initial state', () => {
@@ -10,7 +10,7 @@ describe('notebooksReducer', () => {
 
   it('should handle LOAD_NOTEBOOKS_PENDING', () => {
     // Arrange
-    const type = `${LOAD_NOTEBOOKS_ACTION}_${PROMISE_TYPE_PENDING}`;
+    const type = `${LOAD_STACKS_ACTION}_${PROMISE_TYPE_PENDING}`;
     const action = { type };
 
     // Act
@@ -22,7 +22,7 @@ describe('notebooksReducer', () => {
 
   it('should handle LOAD_NOTEBOOKS_SUCCESS', () => {
     // Arrange
-    const type = `${LOAD_NOTEBOOKS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+    const type = `${LOAD_STACKS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
     const payload = [{ notebook: 'firstStore' }, { notebook: 'secondStore' }];
     const action = { type, payload };
 
@@ -35,7 +35,7 @@ describe('notebooksReducer', () => {
 
   it('should handle LOAD_NOTEBOOKS_FAILURE', () => {
     // Arrange
-    const type = `${LOAD_NOTEBOOKS_ACTION}_${PROMISE_TYPE_FAILURE}`;
+    const type = `${LOAD_STACKS_ACTION}_${PROMISE_TYPE_FAILURE}`;
     const payload = 'example error';
     const action = { type, payload };
 

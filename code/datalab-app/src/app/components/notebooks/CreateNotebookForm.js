@@ -5,14 +5,14 @@ import { Button, Form } from 'semantic-ui-react';
 import { renderTextField, renderTextArea, renderDropdownField } from '../common/form/controls';
 import renderUrlTextField from '../common/form/urlTextField';
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
-import { getNotebookSelections } from '../../../shared/notebookTypes';
+import { getStackSelections } from '../../../shared/stackTypes';
 
 const CreateNotebookForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
   return (
     <Form onSubmit={ handleSubmit }>
       <Field name='displayName' label='Display Name' component={renderTextField} placeholder='Display Name' />
-      <Field name='type' label='Notebook Type' component={renderDropdownField} options={getNotebookSelections()} placeholder='Notebook Type'/>
+      <Field name='type' label='Notebook Type' component={renderDropdownField} options={getStackSelections()} placeholder='Notebook Type'/>
       <Field name='name' label='URL Name' component={renderUrlTextField} placeholder='Notebook Name for URLs' />
       <Field name='description' label='Description' component={renderTextArea} placeholder='Description' />
       <Button type='submit' disabled={submitting} primary>Create</Button>
