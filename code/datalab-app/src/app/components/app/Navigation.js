@@ -11,7 +11,7 @@ const styles = theme => ({
     width: '100%',
   },
   appFrame: {
-    position: 'relative',
+    position: 'absolute',
     display: 'flex',
     height: '100%',
     width: '100%',

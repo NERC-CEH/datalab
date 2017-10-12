@@ -2,8 +2,9 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import List from 'material-ui/List';
-import ListSubheader from 'material-ui/List/ListSubheader';
+import Divider from 'material-ui/Divider';
 import datalabsLogo from '../../../assets/images/datalabs-hori.png';
+import SideBarSubheader from './SideBarSubheader';
 import NavLink from './NavLink';
 
 const drawerWidth = 240;
@@ -33,10 +34,13 @@ const SideBar = ({ classes }) => (
     </header>
     <List>
       <NavLink to="/" label="Dashboard" icon="dashboard" />
-      <ListSubheader>Data</ListSubheader>
+      <SideBarSubheader>Data</SideBarSubheader>
       <NavLink to="/storage" label="Storage" icon="storage" />
-      <ListSubheader>Analysis</ListSubheader>
+      <SideBarSubheader>Analysis</SideBarSubheader>
       <NavLink to="/notebooks" label="Notebooks" icon="book" />
+      <NavLink label="Dask" icon="apps" onClick={() => window.open('https://datalab-dask.datalabs.nerc.ac.uk/')} />
+      <Divider />
+      <NavLink label="Help" icon="help_outline" onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/')} />
     </List>
   </Drawer>
 );
