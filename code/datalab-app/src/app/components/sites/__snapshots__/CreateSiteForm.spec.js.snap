@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`] = `
+exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
 <Form
   as="form"
 >
@@ -12,31 +12,29 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
   />
   <Field
     component={[Function]}
-    label="Notebook Type"
+    label="Site Type"
     name="type"
     options={
       Array [
         Object {
-          "text": "Jupyter",
-          "value": "jupyter",
-        },
-        Object {
-          "text": "Rstudio",
-          "value": "rstudio",
-        },
-        Object {
-          "text": "Zeppelin",
-          "value": "zeppelin",
+          "text": "Rshiny",
+          "value": "rshiny",
         },
       ]
     }
-    placeholder="Notebook Type"
+    placeholder="Site Type"
   />
   <Field
     component={[Function]}
     label="URL Name"
     name="name"
     placeholder="Notebook Name for URLs"
+  />
+  <Field
+    component={[Function]}
+    label="Source Path"
+    name="sourcePath"
+    placeholder="Source directory for site"
   />
   <Field
     component={[Function]}

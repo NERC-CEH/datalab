@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StackCard from '../stacks/StackCard';
 
-class PreviewNotebookCard extends Component {
+class PreviewSiteCard extends Component {
   render() {
     return (
       <StackCard stack={this.props.stack} />
@@ -12,13 +12,13 @@ class PreviewNotebookCard extends Component {
 
 function mapStateToProps({ form }) {
   let stack = {};
-  if (form && form.createNotebook && form.createNotebook.values) {
-    stack = form.createNotebook.values;
+  if (form && form.createSite && form.createSite.values) {
+    stack = form.createSite.values;
   }
   return {
     stack,
   };
 }
 
-export { PreviewNotebookCard as PurePreviewNotebookCard }; // export for testing
-export default connect(mapStateToProps)(PreviewNotebookCard);
+export { PreviewSiteCard as PurePreviewSiteCard }; // export for testing
+export default connect(mapStateToProps)(PreviewSiteCard);

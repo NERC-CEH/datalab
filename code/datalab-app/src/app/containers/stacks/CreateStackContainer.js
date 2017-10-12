@@ -15,7 +15,7 @@ class CreateStackContainer extends Component {
       .then(() => this.props.actions.createStack(stack))
       .then(this.props.actions.resetForm(this.props.formStateName))
       .then(() => notify.success(`${this.props.typeName} created`))
-      .catch(err => notify.error(`Unable to ${this.props.typeName}`))
+      .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
       .finally(this.props.actions.loadStacksByCategory(this.props.containerType));
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
