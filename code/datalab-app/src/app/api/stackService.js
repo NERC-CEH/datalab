@@ -22,11 +22,11 @@ function getUrl(id) {
 
   return gqlQuery(query, { id })
     .then(res => get(res, 'data.stack'))
-    .then((notebook) => {
-      if (!notebook.redirectUrl) {
+    .then((stack) => {
+      if (!stack.redirectUrl) {
         throw new Error('Missing stack URL');
       }
-      return notebook;
+      return stack;
     });
 }
 
