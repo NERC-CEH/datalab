@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotebookCard creates correct snapshot for Jupyer notebook type 1`] = `
+exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
 <Card>
   <CardContent>
     <Image
@@ -45,7 +45,7 @@ exports[`NotebookCard creates correct snapshot for Jupyer notebook type 1`] = `
 </Card>
 `;
 
-exports[`NotebookCard creates correct snapshot for Zeppelin notebook type 1`] = `
+exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 <Card>
   <CardContent>
     <Image
@@ -90,7 +90,7 @@ exports[`NotebookCard creates correct snapshot for Zeppelin notebook type 1`] = 
 </Card>
 `;
 
-exports[`NotebookCard should provide defaults and disable the open button if no notebook is provided 1`] = `
+exports[`StackCard should provide defaults and disable the open button if no stack is provided 1`] = `
 <Card>
   <CardContent>
     <Icon

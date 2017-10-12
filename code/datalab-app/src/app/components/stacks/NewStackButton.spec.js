@@ -1,14 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NewNotebookButton from './NewNotebookButton';
+import NewStackButton from './NewStackButton';
 
-describe('New Notebook Button', () => {
+describe('New Stack Button', () => {
   function shallowRender(props) {
-    return shallow(<NewNotebookButton {...props} />);
+    return shallow(<NewStackButton {...props} />);
   }
 
   const generateProps = () => ({
     onClick: () => {},
+    typeName: 'Stack',
   });
 
   it('creates correct snapshot', () => {

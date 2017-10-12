@@ -28,6 +28,10 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
           "text": "Zeppelin",
           "value": "zeppelin",
         },
+        Object {
+          "text": "Rshiny",
+          "value": "rshiny",
+        },
       ]
     }
     placeholder="Notebook Type"

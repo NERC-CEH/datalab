@@ -1,11 +1,11 @@
-import notebooksReducer from './notebooksReducer';
+import stacksReducer from './stacksReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
 import { LOAD_STACKS_ACTION } from '../actions/stackActions';
 
-describe('notebooksReducer', () => {
+describe('stacksReducer', () => {
   it('should return the initial state', () => {
     // Act/Assert
-    expect(notebooksReducer(undefined, {})).toEqual({ fetching: false, value: [], error: null });
+    expect(stacksReducer(undefined, {})).toEqual({ fetching: false, value: [], error: null });
   });
 
   it('should handle LOAD_NOTEBOOKS_PENDING', () => {
@@ -14,7 +14,7 @@ describe('notebooksReducer', () => {
     const action = { type };
 
     // Act
-    const nextstate = notebooksReducer({ error: null, fetching: false, value: undefined }, action);
+    const nextstate = stacksReducer({ error: null, fetching: false, value: undefined }, action);
 
     // Assert
     expect(nextstate).toEqual({ error: null, fetching: true, value: [] });
@@ -27,7 +27,7 @@ describe('notebooksReducer', () => {
     const action = { type, payload };
 
     // Act
-    const nextstate = notebooksReducer({ error: null, fetching: false, value: undefined }, action);
+    const nextstate = stacksReducer({ error: null, fetching: false, value: undefined }, action);
 
     // Assert
     expect(nextstate).toEqual({ error: null, fetching: false, value: payload });
@@ -40,7 +40,7 @@ describe('notebooksReducer', () => {
     const action = { type, payload };
 
     // Act
-    const nextstate = notebooksReducer({ error: null, fetching: false, value: undefined }, action);
+    const nextstate = stacksReducer({ error: null, fetching: false, value: undefined }, action);
 
     // Assert
     expect(nextstate).toEqual({ error: payload, fetching: false, value: [] });

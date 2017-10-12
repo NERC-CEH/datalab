@@ -1,20 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NotebookCards from './NotebookCards';
+import StackCards from './StackCards';
 
-describe('NotebookCards', () => {
+describe('StackCards', () => {
   function shallowRender(props) {
-    return shallow(<NotebookCards {...props} />);
+    return shallow(<StackCards {...props} />);
   }
 
   const generateProps = () => ({
-    notebooks: [
+    stacks: [
       { displayName: 'name1', id: '1', type: 'type1' },
       { displayName: 'name2', id: '2', type: 'type2' },
       { displayName: 'name3', id: '3', type: 'type3' },
     ],
-    openNotebook: () => {},
-    deleteNotebook: () => {},
+    openStack: () => {},
+    deleteStack: () => {},
   });
 
   it('creates correct snapshot for an array of notebooks', () => {
@@ -30,7 +30,7 @@ describe('NotebookCards', () => {
 
   it('creates correct snapshot for an empty array', () => {
     // Arrange
-    const props = { ...generateProps(), notebooks: [] };
+    const props = { ...generateProps(), stacks: [] };
 
     // Act
     const output = shallowRender(props);

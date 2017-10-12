@@ -3,6 +3,7 @@ import { keyBy, capitalize } from 'lodash';
 export const JUPYTER = 'jupyter';
 export const ZEPPELIN = 'zeppelin';
 export const RSTUDIO = 'rstudio';
+export const RSHINY = 'rshiny';
 
 const STACK_TYPES = [
   {
@@ -16,6 +17,10 @@ const STACK_TYPES = [
   {
     name: ZEPPELIN,
     shortDescription: 'A Zeppelin Notebook',
+  },
+  {
+    name: RSHINY,
+    shortDescription: 'An RShiny Site',
   },
 ];
 

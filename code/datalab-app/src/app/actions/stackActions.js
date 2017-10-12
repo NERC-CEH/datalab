@@ -42,7 +42,7 @@ const deleteStack = (notebook) => {
   const { name, type } = notebook;
   return {
     type: DELETE_STACK_ACTION,
-    payload: stackService.deleteNotebook({ name, type }),
+    payload: stackService.deleteStack({ name, type }),
   };
 };
 
