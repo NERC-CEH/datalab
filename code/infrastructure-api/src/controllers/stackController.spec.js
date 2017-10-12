@@ -81,7 +81,7 @@ describe('Notebook Controller', () => {
     const requestBody = createRequestBody();
     requestBody.type = 'rshiny';
     return executeValidator(requestBody).then(() => {
-      expectValidationError('path', 'path must be specified for publication request');
+      expectValidationError('sourcePath', 'sourcePath must be specified for publication request');
       expectValidationError('isPublic', 'isPublic boolean must be specified for publication request');
     });
   });
