@@ -28,7 +28,7 @@ class StacksContainer extends Component {
       .then(() => this.props.actions.deleteStack(stack))
       .then(() => notify.success(`${this.props.typeName} deleted`))
       .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
-      .finally(this.props.actions.loadStacks);
+      .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
 
   confirmDeleteStack(stack) {
     this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
