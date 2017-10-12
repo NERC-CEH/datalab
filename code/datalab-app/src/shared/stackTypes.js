@@ -1,4 +1,4 @@
-import { keyBy, capitalize } from 'lodash';
+import { keyBy, find, capitalize } from 'lodash';
 
 export const JUPYTER = 'jupyter';
 export const ZEPPELIN = 'zeppelin';
@@ -12,22 +12,22 @@ const STACK_TYPES = [
   {
     name: JUPYTER,
     shortDescription: 'A Jupyter Notebook',
-    type: ANALYSIS,
+    category: ANALYSIS,
   },
   {
     name: RSTUDIO,
     shortDescription: 'An RStudio Server',
-    type: ANALYSIS,
+    category: ANALYSIS,
   },
   {
     name: ZEPPELIN,
     shortDescription: 'A Zeppelin Notebook',
-    type: ANALYSIS,
+    category: ANALYSIS,
   },
   {
     name: RSHINY,
     shortDescription: 'An RShiny Site',
-    type: PUBLISH,
+    category: PUBLISH,
   },
 ];
 
@@ -36,8 +36,8 @@ function getStackTypes() {
   return keyBy(types, type => type.value);
 }
 
-function getStackSelections(type) {
-  return STACK_TYPES.filter(stack => stack.type === type)
+function getStackSelections(category) {
+  return STACK_TYPES.filter(stack => stack.category === category)
     .map(stack => ({ text: capitalize(stack.name), value: stack.name }));
 }
 
@@ -45,4 +45,8 @@ function getStackKeys() {
   return STACK_TYPES.map(type => type.name);
 }
 
-export { getStackTypes, getStackSelections, getStackKeys };
+function getCategoryForType(name) {
+  return find(STACK_TYPES, stack => stack.name === name).category;
+}
+
+export { getStackTypes, getStackSelections, getStackKeys, getCategoryForType };
