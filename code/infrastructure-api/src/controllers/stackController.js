@@ -37,7 +37,7 @@ function deleteStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
-const createStackValidator = [
+const coreStackValidator = [
   sanitize('*').trim(),
   check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
   check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified'),
@@ -50,6 +50,10 @@ const createStackValidator = [
     .isLength({ min: 4, max: 12 })
     .withMessage('Name must be 4-12 characters long'),
   check('type').exists().withMessage('Type must be specified'),
+];
+
+const createStackValidator = [
+  ...coreStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
     .custom((value, { req }) => {
       if (req.body.type === STACKS.RSHINY.name) {
@@ -66,4 +70,4 @@ const createStackValidator = [
     }),
 ];
 
-export default { createStackValidator, createStack, deleteStack };
+export default { coreStackValidator, createStackValidator, createStack, deleteStack };
