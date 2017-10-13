@@ -1,8 +1,6 @@
 *.log
 *.iml
 
-yarn.lock
-
 .idea/
 
 docs/_book
