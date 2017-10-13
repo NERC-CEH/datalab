@@ -1,8 +1,8 @@
 import React from 'react';
 import { createShallow } from 'material-ui/test-utils';
-import Navigation from './Navigation';
+import SideBarSubheader from './SideBarSubheader';
 
-describe('DescribeDatalabs', () => {
+describe('SideBarSubheader', () => {
   let shallow;
 
   beforeEach(() => {
@@ -10,9 +10,6 @@ describe('DescribeDatalabs', () => {
   });
 
   it('renders correct snapshot', () => {
-    expect(shallow(
-      <Navigation>
-        <span>Content</span>
-      </Navigation>)).toMatchSnapshot();
+    expect(shallow(<SideBarSubheader>{'expectedChild'}</SideBarSubheader>)).toMatchSnapshot();
   });
 });

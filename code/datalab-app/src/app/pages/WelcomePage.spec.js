@@ -1,7 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import WelcomePage from './WelcomePage';
 
-it('WelcomePage renders correct snapshot', () => {
-  expect(shallow(<WelcomePage/>)).toMatchSnapshot();
+describe('WelcomePage', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow();
+  });
+
+  it('renders correct snapshot', () => {
+    expect(shallow(<WelcomePage/>)).toMatchSnapshot();
+  });
 });

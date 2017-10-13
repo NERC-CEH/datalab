@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBarSubheader renders correct snapshot 1`] = `
+<withStyles(ListSubheader)
+  className="SideBarSubheader-subheader-1"
+>
+  expectedChild
+</withStyles(ListSubheader)>
+`;

@@ -1,99 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar correctly renders correct snapshot 1`] = `
-<div>
-  <Segment
-    basic={true}
-    inverted={true}
+<withStyles(Drawer)
+  classes={
+    Object {
+      "paper": "SideBar-drawerPaper-2",
+    }
+  }
+  type="permanent"
+>
+  <header
+    className="SideBar-header-1"
   >
-    <Header
-      as="h2"
-      color="teal"
-    >
-      DataLabs
-    </Header>
-  </Segment>
-  <Menu
-    attached={true}
-    fluid={true}
-    inverted={true}
-    vertical={true}
-  >
-    <NavLink
-      activeClassName="active"
-      className="item"
-      exact={true}
+    <img
+      alt="datalabs-logo"
+      className="SideBar-logo-3"
+      src="datalabs-hori.png"
+    />
+  </header>
+  <withStyles(List)>
+    <withStyles(Link)
+      icon="dashboard"
+      label="Dashboard"
       to="/"
-    >
-      Dashboard
-    </NavLink>
-    <SubMenu
-      menuItems={
-        Array [
-          Object {
-            "Component": [Function],
-            "children": "Storage",
-            "props": Object {
-              "className": "item",
-              "exact": true,
-              "to": "/storage",
-            },
-          },
-        ]
-      }
-      menuTitle="Data"
     />
-    <SubMenu
-      menuItems={
-        Array [
-          Object {
-            "Component": [Function],
-            "children": "Notebooks",
-            "props": Object {
-              "className": "item",
-              "exact": true,
-              "to": "/notebooks",
-            },
-          },
-          Object {
-            "Component": [Function],
-            "props": Object {
-              "name": "Dask",
-              "onClick": [Function],
-            },
-          },
-          Object {
-            "Component": [Function],
-            "props": Object {
-              "name": "Spark",
-              "onClick": [Function],
-            },
-          },
-        ]
-      }
-      menuTitle="Analysis"
+    <withStyles(SideBarSubheader)>
+      Data
+    </withStyles(SideBarSubheader)>
+    <withStyles(Link)
+      icon="storage"
+      label="Storage"
+      to="/storage"
     />
-    <SubMenu
-      menuItems={
-        Array [
-          Object {
-            "Component": [Function],
-            "children": "Sites",
-            "props": Object {
-              "className": "item",
-              "exact": true,
-              "to": "/publishing",
-            },
-          },
-        ]
-      }
-      menuTitle="Publish"
+    <withStyles(SideBarSubheader)>
+      Analysis
+    </withStyles(SideBarSubheader)>
+    <withStyles(Link)
+      icon="book"
+      label="Notebooks"
+      to="/notebooks"
     />
-    <MenuItem
-      header={true}
-      name="Help"
+    <withStyles(Link)
+      icon="apps"
+      label="Dask"
       onClick={[Function]}
     />
-  </Menu>
-</div>
+    <withStyles(Divider) />
+    <withStyles(Link)
+      icon="help_outline"
+      label="Help"
+      onClick={[Function]}
+    />
+  </withStyles(List)>
+</withStyles(Drawer)>
 `;
