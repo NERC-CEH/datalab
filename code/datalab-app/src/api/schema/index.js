@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import status from './status';
 import { dataStorage, dataStore } from './dataStorage';
-import { stack, stacks, checkStackName } from './stacks';
+import { stack, stacks, stacksByCategory, checkStackName } from './stacks';
 import { datalab, datalabs } from './datalabs';
 import { createStack, deleteStack } from './mutateStack';
 
@@ -14,6 +14,7 @@ const RootQueryType = new GraphQLObjectType({
     dataStore,
     stack,
     stacks,
+    stacksByCategory,
     checkStackName,
     datalab,
     datalabs,

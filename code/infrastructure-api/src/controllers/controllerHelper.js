@@ -6,6 +6,7 @@ function validateAndExecute(request, response, errorMessage, execute) {
   const errors = validationResult(request);
   if (!errors.isEmpty()) {
     logger.error(`${errorMessage}: ${JSON.stringify(request.body)}`);
+    logger.error(errors.mapped());
     return response.status(400).json({ errors: errors.mapped() });
   }
 

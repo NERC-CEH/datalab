@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`New Notebook Button creates correct snapshot 1`] = `
+exports[`New Stack Button creates correct snapshot 1`] = `
 <Card>
   <div
     onClick={[Function]}
@@ -32,7 +32,8 @@ exports[`New Notebook Button creates correct snapshot 1`] = `
         ui={true}
       />
       <h3>
-        Create Notebook
+        Create 
+        Stack
       </h3>
     </div>
   </div>

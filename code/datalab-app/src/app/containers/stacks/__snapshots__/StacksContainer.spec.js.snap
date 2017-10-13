@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotebooksContainer is a container which passes correct props to NotebookCards 1`] = `
+exports[`StacksContainer is a container which passes correct props to NotebookCards 1`] = `
 <PromisedContentWrapper
   promise={
     Object {
@@ -16,9 +16,13 @@ exports[`NotebooksContainer is a container which passes correct props to Noteboo
     }
   }
 >
-  <NotebookCards
-    deleteNotebook={[Function]}
-    notebooks={
+  <StackCards
+    containerType="analysis"
+    deleteStack={[Function]}
+    dialogAction="ACTION"
+    formStateName="createNotebook"
+    openStack={[Function]}
+    stacks={
       Array [
         Object {
           "prop": "prop1",
@@ -28,7 +32,7 @@ exports[`NotebooksContainer is a container which passes correct props to Noteboo
         },
       ]
     }
-    openNotebook={[Function]}
+    typeName="Notebook"
   />
 </PromisedContentWrapper>
 `;

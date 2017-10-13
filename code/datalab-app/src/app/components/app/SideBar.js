@@ -31,6 +31,14 @@ const SideBar = ({ topBarStyle }) => (
             props: { name: 'Spark', onClick: () => window.open('https://datalab-spark.datalabs.nerc.ac.uk/') } },
         ]}
       />
+      <SubMenu
+        menuTitle="Publish"
+        menuItems={[
+          { Component: NavLink,
+            props: { className: 'item', to: '/publishing', exact: true },
+            children: 'Sites' },
+        ]}
+      />
       <Menu.Item
         header
         name="Help"

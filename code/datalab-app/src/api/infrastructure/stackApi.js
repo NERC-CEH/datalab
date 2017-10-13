@@ -47,6 +47,8 @@ const sendCreationRequest = (stackRequest, datalabInfo) => () => {
     datalabInfo,
     name: stackRequest.name,
     type: stackRequest.type,
+    sourcePath: stackRequest.sourcePath,
+    isPublic: true,
   };
   logger.debug(`Creation Request Url: ${STACK_URL} payload ${JSON.stringify(payload)}`);
   return axios.post(STACK_URL, payload)

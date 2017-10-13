@@ -22,6 +22,12 @@ describe('stackRepository', () => {
       expect(stacks).toMatchSnapshot();
     }));
 
+  it('getByCategory returns expected snapshot', () =>
+    stackRepository.getByCategory('user', 'analysis').then((stacks) => {
+      expect(mockDatabase().query()).toEqual({ category: 'analysis' });
+      expect(stacks).toMatchSnapshot();
+    }));
+
   it('getById returns expected snapshot', () =>
     stackRepository.getById(undefined, '599aa983bdd5430daedc8eec').then((stack) => {
       expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });

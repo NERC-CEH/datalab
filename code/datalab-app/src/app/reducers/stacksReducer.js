@@ -5,7 +5,7 @@ import {
   PROMISE_TYPE_FAILURE,
 } from '../actions/actionTypes';
 import {
-  LOAD_STACKS_ACTION,
+  LOAD_STACKS_ACTION, LOAD_STACKS_BY_CATEGORY_ACTION,
 } from '../actions/stackActions';
 
 const initialState = {
@@ -16,6 +16,11 @@ const initialState = {
 
 export default typeToReducer({
   [LOAD_STACKS_ACTION]: {
+    [PROMISE_TYPE_PENDING]: () => ({ ...initialState, fetching: true }),
+    [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
+  },
+  [LOAD_STACKS_BY_CATEGORY_ACTION]: {
     [PROMISE_TYPE_PENDING]: () => ({ ...initialState, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),

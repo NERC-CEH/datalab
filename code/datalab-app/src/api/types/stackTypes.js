@@ -2,6 +2,7 @@ import {
   GraphQLID,
   GraphQLObjectType,
   GraphQLString,
+  GraphQLBoolean,
   GraphQLEnumType,
   GraphQLInputObjectType,
 } from 'graphql';
@@ -33,6 +34,12 @@ export const StackType = new GraphQLObjectType({
     internalEndpoint: {
       type: GraphQLString,
     },
+    sourcePath: {
+      type: GraphQLString,
+    },
+    isPublic: {
+      type: GraphQLBoolean,
+    },
     redirectUrl: {
       type: GraphQLString,
       resolve: (obj, args, { user }) => stackUrlService(obj, user),
@@ -61,6 +68,12 @@ export const StackCreationType = new GraphQLInputObjectType({
     },
     description: {
       type: GraphQLString,
+    },
+    sourcePath: {
+      type: GraphQLString,
+    },
+    isPublic: {
+      type: GraphQLBoolean,
     },
   },
 });

@@ -1,20 +1,24 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import CreateNotebookContainer, { PureCreateNotebookContainer } from './CreateNotebookContainer';
-import NewNotebookButton from './NewNotebookButton';
-import notify from '../common/notify';
+import CreateStackContainer, { PureCreateStackContainer } from './CreateStackContainer';
+import NewStackButton from '../../components/stacks/NewStackButton';
+import notify from '../../components/common/notify';
 
-const notebook = { name: 'Name' };
+const stack = { name: 'Name' };
 
-describe('NotebooksContainer', () => {
+describe('CreateStackContainer', () => {
   const createStackMock = jest.fn();
   const loadStacksMock = jest.fn();
   const openModalDialogMock = jest.fn();
 
   function createProps() {
     return {
-      notebook,
+      stack,
+      typeName: 'Notebook',
+      containerType: 'analysis',
+      dialogAction: 'ACTION',
+      formStateName: 'createNotebook',
       actions: {
         createStack: createStackMock,
         loadStacks: loadStacksMock,
@@ -28,11 +32,12 @@ describe('NotebooksContainer', () => {
     function shallowRenderConnected(store) {
       const props = {
         store,
+        ...createProps(),
         PrivateComponent: () => {},
         PublicComponent: () => {},
       };
 
-      return shallow(<CreateNotebookContainer {...props} />);
+      return shallow(<CreateStackContainer {...props} />);
     }
 
     it('binds correct actions', () => {
@@ -51,21 +56,25 @@ describe('NotebooksContainer', () => {
 
   describe('is a container which', () => {
     function shallowRenderPure(props) {
-      return shallow(<PureCreateNotebookContainer {...props} />);
+      return shallow(<PureCreateStackContainer {...props} />);
     }
 
     beforeEach(() => jest.resetAllMocks());
 
-    jest.mock('../common/notify');
+    jest.mock('../../components/common/notify');
     const toastrSuccessMock = jest.fn();
     const toastrErrorMock = jest.fn();
     notify.success = toastrSuccessMock;
     notify.error = toastrErrorMock;
 
-    it('passes correct props to NotebookCard', () => {
+    it('passes correct props to StackCard', () => {
       // Arrange
       const props = {
-        notebook,
+        stack,
+        typeName: 'Notebook',
+        containerType: 'analysis',
+        dialogAction: 'ACTION',
+        formStateName: 'createNotebook',
         dialogOpen: true,
         actions: {
           openModalDialog: () => {},
@@ -78,18 +87,18 @@ describe('NotebooksContainer', () => {
       expect(shallowRenderPure(props)).toMatchSnapshot();
     });
 
-    it('createNotebook method calls load notebooks action on successful creation', () => {
+    it('createStack method calls load stacks action on successful creation', () => {
       // Arrange
       openModalDialogMock.mockReturnValue(Promise.resolve('success'));
 
       const props = createProps();
 
       const output = shallowRenderPure(props);
-      const newNotebookButton = output.find(NewNotebookButton);
-      const openDialog = newNotebookButton.prop('onClick');
+      const newStackButton = output.find(NewStackButton);
+      const openDialog = newStackButton.prop('onClick');
 
       // Act/Assert
-      openDialog(notebook).then(() => {
+      openDialog(stack).then(() => {
         expect(openModalDialogMock).toHaveBeenCalledTimes(1);
       });
     });

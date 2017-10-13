@@ -4,14 +4,14 @@ import { reducer as formReducer } from 'redux-form';
 import authentication from './authReducer';
 import dataStorage from './dataStorageReducer';
 import dataStore from './dataStoreReducer';
-import notebooks from './notebooksReducer';
+import stacks from './stacksReducer';
 import modal from './modelDialogReducer';
 
 const rootReducer = combineReducers({
   authentication,
   dataStorage,
   dataStore,
-  notebooks,
+  stacks,
   modal,
   router: routerReducer,
   form: formReducer,

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
+<Form
+  as="form"
+>
+  <Field
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+    placeholder="Display Name"
+  />
+  <Field
+    component={[Function]}
+    label="Site Type"
+    name="type"
+    options={
+      Array [
+        Object {
+          "text": "Rshiny",
+          "value": "rshiny",
+        },
+      ]
+    }
+    placeholder="Site Type"
+  />
+  <Field
+    component={[Function]}
+    label="URL Name"
+    name="name"
+    placeholder="Notebook Name for URLs"
+  />
+  <Field
+    component={[Function]}
+    label="Source Path"
+    name="sourcePath"
+    placeholder="Source directory for site"
+  />
+  <Field
+    component={[Function]}
+    label="Description"
+    name="description"
+    placeholder="Description"
+  />
+  <Button
+    as="button"
+    primary={true}
+    type="submit"
+  >
+    Create
+  </Button>
+  <Button
+    as="button"
+    onClick={[Function]}
+    type="button"
+  >
+    Cancel
+  </Button>
+</Form>
+`;

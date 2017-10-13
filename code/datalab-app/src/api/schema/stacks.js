@@ -13,6 +13,17 @@ export const stacks = {
   resolve: (obj, args, { user }) => stackRepository.getAll(user),
 };
 
+export const stacksByCategory = {
+  description: 'List of currently provisioned DataLabs Stacks for the requested category.',
+  type: new GraphQLList(StackType),
+  args: {
+    category: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  },
+  resolve: (obj, { category }, { user }) => stackRepository.getByCategory(user, category),
+};
+
 export const stack = {
   description: 'Details of a single currently provisioned DataLab Stack.',
   type: StackType,

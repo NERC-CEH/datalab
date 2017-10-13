@@ -1,47 +1,44 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import NotebooksContainer, { PureNotebooksContainer } from './NotebooksContainer';
-import notebookService from '../../api/stackService';
-import notify from '../common/notify';
+import StacksContainer, { PureStacksContainer } from './StacksContainer';
+import stackService from '../../api/stackService';
+import notify from '../../components/common/notify';
 
 jest.mock('../../api/stackService');
 const loadStacksMock = jest.fn().mockReturnValue('expectedPayload');
-notebookService.loadStacks = loadStacksMock;
+stackService.loadStacksByCategory = loadStacksMock;
 
-describe('NotebooksContainer', () => {
+describe('StacksContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
         store,
+        typeName: 'Notebook',
+        containerType: 'analysis',
+        dialogAction: 'ACTION',
+        formStateName: 'createNotebook',
         PrivateComponent: () => {},
         PublicComponent: () => {},
       };
 
-      return shallow(<NotebooksContainer {...props} />);
+      return shallow(<StacksContainer {...props} />);
     }
 
-    const notebooks = { fetching: false, value: ['expectedArray'] };
+    const stacks = { fetching: false, value: ['expectedArray'] };
+    const store = createStore()({
+      stacks,
+    });
 
     it('extracts the correct props from the redux state', () => {
-      // Arrange
-      const store = createStore()({
-        notebooks,
-      });
-
       // Act
       const output = shallowRenderConnected(store);
 
       // Assert
-      expect(output.prop('notebooks')).toBe(notebooks);
+      expect(output.prop('stacks')).toBe(stacks);
     });
 
     it('binds correct actions', () => {
-      // Arrange
-      const store = createStore()({
-        notebooks,
-      });
-
       // Act
       const output = shallowRenderConnected(store).prop('actions');
 
@@ -49,20 +46,15 @@ describe('NotebooksContainer', () => {
       expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadStacks', 'openStack']));
     });
 
-    it('loadNotebooks function dispatches correct action', () => {
-      // Arrange
-      const store = createStore()({
-        notebooks,
-      });
-
+    it('loadStacks function dispatches correct action', () => {
       // Act
       const output = shallowRenderConnected(store);
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadStacks();
+      output.prop('actions').loadStacksByCategory();
       expect(store.getActions()[0]).toEqual({
-        type: 'LOAD_STACKS',
+        type: 'LOAD_STACKS_BY_CATEGORY',
         payload: 'expectedPayload',
       });
     });
@@ -70,10 +62,10 @@ describe('NotebooksContainer', () => {
 
   describe('is a container which', () => {
     function shallowRenderPure(props) {
-      return shallow(<PureNotebooksContainer {...props} />);
+      return shallow(<PureStacksContainer {...props} />);
     }
 
-    const notebooks = {
+    const stacks = {
       fetching: false,
       value: [
         { prop: 'prop1' },
@@ -82,7 +74,7 @@ describe('NotebooksContainer', () => {
     };
 
     const generateActions = () => ({
-      loadStacks: loadStacksMock,
+      loadStacksByCategory: loadStacksMock,
       getUrl: () => {},
       openStack: () => {},
       createStack: () => {},
@@ -90,7 +82,11 @@ describe('NotebooksContainer', () => {
     });
 
     const generateProps = () => ({
-      notebooks,
+      stacks,
+      typeName: 'Notebook',
+      containerType: 'analysis',
+      dialogAction: 'ACTION',
+      formStateName: 'createNotebook',
       actions: generateActions(),
     });
 
@@ -132,12 +128,12 @@ describe('NotebooksContainer', () => {
       };
 
       const output = shallowRenderPure(props);
-      const openNotebook = output.childAt(0).prop('openNotebook');
+      const openStack = output.childAt(0).prop('openStack');
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
       expect(openStackMock).not.toHaveBeenCalled();
-      openNotebook(1000).then(() => {
+      openStack(1000).then(() => {
         expect(getUrlMock).toHaveBeenCalledTimes(1);
         expect(getUrlMock).toHaveBeenCalledWith(1000);
         expect(openStackMock).toHaveBeenCalledTimes(1);
@@ -145,9 +141,9 @@ describe('NotebooksContainer', () => {
       });
     });
 
-    it('openNotebook method calls toastr  on resolved getUrl', () => {
+    it('openStack method calls toastr on resolved getUrl', () => {
       // Arrange
-      jest.mock('../common/notify');
+      jest.mock('../../components/common/notify');
       const toastrErrorMock = jest.fn();
       notify.error = toastrErrorMock;
 
@@ -163,12 +159,12 @@ describe('NotebooksContainer', () => {
       };
 
       const output = shallowRenderPure(props);
-      const openNotebook = output.childAt(0).prop('openNotebook');
+      const openStack = output.childAt(0).prop('openStack');
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
       expect(toastrErrorMock).not.toHaveBeenCalled();
-      openNotebook(1000).then(() => {
+      openStack(1000).then(() => {
         expect(getUrlMock).toHaveBeenCalledTimes(1);
         expect(getUrlMock).toHaveBeenCalledWith(1000);
         expect(toastrErrorMock).toHaveBeenCalledTimes(1);

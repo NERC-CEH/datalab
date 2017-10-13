@@ -4,7 +4,8 @@
     "displayName" : "Biodiversity",
     "type" : "jupyter",
     "url" : "http://testlab-jupyter.datalabs.local",
-    "internalEndpoint" : "http://testlab-jupyter.datalabs.local"
+    "internalEndpoint" : "http://testlab-jupyter.datalabs.local",
+    "category": "analysis"
   },
   {
     "name" : "zeppelin",
@@ -12,6 +13,7 @@
     "type" : "zeppelin",
     "url" : "http://testlab-zeppelin.datalabs.local",
     "internalEndpoint" : "http://testlab-zeppelin.datalabs.local",
+    "category": "analysis",
     "users" : [
       "auth0|595f40a25caf4344b2e0e678"
     ]
@@ -22,8 +24,19 @@
     "type" : "rstudio",
     "url" : "http://testlab-rstudio.datalabs.local",
     "internalEndpoint" : "http://testlab-rstudio.datalabs.local",
+    "category": "analysis",
     "users" : [
       "auth0|595f40a25caf4344b2e0e678"
     ]
+  },
+  {
+    "name" : "rshiny",
+    "displayName" : "RShiny",
+    "type" : "rshiny",
+    "url" : "http://testlab-rshiny.datalabs.local",
+    "internalEndpoint" : "http://testlab-rshiny.datalabs.local",
+    "category": "publish",
+    "sourcePath": "shinyApps",
+    "isPublic": "true"
   }
 ]

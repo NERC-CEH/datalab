@@ -12,6 +12,16 @@ function loadStacks() {
   return gqlQuery(query).then(res => get(res, 'data.stacks'));
 }
 
+function loadStacksByCategory(category) {
+  const query = `
+      GetStacksByCategory($category: String!) {
+        stacksByCategory(category: $category) {
+          id, displayName, name, type, description
+        }
+      }`;
+  return gqlQuery(query, { category }).then(res => get(res, 'data.stacksByCategory'));
+}
+
 function getUrl(id) {
   const query = `
       GetUrl($id: ID!) {
@@ -72,6 +82,7 @@ function handleMutationErrors(response) {
 
 export default {
   loadStacks,
+  loadStacksByCategory,
   getUrl,
   checkStackName,
   createStack,

@@ -1,28 +1,28 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NotebookCard from './NotebookCard';
+import StackCard from './StackCard';
 
-describe('NotebookCard', () => {
+describe('StackCard', () => {
   function shallowRender(props) {
-    return shallow(<NotebookCard {...props} />);
+    return shallow(<StackCard {...props} />);
   }
 
-  const openNotebookMock = jest.fn();
-  const deleteNotebookMock = jest.fn();
+  const openStackMock = jest.fn();
+  const deleteStackMock = jest.fn();
 
   const generateProps = type => ({
-    notebook: {
+    stack: {
       id: '100',
       displayName: 'name1',
       type,
     },
-    openNotebook: openNotebookMock,
-    deleteNotebook: deleteNotebookMock,
+    openStack: openStackMock,
+    deleteStack: deleteStackMock,
   });
 
   beforeEach(() => jest.resetAllMocks());
 
-  it('creates correct snapshot for Jupyer notebook type', () => {
+  it('creates correct snapshot for Jupyer stack type', () => {
     // Arrange
     const props = generateProps('jupyter');
 
@@ -33,7 +33,7 @@ describe('NotebookCard', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('creates correct snapshot for Zeppelin notebook type', () => {
+  it('creates correct snapshot for Zeppelin stack type', () => {
     // Arrange
     const props = generateProps('zeppelin');
 
@@ -44,7 +44,7 @@ describe('NotebookCard', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('onCLick function calls openNotebook with correct props', () => {
+  it('onCLick function calls openStack with correct props', () => {
     // Arrange
     const props = generateProps('jupyter');
 
@@ -53,15 +53,15 @@ describe('NotebookCard', () => {
     const onClick = output.find('Button').prop('onClick');
 
     // Assert
-    expect(openNotebookMock).not.toHaveBeenCalled();
+    expect(openStackMock).not.toHaveBeenCalled();
     onClick();
-    expect(openNotebookMock).toHaveBeenCalledTimes(1);
-    expect(openNotebookMock).toHaveBeenCalledWith('100');
+    expect(openStackMock).toHaveBeenCalledTimes(1);
+    expect(openStackMock).toHaveBeenCalledWith('100');
   });
 
-  it('should provide defaults and disable the open button if no notebook is provided', () => {
+  it('should provide defaults and disable the open button if no stack is provided', () => {
     // Arrange
-    const props = { notebook: {} };
+    const props = { stack: {} };
 
     // Act
     const output = shallowRender(props);
