@@ -37,6 +37,7 @@ const Navigation = ({ classes, children }) => (
 );
 
 Navigation.propTypes = {
+  classes: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),

@@ -4,7 +4,9 @@ exports[`DescribeElementSegment renders correct snapshot 1`] = `
 <div
   className="DescribeElementSegment-inner-2"
 >
-  expectedChild
+  <span>
+    'expectedChild'
+  </span>
 </div>
 `;
 
@@ -15,7 +17,9 @@ exports[`DescribeElementSegment renders correct snapshot with invert switch 1`] 
   <div
     className="DescribeElementSegment-inner-2"
   >
-    expectedChild
+    <span>
+      'expectedChild'
+    </span>
   </div>
 </div>
 `;

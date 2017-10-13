@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -31,5 +32,19 @@ const DescribeElement = ({ classes, title, descriptions, invert, quote, media })
     </Grid>
   </DescribeElementSegment>
 );
+
+DescribeElement.propTypes = {
+  classes: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.shape({
+    icon: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    links: PropTypes.arrayOf(PropTypes.object),
+  }),
+  invert: PropTypes.bool,
+  quote: PropTypes.bool,
+  media: PropTypes.bool,
+};
 
 export default withStyles(styles)(DescribeElement);

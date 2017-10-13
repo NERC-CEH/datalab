@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
@@ -22,5 +23,14 @@ function DescribeElementSegment({ classes, children, invert }) {
 
   return segment;
 }
+
+DescribeElementSegment.propTypes = {
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+  invert: PropTypes.bool,
+};
 
 export default withStyles(styles)(DescribeElementSegment);

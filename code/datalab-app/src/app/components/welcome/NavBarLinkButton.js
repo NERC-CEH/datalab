@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 
@@ -18,5 +19,10 @@ const styles = theme => ({
 const NavBarLinkButton = ({ classes, children, ...rest }) => (
   <Button className={classes.linkButton} {...rest}>{children}</Button>
 );
+
+NavBarLinkButton.propTypes = {
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(NavBarLinkButton);
