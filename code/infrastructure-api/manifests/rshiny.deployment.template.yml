@@ -22,7 +22,7 @@ spec:
         volumeMounts:
           - name: glusterfsvol
             mountPath: /srv/shiny-server
-            subPath: {{ appPath }}
+            subPath: {{ sourcePath }}
         resources:
           requests:
             cpu: 200m

@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NotebookCard from './NotebookCard';
+import StackCard from '../stacks/StackCard';
 
 class PreviewNotebookCard extends Component {
   render() {
     return (
-      <NotebookCard notebook={this.props.notebook} />
+      <StackCard stack={this.props.stack} />
     );
   }
 }
 
 function mapStateToProps({ form }) {
-  let notebook = {};
+  let stack = {};
   if (form && form.createNotebook && form.createNotebook.values) {
-    notebook = form.createNotebook.values;
+    stack = form.createNotebook.values;
   }
   return {
-    notebook,
+    stack,
   };
 }
 

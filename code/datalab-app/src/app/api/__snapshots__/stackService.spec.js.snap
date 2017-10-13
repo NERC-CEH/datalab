@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stackService createStack should build the correct mutation and unpack the results 1`] = `
+"
+    CreateStack($stack: StackCreationRequest) {
+      createStack(stack: $stack) {
+        name
+      }
+    }"
+`;
+
+exports[`stackService deleteStack should build the correct mutation and unpack the results 1`] = `
+"
+    DeleteStack($stack: StackDeletionRequest) {
+      deleteStack(stack: $stack) {
+        name
+      }
+    }
+  "
+`;
+
+exports[`stackService getUrl should build the correct query and return the url 1`] = `
+"
+      GetUrl($id: ID!) {
+        stack(id: $id) {
+          redirectUrl
+        }
+      }"
+`;
+
+exports[`stackService loadStacks should build the correct query and unpack the results 1`] = `
+"
+      Stacks {
+        stacks {
+          id, displayName, name, type, description
+        }
+      }"
+`;

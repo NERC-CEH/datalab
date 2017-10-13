@@ -1,5 +1,6 @@
 import { check } from 'express-validator/check';
 import { matchedData, sanitize } from 'express-validator/filter';
+import { isBoolean } from 'lodash';
 import controllerHelper from './controllerHelper';
 import stackManager from '../stacks/stackManager';
 import { STACKS } from '../stacks/stacks';
@@ -36,7 +37,7 @@ function deleteStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
-const createStackValidator = [
+const coreStackValidator = [
   sanitize('*').trim(),
   check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
   check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified'),
@@ -49,7 +50,11 @@ const createStackValidator = [
     .isLength({ min: 4, max: 12 })
     .withMessage('Name must be 4-12 characters long'),
   check('type').exists().withMessage('Type must be specified'),
-  check('path', 'path must be specified for publication request')
+];
+
+const createStackValidator = [
+  ...coreStackValidator,
+  check('sourcePath', 'sourcePath must be specified for publication request')
     .custom((value, { req }) => {
       if (req.body.type === STACKS.RSHINY.name) {
         return value;
@@ -59,10 +64,10 @@ const createStackValidator = [
   check('isPublic', 'isPublic boolean must be specified for publication request')
     .custom((value, { req }) => {
       if (req.body.type === STACKS.RSHINY.name) {
-        return value === 'true' || value === 'false';
+        return isBoolean(value);
       }
       return true;
     }),
 ];
 
-export default { createStackValidator, createStack, deleteStack };
+export default { coreStackValidator, createStackValidator, createStack, deleteStack };

@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import PreviewNotebookCard from './PreviewNotebookCard';
 
-const notebook = { name: 'Name' };
+const stack = { name: 'Name' };
 
-describe('Preview NotebookCard', () => {
+describe('PreviewNotebookCard', () => {
   function createDefaultStore() {
     return createStore()({
       modalDialog: { open: false },
-      form: { createNotebook: { values: notebook } },
+      form: { createNotebook: { values: stack } },
     });
   }
 
@@ -31,7 +31,7 @@ describe('Preview NotebookCard', () => {
 
       const output = shallowRenderConnected(store);
 
-      expect(output.prop('notebook')).toEqual({});
+      expect(output.prop('stack')).toEqual({});
     });
 
     it('provides empty notebook if the form does not yet exist in the redux state', () => {
@@ -39,7 +39,7 @@ describe('Preview NotebookCard', () => {
 
       const output = shallowRenderConnected(store);
 
-      expect(output.prop('notebook')).toEqual(notebook);
+      expect(output.prop('stack')).toEqual(stack);
     });
   });
 });

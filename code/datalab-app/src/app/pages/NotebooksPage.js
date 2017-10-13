@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Segment } from 'semantic-ui-react';
-import NotebooksContainer from '../components/notebooks/NotebooksContainer';
+import NotebooksContainer from '../containers/notebooks/NotebooksContainer';
 
 const NotebooksPage = () => (
   <Segment basic>

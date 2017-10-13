@@ -1,6 +1,6 @@
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 
-jest.mock('../../actions/notebookActions');
+jest.mock('../../actions/stackActions');
 
 describe('New Notebook Form Validator', () => {
   it('should return empty errors object for valid form', () => {
