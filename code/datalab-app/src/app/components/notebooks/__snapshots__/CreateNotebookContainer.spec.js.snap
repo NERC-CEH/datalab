@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`NotebooksContainer is a container which passes correct props to NotebookCard 1`] = `
-<NewNotebookButton
-  onClick={[Function]}
-/>
-`;

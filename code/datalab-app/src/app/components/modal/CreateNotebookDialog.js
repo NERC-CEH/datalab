@@ -15,7 +15,7 @@ const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
             </Grid.Column>
             <Grid.Column width={6}>
               <h2>Notebook Preview</h2>
-              <PreviewNotebookCard notebook={notebook} />
+              <PreviewNotebookCard />
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -27,7 +27,6 @@ CreateNotebookDialog.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  notebook: PropTypes.object.isRequired,
 };
 
 export default CreateNotebookDialog;

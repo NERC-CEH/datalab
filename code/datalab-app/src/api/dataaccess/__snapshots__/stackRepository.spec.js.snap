@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stackRepository getAll returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
+exports[`stackRepository getByCategory returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
+exports[`stackRepository getById returns expected snapshot 1`] = `
+Object {
+  "name": "Stack 1",
+}
+`;
+
+exports[`stackRepository getByName returns expected snapshot 1`] = `
+Object {
+  "name": "Stack 1",
+}
+`;

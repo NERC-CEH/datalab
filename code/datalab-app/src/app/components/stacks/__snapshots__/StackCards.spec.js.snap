@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
+<CardGroup>
+  <StackCard
+    deleteStack={[Function]}
+    openStack={[Function]}
+    stack={
+      Object {
+        "displayName": "name1",
+        "id": "1",
+        "type": "type1",
+      }
+    }
+  />
+  <StackCard
+    deleteStack={[Function]}
+    openStack={[Function]}
+    stack={
+      Object {
+        "displayName": "name2",
+        "id": "2",
+        "type": "type2",
+      }
+    }
+  />
+  <StackCard
+    deleteStack={[Function]}
+    openStack={[Function]}
+    stack={
+      Object {
+        "displayName": "name3",
+        "id": "3",
+        "type": "type3",
+      }
+    }
+  />
+  <Connect(CreateStackContainer) />
+</CardGroup>
+`;
+
+exports[`StackCards creates correct snapshot for an empty array 1`] = `
+<CardGroup>
+  <Connect(CreateStackContainer) />
+</CardGroup>
+`;

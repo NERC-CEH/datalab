@@ -1,6 +1,6 @@
 import validate from 'validate.js';
-import notebookActions from '../../actions/notebookActions';
-import { getNotebookKeys } from '../../../shared/notebookTypes';
+import stackActions from '../../actions/stackActions';
+import { getStackKeys } from '../../../shared/stackTypes';
 
 const constraints = {
   displayName: {
@@ -8,7 +8,7 @@ const constraints = {
   },
   type: {
     presence: true,
-    inclusion: getNotebookKeys(),
+    inclusion: getStackKeys(),
   },
   name: {
     presence: true,
@@ -36,7 +36,7 @@ function errorReducer(accumulator, error) {
 export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
 
 export const asyncValidate = (values, dispatch) =>
-  dispatch(notebookActions.checkNotebookName(values.name))
+  dispatch(stackActions.checkStackName(values.name))
     .then((response) => {
       if (response.value) {
         return Promise.reject({ name: 'Notebook already exists. Name must be unique' });

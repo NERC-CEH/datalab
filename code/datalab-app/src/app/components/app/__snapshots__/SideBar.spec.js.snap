@@ -73,6 +73,22 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       }
       menuTitle="Analysis"
     />
+    <SubMenu
+      menuItems={
+        Array [
+          Object {
+            "Component": [Function],
+            "children": "Sites",
+            "props": Object {
+              "className": "item",
+              "exact": true,
+              "to": "/publishing",
+            },
+          },
+        ]
+      }
+      menuTitle="Publish"
+    />
     <MenuItem
       header={true}
       name="Help"

@@ -15,11 +15,11 @@ function createNewUserCredentials() {
 }
 
 function storeCredentialsInVault(datalab, id, secret) {
-  return vault.ensureSecret(`${datalab}/notebooks/${id}`, secret);
+  return vault.ensureSecret(`${datalab}/stacks/${id}`, secret);
 }
 
 function deleteSecret(datalab, id) {
-  return vault.deleteSecret(`${datalab}/notebooks/${id}`);
+  return vault.deleteSecret(`${datalab}/stacks/${id}`);
 }
 
 export default { createNewJupyterCredentials, createNewUserCredentials, storeCredentialsInVault, deleteSecret };
