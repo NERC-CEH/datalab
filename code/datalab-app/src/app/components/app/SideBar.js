@@ -39,6 +39,8 @@ const SideBar = ({ classes }) => (
       <SideBarSubheader>Analysis</SideBarSubheader>
       <NavLink to="/notebooks" label="Notebooks" icon="book" />
       <NavLink label="Dask" icon="apps" onClick={() => window.open('https://datalab-dask.datalabs.nerc.ac.uk/')} />
+      <SideBarSubheader>Publish</SideBarSubheader>
+      <NavLink to="/publishing" label="Sites" icon="web" />
       <Divider />
       <NavLink label="Help" icon="help_outline" onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/')} />
     </List>
