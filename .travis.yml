@@ -23,10 +23,7 @@ env:
   - CONTAINER=infrastructure
 
 script:
-  - $TRAVIS_BUILD_DIR/build/validate-build.sh $CONTAINER
-
-after_success:
-  - $TRAVIS_BUILD_DIR/build/build-travis-wrapper.sh $CONTAINER
+  - $TRAVIS_BUILD_DIR/build/validate-build.sh $CONTAINER && $TRAVIS_BUILD_DIR/build/build-travis-wrapper.sh $CONTAINER
 
 notifications:
   email: false
