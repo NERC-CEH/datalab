@@ -67,11 +67,11 @@ function createRStudioDeployment({ datalabInfo, deploymentName }) {
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
 }
 
-function createRShinyDeployment({ datalabInfo, deploymentName, path }) {
+function createRShinyDeployment({ datalabInfo, deploymentName, sourcePath }) {
   const context = {
     name: deploymentName,
     datalabVolume: datalabInfo.volume,
-    appPath: path,
+    sourcePath,
     rshiny: {
       imageName: RSHINY_IMAGE,
       version: RSHINY_VERSION,
