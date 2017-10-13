@@ -1,16 +1,41 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import DescribeElement from './DescribeElement';
 
-it('DescribeElement renders correct snapshot', () => {
-  // Arrange
-  const props = {
-    iconName: 'bug', // acutal semantic ui icon name
-    title: 'expectedTitle',
-    description: 'expectedDescription',
-    secondColor: 'teal', // acutal semantic ui color name
-  };
+function shallowRender(props) {
+  const shallow = createShallow({ dive: true });
 
-  // Act/Assert
-  expect(shallow(<DescribeElement {...props} />)).toMatchSnapshot();
+  return shallow(<DescribeElement {...props} />);
+}
+
+describe('DescribeElement', () => {
+  const links = [
+    { displayName: 'displayName', href: 'address' },
+  ];
+
+  const content = [
+    { icon: 'people', title: 'expectedTitle', content: 'expectedContent' },
+    { title: 'anotherTitle', content: 'moreContent', links },
+  ];
+
+  it('renders correct snapshot', () => {
+    const props = {
+      title: 'cardTitle',
+      descriptions: content,
+    };
+
+    expect(shallowRender(props)).toMatchSnapshot();
+  });
+
+  it('renders correct snapshot with switches', () => {
+    const props = {
+      title: 'cardTitle',
+      descriptions: content,
+      invert: true,
+      quote: true,
+      media: true,
+    };
+
+    expect(shallowRender(props)).toMatchSnapshot();
+  });
 });

@@ -1,15 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElement renders correct snapshot 1`] = `
-<DescribeElement
-  classes={
-    Object {
-      "title": "DescribeElement-title-1",
-    }
-  }
-  description="expectedDescription"
-  iconName="bug"
-  secondColor="teal"
-  title="expectedTitle"
-/>
+<withStyles(DescribeElementSegment)>
+  <withStyles(Typography)
+    className="DescribeElement-title-1"
+    type="display1"
+  >
+    cardTitle
+  </withStyles(Typography)>
+  <withStyles(GridWrapper)
+    align="stretch"
+    container={true}
+  >
+    <withStyles(DescribeElementCard)
+      content="expectedContent"
+      icon="people"
+      title="expectedTitle"
+    />
+    <withStyles(DescribeElementCard)
+      content="moreContent"
+      links={
+        Array [
+          Object {
+            "displayName": "displayName",
+            "href": "address",
+          },
+        ]
+      }
+      title="anotherTitle"
+    />
+  </withStyles(GridWrapper)>
+</withStyles(DescribeElementSegment)>
+`;
+
+exports[`DescribeElement renders correct snapshot with switches 1`] = `
+<withStyles(DescribeElementSegment)
+  invert={true}
+>
+  <withStyles(Typography)
+    className="DescribeElement-title-1"
+    type="display1"
+  >
+    cardTitle
+  </withStyles(Typography)>
+  <withStyles(GridWrapper)
+    align="stretch"
+    container={true}
+  >
+    <withStyles(DescribeElementCard)
+      content="expectedContent"
+      icon="people"
+      invert={true}
+      media={true}
+      quote={true}
+      title="expectedTitle"
+    />
+    <withStyles(DescribeElementCard)
+      content="moreContent"
+      invert={true}
+      links={
+        Array [
+          Object {
+            "displayName": "displayName",
+            "href": "address",
+          },
+        ]
+      }
+      media={true}
+      quote={true}
+      title="anotherTitle"
+    />
+  </withStyles(GridWrapper)>
+</withStyles(DescribeElementSegment)>
 `;

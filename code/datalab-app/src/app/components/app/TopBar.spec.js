@@ -1,17 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import TopBar from './TopBar';
 
 describe('Topbar', () => {
-  function shallowRender(props) {
-    return shallow(<TopBar {...props} />);
-  }
+  let shallow;
 
-  it('correctly renders correct snapshot', () => {
-    expect(shallowRender()).toMatchSnapshot();
+  beforeEach(() => {
+    shallow = createShallow();
   });
 
-  it('style is passed to child segment', () => {
-    expect(shallowRender({ topBarStyle: { element: 'expectedTopBarStyle' } }).find('Segment').prop('style')).toEqual({ element: 'expectedTopBarStyle' });
+  it('correctly renders correct snapshot', () => {
+    expect(shallow(<TopBar />)).toMatchSnapshot();
   });
 });

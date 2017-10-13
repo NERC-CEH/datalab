@@ -1,14 +1,18 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { mount, shallow } from 'enzyme';
+import { createShallow, createMount } from 'material-ui/test-utils';
 import SideBar from './SideBar';
 
 describe('Sidebar', () => {
   function shallowRender(props) {
+    const shallow = createShallow({ dive: true });
+
     return shallow(<SideBar {...props} />);
   }
 
   function fullRender(path) {
+    const mount = createMount();
+
     return mount(
       <MemoryRouter initialEntries={path}>
         <SideBar/>
@@ -19,23 +23,42 @@ describe('Sidebar', () => {
     expect(shallowRender()).toMatchSnapshot();
   });
 
-  it('style is passed to child segment', () => {
-    expect(shallowRender({ topBarStyle: { element: 'expectedTopBarStyle' } }).find('Segment').prop('style')).toEqual({ element: 'expectedTopBarStyle' });
-  });
-
   it('renders "Dashboard" label as active when on / route', () => {
-    // Arrange/Act
-    const output = fullRender(['/']);
+    // Arrange
+    const linkPath = '/';
+    const iconName = 'dashboard';
+    const linkName = 'Dashboard';
+
+    // Act
+    const output = fullRender([linkPath]);
 
     // Assert
-    expect(output.find('a.active.item')).toHaveText('Dashboard');
+    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
   });
 
   it('renders "Storage" label as active when on /storage route', () => {
-    // Arrange/Act
-    const output = fullRender(['/storage']);
+    // Arrange
+    const linkPath = '/storage';
+    const linkName = 'Storage';
+    const iconName = 'storage';
+
+    // Act
+    const output = fullRender([linkPath]);
 
     // Assert
-    expect(output.find('a.active.item')).toHaveText('Storage');
+    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
+  });
+
+  it('renders "Notebooks" label as active when on /storage route', () => {
+    // Arrange
+    const linkPath = '/notebooks';
+    const linkName = 'Notebooks';
+    const iconName = 'book';
+
+    // Act
+    const output = fullRender([linkPath]);
+
+    // Assert
+    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
   });
 });

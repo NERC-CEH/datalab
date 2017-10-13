@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescribeElementSegment renders correct snapshot 1`] = `
+<div
+  className="DescribeElementSegment-inner-2"
+>
+  expectedChild
+</div>
+`;
+
+exports[`DescribeElementSegment renders correct snapshot with invert switch 1`] = `
+<div
+  className="DescribeElementSegment-outer-1"
+>
+  <div
+    className="DescribeElementSegment-inner-2"
+  >
+    expectedChild
+  </div>
+</div>
+`;

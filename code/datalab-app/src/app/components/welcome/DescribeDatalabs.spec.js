@@ -1,7 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import DescribeDatalabs from './DescribeDatalabs';
 
-it('DescribeDatalabs renders correct snapshot', () => {
-  expect(shallow(<DescribeDatalabs/>)).toMatchSnapshot();
+describe('DescribeDatalabs', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow();
+  });
+
+  it('renders correct snapshot', () => {
+    expect(shallow(<DescribeDatalabs/>)).toMatchSnapshot();
+  });
 });
