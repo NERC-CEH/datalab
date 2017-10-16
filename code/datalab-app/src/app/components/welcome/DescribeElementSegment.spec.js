@@ -10,10 +10,10 @@ describe('DescribeElementSegment', () => {
   });
 
   it('renders correct snapshot', () => {
-    expect(shallow(<DescribeElementSegment>{'expectedChild'}</DescribeElementSegment>)).toMatchSnapshot();
+    expect(shallow(<DescribeElementSegment>{<span>'expectedChild'</span>}</DescribeElementSegment>)).toMatchSnapshot();
   });
 
   it('renders correct snapshot with invert switch', () => {
-    expect(shallow(<DescribeElementSegment invert>{'expectedChild'}</DescribeElementSegment>)).toMatchSnapshot();
+    expect(shallow(<DescribeElementSegment invert>{<span>'expectedChild'</span>}</DescribeElementSegment>)).toMatchSnapshot();
   });
 });

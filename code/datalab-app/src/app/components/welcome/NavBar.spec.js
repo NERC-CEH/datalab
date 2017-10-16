@@ -1,9 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import NavBar from './NavBar';
 
 describe('NavBar', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow({ dive: true });
+  });
+
   it('renders correct snapshot', () => {
-    expect(shallow(<NavBar/>)).toMatchSnapshot();
+    expect(shallow(<NavBar />)).toMatchSnapshot();
   });
 });

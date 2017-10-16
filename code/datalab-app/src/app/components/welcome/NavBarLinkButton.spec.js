@@ -1,8 +1,8 @@
 import React from 'react';
 import { createShallow } from 'material-ui/test-utils';
-import HeroBar from './HeroBar';
+import NavBarLinkButton from './NavBarLinkButton';
 
-describe('HeroBar', () => {
+describe('NavBarLinkButton', () => {
   let shallow;
 
   beforeEach(() => {
@@ -10,6 +10,6 @@ describe('HeroBar', () => {
   });
 
   it('renders correct snapshot', () => {
-    expect(shallow(<HeroBar />)).toMatchSnapshot();
+    expect(shallow(<NavBarLinkButton>{'expectedChildren'}</NavBarLinkButton>)).toMatchSnapshot();
   });
 });

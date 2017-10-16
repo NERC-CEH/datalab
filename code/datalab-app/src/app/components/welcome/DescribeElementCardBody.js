@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -35,5 +36,12 @@ function DescribeElementCardBody({ classes, content, media, quote }) {
 
   return media ? generateMediaBody(content) : generateTextBody(content);
 }
+
+DescribeElementCardBody.propTypes = {
+  classes: PropTypes.object.isRequired,
+  content: PropTypes.string.isRequired,
+  media: PropTypes.bool,
+  quote: PropTypes.bool,
+};
 
 export default withStyles(styles)(DescribeElementCardBody);

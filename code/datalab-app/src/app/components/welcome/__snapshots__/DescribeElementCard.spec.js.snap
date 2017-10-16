@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescribeElementCard renders correct snapshot 1`] = `
+<withStyles(GridWrapper)
+  item={true}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <Card
+    className="DescribeElementCard-card-1"
+    raised={false}
+    square={true}
+  >
+    <withStyles(DescribeElementCardBanner)
+      icon="people"
+      title="expectedTitle"
+    />
+    <withStyles(DescribeElementCardBody)
+      content="expectedContent"
+    />
+  </Card>
+</withStyles(GridWrapper)>
+`;
+
+exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
+<withStyles(GridWrapper)
+  item={true}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <Card
+    className="DescribeElementCard-invertCard-2"
+    raised={false}
+    square={true}
+  >
+    <withStyles(DescribeElementCardBody)
+      content="moreContent"
+      media={true}
+      quote={true}
+    />
+    <withStyles(DescribeElementCardBanner)
+      title="expectedTitle"
+    />
+    <DescribeElementCardLinks
+      links={
+        Array [
+          Object {
+            "displayName": "displayName",
+            "href": "address",
+          },
+        ]
+      }
+    />
+  </Card>
+</withStyles(GridWrapper)>
+`;

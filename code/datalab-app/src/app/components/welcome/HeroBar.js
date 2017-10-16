@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -34,5 +35,9 @@ const HeroBar = ({ classes }) => (
     <Button className={classes.button} color="primary" raised onClick={auth.login}> Log In</Button>
   </div>
 );
+
+HeroBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(HeroBar);

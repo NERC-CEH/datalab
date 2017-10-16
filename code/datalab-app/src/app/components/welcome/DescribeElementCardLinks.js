@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import { CardActions } from 'material-ui/Card';
 
@@ -13,5 +14,12 @@ const DescribeElementCardLinks = ({ links }) => (
     {links.map(({ displayName, href }, idx) => (<Link key={`link-${idx}`} displayName={displayName} href={href} />))}
   </CardActions>
 );
+
+DescribeElementCardLinks.propTypes = {
+  links: PropTypes.arrayOf(PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+  })),
+};
 
 export default DescribeElementCardLinks;

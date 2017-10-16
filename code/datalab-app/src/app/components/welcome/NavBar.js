@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -41,5 +42,9 @@ const PublicNavBarContent = ({ classes }) => (
     </Toolbar>
   </AppBar>
 );
+
+PublicNavBarContent.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(PublicNavBarContent);

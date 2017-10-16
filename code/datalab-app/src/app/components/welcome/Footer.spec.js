@@ -1,15 +1,15 @@
 import React from 'react';
 import { createShallow } from 'material-ui/test-utils';
-import WelcomePage from './WelcomePage';
+import Footer from './Footer';
 
-describe('WelcomePage', () => {
+describe('Footer', () => {
   let shallow;
 
   beforeEach(() => {
-    shallow = createShallow();
+    shallow = createShallow({ dive: true });
   });
 
   it('renders correct snapshot', () => {
-    expect(shallow(<WelcomePage />)).toMatchSnapshot();
+    expect(shallow(<Footer />)).toMatchSnapshot();
   });
 });

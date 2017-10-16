@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescribeElementCardBody renders correct snapshot 1`] = `
+<withStyles(CardContent)>
+  <withStyles(Typography)
+    className="DescribeElementCardBody-bodyText-1"
+    type="body1"
+  >
+    expectedContent
+  </withStyles(Typography)>
+</withStyles(CardContent)>
+`;
+
+exports[`DescribeElementCardBody renders correct snapshot with switches 1`] = `
+<withStyles(CardMedia)
+  className="DescribeElementCardBody-cardImage-3"
+  image="moreContent"
+/>
+`;

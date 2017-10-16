@@ -1,12 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar renders correct snapshot 1`] = `
-<PublicNavBarContent
-  classes={
-    Object {
-      "logo": "PublicNavBarContent-logo-1",
-      "spacer": "PublicNavBarContent-spacer-2",
-    }
-  }
-/>
+<withStyles(AppBar)
+  position="fixed"
+>
+  <withStyles(Toolbar)>
+    <img
+      alt="DataLabs-Logo"
+      className="PublicNavBarContent-logo-1"
+      src="datalabs-hori.png"
+    />
+    <div
+      className="PublicNavBarContent-spacer-2"
+    />
+    <withStyles(NavBarLinkButton)
+      onClick={[Function]}
+    >
+      Slack
+    </withStyles(NavBarLinkButton)>
+    <withStyles(NavBarLinkButton)
+      onClick={[Function]}
+    >
+      Discourse
+    </withStyles(NavBarLinkButton)>
+    <withStyles(NavBarLinkButton)
+      onClick={[Function]}
+    >
+      GitHub
+    </withStyles(NavBarLinkButton)>
+    <withStyles(NavBarLinkButton)
+      onClick={[Function]}
+    >
+      Docker Hub
+    </withStyles(NavBarLinkButton)>
+    <withStyles(Button)
+      color="primary"
+      onClick={[Function]}
+      raised={true}
+    >
+      Log In
+    </withStyles(Button)>
+  </withStyles(Toolbar)>
+</withStyles(AppBar)>
 `;

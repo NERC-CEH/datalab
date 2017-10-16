@@ -1,14 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeroBar renders correct snapshot 1`] = `
-<HeroBar
-  classes={
-    Object {
-      "bar": "HeroBar-bar-1",
-      "button": "HeroBar-button-4",
-      "logo": "HeroBar-logo-2",
-      "tagLine": "HeroBar-tagLine-3",
-    }
-  }
-/>
+<div
+  className="HeroBar-bar-1"
+>
+  <img
+    alt="DataLabs-Logo"
+    className="HeroBar-logo-2"
+    src="datalabs-vert.png"
+  />
+  <withStyles(Typography)
+    className="HeroBar-tagLine-3"
+    type="title"
+  >
+    DataLabs provides you with tools to power your research and share the results
+  </withStyles(Typography)>
+  <withStyles(Button)
+    className="HeroBar-button-4"
+    color="primary"
+    disabled={true}
+    raised={true}
+  >
+    Sign Up
+  </withStyles(Button)>
+  <withStyles(Button)
+    className="HeroBar-button-4"
+    color="primary"
+    onClick={[Function]}
+    raised={true}
+  >
+     Log In
+  </withStyles(Button)>
+</div>
 `;

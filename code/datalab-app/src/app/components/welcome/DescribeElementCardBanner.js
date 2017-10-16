@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CardContent } from 'material-ui/Card';
 import Icon from 'material-ui/Icon';
@@ -29,5 +30,11 @@ const DescribeElementCardBanner = ({ classes, icon, title }) => (
     </Typography>
   </CardContent>
 );
+
+DescribeElementCardBanner.propTypes = {
+  classes: PropTypes.object.isRequired,
+  icon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(DescribeElementCardBanner);

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders correct snapshot 1`] = `
+<div
+  className="Footer-footer-1"
+>
+  <img
+    alt="DataLabs-Logo"
+    className="Footer-logo-3"
+    src="datalabs-mono.png"
+  />
+  <withStyles(Typography)
+    gutterBottom={true}
+    type="caption"
+  >
+    © Copyright NERC 2017
+  </withStyles(Typography)>
+  <withStyles(Typography)
+    type="body1"
+  >
+    Version: pre-release
+  </withStyles(Typography)>
+</div>
+`;

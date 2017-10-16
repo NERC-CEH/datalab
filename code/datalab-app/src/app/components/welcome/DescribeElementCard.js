@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Card from 'material-ui/Card';
@@ -39,5 +40,16 @@ function DescribeElementCard({ classes, icon, title, content, links, invert, quo
     </Grid>
   );
 }
+
+DescribeElementCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  icon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  links: PropTypes.arrayOf(PropTypes.object),
+  invert: PropTypes.bool,
+  quote: PropTypes.bool,
+  media: PropTypes.bool,
+};
 
 export default withStyles(styles)(DescribeElementCard);
