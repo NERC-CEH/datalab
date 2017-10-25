@@ -11,7 +11,7 @@ const rstudioDescription = 'RStudio is an integrated development environment (ID
   'direct code execution, as well as tools for plotting, history, debugging and workspace management.';
 const rshinyDescription = 'Shiny is an R package that makes it easy to build interactive web apps straight from R. You can host standalone apps on a webpage or ' +
   'embed them in R Markdown documents or build dashboards.';
-const nbviewerDescription = 'NBViewer is a simple way to share notebooks. Any notebook can be served as a web page.';
+const nbviewerDescription = 'NBViewer is a simple way to share notebooks. Any Jupyter notebook can be served as a web page.';
 
 export default {
   [JUPYTER]: { description: jupyterDescription, logo: jupyerLogo },
