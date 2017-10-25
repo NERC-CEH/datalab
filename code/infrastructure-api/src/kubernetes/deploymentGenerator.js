@@ -16,6 +16,9 @@ const RSTUDIO_CONNECT_VERSION = '1.1.1';
 const RSHINY_IMAGE = 'nerc/rshiny';
 const RSHINY_VERSION = '0.1.1';
 
+const NBVIEWER_IMAGE = 'jupyter/nbviewer';
+const NBVIEWER_VERSION = 'latest';
+
 const SPARK_MASTER_ADDRESS = 'spark://spark-master:7077';
 const SHARED_R_LIBS = '/data/packages/R/%p/%v';
 
@@ -81,6 +84,20 @@ function createRShinyDeployment({ datalabInfo, deploymentName, sourcePath }) {
   return generateManifest(context, DeploymentTemplates.RSHINY_DEPLOYMENT);
 }
 
+function createNbViewerDeployment({ datalabInfo, deploymentName, sourcePath }) {
+  const context = {
+    name: deploymentName,
+    datalabVolume: datalabInfo.volume,
+    sourcePath,
+    nbviewer: {
+      imageName: NBVIEWER_IMAGE,
+      version: NBVIEWER_VERSION,
+    },
+  };
+
+  return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);
+}
+
 function createJupyterService(notebookName) {
   const context = { name: notebookName };
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
@@ -101,13 +118,20 @@ function createRShinyService(name) {
   return generateManifest(context, ServiceTemplates.RSHINY_SERVICE);
 }
 
+function createNbViewerService(name) {
+  const context = { name };
+  return generateManifest(context, ServiceTemplates.NBVIEWER_SERVICE);
+}
+
 export default {
   createJupyterDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
   createRShinyDeployment,
+  createNbViewerDeployment,
   createJupyterService,
   createZeppelinService,
   createRStudioService,
   createRShinyService,
+  createNbViewerService,
 };

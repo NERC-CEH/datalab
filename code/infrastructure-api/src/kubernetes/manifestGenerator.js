@@ -6,6 +6,7 @@ const ServiceTemplates = Object.freeze({
   ZEPPELIN_SERVICE: 'zeppelin.service.template.yml',
   RSTUDIO_SERVICE: 'rstudio.service.template.yml',
   RSHINY_SERVICE: 'rshiny.service.template.yml',
+  NBVIEWER_SERVICE: 'nbviewer.service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
@@ -13,6 +14,7 @@ const DeploymentTemplates = Object.freeze({
   ZEPPELIN_DEPLOYMENT: 'zeppelin.deployment.template.yml',
   RSTUDIO_DEPLOYMENT: 'rstudio.deployment.template.yml',
   RSHINY_DEPLOYMENT: 'rshiny.deployment.template.yml',
+  NBVIEWER_DEPLOYMENT: 'nbviewer.deployment.template.yml',
 });
 
 const ConfigTemplates = Object.freeze({

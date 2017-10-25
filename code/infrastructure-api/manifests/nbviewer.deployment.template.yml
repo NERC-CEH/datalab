@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name }}
+  namespace: {{ namespace }}
+spec:
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+    spec:
+      containers:
+      - name: {{ name }}
+        image: {{ &nbviewer.imageName }}:{{ nbviewer.version }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        args: ["python3",
+              "-m", "nbviewer",
+              "--localfiles=/notebooks",
+              "--debug",
+              "--logging=debug",
+              "--no-cache"]
+        volumeMounts:
+        - name: glusterfsvol
+          mountPath: /notebooks
+          subPath: {{ sourcePath }}
+          readOnly: true
+      volumes:
+      - name: glusterfsvol
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: {{ datalabVolume }}
+          readOnly: false
