@@ -8,6 +8,7 @@
     - common
 
   roles:
+    - docker
     - kubernetes-common
     - rook-common
     - { role: glusterfs, gluster_server: False }
