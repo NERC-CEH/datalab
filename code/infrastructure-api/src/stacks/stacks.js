@@ -3,6 +3,7 @@ import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
 import rshinyStack from './rshinyStack';
+import nbviewerStack from './nbviewerStack';
 
 export const STACKS = Object.freeze({
   JUPYTER: {
@@ -24,6 +25,11 @@ export const STACKS = Object.freeze({
     name: 'rshiny',
     create: rshinyStack.createRShinyStack,
     delete: rshinyStack.deleteRShinyStack,
+  },
+  NBVIEWER: {
+    name: 'nbviewer',
+    create: nbviewerStack.createNbViewerStack,
+    delete: nbviewerStack.deleteNbViewerStack,
   },
 });
 

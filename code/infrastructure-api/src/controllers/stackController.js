@@ -1,6 +1,6 @@
 import { check } from 'express-validator/check';
 import { matchedData, sanitize } from 'express-validator/filter';
-import { isBoolean } from 'lodash';
+import { isBoolean, indexOf } from 'lodash';
 import controllerHelper from './controllerHelper';
 import stackManager from '../stacks/stackManager';
 import { STACKS } from '../stacks/stacks';
@@ -56,14 +56,14 @@ const createStackValidator = [
   ...coreStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
     .custom((value, { req }) => {
-      if (req.body.type === STACKS.RSHINY.name) {
+      if (indexOf([STACKS.RSHINY.name, STACKS.NBVIEWER.name], req.body.type) > -1) {
         return value;
       }
       return true;
     }),
   check('isPublic', 'isPublic boolean must be specified for publication request')
     .custom((value, { req }) => {
-      if (req.body.type === STACKS.RSHINY.name) {
+      if (indexOf([STACKS.RSHINY.name, STACKS.NBVIEWER.name], req.body.type) > -1) {
         return isBoolean(value);
       }
       return true;
