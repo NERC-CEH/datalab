@@ -29,7 +29,6 @@
     state: latest
   with_items:
     - jq
-    - docker-engine
     - kubelet
     - kubeadm
     - kubectl
