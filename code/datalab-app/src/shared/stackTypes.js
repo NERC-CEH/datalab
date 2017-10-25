@@ -4,6 +4,7 @@ export const JUPYTER = 'jupyter';
 export const ZEPPELIN = 'zeppelin';
 export const RSTUDIO = 'rstudio';
 export const RSHINY = 'rshiny';
+export const NBVIEWER = 'nbviewer';
 
 export const ANALYSIS = 'analysis';
 export const PUBLISH = 'publish';
@@ -27,6 +28,11 @@ const STACK_TYPES = [
   {
     name: RSHINY,
     shortDescription: 'An RShiny Site',
+    category: PUBLISH,
+  },
+  {
+    name: NBVIEWER,
+    shortDescription: 'An Jupyter Notebook Viewer Site',
     category: PUBLISH,
   },
 ];
