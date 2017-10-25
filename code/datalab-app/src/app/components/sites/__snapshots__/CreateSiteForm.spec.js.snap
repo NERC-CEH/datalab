@@ -20,6 +20,10 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
           "text": "Rshiny",
           "value": "rshiny",
         },
+        Object {
+          "text": "Nbviewer",
+          "value": "nbviewer",
+        },
       ]
     }
     placeholder="Site Type"
@@ -35,6 +39,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
     label="Source Path"
     name="sourcePath"
     placeholder="Source directory for site"
+    prefix="/data/"
   />
   <Field
     component={[Function]}
