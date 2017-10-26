@@ -148,6 +148,19 @@ describe('stackUrlService', () => {
     });
   });
 
+  describe('processes nbviewers', () => {
+    const notebook = {
+      name: 'NBViewer',
+      type: 'nbviewer',
+      url: 'http://nbviewer.datalab',
+      internalEndpoint: 'http://nbviewer',
+    };
+
+    it('returns the nbviewer localfile url', () =>
+      stackUrlService(notebook, 'user')
+        .then(url => expect(url).toEqual('http://nbviewer.datalab/localfile')));
+  });
+
   describe('Unknown types', () => {
     it('returns url for unknown types', () => {
       const notebook = {

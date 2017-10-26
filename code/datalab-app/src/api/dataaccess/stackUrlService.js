@@ -2,7 +2,7 @@ import axios from 'axios';
 import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
-import { JUPYTER, ZEPPELIN, RSTUDIO } from '../../shared/stackTypes';
+import { JUPYTER, ZEPPELIN, RSTUDIO, NBVIEWER } from '../../shared/stackTypes';
 import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
 
@@ -19,6 +19,8 @@ export default function notebookUrlService(notebook, user) {
   } else if (notebook.type === RSTUDIO) {
     return requestRStudioToken(notebook, user)
       .then(createRStudioUrl(notebook));
+  } else if (notebook.type === NBVIEWER) {
+    return Promise.resolve(`${notebook.url}/localfile`);
   }
   return Promise.resolve(notebook.url);
 }
