@@ -23,11 +23,12 @@ spec:
               "--localfiles=/notebooks",
               "--debug",
               "--logging=debug",
-              "--no-cache"]
+              "--no-cache",
+              "--no-frontpage-input"]
         volumeMounts:
         - name: glusterfsvol
           mountPath: /notebooks
-          subPath: {{ sourcePath }}
+          subPath: {{ &sourcePath }}
           readOnly: true
       volumes:
       - name: glusterfsvol
