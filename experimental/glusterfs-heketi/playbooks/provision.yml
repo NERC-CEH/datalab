@@ -1,0 +1,16 @@
+---
+- hosts: gluster
+  become: yes
+
+  vars_files:
+    - vars.yml
+
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.glusterfs
+
+  tasks:
+    - name: Install curl
+      apt:
+        name: xfsprogs
+        state: present
