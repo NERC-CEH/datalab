@@ -1,7 +1,7 @@
 # Dependency management with Packrat
 
 Packrat is a dependency management system for R developed by RStudio. This
-provides an isolate, portable and reproducible R environment for each project.
+provides an isolated, portable and reproducible R environment for each project.
 Packrat is included by default in the notebooks offered within Datalabs (Jupyter
 and Zeppelin). Below is a quick summary regarding the use of packrat in the
 datalabs environment, further information about this package can be found
@@ -27,12 +27,12 @@ Once initialised, a project can be opened using the `packrat::on` function. This
 will set the private project library for installing and opening of packages. The
 default global library can be restored by running the `packrat::off` command.
 When using *Spark* the `clean.search.path = FALSE`  argument should be given to
-the `on` function, this prevents unloading the `SparkR` library.
+the `on` function, this prevents unloading the `SparkR` library (see [Packrat on
+Spark](./packrat_on_spark.md) for more information).
 
 ```R
 setwd('/data/example_project')
 packrat::on()
-
 ```
 
 ### Installing a package
@@ -64,9 +64,9 @@ packrat::snapshot()
 
 ### Removing a package
 
-Unneeded packages can be deleted using the `remove.packages` function, this will
-remove the package from the private project library. The project lockfile can
-then be updated using the `packrat::snapshot` command.
+Packaged that are no longer required can be deleted using the `remove.packages`
+function, this will remove the package from the private project library. The
+project lockfile can then be updated using the `packrat::snapshot` command.
 
 ```R
 remove.packages('fortunes')
