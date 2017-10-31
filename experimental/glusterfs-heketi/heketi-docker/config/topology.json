@@ -35,6 +35,23 @@
             "/dev/sdb",
             "/dev/sdc"
           ]
+        },
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "192.168.29.4"
+              ],
+              "storage": [
+                "192.168.29.4"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sdb",
+            "/dev/sdc"
+          ]
         }
       ]
     }

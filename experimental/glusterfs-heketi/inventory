@@ -1,6 +1,7 @@
 [gluster]
 192.168.29.2
 192.168.29.3
+192.168.29.4
 
 [gluster:vars]
 ansible_ssh_user=vagrant

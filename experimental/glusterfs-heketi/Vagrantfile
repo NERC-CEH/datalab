@@ -15,7 +15,8 @@ Vagrant.configure("2") do |config|
   # Define two VMs with static private IP addresses.
   boxes = [
     { :name => "gluster1", :ip => "192.168.29.2" },
-    { :name => "gluster2", :ip => "192.168.29.3" }
+    { :name => "gluster2", :ip => "192.168.29.3" },
+    { :name => "gluster3", :ip => "192.168.29.4" }
   ]
 
   # Provision each of the VMs.
@@ -43,7 +44,7 @@ Vagrant.configure("2") do |config|
       end
 
       # Provision both VMs using Ansible after the last VM is booted.
-      if opts[:name] == "gluster2"
+      if opts[:name] == "gluster3"
         config.vm.provision "ansible" do |ansible|
           ansible.playbook = "playbooks/provision.yml"
           ansible.inventory_path = "inventory"
