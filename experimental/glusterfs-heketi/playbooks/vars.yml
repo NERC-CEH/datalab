@@ -1,0 +1,20 @@
+---
+# Firewall configuration.
+firewall_allowed_tcp_ports:
+  - 22
+  # Ports from https://www.jamescoyle.net/how-to/457-glusterfs-firewall-rules
+  - 111
+  # Gluster Daemon
+  - 24007
+  # Gluster Volume Ports (one per volume starting at 49152)
+  - 49152
+  - 49153
+  - 49154
+  - 49155
+  - 49156
+  # Gluster NFS service (38465-38476)
+  - 38465
+  - 38466
+  - 38467
+firewall_allowed_udp_ports:
+  - 111

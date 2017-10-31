@@ -27,3 +27,6 @@ bara-*.tgz
 code/bara/lib/
 
 code/infrastructure-api/dist
+
+experimental/glusterfs-heketi/.vagrant
+*.vdi
