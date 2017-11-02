@@ -1,0 +1,7 @@
+- name: Configure Kublet
+  hosts: k8s-cluster
+  user: "{{ deploy_user }}"
+  become: yes
+
+  roles:
+    - kubelet-configuration

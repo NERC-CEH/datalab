@@ -1,0 +1,20 @@
+---
+# This Role sets Kubelet configuration parameters to reduce the GC thresholds
+# Kubelet docs - https://kubernetes.io/docs/admin/kubelet/
+- name: Add line defining GC flags
+  lineinfile:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    insertafter: 'Environment="KUBELET_KUBECONFIG_ARGS'
+    line: 'Environment="KUBELET_GC_ARGS=--image-gc-high-threshold 80 --image-gc-low-threshold 70"'
+
+- name: Update exec line to use GC flags
+  lineinfile:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    regexp: '^ExecStart=/usr/bin/kubelet'
+    line: 'ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_GC_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_CERTIFICATE_ARGS $KUBELET_EXTRA_ARGS'
+
+- name: Reload kubelet service
+  systemd:
+    name: kubelet
+    state: restarted
+    daemon_reload: yes
