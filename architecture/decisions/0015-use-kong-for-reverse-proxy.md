@@ -4,9 +4,9 @@ Date: 2017-11-04
 
 ## Status
 
-Accepted
-
 Supercedes [14. Use Traefik for Reverse Proxy](0014-use-traefik-for-reverse-proxy.md)
+
+Superceded by [36. Replace Kong with Nginx Ingress Controller](0036-replace-kong-with-nginx-ingress-controller.md)
 
 ## Context
 
