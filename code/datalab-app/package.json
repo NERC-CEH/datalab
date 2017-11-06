@@ -37,7 +37,7 @@
     "semantic-ui-react": "0.70.0",
     "toastr": "2.1.2",
     "type-to-reducer": "1.0.3",
-    "universal-cookie": "2.0.8",
+    "universal-cookie": "2.1.0",
     "validate.js": "0.11.1",
     "winston": "2.3.1"
   },
@@ -77,8 +77,8 @@
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
-    "test-api": "yarn test-api-ci -- --watch",
-    "test-app": "yarn test-app-ci -- --watch",
+    "test-api": "yarn test-api-ci --watch",
+    "test-app": "yarn test-app-ci --watch",
     "test-api-ci": "jest --config tools/api-jest-config.json",
     "test-app-ci": "jest --config tools/app-jest-config.json",
     "eject": "react-scripts eject",
