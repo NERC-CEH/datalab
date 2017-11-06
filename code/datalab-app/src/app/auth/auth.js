@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import auth0 from 'auth0-js';
 import { pick } from 'lodash';
 import authConfig from './authConfig';
+import cookies from './cookies';
 import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
 class Auth {
@@ -27,6 +28,7 @@ class Auth {
   logout() {
     // User redirected to home page on logout
     clearSession();
+    cookies.clearAccessToken();
     this.authZeroInit.logout({ returnTo: authConfig.returnTo });
   }
 
@@ -71,6 +73,7 @@ class Auth {
 function processHash(authResponse) {
   if (authResponse && authResponse.accessToken && authResponse.idToken) {
     const unpackedResponse = processResponse(authResponse);
+    cookies.storeAccessToken(unpackedResponse);
     setSession(unpackedResponse);
     return unpackedResponse;
   }
