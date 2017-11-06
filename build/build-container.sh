@@ -3,7 +3,7 @@ set -e
 
 GIT_DESCRIBE=`git describe --tags --always`
 
-if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure)$ ]]; then
+if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation)$ ]]; then
   case "$1" in
   docs)
     echo "Starting to build documents..."
@@ -28,6 +28,12 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     cd ./code/infrastructure-api && yarn dist
     DOCKERFILE="Dockerfile"
     IMAGE="infrastructure-api"
+    ;;
+  authorisation)
+    echo "Starting to build auth-service..."
+    cd ./code/auth-service && yarn dist
+    DOCKERFILE="Dockerfile"
+    IMAGE="authorisation-svc"
     ;;
   esac
   echo "Generating docker image..."
