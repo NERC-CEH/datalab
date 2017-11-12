@@ -66,7 +66,7 @@ describe('Kubernetes Deployment API', () => {
     });
   });
 
-  describe('update secret', () => {
+  describe('update deployment', () => {
     it('should PUT payload to resource URL', () => {
       mock.onPut(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`, manifest).reply((requestConfig) => {
         expect(requestConfig.headers['Content-Type']).toBe('application/yaml');
@@ -89,7 +89,7 @@ describe('Kubernetes Deployment API', () => {
     });
   });
 
-  describe('createOrUpdate secret', () => {
+  describe('createOrUpdate deployment', () => {
     it('should CREATE if secret does not exist', () => {
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404);
       mock.onPost().reply(204, deployment);
@@ -100,7 +100,7 @@ describe('Kubernetes Deployment API', () => {
         });
     });
 
-    it('should UPDATE if secret exists', () => {
+    it('should UPDATE if deployment exists', () => {
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(200, deployment);
       mock.onPut().reply(204, deployment);
 
@@ -111,7 +111,7 @@ describe('Kubernetes Deployment API', () => {
     });
   });
 
-  describe('delete service', () => {
+  describe('delete deployment', () => {
     it('should DELETE resource URL', () => {
       mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(204);
 
