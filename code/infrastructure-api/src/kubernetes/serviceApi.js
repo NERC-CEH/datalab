@@ -19,7 +19,7 @@ function createOrUpdateService(name, manifest) {
 
 const createOrReplace = (name, manifest) => (existingService) => {
   if (existingService) {
-    return updateService(name, manifest, existingService);
+    return replaceService(name, manifest);
   }
 
   return createService(name, manifest);
@@ -35,6 +35,12 @@ function createService(name, manifest) {
   logger.info('Creating service: %s', name);
   return axios.post(SERVICE_URL, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError('service', name));
+}
+
+function replaceService(name, manifest) {
+  logger.info('Replacing service: %s', name);
+  return deleteService(name)
+    .then(() => createService(name, manifest));
 }
 
 function updateService(name, manifest, existingService) {
