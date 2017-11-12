@@ -3,11 +3,12 @@ import k8sSecretApi from '../kubernetes/secretApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
+import ingressGenerator from '../kubernetes/ingressGenerator';
+import ingressApi from '../kubernetes/ingressApi';
 import { generateManifest, ConfigTemplates } from '../kubernetes/manifestGenerator';
 import zeppelinShiroGenerator from '../credentials/zeppelinShiroGenerator';
-import proxyRouteApi from '../kong/proxyRouteApi';
 
-import { createDeployment, createService, createProxyRouteWithConnect } from './stackBuilders';
+import { createDeployment, createService, createInrgessRuleWithConnect } from './stackBuilders';
 
 function createZeppelinStack(params) {
   const { datalabInfo, name, type } = params;
@@ -18,14 +19,14 @@ function createZeppelinStack(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createZeppelinDeployment))
     .then(createService(name, type, deploymentGenerator.createZeppelinService))
-    .then(createProxyRouteWithConnect(name, datalabInfo));
+    .then(createInrgessRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
 }
 
 function deleteZeppelinStack(params) {
   const { datalabInfo, name, type } = params;
   const k8sName = `${type}-${name}`;
 
-  return proxyRouteApi.deleteRouteWithConnect(name, datalabInfo)
+  return ingressApi.deleteIngress(k8sName, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))
     .then(() => k8sSecretApi.deleteSecret(k8sName))

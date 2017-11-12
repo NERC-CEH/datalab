@@ -2,7 +2,7 @@ import logger from 'winston';
 import chalk from 'chalk';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
-import proxyRouteApi from '../kong/proxyRouteApi';
+import ingressApi from '../kubernetes/ingressApi';
 
 export const createDeployment = (params, generator) => () => {
   const { name, type } = params;
@@ -26,17 +26,29 @@ export const createService = (name, type, generator) => () => {
     });
 };
 
-export const createProxyRoute = (name, datalabInfo) => (service) => {
-  const k8sPort = service.spec.ports[0].nodePort;
-  logger.info(`Creating Proxy Route for: '${name}' for k8s port: ${k8sPort}`);
-  return proxyRouteApi.createOrUpdateRoute(name, datalabInfo, k8sPort);
+export const createIngressRule = (name, type, datalabInfo, generator) => (service) => {
+  const ingressName = `${type}-${name}`;
+  const serviceName = service.metadata.name;
+  const port = service.spec.ports[0].port;
+
+  return generator({ name, datalabInfo, ingressName, serviceName, port })
+    .then((manifest) => {
+      logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return ingressApi.createOrUpdateIngress(ingressName, manifest);
+    });
 };
 
-export const createProxyRouteWithConnect = (name, datalabInfo) => (service) => {
-  const k8sServicePort = service.spec.ports[0].nodePort;
-  const k8sConnectPort = service.spec.ports[1].nodePort;
+export const createInrgessRuleWithConnect = (name, type, datalabInfo, generator) => (service) => {
+  const ingressName = `${type}-${name}`;
+  const serviceName = service.metadata.name;
+  const port = service.spec.ports[0].port;
+  const connectPort = service.spec.ports[1].port;
 
-  logger.info(`Creating Proxy Routes for: '${name}' for k8s port: ${k8sServicePort} and connect port: ${k8sConnectPort}`);
-  return proxyRouteApi.createOrUpdateRoute(name, datalabInfo, k8sServicePort)
-    .then(() => proxyRouteApi.createOrUpdateRoute(name, datalabInfo, k8sConnectPort, true));
+  return generator({ name, datalabInfo, ingressName, serviceName, port, connectPort })
+    .then((manifest) => {
+      logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with connect port from manifest:`);
+      logger.debug(manifest.toString());
+      return ingressApi.createOrUpdateIngress(ingressName, manifest);
+    });
 };

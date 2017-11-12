@@ -49,6 +49,18 @@ const config = convict({
     default: 'devtest',
     env: 'KUBERNETES_NAMESPACE',
   },
+  authServiceUrl: {
+    doc: 'The endpoint for the Authorisation service',
+    format: 'url',
+    default: 'http://datalab-auth-service.test.svc.cluster.local/auth',
+    env: 'AUTH_SERVICE_URL',
+  },
+  authSigninUrl: {
+    doc: 'The sign in URL',
+    format: 'url',
+    default: 'https://testlab.test-datalabs.nerc.ac.uk',
+    env: 'AUTH_SIGNIN_URL',
+  },
 });
 
 export default config;
