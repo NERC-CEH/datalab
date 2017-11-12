@@ -7,7 +7,7 @@ kind: Ingress
 metadata:
   name: name-ingress
   annotations:
-    ingress.kubernetes.io/auth-url: http://datalab-auth-service/auth
+    ingress.kubernetes.io/auth-url: http://datalab-auth-service.test.svc.cluster.local/auth
     ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
 spec:
   rules:
@@ -28,7 +28,7 @@ kind: Ingress
 metadata:
   name: name-ingress
   annotations:
-    ingress.kubernetes.io/auth-url: http://datalab-auth-service/auth
+    ingress.kubernetes.io/auth-url: http://datalab-auth-service.test.svc.cluster.local/auth
     ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
 spec:
   rules:
