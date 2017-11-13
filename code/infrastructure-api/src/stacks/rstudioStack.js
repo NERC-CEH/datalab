@@ -3,8 +3,9 @@ import k8sSecretApi from '../kubernetes/secretApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
-import proxyRouteApi from '../kong/proxyRouteApi';
-import { createDeployment, createService, createProxyRouteWithConnect } from './stackBuilders';
+import ingressGenerator from '../kubernetes/ingressGenerator';
+import ingressApi from '../kubernetes/ingressApi';
+import { createDeployment, createService, createInrgessRuleWithConnect } from './stackBuilders';
 
 function createRStudioStack(params) {
   const { datalabInfo, name, type } = params;
@@ -14,14 +15,14 @@ function createRStudioStack(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(name, type, deploymentGenerator.createRStudioService))
-    .then(createProxyRouteWithConnect(name, datalabInfo));
+    .then(createInrgessRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
 }
 
 function deleteRStudioStack(params) {
   const { datalabInfo, name, type } = params;
   const k8sName = `${type}-${name}`;
 
-  return proxyRouteApi.deleteRouteWithConnect(name, datalabInfo)
+  return ingressApi.deleteIngress(k8sName, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))
     .then(() => k8sSecretApi.deleteSecret(k8sName))

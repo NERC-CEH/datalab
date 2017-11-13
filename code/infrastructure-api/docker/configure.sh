@@ -1,10 +1,5 @@
 #!/bin/bash
 
-curl -i -X POST http://localhost:8002/certificates \
-    -F "cert=testcert" \
-    -F "key=testkey" \
-    -F "snis=testlab.test-datalabs.nerc.ac.uk"
-
 VAULT_TOKEN=root
 VAULT_ADDR=http://localhost:8200
 

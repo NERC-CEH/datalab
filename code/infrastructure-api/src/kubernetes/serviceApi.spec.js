@@ -98,9 +98,10 @@ describe('Kubernetes Service API', () => {
         });
     });
 
-    it('should UPDATE if service exists', () => {
+    it('should REPLACE if service exists', () => {
       mock.onGet(`${SERVICE_URL}/${SERVICE_NAME}`).reply(200, service);
-      mock.onPut().reply(204, service);
+      mock.onDelete().reply(204);
+      mock.onPost().reply(204, service);
 
       return serviceApi.createOrUpdateService(SERVICE_NAME, manifest)
         .then((response) => {

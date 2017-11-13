@@ -17,6 +17,10 @@ const DeploymentTemplates = Object.freeze({
   NBVIEWER_DEPLOYMENT: 'nbviewer.deployment.template.yml',
 });
 
+const IngressTemplates = Object.freeze({
+  DEFAULT_INGRESS: 'default.ingress.template.yml',
+});
+
 const ConfigTemplates = Object.freeze({
   ZEPPELIN_CONFIG: 'zeppelin.shiro.template.ini',
 });
@@ -28,4 +32,4 @@ function generateManifest(context, template) {
     .then(templateContent => render(templateContent, context));
 }
 
-export { ServiceTemplates, DeploymentTemplates, ConfigTemplates, generateManifest };
+export { ServiceTemplates, DeploymentTemplates, IngressTemplates, ConfigTemplates, generateManifest };
