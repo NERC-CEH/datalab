@@ -24,7 +24,7 @@ export const renderTextArea = ({ input, label, meta: { touched, error }, ...cust
     {...custom}
   />;
 
-export const renderDropdownField = ({ input, label, meta: { touched, error }, options, margin, ...custom }) =>
+export const renderSelectField = ({ input, label, meta: { touched, error }, options, margin, ...custom }) =>
   <FormControl error={touched && error} margin={margin}>
     <InputLabel>{label}</InputLabel>
     <Select onChange={(param, data) => input.onChange(data.value)} {...input} {...custom}>
@@ -33,7 +33,7 @@ export const renderDropdownField = ({ input, label, meta: { touched, error }, op
     {touched && error && <FormHelperText>{error}</FormHelperText>}
   </FormControl>;
 
-export const renderUrlField = ({ input, label, meta: { touched, error }, startText, endText, margin, ...custom }) =>
+export const renderAdornedTextField = ({ input, label, meta: { touched, error }, startText, endText, margin, ...custom }) =>
   <FormControl error={touched && error} margin={margin}>
     <InputLabel>{label}</InputLabel>
     <Input

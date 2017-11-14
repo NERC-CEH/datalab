@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'material-ui/Button';
-import { renderTextField, renderTextArea, renderDropdownField, renderUrlField } from '../common/form/controls';
+import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import { ANALYSIS, getStackSelections } from '../../../shared/stackTypes';
 
@@ -14,10 +14,10 @@ const CreateNotebookForm = (props) => {
         <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
       </div>
       <div>
-        <Field name="type" label="Notebook Type" component={renderDropdownField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 120 }} margin="normal" />
+        <Field name="type" label="Notebook Type" component={renderSelectField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 120 }} margin="normal" />
       </div>
       <div>
-        <Field name="name" label="URL Name" component={renderUrlField} placeholder="Notebook Name for URL" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Notebook Name for URL" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
       </div>
       <div>
         <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
