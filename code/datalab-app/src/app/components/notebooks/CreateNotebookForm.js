@@ -1,23 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Form } from 'semantic-ui-react';
-import { renderTextField, renderTextArea, renderDropdownField } from '../common/form/controls';
-import renderUrlTextField from '../common/form/urlTextField';
+import Button from 'material-ui/Button';
+import { renderTextField, renderTextArea, renderDropdownField, renderUrlField } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import { ANALYSIS, getStackSelections } from '../../../shared/stackTypes';
 
 const CreateNotebookForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
   return (
-    <Form onSubmit={ handleSubmit }>
-      <Field name='displayName' label='Display Name' component={renderTextField} placeholder='Display Name' />
-      <Field name='type' label='Notebook Type' component={renderDropdownField} options={getStackSelections(ANALYSIS)} placeholder='Notebook Type'/>
-      <Field name='name' label='URL Name' component={renderUrlTextField} placeholder='Notebook Name for URLs' />
-      <Field name='description' label='Description' component={renderTextArea} placeholder='Description' />
-      <Button type='submit' disabled={submitting} primary>Create</Button>
-      <Button type='button' onClick={cancel}>Cancel</Button>
-    </Form>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
+      </div>
+      <div>
+        <Field name="type" label="Notebook Type" component={renderDropdownField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 120 }} margin="normal" />
+      </div>
+      <div>
+        <Field name="name" label="URL Name" component={renderUrlField} placeholder="Notebook Name for URL" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+      </div>
+      <div>
+        <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
+      </div>
+      <div>
+        <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
+        <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
+      </div>
+    </form>
   );
 };
 
