@@ -9,7 +9,6 @@ exports[`DescribeElement renders correct snapshot 1`] = `
     cardTitle
   </withStyles(Typography)>
   <withStyles(GridWrapper)
-    align="stretch"
     container={true}
   >
     <withStyles(DescribeElementCard)
@@ -44,7 +43,6 @@ exports[`DescribeElement renders correct snapshot with switches 1`] = `
     cardTitle
   </withStyles(Typography)>
   <withStyles(GridWrapper)
-    align="stretch"
     container={true}
   >
     <withStyles(DescribeElementCard)

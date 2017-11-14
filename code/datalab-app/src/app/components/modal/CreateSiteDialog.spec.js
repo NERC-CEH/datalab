@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CreateNotebookDialog from './CreateNotebookDialog';
+import CreateSiteDialog from './CreateSiteDialog';
 
-describe('Notebook dialog', () => {
+describe('Site dialog', () => {
   function shallowRender(props) {
-    return shallow(<CreateNotebookDialog {...props} />);
+    return shallow(<CreateSiteDialog {...props} />);
   }
 
   const onSubmitMock = jest.fn();
