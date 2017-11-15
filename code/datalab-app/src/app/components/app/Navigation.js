@@ -21,6 +21,7 @@ const styles = theme => ({
     width: '100%',
     height: `calc(100% - ${topbarHeight}px)`,
     marginTop: topbarHeight,
+    backgroundColor: theme.palette.backgroundColor,
   },
 });
 
