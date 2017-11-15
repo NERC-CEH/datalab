@@ -25,7 +25,7 @@ const CreateSiteForm = (props) => {
       <div>
         <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
       </div>
-      <Button type="submit" style={{ margin: 8 }} disabled={submitting}>Create</Button>
+      <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
       <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
     </form>
   );

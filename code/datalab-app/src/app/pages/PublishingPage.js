@@ -1,10 +1,11 @@
 import React from 'react';
-import { Header, Segment } from 'semantic-ui-react';
+import Typography from 'material-ui/Typography';
+import Segment from '../components/app/Segment';
 import SiteContainer from '../containers/sites/SitesContainer';
 
 const PublishingPage = () => (
-  <Segment basic>
-    <Header as="h1">Published Sites</Header>
+  <Segment>
+    <Typography gutterBottom type="display1">Published Sites</Typography>
     <SiteContainer />
   </Segment>
 );

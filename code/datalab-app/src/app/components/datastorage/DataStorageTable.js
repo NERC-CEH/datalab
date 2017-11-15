@@ -1,28 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'semantic-ui-react';
+import Paper from 'material-ui/Paper';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import DataStorageTableRow from './DataStorageTableRow';
 
 const DataStorageTable = ({ dataStorage, openStorageAction }) => (
-  <Table celled>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell>Name</Table.HeaderCell>
-        <Table.HeaderCell>Capacity Used</Table.HeaderCell>
-        <Table.HeaderCell>Capacity Total</Table.HeaderCell>
-        <Table.HeaderCell>Type</Table.HeaderCell>
-        <Table.HeaderCell>Link</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-      {dataStorage.map((dataStore, index) => (
-        <DataStorageTableRow
-          key={index}
-          dataStore={dataStore}
-          openStorageAction={openStorageAction} />
-      ))}
-    </Table.Body>
-  </Table>
+  <Paper>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Name</TableCell>
+          <TableCell>Capacity Used</TableCell>
+          <TableCell>Capacity Total</TableCell>
+          <TableCell>Type</TableCell>
+          <TableCell>Link</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {dataStorage.map((dataStore, index) => (
+          <DataStorageTableRow
+            key={index}
+            dataStore={dataStore}
+            openStorageAction={openStorageAction} />
+        ))}
+      </TableBody>
+    </Table>
+  </Paper>
 );
 
 DataStorageTable.propTypes = {
@@ -30,4 +33,3 @@ DataStorageTable.propTypes = {
 };
 
 export default DataStorageTable;
-

@@ -1,14 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataStorageTablePage renders correct snapshot 1`] = `
-<Segment
-  basic={true}
->
-  <Header
-    as="h1"
+<withStyles(Segment)>
+  <withStyles(Typography)
+    gutterBottom={true}
+    type="display1"
   >
     Current Storage Volumes
-  </Header>
+  </withStyles(Typography)>
   <Connect(DataStorageTableContainer) />
-</Segment>
+</withStyles(Segment)>
 `;
