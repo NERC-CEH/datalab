@@ -1,28 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, Image, Icon } from 'semantic-ui-react';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+import Icon from 'material-ui/Icon';
 import stackDescriptions from './stackDescriptions';
 
-const iconStyle = { marginLeft: '5px', cursor: 'pointer' };
-
 const StackCard = ({ stack, openStack, deleteStack }) =>
-  <Card>
-    <Card.Content>
-      {getImage(stack)}
-      <Card.Header>
-        {getDisplayName(stack)}
-        {deleteStack ? <Icon style={iconStyle} size='small' color='blue' name='trash outline' onClick={() => deleteStack(stack)} /> : undefined}
-      </Card.Header>
-      <Card.Meta>
-        {getStackType(stack)}
-      </Card.Meta>
-      <Card.Description>
-        {getDescription(stack)}
-      </Card.Description>
-    </Card.Content>
-    <Button primary fluid disabled={!openStack} onClick={() => openStack(stack.id)}>
-      Open
-    </Button>
+  <Card style={{ height: '100%', minHeight: 230, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <CardContent>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
+          <Typography type="headline">{getDisplayName(stack)}</Typography>
+          <Typography type="subheading">{getStackType(stack)}</Typography>
+        </div>
+        {getImage(stack)}
+      </div>
+      <Typography component="p">{getDescription(stack)}</Typography>
+    </CardContent>
+    <CardActions>
+      <Button color="primary" dense disabled={!openStack} onClick={() => openStack(stack.id)}>
+        Open
+      </Button>
+      <Button color="primary" dense disabled={!deleteStack} onClick={() => deleteStack(stack)}>
+        Delete
+      </Button>
+    </CardActions>
   </Card>;
 
 StackCard.propTypes = {
@@ -32,7 +35,7 @@ StackCard.propTypes = {
     type: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,
-  delectStack: PropTypes.func,
+  deleteStack: PropTypes.func,
 };
 
 function getDisplayName(stack) {
@@ -42,11 +45,11 @@ function getDisplayName(stack) {
 function getImage(stack) {
   if (stack.type && stackDescriptions[stack.type]) {
     const logo = stackDescriptions[stack.type].logo;
-    return <Image floated='right' size='tiny' src={logo}/>;
+    return <CardMedia style={{ height: 70, width: 120, backgroundSize: 'contain', backgroundPositionY: 'top', backgroundPositionX: 'right' }} image={logo} />;
   }
 
   const style = { float: 'right' };
-  return <Icon style={style} size='big' name='question circle' />;
+  return <Icon style={style} children="create" />;
 }
 
 function getDescription(stack) {
