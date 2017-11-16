@@ -1,12 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
+import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
+import { withStyles } from 'material-ui/styles';
 import DatalabModal from './DatalabModal';
 
-const Confirmation = ({ title, body, onSubmit, onCancel }) => (
+function styles(theme) {
+  const buttonBaseStyle = {
+    margin: theme.spacing.unit,
+  };
+
+  return {
+    button: {
+      ...buttonBaseStyle,
+    },
+    buttonDanger: {
+      ...buttonBaseStyle,
+      color: theme.palette.danger,
+    },
+    icon: {
+      marginLeft: theme.spacing.unit,
+    },
+  };
+}
+
+const Confirmation = ({ classes, title, body, onSubmit, onCancel }) => (
   <DatalabModal title={title} body={body}>
-    <Button negative onClick={onCancel} content='No' />
-    <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={onSubmit}/>
+    <Button className={classes.button} color="accent" raised onClick={onCancel}>
+      No
+      <Icon className={classes.icon} children="clear"/>
+    </Button>
+    <Button className={classes.buttonDanger} raised onClick={onSubmit}>
+      Yes
+      <Icon className={classes.icon} children="delete"/>
+    </Button>
   </DatalabModal>
 );
 
@@ -17,4 +44,4 @@ Confirmation.propTypes = {
   onCancel: PropTypes.func.isRequired,
 };
 
-export default Confirmation;
+export default withStyles(styles)(Confirmation);

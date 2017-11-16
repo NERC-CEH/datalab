@@ -1,16 +1,18 @@
 import { createMuiTheme } from 'material-ui';
-import { blueGrey, teal, grey } from 'material-ui/colors';
+import { blueGrey, teal, grey, red } from 'material-ui/colors';
 
 const defaultTheme = createMuiTheme();
 const primary = teal;
 const secondary = blueGrey;
 const backgroundColor = grey[100];
+const danger = red[800];
 
 const theme = createMuiTheme({
   palette: {
     primary,
     secondary,
     backgroundColor,
+    danger,
   },
   overrides: {
     MuiAppBar: {

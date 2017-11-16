@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'semantic-ui-react';
+import Dialog, { DialogTitle, DialogContent, DialogActions, DialogContentText } from 'material-ui/Dialog';
 
 const DatalabModal = ({ title, body, children }) => (
-    <Modal size='small' dimmer='blurring' open={true}>
-      <Modal.Header>{title}</Modal.Header>
-      <Modal.Content>
-        <p>{body}</p>
-      </Modal.Content>
-      <Modal.Actions>{children}</Modal.Actions>
-    </Modal>
+    <Dialog open={true} maxWidth="md">
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>{body}</DialogContentText>
+      </DialogContent>
+      <DialogActions>{children}</DialogActions>
+    </Dialog>
 );
 
 DatalabModal.propTypes = {
