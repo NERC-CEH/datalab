@@ -19,10 +19,10 @@ const StackCard = ({ stack, openStack, deleteStack }) =>
       <Typography component="p">{getDescription(stack)}</Typography>
     </CardContent>
     <CardActions>
-      <Button color="primary" dense disabled={!openStack} onClick={() => openStack(stack.id)}>
+      <Button color="primary" raised disabled={!openStack} onClick={() => openStack(stack.id)}>
         Open
       </Button>
-      <Button color="primary" dense disabled={!deleteStack} onClick={() => deleteStack(stack)}>
+      <Button color="accent" raised disabled={!deleteStack} onClick={() => deleteStack(stack)}>
         Delete
       </Button>
     </CardActions>
@@ -45,7 +45,7 @@ function getDisplayName(stack) {
 function getImage(stack) {
   if (stack.type && stackDescriptions[stack.type]) {
     const logo = stackDescriptions[stack.type].logo;
-    return <CardMedia style={{ height: 70, width: 120, backgroundSize: 'contain', backgroundPositionY: 'top', backgroundPositionX: 'right' }} image={logo} />;
+    return <CardMedia style={{ height: 70, width: 120, marginLeft: 5, backgroundSize: 'contain', backgroundPositionY: 'top', backgroundPositionX: 'right' }} image={logo} />;
   }
 
   const style = { float: 'right' };
