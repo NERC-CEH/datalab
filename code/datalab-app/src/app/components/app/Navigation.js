@@ -1,27 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import SideBar from './SideBar';
+import SideBar, { drawerWidth } from './SideBar';
 import TopBar from './TopBar';
 
-const topbarHeight = 64;
+const topbarHeightLarge = 64;
+const topbarHeightSmall = 56;
+const topbarHeightXSmall = 48;
 
 const styles = theme => ({
   container: {
+    backgroundColor: theme.palette.backgroundColor,
     width: '100%',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
   },
   appFrame: {
-    position: 'absolute',
+    backgroundColor: theme.palette.backgroundColor,
     display: 'flex',
-    height: '100%',
     width: '100%',
+    position: 'relative',
     zIndex: 1,
   },
   content: {
-    width: '100%',
-    height: `calc(100% - ${topbarHeight}px)`,
-    marginTop: topbarHeight,
-    backgroundColor: theme.palette.backgroundColor,
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    '@media (min-width:1px) and (orientation: landscape)': {
+      marginTop: topbarHeightXSmall,
+    },
+    '@media (min-width:600px)': {
+      marginTop: topbarHeightLarge,
+    },
+    marginTop: topbarHeightSmall,
   },
 });
 

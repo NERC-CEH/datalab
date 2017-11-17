@@ -8,16 +8,23 @@ import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import SideBarSubheader from './SideBarSubheader';
 import NavLink from './NavLink';
 
-const drawerWidth = 240;
+export const drawerWidth = 240;
 
-const styles = theme => ({
+function styles(theme) {
+  console.log(theme.mixins.toolbar);
+
+  return styless(theme);
+}
+
+const styless = theme => ({
   header: {
     ...theme.mixins.toolbar,
-    padding: 16,
     backgroundColor: theme.palette.secondary[900],
+    display: 'flex',
+    alignItems: 'center',
   },
   drawerPaper: {
-    position: 'relative',
+    position: 'fixed',
     height: '100%',
     width: drawerWidth,
     backgroundColor: theme.palette.secondary[800],
@@ -25,6 +32,7 @@ const styles = theme => ({
   },
   logo: {
     width: 140,
+    marginLeft: 16,
   },
 });
 
