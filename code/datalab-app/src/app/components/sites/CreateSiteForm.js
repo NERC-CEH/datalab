@@ -17,10 +17,10 @@ const CreateSiteForm = (props) => {
         <Field name="type" label="Site Type" component={renderSelectField} options={getStackSelections(PUBLISH)} placeholder="Site Type" style={{ minWidth: 120 }} margin="normal" />
       </div>
       <div>
-        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Notebook Name for URLs" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Site Name for URLs" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
       </div>
       <div>
-        <Field name="sourcePath" label="Source Path" component={renderAdornedTextField} placeholder="Source directory for site" startText="/data/" margin="normal" />
+        <Field name="sourcePath" label="Source Path" component={renderAdornedTextField} placeholder="Source Directory for Site" startText="/data/" margin="normal" />
       </div>
       <div>
         <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />

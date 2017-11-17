@@ -44,7 +44,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       label="URL Name"
       margin="normal"
       name="name"
-      placeholder="Notebook Name for URLs"
+      placeholder="Site Name for URLs"
       startText="http://datalab-"
     />
   </div>
@@ -54,7 +54,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       label="Source Path"
       margin="normal"
       name="sourcePath"
-      placeholder="Source directory for site"
+      placeholder="Source Directory for Site"
       startText="/data/"
     />
   </div>
