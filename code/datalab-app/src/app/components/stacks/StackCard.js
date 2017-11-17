@@ -37,17 +37,17 @@ function styles(theme) {
   };
 }
 
-const StackCard = ({ classes, stack, openStack, deleteStack }) =>
+const StackCard = ({ classes, stack, openStack, deleteStack, typeName }) =>
   <Card className={classes.card}>
     <CardContent>
       <div className={classes.cardHeader}>
         <div>
           <Typography type="headline">{getDisplayName(stack)}</Typography>
-          <Typography type="subheading">{getStackType(stack)}</Typography>
+          <Typography type="subheading">{getStackType(stack, typeName)}</Typography>
         </div>
         {generateGetImage(classes)(stack)}
       </div>
-      <Typography component="p">{getDescription(stack)}</Typography>
+      <Typography component="p">{getDescription(stack, typeName)}</Typography>
     </CardContent>
     <CardActions>
       <Button color="primary" raised disabled={!openStack} onClick={() => openStack(stack.id)}>
@@ -68,6 +68,7 @@ StackCard.propTypes = {
   }).isRequired,
   openStack: PropTypes.func,
   deleteStack: PropTypes.func,
+  typeName: PropTypes.string.isRequired,
 };
 
 function getDisplayName(stack) {
@@ -87,17 +88,17 @@ function generateGetImage(classes) {
   return getImage;
 }
 
-function getDescription(stack) {
+function getDescription(stack, typeName) {
   if (stack.description) {
     return stack.description;
   } else if (stackDescriptions[stack.type]) {
     return stackDescriptions[stack.type].description;
   }
-  return 'A description of the notebook purpose';
+  return `A description of the ${typeName} purpose`;
 }
 
-function getStackType(stack) {
-  return stack.type ? capitalizeString(stack.type) : 'Notebook type';
+function getStackType(stack, typeName) {
+  return stack.type ? capitalizeString(stack.type) : `${capitalizeString(typeName)} type`;
 }
 
 function capitalizeString(text) {

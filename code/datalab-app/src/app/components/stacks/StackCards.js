@@ -10,7 +10,7 @@ const StackCards = ({ stacks, openStack, deleteStack, typeName, containerType, d
   <Grid container>
     {stacks.map((stack, index) => (
       <Grid key={index} item {...brakePoints}>
-        <StackCard stack={stack} openStack={openStack} deleteStack={deleteStack} />
+        <StackCard stack={stack} openStack={openStack} deleteStack={deleteStack} typeName={typeName} />
       </Grid>
     ))}
     <Grid item {...brakePoints}>
