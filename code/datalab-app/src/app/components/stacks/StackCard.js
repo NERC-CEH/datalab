@@ -4,17 +4,48 @@ import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
+import { withStyles } from 'material-ui/styles';
 import stackDescriptions from './stackDescriptions';
 
-const StackCard = ({ stack, openStack, deleteStack }) =>
-  <Card style={{ height: '100%', minHeight: 230, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+function styles(theme) {
+  const flexProps = {
+    display: 'flex',
+    justifyContent: 'space-between',
+  };
+
+  return {
+    card: {
+      ...flexProps,
+      flexDirection: 'column',
+      height: '100%',
+      minHeight: 230,
+    },
+    cardHeader: {
+      ...flexProps,
+    },
+    cardMedia: {
+      height: 70,
+      width: 120,
+      marginLeft: 5,
+      backgroundSize: 'contain',
+      backgroundPositionY: 'top',
+      backgroundPositionX: 'right',
+    },
+    cardIcon: {
+      float: 'right',
+    },
+  };
+}
+
+const StackCard = ({ classes, stack, openStack, deleteStack }) =>
+  <Card className={classes.card}>
     <CardContent>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div className={classes.cardHeader}>
         <div>
           <Typography type="headline">{getDisplayName(stack)}</Typography>
           <Typography type="subheading">{getStackType(stack)}</Typography>
         </div>
-        {getImage(stack)}
+        {generateGetImage(classes)(stack)}
       </div>
       <Typography component="p">{getDescription(stack)}</Typography>
     </CardContent>
@@ -29,6 +60,7 @@ const StackCard = ({ stack, openStack, deleteStack }) =>
   </Card>;
 
 StackCard.propTypes = {
+  classes: PropTypes.object.isRequired,
   stack: PropTypes.shape({
     id: PropTypes.string,
     displayName: PropTypes.string,
@@ -42,14 +74,17 @@ function getDisplayName(stack) {
   return stack.displayName || 'Display Name';
 }
 
-function getImage(stack) {
-  if (stack.type && stackDescriptions[stack.type]) {
-    const logo = stackDescriptions[stack.type].logo;
-    return <CardMedia style={{ height: 70, width: 120, marginLeft: 5, backgroundSize: 'contain', backgroundPositionY: 'top', backgroundPositionX: 'right' }} image={logo} />;
+function generateGetImage(classes) {
+  function getImage(stack) {
+    if (stack.type && stackDescriptions[stack.type]) {
+      const logo = stackDescriptions[stack.type].logo;
+      return <CardMedia className={classes.cardMedia} image={logo} />;
+    }
+
+    return <Icon className={classes.cardIcon} children="create" />;
   }
 
-  const style = { float: 'right' };
-  return <Icon style={style} children="create" />;
+  return getImage;
 }
 
 function getDescription(stack) {
@@ -69,4 +104,4 @@ function capitalizeString(text) {
   return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
 }
 
-export default StackCard;
+export default withStyles(styles)(StackCard);
