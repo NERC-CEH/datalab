@@ -8,44 +8,44 @@ exports[`Site dialog creates correct snapshot 1`] = `
   <div
     style={
       Object {
+        "display": "flex",
+        "flexDirection": "row",
         "margin": 10,
       }
     }
   >
-    <withStyles(GridWrapper)
-      container={true}
+    <div>
+      <withStyles(DialogTitle)>
+        Title
+      </withStyles(DialogTitle)>
+      <withStyles(DialogContent)>
+        <ReduxForm
+          cancel={[Function]}
+          onSubmit={[Function]}
+        />
+      </withStyles(DialogContent)>
+    </div>
+    <div
+      style={
+        Object {
+          "width": 320,
+        }
+      }
     >
-      <withStyles(GridWrapper)
-        item={true}
-      >
-        <withStyles(DialogTitle)>
-          Title
-        </withStyles(DialogTitle)>
-        <withStyles(DialogContent)>
-          <ReduxForm
-            cancel={[Function]}
-            onSubmit={[Function]}
-          />
-        </withStyles(DialogContent)>
-      </withStyles(GridWrapper)>
-      <withStyles(GridWrapper)
-        item={true}
-      >
-        <withStyles(DialogTitle)>
-          Notebook Preview
-        </withStyles(DialogTitle)>
-        <div
-          style={
-            Object {
-              "margin": "0 auto",
-              "width": "90%",
-            }
+      <withStyles(DialogTitle)>
+        Site Preview
+      </withStyles(DialogTitle)>
+      <div
+        style={
+          Object {
+            "margin": "0 auto",
+            "width": "90%",
           }
-        >
-          <Connect(PreviewSiteCard) />
-        </div>
-      </withStyles(GridWrapper)>
-    </withStyles(GridWrapper)>
+        }
+      >
+        <Connect(PreviewSiteCard) />
+      </div>
+    </div>
   </div>
 </withStyles(Dialog)>
 `;

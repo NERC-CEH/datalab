@@ -1,126 +1,161 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
-<Card>
-  <CardContent>
-    <Image
-      as="img"
-      floated="right"
-      size="tiny"
-      src="jupyter-logo.svg"
-      ui={true}
-    />
-    <CardHeader>
-      name1
-      <Icon
-        as="i"
-        color="blue"
-        name="trash outline"
-        onClick={[Function]}
-        size="small"
-        style={
-          Object {
-            "cursor": "pointer",
-            "marginLeft": "5px",
-          }
-        }
+<Card
+  className="StackCard-card-1"
+  raised={false}
+>
+  <withStyles(CardContent)>
+    <div
+      className="StackCard-cardHeader-2"
+    >
+      <div>
+        <withStyles(Typography)
+          type="headline"
+        >
+          name1
+        </withStyles(Typography)>
+        <withStyles(Typography)
+          type="subheading"
+        >
+          Jupyter
+        </withStyles(Typography)>
+      </div>
+      <withStyles(CardMedia)
+        className="StackCard-cardMedia-3"
+        image="jupyter-logo.svg"
       />
-    </CardHeader>
-    <CardMeta>
-      Jupyter
-    </CardMeta>
-    <CardDescription>
+    </div>
+    <withStyles(Typography)
+      component="p"
+    >
       Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-    </CardDescription>
-  </CardContent>
-  <Button
-    as="button"
-    disabled={false}
-    fluid={true}
-    onClick={[Function]}
-    primary={true}
-  >
-    Open
-  </Button>
+    </withStyles(Typography)>
+  </withStyles(CardContent)>
+  <withStyles(CardActions)>
+    <withStyles(Button)
+      color="primary"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+    >
+      Open
+    </withStyles(Button)>
+    <withStyles(Button)
+      color="accent"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+    >
+      Delete
+    </withStyles(Button)>
+  </withStyles(CardActions)>
 </Card>
 `;
 
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
-<Card>
-  <CardContent>
-    <Image
-      as="img"
-      floated="right"
-      size="tiny"
-      src="zeppelin-logo.svg"
-      ui={true}
-    />
-    <CardHeader>
-      name1
-      <Icon
-        as="i"
-        color="blue"
-        name="trash outline"
-        onClick={[Function]}
-        size="small"
-        style={
-          Object {
-            "cursor": "pointer",
-            "marginLeft": "5px",
-          }
-        }
+<Card
+  className="StackCard-card-1"
+  raised={false}
+>
+  <withStyles(CardContent)>
+    <div
+      className="StackCard-cardHeader-2"
+    >
+      <div>
+        <withStyles(Typography)
+          type="headline"
+        >
+          name1
+        </withStyles(Typography)>
+        <withStyles(Typography)
+          type="subheading"
+        >
+          Zeppelin
+        </withStyles(Typography)>
+      </div>
+      <withStyles(CardMedia)
+        className="StackCard-cardMedia-3"
+        image="zeppelin-logo.svg"
       />
-    </CardHeader>
-    <CardMeta>
-      Zeppelin
-    </CardMeta>
-    <CardDescription>
+    </div>
+    <withStyles(Typography)
+      component="p"
+    >
       Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
-    </CardDescription>
-  </CardContent>
-  <Button
-    as="button"
-    disabled={false}
-    fluid={true}
-    onClick={[Function]}
-    primary={true}
-  >
-    Open
-  </Button>
+    </withStyles(Typography)>
+  </withStyles(CardContent)>
+  <withStyles(CardActions)>
+    <withStyles(Button)
+      color="primary"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+    >
+      Open
+    </withStyles(Button)>
+    <withStyles(Button)
+      color="accent"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+    >
+      Delete
+    </withStyles(Button)>
+  </withStyles(CardActions)>
 </Card>
 `;
 
 exports[`StackCard should provide defaults and disable the open button if no stack is provided 1`] = `
-<Card>
-  <CardContent>
-    <Icon
-      as="i"
-      name="question circle"
-      size="big"
-      style={
-        Object {
-          "float": "right",
-        }
-      }
-    />
-    <CardHeader>
-      Display Name
-    </CardHeader>
-    <CardMeta>
-      Notebook type
-    </CardMeta>
-    <CardDescription>
-      A description of the notebook purpose
-    </CardDescription>
-  </CardContent>
-  <Button
-    as="button"
-    disabled={true}
-    fluid={true}
-    onClick={[Function]}
-    primary={true}
-  >
-    Open
-  </Button>
+<Card
+  className="StackCard-card-1"
+  raised={false}
+>
+  <withStyles(CardContent)>
+    <div
+      className="StackCard-cardHeader-2"
+    >
+      <div>
+        <withStyles(Typography)
+          type="headline"
+        >
+          Display Name
+        </withStyles(Typography)>
+        <withStyles(Typography)
+          type="subheading"
+        >
+          TypeName type
+        </withStyles(Typography)>
+      </div>
+      <withStyles(Icon)
+        className="StackCard-cardIcon-4"
+      >
+        create
+      </withStyles(Icon)>
+    </div>
+    <withStyles(Typography)
+      component="p"
+    >
+      A description of the typeName purpose
+    </withStyles(Typography)>
+  </withStyles(CardContent)>
+  <withStyles(CardActions)>
+    <withStyles(Button)
+      color="primary"
+      disabled={true}
+      onClick={[Function]}
+      raised={true}
+    >
+      Open
+    </withStyles(Button)>
+    <withStyles(Button)
+      color="accent"
+      disabled={true}
+      onClick={[Function]}
+      raised={true}
+    >
+      Delete
+    </withStyles(Button)>
+  </withStyles(CardActions)>
 </Card>
 `;

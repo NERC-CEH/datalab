@@ -1,12 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import StackCard from './StackCard';
 
-describe('StackCard', () => {
-  function shallowRender(props) {
-    return shallow(<StackCard {...props} />);
-  }
+function shallowRender(props) {
+  const shallow = createShallow({ dive: true });
 
+  return shallow(<StackCard {...props} />);
+}
+
+describe('StackCard', () => {
   const openStackMock = jest.fn();
   const deleteStackMock = jest.fn();
 
@@ -18,6 +20,7 @@ describe('StackCard', () => {
     },
     openStack: openStackMock,
     deleteStack: deleteStackMock,
+    typeName: 'notebook',
   });
 
   beforeEach(() => jest.resetAllMocks());
@@ -44,13 +47,13 @@ describe('StackCard', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('onCLick function calls openStack with correct props', () => {
+  it('Open button onClick function calls openStack with correct props', () => {
     // Arrange
     const props = generateProps('jupyter');
 
     // Act
     const output = shallowRender(props);
-    const onClick = output.find('Button').prop('onClick');
+    const onClick = output.find({ children: 'Open' }).prop('onClick');
 
     // Assert
     expect(openStackMock).not.toHaveBeenCalled();
@@ -59,9 +62,27 @@ describe('StackCard', () => {
     expect(openStackMock).toHaveBeenCalledWith('100');
   });
 
+  it('Delete button onClick function calls openStack with correct props', () => {
+    // Arrange
+    const props = generateProps('jupyter');
+
+    // Act
+    const output = shallowRender(props);
+    const onClick = output.find({ children: 'Delete' }).prop('onClick');
+
+    // Assert
+    expect(deleteStackMock).not.toHaveBeenCalled();
+    onClick();
+    expect(deleteStackMock).toHaveBeenCalledTimes(1);
+    expect(deleteStackMock).toHaveBeenCalledWith({ displayName: 'name1', id: '100', type: 'jupyter' });
+  });
+
   it('should provide defaults and disable the open button if no stack is provided', () => {
     // Arrange
-    const props = { stack: {} };
+    const props = {
+      stack: {},
+      typeName: 'typeName',
+    };
 
     // Act
     const output = shallowRender(props);

@@ -1,12 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import NewStackButton from './NewStackButton';
 
-describe('New Stack Button', () => {
-  function shallowRender(props) {
-    return shallow(<NewStackButton {...props} />);
-  }
+function shallowRender(props) {
+  const shallow = createShallow({ dive: true });
 
+  return shallow(<NewStackButton {...props} />);
+}
+
+describe('New Stack Button', () => {
   const generateProps = () => ({
     onClick: () => {},
     typeName: 'Stack',
