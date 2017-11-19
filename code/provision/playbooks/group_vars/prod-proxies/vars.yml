@@ -1,3 +1,4 @@
 ---
 ssl_certificate: "{{ vault_ssl_certificate }}"
 ssl_private_key: "{{ vault_ssl_private_key }}"
+wildcard_domain: "*.datalabs.nerc.ac.uk"

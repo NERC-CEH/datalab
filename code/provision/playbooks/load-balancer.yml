@@ -1,5 +1,5 @@
 ---
-- hosts: proxy
+- hosts: test-lb
   user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
@@ -7,4 +7,4 @@
   roles:
     - ssl-certificates
     - docker
-    - dynamic-proxy
+    - load-balancer
