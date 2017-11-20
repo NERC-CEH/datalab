@@ -4,12 +4,18 @@ import { withStyles } from 'material-ui/styles';
 import { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 
+const cardContent = {
+  height: '100%',
+};
+
 const bodyText = {
+  ...cardContent,
   fontSize: 'larger',
   fontWeight: 'lighter',
 };
 
 const styles = theme => ({
+  cardContent,
   bodyText,
   quoteBodyText: {
     ...bodyText,
@@ -23,7 +29,7 @@ const styles = theme => ({
 
 function DescribeElementCardBody({ classes, content, media, quote }) {
   const generateTextBody = textContent => (
-    <CardContent>
+    <CardContent className={classes.cardContent}>
       <Typography className={quote ? classes.quoteBodyText : classes.bodyText} type="body1">
         {textContent}
       </Typography>

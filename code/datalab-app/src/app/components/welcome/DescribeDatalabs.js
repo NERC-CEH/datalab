@@ -34,7 +34,7 @@ const datalabCommunity = [
 
 const DescribeDatalabs = () => (
   <div>
-    <DescribeElement title="How DataLabs can enhance your research" descriptions={datalabDescriptions} />
+    <DescribeElement title="How DataLabs can enhance your research" descriptions={datalabDescriptions} doubleHeight />
     <DescribeElement title="Success stories" descriptions={datalabStories} invert quote />
     <DescribeElement title="How you can join the DataLabs community" descriptions={datalabCommunity} media />
   </div>

@@ -13,7 +13,7 @@ const styles = theme => ({
   },
 });
 
-const DescribeElement = ({ classes, title, descriptions, invert, quote, media }) => (
+const DescribeElement = ({ classes, title, descriptions, invert, quote, media, doubleHeight }) => (
   <DescribeElementSegment invert={invert}>
     <Typography className={classes.title} type="display1">{title}</Typography>
     <Grid container>
@@ -27,6 +27,7 @@ const DescribeElement = ({ classes, title, descriptions, invert, quote, media })
           invert={invert}
           quote={quote}
           media={media}
+          doubleHeight={doubleHeight}
         />
       ))}
     </Grid>
@@ -45,6 +46,7 @@ DescribeElement.propTypes = {
   invert: PropTypes.bool,
   quote: PropTypes.bool,
   media: PropTypes.bool,
+  doubleHeight: PropTypes.bool,
 };
 
 export default withStyles(styles)(DescribeElement);
