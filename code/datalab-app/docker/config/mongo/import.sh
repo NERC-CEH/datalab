@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 
 echo "Job Import started: $(date)"

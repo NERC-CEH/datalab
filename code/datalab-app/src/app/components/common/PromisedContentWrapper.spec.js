@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Loader } from 'semantic-ui-react';
+import { CircularProgress } from 'material-ui/Progress';
 import PromisedContentWrapper from './PromisedContentWrapper';
 
 describe('PromisedContentWrapper', () => {
@@ -26,8 +26,7 @@ describe('PromisedContentWrapper', () => {
 
     // Assert
     expect(output.children().length).toBe(1);
-    expect(output.children().type()).toBe(Loader);
-    expect(output.children().prop('active')).toBe(true);
+    expect(output.children().type()).toBe(CircularProgress);
   });
 
   it('renders expected content if the promise is resolved', () => {
@@ -42,9 +41,7 @@ describe('PromisedContentWrapper', () => {
     const output = shallowRender(promise);
 
     // Assert
-    expect(output.children().length).toBe(2);
-    expect(output.childAt(0).type()).toBe(Loader);
-    expect(output.childAt(0).prop('active')).toBe(false);
-    expect(output.childAt(1).prop('children')).toBe('PromisedValue');
+    expect(output.children().length).toBe(1);
+    expect(output.childAt(0).prop('children')).toBe('PromisedValue');
   });
 });

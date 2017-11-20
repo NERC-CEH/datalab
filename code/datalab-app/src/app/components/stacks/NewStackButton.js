@@ -1,24 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Image } from 'semantic-ui-react';
-import plusIcon from '../../../assets/images/plus.svg';
+import Card from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
+import Tooltip from 'material-ui/Tooltip';
+import { withStyles } from 'material-ui/styles';
 
-const containerStyle = { width: '100%', height: '100%', background: 'grey', color: 'white', cursor: 'pointer' };
-const contentStyle = { width: '50%', margin: 'auto', marginTop: '50px', marginBottom: '50px' };
+const styles = theme => ({
+  card: {
+    height: '100%',
+    backgroundColor: 'transparent',
+  },
+  buttonContainer: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'left',
+  },
+  button: {
+    margin: 20,
+  },
+  icon: {
+    fontSize: 40,
+  },
+});
 
-const NewStackButton = ({ onClick, typeName }) =>
-  <Card>
-    <div style={containerStyle} onClick={onClick}>
-      <div style={contentStyle}>
-        <Image centered size='tiny' src={plusIcon} />
-        <h3>Create {typeName}</h3>
-      </div>
+const NewStackButton = ({ classes, onClick, typeName }) =>
+  <Card className={classes.card} elevation={0}>
+    <div className={classes.buttonContainer}>
+      <Tooltip title={`Create ${typeName}`}>
+        <Button className={classes.button} fab color="primary" aria-label="add" onClick={onClick}>
+          <Icon className={classes.icon} children="add" />
+        </Button>
+      </Tooltip>
     </div>
   </Card>;
 
 NewStackButton.propTypes = {
-  onClick: PropTypes.func,
+  classes: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
   typeName: PropTypes.string.isRequired,
 };
 
-export default NewStackButton;
+export default withStyles(styles)(NewStackButton);

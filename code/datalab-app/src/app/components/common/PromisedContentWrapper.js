@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'semantic-ui-react';
+import { CircularProgress } from 'material-ui/Progress';
 
 const PromisedContentWrapper = ({ children, promise }) => {
   const isFetching = promise.fetching;
   return (
     <div>
-      <Loader active={isFetching} inline='centered' />
-      {isFetching ? null : children}
+      {isFetching ? <CircularProgress /> : children}
     </div>
   );
 };

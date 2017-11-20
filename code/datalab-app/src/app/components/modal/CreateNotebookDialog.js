@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Modal } from 'semantic-ui-react';
+import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
 const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
-    <Modal size='large' dimmer='blurring' open={true}>
-      <Modal.Header>{title}</Modal.Header>
-      <Modal.Content>
-        <Grid divided>
-          <Grid.Row>
-            <Grid.Column width={10}>
-              <CreateNotebookForm onSubmit={onSubmit} cancel={onCancel} />
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <h2>Notebook Preview</h2>
-              <PreviewNotebookCard />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Modal.Content>
-    </Modal>
+    <Dialog open={true} maxWidth="md">
+      <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
+        <div>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogContent>
+            <CreateNotebookForm onSubmit={onSubmit} cancel={onCancel} />
+          </DialogContent>
+        </div>
+        <div style={{ width: 320 }}>
+          <DialogTitle>Notebook Preview</DialogTitle>
+          <div style={{ width: '90%', margin: '0 auto' }}>
+            <PreviewNotebookCard />
+          </div>
+        </div>
+      </div>
+    </Dialog>
 );
 
 CreateNotebookDialog.propTypes = {

@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button } from 'semantic-ui-react';
+import { TableCell, TableRow } from 'material-ui/Table';
+import Button from 'material-ui/Button';
 
 const DataStorageTableRow = ({ dataStore, openStorageAction }) => (
-  <Table.Row>
-    <Table.Cell>{dataStore.name}</Table.Cell>
-    <Table.Cell>{dataStore.capacityUsed}</Table.Cell>
-    <Table.Cell>{dataStore.capacityTotal}</Table.Cell>
-    <Table.Cell>{dataStore.storageType}</Table.Cell>
-    <Table.Cell>
-      <Button primary onClick={() => openStorageAction(dataStore.linkToStorage, dataStore.accessKey) }>Open</Button>
-    </Table.Cell>
-  </Table.Row>
+  <TableRow>
+    <TableCell>{dataStore.name}</TableCell>
+    <TableCell>{dataStore.capacityUsed}</TableCell>
+    <TableCell>{dataStore.capacityTotal}</TableCell>
+    <TableCell>{dataStore.storageType}</TableCell>
+    <TableCell>
+      <Button color="accent" raised onClick={() => openStorageAction(dataStore.linkToStorage, dataStore.accessKey)}>Open</Button>
+    </TableCell>
+  </TableRow>
 );
 
 DataStorageTableRow.propTypes = {

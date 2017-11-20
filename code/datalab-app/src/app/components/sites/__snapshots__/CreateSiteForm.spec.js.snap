@@ -1,65 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
-<Form
-  as="form"
->
-  <Field
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-    placeholder="Display Name"
-  />
-  <Field
-    component={[Function]}
-    label="Site Type"
-    name="type"
-    options={
-      Array [
+<form>
+  <div>
+    <Field
+      component={[Function]}
+      label="Display Name"
+      margin="normal"
+      name="displayName"
+      placeholder="Display Name"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Site Type"
+      margin="normal"
+      name="type"
+      options={
+        Array [
+          Object {
+            "text": "Rshiny",
+            "value": "rshiny",
+          },
+          Object {
+            "text": "Nbviewer",
+            "value": "nbviewer",
+          },
+        ]
+      }
+      placeholder="Site Type"
+      style={
         Object {
-          "text": "Rshiny",
-          "value": "rshiny",
-        },
-        Object {
-          "text": "Nbviewer",
-          "value": "nbviewer",
-        },
-      ]
+          "minWidth": 120,
+        }
+      }
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      endText=".datalabs.nerc.ac.uk"
+      label="URL Name"
+      margin="normal"
+      name="name"
+      placeholder="Site Name for URLs"
+      startText="http://datalab-"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Source Path"
+      margin="normal"
+      name="sourcePath"
+      placeholder="Source Directory for Site"
+      startText="/data/"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Description"
+      margin="normal"
+      name="description"
+      placeholder="Description"
+    />
+  </div>
+  <withStyles(Button)
+    color="primary"
+    raised={true}
+    style={
+      Object {
+        "margin": 8,
+      }
     }
-    placeholder="Site Type"
-  />
-  <Field
-    component={[Function]}
-    label="URL Name"
-    name="name"
-    placeholder="Notebook Name for URLs"
-  />
-  <Field
-    component={[Function]}
-    label="Source Path"
-    name="sourcePath"
-    placeholder="Source directory for site"
-    prefix="/data/"
-  />
-  <Field
-    component={[Function]}
-    label="Description"
-    name="description"
-    placeholder="Description"
-  />
-  <Button
-    as="button"
-    primary={true}
     type="submit"
   >
     Create
-  </Button>
-  <Button
-    as="button"
+  </withStyles(Button)>
+  <withStyles(Button)
     onClick={[Function]}
-    type="button"
+    raised={true}
+    style={
+      Object {
+        "margin": 8,
+      }
+    }
   >
     Cancel
-  </Button>
-</Form>
+  </withStyles(Button)>
+</form>
 `;

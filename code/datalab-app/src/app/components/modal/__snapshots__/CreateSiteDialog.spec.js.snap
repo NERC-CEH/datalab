@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Notebook dialog creates correct snapshot 1`] = `
+exports[`Site dialog creates correct snapshot 1`] = `
 <withStyles(Dialog)
   maxWidth="md"
   open={true}
@@ -33,7 +33,7 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
       }
     >
       <withStyles(DialogTitle)>
-        Notebook Preview
+        Site Preview
       </withStyles(DialogTitle)>
       <div
         style={
@@ -43,7 +43,7 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
           }
         }
       >
-        <Connect(PreviewNotebookCard) />
+        <Connect(PreviewSiteCard) />
       </div>
     </div>
   </div>

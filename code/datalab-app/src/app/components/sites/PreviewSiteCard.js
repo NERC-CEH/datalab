@@ -5,7 +5,7 @@ import StackCard from '../stacks/StackCard';
 class PreviewSiteCard extends Component {
   render() {
     return (
-      <StackCard stack={this.props.stack} />
+      <StackCard stack={this.props.stack} typeName="site" />
     );
   }
 }

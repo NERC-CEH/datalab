@@ -1,12 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from 'material-ui/test-utils';
 import Confirmation from './Confirmation';
 
-describe('Confirmation', () => {
-  function shallowRender(props) {
-    return shallow(<Confirmation {...props} />);
-  }
+function shallowRender(props) {
+  const shallow = createShallow({ dive: true });
 
+  return shallow(<Confirmation {...props} />);
+}
+
+describe('Confirmation', () => {
   const onSubmitMock = jest.fn();
   const onCancelMock = jest.fn();
 
