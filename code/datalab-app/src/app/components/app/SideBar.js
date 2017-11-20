@@ -10,13 +10,7 @@ import NavLink from './NavLink';
 
 export const drawerWidth = 240;
 
-function styles(theme) {
-  console.log(theme.mixins.toolbar);
-
-  return styless(theme);
-}
-
-const styless = theme => ({
+const styles = theme => ({
   header: {
     ...theme.mixins.toolbar,
     backgroundColor: theme.palette.secondary[900],
