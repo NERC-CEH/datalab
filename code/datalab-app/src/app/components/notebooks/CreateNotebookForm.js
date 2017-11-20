@@ -14,7 +14,7 @@ const CreateNotebookForm = (props) => {
         <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
       </div>
       <div>
-        <Field name="type" label="Notebook Type" component={renderSelectField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 120 }} margin="normal" />
+        <Field name="type" label="Notebook Type" component={renderSelectField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 140 }} margin="normal" />
       </div>
       <div>
         <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Notebook Name for URL" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
