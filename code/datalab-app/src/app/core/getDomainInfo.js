@@ -1,10 +1,11 @@
-function getApiBase(location) {
-  if (location.hostname === 'localhost') {
-    return 'http://localhost:8000';
+function extendSubdomain(extension, localhostPort, location) {
+  const domainInfo = getDomainInfo(location);
+
+  if (domainInfo === 'localhost') {
+    return `http://localhost:${localhostPort}`;
   }
 
-  const domainInfo = getDomainInfo(location);
-  return `${location.protocol}//${domainInfo.subdomain}-api.${domainInfo.domain}`;
+  return `${location.protocol}//${domainInfo.subdomain}-${extension}.${domainInfo.domain}`;
 }
 
 function getDomainInfo(location) {
@@ -21,5 +22,4 @@ function getDomainInfo(location) {
   return { subdomain, domain };
 }
 
-export { getApiBase, getDomainInfo };
-export default getApiBase(window.location);
+export { getDomainInfo, extendSubdomain };

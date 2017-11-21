@@ -1,6 +1,6 @@
 import moment from 'moment';
 import Cookies from 'universal-cookie';
-import { getDomainInfo } from '../api/apiBase';
+import { getDomainInfo } from '../core/getDomainInfo';
 
 const cookies = new Cookies('');
 const COOKIE_NAME = 'authorization';

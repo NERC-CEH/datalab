@@ -9,10 +9,6 @@ function shallowRender(props) {
 }
 
 describe('DescribeElementCardBanner', () => {
-  const links = [
-    { displayName: 'displayName', href: 'address' },
-  ];
-
   it('renders correct snapshot', () => {
     const props = {
       title: 'expectedTitle',

@@ -7,6 +7,7 @@ import Divider from 'material-ui/Divider';
 import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import SideBarSubheader from './SideBarSubheader';
 import NavLink from './NavLink';
+import { extendSubdomain } from '../../core/getDomainInfo';
 
 export const drawerWidth = 240;
 
@@ -55,7 +56,11 @@ const SideBar = ({ classes }) => (
       <NavLink to="/publishing" label="Sites" icon="web" />
       <div className={classes.spacer} />
       <Divider />
-      <NavLink label="Help" icon="help_outline" onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/')} />
+      <NavLink
+        label="Help"
+        icon="help_outline"
+        onClick={() => window.open(extendSubdomain('docs'))}
+      />
     </List>
   </Drawer>
 );
