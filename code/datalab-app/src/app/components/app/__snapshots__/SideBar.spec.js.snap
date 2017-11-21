@@ -45,7 +45,12 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     <withStyles(Link)
       icon="apps"
       label="Dask"
-      onClick={[Function]}
+      to="/dask"
+    />
+    <withStyles(Link)
+      icon="apps"
+      label="Spark"
+      to="/spark"
     />
     <withStyles(SideBarSubheader)>
       Publish

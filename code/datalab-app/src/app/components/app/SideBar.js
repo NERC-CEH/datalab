@@ -49,7 +49,8 @@ const SideBar = ({ classes }) => (
       <NavLink to="/storage" label="Storage" icon="storage" />
       <SideBarSubheader>Analysis</SideBarSubheader>
       <NavLink to="/notebooks" label="Notebooks" icon="book" />
-      <NavLink label="Dask" icon="apps" onClick={() => window.open('https://datalab-dask.datalabs.nerc.ac.uk/')} />
+      <NavLink to="/dask" label="Dask" icon="apps" />
+      <NavLink to="/spark" label="Spark" icon="apps" />
       <SideBarSubheader>Publish</SideBarSubheader>
       <NavLink to="/publishing" label="Sites" icon="web" />
       <div className={classes.spacer} />
