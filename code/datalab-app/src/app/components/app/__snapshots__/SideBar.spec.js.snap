@@ -18,7 +18,9 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       src="datalabs-hori.png"
     />
   </header>
-  <withStyles(List)>
+  <withStyles(List)
+    className="SideBar-drawerList-4"
+  >
     <withStyles(Link)
       icon="dashboard"
       label="Dashboard"
@@ -52,6 +54,9 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       icon="web"
       label="Sites"
       to="/publishing"
+    />
+    <div
+      className="SideBar-spacer-5"
     />
     <withStyles(Divider) />
     <withStyles(Link)

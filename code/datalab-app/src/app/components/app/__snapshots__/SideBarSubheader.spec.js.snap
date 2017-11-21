@@ -3,6 +3,7 @@
 exports[`SideBarSubheader renders correct snapshot 1`] = `
 <withStyles(ListSubheader)
   className="SideBarSubheader-subheader-1"
+  disableSticky={true}
 >
   expectedChild
 </withStyles(ListSubheader)>

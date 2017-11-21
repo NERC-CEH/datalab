@@ -28,6 +28,14 @@ const styles = theme => ({
     width: 140,
     marginLeft: 16,
   },
+  drawerList: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  spacer: {
+    flex: 1,
+  },
 });
 
 const SideBar = ({ classes }) => (
@@ -35,7 +43,7 @@ const SideBar = ({ classes }) => (
     <header className={classes.header}>
       <img className={classes.logo} src={datalabsLogo} alt="datalabs-logo" />
     </header>
-    <List>
+    <List className={classes.drawerList}>
       <NavLink to="/" label="Dashboard" icon="dashboard" />
       <SideBarSubheader>Data</SideBarSubheader>
       <NavLink to="/storage" label="Storage" icon="storage" />
@@ -44,6 +52,7 @@ const SideBar = ({ classes }) => (
       <NavLink label="Dask" icon="apps" onClick={() => window.open('https://datalab-dask.datalabs.nerc.ac.uk/')} />
       <SideBarSubheader>Publish</SideBarSubheader>
       <NavLink to="/publishing" label="Sites" icon="web" />
+      <div className={classes.spacer} />
       <Divider />
       <NavLink label="Help" icon="help_outline" onClick={() => window.open('https://datalab-docs.datalabs.nerc.ac.uk/')} />
     </List>
