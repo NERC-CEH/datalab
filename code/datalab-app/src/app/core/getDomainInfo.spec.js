@@ -48,6 +48,10 @@ describe('Get Domain Info', () => {
     const domainInfo = getDomainInfo(location);
 
     // Assert
-    expect(domainInfo).toEqual({ subdomain: 'datalab', domain: 'datalabs.nerc.ac.uk' });
+    expect(domainInfo).toEqual({
+      protocol: 'http:',
+      subdomain: 'datalab',
+      domain: 'datalabs.nerc.ac.uk',
+    });
   });
 });

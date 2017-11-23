@@ -5,7 +5,7 @@ function extendSubdomain(extension, localhostPort, location) {
     return `http://localhost:${localhostPort}`;
   }
 
-  return `${location.protocol}//${domainInfo.subdomain}-${extension}.${domainInfo.domain}`;
+  return `${domainInfo.protocol}//${domainInfo.subdomain}-${extension}.${domainInfo.domain}`;
 }
 
 function getDomainInfo(location) {
@@ -15,11 +15,12 @@ function getDomainInfo(location) {
     return 'localhost';
   }
 
+  const protocol = currentLocation.protocol;
   const hostname = currentLocation.hostname;
   const subdomain = hostname.split('.')[0];
   const domain = hostname.substring(subdomain.length + 1, hostname.length);
 
-  return { subdomain, domain };
+  return { protocol, subdomain, domain };
 }
 
 export { getDomainInfo, extendSubdomain };
