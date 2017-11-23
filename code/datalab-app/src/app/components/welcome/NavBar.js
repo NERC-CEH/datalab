@@ -11,7 +11,7 @@ import auth from '../../auth/auth';
 export const datalabLinks = {
   discourse: { displayName: 'Discourse', href: 'https://www.discourse.org/' },
   dockerHub: { displayName: 'Docker Hub', href: 'https://hub.docker.com/u/nerc/' },
-  github: { displayName: 'GitHub', href: 'https://github.com/orgs/NERC-CEH/teams/nerc-data-lab/repositories' },
+  github: { displayName: 'GitHub', href: 'https://github.com/NERC-CEH/datalab' },
   slack: { displayName: 'Slack', href: 'http://slack.com/' },
 };
 

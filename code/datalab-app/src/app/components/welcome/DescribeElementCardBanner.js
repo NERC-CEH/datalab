@@ -11,23 +11,25 @@ const cardTitle = {
 
 const styles = theme => ({
   cardTitle,
-  iconCardTitle: {
+  tallCardTitle: {
     ...cardTitle,
-    marginLeft: 35,
+    minHeight: theme.spacing.unit * 8,
   },
   icon: {
     color: theme.palette.error[900],
-    float: 'left',
     paddingTop: 3,
+    marginRight: 35,
   },
 });
 
-const DescribeElementCardBanner = ({ classes, icon, title }) => (
+const DescribeElementCardBanner = ({ classes, icon, title, doubleHeight }) => (
   <CardContent>
-    {icon ? <Icon className={classes.icon}>{icon}</Icon> : undefined}
-    <Typography className={icon ? classes.iconCardTitle : classes.cardTitle} type="headline">
-      {title}
-    </Typography>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      {icon ? <Icon className={classes.icon}>{icon}</Icon> : undefined}
+      <Typography className={doubleHeight ? classes.tallCardTitle : classes.cardTitle} type="headline">
+        {title}
+      </Typography>
+    </div>
   </CardContent>
 );
 
@@ -35,6 +37,7 @@ DescribeElementCardBanner.propTypes = {
   classes: PropTypes.object.isRequired,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
+  doubleHeight: PropTypes.bool,
 };
 
 export default withStyles(styles)(DescribeElementCardBanner);

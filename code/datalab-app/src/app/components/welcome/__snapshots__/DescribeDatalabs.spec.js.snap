@@ -37,6 +37,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
         },
       ]
     }
+    doubleHeight={true}
     title="How DataLabs can enhance your research"
   />
   <withStyles(DescribeElement)
@@ -81,7 +82,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
           "links": Array [
             Object {
               "displayName": "GitHub",
-              "href": "https://github.com/orgs/NERC-CEH/teams/nerc-data-lab/repositories",
+              "href": "https://github.com/NERC-CEH/datalab",
             },
             Object {
               "displayName": "Docker Hub",

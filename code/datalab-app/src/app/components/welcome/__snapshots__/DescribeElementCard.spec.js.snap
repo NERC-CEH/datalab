@@ -8,17 +8,21 @@ exports[`DescribeElementCard renders correct snapshot 1`] = `
   xs={12}
 >
   <Card
-    className="DescribeElementCard-card-1"
+    className="DescribeElementCard-shadedCard-2"
     raised={false}
     square={true}
   >
-    <withStyles(DescribeElementCardBanner)
-      icon="people"
-      title="expectedTitle"
-    />
-    <withStyles(DescribeElementCardBody)
-      content="expectedContent"
-    />
+    <div
+      className="DescribeElementCard-cardContent-3"
+    >
+      <withStyles(DescribeElementCardBanner)
+        icon="people"
+        title="expectedTitle"
+      />
+      <withStyles(DescribeElementCardBody)
+        content="expectedContent"
+      />
+    </div>
   </Card>
 </withStyles(GridWrapper)>
 `;
@@ -31,28 +35,33 @@ exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
   xs={12}
 >
   <Card
-    className="DescribeElementCard-invertCard-2"
+    className="DescribeElementCard-card-1"
     raised={false}
     square={true}
   >
-    <withStyles(DescribeElementCardBody)
-      content="moreContent"
-      media={true}
-      quote={true}
-    />
-    <withStyles(DescribeElementCardBanner)
-      title="expectedTitle"
-    />
-    <DescribeElementCardLinks
-      links={
-        Array [
-          Object {
-            "displayName": "displayName",
-            "href": "address",
-          },
-        ]
-      }
-    />
+    <div
+      className="DescribeElementCard-cardContent-3"
+    >
+      <withStyles(DescribeElementCardBody)
+        content="moreContent"
+        media={true}
+        quote={true}
+      />
+      <withStyles(DescribeElementCardBanner)
+        quote={true}
+        title="expectedTitle"
+      />
+      <DescribeElementCardLinks
+        links={
+          Array [
+            Object {
+              "displayName": "displayName",
+              "href": "address",
+            },
+          ]
+        }
+      />
+    </div>
   </Card>
 </withStyles(GridWrapper)>
 `;

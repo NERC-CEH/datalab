@@ -10,7 +10,7 @@ const styles = theme => ({
 });
 
 const SideBarSubheader = ({ classes, children }) => (
-  <ListSubheader className={classes.subheader}>{children}</ListSubheader>
+  <ListSubheader className={classes.subheader} disableSticky>{children}</ListSubheader>
 );
 
 export default withStyles(styles)(SideBarSubheader);

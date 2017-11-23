@@ -12,15 +12,20 @@ const cardStyle = {
 };
 
 const styles = theme => ({
-  card: {
+  card: cardStyle,
+  shadedCard: {
     ...cardStyle,
     backgroundColor: theme.palette.secondary[50],
   },
-  invertCard: cardStyle,
+  cardContent: {
+    ...cardStyle,
+    display: 'flex',
+    flexDirection: 'column',
+  },
 });
 
-function DescribeElementCard({ classes, icon, title, content, links, invert, quote, media }) {
-  const banner = (<DescribeElementCardBanner key="card-banner" icon={icon} title={title} />);
+function DescribeElementCard({ classes, icon, title, content, links, invert, quote, media, doubleHeight }) {
+  const banner = (<DescribeElementCardBanner key="card-banner" icon={icon} title={title} quote={quote} doubleHeight={doubleHeight} />);
   const body = (<DescribeElementCardBody key="card-body" content={content} media={media} quote={quote} />);
   const actions = links ? (<DescribeElementCardLinks key="card-links" links={links} />) : undefined;
 
@@ -34,8 +39,10 @@ function DescribeElementCard({ classes, icon, title, content, links, invert, quo
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card className={invert ? classes.invertCard : classes.card} square>
-        {cardContent}
+      <Card className={invert ? classes.card : classes.shadedCard} square>
+        <div className={classes.cardContent}>
+          {cardContent}
+        </div>
       </Card>
     </Grid>
   );
@@ -50,6 +57,7 @@ DescribeElementCard.propTypes = {
   invert: PropTypes.bool,
   quote: PropTypes.bool,
   media: PropTypes.bool,
+  doubleHeight: PropTypes.bool,
 };
 
 export default withStyles(styles)(DescribeElementCard);

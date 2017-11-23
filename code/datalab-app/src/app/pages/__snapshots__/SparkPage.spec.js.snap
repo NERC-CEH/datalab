@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SparkPage renders correct snapshot 1`] = `
+<withStyles(Segment)>
+  <withStyles(Typography)
+    gutterBottom={true}
+    type="display1"
+  >
+    Spark
+  </withStyles(Typography)>
+  <p>
+    Apache Spark is an open-source cluster-computing framework.
+  </p>
+</withStyles(Segment)>
+`;

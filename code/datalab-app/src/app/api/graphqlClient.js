@@ -1,8 +1,8 @@
 import { get } from 'lodash';
 import request from '../auth/secureRequest';
-import apiBase from './apiBase';
+import { extendSubdomain } from '../core/getDomainInfo';
 
-const apiURL = `${apiBase}/api`;
+const apiURL = extendSubdomain('api', 8000);
 
 export const gqlQuery = (query, variables) => {
   const options = { headers: { 'Content-Type': 'application/json' } };
