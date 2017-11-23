@@ -1,10 +1,11 @@
 import React from 'react';
-import { Header, Segment } from 'semantic-ui-react';
+import Typography from 'material-ui/Typography';
+import Segment from '../components/app/Segment';
 import NotebooksContainer from '../containers/notebooks/NotebooksContainer';
 
 const NotebooksPage = () => (
-  <Segment basic>
-    <Header as="h1">Current Notebooks</Header>
+  <Segment>
+    <Typography gutterBottom type="display1">Current Notebooks</Typography>
     <NotebooksContainer />
   </Segment>
 );

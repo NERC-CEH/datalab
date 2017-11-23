@@ -1,40 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataStorageTableRow renders correct snapshot 1`] = `
-<TableRow
-  as="tr"
-  cellAs="td"
->
-  <TableCell
-    as="td"
-  >
+<withStyles(TableRow)>
+  <withStyles(TableCell)>
     expectedName
-  </TableCell>
-  <TableCell
-    as="td"
-  >
+  </withStyles(TableCell)>
+  <withStyles(TableCell)>
     222
-  </TableCell>
-  <TableCell
-    as="td"
-  >
+  </withStyles(TableCell)>
+  <withStyles(TableCell)>
     111
-  </TableCell>
-  <TableCell
-    as="td"
-  >
+  </withStyles(TableCell)>
+  <withStyles(TableCell)>
     expectedType
-  </TableCell>
-  <TableCell
-    as="td"
-  >
-    <Button
-      as="button"
+  </withStyles(TableCell)>
+  <withStyles(TableCell)>
+    <withStyles(Button)
+      color="accent"
       onClick={[Function]}
-      primary={true}
+      raised={true}
     >
       Open
-    </Button>
-  </TableCell>
-</TableRow>
+    </withStyles(Button)>
+  </withStyles(TableCell)>
+</withStyles(TableRow)>
 `;

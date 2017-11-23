@@ -61,7 +61,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
     }
     invert={true}
     quote={true}
-    title="Sucess stories"
+    title="Success stories"
   />
   <withStyles(DescribeElement)
     descriptions={

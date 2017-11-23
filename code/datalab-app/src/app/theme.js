@@ -1,14 +1,18 @@
 import { createMuiTheme } from 'material-ui';
-import { blueGrey, teal } from 'material-ui/colors';
+import { blueGrey, teal, grey, red } from 'material-ui/colors';
 
+const defaultTheme = createMuiTheme();
 const primary = teal;
 const secondary = blueGrey;
-const defaultTheme = createMuiTheme();
+const backgroundColor = grey[100];
+const danger = red[800];
 
 const theme = createMuiTheme({
   palette: {
     primary,
     secondary,
+    backgroundColor,
+    danger,
   },
   overrides: {
     MuiAppBar: {
@@ -16,7 +20,15 @@ const theme = createMuiTheme({
         padding: 0,
       },
       colorPrimary: {
-        backgroundColor: defaultTheme.palette.grey[100],
+        backgroundColor,
+      },
+    },
+    MuiTableCell: {
+      root: {
+        fontSize: defaultTheme.typography.body1.fontSize,
+      },
+      head: {
+        fontSize: defaultTheme.typography.subheading.fontSize,
       },
     },
   },

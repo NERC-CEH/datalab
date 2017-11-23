@@ -13,7 +13,7 @@
   with_items: "{{ bane_templates }}"
 
 - name: Install AppArmor profiles with Bane
-  command: "bane {{ item }}"
+  command: "bane -profile-dir /etc/apparmor.d {{ item }}"
   args:
     chdir: /tmp/AppArmor
   with_items: "{{ bane_templates }}"
