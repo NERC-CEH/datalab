@@ -29,36 +29,36 @@ k8s_master_ip: 192.168.3.6
 private_servers:
   - name: k8s-master
     internal_ip: "{{ k8s_master_ip }}"
-    cpus: 4
-    memory: 16384
+    cpus: 8
+    memory: 32768
     disks:
       - name: k8s-master-disk1
         size: 100
   - name: k8s-worker-1
     internal_ip: 192.168.3.7
-    cpus: 4
-    memory: 16384
+    cpus: 8
+    memory: 32768
     disks:
       - name: k8s-worker-1-disk1
         size: 100
   - name: k8s-worker-2
     internal_ip: 192.168.3.8
-    cpus: 4
-    memory: 16384
+    cpus: 8
+    memory: 32768
     disks:
       - name: k8s-worker-2-disk1
         size: 100
   - name: k8s-worker-3
     internal_ip: 192.168.3.9
-    cpus: 4
-    memory: 16384
+    cpus: 8
+    memory: 65536
     disks:
       - name: k8s-worker-3-disk1
         size: 100
   - name: k8s-worker-4
     internal_ip: 192.168.3.10
-    cpus: 4
-    memory: 16384
+    cpus: 8
+    memory: 65536
     disks:
       - name: k8s-worker-4-disk1
         size: 100
@@ -76,10 +76,24 @@ private_servers:
     disks:
       - name: gluster-2-disk1
         size: 1000
-  - name: gluster-3
-    internal_ip: 192.168.3.22
+  - name: glusterfs-1
+    internal_ip: 192.168.3.40
     cpus: 2
     memory: 8192
     disks:
-      - name: gluster-3-disk1
+      - name: glusterfs-1-disk1
+        size: 1000
+  - name: glusterfs-2
+    internal_ip: 192.168.3.41
+    cpus: 2
+    memory: 8192
+    disks:
+      - name: glusterfs-2-disk1
+        size: 1000
+  - name: glusterfs-3
+    internal_ip: 192.168.3.42
+    cpus: 2
+    memory: 8192
+    disks:
+      - name: glusterfs-3-disk1
         size: 1000

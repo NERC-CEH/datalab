@@ -6,6 +6,13 @@
     proto: tcp
   with_items: "{{ gluster_tcp_ports }}"
 
+- name: Add ssh from kubernetes
+  ufw:
+    rule: allow
+    port: 22
+    src: "{{ item.internal_ip }}"
+  with_items: "{{ private_servers }}"
+
 - name: Allow glusterfs UDP traffic
   ufw:
     rule: allow
@@ -25,20 +32,23 @@
     update_cache: yes
   register: glusterfs_ppa_added
 
+- name: Install dependencies
+  apt:
+    name: software-properties-common
+    state: present
+
 - name: Ensure GlusterFS client is installed
   apt:
     name: glusterfs-client
-    state: installed
+    state: present
 
 - name: Ensure GlusterFS server is installed if required
   apt:
     name: glusterfs-server
-    state: installed
-  when: gluster_server
+    state: present
 
 - name: Ensure GlusterFS is started and enabled at boot
-  service:
-    name: glusterfs-server
+  systemd:
+    name: glusterd
     state: started
     enabled: yes
-  when: gluster_server

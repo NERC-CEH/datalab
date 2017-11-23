@@ -17,6 +17,8 @@ deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
 logwatch_email: "gareth.lloyd@stfc.ac.uk"
 slack_token: "{{ vault_slack_token }}"
 
+heketi_ssh_password: "{{ vault_heketi_ssh_password }}"
+
 deploy_public_keys:
   - gary_rsa.pub
   - josh_rsa.pub
