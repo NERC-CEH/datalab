@@ -1,0 +1,12 @@
+- name: Get the Host Keys
+  shell: "ssh-keyscan -H -T 10 -t ecdsa-sha2-nistp256 {{ item.name }}"
+  with_items: "{{ private_servers }}"
+  register: ssh_known_host_results
+  ignore_errors: yes
+
+- name: Add host keys to known_hosts file
+  known_hosts:
+    path: /etc/ssh/ssh_known_hosts
+    name: "{{ item.item.name }}"
+    key: "{{ item.stdout }}"
+  with_items: "{{ ssh_known_host_results.results }}"

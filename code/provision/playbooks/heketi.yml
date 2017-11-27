@@ -1,0 +1,8 @@
+---
+- hosts: k8s-master
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  roles:
+    - gluster-kubernetes

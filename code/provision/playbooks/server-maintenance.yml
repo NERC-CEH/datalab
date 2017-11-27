@@ -1,0 +1,10 @@
+---
+- hosts: k8s-cluster
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  roles:
+    # - setup-networking
+    # - known-hosts
+    # - ntp

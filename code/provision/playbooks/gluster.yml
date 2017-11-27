@@ -1,4 +1,4 @@
-- hosts: gluster
+- hosts: glusterfs
   user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
@@ -6,55 +6,69 @@
   roles:
     - glusterfs
 
+- hosts: localhost
   tasks:
-    - name: Create a partition on the mounted drive
-      parted:
-        device: /dev/sdb
-        number: 1
+    - name: Create temporary keys directory if it doesn't exist
+      file:
+        path: /tmp/keys
+        state: directory
+        mode: 0755
+
+    - name: Create new ssh key pair
+      shell: ssh-keygen -b 2048 -t rsa -f /tmp/keys/heketi_id_rsa -q -N ""
+
+- hosts: glusterfs
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
         state: present
 
-    - name: Create filesystem
-      filesystem:
-        fstype: xfs
-        dev: /dev/sdb1
-        opts: -i size=512 -n size=8192
-
-    - name: Create Mount directory
-      file:
-        path: /data
-        state: directory
-        mode: 0775
-
-    - name: Mount Drive
-      mount:
-        path: /data
-        src: /dev/sdb1
-        fstype: xfs
-        state: mounted
-
-    - name: Create Brick Directory
-      file:
-        path: "{{ brick_directory }}"
-        state: directory
-        mode: 0775
-
-    - name: Create Volume Directory
-      file:
-        path: "{{ brick_directory }}/{{ item }}"
-        state: directory
-        mode: 0775
-      with_items: "{{ volumes }}"
-
-    - name: Configure Gluster volume
-      gluster_volume:
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
         state: present
-        name: "{{ item }}"
-        brick: "{{ brick_directory }}/{{ item }}"
-        replicas: 3
-        cluster:
-          - 192.168.3.20
-          - 192.168.3.21
-          - 192.168.3.22
-        host: "{{ inventory_hostname }}"
-      run_once: true
-      with_items: "{{ volumes }}"
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: visudo -cf %s
+
+    - name: Create heketi user
+      user:
+        name: heketi
+        state: present
+        groups: wheel
+
+    - name: Remove authorized_keys files
+      file:
+        path: /home/heketi/.ssh/authorized_keys
+        state: absent
+
+    - name: Copy new public key to authorized keys
+      authorized_key:
+        user: heketi
+        state: present
+        key: "{{ lookup('file', '/tmp/keys/heketi_id_rsa.pub') }}"
+
+- hosts: k8s-cluster
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Copy private key to k8s servers
+      copy:
+        src: /tmp/keys/heketi_id_rsa
+        dest: "/home/{{ deploy_user }}/.ssh/heketi_id_rsa"
+        owner: "{{ deploy_user }}"
+        group: "{{ deploy_user }}"
+        mode: u+rw,g-rwx,o-rwx
+        force: yes
+
+- hosts: localhost
+  tasks:
+    - name: Delete key pair
+      local_action: file path=/tmp/keys state=absent

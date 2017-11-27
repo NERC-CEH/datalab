@@ -1,0 +1,2 @@
+heketi_admin_key: "{{ vault_heketi_admin_key }}"
+heketi_user_key: "{{ vault_heketi_user_key }}"

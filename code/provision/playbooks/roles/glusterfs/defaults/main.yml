@@ -1,20 +1,16 @@
 ---
-glusterfs_ppa_version: "3.11"
+glusterfs_ppa_version: "3.12"
 gluster_tcp_ports:
   # Ports from https://www.jamescoyle.net/how-to/457-glusterfs-firewall-rules
   - 111
   # Gluster Daemon
   - 24007
-  # Gluster Volume Ports (one per volume starting at 49152)
-  - 49152
-  - 49153
-  - 49154
-  - 49155
-  - 49156
+  - 24008
+  # Gluster Volume Ports (one per volume assigning recommended range)
+  - 49152:49251
   # Gluster NFS service (38465-38476)
   - 38465
   - 38466
   - 38467
 gluster_udp_ports:
   - 111
-gluster_server: True
