@@ -37,6 +37,11 @@
     name: software-properties-common
     state: present
 
+- name: Install Gluster dependency
+  apt:
+    name: thin-provisioning-tools
+    state: present
+
 - name: Ensure GlusterFS client is installed
   apt:
     name: glusterfs-client

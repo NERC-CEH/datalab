@@ -15,7 +15,7 @@
         mode: 0755
 
     - name: Create new ssh key pair
-      shell: ssh-keygen -b 2048 -t rsa -f /tmp/keys/heketi_id_rsa -q -N "{{ heketi_ssh_password }}"
+      shell: ssh-keygen -b 2048 -t rsa -f /tmp/keys/heketi_id_rsa -q -N ""
 
 - hosts: glusterfs
   user: "{{ deploy_user }}"

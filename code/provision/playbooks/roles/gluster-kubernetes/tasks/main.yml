@@ -1,0 +1,48 @@
+---
+- name: Copy template files to the server
+  copy:
+    src: files/gluster-kubernetes
+    dest: /home/deploy/
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Set gk-deploy as executable
+  file:
+    path: /home/deploy/gluster-kubernetes/gk-deploy
+    mode: u+x
+
+- name: Create Heketi config file
+  template:
+    src: heketi.json.template.j2
+    dest: /home/deploy/gluster-kubernetes/heketi.json.template
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Deploy Heketi
+  shell: ./gk-deploy -s /home/deploy/.ssh/heketi_id_rsa --ssh-user heketi -n default --admin-key "{{ heketi_admin_key }}" --user-key "{{ heketi_user_key }}" -v -l /home/deploy/heketi.log topology.json
+  args:
+    chdir: /home/deploy/gluster-kubernetes
+  environment:
+    KUBECONFIG: /home/deploy/admin.conf
+
+- name: Create Heketi Storageclass manifest
+  template:
+    src: gluster-storageclass.yml.j2
+    dest: /home/deploy/gluster-kubernetes/gluster-storageclass.yml
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Deploy storage class
+  shell: kubectl apply -f gluster-storageclass.yml
+  args:
+    chdir: /home/deploy/gluster-kubernetes
+  environment:
+    KUBECONFIG: /home/deploy/admin.conf
+
+- name: Delete stoarge class manifest
+  file:
+    path: /home/deploy/gluster-kubernetes/gluster-storageclass.yml
+    state: absent
