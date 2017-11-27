@@ -12,7 +12,7 @@ export const datalabLinks = {
   discourse: { displayName: 'Discourse', href: 'https://www.discourse.org/' },
   dockerHub: { displayName: 'Docker Hub', href: 'https://hub.docker.com/u/nerc/' },
   github: { displayName: 'GitHub', href: 'https://github.com/NERC-CEH/datalab' },
-  slack: { displayName: 'Slack', href: 'http://slack.com/' },
+  slack: { displayName: 'Slack', href: 'https://nerc-datalabs.slack.com/' },
 };
 
 const publicNavLinks = [

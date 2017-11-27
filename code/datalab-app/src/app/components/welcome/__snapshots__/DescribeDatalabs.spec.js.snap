@@ -72,7 +72,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
           "links": Array [
             Object {
               "displayName": "Slack",
-              "href": "http://slack.com/",
+              "href": "https://nerc-datalabs.slack.com/",
             },
           ],
           "title": "Join Us on Slack",
