@@ -36,7 +36,7 @@
     group: docker
 
 - name: Create secret
-  shell: kubectl create secret generic heketi-secret --type="kubernetes.io/glusterfs" --from-literal=key='{{ heketi_user_key }}' --namespace=default
+  shell: kubectl create secret generic heketi-secret --type="kubernetes.io/glusterfs" --from-literal=key='{{ heketi_admin_key }}' --namespace=default
   environment:
     KUBECONFIG: /home/deploy/admin.conf
 
