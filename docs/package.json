@@ -6,9 +6,11 @@
     "markdownlint-cli": "0.3.1"
   },
   "scripts": {
-    "build": "npm run version-docs && gitbook build",
+    "build": "yarn update-version && gitbook build",
     "lint": "bash ../build/markdown-linter.sh",
     "start": "gitbook serve",
-    "version-docs": "bash ../build/version.sh ../build/template/version.md.template ./version.md"
+    "dist": "yarn update-version && yarn docker-gitbook-build",
+    "update-version": "VERSION=`git describe --tags --always` && sed -i -- 's/_pre-release_/'$VERSION'/g' ./version.md",
+    "docker-gitbook-build": "docker run -v $(pwd):/usr/src/gitbook nerc/gitbook-builder gitbook build"
   }
 }
