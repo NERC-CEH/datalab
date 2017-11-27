@@ -48,7 +48,5 @@ spec:
             memory: 4Gi
       volumes:
         - name: glusterfsvol
-          glusterfs:
-            endpoints: glusterfs-cluster
-            path: {{ datalabVolume }}
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: {{ datalabVolume }}-claim

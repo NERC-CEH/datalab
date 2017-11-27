@@ -54,7 +54,5 @@ spec:
           periodSeconds: 10
       volumes:
       - name: glusterfsvol
-        glusterfs:
-          endpoints: glusterfs-cluster
-          path: {{ datalabVolume }}
-          readOnly: false
+        persistentVolumeClaim:
+          claimName: {{ datalabVolume }}-claim
