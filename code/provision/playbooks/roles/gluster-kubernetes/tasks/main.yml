@@ -35,14 +35,14 @@
     owner: "{{ deploy_user }}"
     group: docker
 
+- name: Create secret
+  shell: kubectl create secret generic heketi-secret --type="kubernetes.io/glusterfs" --from-literal=key='{{ heketi_user_key }}' --namespace=default
+  environment:
+    KUBECONFIG: /home/deploy/admin.conf
+
 - name: Deploy storage class
   shell: kubectl apply -f gluster-storageclass.yml
   args:
     chdir: /home/deploy/gluster-kubernetes
   environment:
     KUBECONFIG: /home/deploy/admin.conf
-
-- name: Delete stoarge class manifest
-  file:
-    path: /home/deploy/gluster-kubernetes/gluster-storageclass.yml
-    state: absent

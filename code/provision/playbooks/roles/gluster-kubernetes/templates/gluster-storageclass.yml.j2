@@ -7,4 +7,6 @@ provisioner: kubernetes.io/glusterfs
 parameters:
   resturl: "http://heketi:8080"
   restuser: "user"
-  restuserkey: "{{ heketi_user_key }}"
+  secretNamespace: "default"
+  secretName: "heketi-secret"
+allowVolumeExpansion: true
