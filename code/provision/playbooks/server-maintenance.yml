@@ -7,3 +7,4 @@
   roles:
     # - setup-networking
     # - known-hosts
+    # - ntp
