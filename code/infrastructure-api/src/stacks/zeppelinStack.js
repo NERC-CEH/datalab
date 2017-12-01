@@ -8,7 +8,7 @@ import ingressApi from '../kubernetes/ingressApi';
 import { generateManifest, ConfigTemplates } from '../kubernetes/manifestGenerator';
 import zeppelinShiroGenerator from '../credentials/zeppelinShiroGenerator';
 
-import { createDeployment, createService, createInrgessRuleWithConnect } from './stackBuilders';
+import { createDeployment, createService, createIngressRuleWithConnect } from './stackBuilders';
 
 function createZeppelinStack(params) {
   const { datalabInfo, name, type } = params;
@@ -19,7 +19,7 @@ function createZeppelinStack(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createZeppelinDeployment))
     .then(createService(name, type, deploymentGenerator.createZeppelinService))
-    .then(createInrgessRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
 }
 
 function deleteZeppelinStack(params) {

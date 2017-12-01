@@ -39,7 +39,7 @@ export const createIngressRule = (name, type, datalabInfo, generator) => (servic
     });
 };
 
-export const createInrgessRuleWithConnect = (name, type, datalabInfo, generator) => (service) => {
+export const createIngressRuleWithConnect = (name, type, datalabInfo, generator) => (service) => {
   const ingressName = `${type}-${name}`;
   const serviceName = service.metadata.name;
   const port = service.spec.ports[0].port;
