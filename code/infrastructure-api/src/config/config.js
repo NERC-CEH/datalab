@@ -61,6 +61,12 @@ const config = convict({
     default: 'https://testlab.test-datalabs.nerc.ac.uk',
     env: 'AUTH_SIGNIN_URL',
   },
+  storageClass: {
+    doc: 'The storage class to use for ne volumes',
+    format: 'String',
+    default: 'glusterfs-storage',
+    env: 'STORAGE_CLASS',
+  },
 });
 
 export default config;
