@@ -53,8 +53,8 @@ const createVolumeValidator = [
   check('volumeSize')
     .exists()
     .withMessage('Volume Size must be specified')
-    .isInt({ min: 1, max: 200 })
-    .withMessage('Volume Size must be an integer between 1 and 200'),
+    .isInt({ min: 5, max: 200 })
+    .withMessage('Volume Size must be an integer between 5 and 200'),
 ];
 
 export default { coreVolumeValidator, createVolumeValidator, createVolume, deleteVolume };
