@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ name }}
+  annotations:
+    volume.beta.kubernetes.io/storage-class: {{ storageClass }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ volumeSize }}G

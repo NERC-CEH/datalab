@@ -5,7 +5,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import ingressGenerator from '../kubernetes/ingressGenerator';
 import ingressApi from '../kubernetes/ingressApi';
-import { createDeployment, createService, createInrgessRuleWithConnect } from './stackBuilders';
+import { createDeployment, createService, createIngressRuleWithConnect } from './stackBuilders';
 
 function createRStudioStack(params) {
   const { datalabInfo, name, type } = params;
@@ -15,7 +15,7 @@ function createRStudioStack(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(name, type, deploymentGenerator.createRStudioService))
-    .then(createInrgessRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
 }
 
 function deleteRStudioStack(params) {

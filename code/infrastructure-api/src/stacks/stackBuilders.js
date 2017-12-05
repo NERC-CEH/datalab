@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import ingressApi from '../kubernetes/ingressApi';
+import volumeApi from '../kubernetes/volumeApi';
 
 export const createDeployment = (params, generator) => () => {
   const { name, type } = params;
@@ -39,7 +40,7 @@ export const createIngressRule = (name, type, datalabInfo, generator) => (servic
     });
 };
 
-export const createInrgessRuleWithConnect = (name, type, datalabInfo, generator) => (service) => {
+export const createIngressRuleWithConnect = (name, type, datalabInfo, generator) => (service) => {
   const ingressName = `${type}-${name}`;
   const serviceName = service.metadata.name;
   const port = service.spec.ports[0].port;
@@ -50,5 +51,16 @@ export const createInrgessRuleWithConnect = (name, type, datalabInfo, generator)
       logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with connect port from manifest:`);
       logger.debug(manifest.toString());
       return ingressApi.createOrUpdateIngress(ingressName, manifest);
+    });
+};
+
+export const createPersistentVolume = (name, volumeSize, generator) => () => {
+  const volumeName = `${name}-claim`;
+
+  return generator(volumeName, volumeSize)
+    .then((manifest) => {
+      logger.info(`Creating persistent volume ${chalk.blue(volumeName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return volumeApi.createOrUpdatePersistentVolumeClaim(volumeName, manifest);
     });
 };

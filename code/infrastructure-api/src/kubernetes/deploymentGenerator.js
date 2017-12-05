@@ -22,6 +22,11 @@ const NBVIEWER_VERSION = 'latest';
 const SPARK_MASTER_ADDRESS = 'spark://spark-master:7077';
 const SHARED_R_LIBS = '/data/packages/R/%p/%v';
 
+const MINIO_IMAGE = 'nerc/minio';
+const MINIO_VERSION = '1.0';
+const MINIO_CONNECT_IMAGE = 'nerc/connect';
+const MINIO_CONNECT_VERSION = '1.0.0';
+
 function createJupyterDeployment({ datalabInfo, deploymentName, notebookName }) {
   const context = {
     name: deploymentName,
@@ -98,6 +103,24 @@ function createNbViewerDeployment({ datalabInfo, deploymentName, sourcePath }) {
   return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);
 }
 
+function createMinioDeployment({ datalabInfo, name, deploymentName }) {
+  const context = {
+    name: deploymentName,
+    // This mapping of name to volume name is because the volume names
+    // don't have the stack name in so we need the raw volume name for the mount.
+    volumeName: name,
+    domain: datalabInfo.domain,
+    minio: {
+      imageName: MINIO_IMAGE,
+      version: MINIO_VERSION,
+      connectImageName: MINIO_CONNECT_IMAGE,
+      connectVersion: MINIO_CONNECT_VERSION,
+    },
+  };
+
+  return generateManifest(context, DeploymentTemplates.MINIO_DEPLOYMENT);
+}
+
 function createJupyterService(notebookName) {
   const context = { name: notebookName };
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
@@ -123,15 +146,22 @@ function createNbViewerService(name) {
   return generateManifest(context, ServiceTemplates.NBVIEWER_SERVICE);
 }
 
+function createMinioService(name) {
+  const context = { name };
+  return generateManifest(context, ServiceTemplates.MINIO_SERVICE);
+}
+
 export default {
   createJupyterDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
   createRShinyDeployment,
   createNbViewerDeployment,
+  createMinioDeployment,
   createJupyterService,
   createZeppelinService,
   createRStudioService,
   createRShinyService,
   createNbViewerService,
+  createMinioService,
 };

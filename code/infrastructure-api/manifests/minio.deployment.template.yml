@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+      name: {{ name }}
+  name: {{ name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+    spec:
+      containers:
+        - name: minio
+          image: {{ &minio.imageName }}:{{ minio.version }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+          env:
+          - name: MINIO_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ name }}
+                key: accessKey
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ name }}
+                key: secretKey
+          args: ["server", "/mnt/glusterfs"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+        - name: {{ name }}-connect
+          image: {{ &minio.connectImageName }}:{{ minio.connectVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+          - name: ORIGIN
+            value: {{ domain }}
+          - name: ACTIONS
+            value: "['set']"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: glusterfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeName }}-claim

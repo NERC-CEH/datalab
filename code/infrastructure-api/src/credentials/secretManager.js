@@ -7,6 +7,13 @@ function createNewJupyterCredentials() {
   };
 }
 
+function createNewMinioCredentials() {
+  return {
+    accessKey: tokenGenerator.generateUUID(),
+    secretKey: tokenGenerator.generateUUID(),
+  };
+}
+
 function createNewUserCredentials() {
   return {
     username: 'datalab',
@@ -22,4 +29,20 @@ function deleteSecret(datalab, id) {
   return vault.deleteSecret(`${datalab}/stacks/${id}`);
 }
 
-export default { createNewJupyterCredentials, createNewUserCredentials, storeCredentialsInVault, deleteSecret };
+function storeMinioCredentialsInVault(datalab, id, strategy) {
+  return vault.ensureSecret(`${datalab}/storage/${id}`, strategy);
+}
+
+function deleteMinioCredentials(datalab, id) {
+  return vault.deleteSecret(`${datalab}/storage/${id}`);
+}
+
+export default {
+  createNewJupyterCredentials,
+  createNewMinioCredentials,
+  createNewUserCredentials,
+  storeCredentialsInVault,
+  deleteSecret,
+  storeMinioCredentialsInVault,
+  deleteMinioCredentials,
+};

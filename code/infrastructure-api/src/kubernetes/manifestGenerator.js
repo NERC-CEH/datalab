@@ -7,6 +7,7 @@ const ServiceTemplates = Object.freeze({
   RSTUDIO_SERVICE: 'rstudio.service.template.yml',
   RSHINY_SERVICE: 'rshiny.service.template.yml',
   NBVIEWER_SERVICE: 'nbviewer.service.template.yml',
+  MINIO_SERVICE: 'minio.service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
@@ -15,10 +16,15 @@ const DeploymentTemplates = Object.freeze({
   RSTUDIO_DEPLOYMENT: 'rstudio.deployment.template.yml',
   RSHINY_DEPLOYMENT: 'rshiny.deployment.template.yml',
   NBVIEWER_DEPLOYMENT: 'nbviewer.deployment.template.yml',
+  MINIO_DEPLOYMENT: 'minio.deployment.template.yml',
 });
 
 const IngressTemplates = Object.freeze({
   DEFAULT_INGRESS: 'default.ingress.template.yml',
+});
+
+const VolumeTemplates = Object.freeze({
+  DEFAULT_VOLUME: 'default.pvc.template.yml',
 });
 
 const ConfigTemplates = Object.freeze({
@@ -32,4 +38,4 @@ function generateManifest(context, template) {
     .then(templateContent => render(templateContent, context));
 }
 
-export { ServiceTemplates, DeploymentTemplates, IngressTemplates, ConfigTemplates, generateManifest };
+export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, generateManifest };
