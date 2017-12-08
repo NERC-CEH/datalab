@@ -50,3 +50,25 @@ export const DataStoreType = new GraphQLObjectType({
     },
   },
 });
+
+export const DataStorageCreationType = new GraphQLInputObjectType({
+  name: 'DataStorageCreationRequest',
+  description: 'Type to describe the mutation for creating a new data store',
+  fields: {
+    name: {
+      type: GraphQLString,
+    },
+    type: {
+      type: StorageType,
+    },
+    capacityTotal: {
+      type: GraphQLInt,
+    },
+    linkToStorage: {
+      type: GraphQLString,
+    },
+    internalEndpoint: {
+      type: GraphQLString,
+    },
+  },
+});
