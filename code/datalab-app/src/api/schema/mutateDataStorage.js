@@ -1,4 +1,4 @@
-import { DataStoreType, DataStorageCreationType } from '../types/dataStoreTypes';
+import { DataStoreType, DataStorageCreationType, DataStorageDeletionType } from '../types/dataStoreTypes';
 import config from '../config';
 import dataStoreApi from '../infrastructure/dataStoreApi';
 
@@ -11,4 +11,13 @@ export const createDataStore = {
     dataStore: { type: DataStorageCreationType },
   },
   resolve: (obj, { dataStore }, { user }) => dataStoreApi.createDataStore(user, DATALAB_NAME, dataStore),
+};
+
+export const deleteDataStore = {
+  type: DataStoreType,
+  description: 'Delete a data store',
+  args: {
+    dataStore: { type: DataStorageDeletionType },
+  },
+  resolve: (obj, { dataStore }, { user }) => dataStoreApi.deleteDataStore(user, DATALAB_NAME, dataStore),
 };

@@ -27,4 +27,20 @@ describe('dataStorageRepository', () => {
       expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
       expect(storage).toMatchSnapshot();
     }));
+
+  it('createOrUpdate should query for data store with same name', () => {
+    const dataStore = { name: 'newVolume', type: 'nfs' };
+    dataStorageRepository.createOrUpdate(undefined, dataStore).then((createdDataStore) => {
+      expect(mockDatabase().query()).toEqual({ name: createdDataStore.name });
+      expect(mockDatabase().entity()).toEqual(createdDataStore);
+      expect(mockDatabase().params()).toEqual({ upsert: true, setDefaultsOnInsert: true });
+    });
+  });
+
+  it('deleteByName should query for data store with same name', () => {
+    const dataStore = { name: 'oldVolume' };
+    dataStorageRepository.deleteByName(undefined, dataStore).then(() => {
+      expect(mockDatabase().query()).toEqual(dataStore);
+    });
+  });
 });

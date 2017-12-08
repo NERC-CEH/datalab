@@ -19,4 +19,8 @@ function createOrUpdate(user, dataStore) {
   return DataStorage().findOneAndUpdate(query, dataStore, { upsert: true, setDefaultsOnInsert: true });
 }
 
-export default { getAll, getById, createOrUpdate };
+function deleteByName(user, { name }) {
+  return DataStorage().remove({ name }).exec();
+}
+
+export default { getAll, getById, createOrUpdate, deleteByName };

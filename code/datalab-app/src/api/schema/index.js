@@ -4,7 +4,7 @@ import { dataStorage, dataStore } from './dataStorage';
 import { stack, stacks, stacksByCategory, checkStackName } from './stacks';
 import { datalab, datalabs } from './datalabs';
 import { createStack, deleteStack } from './mutateStack';
-import { createDataStore } from './mutateDataStorage';
+import { createDataStore, deleteDataStore } from './mutateDataStorage';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -29,6 +29,7 @@ const RootMutationType = new GraphQLObjectType({
     createStack,
     deleteStack,
     createDataStore,
+    deleteDataStore,
   },
 });
 

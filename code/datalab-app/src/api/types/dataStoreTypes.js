@@ -72,3 +72,13 @@ export const DataStorageCreationType = new GraphQLInputObjectType({
     },
   },
 });
+
+export const DataStorageDeletionType = new GraphQLInputObjectType({
+  name: 'DataStorageDeletionRequest',
+  description: 'Type to describe the mutation for creating a new data store',
+  fields: {
+    name: {
+      type: GraphQLString,
+    },
+  },
+});
