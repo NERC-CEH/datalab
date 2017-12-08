@@ -1,57 +1,10 @@
 import {
   GraphQLID,
-  GraphQLEnumType,
-  GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
 } from 'graphql';
+import { DataStoreType } from '../types/dataStoreTypes';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
-import minioTokenService from '../dataaccess/minioTokenService';
-
-const StorageType = new GraphQLEnumType({
-  name: 'StorageType',
-  description: 'Data store classes within DataLabs',
-  values: {
-    nfs: {
-      description: 'Network File System (NFS) share.',
-      value: 1,
-    },
-  },
-});
-
-const DataStoreType = new GraphQLObjectType({
-  name: 'DataStore',
-  description: 'DataLabs data store type.',
-  fields: {
-    id: {
-      type: GraphQLID,
-    },
-    name: {
-      type: GraphQLString,
-    },
-    storageType: {
-      type: StorageType,
-    },
-    capacityTotal: {
-      type: GraphQLInt,
-    },
-    capacityUsed: {
-      type: GraphQLInt,
-    },
-    linkToStorage: {
-      type: GraphQLString,
-    },
-    internalEndpoint: {
-      type: GraphQLString,
-    },
-    accessKey: {
-      type: GraphQLString,
-      resolve: (obj, args, { user }) => minioTokenService.requestMinioToken(obj, user),
-    },
-  },
-});
 
 export const dataStorage = {
   description: 'List of currently provisioned DataLabs data storage.',
