@@ -19,7 +19,7 @@ function createOrUpdate(user, dataStore) {
   return DataStorage().findOneAndUpdate(query, dataStore, { upsert: true, setDefaultsOnInsert: true });
 }
 
-function deleteByName(user, { name }) {
+function deleteByName(user, name) {
   return DataStorage().remove({ name }).exec();
 }
 
