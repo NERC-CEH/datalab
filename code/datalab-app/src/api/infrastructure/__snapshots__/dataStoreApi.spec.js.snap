@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Volume API create volume should handle creation api errors 1`] = `
+Object {
+  "name": "volumeName",
+  "type": 1,
+}
+`;
+
+exports[`Volume API create volume should handle deletion api errors 1`] = `
+Object {
+  "name": "volumeName",
+}
+`;
+
+exports[`Volume API create volume should handle deletion api errors 2`] = `[Error: Unable to delete Data Store Error: Request failed with status code 404]`;
+
+exports[`Volume API create volume should send a deletion request and remove data store record 1`] = `[Error: Unable to create Data Store Error: Request failed with status code 400]`;
