@@ -1,2 +1,8 @@
 heketi_admin_key: "{{ vault_heketi_admin_key }}"
 heketi_user_key: "{{ vault_heketi_user_key }}"
+
+test_ssl_certificate: "{{ vault_test_ssl_certificate }}"
+test_ssl_private_key: "{{ vault_test_ssl_private_key }}"
+
+ssl_certificate: "{{ vault_ssl_certificate }}"
+ssl_private_key: "{{ vault_ssl_private_key }}"
