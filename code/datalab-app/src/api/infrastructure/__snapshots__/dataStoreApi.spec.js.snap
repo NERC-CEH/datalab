@@ -1,18 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Volume API create volume should handle creation api errors 1`] = `
+exports[`Data Storage API configuration should give correct API payload for creation 1`] = `
 Object {
-  "name": "volumeName",
-  "type": 1,
+  "datalabInfo": Object {
+    "domain": "test-datalabs.nerc.ac.uk",
+    "name": "testlab",
+  },
+  "name": "dataStoreName",
+  "volumeSize": 12,
 }
 `;
 
-exports[`Volume API create volume should handle deletion api errors 1`] = `
+exports[`Data Storage API configuration should give correct API payload for deletion 1`] = `
 Object {
-  "name": "volumeName",
+  "datalabInfo": Object {
+    "domain": "test-datalabs.nerc.ac.uk",
+    "name": "testlab",
+  },
+  "name": "dataStoreName",
 }
 `;
 
-exports[`Volume API create volume should handle deletion api errors 2`] = `[Error: Unable to delete Data Store Error: Request failed with status code 404]`;
-
-exports[`Volume API create volume should send a deletion request and remove data store record 1`] = `[Error: Unable to create Data Store Error: Request failed with status code 400]`;
+exports[`Data Storage API configuration should give correct API request for creation 1`] = `
+Object {
+  "capacityTotal": 12,
+  "internalEndpoint": "http://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
+  "linkToStorage": "http://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
+  "name": "dataStoreName",
+}
+`;
