@@ -3,4 +3,4 @@
   shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ test_ssl_certificate }}" --from-literal=tls.key="{{ test_ssl_private_key }}" --type=kubernetes.io/tls -n test
 
 - name: Deploy Prod TLS Secrets
-  shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ test_ssl_certificate }}" --from-literal=tls.key="{{ test_ssl_private_key }}" --type=kubernetes.io/tls -n default
+  shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ ssl_certificate }}" --from-literal=tls.key="{{ ssl_private_key }}" --type=kubernetes.io/tls -n default
