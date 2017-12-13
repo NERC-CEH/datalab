@@ -5,6 +5,4 @@
   become_method: sudo
 
   roles:
-    - ssl-certificates
-    - docker
     - load-balancer

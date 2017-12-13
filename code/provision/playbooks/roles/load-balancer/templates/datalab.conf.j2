@@ -1,37 +1,37 @@
-upstream ingress {
-    server 192.168.3.6:32309;
-    server 192.168.3.7:32309;
-    server 192.168.3.8:32309;
-    server 192.168.3.9:32309;
-    server 192.168.3.10:32309;
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
 }
 
-server {
-      listen       80;
-      server_name  "";
+stream {
+  upstream ingress_controller {
+      server 192.168.3.6:{{ ingress_service_https_port }};
+      server 192.168.3.7:{{ ingress_service_https_port }};
+      server 192.168.3.8:{{ ingress_service_https_port }};
+      server 192.168.3.9:{{ ingress_service_https_port }};
+      server 192.168.3.10:{{ ingress_service_https_port }};
+  }
 
-      location / {
-        return 301 https://$http_host$request_uri;
-      }
-}
+  upstream ingress_controller_insecure {
+      server 192.168.3.6:{{ ingress_service_http_port }};
+      server 192.168.3.7:{{ ingress_service_http_port }};
+      server 192.168.3.8:{{ ingress_service_http_port }};
+      server 192.168.3.9:{{ ingress_service_http_port }};
+      server 192.168.3.10:{{ ingress_service_http_port }};
+  }
 
-server {
-    listen 443 ssl;
-    server_name {{ wildcard_domain }};
+  server {
+      listen 80;
+      proxy_pass ingress_controller;
+  }
 
-    ssl_certificate /etc/ssl/certs/datalabs.pem;
-    ssl_certificate_key /etc/ssl/private/datalabskey.pem;
-
-    add_header X-Request-ID $request_id;
-
-    location / {
-        proxy_pass          http://ingress;
-        proxy_set_header    Host $host;
-        proxy_http_version  1.1;
-        proxy_set_header    Upgrade $http_upgrade;
-        proxy_set_header    Connection "upgrade";
-        proxy_set_header    X-Forwarded-Proto $scheme;
-        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header    X-Request-ID $request_id;
-    }
+  server {
+      listen 443;
+      proxy_pass ingress_controller;
+  }
 }
