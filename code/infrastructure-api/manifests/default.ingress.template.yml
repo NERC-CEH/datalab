@@ -7,6 +7,10 @@ metadata:
     ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
     ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
 spec:
+  tls:
+  - hosts:
+    - {{ service.host }}
+    secretName: tls-secret
   rules:
   - host: {{ service.host }}
     http:

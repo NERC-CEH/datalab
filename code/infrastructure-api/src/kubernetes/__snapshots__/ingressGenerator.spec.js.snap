@@ -10,6 +10,10 @@ metadata:
     ingress.kubernetes.io/auth-url: http://datalab-auth-service.test.svc.cluster.local/auth
     ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
 spec:
+  tls:
+  - hosts:
+    - testlab-name.test-datalabs.nerc.ac.uk
+    secretName: tls-secret
   rules:
   - host: testlab-name.test-datalabs.nerc.ac.uk
     http:
@@ -31,6 +35,10 @@ metadata:
     ingress.kubernetes.io/auth-url: http://datalab-auth-service.test.svc.cluster.local/auth
     ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
 spec:
+  tls:
+  - hosts:
+    - testlab-name.test-datalabs.nerc.ac.uk
+    secretName: tls-secret
   rules:
   - host: testlab-name.test-datalabs.nerc.ac.uk
     http:
