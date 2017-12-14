@@ -1,5 +1,5 @@
 bastion         ansible_host=192.171.139.117
-external-proxy  ansible_host=192.168.3.3
+load-balancer   ansible_host=192.168.3.3
 k8s-master      ansible_host=192.168.3.6
 k8s-worker-1    ansible_host=192.168.3.7
 k8s-worker-2    ansible_host=192.168.3.8
@@ -16,8 +16,8 @@ test-lb         ansible_host=192.168.3.30
 [bastions]
 bastion
 
-[prod-proxies]
-external-proxy
+[load-balancers]
+load-balancer
 
 [test-load-balancers]
 test-lb
@@ -46,7 +46,7 @@ glusterfs-2
 glusterfs-3
 
 [proxied:children]
-prod-proxies
+load-balancers
 test-load-balancers
 k8s-cluster
 gluster
