@@ -17,7 +17,7 @@ const baseConfig = {
 
 export const createDataStoreRequest = (dataStore, datalabInfo) => ({
   ...dataStore,
-  linkToStorage: `http://${dataStore.name}-minio.${datalabInfo.domain}/minio`,
+  linkToStorage: `https://${dataStore.name}-minio.${datalabInfo.domain}/minio`,
   internalEndpoint: `http://${dataStore.name}-minio.${datalabInfo.domain}/minio`,
 });
 

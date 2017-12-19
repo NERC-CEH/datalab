@@ -25,7 +25,7 @@ exports[`Data Storage API configuration should give correct API request for crea
 Object {
   "capacityTotal": 12,
   "internalEndpoint": "http://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
-  "linkToStorage": "http://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
+  "linkToStorage": "https://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
   "name": "dataStoreName",
 }
 `;
