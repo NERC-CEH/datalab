@@ -1,62 +1,35 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import datalabRepository from '../dataaccess/datalabRepository';
-import stackRepository from '../dataaccess/stackRepository';
-import config from '../config';
-import stackApi from './stackApi';
+import {
+  createStackRequest,
+  createStackPayload,
+  deleteStackPayload,
+} from './stackApi';
 
-jest.mock('../dataaccess/datalabRepository');
-jest.mock('../dataaccess/stackRepository');
+jest.mock('../dataaccess/dataStorageRepository');
 
-const mockGetDatalabByName = jest.fn();
-datalabRepository.getByName = mockGetDatalabByName;
-
-const mockCreateStack = jest.fn();
-stackRepository.createOrUpdate = mockCreateStack;
-
-const STACK_CREATION_URL = `${config.get('infrastructureApi')}/stacks`;
-
-const httpMock = new MockAdapter(axios);
 const datalabInfo = { name: 'testlab', domain: 'test-datalabs.nerc.ac.uk' };
-const stackName = 'notebookName';
-const stackType = 'jupyter';
 
-describe('Stack API', () => {
-  beforeEach(() => {
-    httpMock.reset();
+describe('Stack API configuration', () => {
+  it('should give correct API request for creation', () => {
+    const stack = { name: 'notebookName', type: 'jupyter' };
+
+    expect(createStackRequest(stack, datalabInfo)).toMatchSnapshot();
   });
 
-  afterAll(() => {
-    httpMock.restore();
+  it('should give correct API payload for creation', () => {
+    const datalabRequest = {
+      name: 'notebookName',
+      type: 'jupyter',
+      url: 'https://testlab-notebookName.test-datalabs.nerc.ac.uk',
+      internalEndpoint: 'http://jupyter-notebookName',
+      sourcePath: 'expectedSourcePath',
+    };
+
+    expect(createStackPayload(datalabRequest, datalabInfo)).toMatchSnapshot();
   });
 
-  describe('create stack', () => {
-    it('should store the stack and send a create request', () => {
-      mockGetDatalabByName.mockReturnValue(Promise.resolve(datalabInfo));
-      mockCreateStack.mockReturnValue(Promise.resolve({}));
+  it('should give correct API payload for deletion', () => {
+    const stack = { name: 'dataStoreName', type: 'jupyter', extra: 'field' };
 
-      httpMock.onPost(STACK_CREATION_URL)
-        .reply(201);
-
-      const stackRequest = { name: stackName, type: stackType };
-      stackApi.createStack(undefined, datalabInfo.name, stackRequest)
-        .then((notebook) => {
-          expect(notebook).toMatchSnapshot();
-        });
-    });
-
-    it('should handle api errors', () => {
-      mockGetDatalabByName.mockReturnValue(Promise.resolve(datalabInfo));
-      mockCreateStack.mockReturnValue(Promise.resolve({}));
-
-      httpMock.onPost(STACK_CREATION_URL)
-        .reply(400);
-
-      const stackRequest = { name: stackName, type: stackType };
-      stackApi.createStack(undefined, datalabInfo.name, stackRequest)
-        .catch((error) => {
-          expect(error).toMatchSnapshot();
-        });
-    });
+    expect(deleteStackPayload(stack, datalabInfo)).toMatchSnapshot();
   });
 });

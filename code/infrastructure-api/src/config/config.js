@@ -25,23 +25,11 @@ const config = convict({
     default: 'undefinedrole',
     env: 'VAULT_APP_ROLE',
   },
-  kubernetesMasterUrl: {
-    doc: 'The endpoint for Kubernetes Master',
-    format: 'url',
-    default: 'http://192.168.3.6',
-    env: 'KUBERNETES_MASTER_URL',
-  },
   kubernetesApi: {
     doc: 'The endpoint for Kubernetes',
     format: 'url',
     default: 'http://localhost:8001',
     env: 'KUBERNETES_API',
-  },
-  kongApi: {
-    doc: 'The endpoint for Kong',
-    format: 'url',
-    default: 'http://localhost:8002',
-    env: 'KONG_API',
   },
   podNamespace: {
     doc: 'The namespace for the pod',

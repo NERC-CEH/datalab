@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Storage API configuration should give correct API payload for creation 1`] = `
+Object {
+  "datalabInfo": Object {
+    "domain": "test-datalabs.nerc.ac.uk",
+    "name": "testlab",
+  },
+  "name": "dataStoreName",
+  "volumeSize": 12,
+}
+`;
+
+exports[`Data Storage API configuration should give correct API payload for deletion 1`] = `
+Object {
+  "datalabInfo": Object {
+    "domain": "test-datalabs.nerc.ac.uk",
+    "name": "testlab",
+  },
+  "name": "dataStoreName",
+}
+`;
+
+exports[`Data Storage API configuration should give correct API request for creation 1`] = `
+Object {
+  "capacityTotal": 12,
+  "internalEndpoint": "http://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
+  "linkToStorage": "https://dataStoreName-minio.test-datalabs.nerc.ac.uk/minio",
+  "name": "dataStoreName",
+}
+`;

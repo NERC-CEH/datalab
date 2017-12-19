@@ -14,4 +14,13 @@ function getById(user, id) {
   return DataStorage().findOne({ _id: id }).exec();
 }
 
-export default { getAll, getById };
+function createOrUpdate(user, dataStore) {
+  const query = { name: dataStore.name };
+  return DataStorage().findOneAndUpdate(query, dataStore, { upsert: true, setDefaultsOnInsert: true });
+}
+
+function deleteByName(user, name) {
+  return DataStorage().remove({ name }).exec();
+}
+
+export default { getAll, getById, createOrUpdate, deleteByName };
