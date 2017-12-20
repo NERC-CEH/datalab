@@ -23,8 +23,7 @@ spec:
               "--localfiles=/notebooks",
               "--debug",
               "--logging=debug",
-              "--no-cache",
-              "--no-frontpage-input"]
+              "--no-cache"]
         volumeMounts:
         - name: glusterfsvol
           mountPath: /notebooks
