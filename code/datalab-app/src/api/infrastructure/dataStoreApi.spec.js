@@ -1,7 +1,7 @@
 import {
   createDataStoreRequest,
   createDataStorePayload,
-  deleteDateStorePayload,
+  deleteDataStorePayload,
 } from './dataStoreApi';
 
 jest.mock('../dataaccess/dataStorageRepository');
@@ -29,6 +29,6 @@ describe('Data Storage API configuration', () => {
   it('should give correct API payload for deletion', () => {
     const dataStore = { name: 'dataStoreName', capacityTotal: 12 };
 
-    expect(deleteDateStorePayload(dataStore, datalabInfo)).toMatchSnapshot();
+    expect(deleteDataStorePayload(dataStore, datalabInfo)).toMatchSnapshot();
   });
 });

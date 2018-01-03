@@ -27,7 +27,7 @@ export const createDataStorePayload = (datalabRequest, datalabInfo) => ({
   volumeSize: datalabRequest.capacityTotal,
 });
 
-export const deleteDateStorePayload = (dataStore, datalabInfo) => ({
+export const deleteDataStorePayload = (dataStore, datalabInfo) => ({
   datalabInfo,
   name: dataStore.name,
 });
@@ -40,7 +40,7 @@ const createDataStore = generateCreateElement({
 
 const deleteDataStore = generateDeleteElement({
   ...baseConfig,
-  generateApiPayload: deleteDateStorePayload,
+  generateApiPayload: deleteDataStorePayload,
 });
 
 export default { createDataStore, deleteDataStore };

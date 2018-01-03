@@ -6,12 +6,12 @@ import volumeManager from '../stacks/volumeManager';
 const TYPE = 'volume';
 
 function createVolume(request, response) {
-  const errorMessage = 'Invalid stack creation request';
+  const errorMessage = 'Invalid volume creation request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, createVolumeExec);
 }
 
 function deleteVolume(request, response) {
-  const errorMessage = 'Invalid stack deletion request';
+  const errorMessage = 'Invalid volume deletion request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteVolumeExec);
 }
 
