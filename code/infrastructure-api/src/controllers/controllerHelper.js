@@ -24,10 +24,11 @@ const sendSuccessfulDeletion = response => () => {
 };
 
 const handleError = (response, action, type, name) => (error) => {
+  const message = name ? `Error ${action} ${type}: ${name}` : `Error ${action} ${type}`;
   logger.error(error);
   response.status(500);
   response.send({
-    message: `Error ${action} ${type}: ${name}`,
+    message,
     error: error.message });
 };
 

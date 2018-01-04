@@ -3,6 +3,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ name }}
+  labels:
+    visible: "yes"
   annotations:
     volume.beta.kubernetes.io/storage-class: {{ storageClass }}
 spec:

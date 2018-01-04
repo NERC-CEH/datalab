@@ -35,4 +35,8 @@ function deleteVolume(params) {
     .then(() => secretManager.deleteMinioCredentials(datalabInfo.name, name));
 }
 
-export default { createVolume, deleteVolume };
+function listVolumes() {
+  return volumeApi.listPersistentVolumeClaims();
+}
+
+export default { createVolume, deleteVolume, listVolumes };
