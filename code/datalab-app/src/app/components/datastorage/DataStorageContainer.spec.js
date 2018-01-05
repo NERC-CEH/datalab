@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import DataStorageTableContainer, { PureDataStorageTableContainer } from './DataStorageTableContainer';
+import DataStorageContainer, { PureDataStorageContainer } from './DataStorageContainer';
 import dataStorageService from '../../api/dataStorageService';
 
 jest.mock('../../api/dataStorageService');
 const loadDataStorageMock = jest.fn().mockReturnValue('expectedPayload');
 dataStorageService.loadDataStorage = loadDataStorageMock;
 
-describe('DataStorageTableContainer', () => {
+describe('DataStorageContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
@@ -17,7 +17,7 @@ describe('DataStorageTableContainer', () => {
         PublicComponent: () => {},
       };
 
-      return shallow(<DataStorageTableContainer {...props} />);
+      return shallow(<DataStorageContainer {...props} />);
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };
@@ -69,7 +69,7 @@ describe('DataStorageTableContainer', () => {
 
   describe('is a container which', () => {
     function shallowRenderPure(props) {
-      return shallow(<PureDataStorageTableContainer {...props} />);
+      return shallow(<PureDataStorageContainer {...props} />);
     }
 
     const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };

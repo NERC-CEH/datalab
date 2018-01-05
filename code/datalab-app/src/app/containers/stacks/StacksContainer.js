@@ -54,8 +54,7 @@ class StacksContainer extends Component {
           dialogAction={this.props.dialogAction}
           formStateName={this.props.formStateName}
           openStack={this.openStack}
-          deleteStack={this.confirmDeleteStack}
-          CreateContainer={this.props.CreateContainer}/>
+          deleteStack={this.confirmDeleteStack} />
       </PromisedContentWrapper>
     );
   }

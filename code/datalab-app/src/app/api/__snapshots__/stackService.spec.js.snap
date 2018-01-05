@@ -15,8 +15,7 @@ exports[`stackService deleteStack should build the correct mutation and unpack t
       deleteStack(stack: $stack) {
         name
       }
-    }
-  "
+    }"
 `;
 
 exports[`stackService getUrl should build the correct query and return the url 1`] = `

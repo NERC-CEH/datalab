@@ -6,7 +6,7 @@ import dataStorageActions from '../../actions/dataStorageActions';
 import DataStorageTable from './DataStorageTable';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 
-class DataStorageTableContainer extends Component {
+class DataStorageContainer extends Component {
   componentWillMount() {
     this.props.actions.loadDataStorage();
   }
@@ -22,7 +22,7 @@ class DataStorageTableContainer extends Component {
   }
 }
 
-DataStorageTableContainer.propTypes = {
+DataStorageContainer.propTypes = {
   dataStorage: PropTypes.shape({
     error: PropTypes.any,
     fetching: PropTypes.bool.isRequired,
@@ -47,5 +47,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { DataStorageTableContainer as PureDataStorageTableContainer }; // export for testing
-export default connect(mapStateToProps, mapDispatchToProps)(DataStorageTableContainer);
+export { DataStorageContainer as PureDataStorageContainer }; // export for testing
+export default connect(mapStateToProps, mapDispatchToProps)(DataStorageContainer);

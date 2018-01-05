@@ -67,8 +67,7 @@ function deleteStack(stack) {
       deleteStack(stack: $stack) {
         name
       }
-    }
-  `;
+    }`;
 
   return gqlMutation(mutation, { stack }).then(handleMutationErrors);
 }
