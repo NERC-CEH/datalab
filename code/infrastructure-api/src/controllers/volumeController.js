@@ -15,6 +15,16 @@ function deleteVolume(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteVolumeExec);
 }
 
+function queryVolume(request, response) {
+  // Build request params
+  const params = matchedData(request);
+
+  // Handle request
+  return volumeManager.queryVolume(params)
+    .then(volume => response.send(volume))
+    .catch(controllerHelper.handleError(response, 'retrieving', TYPE, params.name));
+}
+
 function listVolumes(request, response) {
   return volumeManager.listVolumes()
     .then(volumes => response.send(volumes))
@@ -63,4 +73,4 @@ const createVolumeValidator = [
     .withMessage('Volume Size must be an integer between 5 and 200'),
 ];
 
-export default { coreVolumeValidator, createVolumeValidator, createVolume, deleteVolume, listVolumes };
+export default { coreVolumeValidator, createVolumeValidator, createVolume, deleteVolume, queryVolume, listVolumes };

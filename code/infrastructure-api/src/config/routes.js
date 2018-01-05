@@ -9,6 +9,7 @@ function configureRoutes(app) {
   app.get('/volumes', volume.listVolumes);
   app.post('/volumes', volume.createVolumeValidator, volume.createVolume);
   app.delete('/volumes', volume.coreVolumeValidator, volume.deleteVolume);
+  app.post('/volumes/query', volume.coreVolumeValidator, volume.queryVolume);
 }
 
 export default { configureRoutes };
