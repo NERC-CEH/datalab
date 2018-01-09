@@ -1,5 +1,6 @@
 import axios from 'axios';
 import logger from 'winston';
+import { has, get } from 'lodash';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 
@@ -48,10 +49,49 @@ function deletePersistentVolumeClaim(name) {
     .catch(handleDeleteError('persistent volume claim', name));
 }
 
+function queryPersistentVolumeClaim(name) {
+  logger.info('Getting volume claim: %s', name);
+  return getPersistentVolumeClaim(name)
+    .then(processVolumeDetails)
+    .catch(() => {});
+}
+
+function listPersistentVolumeClaims() {
+  // List only visible volumes (ie not internal volumes)
+  logger.info('Getting visible volume claims');
+  return axios.get(`${PVC_URL}`, { params: { labelSelector: 'userCreated' } })
+    .then(processPVCs)
+    .catch(() => []);
+}
+
+function processPVCs(response) {
+  if (response.data && response.data.items) {
+    return response.data.items.map(processVolumeDetails);
+  }
+
+  return [];
+}
+
+function processVolumeDetails(volume) {
+  let name;
+
+  if (has(volume, 'metadata.name')) {
+    name = get(volume, 'metadata.name').replace('-claim', '');
+  }
+
+  return {
+    name,
+    storageType: get(volume, 'metadata.annotations["volume.beta.kubernetes.io/storage-class"]'),
+    capacityTotal: get(volume, 'spec.resources.requests.storage'),
+  };
+}
+
 export default {
   getPersistentVolumeClaim,
   createPersistentVolumeClaim,
   deletePersistentVolumeClaim,
   updatePersistentVolumeClaim,
   createOrUpdatePersistentVolumeClaim,
+  queryPersistentVolumeClaim,
+  listPersistentVolumeClaims,
 };

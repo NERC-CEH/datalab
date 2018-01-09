@@ -11,6 +11,9 @@ const NAMESPACE = config.get('podNamespace');
 
 const PVC_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/persistentvolumeclaims`;
 const PVC_NAME = 'test-pvc';
+const PVC_TYPE = 'volume-type';
+const PVC_CAPACITY = '12Gi';
+
 beforeEach(() => {
   mock.reset();
 });
@@ -21,6 +24,7 @@ afterAll(() => {
 
 const manifest = createManifest();
 const pvc = createPVC();
+const pvcs = createPVCs();
 
 describe('Kubernetes Persistent Volume API', () => {
   describe('get pvc', () => {
@@ -33,8 +37,8 @@ describe('Kubernetes Persistent Volume API', () => {
         });
     });
 
-    it('should return undefined it the pvc does not exist', () => {
-      mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(404, pvc);
+    it('should return undefined if the pvc does not exist', () => {
+      mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(404);
 
       return volumeApi.getPersistentVolumeClaim(PVC_NAME)
         .then((response) => {
@@ -131,13 +135,83 @@ describe('Kubernetes Persistent Volume API', () => {
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
+
+  describe('query pvc', () => {
+    it('should return the pvc if it exists', () => {
+      mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(200, pvc);
+
+      return volumeApi.queryPersistentVolumeClaim(PVC_NAME)
+        .then((response) => {
+          expect(response).toEqual({
+            name: PVC_NAME,
+            storageType: PVC_TYPE,
+            capacityTotal: PVC_CAPACITY,
+          });
+        });
+    });
+
+    it('should return an empty object if the pvc does not exist', () => {
+      mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(404);
+
+      return volumeApi.queryPersistentVolumeClaim(PVC_NAME)
+        .then((response) => {
+          expect(response).toEqual({});
+        });
+    });
+  });
+
+  describe('list pvcs', () => {
+    it('should return an array of pvcs', () => {
+      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'userCreated' } }).reply(200, pvcs);
+
+      return volumeApi.listPersistentVolumeClaims()
+        .then((response) => {
+          expect(response.length).toBe(2);
+          expect(response[0]).toEqual({
+            name: PVC_NAME,
+            storageType: PVC_TYPE,
+            capacityTotal: PVC_CAPACITY,
+          });
+        });
+    });
+
+    it('should return an empty array if the pvc does not exist', () => {
+      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'userCreated' } }).reply(404);
+
+      return volumeApi.listPersistentVolumeClaims()
+        .then((response) => {
+          expect(response).toEqual([]);
+        });
+    });
+  });
 });
 
 function createPVC() {
   return {
     apiVersion: 'v1',
     kind: 'PersistentVolumeClaim',
-    metadata: { name: PVC_NAME },
+    metadata: {
+      name: PVC_NAME,
+      annotations: {
+        'volume.beta.kubernetes.io/storage-class': PVC_TYPE,
+      },
+    },
+    spec: {
+      resources: {
+        requests: {
+          storage: PVC_CAPACITY,
+        },
+      },
+    },
+  };
+}
+
+function createPVCs() {
+  return {
+    items: [
+      createPVC(),
+      createPVC(),
+    ],
   };
 }
 
