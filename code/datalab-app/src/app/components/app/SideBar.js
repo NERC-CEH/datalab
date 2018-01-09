@@ -8,7 +8,9 @@ import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import SideBarSubheader from './SideBarSubheader';
 import NavLink from './NavLink';
 import { extendSubdomain } from '../../core/getDomainInfo';
+import navBarLinks from '../../constants/navBarLinks';
 
+const { DISCOURSE, SLACK } = navBarLinks;
 export const drawerWidth = 240;
 
 const styles = theme => ({
@@ -39,6 +41,12 @@ const styles = theme => ({
   },
 });
 
+const datalabLinks = [
+  { ...DISCOURSE, icon: 'question_answer' },
+  { ...SLACK, icon: 'message' },
+  { displayName: 'Help', href: extendSubdomain('docs'), icon: 'help_outline' },
+];
+
 const SideBar = ({ classes }) => (
   <Drawer classes={{ paper: classes.drawerPaper }} type="permanent">
     <header className={classes.header}>
@@ -56,11 +64,12 @@ const SideBar = ({ classes }) => (
       <NavLink to="/publishing" label="Sites" icon="web" />
       <div className={classes.spacer} />
       <Divider />
-      <NavLink
-        label="Help"
-        icon="help_outline"
-        onClick={() => window.open(extendSubdomain('docs'))}
-      />
+      {datalabLinks.map(({ displayName, href, icon }) =>
+        <NavLink
+          label={displayName}
+          icon={icon}
+          onClick={() => window.open(href)}
+        />)}
     </List>
   </Drawer>
 );

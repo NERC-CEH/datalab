@@ -3,7 +3,7 @@ import DescribeElement from './DescribeElement';
 import slackLogo from '../../../assets/images/slack-hori.png';
 import gitHubLogo from '../../../assets/images/github-hori.png';
 import discourseLogo from '../../../assets/images/discourse-hori.png';
-import { datalabLinks } from './NavBar';
+import navBarLinks from '../../constants/navBarLinks';
 
 /* eslint-disable max-len */
 const datalabDescriptions = [
@@ -26,9 +26,9 @@ const datalabStories = [
 
 /* eslint-disable max-len */
 const datalabCommunity = [
-  { title: 'Join Us on Slack', content: slackLogo, links: [datalabLinks.slack] },
-  { title: 'Contribute to Our Projects', content: gitHubLogo, links: [datalabLinks.github, datalabLinks.dockerHub] },
-  { title: 'Join Our Discourse Forum', content: discourseLogo, links: [datalabLinks.discourse] },
+  { title: 'Join Us on Slack', content: slackLogo, links: [navBarLinks.SLACK] },
+  { title: 'Contribute to Our Projects', content: gitHubLogo, links: [navBarLinks.GITHUB, navBarLinks.DOCKER_HUB] },
+  { title: 'Join Our Discourse Forum', content: discourseLogo, links: [navBarLinks.DISCOURSE] },
 ];
 /* eslint-enable max-len */
 

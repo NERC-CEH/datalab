@@ -65,6 +65,16 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     />
     <withStyles(Divider) />
     <withStyles(Link)
+      icon="question_answer"
+      label="Discourse"
+      onClick={[Function]}
+    />
+    <withStyles(Link)
+      icon="message"
+      label="Slack"
+      onClick={[Function]}
+    />
+    <withStyles(Link)
       icon="help_outline"
       label="Help"
       onClick={[Function]}

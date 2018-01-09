@@ -7,19 +7,13 @@ import Button from 'material-ui/Button';
 import NavBarLinkButton from './NavBarLinkButton';
 import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import auth from '../../auth/auth';
-
-export const datalabLinks = {
-  discourse: { displayName: 'Discourse', href: 'https://www.discourse.org/' },
-  dockerHub: { displayName: 'Docker Hub', href: 'https://hub.docker.com/u/nerc/' },
-  github: { displayName: 'GitHub', href: 'https://github.com/NERC-CEH/datalab' },
-  slack: { displayName: 'Slack', href: 'https://nerc-datalabs.slack.com/' },
-};
+import navBarLinks from '../../constants/navBarLinks';
 
 const publicNavLinks = [
-  datalabLinks.slack,
-  datalabLinks.discourse,
-  datalabLinks.github,
-  datalabLinks.dockerHub,
+  navBarLinks.SLACK,
+  navBarLinks.DISCOURSE,
+  navBarLinks.GITHUB,
+  navBarLinks.DOCKER_HUB,
 ];
 
 const styles = theme => ({
