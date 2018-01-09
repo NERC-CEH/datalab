@@ -162,7 +162,7 @@ describe('Kubernetes Persistent Volume API', () => {
 
   describe('list pvcs', () => {
     it('should return an array of pvcs', () => {
-      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'visible' } }).reply(200, pvcs);
+      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'userCreated' } }).reply(200, pvcs);
 
       return volumeApi.listPersistentVolumeClaims()
         .then((response) => {
@@ -176,7 +176,7 @@ describe('Kubernetes Persistent Volume API', () => {
     });
 
     it('should return an empty array if the pvc does not exist', () => {
-      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'visible' } }).reply(404);
+      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'userCreated' } }).reply(404);
 
       return volumeApi.listPersistentVolumeClaims()
         .then((response) => {
