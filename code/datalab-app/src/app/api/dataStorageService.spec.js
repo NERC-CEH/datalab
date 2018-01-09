@@ -46,4 +46,46 @@ describe('dataStorageService', () => {
       });
     });
   });
+
+  describe('createDataStore', () => {
+    it('should build the correct correct mutation and unpack the results', () => {
+      const data = { dataStore: { name: 'name' } };
+      mockClient.prepareSuccess(data);
+
+      return dataStorageService.createDataStore(data.dataStore).then((response) => {
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      const data = { dataStore: { name: 'name' } };
+      mockClient.prepareFailure('error');
+
+      return dataStorageService.createDataStore(data.dataStore).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
+  describe('deleteDataStore', () => {
+    it('should build the correct correct mutation and unpack the results', () => {
+      const data = { dataStore: { name: 'name' } };
+      mockClient.prepareSuccess(data);
+
+      return dataStorageService.deleteDataStore(data.dataStore).then((response) => {
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      const data = { dataStore: { name: 'name' } };
+      mockClient.prepareFailure('error');
+
+      return dataStorageService.deleteDataStore(data.dataStore).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
 });
