@@ -75,6 +75,8 @@ StacksContainer.propTypes = {
     getUrl: PropTypes.func.isRequired,
     openStack: PropTypes.func.isRequired,
     deleteStack: PropTypes.func.isRequired,
+    openModalDialog: PropTypes.func.isRequired,
+    closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
 };
 

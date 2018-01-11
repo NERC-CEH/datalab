@@ -1,32 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
-import CreateNotebookForm from '../notebooks/CreateNotebookForm';
-import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
+import CreateDataStoreForm from '../dataStorage/CreateDateStoreForm';
+import PreviewDataStoreCard from '../dataStorage/PreviewDataStoreCard';
 
-const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
+const CreateDataStoreDialog = ({ title, dataStore, onSubmit, onCancel }) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <CreateNotebookForm onSubmit={onSubmit} cancel={onCancel} />
+          <CreateDataStoreForm onSubmit={onSubmit} cancel={onCancel} />
         </DialogContent>
       </div>
       <div style={{ width: 320 }}>
-        <DialogTitle>Notebook Preview</DialogTitle>
+        <DialogTitle>Data Store Preview</DialogTitle>
         <div style={{ width: '90%', margin: '0 auto' }}>
-          <PreviewNotebookCard />
+          <PreviewDataStoreCard />
         </div>
       </div>
     </div>
   </Dialog>
 );
 
-CreateNotebookDialog.propTypes = {
+CreateDataStoreDialog.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 
-export default CreateNotebookDialog;
+export default CreateDataStoreDialog;

@@ -31,6 +31,11 @@ const CreateSiteForm = (props) => {
   );
 };
 
+CreateSiteForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
+};
+
 const CreateSiteReduxForm = reduxForm({
   form: 'createSite',
   validate: syncValidate,
@@ -41,8 +46,3 @@ const CreateSiteReduxForm = reduxForm({
 
 export { CreateSiteForm as PureCreateSiteForm };
 export default CreateSiteReduxForm;
-
-CreateSiteForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  cancel: PropTypes.func.isRequired,
-};

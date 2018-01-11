@@ -33,6 +33,7 @@ function styles(theme) {
     },
     cardIcon: {
       float: 'right',
+      fontSize: theme.typography.display3.fontSize,
     },
   };
 }
@@ -77,12 +78,18 @@ function getDisplayName(stack) {
 
 function generateGetImage(classes) {
   function getImage(stack) {
+    let icon;
+
     if (stack.type && stackDescriptions[stack.type]) {
       const logo = stackDescriptions[stack.type].logo;
-      return <CardMedia className={classes.cardMedia} image={logo} />;
+      icon = stackDescriptions[stack.type].icon;
+
+      if (logo) {
+        return <CardMedia className={classes.cardMedia} image={logo} />;
+      }
     }
 
-    return <Icon className={classes.cardIcon} children="create" />;
+    return <Icon className={classes.cardIcon} children={icon || 'create'} />;
   }
 
   return getImage;
