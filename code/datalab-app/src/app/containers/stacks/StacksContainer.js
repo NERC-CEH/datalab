@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { reset } from 'redux-form';
 import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import stackActions from '../../actions/stackActions';
 import modalDialogActions from '../../actions/modalDialogActions';
@@ -14,6 +15,9 @@ class StacksContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.openStack = this.openStack.bind(this);
+    this.createStack = this.createStack.bind(this);
+    this.openCreationForm = this.openCreationForm.bind(this);
+    this.deleteStack = this.deleteStack.bind(this);
     this.confirmDeleteStack = this.confirmDeleteStack.bind(this);
   }
 
@@ -23,6 +27,21 @@ class StacksContainer extends Component {
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }
 
+  createStack = stack =>
+    Promise.resolve(this.props.actions.closeModalDialog())
+      .then(() => this.props.actions.createStack(stack))
+      .then(() => this.props.actions.resetForm(this.props.formStateName))
+      .then(() => notify.success(`${this.props.typeName} created`))
+      .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
+      .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+
+  openCreationForm = () =>
+    this.props.actions.openModalDialog(this.props.dialogAction, {
+      title: `Create a ${this.props.typeName}`,
+      onSubmit: this.createStack,
+      onCancel: this.props.actions.closeModalDialog,
+    });
+
   deleteStack = stack =>
     Promise.resolve(this.props.actions.closeModalDialog())
       .then(() => this.props.actions.deleteStack(stack))
@@ -30,7 +49,7 @@ class StacksContainer extends Component {
       .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
       .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
 
-  confirmDeleteStack(stack) {
+  confirmDeleteStack = stack =>
     this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
       title: `Delete ${stack.displayName} ${this.props.typeName}`,
       body: `Would you like to delete the ${stack.displayName} ${this.props.typeName}? Any saved work will continue to be 
@@ -38,7 +57,6 @@ class StacksContainer extends Component {
       onSubmit: () => this.deleteStack(stack),
       onCancel: this.props.actions.closeModalDialog,
     });
-  }
 
   componentWillMount() {
     this.props.actions.loadStacksByCategory(this.props.containerType);
@@ -50,11 +68,9 @@ class StacksContainer extends Component {
         <StackCards
           stacks={this.props.stacks.value}
           typeName={this.props.typeName}
-          containerType={this.props.containerType}
-          dialogAction={this.props.dialogAction}
-          formStateName={this.props.formStateName}
           openStack={this.openStack}
-          deleteStack={this.confirmDeleteStack} />
+          deleteStack={this.confirmDeleteStack}
+          openCreationForm={this.openCreationForm} />
       </PromisedContentWrapper>
     );
   }
@@ -74,6 +90,7 @@ StacksContainer.propTypes = {
     loadStacksByCategory: PropTypes.func.isRequired,
     getUrl: PropTypes.func.isRequired,
     openStack: PropTypes.func.isRequired,
+    createStack: PropTypes.func.isRequired,
     deleteStack: PropTypes.func.isRequired,
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
@@ -89,6 +106,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       ...stackActions,
       ...modalDialogActions,
+      resetForm: formStateName => reset(formStateName),
     }, dispatch),
   };
 }

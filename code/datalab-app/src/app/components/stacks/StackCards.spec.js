@@ -13,8 +13,10 @@ describe('StackCards', () => {
       { displayName: 'name2', id: '2', type: 'type2' },
       { displayName: 'name3', id: '3', type: 'type3' },
     ],
+    typeName: 'expectedTypeName',
     openStack: () => {},
     deleteStack: () => {},
+    openCreationForm: () => {},
   });
 
   it('creates correct snapshot for an array of notebooks', () => {

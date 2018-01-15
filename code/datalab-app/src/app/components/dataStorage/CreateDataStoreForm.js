@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'material-ui/Button';
-import { renderTextField, renderTextArea, renderSelectField } from '../common/form/controls';
+import { renderTextField, renderSelectField } from '../common/form/controls';
 // import { syncValidate, asyncValidate } from './newDataStoreValidator';
 import { DATA_STORE, getStackSelections } from '../../../shared/stackTypes';
 
@@ -12,9 +12,9 @@ const CreateDataStoreForm = (props) => {
     <form onSubmit={ handleSubmit }>
       <div>
         <Field
-          name="displayName"
-          label="Display Name"
-          placeholder="Display Name"
+          name="name"
+          label="Claim Name"
+          placeholder="Claim Name"
           component={renderTextField}
           margin="normal" />
       </div>
@@ -37,14 +37,7 @@ const CreateDataStoreForm = (props) => {
           component={renderTextField}
           type="number"
           InputProps={{ inputProps: { min: 5, max: 200 } }}
-          margin="normal" />
-      </div>
-      <div>
-        <Field
-          name="description"
-          label="Description"
-          placeholder="Description"
-          component={renderTextArea}
+          parse={value => Number(value)}
           margin="normal" />
       </div>
       <Button style={{ margin: 8 }} raised type="submit" color="primary" disabled={submitting}>Create</Button>

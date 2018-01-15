@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
-import CreateDataStoreForm from '../dataStorage/CreateDateStoreForm';
+import CreateDataStoreForm from '../dataStorage/CreateDataStoreForm';
 import PreviewDataStoreCard from '../dataStorage/PreviewDataStoreCard';
 
 const CreateDataStoreDialog = ({ title, dataStore, onSubmit, onCancel }) => (

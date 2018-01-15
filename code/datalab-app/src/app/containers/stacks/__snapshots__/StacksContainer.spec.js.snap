@@ -1,5 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`StacksContainer is a connected component which binds correct actions 1`] = `
+Array [
+  "loadStacks",
+  "loadStacksByCategory",
+  "getUrl",
+  "openStack",
+  "createStack",
+  "checkStackName",
+  "deleteStack",
+  "openModalDialog",
+  "closeModalDialog",
+  "resetForm",
+]
+`;
+
+exports[`StacksContainer is a container which confirmDeleteStack generates correct dialog 1`] = `
+Object {
+  "body": "Would you like to delete the expectedDisplayName Notebook? Any saved work will continue to be 
+        stored in the shared drive.",
+  "title": "Delete expectedDisplayName Notebook",
+}
+`;
+
+exports[`StacksContainer is a container which openCreationForm generates correct dialog 1`] = `
+Object {
+  "title": "Create a Notebook",
+}
+`;
+
 exports[`StacksContainer is a container which passes correct props to NotebookCards 1`] = `
 <PromisedContentWrapper
   promise={
@@ -17,10 +46,8 @@ exports[`StacksContainer is a container which passes correct props to NotebookCa
   }
 >
   <StackCards
-    containerType="analysis"
     deleteStack={[Function]}
-    dialogAction="ACTION"
-    formStateName="createNotebook"
+    openCreationForm={[Function]}
     openStack={[Function]}
     stacks={
       Array [
