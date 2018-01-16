@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataStorageContainer is a connected component which binds correct actions 1`] = `
+Array [
+  "loadDataStorage",
+  "getCredentials",
+  "openMinioDataStore",
+  "createDataStore",
+  "deleteDataStore",
+  "openModalDialog",
+  "closeModalDialog",
+  "resetForm",
+]
+`;
+
+exports[`DataStorageContainer is a container which confirmDeleteDataStore generates correct dialog 1`] = `
+Object {
+  "body": "Are you sure you want to delete the expectedDisplayName Data Store? This will destroy all data 
+      stored on the volume.",
+  "title": "Delete expectedDisplayName Data Store",
+}
+`;
+
+exports[`DataStorageContainer is a container which openCreationForm generates correct dialog 1`] = `
+Object {
+  "title": "Create a Data Store",
+}
+`;
+
+exports[`DataStorageContainer is a container which passes correct props to StackCard 1`] = `
+<PromisedContentWrapper
+  promise={
+    Object {
+      "fetching": false,
+      "value": Array [
+        Object {
+          "props": "expectedPropValue",
+        },
+      ],
+    }
+  }
+>
+  <StackCards
+    deleteStack={[Function]}
+    openCreationForm={[Function]}
+    openStack={[Function]}
+    stacks={
+      Array [
+        Object {
+          "props": "expectedPropValue",
+        },
+      ]
+    }
+    typeName="Data Store"
+  />
+</PromisedContentWrapper>
+`;

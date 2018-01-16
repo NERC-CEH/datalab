@@ -118,7 +118,7 @@ describe('StacksContainer', () => {
       expect(loadStacksMock).toHaveBeenCalledTimes(1);
     });
 
-    it('passes correct props to NotebookCards', () => {
+    it('passes correct props to StackCard', () => {
       // Arrange
       const props = generateProps();
 

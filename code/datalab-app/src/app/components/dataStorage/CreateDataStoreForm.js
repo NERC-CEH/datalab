@@ -75,5 +75,5 @@ const CreateDataStoreReduxFrom = reduxForm({
   destroyOnUnmount: false,
 })(CreateDataStoreForm);
 
-// export { CreateDataStoreForm as PureCreateSiteForm };
+export { CreateDataStoreForm as PureCreateDataStoreForm };
 export default CreateDataStoreReduxFrom;

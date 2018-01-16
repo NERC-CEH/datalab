@@ -45,7 +45,7 @@ describe('DataStorageContainer', () => {
       const output = shallowRenderConnected(store).prop('actions');
 
       // Assert
-      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadDataStorage', 'loadDataStore', 'openMinioDataStore']));
+      expect(Object.keys(output)).toMatchSnapshot();
     });
 
     it('loadDataStorage function dispatch correct action', () => {
@@ -73,14 +73,25 @@ describe('DataStorageContainer', () => {
     }
 
     const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
+    const getCredentialsMock = jest.fn();
+    const openMinioDataStoreMock = jest.fn();
+    const openModalDialogMock = jest.fn();
+    const closeModalDialogMock = jest.fn();
+    const deleteDataStoreMock = jest.fn();
+    const createDataStoreMock = jest.fn();
+    const resetFormMock = jest.fn();
 
-    const openMinioDataStoreFn = () => {};
     const generateProps = () => ({
       dataStorage,
       actions: {
         loadDataStorage: loadDataStorageMock,
-        loadDataStore: () => {},
-        openMinioDataStore: openMinioDataStoreFn,
+        getCredentials: getCredentialsMock,
+        createDataStore: createDataStoreMock,
+        deleteDataStore: deleteDataStoreMock,
+        openMinioDataStore: openMinioDataStoreMock,
+        openModalDialog: openModalDialogMock,
+        closeModalDialog: closeModalDialogMock,
+        resetForm: resetFormMock,
       },
     });
 
@@ -97,17 +108,135 @@ describe('DataStorageContainer', () => {
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
     });
 
-    it('passes correct props to dataStorageTable', () => {
+    it('passes correct props to StackCard', () => {
       // Arrange
       const props = generateProps();
 
       // Act
-      const output = shallowRenderPure(props).find('DataStorageTable');
+      expect(shallowRenderPure(props)).toMatchSnapshot();
+    });
+
+    it('openNotebook method calls openNotebook action on resolved getUrl', () => {
+      // Arrange
+      getCredentialsMock.mockReturnValue(Promise.resolve({ value: { url: 'expectedUrl', accessKey: 'expectedKey' } }));
+      const props = generateProps();
+      const output = shallowRenderPure(props);
+      const openStack = output.childAt(0).prop('openStack');
+
+      // Act/Assert
+      expect(getCredentialsMock).not.toHaveBeenCalled();
+      expect(openMinioDataStoreMock).not.toHaveBeenCalled();
+      openStack(1000).then(() => {
+        expect(getCredentialsMock).toHaveBeenCalledTimes(1);
+        expect(getCredentialsMock).toHaveBeenCalledWith(1000);
+        expect(openMinioDataStoreMock).toHaveBeenCalledTimes(1);
+        expect(openMinioDataStoreMock).toHaveBeenCalledWith('expectedUrl', 'expectedKey');
+      });
+    });
+
+    it('confirmDeleteDataStore calls openModalDialog with correct action', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act/Assert
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      deleteStack(stack);
+      expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      expect(firstMockCall[0]).toBe('MODAL_TYPE_CONFIRMATION');
+    });
+
+    it('confirmDeleteDataStore generates correct dialog', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      deleteStack(stack);
 
       // Assert
-      expect(output.props()).toEqual({
-        dataStorage: dataStorage.value,
-        openStorageAction: openMinioDataStoreFn,
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, body, onCancel } = firstMockCall[1];
+      expect({ title, body }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('confirmDeleteDataStore - onSubmit calls deleteDataStore with correct value', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      deleteStack(stack);
+      const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+      // Assert
+      expect(deleteDataStoreMock).not.toHaveBeenCalled();
+      onSubmit().then(() => {
+        expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
+        expect(deleteDataStoreMock).toHaveBeenCalledWith(stack);
+      });
+    });
+
+    it('openCreationForm calls openModalDialog with correct action', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act/Assert
+      const output = shallowRenderPure(props);
+      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      openCreationForm(stack);
+      expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      expect(firstMockCall[0]).toBe('MODAL_TYPE_CREATE_STORE');
+    });
+
+    it('openCreationForm generates correct dialog', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      openCreationForm(stack);
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, onCancel } = firstMockCall[1];
+      expect({ title }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('openCreationForm - onSubmit calls createStack with correct value', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      openCreationForm();
+      const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+      // Assert
+      expect(createDataStoreMock).not.toHaveBeenCalled();
+      expect(resetFormMock).not.toHaveBeenCalled();
+      expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
+      onSubmit(stack).then(() => {
+        expect(createDataStoreMock).toHaveBeenCalledTimes(1);
+        expect(createDataStoreMock).toHaveBeenCalledWith(stack);
+        expect(resetFormMock).toHaveBeenCalledTimes(1);
       });
     });
   });

@@ -18,20 +18,20 @@ exports[`dataStorageService deleteDataStore should build the correct correct mut
     }"
 `;
 
-exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
+exports[`dataStorageService getCredentials should build the correct query and return the minio credentials 1`] = `
 "
-      DataStorage {
-        dataStorage {
-          capacityTotal capacityUsed linkToStorage name storageType accessKey
+      GetCredentials($id: ID!) {
+        dataStore(id: $id) {
+          url accessKey
         }
       }"
 `;
 
-exports[`dataStorageService loadDataStore should build the correct query and return the data store 1`] = `
+exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
 "
-      GetDataStore($dataStoreId: ID!) {
-        dataStore(id: $dataStoreId) {
-          capacityTotal capacityUsed linkToStorage name storageType
+      DataStorage {
+        dataStorage {
+           id name displayName description type volumeSize
         }
       }"
 `;

@@ -88,6 +88,7 @@ DataStorageContainer.propTypes = {
   }).isRequired,
   actions: PropTypes.shape({
     loadDataStorage: PropTypes.func.isRequired,
+    getCredentials: PropTypes.func.isRequired,
     createDataStore: PropTypes.func.isRequired,
     deleteDataStore: PropTypes.func.isRequired,
     openMinioDataStore: PropTypes.func.isRequired,

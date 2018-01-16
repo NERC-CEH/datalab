@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`StacksContainer is a container which passes correct props to NotebookCards 1`] = `
+exports[`StacksContainer is a container which passes correct props to StackCard 1`] = `
 <PromisedContentWrapper
   promise={
     Object {

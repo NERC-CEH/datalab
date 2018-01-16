@@ -1,6 +1,6 @@
 import dataStorageActions, {
   LOAD_DATASTORAGE_ACTION,
-  LOAD_DATASTORE_ACTION,
+  GET_DATASTORE_CREDENTIALS_ACTION,
   OPEN_MINIO_DATASTORE_ACTION,
   CREATE_DATASTORE_ACTION,
   DELETE_DATASTORE_ACTION,
@@ -31,18 +31,18 @@ describe('dataStorageActions', () => {
       expect(output.payload).toBe('expectedDataStoragePayload');
     });
 
-    it('loadDataStore', () => {
+    it('getCredentials', () => {
       // Arrange
-      const loadDataStoreMock = jest.fn().mockReturnValue('expectedDataStorePayload');
-      dataStorageService.loadDataStore = loadDataStoreMock;
+      const getCredentialsMock = jest.fn().mockReturnValue('expectedDataStorePayload');
+      dataStorageService.getCredentials = getCredentialsMock;
 
       // Act
-      const output = dataStorageActions.loadDataStore(123);
+      const output = dataStorageActions.getCredentials(123);
 
       // Assert
-      expect(loadDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(loadDataStoreMock).toHaveBeenCalledWith(123);
-      expect(output.type).toBe('LOAD_DATASTORE');
+      expect(getCredentialsMock).toHaveBeenCalledTimes(1);
+      expect(getCredentialsMock).toHaveBeenCalledWith(123);
+      expect(output.type).toBe('GET_DATASTORE_CREDENTIALS');
       expect(output.payload).toBe('expectedDataStorePayload');
     });
 
@@ -97,8 +97,8 @@ describe('dataStorageActions', () => {
       expect(LOAD_DATASTORAGE_ACTION).toBe('LOAD_DATASTORAGE');
     });
 
-    it('LOAD_DATASTORE_ACTION', () => {
-      expect(LOAD_DATASTORE_ACTION).toBe('LOAD_DATASTORE');
+    it('GET_DATASTORE_CREDENTIALS_ACTION', () => {
+      expect(GET_DATASTORE_CREDENTIALS_ACTION).toBe('GET_DATASTORE_CREDENTIALS');
     });
 
     it('OPEN_MINIO_DATASTORE_ACTION', () => {

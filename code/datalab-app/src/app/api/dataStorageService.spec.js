@@ -25,14 +25,14 @@ describe('dataStorageService', () => {
     });
   });
 
-  describe('loadDataStore', () => {
-    it('should build the correct query and return the data store', () => {
-      const data = { dataStorage: { name: 'expectedName' } };
-      const queryParams = { dataStoreId: 'id' };
+  describe('getCredentials', () => {
+    it('should build the correct query and return the minio credentials', () => {
+      const data = { dataStore: { url: 'expectedUrl', accessKey: 'expectedKey' } };
+      const queryParams = { id: 'idValue' };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.loadDataStore(queryParams.dataStoreId).then((response) => {
-        expect(response).toEqual(data.dataStorage);
+      return dataStorageService.getCredentials(queryParams.id).then((response) => {
+        expect(response).toEqual(data.dataStore);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(queryParams);
       });
@@ -41,7 +41,7 @@ describe('dataStorageService', () => {
     it('should throw an error if the query fails', () => {
       mockClient.prepareFailure('error');
 
-      return dataStorageService.loadDataStore().catch((error) => {
+      return dataStorageService.getCredentials().catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });
