@@ -29,16 +29,19 @@ export const DataStoreType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
-    storageType: {
+    displayName: {
+      type: GraphQLString,
+    },
+    description: {
+      type: GraphQLString,
+    },
+    type: {
       type: StorageType,
     },
-    capacityTotal: {
+    volumeSize: {
       type: GraphQLInt,
     },
-    capacityUsed: {
-      type: GraphQLInt,
-    },
-    linkToStorage: {
+    url: {
       type: GraphQLString,
     },
     internalEndpoint: {
@@ -58,17 +61,17 @@ export const DataStorageCreationType = new GraphQLInputObjectType({
     name: {
       type: GraphQLString,
     },
+    displayName: {
+      type: GraphQLString,
+    },
+    description: {
+      type: GraphQLString,
+    },
     type: {
       type: StorageType,
     },
-    capacityTotal: {
+    volumeSize: {
       type: GraphQLInt,
-    },
-    linkToStorage: {
-      type: GraphQLString,
-    },
-    internalEndpoint: {
-      type: GraphQLString,
     },
   },
 });

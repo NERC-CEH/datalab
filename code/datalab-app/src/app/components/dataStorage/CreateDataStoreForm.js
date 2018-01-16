@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'material-ui/Button';
-import { renderTextField, renderSelectField } from '../common/form/controls';
+import { renderTextField, renderSelectField, renderTextArea } from '../common/form/controls';
 // import { syncValidate, asyncValidate } from './newDataStoreValidator';
 import { DATA_STORE, getStackSelections } from '../../../shared/stackTypes';
 
@@ -12,32 +12,48 @@ const CreateDataStoreForm = (props) => {
     <form onSubmit={ handleSubmit }>
       <div>
         <Field
-          name="name"
-          label="Claim Name"
-          placeholder="Claim Name"
+          name="displayName"
+          label="Display Name"
+          placeholder="Display Name"
           component={renderTextField}
           margin="normal" />
       </div>
       <div>
         <Field
-          style={{ minWidth: 120 }}
+          style={{ minWidth: 140 }}
           name="type"
-          label="Type"
-          placeholder="Type"
+          label="Storage Type"
+          placeholder="Storage Type"
           component={renderSelectField}
           options={getStackSelections(DATA_STORE)}
           margin="normal" />
       </div>
       <div>
         <Field
-          style={{ minWidth: 120 }}
-          name="capacityTotal"
-          label="Capacity"
-          placeholder="Capacity"
+          style={{ minWidth: 140 }}
+          name="volumeSize"
+          label="Storage Size (GB)"
+          placeholder="GB"
           component={renderTextField}
           type="number"
           InputProps={{ inputProps: { min: 5, max: 200 } }}
           parse={value => Number(value)}
+          margin="normal" />
+      </div>
+      <div>
+        <Field
+          name="name"
+          label="Internal Name"
+          placeholder="Internal Name"
+          component={renderTextField}
+          margin="normal" />
+      </div>
+      <div>
+        <Field
+          name="description"
+          label="Description"
+          placeholder="Description"
+          component={renderTextArea}
           margin="normal" />
       </div>
       <Button style={{ margin: 8 }} raised type="submit" color="primary" disabled={submitting}>Create</Button>

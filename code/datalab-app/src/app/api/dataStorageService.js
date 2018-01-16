@@ -5,7 +5,7 @@ function loadDataStorage() {
   const query = `
       DataStorage {
         dataStorage {
-          capacityTotal capacityUsed linkToStorage name storageType accessKey
+           name displayName description type volumeSize url accessKey
         }
       }`;
 
@@ -16,7 +16,7 @@ function loadDataStore(dataStoreId) {
   const query = `
       GetDataStore($dataStoreId: ID!) {
         dataStore(id: $dataStoreId) {
-          capacityTotal capacityUsed linkToStorage name storageType
+          name displayName description type url
         }
       }`;
 

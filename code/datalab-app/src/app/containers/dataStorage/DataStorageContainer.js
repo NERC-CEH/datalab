@@ -89,17 +89,7 @@ DataStorageContainer.propTypes = {
 };
 
 function mapStateToProps({ dataStorage }) {
-  // This needs fixing
-  return {
-    dataStorage: {
-      ...dataStorage,
-      value: dataStorage.value.map(dataStore => ({
-        ...dataStore,
-        displayName: dataStore.name,
-        type: dataStore.storageType,
-      })),
-    },
-  };
+  return { dataStorage };
 }
 
 function mapDispatchToProps(dispatch) {
