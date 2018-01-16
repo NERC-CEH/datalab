@@ -5,22 +5,22 @@ function loadDataStorage() {
   const query = `
       DataStorage {
         dataStorage {
-           name displayName description type volumeSize url accessKey
+           id name displayName description type volumeSize
         }
       }`;
 
   return gqlQuery(query).then(res => get(res, 'data.dataStorage'));
 }
 
-function loadDataStore(dataStoreId) {
+function getCredentials(id) {
   const query = `
-      GetDataStore($dataStoreId: ID!) {
-        dataStore(id: $dataStoreId) {
-          name displayName description type url
+      GetCredentials($id: ID!) {
+        dataStore(id: $id) {
+          url accessKey
         }
       }`;
 
-  return gqlQuery(query, { dataStoreId }).then(res => get(res, 'data.dataStorage'));
+  return gqlQuery(query, { id }).then(res => get(res, 'data.dataStore'));
 }
 
 function createDataStore(dataStore) {
@@ -54,7 +54,7 @@ function handleMutationErrors(response) {
 
 export default {
   loadDataStorage,
-  loadDataStore,
+  getCredentials,
   createDataStore,
   deleteDataStore,
 };

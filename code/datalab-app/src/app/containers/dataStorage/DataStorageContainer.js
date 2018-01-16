@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reset } from 'redux-form';
+import { pick } from 'lodash';
 import { MODAL_TYPE_CREATE_DATA_STORE, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
@@ -17,11 +18,18 @@ const FORM_NAME = 'createDataStore';
 class DataStorageContainer extends Component {
   constructor(props, context) {
     super(props, context);
+    this.openDataStore = this.openDataStore.bind(this);
     this.createDataStore = this.createDataStore.bind(this);
     this.openCreationForm = this.openCreationForm.bind(this);
     this.deleteDataStore = this.deleteDataStore.bind(this);
     this.confirmDeleteDataStore = this.confirmDeleteDataStore.bind(this);
   }
+
+  openDataStore = id =>
+    this.props.actions.getCredentials(id)
+      .then(payload => pick(payload.value, ['url', 'accessKey']))
+      .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
+      .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
 
   createDataStore = dataStore =>
     Promise.resolve(this.props.actions.closeModalDialog())
@@ -64,7 +72,7 @@ class DataStorageContainer extends Component {
         <StackCards
           stacks={this.props.dataStorage.value}
           typeName={TYPE_NAME}
-          openStack={this.props.actions.openMinioDataStore}
+          openStack={this.openDataStore}
           deleteStack={this.confirmDeleteDataStore}
           openCreationForm={this.openCreationForm} />
       </PromisedContentWrapper>

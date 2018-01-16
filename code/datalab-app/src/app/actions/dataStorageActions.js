@@ -2,7 +2,7 @@ import dataStorageService from '../api/dataStorageService';
 import minioService from '../api/minioService';
 
 export const LOAD_DATASTORAGE_ACTION = 'LOAD_DATASTORAGE';
-export const LOAD_DATASTORE_ACTION = 'LOAD_DATASTORE';
+export const GET_DATASTORE_CREDENTIALS_ACTION = 'GET_DATASTORE_CREDENTIALS';
 export const OPEN_MINIO_DATASTORE_ACTION = 'OPEN_MINIO_DATASTORE';
 export const CREATE_DATASTORE_ACTION = 'CREATE_DATASTORE';
 export const DELETE_DATASTORE_ACTION = 'DELETE_DATASTORE';
@@ -12,9 +12,9 @@ const loadDataStorage = () => ({
   payload: dataStorageService.loadDataStorage(),
 });
 
-const loadDataStore = dataStoreId => ({
-  type: LOAD_DATASTORE_ACTION,
-  payload: dataStorageService.loadDataStore(dataStoreId),
+const getCredentials = id => ({
+  type: GET_DATASTORE_CREDENTIALS_ACTION,
+  payload: dataStorageService.getCredentials(id),
 });
 
 const openMinioDataStore = (storageUrl, token) => ({
@@ -37,7 +37,7 @@ const deleteDataStore = (dataStore) => {
 
 export default {
   loadDataStorage,
-  loadDataStore,
+  getCredentials,
   openMinioDataStore,
   createDataStore,
   deleteDataStore,
