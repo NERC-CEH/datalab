@@ -1,39 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
 import DatalabModal from './DatalabModal';
+import IconButton from '../common/control/IconButton';
 
-function styles(theme) {
-  const buttonBaseStyle = {
-    margin: theme.spacing.unit,
-  };
-
-  return {
-    button: {
-      ...buttonBaseStyle,
-    },
-    buttonDanger: {
-      ...buttonBaseStyle,
-      color: theme.palette.danger,
-    },
-    icon: {
-      marginLeft: theme.spacing.unit,
-    },
-  };
-}
-
-const Confirmation = ({ classes, title, body, onSubmit, onCancel }) => (
+const Confirmation = ({ title, body, onSubmit, onCancel }) => (
   <DatalabModal title={title} body={body}>
-    <Button className={classes.button} color="accent" raised onClick={onCancel}>
+    <IconButton onClick={onCancel} icon="clear">
       No
-      <Icon className={classes.icon} children="clear"/>
-    </Button>
-    <Button className={classes.buttonDanger} raised onClick={onSubmit}>
+    </IconButton>
+    <IconButton danger onClick={onSubmit} icon="delete">
       Yes
-      <Icon className={classes.icon} children="delete"/>
-    </Button>
+    </IconButton>
   </DatalabModal>
 );
 
@@ -44,4 +21,4 @@ Confirmation.propTypes = {
   onCancel: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Confirmation);
+export default Confirmation;

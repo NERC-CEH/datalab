@@ -137,7 +137,7 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore calls openModalDialog with correct action', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
 
       // Act/Assert
       const output = shallowRenderPure(props);
@@ -146,13 +146,13 @@ describe('DataStorageContainer', () => {
       deleteStack(stack);
       expect(openModalDialogMock).toHaveBeenCalledTimes(1);
       const firstMockCall = openModalDialogMock.mock.calls[0];
-      expect(firstMockCall[0]).toBe('MODAL_TYPE_CONFIRMATION');
+      expect(firstMockCall[0]).toBe('MODAL_TYPE_ROBUST_CONFIRMATION');
     });
 
     it('confirmDeleteDataStore generates correct dialog', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
 
       // Act
       const output = shallowRenderPure(props);
@@ -169,7 +169,7 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore - onSubmit calls deleteDataStore with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
 
       // Act
       const output = shallowRenderPure(props);
@@ -188,7 +188,7 @@ describe('DataStorageContainer', () => {
     it('openCreationForm calls openModalDialog with correct action', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
 
       // Act/Assert
       const output = shallowRenderPure(props);
@@ -203,7 +203,7 @@ describe('DataStorageContainer', () => {
     it('openCreationForm generates correct dialog', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
 
       // Act
       const output = shallowRenderPure(props);
@@ -221,7 +221,7 @@ describe('DataStorageContainer', () => {
     it('openCreationForm - onSubmit calls createStack with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
 
       // Act
       const output = shallowRenderPure(props);

@@ -16,8 +16,8 @@ Array [
 
 exports[`DataStorageContainer is a container which confirmDeleteDataStore generates correct dialog 1`] = `
 Object {
-  "body": "Are you sure you want to delete the expectedDisplayName Data Store? This will destroy all data 
-      stored on the volume.",
+  "body": "Are you sure you want to delete the expectedDisplayName (expectedName) Data Store? This will
+      destroy all data stored on the volume.",
   "title": "Delete expectedDisplayName Data Store",
 }
 `;

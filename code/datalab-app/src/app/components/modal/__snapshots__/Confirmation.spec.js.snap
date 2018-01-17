@@ -5,30 +5,18 @@ exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
   body="Body"
   title="Title"
 >
-  <withStyles(Button)
-    className="Confirmation-button-1"
-    color="accent"
+  <withStyles(IconButton)
+    icon="clear"
     onClick={[Function]}
-    raised={true}
   >
     No
-    <withStyles(Icon)
-      className="Confirmation-icon-3"
-    >
-      clear
-    </withStyles(Icon)>
-  </withStyles(Button)>
-  <withStyles(Button)
-    className="Confirmation-buttonDanger-2"
+  </withStyles(IconButton)>
+  <withStyles(IconButton)
+    danger={true}
+    icon="delete"
     onClick={[Function]}
-    raised={true}
   >
     Yes
-    <withStyles(Icon)
-      className="Confirmation-icon-3"
-    >
-      delete
-    </withStyles(Icon)>
-  </withStyles(Button)>
+  </withStyles(IconButton)>
 </DatalabModal>
 `;

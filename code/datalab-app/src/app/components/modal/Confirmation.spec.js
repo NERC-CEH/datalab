@@ -1,10 +1,8 @@
 import React from 'react';
-import { createShallow } from 'material-ui/test-utils';
+import { shallow } from 'enzyme';
 import Confirmation from './Confirmation';
 
 function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
   return shallow(<Confirmation {...props} />);
 }
 

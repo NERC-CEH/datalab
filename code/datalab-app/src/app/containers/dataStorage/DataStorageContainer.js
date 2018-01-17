@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reset } from 'redux-form';
 import { pick } from 'lodash';
-import { MODAL_TYPE_CREATE_DATA_STORE, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_DATA_STORE, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import StackCards from '../../components/stacks/StackCards';
@@ -54,10 +54,14 @@ class DataStorageContainer extends Component {
       .finally(() => this.props.actions.loadDataStorage());
 
   confirmDeleteDataStore = dataStore =>
-    this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+    this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
       title: `Delete ${dataStore.displayName} ${TYPE_NAME}`,
-      body: `Are you sure you want to delete the ${dataStore.displayName} ${TYPE_NAME}? This will destroy all data 
-      stored on the volume.`,
+      body: `Are you sure you want to delete the ${dataStore.displayName} (${dataStore.name}) ${TYPE_NAME}? This will
+      destroy all data stored on the volume.`,
+      confirmField: {
+        label: `Please type "${dataStore.name}" to confirm`,
+        expectedValue: dataStore.name,
+      },
       onSubmit: () => this.deleteDataStore(dataStore),
       onCancel: this.props.actions.closeModalDialog,
     });
