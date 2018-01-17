@@ -1,6 +1,7 @@
 import dataStorageActions, {
   LOAD_DATASTORAGE_ACTION,
   GET_DATASTORE_CREDENTIALS_ACTION,
+  CHECK_DATASTORE_NAME_ACTION,
   OPEN_MINIO_DATASTORE_ACTION,
   CREATE_DATASTORE_ACTION,
   DELETE_DATASTORE_ACTION,
@@ -43,6 +44,21 @@ describe('dataStorageActions', () => {
       expect(getCredentialsMock).toHaveBeenCalledTimes(1);
       expect(getCredentialsMock).toHaveBeenCalledWith(123);
       expect(output.type).toBe('GET_DATASTORE_CREDENTIALS');
+      expect(output.payload).toBe('expectedDataStorePayload');
+    });
+
+    it('checkDataStoreName', () => {
+      // Arrange
+      const checkDataStoreNameMock = jest.fn().mockReturnValue('expectedDataStorePayload');
+      dataStorageService.checkDataStoreName = checkDataStoreNameMock;
+
+      // Act
+      const output = dataStorageActions.checkDataStoreName('expectedName');
+
+      // Assert
+      expect(checkDataStoreNameMock).toHaveBeenCalledTimes(1);
+      expect(checkDataStoreNameMock).toHaveBeenCalledWith('expectedName');
+      expect(output.type).toBe('CHECK_DATASTORE_NAME');
       expect(output.payload).toBe('expectedDataStorePayload');
     });
 
@@ -99,6 +115,10 @@ describe('dataStorageActions', () => {
 
     it('GET_DATASTORE_CREDENTIALS_ACTION', () => {
       expect(GET_DATASTORE_CREDENTIALS_ACTION).toBe('GET_DATASTORE_CREDENTIALS');
+    });
+
+    it('CHECK_DATASTORE_NAME_ACTION', () => {
+      expect(CHECK_DATASTORE_NAME_ACTION).toBe('CHECK_DATASTORE_NAME');
     });
 
     it('OPEN_MINIO_DATASTORE_ACTION', () => {

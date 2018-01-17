@@ -9,6 +9,11 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       margin="normal"
       name="displayName"
       placeholder="Display Name"
+      style={
+        Object {
+          "minWidth": 250,
+        }
+      }
     />
   </div>
   <div>
@@ -28,7 +33,7 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       placeholder="Storage Type"
       style={
         Object {
-          "minWidth": 140,
+          "minWidth": 250,
         }
       }
     />
@@ -51,7 +56,7 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       placeholder="GB"
       style={
         Object {
-          "minWidth": 140,
+          "minWidth": 250,
         }
       }
       type="number"
@@ -64,6 +69,11 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       margin="normal"
       name="name"
       placeholder="Internal Name"
+      style={
+        Object {
+          "minWidth": 250,
+        }
+      }
     />
   </div>
   <div>
@@ -73,6 +83,11 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       margin="normal"
       name="description"
       placeholder="Description"
+      style={
+        Object {
+          "minWidth": 250,
+        }
+      }
     />
   </div>
   <withStyles(Button)

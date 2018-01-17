@@ -1,6 +1,7 @@
 import {
   GraphQLID,
   GraphQLList,
+  GraphQLString,
   GraphQLNonNull,
 } from 'graphql';
 import { DataStoreType } from '../types/dataStoreTypes';
@@ -22,3 +23,15 @@ export const dataStore = {
   },
   resolve: (obj, { id }, { user }) => dataStorageRepository.getById(user, id),
 };
+
+export const checkDataStoreName = {
+  description: 'Details of a single currently provisioned DataLab data store.',
+  type: DataStoreType,
+  args: {
+    name: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  },
+  resolve: (obj, { name }, { user }) => dataStorageRepository.getByName(user, name),
+};
+

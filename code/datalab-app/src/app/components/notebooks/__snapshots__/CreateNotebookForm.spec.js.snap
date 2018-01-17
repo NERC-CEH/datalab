@@ -9,6 +9,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       margin="normal"
       name="displayName"
       placeholder="Display Name"
+      style={
+        Object {
+          "minWidth": 250,
+        }
+      }
     />
   </div>
   <div>
@@ -35,7 +40,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       }
       style={
         Object {
-          "minWidth": 140,
+          "minWidth": 250,
         }
       }
     />
@@ -49,6 +54,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       name="name"
       placeholder="Notebook Name for URL"
       startText="http://datalab-"
+      style={
+        Object {
+          "minWidth": 250,
+        }
+      }
     />
   </div>
   <div>
@@ -58,6 +68,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       margin="normal"
       name="description"
       placeholder="Description"
+      style={
+        Object {
+          "minWidth": 250,
+        }
+      }
     />
   </div>
   <div>

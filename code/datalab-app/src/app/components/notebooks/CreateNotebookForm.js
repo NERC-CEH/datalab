@@ -6,21 +6,49 @@ import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextFi
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import { ANALYSIS, getStackSelections } from '../../../shared/stackTypes';
 
+const fieldStyle = { minWidth: 250 };
+
 const CreateNotebookForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="displayName"
+          label="Display Name"
+          component={renderTextField}
+          placeholder="Display Name"
+          margin="normal" />
       </div>
       <div>
-        <Field name="type" label="Notebook Type" component={renderSelectField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 140 }} margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="type"
+          label="Notebook Type"
+          component={renderSelectField}
+          options={getStackSelections(ANALYSIS)}
+          margin="normal" />
       </div>
       <div>
-        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Notebook Name for URL" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="name"
+          label="URL Name"
+          component={renderAdornedTextField}
+          placeholder="Notebook Name for URL"
+          startText="http://datalab-"
+          endText=".datalabs.nerc.ac.uk"
+          margin="normal" />
       </div>
       <div>
-        <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="description"
+          label="Description"
+          component={renderTextArea}
+          placeholder="Description"
+          margin="normal" />
       </div>
       <div>
         <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>

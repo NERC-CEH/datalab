@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'material-ui/Button';
 import { renderTextField, renderSelectField, renderTextArea } from '../common/form/controls';
-// import { syncValidate, asyncValidate } from './newDataStoreValidator';
+import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 import { DATA_STORE, getStackSelections } from '../../../shared/stackTypes';
+
+const fieldStyle = { minWidth: 250 };
 
 const CreateDataStoreForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field
+          style={fieldStyle}
           name="displayName"
           label="Display Name"
           placeholder="Display Name"
@@ -20,7 +23,7 @@ const CreateDataStoreForm = (props) => {
       </div>
       <div>
         <Field
-          style={{ minWidth: 140 }}
+          style={fieldStyle}
           name="type"
           label="Storage Type"
           placeholder="Storage Type"
@@ -30,7 +33,7 @@ const CreateDataStoreForm = (props) => {
       </div>
       <div>
         <Field
-          style={{ minWidth: 140 }}
+          style={fieldStyle}
           name="volumeSize"
           label="Storage Size (GB)"
           placeholder="GB"
@@ -42,6 +45,7 @@ const CreateDataStoreForm = (props) => {
       </div>
       <div>
         <Field
+          style={fieldStyle}
           name="name"
           label="Internal Name"
           placeholder="Internal Name"
@@ -50,6 +54,7 @@ const CreateDataStoreForm = (props) => {
       </div>
       <div>
         <Field
+          style={fieldStyle}
           name="description"
           label="Description"
           placeholder="Description"
@@ -69,8 +74,8 @@ CreateDataStoreForm.propTypes = {
 
 const CreateDataStoreReduxFrom = reduxForm({
   form: 'createDataStore',
-  // validate: syncValidate,
-  // asyncValidate,
+  validate: syncValidate,
+  asyncValidate,
   asyncBlurFields: ['name'],
   destroyOnUnmount: false,
 })(CreateDataStoreForm);

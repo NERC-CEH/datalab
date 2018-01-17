@@ -4,6 +4,7 @@ exports[`DataStorageContainer is a connected component which binds correct actio
 Array [
   "loadDataStorage",
   "getCredentials",
+  "checkDataStoreName",
   "openMinioDataStore",
   "createDataStore",
   "deleteDataStore",

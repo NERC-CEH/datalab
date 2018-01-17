@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Data Store Form Validator should return correct error for name with symbol 1`] = `
+Object {
+  "name": "Name must be lower case characters without a space",
+}
+`;
+
+exports[`New Data Store Form Validator should return correct error for short name 1`] = `
+Object {
+  "name": "Name is too short (minimum is 4 characters)",
+}
+`;
+
+exports[`New Data Store Form Validator should return correct error for too small a volume size value 1`] = `
+Object {
+  "volumeSize": "Volume size must be greater than or equal to 5",
+}
+`;
+
+exports[`New Data Store Form Validator should return correct error for when volume size is a float 1`] = `
+Object {
+  "volumeSize": "Volume size must be an integer",
+}
+`;
+
+exports[`New Data Store Form Validator should return correct errors for empty form 1`] = `
+Object {
+  "description": "Description can't be blank",
+  "displayName": "Display name can't be blank",
+  "name": "Name can't be blank",
+  "type": "Type can't be blank",
+  "volumeSize": "Volume size can't be blank",
+}
+`;

@@ -6,24 +6,60 @@ import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextFi
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
 import { PUBLISH, getStackSelections } from '../../../shared/stackTypes';
 
+const fieldStyle = { minWidth: 250 };
+
 const CreateSiteForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={handleSubmit}>
       <div>
-        <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="displayName"
+          label="Display Name"
+          component={renderTextField}
+          placeholder="Display Name"
+          margin="normal" />
       </div>
       <div>
-        <Field name="type" label="Site Type" component={renderSelectField} options={getStackSelections(PUBLISH)} placeholder="Site Type" style={{ minWidth: 120 }} margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="type"
+          label="Site Type"
+          component={renderSelectField}
+          options={getStackSelections(PUBLISH)}
+          placeholder="Site Type"
+          margin="normal" />
       </div>
       <div>
-        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Site Name for URLs" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="name"
+          label="URL Name"
+          component={renderAdornedTextField}
+          placeholder="Site Name for URLs"
+          startText="http://datalab-"
+          endText=".datalabs.nerc.ac.uk"
+          margin="normal" />
       </div>
       <div>
-        <Field name="sourcePath" label="Source Path" component={renderAdornedTextField} placeholder="Source Directory for Site" startText="/data/" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="sourcePath"
+          label="Source Path"
+          component={renderAdornedTextField}
+          placeholder="Source Directory for Site"
+          startText="/data/"
+          margin="normal" />
       </div>
       <div>
-        <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
+        <Field
+          style={fieldStyle}
+          name="description"
+          label="Description"
+          component={renderTextArea}
+          placeholder="Description"
+          margin="normal" />
       </div>
       <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
       <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
