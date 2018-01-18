@@ -78,18 +78,15 @@ function getDisplayName(stack) {
 
 function generateGetImage(classes) {
   function getImage(stack) {
-    let icon;
+    const stackDesciption = stack.type && stackDescriptions[stack.type];
+    const logoImage = stackDesciption && stackDesciption.logo;
+    const iconName = stackDesciption && stackDesciption.icon;
 
-    if (stack.type && stackDescriptions[stack.type]) {
-      const logo = stackDescriptions[stack.type].logo;
-      icon = stackDescriptions[stack.type].icon;
-
-      if (logo) {
-        return <CardMedia className={classes.cardMedia} image={logo} />;
-      }
+    if (logoImage) {
+      return <CardMedia className={classes.cardMedia} image={logoImage} />;
     }
 
-    return <Icon className={classes.cardIcon} children={icon || 'create'} />;
+    return <Icon className={classes.cardIcon} children={iconName || 'create'} />;
   }
 
   return getImage;

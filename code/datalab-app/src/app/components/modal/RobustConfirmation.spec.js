@@ -64,7 +64,7 @@ describe('Robust Confirmation', () => {
     expect(onSubmitMock).toHaveBeenCalled();
   });
 
-  it('submit button is enable when given the expected value', () => {
+  it('submit button is enable when TextField contains expected value', () => {
     // Arrange
     const props = generateProps();
 
@@ -73,7 +73,7 @@ describe('Robust Confirmation', () => {
     const textOnChange = output.find(TextField).prop('onChange');
 
     // Assert
-    // Due to changing state the same node need to bes used in this for the expect checks.
+    // Due to changes state, for this test, the same node need to be used for the expect checks.
     expect(output.find(IconButton).find({ children: 'Confirm Deletion' }).prop('disabled')).toBe(true);
     textOnChange({ target: { value: 'alpha' } });
     expect(output.find(IconButton).find({ children: 'Confirm Deletion' }).prop('disabled')).toBe(false);

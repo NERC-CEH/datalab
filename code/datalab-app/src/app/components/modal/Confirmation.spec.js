@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Confirmation from './Confirmation';
+import IconButton from '../common/control/IconButton';
 
 function shallowRender(props) {
   return shallow(<Confirmation {...props} />);
@@ -36,7 +37,8 @@ describe('Confirmation', () => {
 
     // Act
     const output = shallowRender(props);
-    const cancelFunction = output.childAt(0).prop('onClick');
+    const buttons = output.find(IconButton);
+    const cancelFunction = buttons.find({ children: 'No' }).prop('onClick');
     cancelFunction();
 
     // Assert
@@ -49,7 +51,8 @@ describe('Confirmation', () => {
 
     // Act
     const output = shallowRender(props);
-    const submitFunction = output.childAt(1).prop('onClick');
+    const buttons = output.find(IconButton);
+    const submitFunction = buttons.find({ children: 'Yes' }).prop('onClick');
     submitFunction();
 
     // Assert

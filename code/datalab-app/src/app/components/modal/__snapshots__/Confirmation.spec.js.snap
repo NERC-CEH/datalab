@@ -1,22 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
-<DatalabModal
-  body="Body"
-  title="Title"
+<withStyles(Dialog)
+  maxWidth="md"
+  open={true}
 >
-  <withStyles(IconButton)
-    icon="clear"
-    onClick={[Function]}
-  >
-    No
-  </withStyles(IconButton)>
-  <withStyles(IconButton)
-    danger={true}
-    icon="delete"
-    onClick={[Function]}
-  >
-    Yes
-  </withStyles(IconButton)>
-</DatalabModal>
+  <withStyles(DialogTitle)>
+    Title
+  </withStyles(DialogTitle)>
+  <withStyles(DialogContent)>
+    <withStyles(DialogContentText)>
+      Body
+    </withStyles(DialogContentText)>
+  </withStyles(DialogContent)>
+  <withStyles(DialogActions)>
+    <withStyles(IconButton)
+      icon="clear"
+      onClick={[Function]}
+    >
+      No
+    </withStyles(IconButton)>
+    <withStyles(IconButton)
+      danger={true}
+      icon="delete"
+      onClick={[Function]}
+    >
+      Yes
+    </withStyles(IconButton)>
+  </withStyles(DialogActions)>
+</withStyles(Dialog)>
 `;

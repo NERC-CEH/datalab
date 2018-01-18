@@ -29,7 +29,7 @@ describe('dataStorageRepository', () => {
     }));
 
   it('getByName returns expected snapshot', () =>
-    dataStorageRepository.getByName(undefined, 'expectedName'). then((storage) => {
+    dataStorageRepository.getByName(undefined, 'expectedName').then((storage) => {
       expect(mockDatabase().query()).toEqual({ name: 'expectedName' });
       expect(storage).toMatchSnapshot();
     }));
@@ -44,9 +44,9 @@ describe('dataStorageRepository', () => {
   });
 
   it('deleteByName should query for data store with same name', () => {
-    const dataStore = { name: 'oldVolume' };
-    dataStorageRepository.deleteByName(undefined, dataStore).then(() => {
-      expect(mockDatabase().query()).toEqual(dataStore);
+    const name = 'oldVolume';
+    dataStorageRepository.deleteByName(undefined, name).then(() => {
+      expect(mockDatabase().query()).toEqual({ name });
     });
   });
 });

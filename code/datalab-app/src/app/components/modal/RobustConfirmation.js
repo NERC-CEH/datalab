@@ -5,12 +5,11 @@ import Dialog, { DialogTitle, DialogContent, DialogActions, DialogContentText } 
 import IconButton from '../common/control/IconButton';
 
 class RobustConfirmation extends Component {
-  state = {
-    name: {
-      value: '',
-      valid: false,
-    },
-  };
+  constructor(props, context) {
+    super(props, context);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { name: { value: '', valid: false } };
+  }
 
   handleChange = name => (event) => {
     this.setState({
@@ -22,7 +21,7 @@ class RobustConfirmation extends Component {
   };
 
   render() {
-    const { title, body, onSubmit, onCancel } = this.props;
+    const { title, body, onSubmit, onCancel, confirmField } = this.props;
 
     return (
       <Dialog open={true} maxWidth="md">
@@ -32,7 +31,7 @@ class RobustConfirmation extends Component {
           <form>
             <TextField
               id="name"
-              label={this.props.confirmField.label}
+              label={confirmField.label}
               value={this.state.name.value}
               onChange={this.handleChange('name')}
               margin="normal"
