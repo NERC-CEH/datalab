@@ -6,6 +6,7 @@ import { renderTextField, renderSelectField, renderTextArea } from '../common/fo
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 import { DATA_STORE, getStackSelections } from '../../../shared/stackTypes';
 
+const initialValues = { type: 'nfs' };
 const fieldStyle = { minWidth: 250 };
 
 const CreateDataStoreForm = (props) => {
@@ -78,6 +79,7 @@ const CreateDataStoreReduxFrom = reduxForm({
   asyncValidate,
   asyncBlurFields: ['name'],
   destroyOnUnmount: false,
+  initialValues,
 })(CreateDataStoreForm);
 
 export { CreateDataStoreForm as PureCreateDataStoreForm };
