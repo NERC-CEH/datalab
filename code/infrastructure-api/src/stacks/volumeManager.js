@@ -14,13 +14,14 @@ const type = 'minio';
 function createVolume(params) {
   const { datalabInfo, name, volumeSize } = params;
   const secretStrategy = secretManager.createNewMinioCredentials;
+  const rewriteTarget = '/';
 
   return secretManager.storeMinioCredentialsInVault(datalabInfo.name, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createPersistentVolume(name, volumeSize, volumeGenerator.createVolume))
     .then(createDeployment({ ...params, type }, deploymentGenerator.createMinioDeployment))
     .then(createService(name, type, deploymentGenerator.createMinioService))
-    .then(createIngressRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect({ name, type, datalabInfo, rewriteTarget }, ingressGenerator.createIngress));
 }
 
 function deleteVolume(params) {

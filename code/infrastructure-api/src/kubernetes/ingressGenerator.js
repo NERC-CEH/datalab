@@ -1,13 +1,14 @@
 import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
-function createIngress({ name, datalabInfo, ingressName, serviceName, port, connectPort }) {
+function createIngress({ name, datalabInfo, ingressName, serviceName, port, connectPort, rewriteTarget }) {
   const host = createSniInfo(name, datalabInfo);
   const paths = createPathInfo(serviceName, port, connectPort);
   const context = {
     name: ingressName,
     authServiceUrl: config.get('authServiceUrl'),
     authSigninUrl: config.get('authSigninUrl'),
+    rewriteTarget,
     service: { host, paths },
   };
 

@@ -9,8 +9,8 @@ function createNewJupyterCredentials() {
 
 function createNewMinioCredentials() {
   return {
-    accessKey: tokenGenerator.generateUUID(),
-    secretKey: tokenGenerator.generateUUID(),
+    access_key: tokenGenerator.generateUUID(),
+    secret_key: tokenGenerator.generateUUID(),
   };
 }
 
