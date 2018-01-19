@@ -6,60 +6,48 @@ import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextFi
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
 import { PUBLISH, getStackSelections } from '../../../shared/stackTypes';
 
-const fieldStyle = { minWidth: 250 };
-
 const CreateSiteForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <Field
-          style={fieldStyle}
           name="displayName"
           label="Display Name"
           component={renderTextField}
-          placeholder="Display Name"
-          margin="normal" />
+          placeholder="Display Name" />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="type"
           label="Site Type"
           component={renderSelectField}
           options={getStackSelections(PUBLISH)}
-          placeholder="Site Type"
-          margin="normal" />
+          placeholder="Site Type" />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="name"
           label="URL Name"
           component={renderAdornedTextField}
           placeholder="Site Name for URLs"
           startText="http://datalab-"
-          endText=".datalabs.nerc.ac.uk"
-          margin="normal" />
+          endText=".datalabs.nerc.ac.uk" />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="sourcePath"
           label="Source Path"
           component={renderAdornedTextField}
           placeholder="Source Directory for Site"
-          startText="/data/"
-          margin="normal" />
+          startText="/data/" />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="description"
           label="Description"
           component={renderTextArea}
-          placeholder="Description"
-          margin="normal" />
+          placeholder="Description" />
       </div>
       <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
       <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>

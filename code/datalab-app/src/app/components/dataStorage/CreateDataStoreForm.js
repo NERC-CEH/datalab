@@ -7,7 +7,6 @@ import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 import { DATA_STORE, getStackSelections } from '../../../shared/stackTypes';
 
 const initialValues = { type: 'nfs' };
-const fieldStyle = { minWidth: 250 };
 
 const CreateDataStoreForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
@@ -15,52 +14,42 @@ const CreateDataStoreForm = (props) => {
     <form onSubmit={handleSubmit}>
       <div>
         <Field
-          style={fieldStyle}
           name="displayName"
           label="Display Name"
           placeholder="Display Name"
-          component={renderTextField}
-          margin="normal" />
+          component={renderTextField} />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="type"
           label="Storage Type"
           placeholder="Storage Type"
           component={renderSelectField}
-          options={getStackSelections(DATA_STORE)}
-          margin="normal" />
+          options={getStackSelections(DATA_STORE)} />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="volumeSize"
           label="Storage Size (GB)"
           placeholder="GB"
           component={renderTextField}
           type="number"
           InputProps={{ inputProps: { min: 5, max: 200 } }}
-          parse={value => Number(value)}
-          margin="normal" />
+          parse={value => Number(value)} />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="name"
           label="Internal Name"
           placeholder="Internal Name"
-          component={renderTextField}
-          margin="normal" />
+          component={renderTextField} />
       </div>
       <div>
         <Field
-          style={fieldStyle}
           name="description"
           label="Description"
           placeholder="Description"
-          component={renderTextArea}
-          margin="normal" />
+          component={renderTextArea} />
       </div>
       <Button style={{ margin: 8 }} raised type="submit" color="primary" disabled={submitting}>Create</Button>
       <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>

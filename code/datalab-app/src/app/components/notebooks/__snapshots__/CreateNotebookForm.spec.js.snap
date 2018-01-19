@@ -6,21 +6,14 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
     <Field
       component={[Function]}
       label="Display Name"
-      margin="normal"
       name="displayName"
       placeholder="Display Name"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Notebook Type"
-      margin="normal"
       name="type"
       options={
         Array [
@@ -38,11 +31,6 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
           },
         ]
       }
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
@@ -50,29 +38,17 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       component={[Function]}
       endText=".datalabs.nerc.ac.uk"
       label="URL Name"
-      margin="normal"
       name="name"
       placeholder="Notebook Name for URL"
       startText="http://datalab-"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Description"
-      margin="normal"
       name="description"
       placeholder="Description"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>

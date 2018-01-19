@@ -6,21 +6,14 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     <Field
       component={[Function]}
       label="Display Name"
-      margin="normal"
       name="displayName"
       placeholder="Display Name"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Storage Type"
-      margin="normal"
       name="type"
       options={
         Array [
@@ -31,11 +24,6 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
         ]
       }
       placeholder="Storage Type"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
@@ -50,15 +38,9 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       }
       component={[Function]}
       label="Storage Size (GB)"
-      margin="normal"
       name="volumeSize"
       parse={[Function]}
       placeholder="GB"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
       type="number"
     />
   </div>
@@ -66,28 +48,16 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     <Field
       component={[Function]}
       label="Internal Name"
-      margin="normal"
       name="name"
       placeholder="Internal Name"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Description"
-      margin="normal"
       name="description"
       placeholder="Description"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <withStyles(Button)

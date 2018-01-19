@@ -6,21 +6,14 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
     <Field
       component={[Function]}
       label="Display Name"
-      margin="normal"
       name="displayName"
       placeholder="Display Name"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Site Type"
-      margin="normal"
       name="type"
       options={
         Array [
@@ -35,11 +28,6 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
         ]
       }
       placeholder="Site Type"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
@@ -47,44 +35,26 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       component={[Function]}
       endText=".datalabs.nerc.ac.uk"
       label="URL Name"
-      margin="normal"
       name="name"
       placeholder="Site Name for URLs"
       startText="http://datalab-"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Source Path"
-      margin="normal"
       name="sourcePath"
       placeholder="Source Directory for Site"
       startText="/data/"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <div>
     <Field
       component={[Function]}
       label="Description"
-      margin="normal"
       name="description"
       placeholder="Description"
-      style={
-        Object {
-          "minWidth": 250,
-        }
-      }
     />
   </div>
   <withStyles(Button)
