@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import DataStorageTablePage from './DataStorageTablePage';
+import DataStoragePage from './DataStoragePage';
 
 it('DataStorageTablePage renders correct snapshot', () => {
-  expect(shallow(<DataStorageTablePage/>)).toMatchSnapshot();
+  expect(shallow(<DataStoragePage/>)).toMatchSnapshot();
 });

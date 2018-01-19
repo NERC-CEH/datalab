@@ -22,6 +22,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
           "type": "type1",
         }
       }
+      typeName="expectedTypeName"
     />
   </withStyles(GridWrapper)>
   <withStyles(GridWrapper)
@@ -42,6 +43,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
           "type": "type2",
         }
       }
+      typeName="expectedTypeName"
     />
   </withStyles(GridWrapper)>
   <withStyles(GridWrapper)
@@ -62,6 +64,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
           "type": "type3",
         }
       }
+      typeName="expectedTypeName"
     />
   </withStyles(GridWrapper)>
   <withStyles(GridWrapper)
@@ -72,7 +75,10 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     xl={2}
     xs={12}
   >
-    <Connect(CreateStackContainer) />
+    <withStyles(NewStackButton)
+      onClick={[Function]}
+      typeName="expectedTypeName"
+    />
   </withStyles(GridWrapper)>
 </withStyles(GridWrapper)>
 `;
@@ -89,7 +95,10 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
     xl={2}
     xs={12}
   >
-    <Connect(CreateStackContainer) />
+    <withStyles(NewStackButton)
+      onClick={[Function]}
+      typeName="expectedTypeName"
+    />
   </withStyles(GridWrapper)>
 </withStyles(GridWrapper)>
 `;

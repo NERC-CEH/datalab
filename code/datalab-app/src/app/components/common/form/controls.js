@@ -4,9 +4,12 @@ import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl, FormHelperText } from 'material-ui/Form';
+import { fieldStyle, fieldMargin } from './controlStyles';
 
 export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) =>
   <TextField
+    style={fieldStyle}
+    margin={fieldMargin}
     label={label}
     helperText={touched ? error : ''}
     error={error && touched}
@@ -16,6 +19,8 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
 
 export const renderTextArea = ({ input, label, meta: { touched, error }, ...custom }) =>
   <TextField
+    style={fieldStyle}
+    margin={fieldMargin}
     label={label}
     helperText={touched ? error : ''}
     error={error && touched}
@@ -24,17 +29,22 @@ export const renderTextArea = ({ input, label, meta: { touched, error }, ...cust
     {...custom}
   />;
 
-export const renderSelectField = ({ input, label, meta: { touched, error }, options, margin, ...custom }) =>
-  <FormControl error={touched && error} margin={margin}>
+export const renderSelectField = ({ input, label, meta: { touched, error }, options, ...custom }) =>
+  <FormControl error={touched && error} margin={fieldMargin}>
     <InputLabel>{label}</InputLabel>
-    <Select onChange={(param, data) => input.onChange(data.value)} {...input} {...custom}>
+    <Select
+      style={fieldStyle}
+      onChange={(param, data) => input.onChange(data.value)}
+      {...input}
+      {...custom}
+    >
       {options.map(({ text, value }, idx) => (<MenuItem key={idx} value={value}>{text}</MenuItem>))}
     </Select>
     {touched && error && <FormHelperText>{error}</FormHelperText>}
   </FormControl>;
 
-export const renderAdornedTextField = ({ input, label, meta: { touched, error }, startText, endText, margin, ...custom }) =>
-  <FormControl error={touched && error} margin={margin}>
+export const renderAdornedTextField = ({ input, label, meta: { touched, error }, startText, endText, ...custom }) =>
+  <FormControl error={touched && error} margin={fieldMargin}>
     <InputLabel>{label}</InputLabel>
     <Input
       startAdornment={<InputAdornment position="start">{startText}</InputAdornment>}

@@ -5,9 +5,11 @@ export const ZEPPELIN = 'zeppelin';
 export const RSTUDIO = 'rstudio';
 export const RSHINY = 'rshiny';
 export const NBVIEWER = 'nbviewer';
+export const NFS_VOLUME = 'nfs';
 
 export const ANALYSIS = 'analysis';
 export const PUBLISH = 'publish';
+export const DATA_STORE = 'dataStore';
 
 const STACK_TYPES = [
   {
@@ -34,6 +36,11 @@ const STACK_TYPES = [
     name: NBVIEWER,
     shortDescription: 'An Jupyter Notebook Viewer Site',
     category: PUBLISH,
+  },
+  {
+    name: NFS_VOLUME,
+    shortDescription: 'A NFS volume',
+    category: DATA_STORE,
   },
 ];
 

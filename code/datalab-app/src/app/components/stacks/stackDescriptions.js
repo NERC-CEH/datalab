@@ -1,4 +1,4 @@
-import { JUPYTER, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER } from '../../../shared/stackTypes';
+import { JUPYTER, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, NFS_VOLUME } from '../../../shared/stackTypes';
 import jupyerLogo from '../../../assets/images/jupyter-logo.svg';
 import zeppelinLogo from '../../../assets/images/zeppelin-logo.svg';
 import rstudioLogo from '../../../assets/images/rstudio-logo.png';
@@ -12,6 +12,7 @@ const rstudioDescription = 'RStudio is an integrated development environment (ID
 const rshinyDescription = 'Shiny is an R package that makes it easy to build interactive web apps straight from R. You can host standalone apps on a webpage or ' +
   'embed them in R Markdown documents or build dashboards.';
 const nbviewerDescription = 'NBViewer is a simple way to share notebooks. Any Jupyter notebook can be served as a web page.';
+const nfsVolumeDescription = 'Network File System (NFS) volume to store data for Notebooks and Sites.';
 
 export default {
   [JUPYTER]: { description: jupyterDescription, logo: jupyerLogo },
@@ -19,4 +20,5 @@ export default {
   [RSTUDIO]: { description: rstudioDescription, logo: rstudioLogo },
   [RSHINY]: { description: rshinyDescription, logo: rshinyLogo },
   [NBVIEWER]: { description: nbviewerDescription, logo: nbviewerLogo },
+  [NFS_VOLUME]: { description: nfsVolumeDescription, icon: 'save' },
 };

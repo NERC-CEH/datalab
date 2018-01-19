@@ -5,22 +5,22 @@ import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
 const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
-    <Dialog open={true} maxWidth="md">
-      <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
-        <div>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogContent>
-            <CreateNotebookForm onSubmit={onSubmit} cancel={onCancel} />
-          </DialogContent>
-        </div>
-        <div style={{ width: 320 }}>
-          <DialogTitle>Notebook Preview</DialogTitle>
-          <div style={{ width: '90%', margin: '0 auto' }}>
-            <PreviewNotebookCard />
-          </div>
+  <Dialog open={true} maxWidth="md">
+    <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
+      <div>
+        <DialogTitle>{title}</DialogTitle>
+        <DialogContent>
+          <CreateNotebookForm onSubmit={onSubmit} cancel={onCancel} />
+        </DialogContent>
+      </div>
+      <div style={{ width: 320 }}>
+        <DialogTitle>Notebook Preview</DialogTitle>
+        <div style={{ width: '90%', margin: '0 auto' }}>
+          <PreviewNotebookCard />
         </div>
       </div>
-    </Dialog>
+    </div>
+  </Dialog>
 );
 
 CreateNotebookDialog.propTypes = {

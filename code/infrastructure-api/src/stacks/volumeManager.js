@@ -24,13 +24,14 @@ function createVolume(params) {
 }
 
 function deleteVolume(params) {
+  // Deletion of PVC is blocked to prevent breaking pods.
   const { datalabInfo, name } = params;
   const k8sName = `${type}-${name}`;
 
   return ingressApi.deleteIngress(k8sName, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))
-    .then(() => volumeApi.deletePersistentVolumeClaim(`${name}-claim`))
+    // .then(() => volumeApi.deletePersistentVolumeClaim(`${name}-claim`))
     .then(() => k8sSecretApi.deleteSecret(k8sName))
     .then(() => secretManager.deleteMinioCredentials(datalabInfo.name, name));
 }
