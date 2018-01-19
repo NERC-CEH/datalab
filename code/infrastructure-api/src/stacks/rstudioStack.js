@@ -15,7 +15,7 @@ function createRStudioStack(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(name, type, deploymentGenerator.createRStudioService))
-    .then(createIngressRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect(params, ingressGenerator.createIngress));
 }
 
 function deleteRStudioStack(params) {
