@@ -37,8 +37,10 @@ spec:
         - name: R_LIBS_USER
           value: {{ &sharedRLibs }}
         volumeMounts:
+{{#volumeMount}}
           - name: glusterfsvol
             mountPath: /data
+{{/volumeMount}}
           - name: zeppelin-shiro
             mountPath: /secret
         resources:
@@ -70,9 +72,11 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
       volumes:
+{{#volumeMount}}
         - name: glusterfsvol
           persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-claim
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}
         - name: zeppelin-shiro
           secret:
             secretName: {{ name }}

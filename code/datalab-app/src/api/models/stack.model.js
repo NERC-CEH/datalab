@@ -21,6 +21,7 @@ const StackSchema = new Schema({
   category: { type: String, enum: category, required: true },
   status: { type: String, enum: states, default: REQUESTED },
   created: { type: Date, default: Date.now },
+  volumeMount: String,
 });
 
 mongoose.model('Stack', StackSchema);

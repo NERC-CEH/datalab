@@ -27,26 +27,25 @@ const MINIO_VERSION = '1.0';
 const MINIO_CONNECT_IMAGE = 'nerc/connect';
 const MINIO_CONNECT_VERSION = '1.0.0';
 
-function createJupyterDeployment({ datalabInfo, deploymentName, notebookName }) {
+function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, volumeMount }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    datalabVolume: datalabInfo.volume,
     domain: `${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
     jupyter: {
       imageName: JUPYTER_IMAGE,
       version: JUPYTER_VERSION,
     },
+    volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createZeppelinDeployment({ datalabInfo, deploymentName }) {
+function createZeppelinDeployment({ deploymentName, volumeMount }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    datalabVolume: datalabInfo.volume,
     sparkMasterAddress: SPARK_MASTER_ADDRESS,
     sharedRLibs: SHARED_R_LIBS,
     zeppelin: {
@@ -55,21 +54,22 @@ function createZeppelinDeployment({ datalabInfo, deploymentName }) {
       connectImageName: ZEPPELIN_CONNECT_IMAGE,
       connectVersion: ZEPPELIN_CONNECT_VERSION,
     },
+    volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.ZEPPELIN_DEPLOYMENT);
 }
 
-function createRStudioDeployment({ datalabInfo, deploymentName }) {
+function createRStudioDeployment({ deploymentName, volumeMount }) {
   const context = {
     name: deploymentName,
-    datalabVolume: datalabInfo.volume,
     rstudio: {
       imageName: RSTUDIO_IMAGE,
       version: RSTUDIO_VERSION,
       connectImageName: RSTUDIO_CONNECT_IMAGE,
       connectVersion: RSTUDIO_CONNECT_VERSION,
     },
+    volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);

@@ -5,7 +5,6 @@ metadata:
   labels:
     name: {{ name }}
   name: {{ name }}
-  namespace: {{ namespace }}
 spec:
   template:
     metadata:
@@ -27,9 +26,11 @@ spec:
             secretKeyRef:
               name: {{ name }}
               key: password
+{{#volumeMount}}
         volumeMounts:
         - name: glusterfsvol
           mountPath: /data
+{{/volumeMount}}
         resources:
           requests:
             cpu: 200m
@@ -52,7 +53,9 @@ spec:
             port: 8000
           initialDelaySeconds: 5
           periodSeconds: 10
+{{#volumeMount}}
       volumes:
       - name: glusterfsvol
         persistentVolumeClaim:
-          claimName: {{ datalabVolume }}-claim
+          claimName: {{ volumeMount }}-claim
+{{/volumeMount}}

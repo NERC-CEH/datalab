@@ -5,7 +5,6 @@ metadata:
   labels:
     name: {{ name }}
   name: {{ name }}
-  namespace: {{ namespace }}
 spec:
   template:
     metadata:
@@ -36,9 +35,11 @@ spec:
           value: "{{ grantSudo }}"
         - name: R_LIBS_USER
           value: "/data/packages/R/%p/%v"
+{{#volumeMount}}
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+{{/volumeMount}}
         resources:
           requests:
             cpu: 200m
@@ -46,7 +47,9 @@ spec:
           limits:
             cpu: 2
             memory: 4Gi
+{{#volumeMount}}
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-claim
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}
