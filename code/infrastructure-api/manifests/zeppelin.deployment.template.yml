@@ -14,7 +14,39 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
+      initContainers:
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/zeppelin"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/zeppelin"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
       containers:
+      - name: {{ name }}-connect
+        image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: CONNECT_TYPE
+          value: ZEPPELIN
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
       - name:  {{ name }}
         image: {{ &zeppelin.imageName }}:{{ zeppelin.version }}
         imagePullPolicy : IfNotPresent
@@ -36,13 +68,6 @@ spec:
           value: "{{ grantSudo }}"
         - name: R_LIBS_USER
           value: {{ &sharedRLibs }}
-        volumeMounts:
-{{#volumeMount}}
-          - name: glusterfsvol
-            mountPath: /data
-{{/volumeMount}}
-          - name: zeppelin-shiro
-            mountPath: /secret
         resources:
           requests:
             cpu: 200m
@@ -56,27 +81,19 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
-      - name: {{ name }}-connect
-        image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        env:
-        - name: CONNECT_TYPE
-          value: ZEPPELIN
-        livenessProbe:
-          httpGet:
-            path: /status
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
+        volumeMounts:
+          - name: zeppelin-shiro
+            mountPath: /secret
+{{#volumeMount}}
+          - name: glusterfsvol
+            mountPath: /data
+{{/volumeMount}}
       volumes:
+        - name: zeppelin-shiro
+          secret:
+            secretName: {{ name }}
 {{#volumeMount}}
         - name: glusterfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
 {{/volumeMount}}
-        - name: zeppelin-shiro
-          secret:
-            secretName: {{ name }}

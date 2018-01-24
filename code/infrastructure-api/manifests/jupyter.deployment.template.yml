@@ -13,6 +13,23 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
+      initContainers:
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/jupyter"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/jupyter"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
       containers:
       - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
         imagePullPolicy : "IfNotPresent"
@@ -35,11 +52,6 @@ spec:
           value: "{{ grantSudo }}"
         - name: R_LIBS_USER
           value: "/data/packages/R/%p/%v"
-{{#volumeMount}}
-        volumeMounts:
-            - mountPath: /data
-              name: glusterfsvol
-{{/volumeMount}}
         resources:
           requests:
             cpu: 200m
@@ -48,6 +60,9 @@ spec:
             cpu: 2
             memory: 4Gi
 {{#volumeMount}}
+        volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
