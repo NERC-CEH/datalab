@@ -6,12 +6,12 @@ k8s-worker-2    ansible_host=192.168.3.8
 k8s-worker-3    ansible_host=192.168.3.9
 k8s-worker-4    ansible_host=192.168.3.10
 gluster-1       ansible_host=192.168.3.20
-gluster-2       ansible_host=192.168.3.21
-gluster-3       ansible_host=192.168.3.22
 glusterfs-1     ansible_host=192.168.3.40
 glusterfs-2     ansible_host=192.168.3.41
 glusterfs-3     ansible_host=192.168.3.42
 test-lb         ansible_host=192.168.3.30
+discourse-test  ansible_host=192.168.3.50
+discourse       ansible_host=192.168.3.51
 
 [bastions]
 bastion
@@ -37,13 +37,17 @@ k8s-worker-4
 
 [gluster]
 gluster-1
-gluster-2
-gluster-3
 
 [glusterfs]
 glusterfs-1
 glusterfs-2
 glusterfs-3
+
+[test-discourse]
+discourse-test
+
+[prod-discourse]
+discourse
 
 [proxied:children]
 load-balancers
@@ -51,8 +55,9 @@ test-load-balancers
 k8s-cluster
 gluster
 glusterfs
+test-discourse
+prod-discourse
 
 [new]
-glusterfs-1
-glusterfs-2
-glusterfs-3
+discourse
+discourse-test

@@ -32,3 +32,5 @@ base_packages:
   - ntp
 
 k8s_api_port: 6443
+
+sendgrid_api_key: "{{ vault_sendgrid_api_key }}"
