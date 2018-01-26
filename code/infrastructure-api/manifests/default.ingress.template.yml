@@ -4,8 +4,8 @@ kind: Ingress
 metadata:
   name: {{ name }}
   annotations:
-    ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
-    ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
+    # ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
+    # ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
 {{#rewriteTarget}}
     ingress.kubernetes.io/rewrite-target: {{ &rewriteTarget }}
 {{/rewriteTarget}}

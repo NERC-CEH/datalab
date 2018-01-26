@@ -12,6 +12,14 @@ spec:
       labels:
         name: {{ name }}
     spec:
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "chown -R 1000:1000 /mnt/glusterfs"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
       containers:
         - name: minio
           image: {{ &minio.imageName }}:{{ minio.version }}
