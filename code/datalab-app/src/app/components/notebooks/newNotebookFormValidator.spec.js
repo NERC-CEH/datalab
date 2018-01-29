@@ -8,6 +8,7 @@ describe('New Notebook Form Validator', () => {
       displayName: 'Display Name',
       type: 'jupyter',
       name: 'name',
+      volumeMount: 'dataStore',
       description: 'The notebook description',
     };
 
@@ -25,6 +26,7 @@ describe('New Notebook Form Validator', () => {
       displayName: 'Display Name',
       type: 'jupyter',
       name: 'abc',
+      volumeMount: 'dataStore',
       description: 'The notebook description',
     };
 
@@ -36,6 +38,7 @@ describe('New Notebook Form Validator', () => {
       displayName: 'Display Name',
       type: 'jupyter',
       name: 'abc!',
+      volumeMount: 'dataStore',
       description: 'The notebook description',
     };
 
