@@ -134,10 +134,10 @@ describe('DataStorageContainer', () => {
       });
     });
 
-    it('confirmDeleteDataStore calls openModalDialog with correct action', () => {
+    it('confirmDeleteDataStore calls openModalDialog with correct action for unmounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [] };
 
       // Act/Assert
       const output = shallowRenderPure(props);
@@ -149,10 +149,42 @@ describe('DataStorageContainer', () => {
       expect(firstMockCall[0]).toBe('MODAL_TYPE_ROBUST_CONFIRMATION');
     });
 
-    it('confirmDeleteDataStore generates correct dialog', () => {
+    it('confirmDeleteDataStore calls openModalDialog with correct action for a mounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [1, 2, 3] };
+
+      // Act/Assert
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      deleteStack(stack);
+      expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      expect(firstMockCall[0]).toBe('MODAL_TYPE_CONFIRMATION');
+    });
+
+    it('confirmDeleteDataStore generates correct dialog for unmounted volume', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [] };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      deleteStack(stack);
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, body, onCancel } = firstMockCall[1];
+      expect({ title, body }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('confirmDeleteDataStore generates correct dialog for mounted volume', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [1, 2, 3] };
 
       // Act
       const output = shallowRenderPure(props);
@@ -169,7 +201,7 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore - onSubmit calls deleteDataStore with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName' };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [] };
 
       // Act
       const output = shallowRenderPure(props);

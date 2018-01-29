@@ -32,7 +32,7 @@ class CreateNotebookDialog extends Component {
               <CreateNotebookForm
                 onSubmit={this.props.onSubmit}
                 cancel={this.props.onCancel}
-                dataStorageOptions={this.getDataStorage()}/>
+                dataStorageOptions={this.getDataStorage()} />
             </DialogContent>
           </div>
           <div style={{ width: 320 }}>
@@ -65,4 +65,5 @@ CreateNotebookDialog.propTypes = {
   onCancel: PropTypes.func.isRequired,
 };
 
+export { CreateNotebookDialog as PureCreateNotebookDialog }; // export for testing
 export default connect(mapStateToProps, mapDispatchToProps)(CreateNotebookDialog);

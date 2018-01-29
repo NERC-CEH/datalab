@@ -23,9 +23,9 @@ const getUrl = id => ({
   payload: stackService.getUrl(id),
 });
 
-const openStack = notebookUrl => ({
+const openStack = stackUrl => ({
   type: OPEN_STACK_ACTION,
-  payload: window.open(notebookUrl),
+  payload: window.open(stackUrl),
 });
 
 const createStack = stack => ({
@@ -33,18 +33,15 @@ const createStack = stack => ({
   payload: stackService.createStack(stack),
 });
 
-const checkStackName = notebookName => ({
+const checkStackName = stackName => ({
   type: CHECK_STACK_NAME_ACTION,
-  payload: stackService.checkStackName(notebookName),
+  payload: stackService.checkStackName(stackName),
 });
 
-const deleteStack = (notebook) => {
-  const { name, type } = notebook;
-  return {
-    type: DELETE_STACK_ACTION,
-    payload: stackService.deleteStack({ name, type }),
-  };
-};
+const deleteStack = ({ name, type }) => ({
+  type: DELETE_STACK_ACTION,
+  payload: stackService.deleteStack({ name, type }),
+});
 
 export default {
   loadStacks,

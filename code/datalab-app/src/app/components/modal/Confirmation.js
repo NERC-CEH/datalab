@@ -10,8 +10,8 @@ const Confirmation = ({ title, body, onSubmit, onCancel }) => (
       <DialogContentText>{body}</DialogContentText>
     </DialogContent>
     <DialogActions>
-      <IconButton onClick={onCancel} icon="clear">No</IconButton>
-      <IconButton danger onClick={onSubmit} icon="delete">Yes</IconButton>
+      <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
+      <IconButton danger onClick={onSubmit} icon="delete" disabled={onSubmit === undefined}>Confirm Deletion</IconButton>
     </DialogActions>
   </Dialog>
 );
@@ -19,7 +19,7 @@ const Confirmation = ({ title, body, onSubmit, onCancel }) => (
 Confirmation.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   onCancel: PropTypes.func.isRequired,
 };
 

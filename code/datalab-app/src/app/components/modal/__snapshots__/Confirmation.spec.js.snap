@@ -18,14 +18,15 @@ exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
       icon="clear"
       onClick={[Function]}
     >
-      No
+      Cancel
     </withStyles(IconButton)>
     <withStyles(IconButton)
       danger={true}
+      disabled={false}
       icon="delete"
       onClick={[Function]}
     >
-      Yes
+      Confirm Deletion
     </withStyles(IconButton)>
   </withStyles(DialogActions)>
 </withStyles(Dialog)>

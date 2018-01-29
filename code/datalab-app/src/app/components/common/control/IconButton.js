@@ -44,7 +44,7 @@ const IconButton = ({ classes, onClick, children, icon, danger = false, disabled
 );
 
 IconButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   children: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   danger: PropTypes.bool,
