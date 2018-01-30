@@ -19,10 +19,6 @@ spec:
         ports:
         - containerPort: 3838
           protocol: TCP
-        volumeMounts:
-          - name: glusterfsvol
-            mountPath: /srv/shiny-server
-            subPath: {{ &sourcePath }}
         resources:
           requests:
             cpu: 200m
@@ -30,7 +26,13 @@ spec:
           limits:
             cpu: 1
             memory: 2Gi
+{{#volumeMount}}
+        volumeMounts:
+          - name: glusterfsvol
+            mountPath: /srv/shiny-server
+            subPath: {{ &sourcePath }}
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-claim
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}

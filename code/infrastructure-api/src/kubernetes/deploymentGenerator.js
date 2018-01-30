@@ -75,29 +75,29 @@ function createRStudioDeployment({ deploymentName, volumeMount }) {
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
 }
 
-function createRShinyDeployment({ datalabInfo, deploymentName, sourcePath }) {
+function createRShinyDeployment({ deploymentName, sourcePath, volumeMount }) {
   const context = {
     name: deploymentName,
-    datalabVolume: datalabInfo.volume,
     sourcePath,
     rshiny: {
       imageName: RSHINY_IMAGE,
       version: RSHINY_VERSION,
     },
+    volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.RSHINY_DEPLOYMENT);
 }
 
-function createNbViewerDeployment({ datalabInfo, deploymentName, sourcePath }) {
+function createNbViewerDeployment({ deploymentName, sourcePath, volumeMount }) {
   const context = {
     name: deploymentName,
-    datalabVolume: datalabInfo.volume,
     sourcePath,
     nbviewer: {
       imageName: NBVIEWER_IMAGE,
       version: NBVIEWER_VERSION,
     },
+    volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);

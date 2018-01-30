@@ -24,6 +24,7 @@ spec:
               "--debug",
               "--logging=debug",
               "--no-cache"]
+{{#volumeMount}}
         volumeMounts:
         - name: glusterfsvol
           mountPath: /notebooks
@@ -32,4 +33,5 @@ spec:
       volumes:
       - name: glusterfsvol
         persistentVolumeClaim:
-          claimName: {{ datalabVolume }}-claim
+          claimName: {{ volumeMount }}-claim
+{{/volumeMount}}
