@@ -12,7 +12,6 @@ import stackRepository from '../dataaccess/stackRepository';
 const baseConfig = {
   apiRoute: 'stacks',
   elementName: 'stack',
-  elementRepository: stackRepository,
 };
 
 export const createStackRequest = (stack, datalabInfo) => ({
@@ -39,11 +38,16 @@ const createStack = generateCreateElement({
   ...baseConfig,
   generateApiRequest: createStackRequest,
   generateApiPayload: createStackPayload,
+  createOrUpdateRecord: stackRepository.createOrUpdate,
 });
+
+const deleteRecord = (user, { name }) =>
+  stackRepository.deleteByName(user, name);
 
 const deleteStack = generateDeleteElement({
   ...baseConfig,
   generateApiPayload: deleteStackPayload,
+  deleteRecord,
 });
 
 export default { createStack, deleteStack };

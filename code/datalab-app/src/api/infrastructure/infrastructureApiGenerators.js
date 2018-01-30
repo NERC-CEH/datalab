@@ -10,7 +10,7 @@ export function generateCreateElement(props) {
     elementName,
     generateApiRequest,
     generateApiPayload,
-    elementRepository,
+    createOrUpdateRecord,
   } = props;
 
   const API_URL = `${config.get('infrastructureApi')}/${apiRoute}`;
@@ -27,7 +27,7 @@ export function generateCreateElement(props) {
     const apiRequest = generateApiRequest(element, datalabInfo);
 
     logger.debug(`Create database record: ${JSON.stringify(apiRequest)}`);
-    return elementRepository.createOrUpdate(user, apiRequest)
+    return createOrUpdateRecord(user, apiRequest)
       .then(sendCreationRequest(apiRequest, datalabInfo))
       .then(() => element);
   };
@@ -49,7 +49,7 @@ export function generateDeleteElement(props) {
     apiRoute,
     elementName,
     generateApiPayload,
-    elementRepository,
+    deleteRecord,
   } = props;
 
   const API_URL = `${config.get('infrastructureApi')}/${apiRoute}`;
@@ -65,7 +65,7 @@ export function generateDeleteElement(props) {
 
   const removeAndDeleteElement = (user, element) => datalabInfo =>
     sendDeletionRequest(user, element, datalabInfo)
-      .then(elementRepository.deleteByName(user, element.name));
+      .then(deleteRecord(user, element));
 
   const sendDeletionRequest = (user, element, datalabInfo) => {
     const payload = generateApiPayload(element, datalabInfo);

@@ -18,7 +18,8 @@ describe('dataStorageRepository', () => {
 
   it('getAll returns expected snapshot', () =>
     dataStorageRepository.getAll('user').then((storage) => {
-      expect(mockDatabase().query()).toEqual({});
+      // Filters for record with status not equal to deleted.
+      expect(mockDatabase().query()).toEqual({ status: { $ne: 'deleted' } });
       expect(storage).toMatchSnapshot();
     }));
 
@@ -47,6 +48,16 @@ describe('dataStorageRepository', () => {
     const name = 'oldVolume';
     dataStorageRepository.deleteByName(undefined, name).then(() => {
       expect(mockDatabase().query()).toEqual({ name });
+    });
+  });
+
+  it('update should use correct operators to overwrite fields', () => {
+    const name = 'deletedVolume';
+    const updateObject = { status: 'deleted' };
+    dataStorageRepository.update(undefined, name, updateObject).then(() => {
+      expect(mockDatabase().query()).toEqual({ name });
+      expect(mockDatabase().entity()).toEqual({ $set: { status: 'deleted' } });
+      expect(mockDatabase().params()).toEqual({ upsert: false });
     });
   });
 });
