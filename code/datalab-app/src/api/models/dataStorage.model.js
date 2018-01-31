@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 
 export const REQUESTED = 'requested';
 export const CREATING = 'creating';
+export const DELETED = 'deleted';
 
-const states = [REQUESTED, CREATING];
+const states = [REQUESTED, CREATING, DELETED];
 
 const DataStorageSchema = new Schema({
   name: String,
