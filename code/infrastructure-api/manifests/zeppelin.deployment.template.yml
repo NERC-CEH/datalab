@@ -15,6 +15,9 @@ spec:
       securityContext:
         runAsUser: 0
       initContainers:
+        # This container will generate the expected folder structure for the notebooks directory, without this the
+        # zepplin container will not start. As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
         - name: create-notebook-folders
           image: busybox
           imagePullPolicy: IfNotPresent
@@ -23,6 +26,8 @@ spec:
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
+        # This container correct the folder permissions for the generated notebook directory to be owned by the
+        # datalabs:users (user:group; 1000:100).
         - name: set-directory-owner
           image: busybox
           imagePullPolicy: IfNotPresent

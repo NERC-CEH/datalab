@@ -12,6 +12,8 @@ spec:
       labels:
         name: {{ name }}
     spec:
+      # No init container need as the subPath variable only mount the required directory. If the directory is miss this
+      # is automatically created.
       containers:
       - image: {{ &rshiny.imageName }}:{{ rshiny.version }}
         imagePullPolicy : "IfNotPresent"

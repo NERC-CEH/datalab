@@ -12,6 +12,9 @@ spec:
       labels:
         name: {{ name }}
     spec:
+    spec:
+      # No init container need as the subPath variable only mount the required directory. If the directory is miss this
+      # is automatically created.
       containers:
       - name: {{ name }}
         image: {{ &nbviewer.imageName }}:{{ nbviewer.version }}

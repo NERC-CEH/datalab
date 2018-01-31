@@ -12,6 +12,9 @@ spec:
         name: {{ name }}
     spec:
       initContainers:
+        # This container will generate the RStudio notebooks directory. RStudio starts with /home/datalabs as its initial
+        # start-up/default directory and has not environmental variable to change it. This is fixed by mounting an empty
+        # directory as /home and created a symlink datalabs pointing to /data/notebooks/rstudio
         - name: create-notebook-folders
           image: busybox
           imagePullPolicy: IfNotPresent
@@ -20,6 +23,7 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+        # This container will force the directory own to be datalabs:users (user:group; 1000:100).
         - name: set-directory-owner
           image: busybox
           imagePullPolicy: IfNotPresent
@@ -28,6 +32,7 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+        # This container will create the /home/datalabs to /data/notebooks/rstudio symlink
         - name: create-datalab-symlink
           image: busybox
           imagePullPolicy: IfNotPresent
