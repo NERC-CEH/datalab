@@ -10,7 +10,7 @@ const datalabInfo = { name: 'testlab', domain: 'test-datalabs.nerc.ac.uk' };
 
 describe('Stack API configuration', () => {
   it('should give correct API request for creation', () => {
-    const stack = { name: 'notebookName', type: 'jupyter' };
+    const stack = { name: 'notebookName', type: 'jupyter', volumeMount: 'dataStore' };
 
     expect(createStackRequest(stack, datalabInfo)).toMatchSnapshot();
   });

@@ -23,6 +23,10 @@ function getByName(user, name) {
   return Stack().findOne({ name }).exec();
 }
 
+function getByVolumeMount(user, volumeMount) {
+  return Stack().find({ volumeMount }).exec();
+}
+
 function createOrUpdate(user, stack) {
   const stackToSave = { ...stack, category: getCategoryForType(stack.type) };
   const query = { name: stack.name };
@@ -33,4 +37,4 @@ function deleteByName(user, name) {
   return Stack().remove({ name }).exec();
 }
 
-export default { getAll, getByCategory, getById, getByName, createOrUpdate, deleteByName };
+export default { getAll, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };

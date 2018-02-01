@@ -10,6 +10,7 @@ Object {
   "name": "notebookName",
   "sourcePath": "expectedSourcePath",
   "type": "jupyter",
+  "volumeMount": undefined,
 }
 `;
 
@@ -30,5 +31,6 @@ Object {
   "name": "notebookName",
   "type": "jupyter",
   "url": "https://testlab-notebookName.test-datalabs.nerc.ac.uk",
+  "volumeMount": "dataStore",
 }
 `;

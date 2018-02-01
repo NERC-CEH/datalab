@@ -33,13 +33,10 @@ const createDataStore = dataStore => ({
   payload: dataStorageService.createDataStore(dataStore),
 });
 
-const deleteDataStore = (dataStore) => {
-  const { name } = dataStore;
-  return {
-    type: DELETE_DATASTORE_ACTION,
-    payload: dataStorageService.deleteDataStore({ name }),
-  };
-};
+const deleteDataStore = ({ name }) => ({
+  type: DELETE_DATASTORE_ACTION,
+  payload: dataStorageService.deleteDataStore({ name }),
+});
 
 export default {
   loadDataStorage,

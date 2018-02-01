@@ -1,6 +1,7 @@
 import httpMocks from 'node-mocks-http';
 import Promise from 'bluebird';
 import { validationResult } from 'express-validator/check';
+import { omit } from 'lodash';
 import stackController from './stackController';
 import stackManager from '../stacks/stackManager';
 
@@ -77,6 +78,12 @@ describe('Notebook Controller', () => {
       .then(() => expectValidationError('name', 'Name must be 4-12 characters long'));
   });
 
+  it('should validate the volumeMount field exists', () => {
+    const requestBody = omit(createRequestBody(), 'volumeMount');
+    return executeValidator(requestBody)
+      .then(() => expectValidationError('volumeMount', 'A Volume Mount must be specified'));
+  });
+
   it('should validate the additional fields for rshiny', () => {
     const requestBody = createRequestBody();
     requestBody.type = 'rshiny';
@@ -106,6 +113,7 @@ function createRequestBody() {
     },
     name: 'notebookId',
     type: 'jupyter',
+    volumeMount: 'dataStore',
   };
 }
 

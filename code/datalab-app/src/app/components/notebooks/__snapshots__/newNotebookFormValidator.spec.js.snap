@@ -18,5 +18,6 @@ Object {
   "displayName": "Display name can't be blank",
   "name": "Name can't be blank",
   "type": "Type can't be blank",
+  "volumeMount": "Volume mount can't be blank",
 }
 `;

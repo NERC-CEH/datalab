@@ -4,13 +4,16 @@ import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import CreateSiteForm from '../sites/CreateSiteForm';
 import PreviewSiteCard from '../sites/PreviewSiteCard';
 
-const CreateSiteDialog = ({ title, site, onSubmit, onCancel }) => (
+const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <CreateSiteForm onSubmit={onSubmit} cancel={onCancel} />
+          <CreateSiteForm
+            onSubmit={onSubmit}
+            cancel={onCancel}
+            dataStorageOptions={dataStorageOptions} />
         </DialogContent>
       </div>
       <div style={{ width: 320 }}>
@@ -27,6 +30,7 @@ CreateSiteDialog.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  dataStorageOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CreateSiteDialog;

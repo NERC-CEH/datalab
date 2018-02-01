@@ -27,6 +27,11 @@ const constraints = {
   sourcePath: {
     presence: true,
   },
+  volumeMount: {
+    presence: {
+      allowEmpty: false,
+    },
+  },
 };
 
 validate.formatters.reduxForm = errors => errors.reduce(errorReducer, {});

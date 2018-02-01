@@ -5,38 +5,42 @@ metadata:
   labels:
     name: {{ name }}
   name: {{ name }}
-  namespace: {{ namespace }}
 spec:
   template:
     metadata:
       labels:
         name: {{ name }}
     spec:
+      initContainers:
+        # This container will generate the RStudio notebooks directory. RStudio starts with /home/datalabs as its initial
+        # start-up/default directory and has not environmental variable to change it. This is fixed by mounting an empty
+        # directory as /home and created a symlink datalabs pointing to /data/notebooks/rstudio
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /data/notebooks/rstudio"]
+          volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+        # This container will force the directory own to be datalabs:users (user:group; 1000:100).
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 1000:100 /data/notebooks && chown 1000:100 /data/notebooks/rstudio"]
+          volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+        # This container will create the /home/datalabs to /data/notebooks/rstudio symlink
+        - name: create-datalab-symlink
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "ln -s /data/notebooks/rstudio/ /home/datalab"]
+          volumeMounts:
+            - mountPath: /home
+              name: homedir
       containers:
-      - name: {{ name }}
-        image: {{ &rstudio.imageName }}:{{ rstudio.version }}
-        imagePullPolicy : IfNotPresent
-        ports:
-        - containerPort: 8787
-          protocol: TCP
-        env:
-        - name: USER
-          value: datalab
-        - name: PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ name }}
-              key: password
-        volumeMounts:
-        - name: glusterfsvol
-          mountPath: /data
-        resources:
-          requests:
-            cpu: 200m
-            memory: 128Mi
-          limits:
-            cpu: 2
-            memory: 4Gi
       - name: {{ name }}-connect
         image: {{ &rstudio.connectImageName }}:{{ rstudio.connectVersion }}
         imagePullPolicy: IfNotPresent
@@ -52,7 +56,37 @@ spec:
             port: 8000
           initialDelaySeconds: 5
           periodSeconds: 10
+      - name: {{ name }}
+        image: {{ &rstudio.imageName }}:{{ rstudio.version }}
+        imagePullPolicy : IfNotPresent
+        ports:
+        - containerPort: 8787
+          protocol: TCP
+        env:
+        - name: USER
+          value: datalab
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ name }}
+              key: password
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
+{{#volumeMount}}
+        volumeMounts:
+        - name: glusterfsvol
+          mountPath: /data
+        - name: homedir
+          mountPath: /home
       volumes:
       - name: glusterfsvol
         persistentVolumeClaim:
-          claimName: {{ datalabVolume }}-claim
+          claimName: {{ volumeMount }}-claim
+      - name: homedir
+        emptyDir: {}
+{{/volumeMount}}

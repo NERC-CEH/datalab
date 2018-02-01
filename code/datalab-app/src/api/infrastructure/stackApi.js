@@ -26,6 +26,7 @@ export const createStackPayload = (stackRequest, datalabInfo) => ({
   type: stackRequest.type,
   sourcePath: stackRequest.sourcePath,
   isPublic: true,
+  volumeMount: stackRequest.volumeMount,
 });
 
 export const deleteStackPayload = (stack, datalabInfo) => ({

@@ -21,6 +21,16 @@ exports[`Site dialog creates correct snapshot 1`] = `
       <withStyles(DialogContent)>
         <ReduxForm
           cancel={[Function]}
+          dataStorageOptions={
+            Array [
+              Object {
+                "value": "value",
+              },
+              Object {
+                "value": "another value",
+              },
+            ]
+          }
           onSubmit={[Function]}
         />
       </withStyles(DialogContent)>

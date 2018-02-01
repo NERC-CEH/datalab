@@ -4,13 +4,16 @@ import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
-const CreateNotebookDialog = ({ title, notebook, onSubmit, onCancel }) => (
+const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <CreateNotebookForm onSubmit={onSubmit} cancel={onCancel} />
+          <CreateNotebookForm
+            onSubmit={onSubmit}
+            cancel={onCancel}
+            dataStorageOptions={dataStorageOptions} />
         </DialogContent>
       </div>
       <div style={{ width: 320 }}>
@@ -27,6 +30,7 @@ CreateNotebookDialog.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  dataStorageOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CreateNotebookDialog;
