@@ -69,4 +69,8 @@ export default CreateNotebookReduxForm;
 CreateNotebookForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
+  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
 };

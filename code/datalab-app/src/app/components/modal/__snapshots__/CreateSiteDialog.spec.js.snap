@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Site dialog is a container which creates correct snapshot 1`] = `
+exports[`Site dialog creates correct snapshot 1`] = `
 <withStyles(Dialog)
   maxWidth="md"
   open={true}
@@ -24,12 +24,10 @@ exports[`Site dialog is a container which creates correct snapshot 1`] = `
           dataStorageOptions={
             Array [
               Object {
-                "text": "First Data Store",
-                "value": undefined,
+                "value": "value",
               },
               Object {
-                "text": "Second Data Store",
-                "value": undefined,
+                "value": "another value",
               },
             ]
           }

@@ -13,6 +13,10 @@ describe('CreateNotebookForm', () => {
   const generateProps = () => ({
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
+    dataStorageOptions: [
+      { text: 'First Data Store', value: 'alpha' },
+      { text: 'Second Data Store', value: 'beta' },
+    ],
   });
 
   beforeEach(() => jest.resetAllMocks());
