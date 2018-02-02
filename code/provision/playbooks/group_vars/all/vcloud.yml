@@ -69,13 +69,6 @@ private_servers:
     disks:
       - name: gluster-1-disk1
         size: 1000
-  - name: gluster-2
-    internal_ip: 192.168.3.21
-    cpus: 2
-    memory: 8192
-    disks:
-      - name: gluster-2-disk1
-        size: 1000
   - name: glusterfs-1
     internal_ip: 192.168.3.40
     cpus: 2
@@ -97,3 +90,13 @@ private_servers:
     disks:
       - name: glusterfs-3-disk1
         size: 1000
+  - name: discourse-test
+    internal_ip: 192.168.3.50
+    cpus: 2
+    memory: 4096
+    disks: []
+  - name: discourse
+    internal_ip: 192.168.3.51
+    cpus: 2
+    memory: 4096
+    disks: []
