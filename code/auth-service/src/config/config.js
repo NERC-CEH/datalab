@@ -10,7 +10,7 @@ const config = convict({
   port: {
     doc: 'The port for the Auth service',
     format: 'port',
-    default: 8000,
+    default: 9000,
     env: 'PORT',
   },
   privateKey: {
