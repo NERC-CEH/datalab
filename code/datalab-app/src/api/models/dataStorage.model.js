@@ -16,7 +16,7 @@ const DataStorageSchema = new Schema({
   volumeSize: String,
   url: String,
   internalEndpoint: String,
-  users: [String],
+  users: [{ type: String, required: true }],
   status: { type: String, enum: states, default: REQUESTED },
   created: { type: Date, default: Date.now },
 });

@@ -10,7 +10,7 @@ import dataStorageRepository from '../dataaccess/dataStorageRepository';
 export const dataStorage = {
   description: 'List of currently provisioned DataLabs data storage.',
   type: new GraphQLList(DataStoreType),
-  resolve: (obj, args, { user }) => dataStorageRepository.getAll(user),
+  resolve: (obj, args, { user }) => dataStorageRepository.getAllActive(user),
 };
 
 export const dataStore = {

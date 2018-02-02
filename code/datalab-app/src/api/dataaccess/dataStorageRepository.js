@@ -5,33 +5,51 @@ function DataStorage() {
   return database.getModel('DataStorage');
 }
 
-function getAll(user) {
-  // return DataStorage.find({ users: user.sub }).exec();
+function getAllActive(user) {
   // Exclude records tagged as deleted
-  return DataStorage().find({ status: { $ne: DELETED } }).exec();
+  const query = filterByUser(user, { status: { $ne: DELETED } });
+  return DataStorage().find(query).exec();
 }
 
 function getById(user, id) {
-  // return DataStorage.findOne({ users: user.sub, _id: id });
-  return DataStorage().findOne({ _id: id }).exec();
+  const query = filterByUser(user, { _id: id });
+  return DataStorage().findOne(query).exec();
 }
 
 function getByName(user, name) {
-  return DataStorage().findOne({ name }).exec();
+  const query = filterByUser(user, { name });
+  return DataStorage().findOne(query).exec();
 }
 
-function createOrUpdate(user, dataStore) {
-  const query = { name: dataStore.name };
+function createOrUpdate(user, requestedDataStore) {
+  const query = filterByUser(user, { name: requestedDataStore.name });
+  const dataStore = addOwner(user, requestedDataStore);
   return DataStorage().findOneAndUpdate(query, dataStore, { upsert: true, setDefaultsOnInsert: true });
 }
 
 function deleteByName(user, name) {
-  return DataStorage().remove({ name }).exec();
+  const query = filterByUser(user, { name });
+  return DataStorage().remove(query).exec();
 }
 
-function update(user, name, updateValues) {
-  const updateWithOperators = { $set: updateValues };
-  return DataStorage().findOneAndUpdate({ name }, updateWithOperators, { upsert: false });
+function update(user, name, updatedValues) {
+  const updateObj = setUsers(user, { $set: updatedValues });
+  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false });
 }
 
-export default { getAll, getById, getByName, createOrUpdate, deleteByName, update };
+const addOwner = ({ sub }, dataStore) => ({
+  ...dataStore,
+  users: [sub],
+});
+
+const filterByUser = ({ sub }, findQuery) => ({
+  ...findQuery,
+  users: { $elemMatch: { $eq: sub } },
+});
+
+const setUsers = ({ sub }, updateQuery) => ({
+  ...updateQuery,
+  $addToSet: { users: sub },
+});
+
+export default { getAllActive, getById, getByName, createOrUpdate, deleteByName, update };
