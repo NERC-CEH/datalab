@@ -2,6 +2,7 @@ import axios from 'axios';
 import { get } from 'lodash';
 import logger from 'winston/lib/winston';
 import config from '../config/config';
+import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
 const authOuthEndpoint = 'https://mjbr.eu.auth0.com/oauth/token';
 const authorisationExtensionEndpoint = 'https://mjbr.eu.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/api';
@@ -43,4 +44,7 @@ function getUserRoles(userId) {
 const extractRoleNames = response =>
   get(response, 'data', []).map(role => role.name);
 
-export default getUserRoles;
+const cacheRoles = userId =>
+  getOrSetCacheAsyncWrapper(`AUTH_ROLES_${userId}`, getUserRoles)(userId);
+
+export default cacheRoles;
