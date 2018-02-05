@@ -8,6 +8,7 @@ import getRoles from '../auth/authzApi';
 const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
 const algorithm = 'RS256';
 const audience = 'https://api.datalabs.nerc.ac.uk/';
+const expiresIn = '2m';
 const issuer = 'https://authorisation.datalabs.nerc.ac.uk/';
 const keyid = 'datalabs-authorisation';
 
@@ -29,7 +30,7 @@ function generatePermissionToken(request, response) {
         user: userID,
         roles,
       };
-      const options = { algorithm, audience, issuer, keyid };
+      const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
 
       return response.send({ token });
