@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { get } from 'lodash';
+import logger from 'winston/lib/winston';
 import config from '../config/config';
 
 const authOuthEndpoint = 'https://mjbr.eu.auth0.com/oauth/token';
@@ -13,6 +14,7 @@ const accessTokenRequest = {
 };
 
 function getAuthzAccessToken() {
+  logger.info('Requesting Authz Service access token');
   return axios.post(authOuthEndpoint, accessTokenRequest)
     .then(response => get(response, 'data.access_token'))
     .catch(() => {
@@ -21,6 +23,8 @@ function getAuthzAccessToken() {
 }
 
 function getUserRoles(userId) {
+  logger.info('Requesting roles from Authz Service');
+  logger.debug(`UserId: ${userId}`);
   const url = `${authorisationExtensionEndpoint}/users/${userId}/roles`;
 
   return getAuthzAccessToken()
@@ -31,6 +35,7 @@ function getUserRoles(userId) {
           throw new Error('Unable to retrieve roles from the Authz Service.');
         }))
     .catch((err) => {
+      logger.warn(err.message);
       throw err;
     });
 }

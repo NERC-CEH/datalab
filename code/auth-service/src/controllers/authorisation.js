@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import rsaPemToJwk from 'rsa-pem-to-jwk';
 import { get } from 'lodash';
+import logger from 'winston/lib/winston';
 import config from '../config/config';
 import getRoles from '../auth/authzApi';
 
@@ -33,9 +34,12 @@ function generatePermissionToken(request, response) {
       const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
 
+      logger.info('Responding with internal token');
+      logger.debug(`Roles: ${JSON.stringify(roles)}`);
       return response.send({ token });
     })
     .catch((err) => {
+      logger.warn('Responding with status code 500');
       response.status(500);
       return response.send({ message: err.message });
     });
