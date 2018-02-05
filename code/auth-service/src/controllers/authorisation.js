@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import rsaPemToJwk from 'rsa-pem-to-jwk';
+import { get } from 'lodash';
 import config from '../config/config';
+import getRoles from '../auth/authzApi';
 
 const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
 const algorithm = 'RS256';
@@ -19,14 +21,23 @@ function checkUser(request, response) {
 }
 
 function generatePermissionToken(request, response) {
-  const payload = {
-    user: request.user.sub,
-    roles: ['admin', 'datalab:user', 'testlab:admin'],
-  };
-  const options = { algorithm, audience, issuer, keyid };
-  const token = jwt.sign(payload, PRIVATE_KEY, options);
+  const userID = get(request, 'user.sub');
 
-  return response.send({ token });
+  return getRoles(userID)
+    .then((roles) => {
+      const payload = {
+        user: userID,
+        roles,
+      };
+      const options = { algorithm, audience, issuer, keyid };
+      const token = jwt.sign(payload, PRIVATE_KEY, options);
+
+      return response.send({ token });
+    })
+    .catch((err) => {
+      response.status(500);
+      return response.send({ message: err.message });
+    });
 }
 
 /**
