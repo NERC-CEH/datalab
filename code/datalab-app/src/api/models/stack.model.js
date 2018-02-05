@@ -17,7 +17,7 @@ const StackSchema = new Schema({
   description: String,
   url: String,
   internalEndpoint: String,
-  users: [String],
+  users: [{ type: String, required: true }],
   category: { type: String, enum: category, required: true },
   status: { type: String, enum: states, default: REQUESTED },
   created: { type: Date, default: Date.now },
