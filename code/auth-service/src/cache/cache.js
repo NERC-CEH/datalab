@@ -8,11 +8,13 @@ const cache = new NodeCache({
 });
 
 Promise.promisifyAll(cache);
+cache.on('set', createLogger('set'));
+cache.on('expired', createLogger('expire'));
 
 export const getOrSetCacheAsyncWrapper = (keyName, asyncFunc) => (...args) =>
   cache.getAsync(keyName)
     .then((value) => {
-      createLoggingMesage('Get', keyName);
+      createLogger('get')(keyName, value);
       return value;
     })
     .catch(() =>
@@ -21,12 +23,13 @@ export const getOrSetCacheAsyncWrapper = (keyName, asyncFunc) => (...args) =>
 
 export const setCache = keyName => value =>
   cache.setAsync(keyName, value)
-    .then(() => {
-      createLoggingMesage('Set', keyName);
-      return value;
-    });
+    .then(() => value);
 
-const createLoggingMesage = (action, keyName) =>
-  logger.debug(`Cache: ${action} value for key: ${keyName}`);
+function createLogger(action) {
+  return (key, value) => {
+    logger.debug(`Cache: ${action} key: ${key}`);
+    logger.debug(`Cache: ${action} value: ${JSON.stringify(value)}`);
+  };
+}
 
 export default cache;
