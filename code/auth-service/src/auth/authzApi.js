@@ -4,8 +4,8 @@ import logger from 'winston/lib/winston';
 import config from '../config/config';
 import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
-const authOuthEndpoint = 'https://mjbr.eu.auth0.com/oauth/token';
-const authorisationExtensionEndpoint = 'https://mjbr.eu.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/api';
+export const authOAuthEndpoint = 'https://mjbr.eu.auth0.com/oauth/token';
+export const authorisationExtensionEndpoint = 'https://mjbr.eu.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/api';
 
 const accessTokenRequest = {
   audience: config.get('authorisationIdentifier'),
@@ -14,16 +14,16 @@ const accessTokenRequest = {
   grant_type: 'client_credentials',
 };
 
-function getAuthzAccessToken() {
+export function getAuthzAccessToken() {
   logger.info('Requesting Authz Service access token');
-  return axios.post(authOuthEndpoint, accessTokenRequest)
+  return axios.post(authOAuthEndpoint, accessTokenRequest)
     .then(response => get(response, 'data.access_token'))
     .catch(() => {
       throw new Error('Unable to retrieve access token for the Authz Service.');
     });
 }
 
-function getUserRoles(userId) {
+export function getUserRoles(userId) {
   logger.info('Requesting roles from Authz Service');
   logger.debug(`UserId: ${userId}`);
   const url = `${authorisationExtensionEndpoint}/users/${userId}/roles`;
@@ -44,7 +44,7 @@ function getUserRoles(userId) {
 const extractRoleNames = response =>
   get(response, 'data', []).map(role => role.name);
 
-const cacheRoles = userId =>
+const cacheOrGetUserRoles = userId =>
   getOrSetCacheAsyncWrapper(`AUTH_ROLES_${userId}`, getUserRoles)(userId);
 
-export default cacheRoles;
+export default cacheOrGetUserRoles;

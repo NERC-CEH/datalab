@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`authorisation controller generatePermissionToken should generate and return access token 1`] = `
+Object {
+  "aud": "https://api.datalabs.nerc.ac.uk/",
+  "iss": "https://authorisation.datalabs.nerc.ac.uk/",
+  "user": "expectedUserName",
+}
+`;
+
+exports[`authorisation controller serveJWKS should serve the development public key 1`] = `
+Object {
+  "keys": Array [
+    Object {
+      "e": "AQAB",
+      "kid": "datalabs-authorisation",
+      "kty": "RSA",
+      "n": "ANT0SjdE7AbfLOcLLgchIW6cZMKGVOBvL5HyVodCuMpVJqiT3xq4fw7J8yK_KGUGpI1QgrI1S8DmjrXLnZIC57VxkbeyYifcVonrVxyPkFdVC-7F47U1mksItzh26CipsdAgHGK7KIDettX58hjaQf__gfgZb1mVuKb_-aKaXyxttAsuW5f2Aqz5qfaQhnDavIc9tEMJ5TJgZDNcvI22ka51iGHeUNbjsRiQQVucxWViXD16-9tfipouvj1rXoqkHq6i2qjR1S1BiTUGnXmboezOuWyDyHuc9Ti03va-MtG1EFGzcGRxTr78NwvkrkSEkg1qPkiE63wT_n_epdZF2Y0",
+      "use": "sig",
+    },
+  ],
+}
+`;
