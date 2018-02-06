@@ -1,6 +1,6 @@
 import NodeCache from 'node-cache';
 import Promise from 'bluebird';
-import logger from 'winston/lib/winston';
+import logger from 'winston';
 
 const cache = new NodeCache({
   stdTTL: 120, // Standard time to live, 2 minutes

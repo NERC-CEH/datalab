@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import * as authzApi from './authzApi';
 import * as cache from '../cache/cache';
 
+jest.mock('winston');
 jest.mock('../cache/cache');
 const cacheReturnedMock = jest.fn();
 const cacheWrapperMock = jest.fn().mockReturnValue(cacheReturnedMock);

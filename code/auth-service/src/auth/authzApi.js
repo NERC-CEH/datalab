@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { get } from 'lodash';
-import logger from 'winston/lib/winston';
+import logger from 'winston';
 import config from '../config/config';
 import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
@@ -36,7 +36,7 @@ export function getUserRoles(userId) {
           throw new Error('Unable to retrieve roles from the Authz Service.');
         }))
     .catch((err) => {
-      logger.warn(err.message);
+      logger.error(err.message);
       throw err;
     });
 }

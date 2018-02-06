@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import rsaPemToJwk from 'rsa-pem-to-jwk';
 import { get } from 'lodash';
-import logger from 'winston/lib/winston';
+import logger from 'winston';
 import config from '../config/config';
 import getRoles from '../auth/authzApi';
 
@@ -39,7 +39,7 @@ function generatePermissionToken(request, response) {
       return response.send({ token });
     })
     .catch((err) => {
-      logger.warn('Responding with status code 500');
+      logger.error('Responding with status code 500');
       response.status(500);
       return response.send({ message: err.message });
     });
