@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
-import rsaPemToJwk from 'rsa-pem-to-jwk';
+import { pem2jwk } from 'pem-jwk';
 import { get } from 'lodash';
 import logger from 'winston';
 import config from '../config/config';
 import getRoles from '../auth/authzApi';
 
 const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
+const PUBLIC_KEY = fs.readFileSync(config.get('publicKey'));
 const algorithm = 'RS256';
 const audience = 'https://api.datalabs.nerc.ac.uk/';
 const expiresIn = '2m';
@@ -53,8 +54,12 @@ function generatePermissionToken(request, response) {
  * @param response
  */
 function serveJWKS(request, response) {
-  const jwk = rsaPemToJwk(PRIVATE_KEY, { use: 'sig' }, 'public');
-  jwk.kid = keyid;
+  const jwk = {
+    ...pem2jwk(PUBLIC_KEY),
+    kid: keyid,
+    use: 'sig',
+  };
+
   return response.send({ keys: [jwk] });
 }
 

@@ -19,6 +19,12 @@ const config = convict({
     default: 'private.pem',
     env: 'PRIVATE_KEY',
   },
+  publicKey: {
+    doc: 'The path to the public key for JWT validation',
+    format: 'String',
+    default: 'public.pem',
+    env: 'PUBLIC_KEY',
+  },
   authorisationClientId: {
     doc: 'Auth0 client id for the Datalabs Authorisation API',
     format: 'String',
