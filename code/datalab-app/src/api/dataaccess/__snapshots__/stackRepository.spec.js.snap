@@ -11,6 +11,12 @@ Array [
 ]
 `;
 
+exports[`stackRepository getAllByName returns expected snapshot 1`] = `
+Object {
+  "name": "Stack 1",
+}
+`;
+
 exports[`stackRepository getByCategory returns expected snapshot 1`] = `
 Array [
   Object {

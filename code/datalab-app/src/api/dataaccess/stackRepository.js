@@ -10,6 +10,10 @@ function getAll(user) {
   return Stack().find(query).exec();
 }
 
+function getAllByName(user, name) {
+  return Stack().findOne({ name }).exec();
+}
+
 function getByCategory(user, category) {
   const query = filterByUser(user, { category });
   return Stack().find(query).exec();
@@ -50,4 +54,4 @@ const filterByUser = ({ sub }, findQuery) => ({
   users: { $elemMatch: { $eq: sub } },
 });
 
-export default { getAll, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };
+export default { getAll, getAllByName, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };

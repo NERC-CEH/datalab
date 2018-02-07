@@ -43,5 +43,5 @@ export const checkStackName = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { name }, { user }) => stackRepository.getByName(user, name),
+  resolve: (obj, { name }, { user }) => stackRepository.getAllByName(user, name),
 };

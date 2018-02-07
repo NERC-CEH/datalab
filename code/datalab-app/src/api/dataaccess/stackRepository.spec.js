@@ -25,6 +25,14 @@ describe('stackRepository', () => {
       expect(stacks).toMatchSnapshot();
     }));
 
+  it('getAllByName returns expected snapshot', () =>
+    stackRepository.getAllByName(user, 'expectedName').then((storage) => {
+      expect(mockDatabase().query()).toEqual({
+        name: 'expectedName',
+      });
+      expect(storage).toMatchSnapshot();
+    }));
+
   it('getByCategory returns expected snapshot', () =>
     stackRepository.getByCategory(user, 'analysis').then((stacks) => {
       expect(mockDatabase().query()).toEqual({
