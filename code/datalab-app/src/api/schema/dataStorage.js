@@ -32,6 +32,6 @@ export const checkDataStoreName = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { name }, { user }) => dataStorageRepository.getByName(user, name),
+  resolve: (obj, { name }, { user }) => dataStorageRepository.getAllByName(user, name),
 };
 

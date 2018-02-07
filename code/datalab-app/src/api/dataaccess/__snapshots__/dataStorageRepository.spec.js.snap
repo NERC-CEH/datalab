@@ -11,6 +11,12 @@ Array [
 ]
 `;
 
+exports[`dataStorageRepository getAllByName returns expected snapshot 1`] = `
+Object {
+  "name": "Storage 1",
+}
+`;
+
 exports[`dataStorageRepository getById returns expected snapshot 1`] = `
 Object {
   "name": "Storage 1",

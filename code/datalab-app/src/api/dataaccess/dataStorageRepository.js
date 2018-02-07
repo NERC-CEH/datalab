@@ -11,6 +11,11 @@ function getAllActive(user) {
   return DataStorage().find(query).exec();
 }
 
+function getAllByName(user, name) {
+  // For all users
+  return DataStorage().findOne({ name }).exec();
+}
+
 function getById(user, id) {
   const query = filterByUser(user, { _id: id });
   return DataStorage().findOne(query).exec();
@@ -52,4 +57,4 @@ const setUsers = ({ sub }, updateQuery) => ({
   $addToSet: { users: sub },
 });
 
-export default { getAllActive, getById, getByName, createOrUpdate, deleteByName, update };
+export default { getAllActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update };

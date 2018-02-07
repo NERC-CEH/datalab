@@ -29,6 +29,14 @@ describe('dataStorageRepository', () => {
       expect(storage).toMatchSnapshot();
     }));
 
+  it('getAllByName returns expected snapshot', () =>
+    dataStorageRepository.getAllByName(user, 'expectedName').then((storage) => {
+      expect(mockDatabase().query()).toEqual({
+        name: 'expectedName',
+      });
+      expect(storage).toMatchSnapshot();
+    }));
+
   it('getById returns expected snapshot', () =>
     dataStorageRepository.getById(user, '599aa983bdd5430daedc8eec').then((storage) => {
       expect(mockDatabase().query()).toEqual({
