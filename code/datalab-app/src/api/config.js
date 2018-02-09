@@ -55,6 +55,12 @@ const config = convict({
     default: 'http://localhost:9000',
     env: 'AUTHORISATION_SERVICE',
   },
+  authorisationServiceStub: {
+    doc: 'If the authorisation sevice should be stubbed',
+    format: 'Boolean',
+    default: false,
+    env: 'AUTHORISATION_SERVICE_STUB',
+  },
 });
 
 export default config;
