@@ -1,34 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
-<DatalabModal
-  body="Body"
-  title="Title"
+<withStyles(Dialog)
+  maxWidth="md"
+  open={true}
 >
-  <withStyles(Button)
-    className="Confirmation-button-1"
-    color="accent"
-    onClick={[Function]}
-    raised={true}
-  >
-    No
-    <withStyles(Icon)
-      className="Confirmation-icon-3"
+  <withStyles(DialogTitle)>
+    Title
+  </withStyles(DialogTitle)>
+  <withStyles(DialogContent)>
+    <withStyles(DialogContentText)>
+      Body
+    </withStyles(DialogContentText)>
+  </withStyles(DialogContent)>
+  <withStyles(DialogActions)>
+    <withStyles(IconButton)
+      icon="clear"
+      onClick={[Function]}
     >
-      clear
-    </withStyles(Icon)>
-  </withStyles(Button)>
-  <withStyles(Button)
-    className="Confirmation-buttonDanger-2"
-    onClick={[Function]}
-    raised={true}
-  >
-    Yes
-    <withStyles(Icon)
-      className="Confirmation-icon-3"
+      Cancel
+    </withStyles(IconButton)>
+    <withStyles(IconButton)
+      danger={true}
+      disabled={false}
+      icon="delete"
+      onClick={[Function]}
     >
-      delete
-    </withStyles(Icon)>
-  </withStyles(Button)>
-</DatalabModal>
+      Confirm Deletion
+    </withStyles(IconButton)>
+  </withStyles(DialogActions)>
+</withStyles(Dialog)>
 `;

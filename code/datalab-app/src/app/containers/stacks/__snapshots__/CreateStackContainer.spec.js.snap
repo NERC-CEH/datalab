@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CreateStackContainer is a container which passes correct props to StackCard 1`] = `
-<withStyles(NewStackButton)
-  onClick={[Function]}
-  typeName="Notebook"
-/>
-`;

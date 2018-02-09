@@ -21,6 +21,11 @@ const constraints = {
       maximum: 12,
     },
   },
+  volumeMount: {
+    presence: {
+      allowEmpty: false,
+    },
+  },
   description: {
     presence: true,
   },

@@ -1,5 +1,6 @@
 import { generateCreateElement, generateDeleteElement } from './infrastructureApiGenerators';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
+import { DELETED } from '../models/dataStorage.model';
 
 /**
  * Promise chain sequence for the infrastructure API is common between data
@@ -12,19 +13,18 @@ import dataStorageRepository from '../dataaccess/dataStorageRepository';
 const baseConfig = {
   apiRoute: 'volumes',
   elementName: 'data store',
-  elementRepository: dataStorageRepository,
 };
 
 export const createDataStoreRequest = (dataStore, datalabInfo) => ({
   ...dataStore,
-  linkToStorage: `https://${dataStore.name}-minio.${datalabInfo.domain}/minio`,
-  internalEndpoint: `http://${dataStore.name}-minio.${datalabInfo.domain}/minio`,
+  url: `https://${datalabInfo.name}-${dataStore.name}.${datalabInfo.domain}/minio`,
+  internalEndpoint: `http://minio-${dataStore.name}/minio`,
 });
 
 export const createDataStorePayload = (datalabRequest, datalabInfo) => ({
   datalabInfo,
   name: datalabRequest.name,
-  volumeSize: datalabRequest.capacityTotal,
+  volumeSize: datalabRequest.volumeSize,
 });
 
 export const deleteDataStorePayload = (dataStore, datalabInfo) => ({
@@ -36,11 +36,19 @@ const createDataStore = generateCreateElement({
   ...baseConfig,
   generateApiRequest: createDataStoreRequest,
   generateApiPayload: createDataStorePayload,
+  createOrUpdateRecord: dataStorageRepository.createOrUpdate,
 });
+
+const tagAsDeleted = (user, { name }) => {
+  // Tag datastore as deleted but record will remain in db.
+  const updatedRecord = { status: DELETED };
+  return Promise.resolve(dataStorageRepository.update(user, name, updatedRecord));
+};
 
 const deleteDataStore = generateDeleteElement({
   ...baseConfig,
   generateApiPayload: deleteDataStorePayload,
+  deleteRecord: tagAsDeleted,
 });
 
 export default { createDataStore, deleteDataStore };

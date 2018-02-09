@@ -7,20 +7,45 @@ import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import { ANALYSIS, getStackSelections } from '../../../shared/stackTypes';
 
 const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel, submitting } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
+        <Field
+          name="displayName"
+          label="Display Name"
+          component={renderTextField}
+          placeholder="Display Name" />
       </div>
       <div>
-        <Field name="type" label="Notebook Type" component={renderSelectField} options={getStackSelections(ANALYSIS)} style={{ minWidth: 140 }} margin="normal" />
+        <Field
+          name="type"
+          label="Notebook Type"
+          component={renderSelectField}
+          options={getStackSelections(ANALYSIS)} />
       </div>
       <div>
-        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Notebook Name for URL" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+        <Field
+          name="name"
+          label="URL Name"
+          component={renderAdornedTextField}
+          placeholder="Notebook Name for URL"
+          startText="http://datalab-"
+          endText=".datalabs.nerc.ac.uk" />
       </div>
       <div>
-        <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
+        <Field
+          name="volumeMount"
+          label="Data Store to Mount"
+          component={renderSelectField}
+          options={dataStorageOptions}/>
+      </div>
+      <div>
+        <Field
+          name="description"
+          label="Description"
+          component={renderTextArea}
+          placeholder="Description" />
       </div>
       <div>
         <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
@@ -44,4 +69,8 @@ export default CreateNotebookReduxForm;
 CreateNotebookForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
+  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
 };

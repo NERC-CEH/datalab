@@ -1,7 +1,5 @@
 export const fieldStyle = {
-  marginBottom: '0px',
+  minWidth: 250,
 };
 
-export const labelStyle = {
-  marginTop: '7px',
-};
+export const fieldMargin = 'normal';

@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form 1`] = `
+<form>
+  <div>
+    <Field
+      component={[Function]}
+      label="Display Name"
+      name="displayName"
+      placeholder="Display Name"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Storage Type"
+      name="type"
+      options={
+        Array [
+          Object {
+            "text": "Nfs",
+            "value": "nfs",
+          },
+        ]
+      }
+      placeholder="Storage Type"
+    />
+  </div>
+  <div>
+    <Field
+      InputProps={
+        Object {
+          "inputProps": Object {
+            "max": 200,
+            "min": 5,
+          },
+        }
+      }
+      component={[Function]}
+      label="Storage Size (GB)"
+      name="volumeSize"
+      parse={[Function]}
+      placeholder="GB"
+      type="number"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Internal Name"
+      name="name"
+      placeholder="Internal Name"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Description"
+      name="description"
+      placeholder="Description"
+    />
+  </div>
+  <withStyles(Button)
+    color="primary"
+    raised={true}
+    style={
+      Object {
+        "margin": 8,
+      }
+    }
+    type="submit"
+  >
+    Create
+  </withStyles(Button)>
+  <withStyles(Button)
+    onClick={[Function]}
+    raised={true}
+    style={
+      Object {
+        "margin": 8,
+      }
+    }
+  >
+    Cancel
+  </withStyles(Button)>
+</form>
+`;

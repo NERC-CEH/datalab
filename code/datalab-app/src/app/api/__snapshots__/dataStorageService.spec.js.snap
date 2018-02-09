@@ -1,19 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
+exports[`dataStorageService checkDataStoreName should build the correct query and unpack the results 1`] = `
 "
-      DataStorage {
-        dataStorage {
-          capacityTotal capacityUsed linkToStorage name storageType accessKey
-        }
-      }"
+    CheckDataStoreName($name: String!) {
+      checkDataStoreName(name: $name) {
+        id
+      }
+    }"
 `;
 
-exports[`dataStorageService loadDataStore should build the correct query and return the data store 1`] = `
+exports[`dataStorageService createDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-      GetDataStore($dataStoreId: ID!) {
-        dataStore(id: $dataStoreId) {
-          capacityTotal capacityUsed linkToStorage name storageType
-        }
-      }"
+    CreateDataStore($dataStore:  DataStorageCreationRequest) {
+      createDataStore(dataStore: $dataStore) {
+        name
+      }
+    }"
+`;
+
+exports[`dataStorageService deleteDataStore should build the correct correct mutation and unpack the results 1`] = `
+"
+    DeleteDataStore($dataStore: DataStorageDeletionRequest) {
+      deleteDataStore(dataStore: $dataStore) {
+        name
+      }
+    }"
+`;
+
+exports[`dataStorageService getCredentials should build the correct query and return the minio credentials 1`] = `
+"
+    GetCredentials($id: ID!) {
+      dataStore(id: $id) {
+        url, accessKey
+      }
+    }"
+`;
+
+exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
+"
+    DataStorage {
+      dataStorage {
+         id, name, displayName, description, type, stacksMountingStore { id }
+      }
+    }"
 `;

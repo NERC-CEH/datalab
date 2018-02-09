@@ -1,23 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import DataStorageTableContainer, { PureDataStorageTableContainer } from './DataStorageTableContainer';
 import dataStorageService from '../../api/dataStorageService';
+import LoadDataStorageModalWrapper, { PureLoadDataStorageModalWrapper } from './LoadDataStorageModalWrapper';
 
 jest.mock('../../api/dataStorageService');
 const loadDataStorageMock = jest.fn().mockReturnValue('expectedPayload');
 dataStorageService.loadDataStorage = loadDataStorageMock;
 
-describe('DataStorageTableContainer', () => {
+describe('LoadDataStorage Modal Wrapper', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
         store,
         PrivateComponent: () => {},
         PublicComponent: () => {},
+        title: 'Title',
+        onSubmit: () => {},
+        onCancel: () => {},
+        Dialog: () => {},
       };
 
-      return shallow(<DataStorageTableContainer {...props} />);
+      return shallow(<LoadDataStorageModalWrapper {...props} />);
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };
@@ -45,7 +49,7 @@ describe('DataStorageTableContainer', () => {
       const output = shallowRenderConnected(store).prop('actions');
 
       // Assert
-      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadDataStorage', 'loadDataStore', 'openMinioDataStore']));
+      expect(Object.keys(output)).toContain('loadDataStorage');
     });
 
     it('loadDataStorage function dispatch correct action', () => {
@@ -69,19 +73,26 @@ describe('DataStorageTableContainer', () => {
 
   describe('is a container which', () => {
     function shallowRenderPure(props) {
-      return shallow(<PureDataStorageTableContainer {...props} />);
+      return shallow(<PureLoadDataStorageModalWrapper {...props} />);
     }
 
-    const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
+    const onSubmitMock = jest.fn();
+    const onCancelMock = jest.fn();
 
-    const openMinioDataStoreFn = () => {};
     const generateProps = () => ({
-      dataStorage,
+      title: 'Title',
+      onSubmit: onSubmitMock,
+      onCancel: onCancelMock,
       actions: {
         loadDataStorage: loadDataStorageMock,
-        loadDataStore: () => {},
-        openMinioDataStore: openMinioDataStoreFn,
       },
+      dataStorage: {
+        value: [
+          { displayName: 'First Data Store', name: 'alpha' },
+          { displayName: 'Second Data Store', name: 'beta' },
+        ],
+      },
+      Dialog: () => {},
     });
 
     beforeEach(() => jest.resetAllMocks());
@@ -97,18 +108,15 @@ describe('DataStorageTableContainer', () => {
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
     });
 
-    it('passes correct props to dataStorageTable', () => {
+    it('creates correct snapshot', () => {
       // Arrange
       const props = generateProps();
 
       // Act
-      const output = shallowRenderPure(props).find('DataStorageTable');
+      const output = shallowRenderPure(props);
 
       // Assert
-      expect(output.props()).toEqual({
-        dataStorage: dataStorage.value,
-        openStorageAction: openMinioDataStoreFn,
-      });
+      expect(output).toMatchSnapshot();
     });
   });
 });

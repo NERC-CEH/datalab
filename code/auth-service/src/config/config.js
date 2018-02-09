@@ -10,8 +10,14 @@ const config = convict({
   port: {
     doc: 'The port for the Auth service',
     format: 'port',
-    default: 8000,
+    default: 9000,
     env: 'PORT',
+  },
+  privateKey: {
+    doc: 'The path to the private key for JWT signing',
+    format: 'String',
+    default: 'private.pem',
+    env: 'PRIVATE_KEY',
   },
 });
 

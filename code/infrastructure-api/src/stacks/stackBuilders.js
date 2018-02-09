@@ -40,13 +40,14 @@ export const createIngressRule = (name, type, datalabInfo, generator) => (servic
     });
 };
 
-export const createIngressRuleWithConnect = (name, type, datalabInfo, generator) => (service) => {
+export const createIngressRuleWithConnect = (params, generator) => (service) => {
+  const { name, type, datalabInfo, rewriteTarget } = params;
   const ingressName = `${type}-${name}`;
   const serviceName = service.metadata.name;
   const port = service.spec.ports[0].port;
   const connectPort = service.spec.ports[1].port;
 
-  return generator({ name, datalabInfo, ingressName, serviceName, port, connectPort })
+  return generator({ name, datalabInfo, ingressName, serviceName, port, connectPort, rewriteTarget })
     .then((manifest) => {
       logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with connect port from manifest:`);
       logger.debug(manifest.toString());

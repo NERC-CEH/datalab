@@ -23,12 +23,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ name }}
-                key: accessKey
+                key: access_key
           - name: MINIO_SECRET_KEY
             valueFrom:
               secretKeyRef:
                 name: {{ name }}
-                key: secretKey
+                key: secret_key
           args: ["server", "/mnt/glusterfs"]
           volumeMounts:
             - mountPath: /mnt/glusterfs

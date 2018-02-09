@@ -14,7 +14,44 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
+      initContainers:
+        # This container will generate the expected folder structure for the notebooks directory, without this the
+        # zepplin container will not start. As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/zeppelin"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+        # This container correct the folder permissions for the generated notebook directory to be owned by the
+        # datalabs:users (user:group; 1000:100).
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/zeppelin"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
       containers:
+      - name: {{ name }}-connect
+        image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: CONNECT_TYPE
+          value: ZEPPELIN
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
       - name:  {{ name }}
         image: {{ &zeppelin.imageName }}:{{ zeppelin.version }}
         imagePullPolicy : IfNotPresent
@@ -36,11 +73,6 @@ spec:
           value: "{{ grantSudo }}"
         - name: R_LIBS_USER
           value: {{ &sharedRLibs }}
-        volumeMounts:
-          - name: glusterfsvol
-            mountPath: /data
-          - name: zeppelin-shiro
-            mountPath: /secret
         resources:
           requests:
             cpu: 200m
@@ -54,25 +86,19 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
-      - name: {{ name }}-connect
-        image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        env:
-        - name: CONNECT_TYPE
-          value: ZEPPELIN
-        livenessProbe:
-          httpGet:
-            path: /status
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
+        volumeMounts:
+          - name: zeppelin-shiro
+            mountPath: /secret
+{{#volumeMount}}
+          - name: glusterfsvol
+            mountPath: /data
+{{/volumeMount}}
       volumes:
-        - name: glusterfsvol
-          persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-claim
         - name: zeppelin-shiro
           secret:
             secretName: {{ name }}
+{{#volumeMount}}
+        - name: glusterfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}

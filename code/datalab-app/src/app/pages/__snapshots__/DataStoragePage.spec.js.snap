@@ -8,6 +8,6 @@ exports[`DataStorageTablePage renders correct snapshot 1`] = `
   >
     Current Storage Volumes
   </withStyles(Typography)>
-  <Connect(DataStorageTableContainer) />
+  <Connect(DataStorageContainer) />
 </withStyles(Segment)>
 `;

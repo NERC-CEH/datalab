@@ -7,28 +7,64 @@ import { syncValidate, asyncValidate } from './newSiteFormValidator';
 import { PUBLISH, getStackSelections } from '../../../shared/stackTypes';
 
 const CreateSiteForm = (props) => {
-  const { handleSubmit, cancel, submitting } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={handleSubmit}>
       <div>
-        <Field name="displayName" label="Display Name" component={renderTextField} placeholder="Display Name" margin="normal" />
+        <Field
+          name="displayName"
+          label="Display Name"
+          component={renderTextField}
+          placeholder="Display Name" />
       </div>
       <div>
-        <Field name="type" label="Site Type" component={renderSelectField} options={getStackSelections(PUBLISH)} placeholder="Site Type" style={{ minWidth: 120 }} margin="normal" />
+        <Field
+          name="type"
+          label="Site Type"
+          component={renderSelectField}
+          options={getStackSelections(PUBLISH)}
+          placeholder="Site Type" />
       </div>
       <div>
-        <Field name="name" label="URL Name" component={renderAdornedTextField} placeholder="Site Name for URLs" startText="http://datalab-" endText=".datalabs.nerc.ac.uk" margin="normal" />
+        <Field
+          name="name"
+          label="URL Name"
+          component={renderAdornedTextField}
+          placeholder="Site Name for URLs"
+          startText="http://datalab-"
+          endText=".datalabs.nerc.ac.uk" />
       </div>
       <div>
-        <Field name="sourcePath" label="Source Path" component={renderAdornedTextField} placeholder="Source Directory for Site" startText="/data/" margin="normal" />
+        <Field
+          name="volumeMount"
+          label="Data Store to Mount"
+          component={renderSelectField}
+          options={dataStorageOptions}/>
       </div>
       <div>
-        <Field name="description" label="Description" component={renderTextArea} placeholder="Description" margin="normal" />
+        <Field
+          name="sourcePath"
+          label="Source Path"
+          component={renderAdornedTextField}
+          placeholder="Source Directory for Site"
+          startText="/data/" />
+      </div>
+      <div>
+        <Field
+          name="description"
+          label="Description"
+          component={renderTextArea}
+          placeholder="Description" />
       </div>
       <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
       <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
     </form>
   );
+};
+
+CreateSiteForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
 };
 
 const CreateSiteReduxForm = reduxForm({
@@ -41,8 +77,3 @@ const CreateSiteReduxForm = reduxForm({
 
 export { CreateSiteForm as PureCreateSiteForm };
 export default CreateSiteReduxForm;
-
-CreateSiteForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  cancel: PropTypes.func.isRequired,
-};

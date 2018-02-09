@@ -68,6 +68,7 @@ const createStackValidator = [
       }
       return true;
     }),
+  check('volumeMount').exists().withMessage('A Volume Mount must be specified'),
 ];
 
 export default { coreStackValidator, createStackValidator, createStack, deleteStack };

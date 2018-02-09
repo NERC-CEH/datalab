@@ -18,13 +18,20 @@ describe('dataStorageRepository', () => {
 
   it('getAll returns expected snapshot', () =>
     dataStorageRepository.getAll('user').then((storage) => {
-      expect(mockDatabase().query()).toEqual({});
+      // Filters for record with status not equal to deleted.
+      expect(mockDatabase().query()).toEqual({ status: { $ne: 'deleted' } });
       expect(storage).toMatchSnapshot();
     }));
 
   it('getById returns expected snapshot', () =>
     dataStorageRepository.getById(undefined, '599aa983bdd5430daedc8eec').then((storage) => {
       expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
+      expect(storage).toMatchSnapshot();
+    }));
+
+  it('getByName returns expected snapshot', () =>
+    dataStorageRepository.getByName(undefined, 'expectedName').then((storage) => {
+      expect(mockDatabase().query()).toEqual({ name: 'expectedName' });
       expect(storage).toMatchSnapshot();
     }));
 
@@ -38,9 +45,19 @@ describe('dataStorageRepository', () => {
   });
 
   it('deleteByName should query for data store with same name', () => {
-    const dataStore = { name: 'oldVolume' };
-    dataStorageRepository.deleteByName(undefined, dataStore).then(() => {
-      expect(mockDatabase().query()).toEqual(dataStore);
+    const name = 'oldVolume';
+    dataStorageRepository.deleteByName(undefined, name).then(() => {
+      expect(mockDatabase().query()).toEqual({ name });
+    });
+  });
+
+  it('update should use correct operators to overwrite fields', () => {
+    const name = 'deletedVolume';
+    const updateObject = { status: 'deleted' };
+    dataStorageRepository.update(undefined, name, updateObject).then(() => {
+      expect(mockDatabase().query()).toEqual({ name });
+      expect(mockDatabase().entity()).toEqual({ $set: { status: 'deleted' } });
+      expect(mockDatabase().params()).toEqual({ upsert: false });
     });
   });
 });

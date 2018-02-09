@@ -15,24 +15,23 @@ exports[`stackService deleteStack should build the correct mutation and unpack t
       deleteStack(stack: $stack) {
         name
       }
-    }
-  "
+    }"
 `;
 
 exports[`stackService getUrl should build the correct query and return the url 1`] = `
 "
-      GetUrl($id: ID!) {
-        stack(id: $id) {
-          redirectUrl
-        }
-      }"
+    GetUrl($id: ID!) {
+      stack(id: $id) {
+        redirectUrl
+      }
+    }"
 `;
 
 exports[`stackService loadStacks should build the correct query and unpack the results 1`] = `
 "
-      Stacks {
-        stacks {
-          id, displayName, name, type, description
-        }
-      }"
+    Stacks {
+      stacks {
+        id, displayName, name, type, description
+      }
+    }"
 `;

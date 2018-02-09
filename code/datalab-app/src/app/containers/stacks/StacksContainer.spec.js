@@ -9,6 +9,12 @@ jest.mock('../../api/stackService');
 const loadStacksMock = jest.fn().mockReturnValue('expectedPayload');
 stackService.loadStacksByCategory = loadStacksMock;
 
+jest.mock('../../components/common/notify');
+const toastrErrorMock = jest.fn();
+const toastrSuccessMock = jest.fn();
+notify.error = toastrErrorMock;
+notify.success = toastrSuccessMock;
+
 describe('StacksContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
@@ -43,7 +49,7 @@ describe('StacksContainer', () => {
       const output = shallowRenderConnected(store).prop('actions');
 
       // Assert
-      expect(Object.keys(output)).toEqual(expect.arrayContaining(['loadStacks', 'openStack']));
+      expect(Object.keys(output)).toMatchSnapshot();
     });
 
     it('loadStacks function dispatches correct action', () => {
@@ -73,13 +79,13 @@ describe('StacksContainer', () => {
       ],
     };
 
-    const generateActions = () => ({
-      loadStacksByCategory: loadStacksMock,
-      getUrl: () => {},
-      openStack: () => {},
-      createStack: () => {},
-      deleteStack: () => {},
-    });
+    const openModalDialogMock = jest.fn();
+    const closeModalDialogMock = jest.fn();
+    const getUrlMock = jest.fn();
+    const openStackMock = jest.fn();
+    const createStackMock = jest.fn();
+    const deleteStackMock = jest.fn();
+    const restFormMock = jest.fn();
 
     const generateProps = () => ({
       stacks,
@@ -87,7 +93,16 @@ describe('StacksContainer', () => {
       containerType: 'analysis',
       dialogAction: 'ACTION',
       formStateName: 'createNotebook',
-      actions: generateActions(),
+      actions: {
+        loadStacksByCategory: loadStacksMock,
+        getUrl: getUrlMock,
+        openStack: openStackMock,
+        createStack: createStackMock,
+        deleteStack: deleteStackMock,
+        openModalDialog: openModalDialogMock,
+        closeModalDialog: closeModalDialogMock,
+        resetForm: restFormMock,
+      },
     });
 
     beforeEach(() => jest.resetAllMocks());
@@ -103,7 +118,7 @@ describe('StacksContainer', () => {
       expect(loadStacksMock).toHaveBeenCalledTimes(1);
     });
 
-    it('passes correct props to NotebookCards', () => {
+    it('passes correct props to StackCard', () => {
       // Arrange
       const props = generateProps();
 
@@ -113,20 +128,8 @@ describe('StacksContainer', () => {
 
     it('openNotebook method calls openNotebook action on resolved getUrl', () => {
       // Arrange
-      const getUrlMock = jest.fn()
-        .mockReturnValue(Promise.resolve({ value: { redirectUrl: 'expectedUrl' } }));
-
-      const openStackMock = jest.fn();
-
-      const props = {
-        ...generateProps(),
-        actions: {
-          ...generateActions(),
-          getUrl: getUrlMock,
-          openStack: openStackMock,
-        },
-      };
-
+      getUrlMock.mockReturnValue(Promise.resolve({ value: { redirectUrl: 'expectedUrl' } }));
+      const props = generateProps();
       const output = shallowRenderPure(props);
       const openStack = output.childAt(0).prop('openStack');
 
@@ -141,23 +144,10 @@ describe('StacksContainer', () => {
       });
     });
 
-    it('openStack method calls toastr on resolved getUrl', () => {
+    it('openStack method calls toastr on unresolved getUrl', () => {
       // Arrange
-      jest.mock('../../components/common/notify');
-      const toastrErrorMock = jest.fn();
-      notify.error = toastrErrorMock;
-
-      const getUrlMock = jest.fn()
-        .mockReturnValue(Promise.reject('no url'));
-
-      const props = {
-        ...generateProps(),
-        actions: {
-          ...generateActions(),
-          getUrl: getUrlMock,
-        },
-      };
-
+      getUrlMock.mockReturnValue(Promise.reject('no url'));
+      const props = generateProps();
       const output = shallowRenderPure(props);
       const openStack = output.childAt(0).prop('openStack');
 
@@ -169,6 +159,113 @@ describe('StacksContainer', () => {
         expect(getUrlMock).toHaveBeenCalledWith(1000);
         expect(toastrErrorMock).toHaveBeenCalledTimes(1);
         expect(toastrErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
+      });
+    });
+
+    it('confirmDeleteStack calls openModalDialog with correct action', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act/Assert
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      deleteStack(stack);
+      expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      expect(firstMockCall[0]).toBe('MODAL_TYPE_CONFIRMATION');
+    });
+
+    it('confirmDeleteStack generates correct dialog', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      deleteStack(stack);
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, body, onCancel } = firstMockCall[1];
+      expect({ title, body }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('confirmDeleteStack - onSubmit calls deleteStack with correct value', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const deleteStack = output.childAt(0).prop('deleteStack');
+      deleteStack(stack);
+      const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+      // Assert
+      expect(deleteStackMock).not.toHaveBeenCalled();
+      onSubmit().then(() => {
+        expect(deleteStackMock).toHaveBeenCalledTimes(1);
+        expect(deleteStackMock).toHaveBeenCalledWith(stack);
+      });
+    });
+
+    it('openCreationForm calls openModalDialog with correct action', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act/Assert
+      const output = shallowRenderPure(props);
+      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      openCreationForm(stack);
+      expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      expect(firstMockCall[0]).toBe('ACTION');
+    });
+
+    it('openCreationForm generates correct dialog', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      openCreationForm(stack);
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, onCancel } = firstMockCall[1];
+      expect({ title }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('openCreationForm - onSubmit calls createStack with correct value', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      openCreationForm();
+      const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+      // Assert
+      expect(createStackMock).not.toHaveBeenCalled();
+      expect(restFormMock).not.toHaveBeenCalled();
+      expect(loadStacksMock).toHaveBeenCalledTimes(1);
+      onSubmit(stack).then(() => {
+        expect(createStackMock).toHaveBeenCalledTimes(1);
+        expect(createStackMock).toHaveBeenCalledWith(stack);
+        expect(restFormMock).toHaveBeenCalledTimes(1);
+        expect(restFormMock).toHaveBeenCalledWith('createNotebook');
       });
     });
   });

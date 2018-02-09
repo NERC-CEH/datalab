@@ -19,7 +19,7 @@ function createZeppelinStack(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createZeppelinDeployment))
     .then(createService(name, type, deploymentGenerator.createZeppelinService))
-    .then(createIngressRuleWithConnect(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect(params, ingressGenerator.createIngress));
 }
 
 function deleteZeppelinStack(params) {

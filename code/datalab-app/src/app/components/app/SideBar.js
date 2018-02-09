@@ -66,6 +66,7 @@ const SideBar = ({ classes }) => (
       <Divider />
       {datalabLinks.map(({ displayName, href, icon }) =>
         <NavLink
+          key={`nav-link-${displayName}`}
           label={displayName}
           icon={icon}
           onClick={() => window.open(href)}

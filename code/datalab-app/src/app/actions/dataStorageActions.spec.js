@@ -1,13 +1,18 @@
 import dataStorageActions, {
   LOAD_DATASTORAGE_ACTION,
-  LOAD_DATASTORE_ACTION,
+  GET_DATASTORE_CREDENTIALS_ACTION,
+  CHECK_DATASTORE_NAME_ACTION,
   OPEN_MINIO_DATASTORE_ACTION,
+  CREATE_DATASTORE_ACTION,
+  DELETE_DATASTORE_ACTION,
 } from './dataStorageActions';
 import dataStorageService from '../api/dataStorageService';
 import minioService from '../api/minioService';
 
 jest.mock('../api/dataStorageService');
 jest.mock('../api/minioService');
+
+const dataStore = { name: 'expectedName', capacityTotal: 12 };
 
 describe('dataStorageActions', () => {
   beforeEach(() => jest.resetAllMocks());
@@ -27,18 +32,33 @@ describe('dataStorageActions', () => {
       expect(output.payload).toBe('expectedDataStoragePayload');
     });
 
-    it('loadDataStore', () => {
+    it('getCredentials', () => {
       // Arrange
-      const loadDataStoreMock = jest.fn().mockReturnValue('expectedDataStorePayload');
-      dataStorageService.loadDataStore = loadDataStoreMock;
+      const getCredentialsMock = jest.fn().mockReturnValue('expectedDataStorePayload');
+      dataStorageService.getCredentials = getCredentialsMock;
 
       // Act
-      const output = dataStorageActions.loadDataStore(123);
+      const output = dataStorageActions.getCredentials(123);
 
       // Assert
-      expect(loadDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(loadDataStoreMock).toHaveBeenCalledWith(123);
-      expect(output.type).toBe('LOAD_DATASTORE');
+      expect(getCredentialsMock).toHaveBeenCalledTimes(1);
+      expect(getCredentialsMock).toHaveBeenCalledWith(123);
+      expect(output.type).toBe('GET_DATASTORE_CREDENTIALS');
+      expect(output.payload).toBe('expectedDataStorePayload');
+    });
+
+    it('checkDataStoreName', () => {
+      // Arrange
+      const checkDataStoreNameMock = jest.fn().mockReturnValue('expectedDataStorePayload');
+      dataStorageService.checkDataStoreName = checkDataStoreNameMock;
+
+      // Act
+      const output = dataStorageActions.checkDataStoreName('expectedName');
+
+      // Assert
+      expect(checkDataStoreNameMock).toHaveBeenCalledTimes(1);
+      expect(checkDataStoreNameMock).toHaveBeenCalledWith('expectedName');
+      expect(output.type).toBe('CHECK_DATASTORE_NAME');
       expect(output.payload).toBe('expectedDataStorePayload');
     });
 
@@ -56,6 +76,36 @@ describe('dataStorageActions', () => {
       expect(output.type).toBe(OPEN_MINIO_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedDataStorePayload');
     });
+
+    it('createDataStore', () => {
+      // Arrange
+      const createDataStoreMock = jest.fn().mockReturnValue('expectedCreationPayload');
+      dataStorageService.createDataStore = createDataStoreMock;
+
+      // Act
+      const output = dataStorageActions.createDataStore(dataStore);
+
+      // Assert
+      expect(createDataStoreMock).toHaveBeenCalledTimes(1);
+      expect(createDataStoreMock).toHaveBeenCalledWith(dataStore);
+      expect(output.type).toBe(CREATE_DATASTORE_ACTION);
+      expect(output.payload).toBe('expectedCreationPayload');
+    });
+
+    it('deleteDataStore', () => {
+      // Arrange
+      const deleteDataStoreMock = jest.fn().mockReturnValue('expectedDeletionPayload');
+      dataStorageService.deleteDataStore = deleteDataStoreMock;
+
+      // Act
+      const output = dataStorageActions.deleteDataStore(dataStore);
+
+      // Assert
+      expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
+      expect(deleteDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name });
+      expect(output.type).toBe(DELETE_DATASTORE_ACTION);
+      expect(output.payload).toBe('expectedDeletionPayload');
+    });
   });
 
   describe('exports correct values for', () => {
@@ -63,8 +113,24 @@ describe('dataStorageActions', () => {
       expect(LOAD_DATASTORAGE_ACTION).toBe('LOAD_DATASTORAGE');
     });
 
-    it('LOAD_DATASTORE_ACTION', () => {
-      expect(LOAD_DATASTORE_ACTION).toBe('LOAD_DATASTORE');
+    it('GET_DATASTORE_CREDENTIALS_ACTION', () => {
+      expect(GET_DATASTORE_CREDENTIALS_ACTION).toBe('GET_DATASTORE_CREDENTIALS');
+    });
+
+    it('CHECK_DATASTORE_NAME_ACTION', () => {
+      expect(CHECK_DATASTORE_NAME_ACTION).toBe('CHECK_DATASTORE_NAME');
+    });
+
+    it('OPEN_MINIO_DATASTORE_ACTION', () => {
+      expect(OPEN_MINIO_DATASTORE_ACTION).toBe('OPEN_MINIO_DATASTORE');
+    });
+
+    it('CREATE_DATASTORE_ACTION', () => {
+      expect(CREATE_DATASTORE_ACTION).toBe('CREATE_DATASTORE');
+    });
+
+    it('DELETE_DATASTORE_ACTION', () => {
+      expect(DELETE_DATASTORE_ACTION).toBe('DELETE_DATASTORE');
     });
   });
 });

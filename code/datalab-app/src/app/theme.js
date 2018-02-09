@@ -5,14 +5,16 @@ const defaultTheme = createMuiTheme();
 const primary = teal;
 const secondary = blueGrey;
 const backgroundColor = grey[100];
-const danger = red[800];
+const dangerColor = red[800];
+const dangerBackgroundColor = red[100];
 
 const theme = createMuiTheme({
   palette: {
     primary,
     secondary,
     backgroundColor,
-    danger,
+    dangerColor,
+    dangerBackgroundColor,
   },
   overrides: {
     MuiAppBar: {
