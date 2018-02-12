@@ -49,6 +49,18 @@ const config = convict({
     default: 'http://localhost:8003',
     env: 'INFRASTRUCTURE_API',
   },
+  authorisationService: {
+    doc: 'The endpoint for the authorisation service',
+    format: 'String',
+    default: 'http://localhost:9000',
+    env: 'AUTHORISATION_SERVICE',
+  },
+  authorisationServiceStub: {
+    doc: 'If the authorisation sevice should be stubbed',
+    format: 'Boolean',
+    default: false,
+    env: 'AUTHORISATION_SERVICE_STUB',
+  },
 });
 
 export default config;
