@@ -44,8 +44,8 @@ describe('authorisation controller', () => {
       authorisation.generatePermissionToken(request, response)
         .then(() => {
           const { token } = response._getData(); // eslint-disable-line no-underscore-dangle
-          const { aud, iss, user } = jwt.decode(token);
-          expect({ aud, iss, user }).toMatchSnapshot();
+          const { aud, iss, sub } = jwt.decode(token);
+          expect({ aud, iss, sub }).toMatchSnapshot();
         });
     });
 

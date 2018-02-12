@@ -29,7 +29,7 @@ function generatePermissionToken(request, response) {
   return getRoles(userID)
     .then((roles) => {
       const payload = {
-        user: userID,
+        sub: userID,
         roles,
       };
       const options = { algorithm, audience, issuer, keyid, expiresIn };
