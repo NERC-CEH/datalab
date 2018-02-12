@@ -14,7 +14,7 @@ const keyid = 'datalabs-authorisation';
 function retrievePermissionsToken(authorisationToken) {
   const decodedToken = jwt.decode(authorisationToken.split(' ')[1]);
   const payload = {
-    user: decodedToken.sub,
+    sub: decodedToken.sub,
     roles: ['admin', 'datalab:admin'],
   };
   const options = { audience, issuer, keyid };
