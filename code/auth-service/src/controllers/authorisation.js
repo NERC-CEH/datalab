@@ -5,6 +5,7 @@ import { get } from 'lodash';
 import logger from 'winston';
 import config from '../config/config';
 import getRoles from '../auth/authzApi';
+import generatePermissions from '../permissions/permissions';
 
 const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
 const PUBLIC_KEY = fs.readFileSync(config.get('publicKey'));
@@ -31,6 +32,7 @@ function generatePermissionToken(request, response) {
       const payload = {
         sub: userID,
         roles,
+        permissions: generatePermissions(roles),
       };
       const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
