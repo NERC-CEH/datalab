@@ -6,31 +6,52 @@ function Stack() {
 }
 
 function getAll(user) {
-  // return Stack.find({ users: user.sub }).exec();
-  return Stack().find({}).exec();
+  const query = filterByUser(user, {});
+  return Stack().find(query).exec();
 }
 
-function getByCategory(user, category) {
-  return Stack().find({ category }).exec();
-}
-
-function getById(user, id) {
-  // return Stack.findOne({ users: user.sub, _id: id });
-  return Stack().findOne({ _id: id }).exec();
-}
-
-function getByName(user, name) {
+function getAllByName(user, name) {
   return Stack().findOne({ name }).exec();
 }
 
-function createOrUpdate(user, stack) {
-  const stackToSave = { ...stack, category: getCategoryForType(stack.type) };
-  const query = { name: stack.name };
-  return Stack().findOneAndUpdate(query, stackToSave, { upsert: true, setDefaultsOnInsert: true });
+function getByCategory(user, category) {
+  const query = filterByUser(user, { category });
+  return Stack().find(query).exec();
+}
+
+function getById(user, id) {
+  const query = filterByUser(user, { _id: id });
+  return Stack().findOne(query).exec();
+}
+
+function getByName(user, name) {
+  const query = filterByUser(user, { name });
+  return Stack().findOne(query).exec();
+}
+
+function getByVolumeMount(user, volumeMount) {
+  return Stack().find({ volumeMount }).exec();
+}
+
+function createOrUpdate(user, requestStack) {
+  const query = filterByUser(user, { name: requestStack.name });
+  const stack = addOwner(user, { ...requestStack, category: getCategoryForType(requestStack.type) });
+  return Stack().findOneAndUpdate(query, stack, { upsert: true, setDefaultsOnInsert: true });
 }
 
 function deleteByName(user, name) {
-  return Stack().remove({ name }).exec();
+  const query = filterByUser(user, { name });
+  return Stack().remove(query).exec();
 }
 
-export default { getAll, getByCategory, getById, getByName, createOrUpdate, deleteByName };
+const addOwner = ({ sub }, stack) => ({
+  ...stack,
+  users: [sub],
+});
+
+const filterByUser = ({ sub }, findQuery) => ({
+  ...findQuery,
+  users: { $elemMatch: { $eq: sub } },
+});
+
+export default { getAll, getAllByName, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };

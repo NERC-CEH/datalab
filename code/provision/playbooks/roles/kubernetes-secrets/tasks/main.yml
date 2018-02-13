@@ -1,6 +1,30 @@
 ---
+- name: Check TLS secret
+  shell: kc get secret tls-secret &> /dev/null && echo $?
+  register: tls_secret_exists
+
 - name: Deploy Test TLS Secrets
   shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ test_ssl_certificate }}" --from-literal=tls.key="{{ test_ssl_private_key }}" --type=kubernetes.io/tls -n test
+  when: tls_secret_exists.rc != 0
 
 - name: Deploy Prod TLS Secrets
   shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ ssl_certificate }}" --from-literal=tls.key="{{ ssl_private_key }}" --type=kubernetes.io/tls -n default
+  when: tls_secret_exists.rc != 0
+
+- name: Check Authorisation Signing secret
+  shell: kc get secret auth-signing-key &> /dev/null && echo $?
+  register: auth_secret_exists
+
+- name: Deploy Test Auth Signing Keys
+  shell: kubectl create secret generic auth-signing-key --from-literal=public="{{ test_authorisation_public_key }}" --from-literal=private="{{ test_authorisation_private_key }}" -n test
+  when: auth_secret_exists.rc != 0
+
+- name: Deploy Prod Auth Signing Keys
+  shell: kubectl create secret generic auth-signing-key --from-literal=public="{{ authorisation_public_key }}" --from-literal=private="{{ authorisation_private_key }}" -n default
+  when: auth_secret_exists.rc != 0
+
+- name: Deploy Test Authorisation API client secret
+  shell: kubectl create secret generic authorisation-api-client-secret --from-literal=secret="{{ authorisation_api_client_secret }}" -n test
+
+- name: Deploy Prod Authorisation API client secret
+  shell: kubectl create secret generic authorisation-api-client-secret --from-literal=secret="{{ authorisation_api_client_secret }}" -n default

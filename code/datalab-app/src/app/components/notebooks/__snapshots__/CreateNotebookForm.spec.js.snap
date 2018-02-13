@@ -46,6 +46,25 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
   <div>
     <Field
       component={[Function]}
+      label="Data Store to Mount"
+      name="volumeMount"
+      options={
+        Array [
+          Object {
+            "text": "First Data Store",
+            "value": "alpha",
+          },
+          Object {
+            "text": "Second Data Store",
+            "value": "beta",
+          },
+        ]
+      }
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
       label="Description"
       name="description"
       placeholder="Description"

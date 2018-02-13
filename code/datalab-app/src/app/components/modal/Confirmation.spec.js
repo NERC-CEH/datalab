@@ -38,7 +38,7 @@ describe('Confirmation', () => {
     // Act
     const output = shallowRender(props);
     const buttons = output.find(IconButton);
-    const cancelFunction = buttons.find({ children: 'No' }).prop('onClick');
+    const cancelFunction = buttons.find({ children: 'Cancel' }).prop('onClick');
     cancelFunction();
 
     // Assert
@@ -52,7 +52,7 @@ describe('Confirmation', () => {
     // Act
     const output = shallowRender(props);
     const buttons = output.find(IconButton);
-    const submitFunction = buttons.find({ children: 'Yes' }).prop('onClick');
+    const submitFunction = buttons.find({ children: 'Confirm Deletion' }).prop('onClick');
     submitFunction();
 
     // Assert

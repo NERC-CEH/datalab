@@ -1,16 +1,27 @@
 import jwt from 'express-jwt';
-import jwksRsa from 'jwks-rsa';
+import logger from 'winston';
+import authService from '../config/services';
 
-const authMiddleware = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 10,
-    jwksUri: 'https://mjbr.eu.auth0.com/.well-known/jwks.json',
-  }),
-  audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
-  issuer: 'https://mjbr.eu.auth0.com/',
-  algorithms: ['RS256'],
-});
+/**
+ * Authorisation middleware - This passes the Auth0 access_token and exchanges
+ * for an internal access token containing user permissions.
+ * The token is replaced in the request headers allowing the downstream middleware
+ * to then validate the token and extract the user name and roles making them
+ * available to the GraphQL resolvers.
+ * @param request
+ * @param response
+ * @param next
+ */
+export const authorise = (request, response, next) => {
+  authService.retrievePermissionsToken(request.headers.authorization)
+    .then((token) => {
+      request.headers.authorization = `Bearer ${token}`;
+      next();
+    })
+    .catch((err) => {
+      logger.log(err);
+      response.status(401).send({ message: 'Unauthorised' });
+    });
+};
 
-export default authMiddleware;
+export const verifyToken = jwt(authService.jwksVerifyConfig());

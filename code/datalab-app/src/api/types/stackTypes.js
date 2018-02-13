@@ -44,6 +44,9 @@ export const StackType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (obj, args, { user }) => stackUrlService(obj, user),
     },
+    volumeMount: {
+      type: GraphQLString,
+    },
   },
 });
 
@@ -74,6 +77,9 @@ export const StackCreationType = new GraphQLInputObjectType({
     },
     isPublic: {
       type: GraphQLBoolean,
+    },
+    volumeMount: {
+      type: GraphQLString,
     },
   },
 });

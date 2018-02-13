@@ -14,7 +14,14 @@ Array [
 ]
 `;
 
-exports[`DataStorageContainer is a container which confirmDeleteDataStore generates correct dialog 1`] = `
+exports[`DataStorageContainer is a container which confirmDeleteDataStore generates correct dialog for mounted volume 1`] = `
+Object {
+  "body": "Data Store is in use, unable to delete.",
+  "title": "Unable to Delete expectedDisplayName Data Store",
+}
+`;
+
+exports[`DataStorageContainer is a container which confirmDeleteDataStore generates correct dialog for unmounted volume 1`] = `
 Object {
   "body": "Are you sure you want to delete the expectedDisplayName (expectedName) Data Store? This will
       destroy all data stored on the volume.",

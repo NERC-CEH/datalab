@@ -5,7 +5,6 @@ metadata:
   labels:
     name: {{ name }}
   name: {{ name }}
-  namespace: {{ namespace }}
 spec:
   template:
     metadata:
@@ -14,6 +13,28 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
+      initContainers:
+        # This container will generate the expected folder structure for the notebooks directory, without this the
+        # jupyter container will not start. As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/jupyter"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+        # This container correct the folder permissions for the generated notebook directory to be owned by the
+        # datalabs:users (user:group; 1000:100).
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/jupyter"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
       containers:
       - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
         imagePullPolicy : "IfNotPresent"
@@ -36,9 +57,6 @@ spec:
           value: "{{ grantSudo }}"
         - name: R_LIBS_USER
           value: "/data/packages/R/%p/%v"
-        volumeMounts:
-            - mountPath: /data
-              name: glusterfsvol
         resources:
           requests:
             cpu: 200m
@@ -46,7 +64,12 @@ spec:
           limits:
             cpu: 2
             memory: 4Gi
+{{#volumeMount}}
+        volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-claim
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}

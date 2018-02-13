@@ -2,11 +2,11 @@
 
 exports[`dataStorageService checkDataStoreName should build the correct query and unpack the results 1`] = `
 "
-  CheckDataStoreName($name: String!) {
-    checkDataStoreName(name: $name) { 
-      id
-    }
-  }"
+    CheckDataStoreName($name: String!) {
+      checkDataStoreName(name: $name) {
+        id
+      }
+    }"
 `;
 
 exports[`dataStorageService createDataStore should build the correct correct mutation and unpack the results 1`] = `
@@ -29,18 +29,18 @@ exports[`dataStorageService deleteDataStore should build the correct correct mut
 
 exports[`dataStorageService getCredentials should build the correct query and return the minio credentials 1`] = `
 "
-      GetCredentials($id: ID!) {
-        dataStore(id: $id) {
-          url accessKey
-        }
-      }"
+    GetCredentials($id: ID!) {
+      dataStore(id: $id) {
+        url, accessKey
+      }
+    }"
 `;
 
 exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
 "
-      DataStorage {
-        dataStorage {
-           id name displayName description type volumeSize
-        }
-      }"
+    DataStorage {
+      dataStorage {
+         id, name, displayName, description, type, stacksMountingStore { id }
+      }
+    }"
 `;

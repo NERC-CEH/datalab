@@ -43,6 +43,13 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
   <div>
     <Field
       component={[Function]}
+      label="Data Store to Mount"
+      name="volumeMount"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
       label="Source Path"
       name="sourcePath"
       placeholder="Source Directory for Site"

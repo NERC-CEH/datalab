@@ -3,33 +3,33 @@ import { gqlMutation, gqlQuery } from './graphqlClient';
 
 function loadDataStorage() {
   const query = `
-      DataStorage {
-        dataStorage {
-           id name displayName description type volumeSize
-        }
-      }`;
+    DataStorage {
+      dataStorage {
+         id, name, displayName, description, type, stacksMountingStore { id }
+      }
+    }`;
 
   return gqlQuery(query).then(res => get(res, 'data.dataStorage'));
 }
 
 function getCredentials(id) {
   const query = `
-      GetCredentials($id: ID!) {
-        dataStore(id: $id) {
-          url accessKey
-        }
-      }`;
+    GetCredentials($id: ID!) {
+      dataStore(id: $id) {
+        url, accessKey
+      }
+    }`;
 
   return gqlQuery(query, { id }).then(res => get(res, 'data.dataStore'));
 }
 
 function checkDataStoreName(name) {
   const query = `
-  CheckDataStoreName($name: String!) {
-    checkDataStoreName(name: $name) { 
-      id
-    }
-  }`;
+    CheckDataStoreName($name: String!) {
+      checkDataStoreName(name: $name) {
+        id
+      }
+    }`;
 
   return gqlQuery(query, { name }).then(res => get(res, 'data.checkDataStoreName'));
 }

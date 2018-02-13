@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CreateNotebookDialog from '../../components/modal/CreateNotebookDialog';
-import CreateSiteDialog from '../../components/modal/CreateSiteDialog';
+import CreateNotebookDialog from '../notebooks/CreateNotebookDialogContainer';
+import CreateSiteDialog from '../sites/CreateSiteDialogContainer';
 import CreateDataStoreDialog from '../../components/modal/CreateDataStoreDialog';
 import Confirmation from '../../components/modal/Confirmation';
 import RobustConfirmation from '../../components/modal/RobustConfirmation';

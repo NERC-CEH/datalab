@@ -13,10 +13,13 @@ spec:
         name: {{ name }}
     spec:
       initContainers:
+        # This container will correct the directory permissions for the dynamically provisioned storage. Without this it
+        # is not possible to write to the mounted directory.
         - name: fix-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: ["sh", "-c", "chown -R 1000:1000 /mnt/glusterfs"]
+          command: ["sh"]
+          args: ["-c", "chmod 777 /mnt/glusterfs"]
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol

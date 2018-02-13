@@ -12,9 +12,12 @@ describe('Site dialog', () => {
 
   const generateProps = () => ({
     title: 'Title',
-    notebook: { displayName: 'Name' },
     onSubmit: onSubmitMock,
     onCancel: onCancelMock,
+    dataStorageOptions: [
+      { value: 'value' },
+      { value: 'another value' },
+    ],
   });
 
   beforeEach(() => jest.resetAllMocks());

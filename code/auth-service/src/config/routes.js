@@ -1,9 +1,11 @@
 import auth from '../controllers/authorisation';
 import status from '../controllers/status';
-import authMiddleware from '../auth/authMiddleware';
+import { cookieAuthMiddleware, tokenAuthMiddleware } from '../auth/authMiddleware';
 
 function configureRoutes(app) {
-  app.get('/auth', authMiddleware, auth.checkUser);
+  app.get('/auth', cookieAuthMiddleware, auth.checkUser);
+  app.get('/authorise', tokenAuthMiddleware, auth.generatePermissionToken);
+  app.get('/jwks', auth.serveJWKS);
   app.get('/status', status.status);
 }
 

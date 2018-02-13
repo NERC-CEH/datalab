@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reset } from 'redux-form';
 import { pick } from 'lodash';
-import { MODAL_TYPE_CREATE_DATA_STORE, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
+import {
+  MODAL_TYPE_CREATE_DATA_STORE,
+  MODAL_TYPE_CONFIRMATION,
+  MODAL_TYPE_ROBUST_CONFIRMATION,
+} from '../../constants/modaltypes';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import StackCards from '../../components/stacks/StackCards';
@@ -23,6 +27,8 @@ class DataStorageContainer extends Component {
     this.openCreationForm = this.openCreationForm.bind(this);
     this.deleteDataStore = this.deleteDataStore.bind(this);
     this.confirmDeleteDataStore = this.confirmDeleteDataStore.bind(this);
+    this.prohibitDeletion = this.prohibitDeletion.bind(this);
+    this.chooseDialogue = this.chooseDialogue.bind(this);
   }
 
   openDataStore = id =>
@@ -66,6 +72,21 @@ class DataStorageContainer extends Component {
       onCancel: this.props.actions.closeModalDialog,
     });
 
+  prohibitDeletion = dataStore =>
+    this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+      title: `Unable to Delete ${dataStore.displayName} ${TYPE_NAME}`,
+      body: `${TYPE_NAME} is in use, unable to delete.`,
+      onCancel: this.props.actions.closeModalDialog,
+    });
+
+  chooseDialogue = (dataStore) => {
+    if (dataStore.stacksMountingStore.length > 0) {
+      return this.prohibitDeletion(dataStore);
+    }
+
+    return this.confirmDeleteDataStore(dataStore);
+  };
+
   componentWillMount() {
     this.props.actions.loadDataStorage();
   }
@@ -77,7 +98,7 @@ class DataStorageContainer extends Component {
           stacks={this.props.dataStorage.value}
           typeName={TYPE_NAME}
           openStack={this.openDataStore}
-          deleteStack={this.confirmDeleteDataStore}
+          deleteStack={this.chooseDialogue}
           openCreationForm={this.openCreationForm} />
       </PromisedContentWrapper>
     );

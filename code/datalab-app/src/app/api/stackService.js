@@ -3,32 +3,32 @@ import { gqlMutation, gqlQuery } from './graphqlClient';
 
 function loadStacks() {
   const query = `
-      Stacks {
-        stacks {
-          id, displayName, name, type, description
-        }
-      }`;
+    Stacks {
+      stacks {
+        id, displayName, name, type, description
+      }
+    }`;
 
   return gqlQuery(query).then(res => get(res, 'data.stacks'));
 }
 
 function loadStacksByCategory(category) {
   const query = `
-      GetStacksByCategory($category: String!) {
-        stacksByCategory(category: $category) {
-          id, displayName, name, type, description
-        }
-      }`;
+    GetStacksByCategory($category: String!) {
+      stacksByCategory(category: $category) {
+        id, displayName, name, type, description
+      }
+    }`;
   return gqlQuery(query, { category }).then(res => get(res, 'data.stacksByCategory'));
 }
 
 function getUrl(id) {
   const query = `
-      GetUrl($id: ID!) {
-        stack(id: $id) {
-          redirectUrl
-        }
-      }`;
+    GetUrl($id: ID!) {
+      stack(id: $id) {
+        redirectUrl
+      }
+    }`;
 
   return gqlQuery(query, { id })
     .then(res => get(res, 'data.stack'))
@@ -41,13 +41,25 @@ function getUrl(id) {
 }
 
 function checkStackName(name) {
-  const query = `CheckStackName($name: String!) {
-    checkStackName(name: $name) { 
-      id 
-    }
-  }`;
+  const query = `
+    CheckStackName($name: String!) {
+      checkStackName(name: $name) { 
+        id 
+      }
+    }`;
 
   return gqlQuery(query, { name }).then(res => get(res, 'data.checkStackName'));
+}
+
+function checkStackMounts(volumeMount) {
+  const query = `
+    CheckStackMounts($volumeMount:  String!) {
+      checkStackMounts(volumeMount: $volumeMount) {
+        displayName, name, type
+      }
+    }`;
+
+  return gqlQuery(query, { volumeMount }).then(res => get(res, 'data.checkStackMounts'));
 }
 
 function createStack(stack) {
@@ -84,6 +96,7 @@ export default {
   loadStacksByCategory,
   getUrl,
   checkStackName,
+  checkStackMounts,
   createStack,
   deleteStack,
 };

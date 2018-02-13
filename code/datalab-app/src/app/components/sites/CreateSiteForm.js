@@ -7,7 +7,7 @@ import { syncValidate, asyncValidate } from './newSiteFormValidator';
 import { PUBLISH, getStackSelections } from '../../../shared/stackTypes';
 
 const CreateSiteForm = (props) => {
-  const { handleSubmit, cancel, submitting } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -33,6 +33,13 @@ const CreateSiteForm = (props) => {
           placeholder="Site Name for URLs"
           startText="http://datalab-"
           endText=".datalabs.nerc.ac.uk" />
+      </div>
+      <div>
+        <Field
+          name="volumeMount"
+          label="Data Store to Mount"
+          component={renderSelectField}
+          options={dataStorageOptions}/>
       </div>
       <div>
         <Field
