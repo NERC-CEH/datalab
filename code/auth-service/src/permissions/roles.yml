@@ -1,0 +1,15 @@
+---
+admin: []
+project:admin:
+  - name: stacks
+    role: admin
+  - name: storage
+    role: admin
+project:user:
+  - name: stacks
+    role: admin
+  - name: storage
+    role: viewer
+project:viewer:
+  - name: stacks
+    role: viewer

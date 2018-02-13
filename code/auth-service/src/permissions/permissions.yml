@@ -1,0 +1,11 @@
+---
+admin:
+  - create
+  - delete
+  - read
+user:
+  - create
+  - delete
+  - read
+viewer:
+  - read
