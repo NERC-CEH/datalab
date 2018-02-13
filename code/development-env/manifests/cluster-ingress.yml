@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: test
+spec:
+  rules:
+  - host: minio-beta.test.svc.cluster.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: minio-beta
+          servicePort: 80

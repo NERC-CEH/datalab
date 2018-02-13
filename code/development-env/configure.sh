@@ -3,7 +3,8 @@ set -e
 
 # Default environment variables
 DATABASE_HOST="localhost"
-VAULT_TOKEN=root
+KUBERNETES_NAMESPACE="test"
+VAULT_TOKEN="root"
 
 # Start docker-machine and set address
 if [[ ($# -eq 1 && $1 == "--machine") ]]; then
@@ -14,31 +15,29 @@ fi
 DATABASE_HOST=${DOCKER_ADDRESS}
 VAULT_API="http://${DOCKER_ADDRESS}:8200"
 
-# Docker compose is very flaky in Windows and need to be run as single line
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-vault.yml up -d
+# Start mongo and vault containers. Pre-seed database with values.
+(docker-compose -f ./docker/docker-compose.yml up -d)
 
-# Start mongo and pre-seed database
-# docker-compose -f ./docker/docker-compose-mongo.yml up -d
-
-# Start vault and set role value
-# docker-compose -f ./docker/docker-compose-vault.yml up -d
+# Set vault role value
 source ./scripts/configure-vault.sh
 
 # Start minikube and set address
 if [[ `minikube status --format {{.MinikubeStatus}}` == "Stopped" ]]; then
-  echo start mk
-  # minikube start
-  # enable ingress
-  # load TLS cert
+  minikube start
+  minikube addons enable ingress
 fi
 
 MINIKUBE_IP=`minikube ip`
 
 # Get kube-dns address
+CLUSTER_DNS=`kubectl get svc -n kube-system -o json | jq --raw-output '.items | .[] | select(.metadata.name | contains("kube-dns")) | .spec.clusterIP'`
 
 # Generate dnsmasq.conf
 
 # Create namespace
+kubectl create namespace $KUBERNETES_NAMESPACE || echo namespace already present
+
+# load TLS cert
 
 # Load storage class
 
@@ -47,3 +46,4 @@ MINIKUBE_IP=`minikube ip`
 
 echo $DOCKER_ADDRESS
 echo $MINIKUBE_IP
+echo $CLUSTER_DNS
