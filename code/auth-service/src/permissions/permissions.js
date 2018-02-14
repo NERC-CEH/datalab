@@ -29,12 +29,26 @@ const getPermissions = subRole => ({
   permissions: permissionAttributes[subRole.role],
 });
 
+const buildPermissions = ({ projectName, projectRoles }) =>
+  projectRoles.reduce((previous, { name: processName, permissions }) =>
+    permissions.map(action => `${projectName}${roleDelim}${processName}${roleDelim}${action}`),
+    []);
+
+const flattenArray = (previous, current) => {
+  if (Array.isArray(current)) {
+    return [...previous, ...current];
+  }
+  return previous;
+};
+
 function handleRoles(roles) {
   const projects = roles
     .map(parseRoles)
     .map(parseProjects)
     .filter(role => role.projectName)
-    .map(buildProjectRoles);
+    .map(buildProjectRoles)
+    .map(buildPermissions)
+    .reduce(flattenArray, []);
 
   logger.debug(JSON.stringify(projects, null, 2));
 
