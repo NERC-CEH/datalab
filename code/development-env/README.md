@@ -15,7 +15,7 @@ export VAULT_API="http://${DOCKER_ADDRESS}:8200"
 
 ### Start docker containers
 
-Mongo will be pre-seeded with value.
+Mongo will be pre-seeded with data.
 
 ```bash
 docker-compose -f ./docker/docker-compose.yml up -d
