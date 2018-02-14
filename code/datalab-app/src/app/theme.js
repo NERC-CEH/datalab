@@ -1,7 +1,6 @@
 import { createMuiTheme } from 'material-ui';
 import { blueGrey, teal, grey, red } from 'material-ui/colors';
 
-const defaultTheme = createMuiTheme();
 const primary = teal;
 const secondary = blueGrey;
 const backgroundColor = grey[100];
@@ -23,14 +22,6 @@ const theme = createMuiTheme({
       },
       colorPrimary: {
         backgroundColor,
-      },
-    },
-    MuiTableCell: {
-      root: {
-        fontSize: defaultTheme.typography.body1.fontSize,
-      },
-      head: {
-        fontSize: defaultTheme.typography.subheading.fontSize,
       },
     },
   },

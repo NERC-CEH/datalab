@@ -5,9 +5,8 @@ metadata:
   name: {{ name }}
   labels:
     userCreated: "yes"
-  annotations:
-    volume.beta.kubernetes.io/storage-class: {{ storageClass }}
 spec:
+  storageClassName: {{ storageClass }}
   accessModes:
     - ReadWriteMany
   resources:

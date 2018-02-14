@@ -50,7 +50,7 @@ const config = convict({
     env: 'AUTH_SIGNIN_URL',
   },
   storageClass: {
-    doc: 'The storage class to use for ne volumes',
+    doc: 'The storage class to use for new volumes',
     format: 'String',
     default: 'glusterfs-storage',
     env: 'STORAGE_CLASS',

@@ -7,7 +7,7 @@ services:
 
   mongodb_import:
     build:
-      context: ./config/mongo
+      context: ../config/mongo
       dockerfile: Dockerfile.mongoimport
     command: "/import.sh"
     environment:
@@ -17,4 +17,4 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - $PWD/config/mongo:/tmp/mongodb/:ro
+      - $PWD/../config/mongo:/tmp/mongodb/:ro
