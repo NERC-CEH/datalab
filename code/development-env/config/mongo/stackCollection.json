@@ -1,0 +1,15 @@
+[
+  {
+      "name" : "jupyter",
+      "status" : "requested",
+      "created" : "2018-02-13T12:46:39.687Z",
+      "displayName" : "Jupyter Notebook",
+      "type" : "jupyter",
+      "description" : "A Jupyter Notebook",
+      "volumeMount" : "example",
+      "url" : "https://testlab-jupyter.datalabs.local",
+      "internalEndpoint" : "http://jupyter-jupyter",
+      "category" : "analysis",
+      "users" : []
+  }
+]

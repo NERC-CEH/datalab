@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:3.4
+    ports:
+      - 27017:27017
+
+  mongodb_import:
+    build:
+      context: ../config/mongo
+      dockerfile: Dockerfile.mongoimport
+    command: "/import.sh"
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB_NAME=datalab
+    depends_on:
+      - mongodb
+    volumes:
+      - $PWD/../config/mongo:/tmp/mongodb/:ro
+
+  vault:
+    image: 'vault'
+    ports:
+      - 8200:8200
+    command:
+      - server
+      - -dev
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=root
