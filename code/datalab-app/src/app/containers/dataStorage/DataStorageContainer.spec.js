@@ -126,12 +126,13 @@ describe('DataStorageContainer', () => {
       // Act/Assert
       expect(getCredentialsMock).not.toHaveBeenCalled();
       expect(openMinioDataStoreMock).not.toHaveBeenCalled();
-      openStack(1000).then(() => {
-        expect(getCredentialsMock).toHaveBeenCalledTimes(1);
-        expect(getCredentialsMock).toHaveBeenCalledWith(1000);
-        expect(openMinioDataStoreMock).toHaveBeenCalledTimes(1);
-        expect(openMinioDataStoreMock).toHaveBeenCalledWith('expectedUrl', 'expectedKey');
-      });
+      return openStack(1000)
+        .then(() => {
+          expect(getCredentialsMock).toHaveBeenCalledTimes(1);
+          expect(getCredentialsMock).toHaveBeenCalledWith(1000);
+          expect(openMinioDataStoreMock).toHaveBeenCalledTimes(1);
+          expect(openMinioDataStoreMock).toHaveBeenCalledWith('expectedUrl', 'expectedKey');
+        });
     });
 
     it('confirmDeleteDataStore calls openModalDialog with correct action for unmounted volume', () => {
@@ -211,10 +212,11 @@ describe('DataStorageContainer', () => {
 
       // Assert
       expect(deleteDataStoreMock).not.toHaveBeenCalled();
-      onSubmit().then(() => {
-        expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
-        expect(deleteDataStoreMock).toHaveBeenCalledWith(stack);
-      });
+      return onSubmit()
+        .then(() => {
+          expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
+          expect(deleteDataStoreMock).toHaveBeenCalledWith(stack);
+        });
     });
 
     it('openCreationForm calls openModalDialog with correct action', () => {
@@ -265,11 +267,12 @@ describe('DataStorageContainer', () => {
       expect(createDataStoreMock).not.toHaveBeenCalled();
       expect(resetFormMock).not.toHaveBeenCalled();
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
-      onSubmit(stack).then(() => {
-        expect(createDataStoreMock).toHaveBeenCalledTimes(1);
-        expect(createDataStoreMock).toHaveBeenCalledWith(stack);
-        expect(resetFormMock).toHaveBeenCalledTimes(1);
-      });
+      return onSubmit(stack)
+        .then(() => {
+          expect(createDataStoreMock).toHaveBeenCalledTimes(1);
+          expect(createDataStoreMock).toHaveBeenCalledWith(stack);
+          expect(resetFormMock).toHaveBeenCalledTimes(1);
+        });
     });
   });
 });

@@ -53,9 +53,6 @@ describe('minioService', () => {
       crossStorage.CrossStorageClient = mockFailedCrossStorage;
 
       return minioService.openStorage(url, token)
-        .then(() => {
-          expect(true).toBe(false);
-        })
         .catch((error) => {
           expect(error).toBe('error');
         });

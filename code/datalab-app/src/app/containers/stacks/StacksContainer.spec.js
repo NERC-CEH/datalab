@@ -136,12 +136,13 @@ describe('StacksContainer', () => {
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
       expect(openStackMock).not.toHaveBeenCalled();
-      openStack(1000).then(() => {
-        expect(getUrlMock).toHaveBeenCalledTimes(1);
-        expect(getUrlMock).toHaveBeenCalledWith(1000);
-        expect(openStackMock).toHaveBeenCalledTimes(1);
-        expect(openStackMock).toHaveBeenCalledWith('expectedUrl');
-      });
+      return openStack(1000)
+        .then(() => {
+          expect(getUrlMock).toHaveBeenCalledTimes(1);
+          expect(getUrlMock).toHaveBeenCalledWith(1000);
+          expect(openStackMock).toHaveBeenCalledTimes(1);
+          expect(openStackMock).toHaveBeenCalledWith('expectedUrl');
+        });
     });
 
     it('openStack method calls toastr on unresolved getUrl', () => {
@@ -154,12 +155,13 @@ describe('StacksContainer', () => {
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
       expect(toastrErrorMock).not.toHaveBeenCalled();
-      openStack(1000).then(() => {
-        expect(getUrlMock).toHaveBeenCalledTimes(1);
-        expect(getUrlMock).toHaveBeenCalledWith(1000);
-        expect(toastrErrorMock).toHaveBeenCalledTimes(1);
-        expect(toastrErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
-      });
+      return openStack(1000)
+        .then(() => {
+          expect(getUrlMock).toHaveBeenCalledTimes(1);
+          expect(getUrlMock).toHaveBeenCalledWith(1000);
+          expect(toastrErrorMock).toHaveBeenCalledTimes(1);
+          expect(toastrErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
+        });
     });
 
     it('confirmDeleteStack calls openModalDialog with correct action', () => {
@@ -207,10 +209,11 @@ describe('StacksContainer', () => {
 
       // Assert
       expect(deleteStackMock).not.toHaveBeenCalled();
-      onSubmit().then(() => {
-        expect(deleteStackMock).toHaveBeenCalledTimes(1);
-        expect(deleteStackMock).toHaveBeenCalledWith(stack);
-      });
+      return onSubmit()
+        .then(() => {
+          expect(deleteStackMock).toHaveBeenCalledTimes(1);
+          expect(deleteStackMock).toHaveBeenCalledWith(stack);
+        });
     });
 
     it('openCreationForm calls openModalDialog with correct action', () => {
@@ -261,12 +264,13 @@ describe('StacksContainer', () => {
       expect(createStackMock).not.toHaveBeenCalled();
       expect(restFormMock).not.toHaveBeenCalled();
       expect(loadStacksMock).toHaveBeenCalledTimes(1);
-      onSubmit(stack).then(() => {
-        expect(createStackMock).toHaveBeenCalledTimes(1);
-        expect(createStackMock).toHaveBeenCalledWith(stack);
-        expect(restFormMock).toHaveBeenCalledTimes(1);
-        expect(restFormMock).toHaveBeenCalledWith('createNotebook');
-      });
+      return onSubmit(stack)
+        .then(() => {
+          expect(createStackMock).toHaveBeenCalledTimes(1);
+          expect(createStackMock).toHaveBeenCalledWith(stack);
+          expect(restFormMock).toHaveBeenCalledTimes(1);
+          expect(restFormMock).toHaveBeenCalledWith('createNotebook');
+        });
     });
   });
 });

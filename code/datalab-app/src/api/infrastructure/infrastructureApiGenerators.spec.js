@@ -24,10 +24,10 @@ stackRepository.createOrUpdate = mockCreateOrUpdate;
 mockCreateOrUpdate.mockReturnValue(Promise.resolve({}));
 
 const mockGenerateApiRequest = jest.fn();
-mockGenerateApiRequest.mockReturnValue({ expected: 'request' });
+// mockGenerateApiRequest.mockReturnValue({ expected: 'request' });
 
 const mockGenerateApiPayload = jest.fn();
-mockGenerateApiPayload.mockReturnValue({ expected: 'payload' });
+// mockGenerateApiPayload.mockReturnValue({ expected: 'payload' });
 
 const httpMock = new MockAdapter(axios);
 
@@ -43,8 +43,8 @@ const infApiConfig = {
 describe('Infrastructure Api Generators', () => {
   beforeEach(() => {
     httpMock.reset();
-    mockGenerateApiRequest.mockClear();
-    mockGenerateApiPayload.mockClear();
+    mockGenerateApiRequest.mockReset();
+    mockGenerateApiPayload.mockReset();
   });
 
   afterAll(() => {
@@ -56,12 +56,14 @@ describe('Infrastructure Api Generators', () => {
       httpMock.onPost(STACK_CREATION_URL)
         .reply(201);
 
+      const requestedStack = { name: 'testStack', type: 'jupyer' };
+
       const createStack = infApiGen.generateCreateElement(infApiConfig);
 
-      createStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
-        .then((notebook) => {
+      return createStack(undefined, datalabInfo.name, requestedStack)
+        .then(() => {
           expect(mockGenerateApiRequest).toHaveBeenCalledTimes(1);
-          expect(mockGenerateApiRequest.mock.calls).toMatchSnapshot();
+          expect(mockGenerateApiRequest).toHaveBeenCalledWith(requestedStack, datalabInfo);
         });
     });
 
@@ -69,12 +71,15 @@ describe('Infrastructure Api Generators', () => {
       httpMock.onPost(STACK_CREATION_URL)
         .reply(201);
 
+      const apiResponse = { expected: 'requestResponse' };
+      mockGenerateApiRequest.mockReturnValue(apiResponse);
+
       const createStack = infApiGen.generateCreateElement(infApiConfig);
 
-      createStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
-        .then((notebook) => {
+      return createStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
+        .then(() => {
           expect(mockGenerateApiPayload).toHaveBeenCalledTimes(1);
-          expect(mockGenerateApiPayload.mock.calls).toMatchSnapshot();
+          expect(mockGenerateApiPayload).toBeCalledWith(apiResponse, datalabInfo);
         });
     });
 
@@ -82,11 +87,13 @@ describe('Infrastructure Api Generators', () => {
       httpMock.onPost(STACK_CREATION_URL)
         .reply(201);
 
+      const requestedStack = { name: 'testStack', type: 'jupyer' };
+
       const createStack = infApiGen.generateCreateElement(infApiConfig);
 
-      createStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
-        .then((notebook) => {
-          expect(notebook).toMatchSnapshot();
+      return createStack(undefined, datalabInfo.name, requestedStack)
+        .then((output) => {
+          expect(output).toEqual(requestedStack);
         });
     });
 
@@ -96,7 +103,7 @@ describe('Infrastructure Api Generators', () => {
 
       const createStack = infApiGen.generateCreateElement(infApiConfig);
 
-      createStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
+      return createStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
         .catch((error) => {
           expect(error).toMatchSnapshot();
         });
@@ -108,12 +115,14 @@ describe('Infrastructure Api Generators', () => {
       httpMock.onDelete(STACK_CREATION_URL)
         .reply(201);
 
+      const requestedStack = { name: 'testStack', type: 'jupyer' };
+
       const deleteStack = infApiGen.generateDeleteElement(infApiConfig);
 
-      deleteStack(undefined, datalabInfo.name, { name: 'testStack', type: 'jupyer' })
-        .then((notebook) => {
+      return deleteStack(undefined, datalabInfo.name, requestedStack)
+        .then(() => {
           expect(mockGenerateApiPayload).toHaveBeenCalledTimes(1);
-          expect(mockGenerateApiPayload.mock.calls).toMatchSnapshot();
+          expect(mockGenerateApiPayload).toBeCalledWith(requestedStack, datalabInfo);
           expect(mockGenerateApiRequest).not.toHaveBeenCalled();
         });
     });
@@ -122,11 +131,13 @@ describe('Infrastructure Api Generators', () => {
       httpMock.onDelete(STACK_CREATION_URL)
         .reply(201);
 
+      const requestedStack = { name: 'testStack' };
+
       const deleteStack = infApiGen.generateDeleteElement(infApiConfig);
 
-      deleteStack(undefined, datalabInfo.name, { name: 'testStack' })
-        .then((notebook) => {
-          expect(notebook).toMatchSnapshot();
+      return deleteStack(undefined, datalabInfo.name, requestedStack)
+        .then((output) => {
+          expect(output).toEqual(requestedStack);
         });
     });
 
@@ -136,7 +147,7 @@ describe('Infrastructure Api Generators', () => {
 
       const deleteStack = infApiGen.generateDeleteElement(infApiConfig);
 
-      deleteStack(undefined, datalabInfo.name, { name: 'testStack' })
+      return deleteStack(undefined, datalabInfo.name, { name: 'testStack' })
         .catch((error) => {
           expect(error).toMatchSnapshot();
         });
