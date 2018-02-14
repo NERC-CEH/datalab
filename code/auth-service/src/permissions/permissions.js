@@ -1,38 +1,26 @@
 import fs from 'fs';
-import logger from 'winston';
 import yaml from 'js-yaml';
 import config from '../config/config';
 
 const roleDelim = ':';
 const projectTag = 'project';
 
-const permissionBuffer = fs.readFileSync(config.get('permissionAttributes'));
-const roleBuffer = fs.readFileSync(config.get('roleAttributes'));
-const permissionAttributes = yaml.safeLoad(permissionBuffer);
-const roleAttributes = yaml.safeLoad(roleBuffer);
+const permissionAttributes = yaml.safeLoad(fs.readFileSync(config.get('permissionAttributes')));
 
 const parseRoles = role => role.split(roleDelim, 2);
 
+const concatRoles = (head, tail) =>
+  `${head}${roleDelim}${tail}`;
+
 const parseProjects = ([head, tail]) => ({
   projectName: tail ? head : undefined,
-  role: tail || head,
+  role: tail ? concatRoles(projectTag, tail) : head,
 });
 
-const buildProjectRoles = ({ projectName, role }) => ({
-  projectName,
-  projectRoles: roleAttributes[`${projectTag}${roleDelim}${role}`]
-    .map(getPermissions),
+const getPermissions = roleObject => ({
+  ...roleObject,
+  permissions: buildPermissions(permissionAttributes[roleObject.role]),
 });
-
-const getPermissions = subRole => ({
-  ...subRole,
-  permissions: permissionAttributes[subRole.role],
-});
-
-const buildPermissions = ({ projectName, projectRoles }) =>
-  projectRoles.reduce((previous, { name: processName, permissions }) =>
-    permissions.map(action => `${projectName}${roleDelim}${processName}${roleDelim}${action}`),
-    []);
 
 const flattenArray = (previous, current) => {
   if (Array.isArray(current)) {
@@ -41,18 +29,24 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
-function handleRoles(roles) {
-  const projects = roles
-    .map(parseRoles)
-    .map(parseProjects)
-    .filter(role => role.projectName)
-    .map(buildProjectRoles)
-    .map(buildPermissions)
+const buildPermissions = element =>
+  element.map(({ name, permissions }) =>
+    permissions.map(permission => concatRoles(name, permission)))
     .reduce(flattenArray, []);
 
-  logger.debug(JSON.stringify(projects, null, 2));
+const projectifyPermissions = ({ projectName, permissions }) => {
+  if (projectName) {
+    return permissions.map(permission => concatRoles(projectName, permission));
+  }
 
-  return [...projects];
-}
+  return permissions;
+};
 
-export default handleRoles;
+const processRoles = roles =>
+  roles.map(parseRoles)
+    .map(parseProjects)
+    .map(getPermissions)
+    .map(projectifyPermissions)
+    .reduce(flattenArray, []);
+
+export default processRoles;

@@ -1,11 +1,32 @@
 ---
-admin:
-  - create
-  - delete
-  - read
-user:
-  - create
-  - delete
-  - read
-viewer:
-  - read
+admin: []
+project:admin:
+  - name: stacks
+    permissions:
+      - create
+      - delete
+      - list
+      - open
+  - name: storage
+    permissions:
+      - create
+      - delete
+      - view
+      - list
+      - open
+project:user:
+  - name: stacks
+    permissions:
+      - create
+      - delete
+      - list
+      - open
+  - name: storage
+    permissions:
+      - list
+      - open
+project:viewer:
+  - name: stacks
+    permissions:
+      - list
+      - open
