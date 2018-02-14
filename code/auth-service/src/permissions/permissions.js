@@ -17,10 +17,14 @@ const parseProjects = ([head, tail]) => ({
   role: tail ? concatRoles(projectTag, tail) : head,
 });
 
-const getPermissions = roleObject => ({
-  ...roleObject,
-  permissions: buildPermissions(permissionAttributes[roleObject.role]),
-});
+const getPermissions = (roleObject) => {
+  const attributes = permissionAttributes[roleObject.role];
+
+  return {
+    ...roleObject,
+    permissions: attributes ? buildPermissions(attributes) : [],
+  };
+};
 
 const flattenArray = (previous, current) => {
   if (Array.isArray(current)) {
