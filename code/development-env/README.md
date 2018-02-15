@@ -73,7 +73,7 @@ export VAULT_APP_ROLE= # Set to value from ./scripts/configure-vault.sh
 export VAULT_API="http://${DOCKER_ADDRESS}:8200"
 ```
 
-## #Authorisation service
+### Authorisation service
 
 - Set environmental variables
 
