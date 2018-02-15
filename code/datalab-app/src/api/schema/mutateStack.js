@@ -10,7 +10,7 @@ export const createStack = {
   args: {
     stack: { type: StackCreationType },
   },
-  resolve: (obj, { stack }, { user }) => stackApi.createStack(user, DATALAB_NAME, stack),
+  resolve: (obj, { stack }, { user, token }) => stackApi.createStack({ user, token }, DATALAB_NAME, stack),
 };
 
 export const deleteStack = {
@@ -19,5 +19,5 @@ export const deleteStack = {
   args: {
     stack: { type: StackDeletionType },
   },
-  resolve: (obj, { stack }, { user }) => stackApi.deleteStack(user, DATALAB_NAME, stack),
+  resolve: (obj, { stack }, { user, token }) => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack),
 };

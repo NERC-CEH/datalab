@@ -34,4 +34,3 @@ export const checkDataStoreName = {
   },
   resolve: (obj, { name }, { user }) => dataStorageRepository.getAllByName(user, name),
 };
-
