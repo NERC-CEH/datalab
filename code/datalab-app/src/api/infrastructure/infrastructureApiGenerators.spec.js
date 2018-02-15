@@ -24,10 +24,8 @@ stackRepository.createOrUpdate = mockCreateOrUpdate;
 mockCreateOrUpdate.mockReturnValue(Promise.resolve({}));
 
 const mockGenerateApiRequest = jest.fn();
-// mockGenerateApiRequest.mockReturnValue({ expected: 'request' });
 
 const mockGenerateApiPayload = jest.fn();
-// mockGenerateApiPayload.mockReturnValue({ expected: 'payload' });
 
 const httpMock = new MockAdapter(axios);
 
