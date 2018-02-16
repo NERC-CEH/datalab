@@ -10,7 +10,7 @@ export const createDataStore = {
   args: {
     dataStore: { type: DataStorageCreationType },
   },
-  resolve: (obj, { dataStore }, { user }) => dataStoreApi.createDataStore(user, DATALAB_NAME, dataStore),
+  resolve: (obj, { dataStore }, { user, token }) => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore),
 };
 
 export const deleteDataStore = {
@@ -19,5 +19,5 @@ export const deleteDataStore = {
   args: {
     dataStore: { type: DataStorageDeletionType },
   },
-  resolve: (obj, { dataStore }, { user }) => dataStoreApi.deleteDataStore(user, DATALAB_NAME, dataStore),
+  resolve: (obj, { dataStore }, { user, token }) => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore),
 };
