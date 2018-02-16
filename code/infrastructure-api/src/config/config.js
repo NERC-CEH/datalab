@@ -62,7 +62,7 @@ const config = convict({
     env: 'AUTHORISATION_SERVICE',
   },
   authorisationServiceStub: {
-    doc: 'If the authorisation service is in subbed mode',
+    doc: 'If the authorisation service is in stubbed mode',
     format: 'Boolean',
     default: false,
     env: 'AUTHORISATION_SERVICE_STUB',
