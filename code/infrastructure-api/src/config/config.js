@@ -55,6 +55,18 @@ const config = convict({
     default: 'glusterfs-storage',
     env: 'STORAGE_CLASS',
   },
+  authorisationService: {
+    doc: 'The endpoint for the authorisation service',
+    format: 'String',
+    default: 'http://localhost:9000',
+    env: 'AUTHORISATION_SERVICE',
+  },
+  authorisationServiceStub: {
+    doc: 'If the authorisation service is in subbed mode',
+    format: 'Boolean',
+    default: false,
+    env: 'AUTHORISATION_SERVICE_STUB',
+  },
 });
 
 export default config;
