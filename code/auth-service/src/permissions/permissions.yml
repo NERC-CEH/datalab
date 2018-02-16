@@ -1,6 +1,6 @@
 ---
-admin: []
-project:admin:
+instance-admin: []
+admin:
   - name: stacks
     permissions:
       - create
@@ -14,7 +14,7 @@ project:admin:
       - view
       - list
       - open
-project:user:
+user:
   - name: stacks
     permissions:
       - create
@@ -25,7 +25,7 @@ project:user:
     permissions:
       - list
       - open
-project:viewer:
+viewer:
   - name: stacks
     permissions:
       - list

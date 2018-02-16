@@ -3,7 +3,7 @@ import getPermissions from './permissions';
 describe('Get Permissions', () => {
   it('generated permissions should match snapshot', () => {
     const roles = [
-      'admin',
+      'instance-admin',
       'firstProjectName:admin',
       'secondProjectName:user',
       'thirdProjectName:viewer',
