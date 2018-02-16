@@ -2,10 +2,15 @@ import httpMocks from 'node-mocks-http';
 import jwt from 'jsonwebtoken';
 import authorisation from './authorisation';
 import * as getRoles from '../auth/authzApi';
+import * as getPermissions from '../permissions/permissions';
 
 jest.mock('../auth/authzApi');
 const getRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
 getRoles.default = getRolesMock;
+
+jest.mock('../permissions/permissions');
+const getPermissionsMock = jest.fn();
+getPermissions.default = getPermissionsMock;
 
 describe('authorisation controller', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -41,7 +46,7 @@ describe('authorisation controller', () => {
       const response = httpMocks.createResponse();
       const request = { user: { sub: 'expectedUserName' } };
 
-      authorisation.generatePermissionToken(request, response)
+      return authorisation.generatePermissionToken(request, response)
         .then(() => {
           const { token } = response._getData(); // eslint-disable-line no-underscore-dangle
           const { aud, iss, sub } = jwt.decode(token);
@@ -55,11 +60,38 @@ describe('authorisation controller', () => {
       const expectedRoles = ['expected', 'roles'];
       getRolesMock.mockReturnValue(Promise.resolve(expectedRoles));
 
-      authorisation.generatePermissionToken(request, response)
+      return authorisation.generatePermissionToken(request, response)
         .then(() => {
           const { token } = response._getData(); // eslint-disable-line no-underscore-dangle
           const { roles } = jwt.decode(token);
           expect(roles).toEqual(expectedRoles);
+        });
+    });
+
+    it('should call getPermissions with the retrieved roles', () => {
+      const response = httpMocks.createResponse();
+      const request = { user: { sub: 'expectedUserName' } };
+      const expectedRoles = ['expected', 'roles'];
+      getRolesMock.mockReturnValue(Promise.resolve(expectedRoles));
+
+      expect(getPermissionsMock).not.toHaveBeenCalled();
+      return authorisation.generatePermissionToken(request, response)
+        .then(() => {
+          expect(getPermissionsMock).toHaveBeenCalledWith(expectedRoles);
+        });
+    });
+
+    it('should generate token with correct permissions', () => {
+      const response = httpMocks.createResponse();
+      const request = { user: { sub: 'expectedUserName' } };
+      const expectedPermissions = ['expected', 'permissions'];
+      getPermissionsMock.mockReturnValue(expectedPermissions);
+
+      return authorisation.generatePermissionToken(request, response)
+        .then(() => {
+          const { token } = response._getData(); // eslint-disable-line no-underscore-dangle
+          const { permissions } = jwt.decode(token);
+          expect(permissions).toEqual(expectedPermissions);
         });
     });
 
@@ -69,7 +101,7 @@ describe('authorisation controller', () => {
       const expectedRoles = ['expected', 'roles'];
       getRolesMock.mockReturnValue(Promise.resolve(expectedRoles));
 
-      authorisation.generatePermissionToken(request, response)
+      return authorisation.generatePermissionToken(request, response)
         .then(() => {
           const { token } = response._getData(); // eslint-disable-line no-underscore-dangle
           const { exp, iat } = jwt.decode(token);
@@ -83,7 +115,7 @@ describe('authorisation controller', () => {
       const errMessage = { message: 'Something broke' };
       getRolesMock.mockReturnValue(Promise.reject(errMessage));
 
-      authorisation.generatePermissionToken(request, response)
+      return authorisation.generatePermissionToken(request, response)
         .then(() => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()) // eslint-disable-line no-underscore-dangle

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Get Permissions generated permissions should match snapshot 1`] = `
+Array [
+  "firstProjectName:stacks:create",
+  "firstProjectName:stacks:delete",
+  "firstProjectName:stacks:list",
+  "firstProjectName:stacks:open",
+  "firstProjectName:storage:create",
+  "firstProjectName:storage:delete",
+  "firstProjectName:storage:view",
+  "firstProjectName:storage:list",
+  "firstProjectName:storage:open",
+  "secondProjectName:stacks:create",
+  "secondProjectName:stacks:delete",
+  "secondProjectName:stacks:list",
+  "secondProjectName:stacks:open",
+  "secondProjectName:storage:list",
+  "secondProjectName:storage:open",
+  "thirdProjectName:stacks:list",
+  "thirdProjectName:stacks:open",
+]
+`;
+
+exports[`Get Permissions should return permissions for known roles only 1`] = `
+Array [
+  "firstProjectName:stacks:list",
+  "firstProjectName:stacks:open",
+]
+`;

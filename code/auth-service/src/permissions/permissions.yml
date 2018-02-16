@@ -1,0 +1,32 @@
+---
+instance-admin: []
+admin:
+  - name: stacks
+    permissions:
+      - create
+      - delete
+      - list
+      - open
+  - name: storage
+    permissions:
+      - create
+      - delete
+      - view
+      - list
+      - open
+user:
+  - name: stacks
+    permissions:
+      - create
+      - delete
+      - list
+      - open
+  - name: storage
+    permissions:
+      - list
+      - open
+viewer:
+  - name: stacks
+    permissions:
+      - list
+      - open

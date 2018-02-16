@@ -43,6 +43,12 @@ const config = convict({
     default: 'authzIdentifier',
     env: 'AUTHORISATION_API_IDENTIFIER',
   },
+  permissionAttributes: {
+    doc: 'The path to yaml file containing permissions',
+    format: 'String',
+    default: './src/permissions/permissions.yml',
+    env: 'AUTHORISATION_PERMISSIONS',
+  },
 });
 
 export default config;

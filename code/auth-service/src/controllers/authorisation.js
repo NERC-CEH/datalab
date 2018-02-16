@@ -5,6 +5,7 @@ import { get } from 'lodash';
 import logger from 'winston';
 import config from '../config/config';
 import getRoles from '../auth/authzApi';
+import getPermissions from '../permissions/permissions';
 
 const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
 const PUBLIC_KEY = fs.readFileSync(config.get('publicKey'));
@@ -28,15 +29,18 @@ function generatePermissionToken(request, response) {
 
   return getRoles(userID)
     .then((roles) => {
+      const permissions = getPermissions(roles);
       const payload = {
         sub: userID,
         roles,
+        permissions,
       };
       const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
 
       logger.info('Responding with internal token');
       logger.debug(`Roles: ${JSON.stringify(roles)}`);
+      logger.debug(`Permissions: ${JSON.stringify(permissions)}`);
       return response.send({ token });
     })
     .catch((err) => {
