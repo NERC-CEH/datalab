@@ -15,7 +15,7 @@ function retrievePermissionsToken(authorisationToken) {
   const decodedToken = jwt.decode(authorisationToken.split(' ')[1]);
   const payload = {
     sub: decodedToken.sub,
-    roles: ['admin', 'datalab:admin'],
+    roles: ['instance-admin', 'datalab:admin'],
   };
   const options = { audience, issuer, keyid };
   const token = jwt.sign(payload, secret, options);
