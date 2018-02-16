@@ -62,20 +62,24 @@ describe('stackRepository', () => {
 
   it('createOrUpdate should query for stacks with same name', () => {
     const notebook = { name: 'Notebook', type: 'jupyter' };
-    stackRepository.createOrUpdate(user, notebook).then((createdStack) => {
-      expect(mockDatabase().query()).toEqual({
-        name: createdStack.name,
-        users: { $elemMatch: { $eq: 'username' } },
+
+    return stackRepository.createOrUpdate(user, notebook)
+      .then((createdStack) => {
+        expect(mockDatabase().query()).toEqual({
+          name: createdStack.name,
+          users: { $elemMatch: { $eq: 'username' } },
+        });
+        expect(mockDatabase().entity()).toEqual(createdStack);
+        expect(mockDatabase().params()).toEqual({ upsert: true, setDefaultsOnInsert: true });
       });
-      expect(mockDatabase().entity()).toEqual(createdStack);
-      expect(mockDatabase().params()).toEqual({ upsert: true, setDefaultsOnInsert: true });
-    });
   });
 
   it('deleteByName should query for stacks with same name', () => {
     const name = 'Stack';
-    stackRepository.deleteByName(user, name).then(() => {
-      expect(mockDatabase().query()).toEqual({ name, users: { $elemMatch: { $eq: 'username' } } });
-    });
+
+    return stackRepository.deleteByName(user, name)
+      .then(() => {
+        expect(mockDatabase().query()).toEqual({ name, users: { $elemMatch: { $eq: 'username' } } });
+      });
   });
 });
