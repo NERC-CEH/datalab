@@ -1,12 +1,11 @@
 import { get } from 'lodash';
 import logger from 'winston';
-import config from '../config/config';
 
-const namespace = config.get('podNamespace');
 const permissionDelim = ':';
+const projectName = 'project';
 
 function permissionWrapper(permissionSuffix) {
-  const requiredPermission = namespace.concat(permissionDelim, permissionSuffix);
+  const requiredPermission = projectName.concat(permissionDelim, permissionSuffix);
 
   return (request, response, next) => {
     const grantedPermissions = get(request, 'user.permissions') || [];
@@ -19,11 +18,12 @@ function permissionWrapper(permissionSuffix) {
     if (grantedPermissions.includes(requiredPermission)) {
       logger.info('Auth: permission check: PASSED');
       next();
+    } else {
+      logger.warn('Auth: permission check: FAILED');
+      response.status(401)
+        .send({ message: `User missing expected permission: ${requiredPermission}` })
+        .end();
     }
-
-    logger.warn('Auth: permission check: FAILED');
-    response.status(401);
-    return response.send({ message: `User missing expected permission ${requiredPermission}` });
   };
 }
 
