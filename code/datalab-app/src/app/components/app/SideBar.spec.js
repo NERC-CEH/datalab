@@ -61,4 +61,43 @@ describe('Sidebar', () => {
     // Assert
     expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
   });
+
+  it('renders "Sites" label as active when on /publishing route', () => {
+    // Arrange
+    const linkPath = '/publishing';
+    const linkName = 'Sites';
+    const iconName = 'web';
+
+    // Act
+    const output = fullRender([linkPath]);
+
+    // Assert
+    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
+  });
+
+  it('renders "Dask" label as active when on /dask route', () => {
+    // Arrange
+    const linkPath = '/dask';
+    const linkName = 'Dask';
+    const iconName = 'apps';
+
+    // Act
+    const output = fullRender([linkPath]);
+
+    // Assert
+    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
+  });
+
+  it('renders "Spark" label as active when on /spark route', () => {
+    // Arrange
+    const linkPath = '/spark';
+    const linkName = 'Spark';
+    const iconName = 'apps';
+
+    // Act
+    const output = fullRender([linkPath]);
+
+    // Assert
+    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
+  });
 });
