@@ -1,0 +1,54 @@
+version: '3'
+services:
+  datalab-auth:
+    image: node:8
+    environment:
+      - AUTHORISATION_API_CLIENT_ID
+      - AUTHORISATION_API_CLIENT_SECRET
+      - AUTHORISATION_API_IDENTIFIER
+      - LOG_LEVEL
+    ports:
+      - 9000:9000
+    entrypoint: sh -c
+    command:
+      - cd /usr/src/app && yarn start
+    volumes:
+      - $PWD/../../auth-service:/usr/src/app/:ro
+
+  datalab-app-api:
+    build:
+      context: $PWD/../config/vault
+      dockerfile: vault-role-wrapper.Dockerfile
+    environment:
+      - DATABASE_HOST=mongodb
+      - VAULT_API=http://vault:8200
+      - AUTHORISATION_SERVICE=http://datalab-auth:9000
+      - LOG_LEVEL
+    ports:
+      - 3000:3000
+      - 8000:8000
+    depends_on:
+      - mongodb
+      - vault
+      - datalab-auth
+    command:
+      - cd /usr/src/app && yarn start
+    volumes:
+      - $PWD/../../datalab-app:/usr/src/app:ro
+
+  datalab-infra:
+    build:
+      context: $PWD/../config/vault
+      dockerfile: vault-role-wrapper.Dockerfile
+    environment:
+      - VAULT_API=http://vault:8200
+      - LOG_LEVEL
+    ports:
+      - 8003:8003
+    depends_on:
+      - vault
+      - datalab-auth
+    command:
+      - cd /usr/app && yarn start
+    volumes:
+      - $PWD/../../infrastructure-api:/usr/src/app/:ro
