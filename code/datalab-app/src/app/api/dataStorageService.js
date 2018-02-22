@@ -9,7 +9,8 @@ function loadDataStorage() {
       }
     }`;
 
-  return gqlQuery(query).then(res => get(res, 'data.dataStorage'));
+  return gqlQuery(query)
+    .then(handleErrors('data.dataStorage'));
 }
 
 function getCredentials(id) {
@@ -20,7 +21,8 @@ function getCredentials(id) {
       }
     }`;
 
-  return gqlQuery(query, { id }).then(res => get(res, 'data.dataStore'));
+  return gqlQuery(query, { id })
+    .then(handleErrors('data.dataStore'));
 }
 
 function checkDataStoreName(name) {
@@ -31,7 +33,8 @@ function checkDataStoreName(name) {
       }
     }`;
 
-  return gqlQuery(query, { name }).then(res => get(res, 'data.checkDataStoreName'));
+  return gqlQuery(query, { name })
+    .then(handleErrors('data.checkDataStoreName'));
 }
 
 function createDataStore(dataStore) {
@@ -42,7 +45,8 @@ function createDataStore(dataStore) {
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore }).then(handleMutationErrors);
+  return gqlMutation(mutation, { dataStore })
+    .then(handleErrors('data.dataStorage'));
 }
 
 function deleteDataStore(dataStore) {
@@ -53,14 +57,21 @@ function deleteDataStore(dataStore) {
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore }).then(handleMutationErrors);
+  return gqlMutation(mutation, { dataStore })
+    .then(handleErrors('data.dataStorage'));
 }
 
-function handleMutationErrors(response) {
-  if (response.errors) {
-    throw new Error(response.errors[0]);
-  }
-  return get(response, 'data.dataStorage');
+function handleErrors(pathToData) {
+  return (response) => {
+    const { errors } = response;
+    if (errors) {
+      const firstError = errors[0];
+
+      throw new Error(firstError.message || firstError);
+    }
+
+    return get(response, pathToData);
+  };
 }
 
 export default {

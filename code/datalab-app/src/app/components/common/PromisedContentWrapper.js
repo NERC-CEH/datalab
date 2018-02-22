@@ -14,7 +14,9 @@ const PromisedContentWrapper = ({ children, promise }) => {
 PromisedContentWrapper.propTypes = {
   children: PropTypes.element.isRequired,
   promise: PropTypes.shape({
-    error: PropTypes.string,
+    error: PropTypes.shape({
+      message: PropTypes.string,
+    }),
     fetching: PropTypes.bool.isRequired,
     value: PropTypes.any.isRequired,
   }).isRequired,
