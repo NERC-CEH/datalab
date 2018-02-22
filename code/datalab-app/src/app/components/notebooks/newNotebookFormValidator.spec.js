@@ -50,7 +50,17 @@ describe('New Notebook Form Validator', () => {
     const dispatch = () => Promise.resolve({});
 
     return asyncValidate(values, dispatch)
-      .then(() => expect(true).toBe(true));
+      .then(() => expect(true).toBe(true))
+      .catch(() => expect(true).toBe(false)); // fail test if error thrown
+  });
+
+  it('should return an error if unable to check name uniqueness', () => {
+    const dispatch = () => Promise.reject();
+
+    return asyncValidate({ name: 'unableToCheck' }, dispatch)
+      .then(() => expect(true).toBe(false)) // fail test if no error thrown
+      .catch(error =>
+        expect(error).toEqual({ name: 'Unable to check if Data Store Name is unique.' }));
   });
 
   it('should return a rejected promise for async errors', () => {
@@ -58,8 +68,8 @@ describe('New Notebook Form Validator', () => {
     const dispatch = () => Promise.resolve({ value: values });
 
     return asyncValidate(values, dispatch)
-      .catch((error) => {
-        expect(error).toEqual({ name: 'Notebook already exists. Name must be unique' });
-      });
+      .then(() => expect(true).toBe(false)) // fail test if no error thrown
+      .catch(error =>
+        expect(error).toEqual({ name: 'Notebook already exists. Name must be unique' }));
   });
 });

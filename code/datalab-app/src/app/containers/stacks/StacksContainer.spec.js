@@ -6,7 +6,7 @@ import stackService from '../../api/stackService';
 import notify from '../../components/common/notify';
 
 jest.mock('../../api/stackService');
-const loadStacksMock = jest.fn().mockReturnValue('expectedPayload');
+const loadStacksMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 stackService.loadStacksByCategory = loadStacksMock;
 
 jest.mock('../../components/common/notify');
@@ -59,10 +59,10 @@ describe('StacksContainer', () => {
       // Assert
       expect(store.getActions().length).toBe(0);
       output.prop('actions').loadStacksByCategory();
-      expect(store.getActions()[0]).toEqual({
-        type: 'LOAD_STACKS_BY_CATEGORY',
-        payload: 'expectedPayload',
-      });
+      const { type, payload } = store.getActions()[0];
+      expect(type).toBe('LOAD_STACKS_BY_CATEGORY');
+      return payload.then(value =>
+        expect(value).toBe('expectedPayload'));
     });
   });
 
@@ -105,7 +105,8 @@ describe('StacksContainer', () => {
       },
     });
 
-    beforeEach(() => jest.resetAllMocks());
+    beforeEach(() =>
+      jest.clearAllMocks());
 
     it('calls loadNotebooks action when mounted', () => {
       // Arrange

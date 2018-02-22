@@ -59,7 +59,9 @@ class StacksContainer extends Component {
     });
 
   componentWillMount() {
-    this.props.actions.loadStacksByCategory(this.props.containerType);
+    // Added .catch to prevent unhandled promise error, when lacking permission to view content
+    this.props.actions.loadStacksByCategory(this.props.containerType)
+      .catch((() => {}));
   }
 
   render() {

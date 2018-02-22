@@ -5,7 +5,7 @@ import dataStorageService from '../../api/dataStorageService';
 import LoadDataStorageModalWrapper, { PureLoadDataStorageModalWrapper } from './LoadDataStorageModalWrapper';
 
 jest.mock('../../api/dataStorageService');
-const loadDataStorageMock = jest.fn().mockReturnValue('expectedPayload');
+const loadDataStorageMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 dataStorageService.loadDataStorage = loadDataStorageMock;
 
 describe('LoadDataStorage Modal Wrapper', () => {
@@ -64,10 +64,10 @@ describe('LoadDataStorage Modal Wrapper', () => {
       // Assert
       expect(store.getActions().length).toBe(0);
       output.prop('actions').loadDataStorage();
-      expect(store.getActions()[0]).toEqual({
-        type: 'LOAD_DATASTORAGE',
-        payload: 'expectedPayload',
-      });
+      const { type, payload } = store.getActions()[0];
+      expect(type).toBe('LOAD_DATASTORAGE');
+      return payload.then(value =>
+        expect(value).toBe('expectedPayload'));
     });
   });
 
@@ -95,7 +95,7 @@ describe('LoadDataStorage Modal Wrapper', () => {
       Dialog: () => {},
     });
 
-    beforeEach(() => jest.resetAllMocks());
+    beforeEach(() => jest.clearAllMocks());
 
     it('calls loadDataStorage action when mounted', () => {
       // Arrange
