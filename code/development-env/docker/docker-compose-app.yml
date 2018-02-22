@@ -12,43 +12,38 @@ services:
     entrypoint: sh -c
     command:
       - cd /usr/src/app && yarn start
+    network_mode: host
     volumes:
       - $PWD/../../auth-service:/usr/src/app/:ro
 
-  datalab-app-api:
-    build:
-      context: $PWD/../config/vault
-      dockerfile: vault-role-wrapper.Dockerfile
+  datalab-infra:
+    image: vault-role-wrapper
     environment:
-      - DATABASE_HOST=mongodb
-      - VAULT_API=http://vault:8200
-      - AUTHORISATION_SERVICE=http://datalab-auth:9000
+      - LOG_LEVEL
+    ports:
+      - 8003:8003
+    depends_on:
+      - datalab-auth
+      # - vault
+    command:
+      - cd /usr/src/app && yarn start
+    network_mode: host
+    volumes:
+      - $PWD/../../infrastructure-api:/usr/src/app/:ro
+
+  datalab-app-api:
+    image: vault-role-wrapper
+    environment:
       - LOG_LEVEL
     ports:
       - 3000:3000
       - 8000:8000
     depends_on:
-      - mongodb
-      - vault
       - datalab-auth
+      # - mongodb
+      # - vault
     command:
       - cd /usr/src/app && yarn start
+    network_mode: host
     volumes:
       - $PWD/../../datalab-app:/usr/src/app:ro
-
-  datalab-infra:
-    build:
-      context: $PWD/../config/vault
-      dockerfile: vault-role-wrapper.Dockerfile
-    environment:
-      - VAULT_API=http://vault:8200
-      - LOG_LEVEL
-    ports:
-      - 8003:8003
-    depends_on:
-      - vault
-      - datalab-auth
-    command:
-      - cd /usr/app && yarn start
-    volumes:
-      - $PWD/../../infrastructure-api:/usr/src/app/:ro

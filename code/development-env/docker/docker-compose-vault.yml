@@ -1,7 +1,7 @@
 version: '3'
 services:
   vault:
-    image: 'vault'
+    image: vault
     ports:
       - 8200:8200
     command:
@@ -13,6 +13,7 @@ services:
       - VAULT_DEV_ROOT_TOKEN_ID=root
 
   vault_config:
+    image: vault-role-wrapper
     build:
       context: $PWD/../config/vault
       dockerfile: vault-role-wrapper.Dockerfile
