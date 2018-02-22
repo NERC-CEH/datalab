@@ -17,14 +17,15 @@ services:
       - $PWD/../../auth-service:/usr/src/app/:ro
 
   datalab-infra:
-    image: vault-role-wrapper
+    image: node:8
     environment:
+      - VAULT_APP_ROLE
       - LOG_LEVEL
     ports:
       - 8003:8003
     depends_on:
       - datalab-auth
-      # - vault
+    entrypoint: sh -c
     command:
       - cd /usr/src/app && yarn start
     network_mode: host
@@ -32,16 +33,16 @@ services:
       - $PWD/../../infrastructure-api:/usr/src/app/:ro
 
   datalab-app-api:
-    image: vault-role-wrapper
+    image: node:8
     environment:
+      - VAULT_APP_ROLE
       - LOG_LEVEL
     ports:
       - 3000:3000
       - 8000:8000
     depends_on:
       - datalab-auth
-      # - mongodb
-      # - vault
+    entrypoint: sh -c
     command:
       - cd /usr/src/app && yarn start
     network_mode: host

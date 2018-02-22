@@ -8,10 +8,27 @@ export AUTHORISATION_API_CLIENT_SECRET= # from Auth0
 export AUTHORISATION_API_IDENTIFIER= # from Auth0
 ```
 
-- Start docker containers
+- Start mongo & vault containers
 
 ```bash
-docker-compose -f docker-compose-vault.yml -f docker-compose-mongo.yml -f docker-compose-app.yml up -d
+docker-compose -f docker-compose-vault.yml -f docker-compose-mongo.yml up -d
 ```
 
-- Restarting containers will replace mongo collection, comment out `mongodb_import`
+- Set Vault-App-Role token
+
+```bash
+./scripts/configure-vault.sh
+export VAULT_APP_ROLE= # Set to value from line above
+```
+
+- Start minikube proxy
+
+```bash
+kubectl proxy
+```
+
+- Start DataLab APP/API, Infrastructure Api & Auth services
+
+```bash
+docker-compose -f docker-compose-app.yml up
+```

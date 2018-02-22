@@ -11,15 +11,3 @@ services:
       - IPC_LOCK
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=root
-
-  vault_config:
-    image: vault-role-wrapper
-    build:
-      context: $PWD/../config/vault
-      dockerfile: vault-role-wrapper.Dockerfile
-    environment:
-      - VAULT_API=http://vault:8200
-      - VAULT_TOKEN=root
-      - SET_ADMIN_POLICY=1
-    depends_on:
-      - vault
