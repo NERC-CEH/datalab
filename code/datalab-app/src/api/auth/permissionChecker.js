@@ -14,7 +14,7 @@ function permissionWrapper(permissionSuffix, { permissions }, next) {
 
   if (!grantedPermissions.includes(requiredPermission)) {
     logger.warn('Auth: permission check: FAILED');
-    return Promise.reject(new Error(`User missing expected permission: ${requiredPermission}`));
+    return Promise.reject(`User missing expected permission: ${requiredPermission}`);
   }
 
   logger.info('Auth: permission check: PASSED');

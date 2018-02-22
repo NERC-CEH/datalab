@@ -1,5 +1,5 @@
-import { get } from 'lodash';
 import { gqlMutation, gqlQuery } from './graphqlClient';
+import errorHandler from './graphqlErrorHandler';
 
 function loadDataStorage() {
   const query = `
@@ -10,7 +10,7 @@ function loadDataStorage() {
     }`;
 
   return gqlQuery(query)
-    .then(handleErrors('data.dataStorage'));
+    .then(errorHandler('data.dataStorage'));
 }
 
 function getCredentials(id) {
@@ -22,7 +22,7 @@ function getCredentials(id) {
     }`;
 
   return gqlQuery(query, { id })
-    .then(handleErrors('data.dataStore'));
+    .then(errorHandler('data.dataStore'));
 }
 
 function checkDataStoreName(name) {
@@ -34,7 +34,7 @@ function checkDataStoreName(name) {
     }`;
 
   return gqlQuery(query, { name })
-    .then(handleErrors('data.checkDataStoreName'));
+    .then(errorHandler('data.checkDataStoreName'));
 }
 
 function createDataStore(dataStore) {
@@ -46,7 +46,7 @@ function createDataStore(dataStore) {
     }`;
 
   return gqlMutation(mutation, { dataStore })
-    .then(handleErrors('data.dataStorage'));
+    .then(errorHandler('data.dataStorage'));
 }
 
 function deleteDataStore(dataStore) {
@@ -58,20 +58,7 @@ function deleteDataStore(dataStore) {
     }`;
 
   return gqlMutation(mutation, { dataStore })
-    .then(handleErrors('data.dataStorage'));
-}
-
-function handleErrors(pathToData) {
-  return (response) => {
-    const { errors } = response;
-    if (errors) {
-      const firstError = errors[0];
-
-      throw new Error(firstError.message || firstError);
-    }
-
-    return get(response, pathToData);
-  };
+    .then(errorHandler('data.dataStorage'));
 }
 
 export default {

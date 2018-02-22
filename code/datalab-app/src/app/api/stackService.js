@@ -1,5 +1,5 @@
-import { get } from 'lodash';
 import { gqlMutation, gqlQuery } from './graphqlClient';
+import errorHandler from './graphqlErrorHandler';
 
 function loadStacks() {
   const query = `
@@ -9,7 +9,8 @@ function loadStacks() {
       }
     }`;
 
-  return gqlQuery(query).then(handleErrors('data.stacks'));
+  return gqlQuery(query)
+    .then(errorHandler('data.stacks'));
 }
 
 function loadStacksByCategory(category) {
@@ -19,7 +20,8 @@ function loadStacksByCategory(category) {
         id, displayName, name, type, description
       }
     }`;
-  return gqlQuery(query, { category }).then(handleErrors('data.stacksByCategory'));
+  return gqlQuery(query, { category })
+    .then(errorHandler('data.stacksByCategory'));
 }
 
 function getUrl(id) {
@@ -31,7 +33,7 @@ function getUrl(id) {
     }`;
 
   return gqlQuery(query, { id })
-    .then(res => get(res, 'data.stack'))
+    .then(errorHandler('data.stack'))
     .then((stack) => {
       if (!stack.redirectUrl) {
         throw new Error('Missing stack URL');
@@ -48,7 +50,8 @@ function checkStackName(name) {
       }
     }`;
 
-  return gqlQuery(query, { name }).then(handleErrors('data.checkStackName'));
+  return gqlQuery(query, { name })
+    .then(errorHandler('data.checkStackName'));
 }
 
 function checkStackMounts(volumeMount) {
@@ -59,7 +62,8 @@ function checkStackMounts(volumeMount) {
       }
     }`;
 
-  return gqlQuery(query, { volumeMount }).then(handleErrors('data.checkStackMounts'));
+  return gqlQuery(query, { volumeMount })
+    .then(errorHandler('data.checkStackMounts'));
 }
 
 function createStack(stack) {
@@ -70,7 +74,8 @@ function createStack(stack) {
       }
     }`;
 
-  return gqlMutation(mutation, { stack }).then(handleErrors('data.stack'));
+  return gqlMutation(mutation, { stack })
+    .then(errorHandler('data.stack'));
 }
 
 function deleteStack(stack) {
@@ -81,20 +86,8 @@ function deleteStack(stack) {
       }
     }`;
 
-  return gqlMutation(mutation, { stack }).then(handleErrors('data.stack'));
-}
-
-function handleErrors(pathToData) {
-  return (response) => {
-    const { errors } = response;
-    if (errors) {
-      const firstError = errors[0];
-
-      throw new Error(firstError.message || firstError);
-    }
-
-    return get(response, pathToData);
-  };
+  return gqlMutation(mutation, { stack })
+    .then(errorHandler('data.stack'));
 }
 
 export default {
