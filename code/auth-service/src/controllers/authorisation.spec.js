@@ -41,6 +41,20 @@ describe('authorisation controller', () => {
     });
   });
 
+  describe('getPermissions', () => {
+    it('should generate and return permissions', () => {
+      const response = httpMocks.createResponse();
+      const request = { user: { sub: 'expectedUserName' } };
+      const expectedPermissions = ['expected', 'permissions'];
+      getPermissionsMock.mockReturnValue(expectedPermissions);
+
+      return authorisation.getPermissionsForUser(request, response)
+        .then(() => {
+          expect(response._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
+        });
+    });
+  });
+
   describe('generatePermissionToken', () => {
     it('should generate and return access token', () => {
       const response = httpMocks.createResponse();

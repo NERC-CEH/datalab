@@ -24,14 +24,29 @@ function checkUser(request, response) {
   return response.send({ message: `User Authorised for domain ${request.headers.host}` });
 }
 
-function generatePermissionToken(request, response) {
-  const userID = get(request, 'user.sub');
+function getPermissionsForUser(request, response) {
+  const userId = get(request, 'user.sub');
 
-  return getRoles(userID)
+  return getRoles(userId)
+    .then((roles) => {
+      const permissions = getPermissions(roles);
+      return response.json({ permissions });
+    })
+    .catch((err) => {
+      logger.error('Responding with status code 500');
+      response.status(500);
+      return response.send({ message: err.message });
+    });
+}
+
+function generatePermissionToken(request, response) {
+  const userId = get(request, 'user.sub');
+
+  return getRoles(userId)
     .then((roles) => {
       const permissions = getPermissions(roles);
       const payload = {
-        sub: userID,
+        sub: userId,
         roles,
         permissions,
       };
@@ -67,4 +82,4 @@ function serveJWKS(request, response) {
   return response.send({ keys: [jwk] });
 }
 
-export default { checkUser, generatePermissionToken, serveJWKS };
+export default { checkUser, getPermissionsForUser, generatePermissionToken, serveJWKS };

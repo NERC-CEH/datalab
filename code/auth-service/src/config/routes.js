@@ -4,6 +4,7 @@ import { cookieAuthMiddleware, tokenAuthMiddleware } from '../auth/authMiddlewar
 
 function configureRoutes(app) {
   app.get('/auth', cookieAuthMiddleware, auth.checkUser);
+  app.get('/permissions', tokenAuthMiddleware, auth.getPermissionsForUser);
   app.get('/authorise', tokenAuthMiddleware, auth.generatePermissionToken);
   app.get('/jwks', auth.serveJWKS);
   app.get('/status', status.status);
