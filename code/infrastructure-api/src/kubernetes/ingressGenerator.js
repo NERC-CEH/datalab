@@ -6,7 +6,7 @@ function createIngress({ name, datalabInfo, ingressName, serviceName, port, conn
   const paths = createPathInfo(serviceName, port, connectPort);
   const context = {
     name: ingressName,
-    authServiceUrl: config.get('authServiceUrl'),
+    authServiceUrl: `${config.get('authorisationService')}/auth`,
     authSigninUrl: config.get('authSigninUrl'),
     rewriteTarget,
     service: { host, paths },

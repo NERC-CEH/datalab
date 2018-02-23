@@ -37,11 +37,11 @@ const config = convict({
     default: 'devtest',
     env: 'KUBERNETES_NAMESPACE',
   },
-  authServiceUrl: {
-    doc: 'The endpoint for the Authorisation service',
-    format: 'url',
-    default: 'http://datalab-auth-service.test.svc.cluster.local/auth',
-    env: 'AUTH_SERVICE_URL',
+  storageClass: {
+    doc: 'The storage class to use for new volumes',
+    format: 'String',
+    default: 'glusterfs-storage',
+    env: 'STORAGE_CLASS',
   },
   authSigninUrl: {
     doc: 'The sign in URL',
@@ -49,15 +49,9 @@ const config = convict({
     default: 'https://testlab.test-datalabs.nerc.ac.uk',
     env: 'AUTH_SIGNIN_URL',
   },
-  storageClass: {
-    doc: 'The storage class to use for new volumes',
-    format: 'String',
-    default: 'glusterfs-storage',
-    env: 'STORAGE_CLASS',
-  },
   authorisationService: {
     doc: 'The endpoint for the authorisation service',
-    format: 'String',
+    format: 'url',
     default: 'http://localhost:9000',
     env: 'AUTHORISATION_SERVICE',
   },
