@@ -8,7 +8,6 @@ Array [
   "firstProjectName:stacks:open",
   "firstProjectName:storage:create",
   "firstProjectName:storage:delete",
-  "firstProjectName:storage:view",
   "firstProjectName:storage:list",
   "firstProjectName:storage:open",
   "secondProjectName:stacks:create",

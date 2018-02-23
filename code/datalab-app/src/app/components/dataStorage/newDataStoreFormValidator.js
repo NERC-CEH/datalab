@@ -43,8 +43,11 @@ function errorReducer(accumulator, error) {
 
 export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
 
+// Catch statement added to prevent submission of creation request without passing uniqueness check.
 export const asyncValidate = (values, dispatch) =>
   dispatch(dataStorageActions.checkDataStoreName(values.name))
+    .catch(() =>
+      Promise.reject({ name: 'Unable to check if Data Store Name is unique.' }))
     .then((response) => {
       if (response.value) {
         return Promise.reject({ name: 'Data Store already exists. Name must be unique' });

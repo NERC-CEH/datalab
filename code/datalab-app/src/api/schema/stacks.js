@@ -6,11 +6,12 @@ import {
 } from 'graphql';
 import { StackType } from '../types/stackTypes';
 import stackRepository from '../dataaccess/stackRepository';
+import permissionChecker from '../auth/permissionChecker';
 
 export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks.',
   type: new GraphQLList(StackType),
-  resolve: (obj, args, { user }) => stackRepository.getAll(user),
+  resolve: (obj, args, { user }) => permissionChecker('stacks:list', user, () => stackRepository.getAll(user)),
 };
 
 export const stacksByCategory = {
@@ -21,7 +22,8 @@ export const stacksByCategory = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { category }, { user }) => stackRepository.getByCategory(user, category),
+  resolve: (obj, { category }, { user }) =>
+    permissionChecker('stacks:list', user, () => stackRepository.getByCategory(user, category)),
 };
 
 export const stack = {
@@ -32,7 +34,8 @@ export const stack = {
       type: new GraphQLNonNull(GraphQLID),
     },
   },
-  resolve: (obj, { id }, { user }) => stackRepository.getById(user, id),
+  resolve: (obj, { id }, { user }) =>
+    permissionChecker('stacks:open', user, () => stackRepository.getById(user, id)),
 };
 
 export const checkStackName = {
@@ -43,5 +46,6 @@ export const checkStackName = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { name }, { user }) => stackRepository.getAllByName(user, name),
+  resolve: (obj, { name }, { user }) =>
+    permissionChecker('stacks:create', user, () => stackRepository.getAllByName(user, name)),
 };

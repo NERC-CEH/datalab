@@ -11,7 +11,9 @@ class LoadDataStorageModalWrapper extends Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadDataStorage();
+    // Added .catch to prevent unhandled promise error, when lacking permission to view content
+    this.props.actions.loadDataStorage()
+      .catch((() => {}));
   }
 
   getDataStorage() {
