@@ -51,7 +51,7 @@ const config = convict({
   },
   authorisationService: {
     doc: 'The endpoint for the authorisation service',
-    format: 'String',
+    format: 'url',
     default: 'http://localhost:9000',
     env: 'AUTHORISATION_SERVICE',
   },
