@@ -62,13 +62,6 @@ private_servers:
     disks:
       - name: k8s-worker-4-disk1
         size: 100
-  - name: gluster-1
-    internal_ip: 192.168.3.20
-    cpus: 2
-    memory: 8192
-    disks:
-      - name: gluster-1-disk1
-        size: 1000
   - name: glusterfs-1
     internal_ip: 192.168.3.40
     cpus: 2
