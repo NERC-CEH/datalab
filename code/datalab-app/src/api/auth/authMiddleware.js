@@ -15,6 +15,7 @@ import authService from '../config/services';
 export const authorise = (request, response, next) => {
   authService.retrievePermissionsToken(request.headers.authorization)
     .then((token) => {
+      request.headers['auth-zero-token'] = request.headers.authorization;
       request.headers.authorization = `Bearer ${token}`;
       next();
     })
