@@ -84,12 +84,14 @@ function processResponse(authResponse) {
   const state = processState(authResponse.state);
   const appRedirect = state ? state.appRedirect : undefined;
   const expiresAt = authResponse.expiresAt ? authResponse.expiresAt : expiresAtCalculator(authResponse.expiresIn);
+  const identity = pickIdFields(authResponse);
 
   return {
     ...authResponse,
     appRedirect,
     expiresAt,
     state,
+    identity,
   };
 }
 
@@ -103,6 +105,11 @@ function processState(state) {
 
 function expiresAtCalculator(expiresIn) {
   return moment.utc().add(expiresIn, 's').format('x');
+}
+
+function pickIdFields({ idTokenPayload }) {
+  const knownFields = ['sub', 'name', 'nickname', 'picture'];
+  return pick(idTokenPayload, knownFields);
 }
 
 const AuthZero = new auth0.WebAuth(authConfig);
