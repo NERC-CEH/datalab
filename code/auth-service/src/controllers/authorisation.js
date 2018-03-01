@@ -1,19 +1,18 @@
 import jwt from 'jsonwebtoken';
-import fs from 'fs';
 import { pem2jwk } from 'pem-jwk';
 import { get } from 'lodash';
 import logger from 'winston';
-import config from '../config/config';
 import getRoles from '../auth/authzApi';
 import getPermissions from '../permissions/permissions';
-
-const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
-export const PUBLIC_KEY = fs.readFileSync(config.get('publicKey'));
-const algorithm = 'RS256';
-const audience = 'https://api.datalabs.nerc.ac.uk/';
-const expiresIn = '2m';
-const issuer = 'https://authorisation.datalabs.nerc.ac.uk/';
-const keyid = 'datalabs-authorisation';
+import {
+  PRIVATE_KEY,
+  PUBLIC_KEY,
+  algorithm,
+  audience,
+  expiresIn,
+  issuer,
+  keyid,
+} from '../config/auth';
 
 function checkUser(request, response) {
   if (!request.user) {
