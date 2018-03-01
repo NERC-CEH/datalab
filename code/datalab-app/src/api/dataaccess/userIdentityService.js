@@ -8,16 +8,16 @@ const authZeroUrl = 'https://mjbr.eu.auth0.com/userinfo';
 const authPermissionsUrl = `${config.get('authorisationService')}/permissions`;
 const authServiceStub = config.get('authorisationServiceStub');
 
-function getUserInfo({ user, authZeroToken }) {
-  logger.debug(`Requesting user info for user: ${user.sub}`);
+function getUserInfo(authZeroToken) {
+  logger.debug('Requesting user info from Auth0');
 
   return axios.get(authZeroUrl, { headers: { authorization: authZeroToken } })
     .then(response => response.data)
     .catch(axiosErrorHandler('Unable to get user info'));
 }
 
-function getUserPermissions({ user, authZeroToken }) {
-  logger.debug(`Requesting user permissions for user: ${user.sub}`);
+function getUserPermissions(authZeroToken) {
+  logger.debug('Requesting user permissions from auth service');
 
   if (authServiceStub) {
     return Promise.resolve([

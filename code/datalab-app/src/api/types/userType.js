@@ -19,8 +19,8 @@ const UserType = new GraphQLObjectType({
     },
     permissions: {
       type: new GraphQLList(GraphQLString),
-      resolve: (obj, args, { user, authZeroToken }) =>
-        userIdentityRepository.getUserPermissions({ user, authZeroToken }),
+      resolve: (obj, args, { authZeroToken }) =>
+        userIdentityRepository.getUserPermissions(authZeroToken),
     },
   },
 });
