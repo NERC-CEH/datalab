@@ -5,7 +5,7 @@ import { stack, stacks, stacksByCategory, checkStackName } from './stacks';
 import { datalab, datalabs } from './datalabs';
 import { createStack, deleteStack } from './mutateStack';
 import { createDataStore, deleteDataStore } from './mutateDataStorage';
-import userIdentity from './userIdentity';
+import userPermissions from './userPermissions';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -21,7 +21,7 @@ const RootQueryType = new GraphQLObjectType({
     checkStackName,
     datalab,
     datalabs,
-    userIdentity,
+    userPermissions,
   },
 });
 
