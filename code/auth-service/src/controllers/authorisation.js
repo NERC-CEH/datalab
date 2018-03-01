@@ -1,19 +1,18 @@
 import jwt from 'jsonwebtoken';
-import fs from 'fs';
 import { pem2jwk } from 'pem-jwk';
 import { get } from 'lodash';
 import logger from 'winston';
-import config from '../config/config';
 import getRoles from '../auth/authzApi';
 import getPermissions from '../permissions/permissions';
-
-const PRIVATE_KEY = fs.readFileSync(config.get('privateKey'));
-const PUBLIC_KEY = fs.readFileSync(config.get('publicKey'));
-const algorithm = 'RS256';
-const audience = 'https://api.datalabs.nerc.ac.uk/';
-const expiresIn = '2m';
-const issuer = 'https://authorisation.datalabs.nerc.ac.uk/';
-const keyid = 'datalabs-authorisation';
+import {
+  PRIVATE_KEY,
+  PUBLIC_KEY,
+  algorithm,
+  audience,
+  expiresIn,
+  issuer,
+  keyid,
+} from '../config/auth';
 
 function checkUser(request, response) {
   if (!request.user) {
@@ -68,7 +67,7 @@ function generatePermissionToken(request, response) {
 /**
  * Construct the JWKS array to allow clients to retrieve the JWT public signing key
  * https://tools.ietf.org/id/draft-ietf-jose-json-web-key-41.txt
- * https://www.npmjs.com/package/rsa-pem-to-jwk
+ * https://www.npmjs.com/package/pem-jwk
  * @param request
  * @param response
  */

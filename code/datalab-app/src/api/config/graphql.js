@@ -4,7 +4,14 @@ import schema from '../schema/index';
 import status from '../status';
 
 function configureGraphQL(app) {
-  const api = graphqlExpress(request => ({ schema, context: { user: request.user, token: request.headers.authorization } }));
+  const api = graphqlExpress(request => ({
+    schema,
+    context: {
+      user: request.user,
+      token: request.headers.authorization,
+    },
+  }));
+
   const graphiql = graphiqlExpress({
     endpointURL: '/graphiqlApi',
   });
