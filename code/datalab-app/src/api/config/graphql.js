@@ -9,7 +9,6 @@ function configureGraphQL(app) {
     context: {
       user: request.user,
       token: request.headers.authorization,
-      authZeroToken: request.headers['auth-zero-token'],
     },
   }));
 
