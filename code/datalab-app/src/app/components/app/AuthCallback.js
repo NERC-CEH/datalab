@@ -10,6 +10,7 @@ class AuthCallback extends Component {
     if (/access_token|id_token|error/.test(this.props.urlHash)) {
       auth.handleAuthentication().then((authResponse) => {
         this.props.actions.userLogsIn(authResponse);
+        this.props.actions.getUserPermissions();
         this.props.actions.routeTo(authResponse.appRedirect);
       });
     }

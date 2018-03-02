@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { isEmpty } from 'lodash';
 import auth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
@@ -17,11 +18,12 @@ class RequireAuth extends Component {
     const currentSession = auth.getCurrentSession();
     if (currentSession) {
       this.props.actions.userLogsIn(currentSession);
+      this.props.actions.getUserPermissions();
     }
   }
 
   isUserLoggedIn() {
-    return this.props.user !== null;
+    return !isEmpty(this.props.tokens);
   }
 
   switchContent() {
@@ -48,18 +50,19 @@ class RequireAuth extends Component {
 RequireAuth.propTypes = {
   PrivateComponent: PropTypes.func.isRequired,
   PublicComponent: PropTypes.func.isRequired,
-  user: PropTypes.object,
+  tokens: PropTypes.object.isRequired,
   path: PropTypes.string,
   exact: PropTypes.bool,
   strict: PropTypes.bool,
   actions: PropTypes.shape({
     userLogsIn: PropTypes.func.isRequired,
+    getUserPermissions: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-function mapStateToProps({ authentication: { user } }) {
+function mapStateToProps({ authentication: { tokens } }) {
   return {
-    user,
+    tokens,
   };
 }
 
