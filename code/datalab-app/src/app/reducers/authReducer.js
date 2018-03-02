@@ -59,8 +59,6 @@ function processTokens(authResponse) {
   };
 }
 
-function processIdentity(authResponse) {
-  const identity = authResponse.identity || {};
-
-  return { ...identity };
+function processIdentity({ identity }) {
+  return identity ? JSON.parse(identity) : {};
 }

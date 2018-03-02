@@ -1,5 +1,3 @@
-import { isObject } from 'lodash';
-
 const knownFields = [
   'access_token', // Authentication - JWT access token
   'expires_at', // Authentication - JWT access token expiration time
@@ -8,10 +6,8 @@ const knownFields = [
 ];
 
 export function addToLocalStorage(fieldName, value) {
-  const stringifyValue = isObject(value) ? JSON.stringify(value) : value;
-
   if (knownFields.includes(fieldName)) {
-    localStorage.setItem(fieldName, stringifyValue);
+    localStorage.setItem(fieldName, value);
   } else {
     throw new Error(`Unknown localStorage field name: ${fieldName}.`);
   }

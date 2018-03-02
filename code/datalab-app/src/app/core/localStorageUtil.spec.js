@@ -69,12 +69,4 @@ describe('localStorageUtil', () => {
     expect(getFromLocalStorage('expires_at')).toBe('two');
     expect(getFromLocalStorage('id_token')).toBe('three');
   });
-
-  it('store objects as JSON strings', () => {
-    // Arrange/Act
-    addToLocalStorage('identity', { ident: 'authString', name: 'expectedName', other: 'anotherField' });
-
-    // Assert
-    expect(localStorage.store.identity).toBe('{\"ident\":\"authString\",\"name\":\"expectedName\",\"other\":\"anotherField\"}');
-  });
 });
