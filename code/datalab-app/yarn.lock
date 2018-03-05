@@ -6257,10 +6257,6 @@ popper.js@^1.12.5:
   version "1.12.6"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.6.tgz#91e12a97b07815258b76915d64044e8ac053d426"
 
-popper.js@^1.12.9:
-  version "1.12.9"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
-
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -6832,13 +6828,6 @@ react-jss@^8.0.0:
     jss-preset-default "^4.0.1"
     prop-types "^15.6.0"
     theming "^1.2.1"
-
-react-popper@0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.2.tgz#092095ff13933211d3856d9f325511ec3a42f12c"
-  dependencies:
-    popper.js "^1.12.9"
-    prop-types "^15.6.0"
 
 react-popper@^0.7.4:
   version "0.7.4"

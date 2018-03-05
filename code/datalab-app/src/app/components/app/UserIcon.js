@@ -1,78 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
-import Grow from 'material-ui/transitions/Grow';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import { Manager, Target, Popper } from 'react-popper';
-import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
-import auth from '../../auth/auth';
+import Popover from 'material-ui/Popover';
+import UserMenu from './UserMenu';
 
-class UserIcon extends React.Component {
-  state = {
-    open: false,
-  };
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
+class UserIcon extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.closeOnClick = this.closeOnClick.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
+    this.state = {
+      open: false,
+      anchorEl: null,
+    };
   }
 
   togglePopup = () => {
-    this.setState({ open: !this.state.open });
-  };
-
-  closePopup = () => {
-    if (!this.state.open) {
-      return;
-    }
-
-    // setTimeout to ensure a close event comes after a target click event
-    this.timeout = setTimeout(() => {
-      this.setState({ open: false });
+    this.setState({
+      open: !this.state.open,
+      anchorEl: this.state.open ? null : findDOMNode(this.userImage),
     });
   };
 
   closeOnClick = next => () => {
-    this.closePopup();
+    this.setState({ open: false });
     next();
   };
 
   render() {
     return (
-      <Manager>
-        <Target>
-          <Avatar
-            aria-owns={this.state.open ? 'menu-list' : null}
-            aria-haspopup="true"
-            onClick={this.togglePopup}
-            src={this.props.identity.picture}
-          />
-        </Target>
-        <Popper
-          placement="bottom-start"
-          eventsEnabled={this.state.open}
+      <div>
+        <Avatar
+          ref={(node) => { this.userImage = node; }}
+          onClick={this.togglePopup}
+          src={this.props.identity.picture}
+        />
+        <Popover
+          open={this.state.open}
+          onRequestClose={this.togglePopup}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{ vertical: 'bottom' }}
         >
-          <ClickAwayListener onClickAway={this.closePopup}>
-            <Grow in={this.state.open} id="menu-list" style={{ transformOrigin: '0 0 0' }}>
-              <Paper>
-                <Button color="primary" raised onClick={this.closeOnClick(auth.logout)}>
-                  Logout
-                </Button>
-              </Paper>
-            </Grow>
-          </ClickAwayListener>
-        </Popper>
-      </Manager>
+          <UserMenu identity={this.props.identity} closePopover={this.closeOnClick} />
+        </Popover>
+      </div>
     );
   }
 }
 
 UserIcon.propTypes = {
   identity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    nickname: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
-    sub: PropTypes.string.isRequired,
   }),
 };
 
