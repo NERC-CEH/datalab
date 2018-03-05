@@ -28,6 +28,7 @@
     "querystring": "0.2.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
+    "react-popper": "0.8.2",
     "react-redux": "5.0.4",
     "react-router-dom": "4.1.1",
     "react-router-redux": "next",

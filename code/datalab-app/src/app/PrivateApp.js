@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Navigation from './components/app/Navigation';
+import NavigationContainer from './containers/app/NavigationContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import Footer from './components/app/Footer';
 import LandingPage from './pages/LandingPage';
@@ -12,7 +12,7 @@ import SparkPage from './pages/SparkPage';
 import ModalRoot from './containers/modal/ModalRoot';
 
 const PrivateApp = () => (
-  <Navigation>
+  <NavigationContainer>
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/storage" component={DataStoragePage} />
@@ -24,7 +24,7 @@ const PrivateApp = () => (
     </Switch>
     <Route component={Footer} />
     <ModalRoot />
-  </Navigation>
+  </NavigationContainer>
 );
 
 export default PrivateApp;
