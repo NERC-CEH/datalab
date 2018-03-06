@@ -10,6 +10,6 @@ describe('Topbar', () => {
   });
 
   it('correctly renders correct snapshot', () => {
-    expect(shallow(<TopBar />)).toMatchSnapshot();
+    expect(shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} />)).toMatchSnapshot();
   });
 });

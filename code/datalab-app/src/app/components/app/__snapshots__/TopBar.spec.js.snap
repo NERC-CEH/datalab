@@ -12,7 +12,14 @@ exports[`Topbar correctly renders correct snapshot 1`] = `
         }
       }
     />
-    <UserIcon />
+    <UserIcon
+      identity={
+        Object {
+          "expected": "identity",
+          "picture": "expectedUrl",
+        }
+      }
+    />
   </withStyles(Toolbar)>
 </withStyles(AppBar)>
 `;

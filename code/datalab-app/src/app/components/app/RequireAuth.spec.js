@@ -41,7 +41,7 @@ describe('RequireAuth', () => {
     it('userLogsIn function dispatches correct action', () => {
       // Arrange
       const store = createStore()({
-        authentication: { user: {} },
+        authentication: { tokens: {} },
       });
 
       // Act
@@ -69,7 +69,7 @@ describe('RequireAuth', () => {
       PrivateComponent: expectedPrivateComponent,
       PublicComponent: expectedPublicComponent,
       tokens: { token: 'expectedUserToken' },
-      actions: { userLogsIn: () => {} },
+      actions: { userLogsIn: () => {}, getUserPermissions: () => {} },
     });
 
     beforeEach(() => jest.resetAllMocks());

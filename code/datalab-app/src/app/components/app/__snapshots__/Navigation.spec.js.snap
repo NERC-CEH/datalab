@@ -7,7 +7,13 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
   <div
     className="Navigation-appFrame-2"
   >
-    <TopBar />
+    <TopBar
+      identity={
+        Object {
+          "expected": "identity",
+        }
+      }
+    />
     <withStyles(SideBar) />
     <main
       className="Navigation-content-3"
