@@ -51,7 +51,7 @@ describe('RequireAuth', () => {
       expect(store.getActions().length).toBe(0);
       output.prop('actions').userLogsIn({ expected: 'currentSession' });
       expect(store.getActions()[0]).toEqual({
-        type: 'USER_LOGIN',
+        type: 'USER_LOGIN_ACTION',
         payload: { expected: 'currentSession' },
       });
     });

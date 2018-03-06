@@ -1,6 +1,6 @@
 import authReducer from './authReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
-import { USER_LOGIN, GET_USER_PERMISSIONS } from '../actions/authActions';
+import { USER_LOGIN_ACTION, GET_USER_PERMISSIONS_ACTION } from '../actions/authActions';
 
 const initialState = {
   identity: {},
@@ -19,7 +19,7 @@ describe('authReducer', () => {
 
   it('handles USER_LOGIN correctly', () => {
     // Arrange
-    const type = USER_LOGIN;
+    const type = USER_LOGIN_ACTION;
     const payload = {
       accessToken: 'expectedAccessToken',
       expiresAt: 'value',
@@ -46,7 +46,7 @@ describe('authReducer', () => {
 
   it('handles GET_USER_PERMISSIONS_PENDING', () => {
     // Arrange
-    const type = `${GET_USER_PERMISSIONS}_${PROMISE_TYPE_PENDING}`;
+    const type = `${GET_USER_PERMISSIONS_ACTION}_${PROMISE_TYPE_PENDING}`;
     const action = { type };
 
     // Act
@@ -64,7 +64,7 @@ describe('authReducer', () => {
 
   it('handles GET_USER_PERMISSIONS_SUCCESS', () => {
     // Arrange
-    const type = `${GET_USER_PERMISSIONS}_${PROMISE_TYPE_SUCCESS}`;
+    const type = `${GET_USER_PERMISSIONS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
     const payload = ['permission1', 'permission2'];
     const action = { type, payload };
 
@@ -83,7 +83,7 @@ describe('authReducer', () => {
 
   it('handles GET_USER_PERMISSIONS_FAILURE', () => {
     // Arrange
-    const type = `${GET_USER_PERMISSIONS}_${PROMISE_TYPE_FAILURE}`;
+    const type = `${GET_USER_PERMISSIONS_ACTION}_${PROMISE_TYPE_FAILURE}`;
     const payload = 'example error';
     const action = { type, payload };
     // Act

@@ -5,8 +5,8 @@ import {
   PROMISE_TYPE_FAILURE,
 } from '../actions/actionTypes';
 import {
-  USER_LOGIN,
-  GET_USER_PERMISSIONS,
+  USER_LOGIN_ACTION,
+  GET_USER_PERMISSIONS_ACTION,
 } from '../actions/authActions';
 
 const identityInitialState = {
@@ -22,12 +22,12 @@ const initialState = {
 };
 
 export default typeToReducer({
-  [USER_LOGIN]: (state, action) => ({
+  [USER_LOGIN_ACTION]: (state, action) => ({
     ...initialState,
     tokens: processTokens(action.payload),
     identity: processIdentity(action.payload),
   }),
-  [GET_USER_PERMISSIONS]: {
+  [GET_USER_PERMISSIONS_ACTION]: {
     [PROMISE_TYPE_PENDING]: state => ({
       ...state,
       permissions: {
