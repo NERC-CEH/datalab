@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserMenu renders correct snapshot 1`] = `
+<div
+  className="UserMenu-container-1"
+>
+  <div
+    className="UserMenu-identity-2"
+  >
+    <withStyles(Avatar)
+      className="UserMenu-userImage-3"
+      src="expectedPicture"
+    />
+    <div
+      className="UserMenu-userInfo-4"
+    >
+      <withStyles(Typography)
+        type="body1"
+      >
+        expectedNickname
+      </withStyles(Typography)>
+      <withStyles(Typography)
+        type="body2"
+      >
+        expectedName
+      </withStyles(Typography)>
+    </div>
+  </div>
+  <withStyles(Button)
+    color="primary"
+    raised={true}
+  >
+    Logout
+  </withStyles(Button)>
+</div>
+`;
