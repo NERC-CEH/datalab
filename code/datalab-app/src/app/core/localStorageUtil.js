@@ -2,6 +2,7 @@ const knownFields = [
   'access_token', // Authentication - JWT access token
   'expires_at', // Authentication - JWT access token expiration time
   'id_token', // Authentication - JWT id token
+  'identity', // Identification - Collected ID token payload
 ];
 
 export function addToLocalStorage(fieldName, value) {

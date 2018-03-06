@@ -24,23 +24,24 @@ describe('RequireAuth', () => {
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
-      const user = { token: 'expectedUserToken' };
+      const tokens = { token: 'expectedUserToken' };
       const store = createStore()({
-        authentication: { user },
+        authentication: { tokens },
       });
 
       // Act
       const output = shallowRenderConnected(store);
 
       // Assert
-      expect(output.prop('user')).toBe(user);
-      expect(Object.keys(output.prop('actions'))).toEqual(['userLogsIn']);
+      expect(output.prop('tokens')).toBe(tokens);
+      expect(Object.keys(output.prop('actions')))
+        .toEqual(['userLogsIn', 'getUserPermissions']);
     });
 
     it('userLogsIn function dispatches correct action', () => {
       // Arrange
       const store = createStore()({
-        authentication: { user: {} },
+        authentication: { tokens: {} },
       });
 
       // Act
@@ -50,7 +51,7 @@ describe('RequireAuth', () => {
       expect(store.getActions().length).toBe(0);
       output.prop('actions').userLogsIn({ expected: 'currentSession' });
       expect(store.getActions()[0]).toEqual({
-        type: 'USER_LOGIN',
+        type: 'USER_LOGIN_ACTION',
         payload: { expected: 'currentSession' },
       });
     });
@@ -67,8 +68,8 @@ describe('RequireAuth', () => {
     const generateProps = () => ({
       PrivateComponent: expectedPrivateComponent,
       PublicComponent: expectedPublicComponent,
-      user: { token: 'expectedUserToken' },
-      actions: { userLogsIn: () => {} },
+      tokens: { token: 'expectedUserToken' },
+      actions: { userLogsIn: () => {}, getUserPermissions: () => {} },
     });
 
     beforeEach(() => jest.resetAllMocks());
@@ -99,7 +100,7 @@ describe('RequireAuth', () => {
     it('renders public content if user is not logged in', () => {
       // Arrange
       const props = generateProps();
-      props.user = null;
+      props.tokens = {};
 
       // Act
       const output = shallowRenderPure(props).find('Route').prop('render');

@@ -1,5 +1,19 @@
-export const USER_LOGIN = 'USER_LOGIN';
+import permissionsService from '../api/userPermissionsService';
 
-const userLogsIn = user => ({ type: USER_LOGIN, payload: user });
+export const USER_LOGIN_ACTION = 'USER_LOGIN_ACTION';
+export const GET_USER_PERMISSIONS_ACTION = 'GET_USER_PERMISSIONS_ACTION';
 
-export default { userLogsIn };
+const userLogsIn = user => ({
+  type: USER_LOGIN_ACTION,
+  payload: user,
+});
+
+const getUserPermissions = () => ({
+  type: GET_USER_PERMISSIONS_ACTION,
+  payload: permissionsService(),
+});
+
+export default {
+  userLogsIn,
+  getUserPermissions,
+};

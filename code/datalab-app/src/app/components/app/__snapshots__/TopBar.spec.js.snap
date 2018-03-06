@@ -12,13 +12,14 @@ exports[`Topbar correctly renders correct snapshot 1`] = `
         }
       }
     />
-    <withStyles(Button)
-      color="primary"
-      onClick={[Function]}
-      raised={true}
-    >
-      Logout
-    </withStyles(Button)>
+    <UserIcon
+      identity={
+        Object {
+          "expected": "identity",
+          "picture": "expectedUrl",
+        }
+      }
+    />
   </withStyles(Toolbar)>
 </withStyles(AppBar)>
 `;

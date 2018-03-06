@@ -138,6 +138,7 @@ describe('auth', () => {
       accessToken: 'expectedAccessToken',
       expiresAt: 'expectedExpiresAt',
       idToken: 'expectedIdToken',
+      identity: 'expectedIdentity',
     });
 
     // Act
@@ -147,5 +148,6 @@ describe('auth', () => {
     expect(output.accessToken).toBe('expectedAccessToken');
     expect(output.expiresAt).toBe('expectedExpiresAt');
     expect(output.idToken).toBe('expectedIdToken');
+    expect(output.identity).toBe('expectedIdentity');
   });
 });

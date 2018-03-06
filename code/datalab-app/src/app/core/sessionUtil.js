@@ -5,6 +5,7 @@ const localStorageFields = {
   access_token: 'accessToken',
   expires_at: 'expiresAt',
   id_token: 'idToken',
+  identity: 'identity',
 };
 
 const localStorageFieldsKeys = Object.keys(localStorageFields);
@@ -12,6 +13,7 @@ const sessionFieldKeys = values(localStorageFields);
 
 export function setSession(newSessionEntries) {
   const newSessionNames = Object.keys(newSessionEntries);
+
   entries(localStorageFields)
     .filter(([localStorageName, sessionName]) => newSessionNames.includes(sessionName))
     .forEach(([localStorageName, sessionName]) => addToLocalStorage(localStorageName, newSessionEntries[sessionName]));

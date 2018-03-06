@@ -11,7 +11,7 @@ describe('DescribeDatalabs', () => {
 
   it('renders correct snapshot', () => {
     expect(shallow(
-      <Navigation>
+      <Navigation identity={{ expected: 'identity' }}>
         <span>Content</span>
       </Navigation>)).toMatchSnapshot();
   });

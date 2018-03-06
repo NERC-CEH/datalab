@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationContainer is a container which passes correct props to Navigation 1`] = `
+<withStyles(Navigation)
+  anotherProp="something"
+  identity={
+    Object {
+      "expected": "Identity",
+    }
+  }
+/>
+`;

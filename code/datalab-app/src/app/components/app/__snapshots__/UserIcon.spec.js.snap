@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserIcon renders correct snapshot 1`] = `
+<div>
+  <withStyles(Avatar)
+    onClick={[Function]}
+    src="expectedPicture"
+  />
+  <withStyles(Popover)
+    anchorEl={null}
+    anchorOrigin={
+      Object {
+        "vertical": "bottom",
+      }
+    }
+    onRequestClose={[Function]}
+    open={false}
+  >
+    <withStyles(UserMenu)
+      closePopover={[Function]}
+      identity={
+        Object {
+          "picture": "expectedPicture",
+        }
+      }
+    />
+  </withStyles(Popover)>
+</div>
+`;

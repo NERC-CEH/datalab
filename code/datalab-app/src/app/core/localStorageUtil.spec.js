@@ -12,6 +12,7 @@ describe('localStorageUtil', () => {
       ['access_token', 'one'],
       ['expires_at', 'two'],
       ['id_token', 'three'],
+      ['identity', 'four'],
     ];
 
     // Act
@@ -41,6 +42,7 @@ describe('localStorageUtil', () => {
       access_token: 'one',
       expires_at: 'two',
       id_token: 'three',
+      identity: 'four',
     };
 
     // Act/Assert
@@ -55,6 +57,10 @@ describe('localStorageUtil', () => {
     expect(localStorage.store.id_token).toBe('three');
     removeFromLocalStorage('id_token');
     expect(localStorage.store.id_token).toBe(undefined);
+
+    expect(localStorage.store.identity).toBe('four');
+    removeFromLocalStorage('identity');
+    expect(localStorage.store.identity).toBe(undefined);
   });
 
   it('getCurrentSession gets expected items from localStorage', () => {
@@ -63,10 +69,12 @@ describe('localStorageUtil', () => {
       access_token: 'one',
       expires_at: 'two',
       id_token: 'three',
+      identity: 'four',
     };
 
     expect(getFromLocalStorage('access_token')).toBe('one');
     expect(getFromLocalStorage('expires_at')).toBe('two');
     expect(getFromLocalStorage('id_token')).toBe('three');
+    expect(getFromLocalStorage('identity')).toBe('four');
   });
 });
