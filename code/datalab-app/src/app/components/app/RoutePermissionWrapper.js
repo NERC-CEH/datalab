@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function PermissionWrapper(permission, userPermissions, NegativeComponent) {
   const unauthorised = NegativeComponent && (props => (<NegativeComponent {...props} />));
@@ -11,5 +12,11 @@ function PermissionWrapper(permission, userPermissions, NegativeComponent) {
     return unauthorised || null;
   };
 }
+
+PermissionWrapper.propTypes = {
+  permission: PropTypes.string.isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  NegativeComponent: PropTypes.element,
+};
 
 export default PermissionWrapper;

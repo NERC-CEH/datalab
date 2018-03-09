@@ -72,7 +72,8 @@ class StacksContainer extends Component {
           typeName={this.props.typeName}
           openStack={this.openStack}
           deleteStack={this.confirmDeleteStack}
-          openCreationForm={this.openCreationForm} />
+          openCreationForm={this.openCreationForm}
+          userPermissions={this.props.userPermissions} />
       </PromisedContentWrapper>
     );
   }
@@ -97,6 +98,7 @@ StacksContainer.propTypes = {
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 function mapStateToProps({ stacks }) {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ComponentWrapper extends Component {
   hasPermission() {
@@ -10,7 +11,7 @@ class ComponentWrapper extends Component {
   render() {
     if (this.hasPermission()) {
       return (
-        <div>
+        <div style={this.props.style}>
           {this.props.children}
         </div>
       );
@@ -19,5 +20,15 @@ class ComponentWrapper extends Component {
     return (null);
   }
 }
+
+ComponentWrapper.propTypes = {
+  permission: PropTypes.string.isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+  style: PropTypes.object,
+};
 
 export default ComponentWrapper;
