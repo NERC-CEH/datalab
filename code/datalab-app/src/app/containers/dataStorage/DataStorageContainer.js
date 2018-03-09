@@ -101,7 +101,8 @@ class DataStorageContainer extends Component {
           typeName={TYPE_NAME}
           openStack={this.openDataStore}
           deleteStack={this.chooseDialogue}
-          openCreationForm={this.openCreationForm} />
+          openCreationForm={this.openCreationForm}
+          userPermissions={this.props.userPermissions} />
       </PromisedContentWrapper>
     );
   }
@@ -122,6 +123,7 @@ DataStorageContainer.propTypes = {
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 function mapStateToProps({ dataStorage }) {
