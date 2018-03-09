@@ -11,13 +11,14 @@ import PublishingPage from './pages/PublishingPage';
 import DaskPage from './pages/DaskPage';
 import SparkPage from './pages/SparkPage';
 import ModalRoot from './containers/modal/ModalRoot';
+import PermissionWrapper from './components/app/RoutePermissionWrapper';
 
 const PrivateApp = ({ userPermissions }) => {
-  const ListStorage = PermissionWrapper('project:storage:list', userPermissions);
-  const ListStacks = PermissionWrapper('project:stacks:list', userPermissions);
+  const ListStorage = PermissionWrapper('project:storage:list', userPermissions, NotFoundPage);
+  const ListStacks = PermissionWrapper('project:stacks:list', userPermissions, NotFoundPage);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer userPermissions={userPermissions} >
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/storage" render={ListStorage(DataStoragePage)} />
@@ -31,14 +32,6 @@ const PrivateApp = ({ userPermissions }) => {
       <ModalRoot />
     </NavigationContainer>
   );
-};
-
-const PermissionWrapper = (permission, userPermissions) => (WrappedComponent) => {
-  if (userPermissions.includes(permission)) {
-    return props => (<WrappedComponent userPermissions={userPermissions} {...props} />);
-  }
-
-  return () => (<NotFoundPage />);
 };
 
 PrivateApp.propTypes = {

@@ -36,11 +36,11 @@ const styles = theme => ({
   },
 });
 
-const Navigation = ({ classes, children, identity }) => (
+const Navigation = ({ classes, children, identity, userPermissions }) => (
   <div className={classes.container}>
     <div className={classes.appFrame}>
       <TopBar identity={identity} />
-      <SideBar/>
+      <SideBar userPermissions={userPermissions} />
       <main className={classes.content}>
         {children}
       </main>
@@ -55,6 +55,7 @@ Navigation.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
   identity: PropTypes.object.isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(styles)(Navigation);

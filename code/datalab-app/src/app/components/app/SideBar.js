@@ -9,6 +9,7 @@ import SideBarSubheader from './SideBarSubheader';
 import NavLink from './NavLink';
 import { extendSubdomain } from '../../core/getDomainInfo';
 import navBarLinks from '../../constants/navBarLinks';
+import PermissionWrapper from './ComponentPermissionWrapper';
 
 const { DISCOURSE, SLACK } = navBarLinks;
 export const drawerWidth = 240;
@@ -47,21 +48,27 @@ const datalabLinks = [
   { displayName: 'Help', href: extendSubdomain('docs'), icon: 'help_outline' },
 ];
 
-const SideBar = ({ classes }) => (
+const SideBar = ({ classes, userPermissions }) => (
   <Drawer classes={{ paper: classes.drawerPaper }} type="permanent">
     <header className={classes.header}>
       <img className={classes.logo} src={datalabsLogo} alt="datalabs-logo" />
     </header>
     <List className={classes.drawerList}>
       <NavLink to="/" label="Dashboard" icon="dashboard" />
-      <SideBarSubheader>Data</SideBarSubheader>
-      <NavLink to="/storage" label="Storage" icon="storage" />
+      <PermissionWrapper userPermissions={userPermissions} permission="project:storage:list">
+        <SideBarSubheader>Data</SideBarSubheader>
+        <NavLink to="/storage" label="Storage" icon="storage" />
+      </PermissionWrapper>
       <SideBarSubheader>Analysis</SideBarSubheader>
-      <NavLink to="/notebooks" label="Notebooks" icon="book" />
+      <PermissionWrapper userPermissions={userPermissions} permission="project:stacks:list" >
+        <NavLink to="/notebooks" label="Notebooks" icon="book" />
+      </PermissionWrapper>
       <NavLink to="/dask" label="Dask" icon="apps" />
       <NavLink to="/spark" label="Spark" icon="apps" />
-      <SideBarSubheader>Publish</SideBarSubheader>
-      <NavLink to="/publishing" label="Sites" icon="web" />
+      <PermissionWrapper userPermissions={userPermissions} permission="project:stacks:list" >
+        <SideBarSubheader>Publish</SideBarSubheader>
+        <NavLink to="/publishing" label="Sites" icon="web" />
+      </PermissionWrapper>
       <div className={classes.spacer} />
       <Divider />
       {datalabLinks.map(({ displayName, href, icon }) =>
@@ -77,6 +84,7 @@ const SideBar = ({ classes }) => (
 
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(styles)(SideBar);
