@@ -1,22 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+import { CircularProgress } from 'material-ui/Progress';
 
-function PermissionWrapper(permission, userPermissions, NegativeComponent) {
-  const unauthorised = NegativeComponent && (props => (<NegativeComponent {...props} />));
+class RoutePermissionWrapper extends Component {
+  getComponent() {
+    const { value, fetching } = this.props.promisedUserPermissions;
+    const WrappedComponent = this.props.component;
+    const NegativeComponent = this.props.alt;
 
-  return (WrappedComponent) => {
-    if (userPermissions.includes(permission)) {
-      return props => (<WrappedComponent userPermissions={userPermissions} {...props} />);
+    if (fetching) {
+      return () => (<CircularProgress />);
     }
 
-    return unauthorised || null;
-  };
+    if (!fetching && value.includes(this.props.permission)) {
+      return props => (<WrappedComponent userPermissions={value} {...props} />);
+    }
+
+    if (!fetching && NegativeComponent) {
+      return props => (<NegativeComponent {...props} />);
+    }
+
+    return null;
+  }
+
+  render() {
+    const { path, exact } = this.props;
+
+    return (<Route path={path} exact={exact} render={this.getComponent()} />);
+  }
 }
 
-PermissionWrapper.propTypes = {
+RoutePermissionWrapper.propTypes = {
+  path: PropTypes.string,
+  exact: PropTypes.bool,
   permission: PropTypes.string.isRequired,
-  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  NegativeComponent: PropTypes.element,
+  promisedUserPermissions: PropTypes.shape({
+    error: PropTypes.any,
+    fetching: PropTypes.bool.isRequired,
+    value: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  component: PropTypes.func.isRequired,
+  alt: PropTypes.func,
 };
 
-export default PermissionWrapper;
+export default RoutePermissionWrapper;

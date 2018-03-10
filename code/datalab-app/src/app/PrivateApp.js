@@ -11,31 +11,48 @@ import PublishingPage from './pages/PublishingPage';
 import DaskPage from './pages/DaskPage';
 import SparkPage from './pages/SparkPage';
 import ModalRoot from './containers/modal/ModalRoot';
-import PermissionWrapper from './components/app/RoutePermissionWrapper';
+import RoutePermissions from './components/app/RoutePermissionWrapper';
 
-const PrivateApp = ({ userPermissions }) => {
-  const ListStorage = PermissionWrapper('project:storage:list', userPermissions, NotFoundPage);
-  const ListStacks = PermissionWrapper('project:stacks:list', userPermissions, NotFoundPage);
-
-  return (
-    <NavigationContainer userPermissions={userPermissions} >
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/storage" render={ListStorage(DataStoragePage)} />
-        <Route exact path="/notebooks" render={ListStacks(NotebooksPage)} />
-        <Route exact path="/publishing" render={ListStacks(PublishingPage)} />
-        <Route exact path="/dask" component={DaskPage} />
-        <Route exact path="/spark" component={SparkPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <Route component={Footer} />
-      <ModalRoot />
-    </NavigationContainer>
-  );
-};
+const PrivateApp = ({ promisedUserPermissions }) => (
+  <NavigationContainer userPermissions={promisedUserPermissions.value}>
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <RoutePermissions
+        exact
+        path="/storage"
+        component={DataStoragePage}
+        promisedUserPermissions={promisedUserPermissions}
+        permission="project:storage:list"
+        alt={NotFoundPage} />
+      <RoutePermissions
+        exact
+        path="/notebooks"
+        component={NotebooksPage}
+        promisedUserPermissions={promisedUserPermissions}
+        permission="project:stacks:list"
+        alt={NotFoundPage} />
+      <RoutePermissions
+        exact
+        path="/publishing"
+        component={PublishingPage}
+        promisedUserPermissions={promisedUserPermissions}
+        permission="project:stacks:list"
+        alt={NotFoundPage} />
+      <Route exact path="/dask" component={DaskPage} />
+      <Route exact path="/spark" component={SparkPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
+    <Route component={Footer} />
+    <ModalRoot />
+  </NavigationContainer>
+);
 
 PrivateApp.propTypes = {
-  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  promisedUserPermissions: PropTypes.shape({
+    error: PropTypes.any,
+    fetching: PropTypes.bool.isRequired,
+    value: PropTypes.array.isRequired,
+  }).isRequired,
 };
 
 export default PrivateApp;
