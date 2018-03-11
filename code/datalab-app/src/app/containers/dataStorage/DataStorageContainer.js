@@ -102,7 +102,10 @@ class DataStorageContainer extends Component {
           openStack={this.openDataStore}
           deleteStack={this.chooseDialogue}
           openCreationForm={this.openCreationForm}
-          userPermissions={this.props.userPermissions} />
+          userPermissions={this.props.userPermissions}
+          createPermission="project:storage:create"
+          openPermission="project:storage:open"
+          deletePermission="project:storage:delete" />
       </PromisedContentWrapper>
     );
   }

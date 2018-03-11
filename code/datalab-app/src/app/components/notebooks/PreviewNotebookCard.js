@@ -5,7 +5,12 @@ import StackCard from '../stacks/StackCard';
 class PreviewNotebookCard extends Component {
   render() {
     return (
-      <StackCard stack={this.props.stack} typeName="notebook" />
+      <StackCard
+        stack={this.props.stack}
+        typeName="notebook"
+        userPermissions={['open', 'delete']}
+        openPermission="open"
+        deletePermission="delete" />
     );
   }
 }

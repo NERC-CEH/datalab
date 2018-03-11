@@ -39,7 +39,8 @@ function styles(theme) {
   };
 }
 
-const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermissions }) =>
+const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermissions, openPermission,
+                     deletePermission }) =>
   <Card className={classes.card}>
     <CardContent>
       <div className={classes.cardHeader}>
@@ -52,12 +53,12 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
       <Typography component="p">{getDescription(stack, typeName)}</Typography>
     </CardContent>
     <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
-      <PermissionWrapper userPermissions={userPermissions} permission="project:stacks:open">
+      <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
         <Button style={{ marginRight: 4 }} color="primary" raised disabled={!openStack} onClick={() => openStack(stack.id)}>
           Open
         </Button>
       </PermissionWrapper>
-      <PermissionWrapper userPermissions={userPermissions} permission="project:stacks:delete">
+      <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
         <Button style={{ marginLeft: 4 }} color="accent" raised disabled={!deleteStack} onClick={() => deleteStack(stack)}>
           Delete
         </Button>
@@ -76,6 +77,8 @@ StackCard.propTypes = {
   deleteStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  openPermission: PropTypes.string.isRequired,
+  deletePermission: PropTypes.string.isRequired,
 };
 
 function getDisplayName(stack) {

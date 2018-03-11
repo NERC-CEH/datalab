@@ -5,7 +5,12 @@ import StackCard from '../stacks/StackCard';
 class PreviewSiteCard extends Component {
   render() {
     return (
-      <StackCard stack={this.props.stack} typeName="site" />
+      <StackCard
+        stack={this.props.stack}
+        typeName="site"
+        userPermissions={['open', 'delete']}
+        openPermission="open"
+        deletePermission="delete" />
     );
   }
 }

@@ -5,7 +5,12 @@ import StackCard from '../stacks/StackCard';
 class PreviewDataStoreCard extends Component {
   render() {
     return (
-      <StackCard stack={this.props.stack} typeName="dataStore" />
+      <StackCard
+        stack={this.props.stack}
+        typeName="dataStore"
+        userPermissions={['open', 'delete']}
+        openPermission="open"
+        deletePermission="delete" />
     );
   }
 }
