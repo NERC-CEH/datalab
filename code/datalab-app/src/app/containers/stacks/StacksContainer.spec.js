@@ -26,6 +26,7 @@ describe('StacksContainer', () => {
         formStateName: 'createNotebook',
         PrivateComponent: () => {},
         PublicComponent: () => {},
+        userPermissions: ['expectedPermission'],
       };
 
       return shallow(<StacksContainer {...props} />);
@@ -93,6 +94,7 @@ describe('StacksContainer', () => {
       containerType: 'analysis',
       dialogAction: 'ACTION',
       formStateName: 'createNotebook',
+      userPermissions: ['expectedPermission'],
       actions: {
         loadStacksByCategory: loadStacksMock,
         getUrl: getUrlMock,

@@ -13,7 +13,9 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     xs={12}
   >
     <withStyles(StackCard)
+      deletePermission="delete"
       deleteStack={[Function]}
+      openPermission="open"
       openStack={[Function]}
       stack={
         Object {
@@ -23,6 +25,13 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         }
       }
       typeName="expectedTypeName"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "create",
+        ]
+      }
     />
   </withStyles(GridWrapper)>
   <withStyles(GridWrapper)
@@ -34,7 +43,9 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     xs={12}
   >
     <withStyles(StackCard)
+      deletePermission="delete"
       deleteStack={[Function]}
+      openPermission="open"
       openStack={[Function]}
       stack={
         Object {
@@ -44,6 +55,13 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         }
       }
       typeName="expectedTypeName"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "create",
+        ]
+      }
     />
   </withStyles(GridWrapper)>
   <withStyles(GridWrapper)
@@ -55,7 +73,9 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     xs={12}
   >
     <withStyles(StackCard)
+      deletePermission="delete"
       deleteStack={[Function]}
+      openPermission="open"
       openStack={[Function]}
       stack={
         Object {
@@ -65,21 +85,39 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         }
       }
       typeName="expectedTypeName"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "create",
+        ]
+      }
     />
   </withStyles(GridWrapper)>
-  <withStyles(GridWrapper)
-    item={true}
-    lg={4}
-    md={4}
-    sm={6}
-    xl={2}
-    xs={12}
+  <ComponentWrapper
+    permission="create"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "create",
+      ]
+    }
   >
-    <withStyles(NewStackButton)
-      onClick={[Function]}
-      typeName="expectedTypeName"
-    />
-  </withStyles(GridWrapper)>
+    <withStyles(GridWrapper)
+      item={true}
+      lg={4}
+      md={4}
+      sm={6}
+      xl={2}
+      xs={12}
+    >
+      <withStyles(NewStackButton)
+        onClick={[Function]}
+        typeName="expectedTypeName"
+      />
+    </withStyles(GridWrapper)>
+  </ComponentWrapper>
 </withStyles(GridWrapper)>
 `;
 
@@ -87,18 +125,29 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
 <withStyles(GridWrapper)
   container={true}
 >
-  <withStyles(GridWrapper)
-    item={true}
-    lg={4}
-    md={4}
-    sm={6}
-    xl={2}
-    xs={12}
+  <ComponentWrapper
+    permission="create"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "create",
+      ]
+    }
   >
-    <withStyles(NewStackButton)
-      onClick={[Function]}
-      typeName="expectedTypeName"
-    />
-  </withStyles(GridWrapper)>
+    <withStyles(GridWrapper)
+      item={true}
+      lg={4}
+      md={4}
+      sm={6}
+      xl={2}
+      xs={12}
+    >
+      <withStyles(NewStackButton)
+        onClick={[Function]}
+        typeName="expectedTypeName"
+      />
+    </withStyles(GridWrapper)>
+  </ComponentWrapper>
 </withStyles(GridWrapper)>
 `;

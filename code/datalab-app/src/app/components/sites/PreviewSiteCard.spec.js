@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import PreviewSiteCard from './PreviewSiteCard';
+import PreviewSiteCard, { PurePreviewSiteCard } from './PreviewSiteCard';
 
 const stack = { name: 'Name' };
 
@@ -40,6 +40,19 @@ describe('Preview SiteCard', () => {
       const output = shallowRenderConnected(store);
 
       expect(output.prop('stack')).toEqual(stack);
+    });
+  });
+
+  describe('is a component which', () => {
+    function shallowRenderPure() {
+      const props = {
+        stack: 'expectedStack',
+      };
+
+      return shallow(<PurePreviewSiteCard {...props} />);
+    }
+    it('passes correct props to StackCards', () => {
+      expect(shallowRenderPure()).toMatchSnapshot();
     });
   });
 });

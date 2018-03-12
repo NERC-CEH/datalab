@@ -4,18 +4,22 @@ import { createShallow, createMount } from 'material-ui/test-utils';
 import SideBar from './SideBar';
 
 describe('Sidebar', () => {
-  function shallowRender(props) {
+  const userPermissions = ['project:storage:list', 'project:stacks:list'];
+
+  function shallowRender() {
     const shallow = createShallow({ dive: true });
+    const props = { userPermissions };
 
     return shallow(<SideBar {...props} />);
   }
 
   function fullRender(path) {
     const mount = createMount();
+    const props = { userPermissions };
 
     return mount(
       <MemoryRouter initialEntries={path}>
-        <SideBar/>
+        <SideBar {...props} />
       </MemoryRouter>);
   }
 

@@ -26,22 +26,42 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       label="Dashboard"
       to="/"
     />
-    <withStyles(SideBarSubheader)>
-      Data
-    </withStyles(SideBarSubheader)>
-    <withStyles(Link)
-      icon="storage"
-      label="Storage"
-      to="/storage"
-    />
+    <ComponentWrapper
+      permission="project:storage:list"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+        ]
+      }
+    >
+      <withStyles(SideBarSubheader)>
+        Data
+      </withStyles(SideBarSubheader)>
+      <withStyles(Link)
+        icon="storage"
+        label="Storage"
+        to="/storage"
+      />
+    </ComponentWrapper>
     <withStyles(SideBarSubheader)>
       Analysis
     </withStyles(SideBarSubheader)>
-    <withStyles(Link)
-      icon="book"
-      label="Notebooks"
-      to="/notebooks"
-    />
+    <ComponentWrapper
+      permission="project:stacks:list"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+        ]
+      }
+    >
+      <withStyles(Link)
+        icon="book"
+        label="Notebooks"
+        to="/notebooks"
+      />
+    </ComponentWrapper>
     <withStyles(Link)
       icon="apps"
       label="Dask"
@@ -52,14 +72,24 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       label="Spark"
       to="/spark"
     />
-    <withStyles(SideBarSubheader)>
-      Publish
-    </withStyles(SideBarSubheader)>
-    <withStyles(Link)
-      icon="web"
-      label="Sites"
-      to="/publishing"
-    />
+    <ComponentWrapper
+      permission="project:stacks:list"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+        ]
+      }
+    >
+      <withStyles(SideBarSubheader)>
+        Publish
+      </withStyles(SideBarSubheader)>
+      <withStyles(Link)
+        icon="web"
+        label="Sites"
+        to="/publishing"
+      />
+    </ComponentWrapper>
     <div
       className="SideBar-spacer-5"
     />

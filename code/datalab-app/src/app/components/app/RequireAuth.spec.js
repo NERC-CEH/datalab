@@ -25,8 +25,9 @@ describe('RequireAuth', () => {
     it('extracts the correct props from the redux state', () => {
       // Arrange
       const tokens = { token: 'expectedUserToken' };
+      const permissions = { fetching: false, value: ['permission'] };
       const store = createStore()({
-        authentication: { tokens },
+        authentication: { tokens, permissions },
       });
 
       // Act
@@ -34,6 +35,7 @@ describe('RequireAuth', () => {
 
       // Assert
       expect(output.prop('tokens')).toBe(tokens);
+      expect(output.prop('permissions')).toBe(permissions);
       expect(Object.keys(output.prop('actions')))
         .toEqual(['userLogsIn', 'getUserPermissions']);
     });
@@ -41,7 +43,7 @@ describe('RequireAuth', () => {
     it('userLogsIn function dispatches correct action', () => {
       // Arrange
       const store = createStore()({
-        authentication: { tokens: {} },
+        authentication: { tokens: {}, permissions: { fetching: true, value: [] } },
       });
 
       // Act
@@ -69,6 +71,7 @@ describe('RequireAuth', () => {
       PrivateComponent: expectedPrivateComponent,
       PublicComponent: expectedPublicComponent,
       tokens: { token: 'expectedUserToken' },
+      permissions: { fetching: false, value: ['expectedPermission'] },
       actions: { userLogsIn: () => {}, getUserPermissions: () => {} },
     });
 
@@ -95,6 +98,20 @@ describe('RequireAuth', () => {
 
       // Arrange
       expect(mount(output()).find('span')).toHaveText('expectedPrivateComponent');
+    });
+
+    it('passes permissions to PrivateCompinent', () => {
+      // Arrange
+      const props = generateProps();
+
+      // Act
+      const output = shallowRenderPure(props).find('Route').prop('render');
+
+      // Arrange
+      expect(mount(output()).prop('promisedUserPermissions')).toEqual({
+        fetching: false,
+        value: ['expectedPermission'],
+      });
     });
 
     it('renders public content if user is not logged in', () => {

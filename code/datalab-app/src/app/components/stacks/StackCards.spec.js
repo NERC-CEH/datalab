@@ -17,6 +17,10 @@ describe('StackCards', () => {
     openStack: () => {},
     deleteStack: () => {},
     openCreationForm: () => {},
+    userPermissions: ['open', 'delete', 'create'],
+    openPermission: 'open',
+    deletePermission: 'delete',
+    createPermission: 'create',
   });
 
   it('creates correct snapshot for an array of notebooks', () => {

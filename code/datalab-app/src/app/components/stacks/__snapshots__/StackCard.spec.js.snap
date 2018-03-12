@@ -32,23 +32,60 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
       Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
     </withStyles(Typography)>
   </withStyles(CardContent)>
-  <withStyles(CardActions)>
-    <withStyles(Button)
-      color="primary"
-      disabled={false}
-      onClick={[Function]}
-      raised={true}
+  <withStyles(CardActions)
+    style={
+      Object {
+        "paddingLeft": 8,
+        "paddingRight": 8,
+      }
+    }
+  >
+    <ComponentWrapper
+      permission="open"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+        ]
+      }
     >
-      Open
-    </withStyles(Button)>
-    <withStyles(Button)
-      color="accent"
-      disabled={false}
-      onClick={[Function]}
-      raised={true}
+      <withStyles(Button)
+        color="primary"
+        disabled={false}
+        onClick={[Function]}
+        raised={true}
+        style={
+          Object {
+            "marginRight": 4,
+          }
+        }
+      >
+        Open
+      </withStyles(Button)>
+    </ComponentWrapper>
+    <ComponentWrapper
+      permission="delete"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+        ]
+      }
     >
-      Delete
-    </withStyles(Button)>
+      <withStyles(Button)
+        color="accent"
+        disabled={false}
+        onClick={[Function]}
+        raised={true}
+        style={
+          Object {
+            "marginLeft": 4,
+          }
+        }
+      >
+        Delete
+      </withStyles(Button)>
+    </ComponentWrapper>
   </withStyles(CardActions)>
 </Card>
 `;
@@ -85,23 +122,60 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
       Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
     </withStyles(Typography)>
   </withStyles(CardContent)>
-  <withStyles(CardActions)>
-    <withStyles(Button)
-      color="primary"
-      disabled={false}
-      onClick={[Function]}
-      raised={true}
+  <withStyles(CardActions)
+    style={
+      Object {
+        "paddingLeft": 8,
+        "paddingRight": 8,
+      }
+    }
+  >
+    <ComponentWrapper
+      permission="open"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+        ]
+      }
     >
-      Open
-    </withStyles(Button)>
-    <withStyles(Button)
-      color="accent"
-      disabled={false}
-      onClick={[Function]}
-      raised={true}
+      <withStyles(Button)
+        color="primary"
+        disabled={false}
+        onClick={[Function]}
+        raised={true}
+        style={
+          Object {
+            "marginRight": 4,
+          }
+        }
+      >
+        Open
+      </withStyles(Button)>
+    </ComponentWrapper>
+    <ComponentWrapper
+      permission="delete"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+        ]
+      }
     >
-      Delete
-    </withStyles(Button)>
+      <withStyles(Button)
+        color="accent"
+        disabled={false}
+        onClick={[Function]}
+        raised={true}
+        style={
+          Object {
+            "marginLeft": 4,
+          }
+        }
+      >
+        Delete
+      </withStyles(Button)>
+    </ComponentWrapper>
   </withStyles(CardActions)>
 </Card>
 `;
@@ -139,23 +213,60 @@ exports[`StackCard should provide defaults and disable the open button if no sta
       A description of the typeName purpose
     </withStyles(Typography)>
   </withStyles(CardContent)>
-  <withStyles(CardActions)>
-    <withStyles(Button)
-      color="primary"
-      disabled={true}
-      onClick={[Function]}
-      raised={true}
+  <withStyles(CardActions)
+    style={
+      Object {
+        "paddingLeft": 8,
+        "paddingRight": 8,
+      }
+    }
+  >
+    <ComponentWrapper
+      permission="open"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+        ]
+      }
     >
-      Open
-    </withStyles(Button)>
-    <withStyles(Button)
-      color="accent"
-      disabled={true}
-      onClick={[Function]}
-      raised={true}
+      <withStyles(Button)
+        color="primary"
+        disabled={true}
+        onClick={[Function]}
+        raised={true}
+        style={
+          Object {
+            "marginRight": 4,
+          }
+        }
+      >
+        Open
+      </withStyles(Button)>
+    </ComponentWrapper>
+    <ComponentWrapper
+      permission="delete"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+        ]
+      }
     >
-      Delete
-    </withStyles(Button)>
+      <withStyles(Button)
+        color="accent"
+        disabled={true}
+        onClick={[Function]}
+        raised={true}
+        style={
+          Object {
+            "marginLeft": 4,
+          }
+        }
+      >
+        Delete
+      </withStyles(Button)>
+    </ComponentWrapper>
   </withStyles(CardActions)>
 </Card>
 `;

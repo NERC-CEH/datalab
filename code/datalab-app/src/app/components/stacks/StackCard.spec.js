@@ -12,6 +12,12 @@ describe('StackCard', () => {
   const openStackMock = jest.fn();
   const deleteStackMock = jest.fn();
 
+  const permissionProps = {
+    userPermissions: ['open', 'delete'],
+    openPermission: 'open',
+    deletePermission: 'delete',
+  };
+
   const generateProps = type => ({
     stack: {
       id: '100',
@@ -21,6 +27,7 @@ describe('StackCard', () => {
     openStack: openStackMock,
     deleteStack: deleteStackMock,
     typeName: 'notebook',
+    ...permissionProps,
   });
 
   beforeEach(() => jest.resetAllMocks());
@@ -82,6 +89,7 @@ describe('StackCard', () => {
     const props = {
       stack: {},
       typeName: 'typeName',
+      ...permissionProps,
     };
 
     // Act
