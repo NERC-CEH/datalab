@@ -9,7 +9,7 @@ import SideBarSubheader from './SideBarSubheader';
 import NavLink from './NavLink';
 import { extendSubdomain } from '../../core/getDomainInfo';
 import navBarLinks from '../../constants/navBarLinks';
-import PermissionWrapper from './ComponentPermissionWrapper';
+import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
 const { DISCOURSE, SLACK } = navBarLinks;
 export const drawerWidth = 240;

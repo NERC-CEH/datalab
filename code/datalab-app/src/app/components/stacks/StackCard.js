@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
 import stackDescriptions from './stackDescriptions';
-import PermissionWrapper from '../app/ComponentPermissionWrapper';
+import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
 function styles(theme) {
   const flexProps = {
