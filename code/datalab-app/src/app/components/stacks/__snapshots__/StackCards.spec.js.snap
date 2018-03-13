@@ -96,6 +96,11 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
   </withStyles(GridWrapper)>
   <ComponentWrapper
     permission="create"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
     userPermissions={
       Array [
         "open",
@@ -127,6 +132,11 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
 >
   <ComponentWrapper
     permission="create"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
     userPermissions={
       Array [
         "open",

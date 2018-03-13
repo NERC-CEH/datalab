@@ -22,7 +22,7 @@ const StackCards = ({ stacks, typeName, openStack, deleteStack, openCreationForm
           deletePermission={deletePermission} />
       </Grid>
     ))}
-    <PermissionWrapper userPermissions={userPermissions} permission={createPermission}>
+    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions} permission={createPermission}>
       <Grid item {...breakPoints}>
         <NewStackButton onClick={openCreationForm} typeName={typeName} />
       </Grid>
