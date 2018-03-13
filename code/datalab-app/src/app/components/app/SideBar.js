@@ -10,6 +10,9 @@ import NavLink from './NavLink';
 import { extendSubdomain } from '../../core/getDomainInfo';
 import navBarLinks from '../../constants/navBarLinks';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
+import { projectPermissions } from '../../../shared/permissionTypes';
+
+const { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } = projectPermissions;
 
 const { DISCOURSE, SLACK } = navBarLinks;
 export const drawerWidth = 240;
@@ -55,17 +58,17 @@ const SideBar = ({ classes, userPermissions }) => (
     </header>
     <List className={classes.drawerList}>
       <NavLink to="/" label="Dashboard" icon="dashboard" />
-      <PermissionWrapper userPermissions={userPermissions} permission="project:storage:list">
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
         <SideBarSubheader>Data</SideBarSubheader>
         <NavLink to="/storage" label="Storage" icon="storage" />
       </PermissionWrapper>
       <SideBarSubheader>Analysis</SideBarSubheader>
-      <PermissionWrapper userPermissions={userPermissions} permission="project:stacks:list" >
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
         <NavLink to="/notebooks" label="Notebooks" icon="book" />
       </PermissionWrapper>
       <NavLink to="/dask" label="Dask" icon="apps" />
       <NavLink to="/spark" label="Spark" icon="apps" />
-      <PermissionWrapper userPermissions={userPermissions} permission="project:stacks:list" >
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
         <SideBarSubheader>Publish</SideBarSubheader>
         <NavLink to="/publishing" label="Sites" icon="web" />
       </PermissionWrapper>

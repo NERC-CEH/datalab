@@ -7,12 +7,15 @@ import {
 import { DataStoreType } from '../types/dataStoreTypes';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import permissionChecker from '../auth/permissionChecker';
+import { elementPermissions } from '../../shared/permissionTypes';
+
+const { STORAGE_LIST, STORAGE_OPEN, STORAGE_CREATE } = elementPermissions;
 
 export const dataStorage = {
   description: 'List of currently provisioned DataLabs data storage.',
   type: new GraphQLList(DataStoreType),
   resolve: (obj, args, { user }) =>
-    permissionChecker('storage:list', user, () => dataStorageRepository.getAllActive(user)),
+    permissionChecker(STORAGE_LIST, user, () => dataStorageRepository.getAllActive(user)),
 };
 
 export const dataStore = {
@@ -24,7 +27,7 @@ export const dataStore = {
     },
   },
   resolve: (obj, { id }, { user }) =>
-    permissionChecker('storage:open', user, () => dataStorageRepository.getById(user, id)),
+    permissionChecker(STORAGE_OPEN, user, () => dataStorageRepository.getById(user, id)),
 };
 
 export const checkDataStoreName = {
@@ -36,5 +39,5 @@ export const checkDataStoreName = {
     },
   },
   resolve: (obj, { name }, { user }) =>
-    permissionChecker('storage:create', user, () => dataStorageRepository.getAllByName(user, name)),
+    permissionChecker(STORAGE_CREATE, user, () => dataStorageRepository.getAllByName(user, name)),
 };

@@ -12,6 +12,9 @@ import DaskPage from './pages/DaskPage';
 import SparkPage from './pages/SparkPage';
 import ModalRoot from './containers/modal/ModalRoot';
 import RoutePermissions from './components/common/RoutePermissionWrapper';
+import { projectPermissions } from '../shared/permissionTypes';
+
+const { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } = projectPermissions;
 
 const PrivateApp = ({ promisedUserPermissions }) => (
   <NavigationContainer userPermissions={promisedUserPermissions.value}>
@@ -22,21 +25,21 @@ const PrivateApp = ({ promisedUserPermissions }) => (
         path="/storage"
         component={DataStoragePage}
         promisedUserPermissions={promisedUserPermissions}
-        permission="project:storage:list"
+        permission={PROJECT_STORAGE_LIST}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
         path="/notebooks"
         component={NotebooksPage}
         promisedUserPermissions={promisedUserPermissions}
-        permission="project:stacks:list"
+        permission={PROJECT_STACKS_LIST}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
         path="/publishing"
         component={PublishingPage}
         promisedUserPermissions={promisedUserPermissions}
-        permission="project:stacks:list"
+        permission={PROJECT_STACKS_LIST}
         alt={NotFoundPage} />
       <Route exact path="/dask" component={DaskPage} />
       <Route exact path="/spark" component={SparkPage} />

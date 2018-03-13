@@ -2,6 +2,9 @@ import { DataStoreType, DataStorageCreationType, DataStorageDeletionType } from 
 import config from '../config';
 import dataStoreApi from '../infrastructure/dataStoreApi';
 import permissionChecker from '../auth/permissionChecker';
+import { elementPermissions } from '../../shared/permissionTypes';
+
+const { STORAGE_CREATE, STORAGE_DELETE } = elementPermissions;
 
 const DATALAB_NAME = config.get('datalabName');
 
@@ -12,7 +15,7 @@ export const createDataStore = {
     dataStore: { type: DataStorageCreationType },
   },
   resolve: (obj, { dataStore }, { user, token }) =>
-    permissionChecker('storage:create', user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore)),
+    permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore)),
 };
 
 export const deleteDataStore = {
@@ -22,5 +25,5 @@ export const deleteDataStore = {
     dataStore: { type: DataStorageDeletionType },
   },
   resolve: (obj, { dataStore }, { user, token }) =>
-    permissionChecker('storage:delete', user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
+    permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
 };

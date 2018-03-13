@@ -6,10 +6,10 @@ const OPEN = 'open';
 const STACKS = 'stacks';
 const STORAGE = 'storage';
 
-const PROJECT = 'project';
+export const PROJECT = 'project';
 
 const keyDelim = '_';
-const permissionDelim = ':';
+export const permissionDelim = ':';
 
 const permissions = {
   CREATE,

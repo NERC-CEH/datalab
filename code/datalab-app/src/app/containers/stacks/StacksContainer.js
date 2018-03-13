@@ -10,6 +10,9 @@ import modalDialogActions from '../../actions/modalDialogActions';
 import StackCards from '../../components/stacks/StackCards';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import notify from '../../components/common/notify';
+import { projectPermissions } from '../../../shared/permissionTypes';
+
+const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN } = projectPermissions;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -74,9 +77,9 @@ class StacksContainer extends Component {
           deleteStack={this.confirmDeleteStack}
           openCreationForm={this.openCreationForm}
           userPermissions={this.props.userPermissions}
-          createPermission="project:stacks:create"
-          openPermission="project:stacks:open"
-          deletePermission="project:stacks:delete" />
+          createPermission={PROJECT_STACKS_CREATE}
+          openPermission={PROJECT_STACKS_OPEN}
+          deletePermission={PROJECT_STACKS_DELETE} />
       </PromisedContentWrapper>
     );
   }

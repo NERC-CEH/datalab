@@ -7,6 +7,9 @@ import {
 import { StackType } from '../types/stackTypes';
 import stackRepository from '../dataaccess/stackRepository';
 import permissionChecker from '../auth/permissionChecker';
+import { elementPermissions } from '../../shared/permissionTypes';
+
+const { STACKS_LIST, STACKS_OPEN, STACKS_CREATE } = elementPermissions;
 
 export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks.',
@@ -23,7 +26,7 @@ export const stacksByCategory = {
     },
   },
   resolve: (obj, { category }, { user }) =>
-    permissionChecker('stacks:list', user, () => stackRepository.getByCategory(user, category)),
+    permissionChecker(STACKS_LIST, user, () => stackRepository.getByCategory(user, category)),
 };
 
 export const stack = {
@@ -35,7 +38,7 @@ export const stack = {
     },
   },
   resolve: (obj, { id }, { user }) =>
-    permissionChecker('stacks:open', user, () => stackRepository.getById(user, id)),
+    permissionChecker(STACKS_OPEN, user, () => stackRepository.getById(user, id)),
 };
 
 export const checkStackName = {
@@ -47,5 +50,5 @@ export const checkStackName = {
     },
   },
   resolve: (obj, { name }, { user }) =>
-    permissionChecker('stacks:create', user, () => stackRepository.getAllByName(user, name)),
+    permissionChecker(STACKS_CREATE, user, () => stackRepository.getAllByName(user, name)),
 };

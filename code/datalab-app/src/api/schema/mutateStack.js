@@ -2,6 +2,9 @@ import { StackCreationType, StackDeletionType, StackType } from '../types/stackT
 import config from '../config';
 import stackApi from '../infrastructure/stackApi';
 import permissionChecker from '../auth/permissionChecker';
+import { elementPermissions } from '../../shared/permissionTypes';
+
+const { STACKS_CREATE, STACKS_DELETE } = elementPermissions;
 
 const DATALAB_NAME = config.get('datalabName');
 
@@ -12,7 +15,7 @@ export const createStack = {
     stack: { type: StackCreationType },
   },
   resolve: (obj, { stack }, { user, token }) =>
-    permissionChecker('stacks:create', user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
+    permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
 };
 
 export const deleteStack = {
@@ -22,5 +25,5 @@ export const deleteStack = {
     stack: { type: StackDeletionType },
   },
   resolve: (obj, { stack }, { user, token }) =>
-    permissionChecker('stacks:delete', user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
+    permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
 };
