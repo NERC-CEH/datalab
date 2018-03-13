@@ -100,7 +100,7 @@ describe('RequireAuth', () => {
       expect(mount(output()).find('span')).toHaveText('expectedPrivateComponent');
     });
 
-    it('passes permissions to PrivateCompinent', () => {
+    it('passes permissions to PrivateComponent', () => {
       // Arrange
       const props = generateProps();
 
