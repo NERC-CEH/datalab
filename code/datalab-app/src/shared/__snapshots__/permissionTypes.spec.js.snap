@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PermissionTypes generates expected permisisons with the project prefix 1`] = `
+Object {
+  "PROJECT_STACKS_CREATE": "project:stacks:create",
+  "PROJECT_STACKS_DELETE": "project:stacks:delete",
+  "PROJECT_STACKS_LIST": "project:stacks:list",
+  "PROJECT_STACKS_OPEN": "project:stacks:open",
+  "PROJECT_STORAGE_CREATE": "project:storage:create",
+  "PROJECT_STORAGE_DELETE": "project:storage:delete",
+  "PROJECT_STORAGE_LIST": "project:storage:list",
+  "PROJECT_STORAGE_OPEN": "project:storage:open",
+}
+`;
+
+exports[`PermissionTypes generates expected permissions 1`] = `
+Object {
+  "STACKS_CREATE": "stacks:create",
+  "STACKS_DELETE": "stacks:delete",
+  "STACKS_LIST": "stacks:list",
+  "STACKS_OPEN": "stacks:open",
+  "STORAGE_CREATE": "storage:create",
+  "STORAGE_DELETE": "storage:delete",
+  "STORAGE_LIST": "storage:list",
+  "STORAGE_OPEN": "storage:open",
+}
+`;
