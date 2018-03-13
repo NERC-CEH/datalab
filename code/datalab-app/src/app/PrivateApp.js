@@ -11,7 +11,7 @@ import PublishingPage from './pages/PublishingPage';
 import DaskPage from './pages/DaskPage';
 import SparkPage from './pages/SparkPage';
 import ModalRoot from './containers/modal/ModalRoot';
-import RoutePermissions from './components/app/RoutePermissionWrapper';
+import RoutePermissions from './components/common/RoutePermissionWrapper';
 
 const PrivateApp = ({ promisedUserPermissions }) => (
   <NavigationContainer userPermissions={promisedUserPermissions.value}>
