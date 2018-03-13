@@ -15,6 +15,7 @@ describe('DataStorageContainer', () => {
         store,
         PrivateComponent: () => {},
         PublicComponent: () => {},
+        userPermissions: ['expectedPermission'],
       };
 
       return shallow(<DataStorageContainer {...props} />);
@@ -83,6 +84,7 @@ describe('DataStorageContainer', () => {
 
     const generateProps = () => ({
       dataStorage,
+      userPermissions: ['expectedPermission'],
       actions: {
         loadDataStorage: loadDataStorageMock,
         getCredentials: getCredentialsMock,

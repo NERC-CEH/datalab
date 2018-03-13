@@ -1,10 +1,8 @@
 import logger from 'winston';
-
-const permissionDelim = ':';
-const projectName = 'project';
+import { PROJECT, permissionDelim } from '../../shared/permissionTypes';
 
 function permissionWrapper(permissionSuffix, { permissions }, next) {
-  const requiredPermission = projectName.concat(permissionDelim, permissionSuffix);
+  const requiredPermission = PROJECT.concat(permissionDelim, permissionSuffix);
   const grantedPermissions = permissions || [];
 
   logger.info('Auth: checking permissions');

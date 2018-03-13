@@ -3,19 +3,30 @@ import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
+import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
 const breakPoints = { xs: 12, sm: 6, md: 4, lg: 4, xl: 2 };
 
-const StackCards = ({ stacks, typeName, openStack, deleteStack, openCreationForm }) => (
+const StackCards = ({ stacks, typeName, openStack, deleteStack, openCreationForm, userPermissions, createPermission,
+                      openPermission, deletePermission }) => (
   <Grid container>
     {stacks.map((stack, index) => (
       <Grid key={index} item {...breakPoints}>
-        <StackCard stack={stack} typeName={typeName} openStack={openStack} deleteStack={deleteStack} />
+        <StackCard
+          stack={stack}
+          typeName={typeName}
+          openStack={openStack}
+          deleteStack={deleteStack}
+          userPermissions={userPermissions}
+          openPermission={openPermission}
+          deletePermission={deletePermission} />
       </Grid>
     ))}
-    <Grid item {...breakPoints}>
-      <NewStackButton onClick={openCreationForm} typeName={typeName} />
-    </Grid>
+    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions} permission={createPermission}>
+      <Grid item {...breakPoints}>
+        <NewStackButton onClick={openCreationForm} typeName={typeName} />
+      </Grid>
+    </PermissionWrapper>
   </Grid>
 );
 
@@ -25,6 +36,10 @@ StackCards.propTypes = {
   openStack: PropTypes.func.isRequired,
   deleteStack: PropTypes.func.isRequired,
   openCreationForm: PropTypes.func.isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  createPermission: PropTypes.string.isRequired,
+  openPermission: PropTypes.string.isRequired,
+  deletePermission: PropTypes.string.isRequired,
 };
 
 export default StackCards;

@@ -8,12 +8,6 @@ import auth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
 class RequireAuth extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.isUserLoggedIn = this.isUserLoggedIn.bind(this);
-    this.switchContent = this.switchContent.bind(this);
-  }
-
   componentWillMount() {
     const currentSession = auth.getCurrentSession();
     if (currentSession) {
@@ -31,7 +25,7 @@ class RequireAuth extends Component {
     const PublicComponent = this.props.PublicComponent;
 
     if (this.isUserLoggedIn()) {
-      return props => (<PrivateComponent {...props} />);
+      return props => (<PrivateComponent {...props} promisedUserPermissions={this.props.permissions} />);
     }
     return props => (<PublicComponent {...props} />);
   }
@@ -51,6 +45,11 @@ RequireAuth.propTypes = {
   PrivateComponent: PropTypes.func.isRequired,
   PublicComponent: PropTypes.func.isRequired,
   tokens: PropTypes.object.isRequired,
+  permissions: PropTypes.shape({
+    error: PropTypes.any,
+    fetching: PropTypes.bool.isRequired,
+    value: PropTypes.array.isRequired,
+  }).isRequired,
   path: PropTypes.string,
   exact: PropTypes.bool,
   strict: PropTypes.bool,
@@ -60,9 +59,10 @@ RequireAuth.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps({ authentication: { tokens } }) {
+function mapStateToProps({ authentication: { tokens, permissions } }) {
   return {
     tokens,
+    permissions,
   };
 }
 

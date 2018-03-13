@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewNotebookCard is a component which passes correct props to StackCards 1`] = `
+<withStyles(StackCard)
+  deletePermission="delete"
+  openPermission="open"
+  stack="expectedStack"
+  typeName="notebook"
+  userPermissions={
+    Array [
+      "open",
+      "delete",
+    ]
+  }
+/>
+`;

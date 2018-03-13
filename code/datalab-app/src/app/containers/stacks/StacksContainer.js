@@ -10,6 +10,9 @@ import modalDialogActions from '../../actions/modalDialogActions';
 import StackCards from '../../components/stacks/StackCards';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import notify from '../../components/common/notify';
+import { projectPermissions } from '../../../shared/permissionTypes';
+
+const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN } = projectPermissions;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -72,7 +75,11 @@ class StacksContainer extends Component {
           typeName={this.props.typeName}
           openStack={this.openStack}
           deleteStack={this.confirmDeleteStack}
-          openCreationForm={this.openCreationForm} />
+          openCreationForm={this.openCreationForm}
+          userPermissions={this.props.userPermissions}
+          createPermission={PROJECT_STACKS_CREATE}
+          openPermission={PROJECT_STACKS_OPEN}
+          deletePermission={PROJECT_STACKS_DELETE} />
       </PromisedContentWrapper>
     );
   }
@@ -97,6 +104,7 @@ StacksContainer.propTypes = {
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 function mapStateToProps({ stacks }) {

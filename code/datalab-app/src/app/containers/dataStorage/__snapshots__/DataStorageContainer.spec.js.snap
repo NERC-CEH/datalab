@@ -49,8 +49,11 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
   }
 >
   <StackCards
+    createPermission="project:storage:create"
+    deletePermission="project:storage:delete"
     deleteStack={[Function]}
     openCreationForm={[Function]}
+    openPermission="project:storage:open"
     openStack={[Function]}
     stacks={
       Array [
@@ -60,6 +63,11 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
       ]
     }
     typeName="Data Store"
+    userPermissions={
+      Array [
+        "expectedPermission",
+      ]
+    }
   />
 </PromisedContentWrapper>
 `;

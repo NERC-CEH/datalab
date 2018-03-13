@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataStoragePage renders correct snapshot 1`] = `
+exports[`NotebooksPage renders correct snapshot 1`] = `
 <withStyles(Segment)>
   <withStyles(Typography)
     gutterBottom={true}
     type="display1"
   >
-    Current Storage Volumes
+    Current Notebooks
   </withStyles(Typography)>
-  <Connect(DataStorageContainer)
+  <NotebooksContainer
     userPermissions={
       Array [
         "expectedPermission",

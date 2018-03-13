@@ -15,6 +15,9 @@ import modalDialogActions from '../../actions/modalDialogActions';
 import StackCards from '../../components/stacks/StackCards';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import notify from '../../components/common/notify';
+import { projectPermissions } from '../../../shared/permissionTypes';
+
+const { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN } = projectPermissions;
 
 const TYPE_NAME = 'Data Store';
 const FORM_NAME = 'createDataStore';
@@ -101,7 +104,11 @@ class DataStorageContainer extends Component {
           typeName={TYPE_NAME}
           openStack={this.openDataStore}
           deleteStack={this.chooseDialogue}
-          openCreationForm={this.openCreationForm} />
+          openCreationForm={this.openCreationForm}
+          userPermissions={this.props.userPermissions}
+          createPermission={PROJECT_STORAGE_CREATE}
+          openPermission={PROJECT_STORAGE_OPEN}
+          deletePermission={PROJECT_STORAGE_DELETE} />
       </PromisedContentWrapper>
     );
   }
@@ -122,6 +129,7 @@ DataStorageContainer.propTypes = {
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 function mapStateToProps({ dataStorage }) {
