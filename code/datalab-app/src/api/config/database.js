@@ -7,7 +7,7 @@ import config from '../config';
 
 const models = join(__dirname, '../models');
 
-/* This call registers the models the first tim the database module is imported.
+/* This call registers the models the first time the database module is imported.
  * The reason for this is to allow the repository modules to import the models when
  * they are initialised as this keeps that code cleaner.
  */
