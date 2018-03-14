@@ -1,5 +1,6 @@
 import logger from 'winston';
 import getStack from './stacks';
+import stackRepository from '../dataaccess/stacksRepository';
 
 function createStack(params) {
   const { datalabInfo, name, type } = params;
@@ -27,4 +28,8 @@ function deleteStack(params) {
   return stack.delete(params);
 }
 
-export default { createStack, deleteStack };
+function listVolumes(user) {
+  return stackRepository.getAll(user);
+}
+
+export default { createStack, deleteStack, listVolumes };

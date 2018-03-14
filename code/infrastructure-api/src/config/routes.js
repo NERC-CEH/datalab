@@ -7,6 +7,7 @@ import permissionWrapper from '../auth/permissionMiddleware';
 function configureRoutes(app) {
   app.get('/status', status.status);
   app.all('*', verifyToken); // Routes above this line are not auth checked
+  app.get('/stacks', permissionWrapper('stacks:list'), stack.listStacks);
   app.post('/stacks', permissionWrapper('stacks:create'), stack.createStackValidator, stack.createStack);
   app.delete('/stacks', permissionWrapper('stacks:delete'), stack.coreStackValidator, stack.deleteStack);
   app.get('/volumes', permissionWrapper('storage:list'), volume.listVolumes);

@@ -17,6 +17,12 @@ function deleteStack(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteStackExec);
 }
 
+function listStacks(request, response) {
+  return stackManager.listVolumes(request.user)
+    .then(volumes => response.send(volumes))
+    .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
+}
+
 function createStackExec(request, response) {
   // Build request params
   const params = matchedData(request);
@@ -71,4 +77,4 @@ const createStackValidator = [
   check('volumeMount').exists().withMessage('A Volume Mount must be specified'),
 ];
 
-export default { coreStackValidator, createStackValidator, createStack, deleteStack };
+export default { coreStackValidator, createStackValidator, createStack, deleteStack, listStacks };

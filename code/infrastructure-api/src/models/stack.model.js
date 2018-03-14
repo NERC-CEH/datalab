@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import filterByUser from './queryHelper/filterByUser';
 
 const Schema = mongoose.Schema;
 
@@ -24,4 +25,5 @@ const StackSchema = new Schema({
   volumeMount: String,
 });
 
+StackSchema.query.filterByUser = filterByUser;
 mongoose.model('Stack', StackSchema);
