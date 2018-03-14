@@ -4,6 +4,9 @@ import bodyParser from 'body-parser';
 import logger from 'winston';
 import config from './config/config';
 import routes from './config/routes';
+import database from './config/database';
+
+const port = config.get('apiPort');
 
 logger.level = config.get('logLevel');
 logger.remove(logger.transports.Console);
@@ -13,5 +16,10 @@ const app = express();
 app.use(bodyParser.json());
 routes.configureRoutes(app);
 
-const port = config.get('apiPort');
-app.listen(port, () => logger.info(chalk.green(`Management API listening on port ${port}`)));
+function listen() {
+  app.listen(port, () => logger.info(chalk.green(`Management API listening on port ${port}`)));
+}
+
+database.createConnection()
+  .then(listen)
+  .catch(error => logger.error(chalk.red(`Error connecting to the database ${error}`)));
