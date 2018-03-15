@@ -15,7 +15,7 @@ export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks.',
   type: new GraphQLList(StackType),
   resolve: (obj, args, { user, token }) =>
-    permissionChecker(STACKS_LIST, user, () => stackRepository.getAll({ user, token })),
+    permissionChecker(STACKS_LIST, user, () => stackRepository.getAllForUser({ user, token })),
 };
 
 export const stacksByCategory = {
@@ -50,6 +50,6 @@ export const checkStackName = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { name }, { user }) =>
-    permissionChecker(STACKS_CREATE, user, () => stackRepository.getAllByName(user, name)),
+  resolve: (obj, { name }, { user, token }) =>
+    permissionChecker(STACKS_CREATE, user, () => stackRepository.getAllByName({ user, token }, name)),
 };

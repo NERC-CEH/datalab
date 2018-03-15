@@ -4,9 +4,14 @@ function Stack() {
   return database.getModel('Stack');
 }
 
-function getAll(user) {
+function getAllForUser(user) {
   return Stack()
     .find().filterByUser(user).exec();
 }
 
-export default { getAll };
+function getAllByName(user, name) {
+  return Stack()
+    .findOne({ name }).exec();
+}
+
+export default { getAllForUser, getAllByName };

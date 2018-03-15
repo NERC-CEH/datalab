@@ -5,8 +5,13 @@ import config from '../config';
 
 const API_URL = `${config.get('infrastructureApi')}/stacks`;
 
-function getAll({ user, token }) {
+function getAllForUser({ user, token }) {
   return axios.get(API_URL, { headers: { authorization: token } })
+    .then(response => response.data);
+}
+
+function getAllByName({ user, token }, name) {
+  return axios.get(`${API_URL}/${name}`, { headers: { authorization: token } })
     .then(response => response.data);
 }
 
@@ -14,10 +19,6 @@ function getAll({ user, token }) {
 
 function Stack() {
   return database.getModel('Stack');
-}
-
-function getAllByName(user, name) {
-  return Stack().findOne({ name }).exec();
 }
 
 function getByCategory(user, category) {
@@ -60,4 +61,4 @@ const filterByUser = ({ sub }, findQuery) => ({
   users: { $elemMatch: { $eq: sub } },
 });
 
-export default { getAll, getAllByName, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };
+export default { getAllForUser, getAllByName, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };
