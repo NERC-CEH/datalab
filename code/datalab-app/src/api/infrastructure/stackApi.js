@@ -10,7 +10,7 @@ import stackRepository from '../dataaccess/stackRepository';
  * */
 
 const baseConfig = {
-  apiRoute: 'stacks',
+  apiRoute: 'stack',
   elementName: 'stack',
 };
 
