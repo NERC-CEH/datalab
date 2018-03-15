@@ -12,7 +12,6 @@ services:
     entrypoint: sh -c
     command:
       - cd /usr/src/app && yarn start
-    network_mode: host
     volumes:
       - $PWD/../../auth-service:/usr/src/app/:ro
 
@@ -28,7 +27,6 @@ services:
     entrypoint: sh -c
     command:
       - cd /usr/src/app && yarn start
-    network_mode: host
     volumes:
       - $PWD/../../infrastructure-api:/usr/src/app/:ro
 
@@ -45,6 +43,5 @@ services:
     entrypoint: sh -c
     command:
       - cd /usr/src/app && yarn start
-    network_mode: host
     volumes:
       - $PWD/../../datalab-app:/usr/src/app:ro
