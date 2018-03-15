@@ -1,13 +1,19 @@
+import axios from 'axios/index';
 import database from '../config/database';
 import { getCategoryForType } from '../../shared/stackTypes';
+import config from '../config';
+
+const API_URL = `${config.get('infrastructureApi')}/stacks`;
+
+function getAll({ user, token }) {
+  return axios.get(API_URL, { headers: { authorization: token } })
+    .then(response => response.data);
+}
+
+// DB access below
 
 function Stack() {
   return database.getModel('Stack');
-}
-
-function getAll(user) {
-  const query = filterByUser(user, {});
-  return Stack().find(query).exec();
 }
 
 function getAllByName(user, name) {

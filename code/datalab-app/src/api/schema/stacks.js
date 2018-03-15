@@ -14,7 +14,8 @@ const { STACKS_LIST, STACKS_OPEN, STACKS_CREATE } = elementPermissions;
 export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks.',
   type: new GraphQLList(StackType),
-  resolve: (obj, args, { user }) => permissionChecker('stacks:list', user, () => stackRepository.getAll(user)),
+  resolve: (obj, args, { user, token }) =>
+    permissionChecker(STACKS_LIST, user, () => stackRepository.getAll({ user, token })),
 };
 
 export const stacksByCategory = {
