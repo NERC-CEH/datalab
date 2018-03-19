@@ -1,9 +1,9 @@
 import logger from 'winston';
-import getStack from './stacks';
+import Stacks from './Stacks';
 
 function createStack(params) {
   const { datalabInfo, name, type } = params;
-  const stack = getStack(type);
+  const stack = Stacks.getStack(type);
 
   if (!stack) {
     logger.error(`Could not create stack. No stack definition for type ${type}`);
@@ -16,7 +16,7 @@ function createStack(params) {
 
 function deleteStack(params) {
   const { datalabInfo, name, type } = params;
-  const stack = getStack(type);
+  const stack = Stacks.getStack(type);
 
   if (!stack) {
     logger.error(`Could not delete stack. No stack definition for type ${type}`);

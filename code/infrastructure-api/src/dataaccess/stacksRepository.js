@@ -9,9 +9,19 @@ function getAllForUser(user) {
     .find().filterByUser(user).exec();
 }
 
-function getAllByName(user, name) {
+function getAllForUserByCategory(user, category) {
+  return Stack()
+    .find({ category }).filterByUser(user).exec();
+}
+
+function getOneForUserById(user, id) {
+  return Stack()
+    .findOne({ _id: id }).filterOneByUser(user).exec();
+}
+
+function getOneByName(user, name) {
   return Stack()
     .findOne({ name }).exec();
 }
 
-export default { getAllForUser, getAllByName };
+export default { getAllForUser, getAllForUserByCategory, getOneForUserById, getOneByName };

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import filterByUser from './queryHelper/filterByUser';
+import filterByUser, { filterOneByUser } from './queryHelper/filterByUser';
 
 const Schema = mongoose.Schema;
 
@@ -26,4 +26,5 @@ const StackSchema = new Schema({
 });
 
 StackSchema.query.filterByUser = filterByUser;
+StackSchema.query.filterOneByUser = filterOneByUser;
 mongoose.model('Stack', StackSchema);

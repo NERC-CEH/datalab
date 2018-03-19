@@ -4,15 +4,15 @@ import database from '../config/database';
 import { getCategoryForType } from '../../shared/stackTypes';
 import config from '../config';
 
-const API_URL = `${config.get('infrastructureApi')}/stacks`;
+const API_URL_BASE = config.get('infrastructureApi');
 
 function getAllForUser({ user, token }) {
-  return axios.get(API_URL, { headers: { authorization: token } })
+  return axios.get(`${API_URL_BASE}/stacks`, { headers: { authorization: token } })
     .then(response => response.data);
 }
 
 function getAllByName({ user, token }, name) {
-  return axios.get(`${API_URL}/${name}`, { headers: { authorization: token } })
+  return axios.get(`${API_URL_BASE}/stack/name/${name}`, { headers: { authorization: token } })
     .then(response => get(response, 'data.id') || null);
 }
 

@@ -1,8 +1,9 @@
 import { check } from 'express-validator/check';
-import { sanitize } from 'express-validator/filter';
+import { matchedData, sanitize } from 'express-validator/filter';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
-import handleId, { mapHandleId } from '../dataaccess/renameIdHandler';
+import { mapHandleId } from '../dataaccess/renameIdHandler';
+import { ANALYSIS, PUBLISH } from '../stacks/Stacks';
 
 const TYPE = 'stacks';
 
@@ -10,31 +11,33 @@ function listStacks(request, response) {
   const { user } = request;
   return stackRepository.getAllForUser(user)
     .then(mapHandleId)
-    .then(volumes => response.send(volumes))
+    .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
 }
 
-function checkName(request, response) {
-  const { user, params } = request;
-  return stackRepository.getAllByName(user, params.name)
-    .then(handleId)
-    .then(volume => response.send(volume))
-    .catch(controllerHelper.handleError(response, 'matching', TYPE, undefined));
+function listByCategory(request, response) {
+  const errorMessage = 'Invalid stacks fetch request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, listByCategoryExec);
+}
+
+function listByCategoryExec(request, response) {
+  const { user } = request;
+  const params = matchedData(request);
+  return stackRepository.getAllForUserByCategory(user, params.category)
+    .then(mapHandleId)
+    .then(stacks => response.send(stacks))
+    .catch(controllerHelper.handleError(response, 'retrieving by type', TYPE, undefined));
 }
 
 const coreStacksValidator = [
   sanitize('*').trim(),
 ];
 
-const checkNameValidator = [
+const withCategoryValidator = [
   ...coreStacksValidator,
-  check('name')
+  check('category', 'category must match known type')
     .exists()
-    .withMessage('Name must be specified')
-    .isAscii()
-    .withMessage('Name must only use the characters a-z')
-    .isLength({ min: 4, max: 12 })
-    .withMessage('Name must be 4-12 characters long'),
+    .isIn([ANALYSIS, PUBLISH]),
 ];
 
-export default { coreStacksValidator, checkNameValidator, listStacks, checkName };
+export default { coreStacksValidator, withCategoryValidator, listStacks, listByCategory };
