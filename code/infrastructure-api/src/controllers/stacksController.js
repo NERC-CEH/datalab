@@ -2,12 +2,14 @@ import { check } from 'express-validator/check';
 import { sanitize } from 'express-validator/filter';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
+import handleId, { mapHandleId } from '../dataaccess/renameIdHandler';
 
 const TYPE = 'stacks';
 
 function listStacks(request, response) {
   const { user } = request;
   return stackRepository.getAllForUser(user)
+    .then(mapHandleId)
     .then(volumes => response.send(volumes))
     .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
 }
@@ -15,6 +17,7 @@ function listStacks(request, response) {
 function checkName(request, response) {
   const { user, params } = request;
   return stackRepository.getAllByName(user, params.name)
+    .then(handleId)
     .then(volume => response.send(volume))
     .catch(controllerHelper.handleError(response, 'matching', TYPE, undefined));
 }

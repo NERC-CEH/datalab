@@ -12,7 +12,7 @@ function getAllForUser({ user, token }) {
 
 function getAllByName({ user, token }, name) {
   return axios.get(`${API_URL}/${name}`, { headers: { authorization: token } })
-    .then(response => response.data);
+    .then(response => response.data || null);
 }
 
 // DB access below
