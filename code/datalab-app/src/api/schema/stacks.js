@@ -44,7 +44,7 @@ export const stack = {
 
 export const checkStackName = {
   description: 'Details of a single currently provisioned DataLab Stack.',
-  type: StackType,
+  type: GraphQLID,
   args: {
     name: {
       type: new GraphQLNonNull(GraphQLString),

@@ -45,9 +45,7 @@ function getUrl(id) {
 function checkStackName(name) {
   const query = `
     CheckStackName($name: String!) {
-      checkStackName(name: $name) { 
-        id 
-      }
+      checkStackName(name: $name)
     }`;
 
   return gqlQuery(query, { name })

@@ -1,4 +1,5 @@
 import axios from 'axios/index';
+import { get } from 'lodash';
 import database from '../config/database';
 import { getCategoryForType } from '../../shared/stackTypes';
 import config from '../config';
@@ -12,7 +13,7 @@ function getAllForUser({ user, token }) {
 
 function getAllByName({ user, token }, name) {
   return axios.get(`${API_URL}/${name}`, { headers: { authorization: token } })
-    .then(response => response.data || null);
+    .then(response => get(response, 'data.id') || null);
 }
 
 // DB access below
