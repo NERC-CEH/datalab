@@ -52,18 +52,6 @@ function checkStackName(name) {
     .then(errorHandler('data.checkStackName'));
 }
 
-function checkStackMounts(volumeMount) {
-  const query = `
-    CheckStackMounts($volumeMount:  String!) {
-      checkStackMounts(volumeMount: $volumeMount) {
-        displayName, name, type
-      }
-    }`;
-
-  return gqlQuery(query, { volumeMount })
-    .then(errorHandler('data.checkStackMounts'));
-}
-
 function createStack(stack) {
   const mutation = `
     CreateStack($stack: StackCreationRequest) {
@@ -93,7 +81,6 @@ export default {
   loadStacksByCategory,
   getUrl,
   checkStackName,
-  checkStackMounts,
   createStack,
   deleteStack,
 };

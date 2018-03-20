@@ -14,14 +14,21 @@ function getAllForUserByCategory(user, category) {
     .find({ category }).filterByUser(user).exec();
 }
 
+function getAllByVolumeMount(user, mount) {
+  // Searches All Users
+  return Stack()
+    .find({ volumeMount: mount }).exec();
+}
+
 function getOneForUserById(user, id) {
   return Stack()
     .findOne({ _id: id }).filterOneByUser(user).exec();
 }
 
 function getOneByName(user, name) {
+  // Searches All Users
   return Stack()
     .findOne({ name }).exec();
 }
 
-export default { getAllForUser, getAllForUserByCategory, getOneForUserById, getOneByName };
+export default { getAllForUser, getAllForUserByCategory, getOneForUserById, getOneByName, getAllByVolumeMount };

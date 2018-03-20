@@ -6,39 +6,35 @@ import config from '../config';
 
 const API_URL_BASE = config.get('infrastructureApi');
 
-function getAllForUser({ user, token }) {
+function getAll({ user, token }) {
   return axios.get(`${API_URL_BASE}/stacks`, { headers: { authorization: token } })
     .then(response => response.data);
 }
 
-function getAllByName({ user, token }, name) {
+function getAllByCategory({ user, token }, category) {
+  return axios.get(`${API_URL_BASE}/stacks/category/${category}`, { headers: { authorization: token } })
+    .then(response => response.data);
+}
+
+function getAllByVolumeMount({ user, token }, volumeMount) {
+  return axios.get(`${API_URL_BASE}/stacks/mount/${volumeMount}`, { headers: { authorization: token } })
+    .then(response => response.data);
+}
+
+function getByName({ user, token }, name) {
   return axios.get(`${API_URL_BASE}/stack/name/${name}`, { headers: { authorization: token } })
     .then(response => get(response, 'data.id') || null);
+}
+
+function getById({ user, token }, id) {
+  return axios.get(`${API_URL_BASE}/stack/id/${id}`, { headers: { authorization: token } })
+    .then(response => response.data);
 }
 
 // DB access below
 
 function Stack() {
   return database.getModel('Stack');
-}
-
-function getByCategory(user, category) {
-  const query = filterByUser(user, { category });
-  return Stack().find(query).exec();
-}
-
-function getById(user, id) {
-  const query = filterByUser(user, { _id: id });
-  return Stack().findOne(query).exec();
-}
-
-function getByName(user, name) {
-  const query = filterByUser(user, { name });
-  return Stack().findOne(query).exec();
-}
-
-function getByVolumeMount(user, volumeMount) {
-  return Stack().find({ volumeMount }).exec();
 }
 
 function createOrUpdate(user, requestStack) {
@@ -62,4 +58,4 @@ const filterByUser = ({ sub }, findQuery) => ({
   users: { $elemMatch: { $eq: sub } },
 });
 
-export default { getAllForUser, getAllByName, getByCategory, getById, getByName, getByVolumeMount, createOrUpdate, deleteByName };
+export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createOrUpdate, deleteByName };

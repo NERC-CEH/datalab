@@ -56,7 +56,7 @@ export const DataStoreType = new GraphQLObjectType({
     },
     stacksMountingStore: {
       type: new GraphQLList(StackType),
-      resolve: ({ name }, args, { user }) => stackRepository.getByVolumeMount(user, name),
+      resolve: ({ name }, args, { user, token }) => stackRepository.getAllByVolumeMount({ user, token }, name),
     },
   },
 });

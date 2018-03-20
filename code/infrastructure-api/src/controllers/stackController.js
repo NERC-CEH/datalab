@@ -20,12 +20,12 @@ function deleteStack(request, response) {
 }
 
 function getOneById(request, response) {
-  const errorMessage = 'Invalid stack fetch request';
+  const errorMessage = 'Invalid stack fetch by ID request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByIdExec);
 }
 
 function getOneByName(request, response) {
-  const errorMessage = 'Invalid stack fetch request';
+  const errorMessage = 'Invalid stack fetch by Name request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByNameExec);
 }
 
@@ -131,4 +131,8 @@ const createStackValidator = [
   check('volumeMount').exists().withMessage('A Volume Mount must be specified'),
 ];
 
-export default { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator, getOneById, getOneByName, createStack, deleteStack };
+const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };
+
+const controllers = { getOneById, getOneByName, createStack, deleteStack };
+
+export default { ...validators, ...controllers };

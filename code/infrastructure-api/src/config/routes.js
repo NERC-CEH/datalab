@@ -10,9 +10,10 @@ function configureRoutes(app) {
   app.all('*', verifyToken); // Routes above this line are not auth checked
   app.get('/stacks', permissionWrapper('stacks:list'), stacks.coreStacksValidator, stacks.listStacks);
   app.get('/stacks/category/:category', permissionWrapper('stacks:list'), stacks.withCategoryValidator, stacks.listByCategory);
+  app.get('/stacks/mount/:mount', permissionWrapper('storage:delete'), stacks.withMountValidator, stacks.listByMount);
+  app.delete('/stack', permissionWrapper('stacks:delete'), stack.deleteStackValidator, stack.deleteStack);
   app.get('/stack/id/:id', permissionWrapper('stacks:open'), stack.withIdValidator, stack.getOneById);
   app.get('/stack/name/:name', permissionWrapper('stacks:create'), stack.withNameValidator, stack.getOneByName);
-  app.delete('/stack', permissionWrapper('stacks:delete'), stack.deleteStackValidator, stack.deleteStack);
   app.post('/stack', permissionWrapper('stacks:create'), stack.createStackValidator, stack.createStack);
   app.post('/volume', permissionWrapper('storage:create'), volume.createVolumeValidator, volume.createVolume);
   app.delete('/volume', permissionWrapper('storage:delete'), volume.coreVolumeValidator, volume.deleteVolume);
