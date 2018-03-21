@@ -1,7 +1,5 @@
 import axios from 'axios/index';
 import { get } from 'lodash';
-import database from '../config/database';
-import { getCategoryForType } from '../../shared/stackTypes';
 import config from '../config';
 
 const API_URL_BASE = config.get('infrastructureApi');
@@ -31,31 +29,14 @@ function getById({ user, token }, id) {
     .then(response => response.data);
 }
 
-// DB access below
-
-function Stack() {
-  return database.getModel('Stack');
+function createStack({ user, token }, stack) {
+  return axios.post(`${API_URL_BASE}/stack`, stack, { headers: { authorization: token } })
+    .then(response => response.data);
 }
 
-function createOrUpdate(user, requestStack) {
-  const query = filterByUser(user, { name: requestStack.name });
-  const stack = addOwner(user, { ...requestStack, category: getCategoryForType(requestStack.type) });
-  return Stack().findOneAndUpdate(query, stack, { upsert: true, setDefaultsOnInsert: true });
+function deleteStack({ user, token }, stack) {
+  return axios.delete(`${API_URL_BASE}/stack`, { data: stack, headers: { authorization: token } })
+    .then(response => response.data);
 }
 
-function deleteByName(user, name) {
-  const query = filterByUser(user, { name });
-  return Stack().remove(query).exec();
-}
-
-const addOwner = ({ sub }, stack) => ({
-  ...stack,
-  users: [sub],
-});
-
-const filterByUser = ({ sub }, findQuery) => ({
-  ...findQuery,
-  users: { $elemMatch: { $eq: sub } },
-});
-
-export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createOrUpdate, deleteByName };
+export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack };
