@@ -9,7 +9,7 @@ const TYPE = 'stacks';
 
 function listStacks(request, response) {
   const { user } = request;
-  return stackRepository.getAllForUser(user)
+  return stackRepository.getAll(user)
     .then(mapHandleId)
     .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
@@ -28,7 +28,7 @@ function listByMount(request, response) {
 function listByCategoryExec(request, response) {
   const { user } = request;
   const params = matchedData(request);
-  return stackRepository.getAllForUserByCategory(user, params.category)
+  return stackRepository.getAllByCategory(user, params.category)
     .then(mapHandleId)
     .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving by type', TYPE, undefined));

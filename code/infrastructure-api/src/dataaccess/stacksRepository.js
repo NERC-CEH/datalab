@@ -4,12 +4,12 @@ function Stack() {
   return database.getModel('Stack');
 }
 
-function getAllForUser(user) {
+function getAll(user) {
   return Stack()
     .find().filterByUser(user).exec();
 }
 
-function getAllForUserByCategory(user, category) {
+function getAllByCategory(user, category) {
   return Stack()
     .find({ category }).filterByUser(user).exec();
 }
@@ -20,7 +20,7 @@ function getAllByVolumeMount(user, mount) {
     .find({ volumeMount: mount }).exec();
 }
 
-function getOneForUserById(user, id) {
+function getOneById(user, id) {
   return Stack()
     .findOne({ _id: id }).filterOneByUser(user).exec();
 }
@@ -31,4 +31,4 @@ function getOneByName(user, name) {
     .findOne({ name }).exec();
 }
 
-export default { getAllForUser, getAllForUserByCategory, getOneForUserById, getOneByName, getAllByVolumeMount };
+export default { getAll, getAllByCategory, getOneById, getOneByName, getAllByVolumeMount };

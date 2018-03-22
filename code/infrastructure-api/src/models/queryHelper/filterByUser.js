@@ -1,11 +1,11 @@
-function filterByUser(user) {
+function filterFind(user) {
   const { sub } = user;
   return this.find({ users: { $elemMatch: { $eq: sub } } });
 }
 
-export function filterOneByUser(user) {
+function filterFindOne(user) {
   const { sub } = user;
   return this.findOne({ users: { $elemMatch: { $eq: sub } } });
 }
 
-export default filterByUser;
+export default { filterFind, filterFindOne };

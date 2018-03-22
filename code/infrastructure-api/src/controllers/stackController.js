@@ -35,7 +35,7 @@ function getOneByIdExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackRepository.getOneForUserById(user, params.id)
+  return stackRepository.getOneById(user, params.id)
     .then(handleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching ID', TYPE, undefined));
