@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import { filter, find } from 'lodash';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
@@ -43,7 +43,7 @@ export const STACKS = Object.freeze({
 
 const getStack = name => find(STACKS, ['name', name]);
 
-const getNamesByCategory = category => find(STACKS, ['category', category])
+const getNamesByCategory = category => filter(STACKS, ['category', category])
   .map(stacks => stacks.name);
 
 export default { getStack, getNamesByCategory };

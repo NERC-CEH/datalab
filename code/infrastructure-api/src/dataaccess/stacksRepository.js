@@ -31,4 +31,23 @@ function getOneByName(user, name) {
     .findOne({ name }).exec();
 }
 
-export default { getAll, getAllByCategory, getOneById, getOneByName, getAllByVolumeMount };
+function createOrUpdate(user, stack) {
+  return Stack()
+    .find()
+    .filterByUser(user)
+    .findOneAndUpdate(
+      { name: stack.name },
+      { ...stack, users: [user.sub] },
+      { upsert: true, setDefaultsOnInsert: true })
+    .exec();
+}
+
+function deleteStack(user, stack) {
+  return Stack()
+    .find()
+    .filterByUser(user)
+    .remove({ name: stack.name })
+    .exec();
+}
+
+export default { getAll, getAllByCategory, getOneById, getOneByName, getAllByVolumeMount, createOrUpdate, deleteStack };

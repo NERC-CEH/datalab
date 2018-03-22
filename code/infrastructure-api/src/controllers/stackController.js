@@ -5,7 +5,7 @@ import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
 import handleId from '../dataaccess/renameIdHandler';
-import { STACKS } from '../stacks/Stacks';
+import Stacks, { PUBLISH } from '../stacks/Stacks';
 
 const TYPE = 'stack';
 
@@ -55,41 +55,41 @@ function getOneByNameExec(request, response) {
 
 function createStackExec(request, response) {
   // Build request params
+  const { user } = request;
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(params)
+  return stackManager.createStack(user, params)
     .then(controllerHelper.sendSuccessfulCreation(response))
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
 
 function deleteStackExec(request, response) {
   // Build request params
+  const { user } = request;
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.deleteStack(params)
+  return stackManager.deleteStack(user, params)
     .then(controllerHelper.sendSuccessfulDeletion(response))
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
+const checkExistsWithMsg = fieldName =>
+  check(fieldName).exists().withMessage(`${fieldName} must be specified`);
+
 const coreStackValidator = [
   sanitize('*').trim(),
-
 ];
 
 const withIdValidator = [
   ...coreStackValidator,
-  check('id')
-    .exists()
-    .withMessage('ID must be specified'),
+  checkExistsWithMsg('id'),
 ];
 
 const withNameValidator = [
   ...coreStackValidator,
-  check('name')
-    .exists()
-    .withMessage('Name must be specified')
+  checkExistsWithMsg('name')
     .isAscii()
     .withMessage('Name must only use the characters a-z')
     .isLength({ min: 4, max: 12 })
@@ -98,37 +98,30 @@ const withNameValidator = [
 
 const deleteStackValidator = [
   ...withNameValidator,
-  check('datalabInfo.name')
-    .exists()
-    .withMessage('datalabInfo.name must be specified'),
-  check('datalabInfo.domain')
-    .exists()
-    .withMessage('datalabInfo.domain must be specified'),
-  check('datalabInfo.volume')
-    .exists()
-    .withMessage('datalabInfo.volume must be specified'), // no longer needed?
-  check('type')
-    .exists()
-    .withMessage('Type must be specified'),
+  checkExistsWithMsg('datalabInfo.domain'),
+  checkExistsWithMsg('datalabInfo.name'),
+  checkExistsWithMsg('type'),
 ];
 
 const createStackValidator = [
   ...deleteStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
     .custom((value, { req }) => {
-      if (indexOf([STACKS.RSHINY.name, STACKS.NBVIEWER.name], req.body.type) > -1) {
+      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
         return value;
       }
       return true;
     }),
   check('isPublic', 'isPublic boolean must be specified for publication request')
     .custom((value, { req }) => {
-      if (indexOf([STACKS.RSHINY.name, STACKS.NBVIEWER.name], req.body.type) > -1) {
+      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
         return isBoolean(value);
       }
       return true;
     }),
-  check('volumeMount').exists().withMessage('A Volume Mount must be specified'),
+  checkExistsWithMsg('description'),
+  checkExistsWithMsg('displayName'),
+  checkExistsWithMsg('volumeMount'),
 ];
 
 const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };

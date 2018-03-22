@@ -1,4 +1,4 @@
-import { keyBy, find, capitalize } from 'lodash';
+import { keyBy, capitalize } from 'lodash';
 
 export const JUPYTER = 'jupyter';
 export const ZEPPELIN = 'zeppelin';
@@ -58,8 +58,4 @@ function getStackKeys() {
   return STACK_TYPES.map(type => type.name);
 }
 
-function getCategoryForType(name) {
-  return find(STACK_TYPES, stack => stack.name === name).category;
-}
-
-export { getStackTypes, getStackSelections, getStackKeys, getCategoryForType };
+export { getStackTypes, getStackSelections, getStackKeys };
