@@ -26,7 +26,7 @@ function getModel(modelName) {
 function createConnection() {
   mongoose.Promise = bluebird;
   const options = { promiseLibrary: bluebird, keepAlive: true };
-  return mongoose.connect(`mongodb://${config.get('databaseHost')}/datalab`, options);
+  return mongoose.connect(`mongodb://${config.get('databaseHost')}/infrastructure`, options);
 }
 
 function registerModel(modelName) {

@@ -13,7 +13,7 @@ function createStack(user, params) {
 
   logger.info(`Creating new ${type} stack with name: ${name} for datalab: ${datalabInfo.name}`);
   return stack.create(params)
-    .then(response => stackRepository.createOrUpdate(user, { ...params, category: stack.category })
+    .then(response => stackRepository.createOrUpdate(user, { ...params, category: stack.category, status: 'REQUESTED' })
       .then(() => response));
 }
 
