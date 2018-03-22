@@ -9,7 +9,7 @@ import {
 } from 'graphql';
 import { StackType } from '../types/stackTypes';
 import minioTokenService from '../dataaccess/minioTokenService';
-import stackRepository from '../dataaccess/stackRepository';
+import stackService from '../dataaccess/stackService';
 
 export const StorageType = new GraphQLEnumType({
   name: 'StorageType',
@@ -56,7 +56,7 @@ export const DataStoreType = new GraphQLObjectType({
     },
     stacksMountingStore: {
       type: new GraphQLList(StackType),
-      resolve: ({ name }, args, { user, token }) => stackRepository.getAllByVolumeMount({ user, token }, name),
+      resolve: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount({ user, token }, name),
     },
   },
 });

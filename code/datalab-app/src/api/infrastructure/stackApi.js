@@ -1,6 +1,6 @@
 import logger from 'winston';
 import datalabRepository from '../dataaccess/datalabRepository';
-import stackRepository from '../dataaccess/stackRepository';
+import stackService from '../dataaccess/stackService';
 import axiosErrorHandler from '../util/errorHandlers';
 
 const createStack = (context, datalabName, stack) =>
@@ -17,7 +17,7 @@ const createStackPayloadGenerator = stack => datalabInfo => ({
 });
 
 const sendCreationRequest = context => stackPayload =>
-  stackRepository.createStack(context, stackPayload)
+  stackService.createStack(context, stackPayload)
     .then(response => response);
 
 const deleteStack = (context, datalabName, stack) =>
@@ -33,7 +33,7 @@ const deleteStackPayloadGenerator = stack => datalabInfo => ({
 });
 
 const sendDeletionRequest = context => stackPayload =>
-  stackRepository.deleteStack(context, stackPayload)
+  stackService.deleteStack(context, stackPayload)
     .then(response => response);
 
 const logPayload = protocolName => (payload) => {

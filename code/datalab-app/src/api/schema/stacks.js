@@ -5,7 +5,7 @@ import {
   GraphQLString,
 } from 'graphql';
 import { StackType } from '../types/stackTypes';
-import stackRepository from '../dataaccess/stackRepository';
+import stackService from '../dataaccess/stackService';
 import permissionChecker from '../auth/permissionChecker';
 import { elementPermissions } from '../../shared/permissionTypes';
 
@@ -15,7 +15,7 @@ export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks owned by user.',
   type: new GraphQLList(StackType),
   resolve: (obj, args, { user, token }) =>
-    permissionChecker(STACKS_LIST, user, () => stackRepository.getAll({ user, token })),
+    permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
 };
 
 export const stacksByCategory = {
@@ -27,7 +27,7 @@ export const stacksByCategory = {
     },
   },
   resolve: (obj, { category }, { user, token }) =>
-    permissionChecker(STACKS_LIST, user, () => stackRepository.getAllByCategory({ user, token }, category)),
+    permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
 };
 
 export const stack = {
@@ -39,7 +39,7 @@ export const stack = {
     },
   },
   resolve: (obj, { id }, { user, token }) =>
-    permissionChecker(STACKS_OPEN, user, () => stackRepository.getById({ user, token }, id)),
+    permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
 };
 
 export const checkStackName = {
@@ -51,5 +51,5 @@ export const checkStackName = {
     },
   },
   resolve: (obj, { name }, { user, token }) =>
-    permissionChecker(STACKS_CREATE, user, () => stackRepository.getByName({ user, token }, name)),
+    permissionChecker(STACKS_CREATE, user, () => stackService.getByName({ user, token }, name)),
 };

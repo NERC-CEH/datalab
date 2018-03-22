@@ -1,36 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Stack API configuration should give correct API payload for creation 1`] = `
-Object {
-  "datalabInfo": Object {
-    "domain": "test-datalabs.nerc.ac.uk",
-    "name": "testlab",
+exports[`Stack API should log error detail on failed creation request 1`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "Requesting stack creation request for expectedName",
+    "metadata": undefined,
   },
-  "isPublic": true,
-  "name": "notebookName",
-  "sourcePath": "expectedSourcePath",
-  "type": "jupyter",
-  "volumeMount": undefined,
-}
+]
 `;
 
-exports[`Stack API configuration should give correct API payload for deletion 1`] = `
-Object {
-  "datalabInfo": Object {
-    "domain": "test-datalabs.nerc.ac.uk",
-    "name": "testlab",
+exports[`Stack API should log error detail on failed creation request 2`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"isPublic\\":true}",
+    "metadata": undefined,
   },
-  "name": "dataStoreName",
-  "type": "jupyter",
-}
+]
 `;
 
-exports[`Stack API configuration should give correct API request for creation 1`] = `
-Object {
-  "internalEndpoint": "http://jupyter-notebookName",
-  "name": "notebookName",
-  "type": "jupyter",
-  "url": "https://testlab-notebookName.test-datalabs.nerc.ac.uk",
-  "volumeMount": "dataStore",
-}
+exports[`Stack API should log error detail on failed creation request 3`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "failedRequest",
+    "metadata": undefined,
+  },
+]
 `;
+
+exports[`Stack API should log error detail on failed deletion request 1`] = `Array []`;
+
+exports[`Stack API should log error detail on failed deletion request 2`] = `Array []`;
+
+exports[`Stack API should log error detail on failed deletion request 3`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "failedRequest",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Stack API should log stack detail on successful creation request 1`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "Requesting stack creation request for expectedName",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Stack API should log stack detail on successful creation request 2`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"isPublic\\":true}",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Stack API should log stack detail on successful creation request 3`] = `Array []`;
+
+exports[`Stack API should log stack detail on successful deletion request 1`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "Requesting stack deletion request for expectedName",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Stack API should log stack detail on successful deletion request 2`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "deletion request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\"}",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Stack API should log stack detail on successful deletion request 3`] = `Array []`;
