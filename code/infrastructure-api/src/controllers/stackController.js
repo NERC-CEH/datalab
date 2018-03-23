@@ -38,7 +38,7 @@ function getOneByIdExec(request, response) {
   return stackRepository.getOneById(user, params.id)
     .then(handleId)
     .then(stack => response.send(stack))
-    .catch(controllerHelper.handleError(response, 'matching ID', TYPE, undefined));
+    .catch(controllerHelper.handleError(response, 'matching ID for', TYPE, undefined));
 }
 
 function getOneByNameExec(request, response) {
@@ -50,7 +50,7 @@ function getOneByNameExec(request, response) {
   return stackRepository.getOneByName(user, params.name)
     .then(handleId)
     .then(stack => response.send(stack))
-    .catch(controllerHelper.handleError(response, 'matching Name', TYPE, undefined));
+    .catch(controllerHelper.handleError(response, 'matching Name for', TYPE, undefined));
 }
 
 function createStackExec(request, response) {

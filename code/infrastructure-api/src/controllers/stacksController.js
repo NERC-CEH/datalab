@@ -31,7 +31,7 @@ function listByCategoryExec(request, response) {
   return stackRepository.getAllByCategory(user, params.category)
     .then(mapHandleId)
     .then(stacks => response.send(stacks))
-    .catch(controllerHelper.handleError(response, 'retrieving by type', TYPE, undefined));
+    .catch(controllerHelper.handleError(response, 'retrieving by type for', TYPE, undefined));
 }
 
 function listByMountExec(request, response) {
@@ -43,7 +43,7 @@ function listByMountExec(request, response) {
   return stackRepository.getAllByVolumeMount(user, params.mount)
     .then(mapHandleId)
     .then(stack => response.send(stack))
-    .catch(controllerHelper.handleError(response, 'matching Mount', TYPE, undefined));
+    .catch(controllerHelper.handleError(response, 'matching mount for', TYPE, undefined));
 }
 
 const coreStacksValidator = [
@@ -59,13 +59,8 @@ const withCategoryValidator = [
 
 const withMountValidator = [
   ...coreStacksValidator,
-  check('mount')
-    .exists()
-    .withMessage('Volume Mount must be specified')
-    .isAscii()
-    .withMessage('Volume Mount must only use the characters a-z')
-    .isLength({ min: 4, max: 12 })
-    .withMessage('Volume Mount must be 4-12 characters long'),
+  check('mount', 'mount must be specified')
+    .exists(),
 ];
 
 export default { coreStacksValidator, withCategoryValidator, withMountValidator, listStacks, listByCategory, listByMount };
