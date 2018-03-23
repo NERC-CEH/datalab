@@ -118,7 +118,7 @@ describe('Stack Controller', () => {
     it('should validate the volumeMount field exists', () => {
       const requestBody = omit(mutationRequestBody(), 'volumeMount');
       return createValidatedRequest(requestBody, stackController.createStackValidator)
-      .then(() => expectValidationError('volumeMount', 'volumeMount must be specified'));
+        .then(() => expectValidationError('volumeMount', 'volumeMount must be specified'));
     });
 
     it('should validate the additional fields for rshiny', () => {

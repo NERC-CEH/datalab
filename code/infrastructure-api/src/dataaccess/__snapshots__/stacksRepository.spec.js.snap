@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stacksRepository createOrUpdate should query for stacks with same name 1`] = `
+Object {
+  "name": "Notebook",
+  "type": "jupyter",
+  "users": Array [
+    "username",
+  ],
+}
+`;
+
+exports[`stacksRepository getAll returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
+exports[`stacksRepository getAllByCategory returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
+exports[`stacksRepository getAllByVolumeMount returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
+exports[`stacksRepository getById returns expected snapshot 1`] = `
+Object {
+  "name": "Stack 1",
+}
+`;
+
+exports[`stacksRepository getOneByName returns expected snapshot 1`] = `
+Object {
+  "name": "Stack 1",
+}
+`;
