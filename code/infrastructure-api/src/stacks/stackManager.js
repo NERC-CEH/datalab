@@ -1,6 +1,7 @@
 import logger from 'winston';
 import Stacks from './Stacks';
 import stackRepository from '../dataaccess/stacksRepository';
+import { REQUESTED } from '../models/stack.model';
 
 function createStack(user, params) {
   const { datalabInfo, name, type } = params;
@@ -13,7 +14,15 @@ function createStack(user, params) {
 
   logger.info(`Creating new ${type} stack with name: ${name} for datalab: ${datalabInfo.name}`);
   return stack.create(params)
-    .then(response => stackRepository.createOrUpdate(user, { ...params, category: stack.category, status: 'REQUESTED' })
+    .then(response => stackRepository.createOrUpdate(
+      user,
+      {
+        ...params,
+        category: stack.category,
+        status: REQUESTED,
+        url: `https://${datalabInfo.name}-${stack.name}.${datalabInfo.domain}`,
+        internalEndpoint: `http://${params.type}-${stack.name}`,
+      })
       .then(() => response));
 }
 
