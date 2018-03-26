@@ -1,7 +1,6 @@
 [
   {
     "name" : "testlab",
-    "domain" : "datalabs.local",
-    "volume" : "testlab"
+    "domain" : "datalabs.local"
   }
 ]

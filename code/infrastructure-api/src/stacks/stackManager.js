@@ -1,9 +1,10 @@
 import logger from 'winston';
-import getStack from './stacks';
+import Stacks from './Stacks';
+import stackRepository from '../dataaccess/stacksRepository';
 
-function createStack(params) {
+function createStack(user, params) {
   const { datalabInfo, name, type } = params;
-  const stack = getStack(type);
+  const stack = Stacks.getStack(type);
 
   if (!stack) {
     logger.error(`Could not create stack. No stack definition for type ${type}`);
@@ -11,12 +12,14 @@ function createStack(params) {
   }
 
   logger.info(`Creating new ${type} stack with name: ${name} for datalab: ${datalabInfo.name}`);
-  return stack.create(params);
+  return stack.create(params)
+    .then(response => stackRepository.createOrUpdate(user, { ...params, category: stack.category, status: 'REQUESTED' })
+      .then(() => response));
 }
 
-function deleteStack(params) {
+function deleteStack(user, params) {
   const { datalabInfo, name, type } = params;
-  const stack = getStack(type);
+  const stack = Stacks.getStack(type);
 
   if (!stack) {
     logger.error(`Could not delete stack. No stack definition for type ${type}`);
@@ -24,7 +27,9 @@ function deleteStack(params) {
   }
 
   logger.info(`Deleting stack ${name} for datalab: ${datalabInfo.name}`);
-  return stack.delete(params);
+  return stack.delete(params)
+    .then(response => stackRepository.deleteStack(user, params)
+      .then(() => response));
 }
 
 export default { createStack, deleteStack };

@@ -45,25 +45,11 @@ function getUrl(id) {
 function checkStackName(name) {
   const query = `
     CheckStackName($name: String!) {
-      checkStackName(name: $name) { 
-        id 
-      }
+      checkStackName(name: $name)
     }`;
 
   return gqlQuery(query, { name })
     .then(errorHandler('data.checkStackName'));
-}
-
-function checkStackMounts(volumeMount) {
-  const query = `
-    CheckStackMounts($volumeMount:  String!) {
-      checkStackMounts(volumeMount: $volumeMount) {
-        displayName, name, type
-      }
-    }`;
-
-  return gqlQuery(query, { volumeMount })
-    .then(errorHandler('data.checkStackMounts'));
 }
 
 function createStack(stack) {
@@ -95,7 +81,6 @@ export default {
   loadStacksByCategory,
   getUrl,
   checkStackName,
-  checkStackMounts,
   createStack,
   deleteStack,
 };

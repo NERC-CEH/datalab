@@ -11,7 +11,7 @@ import { DELETED } from '../models/dataStorage.model';
  * */
 
 const baseConfig = {
-  apiRoute: 'volumes',
+  apiRoute: 'volume',
   elementName: 'data store',
 };
 

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import datalabRepository from '../dataaccess/datalabRepository';
-import stackRepository from '../dataaccess/stackRepository';
+import stackService from '../dataaccess/stackService';
 import config from '../config';
 import * as infApiGen from './infrastructureApiGenerators';
 
 jest.mock('../dataaccess/datalabRepository');
-jest.mock('../dataaccess/stackRepository');
+jest.mock('../dataaccess/stackService');
 
 const authContext = {
   user: 'expectedUser',
@@ -25,7 +25,7 @@ datalabRepository.getByName = mockGetDatalabByName;
 mockGetDatalabByName.mockReturnValue(Promise.resolve(datalabInfo));
 
 const mockCreateOrUpdate = jest.fn();
-stackRepository.createOrUpdate = mockCreateOrUpdate;
+stackService.createOrUpdate = mockCreateOrUpdate;
 mockCreateOrUpdate.mockReturnValue(Promise.resolve({}));
 
 const mockDeleteRecord = jest.fn();

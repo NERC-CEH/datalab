@@ -61,6 +61,12 @@ const config = convict({
     default: false,
     env: 'AUTHORISATION_SERVICE_STUB',
   },
+  databaseHost: {
+    doc: 'The database hostname',
+    format: 'String',
+    default: 'localhost',
+    env: 'DATABASE_HOST',
+  },
 });
 
 export default config;

@@ -5,50 +5,51 @@ import {
   GraphQLString,
 } from 'graphql';
 import { StackType } from '../types/stackTypes';
-import stackRepository from '../dataaccess/stackRepository';
+import stackService from '../dataaccess/stackService';
 import permissionChecker from '../auth/permissionChecker';
 import { elementPermissions } from '../../shared/permissionTypes';
 
 const { STACKS_LIST, STACKS_OPEN, STACKS_CREATE } = elementPermissions;
 
 export const stacks = {
-  description: 'List of currently provisioned DataLabs Stacks.',
+  description: 'List of currently provisioned DataLabs Stacks owned by user.',
   type: new GraphQLList(StackType),
-  resolve: (obj, args, { user }) => permissionChecker('stacks:list', user, () => stackRepository.getAll(user)),
+  resolve: (obj, args, { user, token }) =>
+    permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
 };
 
 export const stacksByCategory = {
-  description: 'List of currently provisioned DataLabs Stacks for the requested category.',
+  description: 'List of currently provisioned DataLabs Stacks owned by user for the requested category.',
   type: new GraphQLList(StackType),
   args: {
     category: {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { category }, { user }) =>
-    permissionChecker(STACKS_LIST, user, () => stackRepository.getByCategory(user, category)),
+  resolve: (obj, { category }, { user, token }) =>
+    permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
 };
 
 export const stack = {
-  description: 'Details of a single currently provisioned DataLab Stack.',
+  description: 'Details of a single currently provisioned DataLab Stack owned by user.',
   type: StackType,
   args: {
     id: {
       type: new GraphQLNonNull(GraphQLID),
     },
   },
-  resolve: (obj, { id }, { user }) =>
-    permissionChecker(STACKS_OPEN, user, () => stackRepository.getById(user, id)),
+  resolve: (obj, { id }, { user, token }) =>
+    permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
 };
 
 export const checkStackName = {
-  description: 'Details of a single currently provisioned DataLab Stack.',
-  type: StackType,
+  description: 'Returns ID value for stack with matching name.',
+  type: GraphQLID,
   args: {
     name: {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { name }, { user }) =>
-    permissionChecker(STACKS_CREATE, user, () => stackRepository.getAllByName(user, name)),
+  resolve: (obj, { name }, { user, token }) =>
+    permissionChecker(STACKS_CREATE, user, () => stackService.getByName({ user, token }, name)),
 };

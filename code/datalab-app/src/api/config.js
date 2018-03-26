@@ -21,13 +21,13 @@ const config = convict({
   },
   corsOrigin: {
     doc: 'The allowed origin for CORS',
-    format: String,
+    format: 'String',
     default: 'datalabs.nerc.ac.uk',
     env: 'CORS_ORIGIN',
   },
   databaseHost: {
     doc: 'The database hostname',
-    format: String,
+    format: 'String',
     default: 'localhost',
     env: 'DATABASE_HOST',
   },

@@ -2,8 +2,10 @@ import { check } from 'express-validator/check';
 import { matchedData, sanitize } from 'express-validator/filter';
 import { isBoolean, indexOf } from 'lodash';
 import controllerHelper from './controllerHelper';
+import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
-import { STACKS } from '../stacks/stacks';
+import handleId from '../dataaccess/renameIdHandler';
+import Stacks, { PUBLISH } from '../stacks/Stacks';
 
 const TYPE = 'stack';
 
@@ -17,58 +19,113 @@ function deleteStack(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteStackExec);
 }
 
-function createStackExec(request, response) {
+function getOneById(request, response) {
+  const errorMessage = 'Invalid stack fetch by ID request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByIdExec);
+}
+
+function getOneByName(request, response) {
+  const errorMessage = 'Invalid stack fetch by Name request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByNameExec);
+}
+
+function getOneByIdExec(request, response) {
   // Build request params
+  const { user } = request;
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(params)
+  return stackRepository.getOneById(user, params.id)
+    .then(handleId)
+    .then(stack => response.send(stack))
+    .catch(controllerHelper.handleError(response, 'matching ID for', TYPE, undefined));
+}
+
+function getOneByNameExec(request, response) {
+  // Build request params
+  const { user } = request;
+  const params = matchedData(request);
+
+  // Handle request
+  return stackRepository.getOneByName(user, params.name)
+    .then(handleId)
+    .then(stack => response.send(stack))
+    .catch(controllerHelper.handleError(response, 'matching Name for', TYPE, undefined));
+}
+
+function createStackExec(request, response) {
+  // Build request params
+  const { user } = request;
+  const params = matchedData(request);
+
+  // Handle request
+  return stackManager.createStack(user, params)
     .then(controllerHelper.sendSuccessfulCreation(response))
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
 
 function deleteStackExec(request, response) {
   // Build request params
+  const { user } = request;
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.deleteStack(params)
+  return stackManager.deleteStack(user, params)
     .then(controllerHelper.sendSuccessfulDeletion(response))
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
+const checkExistsWithMsg = fieldName =>
+  check(fieldName).exists().withMessage(`${fieldName} must be specified`);
+
 const coreStackValidator = [
   sanitize('*').trim(),
-  check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
-  check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified'),
-  check('datalabInfo.volume').exists().withMessage('datalabInfo.volume must be specified'),
-  check('name')
-    .exists()
-    .withMessage('Name must be specified')
+];
+
+const withIdValidator = [
+  ...coreStackValidator,
+  checkExistsWithMsg('id'),
+];
+
+const withNameValidator = [
+  ...coreStackValidator,
+  checkExistsWithMsg('name')
     .isAscii()
     .withMessage('Name must only use the characters a-z')
     .isLength({ min: 4, max: 12 })
     .withMessage('Name must be 4-12 characters long'),
-  check('type').exists().withMessage('Type must be specified'),
+];
+
+const deleteStackValidator = [
+  ...withNameValidator,
+  checkExistsWithMsg('datalabInfo.domain'),
+  checkExistsWithMsg('datalabInfo.name'),
+  checkExistsWithMsg('type'),
 ];
 
 const createStackValidator = [
-  ...coreStackValidator,
+  ...deleteStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
     .custom((value, { req }) => {
-      if (indexOf([STACKS.RSHINY.name, STACKS.NBVIEWER.name], req.body.type) > -1) {
+      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
         return value;
       }
       return true;
     }),
   check('isPublic', 'isPublic boolean must be specified for publication request')
     .custom((value, { req }) => {
-      if (indexOf([STACKS.RSHINY.name, STACKS.NBVIEWER.name], req.body.type) > -1) {
+      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
         return isBoolean(value);
       }
       return true;
     }),
-  check('volumeMount').exists().withMessage('A Volume Mount must be specified'),
+  checkExistsWithMsg('description'),
+  checkExistsWithMsg('displayName'),
+  checkExistsWithMsg('volumeMount'),
 ];
 
-export default { coreStackValidator, createStackValidator, createStack, deleteStack };
+const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };
+
+const controllers = { getOneById, getOneByName, createStack, deleteStack };
+
+export default { ...validators, ...controllers };
