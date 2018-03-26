@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stack Controller createStack calls Stack.create with correct parameters 1`] = `
+Object {
+  "another": "field",
+  "datalabInfo": Object {
+    "domain": "expectedDatalabDomain",
+    "name": "expectedDatalabName",
+  },
+  "name": "expectedName",
+  "type": "expectedType",
+}
+`;
+
+exports[`Stack Controller createStack calls stack repository with correct parameters 1`] = `
+Array [
+  Array [
+    "username",
+    Object {
+      "another": "field",
+      "category": "expectedStackCatName",
+      "datalabInfo": Object {
+        "domain": "expectedDatalabDomain",
+        "name": "expectedDatalabName",
+      },
+      "internalEndpoint": "http://expectedType-expectedStackName",
+      "name": "expectedName",
+      "status": "requested",
+      "type": "expectedType",
+      "url": "https://expectedDatalabName-expectedStackName.expectedDatalabDomain",
+    },
+  ],
+]
+`;
+
+exports[`Stack Controller createStack failed Stack.create requests are caught 1`] = `
+Object {
+  "message": "No stack definition for type expectedType",
+}
+`;
+
+exports[`Stack Controller deleteStack calls Stack.delete with correct parameters 1`] = `
+Object {
+  "another": "field",
+  "datalabInfo": Object {
+    "domain": "expectedDatalabDomain",
+    "name": "expectedDatalabName",
+  },
+  "name": "expectedName",
+  "type": "expectedType",
+}
+`;
+
+exports[`Stack Controller deleteStack calls stack repository with correct parameters 1`] = `
+Array [
+  Array [
+    "username",
+    Object {
+      "another": "field",
+      "datalabInfo": Object {
+        "domain": "expectedDatalabDomain",
+        "name": "expectedDatalabName",
+      },
+      "name": "expectedName",
+      "type": "expectedType",
+    },
+  ],
+]
+`;
+
+exports[`Stack Controller deleteStack failed Stack.delete requests are caught 1`] = `
+Object {
+  "message": "No stack definition for type expectedType",
+}
+`;
