@@ -59,7 +59,7 @@ function queryPersistentVolumeClaim(name) {
 function listPersistentVolumeClaims() {
   // List only visible volumes (ie not internal volumes)
   logger.info('Getting visible volume claims');
-  return axios.get(`${PVC_URL}`, { params: { labelSelector: 'userCreated' } })
+  return axios.get(`${PVC_URL}`, { params: { labelSelector: 'user-created' } })
     .then(processPVCs)
     .catch(() => []);
 }
