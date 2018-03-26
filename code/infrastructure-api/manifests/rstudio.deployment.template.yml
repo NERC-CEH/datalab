@@ -10,6 +10,7 @@ spec:
     metadata:
       labels:
         name: {{ name }}
+        user-pod: {{ type }}
     spec:
       initContainers:
         # This container will generate the RStudio notebooks directory. RStudio starts with /home/datalabs as its initial

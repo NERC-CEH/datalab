@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         name: {{ name }}
+        user-pod: {{ type }}
     spec:
       initContainers:
         # This container will correct the directory permissions for the dynamically provisioned storage. Without this it
