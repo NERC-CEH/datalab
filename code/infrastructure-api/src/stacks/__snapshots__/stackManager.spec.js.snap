@@ -27,7 +27,7 @@ Array [
       "name": "expectedName",
       "status": "requested",
       "type": "expectedType",
-      "url": "https://expectedDatalabName-expectedStackName.expectedDatalabDomain",
+      "url": "https://expectedDatalabName-expectedName.expectedDatalabDomain",
     },
   ],
 ]
