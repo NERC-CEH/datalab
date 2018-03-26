@@ -20,7 +20,7 @@ function createStack(user, params) {
         ...params,
         category: stack.category,
         status: REQUESTED,
-        url: `https://${datalabInfo.name}-${stack.name}.${datalabInfo.domain}`,
+        url: `https://${datalabInfo.name}-${name}.${datalabInfo.domain}`,
         internalEndpoint: `http://${params.type}-${stack.name}`,
       })
       .then(() => response));
