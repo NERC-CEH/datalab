@@ -27,7 +27,7 @@ const MINIO_VERSION = '1.0';
 const MINIO_CONNECT_IMAGE = 'nerc/connect';
 const MINIO_CONNECT_VERSION = '1.0.0';
 
-function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, volumeMount }) {
+function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, type, volumeMount }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
@@ -36,13 +36,14 @@ function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, vo
       imageName: JUPYTER_IMAGE,
       version: JUPYTER_VERSION,
     },
+    type,
     volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createZeppelinDeployment({ deploymentName, volumeMount }) {
+function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
@@ -54,13 +55,14 @@ function createZeppelinDeployment({ deploymentName, volumeMount }) {
       connectImageName: ZEPPELIN_CONNECT_IMAGE,
       connectVersion: ZEPPELIN_CONNECT_VERSION,
     },
+    type,
     volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.ZEPPELIN_DEPLOYMENT);
 }
 
-function createRStudioDeployment({ deploymentName, volumeMount }) {
+function createRStudioDeployment({ deploymentName, volumeMount, type }) {
   const context = {
     name: deploymentName,
     rstudio: {
@@ -69,13 +71,14 @@ function createRStudioDeployment({ deploymentName, volumeMount }) {
       connectImageName: RSTUDIO_CONNECT_IMAGE,
       connectVersion: RSTUDIO_CONNECT_VERSION,
     },
+    type,
     volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
 }
 
-function createRShinyDeployment({ deploymentName, sourcePath, volumeMount }) {
+function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount }) {
   const context = {
     name: deploymentName,
     sourcePath,
@@ -83,13 +86,14 @@ function createRShinyDeployment({ deploymentName, sourcePath, volumeMount }) {
       imageName: RSHINY_IMAGE,
       version: RSHINY_VERSION,
     },
+    type,
     volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.RSHINY_DEPLOYMENT);
 }
 
-function createNbViewerDeployment({ deploymentName, sourcePath, volumeMount }) {
+function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMount }) {
   const context = {
     name: deploymentName,
     sourcePath,
@@ -97,13 +101,14 @@ function createNbViewerDeployment({ deploymentName, sourcePath, volumeMount }) {
       imageName: NBVIEWER_IMAGE,
       version: NBVIEWER_VERSION,
     },
+    type,
     volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);
 }
 
-function createMinioDeployment({ datalabInfo, name, deploymentName }) {
+function createMinioDeployment({ datalabInfo, name, deploymentName, type }) {
   const context = {
     name: deploymentName,
     // This mapping of name to volume name is because the volume names
@@ -116,6 +121,7 @@ function createMinioDeployment({ datalabInfo, name, deploymentName }) {
       connectImageName: MINIO_CONNECT_IMAGE,
       connectVersion: MINIO_CONNECT_VERSION,
     },
+    type,
   };
 
   return generateManifest(context, DeploymentTemplates.MINIO_DEPLOYMENT);
