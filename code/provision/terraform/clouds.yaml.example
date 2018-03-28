@@ -1,0 +1,11 @@
+clouds:
+  jasmin:
+    auth:
+      auth_url: https://kataifi.sweet.jasmin.ac.uk
+      username: <user_name>
+      password: <password>
+      project_name: nerc-datalab-U
+      project_domain_name: jasmin
+      user_domain_name: jasmin
+    interface: public
+    identity_api_version: 3

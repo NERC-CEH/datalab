@@ -1,0 +1,10 @@
+# The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
+# before we can do anything else
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  tasks:
+  - name: install python
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-dev)
