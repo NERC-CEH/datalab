@@ -8,7 +8,9 @@ Vagrant.configure("2") do |config|
     control.vm.box = "ubuntu/xenial64"
     control.vm.hostname = "datalab-control"
     control.vm.network "private_network", ip: "192.168.33.2"
-    control.vm.synced_folder "playbooks", "/home/ubuntu/playbooks"
+    control.vm.synced_folder "~/.config/openstack", "/home/vagrant/.config/openstack"
+    control.vm.synced_folder "playbooks", "/home/vagrant/playbooks"
+    control.vm.synced_folder "terraform", "/home/vagrant/terraform"
     control.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
     end

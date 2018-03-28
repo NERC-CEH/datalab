@@ -6,6 +6,8 @@
 - hosts: all
   become: yes
   become_method: sudo
+  vars:
+    terraform_version: "0.11.5"
   tasks:
     - name: Generate en_GB locale
       locale_gen:
@@ -15,6 +17,11 @@
     - name: Install build-essential
       apt:
         name: build-essential
+        state: present
+
+    - name: Install unzip
+      apt:
+        name: unzip
         state: present
 
     - name: Install libffi-dev
@@ -68,3 +75,30 @@
       pip:
         name: vcd-cli
         executable: pip3
+
+    # Install Terraform
+    - name: Check Terraform version
+      shell: "terraform --version | head -n1 | grep {{ terraform_version }}"
+      failed_when: False
+      changed_when: False
+      register: current_terraform_version
+
+    - name: Determine Terraform checksums
+      uri: url="https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_SHA256SUMS"
+           method="GET"
+           return_content=True
+      register: terraform_checksums
+
+    - name: Download Terraform
+      get_url: url="https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+               dest="/usr/local/src/terraform_{{ terraform_version }}_linux_amd64.zip"
+               checksum="sha256:{{ item.split(' ') | first }}"
+      with_items: "{{ terraform_checksums.content.split('\n') | select('search', 'linux_amd64') | list | first }}"
+      register: terraform_downloaded
+
+    - name: Extract and install Terraform
+      unarchive: src="/usr/local/src/terraform_{{ terraform_version }}_linux_amd64.zip"
+                 dest=/usr/local/bin
+                 copy=no
+      when: current_terraform_version.rc != 0 or terraform_downloaded | changed
+    # End Install Terraform
