@@ -5,6 +5,7 @@
   "dependencies": {
     "auth0-js": "9.3.3",
     "axios": "0.16.1",
+    "babel-polyfill": "6.26.0",
     "bluebird": "3.5.0",
     "body-parser": "1.17.1",
     "chalk": "2.1.0",
