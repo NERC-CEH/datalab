@@ -12,7 +12,7 @@ variable "number_of_bastions" {
 }
 
 variable "number_of_k8s_masters" {
-  default = 2
+  default = 3
 }
 
 variable "number_of_k8s_nodes" {
