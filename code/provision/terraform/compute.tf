@@ -73,12 +73,12 @@ resource "openstack_compute_instance_v2" "bastion" {
 
   metadata = {
     ssh_user         = "${local.ssh_user}"
-    kubespray_groups = "bastion"
+    groups           = "bastion"
     depends_on       = "${local.tenant_network}"
   }
 
   provisioner "local-exec" {
-    command = "sed s/USER/${local.ssh_user}/ ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${local.bastion_fips[0]}/ > group_vars/no-floating.yml"
+    command = "sed s/USER/${local.ssh_user}/ templates/ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${local.bastion_fips[0]}/ > group_vars/private.yml"
   }
 
 }
@@ -100,9 +100,9 @@ resource "openstack_compute_instance_v2" "k8s_master" {
   ]
 
   metadata = {
-    ssh_user         = "${local.ssh_user}"
-    kubespray_groups = "etcd,kube-master,k8s-cluster,vault,no-floating"
-    depends_on       = "${local.tenant_network}"
+    ssh_user    = "${local.ssh_user}"
+    groups      = "k8s-master,k8s-cluster,private"
+    depends_on  = "${local.tenant_network}"
   }
 
 }
@@ -123,9 +123,9 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   ]
 
   metadata = {
-    ssh_user         = "${local.ssh_user}"
-    kubespray_groups = "kube-node,k8s-cluster,no-floating"
-    depends_on       = "${local.tenant_network}"
+    ssh_user   = "${local.ssh_user}"
+    groups     = "k8s-node,k8s-cluster,private"
+    depends_on = "${local.tenant_network}"
   }
 
 }

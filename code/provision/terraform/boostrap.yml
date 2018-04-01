@@ -1,6 +1,7 @@
 # The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
 # before we can do anything else
 - hosts: all
+  user: ubuntu
   become: yes
   become_method: sudo
   gather_facts: no

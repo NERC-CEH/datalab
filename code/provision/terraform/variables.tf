@@ -12,16 +12,11 @@ variable "number_of_bastions" {
 }
 
 variable "number_of_k8s_masters" {
-  default = 3
+  default = 1
 }
 
 variable "number_of_k8s_nodes" {
   default = 3
-}
-
-variable "image" {
-  description = "the image to use"
-  default     = "ubuntu-14.04"
 }
 
 variable "flavor_bastion" {
