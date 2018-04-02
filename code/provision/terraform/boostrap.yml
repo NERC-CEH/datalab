@@ -1,11 +1,22 @@
+# Configure networking for the bastion to allow private servers to be
+# addressed by name through the bastion.
+- hosts: bastion
+  become: yes
+  become_method: sudo
+  roles:
+  - setup-networking
+
 # The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
 # before we can do anything else
 - hosts: all
-  user: ubuntu
   become: yes
   become_method: sudo
   gather_facts: no
+  roles:
+  - install-python
 
-  tasks:
-  - name: install python
-    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-dev)
+- hosts: private
+  become: yes
+  become_method: sudo
+  roles:
+  - setup-networking

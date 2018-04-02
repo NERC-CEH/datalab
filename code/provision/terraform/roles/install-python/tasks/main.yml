@@ -1,0 +1,5 @@
+---
+
+- name: install python
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-dev)
+  changed_when: False

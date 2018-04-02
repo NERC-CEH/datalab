@@ -1,0 +1,24 @@
+---
+
+# This only seems to be required on Ubuntu
+- name: Force new machine id
+  shell: rm /etc/machine-id /var/lib/dbus/machine-id && systemd-machine-id-setup
+  args:
+    creates: /root/.ansible-machine-id
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Create .ansible-machine-id file. This file is used as a sentinel to indicate that the previous step has been performed.
+  copy:
+    content: "Created {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+    dest: /root/.ansible-machine-id
+    mode: "u=rw,g=,o="
+    force: no
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add cluster IPs on correct interface to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ hostvars[item].openstack.private_v4 }} {{ item }}"
+    insertbefore: BOF
+    regexp: "{{ item }}$"
+  with_items: "{{ groups['all'] }}"

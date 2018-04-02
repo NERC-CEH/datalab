@@ -95,9 +95,12 @@ servers.
 
 ### Bootstrap
 
-The bootstrap process performs two operations:
+The bootstrap process performs several operations:
 
-* Install Python 2.7 onto each box allowing Ansible to function corrrectly
+* Configure the `/etc/hosts` file for the bastion server to allow all private hosts to be
+addressed by name.
+* Install Python 2.7 onto each box allowing Ansible to function corrrectly.
+* Configure the `/etc/hosts` file for all private servers.
 * Extend the drive to make use of all attached storage as the initial volumes are too
 small for use as Kubernetes nodes.
 
@@ -119,11 +122,10 @@ servers:
 
 ### Improvements
 
-* Script the configuration of the bastion `/etc/hosts` file.
-* Improve the dynamic inventory to handle both public and private servers removing the
-need to tweak the hosts file.
 * Use a remote store for `.tfstate` files to allow multiple users to work on this.
 * Script the process to remove the need to run multiple commands.
+* Improve the dynamic inventory to handle both public and private servers removing the
+need to tweak the hosts file - probably not needed as hosts files suffice.
 
 ## Note on Dynamic Inventory
 
