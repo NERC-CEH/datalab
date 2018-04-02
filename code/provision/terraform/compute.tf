@@ -80,7 +80,6 @@ resource "openstack_compute_instance_v2" "bastion" {
   provisioner "local-exec" {
     command = "sed s/USER/${local.ssh_user}/ templates/ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${local.bastion_fips[0]}/ > group_vars/private.yml"
   }
-
 }
 
 resource "openstack_compute_instance_v2" "k8s_master" {
@@ -104,7 +103,6 @@ resource "openstack_compute_instance_v2" "k8s_master" {
     groups      = "k8s-master,k8s-cluster,private"
     depends_on  = "${local.tenant_network}"
   }
-
 }
 
 resource "openstack_compute_instance_v2" "k8s_node" {
@@ -127,7 +125,6 @@ resource "openstack_compute_instance_v2" "k8s_node" {
     groups     = "k8s-node,k8s-cluster,private"
     depends_on = "${local.tenant_network}"
   }
-
 }
 
 resource "openstack_compute_floatingip_associate_v2" "bastion" {
@@ -136,50 +133,15 @@ resource "openstack_compute_floatingip_associate_v2" "bastion" {
   instance_id = "${element(openstack_compute_instance_v2.bastion.*.id, count.index)}"
 }
 
-# resource "openstack_compute_floatingip_associate_v2" "k8s_master" {
-#   count       = "${var.number_of_k8s_masters}"
-#   instance_id = "${element(openstack_compute_instance_v2.k8s_master.*.id, count.index)}"
-#   floating_ip = "${var.k8s_master_fips[count.index]}"
-# }
+resource "openstack_blockstorage_volume_v2" "k8s_master_volume" {
+  name        = "${var.cluster_name}-k8s-master-volume-${count.index+1}"
+  count       = "${var.number_of_k8s_masters}"
+  description = "Volume for Kubernetes Master (Ephemeral)"
+  size        = 100
+}
 
-# resource "openstack_compute_floatingip_associate_v2" "k8s_node" {
-#   count       = "${var.number_of_k8s_nodes}"
-#   floating_ip = "${var.k8s_node_fips[count.index]}"
-#   instance_id = "${element(openstack_compute_instance_v2.k8s_node.*.id, count.index)}"
-# }
-
-# resource "openstack_blockstorage_volume_v2" "glusterfs_volume" {
-#   name        = "${var.cluster_name}-glusterfs_volume-${count.index+1}"
-#   count       = "${var.number_of_gfs_nodes_no_floating_ip}"
-#   description = "Non-ephemeral volume for GlusterFS"
-#   size        = "${var.gfs_volume_size_in_gb}"
-# }
-
-# resource "openstack_compute_instance_v2" "glusterfs_node_no_floating_ip" {
-#   name       = "${var.cluster_name}-gfs-node-nf-${count.index+1}"
-#   count      = "${var.number_of_gfs_nodes_no_floating_ip}"
-#   image_name = "${var.image_gfs}"
-#   flavor_id  = "${var.flavor_gfs_node}"
-#   key_pair   = "${openstack_compute_keypair_v2.k8s.name}"
-
-#   network {
-#     name = "${var.network_name}"
-#   }
-
-#   security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
-#     "default",
-#   ]
-
-#   metadata = {
-#     ssh_user         = "${var.ssh_user_gfs}"
-#     kubespray_groups = "gfs-cluster,network-storage,no-floating"
-#     depends_on       = "${var.network_id}"
-#   }
-
-# }
-
-# resource "openstack_compute_volume_attach_v2" "glusterfs_volume" {
-#   count       = "${var.number_of_gfs_nodes_no_floating_ip}"
-#   instance_id = "${element(openstack_compute_instance_v2.glusterfs_node_no_floating_ip.*.id, count.index)}"
-#   volume_id   = "${element(openstack_blockstorage_volume_v2.glusterfs_volume.*.id, count.index)}"
-# }
+resource "openstack_compute_volume_attach_v2" "k8s_master_volume" {
+  count       = "${var.number_of_k8s_masters}"
+  instance_id = "${element(openstack_compute_instance_v2.k8s_master.*.id, count.index)}"
+  volume_id   = "${element(openstack_blockstorage_volume_v2.k8s_master_volume.*.id, count.index)}"
+}
