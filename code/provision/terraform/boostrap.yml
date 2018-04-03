@@ -1,9 +1,21 @@
+# This playbook first bootstraps the Bastion server and then the rest of the cluster
+# It isn't possible to configure all at once as the internal servers are not addressable
+# until the Bastion hosts file has been configured.
+
 # Configure networking for the bastion to allow private servers to be
 # addressed by name through the bastion.
 - hosts: bastion
   become: yes
   become_method: sudo
+  gather_facts: no
   roles:
+  - install-python
+
+- hosts: bastion
+  become: yes
+  become_method: sudo
+  roles:
+  - reset-machine-id
   - setup-networking
 
 # The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
@@ -19,4 +31,6 @@
   become: yes
   become_method: sudo
   roles:
+  - reset-machine-id
   - setup-networking
+  # - { role: setup-storage, storage_devices: ['/dev/sdb'] }

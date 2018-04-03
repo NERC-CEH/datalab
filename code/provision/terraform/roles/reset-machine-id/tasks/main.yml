@@ -1,0 +1,12 @@
+---
+- name: Force new machine id
+  shell: rm /etc/machine-id /var/lib/dbus/machine-id && systemd-machine-id-setup
+  args:
+    creates: /root/.ansible-machine-id
+
+- name: Create .ansible-machine-id file. This file is used as a sentinel to indicate that the previous step has been performed.
+  copy:
+    content: "Created {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+    dest: /root/.ansible-machine-id
+    mode: "u=rw,g=,o="
+    force: no

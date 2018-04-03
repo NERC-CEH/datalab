@@ -58,6 +58,14 @@ into the Vagrant machine.
 
 Source the `openrc` file with `source ~/.config/openstack/openrc`.
 
+### Clear Known Hosts
+
+To ensure old server identities don't cause SSH issues delete the known hosts file:
+
+```
+rm ~/.ssh/known_hosts
+```
+
 ### Initialise Terraform
 
 To initialise Terraform execute `terraform init`. This will download the required modules
