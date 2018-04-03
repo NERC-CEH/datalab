@@ -17,6 +17,7 @@
     "fs-extra-promise": "1.0.1",
     "js-yaml": "3.9.1",
     "jwks-rsa": "1.2.1",
+    "kube-watch": "0.5.4",
     "lodash": "4.17.4",
     "mongoose": "5.0.10",
     "mustache": "2.3.0",
