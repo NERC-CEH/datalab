@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kubernetes event watcher podAddedWatcher logs events 1`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "Pod added",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Kubernetes event watcher podAddedWatcher logs events 2`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "Pod deleted",
+    "metadata": undefined,
+  },
+]
+`;
+
+exports[`Kubernetes event watcher podReadyWatcher logs events 1`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "Pod ready",
+    "metadata": undefined,
+  },
+]
+`;
