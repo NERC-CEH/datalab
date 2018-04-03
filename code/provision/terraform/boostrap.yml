@@ -17,6 +17,7 @@
   roles:
   - reset-machine-id
   - setup-networking
+  - base-configuration
 
 # The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
 # before we can do anything else
@@ -33,4 +34,5 @@
   roles:
   - reset-machine-id
   - setup-networking
+  - base-configuration
   # - { role: setup-storage, storage_devices: ['/dev/sdb'] }

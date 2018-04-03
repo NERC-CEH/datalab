@@ -1,0 +1,41 @@
+---
+- name: Add authorized keys for ubuntu user
+  authorized_key:
+    user: ubuntu
+    key: "{{ lookup('file', './keys/{{item}}') }}"
+  with_items: "{{ access_public_keys }}"
+
+- name: Update APT package cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install required packages
+  apt:
+    state: present
+    pkg: "{{ item }}"
+  with_items: "{{ base_packages }}"
+
+- name: Upgrade APT to the latest packages
+  apt:
+    upgrade: safe
+
+- name: Adjust APT update intervals
+  copy:
+    src: config/apt_periodic
+    dest: /etc/apt/apt.conf.d/10periodic
+
+- name: Set up Postfix to relay mail
+  debconf: name=postfix
+           question='{{ item.question }}'
+           value='{{ item.value }}'
+           vtype='{{ item.vtype }}'
+  with_items:
+    - { question: 'postfix/mailname', value: '{{ ansible_fqdn }}', vtype: 'string' }
+    - { question: 'postfix/main_mailer_type', value: 'Internet Site', vtype: 'string' }
+
+- name: Email log summary daily
+  lineinfile: dest=/etc/cron.daily/00logwatch
+              regexp="^/usr/sbin/logwatch"
+              line="/usr/sbin/logwatch --output mail --mailto {{ logwatch_email }} --detail high"
+              state=present create=yes
