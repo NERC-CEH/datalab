@@ -1,5 +1,6 @@
 import KubeWatch from 'kube-watch';
 import logger from 'winston';
+import { find } from 'lodash';
 import config from '../config/config';
 
 const kubeApi = config.get('kubernetesApi');
@@ -16,6 +17,22 @@ function kubeWatcher() {
     labelSelector,
     events,
   });
+}
+
+export function podAddedWatcher() {
+  logger.debug('Pod added');
+}
+
+export function podReadyWatcher(event) {
+  if (event.status.phase === 'Running' && event.metadata.deletionTimestamp === undefined) {
+    if (find(event.status.conditions, { type: 'Ready', status: 'True' })) {
+      logger.debug('Pod ready');
+    }
+  }
+}
+
+export function podDeletedWatcher() {
+  logger.debug('Pod deleted');
 }
 
 export default kubeWatcher;
