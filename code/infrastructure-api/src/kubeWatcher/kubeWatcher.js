@@ -27,7 +27,7 @@ export function podAddedWatcher({ metadata: { labels } }) {
 
   logger.debug(`Pod added: -- name: "${name}", type: "${type}"`);
 
-  stackRepository.updateStatus({ name, type, status: CREATING })
+  return stackRepository.updateStatus({ name, type, status: CREATING })
     .then(() => logger.debug(`Updated status record for "${name}" to "${CREATING}"`));
 }
 
@@ -36,14 +36,18 @@ export function podReadyWatcher(event) {
   const name = labels.name;
   const type = labels[labelSelector];
 
+  let output;
+
   if (event.status.phase === 'Running' && event.metadata.deletionTimestamp === undefined) {
     if (find(event.status.conditions, { type: 'Ready', status: 'True' })) {
       logger.debug(`Pod ready -- name: "${name}", type: "${type}"`);
 
-      stackRepository.updateStatus({ name, type, status: READY })
+      output = stackRepository.updateStatus({ name, type, status: READY })
         .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
     }
   }
+
+  return output;
 }
 
 export function podDeletedWatcher({ metadata: { labels } }) {
