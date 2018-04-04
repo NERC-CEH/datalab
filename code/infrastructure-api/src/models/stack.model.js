@@ -5,10 +5,11 @@ const Schema = mongoose.Schema;
 
 export const REQUESTED = 'requested';
 export const CREATING = 'creating';
+export const READY = 'ready';
 export const ANALYSIS = 'analysis';
 export const PUBLISH = 'publish';
 
-const states = [REQUESTED, CREATING];
+const states = [REQUESTED, CREATING, READY];
 const category = [ANALYSIS, PUBLISH];
 
 const StackSchema = new Schema({

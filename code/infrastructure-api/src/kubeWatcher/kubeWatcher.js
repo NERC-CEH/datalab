@@ -2,6 +2,8 @@ import KubeWatch from 'kube-watch';
 import logger from 'winston';
 import { find } from 'lodash';
 import config from '../config/config';
+import stackRepository from '../dataaccess/stacksRepository';
+import { CREATING, READY } from '../models/stack.model';
 
 const kubeApi = config.get('kubernetesApi');
 const kubeNamespace = config.get('podNamespace');
@@ -19,20 +21,33 @@ function kubeWatcher() {
   });
 }
 
-export function podAddedWatcher() {
-  logger.debug('Pod added');
+export function podAddedWatcher({ metadata: { labels } }) {
+  const name = labels.name;
+  const type = labels[labelSelector];
+
+  logger.debug(`Pod added: -- name: "${name}", type: "${type}"`);
+
+  stackRepository.updateStatus({ name, type, status: CREATING })
+    .then(() => logger.debug(`Updated status record for "${name}" to "${CREATING}"`));
 }
 
 export function podReadyWatcher(event) {
+  const labels = event.metadata.labels;
+  const name = labels.name;
+  const type = labels[labelSelector];
+
   if (event.status.phase === 'Running' && event.metadata.deletionTimestamp === undefined) {
     if (find(event.status.conditions, { type: 'Ready', status: 'True' })) {
-      logger.debug('Pod ready');
+      logger.debug(`Pod ready -- name: "${name}", type: "${type}"`);
+
+      stackRepository.updateStatus({ name, type, status: READY })
+        .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
     }
   }
 }
 
-export function podDeletedWatcher() {
-  logger.debug('Pod deleted');
+export function podDeletedWatcher({ metadata: { labels } }) {
+  logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[labelSelector]}"`);
 }
 
 export default kubeWatcher;
