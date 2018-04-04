@@ -1,3 +1,10 @@
 ---
 # The ID of the APT key for the Kubernetes repository
-kubernetes_apt_key_id: 3746C208A7317B0F
+kubernetes_apt_key_id: 6A030B21BA07F4FB
+
+kubernetes_packages:
+  - jq=1.5+dfsg-1
+  - kubelet=1.9.6-00
+  - kubeadm=1.9.6-00
+  - kubectl=1.9.6-00
+  - kubernetes-cni=0.6.0-00
