@@ -1,0 +1,1 @@
+kube_master_ip: "{{ hostvars[groups['k8s-master'][0]].openstack.private_v4 }}"
