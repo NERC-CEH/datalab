@@ -1,37 +1,24 @@
 ---
 - name: Prepare all cluster nodes
   hosts: k8s-cluster
-  user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
-  tags:
-    - common
 
   roles:
     - docker
     - kubernetes-common
-    - rook-common
+    - kubernetes
     - { role: glusterfs, gluster_server: False }
     - app-armor
-
-- name: Configure Master
-  hosts: k8s-master
-  user: "{{ deploy_user }}"
-  become: yes
-  tags:
-    - master
-
-  roles:
-    - kubernetes-master
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
 
-- name: Configure Worker nodes
-  hosts: k8s-workers
-  user: "{{ deploy_user }}"
+- name: Configure Tools
+  hosts: k8s-master
   become: yes
-  tags:
-    - workers
+  become_method: sudo
 
   roles:
-    - kubernetes-worker
+    - helm
+  environment:
+    KUBECONFIG: /etc/kubernetes/admin.conf
