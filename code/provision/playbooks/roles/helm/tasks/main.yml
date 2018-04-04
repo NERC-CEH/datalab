@@ -1,0 +1,78 @@
+---
+- name: Create Certs Directory
+  file: path=/tmp/helm state=directory
+  delegate_to: 127.0.0.1
+
+- name: Create Directory for certificates on server
+  file: path="{{ ca_certs_dir }}" state=directory
+
+- name: Generate Signed Certs
+  include_tasks: create-signed-certs.yml
+  loop:
+    - tiller
+    - helm
+
+- name: Download helm archive
+  get_url:
+    url: "{{ helm_archive_url }}"
+    dest: /root/helm-{{ helm_version }}.tar.gz
+    checksum: "{{ helm_archive_checksum }}"
+
+- name: Make unpack directory
+  file:
+    path: /opt/helm/{{ helm_version }}
+    state: directory
+
+- name: Unpack helm archive
+  unarchive:
+    src: /root/helm-{{ helm_version }}.tar.gz
+    dest: /opt/helm/{{ helm_version }}
+    remote_src: yes
+
+- name: Create symlink in /opt for installed version
+  file:
+    src: /opt/helm/{{ helm_version }}
+    dest: /opt/helm/latest
+    state: link
+
+- name: Create symlink in /usr/local/bin to helm executable
+  file:
+    src: /opt/helm/latest/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    state: link
+
+- name: Create service account for tiller
+  command: kubectl -n kube-system create serviceaccount tiller
+  register: result
+  changed_when: result.rc == 0
+  failed_when: result.rc != 0 and 'AlreadyExists' not in result.stderr
+
+- name: Bind tiller service account to cluster-admin role
+  command: >
+    kubectl create clusterrolebinding tiller-cluster-admin
+      --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+  register: result
+  changed_when: result.rc == 0
+  failed_when: result.rc != 0 and 'AlreadyExists' not in result.stderr
+
+- name: Install/upgrade tiller
+  command: "helm init --service-account=tiller --tiller-tls --tiller-tls-cert ./tiller.cert.pem --tiller-tls-key ./tiller.key.pem --tiller-tls-verify --tls-ca-cert {{k8s_cert_dir}}/ca.crt --upgrade"
+  args:
+    chdir: "{{ ca_certs_dir }}"
+
+- name: Make local artifacts directory
+  file: path={{ playbook_dir }}/.artifacts state=directory
+  delegate_to: 127.0.0.1
+
+- name: Retrieve Helm client certs and Kubernetes CA Cert
+  fetch:
+    src: "{{ item.src }}"
+    dest: "{{ playbook_dir }}/.artifacts/{{ item.dest }}"
+    flat: yes
+  with_items:
+    - src: "{{ ca_certs_dir }}/helm.cert.pem"
+      dest: helm.cert.pem
+    - src: "{{ ca_certs_dir }}/helm.key.pem"
+      dest: helm.key.pem
+    - src: "{{k8s_cert_dir}}/ca.crt"
+      dest: ca.crt
