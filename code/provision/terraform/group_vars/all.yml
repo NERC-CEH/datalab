@@ -1,3 +1,4 @@
+deploy_user: ubuntu
 logwatch_email: "gareth.lloyd@stfc.ac.uk"
 
 access_public_keys:
