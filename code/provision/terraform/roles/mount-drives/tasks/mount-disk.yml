@@ -1,0 +1,21 @@
+---
+# This role relies on volume information and metadata being retrieved from OpenStack.
+# A volume must have a metadata for 'mount_point' set which controls where it will be mounted.
+- name: Format the disk
+  filesystem:
+    fstype: ext4
+    dev: "{{ item.attachments[0].device }}"
+
+- name: Create the mount points for the disks
+  file:
+    path: "{{ item.metadata.mount_point }}"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    state: directory
+
+- name: Mount device
+  mount:
+    path: "{{ item.metadata.mount_point }}"
+    src: "{{ item.attachments[0].device }}"
+    fstype: ext4
+    state: mounted
