@@ -20,6 +20,11 @@
     name: software-properties-common
     state: present
 
+# Prepare alternative docker location
+- name: Update docker configuration if storage location set
+  include_tasks: update-docker-config.yml
+  when: docker_storage_location and docker_storage_location != ''
+
 # Install docker
 - apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
