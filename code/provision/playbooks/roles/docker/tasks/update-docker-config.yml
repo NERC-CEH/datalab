@@ -1,0 +1,14 @@
+# Prepare alternative docker location
+- name: Create docker directory under /data
+  file: path="/data/docker" state=directory
+
+- name: Create docker config directory prior to installation to avoid it ever starting with incorrect directory
+  file: path="/etc/docker" state=directory
+
+- name: Create docker daemon configuration to change Docker store to docker_storage_location
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    force: yes
+    owner: root
+    group: root
