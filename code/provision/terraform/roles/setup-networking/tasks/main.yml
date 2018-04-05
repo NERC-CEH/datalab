@@ -1,0 +1,38 @@
+---
+- name: Setup ufw
+  ufw:
+    state: enabled
+    policy: deny
+
+# - name: Allow ssh traffic from management IPs if bastion
+#   ufw:
+#     rule: allow
+#     port: 22
+#     from_ip: "{{ hostvars[item].openstack.private_v4 }}"
+#     proto: tcp
+#   with_items: "{{ groups['bastion'] }}"
+#   when: inventory_hostname in groups['bastion']
+
+- name: Allow ssh traffic from bastions if internal machine
+  ufw:
+    rule: allow
+    port: 22
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
+    proto: tcp
+  with_items: "{{ groups['bastion'] }}"
+  when: inventory_hostname not in groups['bastion']
+
+- name: Remove general ssh traffic rule if internal machine
+  ufw:
+    delete: yes
+    rule: allow
+    port: 22
+  when: inventory_hostname not in groups['bastion']
+
+- name: Add cluster IPs on correct interface to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ hostvars[item].openstack.private_v4 }} {{ item }}"
+    insertbefore: BOF
+    regexp: "{{ item }}$"
+  with_items: "{{ groups['all'] }}"

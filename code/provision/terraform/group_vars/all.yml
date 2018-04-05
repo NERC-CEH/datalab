@@ -1,0 +1,13 @@
+logwatch_email: "gareth.lloyd@stfc.ac.uk"
+
+access_public_keys:
+  - gary_rsa.pub
+  - josh_rsa.pub
+
+base_packages:
+  - aptitude
+  - ufw
+  - fail2ban
+  - unattended-upgrades
+  - logwatch
+  - ntp

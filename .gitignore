@@ -31,3 +31,7 @@ experimental/glusterfs-heketi/.vagrant
 code/development-env/config/ca/*.crt
 code/development-env/config/ca/*.key
 code/development-env/config/ca/*.pem
+
+*.retry
+.terraform
+*.tfstate*
