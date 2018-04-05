@@ -4,17 +4,22 @@ exports[`Kubernetes event watcher podAddedWatcher logs events 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "Pod added",
+    "message": "Pod added: -- name: \\"expectedName\\", type: \\"expectedType\\"",
+    "metadata": undefined,
+  },
+  Object {
+    "data": undefined,
+    "message": "Updated status record for \\"expectedName\\" to \\"creating\\"",
     "metadata": undefined,
   },
 ]
 `;
 
-exports[`Kubernetes event watcher podAddedWatcher logs events 2`] = `
+exports[`Kubernetes event watcher podDeletedWatcher logs events 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "Pod deleted",
+    "message": "Pod deleted -- name: \\"expectedName\\", type: \\"expectedType\\"",
     "metadata": undefined,
   },
 ]
@@ -24,7 +29,12 @@ exports[`Kubernetes event watcher podReadyWatcher logs events 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "Pod ready",
+    "message": "Pod ready -- name: \\"expectedName\\", type: \\"expectedType\\"",
+    "metadata": undefined,
+  },
+  Object {
+    "data": undefined,
+    "message": "Updated status record for \\"expectedName\\" to \\"ready\\"",
     "metadata": undefined,
   },
 ]

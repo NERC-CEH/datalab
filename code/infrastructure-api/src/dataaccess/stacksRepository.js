@@ -50,4 +50,21 @@ function deleteStack(user, stack) {
     .exec();
 }
 
-export default { getAll, getAllByCategory, getOneById, getOneByName, getAllByVolumeMount, createOrUpdate, deleteStack };
+function updateStatus(stack) {
+  const { name, type, status } = stack;
+  return Stack()
+    .where({ name, type })
+    .update({ status })
+    .exec();
+}
+
+export default {
+  getAll,
+  getAllByCategory,
+  getOneById,
+  getOneByName,
+  getAllByVolumeMount,
+  createOrUpdate,
+  deleteStack,
+  updateStatus,
+};
