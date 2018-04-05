@@ -1,0 +1,37 @@
+---
+- name: Create Keys
+  openssl_privatekey:
+    path: /tmp/helm/{{ item }}.key.pem
+    size: 4096
+  delegate_to: 127.0.0.1
+
+- name: Create CSRs
+  openssl_csr:
+    path: /tmp/helm/{{ item }}.csr.pem
+    privatekey_path: /tmp/helm/{{ item }}.key.pem
+    common_name: "{{ item }}"
+    organization_name: Datalabs
+    country_name: UK
+  delegate_to: 127.0.0.1
+
+- name: Copy CSRs to Kubernetes Master
+  copy:
+    src: /tmp/helm/{{ item }}.csr.pem
+    dest: "{{ ca_certs_dir }}/{{ item }}.csr.pem"
+
+- name: Copy Keys to Kubernetes Master
+  copy:
+    src: /tmp/helm/{{ item }}.key.pem
+    dest: "{{ ca_certs_dir }}/{{ item }}.key.pem"
+
+- name: Sign Helm Certs
+  shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/ca.crt -CAkey {{ k8s_cert_dir }}/ca.key -CAcreateserial -in {{ item }}.csr.pem -out {{ item }}.cert.pem"
+  args:
+    chdir: "{{ ca_certs_dir }}"
+
+- name: Change file permissions
+  file:
+    path: "{{ ca_certs_dir }}/{{ item }}.cert.pem"
+    owner: ubuntu
+    group: docker
+    mode: u+rw

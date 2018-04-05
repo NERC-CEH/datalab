@@ -1,0 +1,8 @@
+---
+- name: Test
+  hosts: k8s-master
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker

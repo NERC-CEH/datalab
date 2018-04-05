@@ -1,0 +1,4 @@
+---
+- name: Mount all attached disks
+  include_tasks: mount-disk.yml
+  loop: "{{ hostvars[inventory_hostname].openstack.volumes }}"

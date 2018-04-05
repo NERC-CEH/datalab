@@ -20,10 +20,15 @@
     name: software-properties-common
     state: present
 
+# Prepare alternative docker location
+- name: Update docker configuration if storage location set
+  include_tasks: update-docker-config.yml
+  when: docker_storage_location and docker_storage_location != ''
+
 # Install docker
 - apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
-    id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+    id: "{{ docker_apt_key }}"
     state: present
 
 - apt_repository:
@@ -32,7 +37,7 @@
 
 - name: Update repositories cache and install docker
   apt:
-    name: docker-ce
+    name: "docker-{{ docker_edition }}={{ docker_version }}~{{ docker_edition }}-0~{{ ansible_distribution | lower }}-xenial"
     update_cache: yes
 
 # Docker post installation steps
@@ -41,9 +46,9 @@
     name: docker
     state: present
 
-- name: Add docker user to docker group
+- name: Add ubuntu user to docker group
   user:
-    name: deploy
+    name: ubuntu
     group: docker
 
 - name: Ensure docker service is running and enabled
@@ -55,7 +60,7 @@
 # Install docker-compose to allow management of groups of containers
 - name: Download docker-compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: ugo+x
 

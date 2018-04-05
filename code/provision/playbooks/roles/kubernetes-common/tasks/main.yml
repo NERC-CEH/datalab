@@ -31,35 +31,21 @@
     repo: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
     state: present
 
-- name: Install Docker and Kubernetes
+- name: Install Kubernetes Components
   apt:
     update_cache: yes
     name: "{{ item }}"
-    state: latest
-  with_items:
-    - jq
-    - kubelet
-    - kubeadm
-    - kubectl
-    - kubernetes-cni
+  with_items: "{{ kubernetes_packages }}"
 
 - name: Open all ports for access fom workers
   ufw:
     rule: allow
-    from_ip: "{{ item.internal_ip }}"
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
     proto: any
-  with_items: "{{ private_servers }}"
+  with_items: "{{ groups['k8s-cluster'] }}"
 
 - name: Open all ports for access fom weave network
   ufw:
     rule: allow
     from_ip: 10.0.0.0/8
     proto: any
-
-- name: Add cluster IPs on correct interface to /etc/hosts
-  lineinfile:
-    dest: /etc/hosts
-    line: "{{ item.internal_ip }} {{ item.name }}"
-    insertbefore: BOF
-    regexp: "{{ item.name }}$"
-  with_items: "{{ private_servers }}"
