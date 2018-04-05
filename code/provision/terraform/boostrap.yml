@@ -35,4 +35,4 @@
   - reset-machine-id
   - setup-networking
   - base-configuration
-  # - { role: setup-storage, storage_devices: ['/dev/sdb'] }
+  - mount-drives
