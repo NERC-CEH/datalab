@@ -1,6 +1,5 @@
 ---
-- hosts: test-lb
-  user: "{{ deploy_user }}"
+- hosts: test-cluster-test-load-balancer
   become: yes
   become_method: sudo
 

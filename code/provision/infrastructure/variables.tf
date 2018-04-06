@@ -24,6 +24,11 @@ variable "flavor_bastion" {
   default     = 11
 }
 
+variable "flavor_load_balancer" {
+  description = "The load balancer flavour"
+  default     = 12
+}
+
 variable "flavor_k8s_master" {
   description = "The bastion flavour"
   default     = 14

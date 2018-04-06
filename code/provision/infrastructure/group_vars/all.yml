@@ -1,5 +1,5 @@
 deploy_user: ubuntu
-logwatch_email: "gareth.lloyd@stfc.ac.uk"
+logwatch_email: "{{ vault_logwatch_email }}"
 
 access_public_keys:
   - gary_rsa.pub

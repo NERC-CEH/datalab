@@ -21,7 +21,51 @@ resource "openstack_compute_instance_v2" "bastion" {
   }
 
   provisioner "local-exec" {
-    command = "sed s/USER/${local.ssh_user}/ templates/ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${local.bastion_fips[0]}/ > group_vars/private.yml"
+    command = "sed s/USER/${local.ssh_user}/ templates/ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${local.bastion_fips[0]}/ > group_vars/proxied.yml"
+  }
+}
+
+resource "openstack_compute_instance_v2" "load_balancer" {
+  name       = "${var.cluster_name}-load-balancer"
+  image_name = "${local.server_image}"
+  flavor_id  = "${var.flavor_load_balancer}"
+  key_pair   = "${var.openstack_keypair}"
+
+  network {
+    name = "${local.tenant_network}"
+  }
+
+  security_groups = ["${openstack_compute_secgroup_v2.load_balancer.name}",
+    "${openstack_compute_secgroup_v2.load_balancer.name}",
+    "default",
+  ]
+
+  metadata = {
+    ssh_user    = "${local.ssh_user}"
+    groups      = "load-balancers,proxied"
+    depends_on  = "${local.tenant_network}"
+  }
+}
+
+resource "openstack_compute_instance_v2" "test_load_balancer" {
+  name       = "${var.cluster_name}-test-load-balancer"
+  image_name = "${local.server_image}"
+  flavor_id  = "${var.flavor_load_balancer}"
+  key_pair   = "${var.openstack_keypair}"
+
+  network {
+    name = "${local.tenant_network}"
+  }
+
+  security_groups = ["${openstack_compute_secgroup_v2.load_balancer.name}",
+    "${openstack_compute_secgroup_v2.load_balancer.name}",
+    "default",
+  ]
+
+  metadata = {
+    ssh_user    = "${local.ssh_user}"
+    groups      = "load-balancers,proxied"
+    depends_on  = "${local.tenant_network}"
   }
 }
 
@@ -43,7 +87,7 @@ resource "openstack_compute_instance_v2" "k8s_master" {
 
   metadata = {
     ssh_user    = "${local.ssh_user}"
-    groups      = "k8s-master,k8s-cluster,private"
+    groups      = "k8s-master,k8s-cluster,proxied"
     depends_on  = "${local.tenant_network}"
   }
 }
@@ -65,7 +109,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
   metadata = {
     ssh_user   = "${local.ssh_user}"
-    groups     = "k8s-node,k8s-cluster,private"
+    groups     = "k8s-node,k8s-cluster,proxied"
     depends_on = "${local.tenant_network}"
   }
 }
