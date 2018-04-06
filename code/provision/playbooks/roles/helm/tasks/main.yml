@@ -60,6 +60,21 @@
   args:
     chdir: "{{ ca_certs_dir }}"
 
+- name: Configure Helm for k8s-master
+  copy:
+    remote_src: True
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ deploy_user }}"
+    group: docker
+  with_items:
+    - src: "{{ ca_certs_dir }}/helm.cert.pem"
+      dest: "{{ ca_certs_dir }}/cert.pem"
+    - src: "{{ ca_certs_dir }}/helm.key.pem"
+      dest: "{{ ca_certs_dir }}/key.pem"
+    - src: "{{k8s_cert_dir}}/ca.crt"
+      dest: "{{ ca_certs_dir }}/ca.crt"
+
 - name: Make local artifacts directory
   file: path={{ playbook_dir }}/.artifacts state=directory
   delegate_to: 127.0.0.1
@@ -76,3 +91,7 @@
       dest: helm.key.pem
     - src: "{{k8s_cert_dir}}/ca.crt"
       dest: ca.crt
+
+- name: Delete tmp directory
+  file: path=/tmp/helm state=absent
+  delegate_to: 127.0.0.1
