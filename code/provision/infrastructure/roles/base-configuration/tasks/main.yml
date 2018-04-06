@@ -16,10 +16,6 @@
     pkg: "{{ item }}"
   with_items: "{{ base_packages }}"
 
-- name: Upgrade APT to the latest packages
-  apt:
-    upgrade: safe
-
 - name: Adjust APT update intervals
   copy:
     src: config/apt_periodic

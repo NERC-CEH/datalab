@@ -140,6 +140,11 @@ def append_hostvars(hostvars, groups, key, server, namegroup=False):
     for group in get_groups_from_server(server, namegroup=namegroup):
         groups[group].append(key)
 
+    # If the server is in a provied group then we need to clear the ansible_ssh_host
+    # field to ensure that it is accessed via the bastion host
+    if 'proxied' in groups:
+        hostvars[key]['ansible_ssh_host']=''
+
 
 def get_host_groups_from_cloud(inventory):
     groups = collections.defaultdict(list)

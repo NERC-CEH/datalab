@@ -35,3 +35,5 @@ code/development-env/config/ca/*.pem
 *.retry
 .terraform
 *.tfstate*
+
+code/provision/infrastructure/vault-password\.txt
