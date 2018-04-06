@@ -3,5 +3,5 @@ ssl_certificate: "{{ vault_ssl_certificate }}"
 ssl_private_key: "{{ vault_ssl_private_key }}"
 wildcard_domain: "*.test-datalabs.nerc.ac.uk"
 
-ingress_service_http_port: 32309
-ingress_service_https_port: 31627
+ingress_service_http_port: 30080
+ingress_service_https_port: 30443

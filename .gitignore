@@ -37,3 +37,5 @@ code/development-env/config/ca/*.pem
 *.tfstate*
 
 code/provision/infrastructure/vault-password\.txt
+
+code/provision/infrastructure/group_vars/proxied\.yml

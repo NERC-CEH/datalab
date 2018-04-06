@@ -10,19 +10,15 @@ events {
 
 stream {
   upstream ingress_controller {
-      server 192.168.3.6:{{ ingress_service_https_port }};
-      server 192.168.3.7:{{ ingress_service_https_port }};
-      server 192.168.3.8:{{ ingress_service_https_port }};
-      server 192.168.3.9:{{ ingress_service_https_port }};
-      server 192.168.3.10:{{ ingress_service_https_port }};
+{% for host in groups['k8s-node'] %}
+      server {{ hostvars[host].openstack.private_v4 }}:30443;
+{% endfor %}
   }
 
   upstream ingress_controller_insecure {
-      server 192.168.3.6:{{ ingress_service_http_port }};
-      server 192.168.3.7:{{ ingress_service_http_port }};
-      server 192.168.3.8:{{ ingress_service_http_port }};
-      server 192.168.3.9:{{ ingress_service_http_port }};
-      server 192.168.3.10:{{ ingress_service_http_port }};
+{% for host in groups['k8s-node'] %}
+      server {{ hostvars[host].openstack.private_v4 }}:30080;
+{% endfor %}
   }
 
   server {
