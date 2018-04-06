@@ -3,6 +3,8 @@
   openssl_privatekey:
     path: /tmp/helm/{{ item }}.key.pem
     size: 4096
+    owner: vagrant
+    group: vagrant
   delegate_to: 127.0.0.1
 
 - name: Create CSRs
@@ -12,6 +14,8 @@
     common_name: "{{ item }}"
     organization_name: Datalabs
     country_name: UK
+    owner: vagrant
+    group: vagrant
   delegate_to: 127.0.0.1
 
 - name: Copy CSRs to Kubernetes Master
