@@ -19,6 +19,10 @@ variable "number_of_k8s_nodes" {
   default = 3
 }
 
+variable "number_of_gluster_nodes" {
+  default = 3
+}
+
 variable "flavor_bastion" {
   description = "The bastion flavour"
   default     = 11
@@ -37,4 +41,9 @@ variable "flavor_k8s_master" {
 variable "flavor_k8s_node" {
   description = "The bastion flavour"
   default     = 15
+}
+
+variable "flavor_gluster_node" {
+  description = "The bastion flavour"
+  default     = 14
 }

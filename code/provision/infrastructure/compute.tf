@@ -113,3 +113,25 @@ resource "openstack_compute_instance_v2" "k8s_node" {
     depends_on = "${local.tenant_network}"
   }
 }
+
+resource "openstack_compute_instance_v2" "gluster_node" {
+  name       = "${var.cluster_name}-glusterfs-${count.index+1}"
+  count      = "${var.number_of_gluster_nodes}"
+  image_name = "${local.server_image}"
+  flavor_id  = "${var.flavor_gluster_node}"
+  key_pair   = "${var.openstack_keypair}"
+
+  network {
+    name = "${local.tenant_network}"
+  }
+
+  security_groups = ["${openstack_compute_secgroup_v2.gluster.name}",
+    "default",
+  ]
+
+  metadata = {
+    ssh_user   = "${local.ssh_user}"
+    groups     = "gluster,proxied"
+    depends_on = "${local.tenant_network}"
+  }
+}
