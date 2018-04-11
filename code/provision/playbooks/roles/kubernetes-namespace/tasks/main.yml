@@ -19,7 +19,7 @@
     group: docker
 
 - name: Execute chart
-  command: "helm install --name {{ namespace }}-ingress --namespace {{ namespace }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
+  command: "helm install --name {{ namespace.name }}-ingress --namespace {{ namespace.name }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent
