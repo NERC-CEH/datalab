@@ -14,3 +14,24 @@ authorisation_public_key: "{{ vault_authorisation_public_key }}"
 authorisation_private_key: "{{ vault_authorisation_private_key }}"
 
 authorisation_api_client_secret: "{{ vault_authorisation_api_client_secret }}"
+
+test_namespace:
+  name: test
+  domain: test-datalabs.nerc.ac.uk
+  nginxVersion: 0.9.0-beta.15
+  ports:
+    httpNodePort: 31080
+    httpsNodePort: 31443
+  defaultBackend:
+    version: 0.2.0
+    policy: localhost/docker-default
+prod_namespace:
+  name: prod
+  domain: datalabs.nerc.ac.uk
+  nginxVersion: 0.9.0-beta.15
+  ports:
+    httpNodePort: 30080
+    httpsNodePort: 30443
+  defaultBackend:
+    version: 0.2.0
+    policy: localhost/docker-node-alpine

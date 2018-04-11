@@ -22,3 +22,15 @@
     - helm
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
+
+- name: Base kubernetes configuration
+  hosts: k8s-master
+
+  roles:
+    - role: kubernetes-namespace
+      namespace: "{{ test_namespace }}"
+    - role: kubernetes-namespace
+      namespace: "{{ prod_namespace }}"
+  environment:
+    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
+    HELM_HOME: "/home/ubuntu/helm"

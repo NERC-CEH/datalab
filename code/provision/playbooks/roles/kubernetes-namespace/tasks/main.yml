@@ -1,0 +1,25 @@
+---
+- name: Create temporary helm chart directory
+  file: path={{ chart_directory }} state=directory
+
+- name: Copy helm chart to server
+  copy:
+    src: files/
+    dest: "{{ chart_directory }}"
+    owner: ubuntu
+    group: docker
+    mode: 0644
+
+- name: Create values file from template
+  template:
+    src: values.yml.j2
+    dest: "{{ chart_directory }}/values.yml"
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Execute chart
+  command: "helm install --name {{ namespace }}-ingress --namespace {{ namespace }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
+
+- name: Delete temporary helm chart directory
+  file: path={{ tmp_directory }} state=absent
