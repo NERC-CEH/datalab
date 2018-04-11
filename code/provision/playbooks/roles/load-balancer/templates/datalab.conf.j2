@@ -11,13 +11,13 @@ events {
 stream {
   upstream ingress_controller {
 {% for host in groups['k8s-node'] %}
-      server {{ hostvars[host].openstack.private_v4 }}:30443;
+      server {{ hostvars[host].openstack.private_v4 }}:{{ ingress_service_https_port }};
 {% endfor %}
   }
 
   upstream ingress_controller_insecure {
 {% for host in groups['k8s-node'] %}
-      server {{ hostvars[host].openstack.private_v4 }}:30080;
+      server {{ hostvars[host].openstack.private_v4 }}:{{ ingress_service_http_port }};
 {% endfor %}
   }
 

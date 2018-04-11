@@ -19,5 +19,9 @@ slack_token: "{{ vault_slack_token }}"
 heketi_ssh_password: "{{ vault_heketi_ssh_password }}"
 
 k8s_api_port: 6443
+test_ingress_http_port: 31080
+test_ingress_https_port: 31443
+prod_ingress_http_port: 30080
+prod_ingress_https_port: 30443
 
 sendgrid_api_key: "{{ vault_sendgrid_api_key }}"
