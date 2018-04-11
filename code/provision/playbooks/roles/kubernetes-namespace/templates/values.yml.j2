@@ -1,0 +1,9 @@
+domain: {{ domain }}
+namespace: {{ namespace }}
+httpNodePort: {{ httpNodePort }}
+httpsNodePort: {{ httpsNodePort }}
+defaultBackend:
+  imageName: nerc/default-backend
+  replicas: 1
+  policy: {{ defaultBackend.policy }}
+  version: {{ defaultBackend.version }}
