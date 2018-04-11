@@ -42,7 +42,7 @@ resource "openstack_compute_instance_v2" "load_balancer" {
 
   metadata = {
     ssh_user    = "${local.ssh_user}"
-    groups      = "load-balancers,proxied"
+    groups      = "load-balancers,prod-load-balancers,proxied"
     depends_on  = "${local.tenant_network}"
   }
 }
@@ -64,7 +64,7 @@ resource "openstack_compute_instance_v2" "test_load_balancer" {
 
   metadata = {
     ssh_user    = "${local.ssh_user}"
-    groups      = "load-balancers,proxied"
+    groups      = "load-balancers,test-load-balancers,proxied"
     depends_on  = "${local.tenant_network}"
   }
 }
