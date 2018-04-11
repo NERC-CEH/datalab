@@ -1,5 +1,5 @@
 ---
-- hosts: test-cluster-test-load-balancer
+- hosts: load-balancers
   become: yes
   become_method: sudo
 
