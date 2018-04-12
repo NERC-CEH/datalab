@@ -131,7 +131,7 @@ resource "openstack_compute_instance_v2" "gluster_node" {
 
   metadata = {
     ssh_user   = "${local.ssh_user}"
-    groups     = "gluster,proxied"
+    groups     = "gluster-node,proxied"
     depends_on = "${local.tenant_network}"
   }
 }
