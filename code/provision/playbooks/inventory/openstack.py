@@ -56,7 +56,6 @@ import collections
 import os
 import sys
 import time
-import pprint
 from distutils.version import StrictVersion
 
 try:
@@ -137,12 +136,13 @@ def append_hostvars(hostvars, groups, key, server, namegroup=False):
     if 'ansible_user' in metadata:
         hostvars[key]['ansible_user'] = metadata['ansible_user']
 
-    for group in get_groups_from_server(server, namegroup=namegroup):
+    server_groups = get_groups_from_server(server, namegroup=namegroup)
+    for group in server_groups:
         groups[group].append(key)
 
-    # If the server is in a provied group then we need to clear the ansible_ssh_host
+    # If the server is in a proxied group then we need to clear the ansible_ssh_host
     # field to ensure that it is accessed via the bastion host
-    if 'proxied' in groups:
+    if 'proxied' in server_groups:
         hostvars[key]['ansible_ssh_host']=''
 
 
