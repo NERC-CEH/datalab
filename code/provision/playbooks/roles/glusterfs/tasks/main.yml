@@ -6,12 +6,12 @@
     proto: tcp
   with_items: "{{ gluster_tcp_ports }}"
 
-- name: Add ssh from kubernetes
+- name: Open ssh from kubernetes
   ufw:
     rule: allow
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
     port: 22
-    src: "{{ item.internal_ip }}"
-  with_items: "{{ private_servers }}"
+  with_items: "{{ groups['k8s-cluster'] }}"
 
 - name: Allow glusterfs UDP traffic
   ufw:

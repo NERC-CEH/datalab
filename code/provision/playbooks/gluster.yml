@@ -1,13 +1,8 @@
-- hosts: glusterfs
-  user: "{{ deploy_user }}"
-  become: yes
-  become_method: sudo
-
-  roles:
-    - glusterfs
-
 - hosts: localhost
   tasks:
+    - name: Delete key pair
+      local_action: file path=/tmp/keys state=absent
+
     - name: Create temporary keys directory if it doesn't exist
       file:
         path: /tmp/keys
@@ -17,10 +12,12 @@
     - name: Create new ssh key pair
       shell: ssh-keygen -b 2048 -t rsa -f /tmp/keys/heketi_id_rsa -q -N ""
 
-- hosts: glusterfs
-  user: "{{ deploy_user }}"
+- hosts: gluster-node
   become: yes
   become_method: sudo
+
+  roles:
+      - glusterfs
 
   tasks:
     - name: Make sure we have a 'wheel' group
@@ -54,7 +51,6 @@
         key: "{{ lookup('file', '/tmp/keys/heketi_id_rsa.pub') }}"
 
 - hosts: k8s-cluster
-  user: "{{ deploy_user }}"
   become: yes
   become_method: sudo
 
