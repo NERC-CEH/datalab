@@ -39,3 +39,5 @@ code/development-env/config/ca/*.pem
 code/provision/infrastructure/vault-password\.txt
 
 code/provision/infrastructure/group_vars/proxied\.yml
+
+code/venv/
