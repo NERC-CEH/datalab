@@ -33,8 +33,8 @@ export function podAddedWatcher({ metadata: { labels } }) {
 
 export function podReadyWatcher(event) {
   const labels = event.metadata.labels;
-  const name = labels.name;
   const type = labels[labelSelector];
+  const name = String(labels.name).replace(`${type}-`, '');
 
   let output;
 
