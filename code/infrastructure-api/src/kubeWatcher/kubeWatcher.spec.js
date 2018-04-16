@@ -66,9 +66,23 @@ describe('Kubernetes event watcher', () => {
           type: 'expectedType',
         }));
   });
+
+  it('podReadyWatcher uses correct name when updating pod status', () => {
+    const event = generatePodEvent('expectedType-expectedName', 'expectedType');
+
+    expect(updateStatusMock).not.toHaveBeenCalled();
+
+    return podReadyWatcher(event)
+      .then(() => expect(updateStatusMock)
+        .toHaveBeenCalledWith({
+          name: 'expectedName',
+          status: 'ready',
+          type: 'expectedType',
+        }));
+  });
 });
 
-const generatePodEvent = () => ({
+const generatePodEvent = (name = 'expectedName', type = 'expectedType') => ({
   status: {
     phase: 'Running',
     conditions: [
@@ -77,8 +91,8 @@ const generatePodEvent = () => ({
   },
   metadata: {
     labels: {
-      name: 'expectedName',
-      'user-pod': 'expectedType',
+      name,
+      'user-pod': type,
     },
     deletionTimestamp: undefined,
   },
