@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { createShallow, createMount } from 'material-ui/test-utils';
 import createStore from 'redux-mock-store';
+import { CircularProgress } from 'material-ui/Progress';
 import auth from '../../auth/auth';
 import RequireAuth, { PureRequireAuth } from './RequireAuth';
 
@@ -11,6 +12,14 @@ auth.isAuthenticated = isAuthenticatedMock;
 auth.getCurrentSession = getCurrentSessionMock;
 
 describe('RequireAuth', () => {
+  let shallow;
+  let mount;
+
+  beforeEach(() => {
+    shallow = createShallow();
+    mount = createMount();
+  });
+
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
@@ -107,7 +116,7 @@ describe('RequireAuth', () => {
       // Act
       const output = shallowRenderPure(props).find('Route').prop('render');
 
-      // Arrange
+      // Assert
       expect(mount(output()).prop('promisedUserPermissions')).toEqual({
         fetching: false,
         value: ['expectedPermission'],
@@ -122,7 +131,7 @@ describe('RequireAuth', () => {
       // Act
       const output = shallowRenderPure(props).find('Route').prop('render');
 
-      // Arrange
+      // Assert
       expect(mount(output()).find('span')).toHaveText('expectedPublicComponent');
     });
 
@@ -133,10 +142,22 @@ describe('RequireAuth', () => {
       // Act
       const output = shallowRenderPure(props).find('Route');
 
-      // Arrange
+      // Assert
       expect(output).toHaveProp('path');
       expect(output).toHaveProp('exact');
       expect(output).toHaveProp('strict');
+    });
+
+    it('renders spinner while permission are retrieved', () => {
+      // Arrange
+      const props = generateProps();
+      props.permissions.fetching = true;
+
+      // Act
+      const output = shallowRenderPure(props).find('Route').prop('render');
+
+      // Assert
+      expect(mount(output()).type()).toEqual(CircularProgress);
     });
   });
 });
