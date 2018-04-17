@@ -46,6 +46,12 @@ spec:
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
+          livenessProbe:
+            httpGet:
+              path: /minio/login
+              port: 9000
+            initialDelaySeconds: 5
+            periodSeconds: 10
         - name: {{ name }}-connect
           image: {{ &minio.connectImageName }}:{{ minio.connectVersion }}
           imagePullPolicy: IfNotPresent

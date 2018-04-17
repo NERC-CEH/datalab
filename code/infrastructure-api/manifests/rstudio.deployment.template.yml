@@ -78,6 +78,12 @@ spec:
             limits:
               cpu: 2
               memory: 4Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8787
+            initialDelaySeconds: 5
+            periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
             - name: glusterfsvol

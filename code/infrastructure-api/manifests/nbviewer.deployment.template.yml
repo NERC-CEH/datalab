@@ -27,6 +27,12 @@ spec:
                 "--debug",
                 "--logging=debug",
                 "--no-cache"]
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
             - name: glusterfsvol

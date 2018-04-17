@@ -65,6 +65,12 @@ spec:
             limits:
               cpu: 2
               memory: 4Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8888
+            initialDelaySeconds: 5
+            periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
             - mountPath: /data
