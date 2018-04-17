@@ -8,14 +8,19 @@ import authActions from '../../actions/authActions';
 class AuthCallback extends Component {
   componentWillMount() {
     if (/access_token|id_token|error/.test(this.props.urlHash)) {
-      auth.handleAuthentication().then((authResponse) => {
-        this.props.actions.userLogsIn(authResponse);
-        this.props.actions.getUserPermissions();
-        this.props.actions.routeTo(authResponse.appRedirect);
-      });
+      auth.handleAuthentication()
+        .then((authResponse) => {
+          this.props.actions.userLogsIn(authResponse);
+          this.props.actions.routeTo(authResponse.appRedirect);
+        })
+        .catch(() => {
+          // Redirect to home page if auth fails
+          this.props.actions.routeTo('/');
+        });
+    } else {
+      // Redirect to home page if no hash is present
+      this.props.actions.routeTo('/');
     }
-    // Redirect to home page if auth fails
-    this.props.actions.routeTo('/');
   }
 
   render() {

@@ -32,6 +32,7 @@ class RequireAuth extends Component {
     if (this.isUserLoggedIn()) {
       return props => (<PrivateComponent {...props} promisedUserPermissions={this.props.permissions} />);
     }
+
     return props => (<PublicComponent {...props} />);
   }
 
