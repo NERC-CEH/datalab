@@ -13,7 +13,6 @@ services:
 
   datalab-app-api:
     environment:
-    environment:
       - VAULT_APP_ROLE
       - LOG_LEVEL
       - AUTHORISATION_SERVICE=http://datalab-auth:9000

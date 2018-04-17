@@ -42,52 +42,52 @@ spec:
             - mountPath: /home
               name: homedir
       containers:
-      - name: {{ name }}-connect
-        image: {{ &rstudio.connectImageName }}:{{ rstudio.connectVersion }}
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        env:
-        - name: CONNECT_TYPE
-          value: RSTUDIO
-        livenessProbe:
-          httpGet:
-            path: /status
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
-      - name: {{ name }}
-        image: {{ &rstudio.imageName }}:{{ rstudio.version }}
-        imagePullPolicy : IfNotPresent
-        ports:
-        - containerPort: 8787
-          protocol: TCP
-        env:
-        - name: USER
-          value: datalab
-        - name: PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ name }}
-              key: password
-        resources:
-          requests:
-            cpu: 200m
-            memory: 128Mi
-          limits:
-            cpu: 2
-            memory: 4Gi
+        - name: {{ name }}-connect
+          image: {{ &rstudio.connectImageName }}:{{ rstudio.connectVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: CONNECT_TYPE
+              value: RSTUDIO
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+        - name: {{ name }}
+          image: {{ &rstudio.imageName }}:{{ rstudio.version }}
+          imagePullPolicy : IfNotPresent
+          ports:
+            - containerPort: 8787
+              protocol: TCP
+          env:
+            - name: USER
+              value: datalab
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ name }}
+                  key: password
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 4Gi
 {{#volumeMount}}
-        volumeMounts:
-        - name: glusterfsvol
-          mountPath: /data
-        - name: homedir
-          mountPath: /home
+          volumeMounts:
+            - name: glusterfsvol
+              mountPath: /data
+            - name: homedir
+              mountPath: /home
       volumes:
-      - name: glusterfsvol
-        persistentVolumeClaim:
-          claimName: {{ volumeMount }}-claim
-      - name: homedir
-        emptyDir: {}
+        - name: glusterfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+        - name: homedir
+          emptyDir: {}
 {{/volumeMount}}

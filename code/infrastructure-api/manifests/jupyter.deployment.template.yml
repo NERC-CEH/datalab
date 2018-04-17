@@ -37,36 +37,36 @@ spec:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
       containers:
-      - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
-        imagePullPolicy : "IfNotPresent"
-        name: {{ name }}
-        command: ["start.sh",
-          "jupyter", "notebook",
-          "--NotebookApp.token='$(JUPYTER_TOKEN)'",
-          "--NotebookApp.allow_origin='{{ domain }}'",
-          "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
-        ports:
-        - containerPort: 8888
-          protocol: TCP
-        env:
-        - name: JUPYTER_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: {{ name }}
-              key: token
-        - name: GRANT_SUDO
-          value: "{{ grantSudo }}"
-        - name: R_LIBS_USER
-          value: "/data/packages/R/%p/%v"
-        resources:
-          requests:
-            cpu: 200m
-            memory: 128Mi
-          limits:
-            cpu: 2
-            memory: 4Gi
+        - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
+          imagePullPolicy : "IfNotPresent"
+          name: {{ name }}
+          command: ["start.sh",
+            "jupyter", "notebook",
+            "--NotebookApp.token='$(JUPYTER_TOKEN)'",
+            "--NotebookApp.allow_origin='{{ domain }}'",
+            "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
+          ports:
+            - containerPort: 8888
+              protocol: TCP
+          env:
+            - name: JUPYTER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ name }}
+                  key: token
+            - name: GRANT_SUDO
+              value: "{{ grantSudo }}"
+            - name: R_LIBS_USER
+              value: "/data/packages/R/%p/%v"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 4Gi
 {{#volumeMount}}
-        volumeMounts:
+          volumeMounts:
             - mountPath: /data
               name: glusterfsvol
       volumes:
