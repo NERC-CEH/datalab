@@ -38,7 +38,7 @@ resource "openstack_blockstorage_volume_v2" "gluster_node_volume" {
   name        = "${var.cluster_name}-gulsterfs-node-${count.index+1}-volume-1"
   count       = "${var.number_of_k8s_nodes}"
   description = "Volume for Gluster Node ${count.index+1} (Persistent)"
-  size        = 100
+  size        = 1000
   metadata = {
     mount_point = "/data"
     attached_mode = "rw"
