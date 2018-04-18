@@ -1,8 +1,8 @@
 ---
 - hosts: k8s-master
-  user: "{{ deploy_user }}"
-  become: yes
-  become_method: sudo
 
   roles:
     - gluster-kubernetes
+
+  environment:
+      KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
