@@ -30,31 +30,38 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
+              protocol: TCP
           env:
-          - name: MINIO_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                name: {{ name }}
-                key: access_key
-          - name: MINIO_SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                name: {{ name }}
-                key: secret_key
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ name }}
+                  key: access_key
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ name }}
+                  key: secret_key
           args: ["server", "/mnt/glusterfs"]
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
+          livenessProbe:
+            httpGet:
+              path: /minio/login
+              port: 9000
+            initialDelaySeconds: 5
+            periodSeconds: 10
         - name: {{ name }}-connect
           image: {{ &minio.connectImageName }}:{{ minio.connectVersion }}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:
-          - name: ORIGIN
-            value: {{ domain }}
-          - name: ACTIONS
-            value: "['set']"
+            - name: ORIGIN
+              value: {{ domain }}
+            - name: ACTIONS
+              value: "['set']"
           livenessProbe:
             httpGet:
               path: /

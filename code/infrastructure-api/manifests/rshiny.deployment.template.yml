@@ -13,27 +13,33 @@ spec:
         name: {{ name }}
         user-pod: {{ type }}
     spec:
-      # No init container need as the subPath variable only mount the required directory. If the directory is miss this
-      # is automatically created.
+      # No init container need as the subPath variable only mounts the required directory. If the directory is missing
+      # this is automatically created.
       containers:
-      - image: {{ &rshiny.imageName }}:{{ rshiny.version }}
-        imagePullPolicy : "IfNotPresent"
-        name:  {{ name }}
-        ports:
-        - containerPort: 3838
-          protocol: TCP
-        resources:
-          requests:
-            cpu: 200m
-            memory: 128Mi
-          limits:
-            cpu: 1
-            memory: 2Gi
+        - image: {{ &rshiny.imageName }}:{{ rshiny.version }}
+          imagePullPolicy: "IfNotPresent"
+          name: {{ name }}
+          ports:
+            - containerPort: 3838
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 2Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3838
+            initialDelaySeconds: 5
+            periodSeconds: 10
 {{#volumeMount}}
-        volumeMounts:
-          - name: glusterfsvol
-            mountPath: /srv/shiny-server
-            subPath: {{ &sourcePath }}
+          volumeMounts:
+            - name: glusterfsvol
+              mountPath: /srv/shiny-server
+              subPath: {{ &sourcePath }}
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:

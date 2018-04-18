@@ -38,61 +38,61 @@ spec:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
       containers:
-      - name: {{ name }}-connect
-        image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        env:
-        - name: CONNECT_TYPE
-          value: ZEPPELIN
-        livenessProbe:
-          httpGet:
-            path: /status
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
-      - name:  {{ name }}
-        image: {{ &zeppelin.imageName }}:{{ zeppelin.version }}
-        imagePullPolicy : IfNotPresent
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        env:
-        - name: MASTER
-          value: {{ &sparkMasterAddress }}
-        - name: SPARK_SUBMIT_OPTIONS
-          value: "--packages com.esri.geometry:esri-geometry-api:1.2.1"
-        - name: ZEPPELIN_JAVA_OPTS
-          value: "-Dshell.command.timeout.millisecs=3600000"
-        - name: ZEPPELIN_NOTEBOOK_DIR
-          value: /data/notebooks/zeppelin
-        - name: SECRET_CONFIG
-          value: /secret/shiro.ini
-        - name: GRANT_SUDO
-          value: "{{ grantSudo }}"
-        - name: R_LIBS_USER
-          value: {{ &sharedRLibs }}
-        resources:
-          requests:
-            cpu: 200m
-            memory: 128Mi
-          limits:
-            cpu: 2
-            memory: 4Gi
-        livenessProbe:
-          httpGet:
-            path: index.html
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        volumeMounts:
-          - name: zeppelin-shiro
-            mountPath: /secret
+        - name: {{ name }}-connect
+          image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: CONNECT_TYPE
+              value: ZEPPELIN
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+        - name:  {{ name }}
+          image: {{ &zeppelin.imageName }}:{{ zeppelin.version }}
+          imagePullPolicy : IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: MASTER
+              value: {{ &sparkMasterAddress }}
+            - name: SPARK_SUBMIT_OPTIONS
+              value: "--packages com.esri.geometry:esri-geometry-api:1.2.1"
+            - name: ZEPPELIN_JAVA_OPTS
+              value: "-Dshell.command.timeout.millisecs=3600000"
+            - name: ZEPPELIN_NOTEBOOK_DIR
+              value: /data/notebooks/zeppelin
+            - name: SECRET_CONFIG
+              value: /secret/shiro.ini
+            - name: GRANT_SUDO
+              value: "{{ grantSudo }}"
+            - name: R_LIBS_USER
+              value: {{ &sharedRLibs }}
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 4Gi
+          livenessProbe:
+            httpGet:
+              path: index.html
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: zeppelin-shiro
+              mountPath: /secret
 {{#volumeMount}}
-          - name: glusterfsvol
-            mountPath: /data
+            - name: glusterfsvol
+              mountPath: /data
 {{/volumeMount}}
       volumes:
         - name: zeppelin-shiro
