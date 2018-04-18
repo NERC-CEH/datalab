@@ -4,26 +4,26 @@ import { find } from 'lodash';
 import config from '../config/config';
 import stackRepository from '../dataaccess/stacksRepository';
 import { CREATING, READY } from '../models/stack.model';
+import { SELECTOR_LABEL } from '../stacks/Stacks';
 
 const kubeApi = config.get('kubernetesApi');
 const kubeNamespace = config.get('podNamespace');
-const labelSelector = 'user-pod';
 const events = ['added', 'modified', 'deleted'];
 
 function kubeWatcher() {
-  logger.info(`Starting kube-watcher, listening for pods labelled "${labelSelector}" on "${kubeNamespace}" namespace.`);
+  logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
 
   return new KubeWatch('pods', {
     url: kubeApi,
     namespace: kubeNamespace,
-    labelSelector,
+    labelSelector: SELECTOR_LABEL,
     events,
   });
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
   const name = labels.name;
-  const type = labels[labelSelector];
+  const type = labels[SELECTOR_LABEL];
 
   logger.debug(`Pod added: -- name: "${name}", type: "${type}"`);
 
@@ -33,7 +33,7 @@ export function podAddedWatcher({ metadata: { labels } }) {
 
 export function podReadyWatcher(event) {
   const labels = event.metadata.labels;
-  const type = labels[labelSelector];
+  const type = labels[SELECTOR_LABEL];
   const name = String(labels.name).replace(`${type}-`, '');
 
   let output;
@@ -51,7 +51,7 @@ export function podReadyWatcher(event) {
 }
 
 export function podDeletedWatcher({ metadata: { labels } }) {
-  logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[labelSelector]}"`);
+  logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[SELECTOR_LABEL]}"`);
 }
 
 export default kubeWatcher;

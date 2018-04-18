@@ -1,6 +1,7 @@
 import logger from 'winston';
 import chalk from 'chalk';
 import kubeWatcher, { podAddedWatcher, podReadyWatcher, podDeletedWatcher } from './kubeWatcher/kubeWatcher';
+import stackStatusChecker from './kubeWatcher/stackStatusChecker';
 import config from './config/config';
 import database from './config/database';
 
@@ -17,6 +18,8 @@ function watcher() {
       logger.info(chalk.red(`Error ${err.code}: ${err.message}`));
     });
 }
+
+setInterval(stackStatusChecker, config.get('statusCheckInterval'));
 
 database.createConnection()
   .then(watcher)
