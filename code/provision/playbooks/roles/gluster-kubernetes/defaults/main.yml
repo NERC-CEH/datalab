@@ -1,0 +1,2 @@
+base_path: "/home/{{ deploy_user }}"
+config_path: "{{ base_path }}/gluster-kubernetes"

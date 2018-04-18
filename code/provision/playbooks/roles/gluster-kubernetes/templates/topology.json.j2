@@ -1,0 +1,30 @@
+{
+  "clusters": [
+    {
+      "nodes": [
+{% for host in groups['gluster-node'] %}
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "{{ hostvars[host].openstack.private_v4 }}"
+              ],
+              "storage": [
+                "{{ hostvars[host].openstack.private_v4 }}"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sdb"
+          ]
+        }
+{%- if not loop.last -%}
+,
+{% endif %}
+{% endfor %}
+
+      ]
+    }
+  ]
+}
