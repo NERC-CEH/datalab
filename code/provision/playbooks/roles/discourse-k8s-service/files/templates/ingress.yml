@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: discourse-proxy
+spec:
+  tls:
+  - hosts:
+    - discourse.{{ .Values.domain }}
+    secretName: tls-secret
+  rules:
+  - host: discourse.{{ .Values.domain }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: discourse-proxy
+          servicePort: 80

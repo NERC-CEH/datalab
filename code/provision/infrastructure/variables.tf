@@ -25,25 +25,30 @@ variable "number_of_gluster_nodes" {
 
 variable "flavor_bastion" {
   description = "The bastion flavour"
-  default     = 11
+  default     = "j1_tiny"
 }
 
 variable "flavor_load_balancer" {
   description = "The load balancer flavour"
-  default     = 12
+  default     = "j1_small"
 }
 
 variable "flavor_k8s_master" {
-  description = "The bastion flavour"
-  default     = 14
+  description = "The K8s master flavour"
+  default     = "j2_medium"
 }
 
 variable "flavor_k8s_node" {
-  description = "The bastion flavour"
-  default     = 15
+  description = "The K8s worker flavour"
+  default     = "j3_medium"
 }
 
 variable "flavor_gluster_node" {
-  description = "The bastion flavour"
-  default     = 14
+  description = "The Gluster flavour"
+  default     = "j2_medium"
+}
+
+variable "flavor_discourse" {
+  description = "The discourse flavour"
+  default     = "j1_medium"
 }
