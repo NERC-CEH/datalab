@@ -27,6 +27,7 @@
   hosts: k8s-master
 
   roles:
+    - role: kubernetes-secrets
     - role: kubernetes-namespace
       namespace: "{{ test_namespace }}"
     - role: kubernetes-namespace
