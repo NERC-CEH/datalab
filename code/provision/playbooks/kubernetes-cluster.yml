@@ -13,15 +13,14 @@
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
 
-- name: Configure Tools
+- name: Configure Helm
   hosts: k8s-master
-  become: yes
-  become_method: sudo
 
   roles:
     - helm
   environment:
-    KUBECONFIG: /etc/kubernetes/admin.conf
+    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
+    HELM_HOME: "/home/ubuntu/helm"
 
 - name: Base kubernetes configuration
   hosts: k8s-master
