@@ -1,0 +1,17 @@
+---
+- name: Create temporary helm chart directory
+  file: path={{ chart_directory }} state=directory
+
+- name: Copy the Helm values file to the server
+  copy:
+    src: files/values.yml
+    dest: "{{ chart_directory }}/values.yml"
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Install Helm Repo
+  command: "helm upgrade --install --tls prometheus --namespace prometheus stable/prometheus --version 5.3.1 --debug -f {{ chart_directory }}/values.yml"
+
+- name: Delete temporary helm chart directory
+  file: path={{ tmp_directory }} state=absent

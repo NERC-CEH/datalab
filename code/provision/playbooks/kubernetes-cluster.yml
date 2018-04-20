@@ -22,7 +22,16 @@
     KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
     HELM_HOME: "/home/ubuntu/helm"
 
-- name: Base kubernetes configuration
+- name: Configure Tools
+  hosts: k8s-master
+
+  roles:
+    - prometheus
+  environment:
+    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
+    HELM_HOME: "/home/ubuntu/helm"
+
+- name: Base Datalabs kubernetes configuration
   hosts: k8s-master
 
   roles:
