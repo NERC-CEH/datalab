@@ -3,9 +3,10 @@ import logger from 'winston';
 import podsApi from '../kubernetes/podsApi';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';
-import { READY, UNAVAILABLE } from '../models/stack.model';
+import { READY, CREATING, UNAVAILABLE } from '../models/stack.model';
 
-const kubeUpStatus = 'Running';
+const kubeUpStatus = ['Running'];
+const kubeCreateStatus = ['Pending', 'ContainerCreating', /^Init:/, 'PodInitializing'];
 
 function statusChecker() {
   logger.info('Status checker: starting');
@@ -24,10 +25,25 @@ const groupStatusByName = pods => pods
 
 const setStatus = pods => Promise.mapSeries(Object.entries(pods), ([kubeName, statusArray]) => {
   const [type, name] = parseKubeName(kubeName);
-  const status = statusArray.includes(kubeUpStatus) ? READY : UNAVAILABLE;
+  const status = getStatus(statusArray);
 
   return stackRepository.updateStatus({ name, type, status })
     .then(() => logger.debug(`Updated status record for "${name}" to "${status}"`));
 });
+
+const getStatus = (statusArray) => {
+  if (arraysIncludes(statusArray, kubeUpStatus)) {
+    return READY;
+  } else if (arraysIncludes(statusArray, kubeCreateStatus)) {
+    return CREATING;
+  }
+
+  return UNAVAILABLE;
+};
+
+const arraysIncludes = (current, expected) =>
+  current.some(currentValue =>
+    expected.some(expectedValue =>
+      (currentValue.match(expectedValue) || []).length > 0));
 
 export default statusChecker;

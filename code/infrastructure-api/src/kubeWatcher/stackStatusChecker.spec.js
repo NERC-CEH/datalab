@@ -23,6 +23,7 @@ const stacks = [
   { name: 'expectedType-firstPod', status: 'Running' },
   { name: 'expectedType-secondPod', status: 'Running' },
   { name: 'expectedType-thirdPod', status: 'Terminating' },
+  { name: 'expectedType-fourthPod', status: 'Init:0/2' },
 ];
 
 getStacksMock.mockReturnValue(Promise.resolve(stacks));
@@ -34,7 +35,55 @@ describe('Stack Status Checker', () => {
     jest.clearAllMocks();
   });
 
-  it('calls stack repository update with correct status', () =>
+  it('updates stack records with correct status', () =>
     statusChecker().then(() =>
       expect(updateStatusMock.mock.calls).toMatchSnapshot()));
+
+  it('updates stack record for Running stack', () => {
+    getStacksMock.mockReturnValue(Promise.resolve([
+      { name: 'expectedType-expectedPodName', status: 'Running' },
+    ]));
+
+    expect(updateStatusMock).not.toHaveBeenCalled();
+    return statusChecker().then(() => {
+      expect(updateStatusMock).toHaveBeenCalledTimes(1);
+      expect(updateStatusMock).toHaveBeenCalledWith({
+        name: 'expectedPodName',
+        status: 'ready',
+        type: 'expectedType',
+      });
+    });
+  });
+
+  it('updates stack record for Creating stack', () => {
+    getStacksMock.mockReturnValue(Promise.resolve([
+      { name: 'expectedType-expectedPodName', status: 'Pending' },
+    ]));
+
+    expect(updateStatusMock).not.toHaveBeenCalled();
+    return statusChecker().then(() => {
+      expect(updateStatusMock).toHaveBeenCalledTimes(1);
+      expect(updateStatusMock).toHaveBeenCalledWith({
+        name: 'expectedPodName',
+        status: 'creating',
+        type: 'expectedType',
+      });
+    });
+  });
+
+  it('updates stack record for Creating stack', () => {
+    getStacksMock.mockReturnValue(Promise.resolve([
+      { name: 'expectedType-expectedPodName', status: 'CrashLoopBackOff' },
+    ]));
+
+    expect(updateStatusMock).not.toHaveBeenCalled();
+    return statusChecker().then(() => {
+      expect(updateStatusMock).toHaveBeenCalledTimes(1);
+      expect(updateStatusMock).toHaveBeenCalledWith({
+        name: 'expectedPodName',
+        status: 'unavailable',
+        type: 'expectedType',
+      });
+    });
+  });
 });

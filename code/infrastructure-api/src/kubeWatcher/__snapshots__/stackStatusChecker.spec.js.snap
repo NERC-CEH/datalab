@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Stack Status Checker calls stack repository update with correct status 1`] = `
+exports[`Stack Status Checker updates stack records with correct status 1`] = `
 Array [
   Array [
     Object {
@@ -20,6 +20,13 @@ Array [
     Object {
       "name": "thirdPod",
       "status": "unavailable",
+      "type": "expectedType",
+    },
+  ],
+  Array [
+    Object {
+      "name": "fourthPod",
+      "status": "creating",
       "type": "expectedType",
     },
   ],
