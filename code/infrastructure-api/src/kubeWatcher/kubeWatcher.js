@@ -45,16 +45,14 @@ export function podReadyWatcher(event) {
 
   let output = Promise.resolve();
 
-  if (event.status.phase === 'Running' && event.metadata.deletionTimestamp === undefined) {
-    if (find(event.status.conditions, { type: 'Ready', status: 'True' })) {
-      logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
+  if (isPodRunning(event)) {
+    logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
 
-      if (stackNames.includes(type)) {
-        // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
-        // have their status updated.
-        output = stackRepository.updateStatus({ name, type, status: READY })
-          .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
-      }
+    if (stackNames.includes(type)) {
+      // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
+      // have their status updated.
+      output = stackRepository.updateStatus({ name, type, status: READY })
+        .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
     }
   }
 
@@ -64,5 +62,10 @@ export function podReadyWatcher(event) {
 export function podDeletedWatcher({ metadata: { labels } }) {
   logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[SELECTOR_LABEL]}"`);
 }
+
+const isPodRunning = event =>
+  event.status.phase === 'Running' &&
+  event.metadata.deletionTimestamp === undefined &&
+  find(event.status.conditions, { type: 'Ready', status: 'True' });
 
 export default kubeWatcher;
