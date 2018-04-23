@@ -45,15 +45,13 @@ export function podReadyWatcher(event) {
 
   let output = Promise.resolve();
 
-  if (isPodRunning(event)) {
+  if (isPodRunning(event) && stackNames.includes(type)) {
+    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
+    // have their status updated.
     logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
 
-    if (stackNames.includes(type)) {
-      // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
-      // have their status updated.
-      output = stackRepository.updateStatus({ name, type, status: READY })
-        .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
-    }
+    output = stackRepository.updateStatus({ name, type, status: READY })
+      .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
   }
 
   return output;
