@@ -3,7 +3,7 @@ import logger from 'winston';
 import { find } from 'lodash';
 import config from '../config/config';
 import stackRepository from '../dataaccess/stacksRepository';
-import { getName } from './kubernetesHelpers';
+import { parsePodLabels } from './kubernetesHelpers';
 import { CREATING, READY } from '../models/stack.model';
 import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
@@ -24,9 +24,7 @@ function kubeWatcher() {
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
-  const kubeName = labels.name;
-  const type = labels[SELECTOR_LABEL];
-  const name = getName(kubeName);
+  const { kubeName, name, type } = parsePodLabels(labels);
 
   logger.debug(`Pod added: -- name: "${kubeName}", type: "${type}"`);
 
@@ -43,10 +41,7 @@ export function podAddedWatcher({ metadata: { labels } }) {
 }
 
 export function podReadyWatcher(event) {
-  const labels = event.metadata.labels;
-  const type = labels[SELECTOR_LABEL];
-  const kubeName = labels.name;
-  const name = getName(kubeName);
+  const { kubeName, name, type } = parsePodLabels(event.metadata.labels);
 
   let output = Promise.resolve();
 

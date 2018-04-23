@@ -6,8 +6,23 @@ export const parseKubeName = (kubeName) => {
   return [head, tail.join(kubeNameDelim)];
 };
 
-export const getName = kubeName =>
+export const getPodName = kubeName =>
   parseKubeName(kubeName)[1];
 
-export const getType = kubeName =>
+export const getPodType = kubeName =>
   parseKubeName(kubeName)[0];
+
+export const parsePodLabels = (labels, selectorLabel) => {
+  const kubeName = labels.name;
+  let name;
+  let type;
+
+  if (selectorLabel) {
+    name = getPodName(kubeName);
+    type = labels[selectorLabel];
+  } else {
+    [type, name] = parseKubeName(kubeName);
+  }
+
+  return { kubeName, name, type };
+};

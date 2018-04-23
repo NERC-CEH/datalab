@@ -1,4 +1,4 @@
-import { parseKubeName, getName, getType } from './kubernetesHelpers';
+import { parseKubeName, getPodName, getPodType, parsePodLabels } from './kubernetesHelpers';
 
 describe('Kubernetes helpers', () => {
   it('parseKubeName correctly parses name', () => {
@@ -10,15 +10,40 @@ describe('Kubernetes helpers', () => {
     ]);
   });
 
-  it('getName correctly returns name', () => {
+  it('getPodName correctly returns name', () => {
     const kubeName = 'expectedType-expectedName';
 
-    expect(getName(kubeName)).toEqual('expectedName');
+    expect(getPodName(kubeName)).toEqual('expectedName');
   });
 
-  it('getType correctly returns name', () => {
+  it('getPodType correctly returns name', () => {
     const kubeName = 'expectedType-expectedName';
 
-    expect(getType(kubeName)).toEqual('expectedType');
+    expect(getPodType(kubeName)).toEqual('expectedType');
+  });
+
+  it('parsePodLabels extracts pod name and type', () => {
+    const labels = {
+      name: 'expectedType-expectedName',
+    };
+
+    expect(parsePodLabels(labels)).toEqual({
+      kubeName: 'expectedType-expectedName',
+      name: 'expectedName',
+      type: 'expectedType',
+    });
+  });
+
+  it('parsePodLabels extracts pod type using selector label', () => {
+    const labels = {
+      name: 'differentType-expectedName',
+      expectedSelector: 'expectedType',
+    };
+
+    expect(parsePodLabels(labels, 'expectedSelector')).toEqual({
+      kubeName: 'differentType-expectedName',
+      name: 'expectedName',
+      type: 'expectedType',
+    });
   });
 });
