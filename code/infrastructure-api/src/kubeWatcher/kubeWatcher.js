@@ -3,55 +3,67 @@ import logger from 'winston';
 import { find } from 'lodash';
 import config from '../config/config';
 import stackRepository from '../dataaccess/stacksRepository';
+import { parsePodLabels } from './kubernetesHelpers';
 import { CREATING, READY } from '../models/stack.model';
+import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
 const kubeApi = config.get('kubernetesApi');
 const kubeNamespace = config.get('podNamespace');
-const labelSelector = 'user-pod';
 const events = ['added', 'modified', 'deleted'];
+const stackNames = Object.values(STACKS).map(stack => stack.name);
 
 function kubeWatcher() {
-  logger.info(`Starting kube-watcher, listening for pods labelled "${labelSelector}" on "${kubeNamespace}" namespace.`);
+  logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
 
   return new KubeWatch('pods', {
     url: kubeApi,
     namespace: kubeNamespace,
-    labelSelector,
+    labelSelector: SELECTOR_LABEL,
     events,
   });
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
-  const name = labels.name;
-  const type = labels[labelSelector];
+  const { kubeName, name, type } = parsePodLabels(labels);
 
-  logger.debug(`Pod added: -- name: "${name}", type: "${type}"`);
+  logger.debug(`Pod added: -- name: "${kubeName}", type: "${type}"`);
 
-  return stackRepository.updateStatus({ name, type, status: CREATING })
-    .then(() => logger.debug(`Updated status record for "${name}" to "${CREATING}"`));
+  let output = Promise.resolve();
+
+  if (stackNames.includes(type)) {
+    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
+    // have their status updated.
+    output = stackRepository.updateStatus({ name, type, status: CREATING })
+      .then(() => logger.debug(`Updated status record for "${kubeName}" to "${CREATING}"`));
+  }
+
+  return output;
 }
 
 export function podReadyWatcher(event) {
-  const labels = event.metadata.labels;
-  const type = labels[labelSelector];
-  const name = String(labels.name).replace(`${type}-`, '');
+  const { kubeName, name, type } = parsePodLabels(event.metadata.labels);
 
-  let output;
+  let output = Promise.resolve();
 
-  if (event.status.phase === 'Running' && event.metadata.deletionTimestamp === undefined) {
-    if (find(event.status.conditions, { type: 'Ready', status: 'True' })) {
-      logger.debug(`Pod ready -- name: "${name}", type: "${type}"`);
+  if (isPodRunning(event) && stackNames.includes(type)) {
+    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
+    // have their status updated.
+    logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
 
-      output = stackRepository.updateStatus({ name, type, status: READY })
-        .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
-    }
+    output = stackRepository.updateStatus({ name, type, status: READY })
+      .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
   }
 
   return output;
 }
 
 export function podDeletedWatcher({ metadata: { labels } }) {
-  logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[labelSelector]}"`);
+  logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[SELECTOR_LABEL]}"`);
 }
+
+const isPodRunning = event =>
+  event.status.phase === 'Running' &&
+  event.metadata.deletionTimestamp === undefined &&
+  find(event.status.conditions, { type: 'Ready', status: 'True' });
 
 export default kubeWatcher;

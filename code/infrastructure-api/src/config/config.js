@@ -67,6 +67,12 @@ const config = convict({
     default: 'localhost',
     env: 'DATABASE_HOST',
   },
+  statusCheckInterval: {
+    doc: 'Internal (ms) for querying kubernetes pod status',
+    format: 'int',
+    default: 60000,
+    env: 'STATUS_CHECK_INTERVAL',
+  },
 });
 
 export default config;

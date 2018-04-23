@@ -8,6 +8,8 @@ import nbviewerStack from './nbviewerStack';
 export const ANALYSIS = 'analysis';
 export const PUBLISH = 'publish';
 
+export const SELECTOR_LABEL = 'user-pod';
+
 export const STACKS = Object.freeze({
   JUPYTER: {
     name: 'jupyter',

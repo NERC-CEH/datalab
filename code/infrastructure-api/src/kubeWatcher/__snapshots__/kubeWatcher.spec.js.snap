@@ -4,12 +4,12 @@ exports[`Kubernetes event watcher podAddedWatcher logs events 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "Pod added: -- name: \\"expectedName\\", type: \\"expectedType\\"",
+    "message": "Pod added: -- name: \\"jupyter-expectedName\\", type: \\"jupyter\\"",
     "metadata": undefined,
   },
   Object {
     "data": undefined,
-    "message": "Updated status record for \\"expectedName\\" to \\"creating\\"",
+    "message": "Updated status record for \\"jupyter-expectedName\\" to \\"creating\\"",
     "metadata": undefined,
   },
 ]
@@ -19,7 +19,7 @@ exports[`Kubernetes event watcher podDeletedWatcher logs events 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "Pod deleted -- name: \\"expectedName\\", type: \\"expectedType\\"",
+    "message": "Pod deleted -- name: \\"jupyter-expectedName\\", type: \\"jupyter\\"",
     "metadata": undefined,
   },
 ]
@@ -29,7 +29,7 @@ exports[`Kubernetes event watcher podReadyWatcher logs events 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "Pod ready -- name: \\"expectedName\\", type: \\"expectedType\\"",
+    "message": "Pod ready -- name: \\"jupyter-expectedName\\", type: \\"jupyter\\"",
     "metadata": undefined,
   },
   Object {
