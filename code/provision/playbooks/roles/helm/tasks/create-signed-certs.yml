@@ -32,6 +32,8 @@
   shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/ca.crt -CAkey {{ k8s_cert_dir }}/ca.key -CAcreateserial -in {{ item }}.csr.pem -out {{ item }}.cert.pem"
   args:
     chdir: "{{ ca_certs_dir }}"
+  become: yes
+  become_method: sudo
 
 - name: Change file permissions
   file:
@@ -39,3 +41,5 @@
     owner: ubuntu
     group: docker
     mode: u+rw
+  become: yes
+  become_method: sudo
