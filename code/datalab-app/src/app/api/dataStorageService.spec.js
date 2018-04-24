@@ -47,28 +47,6 @@ describe('dataStorageService', () => {
     });
   });
 
-  describe('checkDataStoreName', () => {
-    it('should build the correct query and unpack the results', () => {
-      const data = { checkDataStoreName: { id: 'abcd1234zyxw0987' } };
-      const queryParams = { name: 'expectedName' };
-      mockClient.prepareSuccess(data);
-
-      return dataStorageService.checkDataStoreName(queryParams.name).then((response) => {
-        expect(response).toEqual(data.checkDataStoreName);
-        expect(mockClient.lastQuery()).toMatchSnapshot();
-        expect(mockClient.lastOptions()).toEqual(queryParams);
-      });
-    });
-
-    it('should throw an error if the query fails', () => {
-      mockClient.prepareFailure('error');
-
-      return dataStorageService.checkDataStoreName().catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
-    });
-  });
-
   describe('createDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
       const data = { dataStore: { name: 'name' } };
