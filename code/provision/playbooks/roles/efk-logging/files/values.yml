@@ -1,0 +1,11 @@
+namespace: kube-system
+
+elasticName: elasticsearch-logging
+elasticPort: 9200
+elasticVersion: 6.2.4
+
+kibanaName: kibana-logging
+kibanaPort: 5601
+
+fluentdName: fluentd-logging
+fluentdServiceAccount: fluentd-service-account

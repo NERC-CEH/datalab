@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ quote $.Values.elasticName }}
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ quote $.Values.elasticName }}
+    spec:
+     # Needed to accses the mount
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - env:
+        - name: discovery.type
+          value: single-node
+        - name: "xpack.security.enabled"
+          value: "false"
+        image: "docker.elastic.co/elasticsearch/elasticsearch:{{ $.Values.elasticVersion }}"
+        name: {{ quote $.Values.elasticName }}
+        ports:
+        - containerPort: {{ $.Values.elasticPort }}
+        volumeMounts:
+        - name: elasticsearch-volume
+          mountPath: /usr/share/elasticsearch/data
+      volumes:
+      - name: elasticsearch-volume
+        persistentVolumeClaim:
+          claimName: elasticsearch-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ quote $.Values.elasticName }}
+spec:
+  ports:
+  - name: http
+    port: {{ $.Values.elasticPort }}
+    protocol: TCP
+  selector:
+    app: {{ quote $.Values.elasticName }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: elasticsearch-claim
+spec:
+  storageClassName: glusterfs-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+---

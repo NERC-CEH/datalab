@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ quote $.Values.kibanaName }}
+  labels:
+    k8s-app: {{ quote $.Values.kibanaName }}
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: Reconcile
+spec:
+  selector:
+    matchLabels:
+      k8s-app: {{ quote $.Values.kibanaName }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ quote $.Values.kibanaName }}
+    spec:
+      containers:
+      - name: {{ quote $.Values.kibanaName }}
+        image: "docker.elastic.co/kibana/kibana-oss:{{ $.Values.elasticVersion }}"
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        env:
+          - name: ELASTICSEARCH_URL
+            value: "http://{{ $.Values.elasticName }}:{{ $.Values.elasticPort }}"
+        ports:
+        - containerPort: {{ $.Values.kibanaPort }}
+          name: ui
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ quote $.Values.kibanaName }}
+  namespace: {{ quote $.Values.namespace }}
+  labels:
+    k8s-app: {{ quote $.Values.kibanaName }}
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/name: "Kibana"
+spec:
+  ports:
+  - port: {{ $.Values.kibanaPort }}
+    protocol: TCP
+    targetPort: ui
+  selector:
+    k8s-app: {{ quote $.Values.kibanaName }}
+

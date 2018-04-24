@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ quote $.Values.fluentdServiceAccount }}
+  namespace: {{ quote $.Values.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ quote $.Values.fluentdServiceAccount }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ quote $.Values.fluentdServiceAccount }}
+subjects:
+- kind: ServiceAccount
+  name: {{ quote $.Values.fluentdServiceAccount }}
+  namespace: {{ quote $.Values.namespace }}
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: {{ quote $.Values.fluentdServiceAccount }}
+rules:
+  - apiGroups: ["*"]
+    resources:
+      - pods
+      - namespaces
+    verbs:
+      - get
+      - watch
+      - list
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  labels:
+    k8s-app: {{ quote $.Values.fluentdName }}
+    version: v1
+    kubernetes.io/cluster-service: "true"
+spec:
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ quote $.Values.fluentdName }}
+        version: v1
+        kubernetes.io/cluster-service: "true"
+    spec:
+      serviceAccountName: {{ quote $.Values.fluentdServiceAccount }}
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: fluentd
+        image: fluent/fluentd-kubernetes-daemonset:elasticsearch
+        env:
+          - name:  FLUENT_ELASTICSEARCH_HOST
+            value: {{ quote $.Values.elasticName }}
+          - name:  FLUENT_ELASTICSEARCH_PORT
+            value: {{ quote $.Values.elasticPort }}
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /data/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /data/docker/containers
