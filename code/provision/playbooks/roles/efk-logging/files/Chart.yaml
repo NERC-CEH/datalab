@@ -1,0 +1,3 @@
+name: EFK Log Aggregation
+description: A Helm chart to deploy EFK Log aggregation
+version: 0.0.1

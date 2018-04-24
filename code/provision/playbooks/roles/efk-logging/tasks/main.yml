@@ -1,0 +1,17 @@
+---
+- name: Create temporary helm chart directory
+  file: path={{ chart_directory }} state=directory
+
+- name: Copy the Helm values file to the server
+  copy:
+    src: files/
+    dest: "{{ chart_directory }}"
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Install Helm Chart
+  command: "helm upgrade --install logging --tls --namespace kube-system --debug -f {{ chart_directory }}/values.yml {{ chart_directory }}"
+
+- name: Delete temporary helm chart directory
+  file: path={{ tmp_directory }} state=absent
