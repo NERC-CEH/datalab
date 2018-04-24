@@ -25,16 +25,6 @@ function getCredentials(id) {
     .then(errorHandler('data.dataStore'));
 }
 
-function checkDataStoreName(name) {
-  const query = `
-    CheckDataStoreName($name: String!) {
-      checkNameUniqueness(name: $name)
-    }`;
-
-  return gqlQuery(query, { name })
-    .then(errorHandler('data.checkNameUniqueness'));
-}
-
 function createDataStore(dataStore) {
   const mutation = `
     CreateDataStore($dataStore:  DataStorageCreationRequest) {
@@ -62,7 +52,6 @@ function deleteDataStore(dataStore) {
 export default {
   loadDataStorage,
   getCredentials,
-  checkDataStoreName,
   createDataStore,
   deleteDataStore,
 };

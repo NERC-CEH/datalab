@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import stackActions from '../../actions/stackActions';
+import internalNameCheckerActions from '../../actions/internalNameCheckerActions';
 import { getStackKeys } from '../../../shared/stackTypes';
 
 const constraints = {
@@ -42,7 +42,7 @@ export const syncValidate = values => validate(values, constraints, { format: 'r
 
 // Catch statement added to prevent submission of creation request without passing uniqueness check.
 export const asyncValidate = (values, dispatch) =>
-  dispatch(stackActions.checkStackName(values.name))
+  dispatch(internalNameCheckerActions.checkNameUniqueness(values.name))
     .catch(() =>
       Promise.reject({ name: 'Unable to check if Data Store Name is unique.' }))
     .then((response) => {
