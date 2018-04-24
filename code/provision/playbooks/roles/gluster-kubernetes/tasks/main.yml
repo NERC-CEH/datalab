@@ -7,31 +7,34 @@
     owner: "{{ deploy_user }}"
     group: docker
 
-- name: Set gk-deploy as executable
-  file:
-    path: "{{ config_path }}/gk-deploy"
-    mode: u+x
+- block:
+  - name: Set gk-deploy as executable
+    file:
+      path: "{{ config_path }}/gk-deploy"
+      mode: u+x
 
-- name: Create Heketi config file
-  template:
-    src: heketi.json.template.j2
-    dest: "{{ config_path }}/heketi.json.template"
-    force: yes
-    owner: "{{ deploy_user }}"
-    group: docker
+  - name: Create Heketi config file
+    template:
+      src: heketi.json.template.j2
+      dest: "{{ config_path }}/heketi.json.template"
+      force: yes
+      owner: "{{ deploy_user }}"
+      group: docker
 
-- name: Create Heketi topology file
-  template:
-    src: topology.json.j2
-    dest: "{{ config_path }}/topology.json"
-    force: yes
-    owner: "{{ deploy_user }}"
-    group: docker
+  - name: Create Heketi topology file
+    template:
+      src: topology.json.j2
+      dest: "{{ config_path }}/topology.json"
+      force: yes
+      owner: "{{ deploy_user }}"
+      group: docker
 
-- name: Deploy Heketi
-  command: ./gk-deploy --ssh-keyfile /home/ubuntu/.ssh/heketi_id_rsa --ssh-user heketi -n default --admin-key "{{ heketi_admin_key }}" --user-key "{{ heketi_user_key }}" -y -v -l /home/ubuntu/heketi.log topology.json
-  args:
-    chdir: "{{ config_path }}"
+  - name: Deploy Heketi
+    command: ./gk-deploy --ssh-keyfile /home/ubuntu/.ssh/heketi_id_rsa --ssh-user heketi -n default --admin-key "{{ heketi_admin_key }}" --user-key "{{ heketi_user_key }}" -y -v -l /home/ubuntu/heketi.log topology.json
+    args:
+      chdir: "{{ config_path }}"
+  tags:
+    - install
 
 - name: Get Heketi Pod IP
   shell: kubectl get pods --selector=heketi=pod -o jsonpath='{.items[0].status.podIP}'
