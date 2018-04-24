@@ -45,11 +45,11 @@ function getUrl(id) {
 function checkStackName(name) {
   const query = `
     CheckStackName($name: String!) {
-      checkStackName(name: $name)
+      checkNameUniqueness(name: $name)
     }`;
 
   return gqlQuery(query, { name })
-    .then(errorHandler('data.checkStackName'));
+    .then(errorHandler('data.checkNameUniqueness'));
 }
 
 function createStack(stack) {

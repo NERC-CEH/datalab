@@ -28,13 +28,11 @@ function getCredentials(id) {
 function checkDataStoreName(name) {
   const query = `
     CheckDataStoreName($name: String!) {
-      checkDataStoreName(name: $name) {
-        id
-      }
+      checkNameUniqueness(name: $name)
     }`;
 
   return gqlQuery(query, { name })
-    .then(errorHandler('data.checkDataStoreName'));
+    .then(errorHandler('data.checkNameUniqueness'));
 }
 
 function createDataStore(dataStore) {

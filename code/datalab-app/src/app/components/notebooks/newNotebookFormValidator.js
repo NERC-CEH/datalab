@@ -46,7 +46,7 @@ export const asyncValidate = (values, dispatch) =>
     .catch(() =>
       Promise.reject({ name: 'Unable to check if Data Store Name is unique.' }))
     .then((response) => {
-      if (response.value) {
+      if (!response.value) {
         return Promise.reject({ name: 'Notebook already exists. Name must be unique' });
       }
       return Promise.resolve();
