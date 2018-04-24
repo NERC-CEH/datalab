@@ -2,7 +2,7 @@
 - name: Create temporary helm chart directory
   file: path={{ chart_directory }} state=directory
 
-- name: Copy the Helm values file to the server
+- name: Copy the Prometheus Helm values file to the server
   copy:
     src: files/values.yml
     dest: "{{ chart_directory }}/values.yml"
@@ -10,8 +10,19 @@
     owner: "{{ deploy_user }}"
     group: docker
 
-- name: Install Helm Repo
-  command: "helm upgrade --install --tls prometheus --namespace prometheus stable/prometheus --version 5.3.1 --debug -f {{ chart_directory }}/values.yml"
+- name: Copy the Grafana Helm values file to the server
+  copy:
+    src: files/grafana-values.yml
+    dest: "{{ chart_directory }}/grafana-values.yml"
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Install Prometheus Helm Chart
+  command: "helm upgrade --install prometheus --tls --namespace prometheus stable/prometheus --version 5.3.1 --debug -f {{ chart_directory }}/values.yml"
+
+- name: Install Grafana Helm Chart
+  command: "helm upgrade --install grafana --tls --namespace prometheus stable/grafana --debug -f {{ chart_directory }}/grafana-values.yml"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent
