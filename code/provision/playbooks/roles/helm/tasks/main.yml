@@ -74,7 +74,6 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ deploy_user }}"
-    group: docker
   with_items:
     - src: "{{ ca_certs_dir }}/helm.cert.pem"
       dest: "{{ ca_certs_dir }}/cert.pem"
