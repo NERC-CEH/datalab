@@ -4,6 +4,10 @@ import {
   GraphQLBoolean,
 } from 'graphql';
 import internalNameChecker from '../dataaccess/internalNameChecker';
+import permissionChecker from '../auth/permissionChecker';
+import { elementPermissions } from '../../shared/permissionTypes';
+
+const { STACKS_CREATE, STORAGE_CREATE } = elementPermissions;
 
 const checkNameUniqueness = {
   description: 'Checks internal name is unique.',
@@ -14,8 +18,7 @@ const checkNameUniqueness = {
     },
   },
   resolve: (obj, { name }, { user, token }) =>
-    // Add permission check for STACKS_CREATE & STORAGE_CREATE permissions
-    internalNameChecker({ user, token }, name),
+    permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
 };
 
 export default checkNameUniqueness;
