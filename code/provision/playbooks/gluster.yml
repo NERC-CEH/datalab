@@ -50,7 +50,7 @@
         state: present
         key: "{{ lookup('file', '/tmp/keys/heketi_id_rsa.pub') }}"
 
-- hosts: k8s-cluster
+- hosts: k8s-master
   become: yes
   become_method: sudo
 
@@ -63,6 +63,15 @@
         group: "{{ deploy_user }}"
         mode: u+rw,g-rwx,o-rwx
         force: yes
+
+- hosts: k8s-master
+  become: yes
+  become_method: sudo
+
+  roles:
+    - role: known-hosts
+      server_group: gluster-node
+
 
 - hosts: localhost
   tasks:
