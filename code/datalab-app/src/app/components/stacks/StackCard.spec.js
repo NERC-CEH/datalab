@@ -23,6 +23,7 @@ describe('StackCard', () => {
       id: '100',
       displayName: 'name1',
       type,
+      status: 'ready',
     },
     openStack: openStackMock,
     deleteStack: deleteStackMock,
@@ -81,7 +82,7 @@ describe('StackCard', () => {
     expect(deleteStackMock).not.toHaveBeenCalled();
     onClick();
     expect(deleteStackMock).toHaveBeenCalledTimes(1);
-    expect(deleteStackMock).toHaveBeenCalledWith({ displayName: 'name1', id: '100', type: 'jupyter' });
+    expect(deleteStackMock).toHaveBeenCalledWith({ displayName: 'name1', id: '100', type: 'jupyter', status: 'ready' });
   });
 
   it('should provide defaults and disable the open button if no stack is provided', () => {

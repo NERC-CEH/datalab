@@ -31,7 +31,7 @@ exports[`dataStorageService loadDataStorage should build the correct query and u
 "
     DataStorage {
       dataStorage {
-         id, name, displayName, description, type, stacksMountingStore { id }
+         id, name, displayName, description, type, stacksMountingStore { id }, status
       }
     }"
 `;

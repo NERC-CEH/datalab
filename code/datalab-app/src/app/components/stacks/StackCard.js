@@ -7,6 +7,7 @@ import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
 import stackDescriptions from './stackDescriptions';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
+import { READY } from '../../../shared/statusTypes';
 
 function styles(theme) {
   const flexProps = {
@@ -54,12 +55,12 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
     </CardContent>
     <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
       <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
-        <Button style={{ marginRight: 4 }} color="primary" raised disabled={!openStack} onClick={() => openStack(stack.id)}>
+        <Button style={{ marginRight: 4 }} color="primary" raised disabled={!openStack || !isReady(stack)} onClick={() => openStack(stack.id)}>
           Open
         </Button>
       </PermissionWrapper>
       <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-        <Button style={{ marginLeft: 4 }} color="accent" raised disabled={!deleteStack} onClick={() => deleteStack(stack)}>
+        <Button style={{ marginLeft: 4 }} color="accent" raised disabled={!deleteStack || !isReady(stack)} onClick={() => deleteStack(stack)}>
           Delete
         </Button>
       </PermissionWrapper>
@@ -72,6 +73,7 @@ StackCard.propTypes = {
     id: PropTypes.string,
     displayName: PropTypes.string,
     type: PropTypes.string,
+    status: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,
   deleteStack: PropTypes.func,
@@ -117,5 +119,7 @@ function getStackType(stack, typeName) {
 function capitalizeString(text) {
   return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
 }
+
+const isReady = ({ status }) => status === READY;
 
 export default withStyles(styles)(StackCard);

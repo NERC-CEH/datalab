@@ -10,6 +10,7 @@ import {
 import { StackType } from '../types/stackTypes';
 import minioTokenService from '../dataaccess/minioTokenService';
 import stackService from '../dataaccess/stackService';
+import { READY } from '../../shared/statusTypes';
 
 export const StorageType = new GraphQLEnumType({
   name: 'StorageType',
@@ -57,6 +58,11 @@ export const DataStoreType = new GraphQLObjectType({
     stacksMountingStore: {
       type: new GraphQLList(StackType),
       resolve: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount({ user, token }, name),
+    },
+    status: {
+      // Artificially tag storage as ready
+      type: GraphQLString,
+      resolve: () => READY,
     },
   },
 });
