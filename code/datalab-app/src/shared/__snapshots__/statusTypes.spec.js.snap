@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusTypes generates expected keys 1`] = `
+Array [
+  "requested",
+  "creating",
+  "ready",
+  "unavailable",
+]
+`;
+
+exports[`StatusTypes generates expected types 1`] = `
+Object {
+  "creating": Object {
+    "description": "Resource is being created",
+    "value": "creating",
+  },
+  "ready": Object {
+    "description": "Resource is ready for use",
+    "value": "ready",
+  },
+  "requested": Object {
+    "description": "Resource has been requested",
+    "value": "requested",
+  },
+  "unavailable": Object {
+    "description": "Resource is currently unavailable",
+    "value": "unavailable",
+  },
+}
+`;

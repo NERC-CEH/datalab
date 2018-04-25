@@ -5,7 +5,7 @@ function loadStacks() {
   const query = `
     Stacks {
       stacks {
-        id, displayName, name, type, description
+        id, displayName, name, type, description, status
       }
     }`;
 
@@ -17,7 +17,7 @@ function loadStacksByCategory(category) {
   const query = `
     GetStacksByCategory($category: String!) {
       stacksByCategory(category: $category) {
-        id, displayName, name, type, description
+        id, displayName, name, type, description, status
       }
     }`;
   return gqlQuery(query, { category })
