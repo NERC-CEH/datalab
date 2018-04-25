@@ -1,0 +1,10 @@
+---
+- name: Configure Tools
+  hosts: k8s-master
+
+  roles:
+    - prometheus
+    - efk-logging
+  environment:
+    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
+    HELM_HOME: "/home/ubuntu/helm"

@@ -8,6 +8,7 @@
     - docker
     - kubernetes-common
     - kubernetes
+    - kubelet-configuration
     - { role: glusterfs, gluster_server: False }
     - app-armor
   environment:
@@ -22,25 +23,16 @@
     KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
     HELM_HOME: "/home/ubuntu/helm"
 
-- name: Configure Tools
-  hosts: k8s-master
-
-  roles:
-    - prometheus
-    - efk-logging
-  environment:
-    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
-    HELM_HOME: "/home/ubuntu/helm"
-
 - name: Base Datalabs kubernetes configuration
   hosts: k8s-master
 
   roles:
-    - role: kubernetes-secrets
     - role: kubernetes-namespace
       namespace: "{{ test_namespace }}"
     - role: kubernetes-namespace
       namespace: "{{ prod_namespace }}"
+    - role: kubernetes-secrets
+
   environment:
     KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
     HELM_HOME: "/home/ubuntu/helm"
