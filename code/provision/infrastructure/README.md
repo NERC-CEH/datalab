@@ -172,3 +172,86 @@ inventory is used initially for the creation of the `/etc/hosts` entry and then 
 OpenStack inventory is used after this as it can be used in isolation from the Terraform
 state, making its use more flexible.
 
+## Provision Datalabs
+
+This section of the document describes the steps taken to provision a new Datalabs environment from scratch.
+
+### Before you start
+
+Ensure that you have:
+
+* An OpenStack tenancy and have configured API access from your current location as described above
+* Spare capacity in your tenancy
+* Cleared your `known_hosts` entries if you are rebuilding existing servers
+
+### Provisioning
+
+Start a Provisioning environment
+
+```bash
+cd code/provision
+vagrant up
+vagrant ssh
+```
+
+Create the infrastructure. In the `~/infrastructure` directory:
+
+```bash
+terraform plan
+terraform apply
+```
+
+Bootstrap the servers to a common base. In the `~/playbooks` directory
+
+```bash
+ansible-playbook bootstrap.yml
+```
+
+Create Load balancer servers
+
+```bash
+ansible-playbook loadbalancer.yml
+```
+
+Provision the GlusterFS Servers
+
+```bash
+ansible-playbook gluster.yml
+
+```
+
+Provision the Kubernetes Cluster
+
+```bash
+ansible-playbook kubernetes-cluster.yml
+```
+
+Provision Heketi Gluster Manager
+
+```bash
+ansible-playbook heketi.yml
+```
+
+Provision Kubernetes Tools
+
+```bash
+ansible-playbook kubernetes-tools.yml
+```
+
+Provision Discourse Servers
+
+```bash
+ansible-playbook discourse.yml
+```
+
+### 
+
+To provision Gluster servers run the GlusterFS playbook
+
+```bash
+
+```
+### Load Balancers
+
+### Kubernetes
+
