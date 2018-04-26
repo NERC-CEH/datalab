@@ -10,7 +10,7 @@ const actionMock = jest.fn().mockReturnValue(Promise.resolve());
 describe('Permission Checker', () => {
   beforeEach(() => jest.clearAllMocks());
 
-  describe('permissioWrapper', () => {
+  describe('permissionWrapper', () => {
     it('throws an error if user is lacking correct permission', () =>
       permissionWrapper('elementName:missingActionName', user, () => actionMock('value'))
         .catch((err) => {
