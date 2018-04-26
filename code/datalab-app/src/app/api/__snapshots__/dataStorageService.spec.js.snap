@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dataStorageService checkDataStoreName should build the correct query and unpack the results 1`] = `
-"
-    CheckDataStoreName($name: String!) {
-      checkDataStoreName(name: $name) {
-        id
-      }
-    }"
-`;
-
 exports[`dataStorageService createDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
     CreateDataStore($dataStore:  DataStorageCreationRequest) {

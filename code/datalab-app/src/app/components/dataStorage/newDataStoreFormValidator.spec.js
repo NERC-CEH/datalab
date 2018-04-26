@@ -1,6 +1,6 @@
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 
-jest.mock('../../actions/dataStorageActions');
+jest.mock('../../actions/internalNameCheckerActions');
 
 describe('New Data Store Form Validator', () => {
   it('should return empty errors object for valid form', () => {
@@ -71,7 +71,7 @@ describe('New Data Store Form Validator', () => {
 
   it('should return a resolved promise when no async errors', () => {
     const values = { name: 'validName' };
-    const dispatch = () => Promise.resolve({});
+    const dispatch = () => Promise.resolve({ value: true });
 
     return asyncValidate(values, dispatch)
       .then(() => expect(true).toBe(true))
@@ -89,7 +89,7 @@ describe('New Data Store Form Validator', () => {
 
   it('should return a rejected promise for async errors', () => {
     const values = { name: 'invalidName' };
-    const dispatch = () => Promise.resolve({ value: values });
+    const dispatch = () => Promise.resolve({ value: false });
 
     return asyncValidate(values, dispatch)
       .then(() => expect(true).toBe(false)) // fail test if no error thrown

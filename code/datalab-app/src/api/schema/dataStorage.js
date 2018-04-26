@@ -1,7 +1,6 @@
 import {
   GraphQLID,
   GraphQLList,
-  GraphQLString,
   GraphQLNonNull,
 } from 'graphql';
 import { DataStoreType } from '../types/dataStoreTypes';
@@ -9,7 +8,7 @@ import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import permissionChecker from '../auth/permissionChecker';
 import { elementPermissions } from '../../shared/permissionTypes';
 
-const { STORAGE_LIST, STORAGE_OPEN, STORAGE_CREATE } = elementPermissions;
+const { STORAGE_LIST, STORAGE_OPEN } = elementPermissions;
 
 export const dataStorage = {
   description: 'List of currently provisioned DataLabs data storage.',
@@ -28,16 +27,4 @@ export const dataStore = {
   },
   resolve: (obj, { id }, { user }) =>
     permissionChecker(STORAGE_OPEN, user, () => dataStorageRepository.getById(user, id)),
-};
-
-export const checkDataStoreName = {
-  description: 'Details of a single currently provisioned DataLab data store.',
-  type: DataStoreType,
-  args: {
-    name: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
-  },
-  resolve: (obj, { name }, { user }) =>
-    permissionChecker(STORAGE_CREATE, user, () => dataStorageRepository.getAllByName(user, name)),
 };

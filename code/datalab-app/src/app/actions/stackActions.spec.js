@@ -1,7 +1,10 @@
 import stackActions, {
   LOAD_STACKS_ACTION,
+  LOAD_STACKS_BY_CATEGORY_ACTION,
   GET_STACK_URL_ACTION,
   OPEN_STACK_ACTION,
+  CREATE_STACK_ACTION,
+  DELETE_STACK_ACTION,
 } from './stackActions';
 import stackService from '../api/stackService';
 
@@ -25,16 +28,32 @@ describe('stackActions', () => {
       expect(output.payload).toBe('expectedNotebooksPayload');
     });
 
+    it('loadStackByCategory', () => {
+      // Arrange
+      const loadStacksByCategoryMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.loadStacksByCategory = loadStacksByCategoryMock;
+
+      // Act
+      const output = stackActions.loadStacksByCategory('expectedCategory');
+
+      // Assert
+      expect(loadStacksByCategoryMock).toHaveBeenCalledTimes(1);
+      expect(loadStacksByCategoryMock).toBeCalledWith('expectedCategory');
+      expect(output.type).toBe('LOAD_STACKS_BY_CATEGORY');
+      expect(output.payload).toBe('expectedStackPayload');
+    });
+
     it('getUrl', () => {
       // Arrange
       const getUrlMock = jest.fn().mockReturnValue('expectedUrlPayload');
       stackService.getUrl = getUrlMock;
 
       // Act
-      const output = stackActions.getUrl();
+      const output = stackActions.getUrl('expected_id_1234');
 
       // Assert
       expect(getUrlMock).toHaveBeenCalledTimes(1);
+      expect(getUrlMock).toBeCalledWith('expected_id_1234');
       expect(output.type).toBe('GET_STACK_URL');
       expect(output.payload).toBe('expectedUrlPayload');
     });
@@ -44,10 +63,43 @@ describe('stackActions', () => {
       global.open = jest.fn();
 
       // Act
-      stackActions.openStack('url');
+      const output = stackActions.openStack('url');
 
       // Assert
+      expect(global.open).toHaveBeenCalledTimes(1);
       expect(global.open).toBeCalledWith('url');
+      expect(output.type).toBe('OPEN_STACK');
+    });
+
+    it('createStack', () => {
+      // Arrange
+      const createStackMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.createStack = createStackMock;
+
+      // Act
+      const output = stackActions.createStack('expectedStack');
+
+      // Assert
+      expect(createStackMock).toHaveBeenCalledTimes(1);
+      expect(createStackMock).toBeCalledWith('expectedStack');
+      expect(output.type).toBe('CREATE_STACK');
+      expect(output.payload).toBe('expectedStackPayload');
+    });
+
+    it('deleteStack', () => {
+      // Arrange
+      const stack = { name: 'expectedType', type: 'expectedType' };
+      const deleteStackMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.deleteStack = deleteStackMock;
+
+      // Act
+      const output = stackActions.deleteStack(stack);
+
+      // Assert
+      expect(deleteStackMock).toHaveBeenCalledTimes(1);
+      expect(deleteStackMock).toBeCalledWith(stack);
+      expect(output.type).toBe('DELETE_STACK');
+      expect(output.payload).toBe('expectedStackPayload');
     });
   });
 
@@ -56,12 +108,24 @@ describe('stackActions', () => {
       expect(LOAD_STACKS_ACTION).toBe('LOAD_STACKS');
     });
 
+    it('LOAD_STACKS_BY_CATEGORY', () => {
+      expect(LOAD_STACKS_BY_CATEGORY_ACTION).toBe('LOAD_STACKS_BY_CATEGORY');
+    });
+
     it('GET_STACK_URL_ACTION', () => {
       expect(GET_STACK_URL_ACTION).toBe('GET_STACK_URL');
     });
 
     it('OPEN_STACK_ACTION', () => {
       expect(OPEN_STACK_ACTION).toBe('OPEN_STACK');
+    });
+
+    it('CREATE_STACK_ACTION', () => {
+      expect(CREATE_STACK_ACTION).toBe('CREATE_STACK');
+    });
+
+    it('DELETE_STACK_ACTION', () => {
+      expect(DELETE_STACK_ACTION).toBe('DELETE_STACK');
     });
   });
 });

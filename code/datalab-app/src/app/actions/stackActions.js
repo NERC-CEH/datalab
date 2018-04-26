@@ -5,7 +5,6 @@ export const LOAD_STACKS_BY_CATEGORY_ACTION = 'LOAD_STACKS_BY_CATEGORY';
 export const GET_STACK_URL_ACTION = 'GET_STACK_URL';
 export const OPEN_STACK_ACTION = 'OPEN_STACK';
 export const CREATE_STACK_ACTION = 'CREATE_STACK';
-export const CHECK_STACK_NAME_ACTION = 'CHECK_STACK_NAME';
 export const DELETE_STACK_ACTION = 'DELETE_STACK';
 
 const loadStacks = () => ({
@@ -33,11 +32,6 @@ const createStack = stack => ({
   payload: stackService.createStack(stack),
 });
 
-const checkStackName = stackName => ({
-  type: CHECK_STACK_NAME_ACTION,
-  payload: stackService.checkStackName(stackName),
-});
-
 const deleteStack = ({ name, type }) => ({
   type: DELETE_STACK_ACTION,
   payload: stackService.deleteStack({ name, type }),
@@ -49,6 +43,5 @@ export default {
   getUrl,
   openStack,
   createStack,
-  checkStackName,
   deleteStack,
 };

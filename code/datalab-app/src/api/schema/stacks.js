@@ -9,7 +9,7 @@ import stackService from '../dataaccess/stackService';
 import permissionChecker from '../auth/permissionChecker';
 import { elementPermissions } from '../../shared/permissionTypes';
 
-const { STACKS_LIST, STACKS_OPEN, STACKS_CREATE } = elementPermissions;
+const { STACKS_LIST, STACKS_OPEN } = elementPermissions;
 
 export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks owned by user.',
@@ -40,16 +40,4 @@ export const stack = {
   },
   resolve: (obj, { id }, { user, token }) =>
     permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
-};
-
-export const checkStackName = {
-  description: 'Returns ID value for stack with matching name.',
-  type: GraphQLID,
-  args: {
-    name: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
-  },
-  resolve: (obj, { name }, { user, token }) =>
-    permissionChecker(STACKS_CREATE, user, () => stackService.getByName({ user, token }, name)),
 };

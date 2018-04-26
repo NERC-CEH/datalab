@@ -42,16 +42,6 @@ function getUrl(id) {
     });
 }
 
-function checkStackName(name) {
-  const query = `
-    CheckStackName($name: String!) {
-      checkStackName(name: $name)
-    }`;
-
-  return gqlQuery(query, { name })
-    .then(errorHandler('data.checkStackName'));
-}
-
 function createStack(stack) {
   const mutation = `
     CreateStack($stack: StackCreationRequest) {
@@ -80,7 +70,6 @@ export default {
   loadStacks,
   loadStacksByCategory,
   getUrl,
-  checkStackName,
   createStack,
   deleteStack,
 };

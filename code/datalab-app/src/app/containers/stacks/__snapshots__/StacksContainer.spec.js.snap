@@ -7,7 +7,6 @@ Array [
   "getUrl",
   "openStack",
   "createStack",
-  "checkStackName",
   "deleteStack",
   "openModalDialog",
   "closeModalDialog",
