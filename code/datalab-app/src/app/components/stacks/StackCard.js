@@ -4,6 +4,7 @@ import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
+import { capitalize } from 'lodash';
 import stackDescriptions from './stackDescriptions';
 import StackCardActions from './StackCardActions';
 import StackStatus from './StackStatus';
@@ -47,8 +48,10 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
       <div className={classes.cardHeader}>
         <div>
           <Typography type="headline">{getDisplayName(stack)}</Typography>
-          <Typography type="subheading">{getStackType(stack, typeName)}</Typography>
-          {stack.status && <StackStatus status={stack.status}/>}
+          <div style={{ display: 'flex', direction: 'row' }}>
+            <Typography style={{ marginRight: 6 }} type="subheading">{getStackType(stack, typeName)}</Typography>
+            {stack.status && <StackStatus status={stack.status}/>}
+          </div>
         </div>
         {generateGetImage(classes)(stack)}
       </div>
@@ -109,11 +112,7 @@ function getDescription(stack, typeName) {
 }
 
 function getStackType(stack, typeName) {
-  return stack.type ? capitalizeString(stack.type) : `${capitalizeString(typeName)} type`;
-}
-
-function capitalizeString(text) {
-  return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
+  return stack.type ? capitalize(stack.type) : `${capitalize(typeName)} type`;
 }
 
 export default withStyles(styles)(StackCard);
