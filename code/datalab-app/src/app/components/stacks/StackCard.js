@@ -50,7 +50,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
           <Typography type="headline">{getDisplayName(stack)}</Typography>
           <div style={{ display: 'flex', direction: 'row' }}>
             <Typography style={{ marginRight: 6 }} type="subheading">{getStackType(stack, typeName)}</Typography>
-            {stack.status && <StackStatus status={stack.status}/>}
+            {typeName !== 'Data Store' && stack.status && <StackStatus status={stack.status}/>}
           </div>
         </div>
         {generateGetImage(classes)(stack)}
