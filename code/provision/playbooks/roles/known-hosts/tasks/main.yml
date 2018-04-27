@@ -1,12 +1,20 @@
+---
 - name: Get the Host Keys
-  shell: "ssh-keyscan -H -T 10 -t ecdsa-sha2-nistp256 {{ item.name }}"
-  with_items: "{{ private_servers }}"
+  shell: "ssh-keyscan -H -T 10 -t ecdsa-sha2-nistp256 {{ hostvars[item].openstack.private_v4 }}"
+  with_items: "{{ groups[server_group] }}"
   register: ssh_known_host_results
   ignore_errors: yes
 
-- name: Add host keys to known_hosts file
-  known_hosts:
-    path: /etc/ssh/ssh_known_hosts
-    name: "{{ item.item.name }}"
-    key: "{{ item.stdout }}"
+- name: Create known_hosts file
+  file:
+    path: "/home/{{ deploy_user }}/.ssh/known_hosts"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    state: touch
+
+- name: Add hosts to /home/ubuntu/.ssh/known_hosts
+  blockinfile:
+    path: "/home/{{ deploy_user }}/.ssh/known_hosts"
+    block: "{{ item.stdout }}"
+    marker: "# {mark} ANSIBLE MANAGED HOST ENTRY {{ item.item }}"
   with_items: "{{ ssh_known_host_results.results }}"

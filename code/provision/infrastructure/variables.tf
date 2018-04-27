@@ -4,7 +4,7 @@ variable "openstack_keypair" {
 }
 
 variable "cluster_name" {
-  default = "test-cluster"
+  default = "datalabs"
 }
 
 variable "number_of_bastions" {
