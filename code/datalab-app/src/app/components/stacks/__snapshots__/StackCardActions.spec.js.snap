@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StackCardActions creates correct snapshot 1`] = `
+<withStyles(CardActions)
+  style={
+    Object {
+      "paddingLeft": 8,
+      "paddingRight": 8,
+    }
+  }
+>
+  <ComponentWrapper
+    permission="open"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+      ]
+    }
+  >
+    <withStyles(Button)
+      color="primary"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+      style={
+        Object {
+          "marginRight": 4,
+        }
+      }
+    >
+      Open
+    </withStyles(Button)>
+  </ComponentWrapper>
+  <ComponentWrapper
+    permission="delete"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+      ]
+    }
+  >
+    <withStyles(Button)
+      color="accent"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+      style={
+        Object {
+          "marginLeft": 4,
+        }
+      }
+    >
+      Delete
+    </withStyles(Button)>
+  </ComponentWrapper>
+</withStyles(CardActions)>
+`;

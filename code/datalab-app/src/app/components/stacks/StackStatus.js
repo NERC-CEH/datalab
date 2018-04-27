@@ -16,12 +16,10 @@ function styles(theme) {
   return {
     text: {
       ...commonStyle,
-      backgroundColor: theme.palette.secondary[800],
       color: theme.palette.grey[100],
     },
     textInvert: {
       ...commonStyle,
-      backgroundColor: theme.palette.grey[100],
       color: theme.palette.secondary[800],
     },
   };

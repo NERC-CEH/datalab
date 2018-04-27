@@ -60,6 +60,8 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
     {stack.status === READY &&
       <StackCardActions
         stack={stack}
+        openStack={openStack}
+        deleteStack={deleteStack}
         userPermissions={userPermissions}
         openPermission={openPermission}
         deletePermission={deletePermission}

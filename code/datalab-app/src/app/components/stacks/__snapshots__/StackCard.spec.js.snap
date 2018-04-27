@@ -15,11 +15,25 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
         >
           name1
         </withStyles(Typography)>
-        <withStyles(Typography)
-          type="subheading"
+        <div
+          style={
+            Object {
+              "direction": "row",
+              "display": "flex",
+            }
+          }
         >
-          Jupyter
-        </withStyles(Typography)>
+          <withStyles(Typography)
+            style={
+              Object {
+                "marginRight": 6,
+              }
+            }
+            type="subheading"
+          >
+            Jupyter
+          </withStyles(Typography)>
+        </div>
       </div>
       <withStyles(CardMedia)
         className="StackCard-cardMedia-3"
@@ -32,61 +46,6 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
       Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
     </withStyles(Typography)>
   </withStyles(CardContent)>
-  <withStyles(CardActions)
-    style={
-      Object {
-        "paddingLeft": 8,
-        "paddingRight": 8,
-      }
-    }
-  >
-    <ComponentWrapper
-      permission="open"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-        ]
-      }
-    >
-      <withStyles(Button)
-        color="primary"
-        disabled={false}
-        onClick={[Function]}
-        raised={true}
-        style={
-          Object {
-            "marginRight": 4,
-          }
-        }
-      >
-        Open
-      </withStyles(Button)>
-    </ComponentWrapper>
-    <ComponentWrapper
-      permission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-        ]
-      }
-    >
-      <withStyles(Button)
-        color="accent"
-        disabled={false}
-        onClick={[Function]}
-        raised={true}
-        style={
-          Object {
-            "marginLeft": 4,
-          }
-        }
-      >
-        Delete
-      </withStyles(Button)>
-    </ComponentWrapper>
-  </withStyles(CardActions)>
 </Card>
 `;
 
@@ -105,11 +64,25 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
         >
           name1
         </withStyles(Typography)>
-        <withStyles(Typography)
-          type="subheading"
+        <div
+          style={
+            Object {
+              "direction": "row",
+              "display": "flex",
+            }
+          }
         >
-          Zeppelin
-        </withStyles(Typography)>
+          <withStyles(Typography)
+            style={
+              Object {
+                "marginRight": 6,
+              }
+            }
+            type="subheading"
+          >
+            Zeppelin
+          </withStyles(Typography)>
+        </div>
       </div>
       <withStyles(CardMedia)
         className="StackCard-cardMedia-3"
@@ -122,65 +95,10 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
       Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
     </withStyles(Typography)>
   </withStyles(CardContent)>
-  <withStyles(CardActions)
-    style={
-      Object {
-        "paddingLeft": 8,
-        "paddingRight": 8,
-      }
-    }
-  >
-    <ComponentWrapper
-      permission="open"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-        ]
-      }
-    >
-      <withStyles(Button)
-        color="primary"
-        disabled={false}
-        onClick={[Function]}
-        raised={true}
-        style={
-          Object {
-            "marginRight": 4,
-          }
-        }
-      >
-        Open
-      </withStyles(Button)>
-    </ComponentWrapper>
-    <ComponentWrapper
-      permission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-        ]
-      }
-    >
-      <withStyles(Button)
-        color="accent"
-        disabled={false}
-        onClick={[Function]}
-        raised={true}
-        style={
-          Object {
-            "marginLeft": 4,
-          }
-        }
-      >
-        Delete
-      </withStyles(Button)>
-    </ComponentWrapper>
-  </withStyles(CardActions)>
 </Card>
 `;
 
-exports[`StackCard should provide defaults and disable the open button if no stack is provided 1`] = `
+exports[`StackCard should provide defaults and hide actions if no stack is provided 1`] = `
 <Card
   className="StackCard-card-1"
   raised={false}
@@ -195,11 +113,25 @@ exports[`StackCard should provide defaults and disable the open button if no sta
         >
           Display Name
         </withStyles(Typography)>
-        <withStyles(Typography)
-          type="subheading"
+        <div
+          style={
+            Object {
+              "direction": "row",
+              "display": "flex",
+            }
+          }
         >
-          TypeName type
-        </withStyles(Typography)>
+          <withStyles(Typography)
+            style={
+              Object {
+                "marginRight": 6,
+              }
+            }
+            type="subheading"
+          >
+            Typename type
+          </withStyles(Typography)>
+        </div>
       </div>
       <withStyles(Icon)
         className="StackCard-cardIcon-4"
@@ -213,60 +145,77 @@ exports[`StackCard should provide defaults and disable the open button if no sta
       A description of the typeName purpose
     </withStyles(Typography)>
   </withStyles(CardContent)>
-  <withStyles(CardActions)
-    style={
+</Card>
+`;
+
+exports[`StackCard should show status ad buttons when status is ready 1`] = `
+<Card
+  className="StackCard-card-1"
+  raised={false}
+>
+  <withStyles(CardContent)>
+    <div
+      className="StackCard-cardHeader-2"
+    >
+      <div>
+        <withStyles(Typography)
+          type="headline"
+        >
+          name1
+        </withStyles(Typography)>
+        <div
+          style={
+            Object {
+              "direction": "row",
+              "display": "flex",
+            }
+          }
+        >
+          <withStyles(Typography)
+            style={
+              Object {
+                "marginRight": 6,
+              }
+            }
+            type="subheading"
+          >
+            Jupyter
+          </withStyles(Typography)>
+          <withStyles(StackStatus)
+            status="ready"
+          />
+        </div>
+      </div>
+      <withStyles(CardMedia)
+        className="StackCard-cardMedia-3"
+        image="jupyter-logo.svg"
+      />
+    </div>
+    <withStyles(Typography)
+      component="p"
+    >
+      Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+    </withStyles(Typography)>
+  </withStyles(CardContent)>
+  <StackCardActions
+    deletePermission="delete"
+    deleteStack={[Function]}
+    openPermission="open"
+    openStack={[Function]}
+    stack={
       Object {
-        "paddingLeft": 8,
-        "paddingRight": 8,
+        "displayName": "name1",
+        "id": "100",
+        "status": "ready",
+        "type": "jupyter",
       }
     }
-  >
-    <ComponentWrapper
-      permission="open"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-        ]
-      }
-    >
-      <withStyles(Button)
-        color="primary"
-        disabled={true}
-        onClick={[Function]}
-        raised={true}
-        style={
-          Object {
-            "marginRight": 4,
-          }
-        }
-      >
-        Open
-      </withStyles(Button)>
-    </ComponentWrapper>
-    <ComponentWrapper
-      permission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-        ]
-      }
-    >
-      <withStyles(Button)
-        color="accent"
-        disabled={true}
-        onClick={[Function]}
-        raised={true}
-        style={
-          Object {
-            "marginLeft": 4,
-          }
-        }
-      >
-        Delete
-      </withStyles(Button)>
-    </ComponentWrapper>
-  </withStyles(CardActions)>
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+      ]
+    }
+  />
 </Card>
 `;

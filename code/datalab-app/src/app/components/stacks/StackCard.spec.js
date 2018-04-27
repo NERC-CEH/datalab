@@ -9,24 +9,21 @@ function shallowRender(props) {
 }
 
 describe('StackCard', () => {
-  const openStackMock = jest.fn();
-  const deleteStackMock = jest.fn();
-
   const permissionProps = {
     userPermissions: ['open', 'delete'],
     openPermission: 'open',
     deletePermission: 'delete',
   };
 
-  const generateProps = type => ({
+  const generateProps = (type, status) => ({
     stack: {
       id: '100',
       displayName: 'name1',
       type,
-      status: 'ready',
+      status,
     },
-    openStack: openStackMock,
-    deleteStack: deleteStackMock,
+    openStack: () => {},
+    deleteStack: () => {},
     typeName: 'notebook',
     ...permissionProps,
   });
@@ -55,43 +52,24 @@ describe('StackCard', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('Open button onClick function calls openStack with correct props', () => {
-    // Arrange
-    const props = generateProps('jupyter');
-
-    // Act
-    const output = shallowRender(props);
-    const onClick = output.find({ children: 'Open' }).prop('onClick');
-
-    // Assert
-    expect(openStackMock).not.toHaveBeenCalled();
-    onClick();
-    expect(openStackMock).toHaveBeenCalledTimes(1);
-    expect(openStackMock).toHaveBeenCalledWith('100');
-  });
-
-  it('Delete button onClick function calls openStack with correct props', () => {
-    // Arrange
-    const props = generateProps('jupyter');
-
-    // Act
-    const output = shallowRender(props);
-    const onClick = output.find({ children: 'Delete' }).prop('onClick');
-
-    // Assert
-    expect(deleteStackMock).not.toHaveBeenCalled();
-    onClick();
-    expect(deleteStackMock).toHaveBeenCalledTimes(1);
-    expect(deleteStackMock).toHaveBeenCalledWith({ displayName: 'name1', id: '100', type: 'jupyter', status: 'ready' });
-  });
-
-  it('should provide defaults and disable the open button if no stack is provided', () => {
+  it('should provide defaults and hide actions if no stack is provided', () => {
     // Arrange
     const props = {
       stack: {},
       typeName: 'typeName',
       ...permissionProps,
     };
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should show status ad buttons when status is ready', () => {
+    // Arrange
+    const props = generateProps('jupyter', 'ready');
 
     // Act
     const output = shallowRender(props);

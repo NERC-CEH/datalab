@@ -66,7 +66,7 @@ class StacksContainer extends Component {
 
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadStacksByCategory(this.props.containerType)
+    return this.props.actions.loadStacksByCategory(this.props.containerType)
       .then(() => {
         this.timeout = setTimeout(this.loadStack, refreshTimeout);
       })

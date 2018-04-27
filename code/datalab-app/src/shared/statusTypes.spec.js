@@ -1,4 +1,4 @@
-import { getStatusTypes, getStatusKeys } from './statusTypes';
+import { getStatusTypes, getStatusKeys, getStatusProps } from './statusTypes';
 
 describe('StatusTypes', () => {
   it('generates expected types', () =>
@@ -6,4 +6,7 @@ describe('StatusTypes', () => {
 
   it('generates expected keys', () =>
     expect(getStatusKeys()).toMatchSnapshot());
+
+  it('getStatusProps extracts status', () =>
+    expect(getStatusProps('ready')).toMatchSnapshot());
 });

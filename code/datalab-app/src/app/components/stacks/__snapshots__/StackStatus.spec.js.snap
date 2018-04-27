@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StackStatus creates correct snapshot for status types 1`] = `
+<withStyles(Typography)
+  align="center"
+  className="StackStatus-textInvert-2"
+  style={
+    Object {
+      "backgroundColor": "#bbdefb",
+    }
+  }
+  type="caption"
+>
+  Requested
+</withStyles(Typography)>
+`;
+
+exports[`StackStatus creates correct snapshot for status types 2`] = `
+<withStyles(Typography)
+  align="center"
+  className="StackStatus-text-1"
+  style={
+    Object {
+      "backgroundColor": "#2196f3",
+    }
+  }
+  type="caption"
+>
+  Creating
+</withStyles(Typography)>
+`;
+
+exports[`StackStatus creates correct snapshot for status types 3`] = `
+<withStyles(Typography)
+  align="center"
+  className="StackStatus-text-1"
+  style={
+    Object {
+      "backgroundColor": "#4caf50",
+    }
+  }
+  type="caption"
+>
+  Ready
+</withStyles(Typography)>
+`;
+
+exports[`StackStatus creates correct snapshot for status types 4`] = `
+<withStyles(Typography)
+  align="center"
+  className="StackStatus-textInvert-2"
+  style={
+    Object {
+      "backgroundColor": "#fdd835",
+    }
+  }
+  type="caption"
+>
+  Unavailable
+</withStyles(Typography)>
+`;

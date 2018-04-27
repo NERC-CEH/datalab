@@ -15,6 +15,8 @@ const toastrSuccessMock = jest.fn();
 notify.error = toastrErrorMock;
 notify.success = toastrSuccessMock;
 
+jest.useFakeTimers();
+
 describe('StacksContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
@@ -119,6 +121,22 @@ describe('StacksContainer', () => {
 
       // Assert
       expect(loadStacksMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('setTimeout is called once the loadStackByCategory has resolved', () => {
+      // Arrange
+      const props = generateProps();
+
+      // Act
+      const output = new PureStacksContainer(props);
+
+      // Assert
+      expect(loadStacksMock).toHaveBeenCalledTimes(0);
+      expect(setTimeout).toHaveBeenCalledTimes(0);
+      return output.loadStack().then(() => {
+        expect(loadStacksMock).toHaveBeenCalledTimes(1);
+        expect(setTimeout).toHaveBeenCalledTimes(1);
+      });
     });
 
     it('passes correct props to StackCard', () => {
