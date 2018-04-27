@@ -18,7 +18,7 @@ function configureRoutes(app) {
   app.all('*', verifyToken); // Routes above this line are not auth checked
   app.get('/stacks', permissionWrapper(STACKS_LIST), stacks.listStacks);
   app.get('/stacks/category/:category', permissionWrapper(STACKS_LIST), stacks.withCategoryValidator, stacks.listByCategory);
-  app.get('/stacks/mount/:mount', permissionWrapper(STORAGE_DELETE), stacks.withMountValidator, stacks.listByMount);
+  app.get('/stacks/mount/:mount', permissionWrapper(STORAGE_LIST), stacks.withMountValidator, stacks.listByMount);
   app.get('/stack/id/:id', permissionWrapper(STACKS_OPEN), stack.withIdValidator, stack.getOneById);
   app.get('/stack/name/:name', permissionWrapper(STACKS_CREATE), stack.withNameValidator, stack.getOneByName);
   app.delete('/stack', permissionWrapper(STACKS_DELETE), stack.deleteStackValidator, stack.deleteStack);
