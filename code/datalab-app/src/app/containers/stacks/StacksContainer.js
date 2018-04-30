@@ -12,6 +12,8 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import notify from '../../components/common/notify';
 import { projectPermissions } from '../../../shared/permissionTypes';
 
+const refreshTimeout = 15000;
+
 const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN } = projectPermissions;
 
 class StacksContainer extends Component {
@@ -22,6 +24,7 @@ class StacksContainer extends Component {
     this.openCreationForm = this.openCreationForm.bind(this);
     this.deleteStack = this.deleteStack.bind(this);
     this.confirmDeleteStack = this.confirmDeleteStack.bind(this);
+    this.loadStack = this.loadStack.bind(this);
   }
 
   openStack(id) {
@@ -61,10 +64,26 @@ class StacksContainer extends Component {
       onCancel: this.props.actions.closeModalDialog,
     });
 
-  componentWillMount() {
+  loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadStacksByCategory(this.props.containerType)
+    return this.props.actions.loadStacksByCategory(this.props.containerType)
+      .then(() => {
+        this.timeout = setTimeout(this.loadStack, refreshTimeout);
+      })
       .catch((() => {}));
+  }
+
+  componentWillMount() {
+    this.loadStack();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const isFetching = nextProps.stacks.fetching;
+    return !isFetching;
   }
 
   render() {

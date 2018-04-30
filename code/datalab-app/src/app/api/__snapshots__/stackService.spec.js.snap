@@ -31,7 +31,7 @@ exports[`stackService loadStacks should build the correct query and unpack the r
 "
     Stacks {
       stacks {
-        id, displayName, name, type, description
+        id, displayName, name, type, description, status
       }
     }"
 `;

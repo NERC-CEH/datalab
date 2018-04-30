@@ -5,7 +5,7 @@ function loadDataStorage() {
   const query = `
     DataStorage {
       dataStorage {
-         id, name, displayName, description, type, stacksMountingStore { id }
+         id, name, displayName, description, type, stacksMountingStore { id }, status
       }
     }`;
 

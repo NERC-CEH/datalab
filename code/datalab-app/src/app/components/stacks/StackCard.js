@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
+import { capitalize } from 'lodash';
 import stackDescriptions from './stackDescriptions';
-import PermissionWrapper from '../common/ComponentPermissionWrapper';
+import StackCardActions from './StackCardActions';
+import StackStatus from './StackStatus';
+import { READY } from '../../../shared/statusTypes';
 
 function styles(theme) {
   const flexProps = {
@@ -46,24 +48,24 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
       <div className={classes.cardHeader}>
         <div>
           <Typography type="headline">{getDisplayName(stack)}</Typography>
-          <Typography type="subheading">{getStackType(stack, typeName)}</Typography>
+          <div style={{ display: 'flex', direction: 'row' }}>
+            <Typography style={{ marginRight: 6 }} type="subheading">{getStackType(stack, typeName)}</Typography>
+            {typeName !== 'Data Store' && stack.status && <StackStatus status={stack.status}/>}
+          </div>
         </div>
         {generateGetImage(classes)(stack)}
       </div>
       <Typography component="p">{getDescription(stack, typeName)}</Typography>
     </CardContent>
-    <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
-      <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
-        <Button style={{ marginRight: 4 }} color="primary" raised disabled={!openStack} onClick={() => openStack(stack.id)}>
-          Open
-        </Button>
-      </PermissionWrapper>
-      <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-        <Button style={{ marginLeft: 4 }} color="accent" raised disabled={!deleteStack} onClick={() => deleteStack(stack)}>
-          Delete
-        </Button>
-      </PermissionWrapper>
-    </CardActions>
+    {stack.status === READY &&
+      <StackCardActions
+        stack={stack}
+        openStack={openStack}
+        deleteStack={deleteStack}
+        userPermissions={userPermissions}
+        openPermission={openPermission}
+        deletePermission={deletePermission}
+      />}
   </Card>;
 
 StackCard.propTypes = {
@@ -72,6 +74,7 @@ StackCard.propTypes = {
     id: PropTypes.string,
     displayName: PropTypes.string,
     type: PropTypes.string,
+    status: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,
   deleteStack: PropTypes.func,
@@ -111,11 +114,7 @@ function getDescription(stack, typeName) {
 }
 
 function getStackType(stack, typeName) {
-  return stack.type ? capitalizeString(stack.type) : `${capitalizeString(typeName)} type`;
-}
-
-function capitalizeString(text) {
-  return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
+  return stack.type ? capitalize(stack.type) : `${capitalize(typeName)} type`;
 }
 
 export default withStyles(styles)(StackCard);
