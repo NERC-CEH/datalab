@@ -23,7 +23,7 @@ Array [
         "domain": "expectedDatalabDomain",
         "name": "expectedDatalabName",
       },
-      "internalEndpoint": "http://expectedType-expectedStackName",
+      "internalEndpoint": "http://expectedType-expectedName",
       "name": "expectedName",
       "status": "requested",
       "type": "expectedType",
