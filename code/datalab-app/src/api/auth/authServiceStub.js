@@ -17,8 +17,14 @@ function retrievePermissionsToken(authorisationToken) {
     sub: decodedToken.sub,
     permissions: [
       'instance-admin',
+      'project:stacks:create',
+      'project:stacks:delete',
       'project:stacks:list',
+      'project:stacks:open',
+      'project:storage:create',
+      'project:storage:delete',
       'project:storage:list',
+      'project:storage:open',
     ],
   };
   const options = { audience, issuer, keyid };
