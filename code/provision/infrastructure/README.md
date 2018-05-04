@@ -40,7 +40,6 @@ Copy `clouds.yaml.example` to `~/.config/openstack/clouds.yaml` and update with 
 appropriate `username` and `password`. Putting passwords in plain text isn't ideal, but
 it is the recommended OpenStack way for supplying these credentials.
 
-
 ## Server Creation
 
 This sections describes the steps required to build a new set of severs and perform
@@ -66,12 +65,39 @@ To ensure old server identities don't cause SSH issues delete the known hosts fi
 rm ~/.ssh/known_hosts
 ```
 
+### Provision Terraform State server
+
+If not already provisioned then a Terraform state management server must be created using Ansible scripts. The scripts
+are across both the `infrastructure` and `playbooks` directories to allow role reuse. A code restructure could remove
+this requirement but two playbooks are still required as dynamic inventory is used and cannot identify the server until
+it has been created.
+
+Execute the following three commands to create a Terraform State server:
+
+```bash
+# In ./infrastructure
+ansible-playbook terraform-state-server.yml
+ansible-playbook terraform-state-server-provision.yml
+
+# In ./playbooks
+ansible-playbook terraform-state-server.yml
+```
+
+This should complete with no errors. Do not proceed if there are.
+
 ### Initialise Terraform
 
-To initialise Terraform execute `terraform init`. This will download the required modules
-and prepare initial state. If trying to work against an inital set of servers then the
-`.tfstate` files will be required but there is no mechanism in place for sharing these
-at the current time.
+To initialise Terraform execute the `terraform init` command below replacing the `ip address`, `uername` and `password`
+for the correct values . This will download the required modules and prepare initial state.
+
+```bash
+terraform init \
+    -backend-config="address=http://<ip_address>/state/datalabs" \
+    -backend-config="lock_address=http://<ip_address>/state/datalabs" \
+    -backend-config="unlock_address=http://<ip_address>/state/datalabs" \
+    -backend-config="username=username" \
+    -backend-config="password=password"
+```
 
 ### Plan & Execute
 

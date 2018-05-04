@@ -21,11 +21,12 @@
         - port: 22
           ip_range: 130.246.243.0/24
 
-    - name: create 1g Volume
+    - name: create 2g Volume
       os_volume:
         state: present
-        size: 1
+        size: 2
         display_name: tf-state-volume
+        wait: yes
 
     - name: Launch an instance
       os_server:
@@ -42,32 +43,11 @@
           - terraform-state-sg
         floating_ips:
           - 192.171.139.187
-        volumes:
-          - tf-state-volume
+        wait: yes
 
-- hosts: datalabs-terraform-state
-  become: yes
-  become_method: sudo
-  gather_facts: no
-  roles:
-    - install-python
-
-- hosts: datalabs-terraform-state
-  become: yes
-  become_method: sudo
-  roles:
-    - reset-machine-id
-    - base-configuration
-
-  tasks:
-    - name: Setup ufw
-      ufw:
-        state: enabled
-        policy: deny
-
-    - name: Add hostname to /etc/hosts
-      lineinfile:
-        dest: /etc/hosts
-        line: "127.0.0.1 datalabs-terraform-state"
-        insertbefore: BOF
-        regexp: "datalabs-terraform-state$"
+    - name: Attach Volume
+      os_server_volume:
+        state: present
+        server: datalabs-terraform-state
+        volume: tf-state-volume
+        device: /dev/sdb

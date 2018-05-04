@@ -6,6 +6,13 @@
     owner: ubuntu
     group: ubuntu
 
+- name: Create Mongo Data directory
+  file:
+    path: /data/db
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+
 - name: Start Docker containers
   command: docker-compose up -d
   args:

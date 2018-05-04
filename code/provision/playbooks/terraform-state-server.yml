@@ -4,5 +4,5 @@
   become_method: sudo
 
   roles:
-    - docker
+    - { role: docker, docker_storage_location: '' }
     - terraform-state

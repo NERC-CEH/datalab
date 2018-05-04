@@ -22,6 +22,8 @@ services:
     image: mongo:3.4
     networks:
       - terraform-http-state
+    volumes:
+      - /data/db:/data/db
     deploy:
       restart_policy:
         condition: on-failure
