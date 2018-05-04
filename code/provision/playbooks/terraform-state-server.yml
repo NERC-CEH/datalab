@@ -1,0 +1,8 @@
+---
+- hosts: datalabs-terraform-state
+  become: yes
+  become_method: sudo
+
+  roles:
+    - { role: docker, docker_storage_location: '' }
+    - terraform-state
