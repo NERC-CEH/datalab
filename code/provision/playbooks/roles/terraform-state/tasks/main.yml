@@ -1,0 +1,12 @@
+---
+- name: Copy Docker Compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: /home/ubuntu/docker-compose.yml
+    owner: ubuntu
+    group: ubuntu
+
+- name: Start Docker containers
+  command: docker-compose up -d
+  args:
+    chdir: /home/ubuntu

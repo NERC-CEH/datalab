@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  server:
+    image: nerc/terraform-state-backend:1.0.0
+    ports:
+      - 80:8000
+    environment:
+      - DATABASE_HOST=mongodb
+      - LOG_LEVEL=info
+      - USERNAME={{ state_username }}
+      - PASSWORD={{ state_password }}
+    networks:
+      - terraform-http-state
+    links:
+      - mongodb
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:3.4
+    networks:
+      - terraform-http-state
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  terraform-http-state:
