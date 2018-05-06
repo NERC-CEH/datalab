@@ -201,47 +201,47 @@ terraform plan
 terraform apply
 ```
 
-Bootstrap the servers to a common base. In the `~/playbooks` directory
+Bootstrap the servers to a common base. In the `~/infrastructure` directory
 
 ```bash
 ansible-playbook bootstrap.yml
 ```
 
-Create Load balancer servers
+Create Load balancer servers. In the `~/playbooks` directory
 
 ```bash
-ansible-playbook loadbalancer.yml
+ansible-playbook load-balancer.yml
 ```
 
-Provision the GlusterFS Servers
+Provision the GlusterFS Servers. In the `~/playbooks` directory
 
 ```bash
 ansible-playbook gluster.yml
 
 ```
 
-Provision the Kubernetes Cluster
+Provision the Kubernetes Cluster. In the `~/playbooks` directory
 
 ```bash
 ansible-playbook kubernetes-cluster.yml
 ```
 
-Provision Heketi Gluster Manager
+Provision Heketi Gluster Manager. In the `~/playbooks` directory
 
 ```bash
 ansible-playbook heketi.yml
 ```
 
-Provision Kubernetes Tools
+Provision Kubernetes Tools. In the `~/playbooks` directory
 
 ```bash
 ansible-playbook kubernetes-tools.yml
 ```
 
-Provision Discourse Servers
+Provision Discourse Servers. In the `~/playbooks` directory
 
 ```bash
-ansible-playbook discourse.yml
+ansible-playbook discourse-server.yml
 ```
 
 ### 
