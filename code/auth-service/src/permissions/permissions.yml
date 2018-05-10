@@ -13,6 +13,9 @@ admin:
       - delete
       - list
       - open
+  - name: users
+    permissions:
+      - list
 user:
   - name: stacks
     permissions:
