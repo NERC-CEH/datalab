@@ -49,6 +49,18 @@ const config = convict({
     default: './src/permissions/permissions.yml',
     env: 'AUTHORISATION_PERMISSIONS',
   },
+  userManagementClientId: {
+    doc: 'Auth0 client id for the user management API',
+    format: 'String',
+    default: 'userMgmtClientId',
+    env: 'USER_MANAGEMENT_API_CLIENT_ID',
+  },
+  userManagementClientSecret: {
+    doc: 'Auth0 client secret for the user management API',
+    format: 'String',
+    default: 'userMgmtClientSecret',
+    env: 'USER_MANAGEMENT_API_CLIENT_SECRET',
+  },
 });
 
 export default config;
