@@ -17,6 +17,8 @@ authorisation_api_client_secret: "{{ vault_authorisation_api_client_secret }}"
 
 test_namespace:
   name: test
+  datalabName: testlab
+  internalVolumeSize: 10G
   domain: test-datalabs.nerc.ac.uk
   nginxVersion: 0.9.0-beta.15
   ports:
@@ -27,6 +29,8 @@ test_namespace:
     policy: localhost/docker-default
 prod_namespace:
   name: prod
+  datalabName: datalab
+  internalVolumeSize: 10G
   domain: datalabs.nerc.ac.uk
   nginxVersion: 0.9.0-beta.15
   ports:
