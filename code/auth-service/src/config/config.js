@@ -61,6 +61,12 @@ const config = convict({
     default: 'userMgmtClientSecret',
     env: 'USER_MANAGEMENT_API_CLIENT_SECRET',
   },
+  authZeroDomain: {
+    doc: 'URL of the auth0 domain',
+    format: 'String',
+    default: 'mjbr.eu.auth0.com',
+    env: 'AUTH_ZERO_DOMAIN',
+  },
 });
 
 export default config;

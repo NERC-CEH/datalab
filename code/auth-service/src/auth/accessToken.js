@@ -1,8 +1,9 @@
 import axios from 'axios';
 import logger from 'winston';
 import { get } from 'lodash';
+import config from '../config/config';
 
-export const authOAuthEndpoint = 'https://mjbr.eu.auth0.com/oauth/token';
+export const authOAuthEndpoint = `https://${config.get('authZeroDomain')}/oauth/token`;
 
 function requestAccessToken(accessTokenRequest) {
   logger.info('Requesting access token.');

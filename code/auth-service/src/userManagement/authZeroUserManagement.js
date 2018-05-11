@@ -8,7 +8,7 @@ import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 export const authZeroManagementApi = 'https://mjbr.eu.auth0.com/api/v2';
 
 const accessTokenRequest = {
-  audience: 'https://mjbr.eu.auth0.com/api/v2/',
+  audience: `https://${config.get('authZeroDomain')}/api/v2/`,
   client_id: config.get('userManagementClientId'),
   client_secret: config.get('userManagementClientSecret'),
 };
