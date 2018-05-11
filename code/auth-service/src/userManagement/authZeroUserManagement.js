@@ -23,11 +23,10 @@ export function asyncGetUsers() {
         headers: {
           Authorization: `Bearer ${bearer}`,
         },
-      })
-      .then(extractUsers)
-      .catch(() => {
-        throw new Error('Unable to retrieve users from User Management Service.');
-      }))
+      }).then(extractUsers)
+        .catch(() => {
+          throw new Error('Unable to retrieve users from User Management Service.');
+        }))
     .catch((err) => {
       logger.error(err.message);
       throw err;
