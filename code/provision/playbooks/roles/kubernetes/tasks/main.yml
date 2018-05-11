@@ -1,4 +1,13 @@
 ---
+- name: Allow HTTPS traffic from bastion if kubernetes master
+  ufw:
+    rule: allow
+    port: 6443
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
+    proto: tcp
+  with_items: "{{ groups['bastion'] }}"
+  when: inventory_hostname in groups['k8s-master']
+
 - name: Initialise Kubernetes control plane
   command: kubeadm init --apiserver-advertise-address={{ kube_master_ip }}
   args:
