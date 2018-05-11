@@ -10,6 +10,27 @@ spec:
       labels:
         app: vault
     spec:
+      initContainers:
+        # This container will generate the expected folder structure for vault. Without this the
+        # vault container will not start.
+        - name: create-vault-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/vault/vault-1"]
+          volumeMounts:
+            - mountPath: /mnt/vault
+              name: vault-volume-1
+        # This container corrects the folder permissions for the generated vault directory to be owned by the
+        # vault:vault (user:group).
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 100:1000 /mnt/vault/vault-1"]
+          volumeMounts:
+            - mountPath: /mnt/vault
+              name: vault-volume-1
       containers:
         - name: vault
           image: {{ .Values.vault.imageName }}:{{ .Values.vault.version }}

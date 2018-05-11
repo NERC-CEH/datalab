@@ -23,3 +23,53 @@
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent
+
+- name: Ensure vault has started
+  shell: >
+    kubectl -n {{ datalab.name }} get deployment -l app=vault -o json |
+      jq '(.items|length > 0) and (.items|map(.status.replicas == .status.availableReplicas)|all)'
+  register: result
+  until: result.stdout == "true"
+  retries: 30
+  delay: 10
+
+- name: Get Vault Service NodePort
+  command: "kubectl get svc vault-service -n {{ datalab.name }} -o 'jsonpath={.spec.ports[0].nodePort}'"
+  register: vault_port
+
+- name: Init vault
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/init"
+    method: PUT
+    body: "{{ lookup('file','init_params.json') }}"
+    body_format: json
+    return_content: yes
+    status_code: 200
+  become: no
+  register: vault_init
+  failed_when: vault_init.status != 200 and 'Vault is already initialized' not in vault_init.json.errors[0]
+
+- name: Save keys locally
+  copy:
+    content: "{{ vault_init.json }}"
+    dest: "{{ playbook_dir }}/.artifacts/.hashicorp_vault_keys.json"
+  delegate_to: localhost
+  when: vault_init.status == 200
+
+- name: Retrieve keys locally
+  set_fact:
+    vault_keys: "{{ lookup('file','{{ playbook_dir }}/.artifacts/.hashicorp_vault_keys.json') | from_json }}"
+  delegate_to: localhost
+  become: no
+
+- name: Unseal vault
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/unseal"
+    method: PUT
+    body: "{ 'key':'{{ item }}' }"
+    body_format: json
+    return_content: yes
+    status_code: 200
+  no_log: true
+  with_items: "{{ vault_keys['keys'] }}"
+  become: no
