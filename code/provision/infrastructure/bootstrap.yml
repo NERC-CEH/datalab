@@ -19,14 +19,14 @@
 
 # The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
 # before we can do anything else
-- hosts: all
+- hosts: all:!datalabs-terraform-state
   become: yes
   become_method: sudo
   gather_facts: no
   roles:
   - install-python
 
-- hosts: all
+- hosts: all:!datalabs-terraform-state
   become: yes
   become_method: sudo
   roles:
