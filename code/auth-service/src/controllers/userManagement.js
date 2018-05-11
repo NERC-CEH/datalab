@@ -1,7 +1,7 @@
-import userManagement from '../userManagement/userManagement';
+import authZeroUserMgmt from '../userManagement/authZeroUserManagement';
 
 function getUsers(req, res) {
-  return userManagement.getUsers()
+  return authZeroUserMgmt.getUsers()
     .then(users => res.json({ users }));
 }
 
