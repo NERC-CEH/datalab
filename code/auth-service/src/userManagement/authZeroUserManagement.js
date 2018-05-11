@@ -5,7 +5,7 @@ import config from '../config/config';
 import requestAccessToken from '../auth/accessToken';
 import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
-const authZeroManagementApi = 'https://mjbr.eu.auth0.com/api/v2';
+export const authZeroManagementApi = 'https://mjbr.eu.auth0.com/api/v2';
 
 const accessTokenRequest = {
   audience: 'https://mjbr.eu.auth0.com/api/v2/',
