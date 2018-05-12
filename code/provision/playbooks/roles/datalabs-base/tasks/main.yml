@@ -73,3 +73,64 @@
   no_log: true
   with_items: "{{ vault_keys['keys'] }}"
   become: no
+
+- name: Create Vault Policy
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/policy/secret-admin-policy"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    body: "{{ lookup('file','secret-admin-policy.json') }}"
+    body_format: json
+    return_content: yes
+    status_code: 204
+  become: no
+
+- name: Enable App Role
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/auth/approle"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    body: '{"type":"approle"}'
+    body_format: json
+    return_content: yes
+    status_code: 204
+  become: no
+  register: app_role_enable
+  failed_when: app_role_enable.status != 202 and 'path is already in use' not in app_role_enable.json.errors[0]
+
+- name: Create the App Role
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/auth/approle/role/secret-admin"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    body: '{"policies":"secret-admin-policy", "bound_cidr_list": "0.0.0.0/0", "bind_secret_id":"false"}'
+    body_format: json
+    return_content: yes
+    status_code: 204
+  become: no
+
+- name: Retrieve the App Role ID
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/auth/approle/role/secret-admin/role-id"
+    method: GET
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    return_content: yes
+    status_code: 200
+  become: no
+  register: app_role
+
+- name: Create secret for Vault AppRole
+  shell: kubectl create secret generic vault-secret --from-literal=secret="{{ app_role.json.data.role_id }}" -n {{ datalab.name }}
+  register: vault_secret_result
+  changed_when: vault_secret_result.rc == 0
+  failed_when: vault_secret_result.rc != 0 and 'AlreadyExists' not in vault_secret_result.stderr
+
+- name: Create secret for Vault Management AppRole
+  shell: kubectl create secret generic vault-management-secret --from-literal=secret="{{ app_role.json.data.role_id }}" -n {{ datalab.name }}
+  register: vault_management_secret_result
+  changed_when: vault_management_secret_result.rc == 0
+  failed_when: vault_management_secret_result.rc != 0 and 'AlreadyExists' not in vault_management_secret_result.stderr
