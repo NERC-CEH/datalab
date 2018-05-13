@@ -20,7 +20,7 @@ variable "number_of_k8s_nodes" {
 }
 
 variable "number_of_gluster_nodes" {
-  default = 3
+  default = 4
 }
 
 variable "flavor_bastion" {
