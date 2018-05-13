@@ -1,0 +1,136 @@
+---
+- name: Create temporary helm chart directory
+  file: path={{ chart_directory }} state=directory
+
+- name: Copy helm chart to server
+  copy:
+    src: files/
+    dest: "{{ chart_directory }}"
+    owner: ubuntu
+    group: docker
+    mode: 0644
+
+- name: Create values file from template
+  template:
+    src: values.yml.j2
+    dest: "{{ chart_directory }}/values.yml"
+    force: yes
+    owner: "{{ deploy_user }}"
+    group: docker
+
+- name: Install chart
+  command: "helm upgrade --install {{ datalab.name }}-datalabs-base --namespace {{ datalab.name }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
+
+- name: Delete temporary helm chart directory
+  file: path={{ tmp_directory }} state=absent
+
+- name: Ensure vault has started
+  shell: >
+    kubectl -n {{ datalab.name }} get deployment -l app=vault -o json |
+      jq '(.items|length > 0) and (.items|map(.status.replicas == .status.availableReplicas)|all)'
+  register: result
+  until: result.stdout == "true"
+  retries: 30
+  delay: 10
+
+- name: Get Vault Service NodePort
+  command: "kubectl get svc vault-service -n {{ datalab.name }} -o 'jsonpath={.spec.ports[0].nodePort}'"
+  register: vault_port
+
+- name: Init vault
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/init"
+    method: PUT
+    body: "{{ lookup('file','init_params.json') }}"
+    body_format: json
+    return_content: yes
+    status_code: 200
+  become: no
+  register: vault_init
+  failed_when: vault_init.status != 200 and 'Vault is already initialized' not in vault_init.json.errors[0]
+
+- name: Save keys locally
+  copy:
+    content: "{{ vault_init.json }}"
+    dest: "{{ playbook_dir }}/.artifacts/.hashicorp_vault_keys.json"
+  delegate_to: localhost
+  when: vault_init.status == 200
+
+- name: Retrieve keys locally
+  set_fact:
+    vault_keys: "{{ lookup('file','{{ playbook_dir }}/.artifacts/.hashicorp_vault_keys.json') | from_json }}"
+  delegate_to: localhost
+  become: no
+
+- name: Unseal vault
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/unseal"
+    method: PUT
+    body: "{ 'key':'{{ item }}' }"
+    body_format: json
+    return_content: yes
+    status_code: 200
+  no_log: true
+  with_items: "{{ vault_keys['keys'] }}"
+  become: no
+
+- name: Create Vault Policy
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/policy/secret-admin-policy"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    body: "{{ lookup('file','secret-admin-policy.json') }}"
+    body_format: json
+    return_content: yes
+    status_code: 204
+  become: no
+
+- name: Enable App Role
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/sys/auth/approle"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    body: '{"type":"approle"}'
+    body_format: json
+    return_content: yes
+    status_code: 204
+  become: no
+  register: app_role_enable
+  failed_when: app_role_enable.status != 202 and 'path is already in use' not in app_role_enable.json.errors[0]
+
+- name: Create the App Role
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/auth/approle/role/secret-admin"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    body: '{"policies":"secret-admin-policy", "bound_cidr_list": "0.0.0.0/0", "bind_secret_id":"false"}'
+    body_format: json
+    return_content: yes
+    status_code: 204
+  become: no
+
+- name: Retrieve the App Role ID
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/auth/approle/role/secret-admin/role-id"
+    method: GET
+    headers:
+      X-Vault-Token: "{{ vault_keys['root_token'] }}"
+    return_content: yes
+    status_code: 200
+  become: no
+  register: app_role
+
+- name: Create secret for Vault AppRole
+  shell: kubectl create secret generic vault-secret --from-literal=secret="{{ app_role.json.data.role_id }}" -n {{ datalab.name }}
+  register: vault_secret_result
+  changed_when: vault_secret_result.rc == 0
+  failed_when: vault_secret_result.rc != 0 and 'AlreadyExists' not in vault_secret_result.stderr
+
+- name: Create secret for Vault Management AppRole
+  shell: kubectl create secret generic vault-management-secret --from-literal=secret="{{ app_role.json.data.role_id }}" -n {{ datalab.name }}
+  register: vault_management_secret_result
+  changed_when: vault_management_secret_result.rc == 0
+  failed_when: vault_management_secret_result.rc != 0 and 'AlreadyExists' not in vault_management_secret_result.stderr

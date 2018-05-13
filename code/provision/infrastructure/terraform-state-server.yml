@@ -20,6 +20,10 @@
           ip_range: 130.246.243.0/24
         - port: 22
           ip_range: 130.246.243.0/24
+        - port: 80
+          ip_range: 130.246.189.181
+        - port: 80
+          ip_range: 130.246.188.147
 
     - name: create 2g Volume
       os_volume:

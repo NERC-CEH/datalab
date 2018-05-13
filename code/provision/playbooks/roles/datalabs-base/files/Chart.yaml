@@ -1,0 +1,3 @@
+name: Datalab Base Installation
+version: 1.0.0
+description: Helm chart to create internal volume and prepare Vault

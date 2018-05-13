@@ -1,0 +1,64 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vault-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      initContainers:
+        # This container will generate the expected folder structure for vault. Without this the
+        # vault container will not start.
+        - name: create-vault-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/vault/vault-1"]
+          volumeMounts:
+            - mountPath: /mnt/vault
+              name: vault-volume-1
+        # This container corrects the folder permissions for the generated vault directory to be owned by the
+        # vault:vault (user:group).
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 100:1000 /mnt/vault/vault-1"]
+          volumeMounts:
+            - mountPath: /mnt/vault
+              name: vault-volume-1
+      containers:
+        - name: vault
+          image: {{ .Values.vault.imageName }}:{{ .Values.vault.version }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8200
+          env:
+            - name: VAULT_LOCAL_CONFIG
+              value:
+                  storage "file" {
+                    path = "/vault/data/vault-1"
+                  }
+
+                  listener "tcp" {
+                    address     = "0.0.0.0:8200"
+                    tls_disable = 1
+                  }
+                  disable_mlock = true
+          args:
+            - server
+          securityContext:
+            capabilities:
+              add:
+                - IPC_LOCK
+          volumeMounts:
+            - mountPath: /vault/data
+              name: vault-volume-1
+      volumes:
+        - name: vault-volume-1
+          persistentVolumeClaim:
+            claimName: {{ .Values.datalabName }}-internal-claim
