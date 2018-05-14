@@ -49,6 +49,24 @@ const config = convict({
     default: './src/permissions/permissions.yml',
     env: 'AUTHORISATION_PERMISSIONS',
   },
+  userManagementClientId: {
+    doc: 'Auth0 client id for the user management API',
+    format: 'String',
+    default: 'userMgmtClientId',
+    env: 'USER_MANAGEMENT_API_CLIENT_ID',
+  },
+  userManagementClientSecret: {
+    doc: 'Auth0 client secret for the user management API',
+    format: 'String',
+    default: 'userMgmtClientSecret',
+    env: 'USER_MANAGEMENT_API_CLIENT_SECRET',
+  },
+  authZeroDomain: {
+    doc: 'URL of the auth0 domain',
+    format: 'String',
+    default: 'mjbr.eu.auth0.com',
+    env: 'AUTH_ZERO_DOMAIN',
+  },
 });
 
 export default config;
