@@ -207,51 +207,17 @@ Bootstrap the servers to a common base. In the `~/infrastructure` directory
 ansible-playbook bootstrap.yml
 ```
 
-Create Load balancer servers. In the `~/playbooks` directory
+Execute the full suite of Datalabs playbooks. In the `~/playbooks` directory
 
 ```bash
-ansible-playbook load-balancer.yml
+ansible-playbook datalabs.yml
 ```
 
-Provision the GlusterFS Servers. In the `~/playbooks` directory
+This playbook combines playbooks that do the following:
 
-```bash
-ansible-playbook gluster.yml
-
-```
-
-Provision the Kubernetes Cluster. In the `~/playbooks` directory
-
-```bash
-ansible-playbook kubernetes-cluster.yml
-```
-
-Provision Heketi Gluster Manager. In the `~/playbooks` directory
-
-```bash
-ansible-playbook heketi.yml
-```
-
-Provision Kubernetes Tools. In the `~/playbooks` directory
-
-```bash
-ansible-playbook kubernetes-tools.yml
-```
-
-Provision Discourse Servers. In the `~/playbooks` directory
-
-```bash
-ansible-playbook discourse-server.yml
-```
-
-### 
-
-To provision Gluster servers run the GlusterFS playbook
-
-```bash
-
-```
-### Load Balancers
-
-### Kubernetes
-
+* Configure Load Balancers
+* Configure Gluster Servers
+* Configure Kubernetes Cluster
+* Configure Heketi as dynamic Gluster provisioner
+* Install Kubernetes Tools (Monitoring and Logging)
+* Install Discourse
