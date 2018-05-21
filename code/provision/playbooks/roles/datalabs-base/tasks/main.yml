@@ -6,8 +6,6 @@
   copy:
     src: files/
     dest: "{{ chart_directory }}"
-    owner: ubuntu
-    group: docker
     mode: 0644
 
 - name: Create values file from template
@@ -15,8 +13,6 @@
     src: values.yml.j2
     dest: "{{ chart_directory }}/values.yml"
     force: yes
-    owner: "{{ deploy_user }}"
-    group: docker
 
 - name: Install chart
   command: "helm upgrade --install {{ datalab.name }}-datalabs-base --namespace {{ datalab.name }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
@@ -45,7 +41,6 @@
     body_format: json
     return_content: yes
     status_code: 200
-  become: no
   register: vault_init
   failed_when: vault_init.status != 200 and 'Vault is already initialized' not in vault_init.json.errors[0]
 
@@ -60,7 +55,6 @@
   set_fact:
     vault_keys: "{{ lookup('file','{{ playbook_dir }}/.artifacts/.hashicorp_vault_keys.json') | from_json }}"
   delegate_to: localhost
-  become: no
 
 - name: Unseal vault
   uri:
@@ -72,7 +66,6 @@
     status_code: 200
   no_log: true
   with_items: "{{ vault_keys['keys'] }}"
-  become: no
 
 - name: Create Vault Policy
   uri:
@@ -84,7 +77,6 @@
     body_format: json
     return_content: yes
     status_code: 204
-  become: no
 
 - name: Enable App Role
   uri:
@@ -96,9 +88,8 @@
     body_format: json
     return_content: yes
     status_code: 204
-  become: no
   register: app_role_enable
-  failed_when: app_role_enable.status != 202 and 'path is already in use' not in app_role_enable.json.errors[0]
+  failed_when: app_role_enable.status != 204 and 'path is already in use' not in app_role_enable.json.errors[0]
 
 - name: Create the App Role
   uri:
@@ -110,7 +101,6 @@
     body_format: json
     return_content: yes
     status_code: 204
-  become: no
 
 - name: Retrieve the App Role ID
   uri:
@@ -120,7 +110,6 @@
       X-Vault-Token: "{{ vault_keys['root_token'] }}"
     return_content: yes
     status_code: 200
-  become: no
   register: app_role
 
 - name: Create secret for Vault AppRole

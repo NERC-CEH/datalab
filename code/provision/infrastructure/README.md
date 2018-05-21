@@ -77,6 +77,8 @@ Execute the following three commands to create a Terraform State server:
 ```bash
 # In ./infrastructure
 ansible-playbook terraform-state-server.yml
+
+# Restart the server if the disk isn't correctly mounted
 ansible-playbook terraform-state-server-provision.yml
 
 # In ./playbooks
