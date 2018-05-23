@@ -67,10 +67,19 @@
       pip: name=jmespath
 
     - name: Install OpenStack tools
-      pip: name=python-openstackclient
+      pip:
+        name: python-openstackclient
+        version: 3.15.0
 
     - name: Install Shade (required by OpenStack)
-      pip: name=shade
+      pip:
+        name: shade
+        version: 1.27.1
+
+    - name: Install os-client-config (required for OpenStack dynamic inventory)
+      pip:
+        name: os-client-config
+        version: 1.29.0
 
     - name: Install python3-pip
       apt:
