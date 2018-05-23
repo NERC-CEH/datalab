@@ -14,6 +14,7 @@ authorisation_public_key: "{{ vault_authorisation_public_key }}"
 authorisation_private_key: "{{ vault_authorisation_private_key }}"
 
 authorisation_api_client_secret: "{{ vault_authorisation_api_client_secret }}"
+user_management_api_client_secret: "{{ vault_user_management_api_client_secret }}"
 
 test_namespace:
   name: test

@@ -34,3 +34,15 @@
   register: prod_authorisation_secret_result
   changed_when: prod_authorisation_secret_result.rc == 0
   failed_when: prod_authorisation_secret_result.rc != 0 and 'AlreadyExists' not in prod_authorisation_secret_result.stderr
+
+- name: Deploy Test User Management API client secret
+  shell: kubectl create secret generic user-management-api-client-secret --from-literal=secret="{{ user_management_api_client_secret }}" -n test
+  register: test_user_management_api_client_secret
+  changed_when: test_user_management_api_client_secret.rc == 0
+  failed_when: test_user_management_api_client_secret.rc != 0 and 'AlreadyExists' not in test_user_management_api_client_secret.stderr
+
+- name: Deploy Prod User Management API client secret
+  shell: kubectl create secret generic user-management-api-client-secret --from-literal=secret="{{ user_management_api_client_secret }}" -n prod
+  register: prod_authorisation_secret_result
+  changed_when: prod_authorisation_secret_result.rc == 0
+  failed_when: prod_authorisation_secret_result.rc != 0 and 'AlreadyExists' not in prod_authorisation_secret_result.stderr
