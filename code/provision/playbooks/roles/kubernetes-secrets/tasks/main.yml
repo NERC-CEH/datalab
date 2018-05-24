@@ -46,3 +46,15 @@
   register: prod_authorisation_secret_result
   changed_when: prod_authorisation_secret_result.rc == 0
   failed_when: prod_authorisation_secret_result.rc != 0 and 'AlreadyExists' not in prod_authorisation_secret_result.stderr
+
+- name: Deploy Test User Minio shared store secrets
+  shell: kubectl create secret generic minio-shared-store-secret --from-literal=accessKey="{{ test_minio_shared_store_access_key }}" --from-literal=secretKey="{{ test_minio_shared_store_secret_key }}" -n test
+  register: test_minio_shared_store_secret
+  changed_when: test_minio_shared_store_secret.rc == 0
+  failed_when: test_minio_shared_store_secret.rc != 0 and 'AlreadyExists' not in test_minio_shared_store_secret.stderr
+
+- name: Deploy Prod User Minio shared store secrets
+  shell: kubectl create secret generic minio-shared-store-secret --from-literal=accessKey="{{ minio_shared_store_access_key }}" --from-literal=secretKey="{{ minio_shared_store_secret_key }}" -n prod
+  register: minio_shared_store_secret
+  changed_when: minio_shared_store_secret.rc == 0
+  failed_when: minio_shared_store_secret.rc != 0 and 'AlreadyExists' not in minio_shared_store_secret.stderr
