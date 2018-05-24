@@ -7,13 +7,20 @@ test_ssl_private_key: "{{ vault_test_ssl_private_key }}"
 ssl_certificate: "{{ vault_ssl_certificate }}"
 ssl_private_key: "{{ vault_ssl_private_key }}"
 
-test_authorisation_public_key: "{{ test_vault_authorisation_public_key }}"
-test_authorisation_private_key: "{{ test_vault_authorisation_private_key }}"
+test_authorisation_public_key: "{{ vault_test_authorisation_public_key }}"
+test_authorisation_private_key: "{{ vault_test_authorisation_private_key }}"
 
 authorisation_public_key: "{{ vault_authorisation_public_key }}"
 authorisation_private_key: "{{ vault_authorisation_private_key }}"
 
 authorisation_api_client_secret: "{{ vault_authorisation_api_client_secret }}"
+user_management_api_client_secret: "{{ vault_user_management_api_client_secret }}"
+
+minio_shared_store_access_key: "{{ vault_minio_shared_store_access_key }}"
+minio_shared_store_secret_key: "{{ vault_minio_shared_store_secret_key }}"
+
+test_minio_shared_store_access_key: "{{ vault_test_minio_shared_store_access_key }}"
+test_minio_shared_store_secret_key: "{{ vault_test_minio_shared_store_secret_key }}"
 
 test_namespace:
   name: test
