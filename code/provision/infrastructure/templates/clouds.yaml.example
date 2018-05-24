@@ -9,3 +9,6 @@ clouds:
       user_domain_name: jasmin
     interface: public
     identity_api_version: 3
+ansible:
+  use_hostnames: True
+  expand_hostvars: True
