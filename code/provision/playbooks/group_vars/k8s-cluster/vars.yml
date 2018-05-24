@@ -7,8 +7,8 @@ test_ssl_private_key: "{{ vault_test_ssl_private_key }}"
 ssl_certificate: "{{ vault_ssl_certificate }}"
 ssl_private_key: "{{ vault_ssl_private_key }}"
 
-test_authorisation_public_key: "{{ test_vault_authorisation_public_key }}"
-test_authorisation_private_key: "{{ test_vault_authorisation_private_key }}"
+test_authorisation_public_key: "{{ vault_test_authorisation_public_key }}"
+test_authorisation_private_key: "{{ vault_test_authorisation_private_key }}"
 
 authorisation_public_key: "{{ vault_authorisation_public_key }}"
 authorisation_private_key: "{{ vault_authorisation_private_key }}"
