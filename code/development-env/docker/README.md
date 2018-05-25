@@ -6,6 +6,8 @@
 export AUTHORISATION_API_CLIENT_ID= # from Auth0
 export AUTHORISATION_API_CLIENT_SECRET= # from Auth0
 export AUTHORISATION_API_IDENTIFIER= # from Auth0
+export USER_MANAGEMENT_API_CLIENT_ID= # from Auth0
+export USER_MANAGEMENT_API_CLIENT_SECRET= # from Auth0
 ```
 
 - Start mongo & vault containers
