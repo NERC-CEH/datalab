@@ -17,7 +17,7 @@ describe('user management controller', () => {
         .then(() => {
           expect(response.statusCode).toBe(200);
           expect(response._getData()) // eslint-disable-line no-underscore-dangle
-            .toEqual(JSON.stringify({ users: 'expectedValue' }));
+            .toEqual(JSON.stringify('expectedValue'));
         });
     });
   });

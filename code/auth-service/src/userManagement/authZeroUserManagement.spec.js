@@ -49,7 +49,10 @@ describe('auth0 management API', () => {
 
       return asyncGetUsers()
         .then(roles =>
-          expect(roles).toEqual(userList.slice(0, 2)));
+          expect(roles).toEqual([
+            { name: 'firstName', userId: 'one' },
+            { name: 'secondName', userId: 'one' },
+          ]));
     });
 
     it('throws an error when unable to get users', () => {
