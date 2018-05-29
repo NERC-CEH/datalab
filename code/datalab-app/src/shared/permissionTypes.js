@@ -5,6 +5,7 @@ const OPEN = 'open';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
+const USERS = 'users';
 
 export const PROJECT = 'project';
 
@@ -41,9 +42,12 @@ const flatMapPermissions = (outer, inner) => Object.entries(outer)
 
 export const elementPermissions = flatMapPermissions(elements, permissions);
 
-export const projectPermissions = flatMapPermissions(projects, elementPermissions);
+export const usersPermissions = flatMapPermissions({ USERS }, { LIST });
+
+export const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
 
 export default {
   ...elementPermissions,
+  ...usersPermissions,
   ...projectPermissions,
 };
