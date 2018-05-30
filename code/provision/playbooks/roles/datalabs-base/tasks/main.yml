@@ -20,6 +20,28 @@
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent
 
+- name: Ensure internal storage PVC has been created
+  shell: >
+    kubectl -n {{ datalab.name }} get pvc -o json |
+      jq '.items | map(select(.metadata.name == "{{ datalab.datalabName }}-internal-claim")) | (length == 1) and ((.[].status.phase == "Available") or (.[].status.phase == "Bound") )'
+  register: result
+  until: result.stdout == "true"
+  retries: 30
+  delay: 10
+
+- name: Get internal storage volume name
+  shell: >
+    kubectl -n {{ datalab.name }} get pvc -o json |
+      jq '.items | map(select(.metadata.name == "{{ datalab.datalabName }}-internal-claim")) | .[0].spec.volumeName'
+  register: internal_storage_volume_name
+
+- name: Set internal storage PV reclaim policy to Retain
+  shell: >
+    kubectl patch pv {{ internal_storage_volume_name.stdout }} -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+  register: internal_storage_patch
+  changed_when: internal_storage_patch.rc == 0
+  failed_when: internal_storage_patch.rc != 0 and 'not patched' not in internal_storage_patch.stdout
+
 - name: Ensure vault has started
   shell: >
     kubectl -n {{ datalab.name }} get deployment -l app=vault -o json |
