@@ -20,6 +20,7 @@ function getUserPermissions(authZeroToken) {
       'project:storage:delete',
       'project:storage:list',
       'project:storage:open',
+      'project:users:list',
     ]);
   }
 

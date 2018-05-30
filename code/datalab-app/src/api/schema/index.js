@@ -7,6 +7,7 @@ import { datalab, datalabs } from './datalabs';
 import { createStack, deleteStack } from './mutateStack';
 import { createDataStore, deleteDataStore } from './mutateDataStorage';
 import userPermissions from './userPermissions';
+import users from './users';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -22,6 +23,7 @@ const RootQueryType = new GraphQLObjectType({
     datalabs,
     userPermissions,
     checkNameUniqueness,
+    users,
   },
 });
 

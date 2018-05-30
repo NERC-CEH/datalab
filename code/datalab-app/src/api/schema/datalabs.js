@@ -16,9 +16,6 @@ const DatalabType = new GraphQLObjectType({
     domain: {
       type: GraphQLString,
     },
-    volume: {
-      type: GraphQLString,
-    },
   },
 });
 
