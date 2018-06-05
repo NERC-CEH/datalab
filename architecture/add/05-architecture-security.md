@@ -6,10 +6,8 @@ This section details the Datalabs architecture from the view-point of its securi
 * **[Server security](#server-security)**
 * **[Authentication and Authorization](#authentication-and-authorization)**
 * **[Secret management](#secret-management)**
-
-* **[Trust zones](#trust-zones)**
 * **[Data security](#data-security)**
-
+* **[Trust zones](#trust-zones)**
 
 ## Cluster Security
 
@@ -418,7 +416,6 @@ Pods are provisioned with an `APP_ROLE` that can be exchanged with Vault for an
 `access_token` which in turn can be use to request the required `secret`. This is shown
 in the diagram below.
 
-//TODO
 ![Vault Secret Access](./diagrams/vault-secret-access.png)
 
 Secrets are stored in a path structure by Vault. The first part of the path determines
@@ -529,6 +526,52 @@ allows them to then be loaded into containers as environment variables at runtim
 Secrets are loaded into the cluster via Ansible scripts with the values stored securely
 in encrypted ansible vaults.
 
+## Data Security
 
+The data security requirements around datalabs are still evolving as we understand how
+users want to use the system and collaborate and share their data. This section describes
+how we currently protect different resources. This is expected to evolve over time.
 
+### Data Volumes
 
+Data volumes are the central storage mechanism for datalabs and are the primary resource
+that must be secured. Security restrictions are applied using authorisation tokens that
+give the user permissions and id. This information can then be used to apply restrictions
+per resource to determine whether a user can browse to a Minio browser or mount the
+volume into a user provisioned stack.
+
+The desired security model is still evolving but at the current time is as follows.
+
+* Any user with `storage:create` permission can provision a data volume.
+* The user who creates a volume is deemed to be its owner.
+* Any volume owner can add additional viewers to a volume.
+* If a user can view a volume they can mount it into a container.
+
+### Notebooks
+
+Notebooks are all provisioned to individual users and are not shared. Notebookes are
+only visible to the user who created them.
+
+### Sites
+
+Sites can be provisioned as either public or private. This does not reflect who can view
+them within Datalabs but rather whether the public endpoint should be protected by
+ingress controller authz. Sites, as notebooks are only visible to the user who
+provisioned them.
+
+## Trust Zones
+
+There are three trust zones in datalabs:
+
+* **Public** - Datalabs is a public facing web application. All users landing on the
+home page are untrusted and should only be be able to access public resources.
+* **Authorised** - All requests to datalabs are passed through Ingress controllers to
+determine whether the user is authorised before passing them into the authorised trust
+zone. Here users identity has been validated and gateway services have determined that
+they are allow to submit the request. Individual services are still responsible for
+performing service specific authorisation or resource checks.
+* **Full trust** - Some low level internal services operate in a full trust zone meaning
+they have administrator access to underlying resource and so are the last gatekeeper for
+incoming requests. An example is the infrastructure service that has high level control
+over the Kubernetes cluster.
+Kubernetes cluster.
