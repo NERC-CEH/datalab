@@ -433,6 +433,15 @@ container called `myjupyter`.
 Several different mechanisms are in place to provide seamless log on to different types
 of containers. This section details the mechanism in place for each specific type.
 
+#### Jupyter
+
+Jupyter authentication is via a token passed on the URL as the site is opened. The token
+required is set at container start and is stored in Vault. To achieve seamless login,
+the datalabs application needs to retrieve the token from Vault and then open the url
+in a separate browser tab.
+
+No additional containers are needed for seamless login to Juptyer.
+
 #### Minio
 
 Minio authentication is via an authorisation token that is stored in HTML5 local storage.
@@ -463,11 +472,51 @@ open a Minio browser with seamless log in:
 
 ![Minio Login](./diagrams/minio-login.png)
 
-#### Jupyter
-
 #### Zeppelin
 
+Zeppelin authentication is via an authorisation token that is stored in an HttpOnly
+cookie. To achieve seamless login, the datalabs application needs to retrieve a valid
+authentication token from the Zeppelin API and drop the required token such that Zeppelin
+picks it up in subsequent requests. Zeppelin expects a cookie with the following
+structure:
+
+```
+Set-Cookie: JSESSIONID=<token>; Path=/; HttpOnly
+```
+
+Browser security means that it is only possible to set an HttpOnly cookie by attaching it
+to a response from the same sub-domain. This requires a similar but different approach to
+Minio tokens described above.
+
+A micro service is required to listen on a url, process the parameters passed in on the
+URL and then construct and attach the appropriate cookie. This is implemented in the
+`docker-zeppelin-connect` [project](https://github.com/NERC-CEH/docker-zeppelin-connect)
+which is a tiny core Node.js application with no external dependencies. The resposne from
+the connect container is a `302` redirect to immediately direct the user to Zeppelin to
+avoid them seeing the response.
+
+As for the Minio seamless logon, requests to the sub-domain are filtered by the Ingress
+rule allowing requests to `/connect` to be redirected to the connect container while
+requests to `/` are routed to Zeppelin.
+
 #### RStudio
+
+RStudio authentication works broadly in the same way as Zeppelin once an authentication
+token has been retrieved. The token is attached to a request to a dedicated
+`docker-zeppelin-connect` container and the appropriate token is dropped and the user
+redirected to RStudio. The `docker-zeppelin-connect` container should be renamed to
+`docker-cookie-connect` now it is shared, but this has never been prioritised.
+
+Retrieving an RStudio authentication token is complex as individual login requests must
+be signed using a certificate published by the RStudio server. The process is as follows:
+
+* Request user credentials from Vault
+* Request RStudio certificate
+* Create, sign and submit log in request to retrieve authentication cookie
+* Process cookie to parse required details
+* Open connect in a new browser tab providing the appropriate query parameters to drop an
+RStudio cookie
+* Redirect to RStudio once the cookie has been dropped.
 
 ## Secret Management
 
