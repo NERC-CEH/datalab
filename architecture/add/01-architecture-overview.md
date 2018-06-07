@@ -54,33 +54,38 @@ advantage of the scalable compute.
 
 | Quality | Note |
 |---------|------|
-| **Reliability** | |
-| **Security** | |
-| **Scalability** | |
-| **Useability** | |
-| **Testability** | |
-| **Maintainability** | |
-| **Extendability** | |
+| Scalability | It is anticipated that the data volume will grow over time as the system
+continues to add new data sources. It is important that any technologies chosen can
+scale horizontally to support large volumes of data. |
+| Security | The system being developed is a public facing website which means that
+security must be carefully considered in all aspects of the application. Given the
+dynamic nature of the system we need to ensure that security is built in to all layers of
+the system and implemented to ensure that systems are secure by default. |
+| Testability | Given the system will have a large number of different components it is important to ensure that each is independently testable to ensure that developers can work independently. |
+| Usability | Given the Datalabs system will be a public facing website, it is important that usability is considered. |
+| Maintainability | It is hoped that this system will be continually developed and maintained over a period of time. Given this, it is important that the code is developed to all of the appropriate coding standards and that ease of maintenance is considered during development. For example, deployments should be scripted to ensure that configuring system instance is quick. |
 
-### Engineering Principles
+## Engineering Principles
 
 | Principle | Rational | Architectural impacts |
 |-----------|----------|-----------------------|
-| **Separation of concerns** ||
-| **Horizontal scaling** ||
-| **Low coupling** ||
-| **Bounded contexts** ||
-| **Containerised services** ||
-| **Automation** ||
-| **12 Factors** ||
+| Separation of concerns | The application should be developed with clear boundaries between different areas of responsibility. This will be driven out by the use of TDD at a low level and by the layered design at a higher level. | The system will use the architectural layering defined for each component. |
+| Containerised services | Packaging system artefacts into Docker containers means that services can be easily moved between environments. | A container orchestration platform will be required to operate the containerised services. |
+| 12 Factors | The principles described as [12 Factors](https://12factor.net/) provide a good baseline for |
+| Use of frameworks and libraries | The use of standard frameworks and libraries, where appropriate, will enable efficient development and ensure that industry best practice is followed. | Where possible, third party libraries and frameworks should be used to facilitate development. They should be carefully evaluated prior to use to ensure that they are under active development, have clear documentation and a large community. |
+| Communication via HTTP | The system components will need to communicate with each other to store and retrieve data. This communication should be via HTTP as far as possible for simplicity. | Communication between components must be carefully considered to ensure that the system isn't too 'chatty'. |
+| Error handling | The system needs to ensure that unexpected errors do not reveal details of the system’s implementation | Each component will use a consistent approach to error handling. |
+| Logging | All components should implement logging appropriate to the components function. | Logging should be considered as a first class concern for all components since they will require different strategies. For example, the back end data collection tools should report status, progress and any errors in a format suitable for either developers of administrators. The website on the other hand should present the users with clear but appropriate error messages while logging detailed failure messages to the server logs.
+| Automated deployment | The system will consist of many components and will need to be regularly and easily deployed | All components should be designed to be easily deployed. |
 
-### Architectural Styles
+## Architectural Styles
 
 | Style | Description |
 |-------|-------------|
-| **MicroService architecture** |  |
-| **Multi-tennancy** |  |
-| **Federated authentication** | |
+| Service architecture | The most appropriate technology for each component will be selected and any functions required by other systems will be exposed via HTTP as services. This is not a microservices architecture since there will only be a handful of different services. |
+| Separated presentation | Separated presentation gives separation of concerns in the presentation tier and allows for better testability. |
+| Modular architecture | Within each component a modular architecture will be used to ensure that we have clean separation between different areas of responsibility. For example, the data collection code will separate out access to remote systems from database access from data manipulation to allow each to be developed and tested independently. |
+| Multi-tennancy | Datalabs is expected to host multiple independent user groups and so should be designed to be a multi-tenant system. Resources should be protected by account/project information as well as user identity. |
 
 ## Platform Context
 
