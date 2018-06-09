@@ -8,6 +8,7 @@ This section details the Datalabs architecture from the view-point of its securi
 * **[Secret management](#secret-management)**
 * **[Data security](#data-security)**
 * **[Trust zones](#trust-zones)**
+* **[Container Security](#container-security)**
 
 ## Cluster Security
 
@@ -575,3 +576,46 @@ they have administrator access to underlying resource and so are the last gateke
 incoming requests. An example is the infrastructure service that has high level control
 over the Kubernetes cluster.
 Kubernetes cluster.
+
+## Container Security
+
+Docker containers are managed by the Docker daemon that runs as `root` on the host
+machine. Container isolation is a big security concern for running workloads in this way.
+There is always the risk that if an attacker can escape the confines of the container and
+access the host machine they will have full access to the system. In the datalabs use
+case this is of particular concern as through Notebook containers users are given
+terminal access within the container providing a much larger attack surface than with
+a container just serving a web server. Additionally, users would like to be able to
+install code libraries into the containers to allow them to develop their models. Given
+this users need to be given `sudo` permissions within the container and we need to
+build containers in a way that doesn't expose us more than is necessary.
+
+Two techniques have been applied to make our containers more secure. These are creating
+a specific container user and applying AppArmor security policies to our containers.
+
+### Container User
+
+All of the Notebook docker containers have complex Docker builds to provision a specific
+user with a known user and group ID that will not exist on the host machine. This means
+that if a user escapes the container they will have no rights on the host machine.
+
+Containers all exist in their own repositories:
+
+* [docker-jupyter-notebook](https://github.com/NERC-CEH/docker-jupyter-notebook)\
+* [docker-zeppelin](https://github.com/NERC-CEH/docker-zeppelin)
+* [docker-rshiny](https://github.com/NERC-CEH/docker-rshiny)
+
+Additionally, containers have a `start.sh` script that performs startup configuration to
+ensure that the container is switched to the correct user.
+
+> Note: The RStudio server option currently uses a third party container as it provided
+options to allow it to be used without requiring custom configuration.
+
+### AppArmor
+
+TODO: AppArmor description
+
+### Init Containers
+
+TODO: Init Container description
+
