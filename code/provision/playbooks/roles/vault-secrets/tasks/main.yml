@@ -1,0 +1,31 @@
+---
+- name: Get Vault Service NodePort
+  command: "kubectl get svc vault-service -n {{ datalab.name }} -o 'jsonpath={.spec.ports[0].nodePort}'"
+  register: vault_port
+
+- name: Request Vault AppRole ID
+  shell: >
+      kubectl -n {{ datalab.name }} get secret vault-secret -o json |
+        jq '.data.secret' -r |
+        base64 --decode
+  register: app_role_id
+
+- name: Request Vault AppRole Token
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/auth/approle/login"
+    method: POST
+    body: '{"role_id":"{{ app_role_id.stdout }}"}'
+    body_format: json
+    return_content: yes
+    status_code: 200
+  register: app_role_token
+
+- name: Deploy Shared Data Store Minio Secrets
+  uri:
+    url: "http://localhost:{{ vault_port.stdout }}/v1/secret/datalab/storage/{{ datalab.datalabName }}"
+    method: POST
+    headers:
+      X-Vault-Token: "{{ app_role_token.json.auth.client_token }}"
+    body: '{"access_key":"{{ datalab.minio.accessKey }}", "secret_key":"{{ datalab.minio.secretKey }}"}'
+    body_format: json
+    status_code: 204

@@ -32,6 +32,10 @@
     - role: kubernetes-namespace
       namespace: "{{ prod_namespace }}"
     - role: kubernetes-secrets
+    - role: vault-secrets
+      datalab: "{{ test_namespace }}"
+    - role: vault-secrets
+      datalab: "{{ prod_namespace }}"
 
   environment:
     KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
