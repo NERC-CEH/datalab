@@ -22,7 +22,7 @@
 
 - name: Deploy Shared Data Store Minio Secrets
   uri:
-    url: "http://localhost:{{ vault_port.stdout }}/v1/secret/datalab/storage/{{ datalab.datalabName }}"
+    url: "http://localhost:{{ vault_port.stdout }}/v1/secret/{{ datalab.datalabName }}/storage/{{ datalab.datalabName }}"
     method: POST
     headers:
       X-Vault-Token: "{{ app_role_token.json.auth.client_token }}"
