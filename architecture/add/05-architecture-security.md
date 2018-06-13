@@ -613,9 +613,38 @@ options to allow it to be used without requiring custom configuration.
 
 ### AppArmor
 
-TODO: AppArmor description
+[AppArmor](https://wiki.ubuntu.com/AppArmor) is a Mandatory Access Control system which
+is a kernel enhancement to confine programs to a limited set of resources. AppArmor's
+security model is to bind access control attributes to programs rather than to users.
+
+Applying an AppArmor policy provides a way to restrict the actions a malicious user could
+take if they were able to get console access to a running docker container. By specifying
+a policy with only a small subset of commands required to serve the purpose of the
+container the attack surface is reduced and security improved.
+
+It is possible to bind AppArmor policies to Docker containers as they start by specifying
+a `Deployment` manifest annotation and the majority of Datalabs have a policy applied.
+
+AppArmor policies are complex to write so [Bane](https://github.com/genuinetools/bane)
+has is used to provide a higher level DSL. Policies are then generated and deployed to
+the Kubernetes cluster nodes using the Ansible scripts
 
 ### Init Containers
 
-TODO: Init Container description
+[Init Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
+provide a mechanism for running a container as a pod is starting prior to running the
+main workload. Datalabs makes use of this in the dynamic pods to prepare the mounted
+storage volumes. The init containers run a `busybox` image that provides a lightweight
+way to use common UNIX utilities. The actions performed are usually to ensure that a
+directory is present and that the file permissions are set appropriately to be access
+by the user of the main container.
+
+
+
+
+
+
+
+
+
 
