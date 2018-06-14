@@ -5,7 +5,7 @@ import { stack, stacks, stacksByCategory } from './stacks';
 import checkNameUniqueness from './checkNameUniqueness';
 import { datalab, datalabs } from './datalabs';
 import { createStack, deleteStack } from './mutateStack';
-import { createDataStore, deleteDataStore } from './mutateDataStorage';
+import { createDataStore, deleteDataStore, addUserToDataStore, removeUserFromDataStore } from './mutateDataStorage';
 import userPermissions from './userPermissions';
 import users from './users';
 
@@ -35,6 +35,8 @@ const RootMutationType = new GraphQLObjectType({
     deleteStack,
     createDataStore,
     deleteDataStore,
+    addUserToDataStore,
+    removeUserFromDataStore,
   },
 });
 
