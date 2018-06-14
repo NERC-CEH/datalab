@@ -6,7 +6,7 @@ import permissionChecker from '../auth/permissionChecker';
 import { elementPermissions, usersPermissions } from '../../shared/permissionTypes';
 
 const { STORAGE_CREATE, STORAGE_DELETE } = elementPermissions;
-const { USERS_LIST } = usersPermissions;
+const { USERS_GRANT, USERS_FORBID } = usersPermissions;
 
 const DATALAB_NAME = config.get('datalabName');
 
@@ -37,7 +37,7 @@ export const addUserToDataStore = {
     dataStore: { type: DataStorageUpdateType },
   },
   resolve: (obj, { dataStore: { name, users } }, { user }) =>
-    permissionChecker(USERS_LIST, user, () => dataStorageRepository.addUsers(user, name, users)),
+    permissionChecker(USERS_GRANT, user, () => dataStorageRepository.addUsers(user, name, users)),
 };
 
 export const removeUserFromDataStore = {
@@ -47,5 +47,5 @@ export const removeUserFromDataStore = {
     dataStore: { type: DataStorageUpdateType },
   },
   resolve: (obj, { dataStore: { name, users } }, { user }) =>
-    permissionChecker(USERS_LIST, user, () => dataStorageRepository.removeUsers(user, name, users)),
+    permissionChecker(USERS_FORBID, user, () => dataStorageRepository.removeUsers(user, name, users)),
 };

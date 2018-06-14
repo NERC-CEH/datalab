@@ -2,6 +2,8 @@ const CREATE = 'create';
 const DELETE = 'delete';
 const LIST = 'list';
 const OPEN = 'open';
+const GRANT = 'grant';
+const FORBID = 'forbid';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
@@ -12,11 +14,17 @@ export const PROJECT = 'project';
 const keyDelim = '_';
 export const permissionDelim = ':';
 
-const permissions = {
+const elementsPermissionList = {
   CREATE,
   DELETE,
   LIST,
   OPEN,
+};
+
+const usersPermissionList = {
+  LIST,
+  GRANT,
+  FORBID,
 };
 
 const elements = {
@@ -40,9 +48,9 @@ const flatMapPermissions = (outer, inner) => Object.entries(outer)
   .reduce((previous, current) => [...previous, ...current], [])
   .reduce((previous, current) => Object.assign(previous, current), {});
 
-export const elementPermissions = flatMapPermissions(elements, permissions);
+export const elementPermissions = flatMapPermissions(elements, elementsPermissionList);
 
-export const usersPermissions = flatMapPermissions({ USERS }, { LIST });
+export const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
 
 export const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
 

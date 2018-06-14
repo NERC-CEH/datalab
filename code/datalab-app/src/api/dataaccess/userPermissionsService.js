@@ -21,6 +21,8 @@ function getUserPermissions(authZeroToken) {
       'project:storage:list',
       'project:storage:open',
       'project:users:list',
+      'project:users:grant',
+      'project:users:forbid',
     ]);
   }
 

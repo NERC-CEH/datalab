@@ -16,6 +16,8 @@ admin:
   - name: users
     permissions:
       - list
+      - grant
+      - forbid
 user:
   - name: stacks
     permissions:
