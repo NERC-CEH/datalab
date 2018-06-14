@@ -10,6 +10,9 @@ Object {
   "PROJECT_STORAGE_DELETE": "project:storage:delete",
   "PROJECT_STORAGE_LIST": "project:storage:list",
   "PROJECT_STORAGE_OPEN": "project:storage:open",
+  "PROJECT_USERS_FORBID": "project:users:forbid",
+  "PROJECT_USERS_GRANT": "project:users:grant",
+  "PROJECT_USERS_LIST": "project:users:list",
 }
 `;
 

@@ -42,7 +42,6 @@ function deleteByName({ sub }, name) {
 
 function update({ sub }, name, updatedValues) {
   const updateObj = {
-    ...setUsers([sub]),
     $set: updatedValues,
   };
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false });

@@ -11,6 +11,8 @@ Array [
   "firstProjectName:storage:list",
   "firstProjectName:storage:open",
   "firstProjectName:users:list",
+  "firstProjectName:users:grant",
+  "firstProjectName:users:forbid",
   "secondProjectName:stacks:create",
   "secondProjectName:stacks:delete",
   "secondProjectName:stacks:list",
