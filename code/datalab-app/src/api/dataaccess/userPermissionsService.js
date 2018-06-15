@@ -16,6 +16,7 @@ function getUserPermissions(authZeroToken) {
       'project:stacks:delete',
       'project:stacks:list',
       'project:stacks:open',
+      'project:stacks:edit',
       'project:storage:create',
       'project:storage:delete',
       'project:storage:list',

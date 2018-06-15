@@ -10,6 +10,7 @@ Array [
   "firstProjectName:storage:delete",
   "firstProjectName:storage:list",
   "firstProjectName:storage:open",
+  "firstProjectName:storage:edit",
   "firstProjectName:users:list",
   "secondProjectName:stacks:create",
   "secondProjectName:stacks:delete",

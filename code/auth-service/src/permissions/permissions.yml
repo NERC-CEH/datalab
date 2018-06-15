@@ -13,6 +13,7 @@ admin:
       - delete
       - list
       - open
+      - edit
   - name: users
     permissions:
       - list

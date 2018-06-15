@@ -87,7 +87,34 @@ describe('dataStorageRepository', () => {
         expect(mockDatabase().query()).toEqual({ name });
         expect(mockDatabase().entity()).toEqual({
           $set: { status: 'deleted' },
-          $addToSet: { users: 'username' },
+        });
+        expect(mockDatabase().params()).toEqual({ upsert: false });
+      });
+  });
+
+  it('addUser should use correct operators to update users array', () => {
+    const name = 'volume';
+    const userIds = ['user1', 'users2'];
+
+    return dataStorageRepository.addUsers(user, name, userIds)
+      .then(() => {
+        expect(mockDatabase().query()).toEqual({ name });
+        expect(mockDatabase().entity()).toEqual({
+          $addToSet: { users: { $each: userIds } },
+        });
+        expect(mockDatabase().params()).toEqual({ upsert: false });
+      });
+  });
+
+  it('removeUser should use correct operators to update users array', () => {
+    const name = 'volume';
+    const userIds = ['user1', 'users2'];
+
+    return dataStorageRepository.removeUsers(user, name, userIds)
+      .then(() => {
+        expect(mockDatabase().query()).toEqual({ name });
+        expect(mockDatabase().entity()).toEqual({
+          $pull: { users: { $in: userIds } },
         });
         expect(mockDatabase().params()).toEqual({ upsert: false });
       });

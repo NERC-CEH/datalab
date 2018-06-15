@@ -39,7 +39,7 @@ function createDataStore(dataStore) {
 
 function deleteDataStore(dataStore) {
   const mutation = `
-    DeleteDataStore($dataStore: DataStorageDeletionRequest) {
+    DeleteDataStore($dataStore: DataStorageUpdateRequest) {
       deleteDataStore(dataStore: $dataStore) {
         name
       }

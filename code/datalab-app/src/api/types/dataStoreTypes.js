@@ -11,6 +11,10 @@ import { StackType } from '../types/stackTypes';
 import minioTokenService from '../dataaccess/minioTokenService';
 import stackService from '../dataaccess/stackService';
 import { READY } from '../../shared/statusTypes';
+import { usersPermissions } from '../../shared/permissionTypes';
+import permissionChecker from '../auth/permissionChecker';
+
+const { USERS_LIST } = usersPermissions;
 
 export const StorageType = new GraphQLEnumType({
   name: 'StorageType',
@@ -51,6 +55,10 @@ export const DataStoreType = new GraphQLObjectType({
     internalEndpoint: {
       type: GraphQLString,
     },
+    users: {
+      type: new GraphQLList(GraphQLString),
+      resolve: (obj, args, { user }) => permissionChecker(USERS_LIST, user, () => obj.users),
+    },
     accessKey: {
       type: GraphQLString,
       resolve: (obj, args, { user }) => minioTokenService.requestMinioToken(obj, user),
@@ -89,12 +97,15 @@ export const DataStorageCreationType = new GraphQLInputObjectType({
   },
 });
 
-export const DataStorageDeletionType = new GraphQLInputObjectType({
-  name: 'DataStorageDeletionRequest',
-  description: 'Type to describe the mutation for creating a new data store',
+export const DataStorageUpdateType = new GraphQLInputObjectType({
+  name: 'DataStorageUpdateRequest',
+  description: 'Type to describe the mutation for updating or deleting a new data store',
   fields: {
     name: {
       type: GraphQLString,
+    },
+    users: {
+      type: new GraphQLList(GraphQLString),
     },
   },
 });
