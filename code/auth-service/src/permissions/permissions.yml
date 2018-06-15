@@ -13,11 +13,10 @@ admin:
       - delete
       - list
       - open
+      - edit
   - name: users
     permissions:
       - list
-      - grant
-      - forbid
 user:
   - name: stacks
     permissions:

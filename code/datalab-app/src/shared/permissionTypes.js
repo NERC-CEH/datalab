@@ -2,8 +2,7 @@ const CREATE = 'create';
 const DELETE = 'delete';
 const LIST = 'list';
 const OPEN = 'open';
-const GRANT = 'grant';
-const FORBID = 'forbid';
+const EDIT = 'edit';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
@@ -19,12 +18,11 @@ const elementsPermissionList = {
   DELETE,
   LIST,
   OPEN,
+  EDIT,
 };
 
 const usersPermissionList = {
   LIST,
-  GRANT,
-  FORBID,
 };
 
 const elements = {

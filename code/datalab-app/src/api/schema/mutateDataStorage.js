@@ -3,10 +3,9 @@ import config from '../config';
 import dataStoreApi from '../infrastructure/dataStoreApi';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import permissionChecker from '../auth/permissionChecker';
-import { elementPermissions, usersPermissions } from '../../shared/permissionTypes';
+import { elementPermissions } from '../../shared/permissionTypes';
 
-const { STORAGE_CREATE, STORAGE_DELETE } = elementPermissions;
-const { USERS_GRANT, USERS_FORBID } = usersPermissions;
+const { STORAGE_CREATE, STORAGE_DELETE, STORAGE_EDIT } = elementPermissions;
 
 const DATALAB_NAME = config.get('datalabName');
 
@@ -37,7 +36,7 @@ export const addUserToDataStore = {
     dataStore: { type: DataStorageUpdateType },
   },
   resolve: (obj, { dataStore: { name, users } }, { user }) =>
-    permissionChecker(USERS_GRANT, user, () => dataStorageRepository.addUsers(user, name, users)),
+    permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
 };
 
 export const removeUserFromDataStore = {
@@ -47,5 +46,5 @@ export const removeUserFromDataStore = {
     dataStore: { type: DataStorageUpdateType },
   },
   resolve: (obj, { dataStore: { name, users } }, { user }) =>
-    permissionChecker(USERS_FORBID, user, () => dataStorageRepository.removeUsers(user, name, users)),
+    permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.removeUsers(user, name, users)),
 };
