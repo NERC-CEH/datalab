@@ -4,6 +4,14 @@
 
 * **[Introduction](#introduction)**
 * **[Architectural Background](#architectural-background)**
+* **[Platform Context](./02-architecture-context.md)**
+* **[View-Points & Views](#view-points--views)**
+    * [Functional view](./03-architecture-functional.md)
+    * [Process view](./04-architecture-process.md)
+    * [Security view](./05-architecture-security.md)
+    * [Deployment view](./06-architecture-deployment.md)
+    * [Development view](./07-architecture-development.md)
+    * [Testing view](./08-architecture-testing.md)
 * **[Architecture Decision Records](../decisions)**
 
 ## Introduction

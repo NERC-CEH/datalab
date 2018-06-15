@@ -24,7 +24,38 @@ across the available resources. [Kubernetes](https://kubernetes.io/) is a contai
 orchestration tool that provides abstractions over the core pieces required to deploy
 a system.
 
-### Kubernetes Primer
+There is a [Kubernetes primer](#kubernetes-primer) at the end of this section.
+
+## Deployment Structure
+
+Datalabs is deployed in three different layers and a variety of tools are used in the
+process:
+
+* **Infrastructure Layer** - Datalabs is deployed into an OpenStack tenancy provided and
+supported by STFC. Servers are provisioned with appropriate networking and storage
+using Terraform.
+* **Platform Layer** - This layer has Kubernetes at its heart, but also includes load
+balancers, a Gluster storage cluster and a bastion server. The full software installation
+across all of these servers is managed via Ansible scripts.
+* **Application Layer** - Datalabs is deployed as Docker containers into a fully
+configured Kubernetes cluster that has ingress and storage fully configured. Deployment
+is currently done via a custom tool called Bara but should be moved to Helm now it has
+established itself as the Kubernetes deployment tool.
+
+## Environment Handling
+
+Multiple environments are required for datalabs to support ongoing development while
+providing a stable production environment. Ideally these two environments would be
+completely isolated but due to the complexity of managing Kubernetes and Gluster clusters
+there is only a single multi tenant environment. Two instances of Datalabs are separated
+into two namespaces, `prod` and `test`. Each namespace runs its own ingress controller,
+there are two external load balancers and two discourse servers. Storage is dynamically
+provisioned through a single Gluster cluster.
+
+The Bara deployment tool is provided with a full configuration file appropriate to the
+environment so it is possible to run different versions of datalabs in each environment.
+
+## Kubernetes Primer
 
 Kubernetes provides abstractions over all of the pieces required to run an application.
 Datalabs makes use of many of these and this section describes those in use. Kubernetes
@@ -203,7 +234,3 @@ access to resources if required.
 RBAC is used in a number of different areas throughout datalabs. The main usage is to
 provide the infrastructure API access to the Kubernetes API by assigning a service
 account that can managed Kubernetes resources.
-
-### Deployment Structure
-
-TODO: Add deployment structure
