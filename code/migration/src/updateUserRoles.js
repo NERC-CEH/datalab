@@ -5,11 +5,11 @@ import config from './config/config';
 import logger from './logger';
 import { USER } from './config/roles';
 import getKnownUsers from './knownUsers/getKnownUsers';
+import getAccessToken from './auth/getAccessToken';
 
 const knownUserRoles = getKnownUsers();
 const unknownUserRoles = [USER];
 
-const authOAuthEndpoint = `https://${config.get('authZeroDomain')}.eu.auth0.com/oauth/token`;
 const authZeroManagementApi = `https://${config.get('authZeroDomain')}.eu.auth0.com/api/v2`;
 const authZeroAuthApi = `https://${config.get('authZeroDomain')}.eu.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/api`;
 
@@ -25,33 +25,28 @@ const authorisationTokenRequest = {
   client_secret: config.get('authorisationClientSecret'),
 };
 
+const getManagementToken = getAccessToken(managementTokenRequest);
+const getAuthorisationToken = getAccessToken(authorisationTokenRequest);
+
 const authKeyMapping = {
   name: 'name',
   user_id: 'userId',
 };
 
-const requestAccessToken = accessTokenRequest =>
-  axios.post(authOAuthEndpoint, {
-    ...accessTokenRequest,
-    grant_type: 'client_credentials',
-  })
-    .then(response => get(response, 'data.access_token'))
-    .then((response) => {
-      logger.info(`Retrived access token for: ${accessTokenRequest.audience}`);
-      return response;
-    })
-    .catch((err) => { throw err; });
+const createHeaders = token => ({
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
 const getUserList = () =>
-  requestAccessToken(managementTokenRequest)
+  getManagementToken()
     .then(token =>
       axios.get(`${authZeroManagementApi}/users`, {
         params: {
           fields: 'name,user_id',
         },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        ...createHeaders(token),
       }))
     .then(response =>
       get(response, 'data', [])
@@ -64,21 +59,25 @@ const getUserList = () =>
     })
     .catch((err) => { throw err; });
 
-const getRoles = (token, user) =>
-  axios.get(`${authZeroAuthApi}/users/${user.userId}/roles`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+const getAllRoles = () =>
+  getAuthorisationToken()
+    .then(token =>
+      axios.get(`${authZeroAuthApi}/roles`, createHeaders(token)))
+    .then(response => get(response, 'data.roles'))
+    .then(roles => roles.map(({ name, _id }) => ({ name, id: _id })))
+    .catch((err) => { throw err; });
+
+const getRoles = user =>
+  getAuthorisationToken()
+    .then(token =>
+      axios.get(`${authZeroAuthApi}/users/${user.userId}/roles`, createHeaders(token)))
     .then(response => get(response, 'data'))
     .then(roleList => roleList.map(role => role.name))
     .then(roles => ({ ...user, roles }))
     .catch((err) => { throw err; });
 
 const getUsersRoles = users =>
-  requestAccessToken(authorisationTokenRequest)
-    .then(token => Promise.mapSeries(users, user =>
-      getRoles(token, user)));
+  Promise.mapSeries(users, user => getRoles(user));
 
 const getKnownExpectedRoles = name => get(find(knownUserRoles, { name }), 'roles', []);
 
@@ -95,14 +94,55 @@ const addExpectedRoles = users =>
 const findRoleDiff = users =>
   users.map(user => ({
     ...user,
-    addRole: difference(user.expectedRoles, user.roles),
-    removeRole: difference(user.roles, user.expectedRoles),
+    addRoles: difference(user.expectedRoles, user.roles).map(roleName => ({ roleName })),
+    removeRoles: difference(user.roles, user.expectedRoles).map(roleName => ({ roleName })),
   }));
+
+const selectModifiedUsers = users =>
+  users.filter(({ addRoles, removeRoles }) => addRoles.length > 0 || removeRoles.length > 0);
+
+const getRoleId = (name, roleList) => find(roleList, { name });
+
+const findRoleIds = users =>
+  getAllRoles()
+    .then(roleList =>
+      users.map(user => ({
+        ...user,
+        addRole: user.addRoles.map(({ roleName }) => getRoleId(roleName, roleList)),
+        removeRole: user.removeRoles.map(({ roleName }) => getRoleId(roleName, roleList)),
+      })));
+
+const addUserRoles = user =>
+  getAuthorisationToken()
+    .then(token => Promise.resolve(token).then(() => console.log('patched'))) // patch user here
+    .then(() => logger.info(`Added user "${user.name}" to role "${user.role.name}"`))
+    .then(() => user);
+
+const execAddUserRoles = users =>
+  Promise.mapSeries(users, user =>
+    Promise.mapSeries(user.addRole, role => addUserRoles({ ...user, role })))
+    .then(() => users);
+
+const removeUserRoles = user =>
+  getAuthorisationToken()
+    .then(token => Promise.resolve(token).then(() => console.log('deleted'))) // patch user here
+    .then(() => logger.info(`Remove user "${user.name}" to role "${user.role.name}"`))
+    .then(() => user);
+
+const execRemoveUserRoles = users =>
+  Promise.mapSeries(users, user =>
+    Promise.mapSeries(user.removeRole, role => removeUserRoles({ ...user, role })))
+    .then(() => users);
 
 const updateUsers = () =>
   getUserList()
     .then(getUsersRoles)
     .then(addExpectedRoles)
-    .then(findRoleDiff);
+    .then(findRoleDiff)
+    .then(selectModifiedUsers)
+    .then(findRoleIds)
+    .then(execAddUserRoles)
+    .then(execRemoveUserRoles)
+    .then(() => 'done');
 
 export default updateUsers;
