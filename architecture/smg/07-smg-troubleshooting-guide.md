@@ -12,7 +12,7 @@ failing.
 
 ## Check Kubernetes Status
 
-```
+```bash
 # Ensure that all nodes are healty
 kubectl get nodes
 
@@ -34,7 +34,7 @@ First check the server status through the
 Next check that Ansible is able to contact all servers. From a local Ansible management
 machine execute
 
-```
+```bash
 ansible -m ping all
 ```
 

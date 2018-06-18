@@ -44,7 +44,7 @@ are HTML escaped by default so for some values the templates need to be escaped 
 To deploy using bara execute with the deploy keyword and the required templates and
 configuration files. For example
 
-```
+```bash
 bara deploy -t templates/datalab -c config/test.yml
 ```
 
@@ -54,7 +54,7 @@ It is possible to watch the status of pods in the cluster to see the old contain
 stopping and the new ones starting. Depending on the scale of the change and the size of
 the containers this can vary in time. To watch the pod status execute
 
-```
+```bash
 kubectl get pods -n <namespace> --watch
 ```
 
@@ -62,8 +62,6 @@ kubectl get pods -n <namespace> --watch
 
 To verify the deployment:
 
-* Hard refresh the datalabs home page to ensure the expected version number is visible in
-the footer.
-* Request the status of the API (https://datalab-api.datalabs.nerc.ac.uk/status) and
-check that it returns the correct verison.
+* Hard refresh the datalabs home page to ensure the expected version number is visible in the footer.
+* Request the status of the [API](https://datalab-api.datalabs.nerc.ac.uk/status) and check that it returns the correct verison.
 * Test the functionality of the site focusing on the area of change.

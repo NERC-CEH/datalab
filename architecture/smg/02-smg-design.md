@@ -115,7 +115,7 @@ Host k8s-tunnel
 Then run `autossh` to open the tunnel. This will open the tunnel and ensure that it stays
 open.
 
-```
+```bash
 autossh -M 0 -f -T -N k8s-tunnel
 ```
 
@@ -132,7 +132,7 @@ To authenticate to the Kubernetes API it is necessary to have a config file corr
 configure with credentials and cluster configuration and the `KUBECONIG` environment
 variable configured with the path to the config file.
 
-```
+```bash
 export KUBECONFIG=/path/to/config
 ```
 
@@ -157,7 +157,7 @@ tunneled IP address.
 
 Example config file snippet:
 
-```
+```yaml
 apiVersion: v1
 clusters:
 - cluster:
@@ -181,7 +181,7 @@ users:
 
 With a hosts file entry of:
 
-```
+```bash
 127.0.0.1       datalabs-k8s-master-1
 ```
 
@@ -190,14 +190,14 @@ server on the Kubernetes master.
 
 To verify configuration check the connection to the cluster run
 
-```
+```bash
 kubectl version
 ```
 
 The response should look something like below with both client and server versions. If
 the server version is missing this means the connection is not correctly configured.
 
-```
+```bash
 Client Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.2", GitCommit:"5fa2db2bd46ac79e5e00a4e6ed24191080aa463b", GitTreeState:"clean", BuildDate:"2018-01-18T21:11:08Z", GoVersion:"go1.9.2", Compiler:"gc", Platform:"darwin/amd64"}
 Server Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.7", GitCommit:"dd5e1a2978fd0b97d9b78e1564398aeea7e7fe92", GitTreeState:"clean", BuildDate:"2018-04-18T23:58:35Z", GoVersion:"go1.9.3", Compiler:"gc", Platform:"linux/amd64
 ```
