@@ -1,0 +1,8 @@
+---
+- hosts: k8s-master
+
+  roles:
+    - helm
+
+  environment:
+      KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
