@@ -1,42 +1,28 @@
 import axios from 'axios';
 import { get, mapKeys, find, difference } from 'lodash';
 import Promise from 'bluebird';
+import config from './config/config';
 import logger from './logger';
+import { USER } from './config/roles';
+import getKnownUsers from './knownUsers/getKnownUsers';
 
-const USER_MANAGEMENT_API_CLIENT_ID = process.env.USER_MANAGEMENT_API_CLIENT_ID;
-const USER_MANAGEMENT_API_CLIENT_SECRET = process.env.USER_MANAGEMENT_API_CLIENT_SECRET;
-const AUTHORISATION_API_IDENTIFIER = process.env.AUTHORISATION_API_IDENTIFIER;
-const AUTHORISATION_API_CLIENT_ID = process.env.AUTHORISATION_API_CLIENT_ID;
-const AUTHORISATION_API_CLIENT_SECRET = process.env.AUTHORISATION_API_CLIENT_SECRET;
-
-const authZeroDomain = 'mjbr';
-const authOAuthEndpoint = `https://${authZeroDomain}.eu.auth0.com/oauth/token`;
-const authZeroManagementApi = `https://${authZeroDomain}.eu.auth0.com/api/v2`;
-const authZeroAuthApi = `https://${authZeroDomain}.eu.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/api`;
-
-const PROJECT = 'project';
-// const ADMIN = `${PROJECT}:admin`;
-const USER = `${PROJECT}:user`;
-// const VIEWER = `${PROJECT}:viewer`;
-// const INSTANCE_ADMIN = 'instance-admin';
-
+const knownUserRoles = getKnownUsers();
 const unknownUserRoles = [USER];
 
-const knownUserRoles = [
-];
-
-const knownUsers = knownUserRoles.map(knownUser => knownUser.name);
+const authOAuthEndpoint = `https://${config.get('authZeroDomain')}.eu.auth0.com/oauth/token`;
+const authZeroManagementApi = `https://${config.get('authZeroDomain')}.eu.auth0.com/api/v2`;
+const authZeroAuthApi = `https://${config.get('authZeroDomain')}.eu.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/api`;
 
 const managementTokenRequest = {
   audience: `${authZeroManagementApi}/`,
-  client_id: USER_MANAGEMENT_API_CLIENT_ID,
-  client_secret: USER_MANAGEMENT_API_CLIENT_SECRET,
+  client_id: config.get('userManagementClientId'),
+  client_secret: config.get('userManagementClientSecret'),
 };
 
 const authorisationTokenRequest = {
-  audience: AUTHORISATION_API_IDENTIFIER,
-  client_id: AUTHORISATION_API_CLIENT_ID,
-  client_secret: AUTHORISATION_API_CLIENT_SECRET,
+  audience: config.get('authorisationIdentifier'),
+  client_id: config.get('authorisationClientId'),
+  client_secret: config.get('authorisationClientSecret'),
 };
 
 const authKeyMapping = {
@@ -95,6 +81,8 @@ const getUsersRoles = users =>
       getRoles(token, user)));
 
 const getKnownExpectedRoles = name => get(find(knownUserRoles, { name }), 'roles', []);
+
+const knownUsers = knownUserRoles.map(knownUser => knownUser.name);
 
 const addExpectedRoles = users =>
   users.map((user) => {
