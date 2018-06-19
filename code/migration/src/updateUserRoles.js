@@ -114,7 +114,8 @@ const findRoleIds = users =>
 
 const addUserRoles = user =>
   getAuthorisationToken()
-    .then(token => Promise.resolve(token).then(() => console.log('patched'))) // patch user here
+    .then(token =>
+      axios.patch(`${authZeroAuthApi}/users/${user.userId}/roles`, [user.role.id], createHeaders(token)))
     .then(() => logger.info(`Added user "${user.name}" to role "${user.role.name}"`))
     .then(() => user);
 
@@ -125,8 +126,12 @@ const execAddUserRoles = users =>
 
 const removeUserRoles = user =>
   getAuthorisationToken()
-    .then(token => Promise.resolve(token).then(() => console.log('deleted'))) // patch user here
-    .then(() => logger.info(`Remove user "${user.name}" to role "${user.role.name}"`))
+    .then(token =>
+      axios.delete(`${authZeroAuthApi}/users/${user.userId}/roles`, {
+        data: [user.role.id],
+        ...createHeaders(token),
+      }))
+    .then(() => logger.info(`Remove user "${user.name}" from role "${user.role.name}"`))
     .then(() => user);
 
 const execRemoveUserRoles = users =>
