@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "airbnb-base"
+  ],
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "max-len": [
+      "error",
+      200,
+      2,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": false
+      }
+    ],
+    "no-console": "off",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": [
+          "**/**.spec.js"
+        ]
+      }
+    ],
+    "class-methods-use-this": "off",
+    "import/no-named-default": "off",
+    "no-use-before-define": "off",
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
+}

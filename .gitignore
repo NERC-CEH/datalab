@@ -42,3 +42,5 @@ code/provision/infrastructure/vault-password\.txt
 code/provision/infrastructure/group_vars/proxied\.yml
 
 code/venv/
+
+code/migration/src/knownUsers/knownUsers\.yml
