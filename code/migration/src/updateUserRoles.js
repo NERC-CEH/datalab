@@ -63,7 +63,7 @@ const getAllRoles = () =>
   getAuthorisationToken()
     .then(token =>
       axios.get(`${authZeroAuthApi}/roles`, createHeaders(token)))
-    .then(response => get(response, 'data.roles'))
+    .then(response => get(response, 'data.roles', []))
     .then(roles => roles.map(({ name, _id }) => ({ name, id: _id })))
     .catch((err) => { throw err; });
 
