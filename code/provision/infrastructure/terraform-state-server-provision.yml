@@ -25,10 +25,13 @@
         insertbefore: BOF
         regexp: "datalabs-terraform-state$"
 
-    - name: Format the disk
-      filesystem:
-        fstype: ext4
-        dev: "/dev/sdb"
+    - name: Rescan drives
+      command: bash -c "for BUS in /sys/class/scsi_host/host*/scan; do echo '- - -' >> $BUS; done"
+
+#    - name: Format the disk
+#      filesystem:
+#        fstype: ext4
+#        dev: "/dev/sdb"
 
     - name: Create the mount points for the disks
       file:
