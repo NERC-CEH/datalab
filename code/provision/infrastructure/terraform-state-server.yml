@@ -36,7 +36,7 @@
       os_server:
         state: present
         name: datalabs-terraform-state
-        image: ubuntu-1604-20180223
+        image: ubuntu-1604-20180518
         key_name: llogr-c9834a39ddef2dd489d7bd976d0ac79c
         timeout: 200
         flavor: 11
