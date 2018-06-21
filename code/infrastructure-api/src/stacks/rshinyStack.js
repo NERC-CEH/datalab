@@ -17,7 +17,7 @@ function deleteRShinyStack(params) {
   const { datalabInfo, name, type } = params;
   const k8sName = `${type}-${name}`;
 
-  return ingressApi.deleteIngress(name, datalabInfo)
+  return ingressApi.deleteIngress(k8sName, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName));
 }
