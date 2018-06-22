@@ -6,7 +6,7 @@ metadata:
   annotations:
     ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
     ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
-    ingress.kubernetes.io/client-max-body-size: {{ &clientMaxBodySize }}
+    ingress.kubernetes.io/proxy-body-size: {{ &maxBodySize }}
 {{#rewriteTarget}}
     ingress.kubernetes.io/rewrite-target: {{ &rewriteTarget }}
 {{/rewriteTarget}}
