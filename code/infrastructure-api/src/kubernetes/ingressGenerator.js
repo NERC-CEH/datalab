@@ -8,6 +8,7 @@ function createIngress({ name, datalabInfo, ingressName, serviceName, port, conn
     name: ingressName,
     authServiceUrl: `${config.get('authorisationService')}/auth`,
     authSigninUrl: config.get('authSigninUrl'),
+    maxBodySize: config.get('maxBodySize'),
     rewriteTarget,
     service: { host, paths },
   };

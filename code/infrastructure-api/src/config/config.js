@@ -73,6 +73,12 @@ const config = convict({
     default: 60000,
     env: 'STATUS_CHECK_INTERVAL',
   },
+  maxBodySize: {
+    doc: 'Set value for the maximum upload size permitted',
+    format: 'String',
+    default: '500m',
+    env: 'MAX_BODY_SIZE',
+  },
 });
 
 export default config;
