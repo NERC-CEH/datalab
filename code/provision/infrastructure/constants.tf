@@ -1,5 +1,5 @@
 locals {
-  server_image = "ubuntu-1604-20180223"
+  server_image = "ubuntu-1604-datalabs-20180518"
   tenant_network = "nerc-datalab-U-internal"
   ssh_user = "ubuntu"
   flavours = {        #|   RAM | Disk | VCPUs |
