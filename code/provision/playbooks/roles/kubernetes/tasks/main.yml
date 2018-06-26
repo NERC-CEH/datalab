@@ -38,6 +38,10 @@
   delay: 10
   when: inventory_hostname in groups['k8s-master']
 
+- name: Generate new kubeadm token if no token exists
+  shell: kubeadm token create
+  when: inventory_hostname in groups['k8s-master']
+
 - name: Get kubeadm token
   shell: kubeadm token list | sed -n 2p | awk '{ print $1 };'
   register: kubeadm_token
