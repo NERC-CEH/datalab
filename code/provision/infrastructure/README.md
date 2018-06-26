@@ -94,9 +94,9 @@ for the correct values . This will download the required modules and prepare ini
 
 ```bash
 terraform init \
-    -backend-config="address=http://<ip_address>/state/datalabs" \
-    -backend-config="lock_address=http://<ip_address>/state/datalabs" \
-    -backend-config="unlock_address=http://<ip_address>/state/datalabs" \
+    -backend-config="address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
+    -backend-config="lock_address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
+    -backend-config="unlock_address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
     -backend-config="username=username" \
     -backend-config="password=password"
 ```

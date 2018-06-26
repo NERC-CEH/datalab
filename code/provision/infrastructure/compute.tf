@@ -96,7 +96,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   name       = "${var.cluster_name}-k8s-node-${count.index+1}"
   count      = "${var.number_of_k8s_nodes}"
   image_name = "${local.server_image}"
-  flavor_id = "${lookup(local.flavours, var.flavor_k8s_node)}"
+  flavor_name = "${var.flavor_k8s_node}"
   key_pair   = "${var.openstack_keypair}"
 
   network {

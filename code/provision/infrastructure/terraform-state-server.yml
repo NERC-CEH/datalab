@@ -19,7 +19,7 @@
         - port: 80
           ip_range: 130.246.243.0/24
         - port: 22
-          ip_range: 130.246.243.0/24
+          ip_range: 192.168.3.93/32
         - port: 80
           ip_range: 130.246.189.181/32
         - port: 80
@@ -39,7 +39,7 @@
         image: ubuntu-1604-20180518
         key_name: llogr-c9834a39ddef2dd489d7bd976d0ac79c
         timeout: 200
-        flavor: 11
+        flavor: 12
         network: nerc-datalab-U-internal
         meta:
           groups: terraform-state-server
