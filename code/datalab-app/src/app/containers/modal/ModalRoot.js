@@ -6,6 +6,7 @@ import CreateSiteDialog from '../sites/CreateSiteDialogContainer';
 import CreateDataStoreDialog from '../../components/modal/CreateDataStoreDialog';
 import Confirmation from '../../components/modal/Confirmation';
 import RobustConfirmation from '../../components/modal/RobustConfirmation';
+import EditDataStore from '../dataStorage/EditDataStoreContainer';
 
 import {
   MODAL_TYPE_CREATE_NOTEBOOK,
@@ -13,6 +14,7 @@ import {
   MODAL_TYPE_CONFIRMATION,
   MODAL_TYPE_CREATE_DATA_STORE,
   MODAL_TYPE_ROBUST_CONFIRMATION,
+  MODAL_TYPE_EDIT_DATA_STORE,
 } from '../../constants/modaltypes';
 
 const MODAL_COMPONENTS = {
@@ -21,6 +23,7 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_CONFIRMATION]: Confirmation,
   [MODAL_TYPE_CREATE_DATA_STORE]: CreateDataStoreDialog,
   [MODAL_TYPE_ROBUST_CONFIRMATION]: RobustConfirmation,
+  [MODAL_TYPE_EDIT_DATA_STORE]: EditDataStore,
 };
 
 const ModalRoot = ({ modalType, props }) => {

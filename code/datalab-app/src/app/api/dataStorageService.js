@@ -5,7 +5,7 @@ function loadDataStorage() {
   const query = `
     DataStorage {
       dataStorage {
-         id, name, displayName, description, type, stacksMountingStore { id }, status
+         id, name, displayName, description, type, stacksMountingStore { id }, status, users
       }
     }`;
 
@@ -49,9 +49,35 @@ function deleteDataStore(dataStore) {
     .then(errorHandler('data.dataStorage'));
 }
 
+function addUserToDataStore(dataStore) {
+  const mutation = `
+    AddUserToDataStore($dataStore:  DataStorageUpdateRequest) {
+      addUserToDataStore(dataStore: $dataStore) {
+        name
+      }
+    }`;
+
+  return gqlMutation(mutation, { dataStore })
+    .then(errorHandler('data.dataStorage'));
+}
+
+function removeUserFromDataStore(dataStore) {
+  const mutation = `
+    RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
+      fromUserFromDataStore(dataStore: $dataStore) {
+        name
+      }
+    }`;
+
+  return gqlMutation(mutation, { dataStore })
+    .then(errorHandler('data.dataStorage'));
+}
+
 export default {
   loadDataStorage,
   getCredentials,
   createDataStore,
   deleteDataStore,
+  addUserToDataStore,
+  removeUserFromDataStore,
 };

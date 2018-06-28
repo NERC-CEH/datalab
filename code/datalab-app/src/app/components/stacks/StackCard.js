@@ -41,8 +41,8 @@ function styles(theme) {
   };
 }
 
-const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermissions, openPermission,
-                     deletePermission }) =>
+const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
+                     openPermission, deletePermission, editPermission }) =>
   <Card className={classes.card}>
     <CardContent>
       <div className={classes.cardHeader}>
@@ -62,9 +62,11 @@ const StackCard = ({ classes, stack, openStack, deleteStack, typeName, userPermi
         stack={stack}
         openStack={openStack}
         deleteStack={deleteStack}
+        editStack={editStack}
         userPermissions={userPermissions}
         openPermission={openPermission}
         deletePermission={deletePermission}
+        editPermission={editPermission}
       />}
   </Card>;
 
@@ -78,10 +80,12 @@ StackCard.propTypes = {
   }).isRequired,
   openStack: PropTypes.func,
   deleteStack: PropTypes.func,
+  editStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,
+  editPermission: PropTypes.string.isRequired,
 };
 
 function getDisplayName(stack) {
