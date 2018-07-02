@@ -94,9 +94,10 @@ class DataStorageContainer extends Component {
 
   editDataStore = ({ displayName, users }) =>
     this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
-      title: `Edit Data Store "${displayName}"`,
+      title: `Edit Data Store: ${displayName}`,
       onCancel: this.props.actions.closeModalDialog,
       currentUsers: users,
+      userKeysMapping: { name: 'label', userId: 'value' },
     });
 
   componentWillMount() {

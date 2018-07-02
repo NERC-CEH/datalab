@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { mapKeys, get, find } from 'lodash';
 import dataStorageActions from '../../actions/dataStorageActions';
 import userActions from '../../actions/userActions';
 
 class LoadUserManagementModalWrapper extends Component {
   constructor(props, context) {
     super(props, context);
-    this.getUserList = this.getUserList.bind(this);
+    this.addUser = this.addUser.bind(this);
+    this.removeUser = this.removeUser.bind(this);
   }
 
   componentWillMount() {
@@ -17,9 +19,38 @@ class LoadUserManagementModalWrapper extends Component {
       .catch(() => {});
   }
 
-  getUserList() {
-    const users = this.props.users.value || [];
+  addUser(value) {
+    console.log(value);
+  }
+
+  removeUser(value) {
+    console.log(value);
+  }
+
+  remapKeys(users) {
+    if (this.props.userKeysMapping) {
+      return users.map(user => mapKeys(user, (value, key) => get(this.props.userKeysMapping, key)));
+    }
+
     return users;
+  }
+
+  getCurrentUsers() {
+    let currentUsers;
+
+    if (this.props.userKeysMapping) {
+      const invertedMapping = Object.entries(this.props.userKeysMapping)
+        .map(([key, value]) => ({ [value]: key }))
+        .reduce((previous, current) => ({ ...previous, ...current }), {});
+
+      if (!this.props.users.fetching && this.props.users.value.length > 0) {
+        currentUsers = this.props.currentUsers.map(user => find(this.props.users.value, { [invertedMapping.value]: user }));
+      } else {
+        currentUsers = [];
+      }
+    }
+
+    return this.remapKeys(currentUsers);
   }
 
   render() {
@@ -29,8 +60,11 @@ class LoadUserManagementModalWrapper extends Component {
       <Dialog
         onCancel={this.props.onCancel}
         title={this.props.title}
-        currentUsers={this.props.currentUsers}
-        userList={this.getUserList()}
+        currentUsers={this.getCurrentUsers(this.props.currentUsers)}
+        userList={this.remapKeys(this.props.users.value)}
+        loadUsersPromise={this.props.users}
+        addUser={this.addUser}
+        removeUser={this.removeUser}
       />
     );
   }
@@ -40,6 +74,8 @@ LoadUserManagementModalWrapper.propTypes = {
   title: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   Dialog: PropTypes.func.isRequired,
+  currentUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  userKeysMapping: PropTypes.object,
 };
 
 function mapStateToProps({ users }) {
