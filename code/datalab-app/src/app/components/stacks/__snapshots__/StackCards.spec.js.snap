@@ -15,6 +15,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     <withStyles(StackCard)
       deletePermission="delete"
       deleteStack={[Function]}
+      editPermission="edit"
       openPermission="open"
       openStack={[Function]}
       stack={
@@ -30,6 +31,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
           "open",
           "delete",
           "create",
+          "edit",
         ]
       }
     />
@@ -45,6 +47,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     <withStyles(StackCard)
       deletePermission="delete"
       deleteStack={[Function]}
+      editPermission="edit"
       openPermission="open"
       openStack={[Function]}
       stack={
@@ -60,6 +63,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
           "open",
           "delete",
           "create",
+          "edit",
         ]
       }
     />
@@ -75,6 +79,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     <withStyles(StackCard)
       deletePermission="delete"
       deleteStack={[Function]}
+      editPermission="edit"
       openPermission="open"
       openStack={[Function]}
       stack={
@@ -90,6 +95,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
           "open",
           "delete",
           "create",
+          "edit",
         ]
       }
     />
@@ -106,6 +112,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         "open",
         "delete",
         "create",
+        "edit",
       ]
     }
   >
@@ -142,6 +149,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
         "open",
         "delete",
         "create",
+        "edit",
       ]
     }
   >

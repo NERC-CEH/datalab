@@ -7,6 +7,8 @@ Array [
   "openMinioDataStore",
   "createDataStore",
   "deleteDataStore",
+  "addUserToDataStore",
+  "removeUserFromDataStore",
   "openModalDialog",
   "closeModalDialog",
   "resetForm",
@@ -34,6 +36,17 @@ Object {
 }
 `;
 
+exports[`DataStorageContainer is a container which openEditForm generates correct dialog 1`] = `
+Object {
+  "dataStoreId": "expectedId",
+  "title": "Edit Data Store: expectedDisplayName",
+  "userKeysMapping": Object {
+    "name": "label",
+    "userId": "value",
+  },
+}
+`;
+
 exports[`DataStorageContainer is a container which passes correct props to StackCard 1`] = `
 <PromisedContentWrapper
   promise={
@@ -51,6 +64,8 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
     createPermission="project:storage:create"
     deletePermission="project:storage:delete"
     deleteStack={[Function]}
+    editPermission="project:storage:edit"
+    editStack={[Function]}
     openCreationForm={[Function]}
     openPermission="project:storage:open"
     openStack={[Function]}

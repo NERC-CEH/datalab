@@ -4,6 +4,8 @@ import dataStorageActions, {
   OPEN_MINIO_DATASTORE_ACTION,
   CREATE_DATASTORE_ACTION,
   DELETE_DATASTORE_ACTION,
+  ADD_USER_TO_DATASTORE_ACTION,
+  REMOVE_USER_FROM_DATASTORE_ACTION,
 } from './dataStorageActions';
 import dataStorageService from '../api/dataStorageService';
 import minioService from '../api/minioService';
@@ -11,7 +13,7 @@ import minioService from '../api/minioService';
 jest.mock('../api/dataStorageService');
 jest.mock('../api/minioService');
 
-const dataStore = { name: 'expectedName', capacityTotal: 12 };
+const dataStore = { name: 'expectedName', capacityTotal: 12, users: ['expectedUserId'] };
 
 describe('dataStorageActions', () => {
   beforeEach(() => jest.resetAllMocks());
@@ -90,6 +92,36 @@ describe('dataStorageActions', () => {
       expect(output.type).toBe(DELETE_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedDeletionPayload');
     });
+
+    it('addUserToDataStore', () => {
+      // Arrange
+      const addUserToDataStoreMock = jest.fn().mockReturnValue('expectedPayload');
+      dataStorageService.addUserToDataStore = addUserToDataStoreMock;
+
+      // Act
+      const output = dataStorageActions.addUserToDataStore(dataStore);
+
+      // Assert
+      expect(addUserToDataStoreMock).toHaveBeenCalledTimes(1);
+      expect(addUserToDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name, users: dataStore.users });
+      expect(output.type).toBe(ADD_USER_TO_DATASTORE_ACTION);
+      expect(output.payload).toBe('expectedPayload');
+    });
+
+    it('removeUserFromDataStore', () => {
+      // Arrange
+      const removeUserFromDataStoreMock = jest.fn().mockReturnValue('expectedPayload');
+      dataStorageService.removeUserFromDataStore = removeUserFromDataStoreMock;
+
+      // Act
+      const output = dataStorageActions.removeUserFromDataStore(dataStore);
+
+      // Assert
+      expect(removeUserFromDataStoreMock).toHaveBeenCalledTimes(1);
+      expect(removeUserFromDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name, users: dataStore.users });
+      expect(output.type).toBe(REMOVE_USER_FROM_DATASTORE_ACTION);
+      expect(output.payload).toBe('expectedPayload');
+    });
   });
 
   describe('exports correct values for', () => {
@@ -111,6 +143,14 @@ describe('dataStorageActions', () => {
 
     it('DELETE_DATASTORE_ACTION', () => {
       expect(DELETE_DATASTORE_ACTION).toBe('DELETE_DATASTORE');
+    });
+
+    it('ADD_USER_TO_DATASTORE_ACTION', () => {
+      expect(ADD_USER_TO_DATASTORE_ACTION).toBe('ADD_USER_TO_DATASTORE');
+    });
+
+    it('REMOVE_USER_FROM_DATASTORE_ACTION', () => {
+      expect(REMOVE_USER_FROM_DATASTORE_ACTION).toBe('REMOVE_USER_FROM_DATASTORE');
     });
   });
 });

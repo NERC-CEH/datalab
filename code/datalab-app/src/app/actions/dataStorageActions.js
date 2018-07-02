@@ -6,8 +6,8 @@ export const GET_DATASTORE_CREDENTIALS_ACTION = 'GET_DATASTORE_CREDENTIALS';
 export const OPEN_MINIO_DATASTORE_ACTION = 'OPEN_MINIO_DATASTORE';
 export const CREATE_DATASTORE_ACTION = 'CREATE_DATASTORE';
 export const DELETE_DATASTORE_ACTION = 'DELETE_DATASTORE';
-export const ADD_USER_TO_DATASTORE = 'ADD_USER_TO_DATASTORE';
-export const REMOVE_USER_FROM_DATASTORE = 'REMOVE_USER_FROM_DATASTORE';
+export const ADD_USER_TO_DATASTORE_ACTION = 'ADD_USER_TO_DATASTORE';
+export const REMOVE_USER_FROM_DATASTORE_ACTION = 'REMOVE_USER_FROM_DATASTORE';
 
 const loadDataStorage = () => ({
   type: LOAD_DATASTORAGE_ACTION,
@@ -35,12 +35,12 @@ const deleteDataStore = ({ name }) => ({
 });
 
 const addUserToDataStore = ({ name, users }) => ({
-  type: ADD_USER_TO_DATASTORE,
+  type: ADD_USER_TO_DATASTORE_ACTION,
   payload: dataStorageService.addUserToDataStore({ name, users }),
 });
 
 const removeUserFromDataStore = ({ name, users }) => ({
-  type: REMOVE_USER_FROM_DATASTORE,
+  type: REMOVE_USER_FROM_DATASTORE_ACTION,
   payload: dataStorageService.removeUserFromDataStore({ name, users }),
 });
 

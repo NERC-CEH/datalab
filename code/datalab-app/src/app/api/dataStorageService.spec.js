@@ -23,6 +23,10 @@ describe('dataStorageService', () => {
         expect(error).toEqual({ error: 'error' });
       });
     });
+
+    it('should not throw an error if there is an in users', () => {
+
+    });
   });
 
   describe('getCredentials', () => {
@@ -84,6 +88,48 @@ describe('dataStorageService', () => {
       mockClient.prepareFailure('error');
 
       return dataStorageService.deleteDataStore(data.dataStore).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
+  describe('addUserToDataStore', () => {
+    it('should build the correct correct mutation and unpack the results', () => {
+      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      mockClient.prepareSuccess(data);
+
+      return dataStorageService.addUserToDataStore(data.dataStore).then((response) => {
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      mockClient.prepareFailure('error');
+
+      return dataStorageService.addUserToDataStore(data.dataStore).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
+  describe('removeUserFromDataStore', () => {
+    it('should build the correct correct mutation and unpack the results', () => {
+      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      mockClient.prepareSuccess(data);
+
+      return dataStorageService.removeUserFromDataStore(data.dataStore).then((response) => {
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      mockClient.prepareFailure('error');
+
+      return dataStorageService.removeUserFromDataStore(data.dataStore).catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });
