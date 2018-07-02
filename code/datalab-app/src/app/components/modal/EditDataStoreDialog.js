@@ -10,10 +10,10 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
     <Dialog open={true} maxWidth="md" fullWidth>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
+        <Typography type="subheading" gutterBottom>
+          Users with access to data store
+        </Typography>
         <PromisedContentWrapper promise={loadUsersPromise} >
-          <Typography type="subheading" gutterBottom>
-            Users with access to data store
-          </Typography>
           <AutocompleteTextSearch
             suggestions={userList}
             selectedItems={currentUsers}

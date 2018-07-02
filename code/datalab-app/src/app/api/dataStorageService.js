@@ -10,7 +10,7 @@ function loadDataStorage() {
     }`;
 
   return gqlQuery(query)
-    .then(errorHandler('data.dataStorage'));
+    .then(errorHandler('data.dataStorage', 'users'));
 }
 
 function getCredentials(id) {

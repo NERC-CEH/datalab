@@ -1,12 +1,20 @@
-import { get } from 'lodash';
+import { get, isArray } from 'lodash';
 
-function errorHandler(pathToData) {
+function errorHandler(pathToData, ignoreError) {
   return (response) => {
-    const { errors } = response;
+    let errors = response.errors;
+
     if (errors) {
+      if (ignoreError) {
+        errors = errors.filter(({ path }) =>
+          isArray(path) && path.pop() !== ignoreError);
+      }
+
       const firstError = errors[0];
 
-      throw new Error(firstError.message || firstError);
+      if (firstError) {
+        throw new Error(firstError.message || firstError);
+      }
     }
 
     return get(response, pathToData);
