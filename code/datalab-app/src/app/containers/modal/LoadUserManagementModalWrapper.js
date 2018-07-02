@@ -19,12 +19,21 @@ class LoadUserManagementModalWrapper extends Component {
       .catch(() => {});
   }
 
-  addUser(value) {
-    console.log(value);
+  shouldComponentUpdate(nextProps) {
+    const isFetching = nextProps.dataStorage.fetching;
+    return !isFetching;
   }
 
-  removeUser(value) {
-    console.log(value);
+  addUser({ value }) {
+    const { name } = this.getDataStore();
+    this.props.actions.addUserToDataStore({ name, users: [value] })
+      .then(() => this.props.actions.loadDataStorage());
+  }
+
+  removeUser({ value }) {
+    const { name } = this.getDataStore();
+    this.props.actions.removeUserFromDataStore({ name, users: [value] })
+      .then(() => this.props.actions.loadDataStorage());
   }
 
   remapKeys(users) {
@@ -35,7 +44,12 @@ class LoadUserManagementModalWrapper extends Component {
     return users;
   }
 
+  getDataStore() {
+    return find(this.props.dataStorage.value, ({ id }) => id === this.props.dataStoreId);
+  }
+
   getCurrentUsers() {
+    const { users } = this.getDataStore();
     let currentUsers;
 
     if (this.props.userKeysMapping) {
@@ -44,7 +58,7 @@ class LoadUserManagementModalWrapper extends Component {
         .reduce((previous, current) => ({ ...previous, ...current }), {});
 
       if (!this.props.users.fetching && this.props.users.value.length > 0) {
-        currentUsers = this.props.currentUsers.map(user => find(this.props.users.value, { [invertedMapping.value]: user }));
+        currentUsers = users.map(user => find(this.props.users.value, { [invertedMapping.value]: user }));
       } else {
         currentUsers = [];
       }
@@ -60,7 +74,7 @@ class LoadUserManagementModalWrapper extends Component {
       <Dialog
         onCancel={this.props.onCancel}
         title={this.props.title}
-        currentUsers={this.getCurrentUsers(this.props.currentUsers)}
+        currentUsers={this.getCurrentUsers()}
         userList={this.remapKeys(this.props.users.value)}
         loadUsersPromise={this.props.users}
         addUser={this.addUser}
@@ -74,12 +88,12 @@ LoadUserManagementModalWrapper.propTypes = {
   title: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   Dialog: PropTypes.func.isRequired,
-  currentUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dataStoreId: PropTypes.string.isRequired,
   userKeysMapping: PropTypes.object,
 };
 
-function mapStateToProps({ users }) {
-  return { users };
+function mapStateToProps({ dataStorage, users }) {
+  return { dataStorage, users };
 }
 
 function mapDispatchToProps(dispatch) {

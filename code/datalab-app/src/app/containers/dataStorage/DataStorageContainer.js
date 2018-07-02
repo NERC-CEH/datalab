@@ -36,6 +36,11 @@ class DataStorageContainer extends Component {
     this.editDataStore = this.editDataStore.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    const isFetching = nextProps.dataStorage.fetching;
+    return !isFetching;
+  }
+
   openDataStore = id =>
     this.props.actions.getCredentials(id)
       .then(payload => pick(payload.value, ['url', 'accessKey']))
@@ -92,11 +97,11 @@ class DataStorageContainer extends Component {
     return this.confirmDeleteDataStore(dataStore);
   };
 
-  editDataStore = ({ displayName, users }) =>
+  editDataStore = ({ displayName, id }) =>
     this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
       title: `Edit Data Store: ${displayName}`,
       onCancel: this.props.actions.closeModalDialog,
-      currentUsers: users,
+      dataStoreId: id,
       userKeysMapping: { name: 'label', userId: 'value' },
     });
 

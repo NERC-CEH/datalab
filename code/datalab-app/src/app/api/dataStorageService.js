@@ -64,7 +64,7 @@ function addUserToDataStore(dataStore) {
 function removeUserFromDataStore(dataStore) {
   const mutation = `
     RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
-      fromUserFromDataStore(dataStore: $dataStore) {
+      removeUserFromDataStore(dataStore: $dataStore) {
         name
       }
     }`;
