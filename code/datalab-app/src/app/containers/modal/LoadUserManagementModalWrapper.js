@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { mapKeys, get, find } from 'lodash';
 import dataStorageActions from '../../actions/dataStorageActions';
 import userActions from '../../actions/userActions';
+import notify from '../../components/common/notify';
 
 class LoadUserManagementModalWrapper extends Component {
   constructor(props, context) {
@@ -27,13 +28,19 @@ class LoadUserManagementModalWrapper extends Component {
   addUser({ value }) {
     const { name } = this.getDataStore();
     this.props.actions.addUserToDataStore({ name, users: [value] })
+      .then(() => notify.success('User added to data store'))
       .then(() => this.props.actions.loadDataStorage());
   }
 
   removeUser({ value }) {
-    const { name } = this.getDataStore();
-    this.props.actions.removeUserFromDataStore({ name, users: [value] })
-      .then(() => this.props.actions.loadDataStorage());
+    if (this.props.loginUserId !== value) {
+      const { name } = this.getDataStore();
+      this.props.actions.removeUserFromDataStore({ name, users: [value] })
+        .then(() => notify.success('User removed from data store'))
+        .then(() => this.props.actions.loadDataStorage());
+    } else {
+      notify.error('Unable to remove self');
+    }
   }
 
   remapKeys(users) {
@@ -50,18 +57,16 @@ class LoadUserManagementModalWrapper extends Component {
 
   getCurrentUsers() {
     const { users } = this.getDataStore();
+    const invertedMapping = Object.entries(this.props.userKeysMapping)
+      .map(([key, value]) => ({ [value]: key }))
+      .reduce((previous, current) => ({ ...previous, ...current }), {});
+
     let currentUsers;
 
-    if (this.props.userKeysMapping) {
-      const invertedMapping = Object.entries(this.props.userKeysMapping)
-        .map(([key, value]) => ({ [value]: key }))
-        .reduce((previous, current) => ({ ...previous, ...current }), {});
-
-      if (!this.props.users.fetching && this.props.users.value.length > 0) {
-        currentUsers = users.map(user => find(this.props.users.value, { [invertedMapping.value]: user }));
-      } else {
-        currentUsers = [];
-      }
+    if (!this.props.users.fetching && this.props.users.value.length > 0) {
+      currentUsers = users.map(user => find(this.props.users.value, { [invertedMapping.value]: user }));
+    } else {
+      currentUsers = [];
     }
 
     return this.remapKeys(currentUsers);
@@ -89,11 +94,11 @@ LoadUserManagementModalWrapper.propTypes = {
   onCancel: PropTypes.func.isRequired,
   Dialog: PropTypes.func.isRequired,
   dataStoreId: PropTypes.string.isRequired,
-  userKeysMapping: PropTypes.object,
+  userKeysMapping: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ dataStorage, users }) {
-  return { dataStorage, users };
+function mapStateToProps({ authentication: { identity: { sub } }, dataStorage, users }) {
+  return { loginUserId: sub, dataStorage, users };
 }
 
 function mapDispatchToProps(dispatch) {

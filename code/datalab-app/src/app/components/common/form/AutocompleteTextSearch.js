@@ -15,16 +15,14 @@ const styles = theme => ({
   },
   container: {
     flexGrow: 1,
-    // position: 'relative',
     height: 250,
   },
   paper: {
-    // position: 'absolute',
     zIndex: 1,
     marginTop: theme.spacing.unit,
     left: 0,
     right: 0,
-    maxHeight: '50%',
+    maxHeight: '75%',
     overflow: 'auto',
   },
   chip: {
@@ -61,8 +59,8 @@ class DownshiftMultiple extends Component {
           getInputProps,
           getItemProps,
           isOpen,
-          inputValue: inputValue2,
-          selectedItem: selectedItem2,
+          inputValue: searchValue,
+          selectedItem: currentlySelectedItems,
           highlightedIndex,
         }) => (
           <div className={classes.container}>
@@ -80,18 +78,18 @@ class DownshiftMultiple extends Component {
                     />
                   )),
                 onChange: this.handleInputChange,
-                placeholder: 'Select multiple countries',
+                placeholder: this.props.placeholder,
               }),
             })}
             {isOpen ? (
               <Paper className={classes.paper} square>
-                {getSuggestions(inputValue2, suggestions).map((suggestion, index) =>
+                {getSuggestions(searchValue, suggestions).map((suggestion, index) =>
                   renderSuggestion({
                     suggestion,
                     index,
                     itemProps: getItemProps({ item: suggestion.label }),
                     highlightedIndex,
-                    selectedItem: selectedItem2,
+                    selectedItems: currentlySelectedItems,
                   }),
                 )}
               </Paper>
@@ -102,6 +100,24 @@ class DownshiftMultiple extends Component {
     );
   }
 }
+
+DownshiftMultiple.propTypes = {
+  suggestions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ).isRequired,
+  selectedItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ).isRequired,
+  addItem: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+};
 
 function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps;
@@ -120,9 +136,9 @@ function renderInput(inputProps) {
   );
 }
 
-function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItem }) {
+function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItems }) {
   const isHighlighted = highlightedIndex === index;
-  const isSelected = selectedItem.map(({ value }) => value).includes(suggestion.value);
+  const isSelected = selectedItems.map(({ value }) => value).includes(suggestion.value);
 
   return (
     <MenuItem
@@ -139,12 +155,12 @@ function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, sele
   );
 }
 
-function getSuggestions(inputValue, suggestions) {
+function getSuggestions(searchValue, suggestions) {
   let count = 0;
 
   return suggestions.filter((suggestion) => {
     const keep =
-      (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
+      (!searchValue || suggestion.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) &&
       count < 5;
 
     if (keep) {
