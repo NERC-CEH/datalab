@@ -29,4 +29,14 @@ describe('GraphQL Error Handler', () => {
     expect(() => errorHandler('data.stacks')(response))
       .toThrowError('something broke');
   });
+
+  it('filters ignored errors correctly', () => {
+    const response = {
+      errors: [{ path: ['users'] }],
+      data: { stacks: 'expectedValue' },
+    };
+
+    expect(errorHandler('data.stacks', 'users')(response))
+      .toBe('expectedValue');
+  });
 });

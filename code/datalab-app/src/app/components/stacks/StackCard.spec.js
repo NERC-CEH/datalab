@@ -10,9 +10,10 @@ function shallowRender(props) {
 
 describe('StackCard', () => {
   const permissionProps = {
-    userPermissions: ['open', 'delete'],
+    userPermissions: ['open', 'delete', 'edit'],
     openPermission: 'open',
     deletePermission: 'delete',
+    editPermission: 'edit',
   };
 
   const generateProps = (type, status) => ({

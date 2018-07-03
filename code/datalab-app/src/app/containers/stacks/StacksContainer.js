@@ -14,7 +14,7 @@ import { projectPermissions } from '../../../shared/permissionTypes';
 
 const refreshTimeout = 15000;
 
-const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN } = projectPermissions;
+const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT } = projectPermissions;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -58,7 +58,7 @@ class StacksContainer extends Component {
   confirmDeleteStack = stack =>
     this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
       title: `Delete ${stack.displayName} ${this.props.typeName}`,
-      body: `Would you like to delete the ${stack.displayName} ${this.props.typeName}? Any saved work will continue to be 
+      body: `Would you like to delete the ${stack.displayName} ${this.props.typeName}? Any saved work will continue to be
         stored in the shared drive.`,
       onSubmit: () => this.deleteStack(stack),
       onCancel: this.props.actions.closeModalDialog,
@@ -98,7 +98,8 @@ class StacksContainer extends Component {
           userPermissions={this.props.userPermissions}
           createPermission={PROJECT_STACKS_CREATE}
           openPermission={PROJECT_STACKS_OPEN}
-          deletePermission={PROJECT_STACKS_DELETE} />
+          deletePermission={PROJECT_STACKS_DELETE}
+          editPermission={PROJECT_STACKS_EDIT} />
       </PromisedContentWrapper>
     );
   }

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
+<DownshiftMultiple
+  addItem={[Function]}
+  classes={
+    Object {
+      "chip": "DownshiftMultiple-chip-4",
+      "container": "DownshiftMultiple-container-2",
+      "inputRoot": "DownshiftMultiple-inputRoot-5",
+      "paper": "DownshiftMultiple-paper-3",
+      "root": "DownshiftMultiple-root-1",
+    }
+  }
+  placeholder="Expected placerholder text"
+  removeItem={[Function]}
+  selectedItems={
+    Array [
+      Object {
+        "label": "expectedLabelTwo",
+        "value": "expectedValueTwo",
+      },
+    ]
+  }
+  suggestions={
+    Array [
+      Object {
+        "label": "expectedLabelOne",
+        "value": "expectedValueOne",
+      },
+      Object {
+        "label": "expectedLabelTwo",
+        "value": "expectedValueTwo",
+      },
+    ]
+  }
+/>
+`;

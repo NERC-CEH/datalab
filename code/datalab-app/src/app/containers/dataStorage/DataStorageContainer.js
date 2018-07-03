@@ -9,6 +9,7 @@ import {
   MODAL_TYPE_CREATE_DATA_STORE,
   MODAL_TYPE_CONFIRMATION,
   MODAL_TYPE_ROBUST_CONFIRMATION,
+  MODAL_TYPE_EDIT_DATA_STORE,
 } from '../../constants/modaltypes';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
@@ -17,7 +18,7 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import notify from '../../components/common/notify';
 import { projectPermissions } from '../../../shared/permissionTypes';
 
-const { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN } = projectPermissions;
+const { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT } = projectPermissions;
 
 const TYPE_NAME = 'Data Store';
 const FORM_NAME = 'createDataStore';
@@ -32,6 +33,12 @@ class DataStorageContainer extends Component {
     this.confirmDeleteDataStore = this.confirmDeleteDataStore.bind(this);
     this.prohibitDeletion = this.prohibitDeletion.bind(this);
     this.chooseDialogue = this.chooseDialogue.bind(this);
+    this.editDataStore = this.editDataStore.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const isFetching = nextProps.dataStorage.fetching;
+    return !isFetching;
   }
 
   openDataStore = id =>
@@ -90,6 +97,14 @@ class DataStorageContainer extends Component {
     return this.confirmDeleteDataStore(dataStore);
   };
 
+  editDataStore = ({ displayName, id }) =>
+    this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
+      title: `Edit Data Store: ${displayName}`,
+      onCancel: this.props.actions.closeModalDialog,
+      dataStoreId: id,
+      userKeysMapping: { name: 'label', userId: 'value' },
+    });
+
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     this.props.actions.loadDataStorage()
@@ -104,11 +119,14 @@ class DataStorageContainer extends Component {
           typeName={TYPE_NAME}
           openStack={this.openDataStore}
           deleteStack={this.chooseDialogue}
+          editStack={this.editDataStore}
           openCreationForm={this.openCreationForm}
           userPermissions={this.props.userPermissions}
           createPermission={PROJECT_STORAGE_CREATE}
           openPermission={PROJECT_STORAGE_OPEN}
-          deletePermission={PROJECT_STORAGE_DELETE} />
+          deletePermission={PROJECT_STORAGE_DELETE}
+          editPermission={PROJECT_STORAGE_EDIT}
+        />
       </PromisedContentWrapper>
     );
   }

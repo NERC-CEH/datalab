@@ -5,12 +5,14 @@ import authentication from './authReducer';
 import dataStorage from './dataStorageReducer';
 import stacks from './stacksReducer';
 import modal from './modelDialogReducer';
+import users from './usersReducer';
 
 const rootReducer = combineReducers({
   authentication,
   dataStorage,
   stacks,
   modal,
+  users,
   router: routerReducer,
   form: formReducer,
 });

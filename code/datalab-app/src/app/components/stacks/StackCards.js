@@ -7,8 +7,8 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
 const breakPoints = { xs: 12, sm: 6, md: 4, lg: 4, xl: 2 };
 
-const StackCards = ({ stacks, typeName, openStack, deleteStack, openCreationForm, userPermissions, createPermission,
-                      openPermission, deletePermission }) => (
+const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openCreationForm, userPermissions,
+                      createPermission, openPermission, deletePermission, editPermission }) => (
   <Grid container>
     {stacks.map((stack, index) => (
       <Grid key={index} item {...breakPoints}>
@@ -17,9 +17,12 @@ const StackCards = ({ stacks, typeName, openStack, deleteStack, openCreationForm
           typeName={typeName}
           openStack={openStack}
           deleteStack={deleteStack}
+          editStack={editStack}
           userPermissions={userPermissions}
           openPermission={openPermission}
-          deletePermission={deletePermission} />
+          deletePermission={deletePermission}
+          editPermission={editPermission}
+        />
       </Grid>
     ))}
     <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions} permission={createPermission}>
@@ -35,11 +38,13 @@ StackCards.propTypes = {
   typeName: PropTypes.string.isRequired,
   openStack: PropTypes.func.isRequired,
   deleteStack: PropTypes.func.isRequired,
+  editStack: PropTypes.func,
   openCreationForm: PropTypes.func.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   createPermission: PropTypes.string.isRequired,
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,
+  editPermission: PropTypes.string.isRequired,
 };
 
 export default StackCards;

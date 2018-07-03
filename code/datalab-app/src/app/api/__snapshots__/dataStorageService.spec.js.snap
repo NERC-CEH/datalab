@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`dataStorageService addUserToDataStore should build the correct correct mutation and unpack the results 1`] = `
+"
+    AddUserToDataStore($dataStore:  DataStorageUpdateRequest) {
+      addUserToDataStore(dataStore: $dataStore) {
+        name
+      }
+    }"
+`;
+
 exports[`dataStorageService createDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
     CreateDataStore($dataStore:  DataStorageCreationRequest) {
@@ -31,7 +40,16 @@ exports[`dataStorageService loadDataStorage should build the correct query and u
 "
     DataStorage {
       dataStorage {
-         id, name, displayName, description, type, stacksMountingStore { id }, status
+         id, name, displayName, description, type, stacksMountingStore { id }, status, users
+      }
+    }"
+`;
+
+exports[`dataStorageService removeUserFromDataStore should build the correct correct mutation and unpack the results 1`] = `
+"
+    RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
+      removeUserFromDataStore(dataStore: $dataStore) {
+        name
       }
     }"
 `;

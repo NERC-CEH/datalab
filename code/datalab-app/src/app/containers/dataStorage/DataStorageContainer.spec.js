@@ -277,5 +277,23 @@ describe('DataStorageContainer', () => {
           expect(resetFormMock).toHaveBeenCalledTimes(1);
         });
     });
+
+    it('openEditForm generates correct dialog', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName', id: 'expectedId' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const editStack = output.childAt(0).prop('editStack');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      editStack(stack);
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, onCancel, dataStoreId, userKeysMapping } = firstMockCall[1];
+      expect({ title, dataStoreId, userKeysMapping }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
   });
 });

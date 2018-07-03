@@ -200,6 +200,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
   <StackCardActions
     deletePermission="delete"
     deleteStack={[Function]}
+    editPermission="edit"
     openPermission="open"
     openStack={[Function]}
     stack={
@@ -214,6 +215,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
       Array [
         "open",
         "delete",
+        "edit",
       ]
     }
   />

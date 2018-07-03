@@ -15,6 +15,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       Array [
         "open",
         "delete",
+        "edit",
       ]
     }
   >
@@ -38,6 +39,32 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       Array [
         "open",
         "delete",
+        "edit",
+      ]
+    }
+  >
+    <withStyles(Button)
+      color="accent"
+      disabled={false}
+      onClick={[Function]}
+      raised={true}
+      style={
+        Object {
+          "marginLeft": 4,
+          "marginRight": 4,
+        }
+      }
+    >
+      Delete
+    </withStyles(Button)>
+  </ComponentWrapper>
+  <ComponentWrapper
+    permission="edit"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
       ]
     }
   >
@@ -52,7 +79,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
         }
       }
     >
-      Delete
+      Edit
     </withStyles(Button)>
   </ComponentWrapper>
 </withStyles(CardActions)>

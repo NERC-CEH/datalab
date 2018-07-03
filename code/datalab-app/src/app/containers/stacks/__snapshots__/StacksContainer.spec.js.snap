@@ -16,7 +16,7 @@ Array [
 
 exports[`StacksContainer is a container which confirmDeleteStack generates correct dialog 1`] = `
 Object {
-  "body": "Would you like to delete the expectedDisplayName Notebook? Any saved work will continue to be 
+  "body": "Would you like to delete the expectedDisplayName Notebook? Any saved work will continue to be
         stored in the shared drive.",
   "title": "Delete expectedDisplayName Notebook",
 }
@@ -48,6 +48,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
     createPermission="project:stacks:create"
     deletePermission="project:stacks:delete"
     deleteStack={[Function]}
+    editPermission="project:stacks:edit"
     openCreationForm={[Function]}
     openPermission="project:stacks:open"
     openStack={[Function]}

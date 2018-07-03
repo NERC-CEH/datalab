@@ -9,6 +9,7 @@ describe('StackCardActions', () => {
 
   const openStackMock = jest.fn();
   const deleteStackMock = jest.fn();
+  const editStackMock = jest.fn();
 
   const generateProps = () => ({
     stack: {
@@ -19,9 +20,11 @@ describe('StackCardActions', () => {
     },
     openStack: openStackMock,
     deleteStack: deleteStackMock,
-    userPermissions: ['open', 'delete'],
+    editStack: editStackMock,
+    userPermissions: ['open', 'delete', 'edit'],
     openPermission: 'open',
     deletePermission: 'delete',
+    editPermission: 'edit',
   });
 
   beforeEach(() => {
@@ -67,6 +70,26 @@ describe('StackCardActions', () => {
     onClick();
     expect(deleteStackMock).toHaveBeenCalledTimes(1);
     expect(deleteStackMock).toHaveBeenCalledWith({
+      displayName: 'expectedDisplayName',
+      id: 'abc1234',
+      type: 'expectedType',
+      status: 'ready',
+    });
+  });
+
+  it('Edit button onClick function calls openStack with correct props', () => {
+    // Arrange
+    const props = generateProps();
+
+    // Act
+    const output = shallowRender(props);
+    const onClick = output.find({ children: 'Edit' }).prop('onClick');
+
+    // Assert
+    expect(editStackMock).not.toHaveBeenCalled();
+    onClick();
+    expect(editStackMock).toHaveBeenCalledTimes(1);
+    expect(editStackMock).toHaveBeenCalledWith({
       displayName: 'expectedDisplayName',
       id: 'abc1234',
       type: 'expectedType',

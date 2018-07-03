@@ -11,6 +11,7 @@
     "chalk": "2.1.0",
     "convict": "3.0.0",
     "cross-storage": "1.0.0",
+    "downshift": "^2.0.10",
     "express": "4.15.2",
     "express-jwt": "5.3.0",
     "graphql": "0.10.3",
