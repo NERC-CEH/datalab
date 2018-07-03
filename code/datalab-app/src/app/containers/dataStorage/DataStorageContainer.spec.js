@@ -81,7 +81,6 @@ describe('DataStorageContainer', () => {
     const deleteDataStoreMock = jest.fn();
     const createDataStoreMock = jest.fn();
     const resetFormMock = jest.fn();
-    const editStackMock = jest.fn();
 
     const generateProps = () => ({
       dataStorage,
