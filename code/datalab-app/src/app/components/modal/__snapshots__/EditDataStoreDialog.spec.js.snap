@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Edit data store dialog creates correct snapshot 1`] = `
+<withStyles(Dialog)
+  fullWidth={true}
+  maxWidth="md"
+  open={true}
+>
+  <withStyles(DialogTitle)>
+    expectedTitle
+  </withStyles(DialogTitle)>
+  <withStyles(DialogContent)>
+    <withStyles(Typography)
+      gutterBottom={true}
+      type="subheading"
+    >
+      Users with access to data store
+    </withStyles(Typography)>
+    <PromisedContentWrapper
+      promise={
+        Object {
+          "error": null,
+          "fetching": false,
+          "value": Array [],
+        }
+      }
+    >
+      <withStyles(DownshiftMultiple)
+        addItem={[Function]}
+        placeholder="Type user's email address"
+        removeItem={[Function]}
+        selectedItems={
+          Array [
+            Object {
+              "label": "expectedLabelOne",
+              "value": "expectedValueOne",
+            },
+          ]
+        }
+        suggestions={
+          Array [
+            Object {
+              "label": "expectedLabelTwo",
+              "value": "expectedValueTwo",
+            },
+          ]
+        }
+      />
+    </PromisedContentWrapper>
+  </withStyles(DialogContent)>
+  <withStyles(DialogActions)>
+    <withStyles(IconButton)
+      icon="clear"
+      onClick={[Function]}
+    >
+      Close
+    </withStyles(IconButton)>
+  </withStyles(DialogActions)>
+</withStyles(Dialog)>
+`;

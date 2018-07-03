@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadUserManagement Modal Wrapper is a container which creates correct snapshot 1`] = `
+<Dialog
+  addUser={[Function]}
+  currentUsers={
+    Array [
+      Object {},
+    ]
+  }
+  loadUsersPromise={
+    Object {
+      "value": Array [
+        Object {
+          "name": "expectedName",
+          "userId": "expectedId",
+        },
+        Object {
+          "name": "anotherExpectedName",
+          "userId": "anotherExpectedId",
+        },
+      ],
+    }
+  }
+  onCancel={[Function]}
+  removeUser={[Function]}
+  title="Title"
+  userList={
+    Array [
+      Object {
+        "label": "expectedName",
+        "value": "expectedId",
+      },
+      Object {
+        "label": "anotherExpectedName",
+        "value": "anotherExpectedId",
+      },
+    ]
+  }
+/>
+`;
