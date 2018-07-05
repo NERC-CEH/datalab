@@ -18,7 +18,6 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
             suggestions={userList}
             selectedItems={currentUsers}
             addItem={addUser}
-            removeItem={removeUser}
             placeholder={"Type user's email address"}
           />
         </PromisedContentWrapper>
