@@ -74,7 +74,7 @@ class DownshiftMultiple extends Component {
                       tabIndex={-1}
                       label={item.label}
                       className={classes.chip}
-                      onRequestDelete={this.handleDelete(item)}
+                      onRequestDelete={this.props.removeItem && this.handleDelete(item)}
                     />
                   )),
                 onChange: this.handleInputChange,
@@ -115,7 +115,7 @@ DownshiftMultiple.propTypes = {
     }),
   ).isRequired,
   addItem: PropTypes.func.isRequired,
-  removeItem: PropTypes.func.isRequired,
+  removeItem: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
 };
 
