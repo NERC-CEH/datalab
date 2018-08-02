@@ -11,4 +11,3 @@ base_packages:
   - fail2ban
   - unattended-upgrades
   - logwatch
-  - ntp

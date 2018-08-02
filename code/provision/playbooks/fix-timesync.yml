@@ -1,0 +1,16 @@
+---
+- hosts: all
+  user: "{{ deploy_user }}"
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Remove NTP package
+    apt:
+      name: ntp
+      state: absent
+
+  - name: Restart timesyncd service
+    systemd:
+      name: systemd-timesyncd
+      state: restarted
