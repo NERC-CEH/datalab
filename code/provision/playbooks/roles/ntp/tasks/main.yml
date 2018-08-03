@@ -1,3 +1,0 @@
----
-- name: Turn off timedatectl to allow ntp to manage timedatectl
-  shell: timedatectl set-ntp no
