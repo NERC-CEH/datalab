@@ -17,7 +17,8 @@
   become_method: sudo
 
   roles:
-      - glusterfs
+    - glusterfs-firewall
+    - glusterfs
 
   tasks:
     - name: Make sure we have a 'wheel' group
