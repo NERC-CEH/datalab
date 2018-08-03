@@ -1,0 +1,21 @@
+---
+- name: Allow glusterfs TCPtraffic
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items: "{{ gluster_tcp_ports }}"
+
+- name: Open ssh from kubernetes
+  ufw:
+    rule: allow
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
+    port: 22
+  with_items: "{{ groups['k8s-cluster'] }}"
+
+- name: Allow glusterfs UDP traffic
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: udp
+  with_items: "{{ gluster_udp_ports }}"
