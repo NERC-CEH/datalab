@@ -11,7 +11,7 @@ This section details the context that the Datalabs project operates within.
 
 ## Platform context
 
-The 90POE platform context is shown below:
+The Datalabs platform context is shown below:
 
 ![system context](./diagrams/system-context.png)
 
