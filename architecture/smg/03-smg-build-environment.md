@@ -27,7 +27,7 @@ There are a number of tools required for development:
 ## Datalabs Development Environment
 
 Instructions for running a full development environment are kept with the source code to
-ensure that they remain up to date as the system evolves. They can be found [here](../../code/development-enf/README.md).
+ensure that they remain up to date as the system evolves. They can be found [here](../../code/development-env/README.md).
 
 ## Infrastructure Development Environment
 
