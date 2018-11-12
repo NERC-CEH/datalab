@@ -68,9 +68,9 @@ Discuss missing pieces:
 
 Show Application served over HTTPS with API link
 
-* [Datalab Application](http://datalab.datalabs.nerc.ac.uk)
-* [Datalab API](http://datalab-api.datalabs.nerc.ac.uk)
-* [Datalab Docs](http://datalab-docs.datalabs.nerc.ac.uk)
+* [Datalab Application](http://datalab.datalabs.ceh.ac.uk)
+* [Datalab API](http://datalab-api.datalabs.ceh.ac.uk)
+* [Datalab Docs](http://datalab-docs.datalabs.ceh.ac.uk)
 
 Show documentation served over HTTPS
 

@@ -8,16 +8,16 @@ metadata:
   name: name-ingress
   annotations:
     ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.ceh.ac.uk
     ingress.kubernetes.io/proxy-body-size: 500m
     ingress.kubernetes.io/rewrite-target: /here
 spec:
   tls:
   - hosts:
-    - testlab-name.test-datalabs.nerc.ac.uk
+    - testlab-name.test-datalabs.ceh.ac.uk
     secretName: tls-secret
   rules:
-  - host: testlab-name.test-datalabs.nerc.ac.uk
+  - host: testlab-name.test-datalabs.ceh.ac.uk
     http:
       paths:
       - path: /
@@ -39,15 +39,15 @@ metadata:
   name: name-ingress
   annotations:
     ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.ceh.ac.uk
     ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   tls:
   - hosts:
-    - testlab-name.test-datalabs.nerc.ac.uk
+    - testlab-name.test-datalabs.ceh.ac.uk
     secretName: tls-secret
   rules:
-  - host: testlab-name.test-datalabs.nerc.ac.uk
+  - host: testlab-name.test-datalabs.ceh.ac.uk
     http:
       paths:
       - path: /
@@ -65,15 +65,15 @@ metadata:
   name: name-ingress
   annotations:
     ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.ceh.ac.uk
     ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   tls:
   - hosts:
-    - testlab-name.test-datalabs.nerc.ac.uk
+    - testlab-name.test-datalabs.ceh.ac.uk
     secretName: tls-secret
   rules:
-  - host: testlab-name.test-datalabs.nerc.ac.uk
+  - host: testlab-name.test-datalabs.ceh.ac.uk
     http:
       paths:
       - path: /

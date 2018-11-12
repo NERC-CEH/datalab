@@ -36,7 +36,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
   <div>
     <Field
       component={[Function]}
-      endText=".datalabs.nerc.ac.uk"
+      endText=".datalabs.ceh.ac.uk"
       label="URL Name"
       name="name"
       placeholder="Notebook Name for URL"

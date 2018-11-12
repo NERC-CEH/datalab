@@ -33,7 +33,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
   <div>
     <Field
       component={[Function]}
-      endText=".datalabs.nerc.ac.uk"
+      endText=".datalabs.ceh.ac.uk"
       label="URL Name"
       name="name"
       placeholder="Site Name for URLs"

@@ -14,7 +14,7 @@ exports[`Stack API should log error detail on failed creation request 2`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"isPublic\\":true}",
+    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.ceh.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"isPublic\\":true}",
     "metadata": undefined,
   },
 ]
@@ -58,7 +58,7 @@ exports[`Stack API should log stack detail on successful creation request 2`] = 
 Array [
   Object {
     "data": undefined,
-    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"isPublic\\":true}",
+    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.ceh.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"isPublic\\":true}",
     "metadata": undefined,
   },
 ]
@@ -80,7 +80,7 @@ exports[`Stack API should log stack detail on successful deletion request 2`] = 
 Array [
   Object {
     "data": undefined,
-    "message": "deletion request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\"}",
+    "message": "deletion request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.ceh.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\"}",
     "metadata": undefined,
   },
 ]

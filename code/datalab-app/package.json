@@ -65,7 +65,7 @@
     "react-test-renderer": "15.5.4",
     "redux-devtools": "3.4.0",
     "redux-mock-store": "1.2.3",
-    "shx": "0.2.2",
+    "shx": "^0.2.2",
     "webpack": "2.6.1",
     "webpack-node-externals": "1.6.0"
   },

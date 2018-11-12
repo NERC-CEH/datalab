@@ -5,12 +5,12 @@ describe('Extend Subdomain', () => {
     // Arrange/Act
     const location = {
       protocol: 'https:',
-      hostname: 'testlab.test-datalabs.nerc.ac.uk',
+      hostname: 'testlab.test-datalabs.ceh.ac.uk',
     };
     const subdomain = extendSubdomain('docs', 3000, location);
 
     // Assert
-    expect(subdomain).toBe('https://testlab-docs.test-datalabs.nerc.ac.uk');
+    expect(subdomain).toBe('https://testlab-docs.test-datalabs.ceh.ac.uk');
   });
 
   it('should return correct fallback address when using localhost', () => {
@@ -29,12 +29,12 @@ describe('Extend Subdomain', () => {
     // Arrange/Act
     const location = {
       protocol: 'http:',
-      hostname: 'datalab.datalabs.nerc.ac.uk',
+      hostname: 'datalab.datalabs.ceh.ac.uk',
     };
     const apiBase = extendSubdomain('api', 8000, location);
 
     // Assert
-    expect(apiBase).toEqual('http://datalab-api.datalabs.nerc.ac.uk');
+    expect(apiBase).toEqual('http://datalab-api.datalabs.ceh.ac.uk');
   });
 });
 
@@ -43,12 +43,12 @@ describe('Replace subdomain', () => {
     // Arrange/Act
     const location = {
       protocol: 'https:',
-      hostname: 'testlab.test-datalabs.nerc.ac.uk',
+      hostname: 'testlab.test-datalabs.ceh.ac.uk',
     };
     const address = replaceSubdomain('discourse', 'https://www.discourse.org/', location);
 
     // Assert
-    expect(address).toBe('https://discourse.test-datalabs.nerc.ac.uk');
+    expect(address).toBe('https://discourse.test-datalabs.ceh.ac.uk');
   });
 
   it('should return the alturnative address when using localhost', () => {
@@ -69,7 +69,7 @@ describe('Get Domain Info', () => {
     // Arrange/Act
     const location = {
       protocol: 'http:',
-      hostname: 'datalab.datalabs.nerc.ac.uk',
+      hostname: 'datalab.datalabs.ceh.ac.uk',
     };
     const domainInfo = getDomainInfo(location);
 
@@ -77,7 +77,7 @@ describe('Get Domain Info', () => {
     expect(domainInfo).toEqual({
       protocol: 'http:',
       subdomain: 'datalab',
-      domain: 'datalabs.nerc.ac.uk',
+      domain: 'datalabs.ceh.ac.uk',
     });
   });
 });

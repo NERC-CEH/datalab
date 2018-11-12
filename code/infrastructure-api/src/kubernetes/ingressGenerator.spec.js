@@ -6,7 +6,7 @@ describe('Ingress generator', () => {
       name: 'name',
       datalabInfo: {
         name: 'testlab',
-        domain: 'test-datalabs.nerc.ac.uk',
+        domain: 'test-datalabs.ceh.ac.uk',
       },
       ingressName: 'name-ingress',
       serviceName: 'name-service',
@@ -22,7 +22,7 @@ describe('Ingress generator', () => {
       name: 'name',
       datalabInfo: {
         name: 'testlab',
-        domain: 'test-datalabs.nerc.ac.uk',
+        domain: 'test-datalabs.ceh.ac.uk',
       },
       ingressName: 'name-ingress',
       serviceName: 'name-service',
@@ -39,7 +39,7 @@ describe('Ingress generator', () => {
       name: 'name',
       datalabInfo: {
         name: 'testlab',
-        domain: 'test-datalabs.nerc.ac.uk',
+        domain: 'test-datalabs.ceh.ac.uk',
       },
       ingressName: 'name-ingress',
       serviceName: 'name-service',

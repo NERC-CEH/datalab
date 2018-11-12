@@ -32,7 +32,7 @@ const CreateSiteForm = (props) => {
           component={renderAdornedTextField}
           placeholder="Site Name for URLs"
           startText="http://datalab-"
-          endText=".datalabs.nerc.ac.uk" />
+          endText=".datalabs.ceh.ac.uk" />
       </div>
       <div>
         <Field

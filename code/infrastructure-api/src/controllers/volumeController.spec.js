@@ -100,7 +100,7 @@ function createRequestBody() {
   return {
     datalabInfo: {
       name: 'testlab',
-      domain: 'test-datalabs.nerc.ac.uk',
+      domain: 'test-datalabs.ceh.ac.uk',
     },
     name: 'volumeName',
     volumeSize: '10',

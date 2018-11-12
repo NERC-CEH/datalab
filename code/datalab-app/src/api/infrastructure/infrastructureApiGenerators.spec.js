@@ -15,7 +15,7 @@ const authContext = {
 
 const datalabInfo = {
   test: 'testlab',
-  domain: 'test-datalabs.nerc.ac.uk',
+  domain: 'test-datalabs.ceh.ac.uk',
 };
 
 const STACK_URL = `${config.get('infrastructureApi')}/stacks`;

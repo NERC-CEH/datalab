@@ -215,7 +215,7 @@ function mutationRequestBody() {
   return {
     datalabInfo: {
       name: 'testlab',
-      domain: 'test-datalabs.nerc.ac.uk',
+      domain: 'test-datalabs.ceh.ac.uk',
     },
     name: 'notebookId',
     displayName: 'notebookDisplayName',

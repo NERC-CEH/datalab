@@ -31,7 +31,7 @@ const CreateNotebookForm = (props) => {
           component={renderAdornedTextField}
           placeholder="Notebook Name for URL"
           startText="http://datalab-"
-          endText=".datalabs.nerc.ac.uk" />
+          endText=".datalabs.ceh.ac.uk" />
       </div>
       <div>
         <Field

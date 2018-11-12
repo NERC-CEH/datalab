@@ -40,10 +40,10 @@ External, "floating" IP addresses are attached to an instance and the allocation
 datalabs does remain static. The DNS names assigned to these IP addresses are
 
 |DNS|Floating IP Address|
-|*.datalabs.nerc.ac.uk|192.171.139.198|
-|*.test-datalabs.nerc.ac.uk|192.171.139.197|
-|bastion-datalabs.nerc.ac.uk|192.171.139.188|
-|state-datalabs.nerc.ac.uk|192.171.139.187|
+|*.datalabs.ceh.ac.uk|192.171.139.246|
+|*.test-datalabs.ceh.ac.uk|192.171.139.x|
+|bastion-datalabs.ceh.ac.uk|192.171.139.245|
+|state-datalabs.ceh.ac.uk|192.171.139.244|
 
 ## Cluster Access
 

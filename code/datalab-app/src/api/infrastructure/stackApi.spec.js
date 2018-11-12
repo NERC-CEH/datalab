@@ -7,7 +7,7 @@ jest.mock('winston');
 jest.mock('../dataaccess/datalabRepository');
 jest.mock('../dataaccess/stackService');
 
-const datalabInfo = { name: 'testlab', domain: 'test-datalabs.nerc.ac.uk' };
+const datalabInfo = { name: 'testlab', domain: 'test-datalabs.ceh.ac.uk' };
 const context = { token: 'expectedToken', user: 'expectedUser' };
 const stack = { name: 'expectedName', type: 'expectedType' };
 

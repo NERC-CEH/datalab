@@ -6,7 +6,7 @@ import {
 
 jest.mock('../dataaccess/dataStorageRepository');
 
-const datalabInfo = { name: 'testlab', domain: 'test-datalabs.nerc.ac.uk' };
+const datalabInfo = { name: 'testlab', domain: 'test-datalabs.ceh.ac.uk' };
 
 describe('Data Storage API configuration', () => {
   it('should give correct API request for creation', () => {
@@ -25,7 +25,7 @@ describe('Data Storage API configuration', () => {
     const datalabRequest = {
       name: 'dataStoreName',
       volumeSize: 12,
-      linkToStorage: 'https://notebookName-minio.test-datalabs.nerc.ac.uk/minio',
+      linkToStorage: 'https://notebookName-minio.test-datalabs.ceh.ac.uk/minio',
       extra: 'field',
     };
 

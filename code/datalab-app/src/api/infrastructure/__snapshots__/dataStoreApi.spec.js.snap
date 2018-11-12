@@ -3,7 +3,7 @@
 exports[`Data Storage API configuration should give correct API payload for creation 1`] = `
 Object {
   "datalabInfo": Object {
-    "domain": "test-datalabs.nerc.ac.uk",
+    "domain": "test-datalabs.ceh.ac.uk",
     "name": "testlab",
   },
   "name": "dataStoreName",
@@ -14,7 +14,7 @@ Object {
 exports[`Data Storage API configuration should give correct API payload for deletion 1`] = `
 Object {
   "datalabInfo": Object {
-    "domain": "test-datalabs.nerc.ac.uk",
+    "domain": "test-datalabs.ceh.ac.uk",
     "name": "testlab",
   },
   "name": "dataStoreName",
@@ -28,7 +28,7 @@ Object {
   "internalEndpoint": "http://minio-expectedName/minio",
   "name": "expectedName",
   "storageType": 2,
-  "url": "https://testlab-expectedName.test-datalabs.nerc.ac.uk/minio",
+  "url": "https://testlab-expectedName.test-datalabs.ceh.ac.uk/minio",
   "volumeSize": 12,
 }
 `;

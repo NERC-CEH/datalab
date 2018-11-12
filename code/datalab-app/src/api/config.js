@@ -4,7 +4,7 @@ const config = convict({
   datalabName: {
     doc: 'The name of the datalab',
     format: 'String',
-    default: 'testlab',
+    default: 'datalab',
     env: 'DATALAB_NAME',
   },
   logLevel: {
@@ -22,7 +22,7 @@ const config = convict({
   corsOrigin: {
     doc: 'The allowed origin for CORS',
     format: 'String',
-    default: 'datalabs.nerc.ac.uk',
+    default: 'datalabs.ceh.ac.uk',
     env: 'CORS_ORIGIN',
   },
   databaseHost: {
