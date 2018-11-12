@@ -63,5 +63,5 @@ kubectl get pods -n <namespace> --watch
 To verify the deployment:
 
 * Hard refresh the datalabs home page to ensure the expected version number is visible in the footer.
-* Request the status of the [API](https://datalab-api.datalabs.nerc.ac.uk/status) and check that it returns the correct verison.
+* Request the status of the [API](https://datalab-api.datalabs.ceh.ac.uk/status) and check that it returns the correct verison.
 * Test the functionality of the site focusing on the area of change.

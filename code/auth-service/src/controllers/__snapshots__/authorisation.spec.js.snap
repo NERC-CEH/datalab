@@ -2,8 +2,8 @@
 
 exports[`authorisation controller generatePermissionToken should generate and return access token 1`] = `
 Object {
-  "aud": "https://api.datalabs.nerc.ac.uk/",
-  "iss": "https://authorisation.datalabs.nerc.ac.uk/",
+  "aud": "https://api.datalabs.ceh.ac.uk/",
+  "iss": "https://authorisation.datalabs.ceh.ac.uk/",
   "sub": "expectedUserName",
 }
 `;

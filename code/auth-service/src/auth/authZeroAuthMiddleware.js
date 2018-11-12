@@ -10,7 +10,7 @@ const secretStrategy = jwksRsa.expressJwtSecret({
 
 const baseConfig = {
   secret: secretStrategy,
-  audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
+  audience: 'https://datalab-api.datalabs.ceh.ac.uk/',
   issuer: 'https://mjbr.eu.auth0.com/',
   algorithms: ['RS256'],
 };

@@ -29,8 +29,8 @@ function jwksVerifyConfig() {
       jwksRequestsPerMinute: 10,
       jwksUri: JWKS_URL,
     }),
-    audience: 'https://api.datalabs.nerc.ac.uk/',
-    issuer: 'https://authorisation.datalabs.nerc.ac.uk/',
+    audience: 'https://api.datalabs.ceh.ac.uk/',
+    issuer: 'https://authorisation.datalabs.ceh.ac.uk/',
     algorithms: ['RS256'],
   };
 }

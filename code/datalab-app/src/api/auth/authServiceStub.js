@@ -7,8 +7,8 @@
 import jwt from 'jsonwebtoken';
 
 const secret = 'secret';
-const audience = 'https://api.datalabs.nerc.ac.uk/';
-const issuer = 'https://authorisation.datalabs.nerc.ac.uk/';
+const audience = 'https://api.datalabs.ceh.ac.uk/';
+const issuer = 'https://authorisation.datalabs.ceh.ac.uk/';
 const keyid = 'datalabs-authorisation';
 
 function retrievePermissionsToken(authorisationToken) {

@@ -186,7 +186,7 @@ permissions are handled through the authorisation service and service tokens.
   "iss": "https://mjbr.eu.auth0.com/",
   "sub": "auth0|<user-id>",
   "aud": [
-    "https://datalab-api.datalabs.nerc.ac.uk/",
+    "https://datalab-api.datalabs.ceh.ac.uk/",
     "https://mjbr.eu.auth0.com/userinfo"
   ],
   "iat": 1528091768,
