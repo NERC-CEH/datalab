@@ -1,7 +1,7 @@
 ---
 ssl_certificate: "{{ vault_ssl_certificate }}"
 ssl_private_key: "{{ vault_ssl_private_key }}"
-wildcard_domain: "*.test-datalabs.nerc.ac.uk"
+wildcard_domain: "*.test-datalabs.ceh.ac.uk"
 
 ingress_service_http_port: "{{ test_ingress_http_port }}"
 ingress_service_https_port: "{{ test_ingress_https_port }}"

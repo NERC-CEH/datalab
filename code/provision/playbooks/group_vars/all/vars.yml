@@ -1,22 +1,22 @@
 ansible_python_interpreter: /usr/bin/python3
 
-datalabs_domain: datalabs.nerc.ac.uk
+datalabs_domain: datalabs.ceh.ac.uk
 dynamic_proxy_api: "http://{{ external_proxy_internal_ip_address }}:8081"
 
 ssh_port: 22
-bastion_ip_address: 192.171.139.188
-bastion_internal_ip_address: 192.168.3.2
-external_proxy_internal_ip_address: 192.168.3.3
-test_proxy_internal_ip_address: 192.168.3.30
+bastion_ip_address: 192.171.139.245
+bastion_internal_ip_address: 192.168.3.41
+external_proxy_internal_ip_address: 192.168.3.35
+#test_proxy_internal_ip_address: 192.168.3.30
 deploy_user: ubuntu
-ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
+#ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
 
-root_password_crypted: "{{ vault_root_password_crypted }}"
-deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
+#root_password_crypted: "{{ vault_root_password_crypted }}"
+#deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
 
-slack_token: "{{ vault_slack_token }}"
+#slack_token: "{{ vault_slack_token }}"
 
-heketi_ssh_password: "{{ vault_heketi_ssh_password }}"
+#heketi_ssh_password: "{{ vault_heketi_ssh_password }}"
 
 k8s_api_port: 6443
 test_ingress_http_port: 31080
