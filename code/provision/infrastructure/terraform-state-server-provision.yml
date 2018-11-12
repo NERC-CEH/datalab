@@ -1,11 +1,11 @@
-- hosts: datalabs-terraform-state
+- hosts: ceh-datalabs-terraform-state
   become: yes
   become_method: sudo
   gather_facts: no
   roles:
     - install-python
 
-- hosts: datalabs-terraform-state
+- hosts: ceh-datalabs-terraform-state
   become: yes
   become_method: sudo
   roles:
@@ -21,17 +21,17 @@
     - name: Add hostname to /etc/hosts
       lineinfile:
         dest: /etc/hosts
-        line: "127.0.0.1 datalabs-terraform-state"
+        line: "127.0.0.1 ceh-datalabs-terraform-state"
         insertbefore: BOF
-        regexp: "datalabs-terraform-state$"
+        regexp: "ceh-datalabs-terraform-state$"
 
     - name: Rescan drives
       command: bash -c "for BUS in /sys/class/scsi_host/host*/scan; do echo '- - -' >> $BUS; done"
 
-#    - name: Format the disk
-#      filesystem:
-#        fstype: ext4
-#        dev: "/dev/sdb"
+    - name: Format the disk
+      filesystem:
+        fstype: ext4
+        dev: "/dev/sdb"
 
     - name: Create the mount points for the disks
       file:

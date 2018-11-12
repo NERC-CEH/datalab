@@ -1,6 +1,6 @@
 locals {
-  server_image = "ubuntu-1604-datalabs-20180518"
-  tenant_network = "nerc-datalab-U-internal"
+  server_image = "ubuntu-1604-20180518"
+  tenant_network = "ceh-datalab-U-internal"
   ssh_user = "ubuntu"
   flavours = {        #|   RAM | Disk | VCPUs |
     j1_tiny   = 11    #|   512 |    4 |     1 |
@@ -12,8 +12,8 @@ locals {
     j2_large  = 17    #| 16384 |   32 |     8 |
   }
 
-  bastion_fips           = ["192.171.139.188"]
-  test_load_balancer_fip = "192.171.139.197"
-  load_balancer_fip      = "192.171.139.198"
-  spare_fip              = "192.171.139.187" //Not in use but assigned to us
+  bastion_fips           = ["192.171.139.245"]
+  #test_load_balancer_fip = "192.171.139.197"
+  load_balancer_fip      = "192.171.139.246"
+  #spare_fip              = "192.171.139.187" //Not in use but assigned to us
 }

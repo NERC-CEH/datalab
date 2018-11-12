@@ -155,7 +155,7 @@ resource "openstack_compute_floatingip_associate_v2" "load_balancer" {
   instance_id = "${openstack_compute_instance_v2.load_balancer.id}"
 }
 
-resource "openstack_compute_floatingip_associate_v2" "test_load_balancer" {
-  floating_ip = "${local.test_load_balancer_fip}"
-  instance_id = "${openstack_compute_instance_v2.test_load_balancer.id}"
-}
+#resource "openstack_compute_floatingip_associate_v2" "test_load_balancer" {
+#  floating_ip = "${local.test_load_balancer_fip}"
+#  instance_id = "${openstack_compute_instance_v2.test_load_balancer.id}"
+#}

@@ -1,5 +1,5 @@
 ---
-- hosts: datalabs-terraform-state
+- hosts: ceh-datalabs-terraform-state
   become: yes
   become_method: sudo
 

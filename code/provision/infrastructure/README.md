@@ -21,7 +21,7 @@ The easiest way to do this is to create a file that exports them and `source` it
 console before running OpenStack CLI commands.
 
 ```
-export OS_AUTH_URL=https://kataifi.sweet.jasmin.ac.uk
+export OS_AUTH_URL=https://kataifi.sweet.jasmin.ac.uk/v3   #the auth_url should have versioned identity endpoints, if not you get an error that the auth_url is not correct
 export OS_IDENTITY_API_VERSION=3
 export OS_USER_DOMAIN_NAME=jasmin
 export OS_PROJECT_DOMAIN_NAME=jasmin
@@ -94,9 +94,9 @@ for the correct values . This will download the required modules and prepare ini
 
 ```bash
 terraform init \
-    -backend-config="address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
-    -backend-config="lock_address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
-    -backend-config="unlock_address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
+    -backend-config="address=http://state-datalabs.ceh.ac.uk/state/datalabs" \
+    -backend-config="lock_address=http://state-datalabs.ceh.ac.uk/state/datalabs" \
+    -backend-config="unlock_address=http://state-datalabs.ceh.ac.uk/state/datalabs" \
     -backend-config="username=username" \
     -backend-config="password=password"
 ```

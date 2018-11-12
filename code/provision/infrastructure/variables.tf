@@ -1,10 +1,10 @@
 variable "openstack_keypair" {
     description = "The keypair to be used."
-    default  = "llogr-c9834a39ddef2dd489d7bd976d0ac79c"
+    default  = "olaawe-d20a3d59-9433-4b79-8726-20b431d89c78"
 }
 
 variable "cluster_name" {
-  default = "datalabs"
+  default = "ceh-datalabs"
 }
 
 variable "number_of_bastions" {

@@ -47,27 +47,27 @@ resource "openstack_compute_instance_v2" "load_balancer" {
   }
 }
 
-resource "openstack_compute_instance_v2" "test_load_balancer" {
-  name       = "${var.cluster_name}-test-load-balancer"
-  image_name = "${local.server_image}"
-  flavor_id = "${lookup(local.flavours, var.flavor_load_balancer)}"
-  key_pair   = "${var.openstack_keypair}"
-
-  network {
-    name = "${local.tenant_network}"
-  }
-
-  security_groups = ["${openstack_compute_secgroup_v2.load_balancer.name}",
-    "${openstack_compute_secgroup_v2.load_balancer.name}",
-    "default",
-  ]
-
-  metadata = {
-    ssh_user    = "${local.ssh_user}"
-    groups      = "load-balancers,test-load-balancers,proxied"
-    depends_on  = "${local.tenant_network}"
-  }
-}
+#resource "openstack_compute_instance_v2" "test_load_balancer" {
+#  name       = "${var.cluster_name}-test-load-balancer"
+#  image_name = "${local.server_image}"
+#  flavor_id = "${lookup(local.flavours, var.flavor_load_balancer)}"
+#  key_pair   = "${var.openstack_keypair}"#
+#
+#  network {
+#    name = "${local.tenant_network}"
+#  }
+#
+#  security_groups = ["${openstack_compute_secgroup_v2.load_balancer.name}",
+#    "${openstack_compute_secgroup_v2.load_balancer.name}",
+#    "default",
+#  ]
+#
+#  metadata = {
+#    ssh_user    = "${local.ssh_user}"
+#    groups      = "load-balancers,test-load-balancers,proxied"
+#    depends_on  = "${local.tenant_network}"
+#  }
+#}
 
 resource "openstack_compute_instance_v2" "k8s_master" {
   name       = "${var.cluster_name}-k8s-master-${count.index+1}"
@@ -157,23 +157,23 @@ resource "openstack_compute_instance_v2" "discourse" {
   }
 }
 
-resource "openstack_compute_instance_v2" "test_discourse" {
-  name       = "${var.cluster_name}-discourse-test"
-  image_name = "${local.server_image}"
-  flavor_id = "${lookup(local.flavours, var.flavor_discourse)}"
-  key_pair   = "${var.openstack_keypair}"
-
-  network {
-    name = "${local.tenant_network}"
-  }
-
-  security_groups = ["${openstack_compute_secgroup_v2.discourse.name}",
-    "default",
-  ]
-
-  metadata = {
-    ssh_user   = "${local.ssh_user}"
-    groups     = "discourse,test-discourse,proxied"
-    depends_on = "${local.tenant_network}"
-  }
-}
+#resource "openstack_compute_instance_v2" "test_discourse" {
+#  name       = "${var.cluster_name}-discourse-test"
+#  image_name = "${local.server_image}"
+#  flavor_id = "${lookup(local.flavours, var.flavor_discourse)}"
+#  key_pair   = "${var.openstack_keypair}"
+#
+#  network {
+#    name = "${local.tenant_network}"
+#  }
+#
+#  security_groups = ["${openstack_compute_secgroup_v2.discourse.name}",
+#    "default",
+#  ]
+#
+#  metadata = {
+#    ssh_user   = "${local.ssh_user}"
+#    groups     = "discourse,test-discourse,proxied"
+#    depends_on = "${local.tenant_network}"
+#  }
+#}

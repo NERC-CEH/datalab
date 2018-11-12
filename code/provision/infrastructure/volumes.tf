@@ -35,7 +35,7 @@ resource "openstack_compute_volume_attach_v2" "k8s_node_volume" {
 }
 
 resource "openstack_blockstorage_volume_v2" "gluster_node_volume" {
-  name        = "${var.cluster_name}-gulsterfs-node-${count.index+1}-volume-1"
+  name        = "${var.cluster_name}-glusterfs-node-${count.index+1}-volume-1"
   count       = "${var.number_of_gluster_nodes}"
   description = "Volume for Gluster Node ${count.index+1} (Persistent)"
   size        = 1000
