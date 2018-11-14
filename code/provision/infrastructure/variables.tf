@@ -40,7 +40,7 @@ variable "flavor_k8s_master" {
 
 variable "flavor_k8s_node" {
   description = "The K8s worker flavour"
-  default     = "j2.large"
+  default     = "j3.large"
 }
 
 variable "flavor_gluster_node" {
