@@ -46,7 +46,7 @@ const config = convict({
   authSigninUrl: {
     doc: 'The sign in URL',
     format: 'url',
-    default: 'https://datalab.datalabs.ceh.ac.uk',
+    default: 'https://testlab.test-datalabs.ceh.ac.uk',
     env: 'AUTH_SIGNIN_URL',
   },
   authorisationService: {
