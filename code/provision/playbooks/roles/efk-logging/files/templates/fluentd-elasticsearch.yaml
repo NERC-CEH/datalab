@@ -53,12 +53,14 @@ spec:
         effect: NoSchedule
       containers:
       - name: fluentd
-        image: fluent/fluentd-kubernetes-daemonset:elasticsearch
+        image: fluent/fluentd-kubernetes-daemonset:{{ $.Values.fluentVersion }}-elasticsearch
         env:
           - name:  FLUENT_ELASTICSEARCH_HOST
             value: {{ quote $.Values.elasticName }}
           - name:  FLUENT_ELASTICSEARCH_PORT
             value: {{ quote $.Values.elasticPort }}
+          - name:  FLUENT_UID
+            value: 0
         resources:
           limits:
             memory: 200Mi

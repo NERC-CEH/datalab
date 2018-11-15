@@ -9,3 +9,4 @@ kibanaPort: 5601
 
 fluentdName: fluentd-logging
 fluentdServiceAccount: fluentd-service-account
+fluentVersion: v0.12-debian
