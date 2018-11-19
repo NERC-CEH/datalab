@@ -9,7 +9,7 @@ stages:
 
 test:
   stage: test
-  image: node:8.5
+  image: node:8.2.1
 
   cache:
     key: "$CI_COMMIT_REF_SLUG"
