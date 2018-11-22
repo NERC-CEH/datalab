@@ -22,7 +22,7 @@
   command: "helm upgrade --install prometheus --tls --namespace prometheus stable/prometheus --version 5.3.1 --debug -f {{ chart_directory }}/values.yml"
 
 - name: Install Grafana Helm Chart
-  command: "helm upgrade --install grafana --tls --namespace prometheus stable/grafana --debug -f {{ chart_directory }}/grafana-values.yml"
+  command: "helm upgrade --install grafana --tls --namespace prometheus stable/grafana --version 1.18.0 --debug -f {{ chart_directory }}/grafana-values.yml"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent

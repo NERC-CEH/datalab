@@ -2,7 +2,7 @@ replicas: 1
 
 image:
   repository: grafana/grafana
-  tag: 5.0.4
+  tag: 5.3.4
   pullPolicy: IfNotPresent
 
   ## Optionally specify an array of imagePullSecrets.

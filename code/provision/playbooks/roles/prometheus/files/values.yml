@@ -8,6 +8,8 @@ alertmanager:
 server:
   persistentVolume:
     storageClass: glusterfs-storage
+  extraArgs:
+    storage.tsdb.retention: 168h
 
 ## Prometheus server ConfigMap entries
 ##
