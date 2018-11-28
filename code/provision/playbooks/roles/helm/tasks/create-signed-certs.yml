@@ -29,7 +29,7 @@
     dest: "{{ ca_certs_dir }}/{{ item }}.key.pem"
 
 - name: Sign Helm Certs
-  shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/ca.crt -CAkey {{ k8s_cert_dir }}/ca.key -CAcreateserial -in {{ item }}.csr.pem -out {{ item }}.cert.pem"
+  shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/ca.crt -CAkey {{ k8s_cert_dir }}/ca.key -CAcreateserial -in {{ item }}.csr.pem -out {{ item }}.cert.pem -days 365"
   args:
     chdir: "{{ ca_certs_dir }}"
   become: yes
