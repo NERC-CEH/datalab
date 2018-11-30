@@ -11,20 +11,24 @@
       k8s_cert_dir='/etc/kubernetes/pki'
       tmp_dir='/tmp/helm-certs/'
 
-  - name: Create Certs Directory
+  - name: Create Temp Directory
     file:
       path: "{{ tmp_dir }}"
       state: directory
 
-  - name: Create CSR
-    shell: "openssl req -new -key {{ ca_certs_dir }}/{{ item }}.key.pem -out {{ tmp_dir }}/{{ item }}.csr.pem -subj \"/C=UK/O=Datalabs/CN={{ item }}\""
-    args:
-      chdir: "{{ ca_certs_dir }}"
+  - name: Create new Keys
+    shell: "openssl genrsa -out {{ tmp_dir }}/{{ item }}.key.pem"
     with_items:
       - helm
       - tiller
 
-  - name: Sign Helm Certs
+  - name: Create CSRs
+    shell: "openssl req -new -key {{ tmp_dir }}/{{ item }}.key.pem -out {{ tmp_dir }}/{{ item }}.csr.pem -subj \"/C=UK/O=Datalabs/CN={{ item }}\""
+    with_items:
+      - helm
+      - tiller
+
+  - name: Sign Helm/Tiller Certs
     shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/ca.crt -CAkey {{ k8s_cert_dir }}/ca.key -CAcreateserial -in {{ tmp_dir }}/{{ item }}.csr.pem -out {{ item }}.cert.pem -days 365"
     args:
       chdir: "{{ tmp_dir }}"
@@ -34,10 +38,30 @@
       - helm
       - tiller
 
+  - name: Remove current Helm/Tiller Keys
+    file:
+      state: absent
+      path: "{{ ca_certs_dir }}/{{ item }}.key.pem"
+    with_items:
+      - helm
+      - tiller
+
   - name: Remove current Helm/Tiller certificates
     file:
       state: absent
       path: "{{ ca_certs_dir }}/{{ item }}.cert.pem"
+    with_items:
+      - helm
+      - tiller
+
+  - name: Implement newly generated keys
+    copy:
+      src: "{{ tmp_dir }}/{{ item }}.key.pem"
+      dest: "{{ ca_certs_dir }}/{{ item }}.key.pem"
+      remote_src: yes
+      owner: ubuntu
+      group: docker
+      mode: 0640
     with_items:
       - helm
       - tiller
@@ -54,8 +78,13 @@
       - helm
       - tiller
 
-  - name: Update Tiller Secret with new Certificate
+  - name: Update Tiller Key Secre
     shell: "kubectl get secret tiller-secret -n kube-system -o json | jq --arg cert \"$(cat {{ ca_certs_dir }}/tiller.cert.pem | base64 -w 0)\" '.data[\"tls.crt\"]=$cert' | kubectl apply -f -"
+    args:
+      chdir: "{{ ca_certs_dir }}"
+
+  - name: Update Tiller CRT Secret
+    shell: "kubectl get secret tiller-secret -n kube-system -o json | jq --arg cert \"$(cat {{ ca_certs_dir }}/tiller.key.pem | base64 -w 0)\" '.data[\"tls.key\"]=$cert' | kubectl apply -f -"
     args:
       chdir: "{{ ca_certs_dir }}"
 
