@@ -1,0 +1,40 @@
+# This is a playbook to execute the steps to upgrade a kubernetes node
+# See following for an example;
+#
+# https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-11/
+#
+---
+- hosts: k8s-master
+  tasks:
+  - set_fact:
+      kubernetes_apt_key_id: 6A030B21BA07F4FB
+      kubeadm_version: kubeadm=1.10.11-00
+      kubeadm_cluster_version: v1.10.11
+
+  - name: add kubernetes key
+    become: yes
+    apt_key:
+      id: '{{ kubernetes_apt_key_id }}'
+      url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+      state: present
+
+  - name: add kubernetes repo
+    become: yes
+    apt_repository:
+      repo: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+      state: present
+
+  - name: upgrade kubeadm to later version
+    apt:
+      update_cache: yes
+      name: "{{ kubeadm_version }}"
+
+  - name: perform an upgrade plan expecting rc=0
+    command: kubeadm upgrade plan
+
+  - name: perform an upgrade
+    command: kubeadm upgrade apply {{ kubeadm_cluster_version }}
+
+  # Pause to allow control plane to settle
+  - pause:
+      seconds: 20
