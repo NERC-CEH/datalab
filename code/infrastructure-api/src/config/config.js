@@ -79,6 +79,18 @@ const config = convict({
     default: '500m',
     env: 'MAX_BODY_SIZE',
   },
+  databaseUser: {
+    doc: 'User to authenticte against the database',
+    format: 'String',
+    default: 'datalabs',
+    env: 'DATABASE_USER',
+  },
+  databasePassword: {
+    doc: 'Password to authenticate against the database',
+    format: 'String',
+    default: 'datalabs',
+    env: 'DATABASE_PASSWORD',
+  },
 });
 
 export default config;
