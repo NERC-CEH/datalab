@@ -15,7 +15,7 @@ const constraints = {
     numericality: {
       onlyInteger: true,
       greaterThanOrEqualTo: 5,
-      lessThanOrEqualTo: 200,
+      lessThanOrEqualTo: 1000,
     },
   },
   name: {

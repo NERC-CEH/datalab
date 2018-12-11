@@ -81,7 +81,7 @@ describe('Volume Controller', () => {
     const requestBody = createRequestBody();
     requestBody.volumeSize = 4;
     return executeValidator(requestBody).then(() => {
-      expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
+      expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 1000');
     });
   });
 

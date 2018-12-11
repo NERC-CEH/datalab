@@ -34,7 +34,7 @@ const CreateDataStoreForm = (props) => {
           placeholder="GB"
           component={renderTextField}
           type="number"
-          InputProps={{ inputProps: { min: 5, max: 200 } }}
+          InputProps={{ inputProps: { min: 5, max: 1000 } }}
           parse={value => Number(value)} />
       </div>
       <div>

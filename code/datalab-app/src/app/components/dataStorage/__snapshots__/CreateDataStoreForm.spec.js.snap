@@ -31,7 +31,7 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       InputProps={
         Object {
           "inputProps": Object {
-            "max": 200,
+            "max": 1000,
             "min": 5,
           },
         }
