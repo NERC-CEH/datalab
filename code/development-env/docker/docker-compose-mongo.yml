@@ -4,6 +4,9 @@ services:
     image: mongo:3.4
     ports:
       - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=datalabs
+      - MONGO_INITDB_ROOT_PASSWORD=datalabs
 
   mongodb_import:
     build:

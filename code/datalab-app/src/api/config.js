@@ -61,6 +61,18 @@ const config = convict({
     default: false,
     env: 'AUTHORISATION_SERVICE_STUB',
   },
+  databaseUser: {
+    doc: 'User to authenticte against the database',
+    format: 'String',
+    default: 'datalabs',
+    env: 'DATABASE_USER',
+  },
+  databasePassword: {
+    doc: 'Password to authenticate against the database',
+    format: 'String',
+    default: 'datalabs',
+    env: 'DATABASE_PASSWORD',
+  },
 });
 
 export default config;
