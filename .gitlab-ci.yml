@@ -30,8 +30,14 @@ test:
 
 build:
   stage: build
+  image: docker:latest
   only:
     - master
+
+  before_script:
+    - apk update && apk add bash curl git nodejs npm
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH="$HOME/.yarn/bin:$PATH"
 
   script:
     - |
