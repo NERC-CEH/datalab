@@ -2,7 +2,7 @@ replicas: 1
 
 image:
   repository: grafana/grafana
-  tag: 5.0.4
+  tag: 5.3.4
   pullPolicy: IfNotPresent
 
   ## Optionally specify an array of imagePullSecrets.
@@ -72,14 +72,13 @@ affinity: {}
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
 persistence:
-  enabled: false
-  # storageClassName: default
-  # accessModes:
-  #   - ReadWriteOnce
-  # size: 10Gi
-  # annotations: {}
-  # subPath: ""
-  # existingClaim:
+  enabled: true
+  storageClassName: glusterfs-storage
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  annotations: {}
+  subPath: ""
 
 adminUser: admin
 # adminPassword: strongpassword
