@@ -6,6 +6,7 @@ services:
 
 stages:
   - test
+  - build
 
 test:
   stage: test
@@ -26,3 +27,13 @@ test:
   script:
     - >
       for CONTAINER in $CONTAINERS; do cd $CI_PROJECT_DIR && ./build/validate-build.sh $CONTAINER; done
+
+build:
+  stage: build
+  only:
+    - master
+
+  script:
+    - |
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      for CONTAINER in $CONTAINERS; do cd $CI_PROJECT_DIR && ./build/build-container.sh $CONTAINER --push; done
