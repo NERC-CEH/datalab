@@ -31,7 +31,7 @@ function createConnection() {
     keepAlive: true,
     user: config.get('databaseUser'),
     pass: config.get('databasePassword'),
-    auth: { authSource: 'admin' }
+    auth: { authSource: 'admin' },
   };
   return mongoose.connect(`mongodb://${config.get('databaseHost')}/datalab`, options);
 }
