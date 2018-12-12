@@ -1,0 +1,28 @@
+variables:
+  CONTAINERS: "( api app docs infrastructure authorisation )"
+
+services:
+  - docker:dind
+
+stages:
+  - test
+
+test:
+  stage: test
+  image: node:8.2.1
+
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - code/auth-service/node_modules/
+      - code/datalab-app/node_modules/
+      - code/infrastructure-api/node_modules/
+      - docs/node_modules/
+
+  before_script:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH="$HOME/.yarn/bin:$PATH"
+
+  script:
+    - >
+      for CONTAINER in $CONTAINERS; do cd $CI_PROJECT_DIR && ./build/validate-build.sh $CONTAINER; done
