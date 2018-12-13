@@ -1,0 +1,79 @@
+# This is a playbook to execute the steps to upgrade a kubernetes node
+# Code largely taken from kubernetes-common role
+# See following for an example;
+#
+# https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-11/
+#
+# This needs to be provided with a parameter which is the node name (i.e the one from the
+# inventory) e.g;
+#
+# ansible-playbook -i inventory.yml maintenance/kubernetes-upgrade-node.yml --extra-vars="worker=k8s-worker-1"
+#
+---
+- hosts: "{{ worker_var }}"
+  vars:
+    worker_var: "{{ worker }}"
+  tasks:
+  - name: get hostname
+    command: hostname
+    register: hostname_result
+
+- hosts: k8s-master
+  vars:
+    worker_var: "{{ worker }}"
+  tasks:
+  - name: set target hostname as fact
+    set_fact:
+      worker_hostname: "{{ hostvars[worker_var].hostname_result }}"
+
+- hosts: k8s-master
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: evict current workload - workers
+    command: "kubectl drain {{ worker_hostname }}"
+
+- hosts: "{{ worker_var }}"
+  vars:
+    worker_var: "{{ worker }}"
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: add kubernetes key
+    become: yes
+    apt_key:
+      id: '6A030B21BA07F4FB'
+      url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+      state: present
+
+  - name: add kubernetes repo
+    become: yes
+    apt_repository:
+      repo: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+      state: present
+
+  - name: Install Kubernetes Components
+    apt:
+      update_cache: yes
+      name:
+        - jq=1.5+dfsg-1ubuntu0.1
+        - kubelet=1.10.11-00
+        - kubeadm=1.10.11-00
+        - kubectl=1.10.11-00
+        - kubernetes-cni=0.6.0-00
+
+  - name: re-configure kubelet
+    shell: "kubeadm upgrade node config --kubelet-version $(kubelet --version | cut -d ' ' -f 2)"
+    when: inventory_hostname in groups['k8s-workers']
+
+  - name: re-start kubelet
+    systemd:
+      name: kubelet
+      state: restarted
+
+- hosts: k8s-master
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: bring node back into cluster
+    command: "kubectl uncordon {{ worker_hostname }}"
