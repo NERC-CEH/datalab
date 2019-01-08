@@ -148,3 +148,9 @@ grafana.ini:
     mode: console
   grafana_net:
     url: https://grafana.net
+  smtp:
+    enabled: true
+    host: smtp.sendgrid.net:587
+    user: apikey
+    from_address: datalabs@grafana.localhost
+    password: "{{ sendgrid_api_key }}"
