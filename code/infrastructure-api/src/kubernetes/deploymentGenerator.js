@@ -3,6 +3,9 @@ import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manif
 const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
 const JUPYTER_VERSION = '0.1.3';
 
+const JUPYTERLAB_IMAGE = 'nercceh/jupyter-lab';
+const JUPYTERLAB_VERSION = '0.0.2-3-g9029868';
+
 const ZEPPELIN_IMAGE = 'nerc/zeppelin';
 const ZEPPELIN_VERSION = '0.7.2.7';
 const ZEPPELIN_CONNECT_IMAGE = 'nerc/zeppelin-connect';
@@ -41,6 +44,22 @@ function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, ty
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
+}
+
+function createJupyterlabDeployment({ datalabInfo, deploymentName, notebookName, type, volumeMount }) {
+  const context = {
+    name: deploymentName,
+    grantSudo: 'yes',
+    domain: `${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
+    jupyterlab: {
+      imageName: JUPYTERLAB_IMAGE,
+      version: JUPYTERLAB_VERSION,
+    },
+    type,
+    volumeMount,
+  };
+
+  return generateManifest(context, DeploymentTemplates.JUPYTERLAB_DEPLOYMENT);
 }
 
 function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
@@ -132,6 +151,11 @@ function createJupyterService(notebookName) {
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
 }
 
+function createJupyterlabService(notebookName) {
+  const context = { name: notebookName };
+  return generateManifest(context, ServiceTemplates.JUPYTERLAB_SERVICE);
+}
+
 function createZeppelinService(name) {
   const context = { name };
   return generateManifest(context, ServiceTemplates.ZEPPELIN_SERVICE);
@@ -159,12 +183,14 @@ function createMinioService(name) {
 
 export default {
   createJupyterDeployment,
+  createJupyterlabDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
   createRShinyDeployment,
   createNbViewerDeployment,
   createMinioDeployment,
   createJupyterService,
+  createJupyterlabService,
   createZeppelinService,
   createRStudioService,
   createRShinyService,
