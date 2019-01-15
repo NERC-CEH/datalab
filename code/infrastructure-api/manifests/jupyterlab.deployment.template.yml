@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name }}
+spec:
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+        user-pod: {{ type }}
+    spec:
+      securityContext:
+        runAsUser: 0
+      initContainers:
+        # This container will generate the expected folder structure for the notebooks directory, without this the
+        # jupyter container will not start. As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/jupyter"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+        # This container correct the folder permissions for the generated notebook directory to be owned by the
+        # datalabs:users (user:group; 1000:100).
+        - name: set-directory-owner
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/jupyter"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+      containers:
+        - image: {{ &jupyterlab.imageName }}:{{ jupyterlab.version }}
+          imagePullPolicy : "IfNotPresent"
+          name: {{ name }}
+          command: ["start.sh",
+            "jupyter", "lab",
+            "--NotebookApp.token='$(JUPYTER_TOKEN)'",
+            "--NotebookApp.allow_origin='{{ domain }}'",
+            "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
+          ports:
+            - containerPort: 8888
+              protocol: TCP
+          env:
+            - name: JUPYTER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ name }}
+                  key: token
+            - name: GRANT_SUDO
+              value: "{{ grantSudo }}"
+            - name: R_LIBS_USER
+              value: "/data/packages/R/%p/%v"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 4Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8888
+            initialDelaySeconds: 5
+            periodSeconds: 10
+{{#volumeMount}}
+          volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+      volumes:
+        - name: glusterfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}
