@@ -4,7 +4,7 @@ const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
 const JUPYTER_VERSION = '0.1.3';
 
 const JUPYTERLAB_IMAGE = 'nercceh/jupyter-lab';
-const JUPYTERLAB_VERSION = '0.0.2-3-g9029868';
+const JUPYTERLAB_VERSION = '0.0.2-4-g52178e0';
 
 const ZEPPELIN_IMAGE = 'nerc/zeppelin';
 const ZEPPELIN_VERSION = '0.7.2.7';
