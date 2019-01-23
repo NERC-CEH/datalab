@@ -29,10 +29,15 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chown 1000:100 /data/notebooks && chown 1000:100 /data/notebooks/rstudio"]
+          args: ["-c", "chown 1000:100 /data/notebooks /mnt/glusterfs-scratch && chown 1000:100 /data/notebooks/rstudio"]
           volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+{{#scratchVolumeMount}}
+            - mountPath: /mnt/glusterfs-scratch
+              name: glusterfsvol-scratch
+              subPath: {{ name }}
+{{/scratchVolumeMount}}
         # This container will create the /home/datalabs to /data/notebooks/rstudio symlink
         - name: create-datalab-symlink
           image: busybox
@@ -90,10 +95,20 @@ spec:
               mountPath: /data
             - name: homedir
               mountPath: /home
+  {{#scratchVolumeMount}}
+            - mountPath: /scratch
+              name: glusterfsvol-scratch
+              subPath: {{ name }}
+  {{/scratchVolumeMount}}
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
         - name: homedir
           emptyDir: {}
+  {{#scratchVolumeMount}}
+        - name: glusterfsvol-scratch
+          persistentVolumeClaim:
+            claimName: {{ scratchVolumeMount }}-claim
+  {{/scratchVolumeMount}}
 {{/volumeMount}}

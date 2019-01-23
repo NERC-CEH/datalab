@@ -32,10 +32,15 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/jupyter"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks /mnt/glusterfs-scratch && chown 1000:100 /mnt/glusterfs/notebooks/jupyter"]
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
+{{#scratchVolumeMount}}
+            - mountPath: /mnt/glusterfs-scratch
+              name: glusterfsvol-scratch
+              subPath: {{ name }}
+{{/scratchVolumeMount}}
       containers:
         - image: {{ &jupyterlab.imageName }}:{{ jupyterlab.version }}
           imagePullPolicy : "IfNotPresent"
@@ -75,8 +80,18 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+  {{#scratchVolumeMount}}
+            - mountPath: /scratch
+              name: glusterfsvol-scratch
+              subPath: {{ name }}
+  {{/scratchVolumeMount}}
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
+  {{#scratchVolumeMount}}
+        - name: glusterfsvol-scratch
+          persistentVolumeClaim:
+            claimName: {{ scratchVolumeMount }}-claim
+  {{/scratchVolumeMount}}
 {{/volumeMount}}
