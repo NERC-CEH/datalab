@@ -30,7 +30,7 @@ test_namespace:
      accessKey: "{{ test_minio_shared_store_access_key }}"
      secretKey: "{{ test_minio_shared_store_secret_key }}"
    domain: test-datalabs.ceh.ac.uk
-   nginxVersion: 0.9.0-beta.15
+   nginxVersion: 0.21.0
    ports:
      httpNodePort: "{{ test_ingress_http_port }}"
      httpsNodePort: "{{ test_ingress_https_port }}"
@@ -45,7 +45,7 @@ prod_namespace:
     accessKey: "{{ minio_shared_store_access_key }}"
     secretKey: "{{ minio_shared_store_secret_key }}"
   domain: datalabs.ceh.ac.uk
-  nginxVersion: 0.9.0-beta.15
+  nginxVersion: 0.21.0
   ports:
     httpNodePort: "{{ prod_ingress_http_port }}"
     httpsNodePort: "{{ prod_ingress_https_port }}"
