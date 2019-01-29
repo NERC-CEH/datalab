@@ -53,3 +53,32 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: nginx-ingress-serviceaccount
+# Adding ClusterRole+Binding with view nodes permissions.
+# This is a requirement from nginx-ingress-controller > 0.20.0
+# See example;
+#   https://github.com/helm/charts/blob/master/stable/nginx-ingress/templates/scoped-clusterrole.yaml
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: nginx-ingress-clusterrole-scoped
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: nginx-ingress-clusterrole-scoped-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nginx-ingress-clusterrole-scoped
+subjects:
+  - kind: ServiceAccount
+    name: nginx-ingress-serviceaccount
+    namespace: test
+  - kind: ServiceAccount
+    name: nginx-ingress-serviceaccount
+    namespace: prod
