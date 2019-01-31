@@ -71,6 +71,8 @@ spec:
                 secretKeyRef:
                   name: {{ name }}
                   key: password
+            - name: ROOT
+              value: 'TRUE'
           resources:
             requests:
               cpu: 200m
