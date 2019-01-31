@@ -12,7 +12,7 @@ const ZEPPELIN_CONNECT_IMAGE = 'nerc/zeppelin-connect';
 const ZEPPELIN_CONNECT_VERSION = '1.1.1';
 
 const RSTUDIO_IMAGE = 'rocker/rstudio';
-const RSTUDIO_VERSION = '3.4.0';
+const RSTUDIO_VERSION = '3.5.2';
 const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
 const RSTUDIO_CONNECT_VERSION = '1.1.1';
 
