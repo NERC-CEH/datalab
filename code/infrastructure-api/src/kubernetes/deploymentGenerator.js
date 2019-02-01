@@ -24,6 +24,7 @@ const NBVIEWER_VERSION = 'latest';
 
 const SPARK_MASTER_ADDRESS = 'spark://spark-master:7077';
 const SHARED_R_LIBS = '/data/packages/R/%p/%v';
+const SCRATCH_VOLUME = 'scratch';
 
 const MINIO_IMAGE = 'nerc/minio';
 const MINIO_VERSION = '1.0';
@@ -41,6 +42,7 @@ function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, ty
     },
     type,
     volumeMount,
+    scratchVolumeMount: SCRATCH_VOLUME,
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
@@ -49,6 +51,7 @@ function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, ty
 function createJupyterlabDeployment({ datalabInfo, deploymentName, notebookName, type, volumeMount }) {
   const context = {
     name: deploymentName,
+    // Grant sudo access using 'yes' as true does not work for JupyterLab Image
     grantSudo: 'yes',
     domain: `${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
     jupyterlab: {
@@ -57,6 +60,7 @@ function createJupyterlabDeployment({ datalabInfo, deploymentName, notebookName,
     },
     type,
     volumeMount,
+    scratchVolumeMount: SCRATCH_VOLUME,
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTERLAB_DEPLOYMENT);
@@ -76,6 +80,7 @@ function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
     },
     type,
     volumeMount,
+    scratchVolumeMount: SCRATCH_VOLUME,
   };
 
   return generateManifest(context, DeploymentTemplates.ZEPPELIN_DEPLOYMENT);
@@ -92,6 +97,7 @@ function createRStudioDeployment({ deploymentName, volumeMount, type }) {
     },
     type,
     volumeMount,
+    scratchVolumeMount: SCRATCH_VOLUME,
   };
 
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);

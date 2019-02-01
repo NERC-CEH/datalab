@@ -36,6 +36,11 @@ spec:
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
+{{#scratchVolumeMount}}
+            - mountPath: /mnt/glusterfs-scratch
+              name: glusterfsvol-scratch
+              subPath: {{ name }}
+{{/scratchVolumeMount}}
       containers:
         - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
           imagePullPolicy : "IfNotPresent"
@@ -75,8 +80,18 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: glusterfsvol
+  {{#scratchVolumeMount}}
+            - mountPath: /scratch
+              name: glusterfsvol-scratch
+              subPath: {{ name }}
+  {{/scratchVolumeMount}}
       volumes:
         - name: glusterfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
+  {{#scratchVolumeMount}}
+        - name: glusterfsvol-scratch
+          persistentVolumeClaim:
+            claimName: {{ scratchVolumeMount }}-claim
+  {{/scratchVolumeMount}}
 {{/volumeMount}}

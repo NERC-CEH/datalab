@@ -12,8 +12,13 @@ kubectl apply -f local-ingress-rules.yml
 ```bash
 kubectl apply -f storage-class.yml
 ```
+# Add Scratch area that's mounted into all notebooks
 
-# Add custome route for service
+```bash
+kubectl apply -f scratch-local.yml
+```
+
+# Add custom route for service
 
 - Create ingress route using `example-cluster-local-ingress.yml` as a template
 - Update `host` to match service name and namespace
