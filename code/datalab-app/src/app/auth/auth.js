@@ -11,6 +11,7 @@ class Auth {
     this.authZeroInit = authZeroInit;
     this.authZeroAsync = promisifyAuthZeroInit;
     this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.renewSession = this.renewSession.bind(this);
@@ -23,6 +24,13 @@ class Auth {
     // User redirected to Auth0 login page
     const state = JSON.stringify({ appRedirect: window.location.pathname });
     this.authZeroInit.authorize({ state });
+  }
+
+  signUp() {
+    // User redirect to Auth0 login page on sign-up tab
+    // Note: This required customization of Auth0 Lock Page (see auth0)
+    const state = JSON.stringify({ appRedirect: window.location.pathname });
+    this.authZeroInit.authorize({ state, login_hint: 'signUp' });
   }
 
   logout() {
