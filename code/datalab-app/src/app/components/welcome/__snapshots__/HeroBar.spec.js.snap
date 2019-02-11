@@ -18,7 +18,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
   <withStyles(Button)
     className="HeroBar-button-4"
     color="primary"
-    disabled={true}
+    onClick={[Function]}
     raised={true}
   >
     Sign Up
