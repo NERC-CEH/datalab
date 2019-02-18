@@ -10,12 +10,13 @@ import { createDeployment, createService, createIngressRuleWithConnect } from '.
 function createRStudioStack(params) {
   const { datalabInfo, name, type } = params;
   const secretStrategy = secretManager.createNewUserCredentials;
+  const proxyTimeout = '1800';
 
   return secretManager.storeCredentialsInVault(datalabInfo.name, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(name, type, deploymentGenerator.createRStudioService))
-    .then(createIngressRuleWithConnect(params, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect({ datalabInfo, name, type, proxyTimeout }, ingressGenerator.createIngress));
 }
 
 function deleteRStudioStack(params) {
