@@ -1,7 +1,7 @@
 import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
-function createIngress({ name, datalabInfo, ingressName, serviceName, port, connectPort, rewriteTarget }) {
+function createIngress({ name, datalabInfo, ingressName, serviceName, port, connectPort, rewriteTarget, proxyTimeout }) {
   const host = createSniInfo(name, datalabInfo);
   const paths = createPathInfo(serviceName, port, connectPort);
   const context = {
@@ -10,6 +10,7 @@ function createIngress({ name, datalabInfo, ingressName, serviceName, port, conn
     authSigninUrl: config.get('authSigninUrl'),
     maxBodySize: config.get('maxBodySize'),
     rewriteTarget,
+    proxyTimeout,
     service: { host, paths },
   };
 
