@@ -1,26 +1,26 @@
 import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manifestGenerator';
 
-const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
-const JUPYTER_VERSION = '0.1.3';
+const JUPYTER_IMAGE = 'nercceh/jupyter-notebook';
+const JUPYTER_VERSION = '0.0.1-1-g93f3cec';
 
 const JUPYTERLAB_IMAGE = 'nercceh/jupyter-lab';
-const JUPYTERLAB_VERSION = '0.0.2-6-g1d1a97a';
+const JUPYTERLAB_VERSION = '0.0.2-9-g3729fb2';
 
 const ZEPPELIN_IMAGE = 'nerc/zeppelin';
 const ZEPPELIN_VERSION = '0.7.2.7';
 const ZEPPELIN_CONNECT_IMAGE = 'nerc/zeppelin-connect';
 const ZEPPELIN_CONNECT_VERSION = '1.1.1';
 
-const RSTUDIO_IMAGE = 'rocker/rstudio';
-const RSTUDIO_VERSION = '3.5.2';
+const RSTUDIO_IMAGE = 'nercceh/rstudio';
+const RSTUDIO_VERSION = '0.0.1-1-g4aa52c1';
 const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
 const RSTUDIO_CONNECT_VERSION = '1.1.1';
 
-const RSHINY_IMAGE = 'nerc/rshiny';
-const RSHINY_VERSION = '0.1.1';
+const RSHINY_IMAGE = 'nercceh/rshiny';
+const RSHINY_VERSION = '0.0.1-3-g56623f4';
 
-const NBVIEWER_IMAGE = 'jupyter/nbviewer';
-const NBVIEWER_VERSION = 'latest';
+const NBVIEWER_IMAGE = 'nercceh/jupyter-nbviewer';
+const NBVIEWER_VERSION = '0.0.1-1-g129dec8';
 
 const SPARK_MASTER_ADDRESS = 'spark://spark-master:7077';
 const SHARED_R_LIBS = '/data/packages/R/%p/%v';
