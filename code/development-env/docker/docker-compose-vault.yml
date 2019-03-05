@@ -1,12 +1,12 @@
 version: '3'
 services:
   vault:
-    image: vault
+    image: vault:1.0.3
     ports:
       - 8200:8200
     command:
       - server
-      - -dev
+      - -dev-kv-v1
     cap_add:
       - IPC_LOCK
     environment:
