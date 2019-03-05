@@ -8,8 +8,8 @@
   tasks:
   - set_fact:
       kubernetes_apt_key_id: 6A030B21BA07F4FB
-      kubeadm_version: kubeadm=1.11.7-00
-      kubeadm_cluster_version: v1.11.7
+      kubeadm_version: kubeadm=1.13.3-00
+      kubeadm_cluster_version: v1.13.3
 
   - name: add kubernetes key
     become: yes
