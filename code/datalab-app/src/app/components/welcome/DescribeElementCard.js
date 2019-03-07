@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import Card from 'material-ui/Card';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import DescribeElementCardBanner from './DescribeElementCardBanner';
 import DescribeElementCardBody from './DescribeElementCardBody';
 import DescribeElementCardLinks from './DescribeElementCardLinks';

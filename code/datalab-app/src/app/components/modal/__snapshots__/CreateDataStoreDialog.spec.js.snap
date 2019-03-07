@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
-<withStyles(Dialog)
+<WithStyles(Dialog)
   maxWidth="md"
   open={true}
 >
@@ -15,15 +15,15 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
     }
   >
     <div>
-      <withStyles(DialogTitle)>
+      <WithStyles(DialogTitle)>
         Title
-      </withStyles(DialogTitle)>
-      <withStyles(DialogContent)>
+      </WithStyles(DialogTitle)>
+      <WithStyles(DialogContent)>
         <ReduxForm
           cancel={[Function]}
           onSubmit={[Function]}
         />
-      </withStyles(DialogContent)>
+      </WithStyles(DialogContent)>
     </div>
     <div
       style={
@@ -32,9 +32,9 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
         }
       }
     >
-      <withStyles(DialogTitle)>
+      <WithStyles(DialogTitle)>
         Data Store Preview
-      </withStyles(DialogTitle)>
+      </WithStyles(DialogTitle)>
       <div
         style={
           Object {
@@ -47,5 +47,5 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
       </div>
     </div>
   </div>
-</withStyles(Dialog)>
+</WithStyles(Dialog)>
 `;

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardContent, CardMedia } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
+import { withStyles } from '@material-ui/core/styles';
 import { capitalize } from 'lodash';
 import stackDescriptions from './stackDescriptions';
 import StackCardActions from './StackCardActions';
@@ -47,15 +49,15 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
     <CardContent>
       <div className={classes.cardHeader}>
         <div>
-          <Typography type="headline">{getDisplayName(stack)}</Typography>
+          <Typography variant="h5">{getDisplayName(stack)}</Typography>
           <div style={{ display: 'flex', direction: 'row' }}>
-            <Typography style={{ marginRight: 6 }} type="subheading">{getStackType(stack, typeName)}</Typography>
+            <Typography style={{ marginRight: 6 }} variant="subtitle1">{getStackType(stack, typeName)}</Typography>
             {typeName !== 'Data Store' && stack.status && <StackStatus status={stack.status}/>}
           </div>
         </div>
         {generateGetImage(classes)(stack)}
       </div>
-      <Typography component="p">{getDescription(stack, typeName)}</Typography>
+      <Typography component="p" type="body1">{getDescription(stack, typeName)}</Typography>
     </CardContent>
     {stack.status === READY &&
       <StackCardActions

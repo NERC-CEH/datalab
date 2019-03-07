@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import { withStyles } from '@material-ui/core/styles';
 
 function styles(theme) {
   const buttonBaseStyle = {
@@ -37,7 +37,7 @@ const IconButton = ({ classes, onClick, children, icon, danger = false, disabled
       onClick={onClick}
       color={danger ? undefined : 'accent'}
       disabled={disabled}
-      raised >
+      variant="contained" >
       {children}
       <Icon className={classes.icon} children={icon} />
     </Button>

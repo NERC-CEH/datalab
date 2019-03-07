@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
-import Typography from 'material-ui/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Typography from '@material-ui/core/Typography';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import IconButton from '../common/control/IconButton';
 import AutocompleteTextSearch from '../common/form/AutocompleteTextSearch';
@@ -10,7 +13,7 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
     <Dialog open={true} maxWidth="md" fullWidth>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <Typography type="subheading" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom>
           Users with access to data store
         </Typography>
         <PromisedContentWrapper promise={loadUsersPromise} >

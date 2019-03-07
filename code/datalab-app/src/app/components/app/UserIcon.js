@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import Avatar from 'material-ui/Avatar';
-import Popover from 'material-ui/Popover';
+import Avatar from '@material-ui/core/Avatar';
+import Popover from '@material-ui/core/Popover';
 import UserMenu from './UserMenu';
 
 class UserIcon extends Component {
@@ -38,9 +38,9 @@ class UserIcon extends Component {
         />
         <Popover
           open={this.state.open}
-          onRequestClose={this.togglePopup}
+          onClose={this.togglePopup}
           anchorEl={this.state.anchorEl}
-          anchorOrigin={{ vertical: 'bottom' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
           <UserMenu identity={this.props.identity} closePopover={this.closeOnClick} />
         </Popover>

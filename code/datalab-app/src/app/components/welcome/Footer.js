@@ -1,10 +1,10 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import logo from '../../../assets/images/datalabs-mono.png';
 import version from '../../version';
 
-const copyrightString = '© Copyright NERC 2017';
+const copyrightString = '© Copyright NERC 2019';
 
 const footerStyle = {
   padding: '40px 16px 40px 16px',
@@ -24,8 +24,8 @@ const styles = theme => ({
 const Footer = ({ classes, invert }) => (
   <div className={invert ? classes.invertFooter : classes.footer} >
     <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
-    <Typography type="caption" gutterBottom>{copyrightString}</Typography>
-    <Typography type="body1">{`Version: ${version || 'pre-release'}`}</Typography>
+    <Typography variant="caption" gutterBottom>{copyrightString}</Typography>
+    <Typography variant="body1">{`Version: ${version || 'pre-release'}`}</Typography>
   </div>
 );
 

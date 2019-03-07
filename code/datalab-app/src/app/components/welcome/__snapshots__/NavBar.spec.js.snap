@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar renders correct snapshot 1`] = `
-<withStyles(AppBar)
+<WithStyles(AppBar)
   position="fixed"
 >
-  <withStyles(Toolbar)>
+  <WithStyles(Toolbar)>
     <img
       alt="DataLabs-Logo"
       className="PublicNavBarContent-logo-1"
@@ -13,33 +13,37 @@ exports[`NavBar renders correct snapshot 1`] = `
     <div
       className="PublicNavBarContent-spacer-2"
     />
-    <withStyles(NavBarLinkButton)
+    <WithStyles(NavBarLinkButton)
+      key="Slack"
       onClick={[Function]}
     >
       Slack
-    </withStyles(NavBarLinkButton)>
-    <withStyles(NavBarLinkButton)
+    </WithStyles(NavBarLinkButton)>
+    <WithStyles(NavBarLinkButton)
+      key="Discourse"
       onClick={[Function]}
     >
       Discourse
-    </withStyles(NavBarLinkButton)>
-    <withStyles(NavBarLinkButton)
+    </WithStyles(NavBarLinkButton)>
+    <WithStyles(NavBarLinkButton)
+      key="GitHub"
       onClick={[Function]}
     >
       GitHub
-    </withStyles(NavBarLinkButton)>
-    <withStyles(NavBarLinkButton)
+    </WithStyles(NavBarLinkButton)>
+    <WithStyles(NavBarLinkButton)
+      key="Docker Hub"
       onClick={[Function]}
     >
       Docker Hub
-    </withStyles(NavBarLinkButton)>
-    <withStyles(Button)
+    </WithStyles(NavBarLinkButton)>
+    <WithStyles(Button)
       color="primary"
       onClick={[Function]}
-      raised={true}
+      variant="contained"
     >
       Log In
-    </withStyles(Button)>
-  </withStyles(Toolbar)>
-</withStyles(AppBar)>
+    </WithStyles(Button)>
+  </WithStyles(Toolbar)>
+</WithStyles(AppBar)>
 `;

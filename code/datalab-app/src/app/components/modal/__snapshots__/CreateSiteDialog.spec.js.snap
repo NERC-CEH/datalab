@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Site dialog creates correct snapshot 1`] = `
-<withStyles(Dialog)
+<WithStyles(Dialog)
   maxWidth="md"
   open={true}
 >
@@ -15,10 +15,10 @@ exports[`Site dialog creates correct snapshot 1`] = `
     }
   >
     <div>
-      <withStyles(DialogTitle)>
+      <WithStyles(DialogTitle)>
         Title
-      </withStyles(DialogTitle)>
-      <withStyles(DialogContent)>
+      </WithStyles(DialogTitle)>
+      <WithStyles(DialogContent)>
         <ReduxForm
           cancel={[Function]}
           dataStorageOptions={
@@ -33,7 +33,7 @@ exports[`Site dialog creates correct snapshot 1`] = `
           }
           onSubmit={[Function]}
         />
-      </withStyles(DialogContent)>
+      </WithStyles(DialogContent)>
     </div>
     <div
       style={
@@ -42,9 +42,9 @@ exports[`Site dialog creates correct snapshot 1`] = `
         }
       }
     >
-      <withStyles(DialogTitle)>
+      <WithStyles(DialogTitle)>
         Site Preview
-      </withStyles(DialogTitle)>
+      </WithStyles(DialogTitle)>
       <div
         style={
           Object {
@@ -57,5 +57,5 @@ exports[`Site dialog creates correct snapshot 1`] = `
       </div>
     </div>
   </div>
-</withStyles(Dialog)>
+</WithStyles(Dialog)>
 `;
