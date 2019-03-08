@@ -1,8 +1,9 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
-import { ListItem, ListItemIcon } from 'material-ui/List';
-import Icon from 'material-ui/Icon';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Icon from '@material-ui/core/Icon';
 
 const coreStyle = {
   padding: '16px 40px 16px 40px',
@@ -23,7 +24,9 @@ const styles = theme => ({
   },
 });
 
-const Link = ({ classes, to, label, icon, ...rest }) => (
+const Link = ({
+  classes, to, label, icon, ...rest
+}) => (
   <ListItem
     className={classes.inactiveLink}
     to={to}
@@ -32,7 +35,7 @@ const Link = ({ classes, to, label, icon, ...rest }) => (
     exact
     button
     {...rest}>
-    {icon ? <ListItemIcon><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
+    {icon ? <ListItemIcon><Icon color="secondary">{icon}</Icon></ListItemIcon> : undefined}
     {label}
    </ListItem>
 );

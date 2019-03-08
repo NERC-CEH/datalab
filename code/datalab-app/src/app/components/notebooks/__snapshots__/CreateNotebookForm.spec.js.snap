@@ -75,29 +75,29 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
     />
   </div>
   <div>
-    <withStyles(Button)
+    <WithStyles(Button)
       color="primary"
-      raised={true}
       style={
         Object {
           "margin": 8,
         }
       }
       type="submit"
+      variant="contained"
     >
       Create
-    </withStyles(Button)>
-    <withStyles(Button)
-      onClick={[Function]}
-      raised={true}
+    </WithStyles(Button)>
+    <WithStyles(Button)
+      onClick={[MockFunction]}
       style={
         Object {
           "margin": 8,
         }
       }
+      variant="contained"
     >
       Cancel
-    </withStyles(Button)>
+    </WithStyles(Button)>
   </div>
 </form>
 `;

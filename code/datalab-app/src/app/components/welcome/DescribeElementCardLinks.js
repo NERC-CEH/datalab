@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import { CardActions } from 'material-ui/Card';
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
 
 const Link = ({ displayName, href }) => (
   <Button style={{ fontSize: 'larger' }} onClick={() => window.open(href)} color="primary">

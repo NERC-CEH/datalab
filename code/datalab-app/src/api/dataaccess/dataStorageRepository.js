@@ -70,4 +70,6 @@ const unsetUsers = userIds => ({
   $pull: { users: { $in: userIds } },
 });
 
-export default { getAllActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers };
+export default {
+  getAllActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers,
+};

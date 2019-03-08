@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CircularProgress } from 'material-ui/Progress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import PromisedContentWrapper from './PromisedContentWrapper';
 
 describe('PromisedContentWrapper', () => {
@@ -10,7 +10,8 @@ describe('PromisedContentWrapper', () => {
         <span>
           {promise.value}
         </span>
-      </PromisedContentWrapper>);
+      </PromisedContentWrapper>,
+    );
   }
 
   it('renders Loader if fetching', () => {

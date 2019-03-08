@@ -1,20 +1,22 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
-import { CircularProgress } from 'material-ui/Progress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import RoutePermissions from './RoutePermissionWrapper';
 
 describe('RoutePermissionWrapper', () => {
   function shallowRender(props) {
     return shallow(
-      <RoutePermissions {...props} />);
+      <RoutePermissions {...props} />,
+    );
   }
 
   function fullRender(props) {
     return mount(
       <MemoryRouter initialEntries={[props.path]} >
         <RoutePermissions {...props} />
-      </MemoryRouter>);
+      </MemoryRouter>,
+    );
   }
 
   const generateProps = props => ({
@@ -90,7 +92,7 @@ describe('RoutePermissionWrapper', () => {
     expect(output.prop('children')).toBe('Missing Permission');
   });
 
-  it('renders null when permissions do not match and no alt component is given', () => {
+  it('empty render when permissions do not match and no alt component is given', () => {
     // Arrange
     const promisedUserPermissions = {
       error: null,
@@ -103,6 +105,6 @@ describe('RoutePermissionWrapper', () => {
     const output = fullRender(props).children();
 
     // Assert
-    expect(output.length).toBe(0);
+    expect(output.isEmptyRender()).toBe(true);
   });
 });

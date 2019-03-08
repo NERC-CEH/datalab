@@ -2,7 +2,7 @@
 
 exports[`DescribeDatalabs renders correct snapshot 1`] = `
 <div>
-  <withStyles(DescribeElement)
+  <WithStyles(DescribeElement)
     descriptions={
       Array [
         Object {
@@ -40,7 +40,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
     doubleHeight={true}
     title="How DataLabs can enhance your research"
   />
-  <withStyles(DescribeElement)
+  <WithStyles(DescribeElement)
     descriptions={
       Array [
         Object {
@@ -64,7 +64,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
     quote={true}
     title="Success stories"
   />
-  <withStyles(DescribeElement)
+  <WithStyles(DescribeElement)
     descriptions={
       Array [
         Object {

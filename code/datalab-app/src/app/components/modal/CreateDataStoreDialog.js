@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
 import CreateDataStoreForm from '../dataStorage/CreateDataStoreForm';
 import PreviewDataStoreCard from '../dataStorage/PreviewDataStoreCard';
 
-const CreateDataStoreDialog = ({ title, dataStore, onSubmit, onCancel }) => (
+const CreateDataStoreDialog = ({
+  title, dataStore, onSubmit, onCancel,
+}) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>

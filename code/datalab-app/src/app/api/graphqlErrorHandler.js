@@ -2,7 +2,7 @@ import { get, isArray } from 'lodash';
 
 function errorHandler(pathToData, ignoreError) {
   return (response) => {
-    let errors = response.errors;
+    let { errors } = response;
 
     if (errors) {
       if (ignoreError) {

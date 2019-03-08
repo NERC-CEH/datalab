@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
+const CreateNotebookDialog = ({
+  title, onSubmit, onCancel, dataStorageOptions,
+}) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>

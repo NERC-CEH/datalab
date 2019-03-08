@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'material-ui/Button';
-import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField } from '../common/form/controls';
+import Button from '@material-ui/core/Button';
+import {
+  renderTextField, renderTextArea, renderSelectField, renderAdornedTextField,
+} from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import { ANALYSIS, getStackSelections } from '../../../shared/stackTypes';
 
 const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
+  const {
+    handleSubmit, cancel, submitting, dataStorageOptions,
+  } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -48,8 +52,8 @@ const CreateNotebookForm = (props) => {
           placeholder="Description" />
       </div>
       <div>
-        <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
-        <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
+        <Button type="submit" style={{ margin: 8 }} color="primary" variant="contained" disabled={submitting}>Create</Button>
+        <Button style={{ margin: 8 }} variant="contained" onClick={cancel}>Cancel</Button>
       </div>
     </form>
   );

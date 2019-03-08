@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { createShallow, createMount } from 'material-ui/test-utils';
+import { createShallow, createMount } from '@material-ui/core/test-utils';
 import SideBar from './SideBar';
 
 describe('Sidebar', () => {
@@ -20,7 +20,8 @@ describe('Sidebar', () => {
     return mount(
       <MemoryRouter initialEntries={path}>
         <SideBar {...props} />
-      </MemoryRouter>);
+      </MemoryRouter>,
+    );
   }
 
   it('correctly renders correct snapshot', () => {

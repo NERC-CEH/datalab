@@ -8,7 +8,9 @@ describe('SessionUtil', () => {
 
   it('setSession makes correct amount of calls to addToLocalStorage', () => {
     // Arrange
-    const sessionValues = { accessToken: 'a', expiresAt: 'b', idToken: 'c', extraField: 'd', access_token: 'e', identity: 'f' };
+    const sessionValues = {
+      accessToken: 'a', expiresAt: 'b', idToken: 'c', extraField: 'd', access_token: 'e', identity: 'f',
+    };
     // Act
     setSession(sessionValues);
     // Assert
@@ -17,7 +19,9 @@ describe('SessionUtil', () => {
 
   it('setSession calls addToLocalStorage with correct arguments', () => {
     // Arrange
-    const sessionValues = { accessToken: '1234', expiresAt: '4321', idToken: '5678', identity: '9123' };
+    const sessionValues = {
+      accessToken: '1234', expiresAt: '4321', idToken: '5678', identity: '9123',
+    };
     // Act
     setSession(sessionValues);
     // Assert

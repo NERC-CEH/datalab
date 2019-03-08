@@ -1,7 +1,7 @@
 version: '3'
 services:
   datalab-auth:
-    image: node:8
+    image: node:8.10
     environment:
       - AUTHORISATION_API_CLIENT_ID
       - AUTHORISATION_API_CLIENT_SECRET
@@ -18,7 +18,7 @@ services:
       - $PWD/../../auth-service:/usr/src/app/:ro
 
   datalab-infra:
-    image: node:8
+    image: node:8.10
     environment:
       - VAULT_APP_ROLE
       - LOG_LEVEL
@@ -33,7 +33,7 @@ services:
       - $PWD/../../infrastructure-api:/usr/src/app/:ro
 
   datalab-app-api:
-    image: node:8
+    image: node:8.10
     environment:
       - VAULT_APP_ROLE
       - LOG_LEVEL

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import datalabsLogo from '../../../assets/images/datalabs-vert.png';
 import auth from '../../auth/auth';
 
@@ -30,9 +30,9 @@ const tagLine = 'DataLabs provides you with tools to power your research and sha
 const HeroBar = ({ classes }) => (
   <div className={classes.bar}>
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
-    <Typography className={classes.tagLine} type="title">{tagLine}</Typography>
-    <Button className={classes.button} color="primary" raised onClick={auth.signUp}>Sign Up</Button>
-    <Button className={classes.button} color="primary" raised onClick={auth.login}> Log In</Button>
+    <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
+    <Button className={classes.button} color="primary" variant="contained" onClick={auth.signUp}>Sign Up</Button>
+    <Button className={classes.button} color="primary" variant="contained" onClick={auth.login}> Log In</Button>
   </div>
 );
 

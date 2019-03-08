@@ -7,7 +7,7 @@ import {
   GraphQLInputObjectType,
   GraphQLList,
 } from 'graphql';
-import { StackType } from '../types/stackTypes';
+import { StackType } from './stackTypes';
 import minioTokenService from '../dataaccess/minioTokenService';
 import stackService from '../dataaccess/stackService';
 import { READY } from '../../shared/statusTypes';

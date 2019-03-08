@@ -1,6 +1,6 @@
 import internalNameChecker from './internalNameChecker';
-import dataStorageRepository from '../dataaccess/dataStorageRepository';
-import stackService from '../dataaccess/stackService';
+import dataStorageRepository from './dataStorageRepository';
+import stackService from './stackService';
 
 jest.mock('../dataaccess/dataStorageRepository');
 jest.mock('../dataaccess/stackService');

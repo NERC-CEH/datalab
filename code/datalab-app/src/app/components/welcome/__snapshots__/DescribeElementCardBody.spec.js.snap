@@ -1,21 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardBody renders correct snapshot 1`] = `
-<withStyles(CardContent)
+<WithStyles(CardContent)
   className="DescribeElementCardBody-cardContent-1"
 >
-  <withStyles(Typography)
+  <WithStyles(Typography)
     className="DescribeElementCardBody-bodyText-2"
-    type="body1"
+    variant="body1"
   >
     expectedContent
-  </withStyles(Typography)>
-</withStyles(CardContent)>
+  </WithStyles(Typography)>
+</WithStyles(CardContent)>
 `;
 
 exports[`DescribeElementCardBody renders correct snapshot with switches 1`] = `
-<withStyles(CardMedia)
+<WithStyles(CardMedia)
   className="DescribeElementCardBody-cardImage-4"
   image="moreContent"
+  key="card-body"
 />
 `;

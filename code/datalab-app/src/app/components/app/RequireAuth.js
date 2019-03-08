@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from 'lodash';
-import { CircularProgress } from 'material-ui/Progress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import auth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
@@ -22,8 +22,8 @@ class RequireAuth extends Component {
   }
 
   switchContent() {
-    const PrivateComponent = this.props.PrivateComponent;
-    const PublicComponent = this.props.PublicComponent;
+    const { PrivateComponent } = this.props;
+    const { PublicComponent } = this.props;
 
     if (this.props.permissions.fetching) {
       return () => (<CircularProgress />);

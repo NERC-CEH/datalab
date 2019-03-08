@@ -1,7 +1,6 @@
 {
   "rootDir": "..",
   "collectCoverageFrom": [ "src/api/**/*.js" ],
-  "setupFiles": [ "<rootDir>/node_modules/react-scripts/config/polyfills.js" ],
   "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
   "testMatch": [ "<rootDir>/src/api/**/?(*.)(spec|test).js" ],
   "testEnvironment": "node",

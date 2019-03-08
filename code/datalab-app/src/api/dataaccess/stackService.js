@@ -46,4 +46,6 @@ const generateOptions = (token, data) => ({
   data,
 });
 
-export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack };
+export default {
+  getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack,
+};

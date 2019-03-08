@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { CardContent, CardMedia } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
 const cardContent = {
   height: '100%',
@@ -27,10 +28,12 @@ const styles = theme => ({
   },
 });
 
-function DescribeElementCardBody({ classes, content, media, quote }) {
+function DescribeElementCardBody({
+  classes, content, media, quote,
+}) {
   const generateTextBody = textContent => (
     <CardContent className={classes.cardContent}>
-      <Typography className={quote ? classes.quoteBodyText : classes.bodyText} type="body1">
+      <Typography className={quote ? classes.quoteBodyText : classes.bodyText} variant="body1">
         {textContent}
       </Typography>
     </CardContent>

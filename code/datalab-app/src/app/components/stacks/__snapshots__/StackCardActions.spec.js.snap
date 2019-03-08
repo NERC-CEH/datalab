@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCardActions creates correct snapshot 1`] = `
-<withStyles(CardActions)
+<WithStyles(CardActions)
   style={
     Object {
       "paddingLeft": 8,
@@ -19,19 +19,19 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <withStyles(Button)
+    <WithStyles(Button)
       color="primary"
       disabled={false}
       onClick={[Function]}
-      raised={true}
       style={
         Object {
           "marginRight": 4,
         }
       }
+      variant="contained"
     >
       Open
-    </withStyles(Button)>
+    </WithStyles(Button)>
   </ComponentWrapper>
   <ComponentWrapper
     permission="delete"
@@ -43,20 +43,19 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <withStyles(Button)
-      color="accent"
+    <WithStyles(Button)
       disabled={false}
       onClick={[Function]}
-      raised={true}
       style={
         Object {
           "marginLeft": 4,
           "marginRight": 4,
         }
       }
+      variant="contained"
     >
       Delete
-    </withStyles(Button)>
+    </WithStyles(Button)>
   </ComponentWrapper>
   <ComponentWrapper
     permission="edit"
@@ -68,19 +67,18 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <withStyles(Button)
-      color="accent"
+    <WithStyles(Button)
       disabled={false}
       onClick={[Function]}
-      raised={true}
       style={
         Object {
           "marginLeft": 4,
         }
       }
+      variant="contained"
     >
       Edit
-    </withStyles(Button)>
+    </WithStyles(Button)>
   </ComponentWrapper>
-</withStyles(CardActions)>
+</WithStyles(CardActions)>
 `;

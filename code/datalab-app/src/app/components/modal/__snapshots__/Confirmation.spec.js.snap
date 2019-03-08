@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
-<withStyles(Dialog)
+<WithStyles(Dialog)
   maxWidth="md"
   open={true}
 >
-  <withStyles(DialogTitle)>
+  <WithStyles(DialogTitle)>
     Title
-  </withStyles(DialogTitle)>
-  <withStyles(DialogContent)>
-    <withStyles(DialogContentText)>
+  </WithStyles(DialogTitle)>
+  <WithStyles(DialogContent)>
+    <WithStyles(DialogContentText)>
       Body
-    </withStyles(DialogContentText)>
-  </withStyles(DialogContent)>
-  <withStyles(DialogActions)>
-    <withStyles(IconButton)
+    </WithStyles(DialogContentText)>
+  </WithStyles(DialogContent)>
+  <WithStyles(DialogActions)>
+    <WithStyles(IconButton)
       icon="clear"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Cancel
-    </withStyles(IconButton)>
-    <withStyles(IconButton)
+    </WithStyles(IconButton)>
+    <WithStyles(IconButton)
       danger={true}
       disabled={false}
       icon="delete"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Confirm Deletion
-    </withStyles(IconButton)>
-  </withStyles(DialogActions)>
-</withStyles(Dialog)>
+    </WithStyles(IconButton)>
+  </WithStyles(DialogActions)>
+</WithStyles(Dialog)>
 `;

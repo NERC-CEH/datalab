@@ -42,7 +42,9 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-tag-spacing": "off",
     "react/no-array-index-key": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "implicit-arrow-linebreak": "off",
+    "prefer-promise-reject-errors": "off"
   },
   "parserOptions": {
     "ecmaFeatures": {

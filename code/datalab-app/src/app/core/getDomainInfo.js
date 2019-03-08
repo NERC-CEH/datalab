@@ -25,8 +25,8 @@ function getDomainInfo(location) {
     return 'localhost';
   }
 
-  const protocol = currentLocation.protocol;
-  const hostname = currentLocation.hostname;
+  const { protocol } = currentLocation;
+  const { hostname } = currentLocation;
   const subdomain = hostname.split('.')[0];
   const domain = hostname.substring(subdomain.length + 1, hostname.length);
 

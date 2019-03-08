@@ -41,4 +41,6 @@ export const gqlQuery = (query, options) => process(query, options);
 
 export const gqlMutation = (mutation, options) => process(mutation, options);
 
-export default { clearResult, lastQuery, lastOptions, prepareSuccess, prepareFailure };
+export default {
+  clearResult, lastQuery, lastOptions, prepareSuccess, prepareFailure,
+};

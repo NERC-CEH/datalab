@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import SideBar, { drawerWidth } from './SideBar';
 import TopBar from './TopBar';
 
@@ -36,7 +36,9 @@ const styles = theme => ({
   },
 });
 
-const Navigation = ({ classes, children, identity, userPermissions }) => (
+const Navigation = ({
+  classes, children, identity, userPermissions,
+}) => (
   <div className={classes.container}>
     <div className={classes.appFrame}>
       <TopBar identity={identity} />

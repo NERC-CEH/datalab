@@ -1,18 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
-<withStyles(GridWrapper)
+<WithStyles(Grid)
   container={true}
+  spacing={16}
 >
-  <withStyles(GridWrapper)
+  <WithStyles(Grid)
     item={true}
+    key="0"
     lg={4}
     md={4}
     sm={6}
     xl={2}
     xs={12}
   >
-    <withStyles(StackCard)
+    <WithStyles(StackCard)
       deletePermission="delete"
       deleteStack={[Function]}
       editPermission="edit"
@@ -35,16 +37,17 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         ]
       }
     />
-  </withStyles(GridWrapper)>
-  <withStyles(GridWrapper)
+  </WithStyles(Grid)>
+  <WithStyles(Grid)
     item={true}
+    key="1"
     lg={4}
     md={4}
     sm={6}
     xl={2}
     xs={12}
   >
-    <withStyles(StackCard)
+    <WithStyles(StackCard)
       deletePermission="delete"
       deleteStack={[Function]}
       editPermission="edit"
@@ -67,16 +70,17 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         ]
       }
     />
-  </withStyles(GridWrapper)>
-  <withStyles(GridWrapper)
+  </WithStyles(Grid)>
+  <WithStyles(Grid)
     item={true}
+    key="2"
     lg={4}
     md={4}
     sm={6}
     xl={2}
     xs={12}
   >
-    <withStyles(StackCard)
+    <WithStyles(StackCard)
       deletePermission="delete"
       deleteStack={[Function]}
       editPermission="edit"
@@ -99,7 +103,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
         ]
       }
     />
-  </withStyles(GridWrapper)>
+  </WithStyles(Grid)>
   <ComponentWrapper
     permission="create"
     style={
@@ -116,7 +120,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
       ]
     }
   >
-    <withStyles(GridWrapper)
+    <WithStyles(Grid)
       item={true}
       lg={4}
       md={4}
@@ -124,18 +128,19 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
       xl={2}
       xs={12}
     >
-      <withStyles(NewStackButton)
+      <WithStyles(NewStackButton)
         onClick={[Function]}
         typeName="expectedTypeName"
       />
-    </withStyles(GridWrapper)>
+    </WithStyles(Grid)>
   </ComponentWrapper>
-</withStyles(GridWrapper)>
+</WithStyles(Grid)>
 `;
 
 exports[`StackCards creates correct snapshot for an empty array 1`] = `
-<withStyles(GridWrapper)
+<WithStyles(Grid)
   container={true}
+  spacing={16}
 >
   <ComponentWrapper
     permission="create"
@@ -153,7 +158,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
       ]
     }
   >
-    <withStyles(GridWrapper)
+    <WithStyles(Grid)
       item={true}
       lg={4}
       md={4}
@@ -161,11 +166,11 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
       xl={2}
       xs={12}
     >
-      <withStyles(NewStackButton)
+      <WithStyles(NewStackButton)
         onClick={[Function]}
         typeName="expectedTypeName"
       />
-    </withStyles(GridWrapper)>
+    </WithStyles(Grid)>
   </ComponentWrapper>
-</withStyles(GridWrapper)>
+</WithStyles(Grid)>
 `;

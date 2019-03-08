@@ -2,10 +2,10 @@
 
 exports[`WelcomePage renders correct snapshot 1`] = `
 <div>
-  <withStyles(PublicNavBarContent) />
-  <withStyles(HeroBar) />
+  <WithStyles(PublicNavBarContent) />
+  <WithStyles(HeroBar) />
   <DescribeDatalabs />
-  <withStyles(Footer)
+  <WithStyles(Footer)
     invert={true}
   />
 </div>

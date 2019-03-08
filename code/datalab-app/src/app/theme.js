@@ -1,5 +1,7 @@
-import { createMuiTheme } from 'material-ui';
-import { blueGrey, teal, grey, red } from 'material-ui/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
+import {
+  blueGrey, teal, grey, red,
+} from '@material-ui/core/colors';
 
 const primary = teal;
 const secondary = blueGrey;
@@ -24,6 +26,9 @@ const theme = createMuiTheme({
         backgroundColor,
       },
     },
+  },
+  typography: {
+    useNextVariants: true,
   },
 });
 

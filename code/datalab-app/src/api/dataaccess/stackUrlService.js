@@ -2,7 +2,9 @@ import axios from 'axios';
 import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
-import { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } from '../../shared/stackTypes';
+import {
+  JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER,
+} from '../../shared/stackTypes';
 import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
 
@@ -13,16 +15,16 @@ export default function notebookUrlService(notebook, user) {
   if (notebook.type === ZEPPELIN) {
     return requestZeppelinToken(notebook, user)
       .then(createZeppelinUrl(notebook));
-  } else if (notebook.type === JUPYTER) {
+  } if (notebook.type === JUPYTER) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterUrl(notebook));
-  } else if (notebook.type === JUPYTERLAB) {
+  } if (notebook.type === JUPYTERLAB) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterlabUrl(notebook));
-  } else if (notebook.type === RSTUDIO) {
+  } if (notebook.type === RSTUDIO) {
     return requestRStudioToken(notebook, user)
       .then(createRStudioUrl(notebook));
-  } else if (notebook.type === NBVIEWER) {
+  } if (notebook.type === NBVIEWER) {
     return Promise.resolve(`${notebook.url}/localfile`);
   }
   return Promise.resolve(notebook.url);
@@ -84,7 +86,7 @@ function processLoginResponse(loginResponse) {
     return Promise.reject(new Error(`Zeppelin login failed ${loginResponse.data.error.message}`));
   }
 
-  const headers = loginResponse.headers;
+  const { headers } = loginResponse;
   const sessionCookie = findLast(headers['set-cookie'], header => header.indexOf('JSESSIONID') > -1);
   return sessionCookie.split(';')[0].split('=')[1];
 }

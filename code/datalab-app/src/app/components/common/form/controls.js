@@ -1,12 +1,17 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import { fieldStyle, fieldMargin } from './controlStyles';
 
-export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) =>
+export const renderTextField = ({
+  input, label, meta: { touched, error }, ...custom
+}) =>
   <TextField
     style={fieldStyle}
     margin={fieldMargin}
@@ -17,7 +22,9 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
     {...custom}
   />;
 
-export const renderTextArea = ({ input, label, meta: { touched, error }, ...custom }) =>
+export const renderTextArea = ({
+  input, label, meta: { touched, error }, ...custom
+}) =>
   <TextField
     style={fieldStyle}
     margin={fieldMargin}
@@ -29,7 +36,9 @@ export const renderTextArea = ({ input, label, meta: { touched, error }, ...cust
     {...custom}
   />;
 
-export const renderSelectField = ({ input, label, meta: { touched, error }, options, ...custom }) =>
+export const renderSelectField = ({
+  input, label, meta: { touched, error }, options, ...custom
+}) =>
   <FormControl error={touched && error} margin={fieldMargin}>
     <InputLabel>{label}</InputLabel>
     <Select
@@ -43,7 +52,9 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
     {touched && error && <FormHelperText>{error}</FormHelperText>}
   </FormControl>;
 
-export const renderAdornedTextField = ({ input, label, meta: { touched, error }, startText, endText, ...custom }) =>
+export const renderAdornedTextField = ({
+  input, label, meta: { touched, error }, startText, endText, ...custom
+}) =>
   <FormControl error={touched && error} margin={fieldMargin}>
     <InputLabel>{label}</InputLabel>
     <Input

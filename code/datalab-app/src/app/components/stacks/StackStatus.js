@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import { getStatusKeys, getStatusProps } from '../../../shared/statusTypes';
 
 function styles(theme) {
@@ -32,7 +32,7 @@ const StackStatus = ({ classes, status }) => {
     <Typography
       className={invertColor ? classes.textInvert : classes.text}
       style={{ backgroundColor: color }}
-      type="caption"
+      variant="caption"
       align="center"
     >
       {displayName}

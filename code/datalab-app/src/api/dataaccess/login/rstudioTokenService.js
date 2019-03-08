@@ -1,7 +1,7 @@
 import axios from 'axios';
 import querystring from 'querystring';
 import logger from 'winston';
-import rstudioCookieHandler from '../login/rstudioCookieHandler';
+import rstudioCookieHandler from './rstudioCookieHandler';
 import encrypt from '../../vendor/encrypt.min';
 
 const rstudioLogin = notebook => (credentials) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import Card from 'material-ui/Card';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import DescribeElementCardBanner from './DescribeElementCardBanner';
 import DescribeElementCardBody from './DescribeElementCardBody';
 import DescribeElementCardLinks from './DescribeElementCardLinks';
@@ -24,7 +24,9 @@ const styles = theme => ({
   },
 });
 
-function DescribeElementCard({ classes, icon, title, content, links, invert, quote, media, doubleHeight }) {
+function DescribeElementCard({
+  classes, icon, title, content, links, invert, quote, media, doubleHeight,
+}) {
   const banner = (<DescribeElementCardBanner key="card-banner" icon={icon} title={title} quote={quote} doubleHeight={doubleHeight} />);
   const body = (<DescribeElementCardBody key="card-body" content={content} media={media} quote={quote} />);
   const actions = links ? (<DescribeElementCardLinks key="card-links" links={links} />) : undefined;

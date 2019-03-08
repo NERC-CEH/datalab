@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackStatus creates correct snapshot for status types 1`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-textInvert-2"
   style={
@@ -9,14 +9,14 @@ exports[`StackStatus creates correct snapshot for status types 1`] = `
       "backgroundColor": "#bbdefb",
     }
   }
-  type="caption"
+  variant="caption"
 >
   Requested
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 2`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-text-1"
   style={
@@ -24,14 +24,14 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
       "backgroundColor": "#2196f3",
     }
   }
-  type="caption"
+  variant="caption"
 >
   Creating
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 3`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-text-1"
   style={
@@ -39,14 +39,14 @@ exports[`StackStatus creates correct snapshot for status types 3`] = `
       "backgroundColor": "#4caf50",
     }
   }
-  type="caption"
+  variant="caption"
 >
   Ready
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 4`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-textInvert-2"
   style={
@@ -54,8 +54,8 @@ exports[`StackStatus creates correct snapshot for status types 4`] = `
       "backgroundColor": "#fdd835",
     }
   }
-  type="caption"
+  variant="caption"
 >
   Unavailable
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;

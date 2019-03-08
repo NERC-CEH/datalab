@@ -1,4 +1,4 @@
-import { blue, green, yellow } from 'material-ui/colors';
+import { blue, green, yellow } from '@material-ui/core/colors';
 import { keyBy, capitalize } from 'lodash';
 
 export const REQUESTED = 'requested';
@@ -32,7 +32,9 @@ const STATUS_TYPES = [
 ];
 
 function getStatusTypes() {
-  const types = STATUS_TYPES.map(({ name, description, color, invertColor }) => ({
+  const types = STATUS_TYPES.map(({
+    name, description, color, invertColor,
+  }) => ({
     description,
     color,
     invertColor,

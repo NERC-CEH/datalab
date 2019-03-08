@@ -14,7 +14,9 @@ import { projectPermissions } from '../../../shared/permissionTypes';
 
 const refreshTimeout = 15000;
 
-const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT } = projectPermissions;
+const {
+  PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT,
+} = projectPermissions;
 
 class StacksContainer extends Component {
   constructor(props, context) {

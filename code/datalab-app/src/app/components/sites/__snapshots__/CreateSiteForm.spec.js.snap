@@ -64,28 +64,28 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       placeholder="Description"
     />
   </div>
-  <withStyles(Button)
+  <WithStyles(Button)
     color="primary"
-    raised={true}
     style={
       Object {
         "margin": 8,
       }
     }
     type="submit"
+    variant="contained"
   >
     Create
-  </withStyles(Button)>
-  <withStyles(Button)
-    onClick={[Function]}
-    raised={true}
+  </WithStyles(Button)>
+  <WithStyles(Button)
+    onClick={[MockFunction]}
     style={
       Object {
         "margin": 8,
       }
     }
+    variant="contained"
   >
     Cancel
-  </withStyles(Button)>
+  </WithStyles(Button)>
 </form>
 `;

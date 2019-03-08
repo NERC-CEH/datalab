@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardLinks renders correct snapshot 1`] = `
-<withStyles(CardActions)>
+<WithStyles(CardActions)>
   <Link
     displayName="displayName"
     href="address"
+    key="link-0"
   />
   <Link
     displayName="anotherDisplayName"
     href="anotherAddress"
+    key="link-1"
   />
-</withStyles(CardActions)>
+</WithStyles(CardActions)>
 `;

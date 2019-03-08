@@ -1,5 +1,5 @@
 import React from 'react';
-import { createShallow } from 'material-ui/test-utils';
+import { createShallow } from '@material-ui/core/test-utils';
 import Navigation from './Navigation';
 
 describe('DescribeDatalabs', () => {
@@ -13,6 +13,7 @@ describe('DescribeDatalabs', () => {
     expect(shallow(
       <Navigation identity={{ expected: 'identity' }} userPermissions={['expectedPermission']} >
         <span>Content</span>
-      </Navigation>)).toMatchSnapshot();
+      </Navigation>,
+    )).toMatchSnapshot();
   });
 });
