@@ -18,7 +18,9 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import notify from '../../components/common/notify';
 import { projectPermissions } from '../../../shared/permissionTypes';
 
-const { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT } = projectPermissions;
+const {
+  PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT,
+} = projectPermissions;
 
 const TYPE_NAME = 'Data Store';
 const FORM_NAME = 'createDataStore';

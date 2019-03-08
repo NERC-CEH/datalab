@@ -24,7 +24,9 @@ const styles = theme => ({
   },
 });
 
-function DescribeElementCard({ classes, icon, title, content, links, invert, quote, media, doubleHeight }) {
+function DescribeElementCard({
+  classes, icon, title, content, links, invert, quote, media, doubleHeight,
+}) {
   const banner = (<DescribeElementCardBanner key="card-banner" icon={icon} title={title} quote={quote} doubleHeight={doubleHeight} />);
   const body = (<DescribeElementCardBody key="card-body" content={content} media={media} quote={quote} />);
   const actions = links ? (<DescribeElementCardLinks key="card-links" links={links} />) : undefined;

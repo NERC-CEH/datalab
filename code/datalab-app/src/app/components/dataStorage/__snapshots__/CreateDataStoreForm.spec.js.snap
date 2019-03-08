@@ -73,7 +73,7 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     Create
   </WithStyles(Button)>
   <WithStyles(Button)
-    onClick={[Function]}
+    onClick={[MockFunction]}
     style={
       Object {
         "margin": 8,

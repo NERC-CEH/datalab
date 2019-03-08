@@ -9,7 +9,9 @@ import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import IconButton from '../common/control/IconButton';
 import AutocompleteTextSearch from '../common/form/AutocompleteTextSearch';
 
-const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser, removeUser, loadUsersPromise }) => (
+const EditDataStoreDialog = ({
+  onCancel, title, currentUsers, userList, addUser, removeUser, loadUsersPromise,
+}) => (
     <Dialog open={true} maxWidth="md" fullWidth>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
@@ -30,7 +32,7 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
         <IconButton onClick={onCancel} icon="clear">Close</IconButton>
       </DialogActions>
     </Dialog>
-  );
+);
 
 EditDataStoreDialog.propTypes = {
   onCancel: PropTypes.func.isRequired,

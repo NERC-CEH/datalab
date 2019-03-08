@@ -77,7 +77,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
     Create
   </WithStyles(Button)>
   <WithStyles(Button)
-    onClick={[Function]}
+    onClick={[MockFunction]}
     style={
       Object {
         "margin": 8,

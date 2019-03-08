@@ -22,8 +22,8 @@ class RequireAuth extends Component {
   }
 
   switchContent() {
-    const PrivateComponent = this.props.PrivateComponent;
-    const PublicComponent = this.props.PublicComponent;
+    const { PrivateComponent } = this.props;
+    const { PublicComponent } = this.props;
 
     if (this.props.permissions.fetching) {
       return () => (<CircularProgress />);

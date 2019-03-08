@@ -291,7 +291,9 @@ describe('DataStorageContainer', () => {
 
       // Assert
       const firstMockCall = openModalDialogMock.mock.calls[0];
-      const { title, onCancel, dataStoreId, userKeysMapping } = firstMockCall[1];
+      const {
+        title, onCancel, dataStoreId, userKeysMapping,
+      } = firstMockCall[1];
       expect({ title, dataStoreId, userKeysMapping }).toMatchSnapshot();
       expect(onCancel).toBe(closeModalDialogMock);
     });

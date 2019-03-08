@@ -88,7 +88,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       Create
     </WithStyles(Button)>
     <WithStyles(Button)
-      onClick={[Function]}
+      onClick={[MockFunction]}
       style={
         Object {
           "margin": 8,

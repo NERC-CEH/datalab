@@ -73,7 +73,8 @@ describe('LoadUserManagement Modal Wrapper', () => {
         'loadDataStorage',
         'addUserToDataStore',
         'removeUserFromDataStore',
-        'listUsers');
+        'listUsers',
+      );
     });
 
     it('loadDataStorage function dispatch correct action', () => {

@@ -25,7 +25,9 @@ class RobustConfirmation extends Component {
   };
 
   render() {
-    const { title, body, onSubmit, onCancel, confirmField } = this.props;
+    const {
+      title, body, onSubmit, onCancel, confirmField,
+    } = this.props;
 
     return (
       <Dialog open={true} maxWidth="md">

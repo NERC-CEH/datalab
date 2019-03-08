@@ -3,7 +3,8 @@ import { permissionWrapper, multiPermissionsWrapper } from './permissionChecker'
 const user = {
   permissions: [
     'project:elementName:actionName',
-  ] };
+  ],
+};
 
 const actionMock = jest.fn().mockReturnValue(Promise.resolve());
 
@@ -28,11 +29,11 @@ describe('Permission Checker', () => {
 
   describe('multiPermissionWrapper', () => {
     it('throws an error if user is lacking correct permission', () =>
-    multiPermissionsWrapper(['elementName:missingActionName', 'elementName:anotherAction'], user, () => actionMock('value'))
-      .catch((err) => {
-        expect(err).toBe('User missing expected permission(s): project:elementName:missingActionName,project:elementName:anotherAction');
-        expect(actionMock).not.toHaveBeenCalled();
-      }));
+      multiPermissionsWrapper(['elementName:missingActionName', 'elementName:anotherAction'], user, () => actionMock('value'))
+        .catch((err) => {
+          expect(err).toBe('User missing expected permission(s): project:elementName:missingActionName,project:elementName:anotherAction');
+          expect(actionMock).not.toHaveBeenCalled();
+        }));
 
     it('callback to be called if user has correct permission', () =>
       permissionWrapper(['elementName:actionName', 'elementName:anotherAction'], user, () => actionMock('value'))

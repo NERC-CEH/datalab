@@ -29,7 +29,7 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
   <WithStyles(DialogActions)>
     <WithStyles(IconButton)
       icon="clear"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Cancel
     </WithStyles(IconButton)>
@@ -37,7 +37,7 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
       danger={true}
       disabled={true}
       icon="delete"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Confirm Deletion
     </WithStyles(IconButton)>

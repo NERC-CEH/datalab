@@ -22,7 +22,9 @@ const styles = theme => ({
   },
 });
 
-const DescribeElementCardBanner = ({ classes, icon, title, doubleHeight }) => (
+const DescribeElementCardBanner = ({
+  classes, icon, title, doubleHeight,
+}) => (
   <CardContent>
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       {icon ? <Icon className={classes.icon}>{icon}</Icon> : undefined}

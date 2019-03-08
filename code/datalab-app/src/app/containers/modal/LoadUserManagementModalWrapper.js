@@ -73,7 +73,7 @@ class LoadUserManagementModalWrapper extends Component {
   }
 
   render() {
-    const Dialog = this.props.Dialog;
+    const { Dialog } = this.props;
 
     return (
       <Dialog

@@ -31,7 +31,9 @@ function styles(theme) {
   };
 }
 
-const IconButton = ({ classes, onClick, children, icon, danger = false, disabled }) => (
+const IconButton = ({
+  classes, onClick, children, icon, danger = false, disabled,
+}) => (
     <Button
       className={danger ? classes.buttonDanger : classes.button}
       onClick={onClick}

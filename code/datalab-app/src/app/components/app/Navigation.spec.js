@@ -13,6 +13,7 @@ describe('DescribeDatalabs', () => {
     expect(shallow(
       <Navigation identity={{ expected: 'identity' }} userPermissions={['expectedPermission']} >
         <span>Content</span>
-      </Navigation>)).toMatchSnapshot();
+      </Navigation>,
+    )).toMatchSnapshot();
   });
 });

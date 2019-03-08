@@ -7,14 +7,16 @@ import RoutePermissions from './RoutePermissionWrapper';
 describe('RoutePermissionWrapper', () => {
   function shallowRender(props) {
     return shallow(
-      <RoutePermissions {...props} />);
+      <RoutePermissions {...props} />,
+    );
   }
 
   function fullRender(props) {
     return mount(
       <MemoryRouter initialEntries={[props.path]} >
         <RoutePermissions {...props} />
-      </MemoryRouter>);
+      </MemoryRouter>,
+    );
   }
 
   const generateProps = props => ({

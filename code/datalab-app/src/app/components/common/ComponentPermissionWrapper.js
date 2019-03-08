@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 class ComponentWrapper extends Component {
   hasPermission() {
-    const userPermissions = this.props.userPermissions;
-    const permission = this.props.permission;
+    const { userPermissions } = this.props;
+    const { permission } = this.props;
     return userPermissions.includes(permission);
   }
 

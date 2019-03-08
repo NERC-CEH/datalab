@@ -13,11 +13,15 @@ const styles = theme => ({
   },
 });
 
-const DescribeElement = ({ classes, title, descriptions, invert, quote, media, doubleHeight }) => (
+const DescribeElement = ({
+  classes, title, descriptions, invert, quote, media, doubleHeight,
+}) => (
   <DescribeElementSegment invert={invert}>
     <Typography className={classes.title} variant="h4">{title}</Typography>
     <Grid container spacing={16}>
-      {descriptions.map(({ icon, title: cardTitle, content: cardContent, links }, idx) => (
+      {descriptions.map(({
+        icon, title: cardTitle, content: cardContent, links,
+      }, idx) => (
         <DescribeElementCard
           key={`card-${idx}`}
           icon={icon}

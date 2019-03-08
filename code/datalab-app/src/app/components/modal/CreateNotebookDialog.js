@@ -6,7 +6,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
+const CreateNotebookDialog = ({
+  title, onSubmit, onCancel, dataStorageOptions,
+}) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>

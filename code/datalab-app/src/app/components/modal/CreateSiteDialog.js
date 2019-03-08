@@ -6,7 +6,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import CreateSiteForm from '../sites/CreateSiteForm';
 import PreviewSiteCard from '../sites/PreviewSiteCard';
 
-const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
+const CreateSiteDialog = ({
+  title, onSubmit, onCancel, dataStorageOptions,
+}) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>

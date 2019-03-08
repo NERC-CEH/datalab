@@ -28,7 +28,9 @@ const styles = theme => ({
   },
 });
 
-function DescribeElementCardBody({ classes, content, media, quote }) {
+function DescribeElementCardBody({
+  classes, content, media, quote,
+}) {
   const generateTextBody = textContent => (
     <CardContent className={classes.cardContent}>
       <Typography className={quote ? classes.quoteBodyText : classes.bodyText} variant="body1">

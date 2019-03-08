@@ -24,7 +24,9 @@ const styles = theme => ({
   },
 });
 
-const Link = ({ classes, to, label, icon, ...rest }) => (
+const Link = ({
+  classes, to, label, icon, ...rest
+}) => (
   <ListItem
     className={classes.inactiveLink}
     to={to}

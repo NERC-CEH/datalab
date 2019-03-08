@@ -33,21 +33,24 @@ export default typeToReducer({
       permissions: {
         ...identityInitialState,
         fetching: true,
-      } }),
+      },
+    }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({
       ...state,
       permissions: {
         ...identityInitialState,
         fetching: false,
         error: action.payload,
-      } }),
+      },
+    }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({
       ...state,
       permissions: {
         ...identityInitialState,
         fetching: false,
         value: action.payload,
-      } }),
+      },
+    }),
   },
 }, initialState);
 

@@ -20,7 +20,8 @@ describe('Sidebar', () => {
     return mount(
       <MemoryRouter initialEntries={path}>
         <SideBar {...props} />
-      </MemoryRouter>);
+      </MemoryRouter>,
+    );
   }
 
   it('correctly renders correct snapshot', () => {

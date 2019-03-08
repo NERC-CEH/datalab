@@ -10,7 +10,8 @@ describe('PromisedContentWrapper', () => {
         <span>
           {promise.value}
         </span>
-      </PromisedContentWrapper>);
+      </PromisedContentWrapper>,
+    );
   }
 
   it('renders Loader if fetching', () => {

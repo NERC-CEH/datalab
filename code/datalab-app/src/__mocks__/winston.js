@@ -44,4 +44,6 @@ function warn(message, data, metadata) {
   messages.warn.push({ message, data, metadata });
 }
 
-export default { info, error, debug, warn, clearMessages, getInfoMessages, getErrorMessages, getDebugMessages, getWarnMessage };
+export default {
+  info, error, debug, warn, clearMessages, getInfoMessages, getErrorMessages, getDebugMessages, getWarnMessage,
+};

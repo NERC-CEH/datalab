@@ -76,7 +76,7 @@ class DownshiftMultiple extends Component {
                       className={classes.chip}
                       onDelete={this.props.removeItem && this.handleDelete(item)}
                     />
-                  )),
+                )),
                 onChange: this.handleInputChange,
                 placeholder: this.props.placeholder,
               }),
@@ -90,8 +90,7 @@ class DownshiftMultiple extends Component {
                     itemProps: getItemProps({ item: suggestion.label }),
                     highlightedIndex,
                     selectedItems: currentlySelectedItems,
-                  }),
-                )}
+                  }))}
               </Paper>
             ) : null}
           </div>
@@ -120,7 +119,9 @@ DownshiftMultiple.propTypes = {
 };
 
 function renderInput(inputProps) {
-  const { InputProps, classes, ref, ...other } = inputProps;
+  const {
+    InputProps, classes, ref, ...other
+  } = inputProps;
 
   return (
     <TextField
@@ -136,7 +137,9 @@ function renderInput(inputProps) {
   );
 }
 
-function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItems }) {
+function renderSuggestion({
+  suggestion, index, itemProps, highlightedIndex, selectedItems,
+}) {
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItems.map(({ value }) => value).includes(suggestion.value);
 
@@ -159,9 +162,8 @@ function getSuggestions(searchValue, suggestions) {
   let count = 0;
 
   return suggestions.filter((suggestion) => {
-    const keep =
-      (!searchValue || suggestion.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) &&
-      count < 5;
+    const keep = (!searchValue || suggestion.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1)
+      && count < 5;
 
     if (keep) {
       count += 1;

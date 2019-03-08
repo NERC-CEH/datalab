@@ -10,6 +10,7 @@
  * 'csrf-token=a9a40335-dc8d-43ee-bc65-7f2e93e44a4a; path=/']
  * @param cookies
  */
+/* eslint prefer-destructuring: 0 */
 function parseCookies(cookies) {
   if (cookies && cookies.length >= 2) {
     return cookies.reduce((accumulator, cookie) => {

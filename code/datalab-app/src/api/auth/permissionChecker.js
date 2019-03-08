@@ -4,12 +4,14 @@ import { PROJECT, permissionDelim } from '../../shared/permissionTypes';
 export const permissionWrapper = (permissionSuffix, ...rest) =>
   permissionCheck(
     [PROJECT.concat(permissionDelim, permissionSuffix)],
-    ...rest);
+    ...rest,
+  );
 
 export const multiPermissionsWrapper = (permissionSuffixes, ...rest) =>
   permissionCheck(
     permissionSuffixes.map(suffix => PROJECT.concat(permissionDelim, suffix)),
-    ...rest);
+    ...rest,
+  );
 
 function permissionCheck(requiredPermissions, { permissions }, next) {
   const grantedPermissions = permissions || [];

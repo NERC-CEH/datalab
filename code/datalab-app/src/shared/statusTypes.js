@@ -32,7 +32,9 @@ const STATUS_TYPES = [
 ];
 
 function getStatusTypes() {
-  const types = STATUS_TYPES.map(({ name, description, color, invertColor }) => ({
+  const types = STATUS_TYPES.map(({
+    name, description, color, invertColor,
+  }) => ({
     description,
     color,
     invertColor,

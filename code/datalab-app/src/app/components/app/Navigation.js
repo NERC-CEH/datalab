@@ -36,7 +36,9 @@ const styles = theme => ({
   },
 });
 
-const Navigation = ({ classes, children, identity, userPermissions }) => (
+const Navigation = ({
+  classes, children, identity, userPermissions,
+}) => (
   <div className={classes.container}>
     <div className={classes.appFrame}>
       <TopBar identity={identity} />

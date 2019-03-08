@@ -20,8 +20,8 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
       </WithStyles(DialogTitle)>
       <WithStyles(DialogContent)>
         <ReduxForm
-          cancel={[Function]}
-          onSubmit={[Function]}
+          cancel={[MockFunction]}
+          onSubmit={[MockFunction]}
         />
       </WithStyles(DialogContent)>
     </div>

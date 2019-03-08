@@ -7,7 +7,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '../common/control/IconButton';
 
-const Confirmation = ({ title, body, onSubmit, onCancel }) => (
+const Confirmation = ({
+  title, body, onSubmit, onCancel,
+}) => (
   <Dialog open={true} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
