@@ -4,7 +4,7 @@ const JUPYTER_IMAGE = 'nercceh/jupyter-notebook';
 const JUPYTER_VERSION = '0.0.1-1-g93f3cec';
 
 const JUPYTERLAB_IMAGE = 'nercceh/jupyter-lab';
-const JUPYTERLAB_VERSION = '0.0.2-9-g3729fb2';
+const JUPYTERLAB_VERSION = '0.0.2-14-gf1ebc9e';
 
 const ZEPPELIN_IMAGE = 'nerc/zeppelin';
 const ZEPPELIN_VERSION = '0.7.2.7';
@@ -12,7 +12,7 @@ const ZEPPELIN_CONNECT_IMAGE = 'nerc/zeppelin-connect';
 const ZEPPELIN_CONNECT_VERSION = '1.1.1';
 
 const RSTUDIO_IMAGE = 'nercceh/rstudio';
-const RSTUDIO_VERSION = '0.0.1-1-g4aa52c1';
+const RSTUDIO_VERSION = '0.0.1-3-ga22151c';
 const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
 const RSTUDIO_CONNECT_VERSION = '1.1.1';
 
