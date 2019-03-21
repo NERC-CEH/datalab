@@ -24,6 +24,7 @@ export function asyncGetUsers() {
       axios.get(`${authZeroManagementApi}/users`, {
         params: {
           fields: 'name,user_id',
+          per_page: '100',
         },
         headers: {
           Authorization: `Bearer ${bearer}`,
