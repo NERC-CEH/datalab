@@ -53,11 +53,11 @@ function kubeWatcher() {
     });
 }
 
-export function podAddedWatcher({ metadata: { labels } }) {
-  const { kubeName, name, type } = parsePodLabels(labels);
+export function podAddedWatcher(event) {
+  const { kubeName, name, type } = parsePodLabels(event.metadata.labels);
   let output = Promise.resolve();
 
-  if (stackNames.includes(type)) {
+  if (stackNames.includes(type) && isPodPending(event)) {
     logger.debug(`Pod added: -- name: "${kubeName}", type: "${type}"`);
     // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
     // have their status updated.
@@ -91,5 +91,8 @@ export function podDeletedWatcher({ metadata: { labels } }) {
 const isPodRunning = event => event.status.phase === 'Running'
   && event.metadata.deletionTimestamp === undefined
   && find(event.status.conditions, { type: 'Ready', status: 'True' });
+
+const isPodPending = event => event.status.phase === 'Pending'
+  && event.metadata.deletionTimestamp === undefined;
 
 export default kubeWatcher;
