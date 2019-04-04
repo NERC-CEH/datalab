@@ -23,6 +23,7 @@ const context = {
   name: 'default-context',
   user: user.name,
   cluster: cluster.name,
+  namespace: config.get('podNamespace'),
 };
 
 function kubeWatcher() {
