@@ -11,7 +11,6 @@ const kubeApi = config.get('kubernetesApi');
 const kubeNamespace = config.get('podNamespace');
 const stackNames = Object.values(STACKS).map(stack => stack.name);
 const kc = new k8s.KubeConfig();
-
 const cluster = {
   name: 'default-cluster',
   server: kubeApi,
@@ -23,7 +22,7 @@ const context = {
   name: 'default-context',
   user: user.name,
   cluster: cluster.name,
-  namespace: config.get('podNamespace'),
+  namespace: kubeNamespace,
 };
 
 function kubeWatcher() {
@@ -37,7 +36,7 @@ function kubeWatcher() {
   });
 
   const watch = new k8s.Watch(kc);
-  return watch.watch('/api/v1/pods', { labelSelector: 'user-pod' },
+  return watch.watch(`/api/v1/namespaces/${kubeNamespace}/pods`, { labelSelector: 'user-pod' },
     (type, obj) => {
       if (type === 'ADDED') {
         podAddedWatcher(obj);
