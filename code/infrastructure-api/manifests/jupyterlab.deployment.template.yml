@@ -63,6 +63,8 @@ spec:
               value: "{{ grantSudo }}"
             - name: R_LIBS_USER
               value: "/data/packages/R/%p/%v"
+            - name: JUPYTER_DATA_DIR
+              value: "/data/.jupyter"
           resources:
             requests:
               cpu: 200m
