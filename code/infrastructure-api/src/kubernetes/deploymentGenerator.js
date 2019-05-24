@@ -17,7 +17,7 @@ const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be ze
 const RSTUDIO_CONNECT_VERSION = '1.1.1';
 
 const RSHINY_IMAGE = 'nercceh/rshiny';
-const RSHINY_VERSION = '0.0.1-3-g56623f4';
+const RSHINY_VERSION = '0.0.1-5-g9a5617f';
 
 const NBVIEWER_IMAGE = 'nercceh/jupyter-nbviewer';
 const NBVIEWER_VERSION = '0.0.1-1-g129dec8';
