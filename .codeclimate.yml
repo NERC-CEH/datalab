@@ -1,7 +1,7 @@
 engines:
   eslint:
     enabled: true
-    channel: "eslint-3"
+    channel: "eslint-5"
     config:
       config: "code/datalab-app/.eslintrc"
     checks:
