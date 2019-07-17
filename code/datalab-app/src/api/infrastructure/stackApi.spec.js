@@ -51,7 +51,7 @@ describe('Stack API', () => {
   });
 
   it('should log error detail on failed creation request', () => {
-    createStackMock.mockReturnValue(Promise.reject('failedRequest'));
+    createStackMock.mockReturnValue(Promise.reject(new Error('failedRequest')));
 
     return stackApi.createStack(context, 'expectedDatalabName', stack)
       .catch(() => {
@@ -89,7 +89,7 @@ describe('Stack API', () => {
   it('should log error detail on failed deletion request', () => {
     deleteStackMock.mockReturnValue(Promise.resolve('expectedPayload'));
 
-    getByNameMock.mockReturnValue(Promise.reject('failedRequest'));
+    getByNameMock.mockReturnValue(Promise.reject(new Error('failedRequest')));
 
     return stackApi.deleteStack(context, 'expectedDatalabName', stack)
       .catch(() => {

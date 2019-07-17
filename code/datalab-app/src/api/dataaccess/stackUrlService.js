@@ -79,7 +79,7 @@ function processLoginResponse(loginResponse) {
     return Promise.reject(new Error(`Zeppelin login failed ${loginResponse.data.error.message}`));
   }
 
-  const headers = loginResponse.headers;
+  const { headers } = loginResponse;
   const sessionCookie = findLast(headers['set-cookie'], header => header.indexOf('JSESSIONID') > -1);
   return sessionCookie.split(';')[0].split('=')[1];
 }

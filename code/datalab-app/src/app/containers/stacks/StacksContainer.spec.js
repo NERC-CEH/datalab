@@ -168,7 +168,7 @@ describe('StacksContainer', () => {
 
     it('openStack method calls toastr on unresolved getUrl', () => {
       // Arrange
-      getUrlMock.mockReturnValue(Promise.reject('no url'));
+      getUrlMock.mockReturnValue(Promise.reject(new Error('no url')));
       const props = generateProps();
       const output = shallowRenderPure(props);
       const openStack = output.childAt(0).prop('openStack');

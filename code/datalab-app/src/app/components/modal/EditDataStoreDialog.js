@@ -26,7 +26,7 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
         <IconButton onClick={onCancel} icon="clear">Close</IconButton>
       </DialogActions>
     </Dialog>
-  );
+);
 
 EditDataStoreDialog.propTypes = {
   onCancel: PropTypes.func.isRequired,

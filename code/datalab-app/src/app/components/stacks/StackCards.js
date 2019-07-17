@@ -8,7 +8,7 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 const breakPoints = { xs: 12, sm: 6, md: 4, lg: 4, xl: 2 };
 
 const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openCreationForm, userPermissions,
-                      createPermission, openPermission, deletePermission, editPermission }) => (
+  createPermission, openPermission, deletePermission, editPermission }) => (
   <Grid container>
     {stacks.map((stack, index) => (
       <Grid key={index} item {...breakPoints}>

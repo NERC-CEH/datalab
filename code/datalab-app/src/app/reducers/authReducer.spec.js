@@ -59,7 +59,8 @@ describe('authReducer', () => {
         error: null,
         fetching: true,
         value: [],
-      } });
+      },
+    });
   });
 
   it('handles GET_USER_PERMISSIONS_SUCCESS', () => {
@@ -78,7 +79,8 @@ describe('authReducer', () => {
         error: null,
         fetching: false,
         value: payload,
-      } });
+      },
+    });
   });
 
   it('handles GET_USER_PERMISSIONS_FAILURE', () => {
@@ -96,6 +98,7 @@ describe('authReducer', () => {
         error: payload,
         fetching: false,
         value: [],
-      } });
+      },
+    });
   });
 });
