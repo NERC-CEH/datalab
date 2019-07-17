@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
-import dataStorageRepository from '../dataaccess/dataStorageRepository';
-import stackService from '../dataaccess/stackService';
+import dataStorageRepository from './dataStorageRepository';
+import stackService from './stackService';
 
 const isNameUnique = (user, name) =>
   Promise.all([

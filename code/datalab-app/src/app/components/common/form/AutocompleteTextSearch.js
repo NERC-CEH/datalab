@@ -76,7 +76,7 @@ class DownshiftMultiple extends Component {
                       className={classes.chip}
                       onRequestDelete={this.props.removeItem && this.handleDelete(item)}
                     />
-                  )),
+                )),
                 onChange: this.handleInputChange,
                 placeholder: this.props.placeholder,
               }),

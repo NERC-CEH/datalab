@@ -20,7 +20,7 @@ const mockSuccessfulCrossStorage = class CrossStorageClient {
 
 const mockFailedCrossStorage = class CrossStorageClient {
   onConnect() {
-    return Promise.reject('error');
+    return Promise.reject(new Error('error'));
   }
 };
 

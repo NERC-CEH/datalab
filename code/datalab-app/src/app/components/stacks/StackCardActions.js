@@ -6,7 +6,7 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import { READY } from '../../../shared/statusTypes';
 
 const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
-                            deletePermission, editPermission }) => (
+  deletePermission, editPermission }) => (
   <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
     <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
       <Button style={{ marginRight: 4 }} color="primary" raised disabled={!openStack || !isReady(stack)} onClick={() => openStack(stack.id)}>

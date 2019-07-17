@@ -44,7 +44,7 @@ function styles(theme) {
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-                     openPermission, deletePermission, editPermission }) =>
+  openPermission, deletePermission, editPermission }) =>
   <Card className={classes.card}>
     <CardContent>
       <div className={classes.cardHeader}>
