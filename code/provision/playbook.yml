@@ -7,7 +7,7 @@
   become: yes
   become_method: sudo
   vars:
-    terraform_version: "0.11.5"
+    terraform_version: "0.12.4"
   tasks:
     - name: Generate en_GB locale
       locale_gen:
@@ -54,12 +54,6 @@
         name: python-pip
         state: present
 
-    - name: Install pyvcloud
-      pip: name=pyvcloud
-
-    - name: Install vca-cli
-      pip: name=vca-cli
-
     - name: Install xmltodict
       pip: name=xmltodict
 
@@ -85,11 +79,6 @@
       apt:
         name: python3-pip
         state: present
-
-    - name: Install vcd-cli
-      pip:
-        name: vcd-cli
-        executable: pip3
 
     # Install Terraform
     - name: Check Terraform version

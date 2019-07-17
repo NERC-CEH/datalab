@@ -48,6 +48,25 @@ base provisioning to a level that can then be managed by the core ansible script
 This process could be more streamlined and automated but sufficient time was not
 available for this. Possible improvements are highlighted below.
 
+### Create or select base image
+
+The JASMIN Openstack environment provides a number of different server base images. These can be viewed either through
+the portal or using the CLI through `openstack image list`. These images are updated regulary and old images are
+retired. This can cause a problem with Terraform as once the base image has been removed Terraform is no longer able to
+recognise the resources that it provisioned. To avoid this we create a datalabs specific base image which we can
+independently manage the lifecycle for.
+
+#### To create a new base image:
+
+Create a new server using the Portal. **Set the name of the server to the desired image name** as it cannot be set 
+later in the process. Select the smallest image size otherwise when used servers will not be able to be created using
+smaller image sizes. By convention images are named <os-version>-datalabs-<date-of-base-image>. For example, if the
+base is `ubuntu-1804-20190104` the image created should be `ubuntu-1804-datalabs-20190104`.
+
+Once the machine has started run `openstack server image create <server-name>`.
+
+Verify the image has been created and is `active` using the command `openstack image list`.
+
 ### Initialise Environment
 
 Start the Vagrant box using `vagrant up`.
@@ -75,11 +94,11 @@ it has been created.
 Execute the following three commands to create a Terraform State server:
 
 ```bash
-# In ./infrastructure
-ansible-playbook terraform-state-server.yml
+# In ./infrastructure directory target the desired site
+ansible-playbook terraform-state-server.yml --extra-vars "@sites/<sitefile>.yml"
 
 # Restart the server if the disk isn't correctly mounted
-ansible-playbook terraform-state-server-provision.yml
+ansible-playbook terraform-state-server-provision.yml --extra-vars "@sites/tessella.yml"
 
 # In ./playbooks
 ansible-playbook terraform-state-server.yml
@@ -89,21 +108,31 @@ This should complete with no errors. Do not proceed if there are.
 
 ### Initialise Terraform
 
-To initialise Terraform execute the `terraform init` command below replacing the `ip address`, `uername` and `password`
+To initialise Terraform execute the `terraform init` command below replacing the `domain-name`, `uername` and `password`
 for the correct values . This will download the required modules and prepare initial state.
 
 ```bash
+terraform init \
+    -backend-config="address=http://<domain-name>/state/datalabs" \
+    -backend-config="lock_address=http://<domain-name>/state/datalabs" \
+    -backend-config="unlock_address=http://<domain-name>/state/datalabs" \
+    -backend-config="username=<username>" \
+    -backend-config="password=<password>" \
+    -var-file="sites/<site>>.tfvars"
+
+# For example
 terraform init \
     -backend-config="address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
     -backend-config="lock_address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
     -backend-config="unlock_address=http://state-datalabs.nerc.ac.uk/state/datalabs" \
     -backend-config="username=username" \
-    -backend-config="password=password"
+    -backend-config="password=password" \
+    -var-file="sites/tessella.tfvars"
 ```
 
 ### Plan & Execute
 
-Execute `terraform plan` to see what changes Terraform will make to the resources if the
+Execute `terraform plan -var-file="sites/tessella.tfvars"` to see what changes Terraform will make to the resources if the
 plan is executed.
 
 Execute `terraform apply` to run the plan.

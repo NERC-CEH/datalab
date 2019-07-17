@@ -1,10 +1,6 @@
 deploy_user: ubuntu
 logwatch_email: "{{ vault_logwatch_email }}"
 
-access_public_keys:
-  - gary_rsa.pub
-  - josh_rsa.pub
-
 base_packages:
   - aptitude
   - ufw

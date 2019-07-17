@@ -15,15 +15,7 @@
         port_range_min: "{{ item.port }}"
         port_range_max: "{{ item.port }}"
         remote_ip_prefix: "{{ item.ip_range }}"
-      with_items:
-        - port: 80
-          ip_range: 130.246.243.0/24
-        - port: 22
-          ip_range: 192.168.3.93/32
-        - port: 80
-          ip_range: 130.246.189.181/32
-        - port: 80
-          ip_range: 130.246.188.147/32
+      with_items: "{{ management_ips }}"
 
     - name: create 2g Volume
       os_volume:
@@ -36,17 +28,17 @@
       os_server:
         state: present
         name: datalabs-terraform-state
-        image: ubuntu-1604-20180518
-        key_name: llogr-c9834a39ddef2dd489d7bd976d0ac79c
+        image: "{{ server_image }}"
+        key_name: "{{ key_name }}"
         timeout: 200
         flavor: 12
-        network: nerc-datalab-U-internal
+        network: "{{ network }}"
         meta:
           groups: terraform-state-server
         security_groups:
           - terraform-state-sg
         floating_ips:
-          - 192.171.139.187
+          - "{{ external_ip }}"
         wait: yes
 
     - name: Attach Volume
