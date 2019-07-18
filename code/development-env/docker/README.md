@@ -12,6 +12,10 @@
 * Change default namespace
   * `kubectl config set-context minikube --namespace=devtest`
     or `kubectx minikube && kubens devtest`
+* Create Persistent Volume Claim (PVC)
+  * `kubectl apply -f code/development-env/manifests/example-storage-pvc.yml`
+* Create Storage Class
+  * `kubectl apply -f code/development-env/manifests/storage-class.yml`
 
 ## Install Packages
 
