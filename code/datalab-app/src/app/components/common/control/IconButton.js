@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 function styles(theme) {
   const buttonBaseStyle = {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
   };
 
   return {
@@ -26,7 +26,7 @@ function styles(theme) {
       },
     },
     icon: {
-      marginLeft: theme.spacing.unit,
+      marginLeft: theme.spacing(1),
     },
   };
 }
