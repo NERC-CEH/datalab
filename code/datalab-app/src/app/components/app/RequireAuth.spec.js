@@ -1,7 +1,7 @@
 import React from 'react';
 import { createShallow, createMount } from '@material-ui/core/test-utils';
 import createStore from 'redux-mock-store';
-import { CircularProgress } from '@material-ui/core/Progress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import auth from '../../auth/auth';
 import RequireAuth, { PureRequireAuth } from './RequireAuth';
 
