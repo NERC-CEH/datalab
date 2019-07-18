@@ -49,7 +49,7 @@ mongo record created when the mongo container is started, you need to add your A
 `user_id` to the `users` array in the seed document. This seed document is located at
 `code/development-env/config/mongo/dataStorageCollection.json`.
 
-To get your Auth0 `user_id`, do the following:  
+To get your Auth0 `user_id`, do the following:
 
 * Login to [Auth0](https://manage.auth0.com).
 * Click on `Users & Roles` on the left hand side of the screen and then click `Users`.
