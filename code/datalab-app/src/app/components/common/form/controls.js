@@ -1,9 +1,9 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import TextField from '@material-ui/core/TextField';
+import Input, { InputLabel, InputAdornment } from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import { MenuItem } from '@material-ui/core/Menu';
+import { FormControl, FormHelperText } from '@material-ui/core/Form';
 import { fieldStyle, fieldMargin } from './controlStyles';
 
 export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) =>

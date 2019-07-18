@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Avatar from 'material-ui/Avatar';
-import Popover from 'material-ui/Popover';
+import Avatar from '@material-ui/core/Avatar';
+import Popover from '@material-ui/core/Popover';
 import UserMenu from './UserMenu';
 import UserIcon from './UserIcon';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { createShallow, createMount } from 'material-ui/test-utils';
+import { createShallow, createMount } from '@material-ui/core/test-utils';
 import SideBar from './SideBar';
 
 describe('Sidebar', () => {

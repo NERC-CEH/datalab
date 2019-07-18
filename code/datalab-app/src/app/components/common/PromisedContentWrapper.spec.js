@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CircularProgress } from 'material-ui/Progress';
+import { CircularProgress } from '@material-ui/core/Progress';
 import PromisedContentWrapper from './PromisedContentWrapper';
 
 describe('PromisedContentWrapper', () => {

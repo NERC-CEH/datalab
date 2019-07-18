@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardActions } from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import { CardActions } from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import { READY } from '../../../shared/statusTypes';
 

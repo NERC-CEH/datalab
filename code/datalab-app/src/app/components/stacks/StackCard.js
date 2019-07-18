@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardContent, CardMedia } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
+import Card, { CardContent, CardMedia } from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
+import { withStyles } from '@material-ui/core/styles';
 import { capitalize } from 'lodash';
 import stackDescriptions from './stackDescriptions';
 import StackCardActions from './StackCardActions';

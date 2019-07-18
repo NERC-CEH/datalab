@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
+import Dialog, { DialogTitle, DialogContent } from '@material-ui/core/Dialog';
 import CreateSiteForm from '../sites/CreateSiteForm';
 import PreviewSiteCard from '../sites/PreviewSiteCard';
 

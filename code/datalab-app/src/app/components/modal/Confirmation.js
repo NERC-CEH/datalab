@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogContent, DialogActions, DialogContentText } from 'material-ui/Dialog';
+import Dialog, { DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core/Dialog';
 import IconButton from '../common/control/IconButton';
 
 const Confirmation = ({ title, body, onSubmit, onCancel }) => (

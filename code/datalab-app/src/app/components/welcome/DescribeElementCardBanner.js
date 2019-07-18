@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { CardContent } from 'material-ui/Card';
-import Icon from 'material-ui/Icon';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import { CardContent } from '@material-ui/core/Card';
+import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography';
 
 const cardTitle = {
   fontWeight: 'lighter',

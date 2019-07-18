@@ -1,6 +1,6 @@
 import React from 'react';
 import ProptTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 import Segment from '../components/app/Segment';
 import NotebooksContainer from '../containers/notebooks/NotebooksContainer';
 

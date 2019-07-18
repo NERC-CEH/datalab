@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';

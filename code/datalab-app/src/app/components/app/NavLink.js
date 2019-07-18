@@ -1,8 +1,8 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
-import { ListItem, ListItemIcon } from 'material-ui/List';
-import Icon from 'material-ui/Icon';
+import { ListItem, ListItemIcon } from '@material-ui/core/List';
+import Icon from '@material-ui/core/Icon';
 
 const coreStyle = {
   padding: '16px 40px 16px 40px',

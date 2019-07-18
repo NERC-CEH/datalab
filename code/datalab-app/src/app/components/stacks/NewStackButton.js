@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import Tooltip from 'material-ui/Tooltip';
-import { withStyles } from 'material-ui/styles';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   card: {

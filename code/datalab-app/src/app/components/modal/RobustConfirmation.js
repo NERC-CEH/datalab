@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
-import Dialog, { DialogTitle, DialogContent, DialogActions, DialogContentText } from 'material-ui/Dialog';
+import TextField from '@material-ui/core/TextField';
+import Dialog, { DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core/Dialog';
 import IconButton from '../common/control/IconButton';
 
 class RobustConfirmation extends Component {

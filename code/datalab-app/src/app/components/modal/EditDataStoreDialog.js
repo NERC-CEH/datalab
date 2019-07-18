@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
-import Typography from 'material-ui/Typography';
+import Dialog, { DialogTitle, DialogContent, DialogActions } from '@material-ui/core/Dialog';
+import Typography from '@material-ui/core/Typography';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import IconButton from '../common/control/IconButton';
 import AutocompleteTextSearch from '../common/form/AutocompleteTextSearch';
