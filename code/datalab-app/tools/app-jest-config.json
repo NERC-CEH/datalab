@@ -1,8 +1,7 @@
 {
   "rootDir": "..",
   "collectCoverageFrom": [ "src/**/*.{js,jsx}" ],
-  "setupFiles": [ "<rootDir>/node_modules/react-scripts/config/polyfills.js" ],
-  "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
+  "setupFilesAfterEnv": [ "<rootDir>/src/setupTests.js" ],
   "testMatch": [ "<rootDir>/src/app/**/?(*.)(spec|test).js?(x)" ],
   "testEnvironment": "jsdom",
   "testURL": "http://localhost",
