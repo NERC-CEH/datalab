@@ -14,12 +14,12 @@ const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermis
       </Button>
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-      <Button style={{ marginLeft: 4, marginRight: 4 }} color="accent" disabled={!deleteStack || !isReady(stack)} onClick={() => deleteStack(stack)}>
+      <Button style={{ marginLeft: 4, marginRight: 4 }} color="secondary" disabled={!deleteStack || !isReady(stack)} onClick={() => deleteStack(stack)}>
         Delete
       </Button>
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
-      <Button style={{ marginLeft: 4 }} color="accent" disabled={!editStack || !isReady(stack)} onClick={() => editStack(stack)}>
+      <Button style={{ marginLeft: 4 }} color="secondary" disabled={!editStack || !isReady(stack)} onClick={() => editStack(stack)}>
         Edit
       </Button>
     </PermissionWrapper>
