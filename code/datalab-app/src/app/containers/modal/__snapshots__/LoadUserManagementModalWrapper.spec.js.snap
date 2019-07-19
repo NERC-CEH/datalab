@@ -22,7 +22,7 @@ exports[`LoadUserManagement Modal Wrapper is a container which creates correct s
       ],
     }
   }
-  onCancel={[Function]}
+  onCancel={[MockFunction]}
   removeUser={[Function]}
   title="Title"
   userList={

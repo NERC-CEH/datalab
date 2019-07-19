@@ -1,45 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`] = `
-<withStyles(Dialog)
+<WithStyles(ForwardRef(Dialog))
   maxWidth="md"
   open={true}
 >
-  <withStyles(DialogTitle)>
+  <WithStyles(ForwardRef(DialogTitle))>
     Title
-  </withStyles(DialogTitle)>
-  <withStyles(DialogContent)>
-    <withStyles(DialogContentText)>
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))>
       Body
-    </withStyles(DialogContentText)>
+    </WithStyles(ForwardRef(DialogContentText))>
     <form>
-      <TextField
+      <WithStyles(ForwardRef(TextField))
         fullWidth={true}
         id="name"
         label="FieldLabel"
         margin="normal"
         onChange={[Function]}
-        required={false}
-        select={false}
         value=""
       />
     </form>
-  </withStyles(DialogContent)>
-  <withStyles(DialogActions)>
-    <withStyles(IconButton)
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(IconButton)
       icon="clear"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Cancel
-    </withStyles(IconButton)>
-    <withStyles(IconButton)
+    </WithStyles(IconButton)>
+    <WithStyles(IconButton)
       danger={true}
       disabled={true}
       icon="delete"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Confirm Deletion
-    </withStyles(IconButton)>
-  </withStyles(DialogActions)>
-</withStyles(Dialog)>
+    </WithStyles(IconButton)>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
 `;
