@@ -23,7 +23,6 @@
     "jsonwebtoken": "8.1.1",
     "jwks-rsa": "1.2.0",
     "lodash": "4.17.4",
-    "material-ui": "1.0.0-beta.21",
     "moment": "2.21.0",
     "mongoose": "4.11.7",
     "moxios": "0.4.0",
@@ -45,7 +44,6 @@
     "winston": "2.3.1"
   },
   "devDependencies": {
-    "@material-ui/codemod": "^4.0.2",
     "axios-mock-adapter": "1.9.0",
     "babel-cli": "6.24.1",
     "babel-preset-es2015": "6.24.1",
@@ -62,7 +60,6 @@
     "husky": "0.13.3",
     "jest": "24.7.1",
     "jest-enzyme": "7.0.2",
-    "jscodeshift": "^0.6.4",
     "lint-staged": "3.4.1",
     "nodemon": "1.11.0",
     "react-scripts": "^3.0.1",
