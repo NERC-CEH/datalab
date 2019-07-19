@@ -1,20 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
-<Card
+<WithStyles(Card)
   className="StackCard-card-1"
-  raised={false}
 >
-  <withStyles(CardContent)>
+  <WithStyles(CardContent)>
     <div
       className="StackCard-cardHeader-2"
     >
       <div>
-        <withStyles(Typography)
+        <WithStyles(Typography)
           type="headline"
         >
           name1
-        </withStyles(Typography)>
+        </WithStyles(Typography)>
         <div
           style={
             Object {
@@ -23,7 +22,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
             }
           }
         >
-          <withStyles(Typography)
+          <WithStyles(Typography)
             style={
               Object {
                 "marginRight": 6,
@@ -32,38 +31,37 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
             type="subheading"
           >
             Jupyter
-          </withStyles(Typography)>
+          </WithStyles(Typography)>
         </div>
       </div>
-      <withStyles(CardMedia)
+      <WithStyles(CardMedia)
         className="StackCard-cardMedia-3"
         image="jupyter-logo.svg"
       />
     </div>
-    <withStyles(Typography)
+    <WithStyles(Typography)
       component="p"
     >
       Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-    </withStyles(Typography)>
-  </withStyles(CardContent)>
-</Card>
+    </WithStyles(Typography)>
+  </WithStyles(CardContent)>
+</WithStyles(Card)>
 `;
 
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
-<Card
+<WithStyles(Card)
   className="StackCard-card-1"
-  raised={false}
 >
-  <withStyles(CardContent)>
+  <WithStyles(CardContent)>
     <div
       className="StackCard-cardHeader-2"
     >
       <div>
-        <withStyles(Typography)
+        <WithStyles(Typography)
           type="headline"
         >
           name1
-        </withStyles(Typography)>
+        </WithStyles(Typography)>
         <div
           style={
             Object {
@@ -72,7 +70,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
             }
           }
         >
-          <withStyles(Typography)
+          <WithStyles(Typography)
             style={
               Object {
                 "marginRight": 6,
@@ -81,38 +79,37 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
             type="subheading"
           >
             Zeppelin
-          </withStyles(Typography)>
+          </WithStyles(Typography)>
         </div>
       </div>
-      <withStyles(CardMedia)
+      <WithStyles(CardMedia)
         className="StackCard-cardMedia-3"
         image="zeppelin-logo.svg"
       />
     </div>
-    <withStyles(Typography)
+    <WithStyles(Typography)
       component="p"
     >
       Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
-    </withStyles(Typography)>
-  </withStyles(CardContent)>
-</Card>
+    </WithStyles(Typography)>
+  </WithStyles(CardContent)>
+</WithStyles(Card)>
 `;
 
 exports[`StackCard should provide defaults and hide actions if no stack is provided 1`] = `
-<Card
+<WithStyles(Card)
   className="StackCard-card-1"
-  raised={false}
 >
-  <withStyles(CardContent)>
+  <WithStyles(CardContent)>
     <div
       className="StackCard-cardHeader-2"
     >
       <div>
-        <withStyles(Typography)
+        <WithStyles(Typography)
           type="headline"
         >
           Display Name
-        </withStyles(Typography)>
+        </WithStyles(Typography)>
         <div
           style={
             Object {
@@ -121,7 +118,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
             }
           }
         >
-          <withStyles(Typography)
+          <WithStyles(Typography)
             style={
               Object {
                 "marginRight": 6,
@@ -130,39 +127,38 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
             type="subheading"
           >
             Typename type
-          </withStyles(Typography)>
+          </WithStyles(Typography)>
         </div>
       </div>
-      <withStyles(Icon)
+      <WithStyles(Icon)
         className="StackCard-cardIcon-4"
       >
         create
-      </withStyles(Icon)>
+      </WithStyles(Icon)>
     </div>
-    <withStyles(Typography)
+    <WithStyles(Typography)
       component="p"
     >
       A description of the typeName purpose
-    </withStyles(Typography)>
-  </withStyles(CardContent)>
-</Card>
+    </WithStyles(Typography)>
+  </WithStyles(CardContent)>
+</WithStyles(Card)>
 `;
 
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
-<Card
+<WithStyles(Card)
   className="StackCard-card-1"
-  raised={false}
 >
-  <withStyles(CardContent)>
+  <WithStyles(CardContent)>
     <div
       className="StackCard-cardHeader-2"
     >
       <div>
-        <withStyles(Typography)
+        <WithStyles(Typography)
           type="headline"
         >
           name1
-        </withStyles(Typography)>
+        </WithStyles(Typography)>
         <div
           style={
             Object {
@@ -171,7 +167,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
             }
           }
         >
-          <withStyles(Typography)
+          <WithStyles(Typography)
             style={
               Object {
                 "marginRight": 6,
@@ -180,23 +176,23 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
             type="subheading"
           >
             Jupyter
-          </withStyles(Typography)>
-          <withStyles(StackStatus)
+          </WithStyles(Typography)>
+          <WithStyles(StackStatus)
             status="ready"
           />
         </div>
       </div>
-      <withStyles(CardMedia)
+      <WithStyles(CardMedia)
         className="StackCard-cardMedia-3"
         image="jupyter-logo.svg"
       />
     </div>
-    <withStyles(Typography)
+    <WithStyles(Typography)
       component="p"
     >
       Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-    </withStyles(Typography)>
-  </withStyles(CardContent)>
+    </WithStyles(Typography)>
+  </WithStyles(CardContent)>
   <StackCardActions
     deletePermission="delete"
     deleteStack={[Function]}
@@ -219,5 +215,5 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
       ]
     }
   />
-</Card>
+</WithStyles(Card)>
 `;
