@@ -9,17 +9,33 @@ const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermis
   deletePermission, editPermission }) => (
   <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
     <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
-      <Button style={{ marginRight: 4 }} color="primary" disabled={!openStack || !isReady(stack)} onClick={() => openStack(stack.id)}>
+      <Button
+        style={{ marginRight: 4 }}
+        color="primary"
+        disabled={!openStack || !isReady(stack)}
+        onClick={() => openStack(stack.id)}
+        variant="contained" >
         Open
       </Button>
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-      <Button style={{ marginLeft: 4, marginRight: 4 }} color="secondary" disabled={!deleteStack || !isReady(stack)} onClick={() => deleteStack(stack)}>
+      <Button
+        style={{ marginLeft: 4, marginRight: 4 }}
+        color="secondary"
+        disabled={!deleteStack || !isReady(stack)}
+        onClick={() => deleteStack(stack)}
+        variant="contained">
         Delete
       </Button>
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
-      <Button style={{ marginLeft: 4 }} color="secondary" disabled={!editStack || !isReady(stack)} onClick={() => editStack(stack)}>
+      <Button
+        style={{ marginLeft: 4 }}
+        color="secondary"
+        disabled={!editStack || !isReady(stack)}
+        onClick={() => editStack(stack)}
+        variant="contained"
+      >
         Edit
       </Button>
     </PermissionWrapper>
