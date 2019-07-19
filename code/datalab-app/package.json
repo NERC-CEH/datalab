@@ -70,6 +70,7 @@
     "redux-devtools": "3.5.0",
     "redux-mock-store": "1.2.3",
     "shx": "0.2.2",
+    "typescript": "^3.5.3",
     "webpack": "4.29.6",
     "webpack-node-externals": "1.6.0"
   },
