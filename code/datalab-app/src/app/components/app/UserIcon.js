@@ -38,7 +38,7 @@ class UserIcon extends Component {
         />
         <Popover
           open={this.state.open}
-          onRequestClose={this.togglePopup}
+          onClose={this.togglePopup}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         >
