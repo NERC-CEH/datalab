@@ -32,7 +32,7 @@ const PublicNavBarContent = ({ classes }) => (
       <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
       <div className={classes.spacer} />
       {publicNavLinks.map(({ displayName, href }) => <NavBarLinkButton key={displayName} onClick={() => window.open(href)}>{displayName}</NavBarLinkButton>)}
-      <Button color="primary" raised onClick={auth.login}>Log In</Button>
+      <Button color="primary" onClick={auth.login}>Log In</Button>
     </Toolbar>
   </AppBar>
 );

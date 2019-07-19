@@ -48,8 +48,8 @@ const CreateNotebookForm = (props) => {
           placeholder="Description" />
       </div>
       <div>
-        <Button type="submit" style={{ margin: 8 }} color="primary" raised disabled={submitting}>Create</Button>
-        <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
+        <Button type="submit" style={{ margin: 8 }} color="primary" disabled={submitting}>Create</Button>
+        <Button style={{ margin: 8 }} onClick={cancel}>Cancel</Button>
       </div>
     </form>
   );

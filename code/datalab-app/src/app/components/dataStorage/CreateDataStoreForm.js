@@ -51,8 +51,8 @@ const CreateDataStoreForm = (props) => {
           placeholder="Description"
           component={renderTextArea} />
       </div>
-      <Button style={{ margin: 8 }} raised type="submit" color="primary" disabled={submitting}>Create</Button>
-      <Button style={{ margin: 8 }} raised onClick={cancel}>Cancel</Button>
+      <Button style={{ margin: 8 }} type="submit" color="primary" disabled={submitting}>Create</Button>
+      <Button style={{ margin: 8 }} onClick={cancel}>Cancel</Button>
     </form>
   );
 };
