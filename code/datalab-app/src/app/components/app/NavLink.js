@@ -33,7 +33,7 @@ const Link = ({ classes, to, label, icon, ...rest }) => (
     exact
     button
     {...rest}>
-    {icon ? <ListItemIcon><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
+    {icon ? <ListItemIcon style={{ color: 'inherit' }}><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
     {label}
    </ListItem>
 );
