@@ -6,7 +6,7 @@ import DataStorageContainer from '../containers/dataStorage/DataStorageContainer
 
 const DataStoragePage = ({ userPermissions }) => (
   <Segment>
-    <Typography gutterBottom type="display1">Current Storage Volumes</Typography>
+    <Typography gutterBottom variant="display1">Current Storage Volumes</Typography>
     <DataStorageContainer userPermissions={userPermissions} />
   </Segment>
 );

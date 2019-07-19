@@ -6,7 +6,7 @@ import NotebooksContainer from '../containers/notebooks/NotebooksContainer';
 
 const NotebooksPage = ({ userPermissions }) => (
   <Segment>
-    <Typography gutterBottom type="display1">Current Notebooks</Typography>
+    <Typography gutterBottom variant="display1">Current Notebooks</Typography>
     <NotebooksContainer userPermissions={userPermissions}/>
   </Segment>
 );

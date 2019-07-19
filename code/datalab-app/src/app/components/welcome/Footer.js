@@ -24,8 +24,8 @@ const styles = theme => ({
 const Footer = ({ classes, invert }) => (
   <div className={invert ? classes.invertFooter : classes.footer} >
     <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
-    <Typography type="caption" gutterBottom>{copyrightString}</Typography>
-    <Typography type="body1">{`Version: ${version || 'pre-release'}`}</Typography>
+    <Typography variant="caption" gutterBottom>{copyrightString}</Typography>
+    <Typography variant="body1">{`Version: ${version || 'pre-release'}`}</Typography>
   </div>
 );
 

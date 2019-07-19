@@ -30,7 +30,7 @@ const tagLine = 'DataLabs provides you with tools to power your research and sha
 const HeroBar = ({ classes }) => (
   <div className={classes.bar}>
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
-    <Typography className={classes.tagLine} type="title">{tagLine}</Typography>
+    <Typography className={classes.tagLine} variant="title">{tagLine}</Typography>
     <Button className={classes.button} color="primary" disabled>Sign Up</Button>
     <Button className={classes.button} color="primary" onClick={auth.login}> Log In</Button>
   </div>

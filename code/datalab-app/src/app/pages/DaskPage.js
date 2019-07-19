@@ -6,7 +6,7 @@ import { extendSubdomain } from '../core/getDomainInfo';
 
 const DaskPage = () => (
   <Segment>
-    <Typography gutterBottom type="display1">Dask</Typography>
+    <Typography gutterBottom variant="display1">Dask</Typography>
     <p>Dask is a flexible parallel computing library for analytic computing.</p>
     <Button
       color="primary"

@@ -49,9 +49,9 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
     <CardContent>
       <div className={classes.cardHeader}>
         <div>
-          <Typography type="headline">{getDisplayName(stack)}</Typography>
+          <Typography variant="headline">{getDisplayName(stack)}</Typography>
           <div style={{ display: 'flex', direction: 'row' }}>
-            <Typography style={{ marginRight: 6 }} type="subheading">{getStackType(stack, typeName)}</Typography>
+            <Typography style={{ marginRight: 6 }} variant="subheading">{getStackType(stack, typeName)}</Typography>
             {typeName !== 'Data Store' && stack.status && <StackStatus status={stack.status}/>}
           </div>
         </div>
