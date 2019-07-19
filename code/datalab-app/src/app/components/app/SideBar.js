@@ -52,7 +52,7 @@ const datalabLinks = [
 ];
 
 const SideBar = ({ classes, userPermissions }) => (
-  <Drawer classes={{ paper: classes.drawerPaper }} type="permanent">
+  <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent">
     <header className={classes.header}>
       <img className={classes.logo} src={datalabsLogo} alt="datalabs-logo" />
     </header>
