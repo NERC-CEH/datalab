@@ -4,14 +4,14 @@
     state: enabled
     policy: deny
 
- - name: Allow ssh traffic from management IPs if bastion
-   ufw:
-     rule: allow
-     port: 22
-     from_ip: "{{ hostvars[item].openstack.private_v4 }}"
-     proto: tcp
-   with_items: "{{ groups['bastion'] }}"
-   when: inventory_hostname in groups['bastion']
+- name: Allow ssh traffic from management IPs if bastion
+  ufw:
+    rule: allow
+    port: 22
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
+    proto: tcp
+  with_items: "{{ groups['bastion'] }}"
+  when: inventory_hostname in groups['bastion']
 
 - name: Allow ssh traffic from bastions if internal machine
   ufw:

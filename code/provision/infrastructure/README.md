@@ -172,7 +172,10 @@ small for use as Kubernetes nodes.
 To execute the bootstrap process run:
 
 ```
-ansible-playbook bootstrap.yml
+ansible-playbook bootstrap.yml --extra-vars "@sites/<sites>.yml"
+
+e.g.
+ansible-playbook bootstrap.yml --extra-vars "@sites/tessella.yml"
 ```
 
 > Note: The `ansible.cfg` file provides the `inventory/openstack.py` dynamic inventory to

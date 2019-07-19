@@ -4,6 +4,8 @@ key_name: llogr-c9834a39ddef2dd489d7bd976d0ac79c
 network: nerc-datalab-U-internal
 external_ip: 192.171.139.88
 management_ips:
+  - port: 22
+    ip_range: 130.246.243.0/24
   - port: 80
     ip_range: 130.246.243.0/24
   - port: 22
@@ -12,6 +14,8 @@ management_ips:
     ip_range: 130.246.189.181/32
   - port: 80
     ip_range: 130.246.188.147/32
+  - port: 22
+    ip_range: 212.140.132.200/32
 
 access_public_keys:
   - gary_rsa.pub
