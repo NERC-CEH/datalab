@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const DescribeElement = ({ classes, title, descriptions, invert, quote, media, doubleHeight }) => (
   <DescribeElementSegment invert={invert}>
-    <Typography className={classes.title} variant="display1">{title}</Typography>
+    <Typography className={classes.title} variant="h4">{title}</Typography>
     <Grid container>
       {descriptions.map(({ icon, title: cardTitle, content: cardContent, links }, idx) => (
         <DescribeElementCard

@@ -25,7 +25,7 @@ const Footer = ({ classes, invert }) => (
   <div className={invert ? classes.invertFooter : classes.footer} >
     <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
     <Typography variant="caption" gutterBottom>{copyrightString}</Typography>
-    <Typography variant="body1">{`Version: ${version || 'pre-release'}`}</Typography>
+    <Typography variant="body2">{`Version: ${version || 'pre-release'}`}</Typography>
   </div>
 );
 

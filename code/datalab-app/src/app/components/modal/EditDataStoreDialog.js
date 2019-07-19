@@ -13,7 +13,7 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
     <Dialog open={true} maxWidth="md" fullWidth>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <Typography variant="subheading" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom>
           Users with access to data store
         </Typography>
         <PromisedContentWrapper promise={loadUsersPromise} >

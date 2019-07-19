@@ -32,7 +32,7 @@ const UserMenu = ({ classes, identity, closePopover }) => (
       <Avatar className={classes.userImage} src={identity.picture} />
       <div className={classes.userInfo}>
         <Typography variant="body1">{identity.nickname}</Typography>
-        <Typography variant="body2">{identity.name}</Typography>
+        <Typography variant="body1">{identity.name}</Typography>
       </div>
     </div>
     <Button

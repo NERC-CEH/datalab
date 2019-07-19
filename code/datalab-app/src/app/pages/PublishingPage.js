@@ -6,7 +6,7 @@ import SiteContainer from '../containers/sites/SitesContainer';
 
 const PublishingPage = ({ userPermissions }) => (
   <Segment>
-    <Typography gutterBottom variant="display1">Published Sites</Typography>
+    <Typography gutterBottom variant="h4">Published Sites</Typography>
     <SiteContainer userPermissions={userPermissions} />
   </Segment>
 );

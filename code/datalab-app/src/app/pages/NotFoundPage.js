@@ -5,7 +5,7 @@ import Segment from '../components/app/Segment';
 
 const NotFoundPage = () => (
   <Segment>
-    <Typography gutterBottom variant="display1">404 Page Not Found</Typography>
+    <Typography gutterBottom variant="h4">404 Page Not Found</Typography>
     <p><Link to="/">Go to homepage</Link></p>
   </Segment>
 );
