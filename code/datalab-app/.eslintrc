@@ -51,8 +51,6 @@
     "react/require-default-props": "off"
   },
   "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "ecmaVersion": 2018
   }
 }
