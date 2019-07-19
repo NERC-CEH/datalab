@@ -9,7 +9,6 @@ const DaskPage = () => (
     <Typography gutterBottom type="display1">Dask</Typography>
     <p>Dask is a flexible parallel computing library for analytic computing.</p>
     <Button
-      raised
       color="primary"
       onClick={() => window.open(extendSubdomain('dask'))}
     >

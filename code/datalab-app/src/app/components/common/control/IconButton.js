@@ -36,8 +36,7 @@ const IconButton = ({ classes, onClick, children, icon, danger = false, disabled
       className={danger ? classes.buttonDanger : classes.button}
       onClick={onClick}
       color={danger ? undefined : 'accent'}
-      disabled={disabled}
-      raised >
+      disabled={disabled} >
       {children}
       <Icon className={classes.icon} children={icon} />
     </Button>

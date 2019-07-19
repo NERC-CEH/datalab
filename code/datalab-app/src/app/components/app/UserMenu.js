@@ -36,7 +36,6 @@ const UserMenu = ({ classes, identity, closePopover }) => (
       </div>
     </div>
     <Button
-      raised
       color="primary"
       onClick={closePopover(auth.logout)}
     >
