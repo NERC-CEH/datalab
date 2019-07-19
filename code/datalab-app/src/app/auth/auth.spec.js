@@ -20,20 +20,23 @@ describe('auth', () => {
     jest.resetAllMocks();
 
     // Work around for mutating window within the jest framework.
-    // https://github.com/facebook/jest/issues/890
-    Object.defineProperty(window.location, 'pathname', {
-      writable: true,
-      value: 'expectedPathname',
-    });
-
-    Object.defineProperty(window.location, 'hash', {
-      writable: true,
-      value: {
+    // https://github.com/facebook/jest/issues/5124
+    const location = {
+      ...window.location,
+      pathname: 'expectedPathname',
+      hash: {
         accessToken: 'expectedAccessToken',
         expiresIn: '36000',
         idToken: 'expectedIdToken',
         state: JSON.stringify({ appRedirect: 'expectedState' }),
       },
+    };
+
+    delete window.location;
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: location,
+      configurable: true,
     });
   });
 

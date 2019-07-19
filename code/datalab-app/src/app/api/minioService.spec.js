@@ -54,7 +54,7 @@ describe('minioService', () => {
 
       return minioService.openStorage(url, token)
         .catch((error) => {
-          expect(error).toBe('error');
+          expect(error).toEqual(new Error('error'));
         });
     });
   });
