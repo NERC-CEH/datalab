@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar correctly renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(Drawer))
+<WithStyles(Drawer)
   classes={
     Object {
       "paper": "SideBar-drawerPaper-2",
     }
   }
-  type="permanent"
+  variant="permanent"
 >
   <header
     className="SideBar-header-1"
@@ -18,7 +18,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       src="datalabs-hori.png"
     />
   </header>
-  <WithStyles(ForwardRef(List))
+  <WithStyles(List)
     className="SideBar-drawerList-4"
   >
     <WithStyles(Link)
@@ -93,7 +93,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     <div
       className="SideBar-spacer-5"
     />
-    <WithStyles(ForwardRef(Divider)) />
+    <WithStyles(Divider) />
     <WithStyles(Link)
       icon="question_answer"
       key="nav-link-Discourse"
@@ -112,6 +112,6 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       label="Help"
       onClick={[Function]}
     />
-  </WithStyles(ForwardRef(List))>
-</WithStyles(ForwardRef(Drawer))>
+  </WithStyles(List)>
+</WithStyles(Drawer)>
 `;

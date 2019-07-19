@@ -60,7 +60,7 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       placeholder="Description"
     />
   </div>
-  <WithStyles(ForwardRef(Button))
+  <WithStyles(Button)
     color="primary"
     style={
       Object {
@@ -70,8 +70,8 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     type="submit"
   >
     Create
-  </WithStyles(ForwardRef(Button))>
-  <WithStyles(ForwardRef(Button))
+  </WithStyles(Button)>
+  <WithStyles(Button)
     onClick={[MockFunction]}
     style={
       Object {
@@ -80,6 +80,6 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     }
   >
     Cancel
-  </WithStyles(ForwardRef(Button))>
+  </WithStyles(Button)>
 </form>
 `;

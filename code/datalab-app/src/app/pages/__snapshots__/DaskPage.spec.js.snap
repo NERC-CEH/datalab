@@ -2,21 +2,21 @@
 
 exports[`DaskPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
-  <WithStyles(ForwardRef(Typography))
+  <WithStyles(Typography)
     gutterBottom={true}
     type="display1"
   >
     Dask
-  </WithStyles(ForwardRef(Typography))>
+  </WithStyles(Typography)>
   <p>
     Dask is a flexible parallel computing library for analytic computing.
   </p>
-  <WithStyles(ForwardRef(Button))
+  <WithStyles(Button)
     color="primary"
     onClick={[Function]}
     raised={true}
   >
     Dask Status
-  </WithStyles(ForwardRef(Button))>
+  </WithStyles(Button)>
 </WithStyles(Segment)>
 `;

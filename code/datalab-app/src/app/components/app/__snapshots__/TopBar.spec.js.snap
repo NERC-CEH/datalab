@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Topbar correctly renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(AppBar))
+<WithStyles(AppBar)
   position="fixed"
 >
-  <WithStyles(ForwardRef(Toolbar))>
+  <WithStyles(Toolbar)>
     <div
       style={
         Object {
@@ -20,6 +20,6 @@ exports[`Topbar correctly renders correct snapshot 1`] = `
         }
       }
     />
-  </WithStyles(ForwardRef(Toolbar))>
-</WithStyles(ForwardRef(AppBar))>
+  </WithStyles(Toolbar)>
+</WithStyles(AppBar)>
 `;

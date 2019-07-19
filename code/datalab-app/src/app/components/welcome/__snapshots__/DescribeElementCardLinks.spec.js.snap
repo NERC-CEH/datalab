@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardLinks renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(CardActions))>
+<WithStyles(CardActions)>
   <Link
     displayName="displayName"
     href="address"
@@ -12,5 +12,5 @@ exports[`DescribeElementCardLinks renders correct snapshot 1`] = `
     href="anotherAddress"
     key="link-1"
   />
-</WithStyles(ForwardRef(CardActions))>
+</WithStyles(CardActions)>
 `;

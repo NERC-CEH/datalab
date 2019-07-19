@@ -2,11 +2,11 @@
 
 exports[`UserIcon renders correct snapshot 1`] = `
 <div>
-  <WithStyles(ForwardRef(Avatar))
+  <WithStyles(Avatar)
     onClick={[Function]}
     src="expectedPicture"
   />
-  <WithStyles(ForwardRef(Popover))
+  <WithStyles(Popover)
     anchorEl={null}
     anchorOrigin={
       Object {
@@ -24,6 +24,6 @@ exports[`UserIcon renders correct snapshot 1`] = `
         }
       }
     />
-  </WithStyles(ForwardRef(Popover))>
+  </WithStyles(Popover)>
 </div>
 `;

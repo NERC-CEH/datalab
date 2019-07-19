@@ -7,30 +7,30 @@ exports[`UserMenu renders correct snapshot 1`] = `
   <div
     className="UserMenu-identity-2"
   >
-    <WithStyles(ForwardRef(Avatar))
+    <WithStyles(Avatar)
       className="UserMenu-userImage-3"
       src="expectedPicture"
     />
     <div
       className="UserMenu-userInfo-4"
     >
-      <WithStyles(ForwardRef(Typography))
+      <WithStyles(Typography)
         type="body1"
       >
         expectedNickname
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
+      </WithStyles(Typography)>
+      <WithStyles(Typography)
         type="body2"
       >
         expectedName
-      </WithStyles(ForwardRef(Typography))>
+      </WithStyles(Typography)>
     </div>
   </div>
-  <WithStyles(ForwardRef(Button))
+  <WithStyles(Button)
     color="primary"
     raised={true}
   >
     Logout
-  </WithStyles(ForwardRef(Button))>
+  </WithStyles(Button)>
 </div>
 `;

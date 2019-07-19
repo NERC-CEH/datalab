@@ -2,13 +2,13 @@
 
 exports[`DescribeElement renders correct snapshot 1`] = `
 <WithStyles(DescribeElementSegment)>
-  <WithStyles(ForwardRef(Typography))
+  <WithStyles(Typography)
     className="DescribeElement-title-1"
     type="display1"
   >
     cardTitle
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Grid))
+  </WithStyles(Typography)>
+  <WithStyles(Grid)
     container={true}
   >
     <WithStyles(DescribeElementCard)
@@ -30,7 +30,7 @@ exports[`DescribeElement renders correct snapshot 1`] = `
       }
       title="anotherTitle"
     />
-  </WithStyles(ForwardRef(Grid))>
+  </WithStyles(Grid)>
 </WithStyles(DescribeElementSegment)>
 `;
 
@@ -38,13 +38,13 @@ exports[`DescribeElement renders correct snapshot with switches 1`] = `
 <WithStyles(DescribeElementSegment)
   invert={true}
 >
-  <WithStyles(ForwardRef(Typography))
+  <WithStyles(Typography)
     className="DescribeElement-title-1"
     type="display1"
   >
     cardTitle
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Grid))
+  </WithStyles(Typography)>
+  <WithStyles(Grid)
     container={true}
   >
     <WithStyles(DescribeElementCard)
@@ -72,6 +72,6 @@ exports[`DescribeElement renders correct snapshot with switches 1`] = `
       quote={true}
       title="anotherTitle"
     />
-  </WithStyles(ForwardRef(Grid))>
+  </WithStyles(Grid)>
 </WithStyles(DescribeElementSegment)>
 `;

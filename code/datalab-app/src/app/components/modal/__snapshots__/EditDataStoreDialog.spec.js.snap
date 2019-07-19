@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Edit data store dialog creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
+<WithStyles(Dialog)
   fullWidth={true}
   maxWidth="md"
   open={true}
 >
-  <WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(DialogTitle)>
     expectedTitle
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(Typography))
+  </WithStyles(DialogTitle)>
+  <WithStyles(DialogContent)>
+    <WithStyles(Typography)
       gutterBottom={true}
       type="subheading"
     >
       Users with access to data store
-    </WithStyles(ForwardRef(Typography))>
+    </WithStyles(Typography)>
     <PromisedContentWrapper
       promise={
         Object {
@@ -46,14 +46,14 @@ exports[`Edit data store dialog creates correct snapshot 1`] = `
         }
       />
     </PromisedContentWrapper>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
+  </WithStyles(DialogContent)>
+  <WithStyles(DialogActions)>
     <WithStyles(IconButton)
       icon="clear"
       onClick={[Function]}
     >
       Close
     </WithStyles(IconButton)>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
+  </WithStyles(DialogActions)>
+</WithStyles(Dialog)>
 `;
