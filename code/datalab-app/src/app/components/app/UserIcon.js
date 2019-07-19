@@ -40,7 +40,7 @@ class UserIcon extends Component {
           open={this.state.open}
           onRequestClose={this.togglePopup}
           anchorEl={this.state.anchorEl}
-          anchorOrigin={{ vertical: 'bottom' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         >
           <UserMenu identity={this.props.identity} closePopover={this.closeOnClick} />
         </Popover>
