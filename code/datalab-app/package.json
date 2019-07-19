@@ -67,7 +67,7 @@
     "nodemon": "1.11.0",
     "react-scripts": "^3.0.1",
     "react-test-renderer": "16.8.6",
-    "redux-devtools": "3.4.0",
+    "redux-devtools": "3.5.0",
     "redux-mock-store": "1.2.3",
     "shx": "0.2.2",
     "webpack": "4.29.6",
