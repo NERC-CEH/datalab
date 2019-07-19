@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotebooksPage renders correct snapshot 1`] = `
-<withStyles(Segment)>
-  <withStyles(Typography)
+<WithStyles(Segment)>
+  <WithStyles(ForwardRef(Typography))
     gutterBottom={true}
     type="display1"
   >
     Current Notebooks
-  </withStyles(Typography)>
+  </WithStyles(ForwardRef(Typography))>
   <NotebooksContainer
     userPermissions={
       Array [
@@ -15,5 +15,5 @@ exports[`NotebooksPage renders correct snapshot 1`] = `
       ]
     }
   />
-</withStyles(Segment)>
+</WithStyles(Segment)>
 `;

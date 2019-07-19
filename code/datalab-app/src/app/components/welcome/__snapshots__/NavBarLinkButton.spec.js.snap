@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBarLinkButton renders correct snapshot 1`] = `
-<withStyles(Button)
+<WithStyles(ForwardRef(Button))
   className="NavBarLinkButton-linkButton-1"
 >
   expectedChildren
-</withStyles(Button)>
+</WithStyles(ForwardRef(Button))>
 `;

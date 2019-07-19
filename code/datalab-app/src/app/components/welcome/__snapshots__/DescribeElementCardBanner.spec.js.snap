@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardBanner renders correct snapshot 1`] = `
-<withStyles(CardContent)>
+<WithStyles(ForwardRef(CardContent))>
   <div
     style={
       Object {
@@ -10,23 +10,23 @@ exports[`DescribeElementCardBanner renders correct snapshot 1`] = `
       }
     }
   >
-    <withStyles(Icon)
+    <WithStyles(ForwardRef(Icon))
       className="DescribeElementCardBanner-icon-3"
     >
       people
-    </withStyles(Icon)>
-    <withStyles(Typography)
+    </WithStyles(ForwardRef(Icon))>
+    <WithStyles(ForwardRef(Typography))
       className="DescribeElementCardBanner-cardTitle-1"
       type="headline"
     >
       expectedTitle
-    </withStyles(Typography)>
+    </WithStyles(ForwardRef(Typography))>
   </div>
-</withStyles(CardContent)>
+</WithStyles(ForwardRef(CardContent))>
 `;
 
 exports[`DescribeElementCardBanner renders correct snapshot with switches 1`] = `
-<withStyles(CardContent)>
+<WithStyles(ForwardRef(CardContent))>
   <div
     style={
       Object {
@@ -35,12 +35,12 @@ exports[`DescribeElementCardBanner renders correct snapshot with switches 1`] = 
       }
     }
   >
-    <withStyles(Typography)
+    <WithStyles(ForwardRef(Typography))
       className="DescribeElementCardBanner-tallCardTitle-2"
       type="headline"
     >
       expectedTitle
-    </withStyles(Typography)>
+    </WithStyles(ForwardRef(Typography))>
   </div>
-</withStyles(CardContent)>
+</WithStyles(ForwardRef(CardContent))>
 `;

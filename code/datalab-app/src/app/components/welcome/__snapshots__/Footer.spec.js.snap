@@ -9,16 +9,16 @@ exports[`Footer renders correct snapshot 1`] = `
     className="Footer-logo-3"
     src="datalabs-mono.png"
   />
-  <withStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     gutterBottom={true}
     type="caption"
   >
     © Copyright NERC 2017
-  </withStyles(Typography)>
-  <withStyles(Typography)
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
     type="body1"
   >
     Version: pre-release
-  </withStyles(Typography)>
+  </WithStyles(ForwardRef(Typography))>
 </div>
 `;

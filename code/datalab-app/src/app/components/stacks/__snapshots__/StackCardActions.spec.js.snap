@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCardActions creates correct snapshot 1`] = `
-<withStyles(CardActions)
+<WithStyles(ForwardRef(CardActions))
   style={
     Object {
       "paddingLeft": 8,
@@ -19,7 +19,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <withStyles(Button)
+    <WithStyles(ForwardRef(Button))
       color="primary"
       disabled={false}
       onClick={[Function]}
@@ -31,7 +31,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       }
     >
       Open
-    </withStyles(Button)>
+    </WithStyles(ForwardRef(Button))>
   </ComponentWrapper>
   <ComponentWrapper
     permission="delete"
@@ -43,7 +43,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <withStyles(Button)
+    <WithStyles(ForwardRef(Button))
       color="accent"
       disabled={false}
       onClick={[Function]}
@@ -56,7 +56,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       }
     >
       Delete
-    </withStyles(Button)>
+    </WithStyles(ForwardRef(Button))>
   </ComponentWrapper>
   <ComponentWrapper
     permission="edit"
@@ -68,7 +68,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <withStyles(Button)
+    <WithStyles(ForwardRef(Button))
       color="accent"
       disabled={false}
       onClick={[Function]}
@@ -80,7 +80,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       }
     >
       Edit
-    </withStyles(Button)>
+    </WithStyles(ForwardRef(Button))>
   </ComponentWrapper>
-</withStyles(CardActions)>
+</WithStyles(ForwardRef(CardActions))>
 `;

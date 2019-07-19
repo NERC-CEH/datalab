@@ -1,32 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IconButton creates correct snapshot for danger styled button 1`] = `
-<withStyles(Button)
+<WithStyles(ForwardRef(Button))
   className="IconButton-buttonDanger-2"
   onClick={[Function]}
   raised={true}
 >
   buttonText
-  <withStyles(Icon)
+  <WithStyles(ForwardRef(Icon))
     className="IconButton-icon-3"
   >
     store
-  </withStyles(Icon)>
-</withStyles(Button)>
+  </WithStyles(ForwardRef(Icon))>
+</WithStyles(ForwardRef(Button))>
 `;
 
 exports[`IconButton creates correct snapshot for required props 1`] = `
-<withStyles(Button)
+<WithStyles(ForwardRef(Button))
   className="IconButton-button-1"
   color="accent"
   onClick={[Function]}
   raised={true}
 >
   buttonText
-  <withStyles(Icon)
+  <WithStyles(ForwardRef(Icon))
     className="IconButton-icon-3"
   >
     store
-  </withStyles(Icon)>
-</withStyles(Button)>
+  </WithStyles(ForwardRef(Icon))>
+</WithStyles(ForwardRef(Button))>
 `;
