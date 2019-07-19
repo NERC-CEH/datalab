@@ -19,14 +19,14 @@ const styles = theme => ({
   },
   paper: {
     zIndex: 1,
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing.unit * 1,
     left: 0,
     right: 0,
     maxHeight: '75%',
     overflow: 'auto',
   },
   chip: {
-    margin: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`,
+    margin: `${theme.spacing.unit * 0.5}px ${theme.spacing.unit * 0.25}px`,
   },
   inputRoot: {
     flexWrap: 'wrap',

@@ -13,7 +13,7 @@ const styles = theme => ({
   cardTitle,
   tallCardTitle: {
     ...cardTitle,
-    minHeight: theme.spacing(8),
+    minHeight: theme.spacing.unit * 8,
   },
   icon: {
     color: theme.palette.error[900],

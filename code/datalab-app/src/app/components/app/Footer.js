@@ -6,7 +6,7 @@ import version from '../../version';
 
 const styles = theme => ({
   versionText: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing.unit * 2,
   },
 });
 
