@@ -4,7 +4,6 @@ exports[`IconButton creates correct snapshot for danger styled button 1`] = `
 <WithStyles(Button)
   className="IconButton-buttonDanger-2"
   onClick={[Function]}
-  raised={true}
 >
   buttonText
   <WithStyles(Icon)
@@ -20,7 +19,6 @@ exports[`IconButton creates correct snapshot for required props 1`] = `
   className="IconButton-button-1"
   color="accent"
   onClick={[Function]}
-  raised={true}
 >
   buttonText
   <WithStyles(Icon)

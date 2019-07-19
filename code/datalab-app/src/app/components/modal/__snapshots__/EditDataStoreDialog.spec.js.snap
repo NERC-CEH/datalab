@@ -12,7 +12,7 @@ exports[`Edit data store dialog creates correct snapshot 1`] = `
   <WithStyles(DialogContent)>
     <WithStyles(Typography)
       gutterBottom={true}
-      type="subheading"
+      variant="subtitle1"
     >
       Users with access to data store
     </WithStyles(Typography)>

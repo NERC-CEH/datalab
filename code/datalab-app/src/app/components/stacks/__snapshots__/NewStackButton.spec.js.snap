@@ -11,11 +11,10 @@ exports[`New Stack Button creates correct snapshot 1`] = `
     <WithStyles(Tooltip)
       title="Create Stack"
     >
-      <WithStyles(Button)
+      <WithStyles(Fab)
         aria-label="add"
         className="NewStackButton-button-3"
         color="primary"
-        fab={true}
         onClick={[Function]}
       >
         <WithStyles(Icon)
@@ -23,7 +22,7 @@ exports[`New Stack Button creates correct snapshot 1`] = `
         >
           add
         </WithStyles(Icon)>
-      </WithStyles(Button)>
+      </WithStyles(Fab)>
     </WithStyles(Tooltip)>
   </div>
 </WithStyles(Card)>

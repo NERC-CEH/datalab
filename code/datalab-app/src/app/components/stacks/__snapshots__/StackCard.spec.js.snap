@@ -10,7 +10,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
     >
       <div>
         <WithStyles(Typography)
-          type="headline"
+          variant="h5"
         >
           name1
         </WithStyles(Typography)>
@@ -28,7 +28,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
                 "marginRight": 6,
               }
             }
-            type="subheading"
+            variant="subtitle1"
           >
             Jupyter
           </WithStyles(Typography)>
@@ -58,7 +58,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     >
       <div>
         <WithStyles(Typography)
-          type="headline"
+          variant="h5"
         >
           name1
         </WithStyles(Typography)>
@@ -76,7 +76,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
                 "marginRight": 6,
               }
             }
-            type="subheading"
+            variant="subtitle1"
           >
             Zeppelin
           </WithStyles(Typography)>
@@ -106,7 +106,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
     >
       <div>
         <WithStyles(Typography)
-          type="headline"
+          variant="h5"
         >
           Display Name
         </WithStyles(Typography)>
@@ -124,7 +124,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
                 "marginRight": 6,
               }
             }
-            type="subheading"
+            variant="subtitle1"
           >
             Typename type
           </WithStyles(Typography)>
@@ -155,7 +155,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     >
       <div>
         <WithStyles(Typography)
-          type="headline"
+          variant="h5"
         >
           name1
         </WithStyles(Typography)>
@@ -173,7 +173,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
                 "marginRight": 6,
               }
             }
-            type="subheading"
+            variant="subtitle1"
           >
             Jupyter
           </WithStyles(Typography)>

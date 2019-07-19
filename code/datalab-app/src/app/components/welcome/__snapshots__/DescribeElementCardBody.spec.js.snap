@@ -6,7 +6,7 @@ exports[`DescribeElementCardBody renders correct snapshot 1`] = `
 >
   <WithStyles(Typography)
     className="DescribeElementCardBody-bodyText-2"
-    type="body1"
+    variant="body2"
   >
     expectedContent
   </WithStyles(Typography)>

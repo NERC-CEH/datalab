@@ -4,7 +4,7 @@ exports[`NotebooksPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
   <WithStyles(Typography)
     gutterBottom={true}
-    type="display1"
+    variant="h4"
   >
     Current Notebooks
   </WithStyles(Typography)>

@@ -4,7 +4,7 @@ exports[`DaskPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
   <WithStyles(Typography)
     gutterBottom={true}
-    type="display1"
+    variant="h4"
   >
     Dask
   </WithStyles(Typography)>
@@ -14,7 +14,6 @@ exports[`DaskPage renders correct snapshot 1`] = `
   <WithStyles(Button)
     color="primary"
     onClick={[Function]}
-    raised={true}
   >
     Dask Status
   </WithStyles(Button)>

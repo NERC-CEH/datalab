@@ -10,10 +10,11 @@ exports[`UserIcon renders correct snapshot 1`] = `
     anchorEl={null}
     anchorOrigin={
       Object {
+        "horizontal": "right",
         "vertical": "bottom",
       }
     }
-    onRequestClose={[Function]}
+    onClose={[Function]}
     open={false}
   >
     <WithStyles(UserMenu)

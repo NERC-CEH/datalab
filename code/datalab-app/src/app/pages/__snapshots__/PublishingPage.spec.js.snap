@@ -4,7 +4,7 @@ exports[`PublishingPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
   <WithStyles(Typography)
     gutterBottom={true}
-    type="display1"
+    variant="h4"
   >
     Published Sites
   </WithStyles(Typography)>

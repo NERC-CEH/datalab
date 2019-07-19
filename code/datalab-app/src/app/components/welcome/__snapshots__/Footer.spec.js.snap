@@ -11,12 +11,12 @@ exports[`Footer renders correct snapshot 1`] = `
   />
   <WithStyles(Typography)
     gutterBottom={true}
-    type="caption"
+    variant="caption"
   >
     © Copyright NERC 2017
   </WithStyles(Typography)>
   <WithStyles(Typography)
-    type="body1"
+    variant="body2"
   >
     Version: pre-release
   </WithStyles(Typography)>

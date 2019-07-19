@@ -17,7 +17,7 @@ exports[`DescribeElementCardBanner renders correct snapshot 1`] = `
     </WithStyles(Icon)>
     <WithStyles(Typography)
       className="DescribeElementCardBanner-cardTitle-1"
-      type="headline"
+      variant="h5"
     >
       expectedTitle
     </WithStyles(Typography)>
@@ -37,7 +37,7 @@ exports[`DescribeElementCardBanner renders correct snapshot with switches 1`] = 
   >
     <WithStyles(Typography)
       className="DescribeElementCardBanner-tallCardTitle-2"
-      type="headline"
+      variant="h5"
     >
       expectedTitle
     </WithStyles(Typography)>

@@ -4,7 +4,7 @@ exports[`SparkPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
   <WithStyles(Typography)
     gutterBottom={true}
-    type="display1"
+    variant="h4"
   >
     Spark
   </WithStyles(Typography)>

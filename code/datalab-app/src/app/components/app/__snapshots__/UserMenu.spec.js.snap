@@ -15,12 +15,12 @@ exports[`UserMenu renders correct snapshot 1`] = `
       className="UserMenu-userInfo-4"
     >
       <WithStyles(Typography)
-        type="body1"
+        variant="body1"
       >
         expectedNickname
       </WithStyles(Typography)>
       <WithStyles(Typography)
-        type="body2"
+        variant="body1"
       >
         expectedName
       </WithStyles(Typography)>
@@ -28,7 +28,6 @@ exports[`UserMenu renders correct snapshot 1`] = `
   </div>
   <WithStyles(Button)
     color="primary"
-    raised={true}
   >
     Logout
   </WithStyles(Button)>

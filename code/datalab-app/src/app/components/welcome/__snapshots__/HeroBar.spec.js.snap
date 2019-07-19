@@ -11,7 +11,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
   />
   <WithStyles(Typography)
     className="HeroBar-tagLine-3"
-    type="title"
+    variant="h6"
   >
     DataLabs provides you with tools to power your research and share the results
   </WithStyles(Typography)>

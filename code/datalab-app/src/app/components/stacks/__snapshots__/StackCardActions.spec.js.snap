@@ -23,12 +23,12 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       color="primary"
       disabled={false}
       onClick={[Function]}
-      raised={true}
       style={
         Object {
           "marginRight": 4,
         }
       }
+      variant="contained"
     >
       Open
     </WithStyles(Button)>
@@ -44,16 +44,16 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     }
   >
     <WithStyles(Button)
-      color="accent"
+      color="secondary"
       disabled={false}
       onClick={[Function]}
-      raised={true}
       style={
         Object {
           "marginLeft": 4,
           "marginRight": 4,
         }
       }
+      variant="contained"
     >
       Delete
     </WithStyles(Button)>
@@ -69,15 +69,15 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     }
   >
     <WithStyles(Button)
-      color="accent"
+      color="secondary"
       disabled={false}
       onClick={[Function]}
-      raised={true}
       style={
         Object {
           "marginLeft": 4,
         }
       }
+      variant="contained"
     >
       Edit
     </WithStyles(Button)>
