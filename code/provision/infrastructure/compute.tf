@@ -16,7 +16,7 @@ resource "openstack_compute_instance_v2" "bastion" {
 
   metadata = {
     ssh_user    = local.ssh_user
-    groups      = "bastion"
+    groups      = "bastion,${var.site}"
     depends_on  = var.tenant_network
   }
 
@@ -42,7 +42,7 @@ resource "openstack_compute_instance_v2" "load_balancer" {
 
   metadata = {
     ssh_user    = local.ssh_user
-    groups      = "load-balancers,prod-load-balancers,proxied"
+    groups      = "load-balancers,prod-load-balancers,proxied,${var.site}"
     depends_on  = var.tenant_network
   }
 }
@@ -64,7 +64,7 @@ resource "openstack_compute_instance_v2" "test_load_balancer" {
 
   metadata = {
     ssh_user    = local.ssh_user
-    groups      = "load-balancers,test-load-balancers,proxied"
+    groups      = "load-balancers,test-load-balancers,proxied,${var.site}"
     depends_on  = var.tenant_network
   }
 }
@@ -87,7 +87,7 @@ resource "openstack_compute_instance_v2" "k8s_master" {
 
   metadata = {
     ssh_user    = local.ssh_user
-    groups      = "k8s-master,k8s-cluster,proxied"
+    groups      = "k8s-master,k8s-cluster,proxied,${var.site}"
     depends_on  = var.tenant_network
   }
 }
@@ -110,7 +110,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
   metadata = {
     ssh_user   = local.ssh_user
-    groups     = "k8s-node,k8s-cluster,proxied"
+    groups     = "k8s-node,k8s-cluster,proxied,${var.site}"
     depends_on = var.tenant_network
   }
 }
@@ -133,7 +133,7 @@ resource "openstack_compute_instance_v2" "gluster_node" {
 
   metadata = {
     ssh_user   = local.ssh_user
-    groups     = "gluster-node,proxied"
+    groups     = "gluster-node,proxied,${var.site}"
     depends_on = var.tenant_network
   }
 }
@@ -155,7 +155,7 @@ resource "openstack_compute_instance_v2" "discourse" {
 
   metadata = {
     ssh_user   = local.ssh_user
-    groups     = "discourse,prod-discourse,proxied"
+    groups     = "discourse,prod-discourse,proxied,${var.site}"
     depends_on = var.tenant_network
   }
 }
@@ -177,7 +177,7 @@ resource "openstack_compute_instance_v2" "test_discourse" {
 
   metadata = {
     ssh_user   = local.ssh_user
-    groups     = "discourse,test-discourse,proxied"
+    groups     = "discourse,test-discourse,proxied,${var.site}"
     depends_on = var.tenant_network
   }
 }

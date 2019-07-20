@@ -1,0 +1,7 @@
+datalabs_domain: datalabs.nerc.ac.uk
+test_datalabs_domain: test-datalabs.nerc.ac.uk
+
+bastion_ip_address: 192.171.139.87
+bastion_internal_ip_address: 192.168.3.16
+external_proxy_internal_ip_address: 192.168.3.6
+test_proxy_internal_ip_address: 192.168.3.24

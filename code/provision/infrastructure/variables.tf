@@ -1,3 +1,8 @@
+variable "site" {
+  type = string
+  description = "The site name for the instances"
+}
+
 variable "openstack_keypair" {
   type = string
   description = "The keypair to be used."

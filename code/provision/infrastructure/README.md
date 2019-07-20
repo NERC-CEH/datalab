@@ -190,10 +190,7 @@ servers:
 
 ### Improvements
 
-* Use a remote store for `.tfstate` files to allow multiple users to work on this.
 * Script the process to remove the need to run multiple commands.
-* Improve the dynamic inventory to handle both public and private servers removing the
-need to tweak the hosts file - probably not needed as hosts files suffice.
 
 ## Note on Dynamic Inventory
 

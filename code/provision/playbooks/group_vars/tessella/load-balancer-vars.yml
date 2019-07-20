@@ -1,0 +1,2 @@
+prod_wildcard_domain: "*.datalabs.nerc.ac.uk"
+test_wildcard_domain: "*.test-datalabs.nerc.ac.uk"
