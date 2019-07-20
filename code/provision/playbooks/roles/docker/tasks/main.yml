@@ -32,12 +32,12 @@
     state: present
 
 - apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    repo: "{{docker_repository}}"
     state: present
 
 - name: Update repositories cache and install docker
   apt:
-    name: "docker-{{ docker_edition }}={{ docker_version }}~{{ docker_edition }}-0~{{ ansible_distribution | lower }}-xenial"
+    name: "docker-ce={{ docker_version }}"
     update_cache: yes
 
 # Docker post installation steps
