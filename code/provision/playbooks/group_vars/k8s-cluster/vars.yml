@@ -1,3 +1,13 @@
+kube_master_ip: "{{ hostvars[groups['k8s-master'][1]].openstack.private_v4 }}"
+kube_version: v1.15.0
+kube_join_token: "{{ vault_kube_join_token }}"
+kubeadmin_config: /etc/kubernetes/admin.conf
+
+init_opts: ""     # 1.8.x feature: --feature-gates SelfHosting=true
+kubeadm_opts: ""  # For example: kubeadm_opts: '--apiserver-cert-extra-sans "k8s.domain.com"'
+
+enable_dashboard: yes
+
 heketi_admin_key: "{{ vault_heketi_admin_key }}"
 heketi_user_key: "{{ vault_heketi_user_key }}"
 
