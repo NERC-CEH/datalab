@@ -1,6 +1,14 @@
 ansible_python_interpreter: /usr/bin/python3
 
 deploy_user: ubuntu
+logwatch_email: "{{ vault_logwatch_email }}"
+
+base_packages:
+  - aptitude
+  - ufw
+  - fail2ban
+  - unattended-upgrades
+  - logwatch
 
 # Standard ports
 ssh_port: 22

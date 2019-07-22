@@ -1,3 +1,5 @@
+site: tessella
+
 datalabs_domain: datalabs.nerc.ac.uk
 test_datalabs_domain: test-datalabs.nerc.ac.uk
 
@@ -5,3 +7,29 @@ bastion_ip_address: 192.171.139.87
 bastion_internal_ip_address: 192.168.3.16
 external_proxy_internal_ip_address: 192.168.3.6
 test_proxy_internal_ip_address: 192.168.3.24
+
+access_public_keys:
+  - gary_rsa.pub
+  - josh_rsa.pub
+  - alex_rsa.pub
+  - andy_rsa.pub
+
+# Configuration for Terraform State Server
+server_image: ubuntu-1804-datalabs-20190104
+key_name: llogr-c9834a39ddef2dd489d7bd976d0ac79c
+network: nerc-datalab-U-internal
+external_ip: 192.171.139.88
+management_ips:
+  - port: 22
+    ip_range: 130.246.243.0/24
+  - port: 80
+    ip_range: 130.246.243.0/24
+  - port: 22
+    ip_range: 192.168.3.93/32
+  - port: 80
+    ip_range: 130.246.189.181/32
+  - port: 80
+    ip_range: 130.246.188.147/32
+  - port: 22
+    ip_range: 212.140.132.200/32
+

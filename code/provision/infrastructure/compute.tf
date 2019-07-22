@@ -19,10 +19,6 @@ resource "openstack_compute_instance_v2" "bastion" {
     groups      = "bastion,${var.site}"
     depends_on  = var.tenant_network
   }
-
-  provisioner "local-exec" {
-    command = "sed s/USER/${local.ssh_user}/ templates/ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${var.bastion_fips[0]}/ > group_vars/proxied.yml"
-  }
 }
 
 resource "openstack_compute_instance_v2" "load_balancer" {
