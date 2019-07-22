@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { CardContent } from 'material-ui/Card';
-import Icon from 'material-ui/Icon';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import CardContent from '@material-ui/core/CardContent';
+import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography';
 
 const cardTitle = {
   fontWeight: 'lighter',
@@ -26,7 +26,7 @@ const DescribeElementCardBanner = ({ classes, icon, title, doubleHeight }) => (
   <CardContent>
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       {icon ? <Icon className={classes.icon}>{icon}</Icon> : undefined}
-      <Typography className={doubleHeight ? classes.tallCardTitle : classes.cardTitle} type="headline">
+      <Typography className={doubleHeight ? classes.tallCardTitle : classes.cardTitle} variant="h5">
         {title}
       </Typography>
     </div>

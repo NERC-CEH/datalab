@@ -21,9 +21,7 @@ function parseCookies(cookies) {
       const cookieValue = splitCookie[1];
 
       if (cookieName === 'user-id') {
-        const splitValue = cookieValue.split('|');
-        accumulator.expires = splitValue[1]; // eslint-disable-line no-param-reassign
-        accumulator.token = splitValue[2]; // eslint-disable-line no-param-reassign
+        [, accumulator.expires, accumulator.token] = cookieValue.split('|');
       }
 
       if (cookieName === 'csrf-token') {

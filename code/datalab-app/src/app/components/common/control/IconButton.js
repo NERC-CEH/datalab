@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import { withStyles } from '@material-ui/core/styles';
 
 function styles(theme) {
   const buttonBaseStyle = {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit * 1,
   };
 
   return {
@@ -26,7 +26,7 @@ function styles(theme) {
       },
     },
     icon: {
-      marginLeft: theme.spacing.unit,
+      marginLeft: theme.spacing.unit * 1,
     },
   };
 }
@@ -36,8 +36,7 @@ const IconButton = ({ classes, onClick, children, icon, danger = false, disabled
       className={danger ? classes.buttonDanger : classes.button}
       onClick={onClick}
       color={danger ? undefined : 'accent'}
-      disabled={disabled}
-      raised >
+      disabled={disabled} >
       {children}
       <Icon className={classes.icon} children={icon} />
     </Button>

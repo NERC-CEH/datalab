@@ -14,8 +14,8 @@ exports[`LoadDataStorage Modal Wrapper is a container which creates correct snap
       },
     ]
   }
-  onCancel={[Function]}
-  onSubmit={[Function]}
+  onCancel={[MockFunction]}
+  onSubmit={[MockFunction]}
   title="Title"
 />
 `;

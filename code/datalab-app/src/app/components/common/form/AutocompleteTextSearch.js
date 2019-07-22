@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'material-ui/Chip';
-import TextField from 'material-ui/TextField';
-import { MenuItem } from 'material-ui/Menu';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
+import Chip from '@material-ui/core/Chip';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 import Downshift from 'downshift';
 import { find } from 'lodash';
 
@@ -19,14 +19,14 @@ const styles = theme => ({
   },
   paper: {
     zIndex: 1,
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 1,
     left: 0,
     right: 0,
     maxHeight: '75%',
     overflow: 'auto',
   },
   chip: {
-    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
+    margin: `${theme.spacing.unit * 0.5}px ${theme.spacing.unit * 0.25}px`,
   },
   inputRoot: {
     flexWrap: 'wrap',
@@ -76,7 +76,7 @@ class DownshiftMultiple extends Component {
                       className={classes.chip}
                       onRequestDelete={this.props.removeItem && this.handleDelete(item)}
                     />
-                  )),
+                )),
                 onChange: this.handleInputChange,
                 placeholder: this.props.placeholder,
               }),

@@ -25,6 +25,12 @@
         "maxEOF": 1
       }
     ],
+    "object-curly-newline": ["error", { "consistent": true }],
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off",
+    "operator-linebreak": ["error", "after"],
+    "no-else-return": ["error", { "allowElseIf": true }],
+    "prefer-promise-reject-errors": "off",
     "import/no-extraneous-dependencies": [
       "error", {
         "devDependencies": [
@@ -45,8 +51,6 @@
     "react/require-default-props": "off"
   },
   "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "ecmaVersion": 2018
   }
 }

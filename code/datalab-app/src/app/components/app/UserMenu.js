@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import auth from '../../auth/auth';
 
 const styles = theme => ({
@@ -31,12 +31,11 @@ const UserMenu = ({ classes, identity, closePopover }) => (
     <div className={classes.identity}>
       <Avatar className={classes.userImage} src={identity.picture} />
       <div className={classes.userInfo}>
-        <Typography type="body1">{identity.nickname}</Typography>
-        <Typography type="body2">{identity.name}</Typography>
+        <Typography variant="body1">{identity.nickname}</Typography>
+        <Typography variant="body1">{identity.name}</Typography>
       </div>
     </div>
     <Button
-      raised
       color="primary"
       onClick={closePopover(auth.logout)}
     >

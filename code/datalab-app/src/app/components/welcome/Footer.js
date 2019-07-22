@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import logo from '../../../assets/images/datalabs-mono.png';
 import version from '../../version';
 
@@ -24,8 +24,8 @@ const styles = theme => ({
 const Footer = ({ classes, invert }) => (
   <div className={invert ? classes.invertFooter : classes.footer} >
     <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
-    <Typography type="caption" gutterBottom>{copyrightString}</Typography>
-    <Typography type="body1">{`Version: ${version || 'pre-release'}`}</Typography>
+    <Typography variant="caption" gutterBottom>{copyrightString}</Typography>
+    <Typography variant="body2">{`Version: ${version || 'pre-release'}`}</Typography>
   </div>
 );
 

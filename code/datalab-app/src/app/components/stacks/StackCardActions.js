@@ -1,25 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardActions } from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import { READY } from '../../../shared/statusTypes';
 
 const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
-                            deletePermission, editPermission }) => (
+  deletePermission, editPermission }) => (
   <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
     <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
-      <Button style={{ marginRight: 4 }} color="primary" raised disabled={!openStack || !isReady(stack)} onClick={() => openStack(stack.id)}>
+      <Button
+        style={{ marginRight: 4 }}
+        color="primary"
+        disabled={!openStack || !isReady(stack)}
+        onClick={() => openStack(stack.id)}
+        variant="contained" >
         Open
       </Button>
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-      <Button style={{ marginLeft: 4, marginRight: 4 }} color="accent" raised disabled={!deleteStack || !isReady(stack)} onClick={() => deleteStack(stack)}>
+      <Button
+        style={{ marginLeft: 4, marginRight: 4 }}
+        color="secondary"
+        disabled={!deleteStack || !isReady(stack)}
+        onClick={() => deleteStack(stack)}
+        variant="contained">
         Delete
       </Button>
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
-      <Button style={{ marginLeft: 4 }} color="accent" raised disabled={!editStack || !isReady(stack)} onClick={() => editStack(stack)}>
+      <Button
+        style={{ marginLeft: 4 }}
+        color="secondary"
+        disabled={!editStack || !isReady(stack)}
+        onClick={() => editStack(stack)}
+        variant="contained"
+      >
         Edit
       </Button>
     </PermissionWrapper>

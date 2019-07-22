@@ -14,7 +14,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
         }
       }
     />
-    <withStyles(SideBar)
+    <WithStyles(SideBar)
       userPermissions={
         Array [
           "expectedPermission",

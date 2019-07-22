@@ -24,7 +24,7 @@ exports[`Stack API should log error detail on failed creation request 3`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "failedRequest",
+    "message": [Error: failedRequest],
     "metadata": undefined,
   },
 ]
@@ -38,7 +38,7 @@ exports[`Stack API should log error detail on failed deletion request 3`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "failedRequest",
+    "message": [Error: failedRequest],
     "metadata": undefined,
   },
 ]

@@ -20,7 +20,7 @@ function permissionCheck(requiredPermissions, { permissions }, next) {
 
   if (!arraysIncludes(requiredPermissions, grantedPermissions)) {
     logger.warn('Auth: permission check: FAILED');
-    return Promise.reject(`User missing expected permission(s): ${requiredPermissions}`);
+    return Promise.reject(new Error(`User missing expected permission(s): ${requiredPermissions}`));
   }
 
   logger.info('Auth: permission check: PASSED');

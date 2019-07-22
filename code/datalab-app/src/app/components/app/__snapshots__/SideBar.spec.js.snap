@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar correctly renders correct snapshot 1`] = `
-<withStyles(Drawer)
+<WithStyles(Drawer)
   classes={
     Object {
       "paper": "SideBar-drawerPaper-2",
     }
   }
-  type="permanent"
+  variant="permanent"
 >
   <header
     className="SideBar-header-1"
@@ -18,10 +18,10 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       src="datalabs-hori.png"
     />
   </header>
-  <withStyles(List)
+  <WithStyles(List)
     className="SideBar-drawerList-4"
   >
-    <withStyles(Link)
+    <WithStyles(Link)
       icon="dashboard"
       label="Dashboard"
       to="/"
@@ -35,18 +35,18 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         ]
       }
     >
-      <withStyles(SideBarSubheader)>
+      <WithStyles(SideBarSubheader)>
         Data
-      </withStyles(SideBarSubheader)>
-      <withStyles(Link)
+      </WithStyles(SideBarSubheader)>
+      <WithStyles(Link)
         icon="storage"
         label="Storage"
         to="/storage"
       />
     </ComponentWrapper>
-    <withStyles(SideBarSubheader)>
+    <WithStyles(SideBarSubheader)>
       Analysis
-    </withStyles(SideBarSubheader)>
+    </WithStyles(SideBarSubheader)>
     <ComponentWrapper
       permission="project:stacks:list"
       userPermissions={
@@ -56,18 +56,18 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         ]
       }
     >
-      <withStyles(Link)
+      <WithStyles(Link)
         icon="book"
         label="Notebooks"
         to="/notebooks"
       />
     </ComponentWrapper>
-    <withStyles(Link)
+    <WithStyles(Link)
       icon="apps"
       label="Dask"
       to="/dask"
     />
-    <withStyles(Link)
+    <WithStyles(Link)
       icon="apps"
       label="Spark"
       to="/spark"
@@ -81,10 +81,10 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         ]
       }
     >
-      <withStyles(SideBarSubheader)>
+      <WithStyles(SideBarSubheader)>
         Publish
-      </withStyles(SideBarSubheader)>
-      <withStyles(Link)
+      </WithStyles(SideBarSubheader)>
+      <WithStyles(Link)
         icon="web"
         label="Sites"
         to="/publishing"
@@ -93,22 +93,25 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     <div
       className="SideBar-spacer-5"
     />
-    <withStyles(Divider) />
-    <withStyles(Link)
+    <WithStyles(Divider) />
+    <WithStyles(Link)
       icon="question_answer"
+      key="nav-link-Discourse"
       label="Discourse"
       onClick={[Function]}
     />
-    <withStyles(Link)
+    <WithStyles(Link)
       icon="message"
+      key="nav-link-Slack"
       label="Slack"
       onClick={[Function]}
     />
-    <withStyles(Link)
+    <WithStyles(Link)
       icon="help_outline"
+      key="nav-link-Help"
       label="Help"
       onClick={[Function]}
     />
-  </withStyles(List)>
-</withStyles(Drawer)>
+  </WithStyles(List)>
+</WithStyles(Drawer)>
 `;

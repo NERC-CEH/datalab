@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackStatus creates correct snapshot for status types 1`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-textInvert-2"
   style={
@@ -12,11 +12,11 @@ exports[`StackStatus creates correct snapshot for status types 1`] = `
   type="caption"
 >
   Requested
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 2`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-text-1"
   style={
@@ -27,11 +27,11 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
   type="caption"
 >
   Creating
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 3`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-text-1"
   style={
@@ -42,11 +42,11 @@ exports[`StackStatus creates correct snapshot for status types 3`] = `
   type="caption"
 >
   Ready
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 4`] = `
-<withStyles(Typography)
+<WithStyles(Typography)
   align="center"
   className="StackStatus-textInvert-2"
   style={
@@ -57,5 +57,5 @@ exports[`StackStatus creates correct snapshot for status types 4`] = `
   type="caption"
 >
   Unavailable
-</withStyles(Typography)>
+</WithStyles(Typography)>
 `;

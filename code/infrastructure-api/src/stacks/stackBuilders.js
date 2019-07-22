@@ -30,7 +30,7 @@ export const createService = (name, type, generator) => () => {
 export const createIngressRule = (name, type, datalabInfo, generator) => (service) => {
   const ingressName = `${type}-${name}`;
   const serviceName = service.metadata.name;
-  const port = service.spec.ports[0].port;
+  const { port } = service.spec.ports[0];
 
   return generator({ name, datalabInfo, ingressName, serviceName, port })
     .then((manifest) => {
@@ -44,7 +44,7 @@ export const createIngressRuleWithConnect = (params, generator) => (service) => 
   const { name, type, datalabInfo, rewriteTarget } = params;
   const ingressName = `${type}-${name}`;
   const serviceName = service.metadata.name;
-  const port = service.spec.ports[0].port;
+  const { port } = service.spec.ports[0];
   const connectPort = service.spec.ports[1].port;
 
   return generator({ name, datalabInfo, ingressName, serviceName, port, connectPort, rewriteTarget })

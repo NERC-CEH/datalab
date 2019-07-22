@@ -1,57 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCard renders correct snapshot 1`] = `
-<withStyles(GridWrapper)
+<WithStyles(Grid)
   item={true}
   md={4}
   sm={6}
   xs={12}
 >
-  <Card
+  <WithStyles(Card)
     className="DescribeElementCard-shadedCard-2"
-    raised={false}
     square={true}
   >
     <div
       className="DescribeElementCard-cardContent-3"
     >
-      <withStyles(DescribeElementCardBanner)
+      <WithStyles(DescribeElementCardBanner)
         icon="people"
+        key="card-banner"
         title="expectedTitle"
       />
-      <withStyles(DescribeElementCardBody)
+      <WithStyles(DescribeElementCardBody)
         content="expectedContent"
+        key="card-body"
       />
     </div>
-  </Card>
-</withStyles(GridWrapper)>
+  </WithStyles(Card)>
+</WithStyles(Grid)>
 `;
 
 exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
-<withStyles(GridWrapper)
+<WithStyles(Grid)
   item={true}
   md={4}
   sm={6}
   xs={12}
 >
-  <Card
+  <WithStyles(Card)
     className="DescribeElementCard-card-1"
-    raised={false}
     square={true}
   >
     <div
       className="DescribeElementCard-cardContent-3"
     >
-      <withStyles(DescribeElementCardBody)
+      <WithStyles(DescribeElementCardBody)
         content="moreContent"
+        key="card-body"
         media={true}
         quote={true}
       />
-      <withStyles(DescribeElementCardBanner)
+      <WithStyles(DescribeElementCardBanner)
+        key="card-banner"
         quote={true}
         title="expectedTitle"
       />
       <DescribeElementCardLinks
+        key="card-links"
         links={
           Array [
             Object {
@@ -62,6 +65,6 @@ exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
         }
       />
     </div>
-  </Card>
-</withStyles(GridWrapper)>
+  </WithStyles(Card)>
+</WithStyles(Grid)>
 `;

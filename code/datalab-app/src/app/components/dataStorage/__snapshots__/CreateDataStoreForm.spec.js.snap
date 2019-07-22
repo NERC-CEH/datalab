@@ -60,9 +60,8 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       placeholder="Description"
     />
   </div>
-  <withStyles(Button)
+  <WithStyles(Button)
     color="primary"
-    raised={true}
     style={
       Object {
         "margin": 8,
@@ -71,10 +70,9 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     type="submit"
   >
     Create
-  </withStyles(Button)>
-  <withStyles(Button)
-    onClick={[Function]}
-    raised={true}
+  </WithStyles(Button)>
+  <WithStyles(Button)
+    onClick={[MockFunction]}
     style={
       Object {
         "margin": 8,
@@ -82,6 +80,6 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
     }
   >
     Cancel
-  </withStyles(Button)>
+  </WithStyles(Button)>
 </form>
 `;

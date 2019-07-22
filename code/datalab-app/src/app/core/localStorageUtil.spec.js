@@ -3,6 +3,8 @@ import { addToLocalStorage, removeFromLocalStorage, getFromLocalStorage } from '
 
 describe('localStorageUtil', () => {
   beforeEach(() => {
+    // Workaround due to it failing upon multiple runs
+    delete global.localStorage;
     global.localStorage = new LocalStorageMock();
   });
 

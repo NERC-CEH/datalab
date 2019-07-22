@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import DescribeElementSegment from './DescribeElementSegment';
 import DescribeElementCard from './DescribeElementCard';
 
@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const DescribeElement = ({ classes, title, descriptions, invert, quote, media, doubleHeight }) => (
   <DescribeElementSegment invert={invert}>
-    <Typography className={classes.title} type="display1">{title}</Typography>
+    <Typography className={classes.title} variant="h4">{title}</Typography>
     <Grid container>
       {descriptions.map(({ icon, title: cardTitle, content: cardContent, links }, idx) => (
         <DescribeElementCard
