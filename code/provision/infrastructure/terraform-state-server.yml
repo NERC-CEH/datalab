@@ -34,7 +34,7 @@
         flavor: 12
         network: "{{ network }}"
         meta:
-          groups: terraform-state-server
+          groups: "terraform-state-server,{{ site }}"
         security_groups:
           - terraform-state-sg
         floating_ips:

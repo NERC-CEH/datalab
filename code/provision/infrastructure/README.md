@@ -94,11 +94,11 @@ it has been created.
 Execute the following three commands to create a Terraform State server:
 
 ```bash
-# In ./infrastructure directory target the desired site
-ansible-playbook terraform-state-server.yml --extra-vars "@sites/<sitefile>.yml"
+# In ./infrastructure directory create the terraform server. Additional configuration is required to target the site
+ansible-playbook terraform-state-server.yml --extra-vars "@group_vars/<site-dir>/all.yml"
 
 # Restart the server if the disk isn't correctly mounted
-ansible-playbook terraform-state-server-provision.yml --extra-vars "@sites/tessella.yml"
+ansible-playbook terraform-state-server-provision.yml
 
 # In ./playbooks
 ansible-playbook terraform-state-server.yml
