@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import byUser from './queryHelper/filterByUser';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 export const REQUESTED = 'requested';
 export const CREATING = 'creating';
