@@ -1,10 +1,11 @@
-version: '3'
+version: '3.7'
 services:
   mongodb:
     image: mongo:3.4
     ports:
       - 27017:27017
-
+    networks:
+      - internal
   mongodb_import:
     build:
       context: $PWD/../config/mongo
@@ -16,5 +17,13 @@ services:
       - MONGO_INFRASTRUCTURE_DB_NAME=infrastructure
     depends_on:
       - mongodb
+    networks:
+      - internal
     volumes:
       - $PWD/../config/mongo:/tmp/mongodb/:ro
+
+networks:
+  internal:
+    ipam:
+      config:
+        - subnet: 172.16.60.0/24
