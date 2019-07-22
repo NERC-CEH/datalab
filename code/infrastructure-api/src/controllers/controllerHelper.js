@@ -29,7 +29,8 @@ const handleError = (response, action, type, name) => (error) => {
   response.status(500);
   response.send({
     message,
-    error: error.message });
+    error: error.message,
+  });
 };
 
 export default { validateAndExecute, sendSuccessfulCreation, sendSuccessfulDeletion, handleError };
