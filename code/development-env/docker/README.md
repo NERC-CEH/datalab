@@ -12,10 +12,10 @@
 * Change default namespace
   * `kubectl config set-context minikube --namespace=devtest`
     or `kubectx minikube && kubens devtest`
-* Create Persistent Volume Claim (PVC)
-  * `kubectl apply -f code/development-env/manifests/example-storage-pvc.yml`
 * Create Storage Class
   * `kubectl apply -f code/development-env/manifests/storage-class.yml`
+* Create Persistent Volume Claim (PVC)
+  * `kubectl apply -f code/development-env/manifests/example-storage-pvc.yml`
 
 ## Install Packages
 
@@ -78,10 +78,8 @@ export VAULT_APP_ROLE= # Set to value output from command on line above
 kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 ```
 
-* Start DataLab APP/API, Infrastructure Api and Auth services. If running on Mac or
-  Linux, replace `<platform>` with `mac` or `linux` as appropriate. Otherwise, remove
-  `-f docker-compose-app.<platform>.yml` from command.
+* Start DataLab APP/API, Infrastructure Api and Auth services.
 
 ```bash
-docker-compose -f docker-compose-app.yml -f docker-compose-app.<platform>.yml up
+docker-compose -f docker-compose-app.yml up
 ```

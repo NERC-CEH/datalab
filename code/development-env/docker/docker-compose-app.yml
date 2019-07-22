@@ -6,7 +6,7 @@ x-common-variables: &common
   INFRASTRUCTURE_API: http://datalab-infra:8003
   KUBERNETES_API: http://host.docker.internal:8001
   LOG_LEVEL: ${LOG_LEVEL:-info}
-  VAULT_API: vault
+  VAULT_API: http://vault:8200
   VAULT_APP_ROLE: ${VAULT_APP_ROLE}
 
 services:
@@ -43,6 +43,7 @@ services:
     links:
       - datalab-auth
       - mongodb
+      - vault
 
   datalab-api:
     image: node:8
@@ -65,6 +66,7 @@ services:
       - datalab-auth
       - datalab-infra
       - mongodb
+      - vault
 
   datalab-app:
     image: node:8

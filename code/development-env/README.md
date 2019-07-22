@@ -2,42 +2,27 @@
 
 ## Initial set-up
 
-### Using docker-machine (Windows)
+### Start MongoDB and Vault docker containers
 
-- Start docker-machine
-- Update mongo and vault addresses
-
-```bash
-DOCKER_ADDRESS=`docker-machine ip`
-export DATABASE_HOST=${DOCKER_ADDRESS}
-export VAULT_API="http://${DOCKER_ADDRESS}:8200"
-```
-
-### Start docker containers
-
-Mongo will be pre-seeded with data.
+MongoDB will be pre-seeded with data on start-up.
 
 ```bash
-docker-compose -f ./docker/docker-compose.yml up -d
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-vault up -d
 ```
 
-### Set-up minikube
+### Start and configure Minikube
 
 - Start minikube
-- Enable ingress controller
+  - `minikube start`
+- Enable add-ons
   - `minikube addons enable ingress`
+  - `minikube addona enable storage-provisioner-gluster`
 - Create namespace
-  - `kubectl create namespace test`
+  - `kubectl create namespace devtest`
 - Change default namespace
-  - `kubectl config set-context minikube --namespace=test`
-- Create and load TLS certificates
-  - see README in `./config/ca/`
+  - `kubectl config set-context minikube --namespace=devtest`
 - Update and apply manifests
   - see README in `./manifests/`
-
-### Start DNSMasq
-
-- See README in `./config/dnsmasq`
 
 
 ## Start local development environments
@@ -52,12 +37,7 @@ export VAULT_APP_ROLE= # Set to value from ./scripts/configure-vault.sh
 
 # Use stub Auth
 export AUTHORISATION_SERVICE_STUB=true
-
-# For docker machine
-export DATABASE_HOST=${DOCKER_ADDRESS}
-export VAULT_API="http://${DOCKER_ADDRESS}:8200"
 ```
-
 
 ### Infrastructure API
 
@@ -66,11 +46,8 @@ export VAULT_API="http://${DOCKER_ADDRESS}:8200"
 - Start infrastructure api 'yarn start'
 
 ```bash
-export KUBERNETES_NAMESPACE=test # Or minikube namespace
+export KUBERNETES_NAMESPACE=devtest # Or minikube namespace
 export VAULT_APP_ROLE= # Set to value from ./scripts/configure-vault.sh
-
-# For docker machine
-export VAULT_API="http://${DOCKER_ADDRESS}:8200"
 ```
 
 ### Authorisation service
@@ -82,3 +59,19 @@ export AUTHORISATION_API_CLIENT_ID= # from Auth0
 export AUTHORISATION_API_CLIENT_SECRET= # from Auth0
 export AUTHORISATION_API_IDENTIFIER= # from Auth0
 ```
+
+### Start APP/API, Auth and Infra Services
+
+Local services may either be started on the local host directly, `yarn start` in
+the service directory, or by starting the services with docker-compose see
+README in `./docker`.
+
+
+### (Optional) Start DNSMasq
+
+Chrome will resolve sub-domains on the localhost  domain (ie. `*.localhost`) to
+the host machine, other browser may not response the same way. If a domain other
+than `*.localhost` is used for local development a local DNS must be set-up to
+resolve from a browser.
+
+- See README in `./config/dnsmasq`
