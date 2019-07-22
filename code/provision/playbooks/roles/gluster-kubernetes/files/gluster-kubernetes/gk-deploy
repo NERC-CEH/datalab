@@ -42,6 +42,7 @@ SSH_PORT="22"
 ADMIN_KEY=""
 USER_KEY=""
 DAEMONSET_LABEL=""
+SINGLE_NODE=0
 DEPLOY_OBJECT=1
 OBJ_ACCOUNT=""
 OBJ_USER=""
@@ -53,7 +54,7 @@ usage() {
   echo -e "USAGE: ${PROG} [-ghvy] [-c CLI] [-t <TEMPLATES>] [-n NAMESPACE] [-w <SECONDS>]
        [-s <KEYFILE>] [--ssh-user <USER>] [--ssh-port <PORT>]
        [--admin-key <ADMIN_KEY>] [--user-key <USER_KEY>] [-l <LOG_FILE>]
-       [--daemonset-label <DAEMONSET_LABEL> ] [--no-object]
+       [--daemonset-label <DAEMONSET_LABEL> ] [--single-node] [--no-object]
        [--object-account <ACCOUNT>] [--object-user <USER>]
        [--object-password <PASSWORD>] [--object-sc <STORAGE_CLASS>]
        [--object-capacity <CAPACITY>] [-l <LOG_FILE>] [--abort] [<TOPOLOGY>]\n"
@@ -109,17 +110,21 @@ Options:
 
   --admin-key ADMIN_KEY
               Secret string for heketi admin user. heketi admin has access to
-              all APIs and commands. Default is to use no secret.
+              all APIs and commands. This is a required argument.
 
   --user-key USER_KEY
               Secret string for general heketi users. heketi users have access
-              to only Volume APIs. Used in dynamic provisioning. Default is to
-              use no secret.
+              to only Volume APIs. Used in dynamic provisioning. This is a
+              required argument.
 
   --daemonset-label DAEMONSET_LABEL
               Controls the value of the label set on nodes which will host pods
               from the GlusterFS daemonset. This allows for multiple GlusterFS
               daemonsets to run in the same cluster. Default is 'glusterfs'.
+
+  --single-node
+              Deploy as few pods as needed, no redundancy for the heketi
+              database storage volume.
 
   --no-object
               Don't deploy a gluster-s3 container. Default is to deploy.
@@ -214,6 +219,7 @@ abort() {
   debug "Removing heketi resources."
   eval_output "${CLI} delete all,svc,jobs,deploy,secret --selector=\"deploy-heketi\" 2>&1"
   eval_output "${CLI} delete all,svc,deploy,secret,sa,clusterrolebinding --selector=\"heketi\" 2>&1"
+  eval_output "${CLI} delete svc heketi-storage-endpoints 2>&1"
   if [[ "${CLI}" == *oc\ * ]]; then
     eval_output "${CLI} delete dc,route,template --selector=\"deploy-heketi\" 2>&1"
     eval_output "${CLI} delete dc,route,template --selector=\"heketi\" 2>&1"
@@ -334,7 +340,7 @@ check() {
       break
     fi
     sleep 2
-    res=$(${CLI} get "${resource}" --no-headers --show-all "${select}" 2>/dev/null)
+    res=$(${CLI} get "${resource}" --no-headers "${select}" 2>/dev/null)
     if [[ ${s} -ne 0 ]] && [[ ${VERBOSE} -eq 1 ]]; then
       reslines=$(echo "$res" | wc -l)
       ((reslines+=1))
@@ -456,6 +462,10 @@ while [[ $# -ge 1 ]]; do
         -daemonset-label*)
         DAEMONSET_LABEL=$(assign "${key:${keypos}}" "${2}")
         if [[ $? -eq 2 ]]; then shift; fi
+        keypos=$keylen
+        ;;
+        -single-node)
+        SINGLE_NODE=1
         keypos=$keylen
         ;;
         -no-object)
@@ -586,6 +596,11 @@ END
     echo -e "$NODES \nFix json format and rerun"
     exit 1
   fi
+fi
+
+if [[ "x${ADMIN_KEY}" == "x" || "x${USER_KEY}" == "x"  ]]; then
+  output "heketi admin and user keys are required!"
+  exit 1
 fi
 
 if [[ "x${CLI}" == "x" ]]; then
@@ -767,7 +782,7 @@ if [[ ${EXISTS_DEPLOY_HEKETI} -eq 0 ]] && [[ ${EXISTS_HEKETI} -eq 0 ]]; then
   sed -e "s/\${HEKETI_EXECUTOR}/${EXECUTOR}/" -e "s#\${HEKETI_FSTAB}#${FSTAB}#" -e "s/\${SSH_PORT}/${SSH_PORT}/" -e "s/\${SSH_USER}/${SSH_USER}/" -e "s/\${SSH_SUDO}/${SSH_SUDO}/" "${SCRIPT_DIR}/heketi.json.template" > heketi.json
   eval_output "${CLI} create secret generic heketi-config-secret --from-file=private_key=${SSH_KEYFILE} --from-file=./heketi.json --from-file=topology.json=${TOPOLOGY}"
   eval_output "${CLI} label --overwrite secret heketi-config-secret glusterfs=heketi-config-secret heketi=config-secret"
-  # rm -f heketi.json
+  rm -f heketi.json
   if [[ "${CLI}" == *oc\ * ]]; then
     eval_output "${CLI} process ${OC_PROCESS_VAL_SWITCH} HEKETI_EXECUTOR=${EXECUTOR} ${OC_PROCESS_VAL_SWITCH} HEKETI_FSTAB=${FSTAB} ${OC_PROCESS_VAL_SWITCH} HEKETI_ADMIN_KEY=${ADMIN_KEY} ${OC_PROCESS_VAL_SWITCH} HEKETI_USER_KEY=${USER_KEY} deploy-heketi | ${CLI} create -f - 2>&1"
   else
@@ -798,11 +813,15 @@ if [[ ${EXISTS_DEPLOY_HEKETI} -eq 1 ]] && [[ ${EXISTS_HEKETI} -eq 0 ]]; then
     heketi_service=$(${CLI} describe svc/deploy-heketi | grep "Endpoints:" | awk '{print $2}')
   done
 
+  heketi_pod=$(${CLI} get pod --no-headers --selector="deploy-heketi" | awk '{print $1}')
+
   if [[ "${CLI}" == *oc\ * ]]; then
     heketi_service=$(${CLI} describe routes/deploy-heketi | grep "Requested Host:" | awk '{print $3}')
+    hello=$(curl "http://${heketi_service}/hello" 2>/dev/null)
+   else
+    hello=$(${CLI} exec -i "${heketi_pod}" -- curl "http://${heketi_service}/hello" 2>/dev/null)
   fi
 
-  hello=$(curl "http://${heketi_service}/hello" 2>/dev/null)
   if [[ "${hello}" != "Hello from Heketi" ]]; then
     output "Failed to communicate with deploy-heketi service."
     if [[ "${CLI}" == *oc\ * ]]; then
@@ -813,7 +832,6 @@ if [[ ${EXISTS_DEPLOY_HEKETI} -eq 1 ]] && [[ ${EXISTS_HEKETI} -eq 0 ]]; then
     debug "OK"
   fi
 
-  heketi_pod=$(${CLI} get pod --no-headers --show-all --selector="deploy-heketi" | awk '{print $1}')
   heketi_cli="${CLI} exec -i ${heketi_pod} -- heketi-cli -s http://localhost:8080 --user admin --secret '${ADMIN_KEY}'"
 
   load_temp=$(mktemp)
@@ -833,7 +851,17 @@ if [[ ${EXISTS_DEPLOY_HEKETI} -eq 1 ]] && [[ ${EXISTS_HEKETI} -eq 0 ]]; then
   fi
 
   if [[ $("${heketi_cli}" volume list 2>&1) != *heketidbstorage* ]]; then
-    eval_output "${heketi_cli} setup-openshift-heketi-storage --listfile=/tmp/heketi-storage.json 2>&1"
+    durability=''
+    if [ ${SINGLE_NODE} -eq 1 ] ; then
+      durability='--durability=none'
+      eval_output "${heketi_cli} setup-openshift-heketi-storage --help ${durability} >/dev/null 2>&1"
+      if [[ ${?} != 0 ]]; then
+        output "Not able to setup openshift heketi storage with ${durability}"
+        output "This indicates that the heketi running in the pod does not support single-node deployments."
+        exit 1
+      fi
+    fi
+    eval_output "${heketi_cli} setup-openshift-heketi-storage --listfile=/tmp/heketi-storage.json ${durability} 2>&1"
     if [[ ${?} != 0 ]]; then
       output "Failed on setup openshift heketi storage"
       output "This may indicate that the storage must be wiped and the GlusterFS nodes must be reset."
@@ -893,6 +921,8 @@ while [[ "x${heketi_service}" == "x" ]] || [[ "${heketi_service}" == "<none>" ]]
   heketi_service=$(${CLI} describe svc/heketi | grep "Endpoints:" | awk '{print $2}')
 done
 
+heketi_pod=$(${CLI} get pod --no-headers --show-all --selector="heketi" | awk '{print $1}')
+
 if [[ "${CLI}" == *oc\ * ]]; then
   heketi_service=$(${CLI} describe routes/heketi | grep "Requested Host:" | awk '{print $3}')
 fi
@@ -915,7 +945,7 @@ administrative commands you can install 'heketi-cli' and use it as follows:
 You can find it at https://github.com/heketi/heketi/releases . Alternatively,
 use it from within the heketi pod:
 
-  # ${CLI} exec -i <HEKETI_POD> -- heketi-cli -s http://localhost:8080 --user admin --secret '<ADMIN_KEY>' cluster list
+  # ${CLI} exec -i ${heketi_pod} -- heketi-cli -s http://localhost:8080 --user admin --secret '<ADMIN_KEY>' cluster list
 
 For dynamic provisioning, create a StorageClass similar to this:
 

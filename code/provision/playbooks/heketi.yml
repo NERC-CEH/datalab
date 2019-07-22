@@ -3,6 +3,3 @@
 
   roles:
     - gluster-kubernetes
-
-  environment:
-      KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
