@@ -1,0 +1,8 @@
+---
+wildcard_domain: "{{ prod_wildcard_domain }}"
+
+ssl_certificate: "{{ vault_prod_ssl_certificate }}"
+ssl_private_key: "{{ vault_prod_ssl_private_key }}"
+
+ingress_service_http_port: "{{ prod_ingress_http_port }}"
+ingress_service_https_port: "{{ prod_ingress_https_port }}"

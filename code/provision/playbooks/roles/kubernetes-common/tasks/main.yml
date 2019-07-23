@@ -34,8 +34,7 @@
 - name: Install Kubernetes Components
   apt:
     update_cache: yes
-    name: "{{ item }}"
-  with_items: "{{ kubernetes_packages }}"
+    name: "{{ kubernetes_packages }}"
 
 - name: Open all ports for access fom workers
   ufw:

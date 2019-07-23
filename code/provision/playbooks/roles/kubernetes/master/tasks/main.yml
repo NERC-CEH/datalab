@@ -1,0 +1,40 @@
+---
+- name: Check if kubeadm has already run
+  stat:
+    path: "/etc/kubernetes/pki/ca.key"
+  register: kubeadm_ca
+
+- name: Init cluster if needed
+  include_tasks: init.yml
+  when: not kubeadm_ca.stat.exists
+  run_once: yes
+
+- name: Enable and check kubelet service
+  systemd:
+    name: kubelet
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  register: started_kubelet
+
+- name: Make local artifacts directory
+  file: path={{ playbook_dir }}/.artifacts state=directory
+  delegate_to: 127.0.0.1
+
+- name: Retrieve kubectl binary and Kubernetes admin config
+  fetch:
+    src: "{{ item.src }}"
+    dest: "{{ playbook_dir }}/.artifacts/{{ item.dest }}"
+    flat: yes
+  with_items:
+    - src: /usr/bin/kubectl
+      dest: kubectl
+    - src: /etc/kubernetes/admin.conf
+      dest: kubernetes-admin.conf
+
+- name: Update config file to use master host name
+  replace:
+    path: "{{ playbook_dir }}/.artifacts/kubernetes-admin.conf"
+    regexp: 'https:.*'
+    replace: 'https://k8s-master:6443'
+  delegate_to: 127.0.0.1

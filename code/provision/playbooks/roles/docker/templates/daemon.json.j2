@@ -1,3 +1,8 @@
 {
-  "graph": "{{ docker_storage_location }}"
+  "graph": "{{ docker_storage_location }}",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
 }

@@ -10,7 +10,7 @@
   ufw:
     rule: allow
     from_ip: "{{ hostvars[item].openstack.private_v4 }}"
-    port: 22
+    port: "22"
   with_items: "{{ groups['k8s-cluster'] }}"
 
 - name: Allow glusterfs UDP traffic

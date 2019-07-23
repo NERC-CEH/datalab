@@ -1,15 +1,15 @@
 ---
 gluster_tcp_ports:
   # Ports from https://www.jamescoyle.net/how-to/457-glusterfs-firewall-rules
-  - 111
+  - "111"
   # Gluster Daemon
-  - 24007
-  - 24008
+  - "24007"
+  - "24008"
   # Gluster Volume Ports (one per volume assigning recommended range)
-  - 49152:49251
+  - "49152:49251"
   # Gluster NFS service (38465-38476)
-  - 38465
-  - 38466
-  - 38467
+  - "38465"
+  - "38466"
+  - "38467"
 gluster_udp_ports:
-  - 111
+  - "111"

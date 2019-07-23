@@ -1,0 +1,53 @@
+---
+- name: Reset Kubernetes component
+  shell: "kubeadm reset --force"
+  register: reset_cluster
+
+- name: Init Kubernetes cluster
+  when: reset_cluster is succeeded
+  shell: |
+    kubeadm init --kubernetes-version {{ kube_version }} \
+                 --token {{ kube_join_token }} \
+                 --apiserver-advertise-address {{ kube_master_ip }} \
+                 {{ kubeadm_opts }} \
+                 {{ init_opts }}
+  register: init_cluster
+
+- name: Create Kubernetes config directory
+  file:
+    path: ".kube/"
+    state: directory
+
+- name: Copy admin.conf to Home directory
+  when: init_cluster is succeeded
+  copy:
+    src: "{{ kubeadmin_config }}"
+    dest: ".kube/config"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    mode: 0755
+    remote_src: true
+
+- name: Install WeaveNet pod network
+  shell: kubectl --kubeconfig={{ kubeadmin_config }} \
+      apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+- name: Ensure kube-dns has started
+  shell: >
+    kubectl --kubeconfig={{ kubeadmin_config }} -n kube-system get deployment -l k8s-app=kube-dns -o json |
+      jq '(.items|length > 0) and (.items|map(.status.replicas == .status.availableReplicas)|all)'
+  register: result
+  until: result.stdout == "true"
+  retries: 30
+  delay: 10
+
+- name: Deploy kubernetes dashboard into cluster
+  when: init_cluster is succeeded and enable_dashboard
+  command: |
+    kubectl --kubeconfig={{ kubeadmin_config }} \
+        apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
+  register: create_result
+  until: create_result.rc == 0
+  retries: 5
+  delay: 2
+  ignore_errors: true

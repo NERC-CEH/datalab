@@ -7,12 +7,24 @@
   roles:
     - docker
     - kubernetes-common
-    - kubernetes
-    - kubelet-configuration
     - { role: glusterfs, gluster_server: False }
     - app-armor
-  environment:
-    KUBECONFIG: /etc/kubernetes/admin.conf
+
+- name: Initialise Master Node
+  hosts: k8s-master
+  become: yes
+  become_method: sudo
+
+  roles:
+    - kubernetes/master
+
+- name: Initialise Worker Nodes
+  hosts: k8s-node
+  become: yes
+  become_method: sudo
+
+  roles:
+    - kubernetes/node
 
 - name: Configure Helm
   hosts: k8s-master
@@ -20,8 +32,7 @@
   roles:
     - helm
   environment:
-    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
-    HELM_HOME: "/home/ubuntu/helm"
+    HELM_HOME: "/home/{{ deploy_user }}/helm"
 
 - name: Base Datalabs kubernetes configuration
   hosts: k8s-master
@@ -34,7 +45,6 @@
     - role: kubernetes-secrets
 
   environment:
-    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
-    HELM_HOME: "/home/ubuntu/helm"
+    HELM_HOME: "/home/{{ deploy_user }}/helm"
   tags:
     - config

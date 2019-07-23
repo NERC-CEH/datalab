@@ -15,5 +15,4 @@
       datalab: "{{ prod_namespace }}"
 
   environment:
-    KUBECONFIG: "/home/{{ deploy_user }}/admin.conf"
     HELM_HOME: "/home/ubuntu/helm"

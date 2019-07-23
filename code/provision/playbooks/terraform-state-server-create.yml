@@ -1,0 +1,49 @@
+- name: Launch a Terraform State server
+  hosts: localhost
+
+  tasks:
+    - name: Add Security group
+      os_security_group:
+        state: present
+        name: terraform-state-sg
+        description: Security group for Terraform State server
+
+    - name: Add Security group rules
+      os_security_group_rule:
+        security_group: terraform-state-sg
+        protocol: tcp
+        port_range_min: "{{ item.port }}"
+        port_range_max: "{{ item.port }}"
+        remote_ip_prefix: "{{ item.ip_range }}"
+      with_items: "{{ management_ips }}"
+
+    - name: create 2g Volume
+      os_volume:
+        state: present
+        size: 2
+        display_name: tf-state-volume
+        wait: yes
+
+    - name: Launch an instance
+      os_server:
+        state: present
+        name: datalabs-terraform-state
+        image: "{{ server_image }}"
+        key_name: "{{ key_name }}"
+        timeout: 200
+        flavor: 12
+        network: "{{ network }}"
+        meta:
+          groups: "terraform-state-server,{{ site }}"
+        security_groups:
+          - terraform-state-sg
+        floating_ips:
+          - "{{ external_ip }}"
+        wait: yes
+
+    - name: Attach Volume
+      os_server_volume:
+        state: present
+        server: datalabs-terraform-state
+        volume: tf-state-volume
+        device: /dev/sdb
