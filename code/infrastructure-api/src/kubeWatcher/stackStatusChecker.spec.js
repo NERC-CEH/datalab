@@ -55,7 +55,7 @@ describe('Stack Status Checker', () => {
     });
   });
 
-  it('updates stack record for Creating stack', () => {
+  it('updates stack record for Requested stack', () => {
     getStacksMock.mockReturnValue(Promise.resolve([
       { name: 'expectedType-expectedPodName', status: 'Pending' },
     ]));
@@ -65,7 +65,7 @@ describe('Stack Status Checker', () => {
       expect(updateStatusMock).toHaveBeenCalledTimes(1);
       expect(updateStatusMock).toHaveBeenCalledWith({
         name: 'expectedPodName',
-        status: 'creating',
+        status: 'requested',
         type: 'expectedType',
       });
     });
