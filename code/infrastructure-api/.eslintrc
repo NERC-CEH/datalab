@@ -35,11 +35,14 @@
     "class-methods-use-this": "off",
     "import/no-named-default": "off",
     "no-use-before-define": "off",
-    "object-curly-newline": ["error", { "consistent": true }]
+    "object-curly-newline": ["error", { "consistent": true }],
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off",
+    "operator-linebreak": ["error", "after"],
+    "no-else-return": ["error", { "allowElseIf": true }],
+    "prefer-promise-reject-errors": "off"
   },
   "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "ecmaVersion": 2018
   }
 }
