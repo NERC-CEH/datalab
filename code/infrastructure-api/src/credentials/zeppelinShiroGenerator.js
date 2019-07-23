@@ -29,7 +29,7 @@ function generateHash(password, salt) {
   try {
     let hashVal = calculateDigest(salt + password);
     for (let i = 1; i < ITERATIONS; i += 1) {
-      hashVal = calculateDigest(new Buffer(hashVal, 'hex'));
+      hashVal = calculateDigest(Buffer.from(hashVal, 'hex'));
     }
 
     return hashVal;
@@ -43,8 +43,8 @@ function calculateDigest(valueToHash) {
 }
 
 function createShiroCredentialsString(salt, hexPasswordDigest) {
-  const base64Salt = new Buffer(salt).toString('base64');
-  const base64PasswordDigest = new Buffer(hexPasswordDigest, 'hex').toString('base64');
+  const base64Salt = Buffer.from(salt).toString('base64');
+  const base64PasswordDigest = Buffer.from(hexPasswordDigest, 'hex').toString('base64');
   return `$shiro1$SHA-256$${ITERATIONS}$${base64Salt}$${base64PasswordDigest}`;
 }
 
