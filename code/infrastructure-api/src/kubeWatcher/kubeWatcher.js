@@ -1,4 +1,4 @@
-import KubeWatch from 'kube-watch';
+import * as k8s from '@kubernetes/client-node';
 import logger from 'winston';
 import { find } from 'lodash';
 import config from '../config/config';
@@ -9,18 +9,48 @@ import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
 const kubeApi = config.get('kubernetesApi');
 const kubeNamespace = config.get('podNamespace');
-const events = ['added', 'modified', 'deleted'];
 const stackNames = Object.values(STACKS).map(stack => stack.name);
+const kc = new k8s.KubeConfig();
+const cluster = {
+  name: 'default-cluster',
+  server: kubeApi,
+};
+const user = {
+  name: 'default-auth',
+};
+const context = {
+  name: 'default-context',
+  user: user.name,
+  cluster: cluster.name,
+  namespace: kubeNamespace,
+};
 
 function kubeWatcher() {
   logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
 
-  return new KubeWatch('pods', {
-    url: kubeApi,
-    namespace: kubeNamespace,
-    labelSelector: SELECTOR_LABEL,
-    events,
+  kc.loadFromOptions({
+    clusters: [cluster],
+    users: [user],
+    contexts: [context],
+    currentContext: context.name,
   });
+
+  const watch = new k8s.Watch(kc);
+  return watch.watch(`/api/v1/namespaces/${kubeNamespace}/pods`, { labelSelector: SELECTOR_LABEL },
+    (type, obj) => {
+      if (type === 'ADDED') {
+        podAddedWatcher(obj);
+      } else if (type === 'MODIFIED') {
+        podReadyWatcher(obj);
+      } else if (type === 'DELETED') {
+        podDeletedWatcher(obj);
+      } else {
+        logger.info(`Unknown type: ${type}`);
+      }
+    },
+    (err) => {
+      logger.error(err);
+    });
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
