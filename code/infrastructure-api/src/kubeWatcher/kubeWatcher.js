@@ -9,11 +9,12 @@ import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
 const kubeNamespace = config.get('podNamespace');
 const stackNames = Object.values(STACKS).map(stack => stack.name);
-const kc = new k8s.KubeConfig().loadFromDefault();
+const kc = new k8s.KubeConfig();
 
 function kubeWatcher() {
   logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
 
+  kc.loadFromDefault();
   const watch = new k8s.Watch(kc);
   return watch.watch(`/api/v1/namespaces/${kubeNamespace}/pods`, { labelSelector: SELECTOR_LABEL },
     (type, obj) => {
