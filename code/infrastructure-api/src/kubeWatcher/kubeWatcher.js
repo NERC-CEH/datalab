@@ -7,33 +7,12 @@ import { parsePodLabels } from './kubernetesHelpers';
 import { CREATING, READY } from '../models/stack.model';
 import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
-const kubeApi = config.get('kubernetesApi');
 const kubeNamespace = config.get('podNamespace');
 const stackNames = Object.values(STACKS).map(stack => stack.name);
-const kc = new k8s.KubeConfig();
-const cluster = {
-  name: 'default-cluster',
-  server: kubeApi,
-};
-const user = {
-  name: 'default-auth',
-};
-const context = {
-  name: 'default-context',
-  user: user.name,
-  cluster: cluster.name,
-  namespace: kubeNamespace,
-};
+const kc = new k8s.KubeConfig().loadFromDefault();
 
 function kubeWatcher() {
   logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
-
-  kc.loadFromOptions({
-    clusters: [cluster],
-    users: [user],
-    contexts: [context],
-    currentContext: context.name,
-  });
 
   const watch = new k8s.Watch(kc);
   return watch.watch(`/api/v1/namespaces/${kubeNamespace}/pods`, { labelSelector: SELECTOR_LABEL },
