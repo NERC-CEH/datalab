@@ -50,6 +50,11 @@
     "react/no-array-index-key": "off",
     "react/require-default-props": "off"
   },
+  "settings": {
+    "react": {
+      "version": "16.8"
+    }
+  },
   "parserOptions": {
     "ecmaVersion": 2018
   }
