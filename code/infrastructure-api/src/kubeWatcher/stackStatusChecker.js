@@ -3,10 +3,11 @@ import logger from 'winston';
 import podsApi from '../kubernetes/podsApi';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';
-import { READY, CREATING, UNAVAILABLE } from '../models/stack.model';
+import { READY, CREATING, REQUESTED, UNAVAILABLE } from '../models/stack.model';
 
 const kubeUpStatus = ['Running'];
-const kubeCreateStatus = ['Pending', 'ContainerCreating', /^Init:/, 'PodInitializing'];
+const kubeCreateStatus = ['ContainerCreating', /^Init:/, 'PodInitializing'];
+const kubeRequestStatus = ['Pending'];
 
 function statusChecker() {
   logger.info('Status checker: starting');
@@ -36,6 +37,8 @@ const getStatus = (statusArray) => {
     return READY;
   } else if (arraysIncludes(statusArray, kubeCreateStatus)) {
     return CREATING;
+  } else if (arraysIncludes(statusArray, kubeRequestStatus)) {
+    return REQUESTED;
   }
 
   return UNAVAILABLE;
