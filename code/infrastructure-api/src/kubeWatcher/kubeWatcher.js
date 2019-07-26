@@ -10,26 +10,28 @@ import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
 const kubeNamespace = config.get('podNamespace');
 const stackNames = Object.values(STACKS).map(stack => stack.name);
+const watchUrl = `/api/v1/namespaces/${kubeNamespace}/pods`;
+const selector = { labelSelector: SELECTOR_LABEL };
 
 function kubeWatcher() {
   logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
+  return new k8s.Watch(kubeConfig).watch(watchUrl, selector, eventHandler, errorHandler);
+}
 
-  const watch = new k8s.Watch(kubeConfig);
-  return watch.watch(`/api/v1/namespaces/${kubeNamespace}/pods`, { labelSelector: SELECTOR_LABEL },
-    (type, obj) => {
-      if (type === 'ADDED') {
-        podAddedWatcher(obj);
-      } else if (type === 'MODIFIED') {
-        podReadyWatcher(obj);
-      } else if (type === 'DELETED') {
-        podDeletedWatcher(obj);
-      } else {
-        logger.info(`Unknown type: ${type}`);
-      }
-    },
-    (err) => {
-      logger.error(err);
-    });
+function eventHandler(type, obj) {
+  if (type === 'ADDED') {
+    podAddedWatcher(obj);
+  } else if (type === 'MODIFIED') {
+    podReadyWatcher(obj);
+  } else if (type === 'DELETED') {
+    podDeletedWatcher(obj);
+  } else {
+    logger.info(`Unknown type: ${type}`);
+  }
+}
+
+function errorHandler(err) {
+  logger.error(err);
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
