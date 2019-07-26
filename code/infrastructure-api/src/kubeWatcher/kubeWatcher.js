@@ -2,6 +2,7 @@ import * as k8s from '@kubernetes/client-node';
 import logger from 'winston';
 import { find } from 'lodash';
 import config from '../config/config';
+import kubeConfig from '../kubernetes/kubeConfig';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parsePodLabels } from './kubernetesHelpers';
 import { CREATING, READY } from '../models/stack.model';
@@ -9,13 +10,11 @@ import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
 const kubeNamespace = config.get('podNamespace');
 const stackNames = Object.values(STACKS).map(stack => stack.name);
-const kc = new k8s.KubeConfig();
 
 function kubeWatcher() {
   logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
 
-  kc.loadFromDefault();
-  const watch = new k8s.Watch(kc);
+  const watch = new k8s.Watch(kubeConfig);
   return watch.watch(`/api/v1/namespaces/${kubeNamespace}/pods`, { labelSelector: SELECTOR_LABEL },
     (type, obj) => {
       if (type === 'ADDED') {
