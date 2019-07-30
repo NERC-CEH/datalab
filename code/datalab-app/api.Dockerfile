@@ -1,4 +1,4 @@
-FROM node:8.2.1-alpine
+FROM node:8.16.0-alpine
 
 LABEL maintainer "joshua.foster@stfc.ac.uk"
 
