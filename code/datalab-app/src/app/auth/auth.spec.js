@@ -7,13 +7,23 @@ jest.mock('../core/sessionUtil');
 const authorizeMock = jest.fn();
 const logoutMock = jest.fn();
 
+const authConfig = {
+  domain: 'expected.auth0.com',
+  clientID: 'expected-client-id',
+  audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
+  responseType: 'token id_token',
+  scope: 'openid profile',
+  redirectUri: `${window.location.origin}/callback`,
+  returnTo: `${window.location.origin}/`,
+};
+
 const MockAuthZero = {
   authorize: authorizeMock,
   logout: logoutMock,
   parseHashAsync: () => Promise.resolve(window.location.hash),
 };
 
-const auth = new PureAuth(MockAuthZero, MockAuthZero);
+const auth = new PureAuth(MockAuthZero, MockAuthZero, authConfig);
 
 describe('auth', () => {
   beforeEach(() => {

@@ -1,8 +1,11 @@
-import request from 'axios';
-import auth from './auth';
+import axios from 'axios';
+import getAuth from './auth';
+
+const request = axios.create();
 
 request.interceptors.request.use((requestConfig) => {
-  const currentSession = auth.getCurrentSession();
+  const currentSession = getAuth().getCurrentSession();
+
   return {
     ...requestConfig,
     headers: {
@@ -23,7 +26,7 @@ request.interceptors.response.use(
       return new Promise((resolve, reject) => {
         // Add tag to reissued request to prevent looping
         requestValue.isRetryRequest = true;
-        auth.renewSession()
+        getAuth().renewSession()
           .then(() => resolve(request(requestValue)))
           .catch(authErr => reject(authErr));
       });

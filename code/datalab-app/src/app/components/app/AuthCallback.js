@@ -2,13 +2,13 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { replace } from 'react-router-redux';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
 class AuthCallback extends Component {
   componentWillMount() {
     if (/access_token|id_token|error/.test(this.props.urlHash)) {
-      auth.handleAuthentication()
+      getAuth().handleAuthentication()
         .then((authResponse) => {
           this.props.actions.userLogsIn(authResponse);
           this.props.actions.routeTo(authResponse.appRedirect);

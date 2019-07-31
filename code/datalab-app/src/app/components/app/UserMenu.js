@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
 
 const styles = theme => ({
   container: {
@@ -37,7 +37,7 @@ const UserMenu = ({ classes, identity, closePopover }) => (
     </div>
     <Button
       color="primary"
-      onClick={closePopover(auth.logout)}
+      onClick={closePopover(getAuth().logout)}
     >
       Logout
     </Button>

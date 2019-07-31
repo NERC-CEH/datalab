@@ -25,7 +25,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
   <WithStyles(Button)
     className="HeroBar-button-4"
     color="primary"
-    onClick={[Function]}
+    onClick={[MockFunction]}
   >
      Log In
   </WithStyles(Button)>

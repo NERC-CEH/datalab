@@ -1,7 +1,13 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import UserMenu from './UserMenu';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
+
+jest.mock('../../auth/auth');
+const logout = jest.fn();
+getAuth.mockImplementation(() => ({
+  logout,
+}));
 
 const closePopoverMock = jest.fn();
 
@@ -16,7 +22,7 @@ const expectedProps = {
 
 describe('UserMenu', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   function shallowRender(props) {
@@ -34,6 +40,6 @@ describe('UserMenu', () => {
 
     shallowRender(expectedProps);
 
-    expect(closePopoverMock).toHaveBeenCalledWith(auth.logout);
+    expect(closePopoverMock).toHaveBeenCalledWith(logout);
   });
 });

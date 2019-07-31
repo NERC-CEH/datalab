@@ -1,18 +1,23 @@
-import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import request from './secureRequest';
-import auth from './auth';
+import getAuth from './auth';
 
-const mock = new MockAdapter(axios);
+const mock = new MockAdapter(request);
 
 jest.mock('./auth');
+const getCurrentSession = jest.fn();
+const renewSession = jest.fn();
+getAuth.mockImplementation(() => ({
+  getCurrentSession,
+  renewSession,
+}));
 
 describe('secureRequest', () => {
   beforeEach(() => mock.reset());
   afterAll(() => mock.restore());
 
   it('adds authorization and content-type headers', () => {
-    auth.getCurrentSession = jest.fn()
+    getCurrentSession
       .mockReturnValue({ accessToken: 'expectedAccessToken' });
 
     mock.onPost('http://localhost:8000/api')
@@ -26,11 +31,12 @@ describe('secureRequest', () => {
   });
 
   it('intercepts a 401 unathorized response and reissues request with new token', () => {
-    auth.getCurrentSession = jest.fn()
+    getCurrentSession
       .mockReturnValueOnce({ accessToken: 'expiredAccessToken' })
       .mockReturnValueOnce({ accessToken: 'renewedAccessToken' });
 
-    auth.renewSession = jest.fn().mockReturnValue(Promise.resolve());
+    renewSession
+      .mockReturnValue(Promise.resolve());
 
     mock.onPost('http://localhost:8000/api')
       .replyOnce((requestConfig) => {

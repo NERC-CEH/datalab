@@ -5,12 +5,12 @@ import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from 'lodash';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
 class RequireAuth extends Component {
   componentWillMount() {
-    const currentSession = auth.getCurrentSession();
+    const currentSession = getAuth().getCurrentSession();
     if (currentSession) {
       this.props.actions.userLogsIn(currentSession);
       this.props.actions.getUserPermissions();
