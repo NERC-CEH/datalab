@@ -1,5 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Ingress generator should add proxy-timeout options if supplied 1`] = `
+"---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: name-ingress
+  annotations:
+    ingress.kubernetes.io/auth-url: http://localhost:9000/auth
+    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    ingress.kubernetes.io/proxy-body-size: 500m
+    ingress.kubernetes.io/proxy-connect-timeout: \\"1800\\"
+    ingress.kubernetes.io/proxy-read-timeout: \\"1800\\"
+    ingress.kubernetes.io/proxy-send-timeout: \\"1800\\"
+    ingress.kubernetes.io/proxy-socket-keepalive: \\"on\\"
+spec:
+  tls:
+  - hosts:
+    - testlab-name.test-datalabs.ceh.ac.uk
+    secretName: tls-secret
+  rules:
+  - host: testlab-name.test-datalabs.ceh.ac.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: name-service
+          servicePort: 80
+      - path: /connect
+        backend:
+          serviceName: name-service
+          servicePort: 8000
+"
+`;
+
 exports[`Ingress generator should add rewrite target if supplied 1`] = `
 "---
 apiVersion: extensions/v1beta1

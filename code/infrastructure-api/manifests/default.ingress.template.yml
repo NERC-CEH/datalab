@@ -10,6 +10,12 @@ metadata:
 {{#rewriteTarget}}
     ingress.kubernetes.io/rewrite-target: {{ &rewriteTarget }}
 {{/rewriteTarget}}
+{{#proxyTimeout}}
+    ingress.kubernetes.io/proxy-connect-timeout: "{{ &proxyTimeout }}"
+    ingress.kubernetes.io/proxy-read-timeout: "{{ &proxyTimeout }}"
+    ingress.kubernetes.io/proxy-send-timeout: "{{ &proxyTimeout }}"
+    ingress.kubernetes.io/proxy-socket-keepalive: "on"
+{{/proxyTimeout}}
 spec:
   tls:
   - hosts:
