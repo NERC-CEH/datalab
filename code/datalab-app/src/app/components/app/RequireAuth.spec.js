@@ -6,10 +6,12 @@ import auth from '../../auth/auth';
 import RequireAuth, { PureRequireAuth } from './RequireAuth';
 
 jest.mock('../../auth/auth');
-const isAuthenticatedMock = jest.fn();
-const getCurrentSessionMock = jest.fn();
-auth.isAuthenticated = isAuthenticatedMock;
-auth.getCurrentSession = getCurrentSessionMock;
+const isAuthenticated = jest.fn();
+const getCurrentSession = jest.fn();
+auth.mockImplementation(() => ({
+  isAuthenticated,
+  getCurrentSession,
+}));
 
 describe('RequireAuth', () => {
   let shallow;
@@ -84,7 +86,7 @@ describe('RequireAuth', () => {
       actions: { userLogsIn: () => {}, getUserPermissions: () => {} },
     });
 
-    beforeEach(() => jest.resetAllMocks());
+    beforeEach(() => jest.clearAllMocks());
 
     it('calls auth.getCurrentSession when mounted', () => {
       // Arrange
@@ -94,13 +96,13 @@ describe('RequireAuth', () => {
       shallowRenderPure(props);
 
       // Assert
-      expect(getCurrentSessionMock).toHaveBeenCalledTimes(1);
+      expect(getCurrentSession).toHaveBeenCalledTimes(1);
     });
 
     it('renders private content if user is logged in', () => {
       // Arrange
       const props = generateProps();
-      isAuthenticatedMock.mockReturnValue(true);
+      isAuthenticated.mockReturnValue(true);
 
       // Act
       const output = shallowRenderPure(props).find('Route').prop('render');

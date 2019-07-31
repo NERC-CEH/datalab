@@ -39,7 +39,7 @@ exports[`NavBar renders correct snapshot 1`] = `
     </WithStyles(NavBarLinkButton)>
     <WithStyles(Button)
       color="primary"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Log In
     </WithStyles(Button)>
