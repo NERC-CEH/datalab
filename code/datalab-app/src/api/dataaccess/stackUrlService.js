@@ -2,7 +2,7 @@ import axios from 'axios';
 import logger from 'winston';
 import { findLast } from 'lodash';
 import vault from './vault/vault';
-import { JUPYTER, ZEPPELIN, RSTUDIO, NBVIEWER } from '../../shared/stackTypes';
+import { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } from '../../shared/stackTypes';
 import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
 
@@ -16,6 +16,9 @@ export default function notebookUrlService(notebook, user) {
   } else if (notebook.type === JUPYTER) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterUrl(notebook));
+  } else if (notebook.type === JUPYTERLAB) {
+    return requestJupyterToken(notebook, user)
+      .then(createJupyterlabUrl(notebook));
   } else if (notebook.type === RSTUDIO) {
     return requestRStudioToken(notebook, user)
       .then(createRStudioUrl(notebook));
@@ -28,6 +31,8 @@ export default function notebookUrlService(notebook, user) {
 const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
 
 const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?token=${token}` : undefined);
+
+const createJupyterlabUrl = notebook => token => (token ? `${notebook.url}/lab?token=${token}` : undefined);
 
 const createRStudioUrl = notebook => tokens =>
   (tokens ? `${notebook.url}/connect?username=${RSTUDIO_USERNAME}&expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}` : undefined);

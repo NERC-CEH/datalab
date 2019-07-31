@@ -3,6 +3,7 @@ import { render } from 'mustache';
 
 const ServiceTemplates = Object.freeze({
   JUPYTER_SERVICE: 'jupyter.service.template.yml',
+  JUPYTERLAB_SERVICE: 'jupyterlab.service.template.yml',
   ZEPPELIN_SERVICE: 'zeppelin.service.template.yml',
   RSTUDIO_SERVICE: 'rstudio.service.template.yml',
   RSHINY_SERVICE: 'rshiny.service.template.yml',
@@ -12,6 +13,7 @@ const ServiceTemplates = Object.freeze({
 
 const DeploymentTemplates = Object.freeze({
   JUPYTER_DEPLOYMENT: 'jupyter.deployment.template.yml',
+  JUPYTERLAB_DEPLOYMENT: 'jupyterlab.deployment.template.yml',
   ZEPPELIN_DEPLOYMENT: 'zeppelin.deployment.template.yml',
   RSTUDIO_DEPLOYMENT: 'rstudio.deployment.template.yml',
   RSHINY_DEPLOYMENT: 'rshiny.deployment.template.yml',
