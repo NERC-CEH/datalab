@@ -3,6 +3,7 @@
 *.iml
 .DS_Store
 .idea/
+.vscode/
 
 docs/_book
 docs/version.md

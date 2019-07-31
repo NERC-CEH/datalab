@@ -8,7 +8,7 @@ import authActions from '../../actions/authActions';
 class AuthCallback extends Component {
   componentWillMount() {
     if (/access_token|id_token|error/.test(this.props.urlHash)) {
-      auth.handleAuthentication()
+      auth().handleAuthentication()
         .then((authResponse) => {
           this.props.actions.userLogsIn(authResponse);
           this.props.actions.routeTo(authResponse.appRedirect);

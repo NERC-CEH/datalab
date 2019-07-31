@@ -2,14 +2,14 @@ import moment from 'moment';
 import Promise from 'bluebird';
 import auth0 from 'auth0-js';
 import { pick } from 'lodash';
-import authConfig from './authConfig';
 import cookies from './cookies';
 import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
 class Auth {
-  constructor(authZeroInit, promisifyAuthZeroInit) {
-    this.authZeroInit = authZeroInit;
+  constructor(authZeroInit, promisifyAuthZeroInit, authConfig) {
+    this.authConfig = authConfig;
     this.authZeroAsync = promisifyAuthZeroInit;
+    this.authZeroInit = authZeroInit;
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -29,7 +29,7 @@ class Auth {
     // User redirected to home page on logout
     clearSession();
     cookies.clearAccessToken();
-    this.authZeroInit.logout({ returnTo: authConfig.returnTo });
+    this.authZeroInit.logout({ returnTo: this.authConfig.returnTo });
   }
 
   handleAuthentication() {
@@ -39,8 +39,8 @@ class Auth {
 
   renewSession() {
     const renewalAuthConfig = {
-      ...pick(authConfig, ['audience', 'scope']),
-      redirectUri: `${authConfig.returnTo}silent-callback`,
+      ...pick(this.authConfig, ['audience', 'scope']),
+      redirectUri: `${this.authConfig.returnTo}silent-callback`,
       usePostMessage: true,
     };
     // Attempt to renew token in an iframe
@@ -113,7 +113,18 @@ function processIdentity(idTokenPayload) {
   return JSON.stringify(pick(idTokenPayload, knownFields));
 }
 
-const AuthZero = new auth0.WebAuth(authConfig);
-const PromisifyAuthZero = Promise.promisifyAll(AuthZero);
-export default new Auth(AuthZero, PromisifyAuthZero);
-export { Auth as PureAuth }; // export for testing
+let authSession;
+
+const initialiseAuth = (authConfig) => {
+  if (!authSession) {
+    const AuthZero = new auth0.WebAuth(authConfig);
+    const PromisifyAuthZero = Promise.promisifyAll(AuthZero);
+
+    authSession = new Auth(AuthZero, PromisifyAuthZero, authConfig);
+  }
+};
+
+const auth = () => (authSession);
+
+export default auth;
+export { initialiseAuth, Auth as PureAuth };

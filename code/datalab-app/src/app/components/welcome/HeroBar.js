@@ -32,7 +32,7 @@ const HeroBar = ({ classes }) => (
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
     <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
     <Button className={classes.button} color="primary" disabled>Sign Up</Button>
-    <Button className={classes.button} color="primary" onClick={auth.login}> Log In</Button>
+    <Button className={classes.button} color="primary" onClick={auth().login}> Log In</Button>
   </div>
 );
 

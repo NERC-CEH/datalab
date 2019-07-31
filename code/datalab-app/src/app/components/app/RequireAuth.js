@@ -10,7 +10,7 @@ import authActions from '../../actions/authActions';
 
 class RequireAuth extends Component {
   componentWillMount() {
-    const currentSession = auth.getCurrentSession();
+    const currentSession = auth().getCurrentSession();
     if (currentSession) {
       this.props.actions.userLogsIn(currentSession);
       this.props.actions.getUserPermissions();
