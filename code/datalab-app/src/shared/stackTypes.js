@@ -1,6 +1,7 @@
 import { keyBy, capitalize } from 'lodash';
 
 export const JUPYTER = 'jupyter';
+export const JUPYTERLAB = 'jupyterlab';
 export const ZEPPELIN = 'zeppelin';
 export const RSTUDIO = 'rstudio';
 export const RSHINY = 'rshiny';
@@ -15,6 +16,11 @@ const STACK_TYPES = [
   {
     name: JUPYTER,
     shortDescription: 'A Jupyter Notebook',
+    category: ANALYSIS,
+  },
+  {
+    name: JUPYTERLAB,
+    shortDescription: 'A Jupyter Lab',
     category: ANALYSIS,
   },
   {
