@@ -124,7 +124,7 @@ const initialiseAuth = (authConfig) => {
   }
 };
 
-const auth = () => (authSession);
+const getAuth = () => (authSession);
 
-export default auth;
+export default getAuth;
 export { initialiseAuth, Auth as PureAuth };

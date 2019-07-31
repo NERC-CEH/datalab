@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import datalabsLogo from '../../../assets/images/datalabs-vert.png';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
 
 const styles = theme => ({
   bar: {
@@ -32,7 +32,7 @@ const HeroBar = ({ classes }) => (
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
     <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
     <Button className={classes.button} color="primary" disabled>Sign Up</Button>
-    <Button className={classes.button} color="primary" onClick={auth().login}> Log In</Button>
+    <Button className={classes.button} color="primary" onClick={getAuth().login}> Log In</Button>
   </div>
 );
 

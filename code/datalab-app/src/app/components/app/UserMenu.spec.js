@@ -1,11 +1,11 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import UserMenu from './UserMenu';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
 
 jest.mock('../../auth/auth');
 const logout = jest.fn();
-auth.mockImplementation(() => ({
+getAuth.mockImplementation(() => ({
   logout,
 }));
 

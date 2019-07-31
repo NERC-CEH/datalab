@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import NavBarLinkButton from './NavBarLinkButton';
 import datalabsLogo from '../../../assets/images/datalabs-hori.png';
-import auth from '../../auth/auth';
+import getAuth from '../../auth/auth';
 import navBarLinks from '../../constants/navBarLinks';
 
 const publicNavLinks = [
@@ -32,7 +32,7 @@ const PublicNavBarContent = ({ classes }) => (
       <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
       <div className={classes.spacer} />
       {publicNavLinks.map(({ displayName, href }) => <NavBarLinkButton key={displayName} onClick={() => window.open(href)}>{displayName}</NavBarLinkButton>)}
-      <Button color="primary" onClick={auth().login}>Log In</Button>
+      <Button color="primary" onClick={getAuth().login}>Log In</Button>
     </Toolbar>
   </AppBar>
 );
