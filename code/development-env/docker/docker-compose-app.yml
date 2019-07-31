@@ -2,6 +2,7 @@ version: '3.7'
 
 x-common-variables: &common
   AUTHORISATION_SERVICE: http://datalab-auth:9000
+  AUTH_SIGNIN_URL: http://datalabs.localhost
   DATABASE_HOST: mongodb
   INFRASTRUCTURE_API: http://datalab-infra:8003
   KUBERNETES_API: http://host.docker.internal:8001
@@ -26,7 +27,7 @@ services:
     volumes:
       - ${PWD}/../../auth-service:/usr/src/app/:ro
     networks:
-      - internal
+      - private
 
   datalab-infra:
     image: node:8
@@ -39,7 +40,7 @@ services:
     volumes:
       - $PWD/../../infrastructure-api:/usr/src/app/:ro
     networks:
-      - internal
+      - private
     links:
       - datalab-auth
       - mongodb
@@ -56,12 +57,7 @@ services:
     volumes:
       - $PWD/../../datalab-app:/usr/src/app:ro
     networks:
-      - internal
-    labels:
-      - traefik.enable=true
-      - traefik.frontend.rule=Host:datalabs-api.localhost
-      - traefik.docker.network=docker_internal
-      - traefik.port=8000
+      - private
     links:
       - datalab-auth
       - datalab-infra
@@ -76,27 +72,12 @@ services:
       - 3000:3000
     volumes:
       - $PWD/../../datalab-app:/usr/src/app:ro
+      - $PWD/../config/local/web_auth_config.json:/usr/src/app/public/web_auth_config.json:ro
     networks:
-      - internal
-    labels:
-      - traefik.enable=true
-      - traefik.frontend.rule=Host:datalabs.localhost
-      - traefik.docker.network=docker_internal
-      - traefik.port=3000
-
-  traefik:
-    image: traefik
-    ports:
-      - 80:80
-      - 8080:8080
-    networks:
-      - internal
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - $PWD/../config/traefik/traefik.toml:/traefik.toml
+      - private
 
 networks:
-  internal:
+  private:
     ipam:
       config:
         - subnet: 172.16.60.0/24

@@ -7,7 +7,7 @@
     "description" : "An Example Data Store",
     "type" : 1,
     "volumeSize" : "5",
-    "url" : "https://testlab-example.datalabs.local/minio",
+    "url" : "https://testlab-example.datalabs.internal/minio",
     "internalEndpoint" : "http://minio-example/minio",
     "users" : [
       "auth0|5d2efacb1ca16e0efd770ddc",

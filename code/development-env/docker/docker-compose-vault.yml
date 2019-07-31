@@ -16,10 +16,10 @@ services:
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=root
     networks:
-      - internal
+      - private
 
 networks:
-  internal:
+  private:
     ipam:
       config:
         - subnet: 172.16.60.0/24

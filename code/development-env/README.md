@@ -16,7 +16,6 @@ docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-v
   - `minikube start`
 - Enable add-ons
   - `minikube addons enable ingress`
-  - `minikube addona enable storage-provisioner-gluster`
 - Create namespace
   - `kubectl create namespace devtest`
 - Change default namespace

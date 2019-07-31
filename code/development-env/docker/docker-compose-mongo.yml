@@ -5,7 +5,8 @@ services:
     ports:
       - 27017:27017
     networks:
-      - internal
+      - private
+
   mongodb_import:
     build:
       context: $PWD/../config/mongo
@@ -18,12 +19,12 @@ services:
     depends_on:
       - mongodb
     networks:
-      - internal
+      - private
     volumes:
       - $PWD/../config/mongo:/tmp/mongodb/:ro
 
 networks:
-  internal:
+  private:
     ipam:
       config:
         - subnet: 172.16.60.0/24
