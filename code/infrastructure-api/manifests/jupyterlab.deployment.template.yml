@@ -37,11 +37,11 @@ spec:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
       containers:
-        - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
+        - image: {{ &jupyterlab.imageName }}:{{ jupyterlab.version }}
           imagePullPolicy : "IfNotPresent"
           name: {{ name }}
           command: ["start.sh",
-            "jupyter", "notebook",
+            "jupyter", "lab",
             "--NotebookApp.token='$(JUPYTER_TOKEN)'",
             "--NotebookApp.allow_origin='{{ domain }}'",
             "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
