@@ -33,7 +33,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
         userKeysMapping: {},
       };
 
-      return shallow(<LoadUserManagementModalWrapper {...props} />);
+      return shallow(<LoadUserManagementModalWrapper {...props} />).find('LoadUserManagementModalWrapper');
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };

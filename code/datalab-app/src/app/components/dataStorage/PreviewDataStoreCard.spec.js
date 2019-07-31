@@ -21,7 +21,7 @@ describe('PreviewDataStoreCard', () => {
         PublicComponent: () => {},
       };
 
-      return shallow(<PreviewDataStoreCard {...props} />);
+      return shallow(<PreviewDataStoreCard {...props} />).find('PreviewDataStoreCard');
     }
 
     it('extracts the form values from the redux state', () => {

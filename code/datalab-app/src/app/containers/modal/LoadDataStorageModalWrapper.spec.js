@@ -21,7 +21,7 @@ describe('LoadDataStorage Modal Wrapper', () => {
         Dialog: () => {},
       };
 
-      return shallow(<LoadDataStorageModalWrapper {...props} />);
+      return shallow(<LoadDataStorageModalWrapper {...props} />).find('LoadDataStorageModalWrapper');
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };

@@ -21,7 +21,7 @@ describe('Preview SiteCard', () => {
         PublicComponent: () => {},
       };
 
-      return shallow(<PreviewSiteCard {...props} />);
+      return shallow(<PreviewSiteCard {...props} />).find('PreviewSiteCard');
     }
 
     it('extracts the form values from the redux state', () => {

@@ -30,7 +30,7 @@ describe('RequireAuth', () => {
         PublicComponent: () => {},
       };
 
-      return shallow(<RequireAuth {...props} />);
+      return shallow(<RequireAuth {...props} />).find('RequireAuth');
     }
 
     it('extracts the correct props from the redux state', () => {

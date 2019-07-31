@@ -20,6 +20,12 @@ exports[`Site dialog creates correct snapshot 1`] = `
       </WithStyles(DialogTitle)>
       <WithStyles(DialogContent)>
         <ReduxForm
+          asyncBlurFields={
+            Array [
+              "name",
+            ]
+          }
+          asyncValidate={[Function]}
           cancel={[MockFunction]}
           dataStorageOptions={
             Array [
@@ -31,7 +37,24 @@ exports[`Site dialog creates correct snapshot 1`] = `
               },
             ]
           }
+          destroyOnUnmount={false}
+          enableReinitialize={false}
+          forceUnregisterOnUnmount={false}
+          form="createSite"
+          getFormState={[Function]}
+          keepDirtyOnReinitialize={false}
           onSubmit={[MockFunction]}
+          persistentSubmitErrors={false}
+          pure={true}
+          shouldAsyncValidate={[Function]}
+          shouldError={[Function]}
+          shouldValidate={[Function]}
+          shouldWarn={[Function]}
+          submitAsSideEffect={false}
+          touchOnBlur={true}
+          touchOnChange={false}
+          updateUnregisteredFields={false}
+          validate={[Function]}
         />
       </WithStyles(DialogContent)>
     </div>
