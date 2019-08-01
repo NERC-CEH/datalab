@@ -5,9 +5,11 @@
 * [Install Homebrew](https://brew.sh/)
 * [Install Docker for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 * [Install kubectl with Homebrew](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos)
-* Use official kubectl, not Docker's: `brew link --overwrite kubernetes-cli`
+  * Docker for Mac (above) will install a version of `kubectl` at /Applications/Docker.app/Contents/Resources/bin, and then link to it from /usr/local/bin/kubectl (which you can tell by `ls -l /usr/local/bin/kubectl`).
+  * `kubectl` from Homebrew will install to a different location, but not overwrite the symbolic link.
+  * You want `/usr/local/bin/kubectl` to be the one from Homebrew - to do this, run `brew link --overwrite kubernetes-cli`
 * [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-* [Set Oracle security](https://stackoverflow.com/questions/52277019/how-to-fix-vm-issue-with-minikube-start)
+* [Allow system software from Oracle](https://stackoverflow.com/questions/52277019/how-to-fix-vm-issue-with-minikube-start)
 * [Install minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 * Install yarn: `brew install yarn`
 * Install jq: `brew install jq`
