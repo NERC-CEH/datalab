@@ -2,12 +2,12 @@
 
 exports[`PublishingPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     gutterBottom={true}
     variant="h4"
   >
     Published Sites
-  </WithStyles(Typography)>
+  </WithStyles(ForwardRef(Typography))>
   <SitesContainer
     userPermissions={
       Array [

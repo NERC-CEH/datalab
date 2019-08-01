@@ -9,25 +9,25 @@ exports[`HeroBar renders correct snapshot 1`] = `
     className="HeroBar-logo-2"
     src="datalabs-vert.png"
   />
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     className="HeroBar-tagLine-3"
     variant="h6"
   >
     DataLabs provides you with tools to power your research and share the results
-  </WithStyles(Typography)>
-  <WithStyles(Button)
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Button))
     className="HeroBar-button-4"
     color="primary"
     disabled={true}
   >
     Sign Up
-  </WithStyles(Button)>
-  <WithStyles(Button)
+  </WithStyles(ForwardRef(Button))>
+  <WithStyles(ForwardRef(Button))
     className="HeroBar-button-4"
     color="primary"
     onClick={[MockFunction]}
   >
      Log In
-  </WithStyles(Button)>
+  </WithStyles(ForwardRef(Button))>
 </div>
 `;

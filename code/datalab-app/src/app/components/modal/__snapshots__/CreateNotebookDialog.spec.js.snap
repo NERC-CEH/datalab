@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Notebook dialog creates correct snapshot 1`] = `
-<WithStyles(Dialog)
+<WithStyles(ForwardRef(Dialog))
   maxWidth="md"
   open={true}
 >
@@ -15,10 +15,10 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
     }
   >
     <div>
-      <WithStyles(DialogTitle)>
+      <WithStyles(ForwardRef(DialogTitle))>
         Title
-      </WithStyles(DialogTitle)>
-      <WithStyles(DialogContent)>
+      </WithStyles(ForwardRef(DialogTitle))>
+      <WithStyles(ForwardRef(DialogContent))>
         <ReduxForm
           asyncBlurFields={
             Array [
@@ -56,7 +56,7 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
           updateUnregisteredFields={false}
           validate={[Function]}
         />
-      </WithStyles(DialogContent)>
+      </WithStyles(ForwardRef(DialogContent))>
     </div>
     <div
       style={
@@ -65,9 +65,9 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
         }
       }
     >
-      <WithStyles(DialogTitle)>
+      <WithStyles(ForwardRef(DialogTitle))>
         Notebook Preview
-      </WithStyles(DialogTitle)>
+      </WithStyles(ForwardRef(DialogTitle))>
       <div
         style={
           Object {
@@ -80,5 +80,5 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
       </div>
     </div>
   </div>
-</WithStyles(Dialog)>
+</WithStyles(ForwardRef(Dialog))>
 `;
