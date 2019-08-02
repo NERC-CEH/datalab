@@ -18,8 +18,6 @@
 
 * Start minikube
   * `minikube start`
-* Enable ingress controller
-  * `minikube addons enable ingress`
 * (Recommended) [Install `kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
   for easy context and namespace switching.
 * When creating a new minikube cluster follow these [instructions](../manifests/README.md).

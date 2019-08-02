@@ -58,7 +58,6 @@ Local services may either be started on the local host directly, `yarn start` in
 the service directory, or by starting the services with docker-compose see
 README in `./docker`.
 
-
 ### (Optional) Start DNSMasq
 
 Chrome will resolve sub-domains on the localhost  domain (ie. `*.localhost`) to
