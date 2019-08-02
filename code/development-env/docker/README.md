@@ -1,11 +1,26 @@
 # Setup local development environment using docker-compose
 
+## Pre-requisites
+
+* [Install Homebrew](https://brew.sh/)
+* [Install Docker for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
+* [Install kubectl with Homebrew](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos)
+  * Docker for Mac (above) will install a version of `kubectl` at /Applications/Docker.app/Contents/Resources/bin, and then link to it from /usr/local/bin/kubectl (which you can tell by `ls -l /usr/local/bin/kubectl`).
+  * `kubectl` from Homebrew will install to a different location, but not overwrite the symbolic link.
+  * You want `/usr/local/bin/kubectl` to be the one from Homebrew - to do this, run `brew link --overwrite kubernetes-cli`
+* [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Allow system software from Oracle](https://stackoverflow.com/questions/52277019/how-to-fix-vm-issue-with-minikube-start)
+* [Install minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+* Install yarn: `brew install yarn`
+* Install jq: `brew install jq`
+
 ## Set-up minikube
 
 * Start minikube
+  * `minikube start`
 * Enable ingress controller
   * `minikube addons enable ingress`
-* (Optional) Install [`kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
+* (Recommended) [Install `kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
   for easy context and namespace switching.
 * Create namespace
   * `kubectl create namespace devtest`
@@ -28,7 +43,7 @@
 
 There are a number of authorisation related environmental variables that need to be set
 to make the app work locally. [`direnv`](https://direnv.net) can be used to
-automatically set an unset these variables as you enter and leave the repository
+automatically set and unset these variables as you enter and leave the repository
 directories on your local machine. This is most easily installed on macOS using the
 [Homebrew](https://brew.sh) package manager by running the command
 `brew install direnv`. Once `direnv` is installed, follow the instructions
@@ -85,3 +100,5 @@ kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 ```bash
 docker-compose -f docker-compose-app.yml -f docker-compose-app.<platform>.yml up
 ```
+
+You should eventually see a message saying `You can now view datalab-app in the browser.`
