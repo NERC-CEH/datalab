@@ -3,19 +3,9 @@
 ## Set-up minikube
 
 * Start minikube
-* Enable ingress controller
-  * `minikube addons enable ingress`
 * (Optional) Install [`kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
   for easy context and namespace switching.
-* Create namespace
-  * `kubectl create namespace devtest`
-* Change default namespace
-  * `kubectl config set-context minikube --namespace=devtest`
-    or `kubectx minikube && kubens devtest`
-* Create Storage Class
-  * `kubectl apply -f code/development-env/manifests/storage-class.yml`
-* Create Persistent Volume Claim (PVC)
-  * `kubectl apply -f code/development-env/manifests/example-storage-pvc.yml`
+* When creating a new minikube cluster follow these [instructions](../manifests/README.md).
 
 ## Install Packages
 
@@ -72,7 +62,7 @@ docker-compose -f docker-compose-vault.yml -f docker-compose-mongo.yml up -d
 export VAULT_APP_ROLE= # Set to value output from command on line above
 ```
 
-* Start minikube proxy
+* Start minikube proxy, in separate terminal
 
 ```bash
 kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
@@ -81,5 +71,5 @@ kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 * Start DataLab APP/API, Infrastructure Api and Auth services.
 
 ```bash
-docker-compose -f docker-compose-app.yml up
+docker-compose -f docker-compose-vault.yml -f docker-compose-mongo.yml -f docker-compose-app.yml up -d
 ```

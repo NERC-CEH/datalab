@@ -14,15 +14,8 @@ docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-v
 
 - Start minikube
   - `minikube start`
-- Enable add-ons
-  - `minikube addons enable ingress`
-- Create namespace
-  - `kubectl create namespace devtest`
-- Change default namespace
-  - `kubectl config set-context minikube --namespace=devtest`
-- Update and apply manifests
-  - see README in `./manifests/`
 
+When creating a new minikube cluster follow these [instructions](./manifests/README.md).
 
 ## Start local development environments
 
