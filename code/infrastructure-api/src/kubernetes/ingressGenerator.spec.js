@@ -51,4 +51,22 @@ describe('Ingress generator', () => {
 
     return expect(template).resolves.toMatchSnapshot();
   });
+
+  it('should add proxy-timeout options if supplied', () => {
+    const options = {
+      name: 'name',
+      datalabInfo: {
+        name: 'testlab',
+        domain: 'test-datalabs.ceh.ac.uk',
+      },
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      connectPort: 8000,
+      proxyTimeout: '1800',
+    };
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
 });

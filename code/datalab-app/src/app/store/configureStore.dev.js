@@ -2,12 +2,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import rootReducer from '../reducers';
 import middleware from './middleware';
+import browserHistory from './browserHistory';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
 
 export default function configureStore(initialState) {
   const store = createStore(
-    rootReducer,
+    rootReducer(browserHistory),
     initialState,
     composeEnhancers(applyMiddleware(...middleware, logger)),
   );

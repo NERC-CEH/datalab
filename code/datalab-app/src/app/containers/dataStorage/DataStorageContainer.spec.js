@@ -18,7 +18,7 @@ describe('DataStorageContainer', () => {
         userPermissions: ['expectedPermission'],
       };
 
-      return shallow(<DataStorageContainer {...props} />);
+      return shallow(<DataStorageContainer {...props} />).find('DataStorageContainer');
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };

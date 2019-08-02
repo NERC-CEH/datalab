@@ -3,8 +3,14 @@
 VAULT_API=${VAULT_API:="http://localhost:8200"}
 VAULT_TOKEN=${VAULT_TOKEN:="root"}
 
-# Keeps directory relative
-SCRIPT_DIR=$(dirname -- "$(readlink -f -- "$BASH_SOURCE")")
+# Keeps directory relative - see https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT_DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 curl -X POST \
   -H "X-Vault-Token:$VAULT_TOKEN" \
