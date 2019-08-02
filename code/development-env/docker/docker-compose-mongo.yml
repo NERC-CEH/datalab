@@ -4,6 +4,9 @@ services:
     image: mongo:3.4
     ports:
       - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=datalabs-root-u
+      - MONGO_INITDB_ROOT_PASSWORD=datalabs-root-p
 
   mongodb_import:
     image: mongo:3.4
@@ -12,6 +15,8 @@ services:
       - MONGO_PORT=27017
       - MONGO_DATALAB_DB_NAME=datalab
       - MONGO_INFRASTRUCTURE_DB_NAME=infrastructure
+      - MONGO_USER=datalabs-root-u
+      - MONGO_USER_PASSWORD=datalabs-root-p
     depends_on:
       - mongodb
     command: bash -c "cp /tmp/mongodb/import.sh /usr/local/bin && chmod +x /usr/local/bin/import.sh && import.sh"

@@ -25,7 +25,14 @@ function getModel(modelName) {
 
 function createConnection() {
   mongoose.Promise = bluebird;
-  const options = { promiseLibrary: bluebird, keepAlive: true, useNewUrlParser: true };
+  const options = {
+    promiseLibrary: bluebird,
+    keepAlive: true,
+    useNewUrlParser: true,
+    user: config.get('databaseUser'),
+    pass: config.get('databasePassword'),
+    auth: { authSource: 'admin' },
+  };
   mongoose.connect(`mongodb://${config.get('databaseHost')}/datalab`, options);
   return mongoose.connection;
 }
