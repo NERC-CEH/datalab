@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { replace } from 'react-router-redux';
+import { replace } from 'connected-react-router';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 

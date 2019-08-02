@@ -18,7 +18,7 @@ describe('NavigationContainer', () => {
         PublicComponent: () => {},
       };
 
-      return shallow(<NavigationContainer {...props} />);
+      return shallow(<NavigationContainer {...props} />).find('NavigationContainer');
     }
 
     it('extracts the correct props from the redux state', () => {

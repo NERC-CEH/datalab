@@ -1,4 +1,4 @@
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'connected-react-router';
 import promise from 'redux-promise-middleware';
 import browserHistory from './browserHistory';
 

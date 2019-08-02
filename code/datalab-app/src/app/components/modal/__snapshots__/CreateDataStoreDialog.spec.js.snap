@@ -20,8 +20,36 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
       </WithStyles(DialogTitle)>
       <WithStyles(DialogContent)>
         <ReduxForm
+          asyncBlurFields={
+            Array [
+              "name",
+            ]
+          }
+          asyncValidate={[Function]}
           cancel={[MockFunction]}
+          destroyOnUnmount={false}
+          enableReinitialize={false}
+          forceUnregisterOnUnmount={false}
+          form="createDataStore"
+          getFormState={[Function]}
+          initialValues={
+            Object {
+              "type": "nfs",
+            }
+          }
+          keepDirtyOnReinitialize={false}
           onSubmit={[MockFunction]}
+          persistentSubmitErrors={false}
+          pure={true}
+          shouldAsyncValidate={[Function]}
+          shouldError={[Function]}
+          shouldValidate={[Function]}
+          shouldWarn={[Function]}
+          submitAsSideEffect={false}
+          touchOnBlur={true}
+          touchOnChange={false}
+          updateUnregisteredFields={false}
+          validate={[Function]}
         />
       </WithStyles(DialogContent)>
     </div>

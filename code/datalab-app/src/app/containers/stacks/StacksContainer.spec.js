@@ -31,7 +31,7 @@ describe('StacksContainer', () => {
         userPermissions: ['expectedPermission'],
       };
 
-      return shallow(<StacksContainer {...props} />);
+      return shallow(<StacksContainer {...props} />).find('StacksContainer');
     }
 
     const stacks = { fetching: false, value: ['expectedArray'] };
