@@ -64,7 +64,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       placeholder="Description"
     />
   </div>
-  <WithStyles(Button)
+  <WithStyles(ForwardRef(Button))
     color="primary"
     style={
       Object {
@@ -74,8 +74,8 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
     type="submit"
   >
     Create
-  </WithStyles(Button)>
-  <WithStyles(Button)
+  </WithStyles(ForwardRef(Button))>
+  <WithStyles(ForwardRef(Button))
     onClick={[MockFunction]}
     style={
       Object {
@@ -84,6 +84,6 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
     }
   >
     Cancel
-  </WithStyles(Button)>
+  </WithStyles(ForwardRef(Button))>
 </form>
 `;

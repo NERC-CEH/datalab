@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   segment: {
-    padding: theme.spacing.unit * 1,
+    padding: theme.spacing(1),
   },
 });
 

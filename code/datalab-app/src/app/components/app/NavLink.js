@@ -24,18 +24,24 @@ const styles = theme => ({
   },
 });
 
-const Link = ({ classes, to, label, icon, ...rest }) => (
-  <ListItem
-    className={classes.inactiveLink}
-    to={to}
-    component={to ? NavLink : ({ activeClassName, exact, ...liProps }) => <li {...liProps} />}
-    activeClassName={classes.activeLink}
-    exact
-    button
-    {...rest}>
-    {icon ? <ListItemIcon style={{ color: 'inherit' }}><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
-    {label}
-   </ListItem>
-);
+const AdapterNavLink = React.forwardRef((props, ref) => <NavLink innerRef={ref} {...props} />);
+const Link = ({ classes, to, label, icon, ...rest }) => {
+  // Simple li element must be wrapped with forward ref to avoid React warnings
+  const LiLink = React.forwardRef(({ activeClassName, exact, ...liProps }, ref) => <li ref={ref} {...liProps} />);
+
+  return (
+    <ListItem
+      className={classes.inactiveLink}
+      to={to}
+      component={to ? AdapterNavLink : LiLink}
+      activeClassName={classes.activeLink}
+      exact={true}
+      button={true}
+      {...rest}>
+      {icon ? <ListItemIcon style={{ color: 'inherit' }}><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
+      {label}
+     </ListItem>
+  );
+};
 
 export default withStyles(styles)(Link);

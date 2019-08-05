@@ -75,7 +75,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
     />
   </div>
   <div>
-    <WithStyles(Button)
+    <WithStyles(ForwardRef(Button))
       color="primary"
       style={
         Object {
@@ -85,8 +85,8 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       type="submit"
     >
       Create
-    </WithStyles(Button)>
-    <WithStyles(Button)
+    </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
       onClick={[MockFunction]}
       style={
         Object {
@@ -95,7 +95,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       }
     >
       Cancel
-    </WithStyles(Button)>
+    </WithStyles(ForwardRef(Button))>
   </div>
 </form>
 `;
