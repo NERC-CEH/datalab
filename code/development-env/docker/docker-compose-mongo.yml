@@ -1,7 +1,7 @@
 version: '3'
 services:
   mongodb:
-    image: mongo:3.4
+    image: mongo:4.1.13-bionic
     ports:
       - 27017:27017
     environment:
@@ -9,7 +9,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=datalabs-root-p
 
   mongodb_import:
-    image: mongo:3.4
+    image: mongo:4.1.13-bionic
     environment:
       - MONGO_HOST=mongodb
       - MONGO_PORT=27017
