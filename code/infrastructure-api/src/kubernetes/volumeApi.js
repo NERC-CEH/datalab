@@ -1,5 +1,5 @@
 import axios from 'axios';
-import logger from 'winston';
+import logger from '../config/logger';
 import { has, get } from 'lodash';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';

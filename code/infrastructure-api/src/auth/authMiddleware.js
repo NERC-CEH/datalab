@@ -1,6 +1,6 @@
 import jwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import logger from 'winston';
+import logger from '../config/logger';
 import chalk from 'chalk';
 import config from '../config/config';
 

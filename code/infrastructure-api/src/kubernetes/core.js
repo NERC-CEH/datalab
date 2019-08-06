@@ -1,4 +1,4 @@
-import logger from 'winston';
+import logger from '../config/logger';
 import { has, get } from 'lodash';
 
 export const handleCreateError = (type, name) => (error) => {

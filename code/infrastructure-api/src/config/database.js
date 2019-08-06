@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import bluebird from 'bluebird';
-import logger from 'winston';
+import logger from '../config/logger';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 import config from './config';

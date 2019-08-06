@@ -1,4 +1,4 @@
-import logger from 'winston';
+import logger from '../config/logger';
 import Stacks from './Stacks';
 import stackRepository from '../dataaccess/stacksRepository';
 import { REQUESTED } from '../models/stack.model';
