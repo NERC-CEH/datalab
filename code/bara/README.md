@@ -13,7 +13,7 @@ To build
 ```$bash
 yarn install
 npm pack
-npm install bara-1.0.0.tgz -g
+npm install bara-1.0.1.tgz -g
 ```
 
 ## Usage
