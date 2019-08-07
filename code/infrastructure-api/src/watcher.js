@@ -1,5 +1,4 @@
 import logger from 'winston';
-import chalk from 'chalk';
 import kubeWatcher from './kubeWatcher/kubeWatcher';
 import stackStatusChecker from './kubeWatcher/stackStatusChecker';
 import config from './config/config';
@@ -9,12 +8,28 @@ logger.level = config.get('logLevel');
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, { timestamp: true, colorize: true });
 
-function watcher() {
-  return kubeWatcher();
+async function main() {
+  setInterval(stackStatusChecker, config.get('statusCheckInterval'));
+  await connectToDatabase();
+  startKubeWatcher();
 }
 
-setInterval(stackStatusChecker, config.get('statusCheckInterval'));
+async function connectToDatabase() {
+  try {
+    await database.createConnection();
+  } catch (error) {
+    throw new Error(`Error connecting to the database -> ${error}`);
+  }
+}
+function startKubeWatcher() {
+  try {
+    kubeWatcher();
+  } catch (error) {
+    throw new Error(`Error starting Kube Watcher -> ${error}`);
+  }
+}
 
-database.createConnection()
-  .then(watcher)
-  .catch(error => logger.error(chalk.red(`Error connecting to the database ${error}`)));
+main().catch((error) => {
+  logger.error(`Error starting watcher -> ${error.message}`);
+  process.exit(1);
+});
