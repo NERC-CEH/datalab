@@ -33,10 +33,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - testlab.datalabs.internal
+    - testlab.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: testlab.datalabs.internal
+  - host: testlab.datalabs.localhost
     http:
       paths:
       - path: /
@@ -52,10 +52,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - testlab-api.datalabs.internal
+    - testlab-api.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: testlab-api.datalabs.internal
+  - host: testlab-api.datalabs.localhost
     http:
       paths:
       - path: /

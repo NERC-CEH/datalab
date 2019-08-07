@@ -4,12 +4,10 @@ services:
     image: mongo:3.4
     ports:
       - 27017:27017
-    networks:
-      - private
 
   mongodb_import:
     build:
-      context: $PWD/../config/mongo
+      context: $PWD/config/mongo
       dockerfile: mongo-import.Dockerfile
     environment:
       - MONGO_HOST=mongodb
@@ -18,13 +16,5 @@ services:
       - MONGO_INFRASTRUCTURE_DB_NAME=infrastructure
     depends_on:
       - mongodb
-    networks:
-      - private
     volumes:
-      - $PWD/../config/mongo:/tmp/mongodb/:ro
-
-networks:
-  private:
-    ipam:
-      config:
-        - subnet: 172.16.60.0/24
+      - $PWD/config/mongo:/tmp/mongodb/:ro

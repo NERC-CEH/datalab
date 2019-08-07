@@ -15,11 +15,3 @@ services:
       - IPC_LOCK
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=root
-    networks:
-      - private
-
-networks:
-  private:
-    ipam:
-      config:
-        - subnet: 172.16.60.0/24

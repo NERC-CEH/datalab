@@ -25,9 +25,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ${PWD}/../../auth-service:/usr/src/app/:ro
-    networks:
-      - private
+      - ${PWD}/../auth-service:/usr/src/app/:ro
 
   datalab-infra:
     image: node:8
@@ -38,9 +36,7 @@ services:
     ports:
       - 8003:8003
     volumes:
-      - $PWD/../../infrastructure-api:/usr/src/app/:ro
-    networks:
-      - private
+      - $PWD/../infrastructure-api:/usr/src/app/:ro
     links:
       - datalab-auth
       - mongodb
@@ -55,9 +51,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - $PWD/../../datalab-app:/usr/src/app:ro
-    networks:
-      - private
+      - $PWD/../datalab-app:/usr/src/app:ro
     links:
       - datalab-auth
       - datalab-infra
@@ -71,13 +65,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - $PWD/../../datalab-app:/usr/src/app:ro
-      - $PWD/../config/local/web_auth_config.json:/usr/src/app/public/web_auth_config.json:ro
-    networks:
-      - private
+      - $PWD/../datalab-app:/usr/src/app:ro
+      # web_auth_config is unique to each domain and needs updating
+      - $PWD/config/local/web_auth_config.json:/usr/src/app/public/web_auth_config.json:ro
 
-networks:
-  private:
-    ipam:
-      config:
-        - subnet: 172.16.60.0/24

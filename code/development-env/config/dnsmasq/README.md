@@ -1,4 +1,4 @@
-# Configure local wildcard DNS records
+# Configuring local wildcard DNS records
 
 To be able to resolve the development environment via
 `http://testlab.datalabs.internal/` a wildcard DNS record must present locally.
@@ -9,12 +9,6 @@ Minikube.
 
 These instructions are adapted from this
 [blog post](https://blog.thesparktree.com/local-development-with-wildcard-dns).
-
-### Install DNSMasq via brew
-
-```bash
-brew install dnsmasq
-```
 
 ### Update DNSMasq config
 
