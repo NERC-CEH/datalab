@@ -26,12 +26,16 @@ function eventHandler(type, obj) {
   } else if (type === 'DELETED') {
     podDeletedWatcher(obj);
   } else {
-    logger.info(`Unknown type: ${type}`);
+    logger.info(`Unknown watcher event type: ${type}`);
   }
 }
 
-function errorHandler(err) {
-  logger.error(err);
+function errorHandler(error) {
+  // If lose connection to k8s then get error but no attempt to reconnect. This
+  // function forces exit with non-zero code so k8s will restart container as a way of
+  // reconnecting.
+  logger.error(`kubeWatcher error -> ${error} -> Exiting process...`);
+  process.exit(1);
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
@@ -45,7 +49,7 @@ export function podAddedWatcher({ metadata: { labels } }) {
     // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
     // have their status updated.
     output = stackRepository.updateStatus({ name, type, status: CREATING })
-      .then(() => logger.debug(`Updated status record for "${kubeName}" to "${CREATING}"`));
+      .then(() => logger.info(`Updated status record for "${kubeName}" to "${CREATING}"`));
   }
 
   return output;
@@ -62,7 +66,7 @@ export function podReadyWatcher(event) {
     logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
 
     output = stackRepository.updateStatus({ name, type, status: READY })
-      .then(() => logger.debug(`Updated status record for "${name}" to "${READY}"`));
+      .then(() => logger.info(`Updated status record for "${name}" to "${READY}"`));
   }
 
   return output;

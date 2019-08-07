@@ -27,7 +27,7 @@ const stacks = [
 ];
 
 getStacksMock.mockReturnValue(Promise.resolve(stacks));
-updateStatusMock.mockReturnValue(Promise.resolve());
+updateStatusMock.mockReturnValue(Promise.resolve({ n: 1 }));
 
 describe('Stack Status Checker', () => {
   beforeEach(() => {

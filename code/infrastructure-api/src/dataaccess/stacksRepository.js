@@ -54,7 +54,7 @@ function updateStatus(stack) {
   const { name, type, status } = stack;
   return Stack()
     .where({ name, type })
-    .update({ status })
+    .updateOne({ status })
     .exec();
 }
 
