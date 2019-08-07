@@ -29,6 +29,7 @@ function createConnection() {
     promiseLibrary: bluebird,
     keepAlive: true,
     useNewUrlParser: true,
+    useFindAndModify: false,
     user: config.get('databaseUser'),
     pass: config.get('databasePassword'),
     authSource: 'admin',
