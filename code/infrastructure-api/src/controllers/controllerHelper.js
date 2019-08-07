@@ -1,5 +1,5 @@
 import logger from '../config/logger';
-import { validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator';
 
 function validateAndExecute(request, response, errorMessage, execute) {
   // Parse request for errors

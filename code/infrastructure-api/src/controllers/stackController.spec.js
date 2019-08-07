@@ -1,6 +1,6 @@
 import httpMocks from 'node-mocks-http';
 import Promise from 'bluebird';
-import { validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator';
 import { omit } from 'lodash';
 import stackController from './stackController';
 import stackManager from '../stacks/stackManager';
@@ -32,20 +32,13 @@ describe('Stack Controller', () => {
         });
     });
 
-    it('should return 400 for invalid request', () => {
-      const invalidRequest = httpMocks.createRequest({
-        method: 'GET',
-        body: mutationRequestBody(),
-        _validationErrors: [{
-          location: 'body',
-          param: 'type',
-          msg: 'type must be specified',
-        }],
-      });
+    it('should return 400 for invalid request', async () => {
+      delete request.body.type;
+      await Promise.all(stackController.createStackValidator.map(validation => validation.run(request)));
 
       const response = httpMocks.createResponse();
 
-      stackController.createStack(invalidRequest, response);
+      stackController.createStack(request, response);
       expect(response.statusCode).toBe(400);
       const expectedError = {
         errors: {

@@ -1,5 +1,4 @@
-import { check } from 'express-validator/check';
-import { matchedData, sanitize } from 'express-validator/filter';
+import { check, matchedData, sanitize } from 'express-validator';
 import controllerHelper from './controllerHelper';
 import volumeManager from '../stacks/volumeManager';
 
@@ -52,16 +51,16 @@ function deleteVolumeExec(request, response) {
 }
 
 const coreVolumeValidator = [
-  sanitize('*').trim(),
-  check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified'),
-  check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified'),
+  check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified').trim(),
+  check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified').trim(),
   check('name')
     .exists()
     .withMessage('Name must be specified')
     .isAscii()
     .withMessage('Name must only use the characters a-z')
     .isLength({ min: 4, max: 12 })
-    .withMessage('Name must be 4-12 characters long'),
+    .withMessage('Name must be 4-12 characters long')
+    .trim(),
 ];
 
 const createVolumeValidator = [
@@ -70,7 +69,8 @@ const createVolumeValidator = [
     .exists()
     .withMessage('Volume Size must be specified')
     .isInt({ min: 5, max: 200 })
-    .withMessage('Volume Size must be an integer between 5 and 200'),
+    .withMessage('Volume Size must be an integer between 5 and 200')
+    .trim(),
 ];
 
 export default { coreVolumeValidator, createVolumeValidator, createVolume, deleteVolume, queryVolume, listVolumes };
