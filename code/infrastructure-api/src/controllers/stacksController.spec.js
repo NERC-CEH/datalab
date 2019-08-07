@@ -1,8 +1,8 @@
 import httpMocks from 'node-mocks-http';
 import { validationResult } from 'express-validator';
+import Promise from 'bluebird';
 import stacksController from './stacksController';
 import * as stackRepository from '../dataaccess/stacksRepository';
-import Promise from 'bluebird';
 
 jest.mock('../dataaccess/stacksRepository');
 

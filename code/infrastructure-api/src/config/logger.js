@@ -1,7 +1,6 @@
 import { createLogger, transports, format } from 'winston';
 import config from './config';
 
-
 function initialiseLogger() {
   const logger = createLogger({
     level: config.get('logLevel'),
@@ -23,7 +22,7 @@ function initialiseLogger() {
         format.colorize(),
         format.splat(),
         format.simple(),
-      )
+      ),
     }));
   }
   return logger;

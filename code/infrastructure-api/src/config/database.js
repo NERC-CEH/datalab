@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import bluebird from 'bluebird';
-import logger from '../config/logger';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import logger from './logger';
 import config from './config';
 
 const models = join(__dirname, '../models');

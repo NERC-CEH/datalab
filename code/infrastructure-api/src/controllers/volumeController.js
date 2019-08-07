@@ -1,4 +1,4 @@
-import { check, matchedData, sanitize } from 'express-validator';
+import { check, matchedData } from 'express-validator';
 import controllerHelper from './controllerHelper';
 import volumeManager from '../stacks/volumeManager';
 

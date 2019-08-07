@@ -1,4 +1,4 @@
-import { check, matchedData, sanitize } from 'express-validator';
+import { check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';

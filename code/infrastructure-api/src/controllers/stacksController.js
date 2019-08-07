@@ -50,7 +50,7 @@ const withCategoryValidator = [
     .exists()
     .isIn([ANALYSIS, PUBLISH])
     .trim(),
-  sanitize()
+  sanitize(),
 ];
 
 const withMountValidator = [
