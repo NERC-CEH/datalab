@@ -30,7 +30,7 @@ services:
     command:
       - cd /usr/src/app && yarn start
     volumes:
-      - $PWD/../../infrastructure-api:/usr/src/app/:ro
+      - $PWD/../../infrastructure-api:/usr/src/app/
 
   datalab-app-api:
     image: node:8
