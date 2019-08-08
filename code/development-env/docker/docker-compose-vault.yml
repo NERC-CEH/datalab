@@ -1,4 +1,5 @@
 version: '3.7'
+
 services:
   vault:
     image: vault:1.1.3
