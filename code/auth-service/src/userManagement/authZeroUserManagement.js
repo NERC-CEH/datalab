@@ -20,34 +20,30 @@ const authKeyMapping = {
 
 export function asyncGetUsers() {
   return requestAccessToken(accessTokenRequest)
-    .then(bearer =>
-      axios.get(`${authZeroManagementApi}/users`, {
-        params: {
-          fields: 'name,user_id',
-        },
-        headers: {
-          Authorization: `Bearer ${bearer}`,
-        },
-      }).then(extractUsers)
-        .then(processUsers)
-        .catch(() => {
-          throw new Error('Unable to retrieve users from User Management Service.');
-        }))
+    .then(bearer => axios.get(`${authZeroManagementApi}/users`, {
+      params: {
+        fields: 'name,user_id',
+      },
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    }).then(extractUsers)
+      .then(processUsers)
+      .catch(() => {
+        throw new Error('Unable to retrieve users from User Management Service.');
+      }))
     .catch((err) => {
       logger.error(err.message);
       throw err;
     });
 }
 
-const extractUsers = response =>
-  // Pending users are users with an account but have not logged in; these users do not have a populated name field.
-  // This function filters pending users and returns only active users.
-  get(response, 'data', []).filter(user => user.name);
+// Pending users are users with an account but have not logged in; these users do not have a populated name field.
+// This function filters pending users and returns only active users.
+const extractUsers = response => get(response, 'data', []).filter(user => user.name);
 
-const processUsers = users =>
-  users.map(user => mapKeys(user, (value, key) => authKeyMapping[key]));
+const processUsers = users => users.map(user => mapKeys(user, (value, key) => authKeyMapping[key]));
 
-const getUsers = () =>
-  getOrSetCacheAsyncWrapper('USERS_LIST', asyncGetUsers)();
+const getUsers = () => getOrSetCacheAsyncWrapper('USERS_LIST', asyncGetUsers)();
 
 export default { getUsers };

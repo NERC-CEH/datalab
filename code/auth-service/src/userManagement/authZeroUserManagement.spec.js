@@ -35,12 +35,11 @@ describe('auth0 management API', () => {
         .reply(200, userList);
 
       return asyncGetUsers()
-        .then(() =>
-          expect(requestAccessTokenMock).toHaveBeenCalledWith({
-            audience: 'https://mjbr.eu.auth0.com/api/v2/',
-            client_id: 'userMgmtClientId',
-            client_secret: 'userMgmtClientSecret',
-          }));
+        .then(() => expect(requestAccessTokenMock).toHaveBeenCalledWith({
+          audience: 'https://mjbr.eu.auth0.com/api/v2/',
+          client_id: 'userMgmtClientId',
+          client_secret: 'userMgmtClientSecret',
+        }));
     });
 
     it('responds with filtered users', () => {
@@ -48,11 +47,10 @@ describe('auth0 management API', () => {
         .reply(200, userList);
 
       return asyncGetUsers()
-        .then(roles =>
-          expect(roles).toEqual([
-            { name: 'firstName', userId: 'one' },
-            { name: 'secondName', userId: 'one' },
-          ]));
+        .then(roles => expect(roles).toEqual([
+          { name: 'firstName', userId: 'one' },
+          { name: 'secondName', userId: 'one' },
+        ]));
     });
 
     it('throws an error when unable to get users', () => {
@@ -60,8 +58,7 @@ describe('auth0 management API', () => {
         .reply(401);
 
       return asyncGetUsers()
-        .catch(err =>
-          expect(err.message).toBe('Unable to retrieve users from User Management Service.'));
+        .catch(err => expect(err.message).toBe('Unable to retrieve users from User Management Service.'));
     });
   });
 
