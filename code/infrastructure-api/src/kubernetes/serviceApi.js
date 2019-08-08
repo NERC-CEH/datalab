@@ -1,6 +1,6 @@
 import axios from 'axios';
-import logger from 'winston';
 import yaml from 'js-yaml';
+import logger from '../config/logger';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 

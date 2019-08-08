@@ -1,6 +1,6 @@
 import httpMocks from 'node-mocks-http';
 import Promise from 'bluebird';
-import { validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator';
 import volumeController from './volumeController';
 import volumeManager from '../stacks/volumeManager';
 
@@ -24,20 +24,13 @@ describe('Volume Controller', () => {
       });
   });
 
-  it('should return 400 for invalid request', () => {
-    const invalidRequest = httpMocks.createRequest({
-      method: 'GET',
-      body: createRequestBody(),
-      _validationErrors: [{
-        location: 'body',
-        param: 'name',
-        msg: 'Name must be specified',
-      }],
-    });
+  it('should return 400 for invalid request', async () => {
+    delete request.body.name;
+    await Promise.all(volumeController.createVolumeValidator.map(validation => validation.run(request)));
 
     const response = httpMocks.createResponse();
 
-    volumeController.createVolume(invalidRequest, response);
+    volumeController.createVolume(request, response);
     expect(response.statusCode).toBe(400);
     const expectedError = {
       errors: {

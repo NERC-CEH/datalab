@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import logger from 'winston';
+import logger from '../config/logger';
 import podsApi from '../kubernetes/podsApi';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';

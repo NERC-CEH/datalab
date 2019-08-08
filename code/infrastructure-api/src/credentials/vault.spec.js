@@ -1,12 +1,12 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import logger from 'winston';
+import logger from '../config/logger';
 import vault from './vault';
 import config from '../config/config';
 
 const mock = new MockAdapter(axios);
 
-jest.mock('winston');
+jest.mock('../config/logger');
 
 beforeEach(() => {
   mock.reset();

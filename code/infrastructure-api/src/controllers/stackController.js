@@ -1,5 +1,4 @@
-import { check } from 'express-validator/check';
-import { matchedData, sanitize } from 'express-validator/filter';
+import { check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
@@ -76,19 +75,13 @@ function deleteStackExec(request, response) {
 }
 
 const checkExistsWithMsg = fieldName =>
-  check(fieldName).exists().withMessage(`${fieldName} must be specified`);
-
-const coreStackValidator = [
-  sanitize('*').trim(),
-];
+  check(fieldName).exists().withMessage(`${fieldName} must be specified`).trim();
 
 const withIdValidator = [
-  ...coreStackValidator,
   checkExistsWithMsg('id'),
 ];
 
 const withNameValidator = [
-  ...coreStackValidator,
   checkExistsWithMsg('name')
     .isAscii()
     .withMessage('Name must only use the characters a-z')

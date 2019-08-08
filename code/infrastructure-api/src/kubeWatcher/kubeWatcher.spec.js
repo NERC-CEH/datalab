@@ -1,8 +1,8 @@
-import logger from 'winston';
+import logger from '../config/logger';
 import { podAddedWatcher, podDeletedWatcher, podReadyWatcher } from './kubeWatcher';
 import * as stackRepository from '../dataaccess/stacksRepository';
 
-jest.mock('winston');
+jest.mock('../config/logger');
 jest.mock('../dataaccess/stacksRepository');
 
 const updateStatusMock = jest.fn().mockReturnValue(Promise.resolve());

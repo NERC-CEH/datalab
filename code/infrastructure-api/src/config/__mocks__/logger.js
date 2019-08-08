@@ -44,4 +44,6 @@ function error(message, data, metadata) {
   messages.error.push({ message, data, metadata });
 }
 
-export default { debug, info, warn, error, clearMessages, getDebugMessages, getInfoMessages, getWarnMessages, getErrorMessages };
+const logger = { debug, info, warn, error, clearMessages, getDebugMessages, getInfoMessages, getWarnMessages, getErrorMessages };
+
+export default logger;

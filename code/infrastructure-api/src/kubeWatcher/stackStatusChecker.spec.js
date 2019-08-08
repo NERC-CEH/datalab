@@ -1,9 +1,9 @@
-import logger from 'winston';
+import logger from '../config/logger';
 import statusChecker from './stackStatusChecker';
 import * as podsApi from '../kubernetes/podsApi';
 import * as stackRepository from '../dataaccess/stacksRepository';
 
-jest.mock('winston');
+jest.mock('../config/logger');
 jest.mock('../kubernetes/podsApi');
 jest.mock('../dataaccess/stacksRepository');
 

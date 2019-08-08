@@ -1,6 +1,6 @@
 import * as k8s from '@kubernetes/client-node';
-import logger from 'winston';
 import { find } from 'lodash';
+import logger from '../config/logger';
 import config from '../config/config';
 import kubeConfig from '../kubernetes/kubeConfig';
 import stackRepository from '../dataaccess/stacksRepository';

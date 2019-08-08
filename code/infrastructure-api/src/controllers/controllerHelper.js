@@ -1,5 +1,5 @@
-import logger from 'winston';
-import { validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator';
+import logger from '../config/logger';
 
 function validateAndExecute(request, response, errorMessage, execute) {
   // Parse request for errors

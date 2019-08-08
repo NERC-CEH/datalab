@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import bluebird from 'bluebird';
-import logger from 'winston';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import logger from './logger';
 import config from './config';
 
 const models = join(__dirname, '../models');
@@ -28,6 +28,8 @@ function createConnection() {
   const options = {
     promiseLibrary: bluebird,
     keepAlive: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
     user: config.get('databaseUser'),
     pass: config.get('databasePassword'),
     authSource: 'admin',

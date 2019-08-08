@@ -1,5 +1,4 @@
-import { check } from 'express-validator/check';
-import { matchedData, sanitize } from 'express-validator/filter';
+import { check, matchedData, sanitize } from 'express-validator';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import { mapHandleId } from '../dataaccess/renameIdHandler';
@@ -46,21 +45,18 @@ function listByMountExec(request, response) {
     .catch(controllerHelper.handleError(response, 'matching mount for', TYPE, undefined));
 }
 
-const coreStacksValidator = [
-  sanitize('*').trim(),
-];
-
 const withCategoryValidator = [
-  ...coreStacksValidator,
   check('category', 'category must match known type')
     .exists()
-    .isIn([ANALYSIS, PUBLISH]),
+    .isIn([ANALYSIS, PUBLISH])
+    .trim(),
+  sanitize(),
 ];
 
 const withMountValidator = [
-  ...coreStacksValidator,
   check('mount', 'mount must be specified')
-    .exists(),
+    .exists()
+    .trim(),
 ];
 
-export default { coreStacksValidator, withCategoryValidator, withMountValidator, listStacks, listByCategory, listByMount };
+export default { withCategoryValidator, withMountValidator, listStacks, listByCategory, listByMount };

@@ -1,5 +1,6 @@
 import httpMocks from 'node-mocks-http';
-import { validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator';
+import Promise from 'bluebird';
 import stacksController from './stacksController';
 import * as stackRepository from '../dataaccess/stacksRepository';
 
@@ -32,26 +33,20 @@ describe('Stacks controller', () => {
         });
     });
 
-    it('should return 400 for invalid request', () => {
-      const invalidRequest = httpMocks.createRequest({
-        method: 'GET',
-        _validationErrors: [{
-          location: 'body',
-          param: 'category',
-          msg: 'category must be specified',
-        }],
-      });
+    it('should return 400 for invalid request', async () => {
+      delete request.body.category;
+      await Promise.all(stacksController.withCategoryValidator.map(validation => validation.run(request)));
 
       const response = httpMocks.createResponse();
 
-      stacksController.listByCategory(invalidRequest, response);
+      stacksController.listByCategory(request, response);
       expect(response.statusCode).toBe(400);
       const expectedError = {
         errors: {
           category: {
             location: 'body',
             param: 'category',
-            msg: 'category must be specified',
+            msg: 'category must match known type',
           },
         },
       };

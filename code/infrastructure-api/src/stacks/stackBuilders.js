@@ -1,5 +1,5 @@
-import logger from 'winston';
 import chalk from 'chalk';
+import logger from '../config/logger';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import ingressApi from '../kubernetes/ingressApi';

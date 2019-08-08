@@ -1,5 +1,5 @@
-import logger from 'winston';
 import { has, get } from 'lodash';
+import logger from '../config/logger';
 
 export const handleCreateError = (type, name) => (error) => {
   if (has(error, 'response.data.message')) {

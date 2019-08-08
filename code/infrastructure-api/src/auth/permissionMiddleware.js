@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import logger from 'winston';
+import logger from '../config/logger';
 
 const permissionDelim = ':';
 const projectName = 'project';

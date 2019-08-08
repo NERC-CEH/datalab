@@ -1,6 +1,6 @@
 import axios from 'axios';
-import logger from 'winston';
 import { has, get } from 'lodash';
+import logger from '../config/logger';
 import config from '../config/config';
 
 const vaultBaseUrl = config.get('vaultApi');

@@ -1,7 +1,7 @@
 import jwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import logger from 'winston';
 import chalk from 'chalk';
+import logger from '../config/logger';
 import config from '../config/config';
 
 const JWKS_URL = `${config.get('authorisationService')}/jwks`;
