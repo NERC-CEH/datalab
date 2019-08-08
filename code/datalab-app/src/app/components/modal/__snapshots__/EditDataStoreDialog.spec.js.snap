@@ -28,6 +28,7 @@ exports[`Edit data store dialog creates correct snapshot 1`] = `
       <WithStyles(DownshiftMultiple)
         addItem={[Function]}
         placeholder="Type user's email address"
+        removeItem={[Function]}
         selectedItems={
           Array [
             Object {
