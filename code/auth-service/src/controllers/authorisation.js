@@ -49,9 +49,7 @@ function generatePermissionToken(request, response) {
         roles,
         permissions,
       };
-      const options = {
-        algorithm, audience, issuer, keyid, expiresIn,
-      };
+      const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
 
       logger.info('Responding with internal token');
@@ -83,6 +81,4 @@ function serveJWKS(request, response) {
   return response.send({ keys: [jwk] });
 }
 
-export default {
-  checkUser, getPermissionsForUser, generatePermissionToken, serveJWKS,
-};
+export default { checkUser, getPermissionsForUser, generatePermissionToken, serveJWKS };
