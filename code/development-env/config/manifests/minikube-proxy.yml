@@ -1,0 +1,64 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: datalab-app-proxy
+  namespace: devtest
+spec:
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: ExternalName
+  externalName: 10.0.2.2
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: datalab-api-proxy
+  namespace: devtest
+spec:
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: ExternalName
+  externalName: 10.0.2.2
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: datalab-app-ingress
+  namespace: devtest
+spec:
+  tls:
+  - hosts:
+    - testlab.datalabs.localhost
+    secretName: tls-secret
+  rules:
+  - host: testlab.datalabs.localhost
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: datalab-app-proxy
+          servicePort: 3000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: datalab-api-ingress
+  namespace: devtest
+spec:
+  tls:
+  - hosts:
+    - testlab-api.datalabs.localhost
+    secretName: tls-secret
+  rules:
+  - host: testlab-api.datalabs.localhost
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: datalab-api-proxy
+          servicePort: 8000

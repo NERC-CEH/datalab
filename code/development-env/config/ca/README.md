@@ -1,65 +1,50 @@
-# Create CA root key
+# Certificate Authority
+
+## Generate CA root key
 
 ```bash
-openssl genrsa -out rootCA.key 2048
+openssl genrsa -out ./config/ca/rootCA.key 2048
 ```
 
-# Create CA root certificate
-
-- Give user readable details for root cert; `CN`, `O`, `OU`
+## Generate website tls certificate key
 
 ```bash
-openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem
+openssl genrsa -out ./config/ca/datalab.localhost.key 2048
 ```
 
+## Create website certificate request
 
-# Create website tls key
+* Give user readable details for dev cert; `O`, `OU`.
+* Give correct address for CN; `*.datalabs.localhost`.
 
 ```bash
-openssl genrsa -out datalab.local.key 2048
+openssl req -new -key ./config/ca/datalab.localhost.key -out ./config/ca/datalab.localhost.csr
 ```
 
-# Create website certificate request
-
-- Give user readable details for dev cert; `O`, `OU`.
-- Give correct address for CN; `*.datalabs.local`.
-
-```bash
-openssl req -new -key datalab.local.key -out datalab.local.csr
-```
-
-# Add subject alternate name
+## Add subject alternate name
 
 Chrome expects valid certificates to have a correctly set `subjectAltName` field.
 
-- Set `subjectAltName` to match the `CN` set above
+* Set `subjectAltName` to match the `CN` set above
 
 ```bash
-cat <<EOF > datalab.local.ext
+cat <<EOF > ./config/ca/datalab.localhost.ext
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-subjectAltName=DNS:*.datalabs.local
+subjectAltName=DNS:*.datalabs.localhost
 EOF
 ```
 
-# Create website tls certificate
+## Create website tls x509 certificate
 
 ```bash
-openssl x509 -req -in datalab.local.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out datalab.local.crt -days 500 -sha256 -extfile datalab.local.ext
+openssl x509 -req -in ./config/ca/datalab.localhost.csr -CA ./config/ca/rootCA.pem -CAkey ./config/ca/rootCA.key -CAcreateserial -out ./config/ca/datalab.localhost.crt -days 500 -sha256 -extfile ./config/ca/datalab.localhost.ext
 ```
 
-# Install certificates
+This certificate will need to added as a tls-secret in Kubernetes, this is outlined in the Minikube section.
 
-- Add created CA root certificate as trusted in Chrome
-- Create secret for site key and certificate
+## Make development CA root certificate trusted for host system (MacOS)
 
-```bash
-kubectl create secret tls tls-secret --key datalab.local.key --cert datalab.local.crt
-```
-
-# Running node with self-signed certificates
-
-- Start APP/API in insecure mode
-
-`NODE_TLS_REJECT_UNAUTHORIZED=0 yarn start`
+* Open `keychain access` and drag `rootCA.pem` file into window
+* Double click the newly install DataLabs certificate and set trust to `Always Trust`

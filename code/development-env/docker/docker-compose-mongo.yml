@@ -1,4 +1,5 @@
-version: '3'
+version: '3.7'
+
 services:
   mongodb:
     image: mongo:4.1.13-bionic
@@ -21,4 +22,4 @@ services:
       - mongodb
     command: bash -c "cp /tmp/mongodb/import.sh /usr/local/bin && chmod +x /usr/local/bin/import.sh && import.sh"
     volumes:
-      - $PWD/../config/mongo:/tmp/mongodb/:ro
+      - $PWD/config/mongo:/tmp/mongodb/:ro

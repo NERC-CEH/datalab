@@ -1,49 +1,71 @@
-version: '3'
+version: '3.7'
+
+x-common-variables: &common
+  AUTHORISATION_SERVICE: http://datalab-auth:9000
+  AUTH_SIGNIN_URL: http://datalabs.localhost
+  DATABASE_HOST: mongodb
+  INFRASTRUCTURE_API: http://datalab-infra:8003
+  KUBERNETES_API: http://host.docker.internal:8001
+  LOG_LEVEL: ${LOG_LEVEL:-info}
+  VAULT_API: http://vault:8200
+  VAULT_APP_ROLE: ${VAULT_APP_ROLE}
+
 services:
   datalab-auth:
     image: node:8
+    working_dir: /usr/src/app
+    command: ["sh", "-c", "yarn start"]
     environment:
-      - AUTHORISATION_API_CLIENT_ID
-      - AUTHORISATION_API_CLIENT_SECRET
-      - AUTHORISATION_API_IDENTIFIER
-      - USER_MANAGEMENT_API_CLIENT_ID
-      - USER_MANAGEMENT_API_CLIENT_SECRET
-      - LOG_LEVEL
+      <<: *common
+      AUTHORISATION_API_CLIENT_ID: ${AUTHORISATION_API_CLIENT_ID}
+      AUTHORISATION_API_CLIENT_SECRET: ${AUTHORISATION_API_CLIENT_SECRET}
+      AUTHORISATION_API_IDENTIFIER: ${AUTHORISATION_API_IDENTIFIER}
+      USER_MANAGEMENT_API_CLIENT_ID: ${USER_MANAGEMENT_API_CLIENT_ID}
+      USER_MANAGEMENT_API_CLIENT_SECRET: ${USER_MANAGEMENT_API_CLIENT_SECRET}
     ports:
       - 9000:9000
-    entrypoint: sh -c
-    command:
-      - cd /usr/src/app && yarn start
     volumes:
-      - $PWD/../../auth-service:/usr/src/app/:ro
+      - ${PWD}/../auth-service:/usr/src/app/:ro
 
   datalab-infra:
     image: node:8
+    working_dir: /usr/src/app
+    command: ["sh", "-c", "yarn start"]
     environment:
-      - VAULT_APP_ROLE
-      - LOG_LEVEL
+      <<: *common
     ports:
       - 8003:8003
-    depends_on:
-      - datalab-auth
-    entrypoint: sh -c
-    command:
-      - cd /usr/src/app && yarn start
     volumes:
-      - $PWD/../../infrastructure-api:/usr/src/app/:ro
+      - $PWD/../infrastructure-api:/usr/src/app/:ro
+    links:
+      - datalab-auth
+      - mongodb
+      - vault
 
-  datalab-app-api:
+  datalab-api:
     image: node:8
+    working_dir: /usr/src/app
+    command: ["sh", "-c", "yarn api"]
     environment:
-      - VAULT_APP_ROLE
-      - LOG_LEVEL
+      <<: *common
+    ports:
+      - 8000:8000
+    volumes:
+      - $PWD/../datalab-app:/usr/src/app:ro
+    links:
+      - datalab-auth
+      - datalab-infra
+      - mongodb
+      - vault
+
+  datalab-app:
+    image: node:8
+    working_dir: /usr/src/app
+    command: ["sh", "-c", "yarn app"]
     ports:
       - 3000:3000
-      - 8000:8000
-    depends_on:
-      - datalab-auth
-    entrypoint: sh -c
-    command:
-      - cd /usr/src/app && yarn start
     volumes:
-      - $PWD/../../datalab-app:/usr/src/app:ro
+      - $PWD/../datalab-app:/usr/src/app:ro
+      # web_auth_config is unique to each domain and needs updating
+      - $PWD/config/local/web_auth_config.json:/usr/src/app/public/web_auth_config.json:ro
+

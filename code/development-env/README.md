@@ -1,84 +1,171 @@
 # Setup local development environment
 
-## Initial set-up
+## General setup
 
-### Using docker-machine (Windows)
+### Pre-requisites
 
-- Start docker-machine
-- Update mongo and vault addresses
+* NodeJS 8.16
+* Yarn
+* Docker
+* Docker-Compose
+* Minikube
+* OpenSSL
+* JQ
+* (Recommended) VirutalBox -- virtualisation provider for Minikube
+* (Recommended) DNSMasq -- for local wildcard DNS other than `*.localhost`
 
-```bash
-DOCKER_ADDRESS=`docker-machine ip`
-export DATABASE_HOST=${DOCKER_ADDRESS}
-export VAULT_API="http://${DOCKER_ADDRESS}:8200"
-```
+### MacOS specific installation
 
-### Start docker containers
-
-Mongo will be pre-seeded with data.
-
-```bash
-docker-compose -f ./docker/docker-compose.yml up -d
-```
+* [Install Homebrew](https://brew.sh/)
+* [Install Docker for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
+* [Install kubectl with Homebrew](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos)
+  * Docker for Mac (above) will install a version of `kubectl` at /Applications/Docker.app/Contents/Resources/bin,
+    and then link to it from /usr/local/bin/kubectl (which you can tell by `ls -l /usr/local/bin/kubectl`).
+  * `kubectl` from Homebrew will install to a different location, but not overwrite the symbolic link.
+  * You want `/usr/local/bin/kubectl` to be the one from Homebrew - to do this, run `brew link --overwrite kubernetes-cli`
+* [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Allow system software from Oracle](https://stackoverflow.com/questions/52277019/how-to-fix-vm-issue-with-minikube-start)
+* [Install minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+* Install yarn: `brew install yarn`
+* Install jq: `brew install jq`
+* (Recommended) Install dnsmasq: `brew install dnsmasq`
 
 ### Set-up minikube
 
-- Start minikube
-- Enable ingress controller
-  - `minikube addons enable ingress`
-- Create namespace
-  - `kubectl create namespace test`
-- Change default namespace
-  - `kubectl config set-context minikube --namespace=test`
-- Create and load TLS certificates
-  - see README in `./config/ca/`
-- Update and apply manifests
-  - see README in `./manifests/`
+* Start minikube
+  * `minikube start`
+* (Recommended) [Install `kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
+  for easy context and namespace switching.
+* When creating a new minikube cluster follow these [instructions](../manifests/README.md).
 
-### Start DNSMasq
+### Install NodeJS packages
 
-- See README in `./config/dnsmasq`
+* Run `yarn` in each of the following directories:
+  * `code/auth-service`
+  * `code/datalab-app`
+  * `code/infrastructure-api`
 
+### Set-up shell environment varaibles
 
-## Start local development environments
+There are a number of authorisation related environmental variables that need to be set
+to make the app work locally. [`direnv`](https://direnv.net) can be used to
+automatically set and unset these variables as you enter and leave the repository
+directories on your local machine. This is most easily installed on macOS using the
+[Homebrew](https://brew.sh) package manager by running the command
+`brew install direnv`. Once `direnv` is installed, follow the instructions
+[here](https://direnv.net/docs/hook.md) to get it working.
 
-### Datalabs APP/API
+`drienv` knows what environment variable to set by parsing a file called `.envrc`.
+The variables in the `.envrc` file will be set when in the directory containing the
+`.envrc` file or any of its child directories. Therefore, create a `.envrc` in the
+directory one level above the datalab repository's directory on your machine (helps
+avoid accidentally committing the file). There is a note in the shared Datalabs
+LastPass folder called `Dev Env Secrets`. Copy the contents of this note into your
+`.envrc` file.
 
-- Set environmental variables for API
-- Start infrastructure api 'yarn start'
+### Update Mongo default record initial value
+
+Database records can only be viewed by specified users. To be able to view the default
+mongo record created when the mongo container is started, you need to add your Auth0
+`user_id` to the `users` array in the seed document. This seed document is located at
+`code/development-env/config/mongo/dataStorageCollection.json`.
+
+To get your Auth0 `user_id`, do the following:
+
+* Login to [Auth0](https://manage.auth0.com).
+* Click on `Users & Roles` on the left hand side of the screen and then click `Users`.
+* Find yourself in the list of users and click on your email address.
+* Scroll down to `Identity Provider Attributes` section and copy the `user_id` value
+  (including the `auth0|` section).
+
+## Wildcard DNS & Certificate Authority
+
+Chrome will resolve sub-domains on the localhost  domain (ie. `*.localhost`) to
+the host machine, other browser may not response the same way. If a domain other
+than `*.localhost` is used for local development a local DNS must be set-up to
+resolve from a browser. See README in `./config/dnsmasq`.
+
+Development tls certificates have been generated and stored in the `./config/ca`
+these provide tls certificates for the `*.datalabs.localhost` subdomain. If a
+different subdomain is used new certificate will need to be generated using the
+same root certificate. See README in `./config/ca`.
+
+### Make development CA root certificate trusted for host system (MacOS)
+
+* Open `keychain access` and drag `rootCA.pem` file into window
+* Double click the newly install DataLabs certificate and set trust to `Always Trust`
+
+## Minikube
+
+### Create `devtest` namespace
 
 ```bash
-export VAULT_APP_ROLE= # Set to value from ./scripts/configure-vault.sh
-
-# Use stub Auth
-export AUTHORISATION_SERVICE_STUB=true
-
-# For docker machine
-export DATABASE_HOST=${DOCKER_ADDRESS}
-export VAULT_API="http://${DOCKER_ADDRESS}:8200"
+kubectl apply -f ./config/manifests/minikube-namespace.yml
+kubectl config set-context minikube --namespace=devtest
 ```
 
-
-### Infrastructure API
-
-- Set environmental variables
-- Start proxy to minikube in separate terminal
-- Start infrastructure api 'yarn start'
+### Create storage class
 
 ```bash
-export KUBERNETES_NAMESPACE=test # Or minikube namespace
-export VAULT_APP_ROLE= # Set to value from ./scripts/configure-vault.sh
-
-# For docker machine
-export VAULT_API="http://${DOCKER_ADDRESS}:8200"
+minikube addons enable storage-provisioner
+kubectl apply -f ./config/manifests/minikube-storage.yml
 ```
 
-### Authorisation service
+### Add website tls x509 certificate as Kubernetes secret
 
-- Set environmental variables
+This secret must be created __before__ adding ingress rules.
 
 ```bash
-export AUTHORISATION_API_CLIENT_ID= # from Auth0
-export AUTHORISATION_API_CLIENT_SECRET= # from Auth0
-export AUTHORISATION_API_IDENTIFIER= # from Auth0
+kubectl create secret tls tls-secret --key ./config/ca/datalab.localhost.key --cert ./config/ca/datalab.localhost.crt -n devtest
 ```
+
+### Create ingress rules to point back to host machine
+
+We can add ingress rules to use a loopback ip address to access element on the
+host machine. These rules use self-signed TLS certificates, these must be
+generated and stored as Kubernetes secrets __before__ creating the ingress
+rules. When running minikube in VirtualBox this address is expected to be
+`10.0.2.2` (this is the gateway address given to minikube by VirtualBox).
+
+```bash
+kubectl apply -f ./config/manifests/minikube-proxy.yml
+```
+
+### Clearing Minikube IP address when creating new cluster (MacOS)
+
+VirtualBox will retain leases for local IP address, when creating a new cluster
+a new IP address will be assigned. These can be cleared by deleting VirtualBox
+DHCP leases (`rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*`)
+
+The current ip for minikube can be found using `minikube ip`.
+
+## Docker-Compose
+
+## Run Containers
+
+* Start mongo & vault containers
+
+```bash
+docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml up -d
+```
+
+* Set Vault-App-Role token
+
+```bash
+./scripts/configure-vault.sh
+export VAULT_APP_ROLE= # Set to value output from command on line above
+```
+
+* Start minikube proxy, in separate terminal
+
+```bash
+kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
+```
+
+* Start DataLab App, DataLab Api, Infrastructure Api and Auth services.
+
+```bash
+docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up -d
+```
+
+You should eventually see a message saying `You can now view datalab-app in the browser.`

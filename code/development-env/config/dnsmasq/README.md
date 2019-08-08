@@ -1,14 +1,47 @@
-# Using custom DNS -  Linux
+# Configuring local wildcard DNS records
 
-Add 127.0.0.1 to TOP of DNS servers list. This can be found on GNOME via Network
-Setting > Wired > Setting (cog icon), IPv4, DNS.
+To be able to resolve the development environment via
+`http://testlab.datalabs.internal/` a wildcard DNS record must present locally.
+We configure this record to proxy request to the ingress controller running in
+Minikube.
 
+## MacOS
 
-# Start dnsmasq
+These instructions are adapted from this
+[blog post](https://blog.thesparktree.com/local-development-with-wildcard-dns).
 
-Check IP address in configuration file matches that for minikube. Run command
-below in new terminal window.
+### Update DNSMasq config
+
+Check the IP address used by Minikube and update `datalabs-dnsmasq.conf`; this
+is expected to be 192.168.99.100.
 
 ```bash
-sudo dnsmasq -C datalab-dnsmasq.conf -k
+minikube ip
 ```
+
+VirtualBox will retain leases for local IP address, when creating a new cluster
+a new IP address will be assigned. These can be cleared by deleting VirtualBox
+DHCP leases (`rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*`)
+
+```bash
+cp ./datalabs-dnsmasq.conf $(brew --prefix)/etc/dnsmasq.conf
+```
+
+Restart the DNSMasq daemon, this must be restart whenever the configuration file
+is updated.
+
+```bash
+sudo brew services start dnsmasq
+```
+
+Add a resolver record to loopback to localhost.
+
+```bash
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/datalabs.internal'
+```
+
+## GNU/Linux
+
+DNSMasq may also used to configured a locally resolving wildcard DNS record for
+linux, however updating the resolver can be a little more tricky ([see this post
+for more details](https://askubuntu.com/a/1031896)).
