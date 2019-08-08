@@ -31,6 +31,18 @@ const config = convict({
     default: 'localhost',
     env: 'DATABASE_HOST',
   },
+  databaseUser: {
+    doc: 'The user to authenticate against the database',
+    format: 'String',
+    default: 'datalabs-root-u',
+    env: 'DATABASE_USER',
+  },
+  databasePassword: {
+    doc: 'The password for the user being authenticated against the database',
+    format: 'String',
+    default: 'datalabs-root-p',
+    env: 'DATABASE_PASSWORD',
+  },
   vaultApi: {
     doc: 'The endpoint for Vault',
     format: 'url',

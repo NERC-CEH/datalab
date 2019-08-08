@@ -21,7 +21,10 @@ describe('Kubernetes event watcher', () => {
     const event = generatePodEvent('jupyter-expectedName', 'jupyter');
 
     return podAddedWatcher(event)
-      .then(() => expect(logger.getDebugMessages()).toMatchSnapshot());
+      .then(() => {
+        expect(logger.getDebugMessages()).toMatchSnapshot();
+        expect(logger.getInfoMessages()).toMatchSnapshot();
+      });
   });
 
   it('podAddedWatcher updates pod status', () => {
@@ -59,7 +62,10 @@ describe('Kubernetes event watcher', () => {
     const event = generatePodEvent('jupyter-expectedName', 'jupyter');
 
     return podReadyWatcher(event)
-      .then(() => expect(logger.getDebugMessages()).toMatchSnapshot());
+      .then(() => {
+        expect(logger.getDebugMessages()).toMatchSnapshot();
+        expect(logger.getInfoMessages()).toMatchSnapshot();
+      });
   });
 
   it('podReadyWatcher updates pod status', () => {

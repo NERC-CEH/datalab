@@ -31,3 +31,6 @@ minio_shared_store_secret_key: "{{ vault_minio_shared_store_secret_key }}"
 
 test_minio_shared_store_access_key: "{{ vault_test_minio_shared_store_access_key }}"
 test_minio_shared_store_secret_key: "{{ vault_test_minio_shared_store_secret_key }}"
+
+test_mongo_password: "{{ vault_test_mongo_password }}"
+mongo_password: "{{ vault_mongo_password }}"

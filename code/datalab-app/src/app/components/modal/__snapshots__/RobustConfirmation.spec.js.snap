@@ -1,32 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`] = `
-<WithStyles(Dialog)
+<WithStyles(ForwardRef(Dialog))
   maxWidth="md"
   open={true}
 >
-  <WithStyles(DialogTitle)>
+  <WithStyles(ForwardRef(DialogTitle))>
     Title
-  </WithStyles(DialogTitle)>
-  <WithStyles(DialogContent)>
-    <WithStyles(DialogContentText)>
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))>
       Body
-    </WithStyles(DialogContentText)>
+    </WithStyles(ForwardRef(DialogContentText))>
     <form>
-      <TextField
+      <WithStyles(ForwardRef(TextField))
         fullWidth={true}
         id="name"
         label="FieldLabel"
         margin="normal"
         onChange={[Function]}
-        required={false}
-        select={false}
         value=""
-        variant="standard"
       />
     </form>
-  </WithStyles(DialogContent)>
-  <WithStyles(DialogActions)>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
     <WithStyles(IconButton)
       icon="clear"
       onClick={[MockFunction]}
@@ -41,6 +38,6 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
     >
       Confirm Deletion
     </WithStyles(IconButton)>
-  </WithStyles(DialogActions)>
-</WithStyles(Dialog)>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
 `;

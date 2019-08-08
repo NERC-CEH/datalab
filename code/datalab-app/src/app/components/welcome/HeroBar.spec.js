@@ -6,6 +6,7 @@ import getAuth from '../../auth/auth';
 jest.mock('../../auth/auth');
 getAuth.mockImplementation(() => ({
   login: jest.fn(),
+  signUp: jest.fn(),
 }));
 
 describe('HeroBar', () => {

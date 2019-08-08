@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCard renders correct snapshot 1`] = `
-<WithStyles(Grid)
+<WithStyles(ForwardRef(Grid))
   item={true}
   md={4}
   sm={6}
   xs={12}
 >
-  <WithStyles(Card)
+  <WithStyles(ForwardRef(Card))
     className="DescribeElementCard-shadedCard-2"
     square={true}
   >
@@ -24,18 +24,18 @@ exports[`DescribeElementCard renders correct snapshot 1`] = `
         key="card-body"
       />
     </div>
-  </WithStyles(Card)>
-</WithStyles(Grid)>
+  </WithStyles(ForwardRef(Card))>
+</WithStyles(ForwardRef(Grid))>
 `;
 
 exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
-<WithStyles(Grid)
+<WithStyles(ForwardRef(Grid))
   item={true}
   md={4}
   sm={6}
   xs={12}
 >
-  <WithStyles(Card)
+  <WithStyles(ForwardRef(Card))
     className="DescribeElementCard-card-1"
     square={true}
   >
@@ -65,6 +65,6 @@ exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
         }
       />
     </div>
-  </WithStyles(Card)>
-</WithStyles(Grid)>
+  </WithStyles(ForwardRef(Card))>
+</WithStyles(ForwardRef(Grid))>
 `;

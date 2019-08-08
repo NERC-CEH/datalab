@@ -7,6 +7,11 @@ Array [
     "message": "Pod added: -- name: \\"jupyter-expectedName\\", type: \\"jupyter\\"",
     "metadata": undefined,
   },
+]
+`;
+
+exports[`Kubernetes event watcher podAddedWatcher logs events 2`] = `
+Array [
   Object {
     "data": undefined,
     "message": "Updated status record for \\"jupyter-expectedName\\" to \\"creating\\"",
@@ -32,6 +37,11 @@ Array [
     "message": "Pod ready -- name: \\"jupyter-expectedName\\", type: \\"jupyter\\"",
     "metadata": undefined,
   },
+]
+`;
+
+exports[`Kubernetes event watcher podReadyWatcher logs events 2`] = `
+Array [
   Object {
     "data": undefined,
     "message": "Updated status record for \\"expectedName\\" to \\"ready\\"",

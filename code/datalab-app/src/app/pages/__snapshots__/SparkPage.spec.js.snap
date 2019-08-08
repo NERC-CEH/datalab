@@ -2,12 +2,12 @@
 
 exports[`SparkPage renders correct snapshot 1`] = `
 <WithStyles(Segment)>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     gutterBottom={true}
     variant="h4"
   >
     Spark
-  </WithStyles(Typography)>
+  </WithStyles(ForwardRef(Typography))>
   <p>
     Apache Spark is an open-source cluster-computing framework.
   </p>

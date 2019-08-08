@@ -16,6 +16,7 @@
         "ignoreComments": false
       }
     ],
+    "object-curly-newline": ["error", { "consistent": true }],
     "no-console": "off",
     "no-multiple-empty-lines": [
       "error",

@@ -58,3 +58,15 @@
   register: minio_shared_store_secret
   changed_when: minio_shared_store_secret.rc == 0
   failed_when: minio_shared_store_secret.rc != 0 and 'AlreadyExists' not in minio_shared_store_secret.stderr
+
+- name: Deploy Test Mongo password secret
+  shell: kubectl create secret generic mongo-password-secret --from-literal=secret="{{ test_mongo_password }}" -n test
+  register: test_mongo_password_secret
+  changed_when: test_mongo_password_secret.rc == 0
+  failed_when: test_mongo_password_secret.rc != 0 and 'AlreadyExists' not in test_mongo_password_secret.stderr
+
+- name: Deploy Prod Mongo password secret
+  shell: kubectl create secret generic mongo-password-secret --from-literal=secret="{{ mongo_password }}" -n prod
+  register: mongo_password_secret
+  changed_when: mongo_password_secret.rc == 0
+  failed_when: mongo_password_secret.rc != 0 and 'AlreadyExists' not in mongo_password_secret.stderr

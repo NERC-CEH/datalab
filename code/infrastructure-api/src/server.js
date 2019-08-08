@@ -22,4 +22,4 @@ function listen() {
 
 database.createConnection()
   .then(listen)
-  .catch(error => logger.error(chalk.red(`Error connecting to the database ${error}`)));
+  .catch(error => logger.error(`Error connecting to the database ${error}`));

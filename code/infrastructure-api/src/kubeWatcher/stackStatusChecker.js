@@ -10,12 +10,13 @@ const kubeCreateStatus = ['ContainerCreating', /^Init:/, 'PodInitializing'];
 const kubeRequestStatus = ['Pending'];
 
 function statusChecker() {
-  logger.info('Status checker: starting');
+  logger.debug('Status checker: starting');
 
   return podsApi.getStacks()
     .then(groupStatusByName)
     .then(setStatus)
-    .then(() => logger.info('Status checker: complete'));
+    .then(() => logger.debug('Status checker: complete'))
+    .catch(error => logger.error(`Error getting stack status -> ${error}`));
 }
 
 const groupStatusByName = pods => pods
@@ -29,7 +30,15 @@ const setStatus = pods => Promise.mapSeries(Object.entries(pods), ([kubeName, st
   const status = getStatus(statusArray);
 
   return stackRepository.updateStatus({ name, type, status })
-    .then(() => logger.debug(`Updated status record for "${name}" to "${status}"`));
+    .then((result) => {
+      if (result.n === 0) {
+        logger.warn(`Tried to update record for "${name}" but no such record exists.`);
+      } else {
+        const message = `Updated status record for "${name}" to "${status}"`;
+        const loggingFn = result.nModified === 1 ? logger.info : logger.debug;
+        loggingFn(message);
+      }
+    });
 });
 
 const getStatus = (statusArray) => {

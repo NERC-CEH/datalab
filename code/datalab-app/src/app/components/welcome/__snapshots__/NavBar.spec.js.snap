@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar renders correct snapshot 1`] = `
-<WithStyles(AppBar)
+<WithStyles(ForwardRef(AppBar))
   position="fixed"
 >
-  <WithStyles(Toolbar)>
+  <WithStyles(ForwardRef(Toolbar))>
     <img
       alt="DataLabs-Logo"
       className="PublicNavBarContent-logo-1"
@@ -37,12 +37,12 @@ exports[`NavBar renders correct snapshot 1`] = `
     >
       Docker Hub
     </WithStyles(NavBarLinkButton)>
-    <WithStyles(Button)
+    <WithStyles(ForwardRef(Button))
       color="primary"
       onClick={[MockFunction]}
     >
       Log In
-    </WithStyles(Button)>
-  </WithStyles(Toolbar)>
-</WithStyles(AppBar)>
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(Toolbar))>
+</WithStyles(ForwardRef(AppBar))>
 `;
