@@ -85,49 +85,10 @@ the host machine, other browser may not response the same way. If a domain other
 than `*.localhost` is used for local development a local DNS must be set-up to
 resolve from a browser. See README in `./config/dnsmasq`.
 
-### Generate CA root key
-
-```bash
-openssl genrsa -out ./config/ca/rootCA.key 2048
-```
-
-### Generate website tls certificate key
-
-```bash
-openssl genrsa -out ./config/ca/datalab.localhost.key 2048
-```
-
-### Create website certificate request
-
-* Give user readable details for dev cert; `O`, `OU`.
-* Give correct address for CN; `*.datalabs.localhost`.
-
-```bash
-openssl req -new -key ./config/ca/datalab.localhost.key -out ./config/ca/datalab.localhost.csr
-```
-
-### Add subject alternate name
-
-Chrome expects valid certificates to have a correctly set `subjectAltName` field.
-
-* Set `subjectAltName` to match the `CN` set above
-
-```bash
-cat <<EOF > ./config/ca/datalab.localhost.ext
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-subjectAltName=DNS:*.datalabs.localhost
-EOF
-```
-
-## Create website tls x509 certificate
-
-```bash
-openssl x509 -req -in ./config/ca/datalab.localhost.csr -CA ./config/ca/rootCA.pem -CAkey ./config/ca/rootCA.key -CAcreateserial -out ./config/ca/datalab.localhost.crt -days 500 -sha256 -extfile ./config/ca/datalab.localhost.ext
-```
-
-This certificate will need to added as a tls-secret in Kubernetes, this is outlined in the Minikube section.
+Development tls certificates have been generated and stored in the `./config/ca`
+these provide tls certificates for the `*.datalabs.localhost` subdomain. If a
+different subdomain is used new certificate will need to be generated using the
+same root certificate. See README in `./config/ca`.
 
 ### Make development CA root certificate trusted for host system (MacOS)
 
@@ -204,7 +165,7 @@ kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 * Start DataLab App, DataLab Api, Infrastructure Api and Auth services.
 
 ```bash
-docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml up -d
+docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up -d
 ```
 
 You should eventually see a message saying `You can now view datalab-app in the browser.`

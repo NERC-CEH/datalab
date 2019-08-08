@@ -30,10 +30,6 @@ code/auth-service/dist
 experimental/glusterfs-heketi/.vagrant
 *.vdi
 
-code/development-env/config/ca/*.crt
-code/development-env/config/ca/*.key
-code/development-env/config/ca/*.pem
-
 *.retry
 .terraform
 *.tfstate*
