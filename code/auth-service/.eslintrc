@@ -35,10 +35,5 @@
     "class-methods-use-this": "off",
     "import/no-named-default": "off",
     "no-use-before-define": "off",
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
   }
 }

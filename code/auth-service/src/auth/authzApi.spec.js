@@ -29,12 +29,11 @@ describe('Authorisation API', () => {
         .reply(200, [{ name: 'firstRoleName' }, { name: 'secondRoleName' }]);
 
       return getUserRoles('UserName')
-        .then(() =>
-          expect(requestAccessTokenMock).toHaveBeenCalledWith({
-            audience: 'authzIdentifier',
-            client_id: 'authzClientId',
-            client_secret: 'authzClientSecret',
-          }));
+        .then(() => expect(requestAccessTokenMock).toHaveBeenCalledWith({
+          audience: 'authzIdentifier',
+          client_id: 'authzClientId',
+          client_secret: 'authzClientSecret',
+        }));
     });
 
     it('responds with extracted roles', () => {
@@ -42,8 +41,7 @@ describe('Authorisation API', () => {
         .reply(200, [{ name: 'firstRoleName' }, { name: 'secondRoleName' }]);
 
       return getUserRoles('UserName')
-        .then(roles =>
-          expect(roles).toEqual(['firstRoleName', 'secondRoleName']));
+        .then(roles => expect(roles).toEqual(['firstRoleName', 'secondRoleName']));
     });
 
     it('throws error when unable to get roles', () => {
@@ -51,8 +49,7 @@ describe('Authorisation API', () => {
         .reply(401);
 
       return getUserRoles('UserName')
-        .catch(err =>
-          expect(err.message).toBe('Unable to retrieve roles from the Authz Service.'));
+        .catch(err => expect(err.message).toBe('Unable to retrieve roles from the Authz Service.'));
     });
   });
 

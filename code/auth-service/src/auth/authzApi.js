@@ -19,22 +19,19 @@ export function getUserRoles(userId) {
   const url = `${authorisationExtensionEndpoint}/users/${userId}/roles`;
 
   return requestAccessToken(accessTokenRequest)
-    .then(bearer =>
-      axios.get(url, { headers: { Authorization: `Bearer ${bearer}` } })
-        .then(extractRoleNames)
-        .catch(() => {
-          throw new Error('Unable to retrieve roles from the Authz Service.');
-        }))
+    .then(bearer => axios.get(url, { headers: { Authorization: `Bearer ${bearer}` } })
+      .then(extractRoleNames)
+      .catch(() => {
+        throw new Error('Unable to retrieve roles from the Authz Service.');
+      }))
     .catch((err) => {
       logger.error(err.message);
       throw err;
     });
 }
 
-const extractRoleNames = response =>
-  get(response, 'data', []).map(role => role.name);
+const extractRoleNames = response => get(response, 'data', []).map(role => role.name);
 
-const cacheOrGetUserRoles = userId =>
-  getOrSetCacheAsyncWrapper(`AUTH_ROLES_${userId}`, getUserRoles)(userId);
+const cacheOrGetUserRoles = userId => getOrSetCacheAsyncWrapper(`AUTH_ROLES_${userId}`, getUserRoles)(userId);
 
 export default cacheOrGetUserRoles;

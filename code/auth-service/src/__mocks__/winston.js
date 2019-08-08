@@ -44,4 +44,6 @@ function debug(message, data, metadata) {
   messages.debug.push({ message, data, metadata });
 }
 
-export default { info, warn, error, debug, clearMessages, getInfoMessages, getWarnMessages, getErrorMessages, getDebugMessages };
+export default {
+  info, warn, error, debug, clearMessages, getInfoMessages, getWarnMessages, getErrorMessages, getDebugMessages,
+};

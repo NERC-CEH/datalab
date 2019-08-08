@@ -11,19 +11,16 @@ Promise.promisifyAll(cache);
 cache.on('set', createLogger('set'));
 cache.on('expired', createLogger('expire'));
 
-export const getOrSetCacheAsyncWrapper = (keyName, asyncFunc) => (...args) =>
-  cache.getAsync(keyName)
-    .then((value) => {
-      createLogger('get')(keyName, value);
-      return value;
-    })
-    .catch(() =>
-      asyncFunc(args)
-        .then(setCache(keyName)));
+export const getOrSetCacheAsyncWrapper = (keyName, asyncFunc) => (...args) => cache.getAsync(keyName)
+  .then((value) => {
+    createLogger('get')(keyName, value);
+    return value;
+  })
+  .catch(() => asyncFunc(args)
+    .then(setCache(keyName)));
 
-export const setCache = keyName => value =>
-  cache.setAsync(keyName, value)
-    .then(() => value);
+export const setCache = keyName => value => cache.setAsync(keyName, value)
+  .then(() => value);
 
 function createLogger(action) {
   return (key, value) => {

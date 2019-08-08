@@ -25,9 +25,6 @@ function permissionWrapper(permissionSuffixes) {
   };
 }
 
-const arraysIncludes = (current, expected) =>
-  current.some(currentValue =>
-    expected.some(expectedValue =>
-      new RegExp(`^${currentValue}$`).test(expectedValue)));
+const arraysIncludes = (current, expected) => current.some(currentValue => expected.some(expectedValue => new RegExp(`^${currentValue}$`).test(expectedValue)));
 
 export default permissionWrapper;

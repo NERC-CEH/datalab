@@ -27,8 +27,7 @@ const flattenArray = (previous, current) => {
 
 const buildPermissions = ({ permissions, ...rest }) => ({
   ...rest,
-  permissions: permissions.map(({ name, permissions: subPermissions }) =>
-    subPermissions.map(permission => name.concat(roleDelim, permission)))
+  permissions: permissions.map(({ name, permissions: subPermissions }) => subPermissions.map(permission => name.concat(roleDelim, permission)))
     .reduce(flattenArray, []),
 });
 
@@ -38,12 +37,11 @@ const projectifyPermissions = ({ projectName, permissions }) => {
   return permissions.map(permission => project.concat(permission));
 };
 
-const processRoles = roles =>
-  roles.map(parseRoles)
-    .map(parseProjects)
-    .map(getPermissions)
-    .map(buildPermissions)
-    .map(projectifyPermissions)
-    .reduce(flattenArray, []);
+const processRoles = roles => roles.map(parseRoles)
+  .map(parseProjects)
+  .map(getPermissions)
+  .map(buildPermissions)
+  .map(projectifyPermissions)
+  .reduce(flattenArray, []);
 
 export default processRoles;
