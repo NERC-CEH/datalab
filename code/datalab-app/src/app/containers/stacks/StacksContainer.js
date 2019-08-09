@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { reset } from 'redux-form';
+import React, { Component } from 'react';
 import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
-import stackActions from '../../actions/stackActions';
+import { permissionTypes } from '../../../shared';
 import modalDialogActions from '../../actions/modalDialogActions';
-import StackCards from '../../components/stacks/StackCards';
-import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import notify from '../../components/common/notify';
-import { projectPermissions } from '../../../shared/permissionTypes';
+import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
+import stackActions from '../../actions/stackActions';
+import StackCards from '../../components/stacks/StackCards';
 
 const refreshTimeout = 15000;
 
-const { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT } = projectPermissions;
+const { projectPermissions: { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT } } = permissionTypes;
 
 class StacksContainer extends Component {
   constructor(props, context) {

@@ -1,16 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { capitalize } from 'lodash';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
-import { withStyles } from '@material-ui/core/styles';
-import { capitalize } from 'lodash';
-import stackDescriptions from './stackDescriptions';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { statusTypes } from '../../../shared';
 import StackCardActions from './StackCardActions';
+import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
-import { READY } from '../../../shared/statusTypes';
+
+const { READY } = statusTypes;
 
 function styles(theme) {
   const flexProps = {

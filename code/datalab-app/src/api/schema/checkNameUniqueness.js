@@ -3,11 +3,11 @@ import {
   GraphQLString,
   GraphQLBoolean,
 } from 'graphql';
+import { permissionTypes } from '../../shared';
 import internalNameChecker from '../dataaccess/internalNameChecker';
 import permissionChecker from '../auth/permissionChecker';
-import { elementPermissions } from '../../shared/permissionTypes';
 
-const { STACKS_CREATE, STORAGE_CREATE } = elementPermissions;
+const { elementPermissions: { STACKS_CREATE, STORAGE_CREATE } } = permissionTypes;
 
 const checkNameUniqueness = {
   description: 'Checks internal name is unique.',

@@ -1,6 +1,8 @@
 import validate from 'validate.js';
+import { stackTypes } from '../../../shared';
 import internalNameCheckerActions from '../../actions/internalNameCheckerActions';
-import { getStackKeys } from '../../../shared/stackTypes';
+
+const { getStackKeys } = stackTypes;
 
 const constraints = {
   displayName: {

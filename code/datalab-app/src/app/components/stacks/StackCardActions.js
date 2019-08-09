@@ -1,9 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { statusTypes } from '../../../shared';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
-import { READY } from '../../../shared/statusTypes';
+
+const { READY } = statusTypes;
 
 const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
   deletePermission, editPermission }) => (

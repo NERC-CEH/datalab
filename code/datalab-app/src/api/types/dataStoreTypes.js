@@ -8,13 +8,13 @@ import {
   GraphQLList,
 } from 'graphql';
 import { StackType } from './stackTypes';
+import { statusTypes, permissionTypes } from '../../shared';
 import minioTokenService from '../dataaccess/minioTokenService';
-import stackService from '../dataaccess/stackService';
-import { READY } from '../../shared/statusTypes';
-import { usersPermissions } from '../../shared/permissionTypes';
 import permissionChecker from '../auth/permissionChecker';
+import stackService from '../dataaccess/stackService';
 
-const { USERS_LIST } = usersPermissions;
+const { usersPermissions: { USERS_LIST } } = permissionTypes;
+const { READY } = statusTypes;
 
 export const StorageType = new GraphQLEnumType({
   name: 'StorageType',

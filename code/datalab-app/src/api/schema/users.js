@@ -1,10 +1,10 @@
 import { GraphQLList } from 'graphql';
-import UserType from '../types/userTypes';
+import { permissionTypes } from '../../shared';
 import permissionChecker from '../auth/permissionChecker';
-import { usersPermissions } from '../../shared/permissionTypes';
 import userService from '../dataaccess/usersService';
+import UserType from '../types/userTypes';
 
-const { USERS_LIST } = usersPermissions;
+const { usersPermissions: { USERS_LIST } } = permissionTypes;
 
 const users = {
   description: 'List of users within the current DataLab',
