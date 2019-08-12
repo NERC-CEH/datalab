@@ -1,11 +1,11 @@
 import { DataStoreType, DataStorageCreationType, DataStorageUpdateType } from '../types/dataStoreTypes';
+import { permissionTypes } from '../../shared';
 import config from '../config';
-import dataStoreApi from '../infrastructure/dataStoreApi';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
+import dataStoreApi from '../infrastructure/dataStoreApi';
 import permissionChecker from '../auth/permissionChecker';
-import { elementPermissions } from '../../shared/permissionTypes';
 
-const { STORAGE_CREATE, STORAGE_DELETE, STORAGE_EDIT } = elementPermissions;
+const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_EDIT } } = permissionTypes;
 
 const DATALAB_NAME = config.get('datalabName');
 

@@ -1,10 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField } from '../common/form/controls';
+import { stackTypes } from '../../../shared';
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
-import { PUBLISH, getStackSelections } from '../../../shared/stackTypes';
+
+const { PUBLISH, getStackSelections } = stackTypes;
 
 const CreateSiteForm = (props) => {
   const { handleSubmit, cancel, submitting, dataStorageOptions } = props;

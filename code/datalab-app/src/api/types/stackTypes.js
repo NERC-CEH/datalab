@@ -6,9 +6,11 @@ import {
   GraphQLEnumType,
   GraphQLInputObjectType,
 } from 'graphql';
+import { stackTypes, statusTypes } from '../../shared';
 import stackUrlService from '../dataaccess/stackUrlService';
-import { getStackTypes } from '../../shared/stackTypes';
-import { getStatusTypes } from '../../shared/statusTypes';
+
+const { getStackTypes } = stackTypes;
+const { getStatusTypes } = statusTypes;
 
 const statusType = new GraphQLEnumType({
   name: 'StatusType',

@@ -8,10 +8,10 @@ const STACKS = 'stacks';
 const STORAGE = 'storage';
 const USERS = 'users';
 
-export const PROJECT = 'project';
+const PROJECT = 'project';
 
 const keyDelim = '_';
-export const permissionDelim = ':';
+const permissionDelim = ':';
 
 const elementsPermissionList = {
   CREATE,
@@ -46,14 +46,16 @@ const flatMapPermissions = (outer, inner) => Object.entries(outer)
   .reduce((previous, current) => [...previous, ...current], [])
   .reduce((previous, current) => Object.assign(previous, current), {});
 
-export const elementPermissions = flatMapPermissions(elements, elementsPermissionList);
+const elementPermissions = flatMapPermissions(elements, elementsPermissionList);
 
-export const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
+const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
 
-export const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
+const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
 
-export default {
-  ...elementPermissions,
-  ...usersPermissions,
-  ...projectPermissions,
+export {
+  PROJECT,
+  elementPermissions,
+  usersPermissions,
+  projectPermissions,
+  permissionDelim as delimiter,
 };

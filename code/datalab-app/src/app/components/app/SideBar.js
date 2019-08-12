@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import datalabsLogo from '../../../assets/images/datalabs-hori.png';
-import SideBarSubheader from './SideBarSubheader';
-import NavLink from './NavLink';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { extendSubdomain } from '../../core/getDomainInfo';
+import { permissionTypes } from '../../../shared';
+import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import navBarLinks from '../../constants/navBarLinks';
+import NavLink from './NavLink';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
-import { projectPermissions } from '../../../shared/permissionTypes';
+import SideBarSubheader from './SideBarSubheader';
 
-const { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } = projectPermissions;
+const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } } = permissionTypes;
 
 const { DISCOURSE, SLACK } = navBarLinks;
 export const drawerWidth = 240;

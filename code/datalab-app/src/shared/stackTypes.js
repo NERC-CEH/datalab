@@ -1,16 +1,16 @@
 import { keyBy, capitalize } from 'lodash';
 
-export const JUPYTER = 'jupyter';
-export const JUPYTERLAB = 'jupyterlab';
-export const ZEPPELIN = 'zeppelin';
-export const RSTUDIO = 'rstudio';
-export const RSHINY = 'rshiny';
-export const NBVIEWER = 'nbviewer';
-export const NFS_VOLUME = 'nfs';
+const JUPYTER = 'jupyter';
+const JUPYTERLAB = 'jupyterlab';
+const ZEPPELIN = 'zeppelin';
+const RSTUDIO = 'rstudio';
+const RSHINY = 'rshiny';
+const NBVIEWER = 'nbviewer';
+const NFS_VOLUME = 'nfs';
 
-export const ANALYSIS = 'analysis';
-export const PUBLISH = 'publish';
-export const DATA_STORE = 'dataStore';
+const ANALYSIS = 'analysis';
+const PUBLISH = 'publish';
+const DATA_STORE = 'dataStore';
 
 const STACK_TYPES = [
   {
@@ -64,4 +64,18 @@ function getStackKeys() {
   return STACK_TYPES.map(type => type.name);
 }
 
-export { getStackTypes, getStackSelections, getStackKeys };
+export {
+  ANALYSIS,
+  DATA_STORE,
+  JUPYTER,
+  JUPYTERLAB,
+  NBVIEWER,
+  NFS_VOLUME,
+  PUBLISH,
+  RSHINY,
+  RSTUDIO,
+  ZEPPELIN,
+  getStackKeys,
+  getStackSelections,
+  getStackTypes,
+};

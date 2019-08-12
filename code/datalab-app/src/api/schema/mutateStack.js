@@ -1,10 +1,10 @@
+import { permissionTypes } from '../../shared';
 import { StackCreationType, StackDeletionType, StackType } from '../types/stackTypes';
 import config from '../config';
-import stackApi from '../infrastructure/stackApi';
 import permissionChecker from '../auth/permissionChecker';
-import { elementPermissions } from '../../shared/permissionTypes';
+import stackApi from '../infrastructure/stackApi';
 
-const { STACKS_CREATE, STACKS_DELETE } = elementPermissions;
+const { elementPermissions: { STACKS_CREATE, STACKS_DELETE } } = permissionTypes;
 
 const DATALAB_NAME = config.get('datalabName');
 

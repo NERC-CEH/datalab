@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { pick } from 'lodash';
+import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { reset } from 'redux-form';
-import { pick } from 'lodash';
+import React, { Component } from 'react';
 import {
   MODAL_TYPE_CREATE_DATA_STORE,
   MODAL_TYPE_CONFIRMATION,
   MODAL_TYPE_ROBUST_CONFIRMATION,
   MODAL_TYPE_EDIT_DATA_STORE,
 } from '../../constants/modaltypes';
+import { permissionTypes } from '../../../shared';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
-import StackCards from '../../components/stacks/StackCards';
-import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import notify from '../../components/common/notify';
-import { projectPermissions } from '../../../shared/permissionTypes';
+import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
+import StackCards from '../../components/stacks/StackCards';
 
-const { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT } = projectPermissions;
+const { projectPermissions: { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT } } = permissionTypes;
 
 const TYPE_NAME = 'Data Store';
 const FORM_NAME = 'createDataStore';

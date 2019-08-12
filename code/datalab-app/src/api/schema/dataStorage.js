@@ -4,11 +4,11 @@ import {
   GraphQLNonNull,
 } from 'graphql';
 import { DataStoreType } from '../types/dataStoreTypes';
+import { permissionTypes } from '../../shared';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import permissionChecker from '../auth/permissionChecker';
-import { elementPermissions } from '../../shared/permissionTypes';
 
-const { STORAGE_LIST, STORAGE_OPEN } = elementPermissions;
+const { elementPermissions: { STORAGE_LIST, STORAGE_OPEN } } = permissionTypes;
 
 export const dataStorage = {
   description: 'List of currently provisioned DataLabs data storage.',

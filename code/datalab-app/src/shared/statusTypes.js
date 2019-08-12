@@ -1,10 +1,10 @@
 import { blue, green, yellow } from '@material-ui/core/colors';
 import { keyBy, capitalize } from 'lodash';
 
-export const REQUESTED = 'requested';
-export const CREATING = 'creating';
-export const READY = 'ready';
-export const UNAVAILABLE = 'unavailable';
+const REQUESTED = 'requested';
+const CREATING = 'creating';
+const READY = 'ready';
+const UNAVAILABLE = 'unavailable';
 
 const STATUS_TYPES = [
   {
@@ -50,4 +50,12 @@ function getStatusProps(status) {
   return getStatusTypes()[status];
 }
 
-export { getStatusTypes, getStatusKeys, getStatusProps };
+export {
+  CREATING,
+  READY,
+  REQUESTED,
+  UNAVAILABLE,
+  getStatusKeys,
+  getStatusProps,
+  getStatusTypes,
+};

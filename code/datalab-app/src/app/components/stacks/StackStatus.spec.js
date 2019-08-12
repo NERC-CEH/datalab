@@ -1,7 +1,9 @@
-import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import { getStatusKeys } from '../../../shared/statusTypes';
+import React from 'react';
+import { statusTypes } from '../../../shared';
 import StackStatus from './StackStatus';
+
+const { getStatusKeys } = statusTypes;
 
 describe('StackStatus', () => {
   function shallowRender(status) {

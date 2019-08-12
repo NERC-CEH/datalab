@@ -1,11 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { renderTextField, renderSelectField, renderTextArea } from '../common/form/controls';
+import { stackTypes } from '../../../shared';
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
-import { DATA_STORE, getStackSelections } from '../../../shared/stackTypes';
 
+const { DATA_STORE, getStackSelections } = stackTypes;
 const initialValues = { type: 'nfs' };
 
 const CreateDataStoreForm = (props) => {

@@ -4,12 +4,12 @@ import {
   GraphQLNonNull,
   GraphQLString,
 } from 'graphql';
+import { permissionTypes } from '../../shared';
 import { StackType } from '../types/stackTypes';
-import stackService from '../dataaccess/stackService';
 import permissionChecker from '../auth/permissionChecker';
-import { elementPermissions } from '../../shared/permissionTypes';
+import stackService from '../dataaccess/stackService';
 
-const { STACKS_LIST, STACKS_OPEN } = elementPermissions;
+const { elementPermissions: { STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 
 export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks owned by user.',

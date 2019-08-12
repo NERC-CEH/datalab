@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import NavigationContainer from './containers/app/NavigationContainer';
-import NotFoundPage from './pages/NotFoundPage';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { permissionTypes } from '../shared';
+import DaskPage from './pages/DaskPage';
+import DataStoragePage from './pages/DataStoragePage';
 import Footer from './components/app/Footer';
 import LandingPage from './pages/LandingPage';
-import DataStoragePage from './pages/DataStoragePage';
-import NotebooksPage from './pages/NotebooksPage';
-import PublishingPage from './pages/PublishingPage';
-import DaskPage from './pages/DaskPage';
-import SparkPage from './pages/SparkPage';
 import ModalRoot from './containers/modal/ModalRoot';
+import NavigationContainer from './containers/app/NavigationContainer';
+import NotebooksPage from './pages/NotebooksPage';
+import NotFoundPage from './pages/NotFoundPage';
+import PublishingPage from './pages/PublishingPage';
 import RoutePermissions from './components/common/RoutePermissionWrapper';
-import { projectPermissions } from '../shared/permissionTypes';
+import SparkPage from './pages/SparkPage';
 
-const { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } = projectPermissions;
+const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } } = permissionTypes;
 
 const PrivateApp = ({ promisedUserPermissions }) => (
   <NavigationContainer userPermissions={promisedUserPermissions.value}>

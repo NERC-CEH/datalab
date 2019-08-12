@@ -1,11 +1,12 @@
+import { findLast } from 'lodash';
 import axios from 'axios';
 import logger from 'winston';
-import { findLast } from 'lodash';
-import vault from './vault/vault';
-import { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } from '../../shared/stackTypes';
+import { stackTypes } from '../../shared';
 import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
+import vault from './vault/vault';
 
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
 const DATALAB_NAME = config.get('datalabName');
 const RSTUDIO_USERNAME = 'datalab';
 

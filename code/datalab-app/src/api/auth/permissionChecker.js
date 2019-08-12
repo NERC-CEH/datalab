@@ -1,14 +1,16 @@
 import logger from 'winston';
-import { PROJECT, permissionDelim } from '../../shared/permissionTypes';
+import { permissionTypes } from '../../shared';
+
+const { PROJECT, delimiter } = permissionTypes;
 
 export const permissionWrapper = (permissionSuffix, ...rest) =>
   permissionCheck(
-    [PROJECT.concat(permissionDelim, permissionSuffix)],
+    [PROJECT.concat(delimiter, permissionSuffix)],
     ...rest);
 
 export const multiPermissionsWrapper = (permissionSuffixes, ...rest) =>
   permissionCheck(
-    permissionSuffixes.map(suffix => PROJECT.concat(permissionDelim, suffix)),
+    permissionSuffixes.map(suffix => PROJECT.concat(delimiter, suffix)),
     ...rest);
 
 function permissionCheck(requiredPermissions, { permissions }, next) {

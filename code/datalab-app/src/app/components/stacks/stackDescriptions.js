@@ -1,10 +1,12 @@
-import { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, NFS_VOLUME } from '../../../shared/stackTypes';
-import jupyterLogo from '../../../assets/images/jupyter-logo.svg';
+import { stackTypes } from '../../../shared';
 import jupyterlabLogo from '../../../assets/images/jupyterlab-logo.png';
-import zeppelinLogo from '../../../assets/images/zeppelin-logo.svg';
-import rstudioLogo from '../../../assets/images/rstudio-logo.png';
-import rshinyLogo from '../../../assets/images/rshiny-logo.png';
+import jupyterLogo from '../../../assets/images/jupyter-logo.svg';
 import nbviewerLogo from '../../../assets/images/nbviewer-logo.png';
+import rshinyLogo from '../../../assets/images/rshiny-logo.png';
+import rstudioLogo from '../../../assets/images/rstudio-logo.png';
+import zeppelinLogo from '../../../assets/images/zeppelin-logo.svg';
+
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, NFS_VOLUME } = stackTypes;
 
 const jupyterDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
 const jupyterlabDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
