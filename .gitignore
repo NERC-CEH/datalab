@@ -8,16 +8,13 @@
 docs/_book
 docs/version.md
 
-code/datalab-app/coverage/
-code/datalab-app/build/
-code/datalab-app/dist/
-code/datalab-app/src/api/version.js
-code/datalab-app/src/app/version.js
+code/workspaces/**/coverage/
+code/workspaces/**/dist/
+code/workspaces/**/version.js
 node_modules/
 
 code/provision/.vagrant
 code/provision/playbooks/vault-password.txt
-
 code/provision/playbooks/.artifacts/
 
 code/bara/.bara/

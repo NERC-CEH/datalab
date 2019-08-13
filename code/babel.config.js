@@ -8,10 +8,6 @@ module.exports = (api) => {
         { modules: 'commonjs', targets: { node: 'current' } },
       ],
     ],
-    // ignore: [
-    //   '__mocks__',
-    //   '**/*.spec.js',
-    // ],
     babelrcRoots: ['.', './workspaces/*'],
     env: {
       debug: {
