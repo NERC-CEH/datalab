@@ -63,9 +63,8 @@ export function generateDeleteElement(props) {
       .catch(axiosErrorHandler(ERROR_MESSAGE));
   }
 
-  const removeAndDeleteElement = ({ user, token }, element) => datalabInfo =>
-    sendDeletionRequest(token, element, datalabInfo)
-      .then(deleteRecord(user, element));
+  const removeAndDeleteElement = ({ user, token }, element) => datalabInfo => sendDeletionRequest(token, element, datalabInfo)
+    .then(deleteRecord(user, element));
 
   const sendDeletionRequest = (token, element, datalabInfo) => {
     const payload = generateApiPayload(element, datalabInfo);

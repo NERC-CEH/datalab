@@ -9,8 +9,7 @@ const { usersPermissions: { USERS_LIST } } = permissionTypes;
 const users = {
   description: 'List of users within the current DataLab',
   type: new GraphQLList(UserType),
-  resolve: (obj, args, { user, token }) =>
-    permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
+  resolve: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
 };
 
 export default users;

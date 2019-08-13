@@ -14,16 +14,16 @@ export default function notebookUrlService(notebook, user) {
   if (notebook.type === ZEPPELIN) {
     return requestZeppelinToken(notebook, user)
       .then(createZeppelinUrl(notebook));
-  } else if (notebook.type === JUPYTER) {
+  } if (notebook.type === JUPYTER) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterUrl(notebook));
-  } else if (notebook.type === JUPYTERLAB) {
+  } if (notebook.type === JUPYTERLAB) {
     return requestJupyterToken(notebook, user)
       .then(createJupyterlabUrl(notebook));
-  } else if (notebook.type === RSTUDIO) {
+  } if (notebook.type === RSTUDIO) {
     return requestRStudioToken(notebook, user)
       .then(createRStudioUrl(notebook));
-  } else if (notebook.type === NBVIEWER) {
+  } if (notebook.type === NBVIEWER) {
     return Promise.resolve(`${notebook.url}/localfile`);
   }
   return Promise.resolve(notebook.url);
@@ -35,10 +35,11 @@ const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?to
 
 const createJupyterlabUrl = notebook => token => (token ? `${notebook.url}/lab?token=${token}` : undefined);
 
-const createRStudioUrl = notebook => tokens =>
-  (tokens ? `${notebook.url}/connect?username=${RSTUDIO_USERNAME}&expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}` : undefined);
+const createRStudioUrl = notebook => tokens => (tokens
+  ? `${notebook.url}/connect?username=${RSTUDIO_USERNAME}&expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}`
+  : undefined);
 
-function requestZeppelinToken(stack, user) {
+function requestZeppelinToken(stack) { // stack, user
   return vault.requestStackKeys(DATALAB_NAME, stack)
     .then(zeppelinLogin(stack))
     .catch((error) => {
@@ -47,12 +48,12 @@ function requestZeppelinToken(stack, user) {
     });
 }
 
-function requestJupyterToken(stack, user) {
+function requestJupyterToken(stack) { // stack, user
   return vault.requestStackKeys(DATALAB_NAME, stack)
     .then(response => response.token);
 }
 
-function requestRStudioToken(stack, user) {
+function requestRStudioToken(stack) { // stack, user
   return vault.requestStackKeys(DATALAB_NAME, stack)
     .then(rstudioTokenService.rstudioLogin(stack))
     .catch((error) => {

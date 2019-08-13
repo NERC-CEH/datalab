@@ -11,7 +11,7 @@ function getAllActive({ sub }) {
   return DataStorage().find(query).exec();
 }
 
-function getAllByName({ sub }, name) {
+function getAllByName(_, name) { // user, name
   // For all users
   return DataStorage().findOne({ name }).exec();
 }
@@ -40,19 +40,19 @@ function deleteByName({ sub }, name) {
   return DataStorage().remove(query).exec();
 }
 
-function update({ sub }, name, updatedValues) {
+function update(_, name, updatedValues) {
   const updateObj = {
     $set: updatedValues,
   };
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false });
 }
 
-function addUsers({ sub }, name, userIds) {
+function addUsers(_, name, userIds) { // user, name, userId
   const updateObj = setUsers(userIds);
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false });
 }
 
-function removeUsers({ sub }, name, userIds) {
+function removeUsers(_, name, userIds) { // user, name, userId
   const updateObj = unsetUsers(userIds);
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false });
 }

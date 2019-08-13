@@ -59,8 +59,7 @@ describe('New Notebook Form Validator', () => {
 
     return asyncValidate({ name: 'unableToCheck' }, dispatch)
       .then(() => expect(true).toBe(false)) // fail test if no error thrown
-      .catch(error =>
-        expect(error).toEqual({ name: 'Unable to check if Data Store Name is unique.' }));
+      .catch(error => expect(error).toEqual({ name: 'Unable to check if Data Store Name is unique.' }));
   });
 
   it('should return a rejected promise for async errors', () => {
@@ -69,7 +68,6 @@ describe('New Notebook Form Validator', () => {
 
     return asyncValidate(values, dispatch)
       .then(() => expect(true).toBe(false)) // fail test if no error thrown
-      .catch(error =>
-        expect(error).toEqual({ name: 'Notebook already exists. Name must be unique' }));
+      .catch(error => expect(error).toEqual({ name: 'Notebook already exists. Name must be unique' }));
   });
 });

@@ -26,8 +26,7 @@ const styles = theme => ({
   },
 });
 
-const NewStackButton = ({ classes, onClick, typeName }) =>
-  <Card className={classes.card} elevation={0}>
+const NewStackButton = ({ classes, onClick, typeName }) => <Card className={classes.card} elevation={0}>
     <div className={classes.buttonContainer}>
       <Tooltip title={`Create ${typeName}`}>
         <Fab className={classes.button} color="primary" aria-label="add" onClick={onClick}>

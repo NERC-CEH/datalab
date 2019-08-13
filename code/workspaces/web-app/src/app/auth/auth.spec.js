@@ -76,23 +76,20 @@ describe('auth', () => {
     expect(logoutMock).toBeCalledWith({ returnTo: 'http://localhost/' });
   });
 
-  it('handleAuthentication processes response when hash has expected elements', () =>
-    auth.handleAuthentication().then((response) => {
-      expect(response.accessToken).toBe('expectedAccessToken');
-      expect(response.idToken).toBe('expectedIdToken');
-      expect(response.appRedirect).toBe('expectedState');
-    }));
+  it('handleAuthentication processes response when hash has expected elements', () => auth.handleAuthentication().then((response) => {
+    expect(response.accessToken).toBe('expectedAccessToken');
+    expect(response.idToken).toBe('expectedIdToken');
+    expect(response.appRedirect).toBe('expectedState');
+  }));
 
-  it('handleAuthentication calls setSession when hash has expected elements', () =>
-    auth.handleAuthentication().then((response) => {
-      expect(setSession).toHaveBeenCalledWith(response);
-    }));
+  it('handleAuthentication calls setSession when hash has expected elements', () => auth.handleAuthentication().then((response) => {
+    expect(setSession).toHaveBeenCalledWith(response);
+  }));
 
-  it('handleAuthentication sets correct expiresAt value', () =>
-    auth.handleAuthentication().then((response) => {
-      const expiresAt = moment(response.expiresAt, 'x');
-      expect(expiresAt.fromNow()).toBe('in 10 hours');
-    }));
+  it('handleAuthentication sets correct expiresAt value', () => auth.handleAuthentication().then((response) => {
+    const expiresAt = moment(response.expiresAt, 'x');
+    expect(expiresAt.fromNow()).toBe('in 10 hours');
+  }));
 
   it('isAuthenticated returns false for past date-time', () => {
     // Arrange

@@ -46,8 +46,7 @@ function styles(theme) {
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission }) =>
-  <Card className={classes.card}>
+  openPermission, deletePermission, editPermission }) => <Card className={classes.card}>
     <CardContent>
       <div className={classes.cardHeader}>
         <div>
@@ -61,8 +60,8 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
       </div>
       <Typography component="p">{getDescription(stack, typeName)}</Typography>
     </CardContent>
-    {stack.status === READY &&
-      <StackCardActions
+    {stack.status === READY
+      && <StackCardActions
         stack={stack}
         openStack={openStack}
         deleteStack={deleteStack}
@@ -115,7 +114,7 @@ function generateGetImage(classes) {
 function getDescription(stack, typeName) {
   if (stack.description) {
     return stack.description;
-  } else if (stackDescriptions[stack.type]) {
+  } if (stackDescriptions[stack.type]) {
     return stackDescriptions[stack.type].description;
   }
   return `A description of the ${typeName} purpose`;

@@ -4,11 +4,11 @@ function Datalab() {
   return database.getModel('Datalab');
 }
 
-function getAll(user) {
+function getAll() { // user
   return Datalab().find({}).exec();
 }
 
-function getByName(user, name) {
+function getByName(_, name) { // user, name
   return Datalab().findOne({ name }).exec();
 }
 

@@ -43,13 +43,11 @@ function errorReducer(accumulator, error) {
 export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
 
 // Catch statement added to prevent submission of creation request without passing uniqueness check.
-export const asyncValidate = (values, dispatch) =>
-  dispatch(internalNameCheckerActions.checkNameUniqueness(values.name))
-    .catch(() =>
-      Promise.reject({ name: 'Unable to check if Data Store Name is unique.' }))
-    .then((response) => {
-      if (!response.value) {
-        return Promise.reject({ name: 'Notebook already exists. Name must be unique' });
-      }
-      return Promise.resolve();
-    });
+export const asyncValidate = (values, dispatch) => dispatch(internalNameCheckerActions.checkNameUniqueness(values.name))
+  .catch(() => Promise.reject({ name: 'Unable to check if Data Store Name is unique.' }))
+  .then((response) => {
+    if (!response.value) {
+      return Promise.reject({ name: 'Notebook already exists. Name must be unique' });
+    }
+    return Promise.resolve();
+  });

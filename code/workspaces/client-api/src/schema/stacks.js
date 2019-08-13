@@ -14,8 +14,7 @@ const { elementPermissions: { STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 export const stacks = {
   description: 'List of currently provisioned DataLabs Stacks owned by user.',
   type: new GraphQLList(StackType),
-  resolve: (obj, args, { user, token }) =>
-    permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
+  resolve: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
 };
 
 export const stacksByCategory = {
@@ -26,8 +25,7 @@ export const stacksByCategory = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve: (obj, { category }, { user, token }) =>
-    permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
+  resolve: (obj, { category }, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
 };
 
 export const stack = {
@@ -38,6 +36,5 @@ export const stack = {
       type: new GraphQLNonNull(GraphQLID),
     },
   },
-  resolve: (obj, { id }, { user, token }) =>
-    permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
+  resolve: (obj, { id }, { user, token }) => permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
 };

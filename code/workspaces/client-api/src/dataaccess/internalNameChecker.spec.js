@@ -32,8 +32,7 @@ describe('checkNameUniqueness', () => {
     stacksGetByNameMock.mockReturnValue(Promise.resolve(null));
 
     return internalNameChecker('expectedUser', 'expectedName')
-      .then(response =>
-        expect(response).toBe(true));
+      .then(response => expect(response).toBe(true));
   });
 
   it('returns false if dataStore has a matching id', () => {
@@ -41,8 +40,7 @@ describe('checkNameUniqueness', () => {
     stacksGetByNameMock.mockReturnValue(Promise.resolve(null));
 
     return internalNameChecker('expectedUser', 'expectedName')
-      .then(response =>
-        expect(response).toBe(false));
+      .then(response => expect(response).toBe(false));
   });
 
   it('returns false if stacks has a matching id', () => {
@@ -50,7 +48,6 @@ describe('checkNameUniqueness', () => {
     stacksGetByNameMock.mockReturnValue(Promise.resolve({ id: 'id' }));
 
     return internalNameChecker('expectedUser', 'expectedName')
-      .then(response =>
-        expect(response).toBe(false));
+      .then(response => expect(response).toBe(false));
   });
 });

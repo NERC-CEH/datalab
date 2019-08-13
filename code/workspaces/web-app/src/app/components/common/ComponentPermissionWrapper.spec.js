@@ -7,7 +7,8 @@ describe('ComponentPermissionWrapper', () => {
     return shallow(
       <PermissionWrapper {...props}>
         <span>Has Permission</span>
-      </PermissionWrapper>);
+      </PermissionWrapper>,
+    );
   }
 
   it('renders children if user has expected permission', () => {

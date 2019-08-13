@@ -83,15 +83,13 @@ class DownshiftMultiple extends Component {
             })}
             {isOpen ? (
               <Paper className={classes.paper} square>
-                {getSuggestions(searchValue, suggestions).map((suggestion, index) =>
-                  renderSuggestion({
-                    suggestion,
-                    index,
-                    itemProps: getItemProps({ item: suggestion.label }),
-                    highlightedIndex,
-                    selectedItems: currentlySelectedItems,
-                  }),
-                )}
+                {getSuggestions(searchValue, suggestions).map((suggestion, index) => renderSuggestion({
+                  suggestion,
+                  index,
+                  itemProps: getItemProps({ item: suggestion.label }),
+                  highlightedIndex,
+                  selectedItems: currentlySelectedItems,
+                }))}
               </Paper>
             ) : null}
           </div>
@@ -159,9 +157,8 @@ function getSuggestions(searchValue, suggestions) {
   let count = 0;
 
   return suggestions.filter((suggestion) => {
-    const keep =
-      (!searchValue || suggestion.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) &&
-      count < 5;
+    const keep = (!searchValue || suggestion.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1)
+      && count < 5;
 
     if (keep) {
       count += 1;

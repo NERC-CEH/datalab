@@ -5,13 +5,13 @@ import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { permissionTypes } from 'common';
 import {
   MODAL_TYPE_CREATE_DATA_STORE,
   MODAL_TYPE_CONFIRMATION,
   MODAL_TYPE_ROBUST_CONFIRMATION,
   MODAL_TYPE_EDIT_DATA_STORE,
 } from '../../constants/modaltypes';
-import { permissionTypes } from 'common';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
@@ -41,53 +41,47 @@ class DataStorageContainer extends Component {
     return !isFetching;
   }
 
-  openDataStore = id =>
-    this.props.actions.getCredentials(id)
-      .then(payload => pick(payload.value, ['url', 'accessKey']))
-      .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
-      .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
+  openDataStore = id => this.props.actions.getCredentials(id)
+    .then(payload => pick(payload.value, ['url', 'accessKey']))
+    .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
+    .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
 
-  createDataStore = dataStore =>
-    Promise.resolve(this.props.actions.closeModalDialog())
-      .then(() => this.props.actions.createDataStore(dataStore))
-      .then(() => this.props.actions.resetForm())
-      .then(() => notify.success(`${TYPE_NAME} created`))
-      .catch(err => notify.error(`Unable to create ${TYPE_NAME}`))
-      .finally(() => this.props.actions.loadDataStorage());
+  createDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
+    .then(() => this.props.actions.createDataStore(dataStore))
+    .then(() => this.props.actions.resetForm())
+    .then(() => notify.success(`${TYPE_NAME} created`))
+    .catch(err => notify.error(`Unable to create ${TYPE_NAME}`))
+    .finally(() => this.props.actions.loadDataStorage());
 
-  openCreationForm = dataStore =>
-    this.props.actions.openModalDialog(MODAL_TYPE_CREATE_DATA_STORE, {
-      title: `Create a ${TYPE_NAME}`,
-      onSubmit: this.createDataStore,
-      onCancel: this.props.actions.closeModalDialog,
-    });
+  openCreationForm = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_DATA_STORE, {
+    title: `Create a ${TYPE_NAME}`,
+    onSubmit: this.createDataStore,
+    onCancel: this.props.actions.closeModalDialog,
+  });
 
-  deleteDataStore = dataStore =>
-    Promise.resolve(this.props.actions.closeModalDialog())
-      .then(() => this.props.actions.deleteDataStore(dataStore))
-      .then(() => notify.success(`${TYPE_NAME} deleted`))
-      .catch(err => notify.error(`Unable to delete ${TYPE_NAME}`))
-      .finally(() => this.props.actions.loadDataStorage());
+  deleteDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
+    .then(() => this.props.actions.deleteDataStore(dataStore))
+    .then(() => notify.success(`${TYPE_NAME} deleted`))
+    .catch(err => notify.error(`Unable to delete ${TYPE_NAME}`))
+    .finally(() => this.props.actions.loadDataStorage());
 
-  confirmDeleteDataStore = dataStore =>
-    this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
-      title: `Delete ${dataStore.displayName} ${TYPE_NAME}`,
-      body: `Are you sure you want to delete the ${dataStore.displayName} (${dataStore.name}) ${TYPE_NAME}? This will
+  confirmDeleteDataStore = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
+    title: `Delete ${dataStore.displayName} ${TYPE_NAME}`,
+    body: `Are you sure you want to delete the ${dataStore.displayName} (${dataStore.name}) ${TYPE_NAME}? This will
       destroy all data stored on the volume.`,
-      confirmField: {
-        label: `Please type "${dataStore.name}" to confirm`,
-        expectedValue: dataStore.name,
-      },
-      onSubmit: () => this.deleteDataStore(dataStore),
-      onCancel: this.props.actions.closeModalDialog,
-    });
+    confirmField: {
+      label: `Please type "${dataStore.name}" to confirm`,
+      expectedValue: dataStore.name,
+    },
+    onSubmit: () => this.deleteDataStore(dataStore),
+    onCancel: this.props.actions.closeModalDialog,
+  });
 
-  prohibitDeletion = dataStore =>
-    this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
-      title: `Unable to Delete ${dataStore.displayName} ${TYPE_NAME}`,
-      body: `${TYPE_NAME} is in use, unable to delete.`,
-      onCancel: this.props.actions.closeModalDialog,
-    });
+  prohibitDeletion = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+    title: `Unable to Delete ${dataStore.displayName} ${TYPE_NAME}`,
+    body: `${TYPE_NAME} is in use, unable to delete.`,
+    onCancel: this.props.actions.closeModalDialog,
+  });
 
   chooseDialogue = (dataStore) => {
     if (dataStore.stacksMountingStore.length > 0) {
@@ -97,13 +91,12 @@ class DataStorageContainer extends Component {
     return this.confirmDeleteDataStore(dataStore);
   };
 
-  editDataStore = ({ displayName, id }) =>
-    this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
-      title: `Edit Data Store: ${displayName}`,
-      onCancel: this.props.actions.closeModalDialog,
-      dataStoreId: id,
-      userKeysMapping: { name: 'label', userId: 'value' },
-    });
+  editDataStore = ({ displayName, id }) => this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
+    title: `Edit Data Store: ${displayName}`,
+    onCancel: this.props.actions.closeModalDialog,
+    dataStoreId: id,
+    userKeysMapping: { name: 'label', userId: 'value' },
+  });
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content

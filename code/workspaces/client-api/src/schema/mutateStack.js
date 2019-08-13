@@ -14,8 +14,7 @@ export const createStack = {
   args: {
     stack: { type: StackCreationType },
   },
-  resolve: (obj, { stack }, { user, token }) =>
-    permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
+  resolve: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
 };
 
 export const deleteStack = {
@@ -24,6 +23,5 @@ export const deleteStack = {
   args: {
     stack: { type: StackDeletionType },
   },
-  resolve: (obj, { stack }, { user, token }) =>
-    permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
+  resolve: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
 };

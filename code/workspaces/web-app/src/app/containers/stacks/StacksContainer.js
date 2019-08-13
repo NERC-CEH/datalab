@@ -4,8 +4,8 @@ import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import { permissionTypes } from 'common';
+import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
@@ -33,36 +33,32 @@ class StacksContainer extends Component {
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }
 
-  createStack = stack =>
-    Promise.resolve(this.props.actions.closeModalDialog())
-      .then(() => this.props.actions.createStack(stack))
-      .then(() => this.props.actions.resetForm(this.props.formStateName))
-      .then(() => notify.success(`${this.props.typeName} created`))
-      .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
-      .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+  createStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
+    .then(() => this.props.actions.createStack(stack))
+    .then(() => this.props.actions.resetForm(this.props.formStateName))
+    .then(() => notify.success(`${this.props.typeName} created`))
+    .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
 
-  openCreationForm = () =>
-    this.props.actions.openModalDialog(this.props.dialogAction, {
-      title: `Create a ${this.props.typeName}`,
-      onSubmit: this.createStack,
-      onCancel: this.props.actions.closeModalDialog,
-    });
+  openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
+    title: `Create a ${this.props.typeName}`,
+    onSubmit: this.createStack,
+    onCancel: this.props.actions.closeModalDialog,
+  });
 
-  deleteStack = stack =>
-    Promise.resolve(this.props.actions.closeModalDialog())
-      .then(() => this.props.actions.deleteStack(stack))
-      .then(() => notify.success(`${this.props.typeName} deleted`))
-      .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
-      .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+  deleteStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
+    .then(() => this.props.actions.deleteStack(stack))
+    .then(() => notify.success(`${this.props.typeName} deleted`))
+    .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
 
-  confirmDeleteStack = stack =>
-    this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
-      title: `Delete ${stack.displayName} ${this.props.typeName}`,
-      body: `Would you like to delete the ${stack.displayName} ${this.props.typeName}? Any saved work will continue to be
+  confirmDeleteStack = stack => this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+    title: `Delete ${stack.displayName} ${this.props.typeName}`,
+    body: `Would you like to delete the ${stack.displayName} ${this.props.typeName}? Any saved work will continue to be
         stored in the shared drive.`,
-      onSubmit: () => this.deleteStack(stack),
-      onCancel: this.props.actions.closeModalDialog,
-    });
+    onSubmit: () => this.deleteStack(stack),
+    onCancel: this.props.actions.closeModalDialog,
+  });
 
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content

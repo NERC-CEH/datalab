@@ -13,9 +13,8 @@ const initialState = {
 };
 
 describe('authReducer', () => {
-  it('returns the initial state', () =>
-    expect(authReducer(undefined, {}))
-      .toEqual(initialState));
+  it('returns the initial state', () => expect(authReducer(undefined, {}))
+    .toEqual(initialState));
 
   it('handles USER_LOGIN correctly', () => {
     // Arrange

@@ -6,8 +6,7 @@ function errorHandler(pathToData, ignoreError) {
 
     if (errors) {
       if (ignoreError) {
-        errors = errors.filter(({ path }) =>
-          isArray(path) && path.pop() !== ignoreError);
+        errors = errors.filter(({ path }) => isArray(path) && path.pop() !== ignoreError);
       }
 
       const firstError = errors[0];

@@ -12,7 +12,5 @@ describe('StackStatus', () => {
     return shallow(<StackStatus status={status} />);
   }
 
-  it('creates correct snapshot for status types', () =>
-    getStatusKeys().forEach(status =>
-      expect(shallowRender(status)).toMatchSnapshot()));
+  it('creates correct snapshot for status types', () => getStatusKeys().forEach(status => expect(shallowRender(status)).toMatchSnapshot()));
 });

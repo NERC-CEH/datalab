@@ -1,5 +1,5 @@
-import { DataStoreType, DataStorageCreationType, DataStorageUpdateType } from '../types/dataStoreTypes';
 import { permissionTypes } from 'common';
+import { DataStoreType, DataStorageCreationType, DataStorageUpdateType } from '../types/dataStoreTypes';
 import config from '../config';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import dataStoreApi from '../infrastructure/dataStoreApi';
@@ -15,8 +15,7 @@ export const createDataStore = {
   args: {
     dataStore: { type: DataStorageCreationType },
   },
-  resolve: (obj, { dataStore }, { user, token }) =>
-    permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore)),
+  resolve: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore)),
 };
 
 export const deleteDataStore = {
@@ -25,8 +24,7 @@ export const deleteDataStore = {
   args: {
     dataStore: { type: DataStorageUpdateType },
   },
-  resolve: (obj, { dataStore }, { user, token }) =>
-    permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
+  resolve: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
 };
 
 export const addUserToDataStore = {
@@ -35,8 +33,7 @@ export const addUserToDataStore = {
   args: {
     dataStore: { type: DataStorageUpdateType },
   },
-  resolve: (obj, { dataStore: { name, users } }, { user }) =>
-    permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
+  resolve: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
 };
 
 export const removeUserFromDataStore = {
@@ -45,6 +42,5 @@ export const removeUserFromDataStore = {
   args: {
     dataStore: { type: DataStorageUpdateType },
   },
-  resolve: (obj, { dataStore: { name, users } }, { user }) =>
-    permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.removeUsers(user, name, users)),
+  resolve: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.removeUsers(user, name, users)),
 };

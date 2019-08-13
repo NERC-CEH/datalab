@@ -128,7 +128,7 @@ describe('stackUrlService', () => {
       })));
 
       const tokens = { expires: 'e', token: 't', csrfToken: 'c' };
-      rstudioTokenServiceMock.mockImplementationOnce(inputNotebook => credentials => Promise.resolve(tokens));
+      rstudioTokenServiceMock.mockImplementationOnce(() => () => Promise.resolve(tokens));
 
       return stackUrlService(notebook, 'user')
         .then((url) => {
@@ -141,7 +141,7 @@ describe('stackUrlService', () => {
         props: 'noToken',
       })));
 
-      rstudioTokenServiceMock.mockImplementationOnce(inputNotebook => credentials => Promise.reject(undefined));
+      rstudioTokenServiceMock.mockImplementationOnce(() => () => Promise.reject(undefined));
 
       return stackUrlService(notebook, 'user')
         .then(token => expect(token).toBeUndefined());
@@ -156,9 +156,8 @@ describe('stackUrlService', () => {
       internalEndpoint: 'http://nbviewer',
     };
 
-    it('returns the nbviewer localfile url', () =>
-      stackUrlService(notebook, 'user')
-        .then(url => expect(url).toEqual('http://nbviewer.datalab/localfile')));
+    it('returns the nbviewer localfile url', () => stackUrlService(notebook, 'user')
+      .then(url => expect(url).toEqual('http://nbviewer.datalab/localfile')));
   });
 
   describe('Unknown types', () => {

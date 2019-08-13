@@ -9,8 +9,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import { fieldStyle, fieldMargin } from './controlStyles';
 
-export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) =>
-  <TextField
+export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => <TextField
     style={fieldStyle}
     margin={fieldMargin}
     label={label}
@@ -20,8 +19,7 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
     {...custom}
   />;
 
-export const renderTextArea = ({ input, label, meta: { touched, error }, ...custom }) =>
-  <TextField
+export const renderTextArea = ({ input, label, meta: { touched, error }, ...custom }) => <TextField
     style={fieldStyle}
     margin={fieldMargin}
     label={label}
@@ -32,8 +30,7 @@ export const renderTextArea = ({ input, label, meta: { touched, error }, ...cust
     {...custom}
   />;
 
-export const renderSelectField = ({ input, label, meta: { touched, error }, options, ...custom }) =>
-  <FormControl error={touched && error} margin={fieldMargin}>
+export const renderSelectField = ({ input, label, meta: { touched, error }, options, ...custom }) => <FormControl error={touched && error} margin={fieldMargin}>
     <InputLabel>{label}</InputLabel>
     <Select
       style={fieldStyle}
@@ -46,8 +43,7 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
     {touched && error && <FormHelperText>{error}</FormHelperText>}
   </FormControl>;
 
-export const renderAdornedTextField = ({ input, label, meta: { touched, error }, startText, endText, ...custom }) =>
-  <FormControl error={touched && error} margin={fieldMargin}>
+export const renderAdornedTextField = ({ input, label, meta: { touched, error }, startText, endText, ...custom }) => <FormControl error={touched && error} margin={fieldMargin}>
     <InputLabel>{label}</InputLabel>
     <Input
       startAdornment={<InputAdornment position="start">{startText}</InputAdornment>}

@@ -3,15 +3,15 @@ import { permissionTypes } from 'common';
 
 const { PROJECT, delimiter } = permissionTypes;
 
-export const permissionWrapper = (permissionSuffix, ...rest) =>
-  permissionCheck(
-    [PROJECT.concat(delimiter, permissionSuffix)],
-    ...rest);
+export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
+  [PROJECT.concat(delimiter, permissionSuffix)],
+  ...rest,
+);
 
-export const multiPermissionsWrapper = (permissionSuffixes, ...rest) =>
-  permissionCheck(
-    permissionSuffixes.map(suffix => PROJECT.concat(delimiter, suffix)),
-    ...rest);
+export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissionCheck(
+  permissionSuffixes.map(suffix => PROJECT.concat(delimiter, suffix)),
+  ...rest,
+);
 
 function permissionCheck(requiredPermissions, { permissions }, next) {
   const grantedPermissions = permissions || [];
@@ -29,9 +29,6 @@ function permissionCheck(requiredPermissions, { permissions }, next) {
   return next();
 }
 
-const arraysIncludes = (current, expected) =>
-  current.some(currentValue =>
-    expected.some(expectedValue =>
-      (currentValue.match(expectedValue) || []).length > 0));
+const arraysIncludes = (current, expected) => current.some(currentValue => expected.some(expectedValue => (currentValue.match(expectedValue) || []).length > 0));
 
 export default permissionWrapper;

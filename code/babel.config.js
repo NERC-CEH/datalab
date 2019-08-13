@@ -8,12 +8,6 @@ module.exports = (api) => {
         { modules: 'commonjs', targets: { node: 'current' } },
       ],
     ],
-    plugins: [
-      [
-        'module-resolver',
-        { alias: { common: '../common' } },
-      ],
-    ],
     // ignore: [
     //   '__mocks__',
     //   '**/*.spec.js',

@@ -64,8 +64,7 @@ describe('StacksContainer', () => {
       output.prop('actions').loadStacksByCategory();
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_STACKS_BY_CATEGORY');
-      return payload.then(value =>
-        expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toBe('expectedPayload'));
     });
   });
 
@@ -109,8 +108,7 @@ describe('StacksContainer', () => {
       },
     });
 
-    beforeEach(() =>
-      jest.clearAllMocks());
+    beforeEach(() => jest.clearAllMocks());
 
     it('calls loadNotebooks action when mounted', () => {
       // Arrange

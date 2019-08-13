@@ -2,8 +2,8 @@ import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { renderTextField, renderSelectField, renderTextArea } from '../common/form/controls';
 import { stackTypes } from 'common';
+import { renderTextField, renderSelectField, renderTextArea } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 
 const { DATA_STORE, getStackSelections } = stackTypes;

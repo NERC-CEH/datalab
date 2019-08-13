@@ -4,8 +4,8 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { extendSubdomain } from '../../core/getDomainInfo';
 import { permissionTypes } from 'common';
+import { extendSubdomain } from '../../core/getDomainInfo';
 import datalabsLogo from '../../../assets/images/datalabs-hori.png';
 import navBarLinks from '../../constants/navBarLinks';
 import NavLink from './NavLink';
@@ -74,8 +74,7 @@ const SideBar = ({ classes, userPermissions }) => (
       </PermissionWrapper>
       <div className={classes.spacer} />
       <Divider />
-      {datalabLinks.map(({ displayName, href, icon }) =>
-        <NavLink
+      {datalabLinks.map(({ displayName, href, icon }) => <NavLink
           key={`nav-link-${displayName}`}
           label={displayName}
           icon={icon}

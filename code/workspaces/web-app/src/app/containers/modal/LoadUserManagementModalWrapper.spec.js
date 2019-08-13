@@ -73,7 +73,8 @@ describe('LoadUserManagement Modal Wrapper', () => {
         'loadDataStorage',
         'addUserToDataStore',
         'removeUserFromDataStore',
-        'listUsers');
+        'listUsers',
+      );
     });
 
     it('loadDataStorage function dispatch correct action', () => {
@@ -92,8 +93,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
       output.prop('actions').loadDataStorage();
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
-      return payload.then(value =>
-        expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toBe('expectedPayload'));
     });
 
     it('addUserToDataStore function dispatches correct action', () => {
@@ -112,8 +112,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
       output.prop('actions').addUserToDataStore({ name: 'name', users: ['user'] });
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('ADD_USER_TO_DATASTORE');
-      return payload.then(value =>
-        expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toBe('expectedPayload'));
     });
 
     it('removeUserFromDataStore function dispatches correct action', () => {
@@ -132,8 +131,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
       output.prop('actions').removeUserFromDataStore({ name: 'name', users: ['user'] });
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('REMOVE_USER_FROM_DATASTORE');
-      return payload.then(value =>
-        expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toBe('expectedPayload'));
     });
 
     it('listUsers function dispatches correct action', () => {
@@ -152,8 +150,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
       output.prop('actions').listUsers();
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LIST_USERS');
-      return payload.then(value =>
-        expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toBe('expectedPayload'));
     });
   });
 
