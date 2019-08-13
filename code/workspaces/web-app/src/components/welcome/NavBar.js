@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import NavBarLinkButton from './NavBarLinkButton';
-import datalabsLogo from '../../../assets/images/datalabs-hori.png';
+import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import getAuth from '../../auth/auth';
 import navBarLinks from '../../constants/navBarLinks';
 

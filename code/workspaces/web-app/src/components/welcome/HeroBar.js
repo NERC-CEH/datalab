@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import datalabsLogo from '../../../assets/images/datalabs-vert.png';
+import datalabsLogo from '../../assets/images/datalabs-vert.png';
 import getAuth from '../../auth/auth';
 
 const styles = theme => ({

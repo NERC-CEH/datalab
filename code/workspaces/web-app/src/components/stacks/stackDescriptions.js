@@ -1,10 +1,10 @@
 import { stackTypes } from 'common';
-import jupyterlabLogo from '../../../assets/images/jupyterlab-logo.png';
-import jupyterLogo from '../../../assets/images/jupyter-logo.svg';
-import nbviewerLogo from '../../../assets/images/nbviewer-logo.png';
-import rshinyLogo from '../../../assets/images/rshiny-logo.png';
-import rstudioLogo from '../../../assets/images/rstudio-logo.png';
-import zeppelinLogo from '../../../assets/images/zeppelin-logo.svg';
+import jupyterlabLogo from '../../assets/images/jupyterlab-logo.png';
+import jupyterLogo from '../../assets/images/jupyter-logo.svg';
+import nbviewerLogo from '../../assets/images/nbviewer-logo.png';
+import rshinyLogo from '../../assets/images/rshiny-logo.png';
+import rstudioLogo from '../../assets/images/rstudio-logo.png';
+import zeppelinLogo from '../../assets/images/zeppelin-logo.svg';
 
 const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, NFS_VOLUME } = stackTypes;
 

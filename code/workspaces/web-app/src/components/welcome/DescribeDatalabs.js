@@ -1,8 +1,8 @@
 import React from 'react';
 import DescribeElement from './DescribeElement';
-import slackLogo from '../../../assets/images/slack-hori.png';
-import gitHubLogo from '../../../assets/images/github-hori.png';
-import discourseLogo from '../../../assets/images/discourse-hori.png';
+import slackLogo from '../../assets/images/slack-hori.png';
+import gitHubLogo from '../../assets/images/github-hori.png';
+import discourseLogo from '../../assets/images/discourse-hori.png';
 import navBarLinks from '../../constants/navBarLinks';
 
 /* eslint-disable max-len */

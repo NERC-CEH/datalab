@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import logo from '../../../assets/images/datalabs-mono.png';
+import logo from '../../assets/images/datalabs-mono.png';
 import version from '../../version';
 
 const copyrightString = '© Copyright NERC 2017';

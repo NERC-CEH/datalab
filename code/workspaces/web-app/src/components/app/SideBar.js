@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { permissionTypes } from 'common';
 import { extendSubdomain } from '../../core/getDomainInfo';
-import datalabsLogo from '../../../assets/images/datalabs-hori.png';
+import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import navBarLinks from '../../constants/navBarLinks';
 import NavLink from './NavLink';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
