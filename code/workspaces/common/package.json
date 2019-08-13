@@ -1,0 +1,15 @@
+{
+  "name": "common",
+  "version": "0.1.0",
+  "description": "DataLabs Common Library",
+  "main": "src/index.js",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "scripts": {
+    "test": "jest --watch",
+    "lint": "eslint .",
+    "build": "babel src --root-mode upward --out-dir dist"
+  }
+}
