@@ -1,7 +1,7 @@
 import { findLast } from 'lodash';
 import axios from 'axios';
 import logger from 'winston';
-import { stackTypes } from '../../shared';
+import { stackTypes } from 'common';
 import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
 import vault from './vault/vault';

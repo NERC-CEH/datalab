@@ -3,7 +3,7 @@ import {
   GraphQLString,
   GraphQLBoolean,
 } from 'graphql';
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 import internalNameChecker from '../dataaccess/internalNameChecker';
 import permissionChecker from '../auth/permissionChecker';
 

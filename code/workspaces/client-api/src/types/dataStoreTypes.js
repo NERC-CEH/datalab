@@ -8,7 +8,7 @@ import {
   GraphQLList,
 } from 'graphql';
 import { StackType } from './stackTypes';
-import { statusTypes, permissionTypes } from '../../shared';
+import { statusTypes, permissionTypes } from 'common';
 import minioTokenService from '../dataaccess/minioTokenService';
 import permissionChecker from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';

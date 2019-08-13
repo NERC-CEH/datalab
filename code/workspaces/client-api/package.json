@@ -1,0 +1,38 @@
+{
+  "name": "client-api",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "auth0-js": "^9.11.2",
+    "axios": "0.19.0",
+    "bluebird": "3.5.0",
+    "body-parser": "1.19.0",
+    "chalk": "2.1.0",
+    "common": "file:../common",
+    "convict": "5.0.0",
+    "cross-storage": "1.0.0",
+    "express": "4.17.1",
+    "express-jwt": "5.3.1",
+    "graphql": "0.10.3",
+    "graphql-server-express": "1.1.2",
+    "graphql-tag": "2.4.2",
+    "jsonwebtoken": "8.1.1",
+    "jwks-rsa": "1.2.0",
+    "lodash": "4.17.15",
+    "moment": "2.21.0",
+    "mongoose": "5.6.6",
+    "moxios": "0.4.0",
+    "querystring": "0.2.0",
+    "validate.js": "0.11.1",
+    "winston": "2.3.1"
+  },
+  "scripts": {
+    "test": "jest --watch",
+    "lint": "eslint .",
+    "build": "babel src --root-mode upward --out-dir dist",
+    "start": "babel-node --root-mode upward --ignore='../../node_modules' ./src/app.js"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "1.17.0"
+  }
+}

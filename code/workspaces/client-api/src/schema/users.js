@@ -1,5 +1,5 @@
 import { GraphQLList } from 'graphql';
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 import permissionChecker from '../auth/permissionChecker';
 import userService from '../dataaccess/usersService';
 import UserType from '../types/userTypes';

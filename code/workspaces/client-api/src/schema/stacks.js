@@ -4,7 +4,7 @@ import {
   GraphQLNonNull,
   GraphQLString,
 } from 'graphql';
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 import { StackType } from '../types/stackTypes';
 import permissionChecker from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';

@@ -1,4 +1,4 @@
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 import { StackCreationType, StackDeletionType, StackType } from '../types/stackTypes';
 import config from '../config';
 import permissionChecker from '../auth/permissionChecker';

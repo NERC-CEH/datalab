@@ -1,5 +1,5 @@
 import logger from 'winston';
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 
 const { PROJECT, delimiter } = permissionTypes;
 

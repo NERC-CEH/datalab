@@ -6,7 +6,7 @@ import {
   GraphQLEnumType,
   GraphQLInputObjectType,
 } from 'graphql';
-import { stackTypes, statusTypes } from '../../shared';
+import { stackTypes, statusTypes } from 'common';
 import stackUrlService from '../dataaccess/stackUrlService';
 
 const { getStackTypes } = stackTypes;

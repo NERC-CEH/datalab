@@ -1,5 +1,5 @@
 import { DataStoreType, DataStorageCreationType, DataStorageUpdateType } from '../types/dataStoreTypes';
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 import config from '../config';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import dataStoreApi from '../infrastructure/dataStoreApi';

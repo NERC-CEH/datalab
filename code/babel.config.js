@@ -5,14 +5,20 @@ module.exports = (api) => {
     presets: [
       [
         '@babel/preset-env',
-        { modules: 'commonjs', target: { node: 'current' } },
+        { modules: 'commonjs', targets: { node: 'current' } },
       ],
     ],
-    ignore: [
-      '__mocks__',
-      '**/*.spec.js',
+    plugins: [
+      [
+        'module-resolver',
+        { alias: { common: '../common' } },
+      ],
     ],
-    babelrcRoots: ['.', './workspaces/common'],
+    // ignore: [
+    //   '__mocks__',
+    //   '**/*.spec.js',
+    // ],
+    babelrcRoots: ['.', './workspaces/*'],
     env: {
       debug: {
         sourceMaps: 'inline',

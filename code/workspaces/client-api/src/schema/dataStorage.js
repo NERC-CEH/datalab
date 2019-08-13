@@ -4,7 +4,7 @@ import {
   GraphQLNonNull,
 } from 'graphql';
 import { DataStoreType } from '../types/dataStoreTypes';
-import { permissionTypes } from '../../shared';
+import { permissionTypes } from 'common';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import permissionChecker from '../auth/permissionChecker';
 
