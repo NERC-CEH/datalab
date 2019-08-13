@@ -1,0 +1,58 @@
+{
+  "extends": [
+    "airbnb-base",
+    "react-app"
+  ],
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "class-methods-use-this": "off",
+    "import/no-named-default": "off",
+    "linebreak-style": "off",
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-tag-spacing": "off",
+    "react/no-array-index-key": "off",
+    "react/require-default-props": "off",
+    "max-len": [
+      "error",
+      200,
+      2,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": false
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/**.spec.js"
+        ]
+      }
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "16.8"
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  }
+}

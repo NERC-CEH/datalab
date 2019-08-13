@@ -1,0 +1,67 @@
+{
+  "name": "web-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.0.0",
+    "auth0-js": "^9.11.2",
+    "axios": "0.19.0",
+    "bluebird": "3.5.0",
+    "common": "file:../common",
+    "connected-react-router": "^6.5.2",
+    "cross-storage": "1.0.0",
+    "downshift": "^2.0.10",
+    "history": "4.6.1",
+    "jquery": "^3.2.1",
+    "lodash": "4.17.15",
+    "moment": "2.21.0",
+    "moxios": "0.4.0",
+    "prop-types": "15.5.8",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-router": "^5.0.1",
+    "react": "^16.9.0",
+    "redux-form": "^8.2.5",
+    "redux-logger": "3.0.1",
+    "redux-promise-middleware": "4.2.0",
+    "redux": "^4.0.4",
+    "toastr": "2.1.2",
+    "type-to-reducer": "1.0.3",
+    "universal-cookie": "2.1.0"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "1.17.0",
+    "react-scripts": "3.1.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "3.3.5",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "jest-enzyme": "7.0.2",
+    "react-test-renderer": "16.8.6",
+    "redux-devtools": "^3.5.0",
+    "redux-mock-store": "1.2.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
+  },
+  "browserslist": {
+    "production": [
+      ">1%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
