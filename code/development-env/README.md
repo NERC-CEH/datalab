@@ -53,15 +53,23 @@ automatically set and unset these variables as you enter and leave the repositor
 directories on your local machine. This is most easily installed on macOS using the
 [Homebrew](https://brew.sh) package manager by running the command
 `brew install direnv`. Once `direnv` is installed, follow the instructions
-[here](https://direnv.net/docs/hook.md) to get it working.
+[here](https://direnv.net/docs/hook.md) to get it working
+(note - for MacOS, use .bash_profile, not .bashrc).
 
-`drienv` knows what environment variable to set by parsing a file called `.envrc`.
+`direnv` knows what environment variable to set by parsing a file called `.envrc`.
 The variables in the `.envrc` file will be set when in the directory containing the
 `.envrc` file or any of its child directories. Therefore, create a `.envrc` in the
 directory one level above the datalab repository's directory on your machine (helps
 avoid accidentally committing the file). There is a note in the shared Datalabs
 LastPass folder called `Dev Env Secrets`. Copy the contents of this note into your
 `.envrc` file.
+
+When you cd into the .envrc folder (or one of its children), you should see
+
+```bash
+direnv: loading ../../../.envrc
+direnv: export +AUTHORISATION_API_CLIENT_ID +AUTHORISATION_API_CLIENT_SECRET +AUTHORISATION_API_IDENTIFIER +USER_MANAGEMENT_API_CLIENT_ID +USER_MANAGEMENT_API_CLIENT_SECRET
+```
 
 ### Update Mongo default record initial value
 
