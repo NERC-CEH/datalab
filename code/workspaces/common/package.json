@@ -7,9 +7,23 @@
   "dependencies": {
     "lodash": "^4.17.15"
   },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "core-js": "^3.2.1",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.8.0",
+    "regenerator-runtime": "^0.13.3"
+  },
   "scripts": {
     "test": "jest --watch",
-    "lint": "eslint .",
-    "build": "rm -rf dist && babel src --root-mode upward --ignore **/__mocks__/,**/*.spec.js --out-dir dist"
+    "test-ci": "CI=true jest",
+    "lint": "eslint ./src",
+    "build": "rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist"
   }
 }

@@ -3,10 +3,7 @@ module.exports = (api) => {
 
   return {
     presets: [
-      [
-        '@babel/preset-env',
-        { modules: 'commonjs', targets: { node: 'current' } },
-      ],
+      ['@babel/preset-env'],
     ],
     babelrcRoots: ['.', './workspaces/*'],
     env: {

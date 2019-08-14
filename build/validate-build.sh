@@ -7,10 +7,10 @@ if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation)$ ]]
       cd ./docs && yarn install && yarn lint
       ;;
     api)
-      cd ./code/datalab-app && yarn install && yarn lint-api && yarn test-api-ci
+      cd ./code && yarn install && yarn workspace client-api lint && yarn workspace client-api test-ci
       ;;
     app)
-      cd ./code/datalab-app && yarn install && yarn lint-app && yarn test-app-ci
+      cd ./code && yarn install && yarn workspace web-app lint && yarn workspace web-app test-ci
       ;;
     infrastructure)
       cd ./code/infrastructure-api && yarn install && yarn lint && yarn test-ci
