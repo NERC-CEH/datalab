@@ -43,7 +43,7 @@
     "shx": "0.3.2"
   },
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint ./src -c .eslintrc --no-eslintrc",
     "start": "concurrently -p \"[{name}]\" -n \"API,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold\"  \"yarn api\" \"yarn watcher\"",
     "api": "nodemon --exec babel-node src/server.js",
     "watcher": "nodemon --exec babel-node src/watcher.js",
