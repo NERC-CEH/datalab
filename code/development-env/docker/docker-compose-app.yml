@@ -46,15 +46,15 @@ services:
 
   datalab-api:
     image: node:8
-    working_dir: /usr/src/app
-    command: ["sh", "-c", "yarn api"]
+    working_dir: /usr/src/app/workspaces/client-api
+    command: ["sh", "-c", "yarn start"]
     environment:
       <<: *common
       BABEL_DISABLE_CACHE: 1
     ports:
       - 8000:8000
     volumes:
-      - $PWD/../datalab-app:/usr/src/app:ro
+      - $PWD/..:/usr/src/app:ro
     links:
       - datalab-auth
       - datalab-infra
@@ -63,14 +63,14 @@ services:
 
   datalab-app:
     image: node:8
-    working_dir: /usr/src/app
-    command: ["sh", "-c", "yarn app"]
+    working_dir: /usr/src/app/workspaces/web-app
+    command: ["sh", "-c", "yarn start"]
     environment:
       BABEL_DISABLE_CACHE: 1
     ports:
       - 3000:3000
     volumes:
-      - $PWD/../datalab-app:/usr/src/app:ro
+      - $PWD/..:/usr/src/app:ro
       # web_auth_config is unique to each domain and needs updating
-      - $PWD/config/local/web_auth_config.json:/usr/src/app/public/web_auth_config.json:ro
+      - $PWD/config/local/web_auth_config.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
 
