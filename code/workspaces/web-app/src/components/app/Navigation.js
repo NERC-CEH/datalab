@@ -4,35 +4,28 @@ import { withStyles } from '@material-ui/core/styles';
 import SideBar, { drawerWidth } from './SideBar';
 import TopBar from './TopBar';
 
-const topbarHeightLarge = 64;
-const topbarHeightSmall = 56;
-const topbarHeightXSmall = 48;
-
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
+    height: `calc(100vh - ${theme.shape.topBarHeight}px)`,
+    paddingTop: theme.shape.topBarHeight,
   },
   appFrame: {
     backgroundColor: theme.palette.backgroundColor,
-    display: 'flex',
     width: '100%',
-    position: 'relative',
+    height: '100%',
     zIndex: 1,
   },
-  content: {
+  page: {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    '@media (min-width:1px) and (orientation: landscape)': {
-      marginTop: topbarHeightXSmall,
-    },
-    '@media (min-width:600px)': {
-      marginTop: topbarHeightLarge,
-    },
-    marginTop: topbarHeightSmall,
+    maxWidth: '750px',
+    padding: theme.spacing(2),
+    margin: '0 auto',
+  },
+  contentArea: {
+    display: 'flex',
+    height: '100%',
   },
 });
 
@@ -40,10 +33,12 @@ const Navigation = ({ classes, children, identity, userPermissions }) => (
   <div className={classes.container}>
     <div className={classes.appFrame}>
       <TopBar identity={identity} />
-      <SideBar userPermissions={userPermissions} />
-      <main className={classes.content}>
-        {children}
-      </main>
+      <div className={classes.contentArea}>
+        <SideBar className={classes.sideBar} userPermissions={userPermissions} />
+        <main className={classes.page}>
+          {children}
+        </main>
+      </div>
     </div>
   </div>
 );

@@ -3,6 +3,7 @@
 exports[`UserIcon renders correct snapshot 1`] = `
 <div>
   <WithStyles(ForwardRef(Avatar))
+    className="UserIcon-avatar-1"
     onClick={[Function]}
     src="expectedPicture"
   />

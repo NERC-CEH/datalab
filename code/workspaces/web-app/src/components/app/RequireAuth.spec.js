@@ -29,8 +29,8 @@ describe('RequireAuth', () => {
         PrivateComponent: () => {},
         PublicComponent: () => {},
       };
-
-      return shallow(<RequireAuth {...props} />).find('RequireAuth');
+      // need to dive through the with styles;
+      return shallow(<RequireAuth {...props} />).dive().dive().find('RequireAuth');
     }
 
     it('extracts the correct props from the redux state', () => {
@@ -84,6 +84,7 @@ describe('RequireAuth', () => {
       tokens: { token: 'expectedUserToken' },
       permissions: { fetching: false, value: ['expectedPermission'] },
       actions: { userLogsIn: () => {}, getUserPermissions: () => {} },
+      classes: { circularProgress: 'circularProgress' },
     });
 
     beforeEach(() => jest.clearAllMocks());

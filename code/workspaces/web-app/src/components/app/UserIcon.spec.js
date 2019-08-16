@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from '@material-ui/core/test-utils';
 import Avatar from '@material-ui/core/Avatar';
 import Popover from '@material-ui/core/Popover';
 import UserMenu from './UserMenu';
@@ -12,6 +12,12 @@ const expectedProps = {
 };
 
 describe('UserIcon', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow({ dive: true });
+  });
+
   function shallowRender(props) {
     return shallow(<UserIcon {...props} />);
   }

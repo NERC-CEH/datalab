@@ -1,10 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Topbar correctly renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(AppBar))
-  position="fixed"
+<div
+  className="TopBar-appBar-1"
 >
-  <WithStyles(ForwardRef(Toolbar))>
+  <div
+    className="TopBar-toolBar-2"
+  >
+    <img
+      alt="datalabs-logo"
+      className="TopBar-datalabsLogo-3"
+      src="datalabs-hori.png"
+    />
+    <div
+      className="TopBar-buttons-4"
+    >
+      <WithStyles(TopBarButton)
+        key="nav-link-Slack"
+        label="Slack"
+        onClick={[Function]}
+      />
+      <WithStyles(TopBarButton)
+        key="nav-link-Help"
+        label="Help"
+        onClick={[Function]}
+      />
+    </div>
     <div
       style={
         Object {
@@ -12,7 +33,7 @@ exports[`Topbar correctly renders correct snapshot 1`] = `
         }
       }
     />
-    <UserIcon
+    <WithStyles(UserIcon)
       identity={
         Object {
           "expected": "identity",
@@ -20,6 +41,6 @@ exports[`Topbar correctly renders correct snapshot 1`] = `
         }
       }
     />
-  </WithStyles(ForwardRef(Toolbar))>
-</WithStyles(ForwardRef(AppBar))>
+  </div>
+</div>
 `;

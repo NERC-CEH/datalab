@@ -6,10 +6,12 @@ describe('Topbar', () => {
   let shallow;
 
   beforeEach(() => {
-    shallow = createShallow();
+    shallow = createShallow({ dive: true });
   });
 
   it('correctly renders correct snapshot', () => {
-    expect(shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} />)).toMatchSnapshot();
+    expect(
+      shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} />),
+    ).toMatchSnapshot();
   });
 });

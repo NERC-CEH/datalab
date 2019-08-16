@@ -1,117 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar correctly renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(Drawer))
-  classes={
-    Object {
-      "paper": "SideBar-drawerPaper-2",
-    }
-  }
-  variant="permanent"
+<div
+  className="SideBar-sideBar-2"
 >
-  <header
-    className="SideBar-header-1"
-  >
-    <img
-      alt="datalabs-logo"
-      className="SideBar-logo-3"
-      src="datalabs-hori.png"
-    />
-  </header>
   <WithStyles(ForwardRef(List))
-    className="SideBar-drawerList-4"
+    className="SideBar-itemList-1"
   >
-    <WithStyles(Link)
-      icon="dashboard"
-      label="Dashboard"
-      to="/"
-    />
-    <ComponentWrapper
-      permission="project:storage:list"
-      userPermissions={
-        Array [
-          "project:storage:list",
-          "project:stacks:list",
-        ]
-      }
-    >
-      <WithStyles(SideBarSubheader)>
-        Data
-      </WithStyles(SideBarSubheader)>
-      <WithStyles(Link)
-        icon="storage"
-        label="Storage"
-        to="/storage"
+    <WithStyles(SideBarGroup)>
+      <WithStyles(SideBarButton)
+        icon="dashboard"
+        label="Dashboard"
+        to="/"
       />
-    </ComponentWrapper>
-    <WithStyles(SideBarSubheader)>
-      Analysis
-    </WithStyles(SideBarSubheader)>
-    <ComponentWrapper
-      permission="project:stacks:list"
-      userPermissions={
-        Array [
-          "project:storage:list",
-          "project:stacks:list",
-        ]
-      }
+    </WithStyles(SideBarGroup)>
+    <WithStyles(SideBarGroup)
+      title="Analysis"
     >
-      <WithStyles(Link)
-        icon="book"
-        label="Notebooks"
-        to="/notebooks"
+      <ComponentWrapper
+        permission="project:stacks:list"
+        userPermissions={
+          Array [
+            "project:storage:list",
+            "project:stacks:list",
+          ]
+        }
+      >
+        <WithStyles(SideBarButton)
+          icon="book"
+          label="Notebooks"
+          to="/notebooks"
+        />
+      </ComponentWrapper>
+      <WithStyles(SideBarButton)
+        icon="apps"
+        label="Dask"
+        to="/dask"
       />
-    </ComponentWrapper>
-    <WithStyles(Link)
-      icon="apps"
-      label="Dask"
-      to="/dask"
-    />
-    <WithStyles(Link)
-      icon="apps"
-      label="Spark"
-      to="/spark"
-    />
-    <ComponentWrapper
-      permission="project:stacks:list"
-      userPermissions={
-        Array [
-          "project:storage:list",
-          "project:stacks:list",
-        ]
-      }
-    >
-      <WithStyles(SideBarSubheader)>
-        Publish
-      </WithStyles(SideBarSubheader)>
-      <WithStyles(Link)
-        icon="web"
-        label="Sites"
-        to="/publishing"
+      <WithStyles(SideBarButton)
+        icon="apps"
+        label="Spark"
+        to="/spark"
       />
-    </ComponentWrapper>
-    <div
-      className="SideBar-spacer-5"
-    />
-    <WithStyles(ForwardRef(Divider)) />
-    <WithStyles(Link)
-      icon="question_answer"
-      key="nav-link-Discourse"
-      label="Discourse"
-      onClick={[Function]}
-    />
-    <WithStyles(Link)
-      icon="message"
-      key="nav-link-Slack"
-      label="Slack"
-      onClick={[Function]}
-    />
-    <WithStyles(Link)
-      icon="help_outline"
-      key="nav-link-Help"
-      label="Help"
-      onClick={[Function]}
-    />
+    </WithStyles(SideBarGroup)>
+    <WithStyles(SideBarGroup)>
+      <ComponentWrapper
+        permission="project:storage:list"
+        userPermissions={
+          Array [
+            "project:storage:list",
+            "project:stacks:list",
+          ]
+        }
+      >
+        <WithStyles(SideBarButton)
+          icon="storage"
+          label="Storage"
+          to="/storage"
+        />
+      </ComponentWrapper>
+      <ComponentWrapper
+        permission="project:stacks:list"
+        userPermissions={
+          Array [
+            "project:storage:list",
+            "project:stacks:list",
+          ]
+        }
+      >
+        <WithStyles(SideBarButton)
+          icon="web"
+          label="Sites"
+          to="/publishing"
+        />
+      </ComponentWrapper>
+      <WithStyles(SideBarButton)
+        icon="question_answer"
+        key="nav-link-Discourse"
+        label="Discourse"
+        onClick={[Function]}
+      />
+    </WithStyles(SideBarGroup)>
   </WithStyles(ForwardRef(List))>
-</WithStyles(ForwardRef(Drawer))>
+</div>
 `;

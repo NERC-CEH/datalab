@@ -7,27 +7,31 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
   <div
     className="Navigation-appFrame-2"
   >
-    <TopBar
+    <WithStyles(TopBar)
       identity={
         Object {
           "expected": "identity",
         }
       }
     />
-    <WithStyles(SideBar)
-      userPermissions={
-        Array [
-          "expectedPermission",
-        ]
-      }
-    />
-    <main
-      className="Navigation-content-3"
+    <div
+      className="Navigation-contentArea-4"
     >
-      <span>
-        Content
-      </span>
-    </main>
+      <WithStyles(SideBar)
+        userPermissions={
+          Array [
+            "expectedPermission",
+          ]
+        }
+      />
+      <main
+        className="Navigation-page-3"
+      >
+        <span>
+          Content
+        </span>
+      </main>
+    </div>
   </div>
 </div>
 `;
