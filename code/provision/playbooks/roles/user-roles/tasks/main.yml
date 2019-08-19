@@ -1,0 +1,6 @@
+---
+- name: Add authorized keys for ubuntu user
+  authorized_key:
+    user: ubuntu
+    key: "{{ lookup('file', './keys/{{item}}') }}"
+  with_items: "{{ access_public_keys }}"
