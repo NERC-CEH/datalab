@@ -4,19 +4,22 @@
     "instanceRoles": [
       {
         "role": "instance-admin"
+      },
+      {
+        "role": "legacy-project:admin"
       }
     ],
     "projectRoles": [
       {
-        "project": "project1",
+        "projectName": "project1",
         "role": "admin"
       },
       {
-        "project": "project2",
+        "projectName": "project2",
         "role": "user"
       },
       {
-        "project": "project3",
+        "projectName": "project3",
         "role": "viewer"
       }
     ]
@@ -26,19 +29,22 @@
     "instanceRoles": [
       {
         "role": "instance-admin"
+      },
+      {
+        "role": "legacy-project:admin"
       }
     ],
     "projectRoles": [
       {
-        "project": "project1",
+        "projectName": "project1",
         "role": "admin"
       },
       {
-        "project": "project2",
+        "projectName": "project2",
         "role": "user"
       },
       {
-        "project": "project3",
+        "projectName": "project3",
         "role": "viewer"
       }
     ]
@@ -48,19 +54,22 @@
     "instanceRoles": [
       {
         "role": "instance-admin"
+      },
+      {
+        "role": "legacy-project:admin"
       }
     ],
     "projectRoles": [
       {
-        "project": "project1",
+        "projectName": "project1",
         "role": "admin"
       },
       {
-        "project": "project2",
+        "projectName": "project2",
         "role": "user"
       },
       {
-        "project": "project3",
+        "projectName": "project3",
         "role": "viewer"
       }
     ]
@@ -70,19 +79,22 @@
     "instanceRoles": [
       {
         "role": "instance-admin"
+      },
+      {
+        "role": "legacy-project:admin"
       }
     ],
     "projectRoles": [
       {
-        "project": "project1",
+        "projectName": "project1",
         "role": "admin"
       },
       {
-        "project": "project2",
+        "projectName": "project2",
         "role": "user"
       },
       {
-        "project": "project3",
+        "projectName": "project3",
         "role": "viewer"
       }
     ]
@@ -92,19 +104,22 @@
     "instanceRoles": [
       {
         "role": "instance-admin"
+      },
+      {
+        "role": "legacy-project:admin"
       }
     ],
     "projectRoles": [
       {
-        "project": "project1",
+        "projectName": "project1",
         "role": "admin"
       },
       {
-        "project": "project2",
+        "projectName": "project2",
         "role": "user"
       },
       {
-        "project": "project3",
+        "projectName": "project3",
         "role": "viewer"
       }
     ]

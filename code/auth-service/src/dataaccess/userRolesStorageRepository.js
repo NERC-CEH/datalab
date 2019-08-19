@@ -11,7 +11,7 @@ function getRoles(userId) {
       if (err) {
         reject(err);
       }
-      resolve(document);
+      resolve(document.toObject());
     });
   });
 }
