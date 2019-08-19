@@ -1,7 +1,7 @@
 [
   {
     "userId": "dummy",
-    "instance-admin": true,
+    "instanceAdmin": true,
     "roles": [
       {
         "projectName": "project",
@@ -19,7 +19,7 @@
   },
   {
     "userId": "auth0|5d2efacb1ca16e0efd770ddc",
-    "instance-admin": true,
+    "instanceAdmin": true,
     "roles": [
       {
         "projectName": "project",
@@ -37,7 +37,7 @@
   },
   {
     "userId": "auth0|5d28a912a537cc0de851ffb8",
-    "instance-admin": true,
+    "instanceAdmin": true,
     "roles": [
       {
         "projectName": "project",
@@ -55,7 +55,7 @@
   },
   {
     "userId": "auth0|595f40a25caf4344b2e0e678",
-    "instance-admin": true,
+    "instanceAdmin": true,
     "roles": [
       {
         "projectName": "project",
@@ -73,7 +73,7 @@
   },
   {
     "userId": "auth0|5950f70dbad6f109f9f9f560",
-    "instance-admin": true,
+    "instanceAdmin": true,
     "roles": [
       {
         "projectName": "project",
