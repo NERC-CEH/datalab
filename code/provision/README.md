@@ -200,8 +200,8 @@ allow the servers to be discovered by the OpenStack API.
 
 ### Confirm server configuration
 
-Execute the Ansible ping again and this time expect a successful response from all
-servers:
+In the `~/playbooks/` directory, execute the Ansible ping again and this time 
+expect a successful response from all servers:
 
 ```ansible -m ping all -u ubuntu```
 
