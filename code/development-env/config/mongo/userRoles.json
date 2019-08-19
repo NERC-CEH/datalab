@@ -1,17 +1,10 @@
 [
   {
     "userId": "dummy",
-    "instanceRoles": [
+    "instance-admin": true,
+    "roles": [
       {
-        "role": "instance-admin"
-      },
-      {
-        "role": "legacy-project:admin"
-      }
-    ],
-    "projectRoles": [
-      {
-        "projectName": "project1",
+        "projectName": "project",
         "role": "admin"
       },
       {
@@ -26,17 +19,10 @@
   },
   {
     "userId": "auth0|5d2efacb1ca16e0efd770ddc",
-    "instanceRoles": [
+    "instance-admin": true,
+    "roles": [
       {
-        "role": "instance-admin"
-      },
-      {
-        "role": "legacy-project:admin"
-      }
-    ],
-    "projectRoles": [
-      {
-        "projectName": "project1",
+        "projectName": "project",
         "role": "admin"
       },
       {
@@ -51,17 +37,10 @@
   },
   {
     "userId": "auth0|5d28a912a537cc0de851ffb8",
-    "instanceRoles": [
+    "instance-admin": true,
+    "roles": [
       {
-        "role": "instance-admin"
-      },
-      {
-        "role": "legacy-project:admin"
-      }
-    ],
-    "projectRoles": [
-      {
-        "projectName": "project1",
+        "projectName": "project",
         "role": "admin"
       },
       {
@@ -76,17 +55,10 @@
   },
   {
     "userId": "auth0|595f40a25caf4344b2e0e678",
-    "instanceRoles": [
+    "instance-admin": true,
+    "roles": [
       {
-        "role": "instance-admin"
-      },
-      {
-        "role": "legacy-project:admin"
-      }
-    ],
-    "projectRoles": [
-      {
-        "projectName": "project1",
+        "projectName": "project",
         "role": "admin"
       },
       {
@@ -101,17 +73,10 @@
   },
   {
     "userId": "auth0|5950f70dbad6f109f9f9f560",
-    "instanceRoles": [
+    "instance-admin": true,
+    "roles": [
       {
-        "role": "instance-admin"
-      },
-      {
-        "role": "legacy-project:admin"
-      }
-    ],
-    "projectRoles": [
-      {
-        "projectName": "project1",
+        "projectName": "project",
         "role": "admin"
       },
       {
