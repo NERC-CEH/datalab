@@ -104,6 +104,7 @@ controller:
   ##   default-ssl-certificate: "<namespace>/<secret_name>"
   extraArgs:
     default-ssl-certificate: "kube-system/tls-secret"
+    annotations-prefix: "ingress.kubernetes.io"
 
   ## Additional environment variables to set
   extraEnvs: []
