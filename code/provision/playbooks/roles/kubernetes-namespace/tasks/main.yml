@@ -15,7 +15,7 @@
     force: yes
 
 - name: Install chart
-  command: "helm upgrade --install {{ namespace.name }}-ingress --namespace {{ namespace.name }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
+  command: "helm upgrade --install nginx-ingress-controller --namespace kube-system --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent

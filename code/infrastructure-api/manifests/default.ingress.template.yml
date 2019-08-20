@@ -20,7 +20,6 @@ spec:
   tls:
   - hosts:
     - {{ service.host }}
-    secretName: tls-secret
   rules:
   - host: {{ service.host }}
     http:

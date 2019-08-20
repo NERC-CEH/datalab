@@ -40,7 +40,7 @@ controller:
 
   ## Use host ports 80 and 443
   daemonset:
-    useHostPort: false
+    useHostPort: true
 
     hostPorts:
       http: 80
@@ -102,7 +102,7 @@ controller:
   ## E.g. to specify the default SSL certificate you can use
   ## extraArgs:
   ##   default-ssl-certificate: "<namespace>/<secret_name>"
-  extraArgs: {}
+  extraArgs: { default-ssl-certificate: "kube-system/tls-secret" }
 
   ## Additional environment variables to set
   extraEnvs: []
@@ -115,7 +115,7 @@ controller:
 
   ## DaemonSet or Deployment
   ##
-  kind: Deployment
+  kind: DaemonSet
 
   # The update strategy to apply to the Deployment or DaemonSet
   ##
@@ -253,14 +253,12 @@ controller:
       http: http
       https: https
 
-    # type: LoadBalancer
+    type: LoadBalancer
 
-    type: NodePort
+    # type: NodePort
     nodePorts:
-      http: {{ namespace.ports.httpNodePort }}
-      https: {{ namespace.ports.httpsNodePort }}
-    #  tcp:
-    #    8080: 32808
+      http: 32080
+      https: 32443
 
   extraContainers: []
   ## Additional containers to be added to the controller pod.
@@ -303,12 +301,12 @@ controller:
   #   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
 
   metrics:
-    enabled: true
+    enabled: false
 
     service:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "10254"
+      annotations: {}
+      # prometheus.io/scrape: "true"
+      # prometheus.io/port: "10254"
 
       omitClusterIP: false
       clusterIP: ""
@@ -348,7 +346,7 @@ defaultBackend:
   name: default-backend
   image:
     repository: nerc/default-backend
-    tag: {{ namespace.defaultBackend.version }}
+    tag: "0.2.0"
     pullPolicy: IfNotPresent
     # nobody user -> uid 65534
     runAsUser: 65534
@@ -359,7 +357,7 @@ defaultBackend:
     - name: APP_PORT
       value: '8000'
     - name: HOMEPAGE
-      value: https://{{ namespace.domain }}
+      value: https://datalabs.nerc.ac.uk
 
   port: 8000
 
