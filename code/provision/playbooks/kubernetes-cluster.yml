@@ -40,8 +40,6 @@
   roles:
     - role: kubernetes-namespace
       namespace: "{{ test_namespace }}"
-    - role: kubernetes-namespace
-      namespace: "{{ prod_namespace }}"
     - role: kubernetes-secrets
 
   environment:
