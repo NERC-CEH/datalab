@@ -38,7 +38,7 @@
   hosts: k8s-master
 
   roles:
-    - role: kubernetes-namespace
+    - role: ingress-controller
       namespace: "{{ test_namespace }}"
     - role: kubernetes-secrets
 
