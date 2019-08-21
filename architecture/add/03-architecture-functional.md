@@ -102,9 +102,10 @@ domain to user created services.
 
 Kubernetes only provides an abstraction for Ingress, it does not provide the
 implementation. This means that is is necessary to install and configure an
-`Ingress Controller`. Datalabs uses a single deployment of the [Nginx Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
-in the kube-system namespace using a Helm chart with permissions to route traffic to
-all other namespaces and services.
+`Ingress Controller`. Datalabs uses a single deployment of the
+[Nginx Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
+in the kube-system namespace using a Helm chart with permissions to route
+traffic to all other namespaces and services.
 There are a huge range of configurations options that can be set for both ingress
 controllers and ingress rules. These are all detailed in the Ingress Controller
 documentation. Datalabs current uses the following features:
@@ -122,8 +123,8 @@ return a `401`. In the case that the user is unauthorised the ingress controller
 then redirect the user to a sign in page with the original request url appended as a
 query parameter (`?rd=`).
 
-Two rules are used in combination to achieve this (Note: These rules currently use a now
-non-default prefix (ingress.kubernetes.io)):
+Two rules are used in combination to achieve this (Note: These rules currently
+use a now non-default prefix (ingress.kubernetes.io)):
 
 * ingress.kubernetes.io/auth-url - The url for the authorisation service. Note that due
 to quirks of Kubernetes DNS this has to be a full DNS name not just a simple service
