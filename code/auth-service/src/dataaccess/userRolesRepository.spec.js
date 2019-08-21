@@ -8,7 +8,7 @@ const wrapDocument = document => ({
 });
 
 const testUserRoles = [
-  wrapDocument({
+  {
     userId: 'uid1',
     instanceAdmin: false,
     projectRoles: [
@@ -21,8 +21,8 @@ const testUserRoles = [
         role: 'user',
       },
     ],
-  }),
-  wrapDocument({
+  },
+  {
     userId: 'uid2',
     instanceAdmin: true,
     projectRoles: [
@@ -31,9 +31,9 @@ const testUserRoles = [
         role: 'viewer',
       },
     ],
-  }),
+  },
 ];
-const mockDatabase = databaseMock(testUserRoles);
+const mockDatabase = databaseMock(testUserRoles.map(wrapDocument));
 jest.mock('../config/database');
 database.getModel = mockDatabase;
 
