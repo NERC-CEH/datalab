@@ -1,0 +1,92 @@
+[
+  {
+    "userId": "dummy",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
+  },
+  {
+    "userId": "auth0|5d2efacb1ca16e0efd770ddc",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
+  },
+  {
+    "userId": "auth0|5d28a912a537cc0de851ffb8",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
+  },
+  {
+    "userId": "auth0|595f40a25caf4344b2e0e678",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
+  },
+  {
+    "userId": "auth0|5950f70dbad6f109f9f9f560",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
+  }
+]

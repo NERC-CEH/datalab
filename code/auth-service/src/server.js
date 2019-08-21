@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'winston';
 import config from './config/config';
 import routes from './config/routes';
+import database from './config/database';
 
 logger.level = config.get('logLevel');
 logger.remove(logger.transports.Console);
@@ -27,5 +28,14 @@ app.use((error, request, response, next) => { // eslint-disable-line no-unused-v
   return response.send({ message: 'Error authenticating user' });
 });
 
+const connection = database.createConnection();
+
+connection.on('error', error => logger.error(chalk.red(`Error connecting to the database ${error}`)))
+  .on('disconnected', error => logger.info(`Disconnected: ${error}`))
+  .once('open', listen);
+
 const port = config.get('port');
-app.listen(port, () => logger.info(chalk.green(`Authorisation Service listening on port ${port}`)));
+function listen() {
+  app.listen(port, () => logger.info(chalk.green(`Authorisation Service listening on port ${port}`)));
+}
+

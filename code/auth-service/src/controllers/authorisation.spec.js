@@ -1,10 +1,10 @@
 import httpMocks from 'node-mocks-http';
 import jwt from 'jsonwebtoken';
 import authorisation from './authorisation';
-import * as getRoles from '../auth/authzApi';
+import * as getRoles from '../dataaccess/userRolesRepository';
 import * as getPermissions from '../permissions/permissions';
 
-jest.mock('../auth/authzApi');
+jest.mock('../dataaccess/userRolesRepository');
 const getRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
 getRoles.default = getRolesMock;
 
