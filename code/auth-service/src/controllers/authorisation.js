@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { pem2jwk } from 'pem-jwk';
 import { get } from 'lodash';
 import logger from 'winston';
-import getRoles from '../dataaccess/userRolesStorageRepository';
+import getRoles from '../dataaccess/userRolesRepository';
 import getPermissions from '../permissions/permissions';
 import {
   PRIVATE_KEY,
@@ -43,18 +43,18 @@ function generatePermissionToken(request, response) {
   const userId = get(request, 'user.sub');
 
   return getRoles(userId)
-    .then((roles) => {
-      const permissions = getPermissions(roles);
+    .then((userRoles) => {
+      const permissions = getPermissions(userRoles);
       const payload = {
         sub: userId,
-        roles,
+        roles: userRoles,
         permissions,
       };
       const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
 
       logger.info('Responding with internal token');
-      logger.debug(`Roles: ${JSON.stringify(roles)}`);
+      logger.debug(`Roles: ${JSON.stringify(userRoles)}`);
       logger.debug(`Permissions: ${JSON.stringify(permissions)}`);
       return response.send({ token });
     })
