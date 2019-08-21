@@ -171,6 +171,9 @@ annotations and a small number of Nginx specific annotations are in use in Datal
 provide authentication and authorisation checks across all services (including third
 party).
 
+The Ingress Controller is deployed into the kube-system namespace in order for it to
+fullfill all ingress rules and route traffic to any required namespace (see below).
+
 #### Storage Class (SC)
 
 A `Storage Class` provides a definition of storage that can be used dynamically within
