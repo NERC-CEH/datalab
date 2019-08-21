@@ -2,7 +2,7 @@
   {
     "userId": "dummy",
     "instanceAdmin": true,
-    "roles": [
+    "projectRoles": [
       {
         "projectName": "project",
         "role": "admin"
@@ -20,7 +20,7 @@
   {
     "userId": "auth0|5d2efacb1ca16e0efd770ddc",
     "instanceAdmin": true,
-    "roles": [
+    "projectRoles": [
       {
         "projectName": "project",
         "role": "admin"
@@ -38,7 +38,7 @@
   {
     "userId": "auth0|5d28a912a537cc0de851ffb8",
     "instanceAdmin": true,
-    "roles": [
+    "projectRoles": [
       {
         "projectName": "project",
         "role": "admin"
@@ -56,7 +56,7 @@
   {
     "userId": "auth0|595f40a25caf4344b2e0e678",
     "instanceAdmin": true,
-    "roles": [
+    "projectRoles": [
       {
         "projectName": "project",
         "role": "admin"
@@ -74,7 +74,7 @@
   {
     "userId": "auth0|5950f70dbad6f109f9f9f560",
     "instanceAdmin": true,
-    "roles": [
+    "projectRoles": [
       {
         "projectName": "project",
         "role": "admin"

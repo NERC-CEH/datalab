@@ -11,7 +11,7 @@ const projectRoles = [PROJECT_ADMIN, PROJECT_USER, PROJECT_VIEWER];
 const UserRolesSchema = new Schema({
   userId: String,
   instanceAdmin: Boolean,
-  roles: [{
+  projectRoles: [{
     projectName: String,
     role: { type: String, enum: projectRoles },
   }],

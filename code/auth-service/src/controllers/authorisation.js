@@ -27,13 +27,13 @@ function getPermissionsForUser(request, response) {
   const userId = get(request, 'user.sub');
 
   return getRoles(userId)
-    .then((roles) => {
-      const permissions = getPermissions(roles);
-      logger.info(`getPermissionsForUser userId ${userId} permissions ${permissions}`);
+    .then((userRoles) => {
+      const permissions = getPermissions(userRoles);
+      logger.debug(`getPermissionsForUser userId ${userId} permissions ${permissions}`);
       return response.json({ permissions });
     })
     .catch((err) => {
-      logger.error(`Responding with status code 500 because of ${err}`);
+      logger.error(`Error retrieving roles for user ${userId}: ${err}`);
       response.status(500);
       return response.send({ message: err.message });
     });
@@ -59,7 +59,7 @@ function generatePermissionToken(request, response) {
       return response.send({ token });
     })
     .catch((err) => {
-      logger.error(`Responding with status code 500 due to ${err}`);
+      logger.error(`Error retrieving roles for user ${userId}: ${err}`);
       response.status(500);
       return response.send({ message: err.message });
     });

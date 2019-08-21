@@ -36,7 +36,7 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
-const processRoles = userRoles => userRoles.roles
+const processRoles = userRoles => userRoles.projectRoles
   .map(getPermissions)
   .map(buildPermissions)
   .map(projectifyPermissions)
