@@ -88,5 +88,41 @@
         "role": "viewer"
       }
     ]
+  },
+  {
+    "userId": "auth0|5bd9cd5082e23e4889c79d36",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
+  },
+  {
+    "userId": "auth0|5a0db1bf7a987451d45a920a",
+    "instanceAdmin": true,
+    "projectRoles": [
+      {
+        "projectName": "project",
+        "role": "admin"
+      },
+      {
+        "projectName": "project2",
+        "role": "user"
+      },
+      {
+        "projectName": "project3",
+        "role": "viewer"
+      }
+    ]
   }
 ]
