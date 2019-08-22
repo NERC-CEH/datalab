@@ -1,4 +1,4 @@
-# 36. Yarn Workspaces for package management and resolution across services
+# 38. Yarn Workspaces for package management and resolution across services
 
 Date: 2019-08-22
 

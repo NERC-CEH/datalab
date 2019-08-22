@@ -1,4 +1,4 @@
-# 36. Single Ingress Controller for Kubernetes Cluster
+# 37. Single Ingress Controller for Kubernetes Cluster
 
 Date: 2019-08-21
 
