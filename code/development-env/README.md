@@ -41,9 +41,19 @@
 ### Install NodeJS packages
 
 * Run `yarn` in each of the following directories:
+  * `code`
   * `code/auth-service`
-  * `code/datalab-app`
   * `code/infrastructure-api`
+
+Running the `yarn` commend within the `code/` directory will install all the
+packages required for services within the workspace (these services within the
+`code/workspaces` directory; Web-App, Client-API, etc).
+
+Git-hooks (via husky) will enable when running the install step above. This will
+enforce linting rules for any files being staged. Any errors highlighted will
+need to be address before the git commit will be permitted. This rule checking
+may be disabled using the `--no-verify` flag with `git commit`, this is not
+recommended as linting error will still be caught with the CI server.
 
 ### Set-up shell environment varaibles
 
