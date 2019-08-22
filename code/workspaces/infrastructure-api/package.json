@@ -43,15 +43,15 @@
     "shx": "0.3.2"
   },
   "scripts": {
-    "lint": "eslint ./src -c .eslintrc --no-eslintrc",
+    "lint": "eslint ./src",
     "start": "concurrently -p \"[{name}]\" -n \"API,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold\"  \"yarn api\" \"yarn watcher\"",
     "api": "nodemon --exec babel-node src/server.js",
     "watcher": "nodemon --exec babel-node src/watcher.js",
     "clean": "shx rm -rf ./dist",
     "build": "babel src --ignore spec.js,__mocks__ --out-dir dist",
     "dist": "yarn clean && yarn build && yarn update-version",
-    "test": "LOG_LEVEL=emerg yarn test-ci --watch",
-    "test-ci": "jest",
+    "test": "LOG_LEVEL=emerg jest --watch",
+    "test-ci": "CI=true jest",
     "update-version": "VERSION=`git describe --tags --always` && sed -i -- 's/undefined/\"'\"$VERSION\"'\"/g' dist/version.js"
   }
 }
