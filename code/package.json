@@ -3,17 +3,34 @@
   "workspaces": [
     "workspaces/*"
   ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*/src/**/*.js": "eslint",
+    "*/src/**/*.md": "markdownlint",
+    "workspaces/*/src/**/*.js": "eslint",
+    "workspaces/*/src/**/*.md": "markdownlint"
+  },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
     "core-js": "^3.2.1",
-    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint": "^6.1.0",
+    "husky": "^3.0.4",
     "jest": "^24.8.0",
+    "lint-staged": "^9.2.3",
+    "markdownlint": "^0.16.0",
     "regenerator-runtime": "^0.13.3"
   }
 }
