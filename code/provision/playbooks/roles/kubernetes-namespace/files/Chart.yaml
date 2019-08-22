@@ -1,3 +1,0 @@
-name: Datalab Namespace creation
-version: 1.0.0
-description: Helm chart to create a namespace and configure ingress

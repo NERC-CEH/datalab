@@ -38,10 +38,8 @@
   hosts: k8s-master
 
   roles:
-    - role: kubernetes-namespace
+    - role: ingress-controller
       namespace: "{{ test_namespace }}"
-    - role: kubernetes-namespace
-      namespace: "{{ prod_namespace }}"
     - role: kubernetes-secrets
 
   environment:

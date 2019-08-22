@@ -1,0 +1,41 @@
+## nginx configuration
+## Ref: https://github.com/kubernetes/ingress/blob/master/controllers/nginx/configuration.md
+##
+controller:
+  kind: Deployment
+  extraArgs:
+    default-ssl-certificate: "kube-system/tls-secret"
+    annotations-prefix: "ingress.kubernetes.io"
+  service:
+    type: NodePort
+    nodePorts:
+      http: {{ namespace.ports.httpNodePort }}
+      https: {{ namespace.ports.httpsNodePort }}
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
+
+defaultBackend:
+  enabled: true
+  name: default-backend
+  image:
+    repository: nerc/default-backend
+    tag: {{ namespace.defaultBackend.version }}
+    pullPolicy: IfNotPresent
+    runAsUser: 65534 # nobody user -> uid 65534
+  extraEnvs:
+    - name: APP_PORT
+      value: '8000'
+    - name: HOMEPAGE
+      value: https://{{ namespace.domain }}
+  port: 8000
+  service:
+    servicePort: 8000
+    type: ClusterIP
+
+rbac:
+  create: true
+

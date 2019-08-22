@@ -1,0 +1,13 @@
+---
+- name: Install Nginx Ingress Helm Chart
+  hosts: k8s-master
+
+  roles:
+    - role: ingress-controller
+      namespace: "{{ test_namespace }}"
+    - role: kubernetes-secrets
+
+  environment:
+    HELM_HOME: "/home/{{ deploy_user }}/helm"
+  tags:
+    - config

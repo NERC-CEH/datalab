@@ -2,12 +2,6 @@
 - name: Create temporary helm chart directory
   file: path={{ chart_directory }} state=directory
 
-- name: Copy helm chart to server
-  copy:
-    src: files/
-    dest: "{{ chart_directory }}"
-    mode: 0644
-
 - name: Create values file from template
   template:
     src: values.yml.j2
@@ -15,7 +9,7 @@
     force: yes
 
 - name: Install chart
-  command: "helm upgrade --install {{ namespace.name }}-ingress --namespace {{ namespace.name }} --tls -f {{ chart_directory}}/values.yml {{ chart_directory }}"
+  command: "helm upgrade --tls --install nginx-ingress-controller stable/nginx-ingress --version {{ helm_nginx_version }} --namespace kube-system -f {{ chart_directory }}/values.yml --debug"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent

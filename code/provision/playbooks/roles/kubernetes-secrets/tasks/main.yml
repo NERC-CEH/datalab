@@ -11,6 +11,12 @@
   changed_when: prod_tls_secret_result.rc == 0
   failed_when: prod_tls_secret_result.rc != 0 and 'AlreadyExists' not in prod_tls_secret_result.stderr
 
+- name: Deploy Default TLS Secret to Kube System Namespace
+  shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ test_ssl_certificate }}" --from-literal=tls.key="{{ test_ssl_private_key }}" --type=kubernetes.io/tls -n kube-system
+  register: default_tls_secret_result
+  changed_when: prod_tls_secret_result.rc == 0
+  failed_when: prod_tls_secret_result.rc != 0 and 'AlreadyExists' not in prod_tls_secret_result.stderr
+
 - name: Deploy Test Auth Signing Keys
   shell: kubectl create secret generic auth-signing-key --from-literal=public="{{ test_authorisation_public_key }}" --from-literal=private="{{ test_authorisation_private_key }}" -n test
   register: test_auth_secret_result
