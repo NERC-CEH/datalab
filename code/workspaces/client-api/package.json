@@ -46,6 +46,6 @@
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
     "build": "shx rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",
-    "start": "nodemon --watch src --ext js --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/app.js"
+    "start": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/app.js"
   }
 }
