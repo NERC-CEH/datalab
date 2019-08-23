@@ -21,11 +21,10 @@ function getStacks() {
     .then(pods => pods.filter(({ type }) => stackNames.includes(type)));
 }
 
-const handlePodlist = ({ items }) =>
-  items.map(pod => ({
-    name: get(pod, 'metadata.labels.name'),
-    type: get(pod, `metadata.labels.${SELECTOR_LABEL}`),
-    status: get(pod, 'status.phase'),
-  }));
+const handlePodlist = ({ items }) => items.map(pod => ({
+  name: get(pod, 'metadata.labels.name'),
+  type: get(pod, `metadata.labels.${SELECTOR_LABEL}`),
+  status: get(pod, 'status.phase'),
+}));
 
 export default { getPods, getStacks };

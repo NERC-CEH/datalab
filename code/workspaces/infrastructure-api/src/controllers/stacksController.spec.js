@@ -22,7 +22,8 @@ describe('Stacks controller', () => {
   describe('listByCategory', () => {
     beforeEach(() => createValidatedRequest(
       { category: 'publish' },
-      stacksController.withCategoryValidator));
+      stacksController.withCategoryValidator,
+    ));
 
     it('should process a valid request', () => {
       const response = httpMocks.createResponse();
@@ -65,15 +66,15 @@ describe('Stacks controller', () => {
         });
     });
 
-    it('should validate the category field exists', () =>
-      createValidatedRequest({}, stacksController.withCategoryValidator)
-        .then(() => expectValidationError('category', 'category must match known type')));
+    it('should validate the category field exists', () => createValidatedRequest({}, stacksController.withCategoryValidator)
+      .then(() => expectValidationError('category', 'category must match known type')));
   });
 
   describe('listByMount', () => {
     beforeEach(() => createValidatedRequest(
       { mount: 'expectedMount' },
-      stacksController.withMountValidator));
+      stacksController.withMountValidator,
+    ));
 
     it('should process a valid request', () => {
       getAllByCategoryMock.mockReturnValue(Promise.resolve([]));
@@ -97,9 +98,8 @@ describe('Stacks controller', () => {
         });
     });
 
-    it('should validate the category field exists', () =>
-      createValidatedRequest({}, stacksController.withMountValidator)
-        .then(() => expectValidationError('mount', 'mount must be specified')));
+    it('should validate the category field exists', () => createValidatedRequest({}, stacksController.withMountValidator)
+      .then(() => expectValidationError('mount', 'mount must be specified')));
   });
 });
 

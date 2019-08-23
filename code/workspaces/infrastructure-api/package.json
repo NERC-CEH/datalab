@@ -44,7 +44,7 @@
   },
   "scripts": {
     "test": "LOG_LEVEL=emerg jest --watch",
-    "test-ci": "CI=true jest",
+    "test-ci": "CI=true LOG_LEVEL=emerg jest",
     "lint": "eslint ./src",
     "build": "shx rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",
     "start": "concurrently -p \"[{name}]\" -n \"API,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold\"  \"yarn api\" \"yarn watcher\"",

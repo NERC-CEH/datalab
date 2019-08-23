@@ -145,10 +145,10 @@ function createService() {
 }
 
 function createManifest() {
-  return 'apiVersion: v1\n' +
-    'kind: Service\n' +
-    'metadata:\n' +
-    '  name: test-service\n' +
-    'spec:\n' +
-    '  type: NodePort\n';
+  return 'apiVersion: v1\n'
+    + 'kind: Service\n'
+    + 'metadata:\n'
+    + '  name: test-service\n'
+    + 'spec:\n'
+    + '  type: NodePort\n';
 }

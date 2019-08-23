@@ -22,7 +22,8 @@ function createStack(user, params) {
         status: REQUESTED,
         url: `https://${datalabInfo.name}-${name}.${datalabInfo.domain}`,
         internalEndpoint: `http://${params.type}-${name}`,
-      })
+      },
+    )
       .then(() => response));
 }
 

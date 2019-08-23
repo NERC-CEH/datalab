@@ -123,8 +123,8 @@ function getSuccessfulLoginResponse() {
 function getFailedLoginResponse() {
   return {
     errors: [
-      'failed to validate SecretID: failed to find secondary index for role_id ' +
-      '"29fd4305-e856-fe04-6c59-65e3d4936e3"\n',
+      'failed to validate SecretID: failed to find secondary index for role_id '
+      + '"29fd4305-e856-fe04-6c59-65e3d4936e3"\n',
     ],
   };
 }

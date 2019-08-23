@@ -142,6 +142,6 @@ function createDeployment() {
 }
 
 function createManifest() {
-  return 'apiVersion: extensions/v1beta1\n' +
-      'kind: Deployment';
+  return 'apiVersion: extensions/v1beta1\n'
+      + 'kind: Deployment';
 }

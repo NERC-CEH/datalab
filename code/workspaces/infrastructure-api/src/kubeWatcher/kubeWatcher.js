@@ -76,9 +76,8 @@ export function podDeletedWatcher({ metadata: { labels } }) {
   logger.debug(`Pod deleted -- name: "${labels.name}", type: "${labels[SELECTOR_LABEL]}"`);
 }
 
-const isPodRunning = event =>
-  event.status.phase === 'Running' &&
-  event.metadata.deletionTimestamp === undefined &&
-  find(event.status.conditions, { type: 'Ready', status: 'True' });
+const isPodRunning = event => event.status.phase === 'Running'
+  && event.metadata.deletionTimestamp === undefined
+  && find(event.status.conditions, { type: 'Ready', status: 'True' });
 
 export default kubeWatcher;

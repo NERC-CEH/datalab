@@ -173,9 +173,8 @@ describe('Stack Controller', () => {
         });
     });
 
-    it('should validate the id field exists', () =>
-      createValidatedRequest({}, stackController.withIdValidator)
-        .then(() => expectValidationError('id', 'id must be specified')));
+    it('should validate the id field exists', () => createValidatedRequest({}, stackController.withIdValidator)
+      .then(() => expectValidationError('id', 'id must be specified')));
   });
 
   describe('getOneByName', () => {

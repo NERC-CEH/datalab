@@ -38,7 +38,8 @@ function createOrUpdate(user, stack) {
     .findOneAndUpdate(
       { name: stack.name },
       { ...stack, users: [user.sub] },
-      { upsert: true, setDefaultsOnInsert: true })
+      { upsert: true, setDefaultsOnInsert: true },
+    )
     .exec();
 }
 

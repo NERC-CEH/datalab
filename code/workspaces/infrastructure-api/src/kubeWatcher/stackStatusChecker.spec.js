@@ -35,9 +35,7 @@ describe('Stack Status Checker', () => {
     jest.clearAllMocks();
   });
 
-  it('updates stack records with correct status', () =>
-    statusChecker().then(() =>
-      expect(updateStatusMock.mock.calls).toMatchSnapshot()));
+  it('updates stack records with correct status', () => statusChecker().then(() => expect(updateStatusMock.mock.calls).toMatchSnapshot()));
 
   it('updates stack record for Running stack', () => {
     getStacksMock.mockReturnValue(Promise.resolve([

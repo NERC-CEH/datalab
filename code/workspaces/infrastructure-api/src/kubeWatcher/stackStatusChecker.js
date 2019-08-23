@@ -44,18 +44,15 @@ const setStatus = pods => Promise.mapSeries(Object.entries(pods), ([kubeName, st
 const getStatus = (statusArray) => {
   if (arraysIncludes(statusArray, kubeUpStatus)) {
     return READY;
-  } else if (arraysIncludes(statusArray, kubeCreateStatus)) {
+  } if (arraysIncludes(statusArray, kubeCreateStatus)) {
     return CREATING;
-  } else if (arraysIncludes(statusArray, kubeRequestStatus)) {
+  } if (arraysIncludes(statusArray, kubeRequestStatus)) {
     return REQUESTED;
   }
 
   return UNAVAILABLE;
 };
 
-const arraysIncludes = (current, expected) =>
-  current.some(currentValue =>
-    expected.some(expectedValue =>
-      (currentValue.match(expectedValue) || []).length > 0));
+const arraysIncludes = (current, expected) => current.some(currentValue => expected.some(expectedValue => (currentValue.match(expectedValue) || []).length > 0));
 
 export default statusChecker;

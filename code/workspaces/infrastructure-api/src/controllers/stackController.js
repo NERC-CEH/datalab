@@ -74,8 +74,7 @@ function deleteStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
-const checkExistsWithMsg = fieldName =>
-  check(fieldName).exists().withMessage(`${fieldName} must be specified`).trim();
+const checkExistsWithMsg = fieldName => check(fieldName).exists().withMessage(`${fieldName} must be specified`).trim();
 
 const withIdValidator = [
   checkExistsWithMsg('id'),

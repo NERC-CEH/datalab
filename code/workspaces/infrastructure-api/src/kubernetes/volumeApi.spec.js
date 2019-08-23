@@ -216,6 +216,6 @@ function createPVCs() {
 }
 
 function createManifest() {
-  return 'apiVersion: v1\n' +
-    'kind: PersistentVolumeClaim';
+  return 'apiVersion: v1\n'
+    + 'kind: PersistentVolumeClaim';
 }

@@ -14,7 +14,6 @@ function handleId(mongooseObj) {
     }, {});
 }
 
-export const mapHandleId = arrayOfMongooseObj =>
-  arrayOfMongooseObj.map(handleId);
+export const mapHandleId = arrayOfMongooseObj => arrayOfMongooseObj.map(handleId);
 
 export default handleId;
