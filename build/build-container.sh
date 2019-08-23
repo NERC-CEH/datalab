@@ -15,7 +15,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     ;;
   api)
     echo "Starting to build datalab-api..."
-    cd ./code && yarn workspace client-api build
+    cd ./code && yarn update-version && yarn workspace client-api build
     DOCKERFILE="api.Dockerfile"
     IMAGE="datalab-api"
     LIBRARY="common"
@@ -23,7 +23,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     ;;
   app)
     echo "Starting to build datalab-app..."
-    cd ./code && yarn workspace web-app build
+    cd ./code && yarn update-version && yarn workspace web-app build
     DOCKERFILE="app.Dockerfile"
     IMAGE="datalab-app"
     LIBRARY="common"
@@ -31,8 +31,8 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     ;;
   infrastructure)
     echo "Starting to build infrastructure-api..."
-    cd ./code/infrastructure-api && yarn dist
-    DOCKERFILE="Dockerfile"
+    cd ./code && yarn update-version && yarn workspace infrastructure-api build
+    DOCKERFILE="api.Dockerfile"
     IMAGE="infrastructure-api"
     LIBRARY="common"
     WORKSPACE="infrastructure-api"

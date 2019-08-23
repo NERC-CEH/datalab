@@ -13,7 +13,7 @@ if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation)$ ]]
       cd ./code && yarn install && yarn workspace web-app lint && yarn workspace web-app test-ci
       ;;
     infrastructure)
-      cd ./code/infrastructure-api && yarn install && yarn lint && yarn test-ci
+      cd ./code && yarn install && yarn workspace infrastructure-api lint && yarn workspace infrastructure-api test-ci
       ;;
     authorisation)
       cd ./code/auth-service && yarn install && yarn lint && yarn test-ci
