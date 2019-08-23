@@ -10,7 +10,7 @@ docs/version.md
 
 code/workspaces/**/coverage/
 code/workspaces/**/dist/
-code/workspaces/**/version.js
+code/version.json
 node_modules/
 
 code/provision/.vagrant
@@ -21,7 +21,6 @@ code/bara/.bara/
 bara-*.tgz
 code/bara/lib/
 
-code/infrastructure-api/dist
 code/auth-service/dist
 
 experimental/glusterfs-heketi/.vagrant
@@ -36,5 +35,3 @@ code/provision/infrastructure/vault-password\.txt
 code/provision/infrastructure/group_vars/proxied\.yml
 
 code/venv/
-
-code/migration/src/knownUsers/knownUsers\.yml

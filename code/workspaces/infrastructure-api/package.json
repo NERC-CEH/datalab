@@ -39,15 +39,16 @@
     "eslint-plugin-import": "2.18.2",
     "jest": "24.8.0",
     "node-mocks-http": "1.7.6",
-    "nodemon": "1.19.1"
+    "nodemon": "^1.19.1",
+    "shx": "^0.3.2"
   },
   "scripts": {
     "test": "LOG_LEVEL=emerg jest --watch",
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
-    "build": "rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",
+    "build": "shx rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",
     "start": "concurrently -p \"[{name}]\" -n \"API,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold\"  \"yarn api\" \"yarn watcher\"",
-    "api": "nodemon --exec babel-node --root-mode upward --ignore='../../node_modules' src/server.js",
-    "watcher": "nodemon --exec babel-node --root-mode upward --ignore='../../node_modules' src/watcher.js"
+    "api": "nodemon --watch src --ext js --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' src/server.js",
+    "watcher": "nodemon --watch src --ext js --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' src/watcher.js"
   }
 }

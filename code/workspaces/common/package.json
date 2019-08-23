@@ -14,12 +14,12 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
     "core-js": "^3.2.1",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint": "^6.1.0",
     "jest": "^24.8.0",
     "regenerator-runtime": "^0.13.3",
-    "shx": "0.3.2"
+    "shx": "^0.3.2"
   },
   "scripts": {
     "test": "jest --watch",

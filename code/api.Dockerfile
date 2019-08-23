@@ -33,6 +33,7 @@ COPY ./workspaces/${WORKSPACE}/package.json .
 RUN yarn add /usr/src/common/*.tgz && yarn install --silent --production && yarn cache clean
 
 COPY ./workspaces/${WORKSPACE}/dist .
+COPY ./version.json .
 
 EXPOSE 8000
 

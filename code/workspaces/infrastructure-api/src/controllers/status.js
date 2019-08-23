@@ -1,8 +1,7 @@
-import version from '../version';
+import { version } from '../version';
 
 function status(req, res) {
-  const versionString = version.versionString || 'Development build';
-  res.json({ message: 'OK', versionString });
+  res.json({ message: 'OK', version });
 }
 
 export default { status };

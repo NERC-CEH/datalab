@@ -44,11 +44,12 @@
     "react-scripts": "3.1.0",
     "react-test-renderer": "16.8.6",
     "redux-devtools": "^3.5.0",
-    "redux-mock-store": "1.2.3"
+    "redux-mock-store": "1.2.3",
+    "shx": "^0.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf dist && mv build dist",
+    "build": "react-scripts build && shx rm -rf dist && shx mv build dist",
     "test": "react-scripts test",
     "test-ci": "CI=true react-scripts test",
     "eject": "react-scripts eject",
