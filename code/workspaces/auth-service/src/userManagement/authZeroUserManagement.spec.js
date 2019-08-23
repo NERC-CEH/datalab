@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import userMgmt, { authZeroManagementApi, asyncGetUsers } from './authZeroUserManagement';
 import * as requestAccessToken from '../auth/accessToken';
 import * as cache from '../cache/cache';
+import config from '../config/config';
 
 jest.mock('winston');
 
@@ -14,6 +15,9 @@ jest.mock('../cache/cache');
 const cacheReturnedMock = jest.fn();
 const cacheWrapperMock = jest.fn().mockReturnValue(cacheReturnedMock);
 cache.getOrSetCacheAsyncWrapper = cacheWrapperMock;
+
+config.set('userManagementClientId', 'userMgmtClientId');
+config.set('userManagementClientSecret', 'userMgmtClientSecret');
 
 const mock = new MockAdapter(axios);
 

@@ -7,11 +7,11 @@ import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
 export const authZeroManagementApi = 'https://mjbr.eu.auth0.com/api/v2';
 
-const accessTokenRequest = {
+const accessTokenRequest = () => ({
   audience: `https://${config.get('authZeroDomain')}/api/v2/`,
   client_id: config.get('userManagementClientId'),
   client_secret: config.get('userManagementClientSecret'),
-};
+});
 
 const authKeyMapping = {
   name: 'name',
@@ -19,7 +19,7 @@ const authKeyMapping = {
 };
 
 export function asyncGetUsers() {
-  return requestAccessToken(accessTokenRequest)
+  return requestAccessToken(accessTokenRequest())
     .then(bearer => axios.get(`${authZeroManagementApi}/users`, {
       params: {
         fields: 'name,user_id',
