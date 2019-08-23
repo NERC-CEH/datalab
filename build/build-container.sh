@@ -31,7 +31,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     ;;
   infrastructure)
     echo "Starting to build infrastructure-api..."
-    cd ./code/infrastructure-api && yarn dist
+    cd ./code && yarn workspace infrastructure-api build
     DOCKERFILE="Dockerfile"
     IMAGE="infrastructure-api"
     LIBRARY="common"
