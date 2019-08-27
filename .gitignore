@@ -10,18 +10,15 @@ docs/version.md
 
 code/workspaces/**/coverage/
 code/workspaces/**/dist/
+code/workspaces/**/lib/
+code/workspaces/bara/.bara/
+code/workspaces/bara/bara-*.tgz
 code/version.json
 node_modules/
 
 code/provision/.vagrant
 code/provision/playbooks/vault-password.txt
 code/provision/playbooks/.artifacts/
-
-code/bara/.bara/
-bara-*.tgz
-code/bara/lib/
-
-code/auth-service/dist
 
 experimental/glusterfs-heketi/.vagrant
 *.vdi
