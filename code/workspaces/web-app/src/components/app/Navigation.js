@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   page: {
     width: `calc(100% - ${drawerWidth}px)`,
-    maxWidth: '750px',
+    maxWidth: '1000px',
     padding: theme.spacing(2),
     margin: '0 auto',
   },
