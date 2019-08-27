@@ -24,10 +24,12 @@
     "core-js": "^3.2.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "shx": "^0.3.2"
   },
   "scripts": {
     "lint": "eslint ./src",
+    "test-ci": "shx echo 'no tests configured, skipping'",
     "start": "babel-node src/bara.js",
     "prepare": "shx rm -rf lib && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir lib"
   }
