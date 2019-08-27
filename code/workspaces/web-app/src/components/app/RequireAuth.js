@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
-const circularProgressSize = 40; // Default size of component, used for position calculation
+const circularProgressSize = 70;
 
 const styles = theme => ({
   circularProgress: {
@@ -37,7 +37,12 @@ class RequireAuth extends Component {
     const { PrivateComponent, PublicComponent } = this.props;
 
     if (this.props.permissions.fetching) {
-      return () => (<CircularProgress className={this.props.classes.circularProgress} />);
+      return () => (
+        <CircularProgress
+          className={this.props.classes.circularProgress}
+          size={circularProgressSize}
+        />
+      );
     }
 
     if (this.isUserLoggedIn()) {
