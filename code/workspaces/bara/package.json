@@ -21,14 +21,14 @@
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "core-js": "3",
-    "eslint": "6.1.0",
+    "core-js": "^3.2.1",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "2.18.2"
+    "eslint-plugin-import": "^2.18.2"
   },
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint ./src",
     "start": "babel-node src/bara.js",
-    "prepare": "./node_modules/.bin/babel src --out-dir lib"
+    "prepare": "shx rm -rf lib && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir lib"
   }
 }
