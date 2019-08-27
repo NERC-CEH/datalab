@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBarGroup when children provided renders children and title when title provided 1`] = `
+<div
+  className="SideBarGroup-sidebarGroup-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="SideBarGroup-title-2"
+    variant="h6"
+  >
+    Test Group
+  </WithStyles(ForwardRef(Typography))>
+  <div>
+    test div content
+  </div>
+</div>
+`;
+
+exports[`SideBarGroup when children provided renders children when no title provided 1`] = `
+<div
+  className="SideBarGroup-sidebarGroup-1"
+>
+  <div>
+    test div content
+  </div>
+</div>
+`;
+
+exports[`SideBarGroup when no children provided renders nothing when no title provided 1`] = `""`;
+
+exports[`SideBarGroup when no children provided renders nothing when title provided 1`] = `""`;
