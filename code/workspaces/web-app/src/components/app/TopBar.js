@@ -7,10 +7,6 @@ import { extendSubdomain } from '../../core/getDomainInfo';
 import TopBarButton from './TopBarButton';
 import navBarLinks from '../../constants/navBarLinks';
 
-const logoOrigWidth = 280;
-const logoOrigHeight = 50;
-const logoAspect = logoOrigWidth / logoOrigHeight;
-
 const styles = theme => ({
   appBar: {
     background: theme.palette.backgroundDark,
@@ -28,7 +24,7 @@ const styles = theme => ({
   },
   datalabsLogo: {
     height: theme.shape.topBarContentHeight - theme.spacing(0.5),
-    width: (theme.shape.topBarContentHeight - theme.spacing(0.5)) * logoAspect,
+    width: 'auto',
   },
   buttons: {
     display: 'flex',
