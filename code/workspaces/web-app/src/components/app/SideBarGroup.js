@@ -15,6 +15,9 @@ const styles = theme => ({
 });
 
 function SideBarGroup({ classes, children, title }) {
+  // Handles case where might not have permission for anything in group.
+  if (!children) return null;
+
   return (
     <div className={classes.sidebarGroup}>
       {title ? <Typography className={classes.title} variant='h6'>{title}</Typography> : null}
