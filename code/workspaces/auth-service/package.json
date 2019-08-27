@@ -32,7 +32,7 @@
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "axios-mock-adapter": "^1.17.0",
-    "eslint": "^5.3.0",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
     "jest": "^24.8.0",
@@ -40,19 +40,11 @@
     "nodemon": "^1.19.1",
     "shx": "^0.3.2"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
   "scripts": {
-    "lint": "eslint src",
-    "start": "nodemon --exec babel-node src/server.js",
-    "clean": "shx rm -rf ./dist",
-    "build": "babel src --ignore spec.js,__mocks__ --out-dir dist",
-    "dist": "yarn clean && yarn build && yarn update-version",
-    "test": "yarn test-ci --watch",
-    "test-ci": "jest",
-    "update-version": "VERSION=`git describe --tags --always` && sed -i -- 's/undefined/\"'\"$VERSION\"'\"/g' dist/version.js"
+    "test": "jest --watch",
+    "test-ci": "CI=true jest",
+    "lint": "eslint ./src",
+    "build": "shx rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",
+    "start": "nodemon --watch src --ignore **/*.spec.js --exec babel-node src/server.js"
   }
 }

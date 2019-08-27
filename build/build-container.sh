@@ -39,8 +39,8 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     ;;
   authorisation)
     echo "Starting to build auth-service..."
-    cd ./code/auth-service && yarn dist
-    DOCKERFILE="Dockerfile"
+    cd ./code && yarn update-version && yarn workspace auth-service build
+    DOCKERFILE="api.Dockerfile"
     IMAGE="authorisation-svc"
     LIBRARY="common"
     WORKSPACE="authorisation-svc"
