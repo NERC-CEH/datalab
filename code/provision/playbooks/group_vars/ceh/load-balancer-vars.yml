@@ -1,0 +1,2 @@
+prod_wildcard_domain: "*.datalabs.ceh.ac.uk"
+test_wildcard_domain: "*.test-datalabs.ceh.ac.uk"
