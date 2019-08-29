@@ -11,8 +11,9 @@ const text = '#263238';
 
 const backgroundColor = '#F8F8F8';
 const backgroundDark = 'rgba(38, 50, 56, 1.0)';
-const backgroundDarkTransparent = 'rgba(38, 50, 56, 0.6)';
+const backgroundDarkTransparent = 'rgba(38, 50, 56, 0.7)';
 const backgroundDarkHighTransparent = 'rgba(38, 50, 56, 0.2)';
+const sideBarBackground = 'hsl(0, 0%, 95%)';
 
 const highlightMono = 'rgba(248, 248, 248, 1.0)';
 const highlightMonoTransparent = 'rgba(248, 248, 248, 0.25)';
@@ -31,6 +32,7 @@ const theme = createMuiTheme({
     backgroundDark,
     backgroundDarkTransparent,
     backgroundDarkHighTransparent,
+    sideBarBackground,
     highlightMono,
     highlightMonoTransparent,
   },

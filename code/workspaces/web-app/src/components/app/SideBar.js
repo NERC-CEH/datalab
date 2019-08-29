@@ -21,6 +21,7 @@ const styles = theme => ({
     padding: 0,
   },
   sideBar: {
+    background: theme.palette.sideBarBackground,
     height: '100%',
     width: drawerWidth,
     borderRight: `1px solid ${theme.palette.divider}`,
