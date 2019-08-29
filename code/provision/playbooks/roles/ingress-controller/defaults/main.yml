@@ -1,4 +1,4 @@
 ---
 tmp_directory: /tmp/helm
 chart_directory: "{{ tmp_directory}}/namespace"
-helm_nginx_version: "0.17.1"
+helm_nginx_version: "1.17.1"
