@@ -1,9 +1,17 @@
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
+import { importSchema } from 'graphql-import';
 import { authorise, verifyToken } from '../auth/authMiddleware';
-import schema from '../schema/index';
 import status from '../status';
+import resolvers from '../schema/resolvers';
 
 function configureGraphQL(app) {
+  const typeDefs = importSchema('src/schema/schema.graphql');
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
+
   const api = graphqlExpress(request => ({
     schema,
     context: {

@@ -1,0 +1,217 @@
+# Root query methods for DataLabs.
+type Query {
+    # Status string to confirm GraphQL server is running.
+    status: String
+
+    # List of currently provisioned DataLabs data storage.
+    dataStorage: [DataStore]
+
+    # Details of a single Datalabs data store.
+    dataStore(id: ID!): DataStore
+
+    # Details of a single currently provisioned DataLab Stack owned by user.
+    stack(id: ID!): Stack
+
+    # List of currently provisioned DataLabs Stacks owned by user.
+    stacks: [Stack]
+
+    # List of currently provisioned DataLabs Stacks owned by user for the requested category.
+    stacksByCategory(category: String!): [Stack]
+
+    # Details for a single Datalab.
+    datalab(name: String!): Datalab
+
+    # List of DataLabs.
+    datalabs: [Datalab]
+
+    # List permissions of current user
+    userPermissions: [String]
+
+    # Checks internal name is unique.
+    checkNameUniqueness(name: String!): Boolean
+
+    # List of users within the current DataLab
+    users: [User]
+
+    # Details of a single project
+    project(id: ID!): Project
+}
+
+# Root mutation methods for Datalabs.
+type Mutation {
+    # Create a new stack
+    createStack(stack: StackCreationRequest!): Stack
+
+    # Delete a stack
+    deleteStack(stack: StackDeletionRequest!): Stack
+
+    # Create a new data store
+    createDataStore(dataStore: DataStorageCreationRequest!): DataStore
+
+    # Delete a data store
+    deleteDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+
+    # Grant user access to data store
+    addUserToDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+
+    # Remove user access to data store
+    removeUserFromDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+
+    # Add a user permission to a project
+    addProjectPermission(permission: PermissionRequest!): Permission
+
+    # Remove a user permission from a project
+    removeProjectPermission(permission: PermissionRequest!): Permission
+}
+
+# DataLabs type for basic datalab information.
+type Datalab {
+    name: String
+    domain: String
+}
+
+# Type to describe the mutation for creating a new data store
+input DataStorageCreationRequest {
+    name: String
+    displayName: String
+    description: String
+    type: StorageType
+    volumeSize: Int
+}
+
+# Type to describe the mutation for updating or deleting a new data store
+input DataStorageUpdateRequest {
+    name: String
+    users: [String]
+}
+
+# DataLabs data store type.
+type DataStore {
+    id: ID
+    name: String
+    displayName: String
+    description: String
+    type: StorageType
+    volumeSize: Int
+    url: String
+    internalEndpoint: String
+    users: [String]
+    accessKey: String
+    stacksMountingStore: [Stack]
+    status: String
+}
+
+# Type to represent online Stacks
+type Stack {
+    id: ID
+    name: String
+    displayName: String
+    description: String
+    type: String
+    url: String
+    internalEndpoint: String
+    sourcePath: String
+    isPublic: Boolean
+    redirectUrl: String
+    volumeMount: String
+    status: StatusType
+}
+
+# Type to describe the mutation for creating a new Stack.
+input StackCreationRequest {
+    displayName: String
+    name: String
+    type: StackType
+    description: String
+    sourcePath: String
+    isPublic: Boolean
+    volumeMount: String
+}
+
+# Type to describe the mutation for deleting a new Stack.
+input StackDeletionRequest {
+    name: String
+    type: StackType
+}
+
+# Stack types within DataLabs
+enum StackType {
+    # A Jupyter Notebook
+    jupyter
+
+    # A Jupyter Lab
+    jupyterlab
+
+    # An RStudio Server
+    rstudio
+
+    # A Zeppelin Notebook
+    zeppelin
+
+    # An RShiny Site
+    rshiny
+
+    # An Jupyter Notebook Viewer Site
+    nbviewer
+
+    # A NFS volume
+    nfs
+}
+
+# Status classes within DataLabs
+enum StatusType {
+    # Resource has been requested
+    requested
+
+    # Resource is being created
+    creating
+
+    # Resource is ready for use
+    ready
+
+    # Resource is currently unavailable
+    unavailable
+}
+
+# Data store classes within DataLabs
+enum StorageType {
+    # Network File System (NFS) share.
+    nfs
+}
+
+# Type to represent Auth0 User
+type User {
+    userId: ID
+    name: String!
+    permissions: [Permission!]!
+}
+
+type Project {
+    id: ID!
+    name: String!
+    projectUsers: [ProjectUser!]!
+}
+
+type Permission {
+    projectId: String,
+    role: Role!
+}
+
+type ProjectUser {
+    id: ID!
+    name: String!
+    role: Role!
+}
+
+input PermissionRequest {
+    projectId: ID!,
+    userId: ID!
+    role: Role!
+}
+
+enum Role {
+    INSTANCE_ADMIN
+    ADMIN,
+    USER,
+    VIEWER,
+}

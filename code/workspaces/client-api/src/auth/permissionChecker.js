@@ -16,7 +16,7 @@ export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissi
 function permissionCheck(requiredPermissions, { permissions }, next) {
   const grantedPermissions = permissions || [];
 
-  logger.info('Auth: checking permissions');
+  logger.debug('Auth: checking permissions');
   logger.debug(`Auth: expected permission(s): ${requiredPermissions}`);
   logger.debug(`Auth: granted user permission(s): ${grantedPermissions}`);
 
@@ -25,7 +25,7 @@ function permissionCheck(requiredPermissions, { permissions }, next) {
     return Promise.reject(new Error(`User missing expected permission(s): ${requiredPermissions}`));
   }
 
-  logger.info('Auth: permission check: PASSED');
+  logger.debug('Auth: permission check: PASSED');
   return next();
 }
 

@@ -14,8 +14,10 @@
     "express": "4.17.1",
     "express-jwt": "5.3.1",
     "graphql": "0.10.3",
+    "graphql-import": "^0.7.1",
     "graphql-server-express": "1.1.2",
     "graphql-tag": "2.4.2",
+    "graphql-tools": "^4.0.5",
     "jsonwebtoken": "8.1.1",
     "jwks-rsa": "1.2.0",
     "lodash": "4.17.15",
@@ -42,7 +44,7 @@
     "shx": "^0.3.2"
   },
   "scripts": {
-    "test": "jest --watch",
+    "test": "LOG_LEVEL=emerg jest --watch",
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
     "build": "shx rm -rf dist && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",

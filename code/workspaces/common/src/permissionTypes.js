@@ -1,3 +1,4 @@
+const READ = 'read';
 const CREATE = 'create';
 const DELETE = 'delete';
 const LIST = 'list';
@@ -6,6 +7,8 @@ const EDIT = 'edit';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
+const SETTINGS = 'settings';
+const PERMISSIONS = 'permissions';
 const USERS = 'users';
 
 const PROJECT = 'project';
@@ -14,6 +17,7 @@ const keyDelim = '_';
 const permissionDelim = ':';
 
 const elementsPermissionList = {
+  READ,
   CREATE,
   DELETE,
   LIST,
@@ -28,6 +32,8 @@ const usersPermissionList = {
 const elements = {
   STACKS,
   STORAGE,
+  SETTINGS,
+  PERMISSIONS,
 };
 
 const projects = {

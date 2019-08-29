@@ -17,6 +17,15 @@ admin:
   - name: users
     permissions:
       - list
+  - name: settings
+    permissions:
+      - list
+      - read
+  - name: permissions
+    permissions:
+      - read
+      - create
+      - delete
 user:
   - name: stacks
     permissions:
