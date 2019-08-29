@@ -1,0 +1,35 @@
+site: ceh
+
+datalabs_domain: datalabs.ceh.ac.uk
+test_datalabs_domain: test-datalabs.ceh.ac.uk
+
+bastion_ip_address: 192.171.139.121
+bastion_internal_ip_address: 192.168.3.41
+external_proxy_internal_ip_address: 192.171.139.99
+# Have not been allocated external IP for test proxy
+# test_proxy_internal_ip_address:
+
+access_public_keys:
+  - iainw_rsa.pub
+  - ola_rsa.pub
+  - mikew_rsa.pub
+
+# Configuration for Terraform State Server
+server_image: ubuntu-1804-datalabs-20190104
+key_name: olaawe-d20a3d59-9433-4b79-8726-20b431d89c78
+network: ceh-datalab-U-internal
+external_ip: 192.171.139.119
+management_ips:
+  - port: 22
+    ip_range: 192.171.154.4/32
+  - port: 22
+    ip_range: 192.171.154.26/32
+  - port: 22
+    ip_range: 192.171.154.27/32
+  - port: 80
+    ip_range: 192.171.154.4/32
+  - port: 80
+    ip_range: 192.171.154.26/32
+  - port: 80
+    ip_range: 192.171.154.27/32
+

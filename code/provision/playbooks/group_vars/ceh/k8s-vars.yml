@@ -1,0 +1,15 @@
+prod_namespace:
+  name: prod
+  datalabName: datalab
+  internalVolumeSize: 10G
+  minio:
+    accessKey: "{{ minio_shared_store_access_key }}"
+    secretKey: "{{ minio_shared_store_secret_key }}"
+  domain: datalabs.ceh.ac.uk
+  nginxVersion: 0.21.0
+  ports:
+    httpNodePort: "{{ prod_ingress_http_port }}"
+    httpsNodePort: "{{ prod_ingress_https_port }}"
+  defaultBackend:
+    version: 0.2.0
+    policy: localhost/docker-node-alpine
