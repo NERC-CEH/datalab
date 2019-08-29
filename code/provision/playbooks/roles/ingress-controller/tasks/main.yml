@@ -8,8 +8,11 @@
     dest: "{{ chart_directory }}/values.yml"
     force: yes
 
+- name: Helm repo update
+  command: "helm repo update"
+
 - name: Install chart
-  command: "helm upgrade --tls --install nginx-ingress-controller stable/nginx-ingress --version {{ helm_nginx_version }} --namespace kube-system -f {{ chart_directory }}/values.yml --debug"
+  command: "helm upgrade --tls --install nginx-ingress-controller --namespace kube-system -f {{ chart_directory }}/values.yml stable/nginx-ingress --version {{ helm_nginx_version }}"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent
