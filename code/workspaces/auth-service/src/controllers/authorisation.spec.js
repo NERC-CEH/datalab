@@ -1,12 +1,12 @@
 import httpMocks from 'node-mocks-http';
 import jwt from 'jsonwebtoken';
 import authorisation from './authorisation';
-import * as getRoles from '../dataaccess/userRolesRepository';
+import userRolesRepository from '../dataaccess/userRolesRepository';
 import * as getPermissions from '../permissions/permissions';
 
 jest.mock('../dataaccess/userRolesRepository');
 const getRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
-getRoles.default = getRolesMock;
+userRolesRepository.getRoles = getRolesMock;
 
 jest.mock('../permissions/permissions');
 const getPermissionsMock = jest.fn();

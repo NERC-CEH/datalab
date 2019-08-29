@@ -1,4 +1,4 @@
-import getRoles from './userRolesRepository';
+import userRoleRepository from './userRolesRepository';
 import database from '../config/database';
 import databaseMock from './testUtil/databaseMock';
 
@@ -33,6 +33,7 @@ const testUserRoles = [
     ],
   },
 ];
+
 const mockDatabase = databaseMock(testUserRoles.map(wrapDocument));
 jest.mock('../config/database');
 database.getModel = mockDatabase;
@@ -42,11 +43,19 @@ describe('userRolesRepository', () => {
     mockDatabase().clear();
   });
 
-  it('getRoles returns expected snapshot', () => getRoles('uid1')
+  it('getRoles returns expected snapshot', () => userRoleRepository.getRoles('uid1')
     .then((userRoles) => {
       expect(mockDatabase().query()).toEqual({
         userId: 'uid1',
       });
       expect(userRoles).toMatchSnapshot();
+    }));
+
+  it('getProjectUsers returns expected snapshot', () => userRoleRepository.getProjectUsers('project 2')
+    .then((users) => {
+      expect(mockDatabase().query()).toEqual({
+        'projectRoles.projectName': { $eq: 'project 2' },
+      });
+      expect(users).toMatchSnapshot();
     }));
 });
