@@ -32,27 +32,36 @@ type Query {
 
     # List of users within the current DataLab
     users: [User]
+
+    # Details of a single project
+    project(id: ID!): Project
 }
 
 # Root mutation methods for Datalabs.
 type Mutation {
     # Create a new stack
-    createStack(stack: StackCreationRequest): Stack
+    createStack(stack: StackCreationRequest!): Stack
 
     # Delete a stack
-    deleteStack(stack: StackDeletionRequest): Stack
+    deleteStack(stack: StackDeletionRequest!): Stack
 
     # Create a new data store
-    createDataStore(dataStore: DataStorageCreationRequest): DataStore
+    createDataStore(dataStore: DataStorageCreationRequest!): DataStore
 
     # Delete a data store
-    deleteDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    deleteDataStore(dataStore: DataStorageUpdateRequest!): DataStore
 
     # Grant user access to data store
-    addUserToDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    addUserToDataStore(dataStore: DataStorageUpdateRequest!): DataStore
 
     # Remove user access to data store
-    removeUserFromDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    removeUserFromDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+
+    # Add a user permission to a project
+    addProjectPermission(permission: PermissionRequest!): Permission
+
+    # Remove a user permission from a project
+    removeProjectPermission(permission: PermissionRequest!): Permission
 }
 
 # DataLabs type for basic datalab information.
@@ -172,6 +181,37 @@ enum StorageType {
 
 # Type to represent Auth0 User
 type User {
-    name: String
     userId: ID
+    name: String!
+    permissions: [Permission!]!
+}
+
+type Project {
+    id: ID!
+    name: String!
+    projectUsers: [ProjectUser!]!
+}
+
+type Permission {
+    projectId: String,
+    role: Role!
+}
+
+type ProjectUser {
+    id: ID!
+    name: String!
+    role: Role!
+}
+
+input PermissionRequest {
+    projectId: ID!,
+    userId: ID!
+    role: Role!
+}
+
+enum Role {
+    INSTANCE_ADMIN
+    ADMIN,
+    USER,
+    VIEWER,
 }
