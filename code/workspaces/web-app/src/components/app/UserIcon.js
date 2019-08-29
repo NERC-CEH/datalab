@@ -3,7 +3,16 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Popover from '@material-ui/core/Popover';
+import { withStyles } from '@material-ui/core/styles';
 import UserMenu from './UserMenu';
+
+const styles = theme => ({
+  avatar: {
+    width: theme.shape.topBarContentHeight,
+    height: theme.shape.topBarContentHeight,
+    cursor: 'pointer',
+  },
+});
 
 class UserIcon extends Component {
   constructor(props, context) {
@@ -32,6 +41,7 @@ class UserIcon extends Component {
     return (
       <div>
         <Avatar
+          className={this.props.classes.avatar}
           ref={(node) => { this.userImage = node; }}
           onClick={this.togglePopup}
           src={this.props.identity.picture}
@@ -55,4 +65,4 @@ UserIcon.propTypes = {
   }),
 };
 
-export default UserIcon;
+export default withStyles(styles)(UserIcon);

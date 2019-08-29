@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopBarButton correctly passes props to wrapped component 1`] = `
+<WithStyles(Link)
+  activeClassName="TopBarButton-active-2"
+  className="TopBarButton-inactive-1"
+  label="Test Label"
+  to="/testendpoint"
+/>
+`;

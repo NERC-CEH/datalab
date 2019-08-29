@@ -2,6 +2,7 @@
 
 exports[`NavBar renders correct snapshot 1`] = `
 <WithStyles(ForwardRef(AppBar))
+  className="PublicNavBarContent-appBar-3"
   position="fixed"
 >
   <WithStyles(ForwardRef(Toolbar))>

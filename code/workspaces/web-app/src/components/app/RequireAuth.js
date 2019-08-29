@@ -5,8 +5,20 @@ import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from 'lodash';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { withStyles } from '@material-ui/core';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
+
+const circularProgressSize = 70;
+
+const styles = theme => ({
+  circularProgress: {
+    // center the progress in the middle of the page
+    position: 'relative',
+    top: `calc(50vh - ${circularProgressSize / 2}px)`,
+    left: `calc(50vw - ${circularProgressSize / 2}px)`,
+  },
+});
 
 class RequireAuth extends Component {
   componentWillMount() {
@@ -25,7 +37,12 @@ class RequireAuth extends Component {
     const { PrivateComponent, PublicComponent } = this.props;
 
     if (this.props.permissions.fetching) {
-      return () => (<CircularProgress />);
+      return () => (
+        <CircularProgress
+          className={this.props.classes.circularProgress}
+          size={circularProgressSize}
+        />
+      );
     }
 
     if (this.isUserLoggedIn()) {
@@ -80,4 +97,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export { RequireAuth as PureRequireAuth }; // export for testing
-export default connect(mapStateToProps, mapDispatchToProps)(RequireAuth);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(RequireAuth));

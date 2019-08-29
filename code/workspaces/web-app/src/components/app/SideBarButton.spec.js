@@ -1,17 +1,17 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import TopBar from './TopBar';
+import SideBarButton from './SideBarButton';
 
-describe('Topbar', () => {
+describe('SideBarButton', () => {
   let shallow;
 
   beforeEach(() => {
     shallow = createShallow({ dive: true });
   });
 
-  it('correctly renders correct snapshot', () => {
+  it('correctly passes props to wrapped component', () => {
     expect(
-      shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} />),
+      shallow(<SideBarButton label='Test Label' to='/testendpoint'/>),
     ).toMatchSnapshot();
   });
 });

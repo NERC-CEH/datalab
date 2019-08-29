@@ -5,11 +5,11 @@ import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
-const breakPoints = { xs: 12, sm: 6, md: 4, lg: 4, xl: 2 };
+const breakPoints = { xs: 12, sm: 12, md: 6, lg: 4 };
 
 const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openCreationForm, userPermissions,
   createPermission, openPermission, deletePermission, editPermission }) => (
-  <Grid container>
+  <Grid container spacing={2}>
     {stacks.map((stack, index) => (
       <Grid key={index} item {...breakPoints}>
         <StackCard

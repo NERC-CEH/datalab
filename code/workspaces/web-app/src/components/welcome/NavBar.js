@@ -24,10 +24,13 @@ const styles = theme => ({
   spacer: {
     flex: 1,
   },
+  appBar: {
+    background: theme.palette.backgroundDark,
+  },
 });
 
 const PublicNavBarContent = ({ classes }) => (
-  <AppBar position="fixed">
+  <AppBar className={classes.appBar} position="fixed">
     <Toolbar>
       <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
       <div className={classes.spacer} />

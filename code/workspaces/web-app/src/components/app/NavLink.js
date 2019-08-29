@@ -5,22 +5,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Icon from '@material-ui/core/Icon';
 
-const coreStyle = {
-  padding: '16px 40px 16px 40px',
-};
-
 const styles = theme => ({
-  inactiveLink: {
-    ...coreStyle,
-    color: theme.palette.secondary[400],
-    '&:hover': {
-      color: theme.palette.secondary[600],
-      backgroundColor: theme.palette.grey[100],
-    },
-  },
-  activeLink: {
-    ...coreStyle,
-    color: theme.palette.secondary[100],
+  listIcon: {
+    color: 'inherit',
+    minWidth: '24px', // standard size of MUI icons - overrides default value
+    paddingRight: theme.spacing(2),
   },
 });
 
@@ -31,14 +20,12 @@ const Link = ({ classes, to, label, icon, ...rest }) => {
 
   return (
     <ListItem
-      className={classes.inactiveLink}
       to={to}
       component={to ? AdapterNavLink : LiLink}
-      activeClassName={classes.activeLink}
       exact={true}
       button={true}
       {...rest}>
-      {icon ? <ListItemIcon style={{ color: 'inherit' }}><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
+      {icon ? <ListItemIcon className={classes.listIcon}><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}
       {label}
      </ListItem>
   );

@@ -3,14 +3,14 @@
 exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
 <WithStyles(ForwardRef(Grid))
   container={true}
+  spacing={2}
 >
   <WithStyles(ForwardRef(Grid))
     item={true}
     key="0"
     lg={4}
-    md={4}
-    sm={6}
-    xl={2}
+    md={6}
+    sm={12}
     xs={12}
   >
     <WithStyles(StackCard)
@@ -41,9 +41,8 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     item={true}
     key="1"
     lg={4}
-    md={4}
-    sm={6}
-    xl={2}
+    md={6}
+    sm={12}
     xs={12}
   >
     <WithStyles(StackCard)
@@ -74,9 +73,8 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     item={true}
     key="2"
     lg={4}
-    md={4}
-    sm={6}
-    xl={2}
+    md={6}
+    sm={12}
     xs={12}
   >
     <WithStyles(StackCard)
@@ -122,9 +120,8 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     <WithStyles(ForwardRef(Grid))
       item={true}
       lg={4}
-      md={4}
-      sm={6}
-      xl={2}
+      md={6}
+      sm={12}
       xs={12}
     >
       <WithStyles(NewStackButton)
@@ -139,6 +136,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
 exports[`StackCards creates correct snapshot for an empty array 1`] = `
 <WithStyles(ForwardRef(Grid))
   container={true}
+  spacing={2}
 >
   <ComponentWrapper
     permission="create"
@@ -159,9 +157,8 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
     <WithStyles(ForwardRef(Grid))
       item={true}
       lg={4}
-      md={4}
-      sm={6}
-      xl={2}
+      md={6}
+      sm={12}
       xs={12}
     >
       <WithStyles(NewStackButton)
