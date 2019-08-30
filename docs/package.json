@@ -1,0 +1,12 @@
+{
+  "name": "docs",
+  "private": true,
+  "devDependencies": {
+    "markdownlint-cli": "^0.18.0",
+    "shx": "^0.3.2"
+  },
+  "scripts": {
+    "lint": "markdownlint src/**/*.md",
+    "update-version": "shx echo \"version: `git describe --tags --always`\" > version.md"
+  }
+}
