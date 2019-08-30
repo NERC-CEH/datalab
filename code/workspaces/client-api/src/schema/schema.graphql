@@ -40,28 +40,28 @@ type Query {
 # Root mutation methods for Datalabs.
 type Mutation {
     # Create a new stack
-    createStack(stack: StackCreationRequest!): Stack
+    createStack(stack: StackCreationRequest): Stack
 
     # Delete a stack
-    deleteStack(stack: StackDeletionRequest!): Stack
+    deleteStack(stack: StackDeletionRequest): Stack
 
     # Create a new data store
-    createDataStore(dataStore: DataStorageCreationRequest!): DataStore
+    createDataStore(dataStore: DataStorageCreationRequest): DataStore
 
     # Delete a data store
-    deleteDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+    deleteDataStore(dataStore: DataStorageUpdateRequest): DataStore
 
     # Grant user access to data store
-    addUserToDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+    addUserToDataStore(dataStore: DataStorageUpdateRequest): DataStore
 
     # Remove user access to data store
-    removeUserFromDataStore(dataStore: DataStorageUpdateRequest!): DataStore
+    removeUserFromDataStore(dataStore: DataStorageUpdateRequest): DataStore
 
     # Add a user permission to a project
-    addProjectPermission(permission: PermissionRequest!): Permission
+    addProjectPermission(permission: PermissionRequest): Permission
 
     # Remove a user permission from a project
-    removeProjectPermission(permission: PermissionRequest!): Permission
+    removeProjectPermission(permission: PermissionRequest): Permission
 }
 
 # DataLabs type for basic datalab information.
