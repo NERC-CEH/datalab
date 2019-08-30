@@ -1,4 +1,4 @@
-# Readme
+# R Package Management
 
 In DataLabs, notebooks and services run as containers using linux based
 operating systems. When installing a R libary these packages are compiled and

@@ -1,0 +1,6 @@
+[book]
+title = "DataLabs Documentation"
+authors = ["Joshua Foster"]
+language = "en"
+multilingual = false
+src = "src"

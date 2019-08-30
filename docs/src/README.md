@@ -3,4 +3,4 @@
 Documentation for the NERC CEH Data Labs project.
 
 ---
-{% include "./version.md" %}
+{{#include version.md}}
