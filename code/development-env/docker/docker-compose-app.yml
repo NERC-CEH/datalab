@@ -13,7 +13,7 @@ x-common-variables: &common
 services:
   datalab-auth:
     image: node:8
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/workspaces/auth-service
     command: ["sh", "-c", "yarn start"]
     environment:
       <<: *common
@@ -26,11 +26,13 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ${PWD}/../auth-service:/usr/src/app/:ro
+      - ${PWD}/..:/usr/src/app/:ro
+    links:
+      - mongodb
 
   datalab-infra:
     image: node:8
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/workspaces/infrastructure-api
     command: ["sh", "-c", "yarn start"]
     environment:
       <<: *common
@@ -38,7 +40,7 @@ services:
     ports:
       - 8003:8003
     volumes:
-      - $PWD/../infrastructure-api:/usr/src/app/:ro
+      - $PWD/..:/usr/src/app/:ro
     links:
       - datalab-auth
       - mongodb
