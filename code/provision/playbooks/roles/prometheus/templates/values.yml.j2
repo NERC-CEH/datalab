@@ -1,0 +1,71 @@
+alertmanager:
+  ## Deploy alertmanager
+  ##
+  alertmanagerSpec:
+    ## Standard object’s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata
+    ## Metadata Labels and Annotations gets propagated to the Alertmanager pods.
+    ##
+    storage:
+      volumeClaimTemplate:
+        metadata:
+          name: data
+        spec:
+          storageClassName: glusterfs-storage
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+        selector: {}
+
+## Deploy Grafana
+##
+grafana:
+  adminPassword: "{{ grafana_admin_password }}"
+  persistence:
+    enabled: true
+    storageClassName: glusterfs-storage
+    accessModes: ["ReadWriteOnce"]
+    size: 5Gi
+
+  grafana.ini:
+    auth.github:
+      enabled: true
+      client_id: "{{ test_grafana_oauth_client_id }}"
+      client_secret: "{{ test_grafana_oauth_client_secret }}"
+      scopes: user:email,read:org
+      team_ids: '2320760'
+      auth_url: https://github.com/login/oauth/authorize
+      token_url: https://github.com/login/oauth/access_token
+      api_url: https://api.github.com/user
+      allow_sign_up: true
+      
+
+    server:
+      domain: testlab-monitoring.test-datalabs.nerc.ac.uk
+      root_url: https://testlab-monitoring.test-datalabs.nerc.ac.uk
+
+## Configuration for prometheus-node-exporter subchart
+##
+prometheus-node-exporter:
+  service:
+    port: 30206
+    targetPort: 30206
+
+## Deploy a Prometheus instance
+##
+prometheus:
+  prometheusSpec:
+  ## Prometheus StorageSpec for persistent data
+    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
+    ##
+    storageSpec:
+      volumeClaimTemplate:
+        metadata:
+          name: data
+        spec:
+          storageClassName: glusterfs-storage
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+        selector: {}

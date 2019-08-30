@@ -1,3 +1,5 @@
 grafana_admin_password: "{{ vault_grafana_admin_password }}"
 grafana_oauth_client_id: "{{ vault_grafana_oauth_client_id }}"
 grafana_oauth_client_secret: "{{ vault_grafana_oauth_client_secret }}"
+test_grafana_oauth_client_id: "{{ vault_test_grafana_oauth_client_id }}"
+test_grafana_oauth_client_secret: "{{ vault_test_grafana_oauth_client_secret }}"
