@@ -8,6 +8,24 @@ import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 
 const { ANALYSIS, getStackSelections } = stackTypes;
 
+const { startText, endText } = getUrlNameStartEndText(window.location);
+
+export function getUrlNameStartEndText(windowLocation) {
+  if (windowLocation.hostname === 'localhost') {
+    return {
+      startText: `${windowLocation.protocol}//testlab-`,
+      endText: '.datalabs.localhost',
+    };
+  }
+
+  const separator = '.';
+  const [projectName, ...restHostname] = windowLocation.hostname.split(separator);
+  return {
+    startText: `${windowLocation.protocol}//${projectName}-`,
+    endText: `${separator}${restHostname.join(separator)}`,
+  };
+}
+
 const CreateNotebookForm = (props) => {
   const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
   return (
@@ -32,8 +50,8 @@ const CreateNotebookForm = (props) => {
           label="URL Name"
           component={renderAdornedTextField}
           placeholder="Notebook Name for URL"
-          startText="http://datalab-"
-          endText=".datalabs.nerc.ac.uk" />
+          startText={startText}
+          endText={endText} />
       </div>
       <div>
         <Field
