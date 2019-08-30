@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { pem2jwk } from 'pem-jwk';
 import { get } from 'lodash';
 import logger from 'winston';
-import getRoles from '../dataaccess/userRolesRepository';
+import userRolesRepository from '../dataaccess/userRolesRepository';
 import getPermissions from '../permissions/permissions';
 import {
   PRIVATE_KEY,
@@ -26,7 +26,7 @@ function checkUser(request, response) {
 function getPermissionsForUser(request, response) {
   const userId = get(request, 'user.sub');
 
-  return getRoles(userId)
+  return userRolesRepository.getRoles(userId)
     .then((userRoles) => {
       const permissions = getPermissions(userRoles);
       logger.debug(`getPermissionsForUser userId ${userId} permissions ${permissions}`);
@@ -42,7 +42,7 @@ function getPermissionsForUser(request, response) {
 function generatePermissionToken(request, response) {
   const userId = get(request, 'user.sub');
 
-  return getRoles(userId)
+  return userRolesRepository.getRoles(userId)
     .then((userRoles) => {
       const permissions = getPermissions(userRoles);
       const payload = {

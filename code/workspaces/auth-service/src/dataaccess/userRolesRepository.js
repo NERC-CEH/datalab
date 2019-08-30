@@ -10,4 +10,9 @@ function getRoles(userId) {
   return UserRoles().findOne({ userId }).exec().then(document => document.toObject());
 }
 
-export default getRoles;
+function getProjectUsers(projectName) {
+  const query = { 'projectRoles.projectName': { $eq: projectName } };
+  return UserRoles().find(query).exec();
+}
+
+export default { getRoles, getProjectUsers };

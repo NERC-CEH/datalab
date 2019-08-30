@@ -1,51 +1,96 @@
 import httpMocks from 'node-mocks-http';
-import permissionWrapper from './permissionCheckerMiddleware';
+import { permissionChecker, projectPermissionChecker } from './permissionCheckerMiddleware';
 
 jest.mock('winston');
 
-const request = {
-  user: {
-    permissions: [
-      'project:elementName:actionName',
-    ],
-  },
-};
-
+let request;
 const actionMock = jest.fn().mockReturnValue(Promise.resolve());
 
-describe('Permission Checker', () => {
-  beforeEach(() => jest.clearAllMocks());
-
-  it('callback to be called if user has correct permission', () => {
-    const response = httpMocks.createResponse();
-
-    expect(actionMock).not.toHaveBeenCalled();
-    return permissionWrapper(['elementName:actionName'])(request, response, actionMock)
-      .then(() => {
-        expect(actionMock).toHaveBeenCalledTimes(1);
-        expect(response.statusCode).toBe(200);
-      });
+describe('Permission Checker Middleware', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    request = createRequest();
   });
 
-  it('throws an error if user is lacking correct permission', () => {
-    const response = httpMocks.createResponse();
+  describe('Permission Checker', () => {
+    it('callback to be called if user has correct permission', () => {
+      const response = httpMocks.createResponse();
 
-    expect(actionMock).not.toHaveBeenCalled();
-    permissionWrapper(['elementName:missingActionName'])(request, response, actionMock);
-    expect(actionMock).not.toHaveBeenCalled();
-    expect(response.statusCode).toBe(401);
-    expect(response._getData()) // eslint-disable-line no-underscore-dangle
-      .toEqual({ message: 'User missing expected permission(s): project:elementName:missingActionName' });
+      expect(actionMock).not.toHaveBeenCalled();
+      return permissionChecker(['elementName:actionName'])(request, response, actionMock)
+        .then(() => {
+          expect(actionMock).toHaveBeenCalledTimes(1);
+          expect(response.statusCode).toBe(200);
+        });
+    });
+
+    it('throws an error if user is lacking correct permission', () => {
+      const response = httpMocks.createResponse();
+
+      expect(actionMock).not.toHaveBeenCalled();
+      permissionChecker(['elementName:missingActionName'])(request, response, actionMock);
+      expect(actionMock).not.toHaveBeenCalled();
+      expect(response.statusCode).toBe(401);
+      expect(response._getData()) // eslint-disable-line no-underscore-dangle
+        .toEqual({ message: 'User missing expected permission(s): project:elementName:missingActionName' });
+    });
+
+    it('throws error for shortened permission name', () => {
+      const response = httpMocks.createResponse();
+
+      expect(actionMock).not.toHaveBeenCalled();
+      permissionChecker(['elementName:actionNam'])(request, response, actionMock);
+      expect(actionMock).not.toHaveBeenCalled();
+      expect(response.statusCode).toBe(401);
+      expect(response._getData()) // eslint-disable-line no-underscore-dangle
+        .toEqual({ message: 'User missing expected permission(s): project:elementName:actionNam' });
+    });
   });
 
-  it('throws error for shortened permission name', () => {
-    const response = httpMocks.createResponse();
+  describe('Project permission checker', () => {
+    it('should call the callback if user has correct permission on project', () => {
+      request.params = { projectName: 'project' };
+      const response = httpMocks.createResponse();
 
-    expect(actionMock).not.toHaveBeenCalled();
-    permissionWrapper(['elementName:actionNam'])(request, response, actionMock);
-    expect(actionMock).not.toHaveBeenCalled();
-    expect(response.statusCode).toBe(401);
-    expect(response._getData()) // eslint-disable-line no-underscore-dangle
-      .toEqual({ message: 'User missing expected permission(s): project:elementName:actionNam' });
+      expect(actionMock).not.toHaveBeenCalled();
+      return projectPermissionChecker(['elementName:actionName'])(request, response, actionMock)
+        .then(() => {
+          expect(actionMock).toHaveBeenCalledTimes(1);
+          expect(response.statusCode).toBe(200);
+        });
+    });
+
+    it('should return 401 if user does not have permission', () => {
+      request.params = { projectName: 'anotherproject' };
+      const response = httpMocks.createResponse();
+
+      expect(actionMock).not.toHaveBeenCalled();
+      projectPermissionChecker(['elementName:actionName'])(request, response, actionMock);
+      expect(actionMock).not.toHaveBeenCalled();
+      expect(response.statusCode).toBe(401);
+      expect(response._getData()) // eslint-disable-line no-underscore-dangle
+        .toEqual({ message: 'User missing expected permission(s): anotherproject:elementName:actionName' });
+    });
+
+    it('should return 401 if no project name included in request', () => {
+      const response = httpMocks.createResponse();
+
+      expect(actionMock).not.toHaveBeenCalled();
+      projectPermissionChecker(['elementName:actionName'])(request, response, actionMock);
+      expect(actionMock).not.toHaveBeenCalled();
+      expect(response.statusCode).toBe(401);
+      expect(response._getData()) // eslint-disable-line no-underscore-dangle
+        .toEqual({ message: 'Request missing parameter: projectName' });
+    });
   });
 });
+
+function createRequest() {
+  return {
+    user: {
+      permissions: [
+        'project:elementName:actionName',
+      ],
+    },
+  };
+}
