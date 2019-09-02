@@ -1,4 +1,5 @@
 import findIndex from 'lodash/findIndex';
+import remove from 'lodash/remove';
 import database from '../config/database';
 
 function UserRoles() {
@@ -45,4 +46,19 @@ async function addRole(userId, projectName, role) {
   return roleAdded;
 }
 
-export default { getRoles, getProjectUsers, addRole };
+async function removeRole(userId, projectName) {
+  const query = { userId };
+  const user = await UserRoles().findOne(query).exec();
+
+  if (user) {
+    const { projectRoles } = user;
+    const roleIndex = findIndex(projectRoles, { projectName });
+    if (roleIndex > -1) {
+      remove(projectRoles, { projectName });
+      await UserRoles()
+        .findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+    }
+  }
+}
+
+export default { getRoles, getProjectUsers, addRole, removeRole };

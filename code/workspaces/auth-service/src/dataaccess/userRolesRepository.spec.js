@@ -112,4 +112,37 @@ describe('userRolesRepository', () => {
       });
     });
   });
+
+  describe('delete role', () => {
+    beforeEach(() => {
+      mockDatabase = databaseMock(testUserRoles());
+      database.getModel = mockDatabase;
+      mockDatabase().clear();
+    });
+
+    it('should delete role from user and return 204', async () => {
+      await userRoleRepository.removeRole('uid1', 'project 2');
+      expect(mockDatabase().invocation().entity).toEqual({
+        userId: 'uid1',
+        instanceAdmin: false,
+        projectRoles: [
+          { projectName: 'project 1', role: 'admin' },
+        ],
+      });
+    });
+
+    it('should return 204 if user does not have role on project', async () => {
+      const mockFn = jest.fn();
+      mockDatabase().findOneAndUpdate = mockFn;
+      await userRoleRepository.removeRole('uid1', 'not found');
+      expect(mockFn).not.toBeCalled();
+    });
+
+    it('should return 204 if user not found', async () => {
+      const mockFn = jest.fn();
+      mockDatabase().findOneAndUpdate = mockFn;
+      await userRoleRepository.removeRole('not found', 'project 2');
+      expect(mockFn).not.toBeCalled();
+    });
+  });
 });

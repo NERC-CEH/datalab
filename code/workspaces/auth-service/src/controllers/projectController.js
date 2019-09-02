@@ -26,10 +26,23 @@ async function addUserRole(req, res) {
   res.status(statusCode).send();
 }
 
+async function removeUserRole(req, res) {
+  const { params: { projectName, userId } } = req;
+
+  await userRolesRepository.removeRole(userId, projectName);
+
+  res.status(204).send();
+}
+
 export const addRoleValidator = validator([
   check('projectName').isAlphanumeric(),
   check('userId').isAlphanumeric(),
   check('role', `Role must be one of ${PROJECT_ROLES}`).isIn(PROJECT_ROLES),
 ]);
 
-export default { getUserRoles, addUserRole };
+export const removeRoleValidator = validator([
+  check('projectName').isAlphanumeric(),
+  check('userId').isAlphanumeric(),
+]);
+
+export default { getUserRoles, addUserRole, removeUserRole };

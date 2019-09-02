@@ -5,8 +5,10 @@ import userRolesRepository from '../dataaccess/userRolesRepository';
 jest.mock('../dataaccess/userRolesRepository');
 const getProjectUsers = jest.fn();
 const addRole = jest.fn();
+const removeRole = jest.fn();
 userRolesRepository.getProjectUsers = getProjectUsers;
 userRolesRepository.addRole = addRole;
+userRolesRepository.removeRole = removeRole;
 
 describe('project controller', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -78,6 +80,22 @@ describe('project controller', () => {
       } catch (error) {
         expect(error).toEqual('error');
       }
+    });
+  });
+
+  describe('add user role', () => {
+    it('should return 201 if role added', async () => {
+      removeRole.mockResolvedValue(undefined);
+      const req = {
+        params: { projectName: 'project', userId: 'uid1' },
+      };
+
+      const request = httpMocks.createRequest(req);
+      const response = httpMocks.createResponse();
+
+      await projectController.removeUserRole(request, response);
+
+      expect(response.statusCode).toBe(204);
     });
   });
 });
