@@ -12,11 +12,7 @@ function getAll({ token }) {
 function getProjectUsers(projectKey, token) {
   logger.debug(`Loading permissions for project ${projectKey}`);
   return axios.get(`${authServiceUrl}/projects/${projectKey}/users`, generateOptions(token))
-    .then(response => response.data)
-    .then((users) => {
-      console.log(users);
-      return users;
-    });
+    .then(response => response.data);
 }
 
 function getUserName(user) {
