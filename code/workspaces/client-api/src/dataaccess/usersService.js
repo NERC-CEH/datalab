@@ -2,33 +2,25 @@ import axios from 'axios';
 import logger from 'winston';
 import config from '../config';
 
-const authUsersUrl = `${config.get('authorisationService')}/users`;
+const authServiceUrl = `${config.get('authorisationService')}`;
 
 function getAll({ token }) {
-  return axios.get(authUsersUrl, generateOptions(token))
+  return axios.get(`${authServiceUrl}/users`, generateOptions(token))
     .then(response => response.data);
 }
 
-function getProjectUsers(projectName) {
-  logger.debug(`Loading permissions for project ${projectName}`);
-  return Promise.resolve([
-    {
-      id: 123,
-      role: 'ADMIN',
-    },
-    {
-      id: 234,
-      role: 'USER',
-    },
-    {
-      id: 345,
-      role: 'VIEWER',
-    },
-  ]);
+function getProjectUsers(projectKey, token) {
+  logger.debug(`Loading permissions for project ${projectKey}`);
+  return axios.get(`${authServiceUrl}/projects/${projectKey}/users`, generateOptions(token))
+    .then(response => response.data)
+    .then((users) => {
+      console.log(users);
+      return users;
+    });
 }
 
 function getUserName(user) {
-  return Promise.resolve(`username${user.id}`);
+  return Promise.resolve(`${user.userId}`);
 }
 
 const generateOptions = token => ({

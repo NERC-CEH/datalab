@@ -19,7 +19,7 @@ export const authorise = (request, response, next) => {
       next();
     })
     .catch((err) => {
-      logger.log(err);
+      logger.error(err.message);
       response.status(401).send({ message: 'Unauthorised' });
     });
 };
