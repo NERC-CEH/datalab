@@ -4,7 +4,7 @@ const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
 const JUPYTER_VERSION = '0.1.3';
 
 const JUPYTERLAB_IMAGE = 'nerc/jupyterlab';
-const JUPYTERLAB_VERSION = '0.1.0';
+const JUPYTERLAB_VERSION = '0.1.1';
 
 const ZEPPELIN_IMAGE = 'nerc/zeppelin';
 const ZEPPELIN_VERSION = '0.7.2.7';
@@ -12,12 +12,12 @@ const ZEPPELIN_CONNECT_IMAGE = 'nerc/zeppelin-connect';
 const ZEPPELIN_CONNECT_VERSION = '1.1.1';
 
 const RSTUDIO_IMAGE = 'nerc/rstudio';
-const RSTUDIO_VERSION = '0.1.0';
+const RSTUDIO_VERSION = '0.1.2';
 const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
 const RSTUDIO_CONNECT_VERSION = '1.1.1';
 
 const RSHINY_IMAGE = 'nerc/rshiny';
-const RSHINY_VERSION = '0.1.1';
+const RSHINY_VERSION = '0.1.2';
 
 const NBVIEWER_IMAGE = 'jupyter/nbviewer';
 const NBVIEWER_VERSION = 'latest';
