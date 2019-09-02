@@ -49,7 +49,7 @@ describe('Permission Checker Middleware', () => {
 
   describe('Project permission checker', () => {
     it('should call the callback if user has correct permission on project', () => {
-      request.params = { projectName: 'project' };
+      request.params = { projectKey: 'project' };
       const response = httpMocks.createResponse();
 
       expect(actionMock).not.toHaveBeenCalled();
@@ -61,7 +61,7 @@ describe('Permission Checker Middleware', () => {
     });
 
     it('should return 401 if user does not have permission', () => {
-      request.params = { projectName: 'anotherproject' };
+      request.params = { projectKey: 'anotherproject' };
       const response = httpMocks.createResponse();
 
       expect(actionMock).not.toHaveBeenCalled();
@@ -80,7 +80,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'Request missing parameter: projectName' });
+        .toEqual({ message: 'Request missing parameter: projectKey' });
     });
   });
 });

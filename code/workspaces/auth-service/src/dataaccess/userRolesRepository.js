@@ -12,12 +12,12 @@ function getRoles(userId) {
   return UserRoles().findOne({ userId }).exec().then(document => document.toObject());
 }
 
-function getProjectUsers(projectName) {
-  const query = { 'projectRoles.projectName': { $eq: projectName } };
+function getProjectUsers(projectKey) {
+  const query = { 'projectRoles.projectKey': { $eq: projectKey } };
   return UserRoles().find(query).exec();
 }
 
-async function addRole(userId, projectName, role) {
+async function addRole(userId, projectKey, role) {
   // Load existing user
   let roleAdded = false;
   const query = { userId };
@@ -26,19 +26,19 @@ async function addRole(userId, projectName, role) {
   if (user) {
     // Either add role or update existing role
     const { projectRoles } = user;
-    const roleIndex = findIndex(projectRoles, { projectName });
+    const roleIndex = findIndex(projectRoles, { projectKey });
     if (roleIndex > -1) {
       projectRoles[roleIndex].role = role;
     } else {
       roleAdded = true;
-      projectRoles.push({ projectName, role });
+      projectRoles.push({ projectKey, role });
     }
   } else {
     // Add new user entry if not found
     roleAdded = true;
     user = {
       userId,
-      projectRoles: [{ projectName, role }],
+      projectRoles: [{ projectKey, role }],
     };
   }
 
@@ -46,15 +46,15 @@ async function addRole(userId, projectName, role) {
   return roleAdded;
 }
 
-async function removeRole(userId, projectName) {
+async function removeRole(userId, projectKey) {
   const query = { userId };
   const user = await UserRoles().findOne(query).exec();
 
   if (user) {
     const { projectRoles } = user;
-    const roleIndex = findIndex(projectRoles, { projectName });
+    const roleIndex = findIndex(projectRoles, { projectKey });
     if (roleIndex > -1) {
-      remove(projectRoles, { projectName });
+      remove(projectRoles, { projectKey });
       await UserRoles()
         .findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
     }

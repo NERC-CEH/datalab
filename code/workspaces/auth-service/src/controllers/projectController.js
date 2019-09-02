@@ -5,43 +5,43 @@ import userRolesRepository from '../dataaccess/userRolesRepository';
 import { PROJECT_ROLES } from '../models/userRoles.model';
 
 async function getUserRoles(req, res) {
-  const { params: { projectName } } = req;
-  const userPermissions = await userRolesRepository.getProjectUsers(projectName);
+  const { params: { projectKey } } = req;
+  const userPermissions = await userRolesRepository.getProjectUsers(projectKey);
 
   const mappedUsers = userPermissions.map(user => ({
     userId: user.userId,
-    role: find(user.projectRoles, { projectName }).role,
+    role: find(user.projectRoles, { projectKey }).role,
   }));
 
   res.send(mappedUsers);
 }
 
 async function addUserRole(req, res) {
-  const { params: { projectName, userId } } = req;
+  const { params: { projectKey, userId } } = req;
   const { body: { role } } = req;
 
-  const roleAdded = await userRolesRepository.addRole(userId, projectName, role);
+  const roleAdded = await userRolesRepository.addRole(userId, projectKey, role);
 
   const statusCode = roleAdded ? 201 : 200;
   res.status(statusCode).send();
 }
 
 async function removeUserRole(req, res) {
-  const { params: { projectName, userId } } = req;
+  const { params: { projectKey, userId } } = req;
 
-  await userRolesRepository.removeRole(userId, projectName);
+  await userRolesRepository.removeRole(userId, projectKey);
 
   res.status(204).send();
 }
 
 export const addRoleValidator = validator([
-  check('projectName').isAlphanumeric(),
+  check('projectKey').isAlphanumeric(),
   check('userId').isAlphanumeric(),
   check('role', `Role must be one of ${PROJECT_ROLES}`).isIn(PROJECT_ROLES),
 ]);
 
 export const removeRoleValidator = validator([
-  check('projectName').isAlphanumeric(),
+  check('projectKey').isAlphanumeric(),
   check('userId').isAlphanumeric(),
 ]);
 

@@ -16,7 +16,7 @@ describe('project controller', () => {
   describe('get project users', () => {
     it('should return mapped roles as JSON', async () => {
       getProjectUsers.mockReturnValue(Promise.resolve(rolesData()));
-      const params = { params: { projectName: 'project' } };
+      const params = { params: { projectKey: 'project' } };
 
       const request = httpMocks.createRequest(params);
       const response = httpMocks.createResponse();
@@ -37,7 +37,7 @@ describe('project controller', () => {
     it('should return 201 if role added', async () => {
       addRole.mockResolvedValue(true);
       const req = {
-        params: { projectName: 'project', userId: 'uid1' },
+        params: { projectKey: 'project', userId: 'uid1' },
         body: { role: 'admin' },
       };
 
@@ -52,7 +52,7 @@ describe('project controller', () => {
     it('should return 200 if role edited', async () => {
       addRole.mockResolvedValue(false);
       const req = {
-        params: { projectName: 'project', userId: 'uid1' },
+        params: { projectKey: 'project', userId: 'uid1' },
         body: { role: 'admin' },
       };
 
@@ -67,7 +67,7 @@ describe('project controller', () => {
     it('should return an error if add user role fails', async () => {
       addRole.mockRejectedValue('error');
       const req = {
-        params: { projectName: 'project', userId: 'uid1' },
+        params: { projectKey: 'project', userId: 'uid1' },
         body: { role: 'admin' },
       };
 
@@ -87,7 +87,7 @@ describe('project controller', () => {
     it('should return 201 if role added', async () => {
       removeRole.mockResolvedValue(undefined);
       const req = {
-        params: { projectName: 'project', userId: 'uid1' },
+        params: { projectKey: 'project', userId: 'uid1' },
       };
 
       const request = httpMocks.createRequest(req);
@@ -106,16 +106,16 @@ function rolesData() {
       userId: 'user1',
       instanceAdmin: true,
       projectRoles: [
-        { projectName: 'project', role: 'admin' },
-        { projectName: 'project2', role: 'user' },
+        { projectKey: 'project', role: 'admin' },
+        { projectKey: 'project2', role: 'user' },
       ],
     },
     {
       userId: 'user2',
       instanceAdmin: true,
       projectRoles: [
-        { projectName: 'project', role: 'viewer' },
-        { projectName: 'project3', role: 'user' },
+        { projectKey: 'project', role: 'viewer' },
+        { projectKey: 'project3', role: 'user' },
       ],
     },
   ];

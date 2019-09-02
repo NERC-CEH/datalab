@@ -23,8 +23,8 @@ const buildPermissions = ({ permissions, ...rest }) => ({
 
 //    [ { role: 'admin', projectName: 'project', permissions: [/see permissions.yml/] } ]
 // -> [ ['project:stacks:delete', ...] ]
-const projectifyPermissions = ({ projectName, permissions }) => {
-  const project = projectName ? `${projectName}${roleDelim}` : '';
+const projectifyPermissions = ({ projectKey, permissions }) => {
+  const project = projectKey ? `${projectKey}${roleDelim}` : '';
 
   return permissions.map(permission => project.concat(permission));
 };

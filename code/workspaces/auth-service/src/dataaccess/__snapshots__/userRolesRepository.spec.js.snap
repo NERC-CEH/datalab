@@ -6,11 +6,11 @@ Array [
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {
-        "projectName": "project 1",
+        "projectKey": "project 1",
         "role": "admin",
       },
       Object {
-        "projectName": "project 2",
+        "projectKey": "project 2",
         "role": "user",
       },
     ],
@@ -21,7 +21,7 @@ Array [
     "instanceAdmin": true,
     "projectRoles": Array [
       Object {
-        "projectName": "project 2",
+        "projectKey": "project 2",
         "role": "viewer",
       },
     ],
@@ -36,11 +36,11 @@ Object {
   "instanceAdmin": false,
   "projectRoles": Array [
     Object {
-      "projectName": "project 1",
+      "projectKey": "project 1",
       "role": "admin",
     },
     Object {
-      "projectName": "project 2",
+      "projectKey": "project 2",
       "role": "user",
     },
   ],
