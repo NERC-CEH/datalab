@@ -1,0 +1,6 @@
+[book]
+title = "DataLabs Documentation"
+authors = ["DataLabs"]
+language = "en"
+multilingual = false
+src = "src"

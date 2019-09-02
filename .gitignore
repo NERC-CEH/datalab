@@ -5,7 +5,7 @@
 .idea/
 .vscode/
 
-docs/_book
+docs/book/
 docs/version.md
 
 code/workspaces/**/coverage/

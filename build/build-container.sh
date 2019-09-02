@@ -7,11 +7,9 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
   case "$1" in
   docs)
     echo "Starting to build documents..."
-    cd ./docs && yarn dist
-    DOCKERFILE="Dockerfile"
+    cd ./docs && yarn update-version
+    DOCKERFILE="docs.Dockerfile"
     IMAGE="docs"
-    LIBRARY="common"
-    WORKSPACE="docs"
     ;;
   api)
     echo "Starting to build datalab-api..."
