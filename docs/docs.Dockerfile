@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-glibc:alpine-3.9 AS builder
+FROM rust:1.37-stretch AS builder
 
 ENV MDBOOK_VERSION v0.3.1
 
@@ -13,7 +13,6 @@ COPY ./version.md /usr/src/docs/src
 WORKDIR /usr/src/docs
 
 RUN mdbook build
-
 
 FROM nginx:1.17
 
