@@ -23,9 +23,9 @@ app.use((error, request, response, next) => { // eslint-disable-line no-unused-v
     return response.send({ message: 'Unable to authenticate user' });
   }
 
-  logger.error(error.message);
+  logger.error(error);
   response.status(500);
-  return response.send({ message: 'Error authenticating user' });
+  return response.send({ message: error.message });
 });
 
 const connection = database.createConnection();

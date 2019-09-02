@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`userRolesRepository getProjectUsers returns expected snapshot 1`] = `
+exports[`userRolesRepository read operations getProjectUsers returns expected snapshot 1`] = `
 Array [
   Object {
     "instanceAdmin": false,
@@ -31,7 +31,7 @@ Array [
 ]
 `;
 
-exports[`userRolesRepository getRoles returns expected snapshot 1`] = `
+exports[`userRolesRepository read operations getRoles returns expected snapshot 1`] = `
 Object {
   "instanceAdmin": false,
   "projectRoles": Array [

@@ -1,9 +1,12 @@
 import find from 'lodash/find';
-import userRolesRepsoitory from '../dataaccess/userRolesRepository';
+import { check } from 'express-validator';
+import validator from './validationMiddleware';
+import userRolesRepository from '../dataaccess/userRolesRepository';
+import { PROJECT_ROLES } from '../models/userRoles.model';
 
 async function getUserRoles(req, res) {
   const { params: { projectName } } = req;
-  const userPermissions = await userRolesRepsoitory.getProjectUsers(projectName);
+  const userPermissions = await userRolesRepository.getProjectUsers(projectName);
 
   const mappedUsers = userPermissions.map(user => ({
     userId: user.userId,
@@ -13,4 +16,20 @@ async function getUserRoles(req, res) {
   res.send(mappedUsers);
 }
 
-export default { getUserRoles };
+async function addUserRole(req, res) {
+  const { params: { projectName, userId } } = req;
+  const { body: { role } } = req;
+
+  const roleAdded = await userRolesRepository.addRole(userId, projectName, role);
+
+  const statusCode = roleAdded ? 201 : 200;
+  res.status(statusCode).send();
+}
+
+export const addRoleValidator = validator([
+  check('projectName').isAlphanumeric(),
+  check('userId').isAlphanumeric(),
+  check('role', `Role must be one of ${PROJECT_ROLES}`).isIn(PROJECT_ROLES),
+]);
+
+export default { getUserRoles, addUserRole };

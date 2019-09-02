@@ -32,6 +32,7 @@ function createConnection() {
     user: config.get('databaseUser'),
     pass: config.get('databasePassword'),
     auth: { authSource: 'admin' },
+    useFindAndModify: false,
   };
   mongoose.connect(`mongodb://${config.get('databaseHost')}/users`, options);
   return mongoose.connection;
