@@ -15,8 +15,20 @@ function getProjectUsers(projectKey, token) {
     .then(response => response.data);
 }
 
-function getUserName(user) {
-  return Promise.resolve(`${user.userId}`);
+async function getUserName(userId, token) {
+  logger.debug(`Loading user name for user ${userId}`);
+
+  try {
+    const response = await axios.get(`${authServiceUrl}/users/${userId}`, generateOptions(token));
+    return response.data.name;
+  } catch (err) {
+    if (err.response.status === 404) {
+      logger.warn(`No user name found for userId: ${userId}`);
+    }
+
+    logger.error(`Unable to load user name for userId: ${userId}`);
+    return 'Not known';
+  }
 }
 
 const generateOptions = token => ({

@@ -12,6 +12,7 @@ Array [
   "firstProjectName:storage:open",
   "firstProjectName:storage:edit",
   "firstProjectName:users:list",
+  "firstProjectName:users:read",
   "firstProjectName:settings:list",
   "firstProjectName:settings:read",
   "firstProjectName:permissions:read",

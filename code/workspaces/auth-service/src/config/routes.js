@@ -1,6 +1,6 @@
 import auth from '../controllers/authorisation';
 import status from '../controllers/status';
-import userManagement from '../controllers/userManagement';
+import userManagement, { getUserValidator } from '../controllers/userManagement';
 import projectController, { addRoleValidator, removeRoleValidator } from '../controllers/projectController';
 import { cookieAuthMiddleware, tokenAuthMiddleware } from '../auth/authZeroAuthMiddleware';
 import { permissionChecker, projectPermissionChecker } from '../auth/permissionCheckerMiddleware';
@@ -17,6 +17,7 @@ function configureRoutes(app) {
   app.get('/authorise', tokenAuthMiddleware, auth.generatePermissionToken);
   app.get('/permissions', dtMW, auth.getPermissionsForUser);
   app.get('/jwks', auth.serveJWKS);
+  app.get('/users/:userId', dtMW, permissionChecker(['users:read']), getUserValidator, userManagement.getUser);
   app.get('/users', dtMW, permissionChecker(['users:list']), userManagement.getUsers);
   app.get('/projects/:projectKey/users', dtMW, projectPermissionChecker(['permissions:read']), ew(projectController.getUserRoles));
   app.put('/projects/:projectKey/users/:userId/roles', dtMW, projectPermissionChecker(['permissions:create']), addRoleValidator, ew(projectController.addUserRole));
