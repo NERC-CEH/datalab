@@ -83,7 +83,7 @@ describe('project controller', () => {
     });
   });
 
-  describe('add user role', () => {
+  describe('remove user role', () => {
     it('should return 201 if role added', async () => {
       removeRole.mockResolvedValue(undefined);
       const req = {
