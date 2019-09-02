@@ -41,7 +41,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     DOCKERFILE="api.Dockerfile"
     IMAGE="authorisation-svc"
     LIBRARY="common"
-    WORKSPACE="authorisation-svc"
+    WORKSPACE="auth-service"
     ;;
   esac
   echo "Generating docker image..."
