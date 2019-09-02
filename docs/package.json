@@ -6,7 +6,7 @@
     "shx": "^0.3.2"
   },
   "scripts": {
-    "lint": "markdownlint src/**/*.md",
+    "lint": "markdownlint ./src",
     "update-version": "shx echo \"version: `git describe --tags --always`\" > version.md"
   }
 }
