@@ -20,7 +20,7 @@ alertmanager:
 ## Deploy Grafana
 ##
 grafana:
-  adminPassword: "{{ grafana_admin_password }}"
+  adminPassword: {{ grafana_admin_password }}
   persistence:
     enabled: true
     storageClassName: glusterfs-storage
@@ -30,16 +30,15 @@ grafana:
   grafana.ini:
     auth.github:
       enabled: true
-      client_id: "{{ test_grafana_oauth_client_id }}"
-      client_secret: "{{ test_grafana_oauth_client_secret }}"
+      client_id: {{ test_grafana_oauth_client_id }}
+      client_secret: {{ test_grafana_oauth_client_secret }}
       scopes: user:email,read:org
       team_ids: '2320760'
       auth_url: https://github.com/login/oauth/authorize
       token_url: https://github.com/login/oauth/access_token
       api_url: https://api.github.com/user
       allow_sign_up: true
-      
-
+    
     server:
       domain: testlab-monitoring.test-datalabs.nerc.ac.uk
       root_url: https://testlab-monitoring.test-datalabs.nerc.ac.uk
