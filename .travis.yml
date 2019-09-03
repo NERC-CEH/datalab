@@ -20,6 +20,7 @@ env:
   - CONTAINER=docs
   - CONTAINER=infrastructure
   - CONTAINER=authorisation
+  - CONTAINER=common
 
 script:
   - $TRAVIS_BUILD_DIR/build/validate-build.sh $CONTAINER && $TRAVIS_BUILD_DIR/build/build-travis-wrapper.sh $CONTAINER
