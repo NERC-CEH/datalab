@@ -3,14 +3,12 @@ import List from '@material-ui/core/List';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { permissionTypes } from 'common';
-import navBarLinks from '../../constants/navBarLinks';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
 
-const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST } } = permissionTypes;
+const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
 
-const { DISCOURSE } = navBarLinks;
 export const drawerWidth = 200;
 
 const styles = theme => ({
@@ -24,6 +22,7 @@ const styles = theme => ({
     background: theme.palette.sideBarBackground,
     height: '100%',
     width: drawerWidth,
+    minWidth: drawerWidth,
     borderRight: `1px solid ${theme.palette.divider}`,
     overflow: 'auto',
     padding: `0 ${theme.spacing(2)}px`,
@@ -47,17 +46,14 @@ const SideBar = ({ classes, userPermissions }) => (
 
       <SideBarGroup>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
-        <SideBarButton to="/storage" label="Storage" icon="storage" />
+          <SideBarButton to="/storage" label="Storage" icon="storage" />
         </PermissionWrapper>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
           <SideBarButton to="/publishing" label="Sites" icon="web" />
         </PermissionWrapper>
-        <SideBarButton
-          key={`nav-link-${DISCOURSE.displayName}`}
-          label={DISCOURSE.displayName}
-          icon='question_answer'
-          onClick={() => window.open(DISCOURSE.href)}
-        />
+        <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
+          <SideBarButton to="/settings" label="Settings" icon="settings"/>
+        </PermissionWrapper>
       </SideBarGroup>
     </List>
   </div>

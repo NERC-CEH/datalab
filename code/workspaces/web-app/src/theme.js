@@ -40,12 +40,21 @@ const theme = createMuiTheme({
     color: text,
     h4: {
       color: text,
+      margin: `${spacing * 4}px 0`,
+    },
+    h5: {
+      color: text,
+      marginTop: spacing * 4,
+      marginBottom: spacing * 2,
     },
     h6: {
       color: text,
       textTransform: 'uppercase',
       fontSize: '1em',
       letterSpacing: '0.05em',
+    },
+    body2: {
+      color: 'hsl(0, 0%, 40%)',
     },
   },
   shape: {

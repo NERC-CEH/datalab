@@ -1,22 +1,25 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 import { version } from '../../version';
-import Segment from './Segment';
 
 const styles = theme => ({
-  versionText: {
+  divider: {
     marginTop: theme.spacing(2),
+  },
+  versionText: {
+    margin: `${theme.spacing(2)}px 0`,
   },
 });
 
 const Footer = ({ classes }) => (
-  <Segment>
-    <Divider/>
-    <p className={classes.versionText}>
+  <div>
+    <Divider className={classes.divider} />
+    <Typography variant='body2' className={classes.versionText}>
       {`Version: ${version}`}
-    </p>
-  </Segment>
+    </Typography>
+  </div>
 );
 
 export default withStyles(styles)(Footer);

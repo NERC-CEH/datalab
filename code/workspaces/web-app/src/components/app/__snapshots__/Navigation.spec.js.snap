@@ -15,7 +15,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
       }
     />
     <div
-      className="Navigation-contentArea-4"
+      className="Navigation-contentArea-5"
     >
       <WithStyles(SideBar)
         userPermissions={
@@ -24,13 +24,17 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
           ]
         }
       />
-      <main
-        className="Navigation-page-3"
+      <div
+        className="Navigation-pageContainer-4"
       >
-        <span>
-          Content
-        </span>
-      </main>
+        <main
+          className="Navigation-page-3"
+        >
+          <span>
+            Content
+          </span>
+        </main>
+      </div>
     </div>
   </div>
 </div>

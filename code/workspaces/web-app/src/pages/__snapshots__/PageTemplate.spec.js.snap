@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page renders correctly when title is not provided 1`] = `
+<div
+  className="Page-pageTemplate-1"
+>
+  <div
+    className="Page-contentArea-2"
+  >
+    Page Content
+  </div>
+  <WithStyles(Footer) />
+</div>
+`;
+
+exports[`Page renders correctly when title is provided 1`] = `
+<div
+  className="Page-pageTemplate-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    variant="h4"
+  >
+    The Page Title
+  </WithStyles(ForwardRef(Typography))>
+  <div
+    className="Page-contentArea-2"
+  >
+    Page Content
+  </div>
+  <WithStyles(Footer) />
+</div>
+`;

@@ -23,6 +23,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
           Array [
             "project:storage:list",
             "project:stacks:list",
+            "project:settings:list",
           ]
         }
       >
@@ -50,6 +51,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
           Array [
             "project:storage:list",
             "project:stacks:list",
+            "project:settings:list",
           ]
         }
       >
@@ -65,6 +67,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
           Array [
             "project:storage:list",
             "project:stacks:list",
+            "project:settings:list",
           ]
         }
       >
@@ -74,12 +77,22 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
           to="/publishing"
         />
       </ComponentWrapper>
-      <WithStyles(SideBarButton)
-        icon="question_answer"
-        key="nav-link-Discourse"
-        label="Discourse"
-        onClick={[Function]}
-      />
+      <ComponentWrapper
+        permission="project:settings:list"
+        userPermissions={
+          Array [
+            "project:storage:list",
+            "project:stacks:list",
+            "project:settings:list",
+          ]
+        }
+      >
+        <WithStyles(SideBarButton)
+          icon="settings"
+          label="Settings"
+          to="/settings"
+        />
+      </ComponentWrapper>
     </WithStyles(SideBarGroup)>
   </WithStyles(ForwardRef(List))>
 </div>

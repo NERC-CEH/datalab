@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SideBar, { drawerWidth } from './SideBar';
+import SideBar from './SideBar';
 import TopBar from './TopBar';
 
 const styles = theme => ({
@@ -18,10 +18,17 @@ const styles = theme => ({
     zIndex: 1,
   },
   page: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    maxWidth: '1000px',
-    padding: theme.spacing(2),
+    padding: `0 ${theme.spacing(4)}px`,
     margin: '0 auto',
+    width: '100%',
+    maxWidth: '1000px',
+    minWidth: '400px',
+  },
+  pageContainer: {
+    overflow: 'auto',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
   },
   contentArea: {
     display: 'flex',
@@ -35,9 +42,11 @@ const Navigation = ({ classes, children, identity, userPermissions }) => (
       <TopBar identity={identity} />
       <div className={classes.contentArea}>
         <SideBar className={classes.sideBar} userPermissions={userPermissions} />
-        <main className={classes.page}>
-          {children}
-        </main>
+        <div className={classes.pageContainer}>
+          <main className={classes.page}>
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   </div>
