@@ -14,6 +14,7 @@ access_public_keys:
   - alex_rsa.pub
   - andy_rsa.pub
   - iainw_rsa.pub
+  - ola_rsa.pub
 
 # Configuration for Terraform State Server
 server_image: ubuntu-1804-datalabs-20190104
