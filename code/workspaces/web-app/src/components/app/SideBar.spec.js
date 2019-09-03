@@ -4,7 +4,7 @@ import { createShallow, createMount } from '@material-ui/core/test-utils';
 import SideBar from './SideBar';
 
 describe('Sidebar', () => {
-  const userPermissions = ['project:storage:list', 'project:stacks:list'];
+  const userPermissions = ['project:storage:list', 'project:stacks:list', 'project:settings:list'];
 
   function shallowRender() {
     const shallow = createShallow({ dive: true });
