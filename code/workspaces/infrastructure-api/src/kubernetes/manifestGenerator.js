@@ -34,7 +34,7 @@ const ConfigTemplates = Object.freeze({
 });
 
 function generateManifest(context, template) {
-  const templatePath = `manifests/${template}`;
+  const templatePath = `resources/${template}`;
   return fs.readFileAsync(templatePath)
     .then(data => data.toString())
     .then(templateContent => render(templateContent, context));
