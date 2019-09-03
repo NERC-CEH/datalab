@@ -3,7 +3,7 @@ set -e
 
 GIT_DESCRIBE=`git describe --tags --always`
 
-if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation)$ ]]; then
+if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|common)$ ]]; then
   case "$1" in
   docs)
     echo "Starting to build documents..."
@@ -42,6 +42,10 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     IMAGE="authorisation-svc"
     LIBRARY="common"
     WORKSPACE="auth-service"
+    ;;
+  common)
+    echo "No docker build step defined for common. Skipping build."
+    exit 0
     ;;
   esac
   echo "Generating docker image..."

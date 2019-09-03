@@ -22,7 +22,7 @@ ARG WORKSPACE
 
 LABEL maintainer "joshua.foster@stfc.ac.uk"
 
-RUN mkdir -p /usr/src/{app,common}
+RUN mkdir -p /usr/src/app/resources && mkdir -p /usr/src/common
 
 WORKDIR /usr/src/app
 
@@ -33,8 +33,9 @@ COPY ./workspaces/${WORKSPACE}/package.json .
 RUN yarn add /usr/src/common/*.tgz && yarn install --silent --production && yarn cache clean
 
 COPY ./workspaces/${WORKSPACE}/dist .
+COPY ./workspaces/${WORKSPACE}/resources ./resources
 COPY ./version.json .
 
 EXPOSE 8000
 
-CMD ["node", "/dist/app.js"]
+CMD ["node", "server.js"]

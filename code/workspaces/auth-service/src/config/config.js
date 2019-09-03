@@ -16,13 +16,13 @@ const config = convict({
   privateKey: {
     doc: 'The path to the private key for JWT signing',
     format: 'String',
-    default: 'private.pem',
+    default: './resources/private.pem',
     env: 'PRIVATE_KEY',
   },
   publicKey: {
     doc: 'The path to the public key for JWT validation',
     format: 'String',
-    default: 'public.pem',
+    default: './resources/public.pem',
     env: 'PUBLIC_KEY',
   },
   authorisationClientId: {
@@ -46,7 +46,7 @@ const config = convict({
   permissionAttributes: {
     doc: 'The path to yaml file containing permissions',
     format: 'String',
-    default: './src/permissions/permissions.yml',
+    default: './resources/permissions.yml',
     env: 'AUTHORISATION_PERMISSIONS',
   },
   userManagementClientId: {
