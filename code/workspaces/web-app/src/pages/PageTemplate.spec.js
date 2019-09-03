@@ -1,8 +1,8 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import PageTemplate from './PageTemplate';
+import Page from './Page';
 
-describe('PageTemplate', () => {
+describe('Page', () => {
   let shallow;
 
   beforeEach(() => {
@@ -11,13 +11,13 @@ describe('PageTemplate', () => {
 
   it('renders correctly when title is provided', () => {
     expect(
-      shallow(<PageTemplate title="The Page Title">Page Content</PageTemplate>),
+      shallow(<Page title="The Page Title">Page Content</Page>),
     ).toMatchSnapshot();
   });
 
   it('renders correctly when title is not provided', () => {
     expect(
-      shallow(<PageTemplate>Page Content</PageTemplate>),
+      shallow(<Page>Page Content</Page>),
     ).toMatchSnapshot();
   });
 });

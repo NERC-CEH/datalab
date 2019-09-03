@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageTemplate renders correctly when title is not provided 1`] = `
+exports[`Page renders correctly when title is not provided 1`] = `
 <div
-  className="PageTemplate-pageTemplate-1"
+  className="Page-pageTemplate-1"
 >
   <div
-    className="PageTemplate-contentArea-2"
+    className="Page-contentArea-2"
   >
     Page Content
   </div>
@@ -13,9 +13,9 @@ exports[`PageTemplate renders correctly when title is not provided 1`] = `
 </div>
 `;
 
-exports[`PageTemplate renders correctly when title is provided 1`] = `
+exports[`Page renders correctly when title is provided 1`] = `
 <div
-  className="PageTemplate-pageTemplate-1"
+  className="Page-pageTemplate-1"
 >
   <WithStyles(ForwardRef(Typography))
     variant="h4"
@@ -23,7 +23,7 @@ exports[`PageTemplate renders correctly when title is provided 1`] = `
     The Page Title
   </WithStyles(ForwardRef(Typography))>
   <div
-    className="PageTemplate-contentArea-2"
+    className="Page-contentArea-2"
   >
     Page Content
   </div>

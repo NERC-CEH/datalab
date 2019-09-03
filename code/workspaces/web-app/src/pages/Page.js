@@ -14,7 +14,7 @@ const style = theme => ({
   },
 });
 
-function PageTemplate({ title, children, classes }) {
+function Page({ title, children, classes }) {
   return (
     <div className={classes.pageTemplate}>
       {title ? <Typography variant="h4">{title}</Typography> : null}
@@ -26,9 +26,9 @@ function PageTemplate({ title, children, classes }) {
   );
 }
 
-PageTemplate.propTypes = {
+Page.propTypes = {
   title: PropTypes.string,
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(style)(PageTemplate);
+export default withStyles(style)(Page);

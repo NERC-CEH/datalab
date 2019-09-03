@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
-import PageTemplate from './PageTemplate';
+import Page from './Page';
 
 const styles = theme => ({
   textInput: {
@@ -10,8 +10,8 @@ const styles = theme => ({
 });
 
 const SettingsPage = ({ classes, userPermissions }) => (
-  <PageTemplate title="Settings">
-  </PageTemplate>
+  <Page title="Settings">
+  </Page>
 );
 
 SettingsPage.propTypes = {
