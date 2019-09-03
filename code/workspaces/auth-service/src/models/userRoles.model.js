@@ -12,7 +12,7 @@ const UserRolesSchema = new Schema({
   userId: String,
   instanceAdmin: Boolean,
   projectRoles: [{
-    projectName: String,
+    projectKey: String,
     role: { type: String, enum: PROJECT_ROLES },
   }],
 });

@@ -12,15 +12,15 @@ const testUserRoles = () => [
     userId: 'uid1',
     instanceAdmin: false,
     projectRoles: [
-      { projectName: 'project 1', role: 'admin' },
-      { projectName: 'project 2', role: 'user' },
+      { projectKey: 'project 1', role: 'admin' },
+      { projectKey: 'project 2', role: 'user' },
     ],
   },
   {
     userId: 'uid2',
     instanceAdmin: true,
     projectRoles: [
-      { projectName: 'project 2', role: 'viewer' },
+      { projectKey: 'project 2', role: 'viewer' },
     ],
   },
 ];
@@ -47,7 +47,7 @@ describe('userRolesRepository', () => {
     it('getProjectUsers returns expected snapshot', () => userRoleRepository.getProjectUsers('project 2')
       .then((users) => {
         expect(mockDatabase().query()).toEqual({
-          'projectRoles.projectName': { $eq: 'project 2' },
+          'projectRoles.projectKey': { $eq: 'project 2' },
         });
         expect(users).toMatchSnapshot();
       }));
@@ -70,7 +70,7 @@ describe('userRolesRepository', () => {
 
       expect(mockDatabase().invocation()).toEqual({
         query: { userId: 'uid1' },
-        entity: { userId: 'uid1', projectRoles: [{ projectName: 'project', role: 'admin' }] },
+        entity: { userId: 'uid1', projectRoles: [{ projectKey: 'project', role: 'admin' }] },
         params: { upsert: true, setDefaultsOnInsert: true, runValidators: true },
       });
     });
@@ -89,9 +89,9 @@ describe('userRolesRepository', () => {
           userId: 'uid1',
           instanceAdmin: false,
           projectRoles: [
-            { projectName: 'project 1', role: 'admin' },
-            { projectName: 'project 2', role: 'user' },
-            { projectName: 'project', role: 'admin' },
+            { projectKey: 'project 1', role: 'admin' },
+            { projectKey: 'project 2', role: 'user' },
+            { projectKey: 'project', role: 'admin' },
           ],
         });
     });
@@ -106,8 +106,8 @@ describe('userRolesRepository', () => {
         userId: 'uid1',
         instanceAdmin: false,
         projectRoles: [
-          { projectName: 'project 1', role: 'admin' },
-          { projectName: 'project 2', role: 'admin' },
+          { projectKey: 'project 1', role: 'admin' },
+          { projectKey: 'project 2', role: 'admin' },
         ],
       });
     });
@@ -126,7 +126,7 @@ describe('userRolesRepository', () => {
         userId: 'uid1',
         instanceAdmin: false,
         projectRoles: [
-          { projectName: 'project 1', role: 'admin' },
+          { projectKey: 'project 1', role: 'admin' },
         ],
       });
     });

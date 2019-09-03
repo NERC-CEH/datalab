@@ -4,15 +4,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]
@@ -22,15 +22,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]
@@ -40,15 +40,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]
@@ -58,15 +58,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]
@@ -76,15 +76,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]
@@ -94,15 +94,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]
@@ -112,15 +112,15 @@
     "instanceAdmin": true,
     "projectRoles": [
       {
-        "projectName": "project",
+        "projectKey": "project",
         "role": "admin"
       },
       {
-        "projectName": "project2",
+        "projectKey": "project2",
         "role": "user"
       },
       {
-        "projectName": "project3",
+        "projectKey": "project3",
         "role": "viewer"
       }
     ]

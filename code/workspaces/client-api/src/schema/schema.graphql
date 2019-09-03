@@ -34,7 +34,7 @@ type Query {
     users: [User]
 
     # Details of a single project
-    project(id: ID!): Project
+    project(key: String!): Project
 }
 
 # Root mutation methods for Datalabs.
@@ -58,10 +58,10 @@ type Mutation {
     removeUserFromDataStore(dataStore: DataStorageUpdateRequest): DataStore
 
     # Add a user permission to a project
-    addProjectPermission(permission: PermissionRequest): Permission
+    addProjectPermission(permission: PermissionAddRequest): Permission
 
     # Remove a user permission from a project
-    removeProjectPermission(permission: PermissionRequest): Permission
+    removeProjectPermission(permission: PermissionRemoveRequest): Boolean
 }
 
 # DataLabs type for basic datalab information.
@@ -188,30 +188,36 @@ type User {
 
 type Project {
     id: ID!
+    key: String!
     name: String!
     projectUsers: [ProjectUser!]!
 }
 
 type Permission {
-    projectId: String,
+    projectKey: String,
     role: Role!
 }
 
 type ProjectUser {
-    id: ID!
+    userId: ID!
     name: String!
     role: Role!
 }
 
-input PermissionRequest {
-    projectId: ID!,
+input PermissionAddRequest {
+    projectKey: String!,
     userId: ID!
     role: Role!
 }
 
+input PermissionRemoveRequest {
+    projectKey: String!,
+    userId: ID!
+}
+
 enum Role {
-    INSTANCE_ADMIN
-    ADMIN,
-    USER,
-    VIEWER,
+    instance_admin,
+    admin,
+    user,
+    viewer,
 }

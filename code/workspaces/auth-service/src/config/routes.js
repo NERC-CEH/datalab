@@ -18,9 +18,9 @@ function configureRoutes(app) {
   app.get('/permissions', dtMW, auth.getPermissionsForUser);
   app.get('/jwks', auth.serveJWKS);
   app.get('/users', dtMW, permissionChecker(['users:list']), userManagement.getUsers);
-  app.get('/projects/:projectName/users', dtMW, projectPermissionChecker(['permissions:read']), ew(projectController.getUserRoles));
-  app.put('/projects/:projectName/users/:userId/role', dtMW, projectPermissionChecker(['permissions:create']), addRoleValidator, ew(projectController.addUserRole));
-  app.delete('/projects/:projectName/users/:userId/role', dtMW, projectPermissionChecker(['permissions:delete']), removeRoleValidator, ew(projectController.removeUserRole));
+  app.get('/projects/:projectKey/users', dtMW, projectPermissionChecker(['permissions:read']), ew(projectController.getUserRoles));
+  app.put('/projects/:projectKey/users/:userId/roles', dtMW, projectPermissionChecker(['permissions:create']), addRoleValidator, ew(projectController.addUserRole));
+  app.delete('/projects/:projectKey/users/:userId/role', dtMW, projectPermissionChecker(['permissions:delete']), removeRoleValidator, ew(projectController.removeUserRole));
 }
 
 export default { configureRoutes };

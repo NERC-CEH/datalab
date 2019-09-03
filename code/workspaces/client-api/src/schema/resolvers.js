@@ -35,7 +35,7 @@ const resolvers = {
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
     checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
-    project: (obj, { id }, { user }) => permissionChecker(SETTINGS_READ, user, () => projectService.getProjectById(id)),
+    project: (obj, { key }, { user, token }) => permissionChecker(SETTINGS_READ, user, () => projectService.getProjectByKey(key, token)),
   },
 
   Mutation: {
@@ -45,11 +45,11 @@ const resolvers = {
     deleteDataStore: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
     addUserToDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
     removeUserFromDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.removeUsers(user, name, users)),
-    addProjectPermission: (obj, { permission: { projectId, userId, role } }, { user }) => (
-      permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectId, userId, role))
+    addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
+      permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
     ),
-    removeProjectPermission: (obj, { permission: { projectId, userId, role } }, { user }) => (
-      permissionChecker(PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectId, userId, role))
+    removeProjectPermission: (obj, { permission: { projectKey, userId } }, { user, token }) => (
+      permissionChecker(PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
   },
 
@@ -65,7 +65,7 @@ const resolvers = {
   },
 
   Project: {
-    projectUsers: (obj, args, ctx) => userService.getProjectUsers(args.projectId, ctx.token),
+    projectUsers: (obj, args, ctx) => userService.getProjectUsers(obj.name, ctx.token),
   },
 
   ProjectUser: {
