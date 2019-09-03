@@ -33,7 +33,7 @@ const StackStatus = ({ classes, status }) => {
   return (
     <Typography
       className={invertColor ? classes.textInvert : classes.text}
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: color, minWidth: 170 }}
       type="caption"
       align="center"
     >

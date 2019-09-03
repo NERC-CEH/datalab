@@ -2,11 +2,11 @@ import { capitalize } from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import { statusTypes } from 'common';
 import StackCardActions from './StackCardActions';
 import stackDescriptions from './stackDescriptions';
@@ -15,31 +15,19 @@ import StackStatus from './StackStatus';
 const { READY } = statusTypes;
 
 function styles(theme) {
-  const flexProps = {
-    display: 'flex',
-    justifyContent: 'space-between',
-  };
-
   return {
     card: {
-      ...flexProps,
-      flexDirection: 'column',
-      height: '100%',
-      minHeight: 230,
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+      borderRadius: 0,
+      borderTop: '1px solid',
     },
-    cardHeader: {
-      ...flexProps,
-    },
-    cardMedia: {
+    image: {
       height: 70,
       width: 120,
-      marginLeft: 5,
-      backgroundSize: 'contain',
-      backgroundPositionY: 'top',
-      backgroundPositionX: 'right',
     },
     cardIcon: {
-      float: 'right',
+      float: 'left',
       fontSize: theme.typography.h2.fontSize,
     },
   };
@@ -48,29 +36,36 @@ function styles(theme) {
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
   openPermission, deletePermission, editPermission }) => <Card className={classes.card}>
     <CardContent>
-      <div className={classes.cardHeader}>
-        <div>
+      <div>
+        <div style={{ display: 'inline-block' }}>
+          {generateGetImage(classes)(stack)}
+        </div>
+        <div style={{ display: 'inline-block', maxWidth: 650 }}>
           <Typography variant="h5">{getDisplayName(stack)}</Typography>
-          <div style={{ display: 'flex', direction: 'row' }}>
-            <Typography style={{ marginRight: 6 }} variant="subtitle1">{getStackType(stack, typeName)}</Typography>
-            {typeName !== 'Data Store' && stack.status && <StackStatus status={stack.status}/>}
+          <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
+            <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
+          </Tooltip>
+        </div>
+        <div style={{ display: 'inline-block', float: 'right' }}>
+          <div style={{ display: 'table', minHeight: 95 }}>
+            <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+              {typeName !== 'Data Store' && stack.status && <div style={{ textAlign: 'center' }}><StackStatus status={stack.status} /></div>}
+              {stack.status === READY
+                && <StackCardActions
+                  stack={stack}
+                  openStack={openStack}
+                  deleteStack={deleteStack}
+                  editStack={editStack}
+                  userPermissions={userPermissions}
+                  openPermission={openPermission}
+                  deletePermission={deletePermission}
+                  editPermission={editPermission}
+                />}
+            </div>
           </div>
         </div>
-        {generateGetImage(classes)(stack)}
       </div>
-      <Typography component="p">{getDescription(stack, typeName)}</Typography>
     </CardContent>
-    {stack.status === READY
-      && <StackCardActions
-        stack={stack}
-        openStack={openStack}
-        deleteStack={deleteStack}
-        editStack={editStack}
-        userPermissions={userPermissions}
-        openPermission={openPermission}
-        deletePermission={deletePermission}
-        editPermission={editPermission}
-      />}
   </Card>;
 
 StackCard.propTypes = {
@@ -97,12 +92,12 @@ function getDisplayName(stack) {
 
 function generateGetImage(classes) {
   function getImage(stack) {
-    const stackDesciption = stack.type && stackDescriptions[stack.type];
-    const logoImage = stackDesciption && stackDesciption.logo;
-    const iconName = stackDesciption && stackDesciption.icon;
+    const stackDescription = stack.type && stackDescriptions[stack.type];
+    const logoImage = stackDescription && stackDescription.logo;
+    const iconName = stackDescription && stackDescription.icon;
 
     if (logoImage) {
-      return <CardMedia className={classes.cardMedia} image={logoImage} />;
+      return <img className={classes.image} src={logoImage} alt={stackDescription} />;
     }
 
     return <Icon className={classes.cardIcon} children={iconName || 'create'} />;
@@ -118,10 +113,6 @@ function getDescription(stack, typeName) {
     return stackDescriptions[stack.type].description;
   }
   return `A description of the ${typeName} purpose`;
-}
-
-function getStackType(stack, typeName) {
-  return stack.type ? capitalize(stack.type) : `${capitalize(typeName)} type`;
 }
 
 export default withStyles(styles)(StackCard);

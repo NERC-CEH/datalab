@@ -12,11 +12,7 @@ const styles = theme => ({
     backgroundColor: 'transparent',
   },
   buttonContainer: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'left',
+    borderTop: '1px solid',
   },
   button: {
     margin: 20,
@@ -28,7 +24,7 @@ const styles = theme => ({
 
 const NewStackButton = ({ classes, onClick, typeName }) => <Card className={classes.card} elevation={0}>
     <div className={classes.buttonContainer}>
-      <Tooltip title={`Create ${typeName}`}>
+      <Tooltip title={`Create ${typeName}`} style={{ float: 'right' }}>
         <Fab className={classes.button} color="primary" aria-label="add" onClick={onClick}>
           <Icon className={classes.icon} children="add" />
         </Fab>

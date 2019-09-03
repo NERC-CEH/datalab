@@ -9,7 +9,7 @@ const { READY } = statusTypes;
 
 const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
   deletePermission, editPermission }) => (
-  <CardActions style={{ paddingLeft: 8, paddingRight: 8 }}>
+  <CardActions style={{ paddingLeft: 2, paddingRight: 0 }}>
     <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
       <Button
         style={{ marginRight: 4 }}

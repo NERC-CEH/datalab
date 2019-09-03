@@ -4,8 +4,8 @@ exports[`StackCardActions creates correct snapshot 1`] = `
 <WithStyles(ForwardRef(CardActions))
   style={
     Object {
-      "paddingLeft": 8,
-      "paddingRight": 8,
+      "paddingLeft": 2,
+      "paddingRight": 0,
     }
   }
 >
