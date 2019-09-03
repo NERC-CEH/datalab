@@ -37,4 +37,4 @@ COPY ./version.json .
 
 EXPOSE 8000
 
-CMD ["node", "/dist/app.js"]
+CMD ["node", "server.js"]

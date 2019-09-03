@@ -46,7 +46,7 @@ const config = convict({
   permissionAttributes: {
     doc: 'The path to yaml file containing permissions',
     format: 'String',
-    default: './src/permissions/permissions.yml',
+    default: './permissions/permissions.yml',
     env: 'AUTHORISATION_PERMISSIONS',
   },
   userManagementClientId: {
