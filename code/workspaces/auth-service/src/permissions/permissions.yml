@@ -17,6 +17,7 @@ admin:
   - name: users
     permissions:
       - list
+      - read
   - name: settings
     permissions:
       - list

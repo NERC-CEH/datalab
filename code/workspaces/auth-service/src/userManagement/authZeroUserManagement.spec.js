@@ -23,7 +23,7 @@ const mock = new MockAdapter(axios);
 
 const userList = [
   { name: 'firstName', user_id: 'one' },
-  { name: 'secondName', user_id: 'one' },
+  { name: 'secondName', user_id: 'two' },
   { user_id: 'three' },
 ];
 
@@ -53,7 +53,7 @@ describe('auth0 management API', () => {
       return asyncGetUsers()
         .then(roles => expect(roles).toEqual([
           { name: 'firstName', userId: 'one' },
-          { name: 'secondName', userId: 'one' },
+          { name: 'secondName', userId: 'two' },
         ]));
     });
 
@@ -78,6 +78,18 @@ describe('auth0 management API', () => {
       userMgmt.getUsers();
 
       expect(cacheReturnedMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('get user', () => {
+    it('should return the requested user', async () => {
+      cacheReturnedMock.mockResolvedValue([
+        { name: 'firstName', userId: 'one' },
+        { name: 'secondName', userId: 'two' },
+      ]);
+      const user = await userMgmt.getUser('one');
+
+      expect(user).toEqual({ name: 'firstName', userId: 'one' });
     });
   });
 });

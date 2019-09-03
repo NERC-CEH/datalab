@@ -69,7 +69,7 @@ const resolvers = {
   },
 
   ProjectUser: {
-    name: (obj, args, ctx) => userService.getUserName(obj, ctx.token),
+    name: (obj, args, ctx) => userService.getUserName(obj.userId, ctx.token),
   },
 
   // This mapping is required to map the string to an id in the database.

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { get, mapKeys } from 'lodash';
+import { get, mapKeys, find } from 'lodash';
 import logger from 'winston';
 import config from '../config/config';
 import requestAccessToken from '../auth/accessToken';
@@ -47,4 +47,9 @@ const processUsers = users => users.map(user => mapKeys(user, (value, key) => au
 
 const getUsers = () => getOrSetCacheAsyncWrapper('USERS_LIST', asyncGetUsers)();
 
-export default { getUsers };
+const getUser = async (userId) => {
+  const users = await getUsers();
+  return find(users, { userId });
+};
+
+export default { getUser, getUsers };
