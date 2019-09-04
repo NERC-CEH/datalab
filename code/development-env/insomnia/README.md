@@ -13,7 +13,9 @@ To import a definition:
 
 * Click on the `Workspace` drop down in the to left and select `Import/Export`.
 * Click on the `Import Data` drop down and select `From URL`.
-* Paste the URL `https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/development-env/insomnia/datalabs-apis.yaml`.
+* Paste the URL `https://raw.githubusercontent.com/NERC-CEH/datalab/master/code/development-env/insomnia/datalabs-apis.yaml` or click the button below.
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Datalabs&uri=https%3A%2F%2Fraw.githubusercontent.com%2FNERC-CEH%2Fdatalab%2Fmaster%2Fcode%2Fdevelopment-env%2Finsomnia%2Fdatalabs-apis.yaml)
 
 If you have previously imported the definition then any new requests will be added to the
 existing workspace. If you have local changes, it seems that Insomnia will leave these
@@ -43,6 +45,8 @@ using a `Sub Environment`. To do this:
 * Select `Private Environment` to ensure it is not exported later.
 * Specify a name and colour
 * Copy the complete environment from the base environment then remove anything that doesn't need to be changed leaving just the variables to be overridden before setting the required variables.
+
+Once you have created the environment, select it from the `Environment` drop down.
 
 ## Tokens
 
