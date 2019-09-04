@@ -1,156 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
-<WithStyles(ForwardRef(Grid))
-  container={true}
-  spacing={0}
->
-  <WithStyles(ForwardRef(Grid))
-    item={true}
-    key="0"
-    xs={12}
-  >
-    <WithStyles(StackCard)
-      deletePermission="delete"
-      deleteStack={[Function]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[Function]}
-      stack={
-        Object {
-          "displayName": "name1",
-          "id": "1",
-          "type": "type1",
-        }
-      }
-      typeName="expectedTypeName"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "create",
-          "edit",
-        ]
-      }
-    />
-  </WithStyles(ForwardRef(Grid))>
-  <WithStyles(ForwardRef(Grid))
-    item={true}
-    key="1"
-    xs={12}
-  >
-    <WithStyles(StackCard)
-      deletePermission="delete"
-      deleteStack={[Function]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[Function]}
-      stack={
-        Object {
-          "displayName": "name2",
-          "id": "2",
-          "type": "type2",
-        }
-      }
-      typeName="expectedTypeName"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "create",
-          "edit",
-        ]
-      }
-    />
-  </WithStyles(ForwardRef(Grid))>
-  <WithStyles(ForwardRef(Grid))
-    item={true}
-    key="2"
-    xs={12}
-  >
-    <WithStyles(StackCard)
-      deletePermission="delete"
-      deleteStack={[Function]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[Function]}
-      stack={
-        Object {
-          "displayName": "name3",
-          "id": "3",
-          "type": "type3",
-        }
-      }
-      typeName="expectedTypeName"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "create",
-          "edit",
-        ]
-      }
-    />
-  </WithStyles(ForwardRef(Grid))>
-  <ComponentWrapper
-    permission="create"
-    style={
+<StackCards
+  classes={
+    Object {
+      "stackDiv": "StackCards-stackDiv-1",
+    }
+  }
+  createPermission="create"
+  deletePermission="delete"
+  deleteStack={[Function]}
+  editPermission="edit"
+  openCreationForm={[Function]}
+  openPermission="open"
+  openStack={[Function]}
+  stacks={
+    Array [
       Object {
-        "width": "100%",
-      }
-    }
-    userPermissions={
-      Array [
-        "open",
-        "delete",
-        "create",
-        "edit",
-      ]
-    }
-  >
-    <WithStyles(ForwardRef(Grid))
-      item={true}
-      xs={12}
-    >
-      <WithStyles(NewStackButton)
-        onClick={[Function]}
-        typeName="expectedTypeName"
-      />
-    </WithStyles(ForwardRef(Grid))>
-  </ComponentWrapper>
-</WithStyles(ForwardRef(Grid))>
+        "displayName": "name1",
+        "id": "1",
+        "type": "type1",
+      },
+      Object {
+        "displayName": "name2",
+        "id": "2",
+        "type": "type2",
+      },
+      Object {
+        "displayName": "name3",
+        "id": "3",
+        "type": "type3",
+      },
+    ]
+  }
+  typeName="expectedTypeName"
+  userPermissions={
+    Array [
+      "open",
+      "delete",
+      "create",
+      "edit",
+    ]
+  }
+/>
 `;
 
 exports[`StackCards creates correct snapshot for an empty array 1`] = `
-<WithStyles(ForwardRef(Grid))
-  container={true}
-  spacing={0}
->
-  <ComponentWrapper
-    permission="create"
-    style={
-      Object {
-        "width": "100%",
-      }
+<StackCards
+  classes={
+    Object {
+      "stackDiv": "StackCards-stackDiv-1",
     }
-    userPermissions={
-      Array [
-        "open",
-        "delete",
-        "create",
-        "edit",
-      ]
-    }
-  >
-    <WithStyles(ForwardRef(Grid))
-      item={true}
-      xs={12}
-    >
-      <WithStyles(NewStackButton)
-        onClick={[Function]}
-        typeName="expectedTypeName"
-      />
-    </WithStyles(ForwardRef(Grid))>
-  </ComponentWrapper>
-</WithStyles(ForwardRef(Grid))>
+  }
+  createPermission="create"
+  deletePermission="delete"
+  deleteStack={[Function]}
+  editPermission="edit"
+  openCreationForm={[Function]}
+  openPermission="open"
+  openStack={[Function]}
+  stacks={Array []}
+  typeName="expectedTypeName"
+  userPermissions={
+    Array [
+      "open",
+      "delete",
+      "create",
+      "edit",
+    ]
+  }
+/>
 `;

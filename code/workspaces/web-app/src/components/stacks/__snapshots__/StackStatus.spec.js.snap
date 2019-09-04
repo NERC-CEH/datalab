@@ -7,7 +7,6 @@ exports[`StackStatus creates correct snapshot for status types 1`] = `
   style={
     Object {
       "backgroundColor": "#bbdefb",
-      "minWidth": 170,
     }
   }
   type="caption"
@@ -23,7 +22,6 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
   style={
     Object {
       "backgroundColor": "#2196f3",
-      "minWidth": 170,
     }
   }
   type="caption"
@@ -39,7 +37,6 @@ exports[`StackStatus creates correct snapshot for status types 3`] = `
   style={
     Object {
       "backgroundColor": "#4caf50",
-      "minWidth": 170,
     }
   }
   type="caption"
@@ -55,7 +52,6 @@ exports[`StackStatus creates correct snapshot for status types 4`] = `
   style={
     Object {
       "backgroundColor": "#fdd835",
-      "minWidth": 170,
     }
   }
   type="caption"

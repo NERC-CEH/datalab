@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import { withStyles } from '@material-ui/core/styles';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
+const styles = theme => ({
+  dialogDiv: {
+    margin: theme.spacing(2),
+  },
+});
+
+const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes }) => (
   <Dialog open={true} maxWidth="md">
-    <div style={{ margin: 10 }}>
+    <div className={classes.dialogDiv}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <CreateNotebookForm
@@ -26,4 +33,4 @@ CreateNotebookDialog.propTypes = {
   dataStorageOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default CreateNotebookDialog;
+export default withStyles(styles)(CreateNotebookDialog);

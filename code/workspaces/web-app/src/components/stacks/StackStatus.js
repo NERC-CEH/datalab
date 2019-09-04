@@ -8,10 +8,8 @@ const { getStatusKeys, getStatusProps } = statusTypes;
 
 function styles(theme) {
   const commonStyle = {
-    marginLeft: 4,
-    marginRight: 4,
-    marginTop: 0,
-    marginBottom: 4,
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   };
 
   return {
@@ -32,7 +30,7 @@ const StackStatus = ({ classes, status }) => {
   return (
     <Typography
       className={invertColor ? classes.textInvert : classes.text}
-      style={{ backgroundColor: color, minWidth: 170 }}
+      style={{ backgroundColor: color }}
       type="caption"
       align="center"
     >

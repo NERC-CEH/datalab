@@ -1,226 +1,202 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
-<WithStyles(ForwardRef(Card))
-  className="StackCard-card-1"
+<div
+  className="StackCard-cardDiv-1"
 >
-  <WithStyles(ForwardRef(CardContent))>
-    <div
-      className="StackCard-cardDiv-2"
+  <div
+    className="StackCard-imageDiv-2"
+  >
+    <img
+      alt={
+        Object {
+          "description": "Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.",
+          "logo": "jupyter-logo.svg",
+        }
+      }
+      className="StackCard-cardImage-6"
+      src="jupyter-logo.svg"
+    />
+  </div>
+  <div
+    className="StackCard-textDiv-3"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h5"
     >
-      <div
-        className="StackCard-imageDiv-3"
+      name1
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(Tooltip)
+      placement="bottom-start"
+      title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+    >
+      <WithStyles(ForwardRef(Typography))
+        component="p"
+        noWrap={true}
       >
-        <img
-          alt={
-            Object {
-              "description": "Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.",
-              "logo": "jupyter-logo.svg",
-            }
-          }
-          className="StackCard-cardImage-7"
-          src="jupyter-logo.svg"
-        />
-      </div>
-      <div
-        className="StackCard-textDiv-4"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="h5"
-        >
-          name1
-        </WithStyles(ForwardRef(Typography))>
-        <WithStyles(Tooltip)
-          placement="bottom-start"
-          title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
-        >
-          <WithStyles(ForwardRef(Typography))
-            component="p"
-            noWrap={true}
-          >
-            Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-          </WithStyles(ForwardRef(Typography))>
-        </WithStyles(Tooltip)>
-      </div>
-      <div
-        className="StackCard-actionsDiv-5"
-      />
-    </div>
-  </WithStyles(ForwardRef(CardContent))>
-</WithStyles(ForwardRef(Card))>
+        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(Tooltip)>
+  </div>
+  <div
+    className="StackCard-actionsDiv-4"
+  />
+</div>
 `;
 
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
-<WithStyles(ForwardRef(Card))
-  className="StackCard-card-1"
+<div
+  className="StackCard-cardDiv-1"
 >
-  <WithStyles(ForwardRef(CardContent))>
-    <div
-      className="StackCard-cardDiv-2"
+  <div
+    className="StackCard-imageDiv-2"
+  >
+    <img
+      alt={
+        Object {
+          "description": "Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.",
+          "logo": "zeppelin-logo.svg",
+        }
+      }
+      className="StackCard-cardImage-6"
+      src="zeppelin-logo.svg"
+    />
+  </div>
+  <div
+    className="StackCard-textDiv-3"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h5"
     >
-      <div
-        className="StackCard-imageDiv-3"
+      name1
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(Tooltip)
+      placement="bottom-start"
+      title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+    >
+      <WithStyles(ForwardRef(Typography))
+        component="p"
+        noWrap={true}
       >
-        <img
-          alt={
-            Object {
-              "description": "Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.",
-              "logo": "zeppelin-logo.svg",
-            }
-          }
-          className="StackCard-cardImage-7"
-          src="zeppelin-logo.svg"
-        />
-      </div>
-      <div
-        className="StackCard-textDiv-4"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="h5"
-        >
-          name1
-        </WithStyles(ForwardRef(Typography))>
-        <WithStyles(Tooltip)
-          placement="bottom-start"
-          title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
-        >
-          <WithStyles(ForwardRef(Typography))
-            component="p"
-            noWrap={true}
-          >
-            Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
-          </WithStyles(ForwardRef(Typography))>
-        </WithStyles(Tooltip)>
-      </div>
-      <div
-        className="StackCard-actionsDiv-5"
-      />
-    </div>
-  </WithStyles(ForwardRef(CardContent))>
-</WithStyles(ForwardRef(Card))>
+        Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(Tooltip)>
+  </div>
+  <div
+    className="StackCard-actionsDiv-4"
+  />
+</div>
 `;
 
 exports[`StackCard should provide defaults and hide actions if no stack is provided 1`] = `
-<WithStyles(ForwardRef(Card))
-  className="StackCard-card-1"
+<div
+  className="StackCard-cardDiv-1"
 >
-  <WithStyles(ForwardRef(CardContent))>
-    <div
-      className="StackCard-cardDiv-2"
+  <div
+    className="StackCard-imageDiv-2"
+  >
+    <WithStyles(ForwardRef(Icon))
+      className="StackCard-cardIcon-7"
     >
-      <div
-        className="StackCard-imageDiv-3"
+      create
+    </WithStyles(ForwardRef(Icon))>
+  </div>
+  <div
+    className="StackCard-textDiv-3"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h5"
+    >
+      Display Name
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(Tooltip)
+      placement="bottom-start"
+      title="A description of the typeName purpose"
+    >
+      <WithStyles(ForwardRef(Typography))
+        component="p"
+        noWrap={true}
       >
-        <WithStyles(ForwardRef(Icon))
-          className="StackCard-cardIcon-8"
-        >
-          create
-        </WithStyles(ForwardRef(Icon))>
-      </div>
-      <div
-        className="StackCard-textDiv-4"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="h5"
-        >
-          Display Name
-        </WithStyles(ForwardRef(Typography))>
-        <WithStyles(Tooltip)
-          placement="bottom-start"
-          title="A description of the typeName purpose"
-        >
-          <WithStyles(ForwardRef(Typography))
-            component="p"
-            noWrap={true}
-          >
-            A description of the typeName purpose
-          </WithStyles(ForwardRef(Typography))>
-        </WithStyles(Tooltip)>
-      </div>
-      <div
-        className="StackCard-actionsDiv-5"
-      />
-    </div>
-  </WithStyles(ForwardRef(CardContent))>
-</WithStyles(ForwardRef(Card))>
+        A description of the typeName purpose
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(Tooltip)>
+  </div>
+  <div
+    className="StackCard-actionsDiv-4"
+  />
+</div>
 `;
 
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
-<WithStyles(ForwardRef(Card))
-  className="StackCard-card-1"
+<div
+  className="StackCard-cardDiv-1"
 >
-  <WithStyles(ForwardRef(CardContent))>
-    <div
-      className="StackCard-cardDiv-2"
+  <div
+    className="StackCard-imageDiv-2"
+  >
+    <img
+      alt={
+        Object {
+          "description": "Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.",
+          "logo": "jupyter-logo.svg",
+        }
+      }
+      className="StackCard-cardImage-6"
+      src="jupyter-logo.svg"
+    />
+  </div>
+  <div
+    className="StackCard-textDiv-3"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h5"
     >
-      <div
-        className="StackCard-imageDiv-3"
+      name1
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(Tooltip)
+      placement="bottom-start"
+      title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+    >
+      <WithStyles(ForwardRef(Typography))
+        component="p"
+        noWrap={true}
       >
-        <img
-          alt={
-            Object {
-              "description": "Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.",
-              "logo": "jupyter-logo.svg",
-            }
-          }
-          className="StackCard-cardImage-7"
-          src="jupyter-logo.svg"
-        />
-      </div>
-      <div
-        className="StackCard-textDiv-4"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="h5"
-        >
-          name1
-        </WithStyles(ForwardRef(Typography))>
-        <WithStyles(Tooltip)
-          placement="bottom-start"
-          title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
-        >
-          <WithStyles(ForwardRef(Typography))
-            component="p"
-            noWrap={true}
-          >
-            Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-          </WithStyles(ForwardRef(Typography))>
-        </WithStyles(Tooltip)>
-      </div>
-      <div
-        className="StackCard-actionsDiv-5"
-      >
-        <div
-          className="StackCard-statusDiv-6"
-        >
-          <WithStyles(StackStatus)
-            status="ready"
-          />
-        </div>
-        <StackCardActions
-          deletePermission="delete"
-          deleteStack={[Function]}
-          editPermission="edit"
-          openPermission="open"
-          openStack={[Function]}
-          stack={
-            Object {
-              "displayName": "name1",
-              "id": "100",
-              "status": "ready",
-              "type": "jupyter",
-            }
-          }
-          userPermissions={
-            Array [
-              "open",
-              "delete",
-              "edit",
-            ]
-          }
-        />
-      </div>
+        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(Tooltip)>
+  </div>
+  <div
+    className="StackCard-actionsDiv-4"
+  >
+    <div
+      className="StackCard-statusDiv-5"
+    >
+      <WithStyles(StackStatus)
+        status="ready"
+      />
     </div>
-  </WithStyles(ForwardRef(CardContent))>
-</WithStyles(ForwardRef(Card))>
+    <WithStyles(StackCardActions)
+      deletePermission="delete"
+      deleteStack={[Function]}
+      editPermission="edit"
+      openPermission="open"
+      openStack={[Function]}
+      stack={
+        Object {
+          "displayName": "name1",
+          "id": "100",
+          "status": "ready",
+          "type": "jupyter",
+        }
+      }
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    />
+  </div>
+</div>
 `;

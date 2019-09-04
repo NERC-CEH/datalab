@@ -44,7 +44,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
     }
   }
 >
-  <StackCards
+  <WithStyles(StackCards)
     createPermission="project:stacks:create"
     deletePermission="project:stacks:delete"
     deleteStack={[Function]}

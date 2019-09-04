@@ -1,8 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from '@material-ui/core/test-utils';
 import StackCardActions from './StackCardActions';
 
 describe('StackCardActions', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow({ dive: true });
+  });
+
   function shallowRender(props) {
     return shallow(<StackCardActions {...props} />);
   }

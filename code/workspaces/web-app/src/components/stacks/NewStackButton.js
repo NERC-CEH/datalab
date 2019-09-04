@@ -12,7 +12,7 @@ const styles = theme => ({
     backgroundColor: 'transparent',
   },
   buttonContainer: {
-    borderTop: '1px solid',
+    borderTop: `1px solid ${theme.palette.divider}`,
   },
   button: {
     margin: 20,

@@ -6,11 +6,7 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
   open={true}
 >
   <div
-    style={
-      Object {
-        "margin": 10,
-      }
-    }
+    className="CreateNotebookDialog-dialogDiv-1"
   >
     <WithStyles(ForwardRef(DialogTitle))>
       Title

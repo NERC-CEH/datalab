@@ -15,25 +15,29 @@ const { READY } = statusTypes;
 
 function styles(theme) {
   return {
-    card: {
-      backgroundColor: 'transparent',
-      boxShadow: 'none',
-      borderRadius: 0,
-      borderTop: '1px solid',
-    },
     cardDiv: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'flex-start',
+      borderTop: `1px solid ${theme.palette.divider}`,
+      padding: theme.spacing(1),
     },
     imageDiv: {
-      display: 'inline-block',
+      display: 'inline-flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
     textDiv: {
-      display: 'inline-block',
+      display: 'inline-flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
       flexGrow: 1,
       minWidth: 200,
       overflow: 'hidden',
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
     },
     actionsDiv: {
       display: 'inline-flex',
@@ -43,11 +47,13 @@ function styles(theme) {
     statusDiv: {
       display: 'block',
       textAlign: 'center',
-      minWidth: 200,
+      minWidth: 165,
     },
     cardImage: {
       height: 70,
-      width: 120,
+      width: 70,
+      border: `1px solid ${theme.palette.divider}`,
+      borderRadius: theme.spacing(1),
     },
     cardIcon: {
       float: 'left',
@@ -57,35 +63,31 @@ function styles(theme) {
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission }) => <Card className={classes.card}>
-    <CardContent>
-      <div className={classes.cardDiv}>
-        <div className={classes.imageDiv}>
-          {generateGetImage(classes)(stack)}
-        </div>
-        <div className={classes.textDiv}>
-          <Typography variant="h5">{getDisplayName(stack)}</Typography>
-          <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
-            <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
-          </Tooltip>
-        </div>
-        <div className={classes.actionsDiv}>
-          {typeName !== 'Data Store' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
-          {stack.status === READY
-            && <StackCardActions
-              stack={stack}
-              openStack={openStack}
-              deleteStack={deleteStack}
-              editStack={editStack}
-              userPermissions={userPermissions}
-              openPermission={openPermission}
-              deletePermission={deletePermission}
-              editPermission={editPermission}
-            />}
-        </div>
-      </div>
-    </CardContent>
-  </Card>;
+  openPermission, deletePermission, editPermission }) => <div className={classes.cardDiv}>
+    <div className={classes.imageDiv}>
+      {generateGetImage(classes)(stack)}
+    </div>
+    <div className={classes.textDiv}>
+      <Typography variant="h5">{getDisplayName(stack)}</Typography>
+      <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
+        <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
+      </Tooltip>
+    </div>
+    <div className={classes.actionsDiv}>
+      {typeName !== 'Data Store' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
+      {stack.status === READY
+        && <StackCardActions
+          stack={stack}
+          openStack={openStack}
+          deleteStack={deleteStack}
+          editStack={editStack}
+          userPermissions={userPermissions}
+          openPermission={openPermission}
+          deletePermission={deletePermission}
+          editPermission={editPermission}
+        />}
+    </div>
+  </div>;
 
 StackCard.propTypes = {
   classes: PropTypes.object.isRequired,
