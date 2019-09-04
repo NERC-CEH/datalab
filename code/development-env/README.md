@@ -159,7 +159,7 @@ The current ip for minikube can be found using `minikube ip`.
 
 ## Docker-Compose
 
-## Run Containers
+### Run Containers
 
 * Start mongo & vault containers
 
@@ -187,3 +187,9 @@ docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-m
 ```
 
 You should eventually see a message saying `You can now view datalab-app in the browser.`
+
+## Testing APIs
+
+The [Insomnia Rest client](https://insomnia.rest/) is recommended for testing APIs
+during development. Detailed instructions for how to do this can be found
+[here](./insomnia/README.md) including a definition file that can be imported.

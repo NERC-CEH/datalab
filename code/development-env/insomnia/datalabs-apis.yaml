@@ -1,0 +1,351 @@
+_type: export
+__export_format: 4
+__export_date: 2019-09-04T11:28:25.281Z
+__export_source: insomnia.desktop.app:v6.6.2
+resources:
+  - _id: req_096786f5e88746f8b2d4eabe27e09694
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body: {}
+    created: 1567085050735
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567085050835
+    method: GET
+    modified: 1567590736742
+    name: Internal Authorise
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/authorise"
+    _type: request
+  - _id: fld_aedf6e0439314b319e879aec69a4f251
+    created: 1567588455743
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1567588463192
+    modified: 1567589275756
+    name: Auth Service
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: request_group
+  - _id: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    created: 1519239116865
+    description: ""
+    modified: 1519239116865
+    name: Datalabs
+    parentId: null
+    _type: workspace
+  - _id: req_79f09f03b2724d34a32b791c74a38d6c
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1567084820937
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567085050785
+    method: GET
+    modified: 1567590937129
+    name: Get User Permissions
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/projects/unknown/users"
+    _type: request
+  - _id: req_0513b140cfe040fc932d7613e3a6d850
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1567110397902
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567085050772.5
+    method: GET
+    modified: 1567589414315
+    name: Get Users
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/users"
+    _type: request
+  - _id: req_c249a02b974940d5a8bcd650a582c0eb
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1519251350281
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567085050769.375
+    method: GET
+    modified: 1567589420891
+    name: Get Permission for User
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/permissions"
+    _type: request
+  - _id: req_72ea960be0b845e69fe15e6f66a78f7f
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1567442072977
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567085050766.25
+    method: GET
+    modified: 1567589490456
+    name: Get User By ID
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/users/auth0|595f40a25caf4344b2e0e678"
+    _type: request
+  - _id: req_c1fea820ee7d45efaa1b2cefe2a04198
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"role": "admin"
+        }
+    created: 1567157109291
+    description: ""
+    headers:
+      - id: pair_f5281c8ea2a943e8938927aaf4b42734
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1567085050760
+    method: PUT
+    modified: 1567591497646
+    name: Add User Role
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/projects/project/users/missing/roles"
+    _type: request
+  - _id: req_e3c467163210492d8efbd786060d8e10
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1567258837695
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567085050747.5
+    method: DELETE
+    modified: 1567589436965
+    name: Delete User Role
+    parameters: []
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ auth_url  }}/projects/project/users/dummy/role"
+    _type: request
+  - _id: req_67241f2b3eda4593a73273e07248f4f9
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  project(key: \"project\")
+        {\n    id\n    key\n    name\n    projectUsers
+        {\n      userId\n      name\n      role\n    }\n  }\n}"}'
+    created: 1566905934976
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934976
+    method: POST
+    modified: 1567594965613
+    name: Projects
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    created: 1567588463142
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1567588463142
+    modified: 1567588463142
+    name: Client API
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: request_group
+  - _id: req_5e4bf2bc5af143b1b727f4b795b2ff2e
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  addProjectPermission(permission:
+        {\n    projectKey: \"project\",\n    userId: \"dummy\",\n    role:
+        admin\n  }) {\n    projectKey\n    role\n  }\n}"}'
+    created: 1566938804513
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934926
+    method: POST
+    modified: 1567592459414
+    name: Add Permission
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_327f022f621344a79932474f8122b61b
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  removeProjectPermission(permission:
+        {\n    projectKey: \"project\",\n    userId: \"new\"\n  })\n}"}'
+    created: 1566939410205
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934876
+    method: POST
+    modified: 1567592493785
+    name: Delete Permission
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_7acd958c33ca45979bf71a34bc70c16a
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body: {}
+    created: 1519251624443
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1519251624443
+    method: GET
+    modified: 1567594775303
+    name: UserInfo
+    parameters: []
+    parentId: fld_313c3a8e345a49b3be4d55d06109639c
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: https://mjbr.eu.auth0.com/userinfo
+    _type: request
+  - _id: fld_313c3a8e345a49b3be4d55d06109639c
+    created: 1567594762320
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1543420043792.5
+    modified: 1567594769515
+    name: Auth0
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: request_group
+  - _id: env_2014cd721e3244c198b46a159e1352b9
+    color: null
+    created: 1519239116902
+    data:
+      access_token: setup private sub environment
+      auth_url: http://localhost:9000
+      client_api_url: http://localhost:8000
+      internal_token: setup private sub environment
+    dataPropertyOrder:
+      "&":
+        - auth_url
+        - client_api_url
+        - access_token
+        - internal_token
+    isPrivate: false
+    metaSortKey: 1567588785190
+    modified: 1567596319427
+    name: New Environment
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: environment
+  - _id: jar_733966b612ba4c049977c7581f1f3389
+    cookies:
+      - creation: 2019-09-04T10:58:28.739Z
+        domain: mjbr.eu.auth0.com
+        expires: 2024-09-03T16:58:28.000Z
+        hostOnly: true
+        httpOnly: true
+        id: "23696865464845107"
+        key: did
+        lastAccessed: 2019-09-04T10:58:28.739Z
+        maxAge: 157788000
+        path: /
+        secure: true
+        value: s%3Av0%3Aed261150-cf02-11e9-9ed8-03a90a898b6f.krFLMqfQLpWGDOLt3N8kpMuYibXYjjjDRh%2FTuVZB6KM
+    created: 1519239116909
+    modified: 1567594708739
+    name: Default Jar
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: cookie_jar
