@@ -1,12 +1,11 @@
-import { capitalize } from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 import { statusTypes } from 'common';
 import StackCardActions from './StackCardActions';
 import stackDescriptions from './stackDescriptions';
@@ -22,7 +21,31 @@ function styles(theme) {
       borderRadius: 0,
       borderTop: '1px solid',
     },
-    image: {
+    cardDiv: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
+    imageDiv: {
+      display: 'inline-block',
+    },
+    textDiv: {
+      display: 'inline-block',
+      flexGrow: 1,
+      minWidth: 200,
+      overflow: 'hidden',
+    },
+    actionsDiv: {
+      display: 'inline-flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+    statusDiv: {
+      display: 'block',
+      textAlign: 'center',
+      minWidth: 200,
+    },
+    cardImage: {
       height: 70,
       width: 120,
     },
@@ -36,33 +59,29 @@ function styles(theme) {
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
   openPermission, deletePermission, editPermission }) => <Card className={classes.card}>
     <CardContent>
-      <div>
-        <div style={{ display: 'inline-block' }}>
+      <div className={classes.cardDiv}>
+        <div className={classes.imageDiv}>
           {generateGetImage(classes)(stack)}
         </div>
-        <div style={{ display: 'inline-block', maxWidth: 650 }}>
+        <div className={classes.textDiv}>
           <Typography variant="h5">{getDisplayName(stack)}</Typography>
           <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
             <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
           </Tooltip>
         </div>
-        <div style={{ display: 'inline-block', float: 'right' }}>
-          <div style={{ display: 'table', minHeight: 95 }}>
-            <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-              {typeName !== 'Data Store' && stack.status && <div style={{ textAlign: 'center' }}><StackStatus status={stack.status} /></div>}
-              {stack.status === READY
-                && <StackCardActions
-                  stack={stack}
-                  openStack={openStack}
-                  deleteStack={deleteStack}
-                  editStack={editStack}
-                  userPermissions={userPermissions}
-                  openPermission={openPermission}
-                  deletePermission={deletePermission}
-                  editPermission={editPermission}
-                />}
-            </div>
-          </div>
+        <div className={classes.actionsDiv}>
+          {typeName !== 'Data Store' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
+          {stack.status === READY
+            && <StackCardActions
+              stack={stack}
+              openStack={openStack}
+              deleteStack={deleteStack}
+              editStack={editStack}
+              userPermissions={userPermissions}
+              openPermission={openPermission}
+              deletePermission={deletePermission}
+              editPermission={editPermission}
+            />}
         </div>
       </div>
     </CardContent>
@@ -97,7 +116,7 @@ function generateGetImage(classes) {
     const iconName = stackDescription && stackDescription.icon;
 
     if (logoImage) {
-      return <img className={classes.image} src={logoImage} alt={stackDescription} />;
+      return <img className={classes.cardImage} src={logoImage} alt={stackDescription} />;
     }
 
     return <Icon className={classes.cardIcon} children={iconName || 'create'} />;

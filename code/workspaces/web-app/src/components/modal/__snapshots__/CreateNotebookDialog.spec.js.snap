@@ -8,77 +8,52 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
   <div
     style={
       Object {
-        "display": "flex",
-        "flexDirection": "row",
         "margin": 10,
       }
     }
   >
-    <div>
-      <WithStyles(ForwardRef(DialogTitle))>
-        Title
-      </WithStyles(ForwardRef(DialogTitle))>
-      <WithStyles(ForwardRef(DialogContent))>
-        <ReduxForm
-          asyncBlurFields={
-            Array [
-              "name",
-            ]
-          }
-          asyncValidate={[Function]}
-          cancel={[MockFunction]}
-          dataStorageOptions={
-            Array [
-              Object {
-                "value": "value",
-              },
-              Object {
-                "value": "another value",
-              },
-            ]
-          }
-          destroyOnUnmount={false}
-          enableReinitialize={false}
-          forceUnregisterOnUnmount={false}
-          form="createNotebook"
-          getFormState={[Function]}
-          keepDirtyOnReinitialize={false}
-          onSubmit={[MockFunction]}
-          persistentSubmitErrors={false}
-          pure={true}
-          shouldAsyncValidate={[Function]}
-          shouldError={[Function]}
-          shouldValidate={[Function]}
-          shouldWarn={[Function]}
-          submitAsSideEffect={false}
-          touchOnBlur={true}
-          touchOnChange={false}
-          updateUnregisteredFields={false}
-          validate={[Function]}
-        />
-      </WithStyles(ForwardRef(DialogContent))>
-    </div>
-    <div
-      style={
-        Object {
-          "width": 320,
+    <WithStyles(ForwardRef(DialogTitle))>
+      Title
+    </WithStyles(ForwardRef(DialogTitle))>
+    <WithStyles(ForwardRef(DialogContent))>
+      <ReduxForm
+        asyncBlurFields={
+          Array [
+            "name",
+          ]
         }
-      }
-    >
-      <WithStyles(ForwardRef(DialogTitle))>
-        Notebook Preview
-      </WithStyles(ForwardRef(DialogTitle))>
-      <div
-        style={
-          Object {
-            "margin": "0 auto",
-            "width": "90%",
-          }
+        asyncValidate={[Function]}
+        cancel={[MockFunction]}
+        dataStorageOptions={
+          Array [
+            Object {
+              "value": "value",
+            },
+            Object {
+              "value": "another value",
+            },
+          ]
         }
-      >
-        <Connect(PreviewNotebookCard) />
-      </div>
-    </div>
+        destroyOnUnmount={false}
+        enableReinitialize={false}
+        forceUnregisterOnUnmount={false}
+        form="createNotebook"
+        getFormState={[Function]}
+        keepDirtyOnReinitialize={false}
+        onSubmit={[MockFunction]}
+        persistentSubmitErrors={false}
+        pure={true}
+        shouldAsyncValidate={[Function]}
+        shouldError={[Function]}
+        shouldValidate={[Function]}
+        shouldWarn={[Function]}
+        submitAsSideEffect={false}
+        touchOnBlur={true}
+        touchOnChange={false}
+        updateUnregisteredFields={false}
+        validate={[Function]}
+      />
+    </WithStyles(ForwardRef(DialogContent))>
   </div>
 </WithStyles(ForwardRef(Dialog))>
 `;

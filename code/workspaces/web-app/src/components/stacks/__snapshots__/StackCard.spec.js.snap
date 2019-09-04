@@ -5,13 +5,11 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
   className="StackCard-card-1"
 >
   <WithStyles(ForwardRef(CardContent))>
-    <div>
+    <div
+      className="StackCard-cardDiv-2"
+    >
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="StackCard-imageDiv-3"
       >
         <img
           alt={
@@ -20,17 +18,12 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
               "logo": "jupyter-logo.svg",
             }
           }
-          className="StackCard-image-2"
+          className="StackCard-cardImage-7"
           src="jupyter-logo.svg"
         />
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "maxWidth": 650,
-          }
-        }
+        className="StackCard-textDiv-4"
       >
         <WithStyles(ForwardRef(Typography))
           variant="h5"
@@ -50,31 +43,8 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
         </WithStyles(Tooltip)>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "float": "right",
-          }
-        }
-      >
-        <div
-          style={
-            Object {
-              "display": "table",
-              "minHeight": 95,
-            }
-          }
-        >
-          <div
-            style={
-              Object {
-                "display": "table-cell",
-                "verticalAlign": "middle",
-              }
-            }
-          />
-        </div>
-      </div>
+        className="StackCard-actionsDiv-5"
+      />
     </div>
   </WithStyles(ForwardRef(CardContent))>
 </WithStyles(ForwardRef(Card))>
@@ -85,13 +55,11 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
   className="StackCard-card-1"
 >
   <WithStyles(ForwardRef(CardContent))>
-    <div>
+    <div
+      className="StackCard-cardDiv-2"
+    >
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="StackCard-imageDiv-3"
       >
         <img
           alt={
@@ -100,17 +68,12 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
               "logo": "zeppelin-logo.svg",
             }
           }
-          className="StackCard-image-2"
+          className="StackCard-cardImage-7"
           src="zeppelin-logo.svg"
         />
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "maxWidth": 650,
-          }
-        }
+        className="StackCard-textDiv-4"
       >
         <WithStyles(ForwardRef(Typography))
           variant="h5"
@@ -130,31 +93,8 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
         </WithStyles(Tooltip)>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "float": "right",
-          }
-        }
-      >
-        <div
-          style={
-            Object {
-              "display": "table",
-              "minHeight": 95,
-            }
-          }
-        >
-          <div
-            style={
-              Object {
-                "display": "table-cell",
-                "verticalAlign": "middle",
-              }
-            }
-          />
-        </div>
-      </div>
+        className="StackCard-actionsDiv-5"
+      />
     </div>
   </WithStyles(ForwardRef(CardContent))>
 </WithStyles(ForwardRef(Card))>
@@ -165,27 +105,20 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
   className="StackCard-card-1"
 >
   <WithStyles(ForwardRef(CardContent))>
-    <div>
+    <div
+      className="StackCard-cardDiv-2"
+    >
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="StackCard-imageDiv-3"
       >
         <WithStyles(ForwardRef(Icon))
-          className="StackCard-cardIcon-3"
+          className="StackCard-cardIcon-8"
         >
           create
         </WithStyles(ForwardRef(Icon))>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "maxWidth": 650,
-          }
-        }
+        className="StackCard-textDiv-4"
       >
         <WithStyles(ForwardRef(Typography))
           variant="h5"
@@ -205,31 +138,8 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
         </WithStyles(Tooltip)>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "float": "right",
-          }
-        }
-      >
-        <div
-          style={
-            Object {
-              "display": "table",
-              "minHeight": 95,
-            }
-          }
-        >
-          <div
-            style={
-              Object {
-                "display": "table-cell",
-                "verticalAlign": "middle",
-              }
-            }
-          />
-        </div>
-      </div>
+        className="StackCard-actionsDiv-5"
+      />
     </div>
   </WithStyles(ForwardRef(CardContent))>
 </WithStyles(ForwardRef(Card))>
@@ -240,13 +150,11 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
   className="StackCard-card-1"
 >
   <WithStyles(ForwardRef(CardContent))>
-    <div>
+    <div
+      className="StackCard-cardDiv-2"
+    >
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="StackCard-imageDiv-3"
       >
         <img
           alt={
@@ -255,17 +163,12 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
               "logo": "jupyter-logo.svg",
             }
           }
-          className="StackCard-image-2"
+          className="StackCard-cardImage-7"
           src="jupyter-logo.svg"
         />
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "maxWidth": 650,
-          }
-        }
+        className="StackCard-textDiv-4"
       >
         <WithStyles(ForwardRef(Typography))
           variant="h5"
@@ -285,64 +188,37 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
         </WithStyles(Tooltip)>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-            "float": "right",
-          }
-        }
+        className="StackCard-actionsDiv-5"
       >
         <div
-          style={
+          className="StackCard-statusDiv-6"
+        >
+          <WithStyles(StackStatus)
+            status="ready"
+          />
+        </div>
+        <StackCardActions
+          deletePermission="delete"
+          deleteStack={[Function]}
+          editPermission="edit"
+          openPermission="open"
+          openStack={[Function]}
+          stack={
             Object {
-              "display": "table",
-              "minHeight": 95,
+              "displayName": "name1",
+              "id": "100",
+              "status": "ready",
+              "type": "jupyter",
             }
           }
-        >
-          <div
-            style={
-              Object {
-                "display": "table-cell",
-                "verticalAlign": "middle",
-              }
-            }
-          >
-            <div
-              style={
-                Object {
-                  "textAlign": "center",
-                }
-              }
-            >
-              <WithStyles(StackStatus)
-                status="ready"
-              />
-            </div>
-            <StackCardActions
-              deletePermission="delete"
-              deleteStack={[Function]}
-              editPermission="edit"
-              openPermission="open"
-              openStack={[Function]}
-              stack={
-                Object {
-                  "displayName": "name1",
-                  "id": "100",
-                  "status": "ready",
-                  "type": "jupyter",
-                }
-              }
-              userPermissions={
-                Array [
-                  "open",
-                  "delete",
-                  "edit",
-                ]
-              }
-            />
-          </div>
-        </div>
+          userPermissions={
+            Array [
+              "open",
+              "delete",
+              "edit",
+            ]
+          }
+        />
       </div>
     </div>
   </WithStyles(ForwardRef(CardContent))>
