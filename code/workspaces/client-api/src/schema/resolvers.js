@@ -65,7 +65,7 @@ const resolvers = {
   },
 
   Project: {
-    projectUsers: (obj, args, ctx) => userService.getProjectUsers(obj.name, ctx.token),
+    projectUsers: (obj, args, ctx) => userService.getProjectUsers(obj.key, ctx.token),
   },
 
   ProjectUser: {
