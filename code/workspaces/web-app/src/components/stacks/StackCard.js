@@ -37,6 +37,9 @@ function styles(theme) {
       marginLeft: theme.spacing(2),
       marginRight: theme.spacing(2),
     },
+    displayName: {
+      marginTop: 0,
+    },
     actionsDiv: {
       display: 'inline-flex',
       flexDirection: 'column',
@@ -66,7 +69,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
       {generateGetImage(classes)(stack)}
     </div>
     <div className={classes.textDiv}>
-      <Typography variant="h5">{getDisplayName(stack)}</Typography>
+      <Typography variant="h5" className={classes.displayName}>{getDisplayName(stack)}</Typography>
       <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
         <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
       </Tooltip>
