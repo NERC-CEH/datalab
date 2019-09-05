@@ -2,6 +2,8 @@ import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import { getTable,
   getFullWidthRow,
+  getFullWidthTextRow,
+  getTableRow,
   getCheckbox,
   getCheckboxCell,
   getTableHead,
@@ -121,6 +123,54 @@ describe('getFullWidthRow', () => {
         getFullWidthRow(<div>row content</div>, 4),
       ),
     ).toMatchSnapshot();
+  });
+});
+
+describe('getFullWidthTextRow', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow();
+  });
+
+  it('returns a table row with correct colSpan and text wrapped in Typography', () => {
+    expect(
+      shallow(
+        getFullWidthTextRow('Text to go in row.', 4),
+      ),
+    ).toMatchSnapshot();
+  });
+});
+
+describe('getTableRow', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow();
+  });
+
+  const classes = {
+    activeSelection: 'activeSelection',
+    implicitSelection: 'implicitSelection',
+    tableCell: 'tableCell',
+  };
+
+  describe('for a given user', () => {
+    const users = [
+      { name: 'admin name', role: 'admin' },
+      { name: 'user name', role: 'user' },
+      { name: 'viewer name', role: 'viewer' },
+    ];
+
+    it('renders correctly showing users and their permissions', () => {
+      users.forEach((user, index) => {
+        expect(
+          shallow(
+            getTableRow(user, index, classes),
+          ),
+        ).toMatchSnapshot();
+      });
+    });
   });
 });
 

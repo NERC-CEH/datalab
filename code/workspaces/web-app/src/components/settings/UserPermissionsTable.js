@@ -106,10 +106,8 @@ export function getTableHead(headings, classes) {
 
 export function getTableBody(users, classes, numCols) {
   if (users.error || !users.value) {
-    return getFullWidthRow(
-      <Typography variant="body1">
-        Error fetching data. Please try refreshing the page.
-      </Typography>,
+    return getFullWidthTextRow(
+      'Error fetching data. Please try refreshing the page.',
       numCols,
     );
   }
@@ -119,34 +117,10 @@ export function getTableBody(users, classes, numCols) {
   }
 
   if (users.value.length === 0) {
-    return getFullWidthRow(
-      <Typography variant="body1">
-        No users have project permissions.
-      </Typography>,
-      numCols,
-    );
+    return getFullWidthTextRow('No users have project permissions.', numCols);
   }
 
-  return (
-    users.value.map((user, index) => {
-      const rowKey = `row-${index}`;
-      return (
-        <TableRow key={rowKey}>
-          <TableCell className={classes.tableCell} key={`${rowKey}-USERNAME`}>
-            <Typography variant="body1">{user.name}</Typography>
-          </TableCell>
-          {checkBoxColumnOrder.map(
-            permission => getCheckboxCell(
-              user.role,
-              permission,
-              classes,
-              `${rowKey}-${permission.name}`,
-            ),
-          )}
-        </TableRow>
-      );
-    })
-  );
+  return users.value.map((user, index) => getTableRow(user, index, classes));
 }
 
 export function getFullWidthRow(content, numCols) {
@@ -155,6 +129,32 @@ export function getFullWidthRow(content, numCols) {
       <TableCell colSpan={numCols} align="center">
         {content}
       </TableCell>
+    </TableRow>
+  );
+}
+
+export function getFullWidthTextRow(text, numCols) {
+  return getFullWidthRow(
+    <Typography variant="body1">{text}</Typography>,
+    numCols,
+  );
+}
+
+export function getTableRow(user, index, classes) {
+  const rowKey = `row-${index}`;
+  return (
+    <TableRow key={rowKey}>
+      <TableCell className={classes.tableCell} key={`${rowKey}-USERNAME`}>
+        <Typography variant="body1">{user.name}</Typography>
+      </TableCell>
+      {checkBoxColumnOrder.map(
+        permission => getCheckboxCell(
+          user.role,
+          permission,
+          classes,
+          `${rowKey}-${permission.name}`,
+        ),
+      )}
     </TableRow>
   );
 }

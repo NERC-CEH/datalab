@@ -23,6 +23,31 @@ exports[`getFullWidthRow returns a table row with correct colSpan and content 1`
 </ForwardRef(TableRow)>
 `;
 
+exports[`getFullWidthTextRow returns a table row with correct colSpan and text wrapped in Typography 1`] = `
+<ForwardRef(TableRow)
+  classes={
+    Object {
+      "footer": "MuiTableRow-footer",
+      "head": "MuiTableRow-head",
+      "hover": "MuiTableRow-hover",
+      "root": "MuiTableRow-root",
+      "selected": "Mui-selected",
+    }
+  }
+>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    colSpan={4}
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      Text to go in row.
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(TableCell))>
+</ForwardRef(TableRow)>
+`;
+
 exports[`getTable when fetching data renders progress indicator 1`] = `
 <ForwardRef(Table)
   classes={
@@ -516,6 +541,183 @@ exports[`getTableHead renders correct header bar based on column headings 1`] = 
     >
       check box col
     </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(TableCell))>
+</ForwardRef(TableRow)>
+`;
+
+exports[`getTableRow for a given user renders correctly showing users and their permissions 1`] = `
+<ForwardRef(TableRow)
+  classes={
+    Object {
+      "footer": "MuiTableRow-footer",
+      "head": "MuiTableRow-head",
+      "hover": "MuiTableRow-hover",
+      "root": "MuiTableRow-root",
+      "selected": "Mui-selected",
+    }
+  }
+>
+  <WithStyles(ForwardRef(TableCell))
+    className="tableCell"
+    key="row-0-USERNAME"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      admin name
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-0-ADMIN"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={true}
+      className="activeSelection"
+      color="default"
+    />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-0-USER"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={true}
+      className="implicitSelection"
+      color="default"
+    />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-0-VIEWER"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={true}
+      className="implicitSelection"
+      color="default"
+    />
+  </WithStyles(ForwardRef(TableCell))>
+</ForwardRef(TableRow)>
+`;
+
+exports[`getTableRow for a given user renders correctly showing users and their permissions 2`] = `
+<ForwardRef(TableRow)
+  classes={
+    Object {
+      "footer": "MuiTableRow-footer",
+      "head": "MuiTableRow-head",
+      "hover": "MuiTableRow-hover",
+      "root": "MuiTableRow-root",
+      "selected": "Mui-selected",
+    }
+  }
+>
+  <WithStyles(ForwardRef(TableCell))
+    className="tableCell"
+    key="row-1-USERNAME"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      user name
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-1-ADMIN"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={false}
+    />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-1-USER"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={true}
+      className="activeSelection"
+      color="default"
+    />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-1-VIEWER"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={true}
+      className="implicitSelection"
+      color="default"
+    />
+  </WithStyles(ForwardRef(TableCell))>
+</ForwardRef(TableRow)>
+`;
+
+exports[`getTableRow for a given user renders correctly showing users and their permissions 3`] = `
+<ForwardRef(TableRow)
+  classes={
+    Object {
+      "footer": "MuiTableRow-footer",
+      "head": "MuiTableRow-head",
+      "hover": "MuiTableRow-hover",
+      "root": "MuiTableRow-root",
+      "selected": "Mui-selected",
+    }
+  }
+>
+  <WithStyles(ForwardRef(TableCell))
+    className="tableCell"
+    key="row-2-USERNAME"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      viewer name
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-2-ADMIN"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={false}
+    />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-2-USER"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={false}
+    />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    key="row-2-VIEWER"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(Checkbox))
+      checked={true}
+      className="activeSelection"
+      color="default"
+    />
   </WithStyles(ForwardRef(TableCell))>
 </ForwardRef(TableRow)>
 `;
