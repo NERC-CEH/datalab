@@ -1,0 +1,9 @@
+---
+- name: Install Prometheus Operator Helm Chart
+  hosts: k8s-master
+
+  roles:
+    - role: prometheus
+
+  environment:
+    HELM_HOME: "/home/{{ deploy_user }}/helm"
