@@ -61,6 +61,18 @@ const config = convict({
     default: false,
     env: 'AUTHORISATION_SERVICE_STUB',
   },
+  authorisationAudience: {
+    doc: 'Expected audience for the authorisation service',
+    format: 'url',
+    default: 'https://api.datalabs.nerc.ac.uk/',
+    env: 'AUTHORISATION_AUDIENCE',
+  },
+  authorisationIssuer: {
+    doc: 'Issuer for the authorisation service to manage',
+    format: 'url',
+    default: 'https://authorisation.datalabs.nerc.ac.uk/',
+    env: 'AUTHORISATION_ISSUER',
+  },
   databaseHost: {
     doc: 'The database hostname',
     format: 'String',

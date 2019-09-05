@@ -43,6 +43,18 @@ const config = convict({
     default: 'authzIdentifier',
     env: 'AUTHORISATION_API_IDENTIFIER',
   },
+  authorisationAudience: {
+    doc: 'Audience for authorisation',
+    format: 'String',
+    default: 'https://api.datalabs.nerc.ac.uk/',
+    env: 'AUTHORISATION_AUDIENCE',
+  },
+  authorisationIssuer: {
+    doc: 'Issue for Authorisation',
+    format: 'String',
+    default: 'https://authorisation.datalabs.nerc.ac.uk/',
+    env: 'AUTHORISATION_ISSUER',
+  },
   permissionAttributes: {
     doc: 'The path to yaml file containing permissions',
     format: 'String',
@@ -66,6 +78,12 @@ const config = convict({
     format: 'String',
     default: 'mjbr.eu.auth0.com',
     env: 'AUTH_ZERO_DOMAIN',
+  },
+  authZeroAudience: {
+    doc: 'Audience for authorisation',
+    format: 'String',
+    default: 'https://datalab-api.datalabs.nerc.ac.uk/',
+    env: 'AUTH_ZERO_AUDIENCE',
   },
   databaseHost: {
     doc: 'The database hostname',
