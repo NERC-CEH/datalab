@@ -1,20 +1,19 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Segment from '../components/app/Segment';
+import Typography from '@material-ui/core/Typography';
 import { extendSubdomain } from '../core/getDomainInfo';
+import Page from './Page';
 
 const DaskPage = () => (
-  <Segment>
-    <Typography gutterBottom variant="h4">Dask</Typography>
-    <p>Dask is a flexible parallel computing library for analytic computing.</p>
+  <Page title="Dask">
+    <Typography variant="body1">Dask is a flexible parallel computing library for analytic computing.</Typography>
     <Button
       color="primary"
       onClick={() => window.open(extendSubdomain('dask'))}
     >
       Dask Status
     </Button>
-  </Segment>
+  </Page>
 );
 
 export default DaskPage;

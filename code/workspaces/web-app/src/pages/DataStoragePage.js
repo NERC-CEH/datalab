@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import Segment from '../components/app/Segment';
 import DataStorageContainer from '../containers/dataStorage/DataStorageContainer';
+import Page from './Page';
 
 const DataStoragePage = ({ userPermissions }) => (
-  <Segment>
-    <Typography gutterBottom variant="h4">Current Storage Volumes</Typography>
+  <Page title="Storage">
     <DataStorageContainer userPermissions={userPermissions} />
-  </Segment>
+  </Page>
 );
 
 DataStorageContainer.propTypes = {
