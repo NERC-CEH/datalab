@@ -14,7 +14,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
           "logo": "jupyter-logo.svg",
         }
       }
-      className="StackCard-cardImage-6"
+      className="StackCard-cardImage-7"
       src="jupyter-logo.svg"
     />
   </div>
@@ -22,6 +22,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
     className="StackCard-textDiv-3"
   >
     <WithStyles(ForwardRef(Typography))
+      className="StackCard-displayName-4"
       variant="h5"
     >
       name1
@@ -39,7 +40,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-4"
+    className="StackCard-actionsDiv-5"
   />
 </div>
 `;
@@ -58,7 +59,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
           "logo": "zeppelin-logo.svg",
         }
       }
-      className="StackCard-cardImage-6"
+      className="StackCard-cardImage-7"
       src="zeppelin-logo.svg"
     />
   </div>
@@ -66,6 +67,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     className="StackCard-textDiv-3"
   >
     <WithStyles(ForwardRef(Typography))
+      className="StackCard-displayName-4"
       variant="h5"
     >
       name1
@@ -83,7 +85,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-4"
+    className="StackCard-actionsDiv-5"
   />
 </div>
 `;
@@ -96,7 +98,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
     className="StackCard-imageDiv-2"
   >
     <WithStyles(ForwardRef(Icon))
-      className="StackCard-cardIcon-7"
+      className="StackCard-cardIcon-8"
     >
       create
     </WithStyles(ForwardRef(Icon))>
@@ -105,6 +107,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
     className="StackCard-textDiv-3"
   >
     <WithStyles(ForwardRef(Typography))
+      className="StackCard-displayName-4"
       variant="h5"
     >
       Display Name
@@ -122,7 +125,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-4"
+    className="StackCard-actionsDiv-5"
   />
 </div>
 `;
@@ -141,7 +144,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
           "logo": "jupyter-logo.svg",
         }
       }
-      className="StackCard-cardImage-6"
+      className="StackCard-cardImage-7"
       src="jupyter-logo.svg"
     />
   </div>
@@ -149,6 +152,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     className="StackCard-textDiv-3"
   >
     <WithStyles(ForwardRef(Typography))
+      className="StackCard-displayName-4"
       variant="h5"
     >
       name1
@@ -166,10 +170,10 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-4"
+    className="StackCard-actionsDiv-5"
   >
     <div
-      className="StackCard-statusDiv-5"
+      className="StackCard-statusDiv-6"
     >
       <WithStyles(StackStatus)
         status="ready"
