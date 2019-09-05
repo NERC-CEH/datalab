@@ -7,9 +7,11 @@ import theme from './theme';
 import Router from './router';
 import { initialiseAuth } from './auth/auth';
 import getAuthConfig from './auth/authConfig';
+import { initialiseVersion } from './version';
 
 async function createApplication() {
   const store = configureStore();
+  await initialiseVersion();
   const authConfig = await getAuthConfig();
   initialiseAuth(authConfig);
 

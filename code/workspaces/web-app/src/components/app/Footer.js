@@ -2,7 +2,7 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { version } from '../../version';
+import { getVersion } from '../../version';
 
 const styles = theme => ({
   divider: {
@@ -17,7 +17,7 @@ const Footer = ({ classes }) => (
   <div>
     <Divider className={classes.divider} />
     <Typography variant='body2' className={classes.versionText}>
-      {`Version: ${version}`}
+      {`Version: ${getVersion()}`}
     </Typography>
   </div>
 );

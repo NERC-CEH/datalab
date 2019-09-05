@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { version } from '../../version';
+import { getVersion } from '../../version';
 import logo from '../../assets/images/datalabs-mono.png';
 
 const copyrightString = '© Copyright NERC 2017 - 2019';
@@ -25,7 +25,7 @@ const Footer = ({ classes, invert }) => (
   <div className={invert ? classes.invertFooter : classes.footer} >
     <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
     <Typography variant="caption" gutterBottom>{copyrightString}</Typography>
-    <Typography variant="body2">{`Version: ${version}`}</Typography>
+    <Typography variant="body2">{`Version: ${getVersion()}`}</Typography>
   </div>
 );
 
