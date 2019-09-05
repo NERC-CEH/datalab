@@ -1,13 +1,12 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import Segment from '../components/app/Segment';
+import Page from './Page';
 
 const NotFoundPage = () => (
-  <Segment>
-    <Typography gutterBottom variant="h4">404 Page Not Found</Typography>
-    <p><Link to="/">Go to homepage</Link></p>
-  </Segment>
+  <Page title="404 – Page Not Found">
+    <Typography variant="body1"><Link to="/">Go to homepage</Link></Typography>
+  </Page>
 );
 
 export default NotFoundPage;

@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import Segment from '../components/app/Segment';
 import SiteContainer from '../containers/sites/SitesContainer';
+import Page from './Page';
 
 const PublishingPage = ({ userPermissions }) => (
-  <Segment>
-    <Typography gutterBottom variant="h4">Published Sites</Typography>
+  <Page title="Sites">
     <SiteContainer userPermissions={userPermissions} />
-  </Segment>
+  </Page>
 );
 
 PublishingPage.propTypes = {

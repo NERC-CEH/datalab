@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PublishingPage renders correct snapshot 1`] = `
-<WithStyles(Segment)>
-  <WithStyles(ForwardRef(Typography))
-    gutterBottom={true}
-    variant="h4"
-  >
-    Published Sites
-  </WithStyles(ForwardRef(Typography))>
+<WithStyles(Page)
+  title="Sites"
+>
   <SitesContainer
     userPermissions={
       Array [
@@ -15,5 +11,5 @@ exports[`PublishingPage renders correct snapshot 1`] = `
       ]
     }
   />
-</WithStyles(Segment)>
+</WithStyles(Page)>
 `;

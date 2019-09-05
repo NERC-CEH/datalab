@@ -1,14 +1,12 @@
 import React from 'react';
 import ProptTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import Segment from '../components/app/Segment';
 import NotebooksContainer from '../containers/notebooks/NotebooksContainer';
+import Page from './Page';
 
 const NotebooksPage = ({ userPermissions }) => (
-  <Segment>
-    <Typography gutterBottom variant="h4">Notebooks</Typography>
+  <Page title="Notebooks">
     <NotebooksContainer userPermissions={userPermissions}/>
-  </Segment>
+  </Page>
 );
 
 NotebooksPage.propTypes = {

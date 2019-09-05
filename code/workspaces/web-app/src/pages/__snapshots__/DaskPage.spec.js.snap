@@ -1,21 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DaskPage renders correct snapshot 1`] = `
-<WithStyles(Segment)>
+<WithStyles(Page)
+  title="Dask"
+>
   <WithStyles(ForwardRef(Typography))
-    gutterBottom={true}
-    variant="h4"
+    variant="body1"
   >
-    Dask
-  </WithStyles(ForwardRef(Typography))>
-  <p>
     Dask is a flexible parallel computing library for analytic computing.
-  </p>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(ForwardRef(Button))
     color="primary"
     onClick={[Function]}
   >
     Dask Status
   </WithStyles(ForwardRef(Button))>
-</WithStyles(Segment)>
+</WithStyles(Page)>
 `;

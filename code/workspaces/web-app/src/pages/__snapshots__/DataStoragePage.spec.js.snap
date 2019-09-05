@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataStoragePage renders correct snapshot 1`] = `
-<WithStyles(Segment)>
-  <WithStyles(ForwardRef(Typography))
-    gutterBottom={true}
-    variant="h4"
-  >
-    Current Storage Volumes
-  </WithStyles(ForwardRef(Typography))>
+<WithStyles(Page)
+  title="Storage"
+>
   <Connect(DataStorageContainer)
     userPermissions={
       Array [
@@ -15,5 +11,5 @@ exports[`DataStoragePage renders correct snapshot 1`] = `
       ]
     }
   />
-</WithStyles(Segment)>
+</WithStyles(Page)>
 `;
