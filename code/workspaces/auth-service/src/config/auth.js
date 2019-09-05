@@ -7,4 +7,4 @@ export const algorithm = 'RS256';
 export const audience = config.get('authorisationAudience');
 export const expiresIn = '2m';
 export const issuer = config.get('authorisationIssuer');
-export const keyid = config.get('authorisationKeyId');
+export const keyid = 'datalabs-authorisation';

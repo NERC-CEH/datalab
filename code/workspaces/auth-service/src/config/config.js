@@ -55,12 +55,6 @@ const config = convict({
     default: 'https://authorisation.datalabs.nerc.ac.uk/',
     env: 'AUTHORISATION_ISSUER',
   },
-  authorisationKeyId: {
-    doc: 'Key Auth0 client id for the Datalabs Authorisation API',
-    format: 'String',
-    default: 'datalabs-authorisation',
-    env: 'AUTHORISATION_KEY_ID',
-  },
   permissionAttributes: {
     doc: 'The path to yaml file containing permissions',
     format: 'String',
