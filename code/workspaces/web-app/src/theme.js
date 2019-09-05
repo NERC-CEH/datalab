@@ -1,7 +1,8 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { blueGrey, teal, red } from '@material-ui/core/colors';
+import { blueGrey, red } from '@material-ui/core/colors';
 
-const primary = teal;
+const primary = { main: 'rgba(36, 166, 154, 1.0)' };
+const primaryTransparent = 'rgba(36, 166, 154, 0.4)';
 const secondary = blueGrey;
 const dangerColor = red[800];
 const dangerBackgroundColor = red[100];
@@ -25,6 +26,7 @@ const navBarHeight = 8 * spacing;
 const theme = createMuiTheme({
   palette: {
     primary,
+    primaryTransparent,
     secondary,
     dangerColor,
     dangerBackgroundColor,
@@ -52,6 +54,9 @@ const theme = createMuiTheme({
       textTransform: 'uppercase',
       fontSize: '1em',
       letterSpacing: '0.05em',
+    },
+    body1: {
+      color: text,
     },
     body2: {
       color: 'hsl(0, 0%, 40%)',

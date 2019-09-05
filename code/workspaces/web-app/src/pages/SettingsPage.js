@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Page from './Page';
+import UserPermissionsTable from '../components/settings/UserPermissionsTable';
 
-const styles = theme => ({
-  textInput: {
-    margin: `${theme.spacing(2)}px 0`,
-  },
-});
-
-const SettingsPage = ({ classes, userPermissions }) => (
+const SettingsPage = ({ userPermissions }) => (
   <Page title="Settings">
+    <Typography variant="h5">User Permissions</Typography>
+    <UserPermissionsTable />
   </Page>
 );
 
@@ -18,4 +15,4 @@ SettingsPage.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default withStyles(styles)(SettingsPage);
+export default SettingsPage;

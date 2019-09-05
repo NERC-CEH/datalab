@@ -1,7 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SettingsPage renders to match snapshot 1`] = `
-<WithStyles(Page)
+<Page
+  classes={
+    Object {
+      "contentArea": "Page-contentArea-2",
+      "pageTemplate": "Page-pageTemplate-1",
+    }
+  }
   title="Settings"
-/>
+>
+  <WithStyles(ForwardRef(Typography))
+    variant="h5"
+  >
+    User Permissions
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(UserPermissionsTable) />
+</Page>
 `;
