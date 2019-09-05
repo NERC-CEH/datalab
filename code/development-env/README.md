@@ -193,3 +193,48 @@ You should eventually see a message saying `You can now view datalab-app in the 
 The [Insomnia Rest client](https://insomnia.rest/) is recommended for testing APIs
 during development. Detailed instructions for how to do this can be found
 [here](./insomnia/README.md) including a definition file that can be imported.
+
+## Git Hooks
+
+Git hooks have been created to lint all staged files with the `.js` extension
+and formatting of the git commit message on execution of the `git commit`
+command, these hooks will block the commit if the linting fails or the commit
+message is not correctly formatted. These hooks are defined in the root package
+json for the Yarn Workspaces (`code\package.json`). Running `yarn` in this
+directory will install this functionality.
+
+To commit without validation via the git hooks use the following command:
+
+```sh
+git commit --no-verify
+```
+
+To permanently disable the git hooks remove the `"pre-commit": "lint-staged"`
+line from the Yarn Workspace root `package.json`.
+
+## Code Climate
+
+[Code climate](https://codeclimate.com/github/NERC-CEH/datalab) is used to track
+the code quality in the data labs code base. Rule sets are applied for:
+
+* ~~ESLint~~
+* CSS
+* Markdown
+* Code Duplication
+
+### Run Code Climate locally
+
+When resolving issues it can be useful to run code climate locally rather than
+have to commit and push a branch.
+[Code climate CLI](https://github.com/codeclimate/codeclimate) is shipped as a
+docker container so provided docker is installed it can be run with
+
+```bash
+docker run \
+  --interactive --tty --rm \
+  --env CODECLIMATE_CODE="$PWD" \
+  --volume "$PWD":/code \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume /tmp/cc:/tmp/cc \
+  codeclimate/codeclimate analyze
+```
