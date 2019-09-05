@@ -8,9 +8,9 @@ Accepted
 
 ## Context
 
-We need to decide between https://github.com/coreos/kube-prometheus
-and https://github.com/helm/charts/tree/master/stable/prometheus-operator for use in
-deploying the prometheus monitoring solution for DataLabs.
+We need to decide between [Kube Prometheus](https://github.com/coreos/kube-prometheus)
+and [Prometheus Operator](https://github.com/helm/charts/tree/master/stable/prometheus-operator)
+for use in deploying the prometheus monitoring solution for DataLabs.
 
 ## Decision
 
