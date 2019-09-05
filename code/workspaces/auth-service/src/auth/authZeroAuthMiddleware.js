@@ -1,5 +1,6 @@
 import jwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
+import config from '../config/config';
 
 const secretStrategy = jwksRsa.expressJwtSecret({
   cache: true,
@@ -10,7 +11,7 @@ const secretStrategy = jwksRsa.expressJwtSecret({
 
 const baseConfig = {
   secret: secretStrategy,
-  audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
+  audience: config.get('authZeroAudience'),
   issuer: 'https://mjbr.eu.auth0.com/',
   algorithms: ['RS256'],
 };

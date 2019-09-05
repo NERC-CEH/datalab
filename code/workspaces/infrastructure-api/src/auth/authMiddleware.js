@@ -7,8 +7,8 @@ import config from '../config/config';
 const JWKS_URL = `${config.get('authorisationService')}/jwks`;
 
 const baseConfig = {
-  audience: 'https://api.datalabs.nerc.ac.uk/',
-  issuer: 'https://authorisation.datalabs.nerc.ac.uk/',
+  audience: config.get('authorisationAudience'),
+  issuer: config.get('authorisationIssuer'),
 };
 
 function getAuthImplementation() {

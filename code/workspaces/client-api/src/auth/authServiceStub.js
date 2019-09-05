@@ -5,10 +5,11 @@
  * verifiable token with admin permissions for the current user.
  */
 import jwt from 'jsonwebtoken';
+import config from '../config';
 
 const secret = 'secret';
-const audience = 'https://api.datalabs.nerc.ac.uk/';
-const issuer = 'https://authorisation.datalabs.nerc.ac.uk/';
+const audience = config.get('authorisationAudience');
+const issuer = config.get('authorisationIssuer');
 const keyid = 'datalabs-authorisation';
 
 function retrievePermissionsToken(authorisationToken) {
