@@ -2,12 +2,7 @@
 
 exports[`StackCardActions creates correct snapshot 1`] = `
 <WithStyles(ForwardRef(CardActions))
-  style={
-    Object {
-      "paddingLeft": 8,
-      "paddingRight": 8,
-    }
-  }
+  className="StackCardActions-cardActions-1"
 >
   <ComponentWrapper
     permission="open"
@@ -20,14 +15,10 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     }
   >
     <WithStyles(ForwardRef(Button))
+      className="StackCardActions-button-2"
       color="primary"
       disabled={false}
       onClick={[Function]}
-      style={
-        Object {
-          "marginRight": 4,
-        }
-      }
       variant="contained"
     >
       Open
@@ -44,15 +35,10 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     }
   >
     <WithStyles(ForwardRef(Button))
+      className="StackCardActions-button-2"
       color="secondary"
       disabled={false}
       onClick={[Function]}
-      style={
-        Object {
-          "marginLeft": 4,
-          "marginRight": 4,
-        }
-      }
       variant="contained"
     >
       Delete
@@ -69,14 +55,10 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     }
   >
     <WithStyles(ForwardRef(Button))
+      className="StackCardActions-button-2"
       color="secondary"
       disabled={false}
       onClick={[Function]}
-      style={
-        Object {
-          "marginLeft": 4,
-        }
-      }
       variant="contained"
     >
       Edit

@@ -60,7 +60,7 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
     }
   }
 >
-  <StackCards
+  <WithStyles(StackCards)
     createPermission="project:storage:create"
     deletePermission="project:storage:delete"
     deleteStack={[Function]}

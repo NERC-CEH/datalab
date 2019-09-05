@@ -1,8 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow } from '@material-ui/core/test-utils';
 import CreateNotebookDialog from './CreateNotebookDialog';
 
 describe('Notebook dialog', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow({ dive: true });
+  });
+
   function shallowRender(props) {
     return shallow(<CreateNotebookDialog {...props} />);
   }

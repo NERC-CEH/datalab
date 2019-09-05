@@ -6,7 +6,7 @@ exports[`NotebooksPage renders correct snapshot 1`] = `
     gutterBottom={true}
     variant="h4"
   >
-    Current Notebooks
+    Notebooks
   </WithStyles(ForwardRef(Typography))>
   <NotebooksContainer
     userPermissions={

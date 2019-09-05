@@ -9,6 +9,11 @@ exports[`New Stack Button creates correct snapshot 1`] = `
     className="NewStackButton-buttonContainer-2"
   >
     <WithStyles(Tooltip)
+      style={
+        Object {
+          "float": "right",
+        }
+      }
       title="Create Stack"
     >
       <WithStyles(ForwardRef(Fab))

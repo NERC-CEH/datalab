@@ -1,11 +1,8 @@
-import { capitalize } from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { statusTypes } from 'common';
 import StackCardActions from './StackCardActions';
@@ -15,63 +12,80 @@ import StackStatus from './StackStatus';
 const { READY } = statusTypes;
 
 function styles(theme) {
-  const flexProps = {
-    display: 'flex',
-    justifyContent: 'space-between',
-  };
-
   return {
-    card: {
-      ...flexProps,
+    cardDiv: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      borderTop: `1px solid ${theme.palette.divider}`,
+      padding: theme.spacing(1),
+    },
+    imageDiv: {
+      display: 'inline-flex',
       flexDirection: 'column',
-      height: '100%',
-      minHeight: 230,
+      justifyContent: 'center',
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
-    cardHeader: {
-      ...flexProps,
+    textDiv: {
+      display: 'inline-flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      flexGrow: 1,
+      minWidth: 200,
+      overflow: 'hidden',
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
     },
-    cardMedia: {
+    actionsDiv: {
+      display: 'inline-flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+    statusDiv: {
+      display: 'block',
+      textAlign: 'center',
+      minWidth: 165,
+    },
+    cardImage: {
       height: 70,
-      width: 120,
-      marginLeft: 5,
-      backgroundSize: 'contain',
-      backgroundPositionY: 'top',
-      backgroundPositionX: 'right',
+      width: 70,
+      border: `1px solid ${theme.palette.divider}`,
+      borderRadius: theme.spacing(1),
     },
     cardIcon: {
-      float: 'right',
+      float: 'left',
       fontSize: theme.typography.h2.fontSize,
     },
   };
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission }) => <Card className={classes.card}>
-    <CardContent>
-      <div className={classes.cardHeader}>
-        <div>
-          <Typography variant="h5">{getDisplayName(stack)}</Typography>
-          <div style={{ display: 'flex', direction: 'row' }}>
-            <Typography style={{ marginRight: 6 }} variant="subtitle1">{getStackType(stack, typeName)}</Typography>
-            {typeName !== 'Data Store' && stack.status && <StackStatus status={stack.status}/>}
-          </div>
-        </div>
-        {generateGetImage(classes)(stack)}
-      </div>
-      <Typography component="p">{getDescription(stack, typeName)}</Typography>
-    </CardContent>
-    {stack.status === READY
-      && <StackCardActions
-        stack={stack}
-        openStack={openStack}
-        deleteStack={deleteStack}
-        editStack={editStack}
-        userPermissions={userPermissions}
-        openPermission={openPermission}
-        deletePermission={deletePermission}
-        editPermission={editPermission}
-      />}
-  </Card>;
+  openPermission, deletePermission, editPermission }) => <div className={classes.cardDiv}>
+    <div className={classes.imageDiv}>
+      {generateGetImage(classes)(stack)}
+    </div>
+    <div className={classes.textDiv}>
+      <Typography variant="h5">{getDisplayName(stack)}</Typography>
+      <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
+        <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
+      </Tooltip>
+    </div>
+    <div className={classes.actionsDiv}>
+      {typeName !== 'Data Store' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
+      {stack.status === READY
+        && <StackCardActions
+          stack={stack}
+          openStack={openStack}
+          deleteStack={deleteStack}
+          editStack={editStack}
+          userPermissions={userPermissions}
+          openPermission={openPermission}
+          deletePermission={deletePermission}
+          editPermission={editPermission}
+        />}
+    </div>
+  </div>;
 
 StackCard.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -97,12 +111,12 @@ function getDisplayName(stack) {
 
 function generateGetImage(classes) {
   function getImage(stack) {
-    const stackDesciption = stack.type && stackDescriptions[stack.type];
-    const logoImage = stackDesciption && stackDesciption.logo;
-    const iconName = stackDesciption && stackDesciption.icon;
+    const stackDescription = stack.type && stackDescriptions[stack.type];
+    const logoImage = stackDescription && stackDescription.logo;
+    const iconName = stackDescription && stackDescription.icon;
 
     if (logoImage) {
-      return <CardMedia className={classes.cardMedia} image={logoImage} />;
+      return <img className={classes.cardImage} src={logoImage} alt={stackDescription} />;
     }
 
     return <Icon className={classes.cardIcon} children={iconName || 'create'} />;
@@ -118,10 +132,6 @@ function getDescription(stack, typeName) {
     return stackDescriptions[stack.type].description;
   }
   return `A description of the ${typeName} purpose`;
-}
-
-function getStackType(stack, typeName) {
-  return stack.type ? capitalize(stack.type) : `${capitalize(typeName)} type`;
 }
 
 export default withStyles(styles)(StackCard);

@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import { withStyles } from '@material-ui/core/styles';
 import CreateNotebookForm from '../notebooks/CreateNotebookForm';
-import PreviewNotebookCard from '../notebooks/PreviewNotebookCard';
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
+const styles = theme => ({
+  dialogDiv: {
+    margin: theme.spacing(2),
+  },
+});
+
+const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes }) => (
   <Dialog open={true} maxWidth="md">
-    <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
-      <div>
+    <div className={classes.dialogDiv}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <CreateNotebookForm
@@ -17,13 +22,6 @@ const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions })
             cancel={onCancel}
             dataStorageOptions={dataStorageOptions} />
         </DialogContent>
-      </div>
-      <div style={{ width: 320 }}>
-        <DialogTitle>Notebook Preview</DialogTitle>
-        <div style={{ width: '90%', margin: '0 auto' }}>
-          <PreviewNotebookCard />
-        </div>
-      </div>
     </div>
   </Dialog>
 );
@@ -35,4 +33,4 @@ CreateNotebookDialog.propTypes = {
   dataStorageOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default CreateNotebookDialog;
+export default withStyles(styles)(CreateNotebookDialog);

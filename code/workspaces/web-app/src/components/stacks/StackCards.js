@@ -1,36 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
-const breakPoints = { xs: 12, sm: 12, md: 6, lg: 4 };
+const breakPoints = { xs: 12 };
+
+const styles = () => ({
+  stackDiv: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+});
 
 const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openCreationForm, userPermissions,
-  createPermission, openPermission, deletePermission, editPermission }) => (
-  <Grid container spacing={2}>
+  createPermission, openPermission, deletePermission, editPermission, classes }) => (
+  <div className={classes.stackDiv}>
     {stacks.map((stack, index) => (
-      <Grid key={index} item {...breakPoints}>
-        <StackCard
-          stack={stack}
-          typeName={typeName}
-          openStack={openStack}
-          deleteStack={deleteStack}
-          editStack={editStack}
-          userPermissions={userPermissions}
-          openPermission={openPermission}
-          deletePermission={deletePermission}
-          editPermission={editPermission}
-        />
-      </Grid>
+      <StackCard
+        stack={stack}
+        typeName={typeName}
+        openStack={openStack}
+        deleteStack={deleteStack}
+        editStack={editStack}
+        userPermissions={userPermissions}
+        openPermission={openPermission}
+        deletePermission={deletePermission}
+        editPermission={editPermission}
+      />
     ))}
     <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions} permission={createPermission}>
       <Grid item {...breakPoints}>
         <NewStackButton onClick={openCreationForm} typeName={typeName} />
       </Grid>
     </PermissionWrapper>
-  </Grid>
+  </div>
 );
 
 StackCards.propTypes = {
@@ -47,4 +53,4 @@ StackCards.propTypes = {
   editPermission: PropTypes.string.isRequired,
 };
 
-export default StackCards;
+export default withStyles(styles)(StackCards);

@@ -8,11 +8,8 @@ const { getStatusKeys, getStatusProps } = statusTypes;
 
 function styles(theme) {
   const commonStyle = {
-    maxWidth: 88,
-    paddingLeft: theme.spacing(0.5),
-    paddingRight: theme.spacing(0.5),
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.25),
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   };
 
   return {
