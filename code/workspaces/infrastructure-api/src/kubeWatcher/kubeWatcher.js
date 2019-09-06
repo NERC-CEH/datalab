@@ -13,6 +13,14 @@ const stackNames = Object.values(STACKS).map(stack => stack.name);
 const watchUrl = `/api/v1/namespaces/${kubeNamespace}/pods`;
 const selector = { labelSelector: SELECTOR_LABEL };
 
+function startKubeWatcher() {
+  try {
+    kubeWatcher();
+  } catch (error) {
+    throw new Error(`Error starting Kube Watcher -> ${error}`);
+  }
+}
+
 function kubeWatcher() {
   logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
   return new k8s.Watch(kubeConfig).watch(watchUrl, selector, eventHandler, errorHandler);
@@ -34,8 +42,13 @@ function errorHandler(error) {
   // If lose connection to k8s then get error but no attempt to reconnect. This
   // function forces exit with non-zero code so k8s will restart container as a way of
   // reconnecting.
-  logger.error(`kubeWatcher error -> ${error} -> Exiting process...`);
-  process.exit(1);
+  if (error) {
+    logger.error(`kubeWatcher error -> ${error} -> Exiting process...`);
+    return process.exit(1);
+  }
+
+  logger.warn('kubeWatcher connection lost -> Restarting watcher...');
+  return startKubeWatcher();
 }
 
 export function podAddedWatcher({ metadata: { labels } }) {
@@ -80,4 +93,4 @@ const isPodRunning = event => event.status.phase === 'Running'
   && event.metadata.deletionTimestamp === undefined
   && find(event.status.conditions, { type: 'Ready', status: 'True' });
 
-export default kubeWatcher;
+export default startKubeWatcher;
