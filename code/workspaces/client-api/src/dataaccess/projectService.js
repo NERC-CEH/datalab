@@ -4,11 +4,52 @@ import config from '../config';
 
 const authServiceUrl = `${config.get('authorisationService')}`;
 
+function listProjects() {
+  return Promise.resolve([
+    {
+      id: 123,
+      name: 'project',
+      key: 'project',
+      tags: ['alpha', 'beta', 'gamma'],
+      collaborationLink: 'https://testlab.test-datalabs.nerc.ac.uk/',
+    },
+  ]);
+}
+
 function getProjectByKey(projectKey) {
   return Promise.resolve({
     id: 123,
     name: 'project',
     key: projectKey,
+  });
+}
+
+function createProject({ projectKey, ...rest }) {
+  logger.debug(`Creating project ${projectKey}`);
+  return Promise.resolve({
+    id: 321,
+    key: projectKey,
+    ...rest,
+  });
+}
+
+function updateProject({ projectKey, ...rest }) {
+  logger.debug(`Updating project ${projectKey}`);
+  return Promise.resolve({
+    id: 321,
+    key: projectKey,
+    ...rest,
+  });
+}
+
+function deleteProject(projectKey) {
+  logger.debug(`Deleting project ${projectKey}`);
+  return Promise.resolve({
+    id: 321,
+    key: projectKey,
+    name: 'notNeeded',
+    tags: [],
+    collaborationLink: undefined,
   });
 }
 
@@ -34,4 +75,12 @@ const generateOptions = token => ({
   },
 });
 
-export default { getProjectByKey, addProjectPermission, removeProjectPermission };
+export default {
+  listProjects,
+  getProjectByKey,
+  createProject,
+  updateProject,
+  deleteProject,
+  addProjectPermission,
+  removeProjectPermission,
+};

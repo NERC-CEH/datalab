@@ -31,10 +31,17 @@ async function getUserName(userId, token) {
   }
 }
 
+function isMemberOfProject(projectKey) {
+  logger.debug(`Checking user membership for project ${projectKey}`);
+  // This is a temporary dummy value which will require another route to be
+  // added to the auth-service.
+  return true;
+}
+
 const generateOptions = token => ({
   headers: {
     authorization: token,
   },
 });
 
-export default { getAll, getProjectUsers, getUserName };
+export default { getAll, getProjectUsers, getUserName, isMemberOfProject };
