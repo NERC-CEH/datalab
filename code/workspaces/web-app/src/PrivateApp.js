@@ -1,14 +1,14 @@
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { permissionTypes } from 'common';
 import DaskPage from './pages/DaskPage';
 import DataStoragePage from './pages/DataStoragePage';
-import LandingPage from './pages/LandingPage';
 import ModalRoot from './containers/modal/ModalRoot';
 import NavigationContainer from './containers/app/NavigationContainer';
 import NotebooksPage from './pages/NotebooksPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ProjectsPage from './pages/ProjectsPage';
 import PublishingPage from './pages/PublishingPage';
 import RoutePermissions from './components/common/RoutePermissionWrapper';
 import SparkPage from './pages/SparkPage';
@@ -19,7 +19,8 @@ const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT
 const PrivateApp = ({ promisedUserPermissions }) => (
   <NavigationContainer userPermissions={promisedUserPermissions.value}>
     <Switch>
-      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/projects" component={ProjectsPage} />
+      <Redirect exact from="/" to="/projects" />
       <RoutePermissions
         exact
         path="/storage"

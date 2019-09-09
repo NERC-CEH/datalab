@@ -42,11 +42,12 @@ const TopBar = ({ classes, identity }) => (
     <div className={classes.toolBar}>
       <img className={classes.datalabsLogo} src={datalabsLogo} alt={'datalabs-logo'} />
       <div className={classes.buttons}>
+        <TopBarButton to="/projects" label="Projects" />
         {datalabLinks.map(({ displayName, href, icon }) => <TopBarButton
-            key={`nav-link-${displayName}`}
-            label={displayName}
-            onClick={() => window.open(href)}
-          />)}
+          key={`nav-link-${displayName}`}
+          label={displayName}
+          onClick={() => window.open(href)}
+        />)}
       </div>
       <div style={{ flex: 1 }} />
       <UserInfo className={classes.userInfo} identity={identity} />

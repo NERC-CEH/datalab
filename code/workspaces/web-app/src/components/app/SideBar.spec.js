@@ -28,19 +28,6 @@ describe('Sidebar', () => {
     expect(shallowRender()).toMatchSnapshot();
   });
 
-  it('renders "Dashboard" label as active when on / route', () => {
-    // Arrange
-    const linkPath = '/';
-    const iconName = 'dashboard';
-    const linkName = 'Dashboard';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
-  });
-
   it('renders "Storage" label as active when on /storage route', () => {
     // Arrange
     const linkPath = '/storage';

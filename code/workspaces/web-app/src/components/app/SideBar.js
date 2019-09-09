@@ -1,5 +1,7 @@
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { permissionTypes } from 'common';
@@ -27,15 +29,22 @@ const styles = theme => ({
     overflow: 'auto',
     padding: `0 ${theme.spacing(2)}px`,
   },
+  projectTitleLI: {
+    paddingLeft: 10,
+  },
+  projectTitleLIT: {
+    fontSize: 'larger',
+  },
 });
 
 const SideBar = ({ classes, userPermissions }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
       <SideBarGroup>
-        <SideBarButton to="/" label="Dashboard" icon="dashboard" />
+        <ListItem className={classes.projectTitleLI}>
+          <ListItemText classes={{ primary: classes.projectTitleLIT }}>My project title</ListItemText>
+        </ListItem>
       </SideBarGroup>
-
       <SideBarGroup title='Analysis'>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
           <SideBarButton to="/notebooks" label="Notebooks" icon="book" />
@@ -52,7 +61,7 @@ const SideBar = ({ classes, userPermissions }) => (
           <SideBarButton to="/publishing" label="Sites" icon="web" />
         </PermissionWrapper>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
-          <SideBarButton to="/settings" label="Settings" icon="settings"/>
+          <SideBarButton to="/settings" label="Settings" icon="settings" />
         </PermissionWrapper>
       </SideBarGroup>
     </List>

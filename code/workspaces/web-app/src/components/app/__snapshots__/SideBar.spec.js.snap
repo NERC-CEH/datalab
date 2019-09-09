@@ -8,11 +8,19 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
     className="SideBar-itemList-1"
   >
     <WithStyles(SideBarGroup)>
-      <WithStyles(SideBarButton)
-        icon="dashboard"
-        label="Dashboard"
-        to="/"
-      />
+      <WithStyles(ForwardRef(ListItem))
+        className="SideBar-projectTitleLI-3"
+      >
+        <WithStyles(ForwardRef(ListItemText))
+          classes={
+            Object {
+              "primary": "SideBar-projectTitleLIT-4",
+            }
+          }
+        >
+          My project title
+        </WithStyles(ForwardRef(ListItemText))>
+      </WithStyles(ForwardRef(ListItem))>
     </WithStyles(SideBarGroup)>
     <WithStyles(SideBarGroup)
       title="Analysis"
