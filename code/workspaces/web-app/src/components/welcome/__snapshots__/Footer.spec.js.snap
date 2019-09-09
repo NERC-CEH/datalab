@@ -18,7 +18,7 @@ exports[`Footer renders correct snapshot 1`] = `
   <WithStyles(ForwardRef(Typography))
     variant="body2"
   >
-    Version: development
+    Version: undefined
   </WithStyles(ForwardRef(Typography))>
 </div>
 `;
