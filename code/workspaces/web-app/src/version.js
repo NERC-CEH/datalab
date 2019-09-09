@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let version = 'development';
+let version;
 
 const getVersion = () => (version);
 
