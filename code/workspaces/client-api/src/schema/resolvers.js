@@ -35,6 +35,7 @@ const resolvers = {
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
     checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
+    projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, { key }, { user, token }) => permissionChecker(SETTINGS_READ, user, () => projectService.getProjectByKey(key, token)),
   },
 
@@ -51,6 +52,9 @@ const resolvers = {
     removeProjectPermission: (obj, { permission: { projectKey, userId } }, { user, token }) => (
       permissionChecker(PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
+    createProject: (obj, { project }, { token }) => projectService.createProject(project, token),
+    updateProject: (obj, { project }, { token }) => projectService.updateProject(project, token),
+    deleteProject: (obj, { project: { projectKey } }, { token }) => projectService.deleteProject(projectKey, token),
   },
 
   DataStore: {
@@ -66,6 +70,7 @@ const resolvers = {
 
   Project: {
     projectUsers: (obj, args, ctx) => userService.getProjectUsers(obj.key, ctx.token),
+    accessible: (obj, args, ctx) => userService.isMemberOfProject(obj.key, ctx.token),
   },
 
   ProjectUser: {

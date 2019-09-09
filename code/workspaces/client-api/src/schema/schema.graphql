@@ -33,6 +33,9 @@ type Query {
     # List of users within the current DataLab
     users: [User]
 
+    # List of projects where the user is a member
+    projects: [Project]
+
     # Details of a single project
     project(key: String!): Project
 }
@@ -56,6 +59,15 @@ type Mutation {
 
     # Remove user access to data store
     removeUserFromDataStore(dataStore: DataStorageUpdateRequest): DataStore
+
+    # Create a new project
+    createProject(project: ProjectCreationRequest): Project
+
+    # Update a project
+    updateProject(project: ProjectUpdateRequest): Project
+
+    # Delete a project
+    deleteProject(project: ProjectDeletionRequest): Project
 
     # Add a user permission to a project
     addProjectPermission(permission: PermissionAddRequest): Permission
@@ -190,7 +202,31 @@ type Project {
     id: ID!
     key: String!
     name: String!
-    projectUsers: [ProjectUser!]!
+    accessible: Boolean!
+    projectUsers: [ProjectUser!]
+}
+
+# Type to describe the mutation for creating a new Project
+input ProjectCreationRequest {
+    projectKey: String!
+    name: String!
+    description: String
+    tags: [String!]
+    collaborationLink: String
+}
+
+# Type to describe the mutation for updating a Project
+input ProjectUpdateRequest {
+    projectKey: String!
+    name: String!
+    description: String
+    tags: [String!]
+    collaborationLink: String
+}
+
+# Type to describe the project for deletion
+input ProjectDeletionRequest {
+    projectKey: String!
 }
 
 type Permission {
