@@ -4,6 +4,13 @@ import validator from './validationMiddleware';
 import userRolesRepository from '../dataaccess/userRolesRepository';
 import { PROJECT_ROLES } from '../models/userRoles.model';
 
+async function isMember(req, res) {
+  const { params: { projectKey }, user: { sub } } = req;
+  const exists = await userRolesRepository.userIsMember(sub, projectKey);
+
+  res.status(201).send(exists);
+}
+
 async function getUserRoles(req, res) {
   const { params: { projectKey } } = req;
   const userPermissions = await userRolesRepository.getProjectUsers(projectKey);
@@ -45,4 +52,4 @@ export const removeRoleValidator = validator([
   check('userId').isAscii(),
 ]);
 
-export default { getUserRoles, addUserRole, removeUserRole };
+export default { getUserRoles, addUserRole, removeUserRole, isMember };

@@ -31,11 +31,12 @@ async function getUserName(userId, token) {
   }
 }
 
-function isMemberOfProject(projectKey) {
+async function isMemberOfProject(projectKey, token) {
   logger.debug(`Checking user membership for project ${projectKey}`);
-  // This is a temporary dummy value which will require another route to be
-  // added to the auth-service.
-  return true;
+
+  const { data: exists } = await axios.get(`${authServiceUrl}/projects/${projectKey}/is-member`, generateOptions(token));
+
+  return exists;
 }
 
 const generateOptions = token => ({
