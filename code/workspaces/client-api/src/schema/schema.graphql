@@ -110,7 +110,7 @@ type DataStore {
     users: [String]
     accessKey: String
     stacksMountingStore: [Stack]
-    status: String
+    status: StatusType
 }
 
 # Type to represent online Stacks
@@ -119,7 +119,7 @@ type Stack {
     name: String
     displayName: String
     description: String
-    type: String
+    type: StackType
     url: String
     internalEndpoint: String
     sourcePath: String

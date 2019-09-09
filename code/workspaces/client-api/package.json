@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-server": "^2.9.3",
     "apollo-server-express": "^2.9.3",
     "auth0-js": "^9.11.2",
     "axios": "0.19.0",
@@ -16,6 +17,7 @@
     "express-jwt": "5.3.1",
     "graphql": "^14.5.4",
     "graphql-import": "^0.7.1",
+    "graphql-tools": "^4.0.5",
     "jsonwebtoken": "8.1.1",
     "jwks-rsa": "1.2.0",
     "lodash": "4.17.15",
@@ -46,6 +48,7 @@
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
     "build": "shx rm -rf dist && shx mkdir -p resources && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist --copy-files",
-    "start": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/server.js"
+    "start": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/server.js",
+    "mock": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/mockServer.js"
   }
 }
