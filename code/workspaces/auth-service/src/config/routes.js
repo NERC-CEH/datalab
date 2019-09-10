@@ -19,6 +19,7 @@ function configureRoutes(app) {
   app.get('/jwks', auth.serveJWKS);
   app.get('/users/:userId', dtMW, permissionChecker(['users:read']), getUserValidator, userManagement.getUser);
   app.get('/users', dtMW, permissionChecker(['users:list']), userManagement.getUsers);
+  app.get('/projects/:projectKey/is-member', dtMW, ew(projectController.isMember));
   app.get('/projects/:projectKey/users', dtMW, projectPermissionChecker(['permissions:read']), ew(projectController.getUserRoles));
   app.put('/projects/:projectKey/users/:userId/roles', dtMW, projectPermissionChecker(['permissions:create']), addRoleValidator, ew(projectController.addUserRole));
   app.delete('/projects/:projectKey/users/:userId/role', dtMW, projectPermissionChecker(['permissions:delete']), removeRoleValidator, ew(projectController.removeUserRole));

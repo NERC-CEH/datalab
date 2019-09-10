@@ -145,4 +145,29 @@ describe('userRolesRepository', () => {
       expect(mockFn).not.toBeCalled();
     });
   });
+
+  describe('user is member', () => {
+    beforeEach(() => {
+      mockDatabase = databaseMock(testUserRoles());
+      database.getModel = mockDatabase;
+      mockDatabase().clear();
+    });
+
+    it('should query the database with expected arguments', async () => {
+      await userRoleRepository.userIsMember('userName', 'projectKey');
+      expect(mockDatabase().invocation().query).toEqual({
+        'projectRoles.projectKey': {
+          $eq: 'projectKey',
+        },
+        userId: {
+          $eq: 'userName',
+        },
+      });
+    });
+
+    it('should return boolean value given by exists method', async () => {
+      const output = await userRoleRepository.userIsMember('userName', 'projectKey');
+      expect(output).toBe(true);
+    });
+  });
 });

@@ -61,4 +61,9 @@ async function removeRole(userId, projectKey) {
   }
 }
 
-export default { getRoles, getProjectUsers, addRole, removeRole };
+async function userIsMember(userId, projectKey) {
+  const query = { userId: { $eq: userId }, 'projectRoles.projectKey': { $eq: projectKey } };
+  return UserRoles().exists(query);
+}
+
+export default { getRoles, getProjectUsers, addRole, removeRole, userIsMember };

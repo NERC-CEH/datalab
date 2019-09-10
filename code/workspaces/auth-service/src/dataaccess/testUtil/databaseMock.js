@@ -19,6 +19,10 @@ function createDatabaseMock(items) {
       lastInvocation = { query };
       return { exec: () => Promise.resolve() };
     },
+    exists: (query) => {
+      lastInvocation = { query };
+      return Promise.resolve(items.length > 0);
+    },
     invocation: () => lastInvocation,
     query: () => lastInvocation.query,
     entity: () => lastInvocation.entity,

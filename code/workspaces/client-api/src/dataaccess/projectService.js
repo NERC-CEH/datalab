@@ -13,6 +13,21 @@ function listProjects() {
       tags: ['alpha', 'beta', 'gamma'],
       collaborationLink: 'https://testlab.test-datalabs.nerc.ac.uk/',
     },
+    {
+      id: 222,
+      name: 'project2',
+      key: 'project2',
+    },
+    {
+      id: 333,
+      name: 'project3',
+      key: 'project3',
+    },
+    {
+      id: 321,
+      name: 'another',
+      key: 'another',
+    },
   ]);
 }
 
