@@ -6,6 +6,8 @@ import projectActions from '../../actions/projectActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 
+const TYPE_NAME = 'Project';
+
 class ProjectsContainer extends Component {
   shouldComponentUpdate(nextProps) {
     const isFetching = nextProps.projects.fetching;
@@ -23,7 +25,15 @@ class ProjectsContainer extends Component {
       <PromisedContentWrapper promise={this.props.projects}>
         <StackCards
           stacks={this.props.projects.value}
+          typeName={TYPE_NAME}
+          openStack={() => {}}
+          deleteStack={() => {}}
+          openCreationForm={() => {}}
           userPermissions={this.props.userPermissions}
+          createPermission=""
+          openPermission=""
+          deletePermission=""
+          editPermission=""
         />
       </PromisedContentWrapper>
     );

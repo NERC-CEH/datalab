@@ -4,6 +4,7 @@ import React from 'react';
 import { permissionTypes } from 'common';
 import DaskPage from './pages/DaskPage';
 import DataStoragePage from './pages/DataStoragePage';
+import InfoPage from './pages/InfoPage';
 import ModalRoot from './containers/modal/ModalRoot';
 import NavigationContainer from './containers/app/NavigationContainer';
 import NotebooksPage from './pages/NotebooksPage';
@@ -27,6 +28,13 @@ const PrivateApp = ({ promisedUserPermissions }) => (
        alt={NotFoundPage} />
        />
       <Redirect exact from="/" to="/projects" />
+      <RoutePermissions
+        exact
+        path="/info"
+        component={InfoPage}
+        promisedUserPermissions={promisedUserPermissions}
+        permission={PROJECT_STORAGE_LIST}
+        alt={NotFoundPage} />
       <RoutePermissions
         exact
         path="/storage"

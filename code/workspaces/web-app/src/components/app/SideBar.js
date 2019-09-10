@@ -30,7 +30,7 @@ const styles = theme => ({
     padding: `0 ${theme.spacing(2)}px`,
   },
   projectTitleLI: {
-    paddingLeft: 10,
+    paddingLeft: 7,
   },
   projectTitleLIT: {
     fontSize: 'larger',
@@ -44,6 +44,7 @@ const SideBar = ({ classes, userPermissions }) => (
         <ListItem className={classes.projectTitleLI}>
           <ListItemText classes={{ primary: classes.projectTitleLIT }}>My project title</ListItemText>
         </ListItem>
+        <SideBarButton to="/info" label="Info" icon="info_outline" />
       </SideBarGroup>
       <SideBarGroup title='Analysis'>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>

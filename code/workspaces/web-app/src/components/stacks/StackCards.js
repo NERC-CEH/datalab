@@ -20,6 +20,7 @@ const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openC
   <div className={classes.stackDiv}>
     {stacks.map((stack, index) => (
       <StackCard
+        key={stack.id}
         stack={stack}
         typeName={typeName}
         openStack={openStack}

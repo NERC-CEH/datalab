@@ -20,6 +20,13 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
   }
 >
   <WithStyles(StackCards)
+    createPermission=""
+    deletePermission=""
+    deleteStack={[Function]}
+    editPermission=""
+    openCreationForm={[Function]}
+    openPermission=""
+    openStack={[Function]}
     stacks={
       Array [
         Object {
@@ -27,6 +34,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
         },
       ]
     }
+    typeName="Project"
     userPermissions={
       Array [
         "expectedPermission",

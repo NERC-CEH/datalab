@@ -21,6 +21,11 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
           My project title
         </WithStyles(ForwardRef(ListItemText))>
       </WithStyles(ForwardRef(ListItem))>
+      <WithStyles(SideBarButton)
+        icon="info_outline"
+        label="Info"
+        to="/info"
+      />
     </WithStyles(SideBarGroup)>
     <WithStyles(SideBarGroup)
       title="Analysis"
