@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import _ from 'lodash';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
@@ -10,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import projectSettingsActions from '../../actions/projectSettingsActions';
+import { PERMISSION_VALUES, SORTED_PERMISSIONS } from '../../constants/permissions';
 
 const styles = theme => ({
   activeSelection: {
@@ -32,29 +34,16 @@ const styles = theme => ({
   },
 });
 
-export const PERMISSIONS = {
-  ADMIN: {
-    name: 'ADMIN',
-    value: 10,
-  },
-  USER: {
-    name: 'USER',
-    value: 5,
-  },
-  VIEWER: {
-    name: 'VIEWER',
-    value: 1,
-  },
-};
-
 export const columnHeadings = [
   { heading: 'User Name', checkBoxCol: false },
-  { heading: 'Admin', checkBoxCol: true },
-  { heading: 'User', checkBoxCol: true },
-  { heading: 'Viewer', checkBoxCol: true },
-];
+].concat(
+  SORTED_PERMISSIONS.map(item => ({
+    heading: _.startCase(item.name),
+    checkBoxCol: true,
+  })),
+);
 
-const checkBoxColumnOrder = [PERMISSIONS.ADMIN, PERMISSIONS.USER, PERMISSIONS.VIEWER];
+const checkBoxColumnOrder = SORTED_PERMISSIONS;
 
 export const projectUsersSelector = ({ projectUsers }) => projectUsers;
 
@@ -176,13 +165,12 @@ export function getCheckboxCell(userRole, checkbox, classes, key) {
 }
 
 export function getCheckbox(userRole, checkbox, classes) {
-  const roleName = userRole.toUpperCase();
-  if (roleName === checkbox.name) {
+  if (userRole === checkbox.name) {
     return (
       <Checkbox className={classes.activeSelection} checked={true} color="default" />
     );
   }
-  if (PERMISSIONS[roleName].value > checkbox.value) {
+  if (PERMISSION_VALUES[userRole.toUpperCase()] > checkbox.value) {
     return (
       <Checkbox className={classes.implicitSelection} checked={true} color="default" />
     );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -8,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
+import { SORTED_PERMISSIONS } from '../../constants/permissions';
 
 const useStyles = makeStyles(theme => ({
   addUserPermission: {
@@ -35,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PERMISSIONS = ['Admin', 'User', 'Viewer'];
+const PERMISSIONS = SORTED_PERMISSIONS.map(item => _.startCase(item.name));
 
 export const getUsersFromState = ({ users }) => users;
 

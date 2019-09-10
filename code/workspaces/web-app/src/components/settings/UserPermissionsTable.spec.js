@@ -1,5 +1,6 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
+import { PERMISSIONS, PERMISSION_VALUES } from '../../constants/permissions';
 import { getTable,
   getFullWidthRow,
   getFullWidthTextRow,
@@ -8,7 +9,6 @@ import { getTable,
   getCheckboxCell,
   getTableHead,
   projectUsersSelector,
-  PERMISSIONS,
   columnHeadings } from './UserPermissionsTable';
 
 describe('projectUsersSelector', () => {
@@ -194,8 +194,8 @@ describe('when getting checkbox cells', () => {
   });
 
   describe('when user has rights equal to check box', () => {
-    const userRole = 'Admin';
-    const checkBox = PERMISSIONS.ADMIN;
+    const userRole = PERMISSIONS.ADMIN;
+    const checkBox = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
     describe('getCheckbox', () => {
       it('returns an checked active selection check box', () => {
         expect(
@@ -218,8 +218,8 @@ describe('when getting checkbox cells', () => {
   });
 
   describe('when user has rights greater than check box', () => {
-    const userRole = 'Admin';
-    const checkBox = PERMISSIONS.USER;
+    const userRole = PERMISSIONS.ADMIN;
+    const checkBox = { name: PERMISSIONS.USER, value: PERMISSION_VALUES.USER };
     describe('getCheckbox', () => {
       it('returns a check implicit selection check box', () => {
         expect(
@@ -242,8 +242,8 @@ describe('when getting checkbox cells', () => {
   });
 
   describe('when user has rights less than check box', () => {
-    const userRole = 'Viewer';
-    const checkBox = PERMISSIONS.ADMIN;
+    const userRole = PERMISSIONS.VIEWER;
+    const checkBox = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
     describe('getCheckbox', () => {
       it('returns an unchecked check box', () => {
         expect(

@@ -287,7 +287,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-0-ADMIN"
+        key="row-0-admin"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -299,7 +299,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-0-USER"
+        key="row-0-user"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -311,7 +311,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-0-VIEWER"
+        key="row-0-viewer"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -337,7 +337,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-1-ADMIN"
+        key="row-1-admin"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -347,7 +347,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-1-USER"
+        key="row-1-user"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -359,7 +359,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-1-VIEWER"
+        key="row-1-viewer"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -385,7 +385,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-2-ADMIN"
+        key="row-2-admin"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -395,7 +395,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-2-USER"
+        key="row-2-user"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -405,7 +405,7 @@ exports[`getTable when there are users renders correctly showing users and their
       <WithStyles(ForwardRef(TableCell))
         align="center"
         className="tableCell"
-        key="row-2-VIEWER"
+        key="row-2-viewer"
         padding="checkbox"
       >
         <WithStyles(ForwardRef(Checkbox))
@@ -566,7 +566,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-0-ADMIN"
+    key="row-0-admin"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -578,7 +578,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-0-USER"
+    key="row-0-user"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -590,7 +590,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-0-VIEWER"
+    key="row-0-viewer"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -627,7 +627,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-1-ADMIN"
+    key="row-1-admin"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -637,7 +637,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-1-USER"
+    key="row-1-user"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -649,7 +649,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-1-VIEWER"
+    key="row-1-viewer"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -686,7 +686,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-2-ADMIN"
+    key="row-2-admin"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -696,7 +696,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-2-USER"
+    key="row-2-user"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
@@ -706,7 +706,7 @@ exports[`getTableRow for a given user renders correctly showing users and their 
   <WithStyles(ForwardRef(TableCell))
     align="center"
     className="tableCell"
-    key="row-2-VIEWER"
+    key="row-2-viewer"
     padding="checkbox"
   >
     <WithStyles(ForwardRef(Checkbox))
