@@ -6,9 +6,11 @@ jest.mock('../dataaccess/userRolesRepository');
 const getProjectUsers = jest.fn();
 const addRole = jest.fn();
 const removeRole = jest.fn();
+const userIsMember = jest.fn();
 userRolesRepository.getProjectUsers = getProjectUsers;
 userRolesRepository.addRole = addRole;
 userRolesRepository.removeRole = removeRole;
+userRolesRepository.userIsMember = userIsMember;
 
 describe('project controller', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -96,6 +98,24 @@ describe('project controller', () => {
       await projectController.removeUserRole(request, response);
 
       expect(response.statusCode).toBe(204);
+    });
+  });
+
+  describe('is member', () => {
+    it('should return 200 with boolean value', async () => {
+      userIsMember.mockResolvedValue(true);
+      const req = {
+        params: { projectKey: 'projectKey' },
+        user: { sub: 'userName' },
+      };
+
+      const request = httpMocks.createRequest(req);
+      const response = httpMocks.createResponse();
+
+      await projectController.isMember(request, response);
+
+      expect(response.statusCode).toBe(200);
+      expect(response._getData()).toBe('true'); // eslint-disable-line no-underscore-dangle
     });
   });
 });

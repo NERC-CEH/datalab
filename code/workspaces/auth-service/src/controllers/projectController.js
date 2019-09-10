@@ -8,7 +8,7 @@ async function isMember(req, res) {
   const { params: { projectKey }, user: { sub } } = req;
   const exists = await userRolesRepository.userIsMember(sub, projectKey);
 
-  res.status(201).send(exists);
+  res.status(200).send(exists);
 }
 
 async function getUserRoles(req, res) {
