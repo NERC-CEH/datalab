@@ -19,7 +19,13 @@ const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT
 const PrivateApp = ({ promisedUserPermissions }) => (
   <NavigationContainer userPermissions={promisedUserPermissions.value}>
     <Switch>
-      <Route exact path="/projects" component={ProjectsPage} />
+      <RoutePermissions
+       exact path="/projects"
+       component={ProjectsPage}
+       promisedUserPermissions={promisedUserPermissions}
+       permission={PROJECT_STACKS_LIST}
+       alt={NotFoundPage} />
+       />
       <Redirect exact from="/" to="/projects" />
       <RoutePermissions
         exact

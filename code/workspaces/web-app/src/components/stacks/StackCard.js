@@ -60,6 +60,18 @@ function styles(theme) {
       float: 'left',
       fontSize: theme.typography.h2.fontSize,
     },
+    cardInitial: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      display: 'inline-flex',
+      textAlign: 'center',
+      height: 65,
+      width: 65,
+      borderRadius: theme.spacing(1),
+      color: theme.palette.backgroundColor,
+      backgroundColor: theme.palette.backgroundDark,
+      fontSize: theme.typography.h4.fontSize,
+    },
   };
 }
 
@@ -117,9 +129,14 @@ function generateGetImage(classes) {
     const stackDescription = stack.type && stackDescriptions[stack.type];
     const logoImage = stackDescription && stackDescription.logo;
     const iconName = stackDescription && stackDescription.icon;
+    const initial = stackDescription && stackDescription.initial && getDisplayName(stack).charAt(0);
 
     if (logoImage) {
       return <img className={classes.cardImage} src={logoImage} alt={stackDescription} />;
+    }
+
+    if (initial) {
+      return <div className={classes.cardInitial}>{initial}</div>;
     }
 
     return <Icon className={classes.cardIcon} children={iconName || 'create'} />;

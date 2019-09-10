@@ -18,8 +18,8 @@ class AuthCallback extends Component {
           this.props.actions.routeTo('/');
         });
     } else {
-      // Redirect to home page if no hash is present
-      this.props.actions.routeTo('/');
+      // Redirect to projects page if no hash is present
+      this.props.actions.routeTo('/projects');
     }
   }
 

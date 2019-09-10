@@ -7,6 +7,7 @@ const RSTUDIO = 'rstudio';
 const RSHINY = 'rshiny';
 const NBVIEWER = 'nbviewer';
 const NFS_VOLUME = 'nfs';
+const PROJECT = 'project';
 
 const ANALYSIS = 'analysis';
 const PUBLISH = 'publish';
@@ -71,6 +72,7 @@ export {
   JUPYTERLAB,
   NBVIEWER,
   NFS_VOLUME,
+  PROJECT,
   PUBLISH,
   RSHINY,
   RSTUDIO,

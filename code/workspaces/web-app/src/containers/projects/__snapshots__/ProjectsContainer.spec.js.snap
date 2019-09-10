@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
+Array [
+  "loadProjects",
+]
+`;
+
+exports[`ProjectsContainer is a container which passes correct props to StackCard 1`] = `
+<PromisedContentWrapper
+  promise={
+    Object {
+      "fetching": false,
+      "value": Array [
+        Object {
+          "props": "expectedPropValue",
+        },
+      ],
+    }
+  }
+>
+  <WithStyles(StackCards)
+    stacks={
+      Array [
+        Object {
+          "props": "expectedPropValue",
+        },
+      ]
+    }
+    userPermissions={
+      Array [
+        "expectedPermission",
+      ]
+    }
+  />
+</PromisedContentWrapper>
+`;

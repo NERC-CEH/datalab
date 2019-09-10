@@ -1,11 +1,16 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import ProptTypes from 'prop-types';
+import ProjectsContainer from '../containers/projects/ProjectsContainer';
 import Page from './Page';
 
-const ProjectsPage = () => (
+const ProjectsPage = ({ userPermissions }) => (
   <Page title="Projects">
-    <Typography variant="body1">This is the data lab projects page.</Typography>
+    <ProjectsContainer userPermissions={userPermissions}/>
   </Page>
 );
+
+ProjectsPage.propTypes = {
+  userPermissions: ProptTypes.arrayOf(ProptTypes.string).isRequired,
+};
 
 export default ProjectsPage;
