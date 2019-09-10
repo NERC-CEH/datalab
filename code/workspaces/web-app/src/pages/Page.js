@@ -14,7 +14,7 @@ const style = theme => ({
   },
 });
 
-function Page({ title, children, classes }) {
+function Page({ title, children, classes, match }) {
   return (
     <div className={classes.pageTemplate}>
       {title ? <Typography variant="h4">{title}</Typography> : null}

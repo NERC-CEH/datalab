@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { matchPath } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { permissionTypes } from 'common';
@@ -17,54 +18,65 @@ import SettingsPage from './pages/SettingsPage';
 
 const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
 
-const PrivateApp = ({ promisedUserPermissions }) => (
-  <NavigationContainer userPermissions={promisedUserPermissions.value}>
+// const projectKey = pathname => pathname.split('/')[2];
+const projectKey = (pathname) => {
+  const match = matchPath(pathname, {
+    path: '/projects/:projectKey',
+  });
+  return match && match.params.projectKey;
+};
+
+const PrivateApp = ({ promisedUserPermissions, location }) => (
+  <NavigationContainer
+    userPermissions={promisedUserPermissions.value}
+    projectKey={projectKey(location.pathname)}
+  >
     <Switch>
       <RoutePermissions
-       exact path="/projects"
-       component={ProjectsPage}
-       promisedUserPermissions={promisedUserPermissions}
-       permission={PROJECT_STACKS_LIST}
-       alt={NotFoundPage} />
-       />
+        exact path="/projects"
+        component={ProjectsPage}
+        promisedUserPermissions={promisedUserPermissions}
+        permission={PROJECT_STACKS_LIST}
+        alt={NotFoundPage} />
+      />
       <Redirect exact from="/" to="/projects" />
       <RoutePermissions
         exact
-        path="/info"
+        path="/projects/:projectKey/info"
         component={InfoPage}
         promisedUserPermissions={promisedUserPermissions}
         permission={PROJECT_STORAGE_LIST}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
-        path="/storage"
+        path="/projects/:projectKey/storage"
         component={DataStoragePage}
         promisedUserPermissions={promisedUserPermissions}
         permission={PROJECT_STORAGE_LIST}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
-        path="/notebooks"
+        path="/projects/:projectKey/notebooks"
         component={NotebooksPage}
         promisedUserPermissions={promisedUserPermissions}
         permission={PROJECT_STACKS_LIST}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
-        path="/publishing"
+        path="/projects/:projectKey/publishing"
         component={PublishingPage}
         promisedUserPermissions={promisedUserPermissions}
         permission={PROJECT_STACKS_LIST}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
-        path="/settings"
+        path="/projects/:projectKey/settings"
         component={SettingsPage}
         promisedUserPermissions={promisedUserPermissions}
         permission={PROJECT_SETTINGS_LIST}
         alt={NotFoundPage} />
-      <Route exact path="/dask" component={DaskPage} />
-      <Route exact path="/spark" component={SparkPage} />
+      <Route exact path="/projects/:projectKey/dask" component={DaskPage} />
+      <Route exact path="/projects/:projectKey/spark" component={SparkPage} />
       <Route component={NotFoundPage} />
     </Switch>
     <ModalRoot />

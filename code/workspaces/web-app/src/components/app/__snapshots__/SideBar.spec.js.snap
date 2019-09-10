@@ -23,8 +23,8 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       </WithStyles(ForwardRef(ListItem))>
       <WithStyles(SideBarButton)
         icon="info_outline"
-        label="Info"
-        to="/info"
+        label="Information"
+        to="/projects/project99/info"
       />
     </WithStyles(SideBarGroup)>
     <WithStyles(SideBarGroup)
@@ -43,18 +43,18 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         <WithStyles(SideBarButton)
           icon="book"
           label="Notebooks"
-          to="/notebooks"
+          to="/projects/project99/notebooks"
         />
       </ComponentWrapper>
       <WithStyles(SideBarButton)
         icon="apps"
         label="Dask"
-        to="/dask"
+        to="/projects/project99/dask"
       />
       <WithStyles(SideBarButton)
         icon="apps"
         label="Spark"
-        to="/spark"
+        to="/projects/project99/spark"
       />
     </WithStyles(SideBarGroup)>
     <WithStyles(SideBarGroup)>
@@ -71,7 +71,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         <WithStyles(SideBarButton)
           icon="storage"
           label="Storage"
-          to="/storage"
+          to="/projects/project99/storage"
         />
       </ComponentWrapper>
       <ComponentWrapper
@@ -87,7 +87,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         <WithStyles(SideBarButton)
           icon="web"
           label="Sites"
-          to="/publishing"
+          to="/projects/project99/publishing"
         />
       </ComponentWrapper>
       <ComponentWrapper
@@ -103,7 +103,7 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
         <WithStyles(SideBarButton)
           icon="settings"
           label="Settings"
-          to="/settings"
+          to="/projects/project99/settings"
         />
       </ComponentWrapper>
     </WithStyles(SideBarGroup)>

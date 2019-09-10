@@ -2,10 +2,14 @@
 
 exports[`InfoPage renders correct snapshot 1`] = `
 <WithStyles(Page)
-  title="Info"
+  title="Information"
 >
   <div>
-    This is the project info page.
+    This is the project information page.
+  </div>
+  <div>
+    The projectKey is 
+    project99
   </div>
 </WithStyles(Page)>
 `;

@@ -37,32 +37,32 @@ const styles = theme => ({
   },
 });
 
-const SideBar = ({ classes, userPermissions }) => (
+const SideBar = ({ classes, userPermissions, projectKey }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
       <SideBarGroup>
         <ListItem className={classes.projectTitleLI}>
           <ListItemText classes={{ primary: classes.projectTitleLIT }}>My project title</ListItemText>
         </ListItem>
-        <SideBarButton to="/info" label="Info" icon="info_outline" />
+        <SideBarButton to={`/projects/${projectKey}/info`} label="Information" icon="info_outline" />
       </SideBarGroup>
       <SideBarGroup title='Analysis'>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
-          <SideBarButton to="/notebooks" label="Notebooks" icon="book" />
+          <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
         </PermissionWrapper>
-        <SideBarButton to="/dask" label="Dask" icon="apps" />
-        <SideBarButton to="/spark" label="Spark" icon="apps" />
+        <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
+        <SideBarButton to={`/projects/${projectKey}/spark`} label="Spark" icon="apps" />
       </SideBarGroup>
 
       <SideBarGroup>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
-          <SideBarButton to="/storage" label="Storage" icon="storage" />
+          <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
         </PermissionWrapper>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
-          <SideBarButton to="/publishing" label="Sites" icon="web" />
+          <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
         </PermissionWrapper>
         <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
-          <SideBarButton to="/settings" label="Settings" icon="settings" />
+          <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
         </PermissionWrapper>
       </SideBarGroup>
     </List>
