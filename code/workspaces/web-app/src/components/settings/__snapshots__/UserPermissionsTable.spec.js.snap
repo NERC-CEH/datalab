@@ -55,7 +55,6 @@ exports[`getTable when fetching data renders progress indicator 1`] = `
       "root": "MuiTable-root",
     }
   }
-  size="small"
 >
   <WithStyles(ForwardRef(TableHead))>
     <WithStyles(ForwardRef(TableRow))>
@@ -133,7 +132,6 @@ exports[`getTable when there are no users renders correctly displaying there are
       "root": "MuiTable-root",
     }
   }
-  size="small"
 >
   <WithStyles(ForwardRef(TableHead))>
     <WithStyles(ForwardRef(TableRow))>
@@ -215,7 +213,6 @@ exports[`getTable when there are users renders correctly showing users and their
       "root": "MuiTable-root",
     }
   }
-  size="small"
 >
   <WithStyles(ForwardRef(TableHead))>
     <WithStyles(ForwardRef(TableRow))>
@@ -429,7 +426,6 @@ exports[`getTable when there is an error renders correctly displaying there is a
       "root": "MuiTable-root",
     }
   }
-  size="small"
 >
   <WithStyles(ForwardRef(TableHead))>
     <WithStyles(ForwardRef(TableRow))>

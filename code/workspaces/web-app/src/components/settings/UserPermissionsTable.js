@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
@@ -59,7 +59,10 @@ const checkBoxColumnOrder = [PERMISSIONS.ADMIN, PERMISSIONS.USER, PERMISSIONS.VI
 export const projectUsersSelector = ({ projectUsers }) => projectUsers;
 
 function UserPermissionsTable({ classes }) {
-  const users = useSelector(projectUsersSelector);
+  const users = useSelector(
+    projectUsersSelector,
+    shallowEqual,
+  );
   const dispatch = useDispatch();
 
   useEffect(
@@ -76,7 +79,7 @@ function UserPermissionsTable({ classes }) {
 
 export function getTable(users, classes, colHeadings) {
   return (
-    <Table size="small">
+    <Table>
       <TableHead>
         {getTableHead(columnHeadings, classes)}
       </TableHead>
@@ -105,14 +108,14 @@ export function getTableHead(headings, classes) {
 }
 
 export function getTableBody(users, classes, numCols) {
-  if (users.error || !users.value) {
+  if (users.fetching.error || !users.value) {
     return getFullWidthTextRow(
       'Error fetching data. Please try refreshing the page.',
       numCols,
     );
   }
 
-  if (users.fetching) {
+  if (users.fetching.inProgress) {
     return getFullWidthRow(<CircularProgress />, numCols);
   }
 

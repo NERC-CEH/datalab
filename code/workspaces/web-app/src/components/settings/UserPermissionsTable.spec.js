@@ -46,7 +46,14 @@ describe('getTable', () => {
 
   const initialUsers = {
     error: null,
-    fetching: false,
+    fetching: {
+      inProgress: false,
+      error: false,
+    },
+    updating: {
+      inProgress: false,
+      error: false,
+    },
     value: [],
   };
 
@@ -63,7 +70,7 @@ describe('getTable', () => {
   describe('when there is an error', () => {
     const users = {
       ...initialUsers,
-      error: true,
+      fetching: { ...initialUsers.fetching, error: true },
     };
 
     it('renders correctly displaying there is an error', () => {
@@ -78,7 +85,7 @@ describe('getTable', () => {
   describe('when fetching data', () => {
     const users = {
       ...initialUsers,
-      fetching: true,
+      fetching: { ...initialUsers.fetching, inProgress: true },
     };
 
     it('renders progress indicator', () => {
