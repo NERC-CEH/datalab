@@ -6,6 +6,8 @@ import configureCorsHeaders from './corsConfig';
 import config from './config';
 import database from './config/database';
 import graphql from './config/graphql';
+import status from './status';
+import { authorise, verifyToken } from './auth/authMiddleware';
 
 const port = config.get('apiPort');
 
@@ -16,6 +18,10 @@ logger.add(logger.transports.Console, { timestamp: true, colorize: true });
 const app = express();
 configureCorsHeaders(app);
 app.use(bodyParser.json());
+
+app.get('/status', status.get);
+
+app.use('/api', authorise, verifyToken);
 graphql.configureGraphQL(app);
 
 const connection = database.createConnection();
