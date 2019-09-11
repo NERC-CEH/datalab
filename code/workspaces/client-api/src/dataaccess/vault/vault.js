@@ -5,13 +5,13 @@ import config from '../../config';
 const vaultBaseUrl = config.get('vaultApi');
 const vaultAppRole = config.get('vaultAppRole');
 
-function requestStorageKeys(datalab, storage) {
-  const keyPath = `${datalab}/storage/${storage.name}`;
+function requestStorageKeys(projectKey, storage) {
+  const keyPath = `${projectKey}/storage/${storage.name}`;
   return requestPath(keyPath);
 }
 
-function requestStackKeys(datalab, stack) {
-  const keyPath = `${datalab}/stacks/${stack.name}`;
+function requestStackKeys(projectKey, stack) {
+  const keyPath = `${projectKey}/stacks/${stack.name}`;
   return requestPath(keyPath);
 }
 

@@ -21,6 +21,7 @@ const { elementPermissions: { SETTINGS_READ, PERMISSIONS_CREATE, PERMISSIONS_DEL
 const { READY } = statusTypes;
 
 const DATALAB_NAME = config.get('datalabName');
+const PROJECT_KEY = 'project';
 
 const resolvers = {
   Query: {
@@ -40,8 +41,8 @@ const resolvers = {
   },
 
   Mutation: {
-    createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
-    deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
+    createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
+    deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     createDataStore: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore)),
     deleteDataStore: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
     addUserToDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
@@ -59,13 +60,13 @@ const resolvers = {
 
   DataStore: {
     users: (obj, args, { user }) => permissionChecker(USERS_LIST, user, () => obj.users),
-    accessKey: (obj, args, { user }) => minioTokenService.requestMinioToken(obj, user),
+    accessKey: (obj, args, { user }) => minioTokenService.requestMinioToken('project', obj, user),
     stacksMountingStore: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount({ user, token }, name),
     status: () => READY,
   },
 
   Stack: {
-    redirectUrl: (obj, args, { user }) => stackUrlService(obj, user),
+    redirectUrl: obj => stackUrlService(PROJECT_KEY, obj),
   },
 
   Project: {

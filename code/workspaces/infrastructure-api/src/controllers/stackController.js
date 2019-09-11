@@ -90,6 +90,7 @@ const withNameValidator = [
 
 const deleteStackValidator = [
   ...withNameValidator,
+  checkExistsWithMsg('projectKey'),
   checkExistsWithMsg('datalabInfo.domain'),
   checkExistsWithMsg('datalabInfo.name'),
   checkExistsWithMsg('type'),

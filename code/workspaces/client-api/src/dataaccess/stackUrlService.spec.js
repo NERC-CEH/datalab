@@ -15,6 +15,8 @@ vault.requestStackKeys = vaultMock;
 const rstudioTokenServiceMock = jest.fn();
 rstudioTokenService.rstudioLogin = rstudioTokenServiceMock;
 
+const projectKey = 'projectKey';
+
 beforeEach(() => {
   mock.reset();
 });
@@ -45,7 +47,7 @@ describe('stackUrlService', () => {
 
       mock.onPost(loginUrl).reply(200, { message: 'message' }, getSuccessfulLoginResponse());
 
-      return stackUrlService(stack, 'user')
+      return stackUrlService(projectKey, stack)
         .then((url) => {
           expect(url).toEqual('http://zeppelin.datalab/connect?token=8214bf3f-3988-45f2-a33c-58d4be09f02b');
         });
@@ -54,7 +56,7 @@ describe('stackUrlService', () => {
     it('to return undefined and log error if keys are not returned', () => {
       vaultMock.mockImplementationOnce(() => (Promise.resolve({})));
 
-      return stackUrlService(stack, 'user')
+      return stackUrlService(projectKey, stack)
         .then((token) => {
           expect(token).toBeUndefined();
           expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -69,7 +71,7 @@ describe('stackUrlService', () => {
 
       mock.onPost(loginUrl).reply(403, getFailedLoginResponse());
 
-      return stackUrlService(stack, 'user')
+      return stackUrlService(projectKey, stack)
         .then((token) => {
           expect(token).toBeUndefined();
           expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -93,7 +95,7 @@ describe('stackUrlService', () => {
 
       mock.onPost(loginUrl).reply(200, { message: 'message' });
 
-      return stackUrlService(stack, 'user')
+      return stackUrlService(projectKey, stack)
         .then((url) => {
           expect(url).toEqual('http://jupyter.datalab/tree/?token=expectedToken');
         });
@@ -106,7 +108,7 @@ describe('stackUrlService', () => {
 
       mock.onPost(loginUrl).reply(200, { message: 'message' });
 
-      return stackUrlService(stack, 'user')
+      return stackUrlService(projectKey, stack)
         .then((token) => {
           expect(token).toBeUndefined();
         });
@@ -130,7 +132,7 @@ describe('stackUrlService', () => {
       const tokens = { expires: 'e', token: 't', csrfToken: 'c' };
       rstudioTokenServiceMock.mockImplementationOnce(() => () => Promise.resolve(tokens));
 
-      return stackUrlService(notebook, 'user')
+      return stackUrlService(projectKey, notebook)
         .then((url) => {
           expect(url).toEqual('http://rstudio.datalab/connect?username=datalab&expires=e&token=t&csrfToken=c');
         });
@@ -143,7 +145,7 @@ describe('stackUrlService', () => {
 
       rstudioTokenServiceMock.mockImplementationOnce(() => () => Promise.reject(undefined));
 
-      return stackUrlService(notebook, 'user')
+      return stackUrlService(projectKey, notebook)
         .then(token => expect(token).toBeUndefined());
     });
   });
@@ -156,7 +158,7 @@ describe('stackUrlService', () => {
       internalEndpoint: 'http://nbviewer',
     };
 
-    it('returns the nbviewer localfile url', () => stackUrlService(notebook, 'user')
+    it('returns the nbviewer localfile url', () => stackUrlService(projectKey, notebook, 'user')
       .then(url => expect(url).toEqual('http://nbviewer.datalab/localfile')));
   });
 
@@ -169,7 +171,7 @@ describe('stackUrlService', () => {
         internalEndpoint: 'http://unknown',
       };
 
-      return stackUrlService(notebook, 'user')
+      return stackUrlService(projectKey, notebook)
         .then(url => expect(url).toEqual(notebook.url));
     });
   });

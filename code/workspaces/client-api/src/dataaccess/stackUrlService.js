@@ -2,26 +2,24 @@ import { findLast } from 'lodash';
 import axios from 'axios';
 import logger from 'winston';
 import { stackTypes } from 'common';
-import config from '../config';
 import rstudioTokenService from './login/rstudioTokenService';
 import vault from './vault/vault';
 
 const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
-const DATALAB_NAME = config.get('datalabName');
 const RSTUDIO_USERNAME = 'datalab';
 
-export default function notebookUrlService(notebook, user) {
+export default function notebookUrlService(projectKey, notebook) {
   if (notebook.type === ZEPPELIN) {
-    return requestZeppelinToken(notebook, user)
+    return requestZeppelinToken(projectKey, notebook)
       .then(createZeppelinUrl(notebook));
   } if (notebook.type === JUPYTER) {
-    return requestJupyterToken(notebook, user)
+    return requestJupyterToken(projectKey, notebook)
       .then(createJupyterUrl(notebook));
   } if (notebook.type === JUPYTERLAB) {
-    return requestJupyterToken(notebook, user)
+    return requestJupyterToken(projectKey, notebook)
       .then(createJupyterlabUrl(notebook));
   } if (notebook.type === RSTUDIO) {
-    return requestRStudioToken(notebook, user)
+    return requestRStudioToken(projectKey, notebook)
       .then(createRStudioUrl(notebook));
   } if (notebook.type === NBVIEWER) {
     return Promise.resolve(`${notebook.url}/localfile`);
@@ -39,8 +37,8 @@ const createRStudioUrl = notebook => tokens => (tokens
   ? `${notebook.url}/connect?username=${RSTUDIO_USERNAME}&expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}`
   : undefined);
 
-function requestZeppelinToken(stack) { // stack, user
-  return vault.requestStackKeys(DATALAB_NAME, stack)
+function requestZeppelinToken(projectKey, stack) {
+  return vault.requestStackKeys(projectKey, stack)
     .then(zeppelinLogin(stack))
     .catch((error) => {
       logger.error('Error logging in to zeppelin: ', stack.name, error);
@@ -48,13 +46,13 @@ function requestZeppelinToken(stack) { // stack, user
     });
 }
 
-function requestJupyterToken(stack) { // stack, user
-  return vault.requestStackKeys(DATALAB_NAME, stack)
+function requestJupyterToken(projectKey, stack) {
+  return vault.requestStackKeys(projectKey, stack)
     .then(response => response.token);
 }
 
-function requestRStudioToken(stack) { // stack, user
-  return vault.requestStackKeys(DATALAB_NAME, stack)
+function requestRStudioToken(projectKey, stack) {
+  return vault.requestStackKeys(projectKey, stack)
     .then(rstudioTokenService.rstudioLogin(stack))
     .catch((error) => {
       logger.error('Error logging in to RStudio: ', stack.name, error);
