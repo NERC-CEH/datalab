@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import _ from 'lodash';
+import { startCase } from 'lodash';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
@@ -38,7 +38,7 @@ export const columnHeadings = [
   { heading: 'User Name', checkBoxCol: false },
 ].concat(
   SORTED_PERMISSIONS.map(item => ({
-    heading: _.startCase(item.name),
+    heading: startCase(item.name),
     checkBoxCol: true,
   })),
 );

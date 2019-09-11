@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import _ from 'lodash';
+import { startCase } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PERMISSIONS = SORTED_PERMISSIONS.map(item => _.startCase(item.name));
+const PERMISSIONS = SORTED_PERMISSIONS.map(item => startCase(item.name));
 
 export const getUsersFromState = ({ users }) => users;
 
@@ -169,9 +169,7 @@ export function AddUserButton({ userInformation, selectedUserName, project, sele
 export function dispatchAddUserAction(project, user, selectedPermissions, dispatch) {
   dispatch(
     projectSettingsActions.addUserPermission(
-      'project',
-      user,
-      selectedPermissions.toLowerCase(),
+      'project', user, selectedPermissions.toLowerCase(),
     ),
   );
 }
