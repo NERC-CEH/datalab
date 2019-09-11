@@ -18,7 +18,6 @@ import SettingsPage from './pages/SettingsPage';
 
 const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
 
-// const projectKey = pathname => pathname.split('/')[2];
 const projectKey = (pathname) => {
   const match = matchPath(pathname, {
     path: '/projects/:projectKey',

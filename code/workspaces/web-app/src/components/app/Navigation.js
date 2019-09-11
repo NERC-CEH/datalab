@@ -41,7 +41,7 @@ const Navigation = ({ classes, children, identity, userPermissions, projectKey }
     <div className={classes.appFrame}>
       <TopBar identity={identity} />
       <div className={classes.contentArea}>
-        <SideBar className={classes.sideBar} userPermissions={userPermissions} projectKey={projectKey} />
+        {projectKey && (<SideBar className={classes.sideBar} userPermissions={userPermissions} projectKey={projectKey} />)}
         <div className={classes.pageContainer}>
           <main className={classes.page}>
             {children}
@@ -60,7 +60,7 @@ Navigation.propTypes = {
   ]).isRequired,
   identity: PropTypes.object.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  projectKey: PropTypes.string.isRequired,
+  projectKey: PropTypes.string,
 };
 
 export default withStyles(styles)(Navigation);
