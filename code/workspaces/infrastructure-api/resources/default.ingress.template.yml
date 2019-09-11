@@ -4,17 +4,17 @@ kind: Ingress
 metadata:
   name: {{ name }}
   annotations:
-    ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
-    ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
-    ingress.kubernetes.io/proxy-body-size: {{ &maxBodySize }}
+    nginx.ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
+    nginx.ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ &maxBodySize }}
 {{#rewriteTarget}}
-    ingress.kubernetes.io/rewrite-target: {{ &rewriteTarget }}
+    nginx.ingress.kubernetes.io/rewrite-target: {{ &rewriteTarget }}
 {{/rewriteTarget}}
 {{#proxyTimeout}}
-    ingress.kubernetes.io/proxy-connect-timeout: "{{ &proxyTimeout }}"
-    ingress.kubernetes.io/proxy-read-timeout: "{{ &proxyTimeout }}"
-    ingress.kubernetes.io/proxy-send-timeout: "{{ &proxyTimeout }}"
-    ingress.kubernetes.io/proxy-socket-keepalive: "on"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "{{ &proxyTimeout }}"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "{{ &proxyTimeout }}"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "{{ &proxyTimeout }}"
+    nginx.ingress.kubernetes.io/proxy-socket-keepalive: "on"
 {{/proxyTimeout}}
 spec:
   tls:

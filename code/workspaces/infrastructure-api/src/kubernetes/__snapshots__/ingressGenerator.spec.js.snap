@@ -7,13 +7,13 @@ kind: Ingress
 metadata:
   name: name-ingress
   annotations:
-    ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
-    ingress.kubernetes.io/proxy-body-size: 500m
-    ingress.kubernetes.io/proxy-connect-timeout: \\"1800\\"
-    ingress.kubernetes.io/proxy-read-timeout: \\"1800\\"
-    ingress.kubernetes.io/proxy-send-timeout: \\"1800\\"
-    ingress.kubernetes.io/proxy-socket-keepalive: \\"on\\"
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
+    nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: \\"1800\\"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: \\"1800\\"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: \\"1800\\"
+    nginx.ingress.kubernetes.io/proxy-socket-keepalive: \\"on\\"
 spec:
   tls:
   - hosts:
@@ -41,10 +41,10 @@ kind: Ingress
 metadata:
   name: name-ingress
   annotations:
-    ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
-    ingress.kubernetes.io/proxy-body-size: 500m
-    ingress.kubernetes.io/rewrite-target: /here
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
+    nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
+    nginx.ingress.kubernetes.io/rewrite-target: /here
 spec:
   tls:
   - hosts:
@@ -72,9 +72,9 @@ kind: Ingress
 metadata:
   name: name-ingress
   annotations:
-    ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
-    ingress.kubernetes.io/proxy-body-size: 500m
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
+    nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   tls:
   - hosts:
@@ -98,9 +98,9 @@ kind: Ingress
 metadata:
   name: name-ingress
   annotations:
-    ingress.kubernetes.io/auth-url: http://localhost:9000/auth
-    ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
-    ingress.kubernetes.io/proxy-body-size: 500m
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
+    nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   tls:
   - hosts:
