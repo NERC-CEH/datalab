@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InfoPage renders correct snapshot 1`] = `
+exports[`ProjectInfoPage renders correct snapshot 1`] = `
 <WithStyles(Page)
   title="Information"
 >

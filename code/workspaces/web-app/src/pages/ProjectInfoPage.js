@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Page from './Page';
 
-const InfoPage = ({ match }) => (
+const ProjectInfoPage = ({ match }) => (
   <Page title="Information">
     <div>
       This is the project information page.
@@ -13,7 +13,7 @@ const InfoPage = ({ match }) => (
   </Page>
 );
 
-InfoPage.propTypes = {
+ProjectInfoPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       projectKey: PropTypes.string.isRequired,
@@ -21,4 +21,4 @@ InfoPage.propTypes = {
   }).isRequired,
 };
 
-export default InfoPage;
+export default ProjectInfoPage;

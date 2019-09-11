@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import InfoPage from './InfoPage';
+import ProjectInfoPage from './ProjectInfoPage';
 
 const userPermissions = ['expectedPermission'];
 const match = {
@@ -10,6 +10,6 @@ const match = {
 };
 const props = { userPermissions, match };
 
-it('InfoPage renders correct snapshot', () => {
-  expect(shallow(<InfoPage {...props} />)).toMatchSnapshot();
+it('ProjectInfoPage renders correct snapshot', () => {
+  expect(shallow(<ProjectInfoPage {...props} />)).toMatchSnapshot();
 });

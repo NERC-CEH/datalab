@@ -5,12 +5,12 @@ import React from 'react';
 import { permissionTypes } from 'common';
 import DaskPage from './pages/DaskPage';
 import DataStoragePage from './pages/DataStoragePage';
-import InfoPage from './pages/InfoPage';
 import ModalRoot from './containers/modal/ModalRoot';
 import NavigationContainer from './containers/app/NavigationContainer';
 import NotebooksPage from './pages/NotebooksPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectInfoPage from './pages/ProjectInfoPage';
 import PublishingPage from './pages/PublishingPage';
 import RoutePermissions from './components/common/RoutePermissionWrapper';
 import SparkPage from './pages/SparkPage';
@@ -42,7 +42,7 @@ const PrivateApp = ({ promisedUserPermissions, location }) => (
       <RoutePermissions
         exact
         path="/projects/:projectKey/info"
-        component={InfoPage}
+        component={ProjectInfoPage}
         promisedUserPermissions={promisedUserPermissions}
         permission={PROJECT_STORAGE_LIST}
         alt={NotFoundPage} />
