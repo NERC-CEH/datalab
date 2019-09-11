@@ -89,6 +89,9 @@ PrivateApp.propTypes = {
     fetching: PropTypes.bool.isRequired,
     value: PropTypes.array.isRequired,
   }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default PrivateApp;

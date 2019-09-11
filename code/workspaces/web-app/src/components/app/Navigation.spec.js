@@ -11,7 +11,7 @@ describe('DescribeDatalabs', () => {
 
   it('renders correct snapshot', () => {
     expect(shallow(
-      <Navigation identity={{ expected: 'identity' }} userPermissions={['expectedPermission']} >
+      <Navigation identity={{ expected: 'identity' }} userPermissions={['expectedPermission']} projectKey='project99' >
         <span>Content</span>
       </Navigation>,
     )).toMatchSnapshot();

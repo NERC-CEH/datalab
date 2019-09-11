@@ -60,6 +60,7 @@ Navigation.propTypes = {
   ]).isRequired,
   identity: PropTypes.object.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(Navigation);

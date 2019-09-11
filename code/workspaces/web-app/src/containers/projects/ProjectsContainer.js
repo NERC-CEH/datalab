@@ -2,9 +2,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { permissionTypes } from 'common';
 import projectActions from '../../actions/projectActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
+
+const { projectPermissions: { PROJECT_STORAGE_OPEN } } = permissionTypes;
 
 const TYPE_NAME = 'Project';
 
@@ -26,12 +30,12 @@ class ProjectsContainer extends Component {
         <StackCards
           stacks={this.props.projects.value}
           typeName={TYPE_NAME}
-          openStack={() => {}}
+          openStack={id => this.props.history.push(`/projects/${id}/info`) }
           deleteStack={() => {}}
           openCreationForm={() => {}}
           userPermissions={this.props.userPermissions}
           createPermission=""
-          openPermission=""
+          openPermission={PROJECT_STORAGE_OPEN}
           deletePermission=""
           editPermission=""
         />
@@ -64,5 +68,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { ProjectsContainer as PureProjectsContainer }; // export for testing
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
+const ConnectedProjectsContainer = connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
+export { ProjectsContainer as PureProjectsContainer, ConnectedProjectsContainer }; // export for testing
+export default withRouter(ConnectedProjectsContainer);

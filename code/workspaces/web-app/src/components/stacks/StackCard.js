@@ -87,7 +87,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
       </Tooltip>
     </div>
     <div className={classes.actionsDiv}>
-      {typeName !== 'Data Store' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
+      {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
       {stack.status === READY
         && <StackCardActions
           stack={stack}
@@ -111,6 +111,7 @@ StackCard.propTypes = {
     status: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,
+  openHref: PropTypes.string,
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,

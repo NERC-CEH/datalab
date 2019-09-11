@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import ProjectsContainer, { PureProjectsContainer } from './ProjectsContainer';
+import { PureProjectsContainer, ConnectedProjectsContainer } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
@@ -18,7 +18,7 @@ describe('ProjectsContainer', () => {
         userPermissions: ['expectedPermission'],
       };
 
-      return shallow(<ProjectsContainer {...props} />).find('ProjectsContainer');
+      return shallow(<ConnectedProjectsContainer {...props} />).find('ProjectsContainer');
     }
 
     const projects = { fetching: false, value: ['expectedArray'] };

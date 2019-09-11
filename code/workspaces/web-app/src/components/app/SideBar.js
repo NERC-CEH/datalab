@@ -72,6 +72,7 @@ const SideBar = ({ classes, userPermissions, projectKey }) => (
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(SideBar);

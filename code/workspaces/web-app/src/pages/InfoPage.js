@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Page from './Page';
 
 const InfoPage = ({ match }) => (
@@ -11,5 +12,13 @@ const InfoPage = ({ match }) => (
     </div>
   </Page>
 );
+
+InfoPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      projectKey: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
 
 export default InfoPage;
