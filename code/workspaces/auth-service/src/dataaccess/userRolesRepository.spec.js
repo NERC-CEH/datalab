@@ -111,6 +111,21 @@ describe('userRolesRepository', () => {
         ],
       });
     });
+
+    it('should add an empty record for a user that does not have one when retrieving roles', async () => {
+      await userRoleRepository.getRoles('uid999');
+      expect(mockDatabase().query()).toEqual({
+        userId: 'uid999',
+      });
+
+      expect(mockDatabase().invocation().entity).toEqual({
+        $setOnInsert: {
+          userId: 'uid999',
+          instanceAdmin: false,
+          projectRoles: [],
+        },
+      });
+    });
   });
 
   describe('delete role', () => {

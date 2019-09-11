@@ -9,12 +9,35 @@ function UserRoles() {
 // In line with other repository functions, this returns a promise,
 // but the model document is first converted to an object so the spread operator works as expected.
 function getRoles(userId) {
-  return UserRoles().findOne({ userId }).exec().then(document => document.toObject());
+  return UserRoles().findOne({ userId }).exec()
+    .then((document) => {
+      try {
+        return document.toObject();
+      } catch (err) {
+        return addEmptyRecordForNewUser(userId);
+      }
+    });
 }
 
 function getProjectUsers(projectKey) {
   const query = { 'projectRoles.projectKey': { $eq: projectKey } };
   return UserRoles().find(query).exec();
+}
+
+async function addEmptyRecordForNewUser(userId) {
+  // setOnInsert used to prevent accidental override of entry
+  const query = { userId };
+  const user = {
+    userId,
+    projectRoles: [],
+    instanceAdmin: false,
+  };
+  await UserRoles().findOneAndUpdate(
+    query,
+    { $setOnInsert: user },
+    { upsert: true, setDefaultsOnInsert: true, runValidators: true },
+  );
+  return user;
 }
 
 async function addRole(userId, projectKey, role) {
