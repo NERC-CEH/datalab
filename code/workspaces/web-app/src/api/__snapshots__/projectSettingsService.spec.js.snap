@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`projectSettingsService addProjectUserPermission should build correct query and unpack the result 1`] = `
+"
+    AddProjectPermission($request: PermissionAddRequest) {
+      addProjectPermission(permission: $request) { 
+        projectKey, role
+      }
+    }"
+`;
+
 exports[`projectSettingsService getProjectUsers should build correct query and unpack the result 1`] = `
 "
     GetProjectUsers($projectId: String!) {

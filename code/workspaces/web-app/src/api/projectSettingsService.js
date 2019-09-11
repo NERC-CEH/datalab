@@ -1,7 +1,7 @@
-import { gqlQuery } from './graphqlClient';
+import { gqlQuery, gqlMutation } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-export default function getProjectUsers(projectId) {
+export function getProjectUsers(projectId) {
   const query = `
     GetProjectUsers($projectId: String!) {
       project(key: $projectId) {
@@ -13,4 +13,16 @@ export default function getProjectUsers(projectId) {
 
   return gqlQuery(query, { projectId })
     .then(errorHandler('data.project.projectUsers'));
+}
+
+export function addProjectUserPermission(projectKey, userId, role) {
+  const mutation = `
+    AddProjectPermission($request: PermissionAddRequest) {
+      addProjectPermission(permission: $request) { 
+        projectKey, role
+      }
+    }`;
+
+  return gqlMutation(mutation, { request: { projectKey, userId, role } })
+    .then(errorHandler('data.addProjectPermission'));
 }

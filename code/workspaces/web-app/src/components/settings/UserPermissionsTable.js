@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { startCase } from 'lodash';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
@@ -10,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import projectSettingsActions from '../../actions/projectSettingsActions';
+import { PERMISSION_VALUES, SORTED_PERMISSIONS } from '../../constants/permissions';
 
 const styles = theme => ({
   activeSelection: {
@@ -32,34 +34,24 @@ const styles = theme => ({
   },
 });
 
-export const PERMISSIONS = {
-  ADMIN: {
-    name: 'ADMIN',
-    value: 10,
-  },
-  USER: {
-    name: 'USER',
-    value: 5,
-  },
-  VIEWER: {
-    name: 'VIEWER',
-    value: 1,
-  },
-};
-
 export const columnHeadings = [
   { heading: 'User Name', checkBoxCol: false },
-  { heading: 'Admin', checkBoxCol: true },
-  { heading: 'User', checkBoxCol: true },
-  { heading: 'Viewer', checkBoxCol: true },
-];
+].concat(
+  SORTED_PERMISSIONS.map(item => ({
+    heading: startCase(item.name),
+    checkBoxCol: true,
+  })),
+);
 
-const checkBoxColumnOrder = [PERMISSIONS.ADMIN, PERMISSIONS.USER, PERMISSIONS.VIEWER];
+const checkBoxColumnOrder = SORTED_PERMISSIONS;
 
 export const projectUsersSelector = ({ projectUsers }) => projectUsers;
 
 function UserPermissionsTable({ classes }) {
-  const users = useSelector(projectUsersSelector);
+  const users = useSelector(
+    projectUsersSelector,
+    shallowEqual,
+  );
   const dispatch = useDispatch();
 
   useEffect(
@@ -76,7 +68,7 @@ function UserPermissionsTable({ classes }) {
 
 export function getTable(users, classes, colHeadings) {
   return (
-    <Table size="small">
+    <Table>
       <TableHead>
         {getTableHead(columnHeadings, classes)}
       </TableHead>
@@ -105,14 +97,14 @@ export function getTableHead(headings, classes) {
 }
 
 export function getTableBody(users, classes, numCols) {
-  if (users.error || !users.value) {
+  if (users.fetching.error || !users.value) {
     return getFullWidthTextRow(
       'Error fetching data. Please try refreshing the page.',
       numCols,
     );
   }
 
-  if (users.fetching) {
+  if (users.fetching.inProgress) {
     return getFullWidthRow(<CircularProgress />, numCols);
   }
 
@@ -173,13 +165,12 @@ export function getCheckboxCell(userRole, checkbox, classes, key) {
 }
 
 export function getCheckbox(userRole, checkbox, classes) {
-  const roleName = userRole.toUpperCase();
-  if (roleName === checkbox.name) {
+  if (userRole === checkbox.name) {
     return (
       <Checkbox className={classes.activeSelection} checked={true} color="default" />
     );
   }
-  if (PERMISSIONS[roleName].value > checkbox.value) {
+  if (PERMISSION_VALUES[userRole.toUpperCase()] > checkbox.value) {
     return (
       <Checkbox className={classes.implicitSelection} checked={true} color="default" />
     );
