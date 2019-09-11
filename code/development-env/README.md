@@ -122,11 +122,12 @@ kubectl apply -f ./config/manifests/minikube-namespace.yml
 kubectl config set-context minikube --namespace=devtest
 ```
 
-### Create storage class
+### Create storage class and PVC
 
 ```bash
 minikube addons enable storage-provisioner
 kubectl apply -f ./config/manifests/minikube-storage.yml
+kubectl apply -f ./config/manifests/minikube-pvc.yml
 ```
 
 ### Add website tls x509 certificate as Kubernetes secret
