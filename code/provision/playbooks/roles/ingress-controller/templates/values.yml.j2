@@ -5,7 +5,7 @@ controller:
   kind: Deployment
   extraArgs:
     default-ssl-certificate: "kube-system/tls-secret"
-    annotations-prefix: "ingress.kubernetes.io"
+    annotations-prefix: "nginx.ingress.kubernetes.io"
   service:
     type: NodePort
     nodePorts:
