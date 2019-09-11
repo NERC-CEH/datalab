@@ -53,7 +53,7 @@ function generatePermissionToken(request, response) {
       const options = { algorithm, audience, issuer, keyid, expiresIn };
       const token = jwt.sign(payload, PRIVATE_KEY, options);
 
-      logger.info('Responding with internal token');
+      logger.debug('Responding with internal token');
       logger.debug(`Roles: ${JSON.stringify(userRoles)}`);
       logger.debug(`Permissions: ${JSON.stringify(permissions)}`);
       return response.send({ token });
