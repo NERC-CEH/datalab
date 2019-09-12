@@ -117,13 +117,11 @@ describe('userRolesRepository', () => {
       database.getModel = mockDatabase;
       await userRoleRepository.getRoles('uid999');
 
-      expect(mockDatabase().invocation().entity).toEqual(
-        expect.objectContaining ({
-          userId: 'uid999',
-          instanceAdmin: false,
-          projectRoles: [],
-        })
-      );
+      expect(mockDatabase().invocation().entity).toEqual({
+        userId: 'uid999',
+        instanceAdmin: false,
+        projectRoles: [],
+      });
     });
   });
 

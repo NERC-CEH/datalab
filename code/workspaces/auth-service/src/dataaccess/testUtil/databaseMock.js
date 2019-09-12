@@ -28,7 +28,7 @@ function createDatabaseMock(items) {
         ...entity,
         toObject: () => entity,
       };
-      lastInvocation = { entity: wrappedEntity };
+      lastInvocation = { entity };
       return Promise.resolve(wrappedEntity);
     },
     invocation: () => lastInvocation,
