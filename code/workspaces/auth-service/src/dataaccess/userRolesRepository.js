@@ -1,7 +1,6 @@
 import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
-import logger from 'winston';
 
 function UserRoles() {
   return database.getModel('UserRoles');

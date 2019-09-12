@@ -23,6 +23,14 @@ function createDatabaseMock(items) {
       lastInvocation = { query };
       return Promise.resolve(items.length > 0);
     },
+    create: (entity) => {
+      const wrappedEntity = {
+        ...entity,
+        toObject: () => entity,
+      };
+      lastInvocation = { entity: wrappedEntity };
+      return Promise.resolve(wrappedEntity);
+    },
     invocation: () => lastInvocation,
     query: () => lastInvocation.query,
     entity: () => lastInvocation.entity,
