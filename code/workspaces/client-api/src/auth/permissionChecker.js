@@ -1,15 +1,26 @@
 import logger from 'winston';
 import { permissionTypes } from 'common';
 
-const { PROJECT, delimiter } = permissionTypes;
+const { PROJECT, SYSTEM, delimiter, systemPermissions: { INSTANCE_ADMIN } } = permissionTypes;
 
 export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
-  [PROJECT.concat(delimiter, permissionSuffix)],
+  [
+    PROJECT.concat(delimiter, permissionSuffix),
+    SYSTEM.concat(delimiter, INSTANCE_ADMIN),
+  ],
   ...rest,
 );
 
 export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissionCheck(
-  permissionSuffixes.map(suffix => PROJECT.concat(delimiter, suffix)),
+  [
+    ...permissionSuffixes.map(suffix => PROJECT.concat(delimiter, suffix)),
+    SYSTEM.concat(delimiter, INSTANCE_ADMIN),
+  ],
+  ...rest,
+);
+
+export const instanceAdminWrapper = (...rest) => permissionCheck(
+  [SYSTEM.concat(delimiter, INSTANCE_ADMIN)],
   ...rest,
 );
 

@@ -4,14 +4,20 @@ const DELETE = 'delete';
 const LIST = 'list';
 const OPEN = 'open';
 const EDIT = 'edit';
+const ADMIN = 'admin';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
 const SETTINGS = 'settings';
 const PERMISSIONS = 'permissions';
 const USERS = 'users';
+const INSTANCE = 'instance';
 
 const PROJECT = 'project';
+const SYSTEM = 'system';
+
+// key name used for admin role boolean in auth
+const INSTANCE_ADMIN_ROLE = 'instanceAdmin';
 
 const keyDelim = '_';
 const permissionDelim = ':';
@@ -58,10 +64,15 @@ const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
 
 const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
 
+const systemPermissions = flatMapPermissions({ INSTANCE }, { ADMIN });
+
 export {
+  INSTANCE_ADMIN_ROLE,
   PROJECT,
+  SYSTEM,
   elementPermissions,
   usersPermissions,
   projectPermissions,
+  systemPermissions,
   permissionDelim as delimiter,
 };

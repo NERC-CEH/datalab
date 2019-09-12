@@ -1,6 +1,6 @@
 import { statusTypes, permissionTypes } from 'common';
 import { version } from '../version';
-import permissionChecker from '../auth/permissionChecker';
+import permissionChecker, { instanceAdminWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import datalabRepository from '../dataaccess/datalabRepository';
@@ -17,7 +17,8 @@ import config from '../config';
 const { usersPermissions: { USERS_LIST } } = permissionTypes;
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
-const { elementPermissions: { SETTINGS_READ, PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
+const { elementPermissions: { PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
+const { elementPermissions: { SETTINGS_READ, SETTINGS_EDIT } } = permissionTypes;
 const { READY } = statusTypes;
 
 const DATALAB_NAME = config.get('datalabName');
@@ -52,9 +53,9 @@ const resolvers = {
     removeProjectPermission: (obj, { permission: { projectKey, userId } }, { user, token }) => (
       permissionChecker(PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
-    createProject: (obj, { project }, { token }) => projectService.createProject(project, token),
-    updateProject: (obj, { project }, { token }) => projectService.updateProject(project, token),
-    deleteProject: (obj, { project: { projectKey } }, { token }) => projectService.deleteProject(projectKey, token),
+    createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, token)),
+    updateProject: (obj, { project }, { user, token }) => permissionChecker(SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
+    deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
   },
 
   DataStore: {

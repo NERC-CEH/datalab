@@ -15,6 +15,7 @@ Array [
   "firstProjectName:users:read",
   "firstProjectName:settings:list",
   "firstProjectName:settings:read",
+  "firstProjectName:settings:edit",
   "firstProjectName:permissions:read",
   "firstProjectName:permissions:create",
   "firstProjectName:permissions:delete",
@@ -26,6 +27,7 @@ Array [
   "secondProjectName:storage:open",
   "thirdProjectName:stacks:list",
   "thirdProjectName:stacks:open",
+  "system:instance:admin",
 ]
 `;
 
