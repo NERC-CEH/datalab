@@ -7,6 +7,7 @@ Object {
     "name": "testlab",
   },
   "name": "dataStoreName",
+  "projectKey": "project",
   "volumeSize": 12,
 }
 `;
@@ -18,6 +19,7 @@ Object {
     "name": "testlab",
   },
   "name": "dataStoreName",
+  "projectKey": "project",
 }
 `;
 
@@ -27,8 +29,9 @@ Object {
   "displayName": "expectedDisplayName",
   "internalEndpoint": "http://minio-expectedName/minio",
   "name": "expectedName",
+  "projectKey": "project",
   "storageType": 2,
-  "url": "https://testlab-expectedName.test-datalabs.nerc.ac.uk/minio",
+  "url": "https://project-expectedName.test-datalabs.nerc.ac.uk/minio",
   "volumeSize": 12,
 }
 `;

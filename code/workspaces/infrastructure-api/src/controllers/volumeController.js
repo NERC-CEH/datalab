@@ -51,6 +51,7 @@ function deleteVolumeExec(request, response) {
 }
 
 const coreVolumeValidator = [
+  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
   check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified').trim(),
   check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified').trim(),
   check('name')

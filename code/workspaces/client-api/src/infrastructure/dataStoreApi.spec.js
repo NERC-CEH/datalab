@@ -12,6 +12,7 @@ describe('Data Storage API configuration', () => {
   it('should give correct API request for creation', () => {
     const dataStore = {
       name: 'expectedName',
+      projectKey: 'project',
       displayName: 'expectedDisplayName',
       description: 'expected description',
       storageType: 2,
@@ -24,6 +25,7 @@ describe('Data Storage API configuration', () => {
   it('should give correct API payload for creation', () => {
     const datalabRequest = {
       name: 'dataStoreName',
+      projectKey: 'project',
       volumeSize: 12,
       linkToStorage: 'https://notebookName-minio.test-datalabs.nerc.ac.uk/minio',
       extra: 'field',
@@ -35,6 +37,7 @@ describe('Data Storage API configuration', () => {
   it('should give correct API payload for deletion', () => {
     const dataStore = {
       name: 'dataStoreName',
+      projectKey: 'project',
       volumeSize: 12,
       extra: 'field',
     };

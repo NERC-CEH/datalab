@@ -6,11 +6,11 @@ import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRule } from './stackBuilders';
 
 function createRShinyStack(params) {
-  const { datalabInfo, name, type } = params;
+  const { datalabInfo, projectKey, name, type } = params;
 
   return createDeployment(params, deploymentGenerator.createRShinyDeployment)()
     .then(createService(name, type, deploymentGenerator.createRShinyService))
-    .then(createIngressRule(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRule(name, type, datalabInfo, projectKey, ingressGenerator.createIngress));
 }
 
 function deleteRShinyStack(params) {

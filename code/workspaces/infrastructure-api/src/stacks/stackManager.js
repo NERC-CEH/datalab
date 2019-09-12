@@ -4,7 +4,7 @@ import stackRepository from '../dataaccess/stacksRepository';
 import { REQUESTED } from '../models/stack.model';
 
 function createStack(user, params) {
-  const { datalabInfo, name, type } = params;
+  const { datalabInfo, projectKey, name, type } = params;
   const stack = Stacks.getStack(type);
 
   if (!stack) {
@@ -20,7 +20,7 @@ function createStack(user, params) {
         ...params,
         category: stack.category,
         status: REQUESTED,
-        url: `https://${datalabInfo.name}-${name}.${datalabInfo.domain}`,
+        url: `https://${projectKey}-${name}.${datalabInfo.domain}`,
         internalEndpoint: `http://${params.type}-${name}`,
       },
     )

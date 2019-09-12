@@ -15,7 +15,7 @@ function createJupyterNotebook(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createJupyterDeployment))
     .then(createService(name, type, deploymentGenerator.createJupyterService))
-    .then(createIngressRule(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRule(name, type, datalabInfo, projectKey, ingressGenerator.createIngress));
 }
 
 function deleteJupyterNotebook(params) {

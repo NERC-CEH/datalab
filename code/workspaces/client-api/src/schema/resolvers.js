@@ -43,8 +43,12 @@ const resolvers = {
   Mutation: {
     createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
-    createDataStore: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, dataStore)),
-    deleteDataStore: (obj, { dataStore }, { user, token }) => permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, dataStore)),
+    createDataStore: (obj, { dataStore }, { user, token }) => (
+      permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...dataStore }))
+    ),
+    deleteDataStore: (obj, { dataStore }, { user, token }) => (
+      permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...dataStore }))
+    ),
     addUserToDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
     removeUserFromDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.removeUsers(user, name, users)),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
