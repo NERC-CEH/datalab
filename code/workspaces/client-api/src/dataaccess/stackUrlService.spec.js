@@ -158,7 +158,7 @@ describe('stackUrlService', () => {
       internalEndpoint: 'http://nbviewer',
     };
 
-    it('returns the nbviewer localfile url', () => stackUrlService(projectKey, notebook, 'user')
+    it('returns the nbviewer localfile url', () => stackUrlService(projectKey, notebook)
       .then(url => expect(url).toEqual('http://nbviewer.datalab/localfile')));
   });
 
