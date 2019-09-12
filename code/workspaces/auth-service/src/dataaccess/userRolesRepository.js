@@ -1,6 +1,7 @@
 import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
+import logger from 'winston';
 
 function UserRoles() {
   return database.getModel('UserRoles');
@@ -8,15 +9,13 @@ function UserRoles() {
 
 // In line with other repository functions, this returns a promise,
 // but the model document is first converted to an object so the spread operator works as expected.
-function getRoles(userId) {
-  return UserRoles().findOne({ userId }).exec()
-    .then((document) => {
-      try {
-        return document.toObject();
-      } catch (err) {
-        return addEmptyRecordForNewUser(userId);
-      }
-    });
+async function getRoles(userId) {
+  let roles = await UserRoles().findOne({ userId }).exec();
+  if (!roles) {
+    roles = await addEmptyRecordForNewUser(userId);
+  }
+
+  return roles.toObject();
 }
 
 function getProjectUsers(projectKey) {
@@ -24,20 +23,13 @@ function getProjectUsers(projectKey) {
   return UserRoles().find(query).exec();
 }
 
-async function addEmptyRecordForNewUser(userId) {
-  // setOnInsert used to prevent accidental override of entry
-  const query = { userId };
+function addEmptyRecordForNewUser(userId) {
   const user = {
     userId,
     projectRoles: [],
     instanceAdmin: false,
   };
-  await UserRoles().findOneAndUpdate(
-    query,
-    { $setOnInsert: user },
-    { upsert: true, setDefaultsOnInsert: true, runValidators: true },
-  );
-  return user;
+  return UserRoles().create(user);
 }
 
 async function addRole(userId, projectKey, role) {
