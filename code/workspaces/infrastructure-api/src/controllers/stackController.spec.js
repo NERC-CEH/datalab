@@ -205,6 +205,7 @@ describe('Stack Controller', () => {
 
 function mutationRequestBody() {
   return {
+    projectKey: 'project',
     datalabInfo: {
       name: 'testlab',
       domain: 'test-datalabs.nerc.ac.uk',

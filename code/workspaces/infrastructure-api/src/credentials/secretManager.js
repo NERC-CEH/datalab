@@ -21,20 +21,20 @@ function createNewUserCredentials() {
   };
 }
 
-function storeCredentialsInVault(datalab, id, secret) {
-  return vault.ensureSecret(`${datalab}/stacks/${id}`, secret);
+function storeCredentialsInVault(projectKey, id, secret) {
+  return vault.ensureSecret(`${projectKey}/stacks/${id}`, secret);
 }
 
-function deleteSecret(datalab, id) {
-  return vault.deleteSecret(`${datalab}/stacks/${id}`);
+function deleteSecret(projectKey, id) {
+  return vault.deleteSecret(`${projectKey}/stacks/${id}`);
 }
 
-function storeMinioCredentialsInVault(datalab, id, strategy) {
-  return vault.ensureSecret(`${datalab}/storage/${id}`, strategy);
+function storeMinioCredentialsInVault(projectKey, id, strategy) {
+  return vault.ensureSecret(`${projectKey}/storage/${id}`, strategy);
 }
 
-function deleteMinioCredentials(datalab, id) {
-  return vault.deleteSecret(`${datalab}/storage/${id}`);
+function deleteMinioCredentials(projectKey, id) {
+  return vault.deleteSecret(`${projectKey}/storage/${id}`);
 }
 
 export default {

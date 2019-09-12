@@ -8,11 +8,11 @@ import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRuleWithConnect } from './stackBuilders';
 
 function createRStudioStack(params) {
-  const { datalabInfo, name, type } = params;
+  const { projectKey, name, type } = params;
   const secretStrategy = secretManager.createNewUserCredentials;
   const proxyTimeout = '1800';
 
-  return secretManager.storeCredentialsInVault(datalabInfo.name, name, secretStrategy)
+  return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(name, type, deploymentGenerator.createRStudioService))
@@ -20,14 +20,14 @@ function createRStudioStack(params) {
 }
 
 function deleteRStudioStack(params) {
-  const { datalabInfo, name, type } = params;
+  const { datalabInfo, projectKey, name, type } = params;
   const k8sName = `${type}-${name}`;
 
   return ingressApi.deleteIngress(k8sName, datalabInfo)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))
     .then(() => k8sSecretApi.deleteSecret(k8sName))
-    .then(() => secretManager.deleteSecret(datalabInfo.name, name));
+    .then(() => secretManager.deleteSecret(projectKey, name));
 }
 
 export default { createRStudioStack, deleteRStudioStack };

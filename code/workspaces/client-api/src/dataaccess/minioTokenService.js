@@ -1,12 +1,9 @@
 import axios from 'axios';
 import logger from 'winston';
 import vault from './vault/vault';
-import config from '../config';
 
-const DATALAB_NAME = config.get('datalabName');
-
-function requestMinioToken(storage) {
-  return vault.requestStorageKeys(DATALAB_NAME, storage)
+function requestMinioToken(projectKey, storage) {
+  return vault.requestStorageKeys(projectKey, storage)
     .then(minioLogin(storage))
     .catch((error) => {
       logger.error('Error logging in to minio: ', storage.name, error);
