@@ -8,6 +8,7 @@ import { permissionTypes } from 'common';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
+import ProjectTitleContainer from '../../containers/projectInfo/ProjectTitleContainer';
 
 const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
 
@@ -37,34 +38,39 @@ const styles = theme => ({
   },
 });
 
+const SideBarAnalysis = ({ userPermissions, projectKey }) => (
+  [
+    <SideBarGroup title='Analysis' key='Analysis'>
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
+        <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
+      </PermissionWrapper>
+      <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
+      <SideBarButton to={`/projects/${projectKey}/spark`} label="Spark" icon="apps" />
+    </SideBarGroup>,
+    <SideBarGroup key='StorageEtc'>
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
+        <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
+      </PermissionWrapper>
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
+        <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
+      </PermissionWrapper>
+      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
+        <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
+      </PermissionWrapper>
+    </SideBarGroup>,
+  ]
+);
+
 const SideBar = ({ classes, userPermissions, projectKey }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
-      <SideBarGroup>
+      <SideBarGroup key='Info'>
         <ListItem className={classes.projectTitleLI}>
-          <ListItemText classes={{ primary: classes.projectTitleLIT }}>My project title</ListItemText>
+          <ListItemText classes={{ primary: classes.projectTitleLIT }}><ProjectTitleContainer projectKey={projectKey} /></ListItemText>
         </ListItem>
         <SideBarButton to={`/projects/${projectKey}/info`} label="Information" icon="info_outline" />
       </SideBarGroup>
-      <SideBarGroup title='Analysis'>
-        <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
-          <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
-        </PermissionWrapper>
-        <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
-        <SideBarButton to={`/projects/${projectKey}/spark`} label="Spark" icon="apps" />
-      </SideBarGroup>
-
-      <SideBarGroup>
-        <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
-          <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
-        </PermissionWrapper>
-        <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
-          <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
-        </PermissionWrapper>
-        <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
-          <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
-        </PermissionWrapper>
-      </SideBarGroup>
+      <SideBarAnalysis userPermissions={userPermissions} projectKey={projectKey} />
     </List>
   </div>
 );
@@ -75,4 +81,6 @@ SideBar.propTypes = {
   projectKey: PropTypes.string.isRequired,
 };
 
+const StyledSideBarAnalysis = withStyles(styles)(SideBarAnalysis);
+export { StyledSideBarAnalysis }; // export for testing
 export default withStyles(styles)(SideBar);

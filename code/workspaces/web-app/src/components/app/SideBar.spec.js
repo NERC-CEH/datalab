@@ -1,17 +1,24 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { createShallow, createMount } from '@material-ui/core/test-utils';
-import SideBar from './SideBar';
+import SideBar, { StyledSideBarAnalysis } from './SideBar';
 
 describe('Sidebar', () => {
   const userPermissions = ['project:storage:list', 'project:stacks:list', 'project:settings:list'];
   const projectKey = 'project99';
 
-  function shallowRender() {
+  function shallowRenderSideBar() {
     const shallow = createShallow({ dive: true });
     const props = { userPermissions, projectKey };
 
     return shallow(<SideBar {...props} />);
+  }
+
+  function shallowRenderStyledSideBarAnalysis() {
+    const shallow = createShallow({ dive: true });
+    const props = { userPermissions, projectKey };
+
+    return shallow(<StyledSideBarAnalysis {...props} />);
   }
 
   function fullRender(path) {
@@ -20,13 +27,14 @@ describe('Sidebar', () => {
 
     return mount(
       <MemoryRouter initialEntries={path}>
-        <SideBar {...props} />
+        <StyledSideBarAnalysis {...props} />
       </MemoryRouter>,
     );
   }
 
   it('correctly renders correct snapshot', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    expect(shallowRenderSideBar()).toMatchSnapshot();
+    expect(shallowRenderStyledSideBarAnalysis()).toMatchSnapshot();
   });
 
   it('renders "Storage" label as active when on /storage route', () => {

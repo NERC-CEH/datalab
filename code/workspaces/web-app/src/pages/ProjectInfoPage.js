@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Page from './Page';
+import ProjectInfoContainer from '../containers/projectInfo/ProjectInfoContainer';
 
 const ProjectInfoPage = ({ match }) => (
   <Page title="Information">
-    <div>
-      This is the project information page.
-    </div>
-    <div>
-      The projectKey is {match.params.projectKey}
-    </div>
+    <ProjectInfoContainer projectKey={match.params.projectKey} />
   </Page>
 );
 

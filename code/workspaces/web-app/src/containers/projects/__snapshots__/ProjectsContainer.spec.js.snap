@@ -3,6 +3,7 @@
 exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
 Array [
   "loadProjects",
+  "loadProjectInfo",
 ]
 `;
 
@@ -11,11 +12,11 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
   promise={
     Object {
       "fetching": false,
-      "value": Array [
-        Object {
-          "props": "expectedPropValue",
-        },
-      ],
+      "value": Object {
+        "projectArray": Array [
+          "expectedArray",
+        ],
+      },
     }
   }
 >
@@ -29,9 +30,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
     openStack={[Function]}
     stacks={
       Array [
-        Object {
-          "props": "expectedPropValue",
-        },
+        "expectedArray",
       ]
     }
     typeName="Project"

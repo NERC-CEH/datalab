@@ -5,12 +5,12 @@ import {
   PROMISE_TYPE_FAILURE,
 } from '../actions/actionTypes';
 import {
-  LOAD_PROJECTS_ACTION,
+  LOAD_PROJECTS_ACTION, LOAD_PROJECTINFO_ACTION,
 } from '../actions/projectActions';
 
 const initialState = {
   fetching: false,
-  value: [],
+  value: {},
   error: null,
 };
 
@@ -20,4 +20,9 @@ export default typeToReducer({
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
   },
-}, initialState);
+  [LOAD_PROJECTINFO_ACTION]: {
+    [PROMISE_TYPE_PENDING]: () => ({ ...initialState, fetching: true }),
+    [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
+  },
+}, { ...initialState });

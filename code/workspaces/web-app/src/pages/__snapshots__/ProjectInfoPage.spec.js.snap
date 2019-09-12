@@ -4,12 +4,8 @@ exports[`ProjectInfoPage renders correct snapshot 1`] = `
 <WithStyles(Page)
   title="Information"
 >
-  <div>
-    This is the project information page.
-  </div>
-  <div>
-    The projectKey is 
-    project99
-  </div>
+  <Connect(ProjectInfoContainer)
+    projectKey="project99"
+  />
 </WithStyles(Page)>
 `;

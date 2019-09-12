@@ -5,7 +5,7 @@ import { LOAD_PROJECTS_ACTION } from '../actions/projectActions';
 describe('projectsReducer', () => {
   it('should return the initial state', () => {
     // Act/Assert
-    expect(projectsReducer(undefined, {})).toEqual({ fetching: false, value: [], error: null });
+    expect(projectsReducer(undefined, {})).toEqual({ fetching: false, value: {}, error: null });
   });
 
   it('should handle LOAD_PROJECTS_PENDING', () => {
@@ -14,20 +14,22 @@ describe('projectsReducer', () => {
     const action = { type };
 
     // Act
-    const nextstate = projectsReducer({ error: null, fetching: false, value: [] }, action);
+    const nextstate = projectsReducer({ error: null, fetching: false, value: {} }, action);
 
     // Assert
-    expect(nextstate).toEqual({ error: null, fetching: true, value: [] });
+    expect(nextstate).toEqual({ error: null, fetching: true, value: {} });
   });
 
   it('should handle LOAD_PROJECTS_SUCCESS', () => {
     // Arrange
     const type = `${LOAD_PROJECTS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-    const payload = [{ project: 'firstProject' }, { project: 'secondProject' }];
+    const payload = {
+      projectArray: [{ project: 'firstProject' }, { project: 'secondProject' }],
+    };
     const action = { type, payload };
 
     // Act
-    const nextstate = projectsReducer({ error: null, fetching: false, value: [] }, action);
+    const nextstate = projectsReducer({ error: null, fetching: false, value: {} }, action);
 
     // Assert
     expect(nextstate).toEqual({ error: null, fetching: false, value: payload });
@@ -40,9 +42,9 @@ describe('projectsReducer', () => {
     const action = { type, payload };
 
     // Act
-    const nextstate = projectsReducer({ error: null, fetching: false, value: [] }, action);
+    const nextstate = projectsReducer({ error: null, fetching: false, value: {} }, action);
 
     // Assert
-    expect(nextstate).toEqual({ error: payload, fetching: false, value: [] });
+    expect(nextstate).toEqual({ error: payload, fetching: false, value: {} });
   });
 });

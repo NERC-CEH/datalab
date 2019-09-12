@@ -15,30 +15,32 @@ const TYPE_NAME = 'Project';
 class ProjectsContainer extends Component {
   shouldComponentUpdate(nextProps) {
     const isFetching = nextProps.projects.fetching;
-    return !isFetching;
+    return !isFetching || this.props.projects.isFetching !== isFetching;
   }
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     this.props.actions.loadProjects()
-      .catch((() => {}));
+      .catch((() => { }));
   }
 
   render() {
     return (
       <PromisedContentWrapper promise={this.props.projects}>
-        <StackCards
-          stacks={this.props.projects.value}
-          typeName={TYPE_NAME}
-          openStack={id => this.props.history.push(`/projects/${id}/info`) }
-          deleteStack={() => {}}
-          openCreationForm={() => {}}
-          userPermissions={this.props.userPermissions}
-          createPermission=""
-          openPermission={PROJECT_STORAGE_OPEN}
-          deletePermission=""
-          editPermission=""
-        />
+        {this.props.projects.value.projectArray ? (
+          <StackCards
+            stacks={this.props.projects.value.projectArray}
+            typeName={TYPE_NAME}
+            openStack={id => this.props.history.push(`/projects/${id}/info`)}
+            deleteStack={() => { }}
+            openCreationForm={() => { }}
+            userPermissions={this.props.userPermissions}
+            createPermission=""
+            openPermission={PROJECT_STORAGE_OPEN}
+            deletePermission=""
+            editPermission=""
+          />
+        ) : (<div />)}
       </PromisedContentWrapper>
     );
   }
@@ -48,7 +50,7 @@ ProjectsContainer.propTypes = {
   projects: PropTypes.shape({
     error: PropTypes.any,
     fetching: PropTypes.bool.isRequired,
-    value: PropTypes.array.isRequired,
+    value: PropTypes.object.isRequired,
   }).isRequired,
   actions: PropTypes.shape({
     loadProjects: PropTypes.func.isRequired,

@@ -1,27 +1,28 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import { PureProjectsContainer, ConnectedProjectsContainer } from './ProjectsContainer';
+import ProjectTitleContainer, { PureProjectTitleContainer } from './ProjectTitleContainer';
 import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
-const loadProjectsMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-projectsService.loadProjects = loadProjectsMock;
+const loadProjectInfoMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+projectsService.loadProjectInfo = loadProjectInfoMock;
 
-describe('ProjectsContainer', () => {
+describe('ProjectTitleContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
         store,
+        projectKey: 'project99',
         PrivateComponent: () => {},
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
       };
 
-      return shallow(<ConnectedProjectsContainer {...props} />).find('ProjectsContainer');
+      return shallow(<ProjectTitleContainer {...props} />).find('ProjectTitleContainer');
     }
 
-    const projects = { fetching: false, value: { projectArray: ['expectedArray'] } };
+    const projects = { fetching: false, value: { currentProject: { id: 'expectedId' } } };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
@@ -49,7 +50,7 @@ describe('ProjectsContainer', () => {
       expect(Object.keys(output)).toMatchSnapshot();
     });
 
-    it('loadProjects function dispatch correct action', () => {
+    it('loadProjectInfo function dispatch correct action', () => {
       // Arrange
       const store = createStore()({
         projects,
@@ -60,31 +61,32 @@ describe('ProjectsContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadProjects();
+      output.prop('actions').loadProjectInfo();
       const { type, payload } = store.getActions()[0];
-      expect(type).toBe('LOAD_PROJECTS');
+      expect(type).toBe('LOAD_PROJECTINFO');
       return payload.then(value => expect(value).toBe('expectedPayload'));
     });
   });
 
   describe('is a container which', () => {
     function shallowRenderPure(props) {
-      return shallow(<PureProjectsContainer {...props} />);
+      return shallow(<PureProjectTitleContainer {...props} />);
     }
 
-    const projects = { fetching: false, value: { projectArray: ['expectedArray'] } };
+    const projects = { fetching: false, value: { currentProject: { id: 'expectedId' } } };
 
     const generateProps = () => ({
       projects,
+      projectKey: 'project99',
       userPermissions: ['expectedPermission'],
       actions: {
-        loadProjects: loadProjectsMock,
+        loadProjectInfo: loadProjectInfoMock,
       },
     });
 
     beforeEach(() => jest.clearAllMocks());
 
-    it('calls loadProjects action when mounted', () => {
+    it('calls loadProjectInfo action when mounted', () => {
       // Arrange
       const props = generateProps();
 
@@ -92,10 +94,10 @@ describe('ProjectsContainer', () => {
       shallowRenderPure(props);
 
       // Assert
-      expect(loadProjectsMock).toHaveBeenCalledTimes(1);
+      expect(loadProjectInfoMock).toHaveBeenCalledTimes(1);
     });
 
-    it('passes correct props to StackCard', () => {
+    it('passes correct props', () => {
       // Arrange
       const props = generateProps();
 
