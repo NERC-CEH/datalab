@@ -3,7 +3,7 @@ import { createShallow } from '@material-ui/core/test-utils';
 import { PERMISSIONS, PERMISSION_VALUES } from '../../constants/permissions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import {
-  getTable,
+  PureUserPermissionsTable,
   getFullWidthRow,
   getFullWidthTextRow,
   getTableRow,
@@ -35,7 +35,7 @@ describe('projectUsersSelector', () => {
   });
 });
 
-describe('getTable', () => {
+describe('PureUserPermissionsTable', () => {
   let shallow;
 
   beforeEach(() => {
@@ -66,7 +66,11 @@ describe('getTable', () => {
     it('renders correctly displaying there are no users', () => {
       expect(
         shallow(
-          getTable(initialUsers, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={initialUsers}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -81,7 +85,11 @@ describe('getTable', () => {
     it('renders correctly displaying there is an error', () => {
       expect(
         shallow(
-          getTable(users, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={users}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -96,7 +104,11 @@ describe('getTable', () => {
     it('renders progress indicator', () => {
       expect(
         shallow(
-          getTable(users, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={users}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -115,7 +127,11 @@ describe('getTable', () => {
     it('renders correctly showing users and their permissions', () => {
       expect(
         shallow(
-          getTable(users, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={users}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });

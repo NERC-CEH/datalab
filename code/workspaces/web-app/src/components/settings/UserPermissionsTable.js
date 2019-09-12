@@ -79,11 +79,19 @@ function UserPermissionsTable({ classes }) {
   );
 
   return (
-    getTable(users, classes, columnHeadings, removeUserDialogState, setRemoveUserDialogState, dispatchRemoveUserPermissions, dispatch)
+    <PureUserPermissionsTable
+      users={users}
+      classes={classes}
+      colHeadings={columnHeadings}
+      removeUserDialogState={removeUserDialogState}
+      setRemoveUserDialogState={setRemoveUserDialogState}
+      onRemoveUserDialogConfirmationFn={dispatchRemoveUserPermissions}
+      dispatch={dispatch}
+    />
   );
 }
 
-export function getTable(users, classes, colHeadings, removeUserDialogState, setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, dispatch) {
+export function PureUserPermissionsTable({ users, classes, colHeadings, removeUserDialogState, setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, dispatch }) {
   return (
     <div>
       <Table>

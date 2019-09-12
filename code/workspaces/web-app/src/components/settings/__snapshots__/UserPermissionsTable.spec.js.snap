@@ -1,87 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RemoveUserDialog when the dialog state has open equal to false renders as null 1`] = `""`;
-
-exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  open={true}
->
-  <WithStyles(ForwardRef(DialogTitle))>
-    Remove User Permissions?
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))>
-      Are you sure you want to remove all project permissions for User One?
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(ForwardRef(Button))
-      id="cancel-button"
-      onClick={[Function]}
-    >
-      Cancel
-    </WithStyles(ForwardRef(Button))>
-    <WithStyles(ForwardRef(Button))
-      className="dialogDeleteUserButton"
-      id="confirm-button"
-      onClick={[Function]}
-      variant="outlined"
-    >
-      Confirm
-    </WithStyles(ForwardRef(Button))>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
-`;
-
-exports[`getFullWidthRow returns a table row with correct colSpan and content 1`] = `
-<ForwardRef(TableRow)
-  classes={
-    Object {
-      "footer": "MuiTableRow-footer",
-      "head": "MuiTableRow-head",
-      "hover": "MuiTableRow-hover",
-      "root": "MuiTableRow-root",
-      "selected": "Mui-selected",
-    }
-  }
->
-  <WithStyles(ForwardRef(TableCell))
-    align="center"
-    colSpan={4}
-  >
-    <div>
-      row content
-    </div>
-  </WithStyles(ForwardRef(TableCell))>
-</ForwardRef(TableRow)>
-`;
-
-exports[`getFullWidthTextRow returns a table row with correct colSpan and text wrapped in Typography 1`] = `
-<ForwardRef(TableRow)
-  classes={
-    Object {
-      "footer": "MuiTableRow-footer",
-      "head": "MuiTableRow-head",
-      "hover": "MuiTableRow-hover",
-      "root": "MuiTableRow-root",
-      "selected": "Mui-selected",
-    }
-  }
->
-  <WithStyles(ForwardRef(TableCell))
-    align="center"
-    colSpan={4}
-  >
-    <WithStyles(ForwardRef(Typography))
-      variant="body1"
-    >
-      Text to go in row.
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(TableCell))>
-</ForwardRef(TableRow)>
-`;
-
-exports[`getTable when fetching data renders progress indicator 1`] = `
+exports[`PureUserPermissionsTable when fetching data renders progress indicator 1`] = `
 <div>
   <WithStyles(ForwardRef(Table))>
     <WithStyles(ForwardRef(TableHead))>
@@ -176,7 +95,7 @@ exports[`getTable when fetching data renders progress indicator 1`] = `
 </div>
 `;
 
-exports[`getTable when there are no users renders correctly displaying there are no users 1`] = `
+exports[`PureUserPermissionsTable when there are no users renders correctly displaying there are no users 1`] = `
 <div>
   <WithStyles(ForwardRef(Table))>
     <WithStyles(ForwardRef(TableHead))>
@@ -275,7 +194,7 @@ exports[`getTable when there are no users renders correctly displaying there are
 </div>
 `;
 
-exports[`getTable when there are users renders correctly showing users and their permissions 1`] = `
+exports[`PureUserPermissionsTable when there are users renders correctly showing users and their permissions 1`] = `
 <div>
   <WithStyles(ForwardRef(Table))>
     <WithStyles(ForwardRef(TableHead))>
@@ -545,7 +464,7 @@ exports[`getTable when there are users renders correctly showing users and their
 </div>
 `;
 
-exports[`getTable when there is an error renders correctly displaying there is an error 1`] = `
+exports[`PureUserPermissionsTable when there is an error renders correctly displaying there is an error 1`] = `
 <div>
   <WithStyles(ForwardRef(Table))>
     <WithStyles(ForwardRef(TableHead))>
@@ -642,6 +561,87 @@ exports[`getTable when there is an error renders correctly displaying there is a
     project="project"
   />
 </div>
+`;
+
+exports[`RemoveUserDialog when the dialog state has open equal to false renders as null 1`] = `""`;
+
+exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Remove User Permissions?
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))>
+      Are you sure you want to remove all project permissions for User One?
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      id="cancel-button"
+      onClick={[Function]}
+    >
+      Cancel
+    </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
+      className="dialogDeleteUserButton"
+      id="confirm-button"
+      onClick={[Function]}
+      variant="outlined"
+    >
+      Confirm
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;
+
+exports[`getFullWidthRow returns a table row with correct colSpan and content 1`] = `
+<ForwardRef(TableRow)
+  classes={
+    Object {
+      "footer": "MuiTableRow-footer",
+      "head": "MuiTableRow-head",
+      "hover": "MuiTableRow-hover",
+      "root": "MuiTableRow-root",
+      "selected": "Mui-selected",
+    }
+  }
+>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    colSpan={4}
+  >
+    <div>
+      row content
+    </div>
+  </WithStyles(ForwardRef(TableCell))>
+</ForwardRef(TableRow)>
+`;
+
+exports[`getFullWidthTextRow returns a table row with correct colSpan and text wrapped in Typography 1`] = `
+<ForwardRef(TableRow)
+  classes={
+    Object {
+      "footer": "MuiTableRow-footer",
+      "head": "MuiTableRow-head",
+      "hover": "MuiTableRow-hover",
+      "root": "MuiTableRow-root",
+      "selected": "Mui-selected",
+    }
+  }
+>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    colSpan={4}
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      Text to go in row.
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(TableCell))>
+</ForwardRef(TableRow)>
 `;
 
 exports[`getTableHead renders correct header bar based on column headings 1`] = `
