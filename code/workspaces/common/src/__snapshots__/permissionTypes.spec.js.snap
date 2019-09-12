@@ -61,6 +61,6 @@ Object {
 
 exports[`PermissionTypes generates expected system permissions 1`] = `
 Object {
-  "INSTANCE_ADMIN": "instance:admin",
+  "SYSTEM_INSTANCE_ADMIN": "system:instance:admin",
 }
 `;

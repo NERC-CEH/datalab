@@ -64,10 +64,13 @@ const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
 
 const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
 
-const systemPermissions = flatMapPermissions({ INSTANCE }, { ADMIN });
+const systemPermissions = flatMapPermissions({ SYSTEM }, flatMapPermissions({ INSTANCE }, { ADMIN }));
+
+const { SYSTEM_INSTANCE_ADMIN } = systemPermissions;
 
 export {
   INSTANCE_ADMIN_ROLE,
+  SYSTEM_INSTANCE_ADMIN,
   PROJECT,
   SYSTEM,
   elementPermissions,

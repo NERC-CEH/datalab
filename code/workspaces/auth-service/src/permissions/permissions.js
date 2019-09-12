@@ -39,10 +39,17 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
-const processRoles = ({ projectRoles, [INSTANCE_ADMIN_ROLE]: instanceAdmin }) => [
-  ...projectRoles || [],
-  ...(instanceAdmin && [{ projectKey: SYSTEM, role: INSTANCE_ADMIN_ROLE }]) || [],
-]
+function expandRoles(userRoles) {
+  const projectRoles = userRoles.projectRoles || [];
+
+  if (userRoles[INSTANCE_ADMIN_ROLE]) {
+    projectRoles.push({ projectKey: SYSTEM, role: INSTANCE_ADMIN_ROLE });
+  }
+
+  return projectRoles;
+}
+
+const processRoles = userRoles => expandRoles(userRoles)
   .map(getPermissions)
   .map(buildPermissions)
   .map(projectifyPermissions)
