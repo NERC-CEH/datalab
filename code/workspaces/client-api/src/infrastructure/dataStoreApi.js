@@ -17,18 +17,20 @@ const baseConfig = {
 
 export const createDataStoreRequest = (dataStore, datalabInfo) => ({
   ...dataStore,
-  url: `https://${datalabInfo.name}-${dataStore.name}.${datalabInfo.domain}/minio`,
+  url: `https://${dataStore.projectKey}-${dataStore.name}.${datalabInfo.domain}/minio`,
   internalEndpoint: `http://minio-${dataStore.name}/minio`,
 });
 
 export const createDataStorePayload = (datalabRequest, datalabInfo) => ({
   datalabInfo,
   name: datalabRequest.name,
+  projectKey: datalabRequest.projectKey,
   volumeSize: datalabRequest.volumeSize,
 });
 
 export const deleteDataStorePayload = (dataStore, datalabInfo) => ({
   datalabInfo,
+  projectKey: dataStore.projectKey,
   name: dataStore.name,
 });
 

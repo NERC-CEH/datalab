@@ -27,6 +27,7 @@ const params = {
     domain: 'expectedDatalabDomain',
     name: 'expectedDatalabName',
   },
+  projectKey: 'project',
   name: 'expectedName',
   type: 'expectedType',
   another: 'field',

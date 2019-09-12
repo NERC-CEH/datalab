@@ -8,6 +8,7 @@ Object {
     "name": "expectedDatalabName",
   },
   "name": "expectedName",
+  "projectKey": "project",
   "type": "expectedType",
 }
 `;
@@ -25,9 +26,10 @@ Array [
       },
       "internalEndpoint": "http://expectedType-expectedName",
       "name": "expectedName",
+      "projectKey": "project",
       "status": "requested",
       "type": "expectedType",
-      "url": "https://expectedDatalabName-expectedName.expectedDatalabDomain",
+      "url": "https://project-expectedName.expectedDatalabDomain",
     },
   ],
 ]
@@ -47,6 +49,7 @@ Object {
     "name": "expectedDatalabName",
   },
   "name": "expectedName",
+  "projectKey": "project",
   "type": "expectedType",
 }
 `;
@@ -62,6 +65,7 @@ Array [
         "name": "expectedDatalabName",
       },
       "name": "expectedName",
+      "projectKey": "project",
       "type": "expectedType",
     },
   ],

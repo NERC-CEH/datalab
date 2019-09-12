@@ -10,6 +10,7 @@ const states = [REQUESTED, CREATING, DELETED];
 
 const DataStorageSchema = new Schema({
   name: String,
+  projectKey: String,
   displayName: String,
   description: String,
   type: Number,

@@ -15,6 +15,7 @@ const category = [ANALYSIS, PUBLISH];
 
 const StackSchema = new Schema({
   name: String,
+  projectKey: String,
   displayName: String,
   type: String,
   description: String,

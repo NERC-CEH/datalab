@@ -15,7 +15,7 @@ function createJupyterLab(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
     .then(createDeployment(params, deploymentGenerator.createJupyterlabDeployment))
     .then(createService(name, type, deploymentGenerator.createJupyterlabService))
-    .then(createIngressRule(name, type, datalabInfo, ingressGenerator.createIngress));
+    .then(createIngressRule(name, type, datalabInfo, projectKey, ingressGenerator.createIngress));
 }
 
 function deleteJupyterLab(params) {

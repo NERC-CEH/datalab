@@ -96,6 +96,7 @@ function createRequestBody() {
       domain: 'test-datalabs.nerc.ac.uk',
     },
     name: 'volumeName',
+    projectKey: 'project',
     volumeSize: '10',
   };
 }
