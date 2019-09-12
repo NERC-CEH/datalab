@@ -1,8 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { startCase } from 'lodash';
+import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
@@ -32,6 +40,13 @@ const styles = theme => ({
       paddingRight: 0,
     },
   },
+  dialogDeleteUserButton: {
+    color: theme.palette.dangerColor,
+    borderColor: theme.palette.dangerColor,
+    '&:hover': {
+      background: theme.palette.dangerBackgroundColorLight,
+    },
+  },
 });
 
 export const columnHeadings = [
@@ -41,7 +56,7 @@ export const columnHeadings = [
     heading: startCase(item.name),
     checkBoxCol: true,
   })),
-);
+).concat([{ heading: '', checkBoxCol: true }]); // Gives blank column heading for remove buttons
 
 const checkBoxColumnOrder = SORTED_PERMISSIONS;
 
@@ -54,6 +69,8 @@ function UserPermissionsTable({ classes }) {
   );
   const dispatch = useDispatch();
 
+  const [removeUserDialogState, setRemoveUserDialogState] = useState({ open: false, user: null });
+
   useEffect(
     () => {
       dispatch(projectSettingsActions.getProjectUserPermissions('project'));
@@ -62,20 +79,30 @@ function UserPermissionsTable({ classes }) {
   );
 
   return (
-    getTable(users, classes, columnHeadings)
+    getTable(users, classes, columnHeadings, removeUserDialogState, setRemoveUserDialogState, dispatchRemoveUserPermissions, dispatch)
   );
 }
 
-export function getTable(users, classes, colHeadings) {
+export function getTable(users, classes, colHeadings, removeUserDialogState, setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, dispatch) {
   return (
-    <Table>
-      <TableHead>
-        {getTableHead(columnHeadings, classes)}
-      </TableHead>
-      <TableBody>
-        {getTableBody(users, classes, colHeadings.length)}
-      </TableBody>
-    </Table>
+    <div>
+      <Table>
+        <TableHead>
+          {getTableHead(columnHeadings, classes)}
+        </TableHead>
+        <TableBody>
+          {getTableBody(users, classes, colHeadings.length, setRemoveUserDialogState)}
+        </TableBody>
+      </Table>
+      <RemoveUserDialog
+        classes={classes}
+        state={removeUserDialogState}
+        setState={setRemoveUserDialogState}
+        onRemoveConfirmationFn={onRemoveUserDialogConfirmationFn}
+        project="project"
+        dispatch={dispatch}
+      />
+    </div>
   );
 }
 
@@ -96,7 +123,7 @@ export function getTableHead(headings, classes) {
   );
 }
 
-export function getTableBody(users, classes, numCols) {
+export function getTableBody(users, classes, numCols, setRemoveUserDialogState) {
   if (users.fetching.error || !users.value) {
     return getFullWidthTextRow(
       'Error fetching data. Please try refreshing the page.',
@@ -112,7 +139,7 @@ export function getTableBody(users, classes, numCols) {
     return getFullWidthTextRow('No users have project permissions.', numCols);
   }
 
-  return users.value.map((user, index) => getTableRow(user, index, classes));
+  return users.value.map((user, index) => getTableRow(user, index, classes, setRemoveUserDialogState));
 }
 
 export function getFullWidthRow(content, numCols) {
@@ -132,7 +159,7 @@ export function getFullWidthTextRow(text, numCols) {
   );
 }
 
-export function getTableRow(user, index, classes) {
+export function getTableRow(user, index, classes, setRemoveUserDialogState) {
   const rowKey = `row-${index}`;
   return (
     <TableRow key={rowKey}>
@@ -147,6 +174,7 @@ export function getTableRow(user, index, classes) {
           `${rowKey}-${permission.name}`,
         ),
       )}
+      {getRemoveUserButtonCell(user, classes, setRemoveUserDialogState)}
     </TableRow>
   );
 }
@@ -176,6 +204,52 @@ export function getCheckbox(userRole, checkbox, classes) {
     );
   }
   return <Checkbox checked={false}/>;
+}
+
+export function getRemoveUserButtonCell(user, classes, setRemoveUserDialogState) {
+  return (
+    <TableCell className={classes.tableCell} padding="checkbox" align="center">
+      <IconButton onClick={() => {
+        setRemoveUserDialogState({ user, open: true });
+      }}>
+        <Icon>{'remove_circle_outline'}</Icon>
+      </IconButton>
+    </TableCell>
+  );
+}
+
+export function RemoveUserDialog({ classes, state, setState, onRemoveConfirmationFn, project, dispatch }) {
+  if (!state.open) return null;
+
+  const closedState = { user: null, open: false };
+  return (
+    <Dialog open={state.open}>
+      <DialogTitle>Remove User Permissions?</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {`Are you sure you want to remove all project permissions for ${state.user.name}?`}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button id="cancel-button" onClick={() => setState(closedState)}>Cancel</Button>
+        <Button
+          id="confirm-button"
+          className={classes.dialogDeleteUserButton}
+          variant="outlined"
+          onClick={() => {
+            onRemoveConfirmationFn(project, state.user, dispatch);
+            setState(closedState);
+          }}
+        >
+          Confirm
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
+export function dispatchRemoveUserPermissions(projectKey, user, dispatch) {
+  dispatch(projectSettingsActions.removeUserPermission(projectKey, user));
 }
 
 export default withStyles(styles)(UserPermissionsTable);

@@ -17,12 +17,22 @@ export function getProjectUsers(projectId) {
 
 export function addProjectUserPermission(projectKey, userId, role) {
   const mutation = `
-    AddProjectPermission($request: PermissionAddRequest) {
-      addProjectPermission(permission: $request) { 
+    AddProjectPermission($permission: PermissionAddRequest) {
+      addProjectPermission(permission: $permission) { 
         projectKey, role
       }
     }`;
 
-  return gqlMutation(mutation, { request: { projectKey, userId, role } })
+  return gqlMutation(mutation, { permission: { projectKey, userId, role } })
     .then(errorHandler('data.addProjectPermission'));
+}
+
+export function removeProjectPermission(projectKey, userId) {
+  const mutation = `
+    RemoveProjectPermission($permission: PermissionRemoveRequest) {
+      removeProjectPermission(permission: $permission)
+    }`;
+
+  return gqlMutation(mutation, { permission: { projectKey, userId } })
+    .then(errorHandler('data.removeProjectPermission'));
 }

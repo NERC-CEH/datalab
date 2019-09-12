@@ -1,5 +1,9 @@
 import mockClient from './graphqlClient';
-import { getProjectUsers, addProjectUserPermission } from './projectSettingsService';
+import {
+  getProjectUsers,
+  addProjectUserPermission,
+  removeProjectPermission,
+} from './projectSettingsService';
 
 jest.mock('./graphqlClient');
 
@@ -39,6 +43,25 @@ describe('projectSettingsService', () => {
     mockClient.prepareFailure('error');
 
     return addProjectUserPermission('projectKey', 'userId', 'role')
+      .catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+  });
+
+  it('removeProjectPermission should build correct query and unpack the result', () => {
+    mockClient.prepareSuccess({ removeProjectPermission: 'expectedValue' });
+
+    return removeProjectPermission('projectKey', 'userId')
+      .then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+  });
+
+  it('removeProjectPermission should throw an error if the query fails', () => {
+    mockClient.prepareFailure('error');
+
+    return removeProjectPermission('projectKey', 'userId')
       .catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });

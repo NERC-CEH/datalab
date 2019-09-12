@@ -158,11 +158,12 @@ export function AddUserButton({ userInformation, selectedUserName, project, sele
   const selectedUser = userInformation.find(user => user.name === selectedUserName);
   return (
     <Button
-      variant="contained"
+      variant="outlined"
       color="primary"
       disabled={!selectedUser}
-      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}
-    >Add</Button>
+      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}>
+      Add
+    </Button>
   );
 }
 

@@ -2,8 +2,8 @@
 
 exports[`projectSettingsService addProjectUserPermission should build correct query and unpack the result 1`] = `
 "
-    AddProjectPermission($request: PermissionAddRequest) {
-      addProjectPermission(permission: $request) { 
+    AddProjectPermission($permission: PermissionAddRequest) {
+      addProjectPermission(permission: $permission) { 
         projectKey, role
       }
     }"
@@ -17,5 +17,12 @@ exports[`projectSettingsService getProjectUsers should build correct query and u
           userId, name, role
         },
       }
+    }"
+`;
+
+exports[`projectSettingsService removeProjectPermission should build correct query and unpack the result 1`] = `
+"
+    RemoveProjectPermission($permission: PermissionRemoveRequest) {
+      removeProjectPermission(permission: $permission)
     }"
 `;

@@ -2,6 +2,7 @@ import typeToReducer from 'type-to-reducer';
 import {
   GET_PROJECT_USER_PERMISSIONS_ACTION,
   ADD_PROJECT_USER_PERMISSION_ACTION,
+  REMOVE_PROJECT_USER_PERMISSION_ACTION,
 } from '../actions/projectSettingsActions';
 import {
   PROMISE_TYPE_PENDING,
@@ -56,6 +57,21 @@ export default typeToReducer({
       updating: { ...initialState.updating, error: true },
     }),
   },
+  [REMOVE_PROJECT_USER_PERMISSION_ACTION]: {
+    [PROMISE_TYPE_PENDING]: state => ({
+      ...state,
+      fetching: { ...initialState.fetching },
+      updating: { ...initialState.updating, inProgress: true },
+    }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({
+      ...initialState,
+      value: removeUserFromUsers(state.value, action.payload),
+    }),
+    [PROMISE_TYPE_FAILURE]: state => ({
+      ...state,
+      updating: { ...initialState.updating, error: true },
+    }),
+  },
 }, initialState);
 
 function mergeUserIntoUsers(users, user) {
@@ -66,4 +82,8 @@ function mergeUserIntoUsers(users, user) {
   else newUsers[index] = user;
 
   return newUsers;
+}
+
+function removeUserFromUsers(users, user) {
+  return users.filter(item => item.userId !== user.userId);
 }
