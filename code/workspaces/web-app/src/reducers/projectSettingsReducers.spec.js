@@ -3,6 +3,7 @@ import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from
 import {
   GET_PROJECT_USER_PERMISSIONS_ACTION,
   ADD_PROJECT_USER_PERMISSION_ACTION,
+  REMOVE_PROJECT_USER_PERMISSION_ACTION,
 } from '../actions/projectSettingsActions';
 
 describe('projectSettingsReducer', () => {
@@ -119,6 +120,50 @@ describe('projectSettingsReducer', () => {
         expect(nextState).toEqual({
           ...initialState,
           value: [{ ...payload.user, role: payload.role }],
+        });
+      });
+    });
+  });
+
+  describe('should handle REMOVE_PROJECT_USER_PERMISSION_ACTION when it', () => {
+    it('is PENDING', () => {
+      const type = `${REMOVE_PROJECT_USER_PERMISSION_ACTION}_${PROMISE_TYPE_PENDING}`;
+      const action = { type };
+
+      const nextState = projectSettingsReducer(initialState, action);
+      expect(nextState).toEqual({
+        ...initialState, updating: { ...initialState.updating, inProgress: true },
+      });
+    });
+
+    it('is FAILURE', () => {
+      const type = `${REMOVE_PROJECT_USER_PERMISSION_ACTION}_${PROMISE_TYPE_FAILURE}`;
+      const payload = new Error();
+      const action = { type, payload };
+
+      const nextState = projectSettingsReducer(initialState, action);
+
+      expect(nextState).toEqual({
+        ...initialState,
+        updating: { ...initialState.updating, error: true },
+      });
+    });
+
+    describe('is SUCCESS', () => {
+      it('removes user from array of users', () => {
+        const type = `${REMOVE_PROJECT_USER_PERMISSION_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+        const payload = { name: 'user1', userId: 'user1-ID' };
+        const action = { type, payload };
+
+        const prevState = {
+          ...initialState,
+          value: [{ name: 'user1', userId: 'user1-ID' }, { name: 'user2', userId: 'user2-ID' }],
+        };
+        const nextState = projectSettingsReducer(prevState, action);
+
+        expect(nextState).toEqual({
+          ...initialState,
+          value: [{ name: 'user2', userId: 'user2-ID' }],
         });
       });
     });

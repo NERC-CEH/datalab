@@ -1,8 +1,13 @@
 import projectSettingsActions, {
   GET_PROJECT_USER_PERMISSIONS_ACTION,
   ADD_PROJECT_USER_PERMISSION_ACTION,
+  REMOVE_PROJECT_USER_PERMISSION_ACTION,
 } from './projectSettingsActions';
-import { getProjectUsers, addProjectUserPermission } from '../api/projectSettingsService';
+import {
+  getProjectUsers,
+  addProjectUserPermission,
+  removeProjectPermission,
+} from '../api/projectSettingsService';
 
 jest.mock('../api/projectSettingsService');
 
@@ -34,6 +39,20 @@ describe('projectSettingsActions', () => {
       expect(addProjectUserPermission).toHaveBeenCalledWith(projectKey, user.userId, role);
       expect(output.type).toEqual(ADD_PROJECT_USER_PERMISSION_ACTION);
       expect(await output.payload).toEqual({ ...result, user });
+    });
+
+    it('removeProjectUserPermissions', async () => {
+      const projectKey = 'projectKey';
+      const user = { name: 'System User', userId: 'system-user' };
+      const result = user;
+      removeProjectPermission.mockReturnValue(new Promise(resolve => resolve(result)));
+
+      const output = projectSettingsActions.removeUserPermission(projectKey, user);
+
+      expect(removeProjectPermission).toHaveBeenCalledTimes(1);
+      expect(removeProjectPermission).toHaveBeenCalledWith(projectKey, user.userId);
+      expect(output.type).toEqual(REMOVE_PROJECT_USER_PERMISSION_ACTION);
+      expect(await output.payload).toEqual(result);
     });
   });
 });

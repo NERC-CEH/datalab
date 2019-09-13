@@ -5,7 +5,7 @@ exports[`AddUserButton renders as disabled when the selected user name is not in
   color="primary"
   disabled={true}
   onClick={[Function]}
-  variant="contained"
+  variant="outlined"
 >
   Add
 </WithStyles(ForwardRef(Button))>
@@ -16,7 +16,7 @@ exports[`AddUserButton renders as not disabled when the selected user name is in
   color="primary"
   disabled={false}
   onClick={[Function]}
-  variant="contained"
+  variant="outlined"
 >
   Add
 </WithStyles(ForwardRef(Button))>

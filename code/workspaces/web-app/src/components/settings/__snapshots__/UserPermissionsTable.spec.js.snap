@@ -1,5 +1,601 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PureUserPermissionsTable when fetching data renders progress indicator 1`] = `
+<div>
+  <WithStyles(ForwardRef(Table))>
+    <WithStyles(ForwardRef(TableHead))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="left"
+          className="tableCell"
+          key="header-0"
+          padding={null}
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User Name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-1"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Admin
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-2"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-3"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Viewer
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-4"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableHead))>
+    <WithStyles(ForwardRef(TableBody))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          colSpan={5}
+        >
+          <WithStyles(ForwardRef(CircularProgress)) />
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableBody))>
+  </WithStyles(ForwardRef(Table))>
+  <RemoveUserDialog
+    classes={
+      Object {
+        "activeSelection": "activeSelection",
+        "implicitSelection": "implicitSelection",
+        "tableCell": "tableCell",
+        "tableHeader": "tableHeader",
+      }
+    }
+    project="project"
+  />
+</div>
+`;
+
+exports[`PureUserPermissionsTable when there are no users renders correctly displaying there are no users 1`] = `
+<div>
+  <WithStyles(ForwardRef(Table))>
+    <WithStyles(ForwardRef(TableHead))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="left"
+          className="tableCell"
+          key="header-0"
+          padding={null}
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User Name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-1"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Admin
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-2"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-3"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Viewer
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-4"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableHead))>
+    <WithStyles(ForwardRef(TableBody))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          colSpan={5}
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            No users have project permissions.
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableBody))>
+  </WithStyles(ForwardRef(Table))>
+  <RemoveUserDialog
+    classes={
+      Object {
+        "activeSelection": "activeSelection",
+        "implicitSelection": "implicitSelection",
+        "tableCell": "tableCell",
+        "tableHeader": "tableHeader",
+      }
+    }
+    project="project"
+  />
+</div>
+`;
+
+exports[`PureUserPermissionsTable when there are users renders correctly showing users and their permissions 1`] = `
+<div>
+  <WithStyles(ForwardRef(Table))>
+    <WithStyles(ForwardRef(TableHead))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="left"
+          className="tableCell"
+          key="header-0"
+          padding={null}
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User Name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-1"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Admin
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-2"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-3"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Viewer
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-4"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableHead))>
+    <WithStyles(ForwardRef(TableBody))>
+      <WithStyles(ForwardRef(TableRow))
+        key="row-0"
+      >
+        <WithStyles(ForwardRef(TableCell))
+          className="tableCell"
+          key="row-0-USERNAME"
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            admin name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-0-admin"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            className="activeSelection"
+            color="default"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-0-user"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            className="implicitSelection"
+            color="default"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-0-viewer"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            className="implicitSelection"
+            color="default"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(IconButton))
+            onClick={[Function]}
+          >
+            <WithStyles(ForwardRef(Icon))>
+              remove_circle_outline
+            </WithStyles(ForwardRef(Icon))>
+          </WithStyles(ForwardRef(IconButton))>
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+      <WithStyles(ForwardRef(TableRow))
+        key="row-1"
+      >
+        <WithStyles(ForwardRef(TableCell))
+          className="tableCell"
+          key="row-1-USERNAME"
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            user name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-1-admin"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={false}
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-1-user"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            className="activeSelection"
+            color="default"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-1-viewer"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            className="implicitSelection"
+            color="default"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(IconButton))
+            onClick={[Function]}
+          >
+            <WithStyles(ForwardRef(Icon))>
+              remove_circle_outline
+            </WithStyles(ForwardRef(Icon))>
+          </WithStyles(ForwardRef(IconButton))>
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+      <WithStyles(ForwardRef(TableRow))
+        key="row-2"
+      >
+        <WithStyles(ForwardRef(TableCell))
+          className="tableCell"
+          key="row-2-USERNAME"
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            viewer name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-2-admin"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={false}
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-2-user"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={false}
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="row-2-viewer"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            className="activeSelection"
+            color="default"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(IconButton))
+            onClick={[Function]}
+          >
+            <WithStyles(ForwardRef(Icon))>
+              remove_circle_outline
+            </WithStyles(ForwardRef(Icon))>
+          </WithStyles(ForwardRef(IconButton))>
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableBody))>
+  </WithStyles(ForwardRef(Table))>
+  <RemoveUserDialog
+    classes={
+      Object {
+        "activeSelection": "activeSelection",
+        "implicitSelection": "implicitSelection",
+        "tableCell": "tableCell",
+        "tableHeader": "tableHeader",
+      }
+    }
+    project="project"
+  />
+</div>
+`;
+
+exports[`PureUserPermissionsTable when there is an error renders correctly displaying there is an error 1`] = `
+<div>
+  <WithStyles(ForwardRef(Table))>
+    <WithStyles(ForwardRef(TableHead))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="left"
+          className="tableCell"
+          key="header-0"
+          padding={null}
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User Name
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-1"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Admin
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-2"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            User
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-3"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          >
+            Viewer
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          className="tableCell"
+          key="header-4"
+          padding="checkbox"
+        >
+          <WithStyles(ForwardRef(Typography))
+            className="tableHeader"
+            variant="body1"
+          />
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableHead))>
+    <WithStyles(ForwardRef(TableBody))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(ForwardRef(TableCell))
+          align="center"
+          colSpan={5}
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            Error fetching data. Please try refreshing the page.
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(TableCell))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableBody))>
+  </WithStyles(ForwardRef(Table))>
+  <RemoveUserDialog
+    classes={
+      Object {
+        "activeSelection": "activeSelection",
+        "implicitSelection": "implicitSelection",
+        "tableCell": "tableCell",
+        "tableHeader": "tableHeader",
+      }
+    }
+    project="project"
+  />
+</div>
+`;
+
+exports[`RemoveUserDialog when the dialog state has open equal to false renders as null 1`] = `""`;
+
+exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Remove User Permissions?
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))>
+      Are you sure you want to remove all project permissions for User One?
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      id="cancel-button"
+      onClick={[Function]}
+    >
+      Cancel
+    </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
+      className="dialogDeleteUserButton"
+      id="confirm-button"
+      onClick={[Function]}
+      variant="outlined"
+    >
+      Confirm
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;
+
 exports[`getFullWidthRow returns a table row with correct colSpan and content 1`] = `
 <ForwardRef(TableRow)
   classes={
@@ -46,458 +642,6 @@ exports[`getFullWidthTextRow returns a table row with correct colSpan and text w
     </WithStyles(ForwardRef(Typography))>
   </WithStyles(ForwardRef(TableCell))>
 </ForwardRef(TableRow)>
-`;
-
-exports[`getTable when fetching data renders progress indicator 1`] = `
-<ForwardRef(Table)
-  classes={
-    Object {
-      "root": "MuiTable-root",
-    }
-  }
->
-  <WithStyles(ForwardRef(TableHead))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="left"
-        className="tableCell"
-        key="header-0"
-        padding={null}
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User Name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-1"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Admin
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-2"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-3"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Viewer
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableHead))>
-  <WithStyles(ForwardRef(TableBody))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        colSpan={4}
-      >
-        <WithStyles(ForwardRef(CircularProgress)) />
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableBody))>
-</ForwardRef(Table)>
-`;
-
-exports[`getTable when there are no users renders correctly displaying there are no users 1`] = `
-<ForwardRef(Table)
-  classes={
-    Object {
-      "root": "MuiTable-root",
-    }
-  }
->
-  <WithStyles(ForwardRef(TableHead))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="left"
-        className="tableCell"
-        key="header-0"
-        padding={null}
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User Name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-1"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Admin
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-2"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-3"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Viewer
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableHead))>
-  <WithStyles(ForwardRef(TableBody))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        colSpan={4}
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="body1"
-        >
-          No users have project permissions.
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableBody))>
-</ForwardRef(Table)>
-`;
-
-exports[`getTable when there are users renders correctly showing users and their permissions 1`] = `
-<ForwardRef(Table)
-  classes={
-    Object {
-      "root": "MuiTable-root",
-    }
-  }
->
-  <WithStyles(ForwardRef(TableHead))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="left"
-        className="tableCell"
-        key="header-0"
-        padding={null}
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User Name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-1"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Admin
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-2"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-3"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Viewer
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableHead))>
-  <WithStyles(ForwardRef(TableBody))>
-    <WithStyles(ForwardRef(TableRow))
-      key="row-0"
-    >
-      <WithStyles(ForwardRef(TableCell))
-        className="tableCell"
-        key="row-0-USERNAME"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="body1"
-        >
-          admin name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-0-admin"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          className="activeSelection"
-          color="default"
-        />
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-0-user"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          className="implicitSelection"
-          color="default"
-        />
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-0-viewer"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          className="implicitSelection"
-          color="default"
-        />
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-    <WithStyles(ForwardRef(TableRow))
-      key="row-1"
-    >
-      <WithStyles(ForwardRef(TableCell))
-        className="tableCell"
-        key="row-1-USERNAME"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="body1"
-        >
-          user name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-1-admin"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={false}
-        />
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-1-user"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          className="activeSelection"
-          color="default"
-        />
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-1-viewer"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          className="implicitSelection"
-          color="default"
-        />
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-    <WithStyles(ForwardRef(TableRow))
-      key="row-2"
-    >
-      <WithStyles(ForwardRef(TableCell))
-        className="tableCell"
-        key="row-2-USERNAME"
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="body1"
-        >
-          viewer name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-2-admin"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={false}
-        />
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-2-user"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={false}
-        />
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="row-2-viewer"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          className="activeSelection"
-          color="default"
-        />
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableBody))>
-</ForwardRef(Table)>
-`;
-
-exports[`getTable when there is an error renders correctly displaying there is an error 1`] = `
-<ForwardRef(Table)
-  classes={
-    Object {
-      "root": "MuiTable-root",
-    }
-  }
->
-  <WithStyles(ForwardRef(TableHead))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="left"
-        className="tableCell"
-        key="header-0"
-        padding={null}
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User Name
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-1"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Admin
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-2"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          User
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        className="tableCell"
-        key="header-3"
-        padding="checkbox"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="tableHeader"
-          variant="body1"
-        >
-          Viewer
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableHead))>
-  <WithStyles(ForwardRef(TableBody))>
-    <WithStyles(ForwardRef(TableRow))>
-      <WithStyles(ForwardRef(TableCell))
-        align="center"
-        colSpan={4}
-      >
-        <WithStyles(ForwardRef(Typography))
-          variant="body1"
-        >
-          Error fetching data. Please try refreshing the page.
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(TableCell))>
-    </WithStyles(ForwardRef(TableRow))>
-  </WithStyles(ForwardRef(TableBody))>
-</ForwardRef(Table)>
 `;
 
 exports[`getTableHead renders correct header bar based on column headings 1`] = `
@@ -599,6 +743,19 @@ exports[`getTableRow for a given user renders correctly showing users and their 
       color="default"
     />
   </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(IconButton))
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(Icon))>
+        remove_circle_outline
+      </WithStyles(ForwardRef(Icon))>
+    </WithStyles(ForwardRef(IconButton))>
+  </WithStyles(ForwardRef(TableCell))>
 </ForwardRef(TableRow)>
 `;
 
@@ -658,6 +815,19 @@ exports[`getTableRow for a given user renders correctly showing users and their 
       color="default"
     />
   </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(IconButton))
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(Icon))>
+        remove_circle_outline
+      </WithStyles(ForwardRef(Icon))>
+    </WithStyles(ForwardRef(IconButton))>
+  </WithStyles(ForwardRef(TableCell))>
 </ForwardRef(TableRow)>
 `;
 
@@ -714,6 +884,19 @@ exports[`getTableRow for a given user renders correctly showing users and their 
       className="activeSelection"
       color="default"
     />
+  </WithStyles(ForwardRef(TableCell))>
+  <WithStyles(ForwardRef(TableCell))
+    align="center"
+    className="tableCell"
+    padding="checkbox"
+  >
+    <WithStyles(ForwardRef(IconButton))
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(Icon))>
+        remove_circle_outline
+      </WithStyles(ForwardRef(Icon))>
+    </WithStyles(ForwardRef(IconButton))>
   </WithStyles(ForwardRef(TableCell))>
 </ForwardRef(TableRow)>
 `;

@@ -6,6 +6,7 @@ const primaryTransparent = 'rgba(36, 166, 154, 0.4)';
 const secondary = blueGrey;
 const dangerColor = red[800];
 const dangerBackgroundColor = red[100];
+const dangerBackgroundColorLight = red[50];
 
 // Colours
 const backgroundColor = '#F8F8F8';
@@ -30,6 +31,7 @@ const theme = createMuiTheme({
     secondary,
     dangerColor,
     dangerBackgroundColor,
+    dangerBackgroundColorLight,
     backgroundColor,
     backgroundDark,
     backgroundDarkTransparent,

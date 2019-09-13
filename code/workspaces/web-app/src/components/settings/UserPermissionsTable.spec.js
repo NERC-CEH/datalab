@@ -1,7 +1,9 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import { PERMISSIONS, PERMISSION_VALUES } from '../../constants/permissions';
-import { getTable,
+import projectSettingsActions from '../../actions/projectSettingsActions';
+import {
+  PureUserPermissionsTable,
   getFullWidthRow,
   getFullWidthTextRow,
   getTableRow,
@@ -9,7 +11,10 @@ import { getTable,
   getCheckboxCell,
   getTableHead,
   projectUsersSelector,
-  columnHeadings } from './UserPermissionsTable';
+  RemoveUserDialog,
+  dispatchRemoveUserPermissions,
+  columnHeadings,
+} from './UserPermissionsTable';
 
 describe('projectUsersSelector', () => {
   const applicationState = {
@@ -30,7 +35,7 @@ describe('projectUsersSelector', () => {
   });
 });
 
-describe('getTable', () => {
+describe('PureUserPermissionsTable', () => {
   let shallow;
 
   beforeEach(() => {
@@ -61,7 +66,11 @@ describe('getTable', () => {
     it('renders correctly displaying there are no users', () => {
       expect(
         shallow(
-          getTable(initialUsers, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={initialUsers}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -76,7 +85,11 @@ describe('getTable', () => {
     it('renders correctly displaying there is an error', () => {
       expect(
         shallow(
-          getTable(users, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={users}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -91,7 +104,11 @@ describe('getTable', () => {
     it('renders progress indicator', () => {
       expect(
         shallow(
-          getTable(users, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={users}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -110,7 +127,11 @@ describe('getTable', () => {
     it('renders correctly showing users and their permissions', () => {
       expect(
         shallow(
-          getTable(users, classes, columnHeadings),
+          <PureUserPermissionsTable
+            users={users}
+            classes={classes}
+            colHeadings={columnHeadings}
+          />,
         ),
       ).toMatchSnapshot();
     });
@@ -296,5 +317,118 @@ describe('getTableHead', () => {
         getTableHead(headings, classes),
       ),
     ).toMatchSnapshot();
+  });
+});
+
+describe('RemoveUserDialog', () => {
+  const classes = { dialogDeleteUserButton: 'dialogDeleteUserButton' };
+
+  describe('when the dialog state has open equal to false', () => {
+    let shallow;
+
+    beforeEach(() => {
+      shallow = createShallow();
+    });
+
+    it('renders as null', () => {
+      expect(
+        shallow(
+          <RemoveUserDialog
+            classes={classes}
+            state={{ user: null, open: false }}
+            setState={jest.fn()}
+            onRemoveConfirmationFn={jest.fn()}
+            dispatch={jest.fn()}
+          />,
+        ),
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('when the dialog state has open equal to true and a user set', () => {
+    let shallow;
+
+    beforeEach(() => {
+      shallow = createShallow();
+    });
+
+    const openState = { user: { name: 'User One', userId: 'user-one-id' }, open: true };
+
+    it('renders to match snapshot', () => {
+      expect(
+        shallow(
+          <RemoveUserDialog
+            classes={classes}
+            state={openState}
+            setState={jest.fn()}
+            onRemoveConfirmationFn={jest.fn()}
+            dispatch={jest.fn()}
+          />,
+        ),
+      ).toMatchSnapshot();
+    });
+
+    it('closes when the cancel button is pressed and does not call confirmation function', () => {
+      const mockSetState = jest.fn();
+      const mockOnRemoveConfirmationFn = jest.fn();
+      const render = shallow(
+        <RemoveUserDialog
+          classes={classes}
+          state={openState}
+          setState={mockSetState}
+          onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
+          dispatch={jest.fn()}
+        />,
+      );
+      render.find('#cancel-button').simulate('click');
+
+      expect(mockSetState).toHaveBeenCalledTimes(1);
+      expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
+      expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(0);
+    });
+
+    it('calls provided function and closes when the confirm button is pressed', () => {
+      const mockSetState = jest.fn();
+      const mockOnRemoveConfirmationFn = jest.fn();
+      const mockDispatch = jest.fn();
+      const projectName = 'project';
+      const render = shallow(
+        <RemoveUserDialog
+          classes={classes}
+          state={openState}
+          setState={mockSetState}
+          onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
+          project={projectName}
+          dispatch={mockDispatch}
+        />,
+      );
+      render.find('#confirm-button').simulate('click');
+
+      expect(mockSetState).toHaveBeenCalledTimes(1);
+      expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
+      expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(1);
+      expect(mockOnRemoveConfirmationFn)
+        .toHaveBeenCalledWith(projectName, openState.user, mockDispatch);
+    });
+  });
+});
+
+describe('dispatchRemoveUserPermissions', () => {
+  it('dispatches correctly configured remove user permissions action', () => {
+    projectSettingsActions.removeUserPermission = jest.fn();
+    projectSettingsActions.removeUserPermission.mockReturnValue('expected-result');
+
+    const projectKey = 'project';
+    const user = { name: 'User One', userId: 'user-one-id' };
+    const mockDispatch = jest.fn();
+
+    dispatchRemoveUserPermissions(projectKey, user, mockDispatch);
+
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith('expected-result');
+
+    expect(projectSettingsActions.removeUserPermission).toHaveBeenCalledTimes(1);
+    expect(projectSettingsActions.removeUserPermission)
+      .toHaveBeenCalledWith(projectKey, user);
   });
 });
