@@ -35,7 +35,8 @@ function createVolumeExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return volumeManager.createVolume(params)
+  const { user } = request;
+  return volumeManager.createVolume(user, params)
     .then(controllerHelper.sendSuccessfulCreation(response))
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
@@ -66,6 +67,13 @@ const coreVolumeValidator = [
 
 const createVolumeValidator = [
   ...coreVolumeValidator,
+  check('displayName').exists().withMessage('displayName must be specified').trim(),
+  check('description').exists().withMessage('description must be specified').trim(),
+  check('type')
+    .exists()
+    .isInt({ min: 1, max: 1 })
+    .withMessage('type must be specified as a valid storage type')
+    .trim(),
   check('volumeSize')
     .exists()
     .withMessage('Volume Size must be specified')

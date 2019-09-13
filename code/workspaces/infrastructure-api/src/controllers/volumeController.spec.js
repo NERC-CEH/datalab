@@ -97,6 +97,9 @@ function createRequestBody() {
     },
     name: 'volumeName',
     projectKey: 'project',
+    displayName: 'displayName',
+    description: 'description',
+    type: 1,
     volumeSize: '10',
   };
 }

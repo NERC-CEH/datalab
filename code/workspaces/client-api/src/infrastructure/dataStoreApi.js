@@ -23,9 +23,7 @@ export const createDataStoreRequest = (dataStore, datalabInfo) => ({
 
 export const createDataStorePayload = (datalabRequest, datalabInfo) => ({
   datalabInfo,
-  name: datalabRequest.name,
-  projectKey: datalabRequest.projectKey,
-  volumeSize: datalabRequest.volumeSize,
+  ...datalabRequest,
 });
 
 export const deleteDataStorePayload = (dataStore, datalabInfo) => ({
