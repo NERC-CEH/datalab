@@ -58,3 +58,9 @@ Object {
   "PROJECT_USERS_LIST": "project:users:list",
 }
 `;
+
+exports[`PermissionTypes generates expected system permissions 1`] = `
+Object {
+  "SYSTEM_INSTANCE_ADMIN": "system:instance:admin",
+}
+`;

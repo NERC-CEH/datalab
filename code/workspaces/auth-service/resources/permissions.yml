@@ -1,5 +1,8 @@
 ---
-instance-admin: []
+instanceAdmin:
+  - name: instance
+    permissions:
+      - admin
 admin:
   - name: stacks
     permissions:
@@ -22,6 +25,7 @@ admin:
     permissions:
       - list
       - read
+      - edit
   - name: permissions
     permissions:
       - read

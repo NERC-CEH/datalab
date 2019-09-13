@@ -61,4 +61,14 @@ describe('Get Permissions', () => {
     const output = getPermissions(userRoles);
     expect(output).toMatchSnapshot();
   });
+
+  it('should add instance admin permission', () => {
+    const userRole = {
+      userId: 'uid1',
+      instanceAdmin: true,
+    };
+
+    const output = getPermissions(userRole);
+    expect(output).toEqual(expect.arrayContaining(['system:instance:admin']));
+  });
 });
