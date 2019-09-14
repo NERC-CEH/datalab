@@ -92,13 +92,13 @@ describe('dataStorageRepository', () => {
     const name = 'volume';
     const userIds = ['user1', 'users2'];
 
-    return dataStorageRepository.addUsers(user, name, userIds)
+    return dataStorageRepository.addUsers(name, userIds)
       .then(() => {
         expect(mockDatabase().query()).toEqual({ name });
         expect(mockDatabase().entity()).toEqual({
           $addToSet: { users: { $each: userIds } },
         });
-        expect(mockDatabase().params()).toEqual({ upsert: false });
+        expect(mockDatabase().params()).toEqual({ upsert: false, new: true });
       });
   });
 
@@ -106,13 +106,13 @@ describe('dataStorageRepository', () => {
     const name = 'volume';
     const userIds = ['user1', 'users2'];
 
-    return dataStorageRepository.removeUsers(user, name, userIds)
+    return dataStorageRepository.removeUsers(name, userIds)
       .then(() => {
         expect(mockDatabase().query()).toEqual({ name });
         expect(mockDatabase().entity()).toEqual({
           $pull: { users: { $in: userIds } },
         });
-        expect(mockDatabase().params()).toEqual({ upsert: false });
+        expect(mockDatabase().params()).toEqual({ upsert: false, new: true });
       });
   });
 });

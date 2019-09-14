@@ -12,6 +12,7 @@ const STACKS_DELETE = 'stacks:delete';
 const STORAGE_LIST = 'storage:list';
 const STORAGE_CREATE = 'storage:create';
 const STORAGE_DELETE = 'storage:delete';
+const STORAGE_EDIT = 'storage:edit';
 
 function configureRoutes(app) {
   app.get('/status', status.status);
@@ -25,6 +26,10 @@ function configureRoutes(app) {
   app.post('/stack', permissionWrapper(STACKS_CREATE), stack.createStackValidator, stack.createStack);
   app.post('/volume/query', permissionWrapper(STORAGE_LIST), volume.coreVolumeValidator, volume.queryVolume);
   app.get('/volumes', permissionWrapper(STORAGE_LIST), volume.listVolumes);
+  app.get('/volumes/active', permissionWrapper(STORAGE_LIST), volume.listActiveVolumes);
+  app.get('/volumes/:id', permissionWrapper(STORAGE_LIST), volume.getByIdValidator, volume.getById);
+  app.put('/volumes/:name/addUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, volume.addUsers);
+  app.put('/volumes/:name/removeUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, volume.removeUsers);
   app.post('/volume', permissionWrapper(STORAGE_CREATE), volume.createVolumeValidator, volume.createVolume);
   app.delete('/volume', permissionWrapper(STORAGE_DELETE), volume.coreVolumeValidator, volume.deleteVolume);
 }

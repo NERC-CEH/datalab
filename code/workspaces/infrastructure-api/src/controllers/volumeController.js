@@ -1,6 +1,7 @@
 import { check, matchedData } from 'express-validator';
 import controllerHelper from './controllerHelper';
 import volumeManager from '../stacks/volumeManager';
+import dataStorageRepository from '../dataaccess/dataStorageRepository';
 
 const TYPE = 'volume';
 
@@ -30,6 +31,36 @@ function listVolumes(request, response) {
     .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
 }
 
+function listActiveVolumes(request, response) {
+  return dataStorageRepository.getAllActive(request.user)
+    .then(volumes => response.send(volumes))
+    .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
+}
+
+function getById(request, response) {
+  const { id } = matchedData(request);
+
+  return dataStorageRepository.getById(request.user, id)
+    .then(volume => response.send(volume))
+    .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
+}
+
+function addUsers(request, response) {
+  const { name, userIds } = matchedData(request);
+
+  return dataStorageRepository.addUsers(name, userIds)
+    .then(volume => response.send(volume))
+    .catch(controllerHelper.handleError(response, 'adding user', TYPE, name));
+}
+
+function removeUsers(request, response) {
+  const { name, userIds } = matchedData(request);
+
+  return dataStorageRepository.removeUsers(name, userIds)
+    .then(volume => response.send(volume))
+    .catch(controllerHelper.handleError(response, 'removing user', TYPE, name));
+}
+
 function createVolumeExec(request, response) {
   // Build request params
   const params = matchedData(request);
@@ -50,6 +81,15 @@ function deleteVolumeExec(request, response) {
     .then(controllerHelper.sendSuccessfulDeletion(response))
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
+
+const getByIdValidator = [
+  check('id').exists().withMessage('id must be specified').trim(),
+];
+
+const updateVolumeUserValidator = [
+  check('name').exists().withMessage('id must be specified').trim(),
+  check('userIds.*').exists().withMessage('userIds must be specified').trim(),
+];
 
 const coreVolumeValidator = [
   check('projectKey').exists().withMessage('projectKey must be specified').trim(),
@@ -82,4 +122,17 @@ const createVolumeValidator = [
     .trim(),
 ];
 
-export default { coreVolumeValidator, createVolumeValidator, createVolume, deleteVolume, queryVolume, listVolumes };
+export default {
+  getByIdValidator,
+  coreVolumeValidator,
+  createVolumeValidator,
+  updateVolumeUserValidator,
+  createVolume,
+  deleteVolume,
+  queryVolume,
+  listVolumes,
+  getById,
+  listActiveVolumes,
+  addUsers,
+  removeUsers,
+};

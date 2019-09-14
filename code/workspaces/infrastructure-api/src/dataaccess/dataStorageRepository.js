@@ -49,14 +49,14 @@ function update(name, updatedValues) {
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false }).exec();
 }
 
-function addUsers(_, name, userIds) { // user, name, userId
+function addUsers(name, userIds) { // user, name, userId
   const updateObj = setUsers(userIds);
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false }).exec();
+  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false, new: true }).exec();
 }
 
-function removeUsers(_, name, userIds) { // user, name, userId
+function removeUsers(name, userIds) { // user, name, userId
   const updateObj = unsetUsers(userIds);
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false }).exec();
+  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false, new: true }).exec();
 }
 
 const filterByUser = (userId, findQuery) => ({
