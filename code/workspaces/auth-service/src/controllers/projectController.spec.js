@@ -86,7 +86,7 @@ describe('project controller', () => {
   });
 
   describe('remove user role', () => {
-    it('should return 200 if role added', async () => {
+    it('should return 200 if removed', async () => {
       removeRole.mockResolvedValue(true);
       const req = {
         params: { projectKey: 'project', userId: 'uid1' },
