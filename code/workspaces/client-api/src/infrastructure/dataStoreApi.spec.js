@@ -27,8 +27,6 @@ describe('Data Storage API configuration', () => {
       name: 'dataStoreName',
       projectKey: 'project',
       volumeSize: 12,
-      linkToStorage: 'https://notebookName-minio.test-datalabs.nerc.ac.uk/minio',
-      extra: 'field',
     };
 
     expect(createDataStorePayload(datalabRequest, datalabInfo)).toMatchSnapshot();

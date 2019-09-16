@@ -7,6 +7,12 @@ const config = convict({
     default: 'info',
     env: 'LOG_LEVEL',
   },
+  datalabDomain: {
+    doc: 'The domain the datalabs instance is running on',
+    format: 'String',
+    default: 'datalabs.localhost',
+    env: 'DATALAB_DOMAIN',
+  },
   apiPort: {
     doc: 'The port for the API service',
     format: 'port',
