@@ -61,12 +61,11 @@ export const columnHeadings = [
 const checkBoxColumnOrder = SORTED_PERMISSIONS;
 
 export const projectUsersSelector = ({ projectUsers }) => projectUsers;
+export const currentUserIdSelector = ({ authentication: { identity: { sub } } }) => sub;
 
 function UserPermissionsTable({ classes }) {
-  const users = useSelector(
-    projectUsersSelector,
-    shallowEqual,
-  );
+  const users = useSelector(projectUsersSelector, shallowEqual);
+  const currentUserId = useSelector(currentUserIdSelector, shallowEqual);
   const dispatch = useDispatch();
 
   const [removeUserDialogState, setRemoveUserDialogState] = useState({ open: false, user: null });
@@ -78,28 +77,48 @@ function UserPermissionsTable({ classes }) {
     [dispatch],
   );
 
+  const actions = {
+    removeUserPermission: dispatchRemoveUserPermissions,
+    addUserPermission: dispatchAddUserPermissions,
+  };
+
   return (
     <PureUserPermissionsTable
       users={users}
+      currentUserId={currentUserId}
+      project="project"
       classes={classes}
       colHeadings={columnHeadings}
       removeUserDialogState={removeUserDialogState}
       setRemoveUserDialogState={setRemoveUserDialogState}
       onRemoveUserDialogConfirmationFn={dispatchRemoveUserPermissions}
+      actions={actions}
       dispatch={dispatch}
     />
   );
 }
 
-export function PureUserPermissionsTable({ users, classes, colHeadings, removeUserDialogState, setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, dispatch }) {
+export function PureUserPermissionsTable(
+  { users, currentUserId, project, classes, colHeadings, removeUserDialogState,
+    setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, actions, dispatch },
+) {
   return (
     <div>
       <Table>
         <TableHead>
-          {getTableHead(columnHeadings, classes)}
+          <UserPermissionsTableHead headings={colHeadings} classes={classes} />
         </TableHead>
         <TableBody>
-          {getTableBody(users, classes, colHeadings.length, setRemoveUserDialogState)}
+          <UserPermissionsTableBody
+            users={users}
+            currentUserId={currentUserId}
+            project={project}
+            classes={classes}
+            numCols={colHeadings.length}
+            setRemoveUserDialogState={setRemoveUserDialogState}
+            actions={actions}
+            dispatch={dispatch}
+          />
         </TableBody>
       </Table>
       <RemoveUserDialog
@@ -107,14 +126,14 @@ export function PureUserPermissionsTable({ users, classes, colHeadings, removeUs
         state={removeUserDialogState}
         setState={setRemoveUserDialogState}
         onRemoveConfirmationFn={onRemoveUserDialogConfirmationFn}
-        project="project"
+        project={project}
         dispatch={dispatch}
       />
     </div>
   );
 }
 
-export function getTableHead(headings, classes) {
+export function UserPermissionsTableHead({ headings, classes }) {
   return (
     <TableRow>
       {headings.map((item, index) => (
@@ -131,95 +150,124 @@ export function getTableHead(headings, classes) {
   );
 }
 
-export function getTableBody(users, classes, numCols, setRemoveUserDialogState) {
+export function UserPermissionsTableBody({ users, currentUserId, project, classes, numCols, setRemoveUserDialogState, actions, dispatch }) {
   if (users.fetching.error || !users.value) {
-    return getFullWidthTextRow(
-      'Error fetching data. Please try refreshing the page.',
-      numCols,
-    );
+    return <FullWidthTextRow numCols={numCols}>{'Error fetching data. Please try refreshing the page.'}</FullWidthTextRow>;
   }
 
   if (users.fetching.inProgress) {
-    return getFullWidthRow(<CircularProgress />, numCols);
+    return <FullWidthRow numCols={numCols}><CircularProgress /></FullWidthRow>;
   }
 
   if (users.value.length === 0) {
-    return getFullWidthTextRow('No users have project permissions.', numCols);
+    return <FullWidthTextRow numCols={numCols}>{'No users have project permissions.'}</FullWidthTextRow>;
   }
 
-  return users.value.map((user, index) => getTableRow(user, index, classes, setRemoveUserDialogState));
+  return users.value.map((user, index) => (
+    <UserPermissionsTableRow
+      user={user}
+      isCurrentUser={user.userId === currentUserId}
+      index={index}
+      project={project}
+      classes={classes}
+      setRemoveUserDialogState={setRemoveUserDialogState}
+      actions={actions}
+      dispatch={dispatch}
+    />));
 }
 
-export function getFullWidthRow(content, numCols) {
+export function FullWidthRow({ children, numCols }) {
   return (
     <TableRow>
       <TableCell colSpan={numCols} align="center">
-        {content}
+        {children}
       </TableCell>
     </TableRow>
   );
 }
 
-export function getFullWidthTextRow(text, numCols) {
-  return getFullWidthRow(
-    <Typography variant="body1">{text}</Typography>,
-    numCols,
+export function FullWidthTextRow({ children, numCols }) {
+  return (
+    <FullWidthRow numCols={numCols}>
+      <Typography variant="body1">{children}</Typography>
+    </FullWidthRow>
   );
 }
 
-export function getTableRow(user, index, classes, setRemoveUserDialogState) {
+export function UserPermissionsTableRow({ user, isCurrentUser, index, project, classes, setRemoveUserDialogState, actions, dispatch }) {
   const rowKey = `row-${index}`;
   return (
     <TableRow key={rowKey}>
-      <TableCell className={classes.tableCell} key={`${rowKey}-USERNAME`}>
+      <TableCell className={classes.tableCell} key={`${rowKey}-username`}>
         <Typography variant="body1">{user.name}</Typography>
       </TableCell>
-      {checkBoxColumnOrder.map(
-        permission => getCheckboxCell(
-          user.role,
-          permission,
-          classes,
-          `${rowKey}-${permission.name}`,
-        ),
-      )}
-      {getRemoveUserButtonCell(user, classes, setRemoveUserDialogState)}
+      {checkBoxColumnOrder.map(permission => (
+        <CheckboxCell
+          user={user}
+          isCurrentUser={isCurrentUser}
+          checkboxSpec={permission}
+          project={project}
+          classes={classes}
+          cellKey={`${rowKey}-${permission.name}`}
+          key={`${rowKey}-${permission.name}`}
+          actions={actions}
+          dispatch={dispatch}/>))
+      }
+      <RemoveUserButtonCell
+        user={user}
+        isCurrentUser={isCurrentUser}
+        classes={classes}
+        setRemoveUserDialogState={setRemoveUserDialogState}
+      />
     </TableRow>
   );
 }
 
-export function getCheckboxCell(userRole, checkbox, classes, key) {
+export function CheckboxCell({ user, isCurrentUser, checkboxSpec, project, classes, cellKey, actions, dispatch }) {
   return (
     <TableCell
       className={classes.tableCell}
       padding="checkbox"
       align="center"
-      key={key}
+      key={cellKey}
     >
-      {getCheckbox(userRole, checkbox, classes)}
+      <PermissionsCheckbox
+        user={user}
+        isCurrentUser={isCurrentUser}
+        checkboxSpec={checkboxSpec}
+        project={project}
+        classes={classes}
+        actions={actions}
+        dispatch={dispatch}
+      />
     </TableCell>
   );
 }
 
-export function getCheckbox(userRole, checkbox, classes) {
-  if (userRole === checkbox.name) {
-    return (
-      <Checkbox className={classes.activeSelection} checked={true} color="default" />
-    );
+export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, project, classes, actions, dispatch }) {
+  const props = { checked: true, color: 'default' };
+  if (user.role === checkboxSpec.name) {
+    props.className = classes.activeSelection;
+  } else if (PERMISSION_VALUES[user.role.toUpperCase()] > checkboxSpec.value) {
+    props.className = classes.implicitSelection;
+  } else {
+    props.checked = false;
   }
-  if (PERMISSION_VALUES[userRole.toUpperCase()] > checkbox.value) {
-    return (
-      <Checkbox className={classes.implicitSelection} checked={true} color="default" />
-    );
-  }
-  return <Checkbox checked={false}/>;
+
+  if (isCurrentUser) props.disabled = true;
+
+  return <Checkbox {...props} onClick={() => actions.addUserPermission(project, user, checkboxSpec.name, dispatch)}/>;
 }
 
-export function getRemoveUserButtonCell(user, classes, setRemoveUserDialogState) {
+export function RemoveUserButtonCell({ user, isCurrentUser, classes, setRemoveUserDialogState }) {
   return (
     <TableCell className={classes.tableCell} padding="checkbox" align="center">
-      <IconButton onClick={() => {
-        setRemoveUserDialogState({ user, open: true });
-      }}>
+      <IconButton
+        disabled={isCurrentUser}
+        onClick={() => {
+          setRemoveUserDialogState({ user, open: true });
+        }}
+      >
         <Icon>{'remove_circle_outline'}</Icon>
       </IconButton>
     </TableCell>
@@ -258,6 +306,10 @@ export function RemoveUserDialog({ classes, state, setState, onRemoveConfirmatio
 
 export function dispatchRemoveUserPermissions(projectKey, user, dispatch) {
   dispatch(projectSettingsActions.removeUserPermission(projectKey, user));
+}
+
+export function dispatchAddUserPermissions(projectKey, user, role, dispatch) {
+  dispatch(projectSettingsActions.addUserPermission(projectKey, user, role));
 }
 
 export default withStyles(styles)(UserPermissionsTable);
