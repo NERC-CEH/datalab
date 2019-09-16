@@ -231,7 +231,8 @@ input ProjectDeletionRequest {
 
 type Permission {
     projectKey: String,
-    role: Role!
+    role: Role!,
+    userId: ID
 }
 
 type ProjectUser {

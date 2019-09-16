@@ -36,9 +36,9 @@ async function addUserRole(req, res) {
 async function removeUserRole(req, res) {
   const { params: { projectKey, userId } } = req;
 
-  await userRolesRepository.removeRole(userId, projectKey);
+  const roleRemoved = await userRolesRepository.removeRole(userId, projectKey);
 
-  res.status(204).send();
+  res.status(200).send({ roleRemoved });
 }
 
 export const addRoleValidator = validator([

@@ -86,8 +86,8 @@ describe('project controller', () => {
   });
 
   describe('remove user role', () => {
-    it('should return 201 if role added', async () => {
-      removeRole.mockResolvedValue(undefined);
+    it('should return 200 if removed', async () => {
+      removeRole.mockResolvedValue(true);
       const req = {
         params: { projectKey: 'project', userId: 'uid1' },
       };
@@ -97,7 +97,8 @@ describe('project controller', () => {
 
       await projectController.removeUserRole(request, response);
 
-      expect(response.statusCode).toBe(204);
+      expect(response.statusCode).toBe(200);
+      expect(response._getData()).toEqual({ roleRemoved: true }); // eslint-disable-line no-underscore-dangle
     });
   });
 
