@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "private": true,
   "dependencies": {
+    "express-validator": "6.1.1",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
