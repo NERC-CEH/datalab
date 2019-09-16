@@ -1,22 +1,16 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import IconButton from '@material-ui/core/IconButton';
-import Checkbox from '@material-ui/core/Checkbox';
-import { PERMISSIONS, PERMISSION_VALUES } from '../../constants/permissions';
+import { PERMISSIONS } from '../../constants/permissions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import {
   PureUserPermissionsTable,
   FullWidthRow,
   FullWidthTextRow,
   UserPermissionsTableRow,
-  PermissionsCheckbox,
-  CheckboxCell,
   UserPermissionsTableHead,
   UserPermissionsTableBody,
   projectUsersSelector,
   currentUserIdSelector,
-  RemoveUserButtonCell,
-  RemoveUserDialog,
   dispatchRemoveUserPermissions,
   dispatchAddUserPermissions,
   columnHeadings,
@@ -264,157 +258,6 @@ describe('UserPermissionsTableRow', () => {
   });
 });
 
-describe('CheckboxCell', () => {
-  let shallow;
-
-  const classes = {
-    activeSelection: 'active',
-    implicitSelection: 'implicit',
-  };
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
-  it('renders correctly passing props to PermissionsCheckbox in TableCell', () => {
-    const user = { role: PERMISSIONS.ADMIN };
-    const checkboxSpec = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
-
-    expect(
-      shallow(
-        <CheckboxCell
-          user={user}
-          isCurrentUser={false}
-          checkboxSpec={checkboxSpec}
-          project="project"
-          classes={classes}
-          cellKey="key"
-          dispatch={jest.fn()}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-});
-
-describe('PermissionsCheckbox', () => {
-  let shallow;
-
-  const classes = {
-    activeSelection: 'active',
-    implicitSelection: 'implicit',
-  };
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
-  describe('when user has rights equal to CheckboxSpec', () => {
-    const user = { role: PERMISSIONS.ADMIN };
-    const checkboxSpec = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
-    it('returns an checked active selection check box', () => {
-      expect(
-        shallow(
-          <PermissionsCheckbox
-            user={user}
-            isCurrentUser={false}
-            checkboxSpec={checkboxSpec}
-            project="project"
-            classes={classes}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-  });
-
-  describe('when user has rights greater than CheckboxSpec', () => {
-    const user = { role: PERMISSIONS.ADMIN };
-    const checkboxSpec = { name: PERMISSIONS.USER, value: PERMISSION_VALUES.USER };
-    it('returns an checked implicit selection check box', () => {
-      expect(
-        shallow(
-          <PermissionsCheckbox
-            user={user}
-            isCurrentUser={false}
-            checkboxSpec={checkboxSpec}
-            project="project"
-            classes={classes}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-  });
-
-  describe('when user has rights less than CheckboxSpec', () => {
-    const user = { role: PERMISSIONS.VIEWER };
-    const checkboxSpec = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
-    it('returns an unchecked check box', () => {
-      expect(
-        shallow(
-          <PermissionsCheckbox
-            user={user}
-            isCurrentUser={false}
-            checkboxSpec={checkboxSpec}
-            project="project"
-            classes={classes}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-  });
-
-  describe('when checkbox user is the current user', () => {
-    const user = { role: PERMISSIONS.ADMIN };
-    const checkboxSpec = { name: PERMISSIONS.USER, value: PERMISSION_VALUES.USER };
-
-    it('renders with correct check status and as disabled', () => {
-      expect(
-        shallow(
-          <PermissionsCheckbox
-            user={user}
-            isCurrentUser={true}
-            checkboxSpec={checkboxSpec}
-            project="project"
-            classes={classes}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-  });
-
-  describe('when the checkbox is clicked', () => {
-    const mockActions = {
-      addUserPermission: jest.fn(),
-    };
-    mockActions.addUserPermission.mockReturnValue('expected-result');
-
-    const mockDispatch = jest.fn();
-    const project = 'project';
-    const user = { name: 'User One', userId: 'user-one-id', role: PERMISSIONS.USER };
-    const checkboxSpec = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
-
-    it('dispatches update action with correct user and new permission level', () => {
-      const render = shallow(
-        <PermissionsCheckbox
-          user={user}
-          isCurrentUser={true}
-          checkboxSpec={checkboxSpec}
-          project={project}
-          classes={classes}
-          actions={mockActions}
-          dispatch={mockDispatch}
-        />,
-      );
-      render.find(Checkbox).simulate('click');
-      expect(mockActions.addUserPermission).toHaveBeenCalledTimes(1);
-      expect(mockActions.addUserPermission).toHaveBeenCalledWith(project, user, checkboxSpec.name, mockDispatch);
-    });
-  });
-});
-
 describe('UserPermissionsTableHead', () => {
   const classes = {
     tableCell: 'tableCell',
@@ -445,99 +288,6 @@ describe('UserPermissionsTableHead', () => {
         <UserPermissionsTableHead headings={headings} classes={classes} />,
       ),
     ).toMatchSnapshot();
-  });
-});
-
-describe('RemoveUserDialog', () => {
-  const classes = { dialogDeleteUserButton: 'dialogDeleteUserButton' };
-
-  describe('when the dialog state has open equal to false', () => {
-    let shallow;
-
-    beforeEach(() => {
-      shallow = createShallow();
-    });
-
-    it('renders as null', () => {
-      expect(
-        shallow(
-          <RemoveUserDialog
-            classes={classes}
-            state={{ user: null, open: false }}
-            setState={jest.fn()}
-            onRemoveConfirmationFn={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-  });
-
-  describe('when the dialog state has open equal to true and a user set', () => {
-    let shallow;
-
-    beforeEach(() => {
-      shallow = createShallow();
-    });
-
-    const openState = { user: { name: 'User One', userId: 'user-one-id' }, open: true };
-
-    it('renders to match snapshot', () => {
-      expect(
-        shallow(
-          <RemoveUserDialog
-            classes={classes}
-            state={openState}
-            setState={jest.fn()}
-            onRemoveConfirmationFn={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-
-    it('closes when the cancel button is pressed and does not call confirmation function', () => {
-      const mockSetState = jest.fn();
-      const mockOnRemoveConfirmationFn = jest.fn();
-      const render = shallow(
-        <RemoveUserDialog
-          classes={classes}
-          state={openState}
-          setState={mockSetState}
-          onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
-          dispatch={jest.fn()}
-        />,
-      );
-      render.find('#cancel-button').simulate('click');
-
-      expect(mockSetState).toHaveBeenCalledTimes(1);
-      expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
-      expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(0);
-    });
-
-    it('calls provided function and closes when the confirm button is pressed', () => {
-      const mockSetState = jest.fn();
-      const mockOnRemoveConfirmationFn = jest.fn();
-      const mockDispatch = jest.fn();
-      const projectName = 'project';
-      const render = shallow(
-        <RemoveUserDialog
-          classes={classes}
-          state={openState}
-          setState={mockSetState}
-          onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
-          project={projectName}
-          dispatch={mockDispatch}
-        />,
-      );
-      render.find('#confirm-button').simulate('click');
-
-      expect(mockSetState).toHaveBeenCalledTimes(1);
-      expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
-      expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(1);
-      expect(mockOnRemoveConfirmationFn)
-        .toHaveBeenCalledWith(projectName, openState.user, mockDispatch);
-    });
   });
 });
 
@@ -579,45 +329,5 @@ describe('dispatchRemoveUserPermissions', () => {
     expect(projectSettingsActions.removeUserPermission).toHaveBeenCalledTimes(1);
     expect(projectSettingsActions.removeUserPermission)
       .toHaveBeenCalledWith(projectKey, user);
-  });
-});
-
-describe('RemoveUserButtonCell', () => {
-  const classes = { tableCell: 'tableCell' };
-  const user = { name: 'User One', userId: 'user-one-id' };
-
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
-  it('renders as disabled when on the row of the current user', () => {
-    expect(
-      shallow(
-        <RemoveUserButtonCell
-          user={user}
-          isCurrentUser={true}
-          classes={classes}
-          setRemoveUserDialogState={jest.fn()}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('sets the remove user dialog state so it opens when clicked', () => {
-    const mockSetRemoveUserDialogState = jest.fn();
-    const render = shallow(
-      <RemoveUserButtonCell
-        user={user}
-        isCurrentUser={true}
-        classes={classes}
-        setRemoveUserDialogState={mockSetRemoveUserDialogState}
-      />,
-    );
-
-    render.find(IconButton).simulate('click');
-    expect(mockSetRemoveUserDialogState).toHaveBeenCalledTimes(1);
-    expect(mockSetRemoveUserDialogState).toHaveBeenCalledWith({ user, open: true });
   });
 });

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RemoveUserDialog when the dialog state has open equal to false renders as null 1`] = `""`;
+
+exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Remove User Permissions?
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))>
+      Are you sure you want to remove all project permissions for User One?
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      id="cancel-button"
+      onClick={[Function]}
+    >
+      Cancel
+    </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
+      className="dialogDeleteUserButton"
+      id="confirm-button"
+      onClick={[Function]}
+      variant="outlined"
+    >
+      Confirm
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;

@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { startCase } from 'lodash';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,7 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import projectSettingsActions from '../../actions/projectSettingsActions';
-import { PERMISSION_VALUES, SORTED_PERMISSIONS } from '../../constants/permissions';
+import RemoveUserDialog from './RemoveUserDialog';
+import { CheckboxCell, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
+import { SORTED_PERMISSIONS } from '../../constants/permissions';
 
 const styles = theme => ({
   activeSelection: {
@@ -220,87 +213,6 @@ export function UserPermissionsTableRow({ user, isCurrentUser, index, project, c
         setRemoveUserDialogState={setRemoveUserDialogState}
       />
     </TableRow>
-  );
-}
-
-export function CheckboxCell({ user, isCurrentUser, checkboxSpec, project, classes, cellKey, actions, dispatch }) {
-  return (
-    <TableCell
-      className={classes.tableCell}
-      padding="checkbox"
-      align="center"
-      key={cellKey}
-    >
-      <PermissionsCheckbox
-        user={user}
-        isCurrentUser={isCurrentUser}
-        checkboxSpec={checkboxSpec}
-        project={project}
-        classes={classes}
-        actions={actions}
-        dispatch={dispatch}
-      />
-    </TableCell>
-  );
-}
-
-export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, project, classes, actions, dispatch }) {
-  const props = { checked: true, color: 'default' };
-  if (user.role === checkboxSpec.name) {
-    props.className = classes.activeSelection;
-  } else if (PERMISSION_VALUES[user.role.toUpperCase()] > checkboxSpec.value) {
-    props.className = classes.implicitSelection;
-  } else {
-    props.checked = false;
-  }
-
-  if (isCurrentUser) props.disabled = true;
-
-  return <Checkbox {...props} onClick={() => actions.addUserPermission(project, user, checkboxSpec.name, dispatch)}/>;
-}
-
-export function RemoveUserButtonCell({ user, isCurrentUser, classes, setRemoveUserDialogState }) {
-  return (
-    <TableCell className={classes.tableCell} padding="checkbox" align="center">
-      <IconButton
-        disabled={isCurrentUser}
-        onClick={() => {
-          setRemoveUserDialogState({ user, open: true });
-        }}
-      >
-        <Icon>{'remove_circle_outline'}</Icon>
-      </IconButton>
-    </TableCell>
-  );
-}
-
-export function RemoveUserDialog({ classes, state, setState, onRemoveConfirmationFn, project, dispatch }) {
-  if (!state.open) return null;
-
-  const closedState = { user: null, open: false };
-  return (
-    <Dialog open={state.open}>
-      <DialogTitle>Remove User Permissions?</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          {`Are you sure you want to remove all project permissions for ${state.user.name}?`}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button id="cancel-button" onClick={() => setState(closedState)}>Cancel</Button>
-        <Button
-          id="confirm-button"
-          className={classes.dialogDeleteUserButton}
-          variant="outlined"
-          onClick={() => {
-            onRemoveConfirmationFn(project, state.user, dispatch);
-            setState(closedState);
-          }}
-        >
-          Confirm
-        </Button>
-      </DialogActions>
-    </Dialog>
   );
 }
 

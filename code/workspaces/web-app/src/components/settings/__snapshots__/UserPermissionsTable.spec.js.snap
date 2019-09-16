@@ -1,36 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CheckboxCell renders correctly passing props to PermissionsCheckbox in TableCell 1`] = `
-<WithStyles(ForwardRef(TableCell))
-  align="center"
-  key="key"
-  padding="checkbox"
->
-  <PermissionsCheckbox
-    checkboxSpec={
-      Object {
-        "name": "admin",
-        "value": 2,
-      }
-    }
-    classes={
-      Object {
-        "activeSelection": "active",
-        "implicitSelection": "implicit",
-      }
-    }
-    dispatch={[MockFunction]}
-    isCurrentUser={false}
-    project="project"
-    user={
-      Object {
-        "role": "admin",
-      }
-    }
-  />
-</WithStyles(ForwardRef(TableCell))>
-`;
-
 exports[`FullWidthRow returns a table row with correct colSpan and content 1`] = `
 <WithStyles(ForwardRef(TableRow))>
   <WithStyles(ForwardRef(TableCell))
@@ -54,42 +23,6 @@ exports[`FullWidthTextRow returns a table row with correct colSpan and text wrap
     Text to go in row.
   </WithStyles(ForwardRef(Typography))>
 </FullWidthRow>
-`;
-
-exports[`PermissionsCheckbox when checkbox user is the current user renders with correct check status and as disabled 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={true}
-  className="implicit"
-  color="default"
-  disabled={true}
-  onClick={[Function]}
-/>
-`;
-
-exports[`PermissionsCheckbox when user has rights equal to CheckboxSpec returns an checked active selection check box 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={true}
-  className="active"
-  color="default"
-  onClick={[Function]}
-/>
-`;
-
-exports[`PermissionsCheckbox when user has rights greater than CheckboxSpec returns an checked implicit selection check box 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={true}
-  className="implicit"
-  color="default"
-  onClick={[Function]}
-/>
-`;
-
-exports[`PermissionsCheckbox when user has rights less than CheckboxSpec returns an unchecked check box 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={false}
-  color="default"
-  onClick={[Function]}
-/>
 `;
 
 exports[`PureUserPermissionsTable renders correctly passing props to children 1`] = `
@@ -170,56 +103,6 @@ exports[`PureUserPermissionsTable renders correctly passing props to children 1`
     }
   />
 </div>
-`;
-
-exports[`RemoveUserButtonCell renders as disabled when on the row of the current user 1`] = `
-<WithStyles(ForwardRef(TableCell))
-  align="center"
-  className="tableCell"
-  padding="checkbox"
->
-  <WithStyles(ForwardRef(IconButton))
-    disabled={true}
-    onClick={[Function]}
-  >
-    <WithStyles(ForwardRef(Icon))>
-      remove_circle_outline
-    </WithStyles(ForwardRef(Icon))>
-  </WithStyles(ForwardRef(IconButton))>
-</WithStyles(ForwardRef(TableCell))>
-`;
-
-exports[`RemoveUserDialog when the dialog state has open equal to false renders as null 1`] = `""`;
-
-exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  open={true}
->
-  <WithStyles(ForwardRef(DialogTitle))>
-    Remove User Permissions?
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))>
-      Are you sure you want to remove all project permissions for User One?
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(ForwardRef(Button))
-      id="cancel-button"
-      onClick={[Function]}
-    >
-      Cancel
-    </WithStyles(ForwardRef(Button))>
-    <WithStyles(ForwardRef(Button))
-      className="dialogDeleteUserButton"
-      id="confirm-button"
-      onClick={[Function]}
-      variant="outlined"
-    >
-      Confirm
-    </WithStyles(ForwardRef(Button))>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
 `;
 
 exports[`UserPermissionsTableBody when fetching data renders progress indicator 1`] = `
