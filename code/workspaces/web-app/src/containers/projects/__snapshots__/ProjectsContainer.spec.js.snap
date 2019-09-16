@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
+Array [
+  "loadProjects",
+  "loadProjectInfo",
+]
+`;
+
+exports[`ProjectsContainer is a container which passes correct props to StackCard 1`] = `
+<PromisedContentWrapper
+  promise={
+    Object {
+      "fetching": false,
+      "value": Object {
+        "projectArray": Array [
+          "expectedArray",
+        ],
+      },
+    }
+  }
+>
+  <WithStyles(StackCards)
+    createPermission=""
+    deletePermission=""
+    deleteStack={[Function]}
+    editPermission=""
+    openCreationForm={[Function]}
+    openPermission="project:storage:open"
+    openStack={[Function]}
+    stacks={
+      Array [
+        "expectedArray",
+      ]
+    }
+    typeName="Project"
+    userPermissions={
+      Array [
+        "expectedPermission",
+      ]
+    }
+  />
+</PromisedContentWrapper>
+`;

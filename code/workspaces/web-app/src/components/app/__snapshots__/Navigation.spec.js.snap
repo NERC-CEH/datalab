@@ -18,6 +18,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
       className="Navigation-contentArea-5"
     >
       <WithStyles(SideBar)
+        projectKey="project99"
         userPermissions={
           Array [
             "expectedPermission",

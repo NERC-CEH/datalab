@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectInfoPage renders correct snapshot 1`] = `
+<WithStyles(Page)
+  title="Information"
+>
+  <Connect(ProjectInfoContainer)
+    projectKey="project99"
+  />
+</WithStyles(Page)>
+`;

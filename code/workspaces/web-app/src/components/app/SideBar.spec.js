@@ -1,49 +1,45 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { createShallow, createMount } from '@material-ui/core/test-utils';
-import SideBar from './SideBar';
+import SideBar, { StyledSideBarAnalysis } from './SideBar';
 
 describe('Sidebar', () => {
   const userPermissions = ['project:storage:list', 'project:stacks:list', 'project:settings:list'];
+  const projectKey = 'project99';
 
-  function shallowRender() {
+  function shallowRenderSideBar() {
     const shallow = createShallow({ dive: true });
-    const props = { userPermissions };
+    const props = { userPermissions, projectKey };
 
     return shallow(<SideBar {...props} />);
   }
 
+  function shallowRenderStyledSideBarAnalysis() {
+    const shallow = createShallow({ dive: true });
+    const props = { userPermissions, projectKey };
+
+    return shallow(<StyledSideBarAnalysis {...props} />);
+  }
+
   function fullRender(path) {
     const mount = createMount();
-    const props = { userPermissions };
+    const props = { userPermissions, projectKey };
 
     return mount(
       <MemoryRouter initialEntries={path}>
-        <SideBar {...props} />
+        <StyledSideBarAnalysis {...props} />
       </MemoryRouter>,
     );
   }
 
   it('correctly renders correct snapshot', () => {
-    expect(shallowRender()).toMatchSnapshot();
-  });
-
-  it('renders "Dashboard" label as active when on / route', () => {
-    // Arrange
-    const linkPath = '/';
-    const iconName = 'dashboard';
-    const linkName = 'Dashboard';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
+    expect(shallowRenderSideBar()).toMatchSnapshot();
+    expect(shallowRenderStyledSideBarAnalysis()).toMatchSnapshot();
   });
 
   it('renders "Storage" label as active when on /storage route', () => {
     // Arrange
-    const linkPath = '/storage';
+    const linkPath = '/projects/project99/storage';
     const linkName = 'Storage';
     const iconName = 'storage';
 
@@ -56,7 +52,7 @@ describe('Sidebar', () => {
 
   it('renders "Notebooks" label as active when on /storage route', () => {
     // Arrange
-    const linkPath = '/notebooks';
+    const linkPath = '/projects/project99/notebooks';
     const linkName = 'Notebooks';
     const iconName = 'book';
 
@@ -69,7 +65,7 @@ describe('Sidebar', () => {
 
   it('renders "Sites" label as active when on /publishing route', () => {
     // Arrange
-    const linkPath = '/publishing';
+    const linkPath = '/projects/project99/publishing';
     const linkName = 'Sites';
     const iconName = 'web';
 
@@ -82,7 +78,7 @@ describe('Sidebar', () => {
 
   it('renders "Dask" label as active when on /dask route', () => {
     // Arrange
-    const linkPath = '/dask';
+    const linkPath = '/projects/project99/dask';
     const linkName = 'Dask';
     const iconName = 'apps';
 
@@ -95,7 +91,7 @@ describe('Sidebar', () => {
 
   it('renders "Spark" label as active when on /spark route', () => {
     // Arrange
-    const linkPath = '/spark';
+    const linkPath = '/projects/project99/spark';
     const linkName = 'Spark';
     const iconName = 'apps';
 

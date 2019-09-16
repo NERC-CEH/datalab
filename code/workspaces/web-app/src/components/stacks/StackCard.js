@@ -51,14 +51,26 @@ function styles(theme) {
       minWidth: 165,
     },
     cardImage: {
-      height: 70,
-      width: 70,
+      height: theme.cardImageSize + theme.spacing(1),
+      width: theme.cardImageSize + theme.spacing(1),
       border: `1px solid ${theme.palette.divider}`,
       borderRadius: theme.spacing(1),
     },
     cardIcon: {
       float: 'left',
       fontSize: theme.typography.h2.fontSize,
+    },
+    cardInitial: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      display: 'inline-flex',
+      textAlign: 'center',
+      height: theme.cardImageSize,
+      width: theme.cardImageSize,
+      borderRadius: theme.spacing(1),
+      color: theme.palette.backgroundColor,
+      backgroundColor: theme.palette.backgroundDark,
+      fontSize: theme.typography.h4.fontSize,
     },
   };
 }
@@ -75,7 +87,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
       </Tooltip>
     </div>
     <div className={classes.actionsDiv}>
-      {typeName !== 'Data Store' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
+      {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
       {stack.status === READY
         && <StackCardActions
           stack={stack}
@@ -99,6 +111,7 @@ StackCard.propTypes = {
     status: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,
+  openHref: PropTypes.string,
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
@@ -117,9 +130,14 @@ function generateGetImage(classes) {
     const stackDescription = stack.type && stackDescriptions[stack.type];
     const logoImage = stackDescription && stackDescription.logo;
     const iconName = stackDescription && stackDescription.icon;
+    const initial = stackDescription && stackDescription.initial && getDisplayName(stack).charAt(0);
 
     if (logoImage) {
       return <img className={classes.cardImage} src={logoImage} alt={stackDescription} />;
+    }
+
+    if (initial) {
+      return <div className={classes.cardInitial}>{initial}</div>;
     }
 
     return <Icon className={classes.cardIcon} children={iconName || 'create'} />;

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectInfoContainer is a connected component which binds correct actions 1`] = `
+Array [
+  "loadProjects",
+  "loadProjectInfo",
+]
+`;
+
+exports[`ProjectInfoContainer is a container which passes correct props 1`] = `
+<PromisedContentWrapper
+  promise={
+    Object {
+      "fetching": false,
+      "value": Object {
+        "currentProject": Object {
+          "id": "expectedId",
+        },
+      },
+    }
+  }
+>
+  <ProjectInfoContent
+    projectInfo={
+      Object {
+        "id": "expectedId",
+      }
+    }
+  />
+</PromisedContentWrapper>
+`;

@@ -7,93 +7,68 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
   <WithStyles(ForwardRef(List))
     className="SideBar-itemList-1"
   >
-    <WithStyles(SideBarGroup)>
-      <WithStyles(SideBarButton)
-        icon="dashboard"
-        label="Dashboard"
-        to="/"
-      />
-    </WithStyles(SideBarGroup)>
-    <WithStyles(SideBarGroup)
-      title="Analysis"
-    >
-      <ComponentWrapper
-        permission="project:stacks:list"
-        userPermissions={
-          Array [
-            "project:storage:list",
-            "project:stacks:list",
-            "project:settings:list",
-          ]
+    <InfoGroup
+      classes={
+        Object {
+          "itemList": "SideBar-itemList-1",
+          "projectTitleLI": "SideBar-projectTitleLI-3",
+          "projectTitleLIT": "SideBar-projectTitleLIT-4",
+          "sideBar": "SideBar-sideBar-2",
         }
-      >
-        <WithStyles(SideBarButton)
-          icon="book"
-          label="Notebooks"
-          to="/notebooks"
-        />
-      </ComponentWrapper>
-      <WithStyles(SideBarButton)
-        icon="apps"
-        label="Dask"
-        to="/dask"
-      />
-      <WithStyles(SideBarButton)
-        icon="apps"
-        label="Spark"
-        to="/spark"
-      />
-    </WithStyles(SideBarGroup)>
-    <WithStyles(SideBarGroup)>
-      <ComponentWrapper
-        permission="project:storage:list"
-        userPermissions={
-          Array [
-            "project:storage:list",
-            "project:stacks:list",
-            "project:settings:list",
-          ]
-        }
-      >
-        <WithStyles(SideBarButton)
-          icon="storage"
-          label="Storage"
-          to="/storage"
-        />
-      </ComponentWrapper>
-      <ComponentWrapper
-        permission="project:stacks:list"
-        userPermissions={
-          Array [
-            "project:storage:list",
-            "project:stacks:list",
-            "project:settings:list",
-          ]
-        }
-      >
-        <WithStyles(SideBarButton)
-          icon="web"
-          label="Sites"
-          to="/publishing"
-        />
-      </ComponentWrapper>
-      <ComponentWrapper
-        permission="project:settings:list"
-        userPermissions={
-          Array [
-            "project:storage:list",
-            "project:stacks:list",
-            "project:settings:list",
-          ]
-        }
-      >
-        <WithStyles(SideBarButton)
-          icon="settings"
-          label="Settings"
-          to="/settings"
-        />
-      </ComponentWrapper>
-    </WithStyles(SideBarGroup)>
+      }
+      projectKey="project99"
+    />
+    <AnalysisGroup
+      projectKey="project99"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+          "project:settings:list",
+        ]
+      }
+    />
+    <MiscGroup
+      projectKey="project99"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+          "project:settings:list",
+        ]
+      }
+    />
+  </WithStyles(ForwardRef(List))>
+</div>
+`;
+
+exports[`Sidebar correctly renders correct snapshot 2`] = `
+<div
+  className="SideBarAnalysis-sideBar-6"
+>
+  <WithStyles(ForwardRef(List))
+    className="SideBarAnalysis-itemList-5"
+  >
+    <AnalysisGroup
+      projectKey="project99"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+          "project:settings:list",
+        ]
+      }
+    />
+    <MiscGroup
+      projectKey="project99"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+          "project:settings:list",
+        ]
+      }
+    />
   </WithStyles(ForwardRef(List))>
 </div>
 `;
