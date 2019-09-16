@@ -73,6 +73,7 @@ function addProjectPermission(projectKey, userId, role, token) {
   const body = { role };
   return axios.put(`${authServiceUrl}/projects/${projectKey}/users/${userId}/roles`, body, generateOptions(token))
     .then(() => ({
+      userId,
       projectKey,
       role,
     }));
@@ -81,7 +82,7 @@ function addProjectPermission(projectKey, userId, role, token) {
 function removeProjectPermission(projectKey, userId, token) {
   logger.debug(`Removing permissions from user ${userId} for project ${projectKey}`);
   return axios.delete(`${authServiceUrl}/projects/${projectKey}/users/${userId}/role`, generateOptions(token))
-    .then(() => true);
+    .then(response => response.data.roleRemoved);
 }
 
 const generateOptions = token => ({

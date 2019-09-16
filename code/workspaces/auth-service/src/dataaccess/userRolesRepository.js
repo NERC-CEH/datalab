@@ -69,10 +69,12 @@ async function removeRole(userId, projectKey) {
     const roleIndex = findIndex(projectRoles, { projectKey });
     if (roleIndex > -1) {
       remove(projectRoles, { projectKey });
-      await UserRoles()
-        .findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+      const options = { upsert: true, setDefaultsOnInsert: true, runValidators: true };
+      await UserRoles().findOneAndUpdate(query, user, options);
+      return true;
     }
   }
+  return false;
 }
 
 async function userIsMember(userId, projectKey) {
