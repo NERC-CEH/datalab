@@ -1,18 +1,18 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import { PERMISSIONS, PERMISSION_VALUES } from '../../constants/permissions';
+import { PERMISSIONS } from '../../constants/permissions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import {
   PureUserPermissionsTable,
-  getFullWidthRow,
-  getFullWidthTextRow,
-  getTableRow,
-  getCheckbox,
-  getCheckboxCell,
-  getTableHead,
+  FullWidthRow,
+  FullWidthTextRow,
+  UserPermissionsTableRow,
+  UserPermissionsTableHead,
+  UserPermissionsTableBody,
   projectUsersSelector,
-  RemoveUserDialog,
+  currentUserIdSelector,
   dispatchRemoveUserPermissions,
+  dispatchAddUserPermissions,
   columnHeadings,
 } from './UserPermissionsTable';
 
@@ -32,6 +32,25 @@ describe('projectUsersSelector', () => {
 
   it('returns correct part of application state', () => {
     expect(projectUsersSelector(applicationState)).toEqual(applicationState.projectUsers);
+  });
+});
+
+describe('currentUserIdSelector', () => {
+  const applicationStore = {
+    authentication: {
+      permissions: 'permissions',
+      tokens: 'tokens',
+      identity: {
+        sub: 'expected-user-id',
+        name: 'name',
+        nickname: 'nickname',
+        picture: 'picture-url',
+      },
+    },
+  };
+
+  it('extracts the right value from state', () => {
+    expect(currentUserIdSelector(applicationStore)).toEqual('expected-user-id');
   });
 });
 
@@ -62,21 +81,47 @@ describe('PureUserPermissionsTable', () => {
     value: [],
   };
 
-  describe('when there are no users', () => {
-    it('renders correctly displaying there are no users', () => {
-      expect(
-        shallow(
-          <PureUserPermissionsTable
-            users={initialUsers}
-            classes={classes}
-            colHeadings={columnHeadings}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
+  it('renders correctly passing props to children', () => {
+    expect(
+      shallow(
+        <PureUserPermissionsTable
+          users={initialUsers}
+          classes={classes}
+          colHeadings={columnHeadings}
+        />,
+      ),
+    ).toMatchSnapshot();
+  });
+});
+
+describe('UserPermissionsTableBody', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow();
   });
 
-  describe('when there is an error', () => {
+  const classes = {
+    activeSelection: 'activeSelection',
+    implicitSelection: 'implicitSelection',
+    tableHeader: 'tableHeader',
+    tableCell: 'tableCell',
+  };
+
+  const initialUsers = {
+    error: null,
+    fetching: {
+      inProgress: false,
+      error: false,
+    },
+    updating: {
+      inProgress: false,
+      error: false,
+    },
+    value: [],
+  };
+
+  describe('when there is an error fetching', () => {
     const users = {
       ...initialUsers,
       fetching: { ...initialUsers.fetching, error: true },
@@ -85,10 +130,11 @@ describe('PureUserPermissionsTable', () => {
     it('renders correctly displaying there is an error', () => {
       expect(
         shallow(
-          <PureUserPermissionsTable
+          <UserPermissionsTableBody
             users={users}
             classes={classes}
             colHeadings={columnHeadings}
+            numCols={columnHeadings.length}
           />,
         ),
       ).toMatchSnapshot();
@@ -104,10 +150,11 @@ describe('PureUserPermissionsTable', () => {
     it('renders progress indicator', () => {
       expect(
         shallow(
-          <PureUserPermissionsTable
+          <UserPermissionsTableBody
             users={users}
             classes={classes}
             colHeadings={columnHeadings}
+            numCols={columnHeadings.length}
           />,
         ),
       ).toMatchSnapshot();
@@ -118,19 +165,24 @@ describe('PureUserPermissionsTable', () => {
     const users = {
       ...initialUsers,
       value: [
-        { name: 'admin name', role: 'admin' },
+        { name: 'admin name', userId: 'admin-user-id', role: 'admin' },
         { name: 'user name', role: 'user' },
         { name: 'viewer name', role: 'viewer' },
       ],
     };
 
-    it('renders correctly showing users and their permissions', () => {
+    it('correctly renders row for each user', () => {
       expect(
         shallow(
-          <PureUserPermissionsTable
+          <UserPermissionsTableBody
             users={users}
+            currentUserId="admin-user-id"
+            project="project"
             classes={classes}
             colHeadings={columnHeadings}
+            numCols={columnHeadings.length}
+            setRemoveUserDialogState={jest.fn()}
+            dispatch={jest.fn()}
           />,
         ),
       ).toMatchSnapshot();
@@ -138,7 +190,7 @@ describe('PureUserPermissionsTable', () => {
   });
 });
 
-describe('getFullWidthRow', () => {
+describe('FullWidthRow', () => {
   let shallow;
 
   beforeEach(() => {
@@ -148,13 +200,15 @@ describe('getFullWidthRow', () => {
   it('returns a table row with correct colSpan and content', () => {
     expect(
       shallow(
-        getFullWidthRow(<div>row content</div>, 4),
+        <FullWidthRow numCols={4}>
+          <div>row content</div>
+        </FullWidthRow>,
       ),
     ).toMatchSnapshot();
   });
 });
 
-describe('getFullWidthTextRow', () => {
+describe('FullWidthTextRow', () => {
   let shallow;
 
   beforeEach(() => {
@@ -164,13 +218,13 @@ describe('getFullWidthTextRow', () => {
   it('returns a table row with correct colSpan and text wrapped in Typography', () => {
     expect(
       shallow(
-        getFullWidthTextRow('Text to go in row.', 4),
+        <FullWidthTextRow numCols={4}>{'Text to go in row.'}</FullWidthTextRow>,
       ),
     ).toMatchSnapshot();
   });
 });
 
-describe('getTableRow', () => {
+describe('UserPermissionsTableRow', () => {
   let shallow;
 
   beforeEach(() => {
@@ -184,110 +238,27 @@ describe('getTableRow', () => {
   };
 
   describe('for a given user', () => {
-    const users = [
-      { name: 'admin name', role: 'admin' },
-      { name: 'user name', role: 'user' },
-      { name: 'viewer name', role: 'viewer' },
-    ];
+    const user = { name: 'admin name', role: 'admin' };
 
-    it('renders correctly showing users and their permissions', () => {
-      users.forEach((user, index) => {
-        expect(
-          shallow(
-            getTableRow(user, index, classes),
-          ),
-        ).toMatchSnapshot();
-      });
+    it('correctly renders passing props to children when not current user', () => {
+      expect(
+        shallow(
+          <UserPermissionsTableRow
+            user={user}
+            isCurrentUser={false}
+            index={2}
+            project="project"
+            classes={classes}
+            setRemoveUserDialogState={jest.fn()}
+            dispatch={jest.fn()}
+          />,
+        ),
+      ).toMatchSnapshot();
     });
   });
 });
 
-describe('when getting checkbox cells', () => {
-  let shallow;
-
-  const classes = {
-    activeSelection: 'active',
-    implicitSelection: 'implicit',
-  };
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
-  describe('when user has rights equal to check box', () => {
-    const userRole = PERMISSIONS.ADMIN;
-    const checkBox = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
-    describe('getCheckbox', () => {
-      it('returns an checked active selection check box', () => {
-        expect(
-          shallow(
-            getCheckbox(userRole, checkBox, classes),
-          ),
-        ).toMatchSnapshot();
-      });
-    });
-
-    describe('getCheckboxCell', () => {
-      it('returns a table cell with a checked active check box inside', () => {
-        expect(
-          shallow(
-            getCheckboxCell(userRole, checkBox, classes, 'key'),
-          ),
-        ).toMatchSnapshot();
-      });
-    });
-  });
-
-  describe('when user has rights greater than check box', () => {
-    const userRole = PERMISSIONS.ADMIN;
-    const checkBox = { name: PERMISSIONS.USER, value: PERMISSION_VALUES.USER };
-    describe('getCheckbox', () => {
-      it('returns a check implicit selection check box', () => {
-        expect(
-          shallow(
-            getCheckbox(userRole, checkBox, classes),
-          ),
-        ).toMatchSnapshot();
-      });
-    });
-
-    describe('getCheckboxCell', () => {
-      it('returns a table cell with a checked implicit selection check box inside', () => {
-        expect(
-          shallow(
-            getCheckboxCell(userRole, checkBox, classes, 'key'),
-          ),
-        ).toMatchSnapshot();
-      });
-    });
-  });
-
-  describe('when user has rights less than check box', () => {
-    const userRole = PERMISSIONS.VIEWER;
-    const checkBox = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
-    describe('getCheckbox', () => {
-      it('returns an unchecked check box', () => {
-        expect(
-          shallow(
-            getCheckbox(userRole, checkBox, classes),
-          ),
-        ).toMatchSnapshot();
-      });
-    });
-
-    describe('getCheckboxCell', () => {
-      it('returns a table cell with an unchecked check box inside', () => {
-        expect(
-          shallow(
-            getCheckboxCell(userRole, checkBox, classes, 'key'),
-          ),
-        ).toMatchSnapshot();
-      });
-    });
-  });
-});
-
-describe('getTableHead', () => {
+describe('UserPermissionsTableHead', () => {
   const classes = {
     tableCell: 'tableCell',
     tableHeader: 'tableHeader',
@@ -314,102 +285,30 @@ describe('getTableHead', () => {
   it('renders correct header bar based on column headings', () => {
     expect(
       shallow(
-        getTableHead(headings, classes),
+        <UserPermissionsTableHead headings={headings} classes={classes} />,
       ),
     ).toMatchSnapshot();
   });
 });
 
-describe('RemoveUserDialog', () => {
-  const classes = { dialogDeleteUserButton: 'dialogDeleteUserButton' };
+describe('dispatchAddUserPermissions', () => {
+  it('dispatches correctly configured remove user permissions action', () => {
+    projectSettingsActions.addUserPermission = jest.fn();
+    projectSettingsActions.addUserPermission.mockReturnValue('expected-result');
 
-  describe('when the dialog state has open equal to false', () => {
-    let shallow;
+    const projectKey = 'project';
+    const user = { name: 'User One', userId: 'user-one-id' };
+    const role = PERMISSIONS.ADMIN;
+    const mockDispatch = jest.fn();
 
-    beforeEach(() => {
-      shallow = createShallow();
-    });
+    dispatchAddUserPermissions(projectKey, user, role, mockDispatch);
 
-    it('renders as null', () => {
-      expect(
-        shallow(
-          <RemoveUserDialog
-            classes={classes}
-            state={{ user: null, open: false }}
-            setState={jest.fn()}
-            onRemoveConfirmationFn={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-  });
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith('expected-result');
 
-  describe('when the dialog state has open equal to true and a user set', () => {
-    let shallow;
-
-    beforeEach(() => {
-      shallow = createShallow();
-    });
-
-    const openState = { user: { name: 'User One', userId: 'user-one-id' }, open: true };
-
-    it('renders to match snapshot', () => {
-      expect(
-        shallow(
-          <RemoveUserDialog
-            classes={classes}
-            state={openState}
-            setState={jest.fn()}
-            onRemoveConfirmationFn={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
-    });
-
-    it('closes when the cancel button is pressed and does not call confirmation function', () => {
-      const mockSetState = jest.fn();
-      const mockOnRemoveConfirmationFn = jest.fn();
-      const render = shallow(
-        <RemoveUserDialog
-          classes={classes}
-          state={openState}
-          setState={mockSetState}
-          onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
-          dispatch={jest.fn()}
-        />,
-      );
-      render.find('#cancel-button').simulate('click');
-
-      expect(mockSetState).toHaveBeenCalledTimes(1);
-      expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
-      expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(0);
-    });
-
-    it('calls provided function and closes when the confirm button is pressed', () => {
-      const mockSetState = jest.fn();
-      const mockOnRemoveConfirmationFn = jest.fn();
-      const mockDispatch = jest.fn();
-      const projectName = 'project';
-      const render = shallow(
-        <RemoveUserDialog
-          classes={classes}
-          state={openState}
-          setState={mockSetState}
-          onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
-          project={projectName}
-          dispatch={mockDispatch}
-        />,
-      );
-      render.find('#confirm-button').simulate('click');
-
-      expect(mockSetState).toHaveBeenCalledTimes(1);
-      expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
-      expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(1);
-      expect(mockOnRemoveConfirmationFn)
-        .toHaveBeenCalledWith(projectName, openState.user, mockDispatch);
-    });
+    expect(projectSettingsActions.addUserPermission).toHaveBeenCalledTimes(1);
+    expect(projectSettingsActions.addUserPermission)
+      .toHaveBeenCalledWith(projectKey, user, role);
   });
 });
 
