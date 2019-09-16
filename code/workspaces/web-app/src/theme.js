@@ -22,6 +22,7 @@ const text = backgroundDark;
 // Lengths
 const spacing = 5;
 const navBarHeight = 8 * spacing;
+const cardImageSize = 13 * spacing;
 
 const theme = createMuiTheme({
   palette: {
@@ -70,6 +71,7 @@ const theme = createMuiTheme({
     borderRadius: 5,
   },
   spacing,
+  cardImageSize,
 });
 
 export const publicAppTheme = outerTheme => ({

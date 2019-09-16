@@ -7,31 +7,28 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
   <WithStyles(ForwardRef(List))
     className="SideBar-itemList-1"
   >
-    <WithStyles(SideBarGroup)
-      key="Info"
-    >
-      <WithStyles(ForwardRef(ListItem))
-        className="SideBar-projectTitleLI-3"
-      >
-        <WithStyles(ForwardRef(ListItemText))
-          classes={
-            Object {
-              "primary": "SideBar-projectTitleLIT-4",
-            }
-          }
-        >
-          <Connect(ProjectTitleContainer)
-            projectKey="project99"
-          />
-        </WithStyles(ForwardRef(ListItemText))>
-      </WithStyles(ForwardRef(ListItem))>
-      <WithStyles(SideBarButton)
-        icon="info_outline"
-        label="Information"
-        to="/projects/project99/info"
-      />
-    </WithStyles(SideBarGroup)>
-    <SideBarAnalysis
+    <InfoGroup
+      classes={
+        Object {
+          "itemList": "SideBar-itemList-1",
+          "projectTitleLI": "SideBar-projectTitleLI-3",
+          "projectTitleLIT": "SideBar-projectTitleLIT-4",
+          "sideBar": "SideBar-sideBar-2",
+        }
+      }
+      projectKey="project99"
+    />
+    <AnalysisGroup
+      projectKey="project99"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+          "project:settings:list",
+        ]
+      }
+    />
+    <MiscGroup
       projectKey="project99"
       userPermissions={
         Array [
@@ -46,13 +43,14 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
 `;
 
 exports[`Sidebar correctly renders correct snapshot 2`] = `
-Array [
-  <WithStyles(SideBarGroup)
-    key="Analysis"
-    title="Analysis"
+<div
+  className="SideBarAnalysis-sideBar-6"
+>
+  <WithStyles(ForwardRef(List))
+    className="SideBarAnalysis-itemList-5"
   >
-    <ComponentWrapper
-      permission="project:stacks:list"
+    <AnalysisGroup
+      projectKey="project99"
       userPermissions={
         Array [
           "project:storage:list",
@@ -60,75 +58,17 @@ Array [
           "project:settings:list",
         ]
       }
-    >
-      <WithStyles(SideBarButton)
-        icon="book"
-        label="Notebooks"
-        to="/projects/project99/notebooks"
-      />
-    </ComponentWrapper>
-    <WithStyles(SideBarButton)
-      icon="apps"
-      label="Dask"
-      to="/projects/project99/dask"
     />
-    <WithStyles(SideBarButton)
-      icon="apps"
-      label="Spark"
-      to="/projects/project99/spark"
+    <MiscGroup
+      projectKey="project99"
+      userPermissions={
+        Array [
+          "project:storage:list",
+          "project:stacks:list",
+          "project:settings:list",
+        ]
+      }
     />
-  </WithStyles(SideBarGroup)>,
-  <WithStyles(SideBarGroup)
-    key="StorageEtc"
-  >
-    <ComponentWrapper
-      permission="project:storage:list"
-      userPermissions={
-        Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
-        ]
-      }
-    >
-      <WithStyles(SideBarButton)
-        icon="storage"
-        label="Storage"
-        to="/projects/project99/storage"
-      />
-    </ComponentWrapper>
-    <ComponentWrapper
-      permission="project:stacks:list"
-      userPermissions={
-        Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
-        ]
-      }
-    >
-      <WithStyles(SideBarButton)
-        icon="web"
-        label="Sites"
-        to="/projects/project99/publishing"
-      />
-    </ComponentWrapper>
-    <ComponentWrapper
-      permission="project:settings:list"
-      userPermissions={
-        Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
-        ]
-      }
-    >
-      <WithStyles(SideBarButton)
-        icon="settings"
-        label="Settings"
-        to="/projects/project99/settings"
-      />
-    </ComponentWrapper>
-  </WithStyles(SideBarGroup)>,
-]
+  </WithStyles(ForwardRef(List))>
+</div>
 `;

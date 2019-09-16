@@ -38,39 +38,54 @@ const styles = theme => ({
   },
 });
 
-const SideBarAnalysis = ({ userPermissions, projectKey }) => (
-  [
-    <SideBarGroup title='Analysis' key='Analysis'>
-      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
-        <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
-      </PermissionWrapper>
-      <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
-      <SideBarButton to={`/projects/${projectKey}/spark`} label="Spark" icon="apps" />
-    </SideBarGroup>,
-    <SideBarGroup key='StorageEtc'>
-      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
-        <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
-      </PermissionWrapper>
-      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
-        <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
-      </PermissionWrapper>
-      <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
-        <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
-      </PermissionWrapper>
-    </SideBarGroup>,
-  ]
+const InfoGroup = ({ classes, projectKey }) => (
+  <SideBarGroup key='Info'>
+    <ListItem className={classes.projectTitleLI}>
+      <ListItemText classes={{ primary: classes.projectTitleLIT }}><ProjectTitleContainer projectKey={projectKey} /></ListItemText>
+    </ListItem>
+    <SideBarButton to={`/projects/${projectKey}/info`} label="Information" icon="info_outline" />
+  </SideBarGroup>
+);
+
+const AnalysisGroup = ({ userPermissions, projectKey }) => (
+  <SideBarGroup title='Analysis'>
+    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
+      <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
+    </PermissionWrapper>
+    <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
+    <SideBarButton to={`/projects/${projectKey}/spark`} label="Spark" icon="apps" />
+  </SideBarGroup>
+);
+
+const MiscGroup = ({ userPermissions, projectKey }) => (
+  <SideBarGroup>
+    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
+      <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
+    </PermissionWrapper>
+    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
+      <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
+    </PermissionWrapper>
+    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
+      <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
+    </PermissionWrapper>
+  </SideBarGroup>
 );
 
 const SideBar = ({ classes, userPermissions, projectKey }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
-      <SideBarGroup key='Info'>
-        <ListItem className={classes.projectTitleLI}>
-          <ListItemText classes={{ primary: classes.projectTitleLIT }}><ProjectTitleContainer projectKey={projectKey} /></ListItemText>
-        </ListItem>
-        <SideBarButton to={`/projects/${projectKey}/info`} label="Information" icon="info_outline" />
-      </SideBarGroup>
-      <SideBarAnalysis userPermissions={userPermissions} projectKey={projectKey} />
+      <InfoGroup classes={classes} projectKey={projectKey} />
+      <AnalysisGroup userPermissions={userPermissions} projectKey={projectKey} />
+      <MiscGroup userPermissions={userPermissions} projectKey={projectKey} />
+    </List>
+  </div>
+);
+
+const SideBarAnalysis = ({ classes, userPermissions, projectKey }) => (
+  <div className={classes.sideBar}>
+    <List className={classes.itemList}>
+      <AnalysisGroup userPermissions={userPermissions} projectKey={projectKey} />
+      <MiscGroup userPermissions={userPermissions} projectKey={projectKey} />
     </List>
   </div>
 );

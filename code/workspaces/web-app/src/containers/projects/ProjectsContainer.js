@@ -19,9 +19,7 @@ class ProjectsContainer extends Component {
   }
 
   componentWillMount() {
-    // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadProjects()
-      .catch((() => { }));
+    this.props.actions.loadProjects();
   }
 
   render() {

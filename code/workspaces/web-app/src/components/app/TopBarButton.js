@@ -22,7 +22,6 @@ const styles = (theme) => {
       '&:hover': {
         background: theme.palette.highlightMonoTransparent,
       },
-      width: 'initial',
     },
     active: {
       color: theme.typography.color,
@@ -30,7 +29,6 @@ const styles = (theme) => {
       '&:hover': {
         background: theme.palette.highlightMono,
       },
-      width: 'initial',
     },
   };
 };

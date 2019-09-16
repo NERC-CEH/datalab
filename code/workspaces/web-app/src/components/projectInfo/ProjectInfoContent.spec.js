@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMount } from '@material-ui/core/test-utils';
+import { createShallow } from '@material-ui/core/test-utils';
 import ProjectInfoContent from './ProjectInfoContent';
 
 describe('ProjectInfoContent', () => {
@@ -11,16 +11,14 @@ describe('ProjectInfoContent', () => {
     status: 'ready',
   };
 
-  function fullRender() {
-    const mount = createMount();
+  function shallowRender() {
+    const shallow = createShallow();
     const props = { projectInfo };
 
-    return mount(
-      <ProjectInfoContent {...props} />,
-    );
+    return shallow(<ProjectInfoContent {...props} />);
   }
 
   it('correctly renders correct snapshot', () => {
-    expect(fullRender()).toMatchSnapshot();
+    expect(shallowRender()).toMatchSnapshot();
   });
 });
