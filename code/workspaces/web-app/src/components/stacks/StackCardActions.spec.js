@@ -60,7 +60,12 @@ describe('StackCardActions', () => {
     expect(openStackMock).not.toHaveBeenCalled();
     onClick();
     expect(openStackMock).toHaveBeenCalledTimes(1);
-    expect(openStackMock).toHaveBeenCalledWith('abc1234');
+    expect(openStackMock).toHaveBeenCalledWith({
+      displayName: 'expectedDisplayName',
+      id: 'abc1234',
+      type: 'expectedType',
+      status: 'ready',
+    });
   });
 
   it('Delete button onClick function calls openStack with correct props', () => {

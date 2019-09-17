@@ -127,7 +127,7 @@ describe('DataStorageContainer', () => {
       // Act/Assert
       expect(getCredentialsMock).not.toHaveBeenCalled();
       expect(openMinioDataStoreMock).not.toHaveBeenCalled();
-      return openStack(1000)
+      return openStack({ id: 1000 })
         .then(() => {
           expect(getCredentialsMock).toHaveBeenCalledTimes(1);
           expect(getCredentialsMock).toHaveBeenCalledWith(1000);

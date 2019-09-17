@@ -41,7 +41,7 @@ class DataStorageContainer extends Component {
     return !isFetching;
   }
 
-  openDataStore = id => this.props.actions.getCredentials(id)
+  openDataStore = dataStore => this.props.actions.getCredentials(dataStore.id)
     .then(payload => pick(payload.value, ['url', 'accessKey']))
     .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
     .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));

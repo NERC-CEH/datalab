@@ -7,14 +7,14 @@ const authServiceUrl = `${config.get('authorisationService')}`;
 const dummyProjects = [
   {
     id: 123,
-    name: 'The project with id "project"',
+    name: 'The project with key "project"',
     key: 'project',
     description: 'Once upon a time there was only one...',
     collaborationLink: 'https://testlab.test-datalabs.nerc.ac.uk/',
   },
   {
     id: 222,
-    name: '"project2" is the ID of this',
+    name: '"project2" is the key of this',
     key: 'project2',
     description: 'This is the second project.',
   },

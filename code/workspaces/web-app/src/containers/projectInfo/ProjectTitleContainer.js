@@ -10,7 +10,7 @@ class ProjectTitleContainer extends Component {
     return (
       <PromisedContentWrapper promise={this.props.projects}>
         {this.props.projects.value.currentProject ? (
-          <span>{this.props.projects.value.currentProject.displayName}</span>
+          <span>{this.props.projects.value.currentProject.name}</span>
         ) : (<div/>)}
       </PromisedContentWrapper>
     );

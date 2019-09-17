@@ -155,7 +155,7 @@ describe('StacksContainer', () => {
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
       expect(openStackMock).not.toHaveBeenCalled();
-      return openStack(1000)
+      return openStack({ id: 1000 })
         .then(() => {
           expect(getUrlMock).toHaveBeenCalledTimes(1);
           expect(getUrlMock).toHaveBeenCalledWith(1000);
@@ -174,7 +174,7 @@ describe('StacksContainer', () => {
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
       expect(toastrErrorMock).not.toHaveBeenCalled();
-      return openStack(1000)
+      return openStack({ id: 1000 })
         .then(() => {
           expect(getUrlMock).toHaveBeenCalledTimes(1);
           expect(getUrlMock).toHaveBeenCalledWith(1000);
