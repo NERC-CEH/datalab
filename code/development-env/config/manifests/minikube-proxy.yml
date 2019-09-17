@@ -46,19 +46,22 @@ spec:
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
+
 metadata:
   name: datalab-api-ingress
   namespace: devtest
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
   - hosts:
-    - testlab-api.datalabs.localhost
+    - testlab.datalabs.localhost
     secretName: tls-secret
   rules:
   - host: testlab-api.datalabs.localhost
     http:
       paths:
-      - path: /
+      - path: /api
         backend:
           serviceName: datalab-api-proxy
           servicePort: 8000

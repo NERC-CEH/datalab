@@ -82,7 +82,7 @@ const config = convict({
   authZeroAudience: {
     doc: 'Audience for authorisation',
     format: 'String',
-    default: 'https://datalab-api.datalabs.nerc.ac.uk/',
+    default: 'https://datalab.datalabs.nerc.ac.uk/api',
     env: 'AUTH_ZERO_AUDIENCE',
   },
   databaseHost: {

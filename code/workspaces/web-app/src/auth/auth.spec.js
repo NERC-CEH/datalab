@@ -10,7 +10,7 @@ const logoutMock = jest.fn();
 const authConfig = {
   domain: 'expected.auth0.com',
   clientID: 'expected-client-id',
-  audience: 'https://datalab-api.datalabs.nerc.ac.uk/',
+  audience: 'https://datalab.datalabs.nerc.ac.uk/api',
   responseType: 'token id_token',
   scope: 'openid profile',
   redirectUri: `${window.location.origin}/callback`,

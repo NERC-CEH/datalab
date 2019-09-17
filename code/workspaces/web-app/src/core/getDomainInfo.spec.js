@@ -1,4 +1,4 @@
-import { getDomainInfo, replaceSubdomain, extendSubdomain } from './getDomainInfo';
+import { getDomainInfo, replaceSubdomain, extendSubdomain, createUrlFromPath } from './getDomainInfo';
 
 describe('Extend Subdomain', () => {
   it('should generate an extended subdomain', () => {
@@ -31,10 +31,36 @@ describe('Extend Subdomain', () => {
       protocol: 'http:',
       hostname: 'datalab.datalabs.nerc.ac.uk',
     };
-    const apiBase = extendSubdomain('api', 8000, location);
+    const apiBase = extendSubdomain('docs', 3000, location);
 
     // Assert
-    expect(apiBase).toEqual('http://datalab-api.datalabs.nerc.ac.uk');
+    expect(apiBase).toEqual('http://datalab-docs.datalabs.nerc.ac.uk');
+  });
+});
+
+describe('Create URL from Path', () => {
+  it('should generate a correct URL for a given path', () => {
+    // Arrange/Act
+    const location = {
+      protocol: 'https:',
+      hostname: 'testlab.test-datalabs.nerc.ac.uk',
+    };
+    const address = createUrlFromPath('api', 8000, location);
+
+    // Assert
+    expect(address).toBe('https://testlab.test-datalabs.nerc.ac.uk/api');
+  });
+
+  it('should generate a correct URL when using localhost', () => {
+    // Arrange/Act
+    const location = {
+      protocol: 'http:',
+      hostname: 'localhost',
+    };
+    const subdomain = createUrlFromPath('api', 8000, location);
+
+    // Assert
+    expect(subdomain).toBe('http://localhost:8000/api');
   });
 });
 
@@ -51,7 +77,7 @@ describe('Replace subdomain', () => {
     expect(address).toBe('https://discourse.test-datalabs.nerc.ac.uk');
   });
 
-  it('should return the alturnative address when using localhost', () => {
+  it('should return the alternative address when using localhost', () => {
     // Arrange/Act
     const location = {
       protocol: 'http:',
@@ -78,6 +104,7 @@ describe('Get Domain Info', () => {
       protocol: 'http:',
       subdomain: 'datalab',
       domain: 'datalabs.nerc.ac.uk',
+      baseUrl: 'http://datalab.datalabs.nerc.ac.uk',
     });
   });
 });
