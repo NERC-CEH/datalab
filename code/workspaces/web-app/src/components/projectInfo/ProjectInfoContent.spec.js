@@ -4,11 +4,9 @@ import ProjectInfoContent from './ProjectInfoContent';
 
 describe('ProjectInfoContent', () => {
   const projectInfo = {
-    id: 'project2',
-    displayName: '"project2" is the ID of this',
+    key: 'project2',
+    name: '"project2" is the ID of this',
     description: 'This is the second project.',
-    type: 'project',
-    status: 'ready',
   };
 
   function shallowRender() {
