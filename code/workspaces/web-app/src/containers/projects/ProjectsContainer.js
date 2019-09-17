@@ -22,14 +22,25 @@ class ProjectsContainer extends Component {
     this.props.actions.loadProjects();
   }
 
+  adaptProjectsToStacks() {
+    return this.props.projects.value.projectArray.map(project => ({
+      id: project.id,
+      key: project.key,
+      displayName: project.name,
+      description: project.description,
+      type: 'project',
+      status: 'ready',
+    }));
+  }
+
   render() {
     return (
       <PromisedContentWrapper promise={this.props.projects}>
         {this.props.projects.value.projectArray ? (
           <StackCards
-            stacks={this.props.projects.value.projectArray}
+            stacks={this.adaptProjectsToStacks()}
             typeName={TYPE_NAME}
-            openStack={id => this.props.history.push(`/projects/${id}/info`)}
+            openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
             deleteStack={() => { }}
             openCreationForm={() => { }}
             userPermissions={this.props.userPermissions}

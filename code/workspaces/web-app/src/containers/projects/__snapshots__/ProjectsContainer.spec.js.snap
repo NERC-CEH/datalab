@@ -13,32 +13,18 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
     Object {
       "fetching": false,
       "value": Object {
-        "projectArray": Array [
-          "expectedArray",
+        "projectsArray": Array [
+          Object {
+            "description": "A project description",
+            "id": 123,
+            "key": "project2",
+            "name": "A project name",
+          },
         ],
       },
     }
   }
 >
-  <WithStyles(StackCards)
-    createPermission=""
-    deletePermission=""
-    deleteStack={[Function]}
-    editPermission=""
-    openCreationForm={[Function]}
-    openPermission="project:storage:open"
-    openStack={[Function]}
-    stacks={
-      Array [
-        "expectedArray",
-      ]
-    }
-    typeName="Project"
-    userPermissions={
-      Array [
-        "expectedPermission",
-      ]
-    }
-  />
+  <div />
 </PromisedContentWrapper>
 `;

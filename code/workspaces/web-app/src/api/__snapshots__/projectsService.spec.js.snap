@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`projectsService loadProjects should build the correct query and unpack the results 1`] = `
+"
+    LoadProjects {
+      projects {
+        id, key, name, description
+      }
+    }"
+`;

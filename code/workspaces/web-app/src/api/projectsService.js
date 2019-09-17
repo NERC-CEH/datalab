@@ -1,3 +1,6 @@
+import { gqlQuery } from './graphqlClient';
+import errorHandler from './graphqlErrorHandler';
+
 const dummyProjects = [
   {
     id: 'project',
@@ -30,13 +33,15 @@ const dummyProjects = [
 ];
 
 function loadProjects() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        projectArray: dummyProjects,
-      });
-    }, 2000);
-  });
+  const query = `
+    LoadProjects {
+      projects {
+        id, key, name, description
+      }
+    }`;
+
+  return gqlQuery(query)
+    .then(errorHandler('data.projects'));
 }
 
 function loadProjectInfo(projectKey) {

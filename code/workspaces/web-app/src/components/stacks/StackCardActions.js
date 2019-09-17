@@ -28,7 +28,7 @@ const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermis
         className={classes.button}
         color="primary"
         disabled={!openStack || !isReady(stack)}
-        onClick={() => openStack(stack.id)}
+        onClick={() => openStack(stack)}
         variant="contained" >
         Open
       </Button>

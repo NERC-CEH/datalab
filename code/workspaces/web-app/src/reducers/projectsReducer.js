@@ -18,7 +18,7 @@ export default typeToReducer({
   [LOAD_PROJECTS_ACTION]: {
     [PROMISE_TYPE_PENDING]: () => ({ ...initialState, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
-    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: { projectArray: action.payload } }),
   },
   [LOAD_PROJECTINFO_ACTION]: {
     [PROMISE_TYPE_PENDING]: () => ({ ...initialState, fetching: true }),

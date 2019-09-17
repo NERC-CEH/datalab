@@ -23,16 +23,14 @@ describe('projectsReducer', () => {
   it('should handle LOAD_PROJECTS_SUCCESS', () => {
     // Arrange
     const type = `${LOAD_PROJECTS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-    const payload = {
-      projectArray: [{ project: 'firstProject' }, { project: 'secondProject' }],
-    };
+    const payload = [{ project: 'firstProject' }, { project: 'secondProject' }];
     const action = { type, payload };
 
     // Act
     const nextstate = projectsReducer({ error: null, fetching: false, value: {} }, action);
 
     // Assert
-    expect(nextstate).toEqual({ error: null, fetching: false, value: payload });
+    expect(nextstate).toEqual({ error: null, fetching: false, value: { projectArray: action.payload } });
   });
 
   it('should handle LOAD_PROJECTS_FAILURE', () => {
