@@ -11,6 +11,7 @@ const projectsPayload = {
     key: 'project2',
     name: 'A project name',
     description: 'A project description',
+    accessible: true,
   }],
 };
 const loadProjectsMock = jest.fn().mockReturnValue(Promise.resolve(projectsPayload));

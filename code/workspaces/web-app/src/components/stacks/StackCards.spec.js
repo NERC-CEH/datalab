@@ -17,7 +17,7 @@ describe('StackCards', () => {
     openStack: () => {},
     deleteStack: () => {},
     openCreationForm: () => {},
-    userPermissions: ['open', 'delete', 'create', 'edit'],
+    userPermissions: () => ['open', 'delete', 'create', 'edit'],
     openPermission: 'open',
     deletePermission: 'delete',
     createPermission: 'create',

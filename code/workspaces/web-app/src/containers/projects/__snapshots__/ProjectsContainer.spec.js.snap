@@ -15,6 +15,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
       "value": Object {
         "projectsArray": Array [
           Object {
+            "accessible": true,
             "description": "A project description",
             "id": 123,
             "key": "project2",

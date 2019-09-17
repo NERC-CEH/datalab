@@ -26,13 +26,13 @@ const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openC
         openStack={openStack}
         deleteStack={deleteStack}
         editStack={editStack}
-        userPermissions={userPermissions}
+        userPermissions={userPermissions(stack)}
         openPermission={openPermission}
         deletePermission={deletePermission}
         editPermission={editPermission}
       />
     ))}
-    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions} permission={createPermission}>
+    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
       <Grid item {...breakPoints}>
         <NewStackButton onClick={openCreationForm} typeName={typeName} />
       </Grid>
@@ -47,7 +47,7 @@ StackCards.propTypes = {
   deleteStack: PropTypes.func.isRequired,
   editStack: PropTypes.func,
   openCreationForm: PropTypes.func.isRequired,
-  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  userPermissions: PropTypes.func.isRequired,
   createPermission: PropTypes.string.isRequired,
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,

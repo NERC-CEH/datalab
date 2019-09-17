@@ -5,7 +5,7 @@ function loadProjects() {
   const query = `
     LoadProjects {
       projects {
-        id, key, name, description
+        id, key, name, description, accessible
       }
     }`;
 
