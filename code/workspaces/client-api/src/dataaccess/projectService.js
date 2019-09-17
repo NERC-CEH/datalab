@@ -4,38 +4,49 @@ import config from '../config';
 
 const authServiceUrl = `${config.get('authorisationService')}`;
 
+const dummyProjects = [
+  {
+    id: 123,
+    name: 'The project with id "project"',
+    key: 'project',
+    description: 'Once upon a time there was only one...',
+    collaborationLink: 'https://testlab.test-datalabs.nerc.ac.uk/',
+  },
+  {
+    id: 222,
+    name: '"project2" is the ID of this',
+    key: 'project2',
+    description: 'This is the second project.',
+  },
+  {
+    id: 333,
+    name: 'And this is "project3"',
+    key: 'project3',
+    description: 'This is another project.',
+  },
+  {
+    id: 321,
+    name: 'What?',
+    key: 'projectX',
+    description: 'No-one has permission to see this...',
+  },
+];
+
 function listProjects() {
-  return Promise.resolve([
-    {
-      id: 123,
-      name: 'project',
-      key: 'project',
-      tags: ['alpha', 'beta', 'gamma'],
-      collaborationLink: 'https://testlab.test-datalabs.nerc.ac.uk/',
-    },
-    {
-      id: 222,
-      name: 'project2',
-      key: 'project2',
-    },
-    {
-      id: 333,
-      name: 'project3',
-      key: 'project3',
-    },
-    {
-      id: 321,
-      name: 'another',
-      key: 'another',
-    },
-  ]);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(dummyProjects);
+    }, 2000);
+  });
 }
 
 function getProjectByKey(projectKey) {
-  return Promise.resolve({
-    id: 123,
-    name: 'project',
-    key: projectKey,
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        dummyProjects.filter(project => project.key === projectKey)[0],
+      );
+    }, 2000);
   });
 }
 

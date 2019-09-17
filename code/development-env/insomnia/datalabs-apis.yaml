@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2019-09-04T11:28:25.281Z
+__export_date: 2019-09-16T15:52:35.938Z
 __export_source: insomnia.desktop.app:v6.6.2
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -53,7 +53,7 @@ resources:
     isPrivate: false
     metaSortKey: -1567085050785
     method: GET
-    modified: 1567590937129
+    modified: 1568648509426
     name: Get User Permissions
     parameters: []
     parentId: fld_aedf6e0439314b319e879aec69a4f251
@@ -62,7 +62,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ auth_url  }}/projects/unknown/users"
+    url: "{{ auth_url  }}/projects/project/users"
     _type: request
   - _id: req_0513b140cfe040fc932d7613e3a6d850
     authentication:
@@ -189,7 +189,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  project(key: \"project\")
-        {\n    id\n    key\n    name\n    projectUsers
+        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n    projectUsers
         {\n      userId\n      name\n      role\n    }\n  }\n}"}'
     created: 1566905934976
     description: ""
@@ -200,8 +200,8 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934976
     method: POST
-    modified: 1567594965613
-    name: Projects
+    modified: 1568648517707
+    name: project
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
@@ -221,6 +221,34 @@ resources:
     name: Client API
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
     _type: request_group
+  - _id: req_1bb07662812b4c49b19edc6c195a781d
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  projects
+        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}"}'
+    created: 1568644168939
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934951
+    method: POST
+    modified: 1568647975234
+    name: projects
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
   - _id: req_5e4bf2bc5af143b1b727f4b795b2ff2e
     authentication:
       token: "{{ access_token  }}"
@@ -239,8 +267,8 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934926
     method: POST
-    modified: 1567592459414
-    name: Add Permission
+    modified: 1568646390363
+    name: addProjectPermission
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
@@ -267,8 +295,8 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934876
     method: POST
-    modified: 1567592493785
-    name: Delete Permission
+    modified: 1568646399532
+    name: removeProjectPermission
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
