@@ -34,7 +34,7 @@ const resolvers = {
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
-    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
+    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(name, token)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, { key }, { user, token }) => permissionChecker(SETTINGS_READ, user, () => projectService.getProjectByKey(key, token)),
