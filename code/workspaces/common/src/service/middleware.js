@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 
-const validator = validations => async (req, res, next) => {
+const validator = (validations, logger) => async (req, res, next) => {
   await Promise.all(validations.map(validation => validation.run(req)));
 
   const errors = validationResult(req);
@@ -8,6 +8,7 @@ const validator = validations => async (req, res, next) => {
     return next();
   }
 
+  logger.debug('Error validating request', errors.array());
   return res.status(400).json({ errors: errors.array() });
 };
 

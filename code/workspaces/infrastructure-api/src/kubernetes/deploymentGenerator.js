@@ -1,4 +1,5 @@
 import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manifestGenerator';
+import config from '../config/config';
 
 const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
 const JUPYTER_VERSION = '0.1.3';
@@ -30,11 +31,11 @@ const MINIO_VERSION = '1.0';
 const MINIO_CONNECT_IMAGE = 'nerc/connect';
 const MINIO_CONNECT_VERSION = '1.0.0';
 
-function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, type, volumeMount }) {
+function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    domain: `${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
+    domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyter: {
       imageName: JUPYTER_IMAGE,
       version: JUPYTER_VERSION,
@@ -46,11 +47,11 @@ function createJupyterDeployment({ datalabInfo, deploymentName, notebookName, ty
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createJupyterlabDeployment({ datalabInfo, deploymentName, notebookName, type, volumeMount }) {
+function createJupyterlabDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    domain: `${datalabInfo.name}-${notebookName}.${datalabInfo.domain}`,
+    domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyterlab: {
       imageName: JUPYTERLAB_IMAGE,
       version: JUPYTERLAB_VERSION,
@@ -127,13 +128,13 @@ function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMoun
   return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);
 }
 
-function createMinioDeployment({ datalabInfo, name, deploymentName, type }) {
+function createMinioDeployment({ name, deploymentName, type }) {
   const context = {
     name: deploymentName,
     // This mapping of name to volume name is because the volume names
     // don't have the stack name in so we need the raw volume name for the mount.
     volumeName: name,
-    domain: datalabInfo.domain,
+    domain: config.get('datalabDomain'),
     minio: {
       imageName: MINIO_IMAGE,
       version: MINIO_VERSION,

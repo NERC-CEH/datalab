@@ -39,10 +39,10 @@ async function createVolumeStack(params) {
 
 function deleteVolumeStack(params) {
   // Deletion of PVC is blocked to prevent breaking pods.
-  const { datalabInfo, projectKey, name } = params;
+  const { projectKey, name } = params;
   const k8sName = `${type}-${name}`;
 
-  return ingressApi.deleteIngress(k8sName, datalabInfo)
+  return ingressApi.deleteIngress(k8sName)
     .then(() => serviceApi.deleteService(k8sName))
     .then(() => deploymentApi.deleteDeployment(k8sName))
     // .then(() => volumeApi.deletePersistentVolumeClaim(`${name}-claim`))
