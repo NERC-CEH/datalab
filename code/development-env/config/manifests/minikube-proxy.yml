@@ -50,15 +50,13 @@ kind: Ingress
 metadata:
   name: datalab-api-ingress
   namespace: devtest
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
   - hosts:
     - testlab.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: testlab-api.datalabs.localhost
+  - host: testlab.datalabs.localhost
     http:
       paths:
       - path: /api
