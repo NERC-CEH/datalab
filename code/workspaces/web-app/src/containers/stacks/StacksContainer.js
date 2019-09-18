@@ -91,7 +91,7 @@ class StacksContainer extends Component {
           openStack={this.openStack}
           deleteStack={this.confirmDeleteStack}
           openCreationForm={this.openCreationForm}
-          userPermissions={this.props.userPermissions}
+          userPermissions={() => this.props.userPermissions}
           createPermission={PROJECT_STACKS_CREATE}
           openPermission={PROJECT_STACKS_OPEN}
           deletePermission={PROJECT_STACKS_DELETE}

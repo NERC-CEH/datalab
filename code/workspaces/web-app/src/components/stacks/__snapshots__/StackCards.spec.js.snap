@@ -34,14 +34,7 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
     ]
   }
   typeName="expectedTypeName"
-  userPermissions={
-    Array [
-      "open",
-      "delete",
-      "create",
-      "edit",
-    ]
-  }
+  userPermissions={[Function]}
 />
 `;
 
@@ -61,13 +54,6 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
   openStack={[Function]}
   stacks={Array []}
   typeName="expectedTypeName"
-  userPermissions={
-    Array [
-      "open",
-      "delete",
-      "create",
-      "edit",
-    ]
-  }
+  userPermissions={[Function]}
 />
 `;

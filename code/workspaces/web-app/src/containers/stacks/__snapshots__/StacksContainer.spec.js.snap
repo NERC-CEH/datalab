@@ -63,11 +63,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
       ]
     }
     typeName="Notebook"
-    userPermissions={
-      Array [
-        "expectedPermission",
-      ]
-    }
+    userPermissions={[Function]}
   />
 </PromisedContentWrapper>
 `;
