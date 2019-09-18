@@ -1,8 +1,8 @@
 import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
-function createIngress({ name, datalabInfo, projectKey, ingressName, serviceName, port, connectPort, rewriteTarget, proxyTimeout }) {
-  const host = createSniInfo(name, datalabInfo, projectKey);
+function createIngress({ name, projectKey, ingressName, serviceName, port, connectPort, rewriteTarget, proxyTimeout }) {
+  const host = createSniInfo(name, projectKey);
   const paths = createPathInfo(serviceName, port, connectPort);
   const context = {
     name: ingressName,
@@ -17,8 +17,8 @@ function createIngress({ name, datalabInfo, projectKey, ingressName, serviceName
   return generateManifest(context, IngressTemplates.DEFAULT_INGRESS);
 }
 
-function createSniInfo(name, datalab, projectKey) {
-  return `${projectKey}-${name}.${datalab.domain}`;
+function createSniInfo(name, projectKey) {
+  return `${projectKey}-${name}.${config.get('datalabDomain')}`;
 }
 
 function createPathInfo(serviceName, port, connectPort) {

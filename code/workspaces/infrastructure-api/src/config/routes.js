@@ -3,6 +3,7 @@ import status from '../controllers/status';
 import stack from '../controllers/stackController';
 import stacks from '../controllers/stacksController';
 import volume from '../controllers/volumeController';
+import names from '../controllers/nameController';
 import verifyToken from '../auth/authMiddleware';
 import permissionWrapper from '../auth/permissionMiddleware';
 
@@ -23,6 +24,7 @@ function configureRoutes(app) {
   app.get('/stacks', permissionWrapper(STACKS_LIST), stacks.listStacks);
   app.get('/stacks/category/:category', permissionWrapper(STACKS_LIST), stacks.withCategoryValidator, stacks.listByCategory);
   app.get('/stacks/mount/:mount', permissionWrapper(STORAGE_LIST), stacks.withMountValidator, stacks.listByMount);
+  app.get('/stacks/:name/isUnique', permissionWrapper(STACKS_LIST), stack.withNameValidator, names.isUnique);
   app.get('/stack/id/:id', permissionWrapper(STACKS_OPEN), stack.withIdValidator, stack.getOneById);
   app.get('/stack/name/:name', permissionWrapper(STACKS_CREATE), stack.withNameValidator, stack.getOneByName);
   app.delete('/stack', permissionWrapper(STACKS_DELETE), stack.deleteStackValidator, stack.deleteStack);

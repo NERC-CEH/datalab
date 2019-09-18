@@ -1,53 +1,22 @@
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import internalNameChecker from './internalNameChecker';
-import dataStorageRepository from './dataStorageRepository';
-import stackService from './stackService';
+import config from '../config';
 
-jest.mock('../dataaccess/dataStorageRepository');
-jest.mock('../dataaccess/stackService');
+const mock = new MockAdapter(axios);
 
-const dataStoreGetAllByNameMock = jest.fn().mockReturnValue(Promise.resolve());
-const stacksGetByNameMock = jest.fn().mockReturnValue(Promise.resolve());
-
-dataStorageRepository.getAllByName = dataStoreGetAllByNameMock;
-stackService.getByName = stacksGetByNameMock;
+const API_URL_BASE = config.get('infrastructureApi');
 
 describe('checkNameUniqueness', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    mock.reset();
   });
 
-  it('calls repositories with correct arguments', () => {
-    expect(dataStoreGetAllByNameMock).not.toHaveBeenCalled();
-    expect(stacksGetByNameMock).not.toHaveBeenCalled();
+  it('should call the infrastructure service', async () => {
+    const url = `${API_URL_BASE}/stacks/name/isUnique`;
+    mock.onGet(url).reply(200, { isUnique: true });
 
-    return internalNameChecker('expectedUser', 'expectedName')
-      .then(() => {
-        expect(dataStoreGetAllByNameMock).toHaveBeenCalledWith('expectedUser', 'expectedName');
-        expect(stacksGetByNameMock).toHaveBeenCalledWith('expectedUser', 'expectedName');
-      });
-  });
-
-  it('returns true if both ids are NULL', () => {
-    dataStoreGetAllByNameMock.mockReturnValue(Promise.resolve(null));
-    stacksGetByNameMock.mockReturnValue(Promise.resolve(null));
-
-    return internalNameChecker('expectedUser', 'expectedName')
-      .then(response => expect(response).toBe(true));
-  });
-
-  it('returns false if dataStore has a matching id', () => {
-    dataStoreGetAllByNameMock.mockReturnValue(Promise.resolve({ id: 'id' }));
-    stacksGetByNameMock.mockReturnValue(Promise.resolve(null));
-
-    return internalNameChecker('expectedUser', 'expectedName')
-      .then(response => expect(response).toBe(false));
-  });
-
-  it('returns false if stacks has a matching id', () => {
-    dataStoreGetAllByNameMock.mockReturnValue(Promise.resolve(null));
-    stacksGetByNameMock.mockReturnValue(Promise.resolve({ id: 'id' }));
-
-    return internalNameChecker('expectedUser', 'expectedName')
-      .then(response => expect(response).toBe(false));
+    const isUnique = await internalNameChecker('name', 'token');
+    expect(isUnique).toBeTruthy();
   });
 });
