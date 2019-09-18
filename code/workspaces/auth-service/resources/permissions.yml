@@ -3,6 +3,12 @@ instanceAdmin:
   - name: instance
     permissions:
       - admin
+  - name: projects
+    permissions:
+      - create
+      - delete
+      - edit
+      - read
 admin:
   - name: stacks
     permissions:
@@ -31,6 +37,10 @@ admin:
       - read
       - create
       - delete
+  - name: projects
+    permissions:
+      - edit
+      - read
 user:
   - name: stacks
     permissions:
@@ -42,8 +52,14 @@ user:
     permissions:
       - list
       - open
+  - name: projects
+    permissions:
+      - read
 viewer:
   - name: stacks
     permissions:
       - list
       - open
+  - name: projects
+    permissions:
+      - read

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createOrUpdateProject calls next with an error if error thrown while creating data and does not call send 1`] = `[Error: Error creating or updating project: expected error message text]`;
+
+exports[`createOrUpdateProject returns 400 if key in URL and key in body do not match 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "msg": "'key' parameter in URL and 'projectKey' field in request body must match. Got key='key' and projectKey='projectKey'.",
+    },
+  ],
+}
+`;
+
+exports[`createProject calls next with an error if error thrown while creating data and does not call send 1`] = `[Error: Error creating project: expected error message text]`;
+
+exports[`createProject returns 400 if a project with the same key already exists 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "msg": "Entry with projectKey 'projectKey' already exists.",
+    },
+  ],
+}
+`;
+
+exports[`deleteProjectByKey calls next with an error if error thrown while creating data and does not call send 1`] = `[Error: Error deleting project: expected error message text]`;
+
+exports[`getProjectByKey calls next with an error if error thrown while retrieving data and does not call send 1`] = `[Error: Error getting project by key: expected error message text]`;
+
+exports[`listProjects calls next with error if error thrown getting data from database and does not call send 1`] = `[Error: Error listing projects: expected error message text]`;
