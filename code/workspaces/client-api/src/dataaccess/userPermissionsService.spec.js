@@ -1,10 +1,12 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import config from '../config';
 import getUserPermissions from './userPermissionsService';
 
 const mock = new MockAdapter(axios);
 
-const authServiceUrl = 'http://localhost:9000/permissions';
+const AUTH_URL_BASE = config.get('authorisationService');
+const authServiceUrl = `${AUTH_URL_BASE}/permissions`;
 
 describe('User Identity Service', () => {
   beforeEach(() => {

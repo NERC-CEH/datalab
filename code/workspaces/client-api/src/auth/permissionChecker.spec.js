@@ -1,5 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import config from '../config';
 import { permissionWrapper, multiPermissionsWrapper, instanceAdminWrapper, projectPermissionWrapper } from './permissionChecker';
 
 const user = {
@@ -17,6 +18,8 @@ const admin = {
 const actionMock = jest.fn().mockReturnValue(Promise.resolve());
 
 const next = () => actionMock('value');
+
+const AUTH_URL_BASE = config.get('authorisationService');
 
 describe('Permission Checker', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -87,7 +90,7 @@ describe('Permission Checker', () => {
     });
 
     it('throws an error if user is lacking user permission', () => {
-      httpMock.onGet('http://localhost:9000/projects/project2/is-member').reply(200, true);
+      httpMock.onGet(`${AUTH_URL_BASE}/projects/project2/is-member`).reply(200, true);
       projectPermissionWrapper('project2', 'elementName:missingActionName', 'token', user, next)
         .catch((err) => {
           expect(err).toEqual(new Error('User missing expected permission(s): project:elementName:missingActionName,system:instance:admin'));
@@ -96,7 +99,7 @@ describe('Permission Checker', () => {
     });
 
     it('throws an error if user is lacking project permission', () => {
-      httpMock.onGet('http://localhost:9000/projects/projectX/is-member').reply(200, false);
+      httpMock.onGet(`${AUTH_URL_BASE}/projects/projectX/is-member`).reply(200, false);
       projectPermissionWrapper('projectX', 'elementName:actionName', 'token', user, next)
         .catch((err) => {
           expect(err).toEqual(new Error('Requested projectKey projectX not accessible to user'));
@@ -105,7 +108,7 @@ describe('Permission Checker', () => {
     });
 
     it('throws an error if user has instance admin permission but is lacking project permission', () => {
-      httpMock.onGet('http://localhost:9000/projects/projectX/is-member').reply(200, false);
+      httpMock.onGet(`${AUTH_URL_BASE}/projects/projectX/is-member`).reply(200, false);
       projectPermissionWrapper('projectX', 'elementName:actionName', 'token', admin, next)
         .catch((err) => {
           expect(err).toEqual(new Error('Requested projectKey projectX not accessible to user'));
@@ -114,7 +117,7 @@ describe('Permission Checker', () => {
     });
 
     it('callback to be called if user has correct user and project permission', () => {
-      httpMock.onGet('http://localhost:9000/projects/project2/is-member').reply(200, true);
+      httpMock.onGet(`${AUTH_URL_BASE}/projects/project2/is-member`).reply(200, true);
       projectPermissionWrapper('project2', 'elementName:actionName', 'token', user, next)
         .then(() => {
           expect(actionMock).toHaveBeenCalledTimes(1);
@@ -123,7 +126,7 @@ describe('Permission Checker', () => {
     });
 
     it('callback to be called if user has instance admin permission with project permission', () => {
-      httpMock.onGet('http://localhost:9000/projects/project2/is-member').reply(200, true);
+      httpMock.onGet(`${AUTH_URL_BASE}/projects/project2/is-member`).reply(200, true);
       projectPermissionWrapper('project2', 'elementName:actionName', 'token', admin, next)
         .then(() => {
           expect(actionMock).toHaveBeenCalledTimes(1);
