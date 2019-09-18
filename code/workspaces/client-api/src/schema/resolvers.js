@@ -1,6 +1,6 @@
 import { statusTypes, permissionTypes } from 'common';
 import { version } from '../version';
-import permissionChecker, { instanceAdminWrapper } from '../auth/permissionChecker';
+import permissionChecker, { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import datalabRepository from '../dataaccess/datalabRepository';
@@ -38,7 +38,7 @@ const resolvers = {
     checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
-    project: (obj, { key }, { user, token }) => permissionChecker(SETTINGS_READ, user, () => projectService.getProjectByKey(key, token)),
+    project: (obj, { projectKey }, { user, token }) => projectPermissionWrapper(projectKey, SETTINGS_READ, token, user, () => projectService.getProjectByKey(projectKey, token)),
   },
 
   Mutation: {

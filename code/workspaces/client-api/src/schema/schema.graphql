@@ -37,7 +37,7 @@ type Query {
     projects: [Project]
 
     # Details of a single project
-    project(key: String!): Project
+    project(projectKey: String!): Project
 }
 
 # Root mutation methods for Datalabs.

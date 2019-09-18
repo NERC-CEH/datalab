@@ -2,8 +2,8 @@
 
 exports[`projectsService loadProjectInfo should build the correct query and unpack the results 1`] = `
 "
-    LoadProjectInfo($key: String!) {
-      project(key: $key) {
+    LoadProjectInfo($projectKey: String!) {
+      project(projectKey: $projectKey) {
         id, key, name, description
       }
     }"

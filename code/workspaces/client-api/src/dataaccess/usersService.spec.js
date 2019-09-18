@@ -27,4 +27,12 @@ describe('userService', () => {
     return usersService.getAll(context)
       .then(response => expect(response).toEqual(testUsers));
   });
+
+  it('isMemberOfProject makes an api request', () => {
+    httpMock.onGet('http://localhost:9000/projects/project2/is-member')
+      .reply(200, true);
+
+    return usersService.isMemberOfProject('project2', context)
+      .then(response => expect(response).toEqual(true));
+  });
 });
