@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import projectActions from '../../actions/projectActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 
 const TYPE_NAME = 'Project';
 const PROJECT_OPEN_PERMISSION = 'project.open';
+
+const styles = theme => ({
+  searchField: {
+    // background: 'red',
+  },
+});
 
 class ProjectsContainer extends Component {
   shouldComponentUpdate(nextProps) {
@@ -37,21 +45,34 @@ class ProjectsContainer extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <PromisedContentWrapper promise={this.props.projects}>
         {this.props.projects.value.projectArray ? (
-          <StackCards
-            stacks={this.adaptProjectsToStacks()}
-            typeName={TYPE_NAME}
-            openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
-            deleteStack={() => { }}
-            openCreationForm={() => { }}
-            userPermissions={project => this.projectUserPermissions(project)}
-            createPermission=""
-            openPermission={PROJECT_OPEN_PERMISSION}
-            deletePermission=""
-            editPermission=""
-          />
+          <div>
+            <TextField
+              autoFocus={true}
+              className={classes.searchField}
+              id="search"
+              margin="dense"
+              type="search"
+              placeholder="Filter projects..."
+              variant="filled"
+              InputProps={{ disableUnderline: true }}
+            />
+            <StackCards
+              stacks={this.adaptProjectsToStacks()}
+              typeName={TYPE_NAME}
+              openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
+              deleteStack={() => { }}
+              openCreationForm={() => { }}
+              userPermissions={project => this.projectUserPermissions(project)}
+              createPermission=""
+              openPermission={PROJECT_OPEN_PERMISSION}
+              deletePermission=""
+              editPermission=""
+            />
+          </div>
         ) : (<div />)}
       </PromisedContentWrapper>
     );
@@ -84,4 +105,4 @@ function mapDispatchToProps(dispatch) {
 
 const ConnectedProjectsContainer = connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
 export { ProjectsContainer as PureProjectsContainer, ConnectedProjectsContainer }; // export for testing
-export default withRouter(ConnectedProjectsContainer);
+export default withStyles(styles)(withRouter(ConnectedProjectsContainer));
