@@ -1,6 +1,5 @@
 import logger from 'winston';
 import { permissionTypes } from 'common';
-import userService from '../dataaccess/usersService';
 
 const { SYSTEM_INSTANCE_ADMIN, PROJECT, delimiter } = permissionTypes;
 
@@ -12,23 +11,20 @@ export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
   ...rest,
 );
 
-export function projectPermissionWrapper(projectKey, permissionSuffix, token, user, next) {
-  return userService.isMemberOfProject(projectKey, token)
-    .then((accessible) => {
-      if (!accessible) {
-        logger.warn('Auth: permission check: FAILED');
-        return Promise.reject(new Error(`Requested projectKey ${projectKey} not accessible to user`));
-      }
+export function projectPermissionWrapper(args, permissionSuffix, user, next) {
+  if (!args.projectKey) {
+    logger.error('Auth: permission check: FAILED, projectKey not passed in args');
+    return Promise.reject(new Error(`projectKey not passed, expected suffix: ${permissionSuffix}`));
+  }
 
-      return permissionCheck(
-        [
-          PROJECT.concat(delimiter, permissionSuffix),
-          SYSTEM_INSTANCE_ADMIN,
-        ],
-        user,
-        next,
-      );
-    });
+  return permissionCheck(
+    [
+      args.projectKey.concat(delimiter, permissionSuffix),
+      SYSTEM_INSTANCE_ADMIN,
+    ],
+    user,
+    next,
+  );
 }
 
 export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissionCheck(

@@ -38,7 +38,7 @@ const resolvers = {
     checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
-    project: (obj, { projectKey }, { user, token }) => projectPermissionWrapper(projectKey, SETTINGS_READ, token, user, () => projectService.getProjectByKey(projectKey, token)),
+    project: (obj, args, { user, token }) => projectPermissionWrapper(args, SETTINGS_READ, user, () => projectService.getProjectByKey(args.projectKey, token)),
   },
 
   Mutation: {
