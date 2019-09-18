@@ -33,10 +33,7 @@ class ProjectsContainer extends Component {
   }
 
   projectUserPermissions(project) {
-    if (project === undefined) {
-      return [];
-    }
-    return project.accessible ? [PROJECT_OPEN_PERMISSION] : [];
+    return project && project.accessible ? [PROJECT_OPEN_PERMISSION] : [];
   }
 
   render() {
