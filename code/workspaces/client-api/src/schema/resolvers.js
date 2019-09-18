@@ -44,7 +44,6 @@ const resolvers = {
     createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     createDataStore: (obj, { dataStore }, { user, token }) => (
-      // permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...dataStore }))
       permissionChecker(STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
     ),
     deleteDataStore: (obj, { dataStore }, { user, token }) => (

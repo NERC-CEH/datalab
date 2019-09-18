@@ -1,4 +1,4 @@
-import axios from 'axios/index';
+import axios from 'axios';
 import config from '../config';
 import generateOptions from '../auth/tokens';
 
