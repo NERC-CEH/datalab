@@ -19,15 +19,23 @@ Array [
   "firstProjectName:permissions:read",
   "firstProjectName:permissions:create",
   "firstProjectName:permissions:delete",
+  "firstProjectName:projects:edit",
+  "firstProjectName:projects:read",
   "secondProjectName:stacks:create",
   "secondProjectName:stacks:delete",
   "secondProjectName:stacks:list",
   "secondProjectName:stacks:open",
   "secondProjectName:storage:list",
   "secondProjectName:storage:open",
+  "secondProjectName:projects:read",
   "thirdProjectName:stacks:list",
   "thirdProjectName:stacks:open",
+  "thirdProjectName:projects:read",
   "system:instance:admin",
+  "system:projects:create",
+  "system:projects:delete",
+  "system:projects:edit",
+  "system:projects:read",
 ]
 `;
 
@@ -35,5 +43,6 @@ exports[`Get Permissions should return permissions for known roles only 1`] = `
 Array [
   "firstProjectName:stacks:list",
   "firstProjectName:stacks:open",
+  "firstProjectName:projects:read",
 ]
 `;
