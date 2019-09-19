@@ -11,7 +11,10 @@ export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
   ...rest,
 );
 
-export function projectPermissionWrapper(args, permissionSuffix, user, next) {
+/*
+Note, 'done' here is nothing to do with the Express middleware, it is simply a call to the data access function providing the data promise.
+*/
+export function projectPermissionWrapper(args, permissionSuffix, user, done) {
   if (!args.projectKey) {
     logger.error('Auth: permission check: FAILED, projectKey not passed in args');
     return Promise.reject(new Error(`projectKey not passed, expected suffix: ${permissionSuffix}`));
@@ -23,7 +26,7 @@ export function projectPermissionWrapper(args, permissionSuffix, user, next) {
       SYSTEM_INSTANCE_ADMIN,
     ],
     user,
-    next,
+    done,
   );
 }
 
@@ -40,7 +43,7 @@ export const instanceAdminWrapper = (...rest) => permissionCheck(
   ...rest,
 );
 
-function permissionCheck(requiredPermissions, { permissions }, next) {
+function permissionCheck(requiredPermissions, { permissions }, done) {
   const grantedPermissions = permissions || [];
 
   logger.debug('Auth: checking permissions');
@@ -53,7 +56,7 @@ function permissionCheck(requiredPermissions, { permissions }, next) {
   }
 
   logger.debug('Auth: permission check: PASSED');
-  return next();
+  return done();
 }
 
 const arraysIncludes = (current, expected) => current.some(currentValue => expected.some(expectedValue => (currentValue.match(expectedValue) || []).length > 0));
