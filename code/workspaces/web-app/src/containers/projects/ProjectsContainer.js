@@ -18,7 +18,39 @@ const styles = theme => ({
   },
 });
 
+const searchInputProps = {
+  disableUnderline: true,
+};
+
+const projectToStack = project => ({
+  id: project.id,
+  key: project.key,
+  displayName: project.name,
+  description: project.description,
+  accessible: project.accessible,
+  type: 'project',
+  status: 'ready',
+});
+
+const stackMatchesFilter = ({ displayName, description }, searchText) => {
+  const filter = searchText.toLowerCase();
+  return displayName.toLowerCase().includes(filter)
+    || description.toLowerCase().includes(filter);
+};
+
 class ProjectsContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchText: '',
+    };
+    this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+  }
+
+  handleSearchTextChange(event) {
+    this.setState({ searchText: event.target.value });
+  }
+
   shouldComponentUpdate(nextProps) {
     const isFetching = nextProps.projects.fetching;
     return !isFetching || this.props.projects.isFetching !== isFetching;
@@ -29,15 +61,7 @@ class ProjectsContainer extends Component {
   }
 
   adaptProjectsToStacks() {
-    return this.props.projects.value.projectArray.map(project => ({
-      id: project.id,
-      key: project.key,
-      displayName: project.name,
-      description: project.description,
-      accessible: project.accessible,
-      type: 'project',
-      status: 'ready',
-    }));
+    return this.props.projects.value.projectArray.map(projectToStack);
   }
 
   projectUserPermissions(project) {
@@ -55,13 +79,15 @@ class ProjectsContainer extends Component {
               className={classes.searchField}
               id="search"
               margin="dense"
+              onChange={this.handleSearchTextChange}
               type="search"
               placeholder="Filter projects..."
               variant="filled"
-              InputProps={{ disableUnderline: true }}
+              value={this.state.searchText}
+              InputProps={searchInputProps}
             />
             <StackCards
-              stacks={this.adaptProjectsToStacks()}
+              stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
               typeName={TYPE_NAME}
               openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
               deleteStack={() => { }}
@@ -104,5 +130,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 const ConnectedProjectsContainer = connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
-export { ProjectsContainer as PureProjectsContainer, ConnectedProjectsContainer }; // export for testing
+export { ProjectsContainer as PureProjectsContainer, ConnectedProjectsContainer, projectToStack, stackMatchesFilter }; // export for testing
 export default withStyles(styles)(withRouter(ConnectedProjectsContainer));
