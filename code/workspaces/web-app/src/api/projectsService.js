@@ -13,15 +13,15 @@ function loadProjects() {
     .then(errorHandler('data.projects'));
 }
 
-function loadProjectInfo(key) {
+function loadProjectInfo(projectKey) {
   const query = `
-    LoadProjectInfo($key: String!) {
-      project(key: $key) {
+    LoadProjectInfo($projectKey: String!) {
+      project(projectKey: $projectKey) {
         id, key, name, description
       }
     }`;
 
-  return gqlQuery(query, { key })
+  return gqlQuery(query, { projectKey })
     .then(errorHandler('data.project'));
 }
 
