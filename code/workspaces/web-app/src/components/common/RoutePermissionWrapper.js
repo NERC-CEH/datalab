@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class RoutePermissionWrapper extends Component {
+  showWrappedComponent = (fetching, userPermissions, permission) => !fetching && (!permission || userPermissions.includes(permission));
+
   getComponent() {
     const { value, fetching } = this.props.promisedUserPermissions;
     const WrappedComponent = this.props.component;
@@ -13,7 +15,7 @@ class RoutePermissionWrapper extends Component {
       return () => (<CircularProgress />);
     }
 
-    if (!fetching && (!this.props.permission || value.includes(this.props.permission))) {
+    if (this.showWrappedComponent(fetching, value, this.props.permission)) {
       return props => (<WrappedComponent userPermissions={value} {...props} />);
     }
 
