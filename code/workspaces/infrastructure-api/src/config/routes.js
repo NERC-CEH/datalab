@@ -27,9 +27,9 @@ function configureRoutes(app) {
   app.all('*', verifyToken); // Routes above this line are not auth checked
   app.get('/projects', ew(projects.listProjects));
   app.post('/projects', permissionWrapper(PROJECTS_CREATE), projects.projectDocumentValidator(), ew(projects.createProject));
-  app.get('/projects/:key', permissionWrapper(PROJECTS_READ), projects.actionWithKeyValidator(), ew(projects.getProjectByKey));
-  app.put('/projects/:key', permissionWrapper(PROJECTS_EDIT), projects.actionWithKeyValidator(), projects.projectDocumentValidator(), ew(projects.createOrUpdateProject));
-  app.delete('/projects/:key', permissionWrapper(PROJECTS_DELETE), projects.actionWithKeyValidator(), ew(projects.deleteProjectByKey));
+  app.get('/projects/:projectKey', permissionWrapper(PROJECTS_READ), projects.actionWithKeyValidator(), ew(projects.getProjectByKey));
+  app.put('/projects/:projectKey', permissionWrapper(PROJECTS_EDIT), projects.actionWithKeyValidator(), projects.projectDocumentValidator(), ew(projects.createOrUpdateProject));
+  app.delete('/projects/:projectKey', permissionWrapper(PROJECTS_DELETE), projects.actionWithKeyValidator(), ew(projects.deleteProjectByKey));
   app.get('/stacks', permissionWrapper(STACKS_LIST), stacks.listStacks);
   app.get('/stacks/category/:category', permissionWrapper(STACKS_LIST), stacks.withCategoryValidator, stacks.listByCategory);
   app.get('/stacks/mount/:mount', permissionWrapper(STORAGE_LIST), stacks.withMountValidator, stacks.listByMount);

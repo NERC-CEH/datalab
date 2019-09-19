@@ -7,15 +7,15 @@ describe('Get Permissions', () => {
       instanceAdmin: true,
       projectRoles: [
         {
-          projectKey: 'firstProjectName',
+          projectKey: 'firstProjectKey',
           role: 'admin',
         },
         {
-          projectKey: 'secondProjectName',
+          projectKey: 'secondProjectKey',
           role: 'user',
         },
         {
-          projectKey: 'thirdProjectName',
+          projectKey: 'thirdProjectKey',
           role: 'viewer',
         },
       ],
@@ -49,7 +49,7 @@ describe('Get Permissions', () => {
       instanceAdmin: false,
       projectRoles: [
         {
-          projectKey: 'firstProjectName',
+          projectKey: 'firstProjectKey',
           role: 'viewer',
         },
         {

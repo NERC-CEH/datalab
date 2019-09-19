@@ -15,7 +15,11 @@ const nextMock = jest.fn();
 
 const throwErrorMock = jest.fn(() => { throw new Error('expected error message text'); });
 
-validator.matchedData = jest.fn(request => request);
+validator.matchedData = jest.fn((request, options) => (
+  options && options.locations
+    ? request[options.locations[0]]
+    : request
+));
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -33,12 +37,6 @@ describe('listProjects', () => {
     expectToBeCalledOnceWith(responseMock.send, databaseProjects);
   });
 
-  it('returns an empty array if gets undefined back from database', async () => {
-    projectsRepository.getAll = jest.fn(() => undefined);
-    await projectsController.listProjects({}, responseMock, nextMock);
-    expectToBeCalledOnceWith(responseMock.send, []);
-  });
-
   it('calls next with error if error thrown getting data from database and does not call send', async () => {
     projectsRepository.getAll = throwErrorMock;
     await projectsController.listProjects({}, responseMock, nextMock);
@@ -49,20 +47,20 @@ describe('listProjects', () => {
 describe('getProjectByKey', () => {
   it('uses matchedData key to get by key', async () => {
     projectsRepository.getByKey = jest.fn();
-    await projectsController.getProjectByKey({ key: 'expected-key' }, responseMock, nextMock);
+    await projectsController.getProjectByKey({ projectKey: 'expected-key' }, responseMock, nextMock);
     expectToBeCalledOnceWith(projectsRepository.getByKey, 'expected-key');
   });
 
   it('returns project if it exists', async () => {
     const dummyProject = { projectKey: 'projectKey', name: 'name' };
     projectsRepository.getByKey = jest.fn(() => dummyProject);
-    await projectsController.getProjectByKey({ key: 'some-key' }, responseMock, nextMock);
+    await projectsController.getProjectByKey({ projectKey: 'some-key' }, responseMock, nextMock);
     expectToBeCalledOnceWith(responseMock.send, dummyProject);
   });
 
   it('returns a 404 if project not found', async () => {
     projectsRepository.getByKey = jest.fn(() => undefined);
-    await projectsController.getProjectByKey({ key: 'some-key' }, responseMock, nextMock);
+    await projectsController.getProjectByKey({ projectKey: 'some-key' }, responseMock, nextMock);
     expectToBeCalledOnceWith(responseMock.status, 404);
     expectToBeCalledOnceWith(responseMock.send);
   });
@@ -85,7 +83,7 @@ describe('createProject', () => {
   it('takes the document definition from the request body and checks if it exists', async () => {
     projectsRepository.exists = jest.fn();
     await projectsController.createProject({ body: dummyProject }, responseMock, nextMock);
-    expectToBeCalledOnceWith(projectsRepository.exists, dummyProject);
+    expectToBeCalledOnceWith(projectsRepository.exists, dummyProject.projectKey);
   });
 
   it('returns 400 if a project with the same key already exists', async () => {
@@ -123,37 +121,35 @@ describe('createOrUpdateProject', () => {
     ...dummyProject,
     id: 'database-id',
   };
-  const requestMock = { key: dummyProject.projectKey, body: dummyProject };
+  const requestMock = { params: { projectKey: dummyProject.projectKey }, body: dummyProject };
 
   it('returns 400 if key in URL and key in body do not match', async () => {
-    const failingRequestMock = { key: 'key', body: dummyProject };
+    const failingRequestMock = { params: { projectKey: 'key' }, body: dummyProject };
     await projectsController.createOrUpdateProject(failingRequestMock, responseMock, nextMock);
     expectToBeCalledOnceWith(responseMock.status, 400);
     expect(responseMock.send).toBeCalledTimes(1);
     expect(responseMock.send.mock.calls[0][0]).toMatchSnapshot();
   });
 
-  it('returns 201 and project document when created by calling getByKey', async () => {
-    projectsRepository.createOrUpdate = jest.fn(() => undefined);
-    projectsRepository.getByKey = jest.fn(() => dummyDatabaseDocument);
+  it('returns 201 and project document when creating document', async () => {
+    projectsRepository.createOrUpdate = jest.fn(() => dummyDatabaseDocument);
+    projectsRepository.exists = jest.fn(() => false);
 
     await projectsController.createOrUpdateProject(requestMock, responseMock, nextMock);
 
     expectToBeCalledOnceWith(projectsRepository.createOrUpdate, dummyProject);
-    expectToBeCalledOnceWith(projectsRepository.getByKey, dummyProject.projectKey);
     expectToBeCalledOnceWith(responseMock.status, 201);
     expectToBeCalledOnceWith(responseMock.send, dummyDatabaseDocument);
   });
 
-  it('returns 201 and project document when updated without needing to call getByKey', async () => {
+  it('returns 200 and updated project document when updating document', async () => {
     projectsRepository.createOrUpdate = jest.fn(() => dummyDatabaseDocument);
-    projectsRepository.getByKey = jest.fn();
+    projectsRepository.exists = jest.fn(() => true);
 
     await projectsController.createOrUpdateProject(requestMock, responseMock, nextMock);
 
     expectToBeCalledOnceWith(projectsRepository.createOrUpdate, dummyProject);
-    expect(projectsRepository.getByKey).toHaveBeenCalledTimes(0);
-    expectToBeCalledOnceWith(responseMock.status, 201);
+    expectToBeCalledOnceWith(responseMock.status, 200);
     expectToBeCalledOnceWith(responseMock.send, dummyDatabaseDocument);
   });
 
@@ -165,12 +161,12 @@ describe('createOrUpdateProject', () => {
 });
 
 describe('deleteProjectByKey', () => {
-  const requestMock = { key: 'key' };
+  const requestMock = { projectKey: 'projectKey' };
 
   it('calls deleteByKey with correct key', async () => {
     projectsRepository.deleteByKey = jest.fn();
     await projectsController.deleteProjectByKey(requestMock, responseMock, nextMock);
-    expectToBeCalledOnceWith(projectsRepository.deleteByKey, requestMock.key);
+    expectToBeCalledOnceWith(projectsRepository.deleteByKey, requestMock.projectKey);
   });
 
   it('returns 404 if it found no documents to delete', async () => {

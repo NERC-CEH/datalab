@@ -3,7 +3,7 @@ import database from '../config/database';
 
 jest.mock('../config/database');
 
-const testDocument = {
+const testProject = {
   projectKey: 'projectKey',
   name: 'name',
   description: 'description',
@@ -27,48 +27,47 @@ describe('projectsRepository', () => {
 
   it('getAll calls correct methods with correct arguments', async () => {
     await projectsRepository.getAll();
-    expect(ProjectMock.find).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.find).toHaveBeenCalledWith();
-    expect(ProjectMock.exec).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.exec).toHaveBeenCalledWith();
+    expectToHaveBeenCalledOnceWith(ProjectMock.find);
+    expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 
   it('getByKey calls correct methods with correct arguments', async () => {
-    const key = 'expected-key';
-    await projectsRepository.getByKey(key);
-    expect(ProjectMock.findOne).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.findOne).toHaveBeenCalledWith({ projectKey: key });
-    expect(ProjectMock.exec).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.exec).toHaveBeenCalledWith();
+    const projectKey = 'expected-key';
+    await projectsRepository.getByKey(projectKey);
+    expectToHaveBeenCalledOnceWith(ProjectMock.findOne, { projectKey });
+    expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 
   it('exists calls correct methods with correct arguments', async () => {
-    await projectsRepository.exists(testDocument);
-    expect(ProjectMock.exists).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.exists).toHaveBeenCalledWith({ projectKey: testDocument.projectKey });
+    const { projectKey } = testProject;
+    await projectsRepository.exists(projectKey);
+    expectToHaveBeenCalledOnceWith(ProjectMock.exists, { projectKey });
   });
 
   it('create calls correct methods with correct arguments', async () => {
-    await projectsRepository.create(testDocument);
-    expect(ProjectMock.create).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.create).toHaveBeenCalledWith(testDocument);
+    await projectsRepository.create(testProject);
+    expectToHaveBeenCalledOnceWith(ProjectMock.create, testProject);
   });
 
   it('createOrUpdate calls correct methods with correct arguments', async () => {
-    await projectsRepository.createOrUpdate(testDocument);
-    expect(ProjectMock.findOneAndUpdate).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.findOneAndUpdate).toHaveBeenCalledWith(
-      { projectKey: testDocument.projectKey },
-      testDocument,
-      { upsert: true, setDefaultsOnInsert: true },
+    await projectsRepository.createOrUpdate(testProject);
+    expectToHaveBeenCalledOnceWith(
+      ProjectMock.findOneAndUpdate,
+      { projectKey: testProject.projectKey },
+      testProject,
+      { upsert: true, setDefaultsOnInsert: true, new: true },
     );
   });
 
   it('deleteByKey calls correct methods with correct arguments', async () => {
-    await projectsRepository.deleteByKey(testDocument.projectKey);
-    expect(ProjectMock.remove).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.remove).toHaveBeenCalledWith({ projectKey: testDocument.projectKey });
-    expect(ProjectMock.exec).toHaveBeenCalledTimes(1);
-    expect(ProjectMock.exec).toHaveBeenCalledWith();
+    const { projectKey } = testProject;
+    await projectsRepository.deleteByKey(projectKey);
+    expectToHaveBeenCalledOnceWith(ProjectMock.remove, { projectKey });
+    expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 });
+
+function expectToHaveBeenCalledOnceWith(mockFn, ...args) {
+  expect(mockFn).toHaveBeenCalledTimes(1);
+  expect(mockFn).toHaveBeenCalledWith(...args);
+}

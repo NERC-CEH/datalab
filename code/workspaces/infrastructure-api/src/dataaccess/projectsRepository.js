@@ -6,28 +6,28 @@ async function getAll() {
   return Project().find().exec();
 }
 
-async function getByKey(key) {
-  return Project().findOne({ projectKey: key }).exec();
+async function getByKey(projectKey) {
+  return Project().findOne({ projectKey }).exec();
 }
 
-async function exists(document) {
-  return Project().exists({ projectKey: document.projectKey });
+async function exists(projectKey) {
+  return Project().exists({ projectKey });
 }
 
-async function create(document) {
-  return Project().create(document);
+async function create(project) {
+  return Project().create(project);
 }
 
-async function createOrUpdate(document) {
+async function createOrUpdate(project) {
   return Project().findOneAndUpdate(
-    { projectKey: document.projectKey },
-    document,
-    { upsert: true, setDefaultsOnInsert: true },
+    { projectKey: project.projectKey },
+    project,
+    { upsert: true, setDefaultsOnInsert: true, new: true },
   );
 }
 
-async function deleteByKey(key) {
-  return Project().remove({ projectKey: key }).exec();
+async function deleteByKey(projectKey) {
+  return Project().remove({ projectKey }).exec();
 }
 
 export default {

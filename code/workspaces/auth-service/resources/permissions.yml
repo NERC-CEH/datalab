@@ -3,12 +3,6 @@ instanceAdmin:
   - name: instance
     permissions:
       - admin
-  - name: projects
-    permissions:
-      - create
-      - delete
-      - edit
-      - read
 admin:
   - name: stacks
     permissions:
