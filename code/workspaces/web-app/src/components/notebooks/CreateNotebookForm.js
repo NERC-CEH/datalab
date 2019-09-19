@@ -13,7 +13,7 @@ const { startText, endText } = getUrlNameStartEndText(window.location);
 export function getUrlNameStartEndText(windowLocation) {
   if (windowLocation.hostname === 'localhost') {
     return {
-      startText: `${windowLocation.protocol}//testlab-`,
+      startText: `${windowLocation.protocol}//project-`,
       endText: '.datalabs.localhost',
     };
   }

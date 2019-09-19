@@ -10,7 +10,7 @@ describe('getUrlNameStartEndText', () => {
     };
     const { startText, endText } = getUrlNameStartEndText(windowLocation);
 
-    expect(startText).toEqual('https://testlab-');
+    expect(startText).toEqual('https://project-');
     expect(endText).toEqual('.datalabs.localhost');
   });
 
@@ -21,7 +21,7 @@ describe('getUrlNameStartEndText', () => {
     };
     const { startText, endText } = getUrlNameStartEndText(windowLocation);
 
-    expect(startText).toEqual('https://testlab-');
+    expect(startText).toEqual('https://project-');
     expect(endText).toEqual('.datalabs.localhost');
   });
 
