@@ -39,27 +39,11 @@ spec:
   - host: testlab.datalabs.localhost
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: datalab-app-proxy
-          servicePort: 3000
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-
-metadata:
-  name: datalab-api-ingress
-  namespace: devtest
-spec:
-  tls:
-  - hosts:
-    - testlab.datalabs.localhost
-    secretName: tls-secret
-  rules:
-  - host: testlab.datalabs.localhost
-    http:
-      paths:
       - path: /api
         backend:
           serviceName: datalab-api-proxy
           servicePort: 8000
+      - path: /
+        backend:
+          serviceName: datalab-app-proxy
+          servicePort: 3000

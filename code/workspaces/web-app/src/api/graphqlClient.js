@@ -2,7 +2,7 @@ import { get } from 'lodash';
 import request from '../auth/secureRequest';
 import { createUrlFromPath } from '../core/getDomainInfo';
 
-const apiURL = createUrlFromPath('api', '8000');
+const apiURL = createUrlFromPath('api', 8000);
 
 export const gqlQuery = (query, variables) => {
   const options = { headers: { 'Content-Type': 'application/json' } };
