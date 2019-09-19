@@ -13,7 +13,7 @@ class RoutePermissionWrapper extends Component {
       return () => (<CircularProgress />);
     }
 
-    if (!fetching && value.includes(this.props.permission)) {
+    if (!fetching && (!this.props.permission || value.includes(this.props.permission))) {
       return props => (<WrappedComponent userPermissions={value} {...props} />);
     }
 
