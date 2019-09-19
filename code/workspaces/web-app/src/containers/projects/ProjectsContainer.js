@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
@@ -12,14 +13,27 @@ import StackCards from '../../components/stacks/StackCards';
 const TYPE_NAME = 'Project';
 const PROJECT_OPEN_PERMISSION = 'project.open';
 
-const styles = theme => ({
-  searchField: {
-    // background: 'red',
+const styles = () => ({
+  controlContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  searchTextField: {
+    flexBasis: '40%',
   },
 });
 
 const searchInputProps = {
-  disableUnderline: true,
+  inputProps: {
+    style: {
+      backgroundColor: `${theme.palette.backgroundDarkHighTransparent}`,
+      color: `${theme.palette.backgroundDark}`,
+      paddingLeft: `${theme.spacing * 2}px`,
+      paddingTop: `${theme.spacing * 1.6}px`,
+      paddingBottom: `${theme.spacing * 1.6}px`,
+      paddingRight: `${theme.spacing * 2}px`,
+    },
+  },
 };
 
 const projectToStack = project => ({
@@ -74,18 +88,20 @@ class ProjectsContainer extends Component {
       <PromisedContentWrapper promise={this.props.projects}>
         {this.props.projects.value.projectArray ? (
           <div>
-            <TextField
-              autoFocus={true}
-              className={classes.searchField}
-              id="search"
-              margin="dense"
-              onChange={this.handleSearchTextChange}
-              type="search"
-              placeholder="Filter projects..."
-              variant="filled"
-              value={this.state.searchText}
-              InputProps={searchInputProps}
-            />
+            <div className={classes.controlContainer}>
+              <TextField
+                className={classes.searchTextField}
+                autoFocus={true}
+                id="search"
+                margin="dense"
+                onChange={this.handleSearchTextChange}
+                type="search"
+                placeholder="Filter projects..."
+                variant="outlined"
+                value={this.state.searchText}
+                InputProps={searchInputProps}
+              />
+            </div>
             <StackCards
               stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
               typeName={TYPE_NAME}
