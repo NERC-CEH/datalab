@@ -31,6 +31,10 @@ admin:
       - read
       - create
       - delete
+  - name: projects
+    permissions:
+      - edit
+      - read
 user:
   - name: stacks
     permissions:
@@ -42,8 +46,14 @@ user:
     permissions:
       - list
       - open
+  - name: projects
+    permissions:
+      - read
 viewer:
   - name: stacks
     permissions:
       - list
       - open
+  - name: projects
+    permissions:
+      - read

@@ -1,5 +1,6 @@
 import { service } from 'common';
 import status from '../controllers/status';
+import projects from '../controllers/projectsController';
 import stack from '../controllers/stackController';
 import stacks from '../controllers/stacksController';
 import volume from '../controllers/volumeController';
@@ -7,6 +8,10 @@ import names from '../controllers/nameController';
 import verifyToken from '../auth/authMiddleware';
 import permissionWrapper from '../auth/permissionMiddleware';
 
+const PROJECTS_READ = 'projects:read';
+const PROJECTS_EDIT = 'projects:edit';
+const PROJECTS_CREATE = 'projects:create';
+const PROJECTS_DELETE = 'projects:delete';
 const STACKS_LIST = 'stacks:list';
 const STACKS_OPEN = 'stacks:open';
 const STACKS_CREATE = 'stacks:create';
@@ -21,6 +26,11 @@ const { errorWrapper: ew } = service.middleware;
 function configureRoutes(app) {
   app.get('/status', status.status);
   app.all('*', verifyToken); // Routes above this line are not auth checked
+  app.get('/projects', ew(projects.listProjects));
+  app.post('/projects', permissionWrapper(PROJECTS_CREATE), projects.projectDocumentValidator(), ew(projects.createProject));
+  app.get('/projects/:projectKey', permissionWrapper(PROJECTS_READ), projects.actionWithKeyValidator(), ew(projects.getProjectByKey));
+  app.put('/projects/:projectKey', permissionWrapper(PROJECTS_EDIT), projects.actionWithKeyValidator(), projects.projectDocumentValidator(), ew(projects.createOrUpdateProject));
+  app.delete('/projects/:projectKey', permissionWrapper(PROJECTS_DELETE), projects.actionWithKeyValidator(), ew(projects.deleteProjectByKey));
   app.get('/stacks', permissionWrapper(STACKS_LIST), stacks.listStacks);
   app.get('/stacks/category/:category', permissionWrapper(STACKS_LIST), stacks.withCategoryValidator, stacks.listByCategory);
   app.get('/stacks/mount/:mount', permissionWrapper(STORAGE_LIST), stacks.withMountValidator, stacks.listByMount);
