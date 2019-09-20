@@ -18,7 +18,7 @@ describe('Kubernetes event watcher', () => {
   });
 
   it('podAddedWatcher logs events', () => {
-    const event = generatePodEvent('jupyter-expectedName', 'jupyter');
+    const event = creatingPodEvent('jupyter-expectedName', 'jupyter');
 
     return podAddedWatcher(event)
       .then(() => {
@@ -28,7 +28,7 @@ describe('Kubernetes event watcher', () => {
   });
 
   it('podAddedWatcher updates pod status', () => {
-    const event = generatePodEvent('jupyter-expectedName', 'jupyter');
+    const event = creatingPodEvent('jupyter-expectedName', 'jupyter');
 
     expect(updateStatusMock).not.toHaveBeenCalled();
 
@@ -42,7 +42,7 @@ describe('Kubernetes event watcher', () => {
   });
 
   it('podAddedWatcher does not call update for minio', () => {
-    const event = generatePodEvent('minio-expectedName', 'minio');
+    const event = creatingPodEvent('minio-expectedName', 'minio');
 
     expect(updateStatusMock).not.toHaveBeenCalled();
 
@@ -50,8 +50,18 @@ describe('Kubernetes event watcher', () => {
       .then(() => expect(updateStatusMock).not.toHaveBeenCalled());
   });
 
+  it('podAddedWatcher does not call update if Pod is running', () => {
+    const event = readyPodEvent('jupyter-expectedName', 'jupyter');
+
+    expect(updateStatusMock).not.toHaveBeenCalled();
+
+    return podAddedWatcher(event)
+      .then(() => expect(updateStatusMock).not.toHaveBeenCalled());
+  });
+
+
   it('podDeletedWatcher logs events', () => {
-    const event = generatePodEvent('jupyter-expectedName', 'jupyter');
+    const event = readyPodEvent('jupyter-expectedName', 'jupyter');
 
     podDeletedWatcher(event);
 
@@ -59,7 +69,7 @@ describe('Kubernetes event watcher', () => {
   });
 
   it('podReadyWatcher logs events', () => {
-    const event = generatePodEvent('jupyter-expectedName', 'jupyter');
+    const event = readyPodEvent('jupyter-expectedName', 'jupyter');
 
     return podReadyWatcher(event)
       .then(() => {
@@ -69,7 +79,7 @@ describe('Kubernetes event watcher', () => {
   });
 
   it('podReadyWatcher updates pod status', () => {
-    const event = generatePodEvent('jupyter-expectedName', 'jupyter');
+    const event = readyPodEvent('jupyter-expectedName', 'jupyter');
 
     expect(updateStatusMock).not.toHaveBeenCalled();
 
@@ -83,7 +93,7 @@ describe('Kubernetes event watcher', () => {
   });
 
   it('podReadyWatcher does not call update for minio', () => {
-    const event = generatePodEvent('minio-expectedName', 'minio');
+    const event = readyPodEvent('minio-expectedName', 'minio');
 
     expect(updateStatusMock).not.toHaveBeenCalled();
 
@@ -92,11 +102,27 @@ describe('Kubernetes event watcher', () => {
   });
 });
 
-const generatePodEvent = (name, type) => ({
+const readyPodEvent = (name, type) => ({
   status: {
     phase: 'Running',
     conditions: [
       { type: 'Ready', status: 'True' },
+    ],
+  },
+  metadata: {
+    labels: {
+      name,
+      'user-pod': type,
+    },
+    deletionTimestamp: undefined,
+  },
+});
+
+const creatingPodEvent = (name, type) => ({
+  status: {
+    phase: 'Pending',
+    conditions: [
+      { type: 'Pending', status: 'True' },
     ],
   },
   metadata: {
