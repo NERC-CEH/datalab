@@ -123,14 +123,6 @@ describe('createOrUpdateProject', () => {
   };
   const requestMock = { params: { projectKey: dummyProject.key }, body: dummyProject };
 
-  it('returns 400 if key in URL and key in body do not match', async () => {
-    const failingRequestMock = { params: { projectKey: 'non-matching-key' }, body: dummyProject };
-    await projectsController.createOrUpdateProject(failingRequestMock, responseMock, nextMock);
-    expectToBeCalledOnceWith(responseMock.status, 400);
-    expect(responseMock.send).toBeCalledTimes(1);
-    expect(responseMock.send.mock.calls[0][0]).toMatchSnapshot();
-  });
-
   it('returns 201 and project document when creating document', async () => {
     projectsRepository.createOrUpdate = jest.fn(() => dummyDatabaseDocument);
     projectsRepository.exists = jest.fn(() => false);

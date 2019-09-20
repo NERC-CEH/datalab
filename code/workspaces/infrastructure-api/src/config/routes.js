@@ -29,7 +29,7 @@ function configureRoutes(app) {
   app.get('/projects', ew(projects.listProjects));
   app.post('/projects', permissionWrapper(PROJECTS_CREATE), projects.projectDocumentValidator(), ew(projects.createProject));
   app.get('/projects/:projectKey', permissionWrapper(PROJECTS_READ), projects.actionWithKeyValidator(), ew(projects.getProjectByKey));
-  app.put('/projects/:projectKey', permissionWrapper(PROJECTS_EDIT), projects.actionWithKeyValidator(), projects.projectDocumentValidator(), ew(projects.createOrUpdateProject));
+  app.put('/projects/:projectKey', permissionWrapper(PROJECTS_EDIT), projects.projectDocumentValidator(), projects.urlAndBodyProjectKeyMatchValidator(), ew(projects.createOrUpdateProject));
   app.delete('/projects/:projectKey', permissionWrapper(PROJECTS_DELETE), projects.actionWithKeyValidator(), ew(projects.deleteProjectByKey));
   app.get('/stacks', permissionWrapper(STACKS_LIST), stacks.listStacks);
   app.get('/stacks/category/:category', permissionWrapper(STACKS_LIST), stacks.withCategoryValidator, stacks.listByCategory);
