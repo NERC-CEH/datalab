@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const ProjectSchema = new Schema({
-  projectKey: { type: String, required: true },
+  key: { type: String, required: true },
   name: { type: String, required: true },
   description: String,
   collaborationLink: String,

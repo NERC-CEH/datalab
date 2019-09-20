@@ -3,80 +3,33 @@ import logger from 'winston';
 import config from '../config';
 
 const authServiceUrl = `${config.get('authorisationService')}`;
+const infraServiceUrl = `${config.get('infrastructureApi')}`;
 
-const dummyProjects = [
-  {
-    id: 123,
-    name: 'The project with key "project"',
-    key: 'project',
-    description: 'Once upon a time there was only one...',
-    collaborationLink: 'https://testlab.test-datalabs.nerc.ac.uk/',
-  },
-  {
-    id: 222,
-    name: '"project2" is the key of this',
-    key: 'project2',
-    description: 'This is the second project.',
-  },
-  {
-    id: 333,
-    name: 'And this is "project3"',
-    key: 'project3',
-    description: 'This is another project.',
-  },
-  {
-    id: 321,
-    name: 'What?',
-    key: 'projectX',
-    description: 'No-one has permission to see this...',
-  },
-];
-
-function listProjects() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(dummyProjects);
-    }, 2000);
-  });
+async function listProjects(token) {
+  const response = await axios.get(`${infraServiceUrl}/projects`, generateOptions(token));
+  return response.data;
 }
 
-function getProjectByKey(projectKey) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        dummyProjects.filter(project => project.key === projectKey)[0],
-      );
-    }, 2000);
-  });
+async function getProjectByKey(projectKey, token) {
+  const response = await axios.get(`${infraServiceUrl}/projects/${projectKey}`, generateOptions(token));
+  return response.data;
 }
 
-function createProject({ projectKey, ...rest }) {
-  logger.debug(`Creating project ${projectKey}`);
-  return Promise.resolve({
-    id: 321,
-    key: projectKey,
-    ...rest,
-  });
+async function createProject(creationRequest, token) {
+  const project = projectActionRequestToProject(creationRequest);
+  const response = await axios.post(`${infraServiceUrl}/projects`, project, generateOptions(token));
+  return response.data;
 }
 
-function updateProject({ projectKey, ...rest }) {
-  logger.debug(`Updating project ${projectKey}`);
-  return Promise.resolve({
-    id: 321,
-    key: projectKey,
-    ...rest,
-  });
+async function updateProject(updateRequest, token) {
+  const project = projectActionRequestToProject(updateRequest);
+  const response = await axios.put(`${infraServiceUrl}/projects/${project.key}`, project, generateOptions(token));
+  return response.data;
 }
 
-function deleteProject(projectKey) {
-  logger.debug(`Deleting project ${projectKey}`);
-  return Promise.resolve({
-    id: 321,
-    key: projectKey,
-    name: 'notNeeded',
-    tags: [],
-    collaborationLink: undefined,
-  });
+async function deleteProject(projectKey, token) {
+  const response = await axios.delete(`${infraServiceUrl}/projects/${projectKey}`, generateOptions(token));
+  return response.data;
 }
 
 function addProjectPermission(projectKey, userId, role, token) {
@@ -101,6 +54,12 @@ const generateOptions = token => ({
     authorization: token,
   },
 });
+
+export function projectActionRequestToProject(actionRequest) {
+  const project = { ...actionRequest, key: actionRequest.projectKey };
+  delete project.projectKey;
+  return project;
+}
 
 export default {
   listProjects,

@@ -4,7 +4,7 @@ import database from '../config/database';
 jest.mock('../config/database');
 
 const testProject = {
-  projectKey: 'projectKey',
+  key: 'key',
   name: 'name',
   description: 'description',
   collaborationLink: 'collaborationLink',
@@ -32,16 +32,16 @@ describe('projectsRepository', () => {
   });
 
   it('getByKey calls correct methods with correct arguments', async () => {
-    const projectKey = 'expected-key';
-    await projectsRepository.getByKey(projectKey);
-    expectToHaveBeenCalledOnceWith(ProjectMock.findOne, { projectKey });
+    const key = 'expected-key';
+    await projectsRepository.getByKey(key);
+    expectToHaveBeenCalledOnceWith(ProjectMock.findOne, { key });
     expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 
   it('exists calls correct methods with correct arguments', async () => {
-    const { projectKey } = testProject;
-    await projectsRepository.exists(projectKey);
-    expectToHaveBeenCalledOnceWith(ProjectMock.exists, { projectKey });
+    const { key } = testProject;
+    await projectsRepository.exists(key);
+    expectToHaveBeenCalledOnceWith(ProjectMock.exists, { key });
   });
 
   it('create calls correct methods with correct arguments', async () => {
@@ -53,16 +53,16 @@ describe('projectsRepository', () => {
     await projectsRepository.createOrUpdate(testProject);
     expectToHaveBeenCalledOnceWith(
       ProjectMock.findOneAndUpdate,
-      { projectKey: testProject.projectKey },
+      { key: testProject.key },
       testProject,
       { upsert: true, setDefaultsOnInsert: true, new: true },
     );
   });
 
   it('deleteByKey calls correct methods with correct arguments', async () => {
-    const { projectKey } = testProject;
-    await projectsRepository.deleteByKey(projectKey);
-    expectToHaveBeenCalledOnceWith(ProjectMock.remove, { projectKey });
+    const { key } = testProject;
+    await projectsRepository.deleteByKey(key);
+    expectToHaveBeenCalledOnceWith(ProjectMock.remove, { key });
     expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 });

@@ -1,17 +1,17 @@
 import { gqlQuery, gqlMutation } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-export function getProjectUsers(projectId) {
+export function getProjectUsers(projectKey) {
   const query = `
-    GetProjectUsers($projectId: String!) {
-      project(key: $projectId) {
+    GetProjectUsers($projectKey: String!) {
+      project(projectKey: $projectKey) {
         projectUsers { 
           userId, name, role
         },
       }
     }`;
 
-  return gqlQuery(query, { projectId })
+  return gqlQuery(query, { projectKey })
     .then(errorHandler('data.project.projectUsers'));
 }
 

@@ -79,6 +79,7 @@ const resolvers = {
   },
 
   Project: {
+    id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     projectUsers: (obj, args, ctx) => userService.getProjectUsers(obj.key, ctx.token),
     accessible: (obj, args, ctx) => userService.isMemberOfProject(obj.key, ctx.token),
   },

@@ -6,7 +6,7 @@ exports[`createOrUpdateProject returns 400 if key in URL and key in body do not 
 Object {
   "errors": Array [
     Object {
-      "msg": "'projectKey' parameter in URL and 'projectKey' field in request body must match. Got 'key' in URL and 'projectKey' in body.",
+      "msg": "'projectKey' parameter in URL and 'projectKey' field in request body must match. Got 'non-matching-key' in URL and 'key' in body.",
     },
   ],
 }
@@ -18,7 +18,7 @@ exports[`createProject returns 400 if a project with the same key already exists
 Object {
   "errors": Array [
     Object {
-      "msg": "Entry with projectKey 'projectKey' already exists.",
+      "msg": "Entry with key 'projectKey' already exists.",
     },
   ],
 }

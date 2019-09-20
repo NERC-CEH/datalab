@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2019-09-19T13:27:08.309Z
+__export_date: 2019-09-20T14:01:02.350Z
 __export_source: insomnia.desktop.app:v6.6.2
 resources:
   - _id: req_b9b95c4383644bc1a22542c2470790b1
@@ -393,6 +393,34 @@ resources:
     settingStoreCookies: true
     url: "{{ client_api_url  }}/api"
     _type: request
+  - _id: req_1bb07662812b4c49b19edc6c195a781d
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  projects
+        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}"}'
+    created: 1568644168939
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934951
+    method: POST
+    modified: 1568981228650
+    name: projects
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
   - _id: req_62f3cb4b31c84181884cf475dc5185a5
     authentication:
       token: "{{ access_token  }}"
@@ -502,6 +530,39 @@ resources:
     settingStoreCookies: true
     url: "{{ client_api_url  }}/api"
     _type: request
+  - _id: req_23924ad71f224bb5bac9ff07cfdefde6
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  createProject(project: { \n    projectKey:
+        \"gql-create-project\", \n    name: \"GQL Create
+        Project\",\n    description: \"A project created using the createProject
+        mutation in GraphQL.\",\n    collaborationLink:
+        \"some-collaboration-url\",\n  })
+        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}
+        "}'
+    created: 1568905829672
+    description: ""
+    headers:
+      - id: pair_57ece199c6814d9b82e04a41480b77bb
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934938.5
+    method: POST
+    modified: 1568981379545
+    name: createProject
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
   - _id: req_957c83a53645464e9edd5cd83c340c87
     authentication:
       token: "{{ access_token  }}"
@@ -522,6 +583,67 @@ resources:
     method: POST
     modified: 1568029068062
     name: Storage
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_1e855f4eb84f48eb909addb89a59835d
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  updateProject(project: { \n    projectKey:
+        \"gql-update-project\", \n    name: \"GQL Update
+        Project\",\n    description: \"A project created using the updateProject
+        mutation in GraphQL.\",\n    collaborationLink:
+        \"some-collaboration-url\",\n  })
+        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}
+        "}'
+    created: 1568906446384
+    description: ""
+    headers:
+      - id: pair_57ece199c6814d9b82e04a41480b77bb
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934932.25
+    method: POST
+    modified: 1568981971509
+    name: updateProject
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_9dd25c2245294667aa561c46ca3a250b
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  deleteProject(project: {projectKey:
+        \"gql-create-project\"})\n}\n"}'
+    created: 1568906791713
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934929.125
+    method: POST
+    modified: 1568981405171
+    name: deleteProject
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false

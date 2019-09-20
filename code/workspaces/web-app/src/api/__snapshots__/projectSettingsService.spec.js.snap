@@ -11,8 +11,8 @@ exports[`projectSettingsService addProjectUserPermission should build correct qu
 
 exports[`projectSettingsService getProjectUsers should build correct query and unpack the result 1`] = `
 "
-    GetProjectUsers($projectId: String!) {
-      project(key: $projectId) {
+    GetProjectUsers($projectKey: String!) {
+      project(projectKey: $projectKey) {
         projectUsers { 
           userId, name, role
         },
