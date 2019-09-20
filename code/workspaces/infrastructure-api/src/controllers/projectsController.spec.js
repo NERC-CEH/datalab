@@ -28,8 +28,8 @@ beforeEach(() => {
 describe('listProjects', () => {
   it('returns the array of projects returned from the database', async () => {
     const databaseProjects = [
-      { projectKey: 'project-one', name: 'Project One' },
-      { projectKey: 'project-two', name: 'Project Two' },
+      { key: 'project-one', name: 'Project One' },
+      { key: 'project-two', name: 'Project Two' },
     ];
     projectsRepository.getAll = jest.fn(() => databaseProjects);
 
@@ -74,7 +74,7 @@ describe('getProjectByKey', () => {
 
 describe('createProject', () => {
   const dummyProject = {
-    projectKey: 'projectKey',
+    key: 'projectKey',
     name: 'name',
     description: 'description',
     collaborationLink: 'collaborationLink',
@@ -83,7 +83,7 @@ describe('createProject', () => {
   it('takes the document definition from the request body and checks if it exists', async () => {
     projectsRepository.exists = jest.fn();
     await projectsController.createProject({ body: dummyProject }, responseMock, nextMock);
-    expectToBeCalledOnceWith(projectsRepository.exists, dummyProject.projectKey);
+    expectToBeCalledOnceWith(projectsRepository.exists, dummyProject.key);
   });
 
   it('returns 400 if a project with the same key already exists', async () => {
@@ -112,7 +112,7 @@ describe('createProject', () => {
 
 describe('createOrUpdateProject', () => {
   const dummyProject = {
-    projectKey: 'projectKey',
+    key: 'key',
     name: 'name',
     description: 'description',
     collaborationLink: 'collaborationLink',
@@ -121,10 +121,10 @@ describe('createOrUpdateProject', () => {
     ...dummyProject,
     id: 'database-id',
   };
-  const requestMock = { params: { projectKey: dummyProject.projectKey }, body: dummyProject };
+  const requestMock = { params: { projectKey: dummyProject.key }, body: dummyProject };
 
   it('returns 400 if key in URL and key in body do not match', async () => {
-    const failingRequestMock = { params: { projectKey: 'key' }, body: dummyProject };
+    const failingRequestMock = { params: { projectKey: 'non-matching-key' }, body: dummyProject };
     await projectsController.createOrUpdateProject(failingRequestMock, responseMock, nextMock);
     expectToBeCalledOnceWith(responseMock.status, 400);
     expect(responseMock.send).toBeCalledTimes(1);
@@ -169,20 +169,20 @@ describe('deleteProjectByKey', () => {
     expectToBeCalledOnceWith(projectsRepository.deleteByKey, requestMock.projectKey);
   });
 
-  it('returns 404 if it found no documents to delete', async () => {
+  it('returns 404 and false if it found no documents to delete', async () => {
     projectsRepository.deleteByKey = jest.fn(() => ({ n: 0 }));
 
     await projectsController.deleteProjectByKey(requestMock, responseMock, nextMock);
     expectToBeCalledOnceWith(responseMock.status, 404);
-    expectToBeCalledOnceWith(responseMock.send);
+    expectToBeCalledOnceWith(responseMock.send, false);
   });
 
-  it('returns deletion results if document found', async () => {
+  it('returns true if document found and deleted', async () => {
     const deletionResult = { n: 1 };
     projectsRepository.deleteByKey = jest.fn(() => deletionResult);
 
     await projectsController.deleteProjectByKey(requestMock, responseMock, nextMock);
-    expectToBeCalledOnceWith(responseMock.send, deletionResult);
+    expectToBeCalledOnceWith(responseMock.send, true);
   });
 
   it('calls next with an error if error thrown while creating data and does not call send', async () => {

@@ -29,9 +29,9 @@ async function getProjectByKey(request, response, next) {
 async function createProject(request, response, next) {
   const project = matchedData(request, { locations: ['body'] });
 
-  if (await projectsRepository.exists(project.projectKey)) {
+  if (await projectsRepository.exists(project.key)) {
     response.status(400).send({
-      errors: [{ msg: `Entry with projectKey '${project.projectKey}' already exists.` }],
+      errors: [{ msg: `Entry with key '${project.key}' already exists.` }],
     });
   } else {
     try {
@@ -47,9 +47,9 @@ async function createOrUpdateProject(request, response, next) {
   const { projectKey } = matchedData(request, { locations: ['params'] });
   const project = matchedData(request, { locations: ['body'] });
 
-  if (projectKey !== project.projectKey) {
+  if (projectKey !== project.key) {
     const msg = "'projectKey' parameter in URL and 'projectKey' field in request body must "
-      + `match. Got '${projectKey}' in URL and '${project.projectKey}' in body.`;
+      + `match. Got '${projectKey}' in URL and '${project.key}' in body.`;
     response.status(400).send({ errors: [{ msg }] });
   } else {
     try {
@@ -67,8 +67,11 @@ async function deleteProjectByKey(request, response, next) {
 
   try {
     const result = await projectsRepository.deleteByKey(projectKey);
-    if (result.n === 0) response.status(404).send();
-    else response.send(result);
+    if (result.n === 0) {
+      response.status(404).send(false);
+    } else {
+      response.send(true);
+    }
   } catch (error) {
     next(new Error(`Error deleting project: ${error.message}`));
   }
@@ -81,11 +84,11 @@ const actionWithKeyValidator = () => service.middleware.validator([
 // Checking fields makes them appear in matchedData which is used to get the data
 // from the body of the request.
 const projectDocumentValidator = () => service.middleware.validator([
-  check('projectKey')
+  check('key')
     .exists()
-    .withMessage("'projectKey' must be specified in request body.")
+    .withMessage("'key' must be specified in request body.")
     .isLength({ min: 2 })
-    .withMessage("'projectKey' must be 2 or more characters long.")
+    .withMessage("'key' must be 2 or more characters long.")
     .trim(),
   check('name')
     .exists()

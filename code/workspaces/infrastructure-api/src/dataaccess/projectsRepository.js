@@ -7,11 +7,11 @@ async function getAll() {
 }
 
 async function getByKey(projectKey) {
-  return Project().findOne({ projectKey }).exec();
+  return Project().findOne({ key: projectKey }).exec();
 }
 
 async function exists(projectKey) {
-  return Project().exists({ projectKey });
+  return Project().exists({ key: projectKey });
 }
 
 async function create(project) {
@@ -20,14 +20,14 @@ async function create(project) {
 
 async function createOrUpdate(project) {
   return Project().findOneAndUpdate(
-    { projectKey: project.projectKey },
+    { key: project.key },
     project,
     { upsert: true, setDefaultsOnInsert: true, new: true },
   );
 }
 
 async function deleteByKey(projectKey) {
-  return Project().remove({ projectKey }).exec();
+  return Project().remove({ key: projectKey }).exec();
 }
 
 export default {

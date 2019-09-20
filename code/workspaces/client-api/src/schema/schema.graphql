@@ -67,7 +67,7 @@ type Mutation {
     updateProject(project: ProjectUpdateRequest): Project
 
     # Delete a project
-    deleteProject(project: ProjectDeletionRequest): Project
+    deleteProject(project: ProjectDeletionRequest): Boolean
 
     # Add a user permission to a project
     addProjectPermission(permission: PermissionAddRequest): Permission
