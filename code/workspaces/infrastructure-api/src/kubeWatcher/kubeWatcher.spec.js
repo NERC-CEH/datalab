@@ -59,7 +59,6 @@ describe('Kubernetes event watcher', () => {
       .then(() => expect(updateStatusMock).not.toHaveBeenCalled());
   });
 
-
   it('podDeletedWatcher logs events', () => {
     const event = readyPodEvent('jupyter-expectedName', 'jupyter');
 
