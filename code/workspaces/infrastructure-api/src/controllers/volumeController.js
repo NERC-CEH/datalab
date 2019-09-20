@@ -2,6 +2,7 @@ import { service } from 'common';
 import { check, matchedData } from 'express-validator';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
+import logger from '../config/logger';
 
 async function createVolume(request, response, next) {
   // Build request params
@@ -87,18 +88,16 @@ async function removeUsers(request, response, next) {
 
 const getByIdValidator = service.middleware.validator([
   check('id').exists().isMongoId().withMessage('id must be specified as a Mongo Id'),
-]);
+], logger);
 
 const updateVolumeUserValidator = service.middleware.validator([
   check('name').exists().withMessage('volume name must be specified').trim(),
   check('userIds').exists().withMessage('userIds must be specified'),
   check('userIds.*').exists().withMessage('userIds must be specified').trim(),
-]);
+], logger);
 
 const coreVolumeValidator = [
   check('projectKey').exists().withMessage('projectKey must be specified').trim(),
-  check('datalabInfo.name').exists().withMessage('datalabInfo.name must be specified').trim(),
-  check('datalabInfo.domain').exists().withMessage('datalabInfo.domain must be specified').trim(),
   check('name')
     .exists()
     .withMessage('Name must be specified')
@@ -124,7 +123,7 @@ const createVolumeValidator = service.middleware.validator([
     .isInt({ min: 5, max: 200 })
     .withMessage('Volume Size must be an integer between 5 and 200')
     .trim(),
-]);
+], logger);
 
 export default {
   getByIdValidator,

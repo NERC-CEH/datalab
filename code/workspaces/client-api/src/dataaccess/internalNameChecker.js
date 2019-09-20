@@ -1,11 +1,13 @@
-import Promise from 'bluebird';
-import dataStorageRepository from './dataStorageRepository';
-import stackService from './stackService';
+import axios from 'axios';
+import generateOptions from '../auth/tokens';
+import config from '../config';
 
-const isNameUnique = (user, name) => Promise.all([
-  dataStorageRepository.getAllByName(user, name)
-    .then(response => (response && response.id) || null),
-  stackService.getByName(user, name),
-]).then(ids => ids.every(id => id === null));
+const API_URL_BASE = config.get('infrastructureApi');
+
+async function isNameUnique(name, token) {
+  const url = `${API_URL_BASE}/stacks/${name}/isUnique`;
+  const response = await axios.get(url, generateOptions(token));
+  return response.data.isUnique;
+}
 
 export default isNameUnique;

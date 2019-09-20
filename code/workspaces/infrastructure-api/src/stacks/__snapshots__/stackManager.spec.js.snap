@@ -29,7 +29,7 @@ Array [
       "projectKey": "project",
       "status": "requested",
       "type": "expectedType",
-      "url": "https://project-expectedName.expectedDatalabDomain",
+      "url": "https://project-expectedName.datalabs.localhost",
     },
   ],
 ]

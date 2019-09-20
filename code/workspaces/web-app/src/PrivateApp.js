@@ -35,17 +35,14 @@ const PrivateApp = ({ promisedUserPermissions, location }) => (
         exact path="/projects"
         component={ProjectsPage}
         promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STACKS_LIST}
+        permission=''
         alt={NotFoundPage} />
       />
       <Redirect exact from="/" to="/projects" />
-      <RoutePermissions
+      <Route
         exact
         path="/projects/:projectKey/info"
-        component={ProjectInfoPage}
-        promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STORAGE_LIST}
-        alt={NotFoundPage} />
+        component={ProjectInfoPage} />
       <RoutePermissions
         exact
         path="/projects/:projectKey/storage"

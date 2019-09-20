@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2019-09-18T16:22:55.905Z
+__export_date: 2019-09-19T13:27:08.309Z
 __export_source: insomnia.desktop.app:v6.6.2
 resources:
   - _id: req_b9b95c4383644bc1a22542c2470790b1
@@ -23,7 +23,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infrastructure_api_url  }}/projects"
+    url: "{{ infra_api_url  }}/projects"
     _type: request
   - _id: fld_998699fb7271407c91200bc860ef8beb
     created: 1568712917499
@@ -62,7 +62,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infrastructure_api_url  }}/projects/another-project"
+    url: "{{ infra_api_url  }}/projects/another-project"
     _type: request
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
     authentication:
@@ -95,7 +95,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infrastructure_api_url  }}/projects"
+    url: "{{ infra_api_url  }}/projects"
     _type: request
   - _id: req_027e9bfb84de4e3c8a27e63e6c519eac
     authentication:
@@ -128,7 +128,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infrastructure_api_url  }}/projects/another-project"
+    url: "{{ infra_api_url  }}/projects/another-project"
     _type: request
   - _id: req_7171a07c2408433296457db196a9077d
     authentication:
@@ -150,7 +150,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infrastructure_api_url  }}/projects/another-project"
+    url: "{{ infra_api_url  }}/projects/another-project"
     _type: request
   - _id: req_096786f5e88746f8b2d4eabe27e09694
     authentication:
@@ -195,7 +195,7 @@ resources:
     isPrivate: false
     metaSortKey: -1567085050785
     method: GET
-    modified: 1568648509426
+    modified: 1567673956215
     name: Get User Permissions
     parameters: []
     parentId: fld_aedf6e0439314b319e879aec69a4f251
@@ -291,7 +291,7 @@ resources:
     isPrivate: false
     metaSortKey: -1567085050760
     method: PUT
-    modified: 1567591497646
+    modified: 1567673721529
     name: Add User Role
     parameters: []
     parentId: fld_aedf6e0439314b319e879aec69a4f251
@@ -300,7 +300,8 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ auth_url  }}/projects/project/users/missing/roles"
+    url: "{{
+      auth_url  }}/projects/project/users/auth0|595f40a25caf4344b2e0e678/roles"
     _type: request
   - _id: req_e3c467163210492d8efbd786060d8e10
     authentication:
@@ -313,7 +314,7 @@ resources:
     isPrivate: false
     metaSortKey: -1567085050747.5
     method: DELETE
-    modified: 1567589436965
+    modified: 1568395185537
     name: Delete User Role
     parameters: []
     parentId: fld_aedf6e0439314b319e879aec69a4f251
@@ -322,7 +323,8 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ auth_url  }}/projects/project/users/dummy/role"
+    url: "{{
+      auth_url  }}/projects/project/users/auth0|595f40a25caf4344b2e0e678/role"
     _type: request
   - _id: req_67241f2b3eda4593a73273e07248f4f9
     authentication:
@@ -358,20 +360,20 @@ resources:
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1567588463142
-    modified: 1567588463142
+    metaSortKey: -1567588463179.5
+    modified: 1568899599209
     name: Client API
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
     _type: request_group
-  - _id: req_1bb07662812b4c49b19edc6c195a781d
+  - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     authentication:
       token: "{{ access_token  }}"
       type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n  projects
-        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}"}'
-    created: 1568644168939
+      text: '{"query":"query {\n  stacks
+        {\n    id\n    name\n    displayName\n    description\n    type\n    url\n    internalEndpoint\n    sourcePath\n    isPublic\n    redirectUrl\n    volumeMount\n    status\n  }\n}"}'
+    created: 1568024223786
     description: ""
     headers:
       - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
@@ -380,8 +382,146 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934951
     method: POST
-    modified: 1568647975234
-    name: projects
+    modified: 1568024301099
+    name: Stacks
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_62f3cb4b31c84181884cf475dc5185a5
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  dataStorage {\n    id\n    name\n  }\n}"}'
+    created: 1568396058200
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934944.75
+    method: POST
+    modified: 1568660922870
+    name: Volumes
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_0ffbf5922daa49a591d2621e7ef7a7e9
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  checkNameUniqueness(name: \"asdfa\")\n}"}'
+    created: 1568739346189
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934943.1875
+    method: POST
+    modified: 1568739438098
+    name: Is Name Unique
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_bfa7d2efbf5248f5ad04fce924d3116b
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tdataStore(id: \"5d7b8536d2b7665d86d20f8b\")
+        {\n    name\n  }\n}"}'
+    created: 1568396220932
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934941.625
+    method: POST
+    modified: 1568396314187
+    name: Volume By Id
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_d1726df0932641caabd32fb810c33f32
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  userPermissions\n}"}'
+    created: 1568024663043
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934938.5
+    method: POST
+    modified: 1568024692209
+    name: User Permissions
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_957c83a53645464e9edd5cd83c340c87
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  dataStorage
+        {\n    id\n    name\n    displayName\n    description\n    type\n    volumeSize\n    url\n    internalEndpoint\n    users\n    accessKey\n    stacksMountingStore
+        {\n      id\n      name\n      displayName\n      description\n      type\n      url\n      internalEndpoint\n      sourcePath\n      isPublic\n      redirectUrl\n      volumeMount\n      status\n    }\n    status\n  }\n}"}'
+    created: 1568027279146
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934932.25
+    method: POST
+    modified: 1568029068062
+    name: Storage
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
@@ -399,7 +539,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  addProjectPermission(permission:
         {\n    projectKey: \"project\",\n    userId: \"dummy\",\n    role:
-        admin\n  }) {\n    projectKey\n    role\n  }\n}"}'
+        admin\n  }) {\n    projectKey\n    role\n    userId\n  }\n}"}'
     created: 1566938804513
     description: ""
     headers:
@@ -435,7 +575,7 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1566905934876
+    metaSortKey: -1566905934907.25
     method: POST
     modified: 1568646399532
     name: removeProjectPermission
@@ -447,6 +587,204 @@ resources:
     settingSendCookies: true
     settingStoreCookies: true
     url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_02af0ff150234a9dbea2c645f43fdddc
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  addUserToDataStore(dataStore: {\n    name:
+        \"test\"\n    users: [\"a\", \"b\"]\n  })
+        {\n    id\n    displayName\n  }\n}"}'
+    created: 1568663202467
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934888.5
+    method: POST
+    modified: 1568663636597
+    name: Add Users to Volume
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_c8db83f833ed45ac8ee96e5a06097bb9
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  removeUserFromDataStore(dataStore: {\n    name:
+        \"test\"\n    users: [\"a\", \"b\"]\n  })
+        {\n    id\n    displayName\n  }\n}"}'
+    created: 1568664847934
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934882.25
+    method: POST
+    modified: 1568664873995
+    name: Remove Users from Volume
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
+  - _id: req_3145a8c1efe04b898fd6e1a2e81e1deb
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1568395904928
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1568395904928
+    method: GET
+    modified: 1568395992271
+    name: List Active Volumes
+    parameters: []
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/volumes/active"
+    _type: request
+  - _id: fld_13d24c525db74595ba879650f2fb4a60
+    created: 1568395892632
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1567588463167
+    modified: 1568899594162
+    name: Infrastructure
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: request_group
+  - _id: req_760977ccbdbd47d4a7656cd18f18b0af
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1568396572303
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567740477881.5
+    method: GET
+    modified: 1568634302290
+    name: Volume By Id
+    parameters: []
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/volumes/5d7b83593e13cb668d09274b"
+    _type: request
+  - _id: req_3d02cb70952b4c55a061a905edf1a5c6
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1568734025772
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1567576621119.875
+    method: GET
+    modified: 1568738774624
+    name: Name is Unique
+    parameters: []
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/stacks/asdf/isUnique"
+    _type: request
+  - _id: req_23eaa609bf05430fa401e3713ff540c4
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"userIds": [
+        		"a", "b"
+        	]
+        }
+    created: 1568403692318
+    description: ""
+    headers:
+      - id: pair_2182f7519b334fea86ec9c138996c2b0
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1567412764358.25
+    method: PUT
+    modified: 1568632223917
+    name: Add Volume User
+    parameters: []
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/volumes/asdf/addUsers"
+    _type: request
+  - _id: req_177c66eb765f4a92b0e906f6de1a4e36
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"userIds": [
+        		"a", "b"
+        	]
+        }
+    created: 1568406136190
+    description: ""
+    headers:
+      - id: pair_2182f7519b334fea86ec9c138996c2b0
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1567248907596.625
+    method: PUT
+    modified: 1568453254646
+    name: Remove Volume User
+    parameters: []
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/volumes/asdf/removeUsers"
     _type: request
   - _id: req_7acd958c33ca45979bf71a34bc70c16a
     authentication:
@@ -487,18 +825,18 @@ resources:
       access_token: setup private sub environment
       auth_url: http://localhost:9000
       client_api_url: http://localhost:8000
+      infra_api_url: http://localhost:8003
       internal_token: setup private sub environment
-      infrastructure_api_url: http://localhost:8003
     dataPropertyOrder:
       "&":
         - auth_url
         - client_api_url
-        - infrastructure_api_url
+        - infra_api_url
         - access_token
         - internal_token
     isPrivate: false
     metaSortKey: 1567588785190
-    modified: 1568823327140
+    modified: 1568395956241
     name: New Environment
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
     _type: environment

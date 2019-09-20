@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 
 const ProjectInfoContent = ({ projectInfo }) => (
   <div>
-    <Typography variant='h5'>{projectInfo.id}: {projectInfo.displayName}</Typography>
+    <Typography variant='h5'>{projectInfo.key}: {projectInfo.name}</Typography>
     <Typography variant='body1'>
       {projectInfo.description}
     </Typography>

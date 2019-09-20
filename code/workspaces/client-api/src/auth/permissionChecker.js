@@ -11,6 +11,22 @@ export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
   ...rest,
 );
 
+export function projectPermissionWrapper(args, permissionSuffix, user, next) {
+  if (!args.projectKey) {
+    logger.error('Auth: permission check: FAILED, projectKey not passed in args');
+    return Promise.reject(new Error(`projectKey not passed, expected suffix: ${permissionSuffix}`));
+  }
+
+  return permissionCheck(
+    [
+      args.projectKey.concat(delimiter, permissionSuffix),
+      SYSTEM_INSTANCE_ADMIN,
+    ],
+    user,
+    next,
+  );
+}
+
 export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissionCheck(
   [
     ...permissionSuffixes.map(suffix => PROJECT.concat(delimiter, suffix)),

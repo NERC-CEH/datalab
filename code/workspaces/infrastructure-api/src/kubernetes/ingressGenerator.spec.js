@@ -4,10 +4,6 @@ describe('Ingress generator', () => {
   it('should generate a single path if connect port is not supplied', () => {
     const options = {
       name: 'name',
-      datalabInfo: {
-        name: 'testlab',
-        domain: 'test-datalabs.nerc.ac.uk',
-      },
       projectKey: 'project',
       ingressName: 'name-ingress',
       serviceName: 'name-service',
@@ -21,10 +17,6 @@ describe('Ingress generator', () => {
   it('should generate multiple paths if connect port is supplied', () => {
     const options = {
       name: 'name',
-      datalabInfo: {
-        name: 'testlab',
-        domain: 'test-datalabs.nerc.ac.uk',
-      },
       projectKey: 'project',
       ingressName: 'name-ingress',
       serviceName: 'name-service',
@@ -39,10 +31,6 @@ describe('Ingress generator', () => {
   it('should add rewrite target if supplied', () => {
     const options = {
       name: 'name',
-      datalabInfo: {
-        name: 'testlab',
-        domain: 'test-datalabs.nerc.ac.uk',
-      },
       projectKey: 'project',
       ingressName: 'name-ingress',
       serviceName: 'name-service',
@@ -58,10 +46,6 @@ describe('Ingress generator', () => {
   it('should add proxy-timeout options if supplied', () => {
     const options = {
       name: 'name',
-      datalabInfo: {
-        name: 'testlab',
-        domain: 'test-datalabs.ceh.ac.uk',
-      },
       projectKey: 'project',
       ingressName: 'name-ingress',
       serviceName: 'name-service',

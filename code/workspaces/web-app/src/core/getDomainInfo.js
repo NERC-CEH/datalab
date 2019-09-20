@@ -8,6 +8,16 @@ function extendSubdomain(extension, localhostPort, location) {
   return `${domainInfo.protocol}//${domainInfo.subdomain}-${extension}.${domainInfo.domain}`;
 }
 
+function createUrlFromPath(path, localhostPort, location) {
+  const domainInfo = getDomainInfo(location);
+
+  if (domainInfo === 'localhost') {
+    return `http://localhost:${localhostPort}/${path}`;
+  }
+
+  return `${domainInfo.baseUrl}/${path}`;
+}
+
 function replaceSubdomain(subdomain, altHref, location) {
   const domainInfo = getDomainInfo(location);
 
@@ -28,8 +38,8 @@ function getDomainInfo(location) {
   const { protocol, hostname } = currentLocation;
   const subdomain = hostname.split('.')[0];
   const domain = hostname.substring(subdomain.length + 1, hostname.length);
-
-  return { protocol, subdomain, domain };
+  const baseUrl = `${protocol}//${subdomain}.${domain}`;
+  return { baseUrl, protocol, subdomain, domain };
 }
 
-export { getDomainInfo, replaceSubdomain, extendSubdomain };
+export { getDomainInfo, replaceSubdomain, extendSubdomain, createUrlFromPath };

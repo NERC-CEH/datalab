@@ -17,10 +17,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - project-name.test-datalabs.ceh.ac.uk
+    - project-name.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: project-name.test-datalabs.ceh.ac.uk
+  - host: project-name.datalabs.localhost
     http:
       paths:
       - path: /
@@ -48,10 +48,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - project-name.test-datalabs.nerc.ac.uk
+    - project-name.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: project-name.test-datalabs.nerc.ac.uk
+  - host: project-name.datalabs.localhost
     http:
       paths:
       - path: /
@@ -78,10 +78,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - project-name.test-datalabs.nerc.ac.uk
+    - project-name.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: project-name.test-datalabs.nerc.ac.uk
+  - host: project-name.datalabs.localhost
     http:
       paths:
       - path: /
@@ -104,10 +104,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - project-name.test-datalabs.nerc.ac.uk
+    - project-name.datalabs.localhost
     secretName: tls-secret
   rules:
-  - host: project-name.test-datalabs.nerc.ac.uk
+  - host: project-name.datalabs.localhost
     http:
       paths:
       - path: /

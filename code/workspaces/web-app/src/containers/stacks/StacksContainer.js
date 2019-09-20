@@ -27,8 +27,8 @@ class StacksContainer extends Component {
     this.loadStack = this.loadStack.bind(this);
   }
 
-  openStack(id) {
-    return this.props.actions.getUrl(id)
+  openStack(stack) {
+    return this.props.actions.getUrl(stack.id)
       .then(payload => this.props.actions.openStack(payload.value.redirectUrl))
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }
@@ -91,7 +91,7 @@ class StacksContainer extends Component {
           openStack={this.openStack}
           deleteStack={this.confirmDeleteStack}
           openCreationForm={this.openCreationForm}
-          userPermissions={this.props.userPermissions}
+          userPermissions={() => this.props.userPermissions}
           createPermission={PROJECT_STACKS_CREATE}
           openPermission={PROJECT_STACKS_OPEN}
           deletePermission={PROJECT_STACKS_DELETE}

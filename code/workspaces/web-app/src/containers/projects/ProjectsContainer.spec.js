@@ -5,7 +5,16 @@ import { PureProjectsContainer, ConnectedProjectsContainer } from './ProjectsCon
 import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
-const loadProjectsMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+const projectsPayload = {
+  projectsArray: [{
+    id: 123,
+    key: 'project2',
+    name: 'A project name',
+    description: 'A project description',
+    accessible: true,
+  }],
+};
+const loadProjectsMock = jest.fn().mockReturnValue(Promise.resolve(projectsPayload));
 projectsService.loadProjects = loadProjectsMock;
 
 describe('ProjectsContainer', () => {
@@ -13,8 +22,8 @@ describe('ProjectsContainer', () => {
     function shallowRenderConnected(store) {
       const props = {
         store,
-        PrivateComponent: () => {},
-        PublicComponent: () => {},
+        PrivateComponent: () => { },
+        PublicComponent: () => { },
         userPermissions: ['expectedPermission'],
       };
 
@@ -63,7 +72,7 @@ describe('ProjectsContainer', () => {
       output.prop('actions').loadProjects();
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_PROJECTS');
-      return payload.then(value => expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toBe(projectsPayload));
     });
   });
 
@@ -72,7 +81,7 @@ describe('ProjectsContainer', () => {
       return shallow(<PureProjectsContainer {...props} />);
     }
 
-    const projects = { fetching: false, value: { projectArray: ['expectedArray'] } };
+    const projects = { fetching: false, value: projectsPayload };
 
     const generateProps = () => ({
       projects,

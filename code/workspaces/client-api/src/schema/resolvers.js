@@ -1,17 +1,16 @@
 import { statusTypes, permissionTypes } from 'common';
 import { version } from '../version';
-import permissionChecker, { instanceAdminWrapper } from '../auth/permissionChecker';
+import permissionChecker, { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
-import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import datalabRepository from '../dataaccess/datalabRepository';
 import getUserPermissions from '../dataaccess/userPermissionsService';
 import internalNameChecker from '../dataaccess/internalNameChecker';
 import userService from '../dataaccess/usersService';
 import stackApi from '../infrastructure/stackApi';
-import dataStoreApi from '../infrastructure/dataStoreApi';
 import minioTokenService from '../dataaccess/minioTokenService';
 import stackUrlService from '../dataaccess/stackUrlService';
 import projectService from '../dataaccess/projectService';
+import storageService from '../infrastructure/storageService';
 import config from '../config';
 
 const { usersPermissions: { USERS_LIST } } = permissionTypes;
@@ -27,31 +26,35 @@ const PROJECT_KEY = 'project';
 const resolvers = {
   Query: {
     status: () => () => `GraphQL server is running version: ${version}`,
-    dataStorage: (obj, args, { user }) => permissionChecker(STORAGE_LIST, user, () => dataStorageRepository.getAllActive(user)),
-    dataStore: (obj, { id }, { user }) => permissionChecker(STORAGE_OPEN, user, () => dataStorageRepository.getById(user, id)),
+    dataStorage: (obj, args, { user, token }) => permissionChecker(STORAGE_LIST, user, () => storageService.getAllActive(token)),
+    dataStore: (obj, { id }, { user, token }) => permissionChecker(STORAGE_OPEN, user, () => storageService.getById(id, token)),
     stack: (obj, { id }, { user, token }) => permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
     stacks: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
     stacksByCategory: (obj, { category }, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
-    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker({ user, token }, name)),
+    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(name, token)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
-    project: (obj, { key }, { user, token }) => permissionChecker(SETTINGS_READ, user, () => projectService.getProjectByKey(key, token)),
+    project: (obj, args, { user, token }) => projectPermissionWrapper(args, SETTINGS_READ, user, () => projectService.getProjectByKey(args.projectKey, token)),
   },
 
   Mutation: {
     createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     createDataStore: (obj, { dataStore }, { user, token }) => (
-      permissionChecker(STORAGE_CREATE, user, () => dataStoreApi.createDataStore({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...dataStore }))
+      permissionChecker(STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
     ),
     deleteDataStore: (obj, { dataStore }, { user, token }) => (
-      permissionChecker(STORAGE_DELETE, user, () => dataStoreApi.deleteDataStore({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...dataStore }))
+      permissionChecker(STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
     ),
-    addUserToDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.addUsers(user, name, users)),
-    removeUserFromDataStore: (obj, { dataStore: { name, users } }, { user }) => permissionChecker(STORAGE_EDIT, user, () => dataStorageRepository.removeUsers(user, name, users)),
+    addUserToDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
+      permissionChecker(STORAGE_EDIT, user, () => storageService.addUsers(name, users, token))
+    ),
+    removeUserFromDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
+      permissionChecker(STORAGE_EDIT, user, () => storageService.removeUsers(name, users, token))
+    ),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
       permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
     ),
@@ -64,6 +67,7 @@ const resolvers = {
   },
 
   DataStore: {
+    id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     users: (obj, args, { user }) => permissionChecker(USERS_LIST, user, () => obj.users),
     accessKey: (obj, args, { user }) => minioTokenService.requestMinioToken('project', obj, user),
     stacksMountingStore: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount({ user, token }, name),

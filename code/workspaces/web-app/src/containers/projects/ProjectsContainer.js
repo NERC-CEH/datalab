@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { permissionTypes } from 'common';
 import projectActions from '../../actions/projectActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 
-const { projectPermissions: { PROJECT_STORAGE_OPEN } } = permissionTypes;
-
 const TYPE_NAME = 'Project';
+const PROJECT_OPEN_PERMISSION = 'project.open';
 
 class ProjectsContainer extends Component {
   shouldComponentUpdate(nextProps) {
@@ -22,19 +20,35 @@ class ProjectsContainer extends Component {
     this.props.actions.loadProjects();
   }
 
+  adaptProjectsToStacks() {
+    return this.props.projects.value.projectArray.map(project => ({
+      id: project.id,
+      key: project.key,
+      displayName: project.name,
+      description: project.description,
+      accessible: project.accessible,
+      type: 'project',
+      status: 'ready',
+    }));
+  }
+
+  projectUserPermissions(project) {
+    return project && project.accessible ? [PROJECT_OPEN_PERMISSION] : [];
+  }
+
   render() {
     return (
       <PromisedContentWrapper promise={this.props.projects}>
         {this.props.projects.value.projectArray ? (
           <StackCards
-            stacks={this.props.projects.value.projectArray}
+            stacks={this.adaptProjectsToStacks()}
             typeName={TYPE_NAME}
-            openStack={id => this.props.history.push(`/projects/${id}/info`)}
+            openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
             deleteStack={() => { }}
             openCreationForm={() => { }}
-            userPermissions={this.props.userPermissions}
+            userPermissions={project => this.projectUserPermissions(project)}
             createPermission=""
-            openPermission={PROJECT_STORAGE_OPEN}
+            openPermission={PROJECT_OPEN_PERMISSION}
             deletePermission=""
             editPermission=""
           />

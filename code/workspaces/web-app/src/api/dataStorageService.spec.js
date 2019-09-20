@@ -23,10 +23,6 @@ describe('dataStorageService', () => {
         expect(error).toEqual({ error: 'error' });
       });
     });
-
-    it('should not throw an error if there is an in users', () => {
-
-    });
   });
 
   describe('getCredentials', () => {
