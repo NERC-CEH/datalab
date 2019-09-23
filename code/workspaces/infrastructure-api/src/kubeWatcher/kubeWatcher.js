@@ -51,16 +51,18 @@ function errorHandler(error) {
   return startKubeWatcher();
 }
 
-export function podAddedWatcher({ metadata: { labels } }) {
-  const { kubeName, name, type } = parsePodLabels(labels);
+export function podAddedWatcher(event) {
+  const { kubeName, name, type } = parsePodLabels(event.metadata.labels);
 
   logger.debug(`Pod added: -- name: "${kubeName}", type: "${type}"`);
 
   let output = Promise.resolve();
 
-  if (stackNames.includes(type)) {
+  if (stackNames.includes(type) && !isPodRunning(event)) {
     // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
     // have their status updated.
+    // Additionally ensure that pod is not already running as JS Kubernetes Client
+    // issues ADDED events for all current pods on startup by default
     output = stackRepository.updateStatus({ name, type, status: CREATING })
       .then(() => logger.info(`Updated status record for "${kubeName}" to "${CREATING}"`));
   }
