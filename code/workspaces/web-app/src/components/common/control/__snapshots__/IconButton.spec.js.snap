@@ -17,7 +17,7 @@ exports[`IconButton creates correct snapshot for danger styled button 1`] = `
 exports[`IconButton creates correct snapshot for required props 1`] = `
 <WithStyles(ForwardRef(Button))
   className="IconButton-button-1"
-  color="default"
+  color="accent"
   onClick={[Function]}
 >
   buttonText
