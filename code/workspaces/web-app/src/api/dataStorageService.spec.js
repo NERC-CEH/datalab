@@ -28,10 +28,10 @@ describe('dataStorageService', () => {
   describe('getCredentials', () => {
     it('should build the correct query and return the minio credentials', () => {
       const data = { dataStore: { url: 'expectedUrl', accessKey: 'expectedKey' } };
-      const queryParams = { id: 'idValue' };
+      const queryParams = { projectKey: 'project99', id: 'idValue' };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.getCredentials(queryParams.id).then((response) => {
+      return dataStorageService.getCredentials(queryParams.projectKey, queryParams.id).then((response) => {
         expect(response).toEqual(data.dataStore);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(queryParams);

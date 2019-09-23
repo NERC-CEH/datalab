@@ -55,9 +55,9 @@ async function listProjectActiveVolumes(request, response) {
 }
 
 async function getById(request, response) {
-  const { id } = matchedData(request);
+  const { projectKey, id } = matchedData(request);
 
-  const volume = await dataStorageRepository.getById(request.user, id);
+  const volume = await dataStorageRepository.getById(request.user, projectKey, id);
   if (volume) {
     response.send(volume);
   } else {
@@ -88,6 +88,7 @@ async function removeUsers(request, response, next) {
 }
 
 const getByIdValidator = service.middleware.validator([
+  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
   check('id').exists().isMongoId().withMessage('id must be specified as a Mongo Id'),
 ], logger);
 

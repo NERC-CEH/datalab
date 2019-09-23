@@ -7,7 +7,7 @@ type Query {
     dataStorage(projectKey: String!): [DataStore]
 
     # Details of a single Datalabs data store.
-    dataStore(id: ID!): DataStore
+    dataStore(projectKey: String!, id: ID!): DataStore
 
     # Details of a single currently provisioned DataLab Stack owned by user.
     stack(id: ID!): Stack

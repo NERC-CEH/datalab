@@ -38,8 +38,9 @@ describe('dataStorageRepository', () => {
     expect(storage).toMatchSnapshot();
   }));
 
-  it('getById returns expected snapshot', () => dataStorageRepository.getById(user, '599aa983bdd5430daedc8eec').then((storage) => {
+  it('getById returns expected snapshot', () => dataStorageRepository.getById(user, 'project99', '599aa983bdd5430daedc8eec').then((storage) => {
     expect(mockDatabase().query()).toEqual({
+      projectKey: { $eq: 'project99' },
       _id: '599aa983bdd5430daedc8eec',
       users: { $elemMatch: { $eq: 'username' } },
     });

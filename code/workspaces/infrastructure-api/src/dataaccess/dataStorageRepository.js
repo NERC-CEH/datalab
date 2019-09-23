@@ -17,8 +17,8 @@ function getAllByName(_, name) { // user, name
   return DataStorage().findOne({ name }).exec();
 }
 
-function getById({ sub }, id) {
-  const query = filterByUser(sub, { _id: id });
+function getById({ sub }, projectKey, id) {
+  const query = filterByUserAndProject(sub, projectKey, { _id: id });
   return DataStorage().findOne(query).exec();
 }
 
