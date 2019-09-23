@@ -29,27 +29,9 @@ exports[`CreateProjectForm renders to match snapshot 1`] = `
     label="Collaboration Link"
     name="collaborationLink"
   />
-  <div
-    className="buttonContainer"
-  >
-    <WithStyles(ForwardRef(Button))
-      className="button"
-      color="primary"
-      fullWidth={true}
-      type="submit"
-      variant="outlined"
-    >
-      Create
-    </WithStyles(ForwardRef(Button))>
-    <WithStyles(ForwardRef(Button))
-      className="button"
-      color="secondary"
-      fullWidth={true}
-      onClick={[Function]}
-      variant="outlined"
-    >
-      Cancel
-    </WithStyles(ForwardRef(Button))>
-  </div>
+  <CreateFormControls
+    fullWidthButtons={true}
+    onCancel={[Function]}
+  />
 </form>
 `;

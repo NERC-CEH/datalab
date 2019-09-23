@@ -19,6 +19,9 @@ function styles(theme) {
       justifyContent: 'flex-start',
       borderTop: `1px solid ${theme.palette.divider}`,
       padding: theme.spacing(1),
+      '&:last-child': {
+        borderBottom: `1px solid ${theme.palette.divider}`,
+      },
     },
     imageDiv: {
       display: 'inline-flex',
@@ -54,7 +57,7 @@ function styles(theme) {
       height: theme.cardImageSize + theme.spacing(1),
       width: theme.cardImageSize + theme.spacing(1),
       border: `1px solid ${theme.palette.divider}`,
-      borderRadius: theme.spacing(1),
+      borderRadius: theme.shape.borderRadius,
     },
     cardIcon: {
       float: 'left',
@@ -67,7 +70,7 @@ function styles(theme) {
       textAlign: 'center',
       height: theme.cardImageSize,
       width: theme.cardImageSize,
-      borderRadius: theme.spacing(1),
+      borderRadius: theme.shape.borderRadius,
       color: theme.palette.backgroundColor,
       backgroundColor: theme.palette.backgroundDark,
       fontSize: theme.typography.h4.fontSize,

@@ -29,7 +29,7 @@ const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermis
         color="primary"
         disabled={!openStack || !isReady(stack)}
         onClick={() => openStack(stack)}
-        variant="contained" >
+        variant="outlined" >
         Open
       </Button>
     </PermissionWrapper>
@@ -39,7 +39,7 @@ const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermis
         color="secondary"
         disabled={!deleteStack || !isReady(stack)}
         onClick={() => deleteStack(stack)}
-        variant="contained">
+        variant="outlined">
         Delete
       </Button>
     </PermissionWrapper>
@@ -49,7 +49,7 @@ const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermis
         color="secondary"
         disabled={!editStack || !isReady(stack)}
         onClick={() => editStack(stack)}
-        variant="contained"
+        variant="outlined"
       >
         Edit
       </Button>

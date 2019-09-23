@@ -1,9 +1,8 @@
 import { Field, reduxForm } from 'redux-form';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { stackTypes } from 'common';
-import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField } from '../common/form/controls';
+import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
 
 const { PUBLISH, getStackSelections } = stackTypes;
@@ -58,8 +57,7 @@ const CreateSiteForm = (props) => {
           component={renderTextArea}
           placeholder="Description" />
       </div>
-      <Button type="submit" style={{ margin: 8 }} color="primary" disabled={submitting}>Create</Button>
-      <Button style={{ margin: 8 }} onClick={cancel}>Cancel</Button>
+      <CreateFormControls onCancel={cancel} submitting={submitting} />
     </form>
   );
 };

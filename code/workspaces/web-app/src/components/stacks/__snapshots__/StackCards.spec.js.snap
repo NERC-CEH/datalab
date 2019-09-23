@@ -4,6 +4,8 @@ exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
 <StackCards
   classes={
     Object {
+      "bottomControlDiv": "StackCards-bottomControlDiv-2",
+      "noItemsMessage": "StackCards-noItemsMessage-3",
       "stackDiv": "StackCards-stackDiv-1",
     }
   }
@@ -42,6 +44,8 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
 <StackCards
   classes={
     Object {
+      "bottomControlDiv": "StackCards-bottomControlDiv-2",
+      "noItemsMessage": "StackCards-noItemsMessage-3",
       "stackDiv": "StackCards-stackDiv-1",
     }
   }

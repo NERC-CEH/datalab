@@ -12,6 +12,12 @@ exports[`DaskPage renders correct snapshot 1`] = `
   <WithStyles(ForwardRef(Button))
     color="primary"
     onClick={[Function]}
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+    variant="outlined"
   >
     Dask Status
   </WithStyles(ForwardRef(Button))>

@@ -29,11 +29,18 @@ const useStyles = makeStyles(theme => ({
     maxHeight: 400,
   },
   permissionsSelector: {
-    margin: `0 ${theme.spacing(2)}px`,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
     minWidth: 95,
   },
   usersAutofill: {
     flexGrow: 1,
+  },
+  addButton: {
+    // Styling makes button match size and margins of the outlined text fields
+    height: 40,
+    marginTop: 8,
+    marginBottom: 4,
   },
 }));
 
@@ -80,7 +87,9 @@ export function PureAddUserPermission({
         project="project"
         onClickFn={dispatchAddUserAction}
         dispatch={dispatch}
-        selectedPermissions={selectedPermissions} />
+        selectedPermissions={selectedPermissions}
+        classes={classes}/>
+
     </div>
   );
 }
@@ -104,6 +113,7 @@ export function UsersAutofill({ userNames, setSelectedUserName }) {
                 label="Add User"
                 placeholder="Type user's email..."
                 variant="outlined"
+                margin="dense"
                 fullWidth
                 {...getInputProps()} />
               <UsersDropdown
@@ -145,6 +155,7 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
       className={classes.permissionsSelector}
       label="Permissions"
       variant="outlined"
+      margin="dense"
       select
       value={selectedPermissions}
       onChange={event => setSelectedPermissions(event.target.value)}
@@ -154,10 +165,11 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
   );
 }
 
-export function AddUserButton({ userInformation, selectedUserName, project, selectedPermissions, onClickFn, dispatch }) {
+export function AddUserButton({ userInformation, selectedUserName, project, selectedPermissions, onClickFn, dispatch, classes }) {
   const selectedUser = userInformation.find(user => user.name === selectedUserName);
   return (
     <Button
+      className={classes.addButton}
       variant="outlined"
       color="primary"
       disabled={!selectedUser}

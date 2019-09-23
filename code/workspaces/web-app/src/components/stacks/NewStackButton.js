@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
-import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -11,26 +8,19 @@ const styles = theme => ({
     height: '100%',
     backgroundColor: 'transparent',
   },
-  buttonContainer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-  },
   button: {
-    margin: 20,
+    marginTop: 10,
   },
   icon: {
     fontSize: 40,
   },
 });
 
-const NewStackButton = ({ classes, onClick, typeName }) => <Card className={classes.card} elevation={0}>
-    <div className={classes.buttonContainer}>
-      <Tooltip title={`Create ${typeName}`} style={{ float: 'right' }}>
-        <Fab className={classes.button} color="primary" aria-label="add" onClick={onClick}>
-          <Icon className={classes.icon} children="add" />
-        </Fab>
-      </Tooltip>
-    </div>
-  </Card>;
+const NewStackButton = ({ classes, onClick, typeName }) => (
+  <Button className={classes.button} variant="contained" color="primary" aria-label="add" onClick={onClick}>
+    {`Create ${typeName}`}
+  </Button>
+);
 
 NewStackButton.propTypes = {
   classes: PropTypes.object.isRequired,

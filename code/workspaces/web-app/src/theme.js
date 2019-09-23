@@ -74,6 +74,17 @@ const theme = createMuiTheme({
   },
   spacing,
   cardImageSize,
+  overrides: {
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+        fontWeight: '400',
+      },
+      contained: {
+        boxShadow: 'none',
+      },
+    },
+  },
 });
 
 export const publicAppTheme = outerTheme => ({

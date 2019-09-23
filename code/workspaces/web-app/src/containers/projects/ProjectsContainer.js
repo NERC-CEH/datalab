@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import { permissionTypes } from 'common';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
@@ -16,6 +15,7 @@ import { MODAL_TYPE_CREATE_PROJECT } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
 
 const TYPE_NAME = 'Project';
+const TYPE_NAME_PLURAL = 'Projects';
 const PROJECT_OPEN_PERMISSION = 'project.open';
 
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
@@ -27,20 +27,16 @@ const styles = styleTheme => ({
     marginBottom: styleTheme.spacing(2),
   },
   searchTextField: {
-    flexBasis: '40%',
+    width: '100%',
+    margin: 0,
   },
 });
 
 const searchInputProps = {
-  inputProps: {
-    style: {
-      backgroundColor: `${theme.palette.backgroundDarkHighTransparent}`,
-      color: `${theme.palette.backgroundDark}`,
-      paddingLeft: `${theme.spacing * 2}px`,
-      paddingTop: `${theme.spacing * 1.6}px`,
-      paddingBottom: `${theme.spacing * 1.6}px`,
-      paddingRight: `${theme.spacing * 2}px`,
-    },
+  disableUnderline: true,
+  style: {
+    backgroundColor: theme.palette.backgroundDarkHighTransparent,
+    borderRadius: theme.shape.borderRadius,
   },
 };
 
@@ -86,7 +82,9 @@ class ProjectsContainer extends Component {
   }
 
   adaptProjectsToStacks() {
-    return this.props.projects.value.projectArray.map(projectToStack);
+    return this.props.projects.value.projectArray
+      ? this.props.projects.value.projectArray.map(projectToStack)
+      : [];
   }
 
   projectUserPermissions(project) {
@@ -122,14 +120,15 @@ class ProjectsContainer extends Component {
     return (
       <div className={classes.controlContainer}>
         <TextField
+          id="search"
           className={classes.searchTextField}
           autoFocus={true}
-          id="search"
+          hiddenLabel
           margin="dense"
           onChange={this.handleSearchTextChange}
           type="search"
           placeholder="Filter projects..."
-          variant="outlined"
+          variant="filled"
           value={this.state.searchText}
           InputProps={searchInputProps}
         />
@@ -141,23 +140,22 @@ class ProjectsContainer extends Component {
     const { projects, history } = this.props;
     return (
       <PromisedContentWrapper promise={projects}>
-        {projects.value.projectArray ? (
-          <div>
-            {this.renderControls()}
-            <StackCards
-              stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
-              typeName={TYPE_NAME}
-              openStack={project => history.push(`/projects/${project.key}/info`)}
-              deleteStack={() => { }}
-              openCreationForm={this.openCreationForm}
-              userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
-              createPermission={SYSTEM_INSTANCE_ADMIN}
-              openPermission={PROJECT_OPEN_PERMISSION}
-              deletePermission=""
-              editPermission=""
-            />
-          </div>
-        ) : <Typography variant="body1">There are no projects to display.</Typography>}
+        <div>
+          {this.renderControls()}
+          <StackCards
+            stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
+            typeName={TYPE_NAME}
+            typeNamePlural={TYPE_NAME_PLURAL}
+            openStack={project => history.push(`/projects/${project.key}/info`)}
+            deleteStack={() => { }}
+            openCreationForm={this.openCreationForm}
+            userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
+            createPermission={SYSTEM_INSTANCE_ADMIN}
+            openPermission={PROJECT_OPEN_PERMISSION}
+            deletePermission=""
+            editPermission=""
+          />
+        </div>
       </PromisedContentWrapper>
     );
   }

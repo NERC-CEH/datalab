@@ -187,6 +187,8 @@ describe('AddUserButton', () => {
     shallow = createShallow();
   });
 
+  const classes = { addButton: 'addButton' };
+
   it('renders as disabled when the selected user name is not in the list of possibilities', () => {
     expect(
       shallow(
@@ -196,6 +198,7 @@ describe('AddUserButton', () => {
           project={'project'}
           selectedPermissions={permissionLevels[0]}
           onClickFn={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -210,6 +213,7 @@ describe('AddUserButton', () => {
           project={'project'}
           selectedPermissions={permissionLevels[0]}
           onClickFn={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -231,6 +235,7 @@ describe('AddUserButton', () => {
         selectedPermissions={selectedPermissions}
         onClickFn={onClickFnMock}
         dispatch={dispatch}
+        classes={classes}
       />,
     );
     render.simulate('click');

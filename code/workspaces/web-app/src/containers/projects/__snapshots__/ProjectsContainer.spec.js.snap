@@ -37,27 +37,23 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
       <WithStyles(ForwardRef(TextField))
         InputProps={
           Object {
-            "inputProps": Object {
-              "style": Object {
-                "backgroundColor": "rgba(47, 62, 70, 0.2)",
-                "color": "rgba(47, 62, 70, 1.0)",
-                "paddingBottom": "NaNpx",
-                "paddingLeft": "NaNpx",
-                "paddingRight": "NaNpx",
-                "paddingTop": "NaNpx",
-              },
+            "disableUnderline": true,
+            "style": Object {
+              "backgroundColor": "rgba(47, 62, 70, 0.2)",
+              "borderRadius": 5,
             },
           }
         }
         autoFocus={true}
         className="searchTextField"
+        hiddenLabel={true}
         id="search"
         margin="dense"
         onChange={[Function]}
         placeholder="Filter projects..."
         type="search"
         value=""
-        variant="outlined"
+        variant="filled"
       />
     </div>
     <WithStyles(StackCards)
@@ -82,6 +78,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
         ]
       }
       typeName="Project"
+      typeNamePlural="Projects"
       userPermissions={[Function]}
     />
   </div>
