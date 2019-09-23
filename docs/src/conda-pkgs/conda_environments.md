@@ -3,7 +3,7 @@
 When using Datalabs the recommended way to install packages is through use of
 Conda. This is a flexible package/library management tool that can be used to
 install dependencies across multiple languages and platforms (for more
-information see https://docs.conda.io/en/latest/).
+information see <https://docs.conda.io/en/latest/>).
 
 One of the key advantages of Conda is allowing dependencies (including, but not
 limited packages, binaries & libraries) to be captured alongside project code.

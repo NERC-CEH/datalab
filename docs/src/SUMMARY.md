@@ -9,4 +9,3 @@
 * [Conda Package Management](conda-pkgs/README.md)
   * [Conda Environments Quick-Start-Guide](conda-pkgs/conda_environments.md)
   * [Conda Package Management](conda-pkgs/conda_package_management.md)
-
