@@ -82,26 +82,32 @@ class ProjectsContainer extends Component {
     return project && project.accessible ? [PROJECT_OPEN_PERMISSION] : [];
   }
 
-  render() {
+  renderControls() {
     const { classes } = this.props;
+    return (
+      <div className={classes.controlContainer}>
+        <TextField
+          className={classes.searchTextField}
+          autoFocus={true}
+          id="search"
+          margin="dense"
+          onChange={this.handleSearchTextChange}
+          type="search"
+          placeholder="Filter projects..."
+          variant="outlined"
+          value={this.state.searchText}
+          InputProps={searchInputProps}
+        />
+      </div>
+    );
+  }
+
+  render() {
     return (
       <PromisedContentWrapper promise={this.props.projects}>
         {this.props.projects.value.projectArray ? (
           <div>
-            <div className={classes.controlContainer}>
-              <TextField
-                className={classes.searchTextField}
-                autoFocus={true}
-                id="search"
-                margin="dense"
-                onChange={this.handleSearchTextChange}
-                type="search"
-                placeholder="Filter projects..."
-                variant="outlined"
-                value={this.state.searchText}
-                InputProps={searchInputProps}
-              />
-            </div>
+            {this.renderControls()}
             <StackCards
               stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
               typeName={TYPE_NAME}
