@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
-import { PureProjectsContainer, ConnectedProjectsContainer } from './ProjectsContainer';
+import { PureProjectsContainer, ConnectedProjectsContainer, projectToStack, stackMatchesFilter } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
@@ -18,6 +18,18 @@ const loadProjectsMock = jest.fn().mockReturnValue(Promise.resolve(projectsPaylo
 projectsService.loadProjects = loadProjectsMock;
 
 describe('ProjectsContainer', () => {
+  describe('is a component which', () => {
+    it('can filter projects', () => {
+      const stacks = projectsPayload.projectsArray.map(projectToStack);
+      expect(stacks.length).toBe(1);
+      const stack = stacks[0];
+      expect(stackMatchesFilter(stack, '')).toBe(true);
+      expect(stackMatchesFilter(stack, 'A project name')).toBe(true);
+      expect(stackMatchesFilter(stack, 'A project description')).toBe(true);
+      expect(stackMatchesFilter(stack, 'project2')).toBe(false);
+    });
+  });
+
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
       const props = {
