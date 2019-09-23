@@ -166,8 +166,8 @@ describe('UserPermissionsTableBody', () => {
       ...initialUsers,
       value: [
         { name: 'admin name', userId: 'admin-user-id', role: 'admin' },
-        { name: 'user name', role: 'user' },
-        { name: 'viewer name', role: 'viewer' },
+        { name: 'user name', userId: 'user-user-id', role: 'user' },
+        { name: 'viewer name', userId: 'viewer-user-id', role: 'viewer' },
       ],
     };
 
