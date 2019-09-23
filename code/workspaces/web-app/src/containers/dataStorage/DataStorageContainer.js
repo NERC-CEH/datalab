@@ -51,7 +51,7 @@ class DataStorageContainer extends Component {
     .then(() => this.props.actions.resetForm())
     .then(() => notify.success(`${TYPE_NAME} created`))
     .catch(err => notify.error(`Unable to create ${TYPE_NAME}`))
-    .finally(() => this.props.actions.loadDataStorage());
+    .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
 
   openCreationForm = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_DATA_STORE, {
     title: `Create a ${TYPE_NAME}`,
@@ -63,7 +63,7 @@ class DataStorageContainer extends Component {
     .then(() => this.props.actions.deleteDataStore(dataStore))
     .then(() => notify.success(`${TYPE_NAME} deleted`))
     .catch(err => notify.error(`Unable to delete ${TYPE_NAME}`))
-    .finally(() => this.props.actions.loadDataStorage());
+    .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
 
   confirmDeleteDataStore = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
     title: `Delete ${dataStore.displayName} ${TYPE_NAME}`,
@@ -95,12 +95,13 @@ class DataStorageContainer extends Component {
     title: `Edit Data Store: ${displayName}`,
     onCancel: this.props.actions.closeModalDialog,
     dataStoreId: id,
+    projectKey: this.props.projectKey,
     userKeysMapping: { name: 'label', userId: 'value' },
   });
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadDataStorage()
+    this.props.actions.loadDataStorage(this.props.projectKey)
       .catch((() => {}));
   }
 
@@ -131,6 +132,7 @@ DataStorageContainer.propTypes = {
     fetching: PropTypes.bool.isRequired,
     value: PropTypes.array.isRequired,
   }).isRequired,
+  projectKey: PropTypes.string.isRequired,
   actions: PropTypes.shape({
     loadDataStorage: PropTypes.func.isRequired,
     getCredentials: PropTypes.func.isRequired,

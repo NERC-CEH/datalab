@@ -10,7 +10,7 @@ describe('dataStorageService', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ dataStorage: 'expectedValue' });
 
-      return dataStorageService.loadDataStorage().then((response) => {
+      return dataStorageService.loadDataStorage('project99').then((response) => {
         expect(response).toEqual('expectedValue');
         expect(mockClient.lastQuery()).toMatchSnapshot();
       });
@@ -19,7 +19,7 @@ describe('dataStorageService', () => {
     it('should throw an error if the query fails', () => {
       mockClient.prepareFailure('error');
 
-      return dataStorageService.loadDataStorage().catch((error) => {
+      return dataStorageService.loadDataStorage('project99').catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });

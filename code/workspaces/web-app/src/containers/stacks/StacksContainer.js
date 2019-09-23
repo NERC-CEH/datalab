@@ -42,6 +42,8 @@ class StacksContainer extends Component {
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
     title: `Create a ${this.props.typeName}`,
+    // TODO - use real projectKey here
+    projectKey: 'project',
     onSubmit: this.createStack,
     onCancel: this.props.actions.closeModalDialog,
   });

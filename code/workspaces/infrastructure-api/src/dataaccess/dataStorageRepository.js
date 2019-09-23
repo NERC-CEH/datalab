@@ -6,9 +6,9 @@ function DataStorage() {
   return database.getModel('DataStorage');
 }
 
-function getAllActive({ sub }) {
+function getAllProjectActive({ sub }, projectKey) {
   // Exclude records tagged as deleted
-  const query = filterByUser(sub, { status: { $ne: DELETED } });
+  const query = filterByUserAndProject(sub, projectKey, { status: { $ne: DELETED } });
   return DataStorage().find(query).exec();
 }
 
@@ -64,6 +64,12 @@ const filterByUser = (userId, findQuery) => ({
   users: { $elemMatch: { $eq: userId } },
 });
 
+const filterByUserAndProject = (userId, projectKey, findQuery) => ({
+  ...findQuery,
+  users: { $elemMatch: { $eq: userId } },
+  projectKey: { $eq: projectKey },
+});
+
 const setUsers = userIds => ({
   $addToSet: { users: { $each: userIds } },
 });
@@ -77,4 +83,4 @@ const createStorageUrls = requestedDataStore => ({
   internalEndpoint: `http://minio-${requestedDataStore.name}/minio`,
 });
 
-export default { getAllActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers };
+export default { getAllProjectActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers };

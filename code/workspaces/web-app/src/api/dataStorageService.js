@@ -1,15 +1,15 @@
 import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-function loadDataStorage() {
+function loadDataStorage(projectKey) {
   const query = `
-    DataStorage {
-      dataStorage {
+    DataStorage($projectKey: String!) {
+      dataStorage(projectKey: $projectKey) {
          id, name, displayName, description, type, stacksMountingStore { id }, status, users
       }
     }`;
 
-  return gqlQuery(query)
+  return gqlQuery(query, { projectKey })
     .then(errorHandler('data.dataStorage', 'users'));
 }
 

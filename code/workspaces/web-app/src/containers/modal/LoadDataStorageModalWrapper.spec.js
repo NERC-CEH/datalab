@@ -13,6 +13,7 @@ describe('LoadDataStorage Modal Wrapper', () => {
     function shallowRenderConnected(store) {
       const props = {
         store,
+        projectKey: 'project99',
         PrivateComponent: () => {},
         PublicComponent: () => {},
         title: 'Title',
@@ -63,7 +64,7 @@ describe('LoadDataStorage Modal Wrapper', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadDataStorage();
+      output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -80,6 +81,7 @@ describe('LoadDataStorage Modal Wrapper', () => {
 
     const generateProps = () => ({
       title: 'Title',
+      projectKey: 'project99',
       onSubmit: onSubmitMock,
       onCancel: onCancelMock,
       actions: {

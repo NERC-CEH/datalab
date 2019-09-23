@@ -13,11 +13,11 @@ const listVolumeMock = jest.fn();
 volumeManager.createVolume = createVolumeMock;
 volumeManager.listVolumes = listVolumeMock;
 
-const getAllActiveMock = jest.fn();
+const getAllProjectActiveMock = jest.fn();
 const getByIdMock = jest.fn();
 const addUsersMock = jest.fn();
 const removeUsersMock = jest.fn();
-dataStorageRepository.getAllActive = getAllActiveMock;
+dataStorageRepository.getAllProjectActive = getAllProjectActiveMock;
 dataStorageRepository.getById = getByIdMock;
 dataStorageRepository.addUsers = addUsersMock;
 dataStorageRepository.removeUsers = removeUsersMock;
@@ -162,10 +162,10 @@ describe('Volume Controller', () => {
 
   describe('list active volumes', () => {
     it('should return the list of volumes', async () => {
-      getAllActiveMock.mockReturnValue(Promise.resolve(['volume']));
+      getAllProjectActiveMock.mockReturnValue(Promise.resolve(['volume']));
       const response = httpMocks.createResponse();
 
-      await volumeController.listActiveVolumes(request, response);
+      await volumeController.listProjectActiveVolumes(request, response);
       expect(response.statusCode).toBe(200);
       expect(response._getData()).toEqual(['volume']); // eslint-disable-line no-underscore-dangle
     });
@@ -174,7 +174,7 @@ describe('Volume Controller', () => {
   function executeValidator(body) {
     request = httpMocks.createRequest({ method: 'GET', body });
     const response = httpMocks.createResponse();
-    return volumeController.createVolumeValidator(request, response, () => {});
+    return volumeController.createVolumeValidator(request, response, () => { });
   }
 
   function expectValidationError(fieldName, expectedMessage) {
@@ -203,7 +203,7 @@ function validatedCreateRequest() {
     body: createRequestBody(),
   });
 
-  return volumeController.createVolumeValidator(request, () => {}, () => {});
+  return volumeController.createVolumeValidator(request, () => { }, () => { });
 }
 
 function validatedUpdateUserRequest() {
@@ -215,5 +215,5 @@ function validatedUpdateUserRequest() {
     },
   });
 
-  return volumeController.updateVolumeUserValidator(request, () => {}, () => {});
+  return volumeController.updateVolumeUserValidator(request, () => { }, () => { });
 }

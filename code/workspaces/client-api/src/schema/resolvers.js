@@ -26,7 +26,7 @@ const PROJECT_KEY = 'project';
 const resolvers = {
   Query: {
     status: () => () => `GraphQL server is running version: ${version}`,
-    dataStorage: (obj, args, { user, token }) => permissionChecker(STORAGE_LIST, user, () => storageService.getAllActive(token)),
+    dataStorage: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_LIST, user, () => storageService.getAllProjectActive(args.projectKey, token)),
     dataStore: (obj, { id }, { user, token }) => permissionChecker(STORAGE_OPEN, user, () => storageService.getById(id, token)),
     stack: (obj, { id }, { user, token }) => permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
     stacks: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),

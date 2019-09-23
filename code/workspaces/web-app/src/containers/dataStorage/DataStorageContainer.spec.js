@@ -16,6 +16,7 @@ describe('DataStorageContainer', () => {
         PrivateComponent: () => {},
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
+        projectKey: 'project99',
       };
 
       return shallow(<DataStorageContainer {...props} />).find('DataStorageContainer');
@@ -60,7 +61,7 @@ describe('DataStorageContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadDataStorage();
+      output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -84,6 +85,7 @@ describe('DataStorageContainer', () => {
     const generateProps = () => ({
       dataStorage,
       userPermissions: ['expectedPermission'],
+      projectKey: 'project99',
       actions: {
         loadDataStorage: loadDataStorageMock,
         getCredentials: getCredentialsMock,

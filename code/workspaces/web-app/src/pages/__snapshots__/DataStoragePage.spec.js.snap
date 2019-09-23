@@ -5,6 +5,7 @@ exports[`DataStoragePage renders correct snapshot 1`] = `
   title="Storage"
 >
   <Connect(DataStorageContainer)
+    projectKey="project99"
     userPermissions={
       Array [
         "expectedPermission",

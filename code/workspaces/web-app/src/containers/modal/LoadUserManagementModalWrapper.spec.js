@@ -30,6 +30,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
         onCancel: () => {},
         Dialog: () => {},
         dataStoreId: 'dataStoreId',
+        projectKey: 'project99',
         userKeysMapping: {},
       };
 
@@ -90,7 +91,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadDataStorage();
+      output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -169,6 +170,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
         userId: 'value',
         name: 'label',
       },
+      projectKey: 'project99',
       actions: {
         loadDataStorage: loadDataStorageMock,
         addUserToDataStore: addUserToDataStoreMock,

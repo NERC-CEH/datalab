@@ -4,7 +4,7 @@ type Query {
     status: String
 
     # List of currently provisioned DataLabs data storage.
-    dataStorage: [DataStore]
+    dataStorage(projectKey: String!): [DataStore]
 
     # Details of a single Datalabs data store.
     dataStore(id: ID!): DataStore
