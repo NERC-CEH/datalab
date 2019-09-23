@@ -1,6 +1,7 @@
-import { check, matchedData } from 'express-validator';
+import { check, param, matchedData } from 'express-validator';
 import { service } from 'common';
 import projectsRepository from '../dataaccess/projectsRepository';
+import logger from '../config/logger';
 
 async function listProjects(request, response, next) {
   try {
@@ -47,18 +48,12 @@ async function createOrUpdateProject(request, response, next) {
   const { projectKey } = matchedData(request, { locations: ['params'] });
   const project = matchedData(request, { locations: ['body'] });
 
-  if (projectKey !== project.key) {
-    const msg = "'projectKey' parameter in URL and 'projectKey' field in request body must "
-      + `match. Got '${projectKey}' in URL and '${project.key}' in body.`;
-    response.status(400).send({ errors: [{ msg }] });
-  } else {
-    try {
-      const exists = await projectsRepository.exists(projectKey);
-      const dbProject = await projectsRepository.createOrUpdate(project);
-      response.status(exists ? 200 : 201).send(dbProject);
-    } catch (error) {
-      next(new Error(`Error creating or updating project: ${error.message}`));
-    }
+  try {
+    const exists = await projectsRepository.exists(projectKey);
+    const dbProject = await projectsRepository.createOrUpdate(project);
+    response.status(exists ? 200 : 201).send(dbProject);
+  } catch (error) {
+    next(new Error(`Error creating or updating project: ${error.message}`));
   }
 }
 
@@ -79,7 +74,7 @@ async function deleteProjectByKey(request, response, next) {
 
 const actionWithKeyValidator = () => service.middleware.validator([
   check('projectKey').exists().withMessage("Project 'projectKey' must be specified in URL."),
-]);
+], logger);
 
 // Checking fields makes them appear in matchedData which is used to get the data
 // from the body of the request.
@@ -98,7 +93,18 @@ const projectDocumentValidator = () => service.middleware.validator([
     .trim(),
   check('description'),
   check('collaborationLink'),
-]);
+], logger);
+
+const urlAndBodyProjectKeyMatchValidator = () => service.middleware.validator([
+  param('projectKey')
+    .custom((projectKey, { req }) => {
+      if (projectKey !== req.body.key) {
+        throw new Error("'projectKey' parameter in URL and 'key' field in request body must "
+      + `match. Got '${projectKey}' in URL and '${req.body.key}' in body.`);
+      }
+      return true;
+    }),
+], logger);
 
 export default {
   listProjects,
@@ -108,4 +114,5 @@ export default {
   deleteProjectByKey,
   actionWithKeyValidator,
   projectDocumentValidator,
+  urlAndBodyProjectKeyMatchValidator,
 };

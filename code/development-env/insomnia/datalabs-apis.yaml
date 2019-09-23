@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2019-09-20T14:01:02.350Z
+__export_date: 2019-09-20T15:32:36.933Z
 __export_source: insomnia.desktop.app:v6.6.2
 resources:
   - _id: req_b9b95c4383644bc1a22542c2470790b1
@@ -14,7 +14,7 @@ resources:
     isPrivate: false
     metaSortKey: -1568712933581
     method: GET
-    modified: 1568718543324
+    modified: 1568990711216
     name: Get Projects
     parameters: []
     parentId: fld_998699fb7271407c91200bc860ef8beb
@@ -53,7 +53,7 @@ resources:
     isPrivate: false
     metaSortKey: -1568712933556
     method: GET
-    modified: 1568823623722
+    modified: 1568993252260
     name: Get Project by Key
     parameters: []
     parentId: fld_998699fb7271407c91200bc860ef8beb
@@ -62,7 +62,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infra_api_url  }}/projects/another-project"
+    url: "{{ infra_api_url  }}/projects/project"
     _type: request
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
     authentication:
@@ -72,7 +72,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"projectKey": "another-project",
+        	"key": "another-project",
         	"name": "Another Project",
         	"description": "Another project that was added for testing purposes.",
         	"collaborationLink": "https://google.com"
@@ -86,7 +86,7 @@ resources:
     isPrivate: false
     metaSortKey: -1568712933531
     method: POST
-    modified: 1568823634427
+    modified: 1568991736404
     name: Create Project
     parameters: []
     parentId: fld_998699fb7271407c91200bc860ef8beb
@@ -105,7 +105,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"projectKey": "another-project",
+        	"key": "another-project",
         	"name": "Another Project",
         	"description": "An updated description for Anther Project.",
         	"collaborationLink": "https://google.com"
@@ -119,7 +119,7 @@ resources:
     isPrivate: false
     metaSortKey: -1568712933506
     method: PUT
-    modified: 1568733336782
+    modified: 1568993310809
     name: Update or Create Project
     parameters: []
     parentId: fld_998699fb7271407c91200bc860ef8beb
