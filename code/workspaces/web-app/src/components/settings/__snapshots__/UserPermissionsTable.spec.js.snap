@@ -127,6 +127,7 @@ Array [
     dispatch={[MockFunction]}
     index={0}
     isCurrentUser={true}
+    key="row-0"
     project="project"
     setRemoveUserDialogState={[MockFunction]}
     user={
@@ -149,6 +150,7 @@ Array [
     dispatch={[MockFunction]}
     index={1}
     isCurrentUser={false}
+    key="row-1"
     project="project"
     setRemoveUserDialogState={[MockFunction]}
     user={
@@ -170,6 +172,7 @@ Array [
     dispatch={[MockFunction]}
     index={2}
     isCurrentUser={false}
+    key="row-2"
     project="project"
     setRemoveUserDialogState={[MockFunction]}
     user={

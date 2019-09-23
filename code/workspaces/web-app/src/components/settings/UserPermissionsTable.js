@@ -166,6 +166,7 @@ export function UserPermissionsTableBody({ users, currentUserId, project, classe
       setRemoveUserDialogState={setRemoveUserDialogState}
       actions={actions}
       dispatch={dispatch}
+      key={`row-${index}`}
     />));
 }
 
