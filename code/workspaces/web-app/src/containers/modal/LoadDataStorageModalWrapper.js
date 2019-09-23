@@ -12,7 +12,7 @@ class LoadDataStorageModalWrapper extends Component {
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadDataStorage()
+    this.props.actions.loadDataStorage(this.props.projectKey)
       .catch((() => {}));
   }
 
@@ -38,7 +38,8 @@ LoadDataStorageModalWrapper.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  Dialog: PropTypes.func.isRequired,
+  Dialog: PropTypes.any.isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 function mapStateToProps({ dataStorage }) {

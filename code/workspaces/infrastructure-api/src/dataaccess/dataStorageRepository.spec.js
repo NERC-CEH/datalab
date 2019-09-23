@@ -11,6 +11,8 @@ const testStorage = [
 
 const user = { sub: 'username' };
 
+const projectKey = 'project99';
+
 const mockDatabase = databaseMock(testStorage);
 database.getModel = mockDatabase;
 
@@ -19,11 +21,12 @@ describe('dataStorageRepository', () => {
     mockDatabase().clear();
   });
 
-  it('getAll returns expected snapshot', () => dataStorageRepository.getAllActive(user).then((storage) => {
+  it('getAll returns expected snapshot', () => dataStorageRepository.getAllProjectActive(user, projectKey).then((storage) => {
     // Filters for record with status not equal to deleted.
     expect(mockDatabase().query()).toEqual({
       status: { $ne: 'deleted' },
       users: { $elemMatch: { $eq: 'username' } },
+      projectKey: { $eq: 'project99' },
     });
     expect(storage).toMatchSnapshot();
   }));

@@ -25,10 +25,11 @@ describe('dataStorageActions', () => {
       dataStorageService.loadDataStorage = loadDataStorageMock;
 
       // Act
-      const output = dataStorageActions.loadDataStorage();
+      const output = dataStorageActions.loadDataStorage('project99');
 
       // Assert
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
+      expect(loadDataStorageMock).toHaveBeenCalledWith('project99');
       expect(output.type).toBe('LOAD_DATASTORAGE');
       expect(output.payload).toBe('expectedDataStoragePayload');
     });

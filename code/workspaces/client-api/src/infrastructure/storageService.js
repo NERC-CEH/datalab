@@ -24,8 +24,8 @@ async function deleteVolume(storageRequest, token) {
   return response.data;
 }
 
-async function getAllActive(token) {
-  const response = await axios.get(`${API_URL_BASE}/volumes/active`, generateOptions(token));
+async function getAllProjectActive(projectKey, token) {
+  const response = await axios.get(`${API_URL_BASE}/volumes/active/${projectKey}`, generateOptions(token));
   return response.data;
 }
 
@@ -46,4 +46,4 @@ async function removeUsers(name, users, token) {
   return response.data;
 }
 
-export default { getAllActive, getById, addUsers, removeUsers, createVolume, deleteVolume };
+export default { getAllProjectActive, getById, addUsers, removeUsers, createVolume, deleteVolume };

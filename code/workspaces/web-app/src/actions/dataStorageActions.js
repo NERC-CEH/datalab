@@ -9,9 +9,9 @@ export const DELETE_DATASTORE_ACTION = 'DELETE_DATASTORE';
 export const ADD_USER_TO_DATASTORE_ACTION = 'ADD_USER_TO_DATASTORE';
 export const REMOVE_USER_FROM_DATASTORE_ACTION = 'REMOVE_USER_FROM_DATASTORE';
 
-const loadDataStorage = () => ({
+const loadDataStorage = projectKey => ({
   type: LOAD_DATASTORAGE_ACTION,
-  payload: dataStorageService.loadDataStorage(),
+  payload: dataStorageService.loadDataStorage(projectKey),
 });
 
 const getCredentials = id => ({

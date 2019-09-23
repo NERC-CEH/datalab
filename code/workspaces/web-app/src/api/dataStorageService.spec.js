@@ -10,18 +10,22 @@ describe('dataStorageService', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ dataStorage: 'expectedValue' });
 
-      return dataStorageService.loadDataStorage().then((response) => {
+      dataStorageService.loadDataStorage('project99').then((response) => {
         expect(response).toEqual('expectedValue');
         expect(mockClient.lastQuery()).toMatchSnapshot();
       });
     });
 
-    it('should throw an error if the query fails', () => {
+    it('should throw an error if the query fails', async () => {
       mockClient.prepareFailure('error');
 
-      return dataStorageService.loadDataStorage().catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.loadDataStorage('project99');
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 

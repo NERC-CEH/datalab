@@ -38,8 +38,8 @@ exports[`dataStorageService getCredentials should build the correct query and re
 
 exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
 "
-    DataStorage {
-      dataStorage {
+    DataStorage($projectKey: String!) {
+      dataStorage(projectKey: $projectKey) {
          id, name, displayName, description, type, stacksMountingStore { id }, status, users
       }
     }"

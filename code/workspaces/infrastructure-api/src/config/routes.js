@@ -41,7 +41,7 @@ function configureRoutes(app) {
   app.post('/stack', permissionWrapper(STACKS_CREATE), stack.createStackValidator, stack.createStack);
   app.post('/volume/query', permissionWrapper(STORAGE_LIST), volume.coreVolumeValidator, volume.queryVolume);
   app.get('/volumes', permissionWrapper(STORAGE_LIST), ew(volume.listVolumes));
-  app.get('/volumes/active', permissionWrapper(STORAGE_LIST), ew(volume.listActiveVolumes));
+  app.get('/volumes/active/:projectKey', permissionWrapper(STORAGE_LIST), volume.actionWithProjectKeyValidator(), ew(volume.listProjectActiveVolumes));
   app.get('/volumes/:id', permissionWrapper(STORAGE_LIST), volume.getByIdValidator, ew(volume.getById));
   app.put('/volumes/:name/addUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, ew(volume.addUsers));
   app.put('/volumes/:name/removeUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, ew(volume.removeUsers));

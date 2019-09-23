@@ -48,8 +48,9 @@ async function listVolumes(request, response) {
   response.send(volumes);
 }
 
-async function listActiveVolumes(request, response) {
-  const volumes = await dataStorageRepository.getAllActive(request.user);
+async function listProjectActiveVolumes(request, response) {
+  const { projectKey } = matchedData(request);
+  const volumes = await dataStorageRepository.getAllProjectActive(request.user, projectKey);
   response.send(volumes);
 }
 
@@ -90,6 +91,10 @@ const getByIdValidator = service.middleware.validator([
   check('id').exists().isMongoId().withMessage('id must be specified as a Mongo Id'),
 ], logger);
 
+const actionWithProjectKeyValidator = () => service.middleware.validator([
+  check('projectKey').exists().withMessage('projectKey must be specified'.trim()),
+], logger);
+
 const updateVolumeUserValidator = service.middleware.validator([
   check('name').exists().withMessage('volume name must be specified').trim(),
   check('userIds').exists().withMessage('userIds must be specified'),
@@ -127,6 +132,7 @@ const createVolumeValidator = service.middleware.validator([
 
 export default {
   getByIdValidator,
+  actionWithProjectKeyValidator,
   coreVolumeValidator,
   createVolumeValidator,
   updateVolumeUserValidator,
@@ -135,7 +141,7 @@ export default {
   queryVolume,
   listVolumes,
   getById,
-  listActiveVolumes,
+  listProjectActiveVolumes,
   addUsers,
   removeUsers,
 };
