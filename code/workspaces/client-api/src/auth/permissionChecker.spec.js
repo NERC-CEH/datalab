@@ -15,7 +15,7 @@ const admin = {
 
 const actionMock = jest.fn().mockReturnValue(Promise.resolve());
 
-const next = () => actionMock('value');
+const done = () => actionMock('value');
 
 describe('Permission Checker', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -24,7 +24,7 @@ describe('Permission Checker', () => {
     it('throws an error if user is lacking correct permission', async () => {
       let error;
       try {
-        await permissionWrapper('elementName:missingActionName', user, next);
+        await permissionWrapper('elementName:missingActionName', user, done);
       } catch (err) {
         error = err;
       }
@@ -32,13 +32,13 @@ describe('Permission Checker', () => {
       expect(actionMock).not.toHaveBeenCalled();
     });
 
-    it('callback to be called if user has correct permission', () => permissionWrapper('elementName:actionName', user, next)
+    it('callback to be called if user has correct permission', () => permissionWrapper('elementName:actionName', user, done)
       .then(() => {
         expect(actionMock).toHaveBeenCalledTimes(1);
         expect(actionMock).toHaveBeenCalledWith('value');
       }));
 
-    it('callback to be called if user has instance admin permission', () => permissionWrapper('elementName:actionName', admin, next)
+    it('callback to be called if user has instance admin permission', () => permissionWrapper('elementName:actionName', admin, done)
       .then(() => {
         expect(actionMock).toHaveBeenCalledTimes(1);
         expect(actionMock).toHaveBeenCalledWith('value');
@@ -49,7 +49,7 @@ describe('Permission Checker', () => {
     it('throws an error if user is lacking correct permission', async () => {
       let error;
       try {
-        await multiPermissionsWrapper(['elementName:missingActionName', 'elementName:anotherAction'], user, next);
+        await multiPermissionsWrapper(['elementName:missingActionName', 'elementName:anotherAction'], user, done);
       } catch (err) {
         error = err;
       }
@@ -57,13 +57,13 @@ describe('Permission Checker', () => {
       expect(actionMock).not.toHaveBeenCalled();
     });
 
-    it('callback to be called if user has correct permission', () => multiPermissionsWrapper(['elementName:actionName', 'elementName:anotherAction'], user, next)
+    it('callback to be called if user has correct permission', () => multiPermissionsWrapper(['elementName:actionName', 'elementName:anotherAction'], user, done)
       .then(() => {
         expect(actionMock).toHaveBeenCalledTimes(1);
         expect(actionMock).toHaveBeenCalledWith('value');
       }));
 
-    it('callback to be called if user has instance admin permission', () => multiPermissionsWrapper(['elementName:actionName'], admin, next)
+    it('callback to be called if user has instance admin permission', () => multiPermissionsWrapper(['elementName:actionName'], admin, done)
       .then(() => {
         expect(actionMock).toHaveBeenCalledTimes(1);
         expect(actionMock).toHaveBeenCalledWith('value');
@@ -74,7 +74,7 @@ describe('Permission Checker', () => {
     it('throws an error if user is lacking correct permission', async () => {
       let error;
       try {
-        await instanceAdminWrapper(user, next);
+        await instanceAdminWrapper(user, done);
       } catch (err) {
         error = err;
       }
@@ -82,7 +82,7 @@ describe('Permission Checker', () => {
       expect(actionMock).not.toHaveBeenCalled();
     });
 
-    it('callback to be called if user has instance admin permission', () => instanceAdminWrapper(admin, next)
+    it('callback to be called if user has instance admin permission', () => instanceAdminWrapper(admin, done)
       .then(() => {
         expect(actionMock).toHaveBeenCalledTimes(1);
         expect(actionMock).toHaveBeenCalledWith('value');
@@ -93,7 +93,7 @@ describe('Permission Checker', () => {
     it('throws an error if user is lacking correct permission', async () => {
       let error;
       try {
-        await projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:missingActionName', user, next);
+        await projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:missingActionName', user, done);
       } catch (err) {
         error = err;
       }
@@ -104,7 +104,7 @@ describe('Permission Checker', () => {
     it('throws an error if projectKey not passed', async () => {
       let error;
       try {
-        await projectPermissionWrapper({}, 'elementName:actionName', user, next);
+        await projectPermissionWrapper({}, 'elementName:actionName', user, done);
       } catch (err) {
         error = err;
       }
@@ -113,7 +113,7 @@ describe('Permission Checker', () => {
     });
 
     it('callback to be called if user has correct permission', () => {
-      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', user, next)
+      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', user, done)
         .then(() => {
           expect(actionMock).toHaveBeenCalledTimes(1);
           expect(actionMock).toHaveBeenCalledWith('value');
@@ -121,7 +121,7 @@ describe('Permission Checker', () => {
     });
 
     it('callback to be called if user has instance admin permission', async () => {
-      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, next)
+      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, done)
         .then(() => {
           expect(actionMock).toHaveBeenCalledTimes(1);
           expect(actionMock).toHaveBeenCalledWith('value');
