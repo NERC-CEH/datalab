@@ -92,7 +92,7 @@ const getByIdValidator = service.middleware.validator([
 ], logger);
 
 const actionWithProjectKeyValidator = () => service.middleware.validator([
-  check('projectKey').exists().withMessage("Project 'projectKey' must be specified in URL."),
+  check('projectKey').exists().withMessage('projectKey must be specified'.trim()),
 ], logger);
 
 const updateVolumeUserValidator = service.middleware.validator([
