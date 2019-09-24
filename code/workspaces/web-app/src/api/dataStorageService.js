@@ -25,15 +25,15 @@ function getCredentials(projectKey, id) {
     .then(errorHandler('data.dataStore'));
 }
 
-function createDataStore(dataStore) {
+function createDataStore(projectKey, dataStore) {
   const mutation = `
-    CreateDataStore($dataStore:  DataStorageCreationRequest) {
-      createDataStore(dataStore: $dataStore) {
+    CreateDataStore($projectKey: String!, $dataStore:  DataStorageCreationRequest) {
+      createDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 

@@ -43,8 +43,8 @@ const resolvers = {
   Mutation: {
     createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
-    createDataStore: (obj, { dataStore }, { user, token }) => (
-      permissionChecker(STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
+    createDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
     deleteDataStore: (obj, { dataStore }, { user, token }) => (
       permissionChecker(STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))

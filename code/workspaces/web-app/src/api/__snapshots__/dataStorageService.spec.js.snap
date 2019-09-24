@@ -11,8 +11,8 @@ exports[`dataStorageService addUserToDataStore should build the correct correct 
 
 exports[`dataStorageService createDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    CreateDataStore($dataStore:  DataStorageCreationRequest) {
-      createDataStore(dataStore: $dataStore) {
+    CreateDataStore($projectKey: String!, $dataStore:  DataStorageCreationRequest) {
+      createDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"

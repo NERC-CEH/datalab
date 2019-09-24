@@ -273,7 +273,7 @@ describe('DataStorageContainer', () => {
       return onSubmit(stack)
         .then(() => {
           expect(createDataStoreMock).toHaveBeenCalledTimes(1);
-          expect(createDataStoreMock).toHaveBeenCalledWith(stack);
+          expect(createDataStoreMock).toHaveBeenCalledWith('project99', stack);
           expect(resetFormMock).toHaveBeenCalledTimes(1);
         });
     });

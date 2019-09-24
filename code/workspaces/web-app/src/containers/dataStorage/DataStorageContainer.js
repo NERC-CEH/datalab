@@ -47,7 +47,7 @@ class DataStorageContainer extends Component {
     .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
 
   createDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.createDataStore(dataStore))
+    .then(() => this.props.actions.createDataStore(this.props.projectKey, dataStore))
     .then(() => this.props.actions.resetForm())
     .then(() => notify.success(`${TYPE_NAME} created`))
     .catch(err => notify.error(`Unable to create ${TYPE_NAME}`))

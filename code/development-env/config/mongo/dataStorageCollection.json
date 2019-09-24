@@ -5,6 +5,7 @@
     "created" : "2018-02-13T12:45:47.306Z",
     "displayName" : "Example Storage",
     "description" : "An Example Data Store",
+    "projectKey" : "project",
     "type" : 1,
     "volumeSize" : "5",
     "url" : "https://testlab-example.datalabs.localhost/minio",

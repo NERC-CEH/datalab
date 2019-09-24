@@ -70,11 +70,11 @@ describe('dataStorageActions', () => {
       dataStorageService.createDataStore = createDataStoreMock;
 
       // Act
-      const output = dataStorageActions.createDataStore(dataStore);
+      const output = dataStorageActions.createDataStore('project99', dataStore);
 
       // Assert
       expect(createDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(createDataStoreMock).toHaveBeenCalledWith(dataStore);
+      expect(createDataStoreMock).toHaveBeenCalledWith('project99', dataStore);
       expect(output.type).toBe(CREATE_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedCreationPayload');
     });
