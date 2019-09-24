@@ -132,7 +132,7 @@ describe('DataStorageContainer', () => {
       return openStack({ id: 1000 })
         .then(() => {
           expect(getCredentialsMock).toHaveBeenCalledTimes(1);
-          expect(getCredentialsMock).toHaveBeenCalledWith(1000);
+          expect(getCredentialsMock).toHaveBeenCalledWith('project99', 1000);
           expect(openMinioDataStoreMock).toHaveBeenCalledTimes(1);
           expect(openMinioDataStoreMock).toHaveBeenCalledWith('expectedUrl', 'expectedKey');
         });

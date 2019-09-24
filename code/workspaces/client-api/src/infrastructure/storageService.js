@@ -29,8 +29,8 @@ async function getAllProjectActive(projectKey, token) {
   return response.data;
 }
 
-async function getById(id, token) {
-  const response = await axios.get(`${API_URL_BASE}/volumes/${id}`, generateOptions(token));
+async function getById(projectKey, id, token) {
+  const response = await axios.get(`${API_URL_BASE}/volumes/${projectKey}/${id}`, generateOptions(token));
   return response.data;
 }
 

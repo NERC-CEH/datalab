@@ -14,9 +14,9 @@ const loadDataStorage = projectKey => ({
   payload: dataStorageService.loadDataStorage(projectKey),
 });
 
-const getCredentials = id => ({
+const getCredentials = (projectKey, id) => ({
   type: GET_DATASTORE_CREDENTIALS_ACTION,
-  payload: dataStorageService.getCredentials(id),
+  payload: dataStorageService.getCredentials(projectKey, id),
 });
 
 const openMinioDataStore = (storageUrl, token) => ({

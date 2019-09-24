@@ -29,8 +29,8 @@ exports[`dataStorageService deleteDataStore should build the correct correct mut
 
 exports[`dataStorageService getCredentials should build the correct query and return the minio credentials 1`] = `
 "
-    GetCredentials($id: ID!) {
-      dataStore(id: $id) {
+    GetCredentials($projectKey: String!, $id: ID!) {
+      dataStore(projectKey: $projectKey, id: $id) {
         url, accessKey
       }
     }"

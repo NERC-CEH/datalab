@@ -41,7 +41,7 @@ class DataStorageContainer extends Component {
     return !isFetching;
   }
 
-  openDataStore = dataStore => this.props.actions.getCredentials(dataStore.id)
+  openDataStore = dataStore => this.props.actions.getCredentials(this.props.projectKey, dataStore.id)
     .then(payload => pick(payload.value, ['url', 'accessKey']))
     .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
     .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
@@ -94,8 +94,8 @@ class DataStorageContainer extends Component {
   editDataStore = ({ displayName, id }) => this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
     title: `Edit Data Store: ${displayName}`,
     onCancel: this.props.actions.closeModalDialog,
-    dataStoreId: id,
     projectKey: this.props.projectKey,
+    dataStoreId: id,
     userKeysMapping: { name: 'label', userId: 'value' },
   });
 

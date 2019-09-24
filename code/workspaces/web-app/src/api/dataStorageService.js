@@ -13,15 +13,15 @@ function loadDataStorage(projectKey) {
     .then(errorHandler('data.dataStorage', 'users'));
 }
 
-function getCredentials(id) {
+function getCredentials(projectKey, id) {
   const query = `
-    GetCredentials($id: ID!) {
-      dataStore(id: $id) {
+    GetCredentials($projectKey: String!, $id: ID!) {
+      dataStore(projectKey: $projectKey, id: $id) {
         url, accessKey
       }
     }`;
 
-  return gqlQuery(query, { id })
+  return gqlQuery(query, { projectKey, id })
     .then(errorHandler('data.dataStore'));
 }
 

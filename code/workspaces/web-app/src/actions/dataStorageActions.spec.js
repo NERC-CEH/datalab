@@ -40,11 +40,11 @@ describe('dataStorageActions', () => {
       dataStorageService.getCredentials = getCredentialsMock;
 
       // Act
-      const output = dataStorageActions.getCredentials(123);
+      const output = dataStorageActions.getCredentials('project99', 123);
 
       // Assert
       expect(getCredentialsMock).toHaveBeenCalledTimes(1);
-      expect(getCredentialsMock).toHaveBeenCalledWith(123);
+      expect(getCredentialsMock).toHaveBeenCalledWith('project99', 123);
       expect(output.type).toBe('GET_DATASTORE_CREDENTIALS');
       expect(output.payload).toBe('expectedDataStorePayload');
     });
