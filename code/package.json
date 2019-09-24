@@ -4,12 +4,13 @@
     "workspaces/*"
   ],
   "scripts": {
-    "update-version": "shx echo \"{ \\\"version\\\": \\\"`git describe --tags --always`\\\" }\" > version.json"
+    "update-version": "shx echo \"{ \\\"version\\\": \\\"`git describe --tags --always`\\\" }\" > version.json",
+    "check-not-master": "git branch | egrep \"\\*\"  | egrep -v \"^\\* master$\""
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run check-not-master && lint-staged"
     }
   },
   "lint-staged": {
