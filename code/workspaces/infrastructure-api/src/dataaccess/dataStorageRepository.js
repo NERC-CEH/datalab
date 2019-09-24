@@ -49,14 +49,16 @@ function update(name, updatedValues) {
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false }).exec();
 }
 
-function addUsers(name, userIds) { // user, name, userId
+function addUsers({ sub }, projectKey, name, userIds) {
+  const query = filterByUserAndProject(sub, projectKey, { name });
   const updateObj = setUsers(userIds);
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false, new: true }).exec();
+  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false, new: true }).exec();
 }
 
-function removeUsers(name, userIds) { // user, name, userId
+function removeUsers({ sub }, projectKey, name, userIds) {
+  const query = filterByUserAndProject(sub, projectKey, { name });
   const updateObj = unsetUsers(userIds);
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false, new: true }).exec();
+  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false, new: true }).exec();
 }
 
 const filterByUser = (userId, findQuery) => ({
@@ -67,7 +69,7 @@ const filterByUser = (userId, findQuery) => ({
 const filterByUserAndProject = (userId, projectKey, findQuery) => ({
   ...findQuery,
   users: { $elemMatch: { $eq: userId } },
-  projectKey: { $eq: projectKey },
+  projectKey,
 });
 
 const setUsers = userIds => ({

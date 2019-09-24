@@ -49,11 +49,11 @@ const resolvers = {
     deleteDataStore: (obj, args, { user, token }) => (
       projectPermissionWrapper(args, STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
-    addUserToDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
-      permissionChecker(STORAGE_EDIT, user, () => storageService.addUsers(name, users, token))
+    addUserToDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.addUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
-    removeUserFromDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
-      permissionChecker(STORAGE_EDIT, user, () => storageService.removeUsers(name, users, token))
+    removeUserFromDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.removeUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
       permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))

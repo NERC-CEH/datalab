@@ -49,27 +49,27 @@ function deleteDataStore(projectKey, dataStore) {
     .then(errorHandler('data.dataStorage'));
 }
 
-function addUserToDataStore(dataStore) {
+function addUserToDataStore(projectKey, dataStore) {
   const mutation = `
-    AddUserToDataStore($dataStore:  DataStorageUpdateRequest) {
-      addUserToDataStore(dataStore: $dataStore) {
+    AddUserToDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      addUserToDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 
-function removeUserFromDataStore(dataStore) {
+function removeUserFromDataStore(projectKey, dataStore) {
   const mutation = `
-    RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
-      removeUserFromDataStore(dataStore: $dataStore) {
+    RemoveUserFromDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      removeUserFromDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 

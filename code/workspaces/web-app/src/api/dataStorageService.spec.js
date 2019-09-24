@@ -103,21 +103,21 @@ describe('dataStorageService', () => {
 
   describe('addUserToDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareSuccess(data);
 
-      dataStorageService.addUserToDataStore(data.dataStore).then((response) => {
+      dataStorageService.addUserToDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
     it('should throw an error if the mutation fails', async () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareFailure('error');
       let error;
       try {
-        await dataStorageService.addUserToDataStore(data.dataStore);
+        await dataStorageService.addUserToDataStore(data.projectKey, data.dataStore);
       } catch (err) {
         error = err;
       }
@@ -127,21 +127,21 @@ describe('dataStorageService', () => {
 
   describe('removeUserFromDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareSuccess(data);
 
-      dataStorageService.removeUserFromDataStore(data.dataStore).then((response) => {
+      dataStorageService.removeUserFromDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
     it('should throw an error if the mutation fails', async () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareFailure('error');
       let error;
       try {
-        await dataStorageService.removeUserFromDataStore(data.dataStore);
+        await dataStorageService.removeUserFromDataStore(data.projectKey, data.dataStore);
       } catch (err) {
         error = err;
       }

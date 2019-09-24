@@ -66,24 +66,24 @@ async function getById(request, response) {
 }
 
 async function addUsers(request, response, next) {
-  const { name, userIds } = matchedData(request);
+  const { projectKey, name, userIds } = matchedData(request);
 
   try {
-    const volume = await dataStorageRepository.addUsers(name, userIds);
+    const volume = await dataStorageRepository.addUsers(request.user, projectKey, name, userIds);
     response.send(volume);
   } catch (error) {
-    next(new Error(`Unable to add users to volume ${name}: ${error.message}`));
+    next(new Error(`Unable to add users to project ${projectKey} volume ${name}: ${error.message}`));
   }
 }
 
 async function removeUsers(request, response, next) {
-  const { name, userIds } = matchedData(request);
+  const { projectKey, name, userIds } = matchedData(request);
 
   try {
-    const volume = await dataStorageRepository.removeUsers(name, userIds);
+    const volume = await dataStorageRepository.removeUsers(request.user, projectKey, name, userIds);
     response.send(volume);
   } catch (error) {
-    next(new Error(`Unable to remove users from volume ${name}: ${error.message}`));
+    next(new Error(`Unable to remove users from project ${projectKey} volume ${name}: ${error.message}`));
   }
 }
 
@@ -97,6 +97,7 @@ const actionWithProjectKeyValidator = () => service.middleware.validator([
 ], logger);
 
 const updateVolumeUserValidator = service.middleware.validator([
+  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
   check('name').exists().withMessage('volume name must be specified').trim(),
   check('userIds').exists().withMessage('userIds must be specified'),
   check('userIds.*').exists().withMessage('userIds must be specified').trim(),

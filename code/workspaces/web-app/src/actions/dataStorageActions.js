@@ -34,14 +34,14 @@ const deleteDataStore = (projectKey, { name }) => ({
   payload: dataStorageService.deleteDataStore(projectKey, { name }),
 });
 
-const addUserToDataStore = ({ name, users }) => ({
+const addUserToDataStore = (projectKey, { name, users }) => ({
   type: ADD_USER_TO_DATASTORE_ACTION,
-  payload: dataStorageService.addUserToDataStore({ name, users }),
+  payload: dataStorageService.addUserToDataStore(projectKey, { name, users }),
 });
 
-const removeUserFromDataStore = ({ name, users }) => ({
+const removeUserFromDataStore = (projectKey, { name, users }) => ({
   type: REMOVE_USER_FROM_DATASTORE_ACTION,
-  payload: dataStorageService.removeUserFromDataStore({ name, users }),
+  payload: dataStorageService.removeUserFromDataStore(projectKey, { name, users }),
 });
 
 export default {
