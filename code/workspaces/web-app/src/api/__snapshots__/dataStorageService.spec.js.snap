@@ -20,8 +20,8 @@ exports[`dataStorageService createDataStore should build the correct correct mut
 
 exports[`dataStorageService deleteDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    DeleteDataStore($dataStore: DataStorageUpdateRequest) {
-      deleteDataStore(dataStore: $dataStore) {
+    DeleteDataStore($projectKey: String!, $dataStore: DataStorageUpdateRequest) {
+      deleteDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"

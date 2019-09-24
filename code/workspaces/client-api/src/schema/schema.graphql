@@ -52,7 +52,7 @@ type Mutation {
     createDataStore(projectKey: String!, dataStore: DataStorageCreationRequest): DataStore
 
     # Delete a data store
-    deleteDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    deleteDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Grant user access to data store
     addUserToDataStore(dataStore: DataStorageUpdateRequest): DataStore

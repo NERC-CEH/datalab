@@ -29,9 +29,9 @@ const createDataStore = (projectKey, dataStore) => ({
   payload: dataStorageService.createDataStore(projectKey, dataStore),
 });
 
-const deleteDataStore = ({ name }) => ({
+const deleteDataStore = (projectKey, { name }) => ({
   type: DELETE_DATASTORE_ACTION,
-  payload: dataStorageService.deleteDataStore({ name }),
+  payload: dataStorageService.deleteDataStore(projectKey, { name }),
 });
 
 const addUserToDataStore = ({ name, users }) => ({

@@ -60,7 +60,7 @@ class DataStorageContainer extends Component {
   });
 
   deleteDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.deleteDataStore(dataStore))
+    .then(() => this.props.actions.deleteDataStore(this.props.projectKey, dataStore))
     .then(() => notify.success(`${TYPE_NAME} deleted`))
     .catch(err => notify.error(`Unable to delete ${TYPE_NAME}`))
     .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
