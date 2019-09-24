@@ -34,14 +34,14 @@ async function getById(projectKey, id, token) {
   return response.data;
 }
 
-async function addUsers(name, users, token) {
-  const url = `${API_URL_BASE}/volumes/${name}/addUsers`;
+async function addUsers(projectKey, name, users, token) {
+  const url = `${API_URL_BASE}/volumes/${projectKey}/${name}/addUsers`;
   const response = await axios.put(url, { userIds: users }, generateOptions(token));
   return response.data;
 }
 
-async function removeUsers(name, users, token) {
-  const url = `${API_URL_BASE}/volumes/${name}/removeUsers`;
+async function removeUsers(projectKey, name, users, token) {
+  const url = `${API_URL_BASE}/volumes/${projectKey}/${name}/removeUsers`;
   const response = await axios.put(url, { userIds: users }, generateOptions(token));
   return response.data;
 }

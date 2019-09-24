@@ -135,7 +135,7 @@ describe('Volume Controller', () => {
       const response = httpMocks.createResponse();
 
       await volumeController.addUsers(request, response, next.handler);
-      expect(next.getError().message).toEqual('Unable to add users to volume volumeName: error');
+      expect(next.getError().message).toEqual('Unable to add users to project project99 volume volumeName: error');
     });
   });
 
@@ -156,7 +156,7 @@ describe('Volume Controller', () => {
       const response = httpMocks.createResponse();
 
       await volumeController.removeUsers(request, response, next.handler);
-      expect(next.getError().message).toEqual('Unable to remove users from volume volumeName: error');
+      expect(next.getError().message).toEqual('Unable to remove users from project project99 volume volumeName: error');
     });
   });
 
@@ -189,7 +189,7 @@ function createRequestBody() {
       domain: 'test-datalabs.nerc.ac.uk',
     },
     name: 'volumeName',
-    projectKey: 'project',
+    projectKey: 'project99',
     displayName: 'displayName',
     description: 'description',
     type: 1,
@@ -210,6 +210,7 @@ function validatedUpdateUserRequest() {
   request = httpMocks.createRequest({
     method: 'PUT',
     body: {
+      projectKey: 'project99',
       name: 'volumeName',
       userIds: ['uid1', 'uid2'],
     },

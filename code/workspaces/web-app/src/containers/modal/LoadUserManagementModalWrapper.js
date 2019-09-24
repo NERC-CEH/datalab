@@ -27,7 +27,7 @@ class LoadUserManagementModalWrapper extends Component {
 
   addUser({ value }) {
     const { name } = this.getDataStore();
-    this.props.actions.addUserToDataStore({ name, users: [value] })
+    this.props.actions.addUserToDataStore(this.props.projectKey, { name, users: [value] })
       .then(() => notify.success('User added to data store'))
       .then(() => this.props.actions.loadDataStorage(this.props.projectKey));
   }
@@ -35,7 +35,7 @@ class LoadUserManagementModalWrapper extends Component {
   removeUser({ value }) {
     if (this.props.loginUserId !== value) {
       const { name } = this.getDataStore();
-      this.props.actions.removeUserFromDataStore({ name, users: [value] })
+      this.props.actions.removeUserFromDataStore(this.props.projectKey, { name, users: [value] })
         .then(() => notify.success('User removed from data store'))
         .then(() => this.props.actions.loadDataStorage(this.props.projectKey));
     } else {

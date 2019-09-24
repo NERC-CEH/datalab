@@ -55,10 +55,10 @@ type Mutation {
     deleteDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Grant user access to data store
-    addUserToDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    addUserToDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Remove user access to data store
-    removeUserFromDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    removeUserFromDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Create a new project
     createProject(project: ProjectCreationRequest): Project

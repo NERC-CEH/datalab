@@ -2,8 +2,8 @@
 
 exports[`dataStorageService addUserToDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    AddUserToDataStore($dataStore:  DataStorageUpdateRequest) {
-      addUserToDataStore(dataStore: $dataStore) {
+    AddUserToDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      addUserToDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"
@@ -47,8 +47,8 @@ exports[`dataStorageService loadDataStorage should build the correct query and u
 
 exports[`dataStorageService removeUserFromDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
-      removeUserFromDataStore(dataStore: $dataStore) {
+    RemoveUserFromDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      removeUserFromDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"
