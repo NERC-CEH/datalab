@@ -85,11 +85,11 @@ describe('dataStorageActions', () => {
       dataStorageService.deleteDataStore = deleteDataStoreMock;
 
       // Act
-      const output = dataStorageActions.deleteDataStore(dataStore);
+      const output = dataStorageActions.deleteDataStore('project99', dataStore);
 
       // Assert
       expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(deleteDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name });
+      expect(deleteDataStoreMock).toHaveBeenCalledWith('project99', { name: dataStore.name });
       expect(output.type).toBe(DELETE_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedDeletionPayload');
     });

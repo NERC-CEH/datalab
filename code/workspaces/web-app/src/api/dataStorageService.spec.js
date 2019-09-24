@@ -79,21 +79,21 @@ describe('dataStorageService', () => {
 
   describe('deleteDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name' } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name' } };
       mockClient.prepareSuccess(data);
 
-      dataStorageService.deleteDataStore(data.dataStore).then((response) => {
+      dataStorageService.deleteDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
     it('should throw an error if the mutation fails', async () => {
-      const data = { dataStore: { name: 'name' } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name' } };
       mockClient.prepareFailure('error');
       let error;
       try {
-        await dataStorageService.deleteDataStore(data.dataStore);
+        await dataStorageService.deleteDataStore(data.projectKey, data.dataStore);
       } catch (err) {
         error = err;
       }

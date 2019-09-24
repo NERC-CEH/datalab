@@ -218,7 +218,7 @@ describe('DataStorageContainer', () => {
       return onSubmit()
         .then(() => {
           expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
-          expect(deleteDataStoreMock).toHaveBeenCalledWith(stack);
+          expect(deleteDataStoreMock).toHaveBeenCalledWith('project99', stack);
         });
     });
 

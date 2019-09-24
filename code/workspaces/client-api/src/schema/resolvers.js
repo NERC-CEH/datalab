@@ -46,8 +46,8 @@ const resolvers = {
     createDataStore: (obj, args, { user, token }) => (
       projectPermissionWrapper(args, STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
-    deleteDataStore: (obj, { dataStore }, { user, token }) => (
-      permissionChecker(STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
+    deleteDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
     addUserToDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
       permissionChecker(STORAGE_EDIT, user, () => storageService.addUsers(name, users, token))

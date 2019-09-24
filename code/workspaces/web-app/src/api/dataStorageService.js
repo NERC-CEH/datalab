@@ -37,15 +37,15 @@ function createDataStore(projectKey, dataStore) {
     .then(errorHandler('data.dataStorage'));
 }
 
-function deleteDataStore(dataStore) {
+function deleteDataStore(projectKey, dataStore) {
   const mutation = `
-    DeleteDataStore($dataStore: DataStorageUpdateRequest) {
-      deleteDataStore(dataStore: $dataStore) {
+    DeleteDataStore($projectKey: String!, $dataStore: DataStorageUpdateRequest) {
+      deleteDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 
