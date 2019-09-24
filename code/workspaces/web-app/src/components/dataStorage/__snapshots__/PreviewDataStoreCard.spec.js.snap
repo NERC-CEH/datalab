@@ -3,6 +3,7 @@
 exports[`PreviewDataStoreCard is a component which passes correct props to StackCards 1`] = `
 <WithStyles(StackCard)
   deletePermission="delete"
+  editPermission="edit"
   openPermission="open"
   stack="expectedStack"
   typeName="dataStore"

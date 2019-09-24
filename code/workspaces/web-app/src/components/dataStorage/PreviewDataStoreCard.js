@@ -9,6 +9,7 @@ class PreviewDataStoreCard extends Component {
         stack={this.props.stack}
         typeName="dataStore"
         userPermissions={['open', 'delete']}
+        editPermission="edit"
         openPermission="open"
         deletePermission="delete" />
     );

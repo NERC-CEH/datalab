@@ -24,9 +24,9 @@ const openMinioDataStore = (storageUrl, token) => ({
   payload: minioService.openStorage(storageUrl, token),
 });
 
-const createDataStore = dataStore => ({
+const createDataStore = (projectKey, dataStore) => ({
   type: CREATE_DATASTORE_ACTION,
-  payload: dataStorageService.createDataStore(dataStore),
+  payload: dataStorageService.createDataStore(projectKey, dataStore),
 });
 
 const deleteDataStore = ({ name }) => ({
