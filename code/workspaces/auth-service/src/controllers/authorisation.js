@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { pem2jwk } from 'pem-jwk';
 import { get } from 'lodash';
 import logger from 'winston';
+import { permissionTokenCounter } from '../config/metrics';
 import userRolesRepository from '../dataaccess/userRolesRepository';
 import getPermissions from '../permissions/permissions';
 import {
@@ -15,6 +16,8 @@ import {
 } from '../config/auth';
 
 function checkUser(request, response) {
+  permissionTokenCounter.inc();
+
   if (!request.user) {
     response.status(401);
     return response.send({ message: `User not Authorised for domain ${request.headers.host}` });
