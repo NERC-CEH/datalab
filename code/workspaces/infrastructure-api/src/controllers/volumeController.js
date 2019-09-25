@@ -140,12 +140,12 @@ const createVolumeValidator = service.middleware.validator([
 ], logger);
 
 const deleteVolumeValidator = service.middleware.validator([
-  existsCheck('projectKey'),
+  projectKeyCheck,
   nameCheck,
 ], logger);
 
 const queryVolumeValidator = service.middleware.validator([
-  existsCheck('projectKey'),
+  projectKeyCheck,
   nameCheck,
 ], logger);
 
