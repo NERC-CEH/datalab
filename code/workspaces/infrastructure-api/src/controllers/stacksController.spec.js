@@ -7,11 +7,13 @@ import * as stackRepository from '../dataaccess/stacksRepository';
 jest.mock('../dataaccess/stacksRepository');
 
 const getAllMock = jest.fn();
+const getAllByProjectMock = jest.fn().mockReturnValue(Promise.resolve([]));
 const getAllByCategoryMock = jest.fn().mockReturnValue(Promise.resolve([]));
 const getAllByVolumeMountMock = jest.fn().mockReturnValue(Promise.resolve([]));
 
 stackRepository.default = {
   getAll: getAllMock,
+  getAllByProject: getAllByProjectMock,
   getAllByCategory: getAllByCategoryMock,
   getAllByVolumeMount: getAllByVolumeMountMock,
 };
@@ -19,9 +21,60 @@ stackRepository.default = {
 let request;
 
 describe('Stacks controller', () => {
+  describe('listByProject', () => {
+    beforeEach(() => createValidatedRequest(
+      { projectKey: 'expectedProject' },
+      stacksController.withProjectValidator,
+    ));
+
+    it('should process a valid request', () => {
+      const response = httpMocks.createResponse();
+
+      return stacksController.listByProject(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(200);
+        });
+    });
+
+    it('should return 400 for invalid request', async () => {
+      delete request.body.projectKey;
+      await Promise.all(stacksController.withProjectValidator.map(validation => validation.run(request)));
+
+      const response = httpMocks.createResponse();
+
+      stacksController.listByCategory(request, response);
+      expect(response.statusCode).toBe(400);
+      const expectedError = {
+        errors: {
+          projectKey: {
+            location: 'body',
+            param: 'projectKey',
+            msg: "project 'projectKey' must be specified in URL",
+          },
+        },
+      };
+      expect(JSON.parse(response._getData())).toEqual(expectedError); // eslint-disable-line no-underscore-dangle
+    });
+
+    it('should return 500 for failed request', () => {
+      getAllByProjectMock.mockReturnValue(Promise.reject({ message: 'error' }));
+
+      const response = httpMocks.createResponse();
+
+      return stacksController.listByProject(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(500);
+          expect(response._getData()).toEqual({ error: 'error', message: 'Error retrieving by project for stacks' }); // eslint-disable-line no-underscore-dangle
+        });
+    });
+
+    it('should validate the projectKey field exists', () => createValidatedRequest({}, stacksController.withProjectValidator)
+      .then(() => expectValidationError('projectKey', "project 'projectKey' must be specified in URL")));
+  });
+
   describe('listByCategory', () => {
     beforeEach(() => createValidatedRequest(
-      { category: 'publish' },
+      { category: 'publish', projectKey: 'expectedProject' },
       stacksController.withCategoryValidator,
     ));
 
@@ -62,7 +115,7 @@ describe('Stacks controller', () => {
       return stacksController.listByCategory(request, response)
         .then(() => {
           expect(response.statusCode).toBe(500);
-          expect(response._getData()).toEqual({ error: 'error', message: 'Error retrieving by type for stacks' }); // eslint-disable-line no-underscore-dangle
+          expect(response._getData()).toEqual({ error: 'error', message: 'Error retrieving by category for stacks' }); // eslint-disable-line no-underscore-dangle
         });
     });
 
@@ -72,7 +125,7 @@ describe('Stacks controller', () => {
 
   describe('listByMount', () => {
     beforeEach(() => createValidatedRequest(
-      { mount: 'expectedMount' },
+      { mount: 'expectedMount', projectKey: 'expectedProject' },
       stacksController.withMountValidator,
     ));
 
