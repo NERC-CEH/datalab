@@ -2,6 +2,7 @@ import express from 'express';
 import chalk from 'chalk';
 import bodyParser from 'body-parser';
 import logger from 'winston';
+import { service } from 'service-chassis';
 import configureCorsHeaders from './corsConfig';
 import config from './config';
 import database from './config/database';
@@ -17,6 +18,7 @@ logger.add(logger.transports.Console, { timestamp: true, colorize: true });
 
 const app = express();
 configureCorsHeaders(app);
+app.use(service.middleware.metricsMiddleware);
 app.use(bodyParser.json());
 
 app.get('/status', status.get);
