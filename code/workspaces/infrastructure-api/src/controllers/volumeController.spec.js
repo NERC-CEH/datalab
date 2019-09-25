@@ -9,18 +9,22 @@ jest.mock('../stacks/volumeManager');
 jest.mock('../dataaccess/dataStorageRepository');
 
 const createVolumeMock = jest.fn();
+const deleteVolumeMock = jest.fn();
 const listVolumeMock = jest.fn();
 volumeManager.createVolume = createVolumeMock;
+volumeManager.deleteVolume = deleteVolumeMock;
 volumeManager.listVolumes = listVolumeMock;
 
 const getAllProjectActiveMock = jest.fn();
 const getByIdMock = jest.fn();
 const addUsersMock = jest.fn();
 const removeUsersMock = jest.fn();
+const updateMock = jest.fn();
 dataStorageRepository.getAllProjectActive = getAllProjectActiveMock;
 dataStorageRepository.getById = getByIdMock;
 dataStorageRepository.addUsers = addUsersMock;
 dataStorageRepository.removeUsers = removeUsersMock;
+dataStorageRepository.update = updateMock;
 
 let request;
 
@@ -41,50 +45,76 @@ describe('Volume Controller', () => {
   describe('create volume', () => {
     beforeEach(() => validatedCreateRequest());
 
-    it('should process a valid request', () => {
+    it('should process a valid request', async () => {
       createVolumeMock.mockReturnValue(Promise.resolve());
       const response = httpMocks.createResponse();
 
-      return volumeController.createVolume(request, response)
-        .then(() => {
-          expect(response.statusCode)
-            .toBe(201);
-        });
+      await volumeController.createVolume(request, response);
+      expect(response.statusCode).toBe(201);
     });
 
-    it('should return 500 for failed request', () => {
+    it('should return 500 for failed request', async () => {
       createVolumeMock.mockReturnValue(Promise.reject({ message: 'error' }));
 
       const response = httpMocks.createResponse();
 
-      return volumeController.createVolume(request, response, next.handler)
-        .then(() => {
-          expect(next.getError().message)
-            .toEqual('Error creating volume: volumeName: error');
-        });
+      await volumeController.createVolume(request, response, next.handler);
+      expect(next.getError().message).toEqual('Error creating volume: volumeName: error');
     });
 
-    it('should validate the name field exists', () => {
+    it('should validate the projectKey field exists', async () => {
+      const requestBody = createRequestBody();
+      requestBody.projectKey = '';
+      await executeCreateValidator(requestBody);
+      expectValidationError('projectKey', 'projectKey must have content');
+    });
+
+    it('should validate the name field exists', async () => {
       const requestBody = createRequestBody();
       requestBody.name = '';
-      return executeValidator(requestBody)
-        .then(() => expectValidationError('name', 'Name must only use the characters a-z'));
+      await executeCreateValidator(requestBody);
+      expectValidationError('name', 'name must have content');
     });
 
-    it('should validate the name field is at least 4 characters', () => {
+    it('should validate the name field is at least 4 characters', async () => {
       const requestBody = createRequestBody();
       requestBody.name = 'abc';
-      return executeValidator(requestBody)
-        .then(() => expectValidationError('name', 'Name must be 4-12 characters long'));
+      await executeCreateValidator(requestBody);
+      expectValidationError('name', 'Name must be 4-12 characters long');
     });
 
-    it('should validate the volume size is greater than 5', () => {
+    it('should validate the volume size is greater than 5', async () => {
       const requestBody = createRequestBody();
       requestBody.volumeSize = 4;
-      return executeValidator(requestBody)
-        .then(() => {
-          expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
-        });
+      await executeCreateValidator(requestBody);
+      expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
+    });
+  });
+
+  describe('delete volume', () => {
+    beforeEach(() => validatedDeleteRequest());
+
+    it('should process a valid request', async () => {
+      deleteVolumeMock.mockReturnValue(Promise.resolve());
+      const response = httpMocks.createResponse();
+
+      await volumeController.deleteVolume(request, response);
+      expect(response.statusCode).toBe(204);
+    });
+
+    it('should return 500 for failed request', async () => {
+      deleteVolumeMock.mockReturnValue(Promise.reject({ message: 'error' }));
+      const response = httpMocks.createResponse();
+
+      await volumeController.deleteVolume(request, response, next.handler);
+      expect(next.getError().message).toEqual('Error deleting project: project99 volume: volumeName: error');
+    });
+
+    it('should validate the projectKey field exists', async () => {
+      const requestBody = createRequestBody();
+      requestBody.projectKey = '';
+      await executeDeleteValidator(requestBody);
+      expectValidationError('projectKey', 'projectKey must have content');
     });
   });
 
@@ -116,6 +146,13 @@ describe('Volume Controller', () => {
       await volumeController.getById(request, response);
       expect(response.statusCode).toBe(404);
     });
+
+    it('should validate the projectKey field exists', async () => {
+      const requestBody = createRequestBody();
+      requestBody.projectKey = '';
+      await executeIdValidator(requestBody);
+      expectValidationError('projectKey', 'projectKey must have content');
+    });
   });
 
   describe('add users to volume', () => {
@@ -136,6 +173,13 @@ describe('Volume Controller', () => {
 
       await volumeController.addUsers(request, response, next.handler);
       expect(next.getError().message).toEqual('Unable to add users to project project99 volume volumeName: error');
+    });
+
+    it('should validate the projectKey field exists', async () => {
+      const requestBody = createRequestBody();
+      requestBody.projectKey = '';
+      await executeUpdateUserValidator(requestBody);
+      expectValidationError('projectKey', 'projectKey must have content');
     });
   });
 
@@ -158,6 +202,13 @@ describe('Volume Controller', () => {
       await volumeController.removeUsers(request, response, next.handler);
       expect(next.getError().message).toEqual('Unable to remove users from project project99 volume volumeName: error');
     });
+
+    it('should validate the projectKey field exists', async () => {
+      const requestBody = createRequestBody();
+      requestBody.projectKey = '';
+      await executeUpdateUserValidator(requestBody);
+      expectValidationError('projectKey', 'projectKey must have content');
+    });
   });
 
   describe('list active volumes', () => {
@@ -169,16 +220,49 @@ describe('Volume Controller', () => {
       expect(response.statusCode).toBe(200);
       expect(response._getData()).toEqual(['volume']); // eslint-disable-line no-underscore-dangle
     });
+
+    it('should validate the projectKey field exists', async () => {
+      const requestBody = createRequestBody();
+      requestBody.projectKey = '';
+      await executeProjectKeyValidator(requestBody);
+      expectValidationError('projectKey', 'projectKey must have content');
+    });
   });
 
-  function executeValidator(body) {
-    request = httpMocks.createRequest({ method: 'GET', body });
+  function executeCreateValidator(body) {
+    request = httpMocks.createRequest({ method: 'POST', body });
     const response = httpMocks.createResponse();
     return volumeController.createVolumeValidator(request, response, () => { });
   }
 
+  function executeDeleteValidator(body) {
+    request = httpMocks.createRequest({ method: 'DELETE', body });
+    const response = httpMocks.createResponse();
+    return volumeController.deleteVolumeValidator(request, response, () => { });
+  }
+
+  function executeIdValidator(body) {
+    request = httpMocks.createRequest({ method: 'GET', body });
+    const response = httpMocks.createResponse();
+    return volumeController.getByIdValidator(request, response, () => { });
+  }
+
+  function executeUpdateUserValidator(body) {
+    request = httpMocks.createRequest({ method: 'PUT', body });
+    const response = httpMocks.createResponse();
+    return volumeController.updateVolumeUserValidator(request, response, () => { });
+  }
+
+  function executeProjectKeyValidator(body) {
+    request = httpMocks.createRequest({ method: 'GET', body });
+    const response = httpMocks.createResponse();
+    return volumeController.projectKeyValidator(request, response, () => { });
+  }
+
   function expectValidationError(fieldName, expectedMessage) {
-    expect(validationResult(request).mapped()[fieldName].msg).toEqual(expectedMessage);
+    const fieldNameResult = validationResult(request).mapped()[fieldName];
+    expect(fieldNameResult).toBeDefined();
+    expect(fieldNameResult.msg).toEqual(expectedMessage);
   }
 });
 
@@ -204,6 +288,18 @@ function validatedCreateRequest() {
   });
 
   return volumeController.createVolumeValidator(request, () => { }, () => { });
+}
+
+function validatedDeleteRequest() {
+  request = httpMocks.createRequest({
+    method: 'DELETE',
+    body: {
+      projectKey: 'project99',
+      name: 'volumeName',
+    },
+  });
+
+  return volumeController.deleteVolumeValidator(request, () => { }, () => { });
 }
 
 function validatedUpdateUserRequest() {

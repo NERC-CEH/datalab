@@ -3,6 +3,7 @@ import { check, matchedData } from 'express-validator';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import logger from '../config/logger';
+import { DELETED } from '../models/dataStorage.model';
 
 async function createVolume(request, response, next) {
   // Build request params
@@ -12,6 +13,7 @@ async function createVolume(request, response, next) {
   const { user } = request;
 
   try {
+    await dataStorageRepository.create(user, params);
     await volumeManager.createVolume(user, params);
     response.status(201);
     response.send({ message: 'OK' });
@@ -26,11 +28,13 @@ async function deleteVolume(request, response, next) {
 
   // Handle request
   try {
+    // Tag datastore as deleted but record will remain in db.
+    await dataStorageRepository.update(request.user, params.projectKey, params.name, { status: DELETED });
     await volumeManager.deleteVolume(params);
     response.status(204);
     response.send({ message: 'OK' });
   } catch (error) {
-    next(new Error(`Error deleting volume: ${params.name}: ${error.message}`));
+    next(new Error(`Error deleting project: ${params.projectKey} volume: ${params.name}: ${error.message}`));
   }
 }
 
@@ -87,56 +91,70 @@ async function removeUsers(request, response, next) {
   }
 }
 
-const getByIdValidator = service.middleware.validator([
-  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
-  check('id').exists().isMongoId().withMessage('id must be specified as a Mongo Id'),
+const existsCheck = fieldName => check(fieldName)
+  .exists()
+  .withMessage(`${fieldName} must be specified`)
+  .trim()
+  .isLength({ min: 1 })
+  .withMessage(`${fieldName} must have content`);
+
+const nameCheck = existsCheck('name')
+  .isAscii()
+  .withMessage('Name must only use the characters a-z')
+  .isLength({ min: 4, max: 12 })
+  .withMessage('Name must be 4-12 characters long');
+
+const projectKeyCheck = existsCheck('projectKey');
+
+const idCheck = existsCheck('id')
+  .isMongoId()
+  .withMessage('id must be specified as a Mongo Id');
+
+const projectKeyValidator = service.middleware.validator([
+  projectKeyCheck,
 ], logger);
 
-const actionWithProjectKeyValidator = () => service.middleware.validator([
-  check('projectKey').exists().withMessage('projectKey must be specified'.trim()),
+const getByIdValidator = service.middleware.validator([
+  projectKeyCheck,
+  idCheck,
 ], logger);
 
 const updateVolumeUserValidator = service.middleware.validator([
-  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
-  check('name').exists().withMessage('volume name must be specified').trim(),
+  projectKeyCheck,
+  nameCheck,
   check('userIds').exists().withMessage('userIds must be specified'),
-  check('userIds.*').exists().withMessage('userIds must be specified').trim(),
+  existsCheck('userIds.*'),
 ], logger);
 
-const coreVolumeValidator = [
-  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
-  check('name')
-    .exists()
-    .withMessage('Name must be specified')
-    .isAscii()
-    .withMessage('Name must only use the characters a-z')
-    .isLength({ min: 4, max: 12 })
-    .withMessage('Name must be 4-12 characters long')
-    .trim(),
-];
-
 const createVolumeValidator = service.middleware.validator([
-  ...coreVolumeValidator,
-  check('displayName').exists().withMessage('displayName must be specified').trim(),
-  check('description').exists().withMessage('description must be specified').trim(),
-  check('type')
-    .exists()
+  projectKeyCheck,
+  nameCheck,
+  existsCheck('displayName'),
+  existsCheck('description'),
+  existsCheck('type')
     .isInt({ min: 1, max: 1 })
-    .withMessage('type must be specified as a valid storage type')
-    .trim(),
-  check('volumeSize')
-    .exists()
-    .withMessage('Volume Size must be specified')
+    .withMessage('type must be specified as a valid storage type'),
+  existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
-    .withMessage('Volume Size must be an integer between 5 and 200')
-    .trim(),
+    .withMessage('Volume Size must be an integer between 5 and 200'),
+], logger);
+
+const deleteVolumeValidator = service.middleware.validator([
+  projectKeyCheck,
+  nameCheck,
+], logger);
+
+const queryVolumeValidator = service.middleware.validator([
+  projectKeyCheck,
+  nameCheck,
 ], logger);
 
 export default {
   getByIdValidator,
-  actionWithProjectKeyValidator,
-  coreVolumeValidator,
+  projectKeyValidator,
   createVolumeValidator,
+  deleteVolumeValidator,
+  queryVolumeValidator,
   updateVolumeUserValidator,
   createVolume,
   deleteVolume,

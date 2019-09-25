@@ -22,9 +22,3 @@ Object {
   "name": "Storage 1",
 }
 `;
-
-exports[`dataStorageRepository getByName returns expected snapshot 1`] = `
-Object {
-  "name": "Storage 1",
-}
-`;

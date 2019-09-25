@@ -40,25 +40,17 @@ describe('dataStorageRepository', () => {
 
   it('getById returns expected snapshot', () => dataStorageRepository.getById(user, 'project99', '599aa983bdd5430daedc8eec').then((storage) => {
     expect(mockDatabase().query()).toEqual({
-      projectKey,
       _id: '599aa983bdd5430daedc8eec',
       users: { $elemMatch: { $eq: 'username' } },
+      projectKey,
     });
     expect(storage).toMatchSnapshot();
   }));
 
-  it('getByName returns expected snapshot', () => dataStorageRepository.getByName(user, 'expectedName').then((storage) => {
-    expect(mockDatabase().query()).toEqual({
-      name: 'expectedName',
-      users: { $elemMatch: { $eq: 'username' } },
-    });
-    expect(storage).toMatchSnapshot();
-  }));
-
-  it('createOrUpdate should query for data store with same name', () => {
+  it('create should query for data store with same name', () => {
     const dataStore = { name: 'newVolume', type: 'nfs' };
 
-    return dataStorageRepository.createOrUpdate(user, dataStore)
+    return dataStorageRepository.create(user, dataStore)
       .then((createdDataStore) => {
         expect(mockDatabase().query()).toEqual({
           name: createdDataStore.name,
@@ -69,22 +61,17 @@ describe('dataStorageRepository', () => {
       });
   });
 
-  it('deleteByName should query for data store with same name', () => {
-    const name = 'oldVolume';
-
-    return dataStorageRepository.deleteByName(user, name)
-      .then(() => {
-        expect(mockDatabase().query()).toEqual({ name, users: { $elemMatch: { $eq: 'username' } } });
-      });
-  });
-
   it('update should use correct operators to overwrite fields', () => {
     const name = 'deletedVolume';
     const updateObject = { status: 'deleted' };
 
-    return dataStorageRepository.update(name, updateObject)
+    return dataStorageRepository.update(user, projectKey, name, updateObject)
       .then(() => {
-        expect(mockDatabase().query()).toEqual({ name });
+        expect(mockDatabase().query()).toEqual({
+          name,
+          users: { $elemMatch: { $eq: 'username' } },
+          projectKey,
+        });
         expect(mockDatabase().entity()).toEqual({
           $set: { status: 'deleted' },
         });
@@ -99,9 +86,9 @@ describe('dataStorageRepository', () => {
     return dataStorageRepository.addUsers(user, projectKey, name, userIds)
       .then(() => {
         expect(mockDatabase().query()).toEqual({
-          projectKey,
           name,
           users: { $elemMatch: { $eq: 'username' } },
+          projectKey,
         });
         expect(mockDatabase().entity()).toEqual({
           $addToSet: { users: { $each: userIds } },
@@ -117,9 +104,9 @@ describe('dataStorageRepository', () => {
     return dataStorageRepository.removeUsers(user, projectKey, name, userIds)
       .then(() => {
         expect(mockDatabase().query()).toEqual({
-          projectKey,
           name,
           users: { $elemMatch: { $eq: 'username' } },
+          projectKey,
         });
         expect(mockDatabase().entity()).toEqual({
           $pull: { users: { $in: userIds } },
