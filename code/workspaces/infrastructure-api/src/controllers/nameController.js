@@ -3,10 +3,10 @@ import stackRepository from '../dataaccess/stacksRepository';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 
 async function isUnique(request, response) {
-  const { name } = matchedData(request);
+  const { name, projectKey } = matchedData(request);
 
-  const stack = await stackRepository.getOneByName(request.user, name);
-  const volume = await dataStorageRepository.getAllByName(request.user, name);
+  const stack = await stackRepository.getOneByName(projectKey, request.user, name);
+  const volume = await dataStorageRepository.getAllByName(request.user, name); // needs to be updated
 
   if (stack || volume) {
     return response.send({ isUnique: false });

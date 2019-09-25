@@ -46,7 +46,7 @@ function getOneByName(projectKey, user, name) {
   // Searches All Users
   return Stack()
     .findOne({ name })
-    .filterByProject(projectKey)
+    .filterOneByProject(projectKey)
     .exec();
 }
 
@@ -72,10 +72,12 @@ function deleteStack(projectKey, user, stack) {
     .exec();
 }
 
+// Function is used by kube-water to update stacks status. This will require an
+// update when kube-water updated to handle projectKey.
 function updateStatus(stack) {
-  const { projectKey, name, type, status } = stack;
+  const { name, type, status } = stack;
   return Stack()
-    .where({ projectKey, name, type })
+    .where({ name, type })
     .updateOne({ status })
     .exec();
 }

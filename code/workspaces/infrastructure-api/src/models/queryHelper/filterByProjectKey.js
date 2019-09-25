@@ -2,4 +2,8 @@ function filterFind(projectKey) {
   return this.find({ projectKey: { $eq: projectKey } });
 }
 
-export default { filterFind };
+function filterFindOne(projectKey) {
+  return this.findOne({ projectKey: { $eq: projectKey } });
+}
+
+export default { filterFind, filterFindOne };

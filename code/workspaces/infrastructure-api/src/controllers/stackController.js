@@ -58,7 +58,7 @@ function createStackExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(params.projectKey, user, params)
+  return stackManager.createStack(user, params)
     .then(controllerHelper.sendSuccessfulCreation(response))
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
@@ -69,7 +69,7 @@ function deleteStackExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.deleteStack(params.projectKey, user, params)
+  return stackManager.deleteStack(user, params)
     .then(controllerHelper.sendSuccessfulDeletion(response))
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
@@ -91,7 +91,6 @@ const withNameValidator = [
 
 const deleteStackValidator = [
   ...withNameValidator,
-  checkExistsWithMsg('projectKey'),
   checkExistsWithMsg('datalabInfo.domain'),
   checkExistsWithMsg('datalabInfo.name'),
   checkExistsWithMsg('type'),

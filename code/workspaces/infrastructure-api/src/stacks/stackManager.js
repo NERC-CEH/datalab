@@ -16,7 +16,9 @@ function createStack(user, params) {
   logger.info(`Creating new ${type} stack with name: ${name} for project: ${projectKey}`);
   return stack.create(params)
     .then(response => stackRepository.createOrUpdate(
-      user, {
+      projectKey,
+      user,
+      {
         ...params,
         category: stack.category,
         status: REQUESTED,
@@ -38,7 +40,7 @@ function deleteStack(user, params) {
 
   logger.info(`Deleting stack ${name} for project: ${projectKey}`);
   return stack.delete(params)
-    .then(response => stackRepository.deleteStack(user, params)
+    .then(response => stackRepository.deleteStack(projectKey, user, params)
       .then(() => response));
 }
 

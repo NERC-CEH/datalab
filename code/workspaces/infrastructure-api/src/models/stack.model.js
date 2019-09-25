@@ -30,6 +30,7 @@ const StackSchema = new Schema({
 });
 
 StackSchema.query.filterByProject = byProjectKey.filterFind;
+StackSchema.query.filterOneByProject = byProjectKey.filterFindOne;
 StackSchema.query.filterByUser = byUser.filterFind;
 StackSchema.query.filterOneByUser = byUser.filterFindOne;
 mongoose.model('Stack', StackSchema);
