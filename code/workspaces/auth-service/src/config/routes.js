@@ -1,4 +1,3 @@
-import { service } from 'service-chassis';
 import auth from '../controllers/authorisation';
 import status from '../controllers/status';
 import userManagement, { getUserValidator } from '../controllers/userManagement';
@@ -7,7 +6,10 @@ import { cookieAuthMiddleware, tokenAuthMiddleware } from '../auth/authZeroAuthM
 import { permissionChecker, projectPermissionChecker } from '../auth/permissionCheckerMiddleware';
 import dtMW from '../auth/datalabsAuthMiddleware';
 
-const { errorWrapper: ew } = service.middleware;
+// Error wrapper function to allow controller functions to omit try/catch block
+const ew = fn => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
 
 function configureRoutes(app) {
   app.get('/status', status.status);

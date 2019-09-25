@@ -1,5 +1,5 @@
 import { check, param, matchedData } from 'express-validator';
-import { service } from 'service-chassis';
+import { service } from 'common';
 import projectsRepository from '../dataaccess/projectsRepository';
 import logger from '../config/logger';
 
