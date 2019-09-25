@@ -46,7 +46,7 @@ function getOneByNameExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackRepository.getOneByName(user, params.name)
+  return stackRepository.getOneByName(params.projectKey, user, params.name)
     .then(handleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching Name for', TYPE, undefined));
@@ -58,7 +58,7 @@ function createStackExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(user, params)
+  return stackManager.createStack(params.projectKey, user, params)
     .then(controllerHelper.sendSuccessfulCreation(response))
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
@@ -69,7 +69,7 @@ function deleteStackExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.deleteStack(user, params)
+  return stackManager.deleteStack(params.projectKey, user, params)
     .then(controllerHelper.sendSuccessfulDeletion(response))
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
@@ -81,6 +81,7 @@ const withIdValidator = [
 ];
 
 const withNameValidator = [
+  checkExistsWithMsg('projectKey'),
   checkExistsWithMsg('name')
     .isAscii()
     .withMessage('Name must only use the characters a-z')
