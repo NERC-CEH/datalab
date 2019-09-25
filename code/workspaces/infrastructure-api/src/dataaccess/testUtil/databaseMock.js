@@ -20,6 +20,10 @@ function createDatabaseMock(items, state = {}) {
       lastInvocation.projectKey = projectKey;
       return createDatabaseMock(items, lastInvocation)();
     },
+    filterOneByProject(projectKey) {
+      lastInvocation.projectKey = projectKey;
+      return createDatabaseMock(items, lastInvocation)();
+    },
     filterByUser({ sub }) {
       lastInvocation.user = sub;
       return createDatabaseMock(items, lastInvocation)();
