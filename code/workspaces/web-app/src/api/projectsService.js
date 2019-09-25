@@ -28,9 +28,7 @@ function loadProjectInfo(projectKey) {
 function createProject(project) {
   const mutation = `
     CreateProject($project: ProjectCreationRequest) {
-      createProject(project: $project) {
-        id, key, name, description, collaborationLink, accessible
-      }
+      createProject(project: $project) { id }
     }`;
 
   return gqlMutation(mutation, { project })

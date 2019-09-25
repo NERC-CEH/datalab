@@ -10,9 +10,7 @@ exports[`projectsService checkProjectKeyUniqueness should build the correct quer
 exports[`projectsService createProject should build the correct query and unpack the results 1`] = `
 "
     CreateProject($project: ProjectCreationRequest) {
-      createProject(project: $project) {
-        id, key, name, description, collaborationLink, accessible
-      }
+      createProject(project: $project) { id }
     }"
 `;
 

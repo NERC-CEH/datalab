@@ -96,7 +96,6 @@ class ProjectsContainer extends Component {
   }
 
   async onCreateProjectSubmit(project) {
-    console.log('project', project);
     this.props.actions.closeModalDialog();
     try {
       await this.props.actions.createProject(project);
