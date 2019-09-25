@@ -4,6 +4,8 @@ exports[`ProjectInfoContainer is a connected component which binds correct actio
 Array [
   "loadProjects",
   "loadProjectInfo",
+  "createProject",
+  "checkProjectKeyUniqueness",
 ]
 `;
 

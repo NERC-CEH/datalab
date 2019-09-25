@@ -72,6 +72,17 @@ async function deleteProjectByKey(request, response, next) {
   }
 }
 
+async function projectKeyIsUnique(request, response, next) {
+  const { projectKey } = matchedData(request);
+
+  try {
+    const exists = await projectsRepository.exists(projectKey);
+    response.send(!exists);
+  } catch (error) {
+    next(new Error(`Error checking project key uniqueness: ${error.message}`));
+  }
+}
+
 const actionWithKeyValidator = () => service.middleware.validator([
   check('projectKey').exists().withMessage("Project 'projectKey' must be specified in URL."),
 ], logger);
@@ -112,6 +123,7 @@ export default {
   createProject,
   createOrUpdateProject,
   deleteProjectByKey,
+  projectKeyIsUnique,
   actionWithKeyValidator,
   projectDocumentValidator,
   urlAndBodyProjectKeyMatchValidator,

@@ -47,6 +47,15 @@ describe('projectService', () => {
     expect(result).toEqual(testProject);
   });
 
+  it('isProjectKeyUnique makes an api call and returns response data', async () => {
+    const { key } = testProject;
+    httpMock.onGet(`${infraServiceUrl}/projects/${key}/isunique`)
+      .reply(200, true);
+
+    const result = await projectService.isProjectKeyUnique(key, token);
+    expect(result).toEqual(true);
+  });
+
   it('createProject makes an api call and returns the response data', async () => {
     const dummyResponse = { id: 'id', ...testProject };
     httpMock.onPost(`${infraServiceUrl}/projects`, testProject)

@@ -4,6 +4,10 @@ exports[`ProjectsContainer is a connected component which binds correct actions 
 Array [
   "loadProjects",
   "loadProjectInfo",
+  "createProject",
+  "checkProjectKeyUniqueness",
+  "openModalDialog",
+  "closeModalDialog",
 ]
 `;
 
@@ -13,7 +17,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
     Object {
       "fetching": false,
       "value": Object {
-        "projectsArray": Array [
+        "projectArray": Array [
           Object {
             "accessible": true,
             "description": "A project description",
@@ -26,6 +30,60 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
     }
   }
 >
-  <div />
+  <div>
+    <div
+      className="controlContainer"
+    >
+      <WithStyles(ForwardRef(TextField))
+        InputProps={
+          Object {
+            "inputProps": Object {
+              "style": Object {
+                "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                "color": "rgba(47, 62, 70, 1.0)",
+                "paddingBottom": "NaNpx",
+                "paddingLeft": "NaNpx",
+                "paddingRight": "NaNpx",
+                "paddingTop": "NaNpx",
+              },
+            },
+          }
+        }
+        autoFocus={true}
+        className="searchTextField"
+        id="search"
+        margin="dense"
+        onChange={[Function]}
+        placeholder="Filter projects..."
+        type="search"
+        value=""
+        variant="outlined"
+      />
+    </div>
+    <WithStyles(StackCards)
+      createPermission="system:instance:admin"
+      deletePermission=""
+      deleteStack={[Function]}
+      editPermission=""
+      openCreationForm={[Function]}
+      openPermission="project.open"
+      openStack={[Function]}
+      stacks={
+        Array [
+          Object {
+            "accessible": true,
+            "description": "A project description",
+            "displayName": "A project name",
+            "id": 123,
+            "key": "project2",
+            "status": "ready",
+            "type": "project",
+          },
+        ]
+      }
+      typeName="Project"
+      userPermissions={[Function]}
+    />
+  </div>
 </PromisedContentWrapper>
 `;

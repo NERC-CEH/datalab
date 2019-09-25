@@ -38,6 +38,9 @@ type Query {
 
     # Details of a single project
     project(projectKey: String!): Project
+
+    # Checks project key is unique
+    checkProjectKeyUniqueness(projectKey: String!): Boolean
 }
 
 # Root mutation methods for Datalabs.
