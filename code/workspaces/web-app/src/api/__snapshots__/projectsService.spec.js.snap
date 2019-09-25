@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`projectsService checkProjectKeyUniqueness should build the correct query and unpack the results 1`] = `
+"
+    CheckProjectKeyUniqueness($projectKey: String!) {
+      checkProjectKeyUniqueness(projectKey: $projectKey)
+    }"
+`;
+
+exports[`projectsService createProject should build the correct query and unpack the results 1`] = `
+"
+    CreateProject($project: ProjectCreationRequest) {
+      createProject(project: $project) {
+        id, key, name, description, collaborationLink, accessible
+      }
+    }"
+`;
+
 exports[`projectsService loadProjectInfo should build the correct query and unpack the results 1`] = `
 "
     LoadProjectInfo($projectKey: String!) {

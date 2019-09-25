@@ -6,7 +6,7 @@ import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
 const projectsPayload = {
-  projectsArray: [{
+  projectArray: [{
     id: 123,
     key: 'project2',
     name: 'A project name',
@@ -20,7 +20,7 @@ projectsService.loadProjects = loadProjectsMock;
 describe('ProjectsContainer', () => {
   describe('is a component which', () => {
     it('can filter projects', () => {
-      const stacks = projectsPayload.projectsArray.map(projectToStack);
+      const stacks = projectsPayload.projectArray.map(projectToStack);
       expect(stacks.length).toBe(1);
       const stack = stacks[0];
       expect(stackMatchesFilter(stack, '')).toBe(true);
@@ -101,6 +101,7 @@ describe('ProjectsContainer', () => {
       actions: {
         loadProjects: loadProjectsMock,
       },
+      classes: { controlContainer: 'controlContainer', searchTextField: 'searchTextField' },
     });
 
     beforeEach(() => jest.clearAllMocks());

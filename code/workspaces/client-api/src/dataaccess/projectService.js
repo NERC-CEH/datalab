@@ -15,6 +15,11 @@ async function getProjectByKey(projectKey, token) {
   return response.data;
 }
 
+async function isProjectKeyUnique(projectKey, token) {
+  const response = await axios.get(`${infraServiceUrl}/projects/${projectKey}/isunique`, generateOptions(token));
+  return response.data;
+}
+
 async function createProject(creationRequest, token) {
   const project = projectActionRequestToProject(creationRequest);
   const response = await axios.post(`${infraServiceUrl}/projects`, project, generateOptions(token));
@@ -64,6 +69,7 @@ export function projectActionRequestToProject(actionRequest) {
 export default {
   listProjects,
   getProjectByKey,
+  isProjectKeyUnique,
   createProject,
   updateProject,
   deleteProject,

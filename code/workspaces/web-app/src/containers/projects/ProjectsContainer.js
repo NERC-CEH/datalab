@@ -5,18 +5,26 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import { permissionTypes } from 'common';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
+import modalDialogActions from '../../actions/modalDialogActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
+import { MODAL_TYPE_CREATE_PROJECT } from '../../constants/modaltypes';
+import notify from '../../components/common/notify';
 
 const TYPE_NAME = 'Project';
 const PROJECT_OPEN_PERMISSION = 'project.open';
 
-const styles = () => ({
+const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
+
+const styles = styleTheme => ({
   controlContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
+    marginBottom: styleTheme.spacing(2),
   },
   searchTextField: {
     flexBasis: '40%',
@@ -59,6 +67,9 @@ class ProjectsContainer extends Component {
       searchText: '',
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.onCreateProjectSubmit = this.onCreateProjectSubmit.bind(this);
+    this.openCreationForm = this.openCreationForm.bind(this);
+    this.projectUserPermissions = this.projectUserPermissions.bind(this);
   }
 
   handleSearchTextChange(event) {
@@ -79,7 +90,32 @@ class ProjectsContainer extends Component {
   }
 
   projectUserPermissions(project) {
-    return project && project.accessible ? [PROJECT_OPEN_PERMISSION] : [];
+    return (project && project.accessible) || this.props.userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
+      ? [PROJECT_OPEN_PERMISSION]
+      : [];
+  }
+
+  async onCreateProjectSubmit(project) {
+    console.log('project', project);
+    this.props.actions.closeModalDialog();
+    try {
+      await this.props.actions.createProject(project);
+      notify.success(`${TYPE_NAME} created`);
+    } catch (error) {
+      notify.error(`Unable to create ${TYPE_NAME}`);
+    } finally {
+      await this.props.actions.loadProjects();
+    }
+  }
+
+  openCreationForm() {
+    this.props.actions.openModalDialog(
+      MODAL_TYPE_CREATE_PROJECT,
+      {
+        onSubmit: this.onCreateProjectSubmit,
+        onCancel: this.props.actions.closeModalDialog,
+      },
+    );
   }
 
   renderControls() {
@@ -103,25 +139,26 @@ class ProjectsContainer extends Component {
   }
 
   render() {
+    const { projects, history } = this.props;
     return (
-      <PromisedContentWrapper promise={this.props.projects}>
-        {this.props.projects.value.projectArray ? (
+      <PromisedContentWrapper promise={projects}>
+        {projects.value.projectArray ? (
           <div>
             {this.renderControls()}
             <StackCards
               stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
               typeName={TYPE_NAME}
-              openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
+              openStack={project => history.push(`/projects/${project.key}/info`)}
               deleteStack={() => { }}
-              openCreationForm={() => { }}
-              userPermissions={project => this.projectUserPermissions(project)}
-              createPermission=""
+              openCreationForm={this.openCreationForm}
+              userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
+              createPermission={SYSTEM_INSTANCE_ADMIN}
               openPermission={PROJECT_OPEN_PERMISSION}
               deletePermission=""
               editPermission=""
             />
           </div>
-        ) : (<div />)}
+        ) : <Typography variant="body1">There are no projects to display.</Typography>}
       </PromisedContentWrapper>
     );
   }
@@ -147,6 +184,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       ...projectActions,
+      ...modalDialogActions,
     }, dispatch),
   };
 }

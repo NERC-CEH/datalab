@@ -184,6 +184,28 @@ describe('deleteProjectByKey', () => {
   });
 });
 
+describe('projectKeyIsUnique', () => {
+  const requestMock = { projectKey: 'projectKey' };
+
+  it('returns true when project with key does not exist', async () => {
+    projectsRepository.exists = jest.fn(() => false);
+    await projectsController.projectKeyIsUnique(requestMock, responseMock, nextMock);
+    expectToBeCalledOnceWith(responseMock.send, true);
+  });
+
+  it('returns false when project with key exists', async () => {
+    projectsRepository.exists = jest.fn(() => true);
+    await projectsController.projectKeyIsUnique(requestMock, responseMock, nextMock);
+    expectToBeCalledOnceWith(responseMock.send, false);
+  });
+
+  it('calls next with an error if error thrown while checking existence and does not call send', async () => {
+    projectsRepository.exists = throwErrorMock;
+    await projectsController.projectKeyIsUnique(requestMock, responseMock, nextMock);
+    checkNextCalledWithErrorAndSendNotCalled(nextMock, responseMock);
+  });
+});
+
 function expectToBeCalledOnceWith(mockFn, ...args) {
   expect(mockFn).toBeCalledTimes(1);
   expect(mockFn).toBeCalledWith(...args);
