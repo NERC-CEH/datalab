@@ -84,8 +84,10 @@ const projectDocumentValidator = () => service.middleware.validator([
     .withMessage("'key' must be specified in request body.")
     .isLength({ min: 2, max: 8 })
     .withMessage("'key' must be 2-8 characters in length.")
-    .matches(/^[a-z0-9-]+$/)
-    .withMessage("'key' can only contain lowercase alphanumeric characters and hyphens '-' (must match regex '^[a-z0-9-]+$')")
+    .isAlpha()
+    .withMessage("'key' can only contain letters.")
+    .isLowercase()
+    .withMessage("Letters in 'key' must be lowercase.")
     .trim(),
   check('name')
     .exists()
