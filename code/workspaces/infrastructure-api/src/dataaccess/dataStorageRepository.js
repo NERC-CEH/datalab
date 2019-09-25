@@ -22,12 +22,7 @@ function getById({ sub }, projectKey, id) {
   return DataStorage().findOne(query).exec();
 }
 
-function getByName({ sub }, name) {
-  const query = filterByUser(sub, { name });
-  return DataStorage().findOne(query).exec();
-}
-
-function createOrUpdate({ sub }, requestedDataStore) {
+function create({ sub }, requestedDataStore) {
   const query = filterByUser(sub, { name: requestedDataStore.name });
   const dataStore = {
     ...requestedDataStore,
@@ -37,16 +32,12 @@ function createOrUpdate({ sub }, requestedDataStore) {
   return DataStorage().findOneAndUpdate(query, dataStore, { upsert: true, setDefaultsOnInsert: true }).exec();
 }
 
-function deleteByName({ sub }, name) {
-  const query = filterByUser(sub, { name });
-  return DataStorage().remove(query).exec();
-}
-
-function update(name, updatedValues) {
+function update({ sub }, projectKey, name, updatedValues) {
+  const query = filterByUserAndProject(sub, projectKey, { name });
   const updateObj = {
     $set: updatedValues,
   };
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false }).exec();
+  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false }).exec();
 }
 
 function addUsers({ sub }, projectKey, name, userIds) {
@@ -85,4 +76,4 @@ const createStorageUrls = requestedDataStore => ({
   internalEndpoint: `http://minio-${requestedDataStore.name}/minio`,
 });
 
-export default { getAllProjectActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers };
+export default { getAllProjectActive, getAllByName, getById, create, update, addUsers, removeUsers };
