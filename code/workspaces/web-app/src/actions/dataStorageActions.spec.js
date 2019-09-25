@@ -25,10 +25,11 @@ describe('dataStorageActions', () => {
       dataStorageService.loadDataStorage = loadDataStorageMock;
 
       // Act
-      const output = dataStorageActions.loadDataStorage();
+      const output = dataStorageActions.loadDataStorage('project99');
 
       // Assert
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
+      expect(loadDataStorageMock).toHaveBeenCalledWith('project99');
       expect(output.type).toBe('LOAD_DATASTORAGE');
       expect(output.payload).toBe('expectedDataStoragePayload');
     });
@@ -39,11 +40,11 @@ describe('dataStorageActions', () => {
       dataStorageService.getCredentials = getCredentialsMock;
 
       // Act
-      const output = dataStorageActions.getCredentials(123);
+      const output = dataStorageActions.getCredentials('project99', 123);
 
       // Assert
       expect(getCredentialsMock).toHaveBeenCalledTimes(1);
-      expect(getCredentialsMock).toHaveBeenCalledWith(123);
+      expect(getCredentialsMock).toHaveBeenCalledWith('project99', 123);
       expect(output.type).toBe('GET_DATASTORE_CREDENTIALS');
       expect(output.payload).toBe('expectedDataStorePayload');
     });
@@ -69,11 +70,11 @@ describe('dataStorageActions', () => {
       dataStorageService.createDataStore = createDataStoreMock;
 
       // Act
-      const output = dataStorageActions.createDataStore(dataStore);
+      const output = dataStorageActions.createDataStore('project99', dataStore);
 
       // Assert
       expect(createDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(createDataStoreMock).toHaveBeenCalledWith(dataStore);
+      expect(createDataStoreMock).toHaveBeenCalledWith('project99', dataStore);
       expect(output.type).toBe(CREATE_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedCreationPayload');
     });
@@ -84,11 +85,11 @@ describe('dataStorageActions', () => {
       dataStorageService.deleteDataStore = deleteDataStoreMock;
 
       // Act
-      const output = dataStorageActions.deleteDataStore(dataStore);
+      const output = dataStorageActions.deleteDataStore('project99', dataStore);
 
       // Assert
       expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(deleteDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name });
+      expect(deleteDataStoreMock).toHaveBeenCalledWith('project99', { name: dataStore.name });
       expect(output.type).toBe(DELETE_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedDeletionPayload');
     });
@@ -99,11 +100,11 @@ describe('dataStorageActions', () => {
       dataStorageService.addUserToDataStore = addUserToDataStoreMock;
 
       // Act
-      const output = dataStorageActions.addUserToDataStore(dataStore);
+      const output = dataStorageActions.addUserToDataStore('project99', dataStore);
 
       // Assert
       expect(addUserToDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(addUserToDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name, users: dataStore.users });
+      expect(addUserToDataStoreMock).toHaveBeenCalledWith('project99', { name: dataStore.name, users: dataStore.users });
       expect(output.type).toBe(ADD_USER_TO_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedPayload');
     });
@@ -114,11 +115,11 @@ describe('dataStorageActions', () => {
       dataStorageService.removeUserFromDataStore = removeUserFromDataStoreMock;
 
       // Act
-      const output = dataStorageActions.removeUserFromDataStore(dataStore);
+      const output = dataStorageActions.removeUserFromDataStore('project99', dataStore);
 
       // Assert
       expect(removeUserFromDataStoreMock).toHaveBeenCalledTimes(1);
-      expect(removeUserFromDataStoreMock).toHaveBeenCalledWith({ name: dataStore.name, users: dataStore.users });
+      expect(removeUserFromDataStoreMock).toHaveBeenCalledWith('project99', { name: dataStore.name, users: dataStore.users });
       expect(output.type).toBe(REMOVE_USER_FROM_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedPayload');
     });

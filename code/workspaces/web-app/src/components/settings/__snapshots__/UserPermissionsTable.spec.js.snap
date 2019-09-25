@@ -127,6 +127,7 @@ Array [
     dispatch={[MockFunction]}
     index={0}
     isCurrentUser={true}
+    key="row-admin-user-id"
     project="project"
     setRemoveUserDialogState={[MockFunction]}
     user={
@@ -149,12 +150,14 @@ Array [
     dispatch={[MockFunction]}
     index={1}
     isCurrentUser={false}
+    key="row-user-user-id"
     project="project"
     setRemoveUserDialogState={[MockFunction]}
     user={
       Object {
         "name": "user name",
         "role": "user",
+        "userId": "user-user-id",
       }
     }
   />,
@@ -170,12 +173,14 @@ Array [
     dispatch={[MockFunction]}
     index={2}
     isCurrentUser={false}
+    key="row-viewer-user-id"
     project="project"
     setRemoveUserDialogState={[MockFunction]}
     user={
       Object {
         "name": "viewer name",
         "role": "viewer",
+        "userId": "viewer-user-id",
       }
     }
   />,

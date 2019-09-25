@@ -1,75 +1,75 @@
 import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-function loadDataStorage() {
+function loadDataStorage(projectKey) {
   const query = `
-    DataStorage {
-      dataStorage {
+    DataStorage($projectKey: String!) {
+      dataStorage(projectKey: $projectKey) {
          id, name, displayName, description, type, stacksMountingStore { id }, status, users
       }
     }`;
 
-  return gqlQuery(query)
+  return gqlQuery(query, { projectKey })
     .then(errorHandler('data.dataStorage', 'users'));
 }
 
-function getCredentials(id) {
+function getCredentials(projectKey, id) {
   const query = `
-    GetCredentials($id: ID!) {
-      dataStore(id: $id) {
+    GetCredentials($projectKey: String!, $id: ID!) {
+      dataStore(projectKey: $projectKey, id: $id) {
         url, accessKey
       }
     }`;
 
-  return gqlQuery(query, { id })
+  return gqlQuery(query, { projectKey, id })
     .then(errorHandler('data.dataStore'));
 }
 
-function createDataStore(dataStore) {
+function createDataStore(projectKey, dataStore) {
   const mutation = `
-    CreateDataStore($dataStore:  DataStorageCreationRequest) {
-      createDataStore(dataStore: $dataStore) {
+    CreateDataStore($projectKey: String!, $dataStore:  DataStorageCreationRequest) {
+      createDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 
-function deleteDataStore(dataStore) {
+function deleteDataStore(projectKey, dataStore) {
   const mutation = `
-    DeleteDataStore($dataStore: DataStorageUpdateRequest) {
-      deleteDataStore(dataStore: $dataStore) {
+    DeleteDataStore($projectKey: String!, $dataStore: DataStorageUpdateRequest) {
+      deleteDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 
-function addUserToDataStore(dataStore) {
+function addUserToDataStore(projectKey, dataStore) {
   const mutation = `
-    AddUserToDataStore($dataStore:  DataStorageUpdateRequest) {
-      addUserToDataStore(dataStore: $dataStore) {
+    AddUserToDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      addUserToDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 
-function removeUserFromDataStore(dataStore) {
+function removeUserFromDataStore(projectKey, dataStore) {
   const mutation = `
-    RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
-      removeUserFromDataStore(dataStore: $dataStore) {
+    RemoveUserFromDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      removeUserFromDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }`;
 
-  return gqlMutation(mutation, { dataStore })
+  return gqlMutation(mutation, { projectKey, dataStore })
     .then(errorHandler('data.dataStorage'));
 }
 

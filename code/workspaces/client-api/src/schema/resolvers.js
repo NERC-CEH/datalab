@@ -26,8 +26,8 @@ const PROJECT_KEY = 'project';
 const resolvers = {
   Query: {
     status: () => () => `GraphQL server is running version: ${version}`,
-    dataStorage: (obj, args, { user, token }) => permissionChecker(STORAGE_LIST, user, () => storageService.getAllActive(token)),
-    dataStore: (obj, { id }, { user, token }) => permissionChecker(STORAGE_OPEN, user, () => storageService.getById(id, token)),
+    dataStorage: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_LIST, user, () => storageService.getAllProjectActive(args.projectKey, token)),
+    dataStore: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_OPEN, user, () => storageService.getById(args.projectKey, args.id, token)),
     stack: (obj, { id }, { user, token }) => permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
     stacks: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
     stacksByCategory: (obj, { category }, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
@@ -43,17 +43,17 @@ const resolvers = {
   Mutation: {
     createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
     deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
-    createDataStore: (obj, { dataStore }, { user, token }) => (
-      permissionChecker(STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
+    createDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
-    deleteDataStore: (obj, { dataStore }, { user, token }) => (
-      permissionChecker(STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: PROJECT_KEY, ...dataStore }, token))
+    deleteDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_DELETE, user, () => storageService.deleteVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
-    addUserToDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
-      permissionChecker(STORAGE_EDIT, user, () => storageService.addUsers(name, users, token))
+    addUserToDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.addUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
-    removeUserFromDataStore: (obj, { dataStore: { name, users } }, { user, token }) => (
-      permissionChecker(STORAGE_EDIT, user, () => storageService.removeUsers(name, users, token))
+    removeUserFromDataStore: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.removeUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
       permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))

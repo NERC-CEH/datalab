@@ -41,17 +41,17 @@ class DataStorageContainer extends Component {
     return !isFetching;
   }
 
-  openDataStore = dataStore => this.props.actions.getCredentials(dataStore.id)
+  openDataStore = dataStore => this.props.actions.getCredentials(this.props.projectKey, dataStore.id)
     .then(payload => pick(payload.value, ['url', 'accessKey']))
     .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
     .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
 
   createDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.createDataStore(dataStore))
+    .then(() => this.props.actions.createDataStore(this.props.projectKey, dataStore))
     .then(() => this.props.actions.resetForm())
     .then(() => notify.success(`${TYPE_NAME} created`))
     .catch(err => notify.error(`Unable to create ${TYPE_NAME}`))
-    .finally(() => this.props.actions.loadDataStorage());
+    .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
 
   openCreationForm = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_DATA_STORE, {
     title: `Create a ${TYPE_NAME}`,
@@ -60,10 +60,10 @@ class DataStorageContainer extends Component {
   });
 
   deleteDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.deleteDataStore(dataStore))
+    .then(() => this.props.actions.deleteDataStore(this.props.projectKey, dataStore))
     .then(() => notify.success(`${TYPE_NAME} deleted`))
     .catch(err => notify.error(`Unable to delete ${TYPE_NAME}`))
-    .finally(() => this.props.actions.loadDataStorage());
+    .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
 
   confirmDeleteDataStore = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
     title: `Delete ${dataStore.displayName} ${TYPE_NAME}`,
@@ -94,13 +94,14 @@ class DataStorageContainer extends Component {
   editDataStore = ({ displayName, id }) => this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
     title: `Edit Data Store: ${displayName}`,
     onCancel: this.props.actions.closeModalDialog,
+    projectKey: this.props.projectKey,
     dataStoreId: id,
     userKeysMapping: { name: 'label', userId: 'value' },
   });
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadDataStorage()
+    this.props.actions.loadDataStorage(this.props.projectKey)
       .catch((() => {}));
   }
 
@@ -131,6 +132,7 @@ DataStorageContainer.propTypes = {
     fetching: PropTypes.bool.isRequired,
     value: PropTypes.array.isRequired,
   }).isRequired,
+  projectKey: PropTypes.string.isRequired,
   actions: PropTypes.shape({
     loadDataStorage: PropTypes.func.isRequired,
     getCredentials: PropTypes.func.isRequired,

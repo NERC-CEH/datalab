@@ -48,15 +48,16 @@ async function listVolumes(request, response) {
   response.send(volumes);
 }
 
-async function listActiveVolumes(request, response) {
-  const volumes = await dataStorageRepository.getAllActive(request.user);
+async function listProjectActiveVolumes(request, response) {
+  const { projectKey } = matchedData(request);
+  const volumes = await dataStorageRepository.getAllProjectActive(request.user, projectKey);
   response.send(volumes);
 }
 
 async function getById(request, response) {
-  const { id } = matchedData(request);
+  const { projectKey, id } = matchedData(request);
 
-  const volume = await dataStorageRepository.getById(request.user, id);
+  const volume = await dataStorageRepository.getById(request.user, projectKey, id);
   if (volume) {
     response.send(volume);
   } else {
@@ -65,32 +66,38 @@ async function getById(request, response) {
 }
 
 async function addUsers(request, response, next) {
-  const { name, userIds } = matchedData(request);
+  const { projectKey, name, userIds } = matchedData(request);
 
   try {
-    const volume = await dataStorageRepository.addUsers(name, userIds);
+    const volume = await dataStorageRepository.addUsers(request.user, projectKey, name, userIds);
     response.send(volume);
   } catch (error) {
-    next(new Error(`Unable to add users to volume ${name}: ${error.message}`));
+    next(new Error(`Unable to add users to project ${projectKey} volume ${name}: ${error.message}`));
   }
 }
 
 async function removeUsers(request, response, next) {
-  const { name, userIds } = matchedData(request);
+  const { projectKey, name, userIds } = matchedData(request);
 
   try {
-    const volume = await dataStorageRepository.removeUsers(name, userIds);
+    const volume = await dataStorageRepository.removeUsers(request.user, projectKey, name, userIds);
     response.send(volume);
   } catch (error) {
-    next(new Error(`Unable to remove users from volume ${name}: ${error.message}`));
+    next(new Error(`Unable to remove users from project ${projectKey} volume ${name}: ${error.message}`));
   }
 }
 
 const getByIdValidator = service.middleware.validator([
+  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
   check('id').exists().isMongoId().withMessage('id must be specified as a Mongo Id'),
 ], logger);
 
+const actionWithProjectKeyValidator = () => service.middleware.validator([
+  check('projectKey').exists().withMessage('projectKey must be specified'.trim()),
+], logger);
+
 const updateVolumeUserValidator = service.middleware.validator([
+  check('projectKey').exists().withMessage('projectKey must be specified').trim(),
   check('name').exists().withMessage('volume name must be specified').trim(),
   check('userIds').exists().withMessage('userIds must be specified'),
   check('userIds.*').exists().withMessage('userIds must be specified').trim(),
@@ -127,6 +134,7 @@ const createVolumeValidator = service.middleware.validator([
 
 export default {
   getByIdValidator,
+  actionWithProjectKeyValidator,
   coreVolumeValidator,
   createVolumeValidator,
   updateVolumeUserValidator,
@@ -135,7 +143,7 @@ export default {
   queryVolume,
   listVolumes,
   getById,
-  listActiveVolumes,
+  listProjectActiveVolumes,
   addUsers,
   removeUsers,
 };

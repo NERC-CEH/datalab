@@ -6,9 +6,9 @@ function DataStorage() {
   return database.getModel('DataStorage');
 }
 
-function getAllActive({ sub }) {
+function getAllProjectActive({ sub }, projectKey) {
   // Exclude records tagged as deleted
-  const query = filterByUser(sub, { status: { $ne: DELETED } });
+  const query = filterByUserAndProject(sub, projectKey, { status: { $ne: DELETED } });
   return DataStorage().find(query).exec();
 }
 
@@ -17,8 +17,8 @@ function getAllByName(_, name) { // user, name
   return DataStorage().findOne({ name }).exec();
 }
 
-function getById({ sub }, id) {
-  const query = filterByUser(sub, { _id: id });
+function getById({ sub }, projectKey, id) {
+  const query = filterByUserAndProject(sub, projectKey, { _id: id });
   return DataStorage().findOne(query).exec();
 }
 
@@ -49,19 +49,27 @@ function update(name, updatedValues) {
   return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false }).exec();
 }
 
-function addUsers(name, userIds) { // user, name, userId
+function addUsers({ sub }, projectKey, name, userIds) {
+  const query = filterByUserAndProject(sub, projectKey, { name });
   const updateObj = setUsers(userIds);
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false, new: true }).exec();
+  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false, new: true }).exec();
 }
 
-function removeUsers(name, userIds) { // user, name, userId
+function removeUsers({ sub }, projectKey, name, userIds) {
+  const query = filterByUserAndProject(sub, projectKey, { name });
   const updateObj = unsetUsers(userIds);
-  return DataStorage().findOneAndUpdate({ name }, updateObj, { upsert: false, new: true }).exec();
+  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false, new: true }).exec();
 }
 
 const filterByUser = (userId, findQuery) => ({
   ...findQuery,
   users: { $elemMatch: { $eq: userId } },
+});
+
+const filterByUserAndProject = (userId, projectKey, findQuery) => ({
+  ...findQuery,
+  users: { $elemMatch: { $eq: userId } },
+  projectKey,
 });
 
 const setUsers = userIds => ({
@@ -77,4 +85,4 @@ const createStorageUrls = requestedDataStore => ({
   internalEndpoint: `http://minio-${requestedDataStore.name}/minio`,
 });
 
-export default { getAllActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers };
+export default { getAllProjectActive, getAllByName, getById, getByName, createOrUpdate, deleteByName, update, addUsers, removeUsers };

@@ -16,6 +16,7 @@ describe('DataStorageContainer', () => {
         PrivateComponent: () => {},
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
+        projectKey: 'project99',
       };
 
       return shallow(<DataStorageContainer {...props} />).find('DataStorageContainer');
@@ -60,7 +61,7 @@ describe('DataStorageContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadDataStorage();
+      output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -84,6 +85,7 @@ describe('DataStorageContainer', () => {
     const generateProps = () => ({
       dataStorage,
       userPermissions: ['expectedPermission'],
+      projectKey: 'project99',
       actions: {
         loadDataStorage: loadDataStorageMock,
         getCredentials: getCredentialsMock,
@@ -130,7 +132,7 @@ describe('DataStorageContainer', () => {
       return openStack({ id: 1000 })
         .then(() => {
           expect(getCredentialsMock).toHaveBeenCalledTimes(1);
-          expect(getCredentialsMock).toHaveBeenCalledWith(1000);
+          expect(getCredentialsMock).toHaveBeenCalledWith('project99', 1000);
           expect(openMinioDataStoreMock).toHaveBeenCalledTimes(1);
           expect(openMinioDataStoreMock).toHaveBeenCalledWith('expectedUrl', 'expectedKey');
         });
@@ -216,7 +218,7 @@ describe('DataStorageContainer', () => {
       return onSubmit()
         .then(() => {
           expect(deleteDataStoreMock).toHaveBeenCalledTimes(1);
-          expect(deleteDataStoreMock).toHaveBeenCalledWith(stack);
+          expect(deleteDataStoreMock).toHaveBeenCalledWith('project99', stack);
         });
     });
 
@@ -271,7 +273,7 @@ describe('DataStorageContainer', () => {
       return onSubmit(stack)
         .then(() => {
           expect(createDataStoreMock).toHaveBeenCalledTimes(1);
-          expect(createDataStoreMock).toHaveBeenCalledWith(stack);
+          expect(createDataStoreMock).toHaveBeenCalledWith('project99', stack);
           expect(resetFormMock).toHaveBeenCalledTimes(1);
         });
     });

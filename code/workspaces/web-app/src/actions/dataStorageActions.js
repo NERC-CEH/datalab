@@ -9,14 +9,14 @@ export const DELETE_DATASTORE_ACTION = 'DELETE_DATASTORE';
 export const ADD_USER_TO_DATASTORE_ACTION = 'ADD_USER_TO_DATASTORE';
 export const REMOVE_USER_FROM_DATASTORE_ACTION = 'REMOVE_USER_FROM_DATASTORE';
 
-const loadDataStorage = () => ({
+const loadDataStorage = projectKey => ({
   type: LOAD_DATASTORAGE_ACTION,
-  payload: dataStorageService.loadDataStorage(),
+  payload: dataStorageService.loadDataStorage(projectKey),
 });
 
-const getCredentials = id => ({
+const getCredentials = (projectKey, id) => ({
   type: GET_DATASTORE_CREDENTIALS_ACTION,
-  payload: dataStorageService.getCredentials(id),
+  payload: dataStorageService.getCredentials(projectKey, id),
 });
 
 const openMinioDataStore = (storageUrl, token) => ({
@@ -24,24 +24,24 @@ const openMinioDataStore = (storageUrl, token) => ({
   payload: minioService.openStorage(storageUrl, token),
 });
 
-const createDataStore = dataStore => ({
+const createDataStore = (projectKey, dataStore) => ({
   type: CREATE_DATASTORE_ACTION,
-  payload: dataStorageService.createDataStore(dataStore),
+  payload: dataStorageService.createDataStore(projectKey, dataStore),
 });
 
-const deleteDataStore = ({ name }) => ({
+const deleteDataStore = (projectKey, { name }) => ({
   type: DELETE_DATASTORE_ACTION,
-  payload: dataStorageService.deleteDataStore({ name }),
+  payload: dataStorageService.deleteDataStore(projectKey, { name }),
 });
 
-const addUserToDataStore = ({ name, users }) => ({
+const addUserToDataStore = (projectKey, { name, users }) => ({
   type: ADD_USER_TO_DATASTORE_ACTION,
-  payload: dataStorageService.addUserToDataStore({ name, users }),
+  payload: dataStorageService.addUserToDataStore(projectKey, { name, users }),
 });
 
-const removeUserFromDataStore = ({ name, users }) => ({
+const removeUserFromDataStore = (projectKey, { name, users }) => ({
   type: REMOVE_USER_FROM_DATASTORE_ACTION,
-  payload: dataStorageService.removeUserFromDataStore({ name, users }),
+  payload: dataStorageService.removeUserFromDataStore(projectKey, { name, users }),
 });
 
 export default {

@@ -10,124 +10,142 @@ describe('dataStorageService', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ dataStorage: 'expectedValue' });
 
-      return dataStorageService.loadDataStorage().then((response) => {
+      dataStorageService.loadDataStorage('project99').then((response) => {
         expect(response).toEqual('expectedValue');
         expect(mockClient.lastQuery()).toMatchSnapshot();
       });
     });
 
-    it('should throw an error if the query fails', () => {
+    it('should throw an error if the query fails', async () => {
       mockClient.prepareFailure('error');
-
-      return dataStorageService.loadDataStorage().catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.loadDataStorage('project99');
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 
   describe('getCredentials', () => {
     it('should build the correct query and return the minio credentials', () => {
       const data = { dataStore: { url: 'expectedUrl', accessKey: 'expectedKey' } };
-      const queryParams = { id: 'idValue' };
+      const queryParams = { projectKey: 'project99', id: 'idValue' };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.getCredentials(queryParams.id).then((response) => {
+      dataStorageService.getCredentials(queryParams.projectKey, queryParams.id).then((response) => {
         expect(response).toEqual(data.dataStore);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(queryParams);
       });
     });
 
-    it('should throw an error if the query fails', () => {
+    it('should throw an error if the query fails', async () => {
       mockClient.prepareFailure('error');
-
-      return dataStorageService.getCredentials().catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.getCredentials();
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 
   describe('createDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name' } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name' } };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.createDataStore(data.dataStore).then((response) => {
+      dataStorageService.createDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
-    it('should throw an error if the mutation fails', () => {
-      const data = { dataStore: { name: 'name' } };
+    it('should throw an error if the mutation fails', async () => {
+      const data = { projectKey: 'project99', dataStore: { name: 'name' } };
       mockClient.prepareFailure('error');
-
-      return dataStorageService.createDataStore(data.dataStore).catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.createDataStore(data.projectKey, data.dataStore);
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 
   describe('deleteDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name' } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name' } };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.deleteDataStore(data.dataStore).then((response) => {
+      dataStorageService.deleteDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
-    it('should throw an error if the mutation fails', () => {
-      const data = { dataStore: { name: 'name' } };
+    it('should throw an error if the mutation fails', async () => {
+      const data = { projectKey: 'project99', dataStore: { name: 'name' } };
       mockClient.prepareFailure('error');
-
-      return dataStorageService.deleteDataStore(data.dataStore).catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.deleteDataStore(data.projectKey, data.dataStore);
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 
   describe('addUserToDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.addUserToDataStore(data.dataStore).then((response) => {
+      dataStorageService.addUserToDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
-    it('should throw an error if the mutation fails', () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+    it('should throw an error if the mutation fails', async () => {
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareFailure('error');
-
-      return dataStorageService.addUserToDataStore(data.dataStore).catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.addUserToDataStore(data.projectKey, data.dataStore);
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 
   describe('removeUserFromDataStore', () => {
     it('should build the correct correct mutation and unpack the results', () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareSuccess(data);
 
-      return dataStorageService.removeUserFromDataStore(data.dataStore).then((response) => {
+      dataStorageService.removeUserFromDataStore(data.projectKey, data.dataStore).then((response) => {
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
       });
     });
 
-    it('should throw an error if the mutation fails', () => {
-      const data = { dataStore: { name: 'name', user: ['userId'] } };
+    it('should throw an error if the mutation fails', async () => {
+      const data = { projectKey: 'project99', dataStore: { name: 'name', user: ['userId'] } };
       mockClient.prepareFailure('error');
-
-      return dataStorageService.removeUserFromDataStore(data.dataStore).catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      let error;
+      try {
+        await dataStorageService.removeUserFromDataStore(data.projectKey, data.dataStore);
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
     });
   });
 });

@@ -13,11 +13,11 @@ const listVolumeMock = jest.fn();
 volumeManager.createVolume = createVolumeMock;
 volumeManager.listVolumes = listVolumeMock;
 
-const getAllActiveMock = jest.fn();
+const getAllProjectActiveMock = jest.fn();
 const getByIdMock = jest.fn();
 const addUsersMock = jest.fn();
 const removeUsersMock = jest.fn();
-dataStorageRepository.getAllActive = getAllActiveMock;
+dataStorageRepository.getAllProjectActive = getAllProjectActiveMock;
 dataStorageRepository.getById = getByIdMock;
 dataStorageRepository.addUsers = addUsersMock;
 dataStorageRepository.removeUsers = removeUsersMock;
@@ -135,7 +135,7 @@ describe('Volume Controller', () => {
       const response = httpMocks.createResponse();
 
       await volumeController.addUsers(request, response, next.handler);
-      expect(next.getError().message).toEqual('Unable to add users to volume volumeName: error');
+      expect(next.getError().message).toEqual('Unable to add users to project project99 volume volumeName: error');
     });
   });
 
@@ -156,16 +156,16 @@ describe('Volume Controller', () => {
       const response = httpMocks.createResponse();
 
       await volumeController.removeUsers(request, response, next.handler);
-      expect(next.getError().message).toEqual('Unable to remove users from volume volumeName: error');
+      expect(next.getError().message).toEqual('Unable to remove users from project project99 volume volumeName: error');
     });
   });
 
   describe('list active volumes', () => {
     it('should return the list of volumes', async () => {
-      getAllActiveMock.mockReturnValue(Promise.resolve(['volume']));
+      getAllProjectActiveMock.mockReturnValue(Promise.resolve(['volume']));
       const response = httpMocks.createResponse();
 
-      await volumeController.listActiveVolumes(request, response);
+      await volumeController.listProjectActiveVolumes(request, response);
       expect(response.statusCode).toBe(200);
       expect(response._getData()).toEqual(['volume']); // eslint-disable-line no-underscore-dangle
     });
@@ -174,7 +174,7 @@ describe('Volume Controller', () => {
   function executeValidator(body) {
     request = httpMocks.createRequest({ method: 'GET', body });
     const response = httpMocks.createResponse();
-    return volumeController.createVolumeValidator(request, response, () => {});
+    return volumeController.createVolumeValidator(request, response, () => { });
   }
 
   function expectValidationError(fieldName, expectedMessage) {
@@ -189,7 +189,7 @@ function createRequestBody() {
       domain: 'test-datalabs.nerc.ac.uk',
     },
     name: 'volumeName',
-    projectKey: 'project',
+    projectKey: 'project99',
     displayName: 'displayName',
     description: 'description',
     type: 1,
@@ -203,17 +203,18 @@ function validatedCreateRequest() {
     body: createRequestBody(),
   });
 
-  return volumeController.createVolumeValidator(request, () => {}, () => {});
+  return volumeController.createVolumeValidator(request, () => { }, () => { });
 }
 
 function validatedUpdateUserRequest() {
   request = httpMocks.createRequest({
     method: 'PUT',
     body: {
+      projectKey: 'project99',
       name: 'volumeName',
       userIds: ['uid1', 'uid2'],
     },
   });
 
-  return volumeController.updateVolumeUserValidator(request, () => {}, () => {});
+  return volumeController.updateVolumeUserValidator(request, () => { }, () => { });
 }

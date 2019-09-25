@@ -24,26 +24,26 @@ async function deleteVolume(storageRequest, token) {
   return response.data;
 }
 
-async function getAllActive(token) {
-  const response = await axios.get(`${API_URL_BASE}/volumes/active`, generateOptions(token));
+async function getAllProjectActive(projectKey, token) {
+  const response = await axios.get(`${API_URL_BASE}/volumes/active/${projectKey}`, generateOptions(token));
   return response.data;
 }
 
-async function getById(id, token) {
-  const response = await axios.get(`${API_URL_BASE}/volumes/${id}`, generateOptions(token));
+async function getById(projectKey, id, token) {
+  const response = await axios.get(`${API_URL_BASE}/volumes/${projectKey}/${id}`, generateOptions(token));
   return response.data;
 }
 
-async function addUsers(name, users, token) {
-  const url = `${API_URL_BASE}/volumes/${name}/addUsers`;
+async function addUsers(projectKey, name, users, token) {
+  const url = `${API_URL_BASE}/volumes/${projectKey}/${name}/addUsers`;
   const response = await axios.put(url, { userIds: users }, generateOptions(token));
   return response.data;
 }
 
-async function removeUsers(name, users, token) {
-  const url = `${API_URL_BASE}/volumes/${name}/removeUsers`;
+async function removeUsers(projectKey, name, users, token) {
+  const url = `${API_URL_BASE}/volumes/${projectKey}/${name}/removeUsers`;
   const response = await axios.put(url, { userIds: users }, generateOptions(token));
   return response.data;
 }
 
-export default { getAllActive, getById, addUsers, removeUsers, createVolume, deleteVolume };
+export default { getAllProjectActive, getById, addUsers, removeUsers, createVolume, deleteVolume };

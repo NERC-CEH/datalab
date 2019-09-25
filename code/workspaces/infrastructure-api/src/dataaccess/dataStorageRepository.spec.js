@@ -11,6 +11,8 @@ const testStorage = [
 
 const user = { sub: 'username' };
 
+const projectKey = 'project99';
+
 const mockDatabase = databaseMock(testStorage);
 database.getModel = mockDatabase;
 
@@ -19,11 +21,12 @@ describe('dataStorageRepository', () => {
     mockDatabase().clear();
   });
 
-  it('getAll returns expected snapshot', () => dataStorageRepository.getAllActive(user).then((storage) => {
+  it('getAll returns expected snapshot', () => dataStorageRepository.getAllProjectActive(user, projectKey).then((storage) => {
     // Filters for record with status not equal to deleted.
     expect(mockDatabase().query()).toEqual({
       status: { $ne: 'deleted' },
       users: { $elemMatch: { $eq: 'username' } },
+      projectKey,
     });
     expect(storage).toMatchSnapshot();
   }));
@@ -35,8 +38,9 @@ describe('dataStorageRepository', () => {
     expect(storage).toMatchSnapshot();
   }));
 
-  it('getById returns expected snapshot', () => dataStorageRepository.getById(user, '599aa983bdd5430daedc8eec').then((storage) => {
+  it('getById returns expected snapshot', () => dataStorageRepository.getById(user, 'project99', '599aa983bdd5430daedc8eec').then((storage) => {
     expect(mockDatabase().query()).toEqual({
+      projectKey,
       _id: '599aa983bdd5430daedc8eec',
       users: { $elemMatch: { $eq: 'username' } },
     });
@@ -92,9 +96,13 @@ describe('dataStorageRepository', () => {
     const name = 'volume';
     const userIds = ['user1', 'users2'];
 
-    return dataStorageRepository.addUsers(name, userIds)
+    return dataStorageRepository.addUsers(user, projectKey, name, userIds)
       .then(() => {
-        expect(mockDatabase().query()).toEqual({ name });
+        expect(mockDatabase().query()).toEqual({
+          projectKey,
+          name,
+          users: { $elemMatch: { $eq: 'username' } },
+        });
         expect(mockDatabase().entity()).toEqual({
           $addToSet: { users: { $each: userIds } },
         });
@@ -106,9 +114,13 @@ describe('dataStorageRepository', () => {
     const name = 'volume';
     const userIds = ['user1', 'users2'];
 
-    return dataStorageRepository.removeUsers(name, userIds)
+    return dataStorageRepository.removeUsers(user, projectKey, name, userIds)
       .then(() => {
-        expect(mockDatabase().query()).toEqual({ name });
+        expect(mockDatabase().query()).toEqual({
+          projectKey,
+          name,
+          users: { $elemMatch: { $eq: 'username' } },
+        });
         expect(mockDatabase().entity()).toEqual({
           $pull: { users: { $in: userIds } },
         });

@@ -30,6 +30,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
         onCancel: () => {},
         Dialog: () => {},
         dataStoreId: 'dataStoreId',
+        projectKey: 'project99',
         userKeysMapping: {},
       };
 
@@ -90,7 +91,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadDataStorage();
+      output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -109,7 +110,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').addUserToDataStore({ name: 'name', users: ['user'] });
+      output.prop('actions').addUserToDataStore('project99', { name: 'name', users: ['user'] });
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('ADD_USER_TO_DATASTORE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -128,7 +129,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').removeUserFromDataStore({ name: 'name', users: ['user'] });
+      output.prop('actions').removeUserFromDataStore('project99', { name: 'name', users: ['user'] });
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('REMOVE_USER_FROM_DATASTORE');
       return payload.then(value => expect(value).toBe('expectedPayload'));
@@ -169,6 +170,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
         userId: 'value',
         name: 'label',
       },
+      projectKey: 'project99',
       actions: {
         loadDataStorage: loadDataStorageMock,
         addUserToDataStore: addUserToDataStoreMock,

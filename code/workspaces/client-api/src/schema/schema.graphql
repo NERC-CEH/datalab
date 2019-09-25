@@ -4,10 +4,10 @@ type Query {
     status: String
 
     # List of currently provisioned DataLabs data storage.
-    dataStorage: [DataStore]
+    dataStorage(projectKey: String!): [DataStore]
 
     # Details of a single Datalabs data store.
-    dataStore(id: ID!): DataStore
+    dataStore(projectKey: String!, id: ID!): DataStore
 
     # Details of a single currently provisioned DataLab Stack owned by user.
     stack(id: ID!): Stack
@@ -49,16 +49,16 @@ type Mutation {
     deleteStack(stack: StackDeletionRequest): Stack
 
     # Create a new data store
-    createDataStore(dataStore: DataStorageCreationRequest): DataStore
+    createDataStore(projectKey: String!, dataStore: DataStorageCreationRequest): DataStore
 
     # Delete a data store
-    deleteDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    deleteDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Grant user access to data store
-    addUserToDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    addUserToDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Remove user access to data store
-    removeUserFromDataStore(dataStore: DataStorageUpdateRequest): DataStore
+    removeUserFromDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
     # Create a new project
     createProject(project: ProjectCreationRequest): Project

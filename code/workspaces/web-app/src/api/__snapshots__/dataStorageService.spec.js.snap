@@ -2,8 +2,8 @@
 
 exports[`dataStorageService addUserToDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    AddUserToDataStore($dataStore:  DataStorageUpdateRequest) {
-      addUserToDataStore(dataStore: $dataStore) {
+    AddUserToDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      addUserToDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"
@@ -11,8 +11,8 @@ exports[`dataStorageService addUserToDataStore should build the correct correct 
 
 exports[`dataStorageService createDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    CreateDataStore($dataStore:  DataStorageCreationRequest) {
-      createDataStore(dataStore: $dataStore) {
+    CreateDataStore($projectKey: String!, $dataStore:  DataStorageCreationRequest) {
+      createDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"
@@ -20,8 +20,8 @@ exports[`dataStorageService createDataStore should build the correct correct mut
 
 exports[`dataStorageService deleteDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    DeleteDataStore($dataStore: DataStorageUpdateRequest) {
-      deleteDataStore(dataStore: $dataStore) {
+    DeleteDataStore($projectKey: String!, $dataStore: DataStorageUpdateRequest) {
+      deleteDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"
@@ -29,8 +29,8 @@ exports[`dataStorageService deleteDataStore should build the correct correct mut
 
 exports[`dataStorageService getCredentials should build the correct query and return the minio credentials 1`] = `
 "
-    GetCredentials($id: ID!) {
-      dataStore(id: $id) {
+    GetCredentials($projectKey: String!, $id: ID!) {
+      dataStore(projectKey: $projectKey, id: $id) {
         url, accessKey
       }
     }"
@@ -38,8 +38,8 @@ exports[`dataStorageService getCredentials should build the correct query and re
 
 exports[`dataStorageService loadDataStorage should build the correct query and unpack the results 1`] = `
 "
-    DataStorage {
-      dataStorage {
+    DataStorage($projectKey: String!) {
+      dataStorage(projectKey: $projectKey) {
          id, name, displayName, description, type, stacksMountingStore { id }, status, users
       }
     }"
@@ -47,8 +47,8 @@ exports[`dataStorageService loadDataStorage should build the correct query and u
 
 exports[`dataStorageService removeUserFromDataStore should build the correct correct mutation and unpack the results 1`] = `
 "
-    RemoveUserFromDataStore($dataStore:  DataStorageUpdateRequest) {
-      removeUserFromDataStore(dataStore: $dataStore) {
+    RemoveUserFromDataStore($projectKey: String!, $dataStore:  DataStorageUpdateRequest) {
+      removeUserFromDataStore(projectKey: $projectKey, dataStore: $dataStore) {
         name
       }
     }"

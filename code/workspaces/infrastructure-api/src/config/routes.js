@@ -42,10 +42,10 @@ function configureRoutes(app) {
   app.delete('/stack/:projectKey', projectPermissionWrapper(STACKS_DELETE), stack.deleteStackValidator, stack.deleteStack);
   app.post('/volume/query', permissionWrapper(STORAGE_LIST), volume.coreVolumeValidator, volume.queryVolume);
   app.get('/volumes', permissionWrapper(STORAGE_LIST), ew(volume.listVolumes));
-  app.get('/volumes/active', permissionWrapper(STORAGE_LIST), ew(volume.listActiveVolumes));
-  app.get('/volumes/:id', permissionWrapper(STORAGE_LIST), volume.getByIdValidator, ew(volume.getById));
-  app.put('/volumes/:name/addUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, ew(volume.addUsers));
-  app.put('/volumes/:name/removeUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, ew(volume.removeUsers));
+  app.get('/volumes/active/:projectKey', permissionWrapper(STORAGE_LIST), volume.actionWithProjectKeyValidator(), ew(volume.listProjectActiveVolumes));
+  app.get('/volumes/:projectKey/:id', permissionWrapper(STORAGE_LIST), volume.getByIdValidator, ew(volume.getById));
+  app.put('/volumes/:projectKey/:name/addUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, ew(volume.addUsers));
+  app.put('/volumes/:projectKey/:name/removeUsers', permissionWrapper(STORAGE_EDIT), volume.updateVolumeUserValidator, ew(volume.removeUsers));
   app.post('/volume', permissionWrapper(STORAGE_CREATE), volume.createVolumeValidator, ew(volume.createVolume));
   app.delete('/volume', permissionWrapper(STORAGE_DELETE), volume.coreVolumeValidator, ew(volume.deleteVolume));
 }
