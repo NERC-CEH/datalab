@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|common)$ ]]; then
+if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|common|chassis)$ ]]; then
   case "$1" in
     docs)
       cd ./docs && yarn install && yarn lint
@@ -20,6 +20,9 @@ if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|comm
       ;;
     common)
       cd ./code && yarn install && yarn workspace common lint && yarn workspace common test-ci
+      ;;
+    chassis)
+      cd ./code && yarn install && yarn workspace service-chassis lint && yarn workspace service-chassis test-ci
       ;;
   esac
 else
