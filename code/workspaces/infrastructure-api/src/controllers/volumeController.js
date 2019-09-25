@@ -104,38 +104,39 @@ const nameCheck = existsCheck('name')
   .isLength({ min: 4, max: 12 })
   .withMessage('Name must be 4-12 characters long');
 
+const projectKeyCheck = existsCheck('projectKey');
+
+const idCheck = existsCheck('id')
+  .isMongoId()
+  .withMessage('id must be specified as a Mongo Id');
+
 const projectKeyValidator = service.middleware.validator([
-  existsCheck('projectKey'),
+  projectKeyCheck,
 ], logger);
 
 const getByIdValidator = service.middleware.validator([
-  existsCheck('projectKey'),
-  existsCheck('id'),
+  projectKeyCheck,
+  idCheck,
 ], logger);
 
 const updateVolumeUserValidator = service.middleware.validator([
-  existsCheck('projectKey'),
+  projectKeyCheck,
   nameCheck,
   check('userIds').exists().withMessage('userIds must be specified'),
-  check('userIds.*').exists().withMessage('userIds must be specified').trim(),
+  existsCheck('userIds.*'),
 ], logger);
 
 const createVolumeValidator = service.middleware.validator([
-  existsCheck('projectKey'),
+  projectKeyCheck,
   nameCheck,
-  check('displayName').exists().withMessage('displayName must be specified').trim(),
-  check('description').exists().withMessage('description must be specified').trim(),
-  check('type')
-    .exists()
+  existsCheck('displayName'),
+  existsCheck('description'),
+  existsCheck('type')
     .isInt({ min: 1, max: 1 })
-    .withMessage('type must be specified as a valid storage type')
-    .trim(),
-  check('volumeSize')
-    .exists()
-    .withMessage('Volume Size must be specified')
+    .withMessage('type must be specified as a valid storage type'),
+  existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
-    .withMessage('Volume Size must be an integer between 5 and 200')
-    .trim(),
+    .withMessage('Volume Size must be an integer between 5 and 200'),
 ], logger);
 
 const deleteVolumeValidator = service.middleware.validator([
