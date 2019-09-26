@@ -20,7 +20,7 @@ const styles = theme => ({
     justifyContent: 'center',
     borderTop: `1px solid ${theme.palette.divider}`,
     borderBottom: `1px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing(4)}px 0`,
+    padding: `${theme.spacing(3)}px 0`,
   },
 });
 

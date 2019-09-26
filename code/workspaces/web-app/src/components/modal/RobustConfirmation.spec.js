@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import TextField from '@material-ui/core/TextField';
 import RobustConfirmation from './RobustConfirmation';
-import IconButton from '../common/control/IconButton';
+import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
+import DangerButton from '../common/buttons/DangerButton';
 
 function shallowRender(props) {
   return shallow(<RobustConfirmation {...props} />);
@@ -42,7 +43,7 @@ describe('Robust Confirmation', () => {
 
     // Act
     const output = shallowRender(props);
-    const buttons = output.find(IconButton);
+    const buttons = output.find(SecondaryActionButton);
     const cancelFunction = buttons.find({ children: 'Cancel' }).prop('onClick');
     cancelFunction();
 
@@ -56,8 +57,8 @@ describe('Robust Confirmation', () => {
 
     // Act
     const output = shallowRender(props);
-    const buttons = output.find(IconButton);
-    const submitFunction = buttons.find({ children: 'Confirm Deletion' }).prop('onClick');
+    const buttons = output.find(DangerButton);
+    const submitFunction = buttons.find({ children: 'Delete' }).prop('onClick');
     submitFunction();
 
     // Assert
@@ -74,8 +75,8 @@ describe('Robust Confirmation', () => {
 
     // Assert
     // Due to changes state, for this test, the same node need to be used for the expect checks.
-    expect(output.find(IconButton).find({ children: 'Confirm Deletion' }).prop('disabled')).toBe(true);
+    expect(output.find(DangerButton).find({ children: 'Delete' }).prop('disabled')).toBe(true);
     textOnChange({ target: { value: 'alpha' } });
-    expect(output.find(IconButton).find({ children: 'Confirm Deletion' }).prop('disabled')).toBe(false);
+    expect(output.find(DangerButton).find({ children: 'Delete' }).prop('disabled')).toBe(false);
   });
 });

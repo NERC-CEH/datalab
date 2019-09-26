@@ -1,25 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import PagePrimaryAction from '../common/buttons/PagePrimaryActionButton';
 
 const styles = theme => ({
-  card: {
-    height: '100%',
-    backgroundColor: 'transparent',
-  },
   button: {
     marginTop: 10,
-  },
-  icon: {
-    fontSize: 40,
   },
 });
 
 const NewStackButton = ({ classes, onClick, typeName }) => (
-  <Button className={classes.button} variant="contained" color="primary" aria-label="add" onClick={onClick}>
+  <PagePrimaryAction className={classes.button} aria-label="add" onClick={onClick}>
     {`Create ${typeName}`}
-  </Button>
+  </PagePrimaryAction>
 );
 
 NewStackButton.propTypes = {

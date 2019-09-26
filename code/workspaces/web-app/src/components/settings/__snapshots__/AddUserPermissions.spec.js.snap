@@ -1,27 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddUserButton renders as disabled when the selected user name is not in the list of possibilities 1`] = `
-<WithStyles(ForwardRef(Button))
+<PrimaryActionButton
   className="addButton"
-  color="primary"
   disabled={true}
   onClick={[Function]}
-  variant="outlined"
 >
   Add
-</WithStyles(ForwardRef(Button))>
+</PrimaryActionButton>
 `;
 
 exports[`AddUserButton renders as not disabled when the selected user name is in the list of possibilities 1`] = `
-<WithStyles(ForwardRef(Button))
+<PrimaryActionButton
   className="addButton"
-  color="primary"
   disabled={false}
   onClick={[Function]}
-  variant="outlined"
 >
   Add
-</WithStyles(ForwardRef(Button))>
+</PrimaryActionButton>
 `;
 
 exports[`PermissionsSelector renders to match snapshot 1`] = `

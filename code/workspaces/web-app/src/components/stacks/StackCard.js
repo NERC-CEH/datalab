@@ -18,7 +18,7 @@ function styles(theme) {
       flexDirection: 'row',
       justifyContent: 'flex-start',
       borderTop: `1px solid ${theme.palette.divider}`,
-      padding: theme.spacing(1),
+      padding: `${theme.spacing(3)}px 0`,
       '&:last-child': {
         borderBottom: `1px solid ${theme.palette.divider}`,
       },
@@ -27,8 +27,6 @@ function styles(theme) {
       display: 'inline-flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
     },
     textDiv: {
       display: 'inline-flex',
@@ -51,7 +49,7 @@ function styles(theme) {
     statusDiv: {
       display: 'block',
       textAlign: 'center',
-      minWidth: 165,
+      minWidth: 150,
     },
     cardImage: {
       height: theme.cardImageSize + theme.spacing(1),
@@ -86,7 +84,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
     <div className={classes.textDiv}>
       <Typography variant="h5" className={classes.displayName}>{getDisplayName(stack)}</Typography>
       <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
-        <Typography component="p" noWrap>{getDescription(stack, typeName)}</Typography>
+        <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>
       </Tooltip>
     </div>
     <div className={classes.actionsDiv}>

@@ -5,11 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 const useStyles = makeStyles(theme => ({
   addUserPermission: {
@@ -168,14 +168,13 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
 export function AddUserButton({ userInformation, selectedUserName, project, selectedPermissions, onClickFn, dispatch, classes }) {
   const selectedUser = userInformation.find(user => user.name === selectedUserName);
   return (
-    <Button
+    <PrimaryActionButton
       className={classes.addButton}
-      variant="outlined"
-      color="primary"
       disabled={!selectedUser}
-      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}>
+      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}
+    >
       Add
-    </Button>
+    </PrimaryActionButton>
   );
 }
 

@@ -10,7 +10,7 @@ class ComponentWrapper extends Component {
   render() {
     if (this.hasPermission()) {
       return (
-        <div style={this.props.style}>
+        <div style={this.props.style} className={this.props.className}>
           {this.props.children}
         </div>
       );

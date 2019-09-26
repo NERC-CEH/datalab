@@ -24,20 +24,17 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
     </form>
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(IconButton)
-      icon="clear"
+    <WithStyles(DangerButton)
+      disabled={true}
+      onClick={[MockFunction]}
+    >
+      Delete
+    </WithStyles(DangerButton)>
+    <SecondaryActionButton
       onClick={[MockFunction]}
     >
       Cancel
-    </WithStyles(IconButton)>
-    <WithStyles(IconButton)
-      danger={true}
-      disabled={true}
-      icon="delete"
-      onClick={[MockFunction]}
-    >
-      Confirm Deletion
-    </WithStyles(IconButton)>
+    </SecondaryActionButton>
   </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;

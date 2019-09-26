@@ -1,60 +1,57 @@
-import Button from '@material-ui/core/Button';
-import CardActions from '@material-ui/core/CardActions';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { statusTypes } from 'common';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 const { READY } = statusTypes;
 
 const styles = theme => ({
   cardActions: {
-    padding: 0,
-    marginTop: theme.spacing(1),
-    justifyContent: 'space-between',
+    display: 'flex',
+    width: '100%',
   },
-  button: {
-    marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5),
+  buttonWrapper: {
+    flexGrow: '1',
+    '& + &': {
+      marginLeft: theme.spacing(1),
+    },
   },
 });
 
 const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
   deletePermission, editPermission, classes }) => (
-  <CardActions className={classes.cardActions}>
-    <PermissionWrapper userPermissions={userPermissions} permission={openPermission}>
-      <Button
-        className={classes.button}
-        color="primary"
+  <div className={classes.cardActions}>
+    <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
+      <PrimaryActionButton
         disabled={!openStack || !isReady(stack)}
         onClick={() => openStack(stack)}
-        variant="outlined" >
+        fullWidth
+      >
         Open
-      </Button>
+      </PrimaryActionButton>
     </PermissionWrapper>
-    <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-      <Button
-        className={classes.button}
-        color="secondary"
+    <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      <SecondaryActionButton
         disabled={!deleteStack || !isReady(stack)}
         onClick={() => deleteStack(stack)}
-        variant="outlined">
+        fullWidth
+      >
         Delete
-      </Button>
+      </SecondaryActionButton>
     </PermissionWrapper>
-    <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
-      <Button
-        className={classes.button}
-        color="secondary"
+    <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={editPermission}>
+      <SecondaryActionButton
         disabled={!editStack || !isReady(stack)}
         onClick={() => editStack(stack)}
-        variant="outlined"
+        fullWidth
       >
         Edit
-      </Button>
+      </SecondaryActionButton>
     </PermissionWrapper>
-  </CardActions>
+  </div>
 );
 
 StackCardActions.propTypes = {

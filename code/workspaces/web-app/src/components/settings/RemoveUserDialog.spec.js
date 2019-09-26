@@ -84,7 +84,7 @@ describe('RemoveUserDialog', () => {
           dispatch={mockDispatch}
         />,
       );
-      render.find('#confirm-button').simulate('click');
+      render.find('#remove-button').simulate('click');
 
       expect(mockSetState).toHaveBeenCalledTimes(1);
       expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });

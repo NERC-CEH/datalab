@@ -15,20 +15,20 @@ exports[`RemoveUserDialog when the dialog state has open equal to true and a use
     </WithStyles(ForwardRef(DialogContentText))>
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(ForwardRef(Button))
+    <WithStyles(DangerButton)
+      className="dialogDeleteUserButton"
+      id="remove-button"
+      onClick={[Function]}
+      variant="outlined"
+    >
+      Remove
+    </WithStyles(DangerButton)>
+    <SecondaryActionButton
       id="cancel-button"
       onClick={[Function]}
     >
       Cancel
-    </WithStyles(ForwardRef(Button))>
-    <WithStyles(ForwardRef(Button))
-      className="dialogDeleteUserButton"
-      id="confirm-button"
-      onClick={[Function]}
-      variant="outlined"
-    >
-      Confirm
-    </WithStyles(ForwardRef(Button))>
+    </SecondaryActionButton>
   </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;

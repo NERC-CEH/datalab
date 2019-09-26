@@ -32,8 +32,8 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
       title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
     >
       <WithStyles(ForwardRef(Typography))
-        component="p"
         noWrap={true}
+        varient="body1"
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </WithStyles(ForwardRef(Typography))>
@@ -77,8 +77,8 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
       title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
     >
       <WithStyles(ForwardRef(Typography))
-        component="p"
         noWrap={true}
+        varient="body1"
       >
         Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
       </WithStyles(ForwardRef(Typography))>
@@ -117,8 +117,8 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
       title="A description of the typeName purpose"
     >
       <WithStyles(ForwardRef(Typography))
-        component="p"
         noWrap={true}
+        varient="body1"
       >
         A description of the typeName purpose
       </WithStyles(ForwardRef(Typography))>
@@ -162,8 +162,8 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
       title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
     >
       <WithStyles(ForwardRef(Typography))
-        component="p"
         noWrap={true}
+        varient="body1"
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </WithStyles(ForwardRef(Typography))>

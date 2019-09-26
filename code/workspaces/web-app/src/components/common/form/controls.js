@@ -2,9 +2,10 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import { fieldStyle, fieldStyleProps } from './controlStyles';
 import theme from '../../../theme';
+import PrimaryActionButton from '../buttons/PrimaryActionButton';
+import SecondaryActionButton from '../buttons/SecondaryActionButton';
 
 export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => <TextField
     style={fieldStyle}
@@ -66,23 +67,19 @@ export const renderAdornedTextField = ({ input, label, meta: { touched, error },
 
 export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons }) => (
   <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', margin: `${theme.spacing(2)}px 0` }}>
-    <Button
+    <PrimaryActionButton
       type="submit"
-      variant="outlined"
-      color="primary"
       disabled={submitting}
       fullWidth={fullWidthButtons}
     >
       Create
-    </Button>
-    <Button
+    </PrimaryActionButton>
+    <SecondaryActionButton
       style={{ marginLeft: theme.spacing(1) }}
-      variant="outlined"
-      color="secondary"
       onClick={onCancel}
       fullWidth={fullWidthButtons}
     >
       Cancel
-    </Button>
+    </SecondaryActionButton>
   </div>
 );

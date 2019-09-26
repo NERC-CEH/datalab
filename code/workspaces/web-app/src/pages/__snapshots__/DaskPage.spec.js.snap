@@ -9,17 +9,15 @@ exports[`DaskPage renders correct snapshot 1`] = `
   >
     Dask is a flexible parallel computing library for analytic computing.
   </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Button))
-    color="primary"
+  <PrimaryActionButton
     onClick={[Function]}
     style={
       Object {
         "marginTop": 10,
       }
     }
-    variant="outlined"
   >
     Dask Status
-  </WithStyles(ForwardRef(Button))>
+  </PrimaryActionButton>
 </WithStyles(Page)>
 `;
