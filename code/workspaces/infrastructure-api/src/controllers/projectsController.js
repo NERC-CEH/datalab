@@ -82,19 +82,19 @@ const projectDocumentValidator = () => service.middleware.validator([
   check('key')
     .exists()
     .withMessage("'key' must be specified in request body.")
+    .trim()
     .isLength({ min: 2, max: 8 })
     .withMessage("'key' must be 2-8 characters in length.")
     .isAlpha()
     .withMessage("'key' can only contain letters.")
     .isLowercase()
-    .withMessage("Letters in 'key' must be lowercase.")
-    .trim(),
+    .withMessage("Letters in 'key' must be lowercase."),
   check('name')
     .exists()
     .withMessage("'name' must be specified in request body.")
+    .trim()
     .isLength({ min: 2 })
-    .withMessage("'name' must be 2 or more characters long.")
-    .trim(),
+    .withMessage("'name' must be 2 or more characters long."),
   check('description'),
   check('collaborationLink'),
 ], logger);
