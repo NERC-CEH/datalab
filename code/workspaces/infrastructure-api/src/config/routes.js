@@ -1,4 +1,4 @@
-import { service } from 'common';
+import { service } from 'service-chassis';
 import status from '../controllers/status';
 import projects from '../controllers/projectsController';
 import stack from '../controllers/stackController';

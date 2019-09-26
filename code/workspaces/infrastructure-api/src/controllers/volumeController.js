@@ -1,4 +1,4 @@
-import { service } from 'common';
+import { service } from 'service-chassis';
 import { check, matchedData } from 'express-validator';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
