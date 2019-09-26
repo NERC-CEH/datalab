@@ -21,6 +21,7 @@ import StackCards from '../../components/stacks/StackCards';
 const { projectPermissions: { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT } } = permissionTypes;
 
 const TYPE_NAME = 'Data Store';
+const TYPE_NAME_PLURAL = 'Data Stores';
 const FORM_NAME = 'createDataStore';
 
 class DataStorageContainer extends Component {
@@ -111,6 +112,7 @@ class DataStorageContainer extends Component {
         <StackCards
           stacks={this.props.dataStorage.value}
           typeName={TYPE_NAME}
+          typeNamePlural={TYPE_NAME_PLURAL}
           openStack={this.openDataStore}
           deleteStack={this.chooseDialogue}
           editStack={this.editDataStore}

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import { syncValidate, asyncValidate } from './newProjectFormValidator';
-import { renderTextField, renderTextArea } from '../common/form/controls';
+import { renderTextField, renderTextArea, CreateFormControls } from '../common/form/controls';
 
 const style = theme => ({
   form: {
@@ -55,26 +54,7 @@ const CreateProjectForm = ({ handleSubmit, onCancel, classes }) => (
       component={renderTextField}
       className={classes.input}
     />
-    <div className={classes.buttonContainer}>
-      <Button
-        className={classes.button}
-        type="submit"
-        variant="outlined"
-        color="primary"
-        fullWidth
-      >
-        Create
-      </Button>
-      <Button
-        className={classes.button}
-        variant="outlined"
-        color="secondary"
-        onClick={() => onCancel()}
-        fullWidth
-      >
-        Cancel
-      </Button>
-    </div>
+    <CreateFormControls onCancel={() => onCancel()} fullWidthButtons />
   </form>
 );
 

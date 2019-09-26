@@ -5,11 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 const useStyles = makeStyles(theme => ({
   addUserPermission: {
@@ -29,11 +29,18 @@ const useStyles = makeStyles(theme => ({
     maxHeight: 400,
   },
   permissionsSelector: {
-    margin: `0 ${theme.spacing(2)}px`,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
     minWidth: 95,
   },
   usersAutofill: {
     flexGrow: 1,
+  },
+  addButton: {
+    // Styling makes button match size and margins of the outlined text fields
+    height: 40,
+    marginTop: 8,
+    marginBottom: 4,
   },
 }));
 
@@ -80,7 +87,9 @@ export function PureAddUserPermission({
         project="project"
         onClickFn={dispatchAddUserAction}
         dispatch={dispatch}
-        selectedPermissions={selectedPermissions} />
+        selectedPermissions={selectedPermissions}
+        classes={classes}/>
+
     </div>
   );
 }
@@ -104,6 +113,7 @@ export function UsersAutofill({ userNames, setSelectedUserName }) {
                 label="Add User"
                 placeholder="Type user's email..."
                 variant="outlined"
+                margin="dense"
                 fullWidth
                 {...getInputProps()} />
               <UsersDropdown
@@ -145,6 +155,7 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
       className={classes.permissionsSelector}
       label="Permissions"
       variant="outlined"
+      margin="dense"
       select
       value={selectedPermissions}
       onChange={event => setSelectedPermissions(event.target.value)}
@@ -154,16 +165,16 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
   );
 }
 
-export function AddUserButton({ userInformation, selectedUserName, project, selectedPermissions, onClickFn, dispatch }) {
+export function AddUserButton({ userInformation, selectedUserName, project, selectedPermissions, onClickFn, dispatch, classes }) {
   const selectedUser = userInformation.find(user => user.name === selectedUserName);
   return (
-    <Button
-      variant="outlined"
-      color="primary"
+    <PrimaryActionButton
+      className={classes.addButton}
       disabled={!selectedUser}
-      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}>
+      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}
+    >
       Add
-    </Button>
+    </PrimaryActionButton>
   );
 }
 

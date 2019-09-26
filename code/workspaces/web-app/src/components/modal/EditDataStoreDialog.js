@@ -6,8 +6,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
-import IconButton from '../common/control/IconButton';
 import AutocompleteTextSearch from '../common/form/AutocompleteTextSearch';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser, removeUser, loadUsersPromise }) => (
     <Dialog open={true} maxWidth="md" fullWidth>
@@ -27,7 +27,7 @@ const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser,
         </PromisedContentWrapper>
       </DialogContent>
       <DialogActions>
-        <IconButton onClick={onCancel} icon="clear">Close</IconButton>
+        <PrimaryActionButton onClick={onCancel}>Close</PrimaryActionButton>
       </DialogActions>
     </Dialog>
 );

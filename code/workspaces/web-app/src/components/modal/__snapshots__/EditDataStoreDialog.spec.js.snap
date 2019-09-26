@@ -49,12 +49,11 @@ exports[`Edit data store dialog creates correct snapshot 1`] = `
     </PromisedContentWrapper>
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(IconButton)
-      icon="clear"
+    <PrimaryActionButton
       onClick={[Function]}
     >
       Close
-    </WithStyles(IconButton)>
+    </PrimaryActionButton>
   </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;

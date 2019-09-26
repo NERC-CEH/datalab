@@ -64,26 +64,8 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       placeholder="Description"
     />
   </div>
-  <WithStyles(ForwardRef(Button))
-    color="primary"
-    style={
-      Object {
-        "margin": 8,
-      }
-    }
-    type="submit"
-  >
-    Create
-  </WithStyles(ForwardRef(Button))>
-  <WithStyles(ForwardRef(Button))
-    onClick={[MockFunction]}
-    style={
-      Object {
-        "margin": 8,
-      }
-    }
-  >
-    Cancel
-  </WithStyles(ForwardRef(Button))>
+  <CreateFormControls
+    onCancel={[MockFunction]}
+  />
 </form>
 `;

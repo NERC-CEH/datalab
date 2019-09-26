@@ -1,34 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`New Stack Button creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(Card))
-  className="NewStackButton-card-1"
-  elevation={0}
+<PrimaryActionButton
+  aria-label="add"
+  className="NewStackButton-button-1"
+  onClick={[Function]}
 >
-  <div
-    className="NewStackButton-buttonContainer-2"
-  >
-    <WithStyles(Tooltip)
-      style={
-        Object {
-          "float": "right",
-        }
-      }
-      title="Create Stack"
-    >
-      <WithStyles(ForwardRef(Fab))
-        aria-label="add"
-        className="NewStackButton-button-3"
-        color="primary"
-        onClick={[Function]}
-      >
-        <WithStyles(ForwardRef(Icon))
-          className="NewStackButton-icon-4"
-        >
-          add
-        </WithStyles(ForwardRef(Icon))>
-      </WithStyles(ForwardRef(Fab))>
-    </WithStyles(Tooltip)>
-  </div>
-</WithStyles(ForwardRef(Card))>
+  Create Stack
+</PrimaryActionButton>
 `;
