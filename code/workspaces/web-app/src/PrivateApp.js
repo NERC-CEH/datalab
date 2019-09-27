@@ -37,46 +37,55 @@ const PrivateApp = ({ promisedUserPermissions, location }) => (
         promisedUserPermissions={promisedUserPermissions}
         permission=''
         alt={NotFoundPage} />
-      />
       <Redirect exact from="/" to="/projects" />
       <Route
-        exact
-        path="/projects/:projectKey/info"
-        component={ProjectInfoPage} />
-      <RoutePermissions
-        exact
-        path="/projects/:projectKey/storage"
-        component={DataStoragePage}
-        promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STORAGE_LIST}
-        alt={NotFoundPage} />
-      <RoutePermissions
-        exact
-        path="/projects/:projectKey/notebooks"
-        component={NotebooksPage}
-        promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STACKS_LIST}
-        alt={NotFoundPage} />
-      <RoutePermissions
-        exact
-        path="/projects/:projectKey/publishing"
-        component={PublishingPage}
-        promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STACKS_LIST}
-        alt={NotFoundPage} />
-      <RoutePermissions
-        exact
-        path="/projects/:projectKey/settings"
-        component={SettingsPage}
-        promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_SETTINGS_LIST}
-        alt={NotFoundPage} />
-      <Route exact path="/projects/:projectKey/dask" component={DaskPage} />
-      <Route exact path="/projects/:projectKey/spark" component={SparkPage} />
+        path="/projects/:projectKey"
+        render={({ match }) => <ProjectContextWrapper match={match} promisedUserPermissions={promisedUserPermissions} />}
+      />
       <Route component={NotFoundPage} />
     </Switch>
     <ModalRoot />
   </NavigationContainer>
+);
+
+const ProjectContextWrapper = ({ match, promisedUserPermissions }) => (
+  <Switch>
+    <Route
+      exact
+      path={`${match.path}/info`}
+      component={ProjectInfoPage} />
+    <RoutePermissions
+      exact
+      path={`${match.path}/storage`}
+      component={DataStoragePage}
+      promisedUserPermissions={promisedUserPermissions}
+      permission={PROJECT_STORAGE_LIST}
+      alt={NotFoundPage} />
+    <RoutePermissions
+      exact
+      path={`${match.path}/notebooks`}
+      component={NotebooksPage}
+      promisedUserPermissions={promisedUserPermissions}
+      permission={PROJECT_STACKS_LIST}
+      alt={NotFoundPage} />
+    <RoutePermissions
+      exact
+      path={`${match.path}/publishing`}
+      component={PublishingPage}
+      promisedUserPermissions={promisedUserPermissions}
+      permission={PROJECT_STACKS_LIST}
+      alt={NotFoundPage} />
+    <RoutePermissions
+      exact
+      path={`${match.path}/settings`}
+      component={SettingsPage}
+      promisedUserPermissions={promisedUserPermissions}
+      permission={PROJECT_SETTINGS_LIST}
+      alt={NotFoundPage} />
+    <Route exact path={`${match.path}/dask`} component={DaskPage} />
+    <Route exact path={`${match.path}/spark`} component={SparkPage} />
+    <Route component={NotFoundPage} />
+  </Switch>
 );
 
 PrivateApp.propTypes = {
