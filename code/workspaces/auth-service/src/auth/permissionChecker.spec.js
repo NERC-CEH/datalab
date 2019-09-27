@@ -32,7 +32,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'User missing expected permission(s): project:elementName:missingActionName' });
+        .toEqual({ message: 'User missing expected permission(s): project:elementName:missingActionName,system:instance:admin' });
     });
 
     it('throws error for shortened permission name', () => {
@@ -43,7 +43,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'User missing expected permission(s): project:elementName:actionNam' });
+        .toEqual({ message: 'User missing expected permission(s): project:elementName:actionNam,system:instance:admin' });
     });
   });
 
@@ -69,7 +69,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'User missing expected permission(s): anotherproject:elementName:actionName' });
+        .toEqual({ message: 'User missing expected permission(s): anotherproject:elementName:actionName,system:instance:admin' });
     });
 
     it('should return 401 if no project name included in request', () => {
