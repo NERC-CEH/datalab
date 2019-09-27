@@ -46,7 +46,7 @@ describe('projectsRepository', () => {
 
   it('create calls correct methods with correct arguments', async () => {
     await projectsRepository.create(testProject);
-    expectToHaveBeenCalledOnceWith(ProjectMock.create, testProject);
+    expectToHaveBeenCalledOnceWith(ProjectMock.create, [testProject], { setDefaultsOnInsert: true });
   });
 
   it('createOrUpdate calls correct methods with correct arguments', async () => {
