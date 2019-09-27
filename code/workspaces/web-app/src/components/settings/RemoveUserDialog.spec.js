@@ -73,14 +73,14 @@ describe('RemoveUserDialog', () => {
       const mockSetState = jest.fn();
       const mockOnRemoveConfirmationFn = jest.fn();
       const mockDispatch = jest.fn();
-      const projectName = 'project';
+      const projectKey = 'project';
       const render = shallow(
         <RemoveUserDialog
           classes={classes}
           state={openState}
           setState={mockSetState}
           onRemoveConfirmationFn={mockOnRemoveConfirmationFn}
-          project={projectName}
+          projectKey={projectKey}
           dispatch={mockDispatch}
         />,
       );
@@ -90,7 +90,7 @@ describe('RemoveUserDialog', () => {
       expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
       expect(mockOnRemoveConfirmationFn).toHaveBeenCalledTimes(1);
       expect(mockOnRemoveConfirmationFn)
-        .toHaveBeenCalledWith(projectName, openState.user, mockDispatch);
+        .toHaveBeenCalledWith(projectKey, openState.user, mockDispatch);
     });
   });
 });

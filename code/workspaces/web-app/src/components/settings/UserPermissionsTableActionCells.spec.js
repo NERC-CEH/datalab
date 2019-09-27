@@ -27,7 +27,7 @@ describe('CheckboxCell', () => {
           user={user}
           isCurrentUser={false}
           checkboxSpec={checkboxSpec}
-          project="project"
+          projectKey="projectKey"
           classes={classes}
           cellKey="key"
           dispatch={jest.fn()}
@@ -133,7 +133,7 @@ describe('PermissionsCheckbox', () => {
     mockActions.addUserPermission.mockReturnValue('expected-result');
 
     const mockDispatch = jest.fn();
-    const project = 'project';
+    const projectKey = 'projectKey';
     const user = { name: 'User One', userId: 'user-one-id', role: PERMISSIONS.USER };
     const checkboxSpec = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
 
@@ -143,7 +143,7 @@ describe('PermissionsCheckbox', () => {
           user={user}
           isCurrentUser={true}
           checkboxSpec={checkboxSpec}
-          project={project}
+          projectKey={projectKey}
           classes={classes}
           actions={mockActions}
           dispatch={mockDispatch}
@@ -151,7 +151,7 @@ describe('PermissionsCheckbox', () => {
       );
       render.find(Checkbox).simulate('click');
       expect(mockActions.addUserPermission).toHaveBeenCalledTimes(1);
-      expect(mockActions.addUserPermission).toHaveBeenCalledWith(project, user, checkboxSpec.name, mockDispatch);
+      expect(mockActions.addUserPermission).toHaveBeenCalledWith(projectKey, user, checkboxSpec.name, mockDispatch);
     });
   });
 });

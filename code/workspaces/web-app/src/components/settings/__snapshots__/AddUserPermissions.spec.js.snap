@@ -89,7 +89,7 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
     }
     dispatch={[MockFunction]}
     onClickFn={[Function]}
-    project="project"
+    projectKey="projectKey"
     selectedPermissions="Viewer"
     selectedUserName=""
     userInformation={

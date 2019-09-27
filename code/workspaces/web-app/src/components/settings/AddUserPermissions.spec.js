@@ -33,6 +33,7 @@ describe('PureAddUserPermission', () => {
       shallow(
         <PureAddUserPermission
           users={initialUsers}
+          projectKey="projectKey"
           permissionLevels={permissionLevels}
           selectedPermissions={'Viewer'}
           setSelectedPermissions={jest.fn()}
@@ -222,7 +223,7 @@ describe('AddUserButton', () => {
   it('calls onClickFn with correct arguments when clicked', () => {
     const userInformation = initialUsers.value;
     const selectedUser = initialUsers.value[0];
-    const project = 'project';
+    const projectKey = 'projectKey';
     const selectedPermissions = permissionLevels[0];
     const onClickFnMock = jest.fn();
     const dispatch = jest.fn();
@@ -231,7 +232,7 @@ describe('AddUserButton', () => {
       <AddUserButton
         userInformation={userInformation}
         selectedUserName={selectedUser.name}
-        project={project}
+        projectKey={projectKey}
         selectedPermissions={selectedPermissions}
         onClickFn={onClickFnMock}
         dispatch={dispatch}
@@ -241,7 +242,7 @@ describe('AddUserButton', () => {
     render.simulate('click');
     expect(onClickFnMock).toHaveBeenCalledTimes(1);
     expect(onClickFnMock)
-      .toHaveBeenCalledWith(project, selectedUser, selectedPermissions, dispatch);
+      .toHaveBeenCalledWith(projectKey, selectedUser, selectedPermissions, dispatch);
   });
 });
 

@@ -128,7 +128,7 @@ Array [
     index={0}
     isCurrentUser={true}
     key="row-admin-user-id"
-    project="project"
+    projectKey="projectKey"
     setRemoveUserDialogState={[MockFunction]}
     user={
       Object {
@@ -151,7 +151,7 @@ Array [
     index={1}
     isCurrentUser={false}
     key="row-user-user-id"
-    project="project"
+    projectKey="projectKey"
     setRemoveUserDialogState={[MockFunction]}
     user={
       Object {
@@ -174,7 +174,7 @@ Array [
     index={2}
     isCurrentUser={false}
     key="row-viewer-user-id"
-    project="project"
+    projectKey="projectKey"
     setRemoveUserDialogState={[MockFunction]}
     user={
       Object {
@@ -258,7 +258,7 @@ exports[`UserPermissionsTableRow for a given user correctly renders passing prop
     dispatch={[MockFunction]}
     isCurrentUser={false}
     key="row-2-admin"
-    project="project"
+    projectKey="projectKey"
     user={
       Object {
         "name": "admin name",
@@ -284,7 +284,7 @@ exports[`UserPermissionsTableRow for a given user correctly renders passing prop
     dispatch={[MockFunction]}
     isCurrentUser={false}
     key="row-2-user"
-    project="project"
+    projectKey="projectKey"
     user={
       Object {
         "name": "admin name",
@@ -310,7 +310,7 @@ exports[`UserPermissionsTableRow for a given user correctly renders passing prop
     dispatch={[MockFunction]}
     isCurrentUser={false}
     key="row-2-viewer"
-    project="project"
+    projectKey="projectKey"
     user={
       Object {
         "name": "admin name",

@@ -1,5 +1,8 @@
 import { get } from 'lodash';
 import logger from 'winston';
+import { permissionTypes } from 'common';
+
+const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
 const PROJECT = 'project';
 const permissionDelim = ':';
@@ -23,7 +26,9 @@ function checkPermissions(permissionSuffixes, projectNameFn) {
       return response.send({ message: 'Request missing parameter: projectKey' });
     }
 
-    const requiredPermissions = permissionSuffixes.map(suffix => projectKey.concat(permissionDelim, suffix));
+    const requiredPermissions = permissionSuffixes
+      .map(suffix => projectKey.concat(permissionDelim, suffix))
+      .concat(SYSTEM_INSTANCE_ADMIN);
     const grantedPermissions = get(request, 'user.permissions') || [];
 
     logger.debug('Auth: checking permissions');
