@@ -1,3 +1,4 @@
+# Build library dependencies
 FROM node:8.16.0-alpine as common
 
 ARG LIBRARY
@@ -7,15 +8,13 @@ RUN mkdir -p /opt/build && mkdir -p /opt/output
 WORKDIR /opt/build
 
 COPY ./yarn.lock .
-COPY ./workspaces/${LIBRARY}/package.json .
+COPY ./babel.config.js .
+COPY ./workspaces .
+COPY ./docker/buildLibraries .
 
-RUN yarn install --slient
+RUN ./buildLibraries
 
-COPY ./workspaces/${LIBRARY}/ .
-
-RUN yarn build && rm -rf ./src/ && mv ./dist/ ./src/ && yarn pack && mv *.tgz /opt/output
-
-
+# Build the service container
 FROM node:8.16.0-alpine
 
 ARG WORKSPACE
@@ -24,13 +23,15 @@ LABEL maintainer "joshua.foster@stfc.ac.uk"
 
 RUN mkdir -p /usr/src/app/resources && mkdir -p /usr/src/common
 
-WORKDIR /usr/src/app
-
+WORKDIR /usr/src/common
 COPY --from=common /opt/output/ /usr/src/common
+RUN yarn add /usr/src/common/*.tgz
+
+WORKDIR /usr/src/app
 COPY ./yarn.lock .
 COPY ./workspaces/${WORKSPACE}/package.json .
 
-RUN yarn add /usr/src/common/*.tgz && yarn install --silent --production && yarn cache clean
+RUN yarn install --prefer-offline --silent --production && yarn cache clean
 
 COPY ./workspaces/${WORKSPACE}/dist .
 COPY ./workspaces/${WORKSPACE}/resources ./resources

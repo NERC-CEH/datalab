@@ -1,5 +1,5 @@
 import { check, param, matchedData } from 'express-validator';
-import { service } from 'common';
+import { service } from 'service-chassis';
 import projectsRepository from '../dataaccess/projectsRepository';
 import logger from '../config/logger';
 
@@ -72,6 +72,17 @@ async function deleteProjectByKey(request, response, next) {
   }
 }
 
+async function projectKeyIsUnique(request, response, next) {
+  const { projectKey } = matchedData(request);
+
+  try {
+    const exists = await projectsRepository.exists(projectKey);
+    response.send(!exists);
+  } catch (error) {
+    next(new Error(`Error checking project key uniqueness: ${error.message}`));
+  }
+}
+
 const actionWithKeyValidator = () => service.middleware.validator([
   check('projectKey').exists().withMessage("Project 'projectKey' must be specified in URL."),
 ], logger);
@@ -82,15 +93,19 @@ const projectDocumentValidator = () => service.middleware.validator([
   check('key')
     .exists()
     .withMessage("'key' must be specified in request body.")
-    .isLength({ min: 2 })
-    .withMessage("'key' must be 2 or more characters long.")
-    .trim(),
+    .trim()
+    .isLength({ min: 2, max: 8 })
+    .withMessage("'key' must be 2-8 characters in length.")
+    .isAlpha()
+    .withMessage("'key' can only contain letters.")
+    .isLowercase()
+    .withMessage("Letters in 'key' must be lowercase."),
   check('name')
     .exists()
     .withMessage("'name' must be specified in request body.")
+    .trim()
     .isLength({ min: 2 })
-    .withMessage("'name' must be 2 or more characters long.")
-    .trim(),
+    .withMessage("'name' must be 2 or more characters long."),
   check('description'),
   check('collaborationLink'),
 ], logger);
@@ -112,6 +127,7 @@ export default {
   createProject,
   createOrUpdateProject,
   deleteProjectByKey,
+  projectKeyIsUnique,
   actionWithKeyValidator,
   projectDocumentValidator,
   urlAndBodyProjectKeyMatchValidator,

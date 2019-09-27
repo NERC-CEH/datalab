@@ -6,7 +6,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import IconButton from '../common/control/IconButton';
+import DangerButton from '../common/buttons/DangerButton';
+import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 class RobustConfirmation extends Component {
   constructor(props, context) {
@@ -43,12 +44,12 @@ class RobustConfirmation extends Component {
           </form>
         </DialogContent>
         <DialogActions>
-          <IconButton onClick={onCancel} icon="clear">
+          <DangerButton onClick={onSubmit} disabled={!this.state.name.valid}>
+            Delete
+          </DangerButton>
+          <SecondaryActionButton onClick={onCancel}>
             Cancel
-          </IconButton>
-          <IconButton danger onClick={onSubmit} icon="delete" disabled={!this.state.name.valid}>
-            Confirm Deletion
-          </IconButton>
+          </SecondaryActionButton>
         </DialogActions>
       </Dialog>
     );

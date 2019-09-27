@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator';
+import prometheusMiddleware from 'express-prometheus-middleware';
 
 const validator = (validations, logger) => async (req, res, next) => {
   await Promise.all(validations.map(validation => validation.run(req)));
@@ -11,6 +12,12 @@ const validator = (validations, logger) => async (req, res, next) => {
   logger.debug('Error validating request', errors.array());
   return res.status(400).json({ errors: errors.array() });
 };
+
+const metricsMiddleware = prometheusMiddleware({
+  metricsPath: '/metrics',
+  collectDefaultMetrics: true,
+  requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+});
 
 // Error wrapper function to allow controller functions to omit try/catch block
 const errorWrapper = fn => (req, res, next) => {
@@ -30,4 +37,4 @@ const createErrorHandler = logger => (error, request, response, next) => { // es
   return response.send({ error: error.message });
 };
 
-export { errorWrapper, validator, createErrorHandler };
+export { metricsMiddleware, errorWrapper, validator, createErrorHandler };

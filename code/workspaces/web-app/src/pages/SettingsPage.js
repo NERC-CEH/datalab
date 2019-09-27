@@ -5,11 +5,11 @@ import Page from './Page';
 import UserPermissionsTable from '../components/settings/UserPermissionsTable';
 import AddUserPermissions from '../components/settings/AddUserPermissions';
 
-const SettingsPage = ({ userPermissions }) => (
+const SettingsPage = ({ userPermissions, match: { params: { projectKey } } }) => (
   <Page title="Settings">
     <Typography variant="h5">User Permissions</Typography>
-    <AddUserPermissions />
-    <UserPermissionsTable />
+    <AddUserPermissions projectKey={projectKey} />
+    <UserPermissionsTable projectKey={projectKey} />
   </Page>
 );
 

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateProjectForm renders to match snapshot 1`] = `
+<form
+  className="form"
+  onSubmit={[MockFunction handleSubmit]}
+>
+  <Field
+    className="input"
+    component={[Function]}
+    label="Name"
+    name="name"
+  />
+  <Field
+    className="input"
+    component={[Function]}
+    label="Project Key"
+    name="projectKey"
+  />
+  <Field
+    className="input"
+    component={[Function]}
+    label="Description"
+    name="description"
+  />
+  <Field
+    className="input"
+    component={[Function]}
+    label="Collaboration Link"
+    name="collaborationLink"
+  />
+  <CreateFormControls
+    fullWidthButtons={true}
+    onCancel={[Function]}
+  />
+</form>
+`;

@@ -7,20 +7,15 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import ingressGenerator from '../kubernetes/ingressGenerator';
 import ingressApi from '../kubernetes/ingressApi';
-import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import { createPersistentVolume, createDeployment, createService, createIngressRuleWithConnect } from './stackBuilders';
-import { DELETED } from '../models/dataStorage.model';
 
 const type = 'minio';
 
 async function createVolume(user, params) {
-  await dataStorageRepository.createOrUpdate(user, params);
   await createVolumeStack(params);
 }
 
 async function deleteVolume(params) {
-  // Tag datastore as deleted but record will remain in db.
-  await dataStorageRepository.update(params.name, { status: DELETED });
   await deleteVolumeStack(params);
 }
 

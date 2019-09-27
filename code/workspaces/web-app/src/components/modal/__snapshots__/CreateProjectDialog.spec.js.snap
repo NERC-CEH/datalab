@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateProjectDialog renders to match snapshot passing function props to form 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Create New Project
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <ReduxForm
+      asyncBlurFields={
+        Array [
+          "projectKey",
+        ]
+      }
+      asyncValidate={[Function]}
+      destroyOnUnmount={false}
+      enableReinitialize={false}
+      forceUnregisterOnUnmount={false}
+      form="createProject"
+      getFormState={[Function]}
+      keepDirtyOnReinitialize={false}
+      onCancel={[MockFunction onCancel]}
+      onSubmit={[MockFunction onSubmit]}
+      persistentSubmitErrors={false}
+      pure={true}
+      shouldAsyncValidate={[Function]}
+      shouldError={[Function]}
+      shouldValidate={[Function]}
+      shouldWarn={[Function]}
+      submitAsSideEffect={false}
+      touchOnBlur={true}
+      touchOnChange={false}
+      updateUnregisteredFields={false}
+      validate={[Function]}
+    />
+  </WithStyles(ForwardRef(DialogContent))>
+</WithStyles(ForwardRef(Dialog))>
+`;

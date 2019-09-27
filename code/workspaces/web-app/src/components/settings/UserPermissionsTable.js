@@ -56,7 +56,7 @@ const checkBoxColumnOrder = SORTED_PERMISSIONS;
 export const projectUsersSelector = ({ projectUsers }) => projectUsers;
 export const currentUserIdSelector = ({ authentication: { identity: { sub } } }) => sub;
 
-function UserPermissionsTable({ classes }) {
+function UserPermissionsTable({ classes, projectKey }) {
   const users = useSelector(projectUsersSelector, shallowEqual);
   const currentUserId = useSelector(currentUserIdSelector, shallowEqual);
   const dispatch = useDispatch();
@@ -65,9 +65,9 @@ function UserPermissionsTable({ classes }) {
 
   useEffect(
     () => {
-      dispatch(projectSettingsActions.getProjectUserPermissions('project'));
+      dispatch(projectSettingsActions.getProjectUserPermissions(projectKey));
     },
-    [dispatch],
+    [dispatch, projectKey],
   );
 
   const actions = {
@@ -79,7 +79,7 @@ function UserPermissionsTable({ classes }) {
     <PureUserPermissionsTable
       users={users}
       currentUserId={currentUserId}
-      project="project"
+      projectKey={projectKey}
       classes={classes}
       colHeadings={columnHeadings}
       removeUserDialogState={removeUserDialogState}
@@ -92,7 +92,7 @@ function UserPermissionsTable({ classes }) {
 }
 
 export function PureUserPermissionsTable(
-  { users, currentUserId, project, classes, colHeadings, removeUserDialogState,
+  { users, currentUserId, projectKey, classes, colHeadings, removeUserDialogState,
     setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, actions, dispatch },
 ) {
   return (
@@ -105,7 +105,7 @@ export function PureUserPermissionsTable(
           <UserPermissionsTableBody
             users={users}
             currentUserId={currentUserId}
-            project={project}
+            projectKey={projectKey}
             classes={classes}
             numCols={colHeadings.length}
             setRemoveUserDialogState={setRemoveUserDialogState}
@@ -119,7 +119,7 @@ export function PureUserPermissionsTable(
         state={removeUserDialogState}
         setState={setRemoveUserDialogState}
         onRemoveConfirmationFn={onRemoveUserDialogConfirmationFn}
-        project={project}
+        projectKey={projectKey}
         dispatch={dispatch}
       />
     </div>
@@ -143,7 +143,7 @@ export function UserPermissionsTableHead({ headings, classes }) {
   );
 }
 
-export function UserPermissionsTableBody({ users, currentUserId, project, classes, numCols, setRemoveUserDialogState, actions, dispatch }) {
+export function UserPermissionsTableBody({ users, currentUserId, projectKey, classes, numCols, setRemoveUserDialogState, actions, dispatch }) {
   if (users.fetching.error || !users.value) {
     return <FullWidthTextRow numCols={numCols}>{'Error fetching data. Please try refreshing the page.'}</FullWidthTextRow>;
   }
@@ -161,7 +161,7 @@ export function UserPermissionsTableBody({ users, currentUserId, project, classe
       user={user}
       isCurrentUser={user.userId === currentUserId}
       index={index}
-      project={project}
+      projectKey={projectKey}
       classes={classes}
       setRemoveUserDialogState={setRemoveUserDialogState}
       actions={actions}
@@ -188,7 +188,7 @@ export function FullWidthTextRow({ children, numCols }) {
   );
 }
 
-export function UserPermissionsTableRow({ user, isCurrentUser, index, project, classes, setRemoveUserDialogState, actions, dispatch }) {
+export function UserPermissionsTableRow({ user, isCurrentUser, index, projectKey, classes, setRemoveUserDialogState, actions, dispatch }) {
   const rowKey = `row-${index}`;
   return (
     <TableRow key={rowKey}>
@@ -200,7 +200,7 @@ export function UserPermissionsTableRow({ user, isCurrentUser, index, project, c
           user={user}
           isCurrentUser={isCurrentUser}
           checkboxSpec={permission}
-          project={project}
+          projectKey={projectKey}
           classes={classes}
           cellKey={`${rowKey}-${permission.name}`}
           key={`${rowKey}-${permission.name}`}

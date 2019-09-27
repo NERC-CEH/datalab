@@ -90,6 +90,7 @@ class StacksContainer extends Component {
         <StackCards
           stacks={this.props.stacks.value}
           typeName={this.props.typeName}
+          typeNamePlural={this.props.typeNamePlural}
           openStack={this.openStack}
           deleteStack={this.confirmDeleteStack}
           openCreationForm={this.openCreationForm}
@@ -110,6 +111,7 @@ StacksContainer.propTypes = {
     value: PropTypes.array.isRequired,
   }).isRequired,
   typeName: PropTypes.string.isRequired,
+  typeNamePlural: PropTypes.string,
   containerType: PropTypes.string.isRequired,
   dialogAction: PropTypes.string.isRequired,
   formStateName: PropTypes.string.isRequired,

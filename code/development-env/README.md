@@ -195,6 +195,18 @@ The [Insomnia Rest client](https://insomnia.rest/) is recommended for testing AP
 during development. Detailed instructions for how to do this can be found
 [here](./insomnia/README.md) including a definition file that can be imported.
 
+## Running Mock GraphQL Server
+
+A Mock GraphQL server can be run in place of the real Client API GraphQL server. This automatically generates responses
+to queries using canned data. To start the mock server run the following command in the `code/workspaces/client-api`
+directory.
+
+```
+yarn mock
+```
+
+More details of how to extend and configure the mock are located in the `README` for the client-api service.
+
 ## Git Hooks
 
 Git hooks have been created to lint all staged files with the `.js` extension

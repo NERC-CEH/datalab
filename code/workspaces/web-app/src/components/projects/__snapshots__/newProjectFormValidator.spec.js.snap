@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`asyncValidate returns error if projectKey is not unique 1`] = `
+Object {
+  "projectKey": "Project Key already exists. It must be unique.",
+}
+`;
+
+exports[`asyncValidate returns error if unable to check projectKey is unique 1`] = `
+Object {
+  "name": "Unable to check if Project Key is unique.",
+}
+`;
+
+exports[`syncValidate should return an error if project key contains a capital letter 1`] = `
+Object {
+  "projectKey": "Project key can only contain lowercase letters",
+}
+`;
+
+exports[`syncValidate should return an error if project key contains a hyphen 1`] = `
+Object {
+  "projectKey": "Project key can only contain lowercase letters",
+}
+`;
+
+exports[`syncValidate should return an error if project key contains a number 1`] = `
+Object {
+  "projectKey": "Project key can only contain lowercase letters",
+}
+`;
+
+exports[`syncValidate should return an error if project key contains a space 1`] = `
+Object {
+  "projectKey": "Project key can only contain lowercase letters",
+}
+`;
+
+exports[`syncValidate should return an error when the name is less than 2 chars long 1`] = `
+Object {
+  "name": "Name is too short (minimum is 2 characters)",
+}
+`;
+
+exports[`syncValidate should return an error when the projectKey is less than 2 chars long 1`] = `
+Object {
+  "projectKey": "Project key is too short (minimum is 2 characters)",
+}
+`;
+
+exports[`syncValidate should return an error when the projectKey is more than 8 chars long 1`] = `
+Object {
+  "projectKey": "Project key is too long (maximum is 8 characters)",
+}
+`;

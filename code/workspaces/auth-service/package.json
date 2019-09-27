@@ -25,6 +25,8 @@
     "mustache": "^3.0.1",
     "node-cache": "^4.2.1",
     "pem-jwk": "^2.0.0",
+    "prom-client": "^11.5.3",
+    "service-chassis": "^0.1.0",
     "uuid": "^3.3.2",
     "winston": "^2.4.4"
   },

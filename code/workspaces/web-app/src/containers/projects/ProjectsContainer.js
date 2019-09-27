@@ -5,34 +5,38 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { permissionTypes } from 'common';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
+import modalDialogActions from '../../actions/modalDialogActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
+import { MODAL_TYPE_CREATE_PROJECT } from '../../constants/modaltypes';
+import notify from '../../components/common/notify';
 
 const TYPE_NAME = 'Project';
+const TYPE_NAME_PLURAL = 'Projects';
 const PROJECT_OPEN_PERMISSION = 'project.open';
 
-const styles = () => ({
+const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
+
+const styles = styleTheme => ({
   controlContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
+    marginBottom: styleTheme.spacing(2),
   },
   searchTextField: {
-    flexBasis: '40%',
+    width: '100%',
+    margin: 0,
   },
 });
 
 const searchInputProps = {
-  inputProps: {
-    style: {
-      backgroundColor: `${theme.palette.backgroundDarkHighTransparent}`,
-      color: `${theme.palette.backgroundDark}`,
-      paddingLeft: `${theme.spacing * 2}px`,
-      paddingTop: `${theme.spacing * 1.6}px`,
-      paddingBottom: `${theme.spacing * 1.6}px`,
-      paddingRight: `${theme.spacing * 2}px`,
-    },
+  disableUnderline: true,
+  style: {
+    backgroundColor: theme.palette.backgroundDarkHighTransparent,
+    borderRadius: theme.shape.borderRadius,
   },
 };
 
@@ -59,6 +63,9 @@ class ProjectsContainer extends Component {
       searchText: '',
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.onCreateProjectSubmit = this.onCreateProjectSubmit.bind(this);
+    this.openCreationForm = this.openCreationForm.bind(this);
+    this.projectUserPermissions = this.projectUserPermissions.bind(this);
   }
 
   handleSearchTextChange(event) {
@@ -75,11 +82,37 @@ class ProjectsContainer extends Component {
   }
 
   adaptProjectsToStacks() {
-    return this.props.projects.value.projectArray.map(projectToStack);
+    return this.props.projects.value.projectArray
+      ? this.props.projects.value.projectArray.map(projectToStack)
+      : [];
   }
 
   projectUserPermissions(project) {
-    return project && project.accessible ? [PROJECT_OPEN_PERMISSION] : [];
+    return (project && project.accessible) || this.props.userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
+      ? [PROJECT_OPEN_PERMISSION]
+      : [];
+  }
+
+  async onCreateProjectSubmit(project) {
+    this.props.actions.closeModalDialog();
+    try {
+      await this.props.actions.createProject(project);
+      notify.success(`${TYPE_NAME} created`);
+    } catch (error) {
+      notify.error(`Unable to create ${TYPE_NAME}`);
+    } finally {
+      await this.props.actions.loadProjects();
+    }
+  }
+
+  openCreationForm() {
+    this.props.actions.openModalDialog(
+      MODAL_TYPE_CREATE_PROJECT,
+      {
+        onSubmit: this.onCreateProjectSubmit,
+        onCancel: this.props.actions.closeModalDialog,
+      },
+    );
   }
 
   renderControls() {
@@ -87,14 +120,15 @@ class ProjectsContainer extends Component {
     return (
       <div className={classes.controlContainer}>
         <TextField
+          id="search"
           className={classes.searchTextField}
           autoFocus={true}
-          id="search"
+          hiddenLabel
           margin="dense"
           onChange={this.handleSearchTextChange}
           type="search"
           placeholder="Filter projects..."
-          variant="outlined"
+          variant="filled"
           value={this.state.searchText}
           InputProps={searchInputProps}
         />
@@ -103,25 +137,25 @@ class ProjectsContainer extends Component {
   }
 
   render() {
+    const { projects, history } = this.props;
     return (
-      <PromisedContentWrapper promise={this.props.projects}>
-        {this.props.projects.value.projectArray ? (
-          <div>
-            {this.renderControls()}
-            <StackCards
-              stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
-              typeName={TYPE_NAME}
-              openStack={project => this.props.history.push(`/projects/${project.key}/info`)}
-              deleteStack={() => { }}
-              openCreationForm={() => { }}
-              userPermissions={project => this.projectUserPermissions(project)}
-              createPermission=""
-              openPermission={PROJECT_OPEN_PERMISSION}
-              deletePermission=""
-              editPermission=""
-            />
-          </div>
-        ) : (<div />)}
+      <PromisedContentWrapper promise={projects}>
+        <div>
+          {this.renderControls()}
+          <StackCards
+            stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
+            typeName={TYPE_NAME}
+            typeNamePlural={TYPE_NAME_PLURAL}
+            openStack={project => history.push(`/projects/${project.key}/info`)}
+            deleteStack={() => { }}
+            openCreationForm={this.openCreationForm}
+            userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
+            createPermission={SYSTEM_INSTANCE_ADMIN}
+            openPermission={PROJECT_OPEN_PERMISSION}
+            deletePermission=""
+            editPermission=""
+          />
+        </div>
       </PromisedContentWrapper>
     );
   }
@@ -147,6 +181,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       ...projectActions,
+      ...modalDialogActions,
     }, dispatch),
   };
 }

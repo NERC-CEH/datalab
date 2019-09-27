@@ -1,6 +1,8 @@
 import projectActions, {
   LOAD_PROJECTS_ACTION,
   LOAD_PROJECTINFO_ACTION,
+  CREATE_PROJECT_ACTION,
+  CHECK_PROJECT_KEY_UNIQUE_ACTION,
 } from './projectActions';
 import projectsService from '../api/projectsService';
 
@@ -37,6 +39,30 @@ describe('projectActions', () => {
       expect(output.type).toBe('LOAD_PROJECTINFO');
       expect(output.payload).toBe('expectedProjectsPayload');
     });
+
+    it('createProject', () => {
+      const project = { name: 'project', key: 'project' };
+      projectsService.createProject = jest.fn(() => 'expected-payload');
+
+      const output = projectActions.createProject(project);
+
+      expect(projectsService.createProject).toHaveBeenCalledTimes(1);
+      expect(projectsService.createProject).toHaveBeenCalledWith(project);
+      expect(output.type).toEqual(CREATE_PROJECT_ACTION);
+      expect(output.payload).toEqual('expected-payload');
+    });
+
+    it('checkProjectKeyUniqueness', () => {
+      const projectKey = 'projectKey';
+      projectsService.checkProjectKeyUniqueness = jest.fn(() => 'expected-payload');
+
+      const output = projectActions.checkProjectKeyUniqueness(projectKey);
+
+      expect(projectsService.checkProjectKeyUniqueness).toHaveBeenCalledTimes(1);
+      expect(projectsService.checkProjectKeyUniqueness).toHaveBeenCalledWith(projectKey);
+      expect(output.type).toEqual(CHECK_PROJECT_KEY_UNIQUE_ACTION);
+      expect(output.payload).toEqual('expected-payload');
+    });
   });
 
   describe('exports correct values for', () => {
@@ -46,6 +72,14 @@ describe('projectActions', () => {
 
     it('LOAD_PROJECTINFO_ACTION', () => {
       expect(LOAD_PROJECTINFO_ACTION).toBe('LOAD_PROJECTINFO');
+    });
+
+    it('CREATE_PROJECT_ACTION', () => {
+      expect(CREATE_PROJECT_ACTION).toBe('CREATE_PROJECT_ACTION');
+    });
+
+    it('CHECK_PROJECT_KEY_UNIQUE_ACTION', () => {
+      expect(CHECK_PROJECT_KEY_UNIQUE_ACTION).toBe('CHECK_PROJECT_KEY_UNIQUE_ACTION');
     });
   });
 });

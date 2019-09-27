@@ -1,9 +1,8 @@
 import { Field, reduxForm } from 'redux-form';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { stackTypes } from 'common';
-import { renderTextField, renderSelectField, renderTextArea } from '../common/form/controls';
+import { renderTextField, renderSelectField, renderTextArea, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 
 const { DATA_STORE, getStackSelections } = stackTypes;
@@ -52,8 +51,7 @@ const CreateDataStoreForm = (props) => {
           placeholder="Description"
           component={renderTextArea} />
       </div>
-      <Button style={{ margin: 8 }} type="submit" color="primary" disabled={submitting}>Create</Button>
-      <Button style={{ margin: 8 }} onClick={cancel}>Cancel</Button>
+      <CreateFormControls onCancel={cancel} submitting={submitting} fullWidthButtons/>
     </form>
   );
 };

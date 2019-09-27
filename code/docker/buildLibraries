@@ -1,0 +1,19 @@
+#!/bin/ash
+set -e
+
+BASE=/opt/build
+LIBRARIES="common,service-chassis"
+
+for library in $(echo $LIBRARIES | sed "s/,/ /g") ;
+do
+  echo "Building library $library"
+  cp /opt/build/yarn.lock /opt/build/${library}
+  cp /opt/build/babel.config.js /opt/build/${library}
+  cd /opt/build/${library}
+  yarn install --silent --no-progress
+  yarn build
+  rm -rf ./src/
+  mv ./dist/ ./src/
+  yarn pack
+  mv *.tgz /opt/output
+done

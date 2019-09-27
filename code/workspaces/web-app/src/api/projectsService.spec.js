@@ -43,4 +43,42 @@ describe('projectsService', () => {
       });
     });
   });
+
+  describe('createProject', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ createProject: 'expectedValue' });
+
+      return projectsService.createProject().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return projectsService.createProject().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
+  describe('checkProjectKeyUniqueness', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ checkProjectKeyUniqueness: 'expectedValue' });
+
+      return projectsService.checkProjectKeyUniqueness().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return projectsService.checkProjectKeyUniqueness().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
 });

@@ -33,6 +33,7 @@ describe('PureAddUserPermission', () => {
       shallow(
         <PureAddUserPermission
           users={initialUsers}
+          projectKey="projectKey"
           permissionLevels={permissionLevels}
           selectedPermissions={'Viewer'}
           setSelectedPermissions={jest.fn()}
@@ -187,6 +188,8 @@ describe('AddUserButton', () => {
     shallow = createShallow();
   });
 
+  const classes = { addButton: 'addButton' };
+
   it('renders as disabled when the selected user name is not in the list of possibilities', () => {
     expect(
       shallow(
@@ -196,6 +199,7 @@ describe('AddUserButton', () => {
           project={'project'}
           selectedPermissions={permissionLevels[0]}
           onClickFn={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -210,6 +214,7 @@ describe('AddUserButton', () => {
           project={'project'}
           selectedPermissions={permissionLevels[0]}
           onClickFn={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -218,7 +223,7 @@ describe('AddUserButton', () => {
   it('calls onClickFn with correct arguments when clicked', () => {
     const userInformation = initialUsers.value;
     const selectedUser = initialUsers.value[0];
-    const project = 'project';
+    const projectKey = 'projectKey';
     const selectedPermissions = permissionLevels[0];
     const onClickFnMock = jest.fn();
     const dispatch = jest.fn();
@@ -227,16 +232,17 @@ describe('AddUserButton', () => {
       <AddUserButton
         userInformation={userInformation}
         selectedUserName={selectedUser.name}
-        project={project}
+        projectKey={projectKey}
         selectedPermissions={selectedPermissions}
         onClickFn={onClickFnMock}
         dispatch={dispatch}
+        classes={classes}
       />,
     );
     render.simulate('click');
     expect(onClickFnMock).toHaveBeenCalledTimes(1);
     expect(onClickFnMock)
-      .toHaveBeenCalledWith(project, selectedUser, selectedPermissions, dispatch);
+      .toHaveBeenCalledWith(projectKey, selectedUser, selectedPermissions, dispatch);
   });
 });
 

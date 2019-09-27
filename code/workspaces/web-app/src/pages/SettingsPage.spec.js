@@ -13,7 +13,7 @@ describe('SettingsPage', () => {
 
   it('renders to match snapshot', () => {
     expect(
-      shallow(<SettingsPage userPermissions={userPermissions}/>),
+      shallow(<SettingsPage userPermissions={userPermissions} match={{ params: { projectKey: 'projectKey' } }} />),
     ).toMatchSnapshot();
   });
 });

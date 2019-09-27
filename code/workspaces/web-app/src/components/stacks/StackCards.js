@@ -1,44 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 
-const breakPoints = { xs: 12 };
-
-const styles = () => ({
+const styles = theme => ({
   stackDiv: {
     display: 'flex',
     flexDirection: 'column',
   },
+  bottomControlDiv: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  noItemsMessage: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderTop: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    padding: `${theme.spacing(3)}px 0`,
+  },
 });
 
-const StackCards = ({ stacks, typeName, openStack, deleteStack, editStack, openCreationForm, userPermissions,
-  createPermission, openPermission, deletePermission, editPermission, classes }) => (
+const StackCards = ({ stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
+  userPermissions, createPermission, openPermission, deletePermission, editPermission, classes }) => (
   <div className={classes.stackDiv}>
-    {stacks.map((stack, index) => (
-      <StackCard
-        key={stack.id}
-        stack={stack}
-        typeName={typeName}
-        openStack={openStack}
-        deleteStack={deleteStack}
-        editStack={editStack}
-        userPermissions={userPermissions(stack)}
-        openPermission={openPermission}
-        deletePermission={deletePermission}
-        editPermission={editPermission}
-      />
-    ))}
+    <div> {/* extra div enables working css styling of stack card */}
+      {stacks && stacks.length > 0
+        ? stacks.map(stack => (
+          <StackCard
+            key={stack.id}
+            stack={stack}
+            typeName={typeName}
+            openStack={openStack}
+            deleteStack={deleteStack}
+            editStack={editStack}
+            userPermissions={userPermissions(stack)}
+            openPermission={openPermission}
+            deletePermission={deletePermission}
+            editPermission={editPermission}
+          />))
+        : <div className={classes.noItemsMessage}>
+            <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
+          </div>
+      }
+    </div>
     <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
-      <Grid item {...breakPoints}>
+      <div className={classes.bottomControlDiv}>
         <NewStackButton onClick={openCreationForm} typeName={typeName} />
-      </Grid>
+      </div>
     </PermissionWrapper>
   </div>
 );
+
+export default withStyles(styles)(StackCards);
 
 StackCards.propTypes = {
   stacks: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -53,5 +70,3 @@ StackCards.propTypes = {
   deletePermission: PropTypes.string.isRequired,
   editPermission: PropTypes.string.isRequired,
 };
-
-export default withStyles(styles)(StackCards);

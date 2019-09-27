@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCardActions creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(CardActions))
+<div
   className="StackCardActions-cardActions-1"
 >
   <ComponentWrapper
+    className="StackCardActions-buttonWrapper-2"
     permission="open"
     userPermissions={
       Array [
@@ -14,17 +15,16 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <WithStyles(ForwardRef(Button))
-      className="StackCardActions-button-2"
-      color="primary"
+    <PrimaryActionButton
       disabled={false}
+      fullWidth={true}
       onClick={[Function]}
-      variant="contained"
     >
       Open
-    </WithStyles(ForwardRef(Button))>
+    </PrimaryActionButton>
   </ComponentWrapper>
   <ComponentWrapper
+    className="StackCardActions-buttonWrapper-2"
     permission="delete"
     userPermissions={
       Array [
@@ -34,17 +34,16 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <WithStyles(ForwardRef(Button))
-      className="StackCardActions-button-2"
-      color="secondary"
+    <SecondaryActionButton
       disabled={false}
+      fullWidth={true}
       onClick={[Function]}
-      variant="contained"
     >
       Delete
-    </WithStyles(ForwardRef(Button))>
+    </SecondaryActionButton>
   </ComponentWrapper>
   <ComponentWrapper
+    className="StackCardActions-buttonWrapper-2"
     permission="edit"
     userPermissions={
       Array [
@@ -54,15 +53,13 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <WithStyles(ForwardRef(Button))
-      className="StackCardActions-button-2"
-      color="secondary"
+    <SecondaryActionButton
       disabled={false}
+      fullWidth={true}
       onClick={[Function]}
-      variant="contained"
     >
       Edit
-    </WithStyles(ForwardRef(Button))>
+    </SecondaryActionButton>
   </ComponentWrapper>
-</WithStyles(ForwardRef(CardActions))>
+</div>
 `;
