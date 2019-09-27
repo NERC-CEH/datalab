@@ -106,8 +106,7 @@ const projectDocumentValidator = () => service.middleware.validator([
     .trim()
     .isLength({ min: 2 })
     .withMessage("'name' must be 2 or more characters long."),
-  check('description'),
-  check('collaborationLink'),
+  check(['description', 'collaborationLink', 'tags']),
 ], logger);
 
 const urlAndBodyProjectKeyMatchValidator = () => service.middleware.validator([

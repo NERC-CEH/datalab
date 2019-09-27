@@ -15,7 +15,8 @@ async function exists(projectKey) {
 }
 
 async function create(project) {
-  return Project().create(project);
+  // needs to be in array else thinks is spread of projects and not project then options
+  return Project().create([project], { setDefaultsOnInsert: true });
 }
 
 async function createOrUpdate(project) {
