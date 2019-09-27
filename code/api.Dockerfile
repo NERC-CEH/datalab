@@ -1,33 +1,20 @@
+# Build library dependencies
 FROM node:8.16.0-alpine as common
 
 ARG LIBRARY
 
-RUN mkdir -p /opt/build/${LIBRARY} && mkdir -p /opt/output
+RUN mkdir -p /opt/build && mkdir -p /opt/output
 
-WORKDIR /opt/build/${LIBRARY}
+WORKDIR /opt/build
 
 COPY ./yarn.lock .
-COPY ./workspaces/${LIBRARY}/package.json .
+COPY ./babel.config.js .
+COPY ./workspaces .
+COPY ./docker/buildLibraries .
 
-RUN yarn install --slient
+RUN ./buildLibraries
 
-COPY ./workspaces/${LIBRARY}/ .
-
-RUN yarn build && rm -rf ./src/ && mv ./dist/ ./src/ && yarn pack && mv *.tgz /opt/output
-
-
-RUN mkdir -p /opt/build/service-chassis
-WORKDIR /opt/build/service-chassis
-COPY ./yarn.lock .
-COPY ./workspaces/service-chassis/package.json .
-
-RUN yarn install --slient
-
-COPY ./workspaces/service-chassis/ .
-
-RUN yarn build && rm -rf ./src/ && mv ./dist/ ./src/ && yarn pack && mv *.tgz /opt/output
-
-
+# Build the service container
 FROM node:8.16.0-alpine
 
 ARG WORKSPACE
@@ -35,7 +22,6 @@ ARG WORKSPACE
 LABEL maintainer "joshua.foster@stfc.ac.uk"
 
 RUN mkdir -p /usr/src/app/resources && mkdir -p /usr/src/common
-
 
 WORKDIR /usr/src/common
 COPY --from=common /opt/output/ /usr/src/common

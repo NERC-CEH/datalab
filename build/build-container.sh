@@ -16,7 +16,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     cd ./code && yarn update-version && yarn workspace client-api build
     DOCKERFILE="api.Dockerfile"
     IMAGE="datalab-api"
-    LIBRARY="common"
+    LIBRARIES="common,service-chassis"
     WORKSPACE="client-api"
     ;;
   app)
@@ -24,7 +24,6 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     cd ./code && yarn update-version && yarn workspace web-app build
     DOCKERFILE="app.Dockerfile"
     IMAGE="datalab-app"
-    LIBRARY="common"
     WORKSPACE="web-app"
     ;;
   infrastructure)
@@ -32,7 +31,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     cd ./code && yarn update-version && yarn workspace infrastructure-api build
     DOCKERFILE="api.Dockerfile"
     IMAGE="infrastructure-api"
-    LIBRARY="common"
+    LIBRARIES="common,service-chassis"
     WORKSPACE="infrastructure-api"
     ;;
   authorisation)
@@ -40,7 +39,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     cd ./code && yarn update-version && yarn workspace auth-service build
     DOCKERFILE="api.Dockerfile"
     IMAGE="authorisation-svc"
-    LIBRARY="common"
+    LIBRARIES="common,service-chassis"
     WORKSPACE="auth-service"
     ;;
   common)
@@ -53,7 +52,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
     ;;
   esac
   echo "Generating docker image..."
-  docker build -f $DOCKERFILE -t nerc/$IMAGE:latest --build-arg LIBRARY=$LIBRARY --build-arg WORKSPACE=$WORKSPACE .
+  docker build -f $DOCKERFILE -t nerc/$IMAGE:latest --build-arg LIBRARIES=$LIBRARIES --build-arg WORKSPACE=$WORKSPACE .
   docker tag nerc/$IMAGE:latest nerc/$IMAGE:$GIT_DESCRIBE
   if [ "$#" -eq 2 ]; then
     echo "Attempting to push image..."
