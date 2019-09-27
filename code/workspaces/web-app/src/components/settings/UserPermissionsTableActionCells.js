@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import { PERMISSION_VALUES } from '../../constants/permissions';
 
-export function CheckboxCell({ user, isCurrentUser, checkboxSpec, project, classes, cellKey, actions, dispatch }) {
+export function CheckboxCell({ user, isCurrentUser, checkboxSpec, projectKey, classes, cellKey, actions, dispatch }) {
   return (
     <TableCell
       className={classes.tableCell}
@@ -17,7 +17,7 @@ export function CheckboxCell({ user, isCurrentUser, checkboxSpec, project, class
         user={user}
         isCurrentUser={isCurrentUser}
         checkboxSpec={checkboxSpec}
-        project={project}
+        projectKey={projectKey}
         classes={classes}
         actions={actions}
         dispatch={dispatch}
@@ -26,7 +26,7 @@ export function CheckboxCell({ user, isCurrentUser, checkboxSpec, project, class
   );
 }
 
-export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, project, classes, actions, dispatch }) {
+export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, projectKey, classes, actions, dispatch }) {
   const props = { checked: true, color: 'default' };
   if (user.role === checkboxSpec.name) {
     props.className = classes.activeSelection;
@@ -38,7 +38,7 @@ export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, project
 
   if (isCurrentUser) props.disabled = true;
 
-  return <Checkbox {...props} onClick={() => actions.addUserPermission(project, user, checkboxSpec.name, dispatch)}/>;
+  return <Checkbox {...props} onClick={() => actions.addUserPermission(projectKey, user, checkboxSpec.name, dispatch)}/>;
 }
 
 export function RemoveUserButtonCell({ user, isCurrentUser, classes, setRemoveUserDialogState }) {

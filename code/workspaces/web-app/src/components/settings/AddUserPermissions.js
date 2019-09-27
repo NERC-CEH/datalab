@@ -48,7 +48,7 @@ const PERMISSIONS = SORTED_PERMISSIONS.map(item => startCase(item.name));
 
 export const getUsersFromState = ({ users }) => users;
 
-export default function AddUserPermission() {
+export default function AddUserPermission({ projectKey }) {
   const users = useSelector(getUsersFromState);
   const dispatch = useDispatch();
   const [selectedPermissions, setSelectedPermissions] = useState(PERMISSIONS[PERMISSIONS.length - 1]);
@@ -60,6 +60,7 @@ export default function AddUserPermission() {
 
   return <PureAddUserPermission
     users={users}
+    projectKey={projectKey}
     permissionLevels={PERMISSIONS}
     selectedPermissions={selectedPermissions} setSelectedPermissions={setSelectedPermissions}
     selectedUserName={selectedUserName} setSelectedUserName={setSelectedUserName}
@@ -68,7 +69,7 @@ export default function AddUserPermission() {
 }
 
 export function PureAddUserPermission({
-  users, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch,
+  users, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch,
 }) {
   const classes = useStyles();
   const userNames = users.value.map(user => user.name);
@@ -84,7 +85,7 @@ export function PureAddUserPermission({
       <AddUserButton
         userInformation={users.value}
         selectedUserName={selectedUserName}
-        project="project"
+        projectKey={projectKey}
         onClickFn={dispatchAddUserAction}
         dispatch={dispatch}
         selectedPermissions={selectedPermissions}
@@ -165,23 +166,23 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
   );
 }
 
-export function AddUserButton({ userInformation, selectedUserName, project, selectedPermissions, onClickFn, dispatch, classes }) {
+export function AddUserButton({ userInformation, selectedUserName, projectKey, selectedPermissions, onClickFn, dispatch, classes }) {
   const selectedUser = userInformation.find(user => user.name === selectedUserName);
   return (
     <PrimaryActionButton
       className={classes.addButton}
       disabled={!selectedUser}
-      onClick={() => onClickFn(project, selectedUser, selectedPermissions, dispatch)}
+      onClick={() => onClickFn(projectKey, selectedUser, selectedPermissions, dispatch)}
     >
       Add
     </PrimaryActionButton>
   );
 }
 
-export function dispatchAddUserAction(project, user, selectedPermissions, dispatch) {
+export function dispatchAddUserAction(projectKey, user, selectedPermissions, dispatch) {
   dispatch(
     projectSettingsActions.addUserPermission(
-      'project', user, selectedPermissions.toLowerCase(),
+      projectKey, user, selectedPermissions.toLowerCase(),
     ),
   );
 }

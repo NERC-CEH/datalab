@@ -21,7 +21,7 @@ exports[`CheckboxCell renders correctly passing props to PermissionsCheckbox in 
     }
     dispatch={[MockFunction]}
     isCurrentUser={false}
-    project="project"
+    projectKey="projectKey"
     user={
       Object {
         "role": "admin",

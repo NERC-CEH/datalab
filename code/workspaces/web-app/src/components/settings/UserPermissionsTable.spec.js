@@ -177,7 +177,7 @@ describe('UserPermissionsTableBody', () => {
           <UserPermissionsTableBody
             users={users}
             currentUserId="admin-user-id"
-            project="project"
+            projectKey="projectKey"
             classes={classes}
             colHeadings={columnHeadings}
             numCols={columnHeadings.length}
@@ -247,7 +247,7 @@ describe('UserPermissionsTableRow', () => {
             user={user}
             isCurrentUser={false}
             index={2}
-            project="project"
+            projectKey="projectKey"
             classes={classes}
             setRemoveUserDialogState={jest.fn()}
             dispatch={jest.fn()}
