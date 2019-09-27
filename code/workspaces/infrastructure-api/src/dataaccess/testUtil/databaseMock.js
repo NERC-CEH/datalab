@@ -16,6 +16,14 @@ function createDatabaseMock(items, state = {}) {
       lastInvocation.params = params;
       return createDatabaseMock(entity, lastInvocation)();
     },
+    filterByProject(projectKey) {
+      lastInvocation.projectKey = projectKey;
+      return createDatabaseMock(items, lastInvocation)();
+    },
+    filterOneByProject(projectKey) {
+      lastInvocation.projectKey = projectKey;
+      return createDatabaseMock(items, lastInvocation)();
+    },
     filterByUser({ sub }) {
       lastInvocation.user = sub;
       return createDatabaseMock(items, lastInvocation)();
@@ -33,6 +41,7 @@ function createDatabaseMock(items, state = {}) {
     query: () => lastInvocation.query,
     entity: () => lastInvocation.entity,
     params: () => lastInvocation.params,
+    project: () => lastInvocation.projectKey,
     user: () => lastInvocation.user,
     clear: () => { lastInvocation = {}; },
   });

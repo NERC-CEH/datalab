@@ -16,6 +16,7 @@ Object {
 exports[`Stack Controller createStack calls stack repository with correct parameters 1`] = `
 Array [
   Array [
+    "project",
     "username",
     Object {
       "another": "field",
@@ -57,6 +58,7 @@ Object {
 exports[`Stack Controller deleteStack calls stack repository with correct parameters 1`] = `
 Array [
   Array [
+    "project",
     "username",
     Object {
       "another": "field",

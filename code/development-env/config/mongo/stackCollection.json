@@ -1,6 +1,7 @@
 [
   {
       "name" : "jupyter",
+      "projectKey": "project",
       "status" : "requested",
       "created" : "2018-02-13T12:46:39.687Z",
       "displayName" : "Jupyter Notebook",

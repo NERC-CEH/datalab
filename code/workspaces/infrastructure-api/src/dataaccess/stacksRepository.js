@@ -6,34 +6,54 @@ function Stack() {
 
 function getAll(user) {
   return Stack()
-    .find().filterByUser(user).exec();
+    .find()
+    .filterByUser(user)
+    .exec();
 }
 
-function getAllByCategory(user, category) {
+function getAllByProject(projectKey, user) {
   return Stack()
-    .find({ category }).filterByUser(user).exec();
+    .find()
+    .filterByProject(projectKey)
+    .filterByUser(user)
+    .exec();
 }
 
-function getAllByVolumeMount(user, mount) {
+function getAllByCategory(projectKey, user, category) {
+  return Stack()
+    .find({ category })
+    .filterByProject(projectKey)
+    .filterByUser(user)
+    .exec();
+}
+
+function getAllByVolumeMount(projectKey, user, mount) {
   // Searches All Users
   return Stack()
-    .find({ volumeMount: mount }).exec();
+    .find({ volumeMount: mount })
+    .filterByProject(projectKey)
+    .exec();
 }
 
 function getOneById(user, id) {
   return Stack()
-    .findOne({ _id: id }).filterOneByUser(user).exec();
+    .findOne({ _id: id })
+    .filterOneByUser(user)
+    .exec();
 }
 
-function getOneByName(user, name) {
+function getOneByName(projectKey, user, name) {
   // Searches All Users
   return Stack()
-    .findOne({ name }).exec();
+    .findOne({ name })
+    .filterOneByProject(projectKey)
+    .exec();
 }
 
-function createOrUpdate(user, stack) {
+function createOrUpdate(projectKey, user, stack) {
   return Stack()
     .find()
+    .filterByProject(projectKey)
     .filterByUser(user)
     .findOneAndUpdate(
       { name: stack.name },
@@ -43,14 +63,17 @@ function createOrUpdate(user, stack) {
     .exec();
 }
 
-function deleteStack(user, stack) {
+function deleteStack(projectKey, user, stack) {
   return Stack()
     .find()
+    .filterByProject(projectKey)
     .filterByUser(user)
     .remove({ name: stack.name })
     .exec();
 }
 
+// Function is used by kube-water to update stacks status. This will require an
+// update when kube-water updated to handle projectKey.
 function updateStatus(stack) {
   const { name, type, status } = stack;
   return Stack()
@@ -61,6 +84,7 @@ function updateStatus(stack) {
 
 export default {
   getAll,
+  getAllByProject,
   getAllByCategory,
   getOneById,
   getOneByName,

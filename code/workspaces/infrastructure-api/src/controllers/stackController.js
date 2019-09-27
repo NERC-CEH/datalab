@@ -46,7 +46,7 @@ function getOneByNameExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackRepository.getOneByName(user, params.name)
+  return stackRepository.getOneByName(params.projectKey, user, params.name)
     .then(handleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching Name for', TYPE, undefined));
@@ -81,6 +81,7 @@ const withIdValidator = [
 ];
 
 const withNameValidator = [
+  checkExistsWithMsg('projectKey'),
   checkExistsWithMsg('name')
     .isAscii()
     .withMessage('Name must only use the characters a-z')
@@ -90,7 +91,6 @@ const withNameValidator = [
 
 const deleteStackValidator = [
   ...withNameValidator,
-  checkExistsWithMsg('projectKey'),
   checkExistsWithMsg('datalabInfo.domain'),
   checkExistsWithMsg('datalabInfo.name'),
   checkExistsWithMsg('type'),

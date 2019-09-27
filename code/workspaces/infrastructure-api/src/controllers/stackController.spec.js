@@ -178,7 +178,10 @@ describe('Stack Controller', () => {
   });
 
   describe('getOneByName', () => {
-    beforeEach(() => createValidatedRequest({ name: 'expectedName' }, stackController.withNameValidator));
+    beforeEach(() => createValidatedRequest(
+      { name: 'expectedName', projectKey: 'expectedProject' },
+      stackController.withNameValidator,
+    ));
 
     it('should process a valid request', () => {
       const response = httpMocks.createResponse();
