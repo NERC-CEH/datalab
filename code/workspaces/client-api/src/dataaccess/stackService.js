@@ -4,8 +4,8 @@ import config from '../config';
 
 const API_URL_BASE = config.get('infrastructureApi');
 
-function getAll({ token }) {
-  return axios.get(`${API_URL_BASE}/stacks`, generateOptions(token))
+function getAll(projectKey, { token }) {
+  return axios.get(`${API_URL_BASE}/stacks/${projectKey}`, generateOptions(token))
     .then(response => response.data);
 }
 
@@ -24,8 +24,8 @@ function getByName(projectKey, name, { token }) {
     .then(response => get(response, 'data.id') || null);
 }
 
-function getById({ token }, id) {
-  return axios.get(`${API_URL_BASE}/stack/id/${id}`, generateOptions(token))
+function getById(projectKey, id, { token }) {
+  return axios.get(`${API_URL_BASE}/stack/${projectKey}/id/${id}`, generateOptions(token))
     .then(response => response.data);
 }
 

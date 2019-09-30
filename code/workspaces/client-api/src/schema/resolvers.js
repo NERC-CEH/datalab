@@ -11,7 +11,6 @@ import minioTokenService from '../dataaccess/minioTokenService';
 import stackUrlService from '../dataaccess/stackUrlService';
 import projectService from '../dataaccess/projectService';
 import storageService from '../infrastructure/storageService';
-import config from '../config';
 
 const { usersPermissions: { USERS_LIST } } = permissionTypes;
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
@@ -21,7 +20,6 @@ const { elementPermissions: { SETTINGS_READ, SETTINGS_EDIT } } = permissionTypes
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 const { READY } = statusTypes;
 
-const DATALAB_NAME = config.get('datalabName');
 const PROJECT_KEY = 'project';
 
 const resolvers = {
@@ -29,9 +27,9 @@ const resolvers = {
     status: () => () => `GraphQL server is running version: ${version}`,
     dataStorage: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_LIST, user, () => storageService.getAllProjectActive(args.projectKey, token)),
     dataStore: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_OPEN, user, () => storageService.getById(args.projectKey, args.id, token)),
-    stack: (obj, { id }, { user, token }) => permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
-    stacks: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
-    stacksByCategory: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory(PROJECT_KEY, args.category, { user, token })),
+    stack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_OPEN, user, () => stackService.getById(args.id, { user, token })),
+    stacks: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAll(args.projectKey, { user, token })),
+    stacksByCategory: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAllByCategory(args.projectKey, args.category, { user, token })),
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
@@ -43,8 +41,8 @@ const resolvers = {
   },
 
   Mutation: {
-    createStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
-    deleteStack: (obj, { stack }, { user, token }) => permissionChecker(STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, { projectKey: PROJECT_KEY, ...stack })),
+    createStack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => stackApi.createStack(args.stack.projectKey, args.stack, { user, token })),
+    deleteStack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_DELETE, user, () => stackApi.deleteStack(args.stack.projectKey, args.stack, { user, token })),
     createDataStore: (obj, args, { user, token }) => (
       projectPermissionWrapper(args, STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),

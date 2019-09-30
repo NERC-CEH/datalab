@@ -37,7 +37,7 @@ function configureRoutes(app) {
   app.get('/stacks/:projectKey/category/:category', projectPermissionWrapper(STACKS_LIST), stacks.withCategoryValidator, stacks.listByCategory);
   app.get('/stacks/:projectKey/mount/:mount', projectPermissionWrapper(STORAGE_LIST), stacks.withMountValidator, stacks.listByMount);
   app.get('/stacks/:projectKey/:name/isUnique', projectPermissionWrapper(STACKS_LIST), stack.withNameValidator, names.isUnique);
-  app.get('/stack/id/:id', permissionWrapper(STACKS_OPEN), stack.withIdValidator, stack.getOneById);
+  app.get('/stack/:projectKey/id/:id', projectPermissionWrapper(STACKS_OPEN), stack.withIdValidator, stack.getOneById);
   app.get('/stack/:projectKey/name/:name', projectPermissionWrapper(STACKS_CREATE), stack.withNameValidator, stack.getOneByName);
   app.post('/stack/:projectKey', projectPermissionWrapper(STACKS_CREATE), stack.createStackValidator, stack.createStack);
   app.delete('/stack/:projectKey', projectPermissionWrapper(STACKS_DELETE), stack.deleteStackValidator, stack.deleteStack);
