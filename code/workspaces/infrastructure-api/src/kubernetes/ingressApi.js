@@ -4,46 +4,45 @@ import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
 
-const INGRESS_URL = `${API_BASE}/apis/extensions/v1beta1/namespaces/${NAMESPACE}/ingresses`;
+const getIngressUrl = namespace => `${API_BASE}/apis/extensions/v1beta1/namespaces/${namespace}/ingresses`;
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
-function createOrUpdateIngress(name, manifest) {
-  return getIngress(name, manifest)
-    .then(createOrReplace(name, manifest));
+function createOrUpdateIngress(name, namespace, manifest) {
+  return getIngress(name, namespace)
+    .then(createOrReplace(name, namespace, manifest));
 }
 
-const createOrReplace = (name, manifest) => (existingIngress) => {
+const createOrReplace = (name, namespace, manifest) => (existingIngress) => {
   if (existingIngress) {
-    return updateIngress(name, manifest);
+    return updateIngress(name, namespace, manifest);
   }
 
-  return createIngress(name, manifest);
+  return createIngress(name, namespace, manifest);
 };
 
-function getIngress(name) {
-  return axios.get(`${INGRESS_URL}/${name}`)
+function getIngress(name, namespace) {
+  return axios.get(`${getIngressUrl(namespace)}/${name}`)
     .then(response => response.data)
     .catch(() => undefined);
 }
 
-function createIngress(name, manifest) {
+function createIngress(name, namespace, manifest) {
   logger.info('Creating ingress: %s', name);
-  return axios.post(INGRESS_URL, manifest, YAML_CONTENT_HEADER)
+  return axios.post(getIngressUrl(namespace), manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
-function updateIngress(name, manifest) {
+function updateIngress(name, namespace, manifest) {
   logger.info('Updating ingress: %s', name);
-  return axios.put(`${INGRESS_URL}/${name}`, manifest, YAML_CONTENT_HEADER)
+  return axios.put(`${getIngressUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
-function deleteIngress(name) {
+function deleteIngress(name, namespace) {
   logger.info('Deleting ingress: %s', name);
-  return axios.delete(`${INGRESS_URL}/${name}`)
+  return axios.delete(`${getIngressUrl(namespace)}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('ingress', name));
 }

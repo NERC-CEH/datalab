@@ -7,10 +7,11 @@ import deploymentApi from './deploymentApi';
 const mock = new MockAdapter(axios);
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
+const NAMESPACE = 'namespace';
 
 const DEPLOYMENT_URL = `${API_BASE}/apis/apps/v1beta1/namespaces/${NAMESPACE}/deployments`;
 const DEPLOYMENT_NAME = 'test-deployment';
+
 beforeEach(() => {
   mock.reset();
 });
@@ -27,7 +28,7 @@ describe('Kubernetes Deployment API', () => {
     it('should return the deployment if it exists', () => {
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(200, deployment);
 
-      return deploymentApi.getDeployment(DEPLOYMENT_NAME)
+      return deploymentApi.getDeployment(DEPLOYMENT_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toEqual(deployment);
         });
@@ -36,7 +37,7 @@ describe('Kubernetes Deployment API', () => {
     it('should return undefined it the deployment does not exist', () => {
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404, deployment);
 
-      return deploymentApi.getDeployment(DEPLOYMENT_NAME)
+      return deploymentApi.getDeployment(DEPLOYMENT_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toBeUndefined();
         });
@@ -50,7 +51,7 @@ describe('Kubernetes Deployment API', () => {
         return [200, deployment];
       });
 
-      return deploymentApi.createDeployment(DEPLOYMENT_NAME, manifest)
+      return deploymentApi.createDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(deployment);
         });
@@ -59,7 +60,7 @@ describe('Kubernetes Deployment API', () => {
     it('should return an error if creation fails', () => {
       mock.onPost(DEPLOYMENT_URL).reply(400, { message: 'error-message' });
 
-      return deploymentApi.createDeployment(DEPLOYMENT_NAME, manifest)
+      return deploymentApi.createDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
         .catch((error) => {
           expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
         });
@@ -73,7 +74,7 @@ describe('Kubernetes Deployment API', () => {
         return [200, deployment];
       });
 
-      return deploymentApi.updateDeployment(DEPLOYMENT_NAME, manifest)
+      return deploymentApi.updateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(deployment);
         });
@@ -82,7 +83,7 @@ describe('Kubernetes Deployment API', () => {
     it('should return an error if creation fails', () => {
       mock.onPut(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(400, { message: 'error-message' });
 
-      return deploymentApi.updateDeployment(DEPLOYMENT_NAME, manifest)
+      return deploymentApi.updateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
         .catch((error) => {
           expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
         });
@@ -94,7 +95,7 @@ describe('Kubernetes Deployment API', () => {
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404);
       mock.onPost().reply(204, deployment);
 
-      return deploymentApi.createOrUpdateDeployment(DEPLOYMENT_NAME, manifest)
+      return deploymentApi.createOrUpdateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(deployment);
         });
@@ -104,7 +105,7 @@ describe('Kubernetes Deployment API', () => {
       mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(200, deployment);
       mock.onPut().reply(204, deployment);
 
-      return deploymentApi.createOrUpdateDeployment(DEPLOYMENT_NAME, manifest)
+      return deploymentApi.createOrUpdateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(deployment);
         });
@@ -115,19 +116,19 @@ describe('Kubernetes Deployment API', () => {
     it('should DELETE resource URL', () => {
       mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(204);
 
-      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME)).resolves.toBeUndefined();
+      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
     it('should return successfully if deployment does not exist', () => {
       mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(404);
 
-      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME)).resolves.toBeUndefined();
+      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
     it('should return error if server errors', () => {
       mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME))
+      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });

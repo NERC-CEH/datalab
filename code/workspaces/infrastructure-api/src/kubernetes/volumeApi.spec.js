@@ -7,7 +7,7 @@ import volumeApi from './volumeApi';
 const mock = new MockAdapter(axios);
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
+const NAMESPACE = 'namespace';
 
 const PVC_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/persistentvolumeclaims`;
 const PVC_NAME = 'test-pvc';
@@ -31,7 +31,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return the pvc if it exists', () => {
       mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(200, pvc);
 
-      return volumeApi.getPersistentVolumeClaim(PVC_NAME)
+      return volumeApi.getPersistentVolumeClaim(PVC_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toEqual(pvc);
         });
@@ -40,7 +40,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return undefined if the pvc does not exist', () => {
       mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(404);
 
-      return volumeApi.getPersistentVolumeClaim(PVC_NAME)
+      return volumeApi.getPersistentVolumeClaim(PVC_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toBeUndefined();
         });
@@ -54,7 +54,7 @@ describe('Kubernetes Persistent Volume API', () => {
         return [200, pvc];
       });
 
-      return volumeApi.createPersistentVolumeClaim(PVC_NAME, manifest)
+      return volumeApi.createPersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(pvc);
         });
@@ -63,7 +63,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return an error if creation fails', () => {
       mock.onPost(PVC_URL).reply(400, { message: 'error-message' });
 
-      return volumeApi.createPersistentVolumeClaim(PVC_NAME, manifest)
+      return volumeApi.createPersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
         .catch((error) => {
           expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
         });
@@ -77,7 +77,7 @@ describe('Kubernetes Persistent Volume API', () => {
         return [200, pvc];
       });
 
-      return volumeApi.updatePersistentVolumeClaim(PVC_NAME, manifest)
+      return volumeApi.updatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(pvc);
         });
@@ -86,7 +86,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return an error if creation fails', () => {
       mock.onPut(`${PVC_URL}/${PVC_NAME}`).reply(400, { message: 'error-message' });
 
-      return volumeApi.updatePersistentVolumeClaim(PVC_NAME, manifest)
+      return volumeApi.updatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
         .catch((error) => {
           expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
         });
@@ -98,7 +98,7 @@ describe('Kubernetes Persistent Volume API', () => {
       mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(404);
       mock.onPost().reply(204, pvc);
 
-      return volumeApi.createOrUpdatePersistentVolumeClaim(PVC_NAME, manifest)
+      return volumeApi.createOrUpdatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(pvc);
         });
@@ -108,7 +108,7 @@ describe('Kubernetes Persistent Volume API', () => {
       mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(200, pvc);
       mock.onPut().reply(204, pvc);
 
-      return volumeApi.createOrUpdatePersistentVolumeClaim(PVC_NAME, manifest)
+      return volumeApi.createOrUpdatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(pvc);
         });
@@ -119,19 +119,19 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should DELETE resource URL', () => {
       mock.onDelete(`${PVC_URL}/${PVC_NAME}`).reply(204);
 
-      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME)).resolves.toBeUndefined();
+      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
     it('should return successfully if pvc does not exist', () => {
       mock.onDelete(`${PVC_URL}/${PVC_NAME}`).reply(404);
 
-      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME)).resolves.toBeUndefined();
+      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
     it('should return error if server errors', () => {
       mock.onDelete(`${PVC_URL}/${PVC_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME))
+      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
@@ -140,7 +140,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return the pvc if it exists', () => {
       mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(200, pvc);
 
-      return volumeApi.queryPersistentVolumeClaim(PVC_NAME)
+      return volumeApi.queryPersistentVolumeClaim(PVC_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toEqual({
             name: PVC_NAME,
@@ -153,7 +153,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return an empty object if the pvc does not exist', () => {
       mock.onGet(`${PVC_URL}/${PVC_NAME}`).reply(404);
 
-      return volumeApi.queryPersistentVolumeClaim(PVC_NAME)
+      return volumeApi.queryPersistentVolumeClaim(PVC_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toEqual({});
         });
@@ -164,7 +164,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return an array of pvcs', () => {
       mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'user-created' } }).reply(200, pvcs);
 
-      return volumeApi.listPersistentVolumeClaims()
+      return volumeApi.listPersistentVolumeClaims(NAMESPACE)
         .then((response) => {
           expect(response.length).toBe(2);
           expect(response[0]).toEqual({
@@ -178,7 +178,7 @@ describe('Kubernetes Persistent Volume API', () => {
     it('should return an empty array if the pvc does not exist', () => {
       mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'user-created' } }).reply(404);
 
-      return volumeApi.listPersistentVolumeClaims()
+      return volumeApi.listPersistentVolumeClaims(NAMESPACE)
         .then((response) => {
           expect(response).toEqual([]);
         });
