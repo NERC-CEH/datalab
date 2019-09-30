@@ -4,6 +4,7 @@ import logger from '../config/logger';
 function validateAndExecute(request, response, errorMessage, execute) {
   // Parse request for errors
   const errors = validationResult(request);
+
   if (!errors.isEmpty()) {
     logger.error(`${errorMessage}: ${JSON.stringify(request.body)}`);
     logger.error(errors.mapped());

@@ -150,14 +150,16 @@ describe('Stack Controller', () => {
   });
 
   describe('getOneById', () => {
-    beforeEach(() => createValidatedRequest({ id: 'abcd1234' }, stackController.withIdValidator));
+    beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', id: 'abcd1234' }, stackController.withIdValidator));
 
     it('should process a valid request', () => {
       const response = httpMocks.createResponse();
 
+      // Doc key is required in the follow return to allow it to passthrough the renameIdHandler
+      getOneByIdMock.mockReturnValue(Promise.resolve({ _id: '123', projectKey: 'expectedProjectKey', _doc: {} }));
       return stackController.getOneById(request, response)
-        .catch(() => {
-          expect(response.statusCode).toBe(204);
+        .then(() => {
+          expect(response.statusCode).toBe(200);
         });
     });
 
@@ -167,7 +169,7 @@ describe('Stack Controller', () => {
       const response = httpMocks.createResponse();
 
       return stackController.getOneById(request, response)
-        .then(() => {
+        .catch(() => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error matching ID for stack' }); // eslint-disable-line no-underscore-dangle
         });
