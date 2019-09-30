@@ -1,7 +1,7 @@
 import React from 'react';
-import LoadDataStorageModalWrapper from '../modal/LoadDataStorageModalWrapper';
+import CreateStacksModalWrapper from '../modal/CreateStacksModalWrapper';
 import CreateSiteDialog from '../../components/modal/CreateSiteDialog';
 
-const CreateSiteDialogContainer = props => <LoadDataStorageModalWrapper Dialog={CreateSiteDialog} {...props} />;
+const CreateSiteDialogContainer = props => <CreateStacksModalWrapper Dialog={CreateSiteDialog} {...props} />;
 
 export default CreateSiteDialogContainer;

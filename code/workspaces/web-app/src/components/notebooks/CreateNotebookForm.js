@@ -7,26 +7,24 @@ import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 
 const { ANALYSIS, getStackSelections } = stackTypes;
 
-const { startText, endText } = getUrlNameStartEndText(window.location);
+export function getUrlNameStartEndText(projectKey, windowLocation) {
+  const separator = '.';
+  const restHostname = windowLocation.hostname.split(separator).slice(1);
+  const startText = `${windowLocation.protocol}//${projectKey}-`;
 
-export function getUrlNameStartEndText(windowLocation) {
+  let endText = `${separator}${restHostname.join(separator)}`;
+
   if (windowLocation.hostname === 'localhost') {
-    return {
-      startText: `${windowLocation.protocol}//testlab-`,
-      endText: '.datalabs.localhost',
-    };
+    endText = '.datalabs.localhost';
   }
 
-  const separator = '.';
-  const [projectName, ...restHostname] = windowLocation.hostname.split(separator);
-  return {
-    startText: `${windowLocation.protocol}//${projectName}-`,
-    endText: `${separator}${restHostname.join(separator)}`,
-  };
+  return { startText, endText };
 }
 
 const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+  const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -89,4 +87,5 @@ CreateNotebookForm.propTypes = {
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
   })).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };

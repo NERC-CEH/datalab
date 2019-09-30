@@ -7,8 +7,24 @@ import { syncValidate, asyncValidate } from './newSiteFormValidator';
 
 const { PUBLISH, getStackSelections } = stackTypes;
 
+export function getUrlNameStartEndText(projectKey, windowLocation) {
+  const separator = '.';
+  const restHostname = windowLocation.hostname.split(separator).slice(1);
+  const startText = `${windowLocation.protocol}//${projectKey}-`;
+
+  let endText = `${separator}${restHostname.join(separator)}`;
+
+  if (windowLocation.hostname === 'localhost') {
+    endText = '.datalabs.localhost';
+  }
+
+  return { startText, endText };
+}
+
 const CreateSiteForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+  const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -32,8 +48,8 @@ const CreateSiteForm = (props) => {
           label="URL Name"
           component={renderAdornedTextField}
           placeholder="Site Name for URLs"
-          startText="http://datalab-"
-          endText=".datalabs.nerc.ac.uk" />
+          startText={startText}
+          endText={endText} />
       </div>
       <div>
         <Field
@@ -65,6 +81,11 @@ const CreateSiteForm = (props) => {
 CreateSiteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
+  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 const CreateSiteReduxForm = reduxForm({
