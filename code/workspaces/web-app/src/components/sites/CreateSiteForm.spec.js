@@ -13,6 +13,8 @@ describe('CreateSiteForm', () => {
   const generateProps = () => ({
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
+    projectKey: 'project',
+    dataStorageOptions: { text: 'nfs', value: '5' },
   });
 
   beforeEach(() => jest.resetAllMocks());

@@ -29,6 +29,7 @@ describe('StacksContainer', () => {
         PrivateComponent: () => {},
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
+        projectKey: 'project',
       };
 
       return shallow(<StacksContainer {...props} />).find('StacksContainer');
@@ -106,6 +107,7 @@ describe('StacksContainer', () => {
         closeModalDialog: closeModalDialogMock,
         resetForm: restFormMock,
       },
+      projectKey: 'project',
     });
 
     beforeEach(() => jest.clearAllMocks());
@@ -271,7 +273,7 @@ describe('StacksContainer', () => {
     it('openCreationForm - onSubmit calls createStack with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName' };
+      const stack = { projectKey: 'project', displayName: 'expectedDisplayName' };
 
       // Act
       const output = shallowRenderPure(props);

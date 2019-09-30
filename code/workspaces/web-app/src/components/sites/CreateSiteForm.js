@@ -4,22 +4,9 @@ import React from 'react';
 import { stackTypes } from 'common';
 import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
+import getUrlNameStartEndText from '../../core/urlHelper';
 
 const { PUBLISH, getStackSelections } = stackTypes;
-
-export function getUrlNameStartEndText(projectKey, windowLocation) {
-  const separator = '.';
-  const restHostname = windowLocation.hostname.split(separator).slice(1);
-  const startText = `${windowLocation.protocol}//${projectKey}-`;
-
-  let endText = `${separator}${restHostname.join(separator)}`;
-
-  if (windowLocation.hostname === 'localhost') {
-    endText = '.datalabs.localhost';
-  }
-
-  return { startText, endText };
-}
 
 const CreateSiteForm = (props) => {
   const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
@@ -81,10 +68,10 @@ const CreateSiteForm = (props) => {
 CreateSiteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
-  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
+  dataStorageOptions: PropTypes.shape({
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
   projectKey: PropTypes.string.isRequired,
 };
 

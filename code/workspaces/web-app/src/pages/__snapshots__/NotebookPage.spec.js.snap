@@ -5,6 +5,7 @@ exports[`NotebooksPage renders correct snapshot 1`] = `
   title="Notebooks"
 >
   <NotebooksContainer
+    projectKey="project"
     userPermissions={
       Array [
         "expectedPermission",
