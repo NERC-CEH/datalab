@@ -13,7 +13,7 @@ describe('CreateSiteForm', () => {
   const generateProps = () => ({
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
-    projectKey: 'project',
+    projectKey: 'testproj',
     dataStorageOptions: { text: 'nfs', value: '5' },
   });
 

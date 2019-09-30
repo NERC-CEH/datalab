@@ -163,16 +163,18 @@ describe('Stack Controller', () => {
         });
     });
 
-    it('should return 500 for failed request', () => {
+    it('should return 500 for failed request', async () => {
       getOneByIdMock.mockReturnValue(Promise.reject({ message: 'error' }));
 
       const response = httpMocks.createResponse();
 
-      return stackController.getOneById(request, response)
-        .catch(() => {
-          expect(response.statusCode).toBe(500);
-          expect(response._getData()).toEqual({ error: 'error', message: 'Error matching ID for stack' }); // eslint-disable-line no-underscore-dangle
-        });
+      try {
+        await stackController.getOneById(request, response);
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(response.statusCode).toBe(500);
+        expect(response._getData()).toEqual({ error: 'error', message: 'Error matching ID for stack' }); // eslint-disable-line no-underscore-dangle
+      }
     });
 
     it('should validate the id field exists', () => createValidatedRequest({}, stackController.withIdValidator)

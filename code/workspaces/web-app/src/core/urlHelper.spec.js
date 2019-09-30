@@ -1,6 +1,6 @@
 import getUrlNameStartEndText from './urlHelper';
 
-const projectKey = 'project';
+const projectKey = 'testproj';
 
 describe('getUrlNameStartEndText', () => {
   it('returns correct values when on localhost', () => {
@@ -10,7 +10,7 @@ describe('getUrlNameStartEndText', () => {
     };
     const { startText, endText } = getUrlNameStartEndText(projectKey, windowLocation);
 
-    expect(startText).toEqual('https://project-');
+    expect(startText).toEqual('https://testproj-');
     expect(endText).toEqual('.datalabs.localhost');
   });
 
@@ -21,7 +21,7 @@ describe('getUrlNameStartEndText', () => {
     };
     const { startText, endText } = getUrlNameStartEndText(projectKey, windowLocation);
 
-    expect(startText).toEqual('https://project-');
+    expect(startText).toEqual('https://testproj-');
     expect(endText).toEqual('.datalabs.localhost');
   });
 
@@ -32,7 +32,7 @@ describe('getUrlNameStartEndText', () => {
     };
     const { startText, endText } = getUrlNameStartEndText(projectKey, windowLocation);
 
-    expect(startText).toEqual('https://project-');
+    expect(startText).toEqual('https://testproj-');
     expect(endText).toEqual('.datalabs.nerc.ac.uk');
   });
 });

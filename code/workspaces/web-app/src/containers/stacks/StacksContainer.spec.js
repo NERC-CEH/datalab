@@ -29,7 +29,7 @@ describe('StacksContainer', () => {
         PrivateComponent: () => {},
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
-        projectKey: 'project',
+        projectKey: 'testproj',
       };
 
       return shallow(<StacksContainer {...props} />).find('StacksContainer');

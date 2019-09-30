@@ -17,7 +17,7 @@ describe('CreateNotebookForm', () => {
       { text: 'First Data Store', value: 'alpha' },
       { text: 'Second Data Store', value: 'beta' },
     ],
-    projectKey: 'project',
+    projectKey: 'testproj',
   });
 
   beforeEach(() => jest.resetAllMocks());

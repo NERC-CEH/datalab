@@ -10,7 +10,7 @@ type Query {
     dataStore(projectKey: String!, id: ID!): DataStore
 
     # Details of a single currently provisioned DataLab Stack owned by user.
-    stack(id: ID!): Stack
+    stack(projectKey: String!, id: ID!): Stack
 
     # List of currently provisioned DataLabs Stacks owned by user.
     stacks(projectKey: String!): [Stack]

@@ -37,7 +37,7 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       label="URL Name"
       name="name"
       placeholder="Site Name for URLs"
-      startText="http://project-"
+      startText="http://testproj-"
     />
   </div>
   <div>
