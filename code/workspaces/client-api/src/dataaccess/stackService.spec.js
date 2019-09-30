@@ -12,6 +12,7 @@ const testStacks = [
 ];
 
 const context = { token: 'token' };
+const PROJECT_KEY = 'project';
 
 describe('stackService', () => {
   beforeEach(() => {
@@ -31,26 +32,26 @@ describe('stackService', () => {
   });
 
   it('getAllByCategory makes an api request', () => {
-    httpMock.onGet('http://localhost:8003/stacks/category/expectedCategory')
+    httpMock.onGet('http://localhost:8003/stacks/project/category/expectedCategory')
       .reply(200, testStacks);
 
-    return stackService.getAllByCategory(context, 'expectedCategory')
+    return stackService.getAllByCategory(PROJECT_KEY, 'expectedCategory', context)
       .then(response => expect(response).toEqual(testStacks));
   });
 
   it('getByName makes an api request', () => {
-    httpMock.onGet('http://localhost:8003/stack/name/expectedName')
+    httpMock.onGet('http://localhost:8003/stack/project/name/expectedName')
       .reply(200, testStack);
 
-    return stackService.getByName(context, 'expectedName')
+    return stackService.getByName(PROJECT_KEY, 'expectedName', context)
       .then(response => expect(response).toBe('1234'));
   });
 
   it('getByName empty response returns null', () => {
-    httpMock.onGet('http://localhost:8003/stack/name/expectedName')
+    httpMock.onGet('http://localhost:8003/stack/project/name/expectedName')
       .reply(201);
 
-    return stackService.getByName(context, 'expectedName')
+    return stackService.getByName(PROJECT_KEY, 'expectedName', context)
       .then(response => expect(response).toBe(null));
   });
 
@@ -63,18 +64,18 @@ describe('stackService', () => {
   });
 
   it('createStack makes an api request', () => {
-    httpMock.onPost('http://localhost:8003/stack')
+    httpMock.onPost('http://localhost:8003/stack/project')
       .reply(200, testStack);
 
-    return stackService.createStack(context, 'stack')
+    return stackService.createStack('project', 'stack', context)
       .then(response => expect(response).toEqual(testStack));
   });
 
   it('deleteStack makes an api request', () => {
-    httpMock.onDelete('http://localhost:8003/stack')
+    httpMock.onDelete('http://localhost:8003/stack/project')
       .reply(200);
 
-    return stackService.deleteStack(context, 'stack')
+    return stackService.deleteStack('project', 'stack', context)
       .then(() => expect(true).toBe(true));
   });
 });

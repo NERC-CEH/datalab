@@ -13,10 +13,10 @@ describe('checkNameUniqueness', () => {
   });
 
   it('should call the infrastructure service', async () => {
-    const url = `${API_URL_BASE}/stacks/name/isUnique`;
+    const url = `${API_URL_BASE}/stacks/project/name/isUnique`;
     mock.onGet(url).reply(200, { isUnique: true });
 
-    const isUnique = await internalNameChecker('name', 'token');
+    const isUnique = await internalNameChecker('project', 'name', 'token');
     expect(isUnique).toBeTruthy();
   });
 });
