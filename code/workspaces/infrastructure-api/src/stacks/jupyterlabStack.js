@@ -8,24 +8,24 @@ import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRule } from './stackBuilders';
 
 function createJupyterLab(params) {
-  const { datalabInfo, projectKey, name, type } = params;
+  const { projectKey, name, type } = params;
   const secretStrategy = secretManager.createNewJupyterCredentials;
 
   return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
-    .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
+    .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, projectKey, secret))
     .then(createDeployment(params, deploymentGenerator.createJupyterlabDeployment))
-    .then(createService(name, type, deploymentGenerator.createJupyterlabService))
-    .then(createIngressRule(name, type, datalabInfo, projectKey, ingressGenerator.createIngress));
+    .then(createService(params, deploymentGenerator.createJupyterlabService))
+    .then(createIngressRule(params, ingressGenerator.createIngress));
 }
 
 function deleteJupyterLab(params) {
-  const { datalabInfo, projectKey, name, type } = params;
+  const { projectKey, name, type } = params;
   const k8sName = `${type}-${name}`;
 
-  return ingressApi.deleteIngress(k8sName, datalabInfo)
-    .then(() => serviceApi.deleteService(k8sName))
-    .then(() => deploymentApi.deleteDeployment(k8sName))
-    .then(() => k8sSecretApi.deleteSecret(k8sName))
+  return ingressApi.deleteIngress(k8sName, projectKey)
+    .then(() => serviceApi.deleteService(k8sName, projectKey))
+    .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
+    .then(() => k8sSecretApi.deleteSecret(k8sName, projectKey))
     .then(() => secretManager.deleteSecret(projectKey, name));
 }
 

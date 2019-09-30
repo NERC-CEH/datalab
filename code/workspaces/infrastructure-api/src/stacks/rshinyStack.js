@@ -6,20 +6,18 @@ import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRule } from './stackBuilders';
 
 function createRShinyStack(params) {
-  const { datalabInfo, projectKey, name, type } = params;
-
   return createDeployment(params, deploymentGenerator.createRShinyDeployment)()
-    .then(createService(name, type, deploymentGenerator.createRShinyService))
-    .then(createIngressRule(name, type, datalabInfo, projectKey, ingressGenerator.createIngress));
+    .then(createService(params, deploymentGenerator.createRShinyService))
+    .then(createIngressRule(params, ingressGenerator.createIngress));
 }
 
 function deleteRShinyStack(params) {
-  const { datalabInfo, name, type } = params;
+  const { name, type, projectKey } = params;
   const k8sName = `${type}-${name}`;
 
-  return ingressApi.deleteIngress(k8sName, datalabInfo)
-    .then(() => serviceApi.deleteService(k8sName))
-    .then(() => deploymentApi.deleteDeployment(k8sName));
+  return ingressApi.deleteIngress(k8sName, projectKey)
+    .then(() => serviceApi.deleteService(k8sName, projectKey))
+    .then(() => deploymentApi.deleteDeployment(k8sName, projectKey));
 }
 
 export default { createRShinyStack, deleteRShinyStack };

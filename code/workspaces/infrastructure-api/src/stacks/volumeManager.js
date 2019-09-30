@@ -20,15 +20,19 @@ async function deleteVolume(params) {
 }
 
 async function createVolumeStack(params) {
-  const { projectKey, name, volumeSize } = params;
+  const { projectKey, name } = params;
   const secretStrategy = secretManager.createNewMinioCredentials;
   const rewriteTarget = '/';
 
   return secretManager.storeMinioCredentialsInVault(projectKey, name, secretStrategy)
-    .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, secret))
-    .then(createPersistentVolume(name, volumeSize, volumeGenerator.createVolume))
+    .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, projectKey, secret))
+    .then(createPersistentVolume(params, volumeGenerator.createVolume))
+    // Note the override of 'type' in the params object below.
+    // This is due to the fact it is passed as an int but must be the string value for volume type in the kubernetes resources
+    // This will not work if there is more than one volume type.
+    // The best fix is to store the type string in the database to avoid the mapping.
     .then(createDeployment({ ...params, type }, deploymentGenerator.createMinioDeployment))
-    .then(createService(name, type, deploymentGenerator.createMinioService))
+    .then(createService({ ...params, type }, deploymentGenerator.createMinioService))
     .then(createIngressRuleWithConnect({ ...params, type, rewriteTarget }, ingressGenerator.createIngress));
 }
 
@@ -37,11 +41,11 @@ function deleteVolumeStack(params) {
   const { projectKey, name } = params;
   const k8sName = `${type}-${name}`;
 
-  return ingressApi.deleteIngress(k8sName)
-    .then(() => serviceApi.deleteService(k8sName))
-    .then(() => deploymentApi.deleteDeployment(k8sName))
+  return ingressApi.deleteIngress(k8sName, projectKey)
+    .then(() => serviceApi.deleteService(k8sName, projectKey))
+    .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
     // .then(() => volumeApi.deletePersistentVolumeClaim(`${name}-claim`))
-    .then(() => k8sSecretApi.deleteSecret(k8sName))
+    .then(() => k8sSecretApi.deleteSecret(k8sName, projectKey))
     .then(() => secretManager.deleteMinioCredentials(projectKey, name));
 }
 
