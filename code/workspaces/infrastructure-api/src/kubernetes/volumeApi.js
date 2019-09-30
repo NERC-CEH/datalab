@@ -30,26 +30,26 @@ function getPersistentVolumeClaim(name, namespace) {
 }
 
 function createPersistentVolumeClaim(name, namespace, manifest) {
-  logger.info('Creating persistent volume claim: %s', name);
+  logger.info('Creating persistent volume claim: %s in namespace %s', name, namespace);
   return axios.post(getPVCUrl(namespace), manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function updatePersistentVolumeClaim(name, namespace, manifest) {
-  logger.info('Updating persistent volume claim: %s', name);
+  logger.info('Updating persistent volume claim: %s in namespace %s', name, namespace);
   return axios.put(`${getPVCUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function deletePersistentVolumeClaim(name, namespace) {
-  logger.info('Deleting persistent volume claim: %s', name);
+  logger.info('Deleting persistent volume claim: %s in namespace %s', name, namespace);
   return axios.delete(`${getPVCUrl(namespace)}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('persistent volume claim', name));
 }
 
 function queryPersistentVolumeClaim(name, namespace) {
-  logger.info('Getting volume claim: %s', name);
+  logger.info('Getting volume claim: %s in namespace %s', name, namespace);
   return getPersistentVolumeClaim(name, namespace)
     .then(processVolumeDetails)
     .catch(() => {});

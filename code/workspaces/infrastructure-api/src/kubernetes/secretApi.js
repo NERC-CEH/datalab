@@ -27,13 +27,13 @@ function getSecret(name, namespace) {
 }
 
 function createSecret(name, namespace, value) {
-  logger.info('Creating secret: %s', name);
+  logger.info('Creating secret: %s in namespace %s', name, namespace);
   return axios.post(getSecretUrl(namespace), createPayload(name, value))
     .catch(handleCreateError('secret', name));
 }
 
 function updateSecret(name, namespace, value) {
-  logger.info('Updating secret: %s', name);
+  logger.info('Updating secret: %s in namespace %s', name, namespace);
   return axios.put(`${getSecretUrl(namespace)}/${name}`, createPayload(name, value))
     .catch(handleCreateError('secret', name));
 }

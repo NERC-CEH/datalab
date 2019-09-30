@@ -31,26 +31,26 @@ function getService(name, namespace) {
 }
 
 function createService(name, namespace, manifest) {
-  logger.info('Creating service: %s', name);
+  logger.info('Creating service: %s in namespace %s', name, namespace);
   return axios.post(getServiceUrl(namespace), manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError('service', name));
 }
 
 function replaceService(name, namespace, manifest) {
-  logger.info('Replacing service: %s', name);
+  logger.info('Replacing service: %s in namespace %s', name, namespace);
   return deleteService(name)
     .then(() => createService(name, manifest));
 }
 
 function updateService(name, namespace, manifest, existingService) {
-  logger.info('Updating service: %s', name);
+  logger.info('Updating service: %s in namespace %s', name, namespace);
   const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
   return axios.put(`${getServiceUrl(namespace)}/${name}`, jsonManifest)
     .catch(handleCreateError('service', name));
 }
 
 function deleteService(name, namespace) {
-  logger.info('Deleting service: %s', name);
+  logger.info('Deleting service: %s in namespace %s', name, namespace);
   return axios.delete(`${getServiceUrl(namespace)}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('service', name));

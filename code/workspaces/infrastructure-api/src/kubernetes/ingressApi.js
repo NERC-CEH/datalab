@@ -29,19 +29,19 @@ function getIngress(name, namespace) {
 }
 
 function createIngress(name, namespace, manifest) {
-  logger.info('Creating ingress: %s', name);
+  logger.info('Creating ingress: %s in namespace %s', name, namespace);
   return axios.post(getIngressUrl(namespace), manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function updateIngress(name, namespace, manifest) {
-  logger.info('Updating ingress: %s', name);
+  logger.info('Updating ingress: %s in namespace %s', name, namespace);
   return axios.put(`${getIngressUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function deleteIngress(name, namespace) {
-  logger.info('Deleting ingress: %s', name);
+  logger.info('Deleting ingress: %s in namespace %s', name, namespace);
   return axios.delete(`${getIngressUrl(namespace)}/${name}`)
     .then(response => response.data)
     .catch(handleDeleteError('ingress', name));

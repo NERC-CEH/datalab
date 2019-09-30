@@ -29,19 +29,19 @@ function getDeployment(name, namespace) {
 }
 
 function createDeployment(name, namespace, manifest) {
-  logger.info('Creating deployment: %s', name);
+  logger.info('Creating deployment: %s in namespace: %s', name, namespace);
   return axios.post(getDeploymentUrl(namespace), manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function updateDeployment(name, namespace, manifest) {
-  logger.info('Updating deployment: %s', name);
+  logger.info('Updating deployment: %s in namespace: %s', name, namespace);
   return axios.put(`${getDeploymentUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function deleteDeployment(name, namespace) {
-  logger.info('Deleting deployment: %s', name);
+  logger.info('Deleting deployment: %s in namespace: %s', name, namespace);
   const deleteOptions = {
     kind: 'DeleteOptions',
     apiVersion: 'v1',
