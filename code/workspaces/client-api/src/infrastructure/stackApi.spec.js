@@ -9,7 +9,7 @@ jest.mock('../dataaccess/stackService');
 
 const datalabInfo = { name: 'testlab', domain: 'test-datalabs.nerc.ac.uk' };
 const context = { token: 'expectedToken', user: 'expectedUser' };
-const stack = { name: 'expectedName', type: 'expectedType' };
+const stack = { name: 'expectedName', type: 'expectedType', projectKey: 'project' };
 
 const getByNameMock = jest.fn().mockReturnValue(Promise.resolve(datalabInfo));
 const createStackMock = jest.fn();
@@ -34,7 +34,7 @@ describe('Stack API', () => {
     return stackApi.createStack(context, 'expectedDatalabName', stack)
       .then((response) => {
         expect(getByNameMock).toHaveBeenCalledWith(context.user, 'expectedDatalabName');
-        expect(createStackMock).toHaveBeenCalledWith(context, { ...stack, isPublic: true, datalabInfo });
+        expect(createStackMock).toHaveBeenCalledWith(stack.projectKey, { ...stack, isPublic: true, datalabInfo }, context);
         expect(response).toBe('expectedPayload');
       });
   });
@@ -70,7 +70,7 @@ describe('Stack API', () => {
     return stackApi.deleteStack(context, 'expectedDatalabName', stack)
       .then((response) => {
         expect(getByNameMock).toHaveBeenCalledWith(context.user, 'expectedDatalabName');
-        expect(deleteStackMock).toHaveBeenCalledWith(context, { ...stack, datalabInfo });
+        expect(deleteStackMock).toHaveBeenCalledWith(stack.projectKey, { ...stack, datalabInfo }, context);
         expect(response).toBe('expectedPayload');
       });
   });

@@ -15,7 +15,7 @@ const createStackPayloadGenerator = stack => datalabInfo => ({
   isPublic: true,
 });
 
-const sendCreationRequest = context => stackPayload => stackService.createStack(context, stackPayload)
+const sendCreationRequest = context => stackPayload => stackService.createStack(stackPayload.projectKey, stackPayload, context)
   .then(response => response);
 
 const deleteStack = (context, datalabName, stack) => datalabRepository.getByName(context.user, datalabName)
@@ -29,7 +29,7 @@ const deleteStackPayloadGenerator = stack => datalabInfo => ({
   ...stack,
 });
 
-const sendDeletionRequest = context => stackPayload => stackService.deleteStack(context, stackPayload)
+const sendDeletionRequest = context => stackPayload => stackService.deleteStack(stackPayload.projectKey, stackPayload, context)
   .then(response => response);
 
 const logPayload = protocolName => (payload) => {

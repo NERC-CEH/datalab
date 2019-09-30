@@ -31,11 +31,11 @@ const resolvers = {
     dataStore: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_OPEN, user, () => storageService.getById(args.projectKey, args.id, token)),
     stack: (obj, { id }, { user, token }) => permissionChecker(STACKS_OPEN, user, () => stackService.getById({ user, token }, id)),
     stacks: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAll({ user, token })),
-    stacksByCategory: (obj, { category }, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory({ user, token }, category)),
+    stacksByCategory: (obj, args, { user, token }) => permissionChecker(STACKS_LIST, user, () => stackService.getAllByCategory(PROJECT_KEY, args.category, { user, token })),
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
-    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(name, token)),
+    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(PROJECT_KEY, name, token)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, args, { user, token }) => projectPermissionWrapper(args, SETTINGS_READ, user, () => projectService.getProjectByKey(args.projectKey, token)),
@@ -71,8 +71,8 @@ const resolvers = {
   DataStore: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     users: (obj, args, { user }) => permissionChecker(USERS_LIST, user, () => obj.users),
-    accessKey: (obj, args, { user }) => minioTokenService.requestMinioToken('project', obj, user),
-    stacksMountingStore: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount({ user, token }, name),
+    accessKey: (obj, args, { user }) => minioTokenService.requestMinioToken(PROJECT_KEY, obj, user),
+    stacksMountingStore: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount(PROJECT_KEY, name, { user, token }),
     status: () => READY,
   },
 
