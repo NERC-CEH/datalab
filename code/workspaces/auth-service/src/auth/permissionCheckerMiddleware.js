@@ -2,7 +2,7 @@ import { get } from 'lodash';
 import logger from 'winston';
 import { permissionTypes } from 'common';
 
-const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
+const { SYSTEM_INSTANCE_ADMIN, PROJECT_NAMESPACE } = permissionTypes;
 
 const PROJECT = 'project';
 const permissionDelim = ':';
@@ -27,7 +27,7 @@ function checkPermissions(permissionSuffixes, projectNameFn) {
     }
 
     const requiredPermissions = permissionSuffixes
-      .map(suffix => projectKey.concat(permissionDelim, suffix))
+      .map(suffix => PROJECT_NAMESPACE.concat(permissionDelim, projectKey, permissionDelim, suffix))
       .concat(SYSTEM_INSTANCE_ADMIN);
     const grantedPermissions = get(request, 'user.permissions') || [];
 

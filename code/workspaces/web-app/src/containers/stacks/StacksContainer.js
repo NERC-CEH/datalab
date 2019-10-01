@@ -14,7 +14,7 @@ import StackCards from '../../components/stacks/StackCards';
 
 const refreshTimeout = 15000;
 
-const { projectPermissions: { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_EDIT }, projectKeyPermission } = permissionTypes;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -95,10 +95,10 @@ class StacksContainer extends Component {
           deleteStack={this.confirmDeleteStack}
           openCreationForm={this.openCreationForm}
           userPermissions={() => this.props.userPermissions}
-          createPermission={PROJECT_STACKS_CREATE}
-          openPermission={PROJECT_STACKS_OPEN}
-          deletePermission={PROJECT_STACKS_DELETE}
-          editPermission={PROJECT_STACKS_EDIT} />
+          createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey)}
+          openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey)}
+          deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey)}
+          editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey)} />
       </PromisedContentWrapper>
     );
   }

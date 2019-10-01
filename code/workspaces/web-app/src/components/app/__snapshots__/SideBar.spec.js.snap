@@ -22,9 +22,9 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       projectKey="project99"
       userPermissions={
         Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
+          "projects:project99:storage:list",
+          "projects:project99:stacks:list",
+          "projects:project99:settings:list",
         ]
       }
     />
@@ -32,9 +32,9 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       projectKey="project99"
       userPermissions={
         Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
+          "projects:project99:storage:list",
+          "projects:project99:stacks:list",
+          "projects:project99:settings:list",
         ]
       }
     />
@@ -53,9 +53,9 @@ exports[`Sidebar correctly renders correct snapshot 2`] = `
       projectKey="project99"
       userPermissions={
         Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
+          "projects:project99:storage:list",
+          "projects:project99:stacks:list",
+          "projects:project99:settings:list",
         ]
       }
     />
@@ -63,9 +63,9 @@ exports[`Sidebar correctly renders correct snapshot 2`] = `
       projectKey="project99"
       userPermissions={
         Array [
-          "project:storage:list",
-          "project:stacks:list",
-          "project:settings:list",
+          "projects:project99:storage:list",
+          "projects:project99:stacks:list",
+          "projects:project99:settings:list",
         ]
       }
     />

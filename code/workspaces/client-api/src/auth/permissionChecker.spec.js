@@ -1,4 +1,7 @@
+import { permissionTypes } from 'common';
 import { permissionWrapper, multiPermissionsWrapper, instanceAdminWrapper, projectPermissionWrapper } from './permissionChecker';
+
+const { PROJECT_NAMESPACE } = permissionTypes;
 
 const user = {
   permissions: [
@@ -28,7 +31,7 @@ describe('Permission Checker', () => {
       } catch (err) {
         error = err;
       }
-      expect(error).toEqual(new Error('User missing expected permission(s): project:elementName:missingActionName,system:instance:admin'));
+      expect(error).toEqual(new Error(`User missing expected permission(s): ${PROJECT_NAMESPACE}:project:elementName:missingActionName,system:instance:admin`));
       expect(actionMock).not.toHaveBeenCalled();
     });
 
@@ -53,7 +56,8 @@ describe('Permission Checker', () => {
       } catch (err) {
         error = err;
       }
-      expect(error).toEqual(new Error('User missing expected permission(s): project:elementName:missingActionName,project:elementName:anotherAction,system:instance:admin'));
+      expect(error).toEqual(new Error(`User missing expected permission(s): ${PROJECT_NAMESPACE}:project:elementName:missingActionName,`
+        .concat(`${PROJECT_NAMESPACE}:project:elementName:anotherAction,system:instance:admin`)));
       expect(actionMock).not.toHaveBeenCalled();
     });
 
@@ -97,7 +101,7 @@ describe('Permission Checker', () => {
       } catch (err) {
         error = err;
       }
-      expect(error).toEqual(new Error('User missing expected permission(s): project2:elementName:missingActionName,system:instance:admin'));
+      expect(error).toEqual(new Error(`User missing expected permission(s): ${PROJECT_NAMESPACE}:project2:elementName:missingActionName,system:instance:admin`));
       expect(actionMock).not.toHaveBeenCalled();
     });
 

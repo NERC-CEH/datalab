@@ -45,12 +45,12 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
   }
 >
   <WithStyles(StackCards)
-    createPermission="project:stacks:create"
-    deletePermission="project:stacks:delete"
+    createPermission="projects:projtest:stacks:create"
+    deletePermission="projects:projtest:stacks:delete"
     deleteStack={[Function]}
-    editPermission="project:stacks:edit"
+    editPermission="projects:projtest:stacks:edit"
     openCreationForm={[Function]}
-    openPermission="project:stacks:open"
+    openPermission="projects:projtest:stacks:open"
     openStack={[Function]}
     stacks={
       Array [
