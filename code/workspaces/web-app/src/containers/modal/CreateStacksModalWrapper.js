@@ -14,7 +14,7 @@ class CreateStacksModalWrapper extends Component {
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadDataStorage()
+    this.props.actions.loadDataStorage(this.getProjectKey())
       .catch((() => {}));
   }
 

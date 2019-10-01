@@ -1,4 +1,5 @@
 import { statusTypes, permissionTypes } from 'common';
+import config from '../config';
 import { version } from '../version';
 import permissionChecker, { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
@@ -20,6 +21,7 @@ const { elementPermissions: { SETTINGS_READ, SETTINGS_EDIT } } = permissionTypes
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 const { READY } = statusTypes;
 
+const DATALAB_NAME = config.get('datalabName');
 const PROJECT_KEY = 'project';
 
 const resolvers = {
@@ -29,7 +31,9 @@ const resolvers = {
     dataStore: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_OPEN, user, () => storageService.getById(args.projectKey, args.id, token)),
     stack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_OPEN, user, () => stackService.getById(args.projectKey, args.id, { user, token })),
     stacks: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAll(args.projectKey, { user, token })),
-    stacksByCategory: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAllByCategory(args.projectKey, args.category, { user, token })),
+    stacksByCategory: (obj, { params }, { user, token }) => (
+      projectPermissionWrapper(params, STACKS_LIST, user, () => stackService.getAllByCategory(params.projectKey, params.category, { user, token }))
+    ),
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
@@ -41,8 +45,8 @@ const resolvers = {
   },
 
   Mutation: {
-    createStack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => stackApi.createStack(args.stack.projectKey, args.stack, { user, token })),
-    deleteStack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_DELETE, user, () => stackApi.deleteStack(args.stack.projectKey, args.stack, { user, token })),
+    createStack: (obj, { stack }, { user, token }) => projectPermissionWrapper(stack, STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
+    deleteStack: (obj, { stack }, { user, token }) => projectPermissionWrapper(stack, STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
     createDataStore: (obj, args, { user, token }) => (
       projectPermissionWrapper(args, STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token))
     ),
