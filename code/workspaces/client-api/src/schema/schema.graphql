@@ -10,13 +10,13 @@ type Query {
     dataStore(projectKey: String!, id: ID!): DataStore
 
     # Details of a single currently provisioned DataLab Stack owned by user.
-    stack(id: ID!): Stack
+    stack(projectKey: String!, id: ID!): Stack
 
     # List of currently provisioned DataLabs Stacks owned by user.
-    stacks: [Stack]
+    stacks(projectKey: String!): [Stack]
 
     # List of currently provisioned DataLabs Stacks owned by user for the requested category.
-    stacksByCategory(category: String!): [Stack]
+    stacksByCategory(params: StacksByCategoryRequest): [Stack]
 
     # Details for a single Datalab.
     datalab(name: String!): Datalab
@@ -118,6 +118,7 @@ type DataStore {
 
 # Type to represent online Stacks
 type Stack {
+    projectKey: String
     id: ID
     name: String
     displayName: String
@@ -132,8 +133,14 @@ type Stack {
     status: StatusType
 }
 
+input StacksByCategoryRequest {
+    projectKey: String
+    category: String
+}
+
 # Type to describe the mutation for creating a new Stack.
 input StackCreationRequest {
+    projectKey: String
     displayName: String
     name: String
     type: StackType
@@ -145,6 +152,7 @@ input StackCreationRequest {
 
 # Type to describe the mutation for deleting a new Stack.
 input StackDeletionRequest {
+    projectKey: String
     name: String
     type: StackType
 }

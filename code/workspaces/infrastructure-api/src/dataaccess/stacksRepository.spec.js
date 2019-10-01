@@ -39,7 +39,7 @@ describe('stacksRepository', () => {
     expect(stacks).toMatchSnapshot();
   }));
 
-  it('getById returns expected snapshot', () => stacksRepository.getOneById(user, '599aa983bdd5430daedc8eec').then((stack) => {
+  it('getById returns expected snapshot', () => stacksRepository.getOneById(project, user, '599aa983bdd5430daedc8eec').then((stack) => {
     expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
     expect(mockDatabase().user()).toBe('username');
     expect(stack).toMatchSnapshot();

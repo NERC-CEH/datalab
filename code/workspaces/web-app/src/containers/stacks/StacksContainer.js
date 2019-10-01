@@ -34,11 +34,11 @@ class StacksContainer extends Component {
   }
 
   createStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.createStack(stack))
+    .then(() => this.props.actions.createStack({ ...stack, projectKey: this.props.projectKey }))
     .then(() => this.props.actions.resetForm(this.props.formStateName))
     .then(() => notify.success(`${this.props.typeName} created`))
     .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType));
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
     title: `Create a ${this.props.typeName}`,
@@ -52,7 +52,7 @@ class StacksContainer extends Component {
     .then(() => this.props.actions.deleteStack(stack))
     .then(() => notify.success(`${this.props.typeName} deleted`))
     .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType));
 
   confirmDeleteStack = stack => this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
     title: `Delete ${stack.displayName} ${this.props.typeName}`,
@@ -64,7 +64,7 @@ class StacksContainer extends Component {
 
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    return this.props.actions.loadStacksByCategory(this.props.containerType)
+    return this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType)
       .then(() => {
         this.timeout = setTimeout(this.loadStack, refreshTimeout);
       })
@@ -125,6 +125,7 @@ StacksContainer.propTypes = {
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 function mapStateToProps({ stacks }) {

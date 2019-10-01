@@ -29,9 +29,9 @@ exports[`stackService getUrl should build the correct query and return the url 1
 
 exports[`stackService loadStacks should build the correct query and unpack the results 1`] = `
 "
-    Stacks {
+    GetStacks($projectKey: String!) {
       stacks {
-        id, displayName, name, type, description, status
+        id, projectKey, displayName, name, type, description, status
       }
     }"
 `;

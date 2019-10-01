@@ -24,10 +24,10 @@ describe('stackService', () => {
   });
 
   it('getAll makes an api request', () => {
-    httpMock.onGet('http://localhost:8003/stacks')
+    httpMock.onGet('http://localhost:8003/stacks/project')
       .reply(200, testStacks);
 
-    return stackService.getAll(context)
+    return stackService.getAll(PROJECT_KEY, context)
       .then(response => expect(response).toEqual(testStacks));
   });
 
@@ -56,10 +56,10 @@ describe('stackService', () => {
   });
 
   it('getById makes an api request', () => {
-    httpMock.onGet('http://localhost:8003/stack/id/abcd1234efgh4321')
+    httpMock.onGet('http://localhost:8003/stack/project/id/abcd1234efgh4321')
       .reply(200, testStack);
 
-    return stackService.getById(context, 'abcd1234efgh4321')
+    return stackService.getById(PROJECT_KEY, 'abcd1234efgh4321', context)
       .then(response => expect(response).toEqual(testStack));
   });
 

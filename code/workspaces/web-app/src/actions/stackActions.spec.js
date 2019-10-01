@@ -34,11 +34,11 @@ describe('stackActions', () => {
       stackService.loadStacksByCategory = loadStacksByCategoryMock;
 
       // Act
-      const output = stackActions.loadStacksByCategory('expectedCategory');
+      const output = stackActions.loadStacksByCategory('expectedProjectKey', 'expectedCategory');
 
       // Assert
       expect(loadStacksByCategoryMock).toHaveBeenCalledTimes(1);
-      expect(loadStacksByCategoryMock).toBeCalledWith('expectedCategory');
+      expect(loadStacksByCategoryMock).toBeCalledWith('expectedProjectKey', 'expectedCategory');
       expect(output.type).toBe('LOAD_STACKS_BY_CATEGORY');
       expect(output.payload).toBe('expectedStackPayload');
     });

@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 });
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes }) => (
+const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes, projectKey }) => (
   <Dialog open={true} maxWidth="md">
     <div className={classes.dialogDiv}>
         <DialogTitle>{title}</DialogTitle>
@@ -20,7 +20,8 @@ const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, c
           <CreateNotebookForm
             onSubmit={onSubmit}
             cancel={onCancel}
-            dataStorageOptions={dataStorageOptions} />
+            dataStorageOptions={dataStorageOptions}
+            projectKey={projectKey} />
         </DialogContent>
     </div>
   </Dialog>

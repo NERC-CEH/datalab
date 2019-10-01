@@ -1,26 +1,27 @@
 import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-function loadStacks() {
+function loadStacks(projectKey) {
   const query = `
-    Stacks {
+    GetStacks($projectKey: String!) {
       stacks {
-        id, displayName, name, type, description, status
+        id, projectKey, displayName, name, type, description, status
       }
     }`;
 
-  return gqlQuery(query)
+  return gqlQuery(query, { projectKey })
     .then(errorHandler('data.stacks'));
 }
 
-function loadStacksByCategory(category) {
+function loadStacksByCategory(projectKey, category) {
   const query = `
-    GetStacksByCategory($category: String!) {
-      stacksByCategory(category: $category) {
-        id, displayName, name, type, description, status
+    GetStacksByCategory($params: StacksByCategoryRequest) {
+      stacksByCategory(params: $params) {
+        id, projectKey, displayName, name, type, description, status
       }
     }`;
-  return gqlQuery(query, { category })
+
+  return gqlQuery(query, { params: { projectKey, category } })
     .then(errorHandler('data.stacksByCategory'));
 }
 

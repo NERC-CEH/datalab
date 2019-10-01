@@ -35,9 +35,10 @@ function getAllByVolumeMount(projectKey, user, mount) {
     .exec();
 }
 
-function getOneById(user, id) {
+function getOneById(projectKey, user, id) {
   return Stack()
     .findOne({ _id: id })
+    .filterOneByProject(projectKey)
     .filterOneByUser(user)
     .exec();
 }

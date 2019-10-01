@@ -12,9 +12,9 @@ const loadStacks = () => ({
   payload: stackService.loadStacks(),
 });
 
-const loadStacksByCategory = category => ({
+const loadStacksByCategory = (projectKey, category) => ({
   type: LOAD_STACKS_BY_CATEGORY_ACTION,
-  payload: stackService.loadStacksByCategory(category),
+  payload: stackService.loadStacksByCategory(projectKey, category),
 });
 
 const getUrl = id => ({
@@ -32,9 +32,9 @@ const createStack = stack => ({
   payload: stackService.createStack(stack),
 });
 
-const deleteStack = ({ name, type }) => ({
+const deleteStack = ({ projectKey, name, type }) => ({
   type: DELETE_STACK_ACTION,
-  payload: stackService.deleteStack({ name, type }),
+  payload: stackService.deleteStack({ projectKey, name, type }),
 });
 
 export default {
