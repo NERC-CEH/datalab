@@ -37,7 +37,7 @@ async function createProject(request, response, next) {
   } else {
     try {
       const createdProject = await projectsRepository.create(project);
-      response.status(201).send(createdProject);
+      response.status(201).send(createdProject[0]);
     } catch (error) {
       next(new Error(`Error creating project: ${error.message}`));
     }
