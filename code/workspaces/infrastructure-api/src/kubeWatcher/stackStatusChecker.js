@@ -20,21 +20,29 @@ function statusChecker() {
 }
 
 const groupStatusByName = pods => pods
-  .reduce((previous, { name, status }) => ({
-    ...previous,
-    [name]: previous[name] ? [...previous[name], status] : [status],
-  }), {});
+  .reduce((previous, { name, namespace, status }) => {
+    const entry = { namespace, status: [status] };
+    if (previous[name]) {
+      entry.status = [...entry.status, status];
+    }
 
-const setStatus = pods => Promise.mapSeries(Object.entries(pods), ([kubeName, statusArray]) => {
+    return {
+      ...previous,
+      [name]: entry,
+    };
+  }, {});
+
+const setStatus = pods => Promise.mapSeries(Object.entries(pods), ([kubeName, podInfo]) => {
   const [type, name] = parseKubeName(kubeName);
-  const status = getStatus(statusArray);
+  const status = getStatus(podInfo.status);
+  const { namespace } = podInfo;
 
-  return stackRepository.updateStatus({ name, type, status })
+  return stackRepository.updateStatus({ name, namespace, type, status })
     .then((result) => {
       if (result.n === 0) {
-        logger.warn(`Tried to update record for "${name}" but no such record exists.`);
+        logger.warn(`Tried to update record for "${name}" in project "${namespace}" but no such record exists.`);
       } else {
-        const message = `Updated status record for "${name}" to "${status}"`;
+        const message = `Updated status record for "${name}" in project "${namespace}" to "${status}"`;
         const loggingFn = result.nModified === 1 ? logger.info : logger.debug;
         loggingFn(message);
       }

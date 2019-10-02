@@ -5,6 +5,7 @@ Array [
   Array [
     Object {
       "name": "firstPod",
+      "namespace": "a",
       "status": "ready",
       "type": "expectedType",
     },
@@ -12,6 +13,7 @@ Array [
   Array [
     Object {
       "name": "secondPod",
+      "namespace": "a",
       "status": "ready",
       "type": "expectedType",
     },
@@ -19,6 +21,7 @@ Array [
   Array [
     Object {
       "name": "thirdPod",
+      "namespace": "b",
       "status": "unavailable",
       "type": "expectedType",
     },
@@ -26,6 +29,7 @@ Array [
   Array [
     Object {
       "name": "fourthPod",
+      "namespace": "b",
       "status": "creating",
       "type": "expectedType",
     },

@@ -1,16 +1,14 @@
 import * as k8s from '@kubernetes/client-node';
 import { find } from 'lodash';
 import logger from '../config/logger';
-import config from '../config/config';
 import kubeConfig from '../kubernetes/kubeConfig';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parsePodLabels } from './kubernetesHelpers';
 import { CREATING, READY } from '../models/stack.model';
 import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
-const kubeNamespace = config.get('podNamespace');
 const stackNames = Object.values(STACKS).map(stack => stack.name);
-const watchUrl = `/api/v1/namespaces/${kubeNamespace}/pods`;
+const watchUrl = '/api/v1/pods';
 const selector = { labelSelector: SELECTOR_LABEL };
 
 function startKubeWatcher() {
@@ -22,7 +20,7 @@ function startKubeWatcher() {
 }
 
 function kubeWatcher() {
-  logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on "${kubeNamespace}" namespace.`);
+  logger.info(`Starting kube-watcher, listening for pods labelled "${SELECTOR_LABEL}" on any namespace.`);
   return new k8s.Watch(kubeConfig).watch(watchUrl, selector, eventHandler, errorHandler);
 }
 

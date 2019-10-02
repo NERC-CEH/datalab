@@ -76,9 +76,9 @@ function deleteStack(projectKey, user, stack) {
 // Function is used by kube-water to update stacks status. This will require an
 // update when kube-water updated to handle projectKey.
 function updateStatus(stack) {
-  const { name, type, status } = stack;
+  const { name, namespace, type, status } = stack;
   return Stack()
-    .where({ name, type })
+    .where({ name, type, projectKey: namespace })
     .updateOne({ status })
     .exec();
 }
