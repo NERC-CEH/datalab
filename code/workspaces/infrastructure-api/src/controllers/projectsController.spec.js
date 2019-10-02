@@ -95,7 +95,7 @@ describe('createProject', () => {
 
   it('it creates document, returns 201 and returns created document when project does not exist', async () => {
     projectsRepository.exists = jest.fn(() => false);
-    projectsRepository.create = jest.fn(document => ([{ ...document, id: 'database-id' }]));
+    projectsRepository.create = jest.fn(document => ({ ...document, id: 'database-id' }));
     await projectsController.createProject({ body: dummyProject }, responseMock, nextMock);
 
     expectToBeCalledOnceWith(projectsRepository.create, dummyProject);
