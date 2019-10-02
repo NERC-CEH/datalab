@@ -10,7 +10,7 @@ import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
 import ProjectTitleContainer from '../../containers/projectInfo/ProjectTitleContainer';
 
-const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST }, projectKeyPermission } = permissionTypes;
 
 export const drawerWidth = 200;
 
@@ -49,7 +49,7 @@ const InfoGroup = ({ classes, projectKey }) => (
 
 const AnalysisGroup = ({ userPermissions, projectKey }) => (
   <SideBarGroup title='Analysis'>
-    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
+    <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey)}>
       <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
     </PermissionWrapper>
     <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
@@ -59,13 +59,13 @@ const AnalysisGroup = ({ userPermissions, projectKey }) => (
 
 const MiscGroup = ({ userPermissions, projectKey }) => (
   <SideBarGroup>
-    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STORAGE_LIST}>
+    <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STORAGE_LIST, projectKey)}>
       <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
     </PermissionWrapper>
-    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_STACKS_LIST}>
+    <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey)}>
       <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
     </PermissionWrapper>
-    <PermissionWrapper userPermissions={userPermissions} permission={PROJECT_SETTINGS_LIST}>
+    <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_SETTINGS_LIST, projectKey)}>
       <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
     </PermissionWrapper>
   </SideBarGroup>

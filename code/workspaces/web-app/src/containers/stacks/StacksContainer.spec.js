@@ -107,7 +107,7 @@ describe('StacksContainer', () => {
         closeModalDialog: closeModalDialogMock,
         resetForm: restFormMock,
       },
-      projectKey: 'project',
+      projectKey: 'projtest',
     });
 
     beforeEach(() => jest.clearAllMocks());
@@ -273,7 +273,7 @@ describe('StacksContainer', () => {
     it('openCreationForm - onSubmit calls createStack with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { projectKey: 'project', displayName: 'expectedDisplayName' };
+      const stack = { projectKey: 'projtest', displayName: 'expectedDisplayName' };
 
       // Act
       const output = shallowRenderPure(props);

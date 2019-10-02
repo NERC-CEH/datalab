@@ -1,10 +1,13 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { createShallow, createMount } from '@material-ui/core/test-utils';
+import { permissionTypes } from 'common';
 import SideBar, { StyledSideBarAnalysis } from './SideBar';
 
+const { PROJECT_NAMESPACE } = permissionTypes;
+
 describe('Sidebar', () => {
-  const userPermissions = ['project:storage:list', 'project:stacks:list', 'project:settings:list'];
+  const userPermissions = [`${PROJECT_NAMESPACE}:project99:storage:list`, `${PROJECT_NAMESPACE}:project99:stacks:list`, `${PROJECT_NAMESPACE}:project99:settings:list`];
   const projectKey = 'project99';
 
   function shallowRenderSideBar() {

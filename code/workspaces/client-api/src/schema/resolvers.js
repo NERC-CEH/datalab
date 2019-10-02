@@ -18,7 +18,6 @@ const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STOR
 const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 const { elementPermissions: { PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
 const { elementPermissions: { SETTINGS_READ, SETTINGS_EDIT } } = permissionTypes;
-const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 const { READY } = statusTypes;
 
 const DATALAB_NAME = config.get('datalabName');
@@ -41,7 +40,7 @@ const resolvers = {
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, args, { user, token }) => projectPermissionWrapper(args, SETTINGS_READ, user, () => projectService.getProjectByKey(args.projectKey, token)),
-    checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => permissionChecker(SYSTEM_INSTANCE_ADMIN, user, () => projectService.isProjectKeyUnique(projectKey, token)),
+    checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
   },
 
   Mutation: {

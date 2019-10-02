@@ -16,7 +16,7 @@ import RoutePermissions from './components/common/RoutePermissionWrapper';
 import SparkPage from './pages/SparkPage';
 import SettingsPage from './pages/SettingsPage';
 
-const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST } } = permissionTypes;
 
 const projectKey = (pathname) => {
   const match = matchPath(pathname, {
@@ -48,28 +48,32 @@ const PrivateApp = ({ promisedUserPermissions, location }) => (
         path="/projects/:projectKey/storage"
         component={DataStoragePage}
         promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STORAGE_LIST}
+        permission={PROJECT_KEY_STORAGE_LIST}
+        projectKey={projectKey(location.pathname)}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
         path="/projects/:projectKey/notebooks"
         component={NotebooksPage}
         promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STACKS_LIST}
+        permission={PROJECT_KEY_STACKS_LIST}
+        projectKey={projectKey(location.pathname)}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
         path="/projects/:projectKey/publishing"
         component={PublishingPage}
         promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_STACKS_LIST}
+        permission={PROJECT_KEY_STACKS_LIST}
+        projectKey={projectKey(location.pathname)}
         alt={NotFoundPage} />
       <RoutePermissions
         exact
         path="/projects/:projectKey/settings"
         component={SettingsPage}
         promisedUserPermissions={promisedUserPermissions}
-        permission={PROJECT_SETTINGS_LIST}
+        permission={PROJECT_KEY_SETTINGS_LIST}
+        projectKey={projectKey(location.pathname)}
         alt={NotFoundPage} />
       <Route exact path="/projects/:projectKey/dask" component={DaskPage} />
       <Route exact path="/projects/:projectKey/spark" component={SparkPage} />

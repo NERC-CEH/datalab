@@ -76,6 +76,22 @@ describe('RoutePermissionWrapper', () => {
     expect(output.prop('children')).toBe('Has Permission');
   });
 
+  it('renders given component when instance admin', () => {
+    // Arrange
+    const promisedUserPermissions = {
+      error: null,
+      fetching: false,
+      value: ['system:instance:admin'],
+    };
+    const props = generateProps({ promisedUserPermissions });
+
+    // Act
+    const output = fullRender(props).find('span');
+
+    // Assert
+    expect(output.prop('children')).toBe('Has Permission');
+  });
+
   it('renders given component when no permissions required', () => {
     // Arrange
     const promisedUserPermissions = {

@@ -3,7 +3,7 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import config from '../config/config';
 
-const { INSTANCE_ADMIN_ROLE, SYSTEM } = permissionTypes;
+const { INSTANCE_ADMIN_ROLE, SYSTEM, PROJECT_NAMESPACE } = permissionTypes;
 
 const roleDelim = ':';
 
@@ -24,12 +24,18 @@ const buildPermissions = ({ permissions, ...rest }) => ({
     .reduce(flattenArray, []),
 });
 
-//    [ { role: 'admin', projectKey: 'project', permissions: [/see permissions.yml/] } ]
-// -> [ ['project:stacks:delete', ...] ]
+//    [ { role: 'admin', projectKey: 'project2', permissions: [/see permissions.yml/] } ]
+// -> [ ['projects:project2:stacks:delete', ...] ]
 const projectifyPermissions = ({ projectKey, permissions }) => {
-  const project = projectKey ? `${projectKey}${roleDelim}` : '';
+  const prefix = projectKey ? `${PROJECT_NAMESPACE}${roleDelim}${projectKey}${roleDelim}` : '';
+  return permissions.map(permission => prefix.concat(permission));
+};
 
-  return permissions.map(permission => project.concat(permission));
+//    [ { role: 'instanceAdmin', permissions: [/see permissions.yml/] } ]
+// -> [ ['system:instance:admin', ...] ]
+const systemifyPermissions = ({ permissions }) => {
+  const prefix = `${SYSTEM}${roleDelim}`;
+  return permissions.map(permission => prefix.concat(permission));
 };
 
 const flattenArray = (previous, current) => {
@@ -39,20 +45,22 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
-function expandRoles(userRoles) {
+const processRoles = (userRoles) => {
   const projectRoles = userRoles.projectRoles || [];
+  const projectPermissions = projectRoles
+    .map(getPermissions)
+    .map(buildPermissions)
+    .map(projectifyPermissions)
+    .reduce(flattenArray, []);
 
-  if (userRoles[INSTANCE_ADMIN_ROLE]) {
-    projectRoles.push({ projectKey: SYSTEM, role: INSTANCE_ADMIN_ROLE });
-  }
+  const systemRoles = userRoles[INSTANCE_ADMIN_ROLE] ? [{ role: INSTANCE_ADMIN_ROLE }] : [];
+  const systemPermissions = systemRoles
+    .map(getPermissions)
+    .map(buildPermissions)
+    .map(systemifyPermissions)
+    .reduce(flattenArray, []);
 
-  return projectRoles;
-}
-
-const processRoles = userRoles => expandRoles(userRoles)
-  .map(getPermissions)
-  .map(buildPermissions)
-  .map(projectifyPermissions)
-  .reduce(flattenArray, []);
+  return projectPermissions.concat(systemPermissions);
+};
 
 export default processRoles;
