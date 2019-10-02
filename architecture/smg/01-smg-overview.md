@@ -12,8 +12,9 @@ The document is split into the following sections:
 * **[Creating a release](./04-smg-creating-a-release.md)**
 * **[Installation and Verification](./05-smg-installation-and-verification.md)**
 * **[Maintenance](./06-smg-maintenance.md)**
-* **[Troubleshooting](./07-smg-troubleshooting-guide.mg)**
-* **[Reference](./08-smg-reference.md)**
+* **[Monitoring and Logging](./07-smg-monitoring-logging.md)**
+* **[Troubleshooting](./08-smg-troubleshooting-guide.md)**
+* **[Reference](./09-smg-reference.md)**
 
 ## Overview
 
