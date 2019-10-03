@@ -77,9 +77,14 @@ spec:
             periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
+            - name: spark-kubernetes-properties
+              mountPath: '$SPARK_HOME/conf/spark-defaults.conf'
             - mountPath: /data
               name: glusterfsvol
       volumes:
+        - name: spark-kubernetes-properties
+          configMap:
+            name: {{ name }}
         - name: glusterfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
