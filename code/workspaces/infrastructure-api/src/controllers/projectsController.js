@@ -1,6 +1,7 @@
 import { check, param, matchedData } from 'express-validator';
 import { service } from 'service-chassis';
 import projectsRepository from '../dataaccess/projectsRepository';
+import projectNamespaceManager from '../kubernetes/projectNamespaceManager';
 import logger from '../config/logger';
 
 async function listProjects(request, response, next) {
@@ -30,17 +31,30 @@ async function getProjectByKey(request, response, next) {
 async function createProject(request, response, next) {
   const project = matchedData(request, { locations: ['body'] });
 
-  if (await projectsRepository.exists(project.key)) {
-    response.status(400).send({
+  const forbiddenNamespace = await projectNamespaceManager.checkForbiddenNamespaces(project.key);
+  const projectExists = await projectsRepository.exists(project.key);
+
+  if (forbiddenNamespace) {
+    return response.status(400).send({
+      errors: [{ msg: `Project Key '${project.key}' cannot be used as it is a forbidden namespace.` }],
+    });
+  }
+
+  if (projectExists) {
+    return response.status(400).send({
       errors: [{ msg: `Entry with key '${project.key}' already exists.` }],
     });
-  } else {
-    try {
-      const createdProject = await projectsRepository.create(project);
-      response.status(201).send(createdProject);
-    } catch (error) {
-      next(new Error(`Error creating project: ${error.message}`));
-    }
+  }
+
+  try {
+    // Create namespaces first as in the case of failure this operation
+    // can be retried given namespace creation is idempotent
+    logger.info(`Creating Project: ${project.key}`);
+    await projectNamespaceManager.idempotentCreateProjectNamespaces(project.key);
+    const createdProject = await projectsRepository.create(project);
+    return response.status(201).send(createdProject);
+  } catch (error) {
+    return next(new Error(`Error creating project: ${error.message}`));
   }
 }
 
@@ -61,7 +75,11 @@ async function deleteProjectByKey(request, response, next) {
   const { projectKey } = matchedData(request);
 
   try {
+    // Delete Namespaces first to ensure the record is only deleted if namespaces successfully delete
+    logger.info(`Deleting Project: ${projectKey}`);
+    await projectNamespaceManager.idempotentDeleteProjectNamespaces(projectKey);
     const result = await projectsRepository.deleteByKey(projectKey);
+
     if (result.n === 0) {
       response.status(404).send(false);
     } else {
