@@ -26,6 +26,7 @@ async function idempotentCreateNamespace(namespaceName) {
   // this is an idempotent operation We return early if the namespace exists
   const namespaceMetadata = await readNamespaceMetadata(namespaceName);
   if (namespaceMetadata.exists) {
+    logger.debug(`Namespace: ${namespaceName} exists, skipping creation`);
     return;
   }
 
@@ -55,6 +56,7 @@ async function idempotentDeleteNamespace(namespaceName) {
   // this is an idempotent operation We return early if the namespace does not exist
   const namespaceMetadata = await readNamespaceMetadata(namespaceName);
   if (!namespaceMetadata.exists) {
+    logger.debug(`Namespace: ${namespaceName} does not exist, skipping deletion`);
     return;
   }
 

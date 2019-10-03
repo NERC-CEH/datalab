@@ -69,6 +69,8 @@ describe('namespaceApi', () => {
       });
 
       await namespaceApi.idempotentCreateNamespace(NAMESPACE);
+
+      expect(k8sApiMock.createNamespace).not.toBeCalled();
     });
 
     it('should create the namespace', async () => {
@@ -107,6 +109,8 @@ describe('namespaceApi', () => {
       k8sApiMock.readNamespace.mockRejectedValue('missing');
 
       await namespaceApi.idempotentDeleteNamespace(NAMESPACE);
+
+      expect(k8sApiMock.deleteNamespace).not.toBeCalled();
     });
 
     it('should delete the namespace', async () => {
