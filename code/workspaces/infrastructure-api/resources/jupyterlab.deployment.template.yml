@@ -62,6 +62,8 @@ spec:
               value: "/data/.jupyter"
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
+            - name: PYSPARK_PYTHON
+              value: "/usr/bin/python3" #this might be different if it's a conda environment
           resources:
             requests:
               cpu: 200m
@@ -69,6 +71,24 @@ spec:
             limits:
               cpu: 2
               memory: 4Gi
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/bash", "-c", "/bin/cp $SPARK_HOME/conf/spark-defaults.conf.template $SPARK_HOME/conf/spark-defaults.conf" &&
+                          "echo -e 'spark.driver.host {{ name }}-headless.prod.svc.cluster.local
+                          \nspark.driver.port 29413
+                          \nspark.executor.instances 4
+                          \nspark.executor.memory 4g
+                          \nspark.kubernetes.authenticate.caCertFile /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                          \nspark.kubernetes.authenticate.oauthTokenFile /var/run/secrets/kubernetes.io/serviceaccount/token
+                          \nspark.kubernetes.container.image gcr.io/spark-operator/spark-py:v2.4.0
+                          \nspark.kubernetes.executor.limit.cores 2
+                          \nspark.kubernetes.executor.request.cores 0.5
+                          \nspark.kubernetes.namespace {{project-compute-namespace}}
+                          \nspark.kubernetes.pyspark.pythonVersion 3
+                          \nspark.master k8s://https://kubernetes.default.svc.cluster.local:443
+                          \nspark.submit.deployMode client
+                          \nspark.app.name {{ name }}-spark-job' > $SPARK_HOME/conf/spark-defaults.conf"]
           livenessProbe:
             httpGet:
               path: /
