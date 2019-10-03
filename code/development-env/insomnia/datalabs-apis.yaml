@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2019-09-25T11:32:45.176Z
+__export_date: 2019-10-02T14:43:23.979Z
 __export_source: insomnia.desktop.app:v6.6.2
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -190,7 +190,7 @@ resources:
       type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n  project(key: \"project\")
+      text: '{"query":"query {\n  project(projectKey: \"project\")
         {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n    projectUsers
         {\n      userId\n      name\n      role\n    }\n  }\n}"}'
     created: 1566905934976
@@ -202,7 +202,7 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934976
     method: POST
-    modified: 1568648517707
+    modified: 1570026252161
     name: project
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
@@ -223,6 +223,35 @@ resources:
     name: Client API
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
     _type: request_group
+  - _id: req_c121dc119ecf49649786443ae4cc7b04
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  projects
+        {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n    projectUsers
+        {\n      userId\n      name\n      role\n    }\n  }\n}"}'
+    created: 1568900276811
+    description: ""
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1566905934963.5
+    method: POST
+    modified: 1568900344374
+    name: Projects
+    parameters: []
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ client_api_url  }}/api"
+    _type: request
   - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     authentication:
       token: "{{ access_token  }}"
@@ -395,10 +424,9 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  createProject(project: { \n    projectKey:
-        \"gql-create-project\", \n    name: \"GQL Create
-        Project\",\n    description: \"A project created using the createProject
-        mutation in GraphQL.\",\n    collaborationLink:
-        \"some-collaboration-url\",\n  })
+        \"gqlproj\", \n    name: \"GQL Create Project\",\n    description: \"A
+        project created using the createProject mutation in
+        GraphQL.\",\n    collaborationLink: \"some-collaboration-url\",\n  })
         {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}
         "}'
     created: 1568905829672
@@ -410,7 +438,7 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934938.5
     method: POST
-    modified: 1568981379545
+    modified: 1570026350797
     name: createProject
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
@@ -457,10 +485,9 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  updateProject(project: { \n    projectKey:
-        \"gql-update-project\", \n    name: \"GQL Update
-        Project\",\n    description: \"A project created using the updateProject
-        mutation in GraphQL.\",\n    collaborationLink:
-        \"some-collaboration-url\",\n  })
+        \"gqlproj\", \n    name: \"GQL Update Project\",\n    description: \"A
+        project created using the updateProject mutation in
+        GraphQL.\",\n    collaborationLink: \"some-collaboration-url\",\n  })
         {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}
         "}'
     created: 1568906446384
@@ -472,7 +499,7 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934932.25
     method: POST
-    modified: 1568981971509
+    modified: 1570026371136
     name: updateProject
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
@@ -490,7 +517,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  deleteProject(project: {projectKey:
-        \"gql-create-project\"})\n}\n"}'
+        \"gqlproj\"})\n}\n"}'
     created: 1568906791713
     description: ""
     headers:
@@ -500,7 +527,7 @@ resources:
     isPrivate: false
     metaSortKey: -1566905934929.125
     method: POST
-    modified: 1568981405171
+    modified: 1570026397957
     name: deleteProject
     parameters: []
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
@@ -928,6 +955,67 @@ resources:
     settingStoreCookies: true
     url: "{{ infra_api_url  }}/volumes/project/example/removeUsers"
     _type: request
+  - _id: req_738d8b4bbe984709a2ab48b481d9c92f
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"role_id": "71827ce0-8c1d-1092-834b-1ac389ddb211"
+        }
+    created: 1569591028624
+    description: ""
+    headers:
+      - id: pair_9a6ffe9c4caf4e09841c2936594012dd
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1569591253629
+    method: POST
+    modified: 1569591359107
+    name: Login
+    parameters: []
+    parentId: fld_9cf0625d118f45f5b01336ecb4f21c61
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: http://localhost:8200/v1/auth/approle/login
+    _type: request
+  - _id: fld_9cf0625d118f45f5b01336ecb4f21c61
+    created: 1569590989781
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1555504253479.75
+    modified: 1569591014222
+    name: Vault
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: request_group
+  - _id: req_53b8bd0e2e0f4f018ab623b7737b761d
+    authentication: {}
+    body: {}
+    created: 1569591253579
+    description: ""
+    headers:
+      - id: pair_ee78f41e83f542958d97779e222e6446
+        name: X-Vault-Token
+        value: 6327dd91-355f-bfbc-abac-e9611ef1d6fb
+    isPrivate: false
+    metaSortKey: -1569591253579
+    method: GET
+    modified: 1569591339497
+    name: Get Secret
+    parameters: []
+    parentId: fld_9cf0625d118f45f5b01336ecb4f21c61
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: http://localhost:8200/v1/secret/project/stacks/gary
+    _type: request
   - _id: req_7acd958c33ca45979bf71a34bc70c16a
     authentication:
       token: "{{ access_token  }}"
@@ -1001,3 +1089,19 @@ resources:
     name: Default Jar
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
     _type: cookie_jar
+  - _id: env_97245b5d16294ea0adfb5454e162aa91
+    color: "#789ccb"
+    created: 1568900073616
+    data:
+      access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFVWTBORFZFTmtaRE1VSkdRekV5TXpaRFEwVTBSa0kwTmpRd01rVkZSRUV6TmpoR1FVUkZRdyJ9.eyJpc3MiOiJodHRwczovL21qYnIuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDU5NWY0MGEyNWNhZjQzNDRiMmUwZTY3OCIsImF1ZCI6WyJodHRwczovL2RhdGFsYWIuZGF0YWxhYnMubmVyYy5hYy51ay9hcGkiLCJodHRwczovL21qYnIuZXUuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU2ODg5Njk5MiwiZXhwIjoxNTY4OTA0MTkyLCJhenAiOiJwejdaVUtpLWJMNzlNNkFEUDdTV0dhdU9paXZkZjZIZCIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUifQ.Hr8ZDwUVHILWc4v7bWupA-vMrw7RVwFHgx62M3fBtWkZwrljAYC-kR9Yo3lVqZVJ_JPgXS3qRX8EeBizWcYMO2wLq7aGl_9uKClwhZbeCr9UVB51k0qS-L9sssjsS6WEb3FRjmC4bjmhN9o87J8c1px5BsRwaOakYW3CkOeIdX43jh2FKwnYZz79MTqNbJw1izUpjVB7iT8J3Hou-CGH9FbawIC2dJR6Jzb2Xb5o9ZRie7RnNK8Ld41RE8bRsRtryWAPd5T3YKwI0dXabbxqDKL1u_JLP705L6xsz5CDM7zGWf0d0x14sQsJYK0pfJjcbse5aLijm7CwGsUwgXQn5g
+      client_api_url: https://testlab.test-datalabs.nerc.ac.uk/api
+    dataPropertyOrder:
+      "&":
+        - client_api_url
+        - access_token
+    isPrivate: false
+    metaSortKey: 1568900073616
+    modified: 1568900189070
+    name: Test
+    parentId: env_2014cd721e3244c198b46a159e1352b9
+    _type: environment
