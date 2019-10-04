@@ -37,12 +37,6 @@ const config = convict({
     default: 'http://localhost:8001',
     env: 'KUBERNETES_API',
   },
-  podNamespace: {
-    doc: 'The namespace for the pod',
-    format: 'String',
-    default: 'devtest',
-    env: 'KUBERNETES_NAMESPACE',
-  },
   storageClass: {
     doc: 'The storage class to use for new volumes',
     format: 'String',

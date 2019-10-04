@@ -4,52 +4,54 @@ import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
 
-const DEPLOYMENT_URL = `${API_BASE}/apis/apps/v1beta1/namespaces/${NAMESPACE}/deployments`;
+const getDeploymentUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/apis/apps/v1beta1/namespaces/${namespace}/deployments${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
-function createOrUpdateDeployment(name, manifest) {
-  return getDeployment(name, manifest)
-    .then(createOrReplace(name, manifest));
+function createOrUpdateDeployment(name, namespace, manifest) {
+  return getDeployment(name, namespace)
+    .then(createOrReplace(name, namespace, manifest));
 }
 
-const createOrReplace = (name, manifest) => (existingDeployment) => {
+const createOrReplace = (name, namespace, manifest) => (existingDeployment) => {
   if (existingDeployment) {
-    return updateDeployment(name, manifest);
+    return updateDeployment(name, namespace, manifest);
   }
 
-  return createDeployment(name, manifest);
+  return createDeployment(name, namespace, manifest);
 };
 
-function getDeployment(name) {
-  return axios.get(`${DEPLOYMENT_URL}/${name}`)
+function getDeployment(name, namespace) {
+  return axios.get(getDeploymentUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
 
-function createDeployment(name, manifest) {
-  logger.info('Creating deployment: %s', name);
-  return axios.post(DEPLOYMENT_URL, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+function createDeployment(name, namespace, manifest) {
+  logger.info('Creating deployment: %s in namespace: %s', name, namespace);
+  return axios.post(getDeploymentUrl(namespace), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('deployment', name));
 }
 
-function updateDeployment(name, manifest) {
-  logger.info('Updating deployment: %s', name);
-  return axios.put(`${DEPLOYMENT_URL}/${name}`, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+function updateDeployment(name, namespace, manifest) {
+  logger.info('Updating deployment: %s in namespace: %s', name, namespace);
+  return axios.put(getDeploymentUrl(namespace, name), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('deployment', name));
 }
 
-function deleteDeployment(name) {
-  logger.info('Deleting deployment: %s', name);
+function deleteDeployment(name, namespace) {
+  logger.info('Deleting deployment: %s in namespace: %s', name, namespace);
   const deleteOptions = {
     kind: 'DeleteOptions',
     apiVersion: 'v1',
     propagationPolicy: 'Foreground',
   };
 
-  return axios.delete(`${DEPLOYMENT_URL}/${name}`, { data: deleteOptions })
+  return axios.delete(getDeploymentUrl(namespace, name), { data: deleteOptions })
     .then(response => response.data)
     .catch(handleDeleteError('deployment', name));
 }

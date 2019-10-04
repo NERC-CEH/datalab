@@ -7,7 +7,7 @@ import ingressApi from './ingressApi';
 const mock = new MockAdapter(axios);
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
+const NAMESPACE = 'namespace';
 
 const INGRESS_URL = `${API_BASE}/apis/extensions/v1beta1/namespaces/${NAMESPACE}/ingresses`;
 const INGRESS_NAME = 'test-ingress';
@@ -27,7 +27,7 @@ describe('Kubernetes Ingress API', () => {
     it('should return the ingress if it exists', () => {
       mock.onGet(`${INGRESS_URL}/${INGRESS_NAME}`).reply(200, ingress);
 
-      return ingressApi.getIngress(INGRESS_NAME)
+      return ingressApi.getIngress(INGRESS_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toEqual(ingress);
         });
@@ -36,7 +36,7 @@ describe('Kubernetes Ingress API', () => {
     it('should return undefined it the ingress does not exist', () => {
       mock.onGet(`${INGRESS_URL}/${INGRESS_NAME}`).reply(404, ingress);
 
-      return ingressApi.getIngress(INGRESS_NAME)
+      return ingressApi.getIngress(INGRESS_NAME, NAMESPACE)
         .then((response) => {
           expect(response).toBeUndefined();
         });
@@ -50,19 +50,21 @@ describe('Kubernetes Ingress API', () => {
         return [200, ingress];
       });
 
-      return ingressApi.createIngress(INGRESS_NAME, manifest)
+      return ingressApi.createIngress(INGRESS_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(ingress);
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPost(INGRESS_URL).reply(400, { message: 'error-message' });
 
-      return ingressApi.createIngress(INGRESS_NAME, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
-        });
+      try {
+        await ingressApi.createIngress(INGRESS_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes ingress \'test-ingress\' - error-message');
+      }
     });
   });
 
@@ -73,19 +75,21 @@ describe('Kubernetes Ingress API', () => {
         return [200, ingress];
       });
 
-      return ingressApi.updateIngress(INGRESS_NAME, manifest)
+      return ingressApi.updateIngress(INGRESS_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(ingress);
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPut(`${INGRESS_URL}/${INGRESS_NAME}`).reply(400, { message: 'error-message' });
 
-      return ingressApi.updateIngress(INGRESS_NAME, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
-        });
+      try {
+        await ingressApi.updateIngress(INGRESS_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes ingress \'test-ingress\' - error-message');
+      }
     });
   });
 
@@ -94,7 +98,7 @@ describe('Kubernetes Ingress API', () => {
       mock.onGet(`${INGRESS_URL}/${INGRESS_NAME}`).reply(404);
       mock.onPost().reply(204, ingress);
 
-      return ingressApi.createOrUpdateIngress(INGRESS_NAME, manifest)
+      return ingressApi.createOrUpdateIngress(INGRESS_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(ingress);
         });
@@ -104,7 +108,7 @@ describe('Kubernetes Ingress API', () => {
       mock.onGet(`${INGRESS_URL}/${INGRESS_NAME}`).reply(200, ingress);
       mock.onPut().reply(204, ingress);
 
-      return ingressApi.createOrUpdateIngress(INGRESS_NAME, manifest)
+      return ingressApi.createOrUpdateIngress(INGRESS_NAME, NAMESPACE, manifest)
         .then((response) => {
           expect(response.data).toEqual(ingress);
         });
@@ -115,19 +119,19 @@ describe('Kubernetes Ingress API', () => {
     it('should DELETE resource URL', () => {
       mock.onDelete(`${INGRESS_URL}/${INGRESS_NAME}`).reply(204);
 
-      return expect(ingressApi.deleteIngress(INGRESS_NAME)).resolves.toBeUndefined();
+      return expect(ingressApi.deleteIngress(INGRESS_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
     it('should return successfully if ingress does not exist', () => {
       mock.onDelete(`${INGRESS_URL}/${INGRESS_NAME}`).reply(404);
 
-      return expect(ingressApi.deleteIngress(INGRESS_NAME)).resolves.toBeUndefined();
+      return expect(ingressApi.deleteIngress(INGRESS_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
     it('should return error if server errors', () => {
       mock.onDelete(`${INGRESS_URL}/${INGRESS_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(ingressApi.deleteIngress(INGRESS_NAME))
+      return expect(ingressApi.deleteIngress(INGRESS_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
