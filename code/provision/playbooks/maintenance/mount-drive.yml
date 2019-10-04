@@ -1,0 +1,24 @@
+---
+- hosts: datalabs-k8s-worker-x
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Format the disk
+    filesystem:
+      fstype: ext4
+      dev: "/dev/sdb"
+
+  - name: Create the mount points for the disks
+    file:
+      path: "/data"
+      owner: "{{ deploy_user }}"
+      group: "{{ deploy_user }}"
+      state: directory
+
+  - name: Mount device
+    mount:
+      path: "/data"
+      src: "/dev/sdb"
+      fstype: ext4
+      state: mounted
