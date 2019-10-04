@@ -55,7 +55,7 @@ describe('projectsRepository', () => {
       ProjectMock.findOneAndUpdate,
       { key: testProject.key },
       testProject,
-      { upsert: true, setDefaultsOnInsert: true, new: true },
+      { upsert: true, setDefaultsOnInsert: true, new: true, omitUndefined: true },
     );
   });
 

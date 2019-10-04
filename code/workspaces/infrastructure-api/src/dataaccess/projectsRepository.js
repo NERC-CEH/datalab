@@ -25,7 +25,8 @@ async function createOrUpdate(project) {
   return Project().findOneAndUpdate(
     { key: project.key },
     project,
-    { upsert: true, setDefaultsOnInsert: true, new: true },
+    // omitUndefined stops fields being created with null and respects defaults should be inserted
+    { upsert: true, setDefaultsOnInsert: true, new: true, omitUndefined: true },
   );
 }
 
