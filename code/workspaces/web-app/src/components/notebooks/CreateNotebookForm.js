@@ -4,29 +4,14 @@ import React from 'react';
 import { stackTypes } from 'common';
 import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
+import getUrlNameStartEndText from '../../core/urlHelper';
 
 const { ANALYSIS, getStackSelections } = stackTypes;
 
-const { startText, endText } = getUrlNameStartEndText(window.location);
-
-export function getUrlNameStartEndText(windowLocation) {
-  if (windowLocation.hostname === 'localhost') {
-    return {
-      startText: `${windowLocation.protocol}//testlab-`,
-      endText: '.datalabs.localhost',
-    };
-  }
-
-  const separator = '.';
-  const [projectName, ...restHostname] = windowLocation.hostname.split(separator);
-  return {
-    startText: `${windowLocation.protocol}//${projectName}-`,
-    endText: `${separator}${restHostname.join(separator)}`,
-  };
-}
-
 const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+  const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -89,4 +74,5 @@ CreateNotebookForm.propTypes = {
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
   })).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };

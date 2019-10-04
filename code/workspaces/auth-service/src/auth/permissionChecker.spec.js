@@ -1,5 +1,8 @@
 import httpMocks from 'node-mocks-http';
+import { permissionTypes } from 'common';
 import { permissionChecker, projectPermissionChecker } from './permissionCheckerMiddleware';
+
+const { PROJECT_NAMESPACE } = permissionTypes;
 
 jest.mock('winston');
 
@@ -32,7 +35,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'User missing expected permission(s): project:elementName:missingActionName,system:instance:admin' });
+        .toEqual({ message: `User missing expected permission(s): ${PROJECT_NAMESPACE}:project:elementName:missingActionName,system:instance:admin` });
     });
 
     it('throws error for shortened permission name', () => {
@@ -43,7 +46,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'User missing expected permission(s): project:elementName:actionNam,system:instance:admin' });
+        .toEqual({ message: `User missing expected permission(s): ${PROJECT_NAMESPACE}:project:elementName:actionNam,system:instance:admin` });
     });
   });
 
@@ -69,7 +72,7 @@ describe('Permission Checker Middleware', () => {
       expect(actionMock).not.toHaveBeenCalled();
       expect(response.statusCode).toBe(401);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual({ message: 'User missing expected permission(s): anotherproject:elementName:actionName,system:instance:admin' });
+        .toEqual({ message: `User missing expected permission(s): ${PROJECT_NAMESPACE}:anotherproject:elementName:actionName,system:instance:admin` });
     });
 
     it('should return 401 if no project name included in request', () => {
@@ -89,7 +92,7 @@ function createRequest() {
   return {
     user: {
       permissions: [
-        'project:elementName:actionName',
+        `${PROJECT_NAMESPACE}:project:elementName:actionName`,
       ],
     },
   };

@@ -27,6 +27,22 @@ describe('ComponentPermissionWrapper', () => {
     expect(output.childAt(0).prop('children')).toBe('Has Permission');
   });
 
+  it('renders children if user has instance admin permission', () => {
+    // Arrange
+    const props = {
+      userPermissions: ['system:instance:admin'],
+      permission: 'expected-permission',
+    };
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output.children().length).toBe(1);
+    expect(output.childAt(0).type()).toBe('span');
+    expect(output.childAt(0).prop('children')).toBe('Has Permission');
+  });
+
   it('renders null if permissions do not match', () => {
     // Arrange
     const props = {

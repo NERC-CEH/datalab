@@ -1,7 +1,7 @@
 import React from 'react';
-import LoadDataStorageModalWrapper from '../modal/LoadDataStorageModalWrapper';
+import CreateStacksModalWrapper from '../modal/CreateStacksModalWrapper';
 import CreateNotebookDialog from '../../components/modal/CreateNotebookDialog';
 
-const CreateNotebookDialogContainer = props => <LoadDataStorageModalWrapper Dialog={CreateNotebookDialog} {...props} />;
+const CreateNotebookDialogContainer = props => <CreateStacksModalWrapper Dialog={CreateNotebookDialog} {...props} />;
 
 export default CreateNotebookDialogContainer;

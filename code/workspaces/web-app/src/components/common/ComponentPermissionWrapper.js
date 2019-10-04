@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
 
 class ComponentWrapper extends Component {
   hasPermission() {
     const { userPermissions, permission } = this.props;
-    return userPermissions.includes(permission);
+    return userPermissions.includes(permission) || userPermissions.includes(SYSTEM_INSTANCE_ADMIN);
   }
 
   render() {

@@ -6,9 +6,8 @@ import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 const stackNames = Object.values(STACKS).map(stack => stack.name);
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
 
-const PODS_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/pods`;
+const PODS_URL = `${API_BASE}/api/v1/pods`;
 
 function getPods() {
   return axios.get(PODS_URL, { params: { labelSelector: SELECTOR_LABEL } })
@@ -23,8 +22,9 @@ function getStacks() {
 
 const handlePodlist = ({ items }) => items.map(pod => ({
   name: get(pod, 'metadata.labels.name'),
+  namespace: get(pod, 'metadata.namespace'),
   type: get(pod, `metadata.labels.${SELECTOR_LABEL}`),
   status: get(pod, 'status.phase'),
 }));
 
-export default { getPods, getStacks };
+export default { getStacks };

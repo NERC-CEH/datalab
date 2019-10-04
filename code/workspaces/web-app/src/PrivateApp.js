@@ -16,7 +16,7 @@ import RoutePermissions from './components/common/RoutePermissionWrapper';
 import SparkPage from './pages/SparkPage';
 import SettingsPage from './pages/SettingsPage';
 
-const { projectPermissions: { PROJECT_STORAGE_LIST, PROJECT_STACKS_LIST, PROJECT_SETTINGS_LIST } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST } } = permissionTypes;
 
 const projectKey = (pathname) => {
   const match = matchPath(pathname, {

@@ -4,11 +4,14 @@ import React from 'react';
 import { stackTypes } from 'common';
 import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
+import getUrlNameStartEndText from '../../core/urlHelper';
 
 const { PUBLISH, getStackSelections } = stackTypes;
 
 const CreateSiteForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+  const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -32,8 +35,8 @@ const CreateSiteForm = (props) => {
           label="URL Name"
           component={renderAdornedTextField}
           placeholder="Site Name for URLs"
-          startText="http://datalab-"
-          endText=".datalabs.nerc.ac.uk" />
+          startText={startText}
+          endText={endText} />
       </div>
       <div>
         <Field
@@ -65,6 +68,11 @@ const CreateSiteForm = (props) => {
 CreateSiteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
+  dataStorageOptions: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  }).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 const CreateSiteReduxForm = reduxForm({

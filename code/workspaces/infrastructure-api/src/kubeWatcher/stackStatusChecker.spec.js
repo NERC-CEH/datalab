@@ -19,11 +19,11 @@ stackRepository.default = {
 };
 
 const stacks = [
-  { name: 'expectedType-firstPod', status: 'Evicted' },
-  { name: 'expectedType-firstPod', status: 'Running' },
-  { name: 'expectedType-secondPod', status: 'Running' },
-  { name: 'expectedType-thirdPod', status: 'Terminating' },
-  { name: 'expectedType-fourthPod', status: 'Init:0/2' },
+  { name: 'expectedType-firstPod', namespace: 'a', status: 'Evicted' },
+  { name: 'expectedType-firstPod', namespace: 'a', status: 'Running' },
+  { name: 'expectedType-secondPod', namespace: 'a', status: 'Running' },
+  { name: 'expectedType-thirdPod', namespace: 'b', status: 'Terminating' },
+  { name: 'expectedType-fourthPod', namespace: 'b', status: 'Init:0/2' },
 ];
 
 getStacksMock.mockReturnValue(Promise.resolve(stacks));
@@ -39,7 +39,7 @@ describe('Stack Status Checker', () => {
 
   it('updates stack record for Running stack', () => {
     getStacksMock.mockReturnValue(Promise.resolve([
-      { name: 'expectedType-expectedPodName', status: 'Running' },
+      { name: 'expectedType-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },
     ]));
 
     expect(updateStatusMock).not.toHaveBeenCalled();
@@ -47,6 +47,7 @@ describe('Stack Status Checker', () => {
       expect(updateStatusMock).toHaveBeenCalledTimes(1);
       expect(updateStatusMock).toHaveBeenCalledWith({
         name: 'expectedPodName',
+        namespace: 'expectedNamespace',
         status: 'ready',
         type: 'expectedType',
       });
@@ -55,7 +56,7 @@ describe('Stack Status Checker', () => {
 
   it('updates stack record for Requested stack', () => {
     getStacksMock.mockReturnValue(Promise.resolve([
-      { name: 'expectedType-expectedPodName', status: 'Pending' },
+      { name: 'expectedType-expectedPodName', status: 'Pending', namespace: 'expectedNamespace' },
     ]));
 
     expect(updateStatusMock).not.toHaveBeenCalled();
@@ -63,6 +64,7 @@ describe('Stack Status Checker', () => {
       expect(updateStatusMock).toHaveBeenCalledTimes(1);
       expect(updateStatusMock).toHaveBeenCalledWith({
         name: 'expectedPodName',
+        namespace: 'expectedNamespace',
         status: 'requested',
         type: 'expectedType',
       });
@@ -71,7 +73,7 @@ describe('Stack Status Checker', () => {
 
   it('updates stack record for Creating stack', () => {
     getStacksMock.mockReturnValue(Promise.resolve([
-      { name: 'expectedType-expectedPodName', status: 'CrashLoopBackOff' },
+      { name: 'expectedType-expectedPodName', status: 'CrashLoopBackOff', namespace: 'expectedNamespace' },
     ]));
 
     expect(updateStatusMock).not.toHaveBeenCalled();
@@ -79,6 +81,7 @@ describe('Stack Status Checker', () => {
       expect(updateStatusMock).toHaveBeenCalledTimes(1);
       expect(updateStatusMock).toHaveBeenCalledWith({
         name: 'expectedPodName',
+        namespace: 'expectedNamespace',
         status: 'unavailable',
         type: 'expectedType',
       });

@@ -18,7 +18,7 @@ import notify from '../../components/common/notify';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 
-const { projectPermissions: { PROJECT_STORAGE_CREATE, PROJECT_STORAGE_DELETE, PROJECT_STORAGE_OPEN, PROJECT_STORAGE_EDIT } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STORAGE_CREATE, PROJECT_KEY_STORAGE_DELETE, PROJECT_KEY_STORAGE_OPEN, PROJECT_KEY_STORAGE_EDIT }, projectKeyPermission } = permissionTypes;
 
 const TYPE_NAME = 'Data Store';
 const TYPE_NAME_PLURAL = 'Data Stores';
@@ -118,10 +118,10 @@ class DataStorageContainer extends Component {
           editStack={this.editDataStore}
           openCreationForm={this.openCreationForm}
           userPermissions={() => this.props.userPermissions}
-          createPermission={PROJECT_STORAGE_CREATE}
-          openPermission={PROJECT_STORAGE_OPEN}
-          deletePermission={PROJECT_STORAGE_DELETE}
-          editPermission={PROJECT_STORAGE_EDIT}
+          createPermission={projectKeyPermission(PROJECT_KEY_STORAGE_CREATE, this.props.projectKey)}
+          openPermission={projectKeyPermission(PROJECT_KEY_STORAGE_OPEN, this.props.projectKey)}
+          deletePermission={projectKeyPermission(PROJECT_KEY_STORAGE_DELETE, this.props.projectKey)}
+          editPermission={projectKeyPermission(PROJECT_KEY_STORAGE_EDIT, this.props.projectKey)}
         />
       </PromisedContentWrapper>
     );

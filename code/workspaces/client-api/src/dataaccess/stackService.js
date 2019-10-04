@@ -4,38 +4,38 @@ import config from '../config';
 
 const API_URL_BASE = config.get('infrastructureApi');
 
-function getAll({ token }) {
-  return axios.get(`${API_URL_BASE}/stacks`, generateOptions(token))
+function getAll(projectKey, { token }) {
+  return axios.get(`${API_URL_BASE}/stacks/${projectKey}`, generateOptions(token))
     .then(response => response.data);
 }
 
-function getAllByCategory({ token }, category) {
-  return axios.get(`${API_URL_BASE}/stacks/category/${category}`, generateOptions(token))
+function getAllByCategory(projectKey, category, { token }) {
+  return axios.get(`${API_URL_BASE}/stacks/${projectKey}/category/${category}`, generateOptions(token))
     .then(response => response.data);
 }
 
-function getAllByVolumeMount({ token }, volumeMount) {
-  return axios.get(`${API_URL_BASE}/stacks/mount/${volumeMount}`, generateOptions(token))
+function getAllByVolumeMount(projectKey, volumeMount, { token }) {
+  return axios.get(`${API_URL_BASE}/stacks/${projectKey}/mount/${volumeMount}`, generateOptions(token))
     .then(response => response.data);
 }
 
-function getByName({ token }, name) {
-  return axios.get(`${API_URL_BASE}/stack/name/${name}`, generateOptions(token))
+function getByName(projectKey, name, { token }) {
+  return axios.get(`${API_URL_BASE}/stack/${projectKey}/name/${name}`, generateOptions(token))
     .then(response => get(response, 'data.id') || null);
 }
 
-function getById({ token }, id) {
-  return axios.get(`${API_URL_BASE}/stack/id/${id}`, generateOptions(token))
+function getById(projectKey, id, { token }) {
+  return axios.get(`${API_URL_BASE}/stack/${projectKey}/id/${id}`, generateOptions(token))
     .then(response => response.data);
 }
 
-function createStack({ token }, stack) {
-  return axios.post(`${API_URL_BASE}/stack`, stack, generateOptions(token))
+function createStack(projectKey, stack, { token }) {
+  return axios.post(`${API_URL_BASE}/stack/${projectKey}`, stack, generateOptions(token))
     .then(response => response.data);
 }
 
-function deleteStack({ token }, stack) {
-  return axios.delete(`${API_URL_BASE}/stack`, generateOptions(token, stack))
+function deleteStack(projectKey, stack, { token }) {
+  return axios.delete(`${API_URL_BASE}/stack/${projectKey}`, generateOptions(token, stack))
     .then(response => response.data);
 }
 

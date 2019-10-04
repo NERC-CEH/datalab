@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import CreateSiteForm from '../sites/CreateSiteForm';
 import PreviewSiteCard from '../sites/PreviewSiteCard';
 
-const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => (
+const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions, projectKey }) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>
@@ -15,7 +15,8 @@ const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions }) => 
           <CreateSiteForm
             onSubmit={onSubmit}
             cancel={onCancel}
-            dataStorageOptions={dataStorageOptions} />
+            dataStorageOptions={dataStorageOptions}
+            projectKey={projectKey} />
         </DialogContent>
       </div>
       <div style={{ width: 320 }}>

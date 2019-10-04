@@ -14,7 +14,7 @@ import StackCards from '../../components/stacks/StackCards';
 
 const refreshTimeout = 15000;
 
-const { projectPermissions: { PROJECT_STACKS_CREATE, PROJECT_STACKS_DELETE, PROJECT_STACKS_OPEN, PROJECT_STACKS_EDIT } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_EDIT }, projectKeyPermission } = permissionTypes;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -34,11 +34,11 @@ class StacksContainer extends Component {
   }
 
   createStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.createStack(stack))
+    .then(() => this.props.actions.createStack({ ...stack, projectKey: this.props.projectKey }))
     .then(() => this.props.actions.resetForm(this.props.formStateName))
     .then(() => notify.success(`${this.props.typeName} created`))
     .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType));
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
     title: `Create a ${this.props.typeName}`,
@@ -52,7 +52,7 @@ class StacksContainer extends Component {
     .then(() => this.props.actions.deleteStack(stack))
     .then(() => notify.success(`${this.props.typeName} deleted`))
     .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.containerType));
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType));
 
   confirmDeleteStack = stack => this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
     title: `Delete ${stack.displayName} ${this.props.typeName}`,
@@ -64,7 +64,7 @@ class StacksContainer extends Component {
 
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    return this.props.actions.loadStacksByCategory(this.props.containerType)
+    return this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType)
       .then(() => {
         this.timeout = setTimeout(this.loadStack, refreshTimeout);
       })
@@ -95,10 +95,10 @@ class StacksContainer extends Component {
           deleteStack={this.confirmDeleteStack}
           openCreationForm={this.openCreationForm}
           userPermissions={() => this.props.userPermissions}
-          createPermission={PROJECT_STACKS_CREATE}
-          openPermission={PROJECT_STACKS_OPEN}
-          deletePermission={PROJECT_STACKS_DELETE}
-          editPermission={PROJECT_STACKS_EDIT} />
+          createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey)}
+          openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey)}
+          deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey)}
+          editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey)} />
       </PromisedContentWrapper>
     );
   }
@@ -125,6 +125,7 @@ StacksContainer.propTypes = {
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 function mapStateToProps({ stacks }) {

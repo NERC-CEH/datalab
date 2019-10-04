@@ -34,7 +34,7 @@ function getOneByIdExec(request, response) {
   const params = matchedData(request);
 
   // Handle request
-  return stackRepository.getOneById(user, params.id)
+  return stackRepository.getOneById(params.projectKey, user, params.id)
     .then(handleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching ID for', TYPE, undefined));
@@ -78,6 +78,7 @@ const checkExistsWithMsg = fieldName => check(fieldName).exists().withMessage(`$
 
 const withIdValidator = [
   checkExistsWithMsg('id'),
+  checkExistsWithMsg('projectKey'),
 ];
 
 const withNameValidator = [

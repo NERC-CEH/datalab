@@ -13,7 +13,9 @@ const PERMISSIONS = 'permissions';
 const USERS = 'users';
 const INSTANCE = 'instance';
 
+const PROJECT_NAMESPACE = 'projects';
 const PROJECT = 'project';
+const KEY_TOKEN = '?projectKey?';
 const SYSTEM = 'system';
 
 // key name used for admin role boolean in auth
@@ -42,8 +44,9 @@ const elements = {
   PERMISSIONS,
 };
 
-const projects = {
-  PROJECT,
+const PROJECT_KEY = `${PROJECT_NAMESPACE}${permissionDelim}${KEY_TOKEN}`;
+const projectKeys = {
+  PROJECT_KEY,
 };
 
 const concatPermissions = (head, tail, char) => `${head}${char}${tail}`;
@@ -62,7 +65,9 @@ const elementPermissions = flatMapPermissions(elements, elementsPermissionList);
 
 const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
 
-const projectPermissions = flatMapPermissions(projects, { ...elementPermissions, ...usersPermissions });
+const projectPermissions = flatMapPermissions(projectKeys, { ...elementPermissions, ...usersPermissions });
+
+const projectKeyPermission = (permission, projectKey) => permission.replace(KEY_TOKEN, projectKey);
 
 const systemPermissions = flatMapPermissions({ SYSTEM }, flatMapPermissions({ INSTANCE }, { ADMIN }));
 
@@ -71,6 +76,7 @@ const { SYSTEM_INSTANCE_ADMIN } = systemPermissions;
 export {
   INSTANCE_ADMIN_ROLE,
   SYSTEM_INSTANCE_ADMIN,
+  PROJECT_NAMESPACE,
   PROJECT,
   SYSTEM,
   elementPermissions,
@@ -78,4 +84,5 @@ export {
   projectPermissions,
   systemPermissions,
   permissionDelim as delimiter,
+  projectKeyPermission,
 };

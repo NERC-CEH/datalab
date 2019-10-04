@@ -5,6 +5,7 @@ exports[`PublishingPage renders correct snapshot 1`] = `
   title="Sites"
 >
   <SitesContainer
+    projectKey="testproj"
     userPermissions={
       Array [
         "expectedPermission",

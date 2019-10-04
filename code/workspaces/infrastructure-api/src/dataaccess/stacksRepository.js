@@ -35,9 +35,10 @@ function getAllByVolumeMount(projectKey, user, mount) {
     .exec();
 }
 
-function getOneById(user, id) {
+function getOneById(projectKey, user, id) {
   return Stack()
     .findOne({ _id: id })
+    .filterOneByProject(projectKey)
     .filterOneByUser(user)
     .exec();
 }
@@ -75,9 +76,9 @@ function deleteStack(projectKey, user, stack) {
 // Function is used by kube-water to update stacks status. This will require an
 // update when kube-water updated to handle projectKey.
 function updateStatus(stack) {
-  const { name, type, status } = stack;
+  const { name, namespace, type, status } = stack;
   return Stack()
-    .where({ name, type })
+    .where({ name, type, projectKey: namespace })
     .updateOne({ status })
     .exec();
 }

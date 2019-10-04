@@ -12,7 +12,7 @@
   command: "helm repo update"
 
 - name: Install Prometheus Operator Helm Chart
-  command: "helm upgrade --install prometheus-operator --tls --namespace prometheus stable/prometheus-operator --debug -f {{ chart_directory }}/values.yml"
+  command: "helm upgrade --install prometheus-operator --tls --namespace prometheus stable/prometheus-operator --debug -f {{ chart_directory }}/values.yml --version {{ prometheus_operator_version }}"
 
 - name: Delete temporary helm chart directory
   file: path={{ tmp_directory }} state=absent
