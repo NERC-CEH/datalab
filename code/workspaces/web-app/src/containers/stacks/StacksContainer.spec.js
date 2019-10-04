@@ -160,7 +160,7 @@ describe('StacksContainer', () => {
       return openStack({ id: 1000 })
         .then(() => {
           expect(getUrlMock).toHaveBeenCalledTimes(1);
-          expect(getUrlMock).toHaveBeenCalledWith(1000);
+          expect(getUrlMock).toHaveBeenCalledWith('projtest', 1000);
           expect(openStackMock).toHaveBeenCalledTimes(1);
           expect(openStackMock).toHaveBeenCalledWith('expectedUrl');
         });
@@ -179,7 +179,7 @@ describe('StacksContainer', () => {
       return openStack({ id: 1000 })
         .then(() => {
           expect(getUrlMock).toHaveBeenCalledTimes(1);
-          expect(getUrlMock).toHaveBeenCalledWith(1000);
+          expect(getUrlMock).toHaveBeenCalledWith('projtest', 1000);
           expect(toastrErrorMock).toHaveBeenCalledTimes(1);
           expect(toastrErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
         });

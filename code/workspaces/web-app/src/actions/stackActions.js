@@ -17,9 +17,9 @@ const loadStacksByCategory = (projectKey, category) => ({
   payload: stackService.loadStacksByCategory(projectKey, category),
 });
 
-const getUrl = id => ({
+const getUrl = (projectKey, id) => ({
   type: GET_STACK_URL_ACTION,
-  payload: stackService.getUrl(id),
+  payload: stackService.getUrl(projectKey, id),
 });
 
 const openStack = stackUrl => ({

@@ -28,7 +28,7 @@ class StacksContainer extends Component {
   }
 
   openStack(stack) {
-    return this.props.actions.getUrl(stack.id)
+    return this.props.actions.getUrl(this.props.projectKey, stack.id)
       .then(payload => this.props.actions.openStack(payload.value.redirectUrl))
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }

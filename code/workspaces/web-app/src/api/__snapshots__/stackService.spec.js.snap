@@ -20,8 +20,8 @@ exports[`stackService deleteStack should build the correct mutation and unpack t
 
 exports[`stackService getUrl should build the correct query and return the url 1`] = `
 "
-    GetUrl($id: ID!) {
-      stack(id: $id) {
+    GetUrl($projectKey: String!, $id: ID!) {
+      stack(projectKey: $projectKey, id: $id) {
         redirectUrl
       }
     }"

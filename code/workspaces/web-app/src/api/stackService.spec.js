@@ -28,10 +28,10 @@ describe('stackService', () => {
   describe('getUrl', () => {
     it('should build the correct query and return the url', () => {
       const data = { stack: { redirectUrl: 'expectedUrl' } };
-      const queryParams = { id: 'id' };
+      const queryParams = { projectKey: 'testproj', id: 'id' };
       mockClient.prepareSuccess(data);
 
-      return stackService.getUrl(queryParams.id).then((response) => {
+      return stackService.getUrl(queryParams.projectKey, queryParams.id).then((response) => {
         expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(queryParams);
