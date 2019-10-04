@@ -38,4 +38,8 @@ kubeConfig.loadFromOptions({
   currentContext: context.name,
 });
 
+const coreV1Api = kubeConfig.makeApiClient(k8s.CoreV1Api);
+const getCoreV1Api = () => coreV1Api;
+
 export default kubeConfig;
+export { getCoreV1Api };
