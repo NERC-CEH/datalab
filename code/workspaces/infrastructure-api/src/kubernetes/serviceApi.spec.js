@@ -62,6 +62,7 @@ describe('Kubernetes Service API', () => {
 
       try {
         await serviceApi.createService(SERVICE_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
         expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
       }
@@ -83,6 +84,7 @@ describe('Kubernetes Service API', () => {
 
       try {
         await serviceApi.updateService(SERVICE_NAME, NAMESPACE, manifest, service);
+        expect(true).toBe(false);
       } catch (error) {
         expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
       }

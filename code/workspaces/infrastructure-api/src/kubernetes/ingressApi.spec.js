@@ -61,8 +61,9 @@ describe('Kubernetes Ingress API', () => {
 
       try {
         await ingressApi.createIngress(INGRESS_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
-        expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes ingress \'test-ingress\' - error-message');
       }
     });
   });
@@ -85,8 +86,9 @@ describe('Kubernetes Ingress API', () => {
 
       try {
         await ingressApi.updateIngress(INGRESS_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
-        expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes ingress \'test-ingress\' - error-message');
       }
     });
   });

@@ -26,7 +26,7 @@ const createOrReplace = (name, namespace, manifest) => (existingIngress) => {
 };
 
 function getIngress(name, namespace) {
-  return axios.get(`${getIngressUrl(namespace, name)}`)
+  return axios.get(getIngressUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -34,18 +34,18 @@ function getIngress(name, namespace) {
 function createIngress(name, namespace, manifest) {
   logger.info('Creating ingress: %s in namespace %s', name, namespace);
   return axios.post(getIngressUrl(namespace), manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+    .catch(handleCreateError('ingress', name));
 }
 
 function updateIngress(name, namespace, manifest) {
   logger.info('Updating ingress: %s in namespace %s', name, namespace);
-  return axios.put(`${getIngressUrl(namespace, name)}`, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+  return axios.put(getIngressUrl(namespace, name), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('ingress', name));
 }
 
 function deleteIngress(name, namespace) {
   logger.info('Deleting ingress: %s in namespace %s', name, namespace);
-  return axios.delete(`${getIngressUrl(namespace, name)}`)
+  return axios.delete(getIngressUrl(namespace, name))
     .then(response => response.data)
     .catch(handleDeleteError('ingress', name));
 }

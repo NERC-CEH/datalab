@@ -27,7 +27,7 @@ const createOrReplace = (name, namespace, manifest) => (existingPersistentVolume
 };
 
 function getPersistentVolumeClaim(name, namespace) {
-  return axios.get(`${getPVCUrl(namespace, name)}`)
+  return axios.get(getPVCUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -35,18 +35,18 @@ function getPersistentVolumeClaim(name, namespace) {
 function createPersistentVolumeClaim(name, namespace, manifest) {
   logger.info('Creating persistent volume claim: %s in namespace %s', name, namespace);
   return axios.post(getPVCUrl(namespace), manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+    .catch(handleCreateError('persistent volume claim', name));
 }
 
 function updatePersistentVolumeClaim(name, namespace, manifest) {
   logger.info('Updating persistent volume claim: %s in namespace %s', name, namespace);
-  return axios.put(`${getPVCUrl(namespace, name)}`, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+  return axios.put(getPVCUrl(namespace, name), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('persistent volume claim', name));
 }
 
 function deletePersistentVolumeClaim(name, namespace) {
   logger.info('Deleting persistent volume claim: %s in namespace %s', name, namespace);
-  return axios.delete(`${getPVCUrl(namespace, name)}`)
+  return axios.delete(getPVCUrl(namespace, name))
     .then(response => response.data)
     .catch(handleDeleteError('persistent volume claim', name));
 }
@@ -61,7 +61,7 @@ function queryPersistentVolumeClaim(name, namespace) {
 function listPersistentVolumeClaims(namespace) {
   // List only visible volumes (ie not internal volumes)
   logger.info('Getting visible volume claims');
-  return axios.get(`${getPVCUrl(namespace)}`, { params: { labelSelector: 'user-created' } })
+  return axios.get(getPVCUrl(namespace), { params: { labelSelector: 'user-created' } })
     .then(processPVCs)
     .catch(() => []);
 }

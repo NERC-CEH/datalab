@@ -26,7 +26,7 @@ const createOrReplace = (name, namespace, manifest) => (existingDeployment) => {
 };
 
 function getDeployment(name, namespace) {
-  return axios.get(`${getDeploymentUrl(namespace, name)}`)
+  return axios.get(getDeploymentUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -34,13 +34,13 @@ function getDeployment(name, namespace) {
 function createDeployment(name, namespace, manifest) {
   logger.info('Creating deployment: %s in namespace: %s', name, namespace);
   return axios.post(getDeploymentUrl(namespace), manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+    .catch(handleCreateError('deployment', name));
 }
 
 function updateDeployment(name, namespace, manifest) {
   logger.info('Updating deployment: %s in namespace: %s', name, namespace);
-  return axios.put(`${getDeploymentUrl(namespace, name)}`, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+  return axios.put(getDeploymentUrl(namespace, name), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('deployment', name));
 }
 
 function deleteDeployment(name, namespace) {
@@ -51,7 +51,7 @@ function deleteDeployment(name, namespace) {
     propagationPolicy: 'Foreground',
   };
 
-  return axios.delete(`${getDeploymentUrl(namespace, name)}`, { data: deleteOptions })
+  return axios.delete(getDeploymentUrl(namespace, name), { data: deleteOptions })
     .then(response => response.data)
     .catch(handleDeleteError('deployment', name));
 }

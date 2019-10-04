@@ -62,8 +62,9 @@ describe('Kubernetes Deployment API', () => {
 
       try {
         await deploymentApi.createDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
-        expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes deployment \'test-deployment\' - error-message');
       }
     });
   });
@@ -86,8 +87,9 @@ describe('Kubernetes Deployment API', () => {
 
       try {
         await deploymentApi.updateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
-        expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes deployment \'test-deployment\' - error-message');
       }
     });
   });

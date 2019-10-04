@@ -28,7 +28,7 @@ const createOrReplace = (name, namespace, manifest) => (existingService) => {
 };
 
 function getService(name, namespace) {
-  return axios.get(`${getServiceUrl(namespace)}/${name}`)
+  return axios.get(getServiceUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -48,7 +48,7 @@ function replaceService(name, namespace, manifest) {
 function updateService(name, namespace, manifest, existingService) {
   logger.info('Updating service: %s in namespace %s', name, namespace);
   const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
-  return axios.put(`${getServiceUrl(namespace, name)}`, jsonManifest)
+  return axios.put(getServiceUrl(namespace, name), jsonManifest)
     .catch(handleCreateError('service', name));
 }
 

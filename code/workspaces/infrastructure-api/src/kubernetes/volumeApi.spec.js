@@ -65,8 +65,9 @@ describe('Kubernetes Persistent Volume API', () => {
 
       try {
         await volumeApi.createPersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
-        expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes persistent volume claim \'test-pvc\' - error-message');
       }
     });
   });
@@ -89,8 +90,9 @@ describe('Kubernetes Persistent Volume API', () => {
 
       try {
         await volumeApi.updatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest);
+        expect(true).toBe(false);
       } catch (error) {
-        expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes persistent volume claim \'test-pvc\' - error-message');
       }
     });
   });
