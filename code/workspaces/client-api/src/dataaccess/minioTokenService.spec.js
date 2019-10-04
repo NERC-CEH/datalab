@@ -25,10 +25,10 @@ afterAll(() => {
 
 const storage = {
   name: 'disk-1',
+  projectKey: 'testproj',
   internalEndpoint: 'http://files/minio',
 };
 const loginUrl = `${storage.internalEndpoint}/webrpc`;
-const projectKey = 'project';
 
 describe('minioTokenService', () => {
   it('should request login token from minio', () => {
@@ -39,7 +39,7 @@ describe('minioTokenService', () => {
 
     mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
 
-    return minioTokenService.requestMinioToken(projectKey, storage)
+    return minioTokenService.requestMinioToken(storage)
       .then((token) => {
         expect(token).toEqual('returnedToken');
       });
@@ -48,7 +48,7 @@ describe('minioTokenService', () => {
   it('should return undefined and log error if keys are not returned', () => {
     vaultMock.mockImplementationOnce(() => (Promise.resolve({})));
 
-    return minioTokenService.requestMinioToken(projectKey, storage)
+    return minioTokenService.requestMinioToken(storage)
       .then((token) => {
         expect(token).toBeUndefined();
         expect(logger.getErrorMessages()).toMatchSnapshot();
@@ -63,7 +63,7 @@ describe('minioTokenService', () => {
 
     mock.onPost(loginUrl).reply(200, getFailedLoginResponse());
 
-    return minioTokenService.requestMinioToken(projectKey, storage)
+    return minioTokenService.requestMinioToken(storage)
       .then((token) => {
         expect(token).toBeUndefined();
         expect(logger.getErrorMessages()).toMatchSnapshot();
