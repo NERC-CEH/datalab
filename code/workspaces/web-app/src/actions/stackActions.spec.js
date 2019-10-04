@@ -49,11 +49,11 @@ describe('stackActions', () => {
       stackService.getUrl = getUrlMock;
 
       // Act
-      const output = stackActions.getUrl('expected_id_1234');
+      const output = stackActions.getUrl('testproj', 'expected_id_1234');
 
       // Assert
       expect(getUrlMock).toHaveBeenCalledTimes(1);
-      expect(getUrlMock).toBeCalledWith('expected_id_1234');
+      expect(getUrlMock).toBeCalledWith('testproj', 'expected_id_1234');
       expect(output.type).toBe('GET_STACK_URL');
       expect(output.payload).toBe('expectedUrlPayload');
     });
