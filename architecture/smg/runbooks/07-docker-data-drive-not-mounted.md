@@ -29,7 +29,7 @@ This issue can be resolved by the following steps
     mv /data /data-old
     ```
 
-1. Mount the drive using an ansible playbook.
+1. Mount the drive using an ansible playbook. A maintenance playbook exists called `mount-drive.yml`. This mounts device `dev/sdb` to `/data` but should be reviewed before use as these values may need to change.
 1. Validate that the drive is mounted and registered in `/etc/fstab`.
 
     ```bash
