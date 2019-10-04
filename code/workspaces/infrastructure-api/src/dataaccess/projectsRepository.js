@@ -31,7 +31,7 @@ async function createOrUpdate(project) {
 }
 
 async function deleteByKey(projectKey) {
-  return Project().remove({ key: projectKey }).exec();
+  return Project().deleteOne({ key: projectKey }).exec();
 }
 
 export default {

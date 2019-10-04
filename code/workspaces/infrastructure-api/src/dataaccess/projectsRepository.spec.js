@@ -11,7 +11,7 @@ const testProject = {
 };
 
 const ProjectMock = {};
-const methods = ['find', 'findOne', 'findOneAndUpdate', 'exec', 'exists', 'create', 'remove'];
+const methods = ['find', 'findOne', 'findOneAndUpdate', 'exec', 'exists', 'create', 'deleteOne'];
 methods.forEach((name) => {
   ProjectMock[name] = jest.fn();
   // relies on fact ProjectMock returned by reference and not copied. Allows function chaining.
@@ -62,7 +62,7 @@ describe('projectsRepository', () => {
   it('deleteByKey calls correct methods with correct arguments', async () => {
     const { key } = testProject;
     await projectsRepository.deleteByKey(key);
-    expectToHaveBeenCalledOnceWith(ProjectMock.remove, { key });
+    expectToHaveBeenCalledOnceWith(ProjectMock.deleteOne, { key });
     expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 });

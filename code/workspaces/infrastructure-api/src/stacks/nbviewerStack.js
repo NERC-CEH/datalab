@@ -6,11 +6,9 @@ import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRule } from './stackBuilders';
 
 function createNbViewerStack(params) {
-  const { datalabInfo, projectKey, name, type } = params;
-
   return createDeployment(params, deploymentGenerator.createNbViewerDeployment)()
-    .then(createService(name, type, deploymentGenerator.createNbViewerService))
-    .then(createIngressRule(name, type, datalabInfo, projectKey, ingressGenerator.createIngress));
+    .then(createService(params, deploymentGenerator.createNbViewerService))
+    .then(createIngressRule(params, ingressGenerator.createIngress));
 }
 
 function deleteNbViewerStack(params) {

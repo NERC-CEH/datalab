@@ -1,9 +1,11 @@
 import * as validator from 'express-validator';
 import projectsRepository from '../dataaccess/projectsRepository';
 import projectsController from './projectsController';
+import projectNamespaceManager from '../kubernetes/projectNamespaceManager';
 
 jest.mock('express-validator');
 jest.mock('../dataaccess/projectsRepository');
+jest.mock('../kubernetes/projectNamespaceManager');
 
 const responseMock = {};
 const responseMethods = ['send', 'status'];
@@ -86,7 +88,15 @@ describe('createProject', () => {
     expectToBeCalledOnceWith(projectsRepository.exists, dummyProject.key);
   });
 
+  it('returns 400 if a project key for forbidden namespace', async () => {
+    projectNamespaceManager.checkForbiddenNamespaces.mockResolvedValue(true);
+    await projectsController.createProject({ body: dummyProject }, responseMock, nextMock);
+    expectToBeCalledOnceWith(responseMock.status, 400);
+    expect(responseMock.send.mock.calls[0][0]).toMatchSnapshot();
+  });
+
   it('returns 400 if a project with the same key already exists', async () => {
+    projectNamespaceManager.checkForbiddenNamespaces.mockResolvedValue(false);
     projectsRepository.exists = jest.fn(() => true);
     await projectsController.createProject({ body: dummyProject }, responseMock, nextMock);
     expectToBeCalledOnceWith(responseMock.status, 400);
@@ -94,11 +104,13 @@ describe('createProject', () => {
   });
 
   it('it creates document, returns 201 and returns created document when project does not exist', async () => {
+    projectNamespaceManager.checkForbiddenNamespaces.mockResolvedValue(false);
     projectsRepository.exists = jest.fn(() => false);
     projectsRepository.create = jest.fn(document => ({ ...document, id: 'database-id' }));
     await projectsController.createProject({ body: dummyProject }, responseMock, nextMock);
 
     expectToBeCalledOnceWith(projectsRepository.create, dummyProject);
+    expectToBeCalledOnceWith(projectNamespaceManager.idempotentCreateProjectNamespaces, dummyProject.key);
     expectToBeCalledOnceWith(responseMock.status, 201);
     expectToBeCalledOnceWith(responseMock.send, { ...dummyProject, id: 'database-id' });
   });
@@ -165,6 +177,8 @@ describe('deleteProjectByKey', () => {
     projectsRepository.deleteByKey = jest.fn(() => ({ n: 0 }));
 
     await projectsController.deleteProjectByKey(requestMock, responseMock, nextMock);
+
+    expectToBeCalledOnceWith(projectNamespaceManager.idempotentDeleteProjectNamespaces, requestMock.projectKey);
     expectToBeCalledOnceWith(responseMock.status, 404);
     expectToBeCalledOnceWith(responseMock.send, false);
   });
@@ -174,6 +188,8 @@ describe('deleteProjectByKey', () => {
     projectsRepository.deleteByKey = jest.fn(() => deletionResult);
 
     await projectsController.deleteProjectByKey(requestMock, responseMock, nextMock);
+
+    expectToBeCalledOnceWith(projectNamespaceManager.idempotentDeleteProjectNamespaces, requestMock.projectKey);
     expectToBeCalledOnceWith(responseMock.send, true);
   });
 

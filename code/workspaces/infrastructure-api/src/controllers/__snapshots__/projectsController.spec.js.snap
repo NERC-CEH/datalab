@@ -4,6 +4,16 @@ exports[`createOrUpdateProject calls next with an error if error thrown while cr
 
 exports[`createProject calls next with an error if error thrown while creating data and does not call send 1`] = `[Error: Error creating project: expected error message text]`;
 
+exports[`createProject returns 400 if a project key for forbidden namespace 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "msg": "Project Key 'projectKey' cannot be used as it is a forbidden namespace.",
+    },
+  ],
+}
+`;
+
 exports[`createProject returns 400 if a project with the same key already exists 1`] = `
 Object {
   "errors": Array [

@@ -5,61 +5,63 @@ import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
 
-const PVC_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/persistentvolumeclaims`;
+const getPVCUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/api/v1/namespaces/${namespace}/persistentvolumeclaims${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
-function createOrUpdatePersistentVolumeClaim(name, manifest) {
-  return getPersistentVolumeClaim(name, manifest)
-    .then(createOrReplace(name, manifest));
+function createOrUpdatePersistentVolumeClaim(name, namespace, manifest) {
+  return getPersistentVolumeClaim(name, namespace)
+    .then(createOrReplace(name, namespace, manifest));
 }
 
-const createOrReplace = (name, manifest) => (existingPersistentVolumeClaim) => {
+const createOrReplace = (name, namespace, manifest) => (existingPersistentVolumeClaim) => {
   if (existingPersistentVolumeClaim) {
-    return updatePersistentVolumeClaim(name, manifest);
+    return updatePersistentVolumeClaim(name, namespace, manifest);
   }
 
-  return createPersistentVolumeClaim(name, manifest);
+  return createPersistentVolumeClaim(name, namespace, manifest);
 };
 
-function getPersistentVolumeClaim(name) {
-  return axios.get(`${PVC_URL}/${name}`)
+function getPersistentVolumeClaim(name, namespace) {
+  return axios.get(getPVCUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
 
-function createPersistentVolumeClaim(name, manifest) {
-  logger.info('Creating persistent volume claim: %s', name);
-  return axios.post(PVC_URL, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+function createPersistentVolumeClaim(name, namespace, manifest) {
+  logger.info('Creating persistent volume claim: %s in namespace %s', name, namespace);
+  return axios.post(getPVCUrl(namespace), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('persistent volume claim', name));
 }
 
-function updatePersistentVolumeClaim(name, manifest) {
-  logger.info('Updating persistent volume claim: %s', name);
-  return axios.put(`${PVC_URL}/${name}`, manifest, YAML_CONTENT_HEADER)
-    .catch(handleCreateError);
+function updatePersistentVolumeClaim(name, namespace, manifest) {
+  logger.info('Updating persistent volume claim: %s in namespace %s', name, namespace);
+  return axios.put(getPVCUrl(namespace, name), manifest, YAML_CONTENT_HEADER)
+    .catch(handleCreateError('persistent volume claim', name));
 }
 
-function deletePersistentVolumeClaim(name) {
-  logger.info('Deleting persistent volume claim: %s', name);
-  return axios.delete(`${PVC_URL}/${name}`)
+function deletePersistentVolumeClaim(name, namespace) {
+  logger.info('Deleting persistent volume claim: %s in namespace %s', name, namespace);
+  return axios.delete(getPVCUrl(namespace, name))
     .then(response => response.data)
     .catch(handleDeleteError('persistent volume claim', name));
 }
 
-function queryPersistentVolumeClaim(name) {
-  logger.info('Getting volume claim: %s', name);
-  return getPersistentVolumeClaim(name)
+function queryPersistentVolumeClaim(name, namespace) {
+  logger.info('Getting volume claim: %s in namespace %s', name, namespace);
+  return getPersistentVolumeClaim(name, namespace)
     .then(processVolumeDetails)
     .catch(() => {});
 }
 
-function listPersistentVolumeClaims() {
+function listPersistentVolumeClaims(namespace) {
   // List only visible volumes (ie not internal volumes)
   logger.info('Getting visible volume claims');
-  return axios.get(`${PVC_URL}`, { params: { labelSelector: 'user-created' } })
+  return axios.get(getPVCUrl(namespace), { params: { labelSelector: 'user-created' } })
     .then(processPVCs)
     .catch(() => []);
 }

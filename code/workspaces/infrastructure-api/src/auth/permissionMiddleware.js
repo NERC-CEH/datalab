@@ -29,9 +29,9 @@ export function projectPermissionWrapper(permissionSuffix) {
       return next();
     }
 
-    return response.status(401)
-      .send({ message: `User missing expected permission: ${requiredProjectPermission} || ${SYSTEM_INSTANCE_ADMIN}` })
-      .end();
+    return response
+      .status(401)
+      .send({ message: `User missing expected permission: ${requiredProjectPermission} || ${SYSTEM_INSTANCE_ADMIN}` });
   };
 }
 
@@ -71,9 +71,9 @@ export function systemAdminPermissionWrapper() {
       next();
     } else {
       logger.warn('Auth: permission check: FAILED');
-      response.status(401)
-        .send({ message: `User missing expected permission: ${SYSTEM_INSTANCE_ADMIN}` })
-        .end();
+      response
+        .status(401)
+        .send({ message: `User missing expected permission: ${SYSTEM_INSTANCE_ADMIN}` });
     }
   };
 }

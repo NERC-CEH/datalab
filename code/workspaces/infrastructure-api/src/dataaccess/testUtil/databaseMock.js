@@ -36,6 +36,10 @@ function createDatabaseMock(items, state = {}) {
       lastInvocation.query = query;
       return createDatabaseMock(items, lastInvocation)();
     },
+    deleteOne: (query) => {
+      lastInvocation.query = query;
+      return createDatabaseMock(items, lastInvocation)();
+    },
     exec: () => Promise.resolve(items),
     invocation: () => lastInvocation,
     query: () => lastInvocation.query,

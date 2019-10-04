@@ -2,7 +2,6 @@ import * as k8s from '@kubernetes/client-node';
 import config from '../config/config';
 
 const kubeApi = config.get('kubernetesApi');
-const kubeNamespace = config.get('podNamespace');
 
 // Using loadFromOptions method rather than loadFromDefault as loadFromDefault does not
 // work inside a docker container in the development environment.
@@ -27,7 +26,6 @@ const context = {
   name: 'default-context',
   user: user.name,
   cluster: cluster.name,
-  namespace: kubeNamespace,
 };
 
 const kubeConfig = new k8s.KubeConfig();
@@ -38,4 +36,8 @@ kubeConfig.loadFromOptions({
   currentContext: context.name,
 });
 
+const coreV1Api = kubeConfig.makeApiClient(k8s.CoreV1Api);
+const getCoreV1Api = () => coreV1Api;
+
 export default kubeConfig;
+export { getCoreV1Api };

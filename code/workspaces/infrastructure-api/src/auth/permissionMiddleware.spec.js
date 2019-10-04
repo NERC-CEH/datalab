@@ -1,4 +1,5 @@
 import { permissionTypes } from 'common';
+import httpMocks from 'node-mocks-http';
 import { projectPermissionWrapper, systemAdminPermissionWrapper } from './permissionMiddleware';
 
 const { projectPermissions: { PROJECT_KEY_STACKS_LIST }, SYSTEM_INSTANCE_ADMIN } = permissionTypes;
@@ -9,11 +10,11 @@ describe('projectPermissionWrapper', () => {
       const userPermissions = ['projects:testkey:stacks:list'];
 
       it('extracts and uses the projectKey from the params to pass check', () => {
-        const requestMock = {
+        const requestMock = httpMocks.createRequest({
           params: { projectKey: 'testkey' },
           user: { permissions: userPermissions },
-        };
-        const responseMock = jest.fn();
+        });
+        const responseMock = httpMocks.createResponse();
         const nextMock = jest.fn();
 
         projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
@@ -22,11 +23,11 @@ describe('projectPermissionWrapper', () => {
       });
 
       it('extracts and uses the projectKey from the body to pass check', () => {
-        const requestMock = {
+        const requestMock = httpMocks.createRequest({
           body: { projectKey: 'testkey' },
           user: { permissions: userPermissions },
-        };
-        const responseMock = jest.fn();
+        });
+        const responseMock = httpMocks.createResponse();
         const nextMock = jest.fn();
 
         projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
@@ -39,11 +40,11 @@ describe('projectPermissionWrapper', () => {
       const userPermissions = [SYSTEM_INSTANCE_ADMIN];
 
       it('extracts and uses the projectKey from the params to pass check', () => {
-        const requestMock = {
+        const requestMock = httpMocks.createRequest({
           params: { projectKey: 'testkey' },
           user: { permissions: userPermissions },
-        };
-        const responseMock = jest.fn();
+        });
+        const responseMock = httpMocks.createResponse();
         const nextMock = jest.fn();
 
         projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
@@ -52,11 +53,11 @@ describe('projectPermissionWrapper', () => {
       });
 
       it('extracts and uses the projectKey from the body to pass check', () => {
-        const requestMock = {
+        const requestMock = httpMocks.createRequest({
           body: { projectKey: 'testkey' },
           user: { permissions: userPermissions },
-        };
-        const responseMock = jest.fn();
+        });
+        const responseMock = httpMocks.createResponse();
         const nextMock = jest.fn();
 
         projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
@@ -69,20 +70,17 @@ describe('projectPermissionWrapper', () => {
       const userPermissions = ['incorrect:permissions'];
 
       it('fails with 401 and does not call next', () => {
-        const requestMock = {
+        const requestMock = httpMocks.createRequest({
           params: { projectKey: 'testkey' },
           user: { permissions: userPermissions },
-        };
-        const sendMock = jest.fn(() => ({ end: () => {} }));
-        const statusMock = jest.fn(() => ({ send: sendMock }));
-        const responseMock = { status: statusMock };
+        });
+        const responseMock = httpMocks.createResponse();
         const nextMock = jest.fn();
 
         projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
 
-        expect(statusMock).toHaveBeenCalledWith(401);
-        expect(sendMock).toHaveBeenCalledTimes(1);
-        expect(sendMock.mock.calls[0]).toMatchSnapshot();
+        expect(responseMock.statusCode).toEqual(401);
+        expect(responseMock._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
         expect(nextMock).not.toHaveBeenCalled();
       });
     });
@@ -90,17 +88,14 @@ describe('projectPermissionWrapper', () => {
 
   describe('when projectKey not provided', () => {
     it('fails with a 400 and does not call next', () => {
-      const requestMock = { user: { permissions: [] } };
-      const sendMock = jest.fn();
-      const statusMock = jest.fn(() => ({ send: sendMock }));
-      const responseMock = { status: statusMock };
+      const requestMock = httpMocks.createRequest({ user: { permissions: [] } });
+      const responseMock = httpMocks.createResponse();
       const nextMock = jest.fn();
 
       projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
 
-      expect(statusMock).toHaveBeenCalledWith(400);
-      expect(sendMock).toHaveBeenCalledTimes(1);
-      expect(sendMock.mock.calls[0]).toMatchSnapshot();
+      expect(responseMock.statusCode).toEqual(400);
+      expect(responseMock._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
       expect(nextMock).not.toHaveBeenCalled();
     });
   });
@@ -109,7 +104,7 @@ describe('projectPermissionWrapper', () => {
 describe('systemAdminPermissionWrapper', () => {
   describe('when user is system admin', () => {
     it('calls next', () => {
-      const requestMock = { user: { permissions: [SYSTEM_INSTANCE_ADMIN] } };
+      const requestMock = httpMocks.createRequest({ user: { permissions: [SYSTEM_INSTANCE_ADMIN] } });
       const responseMock = jest.fn();
       const nextMock = jest.fn();
 
@@ -121,16 +116,13 @@ describe('systemAdminPermissionWrapper', () => {
 
   describe('when user is not system admin', () => {
     it('fails with a 401, error message matching snapshot and does not call next', () => {
-      const requestMock = { user: { permissions: [] } };
-      const sendMock = jest.fn(() => ({ end: jest.fn() }));
-      const statusMock = jest.fn(() => ({ send: sendMock }));
-      const responseMock = { status: statusMock };
+      const requestMock = httpMocks.createRequest({ user: { permissions: [] } });
+      const responseMock = httpMocks.createResponse();
       const nextMock = jest.fn();
 
       systemAdminPermissionWrapper()(requestMock, responseMock, nextMock);
-      expect(statusMock).toHaveBeenCalledWith(401);
-      expect(sendMock).toHaveBeenCalledTimes(1);
-      expect(sendMock.mock.calls[0]).toMatchSnapshot();
+      expect(responseMock.statusCode).toEqual(401);
+      expect(responseMock._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
       expect(nextMock).not.toHaveBeenCalled();
     });
   });

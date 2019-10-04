@@ -5,54 +5,56 @@ import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
-const NAMESPACE = config.get('podNamespace');
 
-const SERVICE_URL = `${API_BASE}/api/v1/namespaces/${NAMESPACE}/services`;
+const getServiceUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/api/v1/namespaces/${namespace}/services${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
-function createOrUpdateService(name, manifest) {
-  return getService(name)
-    .then(createOrReplace(name, manifest))
+function createOrUpdateService(name, namespace, manifest) {
+  return getService(name, namespace)
+    .then(createOrReplace(name, namespace, manifest))
     .then(response => response.data);
 }
 
-const createOrReplace = (name, manifest) => (existingService) => {
+const createOrReplace = (name, namespace, manifest) => (existingService) => {
   if (existingService) {
-    return replaceService(name, manifest);
+    return replaceService(name, namespace, manifest);
   }
 
-  return createService(name, manifest);
+  return createService(name, namespace, manifest);
 };
 
-function getService(name) {
-  return axios.get(`${SERVICE_URL}/${name}`)
+function getService(name, namespace) {
+  return axios.get(getServiceUrl(namespace, name))
     .then(response => response.data)
     .catch(() => undefined);
 }
 
-function createService(name, manifest) {
-  logger.info('Creating service: %s', name);
-  return axios.post(SERVICE_URL, manifest, YAML_CONTENT_HEADER)
+function createService(name, namespace, manifest) {
+  logger.info('Creating service: %s in namespace %s', name, namespace);
+  return axios.post(getServiceUrl(namespace), manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError('service', name));
 }
 
-function replaceService(name, manifest) {
-  logger.info('Replacing service: %s', name);
+function replaceService(name, namespace, manifest) {
+  logger.info('Replacing service: %s in namespace %s', name, namespace);
   return deleteService(name)
     .then(() => createService(name, manifest));
 }
 
-function updateService(name, manifest, existingService) {
-  logger.info('Updating service: %s', name);
+function updateService(name, namespace, manifest, existingService) {
+  logger.info('Updating service: %s in namespace %s', name, namespace);
   const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
-  return axios.put(`${SERVICE_URL}/${name}`, jsonManifest)
+  return axios.put(getServiceUrl(namespace, name), jsonManifest)
     .catch(handleCreateError('service', name));
 }
 
-function deleteService(name) {
-  logger.info('Deleting service: %s', name);
-  return axios.delete(`${SERVICE_URL}/${name}`)
+function deleteService(name, namespace) {
+  logger.info('Deleting service: %s in namespace %s', name, namespace);
+  return axios.delete(`${getServiceUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(handleDeleteError('service', name));
 }

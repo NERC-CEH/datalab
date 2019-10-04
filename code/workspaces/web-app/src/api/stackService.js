@@ -25,15 +25,15 @@ function loadStacksByCategory(projectKey, category) {
     .then(errorHandler('data.stacksByCategory'));
 }
 
-function getUrl(id) {
+function getUrl(projectKey, id) {
   const query = `
-    GetUrl($id: ID!) {
-      stack(id: $id) {
+    GetUrl($projectKey: String!, $id: ID!) {
+      stack(projectKey: $projectKey, id: $id) {
         redirectUrl
       }
     }`;
 
-  return gqlQuery(query, { id })
+  return gqlQuery(query, { projectKey, id })
     .then(errorHandler('data.stack'))
     .then((stack) => {
       if (!stack.redirectUrl) {
