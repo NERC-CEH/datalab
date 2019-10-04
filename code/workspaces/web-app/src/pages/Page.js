@@ -7,6 +7,11 @@ const style = theme => ({
   pageTemplate: {
     display: 'flex',
     flexDirection: 'column',
+    padding: `0 ${theme.spacing(4)}px`,
+    margin: '0 auto',
+    width: '100%',
+    minWidth: '400px',
+    maxWidth: '1000px',
     minHeight: '100%',
   },
   contentArea: {

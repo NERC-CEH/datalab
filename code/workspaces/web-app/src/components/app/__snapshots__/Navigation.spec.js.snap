@@ -14,29 +14,13 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
         }
       }
     />
-    <div
-      className="Navigation-contentArea-5"
+    <main
+      className="Navigation-pageContainer-3"
     >
-      <WithStyles(SideBar)
-        projectKey="project99"
-        userPermissions={
-          Array [
-            "expectedPermission",
-          ]
-        }
-      />
-      <div
-        className="Navigation-pageContainer-4"
-      >
-        <main
-          className="Navigation-page-3"
-        >
-          <span>
-            Content
-          </span>
-        </main>
-      </div>
-    </div>
+      <span>
+        Content
+      </span>
+    </main>
   </div>
 </div>
 `;

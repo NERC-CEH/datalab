@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
+<WithStyles(ProjectNavigation)
+  projectKey="testproj"
+  userPermissions={
+    Array [
+      "userPermissions",
+    ]
+  }
+>
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="projectspath/info"
+    />
+    <RoutePermissionWrapper
+      alt={[Function]}
+      component={[Function]}
+      exact={true}
+      path="projectspath/storage"
+      permission="projects:testproj:storage:list"
+      promisedUserPermissions={
+        Object {
+          "fetching": false,
+          "value": Array [
+            "userPermissions",
+          ],
+        }
+      }
+    />
+    <RoutePermissionWrapper
+      alt={[Function]}
+      component={[Function]}
+      exact={true}
+      path="projectspath/notebooks"
+      permission="projects:testproj:stacks:list"
+      promisedUserPermissions={
+        Object {
+          "fetching": false,
+          "value": Array [
+            "userPermissions",
+          ],
+        }
+      }
+    />
+    <RoutePermissionWrapper
+      alt={[Function]}
+      component={[Function]}
+      exact={true}
+      path="projectspath/publishing"
+      permission="projects:testproj:stacks:list"
+      promisedUserPermissions={
+        Object {
+          "fetching": false,
+          "value": Array [
+            "userPermissions",
+          ],
+        }
+      }
+    />
+    <RoutePermissionWrapper
+      alt={[Function]}
+      component={[Function]}
+      exact={true}
+      path="projectspath/settings"
+      permission="projects:testproj:settings:list"
+      promisedUserPermissions={
+        Object {
+          "fetching": false,
+          "value": Array [
+            "userPermissions",
+          ],
+        }
+      }
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="projectspath/dask"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="projectspath/spark"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
+</WithStyles(ProjectNavigation)>
+`;
