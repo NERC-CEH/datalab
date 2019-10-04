@@ -57,13 +57,14 @@ describe('Kubernetes Deployment API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPost(DEPLOYMENT_URL).reply(400, { message: 'error-message' });
 
-      return deploymentApi.createDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
-        });
+      try {
+        await deploymentApi.createDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
+      }
     });
   });
 
@@ -80,13 +81,14 @@ describe('Kubernetes Deployment API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPut(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(400, { message: 'error-message' });
 
-      return deploymentApi.updateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
-        });
+      try {
+        await deploymentApi.updateDeployment(DEPLOYMENT_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Unable to create kubernetes deployment error-message');
+      }
     });
   });
 

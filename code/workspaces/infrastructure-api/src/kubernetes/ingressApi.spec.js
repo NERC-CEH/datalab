@@ -56,13 +56,14 @@ describe('Kubernetes Ingress API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPost(INGRESS_URL).reply(400, { message: 'error-message' });
 
-      return ingressApi.createIngress(INGRESS_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
-        });
+      try {
+        await ingressApi.createIngress(INGRESS_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
+      }
     });
   });
 
@@ -79,13 +80,14 @@ describe('Kubernetes Ingress API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPut(`${INGRESS_URL}/${INGRESS_NAME}`).reply(400, { message: 'error-message' });
 
-      return ingressApi.updateIngress(INGRESS_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
-        });
+      try {
+        await ingressApi.updateIngress(INGRESS_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Unable to create kubernetes ingress error-message');
+      }
     });
   });
 

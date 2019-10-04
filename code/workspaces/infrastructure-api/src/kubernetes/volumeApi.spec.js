@@ -60,13 +60,14 @@ describe('Kubernetes Persistent Volume API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPost(PVC_URL).reply(400, { message: 'error-message' });
 
-      return volumeApi.createPersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
-        });
+      try {
+        await volumeApi.createPersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
+      }
     });
   });
 
@@ -83,13 +84,14 @@ describe('Kubernetes Persistent Volume API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPut(`${PVC_URL}/${PVC_NAME}`).reply(400, { message: 'error-message' });
 
-      return volumeApi.updatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
-        });
+      try {
+        await volumeApi.updatePersistentVolumeClaim(PVC_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Unable to create kubernetes persistent volume claim error-message');
+      }
     });
   });
 

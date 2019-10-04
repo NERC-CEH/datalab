@@ -57,13 +57,14 @@ describe('Kubernetes Service API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPost(SERVICE_URL).reply(400, { message: 'error-message' });
 
-      return serviceApi.createService(SERVICE_NAME, NAMESPACE, manifest)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
-        });
+      try {
+        await serviceApi.createService(SERVICE_NAME, NAMESPACE, manifest);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
+      }
     });
   });
 
@@ -77,13 +78,14 @@ describe('Kubernetes Service API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPut(`${SERVICE_URL}/${SERVICE_NAME}`).reply(400, { message: 'error-message' });
 
-      return serviceApi.updateService(SERVICE_NAME, NAMESPACE, manifest, service)
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
-        });
+      try {
+        await serviceApi.updateService(SERVICE_NAME, NAMESPACE, manifest, service);
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes service \'test-service\' - error-message');
+      }
     });
   });
 

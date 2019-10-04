@@ -6,7 +6,10 @@ import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 
-const getServiceUrl = namespace => `${API_BASE}/api/v1/namespaces/${namespace}/services`;
+const getServiceUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/api/v1/namespaces/${namespace}/services${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
@@ -45,13 +48,13 @@ function replaceService(name, namespace, manifest) {
 function updateService(name, namespace, manifest, existingService) {
   logger.info('Updating service: %s in namespace %s', name, namespace);
   const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
-  return axios.put(`${getServiceUrl(namespace)}/${name}`, jsonManifest)
+  return axios.put(`${getServiceUrl(namespace, name)}`, jsonManifest)
     .catch(handleCreateError('service', name));
 }
 
 function deleteService(name, namespace) {
   logger.info('Deleting service: %s in namespace %s', name, namespace);
-  return axios.delete(`${getServiceUrl(namespace)}/${name}`)
+  return axios.delete(`${getServiceUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(handleDeleteError('service', name));
 }

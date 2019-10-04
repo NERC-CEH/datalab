@@ -5,7 +5,10 @@ import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 
-const getIngressUrl = namespace => `${API_BASE}/apis/extensions/v1beta1/namespaces/${namespace}/ingresses`;
+const getIngressUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/apis/extensions/v1beta1/namespaces/${namespace}/ingresses${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
@@ -23,7 +26,7 @@ const createOrReplace = (name, namespace, manifest) => (existingIngress) => {
 };
 
 function getIngress(name, namespace) {
-  return axios.get(`${getIngressUrl(namespace)}/${name}`)
+  return axios.get(`${getIngressUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -36,13 +39,13 @@ function createIngress(name, namespace, manifest) {
 
 function updateIngress(name, namespace, manifest) {
   logger.info('Updating ingress: %s in namespace %s', name, namespace);
-  return axios.put(`${getIngressUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
+  return axios.put(`${getIngressUrl(namespace, name)}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function deleteIngress(name, namespace) {
   logger.info('Deleting ingress: %s in namespace %s', name, namespace);
-  return axios.delete(`${getIngressUrl(namespace)}/${name}`)
+  return axios.delete(`${getIngressUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(handleDeleteError('ingress', name));
 }

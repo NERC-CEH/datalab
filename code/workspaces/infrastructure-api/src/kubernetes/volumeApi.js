@@ -6,7 +6,10 @@ import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 
-const getPVCUrl = namespace => `${API_BASE}/api/v1/namespaces/${namespace}/persistentvolumeclaims`;
+const getPVCUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/api/v1/namespaces/${namespace}/persistentvolumeclaims${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
@@ -24,7 +27,7 @@ const createOrReplace = (name, namespace, manifest) => (existingPersistentVolume
 };
 
 function getPersistentVolumeClaim(name, namespace) {
-  return axios.get(`${getPVCUrl(namespace)}/${name}`)
+  return axios.get(`${getPVCUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -37,13 +40,13 @@ function createPersistentVolumeClaim(name, namespace, manifest) {
 
 function updatePersistentVolumeClaim(name, namespace, manifest) {
   logger.info('Updating persistent volume claim: %s in namespace %s', name, namespace);
-  return axios.put(`${getPVCUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
+  return axios.put(`${getPVCUrl(namespace, name)}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
 function deletePersistentVolumeClaim(name, namespace) {
   logger.info('Deleting persistent volume claim: %s in namespace %s', name, namespace);
-  return axios.delete(`${getPVCUrl(namespace)}/${name}`)
+  return axios.delete(`${getPVCUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(handleDeleteError('persistent volume claim', name));
 }

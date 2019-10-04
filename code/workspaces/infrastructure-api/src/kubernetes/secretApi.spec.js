@@ -82,6 +82,7 @@ describe('Kubernetes Secret API', () => {
       mock.onPost(SECRET_URL).reply(400, { message: 'error-message' });
 
       return secretApi.createSecret('test', NAMESPACE, 'testvalue')
+        .then(() => expect(true).toBe(false))
         .catch((error) => {
           expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes secret \'test\' - error-message');
         });
@@ -99,13 +100,14 @@ describe('Kubernetes Secret API', () => {
         });
     });
 
-    it('should return an error if creation fails', () => {
+    it('should return an error if creation fails', async () => {
       mock.onPut(`${SECRET_URL}/${SECRET_NAME}`).reply(400, { message: 'error-message' });
 
-      return secretApi.updateSecret('test', NAMESPACE, 'testvalue')
-        .catch((error) => {
-          expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes secret \'test\' - error-message');
-        });
+      try {
+        await secretApi.updateSecret('test', NAMESPACE, 'testvalue');
+      } catch (error) {
+        expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes secret \'test\' - error-message');
+      }
     });
   });
 

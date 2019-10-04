@@ -5,7 +5,10 @@ import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 
-const getDeploymentUrl = namespace => `${API_BASE}/apis/apps/v1beta1/namespaces/${namespace}/deployments`;
+const getDeploymentUrl = (namespace, name) => {
+  const nameComponent = name ? `/${name}` : '';
+  return `${API_BASE}/apis/apps/v1beta1/namespaces/${namespace}/deployments${nameComponent}`;
+};
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
@@ -23,7 +26,7 @@ const createOrReplace = (name, namespace, manifest) => (existingDeployment) => {
 };
 
 function getDeployment(name, namespace) {
-  return axios.get(`${getDeploymentUrl(namespace)}/${name}`)
+  return axios.get(`${getDeploymentUrl(namespace, name)}`)
     .then(response => response.data)
     .catch(() => undefined);
 }
@@ -36,7 +39,7 @@ function createDeployment(name, namespace, manifest) {
 
 function updateDeployment(name, namespace, manifest) {
   logger.info('Updating deployment: %s in namespace: %s', name, namespace);
-  return axios.put(`${getDeploymentUrl(namespace)}/${name}`, manifest, YAML_CONTENT_HEADER)
+  return axios.put(`${getDeploymentUrl(namespace, name)}`, manifest, YAML_CONTENT_HEADER)
     .catch(handleCreateError);
 }
 
@@ -48,7 +51,7 @@ function deleteDeployment(name, namespace) {
     propagationPolicy: 'Foreground',
   };
 
-  return axios.delete(`${getDeploymentUrl(namespace)}/${name}`, { data: deleteOptions })
+  return axios.delete(`${getDeploymentUrl(namespace, name)}`, { data: deleteOptions })
     .then(response => response.data)
     .catch(handleDeleteError('deployment', name));
 }
