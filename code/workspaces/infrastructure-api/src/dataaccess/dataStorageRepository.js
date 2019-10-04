@@ -73,7 +73,7 @@ const unsetUsers = userIds => ({
 
 const createStorageUrls = requestedDataStore => ({
   url: `https://${requestedDataStore.projectKey}-${requestedDataStore.name}.${config.get('datalabDomain')}/minio`,
-  internalEndpoint: `http://minio-${requestedDataStore.name}/minio`,
+  internalEndpoint: `http://minio-${requestedDataStore.name}.${requestedDataStore.projectKey}.svc.cluster.local/minio`,
 });
 
 export default { getAllProjectActive, getAllByName, getById, create, update, addUsers, removeUsers };
