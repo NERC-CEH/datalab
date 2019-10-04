@@ -12,6 +12,7 @@ const SETTINGS = 'settings';
 const PERMISSIONS = 'permissions';
 const USERS = 'users';
 const INSTANCE = 'instance';
+const PROJECTS = 'projects';
 
 const PROJECT_NAMESPACE = 'projects';
 const PROJECT = 'project';
@@ -42,6 +43,7 @@ const elements = {
   STORAGE,
   SETTINGS,
   PERMISSIONS,
+  PROJECTS,
 };
 
 const PROJECT_KEY = `${PROJECT_NAMESPACE}${permissionDelim}${KEY_TOKEN}`;
