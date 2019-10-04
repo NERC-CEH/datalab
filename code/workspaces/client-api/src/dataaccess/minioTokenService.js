@@ -2,8 +2,8 @@ import axios from 'axios';
 import logger from 'winston';
 import vault from './vault/vault';
 
-function requestMinioToken(projectKey, storage) {
-  return vault.requestStorageKeys(projectKey, storage)
+function requestMinioToken(storage) {
+  return vault.requestStorageKeys(storage.projectKey, storage)
     .then(minioLogin(storage))
     .catch((error) => {
       logger.error('Error logging in to minio: ', storage.name, error);
