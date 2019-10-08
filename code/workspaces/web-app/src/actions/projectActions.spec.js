@@ -1,6 +1,6 @@
 import projectActions, {
   LOAD_PROJECTS_ACTION,
-  LOAD_PROJECTINFO_ACTION,
+  SET_CURRENT_PROJECT_ACTION,
   CREATE_PROJECT_ACTION,
   CHECK_PROJECT_KEY_UNIQUE_ACTION,
 } from './projectActions';
@@ -22,21 +22,21 @@ describe('projectActions', () => {
 
       // Assert
       expect(loadProjectsMock).toHaveBeenCalledTimes(1);
-      expect(output.type).toBe('LOAD_PROJECTS');
+      expect(output.type).toBe(LOAD_PROJECTS_ACTION);
       expect(output.payload).toBe('expectedProjectsPayload');
     });
 
-    it('loadProjectInfo', () => {
+    it('setCurrentProject', () => {
       // Arrange
       const loadProjectInfoMock = jest.fn().mockReturnValue('expectedProjectsPayload');
       projectsService.loadProjectInfo = loadProjectInfoMock;
 
       // Act
-      const output = projectActions.loadProjectInfo('project99');
+      const output = projectActions.setCurrentProject('project99');
 
       // Assert
       expect(loadProjectInfoMock).toHaveBeenCalledTimes(1);
-      expect(output.type).toBe('LOAD_PROJECTINFO');
+      expect(output.type).toBe(SET_CURRENT_PROJECT_ACTION);
       expect(output.payload).toBe('expectedProjectsPayload');
     });
 
@@ -70,8 +70,8 @@ describe('projectActions', () => {
       expect(LOAD_PROJECTS_ACTION).toBe('LOAD_PROJECTS');
     });
 
-    it('LOAD_PROJECTINFO_ACTION', () => {
-      expect(LOAD_PROJECTINFO_ACTION).toBe('LOAD_PROJECTINFO');
+    it('SET_CURRENT_PROJECT_ACTION', () => {
+      expect(SET_CURRENT_PROJECT_ACTION).toBe('SET_CURRENT_PROJECT_ACTION');
     });
 
     it('CREATE_PROJECT_ACTION', () => {

@@ -3,7 +3,7 @@
 exports[`ProjectInfoContainer is a connected component which binds correct actions 1`] = `
 Array [
   "loadProjects",
-  "loadProjectInfo",
+  "setCurrentProject",
   "createProject",
   "checkProjectKeyUniqueness",
 ]
@@ -15,9 +15,7 @@ exports[`ProjectInfoContainer is a container which passes correct props 1`] = `
     Object {
       "fetching": false,
       "value": Object {
-        "currentProject": Object {
-          "id": "expectedId",
-        },
+        "id": "expectedId",
       },
     }
   }
