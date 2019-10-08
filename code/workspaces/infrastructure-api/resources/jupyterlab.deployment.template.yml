@@ -62,6 +62,8 @@ spec:
               value: "/data/.jupyter"
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
+            - name: PYSPARK_PYTHON
+              value: "/usr/bin/python3"
           resources:
             requests:
               cpu: 200m
