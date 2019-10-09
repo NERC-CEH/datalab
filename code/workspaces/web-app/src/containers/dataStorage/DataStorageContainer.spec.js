@@ -23,11 +23,13 @@ describe('DataStorageContainer', () => {
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };
+    const currentProject = { fetching: false, value: 'testproj' };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
       const store = createStore()({
         dataStorage,
+        currentProject,
       });
 
       // Act
@@ -41,6 +43,7 @@ describe('DataStorageContainer', () => {
       // Arrange
       const store = createStore()({
         dataStorage,
+        currentProject,
       });
 
       // Act
@@ -54,6 +57,7 @@ describe('DataStorageContainer', () => {
       // Arrange
       const store = createStore()({
         dataStorage,
+        currentProject,
       });
 
       // Act

@@ -1,11 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
+exports[`ProjectNavigationContainer renders to match snapshot passing correct project to children 1`] = `
+<PureProjectNavigationContainer
+  match={
+    Object {
+      "params": Object {
+        "projectKey": "testproj",
+      },
+    }
+  }
+  promisedUserPermissions={
+    Object {
+      "error": null,
+      "fetching": false,
+      "value": Array [
+        "expected:permission",
+      ],
+    }
+  }
+/>
+`;
+
+exports[`PureProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
 <WithStyles(ProjectNavigation)
   projectKey="testproj"
   userPermissions={
     Array [
-      "userPermissions",
+      "user:permissions",
     ]
   }
 >
@@ -25,7 +46,7 @@ exports[`ProjectNavigationContainer renders correct snapshot passing props onto 
         Object {
           "fetching": false,
           "value": Array [
-            "userPermissions",
+            "user:permissions",
           ],
         }
       }
@@ -40,7 +61,7 @@ exports[`ProjectNavigationContainer renders correct snapshot passing props onto 
         Object {
           "fetching": false,
           "value": Array [
-            "userPermissions",
+            "user:permissions",
           ],
         }
       }
@@ -55,7 +76,7 @@ exports[`ProjectNavigationContainer renders correct snapshot passing props onto 
         Object {
           "fetching": false,
           "value": Array [
-            "userPermissions",
+            "user:permissions",
           ],
         }
       }
@@ -70,7 +91,7 @@ exports[`ProjectNavigationContainer renders correct snapshot passing props onto 
         Object {
           "fetching": false,
           "value": Array [
-            "userPermissions",
+            "user:permissions",
           ],
         }
       }

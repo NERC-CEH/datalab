@@ -14,6 +14,7 @@ import {
 } from '../../constants/modaltypes';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
+import projectSelectors from '../../selectors/projectsSelectors';
 import notify from '../../components/common/notify';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
@@ -39,7 +40,14 @@ class DataStorageContainer extends Component {
 
   shouldComponentUpdate(nextProps) {
     const isFetching = nextProps.dataStorage.fetching;
-    return !isFetching;
+    const projectKeyChange = this.props.projectKey !== nextProps.projectKey;
+    return !isFetching || projectKeyChange;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.projectKey !== prevProps.projectKey) {
+      this.props.actions.loadDataStorage(this.props.projectKey);
+    }
   }
 
   openDataStore = dataStore => this.props.actions.getCredentials(this.props.projectKey, dataStore.id)
@@ -102,8 +110,11 @@ class DataStorageContainer extends Component {
 
   componentWillMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    this.props.actions.loadDataStorage(this.props.projectKey)
-      .catch((() => {}));
+    if (this.props.projectKey) {
+      this.props.actions.loadDataStorage(this.props.projectKey)
+        .catch((() => {
+        }));
+    }
   }
 
   render() {
@@ -134,7 +145,7 @@ DataStorageContainer.propTypes = {
     fetching: PropTypes.bool.isRequired,
     value: PropTypes.array.isRequired,
   }).isRequired,
-  projectKey: PropTypes.string.isRequired,
+  projectKey: PropTypes.string, // not marked as required as get prop validation errors when get from state
   actions: PropTypes.shape({
     loadDataStorage: PropTypes.func.isRequired,
     getCredentials: PropTypes.func.isRequired,
@@ -147,8 +158,11 @@ DataStorageContainer.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-function mapStateToProps({ dataStorage }) {
-  return { dataStorage };
+function mapStateToProps(state) {
+  return {
+    dataStorage: state.dataStorage,
+    projectKey: projectSelectors.currentProjectKey(state).value,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

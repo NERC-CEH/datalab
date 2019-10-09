@@ -15,11 +15,7 @@ exports[`SettingsPage renders to match snapshot 1`] = `
   >
     User Permissions
   </WithStyles(ForwardRef(Typography))>
-  <AddUserPermission
-    projectKey="projectKey"
-  />
-  <WithStyles(UserPermissionsTable)
-    projectKey="projectKey"
-  />
+  <WithStyles(AddUserPermission) />
+  <WithStyles(UserPermissionsTable) />
 </Page>
 `;

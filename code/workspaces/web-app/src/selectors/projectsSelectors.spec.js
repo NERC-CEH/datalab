@@ -9,9 +9,14 @@ const state = {
     value: [testProj],
   },
   currentProject: {
+    fetching: false,
+    error: null,
+    value: testProj,
+  },
+  projectUsers: {
     error: null,
     fetching: false,
-    value: testProj,
+    value: [{ name: 'user', userId: 'user-id' }],
   },
 };
 
@@ -39,6 +44,14 @@ describe('projectArray', () => {
   it('returns value of projects from state', () => {
     const projectArray = projectsSelectors.projectArray(state);
     expect(projectArray).toEqual(state.projects);
+    expect(projectArray).not.toBeUndefined();
+  });
+});
+
+describe('projectUsers', () => {
+  it('returns value of projectUsers from state', () => {
+    const projectArray = projectsSelectors.projectUsers(state);
+    expect(projectArray).toEqual(state.projectUsers);
     expect(projectArray).not.toBeUndefined();
   });
 });

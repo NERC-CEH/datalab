@@ -105,6 +105,62 @@ exports[`PureUserPermissionsTable renders correctly passing props to children 1`
 </div>
 `;
 
+exports[`UserPermissionsTable renders pure component with correct props 1`] = `
+<PureUserPermissionsTable
+  actions={
+    Object {
+      "addUserPermission": [Function],
+      "removeUserPermission": [Function],
+    }
+  }
+  classes={
+    Object {
+      "activeSelection": "UserPermissionsTable-activeSelection-1",
+      "dialogDeleteUserButton": "UserPermissionsTable-dialogDeleteUserButton-5",
+      "implicitSelection": "UserPermissionsTable-implicitSelection-2",
+      "tableCell": "UserPermissionsTable-tableCell-4",
+      "tableHeader": "UserPermissionsTable-tableHeader-3",
+    }
+  }
+  colHeadings={
+    Array [
+      Object {
+        "checkBoxCol": false,
+        "heading": "User Name",
+      },
+      Object {
+        "checkBoxCol": true,
+        "heading": "Admin",
+      },
+      Object {
+        "checkBoxCol": true,
+        "heading": "User",
+      },
+      Object {
+        "checkBoxCol": true,
+        "heading": "Viewer",
+      },
+      Object {
+        "checkBoxCol": true,
+        "heading": "",
+      },
+    ]
+  }
+  currentUserId="current-user-id"
+  dispatch={[MockFunction dispatch]}
+  onRemoveUserDialogConfirmationFn={[Function]}
+  projectKey="testproj"
+  removeUserDialogState={
+    Object {
+      "open": false,
+      "user": null,
+    }
+  }
+  setRemoveUserDialogState={[Function]}
+  users="users"
+/>
+`;
+
 exports[`UserPermissionsTableBody when fetching data renders progress indicator 1`] = `
 <FullWidthRow
   numCols={5}
