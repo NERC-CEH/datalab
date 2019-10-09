@@ -1,35 +1,9 @@
+import fs from 'fs';
+import yaml from 'js-yaml';
 import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manifestGenerator';
 import config from '../config/config';
 
-const JUPYTER_IMAGE = 'nerc/jupyter-notebook';
-const JUPYTER_VERSION = '0.1.3';
-
-const JUPYTERLAB_IMAGE = 'nerc/jupyterlab';
-const JUPYTERLAB_VERSION = '0.1.1';
-
-const ZEPPELIN_IMAGE = 'nerc/zeppelin';
-const ZEPPELIN_VERSION = '0.7.2.7';
-const ZEPPELIN_CONNECT_IMAGE = 'nerc/zeppelin-connect';
-const ZEPPELIN_CONNECT_VERSION = '1.1.1';
-
-const RSTUDIO_IMAGE = 'nerc/rstudio';
-const RSTUDIO_VERSION = '0.1.2';
-const RSTUDIO_CONNECT_IMAGE = 'nerc/zeppelin-connect'; // This name should be zeppelin-connect as the image is shared
-const RSTUDIO_CONNECT_VERSION = '1.1.1';
-
-const RSHINY_IMAGE = 'nerc/rshiny';
-const RSHINY_VERSION = '0.1.2';
-
-const NBVIEWER_IMAGE = 'jupyter/nbviewer';
-const NBVIEWER_VERSION = 'latest';
-
-const SPARK_MASTER_ADDRESS = 'spark://spark-master:7077';
-const SHARED_R_LIBS = '/data/packages/R/%p/%v';
-
-const MINIO_IMAGE = 'nerc/minio';
-const MINIO_VERSION = '1.0';
-const MINIO_CONNECT_IMAGE = 'nerc/connect';
-const MINIO_CONNECT_VERSION = '1.0.0';
+const containerInfo = yaml.safeLoad(fs.readFileSync(config.get('containerInfoPath')));
 
 function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
   const context = {
@@ -37,8 +11,8 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
     grantSudo: true,
     domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyter: {
-      imageName: JUPYTER_IMAGE,
-      version: JUPYTER_VERSION,
+      imageName: containerInfo.JUPYTER_IMAGE,
+      version: containerInfo.JUPYTER_VERSION,
     },
     type,
     volumeMount,
@@ -53,8 +27,8 @@ function createJupyterlabDeployment({ projectKey, deploymentName, notebookName, 
     grantSudo: true,
     domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyterlab: {
-      imageName: JUPYTERLAB_IMAGE,
-      version: JUPYTERLAB_VERSION,
+      imageName: containerInfo.JUPYTERLAB_IMAGE,
+      version: containerInfo.JUPYTERLAB_VERSION,
     },
     type,
     volumeMount,
@@ -67,13 +41,13 @@ function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
   const context = {
     name: deploymentName,
     grantSudo: true,
-    sparkMasterAddress: SPARK_MASTER_ADDRESS,
-    sharedRLibs: SHARED_R_LIBS,
+    sparkMasterAddress: containerInfo.SPARK_MASTER_ADDRESS,
+    sharedRLibs: containerInfo.SHARED_R_LIBS,
     zeppelin: {
-      imageName: ZEPPELIN_IMAGE,
-      version: ZEPPELIN_VERSION,
-      connectImageName: ZEPPELIN_CONNECT_IMAGE,
-      connectVersion: ZEPPELIN_CONNECT_VERSION,
+      imageName: containerInfo.ZEPPELIN_IMAGE,
+      version: containerInfo.ZEPPELIN_VERSION,
+      connectImageName: containerInfo.ZEPPELIN_CONNECT_IMAGE,
+      connectVersion: containerInfo.ZEPPELIN_CONNECT_VERSION,
     },
     type,
     volumeMount,
@@ -86,10 +60,10 @@ function createRStudioDeployment({ deploymentName, volumeMount, type }) {
   const context = {
     name: deploymentName,
     rstudio: {
-      imageName: RSTUDIO_IMAGE,
-      version: RSTUDIO_VERSION,
-      connectImageName: RSTUDIO_CONNECT_IMAGE,
-      connectVersion: RSTUDIO_CONNECT_VERSION,
+      imageName: containerInfo.RSTUDIO_IMAGE,
+      version: containerInfo.RSTUDIO_VERSION,
+      connectImageName: containerInfo.RSTUDIO_CONNECT_IMAGE,
+      connectVersion: containerInfo.RSTUDIO_CONNECT_VERSION,
     },
     type,
     volumeMount,
@@ -103,8 +77,8 @@ function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount 
     name: deploymentName,
     sourcePath,
     rshiny: {
-      imageName: RSHINY_IMAGE,
-      version: RSHINY_VERSION,
+      imageName: containerInfo.RSHINY_IMAGE,
+      version: containerInfo.RSHINY_VERSION,
     },
     type,
     volumeMount,
@@ -118,8 +92,8 @@ function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMoun
     name: deploymentName,
     sourcePath,
     nbviewer: {
-      imageName: NBVIEWER_IMAGE,
-      version: NBVIEWER_VERSION,
+      imageName: containerInfo.NBVIEWER_IMAGE,
+      version: containerInfo.NBVIEWER_VERSION,
     },
     type,
     volumeMount,
@@ -136,10 +110,10 @@ function createMinioDeployment({ name, deploymentName, type }) {
     volumeName: name,
     domain: config.get('datalabDomain'),
     minio: {
-      imageName: MINIO_IMAGE,
-      version: MINIO_VERSION,
-      connectImageName: MINIO_CONNECT_IMAGE,
-      connectVersion: MINIO_CONNECT_VERSION,
+      imageName: containerInfo.MINIO_IMAGE,
+      version: containerInfo.MINIO_VERSION,
+      connectImageName: containerInfo.MINIO_CONNECT_IMAGE,
+      connectVersion: containerInfo.MINIO_CONNECT_VERSION,
     },
     type,
   };
