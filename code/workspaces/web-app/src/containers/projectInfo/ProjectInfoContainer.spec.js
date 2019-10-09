@@ -21,25 +21,25 @@ describe('ProjectInfoContainer', () => {
       return shallow(<ProjectInfoContainer {...props} />).find('ProjectInfoContainer');
     }
 
-    const projects = { fetching: false, value: { currentProject: { id: 'expectedId' } } };
+    const currentProject = { fetching: false, value: { id: 'expectedId' } };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
       const store = createStore()({
-        projects,
+        currentProject,
       });
 
       // Act
       const output = shallowRenderConnected(store);
 
       // Assert
-      expect(output.prop('projects')).toBe(projects);
+      expect(output.prop('currentProject')).toBe(currentProject);
     });
 
     it('binds correct actions', () => {
       // Arrange
       const store = createStore()({
-        projects,
+        currentProject,
       });
 
       // Act
@@ -49,10 +49,10 @@ describe('ProjectInfoContainer', () => {
       expect(Object.keys(output)).toMatchSnapshot();
     });
 
-    it('loadProjectInfo function dispatch correct action', () => {
+    it('setCurrentProject function dispatch correct action', () => {
       // Arrange
       const store = createStore()({
-        projects,
+        currentProject,
       });
 
       // Act
@@ -60,9 +60,9 @@ describe('ProjectInfoContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadProjectInfo();
+      output.prop('actions').setCurrentProject();
       const { type, payload } = store.getActions()[0];
-      expect(type).toBe('LOAD_PROJECTINFO');
+      expect(type).toBe('SET_CURRENT_PROJECT_ACTION');
       return payload.then(value => expect(value).toBe('expectedPayload'));
     });
   });
@@ -72,19 +72,19 @@ describe('ProjectInfoContainer', () => {
       return shallow(<PureProjectInfoContainer {...props} />);
     }
 
-    const projects = { fetching: false, value: { currentProject: { id: 'expectedId' } } };
+    const currentProject = { fetching: false, value: { id: 'expectedId' } };
 
     const generateProps = () => ({
-      projects,
+      currentProject,
       userPermissions: ['expectedPermission'],
       actions: {
-        loadProjectInfo: loadProjectInfoMock,
+        setCurrentProject: loadProjectInfoMock,
       },
     });
 
     beforeEach(() => jest.clearAllMocks());
 
-    it('does not call loadProjectInfo action when mounted', () => {
+    it('does not call setCurrentProject action when mounted', () => {
       // Arrange
       const props = generateProps();
 

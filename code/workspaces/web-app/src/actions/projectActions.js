@@ -1,7 +1,7 @@
 import projectsService from '../api/projectsService';
 
 export const LOAD_PROJECTS_ACTION = 'LOAD_PROJECTS';
-export const LOAD_PROJECTINFO_ACTION = 'LOAD_PROJECTINFO';
+export const SET_CURRENT_PROJECT_ACTION = 'SET_CURRENT_PROJECT_ACTION';
 export const CREATE_PROJECT_ACTION = 'CREATE_PROJECT_ACTION';
 export const CHECK_PROJECT_KEY_UNIQUE_ACTION = 'CHECK_PROJECT_KEY_UNIQUE_ACTION';
 
@@ -10,8 +10,8 @@ const loadProjects = () => ({
   payload: projectsService.loadProjects(),
 });
 
-const loadProjectInfo = projectKey => ({
-  type: LOAD_PROJECTINFO_ACTION,
+const setCurrentProject = projectKey => ({
+  type: SET_CURRENT_PROJECT_ACTION,
   payload: projectsService.loadProjectInfo(projectKey),
 });
 
@@ -26,5 +26,5 @@ const checkProjectKeyUniqueness = projectKey => ({
 });
 
 export default {
-  loadProjects, loadProjectInfo, createProject, checkProjectKeyUniqueness,
+  loadProjects, setCurrentProject, createProject, checkProjectKeyUniqueness,
 };

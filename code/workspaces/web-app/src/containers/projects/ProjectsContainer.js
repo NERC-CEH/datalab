@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { permissionTypes } from 'common';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
+import projectSelectors from '../../selectors/projectsSelectors';
 import modalDialogActions from '../../actions/modalDialogActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
@@ -82,8 +83,8 @@ class ProjectsContainer extends Component {
   }
 
   adaptProjectsToStacks() {
-    return this.props.projects.value.projectArray
-      ? this.props.projects.value.projectArray.map(projectToStack)
+    return this.props.projects.value
+      ? this.props.projects.value.map(projectToStack)
       : [];
   }
 
@@ -165,7 +166,7 @@ ProjectsContainer.propTypes = {
   projects: PropTypes.shape({
     error: PropTypes.any,
     fetching: PropTypes.bool.isRequired,
-    value: PropTypes.object.isRequired,
+    value: PropTypes.array.isRequired,
   }).isRequired,
   actions: PropTypes.shape({
     loadProjects: PropTypes.func.isRequired,
@@ -173,8 +174,8 @@ ProjectsContainer.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-function mapStateToProps({ projects }) {
-  return { projects };
+function mapStateToProps(state) {
+  return { projects: projectSelectors.projectArray(state) };
 }
 
 function mapDispatchToProps(dispatch) {

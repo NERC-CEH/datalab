@@ -3,7 +3,7 @@
 exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
 Array [
   "loadProjects",
-  "loadProjectInfo",
+  "setCurrentProject",
   "createProject",
   "checkProjectKeyUniqueness",
   "openModalDialog",
@@ -16,17 +16,15 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
   promise={
     Object {
       "fetching": false,
-      "value": Object {
-        "projectArray": Array [
-          Object {
-            "accessible": true,
-            "description": "A project description",
-            "id": 123,
-            "key": "project2",
-            "name": "A project name",
-          },
-        ],
-      },
+      "value": Array [
+        Object {
+          "accessible": true,
+          "description": "A project description",
+          "id": 123,
+          "key": "project2",
+          "name": "A project name",
+        },
+      ],
     }
   }
 >

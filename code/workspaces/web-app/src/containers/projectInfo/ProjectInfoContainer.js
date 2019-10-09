@@ -2,28 +2,29 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import projectActions from '../../actions/projectActions';
+import projectSelectors from '../../selectors/projectsSelectors';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import ProjectInfoContent from '../../components/projectInfo/ProjectInfoContent';
 
 class ProjectInfoContainer extends Component {
   render() {
     return (
-      <PromisedContentWrapper promise={this.props.projects}>
-        {this.props.projects.value.currentProject ? (
-          <ProjectInfoContent projectInfo={this.props.projects.value.currentProject} />
+      <PromisedContentWrapper promise={this.props.currentProject}>
+        {this.props.currentProject.value ? (
+          <ProjectInfoContent projectInfo={this.props.currentProject.value} />
         ) : (<div/>)}
       </PromisedContentWrapper>
     );
   }
 
   shouldComponentUpdate(nextProps) {
-    const isFetching = nextProps.projects.fetching;
-    return !isFetching || this.props.projects.isFetching !== isFetching;
+    const isFetching = nextProps.currentProject.fetching;
+    return !isFetching || this.props.currentProject.isFetching !== isFetching;
   }
 }
 
-function mapStateToProps({ projects }) {
-  return { projects };
+function mapStateToProps(state) {
+  return { currentProject: projectSelectors.currentProject(state) };
 }
 
 function mapDispatchToProps(dispatch) {

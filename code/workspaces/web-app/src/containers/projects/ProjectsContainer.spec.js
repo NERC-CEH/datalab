@@ -6,7 +6,7 @@ import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
 const projectsPayload = {
-  projectArray: [{
+  value: [{
     id: 123,
     key: 'project2',
     name: 'A project name',
@@ -20,7 +20,7 @@ projectsService.loadProjects = loadProjectsMock;
 describe('ProjectsContainer', () => {
   describe('is a component which', () => {
     it('can filter projects', () => {
-      const stacks = projectsPayload.projectArray.map(projectToStack);
+      const stacks = projectsPayload.value.map(projectToStack);
       expect(stacks.length).toBe(1);
       const stack = stacks[0];
       expect(stackMatchesFilter(stack, '')).toBe(true);
@@ -42,7 +42,7 @@ describe('ProjectsContainer', () => {
       return shallow(<ConnectedProjectsContainer {...props} />).find('ProjectsContainer');
     }
 
-    const projects = { fetching: false, value: { projectArray: ['expectedArray'] } };
+    const projects = { fetching: false, value: { value: ['expectedArray'] } };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
@@ -93,7 +93,7 @@ describe('ProjectsContainer', () => {
       return shallow(<PureProjectsContainer {...props} />);
     }
 
-    const projects = { fetching: false, value: projectsPayload };
+    const projects = { fetching: false, value: projectsPayload.value };
 
     const generateProps = () => ({
       projects,

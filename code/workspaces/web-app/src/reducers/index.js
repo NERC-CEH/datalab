@@ -8,6 +8,7 @@ import stacks from './stacksReducer';
 import modal from './modelDialogReducer';
 import users from './usersReducer';
 import projectUsers from './projectSettingsReducers';
+import currentProject from './currentProjectReducer';
 
 const rootReducer = history => combineReducers({
   authentication,
@@ -17,6 +18,7 @@ const rootReducer = history => combineReducers({
   modal,
   users,
   projectUsers,
+  currentProject,
   router: connectRouter(history),
   form: formReducer,
 });

@@ -5,8 +5,8 @@ import ProjectTitleContainer, { PureProjectTitleContainer } from './ProjectTitle
 import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
-const loadProjectInfoMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-projectsService.loadProjectInfo = loadProjectInfoMock;
+const setCurrentProjectMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+projectsService.loadProjectInfo = setCurrentProjectMock;
 
 describe('ProjectTitleContainer', () => {
   describe('is a connected component which', () => {
@@ -22,25 +22,25 @@ describe('ProjectTitleContainer', () => {
       return shallow(<ProjectTitleContainer {...props} />).find('ProjectTitleContainer');
     }
 
-    const projects = { fetching: false, value: { currentProject: { id: 'expectedId' } } };
+    const currentProject = { fetching: false, value: { id: 'expectedId' } };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
       const store = createStore()({
-        projects,
+        currentProject,
       });
 
       // Act
       const output = shallowRenderConnected(store);
 
       // Assert
-      expect(output.prop('projects')).toBe(projects);
+      expect(output.prop('currentProject')).toBe(currentProject);
     });
 
     it('binds correct actions', () => {
       // Arrange
       const store = createStore()({
-        projects,
+        currentProject,
       });
 
       // Act
@@ -53,7 +53,7 @@ describe('ProjectTitleContainer', () => {
     it('loadProjectInfo function dispatch correct action', () => {
       // Arrange
       const store = createStore()({
-        projects,
+        currentProject,
       });
 
       // Act
@@ -61,9 +61,9 @@ describe('ProjectTitleContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadProjectInfo();
+      output.prop('actions').setCurrentProject();
       const { type, payload } = store.getActions()[0];
-      expect(type).toBe('LOAD_PROJECTINFO');
+      expect(type).toBe('SET_CURRENT_PROJECT_ACTION');
       return payload.then(value => expect(value).toBe('expectedPayload'));
     });
   });
@@ -73,14 +73,14 @@ describe('ProjectTitleContainer', () => {
       return shallow(<PureProjectTitleContainer {...props} />);
     }
 
-    const projects = { fetching: false, value: { currentProject: { id: 'expectedId' } } };
+    const currentProject = { fetching: false, value: { id: 'expectedId' } };
 
     const generateProps = () => ({
-      projects,
+      currentProject,
       projectKey: 'project99',
       userPermissions: ['expectedPermission'],
       actions: {
-        loadProjectInfo: loadProjectInfoMock,
+        setCurrentProject: setCurrentProjectMock,
       },
     });
 
@@ -94,7 +94,7 @@ describe('ProjectTitleContainer', () => {
       shallowRenderPure(props);
 
       // Assert
-      expect(loadProjectInfoMock).toHaveBeenCalledTimes(1);
+      expect(setCurrentProjectMock).toHaveBeenCalledTimes(1);
     });
 
     it('passes correct props', () => {
