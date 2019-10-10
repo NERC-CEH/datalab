@@ -35,13 +35,13 @@ function createProject(project) {
     .then(errorHandler('data.createProject'));
 }
 
-function deleteProject(project) {
+function deleteProject(projectKey) {
   const mutation = `
     DeleteProject($project: ProjectDeletionRequest) {
       deleteProject(project: $project)
     }`;
 
-  return gqlMutation(mutation, { project })
+  return gqlMutation(mutation, { project: { projectKey } })
     .then(errorHandler('data.deleteProject'));
 }
 

@@ -23,7 +23,7 @@ const createProject = project => ({
 
 const deleteProject = projectKey => ({
   type: DELETE_PROJECT_ACTION,
-  payload: projectsService.deleteProject({ projectKey }),
+  payload: projectsService.deleteProject(projectKey),
 });
 
 const checkProjectKeyUniqueness = projectKey => ({

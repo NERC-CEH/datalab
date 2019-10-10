@@ -60,7 +60,7 @@ describe('projectActions', () => {
       const output = projectActions.deleteProject(projectKey);
 
       expect(projectsService.deleteProject).toHaveBeenCalledTimes(1);
-      expect(projectsService.deleteProject).toHaveBeenCalledWith({ projectKey });
+      expect(projectsService.deleteProject).toHaveBeenCalledWith(projectKey);
       expect(output.type).toEqual(DELETE_PROJECT_ACTION);
       expect(output.payload).toEqual('expected-payload');
     });
