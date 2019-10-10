@@ -36,8 +36,10 @@ describe('StacksContainer', () => {
     }
 
     const stacks = { fetching: false, value: ['expectedArray'] };
+    const currentProject = { fetching: false, value: 'testproj' };
     const store = createStore()({
       stacks,
+      currentProject,
     });
 
     it('extracts the correct props from the redux state', () => {

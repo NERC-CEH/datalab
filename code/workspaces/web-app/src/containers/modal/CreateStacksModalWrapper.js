@@ -25,9 +25,9 @@ class CreateStacksModalWrapper extends Component {
   }
 
   getProjectKey() {
-    const projects = this.props.projects.value || {};
+    const currentProject = this.props.currentProject.value || {};
 
-    return get(projects, 'currentProject.key');
+    return get(currentProject, 'key');
   }
 
   render() {
@@ -48,11 +48,14 @@ CreateStacksModalWrapper.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  Dialog: PropTypes.func.isRequired,
+  Dialog: PropTypes.oneOfType([
+    PropTypes.func, // for functional component
+    PropTypes.object, // for component wrapped in material UI withStyles()
+  ]).isRequired,
 };
 
-function mapStateToProps({ dataStorage, projects }) {
-  return { dataStorage, projects };
+function mapStateToProps({ dataStorage, currentProject }) {
+  return { dataStorage, currentProject };
 }
 
 function mapDispatchToProps(dispatch) {

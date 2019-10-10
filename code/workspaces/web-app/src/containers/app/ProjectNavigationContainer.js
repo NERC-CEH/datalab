@@ -1,6 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { permissionTypes } from 'common';
+import useShallowSelector from '../../hooks/useShallowSelector';
+import projectActions from '../../actions/projectActions';
+import projectSelectors from '../../selectors/projectsSelectors';
 import ProjectNavigation from '../../components/app/ProjectNavigation';
 import ProjectInfoPage from '../../pages/ProjectInfoPage';
 import RoutePermissions from '../../components/common/RoutePermissionWrapper';
@@ -15,7 +19,20 @@ import SparkPage from '../../pages/SparkPage';
 const { projectKeyPermission, projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST } } = permissionTypes;
 
 function ProjectNavigationContainer({ match, promisedUserPermissions }) {
+  const { params: { projectKey } } = match;
+  const stateProjectKey = useShallowSelector(projectSelectors.currentProjectKey);
+  const dispatch = useDispatch();
+
+  if (projectKey !== stateProjectKey.value && !stateProjectKey.fetching) {
+    dispatch(projectActions.setCurrentProject(projectKey));
+  }
+
+  return <PureProjectNavigationContainer match={match} promisedUserPermissions={promisedUserPermissions} />;
+}
+
+function PureProjectNavigationContainer({ match, promisedUserPermissions }) {
   const { params: { projectKey }, path } = match;
+
   return (
     <ProjectNavigation userPermissions={promisedUserPermissions.value} projectKey={projectKey}>
       <Switch>
@@ -58,5 +75,7 @@ function ProjectNavigationContainer({ match, promisedUserPermissions }) {
     </ProjectNavigation>
   );
 }
+
+export { PureProjectNavigationContainer };
 
 export default ProjectNavigationContainer;

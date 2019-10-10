@@ -9,6 +9,7 @@ import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
+import projectSelectors from '../../selectors/projectsSelectors';
 import stackActions from '../../actions/stackActions';
 import StackCards from '../../components/stacks/StackCards';
 
@@ -42,8 +43,7 @@ class StacksContainer extends Component {
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
     title: `Create a ${this.props.typeName}`,
-    // TODO - use real projectKey here
-    projectKey: 'project',
+    projectKey: this.props.projectKey,
     onSubmit: this.createStack,
     onCancel: this.props.actions.closeModalDialog,
   });
@@ -66,13 +66,21 @@ class StacksContainer extends Component {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     return this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType)
       .then(() => {
+        // If project key changes in state, another timer seemed to be being created
+        // rather than replacing the existing one (would still timeout when navigating to
+        // a different page). Clearing the timeout first seems to solve the issue.
+        if (this.timeout) {
+          clearTimeout(this.timeout);
+        }
         this.timeout = setTimeout(this.loadStack, refreshTimeout);
       })
       .catch((() => {}));
   }
 
   componentWillMount() {
-    this.loadStack();
+    if (this.props.projectKey) {
+      this.loadStack();
+    }
   }
 
   componentWillUnmount() {
@@ -81,7 +89,14 @@ class StacksContainer extends Component {
 
   shouldComponentUpdate(nextProps) {
     const isFetching = nextProps.stacks.fetching;
-    return !isFetching;
+    const projectKeyChanged = this.props.projectKey !== nextProps.projectKey;
+    return !isFetching || projectKeyChanged;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.projectKey !== prevProps.projectKey) {
+      this.loadStack();
+    }
   }
 
   render() {
@@ -128,8 +143,11 @@ StacksContainer.propTypes = {
   projectKey: PropTypes.string.isRequired,
 };
 
-function mapStateToProps({ stacks }) {
-  return { stacks };
+function mapStateToProps(state) {
+  return {
+    stacks: state.stacks,
+    projectKey: projectSelectors.currentProjectKey(state).value || '',
+  };
 }
 
 function mapDispatchToProps(dispatch) {

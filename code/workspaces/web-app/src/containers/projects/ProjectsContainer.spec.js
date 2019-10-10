@@ -42,7 +42,7 @@ describe('ProjectsContainer', () => {
       return shallow(<ConnectedProjectsContainer {...props} />).find('ProjectsContainer');
     }
 
-    const projects = { fetching: false, value: { value: ['expectedArray'] } };
+    const projects = { fetching: false, value: ['expectedArray'] };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange

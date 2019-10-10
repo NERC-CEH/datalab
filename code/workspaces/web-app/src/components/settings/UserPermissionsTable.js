@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { startCase } from 'lodash';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
@@ -9,7 +9,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import useShallowSelector from '../../hooks/useShallowSelector';
 import projectSettingsActions from '../../actions/projectSettingsActions';
+import projectSelectors from '../../selectors/projectsSelectors';
+import authSelectors from '../../selectors/authSelectors';
 import RemoveUserDialog from './RemoveUserDialog';
 import { CheckboxCell, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
@@ -53,19 +56,19 @@ export const columnHeadings = [
 
 const checkBoxColumnOrder = SORTED_PERMISSIONS;
 
-export const projectUsersSelector = ({ projectUsers }) => projectUsers;
-export const currentUserIdSelector = ({ authentication: { identity: { sub } } }) => sub;
-
-function UserPermissionsTable({ classes, projectKey }) {
-  const users = useSelector(projectUsersSelector, shallowEqual);
-  const currentUserId = useSelector(currentUserIdSelector, shallowEqual);
+function UserPermissionsTable({ classes }) {
+  const users = useShallowSelector(projectSelectors.projectUsers);
+  const currentUserId = useShallowSelector(authSelectors.currentUserId);
+  const projectKey = useShallowSelector(projectSelectors.currentProjectKey).value;
   const dispatch = useDispatch();
 
   const [removeUserDialogState, setRemoveUserDialogState] = useState({ open: false, user: null });
 
   useEffect(
     () => {
-      dispatch(projectSettingsActions.getProjectUserPermissions(projectKey));
+      if (projectKey) {
+        dispatch(projectSettingsActions.getProjectUserPermissions(projectKey));
+      }
     },
     [dispatch, projectKey],
   );

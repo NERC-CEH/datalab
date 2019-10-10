@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { startCase } from 'lodash';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
+import projectSelectors from '../../selectors/projectsSelectors';
+import usersSelectors from '../../selectors/usersSelectors';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import useShallowSelector from '../../hooks/useShallowSelector';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   addUserPermission: {
     display: 'flex',
     width: '100%',
@@ -42,14 +45,13 @@ const useStyles = makeStyles(theme => ({
     marginTop: 8,
     marginBottom: 4,
   },
-}));
+});
 
 const PERMISSIONS = SORTED_PERMISSIONS.map(item => startCase(item.name));
 
-export const getUsersFromState = ({ users }) => users;
-
-export default function AddUserPermission({ projectKey }) {
-  const users = useSelector(getUsersFromState);
+function AddUserPermission({ classes }) {
+  const users = useShallowSelector(usersSelectors.users);
+  const projectKey = useShallowSelector(projectSelectors.currentProjectKey).value;
   const dispatch = useDispatch();
   const [selectedPermissions, setSelectedPermissions] = useState(PERMISSIONS[PERMISSIONS.length - 1]);
   const [selectedUserName, setSelectedUserName] = useState('');
@@ -65,23 +67,24 @@ export default function AddUserPermission({ projectKey }) {
     selectedPermissions={selectedPermissions} setSelectedPermissions={setSelectedPermissions}
     selectedUserName={selectedUserName} setSelectedUserName={setSelectedUserName}
     dispatch={dispatch}
+    classes={classes}
   />;
 }
 
 export function PureAddUserPermission({
-  users, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch,
+  users, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch, classes,
 }) {
-  const classes = useStyles();
   const userNames = users.value.map(user => user.name);
 
   return (
     <div className={classes.addUserPermission}>
-      <UsersAutofill userNames={userNames} setSelectedUserName={setSelectedUserName} />
+      <UsersAutofill userNames={userNames} setSelectedUserName={setSelectedUserName} classes={classes} />
       <PermissionsSelector
         className={classes.permissionsSelector}
         permissionLevels={permissionLevels}
         selectedPermissions={selectedPermissions}
-        setSelectedPermissions={setSelectedPermissions} />
+        setSelectedPermissions={setSelectedPermissions}
+        classes={classes} />
       <AddUserButton
         userInformation={users.value}
         selectedUserName={selectedUserName}
@@ -95,8 +98,7 @@ export function PureAddUserPermission({
   );
 }
 
-export function UsersAutofill({ userNames, setSelectedUserName }) {
-  const classes = useStyles();
+export function UsersAutofill({ userNames, setSelectedUserName, classes }) {
   return (
     <Downshift>
       {
@@ -122,7 +124,8 @@ export function UsersAutofill({ userNames, setSelectedUserName }) {
                 inputValue={inputValue}
                 getMenuProps={getMenuProps}
                 getItemProps={getItemProps}
-                isOpen={isOpen} />
+                isOpen={isOpen}
+                classes={classes} />
             </div>
           );
         }
@@ -131,8 +134,7 @@ export function UsersAutofill({ userNames, setSelectedUserName }) {
   );
 }
 
-export function UsersDropdown({ userNames, inputValue, getMenuProps, getItemProps, isOpen }) {
-  const classes = useStyles();
+export function UsersDropdown({ userNames, inputValue, getMenuProps, getItemProps, isOpen, classes }) {
   const namesMatchingSearch = userNames.filter(name => name.search(inputValue) !== -1);
 
   const show = isOpen && namesMatchingSearch.length > 0;
@@ -149,8 +151,7 @@ export function UsersDropdown({ userNames, inputValue, getMenuProps, getItemProp
   );
 }
 
-export function PermissionsSelector({ permissionLevels, selectedPermissions, setSelectedPermissions }) {
-  const classes = useStyles();
+export function PermissionsSelector({ permissionLevels, selectedPermissions, setSelectedPermissions, classes }) {
   return (
     <TextField
       className={classes.permissionsSelector}
@@ -186,3 +187,5 @@ export function dispatchAddUserAction(projectKey, user, selectedPermissions, dis
     ),
   );
 }
+
+export default withStyles(styles)(AddUserPermission);

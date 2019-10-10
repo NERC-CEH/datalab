@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import DataStorageContainer from '../containers/dataStorage/DataStorageContainer';
 import Page from './Page';
 
-const DataStoragePage = ({ userPermissions, match }) => (
+const DataStoragePage = ({ userPermissions }) => (
   <Page title="Storage">
-    <DataStorageContainer userPermissions={userPermissions} projectKey={match.params.projectKey} />
+    <DataStorageContainer userPermissions={userPermissions} />
   </Page>
 );
 
 DataStorageContainer.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  projectKey: PropTypes.string.isRequired,
 };
 
 export default DataStoragePage;

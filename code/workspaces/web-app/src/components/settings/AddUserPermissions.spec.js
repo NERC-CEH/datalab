@@ -1,15 +1,19 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { createShallow } from '@material-ui/core/test-utils';
+import useShallowSelector from '../../hooks/useShallowSelector';
 import projectSettingsActions from '../../actions/projectSettingsActions';
-import {
+import AddUserPermission, {
   PureAddUserPermission,
   UsersAutofill,
   UsersDropdown,
   PermissionsSelector,
   AddUserButton,
   dispatchAddUserAction,
-  getUsersFromState,
 } from './AddUserPermissions';
+
+jest.mock('react-redux');
+jest.mock('../../hooks/useShallowSelector');
 
 const permissionLevels = ['Admin', 'User', 'Viewer'];
 const initialUsers = {
@@ -20,6 +24,33 @@ const initialUsers = {
     { name: 'Test User Two', userId: 'test-user-two' },
   ],
 };
+
+const classes = {
+  addUserPermission: 'addUserPermission',
+  dropDownClosed: 'dropDownClosed',
+  dropDownOpen: 'dropDownOpen',
+  permissionsSelector: 'permissionsSelector',
+  usersAutofill: 'usersAutofill',
+  addButton: 'addButton',
+};
+
+describe('AddUserPermissions', () => {
+  let shallow;
+
+  const dispatchMock = jest.fn().mockName('dispatch');
+  useDispatch.mockReturnValue(dispatchMock);
+
+  useShallowSelector.mockReturnValueOnce('users');
+  useShallowSelector.mockReturnValueOnce({ value: 'testproj' });
+
+  beforeEach(() => {
+    shallow = createShallow({ dive: true });
+  });
+
+  it('renders pure component with correct props', () => {
+    expect(shallow(<AddUserPermission />)).toMatchSnapshot();
+  });
+});
 
 describe('PureAddUserPermission', () => {
   let shallow;
@@ -40,6 +71,7 @@ describe('PureAddUserPermission', () => {
           selectedUserName={''}
           setSelectedUserName={jest.fn()}
           dispatch={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -61,6 +93,7 @@ describe('UsersAutofill', () => {
         <UsersAutofill
           userNames={userNames}
           setSelectedUserName={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -69,7 +102,7 @@ describe('UsersAutofill', () => {
   it('updates the selected user name', () => {
     const setSelectedUserNamesMock = jest.fn();
     shallow(
-      <UsersAutofill userNames={userNames} setSelectedUserName={setSelectedUserNamesMock} />,
+      <UsersAutofill userNames={userNames} setSelectedUserName={setSelectedUserNamesMock} classes={classes}/>,
     );
 
     expect(setSelectedUserNamesMock).toHaveBeenCalledTimes(1);
@@ -97,6 +130,7 @@ describe('UsersDropdown', () => {
           inputValue={''}
           getMenuProps={jest.fn()}
           getItemProps={getItemPropsMock}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -111,6 +145,7 @@ describe('UsersDropdown', () => {
           inputValue={''}
           getMenuProps={jest.fn()}
           getItemProps={getItemPropsMock}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -125,6 +160,7 @@ describe('UsersDropdown', () => {
           userNames={userNames}
           getMenuProps={jest.fn()}
           getItemProps={getItemPropsMock}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -139,6 +175,7 @@ describe('UsersDropdown', () => {
           inputValue={'no matches to this input'}
           getMenuProps={jest.fn()}
           getItemProps={getItemPropsMock}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -153,6 +190,7 @@ describe('UsersDropdown', () => {
         inputValue={''}
         getMenuProps={getMenuPropsMock}
         getItemProps={getItemPropsMock}
+        classes={classes}
       />,
     );
 
@@ -175,6 +213,7 @@ describe('PermissionsSelector', () => {
           permissionLevels={permissionLevels}
           selectedPermissions={'Viewer'}
           setSelectedPermissions={jest.fn()}
+          classes={classes}
         />,
       ),
     ).toMatchSnapshot();
@@ -187,8 +226,6 @@ describe('AddUserButton', () => {
   beforeEach(() => {
     shallow = createShallow();
   });
-
-  const classes = { addButton: 'addButton' };
 
   it('renders as disabled when the selected user name is not in the list of possibilities', () => {
     expect(
@@ -264,26 +301,5 @@ describe('dispatchAddUserAction', () => {
     expect(projectSettingsActions.addUserPermission).toHaveBeenCalledTimes(1);
     expect(projectSettingsActions.addUserPermission)
       .toHaveBeenCalledWith(project, user, selectedPermissions.toLowerCase());
-  });
-});
-
-describe('getUsersFromState', () => {
-  it('returns the correct part of state', () => {
-    const platformUsersState = {
-      fetching: false,
-      error: null,
-      value: [
-        { name: 'Platform User One', userId: 'platform-user-one' },
-        { name: 'Platform User Two', userId: 'platform-user-two' },
-        { name: 'Platform User Three', userId: 'platform-user-three' },
-      ],
-    };
-
-    const state = {
-      users: platformUsersState,
-      anotherStateItem: 'anotherStateItem',
-    };
-
-    expect(getUsersFromState(state)).toEqual(platformUsersState);
   });
 });

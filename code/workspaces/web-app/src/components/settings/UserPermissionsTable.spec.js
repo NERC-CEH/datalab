@@ -1,56 +1,40 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { createShallow } from '@material-ui/core/test-utils';
+import useShallowSelector from '../../hooks/useShallowSelector';
 import { PERMISSIONS } from '../../constants/permissions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
-import {
+import UserPermissionsTable, {
   PureUserPermissionsTable,
   FullWidthRow,
   FullWidthTextRow,
   UserPermissionsTableRow,
   UserPermissionsTableHead,
   UserPermissionsTableBody,
-  projectUsersSelector,
-  currentUserIdSelector,
   dispatchRemoveUserPermissions,
   dispatchAddUserPermissions,
   columnHeadings,
 } from './UserPermissionsTable';
 
-describe('projectUsersSelector', () => {
-  const applicationState = {
-    projectUsers: {
-      error: null,
-      fetching: false,
-      value: [
-        { userId: 'userId0', name: 'userName0', role: 'admin' },
-        { userId: 'userId1', name: 'userName1', role: 'user' },
-        { userId: 'userId2', name: 'userName2', role: 'viewer' },
-      ],
-    },
-    anotherPartOfState: {},
-  };
+jest.mock('react-redux');
+jest.mock('../../hooks/useShallowSelector');
 
-  it('returns correct part of application state', () => {
-    expect(projectUsersSelector(applicationState)).toEqual(applicationState.projectUsers);
+describe('UserPermissionsTable', () => {
+  let shallow;
+
+  const dispatchMock = jest.fn().mockName('dispatch');
+  useDispatch.mockReturnValue(dispatchMock);
+
+  useShallowSelector.mockReturnValueOnce('users');
+  useShallowSelector.mockReturnValueOnce('current-user-id');
+  useShallowSelector.mockReturnValueOnce({ value: 'testproj' });
+
+  beforeEach(() => {
+    shallow = createShallow({ dive: true });
   });
-});
 
-describe('currentUserIdSelector', () => {
-  const applicationStore = {
-    authentication: {
-      permissions: 'permissions',
-      tokens: 'tokens',
-      identity: {
-        sub: 'expected-user-id',
-        name: 'name',
-        nickname: 'nickname',
-        picture: 'picture-url',
-      },
-    },
-  };
-
-  it('extracts the right value from state', () => {
-    expect(currentUserIdSelector(applicationStore)).toEqual('expected-user-id');
+  it('renders pure component with correct props', () => {
+    expect(shallow(<UserPermissionsTable />)).toMatchSnapshot();
   });
 });
 
