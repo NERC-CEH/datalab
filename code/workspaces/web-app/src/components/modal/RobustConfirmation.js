@@ -39,7 +39,8 @@ class RobustConfirmation extends Component {
               label={confirmField.label}
               value={this.state.name.value}
               onChange={this.handleChange('name')}
-              margin="normal"
+              variant="outlined"
+              margin="dense"
               fullWidth />
           </form>
         </DialogContent>

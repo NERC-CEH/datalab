@@ -14,6 +14,13 @@ exports[`projectsService createProject should build the correct query and unpack
     }"
 `;
 
+exports[`projectsService deleteProject should build the correct query and unpack the results 1`] = `
+"
+    DeleteProject($project: ProjectDeletionRequest) {
+      deleteProject(project: $project)
+    }"
+`;
+
 exports[`projectsService loadProjectInfo should build the correct query and unpack the results 1`] = `
 "
     LoadProjectInfo($projectKey: String!) {

@@ -1,10 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ProjectsContainer has methods confirmDeleteProject opens deletion dialog with the correct call 1`] = `
+Array [
+  "MODAL_TYPE_ROBUST_CONFIRMATION",
+  Object {
+    "body": "Are you sure you want to delete the Project \\"Test Project (testproj)\\"?
+      This action will destroy all data related to the Project and can not be undone.",
+    "confirmField": Object {
+      "expectedValue": "testproj",
+      "label": "Please type \\"testproj\\" to confirm",
+    },
+    "onCancel": [MockFunction closeModalDialog],
+    "onSubmit": [Function],
+    "title": "Delete Project \\"Test Project (testproj)\\"",
+  },
+]
+`;
+
 exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
 Array [
   "loadProjects",
   "setCurrentProject",
   "createProject",
+  "deleteProject",
   "checkProjectKeyUniqueness",
   "openModalDialog",
   "closeModalDialog",

@@ -24,33 +24,33 @@ const styles = theme => ({
 const StackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
   deletePermission, editPermission, classes }) => (
   <div className={classes.cardActions}>
-    <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
+    {openStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
       <PrimaryActionButton
-        disabled={!openStack || !isReady(stack)}
+        disabled={!isReady(stack)}
         onClick={() => openStack(stack)}
         fullWidth
       >
         Open
       </PrimaryActionButton>
-    </PermissionWrapper>
-    <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+    </PermissionWrapper>}
+    {deleteStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
       <SecondaryActionButton
-        disabled={!deleteStack || !isReady(stack)}
+        disabled={!isReady(stack)}
         onClick={() => deleteStack(stack)}
         fullWidth
       >
         Delete
       </SecondaryActionButton>
-    </PermissionWrapper>
-    <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={editPermission}>
+    </PermissionWrapper>}
+    {editStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={editPermission}>
       <SecondaryActionButton
-        disabled={!editStack || !isReady(stack)}
+        disabled={!isReady(stack)}
         onClick={() => editStack(stack)}
         fullWidth
       >
         Edit
       </SecondaryActionButton>
-    </PermissionWrapper>
+    </PermissionWrapper>}
   </div>
 );
 

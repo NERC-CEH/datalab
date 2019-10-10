@@ -12,7 +12,7 @@ import projectSelectors from '../../selectors/projectsSelectors';
 import modalDialogActions from '../../actions/modalDialogActions';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
-import { MODAL_TYPE_CREATE_PROJECT } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
 
 const TYPE_NAME = 'Project';
@@ -67,6 +67,8 @@ class ProjectsContainer extends Component {
     this.onCreateProjectSubmit = this.onCreateProjectSubmit.bind(this);
     this.openCreationForm = this.openCreationForm.bind(this);
     this.projectUserPermissions = this.projectUserPermissions.bind(this);
+    this.confirmDeleteProject = this.confirmDeleteProject.bind(this);
+    this.deleteProject = this.deleteProject.bind(this);
   }
 
   handleSearchTextChange(event) {
@@ -116,6 +118,30 @@ class ProjectsContainer extends Component {
     );
   }
 
+  confirmDeleteProject = projectStack => this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
+    title: `Delete ${TYPE_NAME} "${projectStack.displayName} (${projectStack.key})"`,
+    body: `Are you sure you want to delete the ${TYPE_NAME} "${projectStack.displayName} (${projectStack.key})"?
+      This action will destroy all data related to the ${TYPE_NAME} and can not be undone.`,
+    confirmField: {
+      label: `Please type "${projectStack.key}" to confirm`,
+      expectedValue: projectStack.key,
+    },
+    onSubmit: () => this.deleteProject(projectStack),
+    onCancel: this.props.actions.closeModalDialog,
+  });
+
+  deleteProject = async (projectStack) => {
+    try {
+      await this.props.actions.deleteProject(projectStack.key);
+      this.props.actions.closeModalDialog();
+      notify.success(`${TYPE_NAME} deleted.`);
+    } catch (error) {
+      notify.error(`Unable to delete ${TYPE_NAME}.`);
+    } finally {
+      this.props.actions.loadProjects();
+    }
+  };
+
   renderControls() {
     const { classes } = this.props;
     return (
@@ -148,7 +174,7 @@ class ProjectsContainer extends Component {
             typeName={TYPE_NAME}
             typeNamePlural={TYPE_NAME_PLURAL}
             openStack={project => history.push(`/projects/${project.key}/info`)}
-            deleteStack={() => { }}
+            deleteStack={this.confirmDeleteProject}
             openCreationForm={this.openCreationForm}
             userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
             createPermission={SYSTEM_INSTANCE_ADMIN}

@@ -5,6 +5,7 @@ Array [
   "loadProjects",
   "setCurrentProject",
   "createProject",
+  "deleteProject",
   "checkProjectKeyUniqueness",
 ]
 `;

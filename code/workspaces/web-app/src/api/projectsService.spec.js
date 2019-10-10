@@ -63,6 +63,25 @@ describe('projectsService', () => {
     });
   });
 
+  describe('deleteProject', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ deleteProject: 'expectedValue' });
+
+      return projectsService.deleteProject().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return projectsService.deleteProject().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
   describe('checkProjectKeyUniqueness', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ checkProjectKeyUniqueness: 'expectedValue' });

@@ -2,6 +2,7 @@ import projectActions, {
   LOAD_PROJECTS_ACTION,
   SET_CURRENT_PROJECT_ACTION,
   CREATE_PROJECT_ACTION,
+  DELETE_PROJECT_ACTION,
   CHECK_PROJECT_KEY_UNIQUE_ACTION,
 } from './projectActions';
 import projectsService from '../api/projectsService';
@@ -52,6 +53,18 @@ describe('projectActions', () => {
       expect(output.payload).toEqual('expected-payload');
     });
 
+    it('deleteProject', () => {
+      const projectKey = 'testproj';
+      projectsService.deleteProject = jest.fn(() => 'expected-payload');
+
+      const output = projectActions.deleteProject(projectKey);
+
+      expect(projectsService.deleteProject).toHaveBeenCalledTimes(1);
+      expect(projectsService.deleteProject).toHaveBeenCalledWith(projectKey);
+      expect(output.type).toEqual(DELETE_PROJECT_ACTION);
+      expect(output.payload).toEqual('expected-payload');
+    });
+
     it('checkProjectKeyUniqueness', () => {
       const projectKey = 'projectKey';
       projectsService.checkProjectKeyUniqueness = jest.fn(() => 'expected-payload');
@@ -76,6 +89,10 @@ describe('projectActions', () => {
 
     it('CREATE_PROJECT_ACTION', () => {
       expect(CREATE_PROJECT_ACTION).toBe('CREATE_PROJECT_ACTION');
+    });
+
+    it('DELETE_PROJECT_ACTION', () => {
+      expect(DELETE_PROJECT_ACTION).toBe('DELETE_PROJECT_ACTION');
     });
 
     it('CHECK_PROJECT_KEY_UNIQUE_ACTION', () => {
