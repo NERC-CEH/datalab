@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const PromisedContentWrapper = ({ children, promise }) => {
+const PromisedContentWrapper = ({ children, promise, className }) => {
   const isFetching = promise.fetching;
   return (
-    <div>
+    <div className={className}>
       {isFetching ? <CircularProgress /> : children}
     </div>
   );
@@ -18,7 +18,7 @@ PromisedContentWrapper.propTypes = {
       message: PropTypes.string,
     }),
     fetching: PropTypes.bool.isRequired,
-    value: PropTypes.any.isRequired,
+    value: PropTypes.any,
   }).isRequired,
 };
 

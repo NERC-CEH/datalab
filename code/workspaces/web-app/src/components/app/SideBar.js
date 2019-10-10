@@ -1,14 +1,12 @@
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { permissionTypes } from 'common';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
-import ProjectTitleContainer from '../../containers/projectInfo/ProjectTitleContainer';
+import ProjectSwitcher from './ProjectSwitcher';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST }, projectKeyPermission } = permissionTypes;
 
@@ -30,43 +28,37 @@ const styles = theme => ({
     overflow: 'auto',
     padding: `0 ${theme.spacing(2)}px`,
   },
-  projectTitleLI: {
-    paddingLeft: 7,
-  },
-  projectTitleLIT: {
-    fontSize: 'larger',
-  },
 });
 
-const InfoGroup = ({ classes, projectKey }) => (
+const projectRouteBase = projectKey => `/projects/${projectKey}`;
+
+const InfoGroup = ({ projectKey }) => (
   <SideBarGroup key='Info'>
-    <ListItem className={classes.projectTitleLI}>
-      <ListItemText classes={{ primary: classes.projectTitleLIT }}><ProjectTitleContainer projectKey={projectKey} /></ListItemText>
-    </ListItem>
-    <SideBarButton to={`/projects/${projectKey}/info`} label="Information" icon="info_outline" />
+    <ProjectSwitcher />
+    <SideBarButton to={`${projectRouteBase(projectKey)}/info`} label="Information" icon="info_outline" />
   </SideBarGroup>
 );
 
 const AnalysisGroup = ({ userPermissions, projectKey }) => (
   <SideBarGroup title='Analysis'>
     <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey)}>
-      <SideBarButton to={`/projects/${projectKey}/notebooks`} label="Notebooks" icon="book" />
+      <SideBarButton to={`${projectRouteBase(projectKey)}/notebooks`} label="Notebooks" icon="book" />
     </PermissionWrapper>
-    <SideBarButton to={`/projects/${projectKey}/dask`} label="Dask" icon="apps" />
-    <SideBarButton to={`/projects/${projectKey}/spark`} label="Spark" icon="apps" />
+    <SideBarButton to={`${projectRouteBase(projectKey)}/dask`} label="Dask" icon="apps" />
+    <SideBarButton to={`${projectRouteBase(projectKey)}/spark`} label="Spark" icon="apps" />
   </SideBarGroup>
 );
 
 const MiscGroup = ({ userPermissions, projectKey }) => (
   <SideBarGroup>
     <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STORAGE_LIST, projectKey)}>
-      <SideBarButton to={`/projects/${projectKey}/storage`} label="Storage" icon="storage" />
+      <SideBarButton to={`${projectRouteBase(projectKey)}/storage`} label="Storage" icon="storage" />
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey)}>
-      <SideBarButton to={`/projects/${projectKey}/publishing`} label="Sites" icon="web" />
+      <SideBarButton to={`${projectRouteBase(projectKey)}/publishing`} label="Sites" icon="web" />
     </PermissionWrapper>
     <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_SETTINGS_LIST, projectKey)}>
-      <SideBarButton to={`/projects/${projectKey}/settings`} label="Settings" icon="settings" />
+      <SideBarButton to={`${projectRouteBase(projectKey)}/settings`} label="Settings" icon="settings" />
     </PermissionWrapper>
   </SideBarGroup>
 );
