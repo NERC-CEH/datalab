@@ -3,6 +3,7 @@ import projectsService from '../api/projectsService';
 export const LOAD_PROJECTS_ACTION = 'LOAD_PROJECTS';
 export const SET_CURRENT_PROJECT_ACTION = 'SET_CURRENT_PROJECT_ACTION';
 export const CREATE_PROJECT_ACTION = 'CREATE_PROJECT_ACTION';
+export const DELETE_PROJECT_ACTION = 'DELETE_PROJECT_ACTION';
 export const CHECK_PROJECT_KEY_UNIQUE_ACTION = 'CHECK_PROJECT_KEY_UNIQUE_ACTION';
 
 const loadProjects = () => ({
@@ -20,11 +21,16 @@ const createProject = project => ({
   payload: projectsService.createProject(project),
 });
 
+const deleteProject = projectKey => ({
+  type: DELETE_PROJECT_ACTION,
+  payload: projectsService.deleteProject({ projectKey }),
+});
+
 const checkProjectKeyUniqueness = projectKey => ({
   type: CHECK_PROJECT_KEY_UNIQUE_ACTION,
   payload: projectsService.checkProjectKeyUniqueness(projectKey),
 });
 
 export default {
-  loadProjects, setCurrentProject, createProject, checkProjectKeyUniqueness,
+  loadProjects, setCurrentProject, createProject, deleteProject, checkProjectKeyUniqueness,
 };

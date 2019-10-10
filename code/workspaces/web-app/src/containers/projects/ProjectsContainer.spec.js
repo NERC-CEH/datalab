@@ -1,10 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
+import notify from '../../components/common/notify';
 import { PureProjectsContainer, ConnectedProjectsContainer, projectToStack, stackMatchesFilter } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
 
 jest.mock('../../api/projectsService');
+jest.mock('../../components/common/notify');
+
 const projectsPayload = {
   value: [{
     id: 123,
@@ -123,6 +126,73 @@ describe('ProjectsContainer', () => {
 
       // Act
       expect(shallowRenderPure(props)).toMatchSnapshot();
+    });
+  });
+
+  describe('has methods', () => {
+    const openModalDialogMock = jest.fn().mockName('openModalDialog');
+    const closeModalDialogMock = jest.fn().mockName('closeModalDialog');
+    const deleteProjectMock = jest.fn().mockName('deleteProject');
+
+    const props = {
+      projects: { fetching: false, value: projectsPayload.value },
+      userPermissions: ['expectedPermission'],
+      actions: {
+        loadProjects: loadProjectsMock,
+        openModalDialog: openModalDialogMock,
+        closeModalDialog: closeModalDialogMock,
+        deleteProject: deleteProjectMock,
+      },
+      classes: { controlContainer: 'controlContainer', searchTextField: 'searchTextField' },
+    };
+
+    const projectInfo = { key: 'testproj', displayName: 'Test Project' };
+
+    const containerInstance = shallow(<PureProjectsContainer {...props} />).instance();
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe('confirmDeleteProject', () => {
+      it('opens deletion dialog with the correct call', () => {
+        containerInstance.confirmDeleteProject(projectInfo);
+        expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+        expect(openModalDialogMock.mock.calls[0]).toMatchSnapshot();
+      });
+    });
+
+    describe('deleteProject', () => {
+      it('calls action to delete project with project key', async () => {
+        await containerInstance.deleteProject(projectInfo);
+        expect(deleteProjectMock).toHaveBeenCalledTimes(1);
+        expect(deleteProjectMock).toHaveBeenCalledWith(projectInfo.key);
+      });
+
+      it('calls action to load projects', async () => {
+        await containerInstance.deleteProject(projectInfo);
+        expect(loadProjectsMock).toHaveBeenCalledTimes(1);
+      });
+
+      describe('on successful deletion', () => {
+        it('calls to close the modal dialog', async () => {
+          await containerInstance.deleteProject(projectInfo);
+          expect(closeModalDialogMock).toHaveBeenCalledTimes(1);
+        });
+
+        it('it notifies success', async () => {
+          await containerInstance.deleteProject(projectInfo);
+          expect(notify.success).toHaveBeenCalledTimes(1);
+        });
+      });
+
+      describe('on failed deletion', () => {
+        it('notifies of failure', async () => {
+          deleteProjectMock.mockImplementationOnce(() => { throw new Error(); });
+          await containerInstance.deleteProject(projectInfo);
+          expect(notify.error).toHaveBeenCalledTimes(1);
+        });
+      });
     });
   });
 });

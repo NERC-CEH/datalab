@@ -17,9 +17,10 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
         fullWidth={true}
         id="name"
         label="FieldLabel"
-        margin="normal"
+        margin="dense"
         onChange={[Function]}
         value=""
+        variant="outlined"
       />
     </form>
   </WithStyles(ForwardRef(DialogContent))>
