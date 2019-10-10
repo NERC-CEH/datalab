@@ -80,7 +80,7 @@ spec:
 {{#volumeMount}}
           volumeMounts:
             - name: spark-kubernetes-properties
-              mountPath: 'usr/local/spark/conf/spark-defaults.conf'
+              mountPath: '/usr/local/spark/conf/spark-defaults.conf'
             - mountPath: /data
               name: glusterfsvol
       volumes:
