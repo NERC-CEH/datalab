@@ -11,8 +11,6 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
       classes={
         Object {
           "itemList": "SideBar-itemList-1",
-          "projectTitleLI": "SideBar-projectTitleLI-3",
-          "projectTitleLIT": "SideBar-projectTitleLIT-4",
           "sideBar": "SideBar-sideBar-2",
         }
       }
@@ -44,10 +42,10 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
 
 exports[`Sidebar correctly renders correct snapshot 2`] = `
 <div
-  className="SideBarAnalysis-sideBar-6"
+  className="SideBarAnalysis-sideBar-4"
 >
   <WithStyles(ForwardRef(List))
-    className="SideBarAnalysis-itemList-5"
+    className="SideBarAnalysis-itemList-3"
   >
     <AnalysisGroup
       projectKey="project99"
