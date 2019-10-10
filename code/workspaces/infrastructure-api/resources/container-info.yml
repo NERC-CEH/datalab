@@ -1,0 +1,29 @@
+JUPYTER_IMAGE: 'nerc/jupyter-notebook'
+JUPYTER_VERSION: '0.1.3'
+
+JUPYTERLAB_IMAGE: 'nerc/jupyterlab'
+JUPYTERLAB_VERSION: '0.1.1'
+
+ZEPPELIN_IMAGE: 'nerc/zeppelin'
+ZEPPELIN_VERSION: '0.7.2.7'
+ZEPPELIN_CONNECT_IMAGE: 'nerc/zeppelin-connect'
+ZEPPELIN_CONNECT_VERSION: '1.1.1'
+
+RSTUDIO_IMAGE: 'nerc/rstudio'
+RSTUDIO_VERSION: '0.1.2'
+RSTUDIO_CONNECT_IMAGE: 'nerc/zeppelin-connect' # This name should be zeppelin-connect as the image is shared
+RSTUDIO_CONNECT_VERSION: '1.1.1'
+
+RSHINY_IMAGE: 'nerc/rshiny'
+RSHINY_VERSION: '0.1.2'
+
+NBVIEWER_IMAGE: 'jupyter/nbviewer'
+NBVIEWER_VERSION: 'latest'
+
+SPARK_MASTER_ADDRESS: 'spark://spark-master:7077'
+SHARED_R_LIBS: '/data/packages/R/%p/%v'
+
+MINIO_IMAGE: 'nerc/minio'
+MINIO_VERSION: '1.0'
+MINIO_CONNECT_IMAGE: 'nerc/connect'
+MINIO_CONNECT_VERSION: '1.0.0'
