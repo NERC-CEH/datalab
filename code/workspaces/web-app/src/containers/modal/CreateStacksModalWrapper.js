@@ -8,7 +8,6 @@ import dataStorageActions from '../../actions/dataStorageActions';
 class CreateStacksModalWrapper extends Component {
   constructor(props, context) {
     super(props, context);
-    console.log(this.props.Dialog);
     this.getDataStorage = this.getDataStorage.bind(this);
     this.getProjectKey = this.getProjectKey.bind(this);
   }
