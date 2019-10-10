@@ -16,24 +16,6 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
   }
 >
   <Switcher
-    accessibleProjects={
-      Object {
-        "error": null,
-        "fetching": false,
-        "value": Array [
-          Object {
-            "accessible": true,
-            "key": "testproj",
-            "name": "Test Project",
-          },
-          Object {
-            "accessible": true,
-            "key": "projthree",
-            "name": "Project Three",
-          },
-        ],
-      }
-    }
     classes={
       Object {
         "dropdownProgress": "ProjectSwitcher-dropdownProgress-3",
@@ -69,11 +51,29 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
         "toString": [Function],
       }
     }
+    switcherProjects={
+      Object {
+        "error": null,
+        "fetching": false,
+        "value": Array [
+          Object {
+            "accessible": true,
+            "key": "testproj",
+            "name": "Test Project",
+          },
+          Object {
+            "accessible": true,
+            "key": "projthree",
+            "name": "Project Three",
+          },
+        ],
+      }
+    }
   />
 </PromisedContentWrapper>
 `;
 
-exports[`Switcher renders to match snapshot when accessibleProjects is fetching 1`] = `
+exports[`Switcher renders to match snapshot when switcherProjects is fetching 1`] = `
 <WithStyles(ForwardRef(TextField))
   className="switcher"
   fullWidth={true}
@@ -118,7 +118,7 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
 </WithStyles(ForwardRef(TextField))>
 `;
 
-exports[`Switcher renders to match snapshot when there are no accessible projects 1`] = `
+exports[`Switcher renders to match snapshot when there are projects to display 1`] = `
 <WithStyles(ForwardRef(TextField))
   className="switcher"
   fullWidth={true}

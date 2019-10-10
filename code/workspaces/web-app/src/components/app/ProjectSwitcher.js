@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import useCurrentProject from '../../hooks/useCurrentProject';
 import useProjectsArray from '../../hooks/useProjectsArray';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import projectsActions from '../../actions/projectActions';
@@ -34,10 +34,19 @@ export function createRoute(location, projectKey) {
   return location.pathname.replace(pattern, `/projects/${projectKey}/`);
 }
 
-export function getAccessibleProjects(projects) {
+export function getSwitcherProjects(projects, currentProject) {
+  if (projects.fetching || currentProject.fetching) {
+    return { ...projects, value: [] };
+  }
+
+  const accessible = projects.value.filter(item => item.accessible);
+  if (!accessible.map(item => item.key).includes(currentProject.value.key)) {
+    accessible.push(currentProject.value);
+  }
+
   return {
     ...projects,
-    value: projects.value.filter(project => project.accessible),
+    value: accessible,
   };
 }
 
@@ -47,17 +56,17 @@ function ProjectSwitcher({ classes }) {
     dispatch(projectsActions.loadProjects());
   }, [dispatch]);
 
-  const currentProjectKey = useCurrentProjectKey();
+  const currentProject = useCurrentProject();
   const projects = useProjectsArray();
   const { location } = window;
 
-  const accessibleProjects = getAccessibleProjects(projects);
+  const switcherProjects = getSwitcherProjects(projects, currentProject);
 
   return (
-    <PromisedContentWrapper className={classes.promisedContent} promise={currentProjectKey}>
+    <PromisedContentWrapper className={classes.promisedContent} promise={currentProject}>
       <Switcher
-        accessibleProjects={accessibleProjects}
-        currentProject={currentProjectKey}
+        switcherProjects={switcherProjects}
+        currentProject={currentProject}
         location={location}
         classes={classes}
       />
@@ -65,7 +74,7 @@ function ProjectSwitcher({ classes }) {
   );
 }
 
-export const Switcher = ({ accessibleProjects, currentProject, location, classes }) => (
+export const Switcher = ({ switcherProjects, currentProject, location, classes }) => (
   <TextField
     className={classes.switcher}
     label="Current Project"
@@ -73,22 +82,22 @@ export const Switcher = ({ accessibleProjects, currentProject, location, classes
     margin="dense"
     fullWidth
     select
-    value={currentProject.value}
+    value={currentProject.value && currentProject.value.key}
   >
-    {getDropdownContent(accessibleProjects, location, classes)}
+    {getDropdownContent(switcherProjects, location, classes)}
   </TextField>
 );
 
-function getDropdownContent(accessibleProjects, location, classes) {
-  if (accessibleProjects.fetching) {
+function getDropdownContent(switcherProjects, location, classes) {
+  if (switcherProjects.fetching) {
     return <div className={classes.dropdownProgress}><CircularProgress /></div>;
   }
 
-  if (accessibleProjects.value.length === 0) {
+  if (switcherProjects.value.length === 0) {
     return <MenuItem>No Projects Accessible</MenuItem>;
   }
 
-  return accessibleProjects.value.map(project => (
+  return switcherProjects.value.map(project => (
     <MenuItem component={Link} value={project.key} key={project.key} to={createRoute(location, project.key)}>
       {project.name}
     </MenuItem>

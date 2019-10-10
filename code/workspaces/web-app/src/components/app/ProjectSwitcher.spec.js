@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { useDispatch } from 'react-redux';
-import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import useCurrentProject from '../../hooks/useCurrentProject';
 import useProjectsArray from '../../hooks/useProjectsArray';
 import ProjectSwitcher, { Switcher,
-  getAccessibleProjects,
+  getSwitcherProjects,
   createRoute } from './ProjectSwitcher';
 
 jest.mock('react-redux');
-jest.mock('../../hooks/useCurrentProjectKey');
+jest.mock('../../hooks/useCurrentProject');
 jest.mock('../../hooks/useProjectsArray');
 jest.mock('../../actions/projectActions');
 
@@ -34,7 +34,7 @@ describe('ProjectSwitcher', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
   useDispatch.mockReturnValue(dispatchMock);
 
-  useCurrentProjectKey.mockReturnValue(state.currentProject);
+  useCurrentProject.mockReturnValue(state.currentProject);
   useProjectsArray.mockReturnValue(state.projects);
 
   beforeEach(() => {
@@ -60,7 +60,7 @@ describe('Switcher', () => {
     expect(
       shallow(
         <Switcher
-          accessibleProjects={getAccessibleProjects(state.projects)}
+          switcherProjects={getSwitcherProjects(state.projects, state.currentProject)}
           currentProject={testProj}
           location={location}
           classes={classes}
@@ -69,11 +69,11 @@ describe('Switcher', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders to match snapshot when there are no accessible projects', () => {
+  it('renders to match snapshot when there are projects to display', () => {
     expect(
       shallow(
         <Switcher
-          accessibleProjects={{ value: [] }}
+          switcherProjects={{ value: [] }}
           currentProject={{}}
           location={location}
           classes={classes}
@@ -82,11 +82,11 @@ describe('Switcher', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders to match snapshot when accessibleProjects is fetching', () => {
+  it('renders to match snapshot when switcherProjects is fetching', () => {
     expect(
       shallow(
         <Switcher
-          accessibleProjects={{ fetching: true, value: [] }}
+          switcherProjects={{ fetching: true, value: [] }}
           currentProject={testProj}
           location={location}
           classes={classes}
@@ -108,14 +108,25 @@ describe('createRoute', () => {
   });
 });
 
-describe('getAccessibleProjects', () => {
-  it('filters projects to only return those accessible to user', () => {
-    expect(getAccessibleProjects(state.projects)).toEqual({
+describe('getSwitcherProjects', () => {
+  it('filters projects to only return those accessible to user and currentProject', () => {
+    expect(getSwitcherProjects(state.projects, state.currentProject)).toEqual({
       fetching: false,
       error: null,
       value: [
         testProj,
         { key: 'projthree', name: 'Project Three', accessible: true },
+      ],
+    });
+
+    const nonAccessibleProj = { ...state.currentProject, value: { key: 'noaccess', name: 'No Access but Current' } };
+    expect(getSwitcherProjects(state.projects, nonAccessibleProj)).toEqual({
+      fetching: false,
+      error: null,
+      value: [
+        testProj,
+        { key: 'projthree', name: 'Project Three', accessible: true },
+        nonAccessibleProj.value,
       ],
     });
   });
