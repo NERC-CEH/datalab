@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { reset } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { permissionTypes } from 'common';
@@ -18,6 +19,7 @@ import notify from '../../components/common/notify';
 const TYPE_NAME = 'Project';
 const TYPE_NAME_PLURAL = 'Projects';
 const PROJECT_OPEN_PERMISSION = 'project.open';
+const FORM_NAME = 'createProject';
 
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
@@ -100,6 +102,7 @@ class ProjectsContainer extends Component {
     this.props.actions.closeModalDialog();
     try {
       await this.props.actions.createProject(project);
+      await this.props.actions.resetForm(FORM_NAME);
       notify.success(`${TYPE_NAME} created`);
     } catch (error) {
       notify.error(`Unable to create ${TYPE_NAME}`);
@@ -209,6 +212,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       ...projectActions,
       ...modalDialogActions,
+      resetForm: formStateName => reset(formStateName),
     }, dispatch),
   };
 }
