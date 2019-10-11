@@ -51,10 +51,11 @@ const projectToStack = project => ({
   status: 'ready',
 });
 
-const stackMatchesFilter = ({ displayName, description }, searchText) => {
+const stackMatchesFilter = ({ displayName, description, key }, searchText) => {
   const filter = searchText.toLowerCase();
   return displayName.toLowerCase().includes(filter)
-    || description.toLowerCase().includes(filter);
+    || description.toLowerCase().includes(filter)
+    || key.includes(filter);
 };
 
 class ProjectsContainer extends Component {

@@ -22,14 +22,15 @@ projectsService.loadProjects = loadProjectsMock;
 
 describe('ProjectsContainer', () => {
   describe('is a component which', () => {
-    it('can filter projects', () => {
+    it('can filter projects by name, key and description', () => {
       const stacks = projectsPayload.value.map(projectToStack);
       expect(stacks.length).toBe(1);
       const stack = stacks[0];
       expect(stackMatchesFilter(stack, '')).toBe(true);
       expect(stackMatchesFilter(stack, 'A project name')).toBe(true);
       expect(stackMatchesFilter(stack, 'A project description')).toBe(true);
-      expect(stackMatchesFilter(stack, 'project2')).toBe(false);
+      expect(stackMatchesFilter(stack, 'project2')).toBe(true);
+      expect(stackMatchesFilter(stack, 'missing search')).toBe(false);
     });
   });
 

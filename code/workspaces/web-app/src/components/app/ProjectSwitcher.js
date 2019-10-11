@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useProjectsArray from '../../hooks/useProjectsArray';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
@@ -26,6 +27,20 @@ const style = theme => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
+  },
+  itemContent: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  itemKey: {
+    color: theme.typography.colorLight,
+    fontSize: '0.75em',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
 });
 
@@ -99,7 +114,10 @@ function getDropdownContent(switcherProjects, location, classes) {
 
   return switcherProjects.value.map(project => (
     <MenuItem component={Link} value={project.key} key={project.key} to={createRoute(location, project.key)}>
-      {project.name}
+      <div className={classes.itemContent}>
+        <Typography variant="body1" noWrap>{`${project.name}`}</Typography>
+        <Typography className={classes.itemKey}>{`(${project.key})`}</Typography>
+      </div>
     </MenuItem>
   ));
 }

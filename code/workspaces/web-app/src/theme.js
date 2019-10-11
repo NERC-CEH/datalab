@@ -19,6 +19,7 @@ const highlightMono = 'rgba(248, 248, 248, 1.0)';
 const highlightMonoTransparent = 'rgba(248, 248, 248, 0.25)';
 
 const text = backgroundDark;
+const textLight = 'hsl(0, 0%, 40%)';
 
 // Lengths
 const spacing = 5;
@@ -43,6 +44,7 @@ const theme = createMuiTheme({
   },
   typography: {
     color: text,
+    colorLight: textLight,
     h4: {
       color: text,
       margin: `${spacing * 4}px 0`,
@@ -62,7 +64,7 @@ const theme = createMuiTheme({
       color: text,
     },
     body2: {
-      color: 'hsl(0, 0%, 40%)',
+      color: textLight,
     },
   },
   shape: {
