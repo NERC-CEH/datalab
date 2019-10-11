@@ -1,63 +1,188 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StackCards creates correct snapshot for an array of notebooks 1`] = `
-<StackCards
-  classes={
-    Object {
-      "bottomControlDiv": "StackCards-bottomControlDiv-2",
-      "noItemsMessage": "StackCards-noItemsMessage-3",
-      "stackDiv": "StackCards-stackDiv-1",
+exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
+<div
+  className="StackCards-stackDiv-1"
+>
+  <PromisedContentWrapper
+    fetchingClassName="StackCards-placeholderCard-3"
+    promise={
+      Object {
+        "fetching": false,
+        "value": Array [
+          Object {
+            "displayName": "name1",
+            "id": "1",
+            "type": "type1",
+          },
+          Object {
+            "displayName": "name2",
+            "id": "2",
+            "type": "type2",
+          },
+          Object {
+            "displayName": "name3",
+            "id": "3",
+            "type": "type3",
+          },
+        ],
+      }
     }
-  }
-  createPermission="create"
-  deletePermission="delete"
-  deleteStack={[Function]}
-  editPermission="edit"
-  openCreationForm={[Function]}
-  openPermission="open"
-  openStack={[Function]}
-  stacks={
-    Array [
+  >
+    <div>
+       
+      <WithStyles(StackCard)
+        deletePermission="delete"
+        deleteStack={[Function]}
+        editPermission="edit"
+        key="1"
+        openPermission="open"
+        openStack={[Function]}
+        stack={
+          Object {
+            "displayName": "name1",
+            "id": "1",
+            "type": "type1",
+          }
+        }
+        typeName="expectedTypeName"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "create",
+            "edit",
+          ]
+        }
+      />
+      <WithStyles(StackCard)
+        deletePermission="delete"
+        deleteStack={[Function]}
+        editPermission="edit"
+        key="2"
+        openPermission="open"
+        openStack={[Function]}
+        stack={
+          Object {
+            "displayName": "name2",
+            "id": "2",
+            "type": "type2",
+          }
+        }
+        typeName="expectedTypeName"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "create",
+            "edit",
+          ]
+        }
+      />
+      <WithStyles(StackCard)
+        deletePermission="delete"
+        deleteStack={[Function]}
+        editPermission="edit"
+        key="3"
+        openPermission="open"
+        openStack={[Function]}
+        stack={
+          Object {
+            "displayName": "name3",
+            "id": "3",
+            "type": "type3",
+          }
+        }
+        typeName="expectedTypeName"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "create",
+            "edit",
+          ]
+        }
+      />
+    </div>
+  </PromisedContentWrapper>
+  <ComponentWrapper
+    permission="create"
+    style={
       Object {
-        "displayName": "name1",
-        "id": "1",
-        "type": "type1",
-      },
-      Object {
-        "displayName": "name2",
-        "id": "2",
-        "type": "type2",
-      },
-      Object {
-        "displayName": "name3",
-        "id": "3",
-        "type": "type3",
-      },
-    ]
-  }
-  typeName="expectedTypeName"
-  userPermissions={[Function]}
-/>
+        "width": "100%",
+      }
+    }
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "create",
+        "edit",
+      ]
+    }
+  >
+    <div
+      className="StackCards-bottomControlDiv-2"
+    >
+      <WithStyles(NewStackButton)
+        onClick={[Function]}
+        typeName="expectedTypeName"
+      />
+    </div>
+  </ComponentWrapper>
+</div>
 `;
 
 exports[`StackCards creates correct snapshot for an empty array 1`] = `
-<StackCards
-  classes={
-    Object {
-      "bottomControlDiv": "StackCards-bottomControlDiv-2",
-      "noItemsMessage": "StackCards-noItemsMessage-3",
-      "stackDiv": "StackCards-stackDiv-1",
+<div
+  className="StackCards-stackDiv-1"
+>
+  <PromisedContentWrapper
+    fetchingClassName="StackCards-placeholderCard-3"
+    promise={
+      Object {
+        "fetching": false,
+        "value": Array [],
+      }
     }
-  }
-  createPermission="create"
-  deletePermission="delete"
-  deleteStack={[Function]}
-  editPermission="edit"
-  openCreationForm={[Function]}
-  openPermission="open"
-  openStack={[Function]}
-  stacks={Array []}
-  typeName="expectedTypeName"
-  userPermissions={[Function]}
-/>
+  >
+    <div>
+       
+      <div
+        className="StackCards-placeholderCard-3"
+      >
+        <WithStyles(ForwardRef(Typography))
+          variant="body1"
+        >
+          No items to display.
+        </WithStyles(ForwardRef(Typography))>
+      </div>
+    </div>
+  </PromisedContentWrapper>
+  <ComponentWrapper
+    permission="create"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "create",
+        "edit",
+      ]
+    }
+  >
+    <div
+      className="StackCards-bottomControlDiv-2"
+    >
+      <WithStyles(NewStackButton)
+        onClick={[Function]}
+        typeName="expectedTypeName"
+      />
+    </div>
+  </ComponentWrapper>
+</div>
 `;

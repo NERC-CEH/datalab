@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const PromisedContentWrapper = ({ children, promise, className }) => {
-  const isFetching = promise.fetching;
-  return (
-    <div className={className}>
-      {isFetching ? <CircularProgress /> : children}
-    </div>
-  );
-};
+const PromisedContentWrapper = ({ children, promise, fetchingClassName, completeClassName }) => (
+  promise.fetching
+    ? <div className={fetchingClassName}><CircularProgress /></div>
+    : <div className={completeClassName}>{children}</div>
+);
 
 PromisedContentWrapper.propTypes = {
   children: PropTypes.element.isRequired,

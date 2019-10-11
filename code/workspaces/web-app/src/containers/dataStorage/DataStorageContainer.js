@@ -16,7 +16,6 @@ import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import projectSelectors from '../../selectors/projectsSelectors';
 import notify from '../../components/common/notify';
-import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_CREATE, PROJECT_KEY_STORAGE_DELETE, PROJECT_KEY_STORAGE_OPEN, PROJECT_KEY_STORAGE_EDIT }, projectKeyPermission } = permissionTypes;
@@ -36,12 +35,6 @@ class DataStorageContainer extends Component {
     this.prohibitDeletion = this.prohibitDeletion.bind(this);
     this.chooseDialogue = this.chooseDialogue.bind(this);
     this.editDataStore = this.editDataStore.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const isFetching = nextProps.dataStorage.fetching;
-    const projectKeyChange = this.props.projectKey !== nextProps.projectKey;
-    return !isFetching || projectKeyChange;
   }
 
   componentDidUpdate(prevProps) {
@@ -119,22 +112,20 @@ class DataStorageContainer extends Component {
 
   render() {
     return (
-      <PromisedContentWrapper promise={this.props.dataStorage}>
-        <StackCards
-          stacks={this.props.dataStorage.value}
-          typeName={TYPE_NAME}
-          typeNamePlural={TYPE_NAME_PLURAL}
-          openStack={this.openDataStore}
-          deleteStack={this.chooseDialogue}
-          editStack={this.editDataStore}
-          openCreationForm={this.openCreationForm}
-          userPermissions={() => this.props.userPermissions}
-          createPermission={projectKeyPermission(PROJECT_KEY_STORAGE_CREATE, this.props.projectKey)}
-          openPermission={projectKeyPermission(PROJECT_KEY_STORAGE_OPEN, this.props.projectKey)}
-          deletePermission={projectKeyPermission(PROJECT_KEY_STORAGE_DELETE, this.props.projectKey)}
-          editPermission={projectKeyPermission(PROJECT_KEY_STORAGE_EDIT, this.props.projectKey)}
-        />
-      </PromisedContentWrapper>
+      <StackCards
+        stacks={this.props.dataStorage}
+        typeName={TYPE_NAME}
+        typeNamePlural={TYPE_NAME_PLURAL}
+        openStack={this.openDataStore}
+        deleteStack={this.chooseDialogue}
+        editStack={this.editDataStore}
+        openCreationForm={this.openCreationForm}
+        userPermissions={() => this.props.userPermissions}
+        createPermission={projectKeyPermission(PROJECT_KEY_STORAGE_CREATE, this.props.projectKey)}
+        openPermission={projectKeyPermission(PROJECT_KEY_STORAGE_OPEN, this.props.projectKey)}
+        deletePermission={projectKeyPermission(PROJECT_KEY_STORAGE_DELETE, this.props.projectKey)}
+        editPermission={projectKeyPermission(PROJECT_KEY_STORAGE_EDIT, this.props.projectKey)}
+      />
     );
   }
 }

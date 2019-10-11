@@ -10,7 +10,6 @@ import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
 import projectSelectors from '../../selectors/projectsSelectors';
 import modalDialogActions from '../../actions/modalDialogActions';
-import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
@@ -84,10 +83,18 @@ class ProjectsContainer extends Component {
     this.props.actions.loadProjects();
   }
 
-  adaptProjectsToStacks() {
-    return this.props.projects.value
-      ? this.props.projects.value.map(projectToStack)
-      : [];
+  adaptProjectsToStacks(projects) {
+    return {
+      ...projects,
+      value: projects.value ? projects.value.map(projectToStack) : [],
+    };
+  }
+
+  filterProjectStacks(projectStacks, searchText) {
+    return {
+      ...projectStacks,
+      value: projectStacks.value.filter(stack => stackMatchesFilter(stack, searchText)),
+    };
   }
 
   projectUserPermissions(project) {
@@ -165,25 +172,27 @@ class ProjectsContainer extends Component {
 
   render() {
     const { projects, history } = this.props;
+    const filteredStacks = this.filterProjectStacks(
+      this.adaptProjectsToStacks(projects),
+      this.state.searchText,
+    );
     return (
-      <PromisedContentWrapper promise={projects}>
-        <div>
-          {this.renderControls()}
-          <StackCards
-            stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
-            typeName={TYPE_NAME}
-            typeNamePlural={TYPE_NAME_PLURAL}
-            openStack={project => history.push(`/projects/${project.key}/info`)}
-            deleteStack={this.confirmDeleteProject}
-            openCreationForm={this.openCreationForm}
-            userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
-            createPermission={SYSTEM_INSTANCE_ADMIN}
-            openPermission={PROJECT_OPEN_PERMISSION}
-            deletePermission=""
-            editPermission=""
-          />
-        </div>
-      </PromisedContentWrapper>
+      <div>
+        {this.renderControls()}
+        <StackCards
+          stacks={filteredStacks}
+          typeName={TYPE_NAME}
+          typeNamePlural={TYPE_NAME_PLURAL}
+          openStack={project => history.push(`/projects/${project.key}/info`)}
+          deleteStack={this.confirmDeleteProject}
+          openCreationForm={this.openCreationForm}
+          userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
+          createPermission={SYSTEM_INSTANCE_ADMIN}
+          openPermission={PROJECT_OPEN_PERMISSION}
+          deletePermission=""
+          editPermission=""
+        />
+      </div>
     );
   }
 }

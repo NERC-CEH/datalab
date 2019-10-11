@@ -30,58 +30,44 @@ Array [
 `;
 
 exports[`ProjectsContainer is a container which passes correct props to StackCard 1`] = `
-<PromisedContentWrapper
-  promise={
-    Object {
-      "fetching": false,
-      "value": Array [
+<div>
+  <div
+    className="controlContainer"
+  >
+    <WithStyles(ForwardRef(TextField))
+      InputProps={
         Object {
-          "accessible": true,
-          "description": "A project description",
-          "id": 123,
-          "key": "project2",
-          "name": "A project name",
-        },
-      ],
-    }
-  }
->
-  <div>
-    <div
-      className="controlContainer"
-    >
-      <WithStyles(ForwardRef(TextField))
-        InputProps={
-          Object {
-            "disableUnderline": true,
-            "style": Object {
-              "backgroundColor": "rgba(47, 62, 70, 0.2)",
-              "borderRadius": 5,
-            },
-          }
+          "disableUnderline": true,
+          "style": Object {
+            "backgroundColor": "rgba(47, 62, 70, 0.2)",
+            "borderRadius": 5,
+          },
         }
-        autoFocus={true}
-        className="searchTextField"
-        hiddenLabel={true}
-        id="search"
-        margin="dense"
-        onChange={[Function]}
-        placeholder="Filter projects..."
-        type="search"
-        value=""
-        variant="filled"
-      />
-    </div>
-    <WithStyles(StackCards)
-      createPermission="system:instance:admin"
-      deletePermission=""
-      deleteStack={[Function]}
-      editPermission=""
-      openCreationForm={[Function]}
-      openPermission="project.open"
-      openStack={[Function]}
-      stacks={
-        Array [
+      }
+      autoFocus={true}
+      className="searchTextField"
+      hiddenLabel={true}
+      id="search"
+      margin="dense"
+      onChange={[Function]}
+      placeholder="Filter projects..."
+      type="search"
+      value=""
+      variant="filled"
+    />
+  </div>
+  <WithStyles(StackCards)
+    createPermission="system:instance:admin"
+    deletePermission=""
+    deleteStack={[Function]}
+    editPermission=""
+    openCreationForm={[Function]}
+    openPermission="project.open"
+    openStack={[Function]}
+    stacks={
+      Object {
+        "fetching": false,
+        "value": Array [
           Object {
             "accessible": true,
             "description": "A project description",
@@ -91,12 +77,12 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
             "status": "ready",
             "type": "project",
           },
-        ]
+        ],
       }
-      typeName="Project"
-      typeNamePlural="Projects"
-      userPermissions={[Function]}
-    />
-  </div>
-</PromisedContentWrapper>
+    }
+    typeName="Project"
+    typeNamePlural="Projects"
+    userPermissions={[Function]}
+  />
+</div>
 `;

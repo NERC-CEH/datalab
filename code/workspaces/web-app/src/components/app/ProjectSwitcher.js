@@ -63,7 +63,7 @@ function ProjectSwitcher({ classes }) {
   const switcherProjects = getSwitcherProjects(projects, currentProject);
 
   return (
-    <PromisedContentWrapper className={classes.promisedContent} promise={currentProject}>
+    <PromisedContentWrapper fetchingClassName={classes.promisedContent} completeClassName={classes.promisedContent} promise={currentProject}>
       <Switcher
         switcherProjects={switcherProjects}
         currentProject={currentProject}

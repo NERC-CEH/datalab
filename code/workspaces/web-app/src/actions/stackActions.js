@@ -2,6 +2,8 @@ import stackService from '../api/stackService';
 
 export const LOAD_STACKS_ACTION = 'LOAD_STACKS';
 export const LOAD_STACKS_BY_CATEGORY_ACTION = 'LOAD_STACKS_BY_CATEGORY';
+export const UPDATE_STACKS_ACTION = 'UPDATE_STACKS';
+export const UPDATE_STACKS_BY_CATEGORY_ACTION = 'UPDATE_STACKS_BY_CATEGORY';
 export const GET_STACK_URL_ACTION = 'GET_STACK_URL';
 export const OPEN_STACK_ACTION = 'OPEN_STACK';
 export const CREATE_STACK_ACTION = 'CREATE_STACK';
@@ -14,6 +16,16 @@ const loadStacks = () => ({
 
 const loadStacksByCategory = (projectKey, category) => ({
   type: LOAD_STACKS_BY_CATEGORY_ACTION,
+  payload: stackService.loadStacksByCategory(projectKey, category),
+});
+
+const updateStacks = () => ({
+  type: UPDATE_STACKS_ACTION,
+  payload: stackService.loadStacks(),
+});
+
+const updateStacksByCategory = (projectKey, category) => ({
+  type: UPDATE_STACKS_BY_CATEGORY_ACTION,
   payload: stackService.loadStacksByCategory(projectKey, category),
 });
 
@@ -40,6 +52,8 @@ const deleteStack = ({ projectKey, name, type }) => ({
 export default {
   loadStacks,
   loadStacksByCategory,
+  updateStacks,
+  updateStacksByCategory,
   getUrl,
   openStack,
   createStack,
