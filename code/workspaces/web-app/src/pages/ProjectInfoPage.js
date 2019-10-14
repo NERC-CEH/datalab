@@ -1,11 +1,22 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Page from './Page';
 import ProjectInfoContainer from '../containers/projectInfo/ProjectInfoContainer';
 
-const ProjectInfoPage = ({ match }) => (
-  <Page title="Information">
-    <ProjectInfoContainer />
-  </Page>
-);
+const useStyles = makeStyles(() => ({
+  infoPage: {
+    maxWidth: 600,
+  },
+}));
+
+const ProjectInfoPage = () => {
+  const classes = useStyles();
+
+  return (
+    <Page className={classes.infoPage} title="Information">
+      <ProjectInfoContainer />
+    </Page>
+  );
+};
 
 export default ProjectInfoPage;

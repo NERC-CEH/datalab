@@ -2,8 +2,9 @@
 
 exports[`ProjectInfoPage renders correct snapshot 1`] = `
 <WithStyles(Page)
+  className="makeStyles-infoPage-1"
   title="Information"
 >
-  <Connect(ProjectInfoContainer) />
+  <ProjectInfoContainer />
 </WithStyles(Page)>
 `;

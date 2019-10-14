@@ -47,7 +47,7 @@ const theme = createMuiTheme({
     colorLight: textLight,
     h4: {
       color: text,
-      margin: `${spacing * 4}px 0`,
+      margin: `${spacing * 5}px 0`,
     },
     h5: {
       color: text,
@@ -84,6 +84,14 @@ const theme = createMuiTheme({
       },
       contained: {
         boxShadow: 'none',
+      },
+    },
+    MuiTypography: {
+      projectKey: {
+        fontWeight: 200,
+        letterSpacing: '0.05em',
+        color: textLight,
+        textTransform: 'uppercase',
       },
     },
   },
