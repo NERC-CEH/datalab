@@ -24,36 +24,53 @@ const styles = theme => ({
   },
 });
 
+export const sortStacksByDisplayName = (a, b) => {
+  const dispA = a.displayName.toLowerCase();
+  const dispB = b.displayName.toLowerCase();
+
+  if (dispA < dispB) {
+    return -1;
+  }
+  if (dispA > dispB) {
+    return 1;
+  }
+  return 0;
+};
+
 const StackCards = ({ stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
-  userPermissions, createPermission, openPermission, deletePermission, editPermission, classes }) => (
-  <div className={classes.stackDiv}>
-    <div> {/* extra div enables working css styling of stack card */}
-      {stacks && stacks.length > 0
-        ? stacks.map(stack => (
-          <StackCard
-            key={stack.id}
-            stack={stack}
-            typeName={typeName}
-            openStack={openStack}
-            deleteStack={deleteStack}
-            editStack={editStack}
-            userPermissions={userPermissions(stack)}
-            openPermission={openPermission}
-            deletePermission={deletePermission}
-            editPermission={editPermission}
-          />))
-        : <div className={classes.noItemsMessage}>
+  userPermissions, createPermission, openPermission, deletePermission, editPermission, classes }) => {
+  const sortedStacks = [...stacks];
+  sortedStacks.sort(sortStacksByDisplayName);
+  return (
+    <div className={classes.stackDiv}>
+      <div> {/* extra div enables working css styling of stack card */}
+        {sortedStacks && sortedStacks.length > 0
+          ? sortedStacks.map(stack => (
+            <StackCard
+              key={stack.id}
+              stack={stack}
+              typeName={typeName}
+              openStack={openStack}
+              deleteStack={deleteStack}
+              editStack={editStack}
+              userPermissions={userPermissions(stack)}
+              openPermission={openPermission}
+              deletePermission={deletePermission}
+              editPermission={editPermission}
+            />))
+          : <div className={classes.noItemsMessage}>
             <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
           </div>
-      }
-    </div>
-    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
-      <div className={classes.bottomControlDiv}>
-        <NewStackButton onClick={openCreationForm} typeName={typeName} />
+        }
       </div>
-    </PermissionWrapper>
-  </div>
-);
+      <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
+        <div className={classes.bottomControlDiv}>
+          <NewStackButton onClick={openCreationForm} typeName={typeName} />
+        </div>
+      </PermissionWrapper>
+    </div>
+  );
+};
 
 export default withStyles(styles)(StackCards);
 
