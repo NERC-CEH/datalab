@@ -14,19 +14,24 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
           "logo": "jupyter-logo.svg",
         }
       }
-      className="StackCard-cardImage-7"
+      className="StackCard-cardImage-9"
       src="jupyter-logo.svg"
     />
   </div>
   <div
     className="StackCard-textDiv-3"
   >
-    <WithStyles(ForwardRef(Typography))
-      className="StackCard-displayName-4"
-      variant="h5"
+    <div
+      className="StackCard-displayNameContainer-5"
     >
-      name1
-    </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        className="StackCard-displayName-4"
+        noWrap={true}
+        variant="h5"
+      >
+        name1
+      </WithStyles(ForwardRef(Typography))>
+    </div>
     <WithStyles(Tooltip)
       placement="bottom-start"
       title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
@@ -40,7 +45,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-5"
+    className="StackCard-actionsDiv-7"
   />
 </div>
 `;
@@ -59,19 +64,24 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
           "logo": "zeppelin-logo.svg",
         }
       }
-      className="StackCard-cardImage-7"
+      className="StackCard-cardImage-9"
       src="zeppelin-logo.svg"
     />
   </div>
   <div
     className="StackCard-textDiv-3"
   >
-    <WithStyles(ForwardRef(Typography))
-      className="StackCard-displayName-4"
-      variant="h5"
+    <div
+      className="StackCard-displayNameContainer-5"
     >
-      name1
-    </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        className="StackCard-displayName-4"
+        noWrap={true}
+        variant="h5"
+      >
+        name1
+      </WithStyles(ForwardRef(Typography))>
+    </div>
     <WithStyles(Tooltip)
       placement="bottom-start"
       title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
@@ -85,7 +95,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-5"
+    className="StackCard-actionsDiv-7"
   />
 </div>
 `;
@@ -98,7 +108,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
     className="StackCard-imageDiv-2"
   >
     <WithStyles(ForwardRef(Icon))
-      className="StackCard-cardIcon-8"
+      className="StackCard-cardIcon-10"
     >
       create
     </WithStyles(ForwardRef(Icon))>
@@ -106,12 +116,17 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
   <div
     className="StackCard-textDiv-3"
   >
-    <WithStyles(ForwardRef(Typography))
-      className="StackCard-displayName-4"
-      variant="h5"
+    <div
+      className="StackCard-displayNameContainer-5"
     >
-      Display Name
-    </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        className="StackCard-displayName-4"
+        noWrap={true}
+        variant="h5"
+      >
+        Display Name
+      </WithStyles(ForwardRef(Typography))>
+    </div>
     <WithStyles(Tooltip)
       placement="bottom-start"
       title="A description of the typeName purpose"
@@ -125,7 +140,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-5"
+    className="StackCard-actionsDiv-7"
   />
 </div>
 `;
@@ -144,19 +159,24 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
           "logo": "jupyter-logo.svg",
         }
       }
-      className="StackCard-cardImage-7"
+      className="StackCard-cardImage-9"
       src="jupyter-logo.svg"
     />
   </div>
   <div
     className="StackCard-textDiv-3"
   >
-    <WithStyles(ForwardRef(Typography))
-      className="StackCard-displayName-4"
-      variant="h5"
+    <div
+      className="StackCard-displayNameContainer-5"
     >
-      name1
-    </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        className="StackCard-displayName-4"
+        noWrap={true}
+        variant="h5"
+      >
+        name1
+      </WithStyles(ForwardRef(Typography))>
+    </div>
     <WithStyles(Tooltip)
       placement="bottom-start"
       title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
@@ -170,10 +190,10 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     </WithStyles(Tooltip)>
   </div>
   <div
-    className="StackCard-actionsDiv-5"
+    className="StackCard-actionsDiv-7"
   >
     <div
-      className="StackCard-statusDiv-6"
+      className="StackCard-statusDiv-8"
     >
       <WithStyles(StackStatus)
         status="ready"
