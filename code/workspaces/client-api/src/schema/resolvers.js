@@ -17,7 +17,7 @@ const { usersPermissions: { USERS_LIST } } = permissionTypes;
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 const { elementPermissions: { PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
-const { elementPermissions: { SETTINGS_READ, SETTINGS_EDIT } } = permissionTypes;
+const { elementPermissions: { SETTINGS_EDIT } } = permissionTypes;
 const { READY } = statusTypes;
 
 const DATALAB_NAME = config.get('datalabName');
@@ -39,7 +39,7 @@ const resolvers = {
     checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(PROJECT_KEY, name, token)),
     users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
     projects: (obj, args, { token }) => projectService.listProjects(token),
-    project: (obj, args, { user, token }) => projectPermissionWrapper(args, SETTINGS_READ, user, () => projectService.getProjectByKey(args.projectKey, token)),
+    project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
     checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
   },
 

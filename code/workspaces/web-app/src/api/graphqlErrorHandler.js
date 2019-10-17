@@ -12,7 +12,7 @@ function errorHandler(pathToData, ignoreError) {
       const firstError = errors[0];
 
       if (firstError) {
-        throw new Error(firstError.message || firstError);
+        return Promise.reject(firstError.message || firstError);
       }
     }
 

@@ -4,6 +4,7 @@ exports[`ProjectTitleContainer is a connected component which binds correct acti
 Array [
   "loadProjects",
   "setCurrentProject",
+  "clearCurrentProject",
   "createProject",
   "deleteProject",
   "checkProjectKeyUniqueness",

@@ -111,7 +111,7 @@ describe('createRoute', () => {
 });
 
 describe('getSwitcherProjects', () => {
-  it('filters projects to only return those accessible to user and currentProject', () => {
+  it('filters projects to only return those accessible to user and currentProject if defined', () => {
     expect(getSwitcherProjects(state.projects, state.currentProject)).toEqual({
       fetching: false,
       error: null,
@@ -129,6 +129,16 @@ describe('getSwitcherProjects', () => {
         testProj,
         { key: 'projthree', name: 'Project Three', accessible: true },
         nonAccessibleProj.value,
+      ],
+    });
+
+    const undefCurrentProj = { ...state.currentProject, value: {} };
+    expect(getSwitcherProjects(state.projects, undefCurrentProj)).toEqual({
+      fetching: false,
+      error: null,
+      value: [
+        testProj,
+        { key: 'projthree', name: 'Project Three', accessible: true },
       ],
     });
   });

@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sidebar correctly renders correct snapshot 1`] = `
+exports[`PureSideBar correctly renders correct snapshot 1`] = `
 <div
-  className="SideBar-sideBar-2"
+  className="sideBar"
 >
   <WithStyles(ForwardRef(List))
-    className="SideBar-itemList-1"
+    className="itemList"
   >
     <InfoGroup
       classes={
         Object {
-          "itemList": "SideBar-itemList-1",
-          "sideBar": "SideBar-sideBar-2",
+          "itemList": "itemList",
+          "sideBar": "sideBar",
         }
       }
       projectKey="project99"
@@ -40,33 +40,27 @@ exports[`Sidebar correctly renders correct snapshot 1`] = `
 </div>
 `;
 
-exports[`Sidebar correctly renders correct snapshot 2`] = `
-<div
-  className="SideBarAnalysis-sideBar-4"
->
-  <WithStyles(ForwardRef(List))
-    className="SideBarAnalysis-itemList-3"
-  >
-    <AnalysisGroup
-      projectKey="project99"
-      userPermissions={
-        Array [
-          "projects:project99:storage:list",
-          "projects:project99:stacks:list",
-          "projects:project99:settings:list",
-        ]
-      }
-    />
-    <MiscGroup
-      projectKey="project99"
-      userPermissions={
-        Array [
-          "projects:project99:storage:list",
-          "projects:project99:stacks:list",
-          "projects:project99:settings:list",
-        ]
-      }
-    />
-  </WithStyles(ForwardRef(List))>
-</div>
+exports[`SideBar renders correctly passing props to children 1`] = `
+<SideBar
+  classes={
+    Object {
+      "itemList": "SideBar-itemList-1 itemList",
+      "sideBar": "SideBar-sideBar-2 sideBar",
+    }
+  }
+  projectKey={
+    Object {
+      "error": null,
+      "fetching": false,
+      "value": "project99",
+    }
+  }
+  userPermissions={
+    Array [
+      "projects:project99:storage:list",
+      "projects:project99:stacks:list",
+      "projects:project99:settings:list",
+    ]
+  }
+/>
 `;

@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClassWrapper correctly renders with children 1`] = `
+<div
+  className="className"
+>
+  <span>
+    Child Content
+  </span>
+</div>
+`;
+
+exports[`ClassWrapper renders with correct class name when className and fetchingClassName are defined and is fetching 1`] = `
+<div
+  className="className fetchingClassName"
+/>
+`;
+
+exports[`ClassWrapper renders with correct class name when className and fetchingClassName are defined and is not fetching 1`] = `
+<div
+  className="className"
+/>
+`;
+
+exports[`ClassWrapper renders with correct class name when only className is defined and is fetching 1`] = `
+<div
+  className="className"
+/>
+`;
+
+exports[`ClassWrapper renders with correct class name when only className is defined and is notFetching 1`] = `
+<div
+  className="className"
+/>
+`;
+
+exports[`ClassWrapper renders with correct class name when only fetchingClassNameDefined and is fetching 1`] = `
+<div
+  className="fetchingClassName"
+/>
+`;
+
+exports[`ClassWrapper renders with correct class name when only fetchingClassNameDefined and is not fetching 1`] = `
+<div
+  className=""
+/>
+`;
+
+exports[`PromisedContentWrapper with a className renders content inside a ClassWrapper when fetching 1`] = `
+<ClassWrapper
+  className="className"
+  fetchingClassName="fetchingClassName"
+  isFetching={true}
+>
+  <WithStyles(ForwardRef(CircularProgress))
+    size={40}
+  />
+</ClassWrapper>
+`;
+
+exports[`PromisedContentWrapper with a className renders content inside a ClassWrapper when not fetching 1`] = `
+<ClassWrapper
+  className="className"
+  fetchingClassName="fetchingClassName"
+  isFetching={false}
+>
+  <span>
+    Promise Value
+  </span>
+</ClassWrapper>
+`;
+
+exports[`PromisedContentWrapper with a width setting renders content inside a SizeWrapper when it is fetching 1`] = `
+<SizeWrapper
+  fullHeight={false}
+  fullWidth={true}
+>
+  <WithStyles(ForwardRef(CircularProgress))
+    size={40}
+  />
+</SizeWrapper>
+`;
+
+exports[`PromisedContentWrapper with a width setting renders without SizeWrapper when it is resolved 1`] = `
+<span>
+  Promise Value
+</span>
+`;
+
+exports[`PromisedContentWrapper with both className and width value renders to wrap content in both Size and Class Wrappers when fetching 1`] = `
+<SizeWrapper
+  fullHeight={false}
+  fullWidth={true}
+>
+  <ClassWrapper
+    className="className"
+    isFetching={true}
+  >
+    <WithStyles(ForwardRef(CircularProgress))
+      size={40}
+    />
+  </ClassWrapper>
+</SizeWrapper>
+`;
+
+exports[`PromisedContentWrapper with no classNames or widths renders children if the promise is resolved 1`] = `
+<span>
+  PromisedValue
+</span>
+`;
+
+exports[`PromisedContentWrapper with no classNames or widths renders spinner if fetching 1`] = `
+<WithStyles(ForwardRef(CircularProgress))
+  size={40}
+/>
+`;
+
+exports[`SizeWrapper correctly renders with children 1`] = `
+<div
+  className="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2 makeStyles-fullHeight-3"
+>
+  <span>
+    Child Content
+  </span>
+</div>
+`;
+
+exports[`SizeWrapper renders with correct classname when is fullHeight 1`] = `
+<div
+  className="makeStyles-fullSizeBase-1 makeStyles-fullHeight-3"
+/>
+`;
+
+exports[`SizeWrapper renders with correct classname when is fullHeight and fullWidth 1`] = `
+<div
+  className="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2 makeStyles-fullHeight-3"
+/>
+`;
+
+exports[`SizeWrapper renders with correct classname when is fullWidth 1`] = `
+<div
+  className="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2"
+/>
+`;

@@ -2,17 +2,10 @@
 
 exports[`ProjectSwitcher renders to match snapshot passing correct parameters to children 1`] = `
 <PromisedContentWrapper
-  completeClassName="ProjectSwitcher-promisedContent-2"
-  fetchingClassName="ProjectSwitcher-promisedContent-2"
+  className="ProjectSwitcher-promisedContent-2"
   promise={
     Object {
-      "error": null,
       "fetching": false,
-      "value": Object {
-        "accessible": true,
-        "key": "testproj",
-        "name": "Test Project",
-      },
     }
   }
 >

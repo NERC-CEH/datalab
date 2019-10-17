@@ -1,107 +1,38 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { createShallow, createMount } from '@material-ui/core/test-utils';
+import { shallow } from 'enzyme';
 import { permissionTypes } from 'common';
-import SideBar, { StyledSideBarAnalysis } from './SideBar';
+import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import SideBar, { PureSideBar } from './SideBar';
+
+jest.mock('../../hooks/useCurrentProjectKey');
 
 const { PROJECT_NAMESPACE } = permissionTypes;
 
-describe('Sidebar', () => {
-  const userPermissions = [`${PROJECT_NAMESPACE}:project99:storage:list`, `${PROJECT_NAMESPACE}:project99:stacks:list`, `${PROJECT_NAMESPACE}:project99:settings:list`];
-  const projectKey = 'project99';
+const classes = {
+  itemList: 'itemList',
+  sideBar: 'sideBar',
+};
 
-  function shallowRenderSideBar() {
-    const shallow = createShallow({ dive: true });
-    const props = { userPermissions, projectKey };
+const userPermissions = [
+  `${PROJECT_NAMESPACE}:project99:storage:list`,
+  `${PROJECT_NAMESPACE}:project99:stacks:list`,
+  `${PROJECT_NAMESPACE}:project99:settings:list`,
+];
 
-    return shallow(<SideBar {...props} />);
-  }
+const projectKey = { fetching: false, error: null, value: 'project99' };
 
-  function shallowRenderStyledSideBarAnalysis() {
-    const shallow = createShallow({ dive: true });
-    const props = { userPermissions, projectKey };
+useCurrentProjectKey.mockReturnValue(projectKey);
 
-    return shallow(<StyledSideBarAnalysis {...props} />);
-  }
+describe('SideBar', () => {
+  it('renders correctly passing props to children', () => {
+    const props = { userPermissions, projectKey, classes };
+    expect(shallow(<SideBar {...props} />)).toMatchSnapshot();
+  });
+});
 
-  function fullRender(path) {
-    const mount = createMount();
-    const props = { userPermissions, projectKey };
-
-    return mount(
-      <MemoryRouter initialEntries={path}>
-        <StyledSideBarAnalysis {...props} />
-      </MemoryRouter>,
-    );
-  }
-
+describe('PureSideBar', () => {
   it('correctly renders correct snapshot', () => {
-    expect(shallowRenderSideBar()).toMatchSnapshot();
-    expect(shallowRenderStyledSideBarAnalysis()).toMatchSnapshot();
-  });
-
-  it('renders "Storage" label as active when on /storage route', () => {
-    // Arrange
-    const linkPath = '/projects/project99/storage';
-    const linkName = 'Storage';
-    const iconName = 'storage';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
-  });
-
-  it('renders "Notebooks" label as active when on /storage route', () => {
-    // Arrange
-    const linkPath = '/projects/project99/notebooks';
-    const linkName = 'Notebooks';
-    const iconName = 'book';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
-  });
-
-  it('renders "Sites" label as active when on /publishing route', () => {
-    // Arrange
-    const linkPath = '/projects/project99/publishing';
-    const linkName = 'Sites';
-    const iconName = 'web';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
-  });
-
-  it('renders "Dask" label as active when on /dask route', () => {
-    // Arrange
-    const linkPath = '/projects/project99/dask';
-    const linkName = 'Dask';
-    const iconName = 'apps';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
-  });
-
-  it('renders "Spark" label as active when on /spark route', () => {
-    // Arrange
-    const linkPath = '/projects/project99/spark';
-    const linkName = 'Spark';
-    const iconName = 'apps';
-
-    // Act
-    const output = fullRender([linkPath]);
-
-    // Assert
-    expect(output.find({ href: linkPath })).toHaveText(`${iconName}${linkName}`);
+    const props = { userPermissions, projectKey, classes };
+    expect(shallow(<PureSideBar {...props} />)).toMatchSnapshot();
   });
 });

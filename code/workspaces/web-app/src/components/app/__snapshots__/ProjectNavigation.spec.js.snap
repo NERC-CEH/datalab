@@ -5,7 +5,6 @@ exports[`ProjectNavigation renders the correct snapshot 1`] = `
   className="ProjectNavigation-projectNavigation-1 projectNavigation"
 >
   <WithStyles(SideBar)
-    projectKey="testproj"
     userPermissions="userPermissions"
   />
   <div

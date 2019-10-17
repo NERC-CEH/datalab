@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import RoutePermissions from './RoutePermissionWrapper';
@@ -107,6 +107,21 @@ describe('RoutePermissionWrapper', () => {
 
     // Assert
     expect(output.prop('children')).toBe('Has Permission');
+  });
+
+  it('renders redirect when permissions do not match and redirectTo supplied', () => {
+    const promisedUserPermissions = {
+      error: null,
+      fetching: false,
+      value: ['notMatchingPermission'],
+    };
+    const redirectTo = 'redirect/to/this/path';
+    const props = generateProps({ promisedUserPermissions, redirectTo });
+
+    const output = fullRender(props).find(Route);
+    const renderMethod = output.prop('render');
+
+    expect(renderMethod()).toMatchSnapshot();
   });
 
   it('renders alt component when permissions do not match', () => {

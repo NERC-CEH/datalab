@@ -19,6 +19,7 @@ const style = theme => ({
   },
   promisedContent: {
     width: '100%',
+    minHeight: 50,
     display: 'flex',
     justifyContent: 'center',
     margin: `${theme.spacing(2)}px 0`,
@@ -55,7 +56,7 @@ export function getSwitcherProjects(projects, currentProject) {
   }
 
   const accessible = projects.value.filter(item => item.accessible);
-  if (!accessible.map(item => item.key).includes(currentProject.value.key)) {
+  if (currentProject.value.key && !accessible.map(item => item.key).includes(currentProject.value.key)) {
     accessible.push(currentProject.value);
   }
 
@@ -78,7 +79,9 @@ function ProjectSwitcher({ classes }) {
   const switcherProjects = getSwitcherProjects(projects, currentProject);
 
   return (
-    <PromisedContentWrapper fetchingClassName={classes.promisedContent} completeClassName={classes.promisedContent} promise={currentProject}>
+    <PromisedContentWrapper
+      className={classes.promisedContent}
+      promise={{ fetching: currentProject.fetching || !currentProject.value.key }}>
       <Switcher
         switcherProjects={switcherProjects}
         currentProject={currentProject}
