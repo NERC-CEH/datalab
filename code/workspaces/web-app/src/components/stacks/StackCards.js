@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { sortBy } from 'lodash';
 import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
@@ -24,23 +25,9 @@ const styles = theme => ({
   },
 });
 
-export const sortStacksByDisplayName = (a, b) => {
-  const dispA = a.displayName.toLowerCase();
-  const dispB = b.displayName.toLowerCase();
-
-  if (dispA < dispB) {
-    return -1;
-  }
-  if (dispA > dispB) {
-    return 1;
-  }
-  return 0;
-};
-
 const StackCards = ({ stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
   userPermissions, createPermission, openPermission, deletePermission, editPermission, classes }) => {
-  const sortedStacks = [...stacks];
-  sortedStacks.sort(sortStacksByDisplayName);
+  const sortedStacks = sortBy(stacks, stack => stack.displayName.toLowerCase());
   return (
     <div className={classes.stackDiv}>
       <div> {/* extra div enables working css styling of stack card */}

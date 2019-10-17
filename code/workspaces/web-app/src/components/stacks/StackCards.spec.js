@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import StackCards, { sortStacksByDisplayName } from './StackCards';
+import StackCards from './StackCards';
 
 describe('StackCards', () => {
   function shallowRender(props) {
@@ -44,24 +44,5 @@ describe('StackCards', () => {
 
     // Assert
     expect(output).toMatchSnapshot();
-  });
-});
-
-describe('sortByDisplayName', () => {
-  const sortsFirst = { displayName: 'A Project' };
-  const sortsSecond = { displayName: 'Data Analysis Project' };
-  const sortsThird = { displayName: 'Zebra Stripe Effects' };
-
-  const orderedStacks = [sortsFirst, sortsSecond, sortsThird];
-
-  it('correctly sorts stacks alphabetically descending by their displayName', () => {
-    const stacksOne = [sortsThird, sortsFirst, sortsSecond];
-    expect(stacksOne.sort(sortStacksByDisplayName)).toEqual(orderedStacks);
-
-    const stacksTwo = [sortsThird, sortsSecond, sortsFirst];
-    expect(stacksTwo.sort(sortStacksByDisplayName)).toEqual(orderedStacks);
-
-    const stacksThree = [sortsFirst, sortsSecond, sortsThird];
-    expect(stacksThree.sort(sortStacksByDisplayName)).toEqual(orderedStacks);
   });
 });
