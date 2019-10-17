@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { reset } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { permissionTypes } from 'common';
@@ -10,7 +11,6 @@ import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
 import projectSelectors from '../../selectors/projectsSelectors';
 import modalDialogActions from '../../actions/modalDialogActions';
-import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import StackCards from '../../components/stacks/StackCards';
 import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
@@ -18,6 +18,7 @@ import notify from '../../components/common/notify';
 const TYPE_NAME = 'Project';
 const TYPE_NAME_PLURAL = 'Projects';
 const PROJECT_OPEN_PERMISSION = 'project.open';
+const FORM_NAME = 'createProject';
 
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
@@ -51,10 +52,11 @@ const projectToStack = project => ({
   status: 'ready',
 });
 
-const stackMatchesFilter = ({ displayName, description }, searchText) => {
+const stackMatchesFilter = ({ displayName, description, key }, searchText) => {
   const filter = searchText.toLowerCase();
   return displayName.toLowerCase().includes(filter)
-    || description.toLowerCase().includes(filter);
+    || description.toLowerCase().includes(filter)
+    || key.includes(filter);
 };
 
 class ProjectsContainer extends Component {
@@ -84,10 +86,18 @@ class ProjectsContainer extends Component {
     this.props.actions.loadProjects();
   }
 
-  adaptProjectsToStacks() {
-    return this.props.projects.value
-      ? this.props.projects.value.map(projectToStack)
-      : [];
+  adaptProjectsToStacks(projects) {
+    return {
+      ...projects,
+      value: projects.value ? projects.value.map(projectToStack) : [],
+    };
+  }
+
+  filterProjectStacks(projectStacks, searchText) {
+    return {
+      ...projectStacks,
+      value: projectStacks.value.filter(stack => stackMatchesFilter(stack, searchText)),
+    };
   }
 
   projectUserPermissions(project) {
@@ -100,6 +110,7 @@ class ProjectsContainer extends Component {
     this.props.actions.closeModalDialog();
     try {
       await this.props.actions.createProject(project);
+      await this.props.actions.resetForm(FORM_NAME);
       notify.success(`${TYPE_NAME} created`);
     } catch (error) {
       notify.error(`Unable to create ${TYPE_NAME}`);
@@ -165,25 +176,27 @@ class ProjectsContainer extends Component {
 
   render() {
     const { projects, history } = this.props;
+    const filteredStacks = this.filterProjectStacks(
+      this.adaptProjectsToStacks(projects),
+      this.state.searchText,
+    );
     return (
-      <PromisedContentWrapper promise={projects}>
-        <div>
-          {this.renderControls()}
-          <StackCards
-            stacks={this.adaptProjectsToStacks().filter(stack => stackMatchesFilter(stack, this.state.searchText))}
-            typeName={TYPE_NAME}
-            typeNamePlural={TYPE_NAME_PLURAL}
-            openStack={project => history.push(`/projects/${project.key}/info`)}
-            deleteStack={this.confirmDeleteProject}
-            openCreationForm={this.openCreationForm}
-            userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
-            createPermission={SYSTEM_INSTANCE_ADMIN}
-            openPermission={PROJECT_OPEN_PERMISSION}
-            deletePermission=""
-            editPermission=""
-          />
-        </div>
-      </PromisedContentWrapper>
+      <div>
+        {this.renderControls()}
+        <StackCards
+          stacks={filteredStacks}
+          typeName={TYPE_NAME}
+          typeNamePlural={TYPE_NAME_PLURAL}
+          openStack={project => history.push(`/projects/${project.key}/info`)}
+          deleteStack={this.confirmDeleteProject}
+          openCreationForm={this.openCreationForm}
+          userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
+          createPermission={SYSTEM_INSTANCE_ADMIN}
+          openPermission={PROJECT_OPEN_PERMISSION}
+          deletePermission=""
+          editPermission=""
+        />
+      </div>
     );
   }
 }
@@ -209,6 +222,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       ...projectActions,
       ...modalDialogActions,
+      resetForm: formStateName => reset(formStateName),
     }, dispatch),
   };
 }

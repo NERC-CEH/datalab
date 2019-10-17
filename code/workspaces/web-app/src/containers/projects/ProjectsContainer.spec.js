@@ -22,14 +22,15 @@ projectsService.loadProjects = loadProjectsMock;
 
 describe('ProjectsContainer', () => {
   describe('is a component which', () => {
-    it('can filter projects', () => {
+    it('can filter projects by name, key and description', () => {
       const stacks = projectsPayload.value.map(projectToStack);
       expect(stacks.length).toBe(1);
       const stack = stacks[0];
       expect(stackMatchesFilter(stack, '')).toBe(true);
       expect(stackMatchesFilter(stack, 'A project name')).toBe(true);
       expect(stackMatchesFilter(stack, 'A project description')).toBe(true);
-      expect(stackMatchesFilter(stack, 'project2')).toBe(false);
+      expect(stackMatchesFilter(stack, 'project2')).toBe(true);
+      expect(stackMatchesFilter(stack, 'missing search')).toBe(false);
     });
   });
 
@@ -132,7 +133,9 @@ describe('ProjectsContainer', () => {
   describe('has methods', () => {
     const openModalDialogMock = jest.fn().mockName('openModalDialog');
     const closeModalDialogMock = jest.fn().mockName('closeModalDialog');
+    const createProjectMock = jest.fn().mockName('createProject');
     const deleteProjectMock = jest.fn().mockName('deleteProject');
+    const resetFormMock = jest.fn().mockName('resetForm');
 
     const props = {
       projects: { fetching: false, value: projectsPayload.value },
@@ -141,7 +144,9 @@ describe('ProjectsContainer', () => {
         loadProjects: loadProjectsMock,
         openModalDialog: openModalDialogMock,
         closeModalDialog: closeModalDialogMock,
+        createProject: createProjectMock,
         deleteProject: deleteProjectMock,
+        resetForm: resetFormMock,
       },
       classes: { controlContainer: 'controlContainer', searchTextField: 'searchTextField' },
     };
@@ -159,6 +164,35 @@ describe('ProjectsContainer', () => {
         containerInstance.confirmDeleteProject(projectInfo);
         expect(openModalDialogMock).toHaveBeenCalledTimes(1);
         expect(openModalDialogMock.mock.calls[0]).toMatchSnapshot();
+      });
+    });
+
+    describe('onCreateProjectSubmit', () => {
+      it('calls action to create project with project info', async () => {
+        await containerInstance.onCreateProjectSubmit(projectInfo);
+        expect(createProjectMock).toHaveBeenCalledTimes(1);
+        expect(createProjectMock).toHaveBeenCalledWith(projectInfo);
+      });
+
+      describe('on successful creation', () => {
+        it('calls to clear the form using form name', async () => {
+          await containerInstance.onCreateProjectSubmit(projectInfo);
+          expect(resetFormMock).toHaveBeenCalledTimes(1);
+          expect(resetFormMock).toHaveBeenCalledWith('createProject');
+        });
+
+        it('notifies the success', async () => {
+          await containerInstance.onCreateProjectSubmit(projectInfo);
+          expect(notify.success).toHaveBeenCalledTimes(1);
+        });
+      });
+
+      describe('on failed creation', () => {
+        it('notifies of failure', async () => {
+          createProjectMock.mockImplementationOnce(() => { throw new Error(); });
+          await containerInstance.onCreateProjectSubmit(projectInfo);
+          expect(notify.error).toHaveBeenCalledTimes(1);
+        });
       });
     });
 

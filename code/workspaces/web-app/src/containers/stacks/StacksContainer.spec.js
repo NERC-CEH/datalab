@@ -109,7 +109,7 @@ describe('StacksContainer', () => {
         closeModalDialog: closeModalDialogMock,
         resetForm: restFormMock,
       },
-      projectKey: 'projtest',
+      projectKey: { fetching: false, value: 'projtest' },
     });
 
     beforeEach(() => jest.clearAllMocks());
@@ -154,7 +154,7 @@ describe('StacksContainer', () => {
       getUrlMock.mockReturnValue(Promise.resolve({ value: { redirectUrl: 'expectedUrl' } }));
       const props = generateProps();
       const output = shallowRenderPure(props);
-      const openStack = output.childAt(0).prop('openStack');
+      const openStack = output.prop('openStack');
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
@@ -173,7 +173,7 @@ describe('StacksContainer', () => {
       getUrlMock.mockReturnValue(Promise.reject(new Error('no url')));
       const props = generateProps();
       const output = shallowRenderPure(props);
-      const openStack = output.childAt(0).prop('openStack');
+      const openStack = output.prop('openStack');
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
@@ -194,7 +194,7 @@ describe('StacksContainer', () => {
 
       // Act/Assert
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       deleteStack(stack);
       expect(openModalDialogMock).toHaveBeenCalledTimes(1);
@@ -209,7 +209,7 @@ describe('StacksContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
 
       // Assert
@@ -226,7 +226,7 @@ describe('StacksContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
 
@@ -246,7 +246,7 @@ describe('StacksContainer', () => {
 
       // Act/Assert
       const output = shallowRenderPure(props);
-      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      const openCreationForm = output.prop('openCreationForm');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       openCreationForm(stack);
       expect(openModalDialogMock).toHaveBeenCalledTimes(1);
@@ -261,7 +261,7 @@ describe('StacksContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      const openCreationForm = output.prop('openCreationForm');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       openCreationForm(stack);
 
@@ -279,7 +279,7 @@ describe('StacksContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      const openCreationForm = output.prop('openCreationForm');
       openCreationForm();
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
 

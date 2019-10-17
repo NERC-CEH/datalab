@@ -128,7 +128,7 @@ describe('DataStorageContainer', () => {
       getCredentialsMock.mockReturnValue(Promise.resolve({ value: { url: 'expectedUrl', accessKey: 'expectedKey' } }));
       const props = generateProps();
       const output = shallowRenderPure(props);
-      const openStack = output.childAt(0).prop('openStack');
+      const openStack = output.prop('openStack');
 
       // Act/Assert
       expect(getCredentialsMock).not.toHaveBeenCalled();
@@ -149,7 +149,7 @@ describe('DataStorageContainer', () => {
 
       // Act/Assert
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       deleteStack(stack);
       expect(openModalDialogMock).toHaveBeenCalledTimes(1);
@@ -164,7 +164,7 @@ describe('DataStorageContainer', () => {
 
       // Act/Assert
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       deleteStack(stack);
       expect(openModalDialogMock).toHaveBeenCalledTimes(1);
@@ -179,7 +179,7 @@ describe('DataStorageContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
 
       // Assert
@@ -196,7 +196,7 @@ describe('DataStorageContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
 
       // Assert
@@ -213,7 +213,7 @@ describe('DataStorageContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const deleteStack = output.childAt(0).prop('deleteStack');
+      const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
 
@@ -233,7 +233,7 @@ describe('DataStorageContainer', () => {
 
       // Act/Assert
       const output = shallowRenderPure(props);
-      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      const openCreationForm = output.prop('openCreationForm');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       openCreationForm(stack);
       expect(openModalDialogMock).toHaveBeenCalledTimes(1);
@@ -248,7 +248,7 @@ describe('DataStorageContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      const openCreationForm = output.prop('openCreationForm');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       openCreationForm(stack);
 
@@ -266,7 +266,7 @@ describe('DataStorageContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const openCreationForm = output.childAt(0).prop('openCreationForm');
+      const openCreationForm = output.prop('openCreationForm');
       openCreationForm();
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
 
@@ -289,7 +289,7 @@ describe('DataStorageContainer', () => {
 
       // Act
       const output = shallowRenderPure(props);
-      const editStack = output.childAt(0).prop('editStack');
+      const editStack = output.prop('editStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       editStack(stack);
 

@@ -50,6 +50,8 @@ describe('Switcher', () => {
   const classes = {
     switcher: 'switcher',
     dropdownProgress: 'dropdownProgress',
+    itemContent: 'itemContent',
+    itemKey: 'itemKey',
   };
 
   const location = {

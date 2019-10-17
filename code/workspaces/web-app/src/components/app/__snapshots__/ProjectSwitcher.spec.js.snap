@@ -2,7 +2,8 @@
 
 exports[`ProjectSwitcher renders to match snapshot passing correct parameters to children 1`] = `
 <PromisedContentWrapper
-  className="ProjectSwitcher-promisedContent-2"
+  completeClassName="ProjectSwitcher-promisedContent-2"
+  fetchingClassName="ProjectSwitcher-promisedContent-2"
   promise={
     Object {
       "error": null,
@@ -19,6 +20,8 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
     classes={
       Object {
         "dropdownProgress": "ProjectSwitcher-dropdownProgress-3",
+        "itemContent": "ProjectSwitcher-itemContent-4",
+        "itemKey": "ProjectSwitcher-itemKey-5",
         "promisedContent": "ProjectSwitcher-promisedContent-2",
         "switcher": "ProjectSwitcher-switcher-1",
       }
@@ -105,7 +108,21 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
     to="/projects/testproj/info"
     value="testproj"
   >
-    Test Project
+    <div
+      className="itemContent"
+    >
+      <WithStyles(ForwardRef(Typography))
+        noWrap={true}
+        variant="body1"
+      >
+        Test Project
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        className="itemKey"
+      >
+        (testproj)
+      </WithStyles(ForwardRef(Typography))>
+    </div>
   </WithStyles(ForwardRef(MenuItem))>
   <WithStyles(ForwardRef(MenuItem))
     component={[Function]}
@@ -113,7 +130,21 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
     to="/projects/projthree/info"
     value="projthree"
   >
-    Project Three
+    <div
+      className="itemContent"
+    >
+      <WithStyles(ForwardRef(Typography))
+        noWrap={true}
+        variant="body1"
+      >
+        Project Three
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        className="itemKey"
+      >
+        (projthree)
+      </WithStyles(ForwardRef(Typography))>
+    </div>
   </WithStyles(ForwardRef(MenuItem))>
 </WithStyles(ForwardRef(TextField))>
 `;

@@ -4,6 +4,8 @@ exports[`StacksContainer is a connected component which binds correct actions 1`
 Array [
   "loadStacks",
   "loadStacksByCategory",
+  "updateStacks",
+  "updateStacksByCategory",
   "getUrl",
   "openStack",
   "createStack",
@@ -29,8 +31,15 @@ Object {
 `;
 
 exports[`StacksContainer is a container which passes correct props to StackCard 1`] = `
-<PromisedContentWrapper
-  promise={
+<WithStyles(StackCards)
+  createPermission="projects:projtest:stacks:create"
+  deletePermission="projects:projtest:stacks:delete"
+  deleteStack={[Function]}
+  editPermission="projects:projtest:stacks:edit"
+  openCreationForm={[Function]}
+  openPermission="projects:projtest:stacks:open"
+  openStack={[Function]}
+  stacks={
     Object {
       "fetching": false,
       "value": Array [
@@ -43,27 +52,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
       ],
     }
   }
->
-  <WithStyles(StackCards)
-    createPermission="projects:projtest:stacks:create"
-    deletePermission="projects:projtest:stacks:delete"
-    deleteStack={[Function]}
-    editPermission="projects:projtest:stacks:edit"
-    openCreationForm={[Function]}
-    openPermission="projects:projtest:stacks:open"
-    openStack={[Function]}
-    stacks={
-      Array [
-        Object {
-          "prop": "prop1",
-        },
-        Object {
-          "prop": "prop2",
-        },
-      ]
-    }
-    typeName="Notebook"
-    userPermissions={[Function]}
-  />
-</PromisedContentWrapper>
+  typeName="Notebook"
+  userPermissions={[Function]}
+/>
 `;

@@ -41,6 +41,19 @@ function styles(theme) {
     displayName: {
       marginTop: 0,
     },
+    displayNameContainer: {
+      display: 'inline-flex',
+      alignItems: 'center',
+    },
+    projectKey: {
+      marginTop: 0,
+      marginLeft: theme.spacing(3),
+      marginBottom: theme.typography.h5.marginBottom,
+      fontWeight: 200,
+      letterSpacing: '0.05em',
+      color: theme.typography.colorLight,
+      textTransform: 'uppercase',
+    },
     actionsDiv: {
       display: 'inline-flex',
       flexDirection: 'column',
@@ -82,7 +95,10 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
       {generateGetImage(classes)(stack)}
     </div>
     <div className={classes.textDiv}>
-      <Typography variant="h5" className={classes.displayName}>{getDisplayName(stack)}</Typography>
+      <div className={classes.displayNameContainer}>
+        <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
+        {typeName === 'Project' ? <Typography className={classes.projectKey}>({stack.key})</Typography> : null}
+      </div>
       <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
         <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>
       </Tooltip>

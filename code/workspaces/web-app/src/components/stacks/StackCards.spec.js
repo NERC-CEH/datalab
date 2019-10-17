@@ -8,11 +8,14 @@ describe('StackCards', () => {
   }
 
   const generateProps = () => ({
-    stacks: [
-      { displayName: 'name1', id: '1', type: 'type1' },
-      { displayName: 'name2', id: '2', type: 'type2' },
-      { displayName: 'name3', id: '3', type: 'type3' },
-    ],
+    stacks: {
+      fetching: false,
+      value: [
+        { displayName: 'name1', id: '1', type: 'type1' },
+        { displayName: 'name2', id: '2', type: 'type2' },
+        { displayName: 'name3', id: '3', type: 'type3' },
+      ],
+    },
     typeName: 'expectedTypeName',
     openStack: () => {},
     deleteStack: () => {},
@@ -24,12 +27,12 @@ describe('StackCards', () => {
     editPermission: 'edit',
   });
 
-  it('creates correct snapshot for an array of notebooks', () => {
+  it('creates correct snapshot for an array of stacks', () => {
     // Arrange
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    const output = shallowRender(props).dive();
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -37,10 +40,10 @@ describe('StackCards', () => {
 
   it('creates correct snapshot for an empty array', () => {
     // Arrange
-    const props = { ...generateProps(), stacks: [] };
+    const props = { ...generateProps(), stacks: { fetching: false, value: [] } };
 
     // Act
-    const output = shallowRender(props);
+    const output = shallowRender(props).dive();
 
     // Assert
     expect(output).toMatchSnapshot();
