@@ -5,6 +5,7 @@ import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { statusTypes } from 'common';
+import ProjectKey from '../common/typography/ProjectKey';
 import StackCardActions from './StackCardActions';
 import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
@@ -89,7 +90,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
     <div className={classes.textDiv}>
       <div className={classes.displayNameContainer}>
         <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
-        {typeName === 'Project' ? <Typography variant="projectKey">({stack.key})</Typography> : null}
+        {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
       </div>
       <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
         <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>

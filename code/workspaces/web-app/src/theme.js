@@ -86,14 +86,6 @@ const theme = createMuiTheme({
         boxShadow: 'none',
       },
     },
-    MuiTypography: {
-      projectKey: {
-        fontWeight: 200,
-        letterSpacing: '0.05em',
-        color: textLight,
-        textTransform: 'uppercase',
-      },
-    },
   },
 });
 

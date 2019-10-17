@@ -65,14 +65,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
       >
         Test Project
       </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
+      <ProjectKey
         className="makeStyles-projectKey-3"
-        variant="projectKey"
       >
-        (
-        testproj
-        )
-      </WithStyles(ForwardRef(Typography))>
+        (testproj)
+      </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Typography))
       variant="body1"
@@ -110,14 +107,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
       >
         Test Project
       </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
+      <ProjectKey
         className="makeStyles-projectKey-3"
-        variant="projectKey"
       >
-        (
-        testproj
-        )
-      </WithStyles(ForwardRef(Typography))>
+        (testproj)
+      </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Typography))
       variant="body1"

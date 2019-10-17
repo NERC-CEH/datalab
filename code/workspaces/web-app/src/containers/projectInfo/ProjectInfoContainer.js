@@ -3,10 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import ProjectKey from '../../components/common/typography/ProjectKey';
 
-  shouldComponentUpdate(nextProps) {
-    const isFetching = nextProps.currentProject.fetching;
-    return !isFetching || this.props.currentProject.isFetching !== isFetching;
 const useStyles = makeStyles(theme => ({
   projectTitle: {
     marginRight: theme.spacing(2),
@@ -27,11 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   collaborationLinkHeading: {
     marginRight: theme.spacing(2),
-    textTransform: 'uppercase',
-    fontSize: '0.9rem',
     fontWeight: 'bold',
-    lineHeight: theme.typography.body1.lineHeight,
-    letterSpacing: '0.08em',
   },
 }));
 
@@ -49,7 +43,7 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
       <div>
         <div className={classes.projectTitleWrapper}>
           <Typography variant="h5" className={classes.projectTitle}>{name}</Typography>
-          <Typography variant="projectKey" className={classes.projectKey}>({key})</Typography>
+          <ProjectKey className={classes.projectKey}>{key && `(${key})`}</ProjectKey>
         </div>
         <Typography variant="body1">{description}</Typography>
         <CollaborationLink link={collaborationLink}/>
