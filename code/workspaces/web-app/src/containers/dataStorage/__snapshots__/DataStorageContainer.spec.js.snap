@@ -48,8 +48,16 @@ Object {
 `;
 
 exports[`DataStorageContainer is a container which passes correct props to StackCard 1`] = `
-<PromisedContentWrapper
-  promise={
+<WithStyles(StackCards)
+  createPermission="projects:project99:storage:create"
+  deletePermission="projects:project99:storage:delete"
+  deleteStack={[Function]}
+  editPermission="projects:project99:storage:edit"
+  editStack={[Function]}
+  openCreationForm={[Function]}
+  openPermission="projects:project99:storage:open"
+  openStack={[Function]}
+  stacks={
     Object {
       "fetching": false,
       "value": Array [
@@ -59,26 +67,8 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
       ],
     }
   }
->
-  <WithStyles(StackCards)
-    createPermission="projects:project99:storage:create"
-    deletePermission="projects:project99:storage:delete"
-    deleteStack={[Function]}
-    editPermission="projects:project99:storage:edit"
-    editStack={[Function]}
-    openCreationForm={[Function]}
-    openPermission="projects:project99:storage:open"
-    openStack={[Function]}
-    stacks={
-      Array [
-        Object {
-          "props": "expectedPropValue",
-        },
-      ]
-    }
-    typeName="Data Store"
-    typeNamePlural="Data Stores"
-    userPermissions={[Function]}
-  />
-</PromisedContentWrapper>
+  typeName="Data Store"
+  typeNamePlural="Data Stores"
+  userPermissions={[Function]}
+/>
 `;

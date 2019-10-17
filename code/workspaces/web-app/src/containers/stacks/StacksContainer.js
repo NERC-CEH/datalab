@@ -8,7 +8,6 @@ import { permissionTypes } from 'common';
 import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
-import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import projectSelectors from '../../selectors/projectsSelectors';
 import stackActions from '../../actions/stackActions';
 import StackCards from '../../components/stacks/StackCards';
@@ -26,24 +25,26 @@ class StacksContainer extends Component {
     this.deleteStack = this.deleteStack.bind(this);
     this.confirmDeleteStack = this.confirmDeleteStack.bind(this);
     this.loadStack = this.loadStack.bind(this);
+    this.updateStack = this.updateStack.bind(this);
+    this.setUpdateTimeout = this.setUpdateTimeout.bind(this);
   }
 
   openStack(stack) {
-    return this.props.actions.getUrl(this.props.projectKey, stack.id)
+    return this.props.actions.getUrl(this.props.projectKey.value, stack.id)
       .then(payload => this.props.actions.openStack(payload.value.redirectUrl))
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }
 
   createStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.createStack({ ...stack, projectKey: this.props.projectKey }))
+    .then(() => this.props.actions.createStack({ ...stack, projectKey: this.props.projectKey.value }))
     .then(() => this.props.actions.resetForm(this.props.formStateName))
     .then(() => notify.success(`${this.props.typeName} created`))
     .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType));
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
     title: `Create a ${this.props.typeName}`,
-    projectKey: this.props.projectKey,
+    projectKey: this.props.projectKey.value,
     onSubmit: this.createStack,
     onCancel: this.props.actions.closeModalDialog,
   });
@@ -52,7 +53,7 @@ class StacksContainer extends Component {
     .then(() => this.props.actions.deleteStack(stack))
     .then(() => notify.success(`${this.props.typeName} deleted`))
     .catch(err => notify.error(`Unable to delete ${this.props.typeName}`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType));
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
 
   confirmDeleteStack = stack => this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
     title: `Delete ${stack.displayName} ${this.props.typeName}`,
@@ -64,21 +65,31 @@ class StacksContainer extends Component {
 
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    return this.props.actions.loadStacksByCategory(this.props.projectKey, this.props.containerType)
-      .then(() => {
-        // If project key changes in state, another timer seemed to be being created
-        // rather than replacing the existing one (would still timeout when navigating to
-        // a different page). Clearing the timeout first seems to solve the issue.
-        if (this.timeout) {
-          clearTimeout(this.timeout);
-        }
-        this.timeout = setTimeout(this.loadStack, refreshTimeout);
-      })
+    return this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType)
+      .then(() => { this.setUpdateTimeout(); })
       .catch((() => {}));
   }
 
+  updateStack() {
+    this.props.actions.updateStacksByCategory(this.props.projectKey.value, this.props.containerType)
+      .then(() => {
+        this.setUpdateTimeout();
+      })
+      .catch(() => {});
+  }
+
+  setUpdateTimeout() {
+    // If project key changes in state, another timer seemed to be being created
+    // rather than replacing the existing one (would still timeout when navigating to
+    // a different page). Clearing the timeout first seems to solve the issue.
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(this.updateStack, refreshTimeout);
+  }
+
   componentWillMount() {
-    if (this.props.projectKey) {
+    if (this.props.projectKey.value) {
       this.loadStack();
     }
   }
@@ -88,33 +99,33 @@ class StacksContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const isFetching = nextProps.stacks.fetching;
-    const projectKeyChanged = this.props.projectKey !== nextProps.projectKey;
-    return !isFetching || projectKeyChanged;
+    return !nextProps.stacks.updating;
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.projectKey !== prevProps.projectKey) {
+    if (this.props.projectKey.value !== prevProps.projectKey.value) {
       this.loadStack();
     }
   }
 
   render() {
+    const stacksUpdatedFetching = {
+      ...this.props.stacks,
+      fetching: this.props.stacks.fetching || this.props.projectKey.fetching,
+    };
     return (
-      <PromisedContentWrapper promise={this.props.stacks}>
-        <StackCards
-          stacks={this.props.stacks.value}
-          typeName={this.props.typeName}
-          typeNamePlural={this.props.typeNamePlural}
-          openStack={this.openStack}
-          deleteStack={this.confirmDeleteStack}
-          openCreationForm={this.openCreationForm}
-          userPermissions={() => this.props.userPermissions}
-          createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey)}
-          openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey)}
-          deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey)}
-          editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey)} />
-      </PromisedContentWrapper>
+      <StackCards
+        stacks={stacksUpdatedFetching}
+        typeName={this.props.typeName}
+        typeNamePlural={this.props.typeNamePlural}
+        openStack={this.openStack}
+        deleteStack={this.confirmDeleteStack}
+        openCreationForm={this.openCreationForm}
+        userPermissions={() => this.props.userPermissions}
+        createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
+        openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey.value)}
+        deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey.value)}
+        editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey.value)} />
     );
   }
 }
@@ -140,13 +151,13 @@ StacksContainer.propTypes = {
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  projectKey: PropTypes.string.isRequired,
+  projectKey: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     stacks: state.stacks,
-    projectKey: projectSelectors.currentProjectKey(state).value || '',
+    projectKey: projectSelectors.currentProjectKey(state),
   };
 }
 
