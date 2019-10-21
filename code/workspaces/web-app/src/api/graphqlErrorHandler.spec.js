@@ -11,23 +11,23 @@ describe('GraphQL Error Handler', () => {
       .toBe('expectedValue');
   });
 
-  it('throws graphQL errors messages correctly', () => {
+  it('rejects promise with graphQL errors messages correctly', () => {
     const response = {
       errors: [{ message: 'something broke' }],
       data: { stacks: null },
     };
 
-    expect(() => errorHandler('data.stacks')(response))
-      .toThrowError('something broke');
+    expect(errorHandler('data.stacks')(response))
+      .rejects.toEqual('something broke');
   });
 
-  it('throws response errors correctly', () => {
+  it('rejects promise with throws response errors correctly', () => {
     const response = {
       errors: ['something broke'],
     };
 
-    expect(() => errorHandler('data.stacks')(response))
-      .toThrowError('something broke');
+    expect(errorHandler('data.stacks')(response))
+      .rejects.toEqual('something broke');
   });
 
   it('filters ignored errors correctly', () => {

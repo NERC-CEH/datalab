@@ -7,6 +7,7 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
 import ProjectSwitcher from './ProjectSwitcher';
+import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST }, projectKeyPermission } = permissionTypes;
 
@@ -63,21 +64,18 @@ const MiscGroup = ({ userPermissions, projectKey }) => (
   </SideBarGroup>
 );
 
-const SideBar = ({ classes, userPermissions, projectKey }) => (
-  <div className={classes.sideBar}>
-    <List className={classes.itemList}>
-      <InfoGroup classes={classes} projectKey={projectKey} />
-      <AnalysisGroup userPermissions={userPermissions} projectKey={projectKey} />
-      <MiscGroup userPermissions={userPermissions} projectKey={projectKey} />
-    </List>
-  </div>
-);
+const SideBar = ({ classes, userPermissions }) => <PureSideBar
+  classes={classes}
+  userPermissions={userPermissions}
+  projectKey={useCurrentProjectKey()}
+/>;
 
-const SideBarAnalysis = ({ classes, userPermissions, projectKey }) => (
+export const PureSideBar = ({ classes, userPermissions, projectKey }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
-      <AnalysisGroup userPermissions={userPermissions} projectKey={projectKey} />
-      <MiscGroup userPermissions={userPermissions} projectKey={projectKey} />
+      <InfoGroup classes={classes} projectKey={projectKey.value} />
+      <AnalysisGroup userPermissions={userPermissions} projectKey={projectKey.value} />
+      <MiscGroup userPermissions={userPermissions} projectKey={projectKey.value} />
     </List>
   </div>
 );
@@ -85,9 +83,16 @@ const SideBarAnalysis = ({ classes, userPermissions, projectKey }) => (
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  projectKey: PropTypes.string.isRequired,
 };
 
-const StyledSideBarAnalysis = withStyles(styles)(SideBarAnalysis);
-export { StyledSideBarAnalysis }; // export for testing
+PureSideBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  projectKey: PropTypes.shape({
+    fetching: PropTypes.bool.isRequired,
+    error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    value: PropTypes.string,
+  }),
+};
+
 export default withStyles(styles)(SideBar);

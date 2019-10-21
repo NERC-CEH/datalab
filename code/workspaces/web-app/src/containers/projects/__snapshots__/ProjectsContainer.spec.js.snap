@@ -21,6 +21,7 @@ exports[`ProjectsContainer is a connected component which binds correct actions 
 Array [
   "loadProjects",
   "setCurrentProject",
+  "clearCurrentProject",
   "createProject",
   "deleteProject",
   "checkProjectKeyUniqueness",

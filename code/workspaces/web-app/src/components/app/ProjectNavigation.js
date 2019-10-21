@@ -15,10 +15,10 @@ const style = () => ({
   },
 });
 
-function ProjectNavigation({ children, userPermissions, projectKey, classes }) {
+function ProjectNavigation({ children, userPermissions, classes }) {
   return (
     <div className={classes.projectNavigation}>
-      <SideBar userPermissions={userPermissions} projectKey={projectKey}/>
+      <SideBar userPermissions={userPermissions} />
       <div className={classes.contentArea}>
         {children}
       </div>

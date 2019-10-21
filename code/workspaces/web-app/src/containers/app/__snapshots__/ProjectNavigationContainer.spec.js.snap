@@ -2,11 +2,20 @@
 
 exports[`ProjectNavigationContainer renders to match snapshot passing correct project to children 1`] = `
 <PureProjectNavigationContainer
+  dispatch={[MockFunction dispatch]}
   match={
     Object {
       "params": Object {
         "projectKey": "testproj",
       },
+      "path": "projects/:projectKey",
+    }
+  }
+  projectKey={
+    Object {
+      "error": null,
+      "fetching": false,
+      "value": "testproj",
     }
   }
   promisedUserPermissions={
@@ -14,7 +23,7 @@ exports[`ProjectNavigationContainer renders to match snapshot passing correct pr
       "error": null,
       "fetching": false,
       "value": Array [
-        "expected:permission",
+        "projects:testproj:projects:read",
       ],
     }
   }
@@ -23,10 +32,9 @@ exports[`ProjectNavigationContainer renders to match snapshot passing correct pr
 
 exports[`PureProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
 <WithStyles(ProjectNavigation)
-  projectKey="testproj"
   userPermissions={
     Array [
-      "user:permissions",
+      "projects:testproj:projects:read",
     ]
   }
 >
@@ -34,81 +42,97 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
     <Route
       component={[Function]}
       exact={true}
-      path="projectspath/info"
+      path="projects/:projectKey/info"
     />
     <RoutePermissionWrapper
-      alt={[Function]}
       component={[Function]}
       exact={true}
-      path="projectspath/storage"
+      path="projects/:projectKey/storage"
       permission="projects:testproj:storage:list"
       promisedUserPermissions={
         Object {
+          "error": null,
           "fetching": false,
           "value": Array [
-            "user:permissions",
+            "projects:testproj:projects:read",
           ],
         }
       }
+      redirectTo="projects/testproj/info"
     />
     <RoutePermissionWrapper
-      alt={[Function]}
       component={[Function]}
       exact={true}
-      path="projectspath/notebooks"
+      path="projects/:projectKey/notebooks"
       permission="projects:testproj:stacks:list"
       promisedUserPermissions={
         Object {
+          "error": null,
           "fetching": false,
           "value": Array [
-            "user:permissions",
+            "projects:testproj:projects:read",
           ],
         }
       }
+      redirectTo="projects/testproj/info"
     />
     <RoutePermissionWrapper
-      alt={[Function]}
       component={[Function]}
       exact={true}
-      path="projectspath/publishing"
+      path="projects/:projectKey/publishing"
       permission="projects:testproj:stacks:list"
       promisedUserPermissions={
         Object {
+          "error": null,
           "fetching": false,
           "value": Array [
-            "user:permissions",
+            "projects:testproj:projects:read",
           ],
         }
       }
+      redirectTo="projects/testproj/info"
     />
     <RoutePermissionWrapper
-      alt={[Function]}
       component={[Function]}
       exact={true}
-      path="projectspath/settings"
+      path="projects/:projectKey/settings"
       permission="projects:testproj:settings:list"
       promisedUserPermissions={
         Object {
+          "error": null,
           "fetching": false,
           "value": Array [
-            "user:permissions",
+            "projects:testproj:projects:read",
           ],
         }
       }
+      redirectTo="projects/testproj/info"
     />
     <Route
       component={[Function]}
       exact={true}
-      path="projectspath/dask"
+      path="projects/:projectKey/dask"
     />
     <Route
       component={[Function]}
       exact={true}
-      path="projectspath/spark"
+      path="projects/:projectKey/spark"
     />
     <Route
       component={[Function]}
     />
   </Switch>
 </WithStyles(ProjectNavigation)>
+`;
+
+exports[`PureProjectNavigationContainer should redirect if there is an error getting the project key 1`] = `
+<Redirect
+  to="/projects"
+/>
+`;
+
+exports[`PureProjectNavigationContainer should redirect if user does not have read permission on project 1`] = `
+<Redirect
+  to="/projects"
+/>
 `;

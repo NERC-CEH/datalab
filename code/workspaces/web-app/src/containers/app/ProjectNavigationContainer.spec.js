@@ -1,87 +1,78 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
 import { shallow } from 'enzyme';
-import useShallowSelector from '../../hooks/useShallowSelector';
-import projectActions from '../../actions/projectActions';
+import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
 import ProjectNavigationContainer, { PureProjectNavigationContainer } from './ProjectNavigationContainer';
 
-jest.mock('../../hooks/useShallowSelector');
+jest.mock('../../hooks/useCurrentProjectKey');
+
+const testProjKey = { fetching: false, error: null, value: 'testproj' };
+
+const dispatchMock = jest.fn().mockName('dispatch');
+jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
+
+useCurrentProjectKey.mockReturnValue(testProjKey);
+
+const match = { params: { projectKey: 'testproj' }, path: 'projects/:projectKey' };
+const promisedUserPermissions = {
+  fetching: false,
+  error: null,
+  value: ['projects:testproj:projects:read'],
+};
 
 describe('ProjectNavigationContainer', () => {
-  const testProj = { key: 'testproj', name: 'Test Project' };
-
-  const dispatchMock = jest.fn().mockName('dispatch');
-  jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
-
-  useShallowSelector.mockReturnValue({ value: testProj.key, fetching: false });
-
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders to match snapshot passing correct project to children', () => {
-    const match = { params: { projectKey: 'testproj' } };
-    const promisedUserPermissions = {
-      fetching: false,
-      error: null,
-      value: ['expected:permission'],
-    };
     const props = { match, promisedUserPermissions };
-
     expect(shallow(<ProjectNavigationContainer {...props} />)).toMatchSnapshot();
-  });
-
-  it('updates the current project if project in url does not match current project', () => {
-    // Arrange
-    const match = { params: { projectKey: 'newproj' } };
-    const promisedUserPermissions = {
-      fetching: false,
-      error: null,
-      value: ['expected:permission'],
-    };
-    const props = { match, promisedUserPermissions };
-
-    const action = { type: 'TEST_ACTION' };
-    projectActions.setCurrentProject = jest.fn(() => action);
-
-    // Act
-    shallow(<ProjectNavigationContainer {...props} />);
-
-    // Assert
-    expect(projectActions.setCurrentProject).toHaveBeenCalledTimes(1);
-    expect(projectActions.setCurrentProject).toHaveBeenCalledWith('newproj');
-    expect(dispatchMock).toHaveBeenCalledWith(projectActions.setCurrentProject());
-  });
-
-  it('does not update the current project if project in url matches current project', () => {
-    // Arrange
-    const match = { params: { projectKey: testProj.key } };
-    const promisedUserPermissions = {
-      fetching: false,
-      error: null,
-      value: ['expected:permission'],
-    };
-    const props = { match, promisedUserPermissions };
-
-    shallow(<ProjectNavigationContainer {...props} />);
-
-    const action = { type: 'TEST_ACTION' };
-    projectActions.setCurrentProject = jest.fn(() => action);
-
-    expect(projectActions.setCurrentProject).not.toHaveBeenCalled();
-    expect(dispatchMock).not.toHaveBeenCalled();
   });
 });
 
 describe('PureProjectNavigationContainer', () => {
+  const shallowRender = (props) => {
+    const defaultProps = {
+      match,
+      dispatch: dispatchMock,
+      projectKey: testProjKey,
+      promisedUserPermissions,
+    };
+
+    const renderProps = {
+      ...defaultProps,
+      ...props,
+    };
+
+    return shallow(<PureProjectNavigationContainer {...renderProps} />);
+  };
+
+  describe('should redirect if', () => {
+    it('user does not have read permission on project', () => {
+      const props = {
+        promisedUserPermissions: {
+          fetching: false,
+          error: null,
+          value: ['incorrect:permission'],
+        },
+      };
+      expect(shallowRender(props)).toMatchSnapshot();
+    });
+
+    it('there is an error getting the project key', () => {
+      const props = {
+        projectKey: {
+          fetching: false,
+          error: 'An error message.',
+          value: undefined,
+        },
+      };
+      expect(shallowRender(props)).toMatchSnapshot();
+    });
+  });
+
   it('renders correct snapshot passing props onto children', () => {
-    expect(
-      shallow(
-        <PureProjectNavigationContainer
-          match={{ params: { projectKey: 'testproj' }, path: 'projectspath' }}
-          promisedUserPermissions={{ value: ['user:permissions'], fetching: false }}
-        />,
-      ),
-    ).toMatchSnapshot();
+    expect(shallowRender({})).toMatchSnapshot();
   });
 });

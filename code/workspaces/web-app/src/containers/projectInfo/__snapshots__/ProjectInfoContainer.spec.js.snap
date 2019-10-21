@@ -4,6 +4,7 @@ exports[`ProjectInfoContainer is a connected component which binds correct actio
 Array [
   "loadProjects",
   "setCurrentProject",
+  "clearCurrentProject",
   "createProject",
   "deleteProject",
   "checkProjectKeyUniqueness",
@@ -12,6 +13,8 @@ Array [
 
 exports[`ProjectInfoContainer is a container which passes correct props 1`] = `
 <PromisedContentWrapper
+  fullHeight={true}
+  fullWidth={true}
   promise={
     Object {
       "fetching": false,

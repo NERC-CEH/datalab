@@ -1,4 +1,4 @@
-import { SET_CURRENT_PROJECT_ACTION } from '../actions/projectActions';
+import { SET_CURRENT_PROJECT_ACTION, CLEAR_CURRENT_PROJECT_ACTION } from '../actions/projectActions';
 import { PROMISE_TYPE_FAILURE, PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS } from '../actions/actionTypes';
 import currentProjectsReducer from './currentProjectReducer';
 
@@ -40,6 +40,23 @@ describe('currentProjectReducers', () => {
 
       // Assert
       expect(nextstate).toEqual({ error: payload, fetching: false, value: {} });
+    });
+  });
+
+  describe('CLEAR_CURRENT_PROJECT_ACTION', () => {
+    it('should result in initial state being set', () => {
+      // Arrange
+      const type = `${CLEAR_CURRENT_PROJECT_ACTION}`;
+      const action = { type };
+
+      // Act
+      const nextstate = currentProjectsReducer(
+        { error: null, fetching: false, value: { key: 'testproj', name: 'Test Project' } },
+        action,
+      );
+
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: false, value: {} });
     });
   });
 });

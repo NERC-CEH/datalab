@@ -6,7 +6,7 @@ import { projectPermissionWrapper, systemAdminPermissionWrapper } from '../auth/
 
 const { errorWrapper: ew } = service.middleware;
 
-const { projectPermissions: { PROJECT_KEY_PROJECTS_READ, PROJECT_KEY_PROJECTS_EDIT } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_PROJECTS_EDIT } } = permissionTypes;
 
 const projectsRouter = express.Router();
 
@@ -22,7 +22,6 @@ projectsRouter.post(
 );
 projectsRouter.get(
   '/:projectKey',
-  projectPermissionWrapper(PROJECT_KEY_PROJECTS_READ),
   projects.actionWithKeyValidator(),
   ew(projects.getProjectByKey),
 );

@@ -9,7 +9,7 @@ import ProjectInfoContent from '../../components/projectInfo/ProjectInfoContent'
 class ProjectInfoContainer extends Component {
   render() {
     return (
-      <PromisedContentWrapper promise={this.props.currentProject}>
+      <PromisedContentWrapper promise={this.props.currentProject} fullWidth fullHeight>
         {this.props.currentProject.value ? (
           <ProjectInfoContent projectInfo={this.props.currentProject.value} />
         ) : (<div/>)}
