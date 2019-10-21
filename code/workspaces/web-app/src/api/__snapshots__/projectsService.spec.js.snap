@@ -25,7 +25,7 @@ exports[`projectsService loadProjectInfo should build the correct query and unpa
 "
     LoadProjectInfo($projectKey: String!) {
       project(projectKey: $projectKey) {
-        id, key, name, description
+        id, key, name, description, collaborationLink
       }
     }"
 `;

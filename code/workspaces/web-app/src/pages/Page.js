@@ -20,9 +20,9 @@ const style = theme => ({
   },
 });
 
-function Page({ title, children, classes }) {
+function Page({ title, children, className, classes }) {
   return (
-    <div className={classes.pageTemplate}>
+    <div className={getClassname(classes.pageTemplate, className)}>
       {title ? <Typography variant="h4">{title}</Typography> : null}
       <div className={classes.contentArea}>
         {children}
@@ -31,6 +31,8 @@ function Page({ title, children, classes }) {
     </div>
   );
 }
+
+const getClassname = (...classNames) => (classNames.filter(item => item).join(' '));
 
 Page.propTypes = {
   title: PropTypes.string,

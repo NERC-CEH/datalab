@@ -17,7 +17,7 @@ function loadProjectInfo(projectKey) {
   const query = `
     LoadProjectInfo($projectKey: String!) {
       project(projectKey: $projectKey) {
-        id, key, name, description
+        id, key, name, description, collaborationLink
       }
     }`;
 

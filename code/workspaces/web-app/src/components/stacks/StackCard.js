@@ -5,6 +5,7 @@ import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { statusTypes } from 'common';
+import ProjectKey from '../common/typography/ProjectKey';
 import StackCardActions from './StackCardActions';
 import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
@@ -40,19 +41,11 @@ function styles(theme) {
     },
     displayName: {
       marginTop: 0,
+      marginRight: theme.spacing(3),
     },
     displayNameContainer: {
       display: 'inline-flex',
-      alignItems: 'center',
-    },
-    projectKey: {
-      marginTop: 0,
-      marginLeft: theme.spacing(3),
-      marginBottom: theme.typography.h5.marginBottom,
-      fontWeight: 200,
-      letterSpacing: '0.05em',
-      color: theme.typography.colorLight,
-      textTransform: 'uppercase',
+      alignItems: 'baseline',
     },
     actionsDiv: {
       display: 'inline-flex',
@@ -97,7 +90,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
     <div className={classes.textDiv}>
       <div className={classes.displayNameContainer}>
         <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
-        {typeName === 'Project' ? <Typography className={classes.projectKey}>({stack.key})</Typography> : null}
+        {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
       </div>
       <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
         <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>

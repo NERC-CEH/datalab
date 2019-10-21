@@ -1,35 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectInfoContainer is a connected component which binds correct actions 1`] = `
-Array [
-  "loadProjects",
-  "setCurrentProject",
-  "clearCurrentProject",
-  "createProject",
-  "deleteProject",
-  "checkProjectKeyUniqueness",
-]
+exports[`CollaborationLink renders correctly to match snapshot when there is a collaboration link 1`] = `
+<div
+  className="makeStyles-collaborationLink-4"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-collaborationLinkHeading-5"
+  >
+    Collaboration Link
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
+  >
+    <a
+      href="https://testlab.test-datalabs.nerc.ac.uk"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      https://testlab.test-datalabs.nerc.ac.uk
+    </a>
+  </WithStyles(ForwardRef(Typography))>
+</div>
 `;
 
-exports[`ProjectInfoContainer is a container which passes correct props 1`] = `
+exports[`CollaborationLink renders correctly to match snapshot when there is not a collaboration link 1`] = `""`;
+
+exports[`ProjectInfoContainer renders correctly passing correct props to children 1`] = `
+<PureProjectInfoContainer
+  currentProject={
+    Object {
+      "fetching": false,
+      "value": Object {
+        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
+        "description": "A description about Test Project.",
+        "key": "testproj",
+        "name": "Test Project",
+      },
+    }
+  }
+/>
+`;
+
+exports[`PureProjectInfoContainer renders correctly to match snapshot when there is a collaboration link 1`] = `
 <PromisedContentWrapper
-  fullHeight={true}
-  fullWidth={true}
   promise={
     Object {
       "fetching": false,
       "value": Object {
-        "id": "expectedId",
+        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
+        "description": "A description about Test Project.",
+        "key": "testproj",
+        "name": "Test Project",
       },
     }
   }
 >
-  <ProjectInfoContent
-    projectInfo={
-      Object {
-        "id": "expectedId",
-      }
+  <div>
+    <div
+      className="makeStyles-projectTitleWrapper-2"
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-projectTitle-1"
+        variant="h5"
+      >
+        Test Project
+      </WithStyles(ForwardRef(Typography))>
+      <ProjectKey
+        className="makeStyles-projectKey-3"
+      >
+        (testproj)
+      </ProjectKey>
+    </div>
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      A description about Test Project.
+    </WithStyles(ForwardRef(Typography))>
+    <CollaborationLink
+      link="https://testlab.test-datalabs.nerc.ac.uk"
+    />
+  </div>
+</PromisedContentWrapper>
+`;
+
+exports[`PureProjectInfoContainer renders correctly to match snapshot when there is not a collaboration link 1`] = `
+<PromisedContentWrapper
+  promise={
+    Object {
+      "fetching": false,
+      "value": Object {
+        "collaborationLink": undefined,
+        "description": "A description about Test Project.",
+        "key": "testproj",
+        "name": "Test Project",
+      },
     }
-  />
+  }
+>
+  <div>
+    <div
+      className="makeStyles-projectTitleWrapper-2"
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-projectTitle-1"
+        variant="h5"
+      >
+        Test Project
+      </WithStyles(ForwardRef(Typography))>
+      <ProjectKey
+        className="makeStyles-projectKey-3"
+      >
+        (testproj)
+      </ProjectKey>
+    </div>
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      A description about Test Project.
+    </WithStyles(ForwardRef(Typography))>
+    <CollaborationLink />
+  </div>
 </PromisedContentWrapper>
 `;

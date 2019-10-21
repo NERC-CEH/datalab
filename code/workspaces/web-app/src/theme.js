@@ -47,7 +47,7 @@ const theme = createMuiTheme({
     colorLight: textLight,
     h4: {
       color: text,
-      margin: `${spacing * 4}px 0`,
+      margin: `${spacing * 5}px 0`,
     },
     h5: {
       color: text,
