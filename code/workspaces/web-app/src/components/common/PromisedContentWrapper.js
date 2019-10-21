@@ -18,31 +18,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const PromisedContentWrapper = ({ children, promise, className, fetchingClassName, fullWidth = true, fullHeight = false, loadingSize = 40 }) => {
-  let isFetching = false;
-
-  if (Array.isArray(promise)) {
-    isFetching = promise.map(item => item.fetching).includes(true);
-  } else {
-    isFetching = promise.fetching;
-  }
-
+  const isFetching = isPromiseFetching(promise);
   const content = isFetching ? <CircularProgress size={loadingSize}/> : children;
-
-  const classWrapper = className || (isFetching && fetchingClassName)
-    ? (
-      <ClassWrapper isFetching={isFetching} className={className} fetchingClassName={fetchingClassName}>
-        {content}
-      </ClassWrapper>
-    )
-    : content;
-
-  return isFetching && (fullWidth || fullHeight)
-    ? (
-      <SizeWrapper fullWidth={fullWidth} fullHeight={fullHeight}>
-        {classWrapper}
-      </SizeWrapper>
-    )
-    : classWrapper;
+  const classWrapper = getClassWrappedContent(content, isFetching, className, fetchingClassName);
+  return getSizeWrappedContent(classWrapper, isFetching, fullWidth, fullHeight);
 };
 
 export const ClassWrapper = ({ isFetching, className, fetchingClassName, children }) => {
@@ -71,6 +50,34 @@ export const SizeWrapper = ({ fullWidth, fullHeight, children }) => {
 };
 
 export const createClassName = (...names) => names.filter(item => !!item).join(' ');
+
+const isPromiseFetching = (promise) => {
+  if (Array.isArray(promise)) {
+    return promise.map(item => item.fetching).includes(true);
+  }
+
+  return promise.fetching;
+};
+
+const getClassWrappedContent = (content, isFetching, className, fetchingClassName) => (
+  className || (isFetching && fetchingClassName)
+    ? (
+      <ClassWrapper isFetching={isFetching} className={className} fetchingClassName={fetchingClassName}>
+        {content}
+      </ClassWrapper>
+    )
+    : content
+);
+
+const getSizeWrappedContent = (content, isFetching, fullWidth, fullHeight) => (
+  isFetching && (fullWidth || fullHeight)
+    ? (
+      <SizeWrapper fullWidth={fullWidth} fullHeight={fullHeight}>
+        {content}
+      </SizeWrapper>
+    )
+    : content
+);
 
 const promiseType = PropTypes.shape({
   error: PropTypes.shape({

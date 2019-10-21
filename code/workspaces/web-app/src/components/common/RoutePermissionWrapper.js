@@ -22,11 +22,11 @@ class RoutePermissionWrapper extends Component {
       return props => (<WrappedComponent userPermissions={value} {...props} />);
     }
 
-    if (!fetching && this.props.redirectTo) {
+    if (this.props.redirectTo) {
       return () => <Redirect to={this.props.redirectTo} />;
     }
 
-    if (!fetching && NegativeComponent) {
+    if (NegativeComponent) {
       return props => (<NegativeComponent {...props} />);
     }
 
