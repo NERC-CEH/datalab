@@ -2,6 +2,7 @@
 
 exports[`CreateProjectDialog renders to match snapshot passing function props to form 1`] = `
 <WithStyles(ForwardRef(Dialog))
+  fullWidth={true}
   open={true}
 >
   <WithStyles(ForwardRef(DialogTitle))>

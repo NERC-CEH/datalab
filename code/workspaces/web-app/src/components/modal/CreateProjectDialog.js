@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import CreateProjectForm from '../projects/CreateProjectForm';
 
 const CreateProjectDialog = ({ onSubmit, onCancel }) => (
-  <Dialog open={true}>
+  <Dialog open={true} fullWidth>
     <DialogTitle>Create New Project</DialogTitle>
     <DialogContent>
       <CreateProjectForm onSubmit={onSubmit} onCancel={onCancel} />
