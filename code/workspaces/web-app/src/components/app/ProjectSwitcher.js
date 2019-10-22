@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { sortBy } from 'lodash';
 import { withStyles } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -19,10 +20,10 @@ const style = theme => ({
   },
   promisedContent: {
     width: '100%',
-    minHeight: 50,
+    minHeight: 60,
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    margin: `${theme.spacing(2)}px 0`,
   },
   dropdownProgress: {
     width: '100%',
@@ -70,18 +71,26 @@ function ProjectSwitcher({ classes }) {
   const currentProject = useCurrentProject();
   const projects = useProjectsArray();
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(projectsActions.loadProjects());
-  }, [dispatch]);
+    if (currentProject.value && currentProject.value.key) {
+      dispatch(projectsActions.loadProjects());
+    }
+  }, [dispatch, currentProject.value]);
 
   const { location } = window;
 
   const switcherProjects = getSwitcherProjects(projects, currentProject);
+  switcherProjects.value = sortBy(
+    switcherProjects.value,
+    project => `${project.name} ${project.key}`.toLowerCase(),
+  );
 
   return (
     <PromisedContentWrapper
       className={classes.promisedContent}
-      promise={{ fetching: currentProject.fetching || !currentProject.value.key }}>
+      promise={{ fetching: currentProject.fetching || !currentProject.value.key }}
+    >
       <Switcher
         switcherProjects={switcherProjects}
         currentProject={currentProject}
