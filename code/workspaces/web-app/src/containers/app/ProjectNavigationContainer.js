@@ -19,6 +19,7 @@ import SparkPage from '../../pages/SparkPage';
 const {
   projectKeyPermission,
   projectPermissions: { PROJECT_KEY_PROJECTS_READ, PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST },
+  SYSTEM_INSTANCE_ADMIN,
 } = permissionTypes;
 
 function ProjectNavigationContainer({ match, promisedUserPermissions }) {
@@ -106,7 +107,8 @@ const shouldRedirectToProjectsPage = (projectKey, promisedUserPermissions) => pr
 const doesNotHaveProjectPermission = (promisedUserPermissions, projectKey) => !projectKey.fetching
   && projectKey.value
   && !promisedUserPermissions.fetching
-  && !promisedUserPermissions.value.includes(projectKeyPermission(PROJECT_KEY_PROJECTS_READ, projectKey.value));
+  && !promisedUserPermissions.value.includes(projectKeyPermission(PROJECT_KEY_PROJECTS_READ, projectKey.value))
+  && !promisedUserPermissions.value.includes(SYSTEM_INSTANCE_ADMIN);
 
 export { PureProjectNavigationContainer };
 
