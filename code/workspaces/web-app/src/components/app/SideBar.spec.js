@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { permissionTypes } from 'common';
-import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import SideBar, { PureSideBar } from './SideBar';
 
-jest.mock('../../hooks/useCurrentProjectKey');
+jest.mock('../../hooks/currentProjectHooks');
 
 const { PROJECT_NAMESPACE } = permissionTypes;
 

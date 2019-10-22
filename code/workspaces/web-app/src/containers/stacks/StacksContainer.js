@@ -8,7 +8,7 @@ import { permissionTypes } from 'common';
 import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
-import projectSelectors from '../../selectors/projectsSelectors';
+import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import stackActions from '../../actions/stackActions';
 import StackCards from '../../components/stacks/StackCards';
 
@@ -157,7 +157,7 @@ StacksContainer.propTypes = {
 function mapStateToProps(state) {
   return {
     stacks: state.stacks,
-    projectKey: projectSelectors.currentProjectKey(state),
+    projectKey: currentProjectSelectors.currentProjectKey(state),
   };
 }
 
