@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Tooltip } from '@material-ui/core';
 import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
@@ -12,6 +13,8 @@ import { SORTED_PERMISSIONS } from '../../constants/permissions';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import { useUsers } from '../../hooks/usersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
+import { useCurrentUserId } from '../../hooks/authHooks';
+import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
 
 const styles = theme => ({
   addUserPermission: {
@@ -50,6 +53,8 @@ const PERMISSIONS = SORTED_PERMISSIONS.map(item => startCase(item.name));
 
 function AddUserPermission({ classes }) {
   const users = useUsers();
+  const currentUserId = useCurrentUserId();
+  const currentUserSystemAdmin = useCurrentUserSystemAdmin();
   const projectKey = useCurrentProjectKey().value;
   const dispatch = useDispatch();
   const [selectedPermissions, setSelectedPermissions] = useState(PERMISSIONS[PERMISSIONS.length - 1]);
@@ -61,6 +66,8 @@ function AddUserPermission({ classes }) {
 
   return <PureAddUserPermission
     users={users}
+    currentUserId={currentUserId}
+    currentUserSystemAdmin={currentUserSystemAdmin}
     projectKey={projectKey}
     permissionLevels={PERMISSIONS}
     selectedPermissions={selectedPermissions} setSelectedPermissions={setSelectedPermissions}
@@ -71,7 +78,7 @@ function AddUserPermission({ classes }) {
 }
 
 export function PureAddUserPermission({
-  users, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch, classes,
+  users, currentUserId, currentUserSystemAdmin, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch, classes,
 }) {
   const userNames = users.value.map(user => user.name);
 
@@ -86,13 +93,14 @@ export function PureAddUserPermission({
         classes={classes} />
       <AddUserButton
         userInformation={users.value}
+        currentUserId={currentUserId}
+        currentUserSystemAdmin={currentUserSystemAdmin}
         selectedUserName={selectedUserName}
         projectKey={projectKey}
         onClickFn={dispatchAddUserAction}
         dispatch={dispatch}
         selectedPermissions={selectedPermissions}
         classes={classes}/>
-
     </div>
   );
 }
@@ -136,16 +144,16 @@ export function UsersAutofill({ userNames, setSelectedUserName, classes }) {
 export function UsersDropdown({ userNames, inputValue, getMenuProps, getItemProps, isOpen, classes }) {
   const namesMatchingSearch = userNames.filter(name => name.search(inputValue) !== -1);
 
-  const show = isOpen && namesMatchingSearch.length > 0;
   return (
     <Paper
-      className={show ? classes.dropDownOpen : classes.dropDownClosed}
+      className={isOpen ? classes.dropDownOpen : classes.dropDownClosed}
       {...getMenuProps()}
     >
-      {show
+      {namesMatchingSearch.length > 0
         ? namesMatchingSearch
           .map(userName => <MenuItem {...getItemProps({ item: userName, key: userName })}>{userName}</MenuItem>)
-        : null}
+        : <MenuItem>No users match search.</MenuItem>
+      }
     </Paper>
   );
 }
@@ -166,16 +174,29 @@ export function PermissionsSelector({ permissionLevels, selectedPermissions, set
   );
 }
 
-export function AddUserButton({ userInformation, selectedUserName, projectKey, selectedPermissions, onClickFn, dispatch, classes }) {
+export function AddUserButton({ userInformation, currentUserId, currentUserSystemAdmin, selectedUserName, projectKey, selectedPermissions, onClickFn, dispatch, classes }) {
+  let disabledMessage = ''; // empty string stops tooltip displaying
+
   const selectedUser = userInformation.find(user => user.name === selectedUserName);
+
+  if (!selectedUser) {
+    disabledMessage = "Please enter a registered user's email.";
+  } else if (selectedUser.userId === currentUserId && !currentUserSystemAdmin) {
+    disabledMessage = 'You can not add permissions for yourself.';
+  }
+
   return (
-    <PrimaryActionButton
-      className={classes.addButton}
-      disabled={!selectedUser}
-      onClick={() => onClickFn(projectKey, selectedUser, selectedPermissions, dispatch)}
-    >
-      Add
-    </PrimaryActionButton>
+    <Tooltip title={disabledMessage} placement="top">
+      <div>
+        <PrimaryActionButton
+          className={classes.addButton}
+          disabled={!!disabledMessage}
+          onClick={() => onClickFn(projectKey, selectedUser, selectedPermissions, dispatch)}
+        >
+          Add
+        </PrimaryActionButton>
+      </div>
+    </Tooltip>
   );
 }
 

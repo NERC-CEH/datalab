@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createShallow } from '@material-ui/core/test-utils';
-import useShallowSelector from '../../hooks/useShallowSelector';
+import { useProjectUsers } from '../../hooks/projectUsersHooks';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
+import { useCurrentUserId } from '../../hooks/authHooks';
+import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
 import { PERMISSIONS } from '../../constants/permissions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import UserPermissionsTable, {
@@ -17,7 +20,10 @@ import UserPermissionsTable, {
 } from './UserPermissionsTable';
 
 jest.mock('react-redux');
-jest.mock('../../hooks/useShallowSelector');
+jest.mock('../../hooks/projectUsersHooks');
+jest.mock('../../hooks/currentProjectHooks');
+jest.mock('../../hooks/authHooks');
+jest.mock('../../hooks/useCurrentUserSystemAdmin');
 
 describe('UserPermissionsTable', () => {
   let shallow;
@@ -25,9 +31,10 @@ describe('UserPermissionsTable', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
   useDispatch.mockReturnValue(dispatchMock);
 
-  useShallowSelector.mockReturnValueOnce('users');
-  useShallowSelector.mockReturnValueOnce('current-user-id');
-  useShallowSelector.mockReturnValueOnce({ value: 'testproj' });
+  useProjectUsers.mockReturnValue('users');
+  useCurrentUserId.mockReturnValue('current-user-id');
+  useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
+  useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
 
   beforeEach(() => {
     shallow = createShallow({ dive: true });

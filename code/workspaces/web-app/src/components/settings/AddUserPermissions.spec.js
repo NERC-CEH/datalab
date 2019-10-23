@@ -1,7 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createShallow } from '@material-ui/core/test-utils';
-import useShallowSelector from '../../hooks/useShallowSelector';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import { useUsers } from '../../hooks/usersHooks';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
+import { useCurrentUserId } from '../../hooks/authHooks';
+import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import AddUserPermission, {
   PureAddUserPermission,
@@ -13,7 +17,10 @@ import AddUserPermission, {
 } from './AddUserPermissions';
 
 jest.mock('react-redux');
-jest.mock('../../hooks/useShallowSelector');
+jest.mock('../../hooks/usersHooks');
+jest.mock('../../hooks/authHooks');
+jest.mock('../../hooks/currentProjectHooks');
+jest.mock('../../hooks/useCurrentUserSystemAdmin');
 
 const permissionLevels = ['Admin', 'User', 'Viewer'];
 const initialUsers = {
@@ -40,8 +47,10 @@ describe('AddUserPermissions', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
   useDispatch.mockReturnValue(dispatchMock);
 
-  useShallowSelector.mockReturnValueOnce('users');
-  useShallowSelector.mockReturnValueOnce({ value: 'testproj' });
+  useUsers.mockReturnValue('users');
+  useCurrentUserId.mockReturnValue('current-user-id');
+  useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
+  useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
 
   beforeEach(() => {
     shallow = createShallow({ dive: true });
@@ -121,7 +130,7 @@ describe('UsersDropdown', () => {
   const getItemPropsMock = jest.fn();
   getItemPropsMock.mockImplementation(arg => arg);
 
-  it('renders to match snapshot when it is not open', () => {
+  it('renders with correct class name when it is not open', () => {
     expect(
       shallow(
         <UsersDropdown
@@ -136,7 +145,7 @@ describe('UsersDropdown', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders to match snapshot when it is open', () => {
+  it('renders with correct class name when it is open', () => {
     expect(
       shallow(
         <UsersDropdown
@@ -166,7 +175,7 @@ describe('UsersDropdown', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders as closed when there are no items matching the input value', () => {
+  it('renders with message when there are no items matching the input value', () => {
     expect(
       shallow(
         <UsersDropdown
@@ -227,7 +236,7 @@ describe('AddUserButton', () => {
     shallow = createShallow();
   });
 
-  it('renders as disabled when the selected user name is not in the list of possibilities', () => {
+  it('renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities', () => {
     expect(
       shallow(
         <AddUserButton
@@ -242,19 +251,57 @@ describe('AddUserButton', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders as not disabled when the selected user name is in the list of possibilities', () => {
-    expect(
-      shallow(
-        <AddUserButton
-          userInformation={initialUsers.value}
-          selectedUserName={initialUsers.value[0].name}
-          project={'project'}
-          selectedPermissions={permissionLevels[0]}
-          onClickFn={jest.fn()}
-          classes={classes}
-        />,
-      ),
-    ).toMatchSnapshot();
+  describe('when selected user is the current user', () => {
+    it('renders as not disabled when the current user is system admin', () => {
+      expect(
+        shallow(
+          <AddUserButton
+            userInformation={initialUsers.value}
+            selectedUserName={initialUsers.value[0].name}
+            currentUserId={initialUsers.value[0].userId}
+            currentUserSystemAdmin
+            project={'project'}
+            selectedPermissions={permissionLevels[0]}
+            onClickFn={jest.fn()}
+            classes={classes}
+          />,
+        ),
+      ).toMatchSnapshot();
+    });
+
+    it('renders as disabled with explanatory tooltip when the current user is not system admin', () => {
+      expect(
+        shallow(
+          <AddUserButton
+            userInformation={initialUsers.value}
+            selectedUserName={initialUsers.value[0].name}
+            currentUserId={initialUsers.value[0].userId}
+            currentUserSystemAdmin={false}
+            project={'project'}
+            selectedPermissions={permissionLevels[0]}
+            onClickFn={jest.fn()}
+            classes={classes}
+          />,
+        ),
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('when the selected user is not the current user', () => {
+    it('renders as not disabled when the selected user name is in the list of possibilities', () => {
+      expect(
+        shallow(
+          <AddUserButton
+            userInformation={initialUsers.value}
+            selectedUserName={initialUsers.value[0].name}
+            project={'project'}
+            selectedPermissions={permissionLevels[0]}
+            onClickFn={jest.fn()}
+            classes={classes}
+          />,
+        ),
+      ).toMatchSnapshot();
+    });
   });
 
   it('calls onClickFn with correct arguments when clicked', () => {
@@ -276,7 +323,7 @@ describe('AddUserButton', () => {
         classes={classes}
       />,
     );
-    render.simulate('click');
+    render.find(PrimaryActionButton).simulate('click');
     expect(onClickFnMock).toHaveBeenCalledTimes(1);
     expect(onClickFnMock)
       .toHaveBeenCalledWith(projectKey, selectedUser, selectedPermissions, dispatch);

@@ -12,6 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserId } from '../../hooks/authHooks';
+import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import RemoveUserDialog from './RemoveUserDialog';
 import { CheckboxCell, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
@@ -59,6 +60,7 @@ const checkBoxColumnOrder = SORTED_PERMISSIONS;
 function UserPermissionsTable({ classes }) {
   const users = useProjectUsers();
   const currentUserId = useCurrentUserId();
+  const currentUserSystemAdmin = useCurrentUserSystemAdmin();
   const projectKey = useCurrentProjectKey().value;
   const dispatch = useDispatch();
 
@@ -82,6 +84,7 @@ function UserPermissionsTable({ classes }) {
     <PureUserPermissionsTable
       users={users}
       currentUserId={currentUserId}
+      currentUserSystemAdmin={currentUserSystemAdmin}
       projectKey={projectKey}
       classes={classes}
       colHeadings={columnHeadings}
@@ -95,7 +98,7 @@ function UserPermissionsTable({ classes }) {
 }
 
 export function PureUserPermissionsTable(
-  { users, currentUserId, projectKey, classes, colHeadings, removeUserDialogState,
+  { users, currentUserId, currentUserSystemAdmin, projectKey, classes, colHeadings, removeUserDialogState,
     setRemoveUserDialogState, onRemoveUserDialogConfirmationFn, actions, dispatch },
 ) {
   return (
@@ -108,6 +111,7 @@ export function PureUserPermissionsTable(
           <UserPermissionsTableBody
             users={users}
             currentUserId={currentUserId}
+            currentUserSystemAdmin={currentUserSystemAdmin}
             projectKey={projectKey}
             classes={classes}
             numCols={colHeadings.length}
@@ -146,12 +150,12 @@ export function UserPermissionsTableHead({ headings, classes }) {
   );
 }
 
-export function UserPermissionsTableBody({ users, currentUserId, projectKey, classes, numCols, setRemoveUserDialogState, actions, dispatch }) {
+export function UserPermissionsTableBody({ users, currentUserId, currentUserSystemAdmin, projectKey, classes, numCols, setRemoveUserDialogState, actions, dispatch }) {
   if (users.fetching.error || !users.value) {
     return <FullWidthTextRow numCols={numCols}>{'Error fetching data. Please try refreshing the page.'}</FullWidthTextRow>;
   }
 
-  if (users.fetching.inProgress) {
+  if (users.fetching.inProgress || !projectKey) {
     return <FullWidthRow numCols={numCols}><CircularProgress /></FullWidthRow>;
   }
 
@@ -163,6 +167,7 @@ export function UserPermissionsTableBody({ users, currentUserId, projectKey, cla
     <UserPermissionsTableRow
       user={user}
       isCurrentUser={user.userId === currentUserId}
+      currentUserSystemAdmin={currentUserSystemAdmin}
       index={index}
       projectKey={projectKey}
       classes={classes}
@@ -191,7 +196,7 @@ export function FullWidthTextRow({ children, numCols }) {
   );
 }
 
-export function UserPermissionsTableRow({ user, isCurrentUser, index, projectKey, classes, setRemoveUserDialogState, actions, dispatch }) {
+export function UserPermissionsTableRow({ user, isCurrentUser, currentUserSystemAdmin, index, projectKey, classes, setRemoveUserDialogState, actions, dispatch }) {
   const rowKey = `row-${index}`;
   return (
     <TableRow key={rowKey}>
@@ -202,6 +207,7 @@ export function UserPermissionsTableRow({ user, isCurrentUser, index, projectKey
         <CheckboxCell
           user={user}
           isCurrentUser={isCurrentUser}
+          currentUserSystemAdmin={currentUserSystemAdmin}
           checkboxSpec={permission}
           projectKey={projectKey}
           classes={classes}
@@ -213,6 +219,7 @@ export function UserPermissionsTableRow({ user, isCurrentUser, index, projectKey
       <RemoveUserButtonCell
         user={user}
         isCurrentUser={isCurrentUser}
+        currentUserSystemAdmin={currentUserSystemAdmin}
         classes={classes}
         setRemoveUserDialogState={setRemoveUserDialogState}
       />
