@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-const PrimaryActionButton = ({ children, variant, color, ...rest }) => (
+const PagePrimaryActionButton = ({ children, variant, color, ...rest }) => (
   <Button
     variant="contained"
     color="primary"
@@ -11,4 +11,4 @@ const PrimaryActionButton = ({ children, variant, color, ...rest }) => (
   </Button>
 );
 
-export default PrimaryActionButton;
+export default PagePrimaryActionButton;

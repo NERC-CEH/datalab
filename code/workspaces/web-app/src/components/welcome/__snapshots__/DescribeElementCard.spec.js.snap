@@ -1,70 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCard renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(Grid))
-  item={true}
-  md={4}
-  sm={6}
-  xs={12}
+<div
+  className="DescribeElementCard-shadedCard-2"
 >
-  <WithStyles(ForwardRef(Card))
-    className="DescribeElementCard-shadedCard-2"
-    square={true}
+  <div
+    className="DescribeElementCard-cardContentWrapper-3"
   >
-    <div
-      className="DescribeElementCard-cardContent-3"
-    >
-      <WithStyles(DescribeElementCardBanner)
-        icon="people"
-        key="card-banner"
-        title="expectedTitle"
-      />
-      <WithStyles(DescribeElementCardBody)
-        content="expectedContent"
-        key="card-body"
-      />
-    </div>
-  </WithStyles(ForwardRef(Card))>
-</WithStyles(ForwardRef(Grid))>
+    <WithStyles(DescribeElementCardBanner)
+      icon="people"
+      key="card-banner"
+      title="expectedTitle"
+    />
+    <WithStyles(DescribeElementCardBody)
+      content="expectedContent"
+      key="card-body"
+    />
+  </div>
+</div>
 `;
 
 exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
-<WithStyles(ForwardRef(Grid))
-  item={true}
-  md={4}
-  sm={6}
-  xs={12}
+<div
+  className="DescribeElementCard-card-1"
 >
-  <WithStyles(ForwardRef(Card))
-    className="DescribeElementCard-card-1"
-    square={true}
+  <div
+    className="DescribeElementCard-quoteCardContentWrapper-4"
   >
-    <div
-      className="DescribeElementCard-cardContent-3"
-    >
-      <WithStyles(DescribeElementCardBody)
-        content="moreContent"
-        key="card-body"
-        media={true}
-        quote={true}
-      />
-      <WithStyles(DescribeElementCardBanner)
-        key="card-banner"
-        quote={true}
-        title="expectedTitle"
-      />
-      <DescribeElementCardLinks
-        key="card-links"
-        links={
-          Array [
-            Object {
-              "displayName": "displayName",
-              "href": "address",
-            },
-          ]
-        }
-      />
-    </div>
-  </WithStyles(ForwardRef(Card))>
-</WithStyles(ForwardRef(Grid))>
+    <WithStyles(DescribeElementCardBody)
+      content="moreContent"
+      key="card-body"
+      media={true}
+      quote={true}
+    />
+    <WithStyles(DescribeElementCardBanner)
+      key="card-banner"
+      quote={true}
+      title="expectedTitle"
+    />
+    <DescribeElementCardLinks
+      key="card-links"
+      links={
+        Array [
+          Object {
+            "displayName": "displayName",
+            "href": "address",
+          },
+        ]
+      }
+    />
+  </div>
+</div>
 `;

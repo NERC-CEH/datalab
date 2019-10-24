@@ -2,26 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import datalabsLogo from '../../assets/images/datalabs-vert.png';
 import getAuth from '../../auth/auth';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import PagePrimaryActionButton from '../common/buttons/PagePrimaryActionButton';
 
 const styles = theme => ({
   bar: {
-    paddingTop: 62,
-    backgroundColor: theme.palette.secondary[900],
+    backgroundColor: theme.palette.backgroundDark,
     textAlign: 'center',
+    zIndex: 2,
+    padding: `${theme.spacing(14)}px ${theme.spacing(2)}px`,
   },
   logo: {
     height: 300,
-    marginTop: 60,
   },
   tagLine: {
     color: theme.palette.secondary[50],
     padding: 20,
   },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: `${theme.spacing(4)}px ${theme.spacing(1)}px`,
+    marginBottom: 0,
+  },
   button: {
-    margin: 20,
+    '& + &': {
+      marginLeft: theme.spacing(2),
+    },
   },
 });
 
@@ -31,8 +40,10 @@ const HeroBar = ({ classes }) => (
   <div className={classes.bar}>
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
     <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
-    <Button className={classes.button} color="primary" onClick={getAuth().signUp}>Sign Up</Button>
-    <Button className={classes.button} color="primary" onClick={getAuth().login}> Log In</Button>
+    <div className={classes.buttons}>
+      <PagePrimaryActionButton className={classes.button} color="primary" onClick={getAuth().signUp}>Sign Up</PagePrimaryActionButton>
+      <PrimaryActionButton className={classes.button} color="primary" onClick={getAuth().login}> Log In</PrimaryActionButton>
+    </div>
   </div>
 );
 

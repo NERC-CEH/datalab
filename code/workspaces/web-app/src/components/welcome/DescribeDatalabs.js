@@ -18,9 +18,9 @@ const datalabDescriptions = [
 
 /* eslint-disable max-len */
 const datalabStories = [
-  { icon: 'comment', title: 'Pete Henrys', content: 'I wanted to run my R model on the highest resolution UK land cover map, but my local workstation did not have enough memory. By creating a Data Lab, I was able to upload the land cover map and my R model into a Zeppelin notebook. The Data Lab Spark instance was able to run my model on the high resolution map, giving me results that I could not get before.' },
-  { icon: 'comment', title: 'Tom August', content: 'After uploading my bio-diversity model into a Jupyter Notebook I was able to run it against the parallel compute facilities in the Data Lab to get results in a couple of hours. This was so much easier than using traditional parallel compute environments, where your model has to be re-written to fit the environment.' },
-  { icon: 'comment', title: 'David Ciar', content: 'RShiny is a great way of letting the public access our Change Point analysis. With Data Labs, setting up the web server and getting a URL was easy!' },
+  { title: 'Pete Henrys', content: 'I wanted to run my R model on the highest resolution UK land cover map, but my local workstation did not have enough memory. By creating a Data Lab, I was able to upload the land cover map and my R model into a Zeppelin notebook. The Data Lab Spark instance was able to run my model on the high resolution map, giving me results that I could not get before.' },
+  { title: 'Tom August', content: 'After uploading my bio-diversity model into a Jupyter Notebook I was able to run it against the parallel compute facilities in the Data Lab to get results in a couple of hours. This was so much easier than using traditional parallel compute environments, where your model has to be re-written to fit the environment.' },
+  { title: 'David Ciar', content: 'RShiny is a great way of letting the public access our Change Point analysis. With Data Labs, setting up the web server and getting a URL was easy!' },
 ];
 /* eslint-enable max-len */
 

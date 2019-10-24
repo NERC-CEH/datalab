@@ -15,19 +15,23 @@ exports[`HeroBar renders correct snapshot 1`] = `
   >
     DataLabs provides you with tools to power your research and share the results
   </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Button))
-    className="HeroBar-button-4"
-    color="primary"
-    onClick={[MockFunction]}
+  <div
+    className="HeroBar-buttons-4"
   >
-    Sign Up
-  </WithStyles(ForwardRef(Button))>
-  <WithStyles(ForwardRef(Button))
-    className="HeroBar-button-4"
-    color="primary"
-    onClick={[MockFunction]}
-  >
-     Log In
-  </WithStyles(ForwardRef(Button))>
+    <PagePrimaryActionButton
+      className="HeroBar-button-5"
+      color="primary"
+      onClick={[MockFunction]}
+    >
+      Sign Up
+    </PagePrimaryActionButton>
+    <PrimaryActionButton
+      className="HeroBar-button-5"
+      color="primary"
+      onClick={[MockFunction]}
+    >
+       Log In
+    </PrimaryActionButton>
+  </div>
 </div>
 `;
