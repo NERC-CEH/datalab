@@ -23,7 +23,7 @@ function createStack(user, params) {
         category: stack.category,
         status: REQUESTED,
         url: `https://${projectKey}-${name}.${config.get('datalabDomain')}`,
-        internalEndpoint: `http://${params.type}-${name}`,
+        internalEndpoint: `http://${params.type}-${name}.${projectKey}`,
       },
     )
       .then(() => response));
