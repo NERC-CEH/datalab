@@ -25,7 +25,7 @@ Array [
         "domain": "expectedDatalabDomain",
         "name": "expectedDatalabName",
       },
-      "internalEndpoint": "http://expectedType-expectedName",
+      "internalEndpoint": "http://expectedType-expectedName.project",
       "name": "expectedName",
       "projectKey": "project",
       "status": "requested",
