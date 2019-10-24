@@ -6,7 +6,7 @@ import { getVersion } from '../../version';
 
 const styles = theme => ({
   divider: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(8),
   },
   versionText: {
     margin: `${theme.spacing(2)}px 0`,
