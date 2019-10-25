@@ -6,8 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import useCurrentProject from '../../hooks/useCurrentProject';
-import useProjectsArray from '../../hooks/useProjectsArray';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
+import { useProjectsArray } from '../../hooks/projectsHooks';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import projectsActions from '../../actions/projectActions';
 
@@ -67,13 +67,13 @@ export function getSwitcherProjects(projects, currentProject) {
 }
 
 function ProjectSwitcher({ classes }) {
+  const currentProject = useCurrentProject();
+  const projects = useProjectsArray();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(projectsActions.loadProjects());
   }, [dispatch]);
 
-  const currentProject = useCurrentProject();
-  const projects = useProjectsArray();
   const { location } = window;
 
   const switcherProjects = getSwitcherProjects(projects, currentProject);

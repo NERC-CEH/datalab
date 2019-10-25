@@ -1,10 +1,10 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
 import { shallow } from 'enzyme';
-import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import ProjectNavigationContainer, { PureProjectNavigationContainer } from './ProjectNavigationContainer';
 
-jest.mock('../../hooks/useCurrentProjectKey');
+jest.mock('../../hooks/currentProjectHooks');
 
 const testProjKey = { fetching: false, error: null, value: 'testproj' };
 

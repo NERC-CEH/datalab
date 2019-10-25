@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ProjectInfoContainer, { PureProjectInfoContainer, CollaborationLink } from './ProjectInfoContainer';
-import useCurrentProject from '../../hooks/useCurrentProject';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
 
-jest.mock('../../hooks/useCurrentProject');
+jest.mock('../../hooks/currentProjectHooks');
 
 const testProj = {
   key: 'testproj',

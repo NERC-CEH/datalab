@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { permissionTypes } from 'common';
-import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import projectActions from '../../actions/projectActions';
 import ProjectNavigation from '../../components/app/ProjectNavigation';
 import ProjectInfoPage from '../../pages/ProjectInfoPage';

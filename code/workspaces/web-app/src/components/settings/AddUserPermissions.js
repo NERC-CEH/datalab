@@ -8,11 +8,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
-import projectSelectors from '../../selectors/projectsSelectors';
-import usersSelectors from '../../selectors/usersSelectors';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
-import useShallowSelector from '../../hooks/useShallowSelector';
+import { useUsers } from '../../hooks/usersHooks';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 const styles = theme => ({
   addUserPermission: {
@@ -50,8 +49,8 @@ const styles = theme => ({
 const PERMISSIONS = SORTED_PERMISSIONS.map(item => startCase(item.name));
 
 function AddUserPermission({ classes }) {
-  const users = useShallowSelector(usersSelectors.users);
-  const projectKey = useShallowSelector(projectSelectors.currentProjectKey).value;
+  const users = useUsers();
+  const projectKey = useCurrentProjectKey().value;
   const dispatch = useDispatch();
   const [selectedPermissions, setSelectedPermissions] = useState(PERMISSIONS[PERMISSIONS.length - 1]);
   const [selectedUserName, setSelectedUserName] = useState('');

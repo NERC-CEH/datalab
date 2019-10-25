@@ -7,7 +7,7 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
 import ProjectSwitcher from './ProjectSwitcher';
-import useCurrentProjectKey from '../../hooks/useCurrentProjectKey';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST }, projectKeyPermission } = permissionTypes;
 

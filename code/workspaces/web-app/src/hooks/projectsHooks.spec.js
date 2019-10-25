@@ -1,9 +1,8 @@
 import useShallowSelector from './useShallowSelector';
 import projectSelectors from '../selectors/projectsSelectors';
-import useProjectsArray from './useProjectsArray';
+import { useProjectsArray } from './projectsHooks';
 
 jest.mock('./useShallowSelector');
-jest.mock('../selectors/projectsSelectors');
 
 describe('useProjectsArray', () => {
   it('returns result of shallow selector with correct selector function', () => {
