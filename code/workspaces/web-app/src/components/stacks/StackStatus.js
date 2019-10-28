@@ -6,21 +6,28 @@ import { statusTypes } from 'common';
 
 const { getStatusKeys, getStatusProps } = statusTypes;
 
-const styles = theme => ({
-  stackStatus: {
-    marginBottom: theme.spacing(1),
+const styles = (theme) => {
+  const stackStatus = {
     padding: `${theme.spacing(0.5)}px 0`,
     borderRadius: 50, // make round
     userSelect: 'none',
-  },
-});
+  };
+
+  return ({
+    stackStatus,
+    stackStatusReady: {
+      ...stackStatus,
+      marginBottom: theme.spacing(2), // only ready has buttons under it
+    },
+  });
+};
 
 const StackStatus = ({ classes, status }) => {
   const { displayName, backgroundColor, color } = getStatusProps(status);
 
   return (
     <Typography
-      className={classes.stackStatus}
+      className={status === 'ready' ? classes.stackStatusReady : classes.stackStatus}
       style={{ backgroundColor, color }}
       type="caption"
       align="center"

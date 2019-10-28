@@ -35,7 +35,7 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
 exports[`StackStatus creates correct snapshot for status types 3`] = `
 <WithStyles(ForwardRef(Typography))
   align="center"
-  className="StackStatus-stackStatus-1"
+  className="StackStatus-stackStatusReady-2"
   style={
     Object {
       "backgroundColor": "hsl(120, 75%, 85%)",
