@@ -1,47 +1,36 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { replace } from 'connected-react-router';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
+import { useUrlHash } from '../../hooks/routerHooks';
 
-class AuthCallback extends Component {
-  componentWillMount() {
-    if (/access_token|id_token|error/.test(this.props.urlHash)) {
-      getAuth().handleAuthentication()
-        .then((authResponse) => {
-          this.props.actions.userLogsIn(authResponse);
-          this.props.actions.routeTo(authResponse.appRedirect);
-        })
-        .catch(() => {
-          // Redirect to home page if auth fails
-          this.props.actions.routeTo('/');
-        });
-    } else {
-      // Redirect to projects page if no hash is present
-      this.props.actions.routeTo('/projects');
+export const handleAuth = async (urlHash, routeTo, dispatch) => {
+  if (/access_token|id_token|error/.test(urlHash)) {
+    try {
+      const authResponse = await getAuth().handleAuthentication();
+      dispatch(authActions.userLogsIn(authResponse));
+      dispatch(routeTo(authResponse.appRedirect));
+    } catch (error) {
+      // Redirect to home page if auth fails
+      dispatch(routeTo('/'));
     }
+  } else {
+    // Redirect to projects page if no hash is present
+    dispatch(routeTo('/projects'));
   }
+};
 
-  render() {
-    // Callback never renders
-    return null;
-  }
-}
+const AuthCallback = () => {
+  const urlHash = useUrlHash();
+  const dispatch = useDispatch();
+  const routeTo = replace;
 
-function mapStateToProps({ router: { location: { hash } } }) {
-  return {
-    urlHash: hash,
-  };
-}
+  useEffect(() => {
+    handleAuth(urlHash, routeTo, dispatch);
+  }, [urlHash, routeTo, dispatch]);
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      ...authActions,
-      routeTo: replace,
-    }, dispatch),
-  };
-}
+  return null;
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthCallback);
+export default AuthCallback;

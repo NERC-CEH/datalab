@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
-import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
+import { useCurrentUserId } from '../../hooks/authHooks';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import RemoveUserDialog from './RemoveUserDialog';
 import { CheckboxCell, RemoveUserButtonCell } from './UserPermissionsTableActionCells';

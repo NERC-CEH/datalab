@@ -101,7 +101,7 @@ class DataStorageContainer extends Component {
     userKeysMapping: { name: 'label', userId: 'value' },
   });
 
-  componentWillMount() {
+  componentDidMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     if (this.props.projectKey) {
       this.props.actions.loadDataStorage(this.props.projectKey)

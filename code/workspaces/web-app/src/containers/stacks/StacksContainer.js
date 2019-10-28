@@ -88,7 +88,7 @@ class StacksContainer extends Component {
     this.timeout = setTimeout(this.updateStack, refreshTimeout);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.projectKey.value) {
       this.loadStack();
     }

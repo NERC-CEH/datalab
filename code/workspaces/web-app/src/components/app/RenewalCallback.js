@@ -1,14 +1,12 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 
-class AuthCallback extends Component {
-  componentWillMount() {
-    window.parent.postMessage(window.location.hash, '*');
-  }
+export const effectFn = () => {
+  window.parent.postMessage(window.location.hash, '*');
+};
 
-  render() {
-    // Callback never renders
-    return null;
-  }
-}
+const AuthCallback = () => {
+  useEffect(effectFn);
+  return null; // callback shouldn't render
+};
 
 export default AuthCallback;

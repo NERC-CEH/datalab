@@ -14,7 +14,7 @@ class LoadUserManagementModalWrapper extends Component {
     this.removeUser = this.removeUser.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     this.props.actions.listUsers()
       .catch(() => {});

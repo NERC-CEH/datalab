@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequireAuth passes function to returned Route that renders CircularProgress when permissions fetching 1`] = `
+<ForwardRef(CircularProgress)
+  className="makeStyles-circularProgress-1"
+  classes={
+    Object {
+      "circle": "MuiCircularProgress-circle",
+      "circleDisableShrink": "MuiCircularProgress-circleDisableShrink",
+      "circleIndeterminate": "MuiCircularProgress-circleIndeterminate",
+      "circleStatic": "MuiCircularProgress-circleStatic",
+      "colorPrimary": "MuiCircularProgress-colorPrimary",
+      "colorSecondary": "MuiCircularProgress-colorSecondary",
+      "indeterminate": "MuiCircularProgress-indeterminate",
+      "root": "MuiCircularProgress-root",
+      "static": "MuiCircularProgress-static",
+      "svg": "MuiCircularProgress-svg",
+    }
+  }
+  size={70}
+/>
+`;
+
+exports[`RequireAuth passes function to returned Route that renders PrivateComponent when user has tokens 1`] = `
+<span
+  promisedUserPermissions={
+    Object {
+      "fetching": false,
+      "value": Array [
+        "permission",
+      ],
+    }
+  }
+>
+  PrivateComponent
+</span>
+`;
+
+exports[`RequireAuth passes function to returned Route that renders PublicComponent when user has no tokens 1`] = `
+<span>
+  PublicComponent
+</span>
+`;
+
+exports[`RequireAuth renders passing correct props to returned component 1`] = `
+<Route
+  exact={true}
+  path="/path"
+  render={[Function]}
+  strict={true}
+/>
+`;
