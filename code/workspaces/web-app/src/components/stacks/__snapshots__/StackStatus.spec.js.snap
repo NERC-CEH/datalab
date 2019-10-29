@@ -6,7 +6,7 @@ exports[`StackStatus creates correct snapshot for status types 1`] = `
   className="StackStatus-stackStatus-1"
   style={
     Object {
-      "backgroundColor": "hsl(190, 60%, 90%)",
+      "backgroundColor": "hsl(190, 55%, 85%)",
       "color": "hsl(190, 90%, 15%)",
     }
   }
@@ -22,8 +22,8 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
   className="StackStatus-stackStatus-1"
   style={
     Object {
-      "backgroundColor": "hsl(65, 90%, 83%)",
-      "color": "hsl(65, 100%, 14%)",
+      "backgroundColor": "hsl(65, 70%, 80%)",
+      "color": "hsl(65, 100%, 12%)",
     }
   }
   type="caption"
@@ -38,8 +38,8 @@ exports[`StackStatus creates correct snapshot for status types 3`] = `
   className="StackStatus-stackStatusReady-2"
   style={
     Object {
-      "backgroundColor": "hsl(120, 75%, 85%)",
-      "color": "hsl(120, 90%, 15%)",
+      "backgroundColor": "hsl(120, 55%, 80%)",
+      "color": "hsl(120, 90%, 12%)",
     }
   }
   type="caption"
