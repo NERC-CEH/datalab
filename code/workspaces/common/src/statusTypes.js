@@ -9,20 +9,20 @@ const STATUS_TYPES = [
   {
     name: REQUESTED,
     description: 'Resource has been requested',
-    backgroundColor: 'hsl(190, 60%, 90%)',
+    backgroundColor: 'hsl(190, 55%, 85%)',
     color: 'hsl(190, 90%, 15%)',
   },
   {
     name: CREATING,
     description: 'Resource is being created',
-    backgroundColor: 'hsl(65, 90%, 83%)',
-    color: 'hsl(65, 100%, 14%)',
+    backgroundColor: 'hsl(65, 70%, 80%)',
+    color: 'hsl(65, 100%, 12%)',
   },
   {
     name: READY,
     description: 'Resource is ready for use',
-    backgroundColor: 'hsl(120, 75%, 85%)',
-    color: 'hsl(120, 90%, 15%)',
+    backgroundColor: 'hsl(120, 55%, 80%)',
+    color: 'hsl(120, 90%, 12%)',
   },
   {
     name: UNAVAILABLE,
