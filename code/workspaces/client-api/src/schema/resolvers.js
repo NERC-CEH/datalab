@@ -59,10 +59,10 @@ const resolvers = {
       projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.removeUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
-      permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
+      projectPermissionWrapper({ projectKey }, PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
     ),
     removeProjectPermission: (obj, { permission: { projectKey, userId } }, { user, token }) => (
-      permissionChecker(PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
+      projectPermissionWrapper({ projectKey }, PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, token)),
     updateProject: (obj, { project }, { user, token }) => permissionChecker(SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
