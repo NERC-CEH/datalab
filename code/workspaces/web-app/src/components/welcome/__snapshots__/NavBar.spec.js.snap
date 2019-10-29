@@ -24,11 +24,6 @@ exports[`NavBar renders correct snapshot 1`] = `
         onClick={[Function]}
       />
       <WithStyles(TopBarButton)
-        key="Discourse"
-        label="Discourse"
-        onClick={[Function]}
-      />
-      <WithStyles(TopBarButton)
         key="GitHub"
         label="GitHub"
         onClick={[Function]}

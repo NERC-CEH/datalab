@@ -88,16 +88,6 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
           ],
           "title": "Contribute to Our Projects",
         },
-        Object {
-          "content": "discourse-hori.png",
-          "links": Array [
-            Object {
-              "displayName": "Discourse",
-              "href": "https://www.discourse.org/",
-            },
-          ],
-          "title": "Join Our Discourse Forum",
-        },
       ]
     }
     media={true}
