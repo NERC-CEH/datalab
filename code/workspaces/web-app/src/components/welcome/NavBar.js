@@ -9,7 +9,6 @@ import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 const publicNavLinks = [
   navBarLinks.SLACK,
-  navBarLinks.DISCOURSE,
   navBarLinks.GITHUB,
   navBarLinks.DOCKER_HUB,
 ];
@@ -44,7 +43,9 @@ const styles = theme => ({
   },
   login: {
     marginLeft: theme.spacing(0.5),
-    maxHeight: theme.shape.topBarContentHeight,
+    height: theme.shape.topBarContentHeight,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 });
 
