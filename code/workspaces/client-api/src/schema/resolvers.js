@@ -37,7 +37,7 @@ const resolvers = {
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
     checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(PROJECT_KEY, name, token)),
-    users: (obj, args, { user, token }) => permissionChecker(USERS_LIST, user, () => userService.getAll({ token })),
+    users: (obj, args, { token }) => userService.getAll({ token }),
     projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
     checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
@@ -59,10 +59,10 @@ const resolvers = {
       projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.removeUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
-      permissionChecker(PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
+      projectPermissionWrapper({ projectKey }, PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
     ),
     removeProjectPermission: (obj, { permission: { projectKey, userId } }, { user, token }) => (
-      permissionChecker(PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
+      projectPermissionWrapper({ projectKey }, PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, token)),
     updateProject: (obj, { project }, { user, token }) => permissionChecker(SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
