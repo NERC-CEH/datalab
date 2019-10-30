@@ -24,7 +24,23 @@ const handlePodlist = ({ items }) => items.map(pod => ({
   name: get(pod, 'metadata.labels.name'),
   namespace: get(pod, 'metadata.namespace'),
   type: get(pod, `metadata.labels.${SELECTOR_LABEL}`),
-  status: get(pod, 'status.phase'),
+  status: handlePodStatus(pod),
 }));
+
+const handlePodStatus = (pod) => {
+  const containers = get(pod, 'status.containerStatuses', []);
+
+  return getContainerStateReason(containers, 'terminated')
+    || getContainerStateReason(containers, 'waiting')
+    || get(pod, 'status.phase');
+};
+
+const getContainerStateReason = (containers, targetState) => {
+  const filtered = containers.filter(container => get(container, `state.${targetState}`));
+  if (filtered.length > 0) {
+    return get(filtered[0], `state.${targetState}.reason`);
+  }
+  return undefined;
+};
 
 export default { getStacks };
