@@ -3,7 +3,9 @@ import { render } from 'mustache';
 
 const ServiceTemplates = Object.freeze({
   JUPYTER_SERVICE: 'jupyter.service.template.yml',
+  JUPYTER_HEADLESS_SERVICE: 'jupyter.headless-service.template.yml',
   JUPYTERLAB_SERVICE: 'jupyterlab.service.template.yml',
+  JUPYTERLAB_HEADLESS_SERVICE: 'jupyterlab.headless-service.template.yml',
   ZEPPELIN_SERVICE: 'zeppelin.service.template.yml',
   RSTUDIO_SERVICE: 'rstudio.service.template.yml',
   RSHINY_SERVICE: 'rshiny.service.template.yml',

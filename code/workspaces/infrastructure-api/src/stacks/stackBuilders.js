@@ -5,6 +5,8 @@ import serviceApi from '../kubernetes/serviceApi';
 import ingressApi from '../kubernetes/ingressApi';
 import volumeApi from '../kubernetes/volumeApi';
 
+export const getHeadlessServiceName = name => `${name}-headless`;
+
 export const createDeployment = (params, generator) => () => {
   const { name, projectKey, type } = params;
   const deploymentName = `${type}-${name}`;
