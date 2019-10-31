@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ name }}
+  name: {{ name }}-headless
 spec:
   clusterIP: None
   ports:

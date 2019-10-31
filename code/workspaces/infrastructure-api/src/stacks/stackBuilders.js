@@ -1,11 +1,9 @@
 import chalk from 'chalk';
 import logger from '../config/logger';
 import deploymentApi from '../kubernetes/deploymentApi';
-import serviceApi from '../kubernetes/serviceApi';
+import serviceApi, { getHeadlessServiceName } from '../kubernetes/serviceApi';
 import ingressApi from '../kubernetes/ingressApi';
 import volumeApi from '../kubernetes/volumeApi';
-
-export const getHeadlessServiceName = name => `${name}-headless`;
 
 export const createDeployment = (params, generator) => () => {
   const { name, projectKey, type } = params;
@@ -27,6 +25,18 @@ export const createService = (params, generator) => () => {
       logger.info(`Creating service ${chalk.blue(serviceName)} with manifest:`);
       logger.debug(manifest.toString());
       return serviceApi.createOrUpdateService(serviceName, projectKey, manifest);
+    });
+};
+
+export const createHeadlessService = (params, generator) => () => {
+  const { name, projectKey, type } = params;
+  const rootServiceName = `${type}-${name}`;
+  const headlessServiceName = getHeadlessServiceName(rootServiceName);
+  return generator(rootServiceName)
+    .then((manifest) => {
+      logger.info(`Creating service ${chalk.blue(headlessServiceName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return serviceApi.createOrUpdateService(headlessServiceName, projectKey, manifest);
     });
 };
 
