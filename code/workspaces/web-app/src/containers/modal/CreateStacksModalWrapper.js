@@ -12,7 +12,7 @@ class CreateStacksModalWrapper extends Component {
     this.getProjectKey = this.getProjectKey.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     this.props.actions.loadDataStorage(this.getProjectKey())
       .catch((() => {}));
@@ -66,5 +66,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { CreateStacksModalWrapper as PureCreateStacksModalWrapper }; // export for testing
 export default connect(mapStateToProps, mapDispatchToProps)(CreateStacksModalWrapper);

@@ -82,7 +82,7 @@ class ProjectsContainer extends Component {
     return !isFetching || this.props.projects.isFetching !== isFetching;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.loadProjects();
   }
 

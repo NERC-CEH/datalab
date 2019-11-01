@@ -1,11 +1,17 @@
 import React from 'react';
-import { createShallow, createMount } from '@material-ui/core/test-utils';
-import createStore from 'redux-mock-store';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { createShallow } from '@material-ui/core/test-utils';
 import getAuth from '../../auth/auth';
-import RequireAuth, { PureRequireAuth } from './RequireAuth';
+import { useCurrentUserPermissions, useCurrentUserTokens } from '../../hooks/authHooks';
+import RequireAuth, { effectFn } from './RequireAuth';
+import authActions from '../../actions/authActions';
 
+jest.mock('react-redux');
 jest.mock('../../auth/auth');
+jest.mock('../../hooks/authHooks');
+jest.mock('../../actions/authActions');
+
 const isAuthenticated = jest.fn();
 const getCurrentSession = jest.fn();
 getAuth.mockImplementation(() => ({
@@ -13,154 +19,88 @@ getAuth.mockImplementation(() => ({
   getCurrentSession,
 }));
 
+useCurrentUserPermissions.mockReturnValue({ fetching: false, value: ['permission'] });
+useCurrentUserTokens.mockReturnValue({ token: 'expectedUserToken' });
+
+const mockDispatch = jest.fn().mockName('dispatch');
+useDispatch.mockReturnValue(mockDispatch);
+
 describe('RequireAuth', () => {
   let shallow;
-  let mount;
 
   beforeEach(() => {
     shallow = createShallow();
-    mount = createMount();
   });
 
-  describe('is a connected component which', () => {
-    function shallowRenderConnected(store) {
-      const props = {
-        store,
-        PrivateComponent: () => {},
-        PublicComponent: () => {},
-      };
-      // need to dive through the with styles;
-      return shallow(<RequireAuth {...props} />).dive().dive().find('RequireAuth');
-    }
+  const shallowRender = (props = {}) => {
+    const defaultProps = {
+      PrivateComponent: jest.fn().mockName('privateComponent'),
+      PublicComponent: jest.fn().mockName('publicComponent'),
+      path: '/path',
+      exact: true,
+      strict: true,
+    };
 
-    it('extracts the correct props from the redux state', () => {
-      // Arrange
-      const tokens = { token: 'expectedUserToken' };
-      const permissions = { fetching: false, value: ['permission'] };
-      const store = createStore()({
-        authentication: { tokens, permissions },
-      });
+    return shallow(<RequireAuth {...{ ...defaultProps, ...props }} />);
+  };
 
-      // Act
-      const output = shallowRenderConnected(store);
-
-      // Assert
-      expect(output.prop('tokens')).toBe(tokens);
-      expect(output.prop('permissions')).toBe(permissions);
-      expect(Object.keys(output.prop('actions')))
-        .toEqual(['userLogsIn', 'getUserPermissions']);
-    });
-
-    it('userLogsIn function dispatches correct action', () => {
-      // Arrange
-      const store = createStore()({
-        authentication: { tokens: {}, permissions: { fetching: true, value: [] } },
-      });
-
-      // Act
-      const output = shallowRenderConnected(store);
-
-      // Assert
-      expect(store.getActions().length).toBe(0);
-      output.prop('actions').userLogsIn({ expected: 'currentSession' });
-      expect(store.getActions()[0]).toEqual({
-        type: 'USER_LOGIN_ACTION',
-        payload: { expected: 'currentSession' },
-      });
-    });
+  it('renders passing correct props to returned component', () => {
+    expect(shallowRender()).toMatchSnapshot();
   });
 
-  describe('is a container which', () => {
-    function shallowRenderPure({ PrivateComponent = () => {}, ...rest }) {
-      return shallow(<PureRequireAuth PrivateComponent={PrivateComponent} {...rest } />);
-    }
+  describe('passes function to returned Route that renders', () => {
+    const shallowRenderFn = (props = {}) => {
+      const renderFn = shallowRender(props).find(Route).prop('render');
+      return shallow(renderFn());
+    };
 
-    const expectedPrivateComponent = () => (<span>expectedPrivateComponent</span>);
-    const expectedPublicComponent = () => (<span>expectedPublicComponent</span>);
-
-    const generateProps = () => ({
-      PrivateComponent: expectedPrivateComponent,
-      PublicComponent: expectedPublicComponent,
-      tokens: { token: 'expectedUserToken' },
-      permissions: { fetching: false, value: ['expectedPermission'] },
-      actions: { userLogsIn: () => {}, getUserPermissions: () => {} },
-      classes: { circularProgress: 'circularProgress' },
+    it('CircularProgress when permissions fetching', () => {
+      useCurrentUserPermissions.mockReturnValueOnce({ fetching: true });
+      const render = shallowRenderFn();
+      expect(render).toMatchSnapshot();
     });
 
-    beforeEach(() => jest.clearAllMocks());
-
-    it('calls auth.getCurrentSession when mounted', () => {
-      // Arrange
-      const props = generateProps();
-
-      // Act
-      shallowRenderPure(props);
-
-      // Assert
-      expect(getCurrentSession).toHaveBeenCalledTimes(1);
-    });
-
-    it('renders private content if user is logged in', () => {
-      // Arrange
-      const props = generateProps();
-      isAuthenticated.mockReturnValue(true);
-
-      // Act
-      const output = shallowRenderPure(props).find('Route').prop('render');
-
-      // Arrange
-      expect(mount(output()).find('span')).toHaveText('expectedPrivateComponent');
-    });
-
-    it('passes permissions to PrivateComponent', () => {
-      // Arrange
-      const props = generateProps();
-
-      // Act
-      const output = shallowRenderPure(props).find('Route').prop('render');
-
-      // Assert
-      expect(mount(output()).prop('promisedUserPermissions')).toEqual({
-        fetching: false,
-        value: ['expectedPermission'],
+    it('PrivateComponent when user has tokens', () => {
+      const render = shallowRenderFn({
+        PrivateComponent: props => <span {...props}>PrivateComponent</span>,
       });
+      expect(render).toMatchSnapshot();
     });
 
-    it('renders public content if user is not logged in', () => {
-      // Arrange
-      const props = generateProps();
-      props.tokens = {};
-
-      // Act
-      const output = shallowRenderPure(props).find('Route').prop('render');
-
-      // Assert
-      expect(mount(output()).find('span')).toHaveText('expectedPublicComponent');
+    it('PublicComponent when user has no tokens', () => {
+      useCurrentUserTokens.mockReturnValueOnce({});
+      const render = shallowRenderFn({
+        PublicComponent: props => <span {...props}>PublicComponent</span>,
+      });
+      expect(render).toMatchSnapshot();
     });
+  });
+});
 
-    it('passes Route component props down to the rendered child', () => {
-      // Arrange
-      const props = generateProps();
+describe('effectFn', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-      // Act
-      const output = shallowRenderPure(props).find('Route');
+  it('gets currentSession', () => {
+    effectFn(mockDispatch);
+    expect(getAuth().getCurrentSession).toHaveBeenCalled();
+  });
 
-      // Assert
-      expect(output).toHaveProp('path');
-      expect(output).toHaveProp('exact');
-      expect(output).toHaveProp('strict');
-    });
+  it('dispatches correct actions if there is a current session', () => {
+    getAuth().getCurrentSession.mockReturnValueOnce('current-session');
+    authActions.userLogsIn.mockReturnValueOnce('user-logs-in');
+    authActions.getUserPermissions.mockReturnValueOnce('get-user-permissions');
 
-    it('renders spinner while permission are retrieved', () => {
-      // Arrange
-      const props = generateProps();
-      props.permissions.fetching = true;
+    effectFn(mockDispatch);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledWith('user-logs-in');
+    expect(mockDispatch).toHaveBeenCalledWith('get-user-permissions');
+  });
 
-      // Act
-      const output = shallowRenderPure(props).find('Route').prop('render');
-
-      // Assert
-      expect(mount(output()).type()).toEqual(CircularProgress);
-    });
+  it('dispatches no actions if there is no current session', () => {
+    getAuth().getCurrentSession.mockReturnValueOnce(undefined);
+    effectFn(mockDispatch);
+    expect(mockDispatch).not.toHaveBeenCalled();
   });
 });
