@@ -22,7 +22,6 @@ const styles = theme => ({
   },
   sideBar: {
     background: theme.palette.sideBarBackground,
-    height: '100%',
     width: drawerWidth,
     minWidth: drawerWidth,
     borderRight: `1px solid ${theme.palette.divider}`,
