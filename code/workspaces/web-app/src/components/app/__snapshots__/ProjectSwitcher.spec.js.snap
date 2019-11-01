@@ -54,13 +54,13 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
         "value": Array [
           Object {
             "accessible": true,
-            "key": "testproj",
-            "name": "Test Project",
+            "key": "projthree",
+            "name": "Project Three",
           },
           Object {
             "accessible": true,
-            "key": "projthree",
-            "name": "Project Three",
+            "key": "testproj",
+            "name": "Test Project",
           },
         ],
       }
