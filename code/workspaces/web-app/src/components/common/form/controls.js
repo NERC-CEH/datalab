@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
-import { fieldStyle, fieldStyleProps } from './controlStyles';
+import { fieldStyle, fieldStyleProps, multilineFieldStyleProps } from './controlStyles';
 import theme from '../../../theme';
 import PrimaryActionButton from '../buttons/PrimaryActionButton';
 import SecondaryActionButton from '../buttons/SecondaryActionButton';
@@ -25,7 +25,7 @@ export const renderTextArea = ({ input, label, meta: { touched, error }, ...cust
     multiline
     {...input}
     {...custom}
-    {...fieldStyleProps}
+    {...multilineFieldStyleProps}
   />;
 
 export const renderSelectField = ({ input, label, meta: { touched, error }, options, ...custom }) => (
