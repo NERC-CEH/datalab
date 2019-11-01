@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import logger from '../config/logger';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
+import configMapApi from '../kubernetes/configMapApi';
 import ingressApi from '../kubernetes/ingressApi';
 import volumeApi from '../kubernetes/volumeApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
@@ -36,10 +37,16 @@ export const createSparkDriverHeadlessService = params => () => {
   const notebookServiceName = `${type}-${name}`;
   const headlessServiceName = getSparkDriverHeadlessServiceName(notebookServiceName);
   return deploymentGenerator.createSparkDriverHeadlessService(notebookServiceName)
+};
+
+export const createConfigMap = (params, generator) => () => {
+  const { name, projectKey, type } = params;
+  const serviceName = `${type}-${name}`;
+  return generator(serviceName, projectKey)
     .then((manifest) => {
-      logger.info(`Creating service ${chalk.blue(headlessServiceName)} with manifest:`);
+      logger.info(`Creating configMap ${chalk.blue(serviceName)} with manifest:`);
       logger.debug(manifest.toString());
-      return serviceApi.createOrUpdateService(headlessServiceName, projectKey, manifest);
+      return configMapApi.createOrReplaceNamespacedConfigMap(serviceName, projectKey, manifest);
     });
 };
 

@@ -5,7 +5,7 @@ import ingressGenerator from '../kubernetes/ingressGenerator';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import ingressApi from '../kubernetes/ingressApi';
-import { createDeployment, createService, createSparkDriverHeadlessService, createIngressRule, getSparkDriverHeadlessServiceName } from './stackBuilders';
+import { createDeployment, createService, createSparkDriverHeadlessService, createIngressRule, createConfigMap, getSparkDriverHeadlessServiceName } from './stackBuilders';
 
 function createJupyterLab(params) {
   const { projectKey, name, type } = params;
@@ -13,6 +13,7 @@ function createJupyterLab(params) {
 
   return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, projectKey, secret))
+    .then(createConfigMap(params, deploymentGenerator.createJupyterlabConfigMap))
     .then(createDeployment(params, deploymentGenerator.createJupyterlabDeployment))
     .then(createService(params, deploymentGenerator.createJupyterlabService))
     .then(createSparkDriverHeadlessService(params))

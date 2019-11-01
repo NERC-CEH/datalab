@@ -34,6 +34,11 @@ const ConfigTemplates = Object.freeze({
   ZEPPELIN_CONFIG: 'zeppelin.shiro.template.ini',
 });
 
+const ConfigMapTemplates = Object.freeze({
+  JUPYTER_CONFIGMAP: 'jupyter.configmap.template.yml',
+  JUPYTERLAB_CONFIGMAP: 'jupyterlab.configmap.template.yml',
+});
+
 function generateManifest(context, template) {
   const templatePath = `resources/${template}`;
   return fs.readFileAsync(templatePath)
@@ -41,4 +46,4 @@ function generateManifest(context, template) {
     .then(templateContent => render(templateContent, context));
 }
 
-export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, generateManifest };
+export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, ConfigMapTemplates, generateManifest };

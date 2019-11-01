@@ -13,6 +13,7 @@ function createJupyterNotebook(params) {
 
   return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, projectKey, secret))
+    .then(createConfigMap(params, deploymentGenerator.createJupyterConfigMap))
     .then(createDeployment(params, deploymentGenerator.createJupyterDeployment))
     .then(createService(params, deploymentGenerator.createJupyterService))
     .then(createSparkDriverHeadlessService(params))
