@@ -12,31 +12,31 @@ Array [
 exports[`StatusTypes generates expected types 1`] = `
 Object {
   "creating": Object {
-    "color": "#2196f3",
+    "backgroundColor": "hsl(65, 70%, 80%)",
+    "color": "hsl(65, 100%, 12%)",
     "description": "Resource is being created",
     "displayName": "Creating",
-    "invertColor": undefined,
     "value": "creating",
   },
   "ready": Object {
-    "color": "#4caf50",
+    "backgroundColor": "hsl(120, 55%, 80%)",
+    "color": "hsl(120, 90%, 12%)",
     "description": "Resource is ready for use",
     "displayName": "Ready",
-    "invertColor": undefined,
     "value": "ready",
   },
   "requested": Object {
-    "color": "#bbdefb",
+    "backgroundColor": "hsl(190, 55%, 85%)",
+    "color": "hsl(190, 90%, 15%)",
     "description": "Resource has been requested",
     "displayName": "Requested",
-    "invertColor": true,
     "value": "requested",
   },
   "unavailable": Object {
-    "color": "#fdd835",
+    "backgroundColor": "hsl(355, 65%, 90%)",
+    "color": "hsl(355, 100%, 22%)",
     "description": "Resource is currently unavailable",
     "displayName": "Unavailable",
-    "invertColor": true,
     "value": "unavailable",
   },
 }
@@ -44,10 +44,10 @@ Object {
 
 exports[`StatusTypes getStatusProps extracts status 1`] = `
 Object {
-  "color": "#4caf50",
+  "backgroundColor": "hsl(120, 55%, 80%)",
+  "color": "hsl(120, 90%, 12%)",
   "description": "Resource is ready for use",
   "displayName": "Ready",
-  "invertColor": undefined,
   "value": "ready",
 }
 `;

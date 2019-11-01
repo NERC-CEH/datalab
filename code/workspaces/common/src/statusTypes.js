@@ -9,32 +9,34 @@ const STATUS_TYPES = [
   {
     name: REQUESTED,
     description: 'Resource has been requested',
-    color: '#bbdefb',
-    invertColor: true,
+    backgroundColor: 'hsl(190, 55%, 85%)',
+    color: 'hsl(190, 90%, 15%)',
   },
   {
     name: CREATING,
     description: 'Resource is being created',
-    color: '#2196f3',
+    backgroundColor: 'hsl(65, 70%, 80%)',
+    color: 'hsl(65, 100%, 12%)',
   },
   {
     name: READY,
     description: 'Resource is ready for use',
-    color: '#4caf50',
+    backgroundColor: 'hsl(120, 55%, 80%)',
+    color: 'hsl(120, 90%, 12%)',
   },
   {
     name: UNAVAILABLE,
     description: 'Resource is currently unavailable',
-    color: '#fdd835',
-    invertColor: true,
+    backgroundColor: 'hsl(355, 65%, 90%)',
+    color: 'hsl(355, 100%, 22%)',
   },
 ];
 
 function getStatusTypes() {
-  const types = STATUS_TYPES.map(({ name, description, color, invertColor }) => ({
+  const types = STATUS_TYPES.map(({ name, description, backgroundColor, color }) => ({
     description,
+    backgroundColor,
     color,
-    invertColor,
     displayName: capitalize(name),
     value: name,
   }));

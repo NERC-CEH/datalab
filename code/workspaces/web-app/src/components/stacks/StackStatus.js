@@ -6,32 +6,29 @@ import { statusTypes } from 'common';
 
 const { getStatusKeys, getStatusProps } = statusTypes;
 
-function styles(theme) {
-  const commonStyle = {
-    marginBottom: theme.spacing(1),
+const styles = (theme) => {
+  const stackStatus = {
     padding: `${theme.spacing(0.5)}px 0`,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 50, // make round
+    userSelect: 'none',
   };
 
-  return {
-    text: {
-      ...commonStyle,
-      color: theme.palette.grey[100],
+  return ({
+    stackStatus,
+    stackStatusReady: {
+      ...stackStatus,
+      marginBottom: theme.spacing(2), // only ready has buttons under it
     },
-    textInvert: {
-      ...commonStyle,
-      color: theme.palette.secondary[800],
-    },
-  };
-}
+  });
+};
 
 const StackStatus = ({ classes, status }) => {
-  const { displayName, color, invertColor } = getStatusProps(status);
+  const { displayName, backgroundColor, color } = getStatusProps(status);
 
   return (
     <Typography
-      className={invertColor ? classes.textInvert : classes.text}
-      style={{ backgroundColor: color }}
+      className={status === 'ready' ? classes.stackStatusReady : classes.stackStatus}
+      style={{ backgroundColor, color }}
       type="caption"
       align="center"
     >

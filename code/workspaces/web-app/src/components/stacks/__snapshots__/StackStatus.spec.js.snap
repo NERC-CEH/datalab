@@ -3,10 +3,11 @@
 exports[`StackStatus creates correct snapshot for status types 1`] = `
 <WithStyles(ForwardRef(Typography))
   align="center"
-  className="StackStatus-textInvert-2"
+  className="StackStatus-stackStatus-1"
   style={
     Object {
-      "backgroundColor": "#bbdefb",
+      "backgroundColor": "hsl(190, 55%, 85%)",
+      "color": "hsl(190, 90%, 15%)",
     }
   }
   type="caption"
@@ -18,10 +19,11 @@ exports[`StackStatus creates correct snapshot for status types 1`] = `
 exports[`StackStatus creates correct snapshot for status types 2`] = `
 <WithStyles(ForwardRef(Typography))
   align="center"
-  className="StackStatus-text-1"
+  className="StackStatus-stackStatus-1"
   style={
     Object {
-      "backgroundColor": "#2196f3",
+      "backgroundColor": "hsl(65, 70%, 80%)",
+      "color": "hsl(65, 100%, 12%)",
     }
   }
   type="caption"
@@ -33,10 +35,11 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
 exports[`StackStatus creates correct snapshot for status types 3`] = `
 <WithStyles(ForwardRef(Typography))
   align="center"
-  className="StackStatus-text-1"
+  className="StackStatus-stackStatusReady-2"
   style={
     Object {
-      "backgroundColor": "#4caf50",
+      "backgroundColor": "hsl(120, 55%, 80%)",
+      "color": "hsl(120, 90%, 12%)",
     }
   }
   type="caption"
@@ -48,10 +51,11 @@ exports[`StackStatus creates correct snapshot for status types 3`] = `
 exports[`StackStatus creates correct snapshot for status types 4`] = `
 <WithStyles(ForwardRef(Typography))
   align="center"
-  className="StackStatus-textInvert-2"
+  className="StackStatus-stackStatus-1"
   style={
     Object {
-      "backgroundColor": "#fdd835",
+      "backgroundColor": "hsl(355, 65%, 90%)",
+      "color": "hsl(355, 100%, 22%)",
     }
   }
   type="caption"
