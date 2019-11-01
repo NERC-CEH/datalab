@@ -21,7 +21,6 @@ describe('DescribeElementCardBanner', () => {
   it('renders correct snapshot with switches', () => {
     const props = {
       title: 'expectedTitle',
-      doubleHeight: true,
     };
 
     expect(shallowRender(props)).toMatchSnapshot();

@@ -1,36 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import DescribeElementSegment from './DescribeElementSegment';
 import DescribeElementCard from './DescribeElementCard';
 
 const styles = theme => ({
   title: {
-    paddingTop: 28,
-    paddingBottom: 28,
+    paddingTop: theme.spacing(6),
+    paddingBottom: theme.spacing(2),
+  },
+  contentContainer: {
+    margin: 'auto',
+    padding: theme.spacing(4),
+    maxWidth: 1000,
+  },
+  cardContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
 });
 
-const DescribeElement = ({ classes, title, descriptions, invert, quote, media, doubleHeight }) => (
+const DescribeElement = ({ classes, title, descriptions, invert, quote, media }) => (
   <DescribeElementSegment invert={invert}>
-    <Typography className={classes.title} variant="h4">{title}</Typography>
-    <Grid container>
-      {descriptions.map(({ icon, title: cardTitle, content: cardContent, links }, idx) => (
-        <DescribeElementCard
-          key={`card-${idx}`}
-          icon={icon}
-          title={cardTitle}
-          content={cardContent}
-          links={links}
-          invert={invert}
-          quote={quote}
-          media={media}
-          doubleHeight={doubleHeight}
-        />
-      ))}
-    </Grid>
+    <div className={classes.contentContainer}>
+      <Typography className={classes.title} variant="h4">{title}</Typography>
+      <div className={classes.cardContainer}>
+        {descriptions.map(({ icon, title: cardTitle, content: cardContent, links }, idx) => (
+          <DescribeElementCard
+            key={`card-${idx}`}
+            icon={icon}
+            title={cardTitle}
+            content={cardContent}
+            links={links}
+            quote={quote}
+            media={media}
+          />
+        ))}
+      </div>
+    </div>
   </DescribeElementSegment>
 );
 

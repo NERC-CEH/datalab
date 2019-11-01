@@ -1,43 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import CardContent from '@material-ui/core/CardContent';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
+import theme from '../../theme';
 
-const cardTitle = {
-  fontWeight: 'lighter',
+const contentContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  margin: `${theme.spacing(2)}px 0`,
 };
 
-const styles = theme => ({
-  cardTitle,
-  tallCardTitle: {
-    ...cardTitle,
-    minHeight: theme.spacing(8),
+const styles = injectedTheme => ({
+  cardTitle: {
+    fontWeight: 'lighter',
+    margin: 0,
+    color: 'inherit',
+  },
+  contentContainer,
+  quoteContentContainer: {
+    alignSelf: 'flex-end',
+    color: injectedTheme.typography.colorLight,
   },
   icon: {
-    color: theme.palette.error[900],
-    paddingTop: 3,
-    marginRight: 35,
+    color: injectedTheme.palette.backgroundDarkTransparent,
+  },
+  iconContainer: {
+    background: injectedTheme.palette.backgroundDarkHighTransparent,
+    borderRadius: 50, // large so div is round
+    padding: injectedTheme.spacing(2),
+    marginRight: injectedTheme.spacing(4),
+    display: 'flex',
   },
 });
 
-const DescribeElementCardBanner = ({ classes, icon, title, doubleHeight }) => (
-  <CardContent>
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
-      {icon ? <Icon className={classes.icon}>{icon}</Icon> : undefined}
-      <Typography className={doubleHeight ? classes.tallCardTitle : classes.cardTitle} variant="h5">
-        {title}
-      </Typography>
-    </div>
-  </CardContent>
+const DescribeElementCardBanner = ({ classes, icon, title, quote }) => (
+  <div className={quote ? classes.quoteContentContainer : classes.contentContainer}>
+    {icon ? <div className={classes.iconContainer}><Icon className={classes.icon}>{icon}</Icon></div> : undefined}
+    <Typography className={classes.cardTitle} variant="h5">
+      {title}
+    </Typography>
+  </div>
 );
 
 DescribeElementCardBanner.propTypes = {
   classes: PropTypes.object.isRequired,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
-  doubleHeight: PropTypes.bool,
+  quote: PropTypes.bool,
 };
 
 export default withStyles(styles)(DescribeElementCardBanner);

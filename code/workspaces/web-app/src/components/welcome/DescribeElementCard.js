@@ -1,31 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
 import DescribeElementCardBanner from './DescribeElementCardBanner';
 import DescribeElementCardBody from './DescribeElementCardBody';
 import DescribeElementCardLinks from './DescribeElementCardLinks';
+import theme from '../../theme';
 
 const cardStyle = {
+  minHeight: '100%',
+  margin: theme.spacing(2),
+  padding: theme.spacing(4),
+  width: 350,
+  maxWidth: 500,
+  flexGrow: 1,
+  boxShadow: '0 2px 6px hsla(0, 0%, 0%, 0.22), 0 2px 15px hsla(0, 0%, 0%, 0.1)',
+  borderRadius: theme.shape.borderRadius,
+};
+
+const cardContentWrapper = {
+  display: 'flex',
+  flexDirection: 'column',
+  // add extra margin to top of all but first direct descendants
+  '& > *:not(:first-child)': {
+    marginTop: theme.spacing(4),
+  },
   height: '100%',
 };
 
-const styles = theme => ({
+const styles = () => ({
   card: cardStyle,
   shadedCard: {
     ...cardStyle,
-    backgroundColor: theme.palette.secondary[50],
+    backgroundColor: 'hsl(0, 0%, 100%)',
   },
-  cardContent: {
-    ...cardStyle,
-    display: 'flex',
-    flexDirection: 'column',
+  cardContentWrapper,
+  quoteCardContentWrapper: {
+    ...cardContentWrapper,
+    alignItems: 'space-between',
   },
 });
 
-function DescribeElementCard({ classes, icon, title, content, links, invert, quote, media, doubleHeight }) {
-  const banner = (<DescribeElementCardBanner key="card-banner" icon={icon} title={title} quote={quote} doubleHeight={doubleHeight} />);
+function DescribeElementCard({ classes, icon, title, content, links, invert, quote, media }) {
+  const banner = (<DescribeElementCardBanner key="card-banner" icon={icon} title={title} quote={quote} />);
   const body = (<DescribeElementCardBody key="card-body" content={content} media={media} quote={quote} />);
   const actions = links ? (<DescribeElementCardLinks key="card-links" links={links} />) : undefined;
 
@@ -38,13 +54,11 @@ function DescribeElementCard({ classes, icon, title, content, links, invert, quo
   cardContent.push(actions);
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
-      <Card className={invert ? classes.card : classes.shadedCard} square>
-        <div className={classes.cardContent}>
-          {cardContent}
-        </div>
-      </Card>
-    </Grid>
+    <div className={invert ? classes.card : classes.shadedCard}>
+      <div className={quote ? classes.quoteCardContentWrapper : classes.cardContentWrapper}>
+        {cardContent}
+      </div>
+    </div>
   );
 }
 
@@ -57,7 +71,6 @@ DescribeElementCard.propTypes = {
   invert: PropTypes.bool,
   quote: PropTypes.bool,
   media: PropTypes.bool,
-  doubleHeight: PropTypes.bool,
 };
 
 export default withStyles(styles)(DescribeElementCard);

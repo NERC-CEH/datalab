@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`New Stack Button creates correct snapshot 1`] = `
-<PrimaryActionButton
+<PagePrimaryActionButton
   aria-label="add"
   className="NewStackButton-button-1"
   onClick={[Function]}
 >
   Create Stack
-</PrimaryActionButton>
+</PagePrimaryActionButton>
 `;

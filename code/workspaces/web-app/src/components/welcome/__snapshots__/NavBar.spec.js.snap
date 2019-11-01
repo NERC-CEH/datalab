@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(AppBar))
+<div
   className="PublicNavBarContent-appBar-3"
-  position="fixed"
 >
-  <WithStyles(ForwardRef(Toolbar))>
+  <div
+    className="PublicNavBarContent-toolBar-4"
+  >
     <img
       alt="DataLabs-Logo"
       className="PublicNavBarContent-logo-1"
@@ -14,36 +15,32 @@ exports[`NavBar renders correct snapshot 1`] = `
     <div
       className="PublicNavBarContent-spacer-2"
     />
-    <WithStyles(NavBarLinkButton)
-      key="Slack"
-      onClick={[Function]}
+    <div
+      className="PublicNavBarContent-buttons-5"
     >
-      Slack
-    </WithStyles(NavBarLinkButton)>
-    <WithStyles(NavBarLinkButton)
-      key="Discourse"
-      onClick={[Function]}
-    >
-      Discourse
-    </WithStyles(NavBarLinkButton)>
-    <WithStyles(NavBarLinkButton)
-      key="GitHub"
-      onClick={[Function]}
-    >
-      GitHub
-    </WithStyles(NavBarLinkButton)>
-    <WithStyles(NavBarLinkButton)
-      key="Docker Hub"
-      onClick={[Function]}
-    >
-      Docker Hub
-    </WithStyles(NavBarLinkButton)>
-    <WithStyles(ForwardRef(Button))
+      <WithStyles(TopBarButton)
+        key="Slack"
+        label="Slack"
+        onClick={[Function]}
+      />
+      <WithStyles(TopBarButton)
+        key="GitHub"
+        label="GitHub"
+        onClick={[Function]}
+      />
+      <WithStyles(TopBarButton)
+        key="Docker Hub"
+        label="Docker Hub"
+        onClick={[Function]}
+      />
+    </div>
+    <PrimaryActionButton
+      className="PublicNavBarContent-login-6"
       color="primary"
       onClick={[MockFunction]}
     >
       Log In
-    </WithStyles(ForwardRef(Button))>
-  </WithStyles(ForwardRef(Toolbar))>
-</WithStyles(ForwardRef(AppBar))>
+    </PrimaryActionButton>
+  </div>
+</div>
 `;

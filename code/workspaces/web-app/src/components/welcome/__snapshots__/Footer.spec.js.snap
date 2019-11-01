@@ -4,17 +4,20 @@ exports[`Footer renders correct snapshot 1`] = `
 <div
   className="Footer-footer-1"
 >
-  <img
-    alt="DataLabs-Logo"
-    className="Footer-logo-3"
-    src="datalabs-mono.png"
-  />
-  <WithStyles(ForwardRef(Typography))
-    gutterBottom={true}
-    variant="caption"
+  <div
+    className="Footer-logoCopyRightContainer-3"
   >
-    © Copyright NERC 2017 - 2019
-  </WithStyles(ForwardRef(Typography))>
+    <img
+      alt="DataLabs-Logo"
+      className="Footer-logo-4"
+      src="datalabs-mono.png"
+    />
+    <WithStyles(ForwardRef(Typography))
+      variant="caption"
+    >
+      © Copyright NERC 2017—2019
+    </WithStyles(ForwardRef(Typography))>
+  </div>
   <WithStyles(ForwardRef(Typography))
     variant="body2"
   >

@@ -6,7 +6,7 @@ describe('WelcomePage', () => {
   let shallow;
 
   beforeEach(() => {
-    shallow = createShallow();
+    shallow = createShallow({ dive: true });
   });
 
   it('renders correct snapshot', () => {

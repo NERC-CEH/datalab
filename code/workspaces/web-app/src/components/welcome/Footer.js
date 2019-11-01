@@ -3,28 +3,40 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { getVersion } from '../../version';
 import logo from '../../assets/images/datalabs-mono.png';
+import theme from '../../theme';
 
-const copyrightString = '© Copyright NERC 2017 - 2019';
+const copyrightString = '© Copyright NERC 2017—2019';
 
 const footerStyle = {
-  padding: '40px 16px 40px 16px',
+  padding: theme.spacing(4),
+  paddingBottom: theme.spacing(2),
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-end',
 };
 
-const styles = theme => ({
+const styles = injectedTheme => ({
   footer: footerStyle,
   invertFooter: {
     ...footerStyle,
-    backgroundColor: theme.palette.secondary[50],
+    backgroundColor: injectedTheme.palette.backgroundDarkHighTransparent,
+  },
+  logoCopyRightContainer: {
+    display: 'flex',
+    flexDirection: 'column',
   },
   logo: {
     width: 140,
+    marginBottom: injectedTheme.spacing(2),
   },
 });
 
 const Footer = ({ classes, invert }) => (
   <div className={invert ? classes.invertFooter : classes.footer} >
-    <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
-    <Typography variant="caption" gutterBottom>{copyrightString}</Typography>
+    <div className={classes.logoCopyRightContainer}>
+      <img className={classes.logo} src={logo} alt="DataLabs-Logo" />
+      <Typography variant="caption">{copyrightString}</Typography>
+    </div>
     <Typography variant="body2">{`Version: ${getVersion()}`}</Typography>
   </div>
 );

@@ -8,6 +8,7 @@ const styles = (theme) => {
     padding: `0 ${theme.spacing(2)}px`,
     margin: `0 ${theme.spacing(0.5)}px`,
     height: theme.shape.topBarContentHeight,
+    width: 'auto',
   };
 
   // Order of class definitions seems important. It seems like classes get applied in

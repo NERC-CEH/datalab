@@ -2,35 +2,39 @@
 
 exports[`DescribeElement renders correct snapshot 1`] = `
 <WithStyles(DescribeElementSegment)>
-  <WithStyles(ForwardRef(Typography))
-    className="DescribeElement-title-1"
-    variant="h4"
+  <div
+    className="DescribeElement-contentContainer-2"
   >
-    cardTitle
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Grid))
-    container={true}
-  >
-    <WithStyles(DescribeElementCard)
-      content="expectedContent"
-      icon="people"
-      key="card-0"
-      title="expectedTitle"
-    />
-    <WithStyles(DescribeElementCard)
-      content="moreContent"
-      key="card-1"
-      links={
-        Array [
-          Object {
-            "displayName": "displayName",
-            "href": "address",
-          },
-        ]
-      }
-      title="anotherTitle"
-    />
-  </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Typography))
+      className="DescribeElement-title-1"
+      variant="h4"
+    >
+      cardTitle
+    </WithStyles(ForwardRef(Typography))>
+    <div
+      className="DescribeElement-cardContainer-3"
+    >
+      <WithStyles(DescribeElementCard)
+        content="expectedContent"
+        icon="people"
+        key="card-0"
+        title="expectedTitle"
+      />
+      <WithStyles(DescribeElementCard)
+        content="moreContent"
+        key="card-1"
+        links={
+          Array [
+            Object {
+              "displayName": "displayName",
+              "href": "address",
+            },
+          ]
+        }
+        title="anotherTitle"
+      />
+    </div>
+  </div>
 </WithStyles(DescribeElementSegment)>
 `;
 
@@ -38,40 +42,42 @@ exports[`DescribeElement renders correct snapshot with switches 1`] = `
 <WithStyles(DescribeElementSegment)
   invert={true}
 >
-  <WithStyles(ForwardRef(Typography))
-    className="DescribeElement-title-1"
-    variant="h4"
+  <div
+    className="DescribeElement-contentContainer-2"
   >
-    cardTitle
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Grid))
-    container={true}
-  >
-    <WithStyles(DescribeElementCard)
-      content="expectedContent"
-      icon="people"
-      invert={true}
-      key="card-0"
-      media={true}
-      quote={true}
-      title="expectedTitle"
-    />
-    <WithStyles(DescribeElementCard)
-      content="moreContent"
-      invert={true}
-      key="card-1"
-      links={
-        Array [
-          Object {
-            "displayName": "displayName",
-            "href": "address",
-          },
-        ]
-      }
-      media={true}
-      quote={true}
-      title="anotherTitle"
-    />
-  </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Typography))
+      className="DescribeElement-title-1"
+      variant="h4"
+    >
+      cardTitle
+    </WithStyles(ForwardRef(Typography))>
+    <div
+      className="DescribeElement-cardContainer-3"
+    >
+      <WithStyles(DescribeElementCard)
+        content="expectedContent"
+        icon="people"
+        key="card-0"
+        media={true}
+        quote={true}
+        title="expectedTitle"
+      />
+      <WithStyles(DescribeElementCard)
+        content="moreContent"
+        key="card-1"
+        links={
+          Array [
+            Object {
+              "displayName": "displayName",
+              "href": "address",
+            },
+          ]
+        }
+        media={true}
+        quote={true}
+        title="anotherTitle"
+      />
+    </div>
+  </div>
 </WithStyles(DescribeElementSegment)>
 `;
