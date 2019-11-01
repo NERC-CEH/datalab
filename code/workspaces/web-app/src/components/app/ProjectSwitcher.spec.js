@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { useDispatch } from 'react-redux';
-import useCurrentProject from '../../hooks/useCurrentProject';
-import useProjectsArray from '../../hooks/useProjectsArray';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
+import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectSwitcher, { Switcher,
   getSwitcherProjects,
   createRoute } from './ProjectSwitcher';
 
 jest.mock('react-redux');
-jest.mock('../../hooks/useCurrentProject');
-jest.mock('../../hooks/useProjectsArray');
+jest.mock('../../hooks/currentProjectHooks');
+jest.mock('../../hooks/projectsHooks');
 jest.mock('../../actions/projectActions');
 
 const testProj = { key: 'testproj', name: 'Test Project', accessible: true };

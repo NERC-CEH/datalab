@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
-import useCurrentProject from '../../hooks/useCurrentProject';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import ProjectKey from '../../components/common/typography/ProjectKey';
 
 const useStyles = makeStyles(theme => ({

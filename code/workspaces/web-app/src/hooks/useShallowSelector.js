@@ -1,7 +1,5 @@
 import { useSelector, shallowEqual } from 'react-redux';
 
-function useShallowSelector(selectorFn) {
-  return useSelector(selectorFn, shallowEqual);
-}
+const useShallowSelector = selectorFn => useSelector(selectorFn, shallowEqual);
 
 export default useShallowSelector;

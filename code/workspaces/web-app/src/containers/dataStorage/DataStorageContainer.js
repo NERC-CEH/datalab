@@ -14,7 +14,7 @@ import {
 } from '../../constants/modaltypes';
 import dataStorageActions from '../../actions/dataStorageActions';
 import modalDialogActions from '../../actions/modalDialogActions';
-import projectSelectors from '../../selectors/projectsSelectors';
+import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import notify from '../../components/common/notify';
 import StackCards from '../../components/stacks/StackCards';
 
@@ -152,7 +152,7 @@ DataStorageContainer.propTypes = {
 function mapStateToProps(state) {
   return {
     dataStorage: state.dataStorage,
-    projectKey: projectSelectors.currentProjectKey(state).value,
+    projectKey: currentProjectSelectors.currentProjectKey(state).value,
   };
 }
 

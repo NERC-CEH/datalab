@@ -9,10 +9,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import useShallowSelector from '../../hooks/useShallowSelector';
+import { useProjectUsers } from '../../hooks/projectUsersHooks';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
+import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
 import projectSettingsActions from '../../actions/projectSettingsActions';
-import projectSelectors from '../../selectors/projectsSelectors';
-import authSelectors from '../../selectors/authSelectors';
 import RemoveUserDialog from './RemoveUserDialog';
 import { CheckboxCell, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
@@ -57,9 +57,9 @@ export const columnHeadings = [
 const checkBoxColumnOrder = SORTED_PERMISSIONS;
 
 function UserPermissionsTable({ classes }) {
-  const users = useShallowSelector(projectSelectors.projectUsers);
-  const currentUserId = useShallowSelector(authSelectors.currentUserId);
-  const projectKey = useShallowSelector(projectSelectors.currentProjectKey).value;
+  const users = useProjectUsers();
+  const currentUserId = useCurrentUserId();
+  const projectKey = useCurrentProjectKey().value;
   const dispatch = useDispatch();
 
   const [removeUserDialogState, setRemoveUserDialogState] = useState({ open: false, user: null });
