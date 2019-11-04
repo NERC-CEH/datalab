@@ -1,9 +1,12 @@
 import chalk from 'chalk';
 import logger from '../config/logger';
 import deploymentApi from '../kubernetes/deploymentApi';
-import serviceApi, { getHeadlessServiceName } from '../kubernetes/serviceApi';
+import serviceApi from '../kubernetes/serviceApi';
 import ingressApi from '../kubernetes/ingressApi';
 import volumeApi from '../kubernetes/volumeApi';
+import deploymentGenerator from '../kubernetes/deploymentGenerator';
+
+export const getSparkDriverHeadlessServiceName = name => `${name}-spark-driver-headless-service`;
 
 export const createDeployment = (params, generator) => () => {
   const { name, projectKey, type } = params;
@@ -28,11 +31,11 @@ export const createService = (params, generator) => () => {
     });
 };
 
-export const createHeadlessService = (params, generator) => () => {
+export const createSparkDriverHeadlessService = params => () => {
   const { name, projectKey, type } = params;
-  const rootServiceName = `${type}-${name}`;
-  const headlessServiceName = getHeadlessServiceName(rootServiceName);
-  return generator(rootServiceName)
+  const notebookServiceName = `${type}-${name}`;
+  const headlessServiceName = getSparkDriverHeadlessServiceName(notebookServiceName);
+  return deploymentGenerator.createSparkDriverHeadlessService(notebookServiceName)
     .then((manifest) => {
       logger.info(`Creating service ${chalk.blue(headlessServiceName)} with manifest:`);
       logger.debug(manifest.toString());

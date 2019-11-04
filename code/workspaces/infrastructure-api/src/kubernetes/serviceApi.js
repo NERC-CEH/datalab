@@ -6,8 +6,6 @@ import { handleCreateError, handleDeleteError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 
-export const getHeadlessServiceName = name => `${name}-headless`;
-
 const getServiceUrl = (namespace, name) => {
   const nameComponent = name ? `/${name}` : '';
   return `${API_BASE}/api/v1/namespaces/${namespace}/services${nameComponent}`;
@@ -61,10 +59,6 @@ function deleteService(name, namespace) {
     .catch(handleDeleteError('service', name));
 }
 
-function deleteHeadlessService(name, namespace) {
-  return deleteService(getHeadlessServiceName(name), namespace);
-}
-
 function copyRequiredFieldsToJsonManfiest(manifest, existingService) {
   const jsonManifest = yaml.load(manifest);
   jsonManifest.spec.clusterIP = existingService.spec.clusterIP;
@@ -72,4 +66,4 @@ function copyRequiredFieldsToJsonManfiest(manifest, existingService) {
   return jsonManifest;
 }
 
-export default { getService, createService, updateService, deleteService, deleteHeadlessService, createOrUpdateService };
+export default { getService, createService, updateService, deleteService, createOrUpdateService };

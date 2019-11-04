@@ -126,19 +126,9 @@ function createJupyterService(notebookName) {
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
 }
 
-function createJupyterHeadlessService(notebookName) {
-  const context = { name: notebookName };
-  return generateManifest(context, ServiceTemplates.JUPYTER_HEADLESS_SERVICE);
-}
-
 function createJupyterlabService(notebookName) {
   const context = { name: notebookName };
   return generateManifest(context, ServiceTemplates.JUPYTERLAB_SERVICE);
-}
-
-function createJupyterlabHeadlessService(notebookName) {
-  const context = { name: notebookName };
-  return generateManifest(context, ServiceTemplates.JUPYTERLAB_HEADLESS_SERVICE);
 }
 
 function createZeppelinService(name) {
@@ -166,6 +156,11 @@ function createMinioService(name) {
   return generateManifest(context, ServiceTemplates.MINIO_SERVICE);
 }
 
+function createSparkDriverHeadlessService(notebookName) {
+  const context = { name: notebookName };
+  return generateManifest(context, ServiceTemplates.SPARK_DRIVER_HEADLESS_SERVICE);
+}
+
 export default {
   createJupyterDeployment,
   createJupyterlabDeployment,
@@ -175,12 +170,11 @@ export default {
   createNbViewerDeployment,
   createMinioDeployment,
   createJupyterService,
-  createJupyterHeadlessService,
   createJupyterlabService,
-  createJupyterlabHeadlessService,
   createZeppelinService,
   createRStudioService,
   createRShinyService,
   createNbViewerService,
   createMinioService,
+  createSparkDriverHeadlessService,
 };
