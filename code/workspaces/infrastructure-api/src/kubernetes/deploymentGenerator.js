@@ -161,14 +161,13 @@ function createSparkDriverHeadlessService(notebookName) {
   return generateManifest(context, ServiceTemplates.SPARK_DRIVER_HEADLESS_SERVICE);
 }
 
-function createJupyterConfigMap(notebookName, projectKey) {
-  const context = { name: notebookName, 'project-compute-namespace': `${projectKey}-compute` };
-  return generateManifest(context, ConfigMapTemplates.JUPYTER_CONFIGMAP);
-}
-
-function createJupyterlabConfigMap(notebookName, projectKey) {
-  const context = { name: notebookName, 'project-compute-namespace': `${projectKey}-compute` };
-  return generateManifest(context, ConfigMapTemplates.JUPYTERLAB_CONFIGMAP);
+function createPySparkConfigMap(notebookName, projectKey) {
+  const context = {
+    name: notebookName,
+    'project-namespace': projectKey,
+    'project-compute-namespace': `${projectKey}-compute`,
+  };
+  return generateManifest(context, ConfigMapTemplates.PYSPARK_CONFIGMAP);
 }
 
 export default {
@@ -187,6 +186,5 @@ export default {
   createNbViewerService,
   createMinioService,
   createSparkDriverHeadlessService,
-  createJupyterConfigMap,
-  createJupyterlabConfigMap,
+  createPySparkConfigMap,
 };

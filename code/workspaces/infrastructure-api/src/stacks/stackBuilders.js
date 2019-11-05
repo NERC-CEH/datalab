@@ -37,12 +37,17 @@ export const createSparkDriverHeadlessService = params => () => {
   const notebookServiceName = `${type}-${name}`;
   const headlessServiceName = getSparkDriverHeadlessServiceName(notebookServiceName);
   return deploymentGenerator.createSparkDriverHeadlessService(notebookServiceName)
+    .then((manifest) => {
+      logger.info(`Creating service ${chalk.blue(headlessServiceName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return serviceApi.createOrUpdateService(headlessServiceName, projectKey, manifest);
+    });
 };
 
-export const createConfigMap = (params, generator) => () => {
+export const createPySparkConfigMap = params => () => {
   const { name, projectKey, type } = params;
   const serviceName = `${type}-${name}`;
-  return generator(serviceName, projectKey)
+  return deploymentGenerator.createPySparkConfigMap(serviceName, projectKey)
     .then((manifest) => {
       logger.info(`Creating configMap ${chalk.blue(serviceName)} with manifest:`);
       logger.debug(manifest.toString());

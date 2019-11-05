@@ -35,8 +35,7 @@ const ConfigTemplates = Object.freeze({
 });
 
 const ConfigMapTemplates = Object.freeze({
-  JUPYTER_CONFIGMAP: 'jupyter.configmap.template.yml',
-  JUPYTERLAB_CONFIGMAP: 'jupyterlab.configmap.template.yml',
+  PYSPARK_CONFIGMAP: 'pyspark.configmap.template.yml',
 });
 
 function generateManifest(context, template) {
