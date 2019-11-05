@@ -21,21 +21,22 @@ function statusChecker() {
 
 const groupStatusByName = pods => pods
   .reduce((previous, { name, namespace, status }) => {
-    const entry = { namespace, status: [status] };
-    if (previous[name]) {
+    const entry = { kubeName: name, namespace, status: [status] };
+    const key = `${name}-${namespace}`;
+    if (previous[key]) {
       entry.status = [...entry.status, status];
     }
 
     return {
       ...previous,
-      [name]: entry,
+      [key]: entry,
     };
   }, {});
 
-const setStatus = pods => Promise.mapSeries(Object.entries(pods), ([kubeName, podInfo]) => {
+const setStatus = pods => Promise.mapSeries(Object.values(pods), (podInfo) => {
+  const { namespace, kubeName } = podInfo;
   const [type, name] = parseKubeName(kubeName);
   const status = getStatus(podInfo.status);
-  const { namespace } = podInfo;
 
   return stackRepository.updateStatus({ name, namespace, type, status })
     .then((result) => {
