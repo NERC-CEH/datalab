@@ -13,6 +13,7 @@ import {
   getSparkDriverHeadlessServiceName,
   createPySparkConfigMap,
 } from './stackBuilders';
+import configMapApi from '../kubernetes/configMapApi';
 
 function createJupyterNotebook(params) {
   const { projectKey, name, type } = params;
@@ -35,6 +36,7 @@ function deleteJupyterNotebook(params) {
     .then(() => serviceApi.deleteService(k8sName, projectKey))
     .then(() => serviceApi.deleteService(getSparkDriverHeadlessServiceName(k8sName), projectKey))
     .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
+    .then(() => configMapApi.deleteNamespacedConfigMap(`${k8sName}-pyspark-config`, projectKey))
     .then(() => k8sSecretApi.deleteSecret(k8sName, projectKey))
     .then(() => secretManager.deleteSecret(projectKey, name));
 }
