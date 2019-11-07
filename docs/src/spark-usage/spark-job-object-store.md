@@ -1,14 +1,20 @@
 # Spark job using Data in Object Store
 
-In DataLabs, users can create Spark clusters from the notebooks in their sessions and submit jobs to them. This page describe how a user can submit a Spark job using data stored in the Object Storage.
+In DataLabs, users can create Spark clusters from the notebooks in
+their sessions and submit jobs to them. This page describe how a
+user can submit a Spark job using data stored in the Object Storage.
 
 ## Prerequisites
 
-The user would need to have first obtained the Object store credentials from the JASMIN support team. These would be in the form of two strings - an access key and a secret key. These should be stored securely.
+The user would need to have first obtained the Object store credentials
+from the JASMIN support team. These would be in the form of two
+strings - an access key and a secret key. These should be stored securely.
 
 ## Create Notebook
 
-Create a Jupyter notebook within your defined project. When the notebook is created the Spark properties needed for the Spark cluster to be created is dynamically loaded into the notebook environment.
+Create a Jupyter notebook within your defined project.
+When the notebook is created the Spark properties needed
+for the Spark cluster to be created is dynamically loaded into the notebook environment.
 
 ### Create Spark session and load credentails
 
