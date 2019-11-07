@@ -6,12 +6,11 @@ import configMapApi from '../kubernetes/configMapApi';
 import ingressApi from '../kubernetes/ingressApi';
 import volumeApi from '../kubernetes/volumeApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
-
-export const getSparkDriverHeadlessServiceName = name => `${name}-spark-driver-headless-service`;
+import nameGenerator from '../common/nameGenerators';
 
 export const createDeployment = (params, generator) => () => {
   const { name, projectKey, type } = params;
-  const deploymentName = `${type}-${name}`;
+  const deploymentName = nameGenerator.deploymentName(name, type);
 
   return generator({ ...params, deploymentName })
     .then((manifest) => {
@@ -23,7 +22,7 @@ export const createDeployment = (params, generator) => () => {
 
 export const createService = (params, generator) => () => {
   const { name, projectKey, type } = params;
-  const serviceName = `${type}-${name}`;
+  const serviceName = nameGenerator.deploymentName(name, type);
   return generator(serviceName)
     .then((manifest) => {
       logger.info(`Creating service ${chalk.blue(serviceName)} with manifest:`);
@@ -34,8 +33,8 @@ export const createService = (params, generator) => () => {
 
 export const createSparkDriverHeadlessService = params => () => {
   const { name, projectKey, type } = params;
-  const notebookServiceName = `${type}-${name}`;
-  const headlessServiceName = getSparkDriverHeadlessServiceName(notebookServiceName);
+  const notebookServiceName = nameGenerator.deploymentName(name, type);
+  const headlessServiceName = nameGenerator.sparkDriverHeadlessService(notebookServiceName);
   return deploymentGenerator.createSparkDriverHeadlessService(notebookServiceName)
     .then((manifest) => {
       logger.info(`Creating service ${chalk.blue(headlessServiceName)} with manifest:`);
@@ -46,7 +45,7 @@ export const createSparkDriverHeadlessService = params => () => {
 
 export const createPySparkConfigMap = params => () => {
   const { name, projectKey, type } = params;
-  const serviceName = `${type}-${name}`;
+  const serviceName = nameGenerator.deploymentName(name, type);
   return deploymentGenerator.createPySparkConfigMap(serviceName, projectKey)
     .then((manifest) => {
       logger.info(`Creating configMap ${chalk.blue(serviceName)} with manifest:`);
@@ -57,7 +56,7 @@ export const createPySparkConfigMap = params => () => {
 
 export const createIngressRule = (params, generator) => (service) => {
   const { name, projectKey, type } = params;
-  const ingressName = `${type}-${name}`;
+  const ingressName = nameGenerator.deploymentName(name, type);
   const serviceName = service.metadata.name;
   const { port } = service.spec.ports[0];
 
@@ -71,7 +70,7 @@ export const createIngressRule = (params, generator) => (service) => {
 
 export const createIngressRuleWithConnect = (params, generator) => (service) => {
   const { name, projectKey, type } = params;
-  const ingressName = `${type}-${name}`;
+  const ingressName = nameGenerator.deploymentName(name, type);
   const serviceName = service.metadata.name;
   const { port } = service.spec.ports[0];
   const connectPort = service.spec.ports[1].port;
@@ -86,7 +85,7 @@ export const createIngressRuleWithConnect = (params, generator) => (service) => 
 
 export const createPersistentVolume = (params, generator) => () => {
   const { name, volumeSize, projectKey } = params;
-  const volumeName = `${name}-claim`;
+  const volumeName = nameGenerator.pvcName(name);
 
   return generator(volumeName, volumeSize)
     .then((manifest) => {

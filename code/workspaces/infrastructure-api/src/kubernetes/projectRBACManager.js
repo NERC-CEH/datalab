@@ -1,47 +1,43 @@
+import nameGenerators from '../common/nameGenerators';
 import roleBindingApi from './roleBindingApi';
 import serviceAccountApi from './serviceAccountApi';
 
-const getProjectComputeNamespace = projectKey => `${projectKey}-compute`;
-const getComputeSubmissionServiceAccountName = projectKey => `${projectKey}-compute-submission-account`;
-const getComputeSubmissionServiceAccountRoleBindingName = projectKey => `${getComputeSubmissionServiceAccountName(projectKey)}-role-binding`;
-const getComputeSubmissionClusterRoleName = () => 'compute-submission-role';
-
 async function createProjectComputeRBAC(projectKey) {
   await serviceAccountApi.createNamespacedServiceAccount(
-    getComputeSubmissionServiceAccountName(projectKey),
+    nameGenerators.computeSubmissionServiceAccount(projectKey),
     projectKey,
   );
 
   const roleBindingDefinition = {
     metadata: {
-      name: getComputeSubmissionServiceAccountRoleBindingName(projectKey),
+      name: nameGenerators.computeSubmissionServiceAccountRoleBinding(projectKey),
     },
     roleRef: {
       kind: 'ClusterRole',
-      name: getComputeSubmissionClusterRoleName(),
+      name: nameGenerators.computeSubmissionClusterRole(),
       apiGroup: 'rbac.authorization.k8s.io',
     },
     subjects: [{
       kind: 'ServiceAccount',
-      name: getComputeSubmissionServiceAccountName(projectKey),
+      name: nameGenerators.computeSubmissionServiceAccount(projectKey),
       namespace: projectKey,
     }],
   };
   await roleBindingApi.createNamespacedRoleBinding(
     roleBindingDefinition,
-    getProjectComputeNamespace(projectKey),
+    nameGenerators.projectComputeNamespace(projectKey),
   );
 }
 
 async function deleteProjectComputeRBAC(projectKey) {
   await serviceAccountApi.deleteNamespacedServiceAccount(
-    getComputeSubmissionServiceAccountName(projectKey),
+    nameGenerators.computeSubmissionServiceAccount(projectKey),
     projectKey,
   );
 
   await roleBindingApi.deleteNamespacedRoleBinding(
-    getComputeSubmissionServiceAccountRoleBindingName(projectKey),
-    getProjectComputeNamespace(projectKey),
+    nameGenerators.computeSubmissionServiceAccountRoleBinding(projectKey),
+    nameGenerators.projectComputeNamespace(projectKey),
   );
 }
 
