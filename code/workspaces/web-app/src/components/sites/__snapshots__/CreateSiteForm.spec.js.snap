@@ -70,6 +70,29 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       placeholder="Description"
     />
   </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Visibility Status"
+      name="visibility"
+      options={
+        Array [
+          Object {
+            "text": <Personal />,
+            "value": "personal",
+          },
+          Object {
+            "text": <Project />,
+            "value": "project",
+          },
+          Object {
+            "text": <Public />,
+            "value": "public",
+          },
+        ]
+      }
+    />
+  </div>
   <CreateFormControls
     onCancel={[MockFunction]}
   />

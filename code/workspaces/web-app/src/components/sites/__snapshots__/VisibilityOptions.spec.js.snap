@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SiteSharingOptions-personal correctly renders correct snapshot 1`] = `
+<div
+  className="makeStyles-select-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-title-2"
+    variant="body1"
+  >
+    Personal
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-description-3"
+    variant="body1"
+  >
+    Only you can can view and interact with this site.
+  </WithStyles(ForwardRef(Typography))>
+</div>
+`;
+
+exports[`SiteSharingOptions-project correctly renders correct snapshot 1`] = `
+<div
+  className="makeStyles-select-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-title-2"
+    variant="body1"
+  >
+    Project
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-description-3"
+    variant="body1"
+  >
+    Anyone in this project can view and interact with this site.
+  </WithStyles(ForwardRef(Typography))>
+</div>
+`;
+
+exports[`SiteSharingOptions-project correctly renders correct snapshot 2`] = `
+<div
+  className="makeStyles-select-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-title-2"
+    variant="body1"
+  >
+    Public
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-description-3"
+    variant="body1"
+  >
+    Anyone can view and interact with this site.
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-warning-4"
+    variant="body1"
+  >
+    NOTE: This will make the site available (via URL) to anyone including those external to the DataLabs platform. Hence please ensure any security considerations have been implemented before proceeding.
+  </WithStyles(ForwardRef(Typography))>
+</div>
+`;
