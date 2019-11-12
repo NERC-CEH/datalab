@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import { PERMISSION_VALUES } from '../../constants/permissions';
 
-export function CheckboxCell({ user, isCurrentUser, checkboxSpec, projectKey, classes, cellKey, actions, dispatch }) {
+export function CheckboxCell({ user, isCurrentUser, currentUserSystemAdmin, checkboxSpec, projectKey, classes, cellKey, actions, dispatch }) {
   return (
     <TableCell
       className={classes.tableCell}
@@ -16,6 +16,7 @@ export function CheckboxCell({ user, isCurrentUser, checkboxSpec, projectKey, cl
       <PermissionsCheckbox
         user={user}
         isCurrentUser={isCurrentUser}
+        currentUserSystemAdmin={currentUserSystemAdmin}
         checkboxSpec={checkboxSpec}
         projectKey={projectKey}
         classes={classes}
@@ -26,7 +27,7 @@ export function CheckboxCell({ user, isCurrentUser, checkboxSpec, projectKey, cl
   );
 }
 
-export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, projectKey, classes, actions, dispatch }) {
+export function PermissionsCheckbox({ user, isCurrentUser, currentUserSystemAdmin, checkboxSpec, projectKey, classes, actions, dispatch }) {
   const props = { checked: true, color: 'default' };
   if (user.role === checkboxSpec.name) {
     props.className = classes.activeSelection;
@@ -36,16 +37,16 @@ export function PermissionsCheckbox({ user, isCurrentUser, checkboxSpec, project
     props.checked = false;
   }
 
-  if (isCurrentUser) props.disabled = true;
+  if (isCurrentUser && !currentUserSystemAdmin) props.disabled = true;
 
   return <Checkbox {...props} onClick={() => actions.addUserPermission(projectKey, user, checkboxSpec.name, dispatch)}/>;
 }
 
-export function RemoveUserButtonCell({ user, isCurrentUser, classes, setRemoveUserDialogState }) {
+export function RemoveUserButtonCell({ user, isCurrentUser, currentUserSystemAdmin, classes, setRemoveUserDialogState }) {
   return (
     <TableCell className={classes.tableCell} padding="checkbox" align="center">
       <IconButton
-        disabled={isCurrentUser}
+        disabled={isCurrentUser && !currentUserSystemAdmin}
         onClick={() => {
           setRemoveUserDialogState({ user, open: true });
         }}

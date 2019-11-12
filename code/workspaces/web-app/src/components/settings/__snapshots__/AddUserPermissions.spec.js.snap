@@ -1,23 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddUserButton renders as disabled when the selected user name is not in the list of possibilities 1`] = `
-<PrimaryActionButton
-  className="addButton"
-  disabled={true}
-  onClick={[Function]}
+exports[`AddUserButton renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities 1`] = `
+<WithStyles(Tooltip)
+  placement="top"
+  title="Please enter a registered user's email."
 >
-  Add
-</PrimaryActionButton>
+  <div>
+    <PrimaryActionButton
+      className="addButton"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Add
+    </PrimaryActionButton>
+  </div>
+</WithStyles(Tooltip)>
 `;
 
-exports[`AddUserButton renders as not disabled when the selected user name is in the list of possibilities 1`] = `
-<PrimaryActionButton
-  className="addButton"
-  disabled={false}
-  onClick={[Function]}
+exports[`AddUserButton when selected user is the current user renders as disabled with explanatory tooltip when the current user is not system admin 1`] = `
+<WithStyles(Tooltip)
+  placement="top"
+  title="You can not add permissions for yourself."
 >
-  Add
-</PrimaryActionButton>
+  <div>
+    <PrimaryActionButton
+      className="addButton"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Add
+    </PrimaryActionButton>
+  </div>
+</WithStyles(Tooltip)>
+`;
+
+exports[`AddUserButton when selected user is the current user renders as not disabled when the current user is system admin 1`] = `
+<WithStyles(Tooltip)
+  placement="top"
+  title=""
+>
+  <div>
+    <PrimaryActionButton
+      className="addButton"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Add
+    </PrimaryActionButton>
+  </div>
+</WithStyles(Tooltip)>
+`;
+
+exports[`AddUserButton when the selected user is not the current user renders as not disabled when the selected user name is in the list of possibilities 1`] = `
+<WithStyles(Tooltip)
+  placement="top"
+  title=""
+>
+  <div>
+    <PrimaryActionButton
+      className="addButton"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Add
+    </PrimaryActionButton>
+  </div>
+</WithStyles(Tooltip)>
 `;
 
 exports[`AddUserPermissions renders pure component with correct props 1`] = `
@@ -32,6 +80,8 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
       "usersAutofill": "AddUserPermission-usersAutofill-5",
     }
   }
+  currentUserId="current-user-id"
+  currentUserSystemAdmin="current-user-system-admin"
   dispatch={[MockFunction dispatch]}
   permissionLevels={
     Array [
@@ -208,12 +258,6 @@ exports[`UsersAutofill renders to match snapshot 1`] = `
 </div>
 `;
 
-exports[`UsersDropdown renders as closed when there are no items matching the input value 1`] = `
-<WithStyles(ForwardRef(Paper))
-  className="dropDownClosed"
-/>
-`;
-
 exports[`UsersDropdown renders only items containing the input value 1`] = `
 <WithStyles(ForwardRef(Paper))
   className="dropDownOpen"
@@ -227,13 +271,26 @@ exports[`UsersDropdown renders only items containing the input value 1`] = `
 </WithStyles(ForwardRef(Paper))>
 `;
 
-exports[`UsersDropdown renders to match snapshot when it is not open 1`] = `
+exports[`UsersDropdown renders with correct class name when it is not open 1`] = `
 <WithStyles(ForwardRef(Paper))
   className="dropDownClosed"
-/>
+>
+  <WithStyles(ForwardRef(MenuItem))
+    item="Test User One"
+    key="Test User One"
+  >
+    Test User One
+  </WithStyles(ForwardRef(MenuItem))>
+  <WithStyles(ForwardRef(MenuItem))
+    item="Test User Two"
+    key="Test User Two"
+  >
+    Test User Two
+  </WithStyles(ForwardRef(MenuItem))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
-exports[`UsersDropdown renders to match snapshot when it is open 1`] = `
+exports[`UsersDropdown renders with correct class name when it is open 1`] = `
 <WithStyles(ForwardRef(Paper))
   className="dropDownOpen"
 >
@@ -248,6 +305,16 @@ exports[`UsersDropdown renders to match snapshot when it is open 1`] = `
     key="Test User Two"
   >
     Test User Two
+  </WithStyles(ForwardRef(MenuItem))>
+</WithStyles(ForwardRef(Paper))>
+`;
+
+exports[`UsersDropdown renders with message when there are no items matching the input value 1`] = `
+<WithStyles(ForwardRef(Paper))
+  className="dropDownOpen"
+>
+  <WithStyles(ForwardRef(MenuItem))>
+    No users match search.
   </WithStyles(ForwardRef(MenuItem))>
 </WithStyles(ForwardRef(Paper))>
 `;

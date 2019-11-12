@@ -147,6 +147,7 @@ exports[`UserPermissionsTable renders pure component with correct props 1`] = `
     ]
   }
   currentUserId="current-user-id"
+  currentUserSystemAdmin="current-user-system-admin"
   dispatch={[MockFunction dispatch]}
   onRemoveUserDialogConfirmationFn={[Function]}
   projectKey="testproj"
