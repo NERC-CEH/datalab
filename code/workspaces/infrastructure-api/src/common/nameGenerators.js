@@ -1,3 +1,5 @@
+// this would be called deploymentName but this conflicts with the deploymentName arguments
+// to other functions in this file.
 const generateDeploymentName = (name, type) => `${type}-${name}`;
 const pvcName = volumeName => `${volumeName}-claim`;
 
