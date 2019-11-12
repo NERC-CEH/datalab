@@ -9,6 +9,7 @@ const ServiceTemplates = Object.freeze({
   RSHINY_SERVICE: 'rshiny.service.template.yml',
   NBVIEWER_SERVICE: 'nbviewer.service.template.yml',
   MINIO_SERVICE: 'minio.service.template.yml',
+  SPARK_DRIVER_HEADLESS_SERVICE: 'spark-driver.headless-service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
@@ -33,6 +34,10 @@ const ConfigTemplates = Object.freeze({
   ZEPPELIN_CONFIG: 'zeppelin.shiro.template.ini',
 });
 
+const ConfigMapTemplates = Object.freeze({
+  PYSPARK_CONFIGMAP: 'pyspark.configmap.template.yml',
+});
+
 function generateManifest(context, template) {
   const templatePath = `resources/${template}`;
   return fs.readFileAsync(templatePath)
@@ -40,4 +45,4 @@ function generateManifest(context, template) {
     .then(templateContent => render(templateContent, context));
 }
 
-export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, generateManifest };
+export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, ConfigMapTemplates, generateManifest };

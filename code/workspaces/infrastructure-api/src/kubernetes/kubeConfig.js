@@ -39,5 +39,8 @@ kubeConfig.loadFromOptions({
 const coreV1Api = kubeConfig.makeApiClient(k8s.CoreV1Api);
 const getCoreV1Api = () => coreV1Api;
 
+const rbacV1Api = kubeConfig.makeApiClient(k8s.RbacAuthorizationV1Api);
+const getRbacV1Api = () => rbacV1Api;
+
 export default kubeConfig;
-export { getCoreV1Api };
+export { getCoreV1Api, getRbacV1Api };

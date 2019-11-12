@@ -1,6 +1,7 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
-import { DeploymentTemplates, ServiceTemplates, generateManifest } from './manifestGenerator';
+import { DeploymentTemplates, ServiceTemplates, generateManifest, ConfigMapTemplates } from './manifestGenerator';
+import nameGenerator from '../common/nameGenerators';
 import config from '../config/config';
 
 const containerInfo = yaml.safeLoad(fs.readFileSync(config.get('containerInfoPath')));
@@ -14,6 +15,8 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
       imageName: containerInfo.JUPYTER_IMAGE,
       version: containerInfo.JUPYTER_VERSION,
     },
+    serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
+    pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
     type,
     volumeMount,
   };
@@ -30,6 +33,8 @@ function createJupyterlabDeployment({ projectKey, deploymentName, notebookName, 
       imageName: containerInfo.JUPYTERLAB_IMAGE,
       version: containerInfo.JUPYTERLAB_VERSION,
     },
+    serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
+    pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
     type,
     volumeMount,
   };
@@ -156,6 +161,25 @@ function createMinioService(name) {
   return generateManifest(context, ServiceTemplates.MINIO_SERVICE);
 }
 
+function createSparkDriverHeadlessService(notebookName) {
+  const context = {
+    name: nameGenerator.sparkDriverHeadlessService(notebookName),
+    'deployment-service-name': notebookName,
+  };
+  return generateManifest(context, ServiceTemplates.SPARK_DRIVER_HEADLESS_SERVICE);
+}
+
+function createPySparkConfigMap(notebookName, projectKey) {
+  const context = {
+    configMapName: nameGenerator.pySparkConfigMap(notebookName),
+    projectNamespace: nameGenerator.projectNamespace(projectKey),
+    projectComputeNamespace: nameGenerator.projectComputeNamespace(projectKey),
+    sparkDriverHeadlessServiceName: nameGenerator.sparkDriverHeadlessService(notebookName),
+    jobName: nameGenerator.sparkJob(notebookName),
+  };
+  return generateManifest(context, ConfigMapTemplates.PYSPARK_CONFIGMAP);
+}
+
 export default {
   createJupyterDeployment,
   createJupyterlabDeployment,
@@ -171,4 +195,6 @@ export default {
   createRShinyService,
   createNbViewerService,
   createMinioService,
+  createSparkDriverHeadlessService,
+  createPySparkConfigMap,
 };

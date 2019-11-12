@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ configMapName }}
+data:
+  # spark reads whitespace separated key value pairs
+  config: |
+    spark.driver.host                             {{ sparkDriverHeadlessServiceName }}.{{ projectNamespace }}.svc.cluster.local
+    spark.driver.port                             4040
+    spark.executor.instances                      4
+    spark.executor.memory                         4g
+    spark.kubernetes.authenticate.caCertFile      /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    spark.kubernetes.authenticate.oauthTokenFile  /var/run/secrets/kubernetes.io/serviceaccount/token
+    spark.kubernetes.container.image              gcr.io/spark-operator/spark-py:v2.4.0
+    spark.kubernetes.executor.limit.cores         2
+    spark.kubernetes.executor.request.cores       0.5
+    spark.kubernetes.namespace                    {{ projectComputeNamespace }}
+    spark.kubernetes.pyspark.pythonVersion        3
+    spark.master                                  k8s://https://kubernetes.default.svc.cluster.local:443
+    spark.submit.deployMode                       client
+    spark.app.name                                {{ jobName }}

@@ -36,7 +36,9 @@
   * `minikube start`
 * (Recommended) [Install `kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
   for easy context and namespace switching.
-* When creating a new minikube cluster follow these [instructions](../manifests/README.md).
+* Create a Gluster storage class by running `kubectl apply -f ./config/manifests/minikube-storage.yml`
+* Create compute submission cluster role by running `kubectl apply -f ./config/manifests/minikube-compute-submission-role.yml`
+* (Other potentially useful manifests can be found in `./config/manifests/`)
 
 ### Install NodeJS packages
 

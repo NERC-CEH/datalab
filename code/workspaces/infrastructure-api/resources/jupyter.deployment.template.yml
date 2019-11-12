@@ -14,6 +14,7 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
+      serviceAccountName: {{ serviceAccount }}
       initContainers:
         # This container will generate the expected folder structure for the notebooks directory, without this the
         # jupyter container will not start. As the container runs a root these directories are owned by root and can
@@ -75,12 +76,25 @@ spec:
               port: 8888
             initialDelaySeconds: 5
             periodSeconds: 10
-{{#volumeMount}}
           volumeMounts:
-            - mountPath: /data
-              name: glusterfsvol
+            {{#volumeMount}}
+            - name: glusterfsvol
+              mountPath: /data
+            {{/volumeMount}}
+            - name: spark-kubernetes-properties
+              # /usr/local/spark is default value of $SPARK_HOME set in the
+              # base jupyter/pyspark-notebook Dockerfile
+              mountPath: /usr/local/spark/conf/spark-defaults.conf
+              subPath: spark-defaults.conf
       volumes:
+        {{#volumeMount}}
         - name: glusterfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
-{{/volumeMount}}
+        {{/volumeMount}}
+        - name: spark-kubernetes-properties
+          configMap:
+            name: {{ pySparkConfigMapName }}
+            items:
+              - key: config
+                path: spark-defaults.conf

@@ -2,6 +2,7 @@ import { check, param, matchedData } from 'express-validator';
 import { service } from 'service-chassis';
 import projectsRepository from '../dataaccess/projectsRepository';
 import projectNamespaceManager from '../kubernetes/projectNamespaceManager';
+import projectRBACManager from '../kubernetes/projectRBACManager';
 import logger from '../config/logger';
 
 async function listProjects(request, response, next) {
@@ -51,6 +52,7 @@ async function createProject(request, response, next) {
     // can be retried given namespace creation is idempotent
     logger.info(`Creating Project: ${project.key}`);
     await projectNamespaceManager.idempotentCreateProjectNamespaces(project.key);
+    await projectRBACManager.createProjectComputeRBAC(project.key);
     const createdProject = await projectsRepository.create(project);
     return response.status(201).send(createdProject);
   } catch (error) {
@@ -78,6 +80,7 @@ async function deleteProjectByKey(request, response, next) {
     // Delete Namespaces first to ensure the record is only deleted if namespaces successfully delete
     logger.info(`Deleting Project: ${projectKey}`);
     await projectNamespaceManager.idempotentDeleteProjectNamespaces(projectKey);
+    await projectRBACManager.deleteProjectComputeRBAC(projectKey);
     const result = await projectsRepository.deleteByKey(projectKey);
 
     if (result.n === 0) {

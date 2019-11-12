@@ -6,6 +6,7 @@ import projectNamespaceManager from '../kubernetes/projectNamespaceManager';
 jest.mock('express-validator');
 jest.mock('../dataaccess/projectsRepository');
 jest.mock('../kubernetes/projectNamespaceManager');
+jest.mock('../kubernetes/projectRBACManager');
 
 const responseMock = {};
 const responseMethods = ['send', 'status'];
