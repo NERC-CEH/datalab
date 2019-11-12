@@ -2,6 +2,7 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { stackTypes } from 'common';
+import sharingOptions from './NotebookSharingOptions';
 import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
@@ -50,6 +51,13 @@ const CreateNotebookForm = (props) => {
           label="Description"
           component={renderTextArea}
           placeholder="Description" />
+      </div>
+      <div>
+        <Field
+          name="shared"
+          label="Sharing Status"
+          component={renderSelectField}
+          options={sharingOptions}/>
       </div>
       <CreateFormControls onCancel={cancel} submitting={submitting} />
     </form>
