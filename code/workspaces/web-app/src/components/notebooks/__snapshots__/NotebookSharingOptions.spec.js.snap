@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebookSharingOptions-personal correctly renders correct snapshot 1`] = `
+<div
+  className="makeStyles-select-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
+  >
+    Personal
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="body2"
+  >
+    Only you can can view and interact with this notebook.
+  </WithStyles(ForwardRef(Typography))>
+</div>
+`;
+
+exports[`NotebookSharingOptions-project correctly renders correct snapshot 1`] = `
+<div
+  className="makeStyles-select-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
+  >
+    Project
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="body2"
+  >
+    Anyone in this project can view and interact with this notebook.
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-warning-2"
+    variant="body2"
+  >
+    NOTE: This option should be used for primarily sharing for view purposes as real-time collaboration is not currently fully supported and may result in corruption.
+  </WithStyles(ForwardRef(Typography))>
+</div>
+`;
