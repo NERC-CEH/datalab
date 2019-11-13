@@ -14,7 +14,7 @@ exports[`NotebookSharingOptions-personal correctly renders correct snapshot 1`] 
     className="makeStyles-description-3"
     variant="body1"
   >
-    Only you can can view and interact with this notebook.
+    Only you can view and interact with this notebook.
   </WithStyles(ForwardRef(Typography))>
 </div>
 `;
@@ -39,7 +39,7 @@ exports[`NotebookSharingOptions-project correctly renders correct snapshot 1`] =
     className="makeStyles-warning-4"
     variant="body1"
   >
-    NOTE: This option should be used for primarily sharing for view purposes as real-time collaboration is not currently fully supported and may result in corruption.
+    NOTE: This option will allow multiple users to view and edit notebooks at the same time. As real-time collaboration is not currently supported this may result in corruption, hence this option should be chosen primarily for notebooks that are being viewed/run rather than edited.
   </WithStyles(ForwardRef(Typography))>
 </div>
 `;
