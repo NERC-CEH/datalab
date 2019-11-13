@@ -69,9 +69,18 @@ function deleteStackExec(request, response) {
   const { user } = request;
   const params = matchedData(request);
 
-  // Handle request
-  return stackManager.deleteStack(user, params)
-    .then(controllerHelper.sendSuccessfulDeletion(response))
+  const { projectKey, name } = params;
+
+  return stackRepository.userCanDeleteStack(projectKey, user, name)
+    .then((result) => {
+      if (result) {
+        // Handle request
+        return stackManager.deleteStack(user, params)
+          .then(controllerHelper.sendSuccessfulDeletion(response))
+          .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
+      }
+      return Promise.reject();
+    })
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
 
