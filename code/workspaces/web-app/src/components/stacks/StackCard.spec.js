@@ -2,6 +2,9 @@ import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import StackCard from './StackCard';
 
+jest.mock('react-redux');
+jest.mock('../../hooks/usersHooks');
+
 function shallowRender(props) {
   const shallow = createShallow({ dive: true });
 

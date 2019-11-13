@@ -9,6 +9,7 @@ import ProjectKey from '../common/typography/ProjectKey';
 import StackCardActions from './StackCardActions';
 import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
+import { useUsers } from '../../hooks/usersHooks';
 
 const { READY } = statusTypes;
 
@@ -79,38 +80,51 @@ function styles(theme) {
       backgroundColor: theme.palette.backgroundDark,
       fontSize: theme.typography.h4.fontSize,
     },
+    shareStatus: {
+      color: theme.typography.colorLight,
+      fontSize: theme.typography.body2.fontSize,
+    },
   };
 }
 
-const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission }) => <div className={classes.cardDiv}>
-    <div className={classes.imageDiv}>
-      {generateGetImage(classes)(stack)}
-    </div>
-    <div className={classes.textDiv}>
-      <div className={classes.displayNameContainer}>
-        <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
-        {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
+function StackCard({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
+  openPermission, deletePermission, editPermission }) {
+  const users = useUsers();
+
+  return (
+    <div className={classes.cardDiv}>
+      <div className={classes.imageDiv}>
+        {generateGetImage(classes)(stack)}
       </div>
-      <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
-        <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>
-      </Tooltip>
+      <div className={classes.textDiv}>
+        <div className={classes.displayNameContainer}>
+          <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
+          {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
+        </div>
+        <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
+          <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>
+        </Tooltip>
+        <div>
+          {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
+        </div>
+      </div>
+      <div className={classes.actionsDiv}>
+        {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
+        {stack.status === READY
+          && <StackCardActions
+            stack={stack}
+            openStack={openStack}
+            deleteStack={deleteStack}
+            editStack={editStack}
+            userPermissions={userPermissions}
+            openPermission={openPermission}
+            deletePermission={deletePermission}
+            editPermission={editPermission}
+          />}
+      </div>
     </div>
-    <div className={classes.actionsDiv}>
-      {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status} /></div>}
-      {stack.status === READY
-        && <StackCardActions
-          stack={stack}
-          openStack={openStack}
-          deleteStack={deleteStack}
-          editStack={editStack}
-          userPermissions={userPermissions}
-          openPermission={openPermission}
-          deletePermission={deletePermission}
-          editPermission={editPermission}
-        />}
-    </div>
-  </div>;
+  );
+}
 
 StackCard.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -119,6 +133,9 @@ StackCard.propTypes = {
     displayName: PropTypes.string,
     type: PropTypes.string,
     status: PropTypes.string,
+    users: PropTypes.arrayOf(PropTypes.string),
+    shared: PropTypes.string,
+    visible: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,
   openHref: PropTypes.string,
@@ -133,6 +150,24 @@ StackCard.propTypes = {
 
 function getDisplayName(stack) {
   return stack.displayName || 'Display Name';
+}
+
+function renderShareInfo(typeName, stack) {
+  if (
+    stack.users
+    && stack.users.length !== 0
+    && (typeName === 'Notebook' || typeName === 'Site')
+    && (stack.shared === 'project' || stack.visible === 'project' || stack.visible === 'public')
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function getUserEmail(stackUsers, userList, typeName) {
+  const owner = userList.value.find(user => user.userId === stackUsers[0]);
+  const email = owner ? owner.name : 'Unknown';
+  return email;
 }
 
 function generateGetImage(classes) {

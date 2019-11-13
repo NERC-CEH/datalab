@@ -43,6 +43,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(Tooltip)>
+    <div />
   </div>
   <div
     className="StackCard-actionsDiv-6"
@@ -93,6 +94,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
         Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(Tooltip)>
+    <div />
   </div>
   <div
     className="StackCard-actionsDiv-6"
@@ -138,6 +140,7 @@ exports[`StackCard should provide defaults and hide actions if no stack is provi
         A description of the typeName purpose
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(Tooltip)>
+    <div />
   </div>
   <div
     className="StackCard-actionsDiv-6"
@@ -188,6 +191,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(Tooltip)>
+    <div />
   </div>
   <div
     className="StackCard-actionsDiv-6"

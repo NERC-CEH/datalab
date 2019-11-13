@@ -11,6 +11,7 @@ import notify from '../../components/common/notify';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import stackActions from '../../actions/stackActions';
 import StackCards from '../../components/stacks/StackCards';
+import userActions from '../../actions/userActions';
 
 const refreshTimeout = 15000;
 
@@ -89,6 +90,7 @@ class StacksContainer extends Component {
   }
 
   componentDidMount() {
+    this.props.actions.listUsers();
     if (this.props.projectKey.value) {
       this.loadStack();
     }
@@ -166,6 +168,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       ...stackActions,
       ...modalDialogActions,
+      ...userActions,
       resetForm: formStateName => reset(formStateName),
     }, dispatch),
   };
