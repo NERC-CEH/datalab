@@ -4,7 +4,7 @@ import logger from '../config/logger';
 import kubeConfig from '../kubernetes/kubeConfig';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parsePodLabels } from './kubernetesHelpers';
-import { CREATING, READY } from '../models/stack.model';
+import { status } from '../models/stackEnums';
 import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
 
 const stackNames = Object.values(STACKS).map(stack => stack.name);
@@ -61,8 +61,8 @@ export function podAddedWatcher(event) {
     // have their status updated.
     // Additionally ensure that pod is not already running as JS Kubernetes Client
     // issues ADDED events for all current pods on startup by default
-    output = stackRepository.updateStatus({ name, type, status: CREATING })
-      .then(() => logger.info(`Updated status record for "${kubeName}" to "${CREATING}"`));
+    output = stackRepository.updateStatus({ name, type, status: status.CREATING })
+      .then(() => logger.info(`Updated status record for "${kubeName}" to "${status.CREATING}"`));
   }
 
   return output;
@@ -78,8 +78,8 @@ export function podReadyWatcher(event) {
     // have their status updated.
     logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
 
-    output = stackRepository.updateStatus({ name, type, status: READY })
-      .then(() => logger.info(`Updated status record for "${name}" to "${READY}"`));
+    output = stackRepository.updateStatus({ name, type, status: status.READY })
+      .then(() => logger.info(`Updated status record for "${name}" to "${status.READY}"`));
   }
 
   return output;

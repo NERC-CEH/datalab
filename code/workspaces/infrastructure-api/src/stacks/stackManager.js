@@ -2,7 +2,7 @@ import logger from '../config/logger';
 import config from '../config/config';
 import Stacks from './Stacks';
 import stackRepository from '../dataaccess/stacksRepository';
-import { REQUESTED } from '../models/stack.model';
+import { status } from '../models/stackEnums';
 
 function createStack(user, params) {
   const { projectKey, name, type } = params;
@@ -21,7 +21,7 @@ function createStack(user, params) {
       {
         ...params,
         category: stack.category,
-        status: REQUESTED,
+        status: status.REQUESTED,
         url: `https://${projectKey}-${name}.${config.get('datalabDomain')}`,
         internalEndpoint: `http://${params.type}-${name}.${projectKey}`,
       },

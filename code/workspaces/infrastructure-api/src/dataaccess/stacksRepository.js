@@ -7,7 +7,7 @@ function Stack() {
 function getAll(user) {
   return Stack()
     .find()
-    .filterByUser(user)
+    .filterByUserSharedVisible(user)
     .exec();
 }
 
@@ -15,7 +15,7 @@ function getAllByProject(projectKey, user) {
   return Stack()
     .find()
     .filterByProject(projectKey)
-    .filterByUser(user)
+    .filterByUserSharedVisible(user)
     .exec();
 }
 
@@ -23,7 +23,7 @@ function getAllByCategory(projectKey, user, category) {
   return Stack()
     .find({ category })
     .filterByProject(projectKey)
-    .filterByUser(user)
+    .filterByUserSharedVisible(user)
     .exec();
 }
 
@@ -39,7 +39,7 @@ function getOneById(projectKey, user, id) {
   return Stack()
     .findOne({ _id: id })
     .filterOneByProject(projectKey)
-    .filterOneByUser(user)
+    .filterOneByUserSharedVisible(user)
     .exec();
 }
 
@@ -73,8 +73,8 @@ function deleteStack(projectKey, user, stack) {
     .exec();
 }
 
-// Function is used by kube-water to update stacks status. This will require an
-// update when kube-water updated to handle projectKey.
+// Function is used by kube-watcher to update stacks status. This will require an
+// update when kube-watcher updated to handle projectKey.
 function updateStatus(stack) {
   const { name, namespace, type, status } = stack;
   return Stack()
