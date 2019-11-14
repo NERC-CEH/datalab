@@ -8,7 +8,7 @@ exports[`NotebookSharingOptions-personal correctly renders correct snapshot 1`] 
     className="makeStyles-title-2"
     variant="body1"
   >
-    Personal
+    Private
   </WithStyles(ForwardRef(Typography))>
   <WithStyles(ForwardRef(Typography))
     className="makeStyles-description-3"

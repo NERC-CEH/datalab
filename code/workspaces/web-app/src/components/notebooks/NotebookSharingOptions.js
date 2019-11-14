@@ -21,11 +21,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Personal = () => {
+const Private = () => {
   const classes = useStyles();
   return (
     <div className={classes.select}>
-      <Typography variant="body1" className={classes.title}>Personal</Typography>
+      <Typography variant="body1" className={classes.title}>Private</Typography>
       <Typography variant="body1" className={classes.description}>
         Only you can view and interact with this notebook.
       </Typography>
@@ -53,12 +53,12 @@ const Project = () => {
 
 const sharingOptions = [
   {
-    text: <Personal />,
-    value: false,
+    text: <Private />,
+    value: 'private',
   },
   {
     text: <Project />,
-    value: true,
+    value: 'project',
   },
 ];
 
