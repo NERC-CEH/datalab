@@ -124,6 +124,7 @@ type Stack {
     displayName: String
     description: String
     type: StackType
+    users: [String]
     url: String
     internalEndpoint: String
     sourcePath: String
@@ -131,6 +132,8 @@ type Stack {
     redirectUrl: String
     volumeMount: String
     status: StatusType
+    shared: VisiblityType
+    visible: VisiblityType
 }
 
 input StacksByCategoryRequest {
@@ -148,6 +151,7 @@ input StackCreationRequest {
     sourcePath: String
     isPublic: Boolean
     volumeMount: String
+    shared: VisiblityType
 }
 
 # Type to describe the mutation for deleting a new Stack.
@@ -194,6 +198,18 @@ enum StatusType {
 
     # Resource is currently unavailable
     unavailable
+}
+
+# Sharing and visibility classes within Datalabs
+enum VisiblityType {
+  # Resource is only accessibe by the user who owns it
+  private
+
+  # Resoure is accessible by all users in the same project
+  project
+
+  # Resouce is accessible by everyone
+  public
 }
 
 # Data store classes within DataLabs

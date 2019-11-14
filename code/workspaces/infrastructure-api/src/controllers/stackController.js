@@ -116,6 +116,7 @@ const createStackValidator = [
   checkExistsWithMsg('description'),
   checkExistsWithMsg('displayName'),
   checkExistsWithMsg('volumeMount'),
+  checkExistsWithMsg('shared'),
 ];
 
 const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };

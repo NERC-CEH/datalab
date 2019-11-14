@@ -222,6 +222,7 @@ function mutationRequestBody() {
     type: 'jupyter',
     volumeMount: 'dataStore',
     description: 'long description',
+    shared: 'private',
   };
 }
 

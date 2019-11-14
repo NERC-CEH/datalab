@@ -74,6 +74,25 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       placeholder="Description"
     />
   </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Sharing Status"
+      name="shared"
+      options={
+        Array [
+          Object {
+            "text": <Private />,
+            "value": "private",
+          },
+          Object {
+            "text": <Project />,
+            "value": "project",
+          },
+        ]
+      }
+    />
+  </div>
   <CreateFormControls
     onCancel={[MockFunction]}
   />
