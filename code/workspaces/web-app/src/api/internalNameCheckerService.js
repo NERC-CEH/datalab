@@ -1,13 +1,13 @@
 import { gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-function checkNameUniqueness(name) {
+function checkNameUniqueness(projectKey, name) {
   const query = `
-    CheckInternalName($name: String!) {
-      checkNameUniqueness(name: $name)
+    CheckInternalName($projectKey: String!, $name: String!) {
+      checkNameUniqueness(projectKey: $projectKey, name: $name)
     }`;
 
-  return gqlQuery(query, { name })
+  return gqlQuery(query, { projectKey, name })
     .then(errorHandler('data.checkNameUniqueness'));
 }
 

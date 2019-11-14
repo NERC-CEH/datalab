@@ -40,6 +40,7 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
           keepDirtyOnReinitialize={false}
           onSubmit={[MockFunction]}
           persistentSubmitErrors={false}
+          projectKey="testproj"
           pure={true}
           shouldAsyncValidate={[Function]}
           shouldError={[Function]}

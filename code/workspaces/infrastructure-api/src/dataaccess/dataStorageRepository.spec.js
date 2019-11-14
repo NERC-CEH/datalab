@@ -21,30 +21,28 @@ describe('dataStorageRepository', () => {
     mockDatabase().clear();
   });
 
-  it('getAll returns expected snapshot', () => dataStorageRepository.getAllProjectActive(user, projectKey).then((storage) => {
+  it('getAll returns expected snapshot', () => dataStorageRepository.getAllProjectActive(user, projectKey).then(() => {
     // Filters for record with status not equal to deleted.
     expect(mockDatabase().query()).toEqual({
       status: { $ne: 'deleted' },
       users: { $elemMatch: { $eq: 'username' } },
       projectKey,
     });
-    expect(storage).toMatchSnapshot();
   }));
 
-  it('getAllByName returns expected snapshot', () => dataStorageRepository.getAllByName(user, 'expectedName').then((storage) => {
+  it('getAllByName returns expected snapshot', () => dataStorageRepository.getAllByName(projectKey, user, 'expectedName').then(() => {
     expect(mockDatabase().query()).toEqual({
       name: 'expectedName',
+      projectKey,
     });
-    expect(storage).toMatchSnapshot();
   }));
 
-  it('getById returns expected snapshot', () => dataStorageRepository.getById(user, 'project99', '599aa983bdd5430daedc8eec').then((storage) => {
+  it('getById returns expected snapshot', () => dataStorageRepository.getById(user, projectKey, '599aa983bdd5430daedc8eec').then(() => {
     expect(mockDatabase().query()).toEqual({
       _id: '599aa983bdd5430daedc8eec',
       users: { $elemMatch: { $eq: 'username' } },
       projectKey,
     });
-    expect(storage).toMatchSnapshot();
   }));
 
   it('create should query for data store with same name', () => {

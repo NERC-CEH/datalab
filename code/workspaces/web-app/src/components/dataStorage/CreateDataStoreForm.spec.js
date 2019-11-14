@@ -13,6 +13,7 @@ describe('CreateDataStoreForm', () => {
   const generateProps = () => ({
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
+    projectKey: 'testproj',
   });
 
   beforeEach(() => jest.resetAllMocks());

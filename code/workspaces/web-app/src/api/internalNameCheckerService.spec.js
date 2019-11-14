@@ -8,10 +8,10 @@ describe('internalNameCheckerService', () => {
 
   describe('checkNameUniqueness', () => {
     it('should build the correct query and unpack the results', () => {
-      const queryParams = { name: 'validateName' };
+      const queryParams = { projectKey: 'testproj', name: 'validateName' };
       mockClient.prepareSuccess({ checkNameUniqueness: 'expectedValue' });
 
-      return internalNameCheckerSevice.checkNameUniqueness(queryParams.name).then((response) => {
+      return internalNameCheckerSevice.checkNameUniqueness(queryParams.projectKey, queryParams.name).then((response) => {
         expect(response).toEqual('expectedValue');
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(queryParams);

@@ -2,7 +2,7 @@
 
 exports[`internalNameCheckerService checkNameUniqueness should build the correct query and unpack the results 1`] = `
 "
-    CheckInternalName($name: String!) {
-      checkNameUniqueness(name: $name)
+    CheckInternalName($projectKey: String!, $name: String!) {
+      checkNameUniqueness(projectKey: $projectKey, name: $name)
     }"
 `;

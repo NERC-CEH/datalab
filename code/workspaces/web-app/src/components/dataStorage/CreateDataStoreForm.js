@@ -59,6 +59,7 @@ const CreateDataStoreForm = (props) => {
 CreateDataStoreForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 const CreateDataStoreReduxFrom = reduxForm({

@@ -116,20 +116,25 @@ describe('Permission Checker', () => {
       expect(actionMock).not.toHaveBeenCalled();
     });
 
-    it('callback to be called if user has correct permission', () => {
-      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', user, done)
-        .then(() => {
-          expect(actionMock).toHaveBeenCalledTimes(1);
-          expect(actionMock).toHaveBeenCalledWith('value');
-        });
+    it('callback to be called if user has correct permission when single suffix passed', async () => {
+      await projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', user, done);
+
+      expect(actionMock).toHaveBeenCalledTimes(1);
+      expect(actionMock).toHaveBeenCalledWith('value');
+    });
+
+    it('callback to be called if user has correct permission when multiple suffix passed', async () => {
+      await projectPermissionWrapper({ projectKey: 'project2' }, ['elementName:missingActionName', 'elementName:actionName'], user, done);
+
+      expect(actionMock).toHaveBeenCalledTimes(1);
+      expect(actionMock).toHaveBeenCalledWith('value');
     });
 
     it('callback to be called if user has instance admin permission', async () => {
-      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, done)
-        .then(() => {
-          expect(actionMock).toHaveBeenCalledTimes(1);
-          expect(actionMock).toHaveBeenCalledWith('value');
-        });
+      await projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, done);
+
+      expect(actionMock).toHaveBeenCalledTimes(1);
+      expect(actionMock).toHaveBeenCalledWith('value');
     });
   });
 });

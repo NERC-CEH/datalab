@@ -13,11 +13,11 @@ describe('internalNameCheckerActions', () => {
       internalNameCheckerService.checkNameUniqueness = checkNameUniquenessMock;
 
       // Act
-      const output = internalNameCheckerActions.checkNameUniqueness('nameForValidation');
+      const output = internalNameCheckerActions.checkNameUniqueness('testproj', 'nameForValidation');
 
       // Assert
       expect(checkNameUniquenessMock).toHaveBeenCalledTimes(1);
-      expect(checkNameUniquenessMock).toBeCalledWith('nameForValidation');
+      expect(checkNameUniquenessMock).toBeCalledWith('testproj', 'nameForValidation');
       expect(output.type).toBe('CHECK_NAME_UNIQUE');
       expect(output.payload).toBe('expectedCheckNamePayload');
     });

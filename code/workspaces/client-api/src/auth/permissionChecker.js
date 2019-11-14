@@ -20,9 +20,14 @@ export function projectPermissionWrapper(args, permissionSuffix, user, done) {
     return Promise.reject(new Error(`projectKey not passed, expected suffix: ${permissionSuffix}`));
   }
 
+  let permissions = permissionSuffix;
+  if (!Array.isArray(permissionSuffix)) {
+    permissions = [permissionSuffix];
+  }
+
   return permissionCheck(
     [
-      PROJECT_NAMESPACE.concat(delimiter, args.projectKey, delimiter, permissionSuffix),
+      ...permissions.map(suffix => PROJECT_NAMESPACE.concat(delimiter, args.projectKey, delimiter, suffix)),
       SYSTEM_INSTANCE_ADMIN,
     ],
     user,

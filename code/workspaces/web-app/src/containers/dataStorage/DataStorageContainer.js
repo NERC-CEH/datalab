@@ -59,6 +59,7 @@ class DataStorageContainer extends Component {
     title: `Create a ${TYPE_NAME}`,
     onSubmit: this.createDataStore,
     onCancel: this.props.actions.closeModalDialog,
+    projectKey: this.props.projectKey,
   });
 
   deleteDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
