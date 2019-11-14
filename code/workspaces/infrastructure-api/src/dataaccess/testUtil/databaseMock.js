@@ -32,6 +32,14 @@ function createDatabaseMock(items, state = {}) {
       lastInvocation.user = sub;
       return createDatabaseMock(items, lastInvocation)();
     },
+    filterByUserSharedVisible({ sub }) {
+      lastInvocation.user = sub;
+      return createDatabaseMock(items, lastInvocation)();
+    },
+    filterOneByUserSharedVisible({ sub }) {
+      lastInvocation.user = sub;
+      return createDatabaseMock(items, lastInvocation)();
+    },
     remove: (query) => {
       lastInvocation.query = query;
       return createDatabaseMock(items, lastInvocation)();

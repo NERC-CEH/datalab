@@ -3,7 +3,7 @@ import logger from '../config/logger';
 import podsApi from '../kubernetes/podsApi';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';
-import { READY, CREATING, REQUESTED, UNAVAILABLE } from '../models/stack.model';
+import { status as stackStatus } from '../models/stackEnums';
 
 const kubeUpStatus = ['Running'];
 const kubeCreateStatus = ['ContainerCreating', /^Init:/, 'PodInitializing'];
@@ -52,14 +52,14 @@ const setStatus = pods => Promise.mapSeries(Object.values(pods), (podInfo) => {
 
 const getStatus = (statusArray) => {
   if (arraysIncludes(statusArray, kubeUpStatus)) {
-    return READY;
+    return stackStatus.READY;
   } if (arraysIncludes(statusArray, kubeCreateStatus)) {
-    return CREATING;
+    return stackStatus.CREATING;
   } if (arraysIncludes(statusArray, kubeRequestStatus)) {
-    return REQUESTED;
+    return stackStatus.REQUESTED;
   }
 
-  return UNAVAILABLE;
+  return stackStatus.UNAVAILABLE;
 };
 
 const arraysIncludes = (current, expected) => current.some(currentValue => expected.some(expectedValue => (currentValue.match(expectedValue) || []).length > 0));
