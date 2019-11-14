@@ -63,7 +63,7 @@ const CreateSiteForm = (props) => {
       </div>
       <div>
         <Field
-          name="visibility"
+          name="visible"
           label="Visibility Status"
           component={renderSelectField}
           options={visibilityOptions}/>

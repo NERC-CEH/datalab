@@ -74,12 +74,12 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
     <Field
       component={[Function]}
       label="Visibility Status"
-      name="visibility"
+      name="visible"
       options={
         Array [
           Object {
-            "text": <Personal />,
-            "value": "personal",
+            "text": <Private />,
+            "value": "private",
           },
           Object {
             "text": <Project />,

@@ -4,7 +4,8 @@ import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
 import handleId from '../dataaccess/renameIdHandler';
-import Stacks, { PUBLISH } from '../stacks/Stacks';
+import Stacks, { PUBLISH, ANALYSIS } from '../stacks/Stacks';
+import { visibility } from '../models/stackEnums';
 
 const TYPE = 'stack';
 
@@ -113,10 +114,23 @@ const createStackValidator = [
       }
       return true;
     }),
+  check('visible', 'visible must be specified for sites')
+    .custom((value, { req }) => {
+      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
+        return [visibility.PRIVATE, visibility.PROJECT, visibility.PUBLIC].includes(req.body.visible);
+      }
+      return true;
+    }),
+  check('shared', 'shared must be specified for notebooks')
+    .custom((value, { req }) => {
+      if (indexOf(Stacks.getNamesByCategory(ANALYSIS), req.body.type) > -1) {
+        return [visibility.PRIVATE, visibility.PROJECT].includes(req.body.shared);
+      }
+      return true;
+    }),
   checkExistsWithMsg('description'),
   checkExistsWithMsg('displayName'),
   checkExistsWithMsg('volumeMount'),
-  checkExistsWithMsg('shared'),
 ];
 
 const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };
