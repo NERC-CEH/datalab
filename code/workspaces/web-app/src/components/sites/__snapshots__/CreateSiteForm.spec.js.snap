@@ -70,6 +70,38 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       placeholder="Description"
     />
   </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Visibility Status"
+      name="visible"
+      options={
+        Array [
+          Object {
+            "text": <SelectRichComponent
+              title="Private"
+              type="site"
+            />,
+            "value": "private",
+          },
+          Object {
+            "text": <SelectRichComponent
+              title="Project"
+              type="site"
+            />,
+            "value": "project",
+          },
+          Object {
+            "text": <SelectRichComponent
+              title="Public"
+              type="site"
+            />,
+            "value": "public",
+          },
+        ]
+      }
+    />
+  </div>
   <CreateFormControls
     onCancel={[MockFunction]}
   />

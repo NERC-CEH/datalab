@@ -114,6 +114,20 @@ describe('Stack Controller', () => {
         .then(() => expectValidationError('volumeMount', 'volumeMount must be specified'));
     });
 
+    it('should validate the shared field exists for notebooks', () => {
+      const requestBody = omit(mutationRequestBody(), 'shared');
+      requestBody.type = 'jupyterlab';
+      return createValidatedRequest(requestBody, stackController.createStackValidator)
+        .then(() => expectValidationError('shared', 'shared must be specified for notebooks'));
+    });
+
+    it('should validate the visible field exists for sites', () => {
+      const requestBody = omit(mutationRequestBody(), 'visible');
+      requestBody.type = 'rshiny';
+      return createValidatedRequest(requestBody, stackController.createStackValidator)
+        .then(() => expectValidationError('visible', 'visible must be specified for sites'));
+    });
+
     it('should validate the additional fields for rshiny', () => {
       const requestBody = mutationRequestBody();
       requestBody.type = 'rshiny';
@@ -223,6 +237,7 @@ function mutationRequestBody() {
     volumeMount: 'dataStore',
     description: 'long description',
     shared: 'private',
+    visible: 'private',
   };
 }
 

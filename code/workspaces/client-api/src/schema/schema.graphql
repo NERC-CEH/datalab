@@ -132,8 +132,6 @@ type Stack {
     redirectUrl: String
     volumeMount: String
     status: StatusType
-    shared: VisiblityType
-    visible: VisiblityType
 }
 
 input StacksByCategoryRequest {
@@ -151,7 +149,8 @@ input StackCreationRequest {
     sourcePath: String
     isPublic: Boolean
     volumeMount: String
-    shared: VisiblityType
+    shared: VisibilityType
+    visible: VisibilityType
 }
 
 # Type to describe the mutation for deleting a new Stack.
@@ -201,7 +200,7 @@ enum StatusType {
 }
 
 # Sharing and visibility classes within Datalabs
-enum VisiblityType {
+enum VisibilityType {
   # Resource is only accessibe by the user who owns it
   private
 
