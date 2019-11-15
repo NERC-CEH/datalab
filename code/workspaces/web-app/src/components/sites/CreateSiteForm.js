@@ -2,7 +2,7 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { stackTypes } from 'common';
-import visibilityOptions from './VisibilityOptions';
+import { siteVisibilityOptions } from '../common/selectShareOptions';
 import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newSiteFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
@@ -66,7 +66,7 @@ const CreateSiteForm = (props) => {
           name="visible"
           label="Visibility Status"
           component={renderSelectField}
-          options={visibilityOptions}/>
+          options={siteVisibilityOptions}/>
       </div>
       <CreateFormControls onCancel={cancel} submitting={submitting} />
     </form>

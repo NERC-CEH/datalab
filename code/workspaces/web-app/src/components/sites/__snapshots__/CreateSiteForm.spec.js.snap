@@ -78,15 +78,24 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       options={
         Array [
           Object {
-            "text": <Private />,
+            "text": <SelectRichComponent
+              title="Private"
+              type="site"
+            />,
             "value": "private",
           },
           Object {
-            "text": <Project />,
+            "text": <SelectRichComponent
+              title="Project"
+              type="site"
+            />,
             "value": "project",
           },
           Object {
-            "text": <Public />,
+            "text": <SelectRichComponent
+              title="Public"
+              type="site"
+            />,
             "value": "public",
           },
         ]

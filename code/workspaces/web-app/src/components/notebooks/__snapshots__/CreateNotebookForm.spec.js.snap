@@ -82,11 +82,17 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
       options={
         Array [
           Object {
-            "text": <Private />,
+            "text": <SelectRichComponent
+              title="Private"
+              type="notebook"
+            />,
             "value": "private",
           },
           Object {
-            "text": <Project />,
+            "text": <SelectRichComponent
+              title="Project"
+              type="notebook"
+            />,
             "value": "project",
           },
         ]
