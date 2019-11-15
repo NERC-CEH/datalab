@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
 
+/* eslint-disable max-len */
 const CONTENT = {
   notebook: {
     projectDescription: 'Anyone in this project can view and interact with this notebook.',
@@ -15,6 +16,7 @@ const CONTENT = {
     publicWarning: 'NOTE: This will make the site available (via URL) to anyone including those external to the DataLabs platform. Hence please ensure any security considerations have been implemented before proceeding.',
   },
 };
+/* eslint-disable max-len */
 
 const useStyles = makeStyles(theme => ({
   select: {
