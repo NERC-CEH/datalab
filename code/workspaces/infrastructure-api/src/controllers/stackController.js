@@ -5,7 +5,7 @@ import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
 import handleId from '../dataaccess/renameIdHandler';
 import Stacks, { PUBLISH, ANALYSIS } from '../stacks/Stacks';
-import { visibility } from '../models/stackEnums';
+import { visibility, getEnumValues } from '../models/stackEnums';
 
 const TYPE = 'stack';
 
@@ -116,15 +116,15 @@ const createStackValidator = [
     }),
   check('visible', 'visible must be specified for sites')
     .custom((value, { req }) => {
-      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
-        return [visibility.PRIVATE, visibility.PROJECT, visibility.PUBLIC].includes(req.body.visible);
+      if (Stacks.getNamesByCategory(PUBLISH).includes(req.body.type)) {
+        return getEnumValues(visibility).includes(req.body.visible);
       }
       return true;
     }),
   check('shared', 'shared must be specified for notebooks')
     .custom((value, { req }) => {
-      if (indexOf(Stacks.getNamesByCategory(ANALYSIS), req.body.type) > -1) {
-        return [visibility.PRIVATE, visibility.PROJECT].includes(req.body.shared);
+      if (Stacks.getNamesByCategory(ANALYSIS).includes(req.body.type)) {
+        return getEnumValues(visibility).includes(req.body.shared);
       }
       return true;
     }),
