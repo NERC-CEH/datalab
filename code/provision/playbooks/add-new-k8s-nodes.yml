@@ -1,0 +1,38 @@
+---
+- name: Install Python on new worker nodes
+  hosts: k8s-node-nov-2019
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  roles:
+  - install-python
+
+- name: Bootstrap tasks
+  hosts: k8s-node-nov-2019
+  become: yes
+  become_method: sudo
+  roles:
+  - reset-machine-id
+  - setup-networking
+  - base-configuration
+  - mount-drives
+
+- name: Prepare new k8s worker nodes
+  hosts: k8s-node-nov-2019
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker
+    - kubernetes-common
+    - { role: glusterfs, gluster_server: False }
+    - app-armor
+
+
+- name: Initialise new k8s worker nodes
+  hosts: k8s-node-nov-2019
+  become: yes
+  become_method: sudo
+
+  roles:
+    - kubernetes/node

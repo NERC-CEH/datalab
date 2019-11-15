@@ -1,5 +1,5 @@
-kube_master_ip: "{{ hostvars[groups['k8s-master'][1]].openstack.private_v4 }}"
-kube_version: v1.15.0
+kube_master_ip: "{{ hostvars[groups['k8s-master'][0]].openstack.private_v4 }}"
+kube_version: v1.15.5
 kube_join_token: "{{ vault_kube_join_token }}"
 kubeadmin_config: /etc/kubernetes/admin.conf
 
