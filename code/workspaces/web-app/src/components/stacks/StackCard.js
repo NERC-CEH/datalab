@@ -42,6 +42,7 @@ function styles(theme) {
     },
     displayName: {
       marginTop: 0,
+      marginBottom: 0,
       marginRight: theme.spacing(3),
     },
     displayNameContainer: {
@@ -82,13 +83,13 @@ function styles(theme) {
     },
     shareStatus: {
       color: theme.typography.colorLight,
-      fontSize: theme.typography.body2.fontSize,
+    //  fontSize: theme.typography.body2.fontSize,
     },
   };
 }
 
-function StackCard({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission }) {
+const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
+  openPermission, deletePermission, editPermission }) => {
   const users = useUsers();
 
   return (
@@ -104,9 +105,7 @@ function StackCard({ classes, stack, openStack, deleteStack, editStack, typeName
         <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
           <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>
         </Tooltip>
-        <div>
-          {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
-        </div>
+        {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
       </div>
       <div className={classes.actionsDiv}>
         {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
@@ -124,7 +123,7 @@ function StackCard({ classes, stack, openStack, deleteStack, editStack, typeName
       </div>
     </div>
   );
-}
+};
 
 StackCard.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -152,22 +151,14 @@ function getDisplayName(stack) {
   return stack.displayName || 'Display Name';
 }
 
-function renderShareInfo(typeName, stack) {
-  if (
-    stack.users
+const renderShareInfo = (typeName, stack) => stack.users
     && stack.users.length !== 0
     && (typeName === 'Notebook' || typeName === 'Site')
-    && (stack.shared === 'project' || stack.visible === 'project' || stack.visible === 'public')
-  ) {
-    return true;
-  }
-  return false;
-}
+    && (stack.shared === 'project' || stack.visible === 'project' || stack.visible === 'public');
 
 function getUserEmail(stackUsers, userList, typeName) {
   const owner = userList.value.find(user => user.userId === stackUsers[0]);
-  const email = owner ? owner.name : 'Unknown';
-  return email;
+  return owner ? owner.name : 'Unknown';
 }
 
 function generateGetImage(classes) {
