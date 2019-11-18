@@ -83,7 +83,6 @@ function styles(theme) {
     },
     shareStatus: {
       color: theme.typography.colorLight,
-    //  fontSize: theme.typography.body2.fontSize,
     },
   };
 }
