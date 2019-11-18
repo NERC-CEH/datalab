@@ -29,7 +29,10 @@ const StackCardActions = (props) => {
 
 export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
   deletePermission, editPermission, currentUserId, classes }) => {
-  const ownsNotebook = stack.users.includes(currentUserId);
+  // Treat user as owner if 'users' not a defined field on stack.
+  // This is the case for projects which also use this component. This will mean that
+  // projects rely solely on the permissions passed to determine correct rendering.
+  const ownsStack = !stack.users || stack.users.includes(currentUserId);
 
   return (
     <div className={classes.cardActions}>
@@ -42,7 +45,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Open
         </PrimaryActionButton>
       </PermissionWrapper>}
-      {deleteStack && ownsNotebook && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {deleteStack && ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
           disabled={!isReady(stack)}
           onClick={() => deleteStack(stack)}
@@ -51,7 +54,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Delete
         </SecondaryActionButton>
       </PermissionWrapper>}
-      {editStack && ownsNotebook && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={editPermission}>
+      {editStack && ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={editPermission}>
         <SecondaryActionButton
           disabled={!isReady(stack)}
           onClick={() => editStack(stack)}
