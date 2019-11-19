@@ -13,9 +13,14 @@ const createStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPaylo
 const deleteStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const getOneByIdMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const getOneByNameMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+const userCanDeleteStackMock = jest.fn().mockReturnValue(Promise.resolve(true));
 stackManager.createStack = createStackMock;
 stackManager.deleteStack = deleteStackMock;
-stackRepository.default = { getOneById: getOneByIdMock, getOneByName: getOneByNameMock };
+stackRepository.default = {
+  getOneById: getOneByIdMock,
+  getOneByName: getOneByNameMock,
+  userCanDeleteStack: userCanDeleteStackMock,
+};
 
 let request;
 
@@ -147,6 +152,9 @@ describe('Stack Controller', () => {
       return stackController.deleteStack(request, response)
         .then(() => {
           expect(response.statusCode).toBe(204);
+        })
+        .catch(() => {
+          expect(true).toBeFalsy();
         });
     });
 
@@ -159,6 +167,25 @@ describe('Stack Controller', () => {
         .then(() => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error deleting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+        })
+        .catch(() => {
+          expect(true).toBeFalsy();
+        });
+    });
+
+    it('should return 500 if user not allowed to delete stack', () => {
+      deleteStackMock.mockReturnValue(Promise.reject({ message: 'error' }));
+      userCanDeleteStackMock.mockResolvedValueOnce(Promise.resolve(false));
+
+      const response = httpMocks.createResponse();
+
+      return stackController.deleteStack(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(500);
+          expect(response._getData()).toEqual({ error: 'error', message: 'Error deleting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+        })
+        .catch(() => {
+          expect(true).toBeFalsy();
         });
     });
   });

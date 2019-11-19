@@ -73,6 +73,11 @@ function deleteStack(projectKey, user, stack) {
     .exec();
 }
 
+async function userCanDeleteStack(projectKey, user, name) {
+  const stack = await getOneByName(projectKey, user, name);
+  return stack.users.includes(user.sub);
+}
+
 // Function is used by kube-watcher to update stacks status. This will require an
 // update when kube-watcher updated to handle projectKey.
 function updateStatus(stack) {
@@ -92,5 +97,6 @@ export default {
   getAllByVolumeMount,
   createOrUpdate,
   deleteStack,
+  userCanDeleteStack,
   updateStatus,
 };
