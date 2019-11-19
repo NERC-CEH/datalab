@@ -1,11 +1,11 @@
 import logger from 'winston';
 import { permissionTypes } from 'common';
 
-const { SYSTEM_INSTANCE_ADMIN, PROJECT, delimiter, PROJECT_NAMESPACE } = permissionTypes;
+const { SYSTEM_INSTANCE_ADMIN, delimiter, PROJECT_NAMESPACE } = permissionTypes;
 
 export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
   [
-    PROJECT_NAMESPACE.concat(delimiter, PROJECT, delimiter, permissionSuffix),
+    permissionSuffix,
     SYSTEM_INSTANCE_ADMIN,
   ],
   ...rest,
@@ -37,7 +37,7 @@ export function projectPermissionWrapper(args, permissionSuffix, user, done) {
 
 export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissionCheck(
   [
-    ...permissionSuffixes.map(suffix => PROJECT_NAMESPACE.concat(delimiter, PROJECT, delimiter, suffix)),
+    ...permissionSuffixes,
     SYSTEM_INSTANCE_ADMIN,
   ],
   ...rest,
@@ -49,13 +49,13 @@ export const instanceAdminWrapper = (...rest) => permissionCheck(
 );
 
 function permissionCheck(requiredPermissions, { permissions }, done) {
-  const grantedPermissions = permissions || [];
+  const userPermissions = permissions || [];
 
   logger.debug('Auth: checking permissions');
   logger.debug(`Auth: expected permission(s): ${requiredPermissions}`);
-  logger.debug(`Auth: granted user permission(s): ${grantedPermissions}`);
+  logger.debug(`Auth: granted user permission(s): ${userPermissions}`);
 
-  if (!arraysIncludes(requiredPermissions, grantedPermissions)) {
+  if (!userHasPermission(requiredPermissions, userPermissions)) {
     logger.warn('Auth: permission check: FAILED');
     return Promise.reject(new Error(`User missing expected permission(s): ${requiredPermissions}`));
   }
@@ -64,6 +64,4 @@ function permissionCheck(requiredPermissions, { permissions }, done) {
   return done();
 }
 
-const arraysIncludes = (current, expected) => current.some(currentValue => expected.some(expectedValue => (currentValue.match(expectedValue) || []).length > 0));
-
-export default permissionWrapper;
+const userHasPermission = (requiredPermissions, userPermissions) => requiredPermissions.some(value => userPermissions.includes(value));

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { reset } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { permissionTypes } from 'common';
+import { permissionTypes, stackTypes } from 'common';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
 import projectSelectors from '../../selectors/projectsSelectors';
@@ -48,7 +48,7 @@ const projectToStack = project => ({
   displayName: project.name,
   description: project.description,
   accessible: project.accessible,
-  type: 'project',
+  type: stackTypes.PROJECT,
   status: 'ready',
 });
 

@@ -15,7 +15,6 @@ const INSTANCE = 'instance';
 const PROJECTS = 'projects';
 
 const PROJECT_NAMESPACE = 'projects';
-const PROJECT = 'project';
 const KEY_TOKEN = '?projectKey?';
 const SYSTEM = 'system';
 
@@ -79,7 +78,6 @@ export {
   INSTANCE_ADMIN_ROLE,
   SYSTEM_INSTANCE_ADMIN,
   PROJECT_NAMESPACE,
-  PROJECT,
   SYSTEM,
   elementPermissions,
   usersPermissions,

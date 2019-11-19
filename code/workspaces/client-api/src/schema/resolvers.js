@@ -1,7 +1,7 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
 import { version } from '../version';
-import permissionChecker, { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
+import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
 import getUserPermissions from '../dataaccess/userPermissionsService';
@@ -13,7 +13,6 @@ import stackUrlService from '../dataaccess/stackUrlService';
 import projectService from '../dataaccess/projectService';
 import storageService from '../infrastructure/storageService';
 
-const { usersPermissions: { USERS_LIST } } = permissionTypes;
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 const { elementPermissions: { PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
@@ -64,13 +63,13 @@ const resolvers = {
       projectPermissionWrapper({ projectKey }, PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, token)),
-    updateProject: (obj, { project }, { user, token }) => permissionChecker(SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
+    updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.key }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
   },
 
   DataStore: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
-    users: (obj, args, { user }) => permissionChecker(USERS_LIST, user, () => obj.users),
+    users: (obj, args, { user }) => projectPermissionWrapper({ projectKey: obj.projectKey }, STORAGE_EDIT, user, () => obj.users),
     accessKey: obj => minioTokenService.requestMinioToken(obj),
     stacksMountingStore: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount(args.projectKey, name, { user, token }),
     status: () => READY,

@@ -4,9 +4,6 @@ import logger from '../config/logger';
 
 const { projectKeyPermission, SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
-const permissionDelim = ':';
-const projectKey = 'project';
-
 export function projectPermissionWrapper(permissionSuffix) {
   return (request, response, next) => {
     logger.debug('Auth: checking permissions');
@@ -35,24 +32,21 @@ export function projectPermissionWrapper(permissionSuffix) {
   };
 }
 
-export function permissionWrapper(permissionSuffix) {
-  const requiredProjectPermission = projectKey.concat(permissionDelim, permissionSuffix);
-
+export function permissionWrapper(requiredPermission) {
   return (request, response, next) => {
     const grantedPermissions = get(request, 'user.permissions') || [];
 
     logger.debug('Auth: checking permissions');
-    logger.debug(`Auth: expected permission suffix: ${permissionSuffix}`);
-    logger.debug(`Auth: expected permission: ${requiredProjectPermission} || ${SYSTEM_INSTANCE_ADMIN}`);
+    logger.debug(`Auth: expected permission: ${requiredPermission} || ${SYSTEM_INSTANCE_ADMIN}`);
     logger.debug(`Auth: granted user permissions: ${grantedPermissions}`);
 
-    if (grantedPermissions.includes(requiredProjectPermission) || grantedPermissions.includes(SYSTEM_INSTANCE_ADMIN)) {
+    if (grantedPermissions.includes(requiredPermission) || grantedPermissions.includes(SYSTEM_INSTANCE_ADMIN)) {
       logger.debug('Auth: permission check: PASSED');
       next();
     } else {
       logger.warn('Auth: permission check: FAILED');
       response.status(401)
-        .send({ message: `User missing expected permission: ${requiredProjectPermission} || ${SYSTEM_INSTANCE_ADMIN}` })
+        .send({ message: `User missing expected permission: ${requiredPermission} || ${SYSTEM_INSTANCE_ADMIN}` })
         .end();
     }
   };
