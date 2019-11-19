@@ -23,8 +23,8 @@ function createJupyterNotebook(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(nameGenerator.deploymentName(name, type), projectKey, secret))
     .then(createPySparkConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createJupyterDeployment))
-    .then(createService(params, deploymentGenerator.createJupyterService))
     .then(createSparkDriverHeadlessService(params))
+    .then(createService(params, deploymentGenerator.createJupyterService))
     .then(createIngressRule(params, ingressGenerator.createIngress));
 }
 

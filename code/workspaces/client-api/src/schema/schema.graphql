@@ -132,8 +132,8 @@ type Stack {
     redirectUrl: String
     volumeMount: String
     status: StatusType
-    shared: String
-    visible: String
+    shared: VisibilityType
+    visible: VisibilityType
 }
 
 input StacksByCategoryRequest {

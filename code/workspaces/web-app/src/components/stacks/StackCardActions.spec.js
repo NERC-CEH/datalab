@@ -1,37 +1,62 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import StackCardActions from './StackCardActions';
+import { useCurrentUserId } from '../../hooks/authHooks';
+import StackCardActions, { PureStackCardActions } from './StackCardActions';
+
+jest.mock('../../hooks/authHooks');
+
+const openStackMock = jest.fn();
+const deleteStackMock = jest.fn();
+const editStackMock = jest.fn();
+
+const generateProps = () => ({
+  stack: {
+    id: 'abc1234',
+    displayName: 'expectedDisplayName',
+    type: 'expectedType',
+    status: 'ready',
+    users: ['owner-id'],
+  },
+  currentUserId: 'owner-id',
+  openStack: openStackMock,
+  deleteStack: deleteStackMock,
+  editStack: editStackMock,
+  userPermissions: ['open', 'delete', 'edit'],
+  openPermission: 'open',
+  deletePermission: 'delete',
+  editPermission: 'edit',
+  classes: {
+    cardActions: 'cardActions',
+    buttonWrapper: 'buttonWrapper',
+  },
+});
 
 describe('StackCardActions', () => {
+  useCurrentUserId.mockReturnValue('expected-user-id');
   let shallow;
 
   beforeEach(() => {
     shallow = createShallow({ dive: true });
   });
 
-  function shallowRender(props) {
-    return shallow(<StackCardActions {...props} />);
-  }
+  it('passes props down to child component as well as current user id', () => {
+    const props = generateProps();
+    delete props.classes;
 
-  const openStackMock = jest.fn();
-  const deleteStackMock = jest.fn();
-  const editStackMock = jest.fn();
-
-  const generateProps = () => ({
-    stack: {
-      id: 'abc1234',
-      displayName: 'expectedDisplayName',
-      type: 'expectedType',
-      status: 'ready',
-    },
-    openStack: openStackMock,
-    deleteStack: deleteStackMock,
-    editStack: editStackMock,
-    userPermissions: ['open', 'delete', 'edit'],
-    openPermission: 'open',
-    deletePermission: 'delete',
-    editPermission: 'edit',
+    expect(shallow(<StackCardActions {...props} />)).toMatchSnapshot();
   });
+});
+
+describe('PureStackCardActions', () => {
+  let shallow;
+
+  beforeEach(() => {
+    shallow = createShallow();
+  });
+
+  function shallowRender(props) {
+    return shallow(<PureStackCardActions {...props} />);
+  }
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -65,6 +90,7 @@ describe('StackCardActions', () => {
       id: 'abc1234',
       type: 'expectedType',
       status: 'ready',
+      users: ['owner-id'],
     });
   });
 
@@ -85,6 +111,7 @@ describe('StackCardActions', () => {
       id: 'abc1234',
       type: 'expectedType',
       status: 'ready',
+      users: ['owner-id'],
     });
   });
 
@@ -105,6 +132,13 @@ describe('StackCardActions', () => {
       id: 'abc1234',
       type: 'expectedType',
       status: 'ready',
+      users: ['owner-id'],
     });
+  });
+
+  it('Should not render edit and delete buttons if current user is not the owner', () => {
+    const props = generateProps();
+    props.currentUserId = 'not-the-owner-id';
+    expect(shallowRender(props)).toMatchSnapshot();
   });
 });

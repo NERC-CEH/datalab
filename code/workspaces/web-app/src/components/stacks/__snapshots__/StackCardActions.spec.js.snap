@@ -1,11 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StackCardActions creates correct snapshot 1`] = `
+exports[`PureStackCardActions Should not render edit and delete buttons if current user is not the owner 1`] = `
 <div
-  className="StackCardActions-cardActions-1"
+  className="cardActions"
 >
   <ComponentWrapper
-    className="StackCardActions-buttonWrapper-2"
+    className="buttonWrapper"
+    permission="open"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <PrimaryActionButton
+      disabled={false}
+      fullWidth={true}
+      onClick={[Function]}
+    >
+      Open
+    </PrimaryActionButton>
+  </ComponentWrapper>
+</div>
+`;
+
+exports[`PureStackCardActions creates correct snapshot 1`] = `
+<div
+  className="cardActions"
+>
+  <ComponentWrapper
+    className="buttonWrapper"
     permission="open"
     userPermissions={
       Array [
@@ -24,7 +50,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     </PrimaryActionButton>
   </ComponentWrapper>
   <ComponentWrapper
-    className="StackCardActions-buttonWrapper-2"
+    className="buttonWrapper"
     permission="delete"
     userPermissions={
       Array [
@@ -43,7 +69,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     </SecondaryActionButton>
   </ComponentWrapper>
   <ComponentWrapper
-    className="StackCardActions-buttonWrapper-2"
+    className="buttonWrapper"
     permission="edit"
     userPermissions={
       Array [
@@ -62,4 +88,40 @@ exports[`StackCardActions creates correct snapshot 1`] = `
     </SecondaryActionButton>
   </ComponentWrapper>
 </div>
+`;
+
+exports[`StackCardActions passes props down to child component as well as current user id 1`] = `
+<PureStackCardActions
+  classes={
+    Object {
+      "buttonWrapper": "StackCardActions-buttonWrapper-2",
+      "cardActions": "StackCardActions-cardActions-1",
+    }
+  }
+  currentUserId="owner-id"
+  deletePermission="delete"
+  deleteStack={[MockFunction]}
+  editPermission="edit"
+  editStack={[MockFunction]}
+  openPermission="open"
+  openStack={[MockFunction]}
+  stack={
+    Object {
+      "displayName": "expectedDisplayName",
+      "id": "abc1234",
+      "status": "ready",
+      "type": "expectedType",
+      "users": Array [
+        "owner-id",
+      ],
+    }
+  }
+  userPermissions={
+    Array [
+      "open",
+      "delete",
+      "edit",
+    ]
+  }
+/>
 `;

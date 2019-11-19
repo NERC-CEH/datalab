@@ -23,8 +23,8 @@ function createJupyterLab(params) {
     .then(secret => k8sSecretApi.createOrUpdateSecret(nameGenerator.deploymentName(name, type), projectKey, secret))
     .then(createPySparkConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createJupyterlabDeployment))
-    .then(createService(params, deploymentGenerator.createJupyterlabService))
     .then(createSparkDriverHeadlessService(params))
+    .then(createService(params, deploymentGenerator.createJupyterlabService))
     .then(createIngressRule(params, ingressGenerator.createIngress));
 }
 
