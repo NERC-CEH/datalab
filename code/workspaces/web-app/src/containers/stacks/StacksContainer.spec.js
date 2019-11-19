@@ -3,11 +3,14 @@ import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import StacksContainer, { PureStacksContainer } from './StacksContainer';
 import stackService from '../../api/stackService';
+import listUsersService from '../../api/listUsersService';
 import notify from '../../components/common/notify';
 
 jest.mock('../../api/stackService');
 const loadStacksMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 stackService.loadStacksByCategory = loadStacksMock;
+const listUsersMock = jest.fn();
+listUsersService.listUsers = listUsersMock;
 
 jest.mock('../../components/common/notify');
 const toastrErrorMock = jest.fn();
@@ -108,6 +111,7 @@ describe('StacksContainer', () => {
         openModalDialog: openModalDialogMock,
         closeModalDialog: closeModalDialogMock,
         resetForm: restFormMock,
+        listUsers: listUsersMock,
       },
       projectKey: { fetching: false, value: 'projtest' },
     });
@@ -134,6 +138,7 @@ describe('StacksContainer', () => {
 
       // Assert
       expect(loadStacksMock).toHaveBeenCalledTimes(0);
+      expect(listUsersMock).toHaveBeenCalledTimes(0);
       expect(setTimeout).toHaveBeenCalledTimes(0);
       return output.loadStack().then(() => {
         expect(loadStacksMock).toHaveBeenCalledTimes(1);

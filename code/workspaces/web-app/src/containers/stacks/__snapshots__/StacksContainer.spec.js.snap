@@ -12,6 +12,7 @@ Array [
   "deleteStack",
   "openModalDialog",
   "closeModalDialog",
+  "listUsers",
   "resetForm",
 ]
 `;
