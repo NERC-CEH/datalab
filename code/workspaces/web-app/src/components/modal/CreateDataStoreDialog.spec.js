@@ -15,6 +15,7 @@ describe('CreateDataStoreDialog dialog', () => {
     notebook: { displayName: 'Name' },
     onSubmit: onSubmitMock,
     onCancel: onCancelMock,
+    projectKey: 'testproj',
   });
 
   beforeEach(() => jest.resetAllMocks());

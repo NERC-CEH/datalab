@@ -6,13 +6,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import CreateDataStoreForm from '../dataStorage/CreateDataStoreForm';
 import PreviewDataStoreCard from '../dataStorage/PreviewDataStoreCard';
 
-const CreateDataStoreDialog = ({ title, dataStore, onSubmit, onCancel }) => (
+const CreateDataStoreDialog = ({ title, dataStore, onSubmit, onCancel, projectKey }) => (
   <Dialog open={true} maxWidth="md">
     <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
       <div>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <CreateDataStoreForm onSubmit={onSubmit} cancel={onCancel} />
+          <CreateDataStoreForm onSubmit={onSubmit} cancel={onCancel} projectKey={projectKey}/>
         </DialogContent>
       </div>
       <div style={{ width: 320 }}>
@@ -29,6 +29,7 @@ CreateDataStoreDialog.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  projectKey: PropTypes.string.isRequired,
 };
 
 export default CreateDataStoreDialog;

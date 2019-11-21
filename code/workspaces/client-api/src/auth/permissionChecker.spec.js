@@ -5,8 +5,8 @@ const { PROJECT_NAMESPACE } = permissionTypes;
 
 const user = {
   permissions: [
-    'project:elementName:actionName',
-    'project2:elementName:actionName',
+    'elementName:actionName',
+    `${PROJECT_NAMESPACE}:testproj:elementName:actionName`,
   ],
 };
 
@@ -31,7 +31,7 @@ describe('Permission Checker', () => {
       } catch (err) {
         error = err;
       }
-      expect(error).toEqual(new Error(`User missing expected permission(s): ${PROJECT_NAMESPACE}:project:elementName:missingActionName,system:instance:admin`));
+      expect(error).toEqual(new Error('User missing expected permission(s): elementName:missingActionName,system:instance:admin'));
       expect(actionMock).not.toHaveBeenCalled();
     });
 
@@ -41,11 +41,13 @@ describe('Permission Checker', () => {
         expect(actionMock).toHaveBeenCalledWith('value');
       }));
 
-    it('callback to be called if user has instance admin permission', () => permissionWrapper('elementName:actionName', admin, done)
-      .then(() => {
-        expect(actionMock).toHaveBeenCalledTimes(1);
-        expect(actionMock).toHaveBeenCalledWith('value');
-      }));
+    it('callback to be called if user has instance admin permission but not project permission', () => {
+      permissionWrapper('elementName:missingActionName', admin, done)
+        .then(() => {
+          expect(actionMock).toHaveBeenCalledTimes(1);
+          expect(actionMock).toHaveBeenCalledWith('value');
+        });
+    });
   });
 
   describe('multiPermissionWrapper', () => {
@@ -56,8 +58,8 @@ describe('Permission Checker', () => {
       } catch (err) {
         error = err;
       }
-      expect(error).toEqual(new Error(`User missing expected permission(s): ${PROJECT_NAMESPACE}:project:elementName:missingActionName,`
-        .concat(`${PROJECT_NAMESPACE}:project:elementName:anotherAction,system:instance:admin`)));
+      expect(error).toEqual(new Error('User missing expected permission(s): elementName:missingActionName,'
+        .concat('elementName:anotherAction,system:instance:admin')));
       expect(actionMock).not.toHaveBeenCalled();
     });
 
@@ -67,7 +69,7 @@ describe('Permission Checker', () => {
         expect(actionMock).toHaveBeenCalledWith('value');
       }));
 
-    it('callback to be called if user has instance admin permission', () => multiPermissionsWrapper(['elementName:actionName'], admin, done)
+    it('callback to be called if user has instance admin permission', () => multiPermissionsWrapper(['elementName:missingActionName'], admin, done)
       .then(() => {
         expect(actionMock).toHaveBeenCalledTimes(1);
         expect(actionMock).toHaveBeenCalledWith('value');
@@ -116,20 +118,25 @@ describe('Permission Checker', () => {
       expect(actionMock).not.toHaveBeenCalled();
     });
 
-    it('callback to be called if user has correct permission', () => {
-      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', user, done)
-        .then(() => {
-          expect(actionMock).toHaveBeenCalledTimes(1);
-          expect(actionMock).toHaveBeenCalledWith('value');
-        });
+    it('callback to be called if user has correct permission when single suffix passed', async () => {
+      await projectPermissionWrapper({ projectKey: 'testproj' }, 'elementName:actionName', user, done);
+
+      expect(actionMock).toHaveBeenCalledTimes(1);
+      expect(actionMock).toHaveBeenCalledWith('value');
     });
 
-    it('callback to be called if user has instance admin permission', async () => {
-      projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, done)
-        .then(() => {
-          expect(actionMock).toHaveBeenCalledTimes(1);
-          expect(actionMock).toHaveBeenCalledWith('value');
-        });
+    it('callback to be called if user has correct permission when multiple suffix passed', async () => {
+      await projectPermissionWrapper({ projectKey: 'testproj' }, ['elementName:missingActionName', 'elementName:actionName'], user, done);
+
+      expect(actionMock).toHaveBeenCalledTimes(1);
+      expect(actionMock).toHaveBeenCalledWith('value');
+    });
+
+    it('callback to be called if user has instance admin permission but no project permission', async () => {
+      await projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, done);
+
+      expect(actionMock).toHaveBeenCalledTimes(1);
+      expect(actionMock).toHaveBeenCalledWith('value');
     });
   });
 });

@@ -1,7 +1,7 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
 import { version } from '../version';
-import permissionChecker, { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
+import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
 import getUserPermissions from '../dataaccess/userPermissionsService';
@@ -13,7 +13,6 @@ import stackUrlService from '../dataaccess/stackUrlService';
 import projectService from '../dataaccess/projectService';
 import storageService from '../infrastructure/storageService';
 
-const { usersPermissions: { USERS_LIST } } = permissionTypes;
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 const { elementPermissions: { PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
@@ -21,7 +20,6 @@ const { elementPermissions: { SETTINGS_EDIT } } = permissionTypes;
 const { READY } = statusTypes;
 
 const DATALAB_NAME = config.get('datalabName');
-const PROJECT_KEY = 'project';
 
 const resolvers = {
   Query: {
@@ -36,7 +34,7 @@ const resolvers = {
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { token }) => getUserPermissions(token),
-    checkNameUniqueness: (obj, { name }, { user, token }) => permissionChecker([STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(PROJECT_KEY, name, token)),
+    checkNameUniqueness: (obj, args, { user, token }) => projectPermissionWrapper(args, [STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(args.projectKey, args.name, token)),
     users: (obj, args, { token }) => userService.getAll({ token }),
     projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
@@ -65,15 +63,15 @@ const resolvers = {
       projectPermissionWrapper({ projectKey }, PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, token)),
-    updateProject: (obj, { project }, { user, token }) => permissionChecker(SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
+    updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.key }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
   },
 
   DataStore: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
-    users: (obj, args, { user }) => permissionChecker(USERS_LIST, user, () => obj.users),
+    users: (obj, args, { user }) => projectPermissionWrapper({ projectKey: obj.projectKey }, STORAGE_EDIT, user, () => obj.users),
     accessKey: obj => minioTokenService.requestMinioToken(obj),
-    stacksMountingStore: ({ name }, args, { user, token }) => stackService.getAllByVolumeMount(PROJECT_KEY, name, { user, token }),
+    stacksMountingStore: ({ name, projectKey }, args, { user, token }) => stackService.getAllByVolumeMount(projectKey, name, { user, token }),
     status: () => READY,
   },
 

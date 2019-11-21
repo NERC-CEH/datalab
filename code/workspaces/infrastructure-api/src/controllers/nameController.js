@@ -6,7 +6,7 @@ async function isUnique(request, response) {
   const { name, projectKey } = matchedData(request);
 
   const stack = await stackRepository.getOneByName(projectKey, request.user, name);
-  const volume = await dataStorageRepository.getAllByName(request.user, name); // needs to be updated
+  const volume = await dataStorageRepository.getAllByName(projectKey, request.user, name);
 
   if (stack || volume) {
     return response.send({ isUnique: false });

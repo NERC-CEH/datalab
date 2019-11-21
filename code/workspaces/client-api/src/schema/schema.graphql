@@ -28,7 +28,7 @@ type Query {
     userPermissions: [String]
 
     # Checks internal name is unique.
-    checkNameUniqueness(name: String!): Boolean
+    checkNameUniqueness(projectKey: String!, name: String!): Boolean
 
     # List of users within the current DataLab
     users: [User]

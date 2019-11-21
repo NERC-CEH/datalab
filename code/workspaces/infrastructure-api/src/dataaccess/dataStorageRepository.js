@@ -12,9 +12,10 @@ function getAllProjectActive({ sub }, projectKey) {
   return DataStorage().find(query).exec();
 }
 
-function getAllByName(_, name) { // user, name
+function getAllByName(projectKey, user, name) {
   // For all users
-  return DataStorage().findOne({ name }).exec();
+  const query = filterByProject(projectKey, { name });
+  return DataStorage().findOne(query).exec();
 }
 
 function getById({ sub }, projectKey, id) {
@@ -55,6 +56,11 @@ function removeUsers({ sub }, projectKey, name, userIds) {
 const filterByUser = (userId, findQuery) => ({
   ...findQuery,
   users: { $elemMatch: { $eq: userId } },
+});
+
+const filterByProject = (projectKey, findQuery) => ({
+  ...findQuery,
+  projectKey,
 });
 
 const filterByUserAndProject = (userId, projectKey, findQuery) => ({
