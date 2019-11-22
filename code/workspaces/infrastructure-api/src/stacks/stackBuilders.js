@@ -55,7 +55,7 @@ export const createPySparkConfigMap = params => () => {
 };
 
 export const createIngressRule = (params, generator) => (service) => {
-  const { name, projectKey, type } = params;
+  const { name, projectKey, type, visible } = params; // eslint-disable-line no-unused-vars
   const ingressName = nameGenerator.deploymentName(name, type);
   const serviceName = service.metadata.name;
   const { port } = service.spec.ports[0];

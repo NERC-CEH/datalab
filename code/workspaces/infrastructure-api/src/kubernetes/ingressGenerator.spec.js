@@ -57,4 +57,32 @@ describe('Ingress generator', () => {
 
     return expect(template).resolves.toMatchSnapshot();
   });
+
+  it('should add auth-url for privateEndpoints', () => {
+    const options = {
+      name: 'name',
+      projectKey: 'project',
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      privateEndpoint: true,
+    };
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
+
+  it('should not add auth-url for a non-private endpoints', () => {
+    const options = {
+      name: 'name',
+      projectKey: 'project',
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      privateEndpoint: false,
+    };
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
 });

@@ -4,7 +4,9 @@ kind: Ingress
 metadata:
   name: {{ name }}
   annotations:
+{{#privateEndpoint}}
     nginx.ingress.kubernetes.io/auth-url: {{ &authServiceUrl }}
+{{/privateEndpoint}}
     nginx.ingress.kubernetes.io/auth-signin: {{ &authSigninUrl }}
     nginx.ingress.kubernetes.io/proxy-body-size: {{ &maxBodySize }}
 {{#rewriteTarget}}
