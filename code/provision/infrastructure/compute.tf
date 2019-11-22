@@ -109,6 +109,12 @@ resource "openstack_compute_instance_v2" "k8s_node" {
     groups     = "k8s-node,k8s-cluster,proxied,${var.site}"
     depends_on = var.tenant_network
   }
+
+  lifecycle {
+    ignore_changes = [
+      "image_name",
+    ]
+  }
 }
 
 resource "openstack_compute_instance_v2" "k8s_node_nov_2019" {
