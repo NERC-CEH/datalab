@@ -9,7 +9,7 @@ const containerInfo = yaml.safeLoad(fs.readFileSync(config.get('containerInfoPat
 function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
   const context = {
     name: deploymentName,
-    grantSudo: true,
+    grantSudo: 'yes',
     domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyter: {
       imageName: containerInfo.JUPYTER_IMAGE,
@@ -27,7 +27,7 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
 function createJupyterlabDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
   const context = {
     name: deploymentName,
-    grantSudo: true,
+    grantSudo: 'yes',
     domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyterlab: {
       imageName: containerInfo.JUPYTERLAB_IMAGE,
