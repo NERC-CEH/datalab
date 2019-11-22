@@ -65,7 +65,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
-      privateEndpoint: true,
+      visible: 'private',
     };
     const template = ingressGenerator.createIngress(options);
 
@@ -79,7 +79,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
-      privateEndpoint: false,
+      visible: 'public',
     };
     const template = ingressGenerator.createIngress(options);
 
