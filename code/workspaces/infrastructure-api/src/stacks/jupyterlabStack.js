@@ -12,6 +12,7 @@ import {
   createSparkDriverHeadlessService,
   createIngressRule,
   createPySparkConfigMap,
+  createDaskConfigMap,
 } from './stackBuilders';
 import configMapApi from '../kubernetes/configMapApi';
 
@@ -22,6 +23,7 @@ function createJupyterLab(params) {
   return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(nameGenerator.deploymentName(name, type), projectKey, secret))
     .then(createPySparkConfigMap(params))
+    .then(createDaskConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createJupyterlabDeployment))
     .then(createSparkDriverHeadlessService(params))
     .then(createService(params, deploymentGenerator.createJupyterlabService))

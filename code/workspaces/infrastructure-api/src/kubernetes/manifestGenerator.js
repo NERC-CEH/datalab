@@ -36,6 +36,7 @@ const ConfigTemplates = Object.freeze({
 
 const ConfigMapTemplates = Object.freeze({
   PYSPARK_CONFIGMAP: 'pyspark.configmap.template.yml',
+  DASK_CONFIGMAP: 'dask.configmap.template.yml',
 });
 
 function generateManifest(context, template) {

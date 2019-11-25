@@ -54,6 +54,17 @@ export const createPySparkConfigMap = params => () => {
     });
 };
 
+export const createDaskConfigMap = params => () => {
+  const { name, projectKey, type } = params;
+  const serviceName = nameGenerator.deploymentName(name, type);
+  return deploymentGenerator.createDaskConfigMap(serviceName, projectKey)
+    .then((manifest) => {
+      logger.info(`Creating configMap ${chalk.blue(serviceName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return configMapApi.createOrReplaceNamespacedConfigMap(serviceName, projectKey, manifest);
+    });
+};
+
 export const createIngressRule = (params, generator) => (service) => {
   const { name, projectKey, type } = params;
   const ingressName = nameGenerator.deploymentName(name, type);

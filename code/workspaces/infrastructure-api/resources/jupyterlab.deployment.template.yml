@@ -86,6 +86,9 @@ spec:
               # base jupyter/pyspark-notebook Dockerfile
               mountPath: /usr/local/spark/conf/spark-defaults.conf
               subPath: spark-defaults.conf
+            - name: dask-kubernetes-properties
+              mountPath: /opt/conda/etc/dask/dask.yaml
+              subPath: dask.yaml
       volumes:
         {{#volumeMount}}
         - name: glusterfsvol
@@ -98,3 +101,10 @@ spec:
             items:
               - key: config
                 path: spark-defaults.conf
+        - name: dask-kubernetes-properties
+          configMap:
+            name: {{ daskConfigMapName }}
+            items:
+            - key: config
+              path: dask.yaml
+

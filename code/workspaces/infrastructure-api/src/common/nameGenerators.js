@@ -14,6 +14,7 @@ const computeSubmissionClusterRole = () => 'compute-submission-role';
 
 // Spark
 const pySparkConfigMap = deploymentName => `${deploymentName}-pyspark-config`;
+const daskConfigMap = deploymentName => `${deploymentName}-dask-config`;
 const sparkDriverHeadlessService = deploymentServiceName => `${deploymentServiceName}-spark-driver-headless-service`;
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
@@ -26,6 +27,7 @@ export default {
   projectComputeNamespace,
   pvcName,
   pySparkConfigMap,
+  daskConfigMap,
   sparkDriverHeadlessService,
   sparkJob,
 };

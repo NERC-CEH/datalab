@@ -17,6 +17,7 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
     },
     serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
     pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
+    daskConfigMapName: nameGenerator.daskConfigMap(deploymentName),
     type,
     volumeMount,
   };
@@ -35,6 +36,7 @@ function createJupyterlabDeployment({ projectKey, deploymentName, notebookName, 
     },
     serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
     pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
+    daskConfigMapName: nameGenerator.daskConfigMap(deploymentName),
     type,
     volumeMount,
   };
@@ -180,6 +182,15 @@ function createPySparkConfigMap(notebookName, projectKey) {
   return generateManifest(context, ConfigMapTemplates.PYSPARK_CONFIGMAP);
 }
 
+function createDaskConfigMap(notebookName, projectKey) {
+  const context = {
+    configMapName: nameGenerator.daskConfigMap(notebookName),
+    projectNamespace: nameGenerator.projectNamespace(projectKey),
+    projectComputeNamespace: nameGenerator.projectComputeNamespace(projectKey),
+  };
+  return generateManifest(context, ConfigMapTemplates.DASK_CONFIGMAP);
+}
+
 export default {
   createJupyterDeployment,
   createJupyterlabDeployment,
@@ -197,4 +208,5 @@ export default {
   createMinioService,
   createSparkDriverHeadlessService,
   createPySparkConfigMap,
+  createDaskConfigMap,
 };
