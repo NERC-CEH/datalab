@@ -83,9 +83,24 @@ describe('replaceNamespacedConfigMap', () => {
 });
 
 describe('deleteNamespacedConfigMap', () => {
-  it('calls k8s api to delete config map with correct name and namespace', async () => {
+  it('deletes the configMap with correct name and namespace if it exists', async () => {
+    k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(() => configMap);
+
     await configMapApi.deleteNamespacedConfigMap(name, namespace);
-    expect(k8sApiMock.deleteNamespacedConfigMap).toHaveBeenCalledWith(name, namespace);
+    expect(k8sApiMock.readNamespacedConfigMap)
+      .toHaveBeenCalledWith(name, namespace);
+    expect(k8sApiMock.deleteNamespacedConfigMap)
+      .toHaveBeenCalledWith(name, namespace);
+  });
+
+  it('does not attempt to delete the configMap if it does not exist', async () => {
+    k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(() => { throw new Error('expected test error'); });
+    await configMapApi.deleteNamespacedConfigMap(name, namespace);
+
+    expect(k8sApiMock.readNamespacedConfigMap)
+      .toHaveBeenCalledWith(name, namespace);
+    expect(k8sApiMock.deleteNamespacedConfigMap)
+      .not.toHaveBeenCalled();
   });
 });
 

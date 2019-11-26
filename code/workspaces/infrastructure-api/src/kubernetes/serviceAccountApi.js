@@ -3,7 +3,7 @@ import { getCoreV1Api } from './kubeConfig';
 
 async function namespacedServiceAccountExists(name, namespace) {
   const k8sApi = getCoreV1Api();
-  logger.info(`Checking serviceAccount ${name} exists in ${namespace}`);
+  logger.debug(`Checking serviceAccount ${name} exists in ${namespace}`);
   try {
     await k8sApi.readNamespacedServiceAccount(name, namespace);
     return true;
@@ -12,11 +12,10 @@ async function namespacedServiceAccountExists(name, namespace) {
   }
 }
 
-/* eslint-disable consistent-return */
 async function createNamespacedServiceAccount(name, namespace) {
   if (await namespacedServiceAccountExists(name, namespace)) {
-    logger.info(`ServiceAccount ${name} already exists in namespace ${namespace}`);
-    return true;
+    logger.debug(`ServiceAccount ${name} already exists in namespace ${namespace}`);
+    return;
   }
 
   const k8sApi = getCoreV1Api();
@@ -32,9 +31,12 @@ async function createNamespacedServiceAccount(name, namespace) {
     throw error;
   }
 }
-/* eslint-disable consistent-return */
 
 async function deleteNamespacedServiceAccount(name, namespace) {
+  if (!(await namespacedServiceAccountExists(name, namespace))) {
+    logger.debug(`ServiceAccount ${name} does not exist in namespace ${namespace}`);
+    return;
+  }
   const k8sApi = getCoreV1Api();
 
   try {

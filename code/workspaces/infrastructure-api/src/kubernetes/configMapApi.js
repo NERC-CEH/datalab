@@ -44,10 +44,15 @@ async function replaceNamespacedConfigMap(name, namespace, manifest) {
 }
 
 async function deleteNamespacedConfigMap(name, namespace) {
+  if (!(await namespacedConfigMapExists(name, namespace))) {
+    logger.debug(`Config map ${name} does not exist in namespace ${namespace}, skipping deletion`);
+    return;
+  }
   const k8sApi = getCoreV1Api();
+
   try {
     logger.info(`Deleting configMap with name ${name} in namespace ${namespace}`);
-    return await k8sApi.deleteNamespacedConfigMap(name, namespace);
+    await k8sApi.deleteNamespacedConfigMap(name, namespace);
   } catch (error) {
     logger.error(`Error deleting configMap with name ${name} in namespace ${namespace}`, error.response.body);
     throw error;

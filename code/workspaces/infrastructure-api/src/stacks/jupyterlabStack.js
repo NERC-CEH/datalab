@@ -38,6 +38,7 @@ function deleteJupyterLab(params) {
     .then(() => serviceApi.deleteService(k8sName, projectKey))
     .then(() => serviceApi.deleteService(nameGenerator.sparkDriverHeadlessService(k8sName), projectKey))
     .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
+    .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.daskConfigMap(k8sName), projectKey))
     .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.pySparkConfigMap(k8sName), projectKey))
     .then(() => k8sSecretApi.deleteSecret(k8sName, projectKey))
     .then(() => secretManager.deleteSecret(projectKey, name));
