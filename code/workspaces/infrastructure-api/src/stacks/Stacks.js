@@ -1,6 +1,5 @@
 import { filter, find } from 'lodash';
 import jupyterStack from './jupyterStack';
-import jupyterlabStack from './jupyterlabStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
 import rshinyStack from './rshinyStack';
@@ -21,8 +20,8 @@ export const STACKS = Object.freeze({
   JUPYTERLAB: {
     name: 'jupyterlab',
     category: ANALYSIS,
-    create: jupyterlabStack.createJupyterLab,
-    delete: jupyterlabStack.deleteJupyterLab,
+    create: jupyterStack.createJupyterNotebook,
+    delete: jupyterStack.deleteJupyterNotebook,
   },
   ZEPPELIN: {
     name: 'zeppelin',

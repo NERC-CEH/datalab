@@ -7,6 +7,8 @@ import config from '../config/config';
 const containerInfo = yaml.safeLoad(fs.readFileSync(config.get('containerInfoPath')));
 
 function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
+  const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
+
   const context = {
     name: deploymentName,
     grantSudo: 'yes',
@@ -19,29 +21,11 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
     pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
     daskConfigMapName: nameGenerator.daskConfigMap(deploymentName),
     type,
+    startCmd,
     volumeMount,
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
-}
-
-function createJupyterlabDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
-  const context = {
-    name: deploymentName,
-    grantSudo: 'yes',
-    domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
-    jupyterlab: {
-      imageName: containerInfo.JUPYTERLAB_IMAGE,
-      version: containerInfo.JUPYTERLAB_VERSION,
-    },
-    serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
-    pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
-    daskConfigMapName: nameGenerator.daskConfigMap(deploymentName),
-    type,
-    volumeMount,
-  };
-
-  return generateManifest(context, DeploymentTemplates.JUPYTERLAB_DEPLOYMENT);
 }
 
 function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
@@ -133,11 +117,6 @@ function createJupyterService(notebookName) {
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
 }
 
-function createJupyterlabService(notebookName) {
-  const context = { name: notebookName };
-  return generateManifest(context, ServiceTemplates.JUPYTERLAB_SERVICE);
-}
-
 function createZeppelinService(name) {
   const context = { name };
   return generateManifest(context, ServiceTemplates.ZEPPELIN_SERVICE);
@@ -193,14 +172,12 @@ function createDaskConfigMap(notebookName, projectKey) {
 
 export default {
   createJupyterDeployment,
-  createJupyterlabDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
   createRShinyDeployment,
   createNbViewerDeployment,
   createMinioDeployment,
   createJupyterService,
-  createJupyterlabService,
   createZeppelinService,
   createRStudioService,
   createRShinyService,

@@ -12,12 +12,9 @@ export default function notebookUrlService(projectKey, notebook) {
   if (notebook.type === ZEPPELIN) {
     return requestZeppelinToken(projectKey, notebook)
       .then(createZeppelinUrl(notebook));
-  } if (notebook.type === JUPYTER) {
+  } if (notebook.type === JUPYTER || notebook.type === JUPYTERLAB) {
     return requestJupyterToken(projectKey, notebook)
       .then(createJupyterUrl(notebook));
-  } if (notebook.type === JUPYTERLAB) {
-    return requestJupyterToken(projectKey, notebook)
-      .then(createJupyterlabUrl(notebook));
   } if (notebook.type === RSTUDIO) {
     return requestRStudioToken(projectKey, notebook)
       .then(createRStudioUrl(notebook));
@@ -29,9 +26,14 @@ export default function notebookUrlService(projectKey, notebook) {
 
 const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
 
-const createJupyterUrl = notebook => token => (token ? `${notebook.url}/tree/?token=${token}` : undefined);
-
-const createJupyterlabUrl = notebook => token => (token ? `${notebook.url}/lab?token=${token}` : undefined);
+const createJupyterUrl = notebook => token => {
+  if (token && notebook.type === JUPYTER) {
+    return `${notebook.url}/tree/?token=${token}`;
+  } else if (token && notebook.type === JUPYTERLAB) {
+    return `${notebook.url}/lab?token=${token}`;
+  }
+  return undefined;
+};
 
 const createRStudioUrl = notebook => tokens => (tokens
   ? `${notebook.url}/connect?username=${RSTUDIO_USERNAME}&expires=${tokens.expires}&token=${tokens.token}&csrfToken=${tokens.csrfToken}`
