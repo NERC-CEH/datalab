@@ -26,10 +26,11 @@ export default function notebookUrlService(projectKey, notebook) {
 
 const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
 
-const createJupyterUrl = notebook => token => {
+const createJupyterUrl = notebook => (token) => {
   if (token && notebook.type === JUPYTER) {
     return `${notebook.url}/tree/?token=${token}`;
-  } else if (token && notebook.type === JUPYTERLAB) {
+  }
+  if (token && notebook.type === JUPYTERLAB) {
     return `${notebook.url}/lab?token=${token}`;
   }
   return undefined;

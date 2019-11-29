@@ -8,7 +8,6 @@ const containerInfo = yaml.safeLoad(fs.readFileSync(config.get('containerInfoPat
 
 function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
   const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
-
   const context = {
     name: deploymentName,
     grantSudo: 'yes',
