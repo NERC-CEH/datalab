@@ -12,6 +12,7 @@ import {
   createSparkDriverHeadlessService,
   createIngressRule,
   createPySparkConfigMap,
+  createDaskConfigMap,
 } from './stackBuilders';
 import configMapApi from '../kubernetes/configMapApi';
 
@@ -22,6 +23,7 @@ function createJupyterNotebook(params) {
   return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(nameGenerator.deploymentName(name, type), projectKey, secret))
     .then(createPySparkConfigMap(params))
+    .then(createDaskConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createJupyterDeployment))
     .then(createSparkDriverHeadlessService(params))
     .then(createService(params, deploymentGenerator.createJupyterService))
@@ -36,6 +38,7 @@ function deleteJupyterNotebook(params) {
     .then(() => serviceApi.deleteService(k8sName, projectKey))
     .then(() => serviceApi.deleteService(nameGenerator.sparkDriverHeadlessService(k8sName), projectKey))
     .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
+    .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.daskConfigMap(k8sName), projectKey))
     .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.pySparkConfigMap(k8sName), projectKey))
     .then(() => k8sSecretApi.deleteSecret(k8sName, projectKey))
     .then(() => secretManager.deleteSecret(projectKey, name));
