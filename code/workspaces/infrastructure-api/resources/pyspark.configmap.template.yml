@@ -12,7 +12,7 @@ data:
     spark.executor.memory                         4g
     spark.kubernetes.authenticate.caCertFile      /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
     spark.kubernetes.authenticate.oauthTokenFile  /var/run/secrets/kubernetes.io/serviceaccount/token
-    spark.kubernetes.container.image              gcr.io/spark-operator/spark-py:v2.4.0
+    spark.kubernetes.container.image              nerc/spark-k8s:0.1.0
     spark.kubernetes.executor.limit.cores         2
     spark.kubernetes.executor.request.cores       0.5
     spark.kubernetes.namespace                    {{ projectComputeNamespace }}
