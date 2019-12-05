@@ -35,7 +35,6 @@ to be granted access.
 * **[datalab](https://github.com/NERC-CEH/datalab)** - This is the main code base for the datalabs project.
 * **[datalab-k8s-manifests](https://github.com/NERC-CEH/datalab-k8s-manifests)** - Holds the deployment manifests and configuration files for deploying Datalabs to Kubernetes.
 * **[docker-conect](https://github.com/NERC-CEH/docker-connect)** - Service to provide seamless login to Minio containers.
-* **[docker-dask](https://github.com/NERC-CEH/docker-dask)** - Custom docker container for running Dask
 * **[docker-default-backend](https://github.com/NERC-CEH/docker-default-backend)** - Custom backend for datalabs. Serves 404 Page Not Found for datalabs ingress.
 * **[docker-discourse](https://github.com/NERC-CEH/docker-discourse)** - Docker container for running Discourse. Not used currently as running Discourse in containers was abandoned in favour of a standalone server.
 * **[docker-gitbook-builder](https://github.com/NERC-CEH/docker-gitbook-builder)** - Custom Docker container for building GitBook websites.
@@ -43,8 +42,6 @@ to be granted access.
 * **[docker-kubectl](https://github.com/NERC-CEH/docker-kubectl)** - Docker container to allow kubectl proxy to run as an ambassador container.
 * **[docker-minio](https://github.com/NERC-CEH/docker-minio)** - Custom Minio container to configure users as required for datalabs.
 * **[docker-rshiny](https://github.com/NERC-CEH/docker-rshiny)** - Custom RShiny container.
-* **[docker-spark](https://github.com/NERC-CEH/docker-spark)** - Custom Spark container
-* **[docker-spark-core](https://github.com/NERC-CEH/docker-spark-core)** - Base Spark container with all Spark dependencies. Speeds up container build for changing spark version.
 * **[docker-zeppelin](https://github.com/NERC-CEH/docker-zeppelin)** - Custom Zeppelin container.
 * **[docker-zeppelin-connect](https://github.com/NERC-CEH/docker-zeppelin-connect)** - Docker container to provide seamless login for Zeppelin and RShiny projects.
 * **[terraform-http-backend](https://github.com/NERC-CEH/terraform-http-backend)** - Custom Terraform state server for storing Terraform state over HTTP.

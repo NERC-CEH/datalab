@@ -8,6 +8,8 @@ exports[`DaskPage renders correct snapshot 1`] = `
     variant="body1"
   >
     Dask is a flexible parallel computing library for analytic computing.
+    <br />
+    DataLabs supports usage of Dask-Kubernetes which allows workers to be scheduled across the cluster. This is tightly integrated with Jupyter.
   </WithStyles(ForwardRef(Typography))>
   <PrimaryActionButton
     onClick={[Function]}
@@ -17,7 +19,7 @@ exports[`DaskPage renders correct snapshot 1`] = `
       }
     }
   >
-    Dask Status
+    Dask on Kubernetes Documentation
   </PrimaryActionButton>
 </WithStyles(Page)>
 `;
