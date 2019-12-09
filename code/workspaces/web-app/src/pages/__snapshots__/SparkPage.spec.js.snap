@@ -8,6 +8,18 @@ exports[`SparkPage renders correct snapshot 1`] = `
     variant="body1"
   >
     Apache Spark is an open-source cluster-computing framework.
+    <br />
+    DataLabs supports usage of Spark via Kubernetes which allows Spark executors to be deployed across the cluster.
   </WithStyles(ForwardRef(Typography))>
+  <PrimaryActionButton
+    onClick={[Function]}
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+  >
+    Spark in DataLabs Documentation
+  </PrimaryActionButton>
 </WithStyles(Page)>
 `;
