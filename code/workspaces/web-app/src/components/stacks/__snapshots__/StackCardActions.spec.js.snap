@@ -23,6 +23,25 @@ exports[`PureStackCardActions Should not render edit and delete buttons if curre
       Open
     </PrimaryActionButton>
   </ComponentWrapper>
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    anchorOrigin={
+      Object {
+        "horizontal": "center",
+        "vertical": "center",
+      }
+    }
+    id="more-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  />
 </div>
 `;
 
@@ -60,33 +79,72 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <SecondaryActionButton
-      disabled={false}
-      fullWidth={true}
+    <WithStyles(ForwardRef(Button))
+      aria-controls="more-menu"
+      aria-haspopup="true"
+      color="primary"
       onClick={[Function]}
+      variant="outlined"
     >
-      Delete
-    </SecondaryActionButton>
+      <MoreVertIcon />
+    </WithStyles(ForwardRef(Button))>
   </ComponentWrapper>
-  <ComponentWrapper
-    className="buttonWrapper"
-    permission="edit"
-    userPermissions={
-      Array [
-        "open",
-        "delete",
-        "edit",
-      ]
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    anchorOrigin={
+      Object {
+        "horizontal": "center",
+        "vertical": "center",
+      }
+    }
+    id="more-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
     }
   >
-    <SecondaryActionButton
-      disabled={false}
-      fullWidth={true}
-      onClick={[Function]}
+    <ComponentWrapper
+      permission="edit"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
     >
-      Edit
-    </SecondaryActionButton>
-  </ComponentWrapper>
+      <WithStyles(ForwardRef(MenuItem))
+        disabled={false}
+        fullWidth={true}
+        onClick={[Function]}
+      >
+        Edit
+      </WithStyles(ForwardRef(MenuItem))>
+    </ComponentWrapper>
+    <ComponentWrapper
+      permission="delete"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        disabled={false}
+        fullWidth={true}
+        onClick={[Function]}
+      >
+        Delete
+      </WithStyles(ForwardRef(MenuItem))>
+    </ComponentWrapper>
+  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 

@@ -1,11 +1,14 @@
 import { withStyles } from '@material-ui/core/styles';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { statusTypes } from 'common';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
-import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 const { READY } = statusTypes;
 
@@ -33,6 +36,14 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
   const ownsStack = !stack.users || stack.users.includes(currentUserId);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.cardActions}>
@@ -45,24 +56,45 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Open
         </PrimaryActionButton>
       </PermissionWrapper>}
-      {deleteStack && ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
-        <SecondaryActionButton
-          disabled={!isReady(stack)}
-          onClick={() => deleteStack(stack)}
-          fullWidth
+      {ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+        <Button
+          aria-controls="more-menu"
+          aria-haspopup="true"
+          color="primary"
+          variant="outlined"
+          onClick={handleClick}
         >
-          Delete
-        </SecondaryActionButton>
+          <MoreVertIcon />
+        </Button>
       </PermissionWrapper>}
-      {editStack && ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={editPermission}>
-        <SecondaryActionButton
-          disabled={!isReady(stack)}
-          onClick={() => editStack(stack)}
-          fullWidth
-        >
-          Edit
-        </SecondaryActionButton>
-      </PermissionWrapper>}
+      <Menu
+        id="more-menu"
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        {editStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
+          <MenuItem
+            disabled={!isReady(stack)}
+            onClick={() => editStack(stack)}
+            fullWidth
+          >
+            Edit
+        </MenuItem>
+        </PermissionWrapper>}
+        {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+          <MenuItem
+            disabled={!isReady(stack)}
+            onClick={() => deleteStack(stack)}
+            fullWidth
+          >
+            Delete
+        </MenuItem>
+        </PermissionWrapper>}
+      </Menu>
     </div>
   );
 };
