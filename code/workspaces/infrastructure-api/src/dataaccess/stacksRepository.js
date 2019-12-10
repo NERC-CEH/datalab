@@ -51,6 +51,15 @@ function getOneByName(projectKey, user, name) {
     .exec();
 }
 
+function getOneByNameUserAndCategory(projectKey, user, name, category) {
+  return Stack()
+    .find({ category })
+    .findOne({ name })
+    .filterOneByProject(projectKey)
+    .filterByUser(user)
+    .exec();
+}
+
 function createOrUpdate(projectKey, user, stack) {
   return Stack()
     .find()
@@ -94,6 +103,7 @@ export default {
   getAllByCategory,
   getOneById,
   getOneByName,
+  getOneByNameUserAndCategory,
   getAllByVolumeMount,
   createOrUpdate,
   deleteStack,

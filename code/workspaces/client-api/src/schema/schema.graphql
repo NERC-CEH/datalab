@@ -30,6 +30,9 @@ type Query {
     # Checks internal name is unique.
     checkNameUniqueness(projectKey: String!, name: String!): Boolean
 
+    # Retrieve pod logs 
+    logs(projectKey: String!, name: String!): String
+
     # List of users within the current DataLab
     users: [User]
 

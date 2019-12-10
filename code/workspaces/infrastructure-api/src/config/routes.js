@@ -5,6 +5,7 @@ import stackRouter from '../routers/stackRouter';
 import stacksRouter from '../routers/stacksRouter';
 import volumeRouter from '../routers/volumeRouter';
 import volumesRouter from '../routers/volumesRouter';
+import logsRouter from '../routers/logsRouter';
 
 function configureRoutes(app) {
   app.get('/status', status.status);
@@ -14,6 +15,7 @@ function configureRoutes(app) {
   app.use('/stacks', stacksRouter);
   app.use('/volume', volumeRouter);
   app.use('/volumes', volumesRouter);
+  app.use('/logs', logsRouter);
 }
 
 export default { configureRoutes };

@@ -12,6 +12,7 @@ import minioTokenService from '../dataaccess/minioTokenService';
 import stackUrlService from '../dataaccess/stackUrlService';
 import projectService from '../dataaccess/projectService';
 import storageService from '../infrastructure/storageService';
+import logsService from '../dataaccess/logsService';
 
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
@@ -39,6 +40,7 @@ const resolvers = {
     projects: (obj, args, { token }) => projectService.listProjects(token),
     project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
     checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
+    logs: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => logsService.getLogsByName(args.projectKey, args.name, token)),
   },
 
   Mutation: {
