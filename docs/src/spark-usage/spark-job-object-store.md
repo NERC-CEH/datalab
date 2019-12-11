@@ -16,13 +16,21 @@ Create a Jupyter notebook within your defined project.
 When the notebook is created the Spark properties needed
 for the Spark cluster to be created is dynamically loaded into the notebook environment.
 
-### Create Spark session and load credentails
+### Set Object Store Credentials in the environment
+
+```python
+import os
+os.environ['ACCESS_KEY'] = "xxxxxxx"
+os.environ['SECRET_KEY'] = "xxxxxxxxx"
+```
+
+### Create Spark session
 
 ```python
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName('Cropnet') \
-    .config("fs.s3a.access.key", "xxxxxxxxx") \
-    .config("fs.s3a.secret.key", "xxxxxxxxxxx") \
+    .config("fs.s3a.access.key", os.environ.get('ACCESS_KEY')) \
+    .config("fs.s3a.secret.key", os.environ.get('SECRET_KEY')) \
     .config("fs.s3a.endpoint", "http://ceh-datalab-U.s3-ext.jc.rl.ac.uk") \
     .config("fs.s3a.path.style.access", True) \
     .config("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
