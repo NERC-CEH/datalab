@@ -5,7 +5,7 @@ import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { permissionTypes } from 'common';
-import { MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
+import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
@@ -35,6 +35,13 @@ class StacksContainer extends Component {
       .then(payload => this.props.actions.openStack(payload.value.redirectUrl))
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }
+
+  getLogs = stack => this.props.actions.getLogs(stack.projectKey, stack.name)
+    .then(result => this.props.actions.openModalDialog(MODAL_TYPE_LOGS, {
+      title: 'Logs',
+      body: result.value,
+      onCancel: this.props.actions.closeModalDialog,
+    }));
 
   createStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
     .then(() => this.props.actions.createStack({ ...stack, projectKey: this.props.projectKey.value }))
@@ -120,6 +127,7 @@ class StacksContainer extends Component {
         stacks={stacksUpdatedFetching}
         typeName={this.props.typeName}
         typeNamePlural={this.props.typeNamePlural}
+        getLogs={this.getLogs}
         openStack={this.openStack}
         deleteStack={this.confirmDeleteStack}
         openCreationForm={this.openCreationForm}
@@ -151,6 +159,7 @@ StacksContainer.propTypes = {
     deleteStack: PropTypes.func.isRequired,
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
+    getLogs: PropTypes.func,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectKey: PropTypes.object.isRequired,

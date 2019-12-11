@@ -66,10 +66,25 @@ function deleteStack(stack) {
     .then(errorHandler('data.stack'));
 }
 
+function getLogs(projectKey, name) {
+  console.log(`projectKey=${projectKey},name=${name}`);
+  const query = `
+    Logs($projectKey: String!, $name: String!) {
+      logs(projectKey: $projectKey, name: $name)
+    }`;
+
+  return gqlQuery(query, { projectKey, name })
+    .then((stack) => {
+      console.log(stack);
+      return stack.data.logs;
+    });
+}
+
 export default {
   loadStacks,
   loadStacksByCategory,
   getUrl,
   createStack,
   deleteStack,
+  getLogs,
 };

@@ -32,7 +32,7 @@ const StackCardActions = (props) => {
 };
 
 export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
-  deletePermission, editPermission, currentUserId, classes }) => {
+  deletePermission, editPermission, currentUserId, classes, getLogs }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
@@ -75,6 +75,15 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        {stack.type === 'rshiny' && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+          <MenuItem
+            disabled={!isReady(stack)}
+            onClick={() => getLogs(stack)}
+            fullWidth
+          >
+            Logs
+        </MenuItem>
+        </PermissionWrapper>}
         {editStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
           <MenuItem
             disabled={!isReady(stack)}
@@ -106,6 +115,7 @@ StackCardActions.propTypes = {
   openStack: PropTypes.func,
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
+  getLogs: PropTypes.func,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,
