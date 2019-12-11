@@ -19,9 +19,9 @@ prod_ingress_http_port: 30080
 prod_ingress_https_port: 30443
 
 # Shared Secrets - Note that vault files live in site specific group_var directories
-ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
-root_password_crypted: "{{ vault_root_password_crypted }}"
-deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
-slack_token: "{{ vault_slack_token }}"
-heketi_ssh_password: "{{ vault_heketi_ssh_password }}"
+#ansible_sudo_pass: "{{ vault_deploy_password }}" # Note that this is the uncrypted version of the deploy user password
+#root_password_crypted: "{{ vault_root_password_crypted }}"
+#deploy_password_crypted: "{{ vault_deploy_password_crypted }}"
+#slack_token: "{{ vault_slack_token }}"
+#heketi_ssh_password: "{{ vault_heketi_ssh_password }}"
 sendgrid_api_key: "{{ vault_sendgrid_api_key }}"
