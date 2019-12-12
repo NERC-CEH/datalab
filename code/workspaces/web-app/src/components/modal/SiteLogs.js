@@ -5,16 +5,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import IconButton from '../common/control/IconButton';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 const Logs = ({ title, body, onCancel }) => (
   <Dialog open={true} onClose={onCancel} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
-      <DialogContentText style={{ 'white-space': 'pre' }}>{body}</DialogContentText>
+      <DialogContentText style={{ whiteSpace: 'pre' }}>{body}</DialogContentText>
     </DialogContent>
     <DialogActions>
-      <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
+      <PrimaryActionButton onClick={onCancel}>Close</PrimaryActionButton>
     </DialogActions>
   </Dialog>
 );

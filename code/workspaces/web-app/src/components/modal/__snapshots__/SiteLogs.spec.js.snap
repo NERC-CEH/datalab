@@ -13,7 +13,7 @@ exports[`Logs creates correct snapshot for logs dialog 1`] = `
     <WithStyles(ForwardRef(DialogContentText))
       style={
         Object {
-          "white-space": "pre",
+          "whiteSpace": "pre",
         }
       }
     >
@@ -21,12 +21,11 @@ exports[`Logs creates correct snapshot for logs dialog 1`] = `
     </WithStyles(ForwardRef(DialogContentText))>
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(IconButton)
-      icon="clear"
+    <PrimaryActionButton
       onClick={[MockFunction]}
     >
-      Cancel
-    </WithStyles(IconButton)>
+      Close
+    </PrimaryActionButton>
   </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;

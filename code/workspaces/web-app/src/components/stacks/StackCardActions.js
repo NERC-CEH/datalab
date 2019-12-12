@@ -79,7 +79,6 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           <MenuItem
             disabled={!isReady(stack)}
             onClick={() => getLogs(stack)}
-            fullWidth
           >
             Logs
         </MenuItem>

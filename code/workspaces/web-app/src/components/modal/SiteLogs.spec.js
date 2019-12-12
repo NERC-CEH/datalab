@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Logs from './SiteLogs';
-import IconButton from '../common/control/IconButton';
+import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 function shallowRender(props) {
   return shallow(<Logs {...props} />);
@@ -29,14 +29,14 @@ describe('Logs', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('wires up cancel function correctly', () => {
+  it('wires up close function correctly', () => {
     // Arrange
     const props = generateProps();
 
     // Act
     const output = shallowRender(props);
-    const buttons = output.find(IconButton);
-    const cancelFunction = buttons.find({ children: 'Cancel' }).prop('onClick');
+    const buttons = output.find(PrimaryActionButton);
+    const cancelFunction = buttons.find({ children: 'Close' }).prop('onClick');
     cancelFunction();
 
     // Assert
