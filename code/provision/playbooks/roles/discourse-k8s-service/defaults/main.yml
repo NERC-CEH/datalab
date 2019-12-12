@@ -1,3 +1,0 @@
----
-tmp_directory: /tmp/helm
-chart_directory: "{{ tmp_directory}}/discourse"

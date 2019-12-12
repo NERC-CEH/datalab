@@ -19,8 +19,6 @@ startup and may change they are not listed.
 | Name | Usage |
 |------|-------|
 |datalabs-bastion-1|External access point to all datalabs servers|
-|datalabs-discourse|Production Discourse server|
-|datalabs-discourse-test|Test Discourse server|
 |datalabs-glusterfs-1|Gluster storage server|
 |datalabs-glusterfs-2|Gluster storage server|
 |datalabs-glusterfs-3|Gluster storage server|

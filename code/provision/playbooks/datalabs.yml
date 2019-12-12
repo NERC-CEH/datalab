@@ -13,5 +13,3 @@
 - name: Install Kubernetes Tools (Monitoring and Logging)
   import_playbook: kubernetes-tools.yml
 
-- name: Install Discourse
-  import_playbook: discourse-server.yml

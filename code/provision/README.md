@@ -220,7 +220,6 @@ This playbook combines playbooks that do the following:
 * Configure Kubernetes Cluster
 * Configure Heketi as dynamic Gluster provisioner
 * Install Kubernetes Tools (Monitoring and Logging)
-* Install Discourse
 
 ### Improvements
 
