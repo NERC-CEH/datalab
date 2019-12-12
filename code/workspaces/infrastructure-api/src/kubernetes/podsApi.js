@@ -20,11 +20,21 @@ function getStacks() {
     .then(pods => pods.filter(({ type }) => stackNames.includes(type)));
 }
 
+async function getPodName(deploymentName, namespaceName) {
+  const pods = await getPods();
+  try {
+    return pods.find(pod => pod.name === deploymentName && pod.namespace === namespaceName).podName;
+  } catch (error) {
+    return undefined;
+  }
+}
+
 const handlePodlist = ({ items }) => items.map(pod => ({
   name: get(pod, 'metadata.labels.name'),
   namespace: get(pod, 'metadata.namespace'),
   type: get(pod, `metadata.labels.${SELECTOR_LABEL}`),
   status: handlePodStatus(pod),
+  podName: get(pod, 'metadata.name'),
 }));
 
 const handlePodStatus = (pod) => {
@@ -43,4 +53,4 @@ const getContainerStateReason = (containers, targetState) => {
   return undefined;
 };
 
-export default { getStacks };
+export default { getStacks, getPodName };
