@@ -25,12 +25,6 @@ exports[`PureStackCardActions Should not render edit and delete buttons if curre
   </ComponentWrapper>
   <WithStyles(ForwardRef(Menu))
     anchorEl={null}
-    anchorOrigin={
-      Object {
-        "horizontal": "center",
-        "vertical": "center",
-      }
-    }
     id="more-menu"
     keepMounted={true}
     onClose={[Function]}
@@ -79,24 +73,25 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <WithStyles(ForwardRef(Button))
+    <SecondaryActionButton
       aria-controls="more-menu"
       aria-haspopup="true"
-      color="primary"
+      disabled={false}
       onClick={[Function]}
-      variant="outlined"
     >
-      <MoreVertIcon />
-    </WithStyles(ForwardRef(Button))>
+      <WithStyles(ForwardRef(Icon))
+        style={
+          Object {
+            "color": "inherit",
+          }
+        }
+      >
+        more_vert
+      </WithStyles(ForwardRef(Icon))>
+    </SecondaryActionButton>
   </ComponentWrapper>
   <WithStyles(ForwardRef(Menu))
     anchorEl={null}
-    anchorOrigin={
-      Object {
-        "horizontal": "center",
-        "vertical": "center",
-      }
-    }
     id="more-menu"
     keepMounted={true}
     onClose={[Function]}
@@ -120,7 +115,6 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
     >
       <WithStyles(ForwardRef(MenuItem))
         disabled={false}
-        fullWidth={true}
         onClick={[Function]}
       >
         Edit
@@ -138,7 +132,6 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
     >
       <WithStyles(ForwardRef(MenuItem))
         disabled={false}
-        fullWidth={true}
         onClick={[Function]}
       >
         Delete

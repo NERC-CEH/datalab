@@ -1,16 +1,17 @@
 import { withStyles } from '@material-ui/core/styles';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { statusTypes } from 'common';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 const { READY } = statusTypes;
+const MORE_ICON = 'more_vert';
 
 const styles = theme => ({
   cardActions: {
@@ -57,20 +58,18 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         </PrimaryActionButton>
       </PermissionWrapper>}
       {ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
-        <Button
+        <SecondaryActionButton
+          disabled={!isReady(stack)}
           aria-controls="more-menu"
           aria-haspopup="true"
-          color="primary"
-          variant="outlined"
           onClick={handleClick}
         >
-          <MoreVertIcon />
-        </Button>
+          <Icon style={{ color: 'inherit' }}>{MORE_ICON}</Icon>
+        </SecondaryActionButton>
       </PermissionWrapper>}
       <Menu
         id="more-menu"
         anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         keepMounted
         open={Boolean(anchorEl)}
@@ -80,19 +79,17 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           <MenuItem
             disabled={!isReady(stack)}
             onClick={() => editStack(stack)}
-            fullWidth
           >
             Edit
-        </MenuItem>
+          </MenuItem>
         </PermissionWrapper>}
         {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem
             disabled={!isReady(stack)}
             onClick={() => deleteStack(stack)}
-            fullWidth
           >
             Delete
-        </MenuItem>
+          </MenuItem>
         </PermissionWrapper>}
       </Menu>
     </div>
