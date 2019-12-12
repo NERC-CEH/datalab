@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { reset } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import ListItem from '@material-ui/core/ListItem';
 import { permissionTypes, stackTypes } from 'common';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
@@ -31,6 +32,27 @@ const styles = styleTheme => ({
   searchTextField: {
     width: '100%',
     margin: 0,
+  },
+  active: {
+    borderRadius: theme.shape.borderRadius,
+    color: theme.palette.highlightMono,
+    background: theme.palette.backgroundDark,
+    '&:hover': {
+      background: theme.palette.backgroundDarkTransparent,
+    },
+  },
+  inactive: {
+    borderRadius: theme.shape.borderRadius,
+    color: theme.typography.color,
+    background: theme.palette.highlightMono,
+    '&:hover': {
+      background: theme.palette.highlightMonoTransparent,
+    },
+  },
+  filters: {
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    paddingRight: `${theme.spacing(2)}px`,
   },
 });
 
@@ -64,6 +86,8 @@ class ProjectsContainer extends Component {
     super(props);
     this.state = {
       searchText: '',
+      myProjectStyle: this.props.classes.active,
+      myProjectFilter: true,
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.onCreateProjectSubmit = this.onCreateProjectSubmit.bind(this);
@@ -71,10 +95,19 @@ class ProjectsContainer extends Component {
     this.projectUserPermissions = this.projectUserPermissions.bind(this);
     this.confirmDeleteProject = this.confirmDeleteProject.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleSearchTextChange(event) {
     this.setState({ searchText: event.target.value });
+  }
+
+  handleClick() {
+    if (this.state.myProjectFilter === false) {
+      this.setState({ myProjectStyle: this.props.classes.active, myProjectFilter: true });
+    } else {
+      this.setState({ myProjectStyle: this.props.classes.inactive, myProjectFilter: false });
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -97,6 +130,13 @@ class ProjectsContainer extends Component {
     return {
       ...projectStacks,
       value: projectStacks.value.filter(stack => stackMatchesFilter(stack, searchText)),
+    };
+  }
+
+  filterProjectsByUser(projectStacks, myProjectFilter) {
+    return {
+      ...projectStacks,
+      value: myProjectFilter ? projectStacks.value.filter(stack => stack.accessible) : projectStacks.value,
     };
   }
 
@@ -157,6 +197,11 @@ class ProjectsContainer extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.controlContainer}>
+        <div className={classes.filters}>
+          <ListItem button={true} onClick={this.handleClick} className={this.state.myProjectStyle}>
+            My Projects
+          </ListItem>
+        </div>
         <TextField
           id="search"
           className={classes.searchTextField}
@@ -180,11 +225,13 @@ class ProjectsContainer extends Component {
       this.adaptProjectsToStacks(projects),
       this.state.searchText,
     );
+    const userAccessibleStacks = this.filterProjectsByUser(filteredStacks, this.state.myProjectFilter);
+
     return (
       <div>
         {this.renderControls()}
         <StackCards
-          stacks={filteredStacks}
+          stacks={userAccessibleStacks}
           typeName={TYPE_NAME}
           typeNamePlural={TYPE_NAME_PLURAL}
           openStack={project => history.push(`/projects/${project.key}/info`)}
