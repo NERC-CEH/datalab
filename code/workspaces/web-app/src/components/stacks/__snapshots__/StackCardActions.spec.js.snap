@@ -23,6 +23,19 @@ exports[`PureStackCardActions Should not render edit and delete buttons if curre
       Open
     </PrimaryActionButton>
   </ComponentWrapper>
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    id="more-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  />
 </div>
 `;
 
@@ -61,32 +74,70 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
     }
   >
     <SecondaryActionButton
+      aria-controls="more-menu"
+      aria-haspopup="true"
       disabled={false}
-      fullWidth={true}
       onClick={[Function]}
     >
-      Delete
+      <WithStyles(ForwardRef(Icon))
+        style={
+          Object {
+            "color": "inherit",
+          }
+        }
+      >
+        more_vert
+      </WithStyles(ForwardRef(Icon))>
     </SecondaryActionButton>
   </ComponentWrapper>
-  <ComponentWrapper
-    className="buttonWrapper"
-    permission="edit"
-    userPermissions={
-      Array [
-        "open",
-        "delete",
-        "edit",
-      ]
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    id="more-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
     }
   >
-    <SecondaryActionButton
-      disabled={false}
-      fullWidth={true}
-      onClick={[Function]}
+    <ComponentWrapper
+      permission="edit"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
     >
-      Edit
-    </SecondaryActionButton>
-  </ComponentWrapper>
+      <WithStyles(ForwardRef(MenuItem))
+        disabled={false}
+        onClick={[Function]}
+      >
+        Edit
+      </WithStyles(ForwardRef(MenuItem))>
+    </ComponentWrapper>
+    <ComponentWrapper
+      permission="delete"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        disabled={false}
+        onClick={[Function]}
+      >
+        Delete
+      </WithStyles(ForwardRef(MenuItem))>
+    </ComponentWrapper>
+  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 
