@@ -1,3 +1,0 @@
-name: Discourse Service creation
-version: 1.0.0
-description: Helm chart to create Service and Ingress for Discourse

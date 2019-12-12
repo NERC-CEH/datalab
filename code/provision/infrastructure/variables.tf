@@ -87,9 +87,3 @@ variable "flavor_gluster_node" {
   description = "The Gluster flavour"
   default     = "j2_medium"
 }
-
-variable "flavor_discourse" {
-  type = string
-  description = "The discourse flavour"
-  default     = "j1_medium"
-}

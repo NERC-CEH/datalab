@@ -37,7 +37,6 @@ to be granted access.
 * **[docker-conect](https://github.com/NERC-CEH/docker-connect)** - Service to provide seamless login to Minio containers.
 * **[docker-dask](https://github.com/NERC-CEH/docker-dask)** - Custom docker container for running Dask
 * **[docker-default-backend](https://github.com/NERC-CEH/docker-default-backend)** - Custom backend for datalabs. Serves 404 Page Not Found for datalabs ingress.
-* **[docker-discourse](https://github.com/NERC-CEH/docker-discourse)** - Docker container for running Discourse. Not used currently as running Discourse in containers was abandoned in favour of a standalone server.
 * **[docker-gitbook-builder](https://github.com/NERC-CEH/docker-gitbook-builder)** - Custom Docker container for building GitBook websites.
 * **[docker-jupyter-notebook](https://github.com/NERC-CEH/docker-jupyter-notebook)** - Custom Jupyter Notebook container that adds custom analysis libraries
 * **[docker-kubectl](https://github.com/NERC-CEH/docker-kubectl)** - Docker container to allow kubectl proxy to run as an ambassador container.

@@ -111,8 +111,6 @@ Datalabs has a number of Auth0 clients for different components:
 authenticate the user and retrieve the `authorization_token` and `id_token`.
 * **Datalab Authorisation API** - Client for accessing the Authorisation extension. Used
 by the Authorisation service to retrieve user role information
-* **Discourse** - Client for Discourse instances. Allows users to authenticate against
-Discourse using the same credentials.
 * **auth0-authz** - Create and used by the Authorisation extension. Not consumed directly
 by datalabs.
 * **API Explorer Client** - Not needed by the application, created to allow admin access

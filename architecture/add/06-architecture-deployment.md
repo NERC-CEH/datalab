@@ -48,8 +48,8 @@ Multiple environments are required for datalabs to support ongoing development w
 providing a stable production environment. Ideally these two environments would be
 completely isolated but due to the complexity of managing Kubernetes and Gluster clusters
 there is only a single multi tenant environment. Two instances of Datalabs are separated
-into two namespaces, `prod` and `test`. Each namespace runs its own ingress controller,
-there are two external load balancers and two discourse servers. Storage is dynamically
+into two namespaces, `prod` and `test`. Each namespace shares an ingress controller and
+there are two external load balancers. Storage is dynamically
 provisioned through a single Gluster cluster.
 
 The Bara deployment tool is provided with a full configuration file appropriate to the

@@ -132,18 +132,6 @@ resource "openstack_compute_secgroup_v2" "gluster" {
   }
 }
 
-resource "openstack_compute_secgroup_v2" "discourse" {
-  name        = "${var.cluster_name}-discourse"
-  description = "${var.cluster_name} - Discourse"
-
-  rule {
-    ip_protocol = "tcp"
-    from_port   = "80"
-    to_port     = "80"
-    cidr        = "0.0.0.0/0"
-  }
-}
-
 resource "openstack_compute_floatingip_associate_v2" "bastion" {
   count       = var.number_of_bastions
   floating_ip = var.bastion_fips[count.index]
