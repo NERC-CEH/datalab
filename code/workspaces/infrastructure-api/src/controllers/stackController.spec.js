@@ -73,14 +73,14 @@ describe('Stack Controller', () => {
       const requestBody = mutationRequestBody();
       requestBody.name = '';
       return createValidatedRequest(requestBody, stackController.createStackValidator)
-        .then(() => expectValidationError('name', 'Name must only use the characters a-z'));
+        .then(() => expectValidationError('name', 'Name must only use the characters a-z, 0-9'));
     });
 
     it('should validate the name field is at least 4 characters', () => {
       const requestBody = mutationRequestBody();
       requestBody.name = 'abc';
       return createValidatedRequest(requestBody, stackController.createStackValidator)
-        .then(() => expectValidationError('name', 'Name must be 4-12 characters long'));
+        .then(() => expectValidationError('name', 'Name must be 4-16 characters long'));
     });
 
     it('should validate the datalabInfo.domain field exists', () => {

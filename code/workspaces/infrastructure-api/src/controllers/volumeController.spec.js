@@ -80,7 +80,7 @@ describe('Volume Controller', () => {
       const requestBody = createRequestBody();
       requestBody.name = 'abc';
       await executeCreateValidator(requestBody);
-      expectValidationError('name', 'Name must be 4-12 characters long');
+      expectValidationError('name', 'Name must be 4-16 characters long');
     });
 
     it('should validate the volume size is greater than 5', async () => {
