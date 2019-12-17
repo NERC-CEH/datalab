@@ -36,6 +36,14 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
   <div
     className="controlContainer"
   >
+    <div>
+      <WithStyles(ForwardRef(ListItem))
+        button={true}
+        onClick={[Function]}
+      >
+        My Projects
+      </WithStyles(ForwardRef(ListItem))>
+    </div>
     <WithStyles(ForwardRef(TextField))
       InputProps={
         Object {
