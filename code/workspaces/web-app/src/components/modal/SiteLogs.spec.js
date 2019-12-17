@@ -35,9 +35,7 @@ describe('Logs', () => {
 
     // Act
     const output = shallowRender(props);
-    const buttons = output.find(PrimaryActionButton);
-    const cancelFunction = buttons.find({ children: 'Close' }).prop('onClick');
-    cancelFunction();
+    output.find(PrimaryActionButton).simulate('click');
 
     // Assert
     expect(onCancelMock).toHaveBeenCalled();

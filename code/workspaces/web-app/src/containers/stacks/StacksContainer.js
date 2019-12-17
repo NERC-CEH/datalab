@@ -36,12 +36,13 @@ class StacksContainer extends Component {
       .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
   }
 
-  getLogs = stack => this.props.actions.getLogs(stack.projectKey, stack.name)
-    .then(result => this.props.actions.openModalDialog(MODAL_TYPE_LOGS, {
-      title: 'Logs',
-      body: result.value,
-      onCancel: this.props.actions.closeModalDialog,
-    }));
+  getLogs = stack => this.props.actions.openModalDialog(MODAL_TYPE_LOGS, {
+    title: 'Logs',
+    projectName: stack.projectKey,
+    stackName: stack.name,
+    onCancel: this.props.actions.closeModalDialog,
+    getLogs: this.props.actions.getLogs,
+  });
 
   createStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
     .then(() => this.props.actions.createStack({ ...stack, projectKey: this.props.projectKey.value }))

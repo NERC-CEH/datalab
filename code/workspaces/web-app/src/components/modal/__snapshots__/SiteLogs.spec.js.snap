@@ -9,17 +9,23 @@ exports[`Logs creates correct snapshot for logs dialog 1`] = `
   <WithStyles(ForwardRef(DialogTitle))>
     Title
   </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))
-      style={
-        Object {
-          "whiteSpace": "pre",
-        }
+  <PromisedContentWrapper
+    promise={
+      Object {
+        "fetching": true,
       }
-    >
-      Body
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
+    }
+  >
+    <WithStyles(ForwardRef(DialogContent))>
+      <WithStyles(ForwardRef(DialogContentText))
+        style={
+          Object {
+            "whiteSpace": "pre",
+          }
+        }
+      />
+    </WithStyles(ForwardRef(DialogContent))>
+  </PromisedContentWrapper>
   <WithStyles(ForwardRef(DialogActions))>
     <PrimaryActionButton
       onClick={[MockFunction]}
