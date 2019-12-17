@@ -95,9 +95,9 @@ const withNameValidator = [
   checkExistsWithMsg('projectKey'),
   checkExistsWithMsg('name')
     .isAscii()
-    .withMessage('Name must only use the characters a-z')
-    .isLength({ min: 4, max: 12 })
-    .withMessage('Name must be 4-12 characters long'),
+    .withMessage('Name must only use the characters a-z, 0-9')
+    .isLength({ min: 4, max: 16 })
+    .withMessage('Name must be 4-16 characters long'),
 ];
 
 const deleteStackValidator = [
