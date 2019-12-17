@@ -1,5 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PureStackCardActions Should not render Open if stack is not ready 1`] = `
+<div
+  className="cardActions"
+>
+  <ComponentWrapper
+    className="buttonWrapper"
+    permission="delete"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <SecondaryActionButton
+      aria-controls="more-menu"
+      aria-haspopup="true"
+      fullWidth={true}
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(Icon))
+        style={
+          Object {
+            "color": "inherit",
+          }
+        }
+      >
+        more_vert
+      </WithStyles(ForwardRef(Icon))>
+    </SecondaryActionButton>
+  </ComponentWrapper>
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    id="more-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  >
+    <ComponentWrapper
+      permission="edit"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        onClick={[Function]}
+      >
+        Edit
+      </WithStyles(ForwardRef(MenuItem))>
+    </ComponentWrapper>
+    <ComponentWrapper
+      permission="delete"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        onClick={[Function]}
+      >
+        Delete
+      </WithStyles(ForwardRef(MenuItem))>
+    </ComponentWrapper>
+  </WithStyles(ForwardRef(Menu))>
+</div>
+`;
+
 exports[`PureStackCardActions Should not render edit and delete buttons if current user is not the owner 1`] = `
 <div
   className="cardActions"
@@ -76,7 +157,7 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
     <SecondaryActionButton
       aria-controls="more-menu"
       aria-haspopup="true"
-      disabled={false}
+      fullWidth={true}
       onClick={[Function]}
     >
       <WithStyles(ForwardRef(Icon))
@@ -114,7 +195,6 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
       }
     >
       <WithStyles(ForwardRef(MenuItem))
-        disabled={false}
         onClick={[Function]}
       >
         Edit
@@ -131,7 +211,6 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
       }
     >
       <WithStyles(ForwardRef(MenuItem))
-        disabled={false}
         onClick={[Function]}
       >
         Delete

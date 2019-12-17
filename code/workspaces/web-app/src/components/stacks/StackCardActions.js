@@ -48,7 +48,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
 
   return (
     <div className={classes.cardActions}>
-      {openStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
+      {openStack && stack.status === READY && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
         <PrimaryActionButton
           disabled={!isReady(stack)}
           onClick={() => openStack(stack)}
@@ -57,12 +57,12 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Open
         </PrimaryActionButton>
       </PermissionWrapper>}
-      {ownsStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {ownsStack && stack.status && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
-          disabled={!isReady(stack)}
           aria-controls="more-menu"
           aria-haspopup="true"
           onClick={handleClick}
+          fullWidth
         >
           <Icon style={{ color: 'inherit' }}>{MORE_ICON}</Icon>
         </SecondaryActionButton>
@@ -76,18 +76,12 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         onClose={handleClose}
       >
         {editStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
-          <MenuItem
-            disabled={!isReady(stack)}
-            onClick={() => editStack(stack)}
-          >
+          <MenuItem onClick={() => editStack(stack)}>
             Edit
           </MenuItem>
         </PermissionWrapper>}
         {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-          <MenuItem
-            disabled={!isReady(stack)}
-            onClick={() => deleteStack(stack)}
-          >
+          <MenuItem onClick={() => deleteStack(stack)}>
             Delete
           </MenuItem>
         </PermissionWrapper>}

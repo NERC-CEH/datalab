@@ -46,7 +46,30 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
   </div>
   <div
     className="StackCard-actionsDiv-6"
-  />
+  >
+    <WithStyles(StackCardActions)
+      deletePermission="delete"
+      deleteStack={[Function]}
+      editPermission="edit"
+      openPermission="open"
+      openStack={[Function]}
+      stack={
+        Object {
+          "displayName": "name1",
+          "id": "100",
+          "status": undefined,
+          "type": "jupyter",
+        }
+      }
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    />
+  </div>
 </div>
 `;
 
@@ -96,52 +119,30 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
   </div>
   <div
     className="StackCard-actionsDiv-6"
-  />
-</div>
-`;
-
-exports[`StackCard should provide defaults and hide actions if no stack is provided 1`] = `
-<div
-  className="StackCard-cardDiv-1"
->
-  <div
-    className="StackCard-imageDiv-2"
   >
-    <WithStyles(ForwardRef(Icon))
-      className="StackCard-cardIcon-9"
-    >
-      create
-    </WithStyles(ForwardRef(Icon))>
+    <WithStyles(StackCardActions)
+      deletePermission="delete"
+      deleteStack={[Function]}
+      editPermission="edit"
+      openPermission="open"
+      openStack={[Function]}
+      stack={
+        Object {
+          "displayName": "name1",
+          "id": "100",
+          "status": undefined,
+          "type": "zeppelin",
+        }
+      }
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    />
   </div>
-  <div
-    className="StackCard-textDiv-3"
-  >
-    <div
-      className="StackCard-displayNameContainer-5"
-    >
-      <WithStyles(ForwardRef(Typography))
-        className="StackCard-displayName-4"
-        noWrap={true}
-        variant="h5"
-      >
-        Display Name
-      </WithStyles(ForwardRef(Typography))>
-    </div>
-    <WithStyles(Tooltip)
-      placement="bottom-start"
-      title="A description of the typeName purpose"
-    >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        varient="body1"
-      >
-        A description of the typeName purpose
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(Tooltip)>
-  </div>
-  <div
-    className="StackCard-actionsDiv-6"
-  />
 </div>
 `;
 

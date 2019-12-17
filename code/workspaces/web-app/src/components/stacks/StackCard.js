@@ -4,14 +4,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import { statusTypes } from 'common';
 import ProjectKey from '../common/typography/ProjectKey';
 import StackCardActions from './StackCardActions';
 import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
 import { useUsers } from '../../hooks/usersHooks';
-
-const { READY } = statusTypes;
 
 function styles(theme) {
   return {
@@ -108,8 +105,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
       </div>
       <div className={classes.actionsDiv}>
         {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
-        {stack.status === READY
-          && <StackCardActions
+        <StackCardActions
             stack={stack}
             openStack={openStack}
             deleteStack={deleteStack}
@@ -118,7 +114,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
             openPermission={openPermission}
             deletePermission={deletePermission}
             editPermission={editPermission}
-          />}
+          />
       </div>
     </div>
   );

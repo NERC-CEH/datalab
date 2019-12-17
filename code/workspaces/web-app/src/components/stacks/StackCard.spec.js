@@ -55,21 +55,6 @@ describe('StackCard', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('should provide defaults and hide actions if no stack is provided', () => {
-    // Arrange
-    const props = {
-      stack: {},
-      typeName: 'typeName',
-      ...permissionProps,
-    };
-
-    // Act
-    const output = shallowRender(props);
-
-    // Assert
-    expect(output).toMatchSnapshot();
-  });
-
   it('should show status ad buttons when status is ready', () => {
     // Arrange
     const props = generateProps('jupyter', 'ready');
