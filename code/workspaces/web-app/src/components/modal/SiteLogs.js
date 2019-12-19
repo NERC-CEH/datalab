@@ -18,7 +18,7 @@ class Logs extends Component {
 
   async componentDidMount() {
     let logs = await this.props.getLogs(this.props.projectName, this.props.stackName);
-    if (logs.value === '') {
+    if (!logs.value) {
       logs = { value: 'ERROR: Unable to retrieve logs.' };
     }
     this.setState({
@@ -48,9 +48,6 @@ class Logs extends Component {
 Logs.propTypes = {
   title: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
-  getLogs: PropTypes.func.isRequired,
-  stackName: PropTypes.string.isRequired,
-  projectName: PropTypes.string.isRequired,
 };
 
 export default Logs;
