@@ -2,6 +2,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '@material-ui/core/Icon';
+import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { statusTypes } from 'common';
@@ -46,16 +47,25 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
     setAnchorEl(null);
   };
 
+  const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton innerRef={ref} {...props} />);
+
   return (
     <div className={classes.cardActions}>
-      {openStack && stack.status === READY && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
-        <PrimaryActionButton
-          disabled={!isReady(stack)}
-          onClick={() => openStack(stack)}
-          fullWidth
+      {openStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
+        <Tooltip
+          title='Cannot be opened until resource is ready' placement='bottom-start'
+          disableHoverListener={isReady(stack)}
         >
-          Open
-        </PrimaryActionButton>
+          <div>
+            <OpenButton
+              disabled={!isReady(stack)}
+              onClick={() => openStack(stack)}
+              fullWidth
+            >
+              Open
+            </OpenButton>
+          </div>
+        </Tooltip>
       </PermissionWrapper>}
       {ownsStack && stack.status && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton

@@ -6,6 +6,33 @@ exports[`PureStackCardActions Should not render Open if stack is not ready 1`] =
 >
   <ComponentWrapper
     className="buttonWrapper"
+    permission="open"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <WithStyles(Tooltip)
+      disableHoverListener={false}
+      placement="bottom-start"
+      title="Cannot be opened until resource is ready"
+    >
+      <div>
+        <ForwardRef
+          disabled={true}
+          fullWidth={true}
+          onClick={[Function]}
+        >
+          Open
+        </ForwardRef>
+      </div>
+    </WithStyles(Tooltip)>
+  </ComponentWrapper>
+  <ComponentWrapper
+    className="buttonWrapper"
     permission="delete"
     userPermissions={
       Array [
@@ -96,13 +123,21 @@ exports[`PureStackCardActions Should not render edit and delete buttons if curre
       ]
     }
   >
-    <PrimaryActionButton
-      disabled={false}
-      fullWidth={true}
-      onClick={[Function]}
+    <WithStyles(Tooltip)
+      disableHoverListener={true}
+      placement="bottom-start"
+      title="Cannot be opened until resource is ready"
     >
-      Open
-    </PrimaryActionButton>
+      <div>
+        <ForwardRef
+          disabled={false}
+          fullWidth={true}
+          onClick={[Function]}
+        >
+          Open
+        </ForwardRef>
+      </div>
+    </WithStyles(Tooltip)>
   </ComponentWrapper>
   <WithStyles(ForwardRef(Menu))
     anchorEl={null}
@@ -135,13 +170,21 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <PrimaryActionButton
-      disabled={false}
-      fullWidth={true}
-      onClick={[Function]}
+    <WithStyles(Tooltip)
+      disableHoverListener={true}
+      placement="bottom-start"
+      title="Cannot be opened until resource is ready"
     >
-      Open
-    </PrimaryActionButton>
+      <div>
+        <ForwardRef
+          disabled={false}
+          fullWidth={true}
+          onClick={[Function]}
+        >
+          Open
+        </ForwardRef>
+      </div>
+    </WithStyles(Tooltip)>
   </ComponentWrapper>
   <ComponentWrapper
     className="buttonWrapper"

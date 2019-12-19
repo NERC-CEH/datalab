@@ -38,7 +38,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
     >
       <WithStyles(ForwardRef(Typography))
         noWrap={true}
-        varient="body1"
+        variant="body1"
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </WithStyles(ForwardRef(Typography))>
@@ -111,7 +111,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     >
       <WithStyles(ForwardRef(Typography))
         noWrap={true}
-        varient="body1"
+        variant="body1"
       >
         Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
       </WithStyles(ForwardRef(Typography))>
@@ -184,7 +184,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     >
       <WithStyles(ForwardRef(Typography))
         noWrap={true}
-        varient="body1"
+        variant="body1"
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </WithStyles(ForwardRef(Typography))>

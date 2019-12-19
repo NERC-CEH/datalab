@@ -99,7 +99,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
           {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
         </div>
         <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
-          <Typography varient="body1" noWrap>{getDescription(stack, typeName)}</Typography>
+          <Typography variant="body1" noWrap>{getDescription(stack, typeName)}</Typography>
         </Tooltip>
         {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
       </div>
