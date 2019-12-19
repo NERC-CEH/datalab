@@ -94,6 +94,7 @@ describe('StacksContainer', () => {
     const createStackMock = jest.fn();
     const deleteStackMock = jest.fn();
     const restFormMock = jest.fn();
+    const getLogsMock = jest.fn();
 
     const generateProps = () => ({
       stacks,
@@ -112,6 +113,7 @@ describe('StacksContainer', () => {
         closeModalDialog: closeModalDialogMock,
         resetForm: restFormMock,
         listUsers: listUsersMock,
+        getLogs: getLogsMock,
       },
       projectKey: { fetching: false, value: 'projtest' },
     });

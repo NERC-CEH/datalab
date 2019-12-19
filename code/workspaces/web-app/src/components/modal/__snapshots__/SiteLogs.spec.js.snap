@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logs creates correct snapshot for logs dialog 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  onClose={[MockFunction]}
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Title
+  </WithStyles(ForwardRef(DialogTitle))>
+  <PromisedContentWrapper
+    promise={
+      Object {
+        "fetching": true,
+      }
+    }
+  >
+    <WithStyles(ForwardRef(DialogContent))>
+      <WithStyles(ForwardRef(DialogContentText))
+        style={
+          Object {
+            "whiteSpace": "pre",
+          }
+        }
+      />
+    </WithStyles(ForwardRef(DialogContent))>
+  </PromisedContentWrapper>
+  <WithStyles(ForwardRef(DialogActions))>
+    <PrimaryActionButton
+      onClick={[MockFunction]}
+    >
+      Close
+    </PrimaryActionButton>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;

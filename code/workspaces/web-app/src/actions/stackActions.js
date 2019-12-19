@@ -8,6 +8,7 @@ export const GET_STACK_URL_ACTION = 'GET_STACK_URL';
 export const OPEN_STACK_ACTION = 'OPEN_STACK';
 export const CREATE_STACK_ACTION = 'CREATE_STACK';
 export const DELETE_STACK_ACTION = 'DELETE_STACK';
+export const GET_LOGS_ACTION = 'GET_LOGS';
 
 const loadStacks = () => ({
   type: LOAD_STACKS_ACTION,
@@ -49,6 +50,11 @@ const deleteStack = ({ projectKey, name, type }) => ({
   payload: stackService.deleteStack({ projectKey, name, type }),
 });
 
+const getLogs = (projectKey, name) => ({
+  type: GET_LOGS_ACTION,
+  payload: stackService.getLogs(projectKey, name),
+});
+
 export default {
   loadStacks,
   loadStacksByCategory,
@@ -58,4 +64,5 @@ export default {
   openStack,
   createStack,
   deleteStack,
+  getLogs,
 };

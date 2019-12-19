@@ -10,6 +10,7 @@ Array [
   "openStack",
   "createStack",
   "deleteStack",
+  "getLogs",
   "openModalDialog",
   "closeModalDialog",
   "listUsers",
@@ -37,6 +38,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
   deletePermission="projects:projtest:stacks:delete"
   deleteStack={[Function]}
   editPermission="projects:projtest:stacks:edit"
+  getLogs={[Function]}
   openCreationForm={[Function]}
   openPermission="projects:projtest:stacks:open"
   openStack={[Function]}

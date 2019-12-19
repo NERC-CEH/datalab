@@ -88,7 +88,7 @@ function styles(theme) {
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission }) => {
+  openPermission, deletePermission, editPermission, getLogs }) => {
   const users = useUsers();
 
   return (
@@ -114,6 +114,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
             openStack={openStack}
             deleteStack={deleteStack}
             editStack={editStack}
+            getLogs={getLogs}
             userPermissions={userPermissions}
             openPermission={openPermission}
             deletePermission={deletePermission}
@@ -138,6 +139,7 @@ StackCard.propTypes = {
   openStack: PropTypes.func,
   openHref: PropTypes.string,
   deleteStack: PropTypes.func,
+  getLogs: PropTypes.func,
   editStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,

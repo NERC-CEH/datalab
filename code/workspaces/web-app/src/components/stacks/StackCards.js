@@ -29,7 +29,7 @@ const styles = theme => ({
 });
 
 const StackCards = ({ stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
-  userPermissions, createPermission, openPermission, deletePermission, editPermission, classes }) => {
+  userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, classes }) => {
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
   return (
     <div className={classes.stackDiv}>
@@ -48,6 +48,7 @@ const StackCards = ({ stacks, typeName, typeNamePlural, openStack, deleteStack, 
               openPermission={openPermission}
               deletePermission={deletePermission}
               editPermission={editPermission}
+              getLogs={getLogs}
             />))
             : <div className={classes.placeholderCard}>
               <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
@@ -76,6 +77,7 @@ StackCards.propTypes = {
   openStack: PropTypes.func.isRequired,
   deleteStack: PropTypes.func.isRequired,
   editStack: PropTypes.func,
+  getLogs: PropTypes.func,
   openCreationForm: PropTypes.func.isRequired,
   userPermissions: PropTypes.func.isRequired,
   createPermission: PropTypes.string.isRequired,
