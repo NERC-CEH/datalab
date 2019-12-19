@@ -1,6 +1,17 @@
 import logger from '../config/logger';
 import { getRbacV1Api } from './kubeConfig';
 
+async function namespacedRoleBindingExists(name, namespace) {
+  const k8sApi = getRbacV1Api();
+  logger.debug(`Checking roleBinding ${name} exists in ${namespace}`);
+  try {
+    await k8sApi.readNamespacedRoleBinding(name, namespace);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 async function createNamespacedRoleBinding(bindingDefinition, namespace) {
   const k8sApi = getRbacV1Api();
 
@@ -15,6 +26,10 @@ async function createNamespacedRoleBinding(bindingDefinition, namespace) {
 }
 
 async function deleteNamespacedRoleBinding(name, namespace) {
+  if (!(await namespacedRoleBindingExists(name, namespace))) {
+    logger.debug(`RoleBinding ${name} does not exist in namespace ${namespace}`);
+    return;
+  }
   const k8sApi = getRbacV1Api();
 
   try {
