@@ -73,6 +73,17 @@ describe('PureStackCardActions', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('Should not render Open if stack is not ready', () => {
+    // Arrange
+    const baseProps = generateProps();
+    const props = { ...baseProps, stack: { status: 'requested' } };
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
   it('Open button onClick function calls openStack with correct props', () => {
     // Arrange
     const props = generateProps();
