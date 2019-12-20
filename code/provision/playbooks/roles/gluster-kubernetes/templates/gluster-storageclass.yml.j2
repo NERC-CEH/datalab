@@ -5,7 +5,7 @@ metadata:
   name: glusterfs-storage
 provisioner: kubernetes.io/glusterfs
 parameters:
-  resturl: "http://{{ heketi_pod_ip.stdout }}:8080"
+  resturl: "http://heketi.default.svc.cluster.local:8080"
   restuser: "admin"
   secretNamespace: "default"
   secretName: "heketi-secret"
