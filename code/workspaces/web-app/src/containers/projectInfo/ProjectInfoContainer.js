@@ -64,18 +64,18 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
   );
 
   return (
-    <PromisedContentWrapper promise={currentProject}>
+    <PromisedContentWrapper promise={[currentProject, { fetching: users.fetching.inProgress }]}>
       <div>
         <div className={classes.projectTitleWrapper}>
           <Typography variant="h5" className={classes.projectTitle}>{name}</Typography>
           <ProjectKey className={classes.projectKey}>{key && `(${key})`}</ProjectKey>
         </div>
         <Typography className={classes.description} variant="body1">{description}</Typography>
-        <CollaborationLink link={collaborationLink}/>
+        <CollaborationLink link={collaborationLink} />
         <div className={classes.userBlock}>
-          <UserBlock name='admin' users={users.value.filter(user => user.role === 'admin')} classes={classes}/>
-          <UserBlock name='user' users={users.value.filter(user => user.role === 'user')} classes={classes}/>
-          <UserBlock name='viewer' users={users.value.filter(user => user.role === 'viewer')} classes={classes}/>
+          <UserBlock name='admin' users={users.value.filter(user => user.role === 'admin')} classes={classes} />
+          <UserBlock name='user' users={users.value.filter(user => user.role === 'user')} classes={classes} />
+          <UserBlock name='viewer' users={users.value.filter(user => user.role === 'viewer')} classes={classes} />
         </div>
       </div>
     </PromisedContentWrapper>
@@ -83,10 +83,10 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
 };
 
 export const UserBlock = ({ name, users, classes }) => <div>
-    { users.length > 0
-      && <Typography className={classes.chipTitle} variant="h6">{name}s</Typography> }
-    { users.map(user => <Chip key={user.userId} tabIndex={-1} label={user.name}/>) }
-  </div>;
+  {users.length > 0
+    && <Typography className={classes.chipTitle} variant="h6">{name}s</Typography>}
+  {users.map(user => <Chip key={user.userId} tabIndex={-1} label={user.name} />)}
+</div>;
 
 export const CollaborationLink = ({ link }) => {
   const classes = useStyles();

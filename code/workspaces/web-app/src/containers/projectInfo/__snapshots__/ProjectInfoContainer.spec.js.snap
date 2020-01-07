@@ -44,15 +44,20 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is a collaboration link 1`] = `
 <PromisedContentWrapper
   promise={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
+    Array [
+      Object {
+        "fetching": false,
+        "value": Object {
+          "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
+          "description": "A description about Test Project.",
+          "key": "testproj",
+          "name": "Test Project",
+        },
       },
-    }
+      Object {
+        "fetching": undefined,
+      },
+    ]
   }
 >
   <div>
@@ -147,15 +152,20 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is not a collaboration link 1`] = `
 <PromisedContentWrapper
   promise={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": undefined,
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
+    Array [
+      Object {
+        "fetching": false,
+        "value": Object {
+          "collaborationLink": undefined,
+          "description": "A description about Test Project.",
+          "key": "testproj",
+          "name": "Test Project",
+        },
       },
-    }
+      Object {
+        "fetching": undefined,
+      },
+    ]
   }
 >
   <div>
