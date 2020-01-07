@@ -2,10 +2,10 @@
 
 exports[`CollaborationLink renders correctly to match snapshot when there is a collaboration link 1`] = `
 <div
-  className="makeStyles-collaborationLink-4"
+  className="makeStyles-collaborationLink-5"
 >
   <WithStyles(ForwardRef(Typography))
-    className="makeStyles-collaborationLinkHeading-5"
+    className="makeStyles-collaborationLinkHeading-6"
   >
     Collaboration Link
   </WithStyles(ForwardRef(Typography))>
@@ -44,20 +44,25 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is a collaboration link 1`] = `
 <PromisedContentWrapper
   promise={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
+    Array [
+      Object {
+        "fetching": false,
+        "value": Object {
+          "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
+          "description": "A description about Test Project.",
+          "key": "testproj",
+          "name": "Test Project",
+        },
       },
-    }
+      Object {
+        "fetching": undefined,
+      },
+    ]
   }
 >
   <div>
     <div
-      className="makeStyles-projectTitleWrapper-2"
+      className="makeStyles-projectTitleWrapper-3"
     >
       <WithStyles(ForwardRef(Typography))
         className="makeStyles-projectTitle-1"
@@ -66,12 +71,13 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         Test Project
       </WithStyles(ForwardRef(Typography))>
       <ProjectKey
-        className="makeStyles-projectKey-3"
+        className="makeStyles-projectKey-4"
       >
         (testproj)
       </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Typography))
+      className="makeStyles-description-2"
       variant="body1"
     >
       A description about Test Project.
@@ -79,6 +85,66 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
     <CollaborationLink
       link="https://testlab.test-datalabs.nerc.ac.uk"
     />
+    <div
+      className="makeStyles-userBlock-7"
+    >
+      <UserBlock
+        classes={
+          Object {
+            "chipTitle": "makeStyles-chipTitle-8",
+            "collaborationLink": "makeStyles-collaborationLink-5",
+            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+            "description": "makeStyles-description-2",
+            "projectKey": "makeStyles-projectKey-4",
+            "projectTitle": "makeStyles-projectTitle-1",
+            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+            "userBlock": "makeStyles-userBlock-7",
+          }
+        }
+        name="admin"
+        users={Array []}
+      />
+      <UserBlock
+        classes={
+          Object {
+            "chipTitle": "makeStyles-chipTitle-8",
+            "collaborationLink": "makeStyles-collaborationLink-5",
+            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+            "description": "makeStyles-description-2",
+            "projectKey": "makeStyles-projectKey-4",
+            "projectTitle": "makeStyles-projectTitle-1",
+            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+            "userBlock": "makeStyles-userBlock-7",
+          }
+        }
+        name="user"
+        users={
+          Array [
+            Object {
+              "name": "user1@test",
+              "role": "user",
+              "userId": "user1",
+            },
+          ]
+        }
+      />
+      <UserBlock
+        classes={
+          Object {
+            "chipTitle": "makeStyles-chipTitle-8",
+            "collaborationLink": "makeStyles-collaborationLink-5",
+            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+            "description": "makeStyles-description-2",
+            "projectKey": "makeStyles-projectKey-4",
+            "projectTitle": "makeStyles-projectTitle-1",
+            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+            "userBlock": "makeStyles-userBlock-7",
+          }
+        }
+        name="viewer"
+        users={Array []}
+      />
+    </div>
   </div>
 </PromisedContentWrapper>
 `;
@@ -86,20 +152,25 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is not a collaboration link 1`] = `
 <PromisedContentWrapper
   promise={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": undefined,
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
+    Array [
+      Object {
+        "fetching": false,
+        "value": Object {
+          "collaborationLink": undefined,
+          "description": "A description about Test Project.",
+          "key": "testproj",
+          "name": "Test Project",
+        },
       },
-    }
+      Object {
+        "fetching": undefined,
+      },
+    ]
   }
 >
   <div>
     <div
-      className="makeStyles-projectTitleWrapper-2"
+      className="makeStyles-projectTitleWrapper-3"
     >
       <WithStyles(ForwardRef(Typography))
         className="makeStyles-projectTitle-1"
@@ -108,17 +179,78 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         Test Project
       </WithStyles(ForwardRef(Typography))>
       <ProjectKey
-        className="makeStyles-projectKey-3"
+        className="makeStyles-projectKey-4"
       >
         (testproj)
       </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Typography))
+      className="makeStyles-description-2"
       variant="body1"
     >
       A description about Test Project.
     </WithStyles(ForwardRef(Typography))>
     <CollaborationLink />
+    <div
+      className="makeStyles-userBlock-7"
+    >
+      <UserBlock
+        classes={
+          Object {
+            "chipTitle": "makeStyles-chipTitle-8",
+            "collaborationLink": "makeStyles-collaborationLink-5",
+            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+            "description": "makeStyles-description-2",
+            "projectKey": "makeStyles-projectKey-4",
+            "projectTitle": "makeStyles-projectTitle-1",
+            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+            "userBlock": "makeStyles-userBlock-7",
+          }
+        }
+        name="admin"
+        users={Array []}
+      />
+      <UserBlock
+        classes={
+          Object {
+            "chipTitle": "makeStyles-chipTitle-8",
+            "collaborationLink": "makeStyles-collaborationLink-5",
+            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+            "description": "makeStyles-description-2",
+            "projectKey": "makeStyles-projectKey-4",
+            "projectTitle": "makeStyles-projectTitle-1",
+            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+            "userBlock": "makeStyles-userBlock-7",
+          }
+        }
+        name="user"
+        users={
+          Array [
+            Object {
+              "name": "user1@test",
+              "role": "user",
+              "userId": "user1",
+            },
+          ]
+        }
+      />
+      <UserBlock
+        classes={
+          Object {
+            "chipTitle": "makeStyles-chipTitle-8",
+            "collaborationLink": "makeStyles-collaborationLink-5",
+            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+            "description": "makeStyles-description-2",
+            "projectKey": "makeStyles-projectKey-4",
+            "projectTitle": "makeStyles-projectTitle-1",
+            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+            "userBlock": "makeStyles-userBlock-7",
+          }
+        }
+        name="viewer"
+        users={Array []}
+      />
+    </div>
   </div>
 </PromisedContentWrapper>
 `;

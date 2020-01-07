@@ -1,9 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { shallow } from 'enzyme';
 import ProjectInfoContainer, { PureProjectInfoContainer, CollaborationLink } from './ProjectInfoContainer';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
+import { useProjectUsers } from '../../hooks/projectUsersHooks';
 
 jest.mock('../../hooks/currentProjectHooks');
+jest.mock('../../hooks/projectUsersHooks');
+jest.mock('react-redux');
 
 const testProj = {
   key: 'testproj',
@@ -13,8 +17,12 @@ const testProj = {
 };
 
 const currentProject = { fetching: false, value: testProj };
+const projectUsers = { fetching: false, value: [{ userId: 'user1', name: 'user1@test', role: 'user' }] };
+const dispatchMock = jest.fn().mockName('dispatch');
 
 useCurrentProject.mockReturnValue(currentProject);
+useProjectUsers.mockReturnValue(projectUsers);
+useDispatch.mockReturnValue(dispatchMock);
 
 describe('ProjectInfoContainer', () => {
   it('renders correctly passing correct props to children', () => {
