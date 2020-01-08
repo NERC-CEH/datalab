@@ -86,12 +86,9 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         onClose={handleClose}
       >
         {stack.type === 'rshiny' && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-          <MenuItem
-            disabled={!isReady(stack)}
-            onClick={() => getLogs(stack)}
-          >
+          <MenuItem onClick={() => getLogs(stack)}>
             Logs
-        </MenuItem>
+          </MenuItem>
         </PermissionWrapper>}
         {editStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
           <MenuItem onClick={() => editStack(stack)}>
