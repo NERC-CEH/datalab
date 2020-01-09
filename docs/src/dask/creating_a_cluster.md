@@ -38,12 +38,22 @@ One thing to note within DataLabs is that when creating a custom `worker-spec.ym
 as per the examples, an additional field must be added to ensure that workers are
 provisioned correctly within the cluster, this is `namespace:
 ${PROJECT_KEY}-compute` where PROJECT_KEY is the name of the current DataLabs
-project. This can be found below in an example configuration.
+project. An example of spinning up a Dask cluster manually can be found below.
+
+```python
+from dask_kubernetes import KubeCluster
+
+cluster = KubeCluster.from_yaml('worker-spec.yml')
+cluster.scale_up(1)
+cluster.adapt(minimum=1, maximum=3)
+```
+
+Where the `worker-spec.yml` is as follows.
 
 ```yaml
 kind: Pod
 metadata:
-  // This line must be added in order for workers to be created
+  # This line must be added in order for workers to be created
   namespace: testproject-compute
 spec:
   restartPolicy: Never
