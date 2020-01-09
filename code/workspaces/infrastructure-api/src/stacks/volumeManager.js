@@ -23,6 +23,7 @@ async function createVolumeStack(params) {
   const { projectKey, name } = params;
   const secretStrategy = secretManager.createNewMinioCredentials;
   const rewriteTarget = '/';
+  const proxyRequestBuffering = 'off';
 
   return secretManager.storeMinioCredentialsInVault(projectKey, name, secretStrategy)
     .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, projectKey, secret))
@@ -33,7 +34,7 @@ async function createVolumeStack(params) {
     // The best fix is to store the type string in the database to avoid the mapping.
     .then(createDeployment({ ...params, type }, deploymentGenerator.createMinioDeployment))
     .then(createService({ ...params, type }, deploymentGenerator.createMinioService))
-    .then(createIngressRuleWithConnect({ ...params, type, rewriteTarget }, ingressGenerator.createIngress));
+    .then(createIngressRuleWithConnect({ ...params, type, rewriteTarget, proxyRequestBuffering }, ingressGenerator.createIngress));
 }
 
 function deleteVolumeStack(params) {

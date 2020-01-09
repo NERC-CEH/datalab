@@ -1,7 +1,8 @@
 import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
-function createIngress({ name, projectKey, ingressName, serviceName, port, connectPort, rewriteTarget, proxyTimeout, visible }) {
+function createIngress({ name, projectKey, ingressName, serviceName, port,
+  connectPort, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering }) {
   const host = createSniInfo(name, projectKey);
   const paths = createPathInfo(serviceName, port, connectPort);
   const privateEndpoint = visible !== 'public';
@@ -10,6 +11,7 @@ function createIngress({ name, projectKey, ingressName, serviceName, port, conne
     authServiceUrl: `${config.get('authorisationService')}/auth`,
     authSigninUrl: config.get('authSigninUrl'),
     maxBodySize: config.get('maxBodySize'),
+    proxyRequestBuffering,
     rewriteTarget,
     proxyTimeout,
     service: { host, paths },

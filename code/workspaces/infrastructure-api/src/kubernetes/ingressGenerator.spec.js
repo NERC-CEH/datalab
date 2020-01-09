@@ -85,4 +85,18 @@ describe('Ingress generator', () => {
 
     return expect(template).resolves.toMatchSnapshot();
   });
+
+  it('should add proxy-request-buffering option if supplied', () => {
+    const options = {
+      name: 'name',
+      projectKey: 'project',
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      proxyRequestBuffering: 'off',
+    };
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
 });
