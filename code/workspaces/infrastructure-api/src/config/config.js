@@ -100,7 +100,7 @@ const config = convict({
   maxBodySize: {
     doc: 'Set value for the maximum upload size permitted',
     format: 'String',
-    default: '500m',
+    default: '50g',
     env: 'MAX_BODY_SIZE',
   },
   containerInfoPath: {

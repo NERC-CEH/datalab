@@ -12,6 +12,9 @@ metadata:
 {{#rewriteTarget}}
     nginx.ingress.kubernetes.io/rewrite-target: {{ &rewriteTarget }}
 {{/rewriteTarget}}
+{{#proxyRequestBuffering}}
+    nginx.ingress.kubernetes.io/proxy-request-buffering: "{{ &proxyRequestBuffering }}"
+{{/proxyRequestBuffering}}
 {{#proxyTimeout}}
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "{{ &proxyTimeout }}"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "{{ &proxyTimeout }}"
