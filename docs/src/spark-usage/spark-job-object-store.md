@@ -20,6 +20,7 @@ for the Spark cluster to be created is dynamically loaded into the notebook envi
 
 ```python
 import os
+os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3'
 os.environ['ACCESS_KEY'] = "xxxxxxx"
 os.environ['SECRET_KEY'] = "xxxxxxxxx"
 ```
