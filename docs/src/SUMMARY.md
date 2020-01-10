@@ -13,3 +13,6 @@
   * [Python](object-storage/python.md)
   * [Terminal](object-storage/terminal.md)
   * [Desktop Client](object-storage/desktop-client.md)
+* [Dask within JupyterLab](dask/README.md)
+  * [Creating a Cluster](dask/creating_a_cluster.md)
+  * [Common Issues](dask/common_issues.md)
