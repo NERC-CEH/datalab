@@ -13,3 +13,5 @@
   * [Python](object-storage/python.md)
   * [Terminal](object-storage/terminal.md)
   * [Desktop Client](object-storage/desktop-client.md)
+* [Spark Usage](spark-usage/README.md)
+  * [Spark Use with Object Store](spark-usage/spark-job-object-store.md)
