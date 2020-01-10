@@ -16,3 +16,8 @@
 * [Dask within JupyterLab](dask/README.md)
   * [Creating a Cluster](dask/creating_a_cluster.md)
   * [Common Issues](dask/common_issues.md)
+* [Spark Usage](spark-usage/README.md)
+  * [Spark Basic Use](spark-usage/spark-basic-use.md)
+  * [Spark Use with Project Datastore](spark-usage/spark-project-datastore.md)
+  * [Spark Use with Object Store](spark-usage/spark-job-object-store.md)
+  
