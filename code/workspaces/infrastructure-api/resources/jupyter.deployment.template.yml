@@ -23,7 +23,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/jupyter"]
+          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/{{ name }}"]
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
@@ -33,7 +33,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/jupyter"]
+          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/{{ name }}"]
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
@@ -45,7 +45,7 @@ spec:
             "jupyter", "{{ startCmd }}",
             "--NotebookApp.token='$(JUPYTER_TOKEN)'",
             "--NotebookApp.allow_origin='{{ domain }}'",
-            "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
+            "--NotebookApp.notebook_dir='/data/notebooks/{{ name }}'"]
           ports:
             - containerPort: 8888
               protocol: TCP
