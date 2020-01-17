@@ -6,6 +6,7 @@ jest.mock('./kubeConfig');
 const k8sApiMock = {
   createNamespacedRoleBinding: jest.fn(),
   deleteNamespacedRoleBinding: jest.fn(),
+  readNamespacedRoleBinding: jest.fn(),
 };
 
 getRbacV1Api.mockReturnValue(k8sApiMock);
@@ -34,10 +35,23 @@ describe('createNamespacedRoleBinding', () => {
 });
 
 describe('deleteNamespacedRoleBinding', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('calls k8s api to delete a namespaced roleBinding', async () => {
     const bindingName = 'binding-name';
     await roleBindingApi.deleteNamespacedRoleBinding(bindingName, projectKey);
     expect(k8sApiMock.deleteNamespacedRoleBinding)
       .toHaveBeenCalledWith(bindingName, projectKey);
+  });
+
+  it('does not call k8s api to delete a namespaced roleBinding if it does not exist', async () => {
+    const bindingName = ' binding-name';
+    k8sApiMock.readNamespacedRoleBinding.mockImplementationOnce(() => { throw new Error('expected test error'); });
+
+    await roleBindingApi.deleteNamespacedRoleBinding(bindingName, projectKey);
+    expect(k8sApiMock.deleteNamespacedRoleBinding)
+      .not.toHaveBeenCalled();
   });
 });
