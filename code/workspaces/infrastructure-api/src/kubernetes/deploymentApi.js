@@ -7,7 +7,7 @@ const API_BASE = config.get('kubernetesApi');
 
 const getDeploymentUrl = (namespace, name) => {
   const nameComponent = name ? `/${name}` : '';
-  return `${API_BASE}/apis/apps/v1beta1/namespaces/${namespace}/deployments${nameComponent}`;
+  return `${API_BASE}/apis/apps/v1/namespaces/${namespace}/deployments${nameComponent}`;
 };
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
