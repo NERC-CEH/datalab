@@ -1,5 +1,5 @@
 # Build library dependencies
-FROM node:8.16.0-alpine as common
+FROM node:lts-alpine as common
 
 ARG LIBRARY
 
@@ -15,7 +15,7 @@ COPY ./docker/buildLibraries .
 RUN ./buildLibraries
 
 # Build the service container
-FROM node:8.16.0-alpine
+FROM node:lts-alpine
 
 ARG WORKSPACE
 
