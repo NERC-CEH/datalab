@@ -9,7 +9,7 @@ const mock = new MockAdapter(axios);
 const API_BASE = config.get('kubernetesApi');
 const NAMESPACE = 'namespace';
 
-const DEPLOYMENT_URL = `${API_BASE}/apis/apps/v1beta1/namespaces/${NAMESPACE}/deployments`;
+const DEPLOYMENT_URL = `${API_BASE}/apis/apps/v1/namespaces/${NAMESPACE}/deployments`;
 const DEPLOYMENT_NAME = 'test-deployment';
 
 beforeEach(() => {
