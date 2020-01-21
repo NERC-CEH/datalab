@@ -2,7 +2,7 @@
 
 exports[`Ingress generator should add auth-url for privateEndpoints 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -27,7 +27,7 @@ spec:
 
 exports[`Ingress generator should add proxy-request-buffering option if supplied 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -53,7 +53,7 @@ spec:
 
 exports[`Ingress generator should add proxy-timeout options if supplied 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -86,7 +86,7 @@ spec:
 
 exports[`Ingress generator should add rewrite target if supplied 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -116,7 +116,7 @@ spec:
 
 exports[`Ingress generator should generate a single path if connect port is not supplied 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -141,7 +141,7 @@ spec:
 
 exports[`Ingress generator should generate multiple paths if connect port is supplied 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -170,7 +170,7 @@ spec:
 
 exports[`Ingress generator should not add auth-url for a non-private endpoints 1`] = `
 "---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: name-ingress

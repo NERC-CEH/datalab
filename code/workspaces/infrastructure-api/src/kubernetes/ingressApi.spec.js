@@ -9,7 +9,7 @@ const mock = new MockAdapter(axios);
 const API_BASE = config.get('kubernetesApi');
 const NAMESPACE = 'namespace';
 
-const INGRESS_URL = `${API_BASE}/apis/extensions/v1beta1/namespaces/${NAMESPACE}/ingresses`;
+const INGRESS_URL = `${API_BASE}/apis/networking.k8s.io/v1beta1/namespaces/${NAMESPACE}/ingresses`;
 const INGRESS_NAME = 'test-ingress';
 beforeEach(() => {
   mock.reset();
