@@ -27,12 +27,16 @@ spec:
             limits:
               cpu: 1
               memory: 2Gi
+          # Setting these custom values based on loadup times using packrat and
+          # experience with single threaded RShiny applications which can be
+          # slow to respond to polling (default timeout = 1 second)
           livenessProbe:
             httpGet:
               path: /
               port: 3838
-            initialDelaySeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
 {{#volumeMount}}
           volumeMounts:
             - name: glusterfsvol
