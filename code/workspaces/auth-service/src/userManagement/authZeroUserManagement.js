@@ -33,8 +33,11 @@ export async function asyncGetUsers() {
       const bearer = await requestAccessToken(tokenRequest);
 
       // Below approach is required as the auth0 API results are paginated, with a maximum
-      // overall limit, as well as a maximum per_page limit. This approach (non-async) is
-      // taken to prevent excessive API calls which impact performance.
+      // overall limit, as well as a maximum per_page limit. This approach is taken instead
+      // of requesting multiple pages simultaneously (e.g Promise.all).
+      // Additionally extractUsers no longer filters for auth0 'active' users as the raw
+      // return number is required to determine whether return page is full or not hence
+      // this logic is moved into the loop.
       /* eslint-disable no-await-in-loop */
       do {
         users = await fetchUsers(bearer, page);
@@ -68,8 +71,6 @@ const fetchUsers = (bearer, page) => axios.get(`${authZeroManagementApi}/users`,
   },
 });
 
-// Pending users are users with an account but have not logged in; these users do not have a populated name field.
-// This function filters pending users and returns only active users.
 const extractUsers = response => get(response, 'data', []);
 
 const processUsers = users => users.map(user => mapKeys(user, (value, key) => authKeyMapping[key]));
