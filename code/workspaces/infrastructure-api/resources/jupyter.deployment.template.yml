@@ -44,7 +44,7 @@ spec:
           image: {{ &jupyter.imageName }}:{{ jupyter.version }}
           imagePullPolicy : "IfNotPresent"
           command: ["sh"]
-          args: ["-c", "env-control add {{ name }}"]
+          args: ["-c", "env-control --jupyterlab add {{ name }}"]
           env:
             - name: JUPYTER_DATA_DIR
               value: /data/notebooks/{{ name }}/.jupyter
@@ -58,7 +58,7 @@ spec:
           imagePullPolicy : "IfNotPresent"
           name: {{ name }}
           command: ["start.sh",
-            "jupyter", "{{ startCmd }}",
+            "/data/conda/{{ name }}/bin/jupyter", "{{ startCmd }}",
             "--NotebookApp.token='$(JUPYTER_TOKEN)'",
             "--NotebookApp.allow_origin='{{ domain }}'",
             "--NotebookApp.notebook_dir='/data/notebooks/{{ name }}'"]
@@ -103,7 +103,7 @@ spec:
               mountPath: /usr/local/spark/conf/spark-defaults.conf
               subPath: spark-defaults.conf
             - name: dask-kubernetes-properties
-              mountPath: /opt/conda/etc/dask/dask.yaml
+              mountPath: /data/conda/{{ name }}/etc/dask/dask.yaml
               subPath: dask.yaml
       volumes:
         {{#volumeMount}}
