@@ -40,25 +40,12 @@ spec:
           volumeMounts:
             - mountPath: /mnt/glusterfs
               name: glusterfsvol
-        - name: setup-default-environment
-          image: {{ &jupyter.imageName }}:{{ jupyter.version }}
-          imagePullPolicy : "IfNotPresent"
-          command: ["sh"]
-          args: ["-c", "env-control --jupyterlab add {{ name }}"]
-          env:
-            - name: JUPYTER_DATA_DIR
-              value: /data/notebooks/{{ name }}/.jupyter
-            - name: CONDA_ENV_DIR
-              value: /data/conda/
-          volumeMounts:
-            - mountPath: /data
-              name: glusterfsvol
       containers:
         - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
           imagePullPolicy : "IfNotPresent"
           name: {{ name }}
           command: ["start.sh",
-            "/data/conda/{{ name }}/bin/jupyter", "{{ startCmd }}",
+            "jupyter", "{{ startCmd }}",
             "--NotebookApp.token='$(JUPYTER_TOKEN)'",
             "--NotebookApp.allow_origin='{{ domain }}'",
             "--NotebookApp.notebook_dir='/data/notebooks/{{ name }}'"]
@@ -76,7 +63,7 @@ spec:
             - name: R_LIBS_USER
               value: "/data/packages/R/%p/%v"
             - name: JUPYTER_DATA_DIR
-              value: "/data/notebooks/{{ name }}/.jupyter"
+              value: "/data/.jupyter"
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
           resources:
@@ -103,7 +90,7 @@ spec:
               mountPath: /usr/local/spark/conf/spark-defaults.conf
               subPath: spark-defaults.conf
             - name: dask-kubernetes-properties
-              mountPath: /data/conda/{{ name }}/etc/dask/dask.yaml
+              mountPath: /opt/conda/etc/dask/dask.yaml
               subPath: dask.yaml
       volumes:
         {{#volumeMount}}
