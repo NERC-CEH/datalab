@@ -12,7 +12,7 @@ RSTUDIO_CONNECT_IMAGE: 'nerc/zeppelin-connect' # This name should be zeppelin-co
 RSTUDIO_CONNECT_VERSION: '1.1.1'
 
 RSHINY_IMAGE: 'nerc/rshiny'
-RSHINY_VERSION: '0.1.2'
+RSHINY_VERSION: '0.1.5'
 
 NBVIEWER_IMAGE: 'jupyter/nbviewer'
 NBVIEWER_VERSION: 'latest'
