@@ -1,0 +1,79 @@
+# If you intened to deploy Kubernetes in an air-gapped environment,
+# please consult the documentation on how to configure custom RKE images.
+nodes:
+- address: 192.168.4.9
+  port: "22"
+  role:
+  - controlplane
+  - etcd
+  hostname_override: cehsos-k8s-master-1
+  user: ubuntu
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+- address: 192.168.4.6
+  port: "22"
+  role:
+  - controlplane
+  - etcd
+  hostname_override: cehsos-k8s-master-2
+  user: ubuntu
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+- address: 192.168.4.10
+  port: "22"
+  role:
+  - controlplane
+  - etcd
+  hostname_override: cehsos-k8s-master-3
+  user: ubuntu
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+- address: 192.168.4.26
+  port: "22"
+  role:
+  - worker
+  hostname_override: cehsos-k8s-node-1
+  user: ubuntu
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+- address: 192.168.4.7
+  port: "22"
+  role:
+  - worker
+  hostname_override: cehsos-k8s-node-2
+  user: ubuntu
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+- address: 192.168.4.18
+  port: "22"
+  role:
+  - worker
+  hostname_override: cehsos-k8s-node-3
+  user: ubuntu
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+ssh_key_path: ./jasminuser-ssh-keys/id_rsa
+services:
+  etcd:
+    backup_config:
+      interval_hours: 24
+      retention: 6
+  kubelet:
+    extra_binds:
+      - "/sbin/apparmor_parser:/sbin/apparmor_parser"
+ignore_docker_version: false
+
+# Temporarily override nginx controller due to vulnerability 
+#system_images:
+#   ingress: rancher/nginx-ingress-controller:nginx-0.25.1-rancher1
+
+# Currently only nginx ingress provider is supported.
+# To disable ingress controller, set `provider: none`
+# `node_selector` controls ingress placement and is optional
+ingress:
+    provider: none
+    node_selector:
+      app: ingress
+
+kubernetes_version: v1.15.6-rancher1-2
+cluster_name: cehsos-k8s
+bastion_host:
+  address: "192.171.139.106"
+  port: "22"
+  user: ubuntu
+  #ssh_key: ""
+  ssh_key_path: ./jasminuser-ssh-keys/id_rsa

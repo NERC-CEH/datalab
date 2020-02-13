@@ -32,3 +32,7 @@ code/provision/infrastructure/vault-password\.txt
 code/provision/infrastructure/group_vars/proxied\.yml
 
 code/venv/
+
+code/provision/rke/jasminuser-ssh-keys/id_rsa
+code/provision/rke/cluster.rkestate
+code/provision/rke/kube_config_cluster.yml
