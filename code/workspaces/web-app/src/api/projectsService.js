@@ -35,6 +35,16 @@ function createProject(project) {
     .then(errorHandler('data.createProject'));
 }
 
+function updateProject(project) {
+  const mutation = `
+    UpdateProject($project: ProjectUpdateRequest) {
+      updateProject(project: $project) { id }
+    }`;
+
+  return gqlMutation(mutation, { project })
+    .then(errorHandler('data.updateProject'));
+}
+
 function deleteProject(projectKey) {
   const mutation = `
     DeleteProject($project: ProjectDeletionRequest) {
@@ -55,4 +65,4 @@ function checkProjectKeyUniqueness(projectKey) {
     .then(errorHandler('data.checkProjectKeyUniqueness'));
 }
 
-export default { loadProjects, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness };
+export default { loadProjects, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness, updateProject };

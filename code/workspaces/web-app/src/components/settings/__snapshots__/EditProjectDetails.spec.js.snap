@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProjectDetails renders to match snapshot 1`] = `
+<form
+  className="form"
+  onSubmit={[MockFunction handleSubmit]}
+>
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="input"
+    component={[Function]}
+    label="Name"
+    margin="dense"
+    name="name"
+    placeholder="test-project"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="input"
+    component={[Function]}
+    label="Description"
+    margin="dense"
+    name="description"
+    placeholder="description"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="input"
+    component={[Function]}
+    label="Collaboration Link"
+    margin="dense"
+    name="collaborationLink"
+    placeholder="example.com"
+  />
+  <UpdateFormControls />
+</form>
+`;

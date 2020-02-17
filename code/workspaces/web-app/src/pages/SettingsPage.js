@@ -4,9 +4,12 @@ import Typography from '@material-ui/core/Typography';
 import Page from './Page';
 import UserPermissionsTable from '../components/settings/UserPermissionsTable';
 import AddUserPermissions from '../components/settings/AddUserPermissions';
+import EditProjectDetails from '../components/settings/EditProjectDetails';
 
 const SettingsPage = ({ userPermissions }) => (
   <Page title="Settings">
+    <Typography variant="h5">Project Details</Typography>
+    <EditProjectDetails/>
     <Typography variant="h5">User Permissions</Typography>
     <AddUserPermissions />
     <UserPermissionsTable />
