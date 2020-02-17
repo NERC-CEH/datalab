@@ -18,6 +18,8 @@
   * [Common Issues](dask/common_issues.md)
 * [Spark Usage](spark-usage/README.md)
   * [Spark Basic Use](spark-usage/spark-basic-use.md)
-  * [Spark Use with Project Datastore](spark-usage/spark-project-datastore.md)
-  * [Spark Use with Object Store](spark-usage/spark-job-object-store.md)
+  * [Spark with PySpark and Project Datastore](spark-usage/spark-project-datastore.md)
+  * [Spark with PySpark and Object Store](spark-usage/spark-job-object-store.md)
+  * [Spark with SparkR and Project Datastore](spark-usage/sparkr-project-datastore.md)
+  * [Spark with SparkR and Object Store](spark-usage/sparkr-object-store.md)
   
