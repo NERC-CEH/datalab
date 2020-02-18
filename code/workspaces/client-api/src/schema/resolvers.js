@@ -64,7 +64,7 @@ const resolvers = {
     removeProjectPermission: (obj, { permission: { projectKey, userId } }, { user, token }) => (
       projectPermissionWrapper({ projectKey }, PERMISSIONS_DELETE, user, () => projectService.removeProjectPermission(projectKey, userId, token))
     ),
-    createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, token)),
+    createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, user, token)),
     updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.key }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
   },
