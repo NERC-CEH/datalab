@@ -84,7 +84,7 @@ export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons }) =
   </div>
 );
 
-export const UpdateFormControls = ({ submitting, fullWidthButtons }) => (
+export const UpdateFormControls = ({ submitting, fullWidthButtons, onCancel }) => (
   <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', margin: `${theme.spacing(2)}px 0` }}>
     <PrimaryActionButton
       type="submit"
@@ -93,5 +93,12 @@ export const UpdateFormControls = ({ submitting, fullWidthButtons }) => (
     >
       Apply
     </PrimaryActionButton>
+    <SecondaryActionButton
+      style={{ marginLeft: theme.spacing(1) }}
+      onClick={onCancel}
+      fullWidth={fullWidthButtons}
+    >
+      Cancel
+    </SecondaryActionButton>
   </div>
 );

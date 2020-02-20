@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import projectActions from '../../actions/projectActions';
 import syncValidate from '../projects/updateProjectFormValidator';
 import { renderTextField, renderTextArea, UpdateFormControls } from '../common/form/controls';
+import EditProjectDialog from './EditProjectDialog';
 import notify from '../common/notify';
 
 const styles = theme => ({
@@ -23,61 +24,81 @@ export default function EditProjectDetails() {
   const project = useCurrentProject().value;
   const dispatch = useDispatch();
 
-  const updateProject = async (values) => {
+  const [editProjectDialogState, setEditProjectDialogState] = useState({ open: false, values: {} });
+
+  const updateProject = async () => {
     try {
+      const formValues = editProjectDialogState.values;
       const projectKey = project.key;
-      const projectObject = { projectKey, ...values };
+      const projectObject = { projectKey, ...formValues };
+
       await dispatchEditProjectDetails(projectObject, dispatch);
       notify.success('Project updated');
     } catch (error) {
       notify.error(`Error updating Project: ${error.message}`);
     }
+    setEditProjectDialogState({ open: false });
   };
 
+  const openDialog = values => (setEditProjectDialogState({ open: true, values }));
+  const onCancel = () => (dispatch(reset('updateProject')));
+
   return (
-    <EditProjectReduxForm
-      project={project}
-      onSubmit={updateProject}
-    />
+    <div>
+      <EditProjectReduxForm
+        project={project}
+        onSubmit={openDialog}
+        onCancel={onCancel}
+        editProjectDialogState={editProjectDialogState}
+        setEditProjectDialogState={setEditProjectDialogState}
+      />
+      <EditProjectDialog
+        onSubmit={updateProject}
+        onCancel={() => setEditProjectDialogState({ open: false })}
+        state={editProjectDialogState}
+        setState={setEditProjectDialogState}
+        title="Edit Project"
+        body="Please confirm you wish to edit this project"
+        dispatch={dispatch}
+      />
+    </div>
   );
 }
 
 // Redux-Form Component
+function EditProject({ classes, project, handleSubmit, onCancel }) {
+  const commonProps = {
+    component: renderTextField,
+    className: classes.input,
+    margin: 'dense',
+    InputLabelProps: { shrink: true },
+  };
 
-function EditProject({ classes, project, handleSubmit }) {
   return (
     <form
       className={classes.form}
       onSubmit={handleSubmit}
     >
       <Field
+        { ...commonProps }
         name="name"
         label="Name"
-        component={renderTextField}
-        margin="dense"
-        InputLabelProps={{ shrink: true }}
         placeholder={project.name}
-        className={classes.input}
       />
       <Field
+        { ...commonProps }
         name="description"
         label="Description"
         component={renderTextArea}
-        className={classes.input}
-        margin="dense"
-        InputLabelProps={{ shrink: true }}
         placeholder={project.description}
       />
       <Field
+        { ...commonProps }
         name="collaborationLink"
         label="Collaboration Link"
-        component={renderTextField}
-        className={classes.input}
-        margin="dense"
-        InputLabelProps={{ shrink: true }}
         placeholder={project.collaborationLink}
       />
-      <UpdateFormControls />
+      <UpdateFormControls onCancel={() => onCancel()}/>
     </form>
   );
 }

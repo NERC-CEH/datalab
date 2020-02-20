@@ -44,6 +44,8 @@ exports[`EditProjectDetails renders to match snapshot 1`] = `
     name="collaborationLink"
     placeholder="example.com"
   />
-  <UpdateFormControls />
+  <UpdateFormControls
+    onCancel={[Function]}
+  />
 </form>
 `;
