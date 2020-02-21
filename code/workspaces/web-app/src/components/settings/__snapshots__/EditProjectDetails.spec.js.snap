@@ -45,7 +45,7 @@ exports[`EditProjectDetails renders to match snapshot 1`] = `
     placeholder="example.com"
   />
   <UpdateFormControls
-    onCancel={[Function]}
+    onCancel={[MockFunction onCancel]}
   />
 </form>
 `;

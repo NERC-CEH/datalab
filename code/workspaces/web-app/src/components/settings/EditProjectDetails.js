@@ -98,7 +98,7 @@ function EditProject({ classes, project, handleSubmit, onCancel }) {
         label="Collaboration Link"
         placeholder={project.collaborationLink}
       />
-      <UpdateFormControls onCancel={() => onCancel()}/>
+      <UpdateFormControls onCancel={onCancel}/>
     </form>
   );
 }

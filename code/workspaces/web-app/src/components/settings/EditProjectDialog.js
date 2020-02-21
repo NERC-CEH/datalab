@@ -25,7 +25,7 @@ function EditProjectDialog({ state, onSubmit, title, body, onCancel }) {
 }
 
 EditProjectDialog.propTypes = {
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   state: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
