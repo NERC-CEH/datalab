@@ -25,6 +25,7 @@ Array [
   "createProject",
   "deleteProject",
   "checkProjectKeyUniqueness",
+  "updateProject",
   "openModalDialog",
   "closeModalDialog",
   "resetForm",

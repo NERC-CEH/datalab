@@ -76,10 +76,10 @@ const CreateSiteForm = (props) => {
 CreateSiteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
-  dataStorageOptions: PropTypes.shape({
+  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-  }).isRequired,
+  })).isRequired,
   projectKey: PropTypes.string.isRequired,
 };
 
