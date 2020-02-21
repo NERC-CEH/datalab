@@ -19,7 +19,12 @@ const testProjects = [
   { key: 'key-2', name: 'name 2', description: 'description 2' },
 ];
 
+const user = {
+  sub: 'username',
+};
+
 const infraServiceUrl = config.get('infrastructureApi');
+const authServiceUrl = `${config.get('authorisationService')}`;
 
 describe('projectService', () => {
   beforeEach(() => {
@@ -58,12 +63,16 @@ describe('projectService', () => {
 
   it('createProject makes an api call and returns the response data', async () => {
     const dummyResponse = { id: 'id', ...testProject };
+    const dummyAuthResponse = { userId: user.sub, projectKey: testProject.key, role: 'admin' };
+
     httpMock.onPost(`${infraServiceUrl}/projects`, testProject)
       .reply(200, dummyResponse);
+    httpMock.onPut(`${authServiceUrl}/projects/${testProject.key}/users/${user.sub}/roles`, { role: 'admin' })
+      .reply(200, dummyAuthResponse);
 
     const creationRequest = { ...testProject, projectKey: testProject.key };
     delete creationRequest.key;
-    const result = await projectService.createProject(creationRequest, token);
+    const result = await projectService.createProject(creationRequest, user, token);
     expect(result).toEqual(dummyResponse);
   });
 
@@ -94,7 +103,7 @@ describe('projectActionRequestToProject', () => {
     const projectKey = 'projectKey';
     const baseData = { name: 'name', description: 'description', collaborationLink: 'collaborationLink' };
     const actionRequest = { projectKey, ...baseData };
-    const projcetDefinition = { key: projectKey, ...baseData };
-    expect(projectActionRequestToProject(actionRequest)).toEqual(projcetDefinition);
+    const projectDefinition = { key: projectKey, ...baseData };
+    expect(projectActionRequestToProject(actionRequest)).toEqual(projectDefinition);
   });
 });
