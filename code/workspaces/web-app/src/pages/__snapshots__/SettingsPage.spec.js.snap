@@ -13,6 +13,12 @@ exports[`SettingsPage renders to match snapshot 1`] = `
   <WithStyles(ForwardRef(Typography))
     variant="h5"
   >
+    Project Details
+  </WithStyles(ForwardRef(Typography))>
+  <EditProjectDetails />
+  <WithStyles(ForwardRef(Typography))
+    variant="h5"
+  >
     User Permissions
   </WithStyles(ForwardRef(Typography))>
   <WithStyles(AddUserPermission) />
