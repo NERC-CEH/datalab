@@ -9,6 +9,7 @@ x-common-variables: &common
   LOG_LEVEL: ${LOG_LEVEL:-info}
   VAULT_API: http://vault:8200
   VAULT_APP_ROLE: ${VAULT_APP_ROLE}
+  NODE_OPTIONS: '--max-http-header-size=81920'
 
 services:
   datalab-auth:

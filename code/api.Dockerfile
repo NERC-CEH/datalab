@@ -1,5 +1,5 @@
 # Build library dependencies
-FROM node:lts-alpine as common
+FROM node:12-alpine as common
 
 ARG LIBRARY
 
