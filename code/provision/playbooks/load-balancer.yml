@@ -5,3 +5,4 @@
 
   roles:
     - load-balancer
+    - rancher-haproxy

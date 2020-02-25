@@ -1,0 +1,11 @@
+---
+# Frontend settings.
+haproxy_frontend_name: 'k8s-api-frontend'
+haproxy_frontend_bind_address: '*'
+haproxy_frontend_port: 443
+haproxy_frontend_mode: 'tcp'
+
+# Backend settings.
+haproxy_backend_name: 'k8s-api-backend'
+haproxy_backend_mode: 'tcp'
+haproxy_backend_balance_method: 'roundrobin'

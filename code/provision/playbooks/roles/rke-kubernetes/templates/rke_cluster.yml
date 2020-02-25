@@ -1,0 +1,52 @@
+---
+cluster_name: "{{ cluster_name }}"
+
+kubernetes_version: "{{ rke_kubernetes_version }}"
+
+bastion_host:
+  address: "{{ bastion_ip_address }}"
+  port: "{{ ssh_port }}"
+  user: "{{ rke_ssh_user }}"
+  #ssh_key: ""
+  ssh_key_path: "{{ ssh_key_path }}"
+
+# Currently only nginx ingress provider is supported.
+# To disable ingress controller, set `provider: none`
+# `node_selector` controls ingress placement and is optional
+ingress:
+    provider: none
+    node_selector:
+      app: ingress
+
+ignore_docker_version: false
+
+services:
+  etcd:
+    backup_config:
+      interval_hours: 24
+      retention: 6
+  kubelet:
+    extra_binds:
+      - "/sbin/apparmor_parser:/sbin/apparmor_parser"
+
+ssh_key_path: "{{ ssh_key_path }}"
+
+nodes:
+{% for host in groups['rke-k8s-master'] %}
+  - hostname_override: "{{ hostvars[host].openstack.name }}"
+    address: "{{ hostvars[host].openstack.private_v4 }}"
+    user: "{{ rke_ssh_user }}"
+    role: [controlplane,etcd]
+    ssh_key_path: "{{ ssh_key_path }}"
+    port: "{{ ssh_port }}"
+{% endfor %}
+{% for host in groups['rke-k8s-node'] %}
+  - hostname_override: "{{ hostvars[host].openstack.name }}"
+    address: "{{ hostvars[host].openstack.private_v4 }}"
+    user: "{{ rke_ssh_user }}"
+    role: [worker]
+    ssh_key_path: "{{ ssh_key_path }}"
+    port: "{{ ssh_port }}"
+{% endfor %}
+
+

@@ -1,0 +1,15 @@
+---
+- name: Open all ports for access between workers and masters
+  ufw:
+    rule: allow
+    from_ip: "{{ hostvars[item].openstack.private_v4 }}"
+    proto: any
+  with_items: "{{ groups['rke-k8s-cluster'] }}"
+
+#On masters, add rule to allow in traffic on 2379 and 6443 from bastion host - Just allow in bastion host on Anywhere as well
+- name: Open ports for traffic from bastion
+  ufw:
+    rule: allow
+    from_ip: "{{ hostvars[groups['bastion'][1]].openstack.private_v4 }}"
+    proto: any
+  with_items: "{{ groups['rke-k8s-master'] }}"

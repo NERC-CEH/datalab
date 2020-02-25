@@ -4,17 +4,9 @@
 - name: Configure Gluster Servers
   import_playbook: gluster.yml
 
-#- name: Configure Kubernetes Cluster
-#  import_playbook: kubernetes-cluster.yml
+- name: Configure RKE Kubernetes Cluster
+  import_playbook: configure-rke-cluster.yml
 
 - name: Configure Heketi as dynamic Gluster provisioner
   import_playbook: heketi.yml
 
-- name: Configure RKE Kubernetes Cluster
-  import_playbook: configure-rke-cluster.yml
-
-#- name: Install Kubernetes Tools (Monitoring and Logging)
-#  import_playbook: kubernetes-tools.yml
-
-#- name: Install Discourse
-#  import_playbook: discourse-server.yml

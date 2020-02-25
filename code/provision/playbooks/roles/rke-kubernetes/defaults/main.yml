@@ -1,0 +1,22 @@
+---
+cluster_name: cehsos-k8s
+
+rke_kubernetes_version: v1.15.6-rancher1-2
+
+rke_release: v1.0.2
+rke_binary_url: "https://github.com/rancher/rke/releases/download/{{ rke_release }}/rke_linux-amd64"
+rke_binary_checksum: sha256:8c481ff4c188f8dfe53b82ef080bdb6ae89458ed60c918d4ca24f70cc54dc86f
+
+
+rke_config_dir: "{{ ansible_env.HOME | default(ansible_env.PWD) | default('/root') }}/rke"
+rke_force_configure: false
+
+rke_ssh_user: ubuntu
+
+bastion_ip_address: "192.171.139.106"
+
+ssh_key_path: "./jasminuser-ssh-keys/id_rsa"
+ssh_port: "22"
+
+
+manifests_dir: "{{ ansible_env.HOME | default(ansible_env.PWD) | default('/root') }}/manifests"
