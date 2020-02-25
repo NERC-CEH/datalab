@@ -44,20 +44,15 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is a collaboration link 1`] = `
 <PromisedContentWrapper
   promise={
-    Array [
-      Object {
-        "fetching": false,
-        "value": Object {
-          "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
-          "description": "A description about Test Project.",
-          "key": "testproj",
-          "name": "Test Project",
-        },
+    Object {
+      "fetching": false,
+      "value": Object {
+        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
+        "description": "A description about Test Project.",
+        "key": "testproj",
+        "name": "Test Project",
       },
-      Object {
-        "fetching": undefined,
-      },
-    ]
+    }
   }
 >
   <div>
@@ -88,62 +83,64 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
     <div
       className="makeStyles-userBlock-7"
     >
-      <UserBlock
-        classes={
-          Object {
-            "chipTitle": "makeStyles-chipTitle-8",
-            "collaborationLink": "makeStyles-collaborationLink-5",
-            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-            "description": "makeStyles-description-2",
-            "projectKey": "makeStyles-projectKey-4",
-            "projectTitle": "makeStyles-projectTitle-1",
-            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-            "userBlock": "makeStyles-userBlock-7",
-          }
-        }
-        name="admin"
-        users={Array []}
-      />
-      <UserBlock
-        classes={
-          Object {
-            "chipTitle": "makeStyles-chipTitle-8",
-            "collaborationLink": "makeStyles-collaborationLink-5",
-            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-            "description": "makeStyles-description-2",
-            "projectKey": "makeStyles-projectKey-4",
-            "projectTitle": "makeStyles-projectTitle-1",
-            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-            "userBlock": "makeStyles-userBlock-7",
-          }
-        }
-        name="user"
-        users={
-          Array [
+      <div>
+        <UserBlock
+          classes={
             Object {
-              "name": "user1@test",
-              "role": "user",
-              "userId": "user1",
-            },
-          ]
-        }
-      />
-      <UserBlock
-        classes={
-          Object {
-            "chipTitle": "makeStyles-chipTitle-8",
-            "collaborationLink": "makeStyles-collaborationLink-5",
-            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-            "description": "makeStyles-description-2",
-            "projectKey": "makeStyles-projectKey-4",
-            "projectTitle": "makeStyles-projectTitle-1",
-            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-            "userBlock": "makeStyles-userBlock-7",
+              "chipTitle": "makeStyles-chipTitle-8",
+              "collaborationLink": "makeStyles-collaborationLink-5",
+              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+              "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
+              "projectTitle": "makeStyles-projectTitle-1",
+              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+              "userBlock": "makeStyles-userBlock-7",
+            }
           }
-        }
-        name="viewer"
-        users={Array []}
-      />
+          name="admin"
+          users={Array []}
+        />
+        <UserBlock
+          classes={
+            Object {
+              "chipTitle": "makeStyles-chipTitle-8",
+              "collaborationLink": "makeStyles-collaborationLink-5",
+              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+              "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
+              "projectTitle": "makeStyles-projectTitle-1",
+              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+              "userBlock": "makeStyles-userBlock-7",
+            }
+          }
+          name="user"
+          users={
+            Array [
+              Object {
+                "name": "user1@test",
+                "role": "user",
+                "userId": "user1",
+              },
+            ]
+          }
+        />
+        <UserBlock
+          classes={
+            Object {
+              "chipTitle": "makeStyles-chipTitle-8",
+              "collaborationLink": "makeStyles-collaborationLink-5",
+              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+              "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
+              "projectTitle": "makeStyles-projectTitle-1",
+              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+              "userBlock": "makeStyles-userBlock-7",
+            }
+          }
+          name="viewer"
+          users={Array []}
+        />
+      </div>
     </div>
   </div>
 </PromisedContentWrapper>
@@ -152,20 +149,15 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is not a collaboration link 1`] = `
 <PromisedContentWrapper
   promise={
-    Array [
-      Object {
-        "fetching": false,
-        "value": Object {
-          "collaborationLink": undefined,
-          "description": "A description about Test Project.",
-          "key": "testproj",
-          "name": "Test Project",
-        },
+    Object {
+      "fetching": false,
+      "value": Object {
+        "collaborationLink": undefined,
+        "description": "A description about Test Project.",
+        "key": "testproj",
+        "name": "Test Project",
       },
-      Object {
-        "fetching": undefined,
-      },
-    ]
+    }
   }
 >
   <div>
@@ -194,62 +186,64 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
     <div
       className="makeStyles-userBlock-7"
     >
-      <UserBlock
-        classes={
-          Object {
-            "chipTitle": "makeStyles-chipTitle-8",
-            "collaborationLink": "makeStyles-collaborationLink-5",
-            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-            "description": "makeStyles-description-2",
-            "projectKey": "makeStyles-projectKey-4",
-            "projectTitle": "makeStyles-projectTitle-1",
-            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-            "userBlock": "makeStyles-userBlock-7",
-          }
-        }
-        name="admin"
-        users={Array []}
-      />
-      <UserBlock
-        classes={
-          Object {
-            "chipTitle": "makeStyles-chipTitle-8",
-            "collaborationLink": "makeStyles-collaborationLink-5",
-            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-            "description": "makeStyles-description-2",
-            "projectKey": "makeStyles-projectKey-4",
-            "projectTitle": "makeStyles-projectTitle-1",
-            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-            "userBlock": "makeStyles-userBlock-7",
-          }
-        }
-        name="user"
-        users={
-          Array [
+      <div>
+        <UserBlock
+          classes={
             Object {
-              "name": "user1@test",
-              "role": "user",
-              "userId": "user1",
-            },
-          ]
-        }
-      />
-      <UserBlock
-        classes={
-          Object {
-            "chipTitle": "makeStyles-chipTitle-8",
-            "collaborationLink": "makeStyles-collaborationLink-5",
-            "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-            "description": "makeStyles-description-2",
-            "projectKey": "makeStyles-projectKey-4",
-            "projectTitle": "makeStyles-projectTitle-1",
-            "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-            "userBlock": "makeStyles-userBlock-7",
+              "chipTitle": "makeStyles-chipTitle-8",
+              "collaborationLink": "makeStyles-collaborationLink-5",
+              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+              "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
+              "projectTitle": "makeStyles-projectTitle-1",
+              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+              "userBlock": "makeStyles-userBlock-7",
+            }
           }
-        }
-        name="viewer"
-        users={Array []}
-      />
+          name="admin"
+          users={Array []}
+        />
+        <UserBlock
+          classes={
+            Object {
+              "chipTitle": "makeStyles-chipTitle-8",
+              "collaborationLink": "makeStyles-collaborationLink-5",
+              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+              "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
+              "projectTitle": "makeStyles-projectTitle-1",
+              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+              "userBlock": "makeStyles-userBlock-7",
+            }
+          }
+          name="user"
+          users={
+            Array [
+              Object {
+                "name": "user1@test",
+                "role": "user",
+                "userId": "user1",
+              },
+            ]
+          }
+        />
+        <UserBlock
+          classes={
+            Object {
+              "chipTitle": "makeStyles-chipTitle-8",
+              "collaborationLink": "makeStyles-collaborationLink-5",
+              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
+              "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
+              "projectTitle": "makeStyles-projectTitle-1",
+              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
+              "userBlock": "makeStyles-userBlock-7",
+            }
+          }
+          name="viewer"
+          users={Array []}
+        />
+      </div>
     </div>
   </div>
 </PromisedContentWrapper>

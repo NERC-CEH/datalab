@@ -46,10 +46,12 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
       label="Data Store to Mount"
       name="volumeMount"
       options={
-        Object {
-          "text": "nfs",
-          "value": "5",
-        }
+        Array [
+          Object {
+            "text": "nfs",
+            "value": "5",
+          },
+        ]
       }
     />
   </div>

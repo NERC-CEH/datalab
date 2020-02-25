@@ -9,11 +9,14 @@ function shallowRender(props) {
 
 describe('Logs', () => {
   const onCancelMock = jest.fn();
+  const getLogsMock = jest.fn();
 
+  getLogsMock.mockReturnValue(Promise.resolve({ value: 'Example Logs' }));
   const generateProps = () => ({
     title: 'Title',
     body: 'Body',
     onCancel: onCancelMock,
+    getLogs: getLogsMock,
   });
 
   beforeEach(() => jest.resetAllMocks());

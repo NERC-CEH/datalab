@@ -17,13 +17,20 @@ class Logs extends Component {
   }
 
   async componentDidMount() {
-    let logs = await this.props.getLogs(this.props.projectName, this.props.stackName);
-    if (!logs.value) {
-      logs = { value: 'ERROR: Unable to retrieve logs.' };
+    const faillog = { value: 'ERROR: Unable to retrieve logs.' };
+    try {
+      let logs = await this.props.getLogs(this.props.projectName, this.props.stackName);
+      if (!logs.value) {
+        logs = faillog;
+      }
+      this.setState({
+        logs: { fetching: false, ...logs },
+      });
+    } catch (error) {
+      this.setState({
+        logs: { fetching: false, ...faillog },
+      });
     }
-    this.setState({
-      logs: { fetching: false, ...logs },
-    });
   }
 
   render() {

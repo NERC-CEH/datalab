@@ -109,6 +109,11 @@ function dispatchEditProjectDetails(project, dispatch) {
       project,
     ),
   );
+  dispatch(
+    projectActions.setCurrentProject(
+      project.projectKey,
+    ),
+  );
 }
 
 const EditProjectReduxForm = reduxForm({
