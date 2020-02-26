@@ -50,7 +50,7 @@ variable "number_of_bastions" {
 
 variable "number_of_k8s_nodes" {
   type = number
-  default = 3
+  default = 4
 }
 
 variable "number_of_gluster_nodes" {

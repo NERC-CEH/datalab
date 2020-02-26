@@ -109,6 +109,35 @@ resource "openstack_compute_instance_v2" "k8s_node" {
     groups     = "k8s-node,k8s-cluster,proxied,${var.site}"
     depends_on = var.tenant_network
   }
+
+  lifecycle {
+    ignore_changes = [
+      "image_name",
+    ]
+  }
+}
+
+resource "openstack_compute_instance_v2" "k8s_node_nov_2019" {
+  name        = "${var.cluster_name}-k8s-node-${count.index+4}"
+  count       = var.number_of_k8s_nodes
+  image_name  = var.server_image
+  flavor_name = var.flavor_k8s_node
+  key_pair    = var.openstack_keypair
+
+  network {
+    name = var.tenant_network
+  }
+
+  security_groups = [
+    openstack_compute_secgroup_v2.k8s.name,
+    "default",
+  ]
+
+  metadata = {
+    ssh_user   = local.ssh_user
+    groups     = "k8s-node-nov-2019,k8s-node,k8s-cluster,proxied,${var.site}"
+    depends_on = var.tenant_network
+  }
 }
 
 resource "openstack_compute_instance_v2" "gluster_node" {
