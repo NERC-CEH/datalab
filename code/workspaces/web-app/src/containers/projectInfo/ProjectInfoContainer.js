@@ -64,7 +64,7 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
   );
 
   return (
-    <PromisedContentWrapper promise={[currentProject, { fetching: users.fetching.inProgress }]}>
+    <PromisedContentWrapper promise={currentProject}>
       <div>
         <div className={classes.projectTitleWrapper}>
           <Typography variant="h5" className={classes.projectTitle}>{name}</Typography>
@@ -73,9 +73,13 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
         <Typography className={classes.description} variant="body1">{description}</Typography>
         <CollaborationLink link={collaborationLink} />
         <div className={classes.userBlock}>
-          <UserBlock name='admin' users={users.value.filter(user => user.role === 'admin')} classes={classes} />
-          <UserBlock name='user' users={users.value.filter(user => user.role === 'user')} classes={classes} />
-          <UserBlock name='viewer' users={users.value.filter(user => user.role === 'viewer')} classes={classes} />
+          { users
+            && <div>
+              <UserBlock name='admin' users={users.value.filter(user => user.role === 'admin')} classes={classes} />
+              <UserBlock name='user' users={users.value.filter(user => user.role === 'user')} classes={classes} />
+              <UserBlock name='viewer' users={users.value.filter(user => user.role === 'viewer')} classes={classes} />
+            </div>
+          }
         </div>
       </div>
     </PromisedContentWrapper>

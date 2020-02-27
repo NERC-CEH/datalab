@@ -13,7 +13,7 @@ describe('EditProjectDialog', () => {
   it('renders to match snapshot', () => {
     expect(shallow(
       <EditProjectDialog
-        handleSubmit={jest.fn().mockName('handleSubmit')}
+        onSubmit={jest.fn().mockName('onSubmit')}
         onCancel={jest.fn().mockName('onCancel')}
         state={state}
         title={title}

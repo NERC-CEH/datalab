@@ -14,7 +14,7 @@ describe('CreateSiteForm', () => {
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
     projectKey: 'testproj',
-    dataStorageOptions: { text: 'nfs', value: '5' },
+    dataStorageOptions: [{ text: 'nfs', value: '5' }],
   });
 
   beforeEach(() => jest.resetAllMocks());

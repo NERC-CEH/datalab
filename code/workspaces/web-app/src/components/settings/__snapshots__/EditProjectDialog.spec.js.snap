@@ -16,6 +16,7 @@ exports[`EditProjectDialog renders to match snapshot 1`] = `
   <WithStyles(ForwardRef(DialogActions))>
     <WithStyles(IconButton)
       icon="check"
+      onClick={[MockFunction onSubmit]}
     >
       Confirm
     </WithStyles(IconButton)>
