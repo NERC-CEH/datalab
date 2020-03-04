@@ -4,82 +4,64 @@ import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
 jest.mock('../core/sessionUtil');
 
-const authorizeMock = jest.fn();
-const logoutMock = jest.fn();
+const signinRedirectMock = jest.fn();
+const signinRedirectCallbackMock = jest.fn();
+const signoutRedirectMock = jest.fn();
 
 const authConfig = {
-  domain: 'expected.auth0.com',
-  clientID: 'expected-client-id',
-  audience: 'https://datalab.datalabs.nerc.ac.uk/api',
-  responseType: 'token id_token',
+  authority: 'expected.auth0.com',
+  client_id: 'expected-client-id',
+  extraQueryParams: {
+    audience: 'https://datalab.datalabs.nerc.ac.uk/api',
+  },
+  response_type: 'token id_token',
   scope: 'openid profile',
-  redirectUri: `${window.location.origin}/callback`,
-  returnTo: `${window.location.origin}/`,
+  redirect_uri: `${window.location.origin}/callback`,
 };
 
-const MockAuthZero = {
-  authorize: authorizeMock,
-  logout: logoutMock,
+const MockAuth = {
+  signinRedirect: signinRedirectMock,
+  signinRedirectCallback: signinRedirectCallbackMock,
+  signoutRedirect: signoutRedirectMock,
   parseHashAsync: () => Promise.resolve(window.location.hash),
 };
 
-const auth = new PureAuth(MockAuthZero, MockAuthZero, authConfig);
+const auth = new PureAuth(MockAuth, MockAuth, authConfig);
 
 describe('auth', () => {
   beforeEach(() => {
     jest.resetAllMocks();
-
-    // Work around for mutating window within the jest framework.
-    // https://github.com/facebook/jest/issues/5124
-    const location = {
-      ...window.location,
-      pathname: 'expectedPathname',
-      hash: {
-        accessToken: 'expectedAccessToken',
-        expiresIn: '36000',
-        idToken: 'expectedIdToken',
-        state: JSON.stringify({ appRedirect: 'expectedState' }),
-      },
-    };
-
-    delete window.location;
-    Object.defineProperty(window, 'location', {
-      writable: true,
-      value: location,
-      configurable: true,
-    });
+    signinRedirectCallbackMock.mockReturnValue(
+      Promise.resolve({
+        id_token: 'expectedIdToken',
+        access_token: 'expectedAccessToken',
+        identity: { sub: 'exampleUserId' },
+        expiresAt: moment.utc().add(10, 'hours'),
+      }),
+    );
   });
 
-  it('login calls authorize with correct props', () => {
+  it('login calls signinRedirect with correct props', () => {
     // Act
     auth.login();
 
     // Assert
-    expect(authorizeMock.mock.calls.length).toBe(1);
-    expect(authorizeMock).toBeCalledWith({ state: '{"appRedirect":"expectedPathname"}' });
+    expect(signinRedirectMock.mock.calls.length).toBe(1);
+    expect(signinRedirectMock).toBeCalled();
   });
 
-  it('logout calls clearSession and auth0 logout', () => {
+  it('logout calls clearSession and signoutRedirect', () => {
     // Act
     auth.logout();
 
     // Assert
-    expect(logoutMock.mock.calls.length).toBe(1);
+    expect(signoutRedirectMock.mock.calls.length).toBe(1);
     expect(clearSession.mock.calls.length).toBe(1);
   });
 
-  it('logout calls auth0 logout with returnTo url', () => {
-    // Act
-    auth.logout();
-
-    // Assert
-    expect(logoutMock).toBeCalledWith({ returnTo: 'http://localhost/' });
-  });
-
   it('handleAuthentication processes response when hash has expected elements', () => auth.handleAuthentication().then((response) => {
-    expect(response.accessToken).toBe('expectedAccessToken');
-    expect(response.idToken).toBe('expectedIdToken');
-    expect(response.appRedirect).toBe('expectedState');
+    expect(response.access_token).toBe('expectedAccessToken');
+    expect(response.id_token).toBe('expectedIdToken');
   }));
 
   it('handleAuthentication calls setSession when hash has expected elements', () => auth.handleAuthentication().then((response) => {
@@ -114,7 +96,7 @@ describe('auth', () => {
 
   it('isAuthenticated throws false for user object without expiresAt', () => {
     // Arrange
-    const userObject = { accessToken: 'accessToken', idToken: 'idToken' };
+    const userObject = { access_token: 'accessToken', id_token: 'idToken' };
 
     // Act/Assert
     expect(auth.isAuthenticated(userObject)).toBe(false);
@@ -145,9 +127,9 @@ describe('auth', () => {
   it('getCurrentSession if session found returns correctly formatted authResponse', () => {
     // Arrange
     getSession.mockReturnValue({
-      accessToken: 'expectedAccessToken',
+      access_token: 'expectedAccessToken',
       expiresAt: 'expectedExpiresAt',
-      idToken: 'expectedIdToken',
+      id_token: 'expectedIdToken',
       identity: 'expectedIdentity',
     });
 
@@ -155,9 +137,9 @@ describe('auth', () => {
     const output = getSession();
 
     // Assert
-    expect(output.accessToken).toBe('expectedAccessToken');
+    expect(output.access_token).toBe('expectedAccessToken');
     expect(output.expiresAt).toBe('expectedExpiresAt');
-    expect(output.idToken).toBe('expectedIdToken');
+    expect(output.id_token).toBe('expectedIdToken');
     expect(output.identity).toBe('expectedIdentity');
   });
 });

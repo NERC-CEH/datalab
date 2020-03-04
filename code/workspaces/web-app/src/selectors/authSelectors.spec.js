@@ -14,9 +14,9 @@ const state = {
       value: ['permissions'],
     },
     tokens: {
-      accessToken: 'accessToken',
-      expiresAt: '0000',
-      idToken: 'idToken',
+      access_token: 'accessToken',
+      expires_at: '0000',
+      id_token: 'idToken',
     },
   },
 };

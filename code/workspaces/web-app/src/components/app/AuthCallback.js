@@ -6,7 +6,7 @@ import authActions from '../../actions/authActions';
 import { useUrlHash } from '../../hooks/routerHooks';
 
 export const handleAuth = async (urlHash, routeTo, dispatch) => {
-  if (/access_token|id_token|error/.test(urlHash)) {
+  if (/code|access_token|id_token|error/.test(urlHash)) {
     try {
       const authResponse = await getAuth().handleAuthentication();
       dispatch(authActions.userLogsIn(authResponse));

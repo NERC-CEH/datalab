@@ -18,7 +18,7 @@ describe('secureRequest', () => {
 
   it('adds authorization and content-type headers', () => {
     getCurrentSession
-      .mockReturnValue({ accessToken: 'expectedAccessToken' });
+      .mockReturnValue({ access_token: 'expectedAccessToken' });
 
     mock.onPost('http://localhost:8000/api')
       .reply((requestConfig) => {
@@ -32,8 +32,8 @@ describe('secureRequest', () => {
 
   it('intercepts a 401 unathorized response and reissues request with new token', () => {
     getCurrentSession
-      .mockReturnValueOnce({ accessToken: 'expiredAccessToken' })
-      .mockReturnValueOnce({ accessToken: 'renewedAccessToken' });
+      .mockReturnValueOnce({ access_token: 'expiredAccessToken' })
+      .mockReturnValueOnce({ access_token: 'renewedAccessToken' });
 
     renewSession
       .mockReturnValue(Promise.resolve());
