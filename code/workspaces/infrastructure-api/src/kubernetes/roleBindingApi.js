@@ -14,12 +14,13 @@ async function namespacedRoleBindingExists(name, namespace) {
 
 async function createNamespacedRoleBinding(bindingDefinition, namespace) {
   const k8sApi = getRbacV1Api();
+  logger.debug(`RoleBinding being created with definition ${JSON.stringify(bindingDefinition)}`);
 
   try {
     await k8sApi.createNamespacedRoleBinding(namespace, bindingDefinition);
   } catch (error) {
     logger.error(
-      `Error creating RoleBinding ${bindingDefinition.metadata.name} in namespace ${namespace}: ${error.message}`,
+      `Error creating RoleBinding ${bindingDefinition.metadata.name} in namespace ${namespace}: ${JSON.stringify(error)}`,
     );
     throw error;
   }
