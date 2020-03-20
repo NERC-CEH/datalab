@@ -15,6 +15,7 @@
       "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
       "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
       "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://testlab.datalabs.localhost/&client_id=Xf62MEzjqxfaId1DVWnFul61D9oA3eMt",
-      "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json"
+      "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
+      "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token"
   }
 }
