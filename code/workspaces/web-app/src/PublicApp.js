@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { publicAppTheme } from './theme';
 import WelcomePage from './pages/WelcomePage';
 import NotFoundPage from './pages/NotFoundPage';

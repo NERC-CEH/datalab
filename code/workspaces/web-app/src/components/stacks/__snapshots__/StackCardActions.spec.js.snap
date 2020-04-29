@@ -15,7 +15,7 @@ exports[`PureStackCardActions Should not render Open if stack is not ready 1`] =
       ]
     }
   >
-    <WithStyles(Tooltip)
+    <WithStyles(ForwardRef(Tooltip))
       disableHoverListener={false}
       placement="bottom-start"
       title="Cannot be opened until resource is ready"
@@ -29,7 +29,7 @@ exports[`PureStackCardActions Should not render Open if stack is not ready 1`] =
           Open
         </ForwardRef>
       </div>
-    </WithStyles(Tooltip)>
+    </WithStyles(ForwardRef(Tooltip))>
   </ComponentWrapper>
   <ComponentWrapper
     className="buttonWrapper"
@@ -123,7 +123,7 @@ exports[`PureStackCardActions Should not render edit and delete buttons if curre
       ]
     }
   >
-    <WithStyles(Tooltip)
+    <WithStyles(ForwardRef(Tooltip))
       disableHoverListener={true}
       placement="bottom-start"
       title="Cannot be opened until resource is ready"
@@ -137,7 +137,7 @@ exports[`PureStackCardActions Should not render edit and delete buttons if curre
           Open
         </ForwardRef>
       </div>
-    </WithStyles(Tooltip)>
+    </WithStyles(ForwardRef(Tooltip))>
   </ComponentWrapper>
   <WithStyles(ForwardRef(Menu))
     anchorEl={null}
@@ -170,7 +170,7 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
       ]
     }
   >
-    <WithStyles(Tooltip)
+    <WithStyles(ForwardRef(Tooltip))
       disableHoverListener={true}
       placement="bottom-start"
       title="Cannot be opened until resource is ready"
@@ -184,7 +184,7 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
           Open
         </ForwardRef>
       </div>
-    </WithStyles(Tooltip)>
+    </WithStyles(ForwardRef(Tooltip))>
   </ComponentWrapper>
   <ComponentWrapper
     className="buttonWrapper"
