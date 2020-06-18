@@ -19,6 +19,11 @@ function deleteStack(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteStackExec);
 }
 
+function updateStack(request, response) {
+  const errorMessage = 'Invalid stack update request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, updateStackExec);
+}
+
 function getOneById(request, response) {
   const errorMessage = 'Invalid stack fetch by ID request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByIdExec);
@@ -64,6 +69,16 @@ function createStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
 
+function updateStackExec(request, response) {
+  // Build request params
+  const { user } = request;
+  const params = matchedData(request);
+  // Handle request
+  return stackRepository.updateShareStatus(params.projectKey, user, params.name, params.shared)
+    .then(res => response.send(res))
+    .catch(controllerHelper.handleError(response, 'updating', TYPE, params.name));
+}
+
 function deleteStackExec(request, response) {
   // Build request params
   const { user } = request;
@@ -107,6 +122,12 @@ const deleteStackValidator = [
   checkExistsWithMsg('type'),
 ];
 
+const updateStackValidator = [
+  checkExistsWithMsg('name'),
+  checkExistsWithMsg('projectKey'),
+  checkExistsWithMsg('shared'),
+];
+
 const createStackValidator = [
   ...deleteStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
@@ -142,8 +163,14 @@ const createStackValidator = [
   checkExistsWithMsg('volumeMount'),
 ];
 
-const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };
+const validators = {
+  withIdValidator,
+  withNameValidator,
+  deleteStackValidator,
+  createStackValidator,
+  updateStackValidator,
+};
 
-const controllers = { getOneById, getOneByName, createStack, deleteStack };
+const controllers = { getOneById, getOneByName, createStack, deleteStack, updateStack };
 
 export default { ...validators, ...controllers };

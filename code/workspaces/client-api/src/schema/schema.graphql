@@ -51,6 +51,9 @@ type Mutation {
     # Create a new stack
     createStack(stack: StackCreationRequest): Stack
 
+    # Update a stack
+    updateStack(stack: StackUpdateRequest): Stack
+
     # Delete a stack
     deleteStack(stack: StackDeletionRequest): Stack
 
@@ -154,6 +157,13 @@ input StackCreationRequest {
     sourcePath: String
     isPublic: Boolean
     volumeMount: String
+    shared: VisibilityType
+    visible: VisibilityType
+}
+
+input StackUpdateRequest {
+    projectKey: String
+    name: String
     shared: VisibilityType
     visible: VisibilityType
 }

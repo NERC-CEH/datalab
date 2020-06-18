@@ -32,6 +32,12 @@ stackRouter.post(
   stack.createStackValidator,
   ew(stack.createStack),
 );
+stackRouter.put(
+  '/:projectKey',
+  projectPermissionWrapper(PROJECT_KEY_STACKS_DELETE),
+  stack.updateStackValidator,
+  ew(stack.updateStack),
+);
 stackRouter.delete(
   '/:projectKey',
   projectPermissionWrapper(PROJECT_KEY_STACKS_DELETE),
