@@ -165,7 +165,6 @@ input StackUpdateRequest {
     projectKey: String
     name: String
     shared: VisibilityType
-    visible: VisibilityType
 }
 
 # Type to describe the mutation for deleting a new Stack.

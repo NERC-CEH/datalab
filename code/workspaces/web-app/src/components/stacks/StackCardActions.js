@@ -96,8 +96,8 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
             Edit
           </MenuItem>
         </PermissionWrapper>}
-        {(stack.type === 'rstudio' || stack.type === 'jupyterlab' || stack.type === 'jupyter' || stack.type === 'nbviewer' || stack.type === 'rshiny')
-          && deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+        {(stack.type === 'rstudio' || stack.type === 'jupyterlab' || stack.type === 'jupyter' || stack.type === 'nbviewer' || stack.type === 'rshiny'
+          || stack.type === 'zeppelin') && deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem disabled={shared} onClick={() => shareStack(stack, 'project')}>
             Share
           </MenuItem>
