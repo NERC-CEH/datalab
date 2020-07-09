@@ -33,12 +33,13 @@ const StackCardActions = (props) => {
 };
 
 export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
-  deletePermission, editPermission, currentUserId, classes, getLogs }) => {
+  deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
   const ownsStack = !stack.users || stack.users.includes(currentUserId);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const shared = ['project'].includes(stack.shared) || ['project', 'public'].includes(stack.visible);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -95,6 +96,12 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
             Edit
           </MenuItem>
         </PermissionWrapper>}
+        {(stack.type === 'rstudio' || stack.type === 'jupyterlab' || stack.type === 'jupyter' || stack.type === 'nbviewer' || stack.type === 'rshiny')
+          && deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+          <MenuItem disabled={shared} onClick={() => shareStack(stack, 'project')}>
+            Share
+          </MenuItem>
+        </PermissionWrapper>}
         {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem onClick={() => deleteStack(stack)}>
             Delete
@@ -116,6 +123,7 @@ StackCardActions.propTypes = {
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
   getLogs: PropTypes.func,
+  shareStack: PropTypes.func,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,

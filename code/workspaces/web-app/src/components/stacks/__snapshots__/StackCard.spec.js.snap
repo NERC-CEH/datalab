@@ -53,10 +53,12 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
       editPermission="edit"
       openPermission="open"
       openStack={[Function]}
+      shareStack={[Function]}
       stack={
         Object {
           "displayName": "name1",
           "id": "100",
+          "shared": "private",
           "status": undefined,
           "type": "jupyter",
         }
@@ -126,10 +128,12 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
       editPermission="edit"
       openPermission="open"
       openStack={[Function]}
+      shareStack={[Function]}
       stack={
         Object {
           "displayName": "name1",
           "id": "100",
+          "shared": "private",
           "status": undefined,
           "type": "zeppelin",
         }
@@ -206,10 +210,12 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
       editPermission="edit"
       openPermission="open"
       openStack={[Function]}
+      shareStack={[Function]}
       stack={
         Object {
           "displayName": "name1",
           "id": "100",
+          "shared": "private",
           "status": "ready",
           "type": "jupyter",
         }

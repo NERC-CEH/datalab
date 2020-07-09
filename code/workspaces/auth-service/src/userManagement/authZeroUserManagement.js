@@ -52,7 +52,7 @@ export async function asyncGetUsers() {
       return processedUsers;
     } catch (err) {
       logger.error(err.message);
-      throw new Error('Unable to retrieve users from User Management Service.');
+      throw new Error(`Unable to retrieve users from User Management Service - ${err.message}`);
     }
   } catch (err) {
     logger.error(err.message);

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShareStackDialog renders to match snapshot 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Example Title
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))>
+      Warning about sharing this resource
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(IconButton)
+      icon="check"
+      onClick={[MockFunction onSubmit]}
+    >
+      Confirm
+    </WithStyles(IconButton)>
+    <WithStyles(IconButton)
+      icon="clear"
+      onClick={[MockFunction onCancel]}
+    >
+      Cancel
+    </WithStyles(IconButton)>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;

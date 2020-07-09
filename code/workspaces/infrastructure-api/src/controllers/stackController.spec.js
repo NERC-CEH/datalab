@@ -193,7 +193,7 @@ describe('Stack Controller', () => {
   });
 
   describe('updateStack', () => {
-    beforeEach(() => createValidatedRequest(mutationRequestBody(), stackController.updateStackValidator));
+    beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'project' }, stackController.updateStackValidator));
 
     it('should process a valid request', () => {
       const response = httpMocks.createResponse();
@@ -212,7 +212,7 @@ describe('Stack Controller', () => {
       return stackController.updateStack(request, response)
         .then(() => {
           expect(response.statusCode).toBe(500);
-          expect(response._getData()).toEqual({ error: 'error', message: 'Error updating stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+          expect(response._getData()).toEqual({ error: 'error', message: 'Error updating stack: abcd1234' }); // eslint-disable-line no-underscore-dangle
         })
         .catch((res) => {
           console.log(res);
@@ -221,7 +221,13 @@ describe('Stack Controller', () => {
     });
 
     it('should validate the shared field exists', () => createValidatedRequest({}, stackController.updateStackValidator)
-      .then(() => expectValidationError('shared', 'shared must be specified')));
+      .then(() => expectValidationError('shared', 'shared must be specified for notebooks')));
+
+    it('should validate the shared field value', () => {
+      const invalidRequest = { projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'private' };
+      return createValidatedRequest(invalidRequest, stackController.updateStackValidator)
+        .then(() => expectValidationError('shared', 'shared must be specified for notebooks'));
+    });
   });
 
   describe('getOneById', () => {

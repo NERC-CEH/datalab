@@ -91,4 +91,26 @@ describe('stackService', () => {
       });
     });
   });
+
+  describe('updateStackShareStatus', () => {
+    it('should build the correct mutation and unpack the results', () => {
+      const data = { stack: { name: 'name', projectKey: 'test', shared: 'project' } };
+      mockClient.prepareSuccess(data);
+
+      return stackService.updateStackShareStatus(data.stack).then((response) => {
+        expect(response).toEqual(data.stack);
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      const data = { stack: { name: 'name', projectKey: 'test', shared: 'project' } };
+      mockClient.prepareFailure('error');
+
+      return stackService.updateStackShareStatus(data.stack).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
 });

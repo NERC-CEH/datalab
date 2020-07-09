@@ -9,6 +9,7 @@ export const OPEN_STACK_ACTION = 'OPEN_STACK';
 export const CREATE_STACK_ACTION = 'CREATE_STACK';
 export const DELETE_STACK_ACTION = 'DELETE_STACK';
 export const GET_LOGS_ACTION = 'GET_LOGS';
+export const UPDATE_STACK_SHARE_STATUS_ACTION = 'UPDATE_STACK_SHARE_STATUS';
 
 const loadStacks = () => ({
   type: LOAD_STACKS_ACTION,
@@ -55,6 +56,11 @@ const getLogs = (projectKey, name) => ({
   payload: stackService.getLogs(projectKey, name),
 });
 
+const updateStackShareStatus = ({ projectKey, name, shared }) => ({
+  type: UPDATE_STACK_SHARE_STATUS_ACTION,
+  payload: stackService.updateStackShareStatus({ projectKey, name, shared }),
+});
+
 export default {
   loadStacks,
   loadStacksByCategory,
@@ -65,4 +71,5 @@ export default {
   createStack,
   deleteStack,
   getLogs,
+  updateStackShareStatus,
 };

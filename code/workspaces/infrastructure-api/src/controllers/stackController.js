@@ -125,7 +125,8 @@ const deleteStackValidator = [
 const updateStackValidator = [
   checkExistsWithMsg('name'),
   checkExistsWithMsg('projectKey'),
-  checkExistsWithMsg('shared'),
+  check('shared', 'shared must be specified for notebooks')
+    .custom((value, { req }) => 'project'.includes(req.body.shared)),
 ];
 
 const createStackValidator = [
