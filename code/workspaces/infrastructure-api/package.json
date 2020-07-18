@@ -19,7 +19,7 @@
     "fs-extra-promise": "1.0.1",
     "js-yaml": "3.13.1",
     "jwks-rsa": "1.6.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "mongoose": "5.7.5",
     "mustache": "3.0.1",
     "uuid": "3.3.2",
