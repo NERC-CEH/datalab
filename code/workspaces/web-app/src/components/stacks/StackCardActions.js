@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { statusTypes } from 'common';
+import { statusTypes, stackTypes } from 'common';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
@@ -13,6 +13,7 @@ import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 const { READY } = statusTypes;
 const MORE_ICON = 'more_vert';
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER, RSHINY } = stackTypes;
 
 const styles = theme => ({
   cardActions: {
@@ -86,7 +87,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {stack.type === 'rshiny' && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+        {[RSHINY].includes(stack.type) && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem onClick={() => getLogs(stack)}>
             Logs
           </MenuItem>
@@ -96,11 +97,17 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
             Edit
           </MenuItem>
         </PermissionWrapper>}
-        {(stack.type === 'rstudio' || stack.type === 'jupyterlab' || stack.type === 'jupyter' || stack.type === 'nbviewer' || stack.type === 'rshiny'
-          || stack.type === 'zeppelin') && deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-          <MenuItem disabled={shared} onClick={() => shareStack(stack, 'project')}>
-            Share
-          </MenuItem>
+        {([RSTUDIO, JUPYTERLAB, JUPYTER, ZEPPELIN, NBVIEWER, RSHINY].includes(stack.type))
+            && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+          <Tooltip
+           title='Resource is already shared within the project'
+           disableHoverListener={!shared}>
+            <div>
+              <MenuItem disabled={shared} onClick={() => shareStack(stack, 'project')}>
+                Share
+              </MenuItem>
+            </div>
+          </Tooltip>
         </PermissionWrapper>}
         {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem onClick={() => deleteStack(stack)}>

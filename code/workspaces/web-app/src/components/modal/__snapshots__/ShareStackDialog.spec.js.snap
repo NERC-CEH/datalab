@@ -14,18 +14,18 @@ exports[`ShareStackDialog renders to match snapshot 1`] = `
     </WithStyles(ForwardRef(DialogContentText))>
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(IconButton)
+    <SecondaryActionButton
       icon="check"
       onClick={[MockFunction onSubmit]}
     >
       Confirm
-    </WithStyles(IconButton)>
-    <WithStyles(IconButton)
+    </SecondaryActionButton>
+    <SecondaryActionButton
       icon="clear"
       onClick={[MockFunction onCancel]}
     >
       Cancel
-    </WithStyles(IconButton)>
+    </SecondaryActionButton>
   </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;

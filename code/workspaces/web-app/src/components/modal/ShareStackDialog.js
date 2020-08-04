@@ -5,7 +5,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import IconButton from '../common/control/IconButton';
+import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 function ShareStackDialog({ onSubmit, title, body, onCancel }) {
   return (
@@ -15,8 +15,8 @@ function ShareStackDialog({ onSubmit, title, body, onCancel }) {
         <DialogContentText>{body}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <IconButton onClick={onSubmit} icon="check">Confirm</IconButton>
-        <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
+        <SecondaryActionButton onClick={onSubmit} icon="check">Confirm</SecondaryActionButton>
+        <SecondaryActionButton onClick={onCancel} icon="clear">Cancel</SecondaryActionButton>
       </DialogActions>
     </Dialog>
   );
