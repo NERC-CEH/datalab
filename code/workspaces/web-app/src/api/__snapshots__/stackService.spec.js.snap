@@ -35,3 +35,13 @@ exports[`stackService loadStacks should build the correct query and unpack the r
       }
     }"
 `;
+
+exports[`stackService updateStackShareStatus should build the correct mutation and unpack the results 1`] = `
+"
+    UpdateStack($stack: StackUpdateRequest) {
+      updateStack(stack: $stack) {
+        name,
+        shared
+      }
+    }"
+`;

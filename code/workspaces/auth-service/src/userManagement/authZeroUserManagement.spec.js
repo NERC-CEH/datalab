@@ -62,7 +62,7 @@ describe('auth0 management API', () => {
         .reply(401);
 
       return asyncGetUsers()
-        .catch(err => expect(err.message).toBe('Unable to retrieve users from User Management Service.'));
+        .catch(err => expect(err.message).toBe('Unable to retrieve users from User Management Service - Request failed with status code 401'));
     });
   });
 

@@ -15,7 +15,7 @@ import storageService from '../infrastructure/storageService';
 import logsService from '../dataaccess/logsService';
 
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
-const { elementPermissions: { STACKS_CREATE, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
+const { elementPermissions: { STACKS_CREATE, STACKS_EDIT, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
 const { elementPermissions: { PERMISSIONS_CREATE, PERMISSIONS_DELETE } } = permissionTypes;
 const { elementPermissions: { SETTINGS_EDIT } } = permissionTypes;
 const { READY } = statusTypes;
@@ -45,6 +45,7 @@ const resolvers = {
 
   Mutation: {
     createStack: (obj, { stack }, { user, token }) => projectPermissionWrapper(stack, STACKS_CREATE, user, () => stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
+    updateStack: (obj, { stack }, { user, token }) => projectPermissionWrapper(stack, STACKS_EDIT, user, () => stackApi.updateStack({ user, token }, DATALAB_NAME, stack)),
     deleteStack: (obj, { stack }, { user, token }) => projectPermissionWrapper(stack, STACKS_DELETE, user, () => stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
     createDataStore: (obj, args, { user, token }) => (
       projectPermissionWrapper(args, STORAGE_CREATE, user, () => storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token))

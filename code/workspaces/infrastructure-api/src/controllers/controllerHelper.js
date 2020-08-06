@@ -7,7 +7,7 @@ function validateAndExecute(request, response, errorMessage, execute) {
 
   if (!errors.isEmpty()) {
     logger.error(`${errorMessage}: ${JSON.stringify(request.body)}`);
-    logger.error(errors.mapped());
+    logger.error(JSON.stringify(errors.mapped()));
     return response.status(400).json({ errors: errors.mapped() });
   }
 

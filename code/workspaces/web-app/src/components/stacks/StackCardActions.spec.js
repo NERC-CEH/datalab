@@ -8,6 +8,7 @@ jest.mock('../../hooks/authHooks');
 const openStackMock = jest.fn();
 const deleteStackMock = jest.fn();
 const editStackMock = jest.fn();
+const shareStackMock = jest.fn();
 
 const generateProps = () => ({
   stack: {
@@ -16,11 +17,13 @@ const generateProps = () => ({
     type: 'expectedType',
     status: 'ready',
     users: ['owner-id'],
+    shared: 'private',
   },
   currentUserId: 'owner-id',
   openStack: openStackMock,
   deleteStack: deleteStackMock,
   editStack: editStackMock,
+  shareStack: shareStackMock,
   userPermissions: ['open', 'delete', 'edit'],
   openPermission: 'open',
   deletePermission: 'delete',
@@ -102,6 +105,7 @@ describe('PureStackCardActions', () => {
       type: 'expectedType',
       status: 'ready',
       users: ['owner-id'],
+      shared: 'private',
     });
   });
 
@@ -123,6 +127,7 @@ describe('PureStackCardActions', () => {
       type: 'expectedType',
       status: 'ready',
       users: ['owner-id'],
+      shared: 'private',
     });
   });
 
@@ -144,10 +149,11 @@ describe('PureStackCardActions', () => {
       type: 'expectedType',
       status: 'ready',
       users: ['owner-id'],
+      shared: 'private',
     });
   });
 
-  it('Should not render edit and delete buttons if current user is not the owner', () => {
+  it('Should not render edit/delete/share buttons if current user is not the owner', () => {
     const props = generateProps();
     props.currentUserId = 'not-the-owner-id';
     expect(shallowRender(props)).toMatchSnapshot();

@@ -11,6 +11,8 @@ const testStacks = [
   { id: '4321', name: 'Stack 2' },
 ];
 
+const updateMessage = { modified: 1 };
+
 const context = { token: 'token' };
 const PROJECT_KEY = 'project';
 
@@ -69,6 +71,14 @@ describe('stackService', () => {
 
     return stackService.createStack('project', 'stack', context)
       .then(response => expect(response).toEqual(testStack));
+  });
+
+  it('updateStack makes an api request', () => {
+    httpMock.onPut('http://localhost:8003/stack/project')
+      .reply(200, updateMessage);
+
+    return stackService.updateStack('project', 'stack', context)
+      .then(response => expect(response).toEqual(updateMessage));
   });
 
   it('deleteStack makes an api request', () => {

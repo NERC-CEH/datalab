@@ -24,9 +24,11 @@ describe('StackCard', () => {
       displayName: 'name1',
       type,
       status,
+      shared: 'private',
     },
     openStack: () => {},
     deleteStack: () => {},
+    shareStack: () => {},
     typeName: 'notebook',
     ...permissionProps,
   });

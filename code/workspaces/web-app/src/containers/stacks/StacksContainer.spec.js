@@ -95,6 +95,8 @@ describe('StacksContainer', () => {
     const deleteStackMock = jest.fn();
     const restFormMock = jest.fn();
     const getLogsMock = jest.fn();
+    const shareStackMock = jest.fn();
+    const updateStackShareStatusMock = jest.fn();
 
     const generateProps = () => ({
       stacks,
@@ -114,6 +116,8 @@ describe('StacksContainer', () => {
         resetForm: restFormMock,
         listUsers: listUsersMock,
         getLogs: getLogsMock,
+        updateStackShareStatus: updateStackShareStatusMock,
+        shareStack: shareStackMock,
       },
       projectKey: { fetching: false, value: 'projtest' },
     });
@@ -243,6 +247,58 @@ describe('StacksContainer', () => {
         .then(() => {
           expect(deleteStackMock).toHaveBeenCalledTimes(1);
           expect(deleteStackMock).toHaveBeenCalledWith(stack);
+        });
+    });
+
+    it('confirmShareStack calls openModalDialog with correct action', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act/Assert
+      const output = shallowRenderPure(props);
+      const shareStack = output.prop('shareStack');
+      expect(openModalDialogMock).not.toHaveBeenCalled();
+      shareStack(stack, 'project');
+      expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      expect(firstMockCall[0]).toBe('MODAL_TYPE_SHARE_STACK');
+    });
+
+    it('confirmShareStack generates correct dialog', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const shareStack = output.prop('shareStack');
+      shareStack(stack, 'project');
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, body, onCancel } = firstMockCall[1];
+      expect({ title, body }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('confirmShareStack - onSubmit calls shareStack with correct value', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const shareStack = output.prop('shareStack');
+      shareStack(stack, 'project');
+      const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+      // Assert
+      expect(updateStackShareStatusMock).not.toHaveBeenCalled();
+      return onSubmit()
+        .then(() => {
+          expect(updateStackShareStatusMock).toHaveBeenCalledTimes(1);
+          expect(updateStackShareStatusMock).toHaveBeenCalledWith({ ...stack, shared: 'project' });
         });
     });
 

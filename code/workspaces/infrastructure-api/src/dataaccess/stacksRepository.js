@@ -74,6 +74,7 @@ function createOrUpdate(projectKey, user, stack) {
 }
 
 function deleteStack(projectKey, user, stack) {
+  // Filter exclusively by owner (User)
   return Stack()
     .find()
     .filterByProject(projectKey)
@@ -97,6 +98,15 @@ function updateStatus(stack) {
     .exec();
 }
 
+function updateShareStatus(projectKey, user, name, shared) {
+  // Filter exclusively by owner (User)
+  return Stack()
+    .where({ name, projectKey })
+    .filterByUser(user)
+    .updateOne({ shared })
+    .exec();
+}
+
 export default {
   getAll,
   getAllByProject,
@@ -109,4 +119,5 @@ export default {
   deleteStack,
   userCanDeleteStack,
   updateStatus,
+  updateShareStatus,
 };

@@ -108,7 +108,7 @@ exports[`PureStackCardActions Should not render Open if stack is not ready 1`] =
 </div>
 `;
 
-exports[`PureStackCardActions Should not render edit and delete buttons if current user is not the owner 1`] = `
+exports[`PureStackCardActions Should not render edit/delete/share buttons if current user is not the owner 1`] = `
 <div
   className="cardActions"
 >
@@ -278,10 +278,12 @@ exports[`StackCardActions passes props down to child component as well as curren
   editStack={[MockFunction]}
   openPermission="open"
   openStack={[MockFunction]}
+  shareStack={[MockFunction]}
   stack={
     Object {
       "displayName": "expectedDisplayName",
       "id": "abc1234",
+      "shared": "private",
       "status": "ready",
       "type": "expectedType",
       "users": Array [

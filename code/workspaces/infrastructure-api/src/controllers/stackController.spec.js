@@ -11,6 +11,7 @@ jest.mock('../dataaccess/stacksRepository');
 
 const createStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const deleteStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+const updateShareStatusMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const getOneByIdMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const getOneByNameMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const userCanDeleteStackMock = jest.fn().mockReturnValue(Promise.resolve(true));
@@ -20,6 +21,7 @@ stackRepository.default = {
   getOneById: getOneByIdMock,
   getOneByName: getOneByNameMock,
   userCanDeleteStack: userCanDeleteStackMock,
+  updateShareStatus: updateShareStatusMock,
 };
 
 let request;
@@ -187,6 +189,44 @@ describe('Stack Controller', () => {
         .catch(() => {
           expect(true).toBeFalsy();
         });
+    });
+  });
+
+  describe('updateStack', () => {
+    beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'project' }, stackController.updateStackValidator));
+
+    it('should process a valid request', () => {
+      const response = httpMocks.createResponse();
+
+      return stackController.updateStack(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(200);
+        });
+    });
+
+    it('should return 500 for failed request', () => {
+      updateShareStatusMock.mockReturnValue(Promise.reject({ message: 'error' }));
+
+      const response = httpMocks.createResponse();
+
+      return stackController.updateStack(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(500);
+          expect(response._getData()).toEqual({ error: 'error', message: 'Error updating stack: abcd1234' }); // eslint-disable-line no-underscore-dangle
+        })
+        .catch((res) => {
+          console.log(res);
+          expect(true).toBeFalsy();
+        });
+    });
+
+    it('should validate the shared field exists', () => createValidatedRequest({}, stackController.updateStackValidator)
+      .then(() => expectValidationError('shared', 'shared must be specified for notebooks')));
+
+    it('should validate the shared field value', () => {
+      const invalidRequest = { projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'private' };
+      return createValidatedRequest(invalidRequest, stackController.updateStackValidator)
+        .then(() => expectValidationError('shared', 'shared must be specified for notebooks'));
     });
   });
 

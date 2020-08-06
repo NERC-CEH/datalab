@@ -14,10 +14,12 @@ const stack = { name: 'expectedName', type: 'expectedType', projectKey: 'project
 const getByNameMock = jest.fn().mockReturnValue(Promise.resolve(datalabInfo));
 const createStackMock = jest.fn();
 const deleteStackMock = jest.fn();
+const updateStackMock = jest.fn();
 
 datalabRepository.getByName = getByNameMock;
 stackService.createStack = createStackMock;
 stackService.deleteStack = deleteStackMock;
+stackService.updateStack = updateStackMock;
 
 describe('Stack API', () => {
   afterEach(() => {
@@ -92,6 +94,45 @@ describe('Stack API', () => {
     getByNameMock.mockReturnValue(Promise.reject(new Error('failedRequest')));
 
     return stackApi.deleteStack(context, 'expectedDatalabName', stack)
+      .catch(() => {
+        expect(logger.getInfoMessages()).toMatchSnapshot();
+        expect(logger.getDebugMessages()).toMatchSnapshot();
+        expect(logger.getErrorMessages()).toMatchSnapshot();
+      });
+  });
+
+  it('should make correct API request for update', () => {
+    updateStackMock.mockReturnValue(Promise.resolve('expectedPayload'));
+    getByNameMock.mockReturnValue(Promise.resolve(datalabInfo));
+
+    expect(getByNameMock).not.toHaveBeenCalled();
+    expect(updateStackMock).not.toHaveBeenCalled();
+
+    return stackApi.updateStack(context, 'expectedDatalabName', stack)
+      .then((response) => {
+        expect(getByNameMock).toHaveBeenCalledWith(context.user, 'expectedDatalabName');
+        expect(updateStackMock).toHaveBeenCalledWith(stack.projectKey, { ...stack, datalabInfo, isPublic: true }, context);
+        expect(response).toBe('expectedPayload');
+      });
+  });
+
+  it('should log action on successful update request', () => {
+    updateStackMock.mockReturnValue(Promise.resolve('expectedPayload'));
+    getByNameMock.mockReturnValue(Promise.resolve(datalabInfo));
+
+    return stackApi.updateStack(context, 'expectedDatalabName', stack)
+      .then(() => {
+        expect(logger.getInfoMessages()).toMatchSnapshot();
+        expect(logger.getDebugMessages()).toMatchSnapshot();
+        expect(logger.getErrorMessages()).toMatchSnapshot();
+      });
+  });
+
+  it('should log error detail on failed update request', () => {
+    updateStackMock.mockReturnValue(Promise.resolve('expectedPayload'));
+    getByNameMock.mockReturnValue(Promise.reject(new Error('failedRequest')));
+
+    return stackApi.updateStack(context, 'expectedDatalabName', stack)
       .catch(() => {
         expect(logger.getInfoMessages()).toMatchSnapshot();
         expect(logger.getDebugMessages()).toMatchSnapshot();

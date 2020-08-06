@@ -5,7 +5,7 @@ import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { permissionTypes } from 'common';
-import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS } from '../../constants/modaltypes';
+import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
@@ -25,6 +25,8 @@ class StacksContainer extends Component {
     this.openCreationForm = this.openCreationForm.bind(this);
     this.deleteStack = this.deleteStack.bind(this);
     this.confirmDeleteStack = this.confirmDeleteStack.bind(this);
+    this.shareStack = this.shareStack.bind(this);
+    this.confirmShareStack = this.confirmShareStack.bind(this);
     this.loadStack = this.loadStack.bind(this);
     this.updateStack = this.updateStack.bind(this);
     this.setUpdateTimeout = this.setUpdateTimeout.bind(this);
@@ -50,6 +52,19 @@ class StacksContainer extends Component {
     .then(() => notify.success(`${this.props.typeName} created`))
     .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
     .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
+
+  shareStack = (stack, shared) => Promise.resolve(this.props.actions.closeModalDialog())
+    .then(() => this.props.actions.updateStackShareStatus({ ...stack, shared }))
+    .then(() => notify.success(`Resource: ${stack.name} is now shared`))
+    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
+
+  confirmShareStack = (stack, shared) => this.props.actions.openModalDialog(MODAL_TYPE_SHARE_STACK, {
+    title: `Share ${this.props.typeName}`,
+    body: `Please confirm you wish to share the ${stack.displayName} ${this.props.typeName} with other users within the project. 
+      WARNING: This action cannot currently be reversed.`,
+    onCancel: this.props.actions.closeModalDialog,
+    onSubmit: () => this.shareStack(stack, 'project'),
+  });
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {
     title: `Create a ${this.props.typeName}`,
@@ -131,6 +146,7 @@ class StacksContainer extends Component {
         getLogs={this.getLogs}
         openStack={this.openStack}
         deleteStack={this.confirmDeleteStack}
+        shareStack={this.confirmShareStack}
         openCreationForm={this.openCreationForm}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
@@ -161,6 +177,7 @@ StacksContainer.propTypes = {
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
     getLogs: PropTypes.func,
+    shareStack: PropTypes.func,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectKey: PropTypes.object.isRequired,

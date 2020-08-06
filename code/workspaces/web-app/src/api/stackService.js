@@ -76,6 +76,19 @@ function getLogs(projectKey, name) {
     .then(errorHandler('data.logs'));
 }
 
+function updateStackShareStatus(stack) {
+  const mutation = `
+    UpdateStack($stack: StackUpdateRequest) {
+      updateStack(stack: $stack) {
+        name,
+        shared
+      }
+    }`;
+
+  return gqlMutation(mutation, { stack })
+    .then(errorHandler('data.stack'));
+}
+
 export default {
   loadStacks,
   loadStacksByCategory,
@@ -83,4 +96,5 @@ export default {
   createStack,
   deleteStack,
   getLogs,
+  updateStackShareStatus,
 };
