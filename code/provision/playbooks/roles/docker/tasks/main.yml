@@ -37,7 +37,7 @@
 
 - name: Update repositories cache and install docker
   apt:
-    name: "docker-ce={{ docker_version }}"
+    name: "docker.io={{ docker_version }}"
     update_cache: yes
 
 # Docker post installation steps

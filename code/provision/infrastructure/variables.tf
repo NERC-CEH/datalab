@@ -48,12 +48,37 @@ variable "number_of_bastions" {
   default = 1
 }
 
+variable "number_of_k8s_masters" {
+  type = number
+  default = 1
+}
+
 variable "number_of_k8s_nodes" {
+  type = number
+  default = 3
+}
+
+variable "number_of_k8s_nodes_nov_2019" {
   type = number
   default = 4
 }
 
 variable "number_of_gluster_nodes" {
+  type = number
+  default = 4
+}
+
+variable "number_of_rke_k8s_masters" {
+  type = number
+  default = 3
+}
+
+variable "number_of_rke_k8s_nodes" {
+  type = number
+  default = 6
+}
+
+variable "number_of_rke_gluster_nodes" {
   type = number
   default = 3
 }
@@ -86,4 +111,10 @@ variable "flavor_gluster_node" {
   type = string
   description = "The Gluster flavour"
   default     = "j2_medium"
+}
+
+variable "flavor_rke_gluster_node" {
+  type = string
+  description = "The Gluster flavour"
+  default     = "j3_large"
 }

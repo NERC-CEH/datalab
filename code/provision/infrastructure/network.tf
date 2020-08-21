@@ -132,18 +132,18 @@ resource "openstack_compute_secgroup_v2" "gluster" {
   }
 }
 
-resource "openstack_compute_floatingip_associate_v2" "bastion" {
-  count       = var.number_of_bastions
-  floating_ip = var.bastion_fips[count.index]
-  instance_id = openstack_compute_instance_v2.bastion.*.id[count.index]
-}
+#resource "openstack_compute_floatingip_associate_v2" "bastion" {
+#  count       = var.number_of_bastions
+#  floating_ip = var.bastion_fips[count.index]
+#  instance_id = openstack_compute_instance_v2.bastion.*.id[count.index]
+#}
+#
+#resource "openstack_compute_floatingip_associate_v2" "load_balancer" {
+#  floating_ip = var.load_balancer_fip
+#  instance_id = openstack_compute_instance_v2.load_balancer.id
+#}
 
-resource "openstack_compute_floatingip_associate_v2" "load_balancer" {
-  floating_ip = var.load_balancer_fip
-  instance_id = openstack_compute_instance_v2.load_balancer.id
-}
-
-resource "openstack_compute_floatingip_associate_v2" "test_load_balancer" {
-  floating_ip = var.test_load_balancer_fip
-  instance_id = openstack_compute_instance_v2.test_load_balancer.id
-}
+#resource "openstack_compute_floatingip_associate_v2" "test_load_balancer" {
+#  floating_ip = var.test_load_balancer_fip
+#  instance_id = openstack_compute_instance_v2.test_load_balancer.id
+#}

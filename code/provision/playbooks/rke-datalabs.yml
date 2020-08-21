@@ -1,0 +1,21 @@
+- name: Configure Load Balancers
+  import_playbook: load-balancer.yml
+
+- name: Prepare RKE Kubernetes Cluster
+  import_playbook: prepare-rke-cluster.yml
+
+- name: Install RKE Kubernetes Cluster
+  import_playbook: rke-kubernetes.yml
+
+- name: Configure Gluster Servers
+  import_playbook: gluster.yml
+
+- name: Configure RKE Kubernetes Cluster
+  import_playbook: configure-rke-cluster.yml
+
+- name: Configure Heketi as dynamic Gluster provisioner
+  import_playbook: heketi.yml
+
+- name: Install Kubernetes Tools (Monitoring and Logging)
+  import_playbook: rke-kubernetes-tools.yml
+

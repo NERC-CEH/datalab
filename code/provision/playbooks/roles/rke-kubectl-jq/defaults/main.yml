@@ -1,0 +1,5 @@
+---
+rke_kubernetes_version: v1.17.0-rancher1-2
+
+#rke_config_dir: "{{ ansible_env.HOME | default(ansible_env.PWD) | default('/root') }}/rke"
+rke_config_dir: "/home/vagrant/rke"

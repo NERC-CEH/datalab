@@ -76,3 +76,10 @@
   register: mongo_password_secret
   changed_when: mongo_password_secret.rc == 0
   failed_when: mongo_password_secret.rc != 0 and 'AlreadyExists' not in mongo_password_secret.stderr
+
+- name: CEH Deploy Default TLS Secret to Kube System Namespace
+  shell: kubectl create secret generic tls-secret --from-literal=tls.crt="{{ ssl_certificate }}" --from-literal=tls.key="{{ ssl_private_key }}" --type=kubernetes.io/tls -n kube-system
+  register: default_tls_secret_result
+  changed_when: default_tls_secret_result.rc == 0
+  failed_when: default_tls_secret_result.rc != 0 and 'AlreadyExists' not in default_tls_secret_result.stderr
+

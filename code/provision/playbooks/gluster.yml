@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: ceh-datalabs-rke-k8s-master-1
   tasks:
     - name: Delete key pair
       local_action: file path=/tmp/keys state=absent
@@ -8,11 +8,13 @@
         path: /tmp/keys
         state: directory
         mode: 0755
+      delegate_to: 127.0.0.1
 
     - name: Create new ssh key pair
       shell: ssh-keygen -b 2048 -t rsa -f /tmp/keys/heketi_id_rsa -q -N ""
+      delegate_to: 127.0.0.1
 
-- hosts: gluster-node
+- hosts: rke-gluster-node
   become: yes
   become_method: sudo
 
@@ -51,7 +53,7 @@
         state: present
         key: "{{ lookup('file', '/tmp/keys/heketi_id_rsa.pub') }}"
 
-- hosts: k8s-master
+- hosts: ceh-datalabs-rke-k8s-master-1
   become: yes
   become_method: sudo
 
@@ -65,16 +67,16 @@
         mode: u+rw,g-rwx,o-rwx
         force: yes
 
-- hosts: k8s-master
+- hosts: ceh-datalabs-rke-k8s-master-1
   become: yes
   become_method: sudo
 
   roles:
     - role: known-hosts
-      server_group: gluster-node
+      server_group: rke-gluster-node
 
 
-- hosts: localhost
+- hosts: ceh-datalabs-rke-k8s-master-1
   tasks:
     - name: Delete key pair
       local_action: file path=/tmp/keys state=absent

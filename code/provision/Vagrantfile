@@ -11,12 +11,16 @@ Vagrant.configure("2") do |config|
     control.vm.synced_folder "~/.config/openstack", "/home/vagrant/.config/openstack"
     control.vm.synced_folder "playbooks", "/home/vagrant/playbooks"
     control.vm.synced_folder "infrastructure", "/home/vagrant/infrastructure"
+    control.vm.synced_folder "rke", "/home/vagrant/rke"
     control.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
     end
 
     control.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "playbook.yml"
+      ansible.install_mode = "pip"
+      ansible.version = "2.9.5"
+      #ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
     end
   end
 end

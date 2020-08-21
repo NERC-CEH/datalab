@@ -98,7 +98,7 @@
     body: "{{ lookup('file','secret-admin-policy.json') }}"
     body_format: json
     return_content: yes
-    status_code: 204
+    status_code: 200
 
 - name: Enable App Role
   uri:
