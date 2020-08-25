@@ -35,6 +35,6 @@ code/venv/
 
 code/provision/rke/jasminuser-ssh-keys/id_rsa
 code/provision/rke/cluster.rkestate
-code/provision/rke/kube_config_cluster.
+code/provision/rke/kube_config_cluster.yml
 
 code/provision/infrastructure/provider.tf
