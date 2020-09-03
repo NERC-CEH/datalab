@@ -3,8 +3,7 @@ import { createShallow } from '@material-ui/core/test-utils';
 import NewStackButton from './NewStackButton';
 
 function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
+  const shallow = createShallow();
   return shallow(<NewStackButton {...props} />);
 }
 

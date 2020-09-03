@@ -47,6 +47,12 @@
         "consistent": true
       }
     ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ]
   },
   "settings": {
     "react": {

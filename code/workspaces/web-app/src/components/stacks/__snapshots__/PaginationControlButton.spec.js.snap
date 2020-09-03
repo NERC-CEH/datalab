@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationControlButton renders correctly when variant is "next" and it is disabled 1`] = `
+<WithStyles(ForwardRef(Tooltip))
+  title="No next page to goto"
+>
+  <span>
+     
+    <WithStyles(ForwardRef(IconButton))
+      disabled={true}
+      onClick={[MockFunction onClick]}
+      size="small"
+    >
+      <NavigateNextRoundedIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </span>
+</WithStyles(ForwardRef(Tooltip))>
+`;
+
+exports[`PaginationControlButton renders correctly when variant is "next" and it is not disabled 1`] = `
+<WithStyles(ForwardRef(Tooltip))
+  title="Next page"
+>
+  <span>
+     
+    <WithStyles(ForwardRef(IconButton))
+      disabled={false}
+      onClick={[MockFunction onClick]}
+      size="small"
+    >
+      <NavigateNextRoundedIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </span>
+</WithStyles(ForwardRef(Tooltip))>
+`;
+
+exports[`PaginationControlButton renders correctly when variant is "previous" and it is disabled 1`] = `
+<WithStyles(ForwardRef(Tooltip))
+  title="No previous page to goto"
+>
+  <span>
+     
+    <WithStyles(ForwardRef(IconButton))
+      disabled={true}
+      onClick={[MockFunction onClick]}
+      size="small"
+    >
+      <NavigateBeforeRoundedIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </span>
+</WithStyles(ForwardRef(Tooltip))>
+`;
+
+exports[`PaginationControlButton renders correctly when variant is "previous" and it is not disabled 1`] = `
+<WithStyles(ForwardRef(Tooltip))
+  title="Previous page"
+>
+  <span>
+     
+    <WithStyles(ForwardRef(IconButton))
+      disabled={false}
+      onClick={[MockFunction onClick]}
+      size="small"
+    >
+      <NavigateBeforeRoundedIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </span>
+</WithStyles(ForwardRef(Tooltip))>
+`;
