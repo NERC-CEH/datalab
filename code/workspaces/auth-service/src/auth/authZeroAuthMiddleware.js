@@ -6,13 +6,13 @@ const secretStrategy = jwksRsa.expressJwtSecret({
   cache: true,
   rateLimit: true,
   jwksRequestsPerMinute: 10,
-  jwksUri: 'https://mjbr.eu.auth0.com/.well-known/jwks.json',
+  jwksUri: `https://${config.get('authZeroDomain')}/.well-known/jwks.json`,
 });
 
 const baseConfig = {
   secret: secretStrategy,
   audience: config.get('authZeroAudience'),
-  issuer: 'https://mjbr.eu.auth0.com/',
+  issuer: `https://${config.get('authZeroDomain')}/`,
   algorithms: ['RS256'],
 };
 

@@ -5,12 +5,12 @@ import config from '../config/config';
 import requestAccessToken from '../auth/accessToken';
 import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
-export const authZeroManagementApi = 'https://mjbr.eu.auth0.com/api/v2';
+export const authZeroManagementApi = `https://${config.get('authZeroDomain')}/api/v2`;
 const PAGE_LIMIT = 100;
 const AUTH0_MAXIMUM = 1000;
 
 const accessTokenRequest = () => ({
-  audience: `https://${config.get('authZeroDomain')}/api/v2/`,
+  audience: `${authZeroManagementApi}/`,
   client_id: config.get('userManagementClientId'),
   client_secret: config.get('userManagementClientSecret'),
 });
