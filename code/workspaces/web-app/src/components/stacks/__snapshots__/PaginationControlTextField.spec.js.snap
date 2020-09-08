@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationControlTextField renders with the provided pageInputValue as the value 1`] = `
+<WithStyles(ForwardRef(TextField))
+  className="makeStyles-pageNumberInput-1"
+  inputProps={
+    Object {
+      "style": Object {
+        "padding": 5,
+        "textAlign": "center",
+      },
+    }
+  }
+  margin="dense"
+  onBlur={[Function]}
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  size="small"
+  value={5}
+  variant="outlined"
+/>
+`;

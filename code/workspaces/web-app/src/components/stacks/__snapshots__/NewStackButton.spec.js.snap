@@ -3,7 +3,6 @@
 exports[`New Stack Button creates correct snapshot 1`] = `
 <PagePrimaryActionButton
   aria-label="add"
-  className="NewStackButton-button-1"
   onClick={[Function]}
 >
   Create Stack

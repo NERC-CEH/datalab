@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination renders array of additional items in control bar after pagination controls in own div 1`] = `
+<div>
+  <div>
+    <div
+      key="0"
+    >
+      Item 
+      0
+    </div>
+    <div
+      key="1"
+    >
+      Item 
+      1
+    </div>
+  </div>
+  <div
+    className="makeStyles-paginationControlBar-1"
+  >
+    <PaginationControls
+      numPages={2}
+      pageNum={0}
+      setPageNum={[Function]}
+    />
+    <div>
+      <span>
+        Bar Item 1
+      </span>
+      <span>
+        Bar Item 1
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Pagination renders single additional item in control bar after pagination controls in own div 1`] = `
+<div>
+  <div>
+    <div
+      key="0"
+    >
+      Item 
+      0
+    </div>
+    <div
+      key="1"
+    >
+      Item 
+      1
+    </div>
+  </div>
+  <div
+    className="makeStyles-paginationControlBar-1"
+  >
+    <PaginationControls
+      numPages={2}
+      pageNum={0}
+      setPageNum={[Function]}
+    />
+    <div>
+      <span>
+        Bar Item
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Pagination renders the correct number of items from the start of the array on the first page 1`] = `
+<div>
+  <div>
+    <div
+      key="0"
+    >
+      Item 
+      0
+    </div>
+    <div
+      key="1"
+    >
+      Item 
+      1
+    </div>
+    <div
+      key="2"
+    >
+      Item 
+      2
+    </div>
+    <div
+      key="3"
+    >
+      Item 
+      3
+    </div>
+    <div
+      key="4"
+    >
+      Item 
+      4
+    </div>
+  </div>
+  <div
+    className="makeStyles-paginationControlBar-1"
+  >
+    <PaginationControls
+      numPages={2}
+      pageNum={0}
+      setPageNum={[Function]}
+    />
+    <div />
+  </div>
+</div>
+`;

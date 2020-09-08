@@ -42,7 +42,7 @@ Object {
 `;
 
 exports[`StacksContainer is a container which passes correct props to StackCard 1`] = `
-<WithStyles(StackCards)
+<StackCards
   createPermission="projects:projtest:stacks:create"
   deletePermission="projects:projtest:stacks:delete"
   deleteStack={[Function]}
