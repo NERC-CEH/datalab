@@ -48,7 +48,7 @@ describe('auth', () => {
         id_token: 'expectedIdToken',
         access_token: 'expectedAccessToken',
         identity: { sub: 'exampleUserId' },
-        expiresAt: moment.utc().add(10, 'hours'),
+        expires_at: moment.utc().add(10, 'hours'),
       }),
     );
   });
