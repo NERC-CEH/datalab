@@ -79,16 +79,14 @@ function processHash(authResponse) {
 }
 
 function processResponse(authResponse) {
-  const state = undefined;
-  const appRedirect = state ? state.appRedirect : undefined;
-  const expiresAt = authResponse.expiresAt || expiresAtCalculator(authResponse.expires_at);
+  const appRedirect = undefined;
+  const expiresAt = authResponse.expires_at || expiresAtCalculator(authResponse.expires_at);
   const identity = authResponse.identity || processIdentity(authResponse.profile);
 
   return {
     ...authResponse,
     appRedirect,
     expiresAt,
-    state,
     identity,
   };
 }
@@ -107,12 +105,13 @@ let authSession;
 
 const initialiseAuth = (authConfig) => {
   if (!authSession) {
+    Oidc.Log.logger = console;
+    Oidc.Log.level = Oidc.Log.INFO;
+
     const userManagerConfig = {
       ...authConfig,
       userStore: new Oidc.WebStorageStateStore(),
     };
-    Oidc.Log.logger = console;
-    Oidc.Log.level = Oidc.Log.INFO;
 
     const userManager = new Oidc.UserManager(userManagerConfig);
     const PromisifyUserManager = Promise.promisifyAll(userManager);

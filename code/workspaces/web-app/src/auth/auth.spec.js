@@ -31,6 +31,18 @@ const auth = new PureAuth(MockAuth, MockAuth, authConfig);
 describe('auth', () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    const location = {
+      ...window.location,
+      pathname: 'expectedPathname',
+    };
+
+    delete window.location;
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: location,
+      configurable: true,
+    });
+
     signinRedirectCallbackMock.mockReturnValue(
       Promise.resolve({
         id_token: 'expectedIdToken',
@@ -47,7 +59,7 @@ describe('auth', () => {
 
     // Assert
     expect(signinRedirectMock.mock.calls.length).toBe(1);
-    expect(signinRedirectMock).toBeCalled();
+    expect(signinRedirectMock).toBeCalledWith({ appRedirect: "expectedPathname"});
   });
 
   it('logout calls clearSession and signoutRedirect', () => {
