@@ -66,6 +66,8 @@ spec:
               value: "/data/.jupyter"
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
+            - name: JUPYTER_ALLOW_INSECURE_WRITES
+              value: 'true'
           resources:
             requests:
               cpu: 200m
