@@ -19,7 +19,8 @@ A number of severs will be running in the tenancy at any one time depending on t
 |------|-------|
 |datalabs-bastion-1|External access point to all datalabs servers|
 |datalabs-glusterfs-[1-3]|Gluster storage server|
-|datalabs-k8s-nodes-*|Kubernetes master node|
+|datalabs-k8s-master-[1-3]|Kubernetes master nodes|	
+|datalabs-k8s-nodes-*|Kubernetes worker nodes|
 |datalabs-load-balancer|Production load balancer|
 |datalabs-terraform-state|Terraform state server|
 

@@ -249,7 +249,7 @@ authorisation tokens to be issued as part of the authentication process avoiding
 for the datalabs system to have to generate them and allowing it simply to verify the
 signature against the public JWKS certificate.
 * Direct API access token management - The authorisation service retrieves information
-about usersnfrom the Auth0 API. See - 
+about users from the Auth0 API. See - 
 [Auth0 Management API](https://auth0.com/docs/api/management/v2).
 * User profile information - User profile information can be managed for users
 provisioned in Auth0. For users provisioned in other systems only the `app_metadata` can

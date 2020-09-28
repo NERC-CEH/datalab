@@ -99,8 +99,6 @@ flow.
 * **Connections** - Connections represent an IdP. We are currently making use of the
 Auth0 provided database but intend to extend this to include other types of connections
 if needed by our target organisations.
-* **Extensions** - Auth0 provides an extension mechanism and a library of existing
-extensions. 
 
 #### Clients
 
@@ -259,13 +257,13 @@ current requirement.
 }
 ```
 
-##Authorisation Service
+## Authorisation Service
 
 The authorisation service provides an API to allow any service to query whether a specific user has a specified role. All services should be responsible for authorising requests made to them.
 
 Auth0 API calls are severely rate limited and performance is poor the result of the user roles look up is cached in memory with a short TTL.
 
-##Ingress Authorisation##
+## Ingress Authorisation
 
 Datalabs creates and manages many Docker containers running inside Kubernetes Pods to
 serve web applications on user specified sub domains. Some of these systems do not
@@ -308,7 +306,7 @@ logged in.
 logged in to datalabs but does not perform checks to see if the user is able to see the
 resource at the specific URL. This needs to be extended.
 
-##Single Sign On
+## Single Sign On
 
 Several of the containers that users can provision provide their own authentication
 mechanisms. We do not want users to have to remember many different sets of credentials
