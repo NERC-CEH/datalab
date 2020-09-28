@@ -11,8 +11,8 @@ const state = {
   },
 };
 
-describe('searchHash', () => {
+describe('searchUrl', () => {
   it('selects the router location hash from state', () => {
-    expect(routerSelectors.searchHash(state)).toEqual(state.router.location.search);
+    expect(routerSelectors.searchUrl(state)).toEqual(state.router.location.search);
   });
 });

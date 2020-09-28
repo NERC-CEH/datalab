@@ -79,13 +79,11 @@ function processHash(authResponse) {
 }
 
 function processResponse(authResponse) {
-  const appRedirect = undefined;
   const expiresAt = authResponse.expires_at || expiresAtCalculator(authResponse.expires_in);
   const identity = authResponse.identity || processIdentity(authResponse.profile);
 
   return {
     ...authResponse,
-    appRedirect,
     expiresAt,
     identity,
   };
