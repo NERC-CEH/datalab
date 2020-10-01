@@ -4,13 +4,12 @@ import databaseMock from './testUtil/databaseMock';
 
 jest.mock('../config/database');
 
-const testStacks = [
-  { name: 'Stack 1' },
-  { name: 'Stack 2' },
-];
-
 const user = { sub: 'username' };
 const project = 'expectedProject';
+const testStacks = [
+  { name: 'Stack 1', users: [user.sub] },
+  { name: 'Stack 2' },
+];
 
 const mockDatabase = databaseMock(testStacks);
 database.getModel = mockDatabase;
@@ -51,6 +50,11 @@ describe('stacksRepository', () => {
     expect(mockDatabase().user()).toBe(undefined); // All users
     expect(stack).toMatchSnapshot();
   }));
+
+  it('userCanRestartStack only if listed user', async () => {
+    expect(await stacksRepository.userCanRestartStack(project, { sub: 'username' }, 'Stack 1')).toEqual(true);
+    expect(await stacksRepository.userCanRestartStack(project, { sub: 'someone-else' }, 'Stack 1')).toEqual(false);
+  });
 
   it('createOrUpdate should query for stacks with same name', () => {
     const stack = { name: 'Notebook', type: 'jupyter' };
