@@ -45,5 +45,11 @@ volumesRouter.put(
   volume.updateVolumeUserValidator,
   ew(volume.removeUsers),
 );
+volumesRouter.patch(
+  '/:projectKey/:name',
+  projectPermissionWrapper(PROJECT_KEY_STORAGE_EDIT),
+  volume.updateVolumeValidator,
+  ew(volume.updateVolume),
+);
 
 export default volumesRouter;

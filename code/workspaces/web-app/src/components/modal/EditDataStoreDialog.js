@@ -3,33 +3,59 @@ import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
-import PromisedContentWrapper from '../common/PromisedContentWrapper';
-import AutocompleteTextSearch from '../common/form/AutocompleteTextSearch';
-import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import dataStorageActions from '../../actions/dataStorageActions';
+import modalDialogActions from '../../actions/modalDialogActions';
+import notify from '../common/notify';
+import EditDataStoreForm from '../dataStorage/editDataStoreForm';
 
-const EditDataStoreDialog = ({ onCancel, title, currentUsers, userList, addUser, removeUser, loadUsersPromise }) => (
-    <Dialog open={true} maxWidth="md" fullWidth>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <Typography variant="subtitle1" gutterBottom>
-          Users with access to data store
-        </Typography>
-        <PromisedContentWrapper promise={loadUsersPromise} >
-          <AutocompleteTextSearch
-            suggestions={userList}
-            selectedItems={currentUsers}
-            addItem={addUser}
-            removeItem={removeUser}
-            placeholder={"Type user's email address"}
-          />
-        </PromisedContentWrapper>
-      </DialogContent>
-      <DialogActions>
-        <PrimaryActionButton onClick={onCancel}>Close</PrimaryActionButton>
-      </DialogActions>
-    </Dialog>
+const getUserIdsFromUsers = users => users.map(user => user.value);
+const sortUsersByLabel = users => (
+  [...users].sort(
+    (a, b) => {
+      if (a.label < b.label) return -1;
+      if (a.label > b.label) return 1;
+      return 0;
+    },
+  )
+);
+
+export const getOnDetailsEditSubmit = (projectKey, stackName, typeName) => async (values, dispatch) => {
+  dispatch(modalDialogActions.closeModalDialog());
+
+  const updatedValues = { ...values, users: getUserIdsFromUsers(values.users) };
+  try {
+    await dispatch(
+      dataStorageActions.editDataStoreDetails(
+        projectKey, stackName, updatedValues,
+      ),
+    );
+    notify.success(`${typeName} updated`);
+  } catch (error) {
+    notify.error(`Unable to update ${typeName}`);
+  } finally {
+    await dispatch(dataStorageActions.loadDataStorage(projectKey));
+  }
+};
+
+const EditDataStoreDialog = ({
+  onCancel, title, currentUsers, userList, loadUsersPromise, stack, projectKey, typeName,
+}) => (
+  <Dialog open={true} maxWidth="md" fullWidth>
+    <DialogTitle>{title}</DialogTitle>
+    <DialogContent>
+      <EditDataStoreForm
+        userList={sortUsersByLabel(userList)}
+        loadUsersPromise={loadUsersPromise}
+        onSubmit={getOnDetailsEditSubmit(projectKey, stack.name, typeName)}
+        onCancel={onCancel}
+        initialValues={{
+          displayName: stack.displayName,
+          description: stack.description,
+          users: currentUsers,
+        }}
+      />
+    </DialogContent>
+  </Dialog>
 );
 
 EditDataStoreDialog.propTypes = {
@@ -47,13 +73,18 @@ EditDataStoreDialog.propTypes = {
       value: PropTypes.string,
     }),
   ).isRequired,
-  addUser: PropTypes.func.isRequired,
-  removeUser: PropTypes.func.isRequired,
   loadUsersPromise: PropTypes.shape({
     error: PropTypes.any,
     fetching: PropTypes.bool.isRequired,
     value: PropTypes.array.isRequired,
   }).isRequired,
+  stack: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  projectKey: PropTypes.string.isRequired,
+  typeName: PropTypes.string.isRequired,
 };
 
 export default EditDataStoreDialog;

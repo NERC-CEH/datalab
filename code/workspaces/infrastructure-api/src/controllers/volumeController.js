@@ -1,9 +1,11 @@
 import { service } from 'service-chassis';
-import { check, matchedData } from 'express-validator';
+import { check, body, matchedData } from 'express-validator';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import logger from '../config/logger';
 import { DELETED } from '../models/dataStorage.model';
+
+const USER_UPDATEABLE_FIELDS = ['displayName', 'description', 'users'];
 
 async function createVolume(request, response, next) {
   // Build request params
@@ -91,6 +93,29 @@ async function removeUsers(request, response, next) {
   }
 }
 
+async function updateVolume(request, response, next) {
+  const matchedValues = matchedData(request);
+  const { projectKey, name } = matchedValues;
+
+  const updatedValues = USER_UPDATEABLE_FIELDS.reduce(
+    (previousValue, currentValue) => (
+      matchedValues[currentValue]
+        ? { ...previousValue, [currentValue]: matchedValues[currentValue] }
+        : previousValue
+    ),
+    {},
+  );
+
+  try {
+    const volume = await dataStorageRepository.update(
+      request.user, projectKey, name, updatedValues,
+    );
+    response.send(volume);
+  } catch (error) {
+    next(new Error(`Error updating volume details - project: ${projectKey} volume: ${name}: ${error.message}`));
+  }
+}
+
 const existsCheck = fieldName => check(fieldName)
   .exists()
   .withMessage(`${fieldName} must be specified`)
@@ -149,6 +174,12 @@ const queryVolumeValidator = service.middleware.validator([
   nameCheck,
 ], logger);
 
+const updateVolumeValidator = service.middleware.validator([
+  projectKeyCheck,
+  nameCheck,
+  ...USER_UPDATEABLE_FIELDS.map(field => body(field).optional()),
+], logger);
+
 export default {
   getByIdValidator,
   projectKeyValidator,
@@ -156,6 +187,7 @@ export default {
   deleteVolumeValidator,
   queryVolumeValidator,
   updateVolumeUserValidator,
+  updateVolumeValidator,
   createVolume,
   deleteVolume,
   queryVolume,
@@ -164,4 +196,5 @@ export default {
   listProjectActiveVolumes,
   addUsers,
   removeUsers,
+  updateVolume,
 };

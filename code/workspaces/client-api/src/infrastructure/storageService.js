@@ -46,4 +46,12 @@ async function removeUsers(projectKey, name, users, token) {
   return response.data;
 }
 
-export default { getAllProjectActive, getById, addUsers, removeUsers, createVolume, deleteVolume };
+async function updateDetails(projectKey, name, updatedDetails, token) {
+  const url = `${API_URL_BASE}/volumes/${projectKey}/${name}`;
+  const response = await axios.patch(url, updatedDetails, generateOptions(token));
+  return response.data;
+}
+
+export default {
+  getAllProjectActive, getById, addUsers, removeUsers, createVolume, deleteVolume, updateDetails,
+};

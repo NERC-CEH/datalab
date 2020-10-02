@@ -27,6 +27,16 @@ exports[`dataStorageService deleteDataStore should build the correct correct mut
     }"
 `;
 
+exports[`dataStorageService editDataStoreDetails should build the correct correct mutation and unpack the results 1`] = `
+"
+    UpdateDataStoreDetails($projectKey: String!, $name: String!, $updatedDetails: DataStorageDetailsUpdateRequest) {
+      updateDataStoreDetails(projectKey: $projectKey, name: $name, updatedDetails: $updatedDetails) {
+        displayName
+        description
+      }
+    }"
+`;
+
 exports[`dataStorageService getCredentials should build the correct query and return the minio credentials 1`] = `
 "
     GetCredentials($projectKey: String!, $id: ID!) {

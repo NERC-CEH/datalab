@@ -30,7 +30,7 @@ type Query {
     # Checks internal name is unique.
     checkNameUniqueness(projectKey: String!, name: String!): Boolean
 
-    # Retrieve pod logs 
+    # Retrieve pod logs
     logs(projectKey: String!, name: String!): String
 
     # List of users within the current DataLab
@@ -69,6 +69,9 @@ type Mutation {
     # Remove user access to data store
     removeUserFromDataStore(projectKey: String!, dataStore: DataStorageUpdateRequest): DataStore
 
+    # Update the details of a data store
+    updateDataStoreDetails(projectKey: String!, name: String!, updatedDetails: DataStorageUpdateRequest): DataStore
+
     # Create a new project
     createProject(project: ProjectCreationRequest): Project
 
@@ -100,9 +103,11 @@ input DataStorageCreationRequest {
     volumeSize: Int
 }
 
-# Type to describe the mutation for updating or deleting a new data store
+# Type to describe the mutation for updating or deleting a data store
 input DataStorageUpdateRequest {
     name: String
+    displayName: String
+    description: String
     users: [String]
 }
 
@@ -161,6 +166,7 @@ input StackCreationRequest {
     visible: VisibilityType
 }
 
+# Type to describe the mutation for updating a new Stack.
 input StackUpdateRequest {
     projectKey: String
     name: String

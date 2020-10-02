@@ -9,6 +9,7 @@ Array [
   "deleteDataStore",
   "addUserToDataStore",
   "removeUserFromDataStore",
+  "editDataStoreDetails",
   "openModalDialog",
   "closeModalDialog",
   "resetForm",
@@ -39,7 +40,12 @@ Object {
 exports[`DataStorageContainer is a container which openEditForm generates correct dialog 1`] = `
 Object {
   "dataStoreId": "expectedId",
+  "stack": Object {
+    "displayName": "expectedDisplayName",
+    "id": "expectedId",
+  },
   "title": "Edit Data Store: expectedDisplayName",
+  "typeName": "Data Store",
   "userKeysMapping": Object {
     "name": "label",
     "userId": "value",

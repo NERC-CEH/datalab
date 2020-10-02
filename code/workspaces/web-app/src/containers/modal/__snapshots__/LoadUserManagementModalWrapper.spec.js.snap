@@ -23,8 +23,16 @@ exports[`LoadUserManagement Modal Wrapper is a container which creates correct s
     }
   }
   onCancel={[MockFunction]}
+  projectKey="project99"
   removeUser={[Function]}
+  stack={
+    Object {
+      "description": "description",
+      "displayName": "displayName",
+    }
+  }
   title="Title"
+  typeName="Data Store"
   userList={
     Array [
       Object {
