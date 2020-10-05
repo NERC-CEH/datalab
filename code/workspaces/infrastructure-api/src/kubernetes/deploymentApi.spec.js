@@ -22,6 +22,7 @@ afterAll(() => {
 
 const manifest = createManifest();
 const deployment = createDeployment();
+const scale = createScale();
 
 describe('Kubernetes Deployment API', () => {
   describe('get deployment', () => {
@@ -136,6 +137,40 @@ describe('Kubernetes Deployment API', () => {
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
+
+  describe('restart deployment', () => {
+    it('should down and up scale deployment', async () => {
+      // Arrange
+      const getSpy = jest.fn();
+      const patchSpy = jest.fn();
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply((requestConfig) => {
+        getSpy(requestConfig);
+        return [200, scale];
+      });
+      mock.onPatch(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply((requestConfig) => {
+        patchSpy(JSON.parse(requestConfig.data));
+        return [204];
+      });
+
+      // Act
+      const response = await deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE);
+
+      // Assert
+      expect(getSpy).toHaveBeenCalledTimes(1);
+      expect(patchSpy).toHaveBeenCalledTimes(2);
+      expect(patchSpy).toHaveBeenNthCalledWith(1, { spec: { replicas: 0 } });
+      expect(patchSpy).toHaveBeenNthCalledWith(2, { spec: { replicas: 1 } });
+      expect(response.status).toEqual(204);
+    });
+
+    it('should return an error if restart fails', async () => {
+      // Arrange
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply(400, { message: 'error-message' });
+
+      // Act/Assert
+      await expect(deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE)).rejects.toThrow('Request failed with status code 400');
+    });
+  });
 });
 
 function createDeployment() {
@@ -143,6 +178,14 @@ function createDeployment() {
     apiVersion: 'apps/v1beta1',
     kind: 'Deployment',
     metadata: { name: DEPLOYMENT_NAME },
+  };
+}
+
+function createScale() {
+  return {
+    spec: {
+      replicas: 1,
+    },
   };
 }
 

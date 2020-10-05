@@ -39,6 +39,12 @@ stackRouter.put(
   stack.updateStackValidator,
   ew(stack.updateStack),
 );
+stackRouter.put(
+  '/:projectKey/restart',
+  projectPermissionWrapper(PROJECT_KEY_STACKS_EDIT),
+  stack.restartStackValidator,
+  ew(stack.restartStack),
+);
 stackRouter.delete(
   '/:projectKey',
   projectPermissionWrapper(PROJECT_KEY_STACKS_DELETE),

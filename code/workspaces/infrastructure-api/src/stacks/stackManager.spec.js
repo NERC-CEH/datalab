@@ -1,9 +1,11 @@
 import Stacks from './Stacks';
 import * as stackRepository from '../dataaccess/stacksRepository';
 import stackManager from './stackManager';
+import deploymentApi from '../kubernetes/deploymentApi';
 
 jest.mock('./Stacks');
 jest.mock('../dataaccess/stacksRepository');
+jest.mock('../kubernetes/deploymentApi');
 
 const getStackMock = jest.fn();
 Stacks.getStack = getStackMock;
@@ -60,6 +62,22 @@ describe('Stack Controller', () => {
 
       return stackManager.createStack(user, params)
         .catch(err => expect(err).toMatchSnapshot());
+    });
+  });
+
+  describe('restartStack', () => {
+    it('calls deploymentApi.restartDeployment with correct parameters', async () => {
+      // Arrange
+      getStackMock.mockReturnValue(StackResolve);
+      const restartDeploymentMock = jest.fn().mockResolvedValue('success');
+      deploymentApi.restartDeployment = restartDeploymentMock;
+
+      // Act
+      const response = await stackManager.restartStack(params);
+
+      // Assert
+      expect(restartDeploymentMock).toBeCalledWith('expectedType-expectedName', 'project');
+      expect(response).toEqual('success');
     });
   });
 

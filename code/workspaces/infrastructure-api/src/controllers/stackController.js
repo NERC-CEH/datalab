@@ -14,6 +14,11 @@ function createStack(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, createStackExec);
 }
 
+function restartStack(request, response) {
+  const errorMessage = 'Invalid stack restart request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, restartStackExec);
+}
+
 function deleteStack(request, response) {
   const errorMessage = 'Invalid stack deletion request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteStackExec);
@@ -79,6 +84,26 @@ function updateStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'updating', TYPE, params.name));
 }
 
+function restartStackExec(request, response) {
+  // Build request params
+  const { user } = request;
+  const params = matchedData(request);
+
+  const { projectKey, name } = params;
+
+  return stackRepository.userCanRestartStack(projectKey, user, name)
+    .then((result) => {
+      if (result) {
+        // Handle request
+        return stackManager.restartStack(params)
+          .then(controllerHelper.sendSuccessfulRestart(response))
+          .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
+      }
+      return Promise.reject();
+    })
+    .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
+}
+
 function deleteStackExec(request, response) {
   // Build request params
   const { user } = request;
@@ -119,6 +144,11 @@ const deleteStackValidator = [
   ...withNameValidator,
   checkExistsWithMsg('datalabInfo.domain'),
   checkExistsWithMsg('datalabInfo.name'),
+  checkExistsWithMsg('type'),
+];
+
+const restartStackValidator = [
+  ...withNameValidator,
   checkExistsWithMsg('type'),
 ];
 
@@ -170,8 +200,9 @@ const validators = {
   deleteStackValidator,
   createStackValidator,
   updateStackValidator,
+  restartStackValidator,
 };
 
-const controllers = { getOneById, getOneByName, createStack, deleteStack, updateStack };
+const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack };
 
 export default { ...validators, ...controllers };

@@ -85,7 +85,12 @@ function deleteStack(projectKey, user, stack) {
 
 async function userCanDeleteStack(projectKey, user, name) {
   const stack = await getOneByName(projectKey, user, name);
-  return stack.users.includes(user.sub);
+  return stack.users && stack.users.includes(user.sub);
+}
+
+async function userCanRestartStack(projectKey, user, name) {
+  // same as delete - only users in list can restart stack
+  return userCanDeleteStack(projectKey, user, name);
 }
 
 // Function is used by kube-watcher to update stacks status. This will require an
@@ -118,6 +123,7 @@ export default {
   createOrUpdate,
   deleteStack,
   userCanDeleteStack,
+  userCanRestartStack,
   updateStatus,
   updateShareStatus,
 };
