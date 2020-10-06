@@ -15,20 +15,22 @@ export const handleAuth = async (searchUrl, routeTo, dispatch) => {
       // Redirect to home page if auth fails
       dispatch(routeTo('/'));
     }
+  } else if (/verify/.test(props.location.hash)) {
+    dispatch(routeTo('/verify'));
   } else {
     // Redirect to projects page if no hash is present
     dispatch(routeTo('/projects'));
   }
 };
 
-const AuthCallback = () => {
-  const searchUrl = useSearchUrl();
+const AuthCallback = (props) => {
+  const urlHash = useUrlHash();
   const dispatch = useDispatch();
   const routeTo = replace;
 
   useEffect(() => {
-    handleAuth(searchUrl, routeTo, dispatch);
-  }, [searchUrl, routeTo, dispatch]);
+    handleAuth(urlHash, routeTo, dispatch, props);
+  }, [urlHash, routeTo, dispatch, props]);
 
   return null;
 };

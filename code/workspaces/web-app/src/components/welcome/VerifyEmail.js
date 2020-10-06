@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import datalabsLogo from '../../assets/images/datalabs-vert.png';
-import getAuth from '../../auth/auth';
-import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import PagePrimaryActionButton from '../common/buttons/PagePrimaryActionButton';
 
 const styles = theme => ({
@@ -34,21 +32,22 @@ const styles = theme => ({
   },
 });
 
-const tagLine = 'DataLabs provides you with tools to power your research and share the results';
+const tagLine = `Before logging in you need to verify your e-mail address. Please use the
+  link in the e-mail which will be sent to you shortly. Note that you may have to check 
+  your spam folder.`;
 
-const HeroBar = ({ classes }) => (
+const VerifyEmail = ({ classes }) => (
   <div className={classes.bar}>
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
     <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
     <div className={classes.buttons}>
-      <PagePrimaryActionButton className={classes.button} color="primary" onClick={getAuth().signUp}>Sign Up</PagePrimaryActionButton>
-      <PrimaryActionButton className={classes.button} color="primary" onClick={getAuth().login}>Log In</PrimaryActionButton>
+      <PagePrimaryActionButton className={classes.button} color="primary" onClick={() => { window.location.href = '/'; }}>Back to Home</PagePrimaryActionButton>
     </div>
   </div>
 );
 
-HeroBar.propTypes = {
+VerifyEmail.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HeroBar);
+export default withStyles(styles)(VerifyEmail);

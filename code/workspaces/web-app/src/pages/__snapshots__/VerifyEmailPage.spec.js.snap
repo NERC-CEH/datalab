@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerifyEmailPage renders correct snapshot 1`] = `
+<VerifyEmailPage
+  classes={
+    Object {
+      "page": "VerifyEmailPage-page-1",
+    }
+  }
+/>
+`;

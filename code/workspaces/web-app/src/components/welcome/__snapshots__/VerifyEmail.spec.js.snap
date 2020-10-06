@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerifyEmail renders correct snapshot 1`] = `
+<div
+  className="VerifyEmail-bar-1"
+>
+  <img
+    alt="DataLabs-Logo"
+    className="VerifyEmail-logo-2"
+    src="datalabs-vert.png"
+  />
+  <WithStyles(ForwardRef(Typography))
+    className="VerifyEmail-tagLine-3"
+    variant="h6"
+  >
+    Before logging in you need to verify your e-mail address. Please use the
+  link in the e-mail which will be sent to you shortly. Note that you may have to check 
+  your spam folder.
+  </WithStyles(ForwardRef(Typography))>
+  <div
+    className="VerifyEmail-buttons-4"
+  >
+    <PagePrimaryActionButton
+      className="VerifyEmail-button-5"
+      color="primary"
+      onClick={[Function]}
+    >
+      Back to Home
+    </PagePrimaryActionButton>
+  </div>
+</div>
+`;

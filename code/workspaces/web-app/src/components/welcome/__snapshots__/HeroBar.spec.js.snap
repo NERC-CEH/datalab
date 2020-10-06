@@ -30,7 +30,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
       color="primary"
       onClick={[MockFunction]}
     >
-       Log In
+      Log In
     </PrimaryActionButton>
   </div>
 </div>
