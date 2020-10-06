@@ -73,7 +73,7 @@ async function getSpecReplicas(name, namespace) {
 }
 
 async function setSpecReplicas(name, namespace, specReplicas) {
-  await axios.patch(
+  const response = await axios.patch(
     getDeploymentScaleUrl(namespace, name),
     { spec: { replicas: specReplicas } },
     PATCH_CONTENT_HEADER,
@@ -88,11 +88,13 @@ async function setSpecReplicas(name, namespace, specReplicas) {
     // eslint-disable-next-line no-await-in-loop
     if (specReplicas === await getStatusReplicas(name, namespace)) {
       // specified number of replicas matches status number of replicas
-      return;
+      return response;
     }
     // eslint-disable-next-line no-await-in-loop
     await new Promise(resolve => setTimeout(resolve, checkWaitMs));
   }
+
+  return response;
 }
 
 async function restartDeployment(name, namespace) {
@@ -103,7 +105,8 @@ async function restartDeployment(name, namespace) {
     await setSpecReplicas(name, namespace, 0);
   }
   const newSpecReplicas = initialSpecReplicas || 1;
-  await setSpecReplicas(name, namespace, newSpecReplicas);
+  const response = await setSpecReplicas(name, namespace, newSpecReplicas);
+  return response;
 }
 
 export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment, restartDeployment };

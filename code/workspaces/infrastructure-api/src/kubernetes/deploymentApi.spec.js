@@ -173,13 +173,14 @@ describe('Kubernetes Deployment API', () => {
         });
 
       // Act
-      await deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE);
+      const response = await deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE);
 
       // Assert
       expect(getSpy).toHaveBeenCalledTimes(5);
       expect(patchSpy).toHaveBeenCalledTimes(2);
       expect(patchSpy).toHaveBeenNthCalledWith(1, { spec: { replicas: 0 } });
       expect(patchSpy).toHaveBeenNthCalledWith(2, { spec: { replicas: 1 } });
+      expect(response.status).toEqual(204);
     });
 
     it('should return an error if restart fails', async () => {
