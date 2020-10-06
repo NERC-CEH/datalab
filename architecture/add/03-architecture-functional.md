@@ -47,8 +47,7 @@ datalabs:
 * [Jupyter Notebooks](http://jupyter.org/) - Implemented
 * [Zeppelin Notebooks](https://zeppelin.apache.org/) - Implemented
 * [RStudio Server](https://www.rstudio.com/products/rstudio/) - Implemented
-* [Juptyer Lab](https://github.com/jupyterlab/jupyterlab) - Not Implemented, recent
-upgrade to Jupyter notebooks
+* [Juptyer Lab](https://github.com/jupyterlab/jupyterlab) - Implemented
 * [Cloud9 IDE](https://aws.amazon.com/cloud9/) - Not Implemented
 
 The list of identified Sites is as follows
@@ -242,8 +241,6 @@ Authentication is handled by [Auth0](https://auth0.com/). This provides the foll
 functionality:
 
 * User authentication - OAuth flow embedded in the web application.
-* User management (roles/groups) - User addition/removal is available through core Auth0
-functionality. User groups management is available through the authorisation extension.
 * Federated login - Auth0 provides the ability to federate with many different identity
 providers. This means that it is possible to add different identity sources without
 requiring any application changes.
@@ -252,9 +249,8 @@ authorisation tokens to be issued as part of the authentication process avoiding
 for the datalabs system to have to generate them and allowing it simply to verify the
 signature against the public JWKS certificate.
 * Direct API access token management - The authorisation service retrieves information
-about users, groups and permissions from two Auth0 APIs. These are the
-[Auth0 Management API](https://auth0.com/docs/api/management/v2) and
-[auth0-authorization-extension-api](https://auth0.com/docs/api/authorization-extension).
+about users from the Auth0 API. See - 
+[Auth0 Management API](https://auth0.com/docs/api/management/v2).
 * User profile information - User profile information can be managed for users
 provisioned in Auth0. For users provisioned in other systems only the `app_metadata` can
 be used to add additional information but this is not currently used by datalabs.

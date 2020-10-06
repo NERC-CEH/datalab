@@ -13,24 +13,16 @@ To apply for a new account first
 and then apply for access to the `nerc-datalab-u` through the
 [Accounts Portal](https://accounts.jasmin.ac.uk/services/cloud_tenancies/).
 
-The following servers are currently running. Given IP addresses are assigned at
-startup and may change they are not listed.
+A number of severs will be running in the tenancy at any one time depending on the resources currently available and the project requirement. This can be expanded easily and dynamically but generally consists of the following components.
 
 | Name | Usage |
 |------|-------|
 |datalabs-bastion-1|External access point to all datalabs servers|
-|datalabs-glusterfs-1|Gluster storage server|
-|datalabs-glusterfs-2|Gluster storage server|
-|datalabs-glusterfs-3|Gluster storage server|
-|datalabs-glusterfs-4|Gluster storage server|
-|datalabs-k8s-master|Kubernetes master node|
-|datalabs-k8s-node-1|Kubernetes worker node 1|
-|datalabs-k8s-node-2|Kubernetes worker node 1|
-|datalabs-k8s-node-3|Kubernetes worker node 1|
+|datalabs-glusterfs-[1-3]|Gluster storage server|
+|datalabs-k8s-master-[1-3]|Kubernetes master nodes|	
+|datalabs-k8s-nodes-*|Kubernetes worker nodes|
 |datalabs-load-balancer|Production load balancer|
 |datalabs-terraform-state|Terraform state server|
-|datalabs-test-load-balancer|Test load balancer|
-|migration-data-store|Store of all datasets provided to datalabs project to allow Gluster cluster to be rebuilt.|
 
 ## DNS
 

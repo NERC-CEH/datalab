@@ -99,9 +99,6 @@ flow.
 * **Connections** - Connections represent an IdP. We are currently making use of the
 Auth0 provided database but intend to extend this to include other types of connections
 if needed by our target organisations.
-* **Extensions** - Auth0 provides an extension mechanism and a library of existing
-extensions. We are using the [Auth0 Authorisation](https://auth0.com/docs/extensions/authorization-extension/v2)
-extension to provide an easy way to define roles and assign them to users.
 
 #### Clients
 
@@ -125,13 +122,11 @@ chanaged.
 
 #### APIs
 
-Datalabs has three APIs defined in Auth0:
+Datalabs has two APIs defined in Auth0:
 
 * **datalab-api** - The API resource representing the GraphQL aggregation API. Auth0
 provides a [tutorial](https://auth0.com/docs/quickstart/spa/react/03-calling-an-api) on
 how to configure and consume this.
-* **auth0-authorization-extension-api** - Created and used by the Authorisation
-extension.
 * **Auth0 Management API** - Not needed by the application, created to allow admin access
 to the Auth0 API.
 
@@ -140,13 +135,6 @@ to the Auth0 API.
 Datalabs has a single Database Connection called `Datalabs`. This provides a simple
 database of users who can access the application. User sign up has been turned off so
 new Datalabs users can only be added by an Auth0 admin.
-
-#### Extensions
-
-Datalabs makes use of the Auth0 Authorisation Extension to provide an easy way to define
-roles and assign them to users. These are in turn used to map to permissions within the
-scope of the authorisation service and the process for this is defined below in
-[#authorisation-service].
 
 ### Auth Tokens
 
@@ -269,13 +257,13 @@ current requirement.
 }
 ```
 
-##Authorisation Service
+## Authorisation Service
 
 The authorisation service provides an API to allow any service to query whether a specific user has a specified role. All services should be responsible for authorising requests made to them.
 
 Auth0 API calls are severely rate limited and performance is poor the result of the user roles look up is cached in memory with a short TTL.
 
-##Ingress Authorisation##
+## Ingress Authorisation
 
 Datalabs creates and manages many Docker containers running inside Kubernetes Pods to
 serve web applications on user specified sub domains. Some of these systems do not
@@ -318,7 +306,7 @@ logged in.
 logged in to datalabs but does not perform checks to see if the user is able to see the
 resource at the specific URL. This needs to be extended.
 
-##Single Sign On
+## Single Sign On
 
 Several of the containers that users can provision provide their own authentication
 mechanisms. We do not want users to have to remember many different sets of credentials
@@ -527,7 +515,8 @@ that if a user escapes the container they will have no rights on the host machin
 
 Containers all exist in their own repositories:
 
-* [docker-jupyter-notebook](https://github.com/NERC-CEH/docker-jupyter-notebook)\
+* [docker-jupyter-notebook](https://github.com/NERC-CEH/docker-jupyter-notebook)
+* [docker-jupyterlab](https://github.com/NERC-CEH/docker-jupyterlab)
 * [docker-zeppelin](https://github.com/NERC-CEH/docker-zeppelin)
 * [docker-rshiny](https://github.com/NERC-CEH/docker-rshiny)
 
