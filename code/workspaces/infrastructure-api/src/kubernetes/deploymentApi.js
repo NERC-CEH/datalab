@@ -62,6 +62,9 @@ function deleteDeployment(name, namespace) {
 
 async function getScale(name, namespace) {
   const response = await axios.get(getDeploymentScaleUrl(namespace, name));
+  // TODO will remove these loggers once finished debugging
+  logger.info(`getScale response.status ${JSON.stringify(response.status)}`);
+  logger.info(`getScale response.data ${JSON.stringify(response.data)}`);
   return response.data.spec.replicas;
 }
 
