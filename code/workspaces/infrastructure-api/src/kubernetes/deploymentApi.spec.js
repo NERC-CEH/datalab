@@ -22,7 +22,6 @@ afterAll(() => {
 
 const manifest = createManifest();
 const deployment = createDeployment();
-const scale = createScale();
 
 describe('Kubernetes Deployment API', () => {
   describe('get deployment', () => {
@@ -141,26 +140,46 @@ describe('Kubernetes Deployment API', () => {
   describe('restart deployment', () => {
     it('should down and up scale deployment', async () => {
       // Arrange
-      const getSpy = jest.fn();
       const patchSpy = jest.fn();
-      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply((requestConfig) => {
-        getSpy(requestConfig);
-        return [200, scale];
-      });
       mock.onPatch(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply((requestConfig) => {
         patchSpy(JSON.parse(requestConfig.data));
         return [204];
       });
+      const getSpy = jest.fn();
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(1, 1)]; // initial state
+        });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(0, 1)]; // downscale incomplete
+        });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(0, 0)]; // downscale complete
+        });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(1, 0)]; // upscale incomplete
+        });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(1, 1)]; // upscale complete
+        });
 
       // Act
-      const response = await deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE);
+      await deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE);
 
       // Assert
-      expect(getSpy).toHaveBeenCalledTimes(1);
+      expect(getSpy).toHaveBeenCalledTimes(5);
       expect(patchSpy).toHaveBeenCalledTimes(2);
       expect(patchSpy).toHaveBeenNthCalledWith(1, { spec: { replicas: 0 } });
       expect(patchSpy).toHaveBeenNthCalledWith(2, { spec: { replicas: 1 } });
-      expect(response.status).toEqual(204);
     });
 
     it('should return an error if restart fails', async () => {
@@ -181,10 +200,13 @@ function createDeployment() {
   };
 }
 
-function createScale() {
+function createScale(specReplicas, statusReplicas) {
   return {
     spec: {
-      replicas: 1,
+      replicas: specReplicas,
+    },
+    status: {
+      replicas: statusReplicas,
     },
   };
 }

@@ -60,29 +60,50 @@ function deleteDeployment(name, namespace) {
     .catch(handleDeleteError('deployment', name));
 }
 
-async function getScale(name, namespace) {
+async function getStatusReplicas(name, namespace) {
   const response = await axios.get(getDeploymentScaleUrl(namespace, name));
-  // TODO will remove these loggers once finished debugging
-  logger.info(`getScale response.status ${JSON.stringify(response.status)}`);
-  logger.info(`getScale response.data ${JSON.stringify(response.data)}`);
-  return response.data.spec.replicas;
+  const replicas = response.data.status.replicas || 0;
+  return replicas;
 }
 
-async function setScale(name, namespace, scale) {
-  return axios.patch(
+async function getSpecReplicas(name, namespace) {
+  const response = await axios.get(getDeploymentScaleUrl(namespace, name));
+  const replicas = response.data.spec.replicas || 0;
+  return replicas;
+}
+
+async function setSpecReplicas(name, namespace, specReplicas) {
+  await axios.patch(
     getDeploymentScaleUrl(namespace, name),
-    { spec: { replicas: scale } },
+    { spec: { replicas: specReplicas } },
     PATCH_CONTENT_HEADER,
   );
+
+  // Wait for a total of upto approx. 10s for desired number of replicas.
+  // Wait 100ms between checks.
+  // Waiting helps to prevents http 409 (conflict) errors and ensures the pods are all stopped before restarting.
+  const totalWaitMs = 10 * 1000;
+  const checkWaitMs = 100;
+  for (let i = 0; i < totalWaitMs / checkWaitMs; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    if (specReplicas === await getStatusReplicas(name, namespace)) {
+      // specified number of replicas matches status number of replicas
+      return;
+    }
+    // eslint-disable-next-line no-await-in-loop
+    await new Promise(resolve => setTimeout(resolve, checkWaitMs));
+  }
 }
 
 async function restartDeployment(name, namespace) {
   logger.info('Restarting deployment: %s in namespace: %s', name, namespace);
 
-  const initialScale = await getScale(name, namespace);
-  const newScale = initialScale || 1;
-  await setScale(name, namespace, 0);
-  return setScale(name, namespace, newScale);
+  const initialSpecReplicas = await getSpecReplicas(name, namespace);
+  if (initialSpecReplicas > 0) {
+    await setSpecReplicas(name, namespace, 0);
+  }
+  const newSpecReplicas = initialSpecReplicas || 1;
+  await setSpecReplicas(name, namespace, newSpecReplicas);
 }
 
 export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment, restartDeployment };
