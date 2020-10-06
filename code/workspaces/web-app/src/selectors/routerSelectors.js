@@ -1,5 +1,5 @@
-const selectUrlHash = ({ router: { location: { hash } } }) => hash;
+const selectUrlSearch = ({ router: { location: { search } } }) => search;
 
 export default {
-  urlHash: selectUrlHash,
+  searchUrl: selectUrlSearch,
 };

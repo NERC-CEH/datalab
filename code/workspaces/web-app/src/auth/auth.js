@@ -1,16 +1,15 @@
 import moment from 'moment';
 import Promise from 'bluebird';
-import auth0 from 'auth0-js';
 import { pick } from 'lodash';
+import Oidc from 'oidc-client';
 import cookies from './cookies';
 import { setSession, clearSession, getSession } from '../core/sessionUtil';
-import loginScreens from './auth0UniversalLoginScreens';
 
 class Auth {
-  constructor(authZeroInit, promisifyAuthZeroInit, authConfig) {
+  constructor(oidcInit, promisifyOidcInit, authConfig) {
     this.authConfig = authConfig;
-    this.authZeroAsync = promisifyAuthZeroInit;
-    this.authZeroInit = authZeroInit;
+    this.oidcAsync = promisifyOidcInit;
+    this.oidcInit = oidcInit;
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
     this.logout = this.logout.bind(this);
@@ -22,40 +21,30 @@ class Auth {
   }
 
   login() {
-    // User redirected to Auth0 login page
-    const state = JSON.stringify({ appRedirect: window.location.pathname });
-    this.authZeroInit.authorize({ state });
+    // Re-direct to login screen
+    this.oidcInit.signinRedirect({ appRedirect: window.location.pathname });
   }
 
   signUp() {
-    // Auth0 universal login configured to open on Sign Up page
-    // Note: This required customization of Auth0 Universal Login widget (see auth0)
-    const state = JSON.stringify({ appRedirect: window.location.pathname });
-    this.authZeroInit.authorize({ state, initial_screen: loginScreens.SIGN_UP });
+    // Re-direct to login screen
+    this.oidcInit.signinRedirect();
   }
 
   logout() {
     // User redirected to home page on logout
     clearSession();
     cookies.clearAccessToken();
-    this.authZeroInit.logout({ returnTo: this.authConfig.returnTo });
+    this.oidcInit.signoutRedirect();
   }
 
   handleAuthentication() {
-    return this.authZeroAsync.parseHashAsync()
-      .then(processHash);
+    return this.oidcInit.signinRedirectCallback()
+      .then(user => processHash(user));
   }
 
   renewSession() {
-    const renewalAuthConfig = {
-      ...pick(this.authConfig, ['audience', 'scope']),
-      redirectUri: `${this.authConfig.returnTo}silent-callback`,
-      usePostMessage: true,
-    };
-    // Attempt to renew token in an iframe
-    return this.authZeroAsync.renewAuthAsync(renewalAuthConfig)
-      .then(processHash)
-      .catch(() => this.login()); // force login if renewAuth throws (user session expired)
+    // Library handles auto-renewal hence need to login to re-validate session
+    return this.login();
   }
 
   expiresIn(expiresAt) {
@@ -80,7 +69,7 @@ class Auth {
 }
 
 function processHash(authResponse) {
-  if (authResponse && authResponse.accessToken && authResponse.idToken) {
+  if (authResponse && authResponse.access_token && authResponse.id_token) {
     const unpackedResponse = processResponse(authResponse);
     cookies.storeAccessToken(unpackedResponse);
     setSession(unpackedResponse);
@@ -90,26 +79,14 @@ function processHash(authResponse) {
 }
 
 function processResponse(authResponse) {
-  const state = processState(authResponse.state);
-  const appRedirect = state ? state.appRedirect : undefined;
-  const expiresAt = authResponse.expiresAt || expiresAtCalculator(authResponse.expiresIn);
-  const identity = authResponse.identity || processIdentity(authResponse.idTokenPayload);
+  const expiresAt = authResponse.expires_at || expiresAtCalculator(authResponse.expires_in);
+  const identity = authResponse.identity || processIdentity(authResponse.profile);
 
   return {
     ...authResponse,
-    appRedirect,
     expiresAt,
-    state,
     identity,
   };
-}
-
-function processState(state) {
-  // auth0 silent renewal uses state parameter for a nonce value
-  if (/appRedirect/.test(state)) {
-    return JSON.parse(state);
-  }
-  return undefined;
 }
 
 function expiresAtCalculator(expiresIn) {
@@ -126,10 +103,18 @@ let authSession;
 
 const initialiseAuth = (authConfig) => {
   if (!authSession) {
-    const AuthZero = new auth0.WebAuth(authConfig);
-    const PromisifyAuthZero = Promise.promisifyAll(AuthZero);
+    Oidc.Log.logger = console;
+    Oidc.Log.level = Oidc.Log.INFO;
 
-    authSession = new Auth(AuthZero, PromisifyAuthZero, authConfig);
+    const userManagerConfig = {
+      ...authConfig,
+      userStore: new Oidc.WebStorageStateStore(),
+    };
+
+    const userManager = new Oidc.UserManager(userManagerConfig);
+    const PromisifyUserManager = Promise.promisifyAll(userManager);
+
+    authSession = new Auth(userManager, PromisifyUserManager, authConfig);
   }
 };
 

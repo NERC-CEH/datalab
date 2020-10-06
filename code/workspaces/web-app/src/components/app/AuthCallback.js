@@ -3,14 +3,13 @@ import { useDispatch } from 'react-redux';
 import { replace } from 'connected-react-router';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
-import { useUrlHash } from '../../hooks/routerHooks';
+import { useSearchUrl } from '../../hooks/routerHooks';
 
-export const handleAuth = async (urlHash, routeTo, dispatch) => {
-  if (/access_token|id_token|error/.test(urlHash)) {
+export const handleAuth = async (searchUrl, routeTo, dispatch) => {
+  if (/code|access_token|id_token|error/.test(searchUrl)) {
     try {
       const authResponse = await getAuth().handleAuthentication();
       dispatch(authActions.userLogsIn(authResponse));
-      dispatch(routeTo(authResponse.appRedirect));
     } catch (error) {
       // Redirect to home page if auth fails
       dispatch(routeTo('/'));
@@ -22,13 +21,13 @@ export const handleAuth = async (urlHash, routeTo, dispatch) => {
 };
 
 const AuthCallback = () => {
-  const urlHash = useUrlHash();
+  const searchUrl = useSearchUrl();
   const dispatch = useDispatch();
   const routeTo = replace;
 
   useEffect(() => {
-    handleAuth(urlHash, routeTo, dispatch);
-  }, [urlHash, routeTo, dispatch]);
+    handleAuth(searchUrl, routeTo, dispatch);
+  }, [searchUrl, routeTo, dispatch]);
 
   return null;
 };

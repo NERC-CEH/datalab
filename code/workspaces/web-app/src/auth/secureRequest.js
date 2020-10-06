@@ -10,7 +10,7 @@ request.interceptors.request.use((requestConfig) => {
     ...requestConfig,
     headers: {
       ...requestConfig.headers,
-      Authorization: `Bearer ${currentSession.accessToken}`,
+      Authorization: `Bearer ${currentSession.access_token}`,
     },
   };
 });

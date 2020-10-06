@@ -56,9 +56,9 @@ export default typeToReducer({
 
 function processTokens(authResponse) {
   return {
-    accessToken: authResponse.accessToken,
-    expiresAt: authResponse.expiresAt,
-    idToken: authResponse.idToken,
+    access_token: authResponse.access_token,
+    expires_at: authResponse.expires_at,
+    id_token: authResponse.id_token,
   };
 }
 

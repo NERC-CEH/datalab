@@ -20,9 +20,9 @@ describe('authReducer', () => {
     // Arrange
     const type = USER_LOGIN_ACTION;
     const payload = {
-      accessToken: 'expectedAccessToken',
-      expiresAt: 'value',
-      idToken: 'expectedIdToken',
+      access_token: 'expectedAccessToken',
+      expires_at: 'value',
+      id_token: 'expectedIdToken',
       identity: '{"first":123,"second":"string"}',
     };
     const action = { type, payload };
@@ -33,9 +33,9 @@ describe('authReducer', () => {
     // Assert
     expect(nextstate.permissions).toEqual(initialState.permissions);
     expect(nextstate.tokens).toEqual({
-      accessToken: payload.accessToken,
-      expiresAt: payload.expiresAt,
-      idToken: payload.idToken,
+      access_token: payload.access_token,
+      expires_at: payload.expires_at,
+      id_token: payload.id_token,
     });
     expect(nextstate.identity).toEqual({
       first: 123,
