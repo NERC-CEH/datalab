@@ -22,4 +22,6 @@
   * [Spark with PySpark and Object Store](spark-usage/spark-job-object-store.md)
   * [Spark with SparkR and Project Datastore](spark-usage/sparkr-project-datastore.md)
   * [Spark with SparkR and Object Store](spark-usage/sparkr-object-store.md)
-  
+* [File Upload](file-upload/README.md)
+  * [Minio Browser](file-upload/minio-browser.md)
+  * [Mino Client](file-upload/minio-client.md)

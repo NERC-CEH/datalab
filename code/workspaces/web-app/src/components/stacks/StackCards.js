@@ -1,21 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { sortBy } from 'lodash';
 import StackCard from './StackCard';
 import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
+import Pagination from './Pagination';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   stackDiv: {
     display: 'flex',
     flexDirection: 'column',
-  },
-  bottomControlDiv: {
-    display: 'flex',
-    justifyContent: 'flex-end',
   },
   placeholderCard: {
     width: '100%',
@@ -26,46 +23,51 @@ const styles = theme => ({
     borderTop: `1px solid ${theme.palette.divider}`,
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
-});
+}));
 
-const StackCards = ({ stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
-  userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, classes }) => {
+const StackCards = (
+  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack },
+) => {
+  const classes = useStyles();
+
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
+  const renderedStacks = sortedStacks && sortedStacks.length > 0
+    ? sortedStacks.map(stack => (
+      <StackCard
+        key={stack.id}
+        stack={stack}
+        typeName={typeName}
+        openStack={openStack}
+        deleteStack={deleteStack}
+        editStack={editStack}
+        shareStack={shareStack}
+        userPermissions={userPermissions(stack)}
+        openPermission={openPermission}
+        deletePermission={deletePermission}
+        editPermission={editPermission}
+        getLogs={getLogs}
+      />))
+    : [<div className={classes.placeholderCard} key={'placeholder-card'}>
+        <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
+      </div>];
+
+  const actionButton = (
+    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
+      <NewStackButton onClick={openCreationForm} typeName={typeName} />
+    </PermissionWrapper>
+  );
+
   return (
     <div className={classes.stackDiv}>
       <PromisedContentWrapper fetchingClassName={classes.placeholderCard} promise={stacks}>
-        <div> {/* extra div enables working css styling of stack card */}
-          {sortedStacks && sortedStacks.length > 0
-            ? sortedStacks.map(stack => (
-            <StackCard
-              key={stack.id}
-              stack={stack}
-              typeName={typeName}
-              openStack={openStack}
-              deleteStack={deleteStack}
-              editStack={editStack}
-              userPermissions={userPermissions(stack)}
-              openPermission={openPermission}
-              deletePermission={deletePermission}
-              editPermission={editPermission}
-              getLogs={getLogs}
-            />))
-            : <div className={classes.placeholderCard}>
-              <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
-            </div>
-          }
-        </div>
+        <Pagination items={renderedStacks} paginationBarItems={actionButton}/>
       </PromisedContentWrapper>
-      <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
-        <div className={classes.bottomControlDiv}>
-          <NewStackButton onClick={openCreationForm} typeName={typeName} />
-        </div>
-      </PermissionWrapper>
     </div>
   );
 };
 
-export default withStyles(styles)(StackCards);
+export default StackCards;
 
 StackCards.propTypes = {
   stacks: PropTypes.shape({
@@ -76,6 +78,7 @@ StackCards.propTypes = {
   typeName: PropTypes.string.isRequired,
   openStack: PropTypes.func.isRequired,
   deleteStack: PropTypes.func.isRequired,
+  shareStack: PropTypes.func,
   editStack: PropTypes.func,
   getLogs: PropTypes.func,
   openCreationForm: PropTypes.func.isRequired,

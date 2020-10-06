@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { statusTypes } from 'common';
+import { statusTypes, stackTypes } from 'common';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
@@ -13,6 +13,7 @@ import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 
 const { READY } = statusTypes;
 const MORE_ICON = 'more_vert';
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER, RSHINY } = stackTypes;
 
 const styles = theme => ({
   cardActions: {
@@ -33,12 +34,13 @@ const StackCardActions = (props) => {
 };
 
 export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
-  deletePermission, editPermission, currentUserId, classes, getLogs }) => {
+  deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
   const ownsStack = !stack.users || stack.users.includes(currentUserId);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const shared = ['project'].includes(stack.shared) || ['project', 'public'].includes(stack.visible);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,7 +87,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {stack.type === 'rshiny' && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+        {[RSHINY].includes(stack.type) && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem onClick={() => getLogs(stack)}>
             Logs
           </MenuItem>
@@ -94,6 +96,18 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           <MenuItem onClick={() => editStack(stack)}>
             Edit
           </MenuItem>
+        </PermissionWrapper>}
+        {([RSTUDIO, JUPYTERLAB, JUPYTER, ZEPPELIN, NBVIEWER, RSHINY].includes(stack.type))
+            && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
+          <Tooltip
+           title='Resource is already shared within the project'
+           disableHoverListener={!shared}>
+            <div>
+              <MenuItem disabled={shared} onClick={() => shareStack(stack, 'project')}>
+                Share
+              </MenuItem>
+            </div>
+          </Tooltip>
         </PermissionWrapper>}
         {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
           <MenuItem onClick={() => deleteStack(stack)}>
@@ -116,6 +130,7 @@ StackCardActions.propTypes = {
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
   getLogs: PropTypes.func,
+  shareStack: PropTypes.func,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,

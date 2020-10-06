@@ -32,10 +32,25 @@ const deleteStackPayloadGenerator = stack => datalabInfo => ({
 const sendDeletionRequest = context => stackPayload => stackService.deleteStack(stackPayload.projectKey, stackPayload, context)
   .then(response => response);
 
+const updateStack = (context, datalabName, stack) => datalabRepository.getByName(context.user, datalabName)
+  .then(updateStackPayloadGenerator(stack))
+  .then(logPayload('update'))
+  .then(sendUpdateRequest(context))
+  .catch(axiosErrorHandler('Unable to update stack'));
+
+const updateStackPayloadGenerator = stack => datalabInfo => ({
+  datalabInfo,
+  ...stack,
+  isPublic: true,
+});
+
+const sendUpdateRequest = context => stackPayload => stackService.updateStack(stackPayload.projectKey, stackPayload, context)
+  .then(response => response);
+
 const logPayload = protocolName => (payload) => {
   logger.info(`Requesting stack ${protocolName} request for ${payload.name}`);
   logger.debug(`${protocolName} request payload: ${JSON.stringify(payload)}`);
   return payload;
 };
 
-export default { createStack, deleteStack };
+export default { createStack, deleteStack, updateStack };

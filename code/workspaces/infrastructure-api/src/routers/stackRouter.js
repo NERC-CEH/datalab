@@ -8,7 +8,8 @@ const { errorWrapper: ew } = service.middleware;
 
 const {
   projectPermissions: {
-    PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_DELETE,
+    PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_CREATE,
+    PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_EDIT,
   },
 } = permissionTypes;
 
@@ -31,6 +32,18 @@ stackRouter.post(
   projectPermissionWrapper(PROJECT_KEY_STACKS_CREATE),
   stack.createStackValidator,
   ew(stack.createStack),
+);
+stackRouter.put(
+  '/:projectKey',
+  projectPermissionWrapper(PROJECT_KEY_STACKS_EDIT),
+  stack.updateStackValidator,
+  ew(stack.updateStack),
+);
+stackRouter.put(
+  '/:projectKey/restart',
+  projectPermissionWrapper(PROJECT_KEY_STACKS_EDIT),
+  stack.restartStackValidator,
+  ew(stack.restartStack),
 );
 stackRouter.delete(
   '/:projectKey',

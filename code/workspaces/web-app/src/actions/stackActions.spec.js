@@ -5,6 +5,7 @@ import stackActions, {
   OPEN_STACK_ACTION,
   CREATE_STACK_ACTION,
   DELETE_STACK_ACTION,
+  UPDATE_STACK_SHARE_STATUS_ACTION,
 } from './stackActions';
 import stackService from '../api/stackService';
 
@@ -101,6 +102,22 @@ describe('stackActions', () => {
       expect(output.type).toBe('DELETE_STACK');
       expect(output.payload).toBe('expectedStackPayload');
     });
+
+    it('updateStackShareStatus', () => {
+      // Arrange
+      const stack = { name: 'expectedType', projectKey: 'test', shared: 'private' };
+      const updateStackShareStatusMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.updateStackShareStatus = updateStackShareStatusMock;
+
+      // Act
+      const output = stackActions.updateStackShareStatus(stack);
+
+      // Assert
+      expect(updateStackShareStatusMock).toHaveBeenCalledTimes(1);
+      expect(updateStackShareStatusMock).toBeCalledWith(stack);
+      expect(output.type).toBe('UPDATE_STACK_SHARE_STATUS');
+      expect(output.payload).toBe('expectedStackPayload');
+    });
   });
 
   describe('exports correct values for', () => {
@@ -126,6 +143,10 @@ describe('stackActions', () => {
 
     it('DELETE_STACK_ACTION', () => {
       expect(DELETE_STACK_ACTION).toBe('DELETE_STACK');
+    });
+
+    it('UPDATE_STACK_SHARE_STATUS_ACTION', () => {
+      expect(UPDATE_STACK_SHARE_STATUS_ACTION).toBe('UPDATE_STACK_SHARE_STATUS');
     });
   });
 });

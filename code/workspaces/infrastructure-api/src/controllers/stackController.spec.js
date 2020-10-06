@@ -11,15 +11,21 @@ jest.mock('../dataaccess/stacksRepository');
 
 const createStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const deleteStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+const restartStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+const updateShareStatusMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const getOneByIdMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const getOneByNameMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
 const userCanDeleteStackMock = jest.fn().mockReturnValue(Promise.resolve(true));
+const userCanRestartStackMock = jest.fn().mockReturnValue(Promise.resolve(true));
 stackManager.createStack = createStackMock;
 stackManager.deleteStack = deleteStackMock;
+stackManager.restartStack = restartStackMock;
 stackRepository.default = {
   getOneById: getOneByIdMock,
   getOneByName: getOneByNameMock,
   userCanDeleteStack: userCanDeleteStackMock,
+  userCanRestartStack: userCanRestartStackMock,
+  updateShareStatus: updateShareStatusMock,
 };
 
 let request;
@@ -159,7 +165,7 @@ describe('Stack Controller', () => {
     });
 
     it('should return 500 for failed request', () => {
-      deleteStackMock.mockReturnValue(Promise.reject({ message: 'error' }));
+      deleteStackMock.mockRejectedValue({ message: 'error' });
 
       const response = httpMocks.createResponse();
 
@@ -174,7 +180,7 @@ describe('Stack Controller', () => {
     });
 
     it('should return 500 if user not allowed to delete stack', () => {
-      deleteStackMock.mockReturnValue(Promise.reject({ message: 'error' }));
+      deleteStackMock.mockRejectedValue({ message: 'error' });
       userCanDeleteStackMock.mockResolvedValueOnce(Promise.resolve(false));
 
       const response = httpMocks.createResponse();
@@ -187,6 +193,86 @@ describe('Stack Controller', () => {
         .catch(() => {
           expect(true).toBeFalsy();
         });
+    });
+  });
+
+  describe('updateStack', () => {
+    beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'project' }, stackController.updateStackValidator));
+
+    it('should process a valid request', () => {
+      const response = httpMocks.createResponse();
+
+      return stackController.updateStack(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(200);
+        });
+    });
+
+    it('should return 500 for failed request', () => {
+      updateShareStatusMock.mockReturnValue(Promise.reject({ message: 'error' }));
+
+      const response = httpMocks.createResponse();
+
+      return stackController.updateStack(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(500);
+          expect(response._getData()).toEqual({ error: 'error', message: 'Error updating stack: abcd1234' }); // eslint-disable-line no-underscore-dangle
+        })
+        .catch((res) => {
+          console.log(res);
+          expect(true).toBeFalsy();
+        });
+    });
+
+    it('should validate the shared field exists', () => createValidatedRequest({}, stackController.updateStackValidator)
+      .then(() => expectValidationError('shared', 'shared must be specified for notebooks')));
+
+    it('should validate the shared field value', () => {
+      const invalidRequest = { projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'private' };
+      return createValidatedRequest(invalidRequest, stackController.updateStackValidator)
+        .then(() => expectValidationError('shared', 'shared must be specified for notebooks'));
+    });
+  });
+
+  describe('restartStack', () => {
+    beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', name: 'notebookId', type: 'jupyter' }, stackController.restartStackValidator));
+
+    it('should process a valid request', async () => {
+      // Arrange
+      const response = httpMocks.createResponse();
+      restartStackMock.mockResolvedValue('success');
+
+      // Act
+      await stackController.restartStack(request, response);
+
+      // Assert
+      expect(response.statusCode).toEqual(200);
+    });
+
+    it('should return 500 for failed request', async () => {
+      // Arrange
+      const response = httpMocks.createResponse();
+      restartStackMock.mockRejectedValue({ message: 'error' });
+
+      // Act
+      await stackController.restartStack(request, response);
+
+      // Assert
+      expect(response.statusCode).toEqual(500);
+      expect(response._getData()).toEqual({ error: 'error', message: 'Error restarting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+    });
+
+    it('should return 500 if user not allowed to restart stack', async () => {
+      // Arrange
+      const response = httpMocks.createResponse();
+      userCanRestartStackMock.mockResolvedValueOnce(false);
+
+      // Act
+      await stackController.restartStack(request, response);
+
+      // Assert
+      expect(response.statusCode).toEqual(500);
+      expect(response._getData()).toEqual({ error: 'error', message: 'Error restarting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
     });
   });
 

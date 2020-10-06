@@ -32,7 +32,7 @@ describe('StackCards', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props).dive();
+    const output = shallowRender(props);
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -43,7 +43,7 @@ describe('StackCards', () => {
     const props = { ...generateProps(), stacks: { fetching: false, value: [] } };
 
     // Act
-    const output = shallowRender(props).dive();
+    const output = shallowRender(props);
 
     // Assert
     expect(output).toMatchSnapshot();

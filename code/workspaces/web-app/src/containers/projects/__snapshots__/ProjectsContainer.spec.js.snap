@@ -67,7 +67,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
       variant="filled"
     />
   </div>
-  <WithStyles(StackCards)
+  <StackCards
     createPermission="system:instance:admin"
     deletePermission=""
     deleteStack={[Function]}

@@ -74,6 +74,7 @@ function createOrUpdate(projectKey, user, stack) {
 }
 
 function deleteStack(projectKey, user, stack) {
+  // Filter exclusively by owner (User)
   return Stack()
     .find()
     .filterByProject(projectKey)
@@ -84,7 +85,12 @@ function deleteStack(projectKey, user, stack) {
 
 async function userCanDeleteStack(projectKey, user, name) {
   const stack = await getOneByName(projectKey, user, name);
-  return stack.users.includes(user.sub);
+  return stack.users && stack.users.includes(user.sub);
+}
+
+async function userCanRestartStack(projectKey, user, name) {
+  // same as delete - only users in list can restart stack
+  return userCanDeleteStack(projectKey, user, name);
 }
 
 // Function is used by kube-watcher to update stacks status. This will require an
@@ -94,6 +100,15 @@ function updateStatus(stack) {
   return Stack()
     .where({ name, type, projectKey: namespace })
     .updateOne({ status })
+    .exec();
+}
+
+function updateShareStatus(projectKey, user, name, shared) {
+  // Filter exclusively by owner (User)
+  return Stack()
+    .where({ name, projectKey })
+    .filterByUser(user)
+    .updateOne({ shared })
     .exec();
 }
 
@@ -108,5 +123,7 @@ export default {
   createOrUpdate,
   deleteStack,
   userCanDeleteStack,
+  userCanRestartStack,
   updateStatus,
+  updateShareStatus,
 };

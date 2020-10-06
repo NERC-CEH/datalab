@@ -10,7 +10,11 @@ const getDeploymentUrl = (namespace, name) => {
   return `${API_BASE}/apis/apps/v1/namespaces/${namespace}/deployments${nameComponent}`;
 };
 
+const getDeploymentScaleUrl = (namespace, name) => `${getDeploymentUrl(namespace, name)}/scale`;
+
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
+
+const PATCH_CONTENT_HEADER = { headers: { 'Content-Type': 'application/merge-patch+json' } };
 
 function createOrUpdateDeployment(name, namespace, manifest) {
   return getDeployment(name, namespace)
@@ -56,4 +60,29 @@ function deleteDeployment(name, namespace) {
     .catch(handleDeleteError('deployment', name));
 }
 
-export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment };
+async function getScale(name, namespace) {
+  const response = await axios.get(getDeploymentScaleUrl(namespace, name));
+  // TODO will remove these loggers once finished debugging
+  logger.info(`getScale response.status ${JSON.stringify(response.status)}`);
+  logger.info(`getScale response.data ${JSON.stringify(response.data)}`);
+  return response.data.spec.replicas;
+}
+
+async function setScale(name, namespace, scale) {
+  return axios.patch(
+    getDeploymentScaleUrl(namespace, name),
+    { spec: { replicas: scale } },
+    PATCH_CONTENT_HEADER,
+  );
+}
+
+async function restartDeployment(name, namespace) {
+  logger.info('Restarting deployment: %s in namespace: %s', name, namespace);
+
+  const initialScale = await getScale(name, namespace);
+  const newScale = initialScale || 1;
+  await setScale(name, namespace, 0);
+  return setScale(name, namespace, newScale);
+}
+
+export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment, restartDeployment };

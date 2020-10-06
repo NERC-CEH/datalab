@@ -11,6 +11,7 @@ Array [
   "createStack",
   "deleteStack",
   "getLogs",
+  "updateStackShareStatus",
   "openModalDialog",
   "closeModalDialog",
   "listUsers",
@@ -26,6 +27,14 @@ Object {
 }
 `;
 
+exports[`StacksContainer is a container which confirmShareStack generates correct dialog 1`] = `
+Object {
+  "body": "Please confirm you wish to share the expectedDisplayName Notebook with other users within the project. 
+      WARNING: This action cannot currently be reversed.",
+  "title": "Share Notebook",
+}
+`;
+
 exports[`StacksContainer is a container which openCreationForm generates correct dialog 1`] = `
 Object {
   "title": "Create a Notebook",
@@ -33,7 +42,7 @@ Object {
 `;
 
 exports[`StacksContainer is a container which passes correct props to StackCard 1`] = `
-<WithStyles(StackCards)
+<StackCards
   createPermission="projects:projtest:stacks:create"
   deletePermission="projects:projtest:stacks:delete"
   deleteStack={[Function]}
@@ -42,6 +51,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
   openCreationForm={[Function]}
   openPermission="projects:projtest:stacks:open"
   openStack={[Function]}
+  shareStack={[Function]}
   stacks={
     Object {
       "fetching": false,

@@ -1,71 +1,8 @@
 _type: export
 __export_format: 4
-__export_date: 2019-12-13T14:39:59.534Z
-__export_source: insomnia.desktop.app:v7.0.5
+__export_date: 2020-10-01T12:45:20.463Z
+__export_source: insomnia.desktop.app:v7.0.0
 resources:
-  - _id: req_b9b95c4383644bc1a22542c2470790b1
-    authentication:
-      token: "{{ internal_token  }}"
-      type: bearer
-    body: {}
-    created: 1568712933481
-    description: ""
-    headers: []
-    isPrivate: false
-    metaSortKey: -1568712933581
-    method: GET
-    modified: 1568990711216
-    name: Get Projects
-    parameters: []
-    parentId: fld_998699fb7271407c91200bc860ef8beb
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ infra_api_url  }}/projects"
-    _type: request
-  - _id: fld_998699fb7271407c91200bc860ef8beb
-    created: 1568712917499
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1568712917499
-    modified: 1568712917499
-    name: Infrastructure API
-    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    _type: request_group
-  - _id: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    created: 1519239116865
-    description: ""
-    modified: 1519239116865
-    name: Datalabs
-    parentId: null
-    _type: workspace
-  - _id: req_59dff46463f04da5aa0b427a1b91c429
-    authentication:
-      token: "{{ internal_token  }}"
-      type: bearer
-    body: {}
-    created: 1568727278931
-    description: ""
-    headers: []
-    isPrivate: false
-    metaSortKey: -1568712933556
-    method: GET
-    modified: 1568993252260
-    name: Get Project by Key
-    parameters: []
-    parentId: fld_998699fb7271407c91200bc860ef8beb
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ infra_api_url  }}/projects/project"
-    _type: request
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
     authentication:
       token: "{{ internal_token  }}"
@@ -86,20 +23,46 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1568712933531
+    metaSortKey: -1568712933681
     method: POST
-    modified: 1568991736404
+    modified: 1601540337344
     name: Create Project
     parameters: []
-    parentId: fld_998699fb7271407c91200bc860ef8beb
+    parentId: fld_5e6448fbd48f422ab34cfdce676516c9
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
     url: "{{ infra_api_url  }}/projects"
     _type: request
+  - _id: fld_5e6448fbd48f422ab34cfdce676516c9
+    created: 1569410878225
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1569410878225
+    modified: 1569410878225
+    name: Projects
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    _type: request_group
+  - _id: fld_998699fb7271407c91200bc860ef8beb
+    created: 1568712917499
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1568712917499
+    modified: 1568712917499
+    name: Infrastructure API
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    _type: request_group
+  - _id: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    created: 1519239116865
+    description: ""
+    modified: 1519239116865
+    name: Datalabs
+    parentId: null
+    _type: workspace
   - _id: req_027e9bfb84de4e3c8a27e63e6c519eac
     authentication:
       token: "{{ internal_token  }}"
@@ -120,19 +83,62 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1568712933506
+    metaSortKey: -1568712933656
     method: PUT
-    modified: 1568993310809
+    modified: 1601540341685
     name: Update or Create Project
     parameters: []
-    parentId: fld_998699fb7271407c91200bc860ef8beb
+    parentId: fld_5e6448fbd48f422ab34cfdce676516c9
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
     url: "{{ infra_api_url  }}/projects/another-project"
+    _type: request
+  - _id: req_59dff46463f04da5aa0b427a1b91c429
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1568727278931
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1568712933631
+    method: GET
+    modified: 1601540332721
+    name: Get Project by Key
+    parameters: []
+    parentId: fld_5e6448fbd48f422ab34cfdce676516c9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/projects/project"
+    _type: request
+  - _id: req_b9b95c4383644bc1a22542c2470790b1
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1568712933481
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1568712933581
+    method: GET
+    modified: 1601540325090
+    name: Get Projects
+    parameters: []
+    parentId: fld_5e6448fbd48f422ab34cfdce676516c9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/projects"
     _type: request
   - _id: req_7171a07c2408433296457db196a9077d
     authentication:
@@ -143,19 +149,103 @@ resources:
     description: ""
     headers: []
     isPrivate: false
-    metaSortKey: -1568712933481
+    metaSortKey: -1568712933531
     method: DELETE
-    modified: 1568823657985
+    modified: 1601540345279
     name: Delete Project
     parameters: []
-    parentId: fld_998699fb7271407c91200bc860ef8beb
+    parentId: fld_5e6448fbd48f422ab34cfdce676516c9
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
     url: "{{ infra_api_url  }}/projects/another-project"
+    _type: request
+  - _id: req_8fa42e7ccf224c929e99fffc3a5777fe
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1601542322175
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1568712933606
+    method: GET
+    modified: 1601542444187
+    name: Get Stacks
+    parameters: []
+    parentId: fld_541180f583704c469aaea72ca36c35be
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/stacks/"
+    _type: request
+  - _id: fld_541180f583704c469aaea72ca36c35be
+    created: 1569410940434
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1569236392035.875
+    modified: 1569410944009
+    name: Stacks
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    _type: request_group
+  - _id: req_09e96586d8a54b6dbdaee3c86aef15bb
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1601542494672
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1568712933593.5
+    method: GET
+    modified: 1601542792099
+    name: Get Stack by Stack Name
+    parameters: []
+    parentId: fld_541180f583704c469aaea72ca36c35be
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/stack/project/name/jupyter"
+    _type: request
+  - _id: req_61e8be6786a5426f8d4fb83c95a04a4d
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "jupyter",
+        	"type": "jupyter"
+        }
+    created: 1601542763150
+    description: ""
+    headers:
+      - id: pair_ab5a02265f1848799a822c475f3d8942
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1568712933543.5
+    method: PUT
+    modified: 1601543126302
+    name: Restart Stack
+    parameters: []
+    parentId: fld_541180f583704c469aaea72ca36c35be
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/stack/project/restart"
     _type: request
   - _id: req_096786f5e88746f8b2d4eabe27e09694
     authentication:
@@ -174,7 +264,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -207,7 +296,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -230,7 +318,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -253,7 +340,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -276,7 +362,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -307,7 +392,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -331,7 +415,6 @@ resources:
     parentId: fld_aedf6e0439314b319e879aec69a4f251
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -360,7 +443,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -400,7 +482,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -429,7 +510,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -458,7 +538,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -487,7 +566,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -516,7 +594,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -545,7 +622,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -573,7 +649,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -607,7 +682,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -637,7 +711,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -671,7 +744,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -700,7 +772,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -730,7 +801,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -759,7 +829,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -789,7 +858,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -819,7 +887,6 @@ resources:
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -843,7 +910,6 @@ resources:
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -876,7 +942,6 @@ resources:
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -899,7 +964,6 @@ resources:
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -922,7 +986,6 @@ resources:
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -955,7 +1018,6 @@ resources:
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -988,7 +1050,6 @@ resources:
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
@@ -1011,7 +1072,6 @@ resources:
     parentId: fld_313c3a8e345a49b3be4d55d06109639c
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
-    settingFollowRedirects: global
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true

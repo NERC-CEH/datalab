@@ -7,7 +7,7 @@ function validateAndExecute(request, response, errorMessage, execute) {
 
   if (!errors.isEmpty()) {
     logger.error(`${errorMessage}: ${JSON.stringify(request.body)}`);
-    logger.error(errors.mapped());
+    logger.error(JSON.stringify(errors.mapped()));
     return response.status(400).json({ errors: errors.mapped() });
   }
 
@@ -24,6 +24,11 @@ const sendSuccessfulDeletion = response => () => {
   response.send({ message: 'OK' });
 };
 
+const sendSuccessfulRestart = response => () => {
+  response.status(200);
+  response.send({ message: 'OK' });
+};
+
 const handleError = (response, action, type, name) => (error) => {
   const message = name ? `Error ${action} ${type}: ${name}` : `Error ${action} ${type}`;
   logger.error(error);
@@ -34,4 +39,4 @@ const handleError = (response, action, type, name) => (error) => {
   });
 };
 
-export default { validateAndExecute, sendSuccessfulCreation, sendSuccessfulDeletion, handleError };
+export default { validateAndExecute, sendSuccessfulCreation, sendSuccessfulDeletion, sendSuccessfulRestart, handleError };

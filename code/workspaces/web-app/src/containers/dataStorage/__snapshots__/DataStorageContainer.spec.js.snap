@@ -48,7 +48,7 @@ Object {
 `;
 
 exports[`DataStorageContainer is a container which passes correct props to StackCard 1`] = `
-<WithStyles(StackCards)
+<StackCards
   createPermission="projects:project99:storage:create"
   deletePermission="projects:project99:storage:delete"
   deleteStack={[Function]}

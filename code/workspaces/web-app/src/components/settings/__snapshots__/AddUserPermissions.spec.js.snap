@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddUserButton renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities 1`] = `
-<WithStyles(Tooltip)
+<WithStyles(ForwardRef(Tooltip))
   placement="top"
   title="Please enter a registered user's email."
 >
@@ -14,11 +14,11 @@ exports[`AddUserButton renders as disabled with explanatory tooltip when the sel
       Add
     </PrimaryActionButton>
   </div>
-</WithStyles(Tooltip)>
+</WithStyles(ForwardRef(Tooltip))>
 `;
 
 exports[`AddUserButton when selected user is the current user renders as disabled with explanatory tooltip when the current user is not system admin 1`] = `
-<WithStyles(Tooltip)
+<WithStyles(ForwardRef(Tooltip))
   placement="top"
   title="You can not add permissions for yourself."
 >
@@ -31,11 +31,11 @@ exports[`AddUserButton when selected user is the current user renders as disable
       Add
     </PrimaryActionButton>
   </div>
-</WithStyles(Tooltip)>
+</WithStyles(ForwardRef(Tooltip))>
 `;
 
 exports[`AddUserButton when selected user is the current user renders as not disabled when the current user is system admin 1`] = `
-<WithStyles(Tooltip)
+<WithStyles(ForwardRef(Tooltip))
   placement="top"
   title=""
 >
@@ -48,11 +48,11 @@ exports[`AddUserButton when selected user is the current user renders as not dis
       Add
     </PrimaryActionButton>
   </div>
-</WithStyles(Tooltip)>
+</WithStyles(ForwardRef(Tooltip))>
 `;
 
 exports[`AddUserButton when the selected user is not the current user renders as not disabled when the selected user name is in the list of possibilities 1`] = `
-<WithStyles(Tooltip)
+<WithStyles(ForwardRef(Tooltip))
   placement="top"
   title=""
 >
@@ -65,7 +65,7 @@ exports[`AddUserButton when the selected user is not the current user renders as
       Add
     </PrimaryActionButton>
   </div>
-</WithStyles(Tooltip)>
+</WithStyles(ForwardRef(Tooltip))>
 `;
 
 exports[`AddUserPermissions renders pure component with correct props 1`] = `

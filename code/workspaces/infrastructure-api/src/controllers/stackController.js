@@ -14,9 +14,19 @@ function createStack(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, createStackExec);
 }
 
+function restartStack(request, response) {
+  const errorMessage = 'Invalid stack restart request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, restartStackExec);
+}
+
 function deleteStack(request, response) {
   const errorMessage = 'Invalid stack deletion request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteStackExec);
+}
+
+function updateStack(request, response) {
+  const errorMessage = 'Invalid stack update request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, updateStackExec);
 }
 
 function getOneById(request, response) {
@@ -64,6 +74,36 @@ function createStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
 }
 
+function updateStackExec(request, response) {
+  // Build request params
+  const { user } = request;
+  const params = matchedData(request);
+  // Handle request
+  return stackRepository.updateShareStatus(params.projectKey, user, params.name, params.shared)
+    .then(res => response.send(res))
+    .catch(controllerHelper.handleError(response, 'updating', TYPE, params.name));
+}
+
+function restartStackExec(request, response) {
+  // Build request params
+  const { user } = request;
+  const params = matchedData(request);
+
+  const { projectKey, name } = params;
+
+  return stackRepository.userCanRestartStack(projectKey, user, name)
+    .then((result) => {
+      if (result) {
+        // Handle request
+        return stackManager.restartStack(params)
+          .then(controllerHelper.sendSuccessfulRestart(response))
+          .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
+      }
+      return Promise.reject();
+    })
+    .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
+}
+
 function deleteStackExec(request, response) {
   // Build request params
   const { user } = request;
@@ -107,6 +147,18 @@ const deleteStackValidator = [
   checkExistsWithMsg('type'),
 ];
 
+const restartStackValidator = [
+  ...withNameValidator,
+  checkExistsWithMsg('type'),
+];
+
+const updateStackValidator = [
+  checkExistsWithMsg('name'),
+  checkExistsWithMsg('projectKey'),
+  check('shared', 'shared must be specified for notebooks')
+    .custom((value, { req }) => 'project'.includes(req.body.shared)),
+];
+
 const createStackValidator = [
   ...deleteStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
@@ -142,8 +194,15 @@ const createStackValidator = [
   checkExistsWithMsg('volumeMount'),
 ];
 
-const validators = { withIdValidator, withNameValidator, deleteStackValidator, createStackValidator };
+const validators = {
+  withIdValidator,
+  withNameValidator,
+  deleteStackValidator,
+  createStackValidator,
+  updateStackValidator,
+  restartStackValidator,
+};
 
-const controllers = { getOneById, getOneByName, createStack, deleteStack };
+const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack };
 
 export default { ...validators, ...controllers };
