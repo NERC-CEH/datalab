@@ -59,7 +59,7 @@ describe('auth', () => {
 
     // Assert
     expect(signinRedirectMock.mock.calls.length).toBe(1);
-    expect(signinRedirectMock).toBeCalledWith({ appRedirect: 'expectedPathname' });
+    expect(signinRedirectMock).toBeCalledWith({ state: { appRedirect: 'expectedPathname' } });
   });
 
   it('logout calls clearSession and signoutRedirect', () => {
