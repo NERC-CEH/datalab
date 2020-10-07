@@ -22,7 +22,7 @@ class Auth {
 
   login() {
     // Re-direct to login screen
-    this.oidcInit.signinRedirect({ appRedirect: window.location.pathname });
+    this.oidcInit.signinRedirect({ state: { appRedirect: window.location.pathname } });
   }
 
   signUp() {
@@ -79,14 +79,24 @@ function processHash(authResponse) {
 }
 
 function processResponse(authResponse) {
+  const state = processState(authResponse.state);
+  const appRedirect = state ? state.appRedirect : undefined;
   const expiresAt = authResponse.expires_at || expiresAtCalculator(authResponse.expires_in);
   const identity = authResponse.identity || processIdentity(authResponse.profile);
 
   return {
     ...authResponse,
+    appRedirect,
     expiresAt,
     identity,
   };
+}
+
+function processState(state) {
+  if (/appRedirect/.test(JSON.stringify(state))) {
+    return state;
+  }
+  return undefined;
 }
 
 function expiresAtCalculator(expiresIn) {
