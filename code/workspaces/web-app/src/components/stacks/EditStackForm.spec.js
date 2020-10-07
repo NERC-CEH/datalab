@@ -1,20 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PureEditDataStoreForm } from './editDataStoreForm';
+import { PureEditStackForm } from './EditStackForm';
 
-describe('EditDataStoreForm', () => {
+describe('EditStackForm', () => {
   const shallowRender = () => shallow(
-    <PureEditDataStoreForm
+    <PureEditStackForm
       handleSubmit={jest.fn().mockName('handleSubmit')}
       reset={jest.fn().mockName('reset')}
       pristine={true}
       onCancel={jest.fn().mockName('onCancel')}
-      userList={[{ label: 'User 1', value: 'user1' }, { label: 'User 2', value: 'user2' }]}
-      loadUsersPromise={{ error: null, fetching: false, value: [] }}
     />,
   );
 
   it('renders to match snapshot', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    const pristine = true;
+    expect(shallowRender(pristine)).toMatchSnapshot();
   });
 });

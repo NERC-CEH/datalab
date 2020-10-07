@@ -18,6 +18,18 @@ exports[`stackService deleteStack should build the correct mutation and unpack t
     }"
 `;
 
+exports[`stackService editStack should build the correct mutation and unpack the results 1`] = `
+"
+    UpdateStack($stack: StackUpdateRequest) {
+      updateStack(stack: $stack) {
+        name
+        displayName
+        description
+        shared
+      }
+    }"
+`;
+
 exports[`stackService getUrl should build the correct query and return the url 1`] = `
 "
     GetUrl($projectKey: String!, $id: ID!) {
@@ -32,16 +44,6 @@ exports[`stackService loadStacks should build the correct query and unpack the r
     GetStacks($projectKey: String!) {
       stacks {
         id, projectKey, displayName, name, users, type, description, status, shared, visible
-      }
-    }"
-`;
-
-exports[`stackService updateStackShareStatus should build the correct mutation and unpack the results 1`] = `
-"
-    UpdateStack($stack: StackUpdateRequest) {
-      updateStack(stack: $stack) {
-        name,
-        shared
       }
     }"
 `;

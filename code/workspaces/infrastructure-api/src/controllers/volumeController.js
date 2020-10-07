@@ -98,9 +98,9 @@ async function updateVolume(request, response, next) {
   const { projectKey, name } = matchedValues;
 
   const updatedValues = USER_UPDATEABLE_FIELDS.reduce(
-    (previousValue, currentValue) => (
-      matchedValues[currentValue]
-        ? { ...previousValue, [currentValue]: matchedValues[currentValue] }
+    (previousValue, field) => (
+      matchedValues[field] !== undefined
+        ? { ...previousValue, [field]: matchedValues[field] }
         : previousValue
     ),
     {},

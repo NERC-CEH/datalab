@@ -53,6 +53,20 @@ class StacksContainer extends Component {
     .catch(err => notify.error(`Unable to create ${this.props.typeName}`))
     .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
 
+  editStack = async (stack) => {
+    this.props.actions.closeModalDialog();
+
+    try {
+      await this.props.actions.editStack(stack);
+      await this.props.actions.resetForm(this.props.formStateName);
+    } catch (error) {
+      console.log('error', error);
+      notify.error(`Unable to edit ${this.props.typeName}`);
+    } finally {
+      this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType);
+    }
+  }
+
   shareStack = (stack, shared) => Promise.resolve(this.props.actions.closeModalDialog())
     .then(() => this.props.actions.updateStackShareStatus({ ...stack, shared }))
     .then(() => notify.success(`Resource: ${stack.name} is now shared`))
@@ -60,7 +74,7 @@ class StacksContainer extends Component {
 
   confirmShareStack = (stack, shared) => this.props.actions.openModalDialog(MODAL_TYPE_SHARE_STACK, {
     title: `Share ${this.props.typeName}`,
-    body: `Please confirm you wish to share the ${stack.displayName} ${this.props.typeName} with other users within the project. 
+    body: `Please confirm you wish to share the ${stack.displayName} ${this.props.typeName} with other users within the project.
       WARNING: This action cannot currently be reversed.`,
     onCancel: this.props.actions.closeModalDialog,
     onSubmit: () => this.shareStack(stack, 'project'),
@@ -71,6 +85,14 @@ class StacksContainer extends Component {
     projectKey: this.props.projectKey.value,
     onSubmit: this.createStack,
     onCancel: this.props.actions.closeModalDialog,
+  });
+
+  openEditForm = stack => this.props.actions.openModalDialog(this.props.editDialogAction, {
+    title: `Edit ${this.props.typeName}`,
+    onSubmit: this.editStack,
+    onCancel: this.props.actions.closeModalDialog,
+    formComponent: this.props.formComponent,
+    stack,
   });
 
   deleteStack = stack => Promise.resolve(this.props.actions.closeModalDialog())
@@ -147,6 +169,7 @@ class StacksContainer extends Component {
         openStack={this.openStack}
         deleteStack={this.confirmDeleteStack}
         shareStack={this.confirmShareStack}
+        editStack={this.openEditForm}
         openCreationForm={this.openCreationForm}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
@@ -168,6 +191,7 @@ StacksContainer.propTypes = {
   containerType: PropTypes.string.isRequired,
   dialogAction: PropTypes.string.isRequired,
   formStateName: PropTypes.string.isRequired,
+  formComponent: PropTypes.elementType.isRequired,
   actions: PropTypes.shape({
     loadStacksByCategory: PropTypes.func.isRequired,
     getUrl: PropTypes.func.isRequired,

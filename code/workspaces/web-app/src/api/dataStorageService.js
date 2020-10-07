@@ -75,7 +75,7 @@ function removeUserFromDataStore(projectKey, dataStore) {
 
 function editDataStoreDetails(projectKey, name, updatedDetails) {
   const mutation = `
-    UpdateDataStoreDetails($projectKey: String!, $name: String!, $updatedDetails: DataStorageDetailsUpdateRequest) {
+    UpdateDataStoreDetails($projectKey: String!, $name: String!, $updatedDetails: DataStorageUpdateRequest) {
       updateDataStoreDetails(projectKey: $projectKey, name: $name, updatedDetails: $updatedDetails) {
         displayName
         description

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StacksContainer from '../stacks/StacksContainer';
-import { MODAL_TYPE_CREATE_SITE } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_SITE, MODAL_TYPE_EDIT_SITE } from '../../constants/modaltypes';
+import EditStackForm from '../../components/stacks/EditStackForm';
 
 const CONTAINER_TYPE = 'publish';
 const TYPE_NAME = 'Site';
@@ -14,8 +15,11 @@ const SitesContainer = ({ userPermissions }) => (
     typeNamePlural={TYPE_NAME_PLURAL}
     containerType={CONTAINER_TYPE}
     dialogAction={MODAL_TYPE_CREATE_SITE}
+    editDialogAction={MODAL_TYPE_EDIT_SITE}
     formStateName={FORM_NAME}
-    userPermissions={userPermissions} />);
+    formComponent={EditStackForm}
+    userPermissions={userPermissions} />
+);
 
 SitesContainer.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,

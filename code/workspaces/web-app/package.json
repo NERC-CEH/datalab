@@ -18,7 +18,7 @@
     "moment": "2.21.0",
     "moxios": "0.4.0",
     "oidc-client": "^1.10.1",
-    "prop-types": "15.5.8",
+    "prop-types": "15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",

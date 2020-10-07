@@ -170,6 +170,8 @@ input StackCreationRequest {
 input StackUpdateRequest {
     projectKey: String
     name: String
+    displayName: String
+    description: String
     shared: VisibilityType
 }
 

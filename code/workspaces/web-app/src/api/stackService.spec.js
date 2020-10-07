@@ -92,12 +92,12 @@ describe('stackService', () => {
     });
   });
 
-  describe('updateStackShareStatus', () => {
+  describe('editStack', () => {
     it('should build the correct mutation and unpack the results', () => {
       const data = { stack: { name: 'name', projectKey: 'test', shared: 'project' } };
       mockClient.prepareSuccess(data);
 
-      return stackService.updateStackShareStatus(data.stack).then((response) => {
+      return stackService.editStack(data.stack).then((response) => {
         expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
         expect(mockClient.lastOptions()).toEqual(data);
@@ -108,7 +108,7 @@ describe('stackService', () => {
       const data = { stack: { name: 'name', projectKey: 'test', shared: 'project' } };
       mockClient.prepareFailure('error');
 
-      return stackService.updateStackShareStatus(data.stack).catch((error) => {
+      return stackService.editStack(data.stack).catch((error) => {
         expect(error).toEqual({ error: 'error' });
       });
     });

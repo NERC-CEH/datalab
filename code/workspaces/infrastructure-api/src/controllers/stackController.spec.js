@@ -9,14 +9,16 @@ import * as stackRepository from '../dataaccess/stacksRepository';
 jest.mock('../stacks/stackManager');
 jest.mock('../dataaccess/stacksRepository');
 
-const createStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-const deleteStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-const restartStackMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-const updateShareStatusMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-const getOneByIdMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-const getOneByNameMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-const userCanDeleteStackMock = jest.fn().mockReturnValue(Promise.resolve(true));
-const userCanRestartStackMock = jest.fn().mockReturnValue(Promise.resolve(true));
+const createStackMock = jest.fn().mockResolvedValue('expectedPayload');
+const deleteStackMock = jest.fn().mockResolvedValue('expectedPayload');
+const restartStackMock = jest.fn().mockResolvedValue('expectedPayload');
+const updateShareStatusMock = jest.fn().mockResolvedValue('expectedPayload');
+const updateMock = jest.fn().mockResolvedValue('expectedPayload');
+const getOneByIdMock = jest.fn().mockResolvedValue('expectedPayload');
+const getOneByNameMock = jest.fn().mockResolvedValue('expectedPayload');
+const userCanDeleteStackMock = jest.fn().mockResolvedValue(true);
+const userCanRestartStackMock = jest.fn().mockResolvedValue(true);
+
 stackManager.createStack = createStackMock;
 stackManager.deleteStack = deleteStackMock;
 stackManager.restartStack = restartStackMock;
@@ -26,6 +28,7 @@ stackRepository.default = {
   userCanDeleteStack: userCanDeleteStackMock,
   userCanRestartStack: userCanRestartStackMock,
   updateShareStatus: updateShareStatusMock,
+  update: updateMock,
 };
 
 let request;
@@ -180,15 +183,14 @@ describe('Stack Controller', () => {
     });
 
     it('should return 500 if user not allowed to delete stack', () => {
-      deleteStackMock.mockRejectedValue({ message: 'error' });
-      userCanDeleteStackMock.mockResolvedValueOnce(Promise.resolve(false));
+      userCanDeleteStackMock.mockResolvedValueOnce(false);
 
       const response = httpMocks.createResponse();
 
       return stackController.deleteStack(request, response)
         .then(() => {
           expect(response.statusCode).toBe(500);
-          expect(response._getData()).toEqual({ error: 'error', message: 'Error deleting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+          expect(response._getData()).toEqual({ error: 'User cannot delete stack', message: 'Error deleting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
         })
         .catch(() => {
           expect(true).toBeFalsy();
@@ -197,7 +199,13 @@ describe('Stack Controller', () => {
   });
 
   describe('updateStack', () => {
-    beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'project' }, stackController.updateStackValidator));
+    beforeEach(async () => {
+      updateMock.mockClear();
+      await createValidatedRequest(
+        { projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'project' },
+        stackController.updateStackValidator,
+      );
+    });
 
     it('should process a valid request', () => {
       const response = httpMocks.createResponse();
@@ -208,8 +216,8 @@ describe('Stack Controller', () => {
         });
     });
 
-    it('should return 500 for failed request', () => {
-      updateShareStatusMock.mockReturnValue(Promise.reject({ message: 'error' }));
+    it('should return 500 for failed request', async () => {
+      updateMock.mockRejectedValue({ message: 'error' });
 
       const response = httpMocks.createResponse();
 
@@ -224,13 +232,73 @@ describe('Stack Controller', () => {
         });
     });
 
-    it('should validate the shared field exists', () => createValidatedRequest({}, stackController.updateStackValidator)
-      .then(() => expectValidationError('shared', 'shared must be specified for notebooks')));
+    describe('should validate the shared field value', () => {
+      const validValues = ['private', 'project', 'public'];
+      const invalidValue = 'invalidValue';
 
-    it('should validate the shared field value', () => {
-      const invalidRequest = { projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'private' };
-      return createValidatedRequest(invalidRequest, stackController.updateStackValidator)
-        .then(() => expectValidationError('shared', 'shared must be specified for notebooks'));
+      const baseRequest = { projectKey: 'expectedProjectKey', name: 'abcd1234' };
+
+      it(`validates ${validValues} as valid`, () => {
+        validValues.forEach(async (value) => {
+          await createValidatedRequest(
+            { ...baseRequest, shared: value }, stackController.updateStackValidator,
+          );
+          expectNoValidationError();
+        });
+      });
+
+      it(`validates ${invalidValue} as invalid`, async () => {
+        await createValidatedRequest(
+          { ...baseRequest, shared: invalidValue }, stackController.updateStackValidator,
+        );
+        expectValidationError(
+          'shared',
+          'Value of "shared" must be one of: "private", "project", "public".',
+        );
+      });
+    });
+
+    it('should only call update with user updateable fields', async () => {
+      const projectKey = 'projectKey';
+      const name = 'stackname';
+      const userUpdateableDetails = {
+        displayName: 'Stack Display Name',
+        description: 'Stack description',
+        shared: 'private',
+      };
+
+      const requestBody = {
+        projectKey,
+        name,
+        ...userUpdateableDetails,
+        nonUserUpdateable: 'not updateable',
+      };
+
+      await createValidatedRequest(requestBody, stackController.updateStackValidator);
+      const response = httpMocks.createResponse();
+      await stackController.updateStack(request, response);
+
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock).toBeCalledWith(projectKey, request.user, name, userUpdateableDetails);
+    });
+
+    it('should not pass undefined values to update but should pass other falsy values', async () => {
+      const projectKey = 'projectKey';
+      const name = 'stackname';
+
+      const requestBody = {
+        projectKey,
+        name,
+        displayName: '',
+        description: undefined,
+      };
+
+      await createValidatedRequest(requestBody, stackController.updateStackValidator);
+      const response = httpMocks.createResponse();
+      await stackController.updateStack(request, response);
+
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock).toBeCalledWith(projectKey, request.user, name, { displayName: '' });
     });
   });
 
@@ -366,6 +434,10 @@ function createValidatedRequest(body, validators) {
 
 function expectValidationError(fieldName, expectedMessage) {
   expect(validationResult(request).mapped()[fieldName].msg).toEqual(expectedMessage);
+}
+
+function expectNoValidationError() {
+  expect(validationResult(request).errors.length).toBe(0);
 }
 
 const createValidationPromise = req => validator => new Promise((resolve) => { validator(req, null, resolve); });

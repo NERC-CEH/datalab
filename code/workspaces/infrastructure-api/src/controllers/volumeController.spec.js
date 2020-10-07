@@ -260,6 +260,20 @@ describe('Volume Controller', () => {
       expect(updateMock.mock.calls[0][3]).toEqual({ displayName: 'Display Name' });
     });
 
+    it('should not pass undefined values to update but should pass other falsy values', async () => {
+      const requestBody = {
+        displayName: '',
+        description: undefined,
+      };
+
+      await validatedUpdateVolumeRequest(requestBody);
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response);
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock.mock.calls[0][3]).toEqual({ displayName: '' });
+    });
+
     it('should call next with an error if the update fails', async () => {
       updateMock.mockReturnValue(Promise.reject({ message: 'Expected error message.' }));
       const response = httpMocks.createResponse();

@@ -80,4 +80,15 @@ describe('stacksRepository', () => {
         expect(mockDatabase().user()).toBe('username');
       });
   });
+
+  it('update should query for stacks of the same name', async () => {
+    const name = 'stack';
+    const updatedValues = { displayName: 'Display Name' };
+
+    await stacksRepository.update(project, user, name, updatedValues);
+    expect(mockDatabase().queries()).toContainEqual({ name });
+    expect(mockDatabase().project()).toBe('expectedProject');
+    expect(mockDatabase().user()).toBe('username');
+    expect(mockDatabase().queries()).toContainEqual(updatedValues);
+  });
 });
