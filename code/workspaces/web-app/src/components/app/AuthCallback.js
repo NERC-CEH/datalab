@@ -10,6 +10,7 @@ export const handleAuth = async (searchUrl, routeTo, dispatch) => {
     try {
       const authResponse = await getAuth().handleAuthentication();
       dispatch(authActions.userLogsIn(authResponse));
+      dispatch(routeTo('/'));
     } catch (error) {
       // Redirect to home page if auth fails
       dispatch(routeTo('/'));
