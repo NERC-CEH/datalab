@@ -112,7 +112,7 @@ function restartStackExec(request, response) {
           .then(controllerHelper.sendSuccessfulRestart(response))
           .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
       }
-      return Promise.reject();
+      return Promise.reject(new Error('User cannot restart stack.'));
     })
     .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
 }

@@ -340,7 +340,7 @@ describe('Stack Controller', () => {
 
       // Assert
       expect(response.statusCode).toEqual(500);
-      expect(response._getData()).toEqual({ error: 'error', message: 'Error restarting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+      expect(response._getData()).toEqual({ error: 'User cannot restart stack.', message: 'Error restarting stack: notebookId' }); // eslint-disable-line no-underscore-dangle
     });
   });
 
