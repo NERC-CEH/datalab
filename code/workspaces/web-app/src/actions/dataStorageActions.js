@@ -8,6 +8,7 @@ export const CREATE_DATASTORE_ACTION = 'CREATE_DATASTORE';
 export const DELETE_DATASTORE_ACTION = 'DELETE_DATASTORE';
 export const ADD_USER_TO_DATASTORE_ACTION = 'ADD_USER_TO_DATASTORE';
 export const REMOVE_USER_FROM_DATASTORE_ACTION = 'REMOVE_USER_FROM_DATASTORE';
+export const EDIT_DATASTORE_DETAILS_ACTION = 'EDIT_DATASTORE_DETAILS';
 
 const loadDataStorage = projectKey => ({
   type: LOAD_DATASTORAGE_ACTION,
@@ -44,6 +45,11 @@ const removeUserFromDataStore = (projectKey, { name, users }) => ({
   payload: dataStorageService.removeUserFromDataStore(projectKey, { name, users }),
 });
 
+const editDataStoreDetails = (projectKey, name, updatedDetails) => ({
+  type: EDIT_DATASTORE_DETAILS_ACTION,
+  payload: dataStorageService.editDataStoreDetails(projectKey, name, updatedDetails),
+});
+
 export default {
   loadDataStorage,
   getCredentials,
@@ -52,4 +58,5 @@ export default {
   deleteDataStore,
   addUserToDataStore,
   removeUserFromDataStore,
+  editDataStoreDetails,
 };

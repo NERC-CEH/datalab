@@ -148,4 +148,31 @@ describe('dataStorageService', () => {
       expect(error).toEqual({ error: 'error' });
     });
   });
+
+  describe('editDataStoreDetails', () => {
+    const projectKey = 'project99';
+    const name = 'name';
+    const updatedDetails = { displayName: 'Updated Display Name' };
+    const data = { projectKey, name, updatedDetails };
+
+    it('should build the correct correct mutation and unpack the results', () => {
+      mockClient.prepareSuccess(data);
+
+      dataStorageService.editDataStoreDetails(projectKey, name, updatedDetails).then((response) => {
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual(data);
+      });
+    });
+
+    it('should throw an error if the mutation fails', async () => {
+      mockClient.prepareFailure('error');
+      let error;
+      try {
+        await dataStorageService.editDataStoreDetails(projectKey, name, updatedDetails);
+      } catch (err) {
+        error = err;
+      }
+      expect(error).toEqual({ error: 'error' });
+    });
+  });
 });

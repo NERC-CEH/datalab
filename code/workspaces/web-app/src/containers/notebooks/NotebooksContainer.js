@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StacksContainer from '../stacks/StacksContainer';
-import { MODAL_TYPE_CREATE_NOTEBOOK } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../constants/modaltypes';
+import EditStackForm from '../../components/stacks/EditStackForm';
 
 const CONTAINER_TYPE = 'analysis';
 const TYPE_NAME = 'Notebook';
@@ -14,8 +15,12 @@ const NotebooksContainer = ({ userPermissions }) => (
     typeNamePlural={TYPE_NAME_PLURAL}
     containerType={CONTAINER_TYPE}
     dialogAction={MODAL_TYPE_CREATE_NOTEBOOK}
+    editDialogAction={MODAL_TYPE_EDIT_NOTEBOOK}
     formStateName={FORM_NAME}
-    userPermissions={userPermissions} />);
+    formComponent={EditStackForm}
+    userPermissions={userPermissions}
+  />
+);
 
 NotebooksContainer.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,

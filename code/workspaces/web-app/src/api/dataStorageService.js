@@ -73,6 +73,19 @@ function removeUserFromDataStore(projectKey, dataStore) {
     .then(errorHandler('data.dataStorage'));
 }
 
+function editDataStoreDetails(projectKey, name, updatedDetails) {
+  const mutation = `
+    UpdateDataStoreDetails($projectKey: String!, $name: String!, $updatedDetails: DataStorageUpdateRequest) {
+      updateDataStoreDetails(projectKey: $projectKey, name: $name, updatedDetails: $updatedDetails) {
+        displayName
+        description
+      }
+    }`;
+
+  return gqlMutation(mutation, { projectKey, name, updatedDetails })
+    .then(errorHandler('data.dataStorage'));
+}
+
 export default {
   loadDataStorage,
   getCredentials,
@@ -80,4 +93,5 @@ export default {
   deleteDataStore,
   addUserToDataStore,
   removeUserFromDataStore,
+  editDataStoreDetails,
 };

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditStackDialog renders correctly passing values to provided from component 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Title
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <FormComponent
+      initialValues={
+        Object {
+          "description": "description",
+          "displayName": "Display Name",
+          "name": "stackname",
+        }
+      }
+      onCancel={[MockFunction onCancel]}
+      onSubmit={[MockFunction onSubmit]}
+    />
+  </WithStyles(ForwardRef(DialogContent))>
+</WithStyles(ForwardRef(Dialog))>
+`;

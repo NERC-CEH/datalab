@@ -1,61 +1,82 @@
-function createDatabaseMock(items, state = {}) {
-  let lastInvocation = state;
+class InvocationState {
+  constructor() {
+    this.queries = [];
+    this.lastQuery = undefined;
+    this.entity = undefined;
+    this.projectKey = undefined;
+    this.params = undefined;
+    this.user = undefined;
+  }
+
+  addQuery(query) {
+    this.lastQuery = query;
+    this.queries.push(query);
+  }
+}
+
+function createDatabaseMock(items, state) {
+  let invocations = state || new InvocationState();
 
   return () => ({
     find: (query) => {
-      lastInvocation.query = query;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.addQuery(query);
+      return createDatabaseMock(items, invocations)();
     },
     findOne: (query) => {
-      lastInvocation.query = query;
-      return createDatabaseMock(items[0], lastInvocation)();
+      invocations.addQuery(query);
+      return createDatabaseMock(items[0], invocations)();
     },
     findOneAndUpdate: (query, entity, params) => {
-      lastInvocation.query = query;
-      lastInvocation.entity = entity;
-      lastInvocation.params = params;
-      return createDatabaseMock(entity, lastInvocation)();
+      invocations.addQuery(query);
+      invocations.entity = entity;
+      invocations.params = params;
+      return createDatabaseMock(entity, invocations)();
     },
     filterByProject(projectKey) {
-      lastInvocation.projectKey = projectKey;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.projectKey = projectKey;
+      return createDatabaseMock(items, invocations)();
     },
     filterOneByProject(projectKey) {
-      lastInvocation.projectKey = projectKey;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.projectKey = projectKey;
+      return createDatabaseMock(items, invocations)();
     },
     filterByUser({ sub }) {
-      lastInvocation.user = sub;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.user = sub;
+      return createDatabaseMock(items, invocations)();
     },
     filterOneByUser({ sub }) {
-      lastInvocation.user = sub;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.user = sub;
+      return createDatabaseMock(items, invocations)();
     },
     filterByUserSharedVisible({ sub }) {
-      lastInvocation.user = sub;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.user = sub;
+      return createDatabaseMock(items, invocations)();
     },
     filterOneByUserSharedVisible({ sub }) {
-      lastInvocation.user = sub;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.user = sub;
+      return createDatabaseMock(items, invocations)();
     },
     remove: (query) => {
-      lastInvocation.query = query;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.addQuery(query);
+      return createDatabaseMock(items, invocations)();
     },
     deleteOne: (query) => {
-      lastInvocation.query = query;
-      return createDatabaseMock(items, lastInvocation)();
+      invocations.addQuery(query);
+      return createDatabaseMock(items, invocations)();
+    },
+    updateOne: (query) => {
+      invocations.addQuery(query);
+      return createDatabaseMock(items, invocations)();
     },
     exec: () => Promise.resolve(items),
-    invocation: () => lastInvocation,
-    query: () => lastInvocation.query,
-    entity: () => lastInvocation.entity,
-    params: () => lastInvocation.params,
-    project: () => lastInvocation.projectKey,
-    user: () => lastInvocation.user,
-    clear: () => { lastInvocation = {}; },
+    invocation: () => invocations,
+    query: () => invocations.lastQuery,
+    queries: () => invocations.queries,
+    entity: () => invocations.entity,
+    params: () => invocations.params,
+    project: () => invocations.projectKey,
+    user: () => invocations.user,
+    clear: () => { invocations = new InvocationState(); },
   });
 }
 

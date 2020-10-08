@@ -229,6 +229,76 @@ describe('Volume Controller', () => {
     });
   });
 
+  describe('updateVolume', () => {
+    beforeEach(async () => {
+      updateMock.mockClear();
+      // configures the request variable for the following tests
+      await validatedUpdateVolumeRequest({ displayName: 'displayName' });
+    });
+
+    it('should return the updated volume', async () => {
+      const updatedVolume = { name: 'updatedVolume', displayName: 'UpdatedVolume' };
+      updateMock.mockReturnValue(Promise.resolve(updatedVolume));
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response);
+      expect(response.statusCode).toBe(200);
+      expect(response._getData()).toEqual(updatedVolume); // eslint-disable-line no-underscore-dangle
+    });
+
+    it('should only update specific fields', async () => {
+      const requestBody = {
+        displayName: 'Display Name',
+        nonUpdateableField: 'non-updateable',
+      };
+
+      await validatedUpdateVolumeRequest(requestBody);
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response);
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock.mock.calls[0][3]).toEqual({ displayName: 'Display Name' });
+    });
+
+    it('should not pass undefined or null values to update', async () => {
+      const requestBody = {
+        displayName: null,
+        description: undefined,
+      };
+
+      await validatedUpdateVolumeRequest(requestBody);
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response);
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock.mock.calls[0][3]).toEqual({ });
+    });
+
+    it('should pass falsey values other than undefined and null', async () => {
+      const requestBody = {
+        displayName: null,
+        description: '',
+      };
+
+      await validatedUpdateVolumeRequest(requestBody);
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response);
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock.mock.calls[0][3]).toEqual({ description: '' });
+    });
+
+    it('should call next with an error if the update fails', async () => {
+      updateMock.mockReturnValue(Promise.reject({ message: 'Expected error message.' }));
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response, next.handler);
+      expect(next.getError().message).toEqual(
+        'Error updating volume details - project: project99 volume: volumeName: Expected error message.',
+      );
+    });
+  });
+
   function executeCreateValidator(body) {
     request = httpMocks.createRequest({ method: 'POST', body });
     const response = httpMocks.createResponse();
@@ -313,4 +383,17 @@ function validatedUpdateUserRequest() {
   });
 
   return volumeController.updateVolumeUserValidator(request, () => { }, () => { });
+}
+
+function validatedUpdateVolumeRequest(body) {
+  request = httpMocks.createRequest({
+    method: 'PATCH',
+    params: {
+      name: 'volumeName',
+      projectKey: 'project99',
+    },
+    body,
+  });
+
+  return volumeController.updateVolumeValidator(request, () => { }, () => { });
 }

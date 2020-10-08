@@ -10,6 +10,7 @@ admin:
       - delete
       - list
       - open
+      - edit
   - name: storage
     permissions:
       - create
@@ -42,6 +43,7 @@ user:
       - delete
       - list
       - open
+      - edit
   - name: storage
     permissions:
       - list

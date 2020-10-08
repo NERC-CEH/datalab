@@ -5,7 +5,7 @@ import stackActions, {
   OPEN_STACK_ACTION,
   CREATE_STACK_ACTION,
   DELETE_STACK_ACTION,
-  UPDATE_STACK_SHARE_STATUS_ACTION,
+  UPDATE_STACK_SHARE_STATUS_ACTION, EDIT_STACK_ACTION,
 } from './stackActions';
 import stackService from '../api/stackService';
 
@@ -106,16 +106,38 @@ describe('stackActions', () => {
     it('updateStackShareStatus', () => {
       // Arrange
       const stack = { name: 'expectedType', projectKey: 'test', shared: 'private' };
-      const updateStackShareStatusMock = jest.fn().mockReturnValue('expectedStackPayload');
-      stackService.updateStackShareStatus = updateStackShareStatusMock;
+      const editStackMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.editStack = editStackMock;
 
       // Act
       const output = stackActions.updateStackShareStatus(stack);
 
       // Assert
-      expect(updateStackShareStatusMock).toHaveBeenCalledTimes(1);
-      expect(updateStackShareStatusMock).toBeCalledWith(stack);
+      expect(editStackMock).toHaveBeenCalledTimes(1);
+      expect(editStackMock).toBeCalledWith(stack);
       expect(output.type).toBe('UPDATE_STACK_SHARE_STATUS');
+      expect(output.payload).toBe('expectedStackPayload');
+    });
+
+    it('editStack', () => {
+      // Arrange
+      const stack = {
+        name: 'expectedType',
+        projectKey: 'test',
+        displayName: 'Display Name',
+        description: 'Stack description.',
+        shared: 'private',
+      };
+      const editStackMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.editStack = editStackMock;
+
+      // Act
+      const output = stackActions.editStack(stack);
+
+      // Assert
+      expect(editStackMock).toHaveBeenCalledTimes(1);
+      expect(editStackMock).toBeCalledWith(stack);
+      expect(output.type).toBe('EDIT_STACK');
       expect(output.payload).toBe('expectedStackPayload');
     });
   });
@@ -147,6 +169,10 @@ describe('stackActions', () => {
 
     it('UPDATE_STACK_SHARE_STATUS_ACTION', () => {
       expect(UPDATE_STACK_SHARE_STATUS_ACTION).toBe('UPDATE_STACK_SHARE_STATUS');
+    });
+
+    it('EDIT_STACK', () => {
+      expect(EDIT_STACK_ACTION).toBe('EDIT_STACK');
     });
   });
 });

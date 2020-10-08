@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditDataStoreForm renders to match snapshot 1`] = `
+<form
+  onSubmit={[MockFunction handleSubmit]}
+>
+  <Field
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+  />
+  <Field
+    component={[Function]}
+    label="Description"
+    name="description"
+  />
+  <Field
+    component={[Function]}
+    getOptionLabel={[Function]}
+    getOptionSelected={[Function]}
+    label="User's with access to datastore"
+    loading={false}
+    name="users"
+    options={
+      Array [
+        Object {
+          "label": "User 1",
+          "value": "user1",
+        },
+        Object {
+          "label": "User 2",
+          "value": "user2",
+        },
+      ]
+    }
+    placeholder="Type user's email address"
+  />
+  <UpdateFormControls
+    onCancel={[MockFunction onCancel]}
+    onClearChanges={[MockFunction reset]}
+    pristine={true}
+  />
+</form>
+`;

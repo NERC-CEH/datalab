@@ -1,4 +1,4 @@
-import { check, matchedData } from 'express-validator';
+import { body, check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
@@ -8,6 +8,8 @@ import Stacks, { PUBLISH, ANALYSIS } from '../stacks/Stacks';
 import { visibility, getEnumValues } from '../models/stackEnums';
 
 const TYPE = 'stack';
+const USER_UPDATEABLE_FIELDS = ['displayName', 'description', 'shared'];
+const STACK_SHARED_VALUES = ['private', 'project', 'public'];
 
 function createStack(request, response) {
   const errorMessage = 'Invalid stack creation request';
@@ -78,10 +80,21 @@ function updateStackExec(request, response) {
   // Build request params
   const { user } = request;
   const params = matchedData(request);
+  const { projectKey, name } = params;
+
+  const updatedDetails = USER_UPDATEABLE_FIELDS.reduce(
+    (previousValue, field) => (
+      params[field] !== undefined
+        ? { ...previousValue, [field]: params[field] }
+        : previousValue
+    ),
+    {},
+  );
+
   // Handle request
-  return stackRepository.updateShareStatus(params.projectKey, user, params.name, params.shared)
+  return stackRepository.update(projectKey, user, name, updatedDetails)
     .then(res => response.send(res))
-    .catch(controllerHelper.handleError(response, 'updating', TYPE, params.name));
+    .catch(controllerHelper.handleError(response, 'updating', TYPE, name));
 }
 
 function restartStackExec(request, response) {
@@ -99,7 +112,7 @@ function restartStackExec(request, response) {
           .then(controllerHelper.sendSuccessfulRestart(response))
           .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
       }
-      return Promise.reject();
+      return Promise.reject(new Error('User cannot restart stack.'));
     })
     .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
 }
@@ -119,7 +132,7 @@ function deleteStackExec(request, response) {
           .then(controllerHelper.sendSuccessfulDeletion(response))
           .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
       }
-      return Promise.reject();
+      return Promise.reject(new Error('User cannot delete stack'));
     })
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
 }
@@ -155,8 +168,11 @@ const restartStackValidator = [
 const updateStackValidator = [
   checkExistsWithMsg('name'),
   checkExistsWithMsg('projectKey'),
-  check('shared', 'shared must be specified for notebooks')
-    .custom((value, { req }) => 'project'.includes(req.body.shared)),
+  ...USER_UPDATEABLE_FIELDS.map(field => body(field).optional({ nullable: true })),
+  body('shared')
+    .optional({ nullable: true })
+    .isIn(STACK_SHARED_VALUES)
+    .withMessage(`Value of "shared" must be one of: ${STACK_SHARED_VALUES.map(value => `"${value}"`).join(', ')}.`),
 ];
 
 const createStackValidator = [

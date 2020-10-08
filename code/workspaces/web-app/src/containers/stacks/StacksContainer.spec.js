@@ -97,12 +97,16 @@ describe('StacksContainer', () => {
     const getLogsMock = jest.fn();
     const shareStackMock = jest.fn();
     const updateStackShareStatusMock = jest.fn();
+    const editStackMock = jest.fn();
+
+    const FormComponent = () => <div />;
 
     const generateProps = () => ({
       stacks,
       typeName: 'Notebook',
       containerType: 'analysis',
       dialogAction: 'ACTION',
+      editDialogAction: 'EDIT_DIALOG_ACTION',
       formStateName: 'createNotebook',
       userPermissions: ['expectedPermission'],
       actions: {
@@ -118,8 +122,10 @@ describe('StacksContainer', () => {
         getLogs: getLogsMock,
         updateStackShareStatus: updateStackShareStatusMock,
         shareStack: shareStackMock,
+        editStack: editStackMock,
       },
       projectKey: { fetching: false, value: 'projtest' },
+      formComponent: FormComponent,
     });
 
     beforeEach(() => jest.clearAllMocks());
@@ -357,6 +363,68 @@ describe('StacksContainer', () => {
           expect(restFormMock).toHaveBeenCalledTimes(1);
           expect(restFormMock).toHaveBeenCalledWith('createNotebook');
         });
+    });
+
+    describe('openEditForm', () => {
+      it('calls openModalDialog with correct action', () => {
+        // Arrange
+        const props = generateProps();
+        const stack = { displayName: 'expectedDisplayName' };
+
+        // Act/Assert
+        const output = shallowRenderPure(props);
+        const openEditForm = output.prop('editStack');
+        expect(openModalDialogMock).not.toHaveBeenCalled();
+        openEditForm(stack);
+        expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+        const firstMockCall = openModalDialogMock.mock.calls[0];
+        expect(firstMockCall[0]).toBe('EDIT_DIALOG_ACTION');
+      });
+
+      it('calls openModalDialog with correct props', () => {
+        // Arrange
+        const props = generateProps();
+        const inputStack = { displayName: 'expectedDisplayName' };
+
+        // Act
+        const output = shallowRenderPure(props);
+        const openEditForm = output.prop('editStack');
+        expect(openModalDialogMock).not.toHaveBeenCalled();
+        openEditForm(inputStack);
+
+        // Assert
+        const firstMockCall = openModalDialogMock.mock.calls[0];
+        const { title, onSubmit, onCancel, formComponent, stack } = firstMockCall[1];
+        expect({ title }).toMatchSnapshot();
+        expect(onSubmit).toBe(output.instance().editStack);
+        expect(onCancel).toBe(closeModalDialogMock);
+        expect(formComponent).toBe(FormComponent);
+        expect(stack).toBe(inputStack);
+      });
+
+      it('onSubmit calls edit stack with correct value', async () => {
+        // Arrange
+        const props = generateProps();
+        const stack = { projectKey: 'projtest', displayName: 'expectedDisplayName' };
+
+        // Act
+        const output = shallowRenderPure(props);
+        const openEditForm = output.prop('editStack');
+        openEditForm();
+        const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+        // Assert
+        expect(editStackMock).not.toHaveBeenCalled();
+        expect(restFormMock).not.toHaveBeenCalled();
+        expect(loadStacksMock).toHaveBeenCalledTimes(1);
+
+        await onSubmit(stack);
+
+        expect(editStackMock).toHaveBeenCalledTimes(1);
+        expect(editStackMock).toHaveBeenCalledWith(stack);
+        expect(restFormMock).toHaveBeenCalledTimes(1);
+        expect(restFormMock).toHaveBeenCalledWith(props.formStateName);
+      });
     });
   });
 });

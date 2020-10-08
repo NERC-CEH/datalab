@@ -193,6 +193,8 @@ describe('LoadUserManagement Modal Wrapper', () => {
           { userId: 'anotherExpectedId', name: 'anotherExpectedName' },
         ],
       },
+      stack: { displayName: 'displayName', description: 'description' },
+      typeName: 'Data Store',
       Dialog: () => {},
     });
 

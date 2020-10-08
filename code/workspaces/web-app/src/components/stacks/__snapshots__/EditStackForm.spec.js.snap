@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditStackForm renders to match snapshot 1`] = `
+<form
+  onSubmit={[MockFunction handleSubmit]}
+>
+  <Field
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+  />
+  <Field
+    component={[Function]}
+    label="Description"
+    name="description"
+  />
+  <UpdateFormControls
+    onCancel={[MockFunction onCancel]}
+    onClearChanges={[MockFunction reset]}
+    pristine={true}
+  />
+</form>
+`;

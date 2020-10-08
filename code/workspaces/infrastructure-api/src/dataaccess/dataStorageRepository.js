@@ -38,7 +38,7 @@ function update({ sub }, projectKey, name, updatedValues) {
   const updateObj = {
     $set: updatedValues,
   };
-  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false }).exec();
+  return DataStorage().findOneAndUpdate(query, updateObj, { upsert: false, new: true }).exec();
 }
 
 function addUsers({ sub }, projectKey, name, userIds) {

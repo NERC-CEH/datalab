@@ -285,18 +285,18 @@ describe('DataStorageContainer', () => {
     it('openEditForm generates correct dialog', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', id: 'expectedId' };
+      const inputStack = { displayName: 'expectedDisplayName', id: 'expectedId' };
 
       // Act
       const output = shallowRenderPure(props);
       const editStack = output.prop('editStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
-      editStack(stack);
+      editStack(inputStack);
 
       // Assert
       const firstMockCall = openModalDialogMock.mock.calls[0];
-      const { title, onCancel, dataStoreId, userKeysMapping } = firstMockCall[1];
-      expect({ title, dataStoreId, userKeysMapping }).toMatchSnapshot();
+      const { title, onCancel, dataStoreId, userKeysMapping, stack, typeName } = firstMockCall[1];
+      expect({ title, dataStoreId, userKeysMapping, stack, typeName }).toMatchSnapshot();
       expect(onCancel).toBe(closeModalDialogMock);
     });
   });

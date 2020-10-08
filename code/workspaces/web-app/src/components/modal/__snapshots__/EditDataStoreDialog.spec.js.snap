@@ -10,50 +10,54 @@ exports[`Edit data store dialog creates correct snapshot 1`] = `
     expectedTitle
   </WithStyles(ForwardRef(DialogTitle))>
   <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(Typography))
-      gutterBottom={true}
-      variant="subtitle1"
-    >
-      Users with access to data store
-    </WithStyles(ForwardRef(Typography))>
-    <PromisedContentWrapper
-      promise={
+    <ReduxForm
+      destroyOnUnmount={true}
+      enableReinitialize={true}
+      forceUnregisterOnUnmount={false}
+      form="editDataStoreDetails"
+      getFormState={[Function]}
+      initialValues={
+        Object {
+          "description": "Stack description",
+          "displayName": "Stack Display Name",
+          "users": Array [
+            Object {
+              "label": "expectedLabelOne",
+              "value": "expectedValueOne",
+            },
+          ],
+        }
+      }
+      keepDirtyOnReinitialize={false}
+      loadUsersPromise={
         Object {
           "error": null,
           "fetching": false,
           "value": Array [],
         }
       }
-    >
-      <WithStyles(DownshiftMultiple)
-        addItem={[Function]}
-        placeholder="Type user's email address"
-        removeItem={[Function]}
-        selectedItems={
-          Array [
-            Object {
-              "label": "expectedLabelOne",
-              "value": "expectedValueOne",
-            },
-          ]
-        }
-        suggestions={
-          Array [
-            Object {
-              "label": "expectedLabelTwo",
-              "value": "expectedValueTwo",
-            },
-          ]
-        }
-      />
-    </PromisedContentWrapper>
+      onCancel={[MockFunction onCancel]}
+      onSubmit={[Function]}
+      persistentSubmitErrors={false}
+      pure={true}
+      shouldAsyncValidate={[Function]}
+      shouldError={[Function]}
+      shouldValidate={[Function]}
+      shouldWarn={[Function]}
+      submitAsSideEffect={false}
+      touchOnBlur={true}
+      touchOnChange={false}
+      updateUnregisteredFields={false}
+      userList={
+        Array [
+          Object {
+            "label": "expectedLabelTwo",
+            "value": "expectedValueTwo",
+          },
+        ]
+      }
+      validate={[Function]}
+    />
   </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <PrimaryActionButton
-      onClick={[Function]}
-    >
-      Close
-    </PrimaryActionButton>
-  </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;

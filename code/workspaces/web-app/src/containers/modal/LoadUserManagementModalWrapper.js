@@ -84,6 +84,9 @@ class LoadUserManagementModalWrapper extends Component {
         loadUsersPromise={this.props.users}
         addUser={this.addUser}
         removeUser={this.removeUser}
+        stack={this.props.stack}
+        typeName={this.props.typeName}
+        projectKey={this.props.projectKey}
       />
     );
   }

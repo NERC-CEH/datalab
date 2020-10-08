@@ -73,7 +73,7 @@ describe('dataStorageRepository', () => {
         expect(mockDatabase().entity()).toEqual({
           $set: { status: 'deleted' },
         });
-        expect(mockDatabase().params()).toEqual({ upsert: false });
+        expect(mockDatabase().params()).toEqual({ upsert: false, new: true });
       });
   });
 

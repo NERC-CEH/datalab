@@ -9,6 +9,7 @@ import RobustConfirmation from '../../components/modal/RobustConfirmation';
 import EditDataStore from '../dataStorage/EditDataStoreContainer';
 import CreateProjectDialog from '../../components/modal/CreateProjectDialog';
 import ShareStackDialog from '../../components/modal/ShareStackDialog';
+import EditStackDialog from '../../components/modal/EditStackDialog';
 import Logs from '../../components/modal/SiteLogs';
 
 import {
@@ -21,6 +22,7 @@ import {
   MODAL_TYPE_EDIT_DATA_STORE,
   MODAL_TYPE_CREATE_PROJECT,
   MODAL_TYPE_SHARE_STACK,
+  MODAL_TYPE_EDIT_NOTEBOOK, MODAL_TYPE_EDIT_SITE,
 } from '../../constants/modaltypes';
 
 const MODAL_COMPONENTS = {
@@ -33,6 +35,8 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_CREATE_PROJECT]: CreateProjectDialog,
   [MODAL_TYPE_LOGS]: Logs,
   [MODAL_TYPE_SHARE_STACK]: ShareStackDialog,
+  [MODAL_TYPE_EDIT_NOTEBOOK]: EditStackDialog,
+  [MODAL_TYPE_EDIT_SITE]: EditStackDialog,
 };
 
 const ModalRoot = ({ modalType, props }) => {

@@ -103,12 +103,13 @@ function updateStatus(stack) {
     .exec();
 }
 
-function updateShareStatus(projectKey, user, name, shared) {
+function update(projectKey, user, name, updatedValues) {
   // Filter exclusively by owner (User)
   return Stack()
-    .where({ name, projectKey })
+    .find({ name })
     .filterByUser(user)
-    .updateOne({ shared })
+    .filterByProject(projectKey)
+    .updateOne(updatedValues)
     .exec();
 }
 
@@ -125,5 +126,5 @@ export default {
   userCanDeleteStack,
   userCanRestartStack,
   updateStatus,
-  updateShareStatus,
+  update,
 };

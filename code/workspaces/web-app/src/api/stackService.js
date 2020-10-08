@@ -76,11 +76,13 @@ function getLogs(projectKey, name) {
     .then(errorHandler('data.logs'));
 }
 
-function updateStackShareStatus(stack) {
+function editStack(stack) {
   const mutation = `
     UpdateStack($stack: StackUpdateRequest) {
       updateStack(stack: $stack) {
-        name,
+        name
+        displayName
+        description
         shared
       }
     }`;
@@ -96,5 +98,5 @@ export default {
   createStack,
   deleteStack,
   getLogs,
-  updateStackShareStatus,
+  editStack,
 };

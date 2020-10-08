@@ -94,13 +94,21 @@ class DataStorageContainer extends Component {
     return this.confirmDeleteDataStore(dataStore);
   };
 
-  editDataStore = ({ displayName, id }) => this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
-    title: `Edit Data Store: ${displayName}`,
-    onCancel: this.props.actions.closeModalDialog,
-    projectKey: this.props.projectKey,
-    dataStoreId: id,
-    userKeysMapping: { name: 'label', userId: 'value' },
-  });
+  editDataStore = (stack) => {
+    const { displayName, id } = stack;
+    this.props.actions.openModalDialog(MODAL_TYPE_EDIT_DATA_STORE, {
+      title: `Edit Data Store: ${displayName}`,
+      onCancel: this.props.actions.closeModalDialog,
+      projectKey: this.props.projectKey,
+      dataStoreId: id,
+      userKeysMapping: {
+        name: 'label',
+        userId: 'value',
+      },
+      stack,
+      typeName: TYPE_NAME,
+    });
+  };
 
   componentDidMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content

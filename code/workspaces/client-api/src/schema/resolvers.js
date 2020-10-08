@@ -59,6 +59,9 @@ const resolvers = {
     removeUserFromDataStore: (obj, args, { user, token }) => (
       projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.removeUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token))
     ),
+    updateDataStoreDetails: (obj, args, { user, token }) => (
+      projectPermissionWrapper(args, STORAGE_EDIT, user, () => storageService.updateDetails(args.projectKey, args.name, args.updatedDetails, token))
+    ),
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { user, token }) => (
       projectPermissionWrapper({ projectKey }, PERMISSIONS_CREATE, user, () => projectService.addProjectPermission(projectKey, userId, role, token))
     ),

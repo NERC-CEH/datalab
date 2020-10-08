@@ -6,6 +6,7 @@ import dataStorageActions, {
   DELETE_DATASTORE_ACTION,
   ADD_USER_TO_DATASTORE_ACTION,
   REMOVE_USER_FROM_DATASTORE_ACTION,
+  EDIT_DATASTORE_DETAILS_ACTION,
 } from './dataStorageActions';
 import dataStorageService from '../api/dataStorageService';
 import minioService from '../api/minioService';
@@ -123,6 +124,31 @@ describe('dataStorageActions', () => {
       expect(output.type).toBe(REMOVE_USER_FROM_DATASTORE_ACTION);
       expect(output.payload).toBe('expectedPayload');
     });
+
+    it('editDataStoreDetails', () => {
+      // Arrange
+      const editDataStoreDetailsMock = jest.fn().mockReturnValue('expectedPayload');
+      dataStorageService.editDataStoreDetails = editDataStoreDetailsMock;
+
+      const updatedDetails = {
+        displayName: 'New Display Name',
+        description: 'New description',
+        users: ['user1', 'user2'],
+      };
+
+      // Act
+      const output = dataStorageActions.editDataStoreDetails(
+        'project99', 'datastorename', updatedDetails,
+      );
+
+      // Assert
+      expect(editDataStoreDetailsMock).toHaveBeenCalledTimes(1);
+      expect(editDataStoreDetailsMock).toHaveBeenCalledWith(
+        'project99', 'datastorename', updatedDetails,
+      );
+      expect(output.type).toBe(EDIT_DATASTORE_DETAILS_ACTION);
+      expect(output.payload).toBe('expectedPayload');
+    });
   });
 
   describe('exports correct values for', () => {
@@ -152,6 +178,10 @@ describe('dataStorageActions', () => {
 
     it('REMOVE_USER_FROM_DATASTORE_ACTION', () => {
       expect(REMOVE_USER_FROM_DATASTORE_ACTION).toBe('REMOVE_USER_FROM_DATASTORE');
+    });
+
+    it('EDIT_DATASTORE_DETAILS_ACTION', () => {
+      expect(EDIT_DATASTORE_DETAILS_ACTION).toBe('EDIT_DATASTORE_DETAILS');
     });
   });
 });
