@@ -59,6 +59,7 @@ class StacksContainer extends Component {
     try {
       await this.props.actions.editStack(stack);
       await this.props.actions.resetForm(this.props.formStateName);
+      notify.success(`${this.props.typeName} edited`);
     } catch (error) {
       console.log('error', error);
       notify.error(`Unable to edit ${this.props.typeName}`);

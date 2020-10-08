@@ -168,9 +168,9 @@ const restartStackValidator = [
 const updateStackValidator = [
   checkExistsWithMsg('name'),
   checkExistsWithMsg('projectKey'),
-  ...USER_UPDATEABLE_FIELDS.map(field => body(field).optional()),
+  ...USER_UPDATEABLE_FIELDS.map(field => body(field).optional({ nullable: true })),
   body('shared')
-    .optional()
+    .optional({ nullable: true })
     .isIn(STACK_SHARED_VALUES)
     .withMessage(`Value of "shared" must be one of: ${STACK_SHARED_VALUES.map(value => `"${value}"`).join(', ')}.`),
 ];

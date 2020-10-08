@@ -177,7 +177,7 @@ const queryVolumeValidator = service.middleware.validator([
 const updateVolumeValidator = service.middleware.validator([
   projectKeyCheck,
   nameCheck,
-  ...USER_UPDATEABLE_FIELDS.map(field => body(field).optional()),
+  ...USER_UPDATEABLE_FIELDS.map(field => body(field).optional({ nullable: true })),
 ], logger);
 
 export default {
