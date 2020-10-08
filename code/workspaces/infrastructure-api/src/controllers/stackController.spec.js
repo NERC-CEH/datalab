@@ -256,6 +256,13 @@ describe('Stack Controller', () => {
           'Value of "shared" must be one of: "private", "project", "public".',
         );
       });
+
+      it('allows null as an optional value', async () => {
+        await createValidatedRequest(
+          { ...baseRequest, shared: null }, stackController.updateStackValidator,
+        );
+        expectNoValidationError();
+      });
     });
 
     it('should only call update with user updateable fields', async () => {
@@ -282,7 +289,7 @@ describe('Stack Controller', () => {
       expect(updateMock).toBeCalledWith(projectKey, request.user, name, userUpdateableDetails);
     });
 
-    it('should not pass undefined values to update but should pass other falsy values', async () => {
+    it('should not pass undefined or null values to update but should pass other falsy values', async () => {
       const projectKey = 'projectKey';
       const name = 'stackname';
 
@@ -291,6 +298,7 @@ describe('Stack Controller', () => {
         name,
         displayName: '',
         description: undefined,
+        shared: null,
       };
 
       await createValidatedRequest(requestBody, stackController.updateStackValidator);

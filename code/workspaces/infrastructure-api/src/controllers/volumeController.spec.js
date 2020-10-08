@@ -260,9 +260,9 @@ describe('Volume Controller', () => {
       expect(updateMock.mock.calls[0][3]).toEqual({ displayName: 'Display Name' });
     });
 
-    it('should not pass undefined values to update but should pass other falsy values', async () => {
+    it('should not pass undefined or null values to update', async () => {
       const requestBody = {
-        displayName: '',
+        displayName: null,
         description: undefined,
       };
 
@@ -271,7 +271,21 @@ describe('Volume Controller', () => {
 
       await volumeController.updateVolume(request, response);
       expect(updateMock).toBeCalledTimes(1);
-      expect(updateMock.mock.calls[0][3]).toEqual({ displayName: '' });
+      expect(updateMock.mock.calls[0][3]).toEqual({ });
+    });
+
+    it('should pass falsey values other than undefined and null', async () => {
+      const requestBody = {
+        displayName: null,
+        description: '',
+      };
+
+      await validatedUpdateVolumeRequest(requestBody);
+      const response = httpMocks.createResponse();
+
+      await volumeController.updateVolume(request, response);
+      expect(updateMock).toBeCalledTimes(1);
+      expect(updateMock.mock.calls[0][3]).toEqual({ description: '' });
     });
 
     it('should call next with an error if the update fails', async () => {
