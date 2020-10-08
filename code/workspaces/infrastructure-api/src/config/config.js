@@ -37,11 +37,17 @@ const config = convict({
     default: 'http://localhost:8001',
     env: 'KUBERNETES_API',
   },
-  storageClass: {
-    doc: 'The storage class to use for new volumes',
+  glusterFSStorageClass: {
+    doc: 'The storage class to use for GlusterFS volumes',
     format: 'String',
     default: 'glusterfs-storage',
-    env: 'STORAGE_CLASS',
+    env: 'GLUSTERFS_STORAGE_CLASS',
+  },
+  nfsStorageClass: {
+    doc: 'The storage class to use for NFS volumes',
+    format: 'String',
+    default: 'nfs-storage',
+    env: 'NFS_STORAGE_CLASS',
   },
   authSigninUrl: {
     doc: 'The sign in URL',

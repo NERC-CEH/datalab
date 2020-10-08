@@ -150,6 +150,76 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 </div>
 `;
 
+exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
+<div
+  className="StackCard-cardDiv-1"
+>
+  <div
+    className="StackCard-imageDiv-2"
+  >
+    <WithStyles(ForwardRef(Icon))
+      className="StackCard-cardIcon-9"
+    >
+      save
+    </WithStyles(ForwardRef(Icon))>
+  </div>
+  <div
+    className="StackCard-textDiv-3"
+  >
+    <div
+      className="StackCard-displayNameContainer-5"
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="StackCard-displayName-4"
+        noWrap={true}
+        variant="h5"
+      >
+        name1
+      </WithStyles(ForwardRef(Typography))>
+    </div>
+    <WithStyles(ForwardRef(Tooltip))
+      placement="bottom-start"
+      title="Gluster File System (GlusterFS) volume to store data for Notebooks and Sites."
+    >
+      <WithStyles(ForwardRef(Typography))
+        noWrap={true}
+        variant="body1"
+      >
+        Gluster File System (GlusterFS) volume to store data for Notebooks and Sites.
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(ForwardRef(Tooltip))>
+  </div>
+  <div
+    className="StackCard-actionsDiv-6"
+  >
+    <WithStyles(StackCardActions)
+      deletePermission="delete"
+      deleteStack={[Function]}
+      editPermission="edit"
+      openPermission="open"
+      openStack={[Function]}
+      shareStack={[Function]}
+      stack={
+        Object {
+          "displayName": "name1",
+          "id": "100",
+          "shared": "private",
+          "status": undefined,
+          "type": "glusterfs",
+        }
+      }
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    />
+  </div>
+</div>
+`;
+
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
 <div
   className="StackCard-cardDiv-1"

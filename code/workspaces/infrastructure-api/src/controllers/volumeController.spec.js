@@ -89,6 +89,13 @@ describe('Volume Controller', () => {
       await executeCreateValidator(requestBody);
       expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
     });
+
+    it('should validate the type is between 1 and 2', async () => {
+      const requestBody = createRequestBody();
+      requestBody.type = 0;
+      await executeCreateValidator(requestBody);
+      expectValidationError('type', 'Type must be 1 (glusterfs) or 2 (nfs)');
+    });
   });
 
   describe('delete volume', () => {

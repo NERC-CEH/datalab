@@ -6,7 +6,7 @@ import { renderTextField, renderSelectField, renderTextArea, CreateFormControls 
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 
 const { DATA_STORE, getStackSelections } = stackTypes;
-const initialValues = { type: 'nfs' };
+const initialValues = { type: 'glusterfs' };
 
 const CreateDataStoreForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;

@@ -132,8 +132,8 @@ const createVolumeValidator = service.middleware.validator([
   existsCheck('displayName'),
   existsCheck('description'),
   existsCheck('type')
-    .isInt({ min: 1, max: 1 })
-    .withMessage('type must be specified as a valid storage type'),
+    .isInt({ min: 1, max: 2 })
+    .withMessage('Type must be 1 (glusterfs) or 2 (nfs)'),
   existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
     .withMessage('Volume Size must be an integer between 5 and 200'),

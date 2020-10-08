@@ -95,10 +95,10 @@ export const createIngressRuleWithConnect = (params, generator) => (service) => 
 };
 
 export const createPersistentVolume = (params, generator) => () => {
-  const { name, volumeSize, projectKey } = params;
+  const { name, volumeSize, projectKey, type } = params;
   const volumeName = nameGenerator.pvcName(name);
 
-  return generator(volumeName, volumeSize)
+  return generator(volumeName, volumeSize, type)
     .then((manifest) => {
       logger.info(`Creating persistent volume ${chalk.blue(volumeName)} with manifest:`);
       logger.debug(manifest.toString());

@@ -229,6 +229,9 @@ enum VisibilityType {
 enum StorageType {
     # Network File System (NFS) share.
     nfs
+
+    # Gluster File System
+    glusterfs
 }
 
 # Type to represent Auth0 User

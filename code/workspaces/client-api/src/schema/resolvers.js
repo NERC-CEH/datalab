@@ -95,7 +95,8 @@ const resolvers = {
   // This mapping is required to map the string to an id in the database.
   // Ideally it would be removed but this would break existing database entries
   StorageType: {
-    nfs: 1,
+    glusterfs: 1,
+    nfs: 2,
   },
 };
 
