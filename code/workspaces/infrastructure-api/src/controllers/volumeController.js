@@ -1,9 +1,10 @@
+import { stackTypes } from 'common';
 import { service } from 'service-chassis';
 import { check, matchedData } from 'express-validator';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import logger from '../config/logger';
-import { DELETED, NFS, GLUSTERFS } from '../models/dataStorage.model';
+import { DELETED } from '../models/dataStorage.model';
 
 async function createVolume(request, response, next) {
   // Build request params
@@ -133,7 +134,7 @@ const createVolumeValidator = service.middleware.validator([
   existsCheck('description'),
   existsCheck('type')
     .exists()
-    .isIn([GLUSTERFS, NFS]),
+    .isIn([stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME]),
   existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
     .withMessage('Volume Size must be an integer between 5 and 200'),

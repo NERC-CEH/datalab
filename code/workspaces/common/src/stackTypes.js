@@ -47,11 +47,6 @@ const STACK_TYPES = [
     category: PUBLISH,
   },
   {
-    name: LEGACY_GLUSTERFS_VOLUME,
-    shortDescription: 'A GlusterFS volume',
-    category: DATA_STORE,
-  },
-  {
     name: GLUSTERFS_VOLUME,
     shortDescription: 'A GlusterFS volume',
     category: DATA_STORE,

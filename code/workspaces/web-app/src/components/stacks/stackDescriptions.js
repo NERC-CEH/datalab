@@ -6,7 +6,7 @@ import rshinyLogo from '../../assets/images/rshiny-logo.png';
 import rstudioLogo from '../../assets/images/rstudio-logo.png';
 import zeppelinLogo from '../../assets/images/zeppelin-logo.svg';
 
-const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, LEGACY_GLUSTERFS_VOLUME, GLUSTERFS_VOLUME, NFS_VOLUME, PROJECT } = stackTypes;
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, GLUSTERFS_VOLUME, NFS_VOLUME, PROJECT } = stackTypes;
 
 const jupyterDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
 const jupyterlabDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
@@ -27,7 +27,6 @@ export default {
   [RSTUDIO]: { description: rstudioDescription, logo: rstudioLogo },
   [RSHINY]: { description: rshinyDescription, logo: rshinyLogo },
   [NBVIEWER]: { description: nbviewerDescription, logo: nbviewerLogo },
-  [LEGACY_GLUSTERFS_VOLUME]: { description: glusterfsVolumeDescription, icon: 'save' },
   [GLUSTERFS_VOLUME]: { description: glusterfsVolumeDescription, icon: 'save' },
   [NFS_VOLUME]: { description: nfsVolumeDescription, icon: 'save' },
   [PROJECT]: { description: projectDescription, initial: true },
