@@ -98,7 +98,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
         <div className={classes.displayNameContainer}>
           <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
           {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
-          {typeName === 'Data Store' ? <StorageType>({stack.type})</StorageType> : null}
+          {(typeName === 'Data Store' && stack.type) ? <StorageType>({stackDescriptions[stack.type].description})</StorageType> : null}
         </div>
         <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
           <Typography variant="body1" noWrap>{getDescription(stack, typeName)}</Typography>

@@ -106,13 +106,14 @@ input DataStorageUpdateRequest {
     users: [String]
 }
 
-# DataLabs data store type.
+# DataLabs data store type for retrieval.
+# type is not an enum when retrieving, because of legacy value for 1 = GlusterFS.  Enumeration is enforced in mongoose.
 type DataStore {
     id: ID
     name: String
     displayName: String
     description: String
-    type: StorageType
+    type: String
     volumeSize: Int
     url: String
     internalEndpoint: String
@@ -225,7 +226,7 @@ enum VisibilityType {
   public
 }
 
-# Data store classes within DataLabs
+# Data store classes within DataLabs for creation
 enum StorageType {
     # Network File System (NFS) share.
     nfs

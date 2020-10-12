@@ -1,11 +1,11 @@
 import config from '../config/config';
 import { VolumeTemplates, generateManifest } from './manifestGenerator';
+import { NFS, GLUSTERFS } from '../models/dataStorage.model';
 
 function getStorageClass(type) {
-  // these values correspond to code/workspaces/client-api/src/schema/resolvers.js StorageType
-  if (type === '1') {
+  if (type === GLUSTERFS) {
     return config.get('glusterFSStorageClass');
-  } if (type === '2') {
+  } if (type === NFS) {
     return config.get('nfsStorageClass');
   }
   throw new Error(`Unrecognized storage class type ${type}`);
