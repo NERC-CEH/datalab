@@ -57,6 +57,17 @@ describe('StackCard', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('creates correct snapshot for glusterfs stack type', () => {
+    // Arrange
+    const props = generateProps('glusterfs');
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
   it('should show status ad buttons when status is ready', () => {
     // Arrange
     const props = generateProps('jupyter', 'ready');

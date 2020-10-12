@@ -5,3 +5,10 @@ metadata:
   namespace: kube-system
   name: glusterfs-storage
 provisioner: k8s.io/minikube-hostpath
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  namespace: kube-system
+  name: nfs-storage
+provisioner: k8s.io/minikube-hostpath

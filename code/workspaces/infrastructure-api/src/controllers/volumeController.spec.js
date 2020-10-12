@@ -89,6 +89,13 @@ describe('Volume Controller', () => {
       await executeCreateValidator(requestBody);
       expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
     });
+
+    it('should validate the type is one of glusterfs,nfs', async () => {
+      const requestBody = createRequestBody();
+      requestBody.type = 1;
+      await executeCreateValidator(requestBody);
+      expectValidationError('type', 'Type must be one of glusterfs,nfs');
+    });
   });
 
   describe('delete volume', () => {
@@ -346,7 +353,7 @@ function createRequestBody() {
     projectKey: 'project99',
     displayName: 'displayName',
     description: 'description',
-    type: 1,
+    type: 'glusterfs',
     volumeSize: '10',
   };
 }

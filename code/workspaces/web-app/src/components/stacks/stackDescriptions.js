@@ -6,7 +6,7 @@ import rshinyLogo from '../../assets/images/rshiny-logo.png';
 import rstudioLogo from '../../assets/images/rstudio-logo.png';
 import zeppelinLogo from '../../assets/images/zeppelin-logo.svg';
 
-const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, NFS_VOLUME, PROJECT } = stackTypes;
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, GLUSTERFS_VOLUME, NFS_VOLUME, PROJECT } = stackTypes;
 
 const jupyterDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
 const jupyterlabDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
@@ -16,6 +16,7 @@ const rstudioDescription = 'RStudio is an integrated development environment (ID
 const rshinyDescription = 'Shiny is an R package that makes it easy to build interactive web apps straight from R. You can host standalone apps on a webpage or '
   + 'embed them in R Markdown documents or build dashboards.';
 const nbviewerDescription = 'NBViewer is a simple way to share notebooks. Any Jupyter notebook can be served as a web page.';
+const glusterfsVolumeDescription = 'Gluster File System (GlusterFS) volume to store data for Notebooks and Sites.';
 const nfsVolumeDescription = 'Network File System (NFS) volume to store data for Notebooks and Sites.';
 const projectDescription = 'A project lets users share information';
 
@@ -26,6 +27,7 @@ export default {
   [RSTUDIO]: { description: rstudioDescription, logo: rstudioLogo },
   [RSHINY]: { description: rshinyDescription, logo: rshinyLogo },
   [NBVIEWER]: { description: nbviewerDescription, logo: nbviewerLogo },
+  [GLUSTERFS_VOLUME]: { description: glusterfsVolumeDescription, icon: 'save' },
   [NFS_VOLUME]: { description: nfsVolumeDescription, icon: 'save' },
   [PROJECT]: { description: projectDescription, initial: true },
 };

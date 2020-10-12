@@ -18,6 +18,10 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       options={
         Array [
           Object {
+            "text": "Glusterfs",
+            "value": "glusterfs",
+          },
+          Object {
             "text": "Nfs",
             "value": "nfs",
           },

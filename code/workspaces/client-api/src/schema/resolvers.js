@@ -94,12 +94,6 @@ const resolvers = {
   ProjectUser: {
     name: (obj, args, ctx) => userService.getUserName(obj.userId, ctx.token),
   },
-
-  // This mapping is required to map the string to an id in the database.
-  // Ideally it would be removed but this would break existing database entries
-  StorageType: {
-    nfs: 1,
-  },
 };
 
 export default resolvers;

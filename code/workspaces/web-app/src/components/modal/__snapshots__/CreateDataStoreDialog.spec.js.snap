@@ -34,7 +34,7 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
           getFormState={[Function]}
           initialValues={
             Object {
-              "type": "nfs",
+              "type": "glusterfs",
             }
           }
           keepDirtyOnReinitialize={false}

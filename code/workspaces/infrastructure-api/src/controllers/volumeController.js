@@ -1,3 +1,4 @@
+import { stackTypes } from 'common';
 import { service } from 'service-chassis';
 import { check, body, matchedData } from 'express-validator';
 import volumeManager from '../stacks/volumeManager';
@@ -151,14 +152,16 @@ const updateVolumeUserValidator = service.middleware.validator([
   existsCheck('userIds.*'),
 ], logger);
 
+const allowedVolumeTypes = [stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME];
 const createVolumeValidator = service.middleware.validator([
   projectKeyCheck,
   nameCheck,
   existsCheck('displayName'),
   existsCheck('description'),
   existsCheck('type')
-    .isInt({ min: 1, max: 1 })
-    .withMessage('type must be specified as a valid storage type'),
+    .exists()
+    .isIn(allowedVolumeTypes)
+    .withMessage(`Type must be one of ${allowedVolumeTypes}`),
   existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
     .withMessage('Volume Size must be an integer between 5 and 200'),

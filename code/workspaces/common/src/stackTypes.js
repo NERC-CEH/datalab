@@ -6,6 +6,8 @@ const ZEPPELIN = 'zeppelin';
 const RSTUDIO = 'rstudio';
 const RSHINY = 'rshiny';
 const NBVIEWER = 'nbviewer';
+const LEGACY_GLUSTERFS_VOLUME = '1';
+const GLUSTERFS_VOLUME = 'glusterfs';
 const NFS_VOLUME = 'nfs';
 const PROJECT = 'project';
 
@@ -45,6 +47,11 @@ const STACK_TYPES = [
     category: PUBLISH,
   },
   {
+    name: GLUSTERFS_VOLUME,
+    shortDescription: 'A GlusterFS volume',
+    category: DATA_STORE,
+  },
+  {
     name: NFS_VOLUME,
     shortDescription: 'A NFS volume',
     category: DATA_STORE,
@@ -71,6 +78,8 @@ export {
   JUPYTER,
   JUPYTERLAB,
   NBVIEWER,
+  LEGACY_GLUSTERFS_VOLUME,
+  GLUSTERFS_VOLUME,
   NFS_VOLUME,
   PROJECT,
   PUBLISH,

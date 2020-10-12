@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-10-01T12:45:20.463Z
+__export_date: 2020-10-12T09:33:07.870Z
 __export_source: insomnia.desktop.app:v7.0.0
 resources:
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
@@ -224,7 +224,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"name": "jupyter",
+        	"name": "test2",
         	"type": "jupyter"
         }
     created: 1601542763150
@@ -236,7 +236,7 @@ resources:
     isPrivate: false
     metaSortKey: -1568712933543.5
     method: PUT
-    modified: 1601543126302
+    modified: 1601976141968
     name: Restart Stack
     parameters: []
     parentId: fld_541180f583704c469aaea72ca36c35be
@@ -245,7 +245,74 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ infra_api_url  }}/stack/project/restart"
+    url: "{{ infra_api_url  }}/stack/ploc/restart"
+    _type: request
+  - _id: req_aab771b6031e43d1ba89266cc5f782f8
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"projectKey": "ploc",
+        	"name": "locglusterfs",
+        	"displayName": "local glusterfs",
+        	"description": "test",
+        	"type": "glusterfs",
+        	"volumeSize": "5"
+        }
+    created: 1602494387999
+    description: ""
+    headers:
+      - id: pair_39e43053e7e84145ba27337b6f8de517
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1568712933649.75
+    method: POST
+    modified: 1602494520510
+    name: Create Volume
+    parameters: []
+    parentId: fld_f8507cecaacc4b00bd789a1cd72c59cd
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/volume"
+    _type: request
+  - _id: fld_f8507cecaacc4b00bd789a1cd72c59cd
+    created: 1569410909114
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1569061905846.75
+    modified: 1569410912789
+    name: Volumes
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    _type: request_group
+  - _id: req_d460502f6a654c60abbfa6b619898eaf
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    body: {}
+    created: 1602494262838
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1568712933599.75
+    method: GET
+    modified: 1602495084891
+    name: Get Volumes by Project
+    parameters: []
+    parentId: fld_f8507cecaacc4b00bd789a1cd72c59cd
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ infra_api_url  }}/volumes/active/ploc"
     _type: request
   - _id: req_096786f5e88746f8b2d4eabe27e09694
     authentication:
