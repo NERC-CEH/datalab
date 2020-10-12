@@ -94,7 +94,7 @@ describe('Volume Controller', () => {
       const requestBody = createRequestBody();
       requestBody.type = 0;
       await executeCreateValidator(requestBody);
-      expectValidationError('type', 'Type must be 1 (glusterfs) or 2 (nfs)');
+      expectValidationError('type', 'Type muste be one of glusterfs,nfs');
     });
   });
 
@@ -283,7 +283,7 @@ function createRequestBody() {
     projectKey: 'project99',
     displayName: 'displayName',
     description: 'description',
-    type: 1,
+    type: 'glusterfs',
     volumeSize: '10',
   };
 }

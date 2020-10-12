@@ -127,6 +127,7 @@ const updateVolumeUserValidator = service.middleware.validator([
   existsCheck('userIds.*'),
 ], logger);
 
+const allowedVolumeTypes = [stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME];
 const createVolumeValidator = service.middleware.validator([
   projectKeyCheck,
   nameCheck,
@@ -134,7 +135,8 @@ const createVolumeValidator = service.middleware.validator([
   existsCheck('description'),
   existsCheck('type')
     .exists()
-    .isIn([stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME]),
+    .isIn(allowedVolumeTypes)
+    .withMessage(`Type muste be one of ${allowedVolumeTypes}`),
   existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
     .withMessage('Volume Size must be an integer between 5 and 200'),

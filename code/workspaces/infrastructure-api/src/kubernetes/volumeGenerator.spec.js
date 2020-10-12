@@ -4,7 +4,7 @@ describe('volumeGenerator', () => {
   describe('createVolume', () => {
     it('creates GlusterFS manifest', async () => {
       // Act
-      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, '1');
+      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, 'glusterfs');
 
       // Assert
       expect(glusterFSManifest).toMatch('name: volume-name');
@@ -14,7 +14,7 @@ describe('volumeGenerator', () => {
 
     it('creates NFS manifest', async () => {
       // Act
-      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, '2');
+      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, 'nfs');
 
       // Assert
       expect(glusterFSManifest).toMatch('name: volume-name');
@@ -24,7 +24,7 @@ describe('volumeGenerator', () => {
 
     it('throws error for unexpected storage type', async () => {
       // Assert
-      await expect(volumeGenerator.createVolume('volume-name', 5, '0')).rejects.toThrow('Unrecognized storage class type 0');
+      await expect(volumeGenerator.createVolume('volume-name', 5, '1')).rejects.toThrow('Unrecognized storage class type 1');
     });
   });
 });

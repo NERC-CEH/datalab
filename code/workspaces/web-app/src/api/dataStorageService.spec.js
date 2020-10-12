@@ -7,13 +7,45 @@ describe('dataStorageService', () => {
   beforeEach(() => mockClient.clearResult());
 
   describe('loadDataStorage', () => {
-    it('should build the correct query and unpack the results', () => {
-      mockClient.prepareSuccess({ dataStorage: 'expectedValue' });
+    it('should build the correct query and unpack the results', async () => {
+      // Arrange
+      const legacyDataStorage = [
+        {
+          name: 'legacy glusterfs storage',
+          type: '1',
+        },
+        {
+          name: 'glusterfs storage',
+          type: 'glusterfs',
+        },
+        {
+          name: 'nfs storage',
+          type: 'nfs',
+        },
+      ];
+      const mappedDataStorage = [
+        {
+          name: 'legacy glusterfs storage',
+          type: 'glusterfs', // i.e. '1' has been mapped to 'glusterfs'
+        },
+        {
+          name: 'glusterfs storage',
+          type: 'glusterfs',
+        },
+        {
+          name: 'nfs storage',
+          type: 'nfs',
+        },
+      ];
+      const clientResponse = { dataStorage: legacyDataStorage };
+      mockClient.prepareSuccess(clientResponse);
 
-      dataStorageService.loadDataStorage('project99').then((response) => {
-        expect(response).toEqual('expectedValue');
-        expect(mockClient.lastQuery()).toMatchSnapshot();
-      });
+      // Act
+      const dataStorage = await dataStorageService.loadDataStorage('project99');
+
+      // Assert
+      expect(dataStorage).toEqual(mappedDataStorage);
+      expect(mockClient.lastQuery()).toMatchSnapshot();
     });
 
     it('should throw an error if the query fails', async () => {
