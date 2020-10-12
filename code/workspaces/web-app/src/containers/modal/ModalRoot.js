@@ -22,8 +22,11 @@ import {
   MODAL_TYPE_EDIT_DATA_STORE,
   MODAL_TYPE_CREATE_PROJECT,
   MODAL_TYPE_SHARE_STACK,
-  MODAL_TYPE_EDIT_NOTEBOOK, MODAL_TYPE_EDIT_SITE,
+  MODAL_TYPE_EDIT_NOTEBOOK,
+  MODAL_TYPE_EDIT_SITE,
+  MODAL_TYPE_RESTART_STACK,
 } from '../../constants/modaltypes';
+import RestartStackDialog from '../../components/modal/RestartStackDialog';
 
 const MODAL_COMPONENTS = {
   [MODAL_TYPE_CREATE_NOTEBOOK]: CreateNotebookDialog,
@@ -37,6 +40,7 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_SHARE_STACK]: ShareStackDialog,
   [MODAL_TYPE_EDIT_NOTEBOOK]: EditStackDialog,
   [MODAL_TYPE_EDIT_SITE]: EditStackDialog,
+  [MODAL_TYPE_RESTART_STACK]: RestartStackDialog,
 };
 
 const ModalRoot = ({ modalType, props }) => {

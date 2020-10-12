@@ -5,7 +5,7 @@ import stackActions, {
   OPEN_STACK_ACTION,
   CREATE_STACK_ACTION,
   DELETE_STACK_ACTION,
-  UPDATE_STACK_SHARE_STATUS_ACTION, EDIT_STACK_ACTION,
+  UPDATE_STACK_SHARE_STATUS_ACTION, EDIT_STACK_ACTION, RESTART_STACK_ACTION,
 } from './stackActions';
 import stackService from '../api/stackService';
 
@@ -122,7 +122,7 @@ describe('stackActions', () => {
     it('editStack', () => {
       // Arrange
       const stack = {
-        name: 'expectedType',
+        name: 'stackname',
         projectKey: 'test',
         displayName: 'Display Name',
         description: 'Stack description.',
@@ -138,6 +138,26 @@ describe('stackActions', () => {
       expect(editStackMock).toHaveBeenCalledTimes(1);
       expect(editStackMock).toBeCalledWith(stack);
       expect(output.type).toBe('EDIT_STACK');
+      expect(output.payload).toBe('expectedStackPayload');
+    });
+
+    it('restartStack', () => {
+      // Arrange
+      const stack = {
+        name: 'stackname',
+        projectKey: 'test',
+        type: 'expectedType',
+      };
+      const restartStackMock = jest.fn().mockReturnValue('expectedStackPayload');
+      stackService.restartStack = restartStackMock;
+
+      // Act
+      const output = stackActions.restartStack(stack);
+
+      // Assert
+      expect(restartStackMock).toHaveBeenCalledTimes(1);
+      expect(restartStackMock).toBeCalledWith(stack);
+      expect(output.type).toBe('RESTART_STACK');
       expect(output.payload).toBe('expectedStackPayload');
     });
   });
@@ -173,6 +193,10 @@ describe('stackActions', () => {
 
     it('EDIT_STACK', () => {
       expect(EDIT_STACK_ACTION).toBe('EDIT_STACK');
+    });
+
+    it('RESTART_STACK', () => {
+      expect(RESTART_STACK_ACTION).toBe('RESTART_STACK');
     });
   });
 });

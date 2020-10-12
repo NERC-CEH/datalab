@@ -11,6 +11,7 @@ export const DELETE_STACK_ACTION = 'DELETE_STACK';
 export const GET_LOGS_ACTION = 'GET_LOGS';
 export const UPDATE_STACK_SHARE_STATUS_ACTION = 'UPDATE_STACK_SHARE_STATUS';
 export const EDIT_STACK_ACTION = 'EDIT_STACK';
+export const RESTART_STACK_ACTION = 'RESTART_STACK';
 
 const loadStacks = () => ({
   type: LOAD_STACKS_ACTION,
@@ -67,6 +68,11 @@ const editStack = ({ projectKey, name, displayName, description, shared }) => ({
   payload: stackService.editStack({ projectKey, name, displayName, description, shared }),
 });
 
+const restartStack = ({ projectKey, name, type }) => ({
+  type: RESTART_STACK_ACTION,
+  payload: stackService.restartStack({ projectKey, name, type }),
+});
+
 export default {
   loadStacks,
   loadStacksByCategory,
@@ -79,4 +85,5 @@ export default {
   getLogs,
   updateStackShareStatus,
   editStack,
+  restartStack,
 };

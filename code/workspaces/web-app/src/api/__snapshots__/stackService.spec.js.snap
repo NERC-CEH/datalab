@@ -47,3 +47,12 @@ exports[`stackService loadStacks should build the correct query and unpack the r
       }
     }"
 `;
+
+exports[`stackService restartStack should build the correct mutation and unpack the results 1`] = `
+"
+    RestartStack($stack: StackRestartRequest) {
+      restartStack(stack: $stack) {
+        name
+      }
+    }"
+`;

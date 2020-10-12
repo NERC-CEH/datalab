@@ -72,6 +72,13 @@ function getStackKeys() {
   return STACK_TYPES.map(type => type.name);
 }
 
+function stackInCategory(stackName, ...category) {
+  return STACK_TYPES
+    .filter(item => category.includes(item.category))
+    .map(item => item.name)
+    .includes(stackName);
+}
+
 export {
   ANALYSIS,
   DATA_STORE,
@@ -89,4 +96,5 @@ export {
   getStackKeys,
   getStackSelections,
   getStackTypes,
+  stackInCategory,
 };

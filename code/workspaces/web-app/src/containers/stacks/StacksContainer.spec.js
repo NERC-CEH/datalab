@@ -98,6 +98,7 @@ describe('StacksContainer', () => {
     const shareStackMock = jest.fn();
     const updateStackShareStatusMock = jest.fn();
     const editStackMock = jest.fn();
+    const restartStackMock = jest.fn();
 
     const FormComponent = () => <div />;
 
@@ -123,6 +124,7 @@ describe('StacksContainer', () => {
         updateStackShareStatus: updateStackShareStatusMock,
         shareStack: shareStackMock,
         editStack: editStackMock,
+        restartStack: restartStackMock,
       },
       projectKey: { fetching: false, value: 'projtest' },
       formComponent: FormComponent,
@@ -422,6 +424,70 @@ describe('StacksContainer', () => {
 
         expect(editStackMock).toHaveBeenCalledTimes(1);
         expect(editStackMock).toHaveBeenCalledWith(stack);
+        expect(restFormMock).toHaveBeenCalledTimes(1);
+        expect(restFormMock).toHaveBeenCalledWith(props.formStateName);
+      });
+    });
+
+    describe('confirmRestartStack', () => {
+      it('calls openModalDialog with correct action', () => {
+        // Arrange
+        const props = generateProps();
+        const stack = { displayName: 'expectedDisplayName' };
+
+        // Act/Assert
+        const output = shallowRenderPure(props);
+        const confirmRestartStack = output.prop('restartStack');
+        expect(openModalDialogMock).not.toHaveBeenCalled();
+        confirmRestartStack(stack);
+        expect(openModalDialogMock).toHaveBeenCalledTimes(1);
+        const firstMockCall = openModalDialogMock.mock.calls[0];
+        expect(firstMockCall[0]).toBe('MODAL_TYPE_RESTART_STACK');
+      });
+
+      it('calls openModalDialog with correct props', () => {
+        // Arrange
+        const props = generateProps();
+        const stack = {
+          projectKey: 'projtest',
+          name: 'stackName',
+          type: 'jupyter',
+          displayName: 'Stack Display Name',
+        };
+
+        // Act
+        const output = shallowRenderPure(props);
+        const confirmRestartStack = output.prop('restartStack');
+        expect(openModalDialogMock).not.toHaveBeenCalled();
+        confirmRestartStack(stack);
+
+        // Assert
+        const firstMockCall = openModalDialogMock.mock.calls[0];
+        const { title, onCancel } = firstMockCall[1];
+        expect({ title }).toMatchSnapshot();
+        expect(onCancel).toBe(closeModalDialogMock);
+      });
+
+      it('onSubmit calls restartStack with correct value', async () => {
+        // Arrange
+        const props = generateProps();
+        const stack = { projectKey: 'projtest', name: 'stackName', type: 'jupyter' };
+
+        // Act
+        const output = shallowRenderPure(props);
+        const confirmRestartStack = output.prop('restartStack');
+        confirmRestartStack(stack);
+        const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+        // Assert
+        expect(restartStackMock).not.toHaveBeenCalled();
+        expect(restFormMock).not.toHaveBeenCalled();
+        expect(loadStacksMock).toHaveBeenCalledTimes(1);
+
+        await onSubmit(stack);
+
+        expect(restartStackMock).toHaveBeenCalledTimes(1);
+        expect(restartStackMock).toHaveBeenCalledWith(stack);
         expect(restFormMock).toHaveBeenCalledTimes(1);
         expect(restFormMock).toHaveBeenCalledWith(props.formStateName);
       });

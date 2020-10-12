@@ -26,9 +26,10 @@ describe('StackCard', () => {
       status,
       shared: 'private',
     },
-    openStack: () => {},
-    deleteStack: () => {},
-    shareStack: () => {},
+    openStack: jest.fn().mockName('openStack'),
+    deleteStack: jest.fn().mockName('deleteStack'),
+    shareStack: jest.fn().mockName('shareStack'),
+    restartStack: jest.fn().mockName('restartStack'),
     typeName: 'notebook',
     ...permissionProps,
   });

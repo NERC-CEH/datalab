@@ -44,6 +44,11 @@ function updateStack(projectKey, stack, { token }) {
     .then(response => response.data);
 }
 
+function restartStack(projectKey, stack, { token }) {
+  return axios.put(`${API_URL_BASE}/stack/${projectKey}/restart`, stack, generateOptions(token))
+    .then(response => response.data);
+}
+
 const generateOptions = (token, data) => ({
   headers: {
     authorization: token,
@@ -51,4 +56,4 @@ const generateOptions = (token, data) => ({
   data,
 });
 
-export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack, updateStack };
+export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack, updateStack, restartStack };
