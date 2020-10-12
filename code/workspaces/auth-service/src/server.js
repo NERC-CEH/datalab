@@ -21,6 +21,7 @@ routes.configureRoutes(app);
 app.use((error, request, response, next) => { // eslint-disable-line no-unused-vars
   if (error.name === 'UnauthorizedError') {
     logger.warn(`Unsuccessful authentication request from ${request.hostname}`);
+    logger.debug(`Authentication request failure: ${JSON.stringify(error)}`);
     response.status(401);
     return response.send({ message: 'Unable to authenticate user' });
   }
