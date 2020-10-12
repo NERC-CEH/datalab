@@ -25,10 +25,14 @@ exports[`Pagination renders array of additional items in control bar after pagin
       setPageNum={[Function]}
     />
     <div>
-      <span>
+      <span
+        key="0"
+      >
         Bar Item 1
       </span>
-      <span>
+      <span
+        key="1"
+      >
         Bar Item 1
       </span>
     </div>
