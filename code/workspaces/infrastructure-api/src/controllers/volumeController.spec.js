@@ -90,11 +90,11 @@ describe('Volume Controller', () => {
       expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
     });
 
-    it('should validate the type is between 1 and 2', async () => {
+    it('should validate the type is one of glusterfs,nfs', async () => {
       const requestBody = createRequestBody();
-      requestBody.type = 0;
+      requestBody.type = 1;
       await executeCreateValidator(requestBody);
-      expectValidationError('type', 'Type muste be one of glusterfs,nfs');
+      expectValidationError('type', 'Type must be one of glusterfs,nfs');
     });
   });
 

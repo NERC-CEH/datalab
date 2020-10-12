@@ -136,7 +136,7 @@ const createVolumeValidator = service.middleware.validator([
   existsCheck('type')
     .exists()
     .isIn(allowedVolumeTypes)
-    .withMessage(`Type muste be one of ${allowedVolumeTypes}`),
+    .withMessage(`Type must be one of ${allowedVolumeTypes}`),
   existsCheck('volumeSize')
     .isInt({ min: 5, max: 200 })
     .withMessage('Volume Size must be an integer between 5 and 200'),
