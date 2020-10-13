@@ -196,11 +196,12 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
   >
     <WithStyles(StackCardActions)
       deletePermission="delete"
-      deleteStack={[Function]}
+      deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
       openPermission="open"
-      openStack={[Function]}
-      shareStack={[Function]}
+      openStack={[MockFunction openStack]}
+      restartStack={[MockFunction restartStack]}
+      shareStack={[MockFunction shareStack]}
       stack={
         Object {
           "displayName": "name1",
