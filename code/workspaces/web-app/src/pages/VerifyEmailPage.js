@@ -1,19 +1,25 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import VerifyEmail from '../components/welcome/VerifyEmail';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   page: {
     display: 'flex',
     flexDirection: 'column',
-    background: theme.palette.backgroundColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: theme.palette.backgroundDark,
+    minHeight: '100vh',
   },
-});
+}));
 
-const VerifyEmailPage = ({ classes }) => (
-  <div className={classes.page}>
-    <VerifyEmail/>
-  </div>
-);
+const VerifyEmailPage = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.page}>
+      <VerifyEmail/>
+    </div>
+  );
+};
 
-export default withStyles(styles)(VerifyEmailPage);
+export default VerifyEmailPage;

@@ -8,7 +8,7 @@ describe('VerifyEmail', () => {
   let shallow;
 
   beforeEach(() => {
-    shallow = createShallow({ dive: true });
+    shallow = createShallow();
   });
 
   it('renders correct snapshot', () => {
