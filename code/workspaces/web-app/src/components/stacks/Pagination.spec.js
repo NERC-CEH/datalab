@@ -33,7 +33,7 @@ describe('Pagination', () => {
   });
 
   it('renders array of additional items in control bar after pagination controls in own div', () => {
-    const barItems = [<span>Bar Item 1</span>, <span>Bar Item 1</span>];
+    const barItems = [<span key={0}>Bar Item 1</span>, <span key={1}>Bar Item 1</span>];
     const props = generateProps(4, 2, barItems);
     const output = shallowRender(props);
     expect(output).toMatchSnapshot();

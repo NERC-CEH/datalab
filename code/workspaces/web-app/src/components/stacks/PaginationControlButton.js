@@ -10,11 +10,11 @@ export const NEXT_PAGE = 'next';
 
 function getTooltipTitle(variant, disabled) {
   if (variant === PREVIOUS_PAGE) {
-    return !disabled ? 'Previous page' : 'No previous page to goto';
+    return !disabled ? 'Previous page' : 'No previous page';
   }
 
   if (variant === NEXT_PAGE) {
-    return !disabled ? 'Next page' : 'No next page to goto';
+    return !disabled ? 'Next page' : 'No next page';
   }
 
   return '';

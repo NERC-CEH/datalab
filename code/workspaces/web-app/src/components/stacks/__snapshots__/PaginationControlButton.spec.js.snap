@@ -2,7 +2,7 @@
 
 exports[`PaginationControlButton renders correctly when variant is "next" and it is disabled 1`] = `
 <WithStyles(ForwardRef(Tooltip))
-  title="No next page to goto"
+  title="No next page"
 >
   <span>
      
@@ -36,7 +36,7 @@ exports[`PaginationControlButton renders correctly when variant is "next" and it
 
 exports[`PaginationControlButton renders correctly when variant is "previous" and it is disabled 1`] = `
 <WithStyles(ForwardRef(Tooltip))
-  title="No previous page to goto"
+  title="No previous page"
 >
   <span>
      
