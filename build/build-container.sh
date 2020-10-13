@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 
-git fetch --tags
-GIT_DESCRIBE=`git describe --tags --always`
+GIT_DESCRIBE=`git describe --tags --always --candidates=10000`
 
 if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|common|chassis)$ ]]; then
   case "$1" in
