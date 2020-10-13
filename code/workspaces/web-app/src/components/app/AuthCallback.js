@@ -5,8 +5,8 @@ import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 import { useSearchUrl } from '../../hooks/routerHooks';
 
-export const handleAuth = async (searchUrl, routeTo, dispatch) => {
-  if (/code|access_token|id_token|error/.test(searchUrl)) {
+export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
+  if (/code|access_token|id_token/.test(searchUrl)) {
     try {
       const authResponse = await getAuth().handleAuthentication();
       dispatch(authActions.userLogsIn(authResponse));
@@ -15,7 +15,7 @@ export const handleAuth = async (searchUrl, routeTo, dispatch) => {
       // Redirect to home page if auth fails
       dispatch(routeTo('/'));
     }
-  } else if (/verify/.test(props.location.hash)) {
+  } else if (/verify/.test(JSON.stringify(props.location))) {
     dispatch(routeTo('/verify'));
   } else {
     // Redirect to projects page if no hash is present
@@ -24,13 +24,13 @@ export const handleAuth = async (searchUrl, routeTo, dispatch) => {
 };
 
 const AuthCallback = (props) => {
-  const urlHash = useUrlHash();
+  const searchUrl = useSearchUrl();
   const dispatch = useDispatch();
   const routeTo = replace;
 
   useEffect(() => {
-    handleAuth(urlHash, routeTo, dispatch, props);
-  }, [urlHash, routeTo, dispatch, props]);
+    handleAuth(searchUrl, routeTo, dispatch, props);
+  }, [searchUrl, routeTo, dispatch, props]);
 
   return null;
 };
