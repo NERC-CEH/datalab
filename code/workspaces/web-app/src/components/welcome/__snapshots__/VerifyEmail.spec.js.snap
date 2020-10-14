@@ -40,7 +40,7 @@ exports[`VerifyEmail renders correct snapshot 1`] = `
     <PagePrimaryActionButton
       className="makeStyles-button-6"
       color="primary"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       I've verified my email
     </PagePrimaryActionButton>
