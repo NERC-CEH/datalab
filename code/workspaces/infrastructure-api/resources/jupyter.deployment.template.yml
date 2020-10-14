@@ -36,7 +36,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks && chmod777 /mnt/persistentfs/notebooks/{{ name }}"]
+          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/notebooks/{{ name }}"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
