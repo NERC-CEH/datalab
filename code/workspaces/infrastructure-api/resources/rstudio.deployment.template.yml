@@ -26,16 +26,17 @@ spec:
           args: ["-c", "mkdir -p /data/notebooks/{{ name }}"]
           volumeMounts:
             - mountPath: /data
-              name: glusterfsvol
-        # This container will force the directory own to be datalabs:users (user:group; 1000:100).
-        - name: set-directory-owner
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated notebook directory to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chown 1000:100 /data/notebooks && chown 1000:100 /data/notebooks/{{ name }}"]
+          args: ["-c", "chmod 777 /data/notebooks && chmod 777 /data/notebooks/{{ name }}"]
           volumeMounts:
             - mountPath: /data
-              name: glusterfsvol
+              name: persistentfsvol
         # This container will create the /home/datalabs to /data/notebooks/rstudio symlink
         - name: create-datalab-symlink
           image: busybox
@@ -91,12 +92,12 @@ spec:
             periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
-            - name: glusterfsvol
+            - name: persistentfsvol
               mountPath: /data
             - name: homedir
               mountPath: /home
       volumes:
-        - name: glusterfsvol
+        - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
         - name: homedir

@@ -26,20 +26,20 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/{{ name }}"]
+          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}"]
           volumeMounts:
-            - mountPath: /mnt/glusterfs
-              name: glusterfsvol
-        # This container correct the folder permissions for the generated notebook directory to be owned by the
-        # datalabs:users (user:group; 1000:100).
-        - name: set-directory-owner
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated notebook directory to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/{{ name }}"]
+          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks && chmod777 /mnt/persistentfs/notebooks/{{ name }}"]
           volumeMounts:
-            - mountPath: /mnt/glusterfs
-              name: glusterfsvol
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
       containers:
         - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
           imagePullPolicy : "IfNotPresent"
@@ -83,7 +83,7 @@ spec:
             periodSeconds: 10
           volumeMounts:
             {{#volumeMount}}
-            - name: glusterfsvol
+            - name: persistentfsvol
               mountPath: /data
             {{/volumeMount}}
             - name: spark-kubernetes-properties
@@ -96,7 +96,7 @@ spec:
               subPath: dask.yaml
       volumes:
         {{#volumeMount}}
-        - name: glusterfsvol
+        - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
         {{/volumeMount}}
