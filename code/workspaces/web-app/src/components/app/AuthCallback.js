@@ -6,7 +6,9 @@ import authActions from '../../actions/authActions';
 import { useSearchUrl } from '../../hooks/routerHooks';
 
 export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
-  if (/code|access_token|id_token/.test(searchUrl)) {
+  if (/verify/.test(searchUrl)) {
+    dispatch(routeTo('/verify'));
+  } else if (/code|access_token|id_token|error/.test(searchUrl)) {
     try {
       const authResponse = await getAuth().handleAuthentication();
       dispatch(authActions.userLogsIn(authResponse));
@@ -15,8 +17,6 @@ export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
       // Redirect to home page if auth fails
       dispatch(routeTo('/'));
     }
-  } else if (/verify/.test(JSON.stringify(props.location))) {
-    dispatch(routeTo('/verify'));
   } else {
     // Redirect to projects page if no hash is present
     dispatch(routeTo('/projects'));
