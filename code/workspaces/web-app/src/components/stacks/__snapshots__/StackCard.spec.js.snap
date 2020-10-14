@@ -49,11 +49,12 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
   >
     <WithStyles(StackCardActions)
       deletePermission="delete"
-      deleteStack={[Function]}
+      deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
       openPermission="open"
-      openStack={[Function]}
-      shareStack={[Function]}
+      openStack={[MockFunction openStack]}
+      restartStack={[MockFunction restartStack]}
+      shareStack={[MockFunction shareStack]}
       stack={
         Object {
           "displayName": "name1",
@@ -124,11 +125,12 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
   >
     <WithStyles(StackCardActions)
       deletePermission="delete"
-      deleteStack={[Function]}
+      deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
       openPermission="open"
-      openStack={[Function]}
-      shareStack={[Function]}
+      openStack={[MockFunction openStack]}
+      restartStack={[MockFunction restartStack]}
+      shareStack={[MockFunction shareStack]}
       stack={
         Object {
           "displayName": "name1",
@@ -194,11 +196,12 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
   >
     <WithStyles(StackCardActions)
       deletePermission="delete"
-      deleteStack={[Function]}
+      deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
       openPermission="open"
-      openStack={[Function]}
-      shareStack={[Function]}
+      openStack={[MockFunction openStack]}
+      restartStack={[MockFunction restartStack]}
+      shareStack={[MockFunction shareStack]}
       stack={
         Object {
           "displayName": "name1",
@@ -276,11 +279,12 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     </div>
     <WithStyles(StackCardActions)
       deletePermission="delete"
-      deleteStack={[Function]}
+      deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
       openPermission="open"
-      openStack={[Function]}
-      shareStack={[Function]}
+      openStack={[MockFunction openStack]}
+      restartStack={[MockFunction restartStack]}
+      shareStack={[MockFunction shareStack]}
       stack={
         Object {
           "displayName": "name1",

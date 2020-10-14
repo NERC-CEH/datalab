@@ -5,7 +5,7 @@ import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import ProjectKey from '../common/typography/ProjectKey';
-import StackCardActions from './StackCardActions';
+import StackCardActions from './StackCardActions/StackCardActions';
 import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
 import { useUsers } from '../../hooks/usersHooks';
@@ -85,8 +85,8 @@ function styles(theme) {
   };
 }
 
-const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName, userPermissions,
-  openPermission, deletePermission, editPermission, getLogs, shareStack }) => {
+const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
+  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack }) => {
   const users = useUsers();
 
   return (
@@ -112,6 +112,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, typeName
             openStack={openStack}
             deleteStack={deleteStack}
             editStack={editStack}
+            restartStack={restartStack}
             getLogs={getLogs}
             userPermissions={userPermissions}
             openPermission={openPermission}
@@ -140,6 +141,7 @@ StackCard.propTypes = {
   deleteStack: PropTypes.func,
   getLogs: PropTypes.func,
   editStack: PropTypes.func,
+  restartStack: PropTypes.func,
   shareStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,

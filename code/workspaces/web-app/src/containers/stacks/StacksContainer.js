@@ -5,7 +5,7 @@ import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { permissionTypes } from 'common';
-import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
+import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
@@ -110,6 +110,32 @@ class StacksContainer extends Component {
     onCancel: this.props.actions.closeModalDialog,
   });
 
+  restartStack = async (stack) => {
+    this.props.actions.closeModalDialog();
+
+    try {
+      await this.props.actions.restartStack(stack);
+      await this.props.actions.resetForm(this.props.formStateName);
+      notify.success(`${this.props.typeName} restarted`);
+    } catch (error) {
+      console.log('error', error);
+      notify.error(`Unable to restart ${this.props.typeName}`);
+    } finally {
+      this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType);
+    }
+  };
+
+  confirmRestartStack = async stack => this.props.actions.openModalDialog(
+    MODAL_TYPE_RESTART_STACK,
+    {
+      title: `Restart ${stack.displayName}?`,
+      body: `Would you like to restart the ${this.props.typeName} "${stack.displayName}"?
+        Any unsaved work in the ${this.props.typeName} could be lost.`,
+      onSubmit: () => this.restartStack(stack),
+      onCancel: this.props.actions.closeModalDialog,
+    },
+  )
+
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     return this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType)
@@ -171,6 +197,7 @@ class StacksContainer extends Component {
         deleteStack={this.confirmDeleteStack}
         shareStack={this.confirmShareStack}
         editStack={this.openEditForm}
+        restartStack={this.confirmRestartStack}
         openCreationForm={this.openCreationForm}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
@@ -199,6 +226,7 @@ StacksContainer.propTypes = {
     openStack: PropTypes.func.isRequired,
     createStack: PropTypes.func.isRequired,
     deleteStack: PropTypes.func.isRequired,
+    restartStack: PropTypes.func.isRequired,
     openModalDialog: PropTypes.func.isRequired,
     closeModalDialog: PropTypes.func.isRequired,
     getLogs: PropTypes.func,

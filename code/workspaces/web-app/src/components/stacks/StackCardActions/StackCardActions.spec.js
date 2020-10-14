@@ -1,9 +1,9 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import { useCurrentUserId } from '../../hooks/authHooks';
+import { useCurrentUserId } from '../../../hooks/authHooks';
 import StackCardActions, { PureStackCardActions } from './StackCardActions';
 
-jest.mock('../../hooks/authHooks');
+jest.mock('../../../hooks/authHooks');
 
 const openStackMock = jest.fn();
 const deleteStackMock = jest.fn();
@@ -76,7 +76,7 @@ describe('PureStackCardActions', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('Should not render Open if stack is not ready', () => {
+  it('Should render Open as disabled if stack is not ready', () => {
     // Arrange
     const baseProps = generateProps();
     const props = { ...baseProps, stack: { status: 'requested' } };
@@ -153,7 +153,7 @@ describe('PureStackCardActions', () => {
     });
   });
 
-  it('Should not render edit/delete/share buttons if current user is not the owner', () => {
+  it('Should not render edit/delete/share/restart buttons if current user is not the owner', () => {
     const props = generateProps();
     props.currentUserId = 'not-the-owner-id';
     expect(shallowRender(props)).toMatchSnapshot();

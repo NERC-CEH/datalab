@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StackMoreMenuItem should render to match snapshot 1`] = `
+<ComponentWrapper
+  permission="stack:edit"
+  userPermissions={
+    Array [
+      "stack:edit",
+      "stack:create",
+    ]
+  }
+>
+  <WithStyles(ForwardRef(Tooltip))
+    disableHoverListener={false}
+    title=""
+  >
+    <div>
+       
+      <WithStyles(ForwardRef(MenuItem))
+        disabled={false}
+        onClick={[MockFunction onClick]}
+      >
+        Item Text
+      </WithStyles(ForwardRef(MenuItem))>
+    </div>
+  </WithStyles(ForwardRef(Tooltip))>
+</ComponentWrapper>
+`;

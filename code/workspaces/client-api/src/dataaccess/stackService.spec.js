@@ -88,4 +88,15 @@ describe('stackService', () => {
     return stackService.deleteStack('project', 'stack', context)
       .then(() => expect(true).toBe(true));
   });
+
+  it('restartStack makes an api request', async () => {
+    const stack = { ...testStack, projectKey: PROJECT_KEY };
+    const responseMessage = { message: 'ok' };
+
+    httpMock.onPut('http://localhost:8003/stack/project/restart')
+      .reply(200, responseMessage);
+
+    const response = await stackService.restartStack('project', stack, context);
+    expect(response).toEqual(responseMessage);
+  });
 });

@@ -1,19 +1,19 @@
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { statusTypes, stackTypes } from 'common';
-import { useCurrentUserId } from '../../hooks/authHooks';
-import PermissionWrapper from '../common/ComponentPermissionWrapper';
-import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
-import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
+import { useCurrentUserId } from '../../../hooks/authHooks';
+import PermissionWrapper from '../../common/ComponentPermissionWrapper';
+import PrimaryActionButton from '../../common/buttons/PrimaryActionButton';
+import SecondaryActionButton from '../../common/buttons/SecondaryActionButton';
+import StackMoreMenuItem from './StackMoreMenuItem';
 
 const { READY } = statusTypes;
 const MORE_ICON = 'more_vert';
-const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER, RSHINY } = stackTypes;
+const { RSHINY, ANALYSIS, PUBLISH } = stackTypes;
 
 const styles = theme => ({
   cardActions: {
@@ -33,8 +33,8 @@ const StackCardActions = (props) => {
   return <PureStackCardActions currentUserId={currentUserId} {...props} />;
 };
 
-export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, userPermissions, openPermission,
-  deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
+export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, userPermissions,
+  openPermission, deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
@@ -42,10 +42,10 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const [anchorEl, setAnchorEl] = React.useState(null);
   const shared = ['project'].includes(stack.shared) || ['project', 'public'].includes(stack.visible);
 
-  const handleClick = (event) => {
+  const handleMoreButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleMoreMenuClose = () => {
     setAnchorEl(null);
   };
 
@@ -73,7 +73,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         <SecondaryActionButton
           aria-controls="more-menu"
           aria-haspopup="true"
-          onClick={handleClick}
+          onClick={handleMoreButtonClick}
           fullWidth
         >
           <Icon style={{ color: 'inherit' }}>{MORE_ICON}</Icon>
@@ -85,35 +85,51 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={handleMoreMenuClose}
       >
-        {[RSHINY].includes(stack.type) && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-          <MenuItem onClick={() => getLogs(stack)}>
-            Logs
-          </MenuItem>
-        </PermissionWrapper>}
-        {editStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={editPermission}>
-          <MenuItem onClick={() => editStack(stack)}>
-            Edit
-          </MenuItem>
-        </PermissionWrapper>}
-        {([RSTUDIO, JUPYTERLAB, JUPYTER, ZEPPELIN, NBVIEWER, RSHINY].includes(stack.type))
-            && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-          <Tooltip
-           title='Resource is already shared within the project'
-           disableHoverListener={!shared}>
-            <div>
-              <MenuItem disabled={shared} onClick={() => shareStack(stack, 'project')}>
-                Share
-              </MenuItem>
-            </div>
-          </Tooltip>
-        </PermissionWrapper>}
-        {deleteStack && ownsStack && <PermissionWrapper userPermissions={userPermissions} permission={deletePermission}>
-          <MenuItem onClick={() => deleteStack(stack)}>
-            Delete
-          </MenuItem>
-        </PermissionWrapper>}
+        <StackMoreMenuItem
+          shouldRender={[RSHINY].includes(stack.type)}
+          onClick={() => getLogs(stack)}
+          userPermissions={userPermissions}
+          requiredPermission={deletePermission}
+        >
+          Logs
+        </StackMoreMenuItem>
+        <StackMoreMenuItem
+          shouldRender={editStack && ownsStack}
+          onClick={() => editStack(stack)}
+          userPermissions={userPermissions}
+          requiredPermission={editPermission}
+        >
+          Edit
+        </StackMoreMenuItem>
+        <StackMoreMenuItem
+          shouldRender={stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack}
+          onClick={() => shareStack(stack, 'project')}
+          userPermissions={userPermissions}
+          requiredPermission={deletePermission}
+          tooltipText="Resource is already shared within the project"
+          disableTooltip={!shared}
+          disabled={shared}
+        >
+          Share
+        </StackMoreMenuItem>
+        <StackMoreMenuItem
+          shouldRender={stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack}
+          onClick={() => restartStack(stack)}
+          userPermissions={userPermissions}
+          requiredPermission={editPermission}
+        >
+          Restart
+        </StackMoreMenuItem>
+        <StackMoreMenuItem
+          shouldRender={deleteStack && ownsStack}
+          onClick={() => deleteStack(stack)}
+          userPermissions={userPermissions}
+          requiredPermission={deletePermission}
+        >
+          Delete
+        </StackMoreMenuItem>
       </Menu>
     </div>
   );
@@ -129,6 +145,7 @@ StackCardActions.propTypes = {
   openStack: PropTypes.func,
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
+  restartStack: PropTypes.func,
   getLogs: PropTypes.func,
   shareStack: PropTypes.func,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,

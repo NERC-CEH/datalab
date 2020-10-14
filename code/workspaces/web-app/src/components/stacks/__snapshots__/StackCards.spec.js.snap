@@ -34,10 +34,12 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
         Array [
           <ForwardRef(WithStyles)
             deletePermission="delete"
-            deleteStack={[Function]}
+            deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
+            editStack={[MockFunction editStack]}
             openPermission="open"
-            openStack={[Function]}
+            openStack={[MockFunction openStack]}
+            restartStack={[MockFunction restartStack]}
             stack={
               Object {
                 "displayName": "name1",
@@ -57,10 +59,12 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           />,
           <ForwardRef(WithStyles)
             deletePermission="delete"
-            deleteStack={[Function]}
+            deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
+            editStack={[MockFunction editStack]}
             openPermission="open"
-            openStack={[Function]}
+            openStack={[MockFunction openStack]}
+            restartStack={[MockFunction restartStack]}
             stack={
               Object {
                 "displayName": "name2",
@@ -80,10 +84,12 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           />,
           <ForwardRef(WithStyles)
             deletePermission="delete"
-            deleteStack={[Function]}
+            deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
+            editStack={[MockFunction editStack]}
             openPermission="open"
-            openStack={[Function]}
+            openStack={[MockFunction openStack]}
+            restartStack={[MockFunction restartStack]}
             stack={
               Object {
                 "displayName": "name3",
@@ -121,7 +127,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           }
         >
           <NewStackButton
-            onClick={[Function]}
+            onClick={[MockFunction openCreationForm]}
             typeName="expectedTypeName"
           />
         </ComponentWrapper>
@@ -176,7 +182,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
           }
         >
           <NewStackButton
-            onClick={[Function]}
+            onClick={[MockFunction openCreationForm]}
             typeName="expectedTypeName"
           />
         </ComponentWrapper>

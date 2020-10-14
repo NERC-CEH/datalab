@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const StackCards = (
-  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, openCreationForm,
+  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm,
     userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack },
 ) => {
   const classes = useStyles();
@@ -41,6 +41,7 @@ const StackCards = (
         openStack={openStack}
         deleteStack={deleteStack}
         editStack={editStack}
+        restartStack={restartStack}
         shareStack={shareStack}
         userPermissions={userPermissions(stack)}
         openPermission={openPermission}
@@ -80,6 +81,7 @@ StackCards.propTypes = {
   deleteStack: PropTypes.func.isRequired,
   shareStack: PropTypes.func,
   editStack: PropTypes.func,
+  restartStack: PropTypes.func,
   getLogs: PropTypes.func,
   openCreationForm: PropTypes.func.isRequired,
   userPermissions: PropTypes.func.isRequired,

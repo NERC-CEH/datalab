@@ -66,6 +66,18 @@ function deleteStack(stack) {
     .then(errorHandler('data.stack'));
 }
 
+function restartStack(stack) {
+  const mutation = `
+    RestartStack($stack: StackRestartRequest) {
+      restartStack(stack: $stack) {
+        name
+      }
+    }`;
+
+  return gqlMutation(mutation, { stack })
+    .then(errorHandler('data.stack'));
+}
+
 function getLogs(projectKey, name) {
   const query = `
     Logs($projectKey: String!, $name: String!) {
@@ -99,4 +111,5 @@ export default {
   deleteStack,
   getLogs,
   editStack,
+  restartStack,
 };

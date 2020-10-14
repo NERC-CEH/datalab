@@ -15,11 +15,13 @@ const getByNameMock = jest.fn().mockReturnValue(Promise.resolve(datalabInfo));
 const createStackMock = jest.fn();
 const deleteStackMock = jest.fn();
 const updateStackMock = jest.fn();
+const restartStackMock = jest.fn();
 
 datalabRepository.getByName = getByNameMock;
 stackService.createStack = createStackMock;
 stackService.deleteStack = deleteStackMock;
 stackService.updateStack = updateStackMock;
+stackService.restartStack = restartStackMock;
 
 describe('Stack API', () => {
   afterEach(() => {
@@ -138,5 +140,44 @@ describe('Stack API', () => {
         expect(logger.getDebugMessages()).toMatchSnapshot();
         expect(logger.getErrorMessages()).toMatchSnapshot();
       });
+  });
+
+  it('should make correct API request for restart', async () => {
+    restartStackMock.mockResolvedValue('expectedPayload');
+    getByNameMock.mockResolvedValue(datalabInfo);
+
+    expect(getByNameMock).not.toHaveBeenCalled();
+    expect(restartStackMock).not.toHaveBeenCalled();
+
+    const response = await stackApi.restartStack(context, 'expectedDatalabName', stack);
+
+    expect(getByNameMock).toHaveBeenCalledWith(context.user, 'expectedDatalabName');
+    expect(restartStackMock).toHaveBeenCalledWith(stack.projectKey, { ...stack, datalabInfo }, context);
+    expect(response).toBe('expectedPayload');
+  });
+
+  it('should log action on successful restart request', async () => {
+    restartStackMock.mockResolvedValue('expectedPayload');
+    getByNameMock.mockResolvedValue(datalabInfo);
+
+    await stackApi.restartStack(context, 'expectedDatalabName', stack);
+    expect(logger.getInfoMessages()).toMatchSnapshot();
+    expect(logger.getDebugMessages()).toMatchSnapshot();
+    expect(logger.getErrorMessages()).toMatchSnapshot();
+  });
+
+  it('should log error detail on failed restart request', async () => {
+    restartStackMock.mockResolvedValue('expectedPayload');
+    getByNameMock.mockRejectedValue(new Error('failedRequest'));
+
+    try {
+      await stackApi.restartStack(context, 'expectedDatalabName', stack);
+      // should not hit this line as error should be thrown
+      expect(true).toBeFalsy();
+    } catch (error) {
+      expect(logger.getInfoMessages()).toMatchSnapshot();
+      expect(logger.getDebugMessages()).toMatchSnapshot();
+      expect(logger.getErrorMessages()).toMatchSnapshot();
+    }
   });
 });

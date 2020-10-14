@@ -57,6 +57,9 @@ type Mutation {
     # Delete a stack
     deleteStack(stack: StackDeletionRequest): Stack
 
+    # Restart a stack
+    restartStack(stack: StackRestartRequest): Stack
+
     # Create a new data store
     createDataStore(projectKey: String!, dataStore: DataStorageCreationRequest): DataStore
 
@@ -178,6 +181,13 @@ input StackUpdateRequest {
 
 # Type to describe the mutation for deleting a new Stack.
 input StackDeletionRequest {
+    projectKey: String
+    name: String
+    type: StackType
+}
+
+# Type to describe the mutation for deleting a new Stack.
+input StackRestartRequest {
     projectKey: String
     name: String
     type: StackType
