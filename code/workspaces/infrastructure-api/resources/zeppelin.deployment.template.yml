@@ -26,20 +26,20 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "mkdir -p /mnt/glusterfs/notebooks/zeppelin"]
+          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/zeppelin"]
           volumeMounts:
-            - mountPath: /mnt/glusterfs
-              name: glusterfsvol
-        # This container correct the folder permissions for the generated notebook directory to be owned by the
-        # datalabs:users (user:group; 1000:100).
-        - name: set-directory-owner
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated notebook directory to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chown 1000:100 /mnt/glusterfs/notebooks && chown 1000:100 /mnt/glusterfs/notebooks/zeppelin"]
+          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/notebooks/zeppelin"]
           volumeMounts:
-            - mountPath: /mnt/glusterfs
-              name: glusterfsvol
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
       containers:
         - name: {{ name }}-connect
           image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
@@ -94,7 +94,7 @@ spec:
             - name: zeppelin-shiro
               mountPath: /secret
 {{#volumeMount}}
-            - name: glusterfsvol
+            - name: persistentfsvol
               mountPath: /data
 {{/volumeMount}}
       volumes:
@@ -102,7 +102,7 @@ spec:
           secret:
             secretName: {{ name }}
 {{#volumeMount}}
-        - name: glusterfsvol
+        - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
 {{/volumeMount}}
