@@ -42,7 +42,7 @@ const HeroBar = ({ classes }) => (
     <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
     <div className={classes.buttons}>
       <PagePrimaryActionButton className={classes.button} color="primary" onClick={getAuth().signUp}>Sign Up</PagePrimaryActionButton>
-      <PrimaryActionButton className={classes.button} color="primary" onClick={getAuth().login}> Log In</PrimaryActionButton>
+      <PrimaryActionButton className={classes.button} color="primary" onClick={getAuth().login}>Log In</PrimaryActionButton>
     </div>
   </div>
 );

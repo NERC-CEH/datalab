@@ -5,8 +5,10 @@ import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 import { useSearchUrl } from '../../hooks/routerHooks';
 
-export const handleAuth = async (searchUrl, routeTo, dispatch) => {
-  if (/code|access_token|id_token|error/.test(searchUrl)) {
+export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
+  if (/verify/.test(searchUrl)) {
+    dispatch(routeTo('/verify'));
+  } else if (/code|access_token|id_token|error/.test(searchUrl)) {
     try {
       const authResponse = await getAuth().handleAuthentication();
       dispatch(authActions.userLogsIn(authResponse));
@@ -21,14 +23,14 @@ export const handleAuth = async (searchUrl, routeTo, dispatch) => {
   }
 };
 
-const AuthCallback = () => {
+const AuthCallback = (props) => {
   const searchUrl = useSearchUrl();
   const dispatch = useDispatch();
   const routeTo = replace;
 
   useEffect(() => {
-    handleAuth(searchUrl, routeTo, dispatch);
-  }, [searchUrl, routeTo, dispatch]);
+    handleAuth(searchUrl, routeTo, dispatch, props);
+  }, [searchUrl, routeTo, dispatch, props]);
 
   return null;
 };

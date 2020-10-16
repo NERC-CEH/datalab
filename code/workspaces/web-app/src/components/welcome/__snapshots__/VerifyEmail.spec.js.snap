@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerifyEmail renders correct snapshot 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <img
+    alt="DataLabs-Logo"
+    className="makeStyles-logo-2"
+    src="datalabs-vert.png"
+  />
+  <div
+    className="makeStyles-textContainer-3"
+  >
+    <WithStyles(ForwardRef(Typography))
+      className="makeStyles-text-4"
+      variant="h5"
+    >
+      Verify Email
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      className="makeStyles-text-4"
+      variant="body1"
+    >
+      Before logging in you need to verify your e-mail address. Please use the
+  link in the e-mail which will be sent to you shortly. Note that you may have to check
+  your spam folder. Once verified, please click the button below.
+    </WithStyles(ForwardRef(Typography))>
+  </div>
+  <div
+    className="makeStyles-buttons-5"
+  >
+    <PrimaryActionButton
+      className="makeStyles-button-6"
+      color="primary"
+      onClick={[Function]}
+    >
+      Home
+    </PrimaryActionButton>
+    <PagePrimaryActionButton
+      className="makeStyles-button-6"
+      color="primary"
+      onClick={[MockFunction login]}
+    >
+      I've verified my email
+    </PagePrimaryActionButton>
+  </div>
+</div>
+`;
