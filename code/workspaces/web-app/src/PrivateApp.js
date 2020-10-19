@@ -4,6 +4,7 @@ import React from 'react';
 import ModalRoot from './containers/modal/ModalRoot';
 import NavigationContainer from './containers/app/NavigationContainer';
 import ProjectNavigationContainer from './containers/app/ProjectNavigationContainer';
+import AdminNavigationContainer from './containers/app/AdminNavigationContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import ProjectsPage from './pages/ProjectsPage';
 import RoutePermissions from './components/common/RoutePermissionWrapper';
@@ -11,17 +12,21 @@ import RoutePermissions from './components/common/RoutePermissionWrapper';
 const PrivateApp = ({ promisedUserPermissions }) => (
   <NavigationContainer userPermissions={promisedUserPermissions.value}>
     <Switch>
+      <Route
+        path="/admin"
+        render={() => <AdminNavigationContainer promisedUserPermissions={promisedUserPermissions} />}
+      />
       <RoutePermissions
         exact path="/projects"
         component={ProjectsPage}
         promisedUserPermissions={promisedUserPermissions}
         permission=''
         alt={NotFoundPage} />
-      <Redirect exact from="/" to="/projects" />
       <Route
         path="/projects/:projectKey"
         render={({ match }) => <ProjectNavigationContainer match={match} promisedUserPermissions={promisedUserPermissions} />}
       />
+      <Redirect exact from="/" to="/projects" />
       <Route component={NotFoundPage} />
     </Switch>
     <ModalRoot />

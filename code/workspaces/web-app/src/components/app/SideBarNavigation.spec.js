@@ -1,6 +1,6 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import ProjectNavigation from './ProjectNavigation';
+import SideBarNavigation from './SideBarNavigation';
 
 describe('ProjectNavigation', () => {
   let shallow;
@@ -14,9 +14,9 @@ describe('ProjectNavigation', () => {
   it('renders the correct snapshot', () => {
     expect(
       shallow(
-        <ProjectNavigation userPermissions="userPermissions" projectKey="testproj" classes={classes}>
+        <SideBarNavigation userPermissions="userPermissions" projectKey="testproj" classes={classes}>
           <span>Content</span>
-        </ProjectNavigation>,
+        </SideBarNavigation>,
       ),
     ).toMatchSnapshot();
   });

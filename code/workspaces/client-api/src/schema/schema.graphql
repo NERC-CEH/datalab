@@ -118,6 +118,7 @@ input DataStorageUpdateRequest {
 # type is not an enum when retrieving, because of legacy value for 1 = GlusterFS.  Enumeration is enforced in mongoose.
 type DataStore {
     id: ID
+    projectKey: String
     name: String
     displayName: String
     description: String

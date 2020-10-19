@@ -8,27 +8,9 @@ import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
 import ProjectSwitcher from './ProjectSwitcher';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
+import sideBarStyles from './sideBarStyles';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST }, projectKeyPermission } = permissionTypes;
-
-export const drawerWidth = 200;
-
-const styles = theme => ({
-  itemList: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 0,
-  },
-  sideBar: {
-    background: theme.palette.sideBarBackground,
-    width: drawerWidth,
-    minWidth: drawerWidth,
-    borderRight: `1px solid ${theme.palette.divider}`,
-    overflow: 'auto',
-    padding: `0 ${theme.spacing(2)}px`,
-  },
-});
 
 const projectRouteBase = projectKey => `/projects/${projectKey}`;
 
@@ -63,7 +45,7 @@ const MiscGroup = ({ userPermissions, projectKey }) => (
   </SideBarGroup>
 );
 
-const SideBar = ({ classes, userPermissions }) => <PureSideBar
+const ProjectSideBar = ({ classes, userPermissions }) => <PureSideBar
   classes={classes}
   userPermissions={userPermissions}
   projectKey={useCurrentProjectKey()}
@@ -79,7 +61,7 @@ export const PureSideBar = ({ classes, userPermissions, projectKey }) => (
   </div>
 );
 
-SideBar.propTypes = {
+ProjectSideBar.propTypes = {
   classes: PropTypes.object.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
@@ -94,4 +76,4 @@ PureSideBar.propTypes = {
   }),
 };
 
-export default withStyles(styles)(SideBar);
+export default withStyles(sideBarStyles)(ProjectSideBar);

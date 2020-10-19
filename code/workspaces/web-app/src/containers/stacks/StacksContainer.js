@@ -5,6 +5,7 @@ import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { permissionTypes } from 'common';
+import { getCategoryFromTypeName } from 'common/src/stackTypes';
 import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
@@ -186,6 +187,7 @@ class StacksContainer extends Component {
     const stacksUpdatedFetching = {
       ...this.props.stacks,
       fetching: this.props.stacks.fetching || this.props.projectKey.fetching,
+      value: this.props.stacks.value.filter(stack => (stack.projectKey === this.props.projectKey.value) && (getCategoryFromTypeName(stack.type) === this.props.containerType)),
     };
     return (
       <StackCards
@@ -243,6 +245,13 @@ function mapStateToProps(state) {
   };
 }
 
+function mapProjectStateToProps(state) {
+  return {
+    stacks: state.stacks,
+    // leave projectKey as a prop, rather than reading from state
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
@@ -254,5 +263,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const ProjectStacksContainer = connect(mapProjectStateToProps, mapDispatchToProps)(StacksContainer);
+
 export { StacksContainer as PureStacksContainer }; // export for testing
+export { ProjectStacksContainer }; // export with projectKey as prop
 export default connect(mapStateToProps, mapDispatchToProps)(StacksContainer);

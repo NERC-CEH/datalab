@@ -120,9 +120,13 @@ class DataStorageContainer extends Component {
   }
 
   render() {
+    const projectDataStorage = {
+      ...this.props.dataStorage,
+      value: this.props.dataStorage.value.filter(store => store.projectKey === this.props.projectKey),
+    };
     return (
       <StackCards
-        stacks={this.props.dataStorage}
+        stacks={projectDataStorage}
         typeName={TYPE_NAME}
         typeNamePlural={TYPE_NAME_PLURAL}
         openStack={this.openDataStore}
@@ -165,6 +169,13 @@ function mapStateToProps(state) {
   };
 }
 
+function mapProjectStateToProps(state) {
+  return {
+    dataStorage: state.dataStorage,
+    // leave projectKey as a prop, rather than reading from state
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
@@ -175,5 +186,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const ProjectDataStorageContainer = connect(mapProjectStateToProps, mapDispatchToProps)(DataStorageContainer);
+
 export { DataStorageContainer as PureDataStorageContainer }; // export for testing
+export { ProjectDataStorageContainer }; // export with projectKey as prop
 export default connect(mapStateToProps, mapDispatchToProps)(DataStorageContainer);
