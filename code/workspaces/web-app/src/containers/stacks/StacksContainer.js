@@ -201,6 +201,7 @@ class StacksContainer extends Component {
         editStack={this.openEditForm}
         restartStack={this.confirmRestartStack}
         openCreationForm={this.openCreationForm}
+        showCreateButton={this.props.showCreateButton}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
         openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey.value)}
@@ -236,12 +237,14 @@ StacksContainer.propTypes = {
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectKey: PropTypes.object.isRequired,
+  showCreationButton: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     stacks: state.stacks,
     projectKey: currentProjectSelectors.currentProjectKey(state),
+    showCreateButton: true, // default
   };
 }
 
@@ -249,6 +252,7 @@ function mapProjectStateToProps(state) {
   return {
     stacks: state.stacks,
     // leave projectKey as a prop, rather than reading from state
+    showCreateButton: false, // don't show create button in ProjectStacksContainer
   };
 }
 

@@ -41,12 +41,14 @@ const Pagination = ({ items, itemsPerPage = 10, paginationBarItems = null, items
   return (
     <div>
       <div>{itemsToDisplay}</div>
-      <div className={classes.paginationControlBar}>
-        <PaginationControls pageNum={pageNum} setPageNum={setPageNum} numPages={numPages} itemsName={itemsName} />
-        {paginationBarItems
-          && <div>{paginationBarItems}</div>
-        }
-      </div>
+      {(numPages > 1 || paginationBarItems)
+        && <div className={classes.paginationControlBar}>
+          <PaginationControls pageNum={pageNum} setPageNum={setPageNum} numPages={numPages} itemsName={itemsName} />
+          {paginationBarItems
+            && <div>{paginationBarItems}</div>
+          }
+        </div>
+      }
     </div>
   );
 };
