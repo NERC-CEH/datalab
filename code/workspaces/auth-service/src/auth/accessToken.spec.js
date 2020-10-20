@@ -22,6 +22,6 @@ describe('requestAccessToken', () => {
       .reply(401);
 
     return requestAccessToken()
-      .catch(err => expect(err.message).toBe('Unable to retrieve access token.'));
+      .catch(err => expect(err.message).toBe('Unable to retrieve access token - Original message: "Request failed with status code 401"'));
   });
 });

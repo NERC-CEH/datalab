@@ -5,7 +5,7 @@ import config from '../config/config';
 import requestAccessToken from '../auth/accessToken';
 import { getOrSetCacheAsyncWrapper } from '../cache/cache';
 
-export const authZeroManagementApi = `https://${config.get('authZeroDomain')}/api/v2`;
+export const authZeroManagementApi = `https://${config.get('oidcProviderDomain')}/api/v2`;
 const PAGE_LIMIT = 100;
 const AUTH0_MAXIMUM = 1000;
 
