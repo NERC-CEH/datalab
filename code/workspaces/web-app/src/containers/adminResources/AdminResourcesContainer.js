@@ -3,16 +3,28 @@ import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectMultiSelect from './ProjectMultiSelect';
 import projectsActions from '../../actions/projectActions';
 import sortByName from './sortByName';
 import ProjectResources from './ProjectResources';
+import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
+import Pagination from '../../components/stacks/Pagination';
 
 const useStyles = makeStyles(theme => ({
   showText: {
     fontWeight: '400',
     marginRight: theme.spacing(4),
+  },
+  placeholderCard: {
+    width: '100%',
+    height: 70,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTop: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
 }));
 
@@ -37,6 +49,12 @@ function AdminResourcesContainer(props) {
     setShow({ ...show, [event.target.name]: event.target.checked });
   };
 
+  const renderedProjects = shownProjects && shownProjects.length > 0
+    ? shownProjects.map(project => ProjectResources({ userPermissions, project, show }))
+    : [<div className={classes.placeholderCard} key={'placeholder-card'}>
+        <Typography variant="body1">No projects to display.</Typography>
+      </div>];
+
   return (
     <>
       <ProjectMultiSelect selectedProjects={selectedProjects} setSelectedProjects={setSelectedProjects}></ProjectMultiSelect>
@@ -53,7 +71,9 @@ function AdminResourcesContainer(props) {
         } />
       </div>
       <div>
-        {shownProjects.map(project => ProjectResources({ userPermissions, project, show }))}
+      <PromisedContentWrapper fetchingClassName={classes.placeholderCard} promise={projects}>
+        <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects"/>
+      </PromisedContentWrapper>
       </div>
     </>
   );

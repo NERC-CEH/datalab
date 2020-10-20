@@ -59,7 +59,7 @@ function gotoNextPage(pageNum, setPageNum, setPageInputValue) {
   setPageInputValue(pageNumToPageInputValue(newPageNum));
 }
 
-const PaginationControls = ({ pageNum, setPageNum, numPages }) => {
+const PaginationControls = ({ pageNum, setPageNum, numPages, itemsName }) => {
   const classes = useStyles();
 
   const [pageInputValue, setPageInputValue] = useState(pageNumToPageInputValue(pageNum));
@@ -75,6 +75,13 @@ const PaginationControls = ({ pageNum, setPageNum, numPages }) => {
 
   const hasPreviousPage = pageNum > 0;
   const hasNextPage = pageNum < numPages - 1;
+  const pageText = itemsName ? `${itemsName} page` : 'Page';
+
+  if (numPages === 1) {
+    return (
+      <div/>
+    );
+  }
 
   return (
     <div className={classes.paginationControlsContainer}>
@@ -84,7 +91,7 @@ const PaginationControls = ({ pageNum, setPageNum, numPages }) => {
         disabled={!hasPreviousPage}
         onClick={() => gotoPreviousPage(pageNum, setPageNum, setPageInputValue)}
       />
-      <div className={classes.controlText}>Page</div>
+      <div className={classes.controlText}>{pageText}</div>
       <PaginationControlTextField
         pageInputValue={pageInputValue}
         setPageInputValue={setPageInputValue}

@@ -26,7 +26,7 @@ function handleNumPagesDroppingBelowPageNum(numPages, pageNum, setPageNum) {
   if (pageNum >= numPages) setPageNum(numPages - 1);
 }
 
-const Pagination = ({ items, itemsPerPage = 10, paginationBarItems }) => {
+const Pagination = ({ items, itemsPerPage = 10, paginationBarItems = null, itemsName = null }) => {
   const classes = useStyles();
   const [pageNum, setPageNum] = useState(0);
   const numPages = calculateNumberOfPages(items.length, itemsPerPage);
@@ -42,8 +42,10 @@ const Pagination = ({ items, itemsPerPage = 10, paginationBarItems }) => {
     <div>
       <div>{itemsToDisplay}</div>
       <div className={classes.paginationControlBar}>
-        <PaginationControls pageNum={pageNum} setPageNum={setPageNum} numPages={numPages} />
-        <div>{paginationBarItems}</div>
+        <PaginationControls pageNum={pageNum} setPageNum={setPageNum} numPages={numPages} itemsName={itemsName} />
+        {paginationBarItems
+          && <div>{paginationBarItems}</div>
+        }
       </div>
     </div>
   );
