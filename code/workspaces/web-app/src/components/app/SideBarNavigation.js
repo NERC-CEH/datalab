@@ -15,7 +15,7 @@ const style = () => ({
   },
 });
 
-function SideBarNavigation({ children, userPermissions, classes, sideBar }) {
+function SideBarNavigation({ children, classes, sideBar }) {
   return (
     <div className={classes.projectNavigation}>
       { sideBar }

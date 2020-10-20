@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminNavigationContainer renders to match snapshot passing correct props to children 1`] = `
+<WithStyles(SideBarNavigation)
+  sideBar={<ForwardRef(WithStyles) />}
+>
+  <Switch>
+    <RoutePermissionWrapper
+      component={[Function]}
+      exact={true}
+      path="/admin/resources"
+      permission="system:instance:admin"
+      promisedUserPermissions={
+        Object {
+          "error": null,
+          "fetching": false,
+          "value": Array [
+            "some-permission",
+          ],
+        }
+      }
+    />
+    <Redirect
+      exact={true}
+      from="/admin"
+      to="/admin/resources"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
+</WithStyles(SideBarNavigation)>
+`;

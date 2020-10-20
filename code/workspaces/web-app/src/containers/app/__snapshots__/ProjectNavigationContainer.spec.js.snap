@@ -31,11 +31,15 @@ exports[`ProjectNavigationContainer renders to match snapshot passing correct pr
 `;
 
 exports[`PureProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
-<WithStyles(ProjectNavigation)
-  userPermissions={
-    Array [
-      "projects:testproj:projects:read",
-    ]
+<WithStyles(SideBarNavigation)
+  sideBar={
+    <ForwardRef(WithStyles)
+      userPermissions={
+        Array [
+          "projects:testproj:projects:read",
+        ]
+      }
+    />
   }
 >
   <Switch>
@@ -122,7 +126,7 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
       component={[Function]}
     />
   </Switch>
-</WithStyles(ProjectNavigation)>
+</WithStyles(SideBarNavigation)>
 `;
 
 exports[`PureProjectNavigationContainer should redirect if there is an error getting the project key 1`] = `

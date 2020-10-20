@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
-import projectActions from '../../actions/projectActions';
 import SideBarNavigation from '../../components/app/SideBarNavigation';
 import AdminResourcesPage from '../../pages/AdminResourcesPage';
 import RoutePermissions from '../../components/common/RoutePermissionWrapper';
@@ -11,22 +8,9 @@ import NotFoundPage from '../../pages/NotFoundPage';
 import AdminSideBar from '../../components/app/AdminSideBar';
 
 function AdminNavigationContainer({ promisedUserPermissions }) {
-  const projectKey = 'andyl';
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(projectActions.setCurrentProject(projectKey));
-  }, [dispatch, projectKey]);
-
-  return <PureAdminNavigationContainer
-    promisedUserPermissions={promisedUserPermissions}
-  />;
-}
-
-function PureAdminNavigationContainer({ promisedUserPermissions }) {
   return (
     <SideBarNavigation sideBar={
-            <AdminSideBar />
+      <AdminSideBar />
     }>
       <Switch>
         <RoutePermissions
@@ -41,15 +25,5 @@ function PureAdminNavigationContainer({ promisedUserPermissions }) {
     </SideBarNavigation>
   );
 }
-
-PureAdminNavigationContainer.propTypes = {
-  projectKey: PropTypes.shape({
-    fetching: PropTypes.bool.isRequired,
-    value: PropTypes.string,
-    error: PropTypes.any,
-  }),
-};
-
-export { PureAdminNavigationContainer };
 
 export default AdminNavigationContainer;

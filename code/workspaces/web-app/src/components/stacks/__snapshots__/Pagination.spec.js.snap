@@ -20,6 +20,7 @@ exports[`Pagination renders array of additional items in control bar after pagin
     className="makeStyles-paginationControlBar-1"
   >
     <PaginationControls
+      itemsName="bar items"
       numPages={2}
       pageNum={0}
       setPageNum={[Function]}
@@ -60,6 +61,7 @@ exports[`Pagination renders single additional item in control bar after paginati
     className="makeStyles-paginationControlBar-1"
   >
     <PaginationControls
+      itemsName="bar items"
       numPages={2}
       pageNum={0}
       setPageNum={[Function]}
@@ -111,11 +113,30 @@ exports[`Pagination renders the correct number of items from the start of the ar
     className="makeStyles-paginationControlBar-1"
   >
     <PaginationControls
+      itemsName={null}
       numPages={2}
       pageNum={0}
       setPageNum={[Function]}
     />
-    <div />
+  </div>
+</div>
+`;
+
+exports[`Pagination skips div for pagination controls and bar item if only one page and no bar item 1`] = `
+<div>
+  <div>
+    <div
+      key="0"
+    >
+      Item 
+      0
+    </div>
+    <div
+      key="1"
+    >
+      Item 
+      1
+    </div>
   </div>
 </div>
 `;

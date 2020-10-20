@@ -73,10 +73,14 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
       "fetching": false,
       "value": Array [
         Object {
+          "projectKey": "projtest",
           "prop": "prop1",
+          "type": "jupyter",
         },
         Object {
+          "projectKey": "projtest",
           "prop": "prop2",
+          "type": "jupyter",
         },
       ],
     }

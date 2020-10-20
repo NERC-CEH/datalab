@@ -191,3 +191,118 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
   </PromisedContentWrapper>
 </div>
 `;
+
+exports[`StackCards creates correct snapshot when no create button 1`] = `
+<div
+  className="makeStyles-stackDiv-1"
+>
+  <PromisedContentWrapper
+    fetchingClassName="makeStyles-placeholderCard-2"
+    promise={
+      Object {
+        "fetching": false,
+        "value": Array [
+          Object {
+            "displayName": "name1",
+            "id": "1",
+            "type": "type1",
+          },
+          Object {
+            "displayName": "name2",
+            "id": "2",
+            "type": "type2",
+          },
+          Object {
+            "displayName": "name3",
+            "id": "3",
+            "type": "type3",
+          },
+        ],
+      }
+    }
+  >
+    <Pagination
+      items={
+        Array [
+          <ForwardRef(WithStyles)
+            deletePermission="delete"
+            deleteStack={[MockFunction deleteStack]}
+            editPermission="edit"
+            editStack={[MockFunction editStack]}
+            openPermission="open"
+            openStack={[MockFunction openStack]}
+            restartStack={[MockFunction restartStack]}
+            stack={
+              Object {
+                "displayName": "name1",
+                "id": "1",
+                "type": "type1",
+              }
+            }
+            typeName="expectedTypeName"
+            userPermissions={
+              Array [
+                "open",
+                "delete",
+                "create",
+                "edit",
+              ]
+            }
+          />,
+          <ForwardRef(WithStyles)
+            deletePermission="delete"
+            deleteStack={[MockFunction deleteStack]}
+            editPermission="edit"
+            editStack={[MockFunction editStack]}
+            openPermission="open"
+            openStack={[MockFunction openStack]}
+            restartStack={[MockFunction restartStack]}
+            stack={
+              Object {
+                "displayName": "name2",
+                "id": "2",
+                "type": "type2",
+              }
+            }
+            typeName="expectedTypeName"
+            userPermissions={
+              Array [
+                "open",
+                "delete",
+                "create",
+                "edit",
+              ]
+            }
+          />,
+          <ForwardRef(WithStyles)
+            deletePermission="delete"
+            deleteStack={[MockFunction deleteStack]}
+            editPermission="edit"
+            editStack={[MockFunction editStack]}
+            openPermission="open"
+            openStack={[MockFunction openStack]}
+            restartStack={[MockFunction restartStack]}
+            stack={
+              Object {
+                "displayName": "name3",
+                "id": "3",
+                "type": "type3",
+              }
+            }
+            typeName="expectedTypeName"
+            userPermissions={
+              Array [
+                "open",
+                "delete",
+                "create",
+                "edit",
+              ]
+            }
+          />,
+        ]
+      }
+      paginationBarItems={null}
+    />
+  </PromisedContentWrapper>
+</div>
+`;

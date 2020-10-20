@@ -9,12 +9,15 @@ describe('ProjectNavigation', () => {
     shallow = createShallow({ dive: true });
   });
 
-  const classes = { projectNavigation: 'projectNavigation', contentArea: 'contentArea' };
+  const SideBar = () => (
+  <div>
+  </div>
+  );
 
   it('renders the correct snapshot', () => {
     expect(
       shallow(
-        <SideBarNavigation userPermissions="userPermissions" projectKey="testproj" classes={classes}>
+        <SideBarNavigation sideBar={SideBar}>
           <span>Content</span>
         </SideBarNavigation>,
       ),

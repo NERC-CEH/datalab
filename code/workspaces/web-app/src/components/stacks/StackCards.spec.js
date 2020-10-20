@@ -27,11 +27,12 @@ describe('StackCards', () => {
     deletePermission: 'delete',
     createPermission: 'create',
     editPermission: 'edit',
+    showCreateButton: true,
   });
 
   it('creates correct snapshot for an array of stacks', () => {
     // Arrange
-    const props = generateProps();
+    const props = generateProps(true);
 
     // Act
     const output = shallowRender(props);
@@ -42,7 +43,18 @@ describe('StackCards', () => {
 
   it('creates correct snapshot for an empty array', () => {
     // Arrange
-    const props = { ...generateProps(), stacks: { fetching: false, value: [] } };
+    const props = { ...generateProps(true), stacks: { fetching: false, value: [] } };
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('creates correct snapshot when no create button', () => {
+    // Arrange
+    const props = { ...generateProps(true), showCreateButton: false };
 
     // Act
     const output = shallowRender(props);

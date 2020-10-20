@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { permissionTypes } from 'common';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
-import SideBar, { PureSideBar } from './SideBar';
+import ProjectSideBar, { PureSideBar } from './ProjectSideBar';
 
 jest.mock('../../hooks/currentProjectHooks');
 
@@ -26,7 +26,7 @@ useCurrentProjectKey.mockReturnValue(projectKey);
 describe('SideBar', () => {
   it('renders correctly passing props to children', () => {
     const props = { userPermissions, projectKey, classes };
-    expect(shallow(<SideBar {...props} />)).toMatchSnapshot();
+    expect(shallow(<ProjectSideBar {...props} />)).toMatchSnapshot();
   });
 });
 

@@ -1,4 +1,4 @@
-import { stackInCategory, JUPYTER, RSHINY, NFS_VOLUME, ANALYSIS, PUBLISH, DATA_STORE } from './stackTypes';
+import { getCategoryFromTypeName, stackInCategory, JUPYTER, RSHINY, NFS_VOLUME, ANALYSIS, PUBLISH, DATA_STORE } from './stackTypes';
 
 describe('stackInCategory', () => {
   describe('returns true when stack is of category', () => {
@@ -27,5 +27,16 @@ describe('stackInCategory', () => {
       expect(stackInCategory(RSHINY, ANALYSIS, DATA_STORE)).toBe(false);
       expect(stackInCategory(NFS_VOLUME, ANALYSIS, PUBLISH)).toBe(false);
     });
+  });
+});
+
+describe('getCategoryFromTypeName', () => {
+  it('returns category for an existing type', () => {
+    expect(getCategoryFromTypeName(JUPYTER)).toBe(ANALYSIS);
+    expect(getCategoryFromTypeName(RSHINY)).toBe(PUBLISH);
+  });
+
+  it('returns null for an unrecognized type', () => {
+    expect(getCategoryFromTypeName('no-such-type')).toBe(null);
   });
 });

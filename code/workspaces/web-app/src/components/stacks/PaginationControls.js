@@ -91,7 +91,7 @@ const PaginationControls = ({ pageNum, setPageNum, numPages, itemsName }) => {
         disabled={!hasPreviousPage}
         onClick={() => gotoPreviousPage(pageNum, setPageNum, setPageInputValue)}
       />
-      <div className={classes.controlText}>{pageText}</div>
+      <div id="page-text" className={classes.controlText}>{pageText}</div>
       <PaginationControlTextField
         pageInputValue={pageInputValue}
         setPageInputValue={setPageInputValue}

@@ -68,6 +68,7 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
       "fetching": false,
       "value": Array [
         Object {
+          "projectKey": "project99",
           "props": "expectedPropValue",
         },
       ],

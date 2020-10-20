@@ -48,3 +48,56 @@ exports[`Topbar correctly renders correct snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`Topbar correctly renders correct snapshot for instance admin 1`] = `
+<div
+  className="TopBar-appBar-1"
+>
+  <div
+    className="TopBar-toolBar-2"
+  >
+    <img
+      alt="datalabs-logo"
+      className="TopBar-datalabsLogo-3"
+      src="datalabs-hori.png"
+    />
+    <div
+      className="TopBar-buttons-4"
+    >
+      <WithStyles(TopBarButton)
+        label="Admin"
+        to="/admin"
+      />
+      <WithStyles(TopBarButton)
+        label="Projects"
+        to="/projects"
+      />
+      <WithStyles(TopBarButton)
+        key="nav-link-Slack"
+        label="Slack"
+        onClick={[Function]}
+      />
+      <WithStyles(TopBarButton)
+        key="nav-link-Help"
+        label="Help"
+        onClick={[Function]}
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    />
+    <WithStyles(UserIcon)
+      identity={
+        Object {
+          "expected": "identity",
+          "picture": "expectedUrl",
+        }
+      }
+    />
+  </div>
+</div>
+`;

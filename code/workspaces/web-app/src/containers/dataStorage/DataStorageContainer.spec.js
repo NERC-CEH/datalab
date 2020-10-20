@@ -77,7 +77,7 @@ describe('DataStorageContainer', () => {
       return shallow(<PureDataStorageContainer {...props} />);
     }
 
-    const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
+    const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue', projectKey: 'project99' }] };
     const getCredentialsMock = jest.fn();
     const openMinioDataStoreMock = jest.fn();
     const openModalDialogMock = jest.fn();

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminResourcesContainer renders correctly passing correct props to children 1`] = `
+<Fragment>
+  <ProjectMultiSelect
+    selectedProjects={Array []}
+    setSelectedProjects={[Function]}
+  />
+  <div>
+    <span
+      className="makeStyles-showText-1"
+    >
+      Show
+    </span>
+    <WithStyles(ForwardRef(FormControlLabel))
+      control={
+        <ForwardRef(WithStyles)
+          checked={true}
+          color="primary"
+          name="notebooks"
+          onChange={[Function]}
+        />
+      }
+      label="Notebooks"
+    />
+    <WithStyles(ForwardRef(FormControlLabel))
+      control={
+        <ForwardRef(WithStyles)
+          checked={true}
+          color="primary"
+          name="sites"
+          onChange={[Function]}
+        />
+      }
+      label="Sites"
+    />
+    <WithStyles(ForwardRef(FormControlLabel))
+      control={
+        <ForwardRef(WithStyles)
+          checked={true}
+          color="primary"
+          name="storage"
+          onChange={[Function]}
+        />
+      }
+      label="Storage"
+    />
+  </div>
+  <div>
+    <PromisedContentWrapper
+      fetchingClassName="makeStyles-placeholderCard-2"
+      promise={
+        Object {
+          "fetching": false,
+          "value": Array [
+            Object {
+              "key": "testproj1",
+              "name": "Test Project 1",
+            },
+            Object {
+              "key": "testproj2",
+              "name": "Test Project 2",
+            },
+          ],
+        }
+      }
+    >
+      <Pagination
+        items={
+          Array [
+            <React.Fragment>
+              project resources
+            </React.Fragment>,
+            <React.Fragment>
+              project resources
+            </React.Fragment>,
+          ]
+        }
+        itemsName="Projects"
+        itemsPerPage={5}
+      />
+    </PromisedContentWrapper>
+  </div>
+</Fragment>
+`;

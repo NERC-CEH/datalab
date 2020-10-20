@@ -80,8 +80,8 @@ function stackInCategory(stackName, ...category) {
 }
 
 function getCategoryFromTypeName(name) {
-  return STACK_TYPES
-    .filter(item => item.name === name)[0].category;
+  const stack = STACK_TYPES.filter(item => item.name === name);
+  return stack && stack.length ? stack[0].category : null;
 }
 
 export {
