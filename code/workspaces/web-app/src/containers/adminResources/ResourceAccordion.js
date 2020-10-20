@@ -10,24 +10,44 @@ const ResourceAccordion = withStyles({
     '&:before': {
       backgroundColor: 'transparent',
     },
+    '&$expanded': {
+      margin: 0,
+    },
   },
-  expanded: {},
+  expanded: {
+  },
 })(ExpansionPanel);
 
 const ResourceAccordionSummary = withStyles({
   root: {
     justifyContent: 'flex-start',
+    margin: '10px 0 0 0',
+    minHeight: 0,
+    '&$expanded': {
+      margin: '10px 0 0 0',
+      minHeight: 0,
+    },
+  },
+  expandIcon: {
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  expanded: {
   },
   content: {
     flexGrow: 0,
+    margin: 0,
+    '&$expanded': {
+      margin: 0,
+    },
   },
-  expanded: {},
 })(ExpansionPanelSummary);
 
 const ResourceAccordionDetails = withStyles({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    padding: 0,
   },
 })(ExpansionPanelDetails);
 

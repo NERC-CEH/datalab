@@ -6,6 +6,10 @@ import ProjectSites from './ProjectSites';
 import ProjectStorage from './ProjectStorage';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from './ResourceAccordion';
 
+const resourcesStyle = {
+  marginLeft: '40px',
+};
+
 export default function ProjectResources(props) {
   const { userPermissions, project, show } = props;
   return (
@@ -14,9 +18,11 @@ export default function ProjectResources(props) {
         <Typography variant="h5">{project.name}</Typography>
       </ResourceAccordionSummary>
       <ResourceAccordionDetails>
-        {show.notebooks && ProjectNotebooks({ userPermissions, project })}
-        {show.sites && ProjectSites({ userPermissions, project })}
-        {show.storage && ProjectStorage({ userPermissions, project })}
+        <div style={resourcesStyle}>
+          {show.notebooks && ProjectNotebooks({ userPermissions, project })}
+          {show.sites && ProjectSites({ userPermissions, project })}
+          {show.storage && ProjectStorage({ userPermissions, project })}
+        </div>
       </ResourceAccordionDetails>
     </ResourceAccordion>
   );
