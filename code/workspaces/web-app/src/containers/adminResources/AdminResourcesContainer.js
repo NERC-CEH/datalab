@@ -54,14 +54,14 @@ function AdminResourcesContainer(props) {
   };
 
   const renderedProjects = shownProjects && shownProjects.length > 0
-    ? shownProjects.map(project => ProjectResources({ userPermissions, project, show }))
+    ? shownProjects.map(project => <ProjectResources userPermissions={userPermissions} project={project} show={show} />)
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
         <Typography variant="body1">No projects to display.</Typography>
       </div>];
 
   return (
     <>
-      <ProjectMultiSelect selectedProjects={selectedProjects} setSelectedProjects={setSelectedProjects}></ProjectMultiSelect>
+      <ProjectMultiSelect selectedProjects={selectedProjects} setSelectedProjects={setSelectedProjects} />
       <div className={classes.showControls}>
         <span className={classes.showText}>Show</span>
         <FormControlLabel label="Notebooks" control={

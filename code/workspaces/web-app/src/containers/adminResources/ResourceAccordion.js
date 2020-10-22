@@ -2,6 +2,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import theme from '../../theme';
 
 const ResourceAccordion = withStyles({
   root: {
@@ -11,8 +12,9 @@ const ResourceAccordion = withStyles({
       backgroundColor: 'transparent',
     },
     '&$expanded': {
-      margin: '0 0 50px 0',
+      margin: [[0, 0, theme.spacing(6), 0]],
     },
+    margin: [[0, 0, theme.spacing(1), 0]],
   },
   expanded: {
   },
@@ -21,10 +23,11 @@ const ResourceAccordion = withStyles({
 const ResourceAccordionSummary = withStyles({
   root: {
     justifyContent: 'flex-start',
-    margin: 0,
+    margin: [[theme.spacing(1), 0]],
+    padding: 0,
     minHeight: 0,
     '&$expanded': {
-      margin: 0,
+      margin: [[theme.spacing(1), 0]],
       minHeight: 0,
     },
   },
