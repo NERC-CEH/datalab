@@ -75,6 +75,7 @@ exports[`ProjectsContainer is a container which passes correct props to StackCar
     openCreationForm={[Function]}
     openPermission="project.open"
     openStack={[Function]}
+    showCreateButton={true}
     stacks={
       Object {
         "fetching": false,

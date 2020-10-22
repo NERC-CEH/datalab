@@ -68,6 +68,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
   openStack={[Function]}
   restartStack={[Function]}
   shareStack={[Function]}
+  showCreateButton={true}
   stacks={
     Object {
       "fetching": false,

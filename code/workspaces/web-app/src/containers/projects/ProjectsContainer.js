@@ -237,6 +237,7 @@ class ProjectsContainer extends Component {
           openStack={project => history.push(`/projects/${project.key}/info`)}
           deleteStack={this.confirmDeleteProject}
           openCreationForm={this.openCreationForm}
+          showCreateButton={true}
           userPermissions={project => [...this.projectUserPermissions(project), ...this.props.userPermissions]}
           createPermission={SYSTEM_INSTANCE_ADMIN}
           openPermission={PROJECT_OPEN_PERMISSION}

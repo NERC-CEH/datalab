@@ -9,6 +9,11 @@ exports[`ProjectResources shows notebooks 1`] = `
     expandIcon={<Memo(ExpandMoreIcon) />}
   >
     <WithStyles(ForwardRef(Typography))
+      style={
+        Object {
+          "margin": "10px 0 10px 0",
+        }
+      }
       variant="h5"
     >
       Test Project
@@ -59,6 +64,11 @@ exports[`ProjectResources shows sites 1`] = `
     expandIcon={<Memo(ExpandMoreIcon) />}
   >
     <WithStyles(ForwardRef(Typography))
+      style={
+        Object {
+          "margin": "10px 0 10px 0",
+        }
+      }
       variant="h5"
     >
       Test Project
@@ -109,6 +119,11 @@ exports[`ProjectResources shows storage 1`] = `
     expandIcon={<Memo(ExpandMoreIcon) />}
   >
     <WithStyles(ForwardRef(Typography))
+      style={
+        Object {
+          "margin": "10px 0 10px 0",
+        }
+      }
       variant="h5"
     >
       Test Project

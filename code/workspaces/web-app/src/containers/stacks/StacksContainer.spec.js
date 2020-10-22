@@ -36,7 +36,7 @@ describe('StacksContainer', () => {
         userPermissions: ['expectedPermission'],
         projectKey: 'testproj',
         formComponent: FormComponent,
-        showCreationButton: true,
+        showCreateButton: true,
       };
 
       return shallow(<StacksContainer {...props} />).find('StacksContainer');
@@ -132,7 +132,7 @@ describe('StacksContainer', () => {
       },
       projectKey: { fetching: false, value: 'projtest' },
       formComponent: FormComponent,
-      showCreationButton: true,
+      showCreateButton: true,
     });
 
     beforeEach(() => jest.clearAllMocks());

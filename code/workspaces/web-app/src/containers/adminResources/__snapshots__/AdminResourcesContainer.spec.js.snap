@@ -6,9 +6,11 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     selectedProjects={Array []}
     setSelectedProjects={[Function]}
   />
-  <div>
+  <div
+    className="makeStyles-showControls-1"
+  >
     <span
-      className="makeStyles-showText-1"
+      className="makeStyles-showText-2"
     >
       Show
     </span>
@@ -48,7 +50,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
   </div>
   <div>
     <PromisedContentWrapper
-      fetchingClassName="makeStyles-placeholderCard-2"
+      fetchingClassName="makeStyles-placeholderCard-3"
       promise={
         Object {
           "fetching": false,

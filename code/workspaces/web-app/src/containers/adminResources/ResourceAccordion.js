@@ -11,7 +11,7 @@ const ResourceAccordion = withStyles({
       backgroundColor: 'transparent',
     },
     '&$expanded': {
-      margin: 0,
+      margin: '0 0 50px 0',
     },
   },
   expanded: {
@@ -21,16 +21,16 @@ const ResourceAccordion = withStyles({
 const ResourceAccordionSummary = withStyles({
   root: {
     justifyContent: 'flex-start',
-    margin: '10px 0 0 0',
+    margin: 0,
     minHeight: 0,
     '&$expanded': {
-      margin: '10px 0 0 0',
+      margin: 0,
       minHeight: 0,
     },
   },
   expandIcon: {
-    paddingTop: 0,
-    paddingBottom: 0,
+    padding: 0,
+    marginLeft: '15px',
   },
   expanded: {
   },

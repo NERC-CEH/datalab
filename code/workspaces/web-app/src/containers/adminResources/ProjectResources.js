@@ -10,12 +10,16 @@ const resourcesStyle = {
   marginLeft: '40px',
 };
 
+const headingStyle = {
+  margin: '10px 0 10px 0',
+};
+
 export default function ProjectResources(props) {
   const { userPermissions, project, show } = props;
   return (
     <ResourceAccordion key={project.key} defaultExpanded>
       <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h5">{project.name}</Typography>
+        <Typography variant="h5" style={headingStyle}>{project.name}</Typography>
       </ResourceAccordionSummary>
       <ResourceAccordionDetails>
         <div style={resourcesStyle}>

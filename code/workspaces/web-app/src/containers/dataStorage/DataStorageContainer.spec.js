@@ -17,6 +17,7 @@ describe('DataStorageContainer', () => {
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
         projectKey: 'project99',
+        showCreateButton: true,
       };
 
       return shallow(<DataStorageContainer {...props} />).find('DataStorageContainer');
@@ -90,6 +91,7 @@ describe('DataStorageContainer', () => {
       dataStorage,
       userPermissions: ['expectedPermission'],
       projectKey: 'project99',
+      showCreateButton: true,
       actions: {
         loadDataStorage: loadDataStorageMock,
         getCredentials: getCredentialsMock,

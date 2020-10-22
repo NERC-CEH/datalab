@@ -133,6 +133,7 @@ class DataStorageContainer extends Component {
         deleteStack={this.chooseDialogue}
         editStack={this.editDataStore}
         openCreationForm={this.openCreationForm}
+        showCreateButton={this.props.showCreateButton}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STORAGE_CREATE, this.props.projectKey)}
         openPermission={projectKeyPermission(PROJECT_KEY_STORAGE_OPEN, this.props.projectKey)}
@@ -160,12 +161,14 @@ DataStorageContainer.propTypes = {
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showCreateButton: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     dataStorage: state.dataStorage,
     projectKey: currentProjectSelectors.currentProjectKey(state).value,
+    showCreateButton: true, // default
   };
 }
 
@@ -173,6 +176,7 @@ function mapProjectStateToProps(state) {
   return {
     dataStorage: state.dataStorage,
     // leave projectKey as a prop, rather than reading from state
+    showCreateButton: false, // don't show create button in ProjectStacksContainer
   };
 }
 

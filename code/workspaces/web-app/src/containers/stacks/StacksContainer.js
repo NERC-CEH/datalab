@@ -237,7 +237,7 @@ StacksContainer.propTypes = {
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectKey: PropTypes.object.isRequired,
-  showCreationButton: PropTypes.bool.isRequired,
+  showCreateButton: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {

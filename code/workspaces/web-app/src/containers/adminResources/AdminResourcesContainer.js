@@ -13,6 +13,10 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import Pagination from '../../components/stacks/Pagination';
 
 const useStyles = makeStyles(theme => ({
+  showControls: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   showText: {
     fontWeight: '400',
     marginRight: theme.spacing(4),
@@ -58,7 +62,7 @@ function AdminResourcesContainer(props) {
   return (
     <>
       <ProjectMultiSelect selectedProjects={selectedProjects} setSelectedProjects={setSelectedProjects}></ProjectMultiSelect>
-      <div>
+      <div className={classes.showControls}>
         <span className={classes.showText}>Show</span>
         <FormControlLabel label="Notebooks" control={
           <Checkbox checked={show.notebooks} onChange={handleCheckboxChange} name="notebooks" color="primary" />

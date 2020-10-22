@@ -63,6 +63,7 @@ exports[`DataStorageContainer is a container which passes correct props to Stack
   openCreationForm={[Function]}
   openPermission="projects:project99:storage:open"
   openStack={[Function]}
+  showCreateButton={true}
   stacks={
     Object {
       "fetching": false,
