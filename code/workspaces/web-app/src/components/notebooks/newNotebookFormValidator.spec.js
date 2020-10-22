@@ -12,6 +12,7 @@ describe('New Notebook Form Validator', () => {
       name: 'name',
       volumeMount: 'dataStore',
       description: 'The notebook description',
+      shared: 'private',
     };
 
     expect(syncValidate(values)).toBeUndefined();
@@ -30,6 +31,7 @@ describe('New Notebook Form Validator', () => {
       name: 'abc',
       volumeMount: 'dataStore',
       description: 'The notebook description',
+      shared: 'private',
     };
 
     expect(syncValidate(values)).toMatchSnapshot();
@@ -42,6 +44,7 @@ describe('New Notebook Form Validator', () => {
       name: 'abc!',
       volumeMount: 'dataStore',
       description: 'The notebook description',
+      shared: 'private',
     };
 
     expect(syncValidate(values)).toMatchSnapshot();
