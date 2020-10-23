@@ -26,19 +26,19 @@ const config = convict({
     env: 'PUBLIC_KEY',
   },
   authorisationClientId: {
-    doc: 'Auth0 client id for the Datalabs Authorisation API',
+    doc: 'OpenID Connect provider client id for the Datalabs Authorisation API',
     format: 'String',
     default: 'authzClientId',
     env: 'AUTHORISATION_API_CLIENT_ID',
   },
   authorisationClientSecret: {
-    doc: 'Auth0 client secret for the Datalabs Authorisation API',
+    doc: 'OpenID Connect provider client secret for the Datalabs Authorisation API',
     format: 'String',
     default: 'authzClientSecret',
     env: 'AUTHORISATION_API_CLIENT_SECRET',
   },
   authorisationIdentifier: {
-    doc: 'Auth0 identifier for the Datalabs Authorisation API',
+    doc: 'OpenID Connect provider identifier for the Datalabs Authorisation API',
     format: 'String',
     default: 'authzIdentifier',
     env: 'AUTHORISATION_API_IDENTIFIER',
@@ -62,28 +62,42 @@ const config = convict({
     env: 'AUTHORISATION_PERMISSIONS',
   },
   userManagementClientId: {
-    doc: 'Auth0 client id for the user management API',
+    doc: 'OpenID Connect provider client id for the user management API',
     format: 'String',
     default: 'userMgmtClientId',
     env: 'USER_MANAGEMENT_API_CLIENT_ID',
   },
   userManagementClientSecret: {
-    doc: 'Auth0 client secret for the user management API',
+    doc: 'OpenID Connect provider client secret for the user management API',
     format: 'String',
     default: 'userMgmtClientSecret',
     env: 'USER_MANAGEMENT_API_CLIENT_SECRET',
   },
-  authZeroDomain: {
-    doc: 'URL of the auth0 domain',
+  oidcProviderDomain: {
+    doc: 'URL of the OpenID Connect provider domain',
     format: 'String',
     default: 'mjbr.eu.auth0.com',
-    env: 'AUTH_ZERO_DOMAIN',
+    env: 'OIDC_PROVIDER_DOMAIN',
   },
-  authZeroAudience: {
+  oidcProviderAudience: {
     doc: 'Audience for authorisation',
     format: 'String',
     default: 'https://datalab.datalabs.nerc.ac.uk/api',
-    env: 'AUTH_ZERO_AUDIENCE',
+    env: 'OIDC_PROVIDER_AUDIENCE',
+  },
+  oidcOAuthTokenEndpoint: {
+    doc: `Fallback for when OIDC provider does not provide configuration information via /.well-known/openid-configuration.
+          The endpoint on the oidcProviderDomain at which OAuth tokens are issued.`,
+    format: 'String',
+    default: '/oauth/token',
+    env: 'OIDC_OAUTH_TOKEN_ENDPOINT',
+  },
+  oidcJwksEndpoint: {
+    doc: `Fallback for when OIDC provider does not provide configuration information via /.well-known/openid-configuration.
+          The endpoint on the oidcProviderDomain at which JSON Web Key Set (JWKS) information is obtained.`,
+    format: 'String',
+    default: '/.well-known/jwks.json',
+    env: 'OIDC_JWKS_ENDPOINT',
   },
   databaseHost: {
     doc: 'The database hostname',
