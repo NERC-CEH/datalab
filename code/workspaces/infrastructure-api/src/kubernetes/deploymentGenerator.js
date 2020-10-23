@@ -151,6 +151,10 @@ function createSparkDriverHeadlessService(notebookName) {
 
 function createPySparkConfigMap(notebookName, projectKey) {
   const context = {
+    spark: {
+      imageName: containerInfo.SPARK_IMAGE,
+      version: containerInfo.SPARK_VERSION,
+    },
     configMapName: nameGenerator.pySparkConfigMap(notebookName),
     projectNamespace: nameGenerator.projectNamespace(projectKey),
     projectComputeNamespace: nameGenerator.projectComputeNamespace(projectKey),
@@ -162,6 +166,10 @@ function createPySparkConfigMap(notebookName, projectKey) {
 
 function createDaskConfigMap(notebookName, projectKey) {
   const context = {
+    dask: {
+      imageName: containerInfo.DASK_IMAGE,
+      version: containerInfo.DASK_VERSION,
+    },
     configMapName: nameGenerator.daskConfigMap(notebookName),
     projectNamespace: nameGenerator.projectNamespace(projectKey),
     projectComputeNamespace: nameGenerator.projectComputeNamespace(projectKey),

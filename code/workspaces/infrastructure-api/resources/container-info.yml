@@ -1,5 +1,5 @@
 JUPYTER_IMAGE: 'nerc/jupyterlab'
-JUPYTER_VERSION: '0.1.7'
+JUPYTER_VERSION: 'f200ab964cea-dask-2.30.0'
 
 ZEPPELIN_IMAGE: 'nerc/zeppelin'
 ZEPPELIN_VERSION: '0.7.2.7'
@@ -17,8 +17,13 @@ RSHINY_VERSION: '0.1.8'
 NBVIEWER_IMAGE: 'jupyter/nbviewer'
 NBVIEWER_VERSION: 'latest'
 
+SPARK_IMAGE: 'nerc/spark-k8s'
+SPARK_VERSION: '0.1.0'
 SPARK_MASTER_ADDRESS: 'spark://spark-master:7077'
 SHARED_R_LIBS: '/data/packages/R/%p/%v'
+
+DASK_IMAGE: 'daskdev/dask'
+DASK_VERSION: '2.30.0'
 
 MINIO_IMAGE: 'nerc/minio'
 MINIO_VERSION: '1.0'
