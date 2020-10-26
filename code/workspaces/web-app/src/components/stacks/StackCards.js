@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const StackCards = (
-  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm,
+  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm, showCreateButton,
     userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack },
 ) => {
   const classes = useStyles();
@@ -53,11 +53,11 @@ const StackCards = (
         <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
       </div>];
 
-  const actionButton = (
+  const actionButton = showCreateButton ? (
     <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
       <NewStackButton onClick={openCreationForm} typeName={typeName} />
     </PermissionWrapper>
-  );
+  ) : null;
 
   return (
     <div className={classes.stackDiv}>

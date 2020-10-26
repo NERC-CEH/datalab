@@ -22,7 +22,6 @@ const Link = ({ classes, to, label, icon, ...rest }) => {
     <ListItem
       to={to}
       component={to ? AdapterNavLink : LiLink}
-      exact={true}
       button={true}
       {...rest}>
       {icon ? <ListItemIcon className={classes.listIcon}><Icon style={{ color: 'inherit' }}>{icon}</Icon></ListItemIcon> : undefined}

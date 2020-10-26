@@ -24,10 +24,10 @@ const styles = theme => ({
   },
 });
 
-const Navigation = ({ classes, children, identity }) => (
+const Navigation = ({ classes, children, identity, userPermissions }) => (
   <div className={classes.container}>
     <div className={classes.appFrame}>
-      <TopBar identity={identity} />
+      <TopBar identity={identity} userPermissions={userPermissions} />
       <main className={classes.pageContainer}>
         {children}
       </main>

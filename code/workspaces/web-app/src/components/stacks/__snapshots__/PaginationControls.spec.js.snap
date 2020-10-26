@@ -44,6 +44,24 @@ exports[`PaginationControls has a previous page button that renders as not disab
 />
 `;
 
+exports[`PaginationControls has page text that renders as "Page" by default 1`] = `
+<div
+  className="makeStyles-controlText-2"
+  id="page-text"
+>
+  Page
+</div>
+`;
+
+exports[`PaginationControls has page text that renders as "Somethings page" if you ask for it 1`] = `
+<div
+  className="makeStyles-controlText-2"
+  id="page-text"
+>
+  Somethings page
+</div>
+`;
+
 exports[`PaginationControls renders with children in correct order 1`] = `
 <div
   className="makeStyles-paginationControlsContainer-1"
@@ -56,6 +74,7 @@ exports[`PaginationControls renders with children in correct order 1`] = `
   />
   <div
     className="makeStyles-controlText-2"
+    id="page-text"
   >
     Page
   </div>

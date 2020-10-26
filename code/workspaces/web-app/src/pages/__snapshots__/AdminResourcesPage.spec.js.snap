@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminResourcesPage renders correct snapshot 1`] = `
+<WithStyles(Page)
+  title="Resources"
+>
+  <AdminResourcesContainer
+    userPermissions={
+      Array [
+        "expectedPermission",
+      ]
+    }
+  />
+</WithStyles(Page)>
+`;

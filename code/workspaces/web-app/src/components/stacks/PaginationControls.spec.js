@@ -8,8 +8,8 @@ describe('PaginationControls', () => {
     return shallow(<PaginationControls {...props} />);
   }
 
-  function generateProps(pageNum, setPageNum, numPages) {
-    return { pageNum, setPageNum, numPages };
+  function generateProps(pageNum, setPageNum, numPages, itemsName = null) {
+    return { pageNum, setPageNum, numPages, itemsName };
   }
 
   it('renders with children in correct order', () => {
@@ -44,7 +44,7 @@ describe('PaginationControls', () => {
     }
 
     it('renders as disabled when on the last page', () => {
-      const props = generateProps(0, () => {}, 1);
+      const props = generateProps(1, () => {}, 2);
       const render = shallowRender(props);
       const nextPageButton = findNextPageButton(render);
       expect(nextPageButton).toMatchSnapshot();
@@ -68,6 +68,26 @@ describe('PaginationControls', () => {
       const render = shallowRender(props);
       const textField = findPaginationControlTextField(render);
       expect(textField).toMatchSnapshot();
+    });
+  });
+
+  describe('has page text that', () => {
+    function findPageTextDiv(render) {
+      return render.find('#page-text');
+    }
+
+    it('renders as "Page" by default', () => {
+      const props = generateProps(0, () => {}, 5);
+      const render = shallowRender(props);
+      const pageTextDiv = findPageTextDiv(render);
+      expect(pageTextDiv).toMatchSnapshot();
+    });
+
+    it('renders as "Somethings page" if you ask for it', () => {
+      const props = generateProps(0, () => {}, 5, 'Somethings');
+      const render = shallowRender(props);
+      const pageTextDiv = findPageTextDiv(render);
+      expect(pageTextDiv).toMatchSnapshot();
     });
   });
 });

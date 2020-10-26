@@ -7,7 +7,7 @@ describe('Pagination', () => {
     return shallow(<Pagination {...props} />);
   }
 
-  function generateProps(numItems, itemsPerPage, paginationBarItems) {
+  function generateProps(numItems, itemsPerPage, paginationBarItems, itemsName) {
     const items = [];
     for (let i = 0; i < numItems; i++) {
       items.push(<div key={i}>Item {i}</div>);
@@ -16,25 +16,32 @@ describe('Pagination', () => {
       items,
       itemsPerPage,
       paginationBarItems,
+      itemsName,
     };
   }
 
   it('renders the correct number of items from the start of the array on the first page', () => {
-    const props = generateProps(10, 5, undefined);
+    const props = generateProps(10, 5, undefined, undefined);
     const output = shallowRender(props);
     expect(output).toMatchSnapshot();
   });
 
   it('renders single additional item in control bar after pagination controls in own div', () => {
     const barItem = <span>Bar Item</span>;
-    const props = generateProps(4, 2, barItem);
+    const props = generateProps(4, 2, barItem, 'bar items');
     const output = shallowRender(props);
     expect(output).toMatchSnapshot();
   });
 
   it('renders array of additional items in control bar after pagination controls in own div', () => {
     const barItems = [<span key={0}>Bar Item 1</span>, <span key={1}>Bar Item 1</span>];
-    const props = generateProps(4, 2, barItems);
+    const props = generateProps(4, 2, barItems, 'bar items');
+    const output = shallowRender(props);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('skips div for pagination controls and bar item if only one page and no bar item', () => {
+    const props = generateProps(2, 2, null, 'bar items');
     const output = shallowRender(props);
     expect(output).toMatchSnapshot();
   });

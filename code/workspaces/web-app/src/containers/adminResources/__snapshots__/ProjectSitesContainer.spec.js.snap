@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectSitesContainer renders to match snapshot passing correct props to children 1`] = `
+<Connect(StacksContainer)
+  containerType="publish"
+  dialogAction="MODAL_TYPE_CREATE_NOTEBOOK"
+  editDialogAction="MODAL_TYPE_EDIT_NOTEBOOK"
+  formComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "destroyOnUnmount": true,
+        "enableReinitialize": false,
+        "forceUnregisterOnUnmount": false,
+        "form": "editStackDetails",
+        "getFormState": [Function],
+        "keepDirtyOnReinitialize": false,
+        "persistentSubmitErrors": false,
+        "pure": true,
+        "shouldAsyncValidate": [Function],
+        "shouldError": [Function],
+        "shouldValidate": [Function],
+        "shouldWarn": [Function],
+        "submitAsSideEffect": false,
+        "touchOnBlur": true,
+        "touchOnChange": false,
+        "updateUnregisteredFields": false,
+        "validate": [Function],
+      },
+      "displayName": "ReduxForm",
+      "propTypes": Object {
+        "initialValues": [Function],
+        "onCancel": [Function],
+        "onSubmit": [Function],
+      },
+      "render": [Function],
+    }
+  }
+  formStateName="createSite"
+  projectKey={
+    Object {
+      "error": null,
+      "fetching": false,
+      "value": "testproj",
+    }
+  }
+  typeName="Site"
+  typeNamePlural="Sites"
+/>
+`;

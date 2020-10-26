@@ -79,6 +79,11 @@ function stackInCategory(stackName, ...category) {
     .includes(stackName);
 }
 
+function getCategoryFromTypeName(name) {
+  const stack = STACK_TYPES.filter(item => item.name === name);
+  return stack && stack.length ? stack[0].category : null;
+}
+
 export {
   ANALYSIS,
   DATA_STORE,
@@ -97,4 +102,5 @@ export {
   getStackSelections,
   getStackTypes,
   stackInCategory,
+  getCategoryFromTypeName,
 };

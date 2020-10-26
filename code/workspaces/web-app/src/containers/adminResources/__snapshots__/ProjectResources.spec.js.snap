@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectResources shows notebooks 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+    defaultExpanded={true}
+    key="testproj"
+  >
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-heading-3"
+        variant="h5"
+      >
+        Test Project
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+          defaultExpanded={true}
+        >
+          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+            expandIcon={<Memo(ExpandMoreIcon) />}
+          >
+            <WithStyles(ForwardRef(Typography))
+              variant="h6"
+            >
+              Notebooks
+            </WithStyles(ForwardRef(Typography))>
+          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+            <ProjectNotebooksContainer
+              project={
+                Object {
+                  "key": "testproj",
+                  "name": "Test Project",
+                }
+              }
+            />
+          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;
+
+exports[`ProjectResources shows sites 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+    defaultExpanded={true}
+    key="testproj"
+  >
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-heading-3"
+        variant="h5"
+      >
+        Test Project
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+          defaultExpanded={true}
+        >
+          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+            expandIcon={<Memo(ExpandMoreIcon) />}
+          >
+            <WithStyles(ForwardRef(Typography))
+              variant="h6"
+            >
+              Sites
+            </WithStyles(ForwardRef(Typography))>
+          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+            <ProjectSitesContainer
+              project={
+                Object {
+                  "key": "testproj",
+                  "name": "Test Project",
+                }
+              }
+            />
+          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;
+
+exports[`ProjectResources shows storage 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+    defaultExpanded={true}
+    key="testproj"
+  >
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-heading-3"
+        variant="h5"
+      >
+        Test Project
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+          defaultExpanded={true}
+        >
+          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+            expandIcon={<Memo(ExpandMoreIcon) />}
+          >
+            <WithStyles(ForwardRef(Typography))
+              variant="h6"
+            >
+              Storage
+            </WithStyles(ForwardRef(Typography))>
+          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+            <Connect(DataStorageContainer)
+              projectKey="testproj"
+            />
+          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;

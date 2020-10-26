@@ -34,6 +34,7 @@ exports[`EditDataStoreForm renders to match snapshot 1`] = `
       ]
     }
     placeholder="Type user's email address"
+    selectedTip="User has access"
   />
   <UpdateFormControls
     onCancel={[MockFunction onCancel]}

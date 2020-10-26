@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
 import UserInfo from './UserIcon';
 import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import { extendSubdomain } from '../../core/getDomainInfo';
@@ -37,11 +38,14 @@ const datalabLinks = [
   { displayName: 'Help', href: extendSubdomain('docs') },
 ];
 
-const TopBar = ({ classes, identity }) => (
+const TopBar = ({ classes, identity, userPermissions }) => (
   <div className={classes.appBar}>
     <div className={classes.toolBar}>
       <img className={classes.datalabsLogo} src={datalabsLogo} alt={'datalabs-logo'} />
       <div className={classes.buttons}>
+        {userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
+        && <TopBarButton to="/admin" label="Admin" />
+        }
         <TopBarButton to="/projects" label="Projects" />
         {datalabLinks.map(({ displayName, href, icon }) => <TopBarButton
           key={`nav-link-${displayName}`}

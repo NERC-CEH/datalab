@@ -85,7 +85,7 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
 );
 
 export const renderMultiselectAutocompleteField = ({
-  input: { onChange, value }, options, label, placeholder, getOptionLabel, getOptionSelected, loading,
+  input: { onChange, value }, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip,
 }) => (
   <Autocomplete
     style={fieldStyle}
@@ -116,9 +116,9 @@ export const renderMultiselectAutocompleteField = ({
     renderOption={
       (option, { selected }) => <>
         { getOptionLabel(option) }
-        { selected && <Tooltip title="User has access" placement="right">
+        { selected && <Tooltip title={selectedTip} placement="right">
           <CheckCircleRoundedIcon
-            titleAccess="User has access"
+            titleAccess={selectedTip}
             color="primary"
             fontSize="small"
             style={{ marginLeft: theme.spacing(2) }}
