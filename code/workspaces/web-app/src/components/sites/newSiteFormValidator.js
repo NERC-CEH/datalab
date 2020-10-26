@@ -34,6 +34,11 @@ const constraints = {
       allowEmpty: false,
     },
   },
+  visible: {
+    presence: {
+      allowEmpty: false,
+    },
+  },
 };
 
 validate.formatters.reduxForm = errors => errors.reduce(errorReducer, {});
