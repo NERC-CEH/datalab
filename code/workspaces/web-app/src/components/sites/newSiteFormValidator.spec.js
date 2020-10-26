@@ -13,6 +13,7 @@ describe('New Site Form Validator', () => {
       description: 'The notebook description',
       sourcePath: 'path',
       volumeMount: 'dataStore',
+      visible: 'private',
     };
 
     expect(syncValidate(values)).toBeUndefined();

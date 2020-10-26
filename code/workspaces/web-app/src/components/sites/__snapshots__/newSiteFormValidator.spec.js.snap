@@ -7,6 +7,7 @@ Object {
   "name": "Name can't be blank",
   "sourcePath": "Source path can't be blank",
   "type": "Type can't be blank",
+  "visible": "Visible can't be blank",
   "volumeMount": "Volume mount can't be blank",
 }
 `;
