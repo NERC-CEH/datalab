@@ -32,8 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function AdminResourcesContainer(props) {
-  const { userPermissions } = props;
+function AdminResourcesContainer({ userPermissions }) {
   const dispatch = useDispatch();
   const [selectedProjects, setSelectedProjects] = useState([]);
   const [show, setShow] = useState({

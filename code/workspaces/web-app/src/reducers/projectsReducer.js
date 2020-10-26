@@ -16,8 +16,8 @@ const initialState = {
 
 export default typeToReducer({
   [LOAD_PROJECTS_ACTION]: {
-    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, fetching: true, value: [...state.value] }),
-    [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload, value: [...state.value] }),
+    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, fetching: true, value: state.value }),
+    [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload, value: state.value }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
   },
 }, { ...initialState });

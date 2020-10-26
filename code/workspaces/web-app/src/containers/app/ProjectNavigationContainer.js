@@ -53,7 +53,7 @@ function PureProjectNavigationContainer({ match, promisedUserPermissions, projec
 
   return (
     <SideBarNavigation sideBar={
-            <ProjectSideBar userPermissions={promisedUserPermissions.value} />
+      <ProjectSideBar userPermissions={promisedUserPermissions.value} />
     }>
       <Switch>
         <Route

@@ -4,10 +4,10 @@ import StacksContainer from '../stacks/StacksContainer';
 import { MODAL_TYPE_CREATE_SITE, MODAL_TYPE_EDIT_SITE } from '../../constants/modaltypes';
 import EditStackForm from '../../components/stacks/EditStackForm';
 
-const CONTAINER_TYPE = 'publish';
-const TYPE_NAME = 'Site';
-const TYPE_NAME_PLURAL = 'Sites';
-const FORM_NAME = 'createSite';
+export const CONTAINER_TYPE = 'publish';
+export const TYPE_NAME = 'Site';
+export const TYPE_NAME_PLURAL = 'Sites';
+export const FORM_NAME = 'createSite';
 
 const SitesContainer = ({ userPermissions }) => (
   <StacksContainer

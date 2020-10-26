@@ -2,11 +2,7 @@ import React from 'react';
 import { ProjectStacksContainer } from '../stacks/StacksContainer';
 import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../constants/modaltypes';
 import EditStackForm from '../../components/stacks/EditStackForm';
-
-const CONTAINER_TYPE = 'publish';
-const TYPE_NAME = 'Site';
-const TYPE_NAME_PLURAL = 'Sites';
-const FORM_NAME = 'createSite';
+import { CONTAINER_TYPE, FORM_NAME, TYPE_NAME, TYPE_NAME_PLURAL } from '../sites/SitesContainer';
 
 const ProjectSitesContainer = (props) => {
   const { userPermissions, project } = props;

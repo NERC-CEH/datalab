@@ -78,6 +78,7 @@ const PaginationControls = ({ pageNum, setPageNum, numPages, itemsName }) => {
   const pageText = itemsName ? `${itemsName} page` : 'Page';
 
   if (numPages === 1) {
+    // return a div so Create button stays right-justified
     return (
       <div/>
     );

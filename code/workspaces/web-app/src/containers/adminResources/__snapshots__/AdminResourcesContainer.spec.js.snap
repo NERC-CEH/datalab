@@ -70,12 +70,36 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
       <Pagination
         items={
           Array [
-            <React.Fragment>
-              project resources
-            </React.Fragment>,
-            <React.Fragment>
-              project resources
-            </React.Fragment>,
+            <mockConstructor
+              project={
+                Object {
+                  "key": "testproj1",
+                  "name": "Test Project 1",
+                }
+              }
+              show={
+                Object {
+                  "notebooks": true,
+                  "sites": true,
+                  "storage": true,
+                }
+              }
+            />,
+            <mockConstructor
+              project={
+                Object {
+                  "key": "testproj2",
+                  "name": "Test Project 2",
+                }
+              }
+              show={
+                Object {
+                  "notebooks": true,
+                  "sites": true,
+                  "storage": true,
+                }
+              }
+            />,
           ]
         }
         itemsName="Projects"

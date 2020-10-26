@@ -18,22 +18,22 @@ const initialState = {
 
 export default typeToReducer({
   [LOAD_STACKS_ACTION]: {
-    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: [...state.value], fetching: true }),
+    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
   },
   [LOAD_STACKS_BY_CATEGORY_ACTION]: {
-    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: [...state.value], fetching: true }),
+    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: replaceProjectCategoryItems(state.value, action.payload) }),
   },
   [UPDATE_STACKS_ACTION]: {
-    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: [...state.value], updating: true }),
+    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, updating: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
   },
   [UPDATE_STACKS_BY_CATEGORY_ACTION]: {
-    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: [...state.value], updating: true }),
+    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, updating: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: replaceProjectCategoryItems(state.value, action.payload) }),
   },

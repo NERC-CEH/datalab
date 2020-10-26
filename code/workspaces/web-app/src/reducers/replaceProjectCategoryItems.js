@@ -6,7 +6,8 @@ export default function replaceProjectCategoryItems(value, payload) {
   const { projectKey, type } = payload[0];
   const category = getCategoryFromTypeName(type);
   return [
-    ...value
-      .filter(item => item.projectKey !== projectKey || getCategoryFromTypeName(item.type) !== category),
+    ...value.filter(
+      item => item.projectKey !== projectKey || getCategoryFromTypeName(item.type) !== category,
+    ),
     ...payload];
 }

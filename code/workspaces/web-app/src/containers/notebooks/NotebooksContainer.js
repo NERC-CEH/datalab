@@ -4,10 +4,10 @@ import StacksContainer from '../stacks/StacksContainer';
 import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../constants/modaltypes';
 import EditStackForm from '../../components/stacks/EditStackForm';
 
-const CONTAINER_TYPE = 'analysis';
-const TYPE_NAME = 'Notebook';
-const TYPE_NAME_PLURAL = 'Notebooks';
-const FORM_NAME = 'createNotebook';
+export const CONTAINER_TYPE = 'analysis';
+export const TYPE_NAME = 'Notebook';
+export const TYPE_NAME_PLURAL = 'Notebooks';
+export const FORM_NAME = 'createNotebook';
 
 const NotebooksContainer = ({ userPermissions }) => (
   <StacksContainer

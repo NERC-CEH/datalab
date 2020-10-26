@@ -32,7 +32,7 @@ describe('StackCards', () => {
 
   it('creates correct snapshot for an array of stacks', () => {
     // Arrange
-    const props = generateProps(true);
+    const props = generateProps();
 
     // Act
     const output = shallowRender(props);
@@ -43,7 +43,7 @@ describe('StackCards', () => {
 
   it('creates correct snapshot for an empty array', () => {
     // Arrange
-    const props = { ...generateProps(true), stacks: { fetching: false, value: [] } };
+    const props = { ...generateProps(), stacks: { fetching: false, value: [] } };
 
     // Act
     const output = shallowRender(props);
@@ -54,7 +54,7 @@ describe('StackCards', () => {
 
   it('creates correct snapshot when no create button', () => {
     // Arrange
-    const props = { ...generateProps(true), showCreateButton: false };
+    const props = { ...generateProps(), showCreateButton: false };
 
     // Act
     const output = shallowRender(props);
