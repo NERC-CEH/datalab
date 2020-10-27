@@ -14,7 +14,7 @@ const DataStorageSchema = new Schema({
   projectKey: String,
   displayName: String,
   description: String,
-  type: { type: String, enum: storageTypes },
+  type: { type: String, enum: storageTypes() },
   volumeSize: String,
   url: String,
   internalEndpoint: String,
