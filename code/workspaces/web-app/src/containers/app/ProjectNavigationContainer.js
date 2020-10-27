@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { permissionTypes } from 'common';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import projectActions from '../../actions/projectActions';
-import ProjectNavigation from '../../components/app/ProjectNavigation';
+import SideBarNavigation from '../../components/app/SideBarNavigation';
 import ProjectInfoPage from '../../pages/ProjectInfoPage';
 import RoutePermissions from '../../components/common/RoutePermissionWrapper';
 import DataStoragePage from '../../pages/DataStoragePage';
@@ -15,6 +15,7 @@ import PublishingPage from '../../pages/PublishingPage';
 import SettingsPage from '../../pages/SettingsPage';
 import DaskPage from '../../pages/DaskPage';
 import SparkPage from '../../pages/SparkPage';
+import ProjectSideBar from '../../components/app/ProjectSideBar';
 
 const {
   projectKeyPermission,
@@ -51,7 +52,9 @@ function PureProjectNavigationContainer({ match, promisedUserPermissions, projec
     : undefined;
 
   return (
-    <ProjectNavigation userPermissions={promisedUserPermissions.value}>
+    <SideBarNavigation sideBar={
+      <ProjectSideBar userPermissions={promisedUserPermissions.value} />
+    }>
       <Switch>
         <Route
           exact
@@ -89,7 +92,7 @@ function PureProjectNavigationContainer({ match, promisedUserPermissions, projec
         <Route exact path={`${path}/spark`} component={SparkPage} />
         <Route component={NotFoundPage} />
       </Switch>
-    </ProjectNavigation>
+    </SideBarNavigation>
   );
 }
 

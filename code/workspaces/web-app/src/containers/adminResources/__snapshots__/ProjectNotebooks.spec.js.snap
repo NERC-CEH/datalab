@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectNotebooks renders to match snapshot passing correct props to children 1`] = `
+<WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+  defaultExpanded={true}
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+    expandIcon={<Memo(ExpandMoreIcon) />}
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h6"
+    >
+      Notebooks
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+    <ProjectNotebooksContainer
+      project={
+        Object {
+          "key": "testproj",
+          "name": "Test Project",
+        }
+      }
+    />
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+</WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+`;

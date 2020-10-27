@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import SideBar from './SideBar';
 
 const style = () => ({
   projectNavigation: {
@@ -16,10 +15,10 @@ const style = () => ({
   },
 });
 
-function ProjectNavigation({ children, userPermissions, classes }) {
+function SideBarNavigation({ children, classes, sideBar }) {
   return (
     <div className={classes.projectNavigation}>
-      <SideBar userPermissions={userPermissions} />
+      { sideBar }
       <div className={classes.contentArea}>
         {children}
       </div>
@@ -27,4 +26,4 @@ function ProjectNavigation({ children, userPermissions, classes }) {
   );
 }
 
-export default withStyles(style)(ProjectNavigation);
+export default withStyles(style)(SideBarNavigation);

@@ -41,11 +41,11 @@ exports[`PureSideBar correctly renders correct snapshot 1`] = `
 `;
 
 exports[`SideBar renders correctly passing props to children 1`] = `
-<SideBar
+<ProjectSideBar
   classes={
     Object {
-      "itemList": "SideBar-itemList-1 itemList",
-      "sideBar": "SideBar-sideBar-2 sideBar",
+      "itemList": "ProjectSideBar-itemList-1 itemList",
+      "sideBar": "ProjectSideBar-sideBar-2 sideBar",
     }
   }
   projectKey={

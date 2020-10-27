@@ -1,3 +1,4 @@
+import { JUPYTER } from 'common/src/stackTypes';
 import stacksReducer from './stacksReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
 import {
@@ -6,6 +7,21 @@ import {
   UPDATE_STACKS_ACTION,
   UPDATE_STACKS_BY_CATEGORY_ACTION,
 } from '../actions/stackActions';
+
+const currentValue = [
+  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
+  { projectKey: 'proj2', type: JUPYTER, stack: 'proj2.stackA' },
+];
+const valuePayload = [
+  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackB' },
+];
+const replaceProjectNextValue = [
+  { projectKey: 'proj2', type: JUPYTER, stack: 'proj2.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackB' },
+];
+const error = 'example error';
 
 describe('stacksReducer', () => {
   it('should return the initial state when previous state undefined', () => {
@@ -20,36 +36,34 @@ describe('stacksReducer', () => {
       const action = { type };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: true, updating: false, value: [] });
+      expect(nextstate).toEqual({ error: null, fetching: true, updating: false, value: currentValue });
     });
 
     it('SUCCESS', () => {
       // Arrange
       const type = `${LOAD_STACKS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const payload = [{ notebook: 'firstStore' }, { notebook: 'secondStore' }];
-      const action = { type, payload };
+      const action = { type, payload: valuePayload };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: payload });
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: valuePayload });
     });
 
     it('FAILURE', () => {
       // Arrange
       const type = `${LOAD_STACKS_ACTION}_${PROMISE_TYPE_FAILURE}`;
-      const payload = 'example error';
-      const action = { type, payload };
+      const action = { type, payload: error };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: payload, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
     });
   });
 
@@ -60,36 +74,34 @@ describe('stacksReducer', () => {
       const action = { type };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: true, updating: false, value: [] });
+      expect(nextstate).toEqual({ error: null, fetching: true, updating: false, value: currentValue });
     });
 
     it('SUCCESS', () => {
       // Arrange
       const type = `${LOAD_STACKS_BY_CATEGORY_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const payload = [{ notebook: 'firstStore' }, { notebook: 'secondStore' }];
-      const action = { type, payload };
+      const action = { type, payload: valuePayload };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: payload });
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: replaceProjectNextValue });
     });
 
     it('FAILURE', () => {
       // Arrange
       const type = `${LOAD_STACKS_BY_CATEGORY_ACTION}_${PROMISE_TYPE_FAILURE}`;
-      const payload = 'example error';
-      const action = { type, payload };
+      const action = { type, payload: error };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: payload, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
     });
   });
 
@@ -100,36 +112,34 @@ describe('stacksReducer', () => {
       const action = { type };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: false, updating: true, value: [] });
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: true, value: currentValue });
     });
 
     it('SUCCESS', () => {
       // Arrange
       const type = `${UPDATE_STACKS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const payload = [{ notebook: 'firstStore' }, { notebook: 'secondStore' }];
-      const action = { type, payload };
+      const action = { type, payload: valuePayload };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: payload });
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: valuePayload });
     });
 
     it('FAILURE', () => {
       // Arrange
       const type = `${UPDATE_STACKS_ACTION}_${PROMISE_TYPE_FAILURE}`;
-      const payload = 'example error';
-      const action = { type, payload };
+      const action = { type, payload: error };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: payload, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
     });
   });
 
@@ -140,36 +150,34 @@ describe('stacksReducer', () => {
       const action = { type };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: false, updating: true, value: [] });
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: true, value: currentValue });
     });
 
     it('SUCCESS', () => {
       // Arrange
       const type = `${UPDATE_STACKS_BY_CATEGORY_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const payload = [{ notebook: 'firstStore' }, { notebook: 'secondStore' }];
-      const action = { type, payload };
+      const action = { type, payload: valuePayload };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: payload });
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: replaceProjectNextValue });
     });
 
     it('FAILURE', () => {
       // Arrange
       const type = `${UPDATE_STACKS_BY_CATEGORY_ACTION}_${PROMISE_TYPE_FAILURE}`;
-      const payload = 'example error';
-      const action = { type, payload };
+      const action = { type, payload: error };
 
       // Act
-      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: undefined }, action);
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error: payload, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
     });
   });
 });

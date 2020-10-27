@@ -117,6 +117,7 @@ input DataStorageUpdateRequest {
 # DataLabs data store type for retrieval.
 type DataStore {
     id: ID
+    projectKey: String
     name: String
     displayName: String
     description: String

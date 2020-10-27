@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
+import { JUPYTER } from 'common/src/stackTypes';
 import StacksContainer, { PureStacksContainer } from './StacksContainer';
 import stackService from '../../api/stackService';
 import listUsersService from '../../api/listUsersService';
@@ -22,8 +23,8 @@ jest.useFakeTimers();
 
 describe('StacksContainer', () => {
   describe('is a connected component which', () => {
+    const FormComponent = () => <div />;
     function shallowRenderConnected(store) {
-      const FormComponent = () => <div />;
       const props = {
         store,
         typeName: 'Notebook',
@@ -35,6 +36,7 @@ describe('StacksContainer', () => {
         userPermissions: ['expectedPermission'],
         projectKey: 'testproj',
         formComponent: FormComponent,
+        showCreateButton: true,
       };
 
       return shallow(<StacksContainer {...props} />).find('StacksContainer');
@@ -84,8 +86,8 @@ describe('StacksContainer', () => {
     const stacks = {
       fetching: false,
       value: [
-        { prop: 'prop1' },
-        { prop: 'prop2' },
+        { prop: 'prop1', projectKey: 'projtest', type: JUPYTER },
+        { prop: 'prop2', projectKey: 'projtest', type: JUPYTER },
       ],
     };
 
@@ -130,6 +132,7 @@ describe('StacksContainer', () => {
       },
       projectKey: { fetching: false, value: 'projtest' },
       formComponent: FormComponent,
+      showCreateButton: true,
     });
 
     beforeEach(() => jest.clearAllMocks());

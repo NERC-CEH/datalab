@@ -17,6 +17,7 @@ describe('DataStorageContainer', () => {
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
         projectKey: 'project99',
+        showCreateButton: true,
       };
 
       return shallow(<DataStorageContainer {...props} />).find('DataStorageContainer');
@@ -77,7 +78,7 @@ describe('DataStorageContainer', () => {
       return shallow(<PureDataStorageContainer {...props} />);
     }
 
-    const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue' }] };
+    const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue', projectKey: 'project99' }] };
     const getCredentialsMock = jest.fn();
     const openMinioDataStoreMock = jest.fn();
     const openModalDialogMock = jest.fn();
@@ -90,6 +91,7 @@ describe('DataStorageContainer', () => {
       dataStorage,
       userPermissions: ['expectedPermission'],
       projectKey: 'project99',
+      showCreateButton: true,
       actions: {
         loadDataStorage: loadDataStorageMock,
         getCredentials: getCredentialsMock,

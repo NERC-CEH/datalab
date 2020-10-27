@@ -120,15 +120,20 @@ class DataStorageContainer extends Component {
   }
 
   render() {
+    const projectDataStorage = {
+      ...this.props.dataStorage,
+      value: this.props.dataStorage.value.filter(store => store.projectKey === this.props.projectKey),
+    };
     return (
       <StackCards
-        stacks={this.props.dataStorage}
+        stacks={projectDataStorage}
         typeName={TYPE_NAME}
         typeNamePlural={TYPE_NAME_PLURAL}
         openStack={this.openDataStore}
         deleteStack={this.chooseDialogue}
         editStack={this.editDataStore}
         openCreationForm={this.openCreationForm}
+        showCreateButton={this.props.showCreateButton}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STORAGE_CREATE, this.props.projectKey)}
         openPermission={projectKeyPermission(PROJECT_KEY_STORAGE_OPEN, this.props.projectKey)}
@@ -156,12 +161,22 @@ DataStorageContainer.propTypes = {
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showCreateButton: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     dataStorage: state.dataStorage,
     projectKey: currentProjectSelectors.currentProjectKey(state).value,
+    showCreateButton: true, // default
+  };
+}
+
+function mapProjectStateToProps(state) {
+  return {
+    dataStorage: state.dataStorage,
+    // leave projectKey as a prop, rather than reading from state
+    showCreateButton: false, // don't show create button in ProjectStacksContainer
   };
 }
 
@@ -175,5 +190,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const ProjectDataStorageContainer = connect(mapProjectStateToProps, mapDispatchToProps)(DataStorageContainer);
+
 export { DataStorageContainer as PureDataStorageContainer }; // export for testing
+export { ProjectDataStorageContainer }; // export with projectKey as prop
 export default connect(mapStateToProps, mapDispatchToProps)(DataStorageContainer);
