@@ -32,11 +32,6 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
           forceUnregisterOnUnmount={false}
           form="createDataStore"
           getFormState={[Function]}
-          initialValues={
-            Object {
-              "type": "glusterfs",
-            }
-          }
           keepDirtyOnReinitialize={false}
           onSubmit={[MockFunction]}
           persistentSubmitErrors={false}

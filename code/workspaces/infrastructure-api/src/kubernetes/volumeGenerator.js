@@ -1,22 +1,15 @@
-import { stackTypes } from 'common';
-import config from '../config/config';
+import { storageClass, storageCreationAllowedTypes } from 'common/src/config/storage';
 import { VolumeTemplates, generateManifest } from './manifestGenerator';
 
-function getStorageClass(type) {
-  if (type === stackTypes.GLUSTERFS_VOLUME) {
-    return config.get('glusterFSStorageClass');
-  } if (type === stackTypes.NFS_VOLUME) {
-    return config.get('nfsStorageClass');
-  }
-  throw new Error(`Unrecognized storage class type ${type}`);
-}
-
 async function createVolume(name, volumeSize, type) {
-  const storageClass = await getStorageClass(type);
+  if (!storageCreationAllowedTypes().includes(type)) {
+    throw new Error(`Unrecognized storage class type ${type}`);
+  }
+
   const context = {
     name,
     volumeSize,
-    storageClass,
+    storageClass: storageClass(type),
   };
   return generateManifest(context, VolumeTemplates.DEFAULT_VOLUME);
 }

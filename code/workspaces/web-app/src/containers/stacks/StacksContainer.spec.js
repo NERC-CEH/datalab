@@ -23,6 +23,7 @@ jest.useFakeTimers();
 describe('StacksContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected(store) {
+      const FormComponent = () => <div />;
       const props = {
         store,
         typeName: 'Notebook',
@@ -33,6 +34,7 @@ describe('StacksContainer', () => {
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
         projectKey: 'testproj',
+        formComponent: FormComponent,
       };
 
       return shallow(<StacksContainer {...props} />).find('StacksContainer');

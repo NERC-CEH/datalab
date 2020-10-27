@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { stackTypes } from 'common';
+import { storageTypes } from 'common/src/config/storage';
 
 const { Schema } = mongoose;
 
@@ -8,8 +8,6 @@ export const CREATING = 'creating';
 export const DELETED = 'deleted';
 
 const states = [REQUESTED, CREATING, DELETED];
-
-const storageTypes = [stackTypes.LEGACY_GLUSTERFS_VOLUME, stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME];
 
 const DataStorageSchema = new Schema({
   name: String,

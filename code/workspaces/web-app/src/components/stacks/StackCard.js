@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import ProjectKey from '../common/typography/ProjectKey';
@@ -10,6 +10,9 @@ import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
 import { useUsers } from '../../hooks/usersHooks';
 import StorageType from '../common/typography/StorageType';
+import { storageDescription, storageDisplayValue } from '../../config/storage';
+
+const STORAGE_TYPE_NAME = 'Data Store';
 
 function styles(theme) {
   return {
@@ -87,26 +90,52 @@ function styles(theme) {
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
   userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack }) => {
+  const [storeDisplayValue, setStoreDisplayValue] = useState('');
+  const [description, setDescription] = useState(getDescription(stack, typeName));
   const users = useUsers();
+
+  useEffect(() => {
+    async function getStorageDisplayValue() {
+      const text = await storageDisplayValue(stack.type);
+      setStoreDisplayValue(text);
+    }
+    if (typeName === STORAGE_TYPE_NAME && stack.type) {
+      getStorageDisplayValue();
+    }
+  }, [typeName, stack.type]);
+
+  useEffect(() => {
+    async function getStorageDescription() {
+      const text = await storageDescription(stack.type);
+      setDescription(text);
+    }
+    if (stack.description) {
+      setDescription(stack.description);
+    } else if (typeName === STORAGE_TYPE_NAME && stack.type) {
+      getStorageDescription(stack.type);
+    } else {
+      setDescription(getDescription(stack, typeName));
+    }
+  }, [typeName, stack]);
 
   return (
     <div className={classes.cardDiv}>
       <div className={classes.imageDiv}>
-        {generateGetImage(classes)(stack)}
+        {generateGetImage(classes, typeName)(stack)}
       </div>
       <div className={classes.textDiv}>
         <div className={classes.displayNameContainer}>
           <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
           {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
-          {(typeName === 'Data Store' && stack.type) ? <StorageType>({stack.type})</StorageType> : null}
+          {(typeName === STORAGE_TYPE_NAME && stack.type) ? <StorageType>({storeDisplayValue})</StorageType> : null}
         </div>
-        <Tooltip title={getDescription(stack, typeName)} placement='bottom-start'>
-          <Typography variant="body1" noWrap>{getDescription(stack, typeName)}</Typography>
+        <Tooltip title={description} placement='bottom-start'>
+          <Typography variant="body1" noWrap>{description}</Typography>
         </Tooltip>
         {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
       </div>
       <div className={classes.actionsDiv}>
-        {typeName !== 'Data Store' && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
+        {typeName !== STORAGE_TYPE_NAME && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
         <StackCardActions
             stack={stack}
             openStack={openStack}
@@ -164,11 +193,11 @@ function getUserEmail(stackUsers, userList, typeName) {
   return owner ? owner.name : 'Unknown';
 }
 
-function generateGetImage(classes) {
+function generateGetImage(classes, typeName) {
   function getImage(stack) {
     const stackDescription = stack.type && stackDescriptions[stack.type];
     const logoImage = stackDescription && stackDescription.logo;
-    const iconName = stackDescription && stackDescription.icon;
+    const iconName = (typeName === STORAGE_TYPE_NAME) ? 'save' : stackDescription && stackDescription.icon;
     const initial = stackDescription && stackDescription.initial && getDisplayName(stack).charAt(0);
 
     if (logoImage) {

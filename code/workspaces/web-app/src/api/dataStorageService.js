@@ -1,4 +1,3 @@
-import { stackTypes } from 'common';
 import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
@@ -11,19 +10,6 @@ function loadDataStorage(projectKey) {
     }`;
 
   return gqlQuery(query, { projectKey })
-    .then((val) => {
-      // map legacy stack.type of '1' to 'glusterfs'
-      const newStacks = val.data.dataStorage.map(stack => ({
-        ...stack,
-        type: (stack.type === stackTypes.LEGACY_GLUSTERFS_VOLUME) ? stackTypes.GLUSTERFS_VOLUME : stack.type,
-      }));
-      const newVal = {
-        data: {
-          dataStorage: newStacks,
-        },
-      };
-      return newVal;
-    })
     .then(errorHandler('data.dataStorage', 'users'));
 }
 

@@ -20,7 +20,7 @@ import StackCards from '../../components/stacks/StackCards';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_CREATE, PROJECT_KEY_STORAGE_DELETE, PROJECT_KEY_STORAGE_OPEN, PROJECT_KEY_STORAGE_EDIT }, projectKeyPermission } = permissionTypes;
 
-const TYPE_NAME = 'Data Store';
+export const TYPE_NAME = 'Data Store';
 const TYPE_NAME_PLURAL = 'Data Stores';
 const FORM_NAME = 'createDataStore';
 
