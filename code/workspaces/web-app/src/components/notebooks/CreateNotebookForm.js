@@ -1,4 +1,5 @@
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { stackTypes } from 'common';
@@ -7,10 +8,11 @@ import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextFi
 import { syncValidate, asyncValidate } from './newNotebookFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
 
-const { ANALYSIS, getStackSelections } = stackTypes;
+const { ANALYSIS, getStackSelections, R_VERSIONS } = stackTypes;
+const selector = formValueSelector('createNotebook');
 
 const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey, notebookTypeValue } = props;
   const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
 
   return (
@@ -29,6 +31,13 @@ const CreateNotebookForm = (props) => {
           component={renderSelectField}
           options={getStackSelections(ANALYSIS)} />
       </div>
+      { notebookTypeValue === 'rstudio' && <div>
+        <Field
+          name="rversion"
+          label="R Version"
+          component={renderSelectField}
+          options={R_VERSIONS}/>
+      </div> }
       <div>
         <Field
           name="name"
@@ -64,13 +73,20 @@ const CreateNotebookForm = (props) => {
   );
 };
 
+const DecoratedCreateNotebookForm = connect((state) => {
+  const notebookTypeValue = selector(state, 'type');
+  return {
+    notebookTypeValue,
+  };
+})(CreateNotebookForm);
+
 const CreateNotebookReduxForm = reduxForm({
   form: 'createNotebook',
   validate: syncValidate,
   asyncValidate,
   asyncBlurFields: ['name'],
   destroyOnUnmount: false,
-})(CreateNotebookForm);
+})(DecoratedCreateNotebookForm);
 
 export { CreateNotebookForm as PureCreateNotebookForm };
 export default CreateNotebookReduxForm;
