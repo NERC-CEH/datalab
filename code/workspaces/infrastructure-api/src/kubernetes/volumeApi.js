@@ -58,22 +58,6 @@ function queryPersistentVolumeClaim(name, namespace) {
     .catch(() => {});
 }
 
-function listPersistentVolumeClaims(namespace) {
-  // List only visible volumes (ie not internal volumes)
-  logger.info('Getting visible volume claims');
-  return axios.get(getPVCUrl(namespace), { params: { labelSelector: 'user-created' } })
-    .then(processPVCs)
-    .catch(() => []);
-}
-
-function processPVCs(response) {
-  if (response.data && response.data.items) {
-    return response.data.items.map(processVolumeDetails);
-  }
-
-  return [];
-}
-
 function processVolumeDetails(volume) {
   let name;
 
@@ -95,5 +79,4 @@ export default {
   updatePersistentVolumeClaim,
   createOrUpdatePersistentVolumeClaim,
   queryPersistentVolumeClaim,
-  listPersistentVolumeClaims,
 };

@@ -50,11 +50,6 @@ async function queryVolume(request, response) {
   response.send(volume);
 }
 
-async function listVolumes(request, response) {
-  const volumes = await volumeManager.listVolumes();
-  response.send(volumes);
-}
-
 async function listProjectActiveVolumes(request, response) {
   const { projectKey } = matchedData(request);
   const volumes = await dataStorageRepository.getAllProjectActive(request.user, projectKey);
@@ -194,7 +189,6 @@ export default {
   createVolume,
   deleteVolume,
   queryVolume,
-  listVolumes,
   getById,
   listProjectActiveVolumes,
   addUsers,

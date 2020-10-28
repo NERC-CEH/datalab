@@ -56,8 +56,4 @@ function queryVolume(params) {
   return volumeApi.queryPersistentVolumeClaim(`${name}-claim`);
 }
 
-function listVolumes() {
-  return volumeApi.listPersistentVolumeClaims();
-}
-
-export default { createVolume, deleteVolume, queryVolume, listVolumes };
+export default { createVolume, deleteVolume, queryVolume };

@@ -125,17 +125,6 @@ describe('Volume Controller', () => {
     });
   });
 
-  describe('list volumes', () => {
-    it('should return the volumes', async () => {
-      listVolumeMock.mockReturnValue(Promise.resolve(['volume']));
-      const response = httpMocks.createResponse();
-
-      await volumeController.listVolumes(request, response);
-      expect(response.statusCode).toBe(200);
-      expect(response._getData()).toEqual(['volume']); // eslint-disable-line no-underscore-dangle
-    });
-  });
-
   describe('get volume by id', () => {
     it('should return the volume', async () => {
       getByIdMock.mockReturnValue(Promise.resolve('volume'));
