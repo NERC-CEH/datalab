@@ -1,8 +1,7 @@
 import data from './storage_config.json';
 
 export function storageTypes() {
-  return Object.entries(data.types)
-    .map(([key]) => key);
+  return Object.keys(data.types);
 }
 
 export function storageCreationAllowedTypes() {

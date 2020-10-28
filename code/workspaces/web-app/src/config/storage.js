@@ -14,8 +14,7 @@ async function storageConfig() {
 
 export async function storageTypes() {
   const data = await storageConfig();
-  return Object.entries(data.types)
-    .map(([key]) => key);
+  return Object.keys(data.types);
 }
 
 export async function storageCreationAllowedDisplayOptions() {

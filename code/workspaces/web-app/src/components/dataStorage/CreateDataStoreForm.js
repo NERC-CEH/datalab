@@ -15,7 +15,7 @@ const CreateDataStoreForm = (props) => {
       setStorageOptions(options);
     }
     getOptions();
-  }, [setStorageOptions]);
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
