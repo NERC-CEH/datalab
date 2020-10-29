@@ -17,13 +17,25 @@ describe('secureRequest', () => {
   afterAll(() => mock.restore());
 
   it('adds authorization and content-type headers', () => {
+    const identity = {
+      name: 'user1',
+    };
+    const headerIdentity = {
+      userName: 'user1',
+    };
     getCurrentSession
-      .mockReturnValue({ access_token: 'expectedAccessToken' });
+      .mockReturnValue(
+        {
+          access_token: 'expectedAccessToken',
+          identity: JSON.stringify(identity),
+        },
+      );
 
     mock.onPost('http://localhost:8000/api')
       .reply((requestConfig) => {
         expect(requestConfig.headers['Content-Type']).toBe('application/json;charset=utf-8');
         expect(requestConfig.headers.Authorization).toBe('Bearer expectedAccessToken');
+        expect(requestConfig.headers.Identity).toBe(JSON.stringify(headerIdentity));
         return [200, { data: 'value' }];
       });
 

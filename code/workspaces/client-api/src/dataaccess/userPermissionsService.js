@@ -7,8 +7,9 @@ import axiosErrorHandler from '../util/errorHandlers';
 const authPermissionsUrl = `${config.get('authorisationService')}/permissions`;
 const authServiceStub = config.get('authorisationServiceStub');
 
-function getUserPermissions(authZeroToken) {
-  logger.debug('Requesting user permissions from auth service');
+function getUserPermissions(identity, authZeroToken) {
+  const userName = identity ? identity.userName : null;
+  logger.debug(`Requesting user permissions from auth service for userName ${userName}`);
 
   if (authServiceStub) {
     return Promise.resolve([
@@ -25,7 +26,10 @@ function getUserPermissions(authZeroToken) {
     ]);
   }
 
-  return axios.get(authPermissionsUrl, { headers: { authorization: authZeroToken } })
+  return axios.get(authPermissionsUrl, {
+    headers: { authorization: authZeroToken },
+    params: { userName },
+  })
     .then(response => get(response, 'data.permissions') || [])
     .catch(axiosErrorHandler('Unable to get user permissions'));
 }

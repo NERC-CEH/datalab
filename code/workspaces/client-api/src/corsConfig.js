@@ -12,7 +12,7 @@ import config from './config';
 function configureCorsHeaders(app) {
   app.all('/*', (request, response, next) => {
     response.header('Access-Control-Allow-Origin', getCorsOrigin(request));
-    response.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
+    response.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization, Identity');
     response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     next();
   });

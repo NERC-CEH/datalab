@@ -16,6 +16,7 @@ Array [
     ],
     "toObject": [Function],
     "userId": "uid1",
+    "userName": "user1",
   },
   Object {
     "instanceAdmin": true,
@@ -27,6 +28,7 @@ Array [
     ],
     "toObject": [Function],
     "userId": "uid2",
+    "userName": "user2",
   },
 ]
 `;
@@ -45,5 +47,6 @@ Object {
     },
   ],
   "userId": "uid1",
+  "userName": "user1",
 }
 `;

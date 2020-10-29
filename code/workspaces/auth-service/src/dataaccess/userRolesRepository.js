@@ -8,10 +8,10 @@ function UserRoles() {
 
 // In line with other repository functions, this returns a promise,
 // but the model document is first converted to an object so the spread operator works as expected.
-async function getRoles(userId) {
+async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    roles = await addEmptyRecordForNewUser(userId);
+    roles = await addEmptyRecordForNewUser(userId, userName);
   }
 
   return roles.toObject();
@@ -22,16 +22,17 @@ function getProjectUsers(projectKey) {
   return UserRoles().find(query).exec();
 }
 
-function addEmptyRecordForNewUser(userId) {
+function addEmptyRecordForNewUser(userId, userName) {
   const user = {
     userId,
+    userName,
     projectRoles: [],
     instanceAdmin: false,
   };
   return UserRoles().create(user);
 }
 
-async function addRole(userId, projectKey, role) {
+async function addRole(userId, userName, projectKey, role) {
   // Load existing user
   let roleAdded = false;
   const query = { userId };
@@ -52,6 +53,7 @@ async function addRole(userId, projectKey, role) {
     roleAdded = true;
     user = {
       userId,
+      userName,
       projectRoles: [{ projectKey, role }],
     };
   }

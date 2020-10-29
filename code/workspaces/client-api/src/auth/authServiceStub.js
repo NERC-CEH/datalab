@@ -12,7 +12,7 @@ const audience = config.get('authorisationAudience');
 const issuer = config.get('authorisationIssuer');
 const keyid = 'datalabs-authorisation';
 
-function retrievePermissionsToken(authorisationToken) {
+function retrievePermissionsToken(userName, authorisationToken) {
   const decodedToken = jwt.decode(authorisationToken.split(' ')[1]);
   const payload = {
     sub: decodedToken.sub,

@@ -24,10 +24,10 @@ async function getUserRoles(req, res) {
 }
 
 async function addUserRole(req, res) {
-  const { params: { projectKey, userId } } = req;
+  const { params: { projectKey, userId, userName } } = req;
   const { body: { role } } = req;
 
-  const roleAdded = await userRolesRepository.addRole(userId, projectKey, role);
+  const roleAdded = await userRolesRepository.addRole(userId, userName, projectKey, role);
 
   const statusCode = roleAdded ? 201 : 200;
   res.status(statusCode).send();
@@ -44,6 +44,7 @@ async function removeUserRole(req, res) {
 export const addRoleValidator = validator([
   check('projectKey').isAlphanumeric(),
   check('userId').isAscii(),
+  check('userName').isAscii(),
   check('role', `Role must be one of ${PROJECT_ROLES}`).isIn(PROJECT_ROLES),
 ]);
 
