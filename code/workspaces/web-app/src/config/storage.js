@@ -17,6 +17,11 @@ export async function storageTypes() {
   return Object.keys(data.types);
 }
 
+export async function storageCreationDefaultType() {
+  const data = await storageConfig();
+  return data.creationOptions.defaultType;
+}
+
 export async function storageCreationAllowedDisplayOptions() {
   const data = await storageConfig();
   return data.creationOptions.allowedTypes

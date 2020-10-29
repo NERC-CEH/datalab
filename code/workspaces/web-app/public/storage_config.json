@@ -21,6 +21,7 @@
     "allowedTypes": [
       "GLUSTERFS",
       "NFS"
-    ]
+    ],
+    "defaultType": "GLUSTERFS"
   }
 }

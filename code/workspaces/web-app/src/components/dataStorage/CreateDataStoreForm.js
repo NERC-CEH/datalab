@@ -75,6 +75,7 @@ const CreateDataStoreReduxFrom = reduxForm({
   asyncValidate,
   asyncBlurFields: ['name'],
   destroyOnUnmount: false,
+  enableReinitialize: true, // update form state when defaults set
 })(CreateDataStoreForm);
 
 export { CreateDataStoreForm as PureCreateDataStoreForm };

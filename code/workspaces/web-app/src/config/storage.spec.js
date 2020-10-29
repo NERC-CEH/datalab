@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import data from 'common/src/config/storage_config.json';
-import { storageTypes, storageCreationAllowedDisplayOptions, storageDisplayValue, storageDescription } from './storage';
+import { storageTypes, storageCreationAllowedDisplayOptions, storageCreationDefaultType, storageDisplayValue, storageDescription } from './storage';
 
 const httpMock = new MockAdapter(axios);
 httpMock.onGet('/storage_config.json')
@@ -10,6 +10,10 @@ httpMock.onGet('/storage_config.json')
 describe('storage config', () => {
   it('returns storage types', async () => {
     expect(await storageTypes()).toEqual(['1', 'GLUSTERFS', 'NFS']);
+  });
+
+  it('returns default storage type for creation', async () => {
+    expect(await storageCreationDefaultType()).toEqual('GLUSTERFS');
   });
 
   it('returns storage options allowed for creation', async () => {

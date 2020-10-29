@@ -28,10 +28,15 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
           asyncValidate={[Function]}
           cancel={[MockFunction]}
           destroyOnUnmount={false}
-          enableReinitialize={false}
+          enableReinitialize={true}
           forceUnregisterOnUnmount={false}
           form="createDataStore"
           getFormState={[Function]}
+          initialValues={
+            Object {
+              "type": "",
+            }
+          }
           keepDirtyOnReinitialize={false}
           onSubmit={[MockFunction]}
           persistentSubmitErrors={false}
