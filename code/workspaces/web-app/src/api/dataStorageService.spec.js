@@ -9,42 +9,28 @@ describe('dataStorageService', () => {
   describe('loadDataStorage', () => {
     it('should build the correct query and unpack the results', async () => {
       // Arrange
-      const legacyDataStorage = [
+      const responseDataStorage = [
         {
           name: 'legacy glusterfs storage',
           type: '1',
         },
         {
           name: 'glusterfs storage',
-          type: 'glusterfs',
+          type: 'GLUSTERFS',
         },
         {
           name: 'nfs storage',
-          type: 'nfs',
+          type: 'NFS',
         },
       ];
-      const mappedDataStorage = [
-        {
-          name: 'legacy glusterfs storage',
-          type: 'glusterfs', // i.e. '1' has been mapped to 'glusterfs'
-        },
-        {
-          name: 'glusterfs storage',
-          type: 'glusterfs',
-        },
-        {
-          name: 'nfs storage',
-          type: 'nfs',
-        },
-      ];
-      const clientResponse = { dataStorage: legacyDataStorage };
+      const clientResponse = { dataStorage: responseDataStorage };
       mockClient.prepareSuccess(clientResponse);
 
       // Act
       const dataStorage = await dataStorageService.loadDataStorage('project99');
 
       // Assert
-      expect(dataStorage).toEqual(mappedDataStorage);
+      expect(dataStorage).toEqual(responseDataStorage);
       expect(mockClient.lastQuery()).toMatchSnapshot();
     });
 

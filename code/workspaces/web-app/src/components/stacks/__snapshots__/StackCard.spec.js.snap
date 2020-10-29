@@ -178,16 +178,20 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
       >
         name1
       </WithStyles(ForwardRef(Typography))>
+      <ProjectKey>
+        (
+        )
+      </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Tooltip))
       placement="bottom-start"
-      title="Gluster File System (GlusterFS) volume to store data for Notebooks and Sites."
+      title="A description of the Data Store purpose"
     >
       <WithStyles(ForwardRef(Typography))
         noWrap={true}
         variant="body1"
       >
-        Gluster File System (GlusterFS) volume to store data for Notebooks and Sites.
+        A description of the Data Store purpose
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(ForwardRef(Tooltip))>
   </div>
@@ -208,7 +212,7 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
           "id": "100",
           "shared": "private",
           "status": undefined,
-          "type": "glusterfs",
+          "type": "GLUSTERFS",
         }
       }
       userPermissions={

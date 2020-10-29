@@ -1,6 +1,6 @@
-import { stackTypes } from 'common';
 import { service } from 'service-chassis';
 import { check, body, matchedData } from 'express-validator';
+import { storageCreationAllowedTypes } from 'common/src/config/storage';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import logger from '../config/logger';
@@ -147,7 +147,7 @@ const updateVolumeUserValidator = service.middleware.validator([
   existsCheck('userIds.*'),
 ], logger);
 
-const allowedVolumeTypes = [stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME];
+const allowedVolumeTypes = storageCreationAllowedTypes();
 const createVolumeValidator = service.middleware.validator([
   projectKeyCheck,
   nameCheck,

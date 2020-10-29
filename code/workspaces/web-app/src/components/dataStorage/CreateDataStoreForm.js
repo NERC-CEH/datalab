@@ -1,15 +1,22 @@
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { stackTypes } from 'common';
+import React, { useEffect, useState } from 'react';
 import { renderTextField, renderSelectField, renderTextArea, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
-
-const { DATA_STORE, getStackSelections } = stackTypes;
-const initialValues = { type: 'glusterfs' };
+import { storageCreationAllowedDisplayOptions } from '../../config/storage';
 
 const CreateDataStoreForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
+  const [storageOptions, setStorageOptions] = useState([]);
+
+  useEffect(() => {
+    async function getOptions() {
+      const options = await storageCreationAllowedDisplayOptions();
+      setStorageOptions(options);
+    }
+    getOptions();
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -25,7 +32,7 @@ const CreateDataStoreForm = (props) => {
           label="Storage Type"
           placeholder="Storage Type"
           component={renderSelectField}
-          options={getStackSelections(DATA_STORE)} />
+          options={storageOptions} />
       </div>
       <div>
         <Field
@@ -68,7 +75,7 @@ const CreateDataStoreReduxFrom = reduxForm({
   asyncValidate,
   asyncBlurFields: ['name'],
   destroyOnUnmount: false,
-  initialValues,
+  enableReinitialize: true, // update form state when defaults set
 })(CreateDataStoreForm);
 
 export { CreateDataStoreForm as PureCreateDataStoreForm };

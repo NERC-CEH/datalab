@@ -1,4 +1,4 @@
-import { keyBy, capitalize } from 'lodash';
+import { capitalize } from 'lodash';
 
 const JUPYTER = 'jupyter';
 const JUPYTERLAB = 'jupyterlab';
@@ -58,11 +58,6 @@ const STACK_TYPES = [
   },
 ];
 
-function getStackTypes() {
-  const types = STACK_TYPES.map(type => ({ description: type.shortDescription, value: type.name }));
-  return keyBy(types, type => type.value);
-}
-
 function getStackSelections(category) {
   return STACK_TYPES.filter(stack => stack.category === category)
     .map(stack => ({ text: capitalize(stack.name), value: stack.name }));
@@ -100,7 +95,6 @@ export {
   ZEPPELIN,
   getStackKeys,
   getStackSelections,
-  getStackTypes,
   stackInCategory,
   getCategoryFromTypeName,
 };
