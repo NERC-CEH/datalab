@@ -1,5 +1,6 @@
 import { body, check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
+import { versionList } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
@@ -202,6 +203,13 @@ const createStackValidator = [
     .custom((value, { req }) => {
       if (Stacks.getNamesByCategory(ANALYSIS).includes(req.body.type)) {
         return getEnumValues(visibility).includes(req.body.shared);
+      }
+      return true;
+    }),
+  check('version', 'valid version must be specified')
+    .custom((value, { req }) => {
+      if (Object.prototype.hasOwnProperty.call(req.body, 'version')) {
+        return versionList(req.body.type).includes(req.body.version);
       }
       return true;
     }),

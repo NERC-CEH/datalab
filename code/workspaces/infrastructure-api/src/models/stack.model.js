@@ -21,6 +21,7 @@ const StackSchema = new Schema({
   shared: { type: String, enum: getEnumValues(visibility), default: visibility.PRIVATE },
   visible: { type: String, enum: getEnumValues(visibility), default: visibility.PRIVATE },
   volumeMount: String,
+  version: { type: String, default: null },
 });
 
 StackSchema.query.filterByProject = byProjectKey.filterFind;

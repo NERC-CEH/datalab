@@ -28,7 +28,7 @@ data:
             - "4GB"
             - --death-timeout
             - '60'
-            image: {{ &dask.imageName }}:{{ dask.version }}
+            image: {{ &dask.image }}
             name: dask-docker
             resources:
               limits:
