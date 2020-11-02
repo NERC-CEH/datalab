@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getNotebookInfo returns the correct notebookInfo 1`] = `
+Object {
+  "JUPYTER": Object {
+    "displayName": "Jupyter",
+    "type": "notebook",
+    "versions": Array [
+      Object {
+        "displayName": "Dask 2.30.0 support",
+        "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+      },
+    ],
+  },
+  "JUPYTER_LAB": Object {
+    "displayName": "JupyterLab",
+    "type": "notebook",
+    "versions": Array [
+      Object {
+        "displayName": "Dask 2.30.0 support",
+        "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+      },
+    ],
+  },
+  "RSTUDIO": Object {
+    "displayName": "RStudio",
+    "type": "notebook",
+    "userSelectableVersion": true,
+    "versions": Array [
+      Object {
+        "connectVersion": "nerc/zeppelin-connect:1.1.1",
+        "default": true,
+        "displayName": "4.0.1",
+        "image": "nerc/rstudio:4.0.1",
+      },
+      Object {
+        "connectVersion": "nerc/zeppelin-connect:1.1.1",
+        "displayName": "3.5.3",
+        "image": "nerc/rstudio:3.5.3",
+      },
+    ],
+  },
+  "ZEPPLIN": Object {
+    "displayName": "Zepplin",
+    "type": "notebook",
+    "versions": Array [
+      Object {
+        "connectVersion": "nerc/zeppelin-connect:1.1.1",
+        "displayName": "0.7.2.7",
+        "image": "nerc/zeppelin:0.7.2.7",
+      },
+    ],
+  },
+}
+`;
+
+exports[`getSiteInfo returns the correct siteInfo 1`] = `
+Object {
+  "NBVIEWER": Object {
+    "displayName": "NBViewer",
+    "type": "site",
+    "versions": Array [
+      Object {
+        "displayName": "Latest",
+        "image": "jupyter/nbviewer:latest",
+      },
+    ],
+  },
+  "RSHINY": Object {
+    "displayName": "RShiny",
+    "type": "site",
+    "userSelectableVersion": true,
+    "versions": Array [
+      Object {
+        "default": true,
+        "displayName": "4.0.1",
+        "image": "nerc/rshiny:4.0.1",
+      },
+      Object {
+        "displayName": "3.5.3",
+        "image": "nerc/rshiny:3.5.3",
+      },
+    ],
+  },
+}
+`;
+
+exports[`imageConfig returns the correct configuration 1`] = `
+Object {
+  "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
+  "images": Object {
+    "JUPYTER": Object {
+      "displayName": "Jupyter",
+      "type": "notebook",
+      "versions": Array [
+        Object {
+          "displayName": "Dask 2.30.0 support",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+        },
+      ],
+    },
+    "JUPYTER_LAB": Object {
+      "displayName": "JupyterLab",
+      "type": "notebook",
+      "versions": Array [
+        Object {
+          "displayName": "Dask 2.30.0 support",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+        },
+      ],
+    },
+    "MINIO": Object {
+      "type": "infrastructure",
+      "versions": Array [
+        Object {
+          "connectVersion": "nerc/connect:1.0.0",
+          "image": "nerc/minio:1.0",
+        },
+      ],
+    },
+    "NBVIEWER": Object {
+      "displayName": "NBViewer",
+      "type": "site",
+      "versions": Array [
+        Object {
+          "displayName": "Latest",
+          "image": "jupyter/nbviewer:latest",
+        },
+      ],
+    },
+    "RSHINY": Object {
+      "displayName": "RShiny",
+      "type": "site",
+      "userSelectableVersion": true,
+      "versions": Array [
+        Object {
+          "default": true,
+          "displayName": "4.0.1",
+          "image": "nerc/rshiny:4.0.1",
+        },
+        Object {
+          "displayName": "3.5.3",
+          "image": "nerc/rshiny:3.5.3",
+        },
+      ],
+    },
+    "RSTUDIO": Object {
+      "displayName": "RStudio",
+      "type": "notebook",
+      "userSelectableVersion": true,
+      "versions": Array [
+        Object {
+          "connectVersion": "nerc/zeppelin-connect:1.1.1",
+          "default": true,
+          "displayName": "4.0.1",
+          "image": "nerc/rstudio:4.0.1",
+        },
+        Object {
+          "connectVersion": "nerc/zeppelin-connect:1.1.1",
+          "displayName": "3.5.3",
+          "image": "nerc/rstudio:3.5.3",
+        },
+      ],
+    },
+    "SPARK": Object {
+      "masterAddress": "spark://spark-master:7077",
+      "sharedRLibs": "/data/packages/R/%p/%v",
+      "type": "infrastructure",
+      "versions": Array [
+        Object {
+          "image": "nerc/spark-k8s:0.1.0",
+        },
+      ],
+    },
+    "ZEPPLIN": Object {
+      "displayName": "Zepplin",
+      "type": "notebook",
+      "versions": Array [
+        Object {
+          "connectVersion": "nerc/zeppelin-connect:1.1.1",
+          "displayName": "0.7.2.7",
+          "image": "nerc/zeppelin:0.7.2.7",
+        },
+      ],
+    },
+  },
+}
+`;

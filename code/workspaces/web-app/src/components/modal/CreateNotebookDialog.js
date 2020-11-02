@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import { withStyles } from '@material-ui/core/styles';
-import CreateNotebookForm from '../notebooks/CreateNotebookForm';
+import CreateNotebookForm, { FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME } from '../notebooks/CreateNotebookForm';
+import { getNotebookInfo } from '../../config/images';
+import { useReduxFormValue } from '../../hooks/reduxFormHooks';
+import { getTypeOptions, getVersionOptions, updateVersionOnTypeChange } from '../stacks/typeAndVersionFormUtils';
 
 const styles = theme => ({
   dialogDiv: {
@@ -12,20 +15,39 @@ const styles = theme => ({
   },
 });
 
-const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes, projectKey }) => (
-  <Dialog open={true} maxWidth="md">
-    <div className={classes.dialogDiv}>
+const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes, projectKey }) => {
+  const [notebookOptions, setNotebookOptions] = useState({});
+
+  useEffect(() => {
+    async function getNotebookOptions() {
+      const options = await getNotebookInfo();
+      setNotebookOptions(options);
+    }
+    getNotebookOptions();
+  }, []);
+
+  const notebookTypeValue = useReduxFormValue(FORM_NAME, TYPE_FIELD_NAME);
+  const versionOptions = getVersionOptions(notebookOptions, notebookTypeValue);
+
+  return (
+    <Dialog open={true} maxWidth="md">
+      <div className={classes.dialogDiv}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <CreateNotebookForm
             onSubmit={onSubmit}
             cancel={onCancel}
             dataStorageOptions={dataStorageOptions}
-            projectKey={projectKey} />
+            projectKey={projectKey}
+            typeOptions={getTypeOptions(notebookOptions)}
+            versionOptions={versionOptions}
+            onChange={updateVersionOnTypeChange(FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME, versionOptions)}
+          />
         </DialogContent>
-    </div>
-  </Dialog>
-);
+      </div>
+    </Dialog>
+  );
+};
 
 CreateNotebookDialog.propTypes = {
   title: PropTypes.string.isRequired,

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getTypeOptions returns array of values from image options that contain text and value fields suitable for form drop-downs 1`] = `
+Array [
+  Object {
+    "text": "Jupyter",
+    "value": "JUPYTER",
+  },
+  Object {
+    "text": "JupyterLab",
+    "value": "JUPYTER_LAB",
+  },
+  Object {
+    "text": undefined,
+    "value": "MINIO",
+  },
+  Object {
+    "text": "NBViewer",
+    "value": "NBVIEWER",
+  },
+  Object {
+    "text": "RShiny",
+    "value": "RSHINY",
+  },
+  Object {
+    "text": "RStudio",
+    "value": "RSTUDIO",
+  },
+  Object {
+    "text": undefined,
+    "value": "SPARK",
+  },
+  Object {
+    "text": "Zepplin",
+    "value": "ZEPPLIN",
+  },
+]
+`;
+
+exports[`getVersionOptions returns array of values from image options that text and value fields suitable for form drop-downs with default having additionalText and default field 1`] = `
+Array [
+  Object {
+    "additionalText": "(default)",
+    "default": true,
+    "text": "4.0.1",
+    "value": "4.0.1",
+  },
+  Object {
+    "additionalText": undefined,
+    "default": undefined,
+    "text": "3.5.3",
+    "value": "3.5.3",
+  },
+]
+`;

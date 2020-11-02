@@ -15,19 +15,6 @@ const ANALYSIS = 'analysis';
 const PUBLISH = 'publish';
 const DATA_STORE = 'dataStore';
 
-const R_VERSIONS = [
-  {
-    name: '3.5.3',
-    text: '3.5.3',
-    value: '3.5.3',
-  },
-  {
-    name: '4.0.1',
-    text: '4.0.1',
-    value: '4.0.1',
-  },
-];
-
 const STACK_TYPES = [
   {
     name: JUPYTER,
@@ -106,7 +93,6 @@ export {
   RSHINY,
   RSTUDIO,
   ZEPPELIN,
-  R_VERSIONS,
   getStackKeys,
   getStackSelections,
   stackInCategory,

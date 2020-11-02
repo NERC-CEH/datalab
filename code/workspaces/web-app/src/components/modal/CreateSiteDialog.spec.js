@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CreateSiteDialog from './CreateSiteDialog';
 
+jest.mock('../../hooks/reduxFormHooks');
+
 describe('Site dialog', () => {
   function shallowRender(props) {
     return shallow(<CreateSiteDialog {...props} />);

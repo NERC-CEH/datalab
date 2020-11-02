@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
+exports[`CreateSiteForm creates correct snapshot for create Site Form when there are no version options 1`] = `
 <form>
   <div>
     <Field
@@ -13,21 +13,138 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form 1`] = `
   <div>
     <Field
       component={[Function]}
-      label="Site Type"
+      label="Type"
       name="type"
       options={
         Array [
           Object {
-            "text": "Rshiny",
-            "value": "rshiny",
-          },
-          Object {
-            "text": "Nbviewer",
-            "value": "nbviewer",
+            "text": "RStudio",
+            "value": "RSTUDIO",
           },
         ]
       }
       placeholder="Site Type"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      endText=".datalabs.localhost"
+      label="URL Name"
+      name="name"
+      placeholder="Site Name for URLs"
+      startText="http://testproj-"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Data Store to Mount"
+      name="volumeMount"
+      options={
+        Array [
+          Object {
+            "text": "nfs",
+            "value": "5",
+          },
+        ]
+      }
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Source Path"
+      name="sourcePath"
+      placeholder="Source Directory for Site"
+      startText="/data/"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Description"
+      name="description"
+      placeholder="Description"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Visibility Status"
+      name="visible"
+      options={
+        Array [
+          Object {
+            "text": <SelectRichComponent
+              title="Private"
+              type="site"
+            />,
+            "value": "private",
+          },
+          Object {
+            "text": <SelectRichComponent
+              title="Project"
+              type="site"
+            />,
+            "value": "project",
+          },
+          Object {
+            "text": <SelectRichComponent
+              title="Public"
+              type="site"
+            />,
+            "value": "public",
+          },
+        ]
+      }
+    />
+  </div>
+  <CreateFormControls
+    onCancel={[MockFunction]}
+  />
+</form>
+`;
+
+exports[`CreateSiteForm creates correct snapshot for create Site Form when there are version options 1`] = `
+<form>
+  <div>
+    <Field
+      component={[Function]}
+      label="Display Name"
+      name="displayName"
+      placeholder="Display Name"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Type"
+      name="type"
+      options={
+        Array [
+          Object {
+            "text": "RStudio",
+            "value": "RSTUDIO",
+          },
+        ]
+      }
+      placeholder="Site Type"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Version"
+      name="version"
+      options={
+        Array [
+          Object {
+            "text": "0.1.0",
+            "value": "0.1.0",
+          },
+        ]
+      }
     />
   </div>
   <div>
