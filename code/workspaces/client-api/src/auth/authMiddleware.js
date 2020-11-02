@@ -13,7 +13,8 @@ import authService from '../config/services';
  * @param next
  */
 export const authorise = (request, response, next) => {
-  authService.retrievePermissionsToken(request.headers.identity.username, request.headers.authorization)
+  const identity = request.headers.identity ? JSON.parse(request.headers.identity) : {};
+  authService.retrievePermissionsToken(identity.userName, request.headers.authorization)
     .then((token) => {
       request.headers.authorization = `Bearer ${token}`;
       next();
