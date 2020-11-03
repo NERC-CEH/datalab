@@ -39,8 +39,8 @@ describe('project controller', () => {
     it('should return 201 if role added', async () => {
       addRole.mockResolvedValue(true);
       const req = {
-        params: { projectKey: 'project', userId: 'uid1', userName: 'user1' },
-        body: { role: 'admin' },
+        params: { projectKey: 'project', userId: 'uid1' },
+        body: { role: 'admin', userName: 'user1' },
       };
 
       const request = httpMocks.createRequest(req);
@@ -54,8 +54,8 @@ describe('project controller', () => {
     it('should return 200 if role edited', async () => {
       addRole.mockResolvedValue(false);
       const req = {
-        params: { projectKey: 'project', userId: 'uid1', userName: 'user1' },
-        body: { role: 'admin' },
+        params: { projectKey: 'project', userId: 'uid1' },
+        body: { role: 'admin', userName: 'user1' },
       };
 
       const request = httpMocks.createRequest(req);
@@ -69,8 +69,8 @@ describe('project controller', () => {
     it('should return an error if add user role fails', async () => {
       addRole.mockRejectedValue('error');
       const req = {
-        params: { projectKey: 'project', userId: 'uid1', userName: 'user1' },
-        body: { role: 'admin' },
+        params: { projectKey: 'project', userId: 'uid1' },
+        body: { role: 'admin', userName: 'user1' },
       };
 
       const request = httpMocks.createRequest(req);

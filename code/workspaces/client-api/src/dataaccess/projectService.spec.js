@@ -72,7 +72,7 @@ describe('projectService', () => {
 
     const creationRequest = { ...testProject, projectKey: testProject.key };
     delete creationRequest.key;
-    const result = await projectService.createProject(creationRequest, user, token);
+    const result = await projectService.createProject(creationRequest, user, { userName: 'user1' }, token);
     expect(result).toEqual(dummyResponse);
   });
 
