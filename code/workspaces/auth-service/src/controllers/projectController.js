@@ -24,8 +24,8 @@ async function getUserRoles(req, res) {
 }
 
 async function addUserRole(req, res) {
-  const { params: { projectKey, userId, userName } } = req;
-  const { body: { role } } = req;
+  const { params: { projectKey, userId } } = req;
+  const { body: { role, userName } } = req;
 
   const roleAdded = await userRolesRepository.addRole(userId, userName, projectKey, role);
 
