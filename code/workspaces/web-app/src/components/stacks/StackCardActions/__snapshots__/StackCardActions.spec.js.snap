@@ -1,5 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PureStackCardActions Should not render edit/delete buttons if functions not defined 1`] = `
+<div
+  className="cardActions"
+>
+  <ComponentWrapper
+    className="buttonWrapper"
+    permission="open"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <WithStyles(ForwardRef(Tooltip))
+      disableHoverListener={true}
+      placement="bottom-start"
+      title="Cannot be opened until resource is ready"
+    >
+      <div>
+        <ForwardRef
+          disabled={false}
+          fullWidth={true}
+          onClick={[Function]}
+        >
+          Open
+        </ForwardRef>
+      </div>
+    </WithStyles(ForwardRef(Tooltip))>
+  </ComponentWrapper>
+  <ComponentWrapper
+    className="buttonWrapper"
+    permission="delete"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <SecondaryActionButton
+      aria-controls="more-menu"
+      aria-haspopup="true"
+      fullWidth={true}
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(Icon))
+        style={
+          Object {
+            "color": "inherit",
+          }
+        }
+      >
+        more_vert
+      </WithStyles(ForwardRef(Icon))>
+    </SecondaryActionButton>
+  </ComponentWrapper>
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    id="more-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  >
+    <StackMoreMenuItem
+      onClick={[Function]}
+      requiredPermission="delete"
+      shouldRender={false}
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      Logs
+    </StackMoreMenuItem>
+    <StackMoreMenuItem
+      onClick={[Function]}
+      requiredPermission="edit"
+      shouldRender={false}
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      Edit
+    </StackMoreMenuItem>
+    <StackMoreMenuItem
+      disableTooltip={true}
+      disabled={false}
+      onClick={[Function]}
+      requiredPermission="delete"
+      shouldRender={false}
+      tooltipText="Resource is already shared within the project"
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      Share
+    </StackMoreMenuItem>
+    <StackMoreMenuItem
+      onClick={[Function]}
+      requiredPermission="edit"
+      shouldRender={false}
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      Restart
+    </StackMoreMenuItem>
+    <StackMoreMenuItem
+      onClick={[Function]}
+      requiredPermission="delete"
+      shouldRender={false}
+      userPermissions={
+        Array [
+          "open",
+          "delete",
+          "edit",
+        ]
+      }
+    >
+      Delete
+    </StackMoreMenuItem>
+  </WithStyles(ForwardRef(Menu))>
+</div>
+`;
+
 exports[`PureStackCardActions Should not render edit/delete/share/restart buttons if current user is not the owner 1`] = `
 <div
   className="cardActions"
