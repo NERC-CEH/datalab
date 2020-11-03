@@ -1,21 +1,27 @@
 import { check } from 'express-validator';
-import authZeroUserMgmt from '../userManagement/authZeroUserManagement';
 import validator from './validationMiddleware';
+import userRolesRepository from '../dataaccess/userRolesRepository';
 
-function getUsers(req, res) {
-  return authZeroUserMgmt.getUsers()
-    .then(users => res.json(users));
+async function getUsers(req, res) {
+  try {
+    const users = await userRolesRepository.getUsers();
+    res.json(users);
+  } catch (err) {
+    res.status(404);
+    res.send({});
+  }
 }
 
 async function getUser(req, res) {
   const { params: { userId } } = req;
 
-  const user = await authZeroUserMgmt.getUser(userId);
-
-  if (!user) {
+  try {
+    const user = await userRolesRepository.getUser(userId);
+    res.send(user);
+  } catch (err) {
     res.status(404);
+    res.send({});
   }
-  res.send(user);
 }
 
 export const getUserValidator = validator([

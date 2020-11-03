@@ -50,3 +50,23 @@ Object {
   "userName": "user1",
 }
 `;
+
+exports[`userRolesRepository read operations getUser returns expected snapshot 1`] = `
+Object {
+  "name": "user1",
+  "userId": "uid1",
+}
+`;
+
+exports[`userRolesRepository read operations getUsers returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "user1",
+    "userId": "uid1",
+  },
+  Object {
+    "name": "user2",
+    "userId": "uid2",
+  },
+]
+`;

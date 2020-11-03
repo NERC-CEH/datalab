@@ -17,6 +17,23 @@ async function getRoles(userId, userName) {
   return roles.toObject();
 }
 
+function convertToUser(roles) {
+  const userRoles = roles.toObject();
+  const userName = userRoles.userName ? userRoles.userName : 'Unknown user name';
+  const user = { userId: userRoles.userId, name: userName };
+  return user;
+}
+
+async function getUser(userId) {
+  const roles = await UserRoles().findOne({ userId }).exec();
+  return convertToUser(roles);
+}
+
+async function getUsers() {
+  const allRoles = await UserRoles().find().exec();
+  return allRoles.map(roles => convertToUser(roles));
+}
+
 function getProjectUsers(projectKey) {
   const query = { 'projectRoles.projectKey': { $eq: projectKey } };
   return UserRoles().find(query).exec();
@@ -84,4 +101,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { getRoles, getProjectUsers, addRole, removeRole, userIsMember };
+export default { getRoles, getUser, getUsers, getProjectUsers, addRole, removeRole, userIsMember };
