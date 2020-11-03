@@ -207,12 +207,9 @@ const createStackValidator = [
       return true;
     }),
   check('version', 'valid version must be specified')
-    .custom((value, { req }) => {
-      if (Object.prototype.hasOwnProperty.call(req.body, 'version')) {
-        return versionList(req.body.type).includes(req.body.version);
-      }
-      return true;
-    }),
+    .optional()
+    .custom((value, { req }) => versionList(req.body.type).includes(value))
+    .withMessage((value, { req }) => `Must be one of ${versionList(req.body.type)}.`),
   checkExistsWithMsg('description'),
   checkExistsWithMsg('displayName'),
   checkExistsWithMsg('volumeMount'),

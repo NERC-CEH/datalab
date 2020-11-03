@@ -2,7 +2,7 @@ import { upperCase } from 'lodash';
 import data from './image_config.json';
 
 export function imageConfig() {
-  return Object(data.images);
+  return data.images;
 }
 
 export function imageList() {

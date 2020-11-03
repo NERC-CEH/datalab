@@ -109,12 +109,6 @@ const config = convict({
     default: '50g',
     env: 'MAX_BODY_SIZE',
   },
-  containerInfoPath: {
-    doc: 'The path to yaml file containing container information',
-    format: 'String',
-    default: './resources/container-info.yml',
-    env: 'CONTAINER_INFO_PATH',
-  },
 });
 
 export default config;

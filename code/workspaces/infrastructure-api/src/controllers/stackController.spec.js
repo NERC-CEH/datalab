@@ -148,9 +148,21 @@ describe('Stack Controller', () => {
 
     it('should validate the version field', () => {
       const requestBody = mutationRequestBody();
+      return createValidatedRequest(requestBody, stackController.createStackValidator)
+        .then(() => expectNoValidationError());
+    });
+
+    it('should validate an invalid version field', () => {
+      const requestBody = mutationRequestBody();
       requestBody.version = 'invalid-version';
       return createValidatedRequest(requestBody, stackController.createStackValidator)
-        .then(() => expectValidationError('version', 'valid version must be specified'));
+        .then(() => expectValidationError('version', `Must be one of ${mutationRequestBody().version}.`));
+    });
+
+    it('should validate a request where version is omitted', () => {
+      const requestBody = omit(mutationRequestBody(), 'version');
+      return createValidatedRequest(requestBody, stackController.createStackValidator)
+        .then(() => expectNoValidationError());
     });
 
     it('should validate the additional fields for rshiny', () => {
