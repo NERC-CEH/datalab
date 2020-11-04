@@ -79,20 +79,20 @@ describe('userRolesRepository', () => {
     it('should create a new user if the user is not in roles collection', async () => {
       mockDatabase = databaseMock([]);
       database.getModel = mockDatabase;
-      await userRoleRepository.addRole('uid1', 'user1', 'project', 'admin');
-      expect(mockDatabase().query()).toEqual({
-        userId: 'uid1',
-      });
+      const addRole = await userRoleRepository.addRole('uid1', 'user1', 'project', 'admin');
+      expect(addRole).toEqual(true);
 
-      expect(mockDatabase().invocation()).toEqual({
-        query: { userId: 'uid1' },
-        entity: { userId: 'uid1', userName: 'user1', projectRoles: [{ projectKey: 'project', role: 'admin' }] },
-        params: { upsert: true, setDefaultsOnInsert: true, runValidators: true },
+      expect(mockDatabase().invocation().entity).toEqual({
+        userId: 'uid1',
+        userName: 'user1',
+        instanceAdmin: false,
+        projectRoles: [{ projectKey: 'project', role: 'admin' }],
       });
     });
 
     it('should add role to existing user if the user has no role on project', async () => {
-      await userRoleRepository.addRole('uid1', 'user1', 'project', 'admin');
+      const addRole = await userRoleRepository.addRole('uid1', 'user1', 'project', 'admin');
+      expect(addRole).toEqual(true);
       expect(mockDatabase()
         .query())
         .toEqual({
@@ -114,7 +114,8 @@ describe('userRolesRepository', () => {
     });
 
     it('should update role on existing user if the user has role on project', async () => {
-      await userRoleRepository.addRole('uid1', 'user1', 'project 2', 'admin');
+      const addRole = await userRoleRepository.addRole('uid1', 'user1', 'project 2', 'admin');
+      expect(addRole).toEqual(false);
       expect(mockDatabase().query()).toEqual({
         userId: 'uid1',
       });

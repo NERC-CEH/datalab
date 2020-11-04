@@ -7,7 +7,7 @@ async function getUsers(req, res) {
     const users = await userRolesRepository.getUsers();
     res.json(users);
   } catch (err) {
-    res.status(404);
+    res.status(500);
     res.send({});
   }
 }

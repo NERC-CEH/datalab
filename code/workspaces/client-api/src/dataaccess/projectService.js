@@ -28,7 +28,7 @@ async function createProject(creationRequest, user, identity, token) {
   try {
     await addProjectPermission(project.key, owner, userName, 'admin', token);
   } catch (error) {
-    logger.error(`Failed to add user ${owner} ${userName} to project ${project.key}: ${error}`);
+    logger.error(`Failed to add user ${owner} to project ${project.key}: ${error}`);
   }
 
   return response.data;

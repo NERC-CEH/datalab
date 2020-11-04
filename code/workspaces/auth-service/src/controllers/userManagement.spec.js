@@ -22,6 +22,17 @@ describe('user management controller', () => {
             .toEqual(JSON.stringify('expectedValue'));
         });
     });
+
+    it('should return 500 if error', async () => {
+      getUsersMock.mockRejectedValue('no such catalogue');
+
+      const request = httpMocks.createRequest();
+      const response = httpMocks.createResponse();
+
+      await userManagement.getUsers(request, response);
+
+      expect(response.statusCode).toBe(500);
+    });
   });
 
   describe('get user', () => {

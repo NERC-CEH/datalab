@@ -11,7 +11,7 @@ function UserRoles() {
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    roles = await addEmptyRecordForNewUser(userId, userName);
+    roles = await addRecordForNewUser(userId, userName, []);
   }
 
   return roles.toObject();
@@ -39,11 +39,11 @@ function getProjectUsers(projectKey) {
   return UserRoles().find(query).exec();
 }
 
-function addEmptyRecordForNewUser(userId, userName) {
+function addRecordForNewUser(userId, userName, projectRoles) {
   const user = {
     userId,
     userName,
-    projectRoles: [],
+    projectRoles,
     instanceAdmin: false,
   };
   return UserRoles().create(user);
@@ -51,32 +51,25 @@ function addEmptyRecordForNewUser(userId, userName) {
 
 async function addRole(userId, userName, projectKey, role) {
   // Load existing user
-  let roleAdded = false;
   const query = { userId };
-  let user = await UserRoles().findOne(query).exec();
+  const user = await UserRoles().findOne(query).exec();
 
   if (user) {
     // Either add role or update existing role
     const { projectRoles } = user;
     const roleIndex = findIndex(projectRoles, { projectKey });
-    if (roleIndex > -1) {
-      projectRoles[roleIndex].role = role;
-    } else {
-      roleAdded = true;
+    const roleAdded = roleIndex === -1;
+    if (roleAdded) {
       projectRoles.push({ projectKey, role });
+    } else {
+      projectRoles[roleIndex].role = role;
     }
-  } else {
-    // Add new user entry if not found
-    roleAdded = true;
-    user = {
-      userId,
-      userName,
-      projectRoles: [{ projectKey, role }],
-    };
+    await UserRoles().findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+    return roleAdded;
   }
-
-  await UserRoles().findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
-  return roleAdded;
+  // Add new user entry if not found
+  await addRecordForNewUser(userId, userName, [{ projectKey, role }]);
+  return true;
 }
 
 async function removeRole(userId, projectKey) {
