@@ -96,7 +96,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Logs
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={editStack !== undefined && ownsStack}
+          shouldRender={editStack && ownsStack}
           onClick={() => editStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={editPermission}
@@ -123,7 +123,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Restart
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={deleteStack !== undefined && ownsStack}
+          shouldRender={deleteStack && ownsStack}
           onClick={() => deleteStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}

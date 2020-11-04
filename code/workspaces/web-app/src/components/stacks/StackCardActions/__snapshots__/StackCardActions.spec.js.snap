@@ -89,7 +89,6 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
     <StackMoreMenuItem
       onClick={[Function]}
       requiredPermission="edit"
-      shouldRender={false}
       userPermissions={
         Array [
           "open",
@@ -134,7 +133,6 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
     <StackMoreMenuItem
       onClick={[Function]}
       requiredPermission="delete"
-      shouldRender={false}
       userPermissions={
         Array [
           "open",

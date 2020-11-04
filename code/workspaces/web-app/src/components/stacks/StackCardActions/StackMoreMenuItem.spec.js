@@ -41,6 +41,12 @@ describe('StackMoreMenuItem', () => {
     expect(render).toBeEmptyRender();
   });
 
+  it('should not render when shouldRender prop is undefined', () => {
+    const props = { ...generateProps(), shouldRender: undefined };
+    const render = shallowRender(props);
+    expect(render).toBeEmptyRender();
+  });
+
   it('should not render when user does not have required permission', () => {
     const props = generateProps({ requiredPermission: 'does:not:exist' });
     const render = shallowRender(props);
