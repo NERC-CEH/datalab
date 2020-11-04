@@ -37,7 +37,7 @@ const EditDataStoreForm = ({
     />
     <Field
       name="users"
-      label="User's with access to datastore"
+      label="Users with access to datastore"
       placeholder="Type user's email address"
       selectedTip="User has access"
       component={renderMultiselectAutocompleteField}
