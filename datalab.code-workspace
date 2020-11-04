@@ -2,11 +2,25 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "code/workspaces/auth-service"
+		},
+		{
+			"path": "code/workspaces/client-api"
+		},
+		{
+			"path": "code/workspaces/common"
+		},
+		{
+			"path": "code/workspaces/web-app"
 		}
 	],
 	"extensions": {
 		"recommendations": [
-			"dbaeumer.vscode-eslint"
+			"dbaeumer.vscode-eslint",
+			"orta.vscode-jest",
+			"firsttris.vscode-jest-runner"
 		]
 	},
 	"settings": {
@@ -14,6 +28,10 @@
 			"./code"
 		],
 		"editor.formatOnSave": true,
-		"eslint.format.enable": true
-	}
+		"eslint.format.enable": true,
+		"jest.disabledWorkspaceFolders": [
+			"datalab"
+		],
+		"jestrunner.jestCommand": "npm run test --"
+	},
 }
