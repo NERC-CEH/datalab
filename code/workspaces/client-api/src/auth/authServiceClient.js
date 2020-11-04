@@ -10,10 +10,13 @@ import config from '../config';
 const AUTHORISATION_URL = `${config.get('authorisationService')}/authorise`;
 const JWKS_URL = `${config.get('authorisationService')}/jwks`;
 
-function retrievePermissionsToken(authorisationToken) {
+function retrievePermissionsToken(userName, authorisationToken) {
   const options = {
     headers: {
       authorization: authorisationToken,
+    },
+    params: {
+      userName,
     },
   };
 

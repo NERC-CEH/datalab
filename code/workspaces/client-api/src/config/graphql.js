@@ -13,6 +13,7 @@ function configureGraphQL(app) {
     context: ({ req }) => ({
       user: req.user,
       token: req.headers.authorization,
+      identity: req.headers.identity ? JSON.parse(req.headers.identity) : {},
     }),
     playground: process.env.NODE_ENV !== 'production',
   });

@@ -5,12 +5,16 @@ const request = axios.create();
 
 request.interceptors.request.use((requestConfig) => {
   const currentSession = getAuth().getCurrentSession();
-
+  const identity = currentSession.identity ? JSON.parse(currentSession.identity) : {};
+  const headerIdentity = {
+    userName: identity.name,
+  };
   return {
     ...requestConfig,
     headers: {
       ...requestConfig.headers,
       Authorization: `Bearer ${currentSession.access_token}`,
+      Identity: JSON.stringify(headerIdentity),
     },
   };
 });

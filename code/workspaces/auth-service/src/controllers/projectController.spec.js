@@ -40,7 +40,7 @@ describe('project controller', () => {
       addRole.mockResolvedValue(true);
       const req = {
         params: { projectKey: 'project', userId: 'uid1' },
-        body: { role: 'admin' },
+        body: { role: 'admin', userName: 'user1' },
       };
 
       const request = httpMocks.createRequest(req);
@@ -55,7 +55,7 @@ describe('project controller', () => {
       addRole.mockResolvedValue(false);
       const req = {
         params: { projectKey: 'project', userId: 'uid1' },
-        body: { role: 'admin' },
+        body: { role: 'admin', userName: 'user1' },
       };
 
       const request = httpMocks.createRequest(req);
@@ -70,7 +70,7 @@ describe('project controller', () => {
       addRole.mockRejectedValue('error');
       const req = {
         params: { projectKey: 'project', userId: 'uid1' },
-        body: { role: 'admin' },
+        body: { role: 'admin', userName: 'user1' },
       };
 
       const request = httpMocks.createRequest(req);

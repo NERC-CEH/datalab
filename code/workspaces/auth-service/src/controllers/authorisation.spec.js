@@ -44,7 +44,7 @@ describe('authorisation controller', () => {
   describe('getPermissions', () => {
     it('should generate and return permissions', () => {
       const response = httpMocks.createResponse();
-      const request = { user: { sub: 'expectedUserName' } };
+      const request = { user: { sub: 'expectedUserName' }, query: { userName: 'user1' } };
       const expectedPermissions = ['expected', 'permissions'];
       getPermissionsMock.mockReturnValue(expectedPermissions);
 
@@ -58,7 +58,7 @@ describe('authorisation controller', () => {
   describe('generatePermissionToken', () => {
     it('should generate and return access token', () => {
       const response = httpMocks.createResponse();
-      const request = { user: { sub: 'expectedUserName' } };
+      const request = { user: { sub: 'expectedUserName' }, query: { userName: 'user1' } };
 
       return authorisation.generatePermissionToken(request, response)
         .then(() => {

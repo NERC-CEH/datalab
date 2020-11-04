@@ -28,11 +28,12 @@ function checkUser(request, response) {
 
 function getPermissionsForUser(request, response) {
   const userId = get(request, 'user.sub');
+  const userName = get(request, 'query.userName');
 
-  return userRolesRepository.getRoles(userId)
+  return userRolesRepository.getRoles(userId, userName)
     .then((userRoles) => {
       const permissions = getPermissions(userRoles);
-      logger.debug(`getPermissionsForUser userId ${userId} permissions ${permissions}`);
+      logger.debug(`getPermissionsForUser userId ${userId} userName ${userName} permissions ${permissions}`);
       return response.json({ permissions });
     })
     .catch((err) => {
@@ -44,8 +45,9 @@ function getPermissionsForUser(request, response) {
 
 function generatePermissionToken(request, response) {
   const userId = get(request, 'user.sub');
+  const userName = get(request, 'query.userName');
 
-  return userRolesRepository.getRoles(userId)
+  return userRolesRepository.getRoles(userId, userName)
     .then((userRoles) => {
       const permissions = getPermissions(userRoles);
       const payload = {

@@ -1,12 +1,12 @@
 import httpMocks from 'node-mocks-http';
 import userManagement from './userManagement';
-import authZeroUserMgmt from '../userManagement/authZeroUserManagement';
+import userRolesRepository from '../dataaccess/userRolesRepository';
 
-jest.mock('../userManagement/authZeroUserManagement');
+jest.mock('../dataaccess/userRolesRepository');
 const getUsersMock = jest.fn().mockReturnValue(Promise.resolve('expectedValue'));
 const getUserMock = jest.fn();
-authZeroUserMgmt.getUsers = getUsersMock;
-authZeroUserMgmt.getUser = getUserMock;
+userRolesRepository.getUsers = getUsersMock;
+userRolesRepository.getUser = getUserMock;
 
 describe('user management controller', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -21,6 +21,17 @@ describe('user management controller', () => {
           expect(response._getData()) // eslint-disable-line no-underscore-dangle
             .toEqual(JSON.stringify('expectedValue'));
         });
+    });
+
+    it('should return 500 if error', async () => {
+      getUsersMock.mockRejectedValue('no such catalogue');
+
+      const request = httpMocks.createRequest();
+      const response = httpMocks.createResponse();
+
+      await userManagement.getUsers(request, response);
+
+      expect(response.statusCode).toBe(500);
     });
   });
 
@@ -39,7 +50,7 @@ describe('user management controller', () => {
     });
 
     it('should return 404 if user not found', async () => {
-      getUserMock.mockResolvedValue();
+      getUserMock.mockRejectedValue('no such user');
 
       const request = httpMocks.createRequest({ params: { userId: 123 } });
       const response = httpMocks.createResponse();

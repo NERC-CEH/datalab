@@ -10,6 +10,7 @@ export const PROJECT_ROLES = [PROJECT_ADMIN, PROJECT_USER, PROJECT_VIEWER];
 
 const UserRolesSchema = new Schema({
   userId: String,
+  userName: String,
   instanceAdmin: { type: Boolean, default: false },
   projectRoles: [{
     projectKey: String,
