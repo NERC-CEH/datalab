@@ -56,27 +56,25 @@ function addRecordForNewUser(userId, userName, projectRoles) {
   return UserRoles().create(user);
 }
 
-async function addRole(userId, userName, projectKey, role) {
+async function addRole(userId, projectKey, role) {
   // Load existing user
   const query = { userId };
   const user = await UserRoles().findOne(query).exec();
 
-  if (user) {
-    // Either add role or update existing role
-    const { projectRoles } = user;
-    const roleIndex = findIndex(projectRoles, { projectKey });
-    const roleAdded = roleIndex === -1;
-    if (roleAdded) {
-      projectRoles.push({ projectKey, role });
-    } else {
-      projectRoles[roleIndex].role = role;
-    }
-    await UserRoles().findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
-    return roleAdded;
+  if (!user) {
+    throw new Error(`Unrecognized user ${userId}`);
   }
-  // Add new user entry if not found
-  await addRecordForNewUser(userId, userName, [{ projectKey, role }]);
-  return true;
+  // Either add role or update existing role
+  const { projectRoles } = user;
+  const roleIndex = findIndex(projectRoles, { projectKey });
+  const roleAdded = roleIndex === -1;
+  if (roleAdded) {
+    projectRoles.push({ projectKey, role });
+  } else {
+    projectRoles[roleIndex].role = role;
+  }
+  await UserRoles().findOneAndUpdate(query, user, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  return roleAdded;
 }
 
 async function removeRole(userId, projectKey) {

@@ -20,13 +20,12 @@ async function isProjectKeyUnique(projectKey, token) {
   return response.data;
 }
 
-async function createProject(creationRequest, user, identity, token) {
-  const userName = identity ? identity.userName : null;
+async function createProject(creationRequest, user, token) {
   const project = projectActionRequestToProject(creationRequest);
   const owner = user.sub;
   const response = await axios.post(`${infraServiceUrl}/projects`, project, generateOptions(token));
   try {
-    await addProjectPermission(project.key, owner, userName, 'admin', token);
+    await addProjectPermission(project.key, owner, 'admin', token);
   } catch (error) {
     logger.error(`Failed to add user ${owner} to project ${project.key}: ${error}`);
   }
@@ -45,9 +44,9 @@ async function deleteProject(projectKey, token) {
   return response.data;
 }
 
-function addProjectPermission(projectKey, userId, userName, role, token) {
+function addProjectPermission(projectKey, userId, role, token) {
   logger.info(`Adding ${role} role to user ${userId} for project ${projectKey}`);
-  const body = { role, userName };
+  const body = { role };
   return axios.put(`${authServiceUrl}/projects/${projectKey}/users/${userId}/roles`, body, generateOptions(token))
     .then(() => ({
       userId,
