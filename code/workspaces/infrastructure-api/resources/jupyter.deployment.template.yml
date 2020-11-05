@@ -41,7 +41,7 @@ spec:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
+        - image: {{ &jupyter.image }}
           imagePullPolicy : "IfNotPresent"
           name: {{ name }}
           command: ["start.sh",

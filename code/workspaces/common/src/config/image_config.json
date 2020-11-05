@@ -1,0 +1,106 @@
+{
+  "images": {
+    "RSHINY": {
+      "displayName": "Shiny",
+      "type": "site",
+      "userSelectableVersion": true,
+      "versions": [
+        {
+          "default": true,
+          "displayName": "4.0.1",
+          "image": "nerc/rshiny:4.0.1"
+        },
+        {
+          "displayName": "3.5.3",
+          "image": "nerc/rshiny:3.5.3"
+        }
+      ]
+    },
+    "RSTUDIO": {
+      "displayName": "RStudio",
+      "type": "notebook",
+      "userSelectableVersion": true,
+      "versions": [
+        {
+          "default": true,
+          "displayName": "4.0.1",
+          "image": "nerc/rstudio:4.0.1",
+          "connectImage": "nerc/zeppelin-connect:1.1.1"
+        },
+        {
+          "displayName": "3.5.3",
+          "image": "nerc/rstudio:3.5.3",
+          "connectImage": "nerc/zeppelin-connect:1.1.1"
+        }
+      ]
+    },
+    "JUPYTERLAB": {
+      "displayName": "JupyterLab",
+      "type": "notebook",
+      "versions": [
+        {
+          "displayName": "f200ab964cea-dask-2.30.0",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+        }
+      ]
+    },
+    "JUPYTER": {
+      "displayName": "Jupyter",
+      "type": "notebook",
+      "versions": [
+        {
+          "displayName": "f200ab964cea-dask-2.30.0",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+        }
+      ]
+    },
+    "ZEPPELIN": {
+      "displayName": "Zeppelin",
+      "type": "notebook",
+      "versions": [
+        {
+          "displayName": "0.7.2.7",
+          "image": "nerc/zeppelin:0.7.2.7",
+          "connectImage": "nerc/zeppelin-connect:1.1.1"
+        }
+      ]
+    },
+    "NBVIEWER": {
+      "displayName": "NBViewer",
+      "type": "site",
+      "versions": [
+        {
+          "displayName": "latest",
+          "image": "jupyter/nbviewer:latest"
+        }
+      ]
+    },
+    "SPARK": {
+      "type": "infrastructure",
+      "masterAddress": "spark://spark-master:7077",
+      "sharedRLibs": "/data/packages/R/%p/%v",
+      "versions": [
+        {
+          "image": "nerc/spark-k8s:0.1.0"
+        }
+      ]
+    },
+    "DASK": {
+      "type": "infrastructure",
+      "versions": [
+        {
+          "image": "daskdev/dask:2.30.0"
+        }
+      ]
+    },
+    "MINIO": {
+      "versions": [
+        {
+          "displayName": "1.0",
+          "image": "nerc/minio:1.0",
+          "connectImage": "nerc/connect:1.0.0"
+        }
+      ]
+    }
+  }
+}

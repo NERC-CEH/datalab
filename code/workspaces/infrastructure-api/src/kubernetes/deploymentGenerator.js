@@ -1,20 +1,23 @@
-import fs from 'fs';
-import yaml from 'js-yaml';
+import { imageConfig, image, defaultImage } from 'common/src/config/images';
 import { DeploymentTemplates, ServiceTemplates, generateManifest, ConfigMapTemplates } from './manifestGenerator';
 import nameGenerator from '../common/nameGenerators';
 import config from '../config/config';
 
-const containerInfo = yaml.safeLoad(fs.readFileSync(config.get('containerInfoPath')));
+const containerInfo = imageConfig();
 
-function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount }) {
+function getImage(type, version) {
+  return version ? image(type, version) : defaultImage(type);
+}
+
+function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount, version }) {
   const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     grantSudo: 'yes',
     domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
     jupyter: {
-      imageName: containerInfo.JUPYTER_IMAGE,
-      version: containerInfo.JUPYTER_VERSION,
+      image: img.image,
     },
     serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
     pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
@@ -27,17 +30,16 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
+function createZeppelinDeployment({ deploymentName, volumeMount, type, version }) {
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     grantSudo: true,
-    sparkMasterAddress: containerInfo.SPARK_MASTER_ADDRESS,
-    sharedRLibs: containerInfo.SHARED_R_LIBS,
+    sparkMasterAddress: containerInfo.SPARK.masterAddress,
+    sharedRLibs: containerInfo.SPARK.sharedRLibs,
     zeppelin: {
-      imageName: containerInfo.ZEPPELIN_IMAGE,
-      version: containerInfo.ZEPPELIN_VERSION,
-      connectImageName: containerInfo.ZEPPELIN_CONNECT_IMAGE,
-      connectVersion: containerInfo.ZEPPELIN_CONNECT_VERSION,
+      image: img.image,
+      connectImage: img.connectImage,
     },
     type,
     volumeMount,
@@ -46,14 +48,13 @@ function createZeppelinDeployment({ deploymentName, volumeMount, type }) {
   return generateManifest(context, DeploymentTemplates.ZEPPELIN_DEPLOYMENT);
 }
 
-function createRStudioDeployment({ deploymentName, volumeMount, type }) {
+function createRStudioDeployment({ deploymentName, volumeMount, type, version }) {
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     rstudio: {
-      imageName: containerInfo.RSTUDIO_IMAGE,
-      version: containerInfo.RSTUDIO_VERSION,
-      connectImageName: containerInfo.RSTUDIO_CONNECT_IMAGE,
-      connectVersion: containerInfo.RSTUDIO_CONNECT_VERSION,
+      image: img.image,
+      connectImage: img.connectImage,
     },
     type,
     volumeMount,
@@ -62,13 +63,13 @@ function createRStudioDeployment({ deploymentName, volumeMount, type }) {
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
 }
 
-function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount }) {
+function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount, version }) {
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     sourcePath,
     rshiny: {
-      imageName: containerInfo.RSHINY_IMAGE,
-      version: containerInfo.RSHINY_VERSION,
+      image: img.image,
     },
     type,
     volumeMount,
@@ -77,13 +78,13 @@ function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount 
   return generateManifest(context, DeploymentTemplates.RSHINY_DEPLOYMENT);
 }
 
-function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMount }) {
+function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMount, version }) {
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     sourcePath,
     nbviewer: {
-      imageName: containerInfo.NBVIEWER_IMAGE,
-      version: containerInfo.NBVIEWER_VERSION,
+      image: img.image,
     },
     type,
     volumeMount,
@@ -92,7 +93,8 @@ function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMoun
   return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);
 }
 
-function createMinioDeployment({ name, deploymentName, type }) {
+function createMinioDeployment({ name, deploymentName, type, version }) {
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     // This mapping of name to volume name is because the volume names
@@ -100,10 +102,8 @@ function createMinioDeployment({ name, deploymentName, type }) {
     volumeName: name,
     domain: config.get('datalabDomain'),
     minio: {
-      imageName: containerInfo.MINIO_IMAGE,
-      version: containerInfo.MINIO_VERSION,
-      connectImageName: containerInfo.MINIO_CONNECT_IMAGE,
-      connectVersion: containerInfo.MINIO_CONNECT_VERSION,
+      image: img.image,
+      connectImage: img.connectImage,
     },
     type,
   };
@@ -150,10 +150,10 @@ function createSparkDriverHeadlessService(notebookName) {
 }
 
 function createPySparkConfigMap(notebookName, projectKey) {
+  const img = getImage('SPARK');
   const context = {
     spark: {
-      imageName: containerInfo.SPARK_IMAGE,
-      version: containerInfo.SPARK_VERSION,
+      image: img.image,
     },
     configMapName: nameGenerator.pySparkConfigMap(notebookName),
     projectNamespace: nameGenerator.projectNamespace(projectKey),
@@ -165,10 +165,10 @@ function createPySparkConfigMap(notebookName, projectKey) {
 }
 
 function createDaskConfigMap(notebookName, projectKey) {
+  const img = getImage('DASK');
   const context = {
     dask: {
-      imageName: containerInfo.DASK_IMAGE,
-      version: containerInfo.DASK_VERSION,
+      image: img.image,
     },
     configMapName: nameGenerator.daskConfigMap(notebookName),
     projectNamespace: nameGenerator.projectNamespace(projectKey),
