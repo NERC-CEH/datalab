@@ -1,20 +1,18 @@
 [
   {
-    "name" : "example",
-    "status" : "requested",
-    "created" : "2018-02-13T12:45:47.306Z",
-    "displayName" : "Example Storage",
-    "description" : "An Example Data Store",
-    "projectKey" : "project",
-    "type" : 1,
-    "volumeSize" : "5",
-    "url" : "https://testlab-example.datalabs.localhost/minio",
-    "internalEndpoint" : "http://minio-example/minio",
-    "users" : [
+    "name": "example",
+    "status": "requested",
+    "created": "2018-02-13T12:45:47.306Z",
+    "displayName": "Example Storage",
+    "description": "An Example Data Store",
+    "projectKey": "project",
+    "type": 1,
+    "volumeSize": "5",
+    "url": "https://testlab-example.datalabs.localhost/minio",
+    "internalEndpoint": "http://minio-example/minio",
+    "users": [
       "auth0|5d2efacb1ca16e0efd770ddc",
       "auth0|5d28a912a537cc0de851ffb8",
-      "auth0|595f40a25caf4344b2e0e678",
-      "auth0|5950f70dbad6f109f9f9f560",
       "auth0|5bd9cd5082e23e4889c79d36",
       "auth0|5a0db1bf7a987451d45a920a"
     ]
