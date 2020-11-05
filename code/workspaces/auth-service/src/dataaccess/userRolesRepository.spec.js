@@ -25,6 +25,21 @@ const testUserRoles = () => [
       { projectKey: 'project 2', role: 'viewer' },
     ],
   },
+  {
+    // duplicate user
+    userId: 'uid2',
+    userName: 'user2',
+    projectRoles: [
+      { projectKey: 'project 2', role: 'viewer' },
+    ],
+  },
+  {
+    // user without identity
+    userId: 'uid?',
+    projectRoles: [
+      { projectKey: 'project 2', role: 'viewer' },
+    ],
+  },
 ];
 
 let mockDatabase;

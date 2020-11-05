@@ -31,7 +31,12 @@ async function getUser(userId) {
 
 async function getUsers() {
   const allRoles = await UserRoles().find().exec();
-  return allRoles.map(roles => convertToUser(roles));
+  const users = allRoles
+    .filter(roles => roles.userName) // only take users with known user names
+    .map(roles => convertToUser(roles));
+  const uniqueUserIDs = [...new Set(users.map(user => user.userId))];
+  const uniqueUsers = uniqueUserIDs.map(userId => users.filter(user => userId === user.userId)[0]);
+  return uniqueUsers;
 }
 
 function getProjectUsers(projectKey) {
