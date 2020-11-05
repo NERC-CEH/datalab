@@ -31,12 +31,14 @@ async function getUser(userId) {
 
 async function getUsers() {
   const allRoles = await UserRoles().find().exec();
-  const users = allRoles
+  const usersMap = allRoles
     .filter(roles => roles.userName) // only take users with known user names
-    .map(roles => convertToUser(roles));
-  const uniqueUserIDs = [...new Set(users.map(user => user.userId))];
-  const uniqueUsers = uniqueUserIDs.map(userId => users.filter(user => userId === user.userId)[0]);
-  return uniqueUsers;
+    .map(roles => convertToUser(roles)) // convert to users
+    .reduce((uniqueUsersMap, user) => { // convert to map, keyed by userId
+      uniqueUsersMap[user.userId] = user; // eslint-disable-line no-param-reassign
+      return uniqueUsersMap;
+    }, {});
+  return Object.values(usersMap); // return users
 }
 
 function getProjectUsers(projectKey) {
