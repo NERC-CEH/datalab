@@ -25,6 +25,21 @@ const testUserRoles = () => [
       { projectKey: 'project 2', role: 'viewer' },
     ],
   },
+  {
+    // duplicate user
+    userId: 'uid2',
+    userName: 'user2',
+    projectRoles: [
+      { projectKey: 'project 2', role: 'viewer' },
+    ],
+  },
+  {
+    // user without identity
+    userId: 'uid?',
+    projectRoles: [
+      { projectKey: 'project 2', role: 'viewer' },
+    ],
+  },
 ];
 
 let mockDatabase;
@@ -76,22 +91,14 @@ describe('userRolesRepository', () => {
       mockDatabase().clear();
     });
 
-    it('should create a new user if the user is not in roles collection', async () => {
+    it('should reject if the user is not in roles collection', async () => {
       mockDatabase = databaseMock([]);
       database.getModel = mockDatabase;
-      const addRole = await userRoleRepository.addRole('uid1', 'user1', 'project', 'admin');
-      expect(addRole).toEqual(true);
-
-      expect(mockDatabase().invocation().entity).toEqual({
-        userId: 'uid1',
-        userName: 'user1',
-        instanceAdmin: false,
-        projectRoles: [{ projectKey: 'project', role: 'admin' }],
-      });
+      await expect(userRoleRepository.addRole('uid1', 'project', 'admin')).rejects.toThrow('Unrecognized user uid1');
     });
 
     it('should add role to existing user if the user has no role on project', async () => {
-      const addRole = await userRoleRepository.addRole('uid1', 'user1', 'project', 'admin');
+      const addRole = await userRoleRepository.addRole('uid1', 'project', 'admin');
       expect(addRole).toEqual(true);
       expect(mockDatabase()
         .query())
@@ -114,7 +121,7 @@ describe('userRolesRepository', () => {
     });
 
     it('should update role on existing user if the user has role on project', async () => {
-      const addRole = await userRoleRepository.addRole('uid1', 'user1', 'project 2', 'admin');
+      const addRole = await userRoleRepository.addRole('uid1', 'project 2', 'admin');
       expect(addRole).toEqual(false);
       expect(mockDatabase().query()).toEqual({
         userId: 'uid1',

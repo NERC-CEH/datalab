@@ -30,6 +30,27 @@ Array [
     "userId": "uid2",
     "userName": "user2",
   },
+  Object {
+    "projectRoles": Array [
+      Object {
+        "projectKey": "project 2",
+        "role": "viewer",
+      },
+    ],
+    "toObject": [Function],
+    "userId": "uid2",
+    "userName": "user2",
+  },
+  Object {
+    "projectRoles": Array [
+      Object {
+        "projectKey": "project 2",
+        "role": "viewer",
+      },
+    ],
+    "toObject": [Function],
+    "userId": "uid?",
+  },
 ]
 `;
 

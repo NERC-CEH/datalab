@@ -18,16 +18,6 @@
     "projectRoles": []
   },
   {
-    "userId": "auth0|595f40a25caf4344b2e0e678",
-    "instanceAdmin": true,
-    "projectRoles": []
-  },
-  {
-    "userId": "auth0|5950f70dbad6f109f9f9f560",
-    "instanceAdmin": true,
-    "projectRoles": []
-  },
-  {
     "userId": "auth0|5bd9cd5082e23e4889c79d36",
     "userName": "iainw@ceh.ac.uk",
     "instanceAdmin": true,
