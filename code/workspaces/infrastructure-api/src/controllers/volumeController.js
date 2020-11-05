@@ -1,6 +1,6 @@
-import { stackTypes } from 'common';
 import { service } from 'service-chassis';
 import { check, body, matchedData } from 'express-validator';
+import { storageCreationAllowedTypes } from 'common/src/config/storage';
 import volumeManager from '../stacks/volumeManager';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import logger from '../config/logger';
@@ -48,11 +48,6 @@ async function queryVolume(request, response) {
   // Handle request
   const volume = await volumeManager.queryVolume(params);
   response.send(volume);
-}
-
-async function listVolumes(request, response) {
-  const volumes = await volumeManager.listVolumes();
-  response.send(volumes);
 }
 
 async function listProjectActiveVolumes(request, response) {
@@ -152,7 +147,7 @@ const updateVolumeUserValidator = service.middleware.validator([
   existsCheck('userIds.*'),
 ], logger);
 
-const allowedVolumeTypes = [stackTypes.GLUSTERFS_VOLUME, stackTypes.NFS_VOLUME];
+const allowedVolumeTypes = storageCreationAllowedTypes();
 const createVolumeValidator = service.middleware.validator([
   projectKeyCheck,
   nameCheck,
@@ -194,7 +189,6 @@ export default {
   createVolume,
   deleteVolume,
   queryVolume,
-  listVolumes,
   getById,
   listProjectActiveVolumes,
   addUsers,

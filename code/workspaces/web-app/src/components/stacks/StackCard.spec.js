@@ -60,7 +60,7 @@ describe('StackCard', () => {
 
   it('creates correct snapshot for glusterfs stack type', () => {
     // Arrange
-    const props = generateProps('glusterfs');
+    const props = { ...generateProps('GLUSTERFS'), typeName: 'Data Store' };
 
     // Act
     const output = shallowRender(props);

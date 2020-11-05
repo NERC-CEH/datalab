@@ -90,11 +90,11 @@ describe('Volume Controller', () => {
       expectValidationError('volumeSize', 'Volume Size must be an integer between 5 and 200');
     });
 
-    it('should validate the type is one of glusterfs,nfs', async () => {
+    it('should validate the type is one of GLUSTERFS,NFS', async () => {
       const requestBody = createRequestBody();
       requestBody.type = 1;
       await executeCreateValidator(requestBody);
-      expectValidationError('type', 'Type must be one of glusterfs,nfs');
+      expectValidationError('type', 'Type must be one of GLUSTERFS,NFS');
     });
   });
 
@@ -122,17 +122,6 @@ describe('Volume Controller', () => {
       requestBody.projectKey = '';
       await executeDeleteValidator(requestBody);
       expectValidationError('projectKey', 'projectKey must have content');
-    });
-  });
-
-  describe('list volumes', () => {
-    it('should return the volumes', async () => {
-      listVolumeMock.mockReturnValue(Promise.resolve(['volume']));
-      const response = httpMocks.createResponse();
-
-      await volumeController.listVolumes(request, response);
-      expect(response.statusCode).toBe(200);
-      expect(response._getData()).toEqual(['volume']); // eslint-disable-line no-underscore-dangle
     });
   });
 
@@ -353,7 +342,7 @@ function createRequestBody() {
     projectKey: 'project99',
     displayName: 'displayName',
     description: 'description',
-    type: 'glusterfs',
+    type: 'GLUSTERFS',
     volumeSize: '10',
   };
 }

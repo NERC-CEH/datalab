@@ -24,7 +24,6 @@ afterAll(() => {
 
 const manifest = createManifest();
 const pvc = createPVC();
-const pvcs = createPVCs();
 
 describe('Kubernetes Persistent Volume API', () => {
   describe('get pvc', () => {
@@ -163,31 +162,6 @@ describe('Kubernetes Persistent Volume API', () => {
         });
     });
   });
-
-  describe('list pvcs', () => {
-    it('should return an array of pvcs', () => {
-      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'user-created' } }).reply(200, pvcs);
-
-      return volumeApi.listPersistentVolumeClaims(NAMESPACE)
-        .then((response) => {
-          expect(response.length).toBe(2);
-          expect(response[0]).toEqual({
-            name: PVC_NAME,
-            storageType: PVC_TYPE,
-            capacityTotal: PVC_CAPACITY,
-          });
-        });
-    });
-
-    it('should return an empty array if the pvc does not exist', () => {
-      mock.onGet(`${PVC_URL}`, { params: { labelSelector: 'user-created' } }).reply(404);
-
-      return volumeApi.listPersistentVolumeClaims(NAMESPACE)
-        .then((response) => {
-          expect(response).toEqual([]);
-        });
-    });
-  });
 });
 
 function createPVC() {
@@ -207,15 +181,6 @@ function createPVC() {
         },
       },
     },
-  };
-}
-
-function createPVCs() {
-  return {
-    items: [
-      createPVC(),
-      createPVC(),
-    ],
   };
 }
 

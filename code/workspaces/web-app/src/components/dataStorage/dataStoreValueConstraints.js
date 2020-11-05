@@ -1,14 +1,9 @@
-import { stackTypes } from 'common';
-
-const { getStackKeys } = stackTypes;
-
 const constraints = {
   displayName: {
     presence: true,
   },
   type: {
     presence: true,
-    inclusion: getStackKeys(),
   },
   volumeSize: {
     presence: true,

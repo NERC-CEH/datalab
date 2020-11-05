@@ -4,7 +4,7 @@ describe('volumeGenerator', () => {
   describe('createVolume', () => {
     it('creates GlusterFS manifest', async () => {
       // Act
-      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, 'glusterfs');
+      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, 'GLUSTERFS');
 
       // Assert
       expect(glusterFSManifest).toMatch('name: volume-name');
@@ -14,7 +14,7 @@ describe('volumeGenerator', () => {
 
     it('creates NFS manifest', async () => {
       // Act
-      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, 'nfs');
+      const glusterFSManifest = await volumeGenerator.createVolume('volume-name', 5, 'NFS');
 
       // Assert
       expect(glusterFSManifest).toMatch('name: volume-name');

@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 x-common-variables: &common
   AUTHORISATION_SERVICE: http://datalab-auth:9000
@@ -9,7 +9,7 @@ x-common-variables: &common
   LOG_LEVEL: ${LOG_LEVEL:-info}
   VAULT_API: http://vault:8200
   VAULT_APP_ROLE: ${VAULT_APP_ROLE}
-  NODE_OPTIONS: '--max-http-header-size=81920'
+  NODE_OPTIONS: "--max-http-header-size=81920"
 
 services:
   datalab-auth:
@@ -43,6 +43,7 @@ services:
     volumes:
       - $PWD/..:/usr/src/app/:ro
       - $PWD/config/local/image_config.json:/usr/src/app/workspaces/common/src/config/image_config.json:ro
+      - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
     links:
       - datalab-auth
       - mongodb
@@ -59,6 +60,7 @@ services:
       - 8000:8000
     volumes:
       - $PWD/..:/usr/src/app:ro
+      - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
     links:
       - datalab-auth
       - datalab-infra
@@ -77,4 +79,4 @@ services:
       - $PWD/..:/usr/src/app:ro
       # web_auth_config is unique to each domain and needs updating
       - $PWD/config/local/web_auth_config.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
-
+      - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/web-app/public/storage_config.json:ro
