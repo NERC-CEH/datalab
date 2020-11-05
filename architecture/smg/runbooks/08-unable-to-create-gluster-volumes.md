@@ -14,8 +14,10 @@ Events:
   Warning  FailedMount  2m57s (x7933 over 19d)   kubelet, datalabs-k8s-node-3  Unable to attach or mount volumes: unmounted volumes=[db], unattached volumes=[db config heketi-service-account-token-ls4fl]: timed out waiting for the condition
 ```
 
-A restart of the heketi pod can be done to fix this as below:
+A restart of the heketi pod can be done to fix this as below where
+`<namespace>` is substituted for the heketi pod namespace and 
+`<heketi-pod-name>` is substituted with the name of the running heketi pod:
 
 ```bash
-kubectl delete po $HEKETI_POD
+kubectl delete po -n <namespace> <heketi-pod-name>
 ```
