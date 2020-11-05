@@ -5,13 +5,13 @@ import config from '../config/config';
 
 const containerInfo = imageConfig();
 
-function returnImage(type, version) {
+function getImage(type, version) {
   return version ? image(type, version) : defaultImage(type);
 }
 
 function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount, version }) {
   const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
-  const img = returnImage(type, version);
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     grantSudo: 'yes',
@@ -31,7 +31,7 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
 }
 
 function createZeppelinDeployment({ deploymentName, volumeMount, type, version }) {
-  const img = returnImage(type, version);
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     grantSudo: true,
@@ -49,7 +49,7 @@ function createZeppelinDeployment({ deploymentName, volumeMount, type, version }
 }
 
 function createRStudioDeployment({ deploymentName, volumeMount, type, version }) {
-  const img = returnImage(type, version);
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     rstudio: {
@@ -64,7 +64,7 @@ function createRStudioDeployment({ deploymentName, volumeMount, type, version })
 }
 
 function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount, version }) {
-  const img = returnImage(type, version);
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     sourcePath,
@@ -79,7 +79,7 @@ function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount,
 }
 
 function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMount, version }) {
-  const img = returnImage(type, version);
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     sourcePath,
@@ -94,7 +94,7 @@ function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMoun
 }
 
 function createMinioDeployment({ name, deploymentName, type, version }) {
-  const img = returnImage(type, version);
+  const img = getImage(type, version);
   const context = {
     name: deploymentName,
     // This mapping of name to volume name is because the volume names
@@ -150,7 +150,7 @@ function createSparkDriverHeadlessService(notebookName) {
 }
 
 function createPySparkConfigMap(notebookName, projectKey) {
-  const img = returnImage('spark');
+  const img = getImage('SPARK');
   const context = {
     spark: {
       image: img.image,
@@ -165,7 +165,7 @@ function createPySparkConfigMap(notebookName, projectKey) {
 }
 
 function createDaskConfigMap(notebookName, projectKey) {
-  const img = returnImage('dask');
+  const img = getImage('DASK');
   const context = {
     dask: {
       image: img.image,
