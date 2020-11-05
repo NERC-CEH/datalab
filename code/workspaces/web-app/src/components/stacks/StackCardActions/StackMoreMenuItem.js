@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PermissionWrapper from '../../common/ComponentPermissionWrapper';
 
 const StackMoreMenuItem = ({
-  shouldRender = true, onClick, disabled, userPermissions, requiredPermission,
+  shouldRender = false, onClick, disabled, userPermissions, requiredPermission,
   tooltipText = '', disableTooltip, children,
 }) => (
   !shouldRender

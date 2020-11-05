@@ -158,4 +158,13 @@ describe('PureStackCardActions', () => {
     props.currentUserId = 'not-the-owner-id';
     expect(shallowRender(props)).toMatchSnapshot();
   });
+
+  it('Should not render edit/delete buttons if functions not defined', () => {
+    const props = {
+      ...generateProps(),
+      editStack: undefined,
+      deleteStack: undefined,
+    };
+    expect(shallowRender(props)).toMatchSnapshot();
+  });
 });
