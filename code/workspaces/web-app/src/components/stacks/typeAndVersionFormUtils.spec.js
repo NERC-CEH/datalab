@@ -14,14 +14,14 @@ change.mockImplementation((formName, fieldName, fieldValue) => ({
 
 describe('getTypeOptions', () => {
   it('returns array of values from image options that contain text and value fields suitable for form drop-downs', () => {
-    const result = getTypeOptions(data.images);
+    const result = getTypeOptions(data.types);
     expect(result).toMatchSnapshot();
   });
 });
 
 describe('getVersionOptions', () => {
   it('returns array of values from image options that text and value fields suitable for form drop-downs with default having additionalText and default field', () => {
-    const result = getVersionOptions(data.images, 'RSTUDIO');
+    const result = getVersionOptions(data.types, 'rstudio');
     expect(result).toMatchSnapshot();
   });
 });

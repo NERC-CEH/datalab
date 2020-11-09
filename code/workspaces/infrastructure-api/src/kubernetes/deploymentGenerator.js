@@ -2,11 +2,17 @@ import { imageConfig, image, defaultImage } from 'common/src/config/images';
 import { DeploymentTemplates, ServiceTemplates, generateManifest, ConfigMapTemplates } from './manifestGenerator';
 import nameGenerator from '../common/nameGenerators';
 import config from '../config/config';
+import logger from '../config/logger';
 
 const containerInfo = imageConfig();
 
 function getImage(type, version) {
-  return version ? image(type, version) : defaultImage(type);
+  try {
+    return version ? image(type, version) : defaultImage(type);
+  } catch (error) {
+    logger.error(`Failed to get image with error message: ${error.message}`);
+    throw error;
+  }
 }
 
 function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount, version }) {
@@ -149,13 +155,13 @@ function createSparkDriverHeadlessService(notebookName) {
   return generateManifest(context, ServiceTemplates.SPARK_DRIVER_HEADLESS_SERVICE);
 }
 
-function createPySparkConfigMap(notebookName, projectKey) {
-  const img = getImage('SPARK');
+function createPySparkConfigMap(notebookName, projectKey, configMapName) {
+  const img = getImage('spark');
   const context = {
     spark: {
       image: img.image,
     },
-    configMapName: nameGenerator.pySparkConfigMap(notebookName),
+    configMapName,
     projectNamespace: nameGenerator.projectNamespace(projectKey),
     projectComputeNamespace: nameGenerator.projectComputeNamespace(projectKey),
     sparkDriverHeadlessServiceName: nameGenerator.sparkDriverHeadlessService(notebookName),
@@ -164,13 +170,13 @@ function createPySparkConfigMap(notebookName, projectKey) {
   return generateManifest(context, ConfigMapTemplates.PYSPARK_CONFIGMAP);
 }
 
-function createDaskConfigMap(notebookName, projectKey) {
-  const img = getImage('DASK');
+function createDaskConfigMap(notebookName, projectKey, configMapName) {
+  const img = getImage('dask');
   const context = {
     dask: {
       image: img.image,
     },
-    configMapName: nameGenerator.daskConfigMap(notebookName),
+    configMapName,
     projectNamespace: nameGenerator.projectNamespace(projectKey),
     projectComputeNamespace: nameGenerator.projectComputeNamespace(projectKey),
   };

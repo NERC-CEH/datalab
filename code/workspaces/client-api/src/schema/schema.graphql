@@ -169,7 +169,6 @@ input StackCreationRequest {
     volumeMount: String
     shared: VisibilityType
     visible: VisibilityType
-    version: String
 }
 
 # Type to describe the mutation for updating a new Stack.

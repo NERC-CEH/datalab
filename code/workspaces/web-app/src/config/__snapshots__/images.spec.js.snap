@@ -2,9 +2,9 @@
 
 exports[`getNotebookInfo returns the correct notebookInfo 1`] = `
 Object {
-  "JUPYTER": Object {
+  "jupyter": Object {
+    "category": "NOTEBOOK",
     "displayName": "Jupyter",
-    "type": "notebook",
     "versions": Array [
       Object {
         "displayName": "Dask 2.30.0 support",
@@ -12,9 +12,9 @@ Object {
       },
     ],
   },
-  "JUPYTER_LAB": Object {
+  "jupyterlab": Object {
+    "category": "NOTEBOOK",
     "displayName": "JupyterLab",
-    "type": "notebook",
     "versions": Array [
       Object {
         "displayName": "Dask 2.30.0 support",
@@ -22,30 +22,30 @@ Object {
       },
     ],
   },
-  "RSTUDIO": Object {
+  "rstudio": Object {
+    "category": "NOTEBOOK",
     "displayName": "RStudio",
-    "type": "notebook",
     "userSelectableVersion": true,
     "versions": Array [
       Object {
-        "connectVersion": "nerc/zeppelin-connect:1.1.1",
+        "connectImage": "nerc/zeppelin-connect:1.1.1",
         "default": true,
         "displayName": "4.0.1",
         "image": "nerc/rstudio:4.0.1",
       },
       Object {
-        "connectVersion": "nerc/zeppelin-connect:1.1.1",
+        "connectImage": "nerc/zeppelin-connect:1.1.1",
         "displayName": "3.5.3",
         "image": "nerc/rstudio:3.5.3",
       },
     ],
   },
-  "ZEPPLIN": Object {
+  "zeppelin": Object {
+    "category": "NOTEBOOK",
     "displayName": "Zepplin",
-    "type": "notebook",
     "versions": Array [
       Object {
-        "connectVersion": "nerc/zeppelin-connect:1.1.1",
+        "connectImage": "nerc/zeppelin-connect:1.1.1",
         "displayName": "0.7.2.7",
         "image": "nerc/zeppelin:0.7.2.7",
       },
@@ -56,9 +56,9 @@ Object {
 
 exports[`getSiteInfo returns the correct siteInfo 1`] = `
 Object {
-  "NBVIEWER": Object {
+  "nbviewer": Object {
+    "category": "SITE",
     "displayName": "NBViewer",
-    "type": "site",
     "versions": Array [
       Object {
         "displayName": "Latest",
@@ -66,9 +66,12 @@ Object {
       },
     ],
   },
-  "RSHINY": Object {
+  "rshiny": Object {
+    "category": "SITE",
     "displayName": "RShiny",
-    "type": "site",
+    "userActionOverrides": Object {
+      "logs": true,
+    },
     "userSelectableVersion": true,
     "versions": Array [
       Object {
@@ -85,13 +88,64 @@ Object {
 }
 `;
 
+exports[`getUserActionsForType returns all as true if cannot find type 1`] = `
+Object {
+  "delete": true,
+  "edit": true,
+  "logs": true,
+  "restart": true,
+  "share": true,
+}
+`;
+
+exports[`getUserActionsForType returns to match snapshot for site type with logs userActionOverrides 1`] = `
+Object {
+  "delete": true,
+  "edit": true,
+  "logs": true,
+  "restart": true,
+  "share": true,
+}
+`;
+
+exports[`getUserActionsForType returns to match snapshot for site type with no logs userActionOverrides 1`] = `
+Object {
+  "delete": true,
+  "edit": true,
+  "logs": false,
+  "restart": true,
+  "share": true,
+}
+`;
+
 exports[`imageConfig returns the correct configuration 1`] = `
 Object {
+  "categories": Object {
+    "INFRASTRUCTURE": Object {},
+    "NOTEBOOK": Object {
+      "userActions": Object {
+        "delete": true,
+        "edit": true,
+        "logs": false,
+        "restart": true,
+        "share": true,
+      },
+    },
+    "SITE": Object {
+      "userActions": Object {
+        "delete": true,
+        "edit": true,
+        "logs": false,
+        "restart": true,
+        "share": true,
+      },
+    },
+  },
   "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
-  "images": Object {
-    "JUPYTER": Object {
+  "types": Object {
+    "jupyter": Object {
+      "category": "NOTEBOOK",
       "displayName": "Jupyter",
-      "type": "notebook",
       "versions": Array [
         Object {
           "displayName": "Dask 2.30.0 support",
@@ -99,9 +153,9 @@ Object {
         },
       ],
     },
-    "JUPYTER_LAB": Object {
+    "jupyterlab": Object {
+      "category": "NOTEBOOK",
       "displayName": "JupyterLab",
-      "type": "notebook",
       "versions": Array [
         Object {
           "displayName": "Dask 2.30.0 support",
@@ -109,18 +163,18 @@ Object {
         },
       ],
     },
-    "MINIO": Object {
-      "type": "infrastructure",
+    "minio": Object {
+      "category": "INFRASTRUCTURE",
       "versions": Array [
         Object {
-          "connectVersion": "nerc/connect:1.0.0",
+          "connectImage": "nerc/connect:1.0.0",
           "image": "nerc/minio:1.0",
         },
       ],
     },
-    "NBVIEWER": Object {
+    "nbviewer": Object {
+      "category": "SITE",
       "displayName": "NBViewer",
-      "type": "site",
       "versions": Array [
         Object {
           "displayName": "Latest",
@@ -128,9 +182,12 @@ Object {
         },
       ],
     },
-    "RSHINY": Object {
+    "rshiny": Object {
+      "category": "SITE",
       "displayName": "RShiny",
-      "type": "site",
+      "userActionOverrides": Object {
+        "logs": true,
+      },
       "userSelectableVersion": true,
       "versions": Array [
         Object {
@@ -144,40 +201,40 @@ Object {
         },
       ],
     },
-    "RSTUDIO": Object {
+    "rstudio": Object {
+      "category": "NOTEBOOK",
       "displayName": "RStudio",
-      "type": "notebook",
       "userSelectableVersion": true,
       "versions": Array [
         Object {
-          "connectVersion": "nerc/zeppelin-connect:1.1.1",
+          "connectImage": "nerc/zeppelin-connect:1.1.1",
           "default": true,
           "displayName": "4.0.1",
           "image": "nerc/rstudio:4.0.1",
         },
         Object {
-          "connectVersion": "nerc/zeppelin-connect:1.1.1",
+          "connectImage": "nerc/zeppelin-connect:1.1.1",
           "displayName": "3.5.3",
           "image": "nerc/rstudio:3.5.3",
         },
       ],
     },
-    "SPARK": Object {
+    "spark": Object {
+      "category": "INFRASTRUCTURE",
       "masterAddress": "spark://spark-master:7077",
       "sharedRLibs": "/data/packages/R/%p/%v",
-      "type": "infrastructure",
       "versions": Array [
         Object {
           "image": "nerc/spark-k8s:0.1.0",
         },
       ],
     },
-    "ZEPPLIN": Object {
+    "zeppelin": Object {
+      "category": "NOTEBOOK",
       "displayName": "Zepplin",
-      "type": "notebook",
       "versions": Array [
         Object {
-          "connectVersion": "nerc/zeppelin-connect:1.1.1",
+          "connectImage": "nerc/zeppelin-connect:1.1.1",
           "displayName": "0.7.2.7",
           "image": "nerc/zeppelin:0.7.2.7",
         },

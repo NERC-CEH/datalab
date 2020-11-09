@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getImageInfoForType returns the information for specified type when it exists and the type is provided in lowercase 1`] = `
+Object {
+  "category": "NOTEBOOK",
+  "displayName": "RStudio",
+  "userSelectableVersion": true,
+  "versions": Array [
+    Object {
+      "connectImage": "nerc/zeppelin-connect:1.1.1",
+      "default": true,
+      "displayName": "4.0.1",
+      "image": "nerc/rstudio:4.0.1",
+    },
+    Object {
+      "connectImage": "nerc/zeppelin-connect:1.1.1",
+      "displayName": "3.5.3",
+      "image": "nerc/rstudio:3.5.3",
+    },
+  ],
+}
+`;
+
+exports[`getImageInfoForType returns the information for specified type when it exists and the type is provided in uppercase 1`] = `
+Object {
+  "category": "NOTEBOOK",
+  "displayName": "RStudio",
+  "userSelectableVersion": true,
+  "versions": Array [
+    Object {
+      "connectImage": "nerc/zeppelin-connect:1.1.1",
+      "default": true,
+      "displayName": "4.0.1",
+      "image": "nerc/rstudio:4.0.1",
+    },
+    Object {
+      "connectImage": "nerc/zeppelin-connect:1.1.1",
+      "displayName": "3.5.3",
+      "image": "nerc/rstudio:3.5.3",
+    },
+  ],
+}
+`;

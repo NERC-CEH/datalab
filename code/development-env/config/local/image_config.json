@@ -1,8 +1,76 @@
 {
-  "images": {
-    "RSHINY": {
-      "displayName": "Shiny",
-      "type": "site",
+  "categories": {
+    "NOTEBOOK": {
+      "userActions": {
+        "share": true,
+        "edit": true,
+        "restart": true,
+        "delete": true,
+        "logs": false
+      }
+    },
+    "SITE": {
+      "userActions": {
+        "share": true,
+        "edit": true,
+        "restart": true,
+        "delete": true,
+        "logs": false
+      }
+    },
+    "INFRASTRUCTURE": {}
+  },
+  "types": {
+    "dask": {
+      "type": "INFRASTRUCTURE",
+      "versions": [
+        {
+          "image": "daskdev/dask:2.30.0"
+        }
+      ]
+    },
+    "jupyter": {
+      "displayName": "Jupyter",
+      "category": "NOTEBOOK",
+      "versions": [
+        {
+          "displayName": "Dask 2.30.0 support",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+        }
+      ]
+    },
+    "jupyterlab": {
+      "displayName": "JupyterLab",
+      "category": "NOTEBOOK",
+      "versions": [
+        {
+          "displayName": "Dask 2.30.0 support",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+        }
+      ]
+    },
+    "minio": {
+      "category": "INFRASTRUCTURE",
+      "versions": [
+        {
+          "image": "nerc/minio:1.0",
+          "connectImage": "nerc/connect:1.0.0"
+        }
+      ]
+    },
+    "nbviewer": {
+      "displayName": "NBViewer",
+      "category": "SITE",
+      "versions": [
+        {
+          "displayName": "Latest",
+          "image": "jupyter/nbviewer:latest"
+        }
+      ]
+    },
+    "rshiny": {
+      "displayName": "RShiny",
+      "category": "SITE",
       "userSelectableVersion": true,
       "versions": [
         {
@@ -14,11 +82,14 @@
           "displayName": "3.5.3",
           "image": "nerc/rshiny:3.5.3"
         }
-      ]
+      ],
+      "userActionOverrides": {
+        "logs": true
+      }
     },
-    "RSTUDIO": {
+    "rstudio": {
       "displayName": "RStudio",
-      "type": "notebook",
+      "category": "NOTEBOOK",
       "userSelectableVersion": true,
       "versions": [
         {
@@ -34,71 +105,24 @@
         }
       ]
     },
-    "JUPYTERLAB": {
-      "displayName": "JupyterLab",
-      "type": "notebook",
+    "spark": {
+      "category": "INFRASTRUCTURE",
       "versions": [
         {
-          "displayName": "f200ab964cea-dask-2.30.0",
-          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+          "image": "nerc/spark-k8s:0.1.0"
         }
-      ]
+      ],
+      "masterAddress": "spark://spark-master:7077",
+      "sharedRLibs": "/data/packages/R/%p/%v"
     },
-    "JUPYTER": {
-      "displayName": "Jupyter",
-      "type": "notebook",
-      "versions": [
-        {
-          "displayName": "f200ab964cea-dask-2.30.0",
-          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
-        }
-      ]
-    },
-    "ZEPPELIN": {
-      "displayName": "Zeppelin",
-      "type": "notebook",
+    "zeppelin": {
+      "displayName": "Zepplin",
+      "category": "NOTEBOOK",
       "versions": [
         {
           "displayName": "0.7.2.7",
           "image": "nerc/zeppelin:0.7.2.7",
           "connectImage": "nerc/zeppelin-connect:1.1.1"
-        }
-      ]
-    },
-    "NBVIEWER": {
-      "displayName": "NBViewer",
-      "type": "site",
-      "versions": [
-        {
-          "displayName": "latest",
-          "image": "jupyter/nbviewer:latest"
-        }
-      ]
-    },
-    "SPARK": {
-      "type": "infrastructure",
-      "masterAddress": "spark://spark-master:7077",
-      "sharedRLibs": "/data/packages/R/%p/%v",
-      "versions": [
-        {
-          "image": "nerc/spark-k8s:0.1.0"
-        }
-      ]
-    },
-    "DASK": {
-      "type": "infrastructure",
-      "versions": [
-        {
-          "image": "daskdev/dask:2.30.0"
-        }
-      ]
-    },
-    "MINIO": {
-      "versions": [
-        {
-          "displayName": "1.0",
-          "image": "nerc/minio:1.0",
-          "connectImage": "nerc/connect:1.0.0"
         }
       ]
     }

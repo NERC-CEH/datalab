@@ -3,36 +3,40 @@
 exports[`getTypeOptions returns array of values from image options that contain text and value fields suitable for form drop-downs 1`] = `
 Array [
   Object {
+    "text": undefined,
+    "value": "dask",
+  },
+  Object {
     "text": "Jupyter",
-    "value": "JUPYTER",
+    "value": "jupyter",
   },
   Object {
     "text": "JupyterLab",
-    "value": "JUPYTER_LAB",
+    "value": "jupyterlab",
   },
   Object {
     "text": undefined,
-    "value": "MINIO",
+    "value": "minio",
   },
   Object {
     "text": "NBViewer",
-    "value": "NBVIEWER",
+    "value": "nbviewer",
   },
   Object {
     "text": "RShiny",
-    "value": "RSHINY",
+    "value": "rshiny",
   },
   Object {
     "text": "RStudio",
-    "value": "RSTUDIO",
+    "value": "rstudio",
   },
   Object {
     "text": undefined,
-    "value": "SPARK",
+    "value": "spark",
   },
   Object {
     "text": "Zepplin",
-    "value": "ZEPPLIN",
+    "value": "zeppelin",
   },
 ]
 `;
