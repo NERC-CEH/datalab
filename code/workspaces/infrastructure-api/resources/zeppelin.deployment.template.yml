@@ -42,7 +42,7 @@ spec:
               name: persistentfsvol
       containers:
         - name: {{ name }}-connect
-          image: {{ &zeppelin.connectImageName }}:{{ zeppelin.connectVersion }}
+          image: {{ &zeppelin.connectImage }}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -57,7 +57,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
         - name:  {{ name }}
-          image: {{ &zeppelin.imageName }}:{{ zeppelin.version }}
+          image: {{ &zeppelin.image }}
           imagePullPolicy : IfNotPresent
           ports:
             - containerPort: 8080

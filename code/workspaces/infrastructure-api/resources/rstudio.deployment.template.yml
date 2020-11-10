@@ -47,7 +47,7 @@ spec:
               name: homedir
       containers:
         - name: {{ name }}-connect
-          image: {{ &rstudio.connectImageName }}:{{ rstudio.connectVersion }}
+          image: {{ &rstudio.connectImage }}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -62,7 +62,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
         - name: {{ name }}
-          image: {{ &rstudio.imageName }}:{{ rstudio.version }}
+          image: {{ &rstudio.image }}
           imagePullPolicy : IfNotPresent
           ports:
             - containerPort: 8787

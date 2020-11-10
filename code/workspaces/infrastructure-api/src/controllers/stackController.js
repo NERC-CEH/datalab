@@ -1,5 +1,6 @@
 import { body, check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
+import { versionList } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
@@ -205,6 +206,10 @@ const createStackValidator = [
       }
       return true;
     }),
+  check('version', 'valid version must be specified')
+    .optional()
+    .custom((value, { req }) => versionList(req.body.type).includes(value))
+    .withMessage((value, { req }) => `Must be one of ${versionList(req.body.type)}.`),
   checkExistsWithMsg('description'),
   checkExistsWithMsg('displayName'),
   checkExistsWithMsg('volumeMount'),

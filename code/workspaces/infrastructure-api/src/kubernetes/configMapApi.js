@@ -1,6 +1,7 @@
 import { loadYaml } from '@kubernetes/client-node';
 import { getCoreV1Api } from './kubeConfig';
 import logger from '../config/logger';
+import K8sApiError from './k8sApiError';
 
 async function namespacedConfigMapExists(name, namespace) {
   const k8sApi = getCoreV1Api();
@@ -8,8 +9,10 @@ async function namespacedConfigMapExists(name, namespace) {
   try {
     await k8sApi.readNamespacedConfigMap(name, namespace);
     return true;
-  } catch (error) {
-    return false;
+  } catch (e) {
+    const error = new K8sApiError(e, `Error reading namespaced config map with name: ${name} and namespace: ${namespace}`);
+    if (error.getStatusCode() === 404) return false;
+    throw error;
   }
 }
 
@@ -27,9 +30,11 @@ async function createNamespacedConfigMap(name, namespace, manifest) {
     logger.info(`Creating configMap with name ${name} in namespace ${namespace} with manifest:`);
     logger.debug(manifest);
     const configMap = loadYaml(manifest);
-    return k8sApi.createNamespacedConfigMap(namespace, configMap);
-  } catch (error) {
-    logger.error(`Error creating configMap with name ${name} in namespace ${namespace}`, error.response.body);
+    return await k8sApi.createNamespacedConfigMap(namespace, configMap);
+  } catch (e) {
+    const error = new K8sApiError(e, `Error creating namespaced configmap with name: ${name} in namespace: ${namespace}`);
+    logger.error(error.message);
+    logger.error(error.getErrorString());
     throw error;
   }
 }

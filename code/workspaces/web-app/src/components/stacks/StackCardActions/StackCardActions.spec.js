@@ -9,6 +9,7 @@ const openStackMock = jest.fn();
 const deleteStackMock = jest.fn();
 const editStackMock = jest.fn();
 const shareStackMock = jest.fn();
+const restartStackMock = jest.fn();
 
 const generateProps = () => ({
   stack: {
@@ -24,6 +25,7 @@ const generateProps = () => ({
   deleteStack: deleteStackMock,
   editStack: editStackMock,
   shareStack: shareStackMock,
+  restartStack: restartStackMock,
   userPermissions: ['open', 'delete', 'edit'],
   openPermission: 'open',
   deletePermission: 'delete',
@@ -31,6 +33,13 @@ const generateProps = () => ({
   classes: {
     cardActions: 'cardActions',
     buttonWrapper: 'buttonWrapper',
+  },
+  userActions: {
+    share: true,
+    edit: true,
+    restart: true,
+    delete: true,
+    logs: true,
   },
 });
 
@@ -165,6 +174,13 @@ describe('PureStackCardActions', () => {
       editStack: undefined,
       deleteStack: undefined,
     };
+    expect(shallowRender(props)).toMatchSnapshot();
+  });
+
+  it('should not render button if userAction for that button is false', () => {
+    const props = generateProps();
+    // edit action is false so now the shouldRender prop of the edit button should be false
+    props.userActions.edit = false;
     expect(shallowRender(props)).toMatchSnapshot();
   });
 });

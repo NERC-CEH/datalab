@@ -1,8 +1,6 @@
 import validate from 'validate.js';
-import { stackTypes } from 'common';
 import internalNameCheckerActions from '../../actions/internalNameCheckerActions';
-
-const { getStackKeys } = stackTypes;
+import { getNotebookInfo } from '../../config/images';
 
 const constraints = {
   displayName: {
@@ -10,7 +8,6 @@ const constraints = {
   },
   type: {
     presence: true,
-    inclusion: getStackKeys(),
   },
   name: {
     presence: true,
@@ -47,12 +44,35 @@ function errorReducer(accumulator, error) {
 
 export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
 
+// disable no throw literal for async validation options as need to throw objects for
+// redux form validation
+/* eslint-disable no-throw-literal */
+
+const asyncValidateName = async (values, dispatch, projectKey) => {
+  let response;
+  try {
+    response = await dispatch(internalNameCheckerActions.checkNameUniqueness(projectKey, values.name));
+  } catch (error) {
+    throw { name: 'Unable to check if Notebook URL Name is unique.' };
+  }
+  if (!response.value) {
+    throw { name: 'Another resource is already using this name and names must be unique.' };
+  }
+};
+
+const asyncValidateType = async (values) => {
+  const validTypes = Object.keys(await getNotebookInfo());
+  if (!validTypes.includes(values.type)) {
+    throw { type: `Type must be one of ${validTypes}` };
+  }
+};
+
+/* eslint-enable no-throw-literal */
+
 // Catch statement added to prevent submission of creation request without passing uniqueness check.
-export const asyncValidate = (values, dispatch, { projectKey }) => dispatch(internalNameCheckerActions.checkNameUniqueness(projectKey, values.name))
-  .catch(() => Promise.reject({ name: 'Unable to check if Data Store Name is unique.' }))
-  .then((response) => {
-    if (!response.value) {
-      return Promise.reject({ name: 'Another resource is already using this name and names must be unique.' });
-    }
-    return Promise.resolve();
-  });
+export const getAsyncValidate = (nameFieldName, typeFieldName) => async (values, dispatch, { projectKey }, blurredField) => {
+  let result;
+  if (blurredField === nameFieldName) result = asyncValidateName(values, dispatch, projectKey);
+  if (blurredField === typeFieldName) result = asyncValidateType(values);
+  return result;
+};

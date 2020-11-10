@@ -1,16 +1,19 @@
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { stackTypes } from 'common';
 import { siteVisibilityOptions } from '../common/selectShareOptions';
-import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
-import { syncValidate, asyncValidate } from './newSiteFormValidator';
+import { CreateFormControls, renderAdornedTextField, renderSelectField, renderTextArea, renderTextField } from '../common/form/controls';
+import { getAsyncValidate, syncValidate } from './newSiteFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
 
-const { PUBLISH, getStackSelections } = stackTypes;
+export const FORM_NAME = 'createSite';
+const NAME_FIELD_NAME = 'name';
+export const TYPE_FIELD_NAME = 'type';
+export const VERSION_FIELD_NAME = 'version';
 
-const CreateSiteForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+const CreateSiteForm = ({
+  handleSubmit, cancel, submitting, dataStorageOptions, projectKey, typeOptions, versionOptions,
+}) => {
   const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
 
   return (
@@ -24,15 +27,25 @@ const CreateSiteForm = (props) => {
       </div>
       <div>
         <Field
-          name="type"
-          label="Site Type"
+          name={TYPE_FIELD_NAME}
+          label="Type"
           component={renderSelectField}
-          options={getStackSelections(PUBLISH)}
+          options={typeOptions}
           placeholder="Site Type" />
       </div>
+      {versionOptions && versionOptions.length > 0
+        && <div>
+          <Field
+            name={VERSION_FIELD_NAME}
+            label="Version"
+            component={renderSelectField}
+            options={versionOptions}
+          />
+        </div>
+      }
       <div>
         <Field
-          name="name"
+          name={NAME_FIELD_NAME}
           label="URL Name"
           component={renderAdornedTextField}
           placeholder="Site Name for URLs"
@@ -73,21 +86,25 @@ const CreateSiteForm = (props) => {
   );
 };
 
+const dropDownOptionsType = PropTypes.arrayOf(PropTypes.shape({
+  text: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+}));
+
 CreateSiteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
-  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })).isRequired,
+  dataStorageOptions: dropDownOptionsType.isRequired,
   projectKey: PropTypes.string.isRequired,
+  typeOptions: dropDownOptionsType.isRequired,
+  versionOptions: dropDownOptionsType.isRequired,
 };
 
 const CreateSiteReduxForm = reduxForm({
-  form: 'createSite',
+  form: FORM_NAME,
   validate: syncValidate,
-  asyncValidate,
-  asyncBlurFields: ['name'],
+  asyncValidate: getAsyncValidate(NAME_FIELD_NAME, TYPE_FIELD_NAME),
+  asyncBlurFields: [NAME_FIELD_NAME, TYPE_FIELD_NAME],
   destroyOnUnmount: false,
 })(CreateSiteForm);
 
