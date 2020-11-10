@@ -50,7 +50,7 @@ to be granted access.
 Project development and management makes use of the following tools.
 
 * **[Jira](https://jira.ceh.ac.uk/secure/RapidBoard.jspa?projectKey=NERCDL&rapidView=236&view=planning.nodetail)** - Development follows a scrum methodology and all stories are tracked in Jira.
-* **[Travis CI](https://travis-ci.org/NERC-CEH/datalab)** - Travis is used as our continuous integration server and is free for open source use. Build is configured via a `.travis.yml` file in the root of the Datalab repository.
+* **[Travis CI](https://travis-ci.com/NERC-CEH/datalab)** - Travis is used as our continuous integration server and is free for open source use. Build is configured via a `.travis.yml` file in the root of the Datalab repository.
 * **[Code Climate](https://codeclimate.com/github/NERC-CEH/datalab)** - Code climate provides code linting and quality checks. It is automatically run against all PRs and the master branch and new issues reject PRs.
 * **[DockerHub](https://hub.docker.com/u/nerc/)** - DockerHub is used as a store for all of the projects containers. The core project containers are built and published from Travis, but the standalone containers for third party services are all build using DockerHub build for simplicity.
 * **[Confluence](https://wiki.ceh.ac.uk/pages/viewpage.action?spaceKey=nercdl&title=NERC+Data+Labs)** - Confluence provides a Wiki for Datalabs. There is a lot of useful information it here including some content that should probably be in this guide.
