@@ -72,10 +72,9 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       }
     }
   >
-    <StackMoreMenuItem
+    <ForwardRef
       onClick={[Function]}
       requiredPermission="delete"
-      shouldRender={false}
       userPermissions={
         Array [
           "open",
@@ -85,8 +84,8 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       }
     >
       Logs
-    </StackMoreMenuItem>
-    <StackMoreMenuItem
+    </ForwardRef>
+    <ForwardRef
       onClick={[Function]}
       requiredPermission="edit"
       userPermissions={
@@ -98,13 +97,13 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       }
     >
       Edit
-    </StackMoreMenuItem>
-    <StackMoreMenuItem
+    </ForwardRef>
+    <ForwardRef
       disableTooltip={true}
       disabled={false}
       onClick={[Function]}
       requiredPermission="delete"
-      shouldRender={false}
+      shouldRender={true}
       tooltipText="Resource is already shared within the project"
       userPermissions={
         Array [
@@ -115,11 +114,11 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       }
     >
       Share
-    </StackMoreMenuItem>
-    <StackMoreMenuItem
+    </ForwardRef>
+    <ForwardRef
       onClick={[Function]}
       requiredPermission="edit"
-      shouldRender={false}
+      shouldRender={true}
       userPermissions={
         Array [
           "open",
@@ -129,8 +128,8 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       }
     >
       Restart
-    </StackMoreMenuItem>
-    <StackMoreMenuItem
+    </ForwardRef>
+    <ForwardRef
       onClick={[Function]}
       requiredPermission="delete"
       userPermissions={
@@ -142,7 +141,7 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       }
     >
       Delete
-    </StackMoreMenuItem>
+    </ForwardRef>
   </WithStyles(ForwardRef(Menu))>
 </div>
 `;
