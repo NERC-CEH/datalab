@@ -1,6 +1,5 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import PropTypes from 'prop-types';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import StackCardActions, { PureStackCardActions } from './StackCardActions';
 

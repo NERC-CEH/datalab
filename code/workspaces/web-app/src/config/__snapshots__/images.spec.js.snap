@@ -143,6 +143,14 @@ Object {
   },
   "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
   "types": Object {
+    "dask": Object {
+      "type": "INFRASTRUCTURE",
+      "versions": Array [
+        Object {
+          "image": "daskdev/dask:2.30.0",
+        },
+      ],
+    },
     "jupyter": Object {
       "category": "NOTEBOOK",
       "displayName": "Jupyter",
