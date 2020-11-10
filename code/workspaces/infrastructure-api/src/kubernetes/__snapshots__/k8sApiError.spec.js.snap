@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`K8sApiError constructs the correct error string from the provifded error response 1`] = `
+exports[`K8sApiError constructs the correct error string from the provided error response 1`] = `
 "K8s Api request failed with:
   Status - Expected Status
   Code - 404

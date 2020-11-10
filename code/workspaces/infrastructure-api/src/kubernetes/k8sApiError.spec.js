@@ -17,7 +17,7 @@ describe('K8sApiError', () => {
     expect(error.message).toEqual('Expected error message');
   });
 
-  it('constructs the correct error string from the provifded error response', () => {
+  it('constructs the correct error string from the provided error response', () => {
     const error = new K8sApiError(k8sErrorResponse);
     expect(error.getErrorString()).toMatchSnapshot();
   });
