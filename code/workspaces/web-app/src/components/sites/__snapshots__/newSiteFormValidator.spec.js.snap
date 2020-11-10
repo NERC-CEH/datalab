@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`New Site Form Validator should return correct errors for empty form 1`] = `
+exports[`New Site Form Validator syncValidate should return correct errors for empty form 1`] = `
 Object {
   "description": "Description can't be blank",
   "displayName": "Display name can't be blank",

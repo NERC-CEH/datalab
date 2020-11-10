@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import CreateSiteForm from '../sites/CreateSiteForm';
-import PreviewSiteCard from '../sites/PreviewSiteCard';
+import CreateSiteForm, { FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME } from '../sites/CreateSiteForm';
+import { getSiteInfo } from '../../config/images';
+import { useReduxFormValue } from '../../hooks/reduxFormHooks';
+import { getTypeOptions, getVersionOptions, updateVersionOnTypeChange } from '../stacks/typeAndVersionFormUtils';
 
-const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions, projectKey }) => (
-  <Dialog open={true} maxWidth="md">
-    <div style={{ margin: 10, display: 'flex', flexDirection: 'row' }}>
+const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions, projectKey }) => {
+  const [siteOptions, setSiteOptions] = useState({});
+
+  useEffect(() => {
+    async function getSiteOptions() {
+      const options = await getSiteInfo();
+      setSiteOptions(options);
+    }
+    getSiteOptions();
+  }, []);
+
+  const siteTypeValue = useReduxFormValue(FORM_NAME, TYPE_FIELD_NAME);
+  const versionOptions = getVersionOptions(siteOptions, siteTypeValue);
+
+  return (
+    <Dialog open={true} maxWidth="md">
       <div>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
@@ -16,18 +31,16 @@ const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions, proje
             onSubmit={onSubmit}
             cancel={onCancel}
             dataStorageOptions={dataStorageOptions}
-            projectKey={projectKey} />
+            projectKey={projectKey}
+            typeOptions={getTypeOptions(siteOptions)}
+            versionOptions={versionOptions}
+            onChange={updateVersionOnTypeChange(FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME, versionOptions)}
+          />
         </DialogContent>
       </div>
-      <div style={{ width: 320 }}>
-        <DialogTitle>Site Preview</DialogTitle>
-        <div style={{ width: '90%', margin: '0 auto' }}>
-          <PreviewSiteCard />
-        </div>
-      </div>
-    </div>
-  </Dialog>
-);
+    </Dialog>
+  );
+};
 
 CreateSiteDialog.propTypes = {
   title: PropTypes.string.isRequired,

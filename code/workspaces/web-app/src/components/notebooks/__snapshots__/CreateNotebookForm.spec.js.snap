@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`] = `
+exports[`CreateNotebookForm creates correct snapshot for create Notebook Form when there are not version options 1`] = `
 <form>
   <div>
     <Field
@@ -13,25 +13,149 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form 1`
   <div>
     <Field
       component={[Function]}
-      label="Notebook Type"
+      label="Type"
       name="type"
       options={
         Array [
           Object {
+            "text": "JupyterLab",
+            "value": "JUPYTER_LAB",
+          },
+          Object {
             "text": "Jupyter",
-            "value": "jupyter",
+            "value": "JUPYTER",
           },
           Object {
-            "text": "Jupyterlab",
-            "value": "jupyterlab",
-          },
-          Object {
-            "text": "Rstudio",
-            "value": "rstudio",
+            "text": "RStudio",
+            "value": "RSTUDIO",
           },
           Object {
             "text": "Zeppelin",
-            "value": "zeppelin",
+            "value": "ZEPPELIN",
+          },
+        ]
+      }
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      endText=".datalabs.localhost"
+      label="URL Name"
+      name="name"
+      placeholder="Notebook Name for URL"
+      startText="http://testproj-"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Data Store to Mount"
+      name="volumeMount"
+      options={
+        Array [
+          Object {
+            "text": "First Data Store",
+            "value": "alpha",
+          },
+          Object {
+            "text": "Second Data Store",
+            "value": "beta",
+          },
+        ]
+      }
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Description"
+      name="description"
+      placeholder="Description"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Sharing Status"
+      name="shared"
+      options={
+        Array [
+          Object {
+            "text": <SelectRichComponent
+              title="Private"
+              type="notebook"
+            />,
+            "value": "private",
+          },
+          Object {
+            "text": <SelectRichComponent
+              title="Project"
+              type="notebook"
+            />,
+            "value": "project",
+          },
+        ]
+      }
+    />
+  </div>
+  <CreateFormControls
+    onCancel={[MockFunction]}
+  />
+</form>
+`;
+
+exports[`CreateNotebookForm creates correct snapshot for create Notebook Form when there are version options 1`] = `
+<form>
+  <div>
+    <Field
+      component={[Function]}
+      label="Display Name"
+      name="displayName"
+      placeholder="Display Name"
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Type"
+      name="type"
+      options={
+        Array [
+          Object {
+            "text": "JupyterLab",
+            "value": "JUPYTER_LAB",
+          },
+          Object {
+            "text": "Jupyter",
+            "value": "JUPYTER",
+          },
+          Object {
+            "text": "RStudio",
+            "value": "RSTUDIO",
+          },
+          Object {
+            "text": "Zeppelin",
+            "value": "ZEPPELIN",
+          },
+        ]
+      }
+    />
+  </div>
+  <div>
+    <Field
+      component={[Function]}
+      label="Version"
+      name="version"
+      options={
+        Array [
+          Object {
+            "text": "0.1.0",
+            "value": "0.1.0",
+          },
+          Object {
+            "text": "0.2.0",
+            "value": "0.2.0",
           },
         ]
       }

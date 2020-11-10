@@ -80,7 +80,20 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
     {...custom}
     {...fieldStyleProps}
   >
-    {options.map(({ text, value }, idx) => (<MenuItem key={idx} value={value}>{text}</MenuItem>))}
+    {
+      options.map(({ text, value, additionalText }, idx) => (
+        <MenuItem key={idx} value={value}>
+          {text}
+          {additionalText
+            && <span
+              style={{ marginLeft: theme.spacing(2), color: theme.typography.colorLight }}
+            >
+              {additionalText}
+            </span>
+          }
+        </MenuItem>
+      ))
+    }
   </TextField>
 );
 

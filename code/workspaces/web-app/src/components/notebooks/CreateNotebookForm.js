@@ -1,16 +1,19 @@
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { stackTypes } from 'common';
 import { notebookSharingOptions } from '../common/selectShareOptions';
-import { renderTextField, renderTextArea, renderSelectField, renderAdornedTextField, CreateFormControls } from '../common/form/controls';
-import { syncValidate, asyncValidate } from './newNotebookFormValidator';
+import { CreateFormControls, renderAdornedTextField, renderSelectField, renderTextArea, renderTextField } from '../common/form/controls';
+import { getAsyncValidate, syncValidate } from './newNotebookFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
 
-const { ANALYSIS, getStackSelections } = stackTypes;
+export const FORM_NAME = 'createNotebook';
+const NAME_FIELD_NAME = 'name';
+export const TYPE_FIELD_NAME = 'type';
+export const VERSION_FIELD_NAME = 'version';
 
-const CreateNotebookForm = (props) => {
-  const { handleSubmit, cancel, submitting, dataStorageOptions, projectKey } = props;
+const CreateNotebookForm = ({
+  handleSubmit, cancel, submitting, dataStorageOptions, projectKey, typeOptions, versionOptions,
+}) => {
   const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
 
   return (
@@ -24,14 +27,25 @@ const CreateNotebookForm = (props) => {
       </div>
       <div>
         <Field
-          name="type"
-          label="Notebook Type"
+          name={TYPE_FIELD_NAME}
+          label="Type"
           component={renderSelectField}
-          options={getStackSelections(ANALYSIS)} />
+          options={typeOptions} />
       </div>
+      {
+        versionOptions && versionOptions.length > 0
+        && <div>
+          <Field
+            name={VERSION_FIELD_NAME}
+            label="Version"
+            component={renderSelectField}
+            options={versionOptions}
+          />
+        </div>
+      }
       <div>
         <Field
-          name="name"
+          name={NAME_FIELD_NAME}
           label="URL Name"
           component={renderAdornedTextField}
           placeholder="Notebook Name for URL"
@@ -65,22 +79,28 @@ const CreateNotebookForm = (props) => {
 };
 
 const CreateNotebookReduxForm = reduxForm({
-  form: 'createNotebook',
+  form: FORM_NAME,
   validate: syncValidate,
-  asyncValidate,
-  asyncBlurFields: ['name'],
+  asyncValidate: getAsyncValidate(NAME_FIELD_NAME, TYPE_FIELD_NAME),
+  asyncBlurFields: [NAME_FIELD_NAME, TYPE_FIELD_NAME],
   destroyOnUnmount: false,
 })(CreateNotebookForm);
 
 export { CreateNotebookForm as PureCreateNotebookForm };
 export default CreateNotebookReduxForm;
 
+const dropDownOptionType = PropTypes.shape({
+  text: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+});
+
+const dropDownOptionArrayType = PropTypes.arrayOf(dropDownOptionType);
+
 CreateNotebookForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
-  dataStorageOptions: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })).isRequired,
+  dataStorageOptions: dropDownOptionArrayType.isRequired,
   projectKey: PropTypes.string.isRequired,
+  typeOptions: dropDownOptionArrayType.isRequired,
+  versionOptions: dropDownOptionArrayType.isRequired,
 };

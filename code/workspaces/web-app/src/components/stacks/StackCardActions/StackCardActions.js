@@ -3,17 +3,17 @@ import Menu from '@material-ui/core/Menu';
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { statusTypes, stackTypes } from 'common';
+import React, { useEffect, useState } from 'react';
+import { statusTypes } from 'common';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import PermissionWrapper from '../../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../../common/buttons/PrimaryActionButton';
 import SecondaryActionButton from '../../common/buttons/SecondaryActionButton';
 import StackMoreMenuItem from './StackMoreMenuItem';
+import { getUserActionsForType } from '../../../config/images';
 
 const { READY } = statusTypes;
 const MORE_ICON = 'more_vert';
-const { RSHINY, ANALYSIS, PUBLISH } = stackTypes;
 
 const styles = theme => ({
   cardActions: {
@@ -29,17 +29,32 @@ const styles = theme => ({
 });
 
 const StackCardActions = (props) => {
+  const { stack } = props;
+
   const currentUserId = useCurrentUserId();
-  return <PureStackCardActions currentUserId={currentUserId} {...props} />;
+
+  const [userActions, setUserActions] = useState({});
+  useEffect(() => {
+    const getUserActions = async () => {
+      setUserActions(await getUserActionsForType(stack.type));
+    };
+    getUserActions();
+  }, [stack.type]);
+
+  return <PureStackCardActions
+    currentUserId={currentUserId}
+    userActions={userActions}
+    {...props}
+  />;
 };
 
-export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, userPermissions,
-  openPermission, deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
+export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, userActions,
+  userPermissions, openPermission, deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
   const ownsStack = !stack.users || stack.users.includes(currentUserId);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const shared = ['project'].includes(stack.shared) || ['project', 'public'].includes(stack.visible);
 
   const handleMoreButtonClick = (event) => {
@@ -88,7 +103,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         onClose={handleMoreMenuClose}
       >
         <StackMoreMenuItem
-          shouldRender={[RSHINY].includes(stack.type)}
+          shouldRender={userActions.logs && getLogs}
           onClick={() => getLogs(stack)}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}
@@ -96,7 +111,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Logs
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={editStack && ownsStack}
+          shouldRender={userActions.edit && editStack && ownsStack}
           onClick={() => editStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={editPermission}
@@ -104,7 +119,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Edit
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack}
+          shouldRender={userActions.share && shareStack && ownsStack}
           onClick={() => shareStack(stack, 'project')}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}
@@ -115,7 +130,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Share
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack}
+          shouldRender={userActions.restart && restartStack && ownsStack}
           onClick={() => restartStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={editPermission}
@@ -123,7 +138,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Restart
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={deleteStack && ownsStack}
+          shouldRender={userActions.delete && deleteStack && ownsStack}
           onClick={() => deleteStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}
@@ -135,7 +150,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   );
 };
 
-StackCardActions.propTypes = {
+const sharedPropTypes = {
   stack: PropTypes.shape({
     id: PropTypes.string,
     displayName: PropTypes.string,
@@ -152,6 +167,19 @@ StackCardActions.propTypes = {
   openPermission: PropTypes.string.isRequired,
   deletePermission: PropTypes.string.isRequired,
   editPermission: PropTypes.string.isRequired,
+};
+
+StackCardActions.propTypes = sharedPropTypes;
+PureStackCardActions.propTypes = {
+  ...sharedPropTypes,
+  currentUserId: PropTypes.string.isRequired,
+  userActions: PropTypes.shape({
+    share: PropTypes.bool,
+    edit: PropTypes.bool,
+    restart: PropTypes.bool,
+    delete: PropTypes.bool,
+    logs: PropTypes.bool,
+  }).isRequired,
 };
 
 const isReady = ({ status }) => status === READY;

@@ -28,9 +28,9 @@ describe('namespacedConfigMapExists', () => {
     ).toEqual(true);
   });
 
-  it('returns false if reading config map is unsuccessful', async () => {
+  it('returns false if reading config map returns 404', async () => {
     k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(
-      () => { throw new Error('expected test error'); },
+      () => { throw getK8s404ErrorObject(); },
     );
     expect(
       await configMapApi.namespacedConfigMapExists(name, namespace),
@@ -56,7 +56,9 @@ describe('createOrReplaceNamespacedConfigMap', () => {
 
   it('creates config map if it does not already exists', async () => {
     // Make check for config map existence return false
-    k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(() => { throw new Error('expected test error'); });
+    k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(
+      () => { throw getK8s404ErrorObject(); },
+    );
 
     await configMapApi.createOrReplaceNamespacedConfigMap(name, namespace, manifest);
 
@@ -94,7 +96,9 @@ describe('deleteNamespacedConfigMap', () => {
   });
 
   it('does not attempt to delete the configMap if it does not exist', async () => {
-    k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(() => { throw new Error('expected test error'); });
+    k8sApiMock.readNamespacedConfigMap.mockImplementationOnce(
+      () => { throw getK8s404ErrorObject(); },
+    );
     await configMapApi.deleteNamespacedConfigMap(name, namespace);
 
     expect(k8sApiMock.readNamespacedConfigMap)
@@ -119,4 +123,8 @@ data:
 
 function getConfigMap() {
   return loadYaml(getManifest());
+}
+
+function getK8s404ErrorObject() {
+  return { response: { statusCode: 404 } };
 }

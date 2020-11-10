@@ -1,5 +1,3 @@
-import { capitalize } from 'lodash';
-
 const JUPYTER = 'jupyter';
 const JUPYTERLAB = 'jupyterlab';
 const ZEPPELIN = 'zeppelin';
@@ -58,22 +56,6 @@ const STACK_TYPES = [
   },
 ];
 
-function getStackSelections(category) {
-  return STACK_TYPES.filter(stack => stack.category === category)
-    .map(stack => ({ text: capitalize(stack.name), value: stack.name }));
-}
-
-function getStackKeys() {
-  return STACK_TYPES.map(type => type.name);
-}
-
-function stackInCategory(stackName, ...category) {
-  return STACK_TYPES
-    .filter(item => category.includes(item.category))
-    .map(item => item.name)
-    .includes(stackName);
-}
-
 function getCategoryFromTypeName(name) {
   const stack = STACK_TYPES.filter(item => item.name === name);
   return stack && stack.length ? stack[0].category : null;
@@ -93,8 +75,5 @@ export {
   RSHINY,
   RSTUDIO,
   ZEPPELIN,
-  getStackKeys,
-  getStackSelections,
-  stackInCategory,
   getCategoryFromTypeName,
 };
