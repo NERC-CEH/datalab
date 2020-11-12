@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { replace } from 'connected-react-router';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
-import { useSearchUrl } from '../../hooks/routerHooks';
 
 export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
   if (/verify/.test(searchUrl)) {
@@ -24,13 +23,12 @@ export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
 };
 
 const AuthCallback = (props) => {
-  const searchUrl = useSearchUrl();
   const dispatch = useDispatch();
   const routeTo = replace;
 
   useEffect(() => {
-    handleAuth(searchUrl, routeTo, dispatch, props);
-  }, [searchUrl, routeTo, dispatch, props]);
+    handleAuth(props.location.search, routeTo, dispatch, props);
+  }, [routeTo, dispatch, props]);
 
   return null;
 };
