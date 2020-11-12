@@ -17,6 +17,11 @@ async function getRoles(userId, userName) {
   return roles.toObject();
 }
 
+async function getOtherUserRoles(userId) {
+  const roles = await UserRoles().findOne({ userId }).exec();
+  return roles.toObject();
+}
+
 function convertToUser(roles) {
   const userRoles = roles.toObject();
   const userName = userRoles.userName ? userRoles.userName : 'Unknown user name';
@@ -99,4 +104,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { getRoles, getUser, getUsers, getProjectUsers, addRole, removeRole, userIsMember };
+export default { getRoles, getOtherUserRoles, getUser, getUsers, getProjectUsers, addRole, removeRole, userIsMember };

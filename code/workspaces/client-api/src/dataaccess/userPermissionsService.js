@@ -7,23 +7,25 @@ import axiosErrorHandler from '../util/errorHandlers';
 const authPermissionsUrl = `${config.get('authorisationService')}/permissions`;
 const authServiceStub = config.get('authorisationServiceStub');
 
+const stubPermissions = [
+  'project:stacks:create',
+  'project:stacks:delete',
+  'project:stacks:list',
+  'project:stacks:open',
+  'project:stacks:edit',
+  'project:storage:create',
+  'project:storage:delete',
+  'project:storage:list',
+  'project:storage:open',
+  'project:users:list',
+];
+
 function getUserPermissions(identity, token) {
   const userName = identity ? identity.userName : null;
   logger.debug(`Requesting user permissions from auth service for userName ${userName}`);
 
   if (authServiceStub) {
-    return Promise.resolve([
-      'project:stacks:create',
-      'project:stacks:delete',
-      'project:stacks:list',
-      'project:stacks:open',
-      'project:stacks:edit',
-      'project:storage:create',
-      'project:storage:delete',
-      'project:storage:list',
-      'project:storage:open',
-      'project:users:list',
-    ]);
+    return Promise.resolve(stubPermissions);
   }
 
   return axios.get(authPermissionsUrl, {
@@ -34,4 +36,4 @@ function getUserPermissions(identity, token) {
     .catch(axiosErrorHandler('Unable to get user permissions'));
 }
 
-export default getUserPermissions;
+export default { getUserPermissions };

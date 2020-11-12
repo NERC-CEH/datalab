@@ -1,5 +1,5 @@
 import mockClient from './graphqlClient';
-import getUserPermissions from './userPermissionsService';
+import userPermissionsService from './userPermissionsService';
 
 jest.mock('./graphqlClient');
 
@@ -8,19 +8,19 @@ describe('userPermissionService', () => {
     mockClient.clearResult();
   });
 
-  it('getUserPermissions should build correct query and unpack the result', () => {
+  it('userPermissionsService should build correct query and unpack the result', () => {
     mockClient.prepareSuccess({ userPermissions: 'expectedValue' });
 
-    return getUserPermissions().then((response) => {
+    return userPermissionsService.getUserPermissions().then((response) => {
       expect(response).toEqual('expectedValue');
       expect(mockClient.lastQuery()).toMatchSnapshot();
     });
   });
 
-  it('getUserPermissions should throw an error if the query fails', () => {
+  it('userPermissionsService should throw an error if the query fails', () => {
     mockClient.prepareFailure('error');
 
-    return getUserPermissions().catch((error) => {
+    return userPermissionsService.getUserPermissions().catch((error) => {
       expect(error).toEqual({ error: 'error' });
     });
   });

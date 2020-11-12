@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import config from '../config';
-import getUserPermissions from './userPermissionsService';
+import permissionsService from './userPermissionsService';
 
 const mock = new MockAdapter(axios);
 
@@ -26,7 +26,7 @@ describe('User Identity Service', () => {
     mock.onGet(authServiceUrl)
       .reply(200, { permissions: expectedPermissions });
 
-    return getUserPermissions({ userName: 'user1' }, 'tokenToken')
+    return permissionsService.getUserPermissions({ userName: 'user1' }, 'tokenToken')
       .then(permissions => expect(permissions)
         .toEqual(expectedPermissions));
   });
@@ -35,7 +35,7 @@ describe('User Identity Service', () => {
     mock.onGet(authServiceUrl)
       .reply(200, {});
 
-    return getUserPermissions({ userName: 'user1' }, 'tokenToken')
+    return permissionsService.getUserPermissions({ userName: 'user1' }, 'tokenToken')
       .then(permissions => expect(permissions)
         .toEqual([]));
   });
@@ -44,7 +44,7 @@ describe('User Identity Service', () => {
     mock.onGet(authServiceUrl)
       .reply(403, { status: 'FORBIDDEN' });
 
-    return getUserPermissions({ userName: 'user1' }, 'tokenToken')
+    return permissionsService.getUserPermissions({ userName: 'user1' }, 'tokenToken')
       .catch(err => expect(err.message)
         .toBe('Unable to get user permissions Error: Request failed with status code 403'));
   });
