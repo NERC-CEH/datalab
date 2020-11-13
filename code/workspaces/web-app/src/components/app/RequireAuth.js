@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -34,7 +34,7 @@ const RequireAuth = ({ path, exact, strict, PrivateComponent, PublicComponent })
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  useLayoutEffect(() => { effectFn(dispatch); }, [dispatch]);
+  useEffect(() => { effectFn(dispatch); }, [dispatch]);
 
   return <Route
     path={path}
@@ -45,7 +45,7 @@ const RequireAuth = ({ path, exact, strict, PrivateComponent, PublicComponent })
 };
 
 const switchContent = (tokens, permissions, PrivateComponent, PublicComponent, classes) => {
-  if (permissions.fetching) {
+  if (permissions.fetching || userHasSessionButAwaitingTokens(tokens)) {
     return () => (
       <CircularProgress
         className={classes.circularProgress}
@@ -54,14 +54,16 @@ const switchContent = (tokens, permissions, PrivateComponent, PublicComponent, c
     );
   }
 
-  if (isUserLoggedIn(tokens)) {
+  if (userLoggedIn(tokens)) {
     return props => (<PrivateComponent {...props} promisedUserPermissions={permissions} />);
   }
 
   return props => (<PublicComponent {...props} />);
 };
 
-const isUserLoggedIn = tokens => !isEmpty(tokens);
+const userHasSessionButAwaitingTokens = tokens => getAuth().getCurrentSession() && !userLoggedIn(tokens);
+
+const userLoggedIn = tokens => !isEmpty(tokens);
 
 RequireAuth.propTypes = {
   PrivateComponent: PropTypes.func.isRequired,
