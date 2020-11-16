@@ -16,9 +16,9 @@ import StackCards from '../../components/stacks/StackCards';
 import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
 
-const TYPE_NAME = 'Project';
+export const TYPE_NAME = 'Project';
 const TYPE_NAME_PLURAL = 'Projects';
-const PROJECT_OPEN_PERMISSION = 'project.open';
+export const PROJECT_OPEN_PERMISSION = 'project.open';
 const FORM_NAME = 'createProject';
 
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
@@ -265,6 +265,12 @@ function mapStateToProps(state) {
   return { projects: projectSelectors.projectArray(state) };
 }
 
+function mapProjectSingleStateToProps(state) {
+  return {
+    // leave projects as a prop, rather than reading from state
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
@@ -276,5 +282,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 const ConnectedProjectsContainer = connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
+const ProjectSingleContainer = withStyles(styles)(withRouter(connect(mapProjectSingleStateToProps, mapDispatchToProps)(ProjectsContainer)));
+
 export { ProjectsContainer as PureProjectsContainer, ConnectedProjectsContainer, projectToStack, stackMatchesFilter }; // export for testing
+export { ProjectSingleContainer }; // export with projectKey as prop
 export default withStyles(styles)(withRouter(ConnectedProjectsContainer));

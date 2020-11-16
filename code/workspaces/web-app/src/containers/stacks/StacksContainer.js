@@ -62,7 +62,6 @@ class StacksContainer extends Component {
       await this.props.actions.resetForm(this.props.formStateName);
       notify.success(`${this.props.typeName} edited`);
     } catch (error) {
-      console.log('error', error);
       notify.error(`Unable to edit ${this.props.typeName}`);
     } finally {
       this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType);
@@ -119,7 +118,6 @@ class StacksContainer extends Component {
       await this.props.actions.resetForm(this.props.formStateName);
       notify.success(`${this.props.typeName} restarted`);
     } catch (error) {
-      console.log('error', error);
       notify.error(`Unable to restart ${this.props.typeName}`);
     } finally {
       this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType);
@@ -159,7 +157,9 @@ class StacksContainer extends Component {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
-    this.timeout = setTimeout(this.updateStack, refreshTimeout);
+    if (this.props.autoRefreshStacks) {
+      this.timeout = setTimeout(this.updateStack, refreshTimeout);
+    }
   }
 
   componentDidMount() {
@@ -238,6 +238,7 @@ StacksContainer.propTypes = {
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectKey: PropTypes.object.isRequired,
   showCreateButton: PropTypes.bool.isRequired,
+  autoRefreshStacks: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -245,6 +246,7 @@ function mapStateToProps(state) {
     stacks: state.stacks,
     projectKey: currentProjectSelectors.currentProjectKey(state),
     showCreateButton: true, // default
+    autoRefreshStacks: true, // default
   };
 }
 
@@ -253,6 +255,7 @@ function mapProjectStateToProps(state) {
     stacks: state.stacks,
     // leave projectKey as a prop, rather than reading from state
     showCreateButton: false, // don't show create button in ProjectStacksContainer
+    autoRefreshStacks: false, // don't update the stacks in this view
   };
 }
 

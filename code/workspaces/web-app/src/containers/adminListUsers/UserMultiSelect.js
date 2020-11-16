@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderMultiselectAutocompleteField } from '../../components/common/form/controls';
 import { useUsers } from '../../hooks/usersHooks';
-import sortByName from './sortByName';
+import sortByName from '../adminResources/sortByName';
 
 function UserMultiSelect(props) {
   const { selectedUsers, setSelectedUsers } = props;

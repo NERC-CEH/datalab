@@ -8,13 +8,13 @@ import { useUsers } from '../../hooks/usersHooks';
 import { useOtherUserRoles } from '../../hooks/otherUserRolesHooks';
 import UserMultiSelect from './UserMultiSelect';
 import userActions from '../../actions/userActions';
-import sortByName from './sortByName';
+import sortByName from '../adminResources/sortByName';
 import otherUserRolesActions from '../../actions/otherUserRolesActions';
 import filterUserByRoles from './filterUserByRoles';
-
 import UserResources from './UserResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import Pagination from '../../components/stacks/Pagination';
+import projectActions from '../../actions/projectActions';
 
 const useStyles = makeStyles(theme => ({
   filterControls: {
@@ -57,26 +57,26 @@ function AdminUsersContainer({ userPermissions }) {
   const users = useUsers();
   const otherUserRoles = useOtherUserRoles();
 
-  // get list of users
+  // get list of users and projects
   useEffect(() => {
     dispatch(userActions.listUsers());
+    dispatch(projectActions.loadProjects());
   }, [dispatch]);
 
   // get roles for users
   useEffect(() => {
+    // this if condition prevents sub-component loading of users re-triggering this dispatch again
     sortByName(users.value).forEach(user => dispatch(otherUserRolesActions.getOtherUserRoles(user.userId)));
   }, [dispatch, users.value]);
 
   // the users before applying the checkbox filters
   const preFilteredUsers = (selectedUsers && selectedUsers.length > 0) ? selectedUsers : sortByName(users.value);
-  console.log(`otherUserRoles.value ${JSON.stringify(otherUserRoles.value)}`);
 
   // the users after applying the checkbox filters
   const filteredUsers = preFilteredUsers.filter(user => filterUserByRoles(user.userId, filters, otherUserRoles.value));
-  console.log(`filteredUsers ${JSON.stringify(filteredUsers)}`);
 
   const renderedUsers = filteredUsers && filteredUsers.length > 0
-    ? filteredUsers.map(user => <UserResources userPermissions={userPermissions} user={user} filters={filters} roles={otherUserRoles.value[user.userId]} />)
+    ? filteredUsers.map(user => <UserResources key={user.userId} userPermissions={userPermissions} user={user} filters={filters} roles={otherUserRoles.value[user.userId]} />)
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
       <Typography variant="body1">No users to display.</Typography>
     </div>];

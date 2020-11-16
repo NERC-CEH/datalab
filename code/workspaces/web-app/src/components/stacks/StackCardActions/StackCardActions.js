@@ -51,6 +51,17 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
 
   const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton innerRef={ref} {...props} />);
 
+  const shouldRenderLogs = [RSHINY].includes(stack.type);
+  const shouldRenderEdit = editStack && ownsStack;
+  const shouldRenderShare = stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack;
+  const shouldRenderRestart = stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack;
+  const shouldRenderDelete = deleteStack && ownsStack;
+  const shouldRenderOne = shouldRenderLogs
+    || shouldRenderEdit
+    || shouldRenderShare
+    || shouldRenderRestart
+    || shouldRenderDelete;
+
   return (
     <div className={classes.cardActions}>
       {openStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
@@ -69,7 +80,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           </div>
         </Tooltip>
       </PermissionWrapper>}
-      {ownsStack && stack.status && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {ownsStack && stack.status && shouldRenderOne && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
           aria-controls="more-menu"
           aria-haspopup="true"
@@ -88,7 +99,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         onClose={handleMoreMenuClose}
       >
         <StackMoreMenuItem
-          shouldRender={[RSHINY].includes(stack.type)}
+          shouldRender={shouldRenderLogs}
           onClick={() => getLogs(stack)}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}
@@ -96,7 +107,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Logs
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={editStack && ownsStack}
+          shouldRender={shouldRenderEdit}
           onClick={() => editStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={editPermission}
@@ -104,7 +115,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Edit
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack}
+          shouldRender={shouldRenderShare}
           onClick={() => shareStack(stack, 'project')}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}
@@ -115,7 +126,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Share
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={stackTypes.stackInCategory(stack.type, ANALYSIS, PUBLISH) && ownsStack}
+          shouldRender={shouldRenderRestart}
           onClick={() => restartStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={editPermission}
@@ -123,7 +134,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Restart
         </StackMoreMenuItem>
         <StackMoreMenuItem
-          shouldRender={deleteStack && ownsStack}
+          shouldRender={shouldRenderDelete}
           onClick={() => deleteStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={deletePermission}

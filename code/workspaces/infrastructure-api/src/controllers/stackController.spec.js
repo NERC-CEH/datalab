@@ -226,8 +226,7 @@ describe('Stack Controller', () => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error updating stack: abcd1234' }); // eslint-disable-line no-underscore-dangle
         })
-        .catch((res) => {
-          console.log(res);
+        .catch(() => {
           expect(true).toBeFalsy();
         });
     });
