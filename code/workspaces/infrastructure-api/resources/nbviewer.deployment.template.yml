@@ -19,7 +19,7 @@ spec:
       # this is automatically created.
       containers:
         - name: {{ name }}
-          image: {{ &nbviewer.imageName }}:{{ nbviewer.version }}
+          image: {{ &nbviewer.image }}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000

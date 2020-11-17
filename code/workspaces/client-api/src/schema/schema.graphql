@@ -141,7 +141,7 @@ type Stack {
     name: String
     displayName: String
     description: String
-    type: StackType
+    type: String
     users: [String]
     url: String
     internalEndpoint: String
@@ -164,7 +164,8 @@ input StackCreationRequest {
     projectKey: String
     displayName: String
     name: String
-    type: StackType
+    type: String
+    version: String
     description: String
     sourcePath: String
     isPublic: Boolean
@@ -186,38 +187,14 @@ input StackUpdateRequest {
 input StackDeletionRequest {
     projectKey: String
     name: String
-    type: StackType
+    type: String
 }
 
 # Type to describe the mutation for deleting a new Stack.
 input StackRestartRequest {
     projectKey: String
     name: String
-    type: StackType
-}
-
-# Stack types within DataLabs
-enum StackType {
-    # A Jupyter Notebook
-    jupyter
-
-    # A Jupyter Lab
-    jupyterlab
-
-    # An RStudio Server
-    rstudio
-
-    # A Zeppelin Notebook
-    zeppelin
-
-    # An RShiny Site
-    rshiny
-
-    # An Jupyter Notebook Viewer Site
-    nbviewer
-
-    # A NFS volume
-    nfs
+    type: String
 }
 
 # Status classes within DataLabs

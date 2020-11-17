@@ -43,26 +43,30 @@ export const createSparkDriverHeadlessService = params => () => {
     });
 };
 
-export const createPySparkConfigMap = params => () => {
+export const createPySparkConfigMap = params => async () => {
   const { name, projectKey, type } = params;
+
   const serviceName = nameGenerator.deploymentName(name, type);
-  return deploymentGenerator.createPySparkConfigMap(serviceName, projectKey)
-    .then((manifest) => {
-      logger.info(`Creating configMap ${chalk.blue(serviceName)} with manifest:`);
-      logger.debug(manifest.toString());
-      return configMapApi.createOrReplaceNamespacedConfigMap(serviceName, projectKey, manifest);
-    });
+  const configMapName = nameGenerator.pySparkConfigMap(serviceName);
+  const manifest = await deploymentGenerator.createPySparkConfigMap(serviceName, projectKey, configMapName);
+
+  logger.info(`Creating configMap ${chalk.blue(configMapName)} with manifest:`);
+  logger.debug(manifest.toString());
+
+  return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
 };
 
-export const createDaskConfigMap = params => () => {
+export const createDaskConfigMap = params => async () => {
   const { name, projectKey, type } = params;
+
   const serviceName = nameGenerator.deploymentName(name, type);
-  return deploymentGenerator.createDaskConfigMap(serviceName, projectKey)
-    .then((manifest) => {
-      logger.info(`Creating configMap ${chalk.blue(serviceName)} with manifest:`);
-      logger.debug(manifest.toString());
-      return configMapApi.createOrReplaceNamespacedConfigMap(serviceName, projectKey, manifest);
-    });
+  const configMapName = nameGenerator.daskConfigMap(serviceName);
+  const manifest = await deploymentGenerator.createDaskConfigMap(serviceName, projectKey, configMapName);
+
+  logger.info(`Creating configMap ${chalk.blue(configMapName)} with manifest:`);
+  logger.debug(manifest.toString());
+
+  return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
 };
 
 export const createIngressRule = (params, generator) => (service) => {

@@ -2,6 +2,8 @@ import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import CreateNotebookDialog from './CreateNotebookDialog';
 
+jest.mock('../../hooks/reduxFormHooks');
+
 describe('Notebook dialog', () => {
   let shallow;
 

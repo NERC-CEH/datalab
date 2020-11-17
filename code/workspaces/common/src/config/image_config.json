@@ -1,0 +1,131 @@
+{
+  "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
+  "categories": {
+    "NOTEBOOK": {
+      "userActions": {
+        "share": true,
+        "edit": true,
+        "restart": true,
+        "delete": true,
+        "logs": false
+      }
+    },
+    "SITE": {
+      "userActions": {
+        "share": true,
+        "edit": true,
+        "restart": true,
+        "delete": true,
+        "logs": false
+      }
+    },
+    "INFRASTRUCTURE": {}
+  },
+  "types": {
+    "dask": {
+      "type": "INFRASTRUCTURE",
+      "versions": [
+        {
+          "image": "daskdev/dask:2.30.0"
+        }
+      ]
+    },
+    "jupyter": {
+      "displayName": "Jupyter",
+      "category": "NOTEBOOK",
+      "versions": [
+        {
+          "displayName": "Dask 2.30.0 support",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+        }
+      ]
+    },
+    "jupyterlab": {
+      "displayName": "JupyterLab",
+      "category": "NOTEBOOK",
+      "versions": [
+        {
+          "displayName": "Dask 2.30.0 support",
+          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0"
+        }
+      ]
+    },
+    "minio": {
+      "category": "INFRASTRUCTURE",
+      "versions": [
+        {
+          "image": "nerc/minio:1.0",
+          "connectImage": "nerc/connect:1.0.0"
+        }
+      ]
+    },
+    "nbviewer": {
+      "displayName": "NBViewer",
+      "category": "SITE",
+      "versions": [
+        {
+          "displayName": "Latest",
+          "image": "jupyter/nbviewer:latest"
+        }
+      ]
+    },
+    "rshiny": {
+      "displayName": "RShiny",
+      "category": "SITE",
+      "userSelectableVersion": true,
+      "versions": [
+        {
+          "default": true,
+          "displayName": "4.0.1",
+          "image": "nerc/rshiny:4.0.1"
+        },
+        {
+          "displayName": "3.5.3",
+          "image": "nerc/rshiny:3.5.3"
+        }
+      ],
+      "userActionOverrides": {
+        "logs": true
+      }
+    },
+    "rstudio": {
+      "displayName": "RStudio",
+      "category": "NOTEBOOK",
+      "userSelectableVersion": true,
+      "versions": [
+        {
+          "default": true,
+          "displayName": "4.0.1",
+          "image": "nerc/rstudio:4.0.1",
+          "connectImage": "nerc/zeppelin-connect:1.1.1"
+        },
+        {
+          "displayName": "3.5.3",
+          "image": "nerc/rstudio:3.5.3",
+          "connectImage": "nerc/zeppelin-connect:1.1.1"
+        }
+      ]
+    },
+    "spark": {
+      "category": "INFRASTRUCTURE",
+      "versions": [
+        {
+          "image": "nerc/spark-k8s:0.1.0"
+        }
+      ],
+      "masterAddress": "spark://spark-master:7077",
+      "sharedRLibs": "/data/packages/R/%p/%v"
+    },
+    "zeppelin": {
+      "displayName": "Zepplin",
+      "category": "NOTEBOOK",
+      "versions": [
+        {
+          "displayName": "0.7.2.7",
+          "image": "nerc/zeppelin:0.7.2.7",
+          "connectImage": "nerc/zeppelin-connect:1.1.1"
+        }
+      ]
+    }
+  }
+}

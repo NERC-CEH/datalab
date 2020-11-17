@@ -16,6 +16,7 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
         asyncBlurFields={
           Array [
             "name",
+            "type",
           ]
         }
         asyncValidate={[Function]}
@@ -36,6 +37,7 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
         form="createNotebook"
         getFormState={[Function]}
         keepDirtyOnReinitialize={false}
+        onChange={[Function]}
         onSubmit={[MockFunction]}
         persistentSubmitErrors={false}
         pure={true}
@@ -46,8 +48,10 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
         submitAsSideEffect={false}
         touchOnBlur={true}
         touchOnChange={false}
+        typeOptions={Array []}
         updateUnregisteredFields={false}
         validate={[Function]}
+        versionOptions={Array []}
       />
     </WithStyles(ForwardRef(DialogContent))>
   </div>
