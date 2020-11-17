@@ -133,6 +133,7 @@ describe('StacksContainer', () => {
       projectKey: { fetching: false, value: 'projtest' },
       formComponent: FormComponent,
       showCreateButton: true,
+      autoRefreshStacks: true,
     });
 
     beforeEach(() => jest.clearAllMocks());

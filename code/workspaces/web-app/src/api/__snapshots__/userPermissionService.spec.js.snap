@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`userPermissionService userPermissionsService should build correct query and unpack the result 1`] = `
+exports[`userPermissionService getUserPermissions should build correct query and unpack the result 1`] = `
 "
     GetPermissions {
       userPermissions

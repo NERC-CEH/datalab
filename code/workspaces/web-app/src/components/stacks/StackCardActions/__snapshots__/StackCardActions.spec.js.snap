@@ -31,34 +31,6 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       </div>
     </WithStyles(ForwardRef(Tooltip))>
   </ComponentWrapper>
-  <ComponentWrapper
-    className="buttonWrapper"
-    permission="delete"
-    userPermissions={
-      Array [
-        "open",
-        "delete",
-        "edit",
-      ]
-    }
-  >
-    <SecondaryActionButton
-      aria-controls="more-menu"
-      aria-haspopup="true"
-      fullWidth={true}
-      onClick={[Function]}
-    >
-      <WithStyles(ForwardRef(Icon))
-        style={
-          Object {
-            "color": "inherit",
-          }
-        }
-      >
-        more_vert
-      </WithStyles(ForwardRef(Icon))>
-    </SecondaryActionButton>
-  </ComponentWrapper>
   <WithStyles(ForwardRef(Menu))
     anchorEl={null}
     id="more-menu"

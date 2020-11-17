@@ -8,7 +8,7 @@ describe('userPermissionService', () => {
     mockClient.clearResult();
   });
 
-  it('userPermissionsService should build correct query and unpack the result', () => {
+  it('getUserPermissions should build correct query and unpack the result', () => {
     mockClient.prepareSuccess({ userPermissions: 'expectedValue' });
 
     return userPermissionsService.getUserPermissions().then((response) => {
@@ -17,7 +17,7 @@ describe('userPermissionService', () => {
     });
   });
 
-  it('userPermissionsService should throw an error if the query fails', () => {
+  it('getUserPermissions should throw an error if the query fails', () => {
     mockClient.prepareFailure('error');
 
     return userPermissionsService.getUserPermissions().catch((error) => {

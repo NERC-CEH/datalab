@@ -265,12 +265,6 @@ function mapStateToProps(state) {
   return { projects: projectSelectors.projectArray(state) };
 }
 
-function mapProjectSingleStateToProps(state) {
-  return {
-    // leave projects as a prop, rather than reading from state
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
@@ -282,8 +276,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 const ConnectedProjectsContainer = connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
-const ProjectSingleContainer = withStyles(styles)(withRouter(connect(mapProjectSingleStateToProps, mapDispatchToProps)(ProjectsContainer)));
-
 export { ProjectsContainer as PureProjectsContainer, ConnectedProjectsContainer, projectToStack, stackMatchesFilter }; // export for testing
-export { ProjectSingleContainer }; // export with projectKey as prop
 export default withStyles(styles)(withRouter(ConnectedProjectsContainer));
