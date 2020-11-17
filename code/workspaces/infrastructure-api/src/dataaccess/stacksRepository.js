@@ -11,6 +11,13 @@ function getAll(user) {
     .exec();
 }
 
+function getAllOwned(user) {
+  return Stack()
+    .find()
+    .filterByUser(user)
+    .exec();
+}
+
 function getAllByProject(projectKey, user) {
   return Stack()
     .find()
@@ -115,6 +122,7 @@ function update(projectKey, user, name, updatedValues) {
 
 export default {
   getAll,
+  getAllOwned,
   getAllByProject,
   getAllByCategory,
   getOneById,

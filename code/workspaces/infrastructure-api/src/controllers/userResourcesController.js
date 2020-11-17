@@ -11,7 +11,7 @@ async function listUserResources(request, response, next) {
     const storageAccess = storageAccessInfo
       .map(store => ({ projectKey: store.projectKey, name: store.name }));
 
-    const stacksOwned = await stacksRepository.getAll({ sub: userId });
+    const stacksOwned = await stacksRepository.getAllOwned({ sub: userId });
     const notebookOwner = stacksOwned
       .filter(stack => stack.category === ANALYSIS)
       .map(stack => ({ projectKey: stack.projectKey, name: stack.name }));

@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import userSummary from './userSummary';
 import projectsToShow from './projectsToShow';
-import Project from './Project';
+import UserProject from './UserProject';
 import Pagination from '../../components/stacks/Pagination';
 
 const useStyles = makeStyles(theme => ({
@@ -41,13 +41,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserResources(props) {
   const classes = useStyles();
-  const { userPermissions, user, filters, roles } = props;
+  const { user, filters, roles } = props;
 
   if (!roles) { return null; }
   const projects = projectsToShow(filters, roles);
 
   const renderedProjects = projects && projects.length > 0
-    ? projects.map(projectKey => <Project key={projectKey} userPermissions={userPermissions} projectKey={projectKey} filters={filters} roles={roles} />)
+    ? projects.map(projectKey => <UserProject key={projectKey} projectKey={projectKey} filters={filters} roles={roles} />)
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
       <Typography variant="body1">No projects to display.</Typography>
     </div>];

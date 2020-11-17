@@ -1,31 +1,33 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { withRouter } from 'react-router-dom';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import StackCards from '../../components/stacks/StackCards';
-import { TYPE_NAME, PROJECT_OPEN_PERMISSION, projectToStack } from '../projects/ProjectsContainer';
+import { TYPE_NAME } from '../sites/SitesContainer';
 
-function UserProjects(props) {
-  const { projects, userPermissions, history } = props;
+function Sites(props) {
+  const { sites } = props;
   const stacks = {
     fetching: false,
     error: null,
-    value: projects.map(projectToStack),
+    value: sites,
   };
 
   return (
     <ResourceAccordion defaultExpanded>
       <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h6">Project</Typography>
+        <Typography variant="h6">Sites</Typography>
       </ResourceAccordionSummary>
       <ResourceAccordionDetails>
         <StackCards
           stacks={stacks}
-          userPermissions={() => [PROJECT_OPEN_PERMISSION, ...userPermissions]}
           typeName={TYPE_NAME}
-          openStack={proj => history.push(`/projects/${proj.key}/info`)}
-          openPermission={PROJECT_OPEN_PERMISSION}
+          userPermissions={() => []}
+          openStack={() => { }}
+          openCreationForm={() => { }}
+          deleteStack={() => { }}
+          createPermission=""
+          openPermission=""
           deletePermission=""
           editPermission=""
         />
@@ -34,4 +36,4 @@ function UserProjects(props) {
   );
 }
 
-export default (withRouter(UserProjects));
+export default Sites;
