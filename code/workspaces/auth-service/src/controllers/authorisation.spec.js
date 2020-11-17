@@ -7,6 +7,8 @@ import * as getPermissions from '../permissions/permissions';
 jest.mock('../dataaccess/userRolesRepository');
 const getRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
 userRolesRepository.getRoles = getRolesMock;
+const getOtherUserRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
+userRolesRepository.getOtherUserRoles = getOtherUserRolesMock;
 
 jest.mock('../permissions/permissions');
 const getPermissionsMock = jest.fn();
@@ -52,6 +54,18 @@ describe('authorisation controller', () => {
         .then(() => {
           expect(response._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
         });
+    });
+  });
+
+  describe('getRolesForOtherUser', () => {
+    it('should generate and return roles', async () => {
+      const response = httpMocks.createResponse();
+      const request = { user: { sub: 'expectedUserName' }, query: { userName: 'user1' } };
+      const expectedRoles = ['expected', 'roles'];
+      getOtherUserRolesMock.mockReturnValue(expectedRoles);
+
+      await authorisation.getRolesForOtherUser(request, response);
+      expect(response._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
     });
   });
 

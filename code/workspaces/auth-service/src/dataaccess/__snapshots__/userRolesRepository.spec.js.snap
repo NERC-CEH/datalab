@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`userRolesRepository read operations getOtherUserRoles returns expected snapshot 1`] = `
+Object {
+  "instanceAdmin": false,
+  "projectRoles": Array [
+    Object {
+      "projectKey": "project 1",
+      "role": "admin",
+    },
+    Object {
+      "projectKey": "project 2",
+      "role": "user",
+    },
+  ],
+  "userId": "uid1",
+  "userName": "user1",
+}
+`;
+
 exports[`userRolesRepository read operations getProjectUsers returns expected snapshot 1`] = `
 Array [
   Object {

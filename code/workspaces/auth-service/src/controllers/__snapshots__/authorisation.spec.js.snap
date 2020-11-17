@@ -10,6 +10,8 @@ Object {
 
 exports[`authorisation controller getPermissions should generate and return permissions 1`] = `"{\\"permissions\\":[\\"expected\\",\\"permissions\\"]}"`;
 
+exports[`authorisation controller getRolesForOtherUser should generate and return roles 1`] = `"{\\"userRoles\\":[\\"expected\\",\\"roles\\"]}"`;
+
 exports[`authorisation controller serveJWKS should serve the development public key 1`] = `
 Object {
   "keys": Array [
