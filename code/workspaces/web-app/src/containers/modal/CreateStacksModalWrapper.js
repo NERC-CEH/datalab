@@ -21,7 +21,9 @@ class CreateStacksModalWrapper extends Component {
   getDataStorage() {
     const dataStorage = this.props.dataStorage.value || [];
 
-    return dataStorage.map(store => ({ text: store.displayName, value: store.name }));
+    return dataStorage
+      .filter(store => store.projectKey === this.getProjectKey())
+      .map(store => ({ text: store.displayName, value: store.name }));
   }
 
   getProjectKey() {
