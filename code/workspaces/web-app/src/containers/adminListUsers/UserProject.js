@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
-import { PUBLISH, stackInCategory, ANALYSIS } from 'common/src/stackTypes';
+import { PUBLISH, getCategoryFromTypeName, ANALYSIS } from 'common/src/stackTypes';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
@@ -47,11 +47,11 @@ export default function UserProject(props) {
     .filter(proj => projectKeys.includes(proj.key));
   const siteNames = cardsToShow.siteCardsToShow(roles, projectKey);
   const sites = allStacks.value
-    .filter(stack => stackInCategory(stack.type, PUBLISH))
+    .filter(stack => getCategoryFromTypeName(stack.type) === PUBLISH)
     .filter(stack => siteNames.includes(stack.name));
   const notebookNames = cardsToShow.notebookCardsToShow(roles, projectKey);
   const notebooks = allStacks.value
-    .filter(stack => stackInCategory(stack.type, ANALYSIS))
+    .filter(stack => getCategoryFromTypeName(stack.type) === ANALYSIS)
     .filter(stack => notebookNames.includes(stack.name));
   const dataStorageNames = cardsToShow.dataStorageCardsToShow(roles, projectKey);
   const dataStores = allDataStorage.value

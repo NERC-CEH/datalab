@@ -35,7 +35,7 @@ async function getOtherUserRoles(userId, token) {
       storageAccess,
     };
   } catch (err) {
-    return axiosErrorHandler(`Unable to get user roles for ${userId}`);
+    return axiosErrorHandler(`Unable to get user roles for ${userId}`)(err);
   }
 }
 
