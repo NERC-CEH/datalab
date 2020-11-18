@@ -24,6 +24,11 @@ describe('stacksRepository', () => {
     expect(stacks).toMatchSnapshot();
   }));
 
+  it('getAllOwned uses expected query', async () => {
+    await stacksRepository.getAllOwned(user);
+    expect(mockDatabase().user()).toBe('username');
+  });
+
   it('getAllByCategory returns expected snapshot', () => stacksRepository.getAllByCategory(project, user, 'analysis').then((stacks) => {
     expect(mockDatabase().query()).toEqual({ category: 'analysis' });
     expect(mockDatabase().project()).toBe('expectedProject');

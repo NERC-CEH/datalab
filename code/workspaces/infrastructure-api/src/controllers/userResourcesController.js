@@ -1,7 +1,14 @@
-import { matchedData } from 'express-validator';
+import { check, matchedData } from 'express-validator';
+import { service } from 'service-chassis';
+
 import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import stacksRepository from '../dataaccess/stacksRepository';
+import logger from '../config/logger';
+
+const userIdValidator = () => service.middleware.validator([
+  check('userId').exists().withMessage('userId must be specified in URL.'),
+], logger);
 
 async function listUserResources(request, response, next) {
   const { userId } = matchedData(request);
@@ -29,4 +36,4 @@ async function listUserResources(request, response, next) {
   }
 }
 
-export default { listUserResources };
+export default { userIdValidator, listUserResources };
