@@ -1,0 +1,75 @@
+# OpenID Connect Configuration (OIDC)
+
+## Requirements
+
+In order for DataLabs to function there must be an OpenID Connection Authentication provider (e.g Auth0, Keycloak, AWS Cognito) which will either store user information directly or serve to re-direct users to a different authentication provider which in turn will allow a user to recieve an identity token.
+
+All providers are different and offer various advantages, there are multiple considerations to make including is how user registration is expected to work, and the convenience/limits of using a cloud (Auth0) vs a hosted solution.
+
+## Application Setup
+
+DataLabs requires an OIDC complient application to use for authentication. Hence once a provider is chosen an application must be set up for authentication, the method for doing this will vary depending on the provider, however some example guides can be found here;
+
+- [Auth0](https://auth0.com/docs/applications/set-up-an-application/register-single-page-app)
+- [Keycloak](https://robferguson.org/blog/2019/12/24/getting-started-with-keycloak/)
+
+Requirement for OIDC application;
+
+- The name should be clearly associated with "DataLabs"
+- The client must be OIDC compliant (this is typically a configuration option during creation).
+- Callback URLs must be configured to match the callback URLs for the deployment of DataLabs, this ensures that only requests which are re-directed back to the application (and hence include secure credentials are not directed elsewhere) are served. This should include the following URLS at minimum for;
+
+```
+https://datalabName.domain/callback,https://datalabName.domain/silent-callback
+# e.g
+# https://datalab.datalabs.ceh.ac.uk/callback,https://datalab.datalabs.ceh.ac.uk/silent-callback
+```
+- The application must have acces to the user/account lists that you wish users to authenticate with.
+
+## OIDC Configuration
+
+Once the client is set up, the configuration ([documentation](https://github.com/IdentityModel/oidc-client-js/wiki)) for the `oidc-client-js` library which is used by DataLabs must be deployed within a configmap as a JSON object - example found [here](https://github.com/NERC-CEH/datalab-k8s-manifests/blob/master/templates/datalab/oidc-configmap.template.yml). Depending on which provider is being used the settings required may be different hence you may need to read the providers documentation. Below are two examples of different OIDC providers and associated configuration.
+
+- Auth0 (with an auth0 tenancy named `example.eu.auth0.com`)
+```
+    {   
+      "client_id": "{{ oidcProviderClientId }}",
+      "redirect_uri": "https://{{ datalabName }}.{{ domain }}/callback",
+      "response_type": "code",
+      "scope": "openid profile",
+      "authority": "https://example.eu.auth0.com",
+      "automaticSilentRenew": true,
+      "accessTokenExpiringNotificationTime": "600",
+      "filterProtocolClaims": true,
+      "loadUserInfo": true,
+      "extraQueryParams": {
+          "audience": "https://{{ datalabName }}.{{ domain }}/api"
+      },
+      "metadata": {
+          "issuer": "https://example.eu.auth0.com/",
+          "authorization_endpoint": "https://example.eu.auth0.com/authorize",
+          "userinfo_endpoint": "https://example.eu.auth0.com/userinfo",
+          "end_session_endpoint": "https://example.eu.auth0.com/v2/logout?returnTo=https://{{ datalabName }}.{{ domain }}/&client_id={{ oidcProviderClientId }}",
+          "jwks_uri": "https://example.eu.auth0.com/.well-known/jwks.json",
+          "token_endpoint": "https://example.eu.auth0.com/oauth/token"
+      }
+    }
+```
+
+- Keycloak (with a keycloak instance set up on a accessible host which can be resolved via `keycloak` on port `8081`, and a realm created (which the client exists within) called `Datalabs`).
+```
+    {
+      "client_id": "{{ oidcProviderClientId }}",
+      "redirect_uri": "https://{{ datalabName }}.{{ domain }}/callback",
+      "response_type": "code",
+      "scope": "openid profile",
+      "authority": "http://keycloak:8081/auth/realms/Datalabs",
+      "automaticSilentRenew": true,
+      "accessTokenExpiringNotificationTime": "600",
+      "filterProtocolClaims": true,
+      "loadUserInfo": true,
+      "post_logout_redirect_uri": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ datalabName }}.{{ domain }}/&client_id={{ oidcProviderClientId }}",
+    }
+```
+
+Once these are configured within the configmap they will be served up by the web-app for the client to use. Depending on whether users can sign up or not, they may need to be added manually to the user/account list via the OIDC provider.
