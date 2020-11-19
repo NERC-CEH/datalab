@@ -58,91 +58,94 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
         more_vert
       </WithStyles(ForwardRef(Icon))>
     </SecondaryActionButton>
+    <WithStyles(ForwardRef(Menu))
+      anchorEl={null}
+      id="more-menu"
+      keepMounted={true}
+      onClose={[Function]}
+      open={false}
+      transformOrigin={
+        Object {
+          "horizontal": "right",
+          "vertical": "top",
+        }
+      }
+    >
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Logs
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Edit
+      </ForwardRef>
+      <ForwardRef
+        disableTooltip={true}
+        disabled={false}
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        tooltipText="Resource is already shared within the project"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Share
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Delete
+      </ForwardRef>
+    </WithStyles(ForwardRef(Menu))>
   </ComponentWrapper>
-  <WithStyles(ForwardRef(Menu))
-    anchorEl={null}
-    id="more-menu"
-    keepMounted={true}
-    onClose={[Function]}
-    open={false}
-    transformOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "top",
-      }
-    }
-  >
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Logs
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Edit
-    </ForwardRef>
-    <ForwardRef
-      disableTooltip={true}
-      disabled={false}
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      tooltipText="Resource is already shared within the project"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Share
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Restart
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Delete
-    </ForwardRef>
-  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 
@@ -177,92 +180,6 @@ exports[`PureStackCardActions Should not render edit/delete/share/restart button
       </div>
     </WithStyles(ForwardRef(Tooltip))>
   </ComponentWrapper>
-  <WithStyles(ForwardRef(Menu))
-    anchorEl={null}
-    id="more-menu"
-    keepMounted={true}
-    onClose={[Function]}
-    open={false}
-    transformOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "top",
-      }
-    }
-  >
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Logs
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={false}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Edit
-    </ForwardRef>
-    <ForwardRef
-      disableTooltip={true}
-      disabled={false}
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={false}
-      tooltipText="Resource is already shared within the project"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Share
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={false}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Restart
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={false}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Delete
-    </ForwardRef>
-  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 
@@ -324,93 +241,94 @@ exports[`PureStackCardActions Should render Open as disabled if stack is not rea
         more_vert
       </WithStyles(ForwardRef(Icon))>
     </SecondaryActionButton>
+    <WithStyles(ForwardRef(Menu))
+      anchorEl={null}
+      id="more-menu"
+      keepMounted={true}
+      onClose={[Function]}
+      open={false}
+      transformOrigin={
+        Object {
+          "horizontal": "right",
+          "vertical": "top",
+        }
+      }
+    >
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Logs
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Edit
+      </ForwardRef>
+      <ForwardRef
+        disableTooltip={true}
+        disabled={false}
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        tooltipText="Resource is already shared within the project"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Share
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Delete
+      </ForwardRef>
+    </WithStyles(ForwardRef(Menu))>
   </ComponentWrapper>
-  <WithStyles(ForwardRef(Menu))
-    anchorEl={null}
-    id="more-menu"
-    keepMounted={true}
-    onClose={[Function]}
-    open={false}
-    transformOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "top",
-      }
-    }
-  >
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Logs
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Edit
-    </ForwardRef>
-    <ForwardRef
-      disableTooltip={true}
-      disabled={false}
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      tooltipText="Resource is already shared within the project"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Share
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Restart
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Delete
-    </ForwardRef>
-  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 
@@ -472,93 +390,94 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
         more_vert
       </WithStyles(ForwardRef(Icon))>
     </SecondaryActionButton>
+    <WithStyles(ForwardRef(Menu))
+      anchorEl={null}
+      id="more-menu"
+      keepMounted={true}
+      onClose={[Function]}
+      open={false}
+      transformOrigin={
+        Object {
+          "horizontal": "right",
+          "vertical": "top",
+        }
+      }
+    >
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Logs
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Edit
+      </ForwardRef>
+      <ForwardRef
+        disableTooltip={true}
+        disabled={false}
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        tooltipText="Resource is already shared within the project"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Share
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Delete
+      </ForwardRef>
+    </WithStyles(ForwardRef(Menu))>
   </ComponentWrapper>
-  <WithStyles(ForwardRef(Menu))
-    anchorEl={null}
-    id="more-menu"
-    keepMounted={true}
-    onClose={[Function]}
-    open={false}
-    transformOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "top",
-      }
-    }
-  >
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Logs
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Edit
-    </ForwardRef>
-    <ForwardRef
-      disableTooltip={true}
-      disabled={false}
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      tooltipText="Resource is already shared within the project"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Share
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Restart
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Delete
-    </ForwardRef>
-  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 
@@ -620,93 +539,94 @@ exports[`PureStackCardActions should not render button if userAction for that bu
         more_vert
       </WithStyles(ForwardRef(Icon))>
     </SecondaryActionButton>
+    <WithStyles(ForwardRef(Menu))
+      anchorEl={null}
+      id="more-menu"
+      keepMounted={true}
+      onClose={[Function]}
+      open={false}
+      transformOrigin={
+        Object {
+          "horizontal": "right",
+          "vertical": "top",
+        }
+      }
+    >
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Logs
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Edit
+      </ForwardRef>
+      <ForwardRef
+        disableTooltip={true}
+        disabled={false}
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        tooltipText="Resource is already shared within the project"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Share
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Delete
+      </ForwardRef>
+    </WithStyles(ForwardRef(Menu))>
   </ComponentWrapper>
-  <WithStyles(ForwardRef(Menu))
-    anchorEl={null}
-    id="more-menu"
-    keepMounted={true}
-    onClose={[Function]}
-    open={false}
-    transformOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "top",
-      }
-    }
-  >
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Logs
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={false}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Edit
-    </ForwardRef>
-    <ForwardRef
-      disableTooltip={true}
-      disabled={false}
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      tooltipText="Resource is already shared within the project"
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Share
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="edit"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Restart
-    </ForwardRef>
-    <ForwardRef
-      onClick={[Function]}
-      requiredPermission="delete"
-      shouldRender={true}
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    >
-      Delete
-    </ForwardRef>
-  </WithStyles(ForwardRef(Menu))>
 </div>
 `;
 

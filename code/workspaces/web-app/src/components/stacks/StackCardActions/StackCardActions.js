@@ -66,11 +66,11 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
 
   const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton innerRef={ref} {...props} />);
 
-  const shouldRenderLogs = userActions.logs && getLogs;
-  const shouldRenderEdit = userActions.edit && editStack && ownsStack;
-  const shouldRenderShare = userActions.share && shareStack && ownsStack;
-  const shouldRenderRestart = userActions.restart && restartStack && ownsStack;
-  const shouldRenderDelete = userActions.delete && deleteStack && ownsStack;
+  const shouldRenderLogs = userActions.logs && getLogs !== undefined;
+  const shouldRenderEdit = userActions.edit && editStack !== undefined;
+  const shouldRenderShare = userActions.share && shareStack !== undefined;
+  const shouldRenderRestart = userActions.restart && restartStack !== undefined;
+  const shouldRenderDelete = userActions.delete && deleteStack !== undefined;
   const shouldRenderSecondaryActionsMenu = shouldRenderLogs
     || shouldRenderEdit
     || shouldRenderShare
@@ -104,7 +104,6 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         >
           <Icon style={{ color: 'inherit' }}>{MORE_ICON}</Icon>
         </SecondaryActionButton>
-      </PermissionWrapper>}
       <Menu
         id="more-menu"
         anchorEl={anchorEl}
@@ -157,6 +156,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Delete
         </StackMoreMenuItem>
       </Menu>
+      </PermissionWrapper>}
     </div>
   );
 };

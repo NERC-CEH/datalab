@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
 import { useUsers } from '../../hooks/usersHooks';
 import { useOtherUserRoles } from '../../hooks/otherUserRolesHooks';
+import { useProjectsArray } from '../../hooks/projectsHooks';
 import UserMultiSelect from './UserMultiSelect';
 import userActions from '../../actions/userActions';
 import sortByName from '../adminResources/sortByName';
@@ -17,7 +18,6 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import Pagination from '../../components/stacks/Pagination';
 import projectActions from '../../actions/projectActions';
 import dataStoreActions from '../../actions/dataStorageActions';
-import { useProjectsArray } from '../../hooks/projectsHooks';
 import stackActions from '../../actions/stackActions';
 
 const useStyles = makeStyles(theme => ({

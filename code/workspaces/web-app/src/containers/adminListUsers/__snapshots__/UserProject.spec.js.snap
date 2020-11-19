@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserProject renders to match snapshot passing correct props to children 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+    defaultExpanded={true}
+  >
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-heading-3"
+        variant="h5"
+      >
+        project name
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <div
+          className="makeStyles-projectRoles-4"
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            Project admin
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            color="primary"
+            disabled={true}
+            name="projectAdmin"
+          />
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            Project user
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            color="primary"
+            disabled={true}
+            name="projectUser"
+          />
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            Project viewer
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            color="primary"
+            disabled={true}
+            name="projectViewer"
+          />
+        </div>
+        <mockConstructor
+          projects={
+            Array [
+              Object {
+                "key": "proj-1234",
+                "name": "project name",
+              },
+            ]
+          }
+        />
+        <mockConstructor
+          sites={
+            Array [
+              Object {
+                "key": "proj-1234",
+                "name": "site name",
+                "type": "rshiny",
+              },
+            ]
+          }
+        />
+        <mockConstructor
+          notebooks={
+            Array [
+              Object {
+                "key": "proj-1234",
+                "name": "notebook name",
+                "type": "jupyter",
+              },
+            ]
+          }
+        />
+        <mockConstructor
+          dataStores={
+            Array [
+              Object {
+                "key": "proj-1234",
+                "name": "storage name",
+              },
+            ]
+          }
+        />
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;

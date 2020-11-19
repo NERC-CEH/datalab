@@ -37,4 +37,5 @@ function Projects(props) {
   );
 }
 
+export { Projects as PureProjects }; // export for testing
 export default (withRouter(Projects));

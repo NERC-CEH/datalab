@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserResources renders to match snapshot passing correct props to children 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+    defaultExpanded={true}
+  >
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <div
+        className="makeStyles-summary-4"
+      >
+        <WithStyles(ForwardRef(Typography))
+          className="makeStyles-heading-3"
+          variant="h5"
+        >
+          user name
+        </WithStyles(ForwardRef(Typography))>
+        <WithStyles(ForwardRef(Typography))
+          variant="body2"
+        >
+          1 project, 1 site, 1 notebook, 1 data store
+        </WithStyles(ForwardRef(Typography))>
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <div
+          className="makeStyles-instanceAdmin-5"
+        >
+          <WithStyles(ForwardRef(Typography))
+            variant="body1"
+          >
+            Instance admin
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Checkbox))
+            checked={true}
+            color="primary"
+            disabled={true}
+            name="instanceAdmin"
+          />
+        </div>
+        <Pagination
+          items={
+            Array [
+              <UserProject
+                filters={
+                  Object {
+                    "instanceAdmin": false,
+                    "notebookOwner": false,
+                    "projectAdmin": false,
+                    "projectUser": false,
+                    "projectViewer": false,
+                    "siteOwner": false,
+                    "storageAccess": false,
+                  }
+                }
+                projectKey="proj-1234"
+                roles={
+                  Object {
+                    "instanceAdmin": true,
+                    "notebookOwner": Array [
+                      Object {
+                        "name": "notebook name",
+                        "projectKey": "proj-1234",
+                      },
+                    ],
+                    "projectAdmin": Array [
+                      "proj-1234",
+                    ],
+                    "projectUser": Array [
+                      "proj-1234",
+                    ],
+                    "projectViewer": Array [
+                      "proj-1234",
+                    ],
+                    "siteOwner": Array [
+                      Object {
+                        "name": "site name",
+                        "projectKey": "proj-1234",
+                      },
+                    ],
+                    "storageAccess": Array [
+                      Object {
+                        "name": "storage name",
+                        "projectKey": "proj-1234",
+                      },
+                    ],
+                  }
+                }
+              />,
+            ]
+          }
+          itemsName="Projects"
+          itemsPerPage={5}
+        />
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;

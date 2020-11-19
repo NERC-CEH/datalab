@@ -27,7 +27,7 @@ describe('userReducer', () => {
     const action = { type, payload };
 
     // Act
-    const nextstate = userReducer({ error: null, fetching: true, value: undefined }, action);
+    const nextstate = userReducer({ error: null, fetching: true, value: [] }, action);
 
     // Assert
     expect(nextstate).toEqual({ error: null, fetching: false, value: payload });
@@ -40,7 +40,7 @@ describe('userReducer', () => {
     const action = { type, payload };
 
     // Act
-    const nextstate = userReducer({ error: null, fetching: false, value: undefined }, action);
+    const nextstate = userReducer({ error: null, fetching: false, value: [] }, action);
 
     // Assert
     expect(nextstate).toEqual({ error: payload, fetching: false, value: [] });

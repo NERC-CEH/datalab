@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sites renders to match snapshot passing correct props to children 1`] = `
+<WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+  defaultExpanded={true}
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+    expandIcon={<Memo(ExpandMoreIcon) />}
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h6"
+    >
+      Sites
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+    <StackCards
+      createPermission=""
+      deletePermission=""
+      deleteStack={[Function]}
+      editPermission=""
+      openCreationForm={[Function]}
+      openPermission=""
+      openStack={[Function]}
+      stacks={
+        Object {
+          "error": null,
+          "fetching": false,
+          "value": Array [
+            Object {
+              "key": "test-key",
+              "name": "Test Name",
+            },
+          ],
+        }
+      }
+      typeName="Site"
+      userPermissions={[Function]}
+    />
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+</WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+`;

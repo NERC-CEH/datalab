@@ -75,12 +75,18 @@ export default function UserProject(props) {
                   <Typography variant="body1">Project viewer</Typography>
                   <Checkbox checked={roles.projectViewer.includes(projectKey)} name="projectViewer" color="primary" disabled />
                 </div>
-                <Projects projects={ projects }/>
+                <Projects projects={projects}/>
                </>
             )}
-            {(filtersOff || filters.siteOwner) && sites.length > 0 && Sites({ sites })}
-            {(filtersOff || filters.notebookOwner) && notebooks.length > 0 && Notebooks({ notebooks })}
-            {(filtersOff || filters.storageAccess) && dataStores.length > 0 && DataStores({ dataStores })}
+            {(filtersOff || filters.siteOwner) && sites.length > 0 && (
+              <Sites sites={sites} />
+            )}
+            {(filtersOff || filters.notebookOwner) && notebooks.length > 0 && (
+              <Notebooks notebooks={notebooks} />
+            )}
+            {(filtersOff || filters.storageAccess) && dataStores.length > 0 && (
+              <DataStores dataStores={dataStores} />
+            )}
           </div>
         </ResourceAccordionDetails>
       </ResourceAccordion>

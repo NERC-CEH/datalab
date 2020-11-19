@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminUsersContainer renders correctly passing correct props to children 1`] = `
+<Fragment>
+  <UserMultiSelect
+    selectedUsers={Array []}
+    setSelectedUsers={[Function]}
+  />
+  <div
+    className="makeStyles-filterControls-1"
+  >
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <span
+        className="makeStyles-filterText-3"
+      >
+        Filter
+      </span>
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="instanceAdmin"
+            onChange={[Function]}
+          />
+        }
+        label="Instance admin"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="projectAdmin"
+            onChange={[Function]}
+          />
+        }
+        label="Project admin"
+      />
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="projectUser"
+            onChange={[Function]}
+          />
+        }
+        label="Project user"
+      />
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="projectViewer"
+            onChange={[Function]}
+          />
+        }
+        label="Project viewer"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="siteOwner"
+            onChange={[Function]}
+          />
+        }
+        label="Site owner"
+      />
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="notebookOwner"
+            onChange={[Function]}
+          />
+        }
+        label="Notebook owner"
+      />
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={
+          <ForwardRef(WithStyles)
+            checked={false}
+            color="primary"
+            name="storageAccess"
+            onChange={[Function]}
+          />
+        }
+        label="Storage access"
+      />
+    </div>
+  </div>
+  <div>
+    <PromisedContentWrapper
+      fetchingClassName="makeStyles-placeholderCard-4"
+      promise={
+        Object {
+          "fetching": false,
+          "value": Array [
+            Object {
+              "user1": Object {
+                "instanceAdmin": true,
+              },
+            },
+            Object {
+              "user2": Object {
+                "instanceAdmin": true,
+              },
+            },
+          ],
+        }
+      }
+    >
+      <Pagination
+        items={
+          Array [
+            <mockConstructor
+              filters={
+                Object {
+                  "instanceAdmin": false,
+                  "notebookOwner": false,
+                  "projectAdmin": false,
+                  "projectUser": false,
+                  "projectViewer": false,
+                  "siteOwner": false,
+                  "storageAccess": false,
+                }
+              }
+              user={
+                Object {
+                  "name": "Test User 1",
+                  "userId": "user1",
+                }
+              }
+            />,
+            <mockConstructor
+              filters={
+                Object {
+                  "instanceAdmin": false,
+                  "notebookOwner": false,
+                  "projectAdmin": false,
+                  "projectUser": false,
+                  "projectViewer": false,
+                  "siteOwner": false,
+                  "storageAccess": false,
+                }
+              }
+              user={
+                Object {
+                  "name": "Test User 2",
+                  "userId": "user2",
+                }
+              }
+            />,
+          ]
+        }
+        itemsName="Users"
+        itemsPerPage={5}
+      />
+    </PromisedContentWrapper>
+  </div>
+</Fragment>
+`;
