@@ -1,13 +1,16 @@
+import { permissionTypes } from 'common';
 import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
 
+const { CATALOGUE_ADMIN_ROLE, CATALOGUE_EDITOR_ROLE, CATALOGUE_PUBLISHER_ROLE, INSTANCE_ADMIN_ROLE } = permissionTypes;
+
 // Used to set defaults for new users, and to fill in missing values for existing users
 const defaultRoles = {
-  catalogueAdmin: false,
-  catalogueEditor: false,
-  cataloguePublisher: false,
-  instanceAdmin: false,
+  [CATALOGUE_ADMIN_ROLE]: false,
+  [CATALOGUE_EDITOR_ROLE]: false,
+  [CATALOGUE_PUBLISHER_ROLE]: false,
+  [INSTANCE_ADMIN_ROLE]: false,
 };
 
 function UserRoles() {

@@ -3,6 +3,18 @@ instanceAdmin:
   - name: instance
     permissions:
       - admin
+catalogueAdmin:
+  - name: catalogue
+    permissions:
+      - admin
+cataloguePublisher:
+  - name: catalogue
+    permissions:
+      - publish
+catalogueEditor:
+  - name: catalogue
+    permissions:
+      - edit
 admin:
   - name: stacks
     permissions:

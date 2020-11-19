@@ -21,6 +21,10 @@ const SYSTEM = 'system';
 // key name used for admin role boolean in auth
 const INSTANCE_ADMIN_ROLE = 'instanceAdmin';
 
+const CATALOGUE_ADMIN_ROLE = 'catalogueAdmin';
+const CATALOGUE_PUBLISHER_ROLE = 'cataloguePublisher';
+const CATALOGUE_EDITOR_ROLE = 'catalogueEditor';
+
 const keyDelim = '_';
 const permissionDelim = ':';
 
@@ -77,6 +81,9 @@ const { SYSTEM_INSTANCE_ADMIN } = systemPermissions;
 export {
   INSTANCE_ADMIN_ROLE,
   SYSTEM_INSTANCE_ADMIN,
+  CATALOGUE_ADMIN_ROLE,
+  CATALOGUE_EDITOR_ROLE,
+  CATALOGUE_PUBLISHER_ROLE,
   PROJECT_NAMESPACE,
   SYSTEM,
   elementPermissions,

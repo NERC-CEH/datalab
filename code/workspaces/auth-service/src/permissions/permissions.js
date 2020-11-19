@@ -3,7 +3,7 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import config from '../config/config';
 
-const { INSTANCE_ADMIN_ROLE, SYSTEM, PROJECT_NAMESPACE } = permissionTypes;
+const { CATALOGUE_ADMIN_ROLE, CATALOGUE_EDITOR_ROLE, CATALOGUE_PUBLISHER_ROLE, INSTANCE_ADMIN_ROLE, SYSTEM, PROJECT_NAMESPACE } = permissionTypes;
 
 const roleDelim = ':';
 
@@ -45,6 +45,19 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
+const getSystemRoles = (userRoles) => {
+  const instanceAdminRoles = userRoles[INSTANCE_ADMIN_ROLE] ? [{ role: INSTANCE_ADMIN_ROLE }] : [];
+  const catalogueAdminRoles = userRoles[CATALOGUE_ADMIN_ROLE] ? [{ role: CATALOGUE_ADMIN_ROLE }] : [];
+  const catalogueEditorRoles = userRoles[CATALOGUE_EDITOR_ROLE] ? [{ role: CATALOGUE_EDITOR_ROLE }] : [];
+  const cataloguePublisherRoles = userRoles[CATALOGUE_PUBLISHER_ROLE] ? [{ role: CATALOGUE_PUBLISHER_ROLE }] : [];
+  return [
+    ...instanceAdminRoles,
+    ...catalogueAdminRoles,
+    ...catalogueEditorRoles,
+    ...cataloguePublisherRoles,
+  ];
+};
+
 const processRoles = (userRoles) => {
   const projectRoles = userRoles.projectRoles || [];
   const projectPermissions = projectRoles
@@ -53,7 +66,7 @@ const processRoles = (userRoles) => {
     .map(projectifyPermissions)
     .reduce(flattenArray, []);
 
-  const systemRoles = userRoles[INSTANCE_ADMIN_ROLE] ? [{ role: INSTANCE_ADMIN_ROLE }] : [];
+  const systemRoles = getSystemRoles(userRoles);
   const systemPermissions = systemRoles
     .map(getPermissions)
     .map(buildPermissions)
