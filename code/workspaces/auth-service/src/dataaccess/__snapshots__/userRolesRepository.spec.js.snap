@@ -3,6 +3,9 @@
 exports[`userRolesRepository read operations getProjectUsers returns expected snapshot 1`] = `
 Array [
   Object {
+    "catalogueAdmin": false,
+    "catalogueEditor": false,
+    "cataloguePublisher": false,
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {
@@ -14,11 +17,13 @@ Array [
         "role": "user",
       },
     ],
-    "toObject": [Function],
     "userId": "uid1",
     "userName": "user1",
   },
   Object {
+    "catalogueAdmin": false,
+    "catalogueEditor": false,
+    "cataloguePublisher": false,
     "instanceAdmin": true,
     "projectRoles": Array [
       Object {
@@ -26,29 +31,34 @@ Array [
         "role": "viewer",
       },
     ],
-    "toObject": [Function],
     "userId": "uid2",
     "userName": "user2",
   },
   Object {
+    "catalogueAdmin": false,
+    "catalogueEditor": false,
+    "cataloguePublisher": false,
+    "instanceAdmin": false,
     "projectRoles": Array [
       Object {
         "projectKey": "project 2",
         "role": "viewer",
       },
     ],
-    "toObject": [Function],
     "userId": "uid2",
     "userName": "user2",
   },
   Object {
+    "catalogueAdmin": false,
+    "catalogueEditor": false,
+    "cataloguePublisher": false,
+    "instanceAdmin": false,
     "projectRoles": Array [
       Object {
         "projectKey": "project 2",
         "role": "viewer",
       },
     ],
-    "toObject": [Function],
     "userId": "uid?",
   },
 ]
@@ -56,6 +66,9 @@ Array [
 
 exports[`userRolesRepository read operations getRoles returns expected snapshot 1`] = `
 Object {
+  "catalogueAdmin": false,
+  "catalogueEditor": false,
+  "cataloguePublisher": false,
   "instanceAdmin": false,
   "projectRoles": Array [
     Object {

@@ -2,19 +2,33 @@ import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
 
+// Used to set defaults for new users, and to fill in missing values for existing users
+const defaultRoles = {
+  catalogueAdmin: false,
+  catalogueEditor: false,
+  cataloguePublisher: false,
+  instanceAdmin: false,
+};
+
 function UserRoles() {
   return database.getModel('UserRoles');
 }
 
-// In line with other repository functions, this returns a promise,
-// but the model document is first converted to an object so the spread operator works as expected.
+function addDefaults(roles) {
+  // The model document is first converted to an object so the spread operator works as expected.
+  return {
+    ...defaultRoles,
+    ...roles.toObject(),
+  };
+}
+
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
     roles = await addRecordForNewUser(userId, userName, []);
   }
 
-  return roles.toObject();
+  return addDefaults(roles);
 }
 
 function convertToUser(roles) {
@@ -41,17 +55,18 @@ async function getUsers() {
   return Object.values(usersMap); // return users
 }
 
-function getProjectUsers(projectKey) {
+async function getProjectUsers(projectKey) {
   const query = { 'projectRoles.projectKey': { $eq: projectKey } };
-  return UserRoles().find(query).exec();
+  const projectUsers = await UserRoles().find(query).exec();
+  return projectUsers.map(addDefaults);
 }
 
 function addRecordForNewUser(userId, userName, projectRoles) {
   const user = {
+    ...defaultRoles,
     userId,
     userName,
     projectRoles,
-    instanceAdmin: false,
   };
   return UserRoles().create(user);
 }

@@ -146,6 +146,9 @@ describe('userRolesRepository', () => {
       expect(mockDatabase().invocation().entity).toEqual({
         userId: 'uid999',
         userName: 'user999',
+        catalogueAdmin: false,
+        catalogueEditor: false,
+        cataloguePublisher: false,
         instanceAdmin: false,
         projectRoles: [],
       });
