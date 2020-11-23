@@ -1,6 +1,9 @@
 import cardsToShow from './cardsToShow';
 
 const projectKey = 'proj-1234';
+const projectAdminKey = 'proj-admin';
+const projectUserKey = 'proj-user';
+const projectViewerKey = 'proj-viewer';
 const noMatchingProjectKey = 'no-matching-key';
 const siteName = 'site name';
 const notebookName = 'notebook name';
@@ -8,9 +11,9 @@ const storageName = 'storage name';
 
 const roles = {
   instanceAdmin: true,
-  projectAdmin: [projectKey],
-  projectUser: [projectKey],
-  projectViewer: [projectKey],
+  projectAdmin: [projectKey, projectAdminKey],
+  projectUser: [projectKey, projectUserKey],
+  projectViewer: [projectKey, projectViewerKey],
   siteOwner: [{ projectKey, name: siteName }],
   notebookOwner: [{ projectKey, name: notebookName }],
   storageAccess: [{ projectKey, name: storageName }],
@@ -19,6 +22,9 @@ const roles = {
 describe('projectCardsToShow', () => {
   it('gives project key if it is a viewable project', () => {
     expect(cardsToShow.projectCardsToShow(roles, projectKey)).toEqual([projectKey]);
+    expect(cardsToShow.projectCardsToShow(roles, projectAdminKey)).toEqual([projectAdminKey]);
+    expect(cardsToShow.projectCardsToShow(roles, projectUserKey)).toEqual([projectUserKey]);
+    expect(cardsToShow.projectCardsToShow(roles, projectViewerKey)).toEqual([projectViewerKey]);
     expect(cardsToShow.projectCardsToShow(roles, noMatchingProjectKey)).toEqual([]);
   });
 });

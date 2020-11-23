@@ -5,9 +5,9 @@ import userRolesRepository from '../dataaccess/userRolesRepository';
 import * as getPermissions from '../permissions/permissions';
 
 jest.mock('../dataaccess/userRolesRepository');
-const getRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
+const getRolesMock = jest.fn().mockResolvedValue([]);
 userRolesRepository.getRoles = getRolesMock;
-const getOtherUserRolesMock = jest.fn().mockReturnValue(Promise.resolve([]));
+const getOtherUserRolesMock = jest.fn().mockResolvedValue([]);
 userRolesRepository.getOtherUserRoles = getOtherUserRolesMock;
 
 jest.mock('../permissions/permissions');

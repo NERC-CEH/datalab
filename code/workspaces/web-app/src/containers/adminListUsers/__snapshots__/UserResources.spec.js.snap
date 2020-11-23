@@ -4,9 +4,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
 <div
   className="makeStyles-container-1"
 >
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-    defaultExpanded={true}
-  >
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
     <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
       expandIcon={<Memo(ExpandMoreIcon) />}
     >
@@ -33,15 +31,9 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         <div
           className="makeStyles-instanceAdmin-5"
         >
-          <WithStyles(ForwardRef(Typography))
-            variant="body1"
-          >
-            Instance admin
-          </WithStyles(ForwardRef(Typography))>
-          <WithStyles(ForwardRef(Checkbox))
+          <InstanceCheckbox
             checked={true}
-            color="primary"
-            disabled={true}
+            label="Instance admin"
             name="instanceAdmin"
           />
         </div>

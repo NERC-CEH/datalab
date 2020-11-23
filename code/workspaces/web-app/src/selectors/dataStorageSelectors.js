@@ -1,5 +1,5 @@
-const selectDataStoraageArray = ({ dataStorage }) => dataStorage;
+const selectDataStorageArray = ({ dataStorage }) => dataStorage;
 
 export default {
-  dataStorageArray: selectDataStoraageArray,
+  dataStorageArray: selectDataStorageArray,
 };

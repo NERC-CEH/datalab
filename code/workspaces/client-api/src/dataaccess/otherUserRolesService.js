@@ -4,12 +4,12 @@ import { get } from 'lodash';
 import config from '../config';
 import axiosErrorHandler from '../util/errorHandlers';
 
-const authServiceUrl = `${config.get('authorisationService')}`;
-const infraServiceUrl = `${config.get('infrastructureApi')}`;
+const authServiceUrl = config.get('authorisationService');
+const infraServiceUrl = config.get('infrastructureApi');
 
-export function getProjectKeysWithRole(authRoles, roles) {
+export function getProjectKeysWithRole(authRoles, role) {
   return authRoles.projectRoles
-    .filter(projectRole => roles.includes(projectRole.role))
+    .filter(projectRole => projectRole.role === role)
     .map(projectRole => projectRole.projectKey);
 }
 
@@ -19,7 +19,7 @@ async function getOtherUserRoles(userId, token) {
   try {
     const responses = await Promise.all([
       axios.get(`${authServiceUrl}/roles/${userId}`, { headers: { authorization: token } }),
-      axios.get(`${infraServiceUrl}/userresources/${userId}`, { headers: { authorization: token } }),
+      axios.get(`${infraServiceUrl}/user-resources/${userId}`, { headers: { authorization: token } }),
     ]);
 
     const { userRoles } = get(responses[0], 'data');
@@ -27,9 +27,9 @@ async function getOtherUserRoles(userId, token) {
 
     return {
       instanceAdmin: userRoles.instanceAdmin,
-      projectAdmin: getProjectKeysWithRole(userRoles, ['admin']),
-      projectUser: getProjectKeysWithRole(userRoles, ['admin', 'user']),
-      projectViewer: getProjectKeysWithRole(userRoles, ['admin', 'user', 'viewer']),
+      projectAdmin: getProjectKeysWithRole(userRoles, 'admin'),
+      projectUser: getProjectKeysWithRole(userRoles, 'user'),
+      projectViewer: getProjectKeysWithRole(userRoles, 'viewer'),
       siteOwner,
       notebookOwner,
       storageAccess,

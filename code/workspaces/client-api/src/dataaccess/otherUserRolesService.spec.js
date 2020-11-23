@@ -28,7 +28,7 @@ describe('otherUserRolesService', () => {
   it('requests roles from auth and infrastructure service', async () => {
     // Arrange
     mock.onGet(`${authServiceUrl}/roles/${userId}`).reply(200, { userRoles: authRoles });
-    mock.onGet(`${infraServiceUrl}/userresources/${userId}`).reply(200, infraRoles);
+    mock.onGet(`${infraServiceUrl}/user-resources/${userId}`).reply(200, infraRoles);
 
     // Act
     const userRoles = await otherUserRolesService.getOtherUserRoles(userId, token);
@@ -37,8 +37,8 @@ describe('otherUserRolesService', () => {
     expect(userRoles).toEqual({
       instanceAdmin: true,
       projectAdmin: ['proj-admin'],
-      projectUser: ['proj-admin', 'proj-user'],
-      projectViewer: ['proj-admin', 'proj-user', 'proj-viewer'],
+      projectUser: ['proj-user'],
+      projectViewer: ['proj-viewer'],
       ...infraRoles,
     });
   });
@@ -46,7 +46,7 @@ describe('otherUserRolesService', () => {
   it('throws an error if request fails', () => {
     // Arrange
     mock.onGet(`${authServiceUrl}/roles/${userId}`).reply(403, { status: 'FORBIDDEN' });
-    mock.onGet(`${infraServiceUrl}/userresources/${userId}`).reply(403, { status: 'FORBIDDEN' });
+    mock.onGet(`${infraServiceUrl}/user-resources/${userId}`).reply(403, { status: 'FORBIDDEN' });
 
     // Assert
     expect(otherUserRolesService.getOtherUserRoles(userId, token))

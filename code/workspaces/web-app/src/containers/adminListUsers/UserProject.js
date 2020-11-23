@@ -3,7 +3,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
-import { PUBLISH, getCategoryFromTypeName, ANALYSIS } from 'common/src/stackTypes';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
@@ -32,12 +31,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function UserProject(props) {
+export default function UserProject({ userId, projectKey, filters, roles }) {
   const allDataStorage = useDataStorageArray();
   const allProjects = useProjectsArray();
   const allStacks = useStacksArray();
   const classes = useStyles();
-  const { projectKey, filters, roles } = props;
   const filtersOff = allFiltersOff(filters);
 
   const userProject = allProjects.value
@@ -47,15 +45,23 @@ export default function UserProject(props) {
     .filter(proj => projectKeys.includes(proj.key));
   const siteNames = cardsToShow.siteCardsToShow(roles, projectKey);
   const sites = allStacks.value
-    .filter(stack => getCategoryFromTypeName(stack.type) === PUBLISH)
     .filter(stack => siteNames.includes(stack.name));
   const notebookNames = cardsToShow.notebookCardsToShow(roles, projectKey);
   const notebooks = allStacks.value
-    .filter(stack => getCategoryFromTypeName(stack.type) === ANALYSIS)
     .filter(stack => notebookNames.includes(stack.name));
   const dataStorageNames = cardsToShow.dataStorageCardsToShow(roles, projectKey);
   const dataStores = allDataStorage.value
     .filter(store => dataStorageNames.includes(store.name));
+
+  const ProjectCheckbox = ({ label, checked, name }) => {
+    const id = `project-checkbox-${userId}-${projectKey}-${name}`;
+    return (
+    <>
+      <Typography id={id} variant="body1">{label}</Typography>
+      <Checkbox checked={checked} name={name} color="primary" disabled aria-labelledby={id} />
+    </>
+    );
+  };
 
   return (
     <div className={classes.container}>
@@ -68,12 +74,9 @@ export default function UserProject(props) {
             {(filtersOff || filters.projectAdmin || filters.projectUser || filters.projectViewer) && projects.length > 0 && (
               <>
                 <div className={classes.projectRoles}>
-                  <Typography variant="body1">Project admin</Typography>
-                  <Checkbox checked={roles.projectAdmin.includes(projectKey)} name="projectAdmin" color="primary" disabled />
-                  <Typography variant="body1">Project user</Typography>
-                  <Checkbox checked={roles.projectUser.includes(projectKey)} name="projectUser" color="primary" disabled />
-                  <Typography variant="body1">Project viewer</Typography>
-                  <Checkbox checked={roles.projectViewer.includes(projectKey)} name="projectViewer" color="primary" disabled />
+                  <ProjectCheckbox label="Project admin" checked={roles.projectAdmin.includes(projectKey)} name="projectAdmin" />
+                  <ProjectCheckbox label="Project user" checked={roles.projectUser.includes(projectKey)} name="projectUser" />
+                  <ProjectCheckbox label="Project viewer" checked={roles.projectViewer.includes(projectKey)} name="projectViewer" />
                 </div>
                 <Projects projects={projects}/>
                </>

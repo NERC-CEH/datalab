@@ -1,27 +1,31 @@
 import allFiltersOff from './allFiltersOff';
 
-const plural = num => (num !== 1 ? 's' : '');
+function summaryString(name, num) {
+  const plural = num !== 1 ? 's' : '';
+  return `${num} ${name}${plural}`;
+}
 
 function projectSummary(filters, roles) {
   const filtersOff = allFiltersOff(filters);
-  if (filtersOff || filters.projectViewer) {
-    const numProjects = roles.projectViewer.length;
-    return [`${numProjects} project${plural(numProjects)}`];
-  } if (filters.projectUser) {
-    const numProjects = roles.projectUser.length;
-    return [`${numProjects} project${plural(numProjects)}`];
-  } if (filters.projectAdmin) {
-    const numProjects = roles.projectAdmin.length;
-    return [`${numProjects} project${plural(numProjects)}`];
+  if (!filtersOff && !filters.projectAdmin && !filters.projectUser && !filters.projectViewer) {
+    return [];
   }
-  return [];
+
+  const projectAdminKeys = (filtersOff || filters.projectAdmin) ? roles.projectAdmin : [];
+  const projectUserKeys = (filtersOff || filters.projectUser) ? roles.projectUser : [];
+  const projectViewerKeys = (filtersOff || filters.projectViewer) ? roles.projectViewer : [];
+
+  const projectKeys = [...projectViewerKeys, ...projectUserKeys, ...projectAdminKeys];
+  const uniqueProjectKeys = [...new Set(projectKeys)].sort();
+  const numProjects = uniqueProjectKeys.length;
+  return [summaryString('project', numProjects)];
 }
 
 function siteSummary(filters, roles) {
   const filtersOff = allFiltersOff(filters);
   if (filtersOff || filters.siteOwner) {
     const numSites = roles.siteOwner.length;
-    return [`${numSites} site${plural(numSites)}`];
+    return [summaryString('site', numSites)];
   }
   return [];
 }
@@ -30,7 +34,7 @@ function notebookSummary(filters, roles) {
   const filtersOff = allFiltersOff(filters);
   if (filtersOff || filters.notebookOwner) {
     const numNotebooks = roles.notebookOwner.length;
-    return [`${numNotebooks} notebook${plural(numNotebooks)}`];
+    return [summaryString('notebook', numNotebooks)];
   }
   return [];
 }
@@ -39,7 +43,7 @@ function storageSummary(filters, roles) {
   const filtersOff = allFiltersOff(filters);
   if (filtersOff || filters.storageAccess) {
     const numDataStores = roles.storageAccess.length;
-    return [`${numDataStores} data store${plural(numDataStores)}`];
+    return [summaryString('data store', numDataStores)];
   }
   return [];
 }

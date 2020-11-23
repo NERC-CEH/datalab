@@ -70,6 +70,7 @@ function AdminUsersContainer() {
 
   // get roles for users
   useEffect(() => {
+    // (sort by name, so gets data in same order as being shown)
     sortByName(users.value).forEach((user) => {
       dispatch(otherUserRolesActions.getOtherUserRoles(user.userId));
     });
@@ -100,6 +101,12 @@ function AdminUsersContainer() {
     setFilters({ ...filters, [event.target.name]: event.target.checked });
   };
 
+  const FilterCheckBox = ({ label, checked, name }) => (
+    <FormControlLabel label={label} control={
+      <Checkbox checked={checked} onChange={handleCheckboxChange} name={name} color="primary" />
+    } />
+  );
+
   return (
     <>
       <UserMultiSelect selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} />
@@ -108,31 +115,17 @@ function AdminUsersContainer() {
           <span className={classes.filterText}>Filter</span>
         </div>
         <div className={classes.filterColumn}>
-          <FormControlLabel label="Instance admin" control={
-            <Checkbox checked={filters.instanceAdmin} onChange={handleCheckboxChange} name="instanceAdmin" color="primary" />
-          } />
+          <FilterCheckBox label="Instance admin" checked={filters.instanceAdmin} name="instanceAdmin" />
         </div>
         <div className={classes.filterColumn}>
-          <FormControlLabel label="Project admin" control={
-            <Checkbox checked={filters.projectAdmin} onChange={handleCheckboxChange} name="projectAdmin" color="primary" />
-          } />
-          <FormControlLabel label="Project user" control={
-            <Checkbox checked={filters.projectUser} onChange={handleCheckboxChange} name="projectUser" color="primary" />
-          } />
-          <FormControlLabel label="Project viewer" control={
-            <Checkbox checked={filters.projectViewer} onChange={handleCheckboxChange} name="projectViewer" color="primary" />
-          } />
+          <FilterCheckBox label="Project admin" checked={filters.projectAdmin} name="projectAdmin" />
+          <FilterCheckBox label="Project user" checked={filters.projectUser} name="projectUser" />
+          <FilterCheckBox label="Project viewer" checked={filters.projectViewer} name="projectViewer" />
         </div>
         <div className={classes.filterColumn}>
-          <FormControlLabel label="Site owner" control={
-            <Checkbox checked={filters.siteOwner} onChange={handleCheckboxChange} name="siteOwner" color="primary" />
-          } />
-          <FormControlLabel label="Notebook owner" control={
-            <Checkbox checked={filters.notebookOwner} onChange={handleCheckboxChange} name="notebookOwner" color="primary" />
-          } />
-          <FormControlLabel label="Storage access" control={
-            <Checkbox checked={filters.storageAccess} onChange={handleCheckboxChange} name="storageAccess" color="primary" />
-          } />
+          <FilterCheckBox label="Site owner" checked={filters.siteOwner} name="siteOwner" />
+          <FilterCheckBox label="Notebook owner" checked={filters.notebookOwner} name="notebookOwner" />
+          <FilterCheckBox label="Storage access" checked={filters.storageAccess} name="storageAccess" />
         </div>
       </div>
       <div>

@@ -71,7 +71,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const shouldRenderShare = userActions.share && shareStack !== undefined;
   const shouldRenderRestart = userActions.restart && restartStack !== undefined;
   const shouldRenderDelete = userActions.delete && deleteStack !== undefined;
-  const shouldRenderSecondaryActionsMenu = shouldRenderLogs
+  const shouldRenderMenuItems = shouldRenderLogs
     || shouldRenderEdit
     || shouldRenderShare
     || shouldRenderRestart
@@ -95,7 +95,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           </div>
         </Tooltip>
       </PermissionWrapper>}
-      {ownsStack && stack.status && shouldRenderSecondaryActionsMenu && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {ownsStack && stack.status && shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
           aria-controls="more-menu"
           aria-haspopup="true"

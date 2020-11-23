@@ -47,14 +47,24 @@ export default function UserResources(props) {
   const projects = projectsToShow(filters, roles);
 
   const renderedProjects = projects && projects.length > 0
-    ? projects.map(projectKey => <UserProject key={projectKey} projectKey={projectKey} filters={filters} roles={roles} />)
+    ? projects.map(projectKey => <UserProject key={projectKey} userId={user.userId} projectKey={projectKey} filters={filters} roles={roles} />)
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
       <Typography variant="body1">No projects to display.</Typography>
     </div>];
 
+  const InstanceCheckbox = ({ label, checked, name }) => {
+    const id = `instance-checkbox-${user.userId}-${name}`;
+    return (
+      <>
+        <Typography id={id} variant="body1">{label}</Typography>
+        <Checkbox checked={checked} name={name} color="primary" disabled aria-labelledby={id} />
+      </>
+    );
+  };
+
   return (
     <div className={classes.container}>
-      <ResourceAccordion defaultExpanded>
+      <ResourceAccordion>
         <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.summary}>
             <Typography variant="h5" className={classes.heading}>{user.name}</Typography>
@@ -64,8 +74,7 @@ export default function UserResources(props) {
         <ResourceAccordionDetails>
           <div className={classes.resources}>
             <div className={classes.instanceAdmin}>
-              <Typography variant="body1">Instance admin</Typography>
-              <Checkbox checked={roles.instanceAdmin} name="instanceAdmin" color="primary" disabled />
+              <InstanceCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" />
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>

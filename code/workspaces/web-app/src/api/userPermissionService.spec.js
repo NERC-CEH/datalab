@@ -18,12 +18,10 @@ describe('userPermissionService', () => {
       });
     });
 
-    it('should throw an error if the query fails', () => {
+    it('should throw an error if the query fails', async () => {
       mockClient.prepareFailure('error');
 
-      return userPermissionsService.getUserPermissions().catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      await expect(userPermissionsService.getUserPermissions()).rejects.toEqual({ error: 'error' });
     });
   });
 
@@ -42,15 +40,13 @@ describe('userPermissionService', () => {
       expect(mockClient.lastQuery()).toMatchSnapshot();
     });
 
-    it('should throw an error if the query fails', () => {
+    it('should throw an error if the query fails', async () => {
       // Arrange
       const userId = 'user-1234';
       mockClient.prepareFailure('error');
 
       // Assert
-      return userPermissionsService.getOtherUserRoles(userId).catch((error) => {
-        expect(error).toEqual({ error: 'error' });
-      });
+      await expect(userPermissionsService.getOtherUserRoles(userId)).rejects.toEqual({ error: 'error' });
     });
   });
 });

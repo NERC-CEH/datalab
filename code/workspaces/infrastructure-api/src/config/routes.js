@@ -17,7 +17,7 @@ function configureRoutes(app) {
   app.use('/volume', volumeRouter);
   app.use('/volumes', volumesRouter);
   app.use('/logs', logsRouter);
-  app.use('/userresources', userResourcesRouter);
+  app.use('/user-resources', userResourcesRouter);
 }
 
 export default { configureRoutes };

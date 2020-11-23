@@ -1,29 +1,26 @@
-function dataStorageCardsToShow(roles, projectKey) {
-  const dataStoreNames = roles.storageAccess
+function filterByProjectKeyAndMapToName(resources, projectKey) {
+  return resources
     .filter(resource => resource.projectKey === projectKey)
     .map(resource => resource.name);
+}
 
-  return dataStoreNames;
+function dataStorageCardsToShow(roles, projectKey) {
+  return filterByProjectKeyAndMapToName(roles.storageAccess, projectKey);
 }
 
 function notebookCardsToShow(roles, projectKey) {
-  const notebookNames = roles.notebookOwner
-    .filter(resource => resource.projectKey === projectKey)
-    .map(resource => resource.name);
-
-  return notebookNames;
-}
-
-function projectCardsToShow(roles, projectKey) {
-  return roles.projectViewer.includes(projectKey) ? [projectKey] : [];
+  return filterByProjectKeyAndMapToName(roles.notebookOwner, projectKey);
 }
 
 function siteCardsToShow(roles, projectKey) {
-  const siteNames = roles.siteOwner
-    .filter(resource => resource.projectKey === projectKey)
-    .map(resource => resource.name);
+  return filterByProjectKeyAndMapToName(roles.siteOwner, projectKey);
+}
 
-  return siteNames;
+function projectCardsToShow(roles, projectKey) {
+  return (roles.projectViewer.includes(projectKey)
+    || roles.projectUser.includes(projectKey)
+    || roles.projectAdmin.includes(projectKey)
+  ) ? [projectKey] : [];
 }
 
 export default { dataStorageCardsToShow, notebookCardsToShow, projectCardsToShow, siteCardsToShow };

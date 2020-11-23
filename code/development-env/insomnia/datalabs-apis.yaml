@@ -7,7 +7,7 @@ resources:
     parentId: fld_8f24d304923241198bc95c2a94678530
     modified: 1605178398396
     created: 1605178322806
-    url: "{{ infra_api_url  }}/userresources/auth0|5d2efacb1ca16e0efd770ddc"
+    url: "{{ infra_api_url  }}/user-resources/auth0|5d2efacb1ca16e0efd770ddc"
     name: Get Resources by User
     description: ""
     method: GET
@@ -727,7 +727,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n  checkNameUniqueness(name: \"asdfa\", projectKey:
+      text:
+        '{"query":"query {\n  checkNameUniqueness(name: \"asdfa\", projectKey:
         \"project\")\n}"}'
     parameters: []
     headers:
@@ -1029,7 +1030,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"mutation {\n  removeUserFromDataStore(dataStore: {\n    name:
+      text:
+        '{"query":"mutation {\n  removeUserFromDataStore(dataStore: {\n    name:
         \"test\"\n    users: [\"a\", \"b\"]\n  })
         {\n    id\n    displayName\n  }\n}"}'
     parameters: []

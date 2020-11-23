@@ -24,37 +24,19 @@ exports[`UserProject renders to match snapshot passing correct props to children
         <div
           className="makeStyles-projectRoles-4"
         >
-          <WithStyles(ForwardRef(Typography))
-            variant="body1"
-          >
-            Project admin
-          </WithStyles(ForwardRef(Typography))>
-          <WithStyles(ForwardRef(Checkbox))
+          <ProjectCheckbox
             checked={true}
-            color="primary"
-            disabled={true}
+            label="Project admin"
             name="projectAdmin"
           />
-          <WithStyles(ForwardRef(Typography))
-            variant="body1"
-          >
-            Project user
-          </WithStyles(ForwardRef(Typography))>
-          <WithStyles(ForwardRef(Checkbox))
+          <ProjectCheckbox
             checked={true}
-            color="primary"
-            disabled={true}
+            label="Project user"
             name="projectUser"
           />
-          <WithStyles(ForwardRef(Typography))
-            variant="body1"
-          >
-            Project viewer
-          </WithStyles(ForwardRef(Typography))>
-          <WithStyles(ForwardRef(Checkbox))
+          <ProjectCheckbox
             checked={true}
-            color="primary"
-            disabled={true}
+            label="Project viewer"
             name="projectViewer"
           />
         </div>

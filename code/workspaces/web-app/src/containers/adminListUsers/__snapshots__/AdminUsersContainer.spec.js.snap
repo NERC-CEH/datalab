@@ -21,90 +21,48 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
     <div
       className="makeStyles-filterColumn-2"
     >
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="instanceAdmin"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Instance admin"
+        name="instanceAdmin"
       />
     </div>
     <div
       className="makeStyles-filterColumn-2"
     >
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="projectAdmin"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Project admin"
+        name="projectAdmin"
       />
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="projectUser"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Project user"
+        name="projectUser"
       />
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="projectViewer"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Project viewer"
+        name="projectViewer"
       />
     </div>
     <div
       className="makeStyles-filterColumn-2"
     >
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="siteOwner"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Site owner"
+        name="siteOwner"
       />
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="notebookOwner"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Notebook owner"
+        name="notebookOwner"
       />
-      <WithStyles(ForwardRef(FormControlLabel))
-        control={
-          <ForwardRef(WithStyles)
-            checked={false}
-            color="primary"
-            name="storageAccess"
-            onChange={[Function]}
-          />
-        }
+      <FilterCheckBox
+        checked={false}
         label="Storage access"
+        name="storageAccess"
       />
     </div>
   </div>
