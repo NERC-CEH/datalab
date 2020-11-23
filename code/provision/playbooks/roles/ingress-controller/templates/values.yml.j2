@@ -29,7 +29,7 @@ defaultBackend:
     - name: APP_PORT
       value: '8000'
     - name: HOMEPAGE
-      value: https://{{ namespace.domain }}
+      value: https://{{ namespace.datalabName }}.{{ namespace.domain }}
   port: 8000
   service:
     servicePort: 8000
