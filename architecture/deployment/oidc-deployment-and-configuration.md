@@ -21,7 +21,7 @@ guides can be found here;
 
 Requirement for OIDC application;
 
-- The name should be clearly associated with "DataLabs"
+- The name should be recognisable by users logging in as they will generally be re-directed a separate login page with the time.
 - The client must be OIDC compliant (this is typically a configuration option
   during creation).
 - Callback URLs must be configured to match the callback URLs of the DataLab deployment.
@@ -84,7 +84,7 @@ of different OIDC providers and associated configuration.
 ```
 
 - Keycloak (with a keycloak instance set up on a accessible host which can be
-  resolved via `keycloak` on port `8081`, and a realm created (which the client
+  resolved via `keycloak` on port `8080`, and a realm created (which the client
   exists within) called `Datalabs`).
 
 ```yaml
@@ -92,12 +92,20 @@ of different OIDC providers and associated configuration.
       "client_id": "{{ oidcProviderClientId }}",
       "redirect_uri": "https://{{ datalabName }}.{{ domain }}/callback",
       "response_type": "code",
-      "scope": "openid profile",
-      "authority": "http://keycloak:8081/auth/realms/Datalabs",
+      "scope": "openid profile email",
+      "authority": "http://keycloak:8080/auth/realms/DataLabs",
       "automaticSilentRenew": true,
       "accessTokenExpiringNotificationTime": "600",
       "filterProtocolClaims": true,
-      "loadUserInfo": true
+      "loadUserInfo": true,
+      "metadata": {
+        "issuer": "http://keycloak:8080/auth/realms/DataLabs",
+        "authorization_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/auth",
+        "userinfo_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/userinfo",
+        "end_session_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/logout?redirect_uri=https://{{ datalabName }}.{{ domain }}",
+        "jwks_uri": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/certs",
+        "token_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/token"
+      }
     }
 ```
 
@@ -124,15 +132,15 @@ when deploying DataLabs.
 The following parameters must be specified regardless of the OIDC provider being
 used;
 
-| Name                   | Description                                                                                                                                                             | Example                     |   |   |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|---|---|
-| OIDC_PROVIDER_DOMAIN   | This should be the base URL of the OIDC provider                                                                                                                        | https://tenancy.auth0.com/  |   |   |
-| OIDC_PROVIDER_AUDIENCE | This will be a value which is custom to the DataLabs deployment and will be used as the audience parameter on internal tokens that the authentication service generates | https://datalabs.domain/api |   |   |
+| Name                   | Description                                                                                                                                                             | Example                     |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| OIDC_PROVIDER_DOMAIN   | This should be the base URL of the OIDC provider                                                                                                                        | https://tenancy.auth0.com/  |
+| OIDC_PROVIDER_AUDIENCE | This will be a value which is custom to the DataLabs deployment and will be used as the audience parameter on internal tokens that the authentication service generates | https://datalabs.domain/api |
 
 
 Not all providers offer a `${OIDC_PROVIDER_DOMAIN}/.well-known/openid-configuration` endpoint. If the provider you are using does not, two additional paramters must be specified for the necessary configuration information.
 
-| Name                      | Description                                                | Example (and default)  |   |   |
-|---------------------------|------------------------------------------------------------|------------------------|---|---|
-| OIDC_OAUTH_TOKEN_ENDPOINT | Endpoint from the BASE URL where oauth tokens can be found | /oauth/token           |   |   |
-| OIDC_JWKS_ENDPOINT        | Endpoint from the BASE URL where JWKs can be found         | /.well-known/jwks.json |   |   |
+| Name                      | Description                                                | Example (and default)  |
+|---------------------------|------------------------------------------------------------|------------------------|
+| OIDC_OAUTH_TOKEN_ENDPOINT | Endpoint from the BASE URL where oauth tokens can be found | /oauth/token           |
+| OIDC_JWKS_ENDPOINT        | Endpoint from the BASE URL where JWKs can be found         | /.well-known/jwks.json |
