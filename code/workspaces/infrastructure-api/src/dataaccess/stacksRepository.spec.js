@@ -19,8 +19,12 @@ describe('stacksRepository', () => {
     mockDatabase().clear();
   });
 
-  it('getAll returns expected snapshot', () => stacksRepository.getAll(user).then((stacks) => {
+  it('getAllByUser returns expected snapshot', () => stacksRepository.getAllByUser(user).then((stacks) => {
     expect(mockDatabase().user()).toBe('username');
+    expect(stacks).toMatchSnapshot();
+  }));
+
+  it('getAllStacks returns expected snapshot', () => stacksRepository.getAllStacks(user).then((stacks) => {
     expect(stacks).toMatchSnapshot();
   }));
 

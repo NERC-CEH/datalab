@@ -57,18 +57,6 @@ describe('authorisation controller', () => {
     });
   });
 
-  describe('getRolesForOtherUser', () => {
-    it('should generate and return roles', async () => {
-      const response = httpMocks.createResponse();
-      const request = { user: { sub: 'expectedUserName' }, query: { userName: 'user1' } };
-      const expectedRoles = ['expected', 'roles'];
-      getOtherUserRolesMock.mockReturnValue(expectedRoles);
-
-      await authorisation.getRolesForOtherUser(request, response);
-      expect(response._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
-    });
-  });
-
   describe('generatePermissionToken', () => {
     it('should generate and return access token', () => {
       const response = httpMocks.createResponse();

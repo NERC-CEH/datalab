@@ -7,6 +7,7 @@ import {
   UPDATE_STACKS_ACTION,
   UPDATE_STACKS_BY_CATEGORY_ACTION,
 } from '../actions/stackActions';
+import { GET_ALL_PROJECTS_AND_RESOURCES_ACTION } from '../actions/projectActions';
 
 const currentValue = [
   { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
@@ -63,7 +64,7 @@ describe('stacksReducer', () => {
       const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: currentValue });
     });
   });
 
@@ -101,7 +102,7 @@ describe('stacksReducer', () => {
       const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: currentValue });
     });
   });
 
@@ -139,7 +140,7 @@ describe('stacksReducer', () => {
       const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: currentValue });
     });
   });
 
@@ -177,7 +178,45 @@ describe('stacksReducer', () => {
       const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
 
       // Assert
-      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: [] });
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: currentValue });
+    });
+  });
+
+  describe('should handle GET_ALL_PROJECTS_AND_RESOURCES_ACTION', () => {
+    it('PENDING', () => {
+      // Arrange
+      const type = `${GET_ALL_PROJECTS_AND_RESOURCES_ACTION}_${PROMISE_TYPE_PENDING}`;
+      const action = { type };
+
+      // Act
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
+
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: true, updating: false, value: currentValue });
+    });
+
+    it('SUCCESS', () => {
+      // Arrange
+      const type = `${GET_ALL_PROJECTS_AND_RESOURCES_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+      const action = { type, payload: { stacks: valuePayload } };
+
+      // Act
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
+
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: false, updating: false, value: valuePayload });
+    });
+
+    it('FAILURE', () => {
+      // Arrange
+      const type = `${GET_ALL_PROJECTS_AND_RESOURCES_ACTION}_${PROMISE_TYPE_FAILURE}`;
+      const action = { type, payload: error };
+
+      // Act
+      const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
+
+      // Assert
+      expect(nextstate).toEqual({ error, fetching: false, updating: false, value: currentValue });
     });
   });
 });

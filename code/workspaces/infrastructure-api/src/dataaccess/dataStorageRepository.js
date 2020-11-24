@@ -17,6 +17,11 @@ function getAllActiveByUser(sub) {
   return DataStorage().find(query).exec();
 }
 
+function getAllActive() {
+  const query = { status: { $ne: DELETED } };
+  return DataStorage().find(query).exec();
+}
+
 function getAllByName(projectKey, user, name) {
   // For all users
   const query = filterByProject(projectKey, { name });
@@ -87,4 +92,4 @@ const createStorageUrls = requestedDataStore => ({
   internalEndpoint: `http://minio-${requestedDataStore.name}.${requestedDataStore.projectKey}.svc.cluster.local/minio`,
 });
 
-export default { getAllProjectActive, getAllActiveByUser, getAllByName, getById, create, update, addUsers, removeUsers };
+export default { getAllProjectActive, getAllActiveByUser, getAllActive, getAllByName, getById, create, update, addUsers, removeUsers };

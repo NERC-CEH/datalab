@@ -13,6 +13,27 @@ function loadProjects() {
     .then(errorHandler('data.projects'));
 }
 
+async function getAllProjectsAndResources() {
+  const query = `
+    GetAllProjectsAndResources {
+      allProjectsAndResources {
+        projects {
+          id, key, name, description, accessible
+        }
+        storage {
+          id, projectKey, name, displayName, description, type, stacksMountingStore { id }, status, users
+        }
+        stacks {
+          id, projectKey, category, displayName, name, users, type, description, status, shared, visible
+        }
+      }
+    }`;
+
+  const allProjectsAndResources = await gqlQuery(query)
+    .then(errorHandler('data.allProjectsAndResources'));
+  return allProjectsAndResources;
+}
+
 function loadProjectInfo(projectKey) {
   const query = `
     LoadProjectInfo($projectKey: String!) {
@@ -65,4 +86,4 @@ function checkProjectKeyUniqueness(projectKey) {
     .then(errorHandler('data.checkProjectKeyUniqueness'));
 }
 
-export default { loadProjects, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness, updateProject };
+export default { loadProjects, getAllProjectsAndResources, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness, updateProject };

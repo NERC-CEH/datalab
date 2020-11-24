@@ -27,8 +27,8 @@ type Query {
     # List permissions of current user
     userPermissions: [String]
 
-    # List permissions of other user
-    otherUserRoles(userId: String!): UserRoles
+    # Get all users and roles
+    allUsersAndRoles: [UserAndRoles]
 
     # Checks internal name is unique.
     checkNameUniqueness(projectKey: String!, name: String!): Boolean
@@ -44,6 +44,9 @@ type Query {
 
     # Details of a single project
     project(projectKey: String!): Project
+
+    # All projects and resources
+    allProjectsAndResources: AllProjectsAndResources
 
     # Checks project key is unique
     checkProjectKeyUniqueness(projectKey: String!): Boolean
@@ -142,6 +145,7 @@ type Stack {
     displayName: String
     description: String
     type: String
+    category: String
     users: [String]
     url: String
     internalEndpoint: String
@@ -282,14 +286,22 @@ type Resource {
     name: String!
 }
 
-type UserRoles {
+type ProjectPermission {
+    projectKey: String!,
+    role: ProjectRole!,
+}
+
+type UserAndRoles {
     instanceAdmin: Boolean!
-    projectAdmin: [String!]
-    projectUser: [String!]
-    projectViewer: [String!]
-    siteOwner: [Resource!]
-    notebookOwner: [Resource!]
-    storageAccess: [Resource!]
+    userId: ID!
+    name: String!
+    projectRoles: [ProjectPermission!]
+}
+
+type AllProjectsAndResources {
+    projects: [Project!]
+    storage: [DataStore!]
+    stacks: [Stack!]
 }
 
 input PermissionAddRequest {

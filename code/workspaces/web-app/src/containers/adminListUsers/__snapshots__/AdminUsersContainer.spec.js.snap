@@ -70,21 +70,27 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
     <PromisedContentWrapper
       fetchingClassName="makeStyles-placeholderCard-4"
       promise={
-        Object {
-          "fetching": false,
-          "value": Array [
-            Object {
-              "user1": Object {
+        Array [
+          Object {
+            "fetching": false,
+            "value": Array [
+              Object {
                 "instanceAdmin": true,
+                "name": "Test User 1",
+                "userId": "user1",
               },
-            },
-            Object {
-              "user2": Object {
-                "instanceAdmin": true,
+              Object {
+                "instanceAdmin": false,
+                "name": "Test User 2",
+                "userId": "user2",
               },
-            },
-          ],
-        }
+            ],
+          },
+          Object {
+            "fetching": false,
+            "value": Array [],
+          },
+        ]
       }
     >
       <Pagination
@@ -100,6 +106,17 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                   "projectViewer": false,
                   "siteOwner": false,
                   "storageAccess": false,
+                }
+              }
+              roles={
+                Object {
+                  "instanceAdmin": true,
+                  "notebookOwner": Array [],
+                  "projectAdmin": Array [],
+                  "projectUser": Array [],
+                  "projectViewer": Array [],
+                  "siteOwner": Array [],
+                  "storageAccess": Array [],
                 }
               }
               user={
@@ -119,6 +136,17 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                   "projectViewer": false,
                   "siteOwner": false,
                   "storageAccess": false,
+                }
+              }
+              roles={
+                Object {
+                  "instanceAdmin": false,
+                  "notebookOwner": Array [],
+                  "projectAdmin": Array [],
+                  "projectUser": Array [],
+                  "projectViewer": Array [],
+                  "siteOwner": Array [],
+                  "storageAccess": Array [],
                 }
               }
               user={

@@ -19,7 +19,7 @@ function configureRoutes(app) {
   app.get('/auth', cookieAuthMiddleware, auth.checkUser);
   app.get('/authorise', tokenAuthMiddleware, auth.generatePermissionToken);
   app.get('/permissions', dtMW, auth.getPermissionsForUser);
-  app.get('/roles/:userId', dtMW, getUserValidator, permissionChecker(SYSTEM_INSTANCE_ADMIN), auth.getRolesForOtherUser);
+  app.get('/roles', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userManagement.getAllUsersAndRoles);
   app.get('/jwks', auth.serveJWKS);
   app.get('/users/:userId', dtMW, getUserValidator, userManagement.getUser);
   app.get('/users', dtMW, userManagement.getUsers);

@@ -10,20 +10,6 @@ Object {
 }
 `;
 
-exports[`stacksRepository getAll returns expected snapshot 1`] = `
-Array [
-  Object {
-    "name": "Stack 1",
-    "users": Array [
-      "username",
-    ],
-  },
-  Object {
-    "name": "Stack 2",
-  },
-]
-`;
-
 exports[`stacksRepository getAllByCategory returns expected snapshot 1`] = `
 Array [
   Object {
@@ -38,7 +24,35 @@ Array [
 ]
 `;
 
+exports[`stacksRepository getAllByUser returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+    "users": Array [
+      "username",
+    ],
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
 exports[`stacksRepository getAllByVolumeMount returns expected snapshot 1`] = `
+Array [
+  Object {
+    "name": "Stack 1",
+    "users": Array [
+      "username",
+    ],
+  },
+  Object {
+    "name": "Stack 2",
+  },
+]
+`;
+
+exports[`stacksRepository getAllStacks returns expected snapshot 1`] = `
 Array [
   Object {
     "name": "Stack 1",

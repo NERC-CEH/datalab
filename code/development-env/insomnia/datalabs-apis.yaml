@@ -1,14 +1,14 @@
 _type: export
 __export_format: 4
-__export_date: 2020-11-18T09:12:19.600Z
+__export_date: 2020-11-24T13:25:47.463Z
 __export_source: insomnia.desktop.app:v2020.4.2
 resources:
-  - _id: req_adb98daf5ba34b8e8c8b0026c32bec43
+  - _id: req_f69cc29ea22447988e34b96b7312ded1
     parentId: fld_8f24d304923241198bc95c2a94678530
-    modified: 1605178398396
-    created: 1605178322806
-    url: "{{ infra_api_url  }}/user-resources/auth0|5d2efacb1ca16e0efd770ddc"
-    name: Get Resources by User
+    modified: 1606144624304
+    created: 1606144312377
+    url: "{{ infra_api_url  }}/resources"
+    name: Get all projects and resources
     description: ""
     method: GET
     body: {}
@@ -17,7 +17,7 @@ resources:
     authentication:
       token: "{{ internal_token  }}"
       type: bearer
-    metaSortKey: -1568712933596.625
+    metaSortKey: -1568712933595.0625
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -56,7 +56,7 @@ resources:
     _type: workspace
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
     parentId: fld_5e6448fbd48f422ab34cfdce676516c9
-    modified: 1601540337344
+    modified: 1605698364033
     created: 1568718531356
     url: "{{ infra_api_url  }}/projects"
     name: Create Project
@@ -66,7 +66,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"key": "another-project",
+        	"key": "egproj",
         	"name": "Another Project",
         	"description": "Another project that was added for testing purposes.",
         	"collaborationLink": "https://google.com"
@@ -337,9 +337,9 @@ resources:
     _type: request_group
   - _id: req_d460502f6a654c60abbfa6b619898eaf
     parentId: fld_f8507cecaacc4b00bd789a1cd72c59cd
-    modified: 1602495084891
+    modified: 1606141405911
     created: 1602494262838
-    url: "{{ infra_api_url  }}/volumes/active/ploc"
+    url: "{{ infra_api_url  }}/volumes/active/project"
     name: Get Volumes by Project
     description: ""
     method: GET
@@ -393,9 +393,9 @@ resources:
     _type: request_group
   - _id: req_79f09f03b2724d34a32b791c74a38d6c
     parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1575973442889
+    modified: 1605799588286
     created: 1567084820937
-    url: "{{ auth_url  }}/projects/spooky/users"
+    url: "{{ auth_url  }}/projects/project/users"
     name: Get User Permissions
     description: ""
     method: GET
@@ -483,12 +483,12 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_6dd804753ad54f32b9b7db5a29ce82ff
+  - _id: req_cdc0663383f14efd9663e08cb2bc351d
     parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1605175945049
-    created: 1605026407389
-    url: "{{ auth_url  }}/roles/auth0|5bd9cd5082e23e4889c79d36"
-    name: Get roles for other user
+    modified: 1606143163484
+    created: 1606143158577
+    url: "{{ auth_url  }}/roles/"
+    name: Get all users and roles
     description: ""
     method: GET
     body: {}
@@ -497,7 +497,7 @@ resources:
     authentication:
       token: "{{ internal_token  }}"
       type: bearer
-    metaSortKey: -1567085050763.125
+    metaSortKey: -1567085050761.5625
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -564,7 +564,7 @@ resources:
     _type: request
   - _id: req_09e0efcf4b0f4a8e90a820f3a4c35e2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1576247774070
+    modified: 1606139841618
     created: 1575988247734
     url: "{{ client_api_url  }}/api"
     name: logs
@@ -690,7 +690,7 @@ resources:
     _type: request
   - _id: req_62f3cb4b31c84181884cf475dc5185a5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1569421413586
+    modified: 1606141388498
     created: 1568396058200
     url: "{{ client_api_url  }}/api"
     name: Volumes
@@ -778,7 +778,7 @@ resources:
     _type: request
   - _id: req_d1726df0932641caabd32fb810c33f32
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1575973324539
+    modified: 1605801554032
     created: 1568024663043
     url: "{{ client_api_url  }}/api"
     name: User Permissions
@@ -840,7 +840,7 @@ resources:
     _type: request
   - _id: req_957c83a53645464e9edd5cd83c340c87
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1575973642657
+    modified: 1606146077931
     created: 1568027279146
     url: "{{ client_api_url  }}/api"
     name: Storage
@@ -1053,7 +1053,7 @@ resources:
     _type: request
   - _id: req_528b76772803434fadd38e9258d502ce
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1605176430181
+    modified: 1606147742314
     created: 1605021417686
     url: "{{ client_api_url  }}/api"
     name: users
@@ -1079,21 +1079,19 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_c8be9425405d461789ec9f9a04082563
+  - _id: req_ac4015a6432b46a9bba80a0f5e200a63
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1605690672753
-    created: 1605027489777
+    modified: 1606224262586
+    created: 1606145410033
     url: "{{ client_api_url  }}/api"
-    name: Other User Roles
+    name: All users and roles
     description: ""
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n  otherUserRoles(userId:
-        \"auth0|5d2efacb1ca16e0efd770ddc\")
-        {\n    instanceAdmin,\n    projectAdmin,\n    projectUser,\n    projectViewer,\n    siteOwner
-        { projectKey, name},\n    notebookOwner { projectKey,
-        name},\n    storageAccess { projectKey, name}\n  }\n}"}'
+      text: '{"query":"query {\n  allUsersAndRoles
+        {\n    userId,\n    name,\n    instanceAdmin,\n    projectRoles
+        {\n      projectKey,\n      role\n    }\n  }\n}"}'
     parameters: []
     headers:
       - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
@@ -1102,7 +1100,38 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 850
+    metaSortKey: 900
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0a1e7cfd12fe4780b0098d6c8bffc7db
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1606224115446
+    created: 1606147761105
+    url: "{{ client_api_url  }}/api"
+    name: All projects and resources
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  allProjectsAndResources {\n    projects
+        {\n      id,\n      key,\n      name,\n      description,\n      collaborationLink\n    }\n    storage
+        {\n      id,\n      projectKey,\n      name,\n      displayName,\n      description,\n      type,\n      volumeSize,\n      url,\n      internalEndpoint,\n      users,\n      status,\n    }\n    stacks
+        {\n      id,\n      projectKey,\n      name,\n      displayName,\n      description,\n      type,\n      category,\n      users,\n      url,\n      internalEndpoint,\n      volumeMount,\n      status,\n      visible\n    }\n  }\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 950
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true

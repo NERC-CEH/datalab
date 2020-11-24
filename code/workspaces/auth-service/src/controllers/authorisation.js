@@ -43,18 +43,6 @@ function getPermissionsForUser(request, response) {
     });
 }
 
-async function getRolesForOtherUser(request, response) {
-  const userId = get(request, 'params.userId');
-  try {
-    const userRoles = await userRolesRepository.getOtherUserRoles(userId);
-    return response.json({ userRoles });
-  } catch (err) {
-    logger.error(`Error retrieving roles for user ${userId}: ${err}`);
-    response.status(500);
-    return response.send({ message: err.message });
-  }
-}
-
 function generatePermissionToken(request, response) {
   const userId = get(request, 'user.sub');
   const userName = get(request, 'query.userName');
@@ -99,4 +87,4 @@ function serveJWKS(request, response) {
   return response.send({ keys: [jwk] });
 }
 
-export default { checkUser, getPermissionsForUser, getRolesForOtherUser, generatePermissionToken, serveJWKS };
+export default { checkUser, getPermissionsForUser, generatePermissionToken, serveJWKS };

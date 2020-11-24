@@ -1,20 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`userPermissionService getOtherUserRoles should build correct query and unpack the result 1`] = `
-"
-    GetOtherUserRoles($userId: String!) {
-      otherUserRoles(userId: $userId) {
-        instanceAdmin,
-        projectAdmin,
-        projectUser,
-        projectViewer,
-        siteOwner { projectKey, name},
-        notebookOwner { projectKey, name},
-        storageAccess { projectKey, name}
-      }
-    }"
-`;
-
 exports[`userPermissionService getUserPermissions should build correct query and unpack the result 1`] = `
 "
     GetPermissions {

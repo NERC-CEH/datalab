@@ -39,11 +39,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function UserResources(props) {
+export default function UserResources({ user, filters, roles }) {
   const classes = useStyles();
-  const { user, filters, roles } = props;
 
-  if (!roles) { return null; }
+  if (!roles) {
+    return null;
+  }
   const projects = projectsToShow(filters, roles);
 
   const renderedProjects = projects && projects.length > 0

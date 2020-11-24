@@ -1,18 +1,18 @@
 import useShallowSelector from './useShallowSelector';
-import otherUserRolesSelectors from '../selectors/otherUserRolesSelectors';
-import { useOtherUserRoles } from './otherUserRolesHooks';
+import rolesSelectors from '../selectors/rolesSelectors';
+import { useRoles } from './rolesHooks';
 
 jest.mock('./useShallowSelector');
 useShallowSelector.mockReturnValue('expected-value');
 
-describe('useOtherUserRoles', () => {
+describe('useRoles', () => {
   it('returns result of shallow selector with correct selector function', () => {
     // Act
-    const hookResult = useOtherUserRoles();
+    const hookResult = useRoles();
 
     // Assert
     expect(useShallowSelector).toHaveBeenCalledTimes(1);
-    expect(useShallowSelector).toHaveBeenCalledWith(otherUserRolesSelectors.otherUserRoles);
+    expect(useShallowSelector).toHaveBeenCalledWith(rolesSelectors.roles);
     expect(hookResult).toEqual('expected-value');
   });
 });

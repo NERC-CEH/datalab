@@ -13,7 +13,7 @@ import stackUrlService from '../dataaccess/stackUrlService';
 import projectService from '../dataaccess/projectService';
 import storageService from '../infrastructure/storageService';
 import logsService from '../dataaccess/logsService';
-import otherUserRolesService from '../dataaccess/otherUserRolesService';
+import rolesService from '../dataaccess/rolesService';
 
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_EDIT, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
@@ -36,10 +36,11 @@ const resolvers = {
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
     datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
     userPermissions: (obj, params, { identity, token }) => permissionsService.getUserPermissions(identity, token),
-    otherUserRoles: (obj, args, { token }) => otherUserRolesService.getOtherUserRoles(args.userId, token),
+    allUsersAndRoles: (obj, args, { token }) => rolesService.getAllUsersAndRoles(token),
     checkNameUniqueness: (obj, args, { user, token }) => projectPermissionWrapper(args, [STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(args.projectKey, args.name, token)),
     users: (obj, args, { token }) => userService.getAll({ token }),
     projects: (obj, args, { token }) => projectService.listProjects(token),
+    allProjectsAndResources: (obj, args, { token }) => projectService.getAllProjectsAndResources(token),
     project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
     checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
     logs: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => logsService.getLogsByName(args.projectKey, args.name, token)),

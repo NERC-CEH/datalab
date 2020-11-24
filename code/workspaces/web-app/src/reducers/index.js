@@ -2,23 +2,23 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { reducer as formReducer } from 'redux-form';
 import authentication from './authReducer';
-import otherUserRoles from './otherUserRolesReducer';
 import dataStorage from './dataStorageReducer';
 import projects from './projectsReducer';
 import stacks from './stacksReducer';
 import modal from './modelDialogReducer';
 import users from './usersReducer';
+import roles from './rolesReducer';
 import projectUsers from './projectSettingsReducers';
 import currentProject from './currentProjectReducer';
 
 const rootReducer = history => combineReducers({
   authentication,
-  otherUserRoles,
   dataStorage,
   projects,
   stacks,
   modal,
   users,
+  roles,
   projectUsers,
   currentProject,
   router: connectRouter(history),

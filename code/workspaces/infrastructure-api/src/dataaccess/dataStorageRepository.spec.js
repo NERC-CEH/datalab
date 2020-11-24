@@ -38,6 +38,13 @@ describe('dataStorageRepository', () => {
     });
   });
 
+  it('getAllActive uses expected query', async () => {
+    await dataStorageRepository.getAllActive();
+    expect(mockDatabase().query()).toEqual({
+      status: { $ne: 'deleted' },
+    });
+  });
+
   it('getAllByName uses expected query', () => dataStorageRepository.getAllByName(projectKey, user, 'expectedName').then(() => {
     expect(mockDatabase().query()).toEqual({
       name: 'expectedName',
