@@ -104,9 +104,13 @@ function expiresAtCalculator(expiresIn) {
 }
 
 function processIdentity(idTokenPayload) {
-  const knownFields = ['sub', 'name', 'nickname', 'picture'];
-
-  return JSON.stringify(pick(idTokenPayload, knownFields));
+  const knownFields = ['sub', 'name', 'nickname', 'picture', 'email'];
+  const identityObject = pick(idTokenPayload, knownFields);
+  if (Object.prototype.hasOwnProperty.call(identityObject, 'email')) {
+    identityObject.name = identityObject.email;
+    delete identityObject.email;
+  }
+  return JSON.stringify(identityObject);
 }
 
 let authSession;

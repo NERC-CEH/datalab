@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  keycloak:
+    image: jboss/keycloak
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=h2
+
+  keycloak_import:
+    image: jboss/keycloak
+    environment:
+      - KEYCLOAK_INSTANCE=keycloak
+    depends_on:
+      - keycloak
+    entrypoint: /bin/bash -c "/bin/bash -c \"$${@}\""
+    command: /bin/bash -c "/usr/bin/sleep 60 && /usr/bin/cp /tmp/keycloak/import.sh /tmp/import.sh && /usr/bin/chmod +x /tmp/import.sh && /tmp/import.sh"
+    volumes:
+      - $PWD/config/keycloak:/tmp/keycloak/:ro

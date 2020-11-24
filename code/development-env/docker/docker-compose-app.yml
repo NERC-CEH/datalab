@@ -23,13 +23,16 @@ services:
       AUTHORISATION_API_IDENTIFIER: ${AUTHORISATION_API_IDENTIFIER}
       USER_MANAGEMENT_API_CLIENT_ID: ${USER_MANAGEMENT_API_CLIENT_ID}
       USER_MANAGEMENT_API_CLIENT_SECRET: ${USER_MANAGEMENT_API_CLIENT_SECRET}
+      # Keycloak Authentication Parameters
+      # OIDC_OAUTH_TOKEN_ENDPOINT: "/protocol/openid-connect/token"
+      # OIDC_JWKS_ENDPOINT: "/protocol/openid-connect/certs"
+      # OIDC_PROVIDER_DOMAIN: "keycloak:8080/auth/realms/DataLabs"
+      # OIDC_PROVIDER_AUDIENCE: "account"
       BABEL_DISABLE_CACHE: 1
     ports:
       - 9000:9000
     volumes:
       - ${PWD}/..:/usr/src/app/:ro
-    links:
-      - mongodb
 
   datalab-infra:
     image: node:lts
@@ -44,10 +47,6 @@ services:
       - $PWD/..:/usr/src/app/:ro
       - $PWD/config/local/image_config.json:/usr/src/app/workspaces/common/src/config/image_config.json:ro
       - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
-    links:
-      - datalab-auth
-      - mongodb
-      - vault
 
   datalab-api:
     image: node:lts
@@ -61,11 +60,6 @@ services:
     volumes:
       - $PWD/..:/usr/src/app:ro
       - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
-    links:
-      - datalab-auth
-      - datalab-infra
-      - mongodb
-      - vault
 
   datalab-app:
     image: node:lts
@@ -77,6 +71,9 @@ services:
       - 3000:3000
     volumes:
       - $PWD/..:/usr/src/app:ro
-      # web_auth_config is unique to each domain and needs updating
-      - $PWD/config/local/web_auth_config.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
       - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/web-app/public/storage_config.json:ro
+      # web_auth_config is unique to each domain
+      # When using KeyCloak unhash the line below and hash the Auth0 line
+      # - $PWD/config/local/web_auth_config_keycloak.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
+      # When using Auth0 unhash the line below and hash the Auth0 line
+      - $PWD/config/local/web_auth_config.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro

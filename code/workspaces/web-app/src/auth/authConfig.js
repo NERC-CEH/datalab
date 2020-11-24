@@ -9,10 +9,6 @@ const getAuthConfig = () => axios
         ...data,
         silent_redirect_uri: `${window.location.origin}/silent_callback`,
         redirect_uri: `${window.location.origin}/callback`,
-        metadata: {
-          ...data.metadata,
-          end_session_endpoint: `${data.authority}/v2/logout?returnTo=${encodeURIComponent(window.location.origin)}&client_id=${data.client_id}`,
-        },
       };
     }
 
