@@ -4,9 +4,14 @@ import projectsRepository from '../dataaccess/projectsRepository';
 
 async function getAllProjectsAndResources(request, response, next) {
   try {
-    const projects = await projectsRepository.getAll();
-    const storage = await dataStorageRepository.getAllActive();
-    const stacks = await stacksRepository.getAllStacks();
+    const data = await Promise.all([
+      projectsRepository.getAll(),
+      dataStorageRepository.getAllActive(),
+      stacksRepository.getAllStacks(),
+    ]);
+    const projects = data[0];
+    const storage = data[1];
+    const stacks = data[2];
 
     response.send({
       projects,

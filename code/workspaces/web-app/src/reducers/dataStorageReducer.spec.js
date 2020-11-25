@@ -27,7 +27,7 @@ describe('dataStorageReducer', () => {
 
   describe('LOAD_DATASTORAGE_ACTION', () => {
     it('should handle LOAD_DATASTORAGE_PENDING', () => {
-    // Arrange
+      // Arrange
       const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_PENDING}`;
       const action = { type };
 
@@ -39,7 +39,7 @@ describe('dataStorageReducer', () => {
     });
 
     it('should handle LOAD_DATASTORAGE_SUCCESS', () => {
-    // Arrange
+      // Arrange
       const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_SUCCESS}`;
       const action = { type, payload: valuePayload };
 
@@ -51,7 +51,7 @@ describe('dataStorageReducer', () => {
     });
 
     it('should handle LOAD_DATASTORAGE_FAILURE', () => {
-    // Arrange
+      // Arrange
       const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_FAILURE}`;
       const action = { type, payload: error };
 

@@ -2,6 +2,21 @@ import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
 import createUserRoles from './createUserRoles';
 
 describe('createUserRoles', () => {
+  it('returns empty object if resources still fetching', () => {
+    // Arrange
+    const fetching = true;
+    const value = [];
+    const usersProjectRoles = { fetching, value };
+    const stacksArray = { fetching, value };
+    const dataStorageArray = { fetching, value };
+
+    // Act
+    const userRoles = createUserRoles(usersProjectRoles, stacksArray, dataStorageArray);
+
+    // Assert
+    expect(userRoles).toEqual({});
+  });
+
   it('create user roles from project roles and resources', () => {
     // Arrange
     const fetching = false;

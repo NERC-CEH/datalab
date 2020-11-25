@@ -11,8 +11,8 @@ function filterMapProjectRoleToProjectKeys(projectRoles, role) {
 
 function filterMapStacksToUserOwnedStacks(stacks, userId, category) {
   return stacks
-    .filter(stack => stack.category === category)
-    .filter(stack => stack.users.includes(userId))
+    .filter(stack => stack.category === category
+         && stack.users.includes(userId))
     .map(stack => ({ projectKey: stack.projectKey, name: stack.name }));
 }
 
@@ -24,7 +24,7 @@ function filterMapStorageToUserAccessedStorage(storage, userId) {
 
 function createUserRoles(usersProjectRoles, stacksArray, dataStorageArray) {
   if (usersProjectRoles.fetching || stacksArray.fetching || dataStorageArray.fetching) {
-    return [];
+    return {};
   }
 
   const userRoles = {};
