@@ -1,61 +1,71 @@
 ---
 instanceAdmin:
-  - name: instance
+  permissions:
+    - admin
+catalogueRole:
+  - role: admin
     permissions:
       - admin
-admin:
-  - name: stacks
+  - role: publisher
     permissions:
-      - create
-      - delete
-      - list
-      - open
-      - edit
-  - name: storage
-    permissions:
-      - create
-      - delete
-      - list
-      - open
-      - edit
-  - name: users
-    permissions:
-      - list
-      - read
-  - name: settings
-    permissions:
-      - list
-      - read
-      - edit
-  - name: permissions
-    permissions:
-      - read
-      - create
-      - delete
-  - name: projects
+      - publish
+  - role: editor
     permissions:
       - edit
-      - read
-user:
-  - name: stacks
-    permissions:
-      - create
-      - delete
-      - list
-      - open
-      - edit
-  - name: storage
-    permissions:
-      - list
-      - open
-  - name: projects
-    permissions:
-      - read
-viewer:
-  - name: stacks
-    permissions:
-      - list
-      - open
-  - name: projects
-    permissions:
-      - read
+projectRoles:
+  admin:
+    - name: stacks
+      permissions:
+        - create
+        - delete
+        - list
+        - open
+        - edit
+    - name: storage
+      permissions:
+        - create
+        - delete
+        - list
+        - open
+        - edit
+    - name: users
+      permissions:
+        - list
+        - read
+    - name: settings
+      permissions:
+        - list
+        - read
+        - edit
+    - name: permissions
+      permissions:
+        - read
+        - create
+        - delete
+    - name: projects
+      permissions:
+        - edit
+        - read
+  user:
+    - name: stacks
+      permissions:
+        - create
+        - delete
+        - list
+        - open
+        - edit
+    - name: storage
+      permissions:
+        - list
+        - open
+    - name: projects
+      permissions:
+        - read
+  viewer:
+    - name: stacks
+      permissions:
+        - list
+        - open
+    - name: projects
+      permissions:
+        - read

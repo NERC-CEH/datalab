@@ -15,11 +15,15 @@ const INSTANCE = 'instance';
 const PROJECTS = 'projects';
 
 const PROJECT_NAMESPACE = 'projects';
+const PROJECT_ROLES_KEY = 'projectRoles';
 const KEY_TOKEN = '?projectKey?';
 const SYSTEM = 'system';
 
 // key name used for admin role boolean in auth
-const INSTANCE_ADMIN_ROLE = 'instanceAdmin';
+const INSTANCE_ADMIN_ROLE_KEY = 'instanceAdmin';
+
+const CATALOGUE_ROLE_KEY = 'catalogueRole';
+const CATALOGUE = 'catalogue';
 
 const keyDelim = '_';
 const permissionDelim = ':';
@@ -75,10 +79,14 @@ const systemPermissions = flatMapPermissions({ SYSTEM }, flatMapPermissions({ IN
 const { SYSTEM_INSTANCE_ADMIN } = systemPermissions;
 
 export {
-  INSTANCE_ADMIN_ROLE,
+  INSTANCE_ADMIN_ROLE_KEY,
   SYSTEM_INSTANCE_ADMIN,
+  PROJECT_ROLES_KEY,
+  CATALOGUE_ROLE_KEY,
   PROJECT_NAMESPACE,
   SYSTEM,
+  INSTANCE,
+  CATALOGUE,
   elementPermissions,
   usersPermissions,
   projectPermissions,

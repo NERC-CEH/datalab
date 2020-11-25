@@ -1,20 +1,34 @@
+import { permissionTypes } from 'common';
 import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
+
+const { INSTANCE_ADMIN_ROLE_KEY } = permissionTypes;
+
+// Used to set defaults for new users, and to fill in missing values for existing users
+const defaultRoles = {
+  [INSTANCE_ADMIN_ROLE_KEY]: false,
+};
 
 function UserRoles() {
   return database.getModel('UserRoles');
 }
 
-// In line with other repository functions, this returns a promise,
-// but the model document is first converted to an object so the spread operator works as expected.
+function addDefaults(roles) {
+  // The model document is first converted to an object so the spread operator works as expected.
+  return {
+    ...defaultRoles,
+    ...roles.toObject(),
+  };
+}
+
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
     roles = await addRecordForNewUser(userId, userName, []);
   }
 
-  return roles.toObject();
+  return addDefaults(roles);
 }
 
 function convertToUser(roles) {
@@ -52,17 +66,18 @@ async function getAllUsersAndRoles() {
   return Object.values(usersMap); // return users and roles
 }
 
-function getProjectUsers(projectKey) {
+async function getProjectUsers(projectKey) {
   const query = { 'projectRoles.projectKey': { $eq: projectKey } };
-  return UserRoles().find(query).exec();
+  const projectUsers = await UserRoles().find(query).exec();
+  return projectUsers.map(addDefaults);
 }
 
 function addRecordForNewUser(userId, userName, projectRoles) {
   const user = {
+    ...defaultRoles,
     userId,
     userName,
     projectRoles,
-    instanceAdmin: false,
   };
   return UserRoles().create(user);
 }
@@ -73,7 +88,7 @@ async function addRole(userId, projectKey, role) {
   const user = await UserRoles().findOne(query).exec();
 
   if (!user) {
-    throw new Error(`Unrecognized user ${userId}`);
+    throw new Error(`Unrecognised user ${userId}`);
   }
   // Either add role or update existing role
   const { projectRoles } = user;
