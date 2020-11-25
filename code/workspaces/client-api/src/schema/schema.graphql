@@ -27,6 +27,9 @@ type Query {
     # List permissions of current user
     userPermissions: [String]
 
+    # Get all users and roles
+    allUsersAndRoles: [UserAndRoles]
+
     # Checks internal name is unique.
     checkNameUniqueness(projectKey: String!, name: String!): Boolean
 
@@ -41,6 +44,9 @@ type Query {
 
     # Details of a single project
     project(projectKey: String!): Project
+
+    # All projects and resources
+    allProjectsAndResources: AllProjectsAndResources
 
     # Checks project key is unique
     checkProjectKeyUniqueness(projectKey: String!): Boolean
@@ -139,6 +145,7 @@ type Stack {
     displayName: String
     description: String
     type: String
+    category: String
     users: [String]
     url: String
     internalEndpoint: String
@@ -264,20 +271,43 @@ input ProjectDeletionRequest {
 
 type Permission {
     projectKey: String,
-    role: Role!,
+    role: ProjectRole!,
     userId: ID
 }
 
 type ProjectUser {
     userId: ID!
     name: String!
-    role: Role!
+    role: ProjectRole!
+}
+
+type Resource {
+    projectKey: String!,
+    name: String!
+}
+
+type ProjectPermission {
+    projectKey: String!,
+    role: ProjectRole!,
+}
+
+type UserAndRoles {
+    instanceAdmin: Boolean!
+    userId: ID!
+    name: String!
+    projectRoles: [ProjectPermission!]
+}
+
+type AllProjectsAndResources {
+    projects: [Project!]
+    storage: [DataStore!]
+    stacks: [Stack!]
 }
 
 input PermissionAddRequest {
     projectKey: String!,
     userId: ID!
-    role: Role!
+    role: ProjectRole!
 }
 
 input PermissionRemoveRequest {
@@ -285,7 +315,7 @@ input PermissionRemoveRequest {
     userId: ID!
 }
 
-enum Role {
+enum ProjectRole {
     instance_admin,
     admin,
     user,

@@ -2,11 +2,16 @@ import axios from 'axios';
 import logger from 'winston';
 import config from '../config';
 
-const authServiceUrl = `${config.get('authorisationService')}`;
-const infraServiceUrl = `${config.get('infrastructureApi')}`;
+const authServiceUrl = config.get('authorisationService');
+const infraServiceUrl = config.get('infrastructureApi');
 
 async function listProjects(token) {
   const response = await axios.get(`${infraServiceUrl}/projects`, generateOptions(token));
+  return response.data;
+}
+
+async function getAllProjectsAndResources(token) {
+  const response = await axios.get(`${infraServiceUrl}/resources`, generateOptions(token));
   return response.data;
 }
 
@@ -75,6 +80,7 @@ export function projectActionRequestToProject(actionRequest) {
 
 export default {
   listProjects,
+  getAllProjectsAndResources,
   getProjectByKey,
   isProjectKeyUnique,
   createProject,

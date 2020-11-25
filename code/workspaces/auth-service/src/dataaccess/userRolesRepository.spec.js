@@ -75,6 +75,12 @@ describe('userRolesRepository', () => {
         expect(users).toMatchSnapshot();
       }));
 
+    it('getAllUsersAndRoles returns expected snapshot', () => userRoleRepository.getAllUsersAndRoles()
+      .then((usersAndRoles) => {
+        expect(mockDatabase().query()).toEqual();
+        expect(usersAndRoles).toMatchSnapshot();
+      }));
+
     it('getProjectUsers returns expected snapshot', () => userRoleRepository.getProjectUsers('project 2')
       .then((users) => {
         expect(mockDatabase().query()).toEqual({

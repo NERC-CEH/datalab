@@ -20,6 +20,7 @@ Array [
 exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
 Array [
   "loadProjects",
+  "getAllProjectsAndResources",
   "setCurrentProject",
   "clearCurrentProject",
   "createProject",

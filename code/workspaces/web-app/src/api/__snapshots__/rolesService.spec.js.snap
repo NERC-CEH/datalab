@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rolesService getAllUsersAndRoles should build the correct query and unpack the results 1`] = `
+"
+    GetAllUsersAndRoles {
+      allUsersAndRoles {
+        userId,
+        name,
+        instanceAdmin,
+        projectRoles {
+          projectKey,
+          role
+        }
+      }
+    }"
+`;

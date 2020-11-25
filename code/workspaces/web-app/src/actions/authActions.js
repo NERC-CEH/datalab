@@ -10,7 +10,7 @@ const userLogsIn = user => ({
 
 const getUserPermissions = () => ({
   type: GET_USER_PERMISSIONS_ACTION,
-  payload: permissionsService(),
+  payload: permissionsService.getUserPermissions(),
 });
 
 export default {

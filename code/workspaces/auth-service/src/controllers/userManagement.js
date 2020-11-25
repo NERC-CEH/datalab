@@ -24,8 +24,18 @@ async function getUser(req, res) {
   }
 }
 
+async function getAllUsersAndRoles(req, res) {
+  try {
+    const users = await userRolesRepository.getAllUsersAndRoles();
+    res.json(users);
+  } catch (err) {
+    res.status(500);
+    res.send({});
+  }
+}
+
 export const getUserValidator = validator([
   check('userId').isAscii(),
 ]);
 
-export default { getUsers, getUser };
+export default { getUsers, getUser, getAllUsersAndRoles };

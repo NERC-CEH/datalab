@@ -129,10 +129,10 @@ describe('Kubernetes Deployment API', () => {
       return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
-    it('should return error if server errors', () => {
+    it('should return error if server errors', async () => {
       mock.onDelete(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME, NAMESPACE))
+      await expect(deploymentApi.deleteDeployment(DEPLOYMENT_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });

@@ -1,5 +1,6 @@
 import projectActions, {
   LOAD_PROJECTS_ACTION,
+  GET_ALL_PROJECTS_AND_RESOURCES_ACTION,
   SET_CURRENT_PROJECT_ACTION,
   CLEAR_CURRENT_PROJECT_ACTION,
   CREATE_PROJECT_ACTION,
@@ -26,6 +27,20 @@ describe('projectActions', () => {
       expect(loadProjectsMock).toHaveBeenCalledTimes(1);
       expect(output.type).toBe(LOAD_PROJECTS_ACTION);
       expect(output.payload).toBe('expectedProjectsPayload');
+    });
+
+    it('getAllProjectsAndResources', () => {
+      // Arrange
+      const getAllProjectsAndResourcesMock = jest.fn().mockReturnValue('expectedProjectsAndResourcesPayload');
+      projectsService.getAllProjectsAndResources = getAllProjectsAndResourcesMock;
+
+      // Act
+      const output = projectActions.getAllProjectsAndResources();
+
+      // Assert
+      expect(getAllProjectsAndResourcesMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe(GET_ALL_PROJECTS_AND_RESOURCES_ACTION);
+      expect(output.payload).toBe('expectedProjectsAndResourcesPayload');
     });
 
     it('setCurrentProject', () => {
@@ -82,6 +97,10 @@ describe('projectActions', () => {
   describe('exports correct values for', () => {
     it('LOAD_PROJECTS_ACTION', () => {
       expect(LOAD_PROJECTS_ACTION).toBe('LOAD_PROJECTS');
+    });
+
+    it('GET_ALL_PROJECTS_AND_RESOURCES_ACTION', () => {
+      expect(GET_ALL_PROJECTS_AND_RESOURCES_ACTION).toBe('GET_ALL_PROJECTS_AND_RESOURCES_ACTION');
     });
 
     it('SET_CURRENT_PROJECT_ACTION', () => {

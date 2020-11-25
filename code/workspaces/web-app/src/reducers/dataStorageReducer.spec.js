@@ -2,6 +2,7 @@ import { GLUSTERFS_VOLUME } from 'common/src/stackTypes';
 import dataStorageReducer from './dataStorageReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
 import { LOAD_DATASTORAGE_ACTION } from '../actions/dataStorageActions';
+import { GET_ALL_PROJECTS_AND_RESOURCES_ACTION } from '../actions/projectActions';
 
 const currentValue = [
   { projectKey: 'proj1', type: GLUSTERFS_VOLUME, store: 'proj1.storeA' },
@@ -24,39 +25,79 @@ describe('dataStorageReducer', () => {
     expect(dataStorageReducer(undefined, {})).toEqual({ fetching: false, value: [], error: null });
   });
 
-  it('should handle LOAD_DATASTORAGE_PENDING', () => {
-    // Arrange
-    const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_PENDING}`;
-    const action = { type };
+  describe('LOAD_DATASTORAGE_ACTION', () => {
+    it('should handle LOAD_DATASTORAGE_PENDING', () => {
+      // Arrange
+      const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_PENDING}`;
+      const action = { type };
 
-    // Act
-    const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
+      // Act
+      const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
 
-    // Assert
-    expect(nextstate).toEqual({ error: null, fetching: true, value: currentValue });
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: true, value: currentValue });
+    });
+
+    it('should handle LOAD_DATASTORAGE_SUCCESS', () => {
+      // Arrange
+      const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+      const action = { type, payload: valuePayload };
+
+      // Act
+      const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
+
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: false, value: replaceProjectNextValue });
+    });
+
+    it('should handle LOAD_DATASTORAGE_FAILURE', () => {
+      // Arrange
+      const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_FAILURE}`;
+      const action = { type, payload: error };
+
+      // Act
+      const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
+
+      // Assert
+      expect(nextstate).toEqual({ error, fetching: false, value: currentValue });
+    });
   });
 
-  it('should handle LOAD_DATASTORAGE_SUCCESS', () => {
-    // Arrange
-    const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-    const action = { type, payload: valuePayload };
+  describe('GET_ALL_PROJECTS_AND_RESOURCES_ACTION', () => {
+    it('should handle GET_ALL_PROJECTS_AND_RESOURCES_PENDING', () => {
+      // Arrange
+      const type = `${GET_ALL_PROJECTS_AND_RESOURCES_ACTION}_${PROMISE_TYPE_PENDING}`;
+      const action = { type };
 
-    // Act
-    const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
+      // Act
+      const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
 
-    // Assert
-    expect(nextstate).toEqual({ error: null, fetching: false, value: replaceProjectNextValue });
-  });
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: true, value: currentValue });
+    });
 
-  it('should handle LOAD_DATASTORAGE_FAILURE', () => {
-    // Arrange
-    const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_FAILURE}`;
-    const action = { type, payload: error };
+    it('should handle GET_ALL_PROJECTS_AND_RESOURCES_SUCCESS', () => {
+      // Arrange
+      const type = `${GET_ALL_PROJECTS_AND_RESOURCES_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+      const action = { type, payload: { storage: valuePayload } };
 
-    // Act
-    const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
+      // Act
+      const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
 
-    // Assert
-    expect(nextstate).toEqual({ error, fetching: false, value: [] });
+      // Assert
+      expect(nextstate).toEqual({ error: null, fetching: false, value: valuePayload });
+    });
+
+    it('should handle GET_ALL_PROJECTS_AND_RESOURCES_FAILURE', () => {
+      // Arrange
+      const type = `${GET_ALL_PROJECTS_AND_RESOURCES_ACTION}_${PROMISE_TYPE_FAILURE}`;
+      const action = { type, payload: error };
+
+      // Act
+      const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);
+
+      // Assert
+      expect(nextstate).toEqual({ error, fetching: false, value: currentValue });
+    });
   });
 });

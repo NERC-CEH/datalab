@@ -21,6 +21,23 @@ exports[`projectsService deleteProject should build the correct query and unpack
     }"
 `;
 
+exports[`projectsService getAllProjectsAndResources should build the correct query and unpack the results 1`] = `
+"
+    GetAllProjectsAndResources {
+      allProjectsAndResources {
+        projects {
+          id, key, name, description, accessible
+        }
+        storage {
+          id, projectKey, name, displayName, description, type, stacksMountingStore { id }, status, users
+        }
+        stacks {
+          id, projectKey, category, displayName, name, users, type, description, status, shared, visible
+        }
+      }
+    }"
+`;
+
 exports[`projectsService loadProjectInfo should build the correct query and unpack the results 1`] = `
 "
     LoadProjectInfo($projectKey: String!) {

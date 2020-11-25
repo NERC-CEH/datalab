@@ -131,10 +131,10 @@ describe('Kubernetes Persistent Volume API', () => {
       return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
-    it('should return error if server errors', () => {
+    it('should return error if server errors', async () => {
       mock.onDelete(`${PVC_URL}/${PVC_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME, NAMESPACE))
+      await expect(volumeApi.deletePersistentVolumeClaim(PVC_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
