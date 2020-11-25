@@ -3,11 +3,11 @@ import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
 
-const { INSTANCE_ADMIN_ROLE } = permissionTypes;
+const { INSTANCE_ADMIN_ROLE_KEY } = permissionTypes;
 
 // Used to set defaults for new users, and to fill in missing values for existing users
 const defaultRoles = {
-  [INSTANCE_ADMIN_ROLE]: false,
+  [INSTANCE_ADMIN_ROLE_KEY]: false,
 };
 
 function UserRoles() {
