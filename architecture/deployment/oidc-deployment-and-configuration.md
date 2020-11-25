@@ -6,7 +6,7 @@ authentication provider which in turn will allow a user to recieve an identity
 token.
 
 All providers are different and offer various advantages. There are multiple
-considerations to make including is how user registration is expected to work,
+considerations to make including how user registration is expected to work,
 and the convenience/limits of using a cloud (Auth0) vs a hosted solution.
 
 ## Application Setup
@@ -35,7 +35,7 @@ https://datalabName.domain/callback,https://datalabName.domain/silent-callback
 # https://datalab.datalabs.ceh.ac.uk/callback,https://datalab.datalabs.ceh.ac.uk/silent-callback
 ```
 
-- The application must have acces to the user/account lists that you wish users
+- The application must have access to the user/account lists that you wish users
   to authenticate with.
 
 ## Configuration
