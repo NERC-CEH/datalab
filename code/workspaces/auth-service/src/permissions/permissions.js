@@ -3,7 +3,7 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import config from '../config/config';
 
-const { CATALOGUE_ADMIN_ROLE, CATALOGUE_EDITOR_ROLE, CATALOGUE_PUBLISHER_ROLE, INSTANCE_ADMIN_ROLE, SYSTEM, PROJECT_NAMESPACE } = permissionTypes;
+const { CATALOGUE_ROLE_KEY, INSTANCE_ADMIN_ROLE, SYSTEM, PROJECT_NAMESPACE } = permissionTypes;
 
 const roleDelim = ':';
 
@@ -45,18 +45,16 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
-const getSystemRoles = (userRoles) => {
-  const instanceAdminRoles = userRoles[INSTANCE_ADMIN_ROLE] ? [{ role: INSTANCE_ADMIN_ROLE }] : [];
-  const catalogueAdminRoles = userRoles[CATALOGUE_ADMIN_ROLE] ? [{ role: CATALOGUE_ADMIN_ROLE }] : [];
-  const catalogueEditorRoles = userRoles[CATALOGUE_EDITOR_ROLE] ? [{ role: CATALOGUE_EDITOR_ROLE }] : [];
-  const cataloguePublisherRoles = userRoles[CATALOGUE_PUBLISHER_ROLE] ? [{ role: CATALOGUE_PUBLISHER_ROLE }] : [];
-  return [
-    ...instanceAdminRoles,
-    ...catalogueAdminRoles,
-    ...catalogueEditorRoles,
-    ...cataloguePublisherRoles,
-  ];
-};
+function getCataloguePermissions(catalogueRole) {
+  if (!catalogueRole) {
+    return [];
+  }
+  const permissions = permissionAttributes[CATALOGUE_ROLE_KEY]
+    .filter(role => role.role === catalogueRole)
+    .map(role => role.permissions)
+    .map(permission => `system:catalogue:${permission}`);
+  return permissions;
+}
 
 const processRoles = (userRoles) => {
   const projectRoles = userRoles.projectRoles || [];
@@ -66,14 +64,17 @@ const processRoles = (userRoles) => {
     .map(projectifyPermissions)
     .reduce(flattenArray, []);
 
-  const systemRoles = getSystemRoles(userRoles);
+  const systemRoles = userRoles[INSTANCE_ADMIN_ROLE] ? [{ role: INSTANCE_ADMIN_ROLE }] : [];
   const systemPermissions = systemRoles
     .map(getPermissions)
     .map(buildPermissions)
     .map(systemifyPermissions)
     .reduce(flattenArray, []);
 
-  return projectPermissions.concat(systemPermissions);
+  const catalogueRole = userRoles[CATALOGUE_ROLE_KEY];
+  const cataloguePermissions = getCataloguePermissions(catalogueRole);
+
+  return [...projectPermissions, ...systemPermissions, ...cataloguePermissions];
 };
 
 export default processRoles;

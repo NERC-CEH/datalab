@@ -2,46 +2,36 @@
   {
     "userId": "dummy",
     "userName": "dummy@ceh.ac.uk",
-    "catalogueAdmin": true,
-    "catalogueEditor": true,
-    "cataloguePublisher": true,
+    "catalogueRole": "admin",
     "instanceAdmin": true,
     "projectRoles": []
   },
   {
     "userId": "auth0|5d2efacb1ca16e0efd770ddc",
     "userName": "andrew.longmore@tessella.com",
-    "catalogueAdmin": true,
-    "catalogueEditor": true,
-    "cataloguePublisher": true,
+    "catalogueRole": "admin",
     "instanceAdmin": true,
     "projectRoles": []
   },
   {
     "userId": "auth0|5d28a912a537cc0de851ffb8",
     "userName": "alex.lee@tessella.com",
-    "catalogueAdmin": true,
-    "catalogueEditor": true,
-    "cataloguePublisher": true,
+    "catalogueRole": "admin",
     "instanceAdmin": true,
     "projectRoles": []
   },
   {
     "userId": "auth0|5bd9cd5082e23e4889c79d36",
     "userName": "iainw@ceh.ac.uk",
-    "catalogueAdmin": true,
-    "catalogueEditor": true,
-    "cataloguePublisher": true,
+    "catalogueRole": "admin",
     "instanceAdmin": true,
     "projectRoles": []
   },
   {
     "userId": "auth0|5a0db1bf7a987451d45a920a",
     "userName": "olaawe@ceh.ac.uk",
+    "catalogueRole": "admin",
     "instanceAdmin": true,
-    "catalogueAdmin": true,
-    "catalogueEditor": true,
-    "cataloguePublisher": true,
     "projectRoles": []
   }
 ]

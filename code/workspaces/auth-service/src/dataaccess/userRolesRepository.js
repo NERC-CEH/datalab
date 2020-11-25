@@ -3,13 +3,10 @@ import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
 
-const { CATALOGUE_ADMIN_ROLE, CATALOGUE_EDITOR_ROLE, CATALOGUE_PUBLISHER_ROLE, INSTANCE_ADMIN_ROLE } = permissionTypes;
+const { INSTANCE_ADMIN_ROLE } = permissionTypes;
 
 // Used to set defaults for new users, and to fill in missing values for existing users
 const defaultRoles = {
-  [CATALOGUE_ADMIN_ROLE]: false,
-  [CATALOGUE_EDITOR_ROLE]: false,
-  [CATALOGUE_PUBLISHER_ROLE]: false,
   [INSTANCE_ADMIN_ROLE]: false,
 };
 
@@ -80,7 +77,7 @@ async function addRole(userId, projectKey, role) {
   const user = await UserRoles().findOne(query).exec();
 
   if (!user) {
-    throw new Error(`Unrecognized user ${userId}`);
+    throw new Error(`Unrecognised user ${userId}`);
   }
   // Either add role or update existing role
   const { projectRoles } = user;

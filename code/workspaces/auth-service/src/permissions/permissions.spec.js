@@ -75,7 +75,7 @@ describe('Get Permissions', () => {
   it('should add catalogue admin permissions', () => {
     const userRole = {
       userId: 'uid1',
-      catalogueAdmin: true,
+      catalogueRole: 'admin',
     };
 
     const output = getPermissions(userRole);
@@ -85,7 +85,7 @@ describe('Get Permissions', () => {
   it('should add catalogue publisher permission', () => {
     const userRole = {
       userId: 'uid1',
-      cataloguePublisher: true,
+      catalogueRole: 'publisher',
     };
 
     const output = getPermissions(userRole);
@@ -95,7 +95,7 @@ describe('Get Permissions', () => {
   it('should add catalogue editor permission', () => {
     const userRole = {
       userId: 'uid1',
-      catalogueEditor: true,
+      catalogueRole: 'editor',
     };
 
     const output = getPermissions(userRole);
