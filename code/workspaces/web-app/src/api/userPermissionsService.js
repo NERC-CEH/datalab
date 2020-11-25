@@ -11,4 +11,4 @@ function getUserPermissions() {
     .then(errorHandler('data.userPermissions'));
 }
 
-export default getUserPermissions;
+export default { getUserPermissions };

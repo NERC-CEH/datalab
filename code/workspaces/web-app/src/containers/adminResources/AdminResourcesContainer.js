@@ -74,9 +74,9 @@ function AdminResourcesContainer({ userPermissions }) {
         } />
       </div>
       <div>
-      <PromisedContentWrapper fetchingClassName={classes.placeholderCard} promise={projects}>
-        <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects"/>
-      </PromisedContentWrapper>
+        <PromisedContentWrapper fetchingClassName={classes.placeholderCard} promise={projects}>
+          <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects"/>
+        </PromisedContentWrapper>
       </div>
     </>
   );

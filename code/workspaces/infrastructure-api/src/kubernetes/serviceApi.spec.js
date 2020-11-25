@@ -127,10 +127,10 @@ describe('Kubernetes Service API', () => {
       return expect(serviceApi.deleteService(SERVICE_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
-    it('should return error if server errors', () => {
+    it('should return error if server errors', async () => {
       mock.onDelete(`${SERVICE_URL}/${SERVICE_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(serviceApi.deleteService(SERVICE_NAME, NAMESPACE))
+      await expect(serviceApi.deleteService(SERVICE_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });

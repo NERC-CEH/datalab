@@ -7,6 +7,7 @@ import projects from './projectsReducer';
 import stacks from './stacksReducer';
 import modal from './modelDialogReducer';
 import users from './usersReducer';
+import roles from './rolesReducer';
 import projectUsers from './projectSettingsReducers';
 import currentProject from './currentProjectReducer';
 
@@ -17,6 +18,7 @@ const rootReducer = history => combineReducers({
   stacks,
   modal,
   users,
+  roles,
   projectUsers,
   currentProject,
   router: connectRouter(history),

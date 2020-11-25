@@ -8,7 +8,7 @@ const TYPE = 'stacks';
 
 function listStacks(request, response) {
   const { user } = request;
-  return stackRepository.getAll(user)
+  return stackRepository.getAllByUser(user)
     .then(mapHandleId)
     .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));

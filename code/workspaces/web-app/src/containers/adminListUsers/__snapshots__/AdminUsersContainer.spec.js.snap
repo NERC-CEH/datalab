@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminUsersContainer renders correctly passing correct props to children 1`] = `
+<Fragment>
+  <UserMultiSelect
+    selectedUsers={Array []}
+    setSelectedUsers={[Function]}
+  />
+  <div
+    className="makeStyles-filterControls-1"
+  >
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <span
+        className="makeStyles-filterText-3"
+      >
+        Filter
+      </span>
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Instance admin"
+        name="instanceAdmin"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Project admin"
+        name="projectAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Project user"
+        name="projectUser"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Project viewer"
+        name="projectViewer"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Site owner"
+        name="siteOwner"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Notebook owner"
+        name="notebookOwner"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Storage access"
+        name="storageAccess"
+      />
+    </div>
+  </div>
+  <div>
+    <PromisedContentWrapper
+      fetchingClassName="makeStyles-placeholderCard-4"
+      promise={
+        Array [
+          Object {
+            "fetching": false,
+            "value": Array [
+              Object {
+                "instanceAdmin": true,
+                "name": "Test User 1",
+                "userId": "user1",
+              },
+              Object {
+                "instanceAdmin": false,
+                "name": "Test User 2",
+                "userId": "user2",
+              },
+            ],
+          },
+          Object {
+            "fetching": false,
+            "value": Array [],
+          },
+        ]
+      }
+    >
+      <Pagination
+        items={
+          Array [
+            <mockConstructor
+              filters={
+                Object {
+                  "instanceAdmin": false,
+                  "notebookOwner": false,
+                  "projectAdmin": false,
+                  "projectUser": false,
+                  "projectViewer": false,
+                  "siteOwner": false,
+                  "storageAccess": false,
+                }
+              }
+              roles={
+                Object {
+                  "instanceAdmin": true,
+                  "notebookOwner": Array [],
+                  "projectAdmin": Array [],
+                  "projectUser": Array [],
+                  "projectViewer": Array [],
+                  "siteOwner": Array [],
+                  "storageAccess": Array [],
+                }
+              }
+              user={
+                Object {
+                  "name": "Test User 1",
+                  "userId": "user1",
+                }
+              }
+            />,
+            <mockConstructor
+              filters={
+                Object {
+                  "instanceAdmin": false,
+                  "notebookOwner": false,
+                  "projectAdmin": false,
+                  "projectUser": false,
+                  "projectViewer": false,
+                  "siteOwner": false,
+                  "storageAccess": false,
+                }
+              }
+              roles={
+                Object {
+                  "instanceAdmin": false,
+                  "notebookOwner": Array [],
+                  "projectAdmin": Array [],
+                  "projectUser": Array [],
+                  "projectViewer": Array [],
+                  "siteOwner": Array [],
+                  "storageAccess": Array [],
+                }
+              }
+              user={
+                Object {
+                  "name": "Test User 2",
+                  "userId": "user2",
+                }
+              }
+            />,
+          ]
+        }
+        itemsName="Users"
+        itemsPerPage={5}
+      />
+    </PromisedContentWrapper>
+  </div>
+</Fragment>
+`;

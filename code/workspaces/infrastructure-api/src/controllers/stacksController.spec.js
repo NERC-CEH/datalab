@@ -6,13 +6,13 @@ import * as stackRepository from '../dataaccess/stacksRepository';
 
 jest.mock('../dataaccess/stacksRepository');
 
-const getAllMock = jest.fn();
+const getAllByUserMock = jest.fn();
 const getAllByProjectMock = jest.fn().mockReturnValue(Promise.resolve([]));
 const getAllByCategoryMock = jest.fn().mockReturnValue(Promise.resolve([]));
 const getAllByVolumeMountMock = jest.fn().mockReturnValue(Promise.resolve([]));
 
 stackRepository.default = {
-  getAll: getAllMock,
+  getAllByUser: getAllByUserMock,
   getAllByProject: getAllByProjectMock,
   getAllByCategory: getAllByCategoryMock,
   getAllByVolumeMount: getAllByVolumeMountMock,

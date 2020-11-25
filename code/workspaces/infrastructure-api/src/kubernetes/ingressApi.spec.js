@@ -128,10 +128,10 @@ describe('Kubernetes Ingress API', () => {
       return expect(ingressApi.deleteIngress(INGRESS_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
-    it('should return error if server errors', () => {
+    it('should return error if server errors', async () => {
       mock.onDelete(`${INGRESS_URL}/${INGRESS_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(ingressApi.deleteIngress(INGRESS_NAME, NAMESPACE))
+      await expect(ingressApi.deleteIngress(INGRESS_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });
