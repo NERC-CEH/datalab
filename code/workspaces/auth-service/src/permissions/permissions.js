@@ -24,12 +24,14 @@ const buildPermissions = ({ permissions, ...rest }) => ({
     .reduce(flattenArray, []),
 });
 
+//    [ 'system', 'instance', 'admin' ]
+// -> 'system:instance:admin'
+const stringifyPermissions = permissions => permissions.join(roleDelim);
+
 //    [ { role: 'admin', projectKey: 'project2', permissions: [/see permissions.yml/] } ]
 // -> [ ['projects:project2:stacks:delete', ...] ]
-const projectifyPermissions = ({ projectKey, permissions }) => {
-  const prefix = projectKey ? `${PROJECT_NAMESPACE}${roleDelim}${projectKey}${roleDelim}` : '';
-  return permissions.map(permission => prefix.concat(permission));
-};
+const projectifyPermissions = ({ projectKey, permissions }) => permissions
+  .map(permission => stringifyPermissions([PROJECT_NAMESPACE, projectKey, permission]));
 
 const flattenArray = (previous, current) => {
   if (Array.isArray(current)) {
@@ -43,7 +45,8 @@ function getInstanceAdminPermissions(instanceRole) {
     return [];
   }
   const { permissions } = permissionAttributes[INSTANCE_ADMIN_ROLE_KEY];
-  return permissions.map(permission => `${SYSTEM}${roleDelim}${INSTANCE}${roleDelim}${permission}`);
+  return permissions
+    .map(permission => stringifyPermissions([SYSTEM, INSTANCE, permission]));
 }
 
 function getCataloguePermissions(catalogueRole) {
@@ -52,9 +55,8 @@ function getCataloguePermissions(catalogueRole) {
   }
   const permissions = permissionAttributes[CATALOGUE_ROLE_KEY]
     .filter(role => role.role === catalogueRole)
-    .map(role => role.permissions)
-    .reduce((allPermissions, permissionsArray) => [...allPermissions, ...permissionsArray], [])
-    .map(permission => `${SYSTEM}${roleDelim}${CATALOGUE}${roleDelim}${permission}`);
+    .flatMap(role => role.permissions)
+    .map(permission => stringifyPermissions([SYSTEM, CATALOGUE, permission]));
   return permissions;
 }
 
