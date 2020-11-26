@@ -31,13 +31,16 @@ const next = createNext();
 
 const projects = [
   { key: 'project-99', name: 'test project' },
+  { name: 'no key' },
 ];
 const storage = [
   { projectKey: 'project-99', name: 'storage-99' },
+  { name: 'no key' },
 ];
 const stacks = [
   { category: ANALYSIS, projectKey: 'project-99', name: 'notebook-99' },
   { category: PUBLISH, projectKey: 'project-99', name: 'site-99' },
+  { name: 'no key' },
 ];
 
 describe('userResourcesController', () => {
