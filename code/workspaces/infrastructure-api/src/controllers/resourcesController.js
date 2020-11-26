@@ -11,9 +11,9 @@ async function getAllProjectsAndResources(request, response, next) {
     ]);
 
     response.send({
-      projects: projects.filter(project => project.key),
-      storage: storage.filter(store => store.projectKey),
-      stacks: stacks.filter(stack => stack.projectKey),
+      projects,
+      storage,
+      stacks,
     });
   } catch (error) {
     next(new Error(`Unable to get all projects and resources: ${error.message}`));
