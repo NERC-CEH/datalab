@@ -34,7 +34,6 @@
     "validate.js": "0.11.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.2",
     "@testing-library/react-hooks": "^3.4.1",
     "axios-mock-adapter": "1.17.0",
     "enzyme": "3.10.0",

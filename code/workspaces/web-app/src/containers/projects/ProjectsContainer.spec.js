@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import createStore from 'redux-mock-store';
-import { render } from '@testing-library/react';
+import { mount } from 'enzyme';
 import { reset } from 'redux-form';
 import notify from '../../components/common/notify';
 
-import ProjectsContainer, { projectToStack, stackMatchesFilter, deleteProject, confirmDeleteProject, onCreateProjectSubmit } from './ProjectsContainer';
+import ProjectsContainer, { confirmDeleteProject, deleteProject, onCreateProjectSubmit, projectToStack, stackMatchesFilter } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
 import projectActions from '../../actions/projectActions';
 import modalDialogActions from '../../actions/modalDialogActions';
@@ -38,7 +38,7 @@ function renderWithStore({
     projects,
   };
   const store = createStore(middlewares)(initialState);
-  const wrapper = render(
+  const wrapper = mount(
     <Provider store={store}>
       <ProjectsContainer/>
     </Provider>,
@@ -63,7 +63,7 @@ describe('ProjectsContainer', () => {
 
   it('renders to match snapshot', () => {
     const { wrapper } = renderWithStore();
-    expect(wrapper.container).toMatchSnapshot();
+    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
   });
 
   it('loads projects when it is rendered', () => {
