@@ -1,6 +1,5 @@
 import moment from 'moment';
 import Promise from 'bluebird';
-import { pick } from 'lodash';
 import Oidc from 'oidc-client';
 import cookies from './cookies';
 import { setSession, clearSession, getSession } from '../core/sessionUtil';
@@ -103,13 +102,13 @@ function expiresAtCalculator(expiresIn) {
   return moment.utc().add(expiresIn, 's').format('x');
 }
 
-function processIdentity(idTokenPayload) {
-  const knownFields = ['sub', 'name', 'nickname', 'picture', 'email'];
-  const identityObject = pick(idTokenPayload, knownFields);
-  if (Object.prototype.hasOwnProperty.call(identityObject, 'email')) {
-    identityObject.name = identityObject.email;
-    delete identityObject.email;
-  }
+function processIdentity({ sub, name, nickname, picture, email }) {
+  const identityObject = {
+    sub,
+    name: email || name,
+    nickname,
+    picture,
+  };
   return JSON.stringify(identityObject);
 }
 
