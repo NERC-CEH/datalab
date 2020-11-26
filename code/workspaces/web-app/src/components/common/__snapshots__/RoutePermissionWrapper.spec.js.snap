@@ -4,8 +4,9 @@ exports[`RoutePermissionWrapper render correct snapshot 1`] = `
 <Route
   exact={true}
   path="/"
-  render={[Function]}
-/>
+>
+  <WithStyles(ForwardRef(CircularProgress)) />
+</Route>
 `;
 
 exports[`RoutePermissionWrapper renders redirect when permissions do not match and redirectTo supplied 1`] = `

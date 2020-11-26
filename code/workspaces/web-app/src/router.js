@@ -11,8 +11,12 @@ import PrivateApp from './PrivateApp';
 const router = () => (
   <ConnectedRouter history={browserHistory}>
     <Switch>
-      <Route exact path="/callback" component={CallbackPage} />
-      <Route exact path="/silent-callback" component={SilentCallbackPage} />
+      <Route exact path="/callback">
+        <CallbackPage />
+      </Route>
+      <Route exact path="/silent-callback">
+        <SilentCallbackPage />
+      </Route>
       <RequireAuth path="/" PublicComponent={PublicApp} PrivateComponent={PrivateApp} />
     </Switch>
   </ConnectedRouter>

@@ -7,6 +7,7 @@ import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import { extendSubdomain } from '../../core/getDomainInfo';
 import TopBarButton from './TopBarButton';
 import navBarLinks from '../../constants/navBarLinks';
+import { useCurrentUserPermissions } from '../../hooks/authHooks';
 
 const styles = theme => ({
   appBar: {
@@ -38,26 +39,29 @@ const datalabLinks = [
   { displayName: 'Help', href: extendSubdomain('docs') },
 ];
 
-const TopBar = ({ classes, identity, userPermissions }) => (
-  <div className={classes.appBar}>
-    <div className={classes.toolBar}>
-      <img className={classes.datalabsLogo} src={datalabsLogo} alt={'datalabs-logo'} />
-      <div className={classes.buttons}>
-        {userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
-        && <TopBarButton to="/admin" label="Admin" />
-        }
-        <TopBarButton to="/projects" label="Projects" />
-        {datalabLinks.map(({ displayName, href, icon }) => <TopBarButton
-          key={`nav-link-${displayName}`}
-          label={displayName}
-          onClick={() => window.open(href)}
-        />)}
+const TopBar = ({ classes, identity }) => {
+  const userPermissions = useCurrentUserPermissions().value;
+  return (
+    <div className={classes.appBar}>
+      <div className={classes.toolBar}>
+        <img className={classes.datalabsLogo} src={datalabsLogo} alt={'datalabs-logo'}/>
+        <div className={classes.buttons}>
+          {userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
+          && <TopBarButton to="/admin" label="Admin"/>
+          }
+          <TopBarButton to="/projects" label="Projects"/>
+          {datalabLinks.map(({ displayName, href, icon }) => <TopBarButton
+            key={`nav-link-${displayName}`}
+            label={displayName}
+            onClick={() => window.open(href)}
+          />)}
+        </div>
+        <div style={{ flex: 1 }}/>
+        <UserInfo className={classes.userInfo} identity={identity}/>
       </div>
-      <div style={{ flex: 1 }} />
-      <UserInfo className={classes.userInfo} identity={identity} />
     </div>
-  </div>
-);
+  );
+};
 
 TopBar.propTypes = {
   identity: PropTypes.object.isRequired,

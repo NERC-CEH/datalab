@@ -1,24 +1,31 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
+import { useParams, useRouteMatch } from 'react-router';
 import { shallow } from 'enzyme';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
+import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import ProjectNavigationContainer, { PureProjectNavigationContainer } from './ProjectNavigationContainer';
 
+jest.mock('react-router');
 jest.mock('../../hooks/currentProjectHooks');
-
-const testProjKey = { fetching: false, error: null, value: 'testproj' };
+jest.mock('../../hooks/authHooks');
 
 const dispatchMock = jest.fn().mockName('dispatch');
 jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
 
+const match = { params: { projectKey: 'testproj' }, path: 'projects/:projectKey' };
+useParams.mockReturnValue(match.params);
+useRouteMatch.mockReturnValue(match);
+
+const testProjKey = { fetching: false, error: null, value: 'testproj' };
 useCurrentProjectKey.mockReturnValue(testProjKey);
 
-const match = { params: { projectKey: 'testproj' }, path: 'projects/:projectKey' };
 const promisedUserPermissions = {
   fetching: false,
   error: null,
   value: ['projects:testproj:projects:read'],
 };
+useCurrentUserPermissions.mockReturnValue(promisedUserPermissions);
 
 describe('ProjectNavigationContainer', () => {
   beforeEach(() => {
@@ -26,15 +33,14 @@ describe('ProjectNavigationContainer', () => {
   });
 
   it('renders to match snapshot passing correct project to children', () => {
-    const props = { match, promisedUserPermissions };
-    expect(shallow(<ProjectNavigationContainer {...props} />)).toMatchSnapshot();
+    expect(shallow(<ProjectNavigationContainer />)).toMatchSnapshot();
   });
 });
 
 describe('PureProjectNavigationContainer', () => {
   const shallowRender = (props) => {
     const defaultProps = {
-      match,
+      path: match.path,
       dispatch: dispatchMock,
       projectKey: testProjKey,
       promisedUserPermissions,

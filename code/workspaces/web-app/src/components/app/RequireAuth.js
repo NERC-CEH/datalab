@@ -36,17 +36,20 @@ const RequireAuth = ({ path, exact, strict, PrivateComponent, PublicComponent })
 
   useEffect(() => { effectFn(dispatch); }, [dispatch]);
 
-  return <Route
-    path={path}
-    exact={exact}
-    strict={strict}
-    render={switchContent(tokens, permissions, PrivateComponent, PublicComponent, classes)}
-  />;
+  return (
+    <Route
+      path={path}
+      exact={exact}
+      strict={strict}
+    >
+      {switchContent(tokens, permissions, PrivateComponent, PublicComponent, classes)}
+    </Route>
+  );
 };
 
 const switchContent = (tokens, permissions, PrivateComponent, PublicComponent, classes) => {
   if (permissions.fetching || userHasSessionButAwaitingTokens(tokens)) {
-    return () => (
+    return (
       <CircularProgress
         className={classes.circularProgress}
         size={circularProgressSize}
@@ -55,10 +58,10 @@ const switchContent = (tokens, permissions, PrivateComponent, PublicComponent, c
   }
 
   if (userLoggedIn(tokens)) {
-    return props => (<PrivateComponent {...props} promisedUserPermissions={permissions} />);
+    return <PrivateComponent />;
   }
 
-  return props => (<PublicComponent {...props} />);
+  return <PublicComponent />;
 };
 
 const userHasSessionButAwaitingTokens = tokens => getAuth().getCurrentSession() && !userLoggedIn(tokens);
@@ -66,8 +69,8 @@ const userHasSessionButAwaitingTokens = tokens => getAuth().getCurrentSession() 
 const userLoggedIn = tokens => !isEmpty(tokens);
 
 RequireAuth.propTypes = {
-  PrivateComponent: PropTypes.func.isRequired,
-  PublicComponent: PropTypes.func.isRequired,
+  PrivateComponent: PropTypes.elementType.isRequired,
+  PublicComponent: PropTypes.elementType.isRequired,
   path: PropTypes.string,
   exact: PropTypes.bool,
   strict: PropTypes.bool,

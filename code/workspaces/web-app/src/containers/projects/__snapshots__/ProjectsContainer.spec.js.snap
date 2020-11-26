@@ -5,96 +5,80 @@ Array [
   "MODAL_TYPE_ROBUST_CONFIRMATION",
   Object {
     "body": "Are you sure you want to delete the Project \\"Test Project (testproj)\\"?
-      This action will destroy all data related to the Project and can not be undone.",
+        This action will destroy all data related to the Project and can not be undone.",
     "confirmField": Object {
       "expectedValue": "testproj",
       "label": "Please type \\"testproj\\" to confirm",
     },
-    "onCancel": [MockFunction closeModalDialog],
+    "onCancel": [Function],
     "onSubmit": [Function],
     "title": "Delete Project \\"Test Project (testproj)\\"",
   },
 ]
 `;
 
-exports[`ProjectsContainer is a connected component which binds correct actions 1`] = `
-Array [
-  "loadProjects",
-  "setCurrentProject",
-  "clearCurrentProject",
-  "createProject",
-  "deleteProject",
-  "checkProjectKeyUniqueness",
-  "updateProject",
-  "openModalDialog",
-  "closeModalDialog",
-  "resetForm",
-]
-`;
-
-exports[`ProjectsContainer is a container which passes correct props to StackCard 1`] = `
+exports[`ProjectsContainer renders to match snapshot 1`] = `
 <div>
   <div
-    className="controlContainer"
+    class="makeStyles-controlContainer-1"
   >
-    <div>
-      <WithStyles(ForwardRef(ListItem))
-        button={true}
-        onClick={[Function]}
+    <div
+      class="makeStyles-filters-5"
+    >
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-active-3 MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
       >
         My Projects
-      </WithStyles(ForwardRef(ListItem))>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
     </div>
-    <WithStyles(ForwardRef(TextField))
-      InputProps={
-        Object {
-          "disableUnderline": true,
-          "style": Object {
-            "backgroundColor": "rgba(47, 62, 70, 0.2)",
-            "borderRadius": 5,
-          },
-        }
-      }
-      autoFocus={true}
-      className="searchTextField"
-      hiddenLabel={true}
-      id="search"
-      margin="dense"
-      onChange={[Function]}
-      placeholder="Filter projects..."
-      type="search"
-      value=""
-      variant="filled"
-    />
+    <div
+      class="MuiFormControl-root MuiTextField-root makeStyles-searchTextField-2 MuiFormControl-marginDense"
+    >
+      <div
+        class="MuiInputBase-root MuiFilledInput-root Mui-focused Mui-focused MuiInputBase-formControl MuiInputBase-marginDense MuiFilledInput-marginDense"
+        style="background-color: rgba(47, 62, 70, 0.2); border-radius: 5px;"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputHiddenLabel MuiFilledInput-inputHiddenLabel MuiInputBase-inputTypeSearch MuiInputBase-inputMarginDense MuiFilledInput-inputMarginDense"
+          id="search"
+          placeholder="Filter projects..."
+          type="search"
+          value=""
+        />
+      </div>
+    </div>
   </div>
-  <StackCards
-    createPermission="system:instance:admin"
-    deletePermission=""
-    deleteStack={[Function]}
-    editPermission=""
-    openCreationForm={[Function]}
-    openPermission="project.open"
-    openStack={[Function]}
-    showCreateButton={true}
-    stacks={
-      Object {
-        "fetching": false,
-        "value": Array [
-          Object {
-            "accessible": true,
-            "description": "A project description",
-            "displayName": "A project name",
-            "id": 123,
-            "key": "project2",
-            "status": "ready",
-            "type": "project",
-          },
-        ],
+  <div>
+    StackCards Mock - props = 
+    {
+  "stacks": {
+    "value": [
+      {
+        "id": 123,
+        "key": "project2",
+        "displayName": "A project name",
+        "description": "A project description",
+        "accessible": true,
+        "type": "project",
+        "status": "ready"
       }
-    }
-    typeName="Project"
-    typeNamePlural="Projects"
-    userPermissions={[Function]}
-  />
+    ]
+  },
+  "typeName": "Project",
+  "typeNamePlural": "Projects",
+  "showCreateButton": true,
+  "createPermission": "system:instance:admin",
+  "openPermission": "project.open",
+  "deletePermission": "",
+  "editPermission": ""
+}
+  </div>
 </div>
 `;

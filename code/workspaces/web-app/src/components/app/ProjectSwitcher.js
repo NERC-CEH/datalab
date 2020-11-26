@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { sortBy } from 'lodash';
 import { withStyles } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -71,14 +71,13 @@ function ProjectSwitcher({ classes }) {
   const currentProject = useCurrentProject();
   const projects = useProjectsArray();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     if (currentProject.value && currentProject.value.key) {
       dispatch(projectsActions.loadProjects());
     }
   }, [dispatch, currentProject.value]);
-
-  const { location } = window;
 
   const switcherProjects = getSwitcherProjects(projects, currentProject);
   switcherProjects.value = sortBy(
@@ -109,7 +108,7 @@ export const Switcher = ({ switcherProjects, currentProject, location, classes }
     margin="dense"
     fullWidth
     select
-    value={currentProject.value && currentProject.value.key}
+    value={!switcherProjects.fetching && currentProject.value ? currentProject.value.key : ''}
   >
     {getDropdownContent(switcherProjects, location, classes)}
   </TextField>
