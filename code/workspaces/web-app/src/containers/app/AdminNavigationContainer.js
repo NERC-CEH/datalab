@@ -24,7 +24,7 @@ function AdminNavigationContainer() {
           exact
           path="/admin/users"
           component={AdminUsersPage}
-          permission={SYSTEM_INSTANCE_ADMIN} 
+          permission={SYSTEM_INSTANCE_ADMIN}
         />
         <Redirect exact from="/admin" to="/admin/resources" />
         <Route component={NotFoundPage} />

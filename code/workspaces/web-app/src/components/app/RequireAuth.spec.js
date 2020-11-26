@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Route } from 'react-router-dom';
 import { createShallow } from '@material-ui/core/test-utils';
 import getAuth from '../../auth/auth';
 import { useCurrentUserPermissions, useCurrentUserTokens } from '../../hooks/authHooks';
