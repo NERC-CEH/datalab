@@ -40,6 +40,12 @@ export default function UserProject({ userId, projectKey, filters, roles }) {
 
   const userProject = allProjects.value
     .filter(proj => proj.key === projectKey)[0];
+  if (!userProject) {
+    return (
+      <Typography variant="h5" className={classes.heading}>No project matching {projectKey}</Typography>
+    );
+  }
+
   const projectKeys = cardsToShow.projectCardsToShow(roles, projectKey);
   const projects = allProjects.value
     .filter(proj => projectKeys.includes(proj.key));

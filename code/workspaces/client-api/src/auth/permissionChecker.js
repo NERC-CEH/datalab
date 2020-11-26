@@ -16,7 +16,7 @@ Note, 'done' here is nothing to do with the Express middleware, it is simply a c
 */
 export function projectPermissionWrapper(args, permissionSuffix, user, done) {
   if (!args.projectKey) {
-    logger.error('Auth: permission check: FAILED, projectKey not passed in args');
+    logger.error(`Auth: permission check: FAILED, projectKey not passed in args, expected suffix: ${permissionSuffix}`);
     return Promise.reject(new Error(`projectKey not passed, expected suffix: ${permissionSuffix}`));
   }
 
