@@ -15,9 +15,9 @@ import notify from '../../components/common/notify';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 
-const TYPE_NAME = 'Project';
+export const TYPE_NAME = 'Project';
 const TYPE_NAME_PLURAL = 'Projects';
-const PROJECT_OPEN_PERMISSION = 'project.open';
+export const PROJECT_OPEN_PERMISSION = 'project.open';
 const FORM_NAME = 'createProject';
 
 const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;

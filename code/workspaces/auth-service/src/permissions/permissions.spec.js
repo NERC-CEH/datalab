@@ -69,6 +69,36 @@ describe('Get Permissions', () => {
     };
 
     const output = getPermissions(userRole);
-    expect(output).toEqual(expect.arrayContaining(['system:instance:admin']));
+    expect(output).toEqual(['system:instance:admin']);
+  });
+
+  it('should add catalogue admin permissions', () => {
+    const userRole = {
+      userId: 'uid1',
+      catalogueRole: 'admin',
+    };
+
+    const output = getPermissions(userRole);
+    expect(output).toEqual(['system:catalogue:admin']);
+  });
+
+  it('should add catalogue publisher permission', () => {
+    const userRole = {
+      userId: 'uid1',
+      catalogueRole: 'publisher',
+    };
+
+    const output = getPermissions(userRole);
+    expect(output).toEqual(['system:catalogue:publish']);
+  });
+
+  it('should add catalogue editor permission', () => {
+    const userRole = {
+      userId: 'uid1',
+      catalogueRole: 'editor',
+    };
+
+    const output = getPermissions(userRole);
+    expect(output).toEqual(['system:catalogue:edit']);
   });
 });

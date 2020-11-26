@@ -197,6 +197,45 @@ The [Insomnia Rest client](https://insomnia.rest/) is recommended for testing AP
 during development. Detailed instructions for how to do this can be found
 [here](./insomnia/README.md) including a definition file that can be imported.
 
+## Telepresence
+
+[Telepresence](https://www.telepresence.io/) can be installed, allowing you to e.g. investigate issues on the test system which you cannot reproduce locally.
+
+### auth-service
+```
+cd datalab/code/workspaces/auth-service
+kubectx datalabs
+telepresence --expose 9000:9000 --swap-deployment datalab-auth-deployment
+export AUTHORISATION_PERMISSIONS=${PWD}/resources/permissions.yml
+export PRIVATE_KEY=${PWD}/resources/private.pem
+export PUBLIC_KEY=${PWD}/resources/public.pem
+yarn start
+```
+
+### infrastructure-api
+```
+cd datalab/code/workspaces/infrastructure-api
+kubectx datalabs
+telepresence --expose 8000:8000 --swap-deployment infrastructure-api-deployment
+yarn start
+```
+
+### client-api
+```
+cd datalab/code/workspaces/client-api
+kubectx datalabs
+telepresence --expose 8000:8000 --swap-deployment datalab-api-deployment
+yarn start
+```
+
+### web-app
+```
+cd datalab/code/workspaces/web-app
+kubectx datalabs
+telepresence --expose 3000:80 --swap-deployment datalab-app-deployment
+yarn start
+```
+
 ## Running Mock GraphQL Server
 
 A Mock GraphQL server can be run in place of the real Client API GraphQL server. This automatically generates responses

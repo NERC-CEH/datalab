@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`userRolesRepository read operations getProjectUsers returns expected snapshot 1`] = `
+exports[`userRolesRepository read operations getAllUsersAndRoles returns expected snapshot 1`] = `
 Array [
   Object {
     "instanceAdmin": false,
@@ -19,6 +19,38 @@ Array [
     "userName": "user1",
   },
   Object {
+    "projectRoles": Array [
+      Object {
+        "projectKey": "project 2",
+        "role": "viewer",
+      },
+    ],
+    "toObject": [Function],
+    "userId": "uid2",
+    "userName": "user2",
+  },
+]
+`;
+
+exports[`userRolesRepository read operations getProjectUsers returns expected snapshot 1`] = `
+Array [
+  Object {
+    "instanceAdmin": false,
+    "projectRoles": Array [
+      Object {
+        "projectKey": "project 1",
+        "role": "admin",
+      },
+      Object {
+        "projectKey": "project 2",
+        "role": "user",
+      },
+    ],
+    "userId": "uid1",
+    "userName": "user1",
+  },
+  Object {
+    "catalogueRole": "publisher",
     "instanceAdmin": true,
     "projectRoles": Array [
       Object {
@@ -26,29 +58,28 @@ Array [
         "role": "viewer",
       },
     ],
-    "toObject": [Function],
     "userId": "uid2",
     "userName": "user2",
   },
   Object {
+    "instanceAdmin": false,
     "projectRoles": Array [
       Object {
         "projectKey": "project 2",
         "role": "viewer",
       },
     ],
-    "toObject": [Function],
     "userId": "uid2",
     "userName": "user2",
   },
   Object {
+    "instanceAdmin": false,
     "projectRoles": Array [
       Object {
         "projectKey": "project 2",
         "role": "viewer",
       },
     ],
-    "toObject": [Function],
     "userId": "uid?",
   },
 ]

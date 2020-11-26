@@ -21,6 +21,7 @@ const testUserRoles = () => [
     userId: 'uid2',
     userName: 'user2',
     instanceAdmin: true,
+    catalogueRole: 'publisher',
     projectRoles: [
       { projectKey: 'project 2', role: 'viewer' },
     ],
@@ -75,6 +76,12 @@ describe('userRolesRepository', () => {
         expect(users).toMatchSnapshot();
       }));
 
+    it('getAllUsersAndRoles returns expected snapshot', () => userRoleRepository.getAllUsersAndRoles()
+      .then((usersAndRoles) => {
+        expect(mockDatabase().query()).toEqual();
+        expect(usersAndRoles).toMatchSnapshot();
+      }));
+
     it('getProjectUsers returns expected snapshot', () => userRoleRepository.getProjectUsers('project 2')
       .then((users) => {
         expect(mockDatabase().query()).toEqual({
@@ -94,7 +101,7 @@ describe('userRolesRepository', () => {
     it('should reject if the user is not in roles collection', async () => {
       mockDatabase = databaseMock([]);
       database.getModel = mockDatabase;
-      await expect(userRoleRepository.addRole('uid1', 'project', 'admin')).rejects.toThrow('Unrecognized user uid1');
+      await expect(userRoleRepository.addRole('uid1', 'project', 'admin')).rejects.toThrow('Unrecognised user uid1');
     });
 
     it('should add role to existing user if the user has no role on project', async () => {

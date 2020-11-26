@@ -4,10 +4,23 @@ function Stack() {
   return database.getModel('Stack');
 }
 
-function getAll(user) {
+function getAllByUser(user) {
   return Stack()
     .find()
     .filterByUserSharedVisible(user)
+    .exec();
+}
+
+function getAllStacks() {
+  return Stack()
+    .find()
+    .exec();
+}
+
+function getAllOwned(user) {
+  return Stack()
+    .find()
+    .filterByUser(user)
     .exec();
 }
 
@@ -114,7 +127,9 @@ function update(projectKey, user, name, updatedValues) {
 }
 
 export default {
-  getAll,
+  getAllByUser,
+  getAllStacks,
+  getAllOwned,
   getAllByProject,
   getAllByCategory,
   getOneById,

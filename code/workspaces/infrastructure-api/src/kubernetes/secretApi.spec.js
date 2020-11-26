@@ -126,10 +126,10 @@ describe('Kubernetes Secret API', () => {
       return expect(secretApi.deleteSecret(SECRET_NAME, NAMESPACE)).resolves.toBeUndefined();
     });
 
-    it('should return error if server errors', () => {
+    it('should return error if server errors', async () => {
       mock.onDelete(`${SECRET_URL}/${SECRET_NAME}`).reply(500, { message: 'error-message' });
 
-      return expect(secretApi.deleteSecret(SECRET_NAME, NAMESPACE))
+      await expect(secretApi.deleteSecret(SECRET_NAME, NAMESPACE))
         .rejects.toEqual(new Error('Kubernetes API: Request failed with status code 500'));
     });
   });

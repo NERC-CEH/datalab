@@ -25,7 +25,7 @@ describe('authActions', () => {
     it('getUserPermissions', () => {
       // Arrange
       const serviceMock = jest.fn().mockReturnValue('expectedPermissions');
-      userPermissionService.default = serviceMock;
+      userPermissionService.default.getUserPermissions = serviceMock;
 
       // Act
       expect(serviceMock).not.toHaveBeenCalled();

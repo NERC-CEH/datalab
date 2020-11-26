@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminUsersPage renders correct snapshot 1`] = `
+<WithStyles(Page)
+  title="Users"
+>
+  <AdminUsersContainer />
+</WithStyles(Page)>
+`;

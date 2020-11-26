@@ -9,8 +9,9 @@ import sideBarStyles from './sideBarStyles';
 const AdminSideBar = ({ classes }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
-      <SideBarGroup>
+      <SideBarGroup title='Administration'>
         <SideBarButton to="/admin/resources" label="Resources" icon="dashboard"></SideBarButton>
+        <SideBarButton to="/admin/users" label="Users" icon="people"></SideBarButton>
       </SideBarGroup>
     </List>
   </div>

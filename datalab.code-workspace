@@ -13,6 +13,9 @@
 			"path": "code/workspaces/common"
 		},
 		{
+			"path": "code/workspaces/infrastructure-api"
+		},
+		{
 			"path": "code/workspaces/web-app"
 		}
 	],

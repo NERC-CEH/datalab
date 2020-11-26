@@ -25,6 +25,25 @@ describe('projectsService', () => {
     });
   });
 
+  describe('getAllProjectsAndResources', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ allProjectsAndResources: 'expectedValue' });
+
+      return projectsService.getAllProjectsAndResources().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return projectsService.getAllProjectsAndResources().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
   describe('loadProjectInfo', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ project: 'expectedValue' });
