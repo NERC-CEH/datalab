@@ -75,5 +75,5 @@ services:
       # web_auth_config is unique to each domain
       # When using KeyCloak unhash the line below and hash the Auth0 line
       # - $PWD/config/local/web_auth_config_keycloak.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
-      # When using Auth0 unhash the line below and hash the Auth0 line
+      # When using Auth0 unhash the line below and hash the Keycloak line
       - $PWD/config/local/web_auth_config.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
