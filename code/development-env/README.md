@@ -191,6 +191,25 @@ docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-m
 
 You should eventually see a message saying `You can now view datalab-app in the browser.`
 
+### Running with Keycloak
+
+If you wish to use a local authentication provider rather than auth0 to test this is possible by the following modifications to the `./docker/docker-compose-app.yml` file;
+
+- Unhash the lines in the auth service marked as "`OIDC_*`".
+- Hash out the line in the app service relating to `web_auth_config.json` and unhash the next line containing `web_auth_config_keycloak.json`.
+
+Keycloak must be resolvable both by the auth service as well as your local desktop, as keycloak is addressable by default using the docker network by its service name, the easiest way to make it work locally is to add a local DNS entry or a localhost entry for keycloak e.g;
+
+```bash
+127.0.0.1 keycloak
+```
+
+Finally, use the following command to start the app in place of the final one used above. When setting up for the first time it may take a minute before login is available as the OIDC client is set up for the first time.
+
+```bash
+docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up -d
+```
+
 ## Testing APIs
 
 The [Insomnia Rest client](https://insomnia.rest/) is recommended for testing APIs

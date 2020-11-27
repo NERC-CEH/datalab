@@ -1,0 +1,19 @@
+{
+  "client_id": "datalabs",
+  "redirect_uri": "https://testlab.datalabs.localhost/callback",
+  "response_type": "code",
+  "scope": "openid profile email",
+  "authority": "http://keycloak:8080/auth/realms/DataLabs",
+  "automaticSilentRenew": true,
+  "accessTokenExpiringNotificationTime": "600",
+  "filterProtocolClaims": true,
+  "loadUserInfo": true,
+  "metadata": {
+    "issuer": "http://keycloak:8080/auth/realms/DataLabs",
+    "authorization_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/auth",
+    "userinfo_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/userinfo",
+    "end_session_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/logout?redirect_uri=http://testlab.datalabs.localhost",
+    "jwks_uri": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/certs",
+    "token_endpoint": "http://keycloak:8080/auth/realms/DataLabs/protocol/openid-connect/token"
+  }
+}
