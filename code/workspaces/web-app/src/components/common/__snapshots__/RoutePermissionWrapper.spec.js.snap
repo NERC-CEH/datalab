@@ -8,9 +8,3 @@ exports[`RoutePermissionWrapper render correct snapshot 1`] = `
   <WithStyles(ForwardRef(CircularProgress)) />
 </Route>
 `;
-
-exports[`RoutePermissionWrapper renders redirect when permissions do not match and redirectTo supplied 1`] = `
-<Redirect
-  to="redirect/to/this/path"
-/>
-`;
