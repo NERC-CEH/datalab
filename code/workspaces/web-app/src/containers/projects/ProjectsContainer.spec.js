@@ -1,12 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
 import createStore from 'redux-mock-store';
+import { mount } from 'enzyme';
+import { reset } from 'redux-form';
 import notify from '../../components/common/notify';
-import { PureProjectsContainer, ConnectedProjectsContainer, projectToStack, stackMatchesFilter } from './ProjectsContainer';
+
+import ProjectsContainer, { confirmDeleteProject, deleteProject, onCreateProjectSubmit, projectToStack, stackMatchesFilter } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
+import projectActions from '../../actions/projectActions';
+import modalDialogActions from '../../actions/modalDialogActions';
+
+jest.mock('redux-form');
 
 jest.mock('../../api/projectsService');
 jest.mock('../../components/common/notify');
+jest.mock('../../components/stacks/StackCards', () => props => <div>StackCards Mock - props = {JSON.stringify(props, null, 2)}</div>);
 
 const projectsPayload = {
   value: [{
@@ -17,8 +25,27 @@ const projectsPayload = {
     accessible: true,
   }],
 };
-const loadProjectsMock = jest.fn().mockReturnValue(Promise.resolve(projectsPayload));
+const loadProjectsMock = jest.fn().mockResolvedValue(projectsPayload);
 projectsService.loadProjects = loadProjectsMock;
+
+function renderWithStore({
+  projects = projectsPayload,
+  userPermissionsArray = ['expected-user-permission'],
+} = {}) {
+  const middlewares = [];
+  const initialState = {
+    authentication: { permissions: { value: userPermissionsArray } },
+    projects,
+  };
+  const store = createStore(middlewares)(initialState);
+  const wrapper = mount(
+    <Provider store={store}>
+      <ProjectsContainer/>
+    </Provider>,
+  );
+
+  return { store, wrapper };
+}
 
 describe('ProjectsContainer', () => {
   describe('is a component which', () => {
@@ -34,155 +61,75 @@ describe('ProjectsContainer', () => {
     });
   });
 
-  describe('is a connected component which', () => {
-    function shallowRenderConnected(store) {
-      const props = {
-        store,
-        PrivateComponent: () => { },
-        PublicComponent: () => { },
-        userPermissions: ['expectedPermission'],
-      };
-
-      return shallow(<ConnectedProjectsContainer {...props} />).find('ProjectsContainer');
-    }
-
-    const projects = { fetching: false, value: ['expectedArray'] };
-
-    it('extracts the correct props from the redux state', () => {
-      // Arrange
-      const store = createStore()({
-        projects,
-      });
-
-      // Act
-      const output = shallowRenderConnected(store);
-
-      // Assert
-      expect(output.prop('projects')).toBe(projects);
-    });
-
-    it('binds correct actions', () => {
-      // Arrange
-      const store = createStore()({
-        projects,
-      });
-
-      // Act
-      const output = shallowRenderConnected(store).prop('actions');
-
-      // Assert
-      expect(Object.keys(output)).toMatchSnapshot();
-    });
-
-    it('loadProjects function dispatch correct action', () => {
-      // Arrange
-      const store = createStore()({
-        projects,
-      });
-
-      // Act
-      const output = shallowRenderConnected(store);
-
-      // Assert
-      expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadProjects();
-      const { type, payload } = store.getActions()[0];
-      expect(type).toBe('LOAD_PROJECTS');
-      return payload.then(value => expect(value).toBe(projectsPayload));
-    });
+  it('renders to match snapshot', () => {
+    const { wrapper } = renderWithStore();
+    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
   });
 
-  describe('is a container which', () => {
-    function shallowRenderPure(props) {
-      return shallow(<PureProjectsContainer {...props} />);
-    }
-
-    const projects = { fetching: false, value: projectsPayload.value };
-
-    const generateProps = () => ({
-      projects,
-      userPermissions: ['expectedPermission'],
-      actions: {
-        loadProjects: loadProjectsMock,
-      },
-      classes: { controlContainer: 'controlContainer', searchTextField: 'searchTextField' },
-    });
-
-    beforeEach(() => jest.clearAllMocks());
-
-    it('calls loadProjects action when mounted', () => {
-      // Arrange
-      const props = generateProps();
-
-      // Act
-      shallowRenderPure(props);
-
-      // Assert
-      expect(loadProjectsMock).toHaveBeenCalledTimes(1);
-    });
-
-    it('passes correct props to StackCard', () => {
-      // Arrange
-      const props = generateProps();
-
-      // Act
-      expect(shallowRenderPure(props)).toMatchSnapshot();
-    });
+  it('loads projects when it is rendered', () => {
+    const { store } = renderWithStore();
+    const actions = store.getActions();
+    expect(actions).toEqual([projectActions.loadProjects()]);
   });
 
   describe('has methods', () => {
-    const openModalDialogMock = jest.fn().mockName('openModalDialog');
-    const closeModalDialogMock = jest.fn().mockName('closeModalDialog');
-    const createProjectMock = jest.fn().mockName('createProject');
-    const deleteProjectMock = jest.fn().mockName('deleteProject');
-    const resetFormMock = jest.fn().mockName('resetForm');
+    const originalModalDialogActions = { ...modalDialogActions };
+    const originalProjectActions = { ...projectActions };
 
-    const props = {
-      projects: { fetching: false, value: projectsPayload.value },
-      userPermissions: ['expectedPermission'],
-      actions: {
-        loadProjects: loadProjectsMock,
-        openModalDialog: openModalDialogMock,
-        closeModalDialog: closeModalDialogMock,
-        createProject: createProjectMock,
-        deleteProject: deleteProjectMock,
-        resetForm: resetFormMock,
-      },
-      classes: { controlContainer: 'controlContainer', searchTextField: 'searchTextField' },
-    };
+    const openModalDialogMock = jest.fn(() => 'openModalDialogMock').mockName('openModalDialog');
+    modalDialogActions.openModalDialog = openModalDialogMock;
 
-    const projectInfo = { key: 'testproj', displayName: 'Test Project' };
+    const closeModalDialogMock = jest.fn(() => 'closeModalDialogMock').mockName('closeModalDialog');
+    modalDialogActions.closeModalDialog = closeModalDialogMock;
 
-    const containerInstance = shallow(<PureProjectsContainer {...props} />).instance();
+    const createProjectMock = jest.fn(() => 'createProjectMock').mockName('createProject');
+    projectActions.createProject = createProjectMock;
+
+    const deleteProjectMock = jest.fn(() => 'deleteProjectMock').mockName('deleteProject');
+    projectActions.deleteProject = deleteProjectMock;
+
+    const dispatchMock = jest.fn().mockName('dispatch');
 
     beforeEach(() => {
       jest.clearAllMocks();
     });
 
+    afterAll(() => {
+      modalDialogActions.openModalDialog = originalModalDialogActions.openModalDialog;
+      modalDialogActions.closeModalDialog = originalModalDialogActions.closeModalDialog;
+      projectActions.createProject = originalProjectActions.createProject;
+      projectActions.deleteProject = originalProjectActions.deleteProject;
+      projectActions.loadProjects = loadProjectsMock;
+    });
+
+    const projectInfo = { key: 'testproj', displayName: 'Test Project' };
+
     describe('confirmDeleteProject', () => {
       it('opens deletion dialog with the correct call', () => {
-        containerInstance.confirmDeleteProject(projectInfo);
+        confirmDeleteProject(dispatchMock)(projectInfo);
         expect(openModalDialogMock).toHaveBeenCalledTimes(1);
         expect(openModalDialogMock.mock.calls[0]).toMatchSnapshot();
+        expect(dispatchMock).toHaveBeenLastCalledWith('openModalDialogMock');
       });
     });
 
     describe('onCreateProjectSubmit', () => {
       it('calls action to create project with project info', async () => {
-        await containerInstance.onCreateProjectSubmit(projectInfo);
+        await onCreateProjectSubmit(dispatchMock)(projectInfo);
         expect(createProjectMock).toHaveBeenCalledTimes(1);
         expect(createProjectMock).toHaveBeenCalledWith(projectInfo);
+        expect(dispatchMock).toHaveBeenCalledWith('createProjectMock');
       });
 
       describe('on successful creation', () => {
         it('calls to clear the form using form name', async () => {
-          await containerInstance.onCreateProjectSubmit(projectInfo);
-          expect(resetFormMock).toHaveBeenCalledTimes(1);
-          expect(resetFormMock).toHaveBeenCalledWith('createProject');
+          await onCreateProjectSubmit(dispatchMock)(projectInfo);
+          expect(reset).toHaveBeenCalledTimes(1);
+          expect(reset).toHaveBeenCalledWith('createProject');
         });
 
         it('notifies the success', async () => {
-          await containerInstance.onCreateProjectSubmit(projectInfo);
+          await onCreateProjectSubmit(dispatchMock)(projectInfo);
           expect(notify.success).toHaveBeenCalledTimes(1);
         });
       });
@@ -190,7 +137,7 @@ describe('ProjectsContainer', () => {
       describe('on failed creation', () => {
         it('notifies of failure', async () => {
           createProjectMock.mockImplementationOnce(() => { throw new Error(); });
-          await containerInstance.onCreateProjectSubmit(projectInfo);
+          await onCreateProjectSubmit(dispatchMock)(projectInfo);
           expect(notify.error).toHaveBeenCalledTimes(1);
         });
       });
@@ -198,24 +145,27 @@ describe('ProjectsContainer', () => {
 
     describe('deleteProject', () => {
       it('calls action to delete project with project key', async () => {
-        await containerInstance.deleteProject(projectInfo);
+        await deleteProject(dispatchMock, projectInfo);
         expect(deleteProjectMock).toHaveBeenCalledTimes(1);
         expect(deleteProjectMock).toHaveBeenCalledWith(projectInfo.key);
+        expect(dispatchMock).toHaveBeenCalledWith('deleteProjectMock');
       });
 
       it('calls action to load projects', async () => {
-        await containerInstance.deleteProject(projectInfo);
+        await deleteProject(dispatchMock, projectInfo);
         expect(loadProjectsMock).toHaveBeenCalledTimes(1);
+        expect(dispatchMock).toHaveBeenCalledWith({ payload: Promise.resolve(projectsPayload), type: 'LOAD_PROJECTS' });
       });
 
       describe('on successful deletion', () => {
         it('calls to close the modal dialog', async () => {
-          await containerInstance.deleteProject(projectInfo);
+          await deleteProject(dispatchMock, projectInfo);
           expect(closeModalDialogMock).toHaveBeenCalledTimes(1);
+          expect(dispatchMock).toHaveBeenCalledWith('closeModalDialogMock');
         });
 
         it('it notifies success', async () => {
-          await containerInstance.deleteProject(projectInfo);
+          await deleteProject(dispatchMock, projectInfo);
           expect(notify.success).toHaveBeenCalledTimes(1);
         });
       });
@@ -223,7 +173,7 @@ describe('ProjectsContainer', () => {
       describe('on failed deletion', () => {
         it('notifies of failure', async () => {
           deleteProjectMock.mockImplementationOnce(() => { throw new Error(); });
-          await containerInstance.deleteProject(projectInfo);
+          await deleteProject(dispatchMock, projectInfo);
           expect(notify.error).toHaveBeenCalledTimes(1);
         });
       });

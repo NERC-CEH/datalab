@@ -31,20 +31,8 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
       }
     }
     location={
-      Location {
-        "assign": [Function],
-        "hash": "",
-        "host": "localhost",
-        "hostname": "localhost",
-        "href": "http://localhost/",
-        "origin": "http://localhost",
-        "pathname": "/",
-        "port": "",
-        "protocol": "http:",
-        "reload": [Function],
-        "replace": [Function],
-        "search": "",
-        "toString": [Function],
+      Object {
+        "name": "expected location value",
       }
     }
     switcherProjects={
@@ -76,6 +64,7 @@ exports[`Switcher renders to match snapshot when switcherProjects is fetching 1`
   label="Current Project"
   margin="dense"
   select={true}
+  value=""
   variant="outlined"
 >
   <div
@@ -93,10 +82,24 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
   label="Current Project"
   margin="dense"
   select={true}
+  value="testproj"
   variant="outlined"
 >
   <WithStyles(ForwardRef(MenuItem))
-    component={[Function]}
+    component={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Link",
+        "propTypes": Object {
+          "innerRef": [Function],
+          "onClick": [Function],
+          "replace": [Function],
+          "target": [Function],
+          "to": [Function],
+        },
+        "render": [Function],
+      }
+    }
     key="testproj"
     to="/projects/testproj/info"
     value="testproj"
@@ -118,7 +121,20 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
     </div>
   </WithStyles(ForwardRef(MenuItem))>
   <WithStyles(ForwardRef(MenuItem))
-    component={[Function]}
+    component={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Link",
+        "propTypes": Object {
+          "innerRef": [Function],
+          "onClick": [Function],
+          "replace": [Function],
+          "target": [Function],
+          "to": [Function],
+        },
+        "render": [Function],
+      }
+    }
     key="projthree"
     to="/projects/projthree/info"
     value="projthree"
@@ -142,13 +158,14 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
 </WithStyles(ForwardRef(TextField))>
 `;
 
-exports[`Switcher renders to match snapshot when there are projects to display 1`] = `
+exports[`Switcher renders to match snapshot when there are no projects to display 1`] = `
 <WithStyles(ForwardRef(TextField))
   className="switcher"
   fullWidth={true}
   label="Current Project"
   margin="dense"
   select={true}
+  value=""
   variant="outlined"
 >
   <WithStyles(ForwardRef(MenuItem))>

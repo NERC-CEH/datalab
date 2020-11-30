@@ -1,13 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
-import ProjectSwitcher, { Switcher,
+import ProjectSwitcher, {
+  Switcher,
   getSwitcherProjects,
-  createRoute } from './ProjectSwitcher';
+  createRoute,
+} from './ProjectSwitcher';
 
 jest.mock('react-redux');
+jest.mock('react-router');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/projectsHooks');
 jest.mock('../../actions/projectActions');
@@ -33,6 +37,8 @@ const state = {
 describe('ProjectSwitcher', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
   useDispatch.mockReturnValue(dispatchMock);
+
+  useLocation.mockReturnValue({ name: 'expected location value' });
 
   useCurrentProject.mockReturnValue(state.currentProject);
   useProjectsArray.mockReturnValue(state.projects);
@@ -63,7 +69,7 @@ describe('Switcher', () => {
       shallow(
         <Switcher
           switcherProjects={getSwitcherProjects(state.projects, state.currentProject)}
-          currentProject={testProj}
+          currentProject={state.currentProject}
           location={location}
           classes={classes}
         />,
@@ -71,7 +77,7 @@ describe('Switcher', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders to match snapshot when there are projects to display', () => {
+  it('renders to match snapshot when there are no projects to display', () => {
     expect(
       shallow(
         <Switcher
@@ -89,7 +95,7 @@ describe('Switcher', () => {
       shallow(
         <Switcher
           switcherProjects={{ fetching: true, value: [] }}
-          currentProject={testProj}
+          currentProject={state.currentProject}
           location={location}
           classes={classes}
         />,

@@ -8,7 +8,7 @@ import RoutePermissions from '../../components/common/RoutePermissionWrapper';
 import NotFoundPage from '../../pages/NotFoundPage';
 import AdminSideBar from '../../components/app/AdminSideBar';
 
-function AdminNavigationContainer({ promisedUserPermissions }) {
+function AdminNavigationContainer() {
   return (
     <SideBarNavigation sideBar={
       <AdminSideBar />
@@ -18,14 +18,14 @@ function AdminNavigationContainer({ promisedUserPermissions }) {
           exact
           path="/admin/resources"
           component={AdminResourcesPage}
-          promisedUserPermissions={promisedUserPermissions}
-          permission={SYSTEM_INSTANCE_ADMIN} />
+          permission={SYSTEM_INSTANCE_ADMIN}
+        />
         <RoutePermissions
           exact
           path="/admin/users"
           component={AdminUsersPage}
-          promisedUserPermissions={promisedUserPermissions}
-          permission={SYSTEM_INSTANCE_ADMIN} />
+          permission={SYSTEM_INSTANCE_ADMIN}
+        />
         <Redirect exact from="/admin" to="/admin/resources" />
         <Route component={NotFoundPage} />
       </Switch>

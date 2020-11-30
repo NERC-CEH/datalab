@@ -3,14 +3,7 @@
 exports[`ProjectNavigationContainer renders to match snapshot passing correct project to children 1`] = `
 <PureProjectNavigationContainer
   dispatch={[MockFunction dispatch]}
-  match={
-    Object {
-      "params": Object {
-        "projectKey": "testproj",
-      },
-      "path": "projects/:projectKey",
-    }
-  }
+  path="projects/:projectKey"
   projectKey={
     Object {
       "error": null,
@@ -44,24 +37,16 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
 >
   <Switch>
     <Route
-      component={[Function]}
       exact={true}
       path="projects/:projectKey/info"
-    />
+    >
+      <ProjectInfoPage />
+    </Route>
     <RoutePermissionWrapper
       component={[Function]}
       exact={true}
       path="projects/:projectKey/storage"
       permission="projects:testproj:storage:list"
-      promisedUserPermissions={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [
-            "projects:testproj:projects:read",
-          ],
-        }
-      }
       redirectTo="projects/testproj/info"
     />
     <RoutePermissionWrapper
@@ -69,15 +54,6 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
       exact={true}
       path="projects/:projectKey/notebooks"
       permission="projects:testproj:stacks:list"
-      promisedUserPermissions={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [
-            "projects:testproj:projects:read",
-          ],
-        }
-      }
       redirectTo="projects/testproj/info"
     />
     <RoutePermissionWrapper
@@ -85,15 +61,6 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
       exact={true}
       path="projects/:projectKey/publishing"
       permission="projects:testproj:stacks:list"
-      promisedUserPermissions={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [
-            "projects:testproj:projects:read",
-          ],
-        }
-      }
       redirectTo="projects/testproj/info"
     />
     <RoutePermissionWrapper
@@ -101,30 +68,23 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
       exact={true}
       path="projects/:projectKey/settings"
       permission="projects:testproj:settings:list"
-      promisedUserPermissions={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [
-            "projects:testproj:projects:read",
-          ],
-        }
-      }
       redirectTo="projects/testproj/info"
     />
     <Route
-      component={[Function]}
       exact={true}
       path="projects/:projectKey/dask"
-    />
+    >
+      <DaskPage />
+    </Route>
     <Route
-      component={[Function]}
       exact={true}
       path="projects/:projectKey/spark"
-    />
-    <Route
-      component={[Function]}
-    />
+    >
+      <SparkPage />
+    </Route>
+    <Route>
+      <NotFoundPage />
+    </Route>
   </Switch>
 </WithStyles(SideBarNavigation)>
 `;

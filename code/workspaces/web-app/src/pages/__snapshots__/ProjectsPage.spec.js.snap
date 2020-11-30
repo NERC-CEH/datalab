@@ -4,7 +4,7 @@ exports[`ProjectsPage renders correct snapshot 1`] = `
 <WithStyles(Page)
   title="Projects"
 >
-  <WithStyles(withRouter(Connect(ProjectsContainer)))
+  <ProjectsContainer
     userPermissions={
       Array [
         "expectedPermission",

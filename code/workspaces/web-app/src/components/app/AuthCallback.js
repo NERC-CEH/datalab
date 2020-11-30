@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { replace } from 'connected-react-router';
+import { useLocation } from 'react-router';
 import getAuth from '../../auth/auth';
 import authActions from '../../actions/authActions';
 
-export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
+export const handleAuth = async (searchUrl, routeTo, dispatch) => {
   if (/verify/.test(searchUrl)) {
     dispatch(routeTo('/verify'));
   } else if (/code|access_token|id_token|error/.test(searchUrl)) {
@@ -22,13 +23,14 @@ export const handleAuth = async (searchUrl, routeTo, dispatch, props) => {
   }
 };
 
-const AuthCallback = (props) => {
+const AuthCallback = () => {
   const dispatch = useDispatch();
+  const { search } = useLocation();
   const routeTo = replace;
 
   useEffect(() => {
-    handleAuth(props.location.search, routeTo, dispatch, props);
-  }, [routeTo, dispatch, props]);
+    handleAuth(search, routeTo, dispatch);
+  }, [routeTo, dispatch, search]);
 
   return null;
 };

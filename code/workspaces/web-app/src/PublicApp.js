@@ -9,9 +9,15 @@ import RedirectToLoginPage from './pages/RedirectToLoginPage';
 const PublicApp = () => (
   <MuiThemeProvider theme={publicAppTheme}>
     <Switch>
-      <Route exact path="/" component={WelcomePage} />
-      <Route exact path="/verify" component={VerifyEmailPage} />
-      <Route component={RedirectToLoginPage} />
+      <Route exact path="/">
+        <WelcomePage />
+      </Route>
+      <Route exact path="/verify">
+        <VerifyEmailPage />
+      </Route>
+      <Route>
+        <RedirectToLoginPage />
+      </Route>
     </Switch>
   </MuiThemeProvider>
 );

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useParams, useRouteMatch } from 'react-router';
 import { permissionTypes } from 'common';
-import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import projectActions from '../../actions/projectActions';
 import SideBarNavigation from '../../components/app/SideBarNavigation';
 import ProjectInfoPage from '../../pages/ProjectInfoPage';
@@ -16,6 +15,8 @@ import SettingsPage from '../../pages/SettingsPage';
 import DaskPage from '../../pages/DaskPage';
 import SparkPage from '../../pages/SparkPage';
 import ProjectSideBar from '../../components/app/ProjectSideBar';
+import { useCurrentUserPermissions } from '../../hooks/authHooks';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 const {
   projectKeyPermission,
@@ -23,25 +24,25 @@ const {
   SYSTEM_INSTANCE_ADMIN,
 } = permissionTypes;
 
-function ProjectNavigationContainer({ match, promisedUserPermissions }) {
-  const { params: { projectKey } } = match;
+function ProjectNavigationContainer() {
+  const { projectKey } = useParams();
+  const { path } = useRouteMatch();
   const dispatch = useDispatch();
+  const promisedUserPermissions = useCurrentUserPermissions();
 
   useEffect(() => {
     dispatch(projectActions.setCurrentProject(projectKey));
   }, [dispatch, projectKey]);
 
   return <PureProjectNavigationContainer
-    match={match}
+    path={path}
     promisedUserPermissions={promisedUserPermissions}
     projectKey={useCurrentProjectKey()}
     dispatch={dispatch}
   />;
 }
 
-function PureProjectNavigationContainer({ match, promisedUserPermissions, projectKey, dispatch }) {
-  const { path } = match;
-
+function PureProjectNavigationContainer({ path, promisedUserPermissions, projectKey, dispatch }) {
   if (shouldRedirectToProjectsPage(projectKey, promisedUserPermissions)) {
     dispatch(projectActions.clearCurrentProject());
     return <Redirect to="/projects" />;
@@ -56,41 +57,42 @@ function PureProjectNavigationContainer({ match, promisedUserPermissions, projec
       <ProjectSideBar userPermissions={promisedUserPermissions.value} />
     }>
       <Switch>
-        <Route
-          exact
-          path={`${path}/info`}
-          component={ProjectInfoPage} />
+        <Route exact path={`${path}/info`}>
+          <ProjectInfoPage />
+        </Route>
         <RoutePermissions
           exact
           path={`${path}/storage`}
           component={DataStoragePage}
-          promisedUserPermissions={promisedUserPermissions}
           permission={projectKeyPermission(PROJECT_KEY_STORAGE_LIST, projectKey.value)}
           redirectTo={redirectPath} />
         <RoutePermissions
           exact
           path={`${path}/notebooks`}
           component={NotebooksPage}
-          promisedUserPermissions={promisedUserPermissions}
           permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey.value)}
           redirectTo={redirectPath} />
         <RoutePermissions
           exact
           path={`${path}/publishing`}
           component={PublishingPage}
-          promisedUserPermissions={promisedUserPermissions}
           permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey.value)}
           redirectTo={redirectPath} />
         <RoutePermissions
           exact
           path={`${path}/settings`}
           component={SettingsPage}
-          promisedUserPermissions={promisedUserPermissions}
           permission={projectKeyPermission(PROJECT_KEY_SETTINGS_LIST, projectKey.value)}
           redirectTo={redirectPath} />
-        <Route exact path={`${path}/dask`} component={DaskPage} />
-        <Route exact path={`${path}/spark`} component={SparkPage} />
-        <Route component={NotFoundPage} />
+        <Route exact path={`${path}/dask`}>
+          <DaskPage />
+        </Route>
+        <Route exact path={`${path}/spark`}>
+          <SparkPage />
+        </Route>
+        <Route>
+          <NotFoundPage />
+        </Route>
       </Switch>
     </SideBarNavigation>
   );

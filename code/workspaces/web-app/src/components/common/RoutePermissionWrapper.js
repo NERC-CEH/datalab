@@ -1,56 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
+import { useCurrentUserPermissions } from '../../hooks/authHooks';
 
-class RoutePermissionWrapper extends Component {
-  showWrappedComponent = (fetching, userPermissions, permission) => !fetching && (!permission
-      || userPermissions.includes(permission)
-      || userPermissions.includes(SYSTEM_INSTANCE_ADMIN));
+const showWrappedComponent = (fetching, userPermissions, permission) => !fetching && (!permission
+  || userPermissions.includes(permission)
+  || userPermissions.includes(SYSTEM_INSTANCE_ADMIN));
 
-  getComponent() {
-    const { value, fetching } = this.props.promisedUserPermissions;
-    const WrappedComponent = this.props.component;
-    const NegativeComponent = this.props.alt;
+const RoutePermissionWrapper = ({ path, exact, permission, component, alt, redirectTo }) => {
+  const { value: userPermissions, fetching } = useCurrentUserPermissions();
 
-    if (fetching) {
-      return () => (<CircularProgress />);
+  const getComponent = () => {
+    const WrappedComponent = component;
+    const NegativeComponent = alt;
+
+    if (fetching) return <CircularProgress />;
+
+    if (showWrappedComponent(fetching, userPermissions, permission)) {
+      return <WrappedComponent userPermissions={userPermissions} />;
     }
 
-    if (this.showWrappedComponent(fetching, value, this.props.permission)) {
-      return props => (<WrappedComponent userPermissions={value} {...props} />);
-    }
-
-    if (this.props.redirectTo) {
-      return () => <Redirect to={this.props.redirectTo} />;
-    }
-
-    if (NegativeComponent) {
-      return props => (<NegativeComponent {...props} />);
-    }
-
+    if (redirectTo) return <Redirect to={redirectTo} />;
+    if (NegativeComponent) return <NegativeComponent />;
     return null;
-  }
+  };
 
-  render() {
-    const { path, exact } = this.props;
-
-    return (<Route path={path} exact={exact} render={this.getComponent()} />);
-  }
-}
+  return (
+    <Route path={path} exact={exact}>
+      {getComponent()}
+    </Route>
+  );
+};
 
 RoutePermissionWrapper.propTypes = {
   path: PropTypes.string,
   exact: PropTypes.bool,
   permission: PropTypes.string.isRequired,
-  promisedUserPermissions: PropTypes.shape({
-    error: PropTypes.any,
-    fetching: PropTypes.bool.isRequired,
-    value: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-  component: PropTypes.func.isRequired,
-  alt: PropTypes.func,
+  component: PropTypes.elementType.isRequired,
+  alt: PropTypes.elementType,
   redirectTo: PropTypes.string,
 };
 

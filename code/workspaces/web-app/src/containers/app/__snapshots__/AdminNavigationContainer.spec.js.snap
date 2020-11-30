@@ -10,30 +10,12 @@ exports[`AdminNavigationContainer renders to match snapshot passing correct prop
       exact={true}
       path="/admin/resources"
       permission="system:instance:admin"
-      promisedUserPermissions={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [
-            "some-permission",
-          ],
-        }
-      }
     />
     <RoutePermissionWrapper
       component={[Function]}
       exact={true}
       path="/admin/users"
       permission="system:instance:admin"
-      promisedUserPermissions={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [
-            "some-permission",
-          ],
-        }
-      }
     />
     <Redirect
       exact={true}
