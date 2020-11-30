@@ -1,8 +1,12 @@
+import { permissionTypes } from 'common';
+
+const { PROJECT_ADMIN_ROLE, PROJECT_USER_ROLE, PROJECT_VIEWER_ROLE } = permissionTypes;
+
 // Array must be ordered from highest permission level to lowest
 const orderedPermissions = [
-  'admin',
-  'user',
-  'viewer',
+  PROJECT_ADMIN_ROLE,
+  PROJECT_USER_ROLE,
+  PROJECT_VIEWER_ROLE,
 ];
 
 export const PERMISSIONS = createPermissions(orderedPermissions);

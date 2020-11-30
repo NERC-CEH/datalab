@@ -10,6 +10,9 @@ function filterUserByRoles(userId, filters, otherUserRoles) {
 
   // see if we match a filter
   if (filters.instanceAdmin && roles.instanceAdmin) { return true; }
+  if (filters.catalogueAdmin && roles.catalogueAdmin) { return true; }
+  if (filters.cataloguePublisher && roles.cataloguePublisher) { return true; }
+  if (filters.catalogueEditor && roles.catalogueEditor) { return true; }
   if (filters.projectAdmin && roles.projectAdmin.length > 0) { return true; }
   if (filters.projectUser && roles.projectUser.length > 0) { return true; }
   if (filters.projectViewer && roles.projectViewer.length > 0) { return true; }

@@ -32,6 +32,25 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
     >
       <FilterCheckBox
         checked={false}
+        label="Catalogue admin"
+        name="catalogueAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Catalogue publisher"
+        name="cataloguePublisher"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Catalogue editor"
+        name="catalogueEditor"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
         label="Project admin"
         name="projectAdmin"
       />
@@ -75,11 +94,13 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
             "fetching": false,
             "value": Array [
               Object {
+                "catalogueRole": "admin",
                 "instanceAdmin": true,
                 "name": "Test User 1",
                 "userId": "user1",
               },
               Object {
+                "catalogueRole": "user",
                 "instanceAdmin": false,
                 "name": "Test User 2",
                 "userId": "user2",
@@ -99,6 +120,9 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
             <mockConstructor
               filters={
                 Object {
+                  "catalogueAdmin": false,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
                   "instanceAdmin": false,
                   "notebookOwner": false,
                   "projectAdmin": false,
@@ -110,6 +134,10 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
               }
               roles={
                 Object {
+                  "catalogueAdmin": true,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
+                  "catalogueRole": "admin",
                   "instanceAdmin": true,
                   "notebookOwner": Array [],
                   "projectAdmin": Array [],
@@ -129,6 +157,9 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
             <mockConstructor
               filters={
                 Object {
+                  "catalogueAdmin": false,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
                   "instanceAdmin": false,
                   "notebookOwner": false,
                   "projectAdmin": false,
@@ -140,6 +171,10 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
               }
               roles={
                 Object {
+                  "catalogueAdmin": false,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
+                  "catalogueRole": "user",
                   "instanceAdmin": false,
                   "notebookOwner": Array [],
                   "projectAdmin": Array [],

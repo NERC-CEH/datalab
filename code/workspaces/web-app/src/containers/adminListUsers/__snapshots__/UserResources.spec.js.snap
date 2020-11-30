@@ -29,12 +29,16 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         className="makeStyles-resources-2"
       >
         <div
-          className="makeStyles-instanceAdmin-5"
+          className="makeStyles-systemRoles-5"
         >
-          <InstanceCheckbox
+          <SystemCheckbox
             checked={true}
             label="Instance admin"
             name="instanceAdmin"
+          />
+          <SystemSelect
+            label="Catalogue"
+            name="catalogue"
           />
         </div>
         <Pagination

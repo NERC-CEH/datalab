@@ -293,6 +293,7 @@ type ProjectPermission {
 
 type UserAndRoles {
     instanceAdmin: Boolean!
+    catalogueRole: String,
     userId: ID!
     name: String!
     projectRoles: [ProjectPermission!]

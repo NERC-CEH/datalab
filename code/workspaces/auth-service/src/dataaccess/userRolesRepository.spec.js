@@ -154,6 +154,7 @@ describe('userRolesRepository', () => {
         userId: 'uid999',
         userName: 'user999',
         instanceAdmin: false,
+        catalogueRole: 'user',
         projectRoles: [],
       });
     });

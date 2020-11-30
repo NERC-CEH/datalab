@@ -1,4 +1,8 @@
 import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
+import { permissionTypes } from 'common';
+
+const { CATALOGUE_ADMIN_ROLE, CATALOGUE_PUBLISHER_ROLE, CATALOGUE_EDITOR_ROLE,
+  PROJECT_ADMIN_ROLE, PROJECT_USER_ROLE, PROJECT_VIEWER_ROLE } = permissionTypes;
 
 function filterMapProjectRoleToProjectKeys(projectRoles, role) {
   if (projectRoles === undefined) {
@@ -31,9 +35,13 @@ function createUserRoles(usersProjectRoles, stacksArray, dataStorageArray) {
   usersProjectRoles.value.forEach((userProjectRoles) => {
     userRoles[userProjectRoles.userId] = {
       instanceAdmin: userProjectRoles.instanceAdmin,
-      projectAdmin: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, 'admin'),
-      projectUser: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, 'user'),
-      projectViewer: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, 'viewer'),
+      catalogueRole: userProjectRoles.catalogueRole,
+      catalogueAdmin: userProjectRoles.catalogueRole === CATALOGUE_ADMIN_ROLE,
+      cataloguePublisher: userProjectRoles.catalogueRole === CATALOGUE_PUBLISHER_ROLE,
+      catalogueEditor: userProjectRoles.catalogueRole === CATALOGUE_EDITOR_ROLE,
+      projectAdmin: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, PROJECT_ADMIN_ROLE),
+      projectUser: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, PROJECT_USER_ROLE),
+      projectViewer: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, PROJECT_VIEWER_ROLE),
       siteOwner: filterMapStacksToUserOwnedStacks(stacksArray.value, userProjectRoles.userId, PUBLISH),
       notebookOwner: filterMapStacksToUserOwnedStacks(stacksArray.value, userProjectRoles.userId, ANALYSIS),
       storageAccess: filterMapStorageToUserAccessedStorage(dataStorageArray.value, userProjectRoles.userId),

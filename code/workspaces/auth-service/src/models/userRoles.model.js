@@ -1,17 +1,14 @@
 import mongoose from 'mongoose';
+import { permissionTypes } from 'common';
 
 const { Schema } = mongoose;
-
-export const PROJECT_ADMIN = 'admin';
-export const PROJECT_USER = 'user';
-export const PROJECT_VIEWER = 'viewer';
-
-export const PROJECT_ROLES = [PROJECT_ADMIN, PROJECT_USER, PROJECT_VIEWER];
+const { CATALOGUE_ROLES, PROJECT_ROLES } = permissionTypes;
 
 const UserRolesSchema = new Schema({
   userId: String,
   userName: String,
   instanceAdmin: { type: Boolean, default: false },
+  catalogueRoles: { type: String, enum: CATALOGUE_ROLES },
   projectRoles: [{
     projectKey: String,
     role: { type: String, enum: PROJECT_ROLES },
