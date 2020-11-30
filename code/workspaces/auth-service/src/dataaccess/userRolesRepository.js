@@ -5,7 +5,7 @@ import database from '../config/database';
 
 const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_USER_ROLE } = permissionTypes;
 
-// Used to set defaults for new users, and to fill in missing values for existing users
+// Default roles that don't need storing in Mongo
 const defaultRoles = {
   [INSTANCE_ADMIN_ROLE_KEY]: false,
   [CATALOGUE_ROLE_KEY]: CATALOGUE_USER_ROLE,
@@ -75,7 +75,6 @@ async function getProjectUsers(projectKey) {
 
 function addRecordForNewUser(userId, userName, projectRoles) {
   const user = {
-    ...defaultRoles,
     userId,
     userName,
     projectRoles,
