@@ -8,8 +8,8 @@ const style = {
   textTransform: 'uppercase',
 };
 
-const ProjectKey = ({ className, children }) => (
+const ResourceInfoSpan = ({ className, children }) => (
   <span className={className} style={style}>{children}</span>
 );
 
-export default ProjectKey;
+export default ResourceInfoSpan;

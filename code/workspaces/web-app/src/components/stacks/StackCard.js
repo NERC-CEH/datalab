@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import ProjectKey from '../common/typography/ProjectKey';
+import ResourceInfoSpan from '../common/typography/ResourceInfoSpan';
 import StackCardActions from './StackCardActions/StackCardActions';
 import stackDescriptions from './stackDescriptions';
 import StackStatus from './StackStatus';
 import { useUsers } from '../../hooks/usersHooks';
-import StorageType from '../common/typography/StorageType';
 import { storageDescription, storageDisplayValue } from '../../config/storage';
-
-const STORAGE_TYPE_NAME = 'Data Store';
+import { NOTEBOOK_TYPE_NAME } from '../../containers/notebooks/notebookTypeName';
+import { PROJECT_TYPE_NAME } from '../../containers/projects/projectTypeName';
+import { SITE_TYPE_NAME } from '../../containers/sites/siteTypeName';
+import { STORAGE_TYPE_NAME } from '../../containers/dataStorage/storageTypeName';
 
 function styles(theme) {
   return {
@@ -118,6 +119,17 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
     }
   }, [typeName, stack]);
 
+  const ResourceInfo = () => {
+    if (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME) {
+      return stack.version ? (<ResourceInfoSpan>({stack.version})</ResourceInfoSpan>) : null;
+    } if (typeName === PROJECT_TYPE_NAME) {
+      return stack.key ? (<ResourceInfoSpan>({stack.key})</ResourceInfoSpan>) : null;
+    } if (typeName === STORAGE_TYPE_NAME) {
+      return storeDisplayValue ? (<ResourceInfoSpan>({storeDisplayValue})</ResourceInfoSpan>) : null;
+    }
+    return null;
+  };
+
   return (
     <div className={classes.cardDiv}>
       <div className={classes.imageDiv}>
@@ -126,8 +138,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
       <div className={classes.textDiv}>
         <div className={classes.displayNameContainer}>
           <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
-          {typeName === 'Project' ? <ProjectKey>({stack.key})</ProjectKey> : null}
-          {(typeName === STORAGE_TYPE_NAME && stack.type) ? <StorageType>({storeDisplayValue})</StorageType> : null}
+          <ResourceInfo/>
         </div>
         <Tooltip title={description} placement='bottom-start'>
           <Typography variant="body1" noWrap>{description}</Typography>
@@ -135,7 +146,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
         {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
       </div>
       <div className={classes.actionsDiv}>
-        {typeName !== STORAGE_TYPE_NAME && typeName !== 'Project' && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
+        {typeName !== STORAGE_TYPE_NAME && typeName !== PROJECT_TYPE_NAME && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
         <StackCardActions
             stack={stack}
             openStack={openStack}
@@ -185,7 +196,7 @@ function getDisplayName(stack) {
 
 const renderShareInfo = (typeName, stack) => stack.users
     && stack.users.length !== 0
-    && (typeName === 'Notebook' || typeName === 'Site')
+    && (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME)
     && (stack.shared === 'project' || stack.visible === 'project' || stack.visible === 'public');
 
 function getUserEmail(stackUsers, userList, typeName) {

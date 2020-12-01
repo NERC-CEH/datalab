@@ -53,7 +53,7 @@ function AdminResourcesContainer({ userPermissions }) {
   };
 
   const renderedProjects = shownProjects && shownProjects.length > 0
-    ? shownProjects.map(project => <ProjectResources userPermissions={userPermissions} project={project} show={show} />)
+    ? shownProjects.map(project => <ProjectResources key={project.key} userPermissions={userPermissions} project={project} show={show} />)
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
         <Typography variant="body1">No projects to display.</Typography>
       </div>];
