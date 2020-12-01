@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  placeholderCard: {
+  placeHolderCard: {
     width: '100%',
     height: 70,
     display: 'flex',
@@ -55,7 +55,7 @@ export default function UserResources({ user, filters, roles }) {
 
   const renderedProjects = projects && projects.length > 0
     ? projects.map(projectKey => <UserProject key={projectKey} userId={user.userId} projectKey={projectKey} filters={filters} roles={roles} />)
-    : [<div className={classes.placeholderCard} key={'placeholder-card'}>
+    : [<div className={classes.placeHolderCard} key={'place-holder-card'}>
       <Typography variant="body1">No projects to display.</Typography>
     </div>];
 
@@ -69,10 +69,10 @@ export default function UserResources({ user, filters, roles }) {
     );
   };
 
-  const SystemSelect = ({ label, current, name }) => (
+  const SystemSelect = ({ itemPrefix, current, name }) => (
       <div className={classes.systemSelect}>
-        <Select value={current} name={name} color="primary" variant="outlined" margin="dense" disabled>
-          <MenuItem value={current}>{label} {current}</MenuItem>
+        <Select value={current} name={name} color="primary" variant="outlined" margin="dense" disabled aria-label={`${itemPrefix} role`}>
+          <MenuItem value={current}>{itemPrefix} {current}</MenuItem>
         </Select>
       </div>
   );
@@ -90,7 +90,7 @@ export default function UserResources({ user, filters, roles }) {
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
               <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" />
-              <SystemSelect label="Catalogue" current={roles.catalogueRole} name="catalogue" />
+              <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} name="catalogue" />
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>

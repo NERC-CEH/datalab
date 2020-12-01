@@ -37,7 +37,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
             name="instanceAdmin"
           />
           <SystemSelect
-            label="Catalogue"
+            itemPrefix="Catalogue"
             name="catalogue"
           />
         </div>
