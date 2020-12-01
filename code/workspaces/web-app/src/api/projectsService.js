@@ -24,7 +24,7 @@ async function getAllProjectsAndResources() {
           id, projectKey, name, displayName, description, type, stacksMountingStore { id }, status, users
         }
         stacks {
-          id, projectKey, category, displayName, name, users, type, description, status, shared, visible, version
+          id, projectKey, category, displayName, name, users, type, description, status, shared, visible
         }
       }
     }`;

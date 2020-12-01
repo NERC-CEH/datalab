@@ -7,7 +7,7 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
 import projectSettingsActions from '../../actions/projectSettingsActions';
-import ResourceInfoSpan from '../../components/common/typography/ResourceInfoSpan';
+import ProjectKey from '../../components/common/typography/ProjectKey';
 
 const useStyles = makeStyles(theme => ({
   projectTitle: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     alignItems: 'baseline',
   },
-  ResourceInfoSpan: {
+  projectKey: {
     marginBottom: theme.typography.h5.marginBottom,
   },
   collaborationLink: {
@@ -68,7 +68,7 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
       <div>
         <div className={classes.projectTitleWrapper}>
           <Typography variant="h5" className={classes.projectTitle}>{name}</Typography>
-          <ResourceInfoSpan className={classes.ResourceInfoSpan}>{key && `(${key})`}</ResourceInfoSpan>
+          <ProjectKey className={classes.projectKey}>{key && `(${key})`}</ProjectKey>
         </div>
         <Typography className={classes.description} variant="body1">{description}</Typography>
         <CollaborationLink link={collaborationLink} />

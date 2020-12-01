@@ -65,11 +65,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
       >
         Test Project
       </WithStyles(ForwardRef(Typography))>
-      <ResourceInfoSpan
-        className="makeStyles-ResourceInfoSpan-4"
+      <ProjectKey
+        className="makeStyles-projectKey-4"
       >
         (testproj)
-      </ResourceInfoSpan>
+      </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Typography))
       className="makeStyles-description-2"
@@ -87,11 +87,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         <UserBlock
           classes={
             Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
               "chipTitle": "makeStyles-chipTitle-8",
               "collaborationLink": "makeStyles-collaborationLink-5",
               "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
               "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
               "projectTitle": "makeStyles-projectTitle-1",
               "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
               "userBlock": "makeStyles-userBlock-7",
@@ -103,11 +103,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         <UserBlock
           classes={
             Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
               "chipTitle": "makeStyles-chipTitle-8",
               "collaborationLink": "makeStyles-collaborationLink-5",
               "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
               "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
               "projectTitle": "makeStyles-projectTitle-1",
               "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
               "userBlock": "makeStyles-userBlock-7",
@@ -127,11 +127,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         <UserBlock
           classes={
             Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
               "chipTitle": "makeStyles-chipTitle-8",
               "collaborationLink": "makeStyles-collaborationLink-5",
               "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
               "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
               "projectTitle": "makeStyles-projectTitle-1",
               "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
               "userBlock": "makeStyles-userBlock-7",
@@ -170,11 +170,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
       >
         Test Project
       </WithStyles(ForwardRef(Typography))>
-      <ResourceInfoSpan
-        className="makeStyles-ResourceInfoSpan-4"
+      <ProjectKey
+        className="makeStyles-projectKey-4"
       >
         (testproj)
-      </ResourceInfoSpan>
+      </ProjectKey>
     </div>
     <WithStyles(ForwardRef(Typography))
       className="makeStyles-description-2"
@@ -190,11 +190,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         <UserBlock
           classes={
             Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
               "chipTitle": "makeStyles-chipTitle-8",
               "collaborationLink": "makeStyles-collaborationLink-5",
               "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
               "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
               "projectTitle": "makeStyles-projectTitle-1",
               "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
               "userBlock": "makeStyles-userBlock-7",
@@ -206,11 +206,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         <UserBlock
           classes={
             Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
               "chipTitle": "makeStyles-chipTitle-8",
               "collaborationLink": "makeStyles-collaborationLink-5",
               "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
               "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
               "projectTitle": "makeStyles-projectTitle-1",
               "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
               "userBlock": "makeStyles-userBlock-7",
@@ -230,11 +230,11 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
         <UserBlock
           classes={
             Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
               "chipTitle": "makeStyles-chipTitle-8",
               "collaborationLink": "makeStyles-collaborationLink-5",
               "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
               "description": "makeStyles-description-2",
+              "projectKey": "makeStyles-projectKey-4",
               "projectTitle": "makeStyles-projectTitle-1",
               "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
               "userBlock": "makeStyles-userBlock-7",

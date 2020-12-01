@@ -4,8 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { withRouter } from 'react-router-dom';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import StackCards from '../../components/stacks/StackCards';
-import { PROJECT_OPEN_PERMISSION, projectToStack } from '../projects/ProjectsContainer';
-import { PROJECT_TYPE_NAME } from '../projects/projectTypeName';
+import { TYPE_NAME, PROJECT_OPEN_PERMISSION, projectToStack } from '../projects/ProjectsContainer';
 
 function Projects({ projects, history }) {
   const stacks = {
@@ -17,12 +16,12 @@ function Projects({ projects, history }) {
   return (
     <ResourceAccordion defaultExpanded>
       <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h6">{PROJECT_TYPE_NAME}</Typography>
+        <Typography variant="h6">{TYPE_NAME}</Typography>
       </ResourceAccordionSummary>
       <ResourceAccordionDetails>
         <StackCards
           stacks={stacks}
-          typeName={PROJECT_TYPE_NAME}
+          typeName={TYPE_NAME}
           userPermissions={() => [PROJECT_OPEN_PERMISSION]}
           openStack={proj => history.push(`/projects/${proj.key}/info`)}
           openCreationForm={() => {}}
