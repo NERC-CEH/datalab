@@ -25,18 +25,6 @@ const config = convict({
     default: './resources/public.pem',
     env: 'PUBLIC_KEY',
   },
-  authorisationClientId: {
-    doc: 'OpenID Connect provider client id for the Datalabs Authorisation API',
-    format: 'String',
-    default: 'authzClientId',
-    env: 'AUTHORISATION_API_CLIENT_ID',
-  },
-  authorisationClientSecret: {
-    doc: 'OpenID Connect provider client secret for the Datalabs Authorisation API',
-    format: 'String',
-    default: 'authzClientSecret',
-    env: 'AUTHORISATION_API_CLIENT_SECRET',
-  },
   authorisationIdentifier: {
     doc: 'OpenID Connect provider identifier for the Datalabs Authorisation API',
     format: 'String',
@@ -60,18 +48,6 @@ const config = convict({
     format: 'String',
     default: './resources/permissions.yml',
     env: 'AUTHORISATION_PERMISSIONS',
-  },
-  userManagementClientId: {
-    doc: 'OpenID Connect provider client id for the user management API',
-    format: 'String',
-    default: 'userMgmtClientId',
-    env: 'USER_MANAGEMENT_API_CLIENT_ID',
-  },
-  userManagementClientSecret: {
-    doc: 'OpenID Connect provider client secret for the user management API',
-    format: 'String',
-    default: 'userMgmtClientSecret',
-    env: 'USER_MANAGEMENT_API_CLIENT_SECRET',
   },
   oidcProviderDomain: {
     doc: 'URL of the OpenID Connect provider domain',
