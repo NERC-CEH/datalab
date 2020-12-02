@@ -4,12 +4,17 @@ import userRolesRepository from '../dataaccess/userRolesRepository';
 
 jest.mock('../dataaccess/userRolesRepository');
 const user = { userId: 123, name: 'test' };
+const roles = { ...user, instanceAdmin: true };
 const getUsersMock = jest.fn().mockResolvedValue([user]);
 const getUserMock = jest.fn().mockResolvedValue(user);
-const getAllUsersAndRolesMock = jest.fn().mockResolvedValue([{ ...user, instanceAdmin: true }]);
+const getAllUsersAndRolesMock = jest.fn().mockResolvedValue([{ ...roles }]);
+const setInstanceAdminMock = jest.fn().mockResolvedValue(roles);
+const setCatalogueRoleMock = jest.fn().mockResolvedValue(roles);
 userRolesRepository.getUsers = getUsersMock;
 userRolesRepository.getUser = getUserMock;
 userRolesRepository.getAllUsersAndRoles = getAllUsersAndRolesMock;
+userRolesRepository.setInstanceAdmin = setInstanceAdminMock;
+userRolesRepository.setCatalogueRole = setCatalogueRoleMock;
 
 describe('user management controller', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -82,7 +87,7 @@ describe('user management controller', () => {
       // Assert
       expect(response.statusCode).toBe(200);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual(JSON.stringify([{ ...user, instanceAdmin: true }]));
+        .toEqual(JSON.stringify([roles]));
     });
 
     it('should return 500 if error', async () => {
@@ -93,6 +98,64 @@ describe('user management controller', () => {
 
       // Act
       await userManagement.getAllUsersAndRoles(request, response);
+
+      // Assert
+      expect(response.statusCode).toBe(500);
+    });
+  });
+
+  describe('setInstanceAdmin', () => {
+    it('should return roles as JSON', async () => {
+      // Arrange
+      const request = httpMocks.createRequest();
+      const response = httpMocks.createResponse();
+
+      // Act
+      await userManagement.setInstanceAdmin(request, response);
+
+      // Assert
+      expect(response.statusCode).toBe(200);
+      expect(response._getData()) // eslint-disable-line no-underscore-dangle
+        .toEqual(roles);
+    });
+
+    it('should return 500 if error', async () => {
+      // Arrange
+      setInstanceAdminMock.mockRejectedValue('no such catalogue');
+      const request = httpMocks.createRequest();
+      const response = httpMocks.createResponse();
+
+      // Act
+      await userManagement.setInstanceAdmin(request, response);
+
+      // Assert
+      expect(response.statusCode).toBe(500);
+    });
+  });
+
+  describe('setCatalogueRole', () => {
+    it('should return roles as JSON', async () => {
+      // Arrange
+      const request = httpMocks.createRequest();
+      const response = httpMocks.createResponse();
+
+      // Act
+      await userManagement.setCatalogueRole(request, response);
+
+      // Assert
+      expect(response.statusCode).toBe(200);
+      expect(response._getData()) // eslint-disable-line no-underscore-dangle
+        .toEqual(roles);
+    });
+
+    it('should return 500 if error', async () => {
+      // Arrange
+      setCatalogueRoleMock.mockRejectedValue('no such catalogue');
+      const request = httpMocks.createRequest();
+      const response = httpMocks.createResponse();
+
+      // Act
+      await userManagement.setCatalogueRole(request, response);
 
       // Assert
       expect(response.statusCode).toBe(500);

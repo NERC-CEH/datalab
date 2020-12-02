@@ -7,6 +7,12 @@ const wrapDocument = document => ({
   toObject: () => document,
 });
 
+const unwrapDocument = (document) => {
+  const newDoc = { ...document };
+  delete newDoc.toObject;
+  return newDoc;
+};
+
 const testUserRoles = () => [
   {
     userId: 'uid1',
@@ -165,7 +171,7 @@ describe('userRolesRepository', () => {
       mockDatabase().clear();
     });
 
-    it('should delete role from user and return 204', async () => {
+    it('should delete role from user', async () => {
       await userRoleRepository.removeRole('uid1', 'project 2');
       expect(mockDatabase().invocation().entity).toEqual({
         userId: 'uid1',
@@ -177,18 +183,73 @@ describe('userRolesRepository', () => {
       });
     });
 
-    it('should return 204 if user does not have role on project', async () => {
+    it('update not called if user does not have role on project', async () => {
       const mockFn = jest.fn();
       mockDatabase().findOneAndUpdate = mockFn;
       await userRoleRepository.removeRole('uid1', 'not found');
       expect(mockFn).not.toBeCalled();
     });
 
-    it('should return 204 if user not found', async () => {
+    it('update note called if user not found', async () => {
       const mockFn = jest.fn();
       mockDatabase().findOneAndUpdate = mockFn;
       await userRoleRepository.removeRole('not found', 'project 2');
       expect(mockFn).not.toBeCalled();
+    });
+  });
+
+  describe('setInstanceAdmin', () => {
+    beforeEach(() => {
+      mockDatabase = databaseMock(testUserRoles().map(wrapDocument));
+      database.getModel = mockDatabase;
+      mockDatabase().clear();
+    });
+
+    it('should reject if the user is not in roles collection', async () => {
+      mockDatabase = databaseMock([]);
+      database.getModel = mockDatabase;
+      await expect(userRoleRepository.setInstanceAdmin('uid1', false)).rejects.toThrow('Unrecognised user uid1');
+    });
+
+    it('should set instanceAdmin', async () => {
+      await userRoleRepository.setInstanceAdmin('uid1', true);
+      expect(unwrapDocument(mockDatabase().invocation().entity)).toEqual({
+        userId: 'uid1',
+        userName: 'user1',
+        instanceAdmin: true,
+        projectRoles: [
+          { projectKey: 'project 1', role: 'admin' },
+          { projectKey: 'project 2', role: 'user' },
+        ],
+      });
+    });
+  });
+
+  describe('setCatalogueRole', () => {
+    beforeEach(() => {
+      mockDatabase = databaseMock(testUserRoles().map(wrapDocument));
+      database.getModel = mockDatabase;
+      mockDatabase().clear();
+    });
+
+    it('should reject if the user is not in roles collection', async () => {
+      mockDatabase = databaseMock([]);
+      database.getModel = mockDatabase;
+      await expect(userRoleRepository.setCatalogueRole('uid1', 'user')).rejects.toThrow('Unrecognised user uid1');
+    });
+
+    it('should set catalogueRole', async () => {
+      await userRoleRepository.setCatalogueRole('uid1', 'user');
+      expect(unwrapDocument(mockDatabase().invocation().entity)).toEqual({
+        userId: 'uid1',
+        userName: 'user1',
+        instanceAdmin: false,
+        catalogueRole: 'user',
+        projectRoles: [
+          { projectKey: 'project 1', role: 'admin' },
+          { projectKey: 'project 2', role: 'user' },
+        ],
+      });
     });
   });
 

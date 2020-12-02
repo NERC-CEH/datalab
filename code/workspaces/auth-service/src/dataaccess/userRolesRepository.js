@@ -82,6 +82,28 @@ function addRecordForNewUser(userId, userName, projectRoles) {
   return UserRoles().create(user);
 }
 
+async function setInstanceAdmin(userId, instanceAdmin) {
+  const query = { userId };
+  const roles = await UserRoles().findOne(query).exec();
+  if (!roles) {
+    throw new Error(`Unrecognised user ${userId}`);
+  }
+  roles[INSTANCE_ADMIN_ROLE_KEY] = instanceAdmin;
+  await UserRoles().findOneAndUpdate(query, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  return addDefaults(roles);
+}
+
+async function setCatalogueRole(userId, catalogueRole) {
+  const query = { userId };
+  const roles = await UserRoles().findOne(query).exec();
+  if (!roles) {
+    throw new Error(`Unrecognised user ${userId}`);
+  }
+  roles[CATALOGUE_ROLE_KEY] = catalogueRole;
+  await UserRoles().findOneAndUpdate(query, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  return addDefaults(roles);
+}
+
 async function addRole(userId, projectKey, role) {
   // Load existing user
   const query = { userId };
@@ -125,4 +147,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, addRole, removeRole, userIsMember };
+export default { getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };
