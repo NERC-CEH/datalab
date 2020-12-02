@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-11-30T10:34:35.421Z
+__export_date: 2020-12-02T15:29:33.185Z
 __export_source: insomnia.desktop.app:v2020.4.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
@@ -508,11 +508,10 @@ resources:
     _type: request
   - _id: req_c1fea820ee7d45efaa1b2cefe2a04198
     parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1567673721529
+    modified: 1606908552786
     created: 1567157109291
-    url: "{{
-      auth_url  }}/projects/project/users/auth0|595f40a25caf4344b2e0e678/roles"
-    name: Add User Role
+    url: "{{ auth_url  }}/projects/project/users/dummy/roles"
+    name: Add User Project Role
     description: ""
     method: PUT
     body:
@@ -540,11 +539,11 @@ resources:
     _type: request
   - _id: req_e3c467163210492d8efbd786060d8e10
     parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1568395185537
+    modified: 1606836828980
     created: 1567258837695
     url: "{{
       auth_url  }}/projects/project/users/auth0|595f40a25caf4344b2e0e678/role"
-    name: Delete User Role
+    name: Delete User Project Role
     description: ""
     method: DELETE
     body: {}
@@ -553,7 +552,69 @@ resources:
     authentication:
       token: "{{ internal_token  }}"
       type: bearer
-    metaSortKey: -1567085050747.5
+    metaSortKey: -1567085050756.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fdf512d577e04ab3bc508a587e9b0ff3
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    modified: 1606841094958
+    created: 1606836653049
+    url: "{{ auth_url  }}/roles/dummy/instanceAdmin"
+    name: Set instanceAdmin
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"instanceAdmin": true
+        }
+    parameters: []
+    headers:
+      - id: pair_f5281c8ea2a943e8938927aaf4b42734
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1567085050753.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9a1d915c746c4261a523138578870d25
+    parentId: fld_aedf6e0439314b319e879aec69a4f251
+    modified: 1606841108436
+    created: 1606836877259
+    url: "{{ auth_url  }}/roles/dummy/catalogueRole"
+    name: Set catalogueRole
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"catalogueRole": "blah"
+        }
+    parameters: []
+    headers:
+      - id: pair_f5281c8ea2a943e8938927aaf4b42734
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1566995492864.875
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -727,8 +788,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n  checkNameUniqueness(name: \"asdfa\", projectKey:
+      text: '{"query":"query {\n  checkNameUniqueness(name: \"asdfa\", projectKey:
         \"project\")\n}"}'
     parameters: []
     headers:
@@ -778,7 +838,7 @@ resources:
     _type: request
   - _id: req_d1726df0932641caabd32fb810c33f32
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606724599170
+    modified: 1605801554032
     created: 1568024663043
     url: "{{ client_api_url  }}/api"
     name: User Permissions
@@ -870,7 +930,7 @@ resources:
     _type: request
   - _id: req_1e855f4eb84f48eb909addb89a59835d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568981971509
+    modified: 1606922833869
     created: 1568906446384
     url: "{{ client_api_url  }}/api"
     name: updateProject
@@ -933,7 +993,7 @@ resources:
     _type: request
   - _id: req_5e4bf2bc5af143b1b727f4b795b2ff2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568646390363
+    modified: 1606922621933
     created: 1566938804513
     url: "{{ client_api_url  }}/api"
     name: addProjectPermission
@@ -963,7 +1023,7 @@ resources:
     _type: request
   - _id: req_327f022f621344a79932474f8122b61b
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568646399532
+    modified: 1606909568158
     created: 1566939410205
     url: "{{ client_api_url  }}/api"
     name: removeProjectPermission
@@ -1030,8 +1090,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"mutation {\n  removeUserFromDataStore(dataStore: {\n    name:
+      text: '{"query":"mutation {\n  removeUserFromDataStore(dataStore: {\n    name:
         \"test\"\n    users: [\"a\", \"b\"]\n  })
         {\n    id\n    displayName\n  }\n}"}'
     parameters: []
@@ -1081,7 +1140,7 @@ resources:
     _type: request
   - _id: req_ac4015a6432b46a9bba80a0f5e200a63
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606732443616
+    modified: 1606922587075
     created: 1606145410033
     url: "{{ client_api_url  }}/api"
     name: All users and roles
@@ -1090,7 +1149,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  allUsersAndRoles
-        {\n    userId,\n    name,\n    instanceAdmin,\n    catalogueRole,\n    projectRoles
+        {\n    userId,\n    name,\n    instanceAdmin,\n    projectRoles
         {\n      projectKey,\n      role\n    }\n  }\n}"}'
     parameters: []
     headers:
@@ -1111,7 +1170,7 @@ resources:
     _type: request
   - _id: req_0a1e7cfd12fe4780b0098d6c8bffc7db
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606301548296
+    modified: 1606922485745
     created: 1606147761105
     url: "{{ client_api_url  }}/api"
     name: All projects and resources
@@ -1132,6 +1191,64 @@ resources:
       token: "{{ access_token  }}"
       type: bearer
     metaSortKey: 950
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c742c2e35deb496693c5ccaaef9c4248
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1606922882248
+    created: 1606922497352
+    url: "{{ client_api_url  }}/api"
+    name: Set instanceAdmin
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  setInstanceAdmin(userId:\"dummy\",
+        instanceAdmin:false)\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 1000
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_26dad2999d1a421e8dbfdc7e4dcf0f45
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1606922948507
+    created: 1606922876464
+    url: "{{ client_api_url  }}/api"
+    name: Set catalogueRole
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  setCatalogueRole(userId:\"dummy\",
+        catalogueRole:publisher)\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 1050
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true

@@ -34,7 +34,33 @@ describe('userService', () => {
     httpMock.onGet(`${AUTH_URL_BASE}/projects/project2/is-member`)
       .reply(200, true);
 
-    return usersService.isMemberOfProject('project2', context)
+    return usersService.isMemberOfProject('project2', context.token)
       .then(response => expect(response).toEqual(true));
+  });
+
+  it('setInstanceAdmin makes an api request', async () => {
+    // Arrange
+    const instanceAdmin = true;
+    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/instanceAdmin`)
+      .reply(200, { instanceAdmin });
+
+    // Act
+    const response = await usersService.setInstanceAdmin('one', instanceAdmin, context.token);
+
+    // Assert
+    expect(response).toEqual(instanceAdmin);
+  });
+
+  it('setCatalogueRole makes an api request', async () => {
+    // Arrange
+    const catalogueRole = 'publisher';
+    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/catalogueRole`)
+      .reply(200, { catalogueRole });
+
+    // Act
+    const response = await usersService.setCatalogueRole('one', catalogueRole, context.token);
+
+    // Assert
+    expect(response).toEqual(catalogueRole);
   });
 });

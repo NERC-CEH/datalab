@@ -75,6 +75,8 @@ const resolvers = {
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, user, token)),
     updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.projectKey }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
+    setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
+    setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),
   },
 
   DataStore: {
