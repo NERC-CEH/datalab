@@ -1,13 +1,6 @@
 name: API PR action
 
-on:
-  pull_request:
-    paths:
-      - "./.github/workflows/pr_api.yaml"
-      - "./build/**"
-      - "./code/yarn.lock"
-      - "./code/workspaces/common/**"
-      - "./code/workspaces/client-api/**"
+on: pull_request
 
 env:
   CONTAINER: api
