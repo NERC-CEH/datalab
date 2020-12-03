@@ -1,0 +1,50 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ["NERCDL-836-try-GitHub-actions", "master"]
+  pull_request:
+    branches: ["NERCDL-836-try-GitHub-actions", "master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        container:
+          [
+            "api",
+            "app",
+            "docs",
+            "infrastructure",
+            "authorisation",
+            "common",
+            "chassis",
+          ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-cache-
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Test
+        run: ./build/validate-build.sh ${{ matrix.container }}
+        shell: bash
+      - name: Build and push Docker image
+        run: ./build/build-travis-wrapper.sh ${{ matrix.container }}
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
+        env:
+          TRAVIS_BRANCH: "master"
+          TRAVIS_PULL_REQUEST: false
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          TRAVIS_BUILD_DIR: "."
