@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export const PROJECT_TYPE_NAME = 'Project';
+export const PROJECT_TYPE_NAME_PLURAL = 'Projects';

@@ -8,6 +8,7 @@ async function getAllUsersAndRoles() {
         userId,
         name,
         instanceAdmin,
+        catalogueRole,
         projectRoles {
           projectKey,
           role

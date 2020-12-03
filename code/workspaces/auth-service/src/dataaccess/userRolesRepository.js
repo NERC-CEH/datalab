@@ -3,11 +3,12 @@ import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
 import database from '../config/database';
 
-const { INSTANCE_ADMIN_ROLE_KEY } = permissionTypes;
+const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_USER_ROLE } = permissionTypes;
 
-// Used to set defaults for new users, and to fill in missing values for existing users
+// Default roles that don't need storing in Mongo
 const defaultRoles = {
   [INSTANCE_ADMIN_ROLE_KEY]: false,
+  [CATALOGUE_ROLE_KEY]: CATALOGUE_USER_ROLE,
 };
 
 function UserRoles() {
@@ -60,7 +61,7 @@ async function getAllUsersAndRoles() {
   const usersMap = allRoles
     .filter(roles => roles.userName) // only take users with known user names
     .reduce((uniqueUsersMap, roles) => { // convert to map, keyed by userId
-      uniqueUsersMap[roles.userId] = roles; // eslint-disable-line no-param-reassign
+      uniqueUsersMap[roles.userId] = addDefaults(roles); // eslint-disable-line no-param-reassign
       return uniqueUsersMap;
     }, {});
   return Object.values(usersMap); // return users and roles
@@ -74,7 +75,6 @@ async function getProjectUsers(projectKey) {
 
 function addRecordForNewUser(userId, userName, projectRoles) {
   const user = {
-    ...defaultRoles,
     userId,
     userName,
     projectRoles,

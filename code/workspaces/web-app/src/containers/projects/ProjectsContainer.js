@@ -14,9 +14,8 @@ import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../..
 import notify from '../../components/common/notify';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
-import { PROJECT_TYPE_NAME } from './projectTypeName';
+import { PROJECT_TYPE_NAME, PROJECT_TYPE_NAME_PLURAL } from './projectTypeName';
 
-const TYPE_NAME_PLURAL = 'Projects';
 export const PROJECT_OPEN_PERMISSION = 'project.open';
 const FORM_NAME = 'createProject';
 
@@ -215,7 +214,7 @@ const ProjectsContainer = () => {
       <StackCards
         stacks={userAccessibleStacks}
         typeName={PROJECT_TYPE_NAME}
-        typeNamePlural={TYPE_NAME_PLURAL}
+        typeNamePlural={PROJECT_TYPE_NAME_PLURAL}
         openStack={project => history.push(`/projects/${project.key}/info`)}
         deleteStack={confirmDeleteProject(dispatch)}
         openCreationForm={openCreationForm(dispatch)}

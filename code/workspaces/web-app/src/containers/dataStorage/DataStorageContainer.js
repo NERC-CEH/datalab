@@ -17,11 +17,9 @@ import modalDialogActions from '../../actions/modalDialogActions';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import notify from '../../components/common/notify';
 import StackCards from '../../components/stacks/StackCards';
-import { STORAGE_TYPE_NAME } from './storageTypeName';
+import { STORAGE_TYPE_NAME, STORAGE_TYPE_NAME_PLURAL } from './storageTypeName';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_CREATE, PROJECT_KEY_STORAGE_DELETE, PROJECT_KEY_STORAGE_OPEN, PROJECT_KEY_STORAGE_EDIT }, projectKeyPermission } = permissionTypes;
-
-export const TYPE_NAME_PLURAL = 'Data Stores';
 const FORM_NAME = 'createDataStore';
 
 class DataStorageContainer extends Component {
@@ -128,7 +126,7 @@ class DataStorageContainer extends Component {
       <StackCards
         stacks={projectDataStorage}
         typeName={STORAGE_TYPE_NAME}
-        typeNamePlural={TYPE_NAME_PLURAL}
+        typeNamePlural={STORAGE_TYPE_NAME_PLURAL}
         openStack={this.openDataStore}
         deleteStack={this.chooseDialogue}
         editStack={this.editDataStore}

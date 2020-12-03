@@ -1,0 +1,49 @@
+name: Push action
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        container:
+          [
+            "api",
+            "app",
+            "docs",
+            "infrastructure",
+            "authorisation",
+            "common",
+            "chassis",
+          ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ matrix.container }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-cache-${{ matrix.container }}-
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Validate build
+        run: ./build/validate-build.sh ${{ matrix.container }}
+        shell: bash
+      - name: Build and push Docker image
+        run: ./build/build-travis-wrapper.sh ${{ matrix.container }}
+        env:
+          TRAVIS_BRANCH: "master"
+          TRAVIS_PULL_REQUEST: false
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          TRAVIS_BUILD_DIR: "."
