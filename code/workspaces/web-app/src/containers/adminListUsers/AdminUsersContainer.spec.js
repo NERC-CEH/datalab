@@ -26,8 +26,8 @@ const users = [
   user2,
 ];
 const roles = [
-  { ...user1, instanceAdmin: true },
-  { ...user2, instanceAdmin: false },
+  { ...user1, instanceAdmin: true, catalogueRole: 'admin' },
+  { ...user2, instanceAdmin: false, catalogueRole: 'user' },
 ];
 
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));

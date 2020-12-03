@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-11-24T13:25:47.463Z
+__export_date: 2020-11-30T10:34:35.421Z
 __export_source: insomnia.desktop.app:v2020.4.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
@@ -778,7 +778,7 @@ resources:
     _type: request
   - _id: req_d1726df0932641caabd32fb810c33f32
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1605801554032
+    modified: 1606724599170
     created: 1568024663043
     url: "{{ client_api_url  }}/api"
     name: User Permissions
@@ -1081,7 +1081,7 @@ resources:
     _type: request
   - _id: req_ac4015a6432b46a9bba80a0f5e200a63
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606224262586
+    modified: 1606732443616
     created: 1606145410033
     url: "{{ client_api_url  }}/api"
     name: All users and roles
@@ -1090,7 +1090,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  allUsersAndRoles
-        {\n    userId,\n    name,\n    instanceAdmin,\n    projectRoles
+        {\n    userId,\n    name,\n    instanceAdmin,\n    catalogueRole,\n    projectRoles
         {\n      projectKey,\n      role\n    }\n  }\n}"}'
     parameters: []
     headers:
@@ -1111,7 +1111,7 @@ resources:
     _type: request
   - _id: req_0a1e7cfd12fe4780b0098d6c8bffc7db
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606224115446
+    modified: 1606301548296
     created: 1606147761105
     url: "{{ client_api_url  }}/api"
     name: All projects and resources

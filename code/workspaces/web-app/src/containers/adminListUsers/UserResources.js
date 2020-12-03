@@ -1,5 +1,7 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,12 +25,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  instanceAdmin: {
+  systemRoles: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
-  placeholderCard: {
+  placeHolderCard: {
     width: '100%',
     height: 70,
     display: 'flex',
@@ -36,6 +38,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     borderTop: `1px solid ${theme.palette.divider}`,
     borderBottom: `1px solid ${theme.palette.divider}`,
+    marginTop: theme.spacing(2),
+  },
+  systemSelect: {
+    marginLeft: theme.spacing(2),
   },
 }));
 
@@ -49,12 +55,12 @@ export default function UserResources({ user, filters, roles }) {
 
   const renderedProjects = projects && projects.length > 0
     ? projects.map(projectKey => <UserProject key={projectKey} userId={user.userId} projectKey={projectKey} filters={filters} roles={roles} />)
-    : [<div className={classes.placeholderCard} key={'placeholder-card'}>
+    : [<div className={classes.placeHolderCard} key={'place-holder-card'}>
       <Typography variant="body1">No projects to display.</Typography>
     </div>];
 
-  const InstanceCheckbox = ({ label, checked, name }) => {
-    const id = `instance-checkbox-${user.userId}-${name}`;
+  const SystemCheckbox = ({ label, checked, name }) => {
+    const id = `system-checkbox-${user.userId}-${name}`;
     return (
       <>
         <Typography id={id} variant="body1">{label}</Typography>
@@ -62,6 +68,14 @@ export default function UserResources({ user, filters, roles }) {
       </>
     );
   };
+
+  const SystemSelect = ({ itemPrefix, current, name }) => (
+      <div className={classes.systemSelect}>
+        <Select value={current} name={name} color="primary" variant="outlined" margin="dense" disabled aria-label={`${itemPrefix} role`}>
+          <MenuItem value={current}>{itemPrefix} {current}</MenuItem>
+        </Select>
+      </div>
+  );
 
   return (
     <div className={classes.container}>
@@ -74,8 +88,9 @@ export default function UserResources({ user, filters, roles }) {
         </ResourceAccordionSummary>
         <ResourceAccordionDetails>
           <div className={classes.resources}>
-            <div className={classes.instanceAdmin}>
-              <InstanceCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" />
+            <div className={classes.systemRoles}>
+              <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" />
+              <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} name="catalogue" />
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>

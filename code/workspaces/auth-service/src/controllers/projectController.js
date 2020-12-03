@@ -1,8 +1,10 @@
 import find from 'lodash/find';
 import { check } from 'express-validator';
+import { permissionTypes } from 'common';
 import validator from './validationMiddleware';
 import userRolesRepository from '../dataaccess/userRolesRepository';
-import { PROJECT_ROLES } from '../models/userRoles.model';
+
+const { PROJECT_ROLES } = permissionTypes;
 
 async function isMember(req, res) {
   const { params: { projectKey }, user: { sub } } = req;
