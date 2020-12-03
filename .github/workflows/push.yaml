@@ -1,10 +1,8 @@
-name: Node.js CI
+name: push actions
 
 on:
   push:
-    branches: ["NERCDL-836-try-GitHub-actions", "master"]
-  pull_request:
-    branches: ["NERCDL-836-try-GitHub-actions", "master"]
+    branches: ["master"]
 
 jobs:
   build:
@@ -36,12 +34,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12"
-      - name: Test
+      - name: Validate build
         run: ./build/validate-build.sh ${{ matrix.container }}
         shell: bash
       - name: Build and push Docker image
         run: ./build/build-travis-wrapper.sh ${{ matrix.container }}
-        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
         env:
           TRAVIS_BRANCH: "master"
           TRAVIS_PULL_REQUEST: false
