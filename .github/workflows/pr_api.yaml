@@ -1,6 +1,9 @@
 name: API PR action
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - ./.github/workflows/pr_api.yaml
 
 env:
   CONTAINER: api
