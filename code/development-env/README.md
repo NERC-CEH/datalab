@@ -80,7 +80,7 @@ When you cd into the .envrc folder (or one of its children), you should see
 
 ```bash
 direnv: loading ../../../.envrc
-direnv: export +AUTHORISATION_API_CLIENT_ID +AUTHORISATION_API_CLIENT_SECRET +AUTHORISATION_API_IDENTIFIER +USER_MANAGEMENT_API_CLIENT_ID +USER_MANAGEMENT_API_CLIENT_SECRET
+direnv: export +AUTHORISATION_API_IDENTIFIER
 ```
 
 ### Update Mongo default record initial value
