@@ -17,10 +17,10 @@ import modalDialogActions from '../../actions/modalDialogActions';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import notify from '../../components/common/notify';
 import StackCards from '../../components/stacks/StackCards';
+import { STORAGE_TYPE_NAME } from './storageTypeName';
 
 const { projectPermissions: { PROJECT_KEY_STORAGE_CREATE, PROJECT_KEY_STORAGE_DELETE, PROJECT_KEY_STORAGE_OPEN, PROJECT_KEY_STORAGE_EDIT }, projectKeyPermission } = permissionTypes;
 
-export const TYPE_NAME = 'Data Store';
 export const TYPE_NAME_PLURAL = 'Data Stores';
 const FORM_NAME = 'createDataStore';
 
@@ -46,17 +46,17 @@ class DataStorageContainer extends Component {
   openDataStore = dataStore => this.props.actions.getCredentials(this.props.projectKey, dataStore.id)
     .then(payload => pick(payload.value, ['url', 'accessKey']))
     .then(({ url, accessKey }) => this.props.actions.openMinioDataStore(url, accessKey))
-    .catch(err => notify.error(`Unable to open ${TYPE_NAME}`));
+    .catch(err => notify.error(`Unable to open ${STORAGE_TYPE_NAME}`));
 
   createDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
     .then(() => this.props.actions.createDataStore(this.props.projectKey, dataStore))
     .then(() => this.props.actions.resetForm())
-    .then(() => notify.success(`${TYPE_NAME} created`))
-    .catch(err => notify.error(`Unable to create ${TYPE_NAME}`))
+    .then(() => notify.success(`${STORAGE_TYPE_NAME} created`))
+    .catch(err => notify.error(`Unable to create ${STORAGE_TYPE_NAME}`))
     .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
 
   openCreationForm = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_CREATE_DATA_STORE, {
-    title: `Create a ${TYPE_NAME}`,
+    title: `Create a ${STORAGE_TYPE_NAME}`,
     onSubmit: this.createDataStore,
     onCancel: this.props.actions.closeModalDialog,
     projectKey: this.props.projectKey,
@@ -64,13 +64,13 @@ class DataStorageContainer extends Component {
 
   deleteDataStore = dataStore => Promise.resolve(this.props.actions.closeModalDialog())
     .then(() => this.props.actions.deleteDataStore(this.props.projectKey, dataStore))
-    .then(() => notify.success(`${TYPE_NAME} deleted`))
-    .catch(err => notify.error(`Unable to delete ${TYPE_NAME}`))
+    .then(() => notify.success(`${STORAGE_TYPE_NAME} deleted`))
+    .catch(err => notify.error(`Unable to delete ${STORAGE_TYPE_NAME}`))
     .finally(() => this.props.actions.loadDataStorage(this.props.projectKey));
 
   confirmDeleteDataStore = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_ROBUST_CONFIRMATION, {
-    title: `Delete ${dataStore.displayName} ${TYPE_NAME}`,
-    body: `Are you sure you want to delete the ${dataStore.displayName} (${dataStore.name}) ${TYPE_NAME}? This will
+    title: `Delete ${dataStore.displayName} ${STORAGE_TYPE_NAME}`,
+    body: `Are you sure you want to delete the ${dataStore.displayName} (${dataStore.name}) ${STORAGE_TYPE_NAME}? This will
       destroy all data stored on the volume.`,
     confirmField: {
       label: `Please type "${dataStore.name}" to confirm`,
@@ -81,8 +81,8 @@ class DataStorageContainer extends Component {
   });
 
   prohibitDeletion = dataStore => this.props.actions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
-    title: `Unable to Delete ${dataStore.displayName} ${TYPE_NAME}`,
-    body: `${TYPE_NAME} is in use, unable to delete.`,
+    title: `Unable to Delete ${dataStore.displayName} ${STORAGE_TYPE_NAME}`,
+    body: `${STORAGE_TYPE_NAME} is in use, unable to delete.`,
     onCancel: this.props.actions.closeModalDialog,
   });
 
@@ -106,7 +106,7 @@ class DataStorageContainer extends Component {
         userId: 'value',
       },
       stack,
-      typeName: TYPE_NAME,
+      typeName: STORAGE_TYPE_NAME,
     });
   };
 
@@ -127,7 +127,7 @@ class DataStorageContainer extends Component {
     return (
       <StackCards
         stacks={projectDataStorage}
-        typeName={TYPE_NAME}
+        typeName={STORAGE_TYPE_NAME}
         typeNamePlural={TYPE_NAME_PLURAL}
         openStack={this.openDataStore}
         deleteStack={this.chooseDialogue}

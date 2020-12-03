@@ -6,8 +6,8 @@ Using the GraphQL schema it is possible to run a mock service in place of the re
 mock server run `yarn mock`.
 
 The current implementation is very basic using canned responses that match the data types but do not intelligently
-supply data to the front end. It is possible to override this default mocking behaviour by passing resolvers to use
-in place of the default resolvers. This is configured in the following line in the `mockServer.js` file.
+supply data to the front end. It is possible to override this default mocking behaviour by passing resolvers to
+use in place of the default resolvers. This is configured in the following line in the `mockServer.js` file.
 
 ```javascript
 const schema = makeExecutableSchema({ typeDefs, resolvers: mockResolvers });

@@ -5,7 +5,7 @@ function loadStacks(projectKey) {
   const query = `
     GetStacks($projectKey: String!) {
       stacks {
-        id, projectKey, displayName, name, users, type, description, status, shared, visible
+        id, projectKey, displayName, name, users, type, description, status, shared, visible, version
       }
     }`;
 
@@ -17,7 +17,8 @@ function loadStacksByCategory(projectKey, category) {
   const query = `
     GetStacksByCategory($params: StacksByCategoryRequest) {
       stacksByCategory(params: $params) {
-        id, projectKey, displayName, name, users, type, description, status, shared, visible      }
+        id, projectKey, displayName, name, users, type, description, status, shared, visible, version
+      }
     }`;
 
   return gqlQuery(query, { params: { projectKey, category } })

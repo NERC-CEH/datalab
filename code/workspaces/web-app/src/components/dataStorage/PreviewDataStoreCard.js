@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StackCard from '../stacks/StackCard';
-import { TYPE_NAME } from '../../containers/dataStorage/DataStorageContainer';
+import { STORAGE_TYPE_NAME } from '../../containers/dataStorage/storageTypeName';
 
 class PreviewDataStoreCard extends Component {
   render() {
     return (
       <StackCard
         stack={this.props.stack}
-        typeName={TYPE_NAME}
+        typeName={STORAGE_TYPE_NAME}
         userPermissions={['open', 'delete']}
         editPermission="edit"
         openPermission="open"
