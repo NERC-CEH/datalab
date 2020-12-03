@@ -1,4 +1,4 @@
-name: Infrastructure PR action
+name: PR Infrastructure action
 
 env:
   CONTAINER: infrastructure

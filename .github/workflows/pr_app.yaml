@@ -1,4 +1,4 @@
-name: App PR action
+name: PR App action
 
 env:
   CONTAINER: app

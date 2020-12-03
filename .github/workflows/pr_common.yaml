@@ -1,4 +1,4 @@
-name: Common PR action
+name: PR Common action
 
 env:
   CONTAINER: common

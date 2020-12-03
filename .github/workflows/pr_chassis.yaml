@@ -1,4 +1,4 @@
-name: Chassis PR action
+name: PR Chassis action
 
 env:
   CONTAINER: chassis

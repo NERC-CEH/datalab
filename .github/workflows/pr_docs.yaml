@@ -1,4 +1,4 @@
-name: Docs PR action
+name: PR Docs action
 
 env:
   CONTAINER: docs

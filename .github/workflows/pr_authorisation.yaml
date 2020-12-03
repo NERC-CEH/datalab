@@ -1,4 +1,4 @@
-name: Authorisation PR action
+name: PR Authorisation action
 
 env:
   CONTAINER: authorisation

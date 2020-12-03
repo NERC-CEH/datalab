@@ -1,4 +1,4 @@
-name: API PR action
+name: PR API action
 
 env:
   CONTAINER: api
