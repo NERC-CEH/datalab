@@ -7,6 +7,7 @@ exports[`rolesService getAllUsersAndRoles should build the correct query and unp
         userId,
         name,
         instanceAdmin,
+        catalogueRole,
         projectRoles {
           projectKey,
           role

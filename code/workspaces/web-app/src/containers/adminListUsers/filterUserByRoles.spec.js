@@ -32,6 +32,33 @@ describe('filterUserByRoles', () => {
     expect(filterUserByRoles(userId, filters, otherUserRoles)).toEqual(true);
   });
 
+  it('shows user if match catalogueAdmin filter', () => {
+    // Arrange
+    const filters = { catalogueAdmin: true };
+    const otherUserRoles = { [userId]: { catalogueAdmin: true } };
+
+    // Act/Assert
+    expect(filterUserByRoles(userId, filters, otherUserRoles)).toEqual(true);
+  });
+
+  it('shows user if match cataloguePublisher filter', () => {
+    // Arrange
+    const filters = { cataloguePublisher: true };
+    const otherUserRoles = { [userId]: { cataloguePublisher: true } };
+
+    // Act/Assert
+    expect(filterUserByRoles(userId, filters, otherUserRoles)).toEqual(true);
+  });
+
+  it('shows user if match catalogueEditor filter', () => {
+    // Arrange
+    const filters = { catalogueEditor: true };
+    const otherUserRoles = { [userId]: { catalogueEditor: true } };
+
+    // Act/Assert
+    expect(filterUserByRoles(userId, filters, otherUserRoles)).toEqual(true);
+  });
+
   it('shows user if match projectAdmin filter', () => {
     // Arrange
     const filters = { projectAdmin: true };
