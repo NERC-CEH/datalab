@@ -1,15 +1,16 @@
 name: Authorisation PR action
+
 env:
   CONTAINER: authorisation
 
 on:
   pull_request:
     paths:
-      - "./.github/workflows/pr_${{ env.CONTAINER }}.yaml"
-      - "./build/**"
-      - "./code/yarn.lock"
-      - "./code/workspaces/common/**"
-      - "./code/workspaces/auth-service/**"
+      - ".github/workflows/pr_authorisation.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/common/**"
+      - "code/workspaces/auth-service/**"
 
 jobs:
   build:

@@ -1,14 +1,15 @@
 name: Chassis PR action
+
 env:
   CONTAINER: chassis
 
 on:
   pull_request:
     paths:
-      - "./.github/workflows/pr_${{ env.CONTAINER }}.yaml"
-      - "./build/**"
-      - "./code/yarn.lock"
-      - "./code/workspaces/service-chassis/**"
+      - ".github/workflows/pr_chassis.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/service-chassis/**"
 
 jobs:
   build:

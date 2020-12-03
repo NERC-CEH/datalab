@@ -1,13 +1,14 @@
 name: Docs PR action
+
 env:
   CONTAINER: docs
 
 on:
   pull_request:
     paths:
-      - "./.github/workflows/pr_${{ env.CONTAINER }}.yaml"
-      - "./build/**"
-      - "./docs/**"
+      - ".github/workflows/pr_docs.yaml"
+      - "build/**"
+      - "docs/**"
 
 jobs:
   build:

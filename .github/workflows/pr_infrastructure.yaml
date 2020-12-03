@@ -1,15 +1,16 @@
 name: Infrastructure PR action
+
 env:
   CONTAINER: infrastructure
 
 on:
   pull_request:
     paths:
-      - "./.github/workflows/pr_${{ env.CONTAINER }}.yaml"
-      - "./build/**"
-      - "./code/yarn.lock"
-      - "./code/workspaces/common/**"
-      - "./code/workspaces/infrastructure-api/**"
+      - ".github/workflows/pr_infrastructure.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/common/**"
+      - "code/workspaces/infrastructure-api/**"
 
 jobs:
   build:

@@ -6,7 +6,7 @@ env:
 on:
   pull_request:
     paths:
-      - ".github/workflows/pr_${{ env.CONTAINER }}.yaml"
+      - ".github/workflows/pr_api.yaml"
       - "build/**"
       - "code/yarn.lock"
       - "code/workspaces/common/**"

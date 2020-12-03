@@ -1,15 +1,16 @@
 name: App PR action
+
 env:
   CONTAINER: app
 
 on:
   pull_request:
     paths:
-      - "./.github/workflows/pr_${{ env.CONTAINER }}.yaml"
-      - "./build/**"
-      - "./code/yarn.lock"
-      - "./code/workspaces/common/**"
-      - "./code/workspaces/web-app/**"
+      - ".github/workflows/pr_app.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/common/**"
+      - "code/workspaces/web-app/**"
 
 jobs:
   build:

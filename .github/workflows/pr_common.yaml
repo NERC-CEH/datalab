@@ -1,14 +1,15 @@
 name: Common PR action
+
 env:
   CONTAINER: common
 
 on:
   pull_request:
     paths:
-      - "./.github/workflows/pr_${{ env.CONTAINER }}.yaml"
-      - "./build/**"
-      - "./code/yarn.lock"
-      - "./code/workspaces/common/**"
+      - ".github/workflows/pr_common.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/common/**"
 
 jobs:
   build:
