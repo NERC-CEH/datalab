@@ -1,0 +1,32 @@
+name: PR Common action
+
+env:
+  CONTAINER: common
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/pr_common.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/common/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ env.CONTAINER }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-cache-${{ env.CONTAINER }}-
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Validate build
+        run: ./build/validate-build.sh ${{ env.CONTAINER }}
+        shell: bash
