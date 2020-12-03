@@ -1,6 +1,4 @@
 name: API PR action
-env:
-  CONTAINER: api
 
 on:
   pull_request:
@@ -10,6 +8,9 @@ on:
       - "./code/yarn.lock"
       - "./code/workspaces/common/**"
       - "./code/workspaces/client-api/**"
+
+env:
+  CONTAINER: api
 
 jobs:
   build:
