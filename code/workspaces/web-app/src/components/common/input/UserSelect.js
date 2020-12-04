@@ -44,21 +44,21 @@ UserSelect.propTypes = {
 };
 
 export const Input = ({ params, label, placeholder, loading }) => (
-    <StyledTextField
-      {...params}
-      label={label}
-      placeholder={placeholder}
-      InputProps={{
-        ...params.InputProps,
-        endAdornment: (
-          <>
-            {loading && <CircularProgress size={30}/>}
-            {params.InputProps.endAdornment}
-          </>
-        ),
-      }}
-      fullWidth
-    />
+  <StyledTextField
+    {...params}
+    label={label}
+    placeholder={placeholder}
+    InputProps={{
+      ...params.InputProps,
+      endAdornment: (
+        <>
+          {loading && <CircularProgress size={30}/>}
+          {params.InputProps.endAdornment}
+        </>
+      ),
+    }}
+    fullWidth
+  />
 );
 
 export const Option = ({ option, selected, userSelectedToolTip }) => {
