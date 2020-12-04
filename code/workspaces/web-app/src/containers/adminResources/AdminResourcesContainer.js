@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectMultiSelect from './ProjectMultiSelect';
 import projectsActions from '../../actions/projectActions';
-import sortByName from './sortByName';
+import sortByName from '../../components/common/sortByName';
 import ProjectResources from './ProjectResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import Pagination from '../../components/stacks/Pagination';

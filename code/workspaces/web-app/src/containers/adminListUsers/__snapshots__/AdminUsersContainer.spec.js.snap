@@ -2,7 +2,10 @@
 
 exports[`AdminUsersContainer renders correctly passing correct props to children 1`] = `
 <Fragment>
-  <UserMultiSelect
+  <UserSelect
+    label="Users"
+    multiselect={true}
+    placeholder="Filter by user"
     selectedUsers={Array []}
     setSelectedUsers={[Function]}
   />

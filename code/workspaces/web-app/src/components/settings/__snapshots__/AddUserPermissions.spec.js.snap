@@ -92,22 +92,19 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
   }
   projectKey="testproj"
   selectedPermissions="Viewer"
-  selectedUserName=""
+  selectedUser={null}
   setSelectedPermissions={[Function]}
-  setSelectedUserName={[Function]}
-  users="users"
+  setSelectedUser={[Function]}
 />
 `;
 
 exports[`PermissionsSelector renders to match snapshot 1`] = `
-<WithStyles(ForwardRef(TextField))
+<StyledTextField
   className="permissionsSelector"
   label="Permissions"
-  margin="dense"
   onChange={[Function]}
   select={true}
   value="Viewer"
-  variant="outlined"
 >
   <WithStyles(ForwardRef(MenuItem))
     key="Admin"
@@ -127,31 +124,24 @@ exports[`PermissionsSelector renders to match snapshot 1`] = `
   >
     Viewer
   </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(TextField))>
+</StyledTextField>
 `;
 
 exports[`PureAddUserPermission renders to match snapshot 1`] = `
 <div
   className="addUserPermission"
 >
-  <UsersAutofill
-    classes={
+  <UserSelect
+    className="usersAutofill"
+    label="Add User"
+    placeholder="Type user's email..."
+    selectedUsers={
       Object {
-        "addButton": "addButton",
-        "addUserPermission": "addUserPermission",
-        "dropDownClosed": "dropDownClosed",
-        "dropDownOpen": "dropDownOpen",
-        "permissionsSelector": "permissionsSelector",
-        "usersAutofill": "usersAutofill",
+        "name": "Test User One",
+        "userId": "test-user-one",
       }
     }
-    setSelectedUserName={[MockFunction]}
-    userNames={
-      Array [
-        "Test User One",
-        "Test User Two",
-      ]
-    }
+    setSelectedUsers={[MockFunction setSelectedUser]}
   />
   <PermissionsSelector
     className="permissionsSelector"
@@ -173,7 +163,7 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
       ]
     }
     selectedPermissions="Viewer"
-    setSelectedPermissions={[MockFunction]}
+    setSelectedPermissions={[MockFunction setSelectedPermissions]}
   />
   <AddUserButton
     classes={
@@ -186,135 +176,16 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
         "usersAutofill": "usersAutofill",
       }
     }
-    dispatch={[MockFunction]}
+    dispatch={[MockFunction dispatch]}
     onClickFn={[Function]}
     projectKey="projectKey"
     selectedPermissions="Viewer"
-    selectedUserName=""
-    userInformation={
-      Array [
-        Object {
-          "name": "Test User One",
-          "userId": "test-user-one",
-        },
-        Object {
-          "name": "Test User Two",
-          "userId": "test-user-two",
-        },
-      ]
-    }
-  />
-</div>
-`;
-
-exports[`UsersAutofill renders to match snapshot 1`] = `
-<div
-  aria-expanded={false}
-  aria-haspopup="listbox"
-  aria-labelledby="downshift-0-label"
-  aria-owns={null}
-  className="usersAutofill"
-  role="combobox"
->
-  <WithStyles(ForwardRef(TextField))
-    aria-activedescendant={null}
-    aria-autocomplete="list"
-    aria-controls={null}
-    aria-labelledby="downshift-0-label"
-    autoComplete="off"
-    fullWidth={true}
-    id="downshift-0-input"
-    label="Add User"
-    margin="dense"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onKeyDown={[Function]}
-    placeholder="Type user's email..."
-    value=""
-    variant="outlined"
-  />
-  <UsersDropdown
-    classes={
+    selectedUser={
       Object {
-        "addButton": "addButton",
-        "addUserPermission": "addUserPermission",
-        "dropDownClosed": "dropDownClosed",
-        "dropDownOpen": "dropDownOpen",
-        "permissionsSelector": "permissionsSelector",
-        "usersAutofill": "usersAutofill",
+        "name": "Test User One",
+        "userId": "test-user-one",
       }
     }
-    getItemProps={[Function]}
-    getMenuProps={[Function]}
-    inputValue=""
-    isOpen={false}
-    userNames={
-      Array [
-        "Test User One",
-        "Test User Two",
-      ]
-    }
   />
 </div>
-`;
-
-exports[`UsersDropdown renders only items containing the input value 1`] = `
-<WithStyles(ForwardRef(Paper))
-  className="dropDownOpen"
->
-  <WithStyles(ForwardRef(MenuItem))
-    item="Test User One"
-    key="Test User One"
-  >
-    Test User One
-  </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(Paper))>
-`;
-
-exports[`UsersDropdown renders with correct class name when it is not open 1`] = `
-<WithStyles(ForwardRef(Paper))
-  className="dropDownClosed"
->
-  <WithStyles(ForwardRef(MenuItem))
-    item="Test User One"
-    key="Test User One"
-  >
-    Test User One
-  </WithStyles(ForwardRef(MenuItem))>
-  <WithStyles(ForwardRef(MenuItem))
-    item="Test User Two"
-    key="Test User Two"
-  >
-    Test User Two
-  </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(Paper))>
-`;
-
-exports[`UsersDropdown renders with correct class name when it is open 1`] = `
-<WithStyles(ForwardRef(Paper))
-  className="dropDownOpen"
->
-  <WithStyles(ForwardRef(MenuItem))
-    item="Test User One"
-    key="Test User One"
-  >
-    Test User One
-  </WithStyles(ForwardRef(MenuItem))>
-  <WithStyles(ForwardRef(MenuItem))
-    item="Test User Two"
-    key="Test User Two"
-  >
-    Test User Two
-  </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(Paper))>
-`;
-
-exports[`UsersDropdown renders with message when there are no items matching the input value 1`] = `
-<WithStyles(ForwardRef(Paper))
-  className="dropDownOpen"
->
-  <WithStyles(ForwardRef(MenuItem))>
-    No users match search.
-  </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(Paper))>
 `;

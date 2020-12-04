@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { startCase } from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Tooltip } from '@material-ui/core';
-import Downshift from 'downshift';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
-import { useUsers } from '../../hooks/usersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
+import UserSelect from '../common/input/UserSelect';
+import StyledTextField from '../common/input/StyledTextField';
 
 const styles = theme => ({
   addUserPermission: {
@@ -52,132 +50,78 @@ const styles = theme => ({
 const PERMISSIONS = SORTED_PERMISSIONS.map(item => startCase(item.name));
 
 function AddUserPermission({ classes }) {
-  const users = useUsers();
   const currentUserId = useCurrentUserId();
   const currentUserSystemAdmin = useCurrentUserSystemAdmin();
   const projectKey = useCurrentProjectKey().value;
   const dispatch = useDispatch();
   const [selectedPermissions, setSelectedPermissions] = useState(PERMISSIONS[PERMISSIONS.length - 1]);
-  const [selectedUserName, setSelectedUserName] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     dispatch(userActions.listUsers());
   }, [dispatch]);
 
   return <PureAddUserPermission
-    users={users}
     currentUserId={currentUserId}
     currentUserSystemAdmin={currentUserSystemAdmin}
     projectKey={projectKey}
     permissionLevels={PERMISSIONS}
     selectedPermissions={selectedPermissions} setSelectedPermissions={setSelectedPermissions}
-    selectedUserName={selectedUserName} setSelectedUserName={setSelectedUserName}
+    selectedUser={selectedUser} setSelectedUser={setSelectedUser}
     dispatch={dispatch}
     classes={classes}
   />;
 }
 
 export function PureAddUserPermission({
-  users, currentUserId, currentUserSystemAdmin, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUserName, setSelectedUserName, dispatch, classes,
+  currentUserId, currentUserSystemAdmin, projectKey, permissionLevels, selectedPermissions, setSelectedPermissions, selectedUser, setSelectedUser, dispatch, classes,
 }) {
-  const userNames = users.value.map(user => user.name);
-
   return (
     <div className={classes.addUserPermission}>
-      <UsersAutofill userNames={userNames} setSelectedUserName={setSelectedUserName} classes={classes} />
+      <UserSelect
+        className={classes.usersAutofill}
+        selectedUsers={selectedUser}
+        setSelectedUsers={setSelectedUser}
+        label="Add User"
+        placeholder="Type user's email..."
+      />
       <PermissionsSelector
         className={classes.permissionsSelector}
         permissionLevels={permissionLevels}
         selectedPermissions={selectedPermissions}
         setSelectedPermissions={setSelectedPermissions}
-        classes={classes} />
+        classes={classes}
+      />
       <AddUserButton
-        userInformation={users.value}
         currentUserId={currentUserId}
         currentUserSystemAdmin={currentUserSystemAdmin}
-        selectedUserName={selectedUserName}
+        selectedUser={selectedUser}
         projectKey={projectKey}
         onClickFn={dispatchAddUserAction}
         dispatch={dispatch}
         selectedPermissions={selectedPermissions}
-        classes={classes}/>
+        classes={classes}
+      />
     </div>
-  );
-}
-
-export function UsersAutofill({ userNames, setSelectedUserName, classes }) {
-  return (
-    <Downshift>
-      {
-        ({
-          isOpen,
-          inputValue,
-          getInputProps,
-          getMenuProps,
-          getItemProps,
-        }) => {
-          setSelectedUserName(inputValue);
-          return (
-            <div className={classes.usersAutofill}>
-              <TextField
-                label="Add User"
-                placeholder="Type user's email..."
-                variant="outlined"
-                margin="dense"
-                fullWidth
-                {...getInputProps()} />
-              <UsersDropdown
-                userNames={userNames}
-                inputValue={inputValue}
-                getMenuProps={getMenuProps}
-                getItemProps={getItemProps}
-                isOpen={isOpen}
-                classes={classes} />
-            </div>
-          );
-        }
-      }
-    </Downshift>
-  );
-}
-
-export function UsersDropdown({ userNames, inputValue, getMenuProps, getItemProps, isOpen, classes }) {
-  const namesMatchingSearch = userNames.filter(name => name.search(inputValue) !== -1);
-
-  return (
-    <Paper
-      className={isOpen ? classes.dropDownOpen : classes.dropDownClosed}
-      {...getMenuProps()}
-    >
-      {namesMatchingSearch.length > 0
-        ? namesMatchingSearch
-          .map(userName => <MenuItem {...getItemProps({ item: userName, key: userName })}>{userName}</MenuItem>)
-        : <MenuItem>No users match search.</MenuItem>
-      }
-    </Paper>
   );
 }
 
 export function PermissionsSelector({ permissionLevels, selectedPermissions, setSelectedPermissions, classes }) {
   return (
-    <TextField
+    <StyledTextField
       className={classes.permissionsSelector}
       label="Permissions"
-      variant="outlined"
-      margin="dense"
       select
       value={selectedPermissions}
       onChange={event => setSelectedPermissions(event.target.value)}
     >
       {permissionLevels.map(item => <MenuItem value={item} key={item}>{item}</MenuItem>)}
-    </TextField>
+    </StyledTextField>
   );
 }
 
-export function AddUserButton({ userInformation, currentUserId, currentUserSystemAdmin, selectedUserName, projectKey, selectedPermissions, onClickFn, dispatch, classes }) {
+export function AddUserButton({ currentUserId, currentUserSystemAdmin, selectedUser, projectKey, selectedPermissions, onClickFn, dispatch, classes }) {
   let disabledMessage = ''; // empty string stops tooltip displaying
-
-  const selectedUser = userInformation.find(user => user.name === selectedUserName);
 
   if (!selectedUser) {
     disabledMessage = "Please enter a registered user's email.";
