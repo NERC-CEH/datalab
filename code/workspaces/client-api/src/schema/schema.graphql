@@ -97,10 +97,10 @@ type Mutation {
     removeProjectPermission(permission: PermissionRemoveRequest): Boolean
 
     # Set instanceAdmin role
-    setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): Boolean!
+    setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
 
     # Set catalogueRole
-    setCatalogueRole(userId: ID!, catalogueRole: CatalogueRole!): CatalogueRole!
+    setCatalogueRole(userId: ID!, catalogueRole: CatalogueRole!): UserAndRoles!
 }
 
 # DataLabs type for basic datalab information.
@@ -298,11 +298,11 @@ type ProjectPermission {
 }
 
 type UserAndRoles {
-    instanceAdmin: Boolean!
-    catalogueRole: String,
+    instanceAdmin: Boolean
+    catalogueRole: CatalogueRole,
     userId: ID!
-    name: String!
-    projectRoles: [ProjectPermission!]
+    name: String
+    projectRoles: [ProjectPermission]
 }
 
 type AllProjectsAndResources {

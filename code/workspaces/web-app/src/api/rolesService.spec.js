@@ -24,4 +24,42 @@ describe('rolesService', () => {
       });
     });
   });
+
+  describe('setInstanceAdmin', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ setInstanceAdmin: 'expectedValue' });
+
+      return rolesService.setInstanceAdmin('one', true).then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return rolesService.setInstanceAdmin('one', true).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
+  describe('setCatalogueRole', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ setCatalogueRole: 'expectedValue' });
+
+      return rolesService.setCatalogueRole('one', 'publisher').then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return rolesService.setCatalogueRole('one', 'publisher').catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
 });

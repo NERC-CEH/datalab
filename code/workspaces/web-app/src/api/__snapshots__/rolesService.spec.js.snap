@@ -15,3 +15,23 @@ exports[`rolesService getAllUsersAndRoles should build the correct query and unp
       }
     }"
 `;
+
+exports[`rolesService setCatalogueRole should build the correct query and unpack the results 1`] = `
+"
+    SetCatalogueRole($userId: ID!, $catalogueRole: CatalogueRole!) {
+      setCatalogueRole(userId: $userId, catalogueRole: $catalogueRole) {
+        userId,
+        catalogueRole
+      }
+    }"
+`;
+
+exports[`rolesService setInstanceAdmin should build the correct query and unpack the results 1`] = `
+"
+    SetInstanceAdmin($userId: ID!, $instanceAdmin: Boolean!) {
+      setInstanceAdmin(userId: $userId, instanceAdmin: $instanceAdmin) {
+        userId,
+        instanceAdmin
+      }
+    }"
+`;

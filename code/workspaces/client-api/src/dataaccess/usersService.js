@@ -43,14 +43,14 @@ async function setInstanceAdmin(userId, instanceAdmin, token) {
   logger.debug(`Setting instanceAdmin of ${userId} to ${instanceAdmin}`);
   const body = { instanceAdmin };
   const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/instanceAdmin`, body, generateOptions(token));
-  return data.instanceAdmin;
+  return { userId, instanceAdmin: data.instanceAdmin };
 }
 
 async function setCatalogueRole(userId, catalogueRole, token) {
   logger.debug(`Setting catalogueRole of ${userId} to ${catalogueRole}`);
   const body = { catalogueRole };
   const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/catalogueRole`, body, generateOptions(token));
-  return data.catalogueRole;
+  return { userId, catalogueRole: data.catalogueRole };
 }
 
 const generateOptions = token => ({

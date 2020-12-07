@@ -38,13 +38,21 @@ exports[`UserResources renders to match snapshot passing correct props to childr
           />
           <SystemSelect
             itemPrefix="Catalogue"
+            items={
+              Array [
+                "admin",
+                "publisher",
+                "editor",
+                "user",
+              ]
+            }
             name="catalogue"
           />
         </div>
         <Pagination
           items={
             Array [
-              <UserProject
+              <mockConstructor
                 filters={
                   Object {
                     "instanceAdmin": false,

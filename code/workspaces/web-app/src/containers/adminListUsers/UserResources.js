@@ -1,15 +1,20 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
+import { permissionTypes } from 'common';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import userSummary from './userSummary';
 import projectsToShow from './projectsToShow';
 import UserProject from './UserProject';
 import Pagination from '../../components/stacks/Pagination';
+import roleActions from '../../actions/roleActions';
+
+const { CATALOGUE_ROLES } = permissionTypes;
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function UserResources({ user, filters, roles }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   if (!roles) {
@@ -59,20 +65,30 @@ export default function UserResources({ user, filters, roles }) {
       <Typography variant="body1">No projects to display.</Typography>
     </div>];
 
+  const handleSystemCheckbox = (event) => {
+    dispatch(roleActions.setInstanceAdmin(user.userId, event.target.checked));
+  };
+
+  const handleSystemSelect = (event) => {
+    dispatch(roleActions.setCatalogueRole(user.userId, event.target.value));
+  };
+
   const SystemCheckbox = ({ label, checked, name }) => {
     const id = `system-checkbox-${user.userId}-${name}`;
     return (
       <>
         <Typography id={id} variant="body1">{label}</Typography>
-        <Checkbox checked={checked} name={name} color="primary" disabled aria-labelledby={id} />
+        <Checkbox checked={checked} onChange={handleSystemCheckbox} name={name} color="primary" aria-labelledby={id} />
       </>
     );
   };
 
-  const SystemSelect = ({ itemPrefix, current, name }) => (
+  const SystemSelect = ({ itemPrefix, current, items, name }) => (
       <div className={classes.systemSelect}>
-        <Select value={current} name={name} color="primary" variant="outlined" margin="dense" disabled aria-label={`${itemPrefix} role`}>
-          <MenuItem value={current}>{itemPrefix} {current}</MenuItem>
+        <Select value={current} onChange={handleSystemSelect} name={name} color="primary" variant="outlined" margin="dense" aria-label={`${itemPrefix} role`}>
+          {items.map(item => (
+            <MenuItem key={item} value={item}>{itemPrefix} {item}</MenuItem>
+          ))}
         </Select>
       </div>
   );
@@ -90,7 +106,7 @@ export default function UserResources({ user, filters, roles }) {
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
               <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" />
-              <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} name="catalogue" />
+              <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>
