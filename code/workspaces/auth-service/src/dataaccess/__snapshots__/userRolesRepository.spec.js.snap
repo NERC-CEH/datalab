@@ -26,6 +26,10 @@ Array [
         "projectKey": "project 2",
         "role": "viewer",
       },
+      Object {
+        "projectKey": "project 3",
+        "role": "admin",
+      },
     ],
     "userId": "uid2",
     "userName": "user2",
@@ -68,8 +72,8 @@ Array [
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {
-        "projectKey": "project 2",
-        "role": "viewer",
+        "projectKey": "project 3",
+        "role": "admin",
       },
     ],
     "userId": "uid2",

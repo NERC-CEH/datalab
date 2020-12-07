@@ -56,12 +56,23 @@ async function getUsers() {
   return Object.values(usersMap); // return users
 }
 
+function combineRoles(roles1, roles2) {
+  return {
+    ...roles1,
+    ...roles2,
+    projectRoles: [
+      ...(roles1 ? roles1.projectRoles : []),
+      ...(roles2 ? roles2.projectRoles : []),
+    ],
+  };
+}
+
 async function getAllUsersAndRoles() {
   const allRoles = await UserRoles().find().exec();
   const usersMap = allRoles
     .filter(roles => roles.userName) // only take users with known user names
     .reduce((uniqueUsersMap, roles) => { // convert to map, keyed by userId
-      uniqueUsersMap[roles.userId] = addDefaults(roles); // eslint-disable-line no-param-reassign
+      uniqueUsersMap[roles.userId] = combineRoles(uniqueUsersMap[roles.userId], addDefaults(roles)); // eslint-disable-line no-param-reassign
       return uniqueUsersMap;
     }, {});
   return Object.values(usersMap); // return users and roles
@@ -125,4 +136,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, addRole, removeRole, userIsMember };
+export default { combineRoles, getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, addRole, removeRole, userIsMember };
