@@ -57,8 +57,8 @@ describe('userRolesRepository', () => {
           instanceAdmin: true,
           catalogueRole: 'admin',
           projectRoles: [
-            { projectKey: 'project1', role: 'viewer' },
             { projectKey: 'project2', role: 'admin' },
+            { projectKey: 'project1', role: 'viewer' },
           ] },
       );
     });
