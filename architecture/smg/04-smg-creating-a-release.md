@@ -10,7 +10,7 @@ checks but you should never do so.
 
 Build status and in progress builds can be viewed:
 
-* In [Travis](https://travis-ci.com/NERC-CEH/datalab).
+* In Actions on [GitHub](https://github.com/NERC-CEH/datalab/actions).
 * In Pull Requests on [GitHub](https://github.com/NERC-CEH/datalab/pulls).
 * On the repository [home page](https://github.com/NERC-CEH/datalab)
 
