@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input renders to match snapshot when loading 1`] = `
+<StyledTextField
+  InputProps={
+    Object {
+      "endAdornment": <React.Fragment>
+        <ForwardRef(WithStyles)
+          size={30}
+        />
+        expected-endAdornment
+      </React.Fragment>,
+      "fromParamsInputProps": "expected-value",
+    }
+  }
+  fromParams="expected-value"
+  fullWidth={true}
+  label="expected-label"
+  placeholder="expected-placeholder"
+/>
+`;
+
+exports[`Input renders to match snapshot when not loading 1`] = `
+<StyledTextField
+  InputProps={
+    Object {
+      "endAdornment": <React.Fragment>
+        expected-endAdornment
+      </React.Fragment>,
+      "fromParamsInputProps": "expected-value",
+    }
+  }
+  fromParams="expected-value"
+  fullWidth={true}
+  label="expected-label"
+  placeholder="expected-placeholder"
+/>
+`;
+
+exports[`Option renders to match snapshot when user is not selected 1`] = `
+<Fragment>
+  User One
+</Fragment>
+`;
+
+exports[`Option renders to match snapshot when user is selected 1`] = `
+<Fragment>
+  User One
+  <WithStyles(ForwardRef(Tooltip))
+    placement="right"
+    title="User selected"
+  >
+    <CheckCircleRoundedIcon
+      className="makeStyles-userSelectedIcon-1"
+      color="primary"
+      fontSize="small"
+      titleAccess="User selected"
+    />
+  </WithStyles(ForwardRef(Tooltip))>
+</Fragment>
+`;
+
+exports[`UserSelect renders input component to match snapshot forwarding required props 1`] = `
+<Input
+  label="expected-label"
+  loading={false}
+  params="expected-params"
+  placeholder="expected-placeholder"
+/>
+`;
+
+exports[`UserSelect renders option component to match snapshot forwarding required props 1`] = `
+<Option
+  option={
+    Object {
+      "name": "User One",
+      "userId": "user-one-id",
+    }
+  }
+  selected={true}
+  userSelectedToolTip="User Selected"
+/>
+`;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderMultiselectAutocompleteField } from '../../components/common/form/controls';
 import { useProjectsArray } from '../../hooks/projectsHooks';
-import sortByName from './sortByName';
+import sortByName from '../../components/common/sortByName';
 
 function ProjectMultiSelect(props) {
   const { selectedProjects, setSelectedProjects } = props;

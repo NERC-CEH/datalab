@@ -2,15 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createShallow } from '@material-ui/core/test-utils';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
-import { useUsers } from '../../hooks/usersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import AddUserPermission, {
   PureAddUserPermission,
-  UsersAutofill,
-  UsersDropdown,
   PermissionsSelector,
   AddUserButton,
   dispatchAddUserAction,
@@ -23,13 +20,12 @@ jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/useCurrentUserSystemAdmin');
 
 const permissionLevels = ['Admin', 'User', 'Viewer'];
+const userOne = { name: 'Test User One', userId: 'test-user-one' };
+const userTwo = { name: 'Test User Two', userId: 'test-user-two' };
 const initialUsers = {
   fetching: { inProgress: false, error: false },
   updating: { inProgress: false, error: false },
-  value: [
-    { name: 'Test User One', userId: 'test-user-one' },
-    { name: 'Test User Two', userId: 'test-user-two' },
-  ],
+  value: [userOne, userTwo],
 };
 
 const classes = {
@@ -47,7 +43,6 @@ describe('AddUserPermissions', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
   useDispatch.mockReturnValue(dispatchMock);
 
-  useUsers.mockReturnValue('users');
   useCurrentUserId.mockReturnValue('current-user-id');
   useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
   useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
@@ -72,139 +67,17 @@ describe('PureAddUserPermission', () => {
     expect(
       shallow(
         <PureAddUserPermission
-          users={initialUsers}
           projectKey="projectKey"
           permissionLevels={permissionLevels}
           selectedPermissions={'Viewer'}
-          setSelectedPermissions={jest.fn()}
-          selectedUserName={''}
-          setSelectedUserName={jest.fn()}
-          dispatch={jest.fn()}
+          setSelectedPermissions={jest.fn().mockName('setSelectedPermissions')}
+          selectedUser={userOne}
+          setSelectedUser={jest.fn().mockName('setSelectedUser')}
+          dispatch={jest.fn().mockName('dispatch')}
           classes={classes}
         />,
       ),
     ).toMatchSnapshot();
-  });
-});
-
-describe('UsersAutofill', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
-  const userNames = initialUsers.value.map(user => user.name);
-
-  it('renders to match snapshot', () => {
-    expect(
-      shallow(
-        <UsersAutofill
-          userNames={userNames}
-          setSelectedUserName={jest.fn()}
-          classes={classes}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('updates the selected user name', () => {
-    const setSelectedUserNamesMock = jest.fn();
-    shallow(
-      <UsersAutofill userNames={userNames} setSelectedUserName={setSelectedUserNamesMock} classes={classes}/>,
-    );
-
-    expect(setSelectedUserNamesMock).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('UsersDropdown', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-    jest.clearAllMocks();
-  });
-
-  const userNames = initialUsers.value.map(user => user.name);
-  const getItemPropsMock = jest.fn();
-  getItemPropsMock.mockImplementation(arg => arg);
-
-  it('renders with correct class name when it is not open', () => {
-    expect(
-      shallow(
-        <UsersDropdown
-          isOpen={false}
-          userNames={userNames}
-          inputValue={''}
-          getMenuProps={jest.fn()}
-          getItemProps={getItemPropsMock}
-          classes={classes}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('renders with correct class name when it is open', () => {
-    expect(
-      shallow(
-        <UsersDropdown
-          isOpen={true}
-          userNames={userNames}
-          inputValue={''}
-          getMenuProps={jest.fn()}
-          getItemProps={getItemPropsMock}
-          classes={classes}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('renders only items containing the input value', () => {
-    expect(
-      shallow(
-        <UsersDropdown
-          isOpen={true}
-          inputValue={'One'}
-          userNames={userNames}
-          getMenuProps={jest.fn()}
-          getItemProps={getItemPropsMock}
-          classes={classes}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('renders with message when there are no items matching the input value', () => {
-    expect(
-      shallow(
-        <UsersDropdown
-          isOpen={true}
-          userNames={userNames}
-          inputValue={'no matches to this input'}
-          getMenuProps={jest.fn()}
-          getItemProps={getItemPropsMock}
-          classes={classes}
-        />,
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('calls the downshift getProps functions', () => {
-    const getMenuPropsMock = jest.fn();
-    shallow(
-      <UsersDropdown
-        isOpen={true}
-        userNames={userNames}
-        inputValue={''}
-        getMenuProps={getMenuPropsMock}
-        getItemProps={getItemPropsMock}
-        classes={classes}
-      />,
-    );
-
-    expect(getMenuPropsMock).toHaveBeenCalledTimes(1);
-    expect(getItemPropsMock).toHaveBeenCalledTimes(userNames.length);
   });
 });
 
@@ -253,12 +126,13 @@ describe('AddUserButton', () => {
 
   describe('when selected user is the current user', () => {
     it('renders as not disabled when the current user is system admin', () => {
+      const currentUser = userOne;
       expect(
         shallow(
           <AddUserButton
             userInformation={initialUsers.value}
-            selectedUserName={initialUsers.value[0].name}
-            currentUserId={initialUsers.value[0].userId}
+            selectedUser={currentUser}
+            currentUserId={currentUser.userId}
             currentUserSystemAdmin
             project={'project'}
             selectedPermissions={permissionLevels[0]}
@@ -270,12 +144,13 @@ describe('AddUserButton', () => {
     });
 
     it('renders as disabled with explanatory tooltip when the current user is not system admin', () => {
+      const currentUser = userOne;
       expect(
         shallow(
           <AddUserButton
             userInformation={initialUsers.value}
-            selectedUserName={initialUsers.value[0].name}
-            currentUserId={initialUsers.value[0].userId}
+            selectedUser={currentUser}
+            currentUserId={currentUser.userId}
             currentUserSystemAdmin={false}
             project={'project'}
             selectedPermissions={permissionLevels[0]}
@@ -293,7 +168,7 @@ describe('AddUserButton', () => {
         shallow(
           <AddUserButton
             userInformation={initialUsers.value}
-            selectedUserName={initialUsers.value[0].name}
+            selectedUser={userOne}
             project={'project'}
             selectedPermissions={permissionLevels[0]}
             onClickFn={jest.fn()}
@@ -306,7 +181,7 @@ describe('AddUserButton', () => {
 
   it('calls onClickFn with correct arguments when clicked', () => {
     const userInformation = initialUsers.value;
-    const selectedUser = initialUsers.value[0];
+    const selectedUser = userOne;
     const projectKey = 'projectKey';
     const selectedPermissions = permissionLevels[0];
     const onClickFnMock = jest.fn();
@@ -315,7 +190,7 @@ describe('AddUserButton', () => {
     const render = shallow(
       <AddUserButton
         userInformation={userInformation}
-        selectedUserName={selectedUser.name}
+        selectedUser={selectedUser}
         projectKey={projectKey}
         selectedPermissions={selectedPermissions}
         onClickFn={onClickFnMock}
@@ -333,7 +208,7 @@ describe('AddUserButton', () => {
 describe('dispatchAddUserAction', () => {
   it('dispatches the result of addUserPermission action', () => {
     const project = 'project';
-    const user = initialUsers.value[0];
+    const user = userOne;
     const selectedPermissions = permissionLevels[0];
     const dispatchMock = jest.fn();
     const addUserPermissionMock = jest.fn();
