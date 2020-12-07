@@ -31,7 +31,7 @@ const testUserRoles = () => [
     userId: 'uid2',
     userName: 'user2',
     projectRoles: [
-      { projectKey: 'project 2', role: 'viewer' },
+      { projectKey: 'project 3', role: 'admin' },
     ],
   },
   {
@@ -47,6 +47,23 @@ let mockDatabase;
 jest.mock('../config/database');
 
 describe('userRolesRepository', () => {
+  describe('helper functions', () => {
+    it('combineRoles can combine roles', () => {
+      expect(userRoleRepository.combineRoles(
+        { userId: 'uid1', instanceAdmin: true, projectRoles: [{ projectKey: 'project1', role: 'viewer' }] },
+        { userId: 'uid1', catalogueRole: 'admin', projectRoles: [{ projectKey: 'project2', role: 'admin' }] },
+      )).toEqual(
+        { userId: 'uid1',
+          instanceAdmin: true,
+          catalogueRole: 'admin',
+          projectRoles: [
+            { projectKey: 'project2', role: 'admin' },
+            { projectKey: 'project1', role: 'viewer' },
+          ] },
+      );
+    });
+  });
+
   describe('read operations', () => {
     beforeEach(() => {
       mockDatabase = databaseMock(testUserRoles().map(wrapDocument));
