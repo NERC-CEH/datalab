@@ -56,13 +56,21 @@ async function getUsers() {
   return Object.values(usersMap); // return users
 }
 
+/*
+Under some circumstances, duplicate records can be created for MongoDB users.
+This function combines the roles for those users.
+The underlying issue should be fixed - a technical debt story has been written.
+If the roles are contradictory, the first one wins.
+This is a reasonable approach, since when dealing with individual users,
+findOne returns the first one (normally following insert order).
+*/
 function combineRoles(roles1, roles2) {
   return {
-    ...roles1,
     ...roles2,
+    ...roles1,
     projectRoles: [
-      ...(roles1 ? roles1.projectRoles : []),
       ...(roles2 ? roles2.projectRoles : []),
+      ...(roles1 ? roles1.projectRoles : []),
     ],
   };
 }
