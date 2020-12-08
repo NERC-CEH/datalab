@@ -7,12 +7,6 @@ const wrapDocument = document => ({
   toObject: () => document,
 });
 
-const unwrapDocument = (document) => {
-  const newDoc = { ...document };
-  delete newDoc.toObject;
-  return newDoc;
-};
-
 const testUserRoles = () => [
   {
     userId: 'uid1',
@@ -207,7 +201,7 @@ describe('userRolesRepository', () => {
       expect(mockFn).not.toBeCalled();
     });
 
-    it('update note called if user not found', async () => {
+    it('update not called if user not found', async () => {
       const mockFn = jest.fn();
       mockDatabase().findOneAndUpdate = mockFn;
       await userRoleRepository.removeRole('not found', 'project 2');
@@ -230,7 +224,7 @@ describe('userRolesRepository', () => {
 
     it('should set instanceAdmin', async () => {
       await userRoleRepository.setInstanceAdmin('uid1', true);
-      expect(unwrapDocument(mockDatabase().invocation().entity).instanceAdmin).toEqual(true);
+      expect(mockDatabase().invocation().entity.instanceAdmin).toEqual(true);
     });
   });
 
@@ -249,7 +243,7 @@ describe('userRolesRepository', () => {
 
     it('should set catalogueRole', async () => {
       await userRoleRepository.setCatalogueRole('uid1', 'user');
-      expect(unwrapDocument(mockDatabase().invocation().entity).catalogueRole).toEqual('user');
+      expect(mockDatabase().invocation().entity.catalogueRole).toEqual('user');
     });
   });
 
