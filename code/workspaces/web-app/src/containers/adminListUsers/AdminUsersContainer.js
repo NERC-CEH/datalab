@@ -9,8 +9,7 @@ import { useRoles } from '../../hooks/rolesHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
 import { useDataStorageArray } from '../../hooks/dataStorageHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
-import UserMultiSelect from './UserMultiSelect';
-import sortByName from '../adminResources/sortByName';
+import sortByName from '../../components/common/sortByName';
 import filterUserByRoles from './filterUserByRoles';
 import UserResources from './UserResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
@@ -18,6 +17,7 @@ import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
 import projectActions from '../../actions/projectActions';
 import createUserRoles from './createUserRoles';
+import UserSelect from '../../components/common/input/UserSelect';
 
 const useStyles = makeStyles(theme => ({
   filterControls: {
@@ -98,7 +98,7 @@ function AdminUsersContainer() {
 
   return (
     <>
-      <UserMultiSelect selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} />
+      <UserSelect multiselect selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} label="Users" placeholder="Filter by user" />
       <div className={classes.filterControls}>
         <div className={classes.filterColumn}>
           <span className={classes.filterText}>Filter</span>

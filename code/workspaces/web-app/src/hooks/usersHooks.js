@@ -1,5 +1,13 @@
 import useShallowSelector from './useShallowSelector';
 import usersSelectors from '../selectors/usersSelectors';
+import sortByName from '../components/common/sortByName';
 
-// eslint-disable-next-line import/prefer-default-export
 export const useUsers = () => useShallowSelector(usersSelectors.users);
+
+export const useUsersSortedByName = () => {
+  const users = useUsers();
+  return {
+    ...users,
+    value: sortByName(users.value),
+  };
+};

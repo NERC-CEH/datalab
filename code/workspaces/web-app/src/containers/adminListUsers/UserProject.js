@@ -40,12 +40,7 @@ export default function UserProject({ userId, projectKey, filters, roles }) {
 
   const userProject = allProjects.value
     .filter(proj => proj.key === projectKey)[0];
-  if (!userProject) {
-    return (
-      <Typography variant="h5" className={classes.heading}>No project matching {projectKey}</Typography>
-    );
-  }
-
+  const projectName = userProject ? userProject.name : `Deleted project "${projectKey}"`;
   const projectKeys = cardsToShow.projectCardsToShow(roles, projectKey);
   const projects = allProjects.value
     .filter(proj => projectKeys.includes(proj.key));
@@ -73,11 +68,11 @@ export default function UserProject({ userId, projectKey, filters, roles }) {
     <div className={classes.container}>
       <ResourceAccordion defaultExpanded>
         <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" className={classes.heading}>{userProject.name}</Typography>
+          <Typography variant="h5" className={classes.heading}>{projectName}</Typography>
         </ResourceAccordionSummary>
         <ResourceAccordionDetails>
           <div className={classes.resources}>
-            {(filtersOff || filters.projectAdmin || filters.projectUser || filters.projectViewer) && projects.length > 0 && (
+            {(filtersOff || filters.projectAdmin || filters.projectUser || filters.projectViewer) && (
               <>
                 <div className={classes.projectRoles}>
                   <ProjectCheckbox label="Project admin" checked={roles.projectAdmin.includes(projectKey)} name="projectAdmin" />

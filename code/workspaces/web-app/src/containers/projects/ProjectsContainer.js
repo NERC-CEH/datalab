@@ -14,9 +14,8 @@ import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../..
 import notify from '../../components/common/notify';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
+import { PROJECT_TYPE_NAME, PROJECT_TYPE_NAME_PLURAL } from './projectTypeName';
 
-export const TYPE_NAME = 'Project';
-const TYPE_NAME_PLURAL = 'Projects';
 export const PROJECT_OPEN_PERMISSION = 'project.open';
 const FORM_NAME = 'createProject';
 
@@ -116,9 +115,9 @@ export const onCreateProjectSubmit = dispatch => async (project) => {
   try {
     await dispatch(projectActions.createProject(project));
     await reset(FORM_NAME);
-    notify.success(`${TYPE_NAME} created`);
+    notify.success(`${PROJECT_TYPE_NAME} created`);
   } catch (error) {
-    notify.error(`Unable to create ${TYPE_NAME}`);
+    notify.error(`Unable to create ${PROJECT_TYPE_NAME}`);
   } finally {
     await dispatch(projectActions.loadProjects());
   }
@@ -128,9 +127,9 @@ export const confirmDeleteProject = dispatch => projectStack => dispatch(
   modalDialogActions.openModalDialog(
     MODAL_TYPE_ROBUST_CONFIRMATION,
     {
-      title: `Delete ${TYPE_NAME} "${projectStack.displayName} (${projectStack.key})"`,
-      body: `Are you sure you want to delete the ${TYPE_NAME} "${projectStack.displayName} (${projectStack.key})"?
-        This action will destroy all data related to the ${TYPE_NAME} and can not be undone.`,
+      title: `Delete ${PROJECT_TYPE_NAME} "${projectStack.displayName} (${projectStack.key})"`,
+      body: `Are you sure you want to delete the ${PROJECT_TYPE_NAME} "${projectStack.displayName} (${projectStack.key})"?
+        This action will destroy all data related to the ${PROJECT_TYPE_NAME} and can not be undone.`,
       confirmField: {
         label: `Please type "${projectStack.key}" to confirm`,
         expectedValue: projectStack.key,
@@ -145,9 +144,9 @@ export const deleteProject = async (dispatch, projectStack) => {
   try {
     await dispatch(projectActions.deleteProject(projectStack.key));
     dispatch(modalDialogActions.closeModalDialog());
-    notify.success(`${TYPE_NAME} deleted.`);
+    notify.success(`${PROJECT_TYPE_NAME} deleted.`);
   } catch (error) {
-    notify.error(`Unable to delete ${TYPE_NAME}.`);
+    notify.error(`Unable to delete ${PROJECT_TYPE_NAME}.`);
   } finally {
     dispatch(projectActions.loadProjects());
   }
@@ -214,8 +213,8 @@ const ProjectsContainer = () => {
       />
       <StackCards
         stacks={userAccessibleStacks}
-        typeName={TYPE_NAME}
-        typeNamePlural={TYPE_NAME_PLURAL}
+        typeName={PROJECT_TYPE_NAME}
+        typeNamePlural={PROJECT_TYPE_NAME_PLURAL}
         openStack={project => history.push(`/projects/${project.key}/info`)}
         deleteStack={confirmDeleteProject(dispatch)}
         openCreationForm={openCreationForm(dispatch)}

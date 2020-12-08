@@ -23,7 +23,8 @@
 		"recommendations": [
 			"dbaeumer.vscode-eslint",
 			"orta.vscode-jest",
-			"firsttris.vscode-jest-runner"
+			"firsttris.vscode-jest-runner",
+			"streetsidesoftware.code-spell-checker"
 		]
 	},
 	"settings": {
@@ -35,6 +36,25 @@
 		"jest.disabledWorkspaceFolders": [
 			"datalab"
 		],
-		"jestrunner.jestCommand": "npm run test --"
+		"jestrunner.jestCommand": "npm run test --",
+		"cSpell.language": "en-GB",
+		"cSpell.words": [
+			"admin",
+			"checkbox",
+			"dataaccess",
+			"datalab",
+			"datalabs",
+			"dialog",
+			"jwks",
+			"labelledby",
+			"minio",
+			"modaltypes",
+			"noopener",
+			"noreferrer",
+			"setup",
+			"uppercase",
+			"upsert",
+			"workflows"
+		]
 	},
 }

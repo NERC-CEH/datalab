@@ -56,12 +56,31 @@ async function getUsers() {
   return Object.values(usersMap); // return users
 }
 
+/*
+Under some circumstances, duplicate records can be created for MongoDB users.
+This function combines the roles for those users.
+The underlying issue should be fixed - a technical debt story has been written.
+If the roles are contradictory, the first one wins.
+This is a reasonable approach, since when dealing with individual users,
+findOne returns the first one (normally following insert order).
+*/
+function combineRoles(roles1, roles2) {
+  return {
+    ...roles2,
+    ...roles1,
+    projectRoles: [
+      ...(roles2 ? roles2.projectRoles : []),
+      ...(roles1 ? roles1.projectRoles : []),
+    ],
+  };
+}
+
 async function getAllUsersAndRoles() {
   const allRoles = await UserRoles().find().exec();
   const usersMap = allRoles
     .filter(roles => roles.userName) // only take users with known user names
     .reduce((uniqueUsersMap, roles) => { // convert to map, keyed by userId
-      uniqueUsersMap[roles.userId] = addDefaults(roles); // eslint-disable-line no-param-reassign
+      uniqueUsersMap[roles.userId] = combineRoles(uniqueUsersMap[roles.userId], addDefaults(roles)); // eslint-disable-line no-param-reassign
       return uniqueUsersMap;
     }, {});
   return Object.values(usersMap); // return users and roles
@@ -151,4 +170,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };
+export default { combineRoles, getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };

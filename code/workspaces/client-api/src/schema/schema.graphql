@@ -162,6 +162,7 @@ type Stack {
     status: StatusType
     shared: VisibilityType
     visible: VisibilityType
+    version: String
 }
 
 input StacksByCategoryRequest {

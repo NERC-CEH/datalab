@@ -35,6 +35,8 @@ RUN yarn install --prefer-offline --silent --production && yarn cache clean
 
 COPY ./workspaces/${WORKSPACE}/dist .
 COPY ./workspaces/${WORKSPACE}/resources ./resources
+# fix for multiple COPY errors, see https://github.com/moby/moby/issues/37965
+RUN true
 COPY ./version.json .
 
 EXPOSE 8000
