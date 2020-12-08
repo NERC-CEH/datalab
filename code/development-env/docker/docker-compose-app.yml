@@ -68,6 +68,8 @@ services:
     volumes:
       - $PWD/..:/usr/src/app:ro
       - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/web-app/public/storage_config.json:ro
+      - $PWD/config/local/image_config.json:/usr/src/app/workspaces/web-app/public/image_config.json:ro
+      - $PWD/config/local/catalogue_config.json:/usr/src/app/workspaces/web-app/public/catalogue_config.json:ro
       # web_auth_config is unique to each domain
       # When using KeyCloak unhash the line below and hash the Auth0 line
       # - $PWD/config/local/web_auth_config_keycloak.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro

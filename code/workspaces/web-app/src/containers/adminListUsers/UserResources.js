@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import { permissionTypes } from 'common';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import userSummary from './userSummary';
@@ -14,6 +15,8 @@ import projectsToShow from './projectsToShow';
 import UserProject from './UserProject';
 import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
+import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
+import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
 
 const { CATALOGUE_ROLES } = permissionTypes;
 
@@ -36,6 +39,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  systemRoleSkeletonItem: {
+    marginRight: theme.spacing(2),
+  },
   placeHolderCard: {
     width: '100%',
     height: 70,
@@ -55,6 +61,7 @@ export default function UserResources({ user, filters, roles }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const currentUserId = useCurrentUserId();
+  const catalogueAvailable = useCatalogueAvailable();
 
   if (!roles) {
     return null;
@@ -86,13 +93,13 @@ export default function UserResources({ user, filters, roles }) {
   };
 
   const SystemSelect = ({ itemPrefix, current, items, name }) => (
-      <div className={classes.systemSelect}>
-        <Select value={current} onChange={handleSystemSelect} name={name} color="primary" variant="outlined" margin="dense" aria-label={`${itemPrefix} role`}>
-          {items.map(item => (
-            <MenuItem key={item} value={item}>{itemPrefix} {item}</MenuItem>
-          ))}
-        </Select>
-      </div>
+    <div className={classes.systemSelect}>
+      <Select value={current} onChange={handleSystemSelect} name={name} color="primary" variant="outlined" margin="dense" aria-label={`${itemPrefix} role`}>
+        {items.map(item => (
+          <MenuItem key={item} value={item}>{itemPrefix} {item}</MenuItem>
+        ))}
+      </Select>
+    </div>
   );
 
   return (
@@ -107,8 +114,10 @@ export default function UserResources({ user, filters, roles }) {
         <ResourceAccordionDetails>
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
-              <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
-              <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />
+              <PromisedContentSkeletonWrapper promises={catalogueAvailable} skeletonComponent={SystemRoleSkeleton}>
+                <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
+                {catalogueAvailable.value && <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />}
+              </PromisedContentSkeletonWrapper>
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>
@@ -117,3 +126,17 @@ export default function UserResources({ user, filters, roles }) {
     </div>
   );
 }
+
+const SystemRoleSkeleton = () => {
+  const classes = useStyles();
+  return (
+    <>
+      <Skeleton className={classes.systemRoleSkeletonItem} variant="text" style>
+        <Typography>Instance admin checkbox</Typography>
+      </Skeleton>
+      <Skeleton className={classes.systemRoleSkeletonItem} variant="text">
+        <Typography>Catalogue permission select</Typography>
+      </Skeleton>
+    </>
+  );
+};

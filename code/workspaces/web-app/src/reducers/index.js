@@ -10,6 +10,7 @@ import users from './usersReducer';
 import roles from './rolesReducer';
 import projectUsers from './projectSettingsReducers';
 import currentProject from './currentProjectReducer';
+import catalogueConfig from './catalogueConfigReducer';
 
 const rootReducer = history => combineReducers({
   authentication,
@@ -21,6 +22,7 @@ const rootReducer = history => combineReducers({
   roles,
   projectUsers,
   currentProject,
+  catalogueConfig,
   router: connectRouter(history),
   form: formReducer,
 });
