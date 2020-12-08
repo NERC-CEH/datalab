@@ -83,25 +83,29 @@ function addRecordForNewUser(userId, userName, projectRoles) {
 }
 
 async function setInstanceAdmin(userId, instanceAdmin) {
-  const query = { userId };
-  const roles = await UserRoles().findOne(query).exec();
-  if (!roles) {
+  const users = await UserRoles().find({ userId }).exec();
+  if (!users || users.length === 0) {
     throw new Error(`Unrecognised user ${userId}`);
   }
-  roles[INSTANCE_ADMIN_ROLE_KEY] = instanceAdmin;
-  await UserRoles().findOneAndUpdate(query, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
-  return addDefaults(roles);
+  await Promise.all(users.map((roles) => {
+    roles[INSTANCE_ADMIN_ROLE_KEY] = instanceAdmin; // eslint-disable-line no-param-reassign
+    const { _id } = roles;
+    return UserRoles().findOneAndUpdate({ _id }, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  }));
+  return users.map(addDefaults)[0];
 }
 
 async function setCatalogueRole(userId, catalogueRole) {
-  const query = { userId };
-  const roles = await UserRoles().findOne(query).exec();
-  if (!roles) {
+  const users = await UserRoles().find({ userId }).exec();
+  if (!users || users.length === 0) {
     throw new Error(`Unrecognised user ${userId}`);
   }
-  roles[CATALOGUE_ROLE_KEY] = catalogueRole;
-  await UserRoles().findOneAndUpdate(query, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
-  return addDefaults(roles);
+  await Promise.all(users.map((roles) => {
+    roles[CATALOGUE_ROLE_KEY] = catalogueRole; // eslint-disable-line no-param-reassign
+    const { _id } = roles;
+    return UserRoles().findOneAndUpdate({ _id }, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  }));
+  return users.map(addDefaults)[0];
 }
 
 async function addRole(userId, projectKey, role) {

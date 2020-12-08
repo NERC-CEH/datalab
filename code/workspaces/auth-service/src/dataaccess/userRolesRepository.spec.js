@@ -213,15 +213,7 @@ describe('userRolesRepository', () => {
 
     it('should set instanceAdmin', async () => {
       await userRoleRepository.setInstanceAdmin('uid1', true);
-      expect(unwrapDocument(mockDatabase().invocation().entity)).toEqual({
-        userId: 'uid1',
-        userName: 'user1',
-        instanceAdmin: true,
-        projectRoles: [
-          { projectKey: 'project 1', role: 'admin' },
-          { projectKey: 'project 2', role: 'user' },
-        ],
-      });
+      expect(unwrapDocument(mockDatabase().invocation().entity).instanceAdmin).toEqual(true);
     });
   });
 
@@ -240,16 +232,7 @@ describe('userRolesRepository', () => {
 
     it('should set catalogueRole', async () => {
       await userRoleRepository.setCatalogueRole('uid1', 'user');
-      expect(unwrapDocument(mockDatabase().invocation().entity)).toEqual({
-        userId: 'uid1',
-        userName: 'user1',
-        instanceAdmin: false,
-        catalogueRole: 'user',
-        projectRoles: [
-          { projectKey: 'project 1', role: 'admin' },
-          { projectKey: 'project 2', role: 'user' },
-        ],
-      });
+      expect(unwrapDocument(mockDatabase().invocation().entity).catalogueRole).toEqual('user');
     });
   });
 
