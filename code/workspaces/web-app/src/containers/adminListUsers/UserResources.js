@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import { permissionTypes } from 'common';
+import { useCurrentUserId } from '../../hooks/authHooks';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import userSummary from './userSummary';
 import projectsToShow from './projectsToShow';
@@ -53,6 +54,7 @@ const useStyles = makeStyles(theme => ({
 export default function UserResources({ user, filters, roles }) {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const currentUserId = useCurrentUserId();
 
   if (!roles) {
     return null;
@@ -73,12 +75,12 @@ export default function UserResources({ user, filters, roles }) {
     dispatch(roleActions.setCatalogueRole(user.userId, event.target.value));
   };
 
-  const SystemCheckbox = ({ label, checked, name }) => {
+  const SystemCheckbox = ({ label, checked, name, disabled }) => {
     const id = `system-checkbox-${user.userId}-${name}`;
     return (
       <>
         <Typography id={id} variant="body1">{label}</Typography>
-        <Checkbox checked={checked} onChange={handleSystemCheckbox} name={name} color="primary" aria-labelledby={id} />
+        <Checkbox checked={checked} onChange={handleSystemCheckbox} name={name} color="primary" disabled={disabled} aria-labelledby={id} />
       </>
     );
   };
@@ -105,7 +107,7 @@ export default function UserResources({ user, filters, roles }) {
         <ResourceAccordionDetails>
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
-              <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" />
+              <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
               <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { shallow } from 'enzyme';
 import UserResources from './UserResources';
 
-const user = { name: 'user name' };
+const user = { name: 'user name', userId: 'uid1' };
 const projectKey = 'proj-1234';
 const siteName = 'site name';
 const notebookName = 'notebook name';

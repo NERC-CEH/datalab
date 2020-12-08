@@ -33,6 +33,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         >
           <SystemCheckbox
             checked={true}
+            disabled={false}
             label="Instance admin"
             name="instanceAdmin"
           />
@@ -97,6 +98,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     ],
                   }
                 }
+                userId="uid1"
               />,
             ]
           }
