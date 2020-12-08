@@ -101,6 +101,32 @@ function addRecordForNewUser(userId, userName, projectRoles) {
   return UserRoles().create(user);
 }
 
+async function setInstanceAdmin(userId, instanceAdmin) {
+  const users = await UserRoles().find({ userId }).exec();
+  if (!users || users.length === 0) {
+    throw new Error(`Unrecognised user ${userId}`);
+  }
+  await Promise.all(users.map((roles) => {
+    roles[INSTANCE_ADMIN_ROLE_KEY] = instanceAdmin; // eslint-disable-line no-param-reassign
+    const { _id } = roles;
+    return UserRoles().findOneAndUpdate({ _id }, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  }));
+  return users.map(addDefaults)[0];
+}
+
+async function setCatalogueRole(userId, catalogueRole) {
+  const users = await UserRoles().find({ userId }).exec();
+  if (!users || users.length === 0) {
+    throw new Error(`Unrecognised user ${userId}`);
+  }
+  await Promise.all(users.map((roles) => {
+    roles[CATALOGUE_ROLE_KEY] = catalogueRole; // eslint-disable-line no-param-reassign
+    const { _id } = roles;
+    return UserRoles().findOneAndUpdate({ _id }, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
+  }));
+  return users.map(addDefaults)[0];
+}
+
 async function addRole(userId, projectKey, role) {
   // Load existing user
   const query = { userId };
@@ -144,4 +170,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { combineRoles, getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, addRole, removeRole, userIsMember };
+export default { combineRoles, getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };

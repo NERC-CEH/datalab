@@ -1,4 +1,4 @@
-import { gqlQuery } from './graphqlClient';
+import { gqlQuery, gqlMutation } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
 async function getAllUsersAndRoles() {
@@ -21,4 +21,32 @@ async function getAllUsersAndRoles() {
   return allUsersAndRoles;
 }
 
-export default { getAllUsersAndRoles };
+async function setInstanceAdmin(userId, instanceAdmin) {
+  const mutation = `
+    SetInstanceAdmin($userId: ID!, $instanceAdmin: Boolean!) {
+      setInstanceAdmin(userId: $userId, instanceAdmin: $instanceAdmin) {
+        userId,
+        instanceAdmin
+      }
+    }`;
+
+  const newInstanceAdmin = await gqlMutation(mutation, { userId, instanceAdmin })
+    .then(errorHandler('data.setInstanceAdmin'));
+  return newInstanceAdmin;
+}
+
+async function setCatalogueRole(userId, catalogueRole) {
+  const mutation = `
+    SetCatalogueRole($userId: ID!, $catalogueRole: CatalogueRole!) {
+      setCatalogueRole(userId: $userId, catalogueRole: $catalogueRole) {
+        userId,
+        catalogueRole
+      }
+    }`;
+
+  const newCatalogueRole = await gqlMutation(mutation, { userId, catalogueRole })
+    .then(errorHandler('data.setCatalogueRole'));
+  return newCatalogueRole;
+}
+
+export default { getAllUsersAndRoles, setInstanceAdmin, setCatalogueRole };

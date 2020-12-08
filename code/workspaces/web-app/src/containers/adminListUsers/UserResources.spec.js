@@ -1,12 +1,20 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { shallow } from 'enzyme';
 import UserResources from './UserResources';
 
-const user = { name: 'user name' };
+const user = { name: 'user name', userId: 'uid1' };
 const projectKey = 'proj-1234';
 const siteName = 'site name';
 const notebookName = 'notebook name';
 const storageName = 'storage name';
+
+jest.mock('react-redux');
+useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+jest.mock('./UserProject', () => ({
+  __esModule: true,
+  default: jest.fn().mockReturnValue(<>user project</>),
+}));
 
 describe('UserResources', () => {
   const shallowRender = () => {

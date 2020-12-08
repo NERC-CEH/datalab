@@ -2,7 +2,7 @@ import { service } from 'service-chassis';
 import { permissionTypes } from 'common';
 import auth from '../controllers/authorisation';
 import status from '../controllers/status';
-import userManagement, { getUserValidator } from '../controllers/userManagement';
+import userManagement, { userIdValidator } from '../controllers/userManagement';
 import projectController, { addRoleValidator, removeRoleValidator } from '../controllers/projectController';
 import { cookieAuthMiddleware, tokenAuthMiddleware } from '../auth/authZeroAuthMiddleware';
 import { permissionChecker, projectPermissionChecker } from '../auth/permissionCheckerMiddleware';
@@ -21,11 +21,13 @@ function configureRoutes(app) {
   app.get('/permissions', dtMW, auth.getPermissionsForUser);
   app.get('/roles', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userManagement.getAllUsersAndRoles);
   app.get('/jwks', auth.serveJWKS);
-  app.get('/users/:userId', dtMW, getUserValidator, userManagement.getUser);
+  app.get('/users/:userId', dtMW, userIdValidator, userManagement.getUser);
   app.get('/users', dtMW, userManagement.getUsers);
   app.get('/projects/:projectKey/is-member', dtMW, ew(projectController.isMember));
   app.get('/projects/:projectKey/users', dtMW, projectPermissionChecker(PROJECT_KEY_PROJECTS_READ), ew(projectController.getUserRoles));
   app.put('/projects/:projectKey/users/:userId/roles', dtMW, projectPermissionChecker(PROJECT_KEY_PERMISSIONS_CREATE), addRoleValidator, ew(projectController.addUserRole));
+  app.put('/roles/:userId/instanceAdmin', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userIdValidator, userManagement.setInstanceAdmin);
+  app.put('/roles/:userId/catalogueRole', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userIdValidator, userManagement.setCatalogueRole);
   app.delete('/projects/:projectKey/users/:userId/role', dtMW, projectPermissionChecker(PROJECT_KEY_PERMISSIONS_DELETE), removeRoleValidator, ew(projectController.removeUserRole));
 }
 

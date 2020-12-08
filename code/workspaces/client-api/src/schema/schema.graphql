@@ -95,6 +95,12 @@ type Mutation {
 
     # Remove a user permission from a project
     removeProjectPermission(permission: PermissionRemoveRequest): Boolean
+
+    # Set instanceAdmin role
+    setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
+
+    # Set catalogueRole
+    setCatalogueRole(userId: ID!, catalogueRole: CatalogueRole!): UserAndRoles!
 }
 
 # DataLabs type for basic datalab information.
@@ -293,11 +299,11 @@ type ProjectPermission {
 }
 
 type UserAndRoles {
-    instanceAdmin: Boolean!
-    catalogueRole: String,
+    instanceAdmin: Boolean
+    catalogueRole: CatalogueRole,
     userId: ID!
-    name: String!
-    projectRoles: [ProjectPermission!]
+    name: String
+    projectRoles: [ProjectPermission]
 }
 
 type AllProjectsAndResources {
@@ -318,8 +324,14 @@ input PermissionRemoveRequest {
 }
 
 enum ProjectRole {
-    instance_admin,
     admin,
     user,
     viewer,
+}
+
+enum CatalogueRole {
+    admin,
+    publisher,
+    editor,
+    user
 }
