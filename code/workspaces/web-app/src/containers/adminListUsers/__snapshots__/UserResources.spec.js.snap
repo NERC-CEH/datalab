@@ -39,6 +39,12 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               }
             }
             skeletonComponent={[Function]}
+            skeletonProps={
+              Object {
+                "columns": 2,
+                "rows": 1,
+              }
+            }
           >
             <SystemCheckbox
               checked={true}
@@ -160,6 +166,12 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               }
             }
             skeletonComponent={[Function]}
+            skeletonProps={
+              Object {
+                "columns": 2,
+                "rows": 1,
+              }
+            }
           >
             <SystemCheckbox
               checked={true}

@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
-import Skeleton from '@material-ui/lab/Skeleton';
 import { useUsers } from '../../hooks/usersHooks';
 import { useRoles } from '../../hooks/rolesHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
@@ -15,12 +14,13 @@ import sortByName from '../../components/common/sortByName';
 import filterUserByRoles from './filterUserByRoles';
 import UserResources from './UserResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
+import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
+import UserSelect from '../../components/common/input/UserSelect';
+import GridSkeleton from '../../components/common/GridSkeleton';
 import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
 import projectActions from '../../actions/projectActions';
 import createUserRoles from './createUserRoles';
-import UserSelect from '../../components/common/input/UserSelect';
-import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
 import catalogueConfigActions from '../../actions/catalogueConfigActions';
 
 const useStyles = makeStyles(theme => ({
@@ -114,7 +114,7 @@ function AdminUsersContainer() {
         </div>
         <PromisedContentSkeletonWrapper
           promises={catalogueAvailable}
-          skeletonComponent={FilterSkeleton}
+          skeletonComponent={GridSkeleton}
           skeletonProps={{ rows: 3, columns: 4 }}
         >
           <div className={classes.filterColumn}>
@@ -145,25 +145,5 @@ function AdminUsersContainer() {
     </>
   );
 }
-
-const FilterSkeleton = ({ rows = 3, columns = 3 }) => {
-  const classes = useStyles();
-
-  const columnItems = [];
-  for (let i = 0; i < rows; i++) {
-    columnItems.push(
-      <Skeleton className={classes.skeletonFilterItem} key={i} variant="text">
-        <Typography>Text to infer size from.</Typography>
-      </Skeleton>,
-    );
-  }
-
-  const output = [];
-  for (let i = 0; i < columns; i++) {
-    output.push(<div key={i} className={classes.filterColumn}>{columnItems}</div>);
-  }
-
-  return <>{output}</>;
-};
 
 export default AdminUsersContainer;

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import { permissionTypes } from 'common';
-import Skeleton from '@material-ui/lab/Skeleton';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
 import userSummary from './userSummary';
@@ -17,6 +16,7 @@ import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
 import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
 import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
+import GridSkeleton from '../../components/common/GridSkeleton';
 
 const { CATALOGUE_ROLES } = permissionTypes;
 
@@ -114,7 +114,7 @@ export default function UserResources({ user, filters, roles }) {
         <ResourceAccordionDetails>
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
-              <PromisedContentSkeletonWrapper promises={catalogueAvailable} skeletonComponent={SystemRoleSkeleton}>
+              <PromisedContentSkeletonWrapper promises={catalogueAvailable} skeletonComponent={GridSkeleton} skeletonProps={{ rows: 1, columns: 2 }}>
                 <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
                 {catalogueAvailable.value && <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />}
               </PromisedContentSkeletonWrapper>
@@ -126,17 +126,3 @@ export default function UserResources({ user, filters, roles }) {
     </div>
   );
 }
-
-const SystemRoleSkeleton = () => {
-  const classes = useStyles();
-  return (
-    <>
-      <Skeleton className={classes.systemRoleSkeletonItem} variant="text" style>
-        <Typography>Instance admin checkbox</Typography>
-      </Skeleton>
-      <Skeleton className={classes.systemRoleSkeletonItem} variant="text">
-        <Typography>Catalogue permission select</Typography>
-      </Skeleton>
-    </>
-  );
-};
