@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GridSkeleton correctly constructs final class name from default class names and provided class name when when class name is provided 1`] = `"mockMakeStyles-grid test-class-name"`;
+
+exports[`GridSkeleton correctly constructs final class name from default class names and provided class name when when no class name is provided 1`] = `"mockMakeStyles-grid"`;
+
+exports[`GridSkeleton renders correct children passing down provided props to children 1`] = `
+<WithStyles(ForwardRef(Skeleton))
+  key="0"
+  variant="text"
+>
+  <WithStyles(ForwardRef(Typography))
+    variant="h5"
+  >
+    Test sizing text
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Skeleton))>
+`;
+
+exports[`GridSkeleton renders to match snapshot for 1 x 2 grid 1`] = `
+<div
+  className="mockMakeStyles-grid"
+>
+  <WithStyles(ForwardRef(Skeleton))
+    key="0"
+    variant="text"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      Text to infer size from
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Skeleton))>
+  <WithStyles(ForwardRef(Skeleton))
+    key="1"
+    variant="text"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      Text to infer size from
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Skeleton))>
+</div>
+`;

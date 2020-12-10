@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PromisedContentSkeletonWrapper passes skeletonProps to skeletonComponent when it is being rendered 1`] = `
+<TestSkeleton
+  propOne="prop-one"
+  propTwo="prop-two"
+/>
+`;
+
+exports[`PromisedContentSkeletonWrapper when passed a single promise renders child component when promise is not fetching 1`] = `<TestChild />`;
+
+exports[`PromisedContentSkeletonWrapper when passed a single promise renders skeleton component when promise is fetching 1`] = `<TestSkeleton />`;
+
+exports[`PromisedContentSkeletonWrapper when passed multiple promises renders child component when none of the promises are fetching 1`] = `<TestChild />`;
+
+exports[`PromisedContentSkeletonWrapper when passed multiple promises renders skeleton component when all promises are fetching 1`] = `<TestSkeleton />`;
+
+exports[`PromisedContentSkeletonWrapper when passed multiple promises renders skeleton component when one promise is fetching 1`] = `<TestSkeleton />`;

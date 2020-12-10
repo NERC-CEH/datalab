@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserResources renders to match snapshot passing correct props to children 1`] = `
+exports[`UserResources renders to match snapshot passing correct props to children when catalogue is available 1`] = `
 <div
   className="makeStyles-container-1"
 >
@@ -31,24 +31,155 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         <div
           className="makeStyles-systemRoles-5"
         >
-          <SystemCheckbox
-            checked={true}
-            disabled={false}
-            label="Instance admin"
-            name="instanceAdmin"
-          />
-          <SystemSelect
-            itemPrefix="Catalogue"
-            items={
-              Array [
-                "admin",
-                "publisher",
-                "editor",
-                "user",
-              ]
+          <PromisedContentSkeletonWrapper
+            promises={
+              Object {
+                "fetching": false,
+                "value": true,
+              }
             }
-            name="catalogue"
-          />
+            skeletonComponent={[Function]}
+            skeletonProps={
+              Object {
+                "columns": 2,
+                "rows": 1,
+              }
+            }
+          >
+            <SystemCheckbox
+              checked={true}
+              disabled={false}
+              label="Instance admin"
+              name="instanceAdmin"
+            />
+            <SystemSelect
+              itemPrefix="Catalogue"
+              items={
+                Array [
+                  "admin",
+                  "publisher",
+                  "editor",
+                  "user",
+                ]
+              }
+              name="catalogue"
+            />
+          </PromisedContentSkeletonWrapper>
+        </div>
+        <Pagination
+          items={
+            Array [
+              <mockConstructor
+                filters={
+                  Object {
+                    "instanceAdmin": false,
+                    "notebookOwner": false,
+                    "projectAdmin": false,
+                    "projectUser": false,
+                    "projectViewer": false,
+                    "siteOwner": false,
+                    "storageAccess": false,
+                  }
+                }
+                projectKey="proj-1234"
+                roles={
+                  Object {
+                    "instanceAdmin": true,
+                    "notebookOwner": Array [
+                      Object {
+                        "name": "notebook name",
+                        "projectKey": "proj-1234",
+                      },
+                    ],
+                    "projectAdmin": Array [
+                      "proj-1234",
+                    ],
+                    "projectUser": Array [
+                      "proj-1234",
+                    ],
+                    "projectViewer": Array [
+                      "proj-1234",
+                    ],
+                    "siteOwner": Array [
+                      Object {
+                        "name": "site name",
+                        "projectKey": "proj-1234",
+                      },
+                    ],
+                    "storageAccess": Array [
+                      Object {
+                        "name": "storage name",
+                        "projectKey": "proj-1234",
+                      },
+                    ],
+                  }
+                }
+                userId="uid1"
+              />,
+            ]
+          }
+          itemsName="Projects"
+          itemsPerPage={5}
+        />
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;
+
+exports[`UserResources renders to match snapshot passing correct props to children when catalogue is not available 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <div
+        className="makeStyles-summary-4"
+      >
+        <WithStyles(ForwardRef(Typography))
+          className="makeStyles-heading-3"
+          variant="h5"
+        >
+          user name
+        </WithStyles(ForwardRef(Typography))>
+        <WithStyles(ForwardRef(Typography))
+          variant="body2"
+        >
+          1 project, 1 site, 1 notebook, 1 data store
+        </WithStyles(ForwardRef(Typography))>
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <div
+          className="makeStyles-systemRoles-5"
+        >
+          <PromisedContentSkeletonWrapper
+            promises={
+              Object {
+                "fetching": false,
+                "value": false,
+              }
+            }
+            skeletonComponent={[Function]}
+            skeletonProps={
+              Object {
+                "columns": 2,
+                "rows": 1,
+              }
+            }
+          >
+            <SystemCheckbox
+              checked={true}
+              disabled={false}
+              label="Instance admin"
+              name="instanceAdmin"
+            />
+          </PromisedContentSkeletonWrapper>
         </div>
         <Pagination
           items={

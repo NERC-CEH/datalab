@@ -7,6 +7,7 @@ import { useRoles } from '../../hooks/rolesHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
 import { useDataStorageArray } from '../../hooks/dataStorageHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
+import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
 
 jest.mock('react-redux');
 jest.mock('../../hooks/usersHooks');
@@ -14,6 +15,7 @@ jest.mock('../../hooks/rolesHooks');
 jest.mock('../../hooks/stacksHooks');
 jest.mock('../../hooks/dataStorageHooks');
 jest.mock('../../hooks/projectsHooks');
+jest.mock('../../hooks/catalogueConfigHooks');
 jest.mock('./UserResources', () => ({
   __esModule: true,
   default: jest.fn().mockReturnValue(<>user resources</>),
@@ -37,9 +39,16 @@ useRoles.mockReturnValue({ fetching: false, value: roles });
 useStacksArray.mockReturnValue({ fetching: false, value: [] });
 useDataStorageArray.mockReturnValue({ fetching: false, value: [] });
 useProjectsArray.mockReturnValue({ fetching: false, value: [] });
+useProjectsArray.mockReturnValue({ fetching: false, value: [] });
+useCatalogueAvailable.mockReturnValue({ fetching: false, value: true });
 
 describe('AdminUsersContainer', () => {
   it('renders correctly passing correct props to children', () => {
+    expect(shallow(<AdminUsersContainer/>)).toMatchSnapshot();
+  });
+
+  it('does not render catalogue permission filters when there is no catalogue available', () => {
+    useCatalogueAvailable.mockReturnValueOnce({ fetching: false, value: false });
     expect(shallow(<AdminUsersContainer/>)).toMatchSnapshot();
   });
 });

@@ -14,6 +14,9 @@ import projectsToShow from './projectsToShow';
 import UserProject from './UserProject';
 import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
+import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
+import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
+import GridSkeleton from '../../components/common/GridSkeleton';
 
 const { CATALOGUE_ROLES } = permissionTypes;
 
@@ -36,6 +39,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  systemRoleSkeletonItem: {
+    marginRight: theme.spacing(2),
+  },
   placeHolderCard: {
     width: '100%',
     height: 70,
@@ -55,6 +61,7 @@ export default function UserResources({ user, filters, roles }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const currentUserId = useCurrentUserId();
+  const catalogueAvailable = useCatalogueAvailable();
 
   if (!roles) {
     return null;
@@ -86,13 +93,13 @@ export default function UserResources({ user, filters, roles }) {
   };
 
   const SystemSelect = ({ itemPrefix, current, items, name }) => (
-      <div className={classes.systemSelect}>
-        <Select value={current} onChange={handleSystemSelect} name={name} color="primary" variant="outlined" margin="dense" aria-label={`${itemPrefix} role`}>
-          {items.map(item => (
-            <MenuItem key={item} value={item}>{itemPrefix} {item}</MenuItem>
-          ))}
-        </Select>
-      </div>
+    <div className={classes.systemSelect}>
+      <Select value={current} onChange={handleSystemSelect} name={name} color="primary" variant="outlined" margin="dense" aria-label={`${itemPrefix} role`}>
+        {items.map(item => (
+          <MenuItem key={item} value={item}>{itemPrefix} {item}</MenuItem>
+        ))}
+      </Select>
+    </div>
   );
 
   return (
@@ -107,8 +114,10 @@ export default function UserResources({ user, filters, roles }) {
         <ResourceAccordionDetails>
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
-              <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
-              <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />
+              <PromisedContentSkeletonWrapper promises={catalogueAvailable} skeletonComponent={GridSkeleton} skeletonProps={{ rows: 1, columns: 2 }}>
+                <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
+                {catalogueAvailable.value && <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />}
+              </PromisedContentSkeletonWrapper>
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>

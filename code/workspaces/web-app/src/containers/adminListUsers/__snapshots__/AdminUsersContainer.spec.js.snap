@@ -1,5 +1,206 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AdminUsersContainer does not render catalogue permission filters when there is no catalogue available 1`] = `
+<Fragment>
+  <UserSelect
+    label="Users"
+    multiselect={true}
+    placeholder="Filter by user"
+    selectedUsers={Array []}
+    setSelectedUsers={[Function]}
+  />
+  <div
+    className="makeStyles-filterControls-1"
+  >
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <span
+        className="makeStyles-filterText-3"
+      >
+        Filter
+      </span>
+    </div>
+    <PromisedContentSkeletonWrapper
+      promises={
+        Object {
+          "fetching": false,
+          "value": false,
+        }
+      }
+      skeletonComponent={[Function]}
+      skeletonProps={
+        Object {
+          "columns": 4,
+          "rows": 3,
+        }
+      }
+    >
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Instance admin"
+          name="instanceAdmin"
+        />
+      </div>
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Project admin"
+          name="projectAdmin"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Project user"
+          name="projectUser"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Project viewer"
+          name="projectViewer"
+        />
+      </div>
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Site owner"
+          name="siteOwner"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Notebook owner"
+          name="notebookOwner"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Storage access"
+          name="storageAccess"
+        />
+      </div>
+    </PromisedContentSkeletonWrapper>
+  </div>
+  <div>
+    <PromisedContentWrapper
+      fetchingClassName="makeStyles-placeholderCard-5"
+      promise={
+        Array [
+          Object {
+            "fetching": false,
+            "value": Array [
+              Object {
+                "catalogueRole": "admin",
+                "instanceAdmin": true,
+                "name": "Test User 1",
+                "userId": "user1",
+              },
+              Object {
+                "catalogueRole": "user",
+                "instanceAdmin": false,
+                "name": "Test User 2",
+                "userId": "user2",
+              },
+            ],
+          },
+          Object {
+            "fetching": false,
+            "value": Array [],
+          },
+        ]
+      }
+    >
+      <Pagination
+        items={
+          Array [
+            <mockConstructor
+              filters={
+                Object {
+                  "catalogueAdmin": false,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
+                  "instanceAdmin": false,
+                  "notebookOwner": false,
+                  "projectAdmin": false,
+                  "projectUser": false,
+                  "projectViewer": false,
+                  "siteOwner": false,
+                  "storageAccess": false,
+                }
+              }
+              roles={
+                Object {
+                  "catalogueAdmin": true,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
+                  "catalogueRole": "admin",
+                  "instanceAdmin": true,
+                  "notebookOwner": Array [],
+                  "projectAdmin": Array [],
+                  "projectUser": Array [],
+                  "projectViewer": Array [],
+                  "siteOwner": Array [],
+                  "storageAccess": Array [],
+                }
+              }
+              user={
+                Object {
+                  "name": "Test User 1",
+                  "userId": "user1",
+                }
+              }
+            />,
+            <mockConstructor
+              filters={
+                Object {
+                  "catalogueAdmin": false,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
+                  "instanceAdmin": false,
+                  "notebookOwner": false,
+                  "projectAdmin": false,
+                  "projectUser": false,
+                  "projectViewer": false,
+                  "siteOwner": false,
+                  "storageAccess": false,
+                }
+              }
+              roles={
+                Object {
+                  "catalogueAdmin": false,
+                  "catalogueEditor": false,
+                  "cataloguePublisher": false,
+                  "catalogueRole": "user",
+                  "instanceAdmin": false,
+                  "notebookOwner": Array [],
+                  "projectAdmin": Array [],
+                  "projectUser": Array [],
+                  "projectViewer": Array [],
+                  "siteOwner": Array [],
+                  "storageAccess": Array [],
+                }
+              }
+              user={
+                Object {
+                  "name": "Test User 2",
+                  "userId": "user2",
+                }
+              }
+            />,
+          ]
+        }
+        itemsName="Users"
+        itemsPerPage={5}
+      />
+    </PromisedContentWrapper>
+  </div>
+</Fragment>
+`;
+
 exports[`AdminUsersContainer renders correctly passing correct props to children 1`] = `
 <Fragment>
   <UserSelect
@@ -21,76 +222,92 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
         Filter
       </span>
     </div>
-    <div
-      className="makeStyles-filterColumn-2"
+    <PromisedContentSkeletonWrapper
+      promises={
+        Object {
+          "fetching": false,
+          "value": true,
+        }
+      }
+      skeletonComponent={[Function]}
+      skeletonProps={
+        Object {
+          "columns": 4,
+          "rows": 3,
+        }
+      }
     >
-      <FilterCheckBox
-        checked={false}
-        label="Instance admin"
-        name="instanceAdmin"
-      />
-    </div>
-    <div
-      className="makeStyles-filterColumn-2"
-    >
-      <FilterCheckBox
-        checked={false}
-        label="Catalogue admin"
-        name="catalogueAdmin"
-      />
-      <FilterCheckBox
-        checked={false}
-        label="Catalogue publisher"
-        name="cataloguePublisher"
-      />
-      <FilterCheckBox
-        checked={false}
-        label="Catalogue editor"
-        name="catalogueEditor"
-      />
-    </div>
-    <div
-      className="makeStyles-filterColumn-2"
-    >
-      <FilterCheckBox
-        checked={false}
-        label="Project admin"
-        name="projectAdmin"
-      />
-      <FilterCheckBox
-        checked={false}
-        label="Project user"
-        name="projectUser"
-      />
-      <FilterCheckBox
-        checked={false}
-        label="Project viewer"
-        name="projectViewer"
-      />
-    </div>
-    <div
-      className="makeStyles-filterColumn-2"
-    >
-      <FilterCheckBox
-        checked={false}
-        label="Site owner"
-        name="siteOwner"
-      />
-      <FilterCheckBox
-        checked={false}
-        label="Notebook owner"
-        name="notebookOwner"
-      />
-      <FilterCheckBox
-        checked={false}
-        label="Storage access"
-        name="storageAccess"
-      />
-    </div>
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Instance admin"
+          name="instanceAdmin"
+        />
+      </div>
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Catalogue admin"
+          name="catalogueAdmin"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Catalogue publisher"
+          name="cataloguePublisher"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Catalogue editor"
+          name="catalogueEditor"
+        />
+      </div>
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Project admin"
+          name="projectAdmin"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Project user"
+          name="projectUser"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Project viewer"
+          name="projectViewer"
+        />
+      </div>
+      <div
+        className="makeStyles-filterColumn-2"
+      >
+        <FilterCheckBox
+          checked={false}
+          label="Site owner"
+          name="siteOwner"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Notebook owner"
+          name="notebookOwner"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Storage access"
+          name="storageAccess"
+        />
+      </div>
+    </PromisedContentSkeletonWrapper>
   </div>
   <div>
     <PromisedContentWrapper
-      fetchingClassName="makeStyles-placeholderCard-4"
+      fetchingClassName="makeStyles-placeholderCard-5"
       promise={
         Array [
           Object {

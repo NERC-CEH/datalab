@@ -9,15 +9,19 @@ import { useRoles } from '../../hooks/rolesHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
 import { useDataStorageArray } from '../../hooks/dataStorageHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
+import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
 import sortByName from '../../components/common/sortByName';
 import filterUserByRoles from './filterUserByRoles';
 import UserResources from './UserResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
+import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
+import UserSelect from '../../components/common/input/UserSelect';
+import GridSkeleton from '../../components/common/GridSkeleton';
 import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
 import projectActions from '../../actions/projectActions';
 import createUserRoles from './createUserRoles';
-import UserSelect from '../../components/common/input/UserSelect';
+import catalogueConfigActions from '../../actions/catalogueConfigActions';
 
 const useStyles = makeStyles(theme => ({
   filterControls: {
@@ -32,6 +36,9 @@ const useStyles = makeStyles(theme => ({
     fontWeight: '400',
     marginRight: theme.spacing(4),
     paddingTop: theme.spacing(2),
+  },
+  skeletonFilterItem: {
+    margin: [[theme.spacing(1), theme.spacing(2)]],
   },
   placeholderCard: {
     width: '100%',
@@ -59,6 +66,7 @@ function AdminUsersContainer() {
     notebookOwner: false,
     storageAccess: false,
   });
+  const catalogueAvailable = useCatalogueAvailable();
   const classes = useStyles();
   const users = useUsers();
   const projects = useProjectsArray();
@@ -72,6 +80,7 @@ function AdminUsersContainer() {
   useEffect(() => {
     dispatch(roleActions.getAllUsersAndRoles());
     dispatch(projectActions.getAllProjectsAndResources());
+    dispatch(catalogueConfigActions.loadCatalogueConfig());
   }, [dispatch]);
 
   // the users before applying the checkbox filters
@@ -103,24 +112,30 @@ function AdminUsersContainer() {
         <div className={classes.filterColumn}>
           <span className={classes.filterText}>Filter</span>
         </div>
-        <div className={classes.filterColumn}>
-          <FilterCheckBox label="Instance admin" checked={filters.instanceAdmin} name="instanceAdmin" />
-        </div>
-        <div className={classes.filterColumn}>
-          <FilterCheckBox label="Catalogue admin" checked={filters.catalogueAdmin} name="catalogueAdmin" />
-          <FilterCheckBox label="Catalogue publisher" checked={filters.cataloguePublisher} name="cataloguePublisher" />
-          <FilterCheckBox label="Catalogue editor" checked={filters.catalogueEditor} name="catalogueEditor" />
-        </div>
-        <div className={classes.filterColumn}>
-          <FilterCheckBox label="Project admin" checked={filters.projectAdmin} name="projectAdmin" />
-          <FilterCheckBox label="Project user" checked={filters.projectUser} name="projectUser" />
-          <FilterCheckBox label="Project viewer" checked={filters.projectViewer} name="projectViewer" />
-        </div>
-        <div className={classes.filterColumn}>
-          <FilterCheckBox label="Site owner" checked={filters.siteOwner} name="siteOwner" />
-          <FilterCheckBox label="Notebook owner" checked={filters.notebookOwner} name="notebookOwner" />
-          <FilterCheckBox label="Storage access" checked={filters.storageAccess} name="storageAccess" />
-        </div>
+        <PromisedContentSkeletonWrapper
+          promises={catalogueAvailable}
+          skeletonComponent={GridSkeleton}
+          skeletonProps={{ rows: 3, columns: 4 }}
+        >
+          <div className={classes.filterColumn}>
+            <FilterCheckBox label="Instance admin" checked={filters.instanceAdmin} name="instanceAdmin" />
+          </div>
+          {catalogueAvailable.value && <div className={classes.filterColumn}>
+            <FilterCheckBox label="Catalogue admin" checked={filters.catalogueAdmin} name="catalogueAdmin" />
+            <FilterCheckBox label="Catalogue publisher" checked={filters.cataloguePublisher} name="cataloguePublisher" />
+            <FilterCheckBox label="Catalogue editor" checked={filters.catalogueEditor} name="catalogueEditor" />
+          </div>}
+          <div className={classes.filterColumn}>
+            <FilterCheckBox label="Project admin" checked={filters.projectAdmin} name="projectAdmin" />
+            <FilterCheckBox label="Project user" checked={filters.projectUser} name="projectUser" />
+            <FilterCheckBox label="Project viewer" checked={filters.projectViewer} name="projectViewer" />
+          </div>
+          <div className={classes.filterColumn}>
+            <FilterCheckBox label="Site owner" checked={filters.siteOwner} name="siteOwner" />
+            <FilterCheckBox label="Notebook owner" checked={filters.notebookOwner} name="notebookOwner" />
+            <FilterCheckBox label="Storage access" checked={filters.storageAccess} name="storageAccess" />
+          </div>
+        </PromisedContentSkeletonWrapper>
       </div>
       <div>
         <PromisedContentWrapper fetchingClassName={classes.placeholderCard} promise={[roles, projects]}>
