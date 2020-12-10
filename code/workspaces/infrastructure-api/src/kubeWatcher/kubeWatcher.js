@@ -1,13 +1,13 @@
 import * as k8s from '@kubernetes/client-node';
 import { find } from 'lodash';
+import { stackList } from 'common/src/config/images';
 import logger from '../config/logger';
 import kubeConfig from '../kubernetes/kubeConfig';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parsePodLabels } from './kubernetesHelpers';
 import { status } from '../models/stackEnums';
-import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
+import { SELECTOR_LABEL } from '../stacks/Stacks';
 
-const stackNames = Object.values(STACKS).map(stack => stack.name);
 const watchUrl = '/api/v1/pods';
 const selector = { labelSelector: SELECTOR_LABEL };
 
@@ -56,7 +56,7 @@ export function podAddedWatcher(event) {
 
   let output = Promise.resolve();
 
-  if (stackNames.includes(type) && !isPodRunning(event)) {
+  if (stackList().includes(type) && !isPodRunning(event)) {
     // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
     // have their status updated.
     // Additionally ensure that pod is not already running as JS Kubernetes Client
@@ -73,7 +73,7 @@ export function podReadyWatcher(event) {
 
   let output = Promise.resolve();
 
-  if (isPodRunning(event) && stackNames.includes(type)) {
+  if (isPodRunning(event) && stackList().includes(type)) {
     // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
     // have their status updated.
     logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);

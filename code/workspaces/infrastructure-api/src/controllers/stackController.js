@@ -1,11 +1,10 @@
 import { body, check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
-import { versionList } from 'common/src/config/images';
+import { notebookList, siteList, versionList } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
 import handleId from '../dataaccess/renameIdHandler';
-import Stacks, { PUBLISH, ANALYSIS } from '../stacks/Stacks';
 import { visibility, getEnumValues } from '../models/stackEnums';
 
 const TYPE = 'stack';
@@ -180,35 +179,40 @@ const createStackValidator = [
   ...deleteStackValidator,
   check('sourcePath', 'sourcePath must be specified for publication request')
     .custom((value, { req }) => {
-      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
+      if (indexOf(siteList(), req.body.type) > -1) {
         return value;
       }
       return true;
     }),
   check('isPublic', 'isPublic boolean must be specified for publication request')
     .custom((value, { req }) => {
-      if (indexOf(Stacks.getNamesByCategory(PUBLISH), req.body.type) > -1) {
+      if (indexOf(siteList(), req.body.type) > -1) {
         return isBoolean(value);
       }
       return true;
     }),
   check('visible', 'visible must be specified for sites')
     .custom((value, { req }) => {
-      if (Stacks.getNamesByCategory(PUBLISH).includes(req.body.type)) {
+      if (siteList().includes(req.body.type)) {
         return getEnumValues(visibility).includes(req.body.visible);
       }
       return true;
     }),
   check('shared', 'shared must be specified for notebooks')
     .custom((value, { req }) => {
-      if (Stacks.getNamesByCategory(ANALYSIS).includes(req.body.type)) {
+      if (notebookList().includes(req.body.type)) {
         return getEnumValues(visibility).includes(req.body.shared);
       }
       return true;
     }),
   check('version', 'valid version must be specified')
     .optional()
-    .custom((value, { req }) => versionList(req.body.type).includes(value))
+    .custom((value, { req }) => {
+      if (notebookList().includes(req.body.type)) {
+        return versionList(req.body.type).includes(value);
+      }
+      return true;
+    })
     .withMessage((value, { req }) => `Must be one of ${versionList(req.body.type)}.`),
   checkExistsWithMsg('description'),
   checkExistsWithMsg('displayName'),

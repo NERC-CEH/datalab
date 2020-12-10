@@ -1,4 +1,4 @@
-import { filter, find } from 'lodash';
+import { find } from 'lodash';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
@@ -10,7 +10,7 @@ export const PUBLISH = 'publish';
 
 export const SELECTOR_LABEL = 'user-pod';
 
-export const STACKS = Object.freeze({
+const STACKS = Object.freeze({
   JUPYTER: {
     name: 'jupyter',
     category: ANALYSIS,
@@ -51,7 +51,4 @@ export const STACKS = Object.freeze({
 
 const getStack = name => find(STACKS, ['name', name]);
 
-const getNamesByCategory = category => filter(STACKS, ['category', category])
-  .map(stacks => stacks.name);
-
-export default { getStack, getNamesByCategory };
+export default { getStack };

@@ -1,6 +1,9 @@
 import { lowerCase } from 'lodash';
 import data from './image_config.json';
 
+export const NOTEBOOK_CATEGORY = 'NOTEBOOK';
+export const SITE_CATEGORY = 'SITE';
+
 export function imageConfig() {
   return data.types;
 }
@@ -18,6 +21,23 @@ export function getImageInfoForType(type) {
 
 export function imageList() {
   return Object.keys(data.types);
+}
+
+function byCategoryList(categories) {
+  return imageList()
+    .filter(type => categories.includes(data.types[type].category));
+}
+
+export function stackList() {
+  return byCategoryList([NOTEBOOK_CATEGORY, SITE_CATEGORY]);
+}
+
+export function notebookList() {
+  return byCategoryList([NOTEBOOK_CATEGORY]);
+}
+
+export function siteList() {
+  return byCategoryList([SITE_CATEGORY]);
 }
 
 export function versionList(type) {

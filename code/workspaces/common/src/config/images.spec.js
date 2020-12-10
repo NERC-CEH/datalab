@@ -1,5 +1,23 @@
 import { lowerCase, upperCase } from 'lodash';
-import { getImageInfoForType } from './images';
+import { getImageInfoForType, imageCategory, notebookList, siteList, stackList } from './images';
+
+describe('stackList', () => {
+  it('returns list of NOTEBOOKs and SITEs', () => {
+    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'rshiny', 'rstudio', 'zeppelin']);
+  });
+});
+
+describe('notebookList', () => {
+  it('returns list of NOTEBOOKs and SITEs', () => {
+    expect(notebookList().sort()).toEqual(['jupyter', 'jupyterlab', 'rstudio', 'zeppelin']);
+  });
+});
+
+describe('siteList', () => {
+  it('returns list of NOTEBOOKs and SITEs', () => {
+    expect(siteList().sort()).toEqual(['nbviewer', 'rshiny']);
+  });
+});
 
 describe('getImageInfoForType', () => {
   describe('returns the information for specified type when it exists', () => {

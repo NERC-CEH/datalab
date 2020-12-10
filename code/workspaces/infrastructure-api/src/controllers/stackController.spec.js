@@ -2,14 +2,12 @@ import httpMocks from 'node-mocks-http';
 import Promise from 'bluebird';
 import { validationResult } from 'express-validator';
 import { omit } from 'lodash';
-import * as images from 'common/src/config/images';
 import stackController from './stackController';
 import stackManager from '../stacks/stackManager';
 import * as stackRepository from '../dataaccess/stacksRepository';
 
 jest.mock('../stacks/stackManager');
 jest.mock('../dataaccess/stacksRepository');
-jest.mock('common/src/config/images');
 
 const createStackMock = jest.fn().mockResolvedValue('expectedPayload');
 const deleteStackMock = jest.fn().mockResolvedValue('expectedPayload');
@@ -20,7 +18,6 @@ const getOneByIdMock = jest.fn().mockResolvedValue('expectedPayload');
 const getOneByNameMock = jest.fn().mockResolvedValue('expectedPayload');
 const userCanDeleteStackMock = jest.fn().mockResolvedValue(true);
 const userCanRestartStackMock = jest.fn().mockResolvedValue(true);
-const versionListMock = jest.fn().mockReturnValue(['version1']);
 
 stackManager.createStack = createStackMock;
 stackManager.deleteStack = deleteStackMock;
@@ -33,7 +30,6 @@ stackRepository.default = {
   updateShareStatus: updateShareStatusMock,
   update: updateMock,
 };
-images.versionList = versionListMock;
 
 let request;
 
@@ -449,7 +445,7 @@ function mutationRequestBody() {
     description: 'long description',
     shared: 'private',
     visible: 'private',
-    version: 'version1',
+    version: 'Dask 2.30.0 support',
   };
 }
 
