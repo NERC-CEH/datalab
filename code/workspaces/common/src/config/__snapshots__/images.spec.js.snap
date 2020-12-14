@@ -2,7 +2,7 @@
 
 exports[`getImageInfoForType returns the information for specified type when it exists and the type is provided in lowercase 1`] = `
 Object {
-  "category": "NOTEBOOK",
+  "category": "ANALYSIS",
   "displayName": "RStudio",
   "userSelectableVersion": true,
   "versions": Array [
@@ -23,7 +23,7 @@ Object {
 
 exports[`getImageInfoForType returns the information for specified type when it exists and the type is provided in uppercase 1`] = `
 Object {
-  "category": "NOTEBOOK",
+  "category": "ANALYSIS",
   "displayName": "RStudio",
   "userSelectableVersion": true,
   "versions": Array [

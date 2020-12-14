@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const NOTEBOOK_CATEGORY = 'NOTEBOOK';
-const SITE_CATEGORY = 'SITE';
+const NOTEBOOK_CATEGORY = 'ANALYSIS';
+const SITE_CATEGORY = 'PUBLISH';
 
 let cachedData;
 let cachedNotebooks;

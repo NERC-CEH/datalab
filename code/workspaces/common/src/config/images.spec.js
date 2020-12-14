@@ -19,6 +19,15 @@ describe('siteList', () => {
   });
 });
 
+describe('imageCategory', () => {
+  it('returns category of image', () => {
+    expect(imageCategory('dask')).toEqual(undefined);
+    expect(imageCategory('minio')).toEqual('INFRASTRUCTURE');
+    expect(imageCategory('jupyter')).toEqual('ANALYSIS');
+    expect(imageCategory('nbviewer')).toEqual('PUBLISH');
+  });
+});
+
 describe('getImageInfoForType', () => {
   describe('returns the information for specified type when it exists', () => {
     const imageType = 'rstudio';

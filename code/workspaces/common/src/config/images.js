@@ -1,8 +1,8 @@
 import { lowerCase } from 'lodash';
 import data from './image_config.json';
 
-export const NOTEBOOK_CATEGORY = 'NOTEBOOK';
-export const SITE_CATEGORY = 'SITE';
+export const NOTEBOOK_CATEGORY = 'ANALYSIS';
+export const SITE_CATEGORY = 'PUBLISH';
 
 export function imageConfig() {
   return data.types;
@@ -43,6 +43,10 @@ export function siteList() {
 export function versionList(type) {
   const img = lowerCase(type);
   return data.types[img].versions.map(ver => ver.displayName);
+}
+
+export function imageCategory(type) {
+  return data.types[type].category;
 }
 
 export function image(type, version) {
