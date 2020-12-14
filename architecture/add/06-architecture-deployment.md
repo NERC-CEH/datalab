@@ -39,8 +39,7 @@ balancers, a Gluster storage cluster and a bastion server. The full software ins
 across all of these servers is managed via Ansible scripts.
 * **Application Layer** - Datalabs is deployed as Docker containers into a fully
 configured Kubernetes cluster that has ingress and storage fully configured. Deployment
-is currently done via a custom tool called Bara but should be moved to Helm now it has
-established itself as the Kubernetes deployment tool.
+is done using Helm.
 
 ## Environment Handling
 
@@ -51,9 +50,6 @@ there is only a single multi tenant environment. Two instances of Datalabs are s
 into two namespaces, `prod` and `test`. Each namespace shares an ingress controller and
 there are two external load balancers. Storage is dynamically
 provisioned through a single Gluster cluster.
-
-The Bara deployment tool is provided with a full configuration file appropriate to the
-environment so it is possible to run different versions of datalabs in each environment.
 
 ## Kubernetes Primer
 
