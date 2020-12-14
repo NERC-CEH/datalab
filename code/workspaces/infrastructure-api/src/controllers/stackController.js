@@ -4,7 +4,6 @@ import { notebookList, siteList, versionList } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
-import handleId from '../dataaccess/renameIdHandler';
 import { visibility, getEnumValues } from '../models/stackEnums';
 
 const TYPE = 'stack';
@@ -48,7 +47,6 @@ function getOneByIdExec(request, response) {
 
   // Handle request
   return stackRepository.getOneById(params.projectKey, user, params.id)
-    .then(handleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching ID for', TYPE, undefined));
 }
@@ -60,7 +58,6 @@ function getOneByNameExec(request, response) {
 
   // Handle request
   return stackRepository.getOneByName(params.projectKey, user, params.name)
-    .then(handleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching Name for', TYPE, undefined));
 }

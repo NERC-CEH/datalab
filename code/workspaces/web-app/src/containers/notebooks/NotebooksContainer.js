@@ -5,7 +5,7 @@ import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../cons
 import EditStackForm from '../../components/stacks/EditStackForm';
 import { NOTEBOOK_TYPE_NAME, NOTEBOOK_TYPE_NAME_PLURAL } from './notebookTypeName';
 
-export const CONTAINER_TYPE = 'analysis';
+export const CONTAINER_TYPE = 'ANALYSIS';
 export const FORM_NAME = 'createNotebook';
 
 const NotebooksContainer = ({ userPermissions }) => (

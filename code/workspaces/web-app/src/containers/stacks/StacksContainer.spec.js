@@ -28,7 +28,7 @@ describe('StacksContainer', () => {
       const props = {
         store,
         typeName: 'Notebook',
-        containerType: 'analysis',
+        containerType: 'ANALYSIS',
         dialogAction: 'ACTION',
         formStateName: 'createNotebook',
         PrivateComponent: () => {},
@@ -109,7 +109,7 @@ describe('StacksContainer', () => {
     const generateProps = () => ({
       stacks,
       typeName: 'Notebook',
-      containerType: 'analysis',
+      containerType: 'ANALYSIS',
       dialogAction: 'ACTION',
       editDialogAction: 'EDIT_DIALOG_ACTION',
       formStateName: 'createNotebook',

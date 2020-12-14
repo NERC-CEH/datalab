@@ -34,7 +34,8 @@ function getAllByProject(projectKey, user) {
 
 function getAllByCategory(projectKey, user, category) {
   return Stack()
-    .find({ category })
+    .find()
+    .filterByCategory(category)
     .filterByProject(projectKey)
     .filterByUserSharedVisible(user)
     .exec();
@@ -66,7 +67,8 @@ function getOneByName(projectKey, user, name) {
 
 function getOneByNameUserAndCategory(projectKey, user, name, category) {
   return Stack()
-    .find({ category })
+    .find()
+    .filterByCategory(category)
     .findOne({ name })
     .filterOneByProject(projectKey)
     .filterByUser(user)

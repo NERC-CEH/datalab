@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import byUser from './queryHelper/filterByUser';
 import byUserSharedVisible from './queryHelper/filterByUserSharedVisible';
 import byProjectKey from './queryHelper/filterByProjectKey';
+import byCategory from './queryHelper/filterByCategory';
 import { getEnumValues, visibility, status, category } from './stackEnums';
 
 const { Schema } = mongoose;
@@ -30,4 +31,5 @@ StackSchema.query.filterByUser = byUser.filterFind;
 StackSchema.query.filterOneByUser = byUser.filterFindOne;
 StackSchema.query.filterByUserSharedVisible = byUserSharedVisible.filterFind;
 StackSchema.query.filterOneByUserSharedVisible = byUserSharedVisible.filterFindOne;
+StackSchema.query.filterByCategory = byCategory.filterFind;
 mongoose.model('Stack', StackSchema);

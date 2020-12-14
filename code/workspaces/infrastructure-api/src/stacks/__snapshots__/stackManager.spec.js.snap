@@ -9,7 +9,7 @@ Object {
   },
   "name": "expectedName",
   "projectKey": "project",
-  "type": "expectedType",
+  "type": "jupyter",
 }
 `;
 
@@ -20,16 +20,16 @@ Array [
     "username",
     Object {
       "another": "field",
-      "category": "expectedStackCatName",
+      "category": "ANALYSIS",
       "datalabInfo": Object {
         "domain": "expectedDatalabDomain",
         "name": "expectedDatalabName",
       },
-      "internalEndpoint": "http://expectedType-expectedName.project",
+      "internalEndpoint": "http://jupyter-expectedName.project",
       "name": "expectedName",
       "projectKey": "project",
       "status": "requested",
-      "type": "expectedType",
+      "type": "jupyter",
       "url": "https://project-expectedName.datalabs.localhost",
     },
   ],
@@ -38,7 +38,7 @@ Array [
 
 exports[`Stack Controller createStack failed Stack.create requests are caught 1`] = `
 Object {
-  "message": "No stack definition for type expectedType",
+  "message": "No stack definition for type jupyter",
 }
 `;
 
@@ -51,7 +51,7 @@ Object {
   },
   "name": "expectedName",
   "projectKey": "project",
-  "type": "expectedType",
+  "type": "jupyter",
 }
 `;
 
@@ -68,7 +68,7 @@ Array [
       },
       "name": "expectedName",
       "projectKey": "project",
-      "type": "expectedType",
+      "type": "jupyter",
     },
   ],
 ]
@@ -76,6 +76,6 @@ Array [
 
 exports[`Stack Controller deleteStack failed Stack.delete requests are caught 1`] = `
 Object {
-  "message": "No stack definition for type expectedType",
+  "message": "No stack definition for type jupyter",
 }
 `;

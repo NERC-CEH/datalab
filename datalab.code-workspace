@@ -48,6 +48,7 @@
 			"jupyter",
 			"jupyterlab",
 			"jwks",
+			"kube",
 			"kubernetes",
 			"labelledby",
 			"minio",
@@ -58,6 +59,7 @@
 			"rshiny",
 			"rstudio",
 			"setup",
+			"updateable",
 			"uppercase",
 			"upsert",
 			"workflows"

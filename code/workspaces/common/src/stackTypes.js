@@ -9,8 +9,8 @@ const GLUSTERFS_VOLUME = 'glusterfs';
 const NFS_VOLUME = 'nfs';
 const PROJECT = 'project';
 
-const ANALYSIS = 'analysis';
-const PUBLISH = 'publish';
+const ANALYSIS = 'ANALYSIS';
+const PUBLISH = 'PUBLISH';
 const DATA_STORE = 'dataStore';
 
 const STACK_TYPES = [

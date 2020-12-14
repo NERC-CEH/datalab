@@ -5,7 +5,7 @@ import { MODAL_TYPE_CREATE_SITE, MODAL_TYPE_EDIT_SITE } from '../../constants/mo
 import EditStackForm from '../../components/stacks/EditStackForm';
 import { SITE_TYPE_NAME, SITE_TYPE_NAME_PLURAL } from './siteTypeName';
 
-export const CONTAINER_TYPE = 'publish';
+export const CONTAINER_TYPE = 'PUBLISH';
 export const FORM_NAME = 'createSite';
 
 const SitesContainer = ({ userPermissions }) => (

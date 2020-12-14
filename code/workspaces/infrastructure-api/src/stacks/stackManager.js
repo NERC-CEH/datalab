@@ -1,3 +1,4 @@
+import { imageCategory } from 'common/src/config/images';
 import logger from '../config/logger';
 import config from '../config/config';
 import Stacks from './Stacks';
@@ -22,7 +23,7 @@ function createStack(user, params) {
       user,
       {
         ...params,
-        category: stack.category,
+        category: imageCategory(type),
         status: status.REQUESTED,
         url: `https://${projectKey}-${name}.${config.get('datalabDomain')}`,
         internalEndpoint: `http://${params.type}-${name}.${projectKey}`,
