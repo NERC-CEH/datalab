@@ -1,6 +1,6 @@
 import { body, check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
-import { notebookList, siteList, versionList } from 'common/src/config/images';
+import { notebookList, stackList, siteList, versionList } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
@@ -205,7 +205,7 @@ const createStackValidator = [
   check('version', 'valid version must be specified')
     .optional()
     .custom((value, { req }) => {
-      if (notebookList().includes(req.body.type)) {
+      if (stackList().includes(req.body.type)) {
         return versionList(req.body.type).includes(value);
       }
       return true;

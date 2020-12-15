@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NOTEBOOK_CATEGORY } from 'common/src/config/images';
 import StacksContainer from '../stacks/StacksContainer';
 import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../constants/modaltypes';
 import EditStackForm from '../../components/stacks/EditStackForm';
 import { NOTEBOOK_TYPE_NAME, NOTEBOOK_TYPE_NAME_PLURAL } from './notebookTypeName';
 
-export const CONTAINER_TYPE = 'ANALYSIS';
+export const CONTAINER_TYPE = NOTEBOOK_CATEGORY;
 export const FORM_NAME = 'createNotebook';
 
 const NotebooksContainer = ({ userPermissions }) => (

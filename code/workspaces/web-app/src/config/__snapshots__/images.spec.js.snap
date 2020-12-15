@@ -144,7 +144,7 @@ Object {
   "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
   "types": Object {
     "dask": Object {
-      "type": "INFRASTRUCTURE",
+      "category": "INFRASTRUCTURE",
       "versions": Array [
         Object {
           "image": "daskdev/dask:2.30.0",

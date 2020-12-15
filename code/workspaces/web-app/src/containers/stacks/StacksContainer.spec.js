@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import { JUPYTER } from 'common/src/stackTypes';
+import { NOTEBOOK_CATEGORY } from 'common/src/config/images';
 import StacksContainer, { PureStacksContainer } from './StacksContainer';
 import stackService from '../../api/stackService';
 import listUsersService from '../../api/listUsersService';
@@ -28,7 +29,7 @@ describe('StacksContainer', () => {
       const props = {
         store,
         typeName: 'Notebook',
-        containerType: 'ANALYSIS',
+        containerType: NOTEBOOK_CATEGORY,
         dialogAction: 'ACTION',
         formStateName: 'createNotebook',
         PrivateComponent: () => {},
@@ -86,8 +87,8 @@ describe('StacksContainer', () => {
     const stacks = {
       fetching: false,
       value: [
-        { prop: 'prop1', projectKey: 'projtest', type: JUPYTER, category: 'ANALYSIS' },
-        { prop: 'prop2', projectKey: 'projtest', type: JUPYTER, category: 'ANALYSIS' },
+        { prop: 'prop1', projectKey: 'projtest', type: JUPYTER, category: NOTEBOOK_CATEGORY },
+        { prop: 'prop2', projectKey: 'projtest', type: JUPYTER, category: NOTEBOOK_CATEGORY },
       ],
     };
 
@@ -109,7 +110,7 @@ describe('StacksContainer', () => {
     const generateProps = () => ({
       stacks,
       typeName: 'Notebook',
-      containerType: 'ANALYSIS',
+      containerType: NOTEBOOK_CATEGORY,
       dialogAction: 'ACTION',
       editDialogAction: 'EDIT_DIALOG_ACTION',
       formStateName: 'createNotebook',
