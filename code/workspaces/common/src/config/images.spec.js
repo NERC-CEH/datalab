@@ -21,7 +21,7 @@ describe('siteList', () => {
 
 describe('imageCategory', () => {
   it('returns category of image', () => {
-    expect(imageCategory('dask')).toEqual(undefined);
+    expect(imageCategory('dask')).toEqual('INFRASTRUCTURE');
     expect(imageCategory('minio')).toEqual('INFRASTRUCTURE');
     expect(imageCategory('jupyter')).toEqual('ANALYSIS');
     expect(imageCategory('nbviewer')).toEqual('PUBLISH');
