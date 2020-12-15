@@ -1,4 +1,4 @@
-import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
+import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import createUserRoles from './createUserRoles';
 
 describe('createUserRoles', () => {
@@ -42,13 +42,13 @@ describe('createUserRoles', () => {
       value: [
         {
           projectKey,
-          category: ANALYSIS,
+          category: NOTEBOOK_CATEGORY,
           name: 'notebook name',
           users: [userId],
         },
         {
           projectKey,
-          category: PUBLISH,
+          category: SITE_CATEGORY,
           name: 'site name',
           users: [userId],
         },

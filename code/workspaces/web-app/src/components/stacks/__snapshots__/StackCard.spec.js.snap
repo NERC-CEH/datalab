@@ -8,12 +8,7 @@ exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
     className="StackCard-imageDiv-2"
   >
     <img
-      alt={
-        Object {
-          "description": "Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.",
-          "logo": "jupyter-logo.svg",
-        }
-      }
+      alt="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
       className="StackCard-cardImage-8"
       src="jupyter-logo.svg"
     />
@@ -85,12 +80,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     className="StackCard-imageDiv-2"
   >
     <img
-      alt={
-        Object {
-          "description": "Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.",
-          "logo": "zeppelin-logo.svg",
-        }
-      }
+      alt="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
       className="StackCard-cardImage-8"
       src="zeppelin-logo.svg"
     />
@@ -234,12 +224,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
     className="StackCard-imageDiv-2"
   >
     <img
-      alt={
-        Object {
-          "description": "Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.",
-          "logo": "jupyter-logo.svg",
-        }
-      }
+      alt="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
       className="StackCard-cardImage-8"
       src="jupyter-logo.svg"
     />

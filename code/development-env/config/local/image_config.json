@@ -22,7 +22,7 @@
   },
   "types": {
     "dask": {
-      "type": "INFRASTRUCTURE",
+      "category": "INFRASTRUCTURE",
       "versions": [
         {
           "image": "daskdev/dask:2.30.0"

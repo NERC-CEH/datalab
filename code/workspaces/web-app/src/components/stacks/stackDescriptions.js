@@ -18,6 +18,7 @@ const rshinyDescription = 'Shiny is an R package that makes it easy to build int
 const nbviewerDescription = 'NBViewer is a simple way to share notebooks. Any Jupyter notebook can be served as a web page.';
 const projectDescription = 'A project lets users share information';
 
+// NOTE: All other stack details should come from 'src/config/images'
 export default {
   [JUPYTER]: { description: jupyterDescription, logo: jupyterLogo },
   [JUPYTERLAB]: { description: jupyterlabDescription, logo: jupyterlabLogo },

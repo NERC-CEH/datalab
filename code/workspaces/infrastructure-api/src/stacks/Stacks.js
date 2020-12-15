@@ -1,4 +1,5 @@
 import { find } from 'lodash';
+import { stackTypes } from 'common';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
@@ -10,37 +11,37 @@ export const SELECTOR_LABEL = 'user-pod';
 // NOTE: All other stack details should come from 'common/src/config/images'
 const STACKS = Object.freeze({
   JUPYTER: {
-    name: 'jupyter',
+    type: stackTypes.JUPYTER,
     create: jupyterStack.createJupyterNotebook,
     delete: jupyterStack.deleteJupyterNotebook,
   },
   JUPYTERLAB: {
-    name: 'jupyterlab',
+    type: stackTypes.JUPYTERLAB,
     create: jupyterStack.createJupyterNotebook,
     delete: jupyterStack.deleteJupyterNotebook,
   },
   ZEPPELIN: {
-    name: 'zeppelin',
+    type: stackTypes.ZEPPELIN,
     create: zeppelinStack.createZeppelinStack,
     delete: zeppelinStack.deleteZeppelinStack,
   },
   RSTUDIO: {
-    name: 'rstudio',
+    type: stackTypes.RSTUDIO,
     create: rstudioStack.createRStudioStack,
     delete: rstudioStack.deleteRStudioStack,
   },
   RSHINY: {
-    name: 'rshiny',
+    type: stackTypes.RSHINY,
     create: rshinyStack.createRShinyStack,
     delete: rshinyStack.deleteRShinyStack,
   },
   NBVIEWER: {
-    name: 'nbviewer',
+    type: stackTypes.NBVIEWER,
     create: nbviewerStack.createNbViewerStack,
     delete: nbviewerStack.deleteNbViewerStack,
   },
 });
 
-const getStack = name => find(STACKS, ['name', name]);
+const getStack = type => find(STACKS, ['type', type]);
 
 export default { getStack };

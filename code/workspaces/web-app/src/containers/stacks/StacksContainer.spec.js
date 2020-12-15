@@ -86,8 +86,8 @@ describe('StacksContainer', () => {
     const stacks = {
       fetching: false,
       value: [
-        { prop: 'prop1', projectKey: 'projtest', type: JUPYTER },
-        { prop: 'prop2', projectKey: 'projtest', type: JUPYTER },
+        { prop: 'prop1', projectKey: 'projtest', type: JUPYTER, category: 'ANALYSIS' },
+        { prop: 'prop2', projectKey: 'projtest', type: JUPYTER, category: 'ANALYSIS' },
       ],
     };
 

@@ -1,4 +1,4 @@
-import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
+import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import { permissionTypes } from 'common';
 
 const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_ADMIN_ROLE, CATALOGUE_PUBLISHER_ROLE, CATALOGUE_EDITOR_ROLE,
@@ -42,8 +42,8 @@ function createUserRoles(usersProjectRoles, stacksArray, dataStorageArray) {
       projectAdmin: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, PROJECT_ADMIN_ROLE),
       projectUser: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, PROJECT_USER_ROLE),
       projectViewer: filterMapProjectRoleToProjectKeys(userProjectRoles.projectRoles, PROJECT_VIEWER_ROLE),
-      siteOwner: filterMapStacksToUserOwnedStacks(stacksArray.value, userProjectRoles.userId, PUBLISH),
-      notebookOwner: filterMapStacksToUserOwnedStacks(stacksArray.value, userProjectRoles.userId, ANALYSIS),
+      siteOwner: filterMapStacksToUserOwnedStacks(stacksArray.value, userProjectRoles.userId, SITE_CATEGORY),
+      notebookOwner: filterMapStacksToUserOwnedStacks(stacksArray.value, userProjectRoles.userId, NOTEBOOK_CATEGORY),
       storageAccess: filterMapStorageToUserAccessedStorage(dataStorageArray.value, userProjectRoles.userId),
     };
   });
