@@ -5,6 +5,7 @@ import { stackTypes } from 'common';
 import rstudioTokenService from './login/rstudioTokenService';
 import vault from './vault/vault';
 
+// NOTE: All other stack details should come from 'common/src/config/images'
 const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
 const RSTUDIO_USERNAME = 'datalab';
 

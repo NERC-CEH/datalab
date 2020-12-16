@@ -1,7 +1,7 @@
 {
   "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
   "categories": {
-    "NOTEBOOK": {
+    "ANALYSIS": {
       "userActions": {
         "share": true,
         "edit": true,
@@ -10,7 +10,7 @@
         "logs": false
       }
     },
-    "SITE": {
+    "PUBLISH": {
       "userActions": {
         "share": true,
         "edit": true,
@@ -23,7 +23,7 @@
   },
   "types": {
     "dask": {
-      "type": "INFRASTRUCTURE",
+      "category": "INFRASTRUCTURE",
       "versions": [
         {
           "image": "daskdev/dask:2.30.0"
@@ -32,7 +32,7 @@
     },
     "jupyter": {
       "displayName": "Jupyter",
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "versions": [
         {
           "displayName": "Dask 2.30.0 support",
@@ -42,7 +42,7 @@
     },
     "jupyterlab": {
       "displayName": "JupyterLab",
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "versions": [
         {
           "displayName": "Dask 2.30.0 support",
@@ -61,7 +61,7 @@
     },
     "nbviewer": {
       "displayName": "NBViewer",
-      "category": "SITE",
+      "category": "PUBLISH",
       "versions": [
         {
           "displayName": "Latest",
@@ -71,7 +71,7 @@
     },
     "rshiny": {
       "displayName": "RShiny",
-      "category": "SITE",
+      "category": "PUBLISH",
       "userSelectableVersion": true,
       "versions": [
         {
@@ -90,7 +90,7 @@
     },
     "rstudio": {
       "displayName": "RStudio",
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "userSelectableVersion": true,
       "versions": [
         {
@@ -118,7 +118,7 @@
     },
     "zeppelin": {
       "displayName": "Zepplin",
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "versions": [
         {
           "displayName": "0.7.2.7",

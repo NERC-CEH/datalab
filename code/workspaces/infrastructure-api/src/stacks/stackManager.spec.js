@@ -19,7 +19,7 @@ stackRepository.default = {
 
 const StackResolve = {
   name: 'expectedStackName',
-  category: 'expectedStackCatName',
+  category: 'ANALYSIS',
   create: vals => Promise.resolve(vals),
   delete: vals => Promise.resolve(vals),
 };
@@ -31,7 +31,7 @@ const params = {
   },
   projectKey: 'project',
   name: 'expectedName',
-  type: 'expectedType',
+  type: 'jupyter',
   another: 'field',
 };
 
@@ -76,7 +76,7 @@ describe('Stack Controller', () => {
       const response = await stackManager.restartStack(params);
 
       // Assert
-      expect(restartDeploymentMock).toBeCalledWith('expectedType-expectedName', 'project');
+      expect(restartDeploymentMock).toBeCalledWith('jupyter-expectedName', 'project');
       expect(response).toEqual('success');
     });
   });

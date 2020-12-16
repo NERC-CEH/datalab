@@ -90,7 +90,9 @@ const resolvers = {
   },
 
   Stack: {
+    id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     redirectUrl: obj => stackUrlService(obj.projectKey, obj),
+    category: obj => (obj.category ? obj.category.toUpperCase() : null),
   },
 
   Project: {

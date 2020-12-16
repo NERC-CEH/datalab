@@ -43,7 +43,7 @@ exports[`stackService loadStacks should build the correct query and unpack the r
 "
     GetStacks($projectKey: String!) {
       stacks {
-        id, projectKey, displayName, name, users, type, description, status, shared, visible, version
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version
       }
     }"
 `;

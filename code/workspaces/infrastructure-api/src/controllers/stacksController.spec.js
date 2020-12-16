@@ -74,7 +74,7 @@ describe('Stacks controller', () => {
 
   describe('listByCategory', () => {
     beforeEach(() => createValidatedRequest(
-      { category: 'publish', projectKey: 'expectedProject' },
+      { category: 'PUBLISH', projectKey: 'expectedProject' },
       stacksController.withCategoryValidator,
     ));
 

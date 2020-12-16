@@ -1,57 +1,47 @@
-import { filter, find } from 'lodash';
+import { find } from 'lodash';
+import { stackTypes } from 'common';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
 import rshinyStack from './rshinyStack';
 import nbviewerStack from './nbviewerStack';
 
-export const ANALYSIS = 'analysis';
-export const PUBLISH = 'publish';
-
 export const SELECTOR_LABEL = 'user-pod';
 
-export const STACKS = Object.freeze({
+// NOTE: All other stack details should come from 'common/src/config/images'
+const STACKS = Object.freeze({
   JUPYTER: {
-    name: 'jupyter',
-    category: ANALYSIS,
+    type: stackTypes.JUPYTER,
     create: jupyterStack.createJupyterNotebook,
     delete: jupyterStack.deleteJupyterNotebook,
   },
   JUPYTERLAB: {
-    name: 'jupyterlab',
-    category: ANALYSIS,
+    type: stackTypes.JUPYTERLAB,
     create: jupyterStack.createJupyterNotebook,
     delete: jupyterStack.deleteJupyterNotebook,
   },
   ZEPPELIN: {
-    name: 'zeppelin',
-    category: ANALYSIS,
+    type: stackTypes.ZEPPELIN,
     create: zeppelinStack.createZeppelinStack,
     delete: zeppelinStack.deleteZeppelinStack,
   },
   RSTUDIO: {
-    name: 'rstudio',
-    category: ANALYSIS,
+    type: stackTypes.RSTUDIO,
     create: rstudioStack.createRStudioStack,
     delete: rstudioStack.deleteRStudioStack,
   },
   RSHINY: {
-    name: 'rshiny',
-    category: PUBLISH,
+    type: stackTypes.RSHINY,
     create: rshinyStack.createRShinyStack,
     delete: rshinyStack.deleteRShinyStack,
   },
   NBVIEWER: {
-    name: 'nbviewer',
-    category: PUBLISH,
+    type: stackTypes.NBVIEWER,
     create: nbviewerStack.createNbViewerStack,
     delete: nbviewerStack.deleteNbViewerStack,
   },
 });
 
-const getStack = name => find(STACKS, ['name', name]);
+const getStack = type => find(STACKS, ['type', type]);
 
-const getNamesByCategory = category => filter(STACKS, ['category', category])
-  .map(stacks => stacks.name);
-
-export default { getStack, getNamesByCategory };
+export default { getStack };

@@ -3,7 +3,7 @@
 exports[`getNotebookInfo returns the correct notebookInfo 1`] = `
 Object {
   "jupyter": Object {
-    "category": "NOTEBOOK",
+    "category": "ANALYSIS",
     "displayName": "Jupyter",
     "versions": Array [
       Object {
@@ -13,7 +13,7 @@ Object {
     ],
   },
   "jupyterlab": Object {
-    "category": "NOTEBOOK",
+    "category": "ANALYSIS",
     "displayName": "JupyterLab",
     "versions": Array [
       Object {
@@ -23,7 +23,7 @@ Object {
     ],
   },
   "rstudio": Object {
-    "category": "NOTEBOOK",
+    "category": "ANALYSIS",
     "displayName": "RStudio",
     "userSelectableVersion": true,
     "versions": Array [
@@ -41,7 +41,7 @@ Object {
     ],
   },
   "zeppelin": Object {
-    "category": "NOTEBOOK",
+    "category": "ANALYSIS",
     "displayName": "Zepplin",
     "versions": Array [
       Object {
@@ -57,7 +57,7 @@ Object {
 exports[`getSiteInfo returns the correct siteInfo 1`] = `
 Object {
   "nbviewer": Object {
-    "category": "SITE",
+    "category": "PUBLISH",
     "displayName": "NBViewer",
     "versions": Array [
       Object {
@@ -67,7 +67,7 @@ Object {
     ],
   },
   "rshiny": Object {
-    "category": "SITE",
+    "category": "PUBLISH",
     "displayName": "RShiny",
     "userActionOverrides": Object {
       "logs": true,
@@ -121,8 +121,7 @@ Object {
 exports[`imageConfig returns the correct configuration 1`] = `
 Object {
   "categories": Object {
-    "INFRASTRUCTURE": Object {},
-    "NOTEBOOK": Object {
+    "ANALYSIS": Object {
       "userActions": Object {
         "delete": true,
         "edit": true,
@@ -131,7 +130,8 @@ Object {
         "share": true,
       },
     },
-    "SITE": Object {
+    "INFRASTRUCTURE": Object {},
+    "PUBLISH": Object {
       "userActions": Object {
         "delete": true,
         "edit": true,
@@ -144,7 +144,7 @@ Object {
   "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
   "types": Object {
     "dask": Object {
-      "type": "INFRASTRUCTURE",
+      "category": "INFRASTRUCTURE",
       "versions": Array [
         Object {
           "image": "daskdev/dask:2.30.0",
@@ -152,7 +152,7 @@ Object {
       ],
     },
     "jupyter": Object {
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "displayName": "Jupyter",
       "versions": Array [
         Object {
@@ -162,7 +162,7 @@ Object {
       ],
     },
     "jupyterlab": Object {
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "displayName": "JupyterLab",
       "versions": Array [
         Object {
@@ -181,7 +181,7 @@ Object {
       ],
     },
     "nbviewer": Object {
-      "category": "SITE",
+      "category": "PUBLISH",
       "displayName": "NBViewer",
       "versions": Array [
         Object {
@@ -191,7 +191,7 @@ Object {
       ],
     },
     "rshiny": Object {
-      "category": "SITE",
+      "category": "PUBLISH",
       "displayName": "RShiny",
       "userActionOverrides": Object {
         "logs": true,
@@ -210,7 +210,7 @@ Object {
       ],
     },
     "rstudio": Object {
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "displayName": "RStudio",
       "userSelectableVersion": true,
       "versions": Array [
@@ -238,7 +238,7 @@ Object {
       ],
     },
     "zeppelin": Object {
-      "category": "NOTEBOOK",
+      "category": "ANALYSIS",
       "displayName": "Zepplin",
       "versions": Array [
         Object {

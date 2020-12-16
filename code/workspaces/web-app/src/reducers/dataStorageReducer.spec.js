@@ -1,8 +1,9 @@
-import { GLUSTERFS_VOLUME } from 'common/src/stackTypes';
 import dataStorageReducer from './dataStorageReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
 import { LOAD_DATASTORAGE_ACTION } from '../actions/dataStorageActions';
 import { GET_ALL_PROJECTS_AND_RESOURCES_ACTION } from '../actions/projectActions';
+
+const GLUSTERFS_VOLUME = 'glusterfs';
 
 const currentValue = [
   { projectKey: 'proj1', type: GLUSTERFS_VOLUME, store: 'proj1.storeA' },

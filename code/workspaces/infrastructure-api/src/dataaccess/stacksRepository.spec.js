@@ -33,8 +33,8 @@ describe('stacksRepository', () => {
     expect(mockDatabase().user()).toBe('username');
   });
 
-  it('getAllByCategory returns expected snapshot', () => stacksRepository.getAllByCategory(project, user, 'analysis').then((stacks) => {
-    expect(mockDatabase().query()).toEqual({ category: 'analysis' });
+  it('getAllByCategory returns expected snapshot', () => stacksRepository.getAllByCategory(project, user, 'expectedCategory').then((stacks) => {
+    expect(mockDatabase().category()).toBe('expectedCategory');
     expect(mockDatabase().project()).toBe('expectedProject');
     expect(mockDatabase().user()).toBe('username');
     expect(stacks).toMatchSnapshot();

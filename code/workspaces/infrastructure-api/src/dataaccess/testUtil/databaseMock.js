@@ -32,6 +32,10 @@ function createDatabaseMock(items, state) {
       invocations.params = params;
       return createDatabaseMock(entity, invocations)();
     },
+    filterByCategory(category) {
+      invocations.category = category;
+      return createDatabaseMock(items, invocations)();
+    },
     filterByProject(projectKey) {
       invocations.projectKey = projectKey;
       return createDatabaseMock(items, invocations)();
@@ -75,6 +79,7 @@ function createDatabaseMock(items, state) {
     entity: () => invocations.entity,
     params: () => invocations.params,
     project: () => invocations.projectKey,
+    category: () => invocations.category,
     user: () => invocations.user,
     clear: () => { invocations = new InvocationState(); },
   });

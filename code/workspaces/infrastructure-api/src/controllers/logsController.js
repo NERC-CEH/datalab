@@ -1,18 +1,17 @@
 import { service } from 'service-chassis';
 import { check, matchedData } from 'express-validator';
+import { SITE_CATEGORY } from 'common/src/config/images';
 import logsApi from '../kubernetes/logsApi';
 import logger from '../config/logger';
 import podsApi from '../kubernetes/podsApi';
 import stackRepository from '../dataaccess/stacksRepository';
 
 // Logs are only exposed for sites initially, not notebooks
-const CATEGORY = 'publish';
-
 async function getByName(request, response) {
   const { user } = request;
   const { projectKey, name } = matchedData(request);
 
-  return stackRepository.getOneByNameUserAndCategory(projectKey, user, name, CATEGORY)
+  return stackRepository.getOneByNameUserAndCategory(projectKey, user, name, SITE_CATEGORY)
     .then(stack => podsApi.getPodName(`${stack[0].type}-${stack[0].name}`, stack[0].projectKey))
     .then(podName => logsApi.readNamespacedPodLog(projectKey, podName))
     .then(logs => response.send(logs))

@@ -1,15 +1,13 @@
 import { check, matchedData, sanitize } from 'express-validator';
+import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
-import { mapHandleId } from '../dataaccess/renameIdHandler';
-import { ANALYSIS, PUBLISH } from '../stacks/Stacks';
 
 const TYPE = 'stacks';
 
 function listStacks(request, response) {
   const { user } = request;
   return stackRepository.getAllByUser(user)
-    .then(mapHandleId)
     .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving', TYPE, undefined));
 }
@@ -33,7 +31,6 @@ function listByProjectExec(request, response) {
   const { user } = request;
   const params = matchedData(request);
   return stackRepository.getAllByProject(params.projectKey, user)
-    .then(mapHandleId)
     .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving by project for', TYPE, undefined));
 }
@@ -43,7 +40,6 @@ function listByCategoryExec(request, response) {
   const params = matchedData(request);
 
   return stackRepository.getAllByCategory(params.projectKey, user, params.category)
-    .then(mapHandleId)
     .then(stacks => response.send(stacks))
     .catch(controllerHelper.handleError(response, 'retrieving by category for', TYPE, undefined));
 }
@@ -53,7 +49,6 @@ function listByMountExec(request, response) {
   const params = matchedData(request);
 
   return stackRepository.getAllByVolumeMount(params.projectKey, user, params.mount)
-    .then(mapHandleId)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching mount for', TYPE, undefined));
 }
@@ -68,7 +63,7 @@ const withCategoryValidator = [
   ...withProjectValidator,
   check('category', 'category must match known type')
     .exists()
-    .isIn([ANALYSIS, PUBLISH])
+    .isIn([NOTEBOOK_CATEGORY, SITE_CATEGORY])
     .trim(),
   sanitize(),
 ];

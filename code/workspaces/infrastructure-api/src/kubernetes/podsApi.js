@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { get } from 'lodash';
+import { stackList } from 'common/src/config/images';
 import config from '../config/config';
-import { STACKS, SELECTOR_LABEL } from '../stacks/Stacks';
-
-const stackNames = Object.values(STACKS).map(stack => stack.name);
+import { SELECTOR_LABEL } from '../stacks/Stacks';
 
 const API_BASE = config.get('kubernetesApi');
-
 const PODS_URL = `${API_BASE}/api/v1/pods`;
 
 function getPods() {
@@ -15,9 +13,9 @@ function getPods() {
     .then(handlePodlist);
 }
 
-function getStacks() {
-  return getPods()
-    .then(pods => pods.filter(({ type }) => stackNames.includes(type)));
+async function getStacks() {
+  const pods = await getPods();
+  return pods.filter(({ type }) => stackList().includes(type));
 }
 
 async function getPodName(deploymentName, namespaceName) {
