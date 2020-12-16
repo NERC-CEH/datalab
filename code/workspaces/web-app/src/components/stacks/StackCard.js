@@ -212,7 +212,7 @@ function generateGetImage(classes, typeName) {
     const initial = stackDescription && stackDescription.initial && getDisplayName(stack).charAt(0);
 
     if (logoImage) {
-      return <img className={classes.cardImage} src={logoImage} alt={stackDescription.description} />;
+      return <img className={classes.cardImage} src={logoImage} alt={`${stack.type} logo`} />;
     }
 
     if (initial) {
