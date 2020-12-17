@@ -43,7 +43,7 @@ const HeroBar = ({ classes }) => {
   const signUp = () => {
     const auth = getAuth();
     if (auth.signUpConfig().selfService) {
-      auth.login();
+      auth.selfServiceSignUp();
     } else {
       history.push('/sign-up');
     }
