@@ -1,26 +1,15 @@
-const cloneUser = user => ({
-  ...user,
-  projectRoles: [...user.projectRoles],
-});
 
-const wrapUser = user => ({
-  ...user,
-  toObject: () => user,
-});
-
-function createDatabaseMock(users) {
-  const documents = users.map(cloneUser).map(wrapUser);
+function createDatabaseMock(items) {
   let lastInvocation;
-  let findOneReturn;
 
   return () => ({
     find: (query) => {
       lastInvocation = { query };
-      return { exec: () => Promise.resolve(documents) };
+      return { exec: () => Promise.resolve(items) };
     },
     findOne: (query) => {
       lastInvocation = { query };
-      return { exec: () => Promise.resolve(findOneReturn) };
+      return { exec: () => Promise.resolve(items[0]) };
     },
     findOneAndUpdate: (query, entity, params) => {
       lastInvocation = { query, entity, params };
@@ -32,18 +21,20 @@ function createDatabaseMock(users) {
     },
     exists: (query) => {
       lastInvocation = { query };
-      return Promise.resolve(documents.length > 0);
+      return Promise.resolve(items.length > 0);
     },
     create: (entity) => {
-      const document = wrapUser(cloneUser(entity));
+      const wrappedEntity = {
+        ...entity,
+        toObject: () => entity,
+      };
       lastInvocation = { entity };
-      return Promise.resolve(document);
+      return Promise.resolve(wrappedEntity);
     },
     invocation: () => lastInvocation,
     query: () => lastInvocation.query,
     entity: () => lastInvocation.entity,
     params: () => lastInvocation.params,
-    setFindOneReturn: (user) => { findOneReturn = user ? wrapUser(cloneUser(user)) : undefined; },
     clear: () => { lastInvocation = undefined; },
   });
 }

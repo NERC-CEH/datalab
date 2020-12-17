@@ -26,10 +26,7 @@ function addDefaults(roles) {
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    // Need to add this user.  Make the first ever user an instanceAdmin.
-    const allRoles = await UserRoles().find().exec();
-    const instanceAdmin = allRoles.length === 0;
-    roles = await addRecordForNewUser(userId, userName, [], instanceAdmin);
+    roles = await addRecordForNewUser(userId, userName, []);
   }
 
   return addDefaults(roles);
@@ -95,15 +92,12 @@ async function getProjectUsers(projectKey) {
   return projectUsers.map(addDefaults);
 }
 
-function addRecordForNewUser(userId, userName, projectRoles, instanceAdmin) {
+function addRecordForNewUser(userId, userName, projectRoles) {
   const user = {
     userId,
     userName,
     projectRoles,
   };
-  if (instanceAdmin) {
-    user.instanceAdmin = true;
-  }
   return UserRoles().create(user);
 }
 
