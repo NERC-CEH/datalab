@@ -9,8 +9,8 @@ class Auth {
     this.authConfig = authConfig;
     this.oidcAsync = promisifyOidcInit;
     this.oidcInit = oidcInit;
+    this.signUpConfig = this.signUpConfig.bind(this);
     this.login = this.login.bind(this);
-    this.signUp = this.signUp.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.renewSession = this.renewSession.bind(this);
@@ -19,14 +19,13 @@ class Auth {
     this.getCurrentSession = this.getCurrentSession.bind(this);
   }
 
+  signUpConfig() {
+    return this.authConfig.signUp;
+  }
+
   login() {
     // Re-direct to login screen
     this.oidcInit.signinRedirect({ state: { appRedirect: window.location.pathname } });
-  }
-
-  signUp() {
-    // Re-direct to login screen
-    this.oidcInit.signinRedirect();
   }
 
   logout() {
@@ -120,7 +119,7 @@ const initialiseAuth = (authConfig) => {
     Oidc.Log.level = Oidc.Log.INFO;
 
     const userManagerConfig = {
-      ...authConfig,
+      ...authConfig.oidc.userManager,
       userStore: new Oidc.WebStorageStateStore(),
     };
 

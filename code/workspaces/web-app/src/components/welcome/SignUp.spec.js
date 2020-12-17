@@ -1,23 +1,21 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import HeroBar from './HeroBar';
+import SignUp from './SignUp';
 import getAuth from '../../auth/auth';
 
 jest.mock('../../auth/auth');
 getAuth.mockImplementation(() => ({
-  selfService: jest.fn().mockReturnValue({ selfService: true }),
-  login: jest.fn(),
-  signUp: jest.fn(),
+  signUpConfig: jest.fn().mockReturnValue({ requestEmail: 'test@test.com' }),
 }));
 
-describe('HeroBar', () => {
+describe('SignUp', () => {
   let shallow;
 
   beforeEach(() => {
-    shallow = createShallow({ dive: true });
+    shallow = createShallow();
   });
 
   it('renders correct snapshot', () => {
-    expect(shallow(<HeroBar />)).toMatchSnapshot();
+    expect(shallow(<SignUp />)).toMatchSnapshot();
   });
 });

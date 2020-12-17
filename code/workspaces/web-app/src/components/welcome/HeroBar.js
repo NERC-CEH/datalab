@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 import datalabsLogo from '../../assets/images/datalabs-vert.png';
 import getAuth from '../../auth/auth';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
@@ -36,16 +37,29 @@ const styles = theme => ({
 
 const tagLine = 'DataLabs provides you with tools to power your research and share the results';
 
-const HeroBar = ({ classes }) => (
+const HeroBar = ({ classes }) => {
+  const history = useHistory();
+
+  const signUp = () => {
+    const auth = getAuth();
+    if (auth.signUpConfig().selfService) {
+      auth.login();
+    } else {
+      history.push('/sign-up');
+    }
+  };
+
+  return (
   <div className={classes.bar}>
     <img className={classes.logo} src={datalabsLogo} alt="DataLabs-Logo" />
     <Typography className={classes.tagLine} variant="h6">{tagLine}</Typography>
     <div className={classes.buttons}>
-      <PagePrimaryActionButton className={classes.button} color="primary" onClick={getAuth().signUp}>Sign Up</PagePrimaryActionButton>
+      <PagePrimaryActionButton className={classes.button} color="primary" onClick={signUp}>Sign Up</PagePrimaryActionButton>
       <PrimaryActionButton className={classes.button} color="primary" onClick={getAuth().login}>Log In</PrimaryActionButton>
     </div>
   </div>
-);
+  );
+};
 
 HeroBar.propTypes = {
   classes: PropTypes.object.isRequired,

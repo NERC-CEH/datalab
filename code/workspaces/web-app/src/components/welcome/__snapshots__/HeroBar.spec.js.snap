@@ -21,7 +21,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
     <PagePrimaryActionButton
       className="HeroBar-button-5"
       color="primary"
-      onClick={[MockFunction]}
+      onClick={[Function]}
     >
       Sign Up
     </PagePrimaryActionButton>

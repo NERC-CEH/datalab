@@ -5,11 +5,10 @@ const getAuthConfig = () => axios
   .then(({ data }) => {
     // Overwrite default configuration for running locally/development purposes
     if (window.location.hostname.match(/localhost/)) {
-      return {
-        ...data,
-        silent_redirect_uri: `${window.location.origin}/silent_callback`,
-        redirect_uri: `${window.location.origin}/callback`,
-      };
+      const localData = data;
+      localData.oidc.userManager.silent_redirect_uri = `${window.location.origin}/silent_callback`;
+      localData.oidc.userManager.redirect_uri = `${window.location.origin}/callback`;
+      return localData;
     }
 
     return data;
