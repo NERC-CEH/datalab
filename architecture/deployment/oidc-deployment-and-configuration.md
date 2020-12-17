@@ -2,7 +2,7 @@
 
 In order for DataLabs to function there must be an OpenID connect (OIDC) compliant authentication provider (e.g Auth0, Keycloak, AWS Cognito) which will either
 store user information directly or serve to re-direct users to a different
-authentication provider which in turn will allow a user to recieve an identity
+authentication provider which in turn will allow a user to receive an identity
 token.
 
 All providers are different and offer various advantages. There are multiple
@@ -138,9 +138,30 @@ used;
 | OIDC_PROVIDER_AUDIENCE | This will be a value which is custom to the DataLabs deployment and will be used as the audience parameter on internal tokens that the authentication service generates | https://datalabs.domain/api |
 
 
-Not all providers offer a `${OIDC_PROVIDER_DOMAIN}/.well-known/openid-configuration` endpoint. If the provider you are using does not, two additional paramters must be specified for the necessary configuration information.
+Not all providers offer a `${OIDC_PROVIDER_DOMAIN}/.well-known/openid-configuration` endpoint. If the provider you are using does not, two additional parameters must be specified for the necessary configuration information.
 
 | Name                      | Description                                                | Example (and default)  |
 |---------------------------|------------------------------------------------------------|------------------------|
 | OIDC_OAUTH_TOKEN_ENDPOINT | Endpoint from the BASE URL where oauth tokens can be found | /oauth/token           |
 | OIDC_JWKS_ENDPOINT        | Endpoint from the BASE URL where JWKs can be found         | /.well-known/jwks.json |
+
+### Self-service sign-up
+Depending on your identity provider, self-service sign-up may or may not be possible.
+The appropriate corresponding behaviour is configured in the [configmap](https://github.com/NERC-CEH/datalab-k8s-manifests/blob/master/templates/datalab/oidc-configmap.template.yml).
+
+**Self-service is available**
+```yaml
+  "signUp": {
+    "selfService": true
+  }
+```
+In this case, the 'Sign Up' button of DataLabs will redirect to the identity provider's sign-in page.
+
+**Self-service is not available**
+```yaml
+  "signUp": {
+    "selfService": false,
+    "requestEmail": "appsupport@ceh.ac.uk"
+  }
+```
+In this case, the 'Sign Up' button of DataLabs will redirect to a page asking the user to request an account by emailing the `requestEmail` address.
