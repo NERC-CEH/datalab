@@ -26,10 +26,7 @@ function addDefaults(roles) {
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    // Need to add this user.  Make the first ever user an instanceAdmin.
-    const allRoles = await UserRoles().find().exec();
-    const instanceAdmin = allRoles.length === 0;
-    roles = await addRecordForNewUser(userId, userName, [], instanceAdmin);
+    roles = await addRecordForNewUser(userId, userName);
   }
 
   return addDefaults(roles);
@@ -95,16 +92,22 @@ async function getProjectUsers(projectKey) {
   return projectUsers.map(addDefaults);
 }
 
-function addRecordForNewUser(userId, userName, projectRoles, instanceAdmin) {
+async function addRecordForNewUser(userId, userName) {
+  const allRoles = await UserRoles().find().exec();
+  if (allRoles.filter(roles => roles.userId === userId).length > 0) {
+    throw new Error(`Creating new user for ${userId} ${userName}, but they already exist`);
+  }
   const user = {
     userId,
     userName,
-    projectRoles,
+    projectRoles: [],
   };
-  if (instanceAdmin) {
+  if (allRoles.length === 0) {
+    // Make the first ever user an instanceAdmin.
     user.instanceAdmin = true;
   }
-  return UserRoles().create(user);
+  const roles = await UserRoles().create(user);
+  return roles;
 }
 
 async function setInstanceAdmin(userId, instanceAdmin) {
