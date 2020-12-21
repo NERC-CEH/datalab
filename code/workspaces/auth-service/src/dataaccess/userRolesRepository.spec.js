@@ -162,6 +162,61 @@ describe('userRolesRepository', () => {
     });
   });
 
+  describe('addRecordForNewUser', () => {
+    beforeEach(() => {
+      mockDatabase = databaseMock(testUserRoles());
+      database.getModel = mockDatabase;
+      mockDatabase().clear();
+    });
+
+    it('throws an error if the user already exists', async () => {
+      await expect(userRoleRepository.addRecordForNewUser('uid1', 'user1')).rejects.toThrow(new Error('Creating new user for uid1 user1, but they already exist'));
+    });
+
+    it('adds an empty record for a new user that does not exist', async () => {
+      // Act
+      const userRoles = await userRoleRepository.addRecordForNewUser('uid999', 'user999');
+
+      // Assert
+      expect(mockDatabase().invocation()).toEqual({
+        // create a user
+        query: undefined,
+        entity: { userId: 'uid999', userName: 'user999', projectRoles: [] },
+        params: undefined,
+      });
+      expect(unwrapUser(userRoles)).toEqual({
+        // created roles
+        userId: 'uid999',
+        userName: 'user999',
+        projectRoles: [],
+      });
+    });
+
+    it('adds an instanceAdmin record for a new user when none exist', async () => {
+      // Arrange
+      mockDatabase = databaseMock([]);
+      database.getModel = mockDatabase;
+
+      // Act
+      const userRoles = await userRoleRepository.addRecordForNewUser('uid999', 'user999');
+
+      // Assert
+      expect(mockDatabase().invocation()).toEqual({
+        // create a user
+        query: undefined,
+        entity: { userId: 'uid999', userName: 'user999', projectRoles: [], instanceAdmin: true },
+        params: undefined,
+      });
+      expect(unwrapUser(userRoles)).toEqual({
+        // created roles
+        userId: 'uid999',
+        userName: 'user999',
+        projectRoles: [],
+        instanceAdmin: true,
+      });
+    });
+  });
+
   describe('getRoles', () => {
     beforeEach(() => {
       mockDatabase = databaseMock(testUserRoles());
@@ -169,7 +224,7 @@ describe('userRolesRepository', () => {
       mockDatabase().clear();
     });
 
-    it('getRoles returns expected user', async () => {
+    it('returns expected user', async () => {
       // Arrange
       mockDatabase().setFindOneReturn(user1);
 
@@ -190,7 +245,7 @@ describe('userRolesRepository', () => {
       });
     });
 
-    it('should add an empty record for a user that does not have one when retrieving roles', async () => {
+    it('adds an empty record for a user that does not have one when retrieving roles', async () => {
       // Act
       const userRoles = await userRoleRepository.getRoles('uid999', 'user999');
 
@@ -211,7 +266,7 @@ describe('userRolesRepository', () => {
       });
     });
 
-    it('should create an instanceAdmin for the first user', async () => {
+    it('creates an instanceAdmin for the first user', async () => {
       // Arrange
       mockDatabase = databaseMock([]);
       database.getModel = mockDatabase;

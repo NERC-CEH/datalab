@@ -179,4 +179,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { combineRoles, getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };
+export default { combineRoles, getRoles, addRecordForNewUser, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };
