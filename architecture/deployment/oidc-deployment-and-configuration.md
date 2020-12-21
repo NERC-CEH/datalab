@@ -66,7 +66,7 @@ of different OIDC providers and associated configuration.
       "scope": "openid profile",
       "authority": "https://example.eu.auth0.com",
       "automaticSilentRenew": true,
-      "accessTokenExpiringNotificationTime": "600",
+      "accessTokenExpiringNotificationTime": 600,
       "filterProtocolClaims": true,
       "loadUserInfo": true,
       "extraQueryParams": {
@@ -95,7 +95,7 @@ of different OIDC providers and associated configuration.
       "scope": "openid profile email",
       "authority": "http://keycloak:8080/auth/realms/DataLabs",
       "automaticSilentRenew": true,
-      "accessTokenExpiringNotificationTime": "600",
+      "accessTokenExpiringNotificationTime": 600,
       "filterProtocolClaims": true,
       "loadUserInfo": true,
       "metadata": {
