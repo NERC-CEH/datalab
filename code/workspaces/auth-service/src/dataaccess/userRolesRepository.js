@@ -1,6 +1,7 @@
 import { permissionTypes } from 'common';
 import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
+import logger from 'winston';
 import database from '../config/database';
 
 const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_USER_ROLE } = permissionTypes;
@@ -104,6 +105,7 @@ async function addRecordForNewUser(userId, userName) {
   };
   if (allRoles.length === 0) {
     // Make the first ever user an instanceAdmin.
+    logger.info(`${userName} is first user, so making instanceAdmin`);
     user.instanceAdmin = true;
   }
   const roles = await UserRoles().create(user);
