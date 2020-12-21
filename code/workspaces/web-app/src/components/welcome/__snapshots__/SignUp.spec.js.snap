@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp renders correct snapshot 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <img
+    alt="DataLabs-Logo"
+    className="makeStyles-logo-2"
+    src="datalabs-vert.png"
+  />
+  <div
+    className="makeStyles-textContainer-3"
+  >
+    <WithStyles(ForwardRef(Typography))
+      className="makeStyles-text-4"
+      variant="h5"
+    >
+      Sign Up
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      className="makeStyles-text-4"
+      variant="body1"
+    >
+      In order to use DataLabs, please email
+       
+      <a
+        className="makeStyles-link-7"
+        href="mailto:test@test.com"
+      >
+        test@test.com
+      </a>
+       
+      and request an account. Your account will be created using your email address.
+    </WithStyles(ForwardRef(Typography))>
+  </div>
+  <div
+    className="makeStyles-buttons-5"
+  >
+    <PrimaryActionButton
+      className="makeStyles-button-6"
+      color="primary"
+      onClick={[Function]}
+    >
+      Home
+    </PrimaryActionButton>
+    <PagePrimaryActionButton
+      className="makeStyles-button-6"
+      color="primary"
+      href="mailto:test@test.com"
+    >
+      Email 
+      test@test.com
+    </PagePrimaryActionButton>
+  </div>
+</div>
+`;

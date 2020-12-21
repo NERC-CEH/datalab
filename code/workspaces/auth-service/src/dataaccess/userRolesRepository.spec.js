@@ -53,13 +53,15 @@ describe('userRolesRepository', () => {
         { userId: 'uid1', instanceAdmin: true, projectRoles: [{ projectKey: 'project1', role: 'viewer' }] },
         { userId: 'uid1', catalogueRole: 'admin', projectRoles: [{ projectKey: 'project2', role: 'admin' }] },
       )).toEqual(
-        { userId: 'uid1',
+        {
+          userId: 'uid1',
           instanceAdmin: true,
           catalogueRole: 'admin',
           projectRoles: [
             { projectKey: 'project2', role: 'admin' },
             { projectKey: 'project1', role: 'viewer' },
-          ] },
+          ],
+        },
       );
     });
   });

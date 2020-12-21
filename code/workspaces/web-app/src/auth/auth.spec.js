@@ -9,14 +9,21 @@ const signinRedirectCallbackMock = jest.fn();
 const signoutRedirectMock = jest.fn();
 
 const authConfig = {
-  authority: 'expected.auth0.com',
-  client_id: 'expected-client-id',
-  extraQueryParams: {
-    audience: 'https://datalab.datalabs.nerc.ac.uk/api',
+  oidc: {
+    userManager: {
+      authority: 'expected.auth0.com',
+      client_id: 'expected-client-id',
+      extraQueryParams: {
+        audience: 'https://datalab.datalabs.nerc.ac.uk/api',
+      },
+      response_type: 'token id_token',
+      scope: 'openid profile',
+      redirect_uri: `${window.location.origin}/callback`,
+    },
   },
-  response_type: 'token id_token',
-  scope: 'openid profile',
-  redirect_uri: `${window.location.origin}/callback`,
+  signUp: {
+    selfService: true,
+  },
 };
 
 const MockAuth = {
@@ -51,6 +58,14 @@ describe('auth', () => {
         expires_at: moment.utc().add(10, 'hours'),
       }),
     );
+  });
+
+  it('signUpConfig returns expected config', () => {
+    // Act
+    const signUpConfig = auth.signUpConfig();
+
+    // Assert
+    expect(signUpConfig).toEqual({ selfService: true });
   });
 
   it('login calls signinRedirect with correct props', () => {

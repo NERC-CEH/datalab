@@ -5,6 +5,7 @@ import { publicAppTheme } from './theme';
 import WelcomePage from './pages/WelcomePage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
 import RedirectToLoginPage from './pages/RedirectToLoginPage';
+import SignUpPage from './pages/SignUpPage';
 
 const PublicApp = () => (
   <MuiThemeProvider theme={publicAppTheme}>
@@ -14,6 +15,9 @@ const PublicApp = () => (
       </Route>
       <Route exact path="/verify">
         <VerifyEmailPage />
+      </Route>
+      <Route exact path="/sign-up">
+        <SignUpPage />
       </Route>
       <Route>
         <RedirectToLoginPage />
