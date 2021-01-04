@@ -31,7 +31,6 @@ const duplicateUser2 = {
 };
 
 const userWithoutIdentity = {
-  // user without identity
   userId: 'uid?',
   projectRoles: [
     { projectKey: 'project 2', role: 'viewer' },
