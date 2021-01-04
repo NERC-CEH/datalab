@@ -1,6 +1,7 @@
 import { permissionTypes } from 'common';
 import findIndex from 'lodash/findIndex';
 import remove from 'lodash/remove';
+import logger from 'winston';
 import database from '../config/database';
 
 const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_USER_ROLE } = permissionTypes;
@@ -26,7 +27,7 @@ function addDefaults(roles) {
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    roles = await addRecordForNewUser(userId, userName, []);
+    roles = await addRecordForNewUser(userId, userName);
   }
 
   return addDefaults(roles);
@@ -92,13 +93,23 @@ async function getProjectUsers(projectKey) {
   return projectUsers.map(addDefaults);
 }
 
-function addRecordForNewUser(userId, userName, projectRoles) {
+async function addRecordForNewUser(userId, userName) {
+  const allRoles = await UserRoles().find().exec();
+  if (allRoles.filter(roles => roles.userId === userId).length > 0) {
+    throw new Error(`Creating new user for ${userId} ${userName}, but they already exist`);
+  }
   const user = {
     userId,
     userName,
-    projectRoles,
+    projectRoles: [],
   };
-  return UserRoles().create(user);
+  if (allRoles.length === 0) {
+    // Make the first ever user an instanceAdmin.
+    logger.info(`${userName} is first user, so making instanceAdmin`);
+    user.instanceAdmin = true;
+  }
+  const roles = await UserRoles().create(user);
+  return roles;
 }
 
 async function setInstanceAdmin(userId, instanceAdmin) {
@@ -170,4 +181,4 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { combineRoles, getRoles, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };
+export default { combineRoles, getRoles, addRecordForNewUser, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };

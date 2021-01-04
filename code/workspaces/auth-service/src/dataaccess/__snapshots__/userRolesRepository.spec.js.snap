@@ -93,25 +93,6 @@ Array [
 ]
 `;
 
-exports[`userRolesRepository read operations getRoles returns expected snapshot 1`] = `
-Object {
-  "catalogueRole": "user",
-  "instanceAdmin": false,
-  "projectRoles": Array [
-    Object {
-      "projectKey": "project 1",
-      "role": "admin",
-    },
-    Object {
-      "projectKey": "project 2",
-      "role": "user",
-    },
-  ],
-  "userId": "uid1",
-  "userName": "user1",
-}
-`;
-
 exports[`userRolesRepository read operations getUser returns expected snapshot 1`] = `
 Object {
   "name": "user1",
