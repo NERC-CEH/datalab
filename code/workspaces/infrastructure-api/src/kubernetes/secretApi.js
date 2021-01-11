@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { merge } from 'lodash';
 import logger from '../config/logger';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
@@ -10,17 +11,17 @@ const getSecretUrl = (namespace, name) => {
   return `${API_BASE}/api/v1/namespaces/${namespace}/secrets${nameComponent}`;
 };
 
-function createOrUpdateSecret(name, namespace, value) {
+function createOrUpdateSecret(name, namespace, value, additionalMetadata) {
   return getSecret(name, namespace)
-    .then(createOrReplace(name, namespace, value));
+    .then(createOrReplace(name, namespace, value, additionalMetadata));
 }
 
-const createOrReplace = (name, namespace, value) => (existingSecret) => {
+const createOrReplace = (name, namespace, value, additionalMetadata) => (existingSecret) => {
   if (existingSecret) {
-    return updateSecret(name, namespace, value);
+    return updateSecret(name, namespace, value, additionalMetadata);
   }
 
-  return createSecret(name, namespace, value);
+  return createSecret(name, namespace, value, additionalMetadata);
 };
 
 function getSecret(name, namespace) {
@@ -29,25 +30,31 @@ function getSecret(name, namespace) {
     .catch(() => undefined);
 }
 
-function createSecret(name, namespace, value) {
+function createSecret(name, namespace, value, additionalMetadata) {
   logger.info('Creating secret: %s in namespace %s', name, namespace);
-  return axios.post(getSecretUrl(namespace), createPayload(name, value))
+  return axios.post(getSecretUrl(namespace), createPayload(name, value, additionalMetadata))
     .catch(handleCreateError('secret', name));
 }
 
-function updateSecret(name, namespace, value) {
+function updateSecret(name, namespace, value, additionalMetadata) {
   logger.info('Updating secret: %s in namespace %s', name, namespace);
-  return axios.put(getSecretUrl(namespace, name), createPayload(name, value))
+  return axios.put(getSecretUrl(namespace, name), createPayload(name, value, additionalMetadata))
     .catch(handleCreateError('secret', name));
 }
 
-function createPayload(name, value) {
-  return {
+function createPayload(name, value, additionalMetadata) {
+  const payload = {
     apiVersion: 'v1',
     kind: 'Secret',
     metadata: { name },
     stringData: value,
   };
+
+  if (additionalMetadata) {
+    merge(payload.metadata, additionalMetadata);
+  }
+
+  return payload;
 }
 
 function deleteSecret(name, namespace) {

@@ -4,17 +4,18 @@ import logger from 'winston';
 import { stackTypes } from 'common';
 import rstudioTokenService from './login/rstudioTokenService';
 import vault from './vault/vault';
+import secrets from './secrets/secrets';
 
 // NOTE: All other stack details should come from 'common/src/config/images'
 const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
 const RSTUDIO_USERNAME = 'datalab';
 
-export default function notebookUrlService(projectKey, notebook) {
+export default function notebookUrlService(projectKey, notebook, userToken) {
   if (notebook.type === ZEPPELIN) {
     return requestZeppelinToken(projectKey, notebook)
       .then(createZeppelinUrl(notebook));
   } if (notebook.type === JUPYTER || notebook.type === JUPYTERLAB) {
-    return requestJupyterToken(projectKey, notebook)
+    return requestJupyterToken(projectKey, notebook, userToken)
       .then(createJupyterUrl(notebook));
   } if (notebook.type === RSTUDIO) {
     return requestRStudioToken(projectKey, notebook)
@@ -50,8 +51,8 @@ function requestZeppelinToken(projectKey, stack) {
     });
 }
 
-function requestJupyterToken(projectKey, stack) {
-  return vault.requestStackKeys(projectKey, stack)
+function requestJupyterToken(projectKey, stack, userToken) {
+  return secrets.getStackSecret(stack, projectKey, userToken)
     .then(response => response.token);
 }
 
