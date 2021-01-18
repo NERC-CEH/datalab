@@ -1,4 +1,4 @@
-# Uploading Files to DataLabs
+# Uploading files within DataLabs
 
 When external data cannot be accessed externally it is often required for data to be
 brought into DataLabs.

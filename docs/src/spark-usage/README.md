@@ -1,4 +1,4 @@
-# Spark Usage Documentation
+# Using Spark within DataLabs
 
 This is documentaion on Spark usage in DataLabs.
 

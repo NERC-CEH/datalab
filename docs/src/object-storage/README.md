@@ -1,4 +1,4 @@
-# Object Storage
+# Using Object Storage within DataLabs
 
 These pages describe how to interact with Object Storage from within Notebook
 sessions.
