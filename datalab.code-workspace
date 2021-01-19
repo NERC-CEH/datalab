@@ -24,7 +24,8 @@
 			"dbaeumer.vscode-eslint",
 			"orta.vscode-jest",
 			"firsttris.vscode-jest-runner",
-			"streetsidesoftware.code-spell-checker"
+			"streetsidesoftware.code-spell-checker",
+			"davidanson.vscode-markdownlint"
 		]
 	},
 	"settings": {
@@ -40,7 +41,9 @@
 		"cSpell.language": "en-GB",
 		"cSpell.words": [
 			"admin",
+			"admins",
 			"checkbox",
+			"conda",
 			"dataaccess",
 			"datalab",
 			"datalabs",

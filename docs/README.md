@@ -7,7 +7,7 @@ served to the user. These static pages are generated using
 
 `mdBook` is a clone of the legacy GitBook written in rust; a standalone binary
 is available and is utilised in the build pipeline to build a docker container
-to serve the formatted user documentation. If installed the documentation my be
+to serve the formatted user documentation. If installed the documentation may be
 generated and served locally by running the `mdbook serve` command.
 
 Linting of the MarkDown files is preformed by the NodeJS library
