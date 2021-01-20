@@ -20,7 +20,7 @@ import configMapApi from '../kubernetes/configMapApi';
 function createJupyterNotebook(params) {
   const { projectKey, name, type } = params;
   const credentials = secretManager.createNewJupyterCredentials();
-  const secretName = nameGenerator.deploymentName(name, type);
+  const secretName = nameGenerator.stackCredentialSecret(name, type);
   const additionalMetadataForSecret = metadataGenerators.stackSecretMetadata();
 
   return k8sSecretApi.createOrUpdateSecret(secretName, projectKey, credentials, additionalMetadataForSecret)
