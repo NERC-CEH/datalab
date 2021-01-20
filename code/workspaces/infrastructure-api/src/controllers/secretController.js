@@ -12,10 +12,21 @@ export async function getStackSecret(request, response) {
     .checkResourceHasMetadataFromGenerator(secret, metadataGenerators.stackSecretMetadata);
 
   if (isStackSecret) {
-    response.send(secret.data);
+    response.send(decodeSecretData(secret.data));
   } else {
     response.status(404).send();
   }
+}
+
+function decodeSecretData(data) {
+  // The values in a kubernetes secret have to be base64 encoded. This function decodes the values.
+  return Object.entries(data).reduce(
+    (decodedData, [key, value]) => ({
+      ...decodedData,
+      [key]: Buffer.from(value, 'base64').toString(),
+    }),
+    {},
+  );
 }
 
 export const stackSecretValidator = [
