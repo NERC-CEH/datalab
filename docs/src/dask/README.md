@@ -1,4 +1,4 @@
-# Dask within JupyterLab
+# Using Dask within JupyterLab
 
 Dask is a widely used library for parallel computing in Python, information
 regarding it can be found [here](https://docs.dask.org/en/latest/).

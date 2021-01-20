@@ -85,6 +85,18 @@ const config = convict({
     default: 'https://authorisation.datalabs.nerc.ac.uk/',
     env: 'AUTHORISATION_ISSUER',
   },
+  deployedInCluster: {
+    doc: 'Whether the service is running in the same cluster as the rest of DataLabs',
+    format: 'Boolean',
+    default: true,
+    env: 'DEPLOYED_IN_CLUSTER',
+  },
+  testingCookie: {
+    doc: 'Cookie to be added to all client api calls.',
+    format: 'String',
+    default: '',
+    env: 'TESTING_COOKIE',
+  },
 });
 
 export default config;
