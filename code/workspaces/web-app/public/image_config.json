@@ -117,7 +117,7 @@
       "sharedRLibs": "/data/packages/R/%p/%v"
     },
     "zeppelin": {
-      "displayName": "Zepplin",
+      "displayName": "Zeppelin",
       "category": "ANALYSIS",
       "versions": [
         {

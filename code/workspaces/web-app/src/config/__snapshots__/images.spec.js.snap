@@ -42,7 +42,7 @@ Object {
   },
   "zeppelin": Object {
     "category": "ANALYSIS",
-    "displayName": "Zepplin",
+    "displayName": "Zeppelin",
     "versions": Array [
       Object {
         "connectImage": "nerc/zeppelin-connect:1.1.1",
@@ -239,7 +239,7 @@ Object {
     },
     "zeppelin": Object {
       "category": "ANALYSIS",
-      "displayName": "Zepplin",
+      "displayName": "Zeppelin",
       "versions": Array [
         Object {
           "connectImage": "nerc/zeppelin-connect:1.1.1",
