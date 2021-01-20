@@ -6,9 +6,10 @@ function createIngress({ name, projectKey, ingressName, serviceName, port,
   const host = createSniInfo(name, projectKey);
   const paths = createPathInfo(serviceName, port, connectPort);
   const privateEndpoint = visible !== 'public';
+  const authServiceUrlRoot = config.get('authorisationServiceForIngress') || config.get('authorisationService');
   const context = {
     name: ingressName,
-    authServiceUrl: `${config.get('authorisationService')}/auth`,
+    authServiceUrl: `${authServiceUrlRoot}/auth`,
     authSigninUrl: config.get('authSigninUrl'),
     maxBodySize: config.get('maxBodySize'),
     proxyRequestBuffering,

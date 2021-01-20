@@ -32,13 +32,22 @@
 
 ### Set-up minikube
 
-* Start minikube
+* Start minikube (you can ensure virtual box uses the same IP address by following [these instructions](#clearing-minikube-ip-address-when-creating-new-cluster-macos))
   * `minikube start`
+  * Or give the minikube cluster a different name using the `-p` flag e.g. `minikube -p datalabs start` (note that you will need to us the `-p` flag to refer to this instance of minikube in subsequent commands e.g. `minikube -p datalabs stop`).
 * (Recommended) [Install `kubectx` and `kubens`](https://github.com/ahmetb/kubectx)
   for easy context and namespace switching.
-* Create a Gluster storage class by running `kubectl apply -f ./config/manifests/minikube-storage.yml`
+* Create a Gluster and NFS storage class by running `kubectl apply -f ./config/manifests/minikube-storage.yml`
 * Create compute submission cluster role by running `kubectl apply -f ./config/manifests/minikube-compute-submission-role.yml`
 * (Other potentially useful manifests can be found in `./config/manifests/`)
+
+#### Clearing Minikube IP address when creating new cluster (MacOS)
+
+VirtualBox will retain leases for local IP address, when creating a new cluster
+a new IP address will be assigned. These can be cleared by deleting VirtualBox
+DHCP leases (`rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*`)
+
+The current IP for minikube can be found using `minikube ip`.
 
 ### Install NodeJS packages
 
@@ -47,7 +56,7 @@
   * `code/auth-service`
   * `code/infrastructure-api`
 
-Running the `yarn` commend within the `code/` directory will install all the
+Running the `yarn` command within the `code/` directory will install all the
 packages required for services within the workspace (these services within the
 `code/workspaces` directory; Web-App, Client-API, etc).
 
@@ -57,7 +66,7 @@ need to be address before the git commit will be permitted. This rule checking
 may be disabled using the `--no-verify` flag with `git commit`, this is not
 recommended as linting error will still be caught with the CI server.
 
-### Set-up shell environment varaibles
+### Set-up shell environment variables
 
 There are a number of authorisation related environmental variables that need to be set
 to make the app work locally. [`direnv`](https://direnv.net) can be used to
@@ -100,20 +109,28 @@ To get your Auth0 `user_id`, do the following:
 
 ## Wildcard DNS & Certificate Authority
 
-Chrome will resolve sub-domains on the localhost  domain (ie. `*.localhost`) to
-the host machine, other browser may not response the same way. If a domain other
+Chrome and FireFox will resolve sub-domains on the localhost domain (i.e. `*.localhost`) to
+the host machine; other browsers may not respond the same way. If a domain other
 than `*.localhost` is used for local development a local DNS must be set-up to
 resolve from a browser. See README in `./config/dnsmasq`.
 
-Development tls certificates have been generated and stored in the `./config/ca`
-these provide tls certificates for the `*.datalabs.localhost` subdomain. If a
-different subdomain is used new certificate will need to be generated using the
+Development TLS certificates have been generated and stored in the `./config/ca` directory.
+These provide TLS certificates for the `*.datalabs.localhost` and `*.datalabs.internal` subdomains.
+If a different subdomain is used, new certificates will need to be generated using the
 same root certificate. See README in `./config/ca`.
 
 ### Make development CA root certificate trusted for host system (MacOS)
 
 * Open `keychain access` and drag `rootCA.pem` file into window
 * Double click the newly install DataLabs certificate and set trust to `Always Trust`
+* FireFox doesn't use the machine's trusted certificate authorities by default. An option
+  needs to be turned on in Firefox to make this happen. This can be done by entering
+  `about:config` into the address bar and then setting `security.enterprise_roots.enabled`
+  to true ([reference](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox)).
+
+The Client API might give SSL/TLS errors when trying to communicate with services running within minikube.
+If this is the case, provide node the path to the `rootCA.pem` file using the environment variable `NODE_EXTRA_CA_CERTS`.
+If you are running the client api with docker, the pem file will need to be mounted into the container and the value of `NODE_EXTRA_CA_CERTS` will need to be the path to the pem file from within the container.
 
 ## Minikube
 
@@ -132,33 +149,42 @@ kubectl apply -f ./config/manifests/minikube-storage.yml
 kubectl apply -f ./config/manifests/minikube-pvc.yml
 ```
 
-### Add website tls x509 certificate as Kubernetes secret
+### Enabling access to cluster from host machine
 
-This secret must be created __before__ adding ingress rules.
+There are two domains through which you can access the cluster from the host machine (once configured) that configuration information is provided for.
+The first and simpler of the two is `datalabs.localhost` (see [datalabs-localhost-setup.md](./datalabs-localhost-setup.md)) but this might not work on all machines.
+If this does not work, then you can configure access to be through `.datalabs.internal` instead (see [datalabs-internal-setup.md](./datalabs-internal-setup.md)).
 
-```bash
-kubectl create secret tls tls-secret --key ./config/ca/datalab.localhost.key --cert ./config/ca/datalab.localhost.crt -n devtest
-```
+#### Configuring ingress auth
 
-### Create ingress rules to point back to host machine
-
-We can add ingress rules to use a loopback ip address to access element on the
-host machine. These rules use self-signed TLS certificates, these must be
-generated and stored as Kubernetes secrets __before__ creating the ingress
-rules. When running minikube in VirtualBox this address is expected to be
-`10.0.2.2` (this is the gateway address given to minikube by VirtualBox).
+When notebooks etc. are created, an ingress rule is added such that they can be accessed.
+The ingress rule contains a URL to check that the user accessing the resource has permission to view it which is expected to be the URL of the auth service.
+The infrastructure api (responsible for creating the ingress) and the auth service are not running in the cluster, but the dynamically created notebooks are created within the cluster.
+Therefore, the URL of the auth service is different for the infrastructure service and the notebooks.
+The IP address that is used in the ingress rule can be configured using the following environment variable
 
 ```bash
-kubectl apply -f ./config/manifests/minikube-proxy.yml
+AUTHORISATION_SERVICE_FOR_INGRESS=<ip to access auth service>
 ```
 
-### Clearing Minikube IP address when creating new cluster (MacOS)
+where `<ip-to-access-auth-service>` needs to be configured to be the IP address and port through which a service in the cluster can access the authorisation service running on `localhost`.
+From VirtualBox, this is expected to be `http://10.0.2.2:9000` as `10.0.2.2` is the IP through which items running in VirtualBox can access the host machine, and the auth service is configured to run on port `9000` by default.
 
-VirtualBox will retain leases for local IP address, when creating a new cluster
-a new IP address will be assigned. These can be cleared by deleting VirtualBox
-DHCP leases (`rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*`)
+#### Correctly resolving and accessing notebooks
 
-The current ip for minikube can be found using `minikube ip`.
+The client api expects to be running in the cluster alongside the notebooks.
+Therefore, by default it will try and access a notebook using the notebook's internal DNS name.
+Unsurprisingly, trying to resolve this name from outside of the cluster does not work.
+Setting the following environment variable tells the client api that it should use the notebook's external name when trying to access it.
+
+```bash
+DEPLOYED_IN_CLUSTER="false"
+```
+
+When accessing the notebooks from outside of the cluster (specifically when the system is configured to run on `datalabs.internal`), you may find that the auth service rejects the incoming requests with a warning message such as `warn: Unsuccessful authentication request from localhost`.
+If this is the case, you will manually need to provide a valid cookie that will be appended to all requests to `datalabs.internal` (it will not be appended to any requests to any other domains).
+The cookie is provided by setting the value of the environment variable `TESTING_COOKIE` on the client api to be the value of the `authorization` cookie.
+The value of the cookie can be obtained through a web browser's development tools once successfully logged into the DataLabs web-app locally.
 
 ## Docker-Compose
 

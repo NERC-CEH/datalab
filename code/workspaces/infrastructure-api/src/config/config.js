@@ -55,6 +55,14 @@ const config = convict({
     default: false,
     env: 'AUTHORISATION_SERVICE_STUB',
   },
+  authorisationServiceForIngress: {
+    doc: `The endpoint for the authorisation service within the ingress.
+      Used when developing locally and auth service is running outside of cluster.
+      Should default to same value as authorisationService when not set hence empty default value for easy handling in code.`,
+    format: 'url',
+    default: '',
+    env: 'AUTHORISATION_SERVICE_FOR_INGRESS',
+  },
   authorisationAudience: {
     doc: 'Expected audience for the authorisation service',
     format: 'url',
