@@ -3,14 +3,14 @@
 ## I'm having trouble logging into DataLabs ##
 
 In order to login to DataLabs you'll need to create an account using the sign up button
-from the home page. Once you've created an account you'll need to verify your e-mail
+from the home page. Once you've created an account, you'll need to verify your e-mail
 before being able to sign in.
 
 ## I have signed in but can't see anything, what do I do now ##
 
-Initially ou will only be able to see projects which you own or have been given
+Initially you will only be able to see projects which you own or have been given
 access to. If you are collaborating with someone else on a project, you can ask them to
-add you to the relevant project. Otherwise get in touch with us on Slack about
+add you to the relevant project. Otherwise, get in touch with us on Slack about
 having a project set up for you which we'll be happy to help with if you're working
 on a relevant project.
 
@@ -18,6 +18,29 @@ on a relevant project.
 
 A number of [tutorials](../tutorials/) will be added over time which will help with
 getting started within DataLabs.
+
+## I am a project owner, how do I add more people to my project ##
+
+This is done from the project page and browsing to `Settings` in the sidebar, from here
+you can type a users e-mail in the `Add User` field and assign them a permission.
+
+Note that once you have added a user, what they will be able to do depends on the permission
+that they have been assigned, a brief summary is below;
+
+* Admin - Has control of adding and removing users to the project as well as creating
+  data storage.
+* User - Can create and control notebooks and sites but not storage.
+* Viewer - Can only view sites that are created, has no ability to create any resources.
+
+Note that the exception to this is if a user chooses to share their notebook with the entire
+project, at this point every member of the project will be able to access it.
+
+## I'm a user in a project but can't create a notebook ##
+
+Once you are part of a project as a user you will have the permission to create notebooks,
+but this may not be possible unless you have been assigned a data store to use. These are
+created by admins under the `Storage` tab. In order to be able to create a notebook, ask an
+admin to add you to a data store which you will be able to use.
 
 ## I've never used notebooks before, where can I find out more ##
 
@@ -36,7 +59,7 @@ visualized, while also running on a platform that allows you to work collaborati
 There are a few key differences to know about working within DataLabs that it is
 useful to know about
 
-The main one is concerning how packages are installed and persisted. Within DataLabs your
+The main one concerns how packages are installed and persisted. Within DataLabs your
 runtime environment (i.e Python & R packages) must be stored alongside the code, practically
 this means using tools such as [Conda environments](../tutorials/conda_environments.md)
 or [Packrat](../r-libs/packrat.md).
