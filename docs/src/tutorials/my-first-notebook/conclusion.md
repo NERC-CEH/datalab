@@ -17,4 +17,5 @@ __Where next?__
 You may want to consider these next steps:
 
 * To learn more about JupyterLab, visit <https://jupyterlab.readthedocs.io/en/stable/>.
-* To learn how to manage your Jupyter Python environment using Conda, visit [../conda_environments.md](../conda_environments.md).
+* To learn how to manage your Jupyter Python environment using Conda, visit the
+[Conda Environments Quick-Start-Guide](../conda_environments.md).
