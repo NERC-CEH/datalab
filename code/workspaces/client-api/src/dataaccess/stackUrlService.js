@@ -18,7 +18,7 @@ export default function notebookUrlService(projectKey, notebook, userToken) {
     return requestJupyterToken(projectKey, notebook, userToken)
       .then(createJupyterUrl(notebook));
   } if (notebook.type === RSTUDIO) {
-    return requestRStudioToken(projectKey, notebook)
+    return requestRStudioToken(projectKey, notebook, userToken)
       .then(createRStudioUrl(notebook));
   } if (notebook.type === NBVIEWER) {
     return Promise.resolve(`${notebook.url}/localfile`);
@@ -56,8 +56,8 @@ function requestJupyterToken(projectKey, stack, userToken) {
     .then(response => response.token);
 }
 
-function requestRStudioToken(projectKey, stack) {
-  return vault.requestStackKeys(projectKey, stack)
+function requestRStudioToken(projectKey, stack, userToken) {
+  return secrets.getStackSecret(stack, projectKey, userToken)
     .then(rstudioTokenService.rstudioLogin(stack))
     .catch((error) => {
       logger.error('Error logging in to RStudio: ', stack.name, error);
