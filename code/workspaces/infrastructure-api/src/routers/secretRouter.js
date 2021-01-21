@@ -7,7 +7,7 @@ const { errorWrapper } = service.middleware;
 const secretRouter = express.Router();
 
 secretRouter.get(
-  '/stack/:projectKey/:stackType/:stackName',
+  '/stack',
   stackSecretValidator,
   errorWrapper(getStackSecret),
 );

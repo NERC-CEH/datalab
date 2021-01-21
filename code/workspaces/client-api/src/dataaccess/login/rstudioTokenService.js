@@ -3,7 +3,7 @@ import querystring from 'querystring';
 import logger from 'winston';
 import rstudioCookieHandler from './rstudioCookieHandler';
 import encrypt from '../../vendor/encrypt.min';
-import config from '../../config';
+import { getCorrectAccessUrl } from './common';
 
 const rstudioLogin = notebook => (credentials) => {
   if (!credentials.username || !credentials.password) {
@@ -61,12 +61,6 @@ function getRStudioLoginUrl(notebook) {
   const rstudioUrl = `${getCorrectAccessUrl(notebook)}/auth-do-sign-in`;
   logger.info(`Request log in cookie from RStudio at: ${rstudioUrl}`);
   return rstudioUrl;
-}
-
-function getCorrectAccessUrl(notebook) {
-  return config.get('deployedInCluster')
-    ? notebook.internalEndpoint
-    : notebook.url;
 }
 
 export default { rstudioLogin };

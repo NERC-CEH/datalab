@@ -1,4 +1,5 @@
-import { check, matchedData } from 'express-validator';
+import { query, matchedData } from 'express-validator';
+import logger from '../config/logger';
 import { getCoreV1Api } from '../kubernetes/kubeConfig';
 import nameGenerators from '../common/nameGenerators';
 import metadataGenerators from '../common/metadataGenerators';
@@ -6,13 +7,28 @@ import metadataGenerators from '../common/metadataGenerators';
 const k8sApi = getCoreV1Api();
 
 export async function getStackSecret(request, response) {
-  const { projectKey, stackName, stackType } = matchedData(request);
-  const { body: secret } = await k8sApi.readNamespacedSecret(nameGenerators.deploymentName(stackName, stackType), projectKey);
+  const { projectKey, stackName, stackType, key } = matchedData(request);
+  const secretName = nameGenerators.stackCredentialSecret(stackName, stackType);
+
+  let secret;
+  try {
+    const { body } = await k8sApi.readNamespacedSecret(secretName, projectKey);
+    secret = body;
+  } catch (error) {
+    const { response: { statusMessage: message, statusCode: code } } = error;
+    const errorString = `{code: ${code}, message: ${message}}`;
+    logger.error(
+      `Unable to read stack secret ${secretName} in project ${projectKey} with error: ${errorString}.`,
+    );
+    response.status(code).send();
+  }
+
   const isStackSecret = metadataGenerators
     .checkResourceHasMetadataFromGenerator(secret, metadataGenerators.stackSecretMetadata);
 
   if (isStackSecret) {
-    response.send(decodeSecretData(secret.data));
+    const data = decodeSecretData(secret.data);
+    response.send(key ? data[key] : data);
   } else {
     response.status(404).send();
   }
@@ -30,7 +46,8 @@ function decodeSecretData(data) {
 }
 
 export const stackSecretValidator = [
-  check('projectKey', 'projectKey must be specified for stack secret request'),
-  check('stackName', 'stackName must be specified for the stack secret request'),
-  check('stackType', 'stackType must be specified for the stack secret request'),
+  query('projectKey', 'projectKey must be specified for stack secret request'),
+  query('stackName', 'stackName must be specified for the stack secret request'),
+  query('stackType', 'stackType must be specified for the stack secret request'),
+  query('key').optional(),
 ];

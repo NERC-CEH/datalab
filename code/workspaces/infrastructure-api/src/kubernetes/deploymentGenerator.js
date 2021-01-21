@@ -41,8 +41,8 @@ function createZeppelinDeployment({ deploymentName, volumeMount, type, version }
   const context = {
     name: deploymentName,
     grantSudo: true,
-    sparkMasterAddress: containerInfo.SPARK.masterAddress,
-    sharedRLibs: containerInfo.SPARK.sharedRLibs,
+    sparkMasterAddress: containerInfo.spark.masterAddress,
+    sharedRLibs: containerInfo.spark.sharedRLibs,
     zeppelin: {
       image: img.image,
       connectImage: img.connectImage,

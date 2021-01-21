@@ -9,14 +9,17 @@ import { generateManifest, ConfigTemplates } from '../kubernetes/manifestGenerat
 import zeppelinShiroGenerator from '../credentials/zeppelinShiroGenerator';
 
 import { createDeployment, createService, createIngressRuleWithConnect } from './stackBuilders';
+import nameGenerators from '../common/nameGenerators';
+import metadataGenerators from '../common/metadataGenerators';
 
 function createZeppelinStack(params) {
   const { projectKey, name, type } = params;
-  const secretStrategy = secretManager.createNewUserCredentials;
+  const credentials = secretManager.createNewUserCredentials();
+  const secretName = nameGenerators.stackCredentialSecret(name, type);
+  const additionalMetadataForSecret = metadataGenerators.stackSecretMetadata();
 
-  return secretManager.storeCredentialsInVault(projectKey, name, secretStrategy)
-    .then(generateNewShiroIni)
-    .then(secret => k8sSecretApi.createOrUpdateSecret(`${type}-${name}`, projectKey, secret))
+  return generateNewShiroIni(credentials)
+    .then(shiroIni => k8sSecretApi.createOrUpdateSecret(secretName, projectKey, { ...shiroIni, ...credentials }, additionalMetadataForSecret))
     .then(createDeployment(params, deploymentGenerator.createZeppelinDeployment))
     .then(createService(params, deploymentGenerator.createZeppelinService))
     .then(createIngressRuleWithConnect(params, ingressGenerator.createIngress));
@@ -24,13 +27,13 @@ function createZeppelinStack(params) {
 
 function deleteZeppelinStack(params) {
   const { projectKey, name, type } = params;
-  const k8sName = `${type}-${name}`;
+  const deploymentName = nameGenerators.deploymentName(name, type);
+  const secretName = nameGenerators.stackCredentialSecret(name, type);
 
-  return ingressApi.deleteIngress(k8sName, projectKey)
-    .then(() => serviceApi.deleteService(k8sName, projectKey))
-    .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
-    .then(() => k8sSecretApi.deleteSecret(k8sName, projectKey))
-    .then(() => secretManager.deleteSecret(projectKey, name));
+  return ingressApi.deleteIngress(deploymentName, projectKey)
+    .then(() => serviceApi.deleteService(deploymentName, projectKey))
+    .then(() => deploymentApi.deleteDeployment(deploymentName, projectKey))
+    .then(() => k8sSecretApi.deleteSecret(secretName, projectKey));
 }
 
 function generateNewShiroIni(credentials) {

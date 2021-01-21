@@ -4,12 +4,22 @@ import config from '../../config';
 
 const infrastructureApi = config.get('infrastructureApi');
 
-async function getStackSecret(stack, projectKey, userToken) {
-  const { type, name } = stack;
+async function getStackSecret(stack, projectKey, userToken, key) {
+  const { type: stackType, name: stackName } = stack;
+  const requestParams = {
+    projectKey, stackType, stackName,
+  };
+  if (key) {
+    requestParams.key = key;
+  }
+
   try {
     const { data } = await axios.get(
-      `${infrastructureApi}/secrets/stack/${projectKey}/${type}/${name}`,
-      getHeaders(userToken),
+      `${infrastructureApi}/secrets/stack/`,
+      {
+        params: requestParams,
+        ...getHeaders(userToken),
+      },
     );
     return data;
   } catch (error) {
