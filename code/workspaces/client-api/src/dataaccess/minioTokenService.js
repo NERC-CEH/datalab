@@ -1,14 +1,20 @@
 import axios from 'axios';
 import logger from 'winston';
-import vault from './vault/vault';
+import secrets from './secrets/secrets';
+import { getCorrectAccessUrl } from './login/common';
 
-function requestMinioToken(storage) {
-  return vault.requestStorageKeys(storage.projectKey, storage)
+function requestMinioToken(storage, userToken) {
+  return getMinioAccessKeys(storage, userToken)
     .then(minioLogin(storage))
     .catch((error) => {
       logger.error('Error logging in to minio: ', storage.name, error);
       return undefined;
     });
+}
+
+function getMinioAccessKeys(storage, userToken) {
+  // storage.type is one of NFS, GlusterFS etc. Need to overwrite this with 'minio' to match the backend naming
+  return secrets.getStackSecret({ ...storage, type: 'minio' }, storage.projectKey, userToken);
 }
 
 const minioLogin = storage => (accessKeys) => {
@@ -21,7 +27,8 @@ const minioLogin = storage => (accessKeys) => {
 };
 
 function getMinioLoginUrl(storage) {
-  const minioApiUrl = `${storage.internalEndpoint}/webrpc`;
+  const minioRootUrl = getCorrectAccessUrl(storage);
+  const minioApiUrl = `${minioRootUrl}/webrpc`;
   logger.debug(`Request log in token from Minio at: ${minioApiUrl}`);
   return minioApiUrl;
 }

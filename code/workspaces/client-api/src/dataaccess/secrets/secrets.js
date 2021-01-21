@@ -6,20 +6,12 @@ const infrastructureApi = config.get('infrastructureApi');
 
 async function getStackSecret(stack, projectKey, userToken, key) {
   const { type: stackType, name: stackName } = stack;
-  const requestParams = {
-    projectKey, stackType, stackName,
-  };
-  if (key) {
-    requestParams.key = key;
-  }
+  const requestParams = createRequestParams(projectKey, stackType, stackName, key);
 
   try {
     const { data } = await axios.get(
       `${infrastructureApi}/secrets/stack/`,
-      {
-        params: requestParams,
-        ...getHeaders(userToken),
-      },
+      createRequestConfig(requestParams, userToken),
     );
     return data;
   } catch (error) {
@@ -28,8 +20,15 @@ async function getStackSecret(stack, projectKey, userToken, key) {
   }
 }
 
-function getHeaders(userToken) {
+function createRequestParams(projectKey, stackType, stackName, key) {
+  const requestParams = { projectKey, stackType, stackName };
+  if (key) requestParams.key = key;
+  return requestParams;
+}
+
+function createRequestConfig(requestParams, userToken) {
   return {
+    params: requestParams,
     headers: {
       authorization: userToken,
     },
