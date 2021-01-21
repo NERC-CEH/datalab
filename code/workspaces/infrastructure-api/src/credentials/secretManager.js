@@ -1,4 +1,3 @@
-import vault from './vault';
 import tokenGenerator from './tokenGenerator';
 import metadataGenerators from '../common/metadataGenerators';
 import k8sSecretApi from '../kubernetes/secretApi';
@@ -24,10 +23,6 @@ function createNewUserCredentials() {
   };
 }
 
-function storeCredentialsInVault(projectKey, id, secret) {
-  return vault.ensureSecret(`${projectKey}/stacks/${id}`, secret);
-}
-
 function createStackCredentialSecret(stackName, stackType, projectKey, credentials) {
   const secretName = nameGenerators.stackCredentialSecret(stackName, stackType);
   const additionalMetadataForSecret = metadataGenerators.stackSecretMetadata();
@@ -39,26 +34,10 @@ function deleteStackCredentialSecret(stackName, stackType, projectKey) {
   return k8sSecretApi.deleteSecret(secretName, projectKey);
 }
 
-function deleteSecret(projectKey, id) {
-  return vault.deleteSecret(`${projectKey}/stacks/${id}`);
-}
-
-function storeMinioCredentialsInVault(projectKey, id, strategy) {
-  return vault.ensureSecret(`${projectKey}/storage/${id}`, strategy);
-}
-
-function deleteMinioCredentials(projectKey, id) {
-  return vault.deleteSecret(`${projectKey}/storage/${id}`);
-}
-
 export default {
   createNewJupyterCredentials,
   createNewMinioCredentials,
   createNewUserCredentials,
-  storeCredentialsInVault,
-  deleteSecret,
-  storeMinioCredentialsInVault,
-  deleteMinioCredentials,
   createStackCredentialSecret,
   deleteStackCredentialSecret,
 };

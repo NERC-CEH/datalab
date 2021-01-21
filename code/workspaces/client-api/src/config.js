@@ -43,18 +43,6 @@ const config = convict({
     default: 'datalabs-root-p',
     env: 'DATABASE_PASSWORD',
   },
-  vaultApi: {
-    doc: 'The endpoint for Vault',
-    format: 'url',
-    default: 'http://localhost:8200',
-    env: 'VAULT_API',
-  },
-  vaultAppRole: {
-    doc: 'The Vault app role for the API',
-    format: 'String',
-    default: 'undefinedrole',
-    env: 'VAULT_APP_ROLE',
-  },
   infrastructureApi: {
     doc: 'The endpoint for the infrastructure management service',
     format: 'url',

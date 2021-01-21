@@ -3,14 +3,14 @@ import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import rstudioTokenService from './login/rstudioTokenService';
 import stackUrlService from './stackUrlService';
-import vault from './vault/vault';
+import secrets from './secrets/secrets';
 
 const mock = new MockAdapter(axios);
 
 jest.mock('winston');
 
-const vaultMock = jest.fn();
-vault.requestStackKeys = vaultMock;
+const getStackSecretsMock = jest.fn();
+secrets.getStackSecret = getStackSecretsMock;
 
 const rstudioTokenServiceMock = jest.fn();
 rstudioTokenService.rstudioLogin = rstudioTokenServiceMock;
@@ -40,7 +40,7 @@ describe('stackUrlService', () => {
     const loginUrl = `${stack.internalEndpoint}/api/login`;
 
     it('to request login cookie from zeppelin', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
         username: 'datalab',
         password: 'password',
       })));
@@ -54,7 +54,7 @@ describe('stackUrlService', () => {
     });
 
     it('to return undefined and log error if keys are not returned', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({})));
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({})));
 
       return stackUrlService(projectKey, stack)
         .then((token) => {
@@ -64,7 +64,7 @@ describe('stackUrlService', () => {
     });
 
     it('to return undefined and log error if login fails', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
         username: 'datalab',
         password: 'password',
       })));
@@ -89,7 +89,7 @@ describe('stackUrlService', () => {
     const loginUrl = `${stack.internalEndpoint}/api/login`;
 
     it('returns the jupyter notebook token', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
         token: 'expectedToken',
       })));
 
@@ -101,8 +101,8 @@ describe('stackUrlService', () => {
         });
     });
 
-    it('returns undefined if vault response has no token', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+    it('returns undefined if response has no token', () => {
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
         props: 'noToken',
       })));
 
@@ -124,7 +124,7 @@ describe('stackUrlService', () => {
     };
 
     it('returns the rstudio notebook token', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
         username: 'datalab',
         password: 'password',
       })));
@@ -138,8 +138,8 @@ describe('stackUrlService', () => {
         });
     });
 
-    it('returns undefined if vault response has no token', () => {
-      vaultMock.mockImplementationOnce(() => (Promise.resolve({
+    it('returns undefined if response has no token', () => {
+      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
         props: 'noToken',
       })));
 
