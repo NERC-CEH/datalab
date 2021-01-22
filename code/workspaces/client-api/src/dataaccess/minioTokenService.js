@@ -1,6 +1,7 @@
 import axios from 'axios';
 import logger from 'winston';
 import vault from './vault/vault';
+import { getCorrectAccessUrl } from './login/common';
 
 function requestMinioToken(storage) {
   return vault.requestStorageKeys(storage.projectKey, storage)
@@ -21,7 +22,8 @@ const minioLogin = storage => (accessKeys) => {
 };
 
 function getMinioLoginUrl(storage) {
-  const minioApiUrl = `${storage.internalEndpoint}/webrpc`;
+  const minioRootUrl = getCorrectAccessUrl(storage);
+  const minioApiUrl = `${minioRootUrl}/webrpc`;
   logger.debug(`Request log in token from Minio at: ${minioApiUrl}`);
   return minioApiUrl;
 }

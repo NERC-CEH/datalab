@@ -3,6 +3,7 @@ version: "3.7"
 x-common-variables: &common
   AUTHORISATION_SERVICE: http://datalab-auth:9000
   AUTH_SIGNIN_URL: http://datalabs.localhost
+  AUTHORISATION_SERVICE_FOR_INGRESS: http://10.0.2.2:9000
   DATABASE_HOST: mongodb
   INFRASTRUCTURE_API: http://datalab-infra:8003
   KUBERNETES_API: http://host.docker.internal:8001
@@ -10,6 +11,8 @@ x-common-variables: &common
   VAULT_API: http://vault:8200
   VAULT_APP_ROLE: ${VAULT_APP_ROLE}
   NODE_OPTIONS: "--max-http-header-size=81920"
+  DEPLOYED_IN_CLUSTER: "false"
+  NODE_EXTRA_CA_CERTS: /usr/src/rootCA.pem
 
 services:
   datalab-auth:
@@ -29,6 +32,7 @@ services:
       - 9000:9000
     volumes:
       - ${PWD}/..:/usr/src/app/:ro
+      - ${PWD}/config/ca/rootCA.pem:/usr/src/rootCA.pem
 
   datalab-infra:
     image: node:lts
@@ -43,6 +47,7 @@ services:
       - $PWD/..:/usr/src/app/:ro
       - $PWD/config/local/image_config.json:/usr/src/app/workspaces/common/src/config/image_config.json:ro
       - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
+      - ${PWD}/config/ca/rootCA.pem:/usr/src/rootCA.pem
 
   datalab-api:
     image: node:lts
@@ -56,6 +61,7 @@ services:
     volumes:
       - $PWD/..:/usr/src/app:ro
       - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
+      - ${PWD}/config/ca/rootCA.pem:/usr/src/rootCA.pem
 
   datalab-app:
     image: node:lts
@@ -75,3 +81,4 @@ services:
       # - $PWD/config/local/web_auth_config_keycloak.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
       # When using Auth0 unhash the line below and hash the Keycloak line
       - $PWD/config/local/web_auth_config.json:/usr/src/app/workspaces/web-app/public/web_auth_config.json:ro
+      - ${PWD}/config/ca/rootCA.pem:/usr/src/rootCA.pem

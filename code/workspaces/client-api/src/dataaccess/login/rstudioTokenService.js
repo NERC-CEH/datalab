@@ -3,6 +3,7 @@ import querystring from 'querystring';
 import logger from 'winston';
 import rstudioCookieHandler from './rstudioCookieHandler';
 import encrypt from '../../vendor/encrypt.min';
+import { getCorrectAccessUrl } from './common';
 
 const rstudioLogin = notebook => (credentials) => {
   if (!credentials.username || !credentials.password) {
@@ -14,7 +15,7 @@ const rstudioLogin = notebook => (credentials) => {
 };
 
 const login = (notebook, credentials) => (response) => {
-  logger.debug(`Logging in to RStudio instance at: ${notebook.internalUrl}`);
+  logger.debug(`Logging in to RStudio instance at: ${getRStudioLoginUrl(notebook)}`);
   const certificateParts = response.data.split(':');
   const userPayload = `${credentials.username}\n${credentials.password}`;
   const exp = certificateParts[0];
@@ -47,15 +48,17 @@ const login = (notebook, credentials) => (response) => {
 };
 
 function getRStudioCertificate(notebook) {
-  logger.debug(`Requesting RStudio certificate from ${notebook.internalEndpoint}/auth-public-key`);
-  return axios.get(`${notebook.internalEndpoint}/auth-public-key`)
-    .catch((error) => {
-      throw new Error(`Unable to retrieve RStudio certificate: ${error.message}`);
-    });
+  const notebookUrl = getCorrectAccessUrl(notebook);
+  logger.debug(`Requesting RStudio certificate from ${notebookUrl}/auth-public-key`);
+  return axios.get(
+    `${notebookUrl}/auth-public-key`,
+  ).catch((error) => {
+    throw new Error(`Unable to retrieve RStudio certificate: ${error.message}`);
+  });
 }
 
 function getRStudioLoginUrl(notebook) {
-  const rstudioUrl = `${notebook.internalEndpoint}/auth-do-sign-in`;
+  const rstudioUrl = `${getCorrectAccessUrl(notebook)}/auth-do-sign-in`;
   logger.info(`Request log in cookie from RStudio at: ${rstudioUrl}`);
   return rstudioUrl;
 }
