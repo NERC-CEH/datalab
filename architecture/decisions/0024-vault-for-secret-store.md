@@ -4,7 +4,7 @@ Date: 2017-11-04
 
 ## Status
 
-Accepted
+Superseded by [45. Kubernetes Secrets as Secret Store](0045-kubernetes-secrets-as-secret-store.md).
 
 ## Context
 
@@ -19,5 +19,5 @@ It provides a dedicated system to securely store and manage access to secrets.
 
 ## Consequences
 
-We have a flexible system to store secrets in a way that can be securely access from all
+We have a flexible system to store secrets in a way that can be securely accessed from all
 services.
