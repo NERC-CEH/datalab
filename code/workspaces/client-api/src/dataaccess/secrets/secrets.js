@@ -2,15 +2,14 @@ import axios from 'axios';
 import logger from 'winston';
 import config from '../../config';
 
-const infrastructureApi = config.get('infrastructureApi');
-
-async function getStackSecret(stack, projectKey, userToken, key) {
+async function getStackSecret(stack, projectKey, userToken, key = null) {
   const { type: stackType, name: stackName } = stack;
+  const infrastructureApi = config.get('infrastructureApi');
   const requestParams = createRequestParams(projectKey, stackType, stackName, key);
 
   try {
     const { data } = await axios.get(
-      `${infrastructureApi}/secrets/stack/`,
+      `${infrastructureApi}/secrets/stack`,
       createRequestConfig(requestParams, userToken),
     );
     return data;
