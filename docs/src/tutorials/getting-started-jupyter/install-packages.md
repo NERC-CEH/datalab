@@ -23,9 +23,10 @@ conda install -y xarray numpy matplotlib pandas netcdf4
 
 In the case of R conda packages can be installed from a Terminal session,
 this method differs slightly to the standard way that R packages are installed (generally
-using commands such as `install.packages()` from the console, which does also work in most cases.)
-But this method has advantages as it can install system dependencies as well. Note that when
-installing R packages from Conda you must prefix the package name with `r-`.
+using commands such as `install.packages()` from the console, which does also work in
+most cases.) But this method has advantages as it can install system dependencies as
+well. Note that when installing R packages from Conda you must prefix the package name
+with `r-`.
 
 ```bash
 source activate /data/conda/<environment_name>
