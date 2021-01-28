@@ -4,6 +4,7 @@ exports[`userRolesRepository read operations getAllUsersAndRoles returns expecte
 Array [
   Object {
     "catalogueRole": "user",
+    "dataManager": false,
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {
@@ -20,6 +21,7 @@ Array [
   },
   Object {
     "catalogueRole": "publisher",
+    "dataManager": true,
     "instanceAdmin": true,
     "projectRoles": Array [
       Object {
@@ -41,6 +43,7 @@ exports[`userRolesRepository read operations getProjectUsers returns expected sn
 Array [
   Object {
     "catalogueRole": "user",
+    "dataManager": false,
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {
@@ -57,6 +60,7 @@ Array [
   },
   Object {
     "catalogueRole": "publisher",
+    "dataManager": true,
     "instanceAdmin": true,
     "projectRoles": Array [
       Object {
@@ -69,6 +73,7 @@ Array [
   },
   Object {
     "catalogueRole": "user",
+    "dataManager": false,
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {
@@ -81,6 +86,7 @@ Array [
   },
   Object {
     "catalogueRole": "user",
+    "dataManager": false,
     "instanceAdmin": false,
     "projectRoles": Array [
       Object {

@@ -10,6 +10,7 @@ function filterUserByRoles(userId, filters, otherUserRoles) {
 
   // see if we match a filter
   if (filters.instanceAdmin && roles.instanceAdmin) { return true; }
+  if (filters.dataManager && roles.dataManager) { return true; }
   if (filters.catalogueAdmin && roles.catalogueAdmin) { return true; }
   if (filters.cataloguePublisher && roles.cataloguePublisher) { return true; }
   if (filters.catalogueEditor && roles.catalogueEditor) { return true; }

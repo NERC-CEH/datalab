@@ -29,6 +29,7 @@ describe('createUserRoles', () => {
           userId,
           name: 'user name',
           instanceAdmin: true,
+          dataManager: true,
           catalogueRole: 'admin',
           projectRoles: [{
             projectKey,
@@ -72,6 +73,7 @@ describe('createUserRoles', () => {
     expect(userRoles).toEqual({
       'user-1234': {
         instanceAdmin: true,
+        dataManager: true,
         catalogueRole: 'admin',
         catalogueAdmin: true,
         cataloguePublisher: false,

@@ -38,27 +38,24 @@ async function getAllUsersAndRoles(req, res) {
   }
 }
 
-async function setInstanceAdmin(req, res) {
+// Note - roleKey must exist in UserRolesSchema in userRoles.model.js
+async function setSystemRole(req, res) {
   const { params: { userId } } = req;
-  const { body: { instanceAdmin } } = req;
-  try {
-    const roles = await userRolesRepository.setInstanceAdmin(userId, instanceAdmin);
-    res.status(200).send(roles);
-  } catch (err) {
-    logger.error(`setInstanceAdmin: ${err.message}`);
-    res.status(500);
+  const systemRoles = req.body;
+  const roleKeys = Object.keys(req.body);
+  if (roleKeys.length !== 1) {
+    logger.error(`setSystemRole: expected one role, found ${roleKeys.length}`);
+    res.status(400);
     res.send({});
+    return;
   }
-}
-
-async function setCatalogueRole(req, res) {
-  const { params: { userId } } = req;
-  const { body: { catalogueRole } } = req;
+  const roleKey = roleKeys[0];
+  const roleValue = systemRoles[roleKey];
   try {
-    const roles = await userRolesRepository.setCatalogueRole(userId, catalogueRole);
+    const roles = await userRolesRepository.setSystemRole(userId, roleKey, roleValue);
     res.status(200).send(roles);
   } catch (err) {
-    logger.error(`setCatalogueRole: ${err.message}`);
+    logger.error(`setSystemRole: ${err.message}`);
     res.status(500);
     res.send({});
   }
@@ -68,4 +65,4 @@ export const userIdValidator = validator([
   check('userId').isAscii(),
 ]);
 
-export default { getUsers, getUser, getAllUsersAndRoles, setInstanceAdmin, setCatalogueRole };
+export default { getUsers, getUser, getAllUsersAndRoles, setSystemRole };

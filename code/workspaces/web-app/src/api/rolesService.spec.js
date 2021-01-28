@@ -44,6 +44,25 @@ describe('rolesService', () => {
     });
   });
 
+  describe('setDataManager', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ setDataManager: 'expectedValue' });
+
+      return rolesService.setDataManager('one', true).then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return rolesService.setDataManager('one', true).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
   describe('setCatalogueRole', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ setCatalogueRole: 'expectedValue' });

@@ -1,11 +1,15 @@
+import { permissionTypes } from 'common';
 import userRoleRepository from './userRolesRepository';
 import database from '../config/database';
 import databaseMock from './testUtil/databaseMock';
+
+const { INSTANCE_ADMIN_ROLE_KEY } = permissionTypes;
 
 const user1 = {
   userId: 'uid1',
   userName: 'user1',
   instanceAdmin: false,
+  dataManager: false,
   projectRoles: [
     { projectKey: 'project 1', role: 'admin' },
     { projectKey: 'project 2', role: 'user' },
@@ -16,6 +20,7 @@ const user2 = {
   userId: 'uid2',
   userName: 'user2',
   instanceAdmin: true,
+  dataManager: true,
   catalogueRole: 'publisher',
   projectRoles: [
     { projectKey: 'project 2', role: 'viewer' },
@@ -133,6 +138,7 @@ describe('userRolesRepository', () => {
           userId: 'uid1',
           userName: 'user1',
           instanceAdmin: false,
+          dataManager: false,
           projectRoles: [
             { projectKey: 'project 1', role: 'admin' },
             { projectKey: 'project 2', role: 'user' },
@@ -153,6 +159,7 @@ describe('userRolesRepository', () => {
         userId: 'uid1',
         userName: 'user1',
         instanceAdmin: false,
+        dataManager: false,
         projectRoles: [
           { projectKey: 'project 1', role: 'admin' },
           { projectKey: 'project 2', role: 'admin' },
@@ -261,6 +268,7 @@ describe('userRolesRepository', () => {
         userName: 'user999',
         catalogueRole: 'user',
         instanceAdmin: false,
+        dataManager: false,
         projectRoles: [],
       });
     });
@@ -286,6 +294,7 @@ describe('userRolesRepository', () => {
         userName: 'user999',
         catalogueRole: 'user',
         instanceAdmin: true,
+        dataManager: false,
         projectRoles: [],
       });
     });
@@ -305,6 +314,7 @@ describe('userRolesRepository', () => {
         userId: 'uid1',
         userName: 'user1',
         instanceAdmin: false,
+        dataManager: false,
         projectRoles: [
           { projectKey: 'project 1', role: 'admin' },
         ],
@@ -326,7 +336,7 @@ describe('userRolesRepository', () => {
     });
   });
 
-  describe('setInstanceAdmin', () => {
+  describe('setSystemRole', () => {
     beforeEach(() => {
       mockDatabase = databaseMock(testUserRoles());
       database.getModel = mockDatabase;
@@ -336,31 +346,12 @@ describe('userRolesRepository', () => {
     it('should reject if the user is not in roles collection', async () => {
       mockDatabase = databaseMock([]);
       database.getModel = mockDatabase;
-      await expect(userRoleRepository.setInstanceAdmin('uid1', false)).rejects.toThrow('Unrecognised user uid1');
+      await expect(userRoleRepository.setSystemRole('uid1', INSTANCE_ADMIN_ROLE_KEY, false)).rejects.toThrow('Unrecognised user uid1');
     });
 
     it('should set instanceAdmin', async () => {
-      await userRoleRepository.setInstanceAdmin('uid1', true);
-      expect(mockDatabase().entity().instanceAdmin).toEqual(true);
-    });
-  });
-
-  describe('setCatalogueRole', () => {
-    beforeEach(() => {
-      mockDatabase = databaseMock(testUserRoles());
-      database.getModel = mockDatabase;
-      mockDatabase().clear();
-    });
-
-    it('should reject if the user is not in roles collection', async () => {
-      mockDatabase = databaseMock([]);
-      database.getModel = mockDatabase;
-      await expect(userRoleRepository.setCatalogueRole('uid1', 'user')).rejects.toThrow('Unrecognised user uid1');
-    });
-
-    it('should set catalogueRole', async () => {
-      await userRoleRepository.setCatalogueRole('uid1', 'user');
-      expect(mockDatabase().entity().catalogueRole).toEqual('user');
+      await userRoleRepository.setSystemRole('uid1', INSTANCE_ADMIN_ROLE_KEY, true);
+      expect(mockDatabase().entity()[INSTANCE_ADMIN_ROLE_KEY]).toEqual(true);
     });
   });
 

@@ -42,14 +42,21 @@ async function isMemberOfProject(projectKey, token) {
 async function setInstanceAdmin(userId, instanceAdmin, token) {
   logger.debug(`Setting instanceAdmin of ${userId} to ${instanceAdmin}`);
   const body = { instanceAdmin };
-  const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/instanceAdmin`, body, generateOptions(token));
+  const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/systemRole`, body, generateOptions(token));
   return { userId, instanceAdmin: data.instanceAdmin };
+}
+
+async function setDataManager(userId, dataManager, token) {
+  logger.debug(`Setting dataManager of ${userId} to ${dataManager}`);
+  const body = { dataManager };
+  const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/systemRole`, body, generateOptions(token));
+  return { userId, dataManager: data.dataManager };
 }
 
 async function setCatalogueRole(userId, catalogueRole, token) {
   logger.debug(`Setting catalogueRole of ${userId} to ${catalogueRole}`);
   const body = { catalogueRole };
-  const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/catalogueRole`, body, generateOptions(token));
+  const { data } = await axios.put(`${authServiceUrl}/roles/${userId}/systemRole`, body, generateOptions(token));
   return { userId, catalogueRole: data.catalogueRole };
 }
 
@@ -59,4 +66,4 @@ const generateOptions = token => ({
   },
 });
 
-export default { getAll, getProjectUsers, getUserName, isMemberOfProject, setInstanceAdmin, setCatalogueRole };
+export default { getAll, getProjectUsers, getUserName, isMemberOfProject, setInstanceAdmin, setDataManager, setCatalogueRole };

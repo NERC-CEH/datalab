@@ -1,7 +1,7 @@
 import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import { permissionTypes } from 'common';
 
-const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_ADMIN_ROLE, CATALOGUE_PUBLISHER_ROLE, CATALOGUE_EDITOR_ROLE,
+const { INSTANCE_ADMIN_ROLE_KEY, DATA_MANAGER_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_ADMIN_ROLE, CATALOGUE_PUBLISHER_ROLE, CATALOGUE_EDITOR_ROLE,
   PROJECT_ADMIN_ROLE, PROJECT_USER_ROLE, PROJECT_VIEWER_ROLE } = permissionTypes;
 
 function filterMapProjectRoleToProjectKeys(projectRoles, role) {
@@ -35,6 +35,7 @@ function createUserRoles(usersProjectRoles, stacksArray, dataStorageArray) {
   usersProjectRoles.value.forEach((userProjectRoles) => {
     userRoles[userProjectRoles.userId] = {
       instanceAdmin: userProjectRoles[INSTANCE_ADMIN_ROLE_KEY],
+      dataManager: userProjectRoles[DATA_MANAGER_ROLE_KEY],
       catalogueRole: userProjectRoles[CATALOGUE_ROLE_KEY],
       catalogueAdmin: userProjectRoles[CATALOGUE_ROLE_KEY] === CATALOGUE_ADMIN_ROLE,
       cataloguePublisher: userProjectRoles[CATALOGUE_ROLE_KEY] === CATALOGUE_PUBLISHER_ROLE,

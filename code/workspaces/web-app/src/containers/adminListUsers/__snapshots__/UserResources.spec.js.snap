@@ -52,6 +52,11 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               label="Instance admin"
               name="instanceAdmin"
             />
+            <SystemCheckbox
+              checked={true}
+              label="Data manager"
+              name="dataManager"
+            />
             <SystemSelect
               itemPrefix="Catalogue"
               items={
@@ -72,6 +77,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               <mockConstructor
                 filters={
                   Object {
+                    "dataManager": false,
                     "instanceAdmin": false,
                     "notebookOwner": false,
                     "projectAdmin": false,
@@ -84,6 +90,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                 projectKey="proj-1234"
                 roles={
                   Object {
+                    "dataManager": true,
                     "instanceAdmin": true,
                     "notebookOwner": Array [
                       Object {
@@ -179,6 +186,11 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               label="Instance admin"
               name="instanceAdmin"
             />
+            <SystemCheckbox
+              checked={true}
+              label="Data manager"
+              name="dataManager"
+            />
           </PromisedContentSkeletonWrapper>
         </div>
         <Pagination
@@ -187,6 +199,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               <mockConstructor
                 filters={
                   Object {
+                    "dataManager": false,
                     "instanceAdmin": false,
                     "notebookOwner": false,
                     "projectAdmin": false,
@@ -199,6 +212,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                 projectKey="proj-1234"
                 roles={
                   Object {
+                    "dataManager": true,
                     "instanceAdmin": true,
                     "notebookOwner": Array [
                       Object {

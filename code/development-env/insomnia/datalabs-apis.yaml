@@ -1,7 +1,7 @@
 _type: export
 __export_format: 4
-__export_date: 2020-12-07T15:46:57.648Z
-__export_source: insomnia.desktop.app:v2020.4.2
+__export_date: 2021-01-28T09:05:14.704Z
+__export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
     parentId: fld_8f24d304923241198bc95c2a94678530
@@ -561,12 +561,12 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_fdf512d577e04ab3bc508a587e9b0ff3
+  - _id: req_6522ae5b82a848a6b356ac9afe337e57
     parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1606841094958
-    created: 1606836653049
-    url: "{{ auth_url  }}/roles/dummy/instanceAdmin"
-    name: Set instanceAdmin
+    modified: 1611823800407
+    created: 1611822830439
+    url: "{{ auth_url  }}/roles/dummy/systemRole"
+    name: Set systemRole
     description: ""
     method: PUT
     body:
@@ -583,38 +583,7 @@ resources:
     authentication:
       token: "{{ internal_token  }}"
       type: bearer
-    metaSortKey: -1567085050753.75
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: req_9a1d915c746c4261a523138578870d25
-    parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1606841108436
-    created: 1606836877259
-    url: "{{ auth_url  }}/roles/dummy/catalogueRole"
-    name: Set catalogueRole
-    description: ""
-    method: PUT
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"catalogueRole": "blah"
-        }
-    parameters: []
-    headers:
-      - id: pair_f5281c8ea2a943e8938927aaf4b42734
-        name: Content-Type
-        value: application/json
-    authentication:
-      token: "{{ internal_token  }}"
-      type: bearer
-    metaSortKey: -1566995492864.875
+    metaSortKey: -1567062661281.5312
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -693,7 +662,7 @@ resources:
     _type: request
   - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1576247929346
+    modified: 1611744419404
     created: 1568024223786
     url: "{{ client_api_url  }}/api"
     name: Stacks
@@ -1140,7 +1109,7 @@ resources:
     _type: request
   - _id: req_ac4015a6432b46a9bba80a0f5e200a63
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1607353213912
+    modified: 1611746821205
     created: 1606145410033
     url: "{{ client_api_url  }}/api"
     name: All users and roles
@@ -1149,7 +1118,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  allUsersAndRoles
-        {\n    userId,\n    name,\n    instanceAdmin,\n    catalogueRole,\n    projectRoles
+        {\n    userId,\n    name,\n    instanceAdmin,\n    dataManager,\n    catalogueRole,\n    projectRoles
         {\n      projectKey,\n      role\n    }\n  }\n}"}'
     parameters: []
     headers:
@@ -1201,7 +1170,7 @@ resources:
     _type: request
   - _id: req_c742c2e35deb496693c5ccaaef9c4248
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1607355961889
+    modified: 1611824375438
     created: 1606922497352
     url: "{{ client_api_url  }}/api"
     name: Set instanceAdmin
@@ -1228,9 +1197,38 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_57856de0db4946ca892bededff23fed8
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1611824373317
+    created: 1611746389202
+    url: "{{ client_api_url  }}/api"
+    name: Set dataManager
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  setDataManager(userId:\"dummy\",
+        dataManager:true) {\n    userId,\n    dataManager\n  }\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 1025
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_26dad2999d1a421e8dbfdc7e4dcf0f45
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1607355986944
+    modified: 1611824378438
     created: 1606922876464
     url: "{{ client_api_url  }}/api"
     name: Set catalogueRole

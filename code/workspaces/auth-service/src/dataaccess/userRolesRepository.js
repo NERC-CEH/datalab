@@ -4,11 +4,12 @@ import remove from 'lodash/remove';
 import logger from 'winston';
 import database from '../config/database';
 
-const { INSTANCE_ADMIN_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_USER_ROLE } = permissionTypes;
+const { INSTANCE_ADMIN_ROLE_KEY, DATA_MANAGER_ROLE_KEY, CATALOGUE_ROLE_KEY, CATALOGUE_USER_ROLE } = permissionTypes;
 
 // Default roles that don't need storing in Mongo
 const defaultRoles = {
   [INSTANCE_ADMIN_ROLE_KEY]: false,
+  [DATA_MANAGER_ROLE_KEY]: false,
   [CATALOGUE_ROLE_KEY]: CATALOGUE_USER_ROLE,
 };
 
@@ -112,27 +113,15 @@ async function addRecordForNewUser(userId, userName) {
   return roles;
 }
 
-async function setInstanceAdmin(userId, instanceAdmin) {
+// Note - roleKey must exist in UserRolesSchema in userRoles.model.js
+async function setSystemRole(userId, roleKey, roleValue) {
   const users = await UserRoles().find({ userId }).exec();
   if (!users || users.length === 0) {
     throw new Error(`Unrecognised user ${userId}`);
   }
   await Promise.all(users.map((roles) => {
-    roles[INSTANCE_ADMIN_ROLE_KEY] = instanceAdmin; // eslint-disable-line no-param-reassign
     const { _id } = roles;
-    return UserRoles().findOneAndUpdate({ _id }, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
-  }));
-  return users.map(addDefaults)[0];
-}
-
-async function setCatalogueRole(userId, catalogueRole) {
-  const users = await UserRoles().find({ userId }).exec();
-  if (!users || users.length === 0) {
-    throw new Error(`Unrecognised user ${userId}`);
-  }
-  await Promise.all(users.map((roles) => {
-    roles[CATALOGUE_ROLE_KEY] = catalogueRole; // eslint-disable-line no-param-reassign
-    const { _id } = roles;
+    roles[roleKey] = roleValue; // eslint-disable-line no-param-reassign
     return UserRoles().findOneAndUpdate({ _id }, roles, { upsert: true, setDefaultsOnInsert: true, runValidators: true });
   }));
   return users.map(addDefaults)[0];
@@ -181,4 +170,14 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { combineRoles, getRoles, addRecordForNewUser, getUser, getUsers, getAllUsersAndRoles, getProjectUsers, setInstanceAdmin, setCatalogueRole, addRole, removeRole, userIsMember };
+export default { combineRoles,
+  getRoles,
+  addRecordForNewUser,
+  getUser,
+  getUsers,
+  getAllUsersAndRoles,
+  getProjectUsers,
+  setSystemRole,
+  addRole,
+  removeRole,
+  userIsMember };

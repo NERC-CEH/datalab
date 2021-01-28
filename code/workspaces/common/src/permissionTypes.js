@@ -27,6 +27,9 @@ const SYSTEM = 'system';
 // key name used for admin role boolean in auth
 const INSTANCE_ADMIN_ROLE_KEY = 'instanceAdmin';
 
+// key name used for data manager role boolean in auth
+const DATA_MANAGER_ROLE_KEY = 'dataManager';
+
 const CATALOGUE_ROLE_KEY = 'catalogueRole';
 const CATALOGUE = 'catalogue';
 const CATALOGUE_ADMIN_ROLE = 'admin';
@@ -35,8 +38,8 @@ const CATALOGUE_EDITOR_ROLE = 'editor';
 const CATALOGUE_USER_ROLE = 'user';
 const CATALOGUE_ROLES = [CATALOGUE_ADMIN_ROLE, CATALOGUE_PUBLISHER_ROLE, CATALOGUE_EDITOR_ROLE, CATALOGUE_USER_ROLE];
 
-const keyDelim = '_';
-const permissionDelim = ':';
+const keyDelimiter = '_';
+const permissionDelimiter = ':';
 
 const elementsPermissionList = {
   READ,
@@ -59,7 +62,7 @@ const elements = {
   PROJECTS,
 };
 
-const PROJECT_KEY = `${PROJECT_NAMESPACE}${permissionDelim}${KEY_TOKEN}`;
+const PROJECT_KEY = `${PROJECT_NAMESPACE}${permissionDelimiter}${KEY_TOKEN}`;
 const projectKeys = {
   PROJECT_KEY,
 };
@@ -67,7 +70,7 @@ const projectKeys = {
 const concatPermissions = (head, tail, char) => `${head}${char}${tail}`;
 
 const makePermissionObj = ([outerKey, outerValue], [innerKey, innerValue]) => ({
-  [concatPermissions(outerKey, innerKey, keyDelim)]: concatPermissions(outerValue, innerValue, permissionDelim),
+  [concatPermissions(outerKey, innerKey, keyDelimiter)]: concatPermissions(outerValue, innerValue, permissionDelimiter),
 });
 
 const flatMapPermissions = (outer, inner) => Object.entries(outer)
@@ -90,6 +93,7 @@ const { SYSTEM_INSTANCE_ADMIN } = systemPermissions;
 
 export {
   INSTANCE_ADMIN_ROLE_KEY,
+  DATA_MANAGER_ROLE_KEY,
   SYSTEM_INSTANCE_ADMIN,
   PROJECT_ROLES_KEY,
   CATALOGUE_ROLE_KEY,
@@ -110,6 +114,6 @@ export {
   usersPermissions,
   projectPermissions,
   systemPermissions,
-  permissionDelim as delimiter,
+  permissionDelimiter as delimiter,
   projectKeyPermission,
 };
