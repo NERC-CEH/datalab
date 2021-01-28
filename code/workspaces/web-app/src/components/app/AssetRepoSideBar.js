@@ -6,7 +6,7 @@ import SideBarGroup from './SideBarGroup';
 import SideBarButton from './SideBarButton';
 import sideBarStyles from './sideBarStyles';
 
-const AdminSideBar = ({ classes }) => (
+const AssetRepoSideBar = ({ classes }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
       <SideBarGroup title='Asset Repo'>
@@ -16,8 +16,8 @@ const AdminSideBar = ({ classes }) => (
   </div>
 );
 
-AdminSideBar.propTypes = {
+AssetRepoSideBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(sideBarStyles)(AdminSideBar);
+export default withStyles(sideBarStyles)(AssetRepoSideBar);
