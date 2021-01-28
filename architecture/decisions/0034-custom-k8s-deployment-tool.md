@@ -4,7 +4,7 @@ Date: 2017-11-05
 
 ## Status
 
-Accepted
+Superseded by [44. Use Helm as Kubernetes deployment tool](0044-use-helm-as-k8s-deployment-tool.md).
 
 ## Context
 

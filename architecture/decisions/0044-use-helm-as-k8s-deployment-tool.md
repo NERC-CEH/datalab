@@ -1,4 +1,4 @@
-# 44. Replace Bara with Helm as Kubernetes deployment tool
+# 44. Use Helm as Kubernetes deployment tool
 
 Date: 2020-12-14
 
