@@ -5,6 +5,7 @@ const LIST = 'list';
 const OPEN = 'open';
 const EDIT = 'edit';
 const ADMIN = 'admin';
+const MANAGER = 'manager';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
@@ -12,6 +13,7 @@ const SETTINGS = 'settings';
 const PERMISSIONS = 'permissions';
 const USERS = 'users';
 const INSTANCE = 'instance';
+const DATA = 'data';
 const PROJECTS = 'projects';
 
 const PROJECT_NAMESPACE = 'projects';
@@ -87,14 +89,15 @@ const projectPermissions = flatMapPermissions(projectKeys, { ...elementPermissio
 
 const projectKeyPermission = (permission, projectKey) => permission.replace(KEY_TOKEN, projectKey);
 
-const systemPermissions = flatMapPermissions({ SYSTEM }, flatMapPermissions({ INSTANCE }, { ADMIN }));
-
-const { SYSTEM_INSTANCE_ADMIN } = systemPermissions;
+const SYSTEM_INSTANCE_ADMIN = concatPermissions(SYSTEM, concatPermissions(INSTANCE, ADMIN, permissionDelimiter), permissionDelimiter);
+const SYSTEM_DATA_MANAGER = concatPermissions(SYSTEM, concatPermissions(DATA, MANAGER, permissionDelimiter), permissionDelimiter);
+const systemPermissions = { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER };
 
 export {
   INSTANCE_ADMIN_ROLE_KEY,
   DATA_MANAGER_ROLE_KEY,
   SYSTEM_INSTANCE_ADMIN,
+  SYSTEM_DATA_MANAGER,
   PROJECT_ROLES_KEY,
   CATALOGUE_ROLE_KEY,
   CATALOGUE_ADMIN_ROLE,
@@ -108,7 +111,6 @@ export {
   PROJECT_VIEWER_ROLE,
   PROJECT_ROLES,
   SYSTEM,
-  INSTANCE,
   CATALOGUE,
   elementPermissions,
   usersPermissions,

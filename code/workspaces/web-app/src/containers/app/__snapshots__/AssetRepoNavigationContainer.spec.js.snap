@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetRepoNavigationContainer renders to match snapshot passing correct props to children 1`] = `
+<WithStyles(SideBarNavigation)
+  sideBar={<ForwardRef(WithStyles) />}
+>
+  <Switch>
+    <RoutePermissionWrapper
+      component={[Function]}
+      exact={true}
+      path="/assets/add-metadata"
+      permission="system:data:manager"
+    />
+    <Redirect
+      exact={true}
+      from="/assets"
+      to="/assets/add-metadata"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
+</WithStyles(SideBarNavigation)>
+`;

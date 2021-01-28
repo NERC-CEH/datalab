@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetRepoAddMetadataPage renders correct snapshot 1`] = `
+<WithStyles(Page)
+  title="Add Metadata"
+/>
+`;
