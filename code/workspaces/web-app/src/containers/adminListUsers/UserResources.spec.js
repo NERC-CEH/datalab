@@ -22,6 +22,7 @@ describe('UserResources', () => {
   const shallowRender = () => {
     const filters = {
       instanceAdmin: false,
+      dataManager: false,
       projectAdmin: false,
       projectUser: false,
       projectViewer: false,
@@ -31,6 +32,7 @@ describe('UserResources', () => {
     };
     const roles = {
       instanceAdmin: true,
+      dataManager: true,
       projectAdmin: [projectKey],
       projectUser: [projectKey],
       projectViewer: [projectKey],

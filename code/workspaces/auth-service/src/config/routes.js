@@ -26,8 +26,7 @@ function configureRoutes(app) {
   app.get('/projects/:projectKey/is-member', dtMW, ew(projectController.isMember));
   app.get('/projects/:projectKey/users', dtMW, projectPermissionChecker(PROJECT_KEY_PROJECTS_READ), ew(projectController.getUserRoles));
   app.put('/projects/:projectKey/users/:userId/roles', dtMW, projectPermissionChecker(PROJECT_KEY_PERMISSIONS_CREATE), addRoleValidator, ew(projectController.addUserRole));
-  app.put('/roles/:userId/instanceAdmin', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userIdValidator, userManagement.setInstanceAdmin);
-  app.put('/roles/:userId/catalogueRole', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userIdValidator, userManagement.setCatalogueRole);
+  app.put('/roles/:userId/systemRole', dtMW, permissionChecker(SYSTEM_INSTANCE_ADMIN), userIdValidator, userManagement.setSystemRole);
   app.delete('/projects/:projectKey/users/:userId/role', dtMW, projectPermissionChecker(PROJECT_KEY_PERMISSIONS_DELETE), removeRoleValidator, ew(projectController.removeUserRole));
 }
 

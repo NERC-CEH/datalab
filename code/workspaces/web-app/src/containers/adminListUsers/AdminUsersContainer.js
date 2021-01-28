@@ -56,6 +56,7 @@ function AdminUsersContainer() {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [filters, setFilters] = useState({
     instanceAdmin: false,
+    dataManager: false,
     catalogueAdmin: false,
     cataloguePublisher: false,
     catalogueEditor: false,
@@ -119,6 +120,7 @@ function AdminUsersContainer() {
         >
           <div className={classes.filterColumn}>
             <FilterCheckBox label="Instance admin" checked={filters.instanceAdmin} name="instanceAdmin" />
+            <FilterCheckBox label="Data manager" checked={filters.dataManager} name="dataManager" />
           </div>
           {catalogueAvailable.value && <div className={classes.filterColumn}>
             <FilterCheckBox label="Catalogue admin" checked={filters.catalogueAdmin} name="catalogueAdmin" />

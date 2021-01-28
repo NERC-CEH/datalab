@@ -42,7 +42,7 @@ describe('userService', () => {
     // Arrange
     const userId = 'one';
     const instanceAdmin = true;
-    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/instanceAdmin`)
+    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/systemRole`)
       .reply(200, { instanceAdmin });
 
     // Act
@@ -52,11 +52,25 @@ describe('userService', () => {
     expect(response).toEqual({ userId, instanceAdmin });
   });
 
+  it('setDataManager makes an api request', async () => {
+    // Arrange
+    const userId = 'one';
+    const dataManager = true;
+    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/systemRole`)
+      .reply(200, { dataManager });
+
+    // Act
+    const response = await usersService.setDataManager(userId, dataManager, context.token);
+
+    // Assert
+    expect(response).toEqual({ userId, dataManager });
+  });
+
   it('setCatalogueRole makes an api request', async () => {
     // Arrange
     const userId = 'one';
     const catalogueRole = 'publisher';
-    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/catalogueRole`)
+    httpMock.onPut(`${AUTH_URL_BASE}/roles/one/systemRole`)
       .reply(200, { catalogueRole });
 
     // Act

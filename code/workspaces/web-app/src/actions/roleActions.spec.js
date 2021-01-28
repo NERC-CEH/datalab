@@ -1,5 +1,5 @@
 import roleActions, {
-  GET_ALL_USERS_AND_ROLES_ACTION, SET_INSTANCE_ADMIN_ACTION, SET_CATALOGUE_ROLE_ACTION,
+  GET_ALL_USERS_AND_ROLES_ACTION, SET_INSTANCE_ADMIN_ACTION, SET_DATA_MANAGER_ACTION, SET_CATALOGUE_ROLE_ACTION,
 } from './roleActions';
 import rolesService from '../api/rolesService';
 
@@ -35,6 +35,20 @@ describe('roleActions', () => {
       expect(setInstanceAdminMock).toHaveBeenCalledWith('one', false);
       expect(output.type).toBe(SET_INSTANCE_ADMIN_ACTION);
       expect(output.payload).toBe('expectedSetInstanceAdminPayload');
+    });
+
+    it('setDataManager', () => {
+      // Arrange
+      const setDataManagerMock = jest.fn().mockReturnValue('expectedSetDataManagerPayload');
+      rolesService.setDataManager = setDataManagerMock;
+
+      // Act
+      const output = roleActions.setDataManager('one', false);
+
+      // Assert
+      expect(setDataManagerMock).toHaveBeenCalledWith('one', false);
+      expect(output.type).toBe(SET_DATA_MANAGER_ACTION);
+      expect(output.payload).toBe('expectedSetDataManagerPayload');
     });
 
     it('setCatalogueRole', () => {

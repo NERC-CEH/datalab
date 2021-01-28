@@ -4,10 +4,11 @@ import errorHandler from './graphqlErrorHandler';
 async function getAllUsersAndRoles() {
   const query = `
     GetAllUsersAndRoles {
-      allUsersAndRoles {
+      allUsersAndRoles { 
         userId,
         name,
         instanceAdmin,
+        dataManager,
         catalogueRole,
         projectRoles {
           projectKey,
@@ -35,6 +36,20 @@ async function setInstanceAdmin(userId, instanceAdmin) {
   return newInstanceAdmin;
 }
 
+async function setDataManager(userId, dataManager) {
+  const mutation = `
+    SetDataManager($userId: ID!, $dataManager: Boolean!) {
+      setDataManager(userId: $userId, dataManager: $dataManager) {
+        userId,
+        dataManager
+      }
+    }`;
+
+  const newDataManager = await gqlMutation(mutation, { userId, dataManager })
+    .then(errorHandler('data.setDataManager'));
+  return newDataManager;
+}
+
 async function setCatalogueRole(userId, catalogueRole) {
   const mutation = `
     SetCatalogueRole($userId: ID!, $catalogueRole: CatalogueRole!) {
@@ -49,4 +64,4 @@ async function setCatalogueRole(userId, catalogueRole) {
   return newCatalogueRole;
 }
 
-export default { getAllUsersAndRoles, setInstanceAdmin, setCatalogueRole };
+export default { getAllUsersAndRoles, setInstanceAdmin, setDataManager, setCatalogueRole };
