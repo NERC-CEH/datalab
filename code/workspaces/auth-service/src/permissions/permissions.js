@@ -3,9 +3,9 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import config from '../config/config';
 
-const { PROJECT_ROLES_KEY, CATALOGUE_ROLE_KEY, INSTANCE_ADMIN_ROLE_KEY, SYSTEM, INSTANCE, CATALOGUE, PROJECT_NAMESPACE } = permissionTypes;
+const { PROJECT_ROLES_KEY, CATALOGUE_ROLE_KEY, INSTANCE_ADMIN_ROLE_KEY, DATA_MANAGER_ROLE_KEY, SYSTEM, CATALOGUE, PROJECT_NAMESPACE } = permissionTypes;
 
-const roleDelim = ':';
+const roleDelimiter = ':';
 
 const permissionAttributes = yaml.safeLoad(fs.readFileSync(config.get('permissionAttributes')));
 
@@ -20,17 +20,17 @@ const getPermissions = roleObject => ({
 // -> [ { role: 'admin', projectKey: 'project', permissions: [/see permissions.yml/] } ]
 const buildPermissions = ({ permissions, ...rest }) => ({
   ...rest,
-  permissions: permissions.map(({ name, permissions: subPermissions }) => subPermissions.map(permission => name.concat(roleDelim, permission)))
+  permissions: permissions.map(({ name, permissions: subPermissions }) => subPermissions.map(permission => name.concat(roleDelimiter, permission)))
     .reduce(flattenArray, []),
 });
 
 //    [ 'system', 'instance', 'admin' ]
 // -> 'system:instance:admin'
-const stringifyPermissions = permissions => permissions.join(roleDelim);
+const stringifyPermissions = permissions => permissions.join(roleDelimiter);
 
 //    [ { role: 'admin', projectKey: 'project2', permissions: [/see permissions.yml/] } ]
 // -> [ ['projects:project2:stacks:delete', ...] ]
-const projectifyPermissions = ({ projectKey, permissions }) => permissions
+const mapProjectPermissions = ({ projectKey, permissions }) => permissions
   .map(permission => stringifyPermissions([PROJECT_NAMESPACE, projectKey, permission]));
 
 const flattenArray = (previous, current) => {
@@ -40,13 +40,22 @@ const flattenArray = (previous, current) => {
   return previous;
 };
 
-function getInstanceAdminPermissions(instanceRole) {
-  if (!instanceRole) {
+function getInstanceAdminPermissions(instanceAdminRole) {
+  if (!instanceAdminRole) {
     return [];
   }
   const { permissions } = permissionAttributes[INSTANCE_ADMIN_ROLE_KEY];
   return permissions
-    .map(permission => stringifyPermissions([SYSTEM, INSTANCE, permission]));
+    .map(permission => stringifyPermissions([SYSTEM, permission]));
+}
+
+function getDataManagerPermissions(dataManagerRole) {
+  if (!dataManagerRole) {
+    return [];
+  }
+  const { permissions } = permissionAttributes[DATA_MANAGER_ROLE_KEY];
+  return permissions
+    .map(permission => stringifyPermissions([SYSTEM, permission]));
 }
 
 function getCataloguePermissions(catalogueRole) {
@@ -65,16 +74,19 @@ const processRoles = (userRoles) => {
   const projectPermissions = projectRoles
     .map(getPermissions)
     .map(buildPermissions)
-    .map(projectifyPermissions)
+    .map(mapProjectPermissions)
     .reduce(flattenArray, []);
 
   const instanceAdminRole = userRoles[INSTANCE_ADMIN_ROLE_KEY];
   const instanceAdminPermissions = getInstanceAdminPermissions(instanceAdminRole);
 
+  const dataManagerRole = userRoles[DATA_MANAGER_ROLE_KEY];
+  const dataManagerPermissions = getDataManagerPermissions(dataManagerRole);
+
   const catalogueRole = userRoles[CATALOGUE_ROLE_KEY];
   const cataloguePermissions = getCataloguePermissions(catalogueRole);
 
-  return [...projectPermissions, ...instanceAdminPermissions, ...cataloguePermissions];
+  return [...projectPermissions, ...instanceAdminPermissions, ...dataManagerPermissions, ...cataloguePermissions];
 };
 
 export default processRoles;

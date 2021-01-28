@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
+import { permissionTypes } from 'common';
 import SideBarNavigation from '../../components/app/SideBarNavigation';
 import AdminResourcesPage from '../../pages/AdminResourcesPage';
 import AdminUsersPage from '../../pages/AdminUsersPage';
 import RoutePermissions from '../../components/common/RoutePermissionWrapper';
 import NotFoundPage from '../../pages/NotFoundPage';
 import AdminSideBar from '../../components/app/AdminSideBar';
+
+const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
 function AdminNavigationContainer() {
   return (

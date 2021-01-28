@@ -62,14 +62,14 @@ describe('Get Permissions', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('should add instance admin permission', () => {
+  it('should add instance admin permissions', () => {
     const userRole = {
       userId: 'uid1',
       instanceAdmin: true,
     };
 
     const output = getPermissions(userRole);
-    expect(output).toEqual(['system:instance:admin']);
+    expect(output).toEqual(['system:instance:admin', 'system:data:manager']);
   });
 
   it('should add catalogue admin permissions', () => {

@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
+import { permissionTypes } from 'common';
 import UserInfo from './UserIcon';
 import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import { extendSubdomain } from '../../core/getDomainInfo';
 import TopBarButton from './TopBarButton';
 import navBarLinks from '../../constants/navBarLinks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
+
+const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 
 const styles = theme => ({
   appBar: {
@@ -48,6 +50,9 @@ const TopBar = ({ classes, identity }) => {
         <div className={classes.buttons}>
           {userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
           && <TopBarButton to="/admin" label="Admin"/>
+          }
+          {userPermissions.includes(SYSTEM_DATA_MANAGER)
+          && <TopBarButton to="/assets" label="Asset Repo"/>
           }
           <TopBarButton to="/projects" label="Projects"/>
           {datalabLinks.map(({ displayName, href, icon }) => <TopBarButton

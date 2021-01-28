@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetRepoSideBar renders correctly passing props to children 1`] = `
+<AdminSideBar
+  classes={
+    Object {
+      "itemList": "AdminSideBar-itemList-1 itemList",
+      "sideBar": "AdminSideBar-sideBar-2 sideBar",
+    }
+  }
+/>
+`;
