@@ -1,7 +1,7 @@
 _type: export
 __export_format: 4
-__export_date: 2020-12-07T15:46:57.648Z
-__export_source: insomnia.desktop.app:v2020.4.2
+__export_date: 2021-01-28T12:06:25.213Z
+__export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
     parentId: fld_8f24d304923241198bc95c2a94678530
@@ -201,6 +201,51 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_6b8fbd57b5344b898d8c8e350ad89a73
+    parentId: fld_efdc629f5bc0405b82d382c674e6102a
+    modified: 1611835531553
+    created: 1610380108293
+    url: "{{ infra_api_url }}/secrets/stack"
+    name: Get Stack Secret
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: projectKey
+        value: alexproj
+        description: ""
+        id: pair_fdc782d5ba364871a2787a2c1e193012
+      - name: stackName
+        value: accesstest
+        description: ""
+        id: pair_b0ed3524fcda459b89d14f6f149b88ab
+      - name: stackType
+        value: minio
+        description: ""
+        id: pair_18692b29a70a47efbe1e01a6fb258835
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ internal_token }}"
+    metaSortKey: -1610380108293
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_efdc629f5bc0405b82d382c674e6102a
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    modified: 1611835223165
+    created: 1611835200417
+    name: Secrets
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1569323635130.4375
+    _type: request_group
   - _id: req_8fa42e7ccf224c929e99fffc3a5777fe
     parentId: fld_541180f583704c469aaea72ca36c35be
     modified: 1601542444187
