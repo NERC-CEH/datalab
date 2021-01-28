@@ -33,7 +33,7 @@ describe('user management controller', () => {
 
     it('should return 500 if error', async () => {
       // Arrange
-      getUsersMock.mockRejectedValue('no such catalogue');
+      getUsersMock.mockRejectedValue('some error');
       const request = httpMocks.createRequest();
       const response = httpMocks.createResponse();
 
@@ -90,7 +90,7 @@ describe('user management controller', () => {
 
     it('should return 500 if error', async () => {
       // Arrange
-      getAllUsersAndRolesMock.mockRejectedValue('no such catalogue');
+      getAllUsersAndRolesMock.mockRejectedValue('some error');
       const request = httpMocks.createRequest();
       const response = httpMocks.createResponse();
 
@@ -141,7 +141,7 @@ describe('user management controller', () => {
       request.params = { userId: '123' };
       request.body = { instanceAdmin: true };
       const response = httpMocks.createResponse();
-      setSystemRoleMock.mockRejectedValue('no such catalogue');
+      setSystemRoleMock.mockRejectedValue('some error');
 
       // Act
       await userManagement.setSystemRole(request, response);

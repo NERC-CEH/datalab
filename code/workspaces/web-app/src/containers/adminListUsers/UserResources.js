@@ -83,6 +83,7 @@ export default function UserResources({ user, filters, roles }) {
         dispatch(roleActions.setDataManager(user.userId, event.target.checked));
         break;
       default:
+        // no default action
     }
   };
 
