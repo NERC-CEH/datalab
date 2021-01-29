@@ -236,6 +236,20 @@ Finally, use the following command to start the app in place of the final one us
 docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up -d
 ```
 
+## Local Helm install
+
+It is also possible to deploy DataLabs locally using Helm.
+This is not well suited for local development as you cannot change files within the DataLabs containers deployed with this mechanism.
+However, it is useful when testing the Helm chart configuration.
+A script exists at `./scripts/helm-install-datalabs-locally.sh` which will create the necessary secrets within minikube for the Helm install to work (note that this builds off of the items that have already been installed into minikube such as the storage classes etc.).
+There are values that can be used to configure the installation at the top of the script, some of which will need to be set before first use.
+
+**Warning:** Before running this script ensure that your `kubectl` is configured to operate on the correct cluster.
+`kubectl` is used throughout the script to create new secrets etc.
+
+If you require access to the services running in the cluster, you may need to deploy an ingress controller.
+Details of this are covered in [datalabs-internal-setup.md](datalabs-internal-setup.md) from the "Install ingress controller for minikube" section onwards.
+
 ## Testing APIs
 
 The [Insomnia Rest client](https://insomnia.rest/) is recommended for testing APIs
