@@ -7,6 +7,7 @@ import volumeRouter from '../routers/volumeRouter';
 import volumesRouter from '../routers/volumesRouter';
 import logsRouter from '../routers/logsRouter';
 import resourcesRouter from '../routers/resourcesRouter';
+import secretRouter from '../routers/secretRouter';
 
 function configureRoutes(app) {
   app.get('/status', status.status);
@@ -18,6 +19,7 @@ function configureRoutes(app) {
   app.use('/volumes', volumesRouter);
   app.use('/logs', logsRouter);
   app.use('/resources', resourcesRouter);
+  app.use('/secrets', secretRouter);
 }
 
 export default { configureRoutes };
