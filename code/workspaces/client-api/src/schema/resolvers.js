@@ -1,7 +1,7 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
 import { version } from '../version';
-import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
+import { dataManagerPermissionWrapper, instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
 import permissionsService from '../dataaccess/userPermissionsService';
@@ -14,6 +14,7 @@ import projectService from '../dataaccess/projectService';
 import storageService from '../infrastructure/storageService';
 import logsService from '../dataaccess/logsService';
 import rolesService from '../dataaccess/rolesService';
+import centralAssetRepoService from '../dataaccess/centralAssetRepoService';
 
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_EDIT, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
@@ -75,6 +76,7 @@ const resolvers = {
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, user, token)),
     updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.projectKey }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
+    createCentralAssetMetadata: (obj, { metadata }, { user, token }) => dataManagerPermissionWrapper(user, () => centralAssetRepoService.createMetadata(metadata, token)),
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),

@@ -96,6 +96,9 @@ type Mutation {
     # Remove a user permission from a project
     removeProjectPermission(permission: PermissionRemoveRequest): Boolean
 
+    # Create a central asset repo metadata
+    createCentralAssetMetadata(metadata: CentralAssetMetadataCreationRequest!): CentralAssetMetadata!
+
     # Set instanceAdmin role
     setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
 
@@ -338,4 +341,36 @@ enum CatalogueRole {
     publisher,
     editor,
     user
+}
+
+type CentralAssetMetadata {
+    assetId: String!
+    name: String!
+    version: String!
+    type: CentralAssetMetadataType!
+    fileLocation: String
+    masterUrl: String
+    masterVersion: String
+    owners: [String]!
+    isPublic: Boolean!
+    projects: [String]
+    registrationDate: String!
+}
+
+input CentralAssetMetadataCreationRequest {
+    name: String!
+    version: String!
+    type: CentralAssetMetadataType!
+    fileLocation: String
+    masterUrl: String
+    masterVersion: String
+    owners: [String]!
+    isPublic: Boolean!
+    projects: [String]
+}
+
+enum CentralAssetMetadataType {
+    data,
+    notebook,
+    snippet,
 }

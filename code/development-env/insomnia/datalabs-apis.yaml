@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-01-28T09:05:14.704Z
+__export_date: 2021-02-01T11:12:29.063Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
@@ -594,7 +594,7 @@ resources:
     _type: request
   - _id: req_09e0efcf4b0f4a8e90a820f3a4c35e2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606139841618
+    modified: 1612177493145
     created: 1575988247734
     url: "{{ client_api_url  }}/api"
     name: logs
@@ -632,7 +632,7 @@ resources:
     _type: request_group
   - _id: req_67241f2b3eda4593a73273e07248f4f9
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1576144847453
+    modified: 1612177449960
     created: 1566905934976
     url: "{{ client_api_url  }}/api"
     name: project
@@ -899,7 +899,7 @@ resources:
     _type: request
   - _id: req_1e855f4eb84f48eb909addb89a59835d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1607353359632
+    modified: 1612177562393
     created: 1568906446384
     url: "{{ client_api_url  }}/api"
     name: updateProject
@@ -1255,6 +1255,37 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1612177907597
+    created: 1612177227190
+    url: "{{ _.client_api_url }}/api"
+    name: createCentralAssetMetadata
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  createCentralAssetMetadata (metadata:
+        {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    type:
+        data,\n    owners: [\"owner-id\"],\n    isPublic: true,\n  })
+        {\n    name\n    version\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ff5e88661367403f83ff2fc19b939830
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 1100
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_48570009e9174ff99cd16d737a3264fd
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     modified: 1576247760329
@@ -1449,13 +1480,13 @@ resources:
     _type: request
   - _id: fld_313c3a8e345a49b3be4d55d06109639c
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    modified: 1567594769515
+    modified: 1612177428238
     created: 1567594762320
     name: Auth0
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1543420043792.5
+    metaSortKey: -1549462148636.125
     _type: request_group
   - _id: env_2014cd721e3244c198b46a159e1352b9
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
