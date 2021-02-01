@@ -44,6 +44,11 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
           label="Instance admin"
           name="instanceAdmin"
         />
+        <FilterCheckBox
+          checked={false}
+          label="Data manager"
+          name="dataManager"
+        />
       </div>
       <div
         className="makeStyles-filterColumn-2"
@@ -95,12 +100,14 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
             "value": Array [
               Object {
                 "catalogueRole": "admin",
+                "dataManager": true,
                 "instanceAdmin": true,
                 "name": "Test User 1",
                 "userId": "user1",
               },
               Object {
                 "catalogueRole": "user",
+                "dataManager": false,
                 "instanceAdmin": false,
                 "name": "Test User 2",
                 "userId": "user2",
@@ -123,6 +130,7 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
                   "catalogueAdmin": false,
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
+                  "dataManager": false,
                   "instanceAdmin": false,
                   "notebookOwner": false,
                   "projectAdmin": false,
@@ -138,6 +146,7 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
                   "catalogueRole": "admin",
+                  "dataManager": true,
                   "instanceAdmin": true,
                   "notebookOwner": Array [],
                   "projectAdmin": Array [],
@@ -160,6 +169,7 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
                   "catalogueAdmin": false,
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
+                  "dataManager": false,
                   "instanceAdmin": false,
                   "notebookOwner": false,
                   "projectAdmin": false,
@@ -175,6 +185,7 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
                   "catalogueRole": "user",
+                  "dataManager": false,
                   "instanceAdmin": false,
                   "notebookOwner": Array [],
                   "projectAdmin": Array [],
@@ -244,6 +255,11 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
           checked={false}
           label="Instance admin"
           name="instanceAdmin"
+        />
+        <FilterCheckBox
+          checked={false}
+          label="Data manager"
+          name="dataManager"
         />
       </div>
       <div
@@ -315,12 +331,14 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
             "value": Array [
               Object {
                 "catalogueRole": "admin",
+                "dataManager": true,
                 "instanceAdmin": true,
                 "name": "Test User 1",
                 "userId": "user1",
               },
               Object {
                 "catalogueRole": "user",
+                "dataManager": false,
                 "instanceAdmin": false,
                 "name": "Test User 2",
                 "userId": "user2",
@@ -343,6 +361,7 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                   "catalogueAdmin": false,
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
+                  "dataManager": false,
                   "instanceAdmin": false,
                   "notebookOwner": false,
                   "projectAdmin": false,
@@ -358,6 +377,7 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
                   "catalogueRole": "admin",
+                  "dataManager": true,
                   "instanceAdmin": true,
                   "notebookOwner": Array [],
                   "projectAdmin": Array [],
@@ -380,6 +400,7 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                   "catalogueAdmin": false,
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
+                  "dataManager": false,
                   "instanceAdmin": false,
                   "notebookOwner": false,
                   "projectAdmin": false,
@@ -395,6 +416,7 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                   "catalogueEditor": false,
                   "cataloguePublisher": false,
                   "catalogueRole": "user",
+                  "dataManager": false,
                   "instanceAdmin": false,
                   "notebookOwner": Array [],
                   "projectAdmin": Array [],

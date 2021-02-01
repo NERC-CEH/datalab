@@ -5,7 +5,8 @@
 .idea/
 
 docs/book/
-docs/version.md
+docs/src/version.md
+docs/mdbook
 
 code/workspaces/**/coverage/
 code/workspaces/**/dist/

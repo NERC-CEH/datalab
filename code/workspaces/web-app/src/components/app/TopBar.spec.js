@@ -1,12 +1,14 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
+import { permissionTypes } from 'common';
 import TopBar from './TopBar';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 
+const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
+
 jest.mock('../../hooks/authHooks');
 
-describe('Topbar', () => {
+describe('TopBar', () => {
   let shallow;
 
   beforeEach(() => {
@@ -20,10 +22,17 @@ describe('Topbar', () => {
     ).toMatchSnapshot();
   });
 
-  it('correctly renders correct snapshot for instance admin', () => {
+  it('correctly renders correct snapshot for instance admin permission', () => {
     useCurrentUserPermissions.mockReturnValueOnce({ value: [SYSTEM_INSTANCE_ADMIN] });
     expect(
       shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} userPermissions = {[SYSTEM_INSTANCE_ADMIN]} />),
+    ).toMatchSnapshot();
+  });
+
+  it('correctly renders correct snapshot for data manager permission', () => {
+    useCurrentUserPermissions.mockReturnValueOnce({ value: [SYSTEM_DATA_MANAGER] });
+    expect(
+      shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} userPermissions = {[SYSTEM_DATA_MANAGER]} />),
     ).toMatchSnapshot();
   });
 });

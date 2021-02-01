@@ -32,6 +32,15 @@ describe('filterUserByRoles', () => {
     expect(filterUserByRoles(userId, filters, otherUserRoles)).toEqual(true);
   });
 
+  it('shows user if match dataManager filter', () => {
+    // Arrange
+    const filters = { dataManager: true };
+    const otherUserRoles = { [userId]: { dataManager: true } };
+
+    // Act/Assert
+    expect(filterUserByRoles(userId, filters, otherUserRoles)).toEqual(true);
+  });
+
   it('shows user if match catalogueAdmin filter', () => {
     // Arrange
     const filters = { catalogueAdmin: true };

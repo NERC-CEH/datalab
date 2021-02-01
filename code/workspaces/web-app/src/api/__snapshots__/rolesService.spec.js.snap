@@ -3,10 +3,11 @@
 exports[`rolesService getAllUsersAndRoles should build the correct query and unpack the results 1`] = `
 "
     GetAllUsersAndRoles {
-      allUsersAndRoles {
+      allUsersAndRoles { 
         userId,
         name,
         instanceAdmin,
+        dataManager,
         catalogueRole,
         projectRoles {
           projectKey,
@@ -22,6 +23,16 @@ exports[`rolesService setCatalogueRole should build the correct query and unpack
       setCatalogueRole(userId: $userId, catalogueRole: $catalogueRole) {
         userId,
         catalogueRole
+      }
+    }"
+`;
+
+exports[`rolesService setDataManager should build the correct query and unpack the results 1`] = `
+"
+    SetDataManager($userId: ID!, $dataManager: Boolean!) {
+      setDataManager(userId: $userId, dataManager: $dataManager) {
+        userId,
+        dataManager
       }
     }"
 `;

@@ -1,5 +1,6 @@
 {
   "default": true,
   "MD013": { "line_length": 90 },
-  "MD004": { "style": "asterisk" }
+  "MD004": { "style": "asterisk" },
+  "MD026": { "punctuation": ".,;:!" }
 }

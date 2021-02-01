@@ -75,7 +75,16 @@ export default function UserResources({ user, filters, roles }) {
     </div>];
 
   const handleSystemCheckbox = (event) => {
-    dispatch(roleActions.setInstanceAdmin(user.userId, event.target.checked));
+    switch (event.target.name) {
+      case 'instanceAdmin':
+        dispatch(roleActions.setInstanceAdmin(user.userId, event.target.checked));
+        break;
+      case 'dataManager':
+        dispatch(roleActions.setDataManager(user.userId, event.target.checked));
+        break;
+      default:
+        // no default action
+    }
   };
 
   const handleSystemSelect = (event) => {
@@ -116,6 +125,7 @@ export default function UserResources({ user, filters, roles }) {
             <div className={classes.systemRoles}>
               <PromisedContentSkeletonWrapper promises={catalogueAvailable} skeletonComponent={GridSkeleton} skeletonProps={{ rows: 1, columns: 2 }}>
                 <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
+                <SystemCheckbox label="Data manager" checked={roles.dataManager} name="dataManager" />
                 {catalogueAvailable.value && <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />}
               </PromisedContentSkeletonWrapper>
             </div>

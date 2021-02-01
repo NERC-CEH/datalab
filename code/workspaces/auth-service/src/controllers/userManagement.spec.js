@@ -8,13 +8,11 @@ const roles = { ...user, instanceAdmin: true };
 const getUsersMock = jest.fn().mockResolvedValue([user]);
 const getUserMock = jest.fn().mockResolvedValue(user);
 const getAllUsersAndRolesMock = jest.fn().mockResolvedValue([{ ...roles }]);
-const setInstanceAdminMock = jest.fn().mockResolvedValue(roles);
-const setCatalogueRoleMock = jest.fn().mockResolvedValue(roles);
+const setSystemRoleMock = jest.fn().mockResolvedValue(roles);
 userRolesRepository.getUsers = getUsersMock;
 userRolesRepository.getUser = getUserMock;
 userRolesRepository.getAllUsersAndRoles = getAllUsersAndRolesMock;
-userRolesRepository.setInstanceAdmin = setInstanceAdminMock;
-userRolesRepository.setCatalogueRole = setCatalogueRoleMock;
+userRolesRepository.setSystemRole = setSystemRoleMock;
 
 describe('user management controller', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -35,7 +33,7 @@ describe('user management controller', () => {
 
     it('should return 500 if error', async () => {
       // Arrange
-      getUsersMock.mockRejectedValue('no such catalogue');
+      getUsersMock.mockRejectedValue('some error');
       const request = httpMocks.createRequest();
       const response = httpMocks.createResponse();
 
@@ -92,7 +90,7 @@ describe('user management controller', () => {
 
     it('should return 500 if error', async () => {
       // Arrange
-      getAllUsersAndRolesMock.mockRejectedValue('no such catalogue');
+      getAllUsersAndRolesMock.mockRejectedValue('some error');
       const request = httpMocks.createRequest();
       const response = httpMocks.createResponse();
 
@@ -104,58 +102,49 @@ describe('user management controller', () => {
     });
   });
 
-  describe('setInstanceAdmin', () => {
+  describe('setSystemRole', () => {
     it('should return roles as JSON', async () => {
       // Arrange
       const request = httpMocks.createRequest();
+      request.params = { userId: '123' };
+      request.body = { instanceAdmin: true };
       const response = httpMocks.createResponse();
+      setSystemRoleMock.mockResolvedValue(roles);
 
       // Act
-      await userManagement.setInstanceAdmin(request, response);
+      await userManagement.setSystemRole(request, response);
 
       // Assert
+      expect(setSystemRoleMock).toBeCalledWith('123', 'instanceAdmin', true);
       expect(response.statusCode).toBe(200);
       expect(response._getData()) // eslint-disable-line no-underscore-dangle
         .toEqual(roles);
     });
 
-    it('should return 500 if error', async () => {
+    it('should return 400 if invalid input', async () => {
       // Arrange
-      setInstanceAdminMock.mockRejectedValue('no such catalogue');
       const request = httpMocks.createRequest();
+      request.params = { userId: '123' };
+      request.body = {};
       const response = httpMocks.createResponse();
+      setSystemRoleMock.mockResolvedValue(roles);
 
       // Act
-      await userManagement.setInstanceAdmin(request, response);
+      await userManagement.setSystemRole(request, response);
 
       // Assert
-      expect(response.statusCode).toBe(500);
+      expect(response.statusCode).toBe(400);
     });
-  });
-
-  describe('setCatalogueRole', () => {
-    it('should return roles as JSON', async () => {
-      // Arrange
-      const request = httpMocks.createRequest();
-      const response = httpMocks.createResponse();
-
-      // Act
-      await userManagement.setCatalogueRole(request, response);
-
-      // Assert
-      expect(response.statusCode).toBe(200);
-      expect(response._getData()) // eslint-disable-line no-underscore-dangle
-        .toEqual(roles);
-    });
-
     it('should return 500 if error', async () => {
       // Arrange
-      setCatalogueRoleMock.mockRejectedValue('no such catalogue');
       const request = httpMocks.createRequest();
+      request.params = { userId: '123' };
+      request.body = { instanceAdmin: true };
       const response = httpMocks.createResponse();
+      setSystemRoleMock.mockRejectedValue('some error');
 
       // Act
-      await userManagement.setCatalogueRole(request, response);
+      await userManagement.setSystemRole(request, response);
 
       // Assert
       expect(response.statusCode).toBe(500);

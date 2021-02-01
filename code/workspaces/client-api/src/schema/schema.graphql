@@ -99,6 +99,9 @@ type Mutation {
     # Set instanceAdmin role
     setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
 
+    # Set dataManager role
+    setDataManager(userId: ID!, dataManager: Boolean!): UserAndRoles!
+
     # Set catalogueRole
     setCatalogueRole(userId: ID!, catalogueRole: CatalogueRole!): UserAndRoles!
 }
@@ -300,7 +303,8 @@ type ProjectPermission {
 
 type UserAndRoles {
     instanceAdmin: Boolean
-    catalogueRole: CatalogueRole,
+    dataManager: Boolean
+    catalogueRole: CatalogueRole
     userId: ID!
     name: String
     projectRoles: [ProjectPermission]
