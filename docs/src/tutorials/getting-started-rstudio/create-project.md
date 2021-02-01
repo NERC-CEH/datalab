@@ -1,4 +1,4 @@
-# 1. Create a project
+# 1. Create a new RStudio project
 
 In this section you will create a new RStudio project. Projects are a concept within
 RStudio for keeping everything related to one piece of work together and integrates
