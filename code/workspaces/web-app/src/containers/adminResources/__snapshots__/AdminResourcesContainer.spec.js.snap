@@ -3,8 +3,12 @@
 exports[`AdminResourcesContainer renders correctly passing correct props to children 1`] = `
 <Fragment>
   <ProjectMultiSelect
-    selectedProjects={Array []}
-    setSelectedProjects={[Function]}
+    input={
+      Object {
+        "onChange": [Function],
+        "value": Array [],
+      }
+    }
   />
   <div
     className="makeStyles-showControls-1"

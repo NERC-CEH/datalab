@@ -97,8 +97,12 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
   </TextField>
 );
 
-export const renderMultiselectAutocompleteField = ({
-  input: { onChange, value }, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip,
+// Use this in Field.format and Field.parse for multiSelects, to turn '' into []
+// in initialisation and onBlur
+export const formatAndParseMultiSelect = val => val || [];
+
+export const renderMultiSelectAutocompleteField = ({
+  input, currentValue, setCurrentValue, meta: { touched, error }, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, InputLabelProps, ...custom
 }) => (
   <Autocomplete
     style={fieldStyle}
@@ -106,13 +110,18 @@ export const renderMultiselectAutocompleteField = ({
     options={options}
     getOptionLabel={getOptionLabel}
     getOptionSelected={getOptionSelected}
-    value={value}
     autoHighlight
-    onChange={(event, newValue) => onChange(newValue)}
     loading={loading}
+    {...input} // onChange and onBlur overridden below
+    onChange={(event, newValue) => { setCurrentValue(newValue); input.onChange(newValue); }}
+    onBlur={(event, newValue) => { typeof input.onBlur === 'function' && input.onBlur(currentValue); }}
+    {...custom}
     renderInput={params => (
       <TextField
         {...params}
+        InputLabelProps={InputLabelProps}
+        helperText={touched ? error : ''}
+        error={error && touched}
         label={label}
         placeholder={placeholder}
         InputProps={{

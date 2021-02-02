@@ -11,6 +11,7 @@ import roles from './rolesReducer';
 import projectUsers from './projectSettingsReducers';
 import currentProject from './currentProjectReducer';
 import catalogueConfig from './catalogueConfigReducer';
+import assetRepo from './assetRepoReducer';
 
 const rootReducer = history => combineReducers({
   authentication,
@@ -23,6 +24,7 @@ const rootReducer = history => combineReducers({
   projectUsers,
   currentProject,
   catalogueConfig,
+  assetRepo,
   router: connectRouter(history),
   form: formReducer,
 });

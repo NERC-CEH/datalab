@@ -5,9 +5,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import IconButton from '../common/control/IconButton';
+import IconButton from './control/IconButton';
 
-function EditProjectDialog({ state, onSubmit, title, body, onCancel }) {
+function ConfirmDialog({ state, onSubmit, title, body, onCancel }) {
   if (!state.open) return null;
 
   return (
@@ -24,7 +24,7 @@ function EditProjectDialog({ state, onSubmit, title, body, onCancel }) {
   );
 }
 
-EditProjectDialog.propTypes = {
+ConfirmDialog.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   state: PropTypes.object.isRequired,
@@ -32,4 +32,4 @@ EditProjectDialog.propTypes = {
   body: PropTypes.string.isRequired,
 };
 
-export default EditProjectDialog;
+export default ConfirmDialog;

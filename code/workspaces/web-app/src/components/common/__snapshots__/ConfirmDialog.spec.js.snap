@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditProjectDialog renders to match snapshot 1`] = `
+exports[`ConfirmDialog renders to match snapshot 1`] = `
 <WithStyles(ForwardRef(Dialog))
   maxWidth="md"
   open={true}
@@ -10,7 +10,7 @@ exports[`EditProjectDialog renders to match snapshot 1`] = `
   </WithStyles(ForwardRef(DialogTitle))>
   <WithStyles(ForwardRef(DialogContent))>
     <WithStyles(ForwardRef(DialogContentText))>
-      Warning about editing this project accidentically
+      Warning about editing this project accidentally
     </WithStyles(ForwardRef(DialogContentText))>
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>

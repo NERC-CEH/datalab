@@ -6,7 +6,7 @@ import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import projectActions from '../../actions/projectActions';
 import syncValidate from '../projects/updateProjectFormValidator';
 import { renderTextField, renderTextArea, UpdateFormControls } from '../common/form/controls';
-import EditProjectDialog from './EditProjectDialog';
+import ConfirmDialog from '../common/ConfirmDialog';
 import notify from '../common/notify';
 
 const styles = theme => ({
@@ -52,7 +52,7 @@ export default function EditProjectDetails() {
         editProjectDialogState={editProjectDialogState}
         setEditProjectDialogState={setEditProjectDialogState}
       />
-      <EditProjectDialog
+      <ConfirmDialog
         onSubmit={updateProject}
         onCancel={() => setEditProjectDialogState({ open: false })}
         state={editProjectDialogState}
