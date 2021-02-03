@@ -103,7 +103,18 @@ export const formatAndParseMultiSelect = val => val || [];
 
 export const renderMultiSelectAutocompleteField = ({
   input, currentValue, setCurrentValue, meta: { touched, error }, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, InputLabelProps, ...custom
-}) => (
+}) => {
+  const onChange = (event, newValue) => {
+    // optionally cache the current value so it's available for onBlur
+    typeof setCurrentValue === 'function' && setCurrentValue(newValue);
+    // call the input onChange
+    input.onChange(newValue);
+  };
+  const onBlur = (event, newValue) => {
+    // only call onBlur if it's defined, and if we've cached the current value
+    typeof input.onBlur === 'function' && typeof setCurrentValue === 'function' && input.onBlur(currentValue);
+  };
+  return (
   <Autocomplete
     style={fieldStyle}
     multiple
@@ -113,8 +124,8 @@ export const renderMultiSelectAutocompleteField = ({
     autoHighlight
     loading={loading}
     {...input} // onChange and onBlur overridden below
-    onChange={(event, newValue) => { setCurrentValue(newValue); input.onChange(newValue); }}
-    onBlur={(event, newValue) => { typeof input.onBlur === 'function' && input.onBlur(currentValue); }}
+    onChange={onChange}
+    onBlur={onBlur}
     {...custom}
     renderInput={params => (
       <TextField
@@ -149,7 +160,8 @@ export const renderMultiSelectAutocompleteField = ({
         </>
     }
   />
-);
+  );
+};
 
 export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons }) => {
   const classes = useStyles();
