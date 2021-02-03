@@ -1,3 +1,17 @@
 {
-  "available": true
+  "available": true,
+  "types": {
+    "DATA": {
+      "description": "A file or series of files containing raw data.",
+      "displayValue": "Data"
+    },
+    "NOTEBOOK": {
+      "description": "A notebook containing reusable code.",
+      "displayValue": "Notebook"
+    },
+    "SNIPPET": {
+      "description": "A small amount of reusable code.",
+      "displayValue": "Code Snippet"
+    }
+  }
 }

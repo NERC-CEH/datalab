@@ -14,6 +14,12 @@ Object {
 
 exports[`systemAdminPermissionWrapper when user is not system admin fails with a 401, error message matching snapshot and does not call next 1`] = `
 Object {
-  "message": "User missing expected permission: system:instance:admin",
+  "message": "User missing acceptable permission: system:instance:admin",
+}
+`;
+
+exports[`systemDataManagerPermissionWrapper when user is not a data manager fails with a 401, error message matching snapshot and does not call next 1`] = `
+Object {
+  "message": "User missing acceptable permission: system:data:manager",
 }
 `;
