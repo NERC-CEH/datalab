@@ -199,7 +199,7 @@ kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 * Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
 
 ```bash
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up -d
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up -d --remove-orphans
 ```
 
 You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
