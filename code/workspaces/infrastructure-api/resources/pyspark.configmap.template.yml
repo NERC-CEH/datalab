@@ -20,3 +20,4 @@ data:
     spark.master                                  k8s://https://kubernetes.default.svc.cluster.local:443
     spark.submit.deployMode                       client
     spark.app.name                                {{ jobName }}
+    spark.r.backendConnectionTimeout	            604800
