@@ -8,6 +8,6 @@ This tutorial will walk you through setting up a basic RStudio project which cru
 of your packages alongside the code and which is needed within DataLabs for your project to
 work consistently.
 
-1. [Create a project](create-project.md)
+1. [Create a new RStudio project](create-project.md)
 2. [Install some packages](install-packages.md)
 3. [Run some example analysis code](example-analysis.md)
