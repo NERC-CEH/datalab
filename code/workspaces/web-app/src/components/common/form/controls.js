@@ -102,7 +102,7 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
 export const formatAndParseMultiSelect = val => val || [];
 
 export const renderMultiSelectAutocompleteField = ({
-  input, currentValue, setCurrentValue, meta, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, inputLabelProps = { shrink: true }, ...custom
+  input, currentValue, setCurrentValue, meta, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, InputLabelProps, ...custom
 }) => {
   const touched = meta ? meta.touched : false;
   const error = meta ? meta.error : false;
@@ -135,7 +135,7 @@ export const renderMultiSelectAutocompleteField = ({
     renderInput={params => (
       <TextField
         {...params}
-        InputLabelProps={inputLabelProps}
+        InputLabelProps={InputLabelProps}
         helperText={touched ? error : ''}
         error={error && touched}
         label={label}

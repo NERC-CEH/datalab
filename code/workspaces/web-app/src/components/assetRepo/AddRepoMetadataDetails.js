@@ -117,6 +117,7 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
     className: classes.input,
     margin: 'dense',
     disabled,
+    InputLabelProps: { shrink: true },
   };
 
   const typeOptions = [

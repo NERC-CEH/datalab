@@ -5,7 +5,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import IconButton from './control/IconButton';
+import PrimaryActionButton from './buttons/PrimaryActionButton';
+import SecondaryActionButton from './buttons/SecondaryActionButton';
+import theme from '../../theme';
 
 function ConfirmDialog({ state, onSubmit, title, body, onCancel }) {
   if (!state.open) return null;
@@ -17,8 +19,17 @@ function ConfirmDialog({ state, onSubmit, title, body, onCancel }) {
         <DialogContentText>{body}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <IconButton onClick={onSubmit} icon="check">Confirm</IconButton>
-        <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
+        <PrimaryActionButton
+          onClick={onSubmit}
+        >
+          Confirm
+        </PrimaryActionButton>
+        <SecondaryActionButton
+          style={{ marginLeft: theme.spacing(1) }}
+          onClick={onCancel}
+        >
+          Cancel
+        </SecondaryActionButton>
       </DialogActions>
     </Dialog>
   );
