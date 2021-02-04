@@ -8,7 +8,10 @@ import { ADD_REPO_METADATA_ACTION, CLEAR_REPO_METADATA_ACTION } from '../actions
 
 const initialState = {
   fetching: false,
-  value: null,
+  value: {
+    createdAssetId: null,
+    assets: [],
+  },
   error: null,
 };
 
@@ -16,7 +19,7 @@ export default typeToReducer({
   [ADD_REPO_METADATA_ACTION]: {
     [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, value: state.value, error: action.payload }),
-    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: action.payload }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: { ...state.value, createdAssetId: action.payload } }),
   },
-  [CLEAR_REPO_METADATA_ACTION]: () => ({ ...initialState }),
+  [CLEAR_REPO_METADATA_ACTION]: state => ({ ...initialState, value: { ...state.value, createdAssetId: null } }),
 }, initialState);

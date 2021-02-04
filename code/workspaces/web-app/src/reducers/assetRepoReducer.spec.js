@@ -26,7 +26,7 @@ describe('assetRepoReducers', () => {
       const nextState = assetRepoReducer({ error: null, fetching: false, value: null }, action);
 
       // Assert
-      expect(nextState).toEqual({ error: null, fetching: false, value: action.payload });
+      expect(nextState).toEqual({ error: null, fetching: false, value: { createdAssetId: action.payload } });
     });
 
     it('should handle ADD_REPO_METADATA_ACTION_FAILURE', () => {
@@ -51,12 +51,12 @@ describe('assetRepoReducers', () => {
 
       // Act
       const nextState = assetRepoReducer(
-        { error: null, fetching: false, value: 'asset-1234' },
+        { error: null, fetching: false, value: { createdAssetId: 'asset-1234', remainder: 'stuff' } },
         action,
       );
 
       // Assert
-      expect(nextState).toEqual({ error: null, fetching: false, value: null });
+      expect(nextState).toEqual({ error: null, fetching: false, value: { createdAssetId: null, remainder: 'stuff' } });
     });
   });
 });

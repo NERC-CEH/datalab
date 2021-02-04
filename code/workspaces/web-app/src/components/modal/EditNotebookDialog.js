@@ -1,10 +1,11 @@
+// TODO - add unit tests
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 
-const EditStackDialog = ({ title, onSubmit, onCancel, stack, formComponent: Form }) => (
+const EditNotebookDialog = ({ title, onSubmit, onCancel, stack, formComponent: Form }) => (
   <Dialog open={true} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
@@ -13,7 +14,7 @@ const EditStackDialog = ({ title, onSubmit, onCancel, stack, formComponent: Form
   </Dialog>
 );
 
-EditStackDialog.propTypes = {
+EditNotebookDialog.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -24,4 +25,4 @@ EditStackDialog.propTypes = {
   formComponent: PropTypes.elementType.isRequired,
 };
 
-export default EditStackDialog;
+export default EditNotebookDialog;

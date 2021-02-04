@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { notebookSharingOptions } from '../common/selectShareOptions';
 import { CreateFormControls, renderAdornedTextField, renderSelectField, renderTextArea, renderTextField } from '../common/form/controls';
-import { getAsyncValidate, syncValidate } from './newNotebookFormValidator';
+import { getAsyncValidate, syncValidate } from './createNotebookFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
 
 export const FORM_NAME = 'createNotebook';

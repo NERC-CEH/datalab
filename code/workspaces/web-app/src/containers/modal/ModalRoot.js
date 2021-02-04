@@ -9,7 +9,8 @@ import RobustConfirmation from '../../components/modal/RobustConfirmation';
 import EditDataStore from '../dataStorage/EditDataStoreContainer';
 import CreateProjectDialog from '../../components/modal/CreateProjectDialog';
 import ShareStackDialog from '../../components/modal/ShareStackDialog';
-import EditStackDialog from '../../components/modal/EditStackDialog';
+import EditNotebookDialog from '../../components/modal/EditNotebookDialog';
+import EditSiteDialog from '../../components/modal/EditSiteDialog';
 import Logs from '../../components/modal/SiteLogs';
 
 import {
@@ -38,8 +39,8 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_CREATE_PROJECT]: CreateProjectDialog,
   [MODAL_TYPE_LOGS]: Logs,
   [MODAL_TYPE_SHARE_STACK]: ShareStackDialog,
-  [MODAL_TYPE_EDIT_NOTEBOOK]: EditStackDialog,
-  [MODAL_TYPE_EDIT_SITE]: EditStackDialog,
+  [MODAL_TYPE_EDIT_NOTEBOOK]: EditNotebookDialog,
+  [MODAL_TYPE_EDIT_SITE]: EditSiteDialog,
   [MODAL_TYPE_RESTART_STACK]: RestartStackDialog,
 };
 

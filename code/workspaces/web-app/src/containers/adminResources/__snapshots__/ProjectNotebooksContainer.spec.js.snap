@@ -12,7 +12,7 @@ exports[`ProjectNotebooksContainer renders to match snapshot passing correct pro
         "destroyOnUnmount": true,
         "enableReinitialize": false,
         "forceUnregisterOnUnmount": false,
-        "form": "editStackDetails",
+        "form": "editNotebookDetails",
         "getFormState": [Function],
         "keepDirtyOnReinitialize": false,
         "persistentSubmitErrors": false,

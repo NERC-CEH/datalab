@@ -1,23 +1,15 @@
+// TODO - add unit tests
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import validate from 'validate.js';
 import { renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
+import { syncValidate } from './editNotebookFormValidator';
 
-const validationConstraints = {
-  displayName: {
-    presence: true,
-  },
-  description: {
-    presence: true,
-  },
-};
-
-const commonFormProps = {
+const formPropTypes = {
   onCancel: PropTypes.func.isRequired,
 };
 
-const EditStackForm = ({
+const EditNotebookForm = ({
   handleSubmit, reset, pristine, onCancel,
 }) => (
   <form onSubmit={handleSubmit}>
@@ -35,27 +27,28 @@ const EditStackForm = ({
   </form>
 );
 
-EditStackForm.propTypes = {
-  ...commonFormProps,
+EditNotebookForm.propTypes = {
+  ...formPropTypes,
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
 };
 
-const EditStackReduxForm = reduxForm({
-  form: 'editStackDetails',
-  validate: values => validate(values, validationConstraints, { format: 'reduxForm' }),
-})(EditStackForm);
+const EditNotebookReduxForm = reduxForm({
+  form: 'editNotebookDetails',
+  validate: syncValidate,
+})(EditNotebookForm);
 
-EditStackReduxForm.propTypes = {
-  ...commonFormProps,
+EditNotebookReduxForm.propTypes = {
+  ...formPropTypes,
   onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.shape({
     displayName: PropTypes.string,
     description: PropTypes.string,
+    assets: formPropTypes.assetsList,
   }),
 };
 
-export { EditStackForm as PureEditStackForm };
+export { EditNotebookForm as PureEditNotebookForm };
 
-export default EditStackReduxForm;
+export default EditNotebookReduxForm;

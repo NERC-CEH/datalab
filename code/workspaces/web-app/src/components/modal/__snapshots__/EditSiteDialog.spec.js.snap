@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditStackDialog renders correctly passing values to provided from component 1`] = `
+exports[`EditSiteDialog renders correctly passing values to provided from component 1`] = `
 <WithStyles(ForwardRef(Dialog))
   maxWidth="md"
   open={true}

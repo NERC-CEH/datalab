@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PureEditStackForm } from './EditStackForm';
+import { PureEditSiteForm } from './EditSiteForm';
 
-describe('EditStackForm', () => {
+describe('EditSiteForm', () => {
   const shallowRender = () => shallow(
-    <PureEditStackForm
+    <PureEditSiteForm
       handleSubmit={jest.fn().mockName('handleSubmit')}
       reset={jest.fn().mockName('reset')}
       pristine={true}
