@@ -102,8 +102,10 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
 export const formatAndParseMultiSelect = val => val || [];
 
 export const renderMultiSelectAutocompleteField = ({
-  input, currentValue, setCurrentValue, meta: { touched, error }, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, InputLabelProps, ...custom
+  input, currentValue, setCurrentValue, meta, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, inputLabelProps = { shrink: true }, ...custom
 }) => {
+  const touched = meta ? meta.touched : false;
+  const error = meta ? meta.error : false;
   const onChange = (event, newValue) => {
     // optionally cache the current value so it's available for onBlur
     typeof setCurrentValue === 'function' && setCurrentValue(newValue);
@@ -111,7 +113,10 @@ export const renderMultiSelectAutocompleteField = ({
     input.onChange(newValue);
   };
   const onBlur = (event, newValue) => {
-    // only call onBlur if it's defined, and if we've cached the current value
+    // (The onBlur function is needed to trigger validation.)
+    // Only call onBlur if it's defined, and if we've cached the current value.
+    // If we don't cache the current value, redux-form Field will pass a value of an empty string to input.onBlur,
+    // causing an error in the Autocomplete component which expects an array.
     typeof input.onBlur === 'function' && typeof setCurrentValue === 'function' && input.onBlur(currentValue);
   };
   return (
@@ -130,7 +135,7 @@ export const renderMultiSelectAutocompleteField = ({
     renderInput={params => (
       <TextField
         {...params}
-        InputLabelProps={InputLabelProps}
+        InputLabelProps={inputLabelProps}
         helperText={touched ? error : ''}
         error={error && touched}
         label={label}

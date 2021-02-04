@@ -116,7 +116,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
     component: renderTextField,
     className: classes.input,
     margin: 'dense',
-    InputLabelProps: { shrink: true },
     disabled,
   };
 

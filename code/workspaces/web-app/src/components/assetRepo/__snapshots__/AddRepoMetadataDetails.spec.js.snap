@@ -6,11 +6,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
   onSubmit={[MockFunction handleSubmit]}
 >
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
@@ -19,11 +14,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     name="name"
   />
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
@@ -32,11 +22,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     name="version"
   />
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
@@ -61,11 +46,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     }
   />
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
@@ -75,11 +55,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     placeholder="/file/path/"
   />
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
@@ -89,11 +64,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     placeholder="https://"
   />
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
@@ -105,11 +75,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     selectedTip="User is an owner"
   />
   <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}

@@ -3,28 +3,28 @@ import { renderMultiSelectAutocompleteField } from './controls';
 import { useUsers } from '../../../hooks/usersHooks';
 import sortByName from '../sortByName';
 
-function UserMultiSelect(props) {
-  const { label, selectedTip } = props;
+function UserMultiSelect({ input, meta = null, ...custom }) {
   const users = useUsers();
   const sortedUsers = sortByName(users.value);
-  const [currentValue, setCurrentValue] = useState([]); // use to give current value to onBlur
+  const [currentValue, setCurrentValue] = useState([]); // use to give current value to onBlur in renderMultiSelectAutocompleteField
 
   return (
     <>
       {
       renderMultiSelectAutocompleteField(
         {
-          meta: {}, // override with props if provided
-          ...props,
+          input,
+          meta,
           currentValue,
           setCurrentValue,
           options: sortedUsers,
-          label,
+          label: 'Users',
           placeholder: "Type user's email address",
           getOptionLabel: val => val.name,
           getOptionSelected: (option, val) => option.userId === val.userId,
           loading: users.fetching,
-          selectedTip,
+          selectedTip: 'User selected',
+          ...custom,
         },
       )
     }
