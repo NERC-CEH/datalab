@@ -47,11 +47,11 @@ export default function AddRepoMetadataDetails() {
     dispatch(projectActions.loadProjects());
   }, [dispatch]);
 
-  const [AddRepoMetadataDialogState, setAddRepoMetadataDialogState] = useState({ open: false, values: {} });
+  const [addRepoMetadataDialogState, setAddRepoMetadataDialogState] = useState({ open: false, values: {} });
 
   const addMetadata = async () => {
     try {
-      const formValues = AddRepoMetadataDialogState.values;
+      const formValues = addRepoMetadataDialogState.values;
       const metadata = {
         ...formValues,
         owners: formValues.owners.map(user => user.userId),
@@ -66,7 +66,7 @@ export default function AddRepoMetadataDetails() {
   };
 
   const openDialog = values => (setAddRepoMetadataDialogState({ open: true, values }));
-  const onCancel = () => (dispatch(reset(FORM_NAME)));
+  const onCancel = () => dispatch(reset(FORM_NAME));
   const resetForm = () => {
     dispatch(reset(FORM_NAME));
     dispatch(assetRepoActions.clearRepoMetadata());
@@ -78,13 +78,13 @@ export default function AddRepoMetadataDetails() {
       <AddRepoMetadataReduxForm
         onSubmit={openDialog}
         onCancel={onCancel}
-        AddRepoMetadataDialogState={AddRepoMetadataDialogState}
+        addRepoMetadataDialogState={addRepoMetadataDialogState}
         setAddRepoMetadataDialogState={setAddRepoMetadataDialogState}
       />
       <ConfirmDialog
         onSubmit={addMetadata}
         onCancel={() => setAddRepoMetadataDialogState({ open: false })}
-        state={AddRepoMetadataDialogState}
+        state={addRepoMetadataDialogState}
         setState={setAddRepoMetadataDialogState}
         title="Add Repo Metadata"
         body="Please confirm you wish to add this metadata.  Once added, it can only be adjusted by an administrator in the database."
@@ -139,23 +139,23 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
       <Field
         { ...commonProps }
         name="name"
-        label="Name of asset"
+        label="Name"
       />
       <Field
         { ...commonProps }
         name="version"
-        label="Version of asset"
+        label="Version"
       />
       <Field
         { ...commonProps }
         name="type"
-        label="Type of asset"
+        label="Type"
         component={renderSelectField}
         options={typeOptions}
       />
       <Field
         { ...commonProps }
-        name="filePath"
+        name="fileLocation"
         label="File path on server.  Can be omitted if the repo is not hosting a local copy."
         placeholder="/file/path/"
       />
@@ -163,13 +163,13 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
         { ...commonProps }
         name="masterUrl"
         label="Master URL.  Can be omitted if the asset is only stored in the repo."
-        placeholder="http://"
+        placeholder="https://"
       />
       {masterUrlValue && masterUrlValue.length > 0
         && <Field
             { ...commonProps }
             name="masterVersion"
-            label="Master version, e.g. a commit in a git repo."
+            label="Master version, e.g. a commit ID in a git repo."
           />
       }
       <Field
@@ -184,7 +184,7 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
       <Field
         { ...commonProps }
         name="visible"
-        label="Visibility?"
+        label="Visibility"
         component={renderSelectField}
         options={visibleOptions}
       />

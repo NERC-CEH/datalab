@@ -14,7 +14,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
-    label="Name of asset"
+    label="Name"
     margin="dense"
     name="name"
   />
@@ -27,7 +27,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
-    label="Version of asset"
+    label="Version"
     margin="dense"
     name="version"
   />
@@ -40,7 +40,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
-    label="Type of asset"
+    label="Type"
     margin="dense"
     name="type"
     options={
@@ -71,7 +71,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     disabled={false}
     label="File path on server.  Can be omitted if the repo is not hosting a local copy."
     margin="dense"
-    name="filePath"
+    name="fileLocation"
     placeholder="/file/path/"
   />
   <Field
@@ -86,7 +86,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     label="Master URL.  Can be omitted if the asset is only stored in the repo."
     margin="dense"
     name="masterUrl"
-    placeholder="http://"
+    placeholder="https://"
   />
   <Field
     InputLabelProps={
@@ -113,7 +113,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
-    label="Visibility?"
+    label="Visibility"
     margin="dense"
     name="visible"
     options={
