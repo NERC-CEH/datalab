@@ -60,7 +60,7 @@ There are a few key differences to know about when working within DataLabs compa
 The main one concerns how packages are installed and persisted. Within DataLabs your
 runtime environment (i.e Python and R packages) must be stored alongside the code. Practically,
 this means using tools such as [Conda environments](../tutorials/conda_environments.md)
-or [Packrat](../r-libs/packrat.md).
+or [Packrat](../tutorials/packrat.md).
   
 ## I am having problems which I can't find the answer to here, how do I get help?
 

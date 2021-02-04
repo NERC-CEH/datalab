@@ -2,7 +2,7 @@ import { get } from 'lodash';
 import { permissionTypes } from 'common';
 import logger from '../config/logger';
 
-const { projectKeyPermission, SYSTEM_INSTANCE_ADMIN } = permissionTypes;
+const { projectKeyPermission, SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 
 export function projectPermissionWrapper(permissionSuffix) {
   return (request, response, next) => {
@@ -32,42 +32,31 @@ export function projectPermissionWrapper(permissionSuffix) {
   };
 }
 
-export function permissionWrapper(requiredPermission) {
+export function permissionWrapper(requiredPermission, allowInstanceAdmin = true) {
+  const acceptedPermissions = [requiredPermission];
+  if (allowInstanceAdmin) acceptedPermissions.push(SYSTEM_INSTANCE_ADMIN);
+
   return (request, response, next) => {
     const grantedPermissions = get(request, 'user.permissions') || [];
 
     logger.debug('Auth: checking permissions');
-    logger.debug(`Auth: expected permission: ${requiredPermission} || ${SYSTEM_INSTANCE_ADMIN}`);
+    logger.debug(`Auth: accepted permission: ${acceptedPermissions}`);
     logger.debug(`Auth: granted user permissions: ${grantedPermissions}`);
 
-    if (grantedPermissions.includes(requiredPermission) || grantedPermissions.includes(SYSTEM_INSTANCE_ADMIN)) {
+    if (acceptedPermissions.some(acceptedPermission => grantedPermissions.includes(acceptedPermission))) {
       logger.debug('Auth: permission check: PASSED');
-      next();
-    } else {
-      logger.warn('Auth: permission check: FAILED');
-      response.status(401)
-        .send({ message: `User missing expected permission: ${requiredPermission} || ${SYSTEM_INSTANCE_ADMIN}` })
-        .end();
+      return next();
     }
+    logger.warn('Auth: permission check: FAILED');
+    return response.status(401)
+      .send({ message: `User missing acceptable permission: ${acceptedPermissions}` });
   };
 }
 
 export function systemAdminPermissionWrapper() {
-  return (request, response, next) => {
-    const grantedPermissions = get(request, 'user.permissions') || [];
+  return permissionWrapper(SYSTEM_INSTANCE_ADMIN, false);
+}
 
-    logger.debug('Auth: checking permissions');
-    logger.debug(`Auth: expected permission: ${SYSTEM_INSTANCE_ADMIN}`);
-    logger.debug(`Auth: granted user permissions: ${grantedPermissions}`);
-
-    if (grantedPermissions.includes(SYSTEM_INSTANCE_ADMIN)) {
-      logger.debug('Auth: permission check: PASSED');
-      next();
-    } else {
-      logger.warn('Auth: permission check: FAILED');
-      response
-        .status(401)
-        .send({ message: `User missing expected permission: ${SYSTEM_INSTANCE_ADMIN}` });
-    }
-  };
+export function systemDataManagerPermissionWrapper() {
+  return permissionWrapper(SYSTEM_DATA_MANAGER, false);
 }

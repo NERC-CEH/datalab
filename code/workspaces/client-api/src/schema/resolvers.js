@@ -86,7 +86,7 @@ const resolvers = {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     users: (obj, args, { user }) => (obj.projectKey
       ? projectPermissionWrapper({ projectKey: obj.projectKey }, STORAGE_EDIT, user, () => obj.users, 'DataStore.users') : []),
-    accessKey: obj => minioTokenService.requestMinioToken(obj),
+    accessKey: (obj, args, { token }) => minioTokenService.requestMinioToken(obj, token),
     stacksMountingStore: ({ name, projectKey }, args, { user, token }) => (projectKey
       ? stackService.getAllByVolumeMount(projectKey, name, { user, token }) : []),
     status: () => READY,
@@ -94,7 +94,7 @@ const resolvers = {
 
   Stack: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
-    redirectUrl: obj => stackUrlService(obj.projectKey, obj),
+    redirectUrl: (obj, args, { token }) => stackUrlService(obj.projectKey, obj, token),
     category: obj => (obj.category ? obj.category.toUpperCase() : null),
   },
 

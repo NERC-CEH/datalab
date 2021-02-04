@@ -86,6 +86,11 @@ Thredds servers exposing data stored in JASMIN Group Workspaces (GWS).
 The high-level containers that the platform will need to fulfill the demands of its
 context are shown below. Each of the containers is described in the sections that follow.
 
+**Note that Vault is no longer in use.
+Secrets are now being stored in [Kubernetes' native secret solution](https://kubernetes.io/docs/concepts/configuration/secret/).
+The Infrastructure Management API creates and reads the secrets.
+The API Server requests the secrets through the Infrastructure Management API.**
+
 ![High level components](./diagrams/containers.png)
 ![Infrastructure API components](./diagrams/infrastructure-containers.png)
 
@@ -249,7 +254,7 @@ authorisation tokens to be issued as part of the authentication process avoiding
 for the datalabs system to have to generate them and allowing it simply to verify the
 signature against the public JWKS certificate.
 * Direct API access token management - The authorisation service retrieves information
-about users from the Auth0 API. See - 
+about users from the Auth0 API. See -
 [Auth0 Management API](https://auth0.com/docs/api/management/v2).
 * User profile information - User profile information can be managed for users
 provisioned in Auth0. For users provisioned in other systems only the `app_metadata` can
@@ -261,20 +266,13 @@ authorisation extension that adds user roles to the profile.
 ### Default Backend
 
 The default backend is a container that serves requests that do not match to any existing
-ingress rules. It is essential a wild card HTTP `404` server. The service is a tiny
+ingress rules. It is essentially a wild card HTTP `404` server. The service is a tiny
 Node.js Express application that serves a status endpoint and static page with a `404`
 response.
 
 Given the service was not anticipated to change frequently it has been separated into a
 different [docker-default-backend](https://github.com/NERC-CEH/docker-default-backend)
 repository.
-
-### Vault
-
-[Hashicorp Vault](https://www.vaultproject.io/) is used to store dynamic secrets within
-the datalabs system. Vault provides secure storage and an API for authorised access.
-
-Further details are contained in the [Security View](./05-architecture-security.md#hasicor-vault)
 
 ### MongoDB
 

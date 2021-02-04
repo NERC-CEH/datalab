@@ -7,17 +7,21 @@ import volumeRouter from '../routers/volumeRouter';
 import volumesRouter from '../routers/volumesRouter';
 import logsRouter from '../routers/logsRouter';
 import resourcesRouter from '../routers/resourcesRouter';
+import secretRouter from '../routers/secretRouter';
+import centralAssetRepoRouter from '../routers/centralAssetRepoRouter';
 
 function configureRoutes(app) {
   app.get('/status', status.status);
   app.all('*', verifyToken); // Routes above this line are not auth checked
+  app.use('/centralAssetRepo', centralAssetRepoRouter);
+  app.use('/logs', logsRouter);
   app.use('/projects', projectsRouter);
+  app.use('/resources', resourcesRouter);
+  app.use('/secrets', secretRouter);
   app.use('/stack', stackRouter);
   app.use('/stacks', stacksRouter);
   app.use('/volume', volumeRouter);
   app.use('/volumes', volumesRouter);
-  app.use('/logs', logsRouter);
-  app.use('/resources', resourcesRouter);
 }
 
 export default { configureRoutes };

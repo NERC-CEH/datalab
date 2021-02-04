@@ -311,34 +311,11 @@ resource at the specific URL. This needs to be extended.
 Several of the containers that users can provision provide their own authentication
 mechanisms. We do not want users to have to remember many different sets of credentials
 so these are generated automatically with container creation. The credentials are
-stored in Hashicorp Vault and then loaded dynamically and injected using an appropriate
+stored in Kubernetes secrets and then loaded dynamically and injected using an appropriate
 mechanism depending on the container.
 
 The flow for creating and retrieving credentials and the different mechanisms are
 described in the rest of this section.
-
-### Hashicorp Vault
-
-Vault is a tool for securely storing secrets. It provides an API for storing, updating
-and retrieving secrets and has the ability to specify fine-grained access control and
-access auditing. Datalabs only makes very limited use of its capabilities and this is
-expected to extend if we need to control access to different sorts of resources. The
-biggest feature that we use is the capability to `seal` a Vault either when the Vault
-restarts or, in the future on intrusion detection. Unsealing a Vault requires one or
-more keys that can be sharded across administrators.
-
-Pods are provisioned with an `APP_ROLE` that can be exchanged with Vault for an
-`access_token` which in turn can be use to request the required `secret`. This is shown
-in the diagram below.
-
-![Vault Secret Access](./diagrams/vault-secret-access.png)
-
-Secrets are stored in a path structure by Vault. The first part of the path determines
-the type of resource. Datalabs uses the simple `/secret` type and this forms the base
-of the path. The rest of the path is specified by datalabs and is:
-`<datalab-name>/<resource-type>/<resource-name>`.
-For example `thedatalab/stacks/myjupyter` for a datalab called `thedatalab` and a Jupyter
-container called `myjupyter`.
 
 ### Seamless log on
 
@@ -348,8 +325,8 @@ of containers. This section details the mechanism in place for each specific typ
 #### Jupyter
 
 Jupyter authentication is via a token passed on the URL as the site is opened. The token
-required is set at container start and is stored in Vault. To achieve seamless login,
-the datalabs application needs to retrieve the token from Vault and then open the url
+required is set at container start and is stored as a Kubernetes secret. To achieve seamless login,
+the datalabs application needs to retrieve the token from the secret and then open the URL
 in a separate browser tab.
 
 No additional containers are needed for seamless login to Juptyer.
@@ -377,7 +354,7 @@ Requests to the specific Minio sub-domain are routed based on path using Ingress
 This configuration means that the datalabs application can perform the following steps to
 open a Minio browser with seamless log in:
 
-* Retrieve the access key and secret key for the Minio instance from Vault.
+* Retrieve the access key and secret key for the Minio instance from Kubernetes secret.
 * Aquire an authentication token from Minio using the access key and secret key.
 * Store the token in HTML5 session storage using Cross Storage.
 * Open Minio in a new browser tab.
@@ -422,7 +399,7 @@ redirected to RStudio. The `docker-zeppelin-connect` container should be renamed
 Retrieving an RStudio authentication token is complex as individual login requests must
 be signed using a certificate published by the RStudio server. The process is as follows:
 
-* Request user credentials from Vault
+* Request user credentials from Kubernetes secret
 * Request RStudio certificate
 * Create, sign and submit log in request to retrieve authentication cookie
 * Process cookie to parse required details
@@ -432,7 +409,7 @@ RStudio cookie
 
 ## Secret Management
 
-In developing a large, distributed application is is necessary to provide many secrets
+In developing a large, distributed application it is necessary to provide many secrets
 to the application for passwords, api tokens, certificates, etc. It is essential that
 these are not stored in plain text in the code repository. Kubernetes provides a `secret`
 abstraction that allows secrets to be created securely in the cluster in a way that
@@ -489,7 +466,6 @@ performing service specific authorisation or resource checks.
 they have administrator access to underlying resource and so are the last gatekeeper for
 incoming requests. An example is the infrastructure service that has high level control
 over the Kubernetes cluster.
-Kubernetes cluster.
 
 ## Container Security
 
