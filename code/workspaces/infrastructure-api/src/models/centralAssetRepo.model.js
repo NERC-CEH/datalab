@@ -5,7 +5,7 @@ import { assetTypes } from 'common/src/config/catalogue';
 const modelName = 'CentralAssetMetadata';
 
 const possibleTypeValues = () => assetTypes();
-const possibleVisibleValues = () => ['public', 'byProject'];
+const possibleVisibleValues = () => ['PUBLIC', 'BY_PROJECT'];
 
 const { Schema } = mongoose;
 

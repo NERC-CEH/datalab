@@ -3,19 +3,5 @@
 exports[`catalogueConfig returns correct configuration 1`] = `
 Object {
   "available": true,
-  "types": Object {
-    "DATA": Object {
-      "description": "A file or series of files containing raw data.",
-      "displayValue": "Data",
-    },
-    "NOTEBOOK": Object {
-      "description": "A notebook containing reusable code.",
-      "displayValue": "Notebook",
-    },
-    "SNIPPET": Object {
-      "description": "A small amount of reusable code.",
-      "displayValue": "Code Snippet",
-    },
-  },
 }
 `;
