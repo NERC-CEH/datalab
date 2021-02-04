@@ -156,7 +156,7 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
       <Field
         { ...commonProps }
         name="fileLocation"
-        label="File path on server.  Can be omitted if the repo is not hosting a local copy."
+        label="File location on server.  Can be omitted if the repo is not hosting a local copy."
         placeholder="/file/path/"
       />
       <Field

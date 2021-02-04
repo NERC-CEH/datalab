@@ -4,7 +4,7 @@ const values = {
   name: 'Name',
   version: 'Version',
   type: 'Type',
-  filePath: '/file/path',
+  fileLocation: '/file/path',
   masterUrl: 'http://master.url',
   owners: [{ userId: 'user-123' }],
   visible: 'Visible',
@@ -36,8 +36,8 @@ describe('addRepoMetadataValidator', () => {
   });
 
   it('should return an error if the file path is not a valid linux path', () => {
-    const invalidValues = { ...values, filePath: 'C://' };
-    expect(addRepoMetadataValidator(invalidValues)).toEqual({ filePath: 'File path is invalid' });
+    const invalidValues = { ...values, fileLocation: 'C://' };
+    expect(addRepoMetadataValidator(invalidValues)).toEqual({ fileLocation: 'File location is invalid - it must start with a leading slash, trailing slash optional' });
   });
 
   it('should return an error if the masterUrl is not a valid url', () => {
@@ -58,6 +58,14 @@ describe('addRepoMetadataValidator', () => {
   it('should return an error when visible is missing', () => {
     const invalidValues = { ...values, visible: undefined };
     expect(addRepoMetadataValidator(invalidValues)).toEqual({ visible: "Visible can't be blank" });
+  });
+
+  it('should return an error when both masterUrl and fileLocation are missing', () => {
+    const invalidValues = { ...values, masterUrl: undefined, fileLocation: undefined };
+    expect(addRepoMetadataValidator(invalidValues)).toEqual({
+      fileLocation: 'Must be specified if Master URL is blank',
+      masterUrl: 'Must be specified if File location is blank',
+    });
   });
 });
 
