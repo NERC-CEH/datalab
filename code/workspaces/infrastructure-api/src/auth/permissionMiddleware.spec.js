@@ -1,8 +1,8 @@
 import { permissionTypes } from 'common';
 import httpMocks from 'node-mocks-http';
-import { projectPermissionWrapper, systemAdminPermissionWrapper } from './permissionMiddleware';
+import { projectPermissionWrapper, systemAdminPermissionWrapper, systemDataManagerPermissionWrapper } from './permissionMiddleware';
 
-const { projectPermissions: { PROJECT_KEY_STACKS_LIST }, SYSTEM_INSTANCE_ADMIN } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STACKS_LIST }, SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 
 describe('projectPermissionWrapper', () => {
   describe('when projectKey is provided in request', () => {
@@ -121,6 +121,33 @@ describe('systemAdminPermissionWrapper', () => {
       const nextMock = jest.fn();
 
       systemAdminPermissionWrapper()(requestMock, responseMock, nextMock);
+      expect(responseMock.statusCode).toEqual(401);
+      expect(responseMock._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
+      expect(nextMock).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe('systemDataManagerPermissionWrapper', () => {
+  describe('when user is a data manager', () => {
+    it('calls next', () => {
+      const requestMock = httpMocks.createRequest({ user: { permissions: [SYSTEM_DATA_MANAGER] } });
+      const responseMock = jest.fn();
+      const nextMock = jest.fn();
+
+      systemDataManagerPermissionWrapper()(requestMock, responseMock, nextMock);
+      expect(nextMock).toHaveBeenCalledTimes(1);
+      expect(responseMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when user is not a data manager', () => {
+    it('fails with a 401, error message matching snapshot and does not call next', () => {
+      const requestMock = httpMocks.createRequest({ user: { permissions: [] } });
+      const responseMock = httpMocks.createResponse();
+      const nextMock = jest.fn();
+
+      systemDataManagerPermissionWrapper()(requestMock, responseMock, nextMock);
       expect(responseMock.statusCode).toEqual(401);
       expect(responseMock._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
       expect(nextMock).not.toHaveBeenCalled();

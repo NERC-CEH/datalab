@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-01-28T12:06:25.213Z
+__export_date: 2021-02-03T14:12:32.761Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
@@ -1300,6 +1300,83 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1612178471036
+    created: 1612177227190
+    url: "{{ _.client_api_url }}/api"
+    name: createCentralAssetMetadata
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  createCentralAssetMetadata (metadata:
+        {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    type:
+        data,\n    owners: [\"owner-id\"],\n    isPublic: true,\n  })
+        {\n    name\n    version\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ff5e88661367403f83ff2fc19b939830
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 1100
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3184cef31d3a49c097475deadbb28e6f
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    modified: 1612280632301
+    created: 1612200807362
+    url: "{{ _.infra_api_url }}/centralAssetRepo/metadata"
+    name: Create Central Asset Metadata
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "name": "Test URL",
+          "version": "0.4.0",
+          "type": "DATA",
+          "owners": [],
+          "visible": "public",
+          "fileLocation": "file/location"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0d7f662e78fa4ae3ae7fa239f590a569
+    authentication:
+      type: bearer
+      token: "{{ _.internal_token }}"
+    metaSortKey: -1612200807362
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_13d24c525db74595ba879650f2fb4a60
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    modified: 1568899594162
+    created: 1568395892632
+    name: Infrastructure
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1567588463167
+    _type: request_group
   - _id: req_48570009e9174ff99cd16d737a3264fd
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     modified: 1576247760329
@@ -1324,16 +1401,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_13d24c525db74595ba879650f2fb4a60
-    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    modified: 1568899594162
-    created: 1568395892632
-    name: Infrastructure
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1567588463167
-    _type: request_group
   - _id: req_3145a8c1efe04b898fd6e1a2e81e1deb
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     modified: 1576063922722
