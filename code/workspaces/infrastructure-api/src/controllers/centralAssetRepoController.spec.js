@@ -19,7 +19,7 @@ const getMinimalRequestMock = () => ({
   version: '0.1.0',
   type: 'DATA',
   owners: [],
-  visible: 'public',
+  visible: 'PUBLIC',
   fileLocation: 'path/to/file',
 });
 

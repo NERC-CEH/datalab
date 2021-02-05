@@ -4,13 +4,12 @@ import config from '../config';
 const infrastructureApi = config.get('infrastructureApi');
 
 async function createAssetMetadata(metadata, token) {
-  // await axios.post(
-  //   // TODO: update URL to endpoint handling metadata creation
-  //   `${infrastructureApi}/`,
-  //   metadata,
-  //   generateOptions(token),
-  // );
-  return metadata;
+  const { data } = await axios.post(
+    `${infrastructureApi}/centralAssetRepo/metadata`,
+    metadata,
+    generateOptions(token),
+  );
+  return data;
 }
 
 function generateOptions(token) {
@@ -22,5 +21,5 @@ function generateOptions(token) {
 }
 
 export default {
-  createMetadata: createAssetMetadata,
+  createAssetMetadata,
 };

@@ -347,12 +347,12 @@ type CentralAssetMetadata {
     assetId: String!
     name: String!
     version: String!
-    type: CentralAssetMetadataType!
+    type: String!
     fileLocation: String
     masterUrl: String
     masterVersion: String
     owners: [String]!
-    isPublic: Boolean!
+    visible: String!
     projects: [String]
     registrationDate: String!
 }
@@ -360,17 +360,11 @@ type CentralAssetMetadata {
 input CentralAssetMetadataCreationRequest {
     name: String!
     version: String!
-    type: CentralAssetMetadataType!
+    type: String!
     fileLocation: String
     masterUrl: String
     masterVersion: String
     owners: [String]!
-    isPublic: Boolean!
+    visible: String!
     projects: [String]
-}
-
-enum CentralAssetMetadataType {
-    data,
-    notebook,
-    snippet,
 }
