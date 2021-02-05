@@ -2,29 +2,35 @@ import axios from 'axios';
 import config from '../config';
 import axiosErrorHandler from '../util/errorHandlers';
 
-const infrastructureApi = config.get('infrastructureApi');
+const infrastructureApi = () => axios.create({
+  baseURL: config.get('infrastructureApi'),
+});
 
 async function createAssetMetadata(metadata, token) {
-  try {
-    const { data } = await axios.post(
-      `${infrastructureApi}/centralAssetRepo/metadata`,
-      metadata,
-      generateOptions(token),
-    );
-    return data;
-  } catch (err) {
-    return axiosErrorHandler('Error creating metadata')(err);
-  }
+  const { data } = await infrastructureApi().post(
+    '/centralAssetRepo/metadata',
+    metadata,
+    generateRequestConfig(token),
+  );
+  return data;
 }
 
-function generateOptions(token) {
+async function listCentralAssetsAvailableToProject(projectKey, token) {
+  const { data } = await infrastructureApi().get(
+    '/centralAssetRepo/metadata',
+    generateRequestConfig(token, { projectKey }),
+  );
+  return data;
+}
+
+function generateRequestConfig(token, params) {
   return {
-    headers: {
-      authorization: token,
-    },
+    headers: { authorization: token },
+    params,
   };
 }
 
 export default {
   createAssetMetadata,
+  listCentralAssetsAvailableToProject,
 };

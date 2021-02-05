@@ -8,7 +8,9 @@ export function projectPermissionWrapper(permissionSuffix) {
   return (request, response, next) => {
     logger.debug('Auth: checking permissions');
 
-    const requestedProject = get(request, 'params.projectKey') || get(request, 'body.projectKey');
+    const requestedProject = get(request, 'params.projectKey')
+      || get(request, 'body.projectKey')
+      || get(request, 'query.projectKey');
     const grantedPermissions = get(request, 'user.permissions') || [];
 
     if (!requestedProject) {

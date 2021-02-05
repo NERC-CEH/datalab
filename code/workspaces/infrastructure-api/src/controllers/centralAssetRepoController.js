@@ -1,11 +1,10 @@
-import { matchedData, body } from 'express-validator';
+import { matchedData, body, query } from 'express-validator';
 import { service } from 'service-chassis';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import centralAssetRepoModel from '../models/centralAssetRepo.model';
 import logger from '../config/logger';
 import ValidationChainHelper from './utils/validationChainHelper';
 
-// eslint-disable-next-line consistent-return
 async function createAssetMetadata(request, response, next) {
   const metadata = matchedData(request);
 
@@ -16,7 +15,18 @@ async function createAssetMetadata(request, response, next) {
     const createdMetadata = await centralAssetRepoRepository.createMetadata(metadata);
     return response.status(201).send(createdMetadata);
   } catch (error) {
-    next(new Error(`Error creating asset metadata - failed to create new document: ${error.message}`));
+    return next(new Error(`Error creating asset metadata - failed to create new document: ${error.message}`));
+  }
+}
+
+async function assetMetadataAvailableToProject(request, response, next) {
+  const { projectKey } = matchedData(request);
+
+  try {
+    const result = await centralAssetRepoRepository.metadataAvailableToProject(projectKey);
+    return response.status(200).send(result);
+  } catch (error) {
+    return next(new Error(`Error listing asset metadata by key: ${error.message}`));
   }
 }
 
@@ -44,7 +54,7 @@ async function handleExistingMetadata(metadata, response, next) {
   return null;
 }
 
-const getMetadataValidator = () => {
+const metadataValidator = () => {
   const validations = [
     new ValidationChainHelper(body('name'))
       .exists()
@@ -86,7 +96,16 @@ const getMetadataValidator = () => {
   return service.middleware.validator(validationChains, logger);
 };
 
+const listByProjectKeyValidator = () => service.middleware.validator([
+  new ValidationChainHelper(query('projectKey'))
+    .exists()
+    .notEmpty()
+    .getValidationChain(),
+], logger);
+
 export default {
   createAssetMetadata,
-  getMetadataValidator,
+  assetMetadataAvailableToProject,
+  metadataValidator,
+  listByProjectKeyValidator,
 };

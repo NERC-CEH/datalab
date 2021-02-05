@@ -52,6 +52,19 @@ describe('projectPermissionWrapper', () => {
         expect(nextMock).toHaveBeenCalledTimes(1);
       });
 
+      it('extracts and uses the projectKey from the params to pass check', () => {
+        const requestMock = httpMocks.createRequest({
+          query: { projectKey: 'testkey' },
+          user: { permissions: userPermissions },
+        });
+        const responseMock = httpMocks.createResponse();
+        const nextMock = jest.fn();
+
+        projectPermissionWrapper(PROJECT_KEY_STACKS_LIST)(requestMock, responseMock, nextMock);
+
+        expect(nextMock).toHaveBeenCalledTimes(1);
+      });
+
       it('extracts and uses the projectKey from the body to pass check', () => {
         const requestMock = httpMocks.createRequest({
           body: { projectKey: 'testkey' },

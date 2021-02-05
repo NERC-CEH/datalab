@@ -50,6 +50,8 @@ type Query {
 
     # Checks project key is unique
     checkProjectKeyUniqueness(projectKey: String!): Boolean
+
+    centralAssetsAvailableToProject(projectKey: String!): [CentralAssetMetadata]
 }
 
 # Root mutation methods for Datalabs.

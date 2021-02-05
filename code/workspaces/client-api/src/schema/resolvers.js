@@ -45,6 +45,12 @@ const resolvers = {
     project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
     checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
     logs: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => logsService.getLogsByName(args.projectKey, args.name, token)),
+    centralAssetsAvailableToProject: (obj, { projectKey }, { user, token }) => projectPermissionWrapper(
+      { projectKey },
+      [STACKS_CREATE],
+      user,
+      () => centralAssetRepoService.listCentralAssetsAvailableToProject(projectKey, token),
+    ),
   },
 
   Mutation: {
