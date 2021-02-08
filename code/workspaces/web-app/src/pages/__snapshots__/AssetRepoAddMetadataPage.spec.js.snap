@@ -3,5 +3,7 @@
 exports[`AssetRepoAddMetadataPage renders correct snapshot 1`] = `
 <WithStyles(Page)
   title="Add Metadata"
-/>
+>
+  <AddRepoMetadataDetails />
+</WithStyles(Page)>
 `;

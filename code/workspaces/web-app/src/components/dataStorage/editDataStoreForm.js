@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import validate from 'validate.js';
-import { renderMultiselectAutocompleteField, renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
+import { renderMultiSelectAutocompleteField, renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
 import dataStoreValueConstraints from './dataStoreValueConstraints';
 
 const formPropTypes = {
@@ -37,10 +37,10 @@ const EditDataStoreForm = ({
     />
     <Field
       name="users"
-      label="Users with access to datastore"
+      label="Users with access to data store"
       placeholder="Type user's email address"
       selectedTip="User has access"
-      component={renderMultiselectAutocompleteField}
+      component={renderMultiSelectAutocompleteField}
       options={userList}
       getOptionLabel={option => option.label}
       getOptionSelected={(option, value) => option.value === value.value}

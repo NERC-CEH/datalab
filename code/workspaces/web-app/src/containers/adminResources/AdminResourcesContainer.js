@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { useProjectsArray } from '../../hooks/projectsHooks';
-import ProjectMultiSelect from './ProjectMultiSelect';
+import ProjectMultiSelect from '../../components/common/form/ProjectMultiSelect';
 import projectsActions from '../../actions/projectActions';
 import sortByName from '../../components/common/sortByName';
 import ProjectResources from './ProjectResources';
@@ -58,9 +58,14 @@ function AdminResourcesContainer({ userPermissions }) {
         <Typography variant="body1">No projects to display.</Typography>
       </div>];
 
+  const projectsInput = {
+    onChange: (val) => { setSelectedProjects(val); },
+    value: selectedProjects,
+  };
+
   return (
     <>
-      <ProjectMultiSelect selectedProjects={selectedProjects} setSelectedProjects={setSelectedProjects} />
+      <ProjectMultiSelect input={projectsInput} />
       <div className={classes.showControls}>
         <span className={classes.showText}>Show</span>
         <FormControlLabel label="Notebooks" control={

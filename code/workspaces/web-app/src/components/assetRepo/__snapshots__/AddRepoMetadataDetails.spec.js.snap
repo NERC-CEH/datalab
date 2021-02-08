@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
+<form
+  className="makeStyles-form-1"
+  onSubmit={[MockFunction handleSubmit]}
+>
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    label="Name"
+    margin="dense"
+    name="name"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    label="Version"
+    margin="dense"
+    name="version"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    label="Type"
+    margin="dense"
+    name="type"
+    options={
+      Array [
+        Object {
+          "text": "Data set",
+          "value": "DATASET",
+        },
+        Object {
+          "text": "Notebook",
+          "value": "NOTEBOOK",
+        },
+        Object {
+          "text": "Snippet",
+          "value": "SNIPPET",
+        },
+      ]
+    }
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    label="File location on server.  Can be omitted if the repo is not hosting a local copy."
+    margin="dense"
+    name="fileLocation"
+    placeholder="/file/path/"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    label="Master URL.  Can be omitted if the asset is only stored in the repo."
+    margin="dense"
+    name="masterUrl"
+    placeholder="https://"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    format={[Function]}
+    label="Owners"
+    margin="dense"
+    name="owners"
+    parse={[Function]}
+    selectedTip="User is an owner"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    className="makeStyles-input-2"
+    component={[Function]}
+    disabled={false}
+    label="Visibility"
+    margin="dense"
+    name="visible"
+    options={
+      Array [
+        Object {
+          "text": "Public: Asset will be visible to all projects",
+          "value": "PUBLIC",
+        },
+        Object {
+          "text": "By project: Asset is only visible to selected projects",
+          "value": "BY_PROJECT",
+        },
+      ]
+    }
+  />
+  <UpdateFormControls
+    onCancel={[MockFunction onCancel]}
+  />
+</form>
+`;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectMultiSelect renders to match snapshot passing correct props to children 1`] = `
+exports[`UserMultiSelect renders to match snapshot passing correct props to children 1`] = `
 <Fragment>
   <WithStyles(ForwardRef(Autocomplete))
     autoHighlight={true}
@@ -8,16 +8,17 @@ exports[`ProjectMultiSelect renders to match snapshot passing correct props to c
     getOptionSelected={[Function]}
     loading={false}
     multiple={true}
+    onBlur={[Function]}
     onChange={[Function]}
     options={
       Array [
         Object {
-          "key": "testproj1",
-          "name": "Test Project 1",
+          "name": "User 1",
+          "userId": "user-1",
         },
         Object {
-          "key": "testproj2",
-          "name": "Test Project 2",
+          "name": "User 2",
+          "userId": "user-2",
         },
       ]
     }
@@ -32,12 +33,12 @@ exports[`ProjectMultiSelect renders to match snapshot passing correct props to c
     value={
       Array [
         Object {
-          "key": "testproj1",
-          "name": "Test Project 1",
+          "name": "User 1",
+          "userId": "user-1",
         },
         Object {
-          "key": "testproj2",
-          "name": "Test Project 2",
+          "name": "User 2",
+          "userId": "user-2",
         },
       ]
     }
