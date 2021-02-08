@@ -2,6 +2,7 @@
 // to other functions in this file.
 const generateDeploymentName = (name, type) => `${type}-${name}`;
 const pvcName = volumeName => `${volumeName}-claim`;
+const stackCredentialSecret = generateDeploymentName;
 
 // project namespaces
 const projectNamespace = projectKey => projectKey;
@@ -30,4 +31,5 @@ export default {
   daskConfigMap,
   sparkDriverHeadlessService,
   sparkJob,
+  stackCredentialSecret,
 };

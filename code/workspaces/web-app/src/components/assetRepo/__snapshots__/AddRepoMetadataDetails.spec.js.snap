@@ -47,7 +47,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
       Array [
         Object {
           "text": "Data set",
-          "value": "DATASET",
+          "value": "DATA",
         },
         Object {
           "text": "Notebook",

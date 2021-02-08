@@ -42,7 +42,7 @@ async function getAllUsersAndRoles(req, res) {
 async function setSystemRole(req, res) {
   const { params: { userId } } = req;
   const systemRoles = req.body;
-  const roleKeys = Object.keys(req.body);
+  const roleKeys = Object.keys(systemRoles);
   if (roleKeys.length !== 1) {
     logger.error(`setSystemRole: expected one role, found ${roleKeys.length}`);
     res.status(400);

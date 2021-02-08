@@ -43,6 +43,24 @@ describe('Kubernetes Secret API', () => {
           expect(response.data).toEqual(secret);
         });
     });
+
+    it('should add additional metadata to secret if specified', () => {
+      const secret = createSecret();
+      const additionalMetadata = { annotations: { additional: 'metadata' } };
+      const secretWithAdditionalMetadata = {
+        ...secret,
+        metadata: { ...secret.metadata, ...additionalMetadata },
+      };
+
+      mock.onGet(`${SECRET_URL}/${SECRET_NAME}`).reply(404);
+      // only reply with 204 for request to correct url with correct body (the secret to create)
+      mock.onPost(SECRET_URL, secretWithAdditionalMetadata).reply(204, secretWithAdditionalMetadata);
+
+      return secretApi.createOrUpdateSecret('test', NAMESPACE, 'testvalue', additionalMetadata)
+        .then((response) => {
+          expect(response.data).toEqual(secretWithAdditionalMetadata);
+        });
+    });
   });
 
   describe('get secret', () => {

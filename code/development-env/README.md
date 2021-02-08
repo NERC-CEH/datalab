@@ -190,32 +190,19 @@ The value of the cookie can be obtained through a web browser's development tool
 
 ### Run Containers
 
-* Start mongo & vault containers
-
-```bash
-docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml up -d
-```
-
-* Set Vault-App-Role token
-
-```bash
-./scripts/configure-vault.sh
-export VAULT_APP_ROLE= # Set to value output from command on line above
-```
-
 * Start minikube proxy, in separate terminal
 
 ```bash
 kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 ```
 
-* Start DataLab App, DataLab Api, Infrastructure Api and Auth services.
+* Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
 
 ```bash
-docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up -d
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up -d --remove-orphans
 ```
 
-You should eventually see a message saying `You can now view datalab-app in the browser.`
+You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
 
 ### Running with Keycloak
 
@@ -233,7 +220,7 @@ Keycloak must be resolvable both by the auth service as well as your local deskt
 Finally, use the following command to start the app in place of the final one used above. When setting up for the first time it may take a minute before login is available as the OIDC client is set up for the first time.
 
 ```bash
-docker-compose -f ./docker/docker-compose-vault.yml -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up -d
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up -d
 ```
 
 ## Testing APIs

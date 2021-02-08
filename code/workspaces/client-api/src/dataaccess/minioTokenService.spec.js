@@ -2,14 +2,14 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import minioTokenService from './minioTokenService';
-import vault from './vault/vault';
+import secrets from './secrets/secrets';
 
 const mock = new MockAdapter(axios);
 
 jest.mock('winston');
 
-const vaultMock = jest.fn();
-vault.requestStorageKeys = vaultMock;
+const getStackSecretMock = jest.fn();
+secrets.getStackSecret = getStackSecretMock;
 
 beforeEach(() => {
   mock.reset();
@@ -32,7 +32,7 @@ const loginUrl = `${storage.internalEndpoint}/webrpc`;
 
 describe('minioTokenService', () => {
   it('should request login token from minio', () => {
-    vaultMock.mockImplementationOnce(() => (Promise.resolve({
+    getStackSecretMock.mockImplementationOnce(() => (Promise.resolve({
       access_key: 'accessKey',
       secret_key: 'secretKey',
     })));
@@ -46,7 +46,7 @@ describe('minioTokenService', () => {
   });
 
   it('should return undefined and log error if keys are not returned', () => {
-    vaultMock.mockImplementationOnce(() => (Promise.resolve({})));
+    getStackSecretMock.mockImplementationOnce(() => (Promise.resolve({})));
 
     return minioTokenService.requestMinioToken(storage)
       .then((token) => {
@@ -56,7 +56,7 @@ describe('minioTokenService', () => {
   });
 
   it('should return undefined and log error if login fails', () => {
-    vaultMock.mockImplementationOnce(() => (Promise.resolve({
+    getStackSecretMock.mockImplementationOnce(() => (Promise.resolve({
       access_key: 'accessKey',
       secret_key: 'secretKey',
     })));

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export async function catalogueConfig() {
-  const { data } = await axios.get('/catalogue_config.json');
-  return data;
+  const { data: { catalogue } } = await axios.get('/catalogue_asset_repo_config.json');
+  return catalogue;
 }
 
 export async function catalogueAvailable() {
