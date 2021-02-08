@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-02-03T14:12:32.761Z
+__export_date: 2021-02-05T11:43:18.438Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
@@ -707,7 +707,7 @@ resources:
     _type: request
   - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1611744419404
+    modified: 1612525380676
     created: 1568024223786
     url: "{{ client_api_url  }}/api"
     name: Stacks
@@ -1302,7 +1302,7 @@ resources:
     _type: request
   - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1612178471036
+    modified: 1612525269561
     created: 1612177227190
     url: "{{ _.client_api_url }}/api"
     name: createCentralAssetMetadata
@@ -1312,8 +1312,9 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  createCentralAssetMetadata (metadata:
         {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    type:
-        data,\n    owners: [\"owner-id\"],\n    isPublic: true,\n  })
-        {\n    name\n    version\n  }\n}"}'
+        \"DATA\",\n    owners: [\"owner-id\"],\n    visible:
+        \"PUBLIC\",\n    fileLocation: \"/path/to/file1\"\n  })
+        {\n    assetId\n    name\n    version\n  }\n}"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1333,7 +1334,7 @@ resources:
     _type: request
   - _id: req_3184cef31d3a49c097475deadbb28e6f
     parentId: fld_13d24c525db74595ba879650f2fb4a60
-    modified: 1612280632301
+    modified: 1612525347319
     created: 1612200807362
     url: "{{ _.infra_api_url }}/centralAssetRepo/metadata"
     name: Create Central Asset Metadata
@@ -1347,7 +1348,7 @@ resources:
           "version": "0.4.0",
           "type": "DATA",
           "owners": [],
-          "visible": "public",
+          "visible": "PUBLIC",
           "fileLocation": "file/location"
         }
     parameters: []

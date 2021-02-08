@@ -18,7 +18,7 @@ describe('createMetadata', () => {
       version: '0.1.0',
       type: 'DATA',
       owners: [],
-      visible: 'public',
+      visible: 'PUBLIC',
       fileLocation: 'path/to/file',
     };
     const createdDocument = { ...metadata, assetId: 'test-asset-id' };
