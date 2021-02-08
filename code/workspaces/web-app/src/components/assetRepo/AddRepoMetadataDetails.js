@@ -60,7 +60,7 @@ export default function AddRepoMetadataDetails() {
       await dispatch(assetRepoActions.addRepoMetadata(metadata));
       notify.success('Metadata set');
     } catch (error) {
-      notify.error(`Error updating metadata: ${error.message}`);
+      notify.error(error.message || error);
     }
     setAddRepoMetadataDialogState({ open: false });
   };
@@ -121,7 +121,7 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
   };
 
   const typeOptions = [
-    { value: 'DATASET', text: 'Data set' },
+    { value: 'DATA', text: 'Data set' },
     { value: 'NOTEBOOK', text: 'Notebook' },
     { value: 'SNIPPET', text: 'Snippet' },
   ];

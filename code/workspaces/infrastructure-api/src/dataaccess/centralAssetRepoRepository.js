@@ -15,7 +15,8 @@ async function metadataExists(metadata) {
     metadataWithMasterUrlMasterVersionCombinationExists,
   ];
   const results = await Promise.all(checkingFunctions.map(fn => fn(metadata)));
-  return { conflicts: results.flatMap(result => result.conflicts) };
+  const conflicts = results.flatMap(result => result.conflicts);
+  return { conflicts, message: conflicts.join(' ') };
 }
 
 async function metadataWithNameVersionCombinationExists({ name, version }) {

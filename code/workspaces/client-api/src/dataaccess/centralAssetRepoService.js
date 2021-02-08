@@ -1,15 +1,20 @@
 import axios from 'axios';
 import config from '../config';
+import axiosErrorHandler from '../util/errorHandlers';
 
 const infrastructureApi = config.get('infrastructureApi');
 
 async function createAssetMetadata(metadata, token) {
-  const { data } = await axios.post(
-    `${infrastructureApi}/centralAssetRepo/metadata`,
-    metadata,
-    generateOptions(token),
-  );
-  return data;
+  try {
+    const { data } = await axios.post(
+      `${infrastructureApi}/centralAssetRepo/metadata`,
+      metadata,
+      generateOptions(token),
+    );
+    return data;
+  } catch (err) {
+    return axiosErrorHandler('Error creating metadata')(err);
+  }
 }
 
 function generateOptions(token) {
