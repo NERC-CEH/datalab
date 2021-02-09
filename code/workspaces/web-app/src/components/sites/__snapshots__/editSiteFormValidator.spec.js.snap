@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`editSiteFormValidator syncValidate should return correct errors for empty form 1`] = `
+Object {
+  "displayName": "Display name can't be blank",
+  "type": "Type can't be blank",
+}
+`;

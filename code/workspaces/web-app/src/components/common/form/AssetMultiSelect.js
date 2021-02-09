@@ -1,4 +1,3 @@
-// TODO - add unit tests
 import React, { useState } from 'react';
 import { renderMultiSelectAutocompleteField } from './controls';
 import { useAssetRepo } from '../../../hooks/assetRepoHooks';

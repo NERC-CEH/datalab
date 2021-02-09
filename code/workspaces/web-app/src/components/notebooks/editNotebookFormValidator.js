@@ -1,4 +1,3 @@
-// TODO - add unit tests
 import validate from 'validate.js';
 
 export const editConstraints = {
