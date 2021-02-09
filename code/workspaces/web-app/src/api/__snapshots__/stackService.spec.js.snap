@@ -26,6 +26,7 @@ exports[`stackService editStack should build the correct mutation and unpack the
         displayName
         description
         shared
+        assets { assetId, name, version, fileLocation }
       }
     }"
 `;
@@ -43,7 +44,7 @@ exports[`stackService loadStacks should build the correct query and unpack the r
 "
     GetStacks($projectKey: String!) {
       stacks {
-        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }
       }
     }"
 `;

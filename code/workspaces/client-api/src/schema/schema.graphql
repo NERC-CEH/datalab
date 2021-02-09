@@ -169,6 +169,7 @@ type Stack {
     shared: VisibilityType
     visible: VisibilityType
     version: String
+    assets: [CentralAssetMetadataResponse]
 }
 
 input StacksByCategoryRequest {
@@ -345,6 +346,18 @@ enum CatalogueRole {
     user
 }
 
+input CentralAssetMetadataCreationRequest {
+    name: String!
+    version: String!
+    type: String!
+    fileLocation: String
+    masterUrl: String
+    masterVersion: String
+    owners: [String]!
+    visible: String!
+    projects: [String]
+}
+
 type CentralAssetMetadataResponse {
     assetId: String!
     name: String!
@@ -357,18 +370,6 @@ type CentralAssetMetadataResponse {
     visible: String!
     projects: [String]
     registrationDate: String!
-}
-
-input CentralAssetMetadataCreationRequest {
-    name: String!
-    version: String!
-    type: String!
-    fileLocation: String
-    masterUrl: String
-    masterVersion: String
-    owners: [String]!
-    visible: String!
-    projects: [String]
 }
 
 input CentralAssetMetadataReference {

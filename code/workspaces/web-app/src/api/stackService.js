@@ -5,7 +5,7 @@ function loadStacks(projectKey) {
   const query = `
     GetStacks($projectKey: String!) {
       stacks {
-        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }
       }
     }`;
 
@@ -17,7 +17,7 @@ function loadStacksByCategory(projectKey, category) {
   const query = `
     GetStacksByCategory($params: StacksByCategoryRequest) {
       stacksByCategory(params: $params) {
-        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }
       }
     }`;
 
@@ -97,6 +97,7 @@ function editStack(stack) {
         displayName
         description
         shared
+        assets { assetId, name, version, fileLocation }
       }
     }`;
 
