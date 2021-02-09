@@ -11,8 +11,9 @@ targetNamespace="devtest"
 mongoPassword="datalabs-root-p"
 
 # The path to the datalab helm chart to install. You will likely need to have a local
-# of the datalabs-k8s-manifests repo to have this chart available for install.
-helmChartPath="<path to datalab helm chart>"
+# of the datalab-k8s-manifests repo to have this chart available for install.
+# The default value assumes the datalab-k8s-manifests repository is installed adjacently to this repository.
+helmChartPath="../../../datalab-k8s-manifests/helm/datalab/"
 helmDeploymentName="datalab"
 
 # Names to be used for the secrets
