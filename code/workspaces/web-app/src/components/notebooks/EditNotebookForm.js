@@ -2,11 +2,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
+import { formatAndParseMultiSelect, renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
 import { syncValidate } from './editNotebookFormValidator';
+import AssetMultiSelect from '../common/form/AssetMultiSelect';
 
 const formPropTypes = {
   onCancel: PropTypes.func.isRequired,
+};
+
+const commonProps = {
+  component: renderTextField,
+  InputLabelProps: { shrink: true },
 };
 
 const EditNotebookForm = ({
@@ -14,14 +20,23 @@ const EditNotebookForm = ({
 }) => (
   <form onSubmit={handleSubmit}>
     <Field
+      { ...commonProps }
       name="displayName"
       label="Display Name"
-      component={renderTextField}
     />
     <Field
+      { ...commonProps }
       name="description"
       label="Description"
       component={renderTextArea}
+    />
+    <Field
+      { ...commonProps }
+      name="assets"
+      label="Assets"
+      component={AssetMultiSelect}
+      format={formatAndParseMultiSelect}
+      parse={formatAndParseMultiSelect}
     />
     <UpdateFormControls onClearChanges={reset} onCancel={onCancel} pristine={pristine} />
   </form>

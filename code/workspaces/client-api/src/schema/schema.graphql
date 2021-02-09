@@ -97,7 +97,7 @@ type Mutation {
     removeProjectPermission(permission: PermissionRemoveRequest): Boolean
 
     # Create a central asset repo metadata
-    createCentralAssetMetadata(metadata: CentralAssetMetadataCreationRequest!): CentralAssetMetadata!
+    createCentralAssetMetadata(metadata: CentralAssetMetadataCreationRequest!): CentralAssetMetadataResponse!
 
     # Set instanceAdmin role
     setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
@@ -189,6 +189,7 @@ input StackCreationRequest {
     volumeMount: String
     shared: VisibilityType
     visible: VisibilityType
+    assets: [CentralAssetMetadataReference]
 }
 
 # Type to describe the mutation for updating a new Stack.
@@ -198,6 +199,7 @@ input StackUpdateRequest {
     displayName: String
     description: String
     shared: VisibilityType
+    assets: [CentralAssetMetadataReference]
 }
 
 # Type to describe the mutation for deleting a new Stack.
@@ -343,7 +345,7 @@ enum CatalogueRole {
     user
 }
 
-type CentralAssetMetadata {
+type CentralAssetMetadataResponse {
     assetId: String!
     name: String!
     version: String!
@@ -367,4 +369,11 @@ input CentralAssetMetadataCreationRequest {
     owners: [String]!
     visible: String!
     projects: [String]
+}
+
+input CentralAssetMetadataReference {
+    assetId: String!    
+    name: String
+    version: String
+    fileLocation: String
 }
