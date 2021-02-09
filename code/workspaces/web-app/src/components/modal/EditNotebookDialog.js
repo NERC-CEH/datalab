@@ -20,6 +20,7 @@ EditNotebookDialog.propTypes = {
   stack: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    assets: PropTypes.arrayOf(PropTypes.object).isRequired,
   }),
   formComponent: PropTypes.elementType.isRequired,
 };

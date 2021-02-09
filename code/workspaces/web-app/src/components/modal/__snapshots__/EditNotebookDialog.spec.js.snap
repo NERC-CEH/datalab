@@ -12,6 +12,7 @@ exports[`EditNotebookDialog renders correctly passing values to provided from co
     <FormComponent
       initialValues={
         Object {
+          "assets": Array [],
           "description": "description",
           "displayName": "Display Name",
           "name": "stack name",

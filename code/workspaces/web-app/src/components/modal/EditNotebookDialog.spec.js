@@ -7,7 +7,7 @@ describe('EditNotebookDialog', () => {
     title = 'Title',
     onSubmit = jest.fn().mockName('onSubmit'),
     onCancel = jest.fn().mockName('onCancel'),
-    stack = { name: 'stack name', displayName: 'Display Name', description: 'description' },
+    stack = { name: 'stack name', displayName: 'Display Name', description: 'description', assets: [] },
     formComponent,
   }) => shallow(
     <EditNotebookDialog {...{ title, onSubmit, onCancel, stack, formComponent }} />,
