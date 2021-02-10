@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getMiddleware returns middleware that keeps permission as not granted, adds an error to error array and calls next if there is no projectKey in the request 1`] = `
+Array [
+  "'projectKey' must be defined in either URL or request body",
+]
+`;
+
+exports[`getMiddleware returns middleware that keeps permission as not granted, adds error to error array and calls next if user does not have required permission 1`] = `
+Array [
+  "User missing acceptable project permission. Requires one of: projects:testproj:stacks:list.",
+]
+`;

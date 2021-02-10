@@ -1,6 +1,13 @@
 import { permissionTypes } from 'common';
 import httpMocks from 'node-mocks-http';
-import { projectPermissionWrapper, systemAdminPermissionWrapper, systemDataManagerPermissionWrapper } from './permissionMiddleware';
+import permissionMiddleware, { projectPermissionWrapper, systemAdminPermissionWrapper, systemDataManagerPermissionWrapper } from './permissionMiddleware';
+import systemPermissionMiddlewareMock from './subPermissionMiddleware/systemPermissionMiddleware';
+import projectPermissionMiddlewareMock from './subPermissionMiddleware/projectPermissionMiddleware';
+import * as permissionMiddlewareUtilsMock from './subPermissionMiddleware/utils';
+
+jest.mock('./subPermissionMiddleware/systemPermissionMiddleware');
+jest.mock('./subPermissionMiddleware/projectPermissionMiddleware');
+jest.mock('./subPermissionMiddleware/utils');
 
 const { projectPermissions: { PROJECT_KEY_STACKS_LIST }, SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 
@@ -165,5 +172,51 @@ describe('systemDataManagerPermissionWrapper', () => {
       expect(responseMock._getData()).toMatchSnapshot(); // eslint-disable-line no-underscore-dangle
       expect(nextMock).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe('permissionMiddleware', () => {
+  systemPermissionMiddlewareMock.getPermissionsHandled.mockReturnValue(['system:test:permission']);
+  projectPermissionMiddlewareMock.getPermissionsHandled.mockReturnValue(['project:test:permission']);
+
+  const configuredSystemPermissionMiddleware = jest.fn();
+  const configuredProjectPermissionMiddleware = jest.fn();
+
+  systemPermissionMiddlewareMock.getMiddleware.mockReturnValue(configuredSystemPermissionMiddleware);
+  projectPermissionMiddlewareMock.getMiddleware.mockReturnValue(configuredProjectPermissionMiddleware);
+
+  it('has middleware to initialise the permission infrastructure on the request as first middleware', () => {
+    const middleware = permissionMiddleware();
+    expect(middleware[0]).toBe(permissionMiddlewareUtilsMock.initRequestPermissionInfoStructureMiddleware);
+  });
+
+  it('has middleware to ensure that permission has been granted on the request as the last middleware', () => {
+    const middleware = permissionMiddleware();
+    expect(middleware[middleware.length - 1]).toBe(permissionMiddlewareUtilsMock.ensurePermissionGrantedMiddleware);
+  });
+
+  it('filters middleware that does not handle any of the accepted permissions', () => {
+    projectPermissionMiddlewareMock.getPermissionsHandled.mockReturnValueOnce([]);
+
+    const middleware = permissionMiddleware();
+
+    expect(middleware).toContain(configuredSystemPermissionMiddleware);
+    expect(middleware).not.toContain(configuredProjectPermissionMiddleware);
+  });
+
+  it('calls to find the permissions that the middleware handles out of provided accepted permissions and system admin', () => {
+    const acceptedPermissions = ['test:accepted:permission'];
+    const expectedPermissions = [...acceptedPermissions, SYSTEM_INSTANCE_ADMIN];
+
+    permissionMiddleware(...acceptedPermissions);
+
+    expect(systemPermissionMiddlewareMock.getPermissionsHandled).toHaveBeenCalledWith(expectedPermissions);
+    expect(projectPermissionMiddlewareMock.getPermissionsHandled).toHaveBeenCalledWith(expectedPermissions);
+  });
+
+  it('calls to configure middleware with permissions the middleware handles', () => {
+    permissionMiddleware();
+    expect(systemPermissionMiddlewareMock.getMiddleware).toHaveBeenCalledWith(['system:test:permission']);
+    expect(projectPermissionMiddlewareMock.getMiddleware).toHaveBeenCalledWith(['project:test:permission']);
   });
 });
