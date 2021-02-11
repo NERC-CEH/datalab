@@ -38,28 +38,28 @@ function generateRequestConfig(token) {
   };
 }
 
-async function axiosErrorWrapper(callback, ...args) {
+async function axiosErrorWrapper(message, fn, ...args) {
   try {
-    return await callback(...args);
+    return await fn(...args);
   } catch (error) {
-    handleAxiosError(error);
+    return handleAxiosError(message, error);
   }
 }
 
-function handleAxiosError(error) {
+function handleAxiosError(message, error) {
   const { response: { status, data } } = error;
   if (status === 401 || status === 403) {
     throw new ApolloError(data.errors, 'UNAUTHORISED');
   }
-  throw error;
+  axiosErrorHandler(message)(error);
 }
 
-function wrapWithAxiosErrorWrapper(fn) {
-  return (...args) => axiosErrorWrapper(fn, ...args);
+function wrapWithAxiosErrorWrapper(message, fn) {
+  return (...args) => axiosErrorWrapper(message, fn, ...args);
 }
 
 export default {
-  createAssetMetadata: wrapWithAxiosErrorWrapper(createAssetMetadata),
-  listCentralAssets: wrapWithAxiosErrorWrapper(listCentralAssets),
-  listCentralAssetsAvailableToProject: wrapWithAxiosErrorWrapper(listCentralAssetsAvailableToProject),
+  createAssetMetadata: wrapWithAxiosErrorWrapper('Error creating metadata.', createAssetMetadata),
+  listCentralAssets: wrapWithAxiosErrorWrapper('Error listing metadata.', listCentralAssets),
+  listCentralAssetsAvailableToProject: wrapWithAxiosErrorWrapper('Error listing metadata from project.', listCentralAssetsAvailableToProject),
 };
