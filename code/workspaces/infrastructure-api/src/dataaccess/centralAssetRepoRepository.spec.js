@@ -36,6 +36,19 @@ describe('createMetadata', () => {
   });
 });
 
+describe('listMetadata', () => {
+  it('performs the correct query on central asset metadata model and returns the result', async () => {
+    const metadata = getMinimalMetadata();
+    centralAssetMetadataModelMock.exec.mockResolvedValueOnce([metadata]);
+
+    const returnValue = await centralAssetRepoRepository.listMetadata();
+
+    expect(returnValue).toEqual([metadata]);
+    expect(centralAssetMetadataModelMock.find).toHaveBeenCalledWith();
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
+  });
+});
+
 describe('metadataAvailableToProject', () => {
   it('performs correct query on central asset metadata model and returns the result', async () => {
     const projectKey = 'test-project';

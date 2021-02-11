@@ -9,8 +9,8 @@ const matchedDataMock = jest
   .mockImplementation(request => request);
 
 const responseMock = {
-  status: jest.fn().mockImplementation(() => responseMock),
-  send: jest.fn().mockImplementation(() => responseMock),
+  status: jest.fn().mockReturnThis(),
+  send: jest.fn().mockReturnThis(),
 };
 const nextMock = jest.fn();
 
@@ -82,6 +82,28 @@ describe('createAssetMetadata', () => {
     centralAssetRepoRepository.createMetadata.mockRejectedValueOnce(new Error('Expected test error'));
     await createAssetMetadata(requestMock, responseMock, nextMock);
     expect(nextMock).toHaveBeenCalledWith(new Error('Error creating asset metadata - failed to create new document: Expected test error'));
+  });
+});
+
+describe('listAssetMetadata', () => {
+  const { listAssetMetadata } = centralAssetRepoController;
+  const requestMock = jest.fn();
+
+  it('calls to list metadata and returns response configured with 200 status and array of metadata', async () => {
+    const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
+    centralAssetRepoRepository.listMetadata.mockResolvedValueOnce(availableMetadata);
+
+    const returnValue = await listAssetMetadata(requestMock, responseMock, nextMock);
+
+    expect(returnValue).toBe(responseMock);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
+  });
+
+  it('calls next with an error if there is an error when listing the metadata', async () => {
+    centralAssetRepoRepository.listMetadata.mockRejectedValueOnce(new Error('Expected test error'));
+    await listAssetMetadata(requestMock, responseMock, nextMock);
+    expect(nextMock).toHaveBeenCalledWith(new Error('Error listing asset metadata: Expected test error'));
   });
 });
 

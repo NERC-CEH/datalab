@@ -46,13 +46,30 @@ describe('createAssetMetadata', () => {
   });
 });
 
+describe('listCentralAssets', () => {
+  const { listCentralAssets } = centralAssetRepoService;
+
+  it('calls infrastructure-api to get all metadata assets', async () => {
+    httpMock
+      .onGet(`${infrastructureApi}/centralAssetRepo/metadata`)
+      .reply(200, [metadataResponse]);
+
+    const returnValue = await listCentralAssets(token);
+
+    expect(returnValue).toEqual([metadataResponse]);
+    expect(httpMock.history.get.length).toBe(1);
+    const [getMock] = httpMock.history.get;
+    expect(getMock.headers.authorization).toEqual(token);
+  });
+});
+
 describe('listCentralAssetsAvailableToProject', () => {
   const { listCentralAssetsAvailableToProject } = centralAssetRepoService;
   const projectKey = 'test-project';
 
   it('calls infrastructure-api to get metadata of assets visible to the provided project', async () => {
     httpMock
-      .onGet(`${infrastructureApi}/centralAssetRepo/metadata`)
+      .onGet(`${infrastructureApi}/centralAssetRepo/metadata/${projectKey}`)
       .reply(200, [metadataResponse]);
 
     const returnValue = await listCentralAssetsAvailableToProject(projectKey, token);
@@ -60,7 +77,6 @@ describe('listCentralAssetsAvailableToProject', () => {
     expect(returnValue).toEqual([metadataResponse]);
     expect(httpMock.history.get.length).toBe(1);
     const [getMock] = httpMock.history.get;
-    expect(getMock.params).toEqual({ projectKey });
     expect(getMock.headers.authorization).toEqual(token);
   });
 });

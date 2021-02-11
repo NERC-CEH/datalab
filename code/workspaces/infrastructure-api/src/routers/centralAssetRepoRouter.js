@@ -19,6 +19,12 @@ centralAssetRepoRouter.post(
 
 centralAssetRepoRouter.get(
   '/metadata',
+  permissionMiddleware(SYSTEM_DATA_MANAGER),
+  errorWrapper(centralAssetRepo.listAssetMetadata),
+);
+
+centralAssetRepoRouter.get(
+  '/metadata/:projectKey',
   permissionMiddleware(PROJECT_KEY_STACKS_CREATE, SYSTEM_DATA_MANAGER),
   centralAssetRepo.listByProjectKeyValidator(),
   errorWrapper(centralAssetRepo.assetMetadataAvailableToProject),

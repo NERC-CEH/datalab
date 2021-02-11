@@ -1,6 +1,6 @@
 import { permissionTypes } from 'common';
 import {
-  permissionGranted, getUserPermissionsFromRequest, containsPermission, grantPermission, addPermissionError, logHelper, permissionsMatchingRegExp, exportMiddleware,
+  permissionGranted, getUserPermissionsFromRequest, containsPermission, grantPermission, addPermissionError, logHelper, permissionsMatchingRegExp, exportMiddleware, permissionsArrayToString,
 } from './utils';
 
 function systemPermissionMiddleware(acceptedPermissions) {
@@ -21,7 +21,7 @@ function systemPermissionMiddleware(acceptedPermissions) {
       logHelper.permissionCheckFailed(middlewareName, 'no acceptable permission found.');
       addPermissionError(
         request,
-        `User missing acceptable system permission. Requires one of: ${acceptedPermissions}.`,
+        `User missing acceptable system permission. Requires one of: ${permissionsArrayToString(acceptedPermissions)}.`,
       );
     }
 

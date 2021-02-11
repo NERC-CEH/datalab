@@ -8,6 +8,10 @@ async function createMetadata(metadata) {
   return document;
 }
 
+async function listMetadata() {
+  return CentralAssetMetadata().find().exec();
+}
+
 async function metadataAvailableToProject(projectKey) {
   return CentralAssetMetadata()
     .find()
@@ -60,6 +64,7 @@ async function metadataWithMasterUrlMasterVersionCombinationExists({ masterUrl, 
 
 export default {
   createMetadata,
+  listMetadata,
   metadataAvailableToProject,
   metadataExists,
 };

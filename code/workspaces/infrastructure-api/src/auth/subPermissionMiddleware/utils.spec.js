@@ -170,3 +170,10 @@ describe('exportMiddleware', () => {
     expect(returnValue.getMiddleware).toBe(middlewareMock);
   });
 });
+
+describe('permissionsArrayToString', () => {
+  it('creates a easily human readable string representation of an array of permissions', () => {
+    const permissions = ['project:permission:one', 'project:permission:two', 'system:permission:one'];
+    expect(utils.permissionsArrayToString(permissions)).toMatchSnapshot();
+  });
+});

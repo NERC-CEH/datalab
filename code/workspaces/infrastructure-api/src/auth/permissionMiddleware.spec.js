@@ -1,13 +1,21 @@
 import { permissionTypes } from 'common';
 import httpMocks from 'node-mocks-http';
 import permissionMiddleware, { projectPermissionWrapper, systemAdminPermissionWrapper, systemDataManagerPermissionWrapper } from './permissionMiddleware';
+import * as permissionMiddlewareUtilsMock from './subPermissionMiddleware/utils';
 import systemPermissionMiddlewareMock from './subPermissionMiddleware/systemPermissionMiddleware';
 import projectPermissionMiddlewareMock from './subPermissionMiddleware/projectPermissionMiddleware';
-import * as permissionMiddlewareUtilsMock from './subPermissionMiddleware/utils';
 
-jest.mock('./subPermissionMiddleware/systemPermissionMiddleware');
-jest.mock('./subPermissionMiddleware/projectPermissionMiddleware');
 jest.mock('./subPermissionMiddleware/utils');
+
+// Due to the way jest.mock works, unable to split out anything common between these mocks
+jest.mock('./subPermissionMiddleware/systemPermissionMiddleware', () => ({
+  default: { getPermissionsHandled: jest.fn(), getMiddleware: jest.fn() },
+  __esModule: true,
+}));
+jest.mock('./subPermissionMiddleware/projectPermissionMiddleware', () => ({
+  default: { getPermissionsHandled: jest.fn(), getMiddleware: jest.fn() },
+  __esModule: true,
+}));
 
 const { projectPermissions: { PROJECT_KEY_STACKS_LIST }, SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 

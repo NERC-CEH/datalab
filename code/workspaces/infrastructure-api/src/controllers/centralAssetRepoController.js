@@ -1,4 +1,4 @@
-import { matchedData, body, query } from 'express-validator';
+import { matchedData, body, param } from 'express-validator';
 import { service } from 'service-chassis';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import centralAssetRepoModel from '../models/centralAssetRepo.model';
@@ -19,12 +19,21 @@ async function createAssetMetadata(request, response, next) {
   }
 }
 
+async function listAssetMetadata(request, response, next) {
+  try {
+    const metadata = await centralAssetRepoRepository.listMetadata();
+    return response.status(200).send(metadata);
+  } catch (error) {
+    return next(new Error(`Error listing asset metadata: ${error.message}`));
+  }
+}
+
 async function assetMetadataAvailableToProject(request, response, next) {
   const { projectKey } = matchedData(request);
 
   try {
-    const result = await centralAssetRepoRepository.metadataAvailableToProject(projectKey);
-    return response.status(200).send(result);
+    const metadata = await centralAssetRepoRepository.metadataAvailableToProject(projectKey);
+    return response.status(200).send(metadata);
   } catch (error) {
     return next(new Error(`Error listing asset metadata by key: ${error.message}`));
   }
@@ -97,7 +106,7 @@ const metadataValidator = () => {
 };
 
 const listByProjectKeyValidator = () => service.middleware.validator([
-  new ValidationChainHelper(query('projectKey'))
+  new ValidationChainHelper(param('projectKey'))
     .exists()
     .notEmpty()
     .getValidationChain(),
@@ -105,6 +114,7 @@ const listByProjectKeyValidator = () => service.middleware.validator([
 
 export default {
   createAssetMetadata,
+  listAssetMetadata,
   assetMetadataAvailableToProject,
   metadataValidator,
   listByProjectKeyValidator,

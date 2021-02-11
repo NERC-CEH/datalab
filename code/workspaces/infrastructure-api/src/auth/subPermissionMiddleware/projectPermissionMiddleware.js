@@ -1,6 +1,9 @@
 import { get } from 'lodash';
 import { permissionTypes } from 'common';
-import { permissionGranted, addPermissionError, containsPermission, getUserPermissionsFromRequest, grantPermission, exportMiddleware, permissionsMatchingRegExp, logHelper } from './utils';
+import {
+  permissionGranted, addPermissionError, containsPermission, getUserPermissionsFromRequest,
+  grantPermission, exportMiddleware, permissionsMatchingRegExp, logHelper, permissionsArrayToString,
+} from './utils';
 
 const { projectKeyPermission, PROJECT_NAMESPACE } = permissionTypes;
 
@@ -33,7 +36,7 @@ function projectPermissionMiddleware(acceptedPermissions) {
       logHelper.permissionCheckFailed(middlewareName, 'no acceptable permission found.');
       addPermissionError(
         request,
-        `User missing acceptable project permission. Requires one of: ${processedPermissions}.`,
+        `User missing acceptable project permission. Requires one of: ${permissionsArrayToString(processedPermissions)}.`,
       );
     }
 

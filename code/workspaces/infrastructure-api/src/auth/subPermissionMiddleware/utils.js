@@ -47,12 +47,16 @@ export const permissionsMatchingRegExp = (permissions, regexp) => permissions.fi
 
 export const exportMiddleware = (getPermissionsHandled, getMiddleware) => ({ getPermissionsHandled, getMiddleware });
 
+export const permissionsArrayToString = permissions => `[${permissions.join(', ')}]`;
+
 export const logHelper = {
   alreadyGranted: (middlewareName) => {
     logger.debug(`Auth: ${middlewareName}: permission already granted. Skipping check.`);
   },
   checkingPermission: (middlewareName, acceptedPermissions, userPermissions) => {
-    logger.debug(`Auth: ${middlewareName}: checking permissions - accepted permissions: [${acceptedPermissions.join(', ')}] user permissions: [${userPermissions.join(', ')}]`);
+    logger.debug(
+      `Auth: ${middlewareName}: checking permissions - accepted permissions: ${permissionsArrayToString(acceptedPermissions)} user permissions: ${permissionsArrayToString(userPermissions)}`,
+    );
   },
   permissionCheckPassed: (middlewareName) => {
     logger.debug(`Auth: ${middlewareName}: permission check PASSED`);

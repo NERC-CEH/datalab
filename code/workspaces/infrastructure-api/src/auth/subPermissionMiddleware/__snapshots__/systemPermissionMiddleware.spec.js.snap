@@ -2,6 +2,6 @@
 
 exports[`getMiddleware returns middleware that keeps permission as not granted, adds error to error array and calls next if user does not have required permission 1`] = `
 Array [
-  "User missing acceptable system permission. Requires one of: system:instance:admin.",
+  "User missing acceptable system permission. Requires one of: [system:instance:admin].",
 ]
 `;
