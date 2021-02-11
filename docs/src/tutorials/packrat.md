@@ -28,7 +28,7 @@ will set the private project library for installing and opening of packages. The
 default global library can be restored by running the `packrat::off` command.
 When using *Spark* the `clean.search.path = FALSE`  argument should be given to
 the `on` function, this prevents unloading the `SparkR` library (see [Packrat on
-Spark](./packrat_on_spark.md) for more information).
+Spark](../r-libs/) for more information).
 
 ```R
 setwd('/data/example_project')
@@ -83,7 +83,7 @@ included with version control.
 
 This functionality is especially useful within DataLabs when using a project on
 an alternative notebook type or when needing a library within *Spark*. For more
-information see [Packrat on Spark](./packrat_on_spark.md).
+information see [Packrat on Spark](../r-libs/).
 
 ```R
 packrat::restore()
