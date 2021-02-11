@@ -48,11 +48,6 @@ export const instanceAdminWrapper = (...rest) => permissionCheck(
   ...rest,
 );
 
-export const dataManagerPermissionWrapper = (...rest) => permissionCheck(
-  [SYSTEM_DATA_MANAGER],
-  ...rest,
-);
-
 function permissionCheck(requiredPermissions, { permissions }, done) {
   const userPermissions = permissions || [];
 

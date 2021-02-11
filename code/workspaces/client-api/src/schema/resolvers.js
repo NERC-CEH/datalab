@@ -1,7 +1,7 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
 import { version } from '../version';
-import { dataManagerPermissionWrapper, instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
+import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
 import permissionsService from '../dataaccess/userPermissionsService';
