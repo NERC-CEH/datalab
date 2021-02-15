@@ -19,7 +19,6 @@ services:
     command: ["sh", "-c", "yarn start"]
     environment:
       <<: *common
-      AUTHORISATION_API_IDENTIFIER: ${AUTHORISATION_API_IDENTIFIER}
       # Keycloak Authentication Parameters
       # OIDC_OAUTH_TOKEN_ENDPOINT: "/protocol/openid-connect/token"
       # OIDC_JWKS_ENDPOINT: "/protocol/openid-connect/certs"
