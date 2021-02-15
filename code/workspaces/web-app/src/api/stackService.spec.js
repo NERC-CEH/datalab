@@ -50,13 +50,13 @@ describe('stackService', () => {
 
   describe('createStack', () => {
     it('should build the correct mutation and unpack the results', () => {
-      const data = { stack: { name: 'name' } };
+      const data = { stack: { name: 'name', assets: [{ assetId: 'asset-1' }] } };
       mockClient.prepareSuccess(data);
 
       return stackService.createStack(data.stack).then((response) => {
         expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
-        expect(mockClient.lastOptions()).toEqual(data);
+        expect(mockClient.lastOptions()).toEqual({ stack: { name: 'name', assetIds: ['asset-1'] } });
       });
     });
 
@@ -94,13 +94,13 @@ describe('stackService', () => {
 
   describe('editStack', () => {
     it('should build the correct mutation and unpack the results', () => {
-      const data = { stack: { name: 'name', projectKey: 'test', shared: 'project' } };
+      const data = { stack: { name: 'name', projectKey: 'test', shared: 'project', assets: [{ assetId: 'asset-1' }] } };
       mockClient.prepareSuccess(data);
 
       return stackService.editStack(data.stack).then((response) => {
         expect(response).toEqual(data.stack);
         expect(mockClient.lastQuery()).toMatchSnapshot();
-        expect(mockClient.lastOptions()).toEqual(data);
+        expect(mockClient.lastOptions()).toEqual({ stack: { name: 'name', projectKey: 'test', shared: 'project', assetIds: ['asset-1'] } });
       });
     });
 

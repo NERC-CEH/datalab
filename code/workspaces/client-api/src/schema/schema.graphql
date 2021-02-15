@@ -190,17 +190,17 @@ input StackCreationRequest {
     volumeMount: String
     shared: VisibilityType
     visible: VisibilityType
-    assets: [CentralAssetMetadataReference]
+    assetIds: [String]
 }
 
-# Type to describe the mutation for updating a new Stack.
+# Type to describe the mutation for updating a Stack.
 input StackUpdateRequest {
     projectKey: String
     name: String
     displayName: String
     description: String
     shared: VisibilityType
-    assets: [CentralAssetMetadataReference]
+    assetIds: [String]
 }
 
 # Type to describe the mutation for deleting a new Stack.
@@ -370,11 +370,4 @@ input CentralAssetMetadataCreationRequest {
     owners: [String]!
     visible: String!
     projects: [String]
-}
-
-input CentralAssetMetadataReference {
-    assetId: String!    
-    name: String
-    version: String
-    fileLocation: String
 }

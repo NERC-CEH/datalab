@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-02-05T11:43:18.438Z
+__export_date: 2021-02-15T16:16:23.730Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_f69cc29ea22447988e34b96b7312ded1
@@ -707,7 +707,7 @@ resources:
     _type: request
   - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1612525380676
+    modified: 1613405747476
     created: 1568024223786
     url: "{{ client_api_url  }}/api"
     name: Stacks
@@ -716,7 +716,8 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  stacks(projectKey: \"project\")
-        {\n    id\n    name\n    displayName\n    description\n    type\n    url\n    internalEndpoint\n    sourcePath\n    isPublic\n    redirectUrl\n    volumeMount\n    status\n  }\n}"}'
+        {\n    id\n    name\n    displayName\n    description\n    type\n    url\n    internalEndpoint\n    sourcePath\n    isPublic\n    redirectUrl\n    volumeMount\n    status\n    assets
+        { assetId, name, version, fileLocation }\n  }\n}"}'
     parameters: []
     headers:
       - id: pair_420491f04c4d4360a1d824ef4dcbf6d8

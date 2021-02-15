@@ -43,7 +43,12 @@ function getUrl(projectKey, id) {
     });
 }
 
-function createStack(stack) {
+function createStack(stackWithAssets) {
+  const stack = {
+    ...stackWithAssets,
+    assetIds: stackWithAssets.assets ? stackWithAssets.assets.map(asset => asset.assetId) : [],
+  };
+  delete stack.assets;
   const mutation = `
     CreateStack($stack: StackCreationRequest) {
       createStack(stack: $stack) {
@@ -89,7 +94,12 @@ function getLogs(projectKey, name) {
     .then(errorHandler('data.logs'));
 }
 
-function editStack(stack) {
+function editStack(stackWithAssets) {
+  const stack = {
+    ...stackWithAssets,
+    assetIds: stackWithAssets.assets ? stackWithAssets.assets.map(asset => asset.assetId) : [],
+  };
+  delete stack.assets;
   const mutation = `
     UpdateStack($stack: StackUpdateRequest) {
       updateStack(stack: $stack) {
