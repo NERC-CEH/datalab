@@ -6,7 +6,7 @@ import sortByName from '../sortByName';
 function AssetMultiSelect({ input, meta = null, ...custom }) {
   const assetRepo = useAssetRepo();
   const sortedAssets = sortByName(assetRepo.value.assets);
-  const [currentValue, setCurrentValue] = useState([]); // use to give current value to onBlur
+  const [currentValue, setCurrentValue] = useState(input.value || []); // use to give current value to onBlur
 
   return (
     <>
