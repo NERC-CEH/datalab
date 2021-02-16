@@ -2,6 +2,14 @@
 
 **Note:** All commands in this document assume that they are being executed from same directory as this document i.e. `code/development-env/datalabs-internal-setup.md` from the repository root.
 
+## Disable Minikube ingress
+
+This approach uses nginx for ingress, so you need to disable the minikube ingress addon.
+
+```bash
+minikube addons disable ingress
+```
+
 ## Install DNSMasq
 
 A tool named DNSMasq is required to resolve the `*.datalabs.internal` requests to the IP address through which minikube is accessible.
@@ -41,10 +49,10 @@ Therefore, the ingress is installed using the [`ingress-nginx` helm chart](https
 Ensuring that `kubectl` is configured to operate in the `devtest` namespace (by e.g. using `kubens`) run the following commands.
 
 ```bash
-$ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-$ helm repo update
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
 
-$ helm install ingress-nginx ingress-nginx/ingress-nginx --values ./config/ingress/config.yaml
+helm install ingress-nginx ingress-nginx/ingress-nginx --values ./config/ingress/config.yaml -n devtest
 ```
 
 The `config.yaml` adds extra configuration to the deployed ingress.
@@ -57,20 +65,22 @@ If you are able to use one of these and still set the `--default-ssl-certificate
 ## Install ingress manifests
 
 Make the following changes to [`./config/manifests/minikube-proxy.yml`](./config/manifests/minikube-proxy.yml):
+
 - Update all values referring to `datalabs.localhost` to `datalabs.internal`
 - Ensure the `externalName` field of both the `datalab-app-proxy` and `datalab-api-proxy` services is the IP at which a service running within minikube can access services running on your machine's `localhost`.
   This is expected to be `10.0.2.2` when running minikube with Virtualbox.
   This assumes that both the app and api are running and can be accessed on `localhost`.
 
 Once the changes have been made, apply the manifests using
+
 ```bash
-kubectl apply -f ./config/manifests/minikube-proxy.yaml
+kubectl apply -f ./config/manifests/minikube-proxy.yml
 ```
 
 ## Start Minikube tunnel
 
 At this point, the minikube cluster should be configured correctly in order to receive requests.
-However, the entry point for requests into the cluster (the `LoadBalancer` service `ingress-nginx-controller`) doesn't have an externally accessible IP address as can be seen when running the following command (the `EXTERNAL-IP` column should read `<none>`).
+However, the entry point for requests into the cluster (the `LoadBalancer` service `ingress-nginx-controller`) doesn't have an externally accessible IP address as can be seen when running the following command (the `EXTERNAL-IP` column should read `<pending>`).
 
 ```bash
 kubectl -n devtest get services
@@ -120,6 +130,7 @@ ingress-nginx-controller-admission   ClusterIP      10.104.184.182   <none>     
 
 A shell script `configure-dnsmasq.sh` has been written to automate the steps necessary to configure DNSMasq.
 This accepts two arguments (in the given order):
+
 1. the domain name that should be resolved to the desired IP e.g. `datalabs.internal`
 1. the IP address that should be resolved to when entering the domain name.
 
@@ -131,11 +142,12 @@ To configure `dnsmasq` as desired for the scenario given at the start of this se
 
 ```bash
 chmod u+x ./config/dnsmasq/configure-dnsmasq.sh
-./config/dnsmasq/configure-dnsmasq datalabs.internal 10.110.232.162
+./config/dnsmasq/configure-dnsmasq.sh datalabs.internal 10.110.232.162
 ```
 
 When running the `configure-dnsmasq` script you will be asked to enter your `sudo` password (your login password on Mac).
 This allows for:
+
 - writing a file to `/etc/resolver` so the Mac's default dns resolver knows to use `dnsmasq` for this host.
 - restarting of `dnsmasq` to pick up configuration changes.
 
@@ -197,10 +209,20 @@ Further information can be seen using
 scutil --dns
 ```
 
+## Set environment variable
+
+The following environment variable should be set:
+
+```bash
+DATALAB_DOMAIN=datalabs.internal
+```
+
+This can be done in the direnv .envrc file, if you are using direnv.
+
 ## Ensure access to app
 
 At this point, it should now be possible to access the web-app through the `datalabs.internal` domain.
-With the web-app running on `localhost` (e.g. through running the development docker-compose file), try accessing `testlab.datalabs.internal` (this was configured in the ingress we applied earlier to resolve to the web-app).
+With the web-app running on `localhost` (e.g. through running the development docker-compose file), try accessing [https://testlab.datalabs.internal/] (this was configured in the ingress we applied earlier to resolve to the web-app).
 This should access the DataLabs web-app.
 
 Upon logging into the app, you may be redirected to the wrong address `datalabs.localhost`.

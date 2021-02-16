@@ -11,6 +11,7 @@ x-common-variables: &common
   NODE_OPTIONS: "--max-http-header-size=81920"
   DEPLOYED_IN_CLUSTER: "false"
   NODE_EXTRA_CA_CERTS: /usr/src/rootCA.pem
+  DATALAB_DOMAIN: ${DATALAB_DOMAIN:-datalabs.internal}
 
 services:
   datalab-auth:

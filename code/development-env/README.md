@@ -22,6 +22,8 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 * [direnv](https://direnv.net/docs/installation.html)
 * [kubectx + kubens](https://github.com/ahmetb/kubectx)
 * [kube-ps1](https://github.com/jonmosco/kube-ps1)
+* [helm](https://helm.sh/docs/intro/install/#from-homebrew-macos)
+* [Robo 3T](https://robomongo.org/download)
 * [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Configurations
@@ -202,6 +204,14 @@ Finally, use the following command to start the app in place of the final one us
 ```bash
 docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up -d
 ```
+
+### Accessing the database
+
+By default, you can access the development database using a tool such as Robo 3T with authentication:
+
+* User name: datalabs-root-u
+* Password: datalabs-root-p
+* Auth mechanism: SCRAM-SHA-256
 
 ## Local Helm install
 
