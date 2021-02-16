@@ -117,8 +117,8 @@ If you are running the client api with docker, the pem file will need to be moun
 ### Enabling access to cluster from host machine
 
 There are two domains through which you can access the cluster from the host machine (once configured) that configuration information is provided for.
-The first and simpler of the two is `datalabs.localhost` (see [datalabs-localhost-setup.md](./datalabs-localhost-setup.md)) but this might not work on all machines.
-If this does not work, then you can configure access to be through `.datalabs.internal` instead (see [datalabs-internal-setup.md](./datalabs-internal-setup.md)).
+For MacOS, you can configure access to be through `.datalabs.internal` (see [datalabs-internal-setup.md](./datalabs-internal-setup.md)).
+For Linux, you can configure access to be through `.datalabs.localhost` (see [datalabs-localhost-setup.md](./datalabs-localhost-setup.md)).
 
 ### Configuring ingress auth
 
