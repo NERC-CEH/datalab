@@ -73,6 +73,9 @@ minikube config set driver virtualbox
 rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*
 minikube start
 
+# Check the minikube IP is 192.168.99.100
+minikube ip
+
 # Create devtest namespace
 kubectl apply -f ./config/manifests/minikube-namespace.yml
 kubectl config set-context minikube --namespace=devtest
