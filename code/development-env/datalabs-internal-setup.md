@@ -80,7 +80,7 @@ kubectl apply -f ./config/manifests/minikube-proxy.yml
 ## Start Minikube tunnel
 
 At this point, the minikube cluster should be configured correctly in order to receive requests.
-However, the entry point for requests into the cluster (the `LoadBalancer` service `ingress-nginx-controller`) doesn't have an externally accessible IP address as can be seen when running the following command (the `EXTERNAL-IP` column should read `<pending>`).
+However, the entry point for requests into the cluster (the `LoadBalancer` service `ingress-nginx-controller`) doesn't have an externally accessible IP address as can be seen when running the following command (the `EXTERNAL-IP` column should read `<pending>` or `<none>`).
 
 ```bash
 kubectl -n devtest get services

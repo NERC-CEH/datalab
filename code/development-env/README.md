@@ -11,11 +11,11 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 * Node.js v12/Erbium: `nvm install lts/erbium`
 * [Yarn](https://yarnpkg.com/getting-started/install)
 * [Docker](https://docs.docker.com/get-docker/)
-* [Docker Compose](https://docs.docker.com/compose/install/)
+* [Docker Compose](https://docs.docker.com/compose/install/) (installed with Docker for MacOS)
 * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-* [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html)
+* [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html): `brew install dnsmasq`
 
 ### Recommended
 
@@ -48,7 +48,7 @@ avoid accidentally committing the file).
 Set your `.envrc` file to be:
 
 ```bash
-export AUTHORISATION_SERVICE_FOR_INGRESS=10.0.2.2:9000
+export AUTHORISATION_SERVICE_FOR_INGRESS=http://10.0.2.2:9000
 export DEPLOYED_IN_CLUSTER="false"
 ```
 
@@ -131,13 +131,13 @@ When notebooks etc. are created, an ingress rule is added such that they can be 
 The ingress rule contains a URL to check that the user accessing the resource has permission to view it which is expected to be the URL of the auth service.
 The infrastructure api (responsible for creating the ingress) and the auth service are not running in the cluster, but the dynamically created notebooks are created within the cluster.
 Therefore, the URL of the auth service is different for the infrastructure service and the notebooks.
-The IP address that is used in the ingress rule can be configured using the following environment variable
+The URL that is used in the ingress rule can be configured using the following environment variable
 
 ```bash
-AUTHORISATION_SERVICE_FOR_INGRESS=10.0.2.2:9000
+AUTHORISATION_SERVICE_FOR_INGRESS=<url-to-access-auth-service>
 ```
 
-where `<ip-to-access-auth-service>` needs to be configured to be the IP address and port through which a service in the cluster can access the authorisation service running on `localhost`.
+where `<url-to-access-auth-service>` needs to be configured to use the IP address and port through which a service in the cluster can access the authorisation service running on `localhost`.
 From VirtualBox, this is expected to be `http://10.0.2.2:9000` as `10.0.2.2` is the IP through which items running in VirtualBox can access the host machine, and the auth service is configured to run on port `9000` by default.
 
 ### Correctly resolving and accessing notebooks
@@ -187,7 +187,7 @@ kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up --remove-orphans
 ```
 
-You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
+You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`  The services can be run in the background by running docker-compose with the -d flag.
 
 ### Running with Keycloak
 

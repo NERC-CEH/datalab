@@ -67,7 +67,7 @@ Host datalabs-bastion-1
 Host datalabs-k8s-master
         HostName <internal_ip>
         User deploy
-        ProxyCommand ssh bastion -W %h:%p
+        ProxyCommand ssh datalabs-bastion-1 -W %h:%p
 ```
 
 This then allows SSH access using a simple

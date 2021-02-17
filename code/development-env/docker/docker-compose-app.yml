@@ -3,7 +3,7 @@ version: "3.7"
 x-common-variables: &common
   AUTHORISATION_SERVICE: http://datalab-auth:9000
   AUTH_SIGNIN_URL: http://datalabs.localhost
-  AUTHORISATION_SERVICE_FOR_INGRESS: http://10.0.2.2:9000
+  AUTHORISATION_SERVICE_FOR_INGRESS: ${AUTHORISATION_SERVICE_FOR_INGRESS:-http://10.0.2.2:9000}
   DATABASE_HOST: mongodb
   INFRASTRUCTURE_API: http://datalab-infra:8003
   KUBERNETES_API: http://host.docker.internal:8001
