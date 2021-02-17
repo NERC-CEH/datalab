@@ -61,7 +61,7 @@ if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|
   docker tag nerc/$IMAGE:latest nerc/$IMAGE:$GIT_DESCRIBE
   if [ "$#" -eq 2 ]; then
     echo "Attempting to push image..."
-    docker push nerc/$IMAGE
+    docker push nerc/$IMAGE:$GIT_DESCRIBE
   fi
   echo "Success!"
 else
