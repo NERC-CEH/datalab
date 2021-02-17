@@ -19,7 +19,7 @@ A number of severs will be running in the tenancy at any one time depending on t
 |------|-------|
 |datalabs-bastion-1|External access point to all datalabs servers|
 |datalabs-glusterfs-[1-3]|Gluster storage server|
-|datalabs-k8s-master-[1-3]|Kubernetes master nodes|	
+|datalabs-k8s-master|Kubernetes master node|
 |datalabs-k8s-nodes-*|Kubernetes worker nodes|
 |datalabs-load-balancer|Production load balancer|
 |datalabs-terraform-state|Terraform state server|
@@ -30,6 +30,7 @@ External, "floating" IP addresses are attached to an instance and the allocation
 datalabs does remain static. The DNS names assigned to these IP addresses are
 
 |DNS|Floating IP Address|
+|---|-------------------|
 |bastion-datalabs.nerc.ac.uk|192.171.139.87|
 |state-datalabs.nerc.ac.uk|192.171.139.88|
 |*.test-datalabs.nerc.ac.uk|192.171.139.89|
@@ -54,22 +55,28 @@ ssh ubuntu@<internal_server_ip>
 ```
 
 A better way is to add SSH configuration to your SSH config file to allow single step
-access. An example configuration for the same access is:
+access. An example configuration for the same access (typically stored at `~/.ssh/config`) is:
 
 ```bash
-Host bastion
+Host datalabs-bastion-1
         HostName <bastion_public_ip>
         User deploy
         IdentityFile ~/.ssh/<private_key>
         ForwardAgent yes
 
-Host k8s-master
+Host datalabs-k8s-master
         HostName <internal_ip>
         User deploy
-        ProxyCommand ssh bastion -W %h:%p
+        ProxyCommand ssh datalabs-bastion-1 -W %h:%p
 ```
 
-This then allows SSH access using a simple `ssh k8s-master`.
+This then allows SSH access using a simple
+
+```bash
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/<ssh_private_key>
+ssh datalabs-k8s-master
+```
 
 > **Note |** SSH on a Windows machine is a sorry story. MobaXterm provides a good
 starting point but its support for SSH tunneling is limited. If you are supporting
@@ -83,12 +90,27 @@ SSH tunnel from a port on the local machine. There is an excellent paid tool for
 MacOS called [Core Tunnel](https://coressh.io/).
 This allows for easy configuration of tunnels and ensures that they stay open.
 
+Core tunnel settings are default, apart from
+
+General:
+
+* Host: bastion-datalabs.nerc.ac.uk, port 22
+* User: ubuntu
+* Forward: localhost:6443 to datalabs-k8s-master:6443
+
+Connection:
+
+* Private Key: ~/.ssh/<ssh_private_key>
+* Forward Agent: yes
+
+Once connected, you can tick 'Automatically connect on startup'.
+
 On Linux these are configured using the SSH config in the same way as the SSH connections
 but to ensure that they stay open a utility called AutoSSH can be used. To configure the
 tunnel add another block to the SSH config. An example for the Kubernetes API:
 
 ```bash
-Host k8s-tunnel
+Host nerc-k8s-tunnel
   HostName <bastion_public_ip>
   User deploy
   ForwardAgent yes
@@ -104,7 +126,7 @@ Then run `autossh` to open the tunnel. This will open the tunnel and ensure that
 open.
 
 ```bash
-autossh -M 0 -f -T -N k8s-tunnel
+autossh -M 0 -f -T -N nerc-k8s-tunnel
 ```
 
 This would then allow connections to the Kubernetes API running on a private internal
@@ -143,42 +165,35 @@ achieve this an entry is needed in the `/etc/hosts` file to point the desired se
 to localhost and the config file should be updated to reference the server name and
 tunneled IP address.
 
-Example config file snippet:
-
-```yaml
-apiVersion: v1
-clusters:
-- cluster:
-    certificate-authority-data: <cert-data>
-    server: https://datalabs-k8s-master:6443
-  name: kubernetes
-contexts:
-- context:
-    cluster: kubernetes
-    user: kubernetes-admin
-  name: kubernetes-admin@kubernetes
-current-context: kubernetes-admin@kubernetes
-kind: Config
-preferences: {}
-users:
-- name: kubernetes-admin
-  user:
-    client-certificate-data: <cert-data>
-    client-key-data: <key-data>
-```
-
-With a hosts file entry of:
+Edit the hosts file
 
 ```bash
-127.0.0.1       datalabs-k8s-master-1
+sudo vi /etc/hosts
+```
+
+and add an entry of:
+
+```bash
+127.0.0.1       datalabs-k8s-master
 ```
 
 This assumes there is an open SSH tunnel running on port 6443 connected to the API
 server on the Kubernetes master.
 
+To see the test instance kube config file,
+
+```bash
+ssh datalabs-k8s-master
+cat .kube/config
+exit
+```
+
+These entries need merging into ~/.kube/config, with the datalabs server being changed from 192.168.3.4 to datalabs-k8s-master.
+
 To verify configuration check the connection to the cluster run
 
 ```bash
+kubectl config use-context datalabs
 kubectl version
 ```
 
@@ -189,3 +204,12 @@ the server version is missing this means the connection is not correctly configu
 Client Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.2", GitCommit:"5fa2db2bd46ac79e5e00a4e6ed24191080aa463b", GitTreeState:"clean", BuildDate:"2018-01-18T21:11:08Z", GoVersion:"go1.9.2", Compiler:"gc", Platform:"darwin/amd64"}
 Server Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.7", GitCommit:"dd5e1a2978fd0b97d9b78e1564398aeea7e7fe92", GitTreeState:"clean", BuildDate:"2018-04-18T23:58:35Z", GoVersion:"go1.9.3", Compiler:"gc", Platform:"linux/amd64
 ```
+
+## Lens over ssh tunnel
+
+With the ssh tunnel working, you can then see the test cluster over the ssh tunnel with [Lens](https://k8slens.dev/).
+
+Add cluster:
+
+* kubeconfig file: ~/.kube/config
+* Selected context: datalabs

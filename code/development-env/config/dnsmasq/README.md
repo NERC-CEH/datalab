@@ -24,7 +24,7 @@ a new IP address will be assigned. These can be cleared by deleting VirtualBox
 DHCP leases (`rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*`)
 
 ```bash
-cp ./datalabs-dnsmasq.conf $(brew --prefix)/etc/dnsmasq.conf
+cp ./datalab-dnsmasq.conf $(brew --prefix)/etc/dnsmasq.conf
 ```
 
 Restart the DNSMasq daemon, this must be restart whenever the configuration file
@@ -37,6 +37,7 @@ sudo brew services start dnsmasq
 Add a resolver record to loopback to localhost.
 
 ```bash
+sudo mkdir -p /etc/resolver
 sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/datalabs.internal'
 ```
 

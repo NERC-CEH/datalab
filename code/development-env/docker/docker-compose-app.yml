@@ -3,7 +3,7 @@ version: "3.7"
 x-common-variables: &common
   AUTHORISATION_SERVICE: http://datalab-auth:9000
   AUTH_SIGNIN_URL: http://datalabs.localhost
-  AUTHORISATION_SERVICE_FOR_INGRESS: http://10.0.2.2:9000
+  AUTHORISATION_SERVICE_FOR_INGRESS: ${AUTHORISATION_SERVICE_FOR_INGRESS:-http://10.0.2.2:9000}
   DATABASE_HOST: mongodb
   INFRASTRUCTURE_API: http://datalab-infra:8003
   KUBERNETES_API: http://host.docker.internal:8001
@@ -11,6 +11,7 @@ x-common-variables: &common
   NODE_OPTIONS: "--max-http-header-size=81920"
   DEPLOYED_IN_CLUSTER: "false"
   NODE_EXTRA_CA_CERTS: /usr/src/rootCA.pem
+  DATALAB_DOMAIN: ${DATALAB_DOMAIN:-datalabs.internal}
 
 services:
   datalab-auth:
@@ -19,7 +20,6 @@ services:
     command: ["sh", "-c", "yarn start"]
     environment:
       <<: *common
-      AUTHORISATION_API_IDENTIFIER: ${AUTHORISATION_API_IDENTIFIER}
       # Keycloak Authentication Parameters
       # OIDC_OAUTH_TOKEN_ENDPOINT: "/protocol/openid-connect/token"
       # OIDC_JWKS_ENDPOINT: "/protocol/openid-connect/certs"

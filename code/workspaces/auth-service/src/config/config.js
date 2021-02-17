@@ -25,12 +25,6 @@ const config = convict({
     default: './resources/public.pem',
     env: 'PUBLIC_KEY',
   },
-  authorisationIdentifier: {
-    doc: 'OpenID Connect provider identifier for the Datalabs Authorisation API',
-    format: 'String',
-    default: 'authzIdentifier',
-    env: 'AUTHORISATION_API_IDENTIFIER',
-  },
   authorisationAudience: {
     doc: 'Audience for authorisation',
     format: 'String',
