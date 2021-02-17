@@ -50,6 +50,12 @@ type Query {
 
     # Checks project key is unique
     checkProjectKeyUniqueness(projectKey: String!): Boolean
+
+    # Returns all central asset repo metadata items
+    centralAssets: [CentralAssetMetadata]
+
+    # Return all central asset repo metadata items that are available to given project
+    centralAssetsAvailableToProject(projectKey: String!): [CentralAssetMetadata]
 }
 
 # Root mutation methods for Datalabs.

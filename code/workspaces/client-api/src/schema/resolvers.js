@@ -1,7 +1,7 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
 import { version } from '../version';
-import { dataManagerPermissionWrapper, instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
+import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
 import permissionsService from '../dataaccess/userPermissionsService';
@@ -45,6 +45,8 @@ const resolvers = {
     project: (obj, args, { token }) => projectService.getProjectByKey(args.projectKey, token),
     checkProjectKeyUniqueness: (obj, { projectKey }, { user, token }) => instanceAdminWrapper(user, () => projectService.isProjectKeyUnique(projectKey, token)),
     logs: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => logsService.getLogsByName(args.projectKey, args.name, token)),
+    centralAssets: (obj, args, { token }) => centralAssetRepoService.listCentralAssets(token),
+    centralAssetsAvailableToProject: (obj, { projectKey }, { token }) => centralAssetRepoService.listCentralAssetsAvailableToProject(projectKey, token),
   },
 
   Mutation: {
@@ -76,7 +78,7 @@ const resolvers = {
     createProject: (obj, { project }, { user, token }) => instanceAdminWrapper(user, () => projectService.createProject(project, user, token)),
     updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.projectKey }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
-    createCentralAssetMetadata: (obj, { metadata }, { user, token }) => dataManagerPermissionWrapper(user, () => centralAssetRepoService.createAssetMetadata(metadata, token)),
+    createCentralAssetMetadata: (obj, { metadata }, { token }) => centralAssetRepoService.createAssetMetadata(metadata, token),
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),

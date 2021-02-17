@@ -1303,7 +1303,7 @@ resources:
     _type: request
   - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1612525269561
+    modified: 1613045234439
     created: 1612177227190
     url: "{{ _.client_api_url }}/api"
     name: createCentralAssetMetadata
@@ -1314,7 +1314,7 @@ resources:
       text: '{"query":"mutation {\n  createCentralAssetMetadata (metadata:
         {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    type:
         \"DATA\",\n    owners: [\"owner-id\"],\n    visible:
-        \"PUBLIC\",\n    fileLocation: \"/path/to/file1\"\n  })
+        \"PUBLIC\",\n    fileLocation: \"/path/to/file4\"\n  })
         {\n    assetId\n    name\n    version\n  }\n}"}'
     parameters: []
     headers:
@@ -1333,9 +1333,124 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_7099ece7dd0b432eaf509b917cf1cb92
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1613045240745
+    created: 1613039989749
+    url: "{{ _.client_api_url }}/api"
+    name: centralAssets
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"{\n  centralAssets
+        {\n    assetId\n    name\n    version\n    projects\n    visible\n    registrationDate\n  }\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_fb5cad234ec740fb93082a22a157410b
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 1125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_71f237bc68554522b9f09071d6a3854e
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1613045272327
+    created: 1612539520337
+    url: "{{ _.client_api_url }}/api"
+    name: centralAssetMetadataAvailableToProject
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  centralAssetsAvailableToProject(projectKey:
+        \"project\")
+        {\n    assetId\n    name\n    version\n    projects\n    visible\n    registrationDate\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_bd504b415b124fe897d4835b18931abe
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 1150
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_915578952e9843f5835a9d69a7c50481
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    modified: 1612955767916
+    created: 1612535281048
+    url: "{{ _.infra_api_url }}/centralAssetRepo/metadata/"
+    name: List Central Asset Metadata
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ _.internal_token }}"
+    metaSortKey: -1612535281048
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_13d24c525db74595ba879650f2fb4a60
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    modified: 1568899594162
+    created: 1568395892632
+    name: Infrastructure
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1567588463167
+    _type: request_group
+  - _id: req_ad644d95a4dd467f842fc58b856ca7f2
+    parentId: fld_13d24c525db74595ba879650f2fb4a60
+    modified: 1613045354019
+    created: 1613045349531
+    url: "{{ _.infra_api_url }}/centralAssetRepo/metadata/project"
+    name: List Central Asset Metadata Available to Project
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ _.internal_token }}"
+    metaSortKey: -1612368044205
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_3184cef31d3a49c097475deadbb28e6f
     parentId: fld_13d24c525db74595ba879650f2fb4a60
-    modified: 1612525347319
+    modified: 1613045314241
     created: 1612200807362
     url: "{{ _.infra_api_url }}/centralAssetRepo/metadata"
     name: Create Central Asset Metadata
@@ -1345,12 +1460,13 @@ resources:
       mimeType: application/json
       text: |-
         {
-          "name": "Test URL",
-          "version": "0.4.0",
+          "name": "Project DataSet",
+          "version": "0.1.0",
           "type": "DATA",
-          "owners": [],
-          "visible": "PUBLIC",
-          "fileLocation": "file/location"
+          "owners": ["test-owner"],
+          "visible": "BY_PROJECT",
+          "fileLocation": "file/location",
+          "projects": ["project"]
         }
     parameters: []
     headers:

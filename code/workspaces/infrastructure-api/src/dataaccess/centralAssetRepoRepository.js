@@ -8,6 +8,20 @@ async function createMetadata(metadata) {
   return document;
 }
 
+async function listMetadata() {
+  return CentralAssetMetadata().find().exec();
+}
+
+async function metadataAvailableToProject(projectKey) {
+  return CentralAssetMetadata()
+    .find()
+    .or([
+      { visible: 'PUBLIC' },
+      { visible: 'BY_PROJECT', projects: { $elemMatch: { $eq: projectKey } } },
+    ])
+    .exec();
+}
+
 async function metadataExists(metadata) {
   const checkingFunctions = [
     metadataWithNameVersionCombinationExists,
@@ -50,5 +64,7 @@ async function metadataWithMasterUrlMasterVersionCombinationExists({ masterUrl, 
 
 export default {
   createMetadata,
+  listMetadata,
+  metadataAvailableToProject,
   metadataExists,
 };

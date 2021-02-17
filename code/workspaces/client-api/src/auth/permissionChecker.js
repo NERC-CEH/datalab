@@ -1,7 +1,7 @@
 import logger from 'winston';
 import { permissionTypes } from 'common';
 
-const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER, delimiter, PROJECT_NAMESPACE } = permissionTypes;
+const { SYSTEM_INSTANCE_ADMIN, delimiter, PROJECT_NAMESPACE } = permissionTypes;
 
 export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
   [
@@ -45,11 +45,6 @@ export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissi
 
 export const instanceAdminWrapper = (...rest) => permissionCheck(
   [SYSTEM_INSTANCE_ADMIN],
-  ...rest,
-);
-
-export const dataManagerPermissionWrapper = (...rest) => permissionCheck(
-  [SYSTEM_DATA_MANAGER],
   ...rest,
 );
 

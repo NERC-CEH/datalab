@@ -4,23 +4,28 @@ import database from '../config/database';
 const centralAssetMetadataModelMock = {
   create: jest.fn(),
   exists: jest.fn(),
+  find: jest.fn().mockReturnThis(),
+  or: jest.fn().mockReturnThis(),
+  exec: jest.fn(),
 };
 
 jest.mock('../config/database');
 database.getModel.mockReturnValue(centralAssetMetadataModelMock);
 
+const getMinimalMetadata = () => ({
+  name: 'Test Metadata',
+  version: '0.1.0',
+  type: 'DATA',
+  owners: [],
+  visible: 'PUBLIC',
+  fileLocation: 'path/to/file',
+});
+
 const { createMetadata, metadataExists } = centralAssetRepoRepository;
 
 describe('createMetadata', () => {
   it('calls to create new metadata document and returns the newly created document', async () => {
-    const metadata = {
-      name: 'Test Metadata',
-      version: '0.1.0',
-      type: 'DATA',
-      owners: [],
-      visible: 'PUBLIC',
-      fileLocation: 'path/to/file',
-    };
+    const metadata = getMinimalMetadata();
     const createdDocument = { ...metadata, assetId: 'test-asset-id' };
     centralAssetMetadataModelMock.create.mockReturnValueOnce([createdDocument]);
 
@@ -28,6 +33,37 @@ describe('createMetadata', () => {
 
     expect(centralAssetMetadataModelMock.create).toHaveBeenCalledWith([metadata], { setDefaultsOnInsert: true });
     expect(response).toBe(createdDocument);
+  });
+});
+
+describe('listMetadata', () => {
+  it('performs the correct query on central asset metadata model and returns the result', async () => {
+    const metadata = getMinimalMetadata();
+    centralAssetMetadataModelMock.exec.mockResolvedValueOnce([metadata]);
+
+    const returnValue = await centralAssetRepoRepository.listMetadata();
+
+    expect(returnValue).toEqual([metadata]);
+    expect(centralAssetMetadataModelMock.find).toHaveBeenCalledWith();
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
+  });
+});
+
+describe('metadataAvailableToProject', () => {
+  it('performs correct query on central asset metadata model and returns the result', async () => {
+    const projectKey = 'test-project';
+    const metadata = getMinimalMetadata();
+    centralAssetMetadataModelMock.exec.mockResolvedValueOnce([metadata]);
+
+    const returnValue = await centralAssetRepoRepository.metadataAvailableToProject(projectKey);
+
+    expect(returnValue).toEqual([metadata]);
+    expect(centralAssetMetadataModelMock.find).toHaveBeenCalledWith();
+    expect(centralAssetMetadataModelMock.or).toHaveBeenCalledWith([
+      { visible: 'PUBLIC' },
+      { visible: 'BY_PROJECT', projects: { $elemMatch: { $eq: projectKey } } },
+    ]);
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
   });
 });
 
