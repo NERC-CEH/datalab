@@ -141,6 +141,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
       label="Assets"
       name="assets"
       parse={[Function]}
+      projectKey="testproj"
     />
   </div>
   <CreateFormControls
@@ -314,6 +315,7 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
       label="Assets"
       name="assets"
       parse={[Function]}
+      projectKey="testproj"
     />
   </div>
   <CreateFormControls

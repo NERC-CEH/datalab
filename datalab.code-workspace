@@ -33,6 +33,7 @@
 			"source.fixAll": true
 		},
 		"editor.formatOnSave": true,
+		"editor.tabSize": 2,
 		"eslint.workingDirectories": [
 			"./code"
 		],

@@ -1,4 +1,4 @@
-import { gqlMutation } from './graphqlClient';
+import { gqlQuery, gqlMutation } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
 function addRepoMetadata(metadata) {
@@ -14,22 +14,15 @@ function addRepoMetadata(metadata) {
 }
 
 function loadVisibleAssets(projectKey) {
-  /*
   const query = `
-    LoadVisibleAssets($projectKey: String!) {
-      loadVisibleAssets {
-        assetId, name, version, fileLocation
+    CentralAssetsAvailableToProject($projectKey: String!) {
+      centralAssetsAvailableToProject(projectKey: $projectKey) {
+        assetId, name, version, fileLocation, visible, projects
       }
     }`;
 
   return gqlQuery(query, { projectKey })
-    .then(errorHandler('data.assets'));
-    */
-
-  return Promise.resolve([
-    { assetId: 'asset-1', name: 'Test asset 1', version: '0.1', fileLocation: '/file/path1' },
-    { assetId: 'asset-2', name: 'Test asset 2', version: '2.0', fileLocation: '/file/path2' },
-  ]);
+    .then(errorHandler('data.centralAssetsAvailableToProject'));
 }
 
 export default {

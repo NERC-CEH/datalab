@@ -35,6 +35,7 @@ exports[`EditNotebookForm renders to match snapshot 1`] = `
     label="Assets"
     name="assets"
     parse={[Function]}
+    projectKey="projectKey"
   />
   <UpdateFormControls
     onCancel={[MockFunction onCancel]}

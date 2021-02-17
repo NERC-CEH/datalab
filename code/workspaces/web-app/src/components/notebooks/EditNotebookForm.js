@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { formatAndParseMultiSelect, renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
 import { syncValidate } from './editNotebookFormValidator';
 import AssetMultiSelect from '../common/form/AssetMultiSelect';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
 
 const formPropTypes = {
   onCancel: PropTypes.func.isRequired,
@@ -16,7 +17,9 @@ const commonProps = {
 
 const EditNotebookForm = ({
   handleSubmit, reset, pristine, onCancel,
-}) => (
+}) => {
+  const currentProject = useCurrentProject();
+  return (
   <form onSubmit={handleSubmit}>
     <Field
       { ...commonProps }
@@ -34,12 +37,14 @@ const EditNotebookForm = ({
       name="assets"
       label="Assets"
       component={AssetMultiSelect}
+      projectKey={currentProject.value.key}
       format={formatAndParseMultiSelect}
       parse={formatAndParseMultiSelect}
     />
     <UpdateFormControls onClearChanges={reset} onCancel={onCancel} pristine={pristine} />
   </form>
-);
+  );
+};
 
 EditNotebookForm.propTypes = {
   ...formPropTypes,

@@ -92,6 +92,7 @@ const CreateNotebookForm = ({
           name="assets"
           label="Assets"
           component={AssetMultiSelect}
+          projectKey={projectKey}
           format={formatAndParseMultiSelect}
           parse={formatAndParseMultiSelect}
         />

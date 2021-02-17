@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { shallow } from 'enzyme';
-import { useAssetRepo } from '../../../hooks/assetRepoHooks';
+import { useVisibleAssets } from '../../../hooks/assetRepoHooks';
 import AssetMultiSelect from './AssetMultiSelect';
 
 jest.mock('react-redux');
@@ -11,7 +11,7 @@ const asset1 = { assetId: 'asset-1', name: 'Asset 1', version: 'v1' };
 const asset2 = { assetId: 'asset-2', name: 'Asset 2', version: 'v2' };
 
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
-useAssetRepo.mockReturnValue({ fetching: false, value: { assets: [asset1, asset2] } });
+useVisibleAssets.mockReturnValue({ fetching: false, value: { assets: [asset1, asset2] } });
 
 describe('AssetMultiSelect', () => {
   const shallowRender = () => {

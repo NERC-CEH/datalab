@@ -11,7 +11,6 @@ import sortByName from '../../components/common/sortByName';
 import ProjectResources from './ProjectResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import Pagination from '../../components/stacks/Pagination';
-import assetRepoActions from '../../actions/assetRepoActions';
 
 const useStyles = makeStyles(theme => ({
   showControls: {
@@ -47,7 +46,6 @@ function AdminResourcesContainer({ userPermissions }) {
 
   useEffect(() => {
     dispatch(projectsActions.loadProjects());
-    dispatch(assetRepoActions.loadVisibleAssets());
   }, [dispatch]);
 
   const handleCheckboxChange = (event) => {

@@ -7,16 +7,18 @@ import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../cons
 import EditNotebookForm from '../../components/notebooks/EditNotebookForm';
 import { NOTEBOOK_TYPE_NAME, NOTEBOOK_TYPE_NAME_PLURAL } from './notebookTypeName';
 import assetRepoActions from '../../actions/assetRepoActions';
+import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 export const CONTAINER_TYPE = NOTEBOOK_CATEGORY;
 export const FORM_NAME = 'createNotebook';
 
 const NotebooksContainer = ({ userPermissions }) => {
   const dispatch = useDispatch();
+  const projectKey = useCurrentProjectKey();
 
   useEffect(() => {
-    dispatch(assetRepoActions.loadVisibleAssets());
-  }, [dispatch]);
+    !projectKey.fetching && projectKey.value && dispatch(assetRepoActions.loadVisibleAssets(projectKey.value));
+  }, [dispatch, projectKey]);
 
   return (
   <StacksContainer

@@ -1,8 +1,8 @@
 import { PROMISE_TYPE_FAILURE, PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS } from '../actions/actionTypes';
 import { ADD_REPO_METADATA_ACTION, CLEAR_REPO_METADATA_ACTION } from '../actions/assetRepoActions';
-import assetRepoReducer from './assetRepoReducer';
+import assetRepoReducer, { addNewAssets } from './assetRepoReducer';
 
-describe('assetRepoReducers', () => {
+describe('assetRepoReducer', () => {
   describe('ADD_REPO_METADATA_ACTION', () => {
     it('should handle ADD_REPO_METADATA_ACTION_PENDING', () => {
       // Arrange
@@ -57,6 +57,23 @@ describe('assetRepoReducers', () => {
 
       // Assert
       expect(nextState).toEqual({ error: null, fetching: false, value: { createdAssetId: null, remainder: 'stuff' } });
+    });
+  });
+
+  describe('addNewAssets', () => {
+    it('only adds brand new assets', () => {
+      // Arrange
+      const asset1 = { assetId: 'asset-1', name: 'name 1' };
+      const asset2 = { assetId: 'asset-2', name: 'name 2' };
+      const asset3 = { assetId: 'asset-3', name: 'name 3' };
+      const oldAssets = [asset1, asset2];
+      const newAssets = [asset2, asset3];
+
+      // Act
+      const sumAssets = addNewAssets(oldAssets, newAssets);
+
+      // Assert
+      expect(sumAssets).toEqual([asset1, asset2, asset3]);
     });
   });
 });

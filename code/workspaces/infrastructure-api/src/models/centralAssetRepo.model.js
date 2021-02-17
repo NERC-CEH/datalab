@@ -10,7 +10,7 @@ const possibleVisibleValues = () => ['PUBLIC', 'BY_PROJECT'];
 const { Schema } = mongoose;
 
 const CentralAssetMetadataSchema = new Schema({
-  assetId: { type: String, required: true, default: uuid() },
+  assetId: { type: String, required: true, default: uuid },
   name: { type: String, required: true },
   version: { type: String, required: true },
   type: { type: String, enum: possibleTypeValues(), required: true },

@@ -1,6 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PureEditNotebookForm } from './EditNotebookForm';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
+
+jest.mock('../../hooks/currentProjectHooks');
+const currentProject = { fetching: false, value: { key: 'projectKey' } };
+useCurrentProject.mockReturnValue(currentProject);
 
 describe('EditNotebookForm', () => {
   const shallowRender = () => shallow(
