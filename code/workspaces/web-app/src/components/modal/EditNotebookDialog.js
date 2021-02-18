@@ -8,7 +8,7 @@ const EditNotebookDialog = ({ title, onSubmit, onCancel, stack, formComponent: F
   <Dialog open={true} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
-      <Form onSubmit={onSubmit} onCancel={onCancel} initialValues={stack} />
+      <Form onSubmit={onSubmit} onCancel={onCancel} initialValues={stack} projectKey={stack.projectKey} />
     </DialogContent>
   </Dialog>
 );

@@ -14,6 +14,7 @@ describe('EditNotebookForm', () => {
       reset={jest.fn().mockName('reset')}
       pristine={true}
       onCancel={jest.fn().mockName('onCancel')}
+      projectKey="projectKey"
     />,
   );
 
