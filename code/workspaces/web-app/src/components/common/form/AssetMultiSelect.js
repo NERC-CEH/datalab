@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { renderMultiSelectAutocompleteField } from './controls';
-import { useVisibleAssets } from '../../../hooks/assetRepoHooks';
+import { useAssetRepo, useVisibleAssets } from '../../../hooks/assetRepoHooks';
 
-function AssetMultiSelect({ input, meta = null, projectKey, ...custom }) {
-  const assetRepo = useVisibleAssets(projectKey);
+function AssetMultiSelect({ input, meta = null, showAllAssets, projectKey, ...custom }) {
+  const projectAssets = useVisibleAssets(projectKey);
+  const allAssets = useAssetRepo();
+  const assetRepo = showAllAssets ? allAssets : projectAssets;
   const [currentValue, setCurrentValue] = useState(input.value || []); // use to give current value to onBlur
 
   return (
@@ -18,7 +20,7 @@ function AssetMultiSelect({ input, meta = null, projectKey, ...custom }) {
           options: assetRepo.value.assets,
           label: 'Assets',
           placeholder: 'Filter by asset name or location',
-          getOptionLabel: val => `${val.name}:${val.version} (${val.fileLocation})`,
+          getOptionLabel: val => `${val.name}:${val.version} (${val.fileLocation || 'no local file'})`,
           getOptionSelected: (option, val) => option.assetId === val.assetId,
           loading: assetRepo.fetching,
           selectedTip: 'Asset selected',

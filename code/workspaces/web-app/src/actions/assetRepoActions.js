@@ -3,6 +3,7 @@ import assetRepoService from '../api/assetRepoService';
 export const ADD_REPO_METADATA_ACTION = 'ADD_REPO_METADATA_ACTION';
 export const CLEAR_REPO_METADATA_ACTION = 'CLEAR_REPO_METADATA_ACTION';
 export const LOAD_VISIBLE_ASSETS_ACTION = 'LOAD_VISIBLE_ASSETS_ACTION';
+export const LOAD_ALL_ASSETS_ACTION = 'LOAD_ALL_ASSETS_ACTION';
 
 const addRepoMetadata = metadata => ({
   type: ADD_REPO_METADATA_ACTION,
@@ -19,8 +20,14 @@ const loadVisibleAssets = projectKey => ({
   payload: assetRepoService.loadVisibleAssets(projectKey),
 });
 
+const loadAllAssets = () => ({
+  type: LOAD_ALL_ASSETS_ACTION,
+  payload: assetRepoService.loadAllAssets(),
+});
+
 export default {
   addRepoMetadata,
   clearRepoMetadata,
   loadVisibleAssets,
+  loadAllAssets,
 };
