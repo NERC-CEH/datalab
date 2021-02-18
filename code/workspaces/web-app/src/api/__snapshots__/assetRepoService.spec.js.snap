@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`assetRepoService addRepoMetadata should build the correct mutation and unpack the results 1`] = `
+"
+    CreateCentralAssetMetadata($metadata: CentralAssetMetadataCreationRequest!) {
+      createCentralAssetMetadata(metadata: $metadata) {
+        assetId
+      }
+    }"
+`;
+
+exports[`assetRepoService loadVisibleAssets should build the correct query and unpack the results 1`] = `
+"
+    CentralAssetsAvailableToProject($projectKey: String!) {
+      centralAssetsAvailableToProject(projectKey: $projectKey) {
+        assetId, name, version, fileLocation, visible, projects
+      }
+    }"
+`;

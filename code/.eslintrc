@@ -42,6 +42,7 @@
       {
         "consistent": true
       }
-    ]
+    ],
+    "no-warning-comments": "warn"
   }
 }

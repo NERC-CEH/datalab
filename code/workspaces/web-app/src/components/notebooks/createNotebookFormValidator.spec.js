@@ -1,4 +1,4 @@
-import { syncValidate, getAsyncValidate } from './newNotebookFormValidator';
+import { syncValidate, getAsyncValidate } from './createNotebookFormValidator';
 import { getNotebookInfo } from '../../config/images';
 
 jest.mock('../../actions/internalNameCheckerActions');

@@ -4,6 +4,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
 <form>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Display Name"
       name="displayName"
@@ -12,6 +17,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Type"
       name="type"
@@ -39,6 +49,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       endText=".datalabs.localhost"
       label="URL Name"
@@ -49,6 +64,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Data Store to Mount"
       name="volumeMount"
@@ -68,6 +88,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Description"
       name="description"
@@ -76,6 +101,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Sharing Status"
       name="shared"
@@ -99,6 +129,21 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
       }
     />
   </div>
+  <div>
+    <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
+      component={[Function]}
+      format={[Function]}
+      label="Assets"
+      name="assets"
+      parse={[Function]}
+      projectKey="testproj"
+    />
+  </div>
   <CreateFormControls
     onCancel={[MockFunction]}
   />
@@ -109,6 +154,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
 <form>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Display Name"
       name="displayName"
@@ -117,6 +167,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Type"
       name="type"
@@ -144,6 +199,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Version"
       name="version"
@@ -163,6 +223,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       endText=".datalabs.localhost"
       label="URL Name"
@@ -173,6 +238,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Data Store to Mount"
       name="volumeMount"
@@ -192,6 +262,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Description"
       name="description"
@@ -200,6 +275,11 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Sharing Status"
       name="shared"
@@ -221,6 +301,21 @@ exports[`CreateNotebookForm creates correct snapshot for create Notebook Form wh
           },
         ]
       }
+    />
+  </div>
+  <div>
+    <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
+      component={[Function]}
+      format={[Function]}
+      label="Assets"
+      name="assets"
+      parse={[Function]}
+      projectKey="testproj"
     />
   </div>
   <CreateFormControls

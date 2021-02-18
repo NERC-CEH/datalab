@@ -1,23 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import validate from 'validate.js';
 import { renderTextArea, renderTextField, UpdateFormControls } from '../common/form/controls';
-
-const validationConstraints = {
-  displayName: {
-    presence: true,
-  },
-  description: {
-    presence: true,
-  },
-};
+import { syncValidate } from './editSiteFormValidator';
 
 const commonFormProps = {
   onCancel: PropTypes.func.isRequired,
 };
 
-const EditStackForm = ({
+const EditSiteForm = ({
   handleSubmit, reset, pristine, onCancel,
 }) => (
   <form onSubmit={handleSubmit}>
@@ -35,19 +26,19 @@ const EditStackForm = ({
   </form>
 );
 
-EditStackForm.propTypes = {
+EditSiteForm.propTypes = {
   ...commonFormProps,
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
 };
 
-const EditStackReduxForm = reduxForm({
-  form: 'editStackDetails',
-  validate: values => validate(values, validationConstraints, { format: 'reduxForm' }),
-})(EditStackForm);
+const EditSiteReduxForm = reduxForm({
+  form: 'editSiteDetails',
+  validate: syncValidate,
+})(EditSiteForm);
 
-EditStackReduxForm.propTypes = {
+EditSiteReduxForm.propTypes = {
   ...commonFormProps,
   onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.shape({
@@ -56,6 +47,6 @@ EditStackReduxForm.propTypes = {
   }),
 };
 
-export { EditStackForm as PureEditStackForm };
+export { EditSiteForm as PureEditSiteForm };
 
-export default EditStackReduxForm;
+export default EditSiteReduxForm;

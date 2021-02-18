@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { SITE_CATEGORY } from 'common/src/config/images';
 import StacksContainer from '../stacks/StacksContainer';
 import { MODAL_TYPE_CREATE_SITE, MODAL_TYPE_EDIT_SITE } from '../../constants/modaltypes';
-import EditStackForm from '../../components/stacks/EditStackForm';
+import EditSiteForm from '../../components/sites/EditSiteForm';
 import { SITE_TYPE_NAME, SITE_TYPE_NAME_PLURAL } from './siteTypeName';
 
 export const CONTAINER_TYPE = SITE_CATEGORY;
@@ -17,7 +17,7 @@ const SitesContainer = ({ userPermissions }) => (
     dialogAction={MODAL_TYPE_CREATE_SITE}
     editDialogAction={MODAL_TYPE_EDIT_SITE}
     formStateName={FORM_NAME}
-    formComponent={EditStackForm}
+    formComponent={EditSiteForm}
     userPermissions={userPermissions} />
 );
 

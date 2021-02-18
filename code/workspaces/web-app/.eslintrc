@@ -52,7 +52,8 @@
       {
         "allowForLoopAfterthoughts": true
       }
-    ]
+    ],
+    "no-warning-comments": "warn"
   },
   "settings": {
     "react": {

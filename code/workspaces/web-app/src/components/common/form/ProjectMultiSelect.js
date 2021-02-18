@@ -6,7 +6,7 @@ import sortByName from '../sortByName';
 function ProjectMultiSelect({ input, meta = null, ...custom }) {
   const projects = useProjectsArray();
   const sortedProjects = sortByName(projects.value);
-  const [currentValue, setCurrentValue] = useState([]); // use to give current value to onBlur in renderMultiSelectAutocompleteField
+  const [currentValue, setCurrentValue] = useState(input.value || []); // use to give current value to onBlur
 
   return (
     <>

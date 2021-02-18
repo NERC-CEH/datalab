@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProjectStacksContainer } from '../stacks/StacksContainer';
 import { MODAL_TYPE_CREATE_NOTEBOOK, MODAL_TYPE_EDIT_NOTEBOOK } from '../../constants/modaltypes';
-import EditStackForm from '../../components/stacks/EditStackForm';
+import EditSiteForm from '../../components/sites/EditSiteForm';
 import { CONTAINER_TYPE, FORM_NAME } from '../sites/SitesContainer';
 import { SITE_TYPE_NAME, SITE_TYPE_NAME_PLURAL } from '../sites/siteTypeName';
 
@@ -21,7 +21,7 @@ const ProjectSitesContainer = (props) => {
     dialogAction={MODAL_TYPE_CREATE_NOTEBOOK}
     editDialogAction={MODAL_TYPE_EDIT_NOTEBOOK}
     formStateName={FORM_NAME}
-    formComponent={EditStackForm}
+    formComponent={EditSiteForm}
     userPermissions={userPermissions}
     projectKey={projectKey}
   />
