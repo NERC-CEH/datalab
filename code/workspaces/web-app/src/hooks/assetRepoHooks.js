@@ -7,7 +7,7 @@ export const useAssetRepo = () => useShallowSelector(assetRepoSelectors.assetRep
 export const useVisibleAssets = (projectKey) => {
   const assetRepo = useAssetRepo();
   const visibleAssets = assetRepo.value.assets
-    ? assetRepo.value.assets.filter(asset => asset.visible === 'PUBLIC' || asset.projects.includes(projectKey))
+    ? assetRepo.value.assets.filter(asset => (asset.visible === 'PUBLIC' || asset.projects.includes(projectKey)) && asset.fileLocation)
     : [];
   return {
     ...assetRepo,
