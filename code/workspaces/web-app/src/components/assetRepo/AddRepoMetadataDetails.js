@@ -40,7 +40,7 @@ export default function AddRepoMetadataDetails() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const assetRepo = useAssetRepo();
-  const assetId = assetRepo.value ? assetRepo.value : 'Awaiting submission';
+  const assetId = (assetRepo && assetRepo.value && assetRepo.value.assetId) ? assetRepo.value.assetId : 'Awaiting submission';
 
   useEffect(() => {
     dispatch(userActions.listUsers());
@@ -90,7 +90,7 @@ export default function AddRepoMetadataDetails() {
         body="Please confirm you wish to add this metadata.  Once added, it can only be adjusted by an administrator in the database."
         dispatch={dispatch}
       />
-      { assetRepo.value
+      { !!assetRepo.value.createdAssetId
         && <div className={classes.addAnotherButtonDiv}>
           <PrimaryActionButton
             className={classes.addAnotherButton}
@@ -110,7 +110,7 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
   const masterUrlValue = useReduxFormValue(FORM_NAME, 'masterUrl');
   const visibleValue = useReduxFormValue(FORM_NAME, 'visible');
   const assetRepo = useAssetRepo();
-  const disabled = !!assetRepo.value;
+  const disabled = !!assetRepo.value.createdAssetId;
 
   const commonProps = {
     component: renderTextField,

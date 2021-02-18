@@ -5,7 +5,7 @@ function loadStacks(projectKey) {
   const query = `
     GetStacks($projectKey: String!) {
       stacks {
-        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }
       }
     }`;
 
@@ -17,7 +17,7 @@ function loadStacksByCategory(projectKey, category) {
   const query = `
     GetStacksByCategory($params: StacksByCategoryRequest) {
       stacksByCategory(params: $params) {
-        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }
       }
     }`;
 
@@ -43,7 +43,12 @@ function getUrl(projectKey, id) {
     });
 }
 
-function createStack(stack) {
+function createStack(stackWithAssets) {
+  const stack = {
+    ...stackWithAssets,
+    assetIds: stackWithAssets.assets ? stackWithAssets.assets.map(asset => asset.assetId) : [],
+  };
+  delete stack.assets;
   const mutation = `
     CreateStack($stack: StackCreationRequest) {
       createStack(stack: $stack) {
@@ -89,7 +94,12 @@ function getLogs(projectKey, name) {
     .then(errorHandler('data.logs'));
 }
 
-function editStack(stack) {
+function editStack(stackWithAssets) {
+  const stack = {
+    ...stackWithAssets,
+    assetIds: stackWithAssets.assets ? stackWithAssets.assets.map(asset => asset.assetId) : [],
+  };
+  delete stack.assets;
   const mutation = `
     UpdateStack($stack: StackUpdateRequest) {
       updateStack(stack: $stack) {
@@ -97,6 +107,7 @@ function editStack(stack) {
         displayName
         description
         shared
+        assets { assetId, name, version, fileLocation }
       }
     }`;
 

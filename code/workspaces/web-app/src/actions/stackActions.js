@@ -63,9 +63,9 @@ const updateStackShareStatus = ({ projectKey, name, shared }) => ({
   payload: stackService.editStack({ projectKey, name, shared }),
 });
 
-const editStack = ({ projectKey, name, displayName, description, shared }) => ({
+const editStack = ({ projectKey, name, displayName, description, shared, assets }) => ({
   type: EDIT_STACK_ACTION,
-  payload: stackService.editStack({ projectKey, name, displayName, description, shared }),
+  payload: stackService.editStack({ projectKey, name, displayName, description, shared, assets }),
 });
 
 const restartStack = ({ projectKey, name, type }) => ({

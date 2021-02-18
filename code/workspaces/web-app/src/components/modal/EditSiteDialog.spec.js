@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import EditStackDialog from './EditStackDialog';
+import EditSiteDialog from './EditSiteDialog';
 
-describe('EditStackDialog', () => {
+describe('EditSiteDialog', () => {
   const shallowRender = ({
     title = 'Title',
     onSubmit = jest.fn().mockName('onSubmit'),
@@ -10,7 +10,7 @@ describe('EditStackDialog', () => {
     stack = { name: 'stackname', displayName: 'Display Name', description: 'description' },
     formComponent,
   }) => shallow(
-    <EditStackDialog {...{ title, onSubmit, onCancel, stack, formComponent }} />,
+    <EditSiteDialog {...{ title, onSubmit, onCancel, stack, formComponent }} />,
   );
 
   it('renders correctly passing values to provided from component', () => {

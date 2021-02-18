@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { siteVisibilityOptions } from '../common/selectShareOptions';
 import { CreateFormControls, renderAdornedTextField, renderSelectField, renderTextArea, renderTextField } from '../common/form/controls';
-import { getAsyncValidate, syncValidate } from './newSiteFormValidator';
+import { getAsyncValidate, syncValidate } from './createSiteFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
 
 export const FORM_NAME = 'createSite';

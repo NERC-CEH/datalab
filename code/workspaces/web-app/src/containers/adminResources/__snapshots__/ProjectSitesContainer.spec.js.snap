@@ -12,7 +12,7 @@ exports[`ProjectSitesContainer renders to match snapshot passing correct props t
         "destroyOnUnmount": true,
         "enableReinitialize": false,
         "forceUnregisterOnUnmount": false,
-        "form": "editStackDetails",
+        "form": "editSiteDetails",
         "getFormState": [Function],
         "keepDirtyOnReinitialize": false,
         "persistentSubmitErrors": false,

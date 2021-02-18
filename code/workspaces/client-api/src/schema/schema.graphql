@@ -175,6 +175,7 @@ type Stack {
     shared: VisibilityType
     visible: VisibilityType
     version: String
+    assets: [CentralAssetMetadata]
 }
 
 input StacksByCategoryRequest {
@@ -195,15 +196,17 @@ input StackCreationRequest {
     volumeMount: String
     shared: VisibilityType
     visible: VisibilityType
+    assetIds: [String]
 }
 
-# Type to describe the mutation for updating a new Stack.
+# Type to describe the mutation for updating a Stack.
 input StackUpdateRequest {
     projectKey: String
     name: String
     displayName: String
     description: String
     shared: VisibilityType
+    assetIds: [String]
 }
 
 # Type to describe the mutation for deleting a new Stack.

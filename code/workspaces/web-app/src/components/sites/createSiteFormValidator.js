@@ -1,14 +1,10 @@
 import validate from 'validate.js';
 import internalNameCheckerActions from '../../actions/internalNameCheckerActions';
-import { getNotebookInfo } from '../../config/images';
+import { getSiteInfo } from '../../config/images';
+import { editConstraints } from './editSiteFormValidator';
 
-const constraints = {
-  displayName: {
-    presence: true,
-  },
-  type: {
-    presence: true,
-  },
+const createConstraints = {
+  ...editConstraints,
   name: {
     presence: true,
     format: {
@@ -17,18 +13,21 @@ const constraints = {
     },
     length: {
       minimum: 4,
-      maximum: 16,
+      maximum: 12,
     },
+  },
+  description: {
+    presence: true,
+  },
+  sourcePath: {
+    presence: true,
   },
   volumeMount: {
     presence: {
       allowEmpty: false,
     },
   },
-  description: {
-    presence: true,
-  },
-  shared: {
+  visible: {
     presence: {
       allowEmpty: false,
     },
@@ -42,7 +41,7 @@ function errorReducer(accumulator, error) {
   return accumulator;
 }
 
-export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
+export const syncValidate = values => validate(values, createConstraints, { format: 'reduxForm' });
 
 // disable no throw literal for async validation options as need to throw objects for
 // redux form validation
@@ -53,7 +52,7 @@ const asyncValidateName = async (values, dispatch, projectKey) => {
   try {
     response = await dispatch(internalNameCheckerActions.checkNameUniqueness(projectKey, values.name));
   } catch (error) {
-    throw { name: 'Unable to check if Notebook URL Name is unique.' };
+    throw { name: 'Unable to check if Site URL Name is unique.' };
   }
   if (!response.value) {
     throw { name: 'Another resource is already using this name and names must be unique.' };
@@ -61,7 +60,7 @@ const asyncValidateName = async (values, dispatch, projectKey) => {
 };
 
 const asyncValidateType = async (values) => {
-  const validTypes = Object.keys(await getNotebookInfo());
+  const validTypes = Object.keys(await getSiteInfo());
   if (!validTypes.includes(values.type)) {
     throw { type: `Type must be one of ${validTypes}` };
   }

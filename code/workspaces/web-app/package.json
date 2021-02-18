@@ -57,7 +57,7 @@
     "test": "react-scripts test",
     "test-ci": "CI=true react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src"
+    "lint": "../../node_modules/.bin/eslint ./src"
   },
   "browserslist": {
     "production": [

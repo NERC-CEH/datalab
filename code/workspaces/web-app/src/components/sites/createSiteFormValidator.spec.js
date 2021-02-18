@@ -1,4 +1,4 @@
-import { syncValidate, getAsyncValidate } from './newSiteFormValidator';
+import { syncValidate, getAsyncValidate } from './createSiteFormValidator';
 import { getSiteInfo } from '../../config/images';
 
 jest.mock('../../actions/internalNameCheckerActions');

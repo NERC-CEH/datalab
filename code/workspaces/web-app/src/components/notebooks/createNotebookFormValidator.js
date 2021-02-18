@@ -1,14 +1,10 @@
 import validate from 'validate.js';
 import internalNameCheckerActions from '../../actions/internalNameCheckerActions';
-import { getSiteInfo } from '../../config/images';
+import { getNotebookInfo } from '../../config/images';
+import { editConstraints } from './editNotebookFormValidator';
 
 const constraints = {
-  displayName: {
-    presence: true,
-  },
-  type: {
-    presence: true,
-  },
+  ...editConstraints,
   name: {
     presence: true,
     format: {
@@ -17,21 +13,18 @@ const constraints = {
     },
     length: {
       minimum: 4,
-      maximum: 12,
+      maximum: 16,
     },
-  },
-  description: {
-    presence: true,
-  },
-  sourcePath: {
-    presence: true,
   },
   volumeMount: {
     presence: {
       allowEmpty: false,
     },
   },
-  visible: {
+  description: {
+    presence: true,
+  },
+  shared: {
     presence: {
       allowEmpty: false,
     },
@@ -56,7 +49,7 @@ const asyncValidateName = async (values, dispatch, projectKey) => {
   try {
     response = await dispatch(internalNameCheckerActions.checkNameUniqueness(projectKey, values.name));
   } catch (error) {
-    throw { name: 'Unable to check if Site URL Name is unique.' };
+    throw { name: 'Unable to check if Notebook URL Name is unique.' };
   }
   if (!response.value) {
     throw { name: 'Another resource is already using this name and names must be unique.' };
@@ -64,7 +57,7 @@ const asyncValidateName = async (values, dispatch, projectKey) => {
 };
 
 const asyncValidateType = async (values) => {
-  const validTypes = Object.keys(await getSiteInfo());
+  const validTypes = Object.keys(await getNotebookInfo());
   if (!validTypes.includes(values.type)) {
     throw { type: `Type must be one of ${validTypes}` };
   }
