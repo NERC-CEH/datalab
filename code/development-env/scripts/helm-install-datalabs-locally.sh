@@ -67,6 +67,13 @@ kubectl create secret tls $tlsSecretName \
   -n $targetNamespace
 echo "---"
 
+# Remove compute-submission-role (created by helm chart)
+computeSubmissionRole="compute-submission-role"
+if kubectl get clusterrole $computeSubmissionRole &> /dev/null; then
+  echo "$computeSubmissionRole will be created by helm chart. Removing."
+  kubectl delete clusterrole $computeSubmissionRole
+fi
+
 # Do the helm install of the datalab chart
 helm install "$helmDeploymentName" "$helmChartPath" \
   -n $targetNamespace \
