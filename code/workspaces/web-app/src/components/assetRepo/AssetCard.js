@@ -6,10 +6,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   key: {
+    fontWeight: 'lighter',
     width: theme.spacing(20),
+    marginBottom: theme.spacing(1),
   },
   value: {
-    fontWeight: 'lighter',
     marginBottom: theme.spacing(1),
   },
   list: {
@@ -62,9 +63,9 @@ function AssetCard({ asset }) {
       <AssetCardKeyValue rowKey="Asset Id" rowValue={asset.assetId} />
       <AssetCardKeyValue rowKey="File location" rowValue={asset.fileLocation} />
       <AssetCardHyperlink rowKey="Master URL" rowValue={asset.masterUrl} />
-      <AssetCardKeyList rowKey="Owners" rowList={asset.owners} />
+      <AssetCardKeyList rowKey="Owners" rowList={asset.owners ? asset.owners.map(owner => owner.name) : []} />
       <AssetCardKeyValue rowKey="Visibility" rowValue={visibility[asset.visible]} />
-      <AssetCardKeyList rowKey="Projects" rowList={asset.projects} />
+      <AssetCardKeyList rowKey="Projects" rowList={asset.projects ? asset.projects.map(project => project.name) : []} />
     </>
   );
 }

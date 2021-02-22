@@ -17,7 +17,7 @@ function loadVisibleAssets(projectKey) {
   const query = `
     CentralAssetsAvailableToProject($projectKey: String!) {
       centralAssetsAvailableToProject(projectKey: $projectKey) {
-        assetId, name, version, fileLocation, visible, projects
+        assetId, name, version, fileLocation, visible, projects {key, name}
       }
     }`;
 
@@ -29,7 +29,7 @@ function loadAllAssets() {
   const query = `
     CentralAssets {
       centralAssets {
-        assetId, name, version, fileLocation, masterUrl, owners, visible, projects, registrationDate
+        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate
       }
     }`;
 
