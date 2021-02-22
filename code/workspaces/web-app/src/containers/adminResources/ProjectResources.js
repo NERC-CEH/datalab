@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ProjectNotebooks from './ProjectNotebooks';
 import ProjectSites from './ProjectSites';
 import ProjectStorage from './ProjectStorage';
-import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from './ResourceAccordion';
+import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../components/common/ResourceAccordion';
 
 const useStyles = makeStyles(theme => ({
   container: {

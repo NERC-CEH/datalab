@@ -2,8 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
-// TODO - move these into common
-import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../containers/adminResources/ResourceAccordion';
+import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../common/ResourceAccordion';
 import AssetCard from './AssetCard';
 
 const useStyles = makeStyles(theme => ({

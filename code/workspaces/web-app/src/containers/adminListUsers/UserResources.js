@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import { permissionTypes } from 'common';
 import { useCurrentUserId } from '../../hooks/authHooks';
-import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
+import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../components/common/ResourceAccordion';
 import userSummary from './userSummary';
 import projectsToShow from './projectsToShow';
 import UserProject from './UserProject';
