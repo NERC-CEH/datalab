@@ -23,6 +23,7 @@ const StackSchema = new Schema({
   visible: { type: String, enum: getEnumValues(visibility), default: visibility.PRIVATE },
   volumeMount: String,
   version: { type: String, default: null },
+  assetIds: { type: [String], default: () => [] },
 });
 
 StackSchema.query.filterByProject = byProjectKey.filterFind;

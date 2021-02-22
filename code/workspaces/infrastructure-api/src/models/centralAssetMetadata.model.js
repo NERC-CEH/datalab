@@ -21,6 +21,7 @@ const CentralAssetMetadataSchema = new Schema({
   visible: { type: String, enum: possibleVisibleValues(), required: true },
   projectKeys: [String],
   registrationDate: { type: Date, default: Date.now(), required: true },
+  lastAddedDate: Date,
 });
 
 mongoose.model(modelName, CentralAssetMetadataSchema);

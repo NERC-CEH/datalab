@@ -4,10 +4,11 @@ import { notebookList, stackList, siteList, versionList } from 'common/src/confi
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
+import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import { visibility, getEnumValues } from '../models/stackEnums';
 
 const TYPE = 'stack';
-const USER_UPDATEABLE_FIELDS = ['displayName', 'description', 'shared'];
+const USER_UPDATEABLE_FIELDS = ['displayName', 'description', 'shared', 'assetIds'];
 const STACK_SHARED_VALUES = ['private', 'project', 'public'];
 
 function createStack(request, response) {
@@ -62,18 +63,22 @@ function getOneByNameExec(request, response) {
     .catch(controllerHelper.handleError(response, 'matching Name for', TYPE, undefined));
 }
 
-function createStackExec(request, response) {
+async function createStackExec(request, response) {
   // Build request params
   const { user } = request;
   const params = matchedData(request);
 
   // Handle request
-  return stackManager.createStack(user, params)
-    .then(controllerHelper.sendSuccessfulCreation(response))
-    .catch(controllerHelper.handleError(response, 'creating', TYPE, params.name));
+  await updateLinkedAssets(params, response);
+  try {
+    await stackManager.createStack(user, params);
+    controllerHelper.sendSuccessfulCreation(response)();
+  } catch (error) {
+    controllerHelper.handleError(response, 'creating', TYPE, params.name)(error);
+  }
 }
 
-function updateStackExec(request, response) {
+async function updateStackExec(request, response) {
   // Build request params
   const { user } = request;
   const params = matchedData(request);
@@ -89,9 +94,14 @@ function updateStackExec(request, response) {
   );
 
   // Handle request
-  return stackRepository.update(projectKey, user, name, updatedDetails)
-    .then(res => response.send(res))
-    .catch(controllerHelper.handleError(response, 'updating', TYPE, name));
+  await updateLinkedAssets(params, response);
+
+  try {
+    const updateResult = await stackRepository.update(projectKey, user, name, updatedDetails);
+    response.send(updateResult);
+  } catch (error) {
+    controllerHelper.handleError(response, 'updating', TYPE, name)(error);
+  }
 }
 
 function restartStackExec(request, response) {
@@ -132,6 +142,17 @@ function deleteStackExec(request, response) {
       return Promise.reject(new Error('User cannot delete stack'));
     })
     .catch(controllerHelper.handleError(response, 'deleting', TYPE, params.name));
+}
+
+// eslint-disable-next-line consistent-return
+async function updateLinkedAssets({ assetIds }, response) {
+  if (!assetIds || assetIds.length === 0) return null;
+
+  try {
+    await centralAssetRepoRepository.setLastAddedDateToNow(assetIds);
+  } catch (error) {
+    controllerHelper.handleError(response, 'updating', centralAssetRepoRepository.TYPE, assetIds)(error);
+  }
 }
 
 const checkExistsWithMsg = fieldName => check(fieldName).exists().withMessage(`${fieldName} must be specified`).trim();
@@ -214,6 +235,7 @@ const createStackValidator = [
   checkExistsWithMsg('description'),
   checkExistsWithMsg('displayName'),
   checkExistsWithMsg('volumeMount'),
+  body('assetIds').optional().isArray().withMessage('must be an array of strings.'),
 ];
 
 const validators = {

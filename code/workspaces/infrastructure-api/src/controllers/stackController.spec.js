@@ -5,9 +5,14 @@ import { omit } from 'lodash';
 import stackController from './stackController';
 import stackManager from '../stacks/stackManager';
 import * as stackRepository from '../dataaccess/stacksRepository';
+import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 
 jest.mock('../stacks/stackManager');
 jest.mock('../dataaccess/stacksRepository');
+jest.mock('../dataaccess/centralAssetRepoRepository', () => ({
+  __esModule: true,
+  default: { setLastAddedDateToNow: jest.fn() },
+}));
 
 const createStackMock = jest.fn().mockResolvedValue('expectedPayload');
 const deleteStackMock = jest.fn().mockResolvedValue('expectedPayload');
@@ -76,6 +81,12 @@ describe('Stack Controller', () => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error creating stack: notebookId' }); // eslint-disable-line no-underscore-dangle
         });
+    });
+
+    it('should update linked assets', async () => {
+      const responseMock = httpMocks.createResponse();
+      await stackController.createStack(request, responseMock);
+      expect(centralAssetRepoRepository.setLastAddedDateToNow).toHaveBeenCalledWith(request.body.assetIds);
     });
 
     it('should validate the name field exists', () => {
@@ -221,7 +232,12 @@ describe('Stack Controller', () => {
     beforeEach(async () => {
       updateMock.mockClear();
       await createValidatedRequest(
-        { projectKey: 'expectedProjectKey', name: 'abcd1234', shared: 'project' },
+        {
+          projectKey: 'expectedProjectKey',
+          name: 'abcd1234',
+          shared: 'project',
+          assetIds: ['test-update-asset-one', 'test-update-asset-two'],
+        },
         stackController.updateStackValidator,
       );
     });
@@ -248,6 +264,12 @@ describe('Stack Controller', () => {
         .catch(() => {
           expect(true).toBeFalsy();
         });
+    });
+
+    it('should update linked assets', async () => {
+      const responseMock = httpMocks.createResponse();
+      await stackController.createStack(request, responseMock);
+      expect(centralAssetRepoRepository.setLastAddedDateToNow).toHaveBeenCalledWith(request.body.assetIds);
     });
 
     describe('should validate the shared field value', () => {
@@ -446,6 +468,7 @@ function mutationRequestBody() {
     shared: 'private',
     visible: 'private',
     version: 'Dask 2.30.0 support',
+    assetIds: ['test-asset-one', 'test-asset-two'],
   };
 }
 

@@ -1,5 +1,7 @@
 import database from '../config/database';
-import centralAssetMetadataModel from '../models/centralAssetRepo.model';
+import centralAssetMetadataModel from '../models/centralAssetMetadata.model';
+
+const TYPE = 'centralAssetMetadata';
 
 const CentralAssetMetadata = () => database.getModel(centralAssetMetadataModel.modelName);
 
@@ -62,9 +64,17 @@ async function metadataWithMasterUrlMasterVersionCombinationExists({ masterUrl, 
   return { conflicts };
 }
 
+async function setLastAddedDateToNow(assetIds) {
+  return CentralAssetMetadata()
+    .updateMany({ assetId: { $in: assetIds } }, { lastAddedDate: Date.now() })
+    .exec();
+}
+
 export default {
   createMetadata,
   listMetadata,
   metadataAvailableToProject,
   metadataExists,
+  setLastAddedDateToNow,
+  TYPE,
 };

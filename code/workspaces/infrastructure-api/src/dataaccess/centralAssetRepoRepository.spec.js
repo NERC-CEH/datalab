@@ -1,11 +1,15 @@
 import centralAssetRepoRepository from './centralAssetRepoRepository';
 import database from '../config/database';
 
+const nowMockTime = 'Date.now() timestamp';
+jest.spyOn(Date, 'now').mockReturnValue(nowMockTime);
+
 const centralAssetMetadataModelMock = {
   create: jest.fn(),
   exists: jest.fn(),
   find: jest.fn().mockReturnThis(),
   or: jest.fn().mockReturnThis(),
+  updateMany: jest.fn().mockReturnThis(),
   exec: jest.fn(),
 };
 
@@ -96,5 +100,17 @@ describe('metadataExists', () => {
       const response = await metadataExists(metadata);
       expect(response.conflicts).toEqual(["Metadata for asset with 'masterUrl:masterVersion' combination 'masterUrl:masterVersion' already exists."]);
     });
+  });
+});
+
+describe('setLastAddedDateToNow', () => {
+  it('performs the correct mutation on CentralAssetMetadataModel', async () => {
+    const assetIds = ['test-asset-one', 'test-asset-two'];
+    await centralAssetRepoRepository.setLastAddedDateToNow(assetIds);
+    expect(centralAssetMetadataModelMock.updateMany).toHaveBeenCalledWith(
+      { assetId: { $in: assetIds } },
+      { lastAddedDate: nowMockTime },
+    );
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
   });
 });

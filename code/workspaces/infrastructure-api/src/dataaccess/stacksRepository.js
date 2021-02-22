@@ -121,10 +121,10 @@ function updateStatus(stack) {
 function update(projectKey, user, name, updatedValues) {
   // Filter exclusively by owner (User)
   return Stack()
-    .find({ name })
+    .find()
     .filterByUser(user)
     .filterByProject(projectKey)
-    .updateOne(updatedValues)
+    .findOneAndUpdate({ name }, updatedValues, { new: true, omitUndefined: true })
     .exec();
 }
 

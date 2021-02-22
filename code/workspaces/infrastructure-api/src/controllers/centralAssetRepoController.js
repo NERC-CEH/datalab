@@ -1,7 +1,7 @@
 import { matchedData, body, param } from 'express-validator';
 import { service } from 'service-chassis';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
-import centralAssetRepoModel from '../models/centralAssetRepo.model';
+import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 import logger from '../config/logger';
 import ValidationChainHelper from './utils/validationChainHelper';
 

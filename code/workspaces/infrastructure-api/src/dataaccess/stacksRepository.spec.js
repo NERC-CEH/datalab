@@ -98,6 +98,6 @@ describe('stacksRepository', () => {
     expect(mockDatabase().queries()).toContainEqual({ name });
     expect(mockDatabase().project()).toBe('expectedProject');
     expect(mockDatabase().user()).toBe('username');
-    expect(mockDatabase().queries()).toContainEqual(updatedValues);
+    expect(mockDatabase().entity()).toEqual(updatedValues);
   });
 });
