@@ -1,6 +1,11 @@
 {
   "catalogue": {
-    "available": true
+    "available": true,
+    "storage": {
+      "type": "nfs",
+      "server": "192.168.3.16",
+      "rootDirectory": "/central-asset-repository/nfs"
+    }
   },
   "assetRepo": {
     "types": {

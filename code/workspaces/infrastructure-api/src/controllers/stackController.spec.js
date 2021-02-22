@@ -229,15 +229,17 @@ describe('Stack Controller', () => {
   });
 
   describe('updateStack', () => {
+    const getRequestBody = () => ({
+      projectKey: 'expectedProjectKey',
+      name: 'abcd1234',
+      shared: 'project',
+      assetIds: ['test-update-asset-one', 'test-update-asset-two'],
+    });
+
     beforeEach(async () => {
       updateMock.mockClear();
       await createValidatedRequest(
-        {
-          projectKey: 'expectedProjectKey',
-          name: 'abcd1234',
-          shared: 'project',
-          assetIds: ['test-update-asset-one', 'test-update-asset-two'],
-        },
+        getRequestBody(),
         stackController.updateStackValidator,
       );
     });
@@ -268,8 +270,19 @@ describe('Stack Controller', () => {
 
     it('should update linked assets', async () => {
       const responseMock = httpMocks.createResponse();
-      await stackController.createStack(request, responseMock);
+      await stackController.updateStack(request, responseMock);
       expect(centralAssetRepoRepository.setLastAddedDateToNow).toHaveBeenCalledWith(request.body.assetIds);
+    });
+
+    it('should call to mount assets on stack', async () => {
+      const responseMock = httpMocks.createResponse();
+      getOneByNameMock.mockResolvedValueOnce({ type: 'expected-type' });
+
+      await stackController.updateStack(request, responseMock);
+
+      expect(stackManager.mountAssetsOnStack).toHaveBeenCalledWith({
+        ...getRequestBody(), type: 'expected-type',
+      });
     });
 
     describe('should validate the shared field value', () => {

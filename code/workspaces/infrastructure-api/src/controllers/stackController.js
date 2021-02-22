@@ -96,7 +96,10 @@ async function updateStackExec(request, response) {
   // Handle request
   await updateLinkedAssets(params, response);
 
+  const { type } = await stackRepository.getOneByName(projectKey, user, name);
+
   try {
+    await stackManager.mountAssetsOnStack({ ...params, type });
     const updateResult = await stackRepository.update(projectKey, user, name, updatedDetails);
     response.send(updateResult);
   } catch (error) {

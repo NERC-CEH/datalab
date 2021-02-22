@@ -1,3 +1,5 @@
+import path from 'path';
+import { catalogueFileLocation } from 'common/src/config/catalogue';
 import database from '../config/database';
 import centralAssetMetadataModel from '../models/centralAssetMetadata.model';
 
@@ -21,6 +23,14 @@ async function metadataAvailableToProject(projectKey) {
       { visible: 'PUBLIC' },
       { visible: 'BY_PROJECT', projects: { $elemMatch: { $eq: projectKey } } },
     ])
+    .exec();
+}
+
+async function getMetadataWithIds(ids) {
+  return CentralAssetMetadata()
+    .find()
+    .where('assetId')
+    .in(ids)
     .exec();
 }
 
@@ -73,6 +83,7 @@ async function setLastAddedDateToNow(assetIds) {
 export default {
   createMetadata,
   listMetadata,
+  getMetadataWithIds,
   metadataAvailableToProject,
   metadataExists,
   setLastAddedDateToNow,
