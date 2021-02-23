@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createShallow } from '@material-ui/core/test-utils';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/authConfig';
 import { useCurrentUserPermissions, useCurrentUserTokens } from '../../hooks/authHooks';
 import RequireAuth, { effectFn } from './RequireAuth';
 import authActions from '../../actions/authActions';
 
 jest.mock('react-redux');
-jest.mock('../../auth/auth');
+jest.mock('../../config/authConfig');
 jest.mock('../../hooks/authHooks');
 jest.mock('../../actions/authActions');
 

@@ -1,10 +1,10 @@
 import MockAdapter from 'axios-mock-adapter';
 import request from './secureRequest';
-import getAuth from './auth';
+import { getAuth } from '../config/authConfig';
 
 const mock = new MockAdapter(request);
 
-jest.mock('./auth');
+jest.mock('../config/authConfig');
 const getCurrentSession = jest.fn();
 const renewSession = jest.fn();
 getAuth.mockImplementation(() => ({
@@ -42,7 +42,7 @@ describe('secureRequest', () => {
     return request.post('http://localhost:8000/api', { query: 'queryString' });
   });
 
-  it('intercepts a 401 unathorized response and reissues request with new token', () => {
+  it('intercepts a 401 unauthorized response and reissues request with new token', () => {
     getCurrentSession
       .mockReturnValueOnce({ access_token: 'expiredAccessToken' })
       .mockReturnValueOnce({ access_token: 'renewedAccessToken' });

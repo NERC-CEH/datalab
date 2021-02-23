@@ -71,6 +71,8 @@
 			"rstudio",
 			"screenshot",
 			"setup",
+			"signin",
+			"signout",
 			"unmount",
 			"updateable",
 			"uppercase",

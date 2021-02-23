@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/authConfig';
 
 const styles = theme => ({
   container: {

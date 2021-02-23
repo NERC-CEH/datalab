@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
 import datalabsLogo from '../../assets/images/datalabs-vert.png';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/authConfig';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import PagePrimaryActionButton from '../common/buttons/PagePrimaryActionButton';
 

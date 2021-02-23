@@ -5,15 +5,15 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import configureStore from './store/configureStore';
 import theme from './theme';
 import Router from './router';
-import { initialiseAuth } from './auth/auth';
-import getAuthConfig from './auth/authConfig';
+import { initialiseAuth } from './config/authConfig';
 import { initialiseVersion } from './version';
 
 async function createApplication() {
   const store = configureStore();
-  await initialiseVersion();
-  const authConfig = await getAuthConfig();
-  initialiseAuth(authConfig);
+  await Promise.all([
+    initialiseVersion(),
+    initialiseAuth(),
+  ]);
 
   ReactDOM.render(
     <Provider store={store}>

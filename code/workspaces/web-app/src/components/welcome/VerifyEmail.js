@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import datalabsLogo from '../../assets/images/datalabs-vert.png';
 import PagePrimaryActionButton from '../common/buttons/PagePrimaryActionButton';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/authConfig';
 
 const useStyles = makeStyles(theme => ({
   container: {
