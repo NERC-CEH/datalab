@@ -20,7 +20,7 @@ const CentralAssetMetadataSchema = new Schema({
   ownerUserIds: { type: [String], required: true },
   visible: { type: String, enum: possibleVisibleValues(), required: true },
   projectKeys: [String],
-  registrationDate: { type: Date, default: Date.now(), required: true },
+  registrationDate: { type: Date, default: Date.now, required: true },
   lastAddedDate: Date,
 });
 

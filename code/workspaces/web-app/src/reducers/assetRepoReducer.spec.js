@@ -153,7 +153,7 @@ describe('addNewAssets', () => {
     // Act
     const sumAssets = addNewAssets(oldAssets, newAssets);
 
-    // Assert
+    // Assert - should not get asset2 twice
     expect(sumAssets).toEqual([asset1, asset2, asset3]);
   });
 });

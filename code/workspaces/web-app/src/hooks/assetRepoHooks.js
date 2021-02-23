@@ -17,7 +17,7 @@ export const useAssetRepo = () => {
 
 const assetVisible = (projectKey, asset) => asset.fileLocation
   && (asset.visible === 'PUBLIC'
-  || (asset.projects && asset.projects.filter(project => project.key === projectKey).length > 0));
+  || (asset.projects && asset.projects.map(project => project.key).includes(projectKey)));
 
 export const useVisibleAssets = (projectKey) => {
   const assetRepo = useAssetRepoUnsorted();
