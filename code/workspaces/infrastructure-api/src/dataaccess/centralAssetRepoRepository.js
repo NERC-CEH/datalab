@@ -1,5 +1,3 @@
-import path from 'path';
-import { catalogueFileLocation } from 'common/src/config/catalogue';
 import database from '../config/database';
 import centralAssetMetadataModel from '../models/centralAssetMetadata.model';
 
