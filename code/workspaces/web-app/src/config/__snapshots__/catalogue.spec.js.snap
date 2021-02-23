@@ -3,5 +3,10 @@
 exports[`catalogueConfig returns correct configuration 1`] = `
 Object {
   "available": true,
+  "storage": Object {
+    "rootDirectory": "/central-asset-repository/nfs",
+    "server": "192.168.3.16",
+    "type": "nfs",
+  },
 }
 `;
