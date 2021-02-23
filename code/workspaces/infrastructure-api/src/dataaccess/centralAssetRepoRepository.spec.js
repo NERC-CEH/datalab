@@ -6,11 +6,13 @@ jest.spyOn(Date, 'now').mockReturnValue(nowMockTime);
 
 const centralAssetMetadataModelMock = {
   create: jest.fn(),
+  exec: jest.fn(),
   exists: jest.fn(),
   find: jest.fn().mockReturnThis(),
+  in: jest.fn().mockReturnThis(),
   or: jest.fn().mockReturnThis(),
   updateMany: jest.fn().mockReturnThis(),
-  exec: jest.fn(),
+  where: jest.fn().mockReturnThis(),
 };
 
 jest.mock('../config/database');
@@ -67,6 +69,22 @@ describe('metadataAvailableToProject', () => {
       { visible: 'PUBLIC' },
       { visible: 'BY_PROJECT', projects: { $elemMatch: { $eq: projectKey } } },
     ]);
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
+  });
+});
+
+describe('getMetadataWithIds', () => {
+  it('performs correct query on central asset metadata model and returns the result', async () => {
+    const metadata = getMinimalMetadata();
+    centralAssetMetadataModelMock.exec.mockResolvedValueOnce([metadata]);
+    const assetIds = ['asset-one', 'asset-two'];
+
+    const returnValue = await centralAssetRepoRepository.getMetadataWithIds(assetIds);
+
+    expect(returnValue).toEqual([metadata]);
+    expect(centralAssetMetadataModelMock.find).toHaveBeenCalledWith();
+    expect(centralAssetMetadataModelMock.where).toHaveBeenCalledWith('assetId');
+    expect(centralAssetMetadataModelMock.in).toHaveBeenCalledWith(assetIds);
     expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
   });
 });

@@ -60,6 +60,20 @@ function deleteDeployment(name, namespace) {
     .catch(handleDeleteError('deployment', name));
 }
 
+async function mergePatchDeployment(name, namespace, patchBody) {
+  logger.info(`Merge patching deployment ${name} in namespace ${namespace}`);
+  try {
+    return await axios.patch(
+      getDeploymentUrl(namespace, name),
+      patchBody,
+      PATCH_CONTENT_HEADER,
+    );
+  } catch (error) {
+    logger.error(`Failed to merge patch deployment ${name} in namespace ${namespace} with following message: ${error.message}`);
+  }
+  return null;
+}
+
 async function getStatusReplicas(name, namespace) {
   const response = await axios.get(getDeploymentScaleUrl(namespace, name));
   const replicas = response.data.status.replicas || 0;
@@ -109,4 +123,4 @@ async function restartDeployment(name, namespace) {
   return response;
 }
 
-export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment, restartDeployment };
+export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment, mergePatchDeployment, restartDeployment };

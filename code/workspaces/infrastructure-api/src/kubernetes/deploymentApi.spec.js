@@ -137,6 +137,18 @@ describe('Kubernetes Deployment API', () => {
     });
   });
 
+  describe('mergePatchDeployment', () => {
+    it('sends patch request using correct URL and providing provided patch body', async () => {
+      const patchBody = { metadata: { name: 'patch-test' } };
+      mock.onPatch(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}`, patchBody)
+        .reply(200, { message: 'patch successful' });
+
+      const response = await deploymentApi.mergePatchDeployment(DEPLOYMENT_NAME, NAMESPACE, patchBody);
+
+      expect(response.data).toEqual({ message: 'patch successful' });
+    });
+  });
+
   describe('restart deployment', () => {
     it('should down and up scale deployment', async () => {
       // Arrange

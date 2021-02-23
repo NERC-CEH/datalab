@@ -24,6 +24,14 @@ async function metadataAvailableToProject(projectKey) {
     .exec();
 }
 
+async function getMetadataWithIds(ids) {
+  return CentralAssetMetadata()
+    .find()
+    .where('assetId')
+    .in(ids)
+    .exec();
+}
+
 async function metadataExists(metadata) {
   const checkingFunctions = [
     metadataWithNameVersionCombinationExists,
@@ -73,6 +81,7 @@ async function setLastAddedDateToNow(assetIds) {
 export default {
   createMetadata,
   listMetadata,
+  getMetadataWithIds,
   metadataAvailableToProject,
   metadataExists,
   setLastAddedDateToNow,

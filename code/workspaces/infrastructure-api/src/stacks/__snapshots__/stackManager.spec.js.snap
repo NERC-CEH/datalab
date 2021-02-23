@@ -79,3 +79,179 @@ Object {
   "message": "No stack definition for type jupyter",
 }
 `;
+
+exports[`Stack Controller mountAssetsOnStack applies the correct patch when there are initially assets and the assets are removed 1`] = `
+Array [
+  "jupyterlab-teststack",
+  "testproj",
+  Object {
+    "spec": Object {
+      "template": Object {
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "name": "jupyterlab-teststack",
+              "volumeMounts": Array [
+                Object {
+                  "mountPath": "/data",
+                  "name": "test-volume",
+                },
+              ],
+            },
+            Object {
+              "name": "supporting-container",
+            },
+          ],
+          "volumes": Array [
+            Object {
+              "name": "test-volume",
+              "persistentVolumeClaim": Object {
+                "claimName": "test-volume-claim",
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`Stack Controller mountAssetsOnStack applies the correct patch when there are initially assets mounted and the assets are updated 1`] = `
+Array [
+  "jupyterlab-teststack",
+  "testproj",
+  Object {
+    "spec": Object {
+      "template": Object {
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "name": "jupyterlab-teststack",
+              "volumeMounts": Array [
+                Object {
+                  "mountPath": "/data",
+                  "name": "test-volume",
+                },
+                Object {
+                  "mountPath": "/assets/asset_0002",
+                  "name": "asset-0002",
+                  "readOnly": true,
+                },
+                Object {
+                  "mountPath": "/assets/asset_0005",
+                  "name": "asset-0005",
+                  "readOnly": true,
+                },
+              ],
+            },
+            Object {
+              "name": "supporting-container",
+            },
+          ],
+          "volumes": Array [
+            Object {
+              "name": "test-volume",
+              "persistentVolumeClaim": Object {
+                "claimName": "test-volume-claim",
+              },
+            },
+            Object {
+              "name": "asset-0002",
+              "nfs": Object {
+                "path": "/test/assets/asset_0002",
+                "readOnly": true,
+                "server": "127.0.0.1",
+              },
+            },
+            Object {
+              "name": "asset-0005",
+              "nfs": Object {
+                "path": "/test/assets/asset_0005",
+                "readOnly": true,
+                "server": "127.0.0.1",
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`Stack Controller mountAssetsOnStack applies the correct patch when there are initially no assets mounted to deployment and assets are added 1`] = `
+Array [
+  "jupyterlab-teststack",
+  "testproj",
+  Object {
+    "spec": Object {
+      "template": Object {
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "name": "jupyterlab-teststack",
+              "volumeMounts": Array [
+                Object {
+                  "mountPath": "/data",
+                  "name": "test-volume",
+                },
+                Object {
+                  "mountPath": "/assets/asset_0001",
+                  "name": "asset-0001",
+                  "readOnly": true,
+                },
+                Object {
+                  "mountPath": "/assets/asset_0002",
+                  "name": "asset-0002",
+                  "readOnly": true,
+                },
+                Object {
+                  "mountPath": "/assets/asset_0003",
+                  "name": "asset-0003",
+                  "readOnly": true,
+                },
+              ],
+            },
+            Object {
+              "name": "supporting-container",
+            },
+          ],
+          "volumes": Array [
+            Object {
+              "name": "test-volume",
+              "persistentVolumeClaim": Object {
+                "claimName": "test-volume-claim",
+              },
+            },
+            Object {
+              "name": "asset-0001",
+              "nfs": Object {
+                "path": "/test/assets/asset_0001",
+                "readOnly": true,
+                "server": "127.0.0.1",
+              },
+            },
+            Object {
+              "name": "asset-0002",
+              "nfs": Object {
+                "path": "/test/assets/asset_0002",
+                "readOnly": true,
+                "server": "127.0.0.1",
+              },
+            },
+            Object {
+              "name": "asset-0003",
+              "nfs": Object {
+                "path": "/test/assets/asset_0003",
+                "readOnly": true,
+                "server": "127.0.0.1",
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;

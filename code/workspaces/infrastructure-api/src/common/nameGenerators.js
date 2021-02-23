@@ -3,6 +3,8 @@
 const generateDeploymentName = (name, type) => `${type}-${name}`;
 const pvcName = volumeName => `${volumeName}-claim`;
 const stackCredentialSecret = generateDeploymentName;
+const assetVolume = assetId => `asset-${assetId}`;
+const isAssetVolume = volumeName => volumeName.match(/^asset-/);
 
 // project namespaces
 const projectNamespace = projectKey => projectKey;
@@ -20,6 +22,8 @@ const sparkDriverHeadlessService = deploymentServiceName => `${deploymentService
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
 export default {
+  assetVolume,
+  isAssetVolume,
   deploymentName: generateDeploymentName,
   computeSubmissionClusterRole,
   computeSubmissionServiceAccount,
