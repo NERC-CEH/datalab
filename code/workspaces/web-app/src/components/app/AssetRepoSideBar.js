@@ -10,7 +10,8 @@ const AssetRepoSideBar = ({ classes }) => (
   <div className={classes.sideBar}>
     <List className={classes.itemList}>
       <SideBarGroup title='Asset Repo'>
-        <SideBarButton to="/assets/add-metadata" label="Add Metadata" icon="dashboard"></SideBarButton>
+        <SideBarButton to="/assets/add-metadata" label="Add Metadata" icon="dashboard"/>
+        <SideBarButton to="/assets/find" label="Find Asset" icon="dashboard"/>
       </SideBarGroup>
     </List>
   </div>

@@ -18,7 +18,7 @@ const getMinimalMetadata = () => ({
   name: 'Test Metadata',
   version: '0.1.0',
   type: 'DATA',
-  owners: [],
+  ownerUserIds: [],
   visible: 'PUBLIC',
   fileLocation: 'path/to/file',
 });

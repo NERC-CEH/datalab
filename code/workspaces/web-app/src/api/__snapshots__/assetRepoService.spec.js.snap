@@ -9,11 +9,20 @@ exports[`assetRepoService addRepoMetadata should build the correct mutation and 
     }"
 `;
 
+exports[`assetRepoService loadAllAssets should build the correct query and unpack the results 1`] = `
+"
+    CentralAssets {
+      centralAssets {
+        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate
+      }
+    }"
+`;
+
 exports[`assetRepoService loadVisibleAssets should build the correct query and unpack the results 1`] = `
 "
     CentralAssetsAvailableToProject($projectKey: String!) {
       centralAssetsAvailableToProject(projectKey: $projectKey) {
-        assetId, name, version, fileLocation, visible, projects
+        assetId, name, version, fileLocation, visible, projects {key, name}
       }
     }"
 `;

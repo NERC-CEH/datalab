@@ -17,9 +17,9 @@ const CentralAssetMetadataSchema = new Schema({
   fileLocation: String,
   masterUrl: String,
   masterVersion: String,
-  owners: { type: [String], required: true },
+  ownerUserIds: { type: [String], required: true },
   visible: { type: String, enum: possibleVisibleValues(), required: true },
-  projects: [String],
+  projectKeys: [String],
   registrationDate: { type: Date, default: Date.now, required: true },
   lastAddedDate: Date,
 });

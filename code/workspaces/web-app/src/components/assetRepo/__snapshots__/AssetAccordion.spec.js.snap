@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetAccordion renders to match snapshot passing correct props to children 1`] = `
+<div
+  className="makeStyles-container-1"
+>
+  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
+    defaultExpanded={true}
+  >
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
+      expandIcon={<Memo(ExpandMoreIcon) />}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="makeStyles-heading-3"
+        variant="h5"
+      >
+        asset name
+        : 
+        asset version
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
+    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+      <div
+        className="makeStyles-resources-2"
+      >
+        <AssetCard
+          asset={
+            Object {
+              "assetId": "asset-1",
+              "fileLocation": "file location",
+              "masterUrl": "master URL",
+              "name": "asset name",
+              "owners": Array [
+                Object {
+                  "name": "name 1",
+                  "userId": "owner-1",
+                },
+                Object {
+                  "name": "name 2",
+                  "userId": "owner-2",
+                },
+              ],
+              "projects": Array [
+                Object {
+                  "name": "project 1",
+                  "projectKey": "project-1",
+                },
+                Object {
+                  "name": "project 2",
+                  "projectKey": "project-2",
+                },
+              ],
+              "version": "asset version",
+              "visibility": "BY_PROJECT",
+            }
+          }
+        />
+      </div>
+    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
+  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+</div>
+`;

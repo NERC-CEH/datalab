@@ -19,7 +19,7 @@ async function metadataAvailableToProject(projectKey) {
     .find()
     .or([
       { visible: 'PUBLIC' },
-      { visible: 'BY_PROJECT', projects: { $elemMatch: { $eq: projectKey } } },
+      { visible: 'BY_PROJECT', projectKeys: { $elemMatch: { $eq: projectKey } } },
     ])
     .exec();
 }

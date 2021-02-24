@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetCard renders to match snapshot 1`] = `
+<Fragment>
+  <AssetCardKeyValue
+    rowKey="Name"
+    rowValue="asset name"
+  />
+  <AssetCardKeyValue
+    rowKey="Version"
+    rowValue="asset version"
+  />
+  <AssetCardKeyValue
+    rowKey="Asset Id"
+    rowValue="asset-1"
+  />
+  <AssetCardKeyValue
+    rowKey="File location"
+    rowValue="file location"
+  />
+  <AssetCardHyperlink
+    rowKey="Master URL"
+    rowValue="master URL"
+  />
+  <AssetCardKeyList
+    rowKey="Owners"
+    rowList={
+      Array [
+        "name 1",
+        "name 2",
+      ]
+    }
+  />
+  <AssetCardKeyValue
+    rowKey="Visibility"
+  />
+  <AssetCardKeyList
+    rowKey="Projects"
+    rowList={
+      Array [
+        "project 1",
+        "project 2",
+      ]
+    }
+  />
+</Fragment>
+`;

@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
-import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
+import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../components/common/ResourceAccordion';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';
 import { useDataStorageArray } from '../../hooks/dataStorageHooks';

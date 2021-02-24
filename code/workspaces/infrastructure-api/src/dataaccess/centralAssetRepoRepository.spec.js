@@ -22,7 +22,7 @@ const getMinimalMetadata = () => ({
   name: 'Test Metadata',
   version: '0.1.0',
   type: 'DATA',
-  owners: [],
+  ownerUserIds: [],
   visible: 'PUBLIC',
   fileLocation: 'path/to/file',
 });
@@ -67,7 +67,7 @@ describe('metadataAvailableToProject', () => {
     expect(centralAssetMetadataModelMock.find).toHaveBeenCalledWith();
     expect(centralAssetMetadataModelMock.or).toHaveBeenCalledWith([
       { visible: 'PUBLIC' },
-      { visible: 'BY_PROJECT', projects: { $elemMatch: { $eq: projectKey } } },
+      { visible: 'BY_PROJECT', projectKeys: { $elemMatch: { $eq: projectKey } } },
     ]);
     expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
   });
