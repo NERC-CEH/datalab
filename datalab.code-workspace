@@ -44,6 +44,7 @@
 		"jestrunner.jestCommand": "npm run test --",
 		"cSpell.language": "en-GB",
 		"cSpell.words": [
+			"NERC",
 			"admin",
 			"admins",
 			"checkbox",

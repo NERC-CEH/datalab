@@ -6,7 +6,7 @@ import configureStore from './store/configureStore';
 import theme from './theme';
 import Router from './router';
 import { initialiseAuth } from './config/authConfig';
-import { initialiseVersion } from './version';
+import { initialiseVersion } from './config/version';
 
 async function createApplication() {
   const store = configureStore();

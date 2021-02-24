@@ -3,6 +3,9 @@ import Oidc from 'oidc-client';
 import Promise from 'bluebird';
 import Auth from '../auth/auth';
 
+// This is a cached value.
+// Initialise asynchronously before React starts.
+// Get synchronously within React.
 let authSession;
 
 async function getAuthConfig() {
