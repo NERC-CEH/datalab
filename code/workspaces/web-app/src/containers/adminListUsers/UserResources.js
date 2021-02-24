@@ -14,9 +14,7 @@ import projectsToShow from './projectsToShow';
 import UserProject from './UserProject';
 import Pagination from '../../components/stacks/Pagination';
 import roleActions from '../../actions/roleActions';
-import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
-import PromisedContentSkeletonWrapper from '../../components/common/PromisedContentSkeletonWrapper';
-import GridSkeleton from '../../components/common/GridSkeleton';
+import { getCatalogue } from '../../config/catalogue';
 
 const { CATALOGUE_ROLES } = permissionTypes;
 
@@ -61,7 +59,7 @@ export default function UserResources({ user, filters, roles }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const currentUserId = useCurrentUserId();
-  const catalogueAvailable = useCatalogueAvailable();
+  const catalogue = getCatalogue();
 
   if (!roles) {
     return null;
@@ -123,11 +121,9 @@ export default function UserResources({ user, filters, roles }) {
         <ResourceAccordionDetails>
           <div className={classes.resources}>
             <div className={classes.systemRoles}>
-              <PromisedContentSkeletonWrapper promises={catalogueAvailable} skeletonComponent={GridSkeleton} skeletonProps={{ rows: 1, columns: 2 }}>
-                <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
-                <SystemCheckbox label="Data manager" checked={roles.dataManager} name="dataManager" />
-                {catalogueAvailable.value && <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />}
-              </PromisedContentSkeletonWrapper>
+              <SystemCheckbox label="Instance admin" checked={roles.instanceAdmin} name="instanceAdmin" disabled={user.userId === currentUserId} />
+              <SystemCheckbox label="Data manager" checked={roles.dataManager} name="dataManager" />
+              {catalogue.available && <SystemSelect itemPrefix="Catalogue" current={roles.catalogueRole} items={CATALOGUE_ROLES} name="catalogue" />}
             </div>
             <Pagination items={renderedProjects} itemsPerPage={5} itemsName="Projects" />
           </div>

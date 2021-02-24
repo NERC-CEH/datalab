@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`authConfig returns correct configuration 1`] = `
+exports[`auth returns correct configuration 1`] = `
 Object {
   "oidc": Object {
     "userManager": Object {

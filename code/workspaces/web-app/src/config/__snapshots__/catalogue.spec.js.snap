@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`catalogueConfig returns correct configuration 1`] = `
+exports[`catalogue returns correct configuration 1`] = `
 Object {
   "available": true,
 }

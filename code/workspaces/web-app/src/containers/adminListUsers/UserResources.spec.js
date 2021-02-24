@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { shallow } from 'enzyme';
 import UserResources from './UserResources';
-import { useCatalogueAvailable } from '../../hooks/catalogueConfigHooks';
+import { getCatalogue } from '../../config/catalogue';
 
 const user = { name: 'user name', userId: 'uid1' };
 const projectKey = 'proj-1234';
@@ -16,7 +16,7 @@ jest.mock('./UserProject', () => ({
   __esModule: true,
   default: jest.fn().mockReturnValue(<>user project</>),
 }));
-jest.mock('../../hooks/catalogueConfigHooks');
+jest.mock('../../config/catalogue');
 
 describe('UserResources', () => {
   const shallowRender = () => {
@@ -49,12 +49,12 @@ describe('UserResources', () => {
 
   describe('renders to match snapshot passing correct props to children', () => {
     it('when catalogue is available', () => {
-      useCatalogueAvailable.mockReturnValueOnce({ fetching: false, value: true });
+      getCatalogue.mockReturnValueOnce({ available: true });
       expect(shallowRender()).toMatchSnapshot();
     });
 
     it('when catalogue is not available', () => {
-      useCatalogueAvailable.mockReturnValueOnce({ fetching: false, value: false });
+      getCatalogue.mockReturnValueOnce({ available: false });
       expect(shallowRender()).toMatchSnapshot();
     });
   });

@@ -6,13 +6,15 @@ import configureStore from './store/configureStore';
 import theme from './theme';
 import Router from './router';
 import { initialiseAuth } from './config/auth';
+import { initialiseCatalogue } from './config/catalogue';
 import { initialiseVersion } from './config/version';
 
 async function createApplication() {
   const store = configureStore();
   await Promise.all([
-    initialiseVersion(),
     initialiseAuth(),
+    initialiseCatalogue(),
+    initialiseVersion(),
   ]);
 
   ReactDOM.render(

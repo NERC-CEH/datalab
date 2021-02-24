@@ -6,7 +6,7 @@ import { initialiseAuth, getAuth } from './auth';
 const httpMock = new MockAdapter(axios);
 httpMock.onGet('/web_auth_config.json').reply(() => [200, data]);
 
-describe('authConfig', () => {
+describe('auth', () => {
   it('returns correct configuration', async () => {
     await initialiseAuth();
     const auth = getAuth();
