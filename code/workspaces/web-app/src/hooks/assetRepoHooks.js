@@ -10,6 +10,7 @@ export const useAssetRepo = () => {
     ...assetRepo,
     value:
     {
+      ...assetRepo.value,
       assets: sortByName(assetRepo.value.assets),
     },
   };
@@ -28,6 +29,7 @@ export const useVisibleAssets = (projectKey) => {
     ...assetRepo,
     value:
     {
+      ...assetRepo.value,
       assets: sortByName(visibleAssets),
     },
   };

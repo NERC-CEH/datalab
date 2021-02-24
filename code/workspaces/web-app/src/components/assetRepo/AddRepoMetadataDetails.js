@@ -40,7 +40,7 @@ export default function AddRepoMetadataDetails() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const assetRepo = useAssetRepo();
-  const assetId = (assetRepo && assetRepo.value && assetRepo.value.assetId) ? assetRepo.value.assetId : 'Awaiting submission';
+  const assetId = (assetRepo && assetRepo.value && assetRepo.value.createdAssetId) ? assetRepo.value.createdAssetId : 'Awaiting submission';
 
   useEffect(() => {
     dispatch(userActions.listUsers());
