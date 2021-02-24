@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuth } from '../config/authConfig';
+import { getAuth } from '../config/auth';
 
 const request = axios.create();
 

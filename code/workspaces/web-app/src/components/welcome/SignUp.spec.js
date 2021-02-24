@@ -1,9 +1,9 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import SignUp from './SignUp';
-import { getAuth } from '../../config/authConfig';
+import { getAuth } from '../../config/auth';
 
-jest.mock('../../config/authConfig');
+jest.mock('../../config/auth');
 getAuth.mockImplementation(() => ({
   signUpConfig: jest.fn().mockReturnValue({ requestEmail: 'test@test.com' }),
 }));

@@ -1,10 +1,10 @@
 import MockAdapter from 'axios-mock-adapter';
 import request from './secureRequest';
-import { getAuth } from '../config/authConfig';
+import { getAuth } from '../config/auth';
 
 const mock = new MockAdapter(request);
 
-jest.mock('../config/authConfig');
+jest.mock('../config/auth');
 const getCurrentSession = jest.fn();
 const renewSession = jest.fn();
 getAuth.mockImplementation(() => ({

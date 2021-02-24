@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core';
-import { getAuth } from '../../config/authConfig';
+import { getAuth } from '../../config/auth';
 import authActions from '../../actions/authActions';
 import { useCurrentUserPermissions, useCurrentUserTokens } from '../../hooks/authHooks';
 
