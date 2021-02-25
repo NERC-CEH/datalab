@@ -103,11 +103,7 @@ const resolvers = {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     redirectUrl: (obj, args, { token }) => stackUrlService(obj.projectKey, obj, token),
     category: obj => (obj.category ? obj.category.toUpperCase() : null),
-    assets: async ({ projectKey, assetIds }, args, { token }) => {
-      const assetMetadataRequests = assetIds
-        .map(id => centralAssetRepoService.getAssetByIdAndProjectKey(id, projectKey, token));
-      return Promise.all(assetMetadataRequests);
-    },
+    assets: ({ projectKey, assetIds = [] }, args, { token }) => assetIds.map(id => centralAssetRepoService.getAssetByIdAndProjectKey(id, projectKey, token)),
   },
 
   Project: {
