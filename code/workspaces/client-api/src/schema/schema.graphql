@@ -240,13 +240,13 @@ enum StatusType {
 
 # Sharing and visibility classes within Datalabs
 enum VisibilityType {
-  # Resource is only accessibe by the user who owns it
+  # Resource is only accessible by the user who owns it
   private
 
-  # Resoure is accessible by all users in the same project
+  # Resource is accessible by all users in the same project
   project
 
-  # Resouce is accessible by everyone
+  # Resource is accessible by everyone
   public
 }
 
@@ -352,6 +352,11 @@ enum CatalogueRole {
     user
 }
 
+type UserDetail {
+    userId: ID!
+    name: String!
+}
+
 type CentralAssetMetadata {
     assetId: String!
     name: String!
@@ -360,9 +365,9 @@ type CentralAssetMetadata {
     fileLocation: String
     masterUrl: String
     masterVersion: String
-    owners: [String]!
+    owners: [UserDetail]!
     visible: String!
-    projects: [String]
+    projects: [Project]
     registrationDate: String!
 }
 
@@ -373,7 +378,7 @@ input CentralAssetMetadataCreationRequest {
     fileLocation: String
     masterUrl: String
     masterVersion: String
-    owners: [String]!
+    ownerUserIds: [String]!
     visible: String!
-    projects: [String]
+    projectKeys: [String]
 }

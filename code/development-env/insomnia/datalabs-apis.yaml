@@ -1,8 +1,119 @@
 _type: export
 __export_format: 4
-__export_date: 2021-02-15T16:16:23.730Z
+__export_date: 2021-02-22T12:09:22.429Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
+  - _id: req_ce56706c9f504666b75bbf4c81908c11
+    parentId: fld_c5fd5b1d05e24c349febad830d984362
+    modified: 1613991037322
+    created: 1613986566868
+    url: "{{ infra_api_url  }}/centralAssetRepo/metadata"
+    name: Create Asset
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {   
+        	  "name": "newAsset",
+            "version": "0.5.0",
+            "type": "DATA",
+            "ownerUserIds": ["owner-id"],
+            "visible": "BY_PROJECT",
+            "fileLocation": "/path/to/file5",
+        	  "projectKeys": ["project"]
+        }
+    parameters: []
+    headers:
+      - id: pair_39e43053e7e84145ba27337b6f8de517
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933668.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_c5fd5b1d05e24c349febad830d984362
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    modified: 1613986545207
+    created: 1613986545207
+    name: Assets
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1613986545207
+    _type: request_group
+  - _id: fld_998699fb7271407c91200bc860ef8beb
+    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    modified: 1568712917499
+    created: 1568712917499
+    name: Infrastructure API
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1568712917499
+    _type: request_group
+  - _id: wrk_19ed8d51a0ec4d659f9962bcf31a741b
+    parentId: null
+    modified: 1519239116865
+    created: 1519239116865
+    name: Datalabs
+    description: ""
+    scope: null
+    _type: workspace
+  - _id: req_8db25eb500674c95b39b81cee9417df3
+    parentId: fld_c5fd5b1d05e24c349febad830d984362
+    modified: 1613986940853
+    created: 1613986812817
+    url: "{{ infra_api_url  }}/centralAssetRepo/metadata"
+    name: Get Assets
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933618.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_04047c360c574ac199b52a17d2ef2237
+    parentId: fld_c5fd5b1d05e24c349febad830d984362
+    modified: 1613991327212
+    created: 1613991316819
+    url: "{{ infra_api_url  }}/centralAssetRepo/metadata/project"
+    name: Get Assets Visible To Project
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933612.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_f69cc29ea22447988e34b96b7312ded1
     parentId: fld_8f24d304923241198bc95c2a94678530
     modified: 1606144624304
@@ -36,24 +147,6 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1605178344812
     _type: request_group
-  - _id: fld_998699fb7271407c91200bc860ef8beb
-    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    modified: 1568712917499
-    created: 1568712917499
-    name: Infrastructure API
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1568712917499
-    _type: request_group
-  - _id: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    parentId: null
-    modified: 1519239116865
-    created: 1519239116865
-    name: Datalabs
-    description: ""
-    scope: null
-    _type: workspace
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
     parentId: fld_5e6448fbd48f422ab34cfdce676516c9
     modified: 1605698364033
@@ -1155,7 +1248,7 @@ resources:
     _type: request
   - _id: req_ac4015a6432b46a9bba80a0f5e200a63
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1611746821205
+    modified: 1613985348280
     created: 1606145410033
     url: "{{ client_api_url  }}/api"
     name: All users and roles
@@ -1303,7 +1396,7 @@ resources:
     _type: request
   - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1613045234439
+    modified: 1613991108207
     created: 1612177227190
     url: "{{ _.client_api_url }}/api"
     name: createCentralAssetMetadata
@@ -1313,8 +1406,9 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  createCentralAssetMetadata (metadata:
         {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    type:
-        \"DATA\",\n    owners: [\"owner-id\"],\n    visible:
-        \"PUBLIC\",\n    fileLocation: \"/path/to/file4\"\n  })
+        \"DATA\",\n    ownerUserIds: [\"owner-id\"],\n    visible:
+        \"BY_PROJECT\",\n    projectKeys: [\"project\"],\n    fileLocation:
+        \"/path/to/file4\"\n  })
         {\n    assetId\n    name\n    version\n  }\n}"}'
     parameters: []
     headers:
@@ -1335,7 +1429,7 @@ resources:
     _type: request
   - _id: req_7099ece7dd0b432eaf509b917cf1cb92
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1613045240745
+    modified: 1613995738470
     created: 1613039989749
     url: "{{ _.client_api_url }}/api"
     name: centralAssets
@@ -1344,7 +1438,9 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"{\n  centralAssets
-        {\n    assetId\n    name\n    version\n    projects\n    visible\n    registrationDate\n  }\n}\n"}'
+        {\n    assetId\n    name\n    version\n    projects {key,
+        name}\n    visible\n    registrationDate\n    owners {userId,
+        name}\n  }\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1364,7 +1460,7 @@ resources:
     _type: request
   - _id: req_71f237bc68554522b9f09071d6a3854e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1613045272327
+    modified: 1613995740681
     created: 1612539520337
     url: "{{ _.client_api_url }}/api"
     name: centralAssetMetadataAvailableToProject
@@ -1373,8 +1469,9 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  centralAssetsAvailableToProject(projectKey:
-        \"project\")
-        {\n    assetId\n    name\n    version\n    projects\n    visible\n    registrationDate\n  }\n}"}'
+        \"project\") {\n    assetId\n    name\n    version\n    projects {key,
+        name}\n    visible\n    registrationDate\n    owners {userId,
+        name}\n  }\n}"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1485,16 +1582,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_13d24c525db74595ba879650f2fb4a60
-    parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    modified: 1568899594162
-    created: 1568395892632
-    name: Infrastructure
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1567588463167
-    _type: request_group
   - _id: req_48570009e9174ff99cd16d737a3264fd
     parentId: fld_13d24c525db74595ba879650f2fb4a60
     modified: 1576247760329

@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetRepoFindContainer renders to match snapshot passing correct props to children 1`] = `
+<Fragment>
+  <AssetMultiSelect
+    input={
+      Object {
+        "onChange": [Function],
+        "value": Array [],
+      }
+    }
+    showAllAssets={true}
+  />
+  <PromisedContentWrapper
+    fetchingClassName="makeStyles-placeholderCard-3"
+    promise={
+      Object {
+        "error": null,
+        "fetching": false,
+        "value": Object {
+          "assets": Array [
+            Object {
+              "assetId": "asset-1",
+              "fileLocation": "file location",
+              "masterUrl": "master URL",
+              "name": "asset name",
+              "owners": Array [
+                Object {
+                  "name": "name 1",
+                  "userId": "owner-1",
+                },
+                Object {
+                  "name": "name 2",
+                  "userId": "owner-2",
+                },
+              ],
+              "projects": Array [
+                Object {
+                  "name": "project 1",
+                  "projectKey": "project-1",
+                },
+                Object {
+                  "name": "project 2",
+                  "projectKey": "project-2",
+                },
+              ],
+              "version": "asset version",
+              "visibility": "BY_PROJECT",
+            },
+          ],
+        },
+      }
+    }
+  >
+    <Pagination
+      items={
+        Array [
+          <AssetAccordion
+            asset={
+              Object {
+                "assetId": "asset-1",
+                "fileLocation": "file location",
+                "masterUrl": "master URL",
+                "name": "asset name",
+                "owners": Array [
+                  Object {
+                    "name": "name 1",
+                    "userId": "owner-1",
+                  },
+                  Object {
+                    "name": "name 2",
+                    "userId": "owner-2",
+                  },
+                ],
+                "projects": Array [
+                  Object {
+                    "name": "project 1",
+                    "projectKey": "project-1",
+                  },
+                  Object {
+                    "name": "project 2",
+                    "projectKey": "project-2",
+                  },
+                ],
+                "version": "asset version",
+                "visibility": "BY_PROJECT",
+              }
+            }
+          />,
+        ]
+      }
+      itemsPerPage={5}
+    />
+  </PromisedContentWrapper>
+</Fragment>
+`;

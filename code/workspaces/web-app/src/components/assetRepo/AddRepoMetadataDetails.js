@@ -40,7 +40,7 @@ export default function AddRepoMetadataDetails() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const assetRepo = useAssetRepo();
-  const assetId = (assetRepo && assetRepo.value && assetRepo.value.assetId) ? assetRepo.value.assetId : 'Awaiting submission';
+  const assetId = (assetRepo && assetRepo.value && assetRepo.value.createdAssetId) ? assetRepo.value.createdAssetId : 'Awaiting submission';
 
   useEffect(() => {
     dispatch(userActions.listUsers());
@@ -54,9 +54,11 @@ export default function AddRepoMetadataDetails() {
       const formValues = addRepoMetadataDialogState.values;
       const metadata = {
         ...formValues,
-        owners: formValues.owners.map(user => user.userId),
-        projects: formValues.projects ? formValues.projects.map(project => project.key) : [],
+        ownerUserIds: formValues.owners.map(user => user.userId),
+        projectKeys: formValues.projects ? formValues.projects.map(project => project.key) : [],
       };
+      delete metadata.owners;
+      delete metadata.projects;
       await dispatch(assetRepoActions.addRepoMetadata(metadata));
       notify.success('Metadata set');
     } catch (error) {

@@ -46,4 +46,23 @@ describe('assetRepoService', () => {
       });
     });
   });
+
+  describe('loadAllAssets', () => {
+    it('should build the correct query and unpack the results', () => {
+      mockClient.prepareSuccess({ centralAssets: 'expectedValue' });
+
+      return assetRepoService.loadAllAssets().then((response) => {
+        expect(response).toEqual('expectedValue');
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+      });
+    });
+
+    it('should throw an error if the query fails', () => {
+      mockClient.prepareFailure('error');
+
+      return assetRepoService.loadAllAssets().catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
 });

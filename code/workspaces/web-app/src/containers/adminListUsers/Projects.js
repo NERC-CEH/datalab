@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { withRouter } from 'react-router-dom';
-import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../adminResources/ResourceAccordion';
+import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../components/common/ResourceAccordion';
 import StackCards from '../../components/stacks/StackCards';
 import { PROJECT_OPEN_PERMISSION, projectToStack } from '../projects/ProjectsContainer';
 import { PROJECT_TYPE_NAME } from '../projects/projectTypeName';

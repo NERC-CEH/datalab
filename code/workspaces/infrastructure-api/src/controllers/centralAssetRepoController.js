@@ -101,13 +101,13 @@ const metadataValidator = () => {
     new ValidationChainHelper(body('masterVersion'))
       .optional()
       .notEmpty(),
-    new ValidationChainHelper(body('owners'))
+    new ValidationChainHelper(body('ownerUserIds'))
       .exists()
       .isArray(),
     new ValidationChainHelper(body('visible'))
       .exists()
       .isIn(centralAssetRepoModel.possibleVisibleValues()),
-    new ValidationChainHelper(body('projects'))
+    new ValidationChainHelper(body('projectKeys'))
       .optional()
       .isArray(),
   ];

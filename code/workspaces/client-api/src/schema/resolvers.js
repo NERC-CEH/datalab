@@ -84,6 +84,11 @@ const resolvers = {
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),
   },
 
+  CentralAssetMetadata: {
+    owners: (obj, args, { token }) => (obj.ownerUserIds ? obj.ownerUserIds.map(userId => ({ userId, name: userService.getUserName(userId, token) })) : []),
+    projects: (obj, args, { token }) => (obj.projectKeys ? obj.projectKeys.map(projectKey => projectService.getProjectByKey(projectKey, token)) : []),
+  },
+
   DataStore: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     users: (obj, args, { user }) => (obj.projectKey

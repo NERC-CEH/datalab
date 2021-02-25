@@ -17,7 +17,7 @@ function loadVisibleAssets(projectKey) {
   const query = `
     CentralAssetsAvailableToProject($projectKey: String!) {
       centralAssetsAvailableToProject(projectKey: $projectKey) {
-        assetId, name, version, fileLocation, visible, projects
+        assetId, name, version, fileLocation, visible, projects {key, name}
       }
     }`;
 
@@ -25,7 +25,20 @@ function loadVisibleAssets(projectKey) {
     .then(errorHandler('data.centralAssetsAvailableToProject'));
 }
 
+function loadAllAssets() {
+  const query = `
+    CentralAssets {
+      centralAssets {
+        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate
+      }
+    }`;
+
+  return gqlQuery(query)
+    .then(errorHandler('data.centralAssets'));
+}
+
 export default {
   addRepoMetadata,
   loadVisibleAssets,
+  loadAllAssets,
 };
