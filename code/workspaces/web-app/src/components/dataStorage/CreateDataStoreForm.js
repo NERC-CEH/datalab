@@ -1,21 +1,12 @@
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { renderTextField, renderSelectField, renderTextArea, CreateFormControls } from '../common/form/controls';
 import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 import { storageCreationAllowedDisplayOptions } from '../../config/storage';
 
 const CreateDataStoreForm = (props) => {
   const { handleSubmit, cancel, submitting } = props;
-  const [storageOptions, setStorageOptions] = useState([]);
-
-  useEffect(() => {
-    async function getOptions() {
-      const options = await storageCreationAllowedDisplayOptions();
-      setStorageOptions(options);
-    }
-    getOptions();
-  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -32,7 +23,7 @@ const CreateDataStoreForm = (props) => {
           label="Storage Type"
           placeholder="Storage Type"
           component={renderSelectField}
-          options={storageOptions} />
+          options={storageCreationAllowedDisplayOptions()} />
       </div>
       <div>
         <Field

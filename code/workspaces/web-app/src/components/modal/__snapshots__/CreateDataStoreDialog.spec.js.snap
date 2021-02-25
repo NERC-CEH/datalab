@@ -34,13 +34,13 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
           getFormState={[Function]}
           initialValues={
             Object {
-              "type": "",
+              "type": "NFS",
             }
           }
           keepDirtyOnReinitialize={false}
           onSubmit={[MockFunction]}
           persistentSubmitErrors={false}
-          projectKey="testproj"
+          projectKey="test-proj"
           pure={true}
           shouldAsyncValidate={[Function]}
           shouldError={[Function]}

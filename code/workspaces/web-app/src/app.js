@@ -8,6 +8,7 @@ import Router from './router';
 import { initialiseAuth } from './config/auth';
 import { initialiseCatalogue } from './config/catalogue';
 import { initialiseImages } from './config/images';
+import { initialiseStorage } from './config/storage';
 import { initialiseVersion } from './config/version';
 
 async function createApplication() {
@@ -16,6 +17,7 @@ async function createApplication() {
     initialiseAuth(),
     initialiseCatalogue(),
     initialiseImages(),
+    initialiseStorage(),
     initialiseVersion(),
   ]);
 

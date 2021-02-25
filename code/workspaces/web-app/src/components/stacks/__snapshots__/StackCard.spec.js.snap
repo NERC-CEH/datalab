@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StackCard creates correct snapshot for Jupyer stack type 1`] = `
+exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
 <div
   className="StackCard-cardDiv-1"
 >
@@ -174,13 +174,13 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
     </div>
     <WithStyles(ForwardRef(Tooltip))
       placement="bottom-start"
-      title="A description of the Data Store purpose"
+      title="Network File System (NFS) volume to store data for Notebooks and Sites."
     >
       <WithStyles(ForwardRef(Typography))
         noWrap={true}
         variant="body1"
       >
-        A description of the Data Store purpose
+        Network File System (NFS) volume to store data for Notebooks and Sites.
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(ForwardRef(Tooltip))>
   </div>
