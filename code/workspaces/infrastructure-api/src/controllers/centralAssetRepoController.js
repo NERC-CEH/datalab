@@ -36,7 +36,7 @@ async function getAssetById(request, response, next) {
   const [asset] = assetArray;
   if (
     asset.visible === PUBLIC
-    || (asset.visible === BY_PROJECT && projectKey && asset.projects.includes(projectKey))
+    || (asset.visible === BY_PROJECT && projectKey && asset.projectKeys.includes(projectKey))
   ) {
     return response.status(200).send(asset);
   }

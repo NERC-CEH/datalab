@@ -150,7 +150,7 @@ describe('getAssetById', () => {
         ...getMinimalMetadata(),
         assetId: 'asset-id',
         visible: BY_PROJECT,
-        projects: [projectKey],
+        projectKeys: [projectKey],
       };
       centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([metadata]);
 
@@ -180,7 +180,7 @@ describe('getAssetById', () => {
         ...getMinimalMetadata(),
         assetId: 'asset-id',
         visible: BY_PROJECT,
-        projects: ['project-with-access'],
+        projectKeys: ['project-with-access'],
       };
       centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([metadata]);
 
