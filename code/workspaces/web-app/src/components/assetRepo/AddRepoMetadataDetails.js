@@ -109,7 +109,6 @@ export default function AddRepoMetadataDetails() {
 // Redux-Form Component
 export function AddRepoMetadata({ handleSubmit, onCancel }) {
   const classes = useStyles();
-  const masterUrlValue = useReduxFormValue(FORM_NAME, 'masterUrl');
   const visibleValue = useReduxFormValue(FORM_NAME, 'visible');
   const assetRepo = useAssetRepo();
   const disabled = !!assetRepo.value.createdAssetId;
@@ -154,13 +153,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
         label="Master URL.  Can be omitted if the asset is only stored in the repo."
         placeholder="https://"
       />
-      {masterUrlValue && masterUrlValue.length > 0
-        && <Field
-            { ...commonProps }
-            name="masterVersion"
-            label="Master version, e.g. a commit ID in a git repo."
-          />
-      }
       <Field
         { ...commonProps }
         name="owners"

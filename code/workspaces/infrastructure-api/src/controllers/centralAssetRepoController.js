@@ -95,9 +95,6 @@ const metadataValidator = () => {
       .optional()
       .notEmpty()
       .isUrl(),
-    new ValidationChainHelper(body('masterVersion'))
-      .optional()
-      .notEmpty(),
     new ValidationChainHelper(body('ownerUserIds'))
       .exists()
       .isArray(),

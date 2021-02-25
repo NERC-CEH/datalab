@@ -363,7 +363,6 @@ type CentralAssetMetadata {
     version: String!
     fileLocation: String
     masterUrl: String
-    masterVersion: String
     owners: [UserDetail]!
     visible: String!
     projects: [Project]
@@ -375,7 +374,6 @@ input CentralAssetMetadataCreationRequest {
     version: String!
     fileLocation: String
     masterUrl: String
-    masterVersion: String
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]

@@ -36,7 +36,7 @@ async function metadataExists(metadata) {
   const checkingFunctions = [
     metadataWithNameVersionCombinationExists,
     metadataWithFileLocationExists,
-    metadataWithMasterUrlMasterVersionCombinationExists,
+    metadataWithMasterUrlVersionCombinationExists,
   ];
   const results = await Promise.all(checkingFunctions.map(fn => fn(metadata)));
   const conflicts = results.flatMap(result => result.conflicts);
@@ -59,15 +59,10 @@ async function metadataWithFileLocationExists({ fileLocation }) {
   return { conflicts };
 }
 
-async function metadataWithMasterUrlMasterVersionCombinationExists({ masterUrl, masterVersion }) {
+async function metadataWithMasterUrlVersionCombinationExists({ masterUrl, version }) {
   const conflicts = [];
-  if (masterUrl && await CentralAssetMetadata().exists({ masterUrl, masterVersion })) {
-    // Don't need masterVersion if masterUrl already uniquely identifies resource so handle it potentially not being there
-    if (masterVersion) {
-      conflicts.push(`Metadata for asset with 'masterUrl:masterVersion' combination '${masterUrl}:${masterVersion}' already exists.`);
-    } else {
-      conflicts.push(`Metadata for asset with masterUrl '${masterUrl}' already exists.`);
-    }
+  if (masterUrl && await CentralAssetMetadata().exists({ masterUrl, version })) {
+    conflicts.push(`Metadata for asset with 'masterUrl:version' combination '${masterUrl}:${version}' already exists.`);
   }
   return { conflicts };
 }
