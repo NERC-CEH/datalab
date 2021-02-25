@@ -3,20 +3,23 @@ import { getSiteInfo } from '../../config/images';
 
 jest.mock('../../actions/internalNameCheckerActions');
 jest.mock('../../config/images');
+getSiteInfo.mockReturnValue({
+  rshiny: { displayName: 'RShiny' },
+});
 
 const NAME_FIELD_NAME = 'name';
 const TYPE_FIELD_NAME = 'type';
 
-const componentProps = { projectKey: 'testproj' };
+const componentProps = { projectKey: 'test-proj' };
 
 describe('New Site Form Validator', () => {
   describe('syncValidate', () => {
     it('should return empty errors object for valid form', () => {
       const values = {
         displayName: 'Display Name',
-        type: 'jupyter',
+        type: 'rshiny',
         name: 'name',
-        description: 'The notebook description',
+        description: 'The site description',
         sourcePath: 'path',
         volumeMount: 'dataStore',
         visible: 'private',
@@ -27,6 +30,20 @@ describe('New Site Form Validator', () => {
 
     it('should return correct errors for empty form', () => {
       const values = {};
+      expect(syncValidate(values)).toMatchSnapshot();
+    });
+
+    it('should return correct error for invalid type', () => {
+      const values = {
+        displayName: 'Display Name',
+        type: 'no-such-type',
+        name: 'name',
+        description: 'The site description',
+        sourcePath: 'path',
+        volumeMount: 'dataStore',
+        visible: 'private',
+      };
+
       expect(syncValidate(values)).toMatchSnapshot();
     });
   });
@@ -59,20 +76,6 @@ describe('New Site Form Validator', () => {
         return asyncValidate(values, dispatch, componentProps, NAME_FIELD_NAME)
           .then(() => expect(true).toBe(false)) // fail test if no error thrown
           .catch(error => expect(error).toEqual({ [NAME_FIELD_NAME]: 'Another resource is already using this name and names must be unique.' }));
-      });
-    });
-
-    describe('validate type', () => {
-      getSiteInfo.mockResolvedValue({
-        RSHINY: { displayName: 'RShiny' },
-      });
-
-      it('should return a rejected promise for async errors', () => {
-        const values = { [TYPE_FIELD_NAME]: 'invalidType' };
-
-        return asyncValidate(values, jest.fn().mockName('dispatch'), componentProps, TYPE_FIELD_NAME)
-          .then(() => expect(true).toBe(false)) // fail test if no error thrown
-          .catch(error => expect(error).toEqual({ type: 'Type must be one of RSHINY' }));
       });
     });
   });

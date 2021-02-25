@@ -3,11 +3,15 @@ import { getNotebookInfo } from '../../config/images';
 
 jest.mock('../../actions/internalNameCheckerActions');
 jest.mock('../../config/images');
+getNotebookInfo.mockReturnValue({
+  jupyter: { displayName: 'Jupyter' },
+  rstudio: { displayName: 'RStudio' },
+});
 
 const NAME_FIELD_NAME = 'name';
 const TYPE_FIELD_NAME = 'type';
 
-const componentProps = { projectKey: 'testproj' };
+const componentProps = { projectKey: 'test-proj' };
 
 describe('New Notebook Form Validator', () => {
   describe('syncValidate', () => {
@@ -55,6 +59,19 @@ describe('New Notebook Form Validator', () => {
 
       expect(syncValidate(values)).toMatchSnapshot();
     });
+
+    it('should return correct error for invalid type', () => {
+      const values = {
+        displayName: 'Display Name',
+        type: 'no-such-type',
+        name: 'name',
+        volumeMount: 'dataStore',
+        description: 'The notebook description',
+        shared: 'private',
+      };
+
+      expect(syncValidate(values)).toMatchSnapshot();
+    });
   });
 
   describe('asyncValidate', () => {
@@ -90,22 +107,6 @@ describe('New Notebook Form Validator', () => {
         return asyncValidate(values, dispatch, componentProps, NAME_FIELD_NAME)
           .then(() => expect(true).toBe(false)) // fail test if no error thrown
           .catch(error => expect(error).toEqual({ name: 'Another resource is already using this name and names must be unique.' }));
-      });
-    });
-
-    describe('validate type', () => {
-      const notebookInfo = {
-        JUPYTER: { displayName: 'Jupyter' },
-        RSTUDIO: { displayName: 'RStudio' },
-      };
-      getNotebookInfo.mockResolvedValue(notebookInfo);
-
-      it('should return rejected promise for async errors', () => {
-        const values = { [TYPE_FIELD_NAME]: 'invalidType' };
-
-        return asyncValidate(values, jest.fn().mockName('dispatch'), {}, TYPE_FIELD_NAME)
-          .then(() => expect(true).toBe(false)) // fail test if no error thrown
-          .catch(error => expect(error).toEqual({ type: 'Type must be one of JUPYTER,RSTUDIO' }));
       });
     });
   });

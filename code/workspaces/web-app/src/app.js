@@ -7,6 +7,7 @@ import theme from './theme';
 import Router from './router';
 import { initialiseAuth } from './config/auth';
 import { initialiseCatalogue } from './config/catalogue';
+import { initialiseImages } from './config/images';
 import { initialiseVersion } from './config/version';
 
 async function createApplication() {
@@ -14,6 +15,7 @@ async function createApplication() {
   await Promise.all([
     initialiseAuth(),
     initialiseCatalogue(),
+    initialiseImages(),
     initialiseVersion(),
   ]);
 

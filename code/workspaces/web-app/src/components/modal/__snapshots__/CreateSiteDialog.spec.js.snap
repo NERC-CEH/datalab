@@ -46,7 +46,14 @@ exports[`Site dialog creates correct snapshot 1`] = `
         submitAsSideEffect={false}
         touchOnBlur={true}
         touchOnChange={false}
-        typeOptions={Array []}
+        typeOptions={
+          Array [
+            Object {
+              "text": "NBViewer",
+              "value": "nbviewer",
+            },
+          ]
+        }
         updateUnregisteredFields={false}
         validate={[Function]}
         versionOptions={Array []}
