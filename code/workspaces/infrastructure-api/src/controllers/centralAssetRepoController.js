@@ -71,9 +71,6 @@ const metadataValidator = () => {
     new ValidationChainHelper(body('version'))
       .exists()
       .notEmpty(),
-    new ValidationChainHelper(body('type'))
-      .exists()
-      .isIn(centralAssetRepoModel.possibleTypeValues()),
     new ValidationChainHelper(body('fileLocation'))
       .optional()
       .notEmpty(),

@@ -361,7 +361,6 @@ type CentralAssetMetadata {
     assetId: String!
     name: String!
     version: String!
-    type: String!
     fileLocation: String
     masterUrl: String
     masterVersion: String
@@ -374,7 +373,6 @@ type CentralAssetMetadata {
 input CentralAssetMetadataCreationRequest {
     name: String!
     version: String!
-    type: String!
     fileLocation: String
     masterUrl: String
     masterVersion: String
