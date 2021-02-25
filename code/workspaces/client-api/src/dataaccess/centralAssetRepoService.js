@@ -26,7 +26,15 @@ async function listCentralAssets(token) {
 
 async function listCentralAssetsAvailableToProject(projectKey, token) {
   const { data } = await infrastructureApi().get(
-    `/metadata/${projectKey}`,
+    `/metadata?projectKey=${projectKey}`,
+    generateRequestConfig(token),
+  );
+  return data;
+}
+
+async function getAssetByIdAndProjectKey(assetId, projectKey, token) {
+  const { data } = await infrastructureApi().get(
+    `/metadata/${assetId}?projectKey=${projectKey}`,
     generateRequestConfig(token),
   );
   return data;
@@ -62,4 +70,5 @@ export default {
   createAssetMetadata: wrapWithAxiosErrorWrapper('Error creating metadata.', createAssetMetadata),
   listCentralAssets: wrapWithAxiosErrorWrapper('Error listing metadata.', listCentralAssets),
   listCentralAssetsAvailableToProject: wrapWithAxiosErrorWrapper('Error listing metadata from project.', listCentralAssetsAvailableToProject),
+  getAssetByIdAndProjectKey: wrapWithAxiosErrorWrapper('Error getting metadata by assetId and projectKey', getAssetByIdAndProjectKey),
 };

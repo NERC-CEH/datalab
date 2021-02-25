@@ -17,17 +17,23 @@ centralAssetRepoRouter.post(
   errorWrapper(centralAssetRepo.createAssetMetadata),
 );
 
+// Use /metadata?projectKey=<projectKey value> to filter by metadata available to project
+// When projectKey query added, user's project permissions are checked, otherwise requires system permission to access
 centralAssetRepoRouter.get(
   '/metadata',
-  permissionMiddleware(SYSTEM_DATA_MANAGER),
+  permissionMiddleware(PROJECT_KEY_STACKS_CREATE, SYSTEM_DATA_MANAGER),
+  centralAssetRepo.optionalProjectKeyQueryValidator(),
   errorWrapper(centralAssetRepo.listAssetMetadata),
 );
 
+// Use /metadata/:assetId?projectKey=<projectKey value> to filter by metadata available to project
+// When projectKey query added, user's project permissions are checked, otherwise requires system permission to access
 centralAssetRepoRouter.get(
-  '/metadata/:projectKey',
+  '/metadata/:assetId',
   permissionMiddleware(PROJECT_KEY_STACKS_CREATE, SYSTEM_DATA_MANAGER),
-  centralAssetRepo.listByProjectKeyValidator(),
-  errorWrapper(centralAssetRepo.assetMetadataAvailableToProject),
+  centralAssetRepo.assetIdValidator(),
+  centralAssetRepo.optionalProjectKeyQueryValidator(),
+  errorWrapper(centralAssetRepo.getAssetById),
 );
 
 export default centralAssetRepoRouter;

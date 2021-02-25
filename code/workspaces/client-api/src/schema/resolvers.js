@@ -98,10 +98,11 @@ const resolvers = {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     redirectUrl: (obj, args, { token }) => stackUrlService(obj.projectKey, obj, token),
     category: obj => (obj.category ? obj.category.toUpperCase() : null),
-    // TODO - replace this with actual assets owned by the stack
-    assets: () => ([
-      { assetId: 'asset-1', name: 'Test asset 1', version: '0.1', fileLocation: '/file/path1' },
-    ]),
+    assets: async ({ projectKey, assetIds }, args, { token }) => {
+      const assetMetadataRequests = assetIds
+        .map(id => centralAssetRepoService.getAssetByIdAndProjectKey(id, projectKey, token));
+      return Promise.all(assetMetadataRequests);
+    },
   },
 
   Project: {

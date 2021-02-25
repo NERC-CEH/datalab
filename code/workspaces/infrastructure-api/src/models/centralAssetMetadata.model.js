@@ -4,8 +4,11 @@ import { assetTypes } from 'common/src/config/catalogue';
 
 const modelName = 'CentralAssetMetadata';
 
+const PUBLIC = 'PUBLIC';
+const BY_PROJECT = 'BY_PROJECT';
+
+const possibleVisibleValues = () => [PUBLIC, BY_PROJECT];
 const possibleTypeValues = () => assetTypes();
-const possibleVisibleValues = () => ['PUBLIC', 'BY_PROJECT'];
 
 const { Schema } = mongoose;
 
@@ -26,4 +29,4 @@ const CentralAssetMetadataSchema = new Schema({
 
 mongoose.model(modelName, CentralAssetMetadataSchema);
 
-export default { modelName, possibleTypeValues, possibleVisibleValues };
+export default { modelName, possibleTypeValues, possibleVisibleValues, PUBLIC, BY_PROJECT };
