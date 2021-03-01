@@ -122,12 +122,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
     InputLabelProps: { shrink: true },
   };
 
-  const typeOptions = [
-    { value: 'DATA', text: 'Data set' },
-    { value: 'NOTEBOOK', text: 'Notebook' },
-    { value: 'SNIPPET', text: 'Snippet' },
-  ];
-
   const visibleOptions = [
     { value: 'PUBLIC', text: 'Public: Asset will be visible to all projects' },
     { value: 'BY_PROJECT', text: 'By project: Asset is only visible to selected projects' },
@@ -147,13 +141,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
         { ...commonProps }
         name="version"
         label="Version"
-      />
-      <Field
-        { ...commonProps }
-        name="type"
-        label="Type"
-        component={renderSelectField}
-        options={typeOptions}
       />
       <Field
         { ...commonProps }

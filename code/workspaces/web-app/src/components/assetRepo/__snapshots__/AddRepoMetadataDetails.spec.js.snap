@@ -40,35 +40,6 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
     className="makeStyles-input-2"
     component={[Function]}
     disabled={false}
-    label="Type"
-    margin="dense"
-    name="type"
-    options={
-      Array [
-        Object {
-          "text": "Data set",
-          "value": "DATA",
-        },
-        Object {
-          "text": "Notebook",
-          "value": "NOTEBOOK",
-        },
-        Object {
-          "text": "Snippet",
-          "value": "SNIPPET",
-        },
-      ]
-    }
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
     label="File location on server.  Can be omitted if the repo is not hosting a local copy."
     margin="dense"
     name="fileLocation"

@@ -20,7 +20,6 @@ const { PUBLIC, BY_PROJECT } = centralAssetRepoModel;
 const getMinimalMetadata = () => ({
   name: 'Test Metadata',
   version: '0.1.0',
-  type: 'DATA',
   ownerUserIds: [],
   visible: PUBLIC,
   fileLocation: 'path/to/file',
