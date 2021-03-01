@@ -104,18 +104,11 @@ describe('metadataExists', () => {
       expect(response.conflicts).toEqual(["Metadata for asset with fileLocation 'test/file/location' already exists."]);
     });
 
-    it('same masterUrl and no masterVersion already exists', async () => {
-      const metadata = { masterUrl: 'masterUrl', masterVersion: undefined };
+    it('same masterUrl and version combination exists', async () => {
+      const metadata = { masterUrl: 'masterUrl', version: 'version' };
       centralAssetMetadataModelMock.exists.mockResolvedValueOnce(true);
       const response = await metadataExists(metadata);
-      expect(response.conflicts).toEqual(["Metadata for asset with masterUrl 'masterUrl' already exists."]);
-    });
-
-    it('same masterUrl and masterVersion combination exists', async () => {
-      const metadata = { masterUrl: 'masterUrl', masterVersion: 'masterVersion' };
-      centralAssetMetadataModelMock.exists.mockResolvedValueOnce(true);
-      const response = await metadataExists(metadata);
-      expect(response.conflicts).toEqual(["Metadata for asset with 'masterUrl:masterVersion' combination 'masterUrl:masterVersion' already exists."]);
+      expect(response.conflicts).toEqual(["Metadata for asset with 'masterUrl:version' combination 'masterUrl:version' already exists."]);
     });
   });
 });
