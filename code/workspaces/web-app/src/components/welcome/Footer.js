@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { getVersion } from '../../version';
+import { getVersion } from '../../config/version';
 import logo from '../../assets/images/datalabs-mono.png';
 import theme from '../../theme';
 

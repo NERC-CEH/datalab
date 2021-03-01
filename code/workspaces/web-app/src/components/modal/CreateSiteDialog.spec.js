@@ -1,8 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CreateSiteDialog from './CreateSiteDialog';
+import { getSiteInfo } from '../../config/images';
 
 jest.mock('../../hooks/reduxFormHooks');
+jest.mock('../../config/images');
+getSiteInfo.mockReturnValue({
+  nbviewer: {
+    displayName: 'NBViewer',
+  },
+});
 
 describe('Site dialog', () => {
   function shallowRender(props) {
@@ -21,8 +28,6 @@ describe('Site dialog', () => {
       { value: 'another value' },
     ],
   });
-
-  beforeEach(() => jest.resetAllMocks());
 
   it('creates correct snapshot', () => {
     // Arrange

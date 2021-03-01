@@ -21,74 +21,58 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
         Filter
       </span>
     </div>
-    <PromisedContentSkeletonWrapper
-      promises={
-        Object {
-          "fetching": false,
-          "value": false,
-        }
-      }
-      skeletonComponent={[Function]}
-      skeletonProps={
-        Object {
-          "columns": 4,
-          "rows": 3,
-        }
-      }
+    <div
+      className="makeStyles-filterColumn-2"
     >
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Instance admin"
-          name="instanceAdmin"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Data manager"
-          name="dataManager"
-        />
-      </div>
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Project admin"
-          name="projectAdmin"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Project user"
-          name="projectUser"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Project viewer"
-          name="projectViewer"
-        />
-      </div>
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Site owner"
-          name="siteOwner"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Notebook owner"
-          name="notebookOwner"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Storage access"
-          name="storageAccess"
-        />
-      </div>
-    </PromisedContentSkeletonWrapper>
+      <FilterCheckBox
+        checked={false}
+        label="Instance admin"
+        name="instanceAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Data manager"
+        name="dataManager"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Project admin"
+        name="projectAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Project user"
+        name="projectUser"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Project viewer"
+        name="projectViewer"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Site owner"
+        name="siteOwner"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Notebook owner"
+        name="notebookOwner"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Storage access"
+        name="storageAccess"
+      />
+    </div>
   </div>
   <div>
     <PromisedContentWrapper
@@ -233,93 +217,77 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
         Filter
       </span>
     </div>
-    <PromisedContentSkeletonWrapper
-      promises={
-        Object {
-          "fetching": false,
-          "value": true,
-        }
-      }
-      skeletonComponent={[Function]}
-      skeletonProps={
-        Object {
-          "columns": 4,
-          "rows": 3,
-        }
-      }
+    <div
+      className="makeStyles-filterColumn-2"
     >
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Instance admin"
-          name="instanceAdmin"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Data manager"
-          name="dataManager"
-        />
-      </div>
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Catalogue admin"
-          name="catalogueAdmin"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Catalogue publisher"
-          name="cataloguePublisher"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Catalogue editor"
-          name="catalogueEditor"
-        />
-      </div>
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Project admin"
-          name="projectAdmin"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Project user"
-          name="projectUser"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Project viewer"
-          name="projectViewer"
-        />
-      </div>
-      <div
-        className="makeStyles-filterColumn-2"
-      >
-        <FilterCheckBox
-          checked={false}
-          label="Site owner"
-          name="siteOwner"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Notebook owner"
-          name="notebookOwner"
-        />
-        <FilterCheckBox
-          checked={false}
-          label="Storage access"
-          name="storageAccess"
-        />
-      </div>
-    </PromisedContentSkeletonWrapper>
+      <FilterCheckBox
+        checked={false}
+        label="Instance admin"
+        name="instanceAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Data manager"
+        name="dataManager"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Catalogue admin"
+        name="catalogueAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Catalogue publisher"
+        name="cataloguePublisher"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Catalogue editor"
+        name="catalogueEditor"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Project admin"
+        name="projectAdmin"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Project user"
+        name="projectUser"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Project viewer"
+        name="projectViewer"
+      />
+    </div>
+    <div
+      className="makeStyles-filterColumn-2"
+    >
+      <FilterCheckBox
+        checked={false}
+        label="Site owner"
+        name="siteOwner"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Notebook owner"
+        name="notebookOwner"
+      />
+      <FilterCheckBox
+        checked={false}
+        label="Storage access"
+        name="storageAccess"
+      />
+    </div>
   </div>
   <div>
     <PromisedContentWrapper

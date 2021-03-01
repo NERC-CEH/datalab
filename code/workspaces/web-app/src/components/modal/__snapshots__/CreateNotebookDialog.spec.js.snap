@@ -48,7 +48,14 @@ exports[`Notebook dialog creates correct snapshot 1`] = `
         submitAsSideEffect={false}
         touchOnBlur={true}
         touchOnChange={false}
-        typeOptions={Array []}
+        typeOptions={
+          Array [
+            Object {
+              "text": "JupyterLab",
+              "value": "jupyterLab",
+            },
+          ]
+        }
         updateUnregisteredFields={false}
         validate={[Function]}
         versionOptions={Array []}

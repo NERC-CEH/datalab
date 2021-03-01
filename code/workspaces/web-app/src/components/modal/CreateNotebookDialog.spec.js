@@ -1,8 +1,15 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import CreateNotebookDialog from './CreateNotebookDialog';
+import { getNotebookInfo } from '../../config/images';
 
 jest.mock('../../hooks/reduxFormHooks');
+jest.mock('../../config/images');
+getNotebookInfo.mockReturnValue({
+  jupyterLab: {
+    displayName: 'JupyterLab',
+  },
+});
 
 describe('Notebook dialog', () => {
   let shallow;
@@ -27,8 +34,6 @@ describe('Notebook dialog', () => {
       { value: 'another value' },
     ],
   });
-
-  beforeEach(() => jest.resetAllMocks());
 
   it('creates correct snapshot', () => {
     // Arrange

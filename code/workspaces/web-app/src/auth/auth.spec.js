@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { PureAuth } from './auth';
+import Auth from './auth';
 import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
 jest.mock('../core/sessionUtil');
@@ -33,7 +33,7 @@ const MockAuth = {
   parseHashAsync: () => Promise.resolve(window.location.hash),
 };
 
-const auth = new PureAuth(MockAuth, MockAuth, authConfig);
+const auth = new Auth(MockAuth, MockAuth, authConfig);
 
 describe('auth', () => {
   beforeEach(() => {

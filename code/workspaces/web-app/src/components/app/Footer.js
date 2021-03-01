@@ -2,7 +2,7 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { getVersion } from '../../version';
+import { getVersion } from '../../config/version';
 
 const styles = theme => ({
   divider: {

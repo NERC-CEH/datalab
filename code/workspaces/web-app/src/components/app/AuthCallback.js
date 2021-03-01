@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { replace } from 'connected-react-router';
 import { useLocation } from 'react-router';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/auth';
 import authActions from '../../actions/authActions';
 
 export const handleAuth = async (searchUrl, routeTo, dispatch) => {

@@ -3,7 +3,7 @@ import Menu from '@material-ui/core/Menu';
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { statusTypes } from 'common';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import PermissionWrapper from '../../common/ComponentPermissionWrapper';
@@ -30,20 +30,11 @@ const styles = theme => ({
 
 const StackCardActions = (props) => {
   const { stack } = props;
-
   const currentUserId = useCurrentUserId();
-
-  const [userActions, setUserActions] = useState({});
-  useEffect(() => {
-    const getUserActions = async () => {
-      setUserActions(await getUserActionsForType(stack.type));
-    };
-    getUserActions();
-  }, [stack.type]);
 
   return <PureStackCardActions
     currentUserId={currentUserId}
-    userActions={userActions}
+    userActions={getUserActionsForType(stack.type)}
     {...props}
   />;
 };

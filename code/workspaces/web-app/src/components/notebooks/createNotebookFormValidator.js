@@ -3,7 +3,7 @@ import internalNameCheckerActions from '../../actions/internalNameCheckerActions
 import { getNotebookInfo } from '../../config/images';
 import { editConstraints } from './editNotebookFormValidator';
 
-const constraints = {
+const constraints = () => ({
   ...editConstraints,
   name: {
     presence: true,
@@ -29,7 +29,13 @@ const constraints = {
       allowEmpty: false,
     },
   },
-};
+  type: {
+    presence: {
+      allowEmpty: false,
+    },
+    inclusion: Object.keys(getNotebookInfo()),
+  },
+});
 
 validate.formatters.reduxForm = errors => errors.reduce(errorReducer, {});
 
@@ -38,7 +44,7 @@ function errorReducer(accumulator, error) {
   return accumulator;
 }
 
-export const syncValidate = values => validate(values, constraints, { format: 'reduxForm' });
+export const syncValidate = values => validate(values, constraints(), { format: 'reduxForm' });
 
 // disable no throw literal for async validation options as need to throw objects for
 // redux form validation
@@ -56,19 +62,11 @@ const asyncValidateName = async (values, dispatch, projectKey) => {
   }
 };
 
-const asyncValidateType = async (values) => {
-  const validTypes = Object.keys(await getNotebookInfo());
-  if (!validTypes.includes(values.type)) {
-    throw { type: `Type must be one of ${validTypes}` };
-  }
-};
-
 /* eslint-enable no-throw-literal */
 
 // Catch statement added to prevent submission of creation request without passing uniqueness check.
 export const getAsyncValidate = (nameFieldName, typeFieldName) => async (values, dispatch, { projectKey }, blurredField) => {
   let result;
   if (blurredField === nameFieldName) result = asyncValidateName(values, dispatch, projectKey);
-  if (blurredField === typeFieldName) result = asyncValidateType(values);
   return result;
 };
