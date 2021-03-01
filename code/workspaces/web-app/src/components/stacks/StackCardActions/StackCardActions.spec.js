@@ -2,8 +2,11 @@ import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import StackCardActions, { PureStackCardActions } from './StackCardActions';
+import { getUserActionsForType } from '../../../config/images';
 
 jest.mock('../../../hooks/authHooks');
+jest.mock('../../../config/images');
+getUserActionsForType.mockReturnValue([]);
 
 const openStackMock = jest.fn();
 const deleteStackMock = jest.fn();

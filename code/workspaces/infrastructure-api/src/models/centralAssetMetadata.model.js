@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 import { v4 as uuid } from 'uuid';
 
 const modelName = 'CentralAssetMetadata';
-const possibleVisibleValues = () => ['PUBLIC', 'BY_PROJECT'];
+
+const PUBLIC = 'PUBLIC';
+const BY_PROJECT = 'BY_PROJECT';
+const possibleVisibleValues = () => [PUBLIC, BY_PROJECT];
 
 const { Schema } = mongoose;
 
@@ -22,4 +25,4 @@ const CentralAssetMetadataSchema = new Schema({
 
 mongoose.model(modelName, CentralAssetMetadataSchema);
 
-export default { modelName, possibleVisibleValues };
+export default { modelName, possibleVisibleValues, PUBLIC, BY_PROJECT };

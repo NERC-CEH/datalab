@@ -1,42 +1,22 @@
 import axios from 'axios';
 
+// This is a cached value.
+// Initialise asynchronously before React starts.
+// Get synchronously within React.
 let cachedData;
 
-async function storageConfig() {
-  if (cachedData) {
-    return cachedData;
-  }
-
+async function initialiseStorage() {
   const { data } = await axios.get('/storage_config.json');
   cachedData = data;
-  return cachedData;
 }
 
-export async function storageTypes() {
-  const data = await storageConfig();
-  return Object.keys(data.types);
-}
+const storageCreationDefaultType = () => cachedData.creationOptions.defaultType;
+const storageDisplayValue = type => cachedData.types[type].displayValue;
+const storageDescription = type => cachedData.types[type].description;
+const storageCreationAllowedDisplayOptions = () => cachedData.creationOptions.allowedTypes
+  .map(type => ({
+    text: cachedData.types[type].displayValue,
+    value: type,
+  }));
 
-export async function storageCreationDefaultType() {
-  const data = await storageConfig();
-  return data.creationOptions.defaultType;
-}
-
-export async function storageCreationAllowedDisplayOptions() {
-  const data = await storageConfig();
-  return data.creationOptions.allowedTypes
-    .map(type => ({
-      text: data.types[type].displayValue,
-      value: type,
-    }));
-}
-
-export async function storageDisplayValue(type) {
-  const data = await storageConfig();
-  return data.types[type].displayValue;
-}
-
-export async function storageDescription(type) {
-  const data = await storageConfig();
-  return data.types[type].description;
-}
+export { initialiseStorage, storageCreationDefaultType, storageCreationAllowedDisplayOptions, storageDisplayValue, storageDescription };

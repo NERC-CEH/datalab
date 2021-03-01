@@ -9,6 +9,7 @@ const mockValidationChain = {
   isIn: mockValidationChainMethod(),
   isLength: mockValidationChainMethod(),
   isURL: mockValidationChainMethod(),
+  isUUID: mockValidationChainMethod(),
   withMessage: mockValidationChainMethod(),
 };
 
@@ -97,6 +98,21 @@ describe('ValidationChainHelper', () => {
     it('returns itself to allow for chaining', () => {
       const helper = new ValidationChainHelper(mockValidationChain);
       const returnValue = helper.isUrl();
+      expect(returnValue).toBe(helper);
+    });
+  });
+
+  describe('isUUIDv4', () => {
+    it('calls isUUID with correct argument and withMessage with correct argument on internal validation chain', () => {
+      const helper = new ValidationChainHelper(mockValidationChain);
+      helper.isUUIDv4();
+      expect(mockValidationChain.isUUID).toHaveBeenCalledWith(4);
+      expect(mockValidationChain.withMessage).toHaveBeenCalledWith('Value must be formatted as a v4 UUID.');
+    });
+
+    it('returns itself to allow for chaining', () => {
+      const helper = new ValidationChainHelper(mockValidationChain);
+      const returnValue = helper.isUUIDv4();
       expect(returnValue).toBe(helper);
     });
   });

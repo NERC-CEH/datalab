@@ -1,9 +1,9 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import NavBar from './NavBar';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/auth';
 
-jest.mock('../../auth/auth');
+jest.mock('../../config/auth');
 getAuth.mockImplementation(() => ({
   login: jest.fn(),
 }));

@@ -31,45 +31,29 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         <div
           className="makeStyles-systemRoles-5"
         >
-          <PromisedContentSkeletonWrapper
-            promises={
-              Object {
-                "fetching": false,
-                "value": true,
-              }
+          <SystemCheckbox
+            checked={true}
+            disabled={false}
+            label="Instance admin"
+            name="instanceAdmin"
+          />
+          <SystemCheckbox
+            checked={true}
+            label="Data manager"
+            name="dataManager"
+          />
+          <SystemSelect
+            itemPrefix="Catalogue"
+            items={
+              Array [
+                "admin",
+                "publisher",
+                "editor",
+                "user",
+              ]
             }
-            skeletonComponent={[Function]}
-            skeletonProps={
-              Object {
-                "columns": 2,
-                "rows": 1,
-              }
-            }
-          >
-            <SystemCheckbox
-              checked={true}
-              disabled={false}
-              label="Instance admin"
-              name="instanceAdmin"
-            />
-            <SystemCheckbox
-              checked={true}
-              label="Data manager"
-              name="dataManager"
-            />
-            <SystemSelect
-              itemPrefix="Catalogue"
-              items={
-                Array [
-                  "admin",
-                  "publisher",
-                  "editor",
-                  "user",
-                ]
-              }
-              name="catalogue"
-            />
-          </PromisedContentSkeletonWrapper>
+            name="catalogue"
+          />
         </div>
         <Pagination
           items={
@@ -165,33 +149,17 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         <div
           className="makeStyles-systemRoles-5"
         >
-          <PromisedContentSkeletonWrapper
-            promises={
-              Object {
-                "fetching": false,
-                "value": false,
-              }
-            }
-            skeletonComponent={[Function]}
-            skeletonProps={
-              Object {
-                "columns": 2,
-                "rows": 1,
-              }
-            }
-          >
-            <SystemCheckbox
-              checked={true}
-              disabled={false}
-              label="Instance admin"
-              name="instanceAdmin"
-            />
-            <SystemCheckbox
-              checked={true}
-              label="Data manager"
-              name="dataManager"
-            />
-          </PromisedContentSkeletonWrapper>
+          <SystemCheckbox
+            checked={true}
+            disabled={false}
+            label="Instance admin"
+            name="instanceAdmin"
+          />
+          <SystemCheckbox
+            checked={true}
+            label="Data manager"
+            name="dataManager"
+          />
         </div>
         <Pagination
           items={

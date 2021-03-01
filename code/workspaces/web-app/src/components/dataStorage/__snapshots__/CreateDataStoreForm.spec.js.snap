@@ -15,7 +15,14 @@ exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form
       component={[Function]}
       label="Storage Type"
       name="type"
-      options={Array []}
+      options={
+        Object {
+          "NFS": Object {
+            "text": "NFS",
+            "value": "NFS",
+          },
+        }
+      }
       placeholder="Storage Type"
     />
   </div>

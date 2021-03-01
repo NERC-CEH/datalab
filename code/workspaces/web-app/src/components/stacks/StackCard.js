@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import ResourceInfoSpan from '../common/typography/ResourceInfoSpan';
@@ -91,33 +91,9 @@ function styles(theme) {
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
   userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack }) => {
-  const [storeDisplayValue, setStoreDisplayValue] = useState('');
-  const [description, setDescription] = useState(getDescription(stack, typeName));
   const users = useUsers();
-
-  useEffect(() => {
-    async function getStorageDisplayValue() {
-      const text = await storageDisplayValue(stack.type);
-      setStoreDisplayValue(text);
-    }
-    if (typeName === STORAGE_TYPE_NAME && stack.type) {
-      getStorageDisplayValue();
-    }
-  }, [typeName, stack.type]);
-
-  useEffect(() => {
-    async function getStorageDescription() {
-      const text = await storageDescription(stack.type);
-      setDescription(text);
-    }
-    if (stack.description) {
-      setDescription(stack.description);
-    } else if (typeName === STORAGE_TYPE_NAME && stack.type) {
-      getStorageDescription(stack.type);
-    } else {
-      setDescription(getDescription(stack, typeName));
-    }
-  }, [typeName, stack]);
+  const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
+  const description = getDescription(stack, typeName);
 
   const ResourceInfo = () => {
     if (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME) {
@@ -228,6 +204,8 @@ function generateGetImage(classes, typeName) {
 function getDescription(stack, typeName) {
   if (stack.description) {
     return stack.description;
+  } if (typeName === STORAGE_TYPE_NAME && stack.type) {
+    return storageDescription(stack.type);
   } if (stackDescriptions[stack.type]) {
     return stackDescriptions[stack.type].description;
   }

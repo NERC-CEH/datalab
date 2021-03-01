@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth returns correct configuration 1`] = `
+Object {
+  "oidc": Object {
+    "userManager": Object {
+      "authority": "https://mjbr.eu.auth0.com",
+      "automaticSilentRenew": true,
+      "client_id": "Xf62MEzjqxfaId1DVWnFul61D9oA3eMt",
+      "extraQueryParams": Object {
+        "audience": "https://datalab.datalabs.nerc.ac.uk/api",
+      },
+      "filterProtocolClaims": true,
+      "loadUserInfo": true,
+      "metadata": Object {
+        "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
+        "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://testlab.datalabs.localhost/&client_id=Xf62MEzjqxfaId1DVWnFul61D9oA3eMt",
+        "issuer": "https://mjbr.eu.auth0.com/",
+        "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
+        "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token",
+        "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
+      },
+      "redirect_uri": "http://localhost/callback",
+      "response_type": "code",
+      "scope": "openid profile",
+      "silent_redirect_uri": "http://localhost/silent_callback",
+    },
+  },
+  "signUp": Object {
+    "requestEmail": "appsupport@ceh.ac.uk",
+    "selfService": true,
+  },
+}
+`;

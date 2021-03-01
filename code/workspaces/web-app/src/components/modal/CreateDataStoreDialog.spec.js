@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CreateDataStoreDialog from './CreateDataStoreDialog';
+import { storageCreationDefaultType } from '../../config/storage';
+
+jest.mock('../../config/storage');
+storageCreationDefaultType.mockReturnValue('NFS');
 
 describe('CreateDataStoreDialog dialog', () => {
   function shallowRender(props) {
@@ -15,10 +19,8 @@ describe('CreateDataStoreDialog dialog', () => {
     notebook: { displayName: 'Name' },
     onSubmit: onSubmitMock,
     onCancel: onCancelMock,
-    projectKey: 'testproj',
+    projectKey: 'test-proj',
   });
-
-  beforeEach(() => jest.resetAllMocks());
 
   it('creates correct snapshot', () => {
     // Arrange

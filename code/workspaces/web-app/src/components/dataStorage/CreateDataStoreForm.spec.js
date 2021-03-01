@@ -1,6 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PureCreateDataStoreForm } from './CreateDataStoreForm';
+import { storageCreationAllowedDisplayOptions } from '../../config/storage';
+
+jest.mock('../../config/storage');
+storageCreationAllowedDisplayOptions.mockReturnValue({
+  NFS: {
+    text: 'NFS',
+    value: 'NFS',
+  },
+});
 
 describe('CreateDataStoreForm', () => {
   function shallowRender(props) {
@@ -13,10 +22,8 @@ describe('CreateDataStoreForm', () => {
   const generateProps = () => ({
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
-    projectKey: 'testproj',
+    projectKey: 'test-proj',
   });
-
-  beforeEach(() => jest.resetAllMocks());
 
   it('creates correct snapshot for create Data Store Form', () => {
     // Arrange

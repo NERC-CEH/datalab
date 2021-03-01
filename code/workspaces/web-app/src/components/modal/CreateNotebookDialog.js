@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -16,18 +16,8 @@ const styles = theme => ({
 });
 
 const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, classes, projectKey }) => {
-  const [notebookOptions, setNotebookOptions] = useState({});
-
-  useEffect(() => {
-    async function getNotebookOptions() {
-      const options = await getNotebookInfo();
-      setNotebookOptions(options);
-    }
-    getNotebookOptions();
-  }, []);
-
   const notebookTypeValue = useReduxFormValue(FORM_NAME, TYPE_FIELD_NAME);
-  const versionOptions = getVersionOptions(notebookOptions, notebookTypeValue);
+  const versionOptions = getVersionOptions(getNotebookInfo(), notebookTypeValue);
 
   return (
     <Dialog open={true} maxWidth="md">
@@ -39,7 +29,7 @@ const CreateNotebookDialog = ({ title, onSubmit, onCancel, dataStorageOptions, c
             cancel={onCancel}
             dataStorageOptions={dataStorageOptions}
             projectKey={projectKey}
-            typeOptions={getTypeOptions(notebookOptions)}
+            typeOptions={getTypeOptions(getNotebookInfo())}
             versionOptions={versionOptions}
             onChange={updateVersionOnTypeChange(FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME, versionOptions)}
           />

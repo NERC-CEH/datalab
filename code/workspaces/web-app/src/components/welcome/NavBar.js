@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import datalabsLogo from '../../assets/images/datalabs-hori.png';
-import getAuth from '../../auth/auth';
+import { getAuth } from '../../config/auth';
 import navBarLinks from '../../constants/navBarLinks';
 import TopBarButton from '../app/TopBarButton';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
