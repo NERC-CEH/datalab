@@ -41,6 +41,13 @@ class ValidationChainHelper {
     return this;
   }
 
+  isUUIDv4() {
+    this.validationChain
+      .isUUID(4)
+      .withMessage('Value must be formatted as a v4 UUID.');
+    return this;
+  }
+
   notEmpty() {
     this.validationChain
       .isLength({ min: 1 })

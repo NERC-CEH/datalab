@@ -1,9 +1,11 @@
-import { matchedData, body, param } from 'express-validator';
+import { matchedData, body, param, query } from 'express-validator';
 import { service } from 'service-chassis';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 import logger from '../config/logger';
 import ValidationChainHelper from './utils/validationChainHelper';
+
+const { PUBLIC, BY_PROJECT } = centralAssetRepoModel;
 
 async function createAssetMetadata(request, response, next) {
   const metadata = matchedData(request);
@@ -19,23 +21,38 @@ async function createAssetMetadata(request, response, next) {
   }
 }
 
-async function listAssetMetadata(request, response, next) {
+async function getAssetById(request, response, next) {
+  const { assetId, projectKey } = matchedData(request);
+
+  let assetArray;
   try {
-    const metadata = await centralAssetRepoRepository.listMetadata();
-    return response.status(200).send(metadata);
+    assetArray = await centralAssetRepoRepository.getMetadataWithIds([assetId]);
   } catch (error) {
-    return next(new Error(`Error listing asset metadata: ${error.message}`));
+    return next(new Error(`Error getting asset with assetId: ${assetId} - ${error.message}`));
   }
+
+  if (assetArray.length === 0) return response.status(404).send();
+
+  const [asset] = assetArray;
+  if (
+    asset.visible === PUBLIC
+    || (asset.visible === BY_PROJECT && projectKey && asset.projectKeys.includes(projectKey))
+  ) {
+    return response.status(200).send(asset);
+  }
+  return response.status(404).send();
 }
 
-async function assetMetadataAvailableToProject(request, response, next) {
+async function listAssetMetadata(request, response, next) {
   const { projectKey } = matchedData(request);
 
   try {
-    const metadata = await centralAssetRepoRepository.metadataAvailableToProject(projectKey);
+    const metadata = projectKey
+      ? await centralAssetRepoRepository.metadataAvailableToProject(projectKey)
+      : await centralAssetRepoRepository.listMetadata();
     return response.status(200).send(metadata);
   } catch (error) {
-    return next(new Error(`Error listing asset metadata by key: ${error.message}`));
+    return next(new Error(`Error listing asset metadata: ${error.message}`));
   }
 }
 
@@ -105,17 +122,25 @@ const metadataValidator = () => {
   return service.middleware.validator(validationChains, logger);
 };
 
-const listByProjectKeyValidator = () => service.middleware.validator([
-  new ValidationChainHelper(param('projectKey'))
-    .exists()
+const optionalProjectKeyQueryValidator = () => service.middleware.validator([
+  new ValidationChainHelper(query('projectKey'))
+    .optional()
     .notEmpty()
+    .getValidationChain(),
+], logger);
+
+const assetIdValidator = () => service.middleware.validator([
+  new ValidationChainHelper(param('assetId'))
+    .exists()
+    .isUUIDv4()
     .getValidationChain(),
 ], logger);
 
 export default {
   createAssetMetadata,
+  getAssetById,
   listAssetMetadata,
-  assetMetadataAvailableToProject,
   metadataValidator,
-  listByProjectKeyValidator,
+  optionalProjectKeyQueryValidator,
+  assetIdValidator,
 };
