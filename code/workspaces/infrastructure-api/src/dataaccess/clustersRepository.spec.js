@@ -17,6 +17,7 @@ database.getModel.mockReturnValue(clusterModelMock);
 
 const clusterRequest = () => ({
   type: 'DASK',
+  projectKey: 'test-project',
   name: 'new cluster',
   volumeMount: 'example',
   condaPath: '/file/path',
@@ -42,11 +43,11 @@ describe('createCluster', () => {
 
 describe('clusterExists', () => {
   describe('returns that there is a conflict if cluster with', () => {
-    it('same name exists', async () => {
-      const cluster = { name: 'Test cluster' };
+    it('same projectKey and name exists', async () => {
+      const cluster = clusterRequest();
       clusterModelMock.exists.mockResolvedValueOnce(true);
       const response = await clusterExists(cluster);
-      expect(response).toEqual(["Cluster already exists with name of 'Test cluster'."]);
+      expect(response).toEqual(["Cluster already exists with name of 'new cluster' in project with key 'test-project'."]);
     });
   });
 });

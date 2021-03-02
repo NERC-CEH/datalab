@@ -6,6 +6,7 @@ const possibleTypeValues = () => [DASK];
 
 const ClusterSchema = new Schema({
   type: { type: String, enum: possibleTypeValues(), required: true },
+  projectKey: { type: String, required: true },
   name: { type: String, required: true },
   volumeMount: String,
   condaPath: String,

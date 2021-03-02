@@ -16,6 +16,7 @@ const nextMock = jest.fn();
 
 const clusterRequest = () => ({
   type: 'DASK',
+  projectKey: 'test-project',
   name: 'new cluster',
   volumeMount: 'example',
   condaPath: '/file/path',

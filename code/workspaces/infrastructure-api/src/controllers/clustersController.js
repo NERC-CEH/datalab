@@ -35,6 +35,12 @@ const range = limits => ({ min: limits.lowerLimit, max: limits.upperLimit });
 
 const clusterValidator = () => {
   const validations = [
+    new ValidationChainHelper(body('type'))
+      .exists()
+      .isIn(clusterModel.possibleTypeValues()),
+    new ValidationChainHelper(body('projectKey'))
+      .exists()
+      .notEmpty(),
     new ValidationChainHelper(body('name'))
       .exists()
       .notEmpty(),
@@ -53,9 +59,6 @@ const clusterValidator = () => {
     new ValidationChainHelper(body('maxWorkerCpu'))
       .exists()
       .isInFloatRange(range(clustersConfig().dask.workers.CpuMax_vCPU)),
-    new ValidationChainHelper(body('type'))
-      .exists()
-      .isIn(clusterModel.possibleTypeValues()),
   ];
 
   const validationChains = validations.map((validation) => {
