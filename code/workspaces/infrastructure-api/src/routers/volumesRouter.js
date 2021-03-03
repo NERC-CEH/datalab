@@ -12,9 +12,6 @@ const {
 
 const volumesRouter = express.Router();
 
-// TODO - routes running permission wrapper won't currently work.
-//  Don't know use case for them and UI interaction seems to be working as expected so leaving for now.
-
 volumesRouter.get(
   '/active/:projectKey',
   projectPermissionWrapper(PROJECT_KEY_STORAGE_LIST),
