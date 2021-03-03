@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-03-03T08:46:25.065Z
+__export_date: 2021-03-03T14:01:25.436Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -1006,7 +1006,7 @@ resources:
     _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614705103099
+    modified: 1614780058683
     created: 1614703552507
     url: "{{ _.client_api_url }}/api"
     name: createCluster
@@ -1015,11 +1015,11 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  createCluster (cluster: {\n    type:
-        \"DASK\",\n\t  projectKey: \"project\",\n\t  name: \"new
-        cluster\",\n\t  volumeMount: \"example\",\n\t  condaPath:
-        \"/conda/path\",\n\t  maxWorkers: 8,\n\t  maxWorkerMemoryGb:
-        0.5,\n\t  maxWorkerCpu: 1.5\n  })
-        {\n    id\n    type\n    projectKey\n    name\n    volumeMount\n    condaPath\n    maxWorkers\n    maxWorkerMemoryGb\n    maxWorkerCpu\n  }\n}"}'
+        \"DASK\",\n\t  projectKey: \"project\",\n\t  name:
+        \"cluster1\",\n    displayName: \"new cluster\",\n\t  volumeMount:
+        \"example\",\n\t  condaPath: \"/conda/path\",\n\t  maxWorkers:
+        8,\n\t  maxWorkerMemoryGb: 0.5,\n\t  maxWorkerCpu: 1.5\n  })
+        {\n    id\n    type\n    projectKey\n    name\n    displayName\n    volumeMount\n    condaPath\n    maxWorkers\n    maxWorkerMemoryGb\n    maxWorkerCpu\n  }\n}"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1142,7 +1142,7 @@ resources:
     _type: request
   - _id: req_0f421969720d4f21bdf04bde23f5c69e
     parentId: fld_998699fb7271407c91200bc860ef8beb
-    modified: 1614703692270
+    modified: 1614779674358
     created: 1614694712335
     url: "{{ infra_api_url  }}/clusters/cluster"
     name: Create Cluster
@@ -1154,7 +1154,8 @@ resources:
         {
           "type": "DASK",
         	"projectKey": "project",
-        	"name": "new cluster",
+        	"name": "cluster1",
+        	"displayName": "new cluster",
         	"volumeMount": "example",
         	"condaPath": "/conda/path",
         	"maxWorkers": 8,

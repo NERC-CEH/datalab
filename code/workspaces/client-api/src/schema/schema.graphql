@@ -386,6 +386,7 @@ input ClusterCreationRequest {
     type: String!
     projectKey: String!
     name: String!
+    displayName: String!
     volumeMount: String
     condaPath: String
     maxWorkers: Int!
@@ -398,6 +399,7 @@ type Cluster {
     type: String!
     projectKey: String!
     name: String!
+    displayName: String!
     volumeMount: String
     condaPath: String
     maxWorkers: Int!

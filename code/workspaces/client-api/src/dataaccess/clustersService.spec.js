@@ -10,7 +10,8 @@ const token = 'token';
 const clusterRequest = {
   type: 'DASK',
   projectKey: 'test-project',
-  name: 'new cluster',
+  name: 'cluster1',
+  displayName: 'new cluster',
   volumeMount: 'example',
   condaPath: '/file/path',
   maxWorkers: 8,
