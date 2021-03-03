@@ -2,7 +2,7 @@ import axios from 'axios';
 import logger from 'winston';
 import { get } from 'lodash';
 import config from '../config';
-import axiosErrorHandler from '../util/errorHandlers';
+import { axiosErrorHandler } from '../util/errorHandlers';
 
 const authPermissionsUrl = `${config.get('authorisationService')}/permissions`;
 const authServiceStub = config.get('authorisationServiceStub');

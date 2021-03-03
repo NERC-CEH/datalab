@@ -10,9 +10,9 @@ async function createCluster(cluster) {
 
 async function clusterExists({ projectKey, name }) {
   if (projectKey && name && await ClusterModel().exists({ projectKey, name })) {
-    return ([`Cluster already exists with name of '${name}' in project with key '${projectKey}'.`]);
+    return (`Cluster already exists with name of '${name}' in project with key '${projectKey}'.`);
   }
-  return [];
+  return null;
 }
 
 export default {

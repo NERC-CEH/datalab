@@ -22,8 +22,8 @@ async function createCluster(request, response, next) {
 async function handleExistingCluster(cluster, response, next) {
   try {
     const existErrors = await clustersRepository.clusterExists(cluster);
-    if (existErrors.length > 0) {
-      return response.status(409).send(existErrors);
+    if (existErrors) {
+      return response.status(409).send({ message: existErrors });
     }
   } catch (error) {
     next(new Error(`Error creating cluster - failed to check if document already exists: ${error.message}`));

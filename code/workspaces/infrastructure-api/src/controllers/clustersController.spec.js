@@ -25,6 +25,10 @@ const clusterRequest = () => ({
   maxWorkerCpu: 1.5,
 });
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('createCluster', () => {
   const { createCluster } = clustersController;
 
@@ -35,7 +39,7 @@ describe('createCluster', () => {
   });
 
   it('returns response configured with 409 status and result of clusterExists check if cluster already exists', async () => {
-    const clusterExistsResponse = ['Cluster already exists'];
+    const clusterExistsResponse = 'Cluster already exists';
     clustersRepository.clusterExists.mockResolvedValueOnce(clusterExistsResponse);
     const requestMock = clusterRequest();
 
@@ -43,7 +47,7 @@ describe('createCluster', () => {
 
     expect(returnValue).toBe(responseMock);
     expect(responseMock.status).toHaveBeenCalledWith(409);
-    expect(responseMock.send).toHaveBeenCalledWith(clusterExistsResponse);
+    expect(responseMock.send).toHaveBeenCalledWith({ message: clusterExistsResponse });
   });
 
   it('calls next with an error if there is an error checking if the cluster exists', async () => {

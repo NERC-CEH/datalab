@@ -113,6 +113,9 @@ type Mutation {
 
     # Set catalogueRole
     setCatalogueRole(userId: ID!, catalogueRole: CatalogueRole!): UserAndRoles!
+
+    # Create a cluster
+    createCluster(cluster: ClusterCreationRequest!): Cluster!
 }
 
 # DataLabs type for basic datalab information.
@@ -377,4 +380,27 @@ input CentralAssetMetadataCreationRequest {
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]
+}
+
+input ClusterCreationRequest {
+    type: String!
+    projectKey: String!
+    name: String!
+    volumeMount: String
+    condaPath: String
+    maxWorkers: Int!
+    maxWorkerMemoryGb: Float!
+    maxWorkerCpu: Float!
+}
+
+type Cluster {
+    id: ID!
+    type: String!
+    projectKey: String!
+    name: String!
+    volumeMount: String
+    condaPath: String
+    maxWorkers: Int!
+    maxWorkerMemoryGb: Float!
+    maxWorkerCpu: Float!
 }

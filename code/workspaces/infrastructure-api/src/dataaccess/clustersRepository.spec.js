@@ -47,7 +47,7 @@ describe('clusterExists', () => {
       const cluster = clusterRequest();
       clusterModelMock.exists.mockResolvedValueOnce(true);
       const response = await clusterExists(cluster);
-      expect(response).toEqual(["Cluster already exists with name of 'new cluster' in project with key 'test-project'."]);
+      expect(response).toEqual("Cluster already exists with name of 'new cluster' in project with key 'test-project'.");
     });
   });
 });
