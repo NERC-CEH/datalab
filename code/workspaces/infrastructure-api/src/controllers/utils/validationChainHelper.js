@@ -44,6 +44,15 @@ class ValidationChainHelper {
     return this;
   }
 
+  isName() {
+    this.validationChain
+      .isLowercase().isAlphanumeric()
+      .withMessage('Name must only use the characters a-z, 0-9')
+      .isLength({ min: 4, max: 16 })
+      .withMessage('Name must be 4-16 characters long');
+    return this;
+  }
+
   isUrl(options) {
     this.validationChain
       .isURL(options)

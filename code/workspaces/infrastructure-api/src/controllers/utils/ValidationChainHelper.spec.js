@@ -4,11 +4,13 @@ const mockValidationChainMethod = () => jest.fn().mockImplementation(() => mockV
 
 const mockValidationChain = {
   exists: mockValidationChainMethod(),
+  isAlphanumeric: mockValidationChainMethod(),
   isArray: mockValidationChainMethod(),
   isFloat: mockValidationChainMethod(),
   isIn: mockValidationChainMethod(),
   isInt: mockValidationChainMethod(),
   isLength: mockValidationChainMethod(),
+  isLowercase: mockValidationChainMethod(),
   isURL: mockValidationChainMethod(),
   isUUID: mockValidationChainMethod(),
   optional: mockValidationChainMethod(),
@@ -103,6 +105,24 @@ describe('ValidationChainHelper', () => {
     it('returns itself to allow for chaining', () => {
       const helper = new ValidationChainHelper(mockValidationChain);
       const returnValue = helper.isInIntRange({ min, max });
+      expect(returnValue).toBe(helper);
+    });
+  });
+
+  describe('isName', () => {
+    it('calls isName with provided values and withMessage with correct argument on internal validation chain', () => {
+      const helper = new ValidationChainHelper(mockValidationChain);
+      helper.isName();
+      expect(mockValidationChain.isLowercase).toHaveBeenCalledWith();
+      expect(mockValidationChain.isAlphanumeric).toHaveBeenCalledWith();
+      expect(mockValidationChain.isLength).toHaveBeenCalledWith({ min: 4, max: 16 });
+      expect(mockValidationChain.withMessage).toHaveBeenNthCalledWith(1, 'Name must only use the characters a-z, 0-9');
+      expect(mockValidationChain.withMessage).toHaveBeenNthCalledWith(2, 'Name must be 4-16 characters long');
+    });
+
+    it('returns itself to allow for chaining', () => {
+      const helper = new ValidationChainHelper(mockValidationChain);
+      const returnValue = helper.isName();
       expect(returnValue).toBe(helper);
     });
   });

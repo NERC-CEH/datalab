@@ -43,6 +43,9 @@ const clusterValidator = () => {
       .notEmpty(),
     new ValidationChainHelper(body('name'))
       .exists()
+      .isName(),
+    new ValidationChainHelper(body('displayName'))
+      .exists()
       .notEmpty(),
     new ValidationChainHelper(body('volumeMount'))
       .optional()
