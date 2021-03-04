@@ -1,7 +1,7 @@
 import logger from 'winston';
 import datalabRepository from '../dataaccess/datalabRepository';
 import stackService from '../dataaccess/stackService';
-import axiosErrorHandler from '../util/errorHandlers';
+import { axiosErrorHandler } from '../util/errorHandlers';
 
 const createStack = (context, datalabName, stack) => datalabRepository.getByName(context.user, datalabName)
   .then(createStackPayloadGenerator(stack))

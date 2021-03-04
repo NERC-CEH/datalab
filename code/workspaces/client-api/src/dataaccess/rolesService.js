@@ -1,7 +1,7 @@
 import axios from 'axios';
 import logger from 'winston';
 import config from '../config';
-import axiosErrorHandler from '../util/errorHandlers';
+import { axiosErrorHandler } from '../util/errorHandlers';
 
 const authServiceUrl = config.get('authorisationService');
 
