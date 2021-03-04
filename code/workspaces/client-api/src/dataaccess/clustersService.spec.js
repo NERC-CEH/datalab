@@ -40,4 +40,20 @@ describe('clustersService', () => {
       expect(postMock.headers.authorization).toEqual(token);
     });
   });
+
+  describe('getClusters', () => {
+    const { getClusters } = clustersService;
+    it('calls infrastructure-api to get clusters with correct data and returns result data', async () => {
+      httpMock
+        .onGet(`${infrastructureApi}/clusters/project/test-project`)
+        .reply(200, [clusterResponse]);
+
+      const returnValue = await getClusters(clusterRequest.projectKey, token);
+
+      expect(returnValue).toEqual([clusterResponse]);
+      expect(httpMock.history.post.length).toBe(1);
+      const [getMock] = httpMock.history.get;
+      expect(getMock.headers.authorization).toEqual(token);
+    });
+  });
 });

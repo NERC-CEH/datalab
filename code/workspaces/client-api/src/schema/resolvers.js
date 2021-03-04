@@ -48,6 +48,7 @@ const resolvers = {
     logs: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => logsService.getLogsByName(args.projectKey, args.name, token)),
     centralAssets: (obj, args, { token }) => centralAssetRepoService.listCentralAssets(token),
     centralAssetsAvailableToProject: (obj, { projectKey }, { token }) => centralAssetRepoService.listCentralAssetsAvailableToProject(projectKey, token),
+    clusters: (obj, args, { token }) => clustersService.getClusters(args.projectKey, token),
   },
 
   Mutation: {

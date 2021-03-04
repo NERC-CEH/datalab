@@ -56,6 +56,9 @@ type Query {
 
     # Return all central asset repo metadata items that are available to given project
     centralAssetsAvailableToProject(projectKey: String!): [CentralAssetMetadata]
+
+    # List of clusters in a project
+    clusters(projectKey: String!): [Cluster]
 }
 
 # Root mutation methods for Datalabs.
