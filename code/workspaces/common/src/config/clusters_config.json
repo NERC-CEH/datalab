@@ -7,6 +7,14 @@
         "upperLimit": 8
       }
     },
+    "scheduler": {
+      "memoryMax_GB": {
+        "default": 0.5
+      },
+      "CpuMax_vCPU": {
+        "default": 0.5
+      }
+    },
     "workers": {
       "memoryMax_GB": {
         "lowerLimit": 0.5,

@@ -20,6 +20,7 @@ const DeploymentTemplates = Object.freeze({
   RSHINY_DEPLOYMENT: 'rshiny.deployment.template.yml',
   NBVIEWER_DEPLOYMENT: 'nbviewer.deployment.template.yml',
   MINIO_DEPLOYMENT: 'minio.deployment.template.yml',
+  DATALAB_DASK_SCHEDULER_DEPLOYMENT: 'datalab-dask-scheduler.deployment.template.yml',
 });
 
 const IngressTemplates = Object.freeze({

@@ -5,6 +5,7 @@ import clustersRepository from '../dataaccess/clustersRepository';
 import clusterModel from '../models/cluster.model';
 import logger from '../config/logger';
 import ValidationChainHelper from './utils/validationChainHelper';
+import { createClusterStack } from '../stacks/clusterManager';
 
 async function createCluster(request, response, next) {
   const cluster = matchedData(request);
@@ -13,6 +14,7 @@ async function createCluster(request, response, next) {
 
   try {
     const createdCluster = await clustersRepository.createCluster(cluster);
+    await createClusterStack(cluster);
     return response.status(201).send(createdCluster);
   } catch (error) {
     return next(new Error(`Error creating cluster - failed to create new document: ${error.message}`));

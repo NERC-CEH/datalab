@@ -36,6 +36,17 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
+function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, pureDaskImage, jupyterLabImage, schedulerMemory, schedulerCpu }) {
+  const context = {
+    name: deploymentName,
+    daskImage: condaPath ? jupyterLabImage : pureDaskImage,
+    schedulerArgs: condaPath ? ['-c', `${condaPath}/bin/dask-scheduler`] : ['-c', 'dask-scheduler'],
+    schedulerMemory,
+    schedulerCpu,
+  };
+  return generateManifest(context, DeploymentTemplates.DATALAB_DASK_SCHEDULER_DEPLOYMENT);
+}
+
 function createZeppelinDeployment({ deploymentName, volumeMount, type, version }) {
   const img = getImage(type, version);
   const context = {
@@ -199,4 +210,5 @@ export default {
   createSparkDriverHeadlessService,
   createPySparkConfigMap,
   createDaskConfigMap,
+  createDatalabDaskSchedulerDeployment,
 };

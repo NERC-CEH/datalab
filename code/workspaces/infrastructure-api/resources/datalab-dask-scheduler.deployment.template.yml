@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler-{{name}}-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      dask-infra: scheduler-{{name}}-po
+  template:
+    metadata:
+      labels:
+        dask-infra: scheduler-{{name}}-po
+    spec:
+      containers:
+        - image: {{daskImage}}
+          command: ["bash"]
+          args: {{schedulerArgs}}
+          name: dask-scheduler-cont
+          ports:
+            - containerPort: 8786
+            - containerPort: 8787
+          resources:
+            requests:
+              memory: {{schedulerMemory}}
+              cpu: {{schedulerCpu}}
+            limits:
+              memory: {{schedulerMemory}}
+              cpu: {{schedulerCpu}}
+      hostname: dask-scheduler-host
+      restartPolicy: Always

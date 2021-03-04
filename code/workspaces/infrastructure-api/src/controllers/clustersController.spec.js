@@ -1,6 +1,10 @@
 import * as expressValidator from 'express-validator';
 import clustersRepository from '../dataaccess/clustersRepository';
 import clustersController from './clustersController';
+import * as clusterManager from '../stacks/clusterManager';
+
+jest.mock('../stacks/clusterManager');
+clusterManager.createClusterStack = jest.fn().mockResolvedValue('okay');
 
 jest.mock('../dataaccess/clustersRepository');
 
