@@ -12,7 +12,7 @@ const { errorWrapper } = service.middleware;
 const clustersRouter = express.Router();
 
 clustersRouter.post(
-  '/cluster',
+  '/',
   clustersController.clusterValidator(),
   projectPermissionWrapper(PROJECT_KEY_STACKS_CREATE),
   errorWrapper(clustersController.createCluster),

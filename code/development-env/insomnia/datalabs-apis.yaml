@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-03-03T14:01:25.436Z
+__export_date: 2021-03-04T11:18:58.925Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -1006,7 +1006,7 @@ resources:
     _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614780058683
+    modified: 1614856592983
     created: 1614703552507
     url: "{{ _.client_api_url }}/api"
     name: createCluster
@@ -1142,9 +1142,9 @@ resources:
     _type: request
   - _id: req_0f421969720d4f21bdf04bde23f5c69e
     parentId: fld_998699fb7271407c91200bc860ef8beb
-    modified: 1614779674358
+    modified: 1614856543683
     created: 1614694712335
-    url: "{{ infra_api_url  }}/clusters/cluster"
+    url: "{{ infra_api_url  }}/clusters/"
     name: Create Cluster
     description: ""
     method: POST
@@ -1171,6 +1171,29 @@ resources:
       token: "{{ internal_token  }}"
       type: bearer
     metaSortKey: -1612335007632.9375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_eacd4e89bdb84fcf86f3b27855846e4e
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    modified: 1614855330566
+    created: 1614787122987
+    url: "{{ infra_api_url  }}/clusters/project/project"
+    name: Get Clusters by Project
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1612059751370.5938
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true

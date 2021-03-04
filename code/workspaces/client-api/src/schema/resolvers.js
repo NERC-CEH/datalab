@@ -83,7 +83,7 @@ const resolvers = {
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),
-    createCluster: (obj, { cluster }, { user, token }) => projectPermissionWrapper({ projectKey: cluster.projectKey }, STACKS_CREATE, user, () => clustersService.createCluster(cluster, token)),
+    createCluster: (obj, { cluster }, { token }) => clustersService.createCluster(cluster, token),
   },
 
   CentralAssetMetadata: {

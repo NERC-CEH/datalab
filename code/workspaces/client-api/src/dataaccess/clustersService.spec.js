@@ -28,7 +28,7 @@ describe('clustersService', () => {
     const { createCluster } = clustersService;
     it('calls infrastructure-api to create cluster with correct data and returns result data', async () => {
       httpMock
-        .onPost(`${infrastructureApi}/clusters/cluster`)
+        .onPost(`${infrastructureApi}/clusters/`)
         .reply(201, clusterResponse);
 
       const returnValue = await createCluster(clusterRequest, token);
