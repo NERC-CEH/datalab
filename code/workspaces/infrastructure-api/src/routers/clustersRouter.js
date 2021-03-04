@@ -2,9 +2,10 @@ import { service } from 'service-chassis';
 import express from 'express';
 import { permissionTypes } from 'common';
 import clustersController from '../controllers/clustersController';
-import permissionMiddleware from '../auth/permissionMiddleware';
+import { projectPermissionWrapper } from '../auth/permissionMiddleware';
+import { paramProjectKeyValidator } from './commonValidators';
 
-const { projectPermissions: { PROJECT_KEY_STACKS_CREATE } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_LIST } } = permissionTypes;
 
 const { errorWrapper } = service.middleware;
 
@@ -12,9 +13,15 @@ const clustersRouter = express.Router();
 
 clustersRouter.post(
   '/cluster',
-  permissionMiddleware(PROJECT_KEY_STACKS_CREATE),
   clustersController.clusterValidator(),
+  projectPermissionWrapper(PROJECT_KEY_STACKS_CREATE),
   errorWrapper(clustersController.createCluster),
+);
+clustersRouter.get(
+  '/project/:projectKey',
+  paramProjectKeyValidator(),
+  projectPermissionWrapper(PROJECT_KEY_STACKS_LIST),
+  errorWrapper(clustersController.listByProject),
 );
 
 export default clustersRouter;

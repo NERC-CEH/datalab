@@ -18,7 +18,13 @@ async function clusterExists({ projectKey, name, displayName }) {
   return null;
 }
 
+async function listByProject(projectKey) {
+  const documents = await ClusterModel().find({ projectKey }).exec();
+  return documents;
+}
+
 export default {
   createCluster,
   clusterExists,
+  listByProject,
 };
