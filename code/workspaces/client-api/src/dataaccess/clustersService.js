@@ -9,7 +9,7 @@ const infrastructureApi = () => axios.create({
 
 async function createCluster(cluster, token) {
   const { data } = await infrastructureApi().post(
-    '/cluster',
+    '/',
     cluster,
     requestConfig(token),
   );
