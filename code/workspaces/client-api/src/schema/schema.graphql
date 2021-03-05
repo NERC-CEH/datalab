@@ -105,9 +105,6 @@ type Mutation {
     # Create a central asset repo metadata
     createCentralAssetMetadata(metadata: CentralAssetMetadataCreationRequest!): CentralAssetMetadata!
 
-    # Create a cluster
-    createCluster(cluster: ClusterCreationRequest!): Cluster!
-
     # Set instanceAdmin role
     setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
 
