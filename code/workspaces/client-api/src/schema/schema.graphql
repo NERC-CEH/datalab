@@ -105,6 +105,9 @@ type Mutation {
     # Create a central asset repo metadata
     createCentralAssetMetadata(metadata: CentralAssetMetadataCreationRequest!): CentralAssetMetadata!
 
+    # Create a cluster
+    createCluster(cluster: ClusterCreationRequest!): Cluster!
+
     # Set instanceAdmin role
     setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
 
@@ -377,4 +380,29 @@ input CentralAssetMetadataCreationRequest {
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]
+}
+
+type Cluster {
+  id: String!
+  displayName: String!
+  name: String!
+  type: String!
+  projectKey: String!
+  volumeMount: String
+  condaPath: String
+  maxWorkers: Int!
+  maxWorkerMemoryGb: Float
+  maxWorkerCpu: Float
+}
+
+input ClusterCreationRequest {
+  displayName: String!
+  name: String!
+  type: String!
+  projectKey: String!
+  volumeMount: String
+  condaPath: String
+  maxWorkers: Int!
+  maxWorkerMemoryGb: Float
+  maxWorkerCpu: Float
 }

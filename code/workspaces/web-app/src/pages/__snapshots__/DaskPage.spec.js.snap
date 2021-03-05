@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DaskPage Create Dask Cluster Button calls to open create cluster modal dialog with correct props 1`] = `
+Array [
+  "MODAL_TYPE_CREATE_CLUSTER",
+  Object {
+    "clusterMaxWorkers": Object {
+      "default": 4,
+      "lowerLimit": 1,
+      "upperLimit": 8,
+    },
+    "dataStorageOptions": Array [
+      Object {
+        "text": undefined,
+        "value": "test-store",
+      },
+    ],
+    "onCancel": [Function],
+    "onSubmit": [Function],
+    "title": "Create Dask Cluster",
+    "workerMaxCpu": Object {
+      "default": 0.5,
+      "lowerLimit": 0.5,
+      "upperLimit": 2,
+    },
+    "workerMaxMemory": Object {
+      "default": 4,
+      "lowerLimit": 0.5,
+      "upperLimit": 8,
+    },
+  },
+]
+`;
+
 exports[`DaskPage renders correct snapshot 1`] = `
 <WithStyles(Page)
   title="Dask"
@@ -8,18 +40,23 @@ exports[`DaskPage renders correct snapshot 1`] = `
     variant="body1"
   >
     Dask is a flexible parallel computing library for analytic computing.
-    <br />
-    DataLabs supports usage of Dask-Kubernetes which allows workers to be scheduled across the cluster. This is tightly integrated with Jupyter.
   </WithStyles(ForwardRef(Typography))>
-  <PrimaryActionButton
-    onClick={[Function]}
-    style={
-      Object {
-        "marginTop": 10,
-      }
-    }
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
   >
-    Dask on Kubernetes Documentation
-  </PrimaryActionButton>
+    DataLabs supports usage of 
+    <a
+      href="https://kubernetes.dask.org/en/latest/"
+    >
+      Dask-Kubernetes
+    </a>
+     which allows workers to be scheduled across the cluster. This is tightly integrated with Jupyter.
+  </WithStyles(ForwardRef(Typography))>
+  <PagePrimaryActionButton
+    className="makeStyles-createButton-1"
+    onClick={[Function]}
+  >
+    Create Dask Cluster
+  </PagePrimaryActionButton>
 </WithStyles(Page)>
 `;

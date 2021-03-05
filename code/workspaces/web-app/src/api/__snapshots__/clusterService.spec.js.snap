@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`clusterService createCluster should build the correct mutation and unpack the results 1`] = `
+"
+    CreateCluster($cluster: ClusterCreationRequest!) {
+      createCluster(cluster: $cluster) {
+        id
+      }
+    }
+  "
+`;

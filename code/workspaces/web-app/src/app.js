@@ -10,6 +10,7 @@ import { initialiseCatalogue } from './config/catalogue';
 import { initialiseImages } from './config/images';
 import { initialiseStorage } from './config/storage';
 import { initialiseVersion } from './config/version';
+import { initialiseClusters } from './config/clusters';
 
 async function createApplication() {
   const store = configureStore();
@@ -19,6 +20,7 @@ async function createApplication() {
     initialiseImages(),
     initialiseStorage(),
     initialiseVersion(),
+    initialiseClusters(),
   ]);
 
   ReactDOM.render(
