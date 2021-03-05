@@ -15,6 +15,7 @@ import storageService from '../infrastructure/storageService';
 import logsService from '../dataaccess/logsService';
 import rolesService from '../dataaccess/rolesService';
 import centralAssetRepoService from '../dataaccess/centralAssetRepoService';
+import clustersService from '../dataaccess/clustersService';
 
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_EDIT, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
@@ -83,6 +84,7 @@ const resolvers = {
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),
+    createCluster: (obj, { cluster }, { token }) => clustersService.createCluster(cluster, token),
   },
 
   CentralAssetMetadata: {
@@ -115,6 +117,10 @@ const resolvers = {
 
   ProjectUser: {
     name: (obj, args, ctx) => userService.getUserName(obj.userId, ctx.token),
+  },
+
+  Cluster: {
+    id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
   },
 };
 

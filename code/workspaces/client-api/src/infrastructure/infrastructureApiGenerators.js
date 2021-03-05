@@ -1,6 +1,6 @@
 import axios from 'axios/index';
 import logger from 'winston';
-import axiosErrorHandler from '../util/errorHandlers';
+import { axiosErrorHandler } from '../util/errorHandlers';
 import datalabRepository from '../dataaccess/datalabRepository';
 import config from '../config';
 

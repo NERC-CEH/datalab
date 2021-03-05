@@ -7,16 +7,12 @@ class ValidationChainHelper {
     return this.validationChain;
   }
 
+  // For possible base validations, see https://github.com/validatorjs/validator.js
+
   exists() {
     this.validationChain
       .exists()
       .withMessage('A value must be specified.');
-    return this;
-  }
-
-  optional(options) {
-    this.validationChain
-      .optional(options);
     return this;
   }
 
@@ -31,6 +27,29 @@ class ValidationChainHelper {
     this.validationChain
       .isIn(values)
       .withMessage(`Value must be one of: ${values.join(', ')}.`);
+    return this;
+  }
+
+  isInFloatRange({ min, max }) {
+    this.validationChain
+      .isFloat({ min, max })
+      .withMessage(`Value must be a float in the range ${min} to ${max}.`);
+    return this;
+  }
+
+  isInIntRange({ min, max }) {
+    this.validationChain
+      .isInt({ min, max })
+      .withMessage(`Value must be an integer in the range ${min} to ${max}.`);
+    return this;
+  }
+
+  isName() {
+    this.validationChain
+      .isLowercase().isAlphanumeric()
+      .withMessage('Name must only use the characters a-z, 0-9')
+      .isLength({ min: 4, max: 16 })
+      .withMessage('Name must be 4-16 characters long');
     return this;
   }
 
@@ -52,6 +71,12 @@ class ValidationChainHelper {
     this.validationChain
       .isLength({ min: 1 })
       .withMessage('Value cannot be empty.');
+    return this;
+  }
+
+  optional(options) {
+    this.validationChain
+      .optional(options);
     return this;
   }
 }

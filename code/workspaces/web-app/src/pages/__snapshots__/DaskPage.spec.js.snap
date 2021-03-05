@@ -54,6 +54,7 @@ exports[`DaskPage renders correct snapshot 1`] = `
   </WithStyles(ForwardRef(Typography))>
   <PagePrimaryActionButton
     className="makeStyles-createButton-1"
+    id="create-button"
     onClick={[Function]}
   >
     Create Dask Cluster
