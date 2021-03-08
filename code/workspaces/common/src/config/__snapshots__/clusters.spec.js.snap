@@ -10,6 +10,14 @@ Object {
         "upperLimit": 8,
       },
     },
+    "scheduler": Object {
+      "CpuMax_vCPU": Object {
+        "default": 0.5,
+      },
+      "memoryMax_GB": Object {
+        "default": 0.5,
+      },
+    },
     "workers": Object {
       "CpuMax_vCPU": Object {
         "default": 0.5,

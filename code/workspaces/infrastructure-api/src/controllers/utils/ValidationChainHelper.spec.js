@@ -14,6 +14,7 @@ const mockValidationChain = {
   isURL: mockValidationChainMethod(),
   isUUID: mockValidationChainMethod(),
   optional: mockValidationChainMethod(),
+  trim: mockValidationChainMethod(),
   withMessage: mockValidationChainMethod(),
 };
 
@@ -162,6 +163,7 @@ describe('ValidationChainHelper', () => {
     it('calls isLength with correct argument and withMessage with correct argument on internal validation chain', () => {
       const helper = new ValidationChainHelper(mockValidationChain);
       helper.notEmpty();
+      expect(mockValidationChain.trim).toHaveBeenCalledWith();
       expect(mockValidationChain.isLength).toHaveBeenCalledWith({ min: 1 });
       expect(mockValidationChain.withMessage).toHaveBeenCalledWith('Value cannot be empty.');
     });
