@@ -8,7 +8,7 @@ Object {
     "versions": Array [
       Object {
         "displayName": "Dask 2.30.0 support",
-        "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+        "image": "nerc/jupyterlab:fbf2130-dask-2.30",
       },
     ],
   },
@@ -18,7 +18,7 @@ Object {
     "versions": Array [
       Object {
         "displayName": "Dask 2.30.0 support",
-        "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+        "image": "nerc/jupyterlab:fbf2130-dask-2.30",
       },
     ],
   },
