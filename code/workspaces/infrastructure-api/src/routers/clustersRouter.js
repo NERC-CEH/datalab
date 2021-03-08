@@ -3,7 +3,7 @@ import express from 'express';
 import { permissionTypes } from 'common';
 import clustersController from '../controllers/clustersController';
 import permissionMiddleware from '../auth/permissionMiddleware';
-import { paramProjectKeyValidator } from './commonValidators';
+import { queryProjectKeyValidator } from './commonValidators';
 
 const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_LIST } } = permissionTypes;
 
@@ -17,10 +17,12 @@ clustersRouter.post(
   clustersController.clusterValidator(),
   errorWrapper(clustersController.createCluster),
 );
+
+// Use /?projectKey=<projectKey value> to filter by project
 clustersRouter.get(
-  '/project/:projectKey',
-  paramProjectKeyValidator(),
+  '/',
   permissionMiddleware(PROJECT_KEY_CLUSTERS_LIST),
+  queryProjectKeyValidator(),
   errorWrapper(clustersController.listByProject),
 );
 

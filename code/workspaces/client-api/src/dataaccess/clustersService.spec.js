@@ -45,7 +45,7 @@ describe('clustersService', () => {
     const { getClusters } = clustersService;
     it('calls infrastructure-api to get clusters with correct data and returns result data', async () => {
       httpMock
-        .onGet(`${infrastructureApi}/clusters/project/test-project`)
+        .onGet(`${infrastructureApi}/clusters/?projectKey=test-project`)
         .reply(200, [clusterResponse]);
 
       const returnValue = await getClusters(clusterRequest.projectKey, token);

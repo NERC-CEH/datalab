@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-03-04T13:28:05.823Z
+__export_date: 2021-03-08T11:47:21.607Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -1006,7 +1006,7 @@ resources:
     _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614863500666
+    modified: 1614877952147
     created: 1614703552507
     url: "{{ _.client_api_url }}/api"
     name: createCluster
@@ -1039,7 +1039,7 @@ resources:
     _type: request
   - _id: req_947e99a84c20483a9d2b49ce448176f4
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614863586843
+    modified: 1615203852981
     created: 1614863475203
     url: "{{ _.client_api_url }}/api"
     name: clusters
@@ -1171,7 +1171,7 @@ resources:
     _type: request
   - _id: req_0f421969720d4f21bdf04bde23f5c69e
     parentId: fld_998699fb7271407c91200bc860ef8beb
-    modified: 1614856543683
+    modified: 1615203822659
     created: 1614694712335
     url: "{{ infra_api_url  }}/clusters/"
     name: Create Cluster
@@ -1210,9 +1210,9 @@ resources:
     _type: request
   - _id: req_eacd4e89bdb84fcf86f3b27855846e4e
     parentId: fld_998699fb7271407c91200bc860ef8beb
-    modified: 1614855330566
+    modified: 1615203831177
     created: 1614787122987
-    url: "{{ infra_api_url  }}/clusters/project/project"
+    url: "{{ infra_api_url  }}/clusters/?projectKey=project"
     name: Get Clusters by Project
     description: ""
     method: GET

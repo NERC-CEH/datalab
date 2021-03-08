@@ -18,7 +18,7 @@ async function createCluster(cluster, token) {
 
 async function getClusters(projectKey, token) {
   const { data } = await infrastructureApi().get(
-    `/project/${projectKey}`,
+    `/?projectKey=${projectKey}`,
     requestConfig(token),
   );
   return data;
