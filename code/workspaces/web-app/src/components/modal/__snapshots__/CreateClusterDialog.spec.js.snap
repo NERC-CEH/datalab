@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateClusterDialog renders correctly passing props to child components 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  open={true}
+>
+  <div
+    className="makeStyles-dialogDiv-1"
+  >
+    <WithStyles(ForwardRef(DialogTitle))>
+      Create Cluster Dialog Title
+    </WithStyles(ForwardRef(DialogTitle))>
+    <WithStyles(ForwardRef(DialogContent))>
+      <ReduxForm
+        cancel={[MockFunction onCancel]}
+        clusterMaxWorkers={
+          Object {
+            "default": 4,
+            "lowerLimit": 1,
+            "upperLimit": 8,
+          }
+        }
+        dataStorageOptions={Array []}
+        destroyOnUnmount={false}
+        enableReinitialize={true}
+        forceUnregisterOnUnmount={false}
+        form="createCluster"
+        getFormState={[Function]}
+        initialValues={
+          Object {
+            "maxWorkerCpu": 0.5,
+            "maxWorkerMemoryGb": 4,
+            "maxWorkers": 4,
+          }
+        }
+        keepDirtyOnReinitialize={false}
+        onSubmit={[MockFunction onSubmit]}
+        persistentSubmitErrors={false}
+        pure={true}
+        shouldAsyncValidate={[Function]}
+        shouldError={[Function]}
+        shouldValidate={[Function]}
+        shouldWarn={[Function]}
+        submitAsSideEffect={false}
+        touchOnBlur={true}
+        touchOnChange={false}
+        updateUnregisteredFields={false}
+        validate={[Function]}
+        workerMaxCpu={
+          Object {
+            "default": 0.5,
+            "lowerLimit": 0.5,
+            "upperLimit": 2,
+          }
+        }
+        workerMaxMemory={
+          Object {
+            "default": 4,
+            "lowerLimit": 0.5,
+            "upperLimit": 8,
+          }
+        }
+      />
+    </WithStyles(ForwardRef(DialogContent))>
+  </div>
+</WithStyles(ForwardRef(Dialog))>
+`;

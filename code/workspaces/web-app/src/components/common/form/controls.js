@@ -26,10 +26,16 @@ const useStyles = makeStyles(injectedTheme => ({
   },
 }));
 
-export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => <TextField
+export const createHelperText = (touched, error, helperText = '') => {
+  if (touched && error && helperText) return <span>{error} &mdash; {helperText}</span>;
+  if (touched && error) return error;
+  return helperText;
+};
+
+export const renderTextField = ({ input, label, meta: { touched, error }, helperText, ...custom }) => <TextField
     style={fieldStyle}
     label={label}
-    helperText={touched ? error : ''}
+    helperText={createHelperText(touched, error, helperText)}
     error={error && touched}
     {...input}
     {...custom}

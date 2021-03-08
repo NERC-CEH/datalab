@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createHelperText constructs the correct helper text when field touched, there is an error and helper text is provided 1`] = `
+<span>
+  Expected error
+   — 
+  Helper text
+</span>
+`;
