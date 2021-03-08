@@ -4,7 +4,7 @@ import { permissionTypes } from 'common';
 import clustersController from '../controllers/clustersController';
 import permissionMiddleware from '../auth/permissionMiddleware';
 
-const { projectPermissions: { PROJECT_KEY_STACKS_CREATE } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE } } = permissionTypes;
 
 const { errorWrapper } = service.middleware;
 
@@ -12,7 +12,7 @@ const clustersRouter = express.Router();
 
 clustersRouter.post(
   '/',
-  permissionMiddleware(PROJECT_KEY_STACKS_CREATE),
+  permissionMiddleware(PROJECT_KEY_CLUSTERS_CREATE),
   clustersController.clusterValidator(),
   errorWrapper(clustersController.createCluster),
 );

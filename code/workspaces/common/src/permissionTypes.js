@@ -9,6 +9,7 @@ const MANAGER = 'manager';
 
 const STACKS = 'stacks';
 const STORAGE = 'storage';
+const CLUSTERS = 'clusters';
 const SETTINGS = 'settings';
 const PERMISSIONS = 'permissions';
 const USERS = 'users';
@@ -59,6 +60,7 @@ const usersPermissionList = {
 const elements = {
   STACKS,
   STORAGE,
+  CLUSTERS,
   SETTINGS,
   PERMISSIONS,
   PROJECTS,

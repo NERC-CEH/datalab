@@ -2,6 +2,12 @@
 
 exports[`PermissionTypes generates expected permissions 1`] = `
 Object {
+  "CLUSTERS_CREATE": "clusters:create",
+  "CLUSTERS_DELETE": "clusters:delete",
+  "CLUSTERS_EDIT": "clusters:edit",
+  "CLUSTERS_LIST": "clusters:list",
+  "CLUSTERS_OPEN": "clusters:open",
+  "CLUSTERS_READ": "clusters:read",
   "PERMISSIONS_CREATE": "permissions:create",
   "PERMISSIONS_DELETE": "permissions:delete",
   "PERMISSIONS_EDIT": "permissions:edit",
@@ -37,6 +43,12 @@ Object {
 
 exports[`PermissionTypes generates expected permissions with the project prefix 1`] = `
 Object {
+  "PROJECT_KEY_CLUSTERS_CREATE": "projects:?projectKey?:clusters:create",
+  "PROJECT_KEY_CLUSTERS_DELETE": "projects:?projectKey?:clusters:delete",
+  "PROJECT_KEY_CLUSTERS_EDIT": "projects:?projectKey?:clusters:edit",
+  "PROJECT_KEY_CLUSTERS_LIST": "projects:?projectKey?:clusters:list",
+  "PROJECT_KEY_CLUSTERS_OPEN": "projects:?projectKey?:clusters:open",
+  "PROJECT_KEY_CLUSTERS_READ": "projects:?projectKey?:clusters:read",
   "PROJECT_KEY_PERMISSIONS_CREATE": "projects:?projectKey?:permissions:create",
   "PROJECT_KEY_PERMISSIONS_DELETE": "projects:?projectKey?:permissions:delete",
   "PROJECT_KEY_PERMISSIONS_EDIT": "projects:?projectKey?:permissions:edit",
