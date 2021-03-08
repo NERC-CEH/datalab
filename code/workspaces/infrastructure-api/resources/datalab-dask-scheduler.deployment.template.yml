@@ -13,9 +13,9 @@ spec:
         dask-infra: scheduler-{{name}}-po
     spec:
       containers:
-        - image: {{daskImage}}
+        - image: {{{daskImage}}}
           command: ["bash"]
-          args: {{schedulerArgs}}
+          args: ["-c", "{{{schedulerPath}}}"]
           name: dask-scheduler-cont
           ports:
             - containerPort: 8786

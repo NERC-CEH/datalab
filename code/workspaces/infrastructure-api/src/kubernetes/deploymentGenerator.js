@@ -40,7 +40,7 @@ function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, pureD
   const context = {
     name: deploymentName,
     daskImage: condaPath ? jupyterLabImage : pureDaskImage,
-    schedulerArgs: condaPath ? ['-c', `${condaPath}/bin/dask-scheduler`] : ['-c', 'dask-scheduler'],
+    schedulerPath: condaPath ? `${condaPath}/bin/dask-scheduler` : 'dask-scheduler',
     schedulerMemory,
     schedulerCpu,
   };

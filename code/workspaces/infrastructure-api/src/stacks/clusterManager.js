@@ -9,12 +9,12 @@ async function createClusterStack(params) {
   const deploymentParams = {
     ...params,
     type,
-    pureDaskImage: defaultImage('dask'),
-    jupyterLabImage: defaultImage('jupyterlab'),
+    pureDaskImage: defaultImage('dask').image,
+    jupyterLabImage: defaultImage('jupyterlab').image,
     schedulerMemory: `${clustersConfig().dask.scheduler.memoryMax_GB.default}Gi`,
     schedulerCpu: `${clustersConfig().dask.scheduler.CpuMax_vCPU.default}`,
   };
-  await createDeployment(deploymentParams, deploymentGenerator.createDatalabDaskSchedulerDeployment);
+  await createDeployment(deploymentParams, deploymentGenerator.createDatalabDaskSchedulerDeployment)();
 }
 
 export { createClusterStack }; // eslint-disable-line import/prefer-default-export
