@@ -1,38 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: scheduler-{{name}}-deploy
+  name: worker-{{name}}-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      dask-infra: scheduler-{{name}}-po
+      dask-infra: worker-{{name}}-po
   template:
     metadata:
       labels:
-        dask-infra: scheduler-{{name}}-po
+        dask-infra: worker-{{name}}-po
     spec:
       containers:
         - image: {{{daskImage}}}
           command: ["bash"]
-          args: ["-c", "{{{schedulerPath}}}"]
-          name: dask-scheduler-cont
-          ports:
-            - containerPort: 8786
-            - containerPort: 8787
+          args: ["-c", "{{{workerPath}}} --nthreads {{nThreads}} --no-dashboard --memory-limit {{workerMemory}} --death-timeout {{deathTimeoutSec}} tcp://scheduler-{{name}}-svc:8786"]
+          name: dask-worker-cont
           resources:
             requests:
-              memory: {{schedulerMemory}}
-              cpu: {{schedulerCpu}}
+              memory: {{workerMemory}}
+              cpu: {{workerCpu}}
             limits:
-              memory: {{schedulerMemory}}
-              cpu: {{schedulerCpu}}
+              memory: {{workerMemory}}
+              cpu: {{workerCpu}}
           volumeMounts:
             {{#volumeMount}}
             - name: persistentfsvol
               mountPath: /data
             {{/volumeMount}}
-      hostname: dask-scheduler-host
+      hostname: dask-worker-host
       restartPolicy: Always
       volumes:
         {{#volumeMount}}

@@ -5,6 +5,8 @@ import serviceApi from '../kubernetes/serviceApi';
 import configMapApi from '../kubernetes/configMapApi';
 import ingressApi from '../kubernetes/ingressApi';
 import volumeApi from '../kubernetes/volumeApi';
+import networkPolicyApi from '../kubernetes/networkPolicyApi';
+import autoScalerApi from '../kubernetes/autoScalerApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import nameGenerator from '../common/nameGenerators';
 
@@ -107,5 +109,28 @@ export const createPersistentVolume = (params, generator) => () => {
       logger.info(`Creating persistent volume ${chalk.blue(volumeName)} with manifest:`);
       logger.debug(manifest.toString());
       return volumeApi.createOrUpdatePersistentVolumeClaim(volumeName, projectKey, manifest);
+    });
+};
+
+export const createNetworkPolicy = (params, generator) => () => {
+  const { name, type, projectKey } = params;
+  const networkPolicyName = nameGenerator.networkPolicyName(name, type);
+  return generator(networkPolicyName, name, projectKey)
+    .then((manifest) => {
+      logger.info(`Creating network policy ${chalk.blue(networkPolicyName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return networkPolicyApi.createOrUpdateNetworkPolicy(networkPolicyName, projectKey, manifest);
+    });
+};
+
+export const createAutoScaler = (params, generator) => () => {
+  const { name, type, projectKey, cpuUtilization, memoryUtilization, scaleDownWindowSec } = params;
+  const autoScalerName = nameGenerator.autoScalerName(name, type);
+  const deploymentName = nameGenerator.deploymentName(name, type);
+  return generator(autoScalerName, deploymentName, cpuUtilization, memoryUtilization, scaleDownWindowSec)
+    .then((manifest) => {
+      logger.info(`Creating pod auto-scaler ${chalk.blue(autoScalerName)} with manifest:`);
+      logger.debug(manifest.toString());
+      return autoScalerApi.createOrUpdateAutoScaler(autoScalerName, projectKey, manifest);
     });
 };

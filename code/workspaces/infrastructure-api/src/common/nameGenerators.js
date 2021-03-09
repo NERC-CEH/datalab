@@ -5,6 +5,8 @@ const pvcName = volumeName => `${volumeName}-claim`;
 const stackCredentialSecret = generateDeploymentName;
 const assetVolume = assetId => `asset-${assetId}`;
 const isAssetVolume = volumeName => volumeName.match(/^asset-/);
+const networkPolicyName = (name, type) => `${type}-${name}-netpol`;
+const autoScalerName = (name, type) => `${type}-${name}-hpa`;
 
 // project namespaces
 const projectNamespace = projectKey => projectKey;
@@ -28,6 +30,8 @@ export default {
   computeSubmissionClusterRole,
   computeSubmissionServiceAccount,
   computeSubmissionServiceAccountRoleBinding,
+  networkPolicyName,
+  autoScalerName,
   projectNamespace,
   projectComputeNamespace,
   pvcName,

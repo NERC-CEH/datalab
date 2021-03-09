@@ -10,6 +10,7 @@ const ServiceTemplates = Object.freeze({
   NBVIEWER_SERVICE: 'nbviewer.service.template.yml',
   MINIO_SERVICE: 'minio.service.template.yml',
   SPARK_DRIVER_HEADLESS_SERVICE: 'spark-driver.headless-service.template.yml',
+  DATALAB_DASK_SCHEDULER_SERVICE: 'datalab-dask-scheduler.service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
@@ -21,6 +22,7 @@ const DeploymentTemplates = Object.freeze({
   NBVIEWER_DEPLOYMENT: 'nbviewer.deployment.template.yml',
   MINIO_DEPLOYMENT: 'minio.deployment.template.yml',
   DATALAB_DASK_SCHEDULER_DEPLOYMENT: 'datalab-dask-scheduler.deployment.template.yml',
+  DATALAB_DASK_WORKER_DEPLOYMENT: 'datalab-dask-worker.deployment.template.yml',
 });
 
 const IngressTemplates = Object.freeze({
@@ -40,6 +42,14 @@ const ConfigMapTemplates = Object.freeze({
   DASK_CONFIGMAP: 'dask.configmap.template.yml',
 });
 
+const NetworkPolicyTemplates = Object.freeze({
+  DATALAB_DASK_SCHEDULER_NETWORK_POLICY: 'datalab-dask-scheduler.network-policy.template.yml',
+});
+
+const AutoScalerTemplates = Object.freeze({
+  DATALAB_DASK_WORKER_AUTO_SCALER: 'datalab-dask-worker.auto-scaler.template.yml',
+});
+
 function generateManifest(context, template) {
   const templatePath = `resources/${template}`;
   return fs.readFileAsync(templatePath)
@@ -47,4 +57,4 @@ function generateManifest(context, template) {
     .then(templateContent => render(templateContent, context));
 }
 
-export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, ConfigMapTemplates, generateManifest };
+export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, ConfigMapTemplates, NetworkPolicyTemplates, AutoScalerTemplates, generateManifest };

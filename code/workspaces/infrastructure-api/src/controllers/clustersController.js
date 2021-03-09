@@ -13,6 +13,7 @@ async function createCluster(request, response, next) {
   if (await handleExistingCluster(cluster, response, next)) return response;
 
   try {
+    // TODO - add schedulerAddress to mongo
     const createdCluster = await clustersRepository.createCluster(cluster);
     await createClusterStack(cluster);
     return response.status(201).send(createdCluster);
