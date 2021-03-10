@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalLink renders to match snapshot correctly passing props to child components 1`] = `
+<a
+  href="http://test-external-link.com"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  Test Link Text
+</a>
+`;

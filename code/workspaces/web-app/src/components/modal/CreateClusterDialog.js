@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateClusterDialog = ({ title, onSubmit, onCancel, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu }) => {
+const CreateClusterDialog = ({ title, formName, onSubmit, onCancel, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu }) => {
   const classes = useStyles();
   return (
     <Dialog open={true} maxWidth="md">
@@ -20,6 +20,7 @@ const CreateClusterDialog = ({ title, onSubmit, onCancel, dataStorageOptions, cl
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <CreateClusterForm
+            formName={formName}
             onSubmit={onSubmit}
             cancel={onCancel}
             clusterMaxWorkers={clusterMaxWorkers}
@@ -46,6 +47,7 @@ const inputConstraintPropTypes = PropTypes.shape({
 
 CreateClusterDialog.propTypes = {
   title: PropTypes.string.isRequired,
+  formName: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   dataStorageOptions: PropTypes.arrayOf(PropTypes.object).isRequired,

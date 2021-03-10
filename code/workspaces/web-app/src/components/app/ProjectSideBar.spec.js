@@ -17,6 +17,7 @@ const userPermissions = [
   `${PROJECT_NAMESPACE}:project99:storage:list`,
   `${PROJECT_NAMESPACE}:project99:stacks:list`,
   `${PROJECT_NAMESPACE}:project99:settings:list`,
+  `${PROJECT_NAMESPACE}:project99:clusters:list`,
 ];
 
 const projectKey = { fetching: false, error: null, value: 'project99' };

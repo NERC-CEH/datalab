@@ -5,8 +5,6 @@ import { CreateFormControls, renderSelectField, renderTextField } from '../commo
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 import { syncValidate } from './createClusterValidator';
 
-export const FORM_NAME = 'createCluster';
-
 const commonFieldProps = {
   component: renderTextField,
   InputLabelProps: { shrink: true },
@@ -25,11 +23,11 @@ export const removeNoneOptions = values => Object.entries(values).reduce(
   {},
 );
 
-const CreateClusterForm = ({
-  handleSubmit, onSubmit, cancel, submitting, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu,
+export const CreateClusterFormContent = ({
+  handleSubmit, form: formName, onSubmit, cancel, submitting, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu,
 }) => {
   const VOLUME_MOUNT_FIELD_NAME = 'volumeMount';
-  const volumeMountValue = useReduxFormValue(FORM_NAME, VOLUME_MOUNT_FIELD_NAME);
+  const volumeMountValue = useReduxFormValue(formName, VOLUME_MOUNT_FIELD_NAME);
 
   return (
     <form onSubmit={handleSubmit(values => onSubmit(removeNoneOptions(values)))}>
@@ -109,14 +107,15 @@ const CreateClusterForm = ({
 };
 
 const CreateClusterReduxForm = reduxForm({
-  form: FORM_NAME,
   validate: syncValidate,
   destroyOnUnmount: false,
   enableReinitialize: true,
-})(CreateClusterForm);
+})(CreateClusterFormContent);
 
-export { CreateClusterForm as PureCreateClusterForm };
-export default CreateClusterReduxForm;
+const CreateClusterForm = ({ formName, ...otherProps }) => <CreateClusterReduxForm form={formName} {...otherProps} />;
+
+export { CreateClusterFormContent as PureCreateClusterForm };
+export default CreateClusterForm;
 
 const dropDownOptionType = PropTypes.shape({
   text: PropTypes.string.isRequired,
@@ -132,6 +131,7 @@ const inputConstraintPropTypes = PropTypes.shape({
 });
 
 CreateClusterForm.propTypes = {
+  formName: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
   dataStorageOptions: dropDownOptionArrayType.isRequired,

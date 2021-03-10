@@ -121,6 +121,7 @@ const resolvers = {
 
   Cluster: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
+    schedulerAddress: () => 'http://dummy-scheduler-address.namespace.svc.cluster.local',
   },
 };
 
