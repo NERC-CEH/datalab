@@ -113,12 +113,13 @@ export const createPersistentVolume = (params, generator) => () => {
 };
 
 export const createNetworkPolicy = (params, generator) => () => {
-  const { name, schedulerPodLabel, projectKey } = params;
-  return generator(name, schedulerPodLabel, projectKey)
+  const { name, type, schedulerPodLabel, projectKey } = params;
+  const networkPolicyName = nameGenerator.networkPolicyName(name, type);
+  return generator(networkPolicyName, schedulerPodLabel, projectKey)
     .then((manifest) => {
-      logger.info(`Creating network policy ${chalk.blue(name)} with manifest:`);
+      logger.info(`Creating network policy ${chalk.blue(networkPolicyName)} with manifest:`);
       logger.debug(manifest.toString());
-      return networkPolicyApi.createOrUpdateNetworkPolicy(name, projectKey, manifest);
+      return networkPolicyApi.createOrUpdateNetworkPolicy(networkPolicyName, projectKey, manifest);
     });
 };
 

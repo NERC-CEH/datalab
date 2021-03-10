@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: scheduler-{{name}}-deploy
+  name: {{name}}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      dask-infra: scheduler-{{name}}-po
+      dask-infra: {{schedulerPodLabel}}
   template:
     metadata:
       labels:
-        dask-infra: scheduler-{{name}}-po
+        dask-infra: {{schedulerPodLabel}}
     spec:
       containers:
         - image: {{{daskImage}}}

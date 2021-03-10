@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: worker-{{name}}-deploy
+  name: {{name}}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      dask-infra: worker-{{name}}-po
+      dask-infra: {{workerPodLabel}}
   template:
     metadata:
       labels:
-        dask-infra: worker-{{name}}-po
+        dask-infra: {{workerPodLabel}}
     spec:
       containers:
         - image: {{{daskImage}}}
           command: ["bash"]
-          args: ["-c", "{{{workerPath}}} --nthreads {{nThreads}} --no-dashboard --memory-limit {{workerMemory}} --death-timeout {{deathTimeoutSec}} tcp://scheduler-{{name}}-svc:8786"]
+          args: ["-c", "{{{workerPath}}} --nthreads {{nThreads}} --no-dashboard --memory-limit {{workerMemory}} --death-timeout {{deathTimeoutSec}} tcp://{{schedulerServiceName}}:8786"]
           name: dask-worker-cont
           resources:
             requests:

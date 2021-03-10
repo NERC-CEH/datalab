@@ -7,6 +7,7 @@ const assetVolume = assetId => `asset-${assetId}`;
 const isAssetVolume = volumeName => volumeName.match(/^asset-/);
 const networkPolicyName = (name, type) => `${type}-${name}-netpol`;
 const autoScalerName = (name, type) => `${type}-${name}-hpa`;
+const podLabel = name => `${name}-po`;
 
 // project namespaces
 const projectNamespace = projectKey => projectKey;
@@ -23,9 +24,6 @@ const daskConfigMap = deploymentName => `${deploymentName}-dask-config`;
 const sparkDriverHeadlessService = deploymentServiceName => `${deploymentServiceName}-spark-driver-headless-service`;
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
-// Dask
-const schedulerPodLabel = name => `scheduler-${name}-po`;
-
 export default {
   assetVolume,
   isAssetVolume,
@@ -35,6 +33,7 @@ export default {
   computeSubmissionServiceAccountRoleBinding,
   networkPolicyName,
   autoScalerName,
+  podLabel,
   projectNamespace,
   projectComputeNamespace,
   pvcName,
@@ -43,5 +42,4 @@ export default {
   sparkDriverHeadlessService,
   sparkJob,
   stackCredentialSecret,
-  schedulerPodLabel,
 };
