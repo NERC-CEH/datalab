@@ -14,6 +14,7 @@ async function createCluster(request, response, next) {
 
   try {
     // TODO - add schedulerAddress to mongo
+    // TODO - add dask design decision
     const createdCluster = await clustersRepository.createCluster(cluster);
     await createClusterStack(cluster);
     return response.status(201).send(createdCluster);

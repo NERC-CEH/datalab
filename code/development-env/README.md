@@ -186,10 +186,15 @@ kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 * Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
 
 ```bash
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up --remove-orphans
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up --remove-orphans
 ```
 
-You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`  The services can be run in the background by running docker-compose with the -d flag.
+You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
+
+Note:
+
+* The services can be run in the background by running docker-compose with the -d flag.
+* If you want to maintain the state of your previous run, omit `docker-compose-mongo-import.yml`.
 
 ### Running with Keycloak
 
@@ -207,7 +212,7 @@ Keycloak must be resolvable both by the auth service as well as your local deskt
 Finally, use the following command to start the app in place of the final one used above. When setting up for the first time it may take a minute before login is available as the OIDC client is set up for the first time.
 
 ```bash
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up -d
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up
 ```
 
 ### Accessing the database

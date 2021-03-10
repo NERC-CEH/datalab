@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{networkPolicyName}}
+  name: {{name}}
 spec:
   podSelector:
     matchLabels:
-      dask-infra: scheduler-{{name}}-po
+      dask-infra: {{schedulerPodLabel}}
   policyTypes:
   - Ingress
   ingress:

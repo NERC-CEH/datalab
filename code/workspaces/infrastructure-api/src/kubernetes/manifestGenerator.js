@@ -47,7 +47,7 @@ const NetworkPolicyTemplates = Object.freeze({
 });
 
 const AutoScalerTemplates = Object.freeze({
-  DATALAB_DASK_WORKER_AUTO_SCALER: 'datalab-dask-worker.auto-scaler.template.yml',
+  AUTO_SCALER: 'auto-scaler.template.yml',
 });
 
 function generateManifest(context, template) {

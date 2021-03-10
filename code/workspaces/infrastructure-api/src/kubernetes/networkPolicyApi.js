@@ -41,8 +41,8 @@ function createNetworkPolicy(name, namespace, manifest) {
 
 function replaceNetworkPolicy(name, namespace, manifest) {
   logger.info('Replacing network policy: %s in namespace %s', name, namespace);
-  return deleteNetworkPolicy(name)
-    .then(() => createNetworkPolicy(name, manifest));
+  return deleteNetworkPolicy(name, namespace)
+    .then(() => createNetworkPolicy(name, namespace, manifest));
 }
 
 function updateNetworkPolicy(name, namespace, manifest, existingNetworkPolicy) {

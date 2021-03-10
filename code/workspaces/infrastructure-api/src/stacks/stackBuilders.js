@@ -113,21 +113,20 @@ export const createPersistentVolume = (params, generator) => () => {
 };
 
 export const createNetworkPolicy = (params, generator) => () => {
-  const { name, type, projectKey } = params;
-  const networkPolicyName = nameGenerator.networkPolicyName(name, type);
-  return generator(networkPolicyName, name, projectKey)
+  const { name, schedulerPodLabel, projectKey } = params;
+  return generator(name, schedulerPodLabel, projectKey)
     .then((manifest) => {
-      logger.info(`Creating network policy ${chalk.blue(networkPolicyName)} with manifest:`);
+      logger.info(`Creating network policy ${chalk.blue(name)} with manifest:`);
       logger.debug(manifest.toString());
-      return networkPolicyApi.createOrUpdateNetworkPolicy(networkPolicyName, projectKey, manifest);
+      return networkPolicyApi.createOrUpdateNetworkPolicy(name, projectKey, manifest);
     });
 };
 
 export const createAutoScaler = (params, generator) => () => {
-  const { name, type, projectKey, cpuUtilization, memoryUtilization, scaleDownWindowSec } = params;
+  const { name, type, projectKey, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec } = params;
   const autoScalerName = nameGenerator.autoScalerName(name, type);
-  const deploymentName = nameGenerator.deploymentName(name, type);
-  return generator(autoScalerName, deploymentName, cpuUtilization, memoryUtilization, scaleDownWindowSec)
+  const scaleDeploymentName = nameGenerator.deploymentName(name, type);
+  return generator(autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec)
     .then((manifest) => {
       logger.info(`Creating pod auto-scaler ${chalk.blue(autoScalerName)} with manifest:`);
       logger.debug(manifest.toString());

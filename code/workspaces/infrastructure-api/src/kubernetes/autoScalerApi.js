@@ -41,8 +41,8 @@ function createAutoScaler(name, namespace, manifest) {
 
 function replaceAutoScaler(name, namespace, manifest) {
   logger.info('Replacing auto-scaler: %s in namespace %s', name, namespace);
-  return deleteAutoScaler(name)
-    .then(() => createAutoScaler(name, manifest));
+  return deleteAutoScaler(name, namespace)
+    .then(() => createAutoScaler(name, namespace, manifest));
 }
 
 function updateAutoScaler(name, namespace, manifest, existingAutoScaler) {

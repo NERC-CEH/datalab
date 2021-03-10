@@ -6,22 +6,22 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{workerDeploymentName}}
+    name: {{scaleDeploymentName}}
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: {{maxReplicas}}
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: {{workerCpuUtilization}}
+        averageUtilization: {{targetCpuUtilization}}
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: {{workerMemoryUtilization}}
+        averageUtilization: {{targetMemoryUtilization}}
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: {{workerScaleDownWindowSec}}
+      stabilizationWindowSeconds: {{scaleDownWindowSec}}

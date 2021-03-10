@@ -41,8 +41,8 @@ function createService(name, namespace, manifest) {
 
 function replaceService(name, namespace, manifest) {
   logger.info('Replacing service: %s in namespace %s', name, namespace);
-  return deleteService(name)
-    .then(() => createService(name, manifest));
+  return deleteService(name, namespace)
+    .then(() => createService(name, namespace, manifest));
 }
 
 function updateService(name, namespace, manifest, existingService) {

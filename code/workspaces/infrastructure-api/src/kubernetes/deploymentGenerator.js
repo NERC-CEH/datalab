@@ -59,7 +59,6 @@ function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, pureDask
     nThreads,
     deathTimeoutSec,
   };
-  console.log(`context ${JSON.stringify(context)}`);
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_WORKER_DEPLOYMENT);
 }
 
@@ -215,20 +214,21 @@ function createDaskConfigMap(notebookName, projectKey, configMapName) {
   return generateManifest(context, ConfigMapTemplates.DASK_CONFIGMAP);
 }
 
-function createDatalabDaskSchedulerNetworkPolicy(networkPolicyName, name, projectKey) {
-  const context = { networkPolicyName, name, projectKey };
+function createDatalabDaskSchedulerNetworkPolicy(name, schedulerPodLabel, projectKey) {
+  const context = { name, schedulerPodLabel, projectKey };
   return generateManifest(context, NetworkPolicyTemplates.DATALAB_DASK_SCHEDULER_NETWORK_POLICY);
 }
 
-function createDatalabDaskWorkerAutoScaler(autoScalerName, workerDeploymentName, workerCpuUtilization, workerMemoryUtilization, workerScaleDownWindowSec) {
+function createAutoScaler(autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec) {
   const context = {
     autoScalerName,
-    workerDeploymentName,
-    workerCpuUtilization,
-    workerMemoryUtilization,
-    workerScaleDownWindowSec,
+    scaleDeploymentName,
+    maxReplicas,
+    targetCpuUtilization,
+    targetMemoryUtilization,
+    scaleDownWindowSec,
   };
-  return generateManifest(context, AutoScalerTemplates.DATALAB_DASK_WORKER_AUTO_SCALER);
+  return generateManifest(context, AutoScalerTemplates.AUTO_SCALER);
 }
 
 export default {
@@ -251,5 +251,5 @@ export default {
   createDatalabDaskWorkerDeployment,
   createDatalabDaskSchedulerService,
   createDatalabDaskSchedulerNetworkPolicy,
-  createDatalabDaskWorkerAutoScaler,
+  createAutoScaler,
 };

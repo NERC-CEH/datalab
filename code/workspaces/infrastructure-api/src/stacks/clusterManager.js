@@ -2,34 +2,45 @@ import clustersConfig from 'common/src/config/clusters';
 import { defaultImage } from 'common/src/config/images';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import { createDeployment, createService, createNetworkPolicy, createAutoScaler } from './stackBuilders';
+import nameGenerator from '../common/nameGenerators';
 
-const daskType = 'datalab-dask';
-
-async function createClusterStack({ volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
+async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
+  const lowerType = type.toLowerCase();
+  const networkPolicyName = nameGenerator.networkPolicyName(name, lowerType);
+  const schedulerPodLabel = nameGenerator.schedulerPodLabel(name);
   const clusterParams = {
-    type: daskType,
+    type: lowerType,
+    name, // TODO remove this
     projectKey,
-    name,
     volumeMount,
     condaPath,
-    maxWorkers,
-    workerMemory: `${maxWorkerMemoryGb}Gi`,
-    workerCpu: maxWorkerCpu,
     pureDaskImage: defaultImage('dask').image,
     jupyterLabImage: defaultImage('jupyterlab').image,
+    workerMemory: `${maxWorkerMemoryGb}Gi`,
+    workerCpu: maxWorkerCpu,
+    schedulerPodLabel,
     schedulerMemory: `${clustersConfig().dask.scheduler.memoryMax_GB.default}Gi`,
     schedulerCpu: clustersConfig().dask.scheduler.CpuMax_vCPU.default,
     nThreads: clustersConfig().dask.workers.nThreads.default,
     deathTimeoutSec: clustersConfig().dask.workers.deathTimeout_sec.default,
-    cpuUtilization: clustersConfig().dask.workers.targetCpuUtilization_percent.default,
-    memoryUtilization: clustersConfig().dask.workers.targetMemoryUtilization_percent.default,
+    maxReplicas: maxWorkers,
+    targetCpuUtilization: clustersConfig().dask.workers.targetCpuUtilization_percent.default,
+    targetMemoryUtilization: clustersConfig().dask.workers.targetMemoryUtilization_percent.default,
     scaleDownWindowSec: clustersConfig().dask.workers.scaleDownWindow_sec.default,
   };
-  await createNetworkPolicy(clusterParams, deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy)();
-  await createDeployment(clusterParams, deploymentGenerator.createDatalabDaskWorkerDeployment)();
-  await createService(clusterParams, deploymentGenerator.createDatalabDaskSchedulerService)();
-  await createDeployment(clusterParams, deploymentGenerator.createDatalabDaskSchedulerDeployment)();
-  await createAutoScaler(clusterParams, deploymentGenerator.createDatalabDaskWorkerAutoScaler)();
+  // TODO - have params for each type, so name is full name for each
+  const networkPolicyParams = { ...clusterParams, name: networkPolicyName };
+
+  // create network policy first for security
+  await createNetworkPolicy(networkPolicyParams, deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy)();
+
+  // do the rest in parallel
+  await Promise.all([
+    createDeployment(clusterParams, deploymentGenerator.createDatalabDaskWorkerDeployment)(),
+    createService(clusterParams, deploymentGenerator.createDatalabDaskSchedulerService)(),
+    createDeployment(clusterParams, deploymentGenerator.createDatalabDaskSchedulerDeployment)(),
+    createAutoScaler(clusterParams, deploymentGenerator.createAutoScaler)(),
+  ]);
 }
 
 export { createClusterStack }; // eslint-disable-line import/prefer-default-export
