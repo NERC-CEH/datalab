@@ -5,6 +5,7 @@ import CreateClusterDialog from './CreateClusterDialog';
 describe('CreateClusterDialog', () => {
   const getProps = () => ({
     title: 'Create Cluster Dialog Title',
+    formName: 'createCluster',
     onSubmit: jest.fn().mockName('onSubmit'),
     onCancel: jest.fn().mockName('onCancel'),
     dataStorageOptions: [],

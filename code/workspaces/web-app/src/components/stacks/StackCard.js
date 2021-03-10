@@ -124,18 +124,18 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
       <div className={classes.actionsDiv}>
         {typeName !== STORAGE_TYPE_NAME && typeName !== PROJECT_TYPE_NAME && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
         <StackCardActions
-            stack={stack}
-            openStack={openStack}
-            deleteStack={deleteStack}
-            editStack={editStack}
-            restartStack={restartStack}
-            getLogs={getLogs}
-            userPermissions={userPermissions}
-            openPermission={openPermission}
-            deletePermission={deletePermission}
-            shareStack={shareStack}
-            editPermission={editPermission}
-          />
+          stack={stack}
+          openStack={openStack}
+          deleteStack={deleteStack}
+          editStack={editStack}
+          restartStack={restartStack}
+          getLogs={getLogs}
+          userPermissions={userPermissions}
+          openPermission={openPermission}
+          deletePermission={deletePermission}
+          shareStack={shareStack}
+          editPermission={editPermission}
+        />
       </div>
     </div>
   );
@@ -161,9 +161,9 @@ StackCard.propTypes = {
   shareStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  openPermission: PropTypes.string.isRequired,
-  deletePermission: PropTypes.string.isRequired,
-  editPermission: PropTypes.string.isRequired,
+  openPermission: PropTypes.string,
+  deletePermission: PropTypes.string,
+  editPermission: PropTypes.string,
 };
 
 function getDisplayName(stack) {

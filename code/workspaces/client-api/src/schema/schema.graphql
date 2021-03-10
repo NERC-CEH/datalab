@@ -408,4 +408,5 @@ type Cluster {
     maxWorkers: Int!
     maxWorkerMemoryGb: Float!
     maxWorkerCpu: Float!
+    schedulerAddress: String
 }

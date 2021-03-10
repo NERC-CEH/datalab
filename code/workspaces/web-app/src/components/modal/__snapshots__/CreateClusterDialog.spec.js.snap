@@ -12,7 +12,7 @@ exports[`CreateClusterDialog renders correctly passing props to child components
       Create Cluster Dialog Title
     </WithStyles(ForwardRef(DialogTitle))>
     <WithStyles(ForwardRef(DialogContent))>
-      <ReduxForm
+      <CreateClusterForm
         cancel={[MockFunction onCancel]}
         clusterMaxWorkers={
           Object {
@@ -22,11 +22,7 @@ exports[`CreateClusterDialog renders correctly passing props to child components
           }
         }
         dataStorageOptions={Array []}
-        destroyOnUnmount={false}
-        enableReinitialize={true}
-        forceUnregisterOnUnmount={false}
-        form="createCluster"
-        getFormState={[Function]}
+        formName="createCluster"
         initialValues={
           Object {
             "maxWorkerCpu": 0.5,
@@ -34,19 +30,7 @@ exports[`CreateClusterDialog renders correctly passing props to child components
             "maxWorkers": 4,
           }
         }
-        keepDirtyOnReinitialize={false}
         onSubmit={[MockFunction onSubmit]}
-        persistentSubmitErrors={false}
-        pure={true}
-        shouldAsyncValidate={[Function]}
-        shouldError={[Function]}
-        shouldValidate={[Function]}
-        shouldWarn={[Function]}
-        submitAsSideEffect={false}
-        touchOnBlur={true}
-        touchOnChange={false}
-        updateUnregisteredFields={false}
-        validate={[Function]}
         workerMaxCpu={
           Object {
             "default": 0.5,

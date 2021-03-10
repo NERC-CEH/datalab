@@ -10,7 +10,7 @@ import ProjectSwitcher from './ProjectSwitcher';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import sideBarStyles from './sideBarStyles';
 
-const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST }, projectKeyPermission } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST, PROJECT_KEY_CLUSTERS_LIST }, projectKeyPermission } = permissionTypes;
 
 const projectRouteBase = projectKey => `/projects/${projectKey}`;
 
@@ -26,7 +26,9 @@ const AnalysisGroup = ({ userPermissions, projectKey }) => (
     <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_STACKS_LIST, projectKey)}>
       <SideBarButton to={`${projectRouteBase(projectKey)}/notebooks`} label="Notebooks" icon="book" />
     </PermissionWrapper>
-    <SideBarButton to={`${projectRouteBase(projectKey)}/dask`} label="Dask" icon="apps" />
+    <PermissionWrapper userPermissions={userPermissions} permission={projectKeyPermission(PROJECT_KEY_CLUSTERS_LIST, projectKey)}>
+      <SideBarButton to={`${projectRouteBase(projectKey)}/dask`} label="Dask" icon="apps" />
+    </PermissionWrapper>
     <SideBarButton to={`${projectRouteBase(projectKey)}/spark`} label="Spark" icon="apps" />
   </SideBarGroup>
 );

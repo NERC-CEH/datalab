@@ -9,3 +9,18 @@ exports[`clusterService createCluster should build the correct mutation and unpa
     }
   "
 `;
+
+exports[`clusterService loadClusters should build the correct query and unpack the results 1`] = `
+"
+    LoadClusters($projectKey: String!) {
+      clusters(projectKey: $projectKey) {
+        id
+        type
+        projectKey
+        name
+        displayName
+        schedulerAddress
+      }
+    }
+  "
+`;
