@@ -13,7 +13,6 @@ async function createCluster(request, response, next) {
   if (await handleExistingCluster(cluster, response, next)) return response;
 
   try {
-    // TODO - add dask design decision
     const schedulerServiceName = getSchedulerServiceName(cluster.name, cluster.type);
     const schedulerAddress = `tcp://${schedulerServiceName}:8786`;
     const createdCluster = await clustersRepository.createCluster({ ...cluster, schedulerAddress });
