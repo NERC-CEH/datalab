@@ -20,7 +20,7 @@ import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 const {
   projectKeyPermission,
-  projectPermissions: { PROJECT_KEY_PROJECTS_READ, PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST },
+  projectPermissions: { PROJECT_KEY_PROJECTS_READ, PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST, PROJECT_KEY_SETTINGS_LIST, PROJECT_KEY_CLUSTERS_LIST },
   SYSTEM_INSTANCE_ADMIN,
 } = permissionTypes;
 
@@ -84,9 +84,12 @@ function PureProjectNavigationContainer({ path, promisedUserPermissions, project
           component={SettingsPage}
           permission={projectKeyPermission(PROJECT_KEY_SETTINGS_LIST, projectKey.value)}
           redirectTo={redirectPath} />
-        <Route exact path={`${path}/dask`}>
-          <DaskPage />
-        </Route>
+        <RoutePermissions
+          exact
+          path={`${path}/dask`}
+          component={DaskPage}
+          permission={projectKeyPermission(PROJECT_KEY_CLUSTERS_LIST, projectKey.value)}
+          redirectTo={redirectPath} />
         <Route exact path={`${path}/spark`}>
           <SparkPage />
         </Route>
