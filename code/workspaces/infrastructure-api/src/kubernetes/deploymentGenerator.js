@@ -39,8 +39,8 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
 function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, pureDaskImage, jupyterLabImage, schedulerPodLabel, schedulerMemory, schedulerCpu, volumeMount }) {
   const context = {
     name: deploymentName,
-    daskImage: condaPath ? jupyterLabImage : pureDaskImage,
-    schedulerPath: condaPath ? `${condaPath}/bin/dask-scheduler` : 'dask-scheduler',
+    daskImage: (volumeMount && condaPath) ? jupyterLabImage : pureDaskImage,
+    schedulerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-scheduler` : 'dask-scheduler',
     schedulerPodLabel,
     schedulerMemory,
     schedulerCpu,
@@ -53,8 +53,8 @@ function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, pureDask
   schedulerServiceName }) {
   const context = {
     name: deploymentName,
-    daskImage: condaPath ? jupyterLabImage : pureDaskImage,
-    workerPath: condaPath ? `${condaPath}/bin/dask-worker` : 'dask-worker',
+    daskImage: (volumeMount && condaPath) ? jupyterLabImage : pureDaskImage,
+    workerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-worker` : 'dask-worker',
     workerPodLabel,
     workerMemory,
     workerCpu,

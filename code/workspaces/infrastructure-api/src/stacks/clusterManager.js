@@ -4,16 +4,22 @@ import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import { createDeployment, createService, createNetworkPolicy, createAutoScaler } from './stackBuilders';
 import nameGenerator from '../common/nameGenerators';
 
-async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
-  // DASK -> dask
-  const lowerType = type.toLowerCase();
+// DASK -> dask
+const getLowerType = type => type.toLowerCase();
 
-  // distinguish between the scheduler and the worker deployments
-  const schedulerName = `scheduler-${name}`;
-  const workerName = `worker-${name}`;
+// distinguish between the scheduler and the worker deployments
+const getSchedulerName = name => `scheduler-${name}`;
+const getWorkerName = name => `worker-${name}`;
+
+export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
+
+async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
+  const lowerType = getLowerType(type);
+  const schedulerName = getSchedulerName(name);
+  const workerName = getWorkerName(name);
 
   // these are referenced in other resources
-  const schedulerServiceName = nameGenerator.deploymentName(schedulerName, lowerType);
+  const schedulerServiceName = getSchedulerServiceName(name, type);
   const schedulerPodLabel = nameGenerator.podLabel(schedulerName, lowerType);
   const workerPodLabel = nameGenerator.podLabel(workerName, lowerType);
 
