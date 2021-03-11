@@ -54,6 +54,7 @@ exports[`CreateClusterForm it renders to match snapshot with condaPath field whe
     helperText="The file path to the conda environment on the selected Data Store to be used by the workers."
     label="Path to Conda environment (optional)"
     name="condaPath"
+    placeholder="/data/conda/conda-env"
   />
   <Field
     InputLabelProps={
