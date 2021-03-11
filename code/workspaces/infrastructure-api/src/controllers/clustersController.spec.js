@@ -5,6 +5,7 @@ import * as clusterManager from '../stacks/clusterManager';
 
 jest.mock('../stacks/clusterManager');
 clusterManager.createClusterStack = jest.fn().mockResolvedValue('okay');
+clusterManager.getSchedulerServiceName = jest.fn().mockReturnValue('dask-scheduler-cluster');
 
 jest.mock('../dataaccess/clustersRepository');
 
@@ -64,13 +65,14 @@ describe('createCluster', () => {
 
   it('creates new cluster document and returns the newly created document with 201 status', async () => {
     const requestMock = clusterRequest();
-    const newMetaDocument = { ...requestMock, _id: '1234' };
+    const schedulerAddress = 'tcp://dask-scheduler-cluster:8786';
+    const newMetaDocument = { ...requestMock, _id: '1234', schedulerAddress };
     clustersRepository.createCluster.mockResolvedValueOnce(newMetaDocument);
 
     const returnValue = await createCluster(requestMock, responseMock, nextMock);
 
     // For testing, the request mock doubles as the metadata object containing the metadata values
-    expect(clustersRepository.createCluster).toHaveBeenCalledWith(requestMock);
+    expect(clustersRepository.createCluster).toHaveBeenCalledWith({ ...requestMock, schedulerAddress });
     expect(returnValue).toBe(responseMock);
     expect(responseMock.status).toHaveBeenCalledWith(201);
     expect(responseMock.send).toHaveBeenCalledWith(newMetaDocument);
