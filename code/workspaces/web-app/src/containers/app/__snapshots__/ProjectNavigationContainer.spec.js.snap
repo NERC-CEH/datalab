@@ -70,12 +70,13 @@ exports[`PureProjectNavigationContainer renders correct snapshot passing props o
       permission="projects:testproj:settings:list"
       redirectTo="projects/testproj/info"
     />
-    <Route
+    <RoutePermissionWrapper
+      component={[Function]}
       exact={true}
       path="projects/:projectKey/dask"
-    >
-      <DaskPage />
-    </Route>
+      permission="projects:testproj:clusters:list"
+      redirectTo="projects/testproj/info"
+    />
     <Route
       exact={true}
       path="projects/:projectKey/spark"

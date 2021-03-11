@@ -16,6 +16,15 @@ async function createCluster(cluster, token) {
   return data;
 }
 
+async function getClusters(projectKey, token) {
+  const { data } = await infrastructureApi().get(
+    `/?projectKey=${projectKey}`,
+    requestConfig(token),
+  );
+  return data;
+}
+
 export default {
   createCluster: wrapWithAxiosErrorWrapper('Error creating cluster.', createCluster),
+  getClusters: wrapWithAxiosErrorWrapper('Error getting clusters.', getClusters),
 };

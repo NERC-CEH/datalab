@@ -35,6 +35,17 @@ async function handleExistingCluster(cluster, response, next) {
   return null;
 }
 
+async function listByProject(request, response, next) {
+  const { projectKey } = matchedData(request);
+
+  try {
+    const clusters = await clustersRepository.listByProject(projectKey);
+    return response.status(200).send(clusters);
+  } catch (error) {
+    return next(new Error(`Error listing clusters: ${error.message}`));
+  }
+}
+
 const range = limits => ({ min: limits.lowerLimit, max: limits.upperLimit });
 
 const clusterValidator = () => {
@@ -80,5 +91,6 @@ const clusterValidator = () => {
 
 export default {
   createCluster,
+  listByProject,
   clusterValidator,
 };

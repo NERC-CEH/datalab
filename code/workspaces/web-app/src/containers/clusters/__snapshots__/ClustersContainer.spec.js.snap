@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClustersContainer renders correct snapshot 1`] = `
+<div>
+  <StackCards
+    createPermission="projects:current-project:clusters:create"
+    openCreationForm={[Function]}
+    showCreateButton={true}
+    stacks={
+      Object {
+        "fetching": false,
+        "value": Array [
+          Object {
+            "description": "http://test-cluster.svc.cluster.local is the scheduler address.",
+            "displayName": "Test Cluster",
+            "name": "testcluster",
+            "schedulerAddress": "http://test-cluster.svc.cluster.local",
+            "type": "DASK",
+          },
+        ],
+      }
+    }
+    typeName="Cluster"
+    typeNamePlural="Clusters"
+    userPermissions={[Function]}
+  />
+</div>
+`;
+
+exports[`getDialogProps returns object of props matching snapshot 1`] = `
+Object {
+  "clusterMaxWorkers": Object {
+    "default": 4,
+    "lowerLimit": 1,
+    "upperLimit": 8,
+  },
+  "dataStorageOptions": Array [],
+  "formName": "createCluster",
+  "onCancel": [Function],
+  "onSubmit": [Function],
+  "title": "Create Cluster",
+  "workerMaxCpu": Object {
+    "default": 0.5,
+    "lowerLimit": 0.5,
+    "upperLimit": 2,
+  },
+  "workerMaxMemory": Object {
+    "default": 4,
+    "lowerLimit": 0.5,
+    "upperLimit": 8,
+  },
+}
+`;

@@ -166,9 +166,9 @@ const sharedPropTypes = {
   getLogs: PropTypes.func,
   shareStack: PropTypes.func,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  openPermission: PropTypes.string.isRequired,
-  deletePermission: PropTypes.string.isRequired,
-  editPermission: PropTypes.string.isRequired,
+  openPermission: PropTypes.string,
+  deletePermission: PropTypes.string,
+  editPermission: PropTypes.string,
 };
 
 StackCardActions.propTypes = sharedPropTypes;

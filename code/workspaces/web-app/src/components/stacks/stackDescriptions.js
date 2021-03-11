@@ -5,8 +5,9 @@ import nbviewerLogo from '../../assets/images/nbviewer-logo.png';
 import rshinyLogo from '../../assets/images/rshiny-logo.png';
 import rstudioLogo from '../../assets/images/rstudio-logo.png';
 import zeppelinLogo from '../../assets/images/zeppelin-logo.svg';
+import daskLogo from '../../assets/images/dask-logo.svg';
 
-const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, PROJECT } = stackTypes;
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY, NBVIEWER, PROJECT, DASK } = stackTypes;
 
 const jupyterDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
 const jupyterlabDescription = 'Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.';
@@ -17,6 +18,7 @@ const rshinyDescription = 'Shiny is an R package that makes it easy to build int
   + 'embed them in R Markdown documents or build dashboards.';
 const nbviewerDescription = 'NBViewer is a simple way to share notebooks. Any Jupyter notebook can be served as a web page.';
 const projectDescription = 'A project lets users share information';
+const daskDescription = 'Dask natively scales Python across multiple workers, providing advanced parallelism for analytics and enabling performance at scale.';
 
 // NOTE: All other stack details should come from 'src/config/images'
 export default {
@@ -27,4 +29,5 @@ export default {
   [RSHINY]: { description: rshinyDescription, logo: rshinyLogo },
   [NBVIEWER]: { description: nbviewerDescription, logo: nbviewerLogo },
   [PROJECT]: { description: projectDescription, initial: true },
+  [DASK]: { description: daskDescription, logo: daskLogo },
 };

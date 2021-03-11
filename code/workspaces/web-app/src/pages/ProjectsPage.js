@@ -1,5 +1,5 @@
 import React from 'react';
-import ProptTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ProjectsContainer from '../containers/projects/ProjectsContainer';
 import Page from './Page';
 
@@ -10,7 +10,7 @@ const ProjectsPage = ({ userPermissions }) => (
 );
 
 ProjectsPage.propTypes = {
-  userPermissions: ProptTypes.arrayOf(ProptTypes.string).isRequired,
+  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ProjectsPage;
