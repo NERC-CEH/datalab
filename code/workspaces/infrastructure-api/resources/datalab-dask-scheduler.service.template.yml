@@ -11,4 +11,4 @@ spec:
       port: 8787
       targetPort: 8787
   selector:
-    dask-infra: {{podLabel}}
+    dask-infra: {{schedulerPodLabel}}

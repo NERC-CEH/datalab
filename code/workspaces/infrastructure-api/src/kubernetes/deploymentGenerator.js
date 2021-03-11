@@ -49,7 +49,8 @@ function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, pureD
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_SCHEDULER_DEPLOYMENT);
 }
 
-function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, pureDaskImage, jupyterLabImage, workerPodLabel, workerMemory, workerCpu, volumeMount, nThreads, deathTimeoutSec }) {
+function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, pureDaskImage, jupyterLabImage, workerPodLabel, workerMemory, workerCpu, volumeMount, nThreads, deathTimeoutSec,
+  schedulerServiceName }) {
   const context = {
     name: deploymentName,
     daskImage: condaPath ? jupyterLabImage : pureDaskImage,
@@ -60,6 +61,7 @@ function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, pureDask
     volumeMount,
     nThreads,
     deathTimeoutSec,
+    schedulerServiceName,
   };
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_WORKER_DEPLOYMENT);
 }
@@ -145,48 +147,48 @@ function createMinioDeployment({ name, deploymentName, type, version }) {
   return generateManifest(context, DeploymentTemplates.MINIO_DEPLOYMENT);
 }
 
-function createJupyterService(notebookName) {
-  const context = { name: notebookName };
+function createJupyterService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
 }
 
-function createDatalabDaskSchedulerService(name) {
+function createDatalabDaskSchedulerService({ serviceName, schedulerPodLabel }) {
   const context = {
-    name,
-    podLabel: nameGenerator.podLabel(name),
+    name: serviceName,
+    schedulerPodLabel,
   };
   return generateManifest(context, ServiceTemplates.DATALAB_DASK_SCHEDULER_SERVICE);
 }
 
-function createZeppelinService(name) {
-  const context = { name };
+function createZeppelinService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.ZEPPELIN_SERVICE);
 }
 
-function createRStudioService(name) {
-  const context = { name };
+function createRStudioService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.RSTUDIO_SERVICE);
 }
 
-function createRShinyService(name) {
-  const context = { name };
+function createRShinyService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.RSHINY_SERVICE);
 }
 
-function createNbViewerService(name) {
-  const context = { name };
+function createNbViewerService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.NBVIEWER_SERVICE);
 }
 
-function createMinioService(name) {
-  const context = { name };
+function createMinioService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.MINIO_SERVICE);
 }
 
-function createSparkDriverHeadlessService(notebookName) {
+function createSparkDriverHeadlessService({ serviceName }) {
   const context = {
-    name: nameGenerator.sparkDriverHeadlessService(notebookName),
-    'deployment-service-name': notebookName,
+    name: nameGenerator.sparkDriverHeadlessService(serviceName),
+    'deployment-service-name': serviceName,
   };
   return generateManifest(context, ServiceTemplates.SPARK_DRIVER_HEADLESS_SERVICE);
 }

@@ -13,9 +13,9 @@ async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, ma
   const workerName = `worker-${name}`;
 
   // these are referenced in other resources
-  const schedulerServiceName = nameGenerator.deploymentName(schedulerName);
-  const schedulerPodLabel = nameGenerator.podLabel(schedulerName);
-  const workerPodLabel = nameGenerator.podLabel(workerName);
+  const schedulerServiceName = nameGenerator.deploymentName(schedulerName, lowerType);
+  const schedulerPodLabel = nameGenerator.podLabel(schedulerName, lowerType);
+  const workerPodLabel = nameGenerator.podLabel(workerName, lowerType);
 
   const clusterParams = {
     type: lowerType,

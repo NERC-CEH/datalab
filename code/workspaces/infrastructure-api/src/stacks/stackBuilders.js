@@ -25,7 +25,7 @@ export const createDeployment = (params, generator) => () => {
 export const createService = (params, generator) => () => {
   const { name, projectKey, type } = params;
   const serviceName = nameGenerator.deploymentName(name, type);
-  return generator(serviceName)
+  return generator({ ...params, serviceName })
     .then((manifest) => {
       logger.info(`Creating service ${chalk.blue(serviceName)} with manifest:`);
       logger.debug(manifest.toString());

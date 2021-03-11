@@ -39,7 +39,7 @@
         "default": 50
       },
       "scaleDownWindow_sec": {
-        "default": 3000
+        "default": 300
       }
     }
   }
