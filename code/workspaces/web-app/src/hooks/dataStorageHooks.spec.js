@@ -18,10 +18,10 @@ describe('useDataStorageArray', () => {
 });
 
 describe('useDataStorageForUserInProject', () => {
-  it('returns list of storage filtered to only contain storage for provided user and project', () => {
-    const desiredUser = 'desired-user';
-    const projectKey = 'testproj';
+  const projectKey = 'testproj';
+  const desiredUser = 'desired-user';
 
+  it('returns list of storage filtered to only contain storage for provided user and project', () => {
     // use expected flag to indicate in the test which stores should be returned
     const stores = [
       { expected: true, projectKey, users: [desiredUser] }, // has correct project and user
@@ -35,5 +35,14 @@ describe('useDataStorageForUserInProject', () => {
     const result = useDataStorageForUserInProject(desiredUser, projectKey);
 
     expect(result.value).toEqual(expectedResult);
+  });
+
+  it('handles users array being not defined', () => {
+    const stores = [{ projectKey, users: undefined }];
+    useShallowSelector.mockReturnValueOnce({ value: stores });
+
+    const result = useDataStorageForUserInProject(desiredUser, projectKey);
+
+    expect(result.value).toEqual([]); // removes stores with undefined users array
   });
 });
