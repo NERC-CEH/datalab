@@ -1,5 +1,4 @@
 import axios from 'axios';
-import yaml from 'js-yaml';
 import logger from '../config/logger';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
@@ -45,13 +44,6 @@ function replaceAutoScaler(name, namespace, manifest) {
     .then(() => createAutoScaler(name, namespace, manifest));
 }
 
-function updateAutoScaler(name, namespace, manifest, existingAutoScaler) {
-  logger.info('Updating auto-scaler: %s in namespace %s', name, namespace);
-  const jsonManifest = copyRequiredFieldsToJsonManifest(manifest, existingAutoScaler);
-  return axios.put(getAutoScalerUrl(namespace, name), jsonManifest)
-    .catch(handleCreateError('auto-scaler', name));
-}
-
 function deleteAutoScaler(name, namespace) {
   logger.info('Deleting auto-scaler: %s in namespace %s', name, namespace);
   return axios.delete(`${getAutoScalerUrl(namespace, name)}`)
@@ -59,11 +51,4 @@ function deleteAutoScaler(name, namespace) {
     .catch(handleDeleteError('auto-scaler', name));
 }
 
-function copyRequiredFieldsToJsonManifest(manifest, existingAutoScaler) {
-  const jsonManifest = yaml.load(manifest);
-  jsonManifest.spec.clusterIP = existingAutoScaler.spec.clusterIP;
-  jsonManifest.metadata.resourceVersion = existingAutoScaler.metadata.resourceVersion;
-  return jsonManifest;
-}
-
-export default { getAutoScaler, createAutoScaler, updateAutoScaler, deleteAutoScaler, createOrUpdateAutoScaler };
+export default { getAutoScaler, createAutoScaler, deleteAutoScaler, createOrUpdateAutoScaler };

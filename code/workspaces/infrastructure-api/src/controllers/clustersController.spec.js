@@ -33,6 +33,7 @@ const clusterRequest = () => ({
 const clusterDocument = () => ({
   ...clusterRequest(),
   _id: '1234',
+  schedulerAddress: 'tcp://dask-scheduler-cluster:8786',
 });
 
 beforeEach(() => {
@@ -85,18 +86,17 @@ describe('clustersController', () => {
       // Arrange
       const requestMock = clusterRequest();
       const document = clusterDocument();
-      const schedulerAddress = 'tcp://dask-scheduler-cluster:8786';
-      const newMetaDocument = { ...document, schedulerAddress };
-      clustersRepository.createCluster.mockResolvedValueOnce(newMetaDocument);
+      clustersRepository.createCluster.mockResolvedValueOnce(document);
 
       // Act
       const returnValue = await createCluster(requestMock, responseMock, nextMock);
 
       // For testing, the request mock doubles as the metadata object containing the metadata values
-      expect(clustersRepository.createCluster).toHaveBeenCalledWith({ ...requestMock, schedulerAddress });
+      expect(clustersRepository.createCluster).toHaveBeenCalledWith({ ...requestMock, schedulerAddress: document.schedulerAddress });
+      expect(clusterManager.createClusterStack).toHaveBeenCalledWith(requestMock);
       expect(returnValue).toBe(responseMock);
       expect(responseMock.status).toHaveBeenCalledWith(201);
-      expect(responseMock.send).toHaveBeenCalledWith(newMetaDocument);
+      expect(responseMock.send).toHaveBeenCalledWith(document);
     });
 
     it('calls next with an error if there is an error when creating the new metadata document', async () => {

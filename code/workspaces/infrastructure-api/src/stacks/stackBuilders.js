@@ -113,9 +113,9 @@ export const createPersistentVolume = (params, generator) => () => {
 };
 
 export const createNetworkPolicy = (params, generator) => () => {
-  const { name, type, schedulerPodLabel, projectKey } = params;
+  const { name, type, projectKey } = params;
   const networkPolicyName = nameGenerator.networkPolicyName(name, type);
-  return generator(networkPolicyName, schedulerPodLabel, projectKey)
+  return generator({ ...params, networkPolicyName })
     .then((manifest) => {
       logger.info(`Creating network policy ${chalk.blue(networkPolicyName)} with manifest:`);
       logger.debug(manifest.toString());
@@ -124,10 +124,10 @@ export const createNetworkPolicy = (params, generator) => () => {
 };
 
 export const createAutoScaler = (params, generator) => () => {
-  const { name, type, projectKey, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec } = params;
+  const { name, type, projectKey } = params;
   const autoScalerName = nameGenerator.autoScalerName(name, type);
   const scaleDeploymentName = nameGenerator.deploymentName(name, type);
-  return generator(autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec)
+  return generator({ ...params, autoScalerName, scaleDeploymentName })
     .then((manifest) => {
       logger.info(`Creating pod auto-scaler ${chalk.blue(autoScalerName)} with manifest:`);
       logger.debug(manifest.toString());

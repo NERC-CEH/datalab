@@ -221,14 +221,14 @@ function createDaskConfigMap(notebookName, projectKey, configMapName) {
   return generateManifest(context, ConfigMapTemplates.DASK_CONFIGMAP);
 }
 
-function createDatalabDaskSchedulerNetworkPolicy(name, schedulerPodLabel, projectKey) {
-  const context = { name, schedulerPodLabel, projectKey };
+function createDatalabDaskSchedulerNetworkPolicy({ networkPolicyName, schedulerPodLabel, projectKey }) {
+  const context = { name: networkPolicyName, schedulerPodLabel, projectKey };
   return generateManifest(context, NetworkPolicyTemplates.DATALAB_DASK_SCHEDULER_NETWORK_POLICY);
 }
 
-function createAutoScaler(autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec) {
+function createAutoScaler({ autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec }) {
   const context = {
-    autoScalerName,
+    name: autoScalerName,
     scaleDeploymentName,
     maxReplicas,
     targetCpuUtilization,

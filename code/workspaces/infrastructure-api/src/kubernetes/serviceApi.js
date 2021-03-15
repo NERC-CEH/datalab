@@ -47,7 +47,7 @@ function replaceService(name, namespace, manifest) {
 
 function updateService(name, namespace, manifest, existingService) {
   logger.info('Updating service: %s in namespace %s', name, namespace);
-  const jsonManifest = copyRequiredFieldsToJsonManfiest(manifest, existingService);
+  const jsonManifest = copyRequiredFieldsToJsonManifest(manifest, existingService);
   return axios.put(getServiceUrl(namespace, name), jsonManifest)
     .catch(handleCreateError('service', name));
 }
@@ -59,7 +59,7 @@ function deleteService(name, namespace) {
     .catch(handleDeleteError('service', name));
 }
 
-function copyRequiredFieldsToJsonManfiest(manifest, existingService) {
+function copyRequiredFieldsToJsonManifest(manifest, existingService) {
   const jsonManifest = yaml.load(manifest);
   jsonManifest.spec.clusterIP = existingService.spec.clusterIP;
   jsonManifest.metadata.resourceVersion = existingService.metadata.resourceVersion;
