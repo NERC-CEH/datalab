@@ -25,7 +25,8 @@
 			"orta.vscode-jest",
 			"firsttris.vscode-jest-runner",
 			"streetsidesoftware.code-spell-checker",
-			"davidanson.vscode-markdownlint"
+			"davidanson.vscode-markdownlint",
+			"dansnow.vscode-dockerfilelint"
 		]
 	},
 	"settings": {
