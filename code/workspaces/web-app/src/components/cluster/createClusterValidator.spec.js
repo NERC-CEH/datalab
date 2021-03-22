@@ -69,10 +69,9 @@ describe('syncValidate', () => {
   describe('validates volumeMount', () => {
     const validValues = [
       'teststore',
+      undefined,
     ];
-    const invalidValues = [
-      undefined, // must be present
-    ];
+    const invalidValues = [];
     testValues('volumeMount', validValues, invalidValues);
   });
 

@@ -29,7 +29,7 @@ exports[`CreateClusterForm it renders to match snapshot with condaPath field whe
       }
     }
     component={[Function]}
-    label="Data Store to Mount"
+    label="Data Store to Mount (optional)"
     name="volumeMount"
     options={
       Array [
@@ -158,7 +158,7 @@ exports[`CreateClusterForm it renders to match snapshot without condaPath field 
       }
     }
     component={[Function]}
-    label="Data Store to Mount"
+    label="Data Store to Mount (optional)"
     name="volumeMount"
     options={
       Array [
@@ -275,7 +275,7 @@ exports[`CreateClusterForm it renders to match snapshot without condaPath field 
       }
     }
     component={[Function]}
-    label="Data Store to Mount"
+    label="Data Store to Mount (optional)"
     name="volumeMount"
     options={
       Array [
