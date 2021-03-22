@@ -1,5 +1,4 @@
 import axios from 'axios';
-import yaml from 'js-yaml';
 import logger from '../config/logger';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
@@ -45,13 +44,6 @@ function replaceNetworkPolicy(name, namespace, manifest) {
     .then(() => createNetworkPolicy(name, namespace, manifest));
 }
 
-function updateNetworkPolicy(name, namespace, manifest, existingNetworkPolicy) {
-  logger.info('Updating network policy: %s in namespace %s', name, namespace);
-  const jsonManifest = copyRequiredFieldsToJsonManifest(manifest, existingNetworkPolicy);
-  return axios.put(getNetworkPolicyUrl(namespace, name), jsonManifest)
-    .catch(handleCreateError('network policy', name));
-}
-
 function deleteNetworkPolicy(name, namespace) {
   logger.info('Deleting network policy: %s in namespace %s', name, namespace);
   return axios.delete(`${getNetworkPolicyUrl(namespace, name)}`)
@@ -59,11 +51,4 @@ function deleteNetworkPolicy(name, namespace) {
     .catch(handleDeleteError('network policy', name));
 }
 
-function copyRequiredFieldsToJsonManifest(manifest, existingNetworkPolicy) {
-  const jsonManifest = yaml.load(manifest);
-  jsonManifest.spec.clusterIP = existingNetworkPolicy.spec.clusterIP;
-  jsonManifest.metadata.resourceVersion = existingNetworkPolicy.metadata.resourceVersion;
-  return jsonManifest;
-}
-
-export default { getNetworkPolicy, createNetworkPolicy, updateNetworkPolicy, deleteNetworkPolicy, createOrUpdateNetworkPolicy };
+export default { getNetworkPolicy, createNetworkPolicy, deleteNetworkPolicy, createOrUpdateNetworkPolicy };
