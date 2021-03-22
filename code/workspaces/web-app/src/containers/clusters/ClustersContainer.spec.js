@@ -35,7 +35,7 @@ mockClustersHooks.useClustersByType.mockImplementation(type => ({
     name: 'testcluster',
     type,
     displayName: 'Test Cluster',
-    schedulerAddress: 'http://test-cluster.svc.cluster.local',
+    schedulerAddress: 'tcp://dask-scheduler-testcluster:8786',
   }],
 }));
 

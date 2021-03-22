@@ -11,7 +11,7 @@ Object {
 exports[`getWorkerCpuMax returns correct value 1`] = `
 Object {
   "default": 0.5,
-  "lowerLimit": 0.5,
+  "lowerLimit": 0.1,
   "upperLimit": 2,
 }
 `;

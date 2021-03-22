@@ -79,7 +79,7 @@ describe('Kubernetes Service API', () => {
         });
     });
 
-    it('should return an error if creation fails', async () => {
+    it('should return an error if update fails', async () => {
       mock.onPut(`${SERVICE_URL}/${SERVICE_NAME}`).reply(400, { message: 'error-message' });
 
       try {

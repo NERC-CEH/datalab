@@ -10,16 +10,39 @@ Object {
         "upperLimit": 8,
       },
     },
+    "scheduler": Object {
+      "CpuMax_vCPU": Object {
+        "default": 0.2,
+      },
+      "memoryMax_GB": Object {
+        "default": 0.5,
+      },
+    },
     "workers": Object {
       "CpuMax_vCPU": Object {
         "default": 0.5,
-        "lowerLimit": 0.5,
+        "lowerLimit": 0.1,
         "upperLimit": 2,
+      },
+      "deathTimeout_sec": Object {
+        "default": 60,
       },
       "memoryMax_GB": Object {
         "default": 4,
         "lowerLimit": 0.5,
         "upperLimit": 8,
+      },
+      "nThreads": Object {
+        "default": 2,
+      },
+      "scaleDownWindow_sec": Object {
+        "default": 300,
+      },
+      "targetCpuUtilization_percent": Object {
+        "default": 50,
+      },
+      "targetMemoryUtilization_percent": Object {
+        "default": 50,
       },
     },
   },

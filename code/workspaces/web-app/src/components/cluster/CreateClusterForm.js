@@ -54,6 +54,7 @@ export const CreateClusterFormContent = ({
           name="condaPath"
           label="Path to Conda environment (optional)"
           helperText="The file path to the conda environment on the selected Data Store to be used by the workers."
+          placeholder="/data/conda/conda-env"
         />
       }
       <Field

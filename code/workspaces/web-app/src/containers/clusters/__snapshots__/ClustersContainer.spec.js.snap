@@ -11,10 +11,10 @@ exports[`ClustersContainer renders correct snapshot 1`] = `
         "fetching": false,
         "value": Array [
           Object {
-            "description": "http://test-cluster.svc.cluster.local is the scheduler address.",
+            "description": "tcp://dask-scheduler-testcluster:8786 is the scheduler address.",
             "displayName": "Test Cluster",
             "name": "testcluster",
-            "schedulerAddress": "http://test-cluster.svc.cluster.local",
+            "schedulerAddress": "tcp://dask-scheduler-testcluster:8786",
             "type": "DASK",
           },
         ],

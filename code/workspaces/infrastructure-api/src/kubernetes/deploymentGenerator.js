@@ -1,5 +1,5 @@
 import { imageConfig, image, defaultImage } from 'common/src/config/images';
-import { DeploymentTemplates, ServiceTemplates, generateManifest, ConfigMapTemplates } from './manifestGenerator';
+import { DeploymentTemplates, ServiceTemplates, generateManifest, ConfigMapTemplates, NetworkPolicyTemplates, AutoScalerTemplates } from './manifestGenerator';
 import nameGenerator from '../common/nameGenerators';
 import config from '../config/config';
 import logger from '../config/logger';
@@ -34,6 +34,36 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
+}
+
+function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, pureDaskImage, jupyterLabImage, schedulerPodLabel, schedulerMemory, schedulerCpu, volumeMount }) {
+  const context = {
+    name: deploymentName,
+    daskImage: (volumeMount && condaPath) ? jupyterLabImage : pureDaskImage,
+    schedulerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-scheduler` : 'dask-scheduler',
+    schedulerPodLabel,
+    schedulerMemory,
+    schedulerCpu,
+    volumeMount,
+  };
+  return generateManifest(context, DeploymentTemplates.DATALAB_DASK_SCHEDULER_DEPLOYMENT);
+}
+
+function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, pureDaskImage, jupyterLabImage, workerPodLabel, workerMemory, workerCpu, volumeMount, nThreads, deathTimeoutSec,
+  schedulerServiceName }) {
+  const context = {
+    name: deploymentName,
+    daskImage: (volumeMount && condaPath) ? jupyterLabImage : pureDaskImage,
+    workerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-worker` : 'dask-worker',
+    workerPodLabel,
+    workerMemory,
+    workerCpu,
+    volumeMount,
+    nThreads,
+    deathTimeoutSec,
+    schedulerServiceName,
+  };
+  return generateManifest(context, DeploymentTemplates.DATALAB_DASK_WORKER_DEPLOYMENT);
 }
 
 function createZeppelinDeployment({ deploymentName, volumeMount, type, version }) {
@@ -117,40 +147,48 @@ function createMinioDeployment({ name, deploymentName, type, version }) {
   return generateManifest(context, DeploymentTemplates.MINIO_DEPLOYMENT);
 }
 
-function createJupyterService(notebookName) {
-  const context = { name: notebookName };
+function createJupyterService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
 }
 
-function createZeppelinService(name) {
-  const context = { name };
+function createDatalabDaskSchedulerService({ serviceName, schedulerPodLabel }) {
+  const context = {
+    name: serviceName,
+    schedulerPodLabel,
+  };
+  return generateManifest(context, ServiceTemplates.DATALAB_DASK_SCHEDULER_SERVICE);
+}
+
+function createZeppelinService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.ZEPPELIN_SERVICE);
 }
 
-function createRStudioService(name) {
-  const context = { name };
+function createRStudioService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.RSTUDIO_SERVICE);
 }
 
-function createRShinyService(name) {
-  const context = { name };
+function createRShinyService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.RSHINY_SERVICE);
 }
 
-function createNbViewerService(name) {
-  const context = { name };
+function createNbViewerService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.NBVIEWER_SERVICE);
 }
 
-function createMinioService(name) {
-  const context = { name };
+function createMinioService({ serviceName }) {
+  const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.MINIO_SERVICE);
 }
 
-function createSparkDriverHeadlessService(notebookName) {
+function createSparkDriverHeadlessService({ serviceName }) {
   const context = {
-    name: nameGenerator.sparkDriverHeadlessService(notebookName),
-    'deployment-service-name': notebookName,
+    name: nameGenerator.sparkDriverHeadlessService(serviceName),
+    'deployment-service-name': serviceName,
   };
   return generateManifest(context, ServiceTemplates.SPARK_DRIVER_HEADLESS_SERVICE);
 }
@@ -183,6 +221,23 @@ function createDaskConfigMap(notebookName, projectKey, configMapName) {
   return generateManifest(context, ConfigMapTemplates.DASK_CONFIGMAP);
 }
 
+function createDatalabDaskSchedulerNetworkPolicy({ networkPolicyName, schedulerPodLabel, projectKey }) {
+  const context = { name: networkPolicyName, schedulerPodLabel, projectKey };
+  return generateManifest(context, NetworkPolicyTemplates.DATALAB_DASK_SCHEDULER_NETWORK_POLICY);
+}
+
+function createAutoScaler({ autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec }) {
+  const context = {
+    name: autoScalerName,
+    scaleDeploymentName,
+    maxReplicas,
+    targetCpuUtilization,
+    targetMemoryUtilization,
+    scaleDownWindowSec,
+  };
+  return generateManifest(context, AutoScalerTemplates.AUTO_SCALER);
+}
+
 export default {
   createJupyterDeployment,
   createZeppelinDeployment,
@@ -199,4 +254,9 @@ export default {
   createSparkDriverHeadlessService,
   createPySparkConfigMap,
   createDaskConfigMap,
+  createDatalabDaskSchedulerDeployment,
+  createDatalabDaskWorkerDeployment,
+  createDatalabDaskSchedulerService,
+  createDatalabDaskSchedulerNetworkPolicy,
+  createAutoScaler,
 };

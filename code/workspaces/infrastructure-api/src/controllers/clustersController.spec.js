@@ -1,6 +1,11 @@
 import * as expressValidator from 'express-validator';
 import clustersRepository from '../dataaccess/clustersRepository';
 import clustersController from './clustersController';
+import * as clusterManager from '../stacks/clusterManager';
+
+jest.mock('../stacks/clusterManager');
+clusterManager.createClusterStack = jest.fn().mockResolvedValue('okay');
+clusterManager.getSchedulerServiceName = jest.fn().mockReturnValue('dask-scheduler-cluster');
 
 jest.mock('../dataaccess/clustersRepository');
 
@@ -28,6 +33,7 @@ const clusterRequest = () => ({
 const clusterDocument = () => ({
   ...clusterRequest(),
   _id: '1234',
+  schedulerAddress: 'tcp://dask-scheduler-cluster:8786',
 });
 
 beforeEach(() => {
@@ -85,8 +91,9 @@ describe('clustersController', () => {
       // Act
       const returnValue = await createCluster(requestMock, responseMock, nextMock);
 
-      // Assert - For testing, the request mock doubles as the metadata object containing the metadata values
-      expect(clustersRepository.createCluster).toHaveBeenCalledWith(requestMock);
+      // For testing, the request mock doubles as the metadata object containing the metadata values
+      expect(clustersRepository.createCluster).toHaveBeenCalledWith({ ...requestMock, schedulerAddress: document.schedulerAddress });
+      expect(clusterManager.createClusterStack).toHaveBeenCalledWith(requestMock);
       expect(returnValue).toBe(responseMock);
       expect(responseMock.status).toHaveBeenCalledWith(201);
       expect(responseMock.send).toHaveBeenCalledWith(document);

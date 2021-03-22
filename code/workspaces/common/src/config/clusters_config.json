@@ -7,6 +7,14 @@
         "upperLimit": 8
       }
     },
+    "scheduler": {
+      "memoryMax_GB": {
+        "default": 0.5
+      },
+      "CpuMax_vCPU": {
+        "default": 0.2
+      }
+    },
     "workers": {
       "memoryMax_GB": {
         "lowerLimit": 0.5,
@@ -14,9 +22,24 @@
         "upperLimit": 8
       },
       "CpuMax_vCPU": {
-        "lowerLimit": 0.5,
+        "lowerLimit": 0.1,
         "default": 0.5,
         "upperLimit": 2
+      },
+      "nThreads": {
+        "default": 2
+      },
+      "deathTimeout_sec": {
+        "default": 60
+      },
+      "targetCpuUtilization_percent": {
+        "default": 50
+      },
+      "targetMemoryUtilization_percent": {
+        "default": 50
+      },
+      "scaleDownWindow_sec": {
+        "default": 300
       }
     }
   }

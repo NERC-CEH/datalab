@@ -2,6 +2,10 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import rstudioTokenService from './rstudioTokenService';
 import encrypt from '../../vendor/encrypt.min';
+import * as common from './common';
+
+jest.mock('./common');
+common.getCorrectAccessUrl = jest.fn().mockReturnValue('http://rstudio');
 
 const mock = new MockAdapter(axios);
 

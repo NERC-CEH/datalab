@@ -69,6 +69,7 @@ class ValidationChainHelper {
 
   notEmpty() {
     this.validationChain
+      .trim()
       .isLength({ min: 1 })
       .withMessage('Value cannot be empty.');
     return this;

@@ -5,12 +5,16 @@ import stackManager from './stackManager';
 import deploymentApi from '../kubernetes/deploymentApi';
 import nameGenerators from '../common/nameGenerators';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
+import config from '../config/config';
 
 jest.mock('common/src/config/catalogue');
 jest.mock('./Stacks');
 jest.mock('../dataaccess/stacksRepository');
 jest.mock('../kubernetes/deploymentApi');
 jest.mock('../dataaccess/centralAssetRepoRepository');
+jest.mock('../config/config');
+
+config.get = jest.fn().mockReturnValue('datalabs.localhost');
 
 const getStackMock = jest.fn();
 Stacks.getStack = getStackMock;

@@ -5,6 +5,7 @@ import clustersRepository from '../dataaccess/clustersRepository';
 import clusterModel from '../models/cluster.model';
 import logger from '../config/logger';
 import ValidationChainHelper from './utils/validationChainHelper';
+import { getSchedulerServiceName, createClusterStack } from '../stacks/clusterManager';
 
 async function createCluster(request, response, next) {
   const cluster = matchedData(request);
@@ -12,7 +13,10 @@ async function createCluster(request, response, next) {
   if (await handleExistingCluster(cluster, response, next)) return response;
 
   try {
-    const createdCluster = await clustersRepository.createCluster(cluster);
+    const schedulerServiceName = getSchedulerServiceName(cluster.name, cluster.type);
+    const schedulerAddress = `tcp://${schedulerServiceName}:8786`;
+    const createdCluster = await clustersRepository.createCluster({ ...cluster, schedulerAddress });
+    await createClusterStack(cluster);
     return response.status(201).send(createdCluster);
   } catch (error) {
     return next(new Error(`Error creating cluster - failed to create new document: ${error.message}`));

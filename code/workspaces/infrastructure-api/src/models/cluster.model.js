@@ -14,6 +14,7 @@ const ClusterSchema = new Schema({
   maxWorkers: { type: Number, required: true },
   maxWorkerMemoryGb: { type: Number, required: true },
   maxWorkerCpu: { type: Number, required: true },
+  schedulerAddress: String,
 });
 
 model(modelName, ClusterSchema);

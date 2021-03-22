@@ -8,19 +8,3 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=datalabs-root-u
       - MONGO_INITDB_ROOT_PASSWORD=datalabs-root-p
-
-  mongodb_import:
-    image: mongo:4.1.13-bionic
-    environment:
-      - MONGO_HOST=mongodb
-      - MONGO_PORT=27017
-      - MONGO_DATALAB_DB_NAME=datalab
-      - MONGO_INFRASTRUCTURE_DB_NAME=infrastructure
-      - MONGO_USERS_DB_NAME=users
-      - MONGO_USER=datalabs-root-u
-      - MONGO_USER_PASSWORD=datalabs-root-p
-    depends_on:
-      - mongodb
-    command: bash -c "cp /tmp/mongodb/import.sh /usr/local/bin && chmod +x /usr/local/bin/import.sh && import.sh"
-    volumes:
-      - $PWD/config/mongo:/tmp/mongodb/:ro
