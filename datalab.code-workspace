@@ -71,6 +71,7 @@
 			"networkpolicies",
 			"noopener",
 			"noreferrer",
+			"numericality",
 			"oidc",
 			"placeholder",
 			"rshiny",

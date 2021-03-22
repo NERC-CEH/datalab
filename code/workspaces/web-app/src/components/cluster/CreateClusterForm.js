@@ -44,7 +44,7 @@ export const CreateClusterFormContent = ({
       <Field
         {...commonFieldProps}
         name={VOLUME_MOUNT_FIELD_NAME}
-        label="Data Store to Mount"
+        label="Data Store to Mount (optional)"
         component={renderSelectField}
         options={[noneOption, ...dataStorageOptions]}
       />

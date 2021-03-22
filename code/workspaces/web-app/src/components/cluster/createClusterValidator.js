@@ -16,9 +16,6 @@ const constraints = {
       maximum: 16,
     },
   },
-  volumeMount: {
-    presence: true,
-  },
   maxWorkers: {
     presence: true,
     numericality: { onlyInteger: true, noStrings: true },
