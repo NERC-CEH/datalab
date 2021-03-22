@@ -94,8 +94,13 @@ const resolvers = {
 
   DataStore: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
-    users: (obj, args, { user }) => (obj.projectKey
-      ? projectPermissionWrapper({ projectKey: obj.projectKey }, STORAGE_EDIT, user, () => obj.users, 'DataStore.users') : []),
+    users: async ({ projectKey, users }, args, { user }) => {
+      try {
+        return await projectPermissionWrapper({ projectKey }, STORAGE_EDIT, user, () => users);
+      } catch (error) {
+        return [];
+      }
+    },
     accessKey: (obj, args, { token }) => minioTokenService.requestMinioToken(obj, token),
     stacksMountingStore: ({ name, projectKey }, args, { user, token }) => (projectKey
       ? stackService.getAllByVolumeMount(projectKey, name, { user, token }) : []),
