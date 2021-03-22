@@ -28,6 +28,7 @@ describe('useDataStorageForUserInProject', () => {
       { expected: true, projectKey, users: ['other-user', desiredUser] }, // has correct project and user
       { expected: false, projectKey, users: ['other-user'] }, // correct project, missing user
       { expected: false, projectKey: 'other-project', users: [desiredUser] }, // correct user, wrong project
+      { expected: false, projectKey, users: null }, // users is null
     ];
     const expectedResult = stores.filter(store => store.expected);
     useShallowSelector.mockReturnValueOnce({ value: stores });

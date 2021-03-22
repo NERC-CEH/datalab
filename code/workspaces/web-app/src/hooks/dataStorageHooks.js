@@ -7,6 +7,6 @@ export const useDataStorageForUserInProject = (userId, projectKey) => {
   const dataStores = useDataStorageArray();
   return {
     ...dataStores,
-    value: dataStores.value.filter(store => store.projectKey === projectKey && store.users.includes(userId)),
+    value: dataStores.value.filter(store => store.projectKey === projectKey && store.users && store.users.includes(userId)),
   };
 };
