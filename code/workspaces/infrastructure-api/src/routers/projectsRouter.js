@@ -2,7 +2,7 @@ import express from 'express';
 import { service } from 'service-chassis';
 import { permissionTypes } from 'common';
 import projects from '../controllers/projectsController';
-import { projectPermissionWrapper, systemAdminPermissionWrapper } from '../auth/permissionMiddleware';
+import permissionMiddleware from '../auth/permissionMiddleware';
 
 const { errorWrapper: ew } = service.middleware;
 
@@ -16,7 +16,7 @@ projectsRouter.get(
 );
 projectsRouter.post(
   '/',
-  systemAdminPermissionWrapper(),
+  permissionMiddleware(),
   projects.projectDocumentValidator(),
   ew(projects.createProject),
 );
@@ -27,19 +27,19 @@ projectsRouter.get(
 );
 projectsRouter.put(
   '/:projectKey',
-  projectPermissionWrapper(PROJECT_KEY_PROJECTS_EDIT),
+  permissionMiddleware(PROJECT_KEY_PROJECTS_EDIT),
   projects.projectDocumentValidator(), projects.urlAndBodyProjectKeyMatchValidator(),
   ew(projects.createOrUpdateProject),
 );
 projectsRouter.delete(
   '/:projectKey',
-  systemAdminPermissionWrapper(),
+  permissionMiddleware(),
   projects.actionWithKeyValidator(),
   ew(projects.deleteProjectByKey),
 );
 projectsRouter.get(
   '/:projectKey/isunique',
-  systemAdminPermissionWrapper(),
+  permissionMiddleware(),
   projects.actionWithKeyValidator(),
   ew(projects.projectKeyIsUnique),
 );

@@ -1,7 +1,7 @@
 import express from 'express';
 import { service } from 'service-chassis';
 import { permissionTypes } from 'common';
-import { permissionWrapper, projectPermissionWrapper } from '../auth/permissionMiddleware';
+import permissionMiddleware from '../auth/permissionMiddleware';
 import stacks from '../controllers/stacksController';
 import stack from '../controllers/stackController';
 import names from '../controllers/nameController';
@@ -17,30 +17,30 @@ const stacksRouter = express.Router();
 
 stacksRouter.get(
   '/',
-  permissionWrapper(STACKS_LIST),
+  permissionMiddleware(STACKS_LIST),
   ew(stacks.listStacks),
 );
 stacksRouter.get(
   '/:projectKey',
-  projectPermissionWrapper(PROJECT_KEY_STACKS_LIST),
+  permissionMiddleware(PROJECT_KEY_STACKS_LIST),
   stacks.withProjectValidator,
   ew(stacks.listByProject),
 );
 stacksRouter.get(
   '/:projectKey/category/:category',
-  projectPermissionWrapper(PROJECT_KEY_STACKS_LIST),
+  permissionMiddleware(PROJECT_KEY_STACKS_LIST),
   stacks.withCategoryValidator,
   ew(stacks.listByCategory),
 );
 stacksRouter.get(
   '/:projectKey/mount/:mount',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_LIST),
+  permissionMiddleware(PROJECT_KEY_STORAGE_LIST),
   stacks.withMountValidator,
   ew(stacks.listByMount),
 );
 stacksRouter.get(
   '/:projectKey/:name/isUnique',
-  projectPermissionWrapper(PROJECT_KEY_STACKS_LIST),
+  permissionMiddleware(PROJECT_KEY_STACKS_LIST),
   stack.withNameValidator,
   ew(names.isUnique),
 );
