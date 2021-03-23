@@ -12,12 +12,12 @@ function createNbViewerStack(params) {
 }
 
 function deleteNbViewerStack(params) {
-  const { datalabInfo, name, type } = params;
+  const { projectKey, name, type } = params;
   const k8sName = `${type}-${name}`;
 
-  return ingressApi.deleteIngress(k8sName, datalabInfo)
-    .then(() => serviceApi.deleteService(k8sName))
-    .then(() => deploymentApi.deleteDeployment(k8sName));
+  return ingressApi.deleteIngress(k8sName, projectKey)
+    .then(() => serviceApi.deleteService(k8sName, projectKey))
+    .then(() => deploymentApi.deleteDeployment(k8sName, projectKey));
 }
 
 export default { createNbViewerStack, deleteNbViewerStack };
