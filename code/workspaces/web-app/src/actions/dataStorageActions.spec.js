@@ -20,9 +20,9 @@ describe('dataStorageActions', () => {
   beforeEach(() => jest.resetAllMocks());
 
   describe('calls correct service for', () => {
-    it('loadDataStorage', () => {
+    it('loadDataStorage', async () => {
       // Arrange
-      const loadDataStorageMock = jest.fn().mockReturnValue('expectedDataStoragePayload');
+      const loadDataStorageMock = jest.fn().mockResolvedValue('expectedDataStorage');
       dataStorageService.loadDataStorage = loadDataStorageMock;
 
       // Act
@@ -32,7 +32,7 @@ describe('dataStorageActions', () => {
       expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
       expect(loadDataStorageMock).toHaveBeenCalledWith('project99');
       expect(output.type).toBe('LOAD_DATASTORAGE');
-      expect(output.payload).toBe('expectedDataStoragePayload');
+      expect(await output.payload).toEqual({ projectKey: 'project99', storage: 'expectedDataStorage' });
     });
 
     it('getCredentials', () => {

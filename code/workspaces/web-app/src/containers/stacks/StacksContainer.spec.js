@@ -72,10 +72,10 @@ describe('StacksContainer', () => {
 
       // Assert
       expect(store.getActions().length).toBe(0);
-      output.prop('actions').loadStacksByCategory();
+      output.prop('actions').loadStacksByCategory('project99', 'aCategory');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_STACKS_BY_CATEGORY');
-      return payload.then(value => expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toEqual({ category: 'aCategory', projectKey: 'project99', stacks: 'expectedPayload' }));
     });
   });
 

@@ -94,7 +94,7 @@ describe('LoadUserManagement Modal Wrapper', () => {
       output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
-      return payload.then(value => expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toEqual({ projectKey: 'project99', storage: 'expectedPayload' }));
     });
 
     it('addUserToDataStore function dispatches correct action', () => {

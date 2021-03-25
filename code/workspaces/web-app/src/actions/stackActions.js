@@ -20,7 +20,7 @@ const loadStacks = () => ({
 
 const loadStacksByCategory = (projectKey, category) => ({
   type: LOAD_STACKS_BY_CATEGORY_ACTION,
-  payload: stackService.loadStacksByCategory(projectKey, category),
+  payload: stackService.loadStacksByCategory(projectKey, category).then(stacks => ({ projectKey, category, stacks })),
 });
 
 const updateStacks = () => ({
@@ -30,7 +30,7 @@ const updateStacks = () => ({
 
 const updateStacksByCategory = (projectKey, category) => ({
   type: UPDATE_STACKS_BY_CATEGORY_ACTION,
-  payload: stackService.loadStacksByCategory(projectKey, category),
+  payload: stackService.loadStacksByCategory(projectKey, category).then(stacks => ({ projectKey, category, stacks })),
 });
 
 const getUrl = (projectKey, id) => ({

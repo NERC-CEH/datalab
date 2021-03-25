@@ -18,7 +18,7 @@ export default typeToReducer({
   [LOAD_DATASTORAGE_ACTION]: {
     [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, value: state.value, error: action.payload }),
-    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: replaceProjectCategoryItems(state.value, action.payload) }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: replaceProjectCategoryItems(state.value, action.payload.projectKey, undefined, action.payload.storage) }),
   },
   [GET_ALL_PROJECTS_AND_RESOURCES_ACTION]: {
     [PROMISE_TYPE_PENDING]: state => ({ ...initialState, fetching: true, value: state.value }),

@@ -5,8 +5,8 @@ import DataStorageContainer, { PureDataStorageContainer } from './DataStorageCon
 import dataStorageService from '../../api/dataStorageService';
 
 jest.mock('../../api/dataStorageService');
-const loadDataStorageMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-dataStorageService.loadDataStorage = loadDataStorageMock;
+const loadDataStorageServiceMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+dataStorageService.loadDataStorage = loadDataStorageServiceMock;
 
 describe('DataStorageContainer', () => {
   describe('is a connected component which', () => {
@@ -69,7 +69,7 @@ describe('DataStorageContainer', () => {
       output.prop('actions').loadDataStorage('project99');
       const { type, payload } = store.getActions()[0];
       expect(type).toBe('LOAD_DATASTORAGE');
-      return payload.then(value => expect(value).toBe('expectedPayload'));
+      return payload.then(value => expect(value).toEqual({ projectKey: 'project99', storage: 'expectedPayload' }));
     });
   });
 
@@ -79,6 +79,7 @@ describe('DataStorageContainer', () => {
     }
 
     const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue', projectKey: 'project99' }] };
+    const loadDataStorageActionMock = jest.fn().mockResolvedValue({ payload: { projectKey: 'project99', storage: 'expectedPayload' } });
     const getCredentialsMock = jest.fn();
     const openMinioDataStoreMock = jest.fn();
     const openModalDialogMock = jest.fn();
@@ -93,7 +94,7 @@ describe('DataStorageContainer', () => {
       projectKey: 'project99',
       showCreateButton: true,
       actions: {
-        loadDataStorage: loadDataStorageMock,
+        loadDataStorage: loadDataStorageActionMock,
         getCredentials: getCredentialsMock,
         createDataStore: createDataStoreMock,
         deleteDataStore: deleteDataStoreMock,
@@ -114,7 +115,7 @@ describe('DataStorageContainer', () => {
       shallowRenderPure(props);
 
       // Assert
-      expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
+      expect(loadDataStorageActionMock).toHaveBeenCalledTimes(1);
     });
 
     it('passes correct props to StackCard', () => {
@@ -275,7 +276,7 @@ describe('DataStorageContainer', () => {
       // Assert
       expect(createDataStoreMock).not.toHaveBeenCalled();
       expect(resetFormMock).not.toHaveBeenCalled();
-      expect(loadDataStorageMock).toHaveBeenCalledTimes(1);
+      expect(loadDataStorageActionMock).toHaveBeenCalledTimes(1);
       return onSubmit(stack)
         .then(() => {
           expect(createDataStoreMock).toHaveBeenCalledTimes(1);
