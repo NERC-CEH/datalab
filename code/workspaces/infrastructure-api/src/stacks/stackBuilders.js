@@ -37,7 +37,7 @@ export const createSparkDriverHeadlessService = params => () => {
   const { name, projectKey, type } = params;
   const notebookServiceName = nameGenerator.deploymentName(name, type);
   const headlessServiceName = nameGenerator.sparkDriverHeadlessService(notebookServiceName);
-  return deploymentGenerator.createSparkDriverHeadlessService(notebookServiceName)
+  return deploymentGenerator.createSparkDriverHeadlessService({ serviceName: notebookServiceName })
     .then((manifest) => {
       logger.info(`Creating service ${chalk.blue(headlessServiceName)} with manifest:`);
       logger.debug(manifest.toString());
