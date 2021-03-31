@@ -4,6 +4,7 @@ import serviceApi from '../kubernetes/serviceApi';
 import ingressGenerator from '../kubernetes/ingressGenerator';
 import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRule } from './stackBuilders';
+import nameGenerator from '../common/nameGenerators';
 
 function createRShinyStack(params) {
   return createDeployment(params, deploymentGenerator.createRShinyDeployment)()
@@ -13,7 +14,7 @@ function createRShinyStack(params) {
 
 function deleteRShinyStack(params) {
   const { name, type, projectKey } = params;
-  const k8sName = `${type}-${name}`;
+  const k8sName = nameGenerator.deploymentName(name, type);
 
   return ingressApi.deleteIngress(k8sName, projectKey)
     .then(() => serviceApi.deleteService(k8sName, projectKey))

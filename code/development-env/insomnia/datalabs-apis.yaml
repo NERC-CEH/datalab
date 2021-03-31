@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-03-08T11:47:21.607Z
+__export_date: 2021-03-25T09:21:27.818Z
 __export_source: insomnia.desktop.app:v2020.5.2
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -247,7 +247,7 @@ resources:
     _type: request
   - _id: req_09e0efcf4b0f4a8e90a820f3a4c35e2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606139841618
+    modified: 1616581236980
     created: 1575988247734
     url: "{{ client_api_url  }}/api"
     name: logs
@@ -264,7 +264,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1575988247734
+    metaSortKey: 0
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -285,7 +285,7 @@ resources:
     _type: request_group
   - _id: req_67241f2b3eda4593a73273e07248f4f9
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1576144847453
+    modified: 1616581236980
     created: 1566905934976
     url: "{{ client_api_url  }}/api"
     name: project
@@ -304,7 +304,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934976
+    metaSortKey: 100
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -315,7 +315,7 @@ resources:
     _type: request
   - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614691434290
+    modified: 1616664014410
     created: 1568024223786
     url: "{{ client_api_url  }}/api"
     name: Stacks
@@ -334,7 +334,68 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934951
+    metaSortKey: 200
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_36f4719980c94dae848ad779a7c79c94
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1616664058447
+    created: 1616663402544
+    url: "{{ client_api_url  }}/api/"
+    name: Stack delete
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  deleteStack(stack: {\n    projectKey:
+        \"project\"\n    name: \"jupyter\",\n    type: \"jupyter\"\n  })
+        {\n    name\n  }\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 225
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cde6f76d0b5c47d9a6a271c04def5f01
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1616581489002
+    created: 1616581234107
+    url: "{{ client_api_url  }}/api"
+    name: Stacks by category
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  stacksByCategory(params: {projectKey: \"project\",
+        category: \"ANALYSIS\"})
+        {\n    id\n    name\n    displayName\n    description\n    type\n    url\n    internalEndpoint\n    sourcePath\n    isPublic\n    redirectUrl\n    volumeMount\n    status\n    assets
+        { assetId, name, version, fileLocation }\n  }\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 250
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -345,7 +406,7 @@ resources:
     _type: request
   - _id: req_1bb07662812b4c49b19edc6c195a781d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568981228650
+    modified: 1616581236980
     created: 1568644168939
     url: "{{ client_api_url  }}/api"
     name: projects
@@ -363,7 +424,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934951
+    metaSortKey: 300
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -374,7 +435,7 @@ resources:
     _type: request
   - _id: req_62f3cb4b31c84181884cf475dc5185a5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606141388498
+    modified: 1616581236980
     created: 1568396058200
     url: "{{ client_api_url  }}/api"
     name: Volumes
@@ -392,7 +453,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934944.75
+    metaSortKey: 500
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -403,7 +464,7 @@ resources:
     _type: request
   - _id: req_0ffbf5922daa49a591d2621e7ef7a7e9
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1575973624075
+    modified: 1616581236980
     created: 1568739346189
     url: "{{ client_api_url  }}/api"
     name: Is Name Unique
@@ -421,7 +482,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934943.1875
+    metaSortKey: 600
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -432,7 +493,7 @@ resources:
     _type: request
   - _id: req_bfa7d2efbf5248f5ad04fce924d3116b
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1569421440887
+    modified: 1616581236980
     created: 1568396220932
     url: "{{ client_api_url  }}/api"
     name: Volume By Id
@@ -450,7 +511,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934941.625
+    metaSortKey: 700
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -461,7 +522,7 @@ resources:
     _type: request
   - _id: req_d1726df0932641caabd32fb810c33f32
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1605801554032
+    modified: 1616581236980
     created: 1568024663043
     url: "{{ client_api_url  }}/api"
     name: User Permissions
@@ -478,7 +539,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934938.5
+    metaSortKey: 800
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -489,7 +550,7 @@ resources:
     _type: request
   - _id: req_23924ad71f224bb5bac9ff07cfdefde6
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1607353535960
+    modified: 1616581236980
     created: 1568905829672
     url: "{{ client_api_url  }}/api"
     name: createProject
@@ -512,7 +573,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934938.5
+    metaSortKey: 900
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -523,7 +584,7 @@ resources:
     _type: request
   - _id: req_957c83a53645464e9edd5cd83c340c87
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606146077931
+    modified: 1616587014613
     created: 1568027279146
     url: "{{ client_api_url  }}/api"
     name: Storage
@@ -542,7 +603,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934932.25
+    metaSortKey: 1000
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -553,7 +614,7 @@ resources:
     _type: request
   - _id: req_1e855f4eb84f48eb909addb89a59835d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1607353359632
+    modified: 1616581236980
     created: 1568906446384
     url: "{{ client_api_url  }}/api"
     name: updateProject
@@ -576,7 +637,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934932.25
+    metaSortKey: 1100
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -587,7 +648,7 @@ resources:
     _type: request
   - _id: req_9dd25c2245294667aa561c46ca3a250b
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568981405171
+    modified: 1616581236980
     created: 1568906791713
     url: "{{ client_api_url  }}/api"
     name: deleteProject
@@ -605,7 +666,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934929.125
+    metaSortKey: 1200
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -616,7 +677,7 @@ resources:
     _type: request
   - _id: req_5e4bf2bc5af143b1b727f4b795b2ff2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606922621933
+    modified: 1616581236980
     created: 1566938804513
     url: "{{ client_api_url  }}/api"
     name: addProjectPermission
@@ -635,7 +696,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934926
+    metaSortKey: 1300
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -646,7 +707,7 @@ resources:
     _type: request
   - _id: req_327f022f621344a79932474f8122b61b
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606909568158
+    modified: 1616581236980
     created: 1566939410205
     url: "{{ client_api_url  }}/api"
     name: removeProjectPermission
@@ -664,7 +725,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934907.25
+    metaSortKey: 1400
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -675,7 +736,7 @@ resources:
     _type: request
   - _id: req_02af0ff150234a9dbea2c645f43fdddc
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568663636597
+    modified: 1616581236980
     created: 1568663202467
     url: "{{ client_api_url  }}/api"
     name: Add Users to Volume
@@ -694,7 +755,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934888.5
+    metaSortKey: 1500
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -705,7 +766,7 @@ resources:
     _type: request
   - _id: req_c8db83f833ed45ac8ee96e5a06097bb9
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1568664873995
+    modified: 1616581236980
     created: 1568664847934
     url: "{{ client_api_url  }}/api"
     name: Remove Users from Volume
@@ -724,7 +785,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: -1566905934882.25
+    metaSortKey: 1600
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -735,7 +796,7 @@ resources:
     _type: request
   - _id: req_528b76772803434fadd38e9258d502ce
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606147742314
+    modified: 1616581236980
     created: 1605021417686
     url: "{{ client_api_url  }}/api"
     name: users
@@ -752,7 +813,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 400
+    metaSortKey: 1700
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -763,7 +824,7 @@ resources:
     _type: request
   - _id: req_ac4015a6432b46a9bba80a0f5e200a63
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1613985348280
+    modified: 1616581236980
     created: 1606145410033
     url: "{{ client_api_url  }}/api"
     name: All users and roles
@@ -782,7 +843,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 900
+    metaSortKey: 1800
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -793,7 +854,7 @@ resources:
     _type: request
   - _id: req_0a1e7cfd12fe4780b0098d6c8bffc7db
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1606922485745
+    modified: 1616581236980
     created: 1606147761105
     url: "{{ client_api_url  }}/api"
     name: All projects and resources
@@ -813,7 +874,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 950
+    metaSortKey: 1900
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -824,7 +885,7 @@ resources:
     _type: request
   - _id: req_c742c2e35deb496693c5ccaaef9c4248
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1611824375438
+    modified: 1616581236980
     created: 1606922497352
     url: "{{ client_api_url  }}/api"
     name: Set instanceAdmin
@@ -842,7 +903,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 1000
+    metaSortKey: 2000
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -853,7 +914,7 @@ resources:
     _type: request
   - _id: req_57856de0db4946ca892bededff23fed8
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1611824373317
+    modified: 1616581236980
     created: 1611746389202
     url: "{{ client_api_url  }}/api"
     name: Set dataManager
@@ -871,7 +932,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 1025
+    metaSortKey: 2100
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -882,7 +943,7 @@ resources:
     _type: request
   - _id: req_26dad2999d1a421e8dbfdc7e4dcf0f45
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1611824378438
+    modified: 1616581236980
     created: 1606922876464
     url: "{{ client_api_url  }}/api"
     name: Set catalogueRole
@@ -900,7 +961,7 @@ resources:
     authentication:
       token: "{{ access_token  }}"
       type: bearer
-    metaSortKey: 1050
+    metaSortKey: 2200
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -911,7 +972,7 @@ resources:
     _type: request
   - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1613991108207
+    modified: 1616581236980
     created: 1612177227190
     url: "{{ _.client_api_url }}/api"
     name: createCentralAssetMetadata
@@ -933,7 +994,7 @@ resources:
     authentication:
       type: bearer
       token: "{{ _.access_token }}"
-    metaSortKey: 1100
+    metaSortKey: 2300
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -944,7 +1005,7 @@ resources:
     _type: request
   - _id: req_7099ece7dd0b432eaf509b917cf1cb92
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614863453017
+    modified: 1616581236980
     created: 1613039989749
     url: "{{ _.client_api_url }}/api"
     name: centralAssets
@@ -964,7 +1025,7 @@ resources:
     authentication:
       type: bearer
       token: "{{ _.access_token }}"
-    metaSortKey: 1125
+    metaSortKey: 2400
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -975,7 +1036,7 @@ resources:
     _type: request
   - _id: req_71f237bc68554522b9f09071d6a3854e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614863579434
+    modified: 1616581236980
     created: 1612539520337
     url: "{{ _.client_api_url }}/api"
     name: centralAssetMetadataAvailableToProject
@@ -995,7 +1056,7 @@ resources:
     authentication:
       type: bearer
       token: "{{ _.access_token }}"
-    metaSortKey: 1150
+    metaSortKey: 2500
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -1006,7 +1067,7 @@ resources:
     _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1614877952147
+    modified: 1616581236980
     created: 1614703552507
     url: "{{ _.client_api_url }}/api"
     name: createCluster
@@ -1028,7 +1089,39 @@ resources:
     authentication:
       type: bearer
       token: "{{ _.access_token }}"
-    metaSortKey: 1162.5
+    metaSortKey: 2600
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c184d66da7f24915872f0feb73db4789
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1616581236980
+    created: 1615219461776
+    url: "{{ _.client_api_url }}/api"
+    name: createVanillaCluster
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  createCluster (cluster: {\n    type:
+        \"DASK\",\n\t  projectKey: \"andyl\",\n\t  name:
+        \"cluster2\",\n    displayName: \"vanilla cluster\",\n\t  maxWorkers:
+        8,\n\t  maxWorkerMemoryGb: 0.5,\n\t  maxWorkerCpu: 1.5\n  })
+        {\n    id\n    type\n    projectKey\n    name\n    displayName\n    volumeMount\n    condaPath\n    maxWorkers\n    maxWorkerMemoryGb\n    maxWorkerCpu\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ff5e88661367403f83ff2fc19b939830
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 2700
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -1039,7 +1132,7 @@ resources:
     _type: request
   - _id: req_947e99a84c20483a9d2b49ce448176f4
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1615203852981
+    modified: 1616581236980
     created: 1614863475203
     url: "{{ _.client_api_url }}/api"
     name: clusters
@@ -1057,7 +1150,7 @@ resources:
     authentication:
       type: bearer
       token: "{{ _.access_token }}"
-    metaSortKey: 1175
+    metaSortKey: 2800
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true

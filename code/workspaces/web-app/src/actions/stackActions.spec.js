@@ -29,9 +29,9 @@ describe('stackActions', () => {
       expect(output.payload).toBe('expectedNotebooksPayload');
     });
 
-    it('loadStackByCategory', () => {
+    it('loadStackByCategory', async () => {
       // Arrange
-      const loadStacksByCategoryMock = jest.fn().mockReturnValue('expectedStackPayload');
+      const loadStacksByCategoryMock = jest.fn().mockResolvedValue('expectedStacks');
       stackService.loadStacksByCategory = loadStacksByCategoryMock;
 
       // Act
@@ -41,7 +41,7 @@ describe('stackActions', () => {
       expect(loadStacksByCategoryMock).toHaveBeenCalledTimes(1);
       expect(loadStacksByCategoryMock).toBeCalledWith('expectedProjectKey', 'expectedCategory');
       expect(output.type).toBe('LOAD_STACKS_BY_CATEGORY');
-      expect(output.payload).toBe('expectedStackPayload');
+      expect(await output.payload).toEqual({ projectKey: 'expectedProjectKey', category: 'expectedCategory', stacks: 'expectedStacks' });
     });
 
     it('getUrl', () => {

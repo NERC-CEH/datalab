@@ -1,4 +1,5 @@
 import { JUPYTER } from 'common/src/stackTypes';
+import { NOTEBOOK_CATEGORY } from 'common/src/config/images';
 import stacksReducer from './stacksReducer';
 import { PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE } from '../actions/actionTypes';
 import {
@@ -10,17 +11,17 @@ import {
 import { GET_ALL_PROJECTS_AND_RESOURCES_ACTION } from '../actions/projectActions';
 
 const currentValue = [
-  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
-  { projectKey: 'proj2', type: JUPYTER, stack: 'proj2.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj1.stackA' },
+  { projectKey: 'proj2', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj2.stackA' },
 ];
 const valuePayload = [
-  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
-  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackB' },
+  { projectKey: 'proj1', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj1.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj1.stackB' },
 ];
 const replaceProjectNextValue = [
-  { projectKey: 'proj2', type: JUPYTER, stack: 'proj2.stackA' },
-  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackA' },
-  { projectKey: 'proj1', type: JUPYTER, stack: 'proj1.stackB' },
+  { projectKey: 'proj2', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj2.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj1.stackA' },
+  { projectKey: 'proj1', type: JUPYTER, category: NOTEBOOK_CATEGORY, stack: 'proj1.stackB' },
 ];
 const error = 'example error';
 
@@ -84,7 +85,7 @@ describe('stacksReducer', () => {
     it('SUCCESS', () => {
       // Arrange
       const type = `${LOAD_STACKS_BY_CATEGORY_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const action = { type, payload: valuePayload };
+      const action = { type, payload: { projectKey: 'proj1', category: NOTEBOOK_CATEGORY, stacks: valuePayload } };
 
       // Act
       const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
@@ -160,7 +161,7 @@ describe('stacksReducer', () => {
     it('SUCCESS', () => {
       // Arrange
       const type = `${UPDATE_STACKS_BY_CATEGORY_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const action = { type, payload: valuePayload };
+      const action = { type, payload: { projectKey: 'proj1', category: NOTEBOOK_CATEGORY, stacks: valuePayload } };
 
       // Act
       const nextstate = stacksReducer({ error: null, fetching: false, updating: false, value: currentValue }, action);
