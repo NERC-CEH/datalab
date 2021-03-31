@@ -3,6 +3,7 @@
 *.iml
 .DS_Store
 .idea/
+ts-build
 
 docs/book/
 docs/src/version.md
