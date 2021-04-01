@@ -1,8 +1,11 @@
+import { body, param, query } from 'express-validator';
 import { service } from 'service-chassis';
 import express from 'express';
 import { permissionTypes } from 'common';
 import centralAssetRepo from '../controllers/centralAssetRepoController';
 import permissionMiddleware from '../auth/permissionMiddleware';
+import { metadataValidator, assetIdValidator } from '../validators/centralAssetRepoValidators';
+import { optionalProjectKeyValidator } from '../validators/commonValidators';
 
 const { projectPermissions: { PROJECT_KEY_STACKS_CREATE }, SYSTEM_DATA_MANAGER } = permissionTypes;
 
@@ -13,7 +16,7 @@ const centralAssetRepoRouter = express.Router();
 centralAssetRepoRouter.post(
   '/metadata',
   permissionMiddleware(SYSTEM_DATA_MANAGER),
-  centralAssetRepo.metadataValidator(),
+  metadataValidator(body),
   errorWrapper(centralAssetRepo.createAssetMetadata),
 );
 
@@ -22,7 +25,7 @@ centralAssetRepoRouter.post(
 centralAssetRepoRouter.get(
   '/metadata',
   permissionMiddleware(PROJECT_KEY_STACKS_CREATE, SYSTEM_DATA_MANAGER),
-  centralAssetRepo.optionalProjectKeyQueryValidator(),
+  optionalProjectKeyValidator(query),
   errorWrapper(centralAssetRepo.listAssetMetadata),
 );
 
@@ -31,8 +34,8 @@ centralAssetRepoRouter.get(
 centralAssetRepoRouter.get(
   '/metadata/:assetId',
   permissionMiddleware(PROJECT_KEY_STACKS_CREATE, SYSTEM_DATA_MANAGER),
-  centralAssetRepo.assetIdValidator(),
-  centralAssetRepo.optionalProjectKeyQueryValidator(),
+  assetIdValidator(param),
+  optionalProjectKeyValidator(query),
   errorWrapper(centralAssetRepo.getAssetById),
 );
 

@@ -119,6 +119,9 @@ type Mutation {
 
     # Create a cluster
     createCluster(cluster: ClusterCreationRequest!): Cluster!
+
+    # Delete a cluster
+    deleteCluster(cluster: ClusterDeletionRequest!): Cluster!
 }
 
 # DataLabs type for basic datalab information.
@@ -215,14 +218,14 @@ input StackUpdateRequest {
     assetIds: [String]
 }
 
-# Type to describe the mutation for deleting a new Stack.
+# Type to describe the mutation for deleting a Stack.
 input StackDeletionRequest {
     projectKey: String
     name: String
     type: String
 }
 
-# Type to describe the mutation for deleting a new Stack.
+# Type to describe the mutation for restarting a Stack.
 input StackRestartRequest {
     projectKey: String
     name: String
@@ -395,6 +398,13 @@ input ClusterCreationRequest {
     maxWorkers: Int!
     maxWorkerMemoryGb: Float!
     maxWorkerCpu: Float!
+}
+
+# Type to describe the mutation for deleting a cluster.
+input ClusterDeletionRequest {
+    projectKey: String!
+    name: String!
+    type: String!
 }
 
 type Cluster {

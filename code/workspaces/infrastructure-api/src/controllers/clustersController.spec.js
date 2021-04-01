@@ -112,6 +112,61 @@ describe('clustersController', () => {
     });
   });
 
+  describe('deleteCluster', () => {
+    const { deleteCluster } = clustersController;
+
+    it('calls matched data to get the cluster information', async () => {
+      // Arrange
+      const requestMock = { };
+
+      // Act
+      await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(matchedDataMock).toHaveBeenCalledWith(requestMock);
+    });
+
+    it('returns response configured with 404 status if cluster not in mongo', async () => {
+      // Arrange
+      clustersRepository.deleteCluster.mockResolvedValueOnce({ n: 0 });
+      const requestMock = clusterRequest();
+
+      // Act
+      const returnValue = await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(404);
+      expect(responseMock.send).toHaveBeenCalledWith(requestMock);
+    });
+
+    it('returns response configured with 200 status if cluster is in mongo', async () => {
+      // Arrange
+      clustersRepository.deleteCluster.mockResolvedValueOnce({ n: 1 });
+      const requestMock = clusterRequest();
+
+      // Act
+      const returnValue = await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith(requestMock);
+    });
+
+    it('calls next with an error if there is an error when deleting the cluster', async () => {
+      // Arrange
+      const requestMock = clusterRequest();
+      clustersRepository.deleteCluster.mockRejectedValueOnce(new Error('Expected test error'));
+
+      // Act
+      await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(nextMock).toHaveBeenCalledWith(new Error('Error deleting cluster: Expected test error'));
+    });
+  });
+
   describe('listByProject', () => {
     const { listByProject } = clustersController;
     it('calls to get clusters available to project and returns response configured with 200 status and array of clusters when projectKey provided', async () => {

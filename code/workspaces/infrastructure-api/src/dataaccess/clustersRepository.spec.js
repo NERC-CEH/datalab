@@ -10,6 +10,7 @@ const clusterModelMock = {
   or: jest.fn().mockReturnThis(),
   updateMany: jest.fn().mockReturnThis(),
   where: jest.fn().mockReturnThis(),
+  remove: jest.fn().mockReturnThis(),
 };
 
 jest.mock('../config/database');
@@ -45,6 +46,22 @@ describe('clustersRepository', () => {
       // Assert
       expect(clusterModelMock.create).toHaveBeenCalledWith([cluster], { setDefaultsOnInsert: true });
       expect(response).toEqual(document);
+    });
+  });
+
+  describe('deleteCluster', () => {
+    it('finds and removes cluster', async () => {
+      // Arrange
+      const cluster = clusterRequest();
+
+      // Act
+      await clustersRepository.deleteCluster(cluster);
+
+      // Assert
+      expect(clusterModelMock.find).toHaveBeenNthCalledWith(1, { projectKey: 'test-project' });
+      expect(clusterModelMock.find).toHaveBeenNthCalledWith(2, { type: 'DASK' });
+      expect(clusterModelMock.remove).toHaveBeenCalledWith({ name: 'cluster' });
+      expect(clusterModelMock.exec).toHaveBeenCalledWith();
     });
   });
 

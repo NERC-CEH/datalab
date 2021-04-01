@@ -11,16 +11,36 @@ import clusterActions from '../../actions/clusterActions';
 import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
 import modalDialogActions from '../../actions/modalDialogActions';
 import { getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax } from '../../config/clusters';
-import { MODAL_TYPE_CREATE_CLUSTER } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_CLUSTER, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import { useDataStorageForUserInProject } from '../../hooks/dataStorageHooks';
 import dataStorageActions from '../../actions/dataStorageActions';
 import notify from '../../components/common/notify';
 
-const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT } } = permissionTypes;
 
 const TYPE_NAME = 'Cluster';
 const TYPE_NAME_PLURAL = 'Clusters';
 const FORM_NAME = 'createCluster';
+
+const deleteCluster = async (dispatch, cluster) => {
+  try {
+    await dispatch(clusterActions.deleteCluster(cluster));
+    dispatch(modalDialogActions.closeModalDialog());
+    notify.success('Cluster deleted.');
+  } catch (error) {
+    notify.error('Unable to delete cluster.');
+  } finally {
+    dispatch(clusterActions.loadClusters(cluster.projectKey));
+  }
+};
+
+const confirmDeleteCluster = dispatch => cluster => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+  title: `Delete ${cluster.displayName} cluster`,
+  body: `Would you like to delete the ${cluster.displayName} cluster?
+  The cluster will stop and be permanently deleted.`,
+  onSubmit: () => deleteCluster(dispatch, cluster),
+  onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
+}));
 
 const ClustersContainer = ({ clusterType, className }) => {
   const dispatch = useDispatch();
@@ -50,6 +70,9 @@ const ClustersContainer = ({ clusterType, className }) => {
         openCreationForm={() => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createDaskClusterDialogProps))}
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
         showCreateButton
+        deleteStack={confirmDeleteCluster(dispatch)}
+        deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
+        editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
       />
     </div>
   );
