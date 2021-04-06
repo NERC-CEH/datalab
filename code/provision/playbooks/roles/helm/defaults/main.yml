@@ -1,7 +1,7 @@
 ca_certs_dir: /home/ubuntu/helm
-k8s_cert_dir: /etc/kubernetes/pki
+k8s_cert_dir: /etc/kubernetes/ssl
 
-helm_version: 2.14.2
+helm_version: 2.16.0
 
 helm_archive_url: https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm_version }}-linux-amd64.tar.gz
-helm_archive_checksum: sha256:9f50e69cf5cfa7268b28686728ad0227507a169e52bf59c99ada872ddd9679f0
+helm_archive_checksum: sha256:2d9124f582a33b269f48215a00922b3dcf7a03f265499886ba956fbc03ff9892

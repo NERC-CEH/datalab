@@ -1,0 +1,11 @@
+---
+- name: Prepare all rke cluster nodes
+  hosts: rke-k8s-cluster
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker
+    - { role: glusterfs, gluster_server: False }
+    - app-armor
+    - rke-kubernetes-common

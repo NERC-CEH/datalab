@@ -64,7 +64,7 @@
   failed_when: result.rc != 0 and 'AlreadyExists' not in result.stderr
 
 - name: Install/upgrade tiller
-  command: "helm init --service-account=tiller --tiller-tls --tiller-tls-cert ./tiller.cert.pem --tiller-tls-key ./tiller.key.pem --tiller-tls-verify --tls-ca-cert {{k8s_cert_dir}}/ca.crt --upgrade"
+  command: "helm init --service-account=tiller --tiller-tls --tiller-tls-cert ./tiller.cert.pem --tiller-tls-key ./tiller.key.pem --tiller-tls-verify --tls-ca-cert {{k8s_cert_dir}}/kube-ca.pem --upgrade"
   args:
     chdir: "{{ ca_certs_dir }}"
 
@@ -79,8 +79,10 @@
       dest: "{{ ca_certs_dir }}/cert.pem"
     - src: "{{ ca_certs_dir }}/helm.key.pem"
       dest: "{{ ca_certs_dir }}/key.pem"
-    - src: "{{k8s_cert_dir}}/ca.crt"
+    - src: "{{k8s_cert_dir}}/kube-ca.pem"
       dest: "{{ ca_certs_dir }}/ca.crt"
+  become: yes
+  become_method: sudo
 
 - name: Make local artifacts directory
   file: path={{ playbook_dir }}/.artifacts state=directory
@@ -96,8 +98,10 @@
       dest: helm.cert.pem
     - src: "{{ ca_certs_dir }}/helm.key.pem"
       dest: helm.key.pem
-    - src: "{{k8s_cert_dir}}/ca.crt"
+    - src: "{{k8s_cert_dir}}/kube-ca.pem"
       dest: ca.crt
+  become: yes
+  become_method: sudo
 
 - name: Delete tmp directory
   file: path=/tmp/helm state=absent

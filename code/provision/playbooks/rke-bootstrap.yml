@@ -1,0 +1,24 @@
+---
+# This playbook first bootstraps the Bastion server and then the rest of the cluster
+# It isn't possible to configure all at once as the internal servers are not addressable
+# until the Bastion hosts file has been configured.
+
+# The JASMIN OpenStack provided Ubuntu 16.04 base image does not have Python installed so we need to install
+# before we can do anything else
+- name: Install Python on all nodes
+  hosts: all:!ceh-datalabs-terraform-state
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  roles:
+  - install-python
+
+- name: Bootstrap tasks
+  hosts: all:!ceh-datalabs-terraform-state
+  become: yes
+  become_method: sudo
+  roles:
+  - reset-machine-id
+  - setup-networking
+  - base-configuration
+  - mount-drives

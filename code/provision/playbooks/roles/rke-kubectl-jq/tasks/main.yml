@@ -1,0 +1,21 @@
+---
+- name: Install kubectl
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ rke_kubernetes_version.split('-', 1)[0] }}/bin/linux/amd64/kubectl
+    dest: /usr/local/bin/kubectl
+    mode: "+rx"
+
+- name: Ensure $HOME/.kube exists
+  file:
+    path: "/home/{{ deploy_user }}/.kube"
+    state: directory
+
+- name: Copy kubeconfig to default location
+  copy:
+    src: "{{ rke_config_dir }}/kube_config_cluster.yml"
+    dest: "/home/{{ deploy_user }}/.kube/config"
+
+- name: Install jq
+  apt:
+    update_cache: yes
+    name: jq=1.5+dfsg-2

@@ -1,0 +1,28 @@
+---
+- name: Download RKE binary
+  get_url:
+    url: "{{ rke_binary_url }}"
+    checksum: "{{ rke_binary_checksum }}"
+    dest: /usr/local/bin/rke
+    mode: "+rx"
+  register: rke_binary
+
+- name: Ensure config directory exists
+  file:
+    path: "{{ rke_config_dir }}"
+    state: directory
+
+- name: Create/update RKE config file
+  template:
+    src: rke_cluster.yml
+    dest: "{{ rke_config_dir }}/cluster.yml"
+    mode: u=rw,g=r,o=
+  register: rke_cluster_config
+
+- name: Run RKE installer
+  shell: |
+    set -eo pipefail
+    rke up | tee /var/log/rke-up.log
+  args:
+    chdir: "{{ rke_config_dir }}"
+  when: rke_binary is changed or rke_cluster_config is changed or rke_force_configure

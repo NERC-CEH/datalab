@@ -2,7 +2,7 @@
   "clusters": [
     {
       "nodes": [
-{% for host in groups['gluster-node'] %}
+{% for host in groups['rke-gluster-node'] %}
         {
           "node": {
             "hostnames": {

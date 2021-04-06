@@ -1,0 +1,16 @@
+---
+- name: Initialize DataLabs
+  hosts: ceh-datalabs-rke-k8s-master-1
+
+  roles:
+    #- role: datalabs-base
+    #  datalab: "{{ test_namespace }}"
+    - role: datalabs-base
+      datalab: "{{ prod_namespace }}"
+    #- role: vault-secrets
+    #  datalab: "{{ test_namespace }}"
+    - role: vault-secrets
+      datalab: "{{ prod_namespace }}"
+
+  environment:
+    HELM_HOME: "/home/ubuntu/helm"

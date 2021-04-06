@@ -53,7 +53,7 @@
       apt:
         name: python-pip
         state: present
-
+    
     - name: Install xmltodict
       pip: name=xmltodict
 
@@ -79,6 +79,15 @@
       apt:
         name: python3-pip
         state: present
+    
+    - name: Install funcsigs
+      pip: name=funcsigs
+
+    - name: Install monotonic
+      pip: name=monotonic
+
+    - name: Install cryptography
+      pip: name=cryptography
 
     # Install Terraform
     - name: Check Terraform version

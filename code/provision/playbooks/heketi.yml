@@ -1,5 +1,5 @@
 ---
-- hosts: k8s-master
+- hosts: ceh-datalabs-rke-k8s-master-1
 
   roles:
     - gluster-kubernetes

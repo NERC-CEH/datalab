@@ -17,7 +17,7 @@ spec:
     targetPort: 8080
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: heketi
   labels:
@@ -26,6 +26,10 @@ metadata:
   annotations:
     description: Defines how to deploy Heketi
 spec:
+  selector:
+    matchLabels:
+      glusterfs: heketi-pod
+      heketi: pod
   replicas: 1
   template:
     metadata:
@@ -36,7 +40,7 @@ spec:
     spec:
       serviceAccountName: heketi-service-account
       containers:
-      - image: heketi/heketi:9
+      - image: heketi/heketi:dev
         imagePullPolicy: IfNotPresent
         name: heketi
         env:
@@ -52,6 +56,8 @@ spec:
           value: '14'
         - name: HEKETI_KUBE_GLUSTER_DAEMONSET
           value: "y"
+        - name: HEKETI_IGNORE_STALE_OPERATIONS
+          value: "true"
         ports:
         - containerPort: 8080
         volumeMounts:

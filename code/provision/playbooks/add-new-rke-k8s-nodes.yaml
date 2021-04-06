@@ -1,0 +1,39 @@
+---
+#- name: Install Python on new worker nodes
+#  hosts: rke_k8s_node_ext_1
+#  become: yes
+#  become_method: sudo
+#  gather_facts: no
+#  roles:
+#  - install-python
+
+
+- name: Bootstrap tasks
+  hosts: rke_k8s_node_ext_1
+  become: yes
+  become_method: sudo
+  roles:
+  - reset-machine-id
+  - setup-networking
+  - base-configuration
+  - mount-drives
+
+
+- name: Prepare new rke k8s worker nodes
+  hosts: rke_k8s_node_ext_1
+  become: yes
+  become_method: sudo
+  roles:
+    - docker
+    - { role: glusterfs, gluster_server: False }
+    - app-armor
+    - rke-kubernetes-common
+
+
+#- name: add user keys
+#  hosts: rke_k8s_node_ext_1
+#  become: yes
+#  become_method: sudo
+#  roles:
+#   - user-roles
+

@@ -11,6 +11,7 @@
   openssl_csr:
     path: /tmp/helm/{{ item }}.csr.pem
     privatekey_path: /tmp/helm/{{ item }}.key.pem
+    select_crypto_backend: cryptography
     common_name: "{{ item }}"
     organization_name: Datalabs
     country_name: UK
@@ -29,7 +30,7 @@
     dest: "{{ ca_certs_dir }}/{{ item }}.key.pem"
 
 - name: Sign Helm Certs
-  shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/ca.crt -CAkey {{ k8s_cert_dir }}/ca.key -CAcreateserial -in {{ item }}.csr.pem -out {{ item }}.cert.pem -days 365"
+  shell: "openssl x509 -req -CA {{ k8s_cert_dir }}/kube-ca.pem -CAkey {{ k8s_cert_dir }}/kube-ca-key.pem -CAcreateserial -in {{ item }}.csr.pem -out {{ item }}.cert.pem -days 365"
   args:
     chdir: "{{ ca_certs_dir }}"
   become: yes
