@@ -21,7 +21,7 @@
   "include": [
     "./*/src/**/*.js",
     "./*/src/version.json",
-    "./common/src/*.json"
+    "./common/src/config/*.json"
   ],
   "exclude": [
     "**/node_modules",
