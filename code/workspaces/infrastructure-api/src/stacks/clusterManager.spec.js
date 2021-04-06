@@ -1,14 +1,30 @@
 import clustersConfig from 'common/src/config/clusters';
 import { defaultImage } from 'common/src/config/images';
-import { createClusterStack } from './clusterManager';
+import { createClusterStack, deleteClusterStack } from './clusterManager';
 import * as stackBuilders from './stackBuilders';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
+import autoScalerApi from '../kubernetes/autoScalerApi';
+import deploymentApi from '../kubernetes/deploymentApi';
+import networkPolicyApi from '../kubernetes/networkPolicyApi';
+import serviceApi from '../kubernetes/serviceApi';
 
 jest.mock('./stackBuilders');
 stackBuilders.createNetworkPolicy = jest.fn().mockReturnValue(() => {});
 stackBuilders.createDeployment = jest.fn().mockReturnValue(() => {});
 stackBuilders.createService = jest.fn().mockReturnValue(() => {});
 stackBuilders.createAutoScaler = jest.fn().mockReturnValue(() => {});
+
+jest.mock('../kubernetes/autoScalerApi');
+autoScalerApi.deleteAutoScaler = jest.fn().mockResolvedValue();
+
+jest.mock('../kubernetes/deploymentApi');
+deploymentApi.deleteDeployment = jest.fn().mockResolvedValue();
+
+jest.mock('../kubernetes/networkPolicyApi');
+networkPolicyApi.deleteNetworkPolicy = jest.fn().mockResolvedValue();
+
+jest.mock('../kubernetes/serviceApi');
+serviceApi.deleteService = jest.fn().mockResolvedValue();
 
 describe('clusterManager', () => {
   describe('createClusterStack', () => {
@@ -60,6 +76,27 @@ describe('clusterManager', () => {
       expect(stackBuilders.createService).toBeCalledWith(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerService);
       expect(stackBuilders.createDeployment).toHaveBeenNthCalledWith(2, workerParams, deploymentGenerator.createDatalabDaskWorkerDeployment);
       expect(stackBuilders.createAutoScaler).toBeCalledWith(workerParams, deploymentGenerator.createAutoScaler);
+    });
+  });
+
+  describe('deleteClusterStack', () => {
+    it('delete expected resources', async () => {
+      // Arrange
+      const cluster = {
+        type: 'DASK',
+        projectKey: 'project-key',
+        name: 'cluster-name',
+      };
+
+      // Act
+      await deleteClusterStack(cluster);
+
+      // Asset
+      expect(serviceApi.deleteService).toBeCalledWith('dask-scheduler-cluster-name', 'project-key');
+      expect(autoScalerApi.deleteAutoScaler).toBeCalledWith('dask-worker-cluster-name-hpa', 'project-key');
+      expect(deploymentApi.deleteDeployment).toHaveBeenNthCalledWith(1, 'dask-scheduler-cluster-name', 'project-key');
+      expect(deploymentApi.deleteDeployment).toHaveBeenNthCalledWith(2, 'dask-worker-cluster-name', 'project-key');
+      expect(networkPolicyApi.deleteNetworkPolicy).toBeCalledWith('dask-scheduler-cluster-name-netpol', 'project-key');
     });
   });
 });

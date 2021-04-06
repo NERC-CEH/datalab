@@ -1,6 +1,6 @@
 import { matchedData } from 'express-validator';
 import clustersRepository from '../dataaccess/clustersRepository';
-import { getSchedulerServiceName, createClusterStack } from '../stacks/clusterManager';
+import { getSchedulerServiceName, createClusterStack, deleteClusterStack } from '../stacks/clusterManager';
 
 function requestCluster(request) {
   const params = matchedData(request);
@@ -39,7 +39,7 @@ async function deleteCluster(request, response, next) {
 
   try {
     const result = await clustersRepository.deleteCluster(cluster);
-    // await deleteClusterStack(cluster); // TODO in next story
+    await deleteClusterStack(cluster);
     if (result.n === 0) {
       return response.status(404).send(cluster);
     }
