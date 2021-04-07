@@ -6,7 +6,9 @@ metadata:
 data:
   config: |
     # From https://github.com/jupyterhub/jupyter-server-proxy/blob/master/jupyter_server_proxy/config.py
-    # Access also controlled with network policies
+    # Access to Dask schedulers is also controlled with network policies.
+    # This allows the Dask cluster to be seen from the Dask JupyterLab extension
+    # with address proxy/dask-scheduler-<cluster name>:8787
     def host_allowlist(handler, host):
       return host in ["localhost", "127.0.0.1"] or host.startswith("dask-scheduler-")
     c.ServerProxy.host_whitelist = host_allowlist
