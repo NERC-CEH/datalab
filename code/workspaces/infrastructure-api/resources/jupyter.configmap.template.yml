@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ configMapName }}
+data:
+  config: |
+    # From https://github.com/jupyterhub/jupyter-server-proxy/blob/master/jupyter_server_proxy/config.py
+    # Access also controlled with network policies
+    def host_allowlist(handler, host):
+      return host in ["localhost", "127.0.0.1"] or host.startswith("dask-scheduler-")
+    c.ServerProxy.host_whitelist = host_allowlist

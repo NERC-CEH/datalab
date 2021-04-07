@@ -73,7 +73,7 @@ minikube config set driver virtualbox
 rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*
 
 # Create with enough disk space to allow pulling of notebook images, creating conda environments etc.
-minikube start --disk-size='40gb'
+minikube start --disk-size='40gb' --cpus=3 --memory='6gb'
 
 # Check the minikube IP is 192.168.99.100
 minikube ip
