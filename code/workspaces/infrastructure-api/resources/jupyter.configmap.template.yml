@@ -10,5 +10,5 @@ data:
     # This allows the Dask cluster to be seen from the Dask JupyterLab extension
     # with address proxy/dask-scheduler-<cluster name>:8787
     def host_allowlist(handler, host):
-      return host in ["localhost", "127.0.0.1"] or host.startswith("dask-scheduler-")
+      return host in ["localhost", "127.0.0.1"] or (host.startswith("dask-scheduler-") and "." not in host)
     c.ServerProxy.host_whitelist = host_allowlist

@@ -39,6 +39,7 @@ function deleteJupyterNotebook(params) {
     .then(() => serviceApi.deleteService(nameGenerator.sparkDriverHeadlessService(k8sName), projectKey))
     .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
     .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.daskConfigMap(k8sName), projectKey))
+    .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.jupyterConfigMap(k8sName), projectKey))
     .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.pySparkConfigMap(k8sName), projectKey))
     .then(() => secretManager.deleteStackCredentialSecret(name, type, projectKey));
 }
