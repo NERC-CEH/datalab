@@ -11,10 +11,10 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     }
   />
   <div
-    className="makeStyles-showControls-1"
+    className="makeStyles-root-1"
   >
     <span
-      className="makeStyles-showText-2"
+      className="makeStyles-root-2"
     >
       Show
     </span>
@@ -45,6 +45,17 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
         <ForwardRef(WithStyles)
           checked={true}
           color="primary"
+          name="clusters"
+          onChange={[Function]}
+        />
+      }
+      label="Clusters"
+    />
+    <WithStyles(ForwardRef(FormControlLabel))
+      control={
+        <ForwardRef(WithStyles)
+          checked={true}
+          color="primary"
           name="storage"
           onChange={[Function]}
         />
@@ -54,7 +65,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
   </div>
   <div>
     <PromisedContentWrapper
-      fetchingClassName="makeStyles-placeholderCard-3"
+      fetchingClassName="makeStyles-root-3"
       promise={
         Object {
           "fetching": false,
@@ -83,6 +94,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
               }
               show={
                 Object {
+                  "clusters": true,
                   "notebooks": true,
                   "sites": true,
                   "storage": true,
@@ -98,6 +110,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
               }
               show={
                 Object {
+                  "clusters": true,
                   "notebooks": true,
                   "sites": true,
                   "storage": true,

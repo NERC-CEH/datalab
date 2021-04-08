@@ -26,7 +26,7 @@ describe('load clusters reducer', () => {
 
   it('handles successful action type correctly', () => {
     const currentState = { fetching: true, value: [], error: null };
-    const action = { type: getSuccessActionType(LOAD_CLUSTERS_ACTION), payload: clustersArray };
+    const action = { type: getSuccessActionType(LOAD_CLUSTERS_ACTION), payload: { clusters: clustersArray, projectKey: 'project-key' } };
 
     const nextState = clustersReducer(currentState, action);
 
