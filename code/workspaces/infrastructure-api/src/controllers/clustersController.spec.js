@@ -4,7 +4,8 @@ import clustersController from './clustersController';
 import * as clusterManager from '../stacks/clusterManager';
 
 jest.mock('../stacks/clusterManager');
-clusterManager.createClusterStack = jest.fn().mockResolvedValue('okay');
+clusterManager.createClusterStack = jest.fn().mockResolvedValue();
+clusterManager.deleteClusterStack = jest.fn().mockResolvedValue();
 clusterManager.getSchedulerServiceName = jest.fn().mockReturnValue('dask-scheduler-cluster');
 
 jest.mock('../dataaccess/clustersRepository');
@@ -150,6 +151,7 @@ describe('clustersController', () => {
 
       // Assert
       expect(returnValue).toBe(responseMock);
+      expect(clusterManager.deleteClusterStack).toHaveBeenCalledWith(requestMock);
       expect(responseMock.status).toHaveBeenCalledWith(200);
       expect(responseMock.send).toHaveBeenCalledWith(requestMock);
     });

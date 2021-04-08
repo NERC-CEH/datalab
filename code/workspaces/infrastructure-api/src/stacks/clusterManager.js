@@ -3,6 +3,10 @@ import { defaultImage } from 'common/src/config/images';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import { createDeployment, createService, createNetworkPolicy, createAutoScaler } from './stackBuilders';
 import nameGenerator from '../common/nameGenerators';
+import autoScalerApi from '../kubernetes/autoScalerApi';
+import deploymentApi from '../kubernetes/deploymentApi';
+import networkPolicyApi from '../kubernetes/networkPolicyApi';
+import serviceApi from '../kubernetes/serviceApi';
 
 // DASK -> dask
 const getLowerType = type => type.toLowerCase();
@@ -13,7 +17,7 @@ const getWorkerName = name => `worker-${name}`;
 
 export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
 
-async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
+export async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
   const lowerType = getLowerType(type);
   const schedulerName = getSchedulerName(name);
   const workerName = getWorkerName(name);
@@ -64,4 +68,25 @@ async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, ma
   ]);
 }
 
-export { createClusterStack }; // eslint-disable-line import/prefer-default-export
+export async function deleteClusterStack({ type, projectKey, name }) {
+  const lowerType = getLowerType(type);
+  const schedulerName = getSchedulerName(name);
+  const workerName = getWorkerName(name);
+
+  const workerAutoScalerK8sName = nameGenerator.autoScalerName(workerName, lowerType);
+  const workerDeploymentK8sName = nameGenerator.deploymentName(workerName, lowerType);
+  const schedulerServiceK8sName = getSchedulerServiceName(name, type);
+  const schedulerDeploymentK8sName = nameGenerator.deploymentName(schedulerName, lowerType);
+  const schedulerNetworkPolicyK8sName = nameGenerator.networkPolicyName(schedulerName, lowerType);
+
+  // do these in parallel
+  await Promise.all([
+    serviceApi.deleteService(schedulerServiceK8sName, projectKey),
+    autoScalerApi.deleteAutoScaler(workerAutoScalerK8sName, projectKey),
+    deploymentApi.deleteDeployment(schedulerDeploymentK8sName, projectKey),
+    deploymentApi.deleteDeployment(workerDeploymentK8sName, projectKey),
+  ]);
+
+  // delete network policy last, for security
+  await networkPolicyApi.deleteNetworkPolicy(schedulerNetworkPolicyK8sName, projectKey);
+}
