@@ -14,6 +14,18 @@ function createCluster(cluster) {
     .then(errorHandler('data.createCluster'));
 }
 
+function deleteCluster(cluster) {
+  const mutation = `
+    DeleteCluster($cluster: ClusterDeletionRequest!) {
+      deleteCluster(cluster: $cluster) {
+        name
+      }
+    }`;
+
+  return gqlMutation(mutation, { cluster })
+    .then(errorHandler('data.cluster'));
+}
+
 function loadClusters(projectKey) {
   const query = `
     LoadClusters($projectKey: String!) {
@@ -32,4 +44,4 @@ function loadClusters(projectKey) {
     .then(errorHandler('data.clusters'));
 }
 
-export default { createCluster, loadClusters };
+export default { createCluster, deleteCluster, loadClusters };

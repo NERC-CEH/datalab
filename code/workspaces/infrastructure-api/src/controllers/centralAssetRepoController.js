@@ -1,9 +1,6 @@
-import { matchedData, body, param, query } from 'express-validator';
-import { service } from 'service-chassis';
+import { matchedData } from 'express-validator';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import centralAssetRepoModel from '../models/centralAssetMetadata.model';
-import logger from '../config/logger';
-import ValidationChainHelper from './utils/validationChainHelper';
 
 const { PUBLIC, BY_PROJECT } = centralAssetRepoModel;
 
@@ -80,61 +77,8 @@ async function handleExistingMetadata(metadata, response, next) {
   return null;
 }
 
-const metadataValidator = () => {
-  const validations = [
-    new ValidationChainHelper(body('name'))
-      .exists()
-      .notEmpty(),
-    new ValidationChainHelper(body('version'))
-      .exists()
-      .notEmpty(),
-    new ValidationChainHelper(body('fileLocation'))
-      .optional()
-      .notEmpty(),
-    new ValidationChainHelper(body('masterUrl'))
-      .optional()
-      .notEmpty()
-      .isUrl(),
-    new ValidationChainHelper(body('ownerUserIds'))
-      .exists()
-      .isArray(),
-    new ValidationChainHelper(body('visible'))
-      .exists()
-      .isIn(centralAssetRepoModel.possibleVisibleValues()),
-    new ValidationChainHelper(body('projectKeys'))
-      .optional()
-      .isArray(),
-  ];
-
-  const validationChains = validations.map((validation) => {
-    if (validation instanceof ValidationChainHelper) {
-      return validation.getValidationChain();
-    }
-    return validation;
-  });
-
-  return service.middleware.validator(validationChains, logger);
-};
-
-const optionalProjectKeyQueryValidator = () => service.middleware.validator([
-  new ValidationChainHelper(query('projectKey'))
-    .optional()
-    .notEmpty()
-    .getValidationChain(),
-], logger);
-
-const assetIdValidator = () => service.middleware.validator([
-  new ValidationChainHelper(param('assetId'))
-    .exists()
-    .isUUIDv4()
-    .getValidationChain(),
-], logger);
-
 export default {
   createAssetMetadata,
   getAssetById,
   listAssetMetadata,
-  metadataValidator,
-  optionalProjectKeyQueryValidator,
-  assetIdValidator,
 };

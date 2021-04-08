@@ -8,6 +8,15 @@ async function createCluster(cluster) {
   return document;
 }
 
+async function deleteCluster({ projectKey, type, name }) {
+  const result = await ClusterModel()
+    .find({ projectKey })
+    .find({ type })
+    .remove({ name })
+    .exec();
+  return result;
+}
+
 async function clusterExists({ projectKey, name, displayName }) {
   if (projectKey && name && await ClusterModel().exists({ projectKey, name })) {
     return (`Cluster already exists with name of '${name}' in project with key '${projectKey}'.`);
@@ -25,6 +34,7 @@ async function listByProject(projectKey) {
 
 export default {
   createCluster,
+  deleteCluster,
   clusterExists,
   listByProject,
 };

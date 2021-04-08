@@ -1,4 +1,4 @@
-import ValidationChainHelper from './validationChainHelper';
+import ValidationChainHelper from './ValidationChainHelper';
 
 const mockValidationChainMethod = () => jest.fn().mockImplementation(() => mockValidationChain);
 

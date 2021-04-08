@@ -52,6 +52,7 @@
 			"behavior",
 			"checkbox",
 			"conda",
+			"dask",
 			"dataaccess",
 			"datalab",
 			"datalabs",
