@@ -1,4 +1,4 @@
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -16,7 +16,7 @@ import { SITE_TYPE_NAME } from '../../containers/sites/siteTypeName';
 import { STORAGE_TYPE_NAME } from '../../containers/dataStorage/storageTypeName';
 
 function styles(theme) {
-  return {
+  return createStyles({
     cardDiv: {
       display: 'flex',
       flexDirection: 'row',
@@ -86,11 +86,11 @@ function styles(theme) {
     shareStatus: {
       color: theme.typography.colorLight,
     },
-  };
+  });
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
-  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack }) => {
+  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet }) => {
   const users = useUsers();
   const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
   const description = getDescription(stack, typeName);
@@ -130,6 +130,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           editStack={editStack}
           restartStack={restartStack}
           getLogs={getLogs}
+          copySnippet={copySnippet}
           userPermissions={userPermissions}
           openPermission={openPermission}
           deletePermission={deletePermission}

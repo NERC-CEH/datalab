@@ -3,11 +3,13 @@
 exports[`ClustersContainer renders correct snapshot 1`] = `
 <div>
   <StackCards
+    copySnippet={[Function]}
     createPermission="projects:current-project:clusters:create"
     deletePermission="projects:current-project:clusters:delete"
     deleteStack={[Function]}
     editPermission="projects:current-project:clusters:edit"
     openCreationForm={[Function]}
+    openPermission="projects:current-project:clusters:open"
     showCreateButton={true}
     stacks={
       Object {

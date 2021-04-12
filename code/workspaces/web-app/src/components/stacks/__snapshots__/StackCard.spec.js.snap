@@ -44,6 +44,7 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
     className="StackCard-actionsDiv-6"
   >
     <WithStyles(StackCardActions)
+      copySnippet={[MockFunction copySnippet]}
       deletePermission="delete"
       deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
@@ -116,6 +117,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
     className="StackCard-actionsDiv-6"
   >
     <WithStyles(StackCardActions)
+      copySnippet={[MockFunction copySnippet]}
       deletePermission="delete"
       deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
@@ -188,6 +190,7 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
     className="StackCard-actionsDiv-6"
   >
     <WithStyles(StackCardActions)
+      copySnippet={[MockFunction copySnippet]}
       deletePermission="delete"
       deleteStack={[MockFunction deleteStack]}
       editPermission="edit"
@@ -267,6 +270,7 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
       />
     </div>
     <WithStyles(StackCardActions)
+      copySnippet={[MockFunction copySnippet]}
       deletePermission="delete"
       deleteStack={[MockFunction deleteStack]}
       editPermission="edit"

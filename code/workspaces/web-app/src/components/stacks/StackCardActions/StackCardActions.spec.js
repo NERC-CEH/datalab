@@ -8,11 +8,12 @@ jest.mock('../../../hooks/authHooks');
 jest.mock('../../../config/images');
 getUserActionsForType.mockReturnValue([]);
 
-const openStackMock = jest.fn();
-const deleteStackMock = jest.fn();
-const editStackMock = jest.fn();
-const shareStackMock = jest.fn();
-const restartStackMock = jest.fn();
+const openStackMock = jest.fn().mockName('openStack');
+const deleteStackMock = jest.fn().mockName('deleteStack');
+const editStackMock = jest.fn().mockName('editStack');
+const shareStackMock = jest.fn().mockName('shareStack');
+const restartStackMock = jest.fn().mockName('restartStack');
+const copySnippetMock = jest.fn().mockName('copySnippet');
 
 const generateProps = () => ({
   stack: {
@@ -29,6 +30,7 @@ const generateProps = () => ({
   editStack: editStackMock,
   shareStack: shareStackMock,
   restartStack: restartStackMock,
+  copySnippet: copySnippetMock,
   userPermissions: ['open', 'delete', 'edit'],
   openPermission: 'open',
   deletePermission: 'delete',

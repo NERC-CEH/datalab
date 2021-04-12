@@ -132,6 +132,19 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
+        requiredPermission="open"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Copy snippet
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
         requiredPermission="delete"
         shouldRender={false}
         userPermissions={
@@ -315,6 +328,19 @@ exports[`PureStackCardActions Should render Open as disabled if stack is not rea
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
+        requiredPermission="open"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Copy snippet
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
         requiredPermission="delete"
         shouldRender={true}
         userPermissions={
@@ -461,6 +487,19 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
         }
       >
         Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="open"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Copy snippet
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
@@ -613,6 +652,19 @@ exports[`PureStackCardActions should not render button if userAction for that bu
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
+        requiredPermission="open"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Copy snippet
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
         requiredPermission="delete"
         shouldRender={true}
         userPermissions={
@@ -638,15 +690,16 @@ exports[`StackCardActions passes props down to child component as well as curren
       "cardActions": "StackCardActions-cardActions-1",
     }
   }
+  copySnippet={[MockFunction copySnippet]}
   currentUserId="owner-id"
   deletePermission="delete"
-  deleteStack={[MockFunction]}
+  deleteStack={[MockFunction deleteStack]}
   editPermission="edit"
-  editStack={[MockFunction]}
+  editStack={[MockFunction editStack]}
   openPermission="open"
-  openStack={[MockFunction]}
-  restartStack={[MockFunction]}
-  shareStack={[MockFunction]}
+  openStack={[MockFunction openStack]}
+  restartStack={[MockFunction restartStack]}
+  shareStack={[MockFunction shareStack]}
   stack={
     Object {
       "displayName": "expectedDisplayName",

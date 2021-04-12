@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { permissionTypes } from 'common';
 import { projectKeyPermission } from 'common/src/permissionTypes';
 import { reset } from 'redux-form';
+import copy from 'copy-to-clipboard';
 import StackCards from '../../components/stacks/StackCards';
 import { useClustersByType } from '../../hooks/clustersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
@@ -16,7 +17,7 @@ import { useDataStorageForUserInProject } from '../../hooks/dataStorageHooks';
 import dataStorageActions from '../../actions/dataStorageActions';
 import notify from '../../components/common/notify';
 
-const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT, PROJECT_KEY_CLUSTERS_OPEN } } = permissionTypes;
 
 const TYPE_NAME = 'Cluster';
 const TYPE_NAME_PLURAL = 'Clusters';
@@ -41,6 +42,23 @@ const confirmDeleteCluster = dispatch => cluster => dispatch(modalDialogActions.
   onSubmit: () => deleteCluster(dispatch, cluster),
   onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
 }));
+
+const copySnippet = ({ schedulerAddress }) => {
+  const proxyAddress = schedulerAddress.replace('tcp://', 'proxy/').replace('8786', '8787');
+  const message = `# Paste this into your notebook cell
+# Note that the Dask scheduler can be accessed from the Dask JupyterLab extension with address
+# ${proxyAddress}
+from dask.distributed import Client
+c = Client("${schedulerAddress}")
+c
+`;
+  try {
+    copy(message);
+    notify.success('Clipboard contains snippet for notebook cell');
+  } catch (error) {
+    notify.error('Unable to access clipboard.');
+  }
+};
 
 const ClustersContainer = ({ clusterType, className }) => {
   const dispatch = useDispatch();
@@ -71,8 +89,10 @@ const ClustersContainer = ({ clusterType, className }) => {
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
         showCreateButton
         deleteStack={confirmDeleteCluster(dispatch)}
+        copySnippet={copySnippet}
         deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
         editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
+        openPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_OPEN, projectKey)}
       />
     </div>
   );

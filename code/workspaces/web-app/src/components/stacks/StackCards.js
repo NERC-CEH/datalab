@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack },
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet },
 ) => {
   const classes = useStyles();
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
@@ -47,6 +47,7 @@ const StackCards = (
         deletePermission={deletePermission}
         editPermission={editPermission}
         getLogs={getLogs}
+        copySnippet={copySnippet}
       />))
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
         <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>

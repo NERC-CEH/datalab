@@ -7,7 +7,7 @@ const { PROJECT_ROLES_KEY, CATALOGUE_ROLE_KEY, INSTANCE_ADMIN_ROLE_KEY, DATA_MAN
 
 const roleDelimiter = ':';
 
-const permissionAttributes = yaml.safeLoad(fs.readFileSync(config.get('permissionAttributes')));
+const permissionAttributes = yaml.safeLoad(fs.readFileSync(config.get('permissionAttributes')).toString());
 
 //    [ { role: 'admin', projectKey: 'project' } ]
 // -> [ { role: 'admin', projectKey: 'project', permissions: [stackAttributes, storageAttributes, userAttributes] } ]

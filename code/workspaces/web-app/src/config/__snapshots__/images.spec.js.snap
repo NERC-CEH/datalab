@@ -90,6 +90,7 @@ Object {
 
 exports[`getUserActionsForType returns all as true if cannot find type 1`] = `
 Object {
+  "copySnippet": true,
   "delete": true,
   "edit": true,
   "logs": true,
@@ -100,6 +101,7 @@ Object {
 
 exports[`getUserActionsForType returns to match snapshot for site type with logs userActionOverrides 1`] = `
 Object {
+  "copySnippet": true,
   "delete": true,
   "edit": true,
   "logs": true,
@@ -110,6 +112,7 @@ Object {
 
 exports[`getUserActionsForType returns to match snapshot for site type with no logs userActionOverrides 1`] = `
 Object {
+  "copySnippet": true,
   "delete": true,
   "edit": true,
   "logs": false,
