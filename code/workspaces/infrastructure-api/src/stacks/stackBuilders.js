@@ -71,6 +71,19 @@ export const createDaskConfigMap = params => async () => {
   return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
 };
 
+export const createJupyterConfigMap = params => async () => {
+  const { name, projectKey, type } = params;
+
+  const serviceName = nameGenerator.deploymentName(name, type);
+  const configMapName = nameGenerator.jupyterConfigMap(serviceName);
+  const manifest = await deploymentGenerator.createJupyterConfigMap(configMapName);
+
+  logger.info(`Creating configMap ${chalk.blue(configMapName)} with manifest:`);
+  logger.debug(manifest.toString());
+
+  return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
+};
+
 export const createIngressRule = (params, generator) => (service) => {
   const { name, projectKey, type } = params;
   const ingressName = nameGenerator.deploymentName(name, type);

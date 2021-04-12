@@ -33,6 +33,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
       items={
         Array [
           <ForwardRef(WithStyles)
+            copySnippet={[MockFunction copySnippet]}
             deletePermission="delete"
             deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
@@ -58,6 +59,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
             }
           />,
           <ForwardRef(WithStyles)
+            copySnippet={[MockFunction copySnippet]}
             deletePermission="delete"
             deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
@@ -83,6 +85,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
             }
           />,
           <ForwardRef(WithStyles)
+            copySnippet={[MockFunction copySnippet]}
             deletePermission="delete"
             deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
@@ -225,6 +228,7 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
       items={
         Array [
           <ForwardRef(WithStyles)
+            copySnippet={[MockFunction copySnippet]}
             deletePermission="delete"
             deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
@@ -250,6 +254,7 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
             }
           />,
           <ForwardRef(WithStyles)
+            copySnippet={[MockFunction copySnippet]}
             deletePermission="delete"
             deleteStack={[MockFunction deleteStack]}
             editPermission="edit"
@@ -275,6 +280,7 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
             }
           />,
           <ForwardRef(WithStyles)
+            copySnippet={[MockFunction copySnippet]}
             deletePermission="delete"
             deleteStack={[MockFunction deleteStack]}
             editPermission="edit"

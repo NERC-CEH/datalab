@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import Icon from '@material-ui/core/Icon';
@@ -39,7 +40,7 @@ const StackCardActions = (props) => {
   />;
 };
 
-export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, userActions,
+export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, copySnippet, userActions,
   userPermissions, openPermission, deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
@@ -62,11 +63,13 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const shouldRenderShare = userActions.share && shareStack !== undefined;
   const shouldRenderRestart = userActions.restart && restartStack !== undefined;
   const shouldRenderDelete = userActions.delete && deleteStack !== undefined;
+  const shouldRenderCopySnippet = userActions.copySnippet && copySnippet !== undefined;
   const shouldRenderMenuItems = shouldRenderLogs
     || shouldRenderEdit
     || shouldRenderShare
     || shouldRenderRestart
-    || shouldRenderDelete;
+    || shouldRenderDelete
+    || shouldRenderCopySnippet;
 
   return (
     <div className={classes.cardActions}>
@@ -86,7 +89,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           </div>
         </Tooltip>
       </PermissionWrapper>}
-      {ownsStack && stack.status && shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {ownsStack && shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
           aria-controls="more-menu"
           aria-haspopup="true"
@@ -139,6 +142,14 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           Restart
         </StackMoreMenuItem>
         <StackMoreMenuItem
+          shouldRender={shouldRenderCopySnippet}
+          onClick={() => { handleMoreMenuClose(); copySnippet(stack); }}
+          userPermissions={userPermissions}
+          requiredPermission={openPermission}
+        >
+          Copy snippet
+        </StackMoreMenuItem>
+        <StackMoreMenuItem
           shouldRender={shouldRenderDelete}
           onClick={() => deleteStack(stack)}
           userPermissions={userPermissions}
@@ -165,6 +176,7 @@ const sharedPropTypes = {
   restartStack: PropTypes.func,
   getLogs: PropTypes.func,
   shareStack: PropTypes.func,
+  copySnippet: PropTypes.func,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,

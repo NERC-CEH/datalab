@@ -10,6 +10,15 @@ exports[`clusterService createCluster should build the correct mutation and unpa
   "
 `;
 
+exports[`clusterService deleteCluster should build the correct mutation and unpack the results 1`] = `
+"
+    DeleteCluster($cluster: ClusterDeletionRequest!) {
+      deleteCluster(cluster: $cluster) {
+        name
+      }
+    }"
+`;
+
 exports[`clusterService loadClusters should build the correct query and unpack the results 1`] = `
 "
     LoadClusters($projectKey: String!) {

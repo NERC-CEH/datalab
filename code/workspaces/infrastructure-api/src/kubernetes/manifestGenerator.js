@@ -40,6 +40,7 @@ const ConfigTemplates = Object.freeze({
 const ConfigMapTemplates = Object.freeze({
   PYSPARK_CONFIGMAP: 'pyspark.configmap.template.yml',
   DASK_CONFIGMAP: 'dask.configmap.template.yml',
+  JUPYTER_CONFIGMAP: 'jupyter.configmap.template.yml',
 });
 
 const NetworkPolicyTemplates = Object.freeze({

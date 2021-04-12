@@ -8,5 +8,6 @@ describe('nameGenerators', () => {
     expect(nameGenerators.autoScalerName('aName', 'aType')).toEqual('aType-aName-hpa');
     expect(nameGenerators.podLabel('aName', 'aType')).toEqual('aType-aName-po');
     expect(nameGenerators.assetVolume('anAsset')).toEqual('asset-anAsset');
+    expect(nameGenerators.jupyterConfigMap('deploymentName')).toEqual('deploymentName-jupyter-config');
   });
 });

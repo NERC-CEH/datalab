@@ -16,6 +16,14 @@ async function createCluster(cluster, token) {
   return data;
 }
 
+async function deleteCluster(cluster, token) {
+  const { data } = await infrastructureApi().delete(
+    `/${cluster.projectKey}/${cluster.type}/${cluster.name}`,
+    requestConfig(token),
+  );
+  return data;
+}
+
 async function getClusters(projectKey, token) {
   const { data } = await infrastructureApi().get(
     `/?projectKey=${projectKey}`,
@@ -26,5 +34,6 @@ async function getClusters(projectKey, token) {
 
 export default {
   createCluster: wrapWithAxiosErrorWrapper('Error creating cluster.', createCluster),
+  deleteCluster: wrapWithAxiosErrorWrapper('Error deleting cluster.', deleteCluster),
   getClusters: wrapWithAxiosErrorWrapper('Error getting clusters.', getClusters),
 };

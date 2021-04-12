@@ -94,6 +94,9 @@ spec:
             - name: dask-kubernetes-properties
               mountPath: /opt/conda/etc/dask/dask.yaml
               subPath: dask.yaml
+            - name: jupyter-notebook-config
+              mountPath: /home/datalab/.jupyter/jupyter_notebook_config.py
+              subPath: jupyter-notebook-config.py
       volumes:
         {{#volumeMount}}
         - name: persistentfsvol
@@ -112,3 +115,9 @@ spec:
             items:
             - key: config
               path: dask.yaml
+        - name: jupyter-notebook-config
+          configMap:
+            name: {{ jupyterConfigMapName }}
+            items:
+            - key: config
+              path: jupyter-notebook-config.py

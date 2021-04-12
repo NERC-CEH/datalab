@@ -18,9 +18,10 @@ const computeSubmissionServiceAccount = projectKey => `${projectKey}-compute-sub
 const computeSubmissionServiceAccountRoleBinding = projectKey => `${computeSubmissionServiceAccount(projectKey)}-role-binding`;
 const computeSubmissionClusterRole = () => 'compute-submission-role';
 
-// Spark
+// Dask/Spark
 const pySparkConfigMap = deploymentName => `${deploymentName}-pyspark-config`;
 const daskConfigMap = deploymentName => `${deploymentName}-dask-config`;
+const jupyterConfigMap = deploymentName => `${deploymentName}-jupyter-config`;
 const sparkDriverHeadlessService = deploymentServiceName => `${deploymentServiceName}-spark-driver-headless-service`;
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
@@ -39,6 +40,7 @@ export default {
   pvcName,
   pySparkConfigMap,
   daskConfigMap,
+  jupyterConfigMap,
   sparkDriverHeadlessService,
   sparkJob,
   stackCredentialSecret,

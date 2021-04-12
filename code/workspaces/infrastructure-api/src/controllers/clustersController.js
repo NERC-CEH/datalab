@@ -1,14 +1,25 @@
-import { matchedData, body } from 'express-validator';
-import { service } from 'service-chassis';
-import clustersConfig from 'common/src/config/clusters';
+import { matchedData } from 'express-validator';
 import clustersRepository from '../dataaccess/clustersRepository';
-import clusterModel from '../models/cluster.model';
-import logger from '../config/logger';
-import ValidationChainHelper from './utils/validationChainHelper';
-import { getSchedulerServiceName, createClusterStack } from '../stacks/clusterManager';
+import { getSchedulerServiceName, createClusterStack, deleteClusterStack } from '../stacks/clusterManager';
+
+function requestCluster(request) {
+  const params = matchedData(request);
+  const cluster = {
+    type: params.type,
+    projectKey: params.projectKey,
+    name: params.name,
+    displayName: params.displayName,
+    volumeMount: params.volumeMount,
+    condaPath: params.condaPath,
+    maxWorkers: params.maxWorkers,
+    maxWorkerMemoryGb: params.maxWorkerMemoryGb,
+    maxWorkerCpu: params.maxWorkerCpu,
+  };
+  return cluster;
+}
 
 async function createCluster(request, response, next) {
-  const cluster = matchedData(request);
+  const cluster = requestCluster(request);
 
   if (await handleExistingCluster(cluster, response, next)) return response;
 
@@ -20,6 +31,21 @@ async function createCluster(request, response, next) {
     return response.status(201).send(createdCluster);
   } catch (error) {
     return next(new Error(`Error creating cluster - failed to create new document: ${error.message}`));
+  }
+}
+
+async function deleteCluster(request, response, next) {
+  const cluster = requestCluster(request);
+
+  try {
+    const result = await clustersRepository.deleteCluster(cluster);
+    await deleteClusterStack(cluster);
+    if (result.n === 0) {
+      return response.status(404).send(cluster);
+    }
+    return response.status(200).send(cluster);
+  } catch (error) {
+    return next(new Error(`Error deleting cluster: ${error.message}`));
   }
 }
 
@@ -46,51 +72,8 @@ async function listByProject(request, response, next) {
   }
 }
 
-const range = limits => ({ min: limits.lowerLimit, max: limits.upperLimit });
-
-const clusterValidator = () => {
-  const validations = [
-    new ValidationChainHelper(body('type'))
-      .exists()
-      .isIn(clusterModel.possibleTypeValues()),
-    new ValidationChainHelper(body('projectKey'))
-      .exists()
-      .notEmpty(),
-    new ValidationChainHelper(body('name'))
-      .exists()
-      .isName(),
-    new ValidationChainHelper(body('displayName'))
-      .exists()
-      .notEmpty(),
-    new ValidationChainHelper(body('volumeMount'))
-      .optional()
-      .notEmpty(),
-    new ValidationChainHelper(body('condaPath'))
-      .optional()
-      .notEmpty(),
-    new ValidationChainHelper(body('maxWorkers'))
-      .exists()
-      .isInIntRange(range(clustersConfig().dask.cluster.workersMax)),
-    new ValidationChainHelper(body('maxWorkerMemoryGb'))
-      .exists()
-      .isInFloatRange(range(clustersConfig().dask.workers.memoryMax_GB)),
-    new ValidationChainHelper(body('maxWorkerCpu'))
-      .exists()
-      .isInFloatRange(range(clustersConfig().dask.workers.CpuMax_vCPU)),
-  ];
-
-  const validationChains = validations.map((validation) => {
-    if (validation instanceof ValidationChainHelper) {
-      return validation.getValidationChain();
-    }
-    return validation;
-  });
-
-  return service.middleware.validator(validationChains, logger);
-};
-
 export default {
   createCluster,
+  deleteCluster,
   listByProject,
-  clusterValidator,
 };

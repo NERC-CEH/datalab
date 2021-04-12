@@ -14,7 +14,8 @@ jest.mock('../kubernetes/deploymentApi');
 jest.mock('../dataaccess/centralAssetRepoRepository');
 jest.mock('../config/config');
 
-config.get = jest.fn().mockReturnValue('datalabs.localhost');
+const origConfig = jest.requireActual('../config/config');
+config.get = jest.fn().mockImplementation(s => origConfig.default.default(s));
 
 const getStackMock = jest.fn();
 Stacks.getStack = getStackMock;
