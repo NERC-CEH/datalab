@@ -25,7 +25,7 @@ async function idempotentDeleteProjectNamespaces(projectKey) {
 /**
  * Check if project requires a forbidden namespace
  * @param projectKey the project key
- * @returns {Promise<void>}
+ * @returns {Promise<boolean>}
  */
 async function checkForbiddenNamespaces(projectKey) {
   const projectNamespace = await namespaceApi.readNamespaceMetadata(projectKey);

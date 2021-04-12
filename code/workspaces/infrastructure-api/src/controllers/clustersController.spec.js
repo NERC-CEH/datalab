@@ -4,7 +4,8 @@ import clustersController from './clustersController';
 import * as clusterManager from '../stacks/clusterManager';
 
 jest.mock('../stacks/clusterManager');
-clusterManager.createClusterStack = jest.fn().mockResolvedValue('okay');
+clusterManager.createClusterStack = jest.fn().mockResolvedValue();
+clusterManager.deleteClusterStack = jest.fn().mockResolvedValue();
 clusterManager.getSchedulerServiceName = jest.fn().mockReturnValue('dask-scheduler-cluster');
 
 jest.mock('../dataaccess/clustersRepository');
@@ -109,6 +110,62 @@ describe('clustersController', () => {
 
       // Assert
       expect(nextMock).toHaveBeenCalledWith(new Error('Error creating cluster - failed to create new document: Expected test error'));
+    });
+  });
+
+  describe('deleteCluster', () => {
+    const { deleteCluster } = clustersController;
+
+    it('calls matched data to get the cluster information', async () => {
+      // Arrange
+      const requestMock = { };
+
+      // Act
+      await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(matchedDataMock).toHaveBeenCalledWith(requestMock);
+    });
+
+    it('returns response configured with 404 status if cluster not in mongo', async () => {
+      // Arrange
+      clustersRepository.deleteCluster.mockResolvedValueOnce({ n: 0 });
+      const requestMock = clusterRequest();
+
+      // Act
+      const returnValue = await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(404);
+      expect(responseMock.send).toHaveBeenCalledWith(requestMock);
+    });
+
+    it('returns response configured with 200 status if cluster is in mongo', async () => {
+      // Arrange
+      clustersRepository.deleteCluster.mockResolvedValueOnce({ n: 1 });
+      const requestMock = clusterRequest();
+
+      // Act
+      const returnValue = await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(returnValue).toBe(responseMock);
+      expect(clusterManager.deleteClusterStack).toHaveBeenCalledWith(requestMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith(requestMock);
+    });
+
+    it('calls next with an error if there is an error when deleting the cluster', async () => {
+      // Arrange
+      const requestMock = clusterRequest();
+      clustersRepository.deleteCluster.mockRejectedValueOnce(new Error('Expected test error'));
+
+      // Act
+      await deleteCluster(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(nextMock).toHaveBeenCalledWith(new Error('Error deleting cluster: Expected test error'));
     });
   });
 

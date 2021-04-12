@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import Icon from '@material-ui/core/Icon';
@@ -86,7 +87,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           </div>
         </Tooltip>
       </PermissionWrapper>}
-      {ownsStack && stack.status && shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {ownsStack && shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
           aria-controls="more-menu"
           aria-haspopup="true"

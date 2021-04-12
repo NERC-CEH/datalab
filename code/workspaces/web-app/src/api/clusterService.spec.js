@@ -5,14 +5,20 @@ jest.mock('./graphqlClient');
 
 const getClusterCreationObject = () => ({
   displayName: 'Test Cluster',
-  name: 'testcluster',
+  name: 'test-cluster',
   type: 'DASK',
-  projectKey: 'testproj',
-  volumeMount: 'teststore',
+  projectKey: 'test-project',
+  volumeMount: 'test-store',
   condaPath: '/conda/path',
   maxWorkers: 4,
   maxWorkerMemoryGb: 4,
   maxWorkerCpu: 1,
+});
+
+const getClusterDeletionObject = () => ({
+  name: 'test-cluster',
+  type: 'DASK',
+  projectKey: 'test-project',
 });
 
 const getCluster = () => ({
@@ -49,8 +55,27 @@ describe('clusterService', () => {
     });
   });
 
+  describe('deleteCluster', () => {
+    it('should build the correct mutation and unpack the results', async () => {
+      const clusterDeletionRequest = getClusterDeletionObject();
+      const deletionResponseData = { id: 'test-id' };
+      mockClient.prepareSuccess(deletionResponseData);
+
+      await clusterService.deleteCluster(clusterDeletionRequest);
+
+      expect(mockClient.lastQuery()).toMatchSnapshot();
+      expect(mockClient.lastOptions()).toEqual({ cluster: clusterDeletionRequest });
+    });
+
+    it('should throw an error if the mutation fails', async () => {
+      const clusterDeletionRequest = getClusterDeletionObject();
+      mockClient.prepareFailure('expected error');
+      await expect(clusterService.createCluster(clusterDeletionRequest)).rejects.toEqual({ error: 'expected error' });
+    });
+  });
+
   describe('loadClusters', () => {
-    const projectKey = 'testproj';
+    const projectKey = 'test-project';
 
     it('should build the correct query and unpack the results', async () => {
       mockClient.prepareSuccess([getCluster()]);

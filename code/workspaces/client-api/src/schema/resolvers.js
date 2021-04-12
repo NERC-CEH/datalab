@@ -1,6 +1,6 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
-import { version } from '../version';
+import { version } from '../version.json';
 import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
@@ -30,13 +30,13 @@ const resolvers = {
     status: () => () => `GraphQL server is running version: ${version}`,
     dataStorage: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_LIST, user, () => storageService.getAllProjectActive(args.projectKey, token)),
     dataStore: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_OPEN, user, () => storageService.getById(args.projectKey, args.id, token)),
-    stack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_OPEN, user, () => stackService.getById(args.projectKey, args.id, { user, token })),
-    stacks: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAll(args.projectKey, { user, token })),
+    stack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_OPEN, user, () => stackService.getById(args.projectKey, args.id, { token })),
+    stacks: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAll(args.projectKey, { token })),
     stacksByCategory: (obj, { params }, { user, token }) => (
-      projectPermissionWrapper(params, STACKS_LIST, user, () => stackService.getAllByCategory(params.projectKey, params.category, { user, token }))
+      projectPermissionWrapper(params, STACKS_LIST, user, () => stackService.getAllByCategory(params.projectKey, params.category, { token }))
     ),
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
-    datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
+    datalabs: () => datalabRepository.getAll(),
     userPermissions: (obj, params, { identity, token }) => permissionsService.getUserPermissions(identity, token),
     allUsersAndRoles: (obj, args, { token }) => rolesService.getAllUsersAndRoles(token),
     checkNameUniqueness: (obj, args, { user, token }) => projectPermissionWrapper(args, [STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(args.projectKey, args.name, token)),
@@ -85,6 +85,7 @@ const resolvers = {
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),
     createCluster: (obj, { cluster }, { token }) => clustersService.createCluster(cluster, token),
+    deleteCluster: (obj, { cluster }, { token }) => clustersService.deleteCluster(cluster, token),
   },
 
   CentralAssetMetadata: {
@@ -102,8 +103,8 @@ const resolvers = {
       }
     },
     accessKey: (obj, args, { token }) => minioTokenService.requestMinioToken(obj, token),
-    stacksMountingStore: ({ name, projectKey }, args, { user, token }) => (projectKey
-      ? stackService.getAllByVolumeMount(projectKey, name, { user, token }) : []),
+    stacksMountingStore: ({ name, projectKey }, args, { token }) => (projectKey
+      ? stackService.getAllByVolumeMount(projectKey, name, { token }) : []),
     status: () => READY,
   },
 
