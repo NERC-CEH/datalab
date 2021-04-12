@@ -1,4 +1,9 @@
 import deploymentGenerator from './deploymentGenerator';
+import config from '../config/config';
+
+jest.mock('../config/config');
+const origConfig = jest.requireActual('../config/config');
+config.get = jest.fn().mockImplementation(s => origConfig.default.default(s));
 
 describe('deploymentGenerator', () => {
   describe('createDatalabDaskSchedulerDeployment', () => {
@@ -81,6 +86,18 @@ describe('deploymentGenerator', () => {
       scaleDownWindowSec: 'scale-down-window-sec',
     };
     const manifest = await deploymentGenerator.createAutoScaler(params);
+    expect(manifest).toMatchSnapshot();
+  });
+
+  it('generates createJupyterDeployment manifest', async () => {
+    const params = {
+      projectKey: 'project-key',
+      deploymentName: 'deployment-name',
+      notebookName: 'notebook-name',
+      type: 'jupyterlab',
+      volumeMount: 'volume-mount',
+    };
+    const manifest = await deploymentGenerator.createJupyterDeployment(params);
     expect(manifest).toMatchSnapshot();
   });
 });

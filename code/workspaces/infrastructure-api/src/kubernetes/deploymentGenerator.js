@@ -28,6 +28,7 @@ function createJupyterDeployment({ projectKey, deploymentName, notebookName, typ
     serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
     pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
     daskConfigMapName: nameGenerator.daskConfigMap(deploymentName),
+    jupyterConfigMapName: nameGenerator.jupyterConfigMap(deploymentName),
     type,
     startCmd,
     volumeMount,
@@ -221,6 +222,11 @@ function createDaskConfigMap(notebookName, projectKey, configMapName) {
   return generateManifest(context, ConfigMapTemplates.DASK_CONFIGMAP);
 }
 
+function createJupyterConfigMap(configMapName) {
+  const context = { configMapName };
+  return generateManifest(context, ConfigMapTemplates.JUPYTER_CONFIGMAP);
+}
+
 function createDatalabDaskSchedulerNetworkPolicy({ networkPolicyName, schedulerPodLabel, projectKey }) {
   const context = { name: networkPolicyName, schedulerPodLabel, projectKey };
   return generateManifest(context, NetworkPolicyTemplates.DATALAB_DASK_SCHEDULER_NETWORK_POLICY);
@@ -254,6 +260,7 @@ export default {
   createSparkDriverHeadlessService,
   createPySparkConfigMap,
   createDaskConfigMap,
+  createJupyterConfigMap,
   createDatalabDaskSchedulerDeployment,
   createDatalabDaskWorkerDeployment,
   createDatalabDaskSchedulerService,

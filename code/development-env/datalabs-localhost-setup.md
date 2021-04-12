@@ -13,6 +13,7 @@ minikube addons enable ingress
 This secret must be created __before__ adding ingress rules.
 
 ```bash
+kubectl delete secret tls-secret
 kubectl create secret tls tls-secret --key ./config/ca/datalab.localhost.key --cert ./config/ca/datalab.localhost.crt -n devtest
 ```
 
