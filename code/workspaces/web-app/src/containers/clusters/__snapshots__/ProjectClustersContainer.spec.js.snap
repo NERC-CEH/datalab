@@ -2,8 +2,13 @@
 
 exports[`ProjectClustersContainer renders correct snapshot 1`] = `
 <StackCards
+  copySnippet={[Function]}
   createPermission="projects:project-key:clusters:create"
+  deletePermission="projects:project-key:clusters:delete"
+  deleteStack={[Function]}
+  editPermission="projects:project-key:clusters:edit"
   openCreationForm={[Function]}
+  openPermission="projects:project-key:clusters:open"
   showCreateButton={true}
   stacks={
     Object {
