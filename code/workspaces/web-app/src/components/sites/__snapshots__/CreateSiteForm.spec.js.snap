@@ -4,6 +4,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
 <form>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Display Name"
       name="displayName"
@@ -12,6 +17,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Type"
       name="type"
@@ -28,6 +38,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       endText=".datalabs.localhost"
       label="URL Name"
@@ -38,6 +53,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Data Store to Mount"
       name="volumeMount"
@@ -53,6 +73,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Source Path"
       name="sourcePath"
@@ -62,6 +87,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Description"
       name="description"
@@ -70,6 +100,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Visibility Status"
       name="visible"
@@ -100,6 +135,21 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
       }
     />
   </div>
+  <div>
+    <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
+      component={[Function]}
+      format={[Function]}
+      label="Assets"
+      name="assets"
+      parse={[Function]}
+      projectKey="testproj"
+    />
+  </div>
   <CreateFormControls
     onCancel={[MockFunction]}
   />
@@ -110,6 +160,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
 <form>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Display Name"
       name="displayName"
@@ -118,6 +173,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Type"
       name="type"
@@ -134,6 +194,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Version"
       name="version"
@@ -149,6 +214,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       endText=".datalabs.localhost"
       label="URL Name"
@@ -159,6 +229,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Data Store to Mount"
       name="volumeMount"
@@ -174,6 +249,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Source Path"
       name="sourcePath"
@@ -183,6 +263,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Description"
       name="description"
@@ -191,6 +276,11 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
   </div>
   <div>
     <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
       component={[Function]}
       label="Visibility Status"
       name="visible"
@@ -219,6 +309,21 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when there
           },
         ]
       }
+    />
+  </div>
+  <div>
+    <Field
+      InputLabelProps={
+        Object {
+          "shrink": true,
+        }
+      }
+      component={[Function]}
+      format={[Function]}
+      label="Assets"
+      name="assets"
+      parse={[Function]}
+      projectKey="testproj"
     />
   </div>
   <CreateFormControls

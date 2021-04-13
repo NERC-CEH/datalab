@@ -2,14 +2,20 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { siteVisibilityOptions } from '../common/selectShareOptions';
-import { CreateFormControls, renderAdornedTextField, renderSelectField, renderTextArea, renderTextField } from '../common/form/controls';
+import { formatAndParseMultiSelect, CreateFormControls, renderAdornedTextField, renderSelectField, renderTextArea, renderTextField } from '../common/form/controls';
 import { getAsyncValidate, syncValidate } from './createSiteFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
+import AssetMultiSelect from '../common/form/AssetMultiSelect';
 
 export const FORM_NAME = 'createSite';
 const NAME_FIELD_NAME = 'name';
 export const TYPE_FIELD_NAME = 'type';
 export const VERSION_FIELD_NAME = 'version';
+
+const commonProps = {
+  component: renderTextField,
+  InputLabelProps: { shrink: true },
+};
 
 const CreateSiteForm = ({
   handleSubmit, cancel, submitting, dataStorageOptions, projectKey, typeOptions, versionOptions,
@@ -20,6 +26,7 @@ const CreateSiteForm = ({
     <form onSubmit={handleSubmit}>
       <div>
         <Field
+          { ...commonProps }
           name="displayName"
           label="Display Name"
           component={renderTextField}
@@ -27,6 +34,7 @@ const CreateSiteForm = ({
       </div>
       <div>
         <Field
+          { ...commonProps }
           name={TYPE_FIELD_NAME}
           label="Type"
           component={renderSelectField}
@@ -36,6 +44,7 @@ const CreateSiteForm = ({
       {versionOptions && versionOptions.length > 0
         && <div>
           <Field
+            { ...commonProps }
             name={VERSION_FIELD_NAME}
             label="Version"
             component={renderSelectField}
@@ -45,6 +54,7 @@ const CreateSiteForm = ({
       }
       <div>
         <Field
+          { ...commonProps }
           name={NAME_FIELD_NAME}
           label="URL Name"
           component={renderAdornedTextField}
@@ -54,6 +64,7 @@ const CreateSiteForm = ({
       </div>
       <div>
         <Field
+          { ...commonProps }
           name="volumeMount"
           label="Data Store to Mount"
           component={renderSelectField}
@@ -61,6 +72,7 @@ const CreateSiteForm = ({
       </div>
       <div>
         <Field
+          { ...commonProps }
           name="sourcePath"
           label="Source Path"
           component={renderAdornedTextField}
@@ -69,6 +81,7 @@ const CreateSiteForm = ({
       </div>
       <div>
         <Field
+          { ...commonProps }
           name="description"
           label="Description"
           component={renderTextArea}
@@ -76,10 +89,22 @@ const CreateSiteForm = ({
       </div>
       <div>
         <Field
+          { ...commonProps }
           name="visible"
           label="Visibility Status"
           component={renderSelectField}
           options={siteVisibilityOptions}/>
+      </div>
+      <div>
+        <Field
+          { ...commonProps }
+          name="assets"
+          label="Assets"
+          component={AssetMultiSelect}
+          projectKey={projectKey}
+          format={formatAndParseMultiSelect}
+          parse={formatAndParseMultiSelect}
+        />
       </div>
       <CreateFormControls onCancel={cancel} submitting={submitting} />
     </form>
