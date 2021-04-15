@@ -1,6 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PureEditSiteForm } from './EditSiteForm';
+import { useCurrentProject } from '../../hooks/currentProjectHooks';
+
+jest.mock('../../hooks/currentProjectHooks');
+const currentProject = { fetching: false, value: { key: 'projectKey' } };
+useCurrentProject.mockReturnValue(currentProject);
 
 describe('EditSiteForm', () => {
   const shallowRender = () => shallow(
@@ -9,6 +14,7 @@ describe('EditSiteForm', () => {
       reset={jest.fn().mockName('reset')}
       pristine={true}
       onCancel={jest.fn().mockName('onCancel')}
+      projectKey="projectKey"
     />,
   );
 

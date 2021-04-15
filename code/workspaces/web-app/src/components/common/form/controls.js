@@ -198,7 +198,7 @@ export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons = fa
 };
 
 export const UpdateFormControls = ({
-  submitting, fullWidthButtons,
+  submitting = false, fullWidthButtons = false,
   onCancel, cancelButtonText = 'Cancel',
   onClearChanges, clearChangesButtonText = 'Clear Changes',
   pristine,
