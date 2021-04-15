@@ -12,6 +12,8 @@ import ShareStackDialog from '../../components/modal/ShareStackDialog';
 import EditNotebookDialog from '../../components/modal/EditNotebookDialog';
 import EditSiteDialog from '../../components/modal/EditSiteDialog';
 import Logs from '../../components/modal/SiteLogs';
+import RestartStackDialog from '../../components/modal/RestartStackDialog';
+import CreateClusterDialog from '../../components/modal/CreateClusterDialog';
 
 import {
   MODAL_TYPE_CREATE_NOTEBOOK,
@@ -26,8 +28,8 @@ import {
   MODAL_TYPE_EDIT_NOTEBOOK,
   MODAL_TYPE_EDIT_SITE,
   MODAL_TYPE_RESTART_STACK,
+  MODAL_TYPE_CREATE_CLUSTER,
 } from '../../constants/modaltypes';
-import RestartStackDialog from '../../components/modal/RestartStackDialog';
 
 const MODAL_COMPONENTS = {
   [MODAL_TYPE_CREATE_NOTEBOOK]: CreateNotebookDialog,
@@ -42,6 +44,7 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_EDIT_NOTEBOOK]: EditNotebookDialog,
   [MODAL_TYPE_EDIT_SITE]: EditSiteDialog,
   [MODAL_TYPE_RESTART_STACK]: RestartStackDialog,
+  [MODAL_TYPE_CREATE_CLUSTER]: CreateClusterDialog,
 };
 
 const ModalRoot = ({ modalType, props }) => {

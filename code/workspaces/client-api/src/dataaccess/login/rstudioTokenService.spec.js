@@ -2,6 +2,10 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import rstudioTokenService from './rstudioTokenService';
 import encrypt from '../../vendor/encrypt.min';
+import * as common from './common';
+
+jest.mock('./common');
+common.getCorrectAccessUrl = jest.fn().mockReturnValue('http://rstudio');
 
 const mock = new MockAdapter(axios);
 
@@ -26,6 +30,10 @@ describe('RStudio token service', () => {
     password: 'password',
   };
 
+  const csrfToken = {
+    'set-cookie': ['csrf-token=a9a40335-dc8d-43ee-bc65-7f2e93e44a4a;'],
+  };
+
   const certificate = 'ABCD:12345678';
 
   const headers = {
@@ -38,10 +46,11 @@ describe('RStudio token service', () => {
   it('should return tokens for successful login', () => {
     // Mock certificate request
     mock.onGet('http://rstudio/auth-public-key').reply(200, certificate);
+    mock.onGet('http://rstudio/auth-sign-in').reply(200, {}, csrfToken);
 
     // Mock login request
     encryptMock.mockImplementationOnce(() => ('encryptedValue'));
-    const expectedBody = 'persist=0&appUri=&clientPath=%2Fauth-sign-in&v=encryptedValue';
+    const expectedBody = 'persist=0&appUri=&clientPath=%2Fauth-sign-in&csrf-token=a9a40335-dc8d-43ee-bc65-7f2e93e44a4a&v=encryptedValue';
     mock.onPost('http://rstudio/auth-do-sign-in', expectedBody).reply(302, {}, headers);
 
     return rstudioTokenService.rstudioLogin(notebook)(credentials)

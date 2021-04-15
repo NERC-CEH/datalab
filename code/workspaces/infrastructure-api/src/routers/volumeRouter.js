@@ -1,7 +1,7 @@
 import express from 'express';
 import { service } from 'service-chassis';
 import { permissionTypes } from 'common';
-import { projectPermissionWrapper } from '../auth/permissionMiddleware';
+import permissionMiddleware from '../auth/permissionMiddleware';
 import volume from '../controllers/volumeController';
 
 const { errorWrapper: ew } = service.middleware;
@@ -14,13 +14,13 @@ const volumeRouter = express.Router();
 
 volumeRouter.post(
   '/',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_CREATE),
+  permissionMiddleware(PROJECT_KEY_STORAGE_CREATE),
   volume.createVolumeValidator,
   ew(volume.createVolume),
 );
 volumeRouter.delete(
   '/',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_DELETE),
+  permissionMiddleware(PROJECT_KEY_STORAGE_DELETE),
   volume.deleteVolumeValidator,
   ew(volume.deleteVolume),
 );

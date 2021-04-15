@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import getAuth from '../auth/auth';
+import { getAuth } from '../config/auth';
 
 const RedirectToLoginPage = () => {
   useLayoutEffect(() => {

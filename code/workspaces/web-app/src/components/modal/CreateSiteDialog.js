@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -9,18 +9,8 @@ import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 import { getTypeOptions, getVersionOptions, updateVersionOnTypeChange } from '../stacks/typeAndVersionFormUtils';
 
 const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions, projectKey }) => {
-  const [siteOptions, setSiteOptions] = useState({});
-
-  useEffect(() => {
-    async function getSiteOptions() {
-      const options = await getSiteInfo();
-      setSiteOptions(options);
-    }
-    getSiteOptions();
-  }, []);
-
   const siteTypeValue = useReduxFormValue(FORM_NAME, TYPE_FIELD_NAME);
-  const versionOptions = getVersionOptions(siteOptions, siteTypeValue);
+  const versionOptions = getVersionOptions(getSiteInfo(), siteTypeValue);
 
   return (
     <Dialog open={true} maxWidth="md">
@@ -32,7 +22,7 @@ const CreateSiteDialog = ({ title, onSubmit, onCancel, dataStorageOptions, proje
             cancel={onCancel}
             dataStorageOptions={dataStorageOptions}
             projectKey={projectKey}
-            typeOptions={getTypeOptions(siteOptions)}
+            typeOptions={getTypeOptions(getSiteInfo())}
             versionOptions={versionOptions}
             onChange={updateVersionOnTypeChange(FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME, versionOptions)}
           />

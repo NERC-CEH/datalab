@@ -9,6 +9,7 @@ import {
   createDaskConfigMap,
   createDeployment,
   createIngressRule,
+  createJupyterConfigMap,
   createPySparkConfigMap,
   createService,
   createSparkDriverHeadlessService,
@@ -22,6 +23,7 @@ function createJupyterNotebook(params) {
   return secretManager.createStackCredentialSecret(name, type, projectKey, credentials)
     .then(createPySparkConfigMap(params))
     .then(createDaskConfigMap(params))
+    .then(createJupyterConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createJupyterDeployment))
     .then(createSparkDriverHeadlessService(params))
     .then(createService(params, deploymentGenerator.createJupyterService))
@@ -37,6 +39,7 @@ function deleteJupyterNotebook(params) {
     .then(() => serviceApi.deleteService(nameGenerator.sparkDriverHeadlessService(k8sName), projectKey))
     .then(() => deploymentApi.deleteDeployment(k8sName, projectKey))
     .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.daskConfigMap(k8sName), projectKey))
+    .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.jupyterConfigMap(k8sName), projectKey))
     .then(() => configMapApi.deleteNamespacedConfigMap(nameGenerator.pySparkConfigMap(k8sName), projectKey))
     .then(() => secretManager.deleteStackCredentialSecret(name, type, projectKey));
 }

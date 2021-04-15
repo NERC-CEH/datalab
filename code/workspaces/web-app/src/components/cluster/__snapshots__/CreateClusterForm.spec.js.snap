@@ -1,0 +1,364 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateClusterForm it renders to match snapshot with condaPath field when volumeMount field is set 1`] = `
+<form>
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Internal Name"
+    name="name"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Data Store to Mount (optional)"
+    name="volumeMount"
+    options={
+      Array [
+        Object {
+          "text": "None",
+          "value": "--none--",
+        },
+        Object {
+          "text": "Test Store",
+          "value": "teststore",
+        },
+      ]
+    }
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    helperText="The file path to the conda environment on the selected Data Store to be used by the workers."
+    label="Path to Conda environment (optional)"
+    name="condaPath"
+    placeholder="/data/conda/conda-env"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 8,
+          "min": 1,
+          "step": 1,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=1 max=8 default=4"
+    label="Maximum number of workers"
+    name="maxWorkers"
+    parse={[Function]}
+    type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 8,
+          "min": 0.5,
+          "step": 0.5,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=0.5 max=8 default=4"
+    label="Maximum worker memory (GB)"
+    name="maxWorkerMemoryGb"
+    parse={[Function]}
+    type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 2,
+          "min": 0.5,
+          "step": 0.5,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=0.5 max=2 default=0.5"
+    label="Maximum worker CPU use"
+    name="maxWorkerCpu"
+    parse={[Function]}
+    type="number"
+  />
+  <CreateFormControls
+    onCancel={[MockFunction cancel]}
+    submitting={false}
+  />
+</form>
+`;
+
+exports[`CreateClusterForm it renders to match snapshot without condaPath field when volumeMount field has no value 1`] = `
+<form>
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Internal Name"
+    name="name"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Data Store to Mount (optional)"
+    name="volumeMount"
+    options={
+      Array [
+        Object {
+          "text": "None",
+          "value": "--none--",
+        },
+        Object {
+          "text": "Test Store",
+          "value": "teststore",
+        },
+      ]
+    }
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 8,
+          "min": 1,
+          "step": 1,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=1 max=8 default=4"
+    label="Maximum number of workers"
+    name="maxWorkers"
+    parse={[Function]}
+    type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 8,
+          "min": 0.5,
+          "step": 0.5,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=0.5 max=8 default=4"
+    label="Maximum worker memory (GB)"
+    name="maxWorkerMemoryGb"
+    parse={[Function]}
+    type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 2,
+          "min": 0.5,
+          "step": 0.5,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=0.5 max=2 default=0.5"
+    label="Maximum worker CPU use"
+    name="maxWorkerCpu"
+    parse={[Function]}
+    type="number"
+  />
+  <CreateFormControls
+    onCancel={[MockFunction cancel]}
+    submitting={false}
+  />
+</form>
+`;
+
+exports[`CreateClusterForm it renders to match snapshot without condaPath field when volumeMount field is set as None option 1`] = `
+<form>
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Display Name"
+    name="displayName"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Internal Name"
+    name="name"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Data Store to Mount (optional)"
+    name="volumeMount"
+    options={
+      Array [
+        Object {
+          "text": "None",
+          "value": "--none--",
+        },
+        Object {
+          "text": "Test Store",
+          "value": "teststore",
+        },
+      ]
+    }
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 8,
+          "min": 1,
+          "step": 1,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=1 max=8 default=4"
+    label="Maximum number of workers"
+    name="maxWorkers"
+    parse={[Function]}
+    type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 8,
+          "min": 0.5,
+          "step": 0.5,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=0.5 max=8 default=4"
+    label="Maximum worker memory (GB)"
+    name="maxWorkerMemoryGb"
+    parse={[Function]}
+    type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    InputProps={
+      Object {
+        "inputProps": Object {
+          "max": 2,
+          "min": 0.5,
+          "step": 0.5,
+        },
+      }
+    }
+    component={[Function]}
+    helperText="Value range: min=0.5 max=2 default=0.5"
+    label="Maximum worker CPU use"
+    name="maxWorkerCpu"
+    parse={[Function]}
+    type="number"
+  />
+  <CreateFormControls
+    onCancel={[MockFunction cancel]}
+    submitting={false}
+  />
+</form>
+`;

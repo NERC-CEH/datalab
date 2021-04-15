@@ -56,6 +56,9 @@ type Query {
 
     # Return all central asset repo metadata items that are available to given project
     centralAssetsAvailableToProject(projectKey: String!): [CentralAssetMetadata]
+
+    # List of clusters in a project
+    clusters(projectKey: String!): [Cluster]
 }
 
 # Root mutation methods for Datalabs.
@@ -113,6 +116,12 @@ type Mutation {
 
     # Set catalogueRole
     setCatalogueRole(userId: ID!, catalogueRole: CatalogueRole!): UserAndRoles!
+
+    # Create a cluster
+    createCluster(cluster: ClusterCreationRequest!): Cluster!
+
+    # Delete a cluster
+    deleteCluster(cluster: ClusterDeletionRequest!): Cluster!
 }
 
 # DataLabs type for basic datalab information.
@@ -209,14 +218,14 @@ input StackUpdateRequest {
     assetIds: [String]
 }
 
-# Type to describe the mutation for deleting a new Stack.
+# Type to describe the mutation for deleting a Stack.
 input StackDeletionRequest {
     projectKey: String
     name: String
     type: String
 }
 
-# Type to describe the mutation for deleting a new Stack.
+# Type to describe the mutation for restarting a Stack.
 input StackRestartRequest {
     projectKey: String
     name: String
@@ -361,10 +370,8 @@ type CentralAssetMetadata {
     assetId: String!
     name: String!
     version: String!
-    type: String!
     fileLocation: String
     masterUrl: String
-    masterVersion: String
     owners: [UserDetail]!
     visible: String!
     projects: [Project]
@@ -374,11 +381,42 @@ type CentralAssetMetadata {
 input CentralAssetMetadataCreationRequest {
     name: String!
     version: String!
-    type: String!
     fileLocation: String
     masterUrl: String
-    masterVersion: String
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]
+}
+
+input ClusterCreationRequest {
+    type: String!
+    projectKey: String!
+    name: String!
+    displayName: String!
+    volumeMount: String
+    condaPath: String
+    maxWorkers: Int!
+    maxWorkerMemoryGb: Float!
+    maxWorkerCpu: Float!
+}
+
+# Type to describe the mutation for deleting a cluster.
+input ClusterDeletionRequest {
+    projectKey: String!
+    name: String!
+    type: String!
+}
+
+type Cluster {
+    id: ID!
+    type: String!
+    projectKey: String!
+    name: String!
+    displayName: String!
+    volumeMount: String
+    condaPath: String
+    maxWorkers: Int!
+    maxWorkerMemoryGb: Float!
+    maxWorkerCpu: Float!
+    schedulerAddress: String
 }

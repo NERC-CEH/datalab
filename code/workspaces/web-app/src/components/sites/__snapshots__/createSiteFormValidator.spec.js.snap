@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`New Site Form Validator syncValidate should return correct error for invalid type 1`] = `
+Object {
+  "type": "no-such-type is not included in the list",
+}
+`;
+
 exports[`New Site Form Validator syncValidate should return correct errors for empty form 1`] = `
 Object {
   "description": "Description can't be blank",

@@ -1,8 +1,12 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import StackCard from './StackCard';
+import { storageDescription, storageDisplayValue } from '../../config/storage';
 
 jest.mock('../../hooks/usersHooks');
+jest.mock('../../config/storage');
+storageDescription.mockReturnValue('Network File System (NFS) volume to store data for Notebooks and Sites.');
+storageDisplayValue.mockReturnValue('NFS');
 
 function shallowRender(props) {
   const shallow = createShallow({ dive: true });
@@ -30,13 +34,12 @@ describe('StackCard', () => {
     deleteStack: jest.fn().mockName('deleteStack'),
     shareStack: jest.fn().mockName('shareStack'),
     restartStack: jest.fn().mockName('restartStack'),
+    copySnippet: jest.fn().mockName('copySnippet'),
     typeName: 'notebook',
     ...permissionProps,
   });
 
-  beforeEach(() => jest.resetAllMocks());
-
-  it('creates correct snapshot for Jupyer stack type', () => {
+  it('creates correct snapshot for Jupyter stack type', () => {
     // Arrange
     const props = generateProps('jupyter');
 

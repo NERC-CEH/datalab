@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-export async function catalogueConfig() {
-  const { data: { catalogue } } = await axios.get('/catalogue_asset_repo_config.json');
-  return catalogue;
+// This is a cached value.
+// Initialise asynchronously before React starts.
+// Get synchronously within React.
+let catalogue;
+
+async function initialiseCatalogue() {
+  const { data } = await axios.get('/catalogue_asset_repo_config.json');
+  ({ catalogue } = data);
 }
 
-export async function catalogueAvailable() {
-  const config = await catalogueConfig();
-  return config.available;
-}
+const getCatalogue = () => (catalogue);
+
+export { initialiseCatalogue, getCatalogue };

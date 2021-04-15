@@ -17,7 +17,7 @@ const metadata = {
 };
 const metadataResponse = {
   ...metadata,
-  assetId: 'asset-id',
+  assetId: 'test-asset-id',
 };
 
 beforeEach(() => {
@@ -69,12 +69,31 @@ describe('listCentralAssetsAvailableToProject', () => {
 
   it('calls infrastructure-api to get metadata of assets visible to the provided project', async () => {
     httpMock
-      .onGet(`${infrastructureApi}/centralAssetRepo/metadata/${projectKey}`)
+      .onGet(`${infrastructureApi}/centralAssetRepo/metadata?projectKey=${projectKey}`)
       .reply(200, [metadataResponse]);
 
     const returnValue = await listCentralAssetsAvailableToProject(projectKey, token);
 
     expect(returnValue).toEqual([metadataResponse]);
+    expect(httpMock.history.get.length).toBe(1);
+    const [getMock] = httpMock.history.get;
+    expect(getMock.headers.authorization).toEqual(token);
+  });
+});
+
+describe('getAssetByIdAndProjectKey', () => {
+  const { getAssetByIdAndProjectKey } = centralAssetRepoService;
+  const assetId = 'test-asset-id';
+  const projectKey = 'test-project';
+
+  it('calls infrastructure-api to get metadata of asset with assetID that is visible to the provided project', async () => {
+    httpMock
+      .onGet(`${infrastructureApi}/centralAssetRepo/metadata/${assetId}?projectKey=${projectKey}`)
+      .reply(200, metadataResponse);
+
+    const returnValue = await getAssetByIdAndProjectKey(assetId, projectKey, token);
+
+    expect(returnValue).toEqual(metadataResponse);
     expect(httpMock.history.get.length).toBe(1);
     const [getMock] = httpMock.history.get;
     expect(getMock.headers.authorization).toEqual(token);

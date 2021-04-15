@@ -1,6 +1,6 @@
 import { statusTypes, permissionTypes } from 'common';
 import config from '../config';
-import { version } from '../version';
+import { version } from '../version.json';
 import { instanceAdminWrapper, projectPermissionWrapper } from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
 import datalabRepository from '../dataaccess/datalabRepository';
@@ -15,6 +15,7 @@ import storageService from '../infrastructure/storageService';
 import logsService from '../dataaccess/logsService';
 import rolesService from '../dataaccess/rolesService';
 import centralAssetRepoService from '../dataaccess/centralAssetRepoService';
+import clustersService from '../dataaccess/clustersService';
 
 const { elementPermissions: { STORAGE_CREATE, STORAGE_DELETE, STORAGE_LIST, STORAGE_EDIT, STORAGE_OPEN } } = permissionTypes;
 const { elementPermissions: { STACKS_CREATE, STACKS_EDIT, STACKS_DELETE, STACKS_LIST, STACKS_OPEN } } = permissionTypes;
@@ -29,13 +30,13 @@ const resolvers = {
     status: () => () => `GraphQL server is running version: ${version}`,
     dataStorage: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_LIST, user, () => storageService.getAllProjectActive(args.projectKey, token)),
     dataStore: (obj, args, { user, token }) => projectPermissionWrapper(args, STORAGE_OPEN, user, () => storageService.getById(args.projectKey, args.id, token)),
-    stack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_OPEN, user, () => stackService.getById(args.projectKey, args.id, { user, token })),
-    stacks: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAll(args.projectKey, { user, token })),
+    stack: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_OPEN, user, () => stackService.getById(args.projectKey, args.id, { token })),
+    stacks: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_LIST, user, () => stackService.getAll(args.projectKey, { token })),
     stacksByCategory: (obj, { params }, { user, token }) => (
-      projectPermissionWrapper(params, STACKS_LIST, user, () => stackService.getAllByCategory(params.projectKey, params.category, { user, token }))
+      projectPermissionWrapper(params, STACKS_LIST, user, () => stackService.getAllByCategory(params.projectKey, params.category, { token }))
     ),
     datalab: (obj, { name }, { user }) => datalabRepository.getByName(user, name),
-    datalabs: (obj, args, { user }) => datalabRepository.getAll(user),
+    datalabs: () => datalabRepository.getAll(),
     userPermissions: (obj, params, { identity, token }) => permissionsService.getUserPermissions(identity, token),
     allUsersAndRoles: (obj, args, { token }) => rolesService.getAllUsersAndRoles(token),
     checkNameUniqueness: (obj, args, { user, token }) => projectPermissionWrapper(args, [STACKS_CREATE, STORAGE_CREATE], user, () => internalNameChecker(args.projectKey, args.name, token)),
@@ -47,6 +48,7 @@ const resolvers = {
     logs: (obj, args, { user, token }) => projectPermissionWrapper(args, STACKS_CREATE, user, () => logsService.getLogsByName(args.projectKey, args.name, token)),
     centralAssets: (obj, args, { token }) => centralAssetRepoService.listCentralAssets(token),
     centralAssetsAvailableToProject: (obj, { projectKey }, { token }) => centralAssetRepoService.listCentralAssetsAvailableToProject(projectKey, token),
+    clusters: (obj, args, { token }) => clustersService.getClusters(args.projectKey, token),
   },
 
   Mutation: {
@@ -82,6 +84,8 @@ const resolvers = {
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),
+    createCluster: (obj, { cluster }, { token }) => clustersService.createCluster(cluster, token),
+    deleteCluster: (obj, { cluster }, { token }) => clustersService.deleteCluster(cluster, token),
   },
 
   CentralAssetMetadata: {
@@ -91,11 +95,16 @@ const resolvers = {
 
   DataStore: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
-    users: (obj, args, { user }) => (obj.projectKey
-      ? projectPermissionWrapper({ projectKey: obj.projectKey }, STORAGE_EDIT, user, () => obj.users, 'DataStore.users') : []),
+    users: async ({ projectKey, users }, args, { user }) => {
+      try {
+        return await projectPermissionWrapper({ projectKey }, STORAGE_EDIT, user, () => users);
+      } catch (error) {
+        return [];
+      }
+    },
     accessKey: (obj, args, { token }) => minioTokenService.requestMinioToken(obj, token),
-    stacksMountingStore: ({ name, projectKey }, args, { user, token }) => (projectKey
-      ? stackService.getAllByVolumeMount(projectKey, name, { user, token }) : []),
+    stacksMountingStore: ({ name, projectKey }, args, { token }) => (projectKey
+      ? stackService.getAllByVolumeMount(projectKey, name, { token }) : []),
     status: () => READY,
   },
 
@@ -103,10 +112,7 @@ const resolvers = {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
     redirectUrl: (obj, args, { token }) => stackUrlService(obj.projectKey, obj, token),
     category: obj => (obj.category ? obj.category.toUpperCase() : null),
-    // TODO - replace this with actual assets owned by the stack
-    assets: () => ([
-      { assetId: 'asset-1', name: 'Test asset 1', version: '0.1', fileLocation: '/file/path1' },
-    ]),
+    assets: ({ projectKey, assetIds = [] }, args, { token }) => assetIds.map(id => centralAssetRepoService.getAssetByIdAndProjectKey(id, projectKey, token)),
   },
 
   Project: {
@@ -117,6 +123,10 @@ const resolvers = {
 
   ProjectUser: {
     name: (obj, args, ctx) => userService.getUserName(obj.userId, ctx.token),
+  },
+
+  Cluster: {
+    id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
   },
 };
 

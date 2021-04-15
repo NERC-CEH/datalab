@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`New Notebook Form Validator syncValidate should return correct error for invalid type 1`] = `
+Object {
+  "type": "no-such-type is not included in the list",
+}
+`;
+
 exports[`New Notebook Form Validator syncValidate should return correct error for name with symbol 1`] = `
 Object {
   "name": "Name must be lower case characters without a space",

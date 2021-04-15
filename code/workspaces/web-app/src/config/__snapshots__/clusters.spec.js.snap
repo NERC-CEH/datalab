@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getClusterMaxWorkers returns correct value 1`] = `
+Object {
+  "default": 4,
+  "lowerLimit": 1,
+  "upperLimit": 8,
+}
+`;
+
+exports[`getWorkerCpuMax returns correct value 1`] = `
+Object {
+  "default": 0.5,
+  "lowerLimit": 0.1,
+  "upperLimit": 2,
+}
+`;
+
+exports[`getWorkerMemoryMax returns correct value 1`] = `
+Object {
+  "default": 4,
+  "lowerLimit": 0.5,
+  "upperLimit": 8,
+}
+`;

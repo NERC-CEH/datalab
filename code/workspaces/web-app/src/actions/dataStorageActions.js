@@ -12,7 +12,7 @@ export const EDIT_DATASTORE_DETAILS_ACTION = 'EDIT_DATASTORE_DETAILS';
 
 const loadDataStorage = projectKey => ({
   type: LOAD_DATASTORAGE_ACTION,
-  payload: dataStorageService.loadDataStorage(projectKey),
+  payload: dataStorageService.loadDataStorage(projectKey).then(storage => ({ projectKey, storage })),
 });
 
 const getCredentials = (projectKey, id) => ({

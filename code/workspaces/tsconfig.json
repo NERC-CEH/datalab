@@ -1,0 +1,32 @@
+{
+  // vscode:
+  // There is a build task in .vscode/tasks.json which will run tsc in watch mode and report problems.
+  // To enable the task to run automatically, run the command 'Tasks: Manage Automatic Tasks in Folder', and allow.
+  // To stop the task, go to Terminal > Task - tsc static analysis and press ctrl-c.
+  // To ignore a file, place this at the top: // @ts-nocheck
+  "compilerOptions": {
+    "outDir": "./ts-build",
+    "composite": true,
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "preserve",
+    "target": "es2019",
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./*/src/**/*.js",
+    "./*/src/version.json",
+    "./common/src/config/*.json"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/*.spec.js",
+    "**/__mocks__",
+    "**/*.min.js"
+  ]
+}

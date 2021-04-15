@@ -32,6 +32,13 @@ projectRoles:
         - list
         - open
         - edit
+    - name: clusters
+      permissions:
+        - create
+        - delete
+        - list
+        - open
+        - edit
     - name: users
       permissions:
         - list
@@ -59,6 +66,10 @@ projectRoles:
         - open
         - edit
     - name: storage
+      permissions:
+        - list
+        - open
+    - name: clusters
       permissions:
         - list
         - open

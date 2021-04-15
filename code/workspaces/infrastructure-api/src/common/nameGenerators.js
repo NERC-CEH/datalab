@@ -5,6 +5,9 @@ const pvcName = volumeName => `${volumeName}-claim`;
 const stackCredentialSecret = generateDeploymentName;
 const assetVolume = assetId => `asset-${assetId}`;
 const isAssetVolume = volumeName => volumeName.match(/^asset-/);
+const networkPolicyName = (name, type) => `${type}-${name}-netpol`;
+const autoScalerName = (name, type) => `${type}-${name}-hpa`;
+const podLabel = (name, type) => `${type}-${name}-po`;
 
 // project namespaces
 const projectNamespace = projectKey => projectKey;
@@ -15,9 +18,10 @@ const computeSubmissionServiceAccount = projectKey => `${projectKey}-compute-sub
 const computeSubmissionServiceAccountRoleBinding = projectKey => `${computeSubmissionServiceAccount(projectKey)}-role-binding`;
 const computeSubmissionClusterRole = () => 'compute-submission-role';
 
-// Spark
+// Dask/Spark
 const pySparkConfigMap = deploymentName => `${deploymentName}-pyspark-config`;
 const daskConfigMap = deploymentName => `${deploymentName}-dask-config`;
+const jupyterConfigMap = deploymentName => `${deploymentName}-jupyter-config`;
 const sparkDriverHeadlessService = deploymentServiceName => `${deploymentServiceName}-spark-driver-headless-service`;
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
@@ -28,11 +32,15 @@ export default {
   computeSubmissionClusterRole,
   computeSubmissionServiceAccount,
   computeSubmissionServiceAccountRoleBinding,
+  networkPolicyName,
+  autoScalerName,
+  podLabel,
   projectNamespace,
   projectComputeNamespace,
   pvcName,
   pySparkConfigMap,
   daskConfigMap,
+  jupyterConfigMap,
   sparkDriverHeadlessService,
   sparkJob,
   stackCredentialSecret,

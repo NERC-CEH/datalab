@@ -109,7 +109,6 @@ export default function AddRepoMetadataDetails() {
 // Redux-Form Component
 export function AddRepoMetadata({ handleSubmit, onCancel }) {
   const classes = useStyles();
-  const masterUrlValue = useReduxFormValue(FORM_NAME, 'masterUrl');
   const visibleValue = useReduxFormValue(FORM_NAME, 'visible');
   const assetRepo = useAssetRepo();
   const disabled = !!assetRepo.value.createdAssetId;
@@ -121,12 +120,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
     disabled,
     InputLabelProps: { shrink: true },
   };
-
-  const typeOptions = [
-    { value: 'DATA', text: 'Data set' },
-    { value: 'NOTEBOOK', text: 'Notebook' },
-    { value: 'SNIPPET', text: 'Snippet' },
-  ];
 
   const visibleOptions = [
     { value: 'PUBLIC', text: 'Public: Asset will be visible to all projects' },
@@ -150,13 +143,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
       />
       <Field
         { ...commonProps }
-        name="type"
-        label="Type"
-        component={renderSelectField}
-        options={typeOptions}
-      />
-      <Field
-        { ...commonProps }
         name="fileLocation"
         label="File location on server.  Can be omitted if the repo is not hosting a local copy."
         placeholder="/file/path/"
@@ -167,13 +153,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
         label="Master URL.  Can be omitted if the asset is only stored in the repo."
         placeholder="https://"
       />
-      {masterUrlValue && masterUrlValue.length > 0
-        && <Field
-            { ...commonProps }
-            name="masterVersion"
-            label="Master version, e.g. a commit ID in a git repo."
-          />
-      }
       <Field
         { ...commonProps }
         name="owners"

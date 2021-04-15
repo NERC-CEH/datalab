@@ -4,6 +4,7 @@ import serviceApi from '../kubernetes/serviceApi';
 import ingressGenerator from '../kubernetes/ingressGenerator';
 import ingressApi from '../kubernetes/ingressApi';
 import { createDeployment, createService, createIngressRule } from './stackBuilders';
+import nameGenerator from '../common/nameGenerators';
 
 function createNbViewerStack(params) {
   return createDeployment(params, deploymentGenerator.createNbViewerDeployment)()
@@ -12,12 +13,12 @@ function createNbViewerStack(params) {
 }
 
 function deleteNbViewerStack(params) {
-  const { datalabInfo, name, type } = params;
-  const k8sName = `${type}-${name}`;
+  const { projectKey, name, type } = params;
+  const k8sName = nameGenerator.deploymentName(name, type);
 
-  return ingressApi.deleteIngress(k8sName, datalabInfo)
-    .then(() => serviceApi.deleteService(k8sName))
-    .then(() => deploymentApi.deleteDeployment(k8sName));
+  return ingressApi.deleteIngress(k8sName, projectKey)
+    .then(() => serviceApi.deleteService(k8sName, projectKey))
+    .then(() => deploymentApi.deleteDeployment(k8sName, projectKey));
 }
 
 export default { createNbViewerStack, deleteNbViewerStack };

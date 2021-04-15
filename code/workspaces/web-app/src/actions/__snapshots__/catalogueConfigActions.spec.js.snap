@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`loadCatalogConfig created action matches snapshot 1`] = `
-Object {
-  "payload": "expected catalogue config value",
-  "type": "LOAD_CATALOGUE_CONFIG_ACTION",
-}
-`;

@@ -1,6 +1,4 @@
 import moment from 'moment';
-import Promise from 'bluebird';
-import Oidc from 'oidc-client';
 import cookies from './cookies';
 import { setSession, clearSession, getSession } from '../core/sessionUtil';
 
@@ -117,26 +115,4 @@ function processIdentity({ sub, name, nickname, picture, email }) {
   return JSON.stringify(identityObject);
 }
 
-let authSession;
-
-const initialiseAuth = (authConfig) => {
-  if (!authSession) {
-    Oidc.Log.logger = console;
-    Oidc.Log.level = Oidc.Log.INFO;
-
-    const userManagerConfig = {
-      ...authConfig.oidc.userManager,
-      userStore: new Oidc.WebStorageStateStore(),
-    };
-
-    const userManager = new Oidc.UserManager(userManagerConfig);
-    const PromisifyUserManager = Promise.promisifyAll(userManager);
-
-    authSession = new Auth(userManager, PromisifyUserManager, authConfig);
-  }
-};
-
-const getAuth = () => (authSession);
-
-export default getAuth;
-export { initialiseAuth, Auth as PureAuth };
+export default Auth;

@@ -8,7 +8,7 @@ Object {
     "versions": Array [
       Object {
         "displayName": "Dask 2.30.0 support",
-        "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+        "image": "nerc/jupyterlab:fbf2130-dask-2.30",
       },
     ],
   },
@@ -18,7 +18,7 @@ Object {
     "versions": Array [
       Object {
         "displayName": "Dask 2.30.0 support",
-        "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
+        "image": "nerc/jupyterlab:fbf2130-dask-2.30",
       },
     ],
   },
@@ -90,6 +90,7 @@ Object {
 
 exports[`getUserActionsForType returns all as true if cannot find type 1`] = `
 Object {
+  "copySnippet": true,
   "delete": true,
   "edit": true,
   "logs": true,
@@ -100,6 +101,7 @@ Object {
 
 exports[`getUserActionsForType returns to match snapshot for site type with logs userActionOverrides 1`] = `
 Object {
+  "copySnippet": true,
   "delete": true,
   "edit": true,
   "logs": true,
@@ -110,144 +112,11 @@ Object {
 
 exports[`getUserActionsForType returns to match snapshot for site type with no logs userActionOverrides 1`] = `
 Object {
+  "copySnippet": true,
   "delete": true,
   "edit": true,
   "logs": false,
   "restart": true,
   "share": true,
-}
-`;
-
-exports[`imageConfig returns the correct configuration 1`] = `
-Object {
-  "categories": Object {
-    "ANALYSIS": Object {
-      "userActions": Object {
-        "delete": true,
-        "edit": true,
-        "logs": false,
-        "restart": true,
-        "share": true,
-      },
-    },
-    "INFRASTRUCTURE": Object {},
-    "PUBLISH": Object {
-      "userActions": Object {
-        "delete": true,
-        "edit": true,
-        "logs": false,
-        "restart": true,
-        "share": true,
-      },
-    },
-  },
-  "comment": "THIS FILE IS FOR TESTING PURPOSES ONLY",
-  "types": Object {
-    "dask": Object {
-      "category": "INFRASTRUCTURE",
-      "versions": Array [
-        Object {
-          "image": "daskdev/dask:2.30.0",
-        },
-      ],
-    },
-    "jupyter": Object {
-      "category": "ANALYSIS",
-      "displayName": "Jupyter",
-      "versions": Array [
-        Object {
-          "displayName": "Dask 2.30.0 support",
-          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
-        },
-      ],
-    },
-    "jupyterlab": Object {
-      "category": "ANALYSIS",
-      "displayName": "JupyterLab",
-      "versions": Array [
-        Object {
-          "displayName": "Dask 2.30.0 support",
-          "image": "nerc/jupyterlab:f200ab964cea-dask-2.30.0",
-        },
-      ],
-    },
-    "minio": Object {
-      "category": "INFRASTRUCTURE",
-      "versions": Array [
-        Object {
-          "connectImage": "nerc/connect:1.0.0",
-          "image": "nerc/minio:1.0",
-        },
-      ],
-    },
-    "nbviewer": Object {
-      "category": "PUBLISH",
-      "displayName": "NBViewer",
-      "versions": Array [
-        Object {
-          "displayName": "Latest",
-          "image": "jupyter/nbviewer:latest",
-        },
-      ],
-    },
-    "rshiny": Object {
-      "category": "PUBLISH",
-      "displayName": "RShiny",
-      "userActionOverrides": Object {
-        "logs": true,
-      },
-      "userSelectableVersion": true,
-      "versions": Array [
-        Object {
-          "default": true,
-          "displayName": "4.0.1",
-          "image": "nerc/rshiny:4.0.1",
-        },
-        Object {
-          "displayName": "3.5.3",
-          "image": "nerc/rshiny:3.5.3",
-        },
-      ],
-    },
-    "rstudio": Object {
-      "category": "ANALYSIS",
-      "displayName": "RStudio",
-      "userSelectableVersion": true,
-      "versions": Array [
-        Object {
-          "connectImage": "nerc/zeppelin-connect:1.1.1",
-          "default": true,
-          "displayName": "4.0.1",
-          "image": "nerc/rstudio:4.0.1",
-        },
-        Object {
-          "connectImage": "nerc/zeppelin-connect:1.1.1",
-          "displayName": "3.5.3",
-          "image": "nerc/rstudio:3.5.3",
-        },
-      ],
-    },
-    "spark": Object {
-      "category": "INFRASTRUCTURE",
-      "masterAddress": "spark://spark-master:7077",
-      "sharedRLibs": "/data/packages/R/%p/%v",
-      "versions": Array [
-        Object {
-          "image": "nerc/spark-k8s:0.1.0",
-        },
-      ],
-    },
-    "zeppelin": Object {
-      "category": "ANALYSIS",
-      "displayName": "Zeppelin",
-      "versions": Array [
-        Object {
-          "connectImage": "nerc/zeppelin-connect:1.1.1",
-          "displayName": "0.7.2.7",
-          "image": "nerc/zeppelin:0.7.2.7",
-        },
-      ],
-    },
-  },
 }
 `;

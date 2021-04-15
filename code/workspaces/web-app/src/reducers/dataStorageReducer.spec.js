@@ -42,7 +42,7 @@ describe('dataStorageReducer', () => {
     it('should handle LOAD_DATASTORAGE_SUCCESS', () => {
       // Arrange
       const type = `${LOAD_DATASTORAGE_ACTION}_${PROMISE_TYPE_SUCCESS}`;
-      const action = { type, payload: valuePayload };
+      const action = { type, payload: { projectKey: 'proj1', storage: valuePayload } };
 
       // Act
       const nextstate = dataStorageReducer({ error: null, fetching: false, value: currentValue }, action);

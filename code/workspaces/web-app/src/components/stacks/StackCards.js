@@ -27,10 +27,9 @@ const useStyles = makeStyles(theme => ({
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack },
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet },
 ) => {
   const classes = useStyles();
-
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
   const renderedStacks = sortedStacks && sortedStacks.length > 0
     ? sortedStacks.map(stack => (
@@ -48,6 +47,7 @@ const StackCards = (
         deletePermission={deletePermission}
         editPermission={editPermission}
         getLogs={getLogs}
+        copySnippet={copySnippet}
       />))
     : [<div className={classes.placeholderCard} key={'placeholder-card'}>
         <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
@@ -77,16 +77,16 @@ StackCards.propTypes = {
     error: PropTypes.object,
   }).isRequired,
   typeName: PropTypes.string.isRequired,
-  openStack: PropTypes.func.isRequired,
-  deleteStack: PropTypes.func.isRequired,
+  openStack: PropTypes.func,
+  deleteStack: PropTypes.func,
   shareStack: PropTypes.func,
   editStack: PropTypes.func,
   restartStack: PropTypes.func,
   getLogs: PropTypes.func,
-  openCreationForm: PropTypes.func.isRequired,
+  openCreationForm: PropTypes.func,
   userPermissions: PropTypes.func.isRequired,
-  createPermission: PropTypes.string.isRequired,
-  openPermission: PropTypes.string.isRequired,
-  deletePermission: PropTypes.string.isRequired,
-  editPermission: PropTypes.string.isRequired,
+  createPermission: PropTypes.string,
+  openPermission: PropTypes.string,
+  deletePermission: PropTypes.string,
+  editPermission: PropTypes.string,
 };

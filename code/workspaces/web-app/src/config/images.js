@@ -3,24 +3,24 @@ import axios from 'axios';
 const NOTEBOOK_CATEGORY = 'ANALYSIS';
 const SITE_CATEGORY = 'PUBLISH';
 
+// These are cached values.
+// Initialise asynchronously before React starts.
+// Get synchronously within React.
 let cachedData;
 let cachedNotebooks;
 let cachedSites;
-const cachedUserActions = {};
+let cachedUserActions;
 
-export async function imageConfig() {
-  return asyncCachedReturn(
-    cachedData,
-    async () => {
-      const { data } = await axios.get('/image_config.json');
-      return data;
-    },
-  );
+async function initialiseImages() {
+  const { data } = await axios.get('/image_config.json');
+  cachedData = data;
+  cachedNotebooks = getInfoForItemsInCategory(NOTEBOOK_CATEGORY);
+  cachedSites = getInfoForItemsInCategory(SITE_CATEGORY);
+  cachedUserActions = getInfoForUserActions();
 }
 
-async function getInfoForItemsInCategory(category) {
-  const data = await imageConfig();
-  return Object.entries(data.types).reduce(
+function getInfoForItemsInCategory(category) {
+  return Object.entries(cachedData.types).reduce(
     (infoForType, [key, value]) => {
       if (value.category === category) {
         infoForType[key] = value; // eslint-disable-line no-param-reassign
@@ -31,31 +31,25 @@ async function getInfoForItemsInCategory(category) {
   );
 }
 
-export async function getNotebookInfo() {
-  return asyncCachedReturn(cachedNotebooks, getInfoForItemsInCategory, NOTEBOOK_CATEGORY);
+function getInfoForUserActions() {
+  return Object.entries(cachedData.types).reduce(
+    (infoForType, [key, value]) => {
+      infoForType[key] = calculateUserActionsForType(key); // eslint-disable-line no-param-reassign
+      return infoForType;
+    },
+    {},
+  );
 }
 
-export async function getSiteInfo() {
-  return asyncCachedReturn(cachedSites, getInfoForItemsInCategory, SITE_CATEGORY);
-}
-
-export async function getUserActionsForType(type) {
-  if (!cachedUserActions[type]) {
-    cachedUserActions[type] = await calculateUserActionsForType(type);
-  }
-  return cachedUserActions[type];
-}
-
-async function calculateUserActionsForType(type) {
-  const data = await imageConfig();
-  const typeInfo = data.types[type];
+function calculateUserActionsForType(type) {
+  const typeInfo = cachedData.types[type];
 
   const actionDefaults = getActionDefaults();
   let categoryDefaultActions = {};
   let actionOverrides = {};
 
   if (typeInfo) {
-    categoryDefaultActions = data.categories[typeInfo.category].userActions || {};
+    categoryDefaultActions = cachedData.categories[typeInfo.category].userActions || {};
     actionOverrides = typeInfo.userActionOverrides || {};
   }
 
@@ -63,7 +57,7 @@ async function calculateUserActionsForType(type) {
 }
 
 function getActionDefaults() {
-  const possibleActions = ['share', 'edit', 'restart', 'delete', 'logs'];
+  const possibleActions = ['share', 'edit', 'restart', 'delete', 'logs', 'copySnippet'];
   const defaultValue = true;
   return possibleActions.reduce(
     (returnValue, actionName) => {
@@ -73,9 +67,8 @@ function getActionDefaults() {
   );
 }
 
-async function asyncCachedReturn(cachedValueStoreVariable, fn, ...fnArgs) {
-  if (!cachedValueStoreVariable) {
-    cachedValueStoreVariable = await fn(...fnArgs); // eslint-disable-line no-param-reassign
-  }
-  return cachedValueStoreVariable;
-}
+const getNotebookInfo = () => (cachedNotebooks);
+const getSiteInfo = () => (cachedSites);
+const getUserActionsForType = type => (cachedUserActions[type] || getActionDefaults());
+
+export { initialiseImages, getNotebookInfo, getSiteInfo, getUserActionsForType };

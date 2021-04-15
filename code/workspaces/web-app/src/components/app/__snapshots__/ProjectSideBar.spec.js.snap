@@ -23,6 +23,7 @@ exports[`PureSideBar correctly renders correct snapshot 1`] = `
           "projects:project99:storage:list",
           "projects:project99:stacks:list",
           "projects:project99:settings:list",
+          "projects:project99:clusters:list",
         ]
       }
     />
@@ -33,6 +34,7 @@ exports[`PureSideBar correctly renders correct snapshot 1`] = `
           "projects:project99:storage:list",
           "projects:project99:stacks:list",
           "projects:project99:settings:list",
+          "projects:project99:clusters:list",
         ]
       }
     />
@@ -60,6 +62,7 @@ exports[`SideBar renders correctly passing props to children 1`] = `
       "projects:project99:storage:list",
       "projects:project99:stacks:list",
       "projects:project99:settings:list",
+      "projects:project99:clusters:list",
     ]
   }
 />

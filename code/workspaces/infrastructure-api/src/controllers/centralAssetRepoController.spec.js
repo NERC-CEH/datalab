@@ -1,6 +1,7 @@
 import * as expressValidator from 'express-validator';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import centralAssetRepoController from './centralAssetRepoController';
+import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 
 jest.mock('../dataaccess/centralAssetRepoRepository');
 
@@ -14,12 +15,13 @@ const responseMock = {
 };
 const nextMock = jest.fn();
 
+const { PUBLIC, BY_PROJECT } = centralAssetRepoModel;
+
 const getMinimalMetadata = () => ({
   name: 'Test Metadata',
   version: '0.1.0',
-  type: 'DATA',
   ownerUserIds: [],
-  visible: 'PUBLIC',
+  visible: PUBLIC,
   fileLocation: 'path/to/file',
 });
 
@@ -87,9 +89,9 @@ describe('createAssetMetadata', () => {
 
 describe('listAssetMetadata', () => {
   const { listAssetMetadata } = centralAssetRepoController;
-  const requestMock = jest.fn();
 
-  it('calls to list metadata and returns response configured with 200 status and array of metadata', async () => {
+  it('calls to list metadata and returns response configured with 200 status and array of metadata when projectKey not provided', async () => {
+    const requestMock = {};
     const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
     centralAssetRepoRepository.listMetadata.mockResolvedValueOnce(availableMetadata);
 
@@ -100,34 +102,99 @@ describe('listAssetMetadata', () => {
     expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
   });
 
+  it('calls to get metadata available to project and returns response configured with 200 status and array of metadata when projectKey provided', async () => {
+    const requestMock = { projectKey: 'testproj' };
+    const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
+    centralAssetRepoRepository.metadataAvailableToProject.mockResolvedValueOnce(availableMetadata);
+
+    const returnValue = await listAssetMetadata(requestMock, responseMock, nextMock);
+
+    expect(returnValue).toBe(responseMock);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
+  });
+
   it('calls next with an error if there is an error when listing the metadata', async () => {
+    const requestMock = {};
     centralAssetRepoRepository.listMetadata.mockRejectedValueOnce(new Error('Expected test error'));
     await listAssetMetadata(requestMock, responseMock, nextMock);
     expect(nextMock).toHaveBeenCalledWith(new Error('Error listing asset metadata: Expected test error'));
   });
 });
 
-describe('assetMetadataAvailableToProject', () => {
-  const { assetMetadataAvailableToProject } = centralAssetRepoController;
-  const projectKey = 'test-project';
+describe('getAssetById', () => {
+  const { getAssetById } = centralAssetRepoController;
 
-  it('calls to get metadata available to project and returns response configured with 200 status and available projects', async () => {
-    const requestMock = { projectKey };
-    const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
-    centralAssetRepoRepository.metadataAvailableToProject.mockResolvedValueOnce(availableMetadata);
+  describe('calls to get metadata with provided id and returns response configured with 200 status and metadata', () => {
+    it('if asset is public', async () => {
+      const requestMock = {};
+      const metadata = {
+        ...getMinimalMetadata(),
+        assetId: 'asset-id',
+        visible: PUBLIC,
+      };
+      centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([metadata]);
 
-    const returnValue = await assetMetadataAvailableToProject(requestMock, responseMock, nextMock);
+      const returnValue = await getAssetById(requestMock, responseMock, nextMock);
 
-    expect(returnValue).toBe(responseMock);
-    expect(responseMock.status).toHaveBeenCalledWith(200);
-    expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
-    expect(centralAssetRepoRepository.metadataAvailableToProject).toHaveBeenCalledWith(projectKey);
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith(metadata);
+    });
+
+    it('if asset is by project and projectKey of project asset is available from is provided', async () => {
+      const projectKey = 'testproj';
+      const requestMock = { projectKey };
+      const metadata = {
+        ...getMinimalMetadata(),
+        assetId: 'asset-id',
+        visible: BY_PROJECT,
+        projectKeys: [projectKey],
+      };
+      centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([metadata]);
+
+      const returnValue = await getAssetById(requestMock, responseMock, nextMock);
+
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith(metadata);
+    });
   });
 
-  it('calls next with error if there is an error when querying metadata', async () => {
-    const requestMock = { projectKey };
-    centralAssetRepoRepository.metadataAvailableToProject.mockRejectedValueOnce(new Error('Expected test error'));
-    await assetMetadataAvailableToProject(requestMock, responseMock, nextMock);
-    expect(nextMock).toHaveBeenCalledWith(new Error('Error listing asset metadata by key: Expected test error'));
+  describe('calls to get metadata with provided id and returns response configured with 404 status', () => {
+    it('if no asset with ID found', async () => {
+      const requestMock = {};
+      centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([]);
+
+      const returnValue = await getAssetById(requestMock, responseMock, nextMock);
+
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(404);
+      expect(responseMock.send).toHaveBeenCalledWith();
+    });
+
+    it('if asset is by project and provided project is unable to access asset', async () => {
+      const requestMock = { projectKey: 'project-without-access' };
+      const metadata = {
+        ...getMinimalMetadata(),
+        assetId: 'asset-id',
+        visible: BY_PROJECT,
+        projectKeys: ['project-with-access'],
+      };
+      centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([metadata]);
+
+      const returnValue = await getAssetById(requestMock, responseMock, nextMock);
+
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(404);
+      expect(responseMock.send).toHaveBeenCalledWith();
+    });
+  });
+
+  it('calls next with an error if there is an error when getting asset by ID', async () => {
+    const requestMock = { assetId: 'test-asset' };
+    centralAssetRepoRepository.getMetadataWithIds.mockRejectedValueOnce(new Error('Expected test error'));
+    await getAssetById(requestMock, responseMock, nextMock);
+    expect(nextMock).toHaveBeenCalledWith(new Error('Error getting asset with assetId: test-asset - Expected test error'));
   });
 });

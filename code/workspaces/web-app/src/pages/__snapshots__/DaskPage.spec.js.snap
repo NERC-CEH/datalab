@@ -7,19 +7,22 @@ exports[`DaskPage renders correct snapshot 1`] = `
   <WithStyles(ForwardRef(Typography))
     variant="body1"
   >
-    Dask is a flexible parallel computing library for analytic computing.
-    <br />
-    DataLabs supports usage of Dask-Kubernetes which allows workers to be scheduled across the cluster. This is tightly integrated with Jupyter.
+    <ExternalLink
+      href="https://dask.org/"
+    >
+      Dask
+    </ExternalLink>
+     is a flexible parallel computing library for analytic computing in Python. DataLabs allows users to create Dask clusters for use within projects. These clusters can be utilised from notebooks using the 
+    <ExternalLink
+      href="https://kubernetes.dask.org/en/latest/"
+    >
+      Dask Kubernetes
+    </ExternalLink>
+     package when configured to use the specified scheduler address for the cluster. Dask can only be used with Python.
   </WithStyles(ForwardRef(Typography))>
-  <PrimaryActionButton
-    onClick={[Function]}
-    style={
-      Object {
-        "marginTop": 10,
-      }
-    }
-  >
-    Dask on Kubernetes Documentation
-  </PrimaryActionButton>
+  <ClustersContainer
+    className="makeStyles-clusterList-1"
+    clusterType="DASK"
+  />
 </WithStyles(Page)>
 `;

@@ -1,15 +1,21 @@
 import React from 'react';
-import theme from '../../../theme';
+import { makeStyles } from '@material-ui/core/styles';
 
-const style = {
-  fontWeight: 200,
-  letterSpacing: '0.05em',
-  color: theme.typography.colorLight,
-  textTransform: 'uppercase',
+const useStyles = makeStyles(theme => ({
+  root: {
+    fontWeight: 200,
+    letterSpacing: '0.05em',
+    color: theme.typography.body2.color,
+    textTransform: 'uppercase',
+  },
+}));
+
+const ResourceInfoSpan = ({ className = '', children }) => {
+  const classes = useStyles();
+  const totalClassName = `${className} ${classes.root}`;
+  return (
+    <span className={totalClassName}>{children}</span>
+  );
 };
-
-const ResourceInfoSpan = ({ className, children }) => (
-  <span className={className} style={style}>{children}</span>
-);
 
 export default ResourceInfoSpan;

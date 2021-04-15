@@ -1,7 +1,8 @@
 import express from 'express';
 import { service } from 'service-chassis';
 import { permissionTypes } from 'common';
-import { projectPermissionWrapper } from '../auth/permissionMiddleware';
+import permissionMiddleware from '../auth/permissionMiddleware';
+
 import volume from '../controllers/volumeController';
 
 const { errorWrapper: ew } = service.middleware;
@@ -12,36 +13,33 @@ const {
 
 const volumesRouter = express.Router();
 
-// TODO - routes running permission wrapper won't currently work.
-//  Don't know use case for them and UI interaction seems to be working as expected so leaving for now.
-
 volumesRouter.get(
   '/active/:projectKey',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_LIST),
+  permissionMiddleware(PROJECT_KEY_STORAGE_LIST),
   volume.projectKeyValidator,
   ew(volume.listProjectActiveVolumes),
 );
 volumesRouter.get(
   '/:projectKey/:id',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_LIST),
+  permissionMiddleware(PROJECT_KEY_STORAGE_LIST),
   volume.getByIdValidator,
   ew(volume.getById),
 );
 volumesRouter.put(
   '/:projectKey/:name/addUsers',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_EDIT),
+  permissionMiddleware(PROJECT_KEY_STORAGE_EDIT),
   volume.updateVolumeUserValidator,
   ew(volume.addUsers),
 );
 volumesRouter.put(
   '/:projectKey/:name/removeUsers',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_EDIT),
+  permissionMiddleware(PROJECT_KEY_STORAGE_EDIT),
   volume.updateVolumeUserValidator,
   ew(volume.removeUsers),
 );
 volumesRouter.patch(
   '/:projectKey/:name',
-  projectPermissionWrapper(PROJECT_KEY_STORAGE_EDIT),
+  permissionMiddleware(PROJECT_KEY_STORAGE_EDIT),
   volume.updateVolumeValidator,
   ew(volume.updateVolume),
 );

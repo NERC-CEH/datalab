@@ -1,7 +1,7 @@
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import ResourceInfoSpan from '../common/typography/ResourceInfoSpan';
@@ -16,7 +16,7 @@ import { SITE_TYPE_NAME } from '../../containers/sites/siteTypeName';
 import { STORAGE_TYPE_NAME } from '../../containers/dataStorage/storageTypeName';
 
 function styles(theme) {
-  return {
+  return createStyles({
     cardDiv: {
       display: 'flex',
       flexDirection: 'row',
@@ -86,38 +86,14 @@ function styles(theme) {
     shareStatus: {
       color: theme.typography.colorLight,
     },
-  };
+  });
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
-  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack }) => {
-  const [storeDisplayValue, setStoreDisplayValue] = useState('');
-  const [description, setDescription] = useState(getDescription(stack, typeName));
+  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet }) => {
   const users = useUsers();
-
-  useEffect(() => {
-    async function getStorageDisplayValue() {
-      const text = await storageDisplayValue(stack.type);
-      setStoreDisplayValue(text);
-    }
-    if (typeName === STORAGE_TYPE_NAME && stack.type) {
-      getStorageDisplayValue();
-    }
-  }, [typeName, stack.type]);
-
-  useEffect(() => {
-    async function getStorageDescription() {
-      const text = await storageDescription(stack.type);
-      setDescription(text);
-    }
-    if (stack.description) {
-      setDescription(stack.description);
-    } else if (typeName === STORAGE_TYPE_NAME && stack.type) {
-      getStorageDescription(stack.type);
-    } else {
-      setDescription(getDescription(stack, typeName));
-    }
-  }, [typeName, stack]);
+  const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
+  const description = getDescription(stack, typeName);
 
   const ResourceInfo = () => {
     if (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME) {
@@ -148,18 +124,19 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
       <div className={classes.actionsDiv}>
         {typeName !== STORAGE_TYPE_NAME && typeName !== PROJECT_TYPE_NAME && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
         <StackCardActions
-            stack={stack}
-            openStack={openStack}
-            deleteStack={deleteStack}
-            editStack={editStack}
-            restartStack={restartStack}
-            getLogs={getLogs}
-            userPermissions={userPermissions}
-            openPermission={openPermission}
-            deletePermission={deletePermission}
-            shareStack={shareStack}
-            editPermission={editPermission}
-          />
+          stack={stack}
+          openStack={openStack}
+          deleteStack={deleteStack}
+          editStack={editStack}
+          restartStack={restartStack}
+          getLogs={getLogs}
+          copySnippet={copySnippet}
+          userPermissions={userPermissions}
+          openPermission={openPermission}
+          deletePermission={deletePermission}
+          shareStack={shareStack}
+          editPermission={editPermission}
+        />
       </div>
     </div>
   );
@@ -185,9 +162,9 @@ StackCard.propTypes = {
   shareStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  openPermission: PropTypes.string.isRequired,
-  deletePermission: PropTypes.string.isRequired,
-  editPermission: PropTypes.string.isRequired,
+  openPermission: PropTypes.string,
+  deletePermission: PropTypes.string,
+  editPermission: PropTypes.string,
 };
 
 function getDisplayName(stack) {
@@ -228,6 +205,8 @@ function generateGetImage(classes, typeName) {
 function getDescription(stack, typeName) {
   if (stack.description) {
     return stack.description;
+  } if (typeName === STORAGE_TYPE_NAME && stack.type) {
+    return storageDescription(stack.type);
   } if (stackDescriptions[stack.type]) {
     return stackDescriptions[stack.type].description;
   }

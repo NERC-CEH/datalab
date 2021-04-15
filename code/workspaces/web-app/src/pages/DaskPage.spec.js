@@ -1,14 +1,11 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { shallow } from 'enzyme';
 import DaskPage from './DaskPage';
 
+jest.mock('react-redux');
+jest.mock('redux-form', () => ({ reset: jest.fn() }));
+
 describe('DaskPage', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct snapshot', () => {
     expect(shallow(<DaskPage />)).toMatchSnapshot();
   });

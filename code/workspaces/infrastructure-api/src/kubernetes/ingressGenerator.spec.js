@@ -1,4 +1,9 @@
 import ingressGenerator from './ingressGenerator';
+import config from '../config/config';
+
+jest.mock('../config/config');
+const origConfig = jest.requireActual('../config/config');
+config.get = jest.fn().mockImplementation(s => origConfig.default.default(s));
 
 describe('Ingress generator', () => {
   it('should generate a single path if connect port is not supplied', () => {
