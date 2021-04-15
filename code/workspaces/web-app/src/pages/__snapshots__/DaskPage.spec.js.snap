@@ -2,6 +2,7 @@
 
 exports[`DaskPage renders correct snapshot 1`] = `
 <WithStyles(Page)
+  className=""
   title="Dask"
 >
   <WithStyles(ForwardRef(Typography))
@@ -20,9 +21,12 @@ exports[`DaskPage renders correct snapshot 1`] = `
     </ExternalLink>
      package when configured to use the specified scheduler address for the cluster. Dask can only be used with Python.
   </WithStyles(ForwardRef(Typography))>
-  <ClustersContainer
+  <div
     className="makeStyles-clusterList-1"
-    clusterType="DASK"
-  />
+  >
+    <ClustersContainer
+      clusterType="DASK"
+    />
+  </div>
 </WithStyles(Page)>
 `;

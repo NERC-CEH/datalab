@@ -64,16 +64,16 @@ describe('clusterActions', () => {
   });
 
   describe('loadClusters', () => {
-    it('makes correct call to service function and provides result in action payload', () => {
-      const projectKey = 'test-project';
+    it('makes correct call to service function and provides result in action payload', async () => {
+      const projectKey = 'project-key';
       const loadClustersMockReturnValue = 'clusters-loaded';
-      loadClustersMock.mockReturnValueOnce(loadClustersMockReturnValue);
+      loadClustersMock.mockResolvedValueOnce(loadClustersMockReturnValue);
 
       const actionReturn = clusterActions.loadClusters(projectKey);
 
       expect(loadClustersMock).toHaveBeenCalledWith(projectKey);
       expect(actionReturn.type).toEqual(LOAD_CLUSTERS_ACTION);
-      expect(actionReturn.payload).toEqual(loadClustersMockReturnValue);
+      expect(await actionReturn.payload).toEqual({ clusters: loadClustersMockReturnValue, projectKey });
     });
   });
 

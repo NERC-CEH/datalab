@@ -16,7 +16,7 @@ const deleteCluster = ({ projectKey, name, type }) => ({
 
 const loadClusters = projectKey => ({
   type: LOAD_CLUSTERS_ACTION,
-  payload: clusterService.loadClusters(projectKey),
+  payload: clusterService.loadClusters(projectKey).then(clusters => ({ projectKey, clusters })),
 });
 
 export default { createCluster, loadClusters, deleteCluster };

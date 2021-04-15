@@ -12,9 +12,9 @@ const ResourceAccordion = withStyles({
       backgroundColor: 'transparent',
     },
     '&$expanded': {
-      margin: [[0, 0, theme.spacing(6), 0]],
+      margin: `0, 0, ${theme.spacing(6)}, 0`,
     },
-    margin: [[0, 0, theme.spacing(1), 0]],
+    margin: `0, 0, ${theme.spacing(1)}, 0`,
   },
   expanded: {
   },
@@ -23,11 +23,11 @@ const ResourceAccordion = withStyles({
 const ResourceAccordionSummary = withStyles({
   root: {
     justifyContent: 'flex-start',
-    margin: [[theme.spacing(1), 0]],
+    margin: `${theme.spacing(1)}, 0`,
     padding: 0,
     minHeight: 0,
     '&$expanded': {
-      margin: [[theme.spacing(1), 0]],
+      margin: `${theme.spacing(1)}, 0`,
       minHeight: 0,
     },
   },
