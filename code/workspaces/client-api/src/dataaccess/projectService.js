@@ -66,6 +66,17 @@ function removeProjectPermission(projectKey, userId, token) {
     .then(response => response.data.roleRemoved);
 }
 
+async function getMultipleProjects(projectKeys, token) {
+  // Returns an array of projects, useful if nested in another object e.g. central asset metadata
+  // Filters out projects which throw an error since they probably don't exist any more.
+  const projectsPromise = projectKeys
+    ? Promise.all(projectKeys // do in Promise.all for performance
+      .map(projectKey => getProjectByKey(projectKey, token).catch(() => undefined))) // get the project, or undefined if throws an error
+    : []; // if projectKeys undefined, return an empty array
+  const projects = await projectsPromise;
+  return projects.filter(project => project); // filter out non-existent projects
+}
+
 const generateOptions = token => ({
   headers: {
     authorization: token,
@@ -88,4 +99,5 @@ export default {
   deleteProject,
   addProjectPermission,
   removeProjectPermission,
+  getMultipleProjects,
 };

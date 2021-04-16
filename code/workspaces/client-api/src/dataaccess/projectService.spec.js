@@ -104,6 +104,15 @@ describe('projectService', () => {
     const result = await projectService.deleteProject(key, token);
     expect(result).toEqual(true);
   });
+
+  it('getMultipleProjects makes an api call and returns response data', async () => {
+    const { key } = testProject;
+    httpMock.onGet(`${infraServiceUrl}/projects/${key}`)
+      .reply(200, testProject);
+
+    const result = await projectService.getMultipleProjects([key, 'no-such-key'], token);
+    expect(result).toEqual([testProject]);
+  });
 });
 
 describe('projectActionRequestToProject', () => {
