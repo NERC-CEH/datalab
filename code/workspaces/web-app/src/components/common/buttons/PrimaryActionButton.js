@@ -1,11 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-const PrimaryActionButton = ({ children, variant, color, ...rest }) => (
+const PrimaryActionButton = ({ children, ...rest }) => (
   <Button
+    {...rest}
     variant="outlined"
     color="primary"
-    {...rest}
   >
     {children}
   </Button>
