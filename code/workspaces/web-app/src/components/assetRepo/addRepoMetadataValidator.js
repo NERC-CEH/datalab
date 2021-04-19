@@ -1,6 +1,8 @@
 import validate from 'validate.js';
+import { editConstraints } from './editRepoMetadataValidator';
 
 const constraints = {
+  ...editConstraints,
   name: {
     presence: true,
     length: { minimum: 4 },
@@ -19,12 +21,6 @@ const constraints = {
   },
   masterUrl: {
     url: true,
-  },
-  owners: {
-    presence: { allowEmpty: false },
-  },
-  visible: {
-    presence: true,
   },
 };
 

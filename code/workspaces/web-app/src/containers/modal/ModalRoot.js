@@ -14,6 +14,7 @@ import EditSiteDialog from '../../components/modal/EditSiteDialog';
 import Logs from '../../components/modal/SiteLogs';
 import RestartStackDialog from '../../components/modal/RestartStackDialog';
 import CreateClusterDialog from '../../components/modal/CreateClusterDialog';
+import EditAssetDialog from '../../components/modal/EditAssetDialog';
 
 import {
   MODAL_TYPE_CREATE_NOTEBOOK,
@@ -29,6 +30,7 @@ import {
   MODAL_TYPE_EDIT_SITE,
   MODAL_TYPE_RESTART_STACK,
   MODAL_TYPE_CREATE_CLUSTER,
+  MODAL_TYPE_EDIT_ASSET,
 } from '../../constants/modaltypes';
 
 const MODAL_COMPONENTS = {
@@ -45,6 +47,7 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_EDIT_SITE]: EditSiteDialog,
   [MODAL_TYPE_RESTART_STACK]: RestartStackDialog,
   [MODAL_TYPE_CREATE_CLUSTER]: CreateClusterDialog,
+  [MODAL_TYPE_EDIT_ASSET]: EditAssetDialog,
 };
 
 const ModalRoot = ({ modalType, props }) => {

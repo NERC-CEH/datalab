@@ -106,6 +106,11 @@ export default function AddRepoMetadataDetails() {
   );
 }
 
+export const visibleOptions = [
+  { value: 'PUBLIC', text: 'Public: Asset will be visible to all projects' },
+  { value: 'BY_PROJECT', text: 'By project: Asset is only visible to selected projects' },
+];
+
 // Redux-Form Component
 export function AddRepoMetadata({ handleSubmit, onCancel }) {
   const classes = useStyles();
@@ -120,11 +125,6 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
     disabled,
     InputLabelProps: { shrink: true },
   };
-
-  const visibleOptions = [
-    { value: 'PUBLIC', text: 'Public: Asset will be visible to all projects' },
-    { value: 'BY_PROJECT', text: 'By project: Asset is only visible to selected projects' },
-  ];
 
   return (
     <form

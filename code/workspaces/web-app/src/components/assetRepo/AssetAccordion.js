@@ -3,11 +3,15 @@ import { useDispatch } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
+import { reset } from 'redux-form';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../common/ResourceAccordion';
 import AssetCard from './AssetCard';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import modalDialogActions from '../../actions/modalDialogActions';
-import { MODAL_TYPE_CREATE_PROJECT } from '../../constants/modaltypes';
+import { MODAL_TYPE_EDIT_ASSET } from '../../constants/modaltypes';
+import EditRepoMetadataForm, { FORM_NAME } from './EditRepoMetadataForm';
+import assetRepoActions from '../../actions/assetRepoActions';
+import notify from '../common/notify';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,17 +31,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const openEditForm = dispatch => dispatch(
+export const openEditForm = (dispatch, asset) => dispatch(
   modalDialogActions.openModalDialog(
-    MODAL_TYPE_CREATE_PROJECT,
+    MODAL_TYPE_EDIT_ASSET,
     {
       onSubmit: onEditAssetSubmit(dispatch),
       onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
+      asset,
+      formComponent: EditRepoMetadataForm,
     },
   ),
 );
 
 export const onEditAssetSubmit = dispatch => async (asset) => {
+  dispatch(modalDialogActions.closeModalDialog());
+  try {
+    await dispatch(assetRepoActions.updateRepoMetadata(asset));
+    await reset(FORM_NAME);
+    notify.success('Asset updated');
+  } catch (error) {
+    notify.error('Unable to update asset');
+  } finally {
+    await dispatch(assetRepoActions.loadProjects());
+  }
 };
 
 function AssetAccordion({ asset }) {
@@ -51,7 +67,7 @@ function AssetAccordion({ asset }) {
           <div className={classes.buttonDiv}>
             <PrimaryActionButton
               aria-label="edit"
-              onClick={(event) => { openEditForm(dispatch); event.stopPropagation(); }}
+              onClick={(event) => { openEditForm(dispatch, asset); event.stopPropagation(); }}
             >
             Edit
           </PrimaryActionButton>

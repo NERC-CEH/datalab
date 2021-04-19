@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { renderMultiSelectAutocompleteField } from './controls';
 import { useAssetRepo, useVisibleAssets } from '../../../hooks/assetRepoHooks';
+import assetLabel from './assetLabel';
 
 function AssetMultiSelect({ input, meta = null, showAllAssets, projectKey, ...custom }) {
   const projectAssets = useVisibleAssets(projectKey);
@@ -20,7 +21,7 @@ function AssetMultiSelect({ input, meta = null, showAllAssets, projectKey, ...cu
           options: assetRepo.value.assets,
           label: 'Assets',
           placeholder: 'Filter by asset name or location',
-          getOptionLabel: val => `${val.name}:${val.version} (${val.fileLocation || 'no local file'})`,
+          getOptionLabel: assetLabel,
           getOptionSelected: (option, val) => option.assetId === val.assetId,
           loading: assetRepo.fetching,
           selectedTip: 'Asset selected',
