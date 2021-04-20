@@ -12,7 +12,7 @@ exports[`AssetRepoFindContainer renders to match snapshot passing correct props 
     showAllAssets={true}
   />
   <PromisedContentWrapper
-    fetchingClassName="makeStyles-placeholderCard-3"
+    fetchingClassName="makeStyles-root-1"
     promise={
       Object {
         "error": null,

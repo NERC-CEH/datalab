@@ -46,13 +46,13 @@ export const openEditForm = (dispatch, asset) => dispatch(
 export const onEditAssetSubmit = dispatch => async (asset) => {
   dispatch(modalDialogActions.closeModalDialog());
   try {
-    await dispatch(assetRepoActions.updateRepoMetadata(asset));
+    await dispatch(assetRepoActions.editRepoMetadata(asset));
     await reset(FORM_NAME);
     notify.success('Asset updated');
   } catch (error) {
     notify.error('Unable to update asset');
   } finally {
-    await dispatch(assetRepoActions.loadProjects());
+    await dispatch(assetRepoActions.loadAllAssets());
   }
 };
 

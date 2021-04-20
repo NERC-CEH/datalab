@@ -3,7 +3,7 @@ import { renderMultiSelectAutocompleteField } from './controls';
 import { useAssetRepo, useVisibleAssets } from '../../../hooks/assetRepoHooks';
 import assetLabel from './assetLabel';
 
-function AssetMultiSelect({ input, meta = null, showAllAssets, projectKey, ...custom }) {
+function AssetMultiSelect({ input, meta = null, showAllAssets, projectKey = undefined, ...custom }) {
   const projectAssets = useVisibleAssets(projectKey);
   const allAssets = useAssetRepo();
   const assetRepo = showAllAssets ? allAssets : projectAssets;
