@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditAssetDialog renders correctly passing values to provided from component 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Edit Asset
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(Typography))
+      className="makeStyles-root-1"
+      variant="h5"
+    >
+      name:version (fileLocation)
+    </WithStyles(ForwardRef(Typography))>
+    <FormComponent
+      initialValues={
+        Object {
+          "fileLocation": "fileLocation",
+          "name": "name",
+          "owners": Array [],
+          "projects": Array [],
+          "version": "version",
+          "visible": "PUBLIC",
+        }
+      }
+      onCancel={[MockFunction onCancel]}
+      onSubmit={[MockFunction onSubmit]}
+    />
+  </WithStyles(ForwardRef(DialogContent))>
+</WithStyles(ForwardRef(Dialog))>
+`;

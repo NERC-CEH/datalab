@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditRepoMetadataForm renders to match snapshot 1`] = `
+<form
+  onSubmit={[MockFunction handleSubmit]}
+>
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    format={[Function]}
+    label="Owners"
+    name="owners"
+    parse={[Function]}
+    selectedTip="User is an owner"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    label="Visibility"
+    name="visible"
+    options={
+      Array [
+        Object {
+          "text": "Public: Asset will be visible to all projects",
+          "value": "PUBLIC",
+        },
+        Object {
+          "text": "By project: Asset is only visible to selected projects",
+          "value": "BY_PROJECT",
+        },
+      ]
+    }
+  />
+  <UpdateFormControls
+    onCancel={[MockFunction onCancel]}
+    onClearChanges={[MockFunction reset]}
+    pristine={true}
+  />
+</form>
+`;
