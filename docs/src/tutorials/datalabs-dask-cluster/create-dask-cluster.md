@@ -29,4 +29,4 @@ Then select **Create**.
 
 You will then be able to see the cluster that you have created.
 
-![project storage page](../../img/project-storage-page-first-storage.png "project storage page")
+![project dask page](../../img/project-dask-page-first-cluster.png "project dask page")

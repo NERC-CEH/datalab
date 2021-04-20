@@ -16,5 +16,7 @@ Therefore, before proceeding, ensure that you have:
 * a notebook
 * a Conda environment
 
-If you are unsure how to create these, then please follow the material in the tutorial
-[My first Jupyter project](../getting-started-jupyter/README.md).
+If you are unsure how to create these, then please follow the material in the tutorials
+
+* [My First Notebook](../my-first-notebook/README.md)
+* [My first Jupyter project](../getting-started-jupyter/README.md)
