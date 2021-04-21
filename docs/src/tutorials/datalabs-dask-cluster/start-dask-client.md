@@ -13,7 +13,8 @@ This copies a useful snippet of code that you can use in your notebook.
 In your JupyterLab,
 start a notebook based on the same Conda environment that you used to create your cluster.
 
-![jupyterlab launcher with conda](../../img/jupyterlab-launcher-conda.png "jupyterlab launcher with conda")
+![jupyterlab launcher with conda](../../img/jupyterlab-launcher-conda.png
+"jupyterlab launcher with conda")
 
 This will ensure that your cluster and your notebook have exactly the same environments.
 

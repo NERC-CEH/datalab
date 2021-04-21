@@ -23,4 +23,5 @@ you can observe the scheduler co-ordinating the work on the Dask Graph.
 
 Back on the notebook tab, the Dask calculation will be outputted.
 
-![jupyterlab dask calculation](../../img/jupyterlab-dask-calculation-done.png "jupyterlab dask calculation")
+![jupyterlab dask calculation](../../img/jupyterlab-dask-calculation-done.png
+"jupyterlab dask calculation")
