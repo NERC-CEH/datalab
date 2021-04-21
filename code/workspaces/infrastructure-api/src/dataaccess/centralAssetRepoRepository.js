@@ -73,6 +73,13 @@ async function setLastAddedDateToNow(assetIds) {
     .exec();
 }
 
+async function deleteProject(projectKey) {
+  // a project is being deleted, remove the projectKey from all assets
+  return CentralAssetMetadata()
+    .updateMany({}, { $pull: { projectKeys: { $in: [projectKey] } } })
+    .exec();
+}
+
 export default {
   createMetadata,
   listMetadata,
@@ -80,5 +87,6 @@ export default {
   metadataAvailableToProject,
   metadataExists,
   setLastAddedDateToNow,
+  deleteProject,
   TYPE,
 };

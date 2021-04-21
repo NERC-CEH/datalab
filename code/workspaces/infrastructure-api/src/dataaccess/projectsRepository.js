@@ -1,4 +1,5 @@
 import database from '../config/database';
+import centralAssetRepoRepository from './centralAssetRepoRepository';
 
 const Project = () => database.getModel('Project');
 
@@ -31,6 +32,7 @@ async function createOrUpdate(project) {
 }
 
 async function deleteByKey(projectKey) {
+  centralAssetRepoRepository.deleteProject(projectKey);
   return Project().deleteOne({ key: projectKey }).exec();
 }
 
