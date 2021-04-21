@@ -92,7 +92,7 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
           {text}
           {additionalText
             && <span
-              style={{ marginLeft: theme.spacing(2), color: theme.typography.colorLight }}
+              style={{ marginLeft: theme.spacing(2), color: theme.typography.body2.color }}
             >
               {additionalText}
             </span>
@@ -174,7 +174,7 @@ export const renderMultiSelectAutocompleteField = ({
   );
 };
 
-export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons }) => {
+export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons = false }) => {
   const classes = useStyles();
 
   return (
@@ -198,7 +198,7 @@ export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons }) =
 };
 
 export const UpdateFormControls = ({
-  submitting, fullWidthButtons,
+  submitting = false, fullWidthButtons = false,
   onCancel, cancelButtonText = 'Cancel',
   onClearChanges, clearChangesButtonText = 'Clear Changes',
   pristine,

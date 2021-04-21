@@ -72,7 +72,7 @@ const resolvers = {
 
   CentralAssetMetadata: {
     owners: (obj, args, { token }) => (obj.ownerUserIds ? obj.ownerUserIds.map(userId => ({ userId, name: usersService.getUserName(userId, token) })) : []),
-    projects: (obj, args, { token }) => (obj.projectKeys ? obj.projectKeys.map(projectKey => projectService.getProjectByKey(projectKey, token)) : []),
+    projects: (obj, args, { token }) => projectService.getMultipleProjects(obj.projectKeys, token),
   },
 
   DataStore: {
