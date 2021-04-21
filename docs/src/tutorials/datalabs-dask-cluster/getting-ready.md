@@ -18,5 +18,5 @@ Therefore, before proceeding, ensure that you have:
 
 If you are unsure how to create these, then please follow the material in the tutorials
 
-* [My First Notebook](../my-first-notebook/README.md)
-* [My first Jupyter project](../getting-started-jupyter/README.md)
+* [My First Notebook](../my-first-notebook/)
+* [My first Jupyter project](../getting-started-jupyter/)

@@ -6,7 +6,7 @@ A Dask cluster created this way can use the same Conda environment as your noteb
 and access your project storage.
 
 It is recommended that you should already be familiar with the material in the tutorial
-[My first Jupyter project](../getting-started-jupyter/README.md).
+[My first Jupyter project](../getting-started-jupyter/).
 
 1. [What is a Dask cluster?](what-is-a-dask-cluster.md)
 1. [Getting ready](getting-ready.md)
