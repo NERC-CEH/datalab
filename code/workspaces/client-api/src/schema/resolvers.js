@@ -81,6 +81,7 @@ const resolvers = {
     updateProject: (obj, { project }, { user, token }) => projectPermissionWrapper({ projectKey: project.projectKey }, SETTINGS_EDIT, user, () => projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { user, token }) => instanceAdminWrapper(user, () => projectService.deleteProject(projectKey, token)),
     createCentralAssetMetadata: (obj, { metadata }, { token }) => centralAssetRepoService.createAssetMetadata(metadata, token),
+    updateCentralAssetMetadata: (obj, { metadata }, { token }) => centralAssetRepoService.updateAssetMetadata(metadata, token),
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { user, token }) => instanceAdminWrapper(user, () => userService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { user, token }) => instanceAdminWrapper(user, () => userService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { user, token }) => instanceAdminWrapper(user, () => userService.setCatalogueRole(userId, catalogueRole, token)),

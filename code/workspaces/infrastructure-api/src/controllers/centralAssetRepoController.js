@@ -18,6 +18,23 @@ async function createAssetMetadata(request, response, next) {
   }
 }
 
+async function updateAssetMetadata(request, response, next) {
+  const { assetId } = matchedData(request, { locations: ['params'] });
+  const { ownerUserIds, visible, projectKeys } = matchedData(request, { locations: ['body'] });
+
+  try {
+    const exists = await centralAssetRepoRepository.assetIdExists(assetId);
+    if (!exists) {
+      next(new Error(`Can not update asset metadata - no document exists with assetId ${assetId}`));
+    } else {
+      const updatedAsset = await centralAssetRepoRepository.updateMetadata({ assetId, ownerUserIds, visible, projectKeys });
+      response.status(200).send(updatedAsset);
+    }
+  } catch (error) {
+    next(new Error(`Error updating asset metadata - failed to update document: ${error.message}`));
+  }
+}
+
 async function getAssetById(request, response, next) {
   const { assetId, projectKey } = matchedData(request);
 
@@ -79,6 +96,7 @@ async function handleExistingMetadata(metadata, response, next) {
 
 export default {
   createAssetMetadata,
+  updateAssetMetadata,
   getAssetById,
   listAssetMetadata,
 };

@@ -14,8 +14,15 @@ function addRepoMetadata(metadata) {
 }
 
 function editRepoMetadata(metadata) {
-  // TODO - add back-end handling
-  return Promise.resolve(metadata.assetId);
+  const mutation = `
+    UpdateCentralAssetMetadata($metadata: CentralAssetMetadataUpdateRequest!) {
+      updateCentralAssetMetadata(metadata: $metadata) {
+        assetId
+      }
+    }`;
+
+  return gqlMutation(mutation, { metadata })
+    .then(errorHandler('data.updateCentralAssetMetadata.assetId'));
 }
 
 function loadVisibleAssets(projectKey) {

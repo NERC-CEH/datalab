@@ -8,6 +8,7 @@ import Pagination from '../../components/stacks/Pagination';
 import AssetMultiSelect from '../../components/common/form/AssetMultiSelect';
 import assetRepoActions from '../../actions/assetRepoActions';
 import projectsActions from '../../actions/projectActions';
+import userActions from '../../actions/userActions';
 import { useAssetRepo } from '../../hooks/assetRepoHooks';
 import AssetAccordion from '../../components/assetRepo/AssetAccordion';
 
@@ -33,6 +34,7 @@ function AssetRepoFindContainer({ userPermissions }) {
   useEffect(() => {
     dispatch(assetRepoActions.loadAllAssets());
     dispatch(projectsActions.loadProjects()); // needed for Asset Edit
+    dispatch(userActions.listUsers()); // needed for Asset Edit
   }, [dispatch]);
 
   const renderedAssets = shownAssets && shownAssets.length > 0

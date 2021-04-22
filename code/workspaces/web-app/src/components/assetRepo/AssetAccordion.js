@@ -46,7 +46,13 @@ export const openEditForm = (dispatch, asset) => dispatch(
 export const onEditAssetSubmit = dispatch => async (asset) => {
   dispatch(modalDialogActions.closeModalDialog());
   try {
-    await dispatch(assetRepoActions.editRepoMetadata(asset));
+    const assetUpdate = {
+      assetId: asset.assetId,
+      ownerUserIds: asset.owners ? asset.owners.map(owner => owner.userId) : [],
+      visible: asset.visible,
+      projectKeys: (asset.visible === 'BY_PROJECT' && asset.projects) ? asset.projects.map(project => project.key) : [],
+    };
+    await dispatch(assetRepoActions.editRepoMetadata(assetUpdate));
     await reset(FORM_NAME);
     notify.success('Asset updated');
   } catch (error) {

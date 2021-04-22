@@ -9,7 +9,7 @@ const assetIdValidation = checkFunction => new ValidationChainHelper(checkFuncti
   .getValidationChain();
 export const assetIdValidator = checkFunction => service.middleware.validator([assetIdValidation(checkFunction)], logger);
 
-export const metadataValidator = (checkFunction) => {
+export const createValidator = (checkFunction) => {
   const validations = [
     new ValidationChainHelper(checkFunction('name'))
       .exists()
@@ -45,3 +45,25 @@ export const metadataValidator = (checkFunction) => {
   return service.middleware.validator(validationChains, logger);
 };
 
+export const updateValidator = (checkFunction) => {
+  const validations = [
+    new ValidationChainHelper(checkFunction('ownerUserIds'))
+      .exists()
+      .isArray(),
+    new ValidationChainHelper(checkFunction('visible'))
+      .exists()
+      .isIn(centralAssetRepoModel.possibleVisibleValues()),
+    new ValidationChainHelper(checkFunction('projectKeys'))
+      .optional()
+      .isArray(),
+  ];
+
+  const validationChains = validations.map((validation) => {
+    if (validation instanceof ValidationChainHelper) {
+      return validation.getValidationChain();
+    }
+    return validation;
+  });
+
+  return service.middleware.validator(validationChains, logger);
+};

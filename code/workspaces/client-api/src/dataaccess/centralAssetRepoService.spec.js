@@ -11,7 +11,6 @@ const metadata = {
   name: 'Test Metadata',
   version: '0.1.0',
   type: 'DATA',
-  owners: [],
   visible: 'PUBLIC',
   fileLocation: 'path/to/file',
 };
@@ -41,8 +40,28 @@ describe('createAssetMetadata', () => {
     expect(returnValue).toEqual(metadataResponse);
     expect(httpMock.history.post.length).toBe(1);
     const [postMock] = httpMock.history.post;
-    expect(postMock.data).toEqual(JSON.stringify(metadata));
+    expect(JSON.parse(postMock.data)).toEqual(metadata);
     expect(postMock.headers.authorization).toEqual(token);
+  });
+});
+
+describe('updateAssetMetadata', () => {
+  const { updateAssetMetadata } = centralAssetRepoService;
+
+  it('calls infrastructure-api to update metadata with correct data and returns result data', async () => {
+    httpMock
+      .onPut(`${infrastructureApi}/centralAssetRepo/metadata/asset-id`)
+      .reply(200, metadataResponse);
+    const metadataUpdate = { visible: 'PUBLIC', projectKeys: ['proj1'], ownerUserIds: ['user1'] };
+    const metadataRequest = { ...metadataUpdate, assetId: 'asset-id' };
+
+    const returnValue = await updateAssetMetadata(metadataRequest, token);
+
+    expect(returnValue).toEqual(metadataResponse);
+    expect(httpMock.history.put.length).toBe(1);
+    const [putMock] = httpMock.history.put;
+    expect(JSON.parse(putMock.data)).toEqual(metadataUpdate);
+    expect(putMock.headers.authorization).toEqual(token);
   });
 });
 
@@ -99,3 +118,4 @@ describe('getAssetByIdAndProjectKey', () => {
     expect(getMock.headers.authorization).toEqual(token);
   });
 });
+

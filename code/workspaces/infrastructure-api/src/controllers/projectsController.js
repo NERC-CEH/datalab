@@ -36,14 +36,18 @@ async function createProject(request, response, next) {
   const projectExists = await projectsRepository.exists(project.key);
 
   if (forbiddenNamespace) {
+    const msg = `Project Key '${project.key}' cannot be used as it is a forbidden namespace.`;
+    logger.info(msg);
     return response.status(400).send({
-      errors: [{ msg: `Project Key '${project.key}' cannot be used as it is a forbidden namespace.` }],
+      errors: [{ msg }],
     });
   }
 
   if (projectExists) {
+    const msg = `Entry with key '${project.key}' already exists.`;
+    logger.info(msg);
     return response.status(400).send({
-      errors: [{ msg: `Entry with key '${project.key}' already exists.` }],
+      errors: [{ msg }],
     });
   }
 
