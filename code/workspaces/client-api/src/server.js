@@ -51,6 +51,9 @@ function configureAxiosForLocalDevelopment() {
   if (!testingCookie) return;
 
   axios.interceptors.request.use((requestConfig) => {
+    if (!requestConfig.url) {
+      throw new Error('url not defined');
+    }
     const url = new URL(requestConfig.url);
 
     if (url.host.includes('datalabs.internal')) {

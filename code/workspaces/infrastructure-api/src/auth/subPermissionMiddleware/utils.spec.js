@@ -45,7 +45,7 @@ describe('ensurePermissionGrantedMiddleware', () => {
     ensurePermissionGrantedMiddleware(requestMock, responseMock, nextMock);
 
     expect(responseMock.status).toHaveBeenCalledWith(401);
-    expect(responseMock.send).toHaveBeenCalledWith({ permissionGranted: false, errors: ['expected error'] });
+    expect(responseMock.send).toHaveBeenCalledWith({ permissionGranted: false, errors: ['expected error'], message: 'expected error' });
     expect(nextMock).not.toHaveBeenCalled();
   });
 });

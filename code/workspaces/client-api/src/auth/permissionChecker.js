@@ -3,18 +3,10 @@ import { permissionTypes } from 'common';
 
 const { SYSTEM_INSTANCE_ADMIN, delimiter, PROJECT_NAMESPACE } = permissionTypes;
 
-export const permissionWrapper = (permissionSuffix, ...rest) => permissionCheck(
-  [
-    permissionSuffix,
-    SYSTEM_INSTANCE_ADMIN,
-  ],
-  ...rest,
-);
-
 /*
 Note, 'done' here is nothing to do with the Express middleware, it is simply a call to the data access function providing the data promise.
 */
-export function projectPermissionWrapper(args, permissionSuffix, user, done) {
+export default function projectPermissionWrapper(args, permissionSuffix, user, done) {
   if (!args.projectKey) {
     logger.error(`Auth: permission check: FAILED, projectKey not passed in args, expected suffix: ${permissionSuffix}`);
     return Promise.reject(new Error(`projectKey not passed, expected suffix: ${permissionSuffix}`));
@@ -34,19 +26,6 @@ export function projectPermissionWrapper(args, permissionSuffix, user, done) {
     done,
   );
 }
-
-export const multiPermissionsWrapper = (permissionSuffixes, ...rest) => permissionCheck(
-  [
-    ...permissionSuffixes,
-    SYSTEM_INSTANCE_ADMIN,
-  ],
-  ...rest,
-);
-
-export const instanceAdminWrapper = (...rest) => permissionCheck(
-  [SYSTEM_INSTANCE_ADMIN],
-  ...rest,
-);
 
 function permissionCheck(requiredPermissions, { permissions }, done) {
   const userPermissions = permissions || [];

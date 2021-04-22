@@ -19,8 +19,9 @@ export const ensurePermissionGrantedMiddleware = (request, response, next) => {
 
   const granted = permissionGranted(request);
   const errors = permissionErrors(request);
-  logger.warn(`Auth: permission check FAILED with errors: [${errors.join(', ')}]`);
-  return response.status(401).send({ permissionGranted: granted, errors });
+  const message = errors.join(', ');
+  logger.warn(`Auth: permission check FAILED with errors: [${message}]`);
+  return response.status(401).send({ permissionGranted: granted, errors, message });
 };
 
 export const getRequestPermissionInfo = request => request[REQUEST_PERMISSION_INFO_KEY];

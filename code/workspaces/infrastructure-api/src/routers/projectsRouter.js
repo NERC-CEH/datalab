@@ -6,7 +6,7 @@ import permissionMiddleware from '../auth/permissionMiddleware';
 
 const { errorWrapper: ew } = service.middleware;
 
-const { projectPermissions: { PROJECT_KEY_PROJECTS_EDIT } } = permissionTypes;
+const { projectPermissions: { PROJECT_KEY_SETTINGS_EDIT } } = permissionTypes;
 
 const projectsRouter = express.Router();
 
@@ -27,7 +27,7 @@ projectsRouter.get(
 );
 projectsRouter.put(
   '/:projectKey',
-  permissionMiddleware(PROJECT_KEY_PROJECTS_EDIT),
+  permissionMiddleware(PROJECT_KEY_SETTINGS_EDIT),
   projects.projectDocumentValidator(), projects.urlAndBodyProjectKeyMatchValidator(),
   ew(projects.createOrUpdateProject),
 );
