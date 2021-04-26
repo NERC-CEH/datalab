@@ -166,3 +166,15 @@ describe('setLastAddedDateToNow', () => {
     expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
   });
 });
+
+describe('deleteProject', () => {
+  it('performs the correct mutation on CentralAssetMetadataModel', async () => {
+    const projectKey = 'project-key';
+    await centralAssetRepoRepository.deleteProject(projectKey);
+    expect(centralAssetMetadataModelMock.updateMany).toHaveBeenCalledWith(
+      { },
+      { $pull: { projectKeys: { $in: [projectKey] } } },
+    );
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
+  });
+});

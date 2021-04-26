@@ -27,6 +27,9 @@ const constraints = {
   description: {
     presence: true,
   },
+  users: {
+    presence: { allowEmpty: false },
+  },
 };
 
 export default constraints;

@@ -5,14 +5,37 @@ exports[`EditSiteForm renders to match snapshot 1`] = `
   onSubmit={[MockFunction handleSubmit]}
 >
   <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
     component={[Function]}
     label="Display Name"
     name="displayName"
   />
   <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
     component={[Function]}
     label="Description"
     name="description"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    format={[Function]}
+    label="Assets"
+    name="assets"
+    parse={[Function]}
+    projectKey="projectKey"
   />
   <UpdateFormControls
     onCancel={[MockFunction onCancel]}

@@ -1,7 +1,11 @@
 import projectsRepository from './projectsRepository';
 import database from '../config/database';
+import centralAssetRepoRepository from './centralAssetRepoRepository';
 
 jest.mock('../config/database');
+
+jest.mock('./centralAssetRepoRepository');
+centralAssetRepoRepository.deleteProject = jest.fn();
 
 const testProject = {
   key: 'key',
@@ -62,6 +66,7 @@ describe('projectsRepository', () => {
   it('deleteByKey calls correct methods with correct arguments', async () => {
     const { key } = testProject;
     await projectsRepository.deleteByKey(key);
+    expectToHaveBeenCalledOnceWith(centralAssetRepoRepository.deleteProject, key);
     expectToHaveBeenCalledOnceWith(ProjectMock.deleteOne, { key });
     expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });

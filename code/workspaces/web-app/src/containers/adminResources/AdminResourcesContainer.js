@@ -84,7 +84,7 @@ function AdminResourcesContainer({ userPermissions }) {
           <Checkbox checked={show.sites} onChange={handleCheckboxChange} name="sites" color="primary" />
         } />
         <FormControlLabel label="Clusters" control={
-          <Checkbox checked={show.storage} onChange={handleCheckboxChange} name="clusters" color="primary" />
+          <Checkbox checked={show.clusters} onChange={handleCheckboxChange} name="clusters" color="primary" />
         } />
         <FormControlLabel label="Storage" control={
           <Checkbox checked={show.storage} onChange={handleCheckboxChange} name="storage" color="primary" />

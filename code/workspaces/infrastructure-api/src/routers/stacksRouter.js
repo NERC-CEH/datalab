@@ -40,7 +40,7 @@ stacksRouter.get(
 );
 stacksRouter.get(
   '/:projectKey/:name/isUnique',
-  permissionMiddleware(PROJECT_KEY_STACKS_LIST),
+  permissionMiddleware(PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_STACKS_LIST),
   stack.withNameValidator,
   ew(names.isUnique),
 );
