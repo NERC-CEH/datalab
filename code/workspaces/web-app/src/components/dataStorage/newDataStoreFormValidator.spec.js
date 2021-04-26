@@ -2,7 +2,7 @@ import { syncValidate, asyncValidate } from './newDataStoreFormValidator';
 
 jest.mock('../../actions/internalNameCheckerActions');
 
-const componentProps = { projectKey: 'testproj' };
+const componentProps = { projectKey: 'test-proj' };
 
 describe('New Data Store Form Validator', () => {
   it('should return empty errors object for valid form', () => {
@@ -12,6 +12,7 @@ describe('New Data Store Form Validator', () => {
       volumeSize: 5,
       name: 'name',
       description: 'data store description',
+      users: [{ name: 'user-name', userId: 'user-id' }],
     };
 
     expect(syncValidate(values)).toBeUndefined();
@@ -30,6 +31,7 @@ describe('New Data Store Form Validator', () => {
       volumeSize: 5,
       name: 'ab',
       description: 'data store description',
+      users: [{ name: 'user-name', userId: 'user-id' }],
     };
 
     expect(syncValidate(values)).toMatchSnapshot();
@@ -42,6 +44,7 @@ describe('New Data Store Form Validator', () => {
       volumeSize: 5,
       name: 'abcd!',
       description: 'data store description',
+      users: [{ name: 'user-name', userId: 'user-id' }],
     };
 
     expect(syncValidate(values)).toMatchSnapshot();
@@ -54,6 +57,7 @@ describe('New Data Store Form Validator', () => {
       volumeSize: 1,
       name: 'name',
       description: 'data store description',
+      users: [{ name: 'user-name', userId: 'user-id' }],
     };
 
     expect(syncValidate(values)).toMatchSnapshot();
@@ -66,6 +70,7 @@ describe('New Data Store Form Validator', () => {
       volumeSize: 10.5,
       name: 'name',
       description: 'data store description',
+      users: [{ name: 'user-name', userId: 'user-id' }],
     };
 
     expect(syncValidate(values)).toMatchSnapshot();
