@@ -8,10 +8,11 @@ import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails }
 import AssetCard from './AssetCard';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import modalDialogActions from '../../actions/modalDialogActions';
-import { MODAL_TYPE_EDIT_ASSET } from '../../constants/modaltypes';
+import { MODAL_TYPE_EDIT_ASSET, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import EditRepoMetadataForm, { FORM_NAME } from './EditRepoMetadataForm';
 import assetRepoActions from '../../actions/assetRepoActions';
 import notify from '../common/notify';
+import assetLabel from '../common/form/assetLabel';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,6 +45,19 @@ export const openEditForm = (dispatch, asset) => dispatch(
 );
 
 export const onEditAssetSubmit = dispatch => async (asset) => {
+  const label = assetLabel(asset);
+  dispatch(modalDialogActions.closeModalDialog());
+  dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+    title: `Edit permissions for asset '${label}'`,
+    body: 'Are you sure you want to change permissions?  Note that changing permissions will affect existing notebooks etc.',
+    confirmText: 'Confirm Change',
+    confirmIcon: 'check',
+    onSubmit: onEditAssetConfirm(dispatch),
+    onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
+  }));
+};
+
+export const onEditAssetConfirm = dispatch => async (asset) => {
   dispatch(modalDialogActions.closeModalDialog());
   try {
     await dispatch(assetRepoActions.editRepoMetadata(asset));
