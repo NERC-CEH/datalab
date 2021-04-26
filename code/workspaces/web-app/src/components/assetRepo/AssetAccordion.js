@@ -13,6 +13,7 @@ import EditRepoMetadataForm, { FORM_NAME } from './EditRepoMetadataForm';
 import assetRepoActions from '../../actions/assetRepoActions';
 import notify from '../common/notify';
 import assetLabel from '../common/form/assetLabel';
+import { BY_PROJECT } from './assetVisibilities';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,7 +65,7 @@ export const onEditAssetConfirm = async (dispatch, asset) => {
       assetId: asset.assetId,
       ownerUserIds: asset.owners ? asset.owners.map(owner => owner.userId) : [],
       visible: asset.visible,
-      projectKeys: (asset.visible === 'BY_PROJECT' && asset.projects) ? asset.projects.map(project => project.key) : [],
+      projectKeys: (asset.visible === BY_PROJECT && asset.projects) ? asset.projects.map(project => project.key) : [],
     };
     await dispatch(assetRepoActions.editRepoMetadata(assetUpdate));
     await reset(FORM_NAME);

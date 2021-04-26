@@ -55,7 +55,7 @@ async function updateStacksForAsset(assetId, visible, projectKeys) {
 }
 
 function stackCanUseAsset(stackProjectKey, visible, projectKeys) {
-  return visible === 'PUBLIC' || (visible === 'BY_PROJECT' && projectKeys && projectKeys.includes(stackProjectKey));
+  return visible === PUBLIC || (visible === BY_PROJECT && projectKeys && projectKeys.includes(stackProjectKey));
 }
 
 async function getAssetById(request, response, next) {

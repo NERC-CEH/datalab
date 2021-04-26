@@ -5,7 +5,7 @@ import { formatAndParseMultiSelect, renderTextField, UpdateFormControls, renderS
 import { syncValidate } from './editRepoMetadataValidator';
 import UserMultiSelect from '../common/form/UserMultiSelect';
 import ProjectMultiSelect from '../common/form/ProjectMultiSelect';
-import { visibleOptions } from './AddRepoMetadataDetails';
+import { visibleOptions, BY_PROJECT } from './assetVisibilities';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 
 export const FORM_NAME = 'editAssetDetails';
@@ -42,7 +42,7 @@ const EditRepoMetadataForm = ({
       component={renderSelectField}
       options={visibleOptions}
   />
-      { visibleValue === 'BY_PROJECT'
+      { visibleValue === BY_PROJECT
         && <Field
             { ...commonProps }
             name="projects"
