@@ -52,12 +52,12 @@ export const onEditAssetSubmit = dispatch => async (asset) => {
     body: 'Are you sure you want to change permissions?  Note that changing permissions will affect existing notebooks etc.',
     confirmText: 'Confirm Change',
     confirmIcon: 'check',
-    onSubmit: onEditAssetConfirm(dispatch),
+    onSubmit: () => onEditAssetConfirm(dispatch, asset),
     onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
   }));
 };
 
-export const onEditAssetConfirm = dispatch => async (asset) => {
+export const onEditAssetConfirm = async (dispatch, asset) => {
   dispatch(modalDialogActions.closeModalDialog());
   try {
     const assetUpdate = {
