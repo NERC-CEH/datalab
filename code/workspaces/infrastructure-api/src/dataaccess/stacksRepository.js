@@ -49,6 +49,12 @@ function getAllByVolumeMount(projectKey, user, mount) {
     .exec();
 }
 
+function getAllByAsset(assetId) {
+  return Stack()
+    .find({ assetIds: { $elemMatch: { $eq: assetId } } })
+    .exec();
+}
+
 function getOneById(projectKey, user, id) {
   return Stack()
     .findOne({ _id: id })
@@ -118,6 +124,14 @@ function updateStatus(stack) {
     .exec();
 }
 
+// Function is used by centralAssetRepoController
+// when data manager removes permission to see asset
+function updateAssets(_id, assetIds) {
+  return Stack()
+    .findOneAndUpdate({ _id }, { assetIds }, { new: true, omitUndefined: true })
+    .exec();
+}
+
 function update(projectKey, user, name, updatedValues) {
   // Filter exclusively by owner (User)
   return Stack()
@@ -134,6 +148,7 @@ export default {
   getAllOwned,
   getAllByProject,
   getAllByCategory,
+  getAllByAsset,
   getOneById,
   getOneByName,
   getOneByNameUserAndCategory,
@@ -143,5 +158,6 @@ export default {
   userCanDeleteStack,
   userCanRestartStack,
   updateStatus,
+  updateAssets,
   update,
 };
