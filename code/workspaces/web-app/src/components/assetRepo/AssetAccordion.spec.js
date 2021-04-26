@@ -1,6 +1,11 @@
 import React from 'react';
+import * as ReactRedux from 'react-redux';
 import { shallow } from 'enzyme';
 import AssetAccordion from './AssetAccordion';
+
+jest.mock('react-router');
+const dispatchMock = jest.fn().mockName('dispatch');
+jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
 
 describe('AssetAccordion', () => {
   const shallowRender = () => {

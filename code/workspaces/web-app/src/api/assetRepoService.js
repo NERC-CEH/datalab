@@ -13,6 +13,11 @@ function addRepoMetadata(metadata) {
     .then(errorHandler('data.createCentralAssetMetadata.assetId'));
 }
 
+function editRepoMetadata(metadata) {
+  // TODO - add back-end handling
+  return Promise.resolve(metadata.assetId);
+}
+
 function loadVisibleAssets(projectKey) {
   const query = `
     CentralAssetsAvailableToProject($projectKey: String!) {
@@ -39,6 +44,7 @@ function loadAllAssets() {
 
 export default {
   addRepoMetadata,
+  editRepoMetadata,
   loadVisibleAssets,
   loadAllAssets,
 };

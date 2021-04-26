@@ -7,19 +7,12 @@ import PromisedContentWrapper from '../../components/common/PromisedContentWrapp
 import Pagination from '../../components/stacks/Pagination';
 import AssetMultiSelect from '../../components/common/form/AssetMultiSelect';
 import assetRepoActions from '../../actions/assetRepoActions';
+import projectsActions from '../../actions/projectActions';
 import { useAssetRepo } from '../../hooks/assetRepoHooks';
 import AssetAccordion from '../../components/assetRepo/AssetAccordion';
 
 const useStyles = makeStyles(theme => ({
-  showControls: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  showText: {
-    fontWeight: '400',
-    marginRight: theme.spacing(4),
-  },
-  placeholderCard: {
+  root: {
     width: '100%',
     height: 70,
     display: 'flex',
@@ -39,11 +32,12 @@ function AssetRepoFindContainer({ userPermissions }) {
 
   useEffect(() => {
     dispatch(assetRepoActions.loadAllAssets());
+    dispatch(projectsActions.loadProjects()); // needed for Asset Edit
   }, [dispatch]);
 
   const renderedAssets = shownAssets && shownAssets.length > 0
     ? shownAssets.map(asset => <AssetAccordion key={asset.assetId} asset={asset}/>)
-    : [<div className={classes.placeholderCard} key={'placeholder-card'}>
+    : [<div className={classes.root} key={'placeholder-card'}>
       <Typography variant="body1">No assets to display.</Typography>
     </div>];
 
@@ -55,7 +49,7 @@ function AssetRepoFindContainer({ userPermissions }) {
   return (
     <>
       <AssetMultiSelect input={assetsInput} showAllAssets />
-      <PromisedContentWrapper fetchingClassName={classes.placeholderCard} promise={assetRepo}>
+      <PromisedContentWrapper fetchingClassName={classes.root} promise={assetRepo}>
         <Pagination items={renderedAssets} itemsPerPage={5} />
       </PromisedContentWrapper>
     </>

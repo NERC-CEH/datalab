@@ -7,7 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '../common/control/IconButton';
 
-const Confirmation = ({ title, body, onSubmit, onCancel }) => (
+const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm Deletion', confirmIcon = 'delete' }) => (
   <Dialog open={true} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
@@ -15,7 +15,7 @@ const Confirmation = ({ title, body, onSubmit, onCancel }) => (
     </DialogContent>
     <DialogActions>
       <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
-      <IconButton danger onClick={onSubmit} icon="delete" disabled={onSubmit === undefined}>Confirm Deletion</IconButton>
+      <IconButton danger onClick={onSubmit} icon={confirmIcon} disabled={onSubmit === undefined}>{confirmText}</IconButton>
     </DialogActions>
   </Dialog>
 );

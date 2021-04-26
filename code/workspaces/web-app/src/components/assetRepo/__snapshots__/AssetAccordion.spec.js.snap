@@ -2,7 +2,7 @@
 
 exports[`AssetAccordion renders to match snapshot passing correct props to children 1`] = `
 <div
-  className="makeStyles-container-1"
+  className="makeStyles-root-1"
 >
   <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
     defaultExpanded={true}
@@ -18,6 +18,16 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
         : 
         asset version
       </WithStyles(ForwardRef(Typography))>
+      <div
+        className="makeStyles-buttonDiv-4"
+      >
+        <PrimaryActionButton
+          aria-label="edit"
+          onClick={[Function]}
+        >
+          Edit
+        </PrimaryActionButton>
+      </div>
     </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
     <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
       <div

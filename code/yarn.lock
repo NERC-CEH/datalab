@@ -14319,10 +14319,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validate.js@0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/validate.js/-/validate.js-0.11.1.tgz#f51c3c6c4a56e6380a20a7eb104245037f2a540d"
-  integrity sha1-9Rw8bEpW5jgKIKfrEEJFA38qVA0=
+validate.js@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/validate.js/-/validate.js-0.13.1.tgz#b58bfac04a0f600a340f62e5227e70d95971e92a"
+  integrity sha512-PnFM3xiZ+kYmLyTiMgTYmU7ZHkjBZz2/+F0DaALc/uUtVzdCt1wAosvYJ5hFQi/hz8O4zb52FQhHZRC+uVkJ+g==
 
 validator@10.11.0:
   version "10.11.0"
