@@ -13,7 +13,7 @@ Therefore, before proceeding, ensure that you have:
 
 * a project
 * project storage
-* a notebook
+* a JupyterLab notebook
 * a Conda environment
 
 If you are unsure how to create these, then please follow the material in the tutorials
