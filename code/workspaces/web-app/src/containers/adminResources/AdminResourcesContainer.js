@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectMultiSelect from '../../components/common/form/ProjectMultiSelect';
 import projectActions from '../../actions/projectActions';
+import userActions from '../../actions/userActions';
 import sortByName from '../../components/common/sortByName';
 import ProjectResources from './ProjectResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
@@ -55,6 +56,7 @@ function AdminResourcesContainer({ userPermissions }) {
 
   useEffect(() => {
     dispatch(projectActions.getAllProjectsAndResources());
+    dispatch(userActions.listUsers());
   }, [dispatch]);
 
   const handleCheckboxChange = (event) => {
