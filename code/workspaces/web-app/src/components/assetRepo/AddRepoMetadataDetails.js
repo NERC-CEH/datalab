@@ -15,6 +15,7 @@ import UserMultiSelect from '../common/form/UserMultiSelect';
 import ProjectMultiSelect from '../common/form/ProjectMultiSelect';
 import { useAssetRepo } from '../../hooks/assetRepoHooks';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import { BY_PROJECT, visibleOptions } from './assetVisibilities';
 
 const FORM_NAME = 'addRepoMetadata';
 
@@ -47,27 +48,28 @@ export default function AddRepoMetadataDetails() {
     dispatch(projectActions.loadProjects());
   }, [dispatch]);
 
-  const [addRepoMetadataDialogState, setAddRepoMetadataDialogState] = useState({ open: false, values: {} });
+  const [dialogState, setDialogState] = useState({ open: false });
+  const [valuesState, setValuesState] = useState({ owners: [], projects: [] });
 
   const addMetadata = async () => {
     try {
-      const formValues = addRepoMetadataDialogState.values;
+      const { owners, projects, ...formValues } = valuesState;
       const metadata = {
         ...formValues,
-        ownerUserIds: formValues.owners.map(user => user.userId),
-        projectKeys: formValues.projects ? formValues.projects.map(project => project.key) : [],
+        // @ts-ignore - no way to let tsc know the shape of owners
+        ownerUserIds: owners ? owners.map(user => user.userId) : [],
+        // @ts-ignore - no way to let tsc know the shape of projects
+        projectKeys: projects ? projects.map(project => project.key) : [],
       };
-      delete metadata.owners;
-      delete metadata.projects;
       await dispatch(assetRepoActions.addRepoMetadata(metadata));
       notify.success('Metadata set');
     } catch (error) {
       notify.error(error.message || error);
     }
-    setAddRepoMetadataDialogState({ open: false });
+    setDialogState({ open: false });
   };
 
-  const openDialog = values => (setAddRepoMetadataDialogState({ open: true, values }));
+  const openDialog = (values) => { setDialogState({ open: true }); setValuesState(values); };
   const onCancel = () => dispatch(reset(FORM_NAME));
   const resetForm = () => {
     dispatch(reset(FORM_NAME));
@@ -80,17 +82,13 @@ export default function AddRepoMetadataDetails() {
       <AddRepoMetadataReduxForm
         onSubmit={openDialog}
         onCancel={onCancel}
-        addRepoMetadataDialogState={addRepoMetadataDialogState}
-        setAddRepoMetadataDialogState={setAddRepoMetadataDialogState}
       />
       <ConfirmDialog
         onSubmit={addMetadata}
-        onCancel={() => setAddRepoMetadataDialogState({ open: false })}
-        state={addRepoMetadataDialogState}
-        setState={setAddRepoMetadataDialogState}
+        onCancel={() => setDialogState({ open: false })}
+        state={dialogState}
         title="Add Repo Metadata"
         body="Please confirm you wish to add this metadata.  Once added, it can only be adjusted by an administrator in the database."
-        dispatch={dispatch}
       />
       { !!assetRepo.value.createdAssetId
         && <div className={classes.addAnotherButtonDiv}>
@@ -105,11 +103,6 @@ export default function AddRepoMetadataDetails() {
     </div>
   );
 }
-
-export const visibleOptions = [
-  { value: 'PUBLIC', text: 'Public: Asset will be visible to all projects' },
-  { value: 'BY_PROJECT', text: 'By project: Asset is only visible to selected projects' },
-];
 
 // Redux-Form Component
 export function AddRepoMetadata({ handleSubmit, onCancel }) {
@@ -169,7 +162,7 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
         component={renderSelectField}
         options={visibleOptions}
       />
-      { visibleValue === 'BY_PROJECT'
+      { visibleValue === BY_PROJECT
         && <Field
             { ...commonProps }
             name="projects"

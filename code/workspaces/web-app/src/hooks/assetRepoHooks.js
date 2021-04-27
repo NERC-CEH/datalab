@@ -1,6 +1,7 @@
 import useShallowSelector from './useShallowSelector';
 import assetRepoSelectors from '../selectors/assetRepoSelectors';
 import sortByName from '../components/common/sortByName';
+import { PUBLIC } from '../components/assetRepo/assetVisibilities';
 
 const useAssetRepoUnsorted = () => useShallowSelector(assetRepoSelectors.assetRepo);
 
@@ -17,7 +18,7 @@ export const useAssetRepo = () => {
 };
 
 const assetVisible = (projectKey, asset) => asset.fileLocation
-  && (asset.visible === 'PUBLIC'
+  && (asset.visible === PUBLIC
   || (asset.projects && asset.projects.map(project => project.key).includes(projectKey)));
 
 export const useVisibleAssets = (projectKey) => {

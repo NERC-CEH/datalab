@@ -200,8 +200,8 @@ export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons = fa
 export const UpdateFormControls = ({
   submitting = false, fullWidthButtons = false,
   onCancel, cancelButtonText = 'Cancel',
-  onClearChanges, clearChangesButtonText = 'Clear Changes',
-  pristine,
+  onClearChanges = null, clearChangesButtonText = 'Clear Changes',
+  pristine = false,
 }) => {
   const classes = useStyles();
 

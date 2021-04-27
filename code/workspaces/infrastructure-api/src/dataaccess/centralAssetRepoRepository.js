@@ -1,6 +1,7 @@
 import database from '../config/database';
 import centralAssetMetadataModel from '../models/centralAssetMetadata.model';
 
+const { PUBLIC, BY_PROJECT } = centralAssetMetadataModel;
 const TYPE = 'centralAssetMetadata';
 
 const CentralAssetMetadata = () => database.getModel(centralAssetMetadataModel.modelName);
@@ -27,8 +28,8 @@ async function metadataAvailableToProject(projectKey) {
   return CentralAssetMetadata()
     .find()
     .or([
-      { visible: 'PUBLIC' },
-      { visible: 'BY_PROJECT', projectKeys: { $elemMatch: { $eq: projectKey } } },
+      { visible: PUBLIC },
+      { visible: BY_PROJECT, projectKeys: { $elemMatch: { $eq: projectKey } } },
     ])
     .exec();
 }
