@@ -4,7 +4,7 @@ import express from 'express';
 import { permissionTypes } from 'common';
 import centralAssetRepo from '../controllers/centralAssetRepoController';
 import permissionMiddleware from '../auth/permissionMiddleware';
-import { metadataValidator, assetIdValidator } from '../validators/centralAssetRepoValidators';
+import { createValidator, updateValidator, assetIdValidator } from '../validators/centralAssetRepoValidators';
 import { optionalProjectKeyValidator } from '../validators/commonValidators';
 
 const { projectPermissions: { PROJECT_KEY_STACKS_CREATE }, SYSTEM_DATA_MANAGER } = permissionTypes;
@@ -16,8 +16,16 @@ const centralAssetRepoRouter = express.Router();
 centralAssetRepoRouter.post(
   '/metadata',
   permissionMiddleware(SYSTEM_DATA_MANAGER),
-  metadataValidator(body),
+  createValidator(body),
   errorWrapper(centralAssetRepo.createAssetMetadata),
+);
+
+centralAssetRepoRouter.put(
+  '/metadata/:assetId',
+  permissionMiddleware(SYSTEM_DATA_MANAGER),
+  assetIdValidator(param),
+  updateValidator(body),
+  errorWrapper(centralAssetRepo.updateAssetMetadata),
 );
 
 // Use /metadata?projectKey=<projectKey value> to filter by metadata available to project

@@ -105,8 +105,11 @@ type Mutation {
     # Remove a user permission from a project
     removeProjectPermission(permission: PermissionRemoveRequest): Boolean
 
-    # Create a central asset repo metadata
+    # Create central asset repo metadata
     createCentralAssetMetadata(metadata: CentralAssetMetadataCreationRequest!): CentralAssetMetadata!
+
+    # Update central asset repo metadata
+    updateCentralAssetMetadata(metadata: CentralAssetMetadataUpdateRequest!): CentralAssetMetadata!
 
     # Set instanceAdmin role
     setInstanceAdmin(userId: ID!, instanceAdmin: Boolean!): UserAndRoles!
@@ -383,6 +386,13 @@ input CentralAssetMetadataCreationRequest {
     version: String!
     fileLocation: String
     masterUrl: String
+    ownerUserIds: [String]!
+    visible: String!
+    projectKeys: [String]
+}
+
+input CentralAssetMetadataUpdateRequest {
+    assetId: String!
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]

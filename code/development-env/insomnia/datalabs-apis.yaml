@@ -1,7 +1,7 @@
 _type: export
 __export_format: 4
-__export_date: 2021-04-01T14:33:47.267Z
-__export_source: insomnia.desktop.app:v2020.5.2
+__export_date: 2021-04-22T11:10:47.232Z
+__export_source: insomnia.desktop.app:v2021.1.0
 resources:
   - _id: req_c249a02b974940d5a8bcd650a582c0eb
     parentId: fld_aedf6e0439314b319e879aec69a4f251
@@ -42,7 +42,7 @@ resources:
     created: 1519239116865
     name: Datalabs
     description: ""
-    scope: null
+    scope: collection
     _type: workspace
   - _id: req_79f09f03b2724d34a32b791c74a38d6c
     parentId: fld_aedf6e0439314b319e879aec69a4f251
@@ -247,7 +247,7 @@ resources:
     _type: request
   - _id: req_67241f2b3eda4593a73273e07248f4f9
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619081319346
     created: 1566905934976
     url: "{{ client_api_url  }}/api"
     name: project
@@ -287,7 +287,7 @@ resources:
     _type: request_group
   - _id: req_5e4bf2bc5af143b1b727f4b795b2ff2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619085120346
     created: 1566938804513
     url: "{{ client_api_url  }}/api"
     name: addProjectPermission
@@ -317,7 +317,7 @@ resources:
     _type: request
   - _id: req_327f022f621344a79932474f8122b61b
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619081128574
     created: 1566939410205
     url: "{{ client_api_url  }}/api"
     name: removeProjectPermission
@@ -376,7 +376,7 @@ resources:
     _type: request
   - _id: req_d1726df0932641caabd32fb810c33f32
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619085263432
     created: 1568024663043
     url: "{{ client_api_url  }}/api"
     name: User Permissions
@@ -610,7 +610,7 @@ resources:
     _type: request
   - _id: req_23924ad71f224bb5bac9ff07cfdefde6
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619087381714
     created: 1568905829672
     url: "{{ client_api_url  }}/api"
     name: createProject
@@ -619,10 +619,9 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  createProject(project: { \n    projectKey:
-        \"gql-create-project\", \n    name: \"GQL Create
-        Project\",\n    description: \"A project created using the createProject
-        mutation in GraphQL.\",\n    collaborationLink:
-        \"some-collaboration-url\",\n  })
+        \"newproj\", \n    name: \"GQL Create Project\",\n    description: \"A
+        project created using the createProject mutation in
+        GraphQL.\",\n    collaborationLink: \"some-collaboration-url\",\n  })
         {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}
         "}'
     parameters: []
@@ -644,7 +643,7 @@ resources:
     _type: request
   - _id: req_1e855f4eb84f48eb909addb89a59835d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619087384690
     created: 1568906446384
     url: "{{ client_api_url  }}/api"
     name: updateProject
@@ -653,10 +652,9 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  updateProject(project: { \n    projectKey:
-        \"gql-update-project\", \n    name: \"GQL Update
-        Project\",\n    description: \"A project created using the updateProject
-        mutation in GraphQL.\",\n    collaborationLink:
-        \"some-collaboration-url\",\n  })
+        \"newproj\", \n    name: \"GQL Update Project\",\n    description: \"A
+        project created using the updateProject mutation in
+        GraphQL.\",\n    collaborationLink: \"some-collaboration-url\",\n  })
         {\n    id\n    key\n    name\n    description\n    collaborationLink\n    accessible\n  }\n}
         "}'
     parameters: []
@@ -824,7 +822,7 @@ resources:
     _type: request
   - _id: req_c742c2e35deb496693c5ccaaef9c4248
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1618577299213
     created: 1606922497352
     url: "{{ client_api_url  }}/api"
     name: Set instanceAdmin
@@ -911,7 +909,7 @@ resources:
     _type: request
   - _id: req_d53d1acb6d8d44d2ae24c2ca4ebde198
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619081008853
     created: 1612177227190
     url: "{{ _.client_api_url }}/api"
     name: createCentralAssetMetadata
@@ -920,11 +918,11 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation {\n  createCentralAssetMetadata (metadata:
-        {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    type:
-        \"DATA\",\n    ownerUserIds: [\"owner-id\"],\n    visible:
-        \"BY_PROJECT\",\n    projectKeys: [\"project\"],\n    fileLocation:
-        \"/path/to/file4\"\n  })
-        {\n    assetId\n    name\n    version\n  }\n}"}'
+        {\n    name: \"newAsset\",\n    version: \"0.1.0\",\n    ownerUserIds:
+        [\"owner-id\"],\n    visible: \"BY_PROJECT\",\n    projectKeys:
+        [\"project\"],\n    fileLocation: \"/path/to/file4\"\n  })
+        {\n    assetId\n    name\n    version\n    owners
+        {userId}\n    visible\n    projects {key}\n    fileLocation\n  }\n}"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -975,7 +973,7 @@ resources:
     _type: request
   - _id: req_7099ece7dd0b432eaf509b917cf1cb92
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1618488219843
     created: 1613039989749
     url: "{{ _.client_api_url }}/api"
     name: centralAssets
@@ -1006,7 +1004,7 @@ resources:
     _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619085382255
     created: 1614703552507
     url: "{{ _.client_api_url }}/api"
     name: createCluster
@@ -1151,6 +1149,39 @@ resources:
       token: "{{ access_token  }}"
       type: bearer
     metaSortKey: 225
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ecc18fb9e89a4465b2c12c0363e25b81
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1619089809601
+    created: 1619080730791
+    url: "{{ _.client_api_url }}/api"
+    name: updateCentralAssetMetadata
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  updateCentralAssetMetadata (metadata:
+        {\n    assetId:
+        \"85e76212-319d-4d62-b1a1-2e4a6091fe64\",\n    ownerUserIds:
+        [\"owner2-id\"],\n    visible: \"PUBLIC\",\n    projectKeys: []\n  })
+        {\n    assetId\n    name\n    version\n    owners
+        {userId}\n    visible\n    projects {key}\n    fileLocation\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ff5e88661367403f83ff2fc19b939830
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 2350
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -1806,6 +1837,41 @@ resources:
       token: "{{ internal_token  }}"
       type: bearer
     metaSortKey: -1568712933609.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_24cb7bbb362c4363b667e7d5798ecc1d
+    parentId: fld_c5fd5b1d05e24c349febad830d984362
+    modified: 1619079313965
+    created: 1619079238969
+    url: "{{
+      infra_api_url  }}/centralAssetRepo/metadata/2da8e0e1-6e5c-4e05-af5f-934f6\
+      90b4098"
+    name: Update Asset
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {   
+            "ownerUserIds": ["owner2-id"],
+            "visible": "PUBLIC",
+        	  "projectKeys": []
+        }
+    parameters: []
+    headers:
+      - id: pair_39e43053e7e84145ba27337b6f8de517
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933662.25
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
