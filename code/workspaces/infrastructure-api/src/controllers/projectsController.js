@@ -37,7 +37,7 @@ async function createProject(request, response, next) {
 
   if (forbiddenNamespace) {
     const msg = `Project Key '${project.key}' cannot be used as it is a forbidden namespace.`;
-    logger.info(msg);
+    logger.warn(msg);
     return response.status(400).send({
       errors: [{ msg }],
     });
@@ -45,7 +45,7 @@ async function createProject(request, response, next) {
 
   if (projectExists) {
     const msg = `Entry with key '${project.key}' already exists.`;
-    logger.info(msg);
+    logger.warn(msg);
     return response.status(400).send({
       errors: [{ msg }],
     });
