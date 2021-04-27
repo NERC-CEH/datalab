@@ -58,19 +58,18 @@ c
   }
 };
 
-const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, showCreateButton }) => {
+const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData }) => {
   const dispatch = useDispatch();
   const currentUserId = useCurrentUserId();
   const { value: dataStores } = useDataStorageForUserInProject(currentUserId, projectKey);
   const clusters = clustersToStacks(useClustersByType(clusterType), projectKey);
 
   useEffect(() => {
-    if (projectKey) dispatch(clusterActions.loadClusters(projectKey));
-  }, [dispatch, projectKey]);
-
-  useEffect(() => {
-    if (projectKey) dispatch(dataStorageActions.loadDataStorage(projectKey));
-  }, [dispatch, projectKey]);
+    if (projectKey && modifyData) {
+      dispatch(clusterActions.loadClusters(projectKey));
+      dispatch(dataStorageActions.loadDataStorage(projectKey));
+    }
+  }, [dispatch, projectKey, modifyData]);
 
   const createDaskClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
 
@@ -82,8 +81,8 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, sh
         userPermissions={() => userPermissions}
         openCreationForm={() => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createDaskClusterDialogProps))}
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
-        showCreateButton={showCreateButton}
-        deleteStack={confirmDeleteCluster(dispatch)}
+        showCreateButton={modifyData}
+        deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
         copySnippet={copySnippet}
         deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
         editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}

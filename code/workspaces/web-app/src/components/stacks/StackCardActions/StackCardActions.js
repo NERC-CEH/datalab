@@ -193,6 +193,7 @@ PureStackCardActions.propTypes = {
     restart: PropTypes.bool,
     delete: PropTypes.bool,
     logs: PropTypes.bool,
+    copySnippet: PropTypes.bool,
   }).isRequired,
 };
 

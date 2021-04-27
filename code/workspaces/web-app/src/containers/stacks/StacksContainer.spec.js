@@ -15,10 +15,10 @@ const listUsersMock = jest.fn();
 listUsersService.listUsers = listUsersMock;
 
 jest.mock('../../components/common/notify');
-const toastrErrorMock = jest.fn();
-const toastrSuccessMock = jest.fn();
-notify.error = toastrErrorMock;
-notify.success = toastrSuccessMock;
+const toastErrorMock = jest.fn();
+const toastSuccessMock = jest.fn();
+notify.error = toastErrorMock;
+notify.success = toastSuccessMock;
 
 jest.useFakeTimers();
 
@@ -35,7 +35,7 @@ describe('StacksContainer', () => {
         PrivateComponent: () => {},
         PublicComponent: () => {},
         userPermissions: ['expectedPermission'],
-        projectKey: 'testproj',
+        projectKey: 'project-key',
         formComponent: FormComponent,
         showCreateButton: true,
       };
@@ -44,7 +44,7 @@ describe('StacksContainer', () => {
     }
 
     const stacks = { fetching: false, value: ['expectedArray'] };
-    const currentProject = { fetching: false, value: 'testproj' };
+    const currentProject = { fetching: false, value: 'project-key' };
     const store = createStore()({
       stacks,
       currentProject,
@@ -87,8 +87,8 @@ describe('StacksContainer', () => {
     const stacks = {
       fetching: false,
       value: [
-        { prop: 'prop1', projectKey: 'projtest', type: JUPYTER, category: NOTEBOOK_CATEGORY },
-        { prop: 'prop2', projectKey: 'projtest', type: JUPYTER, category: NOTEBOOK_CATEGORY },
+        { prop: 'prop1', projectKey: 'project-key', type: JUPYTER, category: NOTEBOOK_CATEGORY },
+        { prop: 'prop2', projectKey: 'project-key', type: JUPYTER, category: NOTEBOOK_CATEGORY },
       ],
     };
 
@@ -131,10 +131,9 @@ describe('StacksContainer', () => {
         editStack: editStackMock,
         restartStack: restartStackMock,
       },
-      projectKey: { fetching: false, value: 'projtest' },
+      projectKey: { fetching: false, value: 'project-key' },
       formComponent: FormComponent,
-      showCreateButton: true,
-      autoRefreshStacks: true,
+      modifyData: true,
     });
 
     beforeEach(() => jest.clearAllMocks());
@@ -150,7 +149,7 @@ describe('StacksContainer', () => {
       expect(loadStacksMock).toHaveBeenCalledTimes(1);
     });
 
-    it('setTimeout is called once the loadStackByCategory has resolved', () => {
+    it('setTimeout is called once the loadStackByCategory has resolved', async () => {
       // Arrange
       const props = generateProps();
 
@@ -161,10 +160,9 @@ describe('StacksContainer', () => {
       expect(loadStacksMock).toHaveBeenCalledTimes(0);
       expect(listUsersMock).toHaveBeenCalledTimes(0);
       expect(setTimeout).toHaveBeenCalledTimes(0);
-      return output.loadStack().then(() => {
-        expect(loadStacksMock).toHaveBeenCalledTimes(1);
-        expect(setTimeout).toHaveBeenCalledTimes(1);
-      });
+      await output.loadStack();
+      expect(loadStacksMock).toHaveBeenCalledTimes(1);
+      expect(setTimeout).toHaveBeenCalledTimes(1);
     });
 
     it('passes correct props to StackCard', () => {
@@ -188,13 +186,13 @@ describe('StacksContainer', () => {
       return openStack({ id: 1000 })
         .then(() => {
           expect(getUrlMock).toHaveBeenCalledTimes(1);
-          expect(getUrlMock).toHaveBeenCalledWith('projtest', 1000);
+          expect(getUrlMock).toHaveBeenCalledWith('project-key', 1000);
           expect(openStackMock).toHaveBeenCalledTimes(1);
           expect(openStackMock).toHaveBeenCalledWith('expectedUrl');
         });
     });
 
-    it('openStack method calls toastr on unresolved getUrl', () => {
+    it('openStack method calls toast on unresolved getUrl', () => {
       // Arrange
       getUrlMock.mockReturnValue(Promise.reject(new Error('no url')));
       const props = generateProps();
@@ -203,13 +201,13 @@ describe('StacksContainer', () => {
 
       // Act/Assert
       expect(getUrlMock).not.toHaveBeenCalled();
-      expect(toastrErrorMock).not.toHaveBeenCalled();
+      expect(toastErrorMock).not.toHaveBeenCalled();
       return openStack({ id: 1000 })
         .then(() => {
           expect(getUrlMock).toHaveBeenCalledTimes(1);
-          expect(getUrlMock).toHaveBeenCalledWith('projtest', 1000);
-          expect(toastrErrorMock).toHaveBeenCalledTimes(1);
-          expect(toastrErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
+          expect(getUrlMock).toHaveBeenCalledWith('project-key', 1000);
+          expect(toastErrorMock).toHaveBeenCalledTimes(1);
+          expect(toastErrorMock).toHaveBeenCalledWith('Unable to open Notebook');
         });
     });
 
@@ -353,7 +351,7 @@ describe('StacksContainer', () => {
     it('openCreationForm - onSubmit calls createStack with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { projectKey: 'projtest', displayName: 'expectedDisplayName' };
+      const stack = { projectKey: 'project-key', displayName: 'expectedDisplayName' };
 
       // Act
       const output = shallowRenderPure(props);
@@ -414,7 +412,7 @@ describe('StacksContainer', () => {
       it('onSubmit calls edit stack with correct value', async () => {
         // Arrange
         const props = generateProps();
-        const stack = { projectKey: 'projtest', displayName: 'expectedDisplayName' };
+        const stack = { projectKey: 'project-key', displayName: 'expectedDisplayName' };
 
         // Act
         const output = shallowRenderPure(props);
@@ -456,7 +454,7 @@ describe('StacksContainer', () => {
         // Arrange
         const props = generateProps();
         const stack = {
-          projectKey: 'projtest',
+          projectKey: 'project-key',
           name: 'stackName',
           type: 'jupyter',
           displayName: 'Stack Display Name',
@@ -478,7 +476,7 @@ describe('StacksContainer', () => {
       it('onSubmit calls restartStack with correct value', async () => {
         // Arrange
         const props = generateProps();
-        const stack = { projectKey: 'projtest', name: 'stackName', type: 'jupyter' };
+        const stack = { projectKey: 'project-key', name: 'stackName', type: 'jupyter' };
 
         // Act
         const output = shallowRenderPure(props);

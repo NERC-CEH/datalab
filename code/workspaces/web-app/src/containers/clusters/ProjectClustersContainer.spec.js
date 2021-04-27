@@ -60,7 +60,7 @@ const mockCloseModalDialogAction = jest.fn();
 mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
 
 describe('ProjectClustersContainer', () => {
-  const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} showCreateButton />);
+  const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData />);
 
   it('renders correct snapshot', () => {
     expect(getShallowRender()).toMatchSnapshot();

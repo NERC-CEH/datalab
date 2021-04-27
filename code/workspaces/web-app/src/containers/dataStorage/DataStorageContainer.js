@@ -36,7 +36,7 @@ class DataStorageContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.projectKey !== prevProps.projectKey) {
+    if (this.props.projectKey !== prevProps.projectKey && this.props.modifyData) {
       this.props.actions.loadDataStorage(this.props.projectKey);
     }
   }
@@ -110,7 +110,7 @@ class DataStorageContainer extends Component {
 
   componentDidMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    if (this.props.projectKey) {
+    if (this.props.projectKey && this.props.modifyData) {
       this.props.actions.loadDataStorage(this.props.projectKey)
         .catch((() => {
         }));
@@ -128,10 +128,10 @@ class DataStorageContainer extends Component {
         typeName={STORAGE_TYPE_NAME}
         typeNamePlural={STORAGE_TYPE_NAME_PLURAL}
         openStack={this.openDataStore}
-        deleteStack={this.chooseDialogue}
-        editStack={this.editDataStore}
+        deleteStack={this.props.modifyData ? this.chooseDialogue : undefined}
+        editStack={this.props.modifyData ? this.editDataStore : undefined}
         openCreationForm={this.openCreationForm}
-        showCreateButton={this.props.showCreateButton}
+        showCreateButton={this.props.modifyData}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STORAGE_CREATE, this.props.projectKey)}
         openPermission={projectKeyPermission(PROJECT_KEY_STORAGE_OPEN, this.props.projectKey)}
@@ -159,14 +159,14 @@ DataStorageContainer.propTypes = {
     closeModalDialog: PropTypes.func.isRequired,
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  showCreateButton: PropTypes.bool.isRequired,
+  modifyData: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     dataStorage: state.dataStorage,
     projectKey: currentProjectSelectors.currentProjectKey(state).value,
-    showCreateButton: true, // default
+    modifyData: true, // default
   };
 }
 
@@ -174,7 +174,7 @@ function mapProjectStateToProps(state) {
   return {
     dataStorage: state.dataStorage,
     // leave projectKey as a prop, rather than reading from state
-    showCreateButton: false, // don't show create button in ProjectStacksContainer
+    modifyData: false, // don't load (or cause a load of) the storage in this view, admin sees more
   };
 }
 

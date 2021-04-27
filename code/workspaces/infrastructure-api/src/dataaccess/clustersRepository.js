@@ -32,9 +32,14 @@ async function listByProject(projectKey) {
   return documents;
 }
 
+async function getAll() {
+  return ClusterModel().find().exec();
+}
+
 export default {
   createCluster,
   deleteCluster,
   clusterExists,
   listByProject,
+  getAll,
 };
