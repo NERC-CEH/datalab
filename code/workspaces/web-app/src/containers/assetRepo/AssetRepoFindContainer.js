@@ -29,7 +29,14 @@ function AssetRepoFindContainer({ userPermissions }) {
   const [selectedAssets, setSelectedAssets] = useState([]);
   const classes = useStyles();
   const assetRepo = useAssetRepo();
-  const shownAssets = (selectedAssets && selectedAssets.length > 0) ? selectedAssets : sortByName(assetRepo.value.assets);
+
+  // @ts-ignore - no way to let tsc know the shape of selectedAssets
+  const selectedAssetIds = selectedAssets ? selectedAssets.map(asset => asset.assetId) : [];
+
+  // recalculate shownAssets in case edited
+  const shownAssets = (selectedAssetIds.length > 0)
+    ? sortByName(assetRepo.value.assets.filter(asset => selectedAssetIds.includes(asset.assetId)))
+    : sortByName(assetRepo.value.assets);
 
   useEffect(() => {
     dispatch(assetRepoActions.loadAllAssets());
