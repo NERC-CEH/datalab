@@ -22,7 +22,8 @@
   "include": [
     "./*/src/**/*.js",
     "./*/src/version.json",
-    "./common/src/config/*.json"
+    "./common/src/config/*.json",
+    "./web-app/src/assets/images/images.d.ts"
   ],
   "exclude": [
     "**/node_modules",

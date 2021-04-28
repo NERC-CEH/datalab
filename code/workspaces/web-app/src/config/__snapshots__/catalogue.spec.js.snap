@@ -8,5 +8,6 @@ Object {
     "server": "192.168.3.16",
     "type": "nfs",
   },
+  "url": "https://www.google.co.uk/",
 }
 `;
