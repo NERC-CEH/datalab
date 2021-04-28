@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import { permissionTypes } from 'common';
-import UserInfo from './UserIcon';
+import UserIcon from './UserIcon';
 import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import { extendSubdomain } from '../../core/getDomainInfo';
 import TopBarButton from './TopBarButton';
 import navBarLinks from '../../constants/navBarLinks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
+import { getCatalogue } from '../../config/catalogue';
 
 const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 
-const styles = theme => ({
+const styles = theme => createStyles({
   appBar: {
     background: theme.palette.backgroundDark,
     height: theme.shape.topBarHeight,
@@ -43,6 +44,7 @@ const datalabLinks = [
 
 const TopBar = ({ classes, identity }) => {
   const userPermissions = useCurrentUserPermissions().value;
+  const catalogue = getCatalogue();
   return (
     <div className={classes.appBar}>
       <div className={classes.toolBar}>
@@ -55,14 +57,17 @@ const TopBar = ({ classes, identity }) => {
           && <TopBarButton to="/assets" label="Asset Repo"/>
           }
           <TopBarButton to="/projects" label="Projects"/>
-          {datalabLinks.map(({ displayName, href, icon }) => <TopBarButton
+          {catalogue.available
+          && <TopBarButton label="Catalogue" onClick={() => window.open(catalogue.url)} />
+          }
+          {datalabLinks.map(({ displayName, href }) => <TopBarButton
             key={`nav-link-${displayName}`}
             label={displayName}
             onClick={() => window.open(href)}
           />)}
         </div>
         <div style={{ flex: 1 }}/>
-        <UserInfo className={classes.userInfo} identity={identity}/>
+        <UserIcon identity={identity}/>
       </div>
     </div>
   );
