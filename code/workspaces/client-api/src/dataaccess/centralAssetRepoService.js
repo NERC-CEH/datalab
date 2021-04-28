@@ -16,6 +16,15 @@ async function createAssetMetadata(metadata, token) {
   return data;
 }
 
+async function updateAssetMetadata({ assetId, ownerUserIds, visible, projectKeys }, token) {
+  const { data } = await infrastructureApi().put(
+    `/metadata/${assetId}`,
+    { ownerUserIds, visible, projectKeys },
+    requestConfig(token),
+  );
+  return data;
+}
+
 async function listCentralAssets(token) {
   const { data } = await infrastructureApi().get(
     '/metadata',
@@ -42,6 +51,7 @@ async function getAssetByIdAndProjectKey(assetId, projectKey, token) {
 
 export default {
   createAssetMetadata: wrapWithAxiosErrorWrapper('Error creating metadata.', createAssetMetadata),
+  updateAssetMetadata: wrapWithAxiosErrorWrapper('Error updating metadata.', updateAssetMetadata),
   listCentralAssets: wrapWithAxiosErrorWrapper('Error listing metadata.', listCentralAssets),
   listCentralAssetsAvailableToProject: wrapWithAxiosErrorWrapper('Error listing metadata from project.', listCentralAssetsAvailableToProject),
   getAssetByIdAndProjectKey: wrapWithAxiosErrorWrapper('Error getting metadata by assetId and projectKey', getAssetByIdAndProjectKey),

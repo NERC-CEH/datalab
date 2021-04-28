@@ -9,7 +9,7 @@ const validator = (validations, logger) => async (req, res, next) => {
     return next();
   }
 
-  logger.debug('Error validating request', errors.array());
+  logger.info('Error validating request', errors.array());
   return res.status(400).json({ errors: errors.array() });
 };
 

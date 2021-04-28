@@ -47,6 +47,11 @@ describe('stacksRepository', () => {
     expect(stacks).toMatchSnapshot();
   }));
 
+  it('getAllByAsset returns expected snapshot', () => stacksRepository.getAllByAsset('asset-id').then((stacks) => {
+    expect(mockDatabase().query()).toEqual({ assetIds: { $elemMatch: { $eq: 'asset-id' } } });
+    expect(stacks).toMatchSnapshot();
+  }));
+
   it('getById returns expected snapshot', () => stacksRepository.getOneById(project, user, '599aa983bdd5430daedc8eec').then((stack) => {
     expect(mockDatabase().query()).toEqual({ _id: '599aa983bdd5430daedc8eec' });
     expect(mockDatabase().user()).toBe('username');
@@ -88,6 +93,12 @@ describe('stacksRepository', () => {
         expect(mockDatabase().project()).toBe('expectedProject');
         expect(mockDatabase().user()).toBe('username');
       });
+  });
+
+  it('updateAssets should update stack assets', async () => {
+    await stacksRepository.updateAssets('id', ['asset-id']);
+    expect(mockDatabase().queries()).toContainEqual({ _id: 'id' });
+    expect(mockDatabase().entity()).toEqual({ assetIds: ['asset-id'] });
   });
 
   it('update should query for stacks of the same name', async () => {

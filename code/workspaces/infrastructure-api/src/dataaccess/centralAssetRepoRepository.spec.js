@@ -8,6 +8,7 @@ const centralAssetMetadataModelMock = {
   create: jest.fn(),
   exec: jest.fn(),
   exists: jest.fn(),
+  findOneAndUpdate: jest.fn(),
   find: jest.fn().mockReturnThis(),
   in: jest.fn().mockReturnThis(),
   or: jest.fn().mockReturnThis(),
@@ -26,18 +27,47 @@ const getMinimalMetadata = () => ({
   fileLocation: 'path/to/file',
 });
 
-const { createMetadata, metadataExists } = centralAssetRepoRepository;
+const getUpdateMetadata = () => ({
+  ownerUserIds: ['user1'],
+  visible: 'BY_PROJECT',
+  projectKeys: ['projKey'],
+});
+
+const { createMetadata, updateMetadata, metadataExists, assetIdExists } = centralAssetRepoRepository;
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('createMetadata', () => {
   it('calls to create new metadata document and returns the newly created document', async () => {
-    const metadata = getMinimalMetadata();
-    const createdDocument = { ...metadata, assetId: 'test-asset-id' };
-    centralAssetMetadataModelMock.create.mockReturnValueOnce([createdDocument]);
+    // Arrange
+    const metadata = { ...getMinimalMetadata(), assetId: 'test-asset-id' };
+    centralAssetMetadataModelMock.create.mockReturnValueOnce([metadata]);
 
+    // Act
     const response = await createMetadata(metadata);
 
+    // Assert
     expect(centralAssetMetadataModelMock.create).toHaveBeenCalledWith([metadata], { setDefaultsOnInsert: true });
-    expect(response).toBe(createdDocument);
+    expect(response).toBe(metadata);
+  });
+});
+
+describe('updateMetadata', () => {
+  it('calls to update metadata document and returns the newly updated document', async () => {
+    // Arrange
+    const metadata = getUpdateMetadata();
+    const assetId = 'test-asset-id';
+    const updatedDocument = { assetId, ...metadata };
+    centralAssetMetadataModelMock.findOneAndUpdate.mockReturnValueOnce(updatedDocument);
+
+    // Act
+    const response = await updateMetadata({ assetId, ...metadata });
+
+    // Assert
+    expect(centralAssetMetadataModelMock.findOneAndUpdate).toHaveBeenCalledWith({ assetId }, metadata, { new: true });
+    expect(response).toBe(updatedDocument);
   });
 });
 
@@ -110,6 +140,18 @@ describe('metadataExists', () => {
       const response = await metadataExists(metadata);
       expect(response.conflicts).toEqual(["Metadata for asset with 'masterUrl:version' combination 'masterUrl:version' already exists."]);
     });
+  });
+});
+
+describe('assetIdExists', () => {
+  it('returns value depending on if exists', async () => {
+    // Arrange
+    centralAssetMetadataModelMock.exists.mockResolvedValueOnce('true-or-false');
+    // Act
+    const response = await assetIdExists('asset-id');
+    // Assert
+    expect(centralAssetMetadataModelMock.exists).toHaveBeenCalledWith({ assetId: 'asset-id' });
+    expect(response).toEqual('true-or-false');
   });
 });
 

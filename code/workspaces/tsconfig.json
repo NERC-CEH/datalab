@@ -4,6 +4,7 @@
   // To enable the task to run automatically, run the command 'Tasks: Manage Automatic Tasks in Folder', and allow.
   // To stop the task, go to Terminal > Task - tsc static analysis and press ctrl-c.
   // To ignore a file, place this at the top: // @ts-nocheck
+  // To ignore a line, place this just before it: // @ts-ignore
   "compilerOptions": {
     "outDir": "./ts-build",
     "composite": true,
@@ -21,7 +22,8 @@
   "include": [
     "./*/src/**/*.js",
     "./*/src/version.json",
-    "./common/src/config/*.json"
+    "./common/src/config/*.json",
+    "./web-app/src/assets/images/images.d.ts"
   ],
   "exclude": [
     "**/node_modules",

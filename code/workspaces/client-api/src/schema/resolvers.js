@@ -63,6 +63,7 @@ const resolvers = {
     updateProject: (obj, { project }, { token }) => w(projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { token }) => w(projectService.deleteProject(projectKey, token)),
     createCentralAssetMetadata: (obj, { metadata }, { token }) => w(centralAssetRepoService.createAssetMetadata(metadata, token)),
+    updateCentralAssetMetadata: (obj, { metadata }, { token }) => w(centralAssetRepoService.updateAssetMetadata(metadata, token)),
     setInstanceAdmin: (obj, { userId, instanceAdmin }, { token }) => w(usersService.setInstanceAdmin(userId, instanceAdmin, token)),
     setDataManager: (obj, { userId, dataManager }, { token }) => w(usersService.setDataManager(userId, dataManager, token)),
     setCatalogueRole: (obj, { userId, catalogueRole }, { token }) => w(usersService.setCatalogueRole(userId, catalogueRole, token)),

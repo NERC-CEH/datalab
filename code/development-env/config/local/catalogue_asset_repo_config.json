@@ -1,6 +1,6 @@
 {
   "catalogue": {
-    "available": true
-  },
-  "assetRepo": { }
+    "available": true,
+    "url": "https://www.google.co.uk/"
+  }
 }

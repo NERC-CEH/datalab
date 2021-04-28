@@ -1,12 +1,22 @@
 import database from '../config/database';
 import centralAssetMetadataModel from '../models/centralAssetMetadata.model';
 
+const { PUBLIC, BY_PROJECT } = centralAssetMetadataModel;
 const TYPE = 'centralAssetMetadata';
 
 const CentralAssetMetadata = () => database.getModel(centralAssetMetadataModel.modelName);
 
 async function createMetadata(metadata) {
   const [document] = await CentralAssetMetadata().create([metadata], { setDefaultsOnInsert: true });
+  return document;
+}
+
+async function updateMetadata({ assetId, ownerUserIds, visible, projectKeys }) {
+  const document = await CentralAssetMetadata().findOneAndUpdate(
+    { assetId },
+    { ownerUserIds, visible, projectKeys },
+    { new: true },
+  );
   return document;
 }
 
@@ -18,8 +28,8 @@ async function metadataAvailableToProject(projectKey) {
   return CentralAssetMetadata()
     .find()
     .or([
-      { visible: 'PUBLIC' },
-      { visible: 'BY_PROJECT', projectKeys: { $elemMatch: { $eq: projectKey } } },
+      { visible: PUBLIC },
+      { visible: BY_PROJECT, projectKeys: { $elemMatch: { $eq: projectKey } } },
     ])
     .exec();
 }
@@ -67,6 +77,11 @@ async function metadataWithMasterUrlVersionCombinationExists({ masterUrl, versio
   return { conflicts };
 }
 
+async function assetIdExists(assetId) {
+  const exists = await CentralAssetMetadata().exists({ assetId });
+  return exists;
+}
+
 async function setLastAddedDateToNow(assetIds) {
   return CentralAssetMetadata()
     .updateMany({ assetId: { $in: assetIds } }, { lastAddedDate: Date.now() })
@@ -82,10 +97,12 @@ async function deleteProject(projectKey) {
 
 export default {
   createMetadata,
+  updateMetadata,
   listMetadata,
   getMetadataWithIds,
   metadataAvailableToProject,
   metadataExists,
+  assetIdExists,
   setLastAddedDateToNow,
   deleteProject,
   TYPE,

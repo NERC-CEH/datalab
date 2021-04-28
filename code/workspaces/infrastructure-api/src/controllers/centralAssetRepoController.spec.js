@@ -1,9 +1,13 @@
 import * as expressValidator from 'express-validator';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
+import stacksRepository from '../dataaccess/stacksRepository';
 import centralAssetRepoController from './centralAssetRepoController';
 import centralAssetRepoModel from '../models/centralAssetMetadata.model';
+import stackManager from '../stacks/stackManager';
 
 jest.mock('../dataaccess/centralAssetRepoRepository');
+jest.mock('../dataaccess/stacksRepository');
+jest.mock('../stacks/stackManager');
 
 const matchedDataMock = jest
   .spyOn(expressValidator, 'matchedData')
@@ -23,6 +27,13 @@ const getMinimalMetadata = () => ({
   ownerUserIds: [],
   visible: PUBLIC,
   fileLocation: 'path/to/file',
+});
+
+const getUpdateMetadata = () => ({
+  assetId: 'asset-id',
+  ownerUserIds: ['user1'],
+  visible: 'BY_PROJECT',
+  projectKeys: ['projKey'],
 });
 
 beforeEach(() => {
@@ -87,6 +98,53 @@ describe('createAssetMetadata', () => {
   });
 });
 
+describe('updateAssetMetadata', () => {
+  const { updateAssetMetadata } = centralAssetRepoController;
+
+  it('calls matched data to get the metadata information', async () => {
+    const requestMock = { };
+    await updateAssetMetadata(requestMock, responseMock, nextMock);
+    expect(matchedDataMock).toHaveBeenNthCalledWith(1, requestMock, { locations: ['params'] });
+    expect(matchedDataMock).toHaveBeenNthCalledWith(2, requestMock, { locations: ['body'] });
+  });
+
+  it('updates metadata document and returns the newly updated document with 200 status', async () => {
+    const requestMock = getUpdateMetadata();
+    const updatedMetaDocument = { ...getMinimalMetadata(), ...requestMock };
+    const stack = { _id: 'id', assetIds: ['asset-id', 'asset-id2'] };
+    centralAssetRepoRepository.assetIdExists.mockResolvedValueOnce(true);
+    centralAssetRepoRepository.updateMetadata.mockResolvedValueOnce(updatedMetaDocument);
+    stacksRepository.getAllByAsset.mockResolvedValueOnce([stack]);
+    stackManager.mountAssetsOnStack.mockResolvedValueOnce();
+
+    await updateAssetMetadata(requestMock, responseMock, nextMock);
+
+    expect(centralAssetRepoRepository.updateMetadata).toHaveBeenCalledWith(requestMock);
+    expect(stacksRepository.getAllByAsset).toHaveBeenCalledWith('asset-id');
+    expect(stackManager.mountAssetsOnStack).toHaveBeenCalledWith({ _id: 'id', assetIds: ['asset-id2'] });
+    expect(stacksRepository.updateAssets).toHaveBeenCalledWith('id', ['asset-id2']);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(updatedMetaDocument);
+  });
+
+  it('calls next with an error if the document does not exist', async () => {
+    const requestMock = getUpdateMetadata();
+    centralAssetRepoRepository.assetIdExists.mockResolvedValueOnce(false);
+    await updateAssetMetadata(requestMock, responseMock, nextMock);
+    expect(nextMock).toHaveBeenCalledWith(new Error('Can not update asset metadata - no document exists with assetId asset-id'));
+  });
+
+  it('calls next with an error if there is an error when updating the metadata document', async () => {
+    const requestMock = getUpdateMetadata();
+    const stack = { _id: 'id', assetIds: ['asset-id', 'asset-id2'] };
+    centralAssetRepoRepository.assetIdExists.mockResolvedValueOnce(true);
+    stacksRepository.getAllByAsset.mockResolvedValueOnce([stack]);
+    stackManager.mountAssetsOnStack.mockRejectedValueOnce(new Error('Expected test error'));
+    await updateAssetMetadata(requestMock, responseMock, nextMock);
+    expect(nextMock).toHaveBeenCalledWith(new Error('Error updating asset metadata - failed to update document: Expected test error'));
+  });
+});
+
 describe('listAssetMetadata', () => {
   const { listAssetMetadata } = centralAssetRepoController;
 
@@ -103,7 +161,7 @@ describe('listAssetMetadata', () => {
   });
 
   it('calls to get metadata available to project and returns response configured with 200 status and array of metadata when projectKey provided', async () => {
-    const requestMock = { projectKey: 'testproj' };
+    const requestMock = { projectKey: 'test-project' };
     const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
     centralAssetRepoRepository.metadataAvailableToProject.mockResolvedValueOnce(availableMetadata);
 
@@ -143,7 +201,7 @@ describe('getAssetById', () => {
     });
 
     it('if asset is by project and projectKey of project asset is available from is provided', async () => {
-      const projectKey = 'testproj';
+      const projectKey = 'test-project';
       const requestMock = { projectKey };
       const metadata = {
         ...getMinimalMetadata(),
@@ -196,5 +254,21 @@ describe('getAssetById', () => {
     centralAssetRepoRepository.getMetadataWithIds.mockRejectedValueOnce(new Error('Expected test error'));
     await getAssetById(requestMock, responseMock, nextMock);
     expect(nextMock).toHaveBeenCalledWith(new Error('Error getting asset with assetId: test-asset - Expected test error'));
+  });
+});
+
+describe('stackCanUseAsset', () => {
+  const { stackCanUseAsset } = centralAssetRepoController;
+
+  it('is true if asset is public', () => {
+    expect(stackCanUseAsset('projectKey1', 'PUBLIC', [])).toEqual(true);
+  });
+
+  it('is true if stack project is in list of projects', () => {
+    expect(stackCanUseAsset('projectKey1', 'BY_PROJECT', ['projectKey1', 'projectKey2'])).toEqual(true);
+  });
+
+  it('is false if stack project is not in list of projects', () => {
+    expect(stackCanUseAsset('projectKey3', 'BY_PROJECT', ['projectKey1', 'projectKey2'])).toEqual(false);
   });
 });

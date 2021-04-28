@@ -8,6 +8,7 @@ import Pagination from '../../components/stacks/Pagination';
 import AssetMultiSelect from '../../components/common/form/AssetMultiSelect';
 import assetRepoActions from '../../actions/assetRepoActions';
 import projectsActions from '../../actions/projectActions';
+import userActions from '../../actions/userActions';
 import { useAssetRepo } from '../../hooks/assetRepoHooks';
 import AssetAccordion from '../../components/assetRepo/AssetAccordion';
 
@@ -28,11 +29,19 @@ function AssetRepoFindContainer({ userPermissions }) {
   const [selectedAssets, setSelectedAssets] = useState([]);
   const classes = useStyles();
   const assetRepo = useAssetRepo();
-  const shownAssets = (selectedAssets && selectedAssets.length > 0) ? selectedAssets : sortByName(assetRepo.value.assets);
+
+  // @ts-ignore - no way to let tsc know the shape of selectedAssets
+  const selectedAssetIds = selectedAssets ? selectedAssets.map(asset => asset.assetId) : [];
+
+  // recalculate shownAssets in case edited
+  const shownAssets = (selectedAssetIds.length > 0)
+    ? sortByName(assetRepo.value.assets.filter(asset => selectedAssetIds.includes(asset.assetId)))
+    : sortByName(assetRepo.value.assets);
 
   useEffect(() => {
     dispatch(assetRepoActions.loadAllAssets());
     dispatch(projectsActions.loadProjects()); // needed for Asset Edit
+    dispatch(userActions.listUsers()); // needed for Asset Edit
   }, [dispatch]);
 
   const renderedAssets = shownAssets && shownAssets.length > 0

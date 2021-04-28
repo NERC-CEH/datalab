@@ -28,6 +28,28 @@ describe('assetRepoService', () => {
     });
   });
 
+  describe('editRepoMetadata', () => {
+    it('should build the correct mutation and unpack the results', () => {
+      const metadata = { assetId: 'asset-1', visible: 'PUBLIC' };
+      const responseData = { updateCentralAssetMetadata: { assetId: 'asset-1' } };
+      mockClient.prepareSuccess(responseData);
+
+      return assetRepoService.editRepoMetadata(metadata).then((response) => {
+        expect(response).toEqual(responseData.updateCentralAssetMetadata.assetId);
+        expect(mockClient.lastQuery()).toMatchSnapshot();
+        expect(mockClient.lastOptions()).toEqual({ metadata });
+      });
+    });
+
+    it('should throw an error if the mutation fails', () => {
+      mockClient.prepareFailure('error');
+
+      return assetRepoService.editRepoMetadata({ metadata: 'metadata' }).catch((error) => {
+        expect(error).toEqual({ error: 'error' });
+      });
+    });
+  });
+
   describe('loadVisibleAssets', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ centralAssetsAvailableToProject: 'expectedValue' });

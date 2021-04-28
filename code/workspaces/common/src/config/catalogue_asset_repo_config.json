@@ -5,6 +5,7 @@
       "type": "nfs",
       "server": "192.168.3.16",
       "rootDirectory": "/central-asset-repository/nfs"
-    }
+    },
+    "url": "https://www.google.co.uk/"
   }
 }
