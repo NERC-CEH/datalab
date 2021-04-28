@@ -6,7 +6,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectMultiSelect from '../../components/common/form/ProjectMultiSelect';
-import projectsActions from '../../actions/projectActions';
+import projectActions from '../../actions/projectActions';
+import userActions from '../../actions/userActions';
 import sortByName from '../../components/common/sortByName';
 import ProjectResources from './ProjectResources';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
@@ -54,7 +55,8 @@ function AdminResourcesContainer({ userPermissions }) {
   const shownProjects = (selectedProjects && selectedProjects.length > 0) ? selectedProjects : sortByName(projects.value);
 
   useEffect(() => {
-    dispatch(projectsActions.loadProjects());
+    dispatch(projectActions.getAllProjectsAndResources());
+    dispatch(userActions.listUsers());
   }, [dispatch]);
 
   const handleCheckboxChange = (event) => {

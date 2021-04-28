@@ -338,6 +338,7 @@ type AllProjectsAndResources {
     projects: [Project!]
     storage: [DataStore!]
     stacks: [Stack!]
+    clusters: [Cluster!]
 }
 
 input PermissionAddRequest {

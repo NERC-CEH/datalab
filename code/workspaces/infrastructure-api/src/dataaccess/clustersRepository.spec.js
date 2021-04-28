@@ -94,8 +94,8 @@ describe('clustersRepository', () => {
     });
   });
 
-  describe('listClusters', () => {
-    it('calls to create new cluster document and returns the newly created document', async () => {
+  describe('listByProject', () => {
+    it('lists clusters on a project', async () => {
       // Arrange
       const { projectKey } = clusterRequest();
       const document = clusterDocument();
@@ -106,6 +106,21 @@ describe('clustersRepository', () => {
 
       // Assert
       expect(clusterModelMock.find).toHaveBeenCalledWith({ projectKey });
+      expect(response).toEqual([document]);
+    });
+  });
+
+  describe('getAll', () => {
+    it('gets all clusters', async () => {
+      // Arrange
+      const document = clusterDocument();
+      clusterModelMock.exec.mockReturnValueOnce([document]);
+
+      // Act
+      const response = await clustersRepository.getAll();
+
+      // Assert
+      expect(clusterModelMock.find).toHaveBeenCalledWith();
       expect(response).toEqual([document]);
     });
   });

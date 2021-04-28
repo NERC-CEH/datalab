@@ -26,6 +26,9 @@ async function getAllProjectsAndResources() {
         stacks {
           id, projectKey, category, displayName, name, users, type, description, status, shared, visible, version
         }
+        clusters {
+          id, type, projectKey, name, displayName, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, schedulerAddress
+        }
       }
     }`;
 

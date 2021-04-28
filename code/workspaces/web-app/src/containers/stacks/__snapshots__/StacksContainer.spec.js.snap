@@ -57,14 +57,14 @@ Object {
 
 exports[`StacksContainer is a container which passes correct props to StackCard 1`] = `
 <StackCards
-  createPermission="projects:projtest:stacks:create"
-  deletePermission="projects:projtest:stacks:delete"
+  createPermission="projects:project-key:stacks:create"
+  deletePermission="projects:project-key:stacks:delete"
   deleteStack={[Function]}
-  editPermission="projects:projtest:stacks:edit"
+  editPermission="projects:project-key:stacks:edit"
   editStack={[Function]}
   getLogs={[Function]}
   openCreationForm={[Function]}
-  openPermission="projects:projtest:stacks:open"
+  openPermission="projects:project-key:stacks:open"
   openStack={[Function]}
   restartStack={[Function]}
   shareStack={[Function]}
@@ -75,13 +75,13 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
       "value": Array [
         Object {
           "category": "ANALYSIS",
-          "projectKey": "projtest",
+          "projectKey": "project-key",
           "prop": "prop1",
           "type": "jupyter",
         },
         Object {
           "category": "ANALYSIS",
-          "projectKey": "projtest",
+          "projectKey": "project-key",
           "prop": "prop2",
           "type": "jupyter",
         },

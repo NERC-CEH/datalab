@@ -24,7 +24,7 @@ describe('DataStorageContainer', () => {
     }
 
     const dataStorage = { fetching: false, value: ['expectedArray'] };
-    const currentProject = { fetching: false, value: 'testproj' };
+    const currentProject = { fetching: false, value: 'project-key' };
 
     it('extracts the correct props from the redux state', () => {
       // Arrange
@@ -92,7 +92,7 @@ describe('DataStorageContainer', () => {
       dataStorage,
       userPermissions: ['expectedPermission'],
       projectKey: 'project99',
-      showCreateButton: true,
+      modifyData: true,
       actions: {
         loadDataStorage: loadDataStorageActionMock,
         getCredentials: getCredentialsMock,

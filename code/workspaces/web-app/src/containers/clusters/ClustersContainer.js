@@ -6,8 +6,8 @@ import ProjectClustersContainer from './ProjectClustersContainer';
 const ClustersContainer = ({ clusterType }) => {
   const { value: projectKey } = useCurrentProjectKey();
   const { value: userPermissions } = useCurrentUserPermissions();
-  const showCreateButton = true;
-  return ProjectClustersContainer({ clusterType, projectKey, userPermissions, showCreateButton });
+  const modifyData = true;
+  return ProjectClustersContainer({ clusterType, projectKey, userPermissions, modifyData });
 };
 
 export default ClustersContainer;

@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet },
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet = undefined },
 ) => {
   const classes = useStyles();
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());

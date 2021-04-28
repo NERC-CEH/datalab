@@ -136,9 +136,11 @@ class StacksContainer extends Component {
 
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
-    return this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType)
-      .then(() => { this.setUpdateTimeout(); })
-      .catch((() => {}));
+    if (this.props.modifyData) {
+      this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType)
+        .then(() => { this.setUpdateTimeout(); })
+        .catch((() => {}));
+    }
   }
 
   updateStack() {
@@ -156,20 +158,24 @@ class StacksContainer extends Component {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
-    if (this.props.autoRefreshStacks) {
+    if (this.props.modifyData) {
       this.timeout = setTimeout(this.updateStack, refreshTimeout);
     }
   }
 
   componentDidMount() {
-    this.props.actions.listUsers();
+    if (this.props.modifyData) {
+      this.props.actions.listUsers();
+    }
     if (this.props.projectKey.value) {
       this.loadStack();
     }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timeout);
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -195,12 +201,12 @@ class StacksContainer extends Component {
         typeNamePlural={this.props.typeNamePlural}
         getLogs={this.getLogs}
         openStack={this.openStack}
-        deleteStack={this.confirmDeleteStack}
-        shareStack={this.confirmShareStack}
-        editStack={this.openEditForm}
-        restartStack={this.confirmRestartStack}
-        openCreationForm={this.openCreationForm}
-        showCreateButton={this.props.showCreateButton}
+        deleteStack={this.props.modifyData ? this.confirmDeleteStack : undefined}
+        shareStack={this.props.modifyData ? this.confirmShareStack : undefined}
+        editStack={this.props.modifyData ? this.openEditForm : undefined}
+        restartStack={this.props.modifyData ? this.confirmRestartStack : undefined}
+        openCreationForm={this.props.modifyData ? this.openCreationForm : undefined}
+        showCreateButton={this.props.modifyData}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
         openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey.value)}
@@ -236,16 +242,14 @@ StacksContainer.propTypes = {
   }).isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectKey: PropTypes.object.isRequired,
-  showCreateButton: PropTypes.bool.isRequired,
-  autoRefreshStacks: PropTypes.bool.isRequired,
+  modifyData: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     stacks: state.stacks,
     projectKey: currentProjectSelectors.currentProjectKey(state),
-    showCreateButton: true, // default
-    autoRefreshStacks: true, // default
+    modifyData: true, // default
   };
 }
 
@@ -253,8 +257,7 @@ function mapProjectStateToProps(state) {
   return {
     stacks: state.stacks,
     // leave projectKey as a prop, rather than reading from state
-    showCreateButton: false, // don't show create button in ProjectStacksContainer
-    autoRefreshStacks: false, // don't update the stacks in this view
+    modifyData: false, // don't load (or cause a load of) the stacks in this view, admin sees more
   };
 }
 

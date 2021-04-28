@@ -37,8 +37,8 @@ exports[`ProjectResources shows clusters 1`] = `
           <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
             <ProjectClustersContainer
               clusterType="DASK"
+              modifyData={false}
               projectKey="test-project"
-              showCreateButton={false}
             />
           </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
         </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>

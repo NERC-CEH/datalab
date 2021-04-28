@@ -4,19 +4,24 @@ import resourcesController from './resourcesController';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import stacksRepository from '../dataaccess/stacksRepository';
 import projectsRepository from '../dataaccess/projectsRepository';
+import clustersRepository from '../dataaccess/clustersRepository';
 
 jest.mock('../dataaccess/dataStorageRepository');
 jest.mock('../dataaccess/stacksRepository');
 jest.mock('../dataaccess/projectsRepository');
+jest.mock('../dataaccess/clustersRepository');
 
-const getAllActiveMock = jest.fn();
-dataStorageRepository.getAllActive = getAllActiveMock;
+const getAllStorageMock = jest.fn();
+dataStorageRepository.getAllActive = getAllStorageMock;
 
 const getAllStacksMock = jest.fn();
 stacksRepository.getAllStacks = getAllStacksMock;
 
-const getAllMock = jest.fn();
-projectsRepository.getAll = getAllMock;
+const getAllProjectsMock = jest.fn();
+projectsRepository.getAll = getAllProjectsMock;
+
+const getAllClustersMock = jest.fn();
+clustersRepository.getAll = getAllClustersMock;
 
 const createNext = () => {
   let error;
@@ -42,6 +47,10 @@ const stacks = [
   { category: PUBLISH, projectKey: 'project-99', name: 'site-99' },
   { name: 'no key' },
 ];
+const clusters = [
+  { projectKey: 'project-99', name: 'cluster-99' },
+  { name: 'no key' },
+];
 
 describe('userResourcesController', () => {
   it('getAllProjectsAndResources gets all project resources', async () => {
@@ -50,9 +59,10 @@ describe('userResourcesController', () => {
       method: 'GET',
     });
     const response = httpMocks.createResponse();
-    getAllMock.mockResolvedValue(projects);
-    getAllActiveMock.mockResolvedValue(storage);
+    getAllProjectsMock.mockResolvedValue(projects);
+    getAllStorageMock.mockResolvedValue(storage);
     getAllStacksMock.mockResolvedValue(stacks);
+    getAllClustersMock.mockResolvedValue(clusters);
 
     // Act
     await resourcesController.getAllProjectsAndResources(request, response, next.handler);
@@ -64,6 +74,7 @@ describe('userResourcesController', () => {
       projects,
       storage,
       stacks,
+      clusters,
     });
   });
 });

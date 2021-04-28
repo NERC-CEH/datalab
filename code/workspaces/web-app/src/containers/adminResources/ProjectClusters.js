@@ -7,7 +7,7 @@ import { DASK_CLUSTER_TYPE } from '../clusters/clusterTypeName';
 
 export default function ProjectClusters(props) {
   const { project, userPermissions } = props;
-  const showCreateButton = false;
+  const modifyData = false;
 
   return (
     <ResourceAccordion defaultExpanded>
@@ -15,7 +15,7 @@ export default function ProjectClusters(props) {
         <Typography variant="h6">Clusters</Typography>
       </ResourceAccordionSummary>
       <ResourceAccordionDetails>
-        <ProjectClustersContainer clusterType={DASK_CLUSTER_TYPE} userPermissions={userPermissions} projectKey={project.key} showCreateButton={showCreateButton} />
+        <ProjectClustersContainer clusterType={DASK_CLUSTER_TYPE} userPermissions={userPermissions} projectKey={project.key} modifyData={modifyData} />
       </ResourceAccordionDetails>
     </ResourceAccordion>
   );

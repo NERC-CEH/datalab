@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-04-22T11:10:47.232Z
+__export_date: 2021-04-27T09:00:38.362Z
 __export_source: insomnia.desktop.app:v2021.1.0
 resources:
   - _id: req_c249a02b974940d5a8bcd650a582c0eb
@@ -791,7 +791,7 @@ resources:
     _type: request
   - _id: req_0a1e7cfd12fe4780b0098d6c8bffc7db
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619513985818
     created: 1606147761105
     url: "{{ client_api_url  }}/api"
     name: All projects and resources
@@ -802,7 +802,8 @@ resources:
       text: '{"query":"query {\n  allProjectsAndResources {\n    projects
         {\n      id,\n      key,\n      name,\n      description,\n      collaborationLink\n    }\n    storage
         {\n      id,\n      projectKey,\n      name,\n      displayName,\n      description,\n      type,\n      volumeSize,\n      url,\n      internalEndpoint,\n      users,\n      status,\n    }\n    stacks
-        {\n      id,\n      projectKey,\n      name,\n      displayName,\n      description,\n      type,\n      category,\n      users,\n      url,\n      internalEndpoint,\n      volumeMount,\n      status,\n      visible\n    }\n  }\n}"}'
+        {\n      id,\n      projectKey,\n      name,\n      displayName,\n      description,\n      type,\n      category,\n      users,\n      url,\n      internalEndpoint,\n      volumeMount,\n      status,\n      visible\n    }\n    clusters
+        {\n      id\n      type\n      projectKey\n      name\n      displayName\n      volumeMount\n      condaPath\n      maxWorkers\n      maxWorkerMemoryGb\n      maxWorkerCpu\n      schedulerAddress\n    }\n  }\n}"}'
     parameters: []
     headers:
       - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
@@ -1037,7 +1038,7 @@ resources:
     _type: request
   - _id: req_947e99a84c20483a9d2b49ce448176f4
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1619513995501
     created: 1614863475203
     url: "{{ _.client_api_url }}/api"
     name: clusters
@@ -1046,7 +1047,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n  clusters(projectKey: \"project\")
-        {\n    id\n    type\n    projectKey\n    name\n    displayName\n    volumeMount\n    condaPath\n    maxWorkers\n    maxWorkerMemoryGb\n    maxWorkerCpu\n  }\n}"}'
+        {\n    id\n    type\n    projectKey\n    name\n    displayName\n    volumeMount\n    condaPath\n    maxWorkers\n    maxWorkerMemoryGb\n    maxWorkerCpu\n    schedulerAddress\n  }\n}"}'
     parameters: []
     headers:
       - name: Content-Type
