@@ -35,10 +35,6 @@ const StackResolve = {
 };
 
 const params = {
-  datalabInfo: {
-    domain: 'expectedDatalabDomain',
-    name: 'expectedDatalabName',
-  },
   projectKey: 'project',
   name: 'expectedName',
   type: 'jupyter',

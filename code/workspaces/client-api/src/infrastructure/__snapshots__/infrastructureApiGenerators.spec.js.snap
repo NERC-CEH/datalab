@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Infrastructure Api Generators create stack should handle api errors 1`] = `[Error: Unable to create stack Error: Request failed with status code 400]`;

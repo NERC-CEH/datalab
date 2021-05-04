@@ -18,12 +18,6 @@ type Query {
     # List of currently provisioned DataLabs Stacks owned by user for the requested category.
     stacksByCategory(params: StacksByCategoryRequest): [Stack]
 
-    # Details for a single Datalab.
-    datalab(name: String!): Datalab
-
-    # List of DataLabs.
-    datalabs: [Datalab]
-
     # List permissions of current user
     userPermissions: [String]
 
@@ -125,12 +119,6 @@ type Mutation {
 
     # Delete a cluster
     deleteCluster(cluster: ClusterDeletionRequest!): Cluster!
-}
-
-# DataLabs type for basic datalab information.
-type Datalab {
-    name: String
-    domain: String
 }
 
 # Type to describe the mutation for creating a new data store
