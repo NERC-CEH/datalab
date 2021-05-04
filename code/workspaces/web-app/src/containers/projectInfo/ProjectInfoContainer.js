@@ -73,7 +73,7 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
         <Typography className={classes.description} variant="body1">{description}</Typography>
         <CollaborationLink link={collaborationLink} />
         <div className={classes.userBlock}>
-          { users
+          { users && users.value
             && <div>
               <UserBlock name='admin' users={users.value.filter(user => user.role === 'admin')} classes={classes} />
               <UserBlock name='user' users={users.value.filter(user => user.role === 'user')} classes={classes} />

@@ -334,10 +334,6 @@ describe('Volume Controller', () => {
 
 function createRequestBody() {
   return {
-    datalabInfo: {
-      name: 'testlab',
-      domain: 'test-datalabs.nerc.ac.uk',
-    },
     name: 'volumeName',
     projectKey: 'project99',
     displayName: 'displayName',

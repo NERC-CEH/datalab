@@ -176,8 +176,6 @@ const withNameValidator = [
 
 const deleteStackValidator = [
   ...withNameValidator,
-  checkExistsWithMsg('datalabInfo.domain'),
-  checkExistsWithMsg('datalabInfo.name'),
   checkExistsWithMsg('type'),
 ];
 

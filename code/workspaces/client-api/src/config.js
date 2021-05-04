@@ -1,12 +1,6 @@
 import convict from 'convict';
 
 const config = convict({
-  datalabName: {
-    doc: 'The name of the datalab',
-    format: 'String',
-    default: 'testlab',
-    env: 'DATALAB_NAME',
-  },
   logLevel: {
     doc: 'The logging level',
     format: 'String',

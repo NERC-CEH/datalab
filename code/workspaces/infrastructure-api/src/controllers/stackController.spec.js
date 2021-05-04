@@ -103,18 +103,6 @@ describe('Stack Controller', () => {
         .then(() => expectValidationError('name', 'Name must be 4-16 characters long'));
     });
 
-    it('should validate the datalabInfo.domain field exists', () => {
-      const requestBody = omit(mutationRequestBody(), 'datalabInfo.domain');
-      return createValidatedRequest(requestBody, stackController.createStackValidator)
-        .then(() => expectValidationError('datalabInfo.domain', 'datalabInfo.domain must be specified'));
-    });
-
-    it('should validate the datalabInfo.name field exists', () => {
-      const requestBody = omit(mutationRequestBody(), 'datalabInfo.name');
-      return createValidatedRequest(requestBody, stackController.createStackValidator)
-        .then(() => expectValidationError('datalabInfo.name', 'datalabInfo.name must be specified'));
-    });
-
     it('should validate the type field exists', () => {
       const requestBody = omit(mutationRequestBody(), 'type');
       return createValidatedRequest(requestBody, stackController.createStackValidator)
@@ -469,10 +457,6 @@ describe('Stack Controller', () => {
 function mutationRequestBody() {
   return {
     projectKey: 'project',
-    datalabInfo: {
-      name: 'testlab',
-      domain: 'test-datalabs.nerc.ac.uk',
-    },
     name: 'notebookId',
     displayName: 'notebookDisplayName',
     type: 'jupyter',

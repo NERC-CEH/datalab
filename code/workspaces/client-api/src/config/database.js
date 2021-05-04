@@ -33,7 +33,7 @@ function createConnection() {
     pass: config.get('databasePassword'),
     auth: { authSource: 'admin' },
   };
-  mongoose.connect(`mongodb://${config.get('databaseHost')}/datalab`, options);
+  mongoose.connect(`mongodb://${config.get('databaseHost')}/users`, options);
   return mongoose.connection;
 }
 

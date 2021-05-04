@@ -1,9 +1,7 @@
 import { statusTypes, permissionTypes } from 'common';
-import config from '../config';
 import { version } from '../version.json';
 import projectPermissionWrapper from '../auth/permissionChecker';
 import stackService from '../dataaccess/stackService';
-import datalabRepository from '../dataaccess/datalabRepository';
 import permissionsService from '../dataaccess/userPermissionsService';
 import internalNameChecker from '../dataaccess/internalNameChecker';
 import usersService from '../dataaccess/usersService';
@@ -21,8 +19,6 @@ import w from './wrapper';
 const { elementPermissions: { STORAGE_EDIT } } = permissionTypes;
 const { READY } = statusTypes;
 
-const DATALAB_NAME = config.get('datalabName');
-
 const resolvers = {
   Query: {
     status: () => () => `GraphQL server is running version: ${version}`,
@@ -31,8 +27,6 @@ const resolvers = {
     stack: (obj, args, { token }) => w(stackService.getById(args.projectKey, args.id, { token })),
     stacks: (obj, args, { token }) => w(stackService.getAll(args.projectKey, { token })),
     stacksByCategory: (obj, { params }, { token }) => w(stackService.getAllByCategory(params.projectKey, params.category, { token })),
-    datalab: (obj, { name }, { user }) => w(datalabRepository.getByName(user, name)),
-    datalabs: () => w(datalabRepository.getAll()),
     userPermissions: (obj, params, { identity, token }) => w(permissionsService.getUserPermissions(identity, token)),
     allUsersAndRoles: (obj, args, { token }) => w(rolesService.getAllUsersAndRoles(token)),
     checkNameUniqueness: (obj, args, { token }) => w(internalNameChecker(args.projectKey, args.name, token)),
@@ -48,10 +42,10 @@ const resolvers = {
   },
 
   Mutation: {
-    createStack: (obj, { stack }, { user, token }) => w(stackApi.createStack({ user, token }, DATALAB_NAME, stack)),
-    updateStack: (obj, { stack }, { user, token }) => w(stackApi.updateStack({ user, token }, DATALAB_NAME, stack)),
-    deleteStack: (obj, { stack }, { user, token }) => w(stackApi.deleteStack({ user, token }, DATALAB_NAME, stack)),
-    restartStack: (obj, { stack }, { user, token }) => w(stackApi.restartStack({ user, token }, DATALAB_NAME, stack)),
+    createStack: (obj, { stack }, { user, token }) => w(stackApi.createStack({ user, token }, stack)),
+    updateStack: (obj, { stack }, { user, token }) => w(stackApi.updateStack({ user, token }, stack)),
+    deleteStack: (obj, { stack }, { user, token }) => w(stackApi.deleteStack({ user, token }, stack)),
+    restartStack: (obj, { stack }, { user, token }) => w(stackApi.restartStack({ user, token }, stack)),
     createDataStore: (obj, args, { token }) => w(storageService.createVolume({ projectKey: args.projectKey, ...args.dataStore }, token)),
     deleteDataStore: (obj, args, { token }) => w(storageService.deleteVolume({ projectKey: args.projectKey, ...args.dataStore }, token)),
     addUserToDataStore: (obj, args, { token }) => w(storageService.addUsers(args.projectKey, args.dataStore.name, args.dataStore.users, token)),
