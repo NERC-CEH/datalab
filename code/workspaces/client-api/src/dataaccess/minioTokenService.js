@@ -22,7 +22,7 @@ const minioLogin = storage => (accessKeys) => {
     return Promise.reject(new Error('access_key or secret_key not defined'));
   }
 
-  return axios.post(getMinioLoginUrl(storage), createLoginPayload(accessKeys))
+  return axios.post(getMinioLoginUrl(storage), createLoginPayload(accessKeys), generateOptions())
     .then(processLoginResponse);
 };
 
@@ -42,6 +42,14 @@ function createLoginPayload(accessKeys) {
       password: accessKeys.secret_key,
     },
     method: 'Web.Login',
+  };
+}
+
+function generateOptions() {
+  return {
+    headers: {
+      'User-Agent': 'Mozilla',
+    },
   };
 }
 

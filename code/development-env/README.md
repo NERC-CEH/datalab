@@ -238,9 +238,13 @@ There are values that can be used to configure the installation at the top of th
 It also assumes that the `datalab-k8s-manifests` repo is checked out parallel to this (`datalab`) repo.
 
 ```bash
-kubectl delete -f ./config/manifests/minikube-proxy.yml
-helm delete datalab -n devtest
+kubectl delete -f ./config/manifests/minikube-proxy.yml # remove if applied from above instructions
+./config/dnsmasq/configure-dnsmasq.sh datalabs.internal <ingress-nginx-controller external ip>
+minikube tunnel # run this in a different terminal
 ./scripts/helm-install-datalabs-locally.sh
+
+# if you want to re-install helm, do the following and wait for pods to terminate
+helm uninstall datalab -n devtest
 ```
 
 **Warning:** Before running this script ensure that your `kubectl` is configured to operate on the correct cluster.
