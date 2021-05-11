@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import minioTokenService from './minioTokenService';
 import secrets from './secrets/secrets';
+import * as common from './login/common';
 
 const mock = new MockAdapter(axios);
 
@@ -10,6 +11,9 @@ jest.mock('winston');
 
 const getStackSecretMock = jest.fn();
 secrets.getStackSecret = getStackSecretMock;
+
+jest.mock('./login/common');
+common.getCorrectAccessUrl = jest.fn().mockImplementation(notebook => notebook.internalEndpoint);
 
 beforeEach(() => {
   mock.reset();
@@ -31,18 +35,16 @@ const storage = {
 const loginUrl = `${storage.internalEndpoint}/webrpc`;
 
 describe('minioTokenService', () => {
-  it('should request login token from minio', () => {
+  it('should request login token from minio', async () => {
     getStackSecretMock.mockImplementationOnce(() => (Promise.resolve({
       access_key: 'accessKey',
       secret_key: 'secretKey',
     })));
-
     mock.onPost(loginUrl).reply(200, getSuccessfulLoginResponse());
 
-    return minioTokenService.requestMinioToken(storage)
-      .then((token) => {
-        expect(token).toEqual('returnedToken');
-      });
+    const token = await minioTokenService.requestMinioToken(storage);
+
+    expect(token).toEqual('returnedToken');
   });
 
   it('should return undefined and log error if keys are not returned', () => {

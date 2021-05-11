@@ -69,6 +69,9 @@ In this folder:
 # Use VirtualBox as the driver, as ingress will expect the VirtualBox IP addresses
 minikube config set driver virtualbox
 
+# Check for running minikubes - stop any which use the IP 192.168.99.100
+minikube profile list
+
 # Ensure default IP addresses are used
 rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*
 
@@ -80,6 +83,8 @@ minikube ip
 
 # Create devtest namespace
 kubectl apply -f ./config/manifests/minikube-namespace.yml
+
+# Set default namespace (replace 'minikube' with your minikube name)
 kubectl config set-context minikube --namespace=devtest
 
 # Create Gluster and NFS storage classes
@@ -230,6 +235,17 @@ This is not well suited for local development as you cannot change files within 
 However, it is useful when testing the Helm chart configuration.
 A script exists at `./scripts/helm-install-datalabs-locally.sh` which will create the necessary secrets within minikube for the Helm install to work (note that this builds off of the items that have already been installed into minikube such as the storage classes etc.).
 There are values that can be used to configure the installation at the top of the script, some of which will need to be set before first use.
+It also assumes that the `datalab-k8s-manifests` repo is checked out parallel to this (`datalab`) repo.
+
+```bash
+kubectl delete -f ./config/manifests/minikube-proxy.yml # remove if applied from above instructions
+./config/dnsmasq/configure-dnsmasq.sh datalabs.internal <ingress-nginx-controller external ip>
+minikube tunnel # run this in a different terminal
+./scripts/helm-install-datalabs-locally.sh
+
+# if you want to re-install helm, do the following and wait for pods to terminate
+helm uninstall datalab -n devtest
+```
 
 **Warning:** Before running this script ensure that your `kubectl` is configured to operate on the correct cluster.
 `kubectl` is used throughout the script to create new secrets etc.
