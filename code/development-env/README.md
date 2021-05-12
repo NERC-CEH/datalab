@@ -69,7 +69,8 @@ In this folder:
 # Use VirtualBox as the driver, as ingress will expect the VirtualBox IP addresses
 minikube config set driver virtualbox
 
-# Ensure default IP addresses are used
+# Ensure default IP addresses are used.
+# This is required even when re-starting minikube clusters which previously had the right IP.
 rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*
 
 # Create with enough disk space to allow pulling of notebook images, creating conda environments etc.

@@ -1,5 +1,4 @@
 import express from 'express';
-import chalk from 'chalk';
 import bodyParser from 'body-parser';
 import logger from 'winston';
 import { service } from 'service-chassis';
@@ -7,7 +6,6 @@ import axios from 'axios';
 import { merge } from 'lodash';
 import configureCorsHeaders from './corsConfig';
 import config from './config';
-import database from './config/database';
 import graphql from './config/graphql';
 import status from './status';
 import { authorise, verifyToken } from './auth/authMiddleware';
@@ -29,16 +27,7 @@ app.use('/api', authorise, verifyToken);
 graphql.configureGraphQL(app);
 
 configureAxiosForLocalDevelopment();
-
-const connection = database.createConnection();
-
-connection.on('error', error => logger.error(chalk.red(`Error connecting to the database ${error}`)))
-  .on('disconnected', error => logger.info(`Disconnected: ${error}`))
-  .once('open', listen);
-
-function listen() {
-  app.listen(port, () => logger.info(`App listening on port ${port}.`));
-}
+app.listen(port, () => logger.info(`App listening on port ${port}.`));
 
 // When running locally (and therefore not within the cluster), requests to internal services
 // don't have the required permissions. This function configures axios to add a cookie to

@@ -22,7 +22,6 @@
     "jwks-rsa": "1.2.0",
     "lodash": "4.17.19",
     "moment": "2.21.0",
-    "mongoose": "5.7.5",
     "moxios": "0.4.0",
     "querystring": "0.2.0",
     "service-chassis": "^0.1.0",
