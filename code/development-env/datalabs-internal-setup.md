@@ -39,7 +39,7 @@ To handle HTTPS requests to items running the cluster, we need to configure TLS 
 The first step of this is to create a TLS secret in our minikube cluster in the `devtest` namespace which will later be used in the ingress.
 
 ```bash
-kubectl delete secret tls-secret
+kubectl delete secret tls-secret -n devtest
 kubectl create secret tls tls-secret --key ./config/ca/datalabs.internal.key --cert ./config/ca/datalabs.internal.crt -n devtest
 ```
 
