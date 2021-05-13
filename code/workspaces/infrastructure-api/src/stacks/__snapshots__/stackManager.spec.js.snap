@@ -3,10 +3,6 @@
 exports[`Stack Controller createStack calls Stack.create with correct parameters 1`] = `
 Object {
   "another": "field",
-  "datalabInfo": Object {
-    "domain": "expectedDatalabDomain",
-    "name": "expectedDatalabName",
-  },
   "name": "expectedName",
   "projectKey": "project",
   "type": "jupyter",
@@ -21,10 +17,6 @@ Array [
     Object {
       "another": "field",
       "category": "ANALYSIS",
-      "datalabInfo": Object {
-        "domain": "expectedDatalabDomain",
-        "name": "expectedDatalabName",
-      },
       "internalEndpoint": "http://jupyter-expectedName.project",
       "name": "expectedName",
       "projectKey": "project",
@@ -45,10 +37,6 @@ Object {
 exports[`Stack Controller deleteStack calls Stack.delete with correct parameters 1`] = `
 Object {
   "another": "field",
-  "datalabInfo": Object {
-    "domain": "expectedDatalabDomain",
-    "name": "expectedDatalabName",
-  },
   "name": "expectedName",
   "projectKey": "project",
   "type": "jupyter",
@@ -62,10 +50,6 @@ Array [
     "username",
     Object {
       "another": "field",
-      "datalabInfo": Object {
-        "domain": "expectedDatalabDomain",
-        "name": "expectedDatalabName",
-      },
       "name": "expectedName",
       "projectKey": "project",
       "type": "jupyter",

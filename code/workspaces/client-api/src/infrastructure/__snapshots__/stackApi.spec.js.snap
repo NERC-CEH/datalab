@@ -14,7 +14,7 @@ exports[`Stack API should log action on successful restart request 2`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "restart request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\"}",
+    "message": "restart request payload: {\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\"}",
     "metadata": undefined,
   },
 ]
@@ -36,7 +36,7 @@ exports[`Stack API should log action on successful update request 2`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "update request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\",\\"isPublic\\":true}",
+    "message": "update request payload: {\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\",\\"isPublic\\":true}",
     "metadata": undefined,
   },
 ]
@@ -58,7 +58,7 @@ exports[`Stack API should log error detail on failed creation request 2`] = `
 Array [
   Object {
     "data": undefined,
-    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\",\\"isPublic\\":true}",
+    "message": "creation request payload: {\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\",\\"isPublic\\":true}",
     "metadata": undefined,
   },
 ]
@@ -74,39 +74,27 @@ Array [
 ]
 `;
 
-exports[`Stack API should log error detail on failed deletion request 1`] = `Array []`;
-
-exports[`Stack API should log error detail on failed deletion request 2`] = `Array []`;
-
-exports[`Stack API should log error detail on failed deletion request 3`] = `
+exports[`Stack API should log error detail on failed restart request 1`] = `
 Array [
   Object {
     "data": undefined,
-    "message": [Error: failedRequest],
+    "message": "Requesting stack restart request for expectedName",
     "metadata": undefined,
   },
 ]
 `;
 
-exports[`Stack API should log error detail on failed restart request 1`] = `Array []`;
-
-exports[`Stack API should log error detail on failed restart request 2`] = `Array []`;
+exports[`Stack API should log error detail on failed restart request 2`] = `
+Array [
+  Object {
+    "data": undefined,
+    "message": "restart request payload: {\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\"}",
+    "metadata": undefined,
+  },
+]
+`;
 
 exports[`Stack API should log error detail on failed restart request 3`] = `
-Array [
-  Object {
-    "data": undefined,
-    "message": [Error: failedRequest],
-    "metadata": undefined,
-  },
-]
-`;
-
-exports[`Stack API should log error detail on failed update request 1`] = `Array []`;
-
-exports[`Stack API should log error detail on failed update request 2`] = `Array []`;
-
-exports[`Stack API should log error detail on failed update request 3`] = `
 Array [
   Object {
     "data": undefined,
@@ -130,7 +118,7 @@ exports[`Stack API should log stack detail on successful creation request 2`] = 
 Array [
   Object {
     "data": undefined,
-    "message": "creation request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\",\\"isPublic\\":true}",
+    "message": "creation request payload: {\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\",\\"isPublic\\":true}",
     "metadata": undefined,
   },
 ]
@@ -152,7 +140,7 @@ exports[`Stack API should log stack detail on successful deletion request 2`] = 
 Array [
   Object {
     "data": undefined,
-    "message": "deletion request payload: {\\"datalabInfo\\":{\\"name\\":\\"testlab\\",\\"domain\\":\\"test-datalabs.nerc.ac.uk\\"},\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\"}",
+    "message": "deletion request payload: {\\"name\\":\\"expectedName\\",\\"type\\":\\"expectedType\\",\\"projectKey\\":\\"project\\"}",
     "metadata": undefined,
   },
 ]

@@ -72,7 +72,8 @@ minikube config set driver virtualbox
 # Check for running minikubes - stop any which use the IP 192.168.99.100
 minikube profile list
 
-# Ensure default IP addresses are used
+# Ensure default IP addresses are used.
+# This is required even when re-starting minikube clusters which previously had the right IP.
 rm ~/Library/VirtualBox/HostInterfaceNetworking-vboxnet0-Dhcpd.*
 
 # Create with enough disk space to allow pulling of notebook images, creating conda environments etc.
