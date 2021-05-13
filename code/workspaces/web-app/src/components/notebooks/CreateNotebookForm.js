@@ -6,6 +6,7 @@ import { formatAndParseMultiSelect, CreateFormControls, renderAdornedTextField, 
 import { getAsyncValidate, syncValidate } from './createNotebookFormValidator';
 import getUrlNameStartEndText from '../../core/urlHelper';
 import AssetMultiSelect from '../common/form/AssetMultiSelect';
+import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 
 export const FORM_NAME = 'createNotebook';
 const NAME_FIELD_NAME = 'name';
@@ -20,7 +21,8 @@ const commonProps = {
 const CreateNotebookForm = ({
   handleSubmit, cancel, submitting, dataStorageOptions, projectKey, typeOptions, versionOptions,
 }) => {
-  const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
+  const typeValue = useReduxFormValue(FORM_NAME, TYPE_FIELD_NAME);
+  const { startText, endText } = getUrlNameStartEndText(projectKey, window.location, typeValue);
 
   return (
     <form onSubmit={handleSubmit}>

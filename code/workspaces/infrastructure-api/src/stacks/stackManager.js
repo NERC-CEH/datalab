@@ -1,6 +1,7 @@
-import path from 'path';
+import { join } from 'path';
 import { imageCategory } from 'common/src/config/images';
 import { catalogueFileLocation, catalogueServer } from 'common/src/config/catalogue';
+import { stackTypes } from 'common';
 import logger from '../config/logger';
 import config from '../config/config';
 import Stacks from './Stacks';
@@ -9,6 +10,8 @@ import { status } from '../models/stackEnums';
 import nameGenerator from '../common/nameGenerators';
 import deploymentApi from '../kubernetes/deploymentApi';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
+
+const { isSingleHostName, basePath } = stackTypes;
 
 async function createStack(user, params) {
   const { projectKey, name, type } = params;
@@ -30,11 +33,20 @@ async function createStack(user, params) {
       ...params,
       category: imageCategory(type),
       status: status.REQUESTED,
-      url: `https://${projectKey}-${name}.${config.get('datalabDomain')}`,
+      url: url(projectKey, name, type),
       internalEndpoint: `http://${params.type}-${name}.${projectKey}`,
     },
   );
   return creationResponse;
+}
+
+function url(projectKey, name, type) {
+  const lab = config.get('datalabName');
+  const domain = config.get('datalabDomain');
+  const singleHostNameAndPath = join(`${lab}.${domain}`, basePath(type, projectKey, name));
+  return isSingleHostName(type)
+    ? `https://${singleHostNameAndPath}`
+    : `https://${projectKey}-${name}.${domain}`;
 }
 
 function restartStack(params) {
@@ -120,13 +132,13 @@ async function createAssetVolumeAndVolumeMountArrays(assetIds) {
       name: volumeName,
       nfs: {
         server: storageServer,
-        path: path.join(storageLocation, fileLocation),
+        path: join(storageLocation || '', fileLocation),
         readOnly: true,
       },
     });
     assetVolumeMounts.push({
       name: volumeName,
-      mountPath: path.join('/assets', fileLocation),
+      mountPath: join('/assets', fileLocation),
       readOnly: true,
     });
   });
@@ -144,4 +156,4 @@ function getContainerNonAssetVolumeMounts(container) {
   return volumeMounts.filter(volumeMount => !nameGenerator.isAssetVolume(volumeMount.name));
 }
 
-export default { createStack, restartStack, deleteStack, mountAssetsOnStack };
+export default { createStack, restartStack, deleteStack, mountAssetsOnStack, url };

@@ -30,7 +30,7 @@ Array [
       "projectKey": "project",
       "status": "requested",
       "type": "jupyter",
-      "url": "https://project-expectedName.datalabs.localhost",
+      "url": "https://testlab.datalabs.localhost/resource/project/expectedName",
     },
   ],
 ]

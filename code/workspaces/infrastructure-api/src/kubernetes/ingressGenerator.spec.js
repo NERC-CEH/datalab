@@ -1,3 +1,4 @@
+import { JUPYTER } from 'common/src/stackTypes';
 import ingressGenerator from './ingressGenerator';
 import config from '../config/config';
 
@@ -99,6 +100,20 @@ describe('Ingress generator', () => {
       serviceName: 'name-service',
       port: 80,
       proxyRequestBuffering: 'off',
+    };
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
+
+  it('should use datalab hostname and custom path for single hostname type', () => {
+    const options = {
+      name: 'name',
+      projectKey: 'project',
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      type: JUPYTER,
     };
     const template = ingressGenerator.createIngress(options);
 

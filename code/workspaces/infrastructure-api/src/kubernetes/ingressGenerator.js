@@ -1,10 +1,12 @@
+import { isSingleHostName, basePath } from 'common/src/stackTypes';
+import { join } from 'path';
 import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
 function createIngress({ name, projectKey, ingressName, serviceName, port,
-  connectPort, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering }) {
-  const host = createSniInfo(name, projectKey);
-  const paths = createPathInfo(serviceName, port, connectPort);
+  connectPort, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering, type }) {
+  const host = createSniInfo(name, projectKey, type);
+  const paths = createPathInfo(serviceName, port, connectPort, type, projectKey, name);
   const privateEndpoint = visible !== 'public';
   const authServiceUrlRoot = config.get('authorisationServiceForIngress') || config.get('authorisationService');
   const context = {
@@ -22,21 +24,26 @@ function createIngress({ name, projectKey, ingressName, serviceName, port,
   return generateManifest(context, IngressTemplates.DEFAULT_INGRESS);
 }
 
-function createSniInfo(name, projectKey) {
-  return `${projectKey}-${name}.${config.get('datalabDomain')}`;
+function createSniInfo(name, projectKey, type) {
+  const domain = config.get('datalabDomain');
+  const lab = config.get('datalabName');
+  return isSingleHostName(type)
+    ? `${lab}.${domain}`
+    : `${projectKey}-${name}.${domain}`;
 }
 
-function createPathInfo(serviceName, port, connectPort) {
+function createPathInfo(serviceName, port, connectPort, type, projectKey, name) {
   const paths = [];
+  const base = basePath(type, projectKey, name);
   paths.push({
-    path: '/',
+    path: base,
     serviceName,
     servicePort: port,
   });
 
   if (connectPort) {
     paths.push({
-      path: '/connect',
+      path: join(base, 'connect'),
       serviceName,
       servicePort: connectPort,
     });

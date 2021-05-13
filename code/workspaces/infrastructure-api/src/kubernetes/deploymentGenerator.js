@@ -1,8 +1,11 @@
 import { imageConfig, image, defaultImage } from 'common/src/config/images';
+import { stackTypes } from 'common';
 import { DeploymentTemplates, ServiceTemplates, generateManifest, ConfigMapTemplates, NetworkPolicyTemplates, AutoScalerTemplates } from './manifestGenerator';
 import nameGenerator from '../common/nameGenerators';
 import config from '../config/config';
 import logger from '../config/logger';
+
+const { basePath } = stackTypes;
 
 const containerInfo = imageConfig();
 
@@ -15,13 +18,14 @@ function getImage(type, version) {
   }
 }
 
-function createJupyterDeployment({ projectKey, deploymentName, notebookName, type, volumeMount, version }) {
+function createJupyterDeployment({ projectKey, deploymentName, name, type, volumeMount, version }) {
   const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
   const img = getImage(type, version);
   const context = {
     name: deploymentName,
     grantSudo: 'yes',
-    domain: `${projectKey}-${notebookName}.${config.get('datalabDomain')}`,
+    domain: `${projectKey}-${name}.${config.get('datalabDomain')}`,
+    basePath: basePath(type, projectKey, name),
     jupyter: {
       image: img.image,
     },

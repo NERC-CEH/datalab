@@ -46,9 +46,10 @@ spec:
           name: {{ name }}
           command: ["start.sh",
             "jupyter", "{{ startCmd }}",
-            "--NotebookApp.token='$(JUPYTER_TOKEN)'",
-            "--NotebookApp.allow_origin='{{ domain }}'",
-            "--NotebookApp.notebook_dir='/data/notebooks/{{ name }}'"]
+            "--NotebookApp.token=$(JUPYTER_TOKEN)",
+            "--NotebookApp.allow_origin={{ domain }}",
+            "--NotebookApp.notebook_dir=/data/notebooks/{{ name }}",
+            "--NotebookApp.base_url={{{ basePath }}}"]
           ports:
             - containerPort: 8888
               protocol: TCP
@@ -77,7 +78,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: /
+              path: {{{ basePath }}}
               port: 8888
             initialDelaySeconds: 5
             periodSeconds: 10
