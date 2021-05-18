@@ -3,6 +3,11 @@ import { createRStudioConfigMap, ingressPath, ingressConnectPath, createIngressR
 import ingressGenerator from '../kubernetes/ingressGenerator';
 import configMapApi from '../kubernetes/configMapApi';
 import ingressApi from '../kubernetes/ingressApi';
+import config from '../config/config';
+
+jest.mock('../config/config');
+const origConfig = jest.requireActual('../config/config');
+config.get = jest.fn().mockImplementation(s => origConfig.default.default(s));
 
 jest.mock('../kubernetes/configMapApi');
 configMapApi.createOrReplaceNamespacedConfigMap = jest.fn().mockReturnValue('configmap return');
@@ -67,16 +72,16 @@ kind: Ingress
 metadata:
   name: rstudio-name
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: http://10.0.2.2:9000/auth
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
     nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
     nginx.ingress.kubernetes.io/proxy-body-size: 50g
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   tls:
   - hosts:
-    - testlab.datalabs.internal
+    - testlab.datalabs.localhost
   rules:
-  - host: testlab.datalabs.internal
+  - host: testlab.datalabs.localhost
     http:
       paths:
       - path: /resource/projectKey/name(/|$)(.*)
@@ -97,15 +102,15 @@ kind: Ingress
 metadata:
   name: rstudio-name-connect
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: http://10.0.2.2:9000/auth
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
     nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
     nginx.ingress.kubernetes.io/proxy-body-size: 50g
 spec:
   tls:
   - hosts:
-    - testlab.datalabs.internal
+    - testlab.datalabs.localhost
   rules:
-  - host: testlab.datalabs.internal
+  - host: testlab.datalabs.localhost
     http:
       paths:
       - path: /resource/projectKey/name/connect(/|$)(.*)
@@ -126,16 +131,16 @@ kind: Ingress
 metadata:
   name: minio-name
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: http://10.0.2.2:9000/auth
+    nginx.ingress.kubernetes.io/auth-url: http://localhost:9000/auth
     nginx.ingress.kubernetes.io/auth-signin: https://testlab.test-datalabs.nerc.ac.uk
     nginx.ingress.kubernetes.io/proxy-body-size: 50g
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
   - hosts:
-    - projectKey-name.datalabs.internal
+    - projectKey-name.datalabs.localhost
   rules:
-  - host: projectKey-name.datalabs.internal
+  - host: projectKey-name.datalabs.localhost
     http:
       paths:
       - path: /
