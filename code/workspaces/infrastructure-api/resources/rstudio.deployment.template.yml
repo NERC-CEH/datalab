@@ -57,7 +57,7 @@ spec:
               value: RSTUDIO
           livenessProbe:
             httpGet:
-              path: /status
+              path: {{{ basePath }}}/status
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -86,7 +86,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: /
+              path: {{{ basePath }}}
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10

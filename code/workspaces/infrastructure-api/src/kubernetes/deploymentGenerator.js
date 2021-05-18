@@ -231,8 +231,8 @@ function createJupyterConfigMap(configMapName) {
   return generateManifest(context, ConfigMapTemplates.JUPYTER_CONFIGMAP);
 }
 
-function createRStudioConfigMap(configMapName) {
-  const context = { configMapName };
+function createRStudioConfigMap(configMapName, base) {
+  const context = { configMapName, basePath: base };
   return generateManifest(context, ConfigMapTemplates.RSTUDIO_CONFIGMAP);
 }
 

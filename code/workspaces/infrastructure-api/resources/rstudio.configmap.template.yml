@@ -5,4 +5,4 @@ metadata:
   name: {{ configMapName }}
 data:
   config: |
-    www-root-path=/
+    www-root-path={{{ basePath }}}

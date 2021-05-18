@@ -9,7 +9,7 @@ const PROJECT = 'project';
 const RSHINY = 'rshiny';
 const RSTUDIO = 'rstudio';
 const ZEPPELIN = 'zeppelin';
-const singleHostNameTypes = [JUPYTER, JUPYTERLAB];
+const singleHostNameTypes = [JUPYTER, JUPYTERLAB, RSTUDIO];
 
 // returns true if this stack type can be handled by a single host name
 const isSingleHostName = type => singleHostNameTypes.includes(type);

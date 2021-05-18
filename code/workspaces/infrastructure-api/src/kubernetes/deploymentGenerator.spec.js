@@ -100,4 +100,11 @@ describe('deploymentGenerator', () => {
     const manifest = await deploymentGenerator.createJupyterDeployment(params);
     expect(manifest).toMatchSnapshot();
   });
+
+  describe('createRStudioConfigMap', () => {
+    it('produces expected configmap', async () => {
+      const manifest = await deploymentGenerator.createRStudioConfigMap('configmap-name', '/base/path');
+      expect(manifest).toMatchSnapshot();
+    });
+  });
 });

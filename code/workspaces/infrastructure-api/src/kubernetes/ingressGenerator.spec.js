@@ -14,6 +14,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
+      path: '/',
     };
     const template = ingressGenerator.createIngress(options);
 
@@ -28,6 +29,8 @@ describe('Ingress generator', () => {
       serviceName: 'name-service',
       port: 80,
       connectPort: 8000,
+      path: '/',
+      connectPath: '/connect',
     };
     const template = ingressGenerator.createIngress(options);
 
@@ -42,6 +45,8 @@ describe('Ingress generator', () => {
       serviceName: 'name-service',
       port: 80,
       connectPort: 8000,
+      path: '/',
+      connectPath: '/connect',
       rewriteTarget: '/here',
     };
     const template = ingressGenerator.createIngress(options);
@@ -57,6 +62,8 @@ describe('Ingress generator', () => {
       serviceName: 'name-service',
       port: 80,
       connectPort: 8000,
+      path: '/',
+      connectPath: '/connect',
       proxyTimeout: '1800',
     };
     const template = ingressGenerator.createIngress(options);
@@ -71,6 +78,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
+      path: '/',
       visible: 'private',
     };
     const template = ingressGenerator.createIngress(options);
@@ -85,6 +93,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
+      path: '/',
       visible: 'public',
     };
     const template = ingressGenerator.createIngress(options);
@@ -99,6 +108,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
+      path: '/',
       proxyRequestBuffering: 'off',
     };
     const template = ingressGenerator.createIngress(options);
@@ -113,6 +123,7 @@ describe('Ingress generator', () => {
       ingressName: 'name-ingress',
       serviceName: 'name-service',
       port: 80,
+      path: '/resource/project/name',
       type: JUPYTER,
     };
     const template = ingressGenerator.createIngress(options);
