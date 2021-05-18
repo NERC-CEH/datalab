@@ -1,4 +1,5 @@
 import * as catalogueConfig from 'common/src/config/catalogue';
+import { JUPYTER } from 'common/src/stackTypes';
 import Stacks from './Stacks';
 import * as stackRepository from '../dataaccess/stacksRepository';
 import stackManager from './stackManager';
@@ -243,6 +244,19 @@ describe('Stack Controller', () => {
         expect(mock).toHaveBeenCalledTimes(1);
         expect(mock.mock.calls[0]).toMatchSnapshot();
       }
+    });
+  });
+
+  describe('url', () => {
+    const projectKey = 'project-key';
+    const name = 'name';
+
+    it('gives correct url when single hostname', () => {
+      expect(stackManager.url(projectKey, name, JUPYTER)).toEqual('https://testlab.datalabs.localhost/resource/project-key/name');
+    });
+
+    it('gives correct url when multiple hostname', () => {
+      expect(stackManager.url(projectKey, name, 'assumed-multiple-hostname')).toEqual('https://project-key-name.datalabs.localhost');
     });
   });
 });

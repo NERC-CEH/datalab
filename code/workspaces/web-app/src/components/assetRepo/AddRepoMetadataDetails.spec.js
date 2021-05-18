@@ -6,7 +6,7 @@ import * as assetRepoHooks from '../../hooks/assetRepoHooks';
 
 jest.mock('../../hooks/reduxFormHooks');
 jest.mock('../../hooks/assetRepoHooks');
-reduxFormHooks.useReduxFormValue = jest.fn().mockResolvedValue('value');
+reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('value');
 assetRepoHooks.useAssetRepo = jest.fn().mockReturnValue({ fetching: false, value: { createdAssetId: null } });
 
 describe('AddRepoMetadataDetails', () => {
