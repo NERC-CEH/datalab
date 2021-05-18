@@ -84,6 +84,19 @@ export const createJupyterConfigMap = params => async () => {
   return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
 };
 
+export const createRStudioConfigMap = params => async () => {
+  const { name, projectKey, type } = params;
+
+  const serviceName = nameGenerator.deploymentName(name, type);
+  const configMapName = nameGenerator.rStudioConfigMap(serviceName);
+  const manifest = await deploymentGenerator.createRStudioConfigMap(configMapName);
+
+  logger.info(`Creating configMap ${chalk.blue(configMapName)} with manifest:`);
+  logger.debug(manifest.toString());
+
+  return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
+};
+
 export const createIngressRule = (params, generator) => (service) => {
   const { name, projectKey, type } = params;
   const ingressName = nameGenerator.deploymentName(name, type);

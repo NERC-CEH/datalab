@@ -227,6 +227,11 @@ function createJupyterConfigMap(configMapName) {
   return generateManifest(context, ConfigMapTemplates.JUPYTER_CONFIGMAP);
 }
 
+function createRStudioConfigMap(configMapName) {
+  const context = { configMapName };
+  return generateManifest(context, ConfigMapTemplates.RSTUDIO_CONFIGMAP);
+}
+
 function createDatalabDaskSchedulerNetworkPolicy({ networkPolicyName, schedulerPodLabel, projectKey }) {
   const context = { name: networkPolicyName, schedulerPodLabel, projectKey };
   return generateManifest(context, NetworkPolicyTemplates.DATALAB_DASK_SCHEDULER_NETWORK_POLICY);
@@ -261,6 +266,7 @@ export default {
   createPySparkConfigMap,
   createDaskConfigMap,
   createJupyterConfigMap,
+  createRStudioConfigMap,
   createDatalabDaskSchedulerDeployment,
   createDatalabDaskWorkerDeployment,
   createDatalabDaskSchedulerService,

@@ -4,7 +4,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
 import ingressGenerator from '../kubernetes/ingressGenerator';
 import ingressApi from '../kubernetes/ingressApi';
-import { createDeployment, createService, createIngressRuleWithConnect } from './stackBuilders';
+import { createDeployment, createService, createIngressRuleWithConnect, createRStudioConfigMap } from './stackBuilders';
 import nameGenerators from '../common/nameGenerators';
 
 function createRStudioStack(params) {
@@ -13,6 +13,7 @@ function createRStudioStack(params) {
   const proxyTimeout = '1800';
 
   return secretManager.createStackCredentialSecret(name, type, projectKey, credentials)
+    .then(createRStudioConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(params, deploymentGenerator.createRStudioService))
     .then(createIngressRuleWithConnect({ ...params, proxyTimeout }, ingressGenerator.createIngress));

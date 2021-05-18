@@ -90,16 +90,27 @@ spec:
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10
-{{#volumeMount}}
           volumeMounts:
+{{#volumeMount}}
             - name: persistentfsvol
               mountPath: /data
             - name: homedir
               mountPath: /home
+{{/volumeMount}}
+            - name: rstudio-notebook-config
+              mountPath: /etc/rstudio/rserver.conf
+              subPath: rserver.conf
       volumes:
+{{#volumeMount}}
         - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
         - name: homedir
           emptyDir: {}
 {{/volumeMount}}
+        - name: rstudio-notebook-config
+          configMap:
+            name: {{ rstudioConfigMapName }}
+            items:
+            - key: config
+              path: rserver.conf
