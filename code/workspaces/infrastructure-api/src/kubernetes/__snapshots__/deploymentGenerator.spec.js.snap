@@ -274,9 +274,10 @@ spec:
           name: deployment-name
           command: [\\"start.sh\\",
             \\"jupyter\\", \\"lab\\",
-            \\"--NotebookApp.token='$(JUPYTER_TOKEN)'\\",
-            \\"--NotebookApp.allow_origin='project-key-notebook-name.datalabs.localhost'\\",
-            \\"--NotebookApp.notebook_dir='/data/notebooks/deployment-name'\\"]
+            \\"--NotebookApp.token=$(JUPYTER_TOKEN)\\",
+            \\"--NotebookApp.allow_origin=project-key-notebook-name.datalabs.localhost\\",
+            \\"--NotebookApp.notebook_dir=/data/notebooks/deployment-name\\",
+            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\"]
           ports:
             - containerPort: 8888
               protocol: TCP
@@ -305,7 +306,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: /
+              path: /resource/project-key/notebook-name
               port: 8888
             initialDelaySeconds: 5
             periodSeconds: 10

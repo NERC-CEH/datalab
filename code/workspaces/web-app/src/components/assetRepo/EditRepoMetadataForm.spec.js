@@ -4,7 +4,7 @@ import { PureEditRepoMetadataForm } from './EditRepoMetadataForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 
 jest.mock('../../hooks/reduxFormHooks');
-reduxFormHooks.useReduxFormValue = jest.fn().mockResolvedValue('value');
+reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('value');
 
 describe('EditRepoMetadataForm', () => {
   const shallowRender = () => shallow(

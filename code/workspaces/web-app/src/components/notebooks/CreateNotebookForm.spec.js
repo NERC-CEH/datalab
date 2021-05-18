@@ -1,6 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { JUPYTER } from 'common/src/stackTypes';
 import { PureCreateNotebookForm } from './CreateNotebookForm';
+import * as reduxFormHooks from '../../hooks/reduxFormHooks';
+
+jest.mock('../../hooks/reduxFormHooks');
+reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('value');
 
 describe('CreateNotebookForm', () => {
   function shallowRender(props) {
@@ -44,6 +49,18 @@ describe('CreateNotebookForm', () => {
   it('creates correct snapshot for create Notebook Form when there are not version options', () => {
     // Arrange
     const props = generateProps();
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('creates correct snapshot for create Notebook Form when the type supports single hostname', () => {
+    // Arrange
+    const props = generateProps();
+    reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue(JUPYTER);
 
     // Act
     const output = shallowRender(props);

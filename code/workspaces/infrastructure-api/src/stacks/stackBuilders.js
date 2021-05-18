@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import { stackTypes } from 'common';
 import logger from '../config/logger';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
@@ -9,6 +10,8 @@ import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import autoScalerApi from '../kubernetes/autoScalerApi';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import nameGenerator from '../common/nameGenerators';
+
+const { basePath } = stackTypes;
 
 export const createDeployment = (params, generator) => () => {
   const { name, projectKey, type } = params;
@@ -102,8 +105,9 @@ export const createIngressRule = (params, generator) => (service) => {
   const ingressName = nameGenerator.deploymentName(name, type);
   const serviceName = service.metadata.name;
   const { port } = service.spec.ports[0];
+  const base = basePath(type, projectKey, name);
 
-  return generator({ ...params, ingressName, serviceName, port })
+  return generator({ ...params, ingressName, serviceName, port, basePath: base })
     .then((manifest) => {
       logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with manifest:`);
       logger.debug(manifest.toString());

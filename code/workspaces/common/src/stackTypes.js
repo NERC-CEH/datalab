@@ -9,6 +9,15 @@ const PROJECT = 'project';
 const RSHINY = 'rshiny';
 const RSTUDIO = 'rstudio';
 const ZEPPELIN = 'zeppelin';
+const singleHostNameTypes = [JUPYTER, JUPYTERLAB];
+
+// returns true if this stack type can be handled by a single host name
+const isSingleHostName = type => singleHostNameTypes.includes(type);
+
+// base path for resources
+const basePath = (type, projectKey, name) => (isSingleHostName(type)
+  ? `/resource/${projectKey}/${name}`
+  : '/');
 
 export {
   DASK,
@@ -19,4 +28,6 @@ export {
   RSHINY,
   RSTUDIO,
   ZEPPELIN,
+  isSingleHostName,
+  basePath,
 };

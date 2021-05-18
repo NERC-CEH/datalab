@@ -93,7 +93,7 @@ describe('deploymentGenerator', () => {
     const params = {
       projectKey: 'project-key',
       deploymentName: 'deployment-name',
-      notebookName: 'notebook-name',
+      name: 'notebook-name',
       type: 'jupyterlab',
       volumeMount: 'volume-mount',
     };

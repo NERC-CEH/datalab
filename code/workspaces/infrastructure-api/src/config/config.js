@@ -7,6 +7,12 @@ const config = convict({
     default: 'info',
     env: 'LOG_LEVEL',
   },
+  datalabName: {
+    doc: 'The name of the datalab',
+    format: 'String',
+    default: 'testlab',
+    env: 'DATALAB_NAME',
+  },
   datalabDomain: {
     doc: 'The domain the datalabs instance is running on',
     format: 'String',
