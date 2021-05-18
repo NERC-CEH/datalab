@@ -34,11 +34,11 @@ describe('stackBuilders', () => {
     it('makes expected call to api', async () => {
       const val = await createRStudioConfigMap({ name, projectKey, type: stackTypes.RSTUDIO })();
       expect(val).toEqual('configmap return');
-      expect(configMapApi.createOrReplaceNamespacedConfigMap).toBeCalledWith('rstudio-name-rstudio-config', 'projectKey', `---
+      expect(configMapApi.createOrReplaceNamespacedConfigMap).toBeCalledWith('rstudio-name-rserver-config', 'projectKey', `---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: rstudio-name-rstudio-config
+  name: rstudio-name-rserver-config
 data:
   config: |
     www-root-path=/resource/projectKey/name

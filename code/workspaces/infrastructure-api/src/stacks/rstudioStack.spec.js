@@ -81,7 +81,7 @@ describe('rstudioStack', () => {
       expect(ingressApi.deleteIngress).toHaveBeenNthCalledWith(2, 'rstudio-nb-name', projectKey);
       expect(serviceApi.deleteService).toBeCalledWith('rstudio-nb-name', projectKey);
       expect(deploymentApi.deleteDeployment).toBeCalledWith('rstudio-nb-name', projectKey);
-      expect(configMapApi.deleteNamespacedConfigMap).toBeCalledWith('rstudio-nb-name-rstudio-config', projectKey);
+      expect(configMapApi.deleteNamespacedConfigMap).toBeCalledWith('rstudio-nb-name-rserver-config', projectKey);
       expect(secretManager.deleteStackCredentialSecret).toBeCalledWith(name, type, projectKey);
     });
   });

@@ -89,7 +89,7 @@ function createZeppelinDeployment({ deploymentName, volumeMount, type, version }
   return generateManifest(context, DeploymentTemplates.ZEPPELIN_DEPLOYMENT);
 }
 
-function createRStudioDeployment({ deploymentName, volumeMount, type, version }) {
+function createRStudioDeployment({ deploymentName, volumeMount, type, version, projectKey, name }) {
   const img = getImage(type, version);
   const context = {
     name: deploymentName,
@@ -97,6 +97,7 @@ function createRStudioDeployment({ deploymentName, volumeMount, type, version })
       image: img.image,
       connectImage: img.connectImage,
     },
+    rstudioConfigMapName: nameGenerator.rStudioConfigMap(deploymentName),
     type,
     volumeMount,
   };

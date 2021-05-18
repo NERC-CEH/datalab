@@ -57,7 +57,7 @@ spec:
               value: RSTUDIO
           livenessProbe:
             httpGet:
-              path: {{{ basePath }}}/status
+              path: /status
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -86,7 +86,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: {{{ basePath }}}
+              path: /
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -97,7 +97,7 @@ spec:
             - name: homedir
               mountPath: /home
 {{/volumeMount}}
-            - name: rstudio-notebook-config
+            - name: rstudio-rserver-config
               mountPath: /etc/rstudio/rserver.conf
               subPath: rserver.conf
       volumes:
@@ -108,7 +108,7 @@ spec:
         - name: homedir
           emptyDir: {}
 {{/volumeMount}}
-        - name: rstudio-notebook-config
+        - name: rstudio-rserver-config
           configMap:
             name: {{ rstudioConfigMapName }}
             items:
