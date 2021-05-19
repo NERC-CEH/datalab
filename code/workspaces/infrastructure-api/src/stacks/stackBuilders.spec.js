@@ -41,7 +41,9 @@ metadata:
   name: rstudio-name-rserver-config
 data:
   config: |
-    www-root-path=/resource/projectKey/name
+    rsession-which-r=/usr/local/bin/R
+    # www-root-path doesn't seem to work before R4.0.4, and doesn't seem to be necessary (yet)
+    # www-root-path=/resource/projectKey/name
 `);
     });
   });
