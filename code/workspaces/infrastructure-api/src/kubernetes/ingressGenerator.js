@@ -1,12 +1,11 @@
-import { isSingleHostName, basePath } from 'common/src/stackTypes';
-import { join } from 'path';
+import { isSingleHostName } from 'common/src/stackTypes';
 import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
 function createIngress({ name, projectKey, ingressName, serviceName, port,
-  connectPort, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering, type }) {
+  connectPort, path, connectPath, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering, type }) {
   const host = createSniInfo(name, projectKey, type);
-  const paths = createPathInfo(serviceName, port, connectPort, type, projectKey, name);
+  const paths = createPathInfo(serviceName, port, connectPort, path, connectPath);
   const privateEndpoint = visible !== 'public';
   const authServiceUrlRoot = config.get('authorisationServiceForIngress') || config.get('authorisationService');
   const context = {
@@ -32,18 +31,17 @@ function createSniInfo(name, projectKey, type) {
     : `${projectKey}-${name}.${domain}`;
 }
 
-function createPathInfo(serviceName, port, connectPort, type, projectKey, name) {
+function createPathInfo(serviceName, port, connectPort, path, connectPath) {
   const paths = [];
-  const base = basePath(type, projectKey, name);
   paths.push({
-    path: base,
+    path,
     serviceName,
     servicePort: port,
   });
 
   if (connectPort) {
     paths.push({
-      path: join(base, 'connect'),
+      path: connectPath,
       serviceName,
       servicePort: connectPort,
     });

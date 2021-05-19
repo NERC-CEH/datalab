@@ -152,6 +152,134 @@ spec:
 "
 `;
 
+exports[`deploymentGenerator createRStudioConfigMap produces expected configmap 1`] = `
+"---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-name
+data:
+  config: |
+    www-root-path=/base/path
+"
+`;
+
+exports[`deploymentGenerator createRStudioDeployment creates expected manifest 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: rstudio-name
+  name: rstudio-name
+spec:
+  selector:
+    matchLabels:
+      name: rstudio-name
+  template:
+    metadata:
+      labels:
+        name: rstudio-name
+        user-pod: rstudio
+    spec:
+      initContainers:
+        # This container will generate the RStudio notebooks directory. RStudio starts with /home/datalabs as its initial
+        # start-up/default directory and has not environmental variable to change it. This is fixed by mounting an empty
+        # directory as /home and created a symlink datalabs pointing to /data/notebooks/rstudio
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\"]
+          args: [\\"-c\\", \\"mkdir -p /data/notebooks/rstudio-name\\"]
+          volumeMounts:
+            - mountPath: /data
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated notebook directory to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\"]
+          args: [\\"-c\\", \\"chmod 777 /data/notebooks && chmod 777 /data/notebooks/rstudio-name\\"]
+          volumeMounts:
+            - mountPath: /data
+              name: persistentfsvol
+        # This container will create the /home/datalabs to /data/notebooks/rstudio symlink
+        - name: create-datalab-symlink
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\", \\"-c\\", \\"ln -s /data/notebooks/rstudio-name/ /home/datalab\\"]
+          volumeMounts:
+            - mountPath: /home
+              name: homedir
+      containers:
+        - name: rstudio-name-connect
+          image: nerc/zeppelin-connect:1.2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: CONNECT_TYPE
+              value: RSTUDIO
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+        - name: rstudio-name
+          image: nerc/rstudio:4.0.1
+          imagePullPolicy : IfNotPresent
+          ports:
+            - containerPort: 8787
+              protocol: TCP
+          env:
+            - name: USER
+              value: datalab
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rstudio-name
+                  key: password
+            - name: ROOT
+              value: 'TRUE'
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 8Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8787
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: persistentfsvol
+              mountPath: /data
+            - name: homedir
+              mountPath: /home
+            - name: rstudio-rserver-config
+              mountPath: /etc/rstudio/rserver.conf
+              subPath: rserver.conf
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: volumeMount-claim
+        - name: homedir
+          emptyDir: {}
+        - name: rstudio-rserver-config
+          configMap:
+            name: rstudio-name-rserver-config
+            items:
+            - key: config
+              path: rserver.conf
+"
+`;
+
 exports[`deploymentGenerator generates createAutoScaler manifest 1`] = `
 "apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler

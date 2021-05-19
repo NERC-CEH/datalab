@@ -82,6 +82,7 @@
 			"numericality",
 			"oidc",
 			"placeholder",
+			"rserver",
 			"rshiny",
 			"rstudio",
 			"screenshot",

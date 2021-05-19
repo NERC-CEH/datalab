@@ -22,6 +22,7 @@ const computeSubmissionClusterRole = () => 'compute-submission-role';
 const pySparkConfigMap = deploymentName => `${deploymentName}-pyspark-config`;
 const daskConfigMap = deploymentName => `${deploymentName}-dask-config`;
 const jupyterConfigMap = deploymentName => `${deploymentName}-jupyter-config`;
+const rStudioConfigMap = deploymentName => `${deploymentName}-rserver-config`;
 const sparkDriverHeadlessService = deploymentServiceName => `${deploymentServiceName}-spark-driver-headless-service`;
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
@@ -41,6 +42,7 @@ export default {
   pySparkConfigMap,
   daskConfigMap,
   jupyterConfigMap,
+  rStudioConfigMap,
   sparkDriverHeadlessService,
   sparkJob,
   stackCredentialSecret,

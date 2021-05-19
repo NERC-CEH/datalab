@@ -1,3 +1,4 @@
+import { stackTypes } from 'common';
 import deploymentGenerator from './deploymentGenerator';
 import config from '../config/config';
 
@@ -99,5 +100,25 @@ describe('deploymentGenerator', () => {
     };
     const manifest = await deploymentGenerator.createJupyterDeployment(params);
     expect(manifest).toMatchSnapshot();
+  });
+
+  describe('createRStudioConfigMap', () => {
+    it('produces expected configmap', async () => {
+      const manifest = await deploymentGenerator.createRStudioConfigMap('configmap-name', '/base/path');
+      expect(manifest).toMatchSnapshot();
+    });
+  });
+
+  describe('createRStudioDeployment', () => {
+    it('creates expected manifest', async () => {
+      const deploymentName = 'rstudio-name';
+      const volumeMount = 'volumeMount';
+      const type = stackTypes.RSTUDIO;
+      const version = '4.0.1';
+      const projectKey = 'projectKey';
+      const name = 'name';
+      const manifest = await deploymentGenerator.createRStudioDeployment({ deploymentName, volumeMount, type, version, projectKey, name });
+      expect(manifest).toMatchSnapshot();
+    });
   });
 });

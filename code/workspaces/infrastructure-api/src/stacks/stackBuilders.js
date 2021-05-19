@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { stackTypes } from 'common';
+import { join } from 'path';
 import logger from '../config/logger';
 import deploymentApi from '../kubernetes/deploymentApi';
 import serviceApi from '../kubernetes/serviceApi';
@@ -87,33 +88,80 @@ export const createJupyterConfigMap = params => async () => {
   return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
 };
 
-export const createIngressRule = (params, generator) => (service) => {
+export const createRStudioConfigMap = params => async () => {
   const { name, projectKey, type } = params;
+  const base = basePath(type, projectKey, name);
+
+  const serviceName = nameGenerator.deploymentName(name, type);
+  const configMapName = nameGenerator.rStudioConfigMap(serviceName);
+  const manifest = await deploymentGenerator.createRStudioConfigMap(configMapName, base);
+
+  logger.info(`Creating configMap ${chalk.blue(configMapName)} with manifest:`);
+  logger.debug(manifest.toString());
+
+  return configMapApi.createOrReplaceNamespacedConfigMap(configMapName, projectKey, manifest);
+};
+
+export const ingressPath = (type, projectKey, name, pathPattern) => {
+  const base = basePath(type, projectKey, name);
+  return pathPattern ? `${base}${pathPattern}` : base;
+};
+
+export const ingressConnectPath = (type, projectKey, name, pathPattern) => {
+  const base = basePath(type, projectKey, name);
+  const connectBase = join(base, 'connect');
+  return pathPattern ? `${connectBase}${pathPattern}` : connectBase;
+};
+
+export const createIngressRule = (params, generator) => (service) => {
+  const { name, projectKey, type, pathPattern = null } = params;
   const ingressName = nameGenerator.deploymentName(name, type);
   const serviceName = service.metadata.name;
   const { port } = service.spec.ports[0];
-  const base = basePath(type, projectKey, name);
+  const path = ingressPath(type, projectKey, name, pathPattern);
 
-  return generator({ ...params, ingressName, serviceName, port, basePath: base })
+  return generator({ ...params, ingressName, serviceName, port, path })
     .then((manifest) => {
       logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with manifest:`);
       logger.debug(manifest.toString());
-      return ingressApi.createOrUpdateIngress(ingressName, projectKey, manifest);
+      ingressApi.createOrUpdateIngress(ingressName, projectKey, manifest);
+      return service; // so can be used in additional ingresses
+    });
+};
+
+// use if the connect rule needs to be in a separate ingress,
+// e.g. because one ingress uses rewriteTarget
+export const createConnectIngressRule = (params, generator) => (service) => {
+  const { name, projectKey, type, pathPattern = null } = params;
+  const ingressName = `${nameGenerator.deploymentName(name, type)}-connect`;
+  const serviceName = service.metadata.name;
+  const connectPort = service.spec.ports[1].port;
+  const connectPath = ingressConnectPath(type, projectKey, name, pathPattern);
+
+  return generator({ ...params, ingressName, serviceName, port: connectPort, path: connectPath })
+    .then((manifest) => {
+      logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with manifest:`);
+      logger.debug(manifest.toString());
+      ingressApi.createOrUpdateIngress(ingressName, projectKey, manifest);
+      return service; // so can be used in additional ingresses
     });
 };
 
 export const createIngressRuleWithConnect = (params, generator) => (service) => {
-  const { name, projectKey, type } = params;
+  const { name, projectKey, type, pathPattern = null } = params;
   const ingressName = nameGenerator.deploymentName(name, type);
   const serviceName = service.metadata.name;
   const { port } = service.spec.ports[0];
   const connectPort = service.spec.ports[1].port;
+  const path = ingressPath(type, projectKey, name, pathPattern);
+  const connectPath = ingressConnectPath(type, projectKey, name, pathPattern);
 
-  return generator({ ...params, ingressName, serviceName, port, connectPort })
+  return generator({ ...params, ingressName, serviceName, port, connectPort, path, connectPath })
     .then((manifest) => {
       logger.info(`Creating ingress rule ${chalk.blue(ingressName)} with connect port from manifest:`);
       logger.debug(manifest.toString());
-      return ingressApi.createOrUpdateIngress(ingressName, projectKey, manifest);
+      ingressApi.createOrUpdateIngress(ingressName, projectKey, manifest);
+      return service; // so can be used in additional ingresses
     });
 };
 
