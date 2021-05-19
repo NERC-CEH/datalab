@@ -86,7 +86,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: /
+              path: /images/favicon.ico
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10
