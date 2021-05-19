@@ -60,7 +60,13 @@ describe('rstudioStack', () => {
       expect(stackBuilders.createRStudioConfigMap).toBeCalledWith(params);
       expect(stackBuilders.createDeployment).toBeCalledWith(params, deploymentGenerator.createRStudioDeployment);
       expect(stackBuilders.createService).toBeCalledWith(params, deploymentGenerator.createRStudioService);
-      expect(stackBuilders.createIngressRule).toBeCalledWith({ ...params, proxyTimeout, rewriteTarget, pathPattern, proxyHeadersConfigMap: 'rstudio-nb-name-proxy-headers-config' }, ingressGenerator.createIngress);
+      expect(stackBuilders.createIngressRule).toBeCalledWith({
+        ...params,
+        proxyTimeout,
+        rewriteTarget,
+        pathPattern,
+        proxyHeadersConfigMap: 'rstudio-nb-name-proxy-headers-config',
+      }, ingressGenerator.createIngress);
       expect(stackBuilders.createConnectIngressRule).toBeCalledWith({ ...params, proxyTimeout, pathPattern }, ingressGenerator.createIngress);
     });
   });
