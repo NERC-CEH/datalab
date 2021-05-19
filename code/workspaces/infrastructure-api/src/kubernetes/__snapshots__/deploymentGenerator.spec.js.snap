@@ -159,8 +159,7 @@ kind: ConfigMap
 metadata:
   name: configmap-name
 data:
-  config: |
-    www-root-path=/base/path
+  X-RStudio-Root-Path /base/path
 "
 `;
 
@@ -253,7 +252,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: /images/favicon.ico
+              path: /
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -262,21 +261,12 @@ spec:
               mountPath: /data
             - name: homedir
               mountPath: /home
-            - name: rstudio-rserver-config
-              mountPath: /etc/rstudio/rserver.conf
-              subPath: rserver.conf
       volumes:
         - name: persistentfsvol
           persistentVolumeClaim:
             claimName: volumeMount-claim
         - name: homedir
           emptyDir: {}
-        - name: rstudio-rserver-config
-          configMap:
-            name: rstudio-name-rserver-config
-            items:
-            - key: config
-              path: rserver.conf
 "
 `;
 

@@ -86,7 +86,7 @@ spec:
               memory: 8Gi
           livenessProbe:
             httpGet:
-              path: /images/favicon.ico
+              path: /
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -97,9 +97,6 @@ spec:
             - name: homedir
               mountPath: /home
 {{/volumeMount}}
-            - name: rstudio-rserver-config
-              mountPath: /etc/rstudio/rserver.conf
-              subPath: rserver.conf
       volumes:
 {{#volumeMount}}
         - name: persistentfsvol
@@ -108,9 +105,3 @@ spec:
         - name: homedir
           emptyDir: {}
 {{/volumeMount}}
-        - name: rstudio-rserver-config
-          configMap:
-            name: {{ rstudioConfigMapName }}
-            items:
-            - key: config
-              path: rserver.conf

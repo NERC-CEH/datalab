@@ -60,7 +60,7 @@ describe('rstudioStack', () => {
       expect(stackBuilders.createRStudioConfigMap).toBeCalledWith(params);
       expect(stackBuilders.createDeployment).toBeCalledWith(params, deploymentGenerator.createRStudioDeployment);
       expect(stackBuilders.createService).toBeCalledWith(params, deploymentGenerator.createRStudioService);
-      expect(stackBuilders.createIngressRule).toBeCalledWith({ ...params, proxyTimeout, rewriteTarget, pathPattern }, ingressGenerator.createIngress);
+      expect(stackBuilders.createIngressRule).toBeCalledWith({ ...params, proxyTimeout, rewriteTarget, pathPattern, proxyHeadersConfigMap: 'rstudio-nb-name-proxy-headers-config' }, ingressGenerator.createIngress);
       expect(stackBuilders.createConnectIngressRule).toBeCalledWith({ ...params, proxyTimeout, pathPattern }, ingressGenerator.createIngress);
     });
   });
@@ -81,7 +81,7 @@ describe('rstudioStack', () => {
       expect(ingressApi.deleteIngress).toHaveBeenNthCalledWith(2, 'rstudio-nb-name', projectKey);
       expect(serviceApi.deleteService).toBeCalledWith('rstudio-nb-name', projectKey);
       expect(deploymentApi.deleteDeployment).toBeCalledWith('rstudio-nb-name', projectKey);
-      expect(configMapApi.deleteNamespacedConfigMap).toBeCalledWith('rstudio-nb-name-rserver-config', projectKey);
+      expect(configMapApi.deleteNamespacedConfigMap).toBeCalledWith('rstudio-nb-name-proxy-headers-config', projectKey);
       expect(secretManager.deleteStackCredentialSecret).toBeCalledWith(name, type, projectKey);
     });
   });

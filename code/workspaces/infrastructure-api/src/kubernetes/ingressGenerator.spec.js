@@ -116,6 +116,21 @@ describe('Ingress generator', () => {
     return expect(template).resolves.toMatchSnapshot();
   });
 
+  it('should add proxy-set-headers option if supplied', () => {
+    const options = {
+      name: 'name',
+      projectKey: 'project',
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      path: '/',
+      proxyHeadersConfigMap: 'proxy-headers-config-map',
+    };
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
+
   it('should use datalab hostname and custom path for single hostname type', () => {
     const options = {
       name: 'name',
