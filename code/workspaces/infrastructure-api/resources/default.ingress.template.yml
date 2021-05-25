@@ -21,6 +21,9 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "{{ &proxyTimeout }}"
     nginx.ingress.kubernetes.io/proxy-socket-keepalive: "on"
 {{/proxyTimeout}}
+{{#proxyHeadersConfigMap}}
+    nginx.ingress.kubernetes.io/proxy-set-headers: "{{ &proxyHeadersConfigMap }}"
+{{/proxyHeadersConfigMap}}
 spec:
   tls:
   - hosts:

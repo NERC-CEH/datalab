@@ -97,7 +97,6 @@ function createRStudioDeployment({ deploymentName, volumeMount, type, version })
       image: img.image,
       connectImage: img.connectImage,
     },
-    rstudioConfigMapName: nameGenerator.rStudioConfigMap(deploymentName),
     type,
     volumeMount,
   };

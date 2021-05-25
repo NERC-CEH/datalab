@@ -3,7 +3,7 @@ import config from '../config/config';
 import { IngressTemplates, generateManifest } from './manifestGenerator';
 
 function createIngress({ name, projectKey, ingressName, serviceName, port,
-  connectPort, path, connectPath, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering, type }) {
+  connectPort, path, connectPath, rewriteTarget, proxyTimeout, visible, proxyRequestBuffering, type, proxyHeadersConfigMap }) {
   const host = createSniInfo(name, projectKey, type);
   const paths = createPathInfo(serviceName, port, connectPort, path, connectPath);
   const privateEndpoint = visible !== 'public';
@@ -18,6 +18,7 @@ function createIngress({ name, projectKey, ingressName, serviceName, port,
     proxyTimeout,
     service: { host, paths },
     privateEndpoint,
+    proxyHeadersConfigMap,
   };
 
   return generateManifest(context, IngressTemplates.DEFAULT_INGRESS);

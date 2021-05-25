@@ -14,12 +14,14 @@ function createRStudioStack(params) {
   const proxyTimeout = '1800';
   const rewriteTarget = '/$2';
   const pathPattern = '(/|$)(.*)';
+  const deploymentName = nameGenerators.deploymentName(name, type);
+  const proxyHeadersConfigMap = nameGenerators.rStudioConfigMap(deploymentName);
 
   return secretManager.createStackCredentialSecret(name, type, projectKey, credentials)
     .then(createRStudioConfigMap(params))
     .then(createDeployment(params, deploymentGenerator.createRStudioDeployment))
     .then(createService(params, deploymentGenerator.createRStudioService))
-    .then(createIngressRule({ ...params, proxyTimeout, rewriteTarget, pathPattern }, ingressGenerator.createIngress))
+    .then(createIngressRule({ ...params, proxyTimeout, rewriteTarget, pathPattern, proxyHeadersConfigMap }, ingressGenerator.createIngress))
     // Note - the pathPattern is required, even though there's no rewriteTarget
     // in order to ensure the connect path is long enough to be matched before the main service
     .then(createConnectIngressRule({ ...params, proxyTimeout, pathPattern }, ingressGenerator.createIngress));
