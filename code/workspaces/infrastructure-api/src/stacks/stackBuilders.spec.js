@@ -40,7 +40,7 @@ kind: ConfigMap
 metadata:
   name: rstudio-name-proxy-headers-config
 data:
-  X-RStudio-Root-Path /resource/projectKey/name
+  X-RStudio-Root-Path: /resource/projectKey/name
 `);
     });
   });

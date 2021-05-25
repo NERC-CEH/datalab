@@ -159,7 +159,7 @@ kind: ConfigMap
 metadata:
   name: configmap-name
 data:
-  X-RStudio-Root-Path /base/path
+  X-RStudio-Root-Path: /base/path
 "
 `;
 

@@ -4,4 +4,4 @@ kind: ConfigMap
 metadata:
   name: {{ configMapName }}
 data:
-  X-RStudio-Root-Path {{{ basePath }}}
+  X-RStudio-Root-Path: {{{ basePath }}}
