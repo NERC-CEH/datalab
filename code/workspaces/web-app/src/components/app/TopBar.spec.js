@@ -41,7 +41,7 @@ describe('TopBar', () => {
 
   it('correctly renders correct snapshot if catalogue exists', () => {
     useCurrentUserPermissions.mockReturnValueOnce({ value: [] });
-    getCatalogue.mockReturnValueOnce({ available: true, topBarLink: true, url: 'https://catalogue-url.com/' });
+    getCatalogue.mockReturnValueOnce({ available: true, url: 'https://catalogue-url.com/' });
     expect(
       shallow(<TopBar identity={{ expected: 'identity', picture: 'expectedUrl' }} />),
     ).toMatchSnapshot();
