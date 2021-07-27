@@ -58,6 +58,7 @@ const TopBar = ({ classes, identity }) => {
           }
           <TopBarButton to="/projects" label="Projects"/>
           {catalogue.available
+          && catalogue.url
           && <TopBarButton label="Catalogue" onClick={() => window.open(catalogue.url)} />
           }
           {datalabLinks.map(({ displayName, href }) => <TopBarButton
