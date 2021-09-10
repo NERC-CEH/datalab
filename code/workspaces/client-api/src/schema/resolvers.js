@@ -15,6 +15,7 @@ import rolesService from '../dataaccess/rolesService';
 import centralAssetRepoService from '../dataaccess/centralAssetRepoService';
 import clustersService from '../dataaccess/clustersService';
 import w from './wrapper';
+import { replaceFields } from '../util/converters';
 
 const { elementPermissions: { STORAGE_EDIT } } = permissionTypes;
 const { READY } = statusTypes;
@@ -81,7 +82,7 @@ const resolvers = {
     },
     accessKey: (obj, args, { token }) => minioTokenService.requestMinioToken(obj, token),
     stacksMountingStore: ({ name, projectKey }, args, { token }) => (projectKey
-      ? stackService.getAllByVolumeMount(projectKey, name, { token }) : []),
+      ? replaceFields(stackService.getAllByVolumeMount(projectKey, name, { token }), token) : []),
     status: () => READY,
   },
 
