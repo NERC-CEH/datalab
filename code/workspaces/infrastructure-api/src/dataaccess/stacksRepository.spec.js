@@ -41,6 +41,15 @@ describe('stacksRepository', () => {
   }));
 
   it('getAllByVolumeMount returns expected snapshot', () => stacksRepository.getAllByVolumeMount(project, user, 'expectedVolume').then((stacks) => {
+    expect(mockDatabase().isLean()).toBeFalsy();
+    expect(mockDatabase().query()).toEqual({ volumeMount: 'expectedVolume' });
+    expect(mockDatabase().project()).toBe('expectedProject');
+    expect(mockDatabase().user()).toBe(undefined); // All users
+    expect(stacks).toMatchSnapshot();
+  }));
+
+  it('getAllByVolumeMountAnonymised returns expected snapshot', () => stacksRepository.getAllByVolumeMountAnonymised(project, user, 'expectedVolume').then((stacks) => {
+    expect(mockDatabase().isLean()).toBeTruthy();
     expect(mockDatabase().query()).toEqual({ volumeMount: 'expectedVolume' });
     expect(mockDatabase().project()).toBe('expectedProject');
     expect(mockDatabase().user()).toBe(undefined); // All users
@@ -110,5 +119,64 @@ describe('stacksRepository', () => {
     expect(mockDatabase().project()).toBe('expectedProject');
     expect(mockDatabase().user()).toBe('username');
     expect(mockDatabase().entity()).toEqual(updatedValues);
+  });
+});
+
+describe('anonymiseStack', () => {
+  const userId = 'userId';
+
+  it('returns the original stack if it is not private', () => {
+    const stack = {
+      name: 'stack',
+      displayName: 'Public name',
+      description: 'Public description',
+      shared: 'public',
+      visible: 'public',
+      users: ['otherUser'],
+      url: 'url.com',
+    };
+
+    const response = stacksRepository.anonymiseStack(userId)(stack);
+    expect(response).toEqual(stack);
+  });
+
+  it('returns the original stack if the current user is the owner', () => {
+    const stack = {
+      name: 'stack',
+      displayName: 'Public name',
+      description: 'Public description',
+      shared: 'private',
+      visible: 'private',
+      users: [userId],
+      url: 'url.com',
+    };
+
+    const response = stacksRepository.anonymiseStack(userId)(stack);
+    expect(response).toEqual(stack);
+  });
+
+  it('returns an anonymised stack if the current user is not the owner', () => {
+    const stack = {
+      name: 'stack',
+      displayName: 'Secret name',
+      description: 'Secret description',
+      shared: 'private',
+      visible: 'private',
+      users: ['otherUser'],
+      url: 'url.com',
+    };
+
+    const expected = {
+      name: 'private',
+      displayName: 'Private',
+      description: 'Private',
+      shared: 'private',
+      visible: 'private',
+      users: ['otherUser'],
+      url: null,
+    };
+
+    const response = stacksRepository.anonymiseStack(userId)(stack);
+    expect(response).toEqual(expected);
   });
 });
