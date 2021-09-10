@@ -88,6 +88,27 @@ describe('DataStorageContainer', () => {
     const createDataStoreMock = jest.fn();
     const resetFormMock = jest.fn();
 
+    const stacksMountingStore = [
+      {
+        id: 1,
+        displayName: 'Name',
+        type: 'notebook',
+        users: ['user1', 'user2'],
+      },
+      {
+        id: 2,
+        displayName: 'Other Name',
+        type: 'notebook',
+        users: ['user1'],
+      },
+      {
+        id: 3,
+        displayName: 'Private',
+        type: 'notebook',
+        users: ['user2'],
+      },
+    ];
+
     const generateProps = () => ({
       dataStorage,
       userPermissions: ['expectedPermission'],
@@ -163,7 +184,8 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore calls openModalDialog with correct action for a mounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [1, 2, 3] };
+
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore };
 
       // Act/Assert
       const output = shallowRenderPure(props);
@@ -195,7 +217,7 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore generates correct dialog for mounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [1, 2, 3] };
+      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore };
 
       // Act
       const output = shallowRenderPure(props);
