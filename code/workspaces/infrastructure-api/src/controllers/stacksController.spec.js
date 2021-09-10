@@ -10,12 +10,14 @@ const getAllByUserMock = jest.fn();
 const getAllByProjectMock = jest.fn().mockReturnValue(Promise.resolve([]));
 const getAllByCategoryMock = jest.fn().mockReturnValue(Promise.resolve([]));
 const getAllByVolumeMountMock = jest.fn().mockReturnValue(Promise.resolve([]));
+const getAllByVolumeMountAnonymisedMock = jest.fn().mockReturnValue(Promise.resolve([]));
 
 stackRepository.default = {
   getAllByUser: getAllByUserMock,
   getAllByProject: getAllByProjectMock,
   getAllByCategory: getAllByCategoryMock,
   getAllByVolumeMount: getAllByVolumeMountMock,
+  getAllByVolumeMountAnonymised: getAllByVolumeMountAnonymisedMock,
 };
 
 let request;
@@ -140,7 +142,7 @@ describe('Stacks controller', () => {
     });
 
     it('should return 500 for failed request', () => {
-      getAllByVolumeMountMock.mockReturnValue(Promise.reject({ message: 'error' }));
+      getAllByVolumeMountAnonymisedMock.mockReturnValue(Promise.reject({ message: 'error' }));
 
       const response = httpMocks.createResponse();
 

@@ -48,7 +48,7 @@ function listByMountExec(request, response) {
   const { user } = request;
   const params = matchedData(request);
 
-  return stackRepository.getAllByVolumeMount(params.projectKey, user, params.mount)
+  return stackRepository.getAllByVolumeMountAnonymised(params.projectKey, user, params.mount)
     .then(stack => response.send(stack))
     .catch(controllerHelper.handleError(response, 'matching mount for', TYPE, undefined));
 }
