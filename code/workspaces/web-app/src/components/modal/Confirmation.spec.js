@@ -31,6 +31,20 @@ describe('Confirmation', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('creates correct snapshot for confirmation dialog with array in body', () => {
+    // Arrange
+    const props = {
+      ...generateProps(),
+      body: ['Body', 'Next line', 'Final line'],
+    };
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
   it('wires up cancel function correctly', () => {
     // Arrange
     const props = generateProps();
