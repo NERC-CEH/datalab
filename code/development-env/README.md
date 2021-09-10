@@ -24,6 +24,7 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 * [kube-ps1](https://github.com/jonmosco/kube-ps1)
 * [helm](https://helm.sh/docs/intro/install/#from-homebrew-macos)
 * [Robo 3T](https://robomongo.org/download)
+* [Compass](https://www.mongodb.com/try/download/compass) (Alternative to Robo 3T)
 * [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Configurations
