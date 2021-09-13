@@ -24,6 +24,7 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 * [kube-ps1](https://github.com/jonmosco/kube-ps1)
 * [helm](https://helm.sh/docs/intro/install/#from-homebrew-macos)
 * [Robo 3T](https://robomongo.org/download)
+* [Compass](https://www.mongodb.com/try/download/compass) (Alternative to Robo 3T)
 * [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Configurations
@@ -99,6 +100,29 @@ kubectl apply -f ./config/manifests/minikube-pvc.yml
 kubectl apply -f ./config/manifests/minikube-compute-submission-role.yml
 
 ```
+
+### Docker Desktop
+
+If using Docker Desktop with Kubernetes instead of minikube, there are some alternative steps to the ones listed above.
+
+To get the IP address, run:
+```bash
+kubectl get nodes -o wide
+```
+
+Which will return something like:
+```
+NAME             STATUS   ROLES    AGE   VERSION  INTERNAL-IP   EXTERNAL-IP  OS-IMAGE  KERNEL-VERSION CONTAINER-RUNTIME
+docker-desktop   Ready    master   ...  ...       192.168.65.3  ...          ...       ...            ...
+```
+
+Change the IP addresses in `./config/dnsmasq/datalab-dnsmasq.conf` to the value beneath `INTERNAL-IP`.
+
+The majority of the manifests can be `apply`ed as above, with the exception of the `minikube-storage.yml`,
+which should be replaced with `./config/manifests/docker-desktop-storage.yml`.
+This changes the provisioner to Docker, instead of minikube.
+
+In addition, the default context name is `docker-desktop`, instead of `minikube`.
 
 ### dnsmasq
 
