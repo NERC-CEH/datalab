@@ -41,12 +41,45 @@ function getAllByCategory(projectKey, user, category) {
     .exec();
 }
 
-function getAllByVolumeMount(projectKey, user, mount) {
+function getAllByVolumeMount(projectKey, user, mount, lean = false) {
   // Searches All Users
   return Stack()
     .find({ volumeMount: mount })
     .filterByProject(projectKey)
+    .lean(lean)
     .exec();
+}
+
+const anonymiseStack = userId => (stack) => {
+  if (stack.shared === 'private' || stack.visible === 'private') {
+    // The "owner" of a private stack will be the first user in the array.
+    const owner = stack.users[0];
+
+    if (userId === owner) {
+      return stack;
+    }
+
+    return {
+      ...stack,
+      name: 'private',
+      displayName: 'Private',
+      description: 'Private',
+      url: null,
+    };
+  }
+
+  return stack;
+};
+
+async function getAllByVolumeMountAnonymised(projectKey, user, mount) {
+  // Gets all stacks used by a volume, but "anonymises" any stack names the caller shouldn't see.
+  // Setting "lean" to true returns the values as JSON, making them more easily editable.
+  const allByVolume = await getAllByVolumeMount(projectKey, user, mount, true);
+  const callingUser = user.sub;
+
+  const anonymised = allByVolume.map(anonymiseStack(callingUser));
+
+  return anonymised;
 }
 
 function getAllByAsset(assetId) {
@@ -153,6 +186,8 @@ export default {
   getOneByName,
   getOneByNameUserAndCategory,
   getAllByVolumeMount,
+  getAllByVolumeMountAnonymised,
+  anonymiseStack,
   createOrUpdate,
   deleteStack,
   userCanDeleteStack,

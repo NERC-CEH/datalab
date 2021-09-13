@@ -6,6 +6,7 @@ class InvocationState {
     this.projectKey = undefined;
     this.params = undefined;
     this.user = undefined;
+    this.lean = false;
   }
 
   addQuery(query) {
@@ -72,6 +73,10 @@ function createDatabaseMock(items, state) {
       invocations.addQuery(query);
       return createDatabaseMock(items, invocations)();
     },
+    lean: (l) => {
+      invocations.lean = l;
+      return createDatabaseMock(items, invocations)();
+    },
     exec: () => Promise.resolve(items),
     invocation: () => invocations,
     query: () => invocations.lastQuery,
@@ -81,6 +86,7 @@ function createDatabaseMock(items, state) {
     project: () => invocations.projectKey,
     category: () => invocations.category,
     user: () => invocations.user,
+    isLean: () => invocations.lean,
     clear: () => { invocations = new InvocationState(); },
   });
 }
