@@ -31,3 +31,47 @@ exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
   </WithStyles(ForwardRef(DialogActions))>
 </WithStyles(ForwardRef(Dialog))>
 `;
+
+exports[`Confirmation creates correct snapshot for confirmation dialog with array in body 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Title
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))
+      key="0"
+    >
+      Body
+    </WithStyles(ForwardRef(DialogContentText))>
+    <WithStyles(ForwardRef(DialogContentText))
+      key="1"
+    >
+      Next line
+    </WithStyles(ForwardRef(DialogContentText))>
+    <WithStyles(ForwardRef(DialogContentText))
+      key="2"
+    >
+      Final line
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(IconButton)
+      icon="clear"
+      onClick={[MockFunction]}
+    >
+      Cancel
+    </WithStyles(IconButton)>
+    <WithStyles(IconButton)
+      danger={true}
+      disabled={false}
+      icon="delete"
+      onClick={[MockFunction]}
+    >
+      Confirm Deletion
+    </WithStyles(IconButton)>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;

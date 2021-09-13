@@ -7,12 +7,29 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '../common/control/IconButton';
 
-const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm Deletion', confirmIcon = 'delete' }) => (
-  <Dialog open={true} maxWidth="md">
-    <DialogTitle>{title}</DialogTitle>
+const bodyToContent = (body) => {
+  // Handle writing the body as either an individual, or a list of elements.
+  if (Array.isArray(body)) {
+    const contentTexts = body.map((t, i) => (<DialogContentText key={i}>{t}</DialogContentText>));
+
+    return (
+      <DialogContent>
+        {contentTexts}
+      </DialogContent>
+    );
+  }
+
+  return (
     <DialogContent>
       <DialogContentText>{body}</DialogContentText>
     </DialogContent>
+  );
+};
+
+const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm Deletion', confirmIcon = 'delete' }) => (
+  <Dialog open={true} maxWidth="md">
+    <DialogTitle>{title}</DialogTitle>
+    {bodyToContent(body)}
     <DialogActions>
       <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
       <IconButton danger onClick={onSubmit} icon={confirmIcon} disabled={onSubmit === undefined}>{confirmText}</IconButton>
@@ -22,7 +39,7 @@ const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm 
 
 Confirmation.propTypes = {
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  body: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.arrayOf(PropTypes.string).isRequired]),
   onSubmit: PropTypes.func,
   onCancel: PropTypes.func.isRequired,
 };

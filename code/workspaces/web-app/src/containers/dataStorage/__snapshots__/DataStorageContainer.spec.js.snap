@@ -18,7 +18,12 @@ Array [
 
 exports[`DataStorageContainer is a container which confirmDeleteDataStore generates correct dialog for mounted volume 1`] = `
 Object {
-  "body": "Data Store is in use, unable to delete.",
+  "body": Array [
+    "Unable to delete, Data Store is in use by the following resources:",
+    "- Name (notebook)",
+    "- Other Name (notebook) (Owner: user1)",
+    "- Private (notebook) (Owner: user2)",
+  ],
   "title": "Unable to Delete expectedDisplayName Data Store",
 }
 `;
