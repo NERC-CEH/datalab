@@ -22,11 +22,11 @@ import { STORAGE_TYPE_NAME, STORAGE_TYPE_NAME_PLURAL } from './storageTypeName';
 const { projectPermissions: { PROJECT_KEY_STORAGE_CREATE, PROJECT_KEY_STORAGE_DELETE, PROJECT_KEY_STORAGE_OPEN, PROJECT_KEY_STORAGE_EDIT }, projectKeyPermission } = permissionTypes;
 const FORM_NAME = 'createDataStore';
 
-const stackString = (stack) => {
-  const base = `- ${stack.displayName} (${stack.type})`;
+const resourceString = (resource) => {
+  const base = `- ${resource.displayName} (${resource.type})`;
 
-  if (stack.users && stack.users.length === 1) {
-    return `${base} (Owner: ${stack.users[0]})`;
+  if (resource.users && resource.users.length === 1) {
+    return `${base} (Owner: ${resource.users[0]})`;
   }
 
   return base;
@@ -92,13 +92,18 @@ class DataStorageContainer extends Component {
     title: `Unable to Delete ${dataStore.displayName} ${STORAGE_TYPE_NAME}`,
     body: [
       `Unable to delete, ${STORAGE_TYPE_NAME} is in use by the following resources:`,
-      ...dataStore.stacksMountingStore.map(stackString),
+      ...dataStore.stacksMountingStore.map(resourceString),
+      ...dataStore.clustersMountingStore.map(resourceString),
     ],
     onCancel: this.props.actions.closeModalDialog,
   });
 
   chooseDialogue = (dataStore) => {
-    if (dataStore.stacksMountingStore.length > 0) {
+    const resourcesMountingStore = [
+      ...(dataStore.stacksMountingStore || []),
+      ...(dataStore.clustersMountingStore || []),
+    ];
+    if (resourcesMountingStore.length > 0) {
       return this.prohibitDeletion(dataStore);
     }
 
