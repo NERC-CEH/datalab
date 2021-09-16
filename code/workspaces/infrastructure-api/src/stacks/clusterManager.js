@@ -8,7 +8,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
 
-// DASK -> dask
+// DASK -> dask; SPARK -> spark
 const getLowerType = type => type.toLowerCase();
 
 // distinguish between the scheduler and the worker deployments

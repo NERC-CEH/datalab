@@ -2,7 +2,8 @@ import { Schema, model } from 'mongoose';
 
 const modelName = 'Cluster';
 const DASK = 'DASK';
-const possibleTypeValues = () => [DASK];
+const SPARK = 'SPARK';
+const possibleTypeValues = () => [DASK, SPARK];
 
 const ClusterSchema = new Schema({
   type: { type: String, enum: possibleTypeValues(), required: true },
@@ -19,4 +20,4 @@ const ClusterSchema = new Schema({
 
 model(modelName, ClusterSchema);
 
-export default { modelName, possibleTypeValues, DASK };
+export default { modelName, possibleTypeValues, DASK, SPARK };

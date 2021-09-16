@@ -8,6 +8,7 @@ const NBVIEWER = 'nbviewer';
 const PROJECT = 'project';
 const RSHINY = 'rshiny';
 const RSTUDIO = 'rstudio';
+const SPARK = 'SPARK';
 const ZEPPELIN = 'zeppelin';
 const singleHostNameTypes = [JUPYTER, JUPYTERLAB, RSTUDIO];
 
@@ -27,6 +28,7 @@ export {
   PROJECT,
   RSHINY,
   RSTUDIO,
+  SPARK,
   ZEPPELIN,
   isSingleHostName,
   basePath,
