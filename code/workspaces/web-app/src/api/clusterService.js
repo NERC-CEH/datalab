@@ -1,7 +1,13 @@
 import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-function createCluster(cluster) {
+function createCluster(clusterWithAssets) {
+  const cluster = {
+    ...clusterWithAssets,
+    assetIds: clusterWithAssets.assets ? clusterWithAssets.assets.map(asset => asset.assetId) : [],
+  };
+  delete cluster.assets;
+
   const mutation = `
     CreateCluster($cluster: ClusterCreationRequest!) {
       createCluster(cluster: $cluster) {

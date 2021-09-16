@@ -13,6 +13,7 @@ const getClusterCreationObject = () => ({
   maxWorkers: 4,
   maxWorkerMemoryGb: 4,
   maxWorkerCpu: 1,
+  assetIds: [],
 });
 
 const getClusterDeletionObject = () => ({

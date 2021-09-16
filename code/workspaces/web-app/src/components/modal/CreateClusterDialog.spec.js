@@ -12,6 +12,7 @@ describe('CreateClusterDialog', () => {
     clusterMaxWorkers: { lowerLimit: 1, default: 4, upperLimit: 8 },
     workerMaxMemory: { lowerLimit: 0.5, default: 4, upperLimit: 8 },
     workerMaxCpu: { lowerLimit: 0.5, default: 0.5, upperLimit: 2 },
+    projectKey: 'testproj',
   });
 
   it('renders correctly passing props to child components', () => {

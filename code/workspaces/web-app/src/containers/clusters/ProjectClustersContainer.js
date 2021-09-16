@@ -16,6 +16,7 @@ import { useDataStorageForUserInProject } from '../../hooks/dataStorageHooks';
 import dataStorageActions from '../../actions/dataStorageActions';
 import notify from '../../components/common/notify';
 import { CLUSTER_TYPE_NAME, CLUSTER_TYPE_NAME_PLURAL } from './clusterTypeName';
+import assetRepoActions from '../../actions/assetRepoActions';
 
 const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT, PROJECT_KEY_CLUSTERS_OPEN } } = permissionTypes;
 
@@ -68,6 +69,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
     if (projectKey && modifyData) {
       dispatch(clusterActions.loadClusters(projectKey));
       dispatch(dataStorageActions.loadDataStorage(projectKey));
+      dispatch(assetRepoActions.loadVisibleAssets(projectKey));
     }
   }, [dispatch, projectKey, modifyData]);
 
@@ -130,6 +132,7 @@ export const getDialogProps = (dispatch, projectKey, clusterType, dataStores) =>
   workerMaxMemory: getWorkerMemoryMax(clusterType),
   workerMaxCpu: getWorkerCpuMax(clusterType),
   dataStorageOptions: dataStores.map(store => ({ text: store.displayName, value: store.name })),
+  projectKey,
 });
 
 export default ProjectClustersContainer;

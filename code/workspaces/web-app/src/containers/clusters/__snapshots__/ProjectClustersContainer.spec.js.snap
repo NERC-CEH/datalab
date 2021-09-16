@@ -42,6 +42,7 @@ Object {
   "formName": "createCluster",
   "onCancel": [Function],
   "onSubmit": [Function],
+  "projectKey": "testproj",
   "title": "Create Cluster",
   "workerMaxCpu": Object {
     "default": 0.5,

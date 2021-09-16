@@ -1,9 +1,10 @@
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { CreateFormControls, renderSelectField, renderTextField } from '../common/form/controls';
+import { CreateFormControls, renderSelectField, renderTextField, formatAndParseMultiSelect } from '../common/form/controls';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 import { syncValidate } from './createClusterValidator';
+import AssetMultiSelect from '../common/form/AssetMultiSelect';
 
 const commonFieldProps = {
   component: renderTextField,
@@ -24,7 +25,7 @@ export const removeNoneOptions = values => Object.entries(values).reduce(
 );
 
 export const CreateClusterFormContent = ({
-  handleSubmit, form: formName, onSubmit, cancel, submitting, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu,
+  handleSubmit, form: formName, onSubmit, cancel, submitting, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu, projectKey,
 }) => {
   const VOLUME_MOUNT_FIELD_NAME = 'volumeMount';
   const volumeMountValue = useReduxFormValue(formName, VOLUME_MOUNT_FIELD_NAME);
@@ -102,6 +103,15 @@ export const CreateClusterFormContent = ({
         parse={value => Number(value)}
         helperText={createHelperText(workerMaxCpu)}
       />
+      <Field
+        { ...commonFieldProps }
+        name="assets"
+        label="Assets"
+        component={AssetMultiSelect}
+        projectKey={projectKey}
+        format={formatAndParseMultiSelect}
+        parse={formatAndParseMultiSelect}
+      />
       <CreateFormControls onCancel={cancel} submitting={submitting}/>
     </form>
   );
@@ -139,4 +149,5 @@ CreateClusterForm.propTypes = {
   clusterMaxWorkers: inputConstraintPropTypes.isRequired,
   workerMaxMemory: inputConstraintPropTypes.isRequired,
   workerMaxCpu: inputConstraintPropTypes.isRequired,
+  projectKey: PropTypes.string.isRequired,
 };

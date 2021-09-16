@@ -31,6 +31,7 @@ exports[`CreateClusterDialog renders correctly passing props to child components
           }
         }
         onSubmit={[MockFunction onSubmit]}
+        projectKey="testproj"
         workerMaxCpu={
           Object {
             "default": 0.5,
