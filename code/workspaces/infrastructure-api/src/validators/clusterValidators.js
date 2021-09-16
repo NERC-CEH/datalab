@@ -36,6 +36,9 @@ export const clusterValidator = (checkFunction) => {
     new ValidationChainHelper(checkFunction('maxWorkerCpu'))
       .exists()
       .isInFloatRange(range(clustersConfig().dask.workers.CpuMax_vCPU)),
+    new ValidationChainHelper(checkFunction('assetIds'))
+      .optional()
+      .isArray(),
   ];
 
   const validationChains = validations.map((validation) => {
