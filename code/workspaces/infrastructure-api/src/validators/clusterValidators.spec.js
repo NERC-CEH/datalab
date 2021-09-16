@@ -1,6 +1,6 @@
 import * as expressValidator from 'express-validator';
 import ValidationChainHelper from './ValidationChainHelper';
-import { clusterTypeValidator } from './clusterValidators';
+import { clusterTypeValidator, mountValidator } from './clusterValidators';
 
 const bodyMock = jest
   .spyOn(expressValidator, 'body');
@@ -21,6 +21,12 @@ describe('clusterValidators', () => {
       expect(bodyMock).toHaveBeenCalledWith('type');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
       expect(mockHelperChain.isIn).toHaveBeenCalledWith(['DASK']);
+    });
+
+    it('mountValidator', () => {
+      mountValidator(expressValidator.body);
+      expect(bodyMock).toHaveBeenCalledWith('volumeMount');
+      expect(mockHelperChain.exists).toHaveBeenCalledWith();
     });
   });
 });

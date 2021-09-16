@@ -124,4 +124,20 @@ describe('clustersRepository', () => {
       expect(response).toEqual([document]);
     });
   });
+
+  describe('getAll', () => {
+    it('gets clusters by volume mount', async () => {
+      // Arrange
+      const { projectKey, volumeMount } = clusterRequest();
+      const document = clusterDocument();
+      clusterModelMock.exec.mockReturnValueOnce([document]);
+
+      // Act
+      const response = await clustersRepository.getByVolumeMount(projectKey, volumeMount);
+
+      // Assert
+      expect(clusterModelMock.find).toHaveBeenCalledWith({ projectKey, volumeMount });
+      expect(response).toEqual([document]);
+    });
+  });
 });

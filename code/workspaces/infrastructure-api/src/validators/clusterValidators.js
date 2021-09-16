@@ -13,6 +13,11 @@ const clusterTypeValidation = checkFunction => new ValidationChainHelper(checkFu
   .getValidationChain();
 export const clusterTypeValidator = checkFunction => service.middleware.validator([clusterTypeValidation(checkFunction)], logger);
 
+const mountValidation = checkFunction => new ValidationChainHelper(checkFunction('volumeMount'))
+  .exists()
+  .getValidationChain();
+export const mountValidator = checkFunction => service.middleware.validator([mountValidation(checkFunction)], logger);
+
 export const clusterValidator = (checkFunction) => {
   const validations = [
     clusterTypeValidation(checkFunction),

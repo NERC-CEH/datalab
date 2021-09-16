@@ -36,10 +36,17 @@ async function getAll() {
   return ClusterModel().find().exec();
 }
 
+function getByVolumeMount(projectKey, mount) {
+  return ClusterModel()
+    .find({ projectKey, volumeMount: mount })
+    .exec();
+}
+
 export default {
   createCluster,
   deleteCluster,
   clusterExists,
   listByProject,
+  getByVolumeMount,
   getAll,
 };
