@@ -9,6 +9,14 @@ const infrastructureApi = config.get('infrastructureApi');
 const token = 'token';
 
 describe('clustersService', () => {
+  beforeEach(() => {
+    httpMock.reset();
+  });
+
+  afterAll(() => {
+    httpMock.restore();
+  });
+
   describe('createCluster', () => {
     const clusterRequest = {
       type: 'DASK',
@@ -85,7 +93,35 @@ describe('clustersService', () => {
       const returnValue = await getClusters('test-project', token);
 
       expect(returnValue).toEqual([clusterResponse]);
-      expect(httpMock.history.post.length).toBe(1);
+      expect(httpMock.history.get.length).toBe(1);
+      const [getMock] = httpMock.history.get;
+      expect(getMock.headers.authorization).toEqual(token);
+    });
+  });
+
+  describe('getClustersByMount', () => {
+    const clusterResponse = {
+      type: 'DASK',
+      projectKey: 'test-project',
+      name: 'cluster1',
+      displayName: 'new cluster',
+      volumeMount: 'example',
+      condaPath: '/file/path',
+      maxWorkers: 8,
+      maxWorkerMemoryGb: 0.5,
+      maxWorkerCpu: 1.5,
+      id: '1234',
+    };
+    const { getClustersByMount } = clustersService;
+    it('calls infrastructure-api to get clusters by mount with correct data and returns result data', async () => {
+      httpMock
+        .onGet(`${infrastructureApi}/clusters/test-project/mount/example`)
+        .reply(200, [clusterResponse]);
+
+      const returnValue = await getClustersByMount('test-project', 'example', token);
+
+      expect(returnValue).toEqual([clusterResponse]);
+      expect(httpMock.history.get.length).toBe(1);
       const [getMock] = httpMock.history.get;
       expect(getMock.headers.authorization).toEqual(token);
     });

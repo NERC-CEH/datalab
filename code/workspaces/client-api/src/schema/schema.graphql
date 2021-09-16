@@ -152,6 +152,7 @@ type DataStore {
     users: [String]
     accessKey: String
     stacksMountingStore: [Stack]
+    clustersMountingStore: [Cluster]
     status: StatusType
 }
 

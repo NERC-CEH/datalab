@@ -32,8 +32,17 @@ async function getClusters(projectKey, token) {
   return data;
 }
 
+async function getClustersByMount(projectKey, mount, token) {
+  const { data } = await infrastructureApi().get(
+    `/${projectKey}/mount/${mount}`,
+    requestConfig(token),
+  );
+  return data;
+}
+
 export default {
   createCluster: wrapWithAxiosErrorWrapper('Error creating cluster.', createCluster),
   deleteCluster: wrapWithAxiosErrorWrapper('Error deleting cluster.', deleteCluster),
   getClusters: wrapWithAxiosErrorWrapper('Error getting clusters.', getClusters),
+  getClustersByMount: wrapWithAxiosErrorWrapper('Error getting clusters by mount.', getClustersByMount),
 };
