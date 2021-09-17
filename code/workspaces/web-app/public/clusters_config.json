@@ -19,5 +19,26 @@
         "upperLimit": 2
       }
     }
+  },
+  "spark": {
+    "cluster": {
+      "workersMax": {
+        "lowerLimit": 1,
+        "default": 4,
+        "upperLimit": 8
+      }
+    },
+    "workers": {
+      "memoryMax_GB": {
+        "lowerLimit": 0.5,
+        "default": 4,
+        "upperLimit": 8
+      },
+      "CpuMax_vCPU": {
+        "lowerLimit": 0.5,
+        "default": 0.5,
+        "upperLimit": 2
+      }
+    }
   }
 }
