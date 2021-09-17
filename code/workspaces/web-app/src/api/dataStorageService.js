@@ -5,7 +5,16 @@ function loadDataStorage(projectKey) {
   const query = `
     DataStorage($projectKey: String!) {
       dataStorage(projectKey: $projectKey) {
-         id, projectKey, name, displayName, description, type, stacksMountingStore { id, displayName, type, users }, status, users
+         id,
+         projectKey,
+         name,
+         displayName,
+         description,
+         type, 
+         stacksMountingStore { id, displayName, type, users },
+         clustersMountingStore { id, displayName, type },
+         status,
+         users
       }
     }`;
 

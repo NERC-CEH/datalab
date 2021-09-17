@@ -23,6 +23,8 @@ Object {
     "- Name (notebook)",
     "- Other Name (notebook) (Owner: user1)",
     "- Private (notebook) (Owner: user2)",
+    "- Dask Cluster (DASK)",
+    "- Spark Cluster (SPARK)",
   ],
   "title": "Unable to Delete expectedDisplayName Data Store",
 }

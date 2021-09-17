@@ -198,4 +198,34 @@ describe('clustersController', () => {
       expect(nextMock).toHaveBeenCalledWith(new Error('Error listing clusters: Expected test error'));
     });
   });
+
+  describe('listByMount', () => {
+    const { listByMount } = clustersController;
+    it('calls to get clusters using mount and returns response configured with 200 status and array of clusters when projectKey and volumeMount provided', async () => {
+      // Arrange
+      const requestMock = { projectKey: 'test-proj', volumeMount: 'example' };
+      const clusterDocuments = [clusterDocument()];
+      clustersRepository.getByVolumeMount.mockResolvedValueOnce(clusterDocuments);
+
+      // Act
+      const returnValue = await listByMount(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(returnValue).toBe(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith(clusterDocuments);
+    });
+
+    it('calls next with an error if there is an error when listing the metadata', async () => {
+      // Arrange
+      const requestMock = {};
+      clustersRepository.getByVolumeMount.mockRejectedValueOnce(new Error('Expected test error'));
+
+      // Act
+      await listByMount(requestMock, responseMock, nextMock);
+
+      // Assert
+      expect(nextMock).toHaveBeenCalledWith(new Error('Error listing clusters: Expected test error'));
+    });
+  });
 });

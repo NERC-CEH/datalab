@@ -5,9 +5,16 @@ import { permissionTypes } from 'common';
 import clustersController from '../controllers/clustersController';
 import permissionMiddleware from '../auth/permissionMiddleware';
 import { projectKeyValidator, nameValidator } from '../validators/commonValidators';
-import { clusterValidator, clusterTypeValidator } from '../validators/clusterValidators';
+import { clusterValidator, clusterTypeValidator, mountValidator } from '../validators/clusterValidators';
 
-const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_LIST, PROJECT_KEY_CLUSTERS_DELETE } } = permissionTypes;
+const {
+  projectPermissions: {
+    PROJECT_KEY_CLUSTERS_CREATE,
+    PROJECT_KEY_CLUSTERS_LIST,
+    PROJECT_KEY_CLUSTERS_DELETE,
+    PROJECT_KEY_STORAGE_LIST,
+  },
+} = permissionTypes;
 
 const { errorWrapper } = service.middleware;
 
@@ -26,6 +33,14 @@ clustersRouter.get(
   permissionMiddleware(PROJECT_KEY_CLUSTERS_LIST),
   projectKeyValidator(query),
   errorWrapper(clustersController.listByProject),
+);
+
+clustersRouter.get(
+  '/:projectKey/mount/:volumeMount',
+  permissionMiddleware(PROJECT_KEY_STORAGE_LIST, PROJECT_KEY_CLUSTERS_LIST),
+  projectKeyValidator(param),
+  mountValidator(param),
+  errorWrapper(clustersController.listByMount),
 );
 
 clustersRouter.delete(

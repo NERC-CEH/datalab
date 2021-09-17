@@ -109,6 +109,19 @@ describe('DataStorageContainer', () => {
       },
     ];
 
+    const clustersMountingStore = [
+      {
+        id: 1,
+        displayName: 'Dask Cluster',
+        type: 'DASK',
+      },
+      {
+        id: 2,
+        displayName: 'Spark Cluster',
+        type: 'SPARK',
+      },
+    ];
+
     const generateProps = () => ({
       dataStorage,
       userPermissions: ['expectedPermission'],
@@ -169,7 +182,12 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore calls openModalDialog with correct action for unmounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [] };
+      const stack = {
+        displayName: 'expectedDisplayName',
+        name: 'expectedName',
+        stacksMountingStore: [],
+        clustersMountingStore: [],
+      };
 
       // Act/Assert
       const output = shallowRenderPure(props);
@@ -185,7 +203,12 @@ describe('DataStorageContainer', () => {
       // Arrange
       const props = generateProps();
 
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore };
+      const stack = {
+        displayName: 'expectedDisplayName',
+        name: 'expectedName',
+        stacksMountingStore,
+        clustersMountingStore,
+      };
 
       // Act/Assert
       const output = shallowRenderPure(props);
@@ -200,7 +223,12 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore generates correct dialog for unmounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [] };
+      const stack = {
+        displayName: 'expectedDisplayName',
+        name: 'expectedName',
+        stacksMountingStore: [],
+        clustersMountingStore: [],
+      };
 
       // Act
       const output = shallowRenderPure(props);
@@ -217,7 +245,12 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore generates correct dialog for mounted volume', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore };
+      const stack = {
+        displayName: 'expectedDisplayName',
+        name: 'expectedName',
+        stacksMountingStore,
+        clustersMountingStore,
+      };
 
       // Act
       const output = shallowRenderPure(props);
@@ -234,7 +267,12 @@ describe('DataStorageContainer', () => {
     it('confirmDeleteDataStore - onSubmit calls deleteDataStore with correct value', () => {
       // Arrange
       const props = generateProps();
-      const stack = { displayName: 'expectedDisplayName', name: 'expectedName', stacksMountingStore: [] };
+      const stack = {
+        displayName: 'expectedDisplayName',
+        name: 'expectedName',
+        stacksMountingStore: [],
+        clustersMountingStore: [],
+      };
 
       // Act
       const output = shallowRenderPure(props);

@@ -83,6 +83,8 @@ const resolvers = {
     accessKey: (obj, args, { token }) => minioTokenService.requestMinioToken(obj, token),
     stacksMountingStore: ({ name, projectKey }, args, { token }) => (projectKey
       ? replaceFields(stackService.getAllByVolumeMount(projectKey, name, { token }), token) : []),
+    clustersMountingStore: ({ name, projectKey }, args, { token }) => (projectKey
+      ? clustersService.getClustersByMount(projectKey, name, token) : []),
     status: () => READY,
   },
 

@@ -72,8 +72,20 @@ async function listByProject(request, response, next) {
   }
 }
 
+async function listByMount(request, response, next) {
+  const { projectKey, volumeMount } = matchedData(request);
+
+  try {
+    const clusters = await clustersRepository.getByVolumeMount(projectKey, volumeMount);
+    return response.status(200).send(clusters);
+  } catch (error) {
+    return next(new Error(`Error listing clusters: ${error.message}`));
+  }
+}
+
 export default {
   createCluster,
   deleteCluster,
   listByProject,
+  listByMount,
 };
