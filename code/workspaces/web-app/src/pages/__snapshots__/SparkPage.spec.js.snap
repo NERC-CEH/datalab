@@ -2,24 +2,27 @@
 
 exports[`SparkPage renders correct snapshot 1`] = `
 <WithStyles(Page)
+  className=""
   title="Spark"
 >
   <WithStyles(ForwardRef(Typography))
     variant="body1"
   >
-    Apache Spark is an open-source cluster-computing framework.
+    <ExternalLink
+      href="https://spark.apache.org/"
+    >
+      Apache Spark
+    </ExternalLink>
+     is an open-source cluster-computing framework.
     <br />
     DataLabs supports usage of Spark via Kubernetes which allows Spark executors to be deployed across the cluster.
   </WithStyles(ForwardRef(Typography))>
-  <PrimaryActionButton
-    onClick={[Function]}
-    style={
-      Object {
-        "marginTop": 10,
-      }
-    }
+  <div
+    className="makeStyles-clusterList-1"
   >
-    Spark in DataLabs Documentation
-  </PrimaryActionButton>
+    <ClustersContainer
+      clusterType="SPARK"
+    />
+  </div>
 </WithStyles(Page)>
 `;
