@@ -14,6 +14,7 @@ function requestCluster(request) {
     maxWorkers: params.maxWorkers,
     maxWorkerMemoryGb: params.maxWorkerMemoryGb,
     maxWorkerCpu: params.maxWorkerCpu,
+    assetIds: params.assetIds,
   };
   return cluster;
 }

@@ -122,6 +122,18 @@ exports[`CreateClusterForm it renders to match snapshot with condaPath field whe
     parse={[Function]}
     type="number"
   />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    format={[Function]}
+    label="Assets"
+    name="assets"
+    parse={[Function]}
+  />
   <CreateFormControls
     onCancel={[MockFunction cancel]}
     submitting={false}
@@ -239,6 +251,18 @@ exports[`CreateClusterForm it renders to match snapshot without condaPath field 
     parse={[Function]}
     type="number"
   />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    format={[Function]}
+    label="Assets"
+    name="assets"
+    parse={[Function]}
+  />
   <CreateFormControls
     onCancel={[MockFunction cancel]}
     submitting={false}
@@ -355,6 +379,18 @@ exports[`CreateClusterForm it renders to match snapshot without condaPath field 
     name="maxWorkerCpu"
     parse={[Function]}
     type="number"
+  />
+  <Field
+    InputLabelProps={
+      Object {
+        "shrink": true,
+      }
+    }
+    component={[Function]}
+    format={[Function]}
+    label="Assets"
+    name="assets"
+    parse={[Function]}
   />
   <CreateFormControls
     onCancel={[MockFunction cancel]}

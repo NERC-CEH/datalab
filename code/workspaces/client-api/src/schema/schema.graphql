@@ -398,6 +398,7 @@ input ClusterCreationRequest {
     maxWorkers: Int!
     maxWorkerMemoryGb: Float!
     maxWorkerCpu: Float!
+    assetIds: [String]
 }
 
 # Type to describe the mutation for deleting a cluster.
