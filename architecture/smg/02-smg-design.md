@@ -54,19 +54,21 @@ ssh -A -i ~/.ssh/<ssh_private_key> ubuntu@<bastion_ip>
 ssh ubuntu@<internal_server_ip>
 ```
 
+Where the internal IP can be found by looking in `/etc/hosts` when on the Bastion server.
+
 A better way is to add SSH configuration to your SSH config file to allow single step
 access. An example configuration for the same access (typically stored at `~/.ssh/config`) is:
 
 ```bash
 Host datalabs-bastion-1
         HostName <bastion_public_ip>
-        User deploy
+        User ubuntu
         IdentityFile ~/.ssh/<private_key>
         ForwardAgent yes
 
 Host datalabs-k8s-master
         HostName <internal_ip>
-        User deploy
+        User ubuntu
         ProxyCommand ssh datalabs-bastion-1 -W %h:%p
 ```
 
@@ -106,13 +108,15 @@ Connection:
 Once connected, you can tick 'Automatically connect on startup'.
 
 On Linux these are configured using the SSH config in the same way as the SSH connections
-but to ensure that they stay open a utility called AutoSSH can be used. To configure the
-tunnel add another block to the SSH config. An example for the Kubernetes API:
+but to ensure that they stay open a utility called AutoSSH can be used.
+It is also possible to install autossh on a Mac using brew: `brew install autossh`.
+To configure the tunnel add another block to the SSH config.
+An example for the Kubernetes API:
 
 ```bash
 Host nerc-k8s-tunnel
   HostName <bastion_public_ip>
-  User deploy
+  User ubuntu
   ForwardAgent yes
   ControlPath=~/.ssh/ssh2k8s-%r@%h
   ControlMaster=auto
@@ -121,6 +125,10 @@ Host nerc-k8s-tunnel
   ServerAliveInterval 30
   ServerAliveCountMax 3
 ```
+
+Note: If using a different port to 6443 (for instance if something else is already running
+on that port), change to use `LocalForward <port> <k8s_master_internal_ip>:6443`. Then,
+use this `<port>` when connecting, such as inside the kube config below.
 
 Then run `autossh` to open the tunnel. This will open the tunnel and ensure that it stays
 open.
