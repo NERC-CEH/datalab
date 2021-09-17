@@ -18,6 +18,19 @@ const getWorkerName = name => `worker-${name}`;
 
 export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
 
+export const getComponentCreators = (type) => {
+  if (type === 'dask') {
+    return {
+      networkPolicyCreator: deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy,
+      schedulerDeploymentCreator: deploymentGenerator.createDatalabDaskSchedulerDeployment,
+      schedulerServiceCreator: deploymentGenerator.createDatalabDaskSchedulerService,
+      workerDeploymentCreator: deploymentGenerator.createDatalabDaskWorkerDeployment,
+    };
+  }
+
+  throw new Error(`Unsupported cluster type ${type}`);
+};
+
 export async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name, assetIds }) {
   const lowerType = getLowerType(type);
   const schedulerName = getSchedulerName(name);
@@ -33,38 +46,45 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
     projectKey,
     volumeMount,
     condaPath,
-    pureDaskImage: defaultImage('dask').image,
+    clusterImage: defaultImage(lowerType).image,
     jupyterLabImage: defaultImage('jupyterlab').image,
     // scheduler
     schedulerPodLabel,
-    schedulerMemory: `${clustersConfig().dask.scheduler.memoryMax_GB.default}Gi`,
-    schedulerCpu: clustersConfig().dask.scheduler.CpuMax_vCPU.default,
+    schedulerMemory: `${clustersConfig()[lowerType].scheduler.memoryMax_GB.default}Gi`,
+    schedulerCpu: clustersConfig()[lowerType].scheduler.CpuMax_vCPU.default,
     // workers
     workerPodLabel,
     schedulerServiceName,
-    nThreads: clustersConfig().dask.workers.nThreads.default,
-    deathTimeoutSec: clustersConfig().dask.workers.deathTimeout_sec.default,
+    nThreads: clustersConfig()[lowerType].workers.nThreads.default,
+    deathTimeoutSec: clustersConfig()[lowerType].workers.deathTimeout_sec.default,
     workerMemory: `${maxWorkerMemoryGb}Gi`,
     workerCpu: maxWorkerCpu,
     // auto-scaling
     maxReplicas: maxWorkers,
-    targetCpuUtilization: clustersConfig().dask.workers.targetCpuUtilization_percent.default,
-    targetMemoryUtilization: clustersConfig().dask.workers.targetMemoryUtilization_percent.default,
-    scaleDownWindowSec: clustersConfig().dask.workers.scaleDownWindow_sec.default,
+    targetCpuUtilization: clustersConfig()[lowerType].workers.targetCpuUtilization_percent.default,
+    targetMemoryUtilization: clustersConfig()[lowerType].workers.targetMemoryUtilization_percent.default,
+    scaleDownWindowSec: clustersConfig()[lowerType].workers.scaleDownWindow_sec.default,
   };
 
   // distinguish between the scheduler and the worker deployments (and related resources)
   const schedulerParams = { ...clusterParams, name: schedulerName };
   const workerParams = { ...clusterParams, name: workerName };
 
+  const {
+    networkPolicyCreator,
+    schedulerDeploymentCreator,
+    schedulerServiceCreator,
+    workerDeploymentCreator,
+  } = getComponentCreators(lowerType);
+
   // create network policy first, for security
-  await createNetworkPolicy(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy)();
+  await createNetworkPolicy(schedulerParams, networkPolicyCreator)();
 
   // do the rest in parallel
   await Promise.all([
-    createDeployment(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerDeployment)(),
-    createService(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerService)(),
-    createDeployment(workerParams, deploymentGenerator.createDatalabDaskWorkerDeployment)(),
+    createDeployment(schedulerParams, schedulerDeploymentCreator)(),
+    createService(schedulerParams, schedulerServiceCreator)(),
+    createDeployment(workerParams, workerDeploymentCreator)(),
     createAutoScaler(workerParams, deploymentGenerator.createAutoScaler)(),
   ]);
 

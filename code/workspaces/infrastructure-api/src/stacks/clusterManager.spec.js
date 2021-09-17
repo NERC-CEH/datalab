@@ -55,7 +55,7 @@ describe('clusterManager', () => {
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
-        pureDaskImage: defaultImage('dask').image,
+        clusterImage: defaultImage('dask').image,
         jupyterLabImage: defaultImage('jupyterlab').image,
         // scheduler
         schedulerPodLabel: 'dask-scheduler-cluster-name-po',
