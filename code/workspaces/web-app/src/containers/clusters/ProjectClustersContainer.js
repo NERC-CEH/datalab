@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { permissionTypes } from 'common';
 import { projectKeyPermission } from 'common/src/permissionTypes';
 import { reset } from 'redux-form';
-import copy from 'copy-to-clipboard';
 import StackCards from '../../components/stacks/StackCards';
 import { useClustersByType } from '../../hooks/clustersHooks';
 import clusterActions from '../../actions/clusterActions';
@@ -42,24 +41,7 @@ const confirmDeleteCluster = dispatch => cluster => dispatch(modalDialogActions.
   onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
 }));
 
-const copySnippet = ({ schedulerAddress }) => {
-  const proxyAddress = schedulerAddress.replace('tcp://', 'proxy/').replace('8786', '8787');
-  const message = `# Paste this into your notebook cell
-# Note that the Dask scheduler can be accessed from the Dask JupyterLab extension with address
-# ${proxyAddress}
-from dask.distributed import Client
-c = Client("${schedulerAddress}")
-c
-`;
-  try {
-    copy(message);
-    notify.success('Clipboard contains snippet for notebook cell');
-  } catch (error) {
-    notify.error('Unable to access clipboard.');
-  }
-};
-
-const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData }) => {
+const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData, copySnippet }) => {
   const dispatch = useDispatch();
   const currentUserId = useCurrentUserId();
   const { value: dataStores } = useDataStorageForUserInProject(currentUserId, projectKey);
@@ -73,7 +55,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
     }
   }, [dispatch, projectKey, modifyData]);
 
-  const createDaskClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
+  const createClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
 
   return (
       <StackCards
@@ -81,7 +63,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
         typeName={CLUSTER_TYPE_NAME}
         typeNamePlural={CLUSTER_TYPE_NAME_PLURAL}
         userPermissions={() => userPermissions}
-        openCreationForm={() => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createDaskClusterDialogProps))}
+        openCreationForm={() => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createClusterDialogProps))}
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
         showCreateButton={modifyData}
         deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
@@ -139,4 +121,5 @@ export default ProjectClustersContainer;
 
 ProjectClustersContainer.propTypes = {
   clusterType: PropTypes.string.isRequired,
+  copySnippet: PropTypes.func,
 };

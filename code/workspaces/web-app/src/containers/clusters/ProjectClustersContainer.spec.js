@@ -59,8 +59,10 @@ mockClusterActions.createCluster = mockCreateClusterAction;
 const mockCloseModalDialogAction = jest.fn();
 mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
 
+const copyMock = () => {};
+
 describe('ProjectClustersContainer', () => {
-  const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData />);
+  const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
 
   it('renders correct snapshot', () => {
     expect(getShallowRender()).toMatchSnapshot();
