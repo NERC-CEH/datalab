@@ -13,6 +13,7 @@ describe('deploymentGenerator', () => {
       clusterImage: 'dask-image',
       jupyterLabImage: 'lab-image',
       schedulerPodLabel: 'scheduler-pod-label',
+      schedulerContainerName: 'dask-scheduler-cont',
       schedulerMemory: 'scheduler-memory',
       schedulerCpu: 'scheduler-cpu',
     };
@@ -37,6 +38,7 @@ describe('deploymentGenerator', () => {
       clusterImage: 'dask-image',
       jupyterLabImage: 'lab-image',
       workerPodLabel: 'worker-pod-label',
+      workerContainerName: 'dask-worker-cont',
       workerMemory: 'worker-memory',
       workerCpu: 'worker-cpu',
       nThreads: 'n-threads',

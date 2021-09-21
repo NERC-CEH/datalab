@@ -57,6 +57,8 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
   const schedulerServiceName = getSchedulerServiceName(name, type);
   const schedulerPodLabel = nameGenerator.podLabel(schedulerName, lowerType);
   const workerPodLabel = nameGenerator.podLabel(workerName, lowerType);
+  const schedulerContainerName = nameGenerator.schedulerContainerName(lowerType);
+  const workerContainerName = nameGenerator.workerContainerName(lowerType);
 
   const clusterParams = {
     type: lowerType,
@@ -67,10 +69,12 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
     jupyterLabImage: defaultImage('jupyterlab').image,
     // scheduler
     schedulerPodLabel,
+    schedulerContainerName,
     schedulerMemory: `${clustersConfig()[lowerType].scheduler.memoryMax_GB.default}Gi`,
     schedulerCpu: clustersConfig()[lowerType].scheduler.CpuMax_vCPU.default,
     // workers
     workerPodLabel,
+    workerContainerName,
     schedulerServiceName,
     nThreads: clustersConfig()[lowerType].workers.nThreads.default,
     deathTimeoutSec: clustersConfig()[lowerType].workers.deathTimeout_sec.default,
@@ -110,8 +114,8 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
     const schedulerDeploymentName = nameGenerator.deploymentName(schedulerName, lowerType);
     const workerDeploymentName = nameGenerator.deploymentName(workerName, lowerType);
     await Promise.all([
-      mountAssetsOnDeployment({ projectKey, deploymentName: schedulerDeploymentName, containerNameWithMounts: 'dask-scheduler-cont', assetIds }),
-      mountAssetsOnDeployment({ projectKey, deploymentName: workerDeploymentName, containerNameWithMounts: 'dask-worker-cont', assetIds }),
+      mountAssetsOnDeployment({ projectKey, deploymentName: schedulerDeploymentName, containerNameWithMounts: schedulerContainerName, assetIds }),
+      mountAssetsOnDeployment({ projectKey, deploymentName: workerDeploymentName, containerNameWithMounts: workerContainerName, assetIds }),
     ]);
   }
 }

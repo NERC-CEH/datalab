@@ -41,12 +41,13 @@ function createJupyterDeployment({ projectKey, deploymentName, name, type, volum
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, schedulerPodLabel, schedulerMemory, schedulerCpu, volumeMount }) {
+function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
   const context = {
     name: deploymentName,
     daskImage: (volumeMount && condaPath) ? jupyterLabImage : clusterImage,
     schedulerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-scheduler` : 'dask-scheduler',
     schedulerPodLabel,
+    schedulerContainerName,
     schedulerMemory,
     schedulerCpu,
     volumeMount,
@@ -54,13 +55,14 @@ function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, clust
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_SCHEDULER_DEPLOYMENT);
 }
 
-function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, workerPodLabel, workerMemory, workerCpu, volumeMount, nThreads, deathTimeoutSec,
-  schedulerServiceName }) {
+function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, workerPodLabel, workerContainerName, workerMemory, workerCpu, volumeMount, nThreads,
+  deathTimeoutSec, schedulerServiceName }) {
   const context = {
     name: deploymentName,
     daskImage: (volumeMount && condaPath) ? jupyterLabImage : clusterImage,
     workerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-worker` : 'dask-worker',
     workerPodLabel,
+    workerContainerName,
     workerMemory,
     workerCpu,
     volumeMount,

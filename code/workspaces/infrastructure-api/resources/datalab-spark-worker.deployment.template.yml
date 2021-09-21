@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - image: {{{sparkImage}}}
-          name: spark-worker-cont
+          name: {{workerContainerName}}
           env:
             - name: SPARK_MODE
               value: "worker"
