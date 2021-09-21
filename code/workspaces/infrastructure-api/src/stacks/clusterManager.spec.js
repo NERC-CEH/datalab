@@ -7,6 +7,7 @@ import autoScalerApi from '../kubernetes/autoScalerApi';
 import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
+import { mountAssetsOnDeployment } from './assets/assetManager';
 
 jest.mock('./stackBuilders');
 stackBuilders.createNetworkPolicy = jest.fn().mockReturnValue(() => {});
@@ -26,7 +27,15 @@ networkPolicyApi.deleteNetworkPolicy = jest.fn().mockResolvedValue();
 jest.mock('../kubernetes/serviceApi');
 serviceApi.deleteService = jest.fn().mockResolvedValue();
 
+jest.mock('./assets/assetManager', () => ({
+  mountAssetsOnDeployment: jest.fn().mockResolvedValue(),
+}));
+
 describe('clusterManager', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('createClusterStack', () => {
     it('creates expected resources', async () => {
       // Arrange
@@ -39,6 +48,7 @@ describe('clusterManager', () => {
         maxWorkerCpu: 2,
         projectKey: 'project-key',
         name: 'cluster-name',
+        assetIds: ['1234', '5678'],
       };
       const clusterParams = {
         type: 'dask',
@@ -76,6 +86,73 @@ describe('clusterManager', () => {
       expect(stackBuilders.createService).toBeCalledWith(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerService);
       expect(stackBuilders.createDeployment).toHaveBeenNthCalledWith(2, workerParams, deploymentGenerator.createDatalabDaskWorkerDeployment);
       expect(stackBuilders.createAutoScaler).toBeCalledWith(workerParams, deploymentGenerator.createAutoScaler);
+
+      expect(mountAssetsOnDeployment).toBeCalledWith({
+        projectKey: 'project-key',
+        deploymentName: 'dask-scheduler-cluster-name',
+        containerNameWithMounts: 'dask-scheduler-cont',
+        assetIds: cluster.assetIds,
+      });
+
+      expect(mountAssetsOnDeployment).toBeCalledWith({
+        projectKey: 'project-key',
+        deploymentName: 'dask-worker-cluster-name',
+        containerNameWithMounts: 'dask-worker-cont',
+        assetIds: cluster.assetIds,
+      });
+    });
+
+    it('creates expected resources without assets', async () => {
+      // Arrange
+      const cluster = {
+        type: 'DASK',
+        volumeMount: 'volume-mount',
+        condaPath: '/conda/path',
+        maxWorkers: 8,
+        maxWorkerMemoryGb: 4,
+        maxWorkerCpu: 2,
+        projectKey: 'project-key',
+        name: 'cluster-name',
+        assetIds: [],
+      };
+      const clusterParams = {
+        type: 'dask',
+        projectKey: cluster.projectKey,
+        volumeMount: cluster.volumeMount,
+        condaPath: cluster.condaPath,
+        pureDaskImage: defaultImage('dask').image,
+        jupyterLabImage: defaultImage('jupyterlab').image,
+        // scheduler
+        schedulerPodLabel: 'dask-scheduler-cluster-name-po',
+        schedulerMemory: `${clustersConfig().dask.scheduler.memoryMax_GB.default}Gi`,
+        schedulerCpu: clustersConfig().dask.scheduler.CpuMax_vCPU.default,
+        // workers
+        workerPodLabel: 'dask-worker-cluster-name-po',
+        schedulerServiceName: 'dask-scheduler-cluster-name',
+        nThreads: clustersConfig().dask.workers.nThreads.default,
+        deathTimeoutSec: clustersConfig().dask.workers.deathTimeout_sec.default,
+        workerMemory: `${cluster.maxWorkerMemoryGb}Gi`,
+        workerCpu: cluster.maxWorkerCpu,
+        // auto-scaling
+        maxReplicas: cluster.maxWorkers,
+        targetCpuUtilization: clustersConfig().dask.workers.targetCpuUtilization_percent.default,
+        targetMemoryUtilization: clustersConfig().dask.workers.targetMemoryUtilization_percent.default,
+        scaleDownWindowSec: clustersConfig().dask.workers.scaleDownWindow_sec.default,
+      };
+      const schedulerParams = { ...clusterParams, name: 'scheduler-cluster-name' };
+      const workerParams = { ...clusterParams, name: 'worker-cluster-name' };
+
+      // Act
+      await createClusterStack(cluster);
+
+      // Asset
+      expect(stackBuilders.createNetworkPolicy).toBeCalledWith(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy);
+      expect(stackBuilders.createDeployment).toHaveBeenNthCalledWith(1, schedulerParams, deploymentGenerator.createDatalabDaskSchedulerDeployment);
+      expect(stackBuilders.createService).toBeCalledWith(schedulerParams, deploymentGenerator.createDatalabDaskSchedulerService);
+      expect(stackBuilders.createDeployment).toHaveBeenNthCalledWith(2, workerParams, deploymentGenerator.createDatalabDaskWorkerDeployment);
+      expect(stackBuilders.createAutoScaler).toBeCalledWith(workerParams, deploymentGenerator.createAutoScaler);
+
+      expect(mountAssetsOnDeployment).not.toHaveBeenCalled();
     });
   });
 

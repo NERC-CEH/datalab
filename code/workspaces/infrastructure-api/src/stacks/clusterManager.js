@@ -7,6 +7,7 @@ import autoScalerApi from '../kubernetes/autoScalerApi';
 import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
+import { mountAssetsOnDeployment } from './assets/assetManager';
 
 // DASK -> dask; SPARK -> spark
 const getLowerType = type => type.toLowerCase();
@@ -17,7 +18,7 @@ const getWorkerName = name => `worker-${name}`;
 
 export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
 
-export async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name }) {
+export async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name, assetIds }) {
   const lowerType = getLowerType(type);
   const schedulerName = getSchedulerName(name);
   const workerName = getWorkerName(name);
@@ -66,6 +67,16 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
     createDeployment(workerParams, deploymentGenerator.createDatalabDaskWorkerDeployment)(),
     createAutoScaler(workerParams, deploymentGenerator.createAutoScaler)(),
   ]);
+
+  // mount assets on the deployments
+  if (assetIds.length > 0) {
+    const schedulerDeploymentName = nameGenerator.deploymentName(schedulerName, lowerType);
+    const workerDeploymentName = nameGenerator.deploymentName(workerName, lowerType);
+    await Promise.all([
+      mountAssetsOnDeployment({ projectKey, deploymentName: schedulerDeploymentName, containerNameWithMounts: 'dask-scheduler-cont', assetIds }),
+      mountAssetsOnDeployment({ projectKey, deploymentName: workerDeploymentName, containerNameWithMounts: 'dask-worker-cont', assetIds }),
+    ]);
+  }
 }
 
 export async function deleteClusterStack({ type, projectKey, name }) {

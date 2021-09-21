@@ -192,7 +192,7 @@ describe('Stack Controller', () => {
       try {
         await stackManager.mountAssetsOnStack(stack);
       } catch (error) {
-        expect(error.message).toEqual('Could not mount assets on Stack. No stack deployment with name: jupyter-does-not-exist in namespace: testproj');
+        expect(error.message).toEqual('Could not mount assets on Stack. No deployment with name: jupyter-does-not-exist in namespace: testproj');
       }
     });
 
