@@ -71,6 +71,32 @@ function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, clusterI
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_WORKER_DEPLOYMENT);
 }
 
+function createDatalabSparkSchedulerDeployment({ deploymentName, clusterImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
+  const context = {
+    name: deploymentName,
+    sparkImage: clusterImage,
+    schedulerPodLabel,
+    schedulerContainerName,
+    schedulerMemory,
+    schedulerCpu,
+    volumeMount,
+  };
+  return generateManifest(context, DeploymentTemplates.DATALAB_SPARK_SCHEDULER_DEPLOYMENT);
+}
+
+function createDatalabSparkWorkerDeployment({ deploymentName, clusterImage, workerPodLabel, workerContainerName, workerMemory, workerCpu, volumeMount }) {
+  const context = {
+    name: deploymentName,
+    sparkImage: clusterImage,
+    workerPodLabel,
+    workerContainerName,
+    workerMemory,
+    workerCpu,
+    volumeMount,
+  };
+  return generateManifest(context, DeploymentTemplates.DATALAB_SPARK_WORKER_DEPLOYMENT);
+}
+
 function createZeppelinDeployment({ deploymentName, volumeMount, type, version }) {
   const img = getImage(type, version);
   const context = {
@@ -165,6 +191,14 @@ function createDatalabDaskSchedulerService({ serviceName, schedulerPodLabel }) {
   return generateManifest(context, ServiceTemplates.DATALAB_DASK_SCHEDULER_SERVICE);
 }
 
+function createDatalabSparkSchedulerService({ serviceName, schedulerPodLabel }) {
+  const context = {
+    name: serviceName,
+    schedulerPodLabel,
+  };
+  return generateManifest(context, ServiceTemplates.DATALAB_SPARK_SCHEDULER_SERVICE);
+}
+
 function createZeppelinService({ serviceName }) {
   const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.ZEPPELIN_SERVICE);
@@ -241,6 +275,11 @@ function createDatalabDaskSchedulerNetworkPolicy({ networkPolicyName, schedulerP
   return generateManifest(context, NetworkPolicyTemplates.DATALAB_DASK_SCHEDULER_NETWORK_POLICY);
 }
 
+function createDatalabSparkSchedulerNetworkPolicy({ networkPolicyName, schedulerPodLabel, projectKey }) {
+  const context = { name: networkPolicyName, schedulerPodLabel, projectKey };
+  return generateManifest(context, NetworkPolicyTemplates.DATALAB_SPARK_SCHEDULER_NETWORK_POLICY);
+}
+
 function createAutoScaler({ autoScalerName, scaleDeploymentName, maxReplicas, targetCpuUtilization, targetMemoryUtilization, scaleDownWindowSec }) {
   const context = {
     name: autoScalerName,
@@ -275,5 +314,9 @@ export default {
   createDatalabDaskWorkerDeployment,
   createDatalabDaskSchedulerService,
   createDatalabDaskSchedulerNetworkPolicy,
+  createDatalabSparkSchedulerDeployment,
+  createDatalabSparkWorkerDeployment,
+  createDatalabSparkSchedulerService,
+  createDatalabSparkSchedulerNetworkPolicy,
   createAutoScaler,
 };
