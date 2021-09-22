@@ -14,8 +14,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const copySnippet = () => {
-  const message = 'Unimplemented';
+const copySnippet = ({ schedulerAddress }) => {
+  const message = `# Paste this into your notebook cell
+import pyspark
+
+sc = pyspark.SparkContext(master="${schedulerAddress}")
+sc
+`;
   try {
     copy(message);
     notify.success('Clipboard contains snippet for notebook cell');
