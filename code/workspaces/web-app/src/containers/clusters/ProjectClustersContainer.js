@@ -41,6 +41,15 @@ const confirmDeleteCluster = dispatch => cluster => dispatch(modalDialogActions.
   onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
 }));
 
+const getOpenCreationForm = (dispatch, projectKey, clusterType, dataStores) => {
+  if (clusterType) {
+    const createClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
+    return () => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createClusterDialogProps));
+  }
+
+  return undefined;
+};
+
 const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData, copySnippet }) => {
   const dispatch = useDispatch();
   const currentUserId = useCurrentUserId();
@@ -55,7 +64,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
     }
   }, [dispatch, projectKey, modifyData]);
 
-  const createClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
+  const openCreationForm = getOpenCreationForm(dispatch, projectKey, clusterType, dataStores);
 
   return (
       <StackCards
@@ -63,7 +72,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
         typeName={CLUSTER_TYPE_NAME}
         typeNamePlural={CLUSTER_TYPE_NAME_PLURAL}
         userPermissions={() => userPermissions}
-        openCreationForm={() => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createClusterDialogProps))}
+        openCreationForm={openCreationForm}
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
         showCreateButton={modifyData}
         deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
@@ -120,6 +129,6 @@ export const getDialogProps = (dispatch, projectKey, clusterType, dataStores) =>
 export default ProjectClustersContainer;
 
 ProjectClustersContainer.propTypes = {
-  clusterType: PropTypes.string.isRequired,
+  clusterType: PropTypes.string,
   copySnippet: PropTypes.func,
 };

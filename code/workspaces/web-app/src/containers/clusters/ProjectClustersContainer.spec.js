@@ -62,9 +62,18 @@ mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
 const copyMock = () => {};
 
 describe('ProjectClustersContainer', () => {
-  const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
+  it('renders correct snapshot for all clusters', () => {
+    const getShallowRender = () => shallow(<ProjectClustersContainer projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
+    expect(getShallowRender()).toMatchSnapshot();
+  });
 
-  it('renders correct snapshot', () => {
+  it('renders correct snapshot for Dask clusters', () => {
+    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
+    expect(getShallowRender()).toMatchSnapshot();
+  });
+
+  it('renders correct snapshot for Spark clusters', () => {
+    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="SPARK" projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
     expect(getShallowRender()).toMatchSnapshot();
   });
 });
