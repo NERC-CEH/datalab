@@ -36,4 +36,18 @@ describe('useClustersByType', () => {
       value: [{ name: 'test1', type: 'DASK' }, { name: 'test2', type: 'DASK' }],
     });
   });
+
+  it('returns value of useClusters when no cluster type is specified', () => {
+    useShallowSelector.mockReturnValueOnce({
+      fetching: false,
+      value: clusters,
+    });
+
+    const returnValue = useClustersByType(undefined);
+
+    expect(returnValue).toEqual({
+      fetching: false,
+      value: clusters,
+    });
+  });
 });

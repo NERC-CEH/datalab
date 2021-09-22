@@ -89,4 +89,5 @@ StackCards.propTypes = {
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,
   editPermission: PropTypes.string,
+  copySnippet: PropTypes.func,
 };
