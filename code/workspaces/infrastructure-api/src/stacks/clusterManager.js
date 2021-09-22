@@ -18,8 +18,22 @@ const getWorkerName = name => `worker-${name}`;
 
 export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
 
+export const getSchedulerAddress = (schedulerServiceName, type) => {
+  const lowerType = getLowerType(type);
+  if (lowerType === 'dask') {
+    return `tcp://${schedulerServiceName}:8786`;
+  }
+
+  if (lowerType === 'spark') {
+    return `spark://${schedulerServiceName}:7077`;
+  }
+
+  return '';
+};
+
 export const getComponentCreators = (type) => {
-  if (type === 'dask') {
+  const lowerType = getLowerType(type);
+  if (lowerType === 'dask') {
     return {
       networkPolicyCreator: deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy,
       schedulerDeploymentCreator: deploymentGenerator.createDatalabDaskSchedulerDeployment,
@@ -28,7 +42,7 @@ export const getComponentCreators = (type) => {
     };
   }
 
-  if (type === 'spark') {
+  if (lowerType === 'spark') {
     return {
       networkPolicyCreator: deploymentGenerator.createDatalabSparkSchedulerNetworkPolicy,
       schedulerDeploymentCreator: deploymentGenerator.createDatalabSparkSchedulerDeployment,

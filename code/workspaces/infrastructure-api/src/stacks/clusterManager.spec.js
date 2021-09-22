@@ -1,6 +1,6 @@
 import clustersConfig from 'common/src/config/clusters';
 import { defaultImage, image } from 'common/src/config/images';
-import { createClusterStack, deleteClusterStack } from './clusterManager';
+import { createClusterStack, deleteClusterStack, getSchedulerAddress } from './clusterManager';
 import * as stackBuilders from './stackBuilders';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import autoScalerApi from '../kubernetes/autoScalerApi';
@@ -34,6 +34,22 @@ jest.mock('./assets/assetManager', () => ({
 describe('clusterManager', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  describe('getSchedulerAddress', () => {
+    const scheduler = 'scheduler';
+
+    it('returns the correct dask address', () => {
+      expect(getSchedulerAddress(scheduler, 'DASK')).toEqual('tcp://scheduler:8786');
+    });
+
+    it('returns the correct spark address', () => {
+      expect(getSchedulerAddress(scheduler, 'SPARK')).toEqual('spark://scheduler:7077');
+    });
+
+    it('returns an empty address for an invalid type', () => {
+      expect(getSchedulerAddress(scheduler, 'invalid')).toEqual('');
+    });
   });
 
   describe('createClusterStack', () => {

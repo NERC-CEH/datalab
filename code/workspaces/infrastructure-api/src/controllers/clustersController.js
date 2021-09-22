@@ -1,6 +1,6 @@
 import { matchedData } from 'express-validator';
 import clustersRepository from '../dataaccess/clustersRepository';
-import { getSchedulerServiceName, createClusterStack, deleteClusterStack } from '../stacks/clusterManager';
+import { getSchedulerServiceName, getSchedulerAddress, createClusterStack, deleteClusterStack } from '../stacks/clusterManager';
 
 function requestCluster(request) {
   const params = matchedData(request);
@@ -26,7 +26,7 @@ async function createCluster(request, response, next) {
 
   try {
     const schedulerServiceName = getSchedulerServiceName(cluster.name, cluster.type);
-    const schedulerAddress = `tcp://${schedulerServiceName}:8786`;
+    const schedulerAddress = getSchedulerAddress(schedulerServiceName, cluster.type);
     const createdCluster = await clustersRepository.createCluster({ ...cluster, schedulerAddress });
     await createClusterStack(cluster);
     return response.status(201).send(createdCluster);
