@@ -73,10 +73,10 @@ function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, clusterI
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_WORKER_DEPLOYMENT);
 }
 
-function createDatalabSparkSchedulerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
+function createDatalabSparkSchedulerDeployment({ deploymentName, clusterImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
   const context = {
     name: deploymentName,
-    sparkImage: (volumeMount && condaPath) ? jupyterLabImage : clusterImage,
+    sparkImage: clusterImage,
     schedulerPodLabel,
     schedulerContainerName,
     schedulerMemory,
@@ -86,10 +86,10 @@ function createDatalabSparkSchedulerDeployment({ deploymentName, condaPath, clus
   return generateManifest(context, DeploymentTemplates.DATALAB_SPARK_SCHEDULER_DEPLOYMENT);
 }
 
-function createDatalabSparkWorkerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, workerPodLabel, workerContainerName, workerMemory, workerCpu, volumeMount }) {
+function createDatalabSparkWorkerDeployment({ deploymentName, clusterImage, workerPodLabel, workerContainerName, workerMemory, workerCpu, volumeMount }) {
   const context = {
     name: deploymentName,
-    sparkImage: (volumeMount && condaPath) ? jupyterLabImage : clusterImage,
+    sparkImage: clusterImage,
     workerPodLabel,
     workerContainerName,
     workerMemory,
