@@ -46,11 +46,11 @@ exports[`ProjectClustersContainer renders correct snapshot for Spark clusters 1`
       "fetching": false,
       "value": Array [
         Object {
-          "description": "tcp://dask-scheduler-test-cluster:8786 is the scheduler address.",
-          "displayName": "Test Cluster",
-          "name": "test-cluster",
+          "description": "spark://spark-scheduler-test-cluster:7077 is the scheduler address.",
+          "displayName": "Test Spark Cluster",
+          "name": "test-spark-cluster",
           "projectKey": "project-key",
-          "schedulerAddress": "tcp://dask-scheduler-test-cluster:8786",
+          "schedulerAddress": "spark://spark-scheduler-test-cluster:7077",
           "type": "SPARK",
         },
       ],
