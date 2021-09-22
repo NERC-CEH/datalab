@@ -7,6 +7,7 @@ jest.mock('../stacks/clusterManager');
 clusterManager.createClusterStack = jest.fn().mockResolvedValue();
 clusterManager.deleteClusterStack = jest.fn().mockResolvedValue();
 clusterManager.getSchedulerServiceName = jest.fn().mockReturnValue('dask-scheduler-cluster');
+clusterManager.getSchedulerAddress = jest.fn().mockReturnValue('tcp://dask-scheduler-cluster:8786');
 
 jest.mock('../dataaccess/clustersRepository');
 

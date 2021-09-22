@@ -1,6 +1,6 @@
 import clustersConfig from 'common/src/config/clusters';
-import { defaultImage } from 'common/src/config/images';
-import { createClusterStack, deleteClusterStack } from './clusterManager';
+import { defaultImage, image } from 'common/src/config/images';
+import { createClusterStack, deleteClusterStack, getSchedulerAddress } from './clusterManager';
 import * as stackBuilders from './stackBuilders';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import autoScalerApi from '../kubernetes/autoScalerApi';
@@ -36,6 +36,22 @@ describe('clusterManager', () => {
     jest.clearAllMocks();
   });
 
+  describe('getSchedulerAddress', () => {
+    const scheduler = 'scheduler';
+
+    it('returns the correct dask address', () => {
+      expect(getSchedulerAddress(scheduler, 'DASK')).toEqual('tcp://scheduler:8786');
+    });
+
+    it('returns the correct spark address', () => {
+      expect(getSchedulerAddress(scheduler, 'SPARK')).toEqual('spark://scheduler:7077');
+    });
+
+    it('returns an empty address for an invalid type', () => {
+      expect(getSchedulerAddress(scheduler, 'invalid')).toEqual('');
+    });
+  });
+
   describe('createClusterStack', () => {
     it('creates expected resources', async () => {
       // Arrange
@@ -55,14 +71,16 @@ describe('clusterManager', () => {
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
-        pureDaskImage: defaultImage('dask').image,
+        clusterImage: defaultImage('dask').image,
         jupyterLabImage: defaultImage('jupyterlab').image,
         // scheduler
         schedulerPodLabel: 'dask-scheduler-cluster-name-po',
+        schedulerContainerName: 'dask-scheduler-cont',
         schedulerMemory: `${clustersConfig().dask.scheduler.memoryMax_GB.default}Gi`,
         schedulerCpu: clustersConfig().dask.scheduler.CpuMax_vCPU.default,
         // workers
         workerPodLabel: 'dask-worker-cluster-name-po',
+        workerContainerName: 'dask-worker-cont',
         schedulerServiceName: 'dask-scheduler-cluster-name',
         nThreads: clustersConfig().dask.workers.nThreads.default,
         deathTimeoutSec: clustersConfig().dask.workers.deathTimeout_sec.default,
@@ -102,6 +120,73 @@ describe('clusterManager', () => {
       });
     });
 
+    it('creates spark cluster correctly', async () => {
+      // Arrange
+      const cluster = {
+        type: 'SPARK',
+        volumeMount: 'volume-mount',
+        condaPath: '/conda/path',
+        maxWorkers: 8,
+        maxWorkerMemoryGb: 4,
+        maxWorkerCpu: 2,
+        projectKey: 'project-key',
+        name: 'cluster-name',
+        assetIds: ['1234', '5678'],
+      };
+      const clusterParams = {
+        type: 'spark',
+        projectKey: cluster.projectKey,
+        volumeMount: cluster.volumeMount,
+        condaPath: cluster.condaPath,
+        clusterImage: image('spark', 'Per Project').image,
+        jupyterLabImage: defaultImage('jupyterlab').image,
+        // scheduler
+        schedulerPodLabel: 'spark-scheduler-cluster-name-po',
+        schedulerContainerName: 'spark-scheduler-cont',
+        schedulerMemory: `${clustersConfig().spark.scheduler.memoryMax_GB.default}Gi`,
+        schedulerCpu: clustersConfig().spark.scheduler.CpuMax_vCPU.default,
+        // workers
+        workerPodLabel: 'spark-worker-cluster-name-po',
+        workerContainerName: 'spark-worker-cont',
+        schedulerServiceName: 'spark-scheduler-cluster-name',
+        nThreads: clustersConfig().spark.workers.nThreads.default,
+        deathTimeoutSec: clustersConfig().spark.workers.deathTimeout_sec.default,
+        workerMemory: `${cluster.maxWorkerMemoryGb}Gi`,
+        workerCpu: cluster.maxWorkerCpu,
+        // auto-scaling
+        maxReplicas: cluster.maxWorkers,
+        targetCpuUtilization: clustersConfig().spark.workers.targetCpuUtilization_percent.default,
+        targetMemoryUtilization: clustersConfig().spark.workers.targetMemoryUtilization_percent.default,
+        scaleDownWindowSec: clustersConfig().spark.workers.scaleDownWindow_sec.default,
+      };
+      const schedulerParams = { ...clusterParams, name: 'scheduler-cluster-name' };
+      const workerParams = { ...clusterParams, name: 'worker-cluster-name' };
+
+      // Act
+      await createClusterStack(cluster);
+
+      // Asset
+      expect(stackBuilders.createNetworkPolicy).toBeCalledWith(schedulerParams, deploymentGenerator.createDatalabSparkSchedulerNetworkPolicy);
+      expect(stackBuilders.createDeployment).toHaveBeenNthCalledWith(1, schedulerParams, deploymentGenerator.createDatalabSparkSchedulerDeployment);
+      expect(stackBuilders.createService).toBeCalledWith(schedulerParams, deploymentGenerator.createDatalabSparkSchedulerService);
+      expect(stackBuilders.createDeployment).toHaveBeenNthCalledWith(2, workerParams, deploymentGenerator.createDatalabSparkWorkerDeployment);
+      expect(stackBuilders.createAutoScaler).toBeCalledWith(workerParams, deploymentGenerator.createAutoScaler);
+
+      expect(mountAssetsOnDeployment).toBeCalledWith({
+        projectKey: 'project-key',
+        deploymentName: 'spark-scheduler-cluster-name',
+        containerNameWithMounts: 'spark-scheduler-cont',
+        assetIds: cluster.assetIds,
+      });
+
+      expect(mountAssetsOnDeployment).toBeCalledWith({
+        projectKey: 'project-key',
+        deploymentName: 'spark-worker-cluster-name',
+        containerNameWithMounts: 'spark-worker-cont',
+        assetIds: cluster.assetIds,
+      });
+    });
+
     it('creates expected resources without assets', async () => {
       // Arrange
       const cluster = {
@@ -120,14 +205,16 @@ describe('clusterManager', () => {
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
-        pureDaskImage: defaultImage('dask').image,
+        clusterImage: defaultImage('dask').image,
         jupyterLabImage: defaultImage('jupyterlab').image,
         // scheduler
         schedulerPodLabel: 'dask-scheduler-cluster-name-po',
+        schedulerContainerName: 'dask-scheduler-cont',
         schedulerMemory: `${clustersConfig().dask.scheduler.memoryMax_GB.default}Gi`,
         schedulerCpu: clustersConfig().dask.scheduler.CpuMax_vCPU.default,
         // workers
         workerPodLabel: 'dask-worker-cluster-name-po',
+        workerContainerName: 'dask-worker-cont',
         schedulerServiceName: 'dask-scheduler-cluster-name',
         nThreads: clustersConfig().dask.workers.nThreads.default,
         deathTimeoutSec: clustersConfig().dask.workers.deathTimeout_sec.default,

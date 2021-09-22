@@ -8,6 +8,8 @@ const isAssetVolume = volumeName => volumeName.match(/^asset-/);
 const networkPolicyName = (name, type) => `${type}-${name}-netpol`;
 const autoScalerName = (name, type) => `${type}-${name}-hpa`;
 const podLabel = (name, type) => `${type}-${name}-po`;
+const schedulerContainerName = type => `${type}-scheduler-cont`;
+const workerContainerName = type => `${type}-worker-cont`;
 
 // project namespaces
 const projectNamespace = projectKey => projectKey;
@@ -36,6 +38,8 @@ export default {
   networkPolicyName,
   autoScalerName,
   podLabel,
+  schedulerContainerName,
+  workerContainerName,
   projectNamespace,
   projectComputeNamespace,
   pvcName,

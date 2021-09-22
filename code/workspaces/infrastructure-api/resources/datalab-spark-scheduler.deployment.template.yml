@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - image: {{{sparkImage}}}
-          name: spark-scheduler-cont
+          name: {{schedulerContainerName}}
           env:
             - name: SPARK_MODE
               value: "master"

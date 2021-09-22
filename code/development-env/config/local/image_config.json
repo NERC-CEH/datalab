@@ -110,6 +110,10 @@
       "versions": [
         {
           "image": "nerc/spark-k8s:0.1.0"
+        },
+        {
+          "displayName": "Per Project",
+          "image": "bitnami/spark:3.1.2"
         }
       ],
       "masterAddress": "spark://spark-master:7077",
