@@ -138,7 +138,7 @@ describe('clusterManager', () => {
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
-        clusterImage: image('spark', 'Per Project').image,
+        clusterImage: defaultImage('spark').image,
         jupyterLabImage: defaultImage('jupyterlab').image,
         // scheduler
         schedulerPodLabel: 'spark-scheduler-cluster-name-po',

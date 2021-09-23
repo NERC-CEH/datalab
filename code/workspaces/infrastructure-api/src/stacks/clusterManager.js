@@ -1,5 +1,5 @@
 import clustersConfig from 'common/src/config/clusters';
-import { defaultImage, image } from 'common/src/config/images';
+import { defaultImage } from 'common/src/config/images';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import { createDeployment, createService, createNetworkPolicy, createAutoScaler } from './stackBuilders';
 import nameGenerator from '../common/nameGenerators';
@@ -54,14 +54,6 @@ export const getComponentCreators = (type) => {
   throw new Error(`Unsupported cluster type ${type}`);
 };
 
-export const getClusterImage = (type) => {
-  if (type === 'spark') {
-    return image(type, 'Per Project');
-  }
-
-  return defaultImage(type);
-};
-
 export async function createClusterStack({ type, volumeMount, condaPath, maxWorkers, maxWorkerMemoryGb, maxWorkerCpu, projectKey, name, assetIds }) {
   const lowerType = getLowerType(type);
   const schedulerName = getSchedulerName(name);
@@ -79,7 +71,7 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
     projectKey,
     volumeMount,
     condaPath,
-    clusterImage: getClusterImage(lowerType).image,
+    clusterImage: defaultImage(lowerType).image,
     jupyterLabImage: defaultImage('jupyterlab').image,
     // scheduler
     schedulerPodLabel,
