@@ -1,5 +1,5 @@
 import clustersConfig from 'common/src/config/clusters';
-import { defaultImage, image } from 'common/src/config/images';
+import { defaultImage } from 'common/src/config/images';
 import { createClusterStack, deleteClusterStack, getSchedulerAddress } from './clusterManager';
 import * as stackBuilders from './stackBuilders';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
