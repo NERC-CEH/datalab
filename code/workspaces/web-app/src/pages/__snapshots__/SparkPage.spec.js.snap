@@ -27,3 +27,21 @@ exports[`SparkPage renders correct snapshot 1`] = `
   </div>
 </WithStyles(Page)>
 `;
+
+exports[`getMessage returns the correct message 1`] = `
+"
+import os
+import pyspark
+
+conf = pyspark.SparkConf()
+# The below option can be altered depending on your memory requirement.
+# The maximum value is the amount of memory assigned to each worker, minus 1GB.
+conf.set('spark.executor.memory', '3g')
+
+os.environ[\\"PYSPARK_PYTHON\\"] = \\"/data/conda/myenv/bin/python\\"
+os.environ[\\"PYSPARK_DRIVER_PYTHON\\"] = \\"/data/conda/myenv/bin/python\\"
+
+sc = pyspark.SparkContext(master=\\"spark://spark-scheduler-mycluster:7077\\", conf=conf)
+sc
+"
+`;

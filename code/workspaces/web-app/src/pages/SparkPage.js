@@ -14,13 +14,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const copySnippet = ({ schedulerAddress }) => {
-  const message = `# Paste this into your notebook cell
+export const getPythonMessage = (condaPath, schedulerAddress) => {
+  const pythonVersionString = `${condaPath}/bin/python`;
+
+  return `
+import os
 import pyspark
 
-sc = pyspark.SparkContext(master="${schedulerAddress}")
+conf = pyspark.SparkConf()
+# The below option can be altered depending on your memory requirement.
+# The maximum value is the amount of memory assigned to each worker, minus 1GB.
+conf.set('spark.executor.memory', '3g')
+
+os.environ["PYSPARK_PYTHON"] = "${pythonVersionString}"
+os.environ["PYSPARK_DRIVER_PYTHON"] = "${pythonVersionString}"
+
+sc = pyspark.SparkContext(master="${schedulerAddress}", conf=conf)
 sc
 `;
+};
+
+const copySnippet = ({ condaPath, schedulerAddress }) => {
+  const message = getPythonMessage(condaPath, schedulerAddress);
   try {
     copy(message);
     notify.success('Clipboard contains snippet for notebook cell');
