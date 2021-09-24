@@ -29,8 +29,7 @@ exports[`SparkPage renders correct snapshot 1`] = `
 `;
 
 exports[`getMessage returns the correct message 1`] = `
-"
-import os
+"import os
 import pyspark
 
 conf = pyspark.SparkConf()

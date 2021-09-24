@@ -17,8 +17,7 @@ const useStyles = makeStyles(theme => ({
 export const getPythonMessage = (condaPath, schedulerAddress) => {
   const pythonVersionString = `${condaPath}/bin/python`;
 
-  return `
-import os
+  return `import os
 import pyspark
 
 conf = pyspark.SparkConf()
