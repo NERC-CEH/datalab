@@ -10,6 +10,7 @@ Object {
         "upperLimit": 8,
       },
     },
+    "condaRequired": false,
     "scheduler": Object {
       "CpuMax_vCPU": Object {
         "default": 0.2,
@@ -54,6 +55,7 @@ Object {
         "upperLimit": 8,
       },
     },
+    "condaRequired": true,
     "scheduler": Object {
       "CpuMax_vCPU": Object {
         "default": 0.2,
