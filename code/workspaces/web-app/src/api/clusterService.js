@@ -42,6 +42,7 @@ function loadClusters(projectKey) {
         name
         displayName
         schedulerAddress
+        condaPath
       }
     }
   `;
