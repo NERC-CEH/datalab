@@ -55,6 +55,7 @@ const setMocks = () => {
   mockCluster.getClusterMaxWorkers.mockReturnValue({ lowerLimit: 1, default: 4, upperLimit: 8 });
   mockCluster.getWorkerMemoryMax.mockReturnValue({ lowerLimit: 0.5, default: 4, upperLimit: 8 });
   mockCluster.getWorkerCpuMax.mockReturnValue({ lowerLimit: 0.5, default: 0.5, upperLimit: 2 });
+  mockCluster.getCondaRequired.mockReturnValue(true);
   mockClusterActions.loadClusters = mockLoadClustersAction;
   mockClusterActions.createCluster = mockCreateClusterAction;
   mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;

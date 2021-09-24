@@ -9,7 +9,7 @@ import { useClustersByType } from '../../hooks/clustersHooks';
 import clusterActions from '../../actions/clusterActions';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import modalDialogActions from '../../actions/modalDialogActions';
-import { getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax } from '../../config/clusters';
+import { getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax, getCondaRequired } from '../../config/clusters';
 import { MODAL_TYPE_CREATE_CLUSTER, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import { useDataStorageForUserInProject } from '../../hooks/dataStorageHooks';
 import dataStorageActions from '../../actions/dataStorageActions';
@@ -122,6 +122,7 @@ export const getDialogProps = (dispatch, projectKey, clusterType, dataStores) =>
   clusterMaxWorkers: getClusterMaxWorkers(clusterType),
   workerMaxMemory: getWorkerMemoryMax(clusterType),
   workerMaxCpu: getWorkerCpuMax(clusterType),
+  condaRequired: getCondaRequired(clusterType),
   dataStorageOptions: dataStores.map(store => ({ text: store.displayName, value: store.name })),
   projectKey,
 });

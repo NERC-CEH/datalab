@@ -25,10 +25,16 @@ export const removeNoneOptions = values => Object.entries(values).reduce(
 );
 
 export const CreateClusterFormContent = ({
-  handleSubmit, form: formName, onSubmit, cancel, submitting, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu, projectKey,
+  handleSubmit, form: formName, onSubmit, cancel, submitting, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu, projectKey, condaRequired,
 }) => {
   const VOLUME_MOUNT_FIELD_NAME = 'volumeMount';
   const volumeMountValue = useReduxFormValue(formName, VOLUME_MOUNT_FIELD_NAME);
+
+  const volumeMountLabel = `Data Store to Mount${condaRequired ? '' : ' (optional)'}`;
+  const condaPathLabel = `Path to Conda environment${condaRequired ? '' : ' (optional)'}`;
+
+  // Don't allow "None" for the Data Storage if a conda environment is required.
+  const volumeOptions = condaRequired ? dataStorageOptions : [noneOption, ...dataStorageOptions];
 
   return (
     <form onSubmit={handleSubmit(values => onSubmit(removeNoneOptions(values)))}>
@@ -45,15 +51,15 @@ export const CreateClusterFormContent = ({
       <Field
         {...commonFieldProps}
         name={VOLUME_MOUNT_FIELD_NAME}
-        label="Data Store to Mount (optional)"
+        label={volumeMountLabel}
         component={renderSelectField}
-        options={[noneOption, ...dataStorageOptions]}
+        options={volumeOptions}
       />
       {volumeMountValue && volumeMountValue !== noneOption.value
         && <Field
           {...commonFieldProps}
           name="condaPath"
-          label="Path to Conda environment (optional)"
+          label={condaPathLabel}
           helperText="The file path to the conda environment on the selected Data Store to be used by the workers."
           placeholder="/data/conda/conda-env"
         />
@@ -117,13 +123,15 @@ export const CreateClusterFormContent = ({
   );
 };
 
-const CreateClusterReduxForm = reduxForm({
-  validate: syncValidate,
-  destroyOnUnmount: false,
-  enableReinitialize: true,
-})(CreateClusterFormContent);
+const CreateClusterForm = ({ formName, ...otherProps }) => {
+  const CreateClusterReduxForm = reduxForm({
+    validate: syncValidate(otherProps.condaRequired),
+    destroyOnUnmount: false,
+    enableReinitialize: true,
+  })(CreateClusterFormContent);
 
-const CreateClusterForm = ({ formName, ...otherProps }) => <CreateClusterReduxForm form={formName} {...otherProps} />;
+  return <CreateClusterReduxForm form={formName} {...otherProps} />;
+};
 
 export { CreateClusterFormContent as PureCreateClusterForm };
 export default CreateClusterForm;
@@ -150,4 +158,5 @@ CreateClusterForm.propTypes = {
   workerMaxMemory: inputConstraintPropTypes.isRequired,
   workerMaxCpu: inputConstraintPropTypes.isRequired,
   projectKey: PropTypes.string.isRequired,
+  condaRequired: PropTypes.bool.isRequired,
 };

@@ -99,6 +99,7 @@ Object {
     "lowerLimit": 1,
     "upperLimit": 8,
   },
+  "condaRequired": true,
   "dataStorageOptions": Array [],
   "formName": "createCluster",
   "onCancel": [Function],

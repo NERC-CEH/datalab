@@ -1,6 +1,6 @@
 import reduxFormValidator from '../common/form/reduxFormValidator';
 
-const constraints = {
+const getConstraints = condaRequired => ({
   displayName: {
     presence: true,
     length: { minimum: 2 },
@@ -16,6 +16,12 @@ const constraints = {
       maximum: 16,
     },
   },
+  volumeMount: {
+    presence: condaRequired,
+  },
+  condaPath: {
+    presence: condaRequired,
+  },
   maxWorkers: {
     presence: true,
     numericality: { onlyInteger: true, noStrings: true },
@@ -28,7 +34,7 @@ const constraints = {
     presence: true,
     numericality: { noStrings: true },
   },
-};
+});
 
 // eslint-disable-next-line import/prefer-default-export
-export const syncValidate = values => reduxFormValidator(values, constraints);
+export const syncValidate = condaRequired => values => reduxFormValidator(values, getConstraints(condaRequired));
