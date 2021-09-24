@@ -41,7 +41,8 @@
       "scaleDownWindow_sec": {
         "default": 300
       }
-    }
+    },
+    "condaRequired": false
   },
   "spark": {
     "cluster": {
@@ -85,6 +86,7 @@
       "scaleDownWindow_sec": {
         "default": 300
       }
-    }
+    },
+    "condaRequired": true
   }
 }

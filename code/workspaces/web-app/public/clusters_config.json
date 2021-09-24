@@ -18,7 +18,8 @@
         "default": 0.5,
         "upperLimit": 2
       }
-    }
+    },
+    "condaRequired": false
   },
   "spark": {
     "cluster": {
@@ -39,6 +40,7 @@
         "default": 0.5,
         "upperLimit": 2
       }
-    }
+    },
+    "condaRequired": true
   }
 }
