@@ -22,4 +22,12 @@ describe('getMessage', () => {
 
     expect(getPythonMessage(condaPath, schedulerAddress, maxMemory)).toMatchSnapshot();
   });
+
+  it('returns the correct message if memory is not an integer', () => {
+    const condaPath = '/data/conda/myenv';
+    const schedulerAddress = 'spark://spark-scheduler-mycluster:7077';
+    const maxMemory = 5.5;
+
+    expect(getPythonMessage(condaPath, schedulerAddress, maxMemory)).toMatchSnapshot();
+  });
 });
