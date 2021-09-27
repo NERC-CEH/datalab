@@ -75,7 +75,7 @@ Object {
       },
       "memoryMax_GB": Object {
         "default": 4,
-        "lowerLimit": 0.5,
+        "lowerLimit": 2,
         "upperLimit": 8,
       },
       "nThreads": Object {
