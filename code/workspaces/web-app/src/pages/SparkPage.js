@@ -14,8 +14,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const getPythonMessage = (condaPath, schedulerAddress) => {
+export const getPythonMessage = (condaPath, schedulerAddress, maxWorkerMemoryGb) => {
   const pythonVersionString = `${condaPath}/bin/python`;
+
+  // 1GB is reserved, and Spark expects integer values for the executor memory.
+  const mem = Math.floor(maxWorkerMemoryGb) - 1;
 
   return `import os
 import pyspark
@@ -23,7 +26,7 @@ import pyspark
 conf = pyspark.SparkConf()
 # The below option can be altered depending on your memory requirement.
 # The maximum value is the amount of memory assigned to each worker, minus 1GB.
-conf.set('spark.executor.memory', '3g')
+conf.set('spark.executor.memory', '${mem}g')
 
 os.environ["PYSPARK_PYTHON"] = "${pythonVersionString}"
 os.environ["PYSPARK_DRIVER_PYTHON"] = "${pythonVersionString}"
@@ -33,8 +36,8 @@ sc
 `;
 };
 
-const copySnippet = ({ condaPath, schedulerAddress }) => {
-  const message = getPythonMessage(condaPath, schedulerAddress);
+const copySnippet = ({ condaPath, schedulerAddress, maxWorkerMemoryGb }) => {
+  const message = getPythonMessage(condaPath, schedulerAddress, maxWorkerMemoryGb);
   try {
     copy(message);
     notify.success('Clipboard contains snippet for notebook cell');

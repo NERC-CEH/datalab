@@ -18,7 +18,8 @@ describe('getMessage', () => {
   it('returns the correct message', () => {
     const condaPath = '/data/conda/myenv';
     const schedulerAddress = 'spark://spark-scheduler-mycluster:7077';
+    const maxMemory = 4;
 
-    expect(getPythonMessage(condaPath, schedulerAddress)).toMatchSnapshot();
+    expect(getPythonMessage(condaPath, schedulerAddress, maxMemory)).toMatchSnapshot();
   });
 });

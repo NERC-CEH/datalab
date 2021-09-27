@@ -43,6 +43,7 @@ function loadClusters(projectKey) {
         displayName
         schedulerAddress
         condaPath
+        maxWorkerMemoryGb
       }
     }
   `;

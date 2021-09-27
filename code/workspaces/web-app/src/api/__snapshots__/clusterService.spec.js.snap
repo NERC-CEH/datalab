@@ -30,6 +30,7 @@ exports[`clusterService loadClusters should build the correct query and unpack t
         displayName
         schedulerAddress
         condaPath
+        maxWorkerMemoryGb
       }
     }
   "
