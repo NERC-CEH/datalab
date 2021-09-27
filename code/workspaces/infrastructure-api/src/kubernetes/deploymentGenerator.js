@@ -86,7 +86,7 @@ function createDatalabSparkSchedulerDeployment({ deploymentName, clusterImage, s
   return generateManifest(context, DeploymentTemplates.DATALAB_SPARK_SCHEDULER_DEPLOYMENT);
 }
 
-function createDatalabSparkWorkerDeployment({ deploymentName, clusterImage, workerPodLabel, workerContainerName, workerMemory, workerCpu, volumeMount }) {
+function createDatalabSparkWorkerDeployment({ deploymentName, clusterImage, workerPodLabel, workerContainerName, workerMemory, workerCpu, volumeMount, schedulerServiceName }) {
   const context = {
     name: deploymentName,
     sparkImage: clusterImage,
@@ -95,6 +95,7 @@ function createDatalabSparkWorkerDeployment({ deploymentName, clusterImage, work
     workerMemory,
     workerCpu,
     volumeMount,
+    schedulerServiceName,
   };
   return generateManifest(context, DeploymentTemplates.DATALAB_SPARK_WORKER_DEPLOYMENT);
 }

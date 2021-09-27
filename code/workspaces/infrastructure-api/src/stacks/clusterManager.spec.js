@@ -1,5 +1,5 @@
 import clustersConfig from 'common/src/config/clusters';
-import { defaultImage, image } from 'common/src/config/images';
+import { defaultImage } from 'common/src/config/images';
 import { createClusterStack, deleteClusterStack, getSchedulerAddress } from './clusterManager';
 import * as stackBuilders from './stackBuilders';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
@@ -138,7 +138,7 @@ describe('clusterManager', () => {
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
-        clusterImage: image('spark', 'Per Project').image,
+        clusterImage: defaultImage('spark').image,
         jupyterLabImage: defaultImage('jupyterlab').image,
         // scheduler
         schedulerPodLabel: 'spark-scheduler-cluster-name-po',

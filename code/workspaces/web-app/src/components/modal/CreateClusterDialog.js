@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateClusterDialog = ({ title, formName, onSubmit, onCancel, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu, projectKey }) => {
+const CreateClusterDialog = ({ title, formName, onSubmit, onCancel, dataStorageOptions, clusterMaxWorkers, workerMaxMemory, workerMaxCpu, projectKey, condaRequired }) => {
   const classes = useStyles();
   return (
     <Dialog open={true} maxWidth="md">
@@ -33,6 +33,7 @@ const CreateClusterDialog = ({ title, formName, onSubmit, onCancel, dataStorageO
               maxWorkerCpu: workerMaxCpu.default,
             }}
             projectKey={projectKey}
+            condaRequired={condaRequired}
           />
         </DialogContent>
       </div>
@@ -56,6 +57,7 @@ CreateClusterDialog.propTypes = {
   workerMaxMemory: inputConstraintPropTypes.isRequired,
   workerMaxCpu: inputConstraintPropTypes.isRequired,
   projectKey: PropTypes.string.isRequired,
+  condaRequired: PropTypes.bool.isRequired,
 };
 
 export default CreateClusterDialog;

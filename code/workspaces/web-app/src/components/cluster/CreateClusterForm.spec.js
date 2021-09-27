@@ -14,6 +14,7 @@ const getProps = () => ({
   clusterMaxWorkers: { lowerLimit: 1, default: 4, upperLimit: 8 },
   workerMaxMemory: { lowerLimit: 0.5, default: 4, upperLimit: 8 },
   workerMaxCpu: { lowerLimit: 0.5, default: 0.5, upperLimit: 2 },
+  condaRequired: false,
 });
 
 describe('CreateClusterForm', () => {
@@ -35,6 +36,16 @@ describe('CreateClusterForm', () => {
     it('with condaPath field when volumeMount field is set', () => {
       useReduxFormValue.mockReturnValueOnce('teststore');
       const props = getProps();
+      const render = shallow(<PureCreateClusterForm {...props} />);
+      expect(render).toMatchSnapshot();
+    });
+
+    it('when conda is required and volumeMount field is set', () => {
+      useReduxFormValue.mockReturnValueOnce('teststore');
+      const props = {
+        ...getProps(),
+        condaRequired: true,
+      };
       const render = shallow(<PureCreateClusterForm {...props} />);
       expect(render).toMatchSnapshot();
     });

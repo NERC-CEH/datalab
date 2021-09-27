@@ -212,7 +212,7 @@ spec:
             - name: SPARK_MODE
               value: \\"worker\\"
             - name: SPARK_MASTER_URL
-              value: \\"spark://spark-scheduler-host:7077\\"
+              value: \\"spark://scheduler-service-name:7077\\"
           resources:
             requests:
               memory: worker-memory

@@ -41,7 +41,8 @@
       "scaleDownWindow_sec": {
         "default": 300
       }
-    }
+    },
+    "condaRequired": false
   },
   "spark": {
     "cluster": {
@@ -61,7 +62,7 @@
     },
     "workers": {
       "memoryMax_GB": {
-        "lowerLimit": 0.5,
+        "lowerLimit": 2,
         "default": 4,
         "upperLimit": 8
       },
@@ -85,6 +86,7 @@
       "scaleDownWindow_sec": {
         "default": 300
       }
-    }
+    },
+    "condaRequired": true
   }
 }

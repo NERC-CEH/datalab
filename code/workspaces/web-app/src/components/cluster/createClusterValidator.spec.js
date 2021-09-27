@@ -5,17 +5,18 @@ describe('syncValidate', () => {
     displayName: 'Test Cluster',
     name: 'testcluster',
     volumeMount: 'teststore',
+    condaPath: 'example/path/to/env',
     maxWorkers: 5,
     maxWorkerMemoryGb: 4.5,
     maxWorkerCpu: 0.5,
   });
 
-  const testValues = (fieldName, validValues, invalidValues) => {
+  const testValues = (fieldName, validValues, invalidValues, condaRequired = false) => {
     validValues.forEach((testValue) => {
       it(`as valid when value = ${testValue} and is typeof ${typeof testValue}`, () => {
         const valuesToValidate = getValidValues();
         valuesToValidate[fieldName] = testValue;
-        const validationResult = syncValidate(valuesToValidate);
+        const validationResult = syncValidate(condaRequired)(valuesToValidate);
         expect(validationResult).toBeUndefined(); // no return value when all valid
       });
     });
@@ -24,7 +25,7 @@ describe('syncValidate', () => {
       it(`as invalid when value = ${testValue} and is typeof ${typeof testValue}`, () => {
         const valuesToValidate = getValidValues();
         valuesToValidate[fieldName] = testValue;
-        const validationResult = syncValidate(valuesToValidate);
+        const validationResult = syncValidate(condaRequired)(valuesToValidate);
         expect(validationResult).toBeDefined();
         expect(validationResult[fieldName]).toBeDefined(); // return of { fieldName: error } when invalid
       });
@@ -67,12 +68,28 @@ describe('syncValidate', () => {
   });
 
   describe('validates volumeMount', () => {
-    const validValues = [
-      'teststore',
-      undefined,
-    ];
-    const invalidValues = [];
-    testValues('volumeMount', validValues, invalidValues);
+    describe('when conda is not required', () => {
+      const validValues = [
+        'teststore',
+        undefined,
+      ];
+      const invalidValues = [];
+      testValues('volumeMount', validValues, invalidValues);
+    });
+
+    describe('when conda is required', () => {
+      const validValues = ['teststore'];
+      const invalidValues = [undefined];
+      testValues('volumeMount', validValues, invalidValues, true);
+    });
+  });
+
+  describe('validates condaPath', () => {
+    describe('when conda is required', () => {
+      const validValues = ['example/path/to/env'];
+      const invalidValues = [undefined];
+      testValues('condaPath', validValues, invalidValues, true);
+    });
   });
 
   describe('validates maxWorkers', () => {
