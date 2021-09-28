@@ -90,7 +90,7 @@ function styles(theme) {
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
-  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippet }) => {
+  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippets }) => {
   const users = useUsers();
   const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
   const description = getDescription(stack, typeName);
@@ -130,7 +130,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           editStack={editStack}
           restartStack={restartStack}
           getLogs={getLogs}
-          copySnippet={copySnippet}
+          copySnippets={copySnippets}
           userPermissions={userPermissions}
           openPermission={openPermission}
           deletePermission={deletePermission}
@@ -165,6 +165,7 @@ StackCard.propTypes = {
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,
   editPermission: PropTypes.string,
+  copySnippets: PropTypes.objectOf(PropTypes.func),
 };
 
 function getDisplayName(stack) {

@@ -2,7 +2,11 @@
 
 exports[`ClustersContainer renders correct snapshot 1`] = `
 <StackCards
-  copySnippet={[Function]}
+  copySnippets={
+    Object {
+      "Python": [Function],
+    }
+  }
   createPermission="projects:current-project:clusters:create"
   deletePermission="projects:current-project:clusters:delete"
   deleteStack={[Function]}

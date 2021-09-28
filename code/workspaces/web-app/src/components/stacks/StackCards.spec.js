@@ -22,7 +22,9 @@ describe('StackCards', () => {
     openCreationForm: jest.fn().mockName('openCreationForm'),
     editStack: jest.fn().mockName('editStack'),
     restartStack: jest.fn().mockName('restartStack'),
-    copySnippet: jest.fn().mockName('copySnippet'),
+    copySnippets: {
+      Python: jest.fn().mockName('copyPythonSnippet'),
+    },
     userPermissions: () => ['open', 'delete', 'create', 'edit'],
     openPermission: 'open',
     deletePermission: 'delete',

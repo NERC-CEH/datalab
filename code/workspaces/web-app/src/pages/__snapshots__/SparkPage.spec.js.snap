@@ -22,7 +22,12 @@ exports[`SparkPage renders correct snapshot 1`] = `
   >
     <ClustersContainer
       clusterType="SPARK"
-      copySnippet={[Function]}
+      copySnippets={
+        Object {
+          "Python": [Function],
+          "R": [Function],
+        }
+      }
     />
   </div>
 </WithStyles(Page)>

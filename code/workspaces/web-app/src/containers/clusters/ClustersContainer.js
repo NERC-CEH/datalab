@@ -3,16 +3,16 @@ import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import ProjectClustersContainer from './ProjectClustersContainer';
 
-const ClustersContainer = ({ clusterType, copySnippet }) => {
+const ClustersContainer = ({ clusterType, copySnippets }) => {
   const { value: projectKey } = useCurrentProjectKey();
   const { value: userPermissions } = useCurrentUserPermissions();
   const modifyData = true;
-  return ProjectClustersContainer({ clusterType, projectKey, userPermissions, modifyData, copySnippet });
+  return ProjectClustersContainer({ clusterType, projectKey, userPermissions, modifyData, copySnippets });
 };
 
 export default ClustersContainer;
 
 ClustersContainer.propTypes = {
   clusterType: PropTypes.string.isRequired,
-  copySnippet: PropTypes.func,
+  copySnippets: PropTypes.objectOf(PropTypes.func),
 };

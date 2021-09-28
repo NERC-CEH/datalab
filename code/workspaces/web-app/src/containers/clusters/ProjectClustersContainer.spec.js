@@ -61,7 +61,9 @@ const setMocks = () => {
   mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
 };
 
-const copyMock = () => {};
+const copyMock = {
+  Python: () => {},
+};
 
 describe('ProjectClustersContainer', () => {
   beforeEach(() => {
@@ -70,12 +72,12 @@ describe('ProjectClustersContainer', () => {
   });
 
   it('renders correct snapshot for all clusters', () => {
-    const getShallowRender = () => shallow(<ProjectClustersContainer projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
+    const getShallowRender = () => shallow(<ProjectClustersContainer projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
     expect(getShallowRender()).toMatchSnapshot();
   });
 
   it('renders correct snapshot for Dask clusters', () => {
-    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
+    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
     expect(getShallowRender()).toMatchSnapshot();
   });
 
@@ -93,7 +95,7 @@ describe('ProjectClustersContainer', () => {
       ],
     }));
 
-    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="SPARK" projectKey="project-key" userPermissions={[]} modifyData copySnippet={copyMock}/>);
+    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="SPARK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
     expect(getShallowRender()).toMatchSnapshot();
   });
 });

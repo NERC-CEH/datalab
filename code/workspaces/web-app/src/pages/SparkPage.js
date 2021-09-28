@@ -70,6 +70,11 @@ const copyRSnippet = ({ schedulerAddress, maxWorkerMemoryGb }) => {
 const SparkPage = () => {
   const classes = useStyles();
 
+  const copySnippets = {
+    Python: copyPythonSnippet,
+    R: copyRSnippet,
+  };
+
   return (
     <Page className={''} title="Spark">
       <Typography variant="body1">
@@ -78,7 +83,7 @@ const SparkPage = () => {
         to be deployed across the cluster.
       </Typography>
       <div className={classes.clusterList}>
-        <ClustersContainer clusterType={SPARK_CLUSTER_TYPE} copySnippet={copySnippet} />
+        <ClustersContainer clusterType={SPARK_CLUSTER_TYPE} copySnippets={copySnippets} />
       </div>
     </Page>
   );

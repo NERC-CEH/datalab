@@ -13,7 +13,9 @@ const deleteStackMock = jest.fn().mockName('deleteStack');
 const editStackMock = jest.fn().mockName('editStack');
 const shareStackMock = jest.fn().mockName('shareStack');
 const restartStackMock = jest.fn().mockName('restartStack');
-const copySnippetMock = jest.fn().mockName('copySnippet');
+const copySnippetsMock = {
+  Python: jest.fn().mockName('copyPythonSnippet'),
+};
 
 const generateProps = () => ({
   stack: {
@@ -30,7 +32,7 @@ const generateProps = () => ({
   editStack: editStackMock,
   shareStack: shareStackMock,
   restartStack: restartStackMock,
-  copySnippet: copySnippetMock,
+  copySnippets: copySnippetsMock,
   userPermissions: ['open', 'delete', 'edit'],
   openPermission: 'open',
   deletePermission: 'delete',
@@ -82,6 +84,23 @@ describe('PureStackCardActions', () => {
   it('creates correct snapshot', () => {
     // Arrange
     const props = generateProps();
+
+    // Act
+    const output = shallowRender(props);
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('creates correct snapshot if there are multiple copy snippets', () => {
+    // Arrange
+    const props = {
+      ...generateProps(),
+      copySnippets: {
+        Python: jest.fn().mockName('copyPythonSnippet'),
+        R: jest.fn().mockName('copyRSnippet'),
+      },
+    };
 
     // Act
     const output = shallowRender(props);
