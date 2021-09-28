@@ -11,7 +11,8 @@ Spark can be used from both Python and R. This section covers how to connect in 
 
 ## Python
 
-On the Spark page, find your cluster and select the triple-dot *More* menu and select **Copy Python snippet**.
+On the Spark page, find your cluster and select the triple-dot *More* menu and
+select **Copy Python snippet**.
 This copies a useful snippet of Python code that you can use in your notebook.
 
 In your JupyterLab,
@@ -23,13 +24,15 @@ start a Python notebook based on the same Conda environment that you used to cre
 Paste the contents of the clipboard into the notebook cell,
 and run the notebook.
 
-![jupyterlab spark python context](../../img/jupyterlab-spark-python-context.png "jupyterlab spark python context")
+![jupyterlab spark python context](../../img/jupyterlab-spark-python-context.png
+"jupyterlab spark python context")
 
 The output shows you that the Spark Cluster is contactable and ready for use.
 
 ## R
 
-n the Spark page, find your cluster and select the triple-dot *More* menu and select **Copy R snippet**.
+n the Spark page, find your cluster and select the triple-dot *More* menu and
+select **Copy R snippet**.
 This copies a useful snippet of R code that you can use in your notebook.
 
 In your JupyterLab,
@@ -48,6 +51,8 @@ packageurl <- "https://cran.r-project.org/src/contrib/Archive/SparkR/SparkR_3.1.
 install.packages(packageurl, repos=NULL, type="source")
 ```
 
-![jupyterlab spark r session](../../img/jupyterlab-spark-r-session.png "jupyterlab spark r session")
+![jupyterlab spark r session](../../img/jupyterlab-spark-r-session.png
+"jupyterlab spark r session")
 
-This sets the configuration for the spark "session" so subsequent calls will be made to the specified cluster.
+This sets the configuration for the spark "session" so subsequent
+calls will be made to the specified cluster.
