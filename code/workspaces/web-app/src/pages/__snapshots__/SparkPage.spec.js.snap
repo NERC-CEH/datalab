@@ -28,7 +28,7 @@ exports[`SparkPage renders correct snapshot 1`] = `
 </WithStyles(Page)>
 `;
 
-exports[`getMessage returns the correct message 1`] = `
+exports[`getPythonMessage returns the correct message 1`] = `
 "import os
 import pyspark
 
@@ -45,7 +45,7 @@ sc
 "
 `;
 
-exports[`getMessage returns the correct message if memory is not an integer 1`] = `
+exports[`getPythonMessage returns the correct message if memory is not an integer 1`] = `
 "import os
 import pyspark
 
@@ -60,4 +60,20 @@ os.environ[\\"PYSPARK_DRIVER_PYTHON\\"] = \\"/data/conda/myenv/bin/python\\"
 sc = pyspark.SparkContext(master=\\"spark://spark-scheduler-mycluster:7077\\", conf=conf)
 sc
 "
+`;
+
+exports[`getRMessage returns the correct message 1`] = `
+"library(SparkR)
+
+# The below option can be altered depending on your memory requirement.
+# The maximum value is the amount of memory assigned to each worker, minus 1GB.
+sparkR.session(master=\\"spark://spark-scheduler-mycluster:7077\\", sparkConfig=list(spark.executor.memory=\\"3g\\"))"
+`;
+
+exports[`getRMessage returns the correct message if memory is not an integer 1`] = `
+"library(SparkR)
+
+# The below option can be altered depending on your memory requirement.
+# The maximum value is the amount of memory assigned to each worker, minus 1GB.
+sparkR.session(master=\\"spark://spark-scheduler-mycluster:7077\\", sparkConfig=list(spark.executor.memory=\\"4g\\"))"
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import SparkPage, { getPythonMessage } from './SparkPage';
+import SparkPage, { getPythonMessage, getRMessage } from './SparkPage';
 
 describe('SparkPage', () => {
   let shallow;
@@ -14,7 +14,7 @@ describe('SparkPage', () => {
   });
 });
 
-describe('getMessage', () => {
+describe('getPythonMessage', () => {
   it('returns the correct message', () => {
     const condaPath = '/data/conda/myenv';
     const schedulerAddress = 'spark://spark-scheduler-mycluster:7077';
@@ -29,5 +29,21 @@ describe('getMessage', () => {
     const maxMemory = 5.5;
 
     expect(getPythonMessage(condaPath, schedulerAddress, maxMemory)).toMatchSnapshot();
+  });
+});
+
+describe('getRMessage', () => {
+  it('returns the correct message', () => {
+    const schedulerAddress = 'spark://spark-scheduler-mycluster:7077';
+    const maxMemory = 4;
+
+    expect(getRMessage(schedulerAddress, maxMemory)).toMatchSnapshot();
+  });
+
+  it('returns the correct message if memory is not an integer', () => {
+    const schedulerAddress = 'spark://spark-scheduler-mycluster:7077';
+    const maxMemory = 5.5;
+
+    expect(getRMessage(schedulerAddress, maxMemory)).toMatchSnapshot();
   });
 });

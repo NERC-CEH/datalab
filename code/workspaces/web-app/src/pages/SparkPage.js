@@ -36,8 +36,29 @@ sc
 `;
 };
 
-const copySnippet = ({ condaPath, schedulerAddress, maxWorkerMemoryGb }) => {
+const copyPythonSnippet = ({ condaPath, schedulerAddress, maxWorkerMemoryGb }) => {
   const message = getPythonMessage(condaPath, schedulerAddress, maxWorkerMemoryGb);
+  try {
+    copy(message);
+    notify.success('Clipboard contains snippet for notebook cell');
+  } catch (error) {
+    notify.error('Unable to access clipboard.');
+  }
+};
+
+export const getRMessage = (schedulerAddress, maxWorkerMemoryGb) => {
+  // 1GB is reserved, and Spark expects integer values for the executor memory.
+  const mem = Math.floor(maxWorkerMemoryGb) - 1;
+
+  return `library(SparkR)
+
+# The below option can be altered depending on your memory requirement.
+# The maximum value is the amount of memory assigned to each worker, minus 1GB.
+sparkR.session(master="${schedulerAddress}", sparkConfig=list(spark.executor.memory="${mem}g"))`;
+};
+
+const copyRSnippet = ({ schedulerAddress, maxWorkerMemoryGb }) => {
+  const message = getRMessage(schedulerAddress, maxWorkerMemoryGb);
   try {
     copy(message);
     notify.success('Clipboard contains snippet for notebook cell');
