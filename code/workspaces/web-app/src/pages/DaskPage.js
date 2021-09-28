@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const copySnippet = ({ schedulerAddress }) => {
+const copyPythonSnippet = ({ schedulerAddress }) => {
   const proxyAddress = schedulerAddress.replace('tcp://', 'proxy/').replace('8786', '8787');
   const message = `# Paste this into your notebook cell
 # Note that the Dask scheduler can be accessed from the Dask JupyterLab extension with address
@@ -34,6 +34,10 @@ c
 const DaskPage = () => {
   const classes = useStyles();
 
+  const copySnippets = {
+    Python: copyPythonSnippet,
+  };
+
   return (
     <Page className={''} title="Dask">
       <Typography variant="body1">
@@ -43,7 +47,7 @@ const DaskPage = () => {
         Dask can only be used with Python.
       </Typography>
       <div className={classes.clusterList}>
-        <ClustersContainer clusterType={DASK_CLUSTER_TYPE} copySnippet={copySnippet} />
+        <ClustersContainer clusterType={DASK_CLUSTER_TYPE} copySnippets={copySnippets} />
       </div>
     </Page>
   );

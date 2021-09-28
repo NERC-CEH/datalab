@@ -50,7 +50,7 @@ const getOpenCreationForm = (dispatch, projectKey, clusterType, dataStores) => {
   return undefined;
 };
 
-const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData, copySnippet }) => {
+const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData, copySnippets }) => {
   const dispatch = useDispatch();
   const currentUserId = useCurrentUserId();
   const { value: dataStores } = useDataStorageForUserInProject(currentUserId, projectKey);
@@ -76,7 +76,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
         showCreateButton={modifyData}
         deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
-        copySnippet={copySnippet}
+        copySnippets={copySnippets}
         deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
         editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
         openPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_OPEN, projectKey)}
@@ -131,5 +131,5 @@ export default ProjectClustersContainer;
 
 ProjectClustersContainer.propTypes = {
   clusterType: PropTypes.string,
-  copySnippet: PropTypes.func,
+  copySnippets: PropTypes.objectOf(PropTypes.func),
 };

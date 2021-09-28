@@ -131,6 +131,7 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
         Restart
       </ForwardRef>
       <ForwardRef
+        key="Python"
         onClick={[Function]}
         requiredPermission="open"
         userPermissions={
@@ -141,7 +142,7 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
           ]
         }
       >
-        Copy snippet
+        Copy Python snippet
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
@@ -327,6 +328,7 @@ exports[`PureStackCardActions Should render Open as disabled if stack is not rea
         Restart
       </ForwardRef>
       <ForwardRef
+        key="Python"
         onClick={[Function]}
         requiredPermission="open"
         userPermissions={
@@ -337,7 +339,7 @@ exports[`PureStackCardActions Should render Open as disabled if stack is not rea
           ]
         }
       >
-        Copy snippet
+        Copy Python snippet
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
@@ -489,6 +491,7 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
         Restart
       </ForwardRef>
       <ForwardRef
+        key="Python"
         onClick={[Function]}
         requiredPermission="open"
         userPermissions={
@@ -499,7 +502,184 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
           ]
         }
       >
-        Copy snippet
+        Copy Python snippet
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Delete
+      </ForwardRef>
+    </WithStyles(ForwardRef(Menu))>
+  </ComponentWrapper>
+</div>
+`;
+
+exports[`PureStackCardActions creates correct snapshot if there are multiple copy snippets 1`] = `
+<div
+  className="cardActions"
+>
+  <ComponentWrapper
+    className="buttonWrapper"
+    permission="open"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <WithStyles(ForwardRef(Tooltip))
+      disableHoverListener={true}
+      placement="bottom-start"
+      title="Cannot be opened until resource is ready"
+    >
+      <div>
+        <ForwardRef
+          disabled={false}
+          fullWidth={true}
+          onClick={[Function]}
+        >
+          Open
+        </ForwardRef>
+      </div>
+    </WithStyles(ForwardRef(Tooltip))>
+  </ComponentWrapper>
+  <ComponentWrapper
+    className="buttonWrapper"
+    permission="delete"
+    userPermissions={
+      Array [
+        "open",
+        "delete",
+        "edit",
+      ]
+    }
+  >
+    <SecondaryActionButton
+      aria-controls="more-menu"
+      aria-haspopup="true"
+      fullWidth={true}
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(Icon))
+        style={
+          Object {
+            "color": "inherit",
+          }
+        }
+      >
+        more_vert
+      </WithStyles(ForwardRef(Icon))>
+    </SecondaryActionButton>
+    <WithStyles(ForwardRef(Menu))
+      anchorEl={null}
+      id="more-menu"
+      keepMounted={true}
+      onClose={[Function]}
+      open={false}
+      transformOrigin={
+        Object {
+          "horizontal": "right",
+          "vertical": "top",
+        }
+      }
+    >
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Logs
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Edit
+      </ForwardRef>
+      <ForwardRef
+        disableTooltip={true}
+        disabled={false}
+        onClick={[Function]}
+        requiredPermission="delete"
+        shouldRender={true}
+        tooltipText="Resource is already shared within the project"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Share
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="edit"
+        shouldRender={true}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Restart
+      </ForwardRef>
+      <ForwardRef
+        key="Python"
+        onClick={[Function]}
+        requiredPermission="open"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Copy Python snippet
+      </ForwardRef>
+      <ForwardRef
+        key="R"
+        onClick={[Function]}
+        requiredPermission="open"
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Copy R snippet
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
@@ -651,6 +831,7 @@ exports[`PureStackCardActions should not render button if userAction for that bu
         Restart
       </ForwardRef>
       <ForwardRef
+        key="Python"
         onClick={[Function]}
         requiredPermission="open"
         userPermissions={
@@ -661,7 +842,7 @@ exports[`PureStackCardActions should not render button if userAction for that bu
           ]
         }
       >
-        Copy snippet
+        Copy Python snippet
       </ForwardRef>
       <ForwardRef
         onClick={[Function]}
@@ -690,7 +871,11 @@ exports[`StackCardActions passes props down to child component as well as curren
       "cardActions": "StackCardActions-cardActions-1",
     }
   }
-  copySnippet={[MockFunction copySnippet]}
+  copySnippets={
+    Object {
+      "Python": [MockFunction copyPythonSnippet],
+    }
+  }
   currentUserId="owner-id"
   deletePermission="delete"
   deleteStack={[MockFunction deleteStack]}

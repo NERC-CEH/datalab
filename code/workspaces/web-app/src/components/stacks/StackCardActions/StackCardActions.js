@@ -40,7 +40,7 @@ const StackCardActions = (props) => {
   />;
 };
 
-export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, copySnippet, userActions,
+export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, copySnippets, userActions,
   userPermissions, openPermission, deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
@@ -63,7 +63,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const shouldRenderShare = userActions.share && shareStack !== undefined;
   const shouldRenderRestart = userActions.restart && restartStack !== undefined;
   const shouldRenderDelete = userActions.delete && deleteStack !== undefined;
-  const shouldRenderCopySnippet = userActions.copySnippet && copySnippet !== undefined;
+  const shouldRenderCopySnippet = userActions.copySnippets && copySnippets !== undefined;
   const shouldRenderMenuItems = shouldRenderLogs
     || shouldRenderEdit
     || shouldRenderShare
@@ -141,14 +141,15 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         >
           Restart
         </StackMoreMenuItem>
-        <StackMoreMenuItem
+        {copySnippets !== undefined && Object.keys(copySnippets).map(k => <StackMoreMenuItem
           shouldRender={shouldRenderCopySnippet}
-          onClick={() => { handleMoreMenuClose(); copySnippet(stack); }}
+          onClick={() => { handleMoreMenuClose(); copySnippets[k](stack); }}
           userPermissions={userPermissions}
           requiredPermission={openPermission}
+          key={k}
         >
-          Copy snippet
-        </StackMoreMenuItem>
+          {`Copy ${k} snippet`}
+        </StackMoreMenuItem>)}
         <StackMoreMenuItem
           shouldRender={shouldRenderDelete}
           onClick={() => deleteStack(stack)}
@@ -176,7 +177,7 @@ const sharedPropTypes = {
   restartStack: PropTypes.func,
   getLogs: PropTypes.func,
   shareStack: PropTypes.func,
-  copySnippet: PropTypes.func,
+  copySnippets: PropTypes.objectOf(PropTypes.func),
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,
@@ -193,7 +194,7 @@ PureStackCardActions.propTypes = {
     restart: PropTypes.bool,
     delete: PropTypes.bool,
     logs: PropTypes.bool,
-    copySnippet: PropTypes.bool,
+    copySnippets: PropTypes.bool,
   }).isRequired,
 };
 
