@@ -10,9 +10,10 @@ describe('deploymentGenerator', () => {
   describe('createDatalabDaskSchedulerDeployment', () => {
     const params = {
       deploymentName: 'deployment-name',
-      pureDaskImage: 'dask-image',
+      clusterImage: 'dask-image',
       jupyterLabImage: 'lab-image',
       schedulerPodLabel: 'scheduler-pod-label',
+      schedulerContainerName: 'dask-scheduler-cont',
       schedulerMemory: 'scheduler-memory',
       schedulerCpu: 'scheduler-cpu',
     };
@@ -34,9 +35,10 @@ describe('deploymentGenerator', () => {
   describe('createDatalabDaskWorkerDeployment', () => {
     const params = {
       deploymentName: 'deployment-name',
-      pureDaskImage: 'dask-image',
+      clusterImage: 'dask-image',
       jupyterLabImage: 'lab-image',
       workerPodLabel: 'worker-pod-label',
+      workerContainerName: 'dask-worker-cont',
       workerMemory: 'worker-memory',
       workerCpu: 'worker-cpu',
       nThreads: 'n-threads',
@@ -74,6 +76,60 @@ describe('deploymentGenerator', () => {
       projectKey: 'project-key',
     };
     const manifest = await deploymentGenerator.createDatalabDaskSchedulerNetworkPolicy(params);
+    expect(manifest).toMatchSnapshot();
+  });
+
+  describe('createDatalabSparkSchedulerDeployment', () => {
+    const params = {
+      deploymentName: 'deployment-name',
+      clusterImage: 'spark-image',
+      jupyterLabImage: 'lab-image',
+      schedulerPodLabel: 'scheduler-pod-label',
+      schedulerContainerName: 'spark-scheduler-cont',
+      schedulerMemory: 'scheduler-memory',
+      schedulerCpu: 'scheduler-cpu',
+    };
+    it('uses spark image', async () => {
+      const manifest = await deploymentGenerator.createDatalabSparkSchedulerDeployment(params);
+      expect(manifest).toMatchSnapshot();
+    });
+  });
+
+  describe('createDatalabSparkWorkerDeployment', () => {
+    const params = {
+      deploymentName: 'deployment-name',
+      clusterImage: 'spark-image',
+      jupyterLabImage: 'lab-image',
+      workerPodLabel: 'worker-pod-label',
+      workerContainerName: 'spark-worker-cont',
+      workerMemory: 'worker-memory',
+      workerCpu: 'worker-cpu',
+      nThreads: 'n-threads',
+      deathTimeoutSec: 'death-timeout-sec',
+      schedulerServiceName: 'scheduler-service-name',
+    };
+    it('uses spark image', async () => {
+      const manifest = await deploymentGenerator.createDatalabSparkWorkerDeployment(params);
+      expect(manifest).toMatchSnapshot();
+    });
+  });
+
+  it('generates createDatalabSparkSchedulerService manifest', async () => {
+    const params = {
+      serviceName: 'service-name',
+      schedulerPodLabel: 'scheduler-pod-label',
+    };
+    const manifest = await deploymentGenerator.createDatalabSparkSchedulerService(params);
+    expect(manifest).toMatchSnapshot();
+  });
+
+  it('generates createDatalabSparkSchedulerNetworkPolicy manifest', async () => {
+    const params = {
+      networkPolicyName: 'policy-name',
+      schedulerPodLabel: 'scheduler-pod-label',
+      projectKey: 'project-key',
+    };
+    const manifest = await deploymentGenerator.createDatalabSparkSchedulerNetworkPolicy(params);
     expect(manifest).toMatchSnapshot();
   });
 

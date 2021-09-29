@@ -1,10 +1,12 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import copy from 'copy-to-clipboard';
 import Page from './Page';
 import ClustersContainer from '../containers/clusters/ClustersContainer';
 import ExternalLink from '../components/common/ExternalLink';
 import { DASK_CLUSTER_TYPE } from '../containers/clusters/clusterTypeName';
+import notify from '../components/common/notify';
 
 const useStyles = makeStyles(theme => ({
   clusterList: {
@@ -12,8 +14,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const copyPythonSnippet = ({ schedulerAddress }) => {
+  const proxyAddress = schedulerAddress.replace('tcp://', 'proxy/').replace('8786', '8787');
+  const message = `# Paste this into your notebook cell
+# Note that the Dask scheduler can be accessed from the Dask JupyterLab extension with address
+# ${proxyAddress}
+from dask.distributed import Client
+c = Client("${schedulerAddress}")
+c
+`;
+  try {
+    copy(message);
+    notify.success('Clipboard contains snippet for notebook cell');
+  } catch (error) {
+    notify.error('Unable to access clipboard.');
+  }
+};
+
 const DaskPage = () => {
   const classes = useStyles();
+
+  const copySnippets = {
+    Python: copyPythonSnippet,
+  };
 
   return (
     <Page className={''} title="Dask">
@@ -24,7 +47,7 @@ const DaskPage = () => {
         Dask can only be used with Python.
       </Typography>
       <div className={classes.clusterList}>
-        <ClustersContainer clusterType={DASK_CLUSTER_TYPE} />
+        <ClustersContainer clusterType={DASK_CLUSTER_TYPE} copySnippets={copySnippets} />
       </div>
     </Page>
   );

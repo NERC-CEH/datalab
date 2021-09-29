@@ -15,7 +15,6 @@ exports[`ProjectClusters renders to match snapshot passing correct props to chil
   </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
   <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
     <ProjectClustersContainer
-      clusterType="DASK"
       modifyData={false}
       projectKey="test-project"
     />

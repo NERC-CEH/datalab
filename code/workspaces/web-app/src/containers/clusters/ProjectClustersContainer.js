@@ -4,13 +4,12 @@ import { useDispatch } from 'react-redux';
 import { permissionTypes } from 'common';
 import { projectKeyPermission } from 'common/src/permissionTypes';
 import { reset } from 'redux-form';
-import copy from 'copy-to-clipboard';
 import StackCards from '../../components/stacks/StackCards';
 import { useClustersByType } from '../../hooks/clustersHooks';
 import clusterActions from '../../actions/clusterActions';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import modalDialogActions from '../../actions/modalDialogActions';
-import { getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax } from '../../config/clusters';
+import { getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax, getCondaRequired } from '../../config/clusters';
 import { MODAL_TYPE_CREATE_CLUSTER, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import { useDataStorageForUserInProject } from '../../hooks/dataStorageHooks';
 import dataStorageActions from '../../actions/dataStorageActions';
@@ -42,24 +41,16 @@ const confirmDeleteCluster = dispatch => cluster => dispatch(modalDialogActions.
   onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
 }));
 
-const copySnippet = ({ schedulerAddress }) => {
-  const proxyAddress = schedulerAddress.replace('tcp://', 'proxy/').replace('8786', '8787');
-  const message = `# Paste this into your notebook cell
-# Note that the Dask scheduler can be accessed from the Dask JupyterLab extension with address
-# ${proxyAddress}
-from dask.distributed import Client
-c = Client("${schedulerAddress}")
-c
-`;
-  try {
-    copy(message);
-    notify.success('Clipboard contains snippet for notebook cell');
-  } catch (error) {
-    notify.error('Unable to access clipboard.');
+const getOpenCreationForm = (dispatch, projectKey, clusterType, dataStores) => {
+  if (clusterType) {
+    const createClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
+    return () => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createClusterDialogProps));
   }
+
+  return undefined;
 };
 
-const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData }) => {
+const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, modifyData, copySnippets }) => {
   const dispatch = useDispatch();
   const currentUserId = useCurrentUserId();
   const { value: dataStores } = useDataStorageForUserInProject(currentUserId, projectKey);
@@ -73,7 +64,7 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
     }
   }, [dispatch, projectKey, modifyData]);
 
-  const createDaskClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
+  const openCreationForm = getOpenCreationForm(dispatch, projectKey, clusterType, dataStores);
 
   return (
       <StackCards
@@ -81,11 +72,11 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
         typeName={CLUSTER_TYPE_NAME}
         typeNamePlural={CLUSTER_TYPE_NAME_PLURAL}
         userPermissions={() => userPermissions}
-        openCreationForm={() => dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CREATE_CLUSTER, createDaskClusterDialogProps))}
+        openCreationForm={openCreationForm}
         createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
         showCreateButton={modifyData}
         deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
-        copySnippet={copySnippet}
+        copySnippets={copySnippets}
         deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
         editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
         openPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_OPEN, projectKey)}
@@ -131,6 +122,7 @@ export const getDialogProps = (dispatch, projectKey, clusterType, dataStores) =>
   clusterMaxWorkers: getClusterMaxWorkers(clusterType),
   workerMaxMemory: getWorkerMemoryMax(clusterType),
   workerMaxCpu: getWorkerCpuMax(clusterType),
+  condaRequired: getCondaRequired(clusterType),
   dataStorageOptions: dataStores.map(store => ({ text: store.displayName, value: store.name })),
   projectKey,
 });
@@ -138,5 +130,6 @@ export const getDialogProps = (dispatch, projectKey, clusterType, dataStores) =>
 export default ProjectClustersContainer;
 
 ProjectClustersContainer.propTypes = {
-  clusterType: PropTypes.string.isRequired,
+  clusterType: PropTypes.string,
+  copySnippets: PropTypes.objectOf(PropTypes.func),
 };

@@ -25,7 +25,7 @@
       "category": "INFRASTRUCTURE",
       "versions": [
         {
-          "image": "daskdev/dask:2.30.0"
+          "image": "daskdev/dask:2021.6.2"
         }
       ]
     },
@@ -109,7 +109,7 @@
       "category": "INFRASTRUCTURE",
       "versions": [
         {
-          "image": "nerc/spark-k8s:0.1.0"
+          "image": "nerc/spark-k8s:3.1.2"
         }
       ],
       "masterAddress": "spark://spark-master:7077",

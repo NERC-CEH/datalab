@@ -34,7 +34,9 @@ describe('StackCard', () => {
     deleteStack: jest.fn().mockName('deleteStack'),
     shareStack: jest.fn().mockName('shareStack'),
     restartStack: jest.fn().mockName('restartStack'),
-    copySnippet: jest.fn().mockName('copySnippet'),
+    copySnippets: {
+      Python: jest.fn().mockName('copyPythonSnippet'),
+    },
     typeName: 'notebook',
     ...permissionProps,
   });

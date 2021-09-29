@@ -11,6 +11,7 @@ const ServiceTemplates = Object.freeze({
   MINIO_SERVICE: 'minio.service.template.yml',
   SPARK_DRIVER_HEADLESS_SERVICE: 'spark-driver.headless-service.template.yml',
   DATALAB_DASK_SCHEDULER_SERVICE: 'datalab-dask-scheduler.service.template.yml',
+  DATALAB_SPARK_SCHEDULER_SERVICE: 'datalab-spark-scheduler.service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
@@ -23,6 +24,8 @@ const DeploymentTemplates = Object.freeze({
   MINIO_DEPLOYMENT: 'minio.deployment.template.yml',
   DATALAB_DASK_SCHEDULER_DEPLOYMENT: 'datalab-dask-scheduler.deployment.template.yml',
   DATALAB_DASK_WORKER_DEPLOYMENT: 'datalab-dask-worker.deployment.template.yml',
+  DATALAB_SPARK_SCHEDULER_DEPLOYMENT: 'datalab-spark-scheduler.deployment.template.yml',
+  DATALAB_SPARK_WORKER_DEPLOYMENT: 'datalab-spark-worker.deployment.template.yml',
 });
 
 const IngressTemplates = Object.freeze({
@@ -46,6 +49,7 @@ const ConfigMapTemplates = Object.freeze({
 
 const NetworkPolicyTemplates = Object.freeze({
   DATALAB_DASK_SCHEDULER_NETWORK_POLICY: 'datalab-dask-scheduler.network-policy.template.yml',
+  DATALAB_SPARK_SCHEDULER_NETWORK_POLICY: 'datalab-spark-scheduler.network-policy.template.yml',
 });
 
 const AutoScalerTemplates = Object.freeze({

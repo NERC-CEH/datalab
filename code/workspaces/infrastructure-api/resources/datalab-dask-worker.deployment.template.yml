@@ -16,7 +16,7 @@ spec:
         - image: {{{daskImage}}}
           command: ["bash"]
           args: ["-c", "{{{workerPath}}} --nthreads {{nThreads}} --no-dashboard --memory-limit {{workerMemory}} --death-timeout {{deathTimeoutSec}} tcp://{{schedulerServiceName}}:8786"]
-          name: dask-worker-cont
+          name: {{workerContainerName}}
           resources:
             requests:
               memory: {{workerMemory}}

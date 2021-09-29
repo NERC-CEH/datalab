@@ -25,44 +25,77 @@ jest.mock('../../actions/clusterActions');
 
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 
-mockAuthHooks.useCurrentUserId.mockReturnValue({ value: 'test-user' });
-mockDataStorageHooks.useDataStorageForUserInProject.mockReturnValue({ value: [{ name: 'test-store' }] });
-mockClustersHooks.useClustersByType.mockImplementation(type => ({
-  fetching: false,
-  value: [
-    {
-      name: 'test-cluster',
-      type,
-      displayName: 'Test Cluster',
-      schedulerAddress: 'tcp://dask-scheduler-test-cluster:8786',
-      projectKey: 'project-key',
-    },
-    {
-      name: 'test-cluster2',
-      type,
-      displayName: 'Test Cluster2',
-      schedulerAddress: 'tcp://dask-scheduler-test-cluster2:8786',
-      projectKey: 'project-key2',
-    },
-  ],
-}));
-
-mockCluster.getClusterMaxWorkers.mockReturnValue({ lowerLimit: 1, default: 4, upperLimit: 8 });
-mockCluster.getWorkerMemoryMax.mockReturnValue({ lowerLimit: 0.5, default: 4, upperLimit: 8 });
-mockCluster.getWorkerCpuMax.mockReturnValue({ lowerLimit: 0.5, default: 0.5, upperLimit: 2 });
-
 const mockLoadClustersAction = jest.fn();
 const mockCreateClusterAction = jest.fn();
-mockClusterActions.loadClusters = mockLoadClustersAction;
-mockClusterActions.createCluster = mockCreateClusterAction;
-
 const mockCloseModalDialogAction = jest.fn();
-mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
+
+const setMocks = () => {
+  mockAuthHooks.useCurrentUserId.mockReturnValue({ value: 'test-user' });
+  mockDataStorageHooks.useDataStorageForUserInProject.mockReturnValue({ value: [{ name: 'test-store' }] });
+  mockClustersHooks.useClustersByType.mockImplementation(type => ({
+    fetching: false,
+    value: [
+      {
+        name: 'test-cluster',
+        type,
+        displayName: 'Test Cluster',
+        schedulerAddress: 'tcp://dask-scheduler-test-cluster:8786',
+        projectKey: 'project-key',
+      },
+      {
+        name: 'test-cluster2',
+        type,
+        displayName: 'Test Cluster2',
+        schedulerAddress: 'tcp://dask-scheduler-test-cluster2:8786',
+        projectKey: 'project-key2',
+      },
+    ],
+  }));
+
+  mockCluster.getClusterMaxWorkers.mockReturnValue({ lowerLimit: 1, default: 4, upperLimit: 8 });
+  mockCluster.getWorkerMemoryMax.mockReturnValue({ lowerLimit: 0.5, default: 4, upperLimit: 8 });
+  mockCluster.getWorkerCpuMax.mockReturnValue({ lowerLimit: 0.5, default: 0.5, upperLimit: 2 });
+  mockCluster.getCondaRequired.mockReturnValue(true);
+  mockClusterActions.loadClusters = mockLoadClustersAction;
+  mockClusterActions.createCluster = mockCreateClusterAction;
+  mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
+};
+
+const copyMock = {
+  Python: () => {},
+};
 
 describe('ProjectClustersContainer', () => {
-  const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData />);
+  beforeEach(() => {
+    jest.clearAllMocks();
+    setMocks();
+  });
 
-  it('renders correct snapshot', () => {
+  it('renders correct snapshot for all clusters', () => {
+    const getShallowRender = () => shallow(<ProjectClustersContainer projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
+    expect(getShallowRender()).toMatchSnapshot();
+  });
+
+  it('renders correct snapshot for Dask clusters', () => {
+    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
+    expect(getShallowRender()).toMatchSnapshot();
+  });
+
+  it('renders correct snapshot for Spark clusters', () => {
+    mockClustersHooks.useClustersByType.mockImplementationOnce(type => ({
+      fetching: false,
+      value: [
+        {
+          name: 'test-spark-cluster',
+          type,
+          displayName: 'Test Spark Cluster',
+          schedulerAddress: 'spark://spark-scheduler-test-cluster:7077',
+          projectKey: 'project-key',
+        },
+      ],
+    }));
+
+    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="SPARK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
     expect(getShallowRender()).toMatchSnapshot();
   });
 });

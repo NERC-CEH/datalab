@@ -39,8 +39,12 @@ mockCluster.getClusterMaxWorkers.mockReturnValue({ lowerLimit: 1, default: 4, up
 mockCluster.getWorkerMemoryMax.mockReturnValue({ lowerLimit: 0.5, default: 4, upperLimit: 8 });
 mockCluster.getWorkerCpuMax.mockReturnValue({ lowerLimit: 0.5, default: 0.5, upperLimit: 2 });
 
+const copyMock = {
+  Python: () => {},
+};
+
 describe('ClustersContainer', () => {
-  const getShallowRender = () => shallow(<ClustersContainer clusterType="DASK" />);
+  const getShallowRender = () => shallow(<ClustersContainer clusterType="DASK" copySnippets={copyMock}/>);
 
   it('renders correct snapshot', () => {
     expect(getShallowRender()).toMatchSnapshot();

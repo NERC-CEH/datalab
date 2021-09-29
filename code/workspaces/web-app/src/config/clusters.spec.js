@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import data from 'common/src/config/clusters_config.json';
-import { initialiseClusters, getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax } from './clusters';
+import { initialiseClusters, getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax, getCondaRequired } from './clusters';
 
 const httpMock = new MockAdapter(axios);
 httpMock.onGet('/clusters_config.json').reply(() => [200, data]);
@@ -29,6 +29,14 @@ describe('getWorkerCpuMax', () => {
     await initialiseClusters();
     const maxCpu = getWorkerCpuMax(CLUSTER_TYPE);
     expect(maxCpu).toMatchSnapshot();
+  });
+});
+
+describe('getCondaRequired', () => {
+  it('returns correct value', async () => {
+    await initialiseClusters();
+    const condaRequired = getCondaRequired(CLUSTER_TYPE);
+    expect(condaRequired).toBeFalsy();
   });
 });
 

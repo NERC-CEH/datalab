@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../components/common/ResourceAccordion';
 import ProjectClustersContainer from '../clusters/ProjectClustersContainer';
-import { DASK_CLUSTER_TYPE } from '../clusters/clusterTypeName';
 
 export default function ProjectClusters(props) {
   const { project, userPermissions } = props;
@@ -15,7 +14,7 @@ export default function ProjectClusters(props) {
         <Typography variant="h6">Clusters</Typography>
       </ResourceAccordionSummary>
       <ResourceAccordionDetails>
-        <ProjectClustersContainer clusterType={DASK_CLUSTER_TYPE} userPermissions={userPermissions} projectKey={project.key} modifyData={modifyData} />
+        <ProjectClustersContainer userPermissions={userPermissions} projectKey={project.key} modifyData={modifyData} />
       </ResourceAccordionDetails>
     </ResourceAccordion>
   );

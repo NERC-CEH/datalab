@@ -26,6 +26,11 @@ exports[`DaskPage renders correct snapshot 1`] = `
   >
     <ClustersContainer
       clusterType="DASK"
+      copySnippets={
+        Object {
+          "Python": [Function],
+        }
+      }
     />
   </div>
 </WithStyles(Page)>

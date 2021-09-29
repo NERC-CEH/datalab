@@ -20,7 +20,7 @@ describe('clusterValidators', () => {
       clusterTypeValidator(expressValidator.body);
       expect(bodyMock).toHaveBeenCalledWith('type');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
-      expect(mockHelperChain.isIn).toHaveBeenCalledWith(['DASK']);
+      expect(mockHelperChain.isIn).toHaveBeenCalledWith(['DASK', 'SPARK']);
     });
 
     it('mountValidator', () => {
