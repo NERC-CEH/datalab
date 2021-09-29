@@ -7,10 +7,8 @@ import permissionMiddleware from '../auth/permissionMiddleware';
 import validators from '../validators/messageValidators';
 
 const {
-  systemPermissions: {
-    SYSTEM_INSTANCE_ADMIN,
-  },
-} = permissionTypes;
+  SYSTEM_INSTANCE_ADMIN,
+} = permissionTypes.systemPermissions;
 
 const { errorWrapper } = service.middleware;
 
