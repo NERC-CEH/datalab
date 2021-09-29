@@ -23,7 +23,7 @@ const statusChecker = async () => {
       .filter(d => stackPods.findIndex(p => d.name === p.name) === -1)
       .map(d => ({
         ...d,
-        status: d.replicas === 0 ? stackStatus.SUSPENDED : 'unkown',
+        status: d.replicas === 0 ? stackStatus.SUSPENDED : 'unknown',
       }));
 
     const stackPodsGroupedByName = groupStatusByName([...stackPods, ...missingPods]);
