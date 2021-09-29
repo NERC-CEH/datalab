@@ -1,7 +1,10 @@
 import axios from 'axios';
+import { get } from 'lodash';
+import { stackList } from 'common/src/config/images';
 import logger from '../config/logger';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
+import { SELECTOR_LABEL } from '../stacks/StackConstants';
 
 const API_BASE = config.get('kubernetesApi');
 
@@ -9,6 +12,8 @@ const getDeploymentUrl = (namespace, name) => {
   const nameComponent = name ? `/${name}` : '';
   return `${API_BASE}/apis/apps/v1/namespaces/${namespace}/deployments${nameComponent}`;
 };
+
+const allDeploymentsUrl = `${API_BASE}/apis/apps/v1/deployments`;
 
 const getDeploymentScaleUrl = (namespace, name) => `${getDeploymentUrl(namespace, name)}/scale`;
 
@@ -34,6 +39,19 @@ function getDeployment(name, namespace) {
     .then(response => response.data)
     .catch(() => undefined);
 }
+
+export const getStacksDeployments = async () => {
+  const deploymentResponse = await axios.get(allDeploymentsUrl);
+  const deployments = deploymentResponse.data.items.map(deployment => ({
+    name: get(deployment, 'spec.template.metadata.labels.name'),
+    namespace: get(deployment, 'metadata.namespace'),
+    type: get(deployment, `spec.template.metadata.labels.${SELECTOR_LABEL}`),
+    replicas: get(deployment, 'spec.replicas'),
+    deploymentName: get(deployment, 'metadata.name'),
+  }));
+
+  return deployments.filter(({ type }) => stackList().includes(type));
+};
 
 function createDeployment(name, namespace, manifest) {
   logger.info('Creating deployment: %s in namespace: %s', name, namespace);
@@ -123,4 +141,13 @@ async function restartDeployment(name, namespace) {
   return response;
 }
 
-export default { getDeployment, createDeployment, deleteDeployment, updateDeployment, createOrUpdateDeployment, mergePatchDeployment, restartDeployment };
+export default {
+  getDeployment,
+  createDeployment,
+  deleteDeployment,
+  updateDeployment,
+  createOrUpdateDeployment,
+  mergePatchDeployment,
+  restartDeployment,
+  getStacksDeployments,
+};

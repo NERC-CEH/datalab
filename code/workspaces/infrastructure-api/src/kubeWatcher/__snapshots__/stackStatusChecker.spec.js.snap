@@ -36,3 +36,48 @@ Array [
   ],
 ]
 `;
+
+exports[`Stack Status Checker updates stack records with suspended stacks as well 1`] = `
+Array [
+  Array [
+    Object {
+      "name": "firstPod",
+      "namespace": "a",
+      "status": "ready",
+      "type": "expectedType",
+    },
+  ],
+  Array [
+    Object {
+      "name": "secondPod",
+      "namespace": "a",
+      "status": "ready",
+      "type": "expectedType",
+    },
+  ],
+  Array [
+    Object {
+      "name": "thirdPod",
+      "namespace": "b",
+      "status": "unavailable",
+      "type": "expectedType",
+    },
+  ],
+  Array [
+    Object {
+      "name": "fourthPod",
+      "namespace": "b",
+      "status": "creating",
+      "type": "expectedType",
+    },
+  ],
+  Array [
+    Object {
+      "name": "suspendedPod",
+      "namespace": "a",
+      "status": "suspended",
+      "type": "expectedType",
+    },
+  ],
+]
+`;

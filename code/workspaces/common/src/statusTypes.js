@@ -3,6 +3,7 @@ import { keyBy, capitalize } from 'lodash';
 const REQUESTED = 'requested';
 const CREATING = 'creating';
 const READY = 'ready';
+const SUSPENDED = 'suspended';
 const UNAVAILABLE = 'unavailable';
 
 const STATUS_TYPES = [
@@ -23,6 +24,12 @@ const STATUS_TYPES = [
     description: 'Resource is ready for use',
     backgroundColor: 'hsl(120, 55%, 80%)',
     color: 'hsl(120, 90%, 12%)',
+  },
+  {
+    name: SUSPENDED,
+    description: 'Resource is suspended',
+    backgroundColor: 'hsl(190, 55%, 85%)',
+    color: 'hsl(190, 90%, 15%)',
   },
   {
     name: UNAVAILABLE,

@@ -4,20 +4,37 @@ import podsApi from '../kubernetes/podsApi';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';
 import { status as stackStatus } from '../models/stackEnums';
+import { getStacksDeployments } from '../kubernetes/deploymentApi';
 
 const kubeUpStatus = ['Running'];
 const kubeCreateStatus = ['ContainerCreating', /^Init:/, 'PodInitializing'];
 const kubeRequestStatus = ['Pending'];
+const kubeSuspendedStatus = [stackStatus.SUSPENDED];
 
-function statusChecker() {
+const statusChecker = async () => {
   logger.debug('Status checker: starting');
 
-  return podsApi.getStacks()
-    .then(groupStatusByName)
-    .then(setStatus)
-    .then(() => logger.debug('Status checker: complete'))
-    .catch(error => logger.error(`Error getting stack status -> ${error}`));
-}
+  try {
+    const stackPods = await podsApi.getStacks();
+    const stackDeployments = await getStacksDeployments();
+
+    // find scaled down deployments
+    const missingPods = stackDeployments
+      .filter(d => stackPods.findIndex(p => d.name === p.name) === -1)
+      .map(d => ({
+        ...d,
+        status: d.replicas === 0 ? stackStatus.SUSPENDED : 'unkown',
+      }));
+
+    const stackPodsGroupedByName = groupStatusByName([...stackPods, ...missingPods]);
+
+    await setStatus(stackPodsGroupedByName);
+    logger.debug('Status checker: complete');
+  } catch (error) {
+    console.log('error', error);
+    logger.error(`Error getting stack status -> ${error}`);
+  }
+};
 
 const groupStatusByName = pods => pods
   .reduce((previous, { name, namespace, status }) => {
@@ -57,6 +74,8 @@ const getStatus = (statusArray) => {
     return stackStatus.CREATING;
   } if (arraysIncludes(statusArray, kubeRequestStatus)) {
     return stackStatus.REQUESTED;
+  } if (arraysIncludes(statusArray, kubeSuspendedStatus)) {
+    return stackStatus.SUSPENDED;
   }
 
   return stackStatus.UNAVAILABLE;

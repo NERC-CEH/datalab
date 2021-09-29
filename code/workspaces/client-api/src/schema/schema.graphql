@@ -235,6 +235,9 @@ enum StatusType {
     # Resource is ready for use
     ready
 
+    # Resource is currently suspended
+    suspended
+
     # Resource is currently unavailable
     unavailable
 }

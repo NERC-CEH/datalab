@@ -6,8 +6,6 @@ import zeppelinStack from './zeppelinStack';
 import rshinyStack from './rshinyStack';
 import nbviewerStack from './nbviewerStack';
 
-export const SELECTOR_LABEL = 'user-pod';
-
 // NOTE: All other stack details should come from 'common/src/config/images'
 const STACKS = Object.freeze({
   JUPYTER: {
