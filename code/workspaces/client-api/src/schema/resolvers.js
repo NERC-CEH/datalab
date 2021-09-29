@@ -14,6 +14,7 @@ import logsService from '../dataaccess/logsService';
 import rolesService from '../dataaccess/rolesService';
 import centralAssetRepoService from '../dataaccess/centralAssetRepoService';
 import clustersService from '../dataaccess/clustersService';
+import messagesService from '../dataaccess/messagesService';
 import w from './wrapper';
 import { replaceFields } from '../util/converters';
 
@@ -40,6 +41,8 @@ const resolvers = {
     centralAssets: (obj, args, { token }) => w(centralAssetRepoService.listCentralAssets(token)),
     centralAssetsAvailableToProject: (obj, { projectKey }, { token }) => w(centralAssetRepoService.listCentralAssetsAvailableToProject(projectKey, token)),
     clusters: (obj, args, { token }) => w(clustersService.getClusters(args.projectKey, token)),
+    messages: (obj, args, { token }) => w(messagesService.getMessages(token)),
+    allMessages: (obj, args, { token }) => w(messagesService.getAllMessages(token)),
   },
 
   Mutation: {
@@ -64,6 +67,8 @@ const resolvers = {
     setCatalogueRole: (obj, { userId, catalogueRole }, { token }) => w(usersService.setCatalogueRole(userId, catalogueRole, token)),
     createCluster: (obj, { cluster }, { token }) => w(clustersService.createCluster(cluster, token)),
     deleteCluster: (obj, { cluster }, { token }) => w(clustersService.deleteCluster(cluster, token)),
+    createMessage: (obj, { message }, { token }) => w(messagesService.createMessage(message, token)),
+    deleteMessage: (obj, { messageId }, { token }) => w(messagesService.deleteMessage(messageId, token)),
   },
 
   CentralAssetMetadata: {
@@ -107,6 +112,10 @@ const resolvers = {
 
   Cluster: {
     id: obj => (obj._id), // eslint-disable-line no-underscore-dangle
+  },
+
+  Message: {
+    id: obj => obj._id || obj.id, // eslint-disable-line no-underscore-dangle
   },
 };
 
