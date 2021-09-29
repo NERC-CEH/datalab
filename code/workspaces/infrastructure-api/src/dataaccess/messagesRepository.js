@@ -8,9 +8,9 @@ async function createMessage(message) {
   return document;
 }
 
-async function deleteMessage({ id }) {
+async function deleteMessage(id) {
   const result = await MessageModel()
-    .deleteOne({ id })
+    .deleteOne({ _id: id })
     .exec();
   return result;
 }

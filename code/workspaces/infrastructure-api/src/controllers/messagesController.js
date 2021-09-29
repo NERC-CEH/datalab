@@ -16,8 +16,8 @@ async function deleteMessage(request, response, next) {
   const { id } = matchedData(request);
 
   try {
-    const result = await messagesRepository.deleteMessage({ id });
-    if (result.ok !== 1) {
+    const result = await messagesRepository.deleteMessage(id);
+    if (result.n === 0) {
       return response.status(404).send({ id });
     }
     return response.status(200).send({ id });

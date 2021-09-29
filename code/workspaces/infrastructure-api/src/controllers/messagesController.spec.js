@@ -88,9 +88,9 @@ describe('messagesController', () => {
       expect(matchedDataMock).toHaveBeenCalledWith(requestMock);
     });
 
-    it('returns response configured with 404 status if something goes wrong in deletion from mongo', async () => {
+    it('returns response configured with 404 status if there is no matching message to delete from mongo', async () => {
       // Arrange
-      messagesRepository.deleteMessage.mockResolvedValueOnce({ ok: 0 });
+      messagesRepository.deleteMessage.mockResolvedValueOnce({ n: 0 });
       const requestMock = deleteMessageRequest();
 
       // Act
@@ -104,7 +104,7 @@ describe('messagesController', () => {
 
     it('returns response configured with 200 status if message can be deleted from mongo', async () => {
       // Arrange
-      messagesRepository.deleteMessage.mockResolvedValueOnce({ ok: 1 });
+      messagesRepository.deleteMessage.mockResolvedValueOnce({ n: 1 });
       const requestMock = deleteMessageRequest();
 
       // Act
