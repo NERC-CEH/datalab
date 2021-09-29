@@ -5,6 +5,7 @@ Array [
   "requested",
   "creating",
   "ready",
+  "suspended",
   "unavailable",
 ]
 `;
@@ -31,6 +32,13 @@ Object {
     "description": "Resource has been requested",
     "displayName": "Requested",
     "value": "requested",
+  },
+  "suspended": Object {
+    "backgroundColor": "hsl(190, 55%, 85%)",
+    "color": "hsl(190, 90%, 15%)",
+    "description": "Resource is suspended",
+    "displayName": "Suspended",
+    "value": "suspended",
   },
   "unavailable": Object {
     "backgroundColor": "hsl(355, 65%, 90%)",

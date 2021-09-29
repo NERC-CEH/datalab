@@ -2,9 +2,11 @@ import logger from '../config/logger';
 import statusChecker from './stackStatusChecker';
 import * as podsApi from '../kubernetes/podsApi';
 import * as stackRepository from '../dataaccess/stacksRepository';
+import { getStacksDeployments } from '../kubernetes/deploymentApi';
 
 jest.mock('../config/logger');
 jest.mock('../kubernetes/podsApi');
+jest.mock('../kubernetes/deploymentApi');
 jest.mock('../dataaccess/stacksRepository');
 
 const getStacksMock = jest.fn();
@@ -26,65 +28,97 @@ const stacks = [
   { name: 'expectedType-fourthPod', namespace: 'b', status: 'Init:0/2' },
 ];
 
-getStacksMock.mockReturnValue(Promise.resolve(stacks));
-updateStatusMock.mockReturnValue(Promise.resolve({ n: 1 }));
+getStacksMock.mockResolvedValue(stacks);
+updateStatusMock.mockResolvedValue({ n: 1 });
 
 describe('Stack Status Checker', () => {
   beforeEach(() => {
     logger.clearMessages();
     jest.clearAllMocks();
+
+    getStacksDeployments.mockResolvedValue([]);
   });
 
-  it('updates stack records with correct status', () => statusChecker().then(() => expect(updateStatusMock.mock.calls).toMatchSnapshot()));
+  it('updates stack records with correct status', async () => {
+    await statusChecker();
+    expect(updateStatusMock.mock.calls).toMatchSnapshot();
+  });
 
-  it('updates stack record for Running stack', () => {
+  it('updates stack records with suspended stacks as well', async () => {
+    // return a deployment not in the pods list with 0 replicas to simulate a suspended notebook
+    getStacksDeployments.mockResolvedValueOnce([
+      { name: 'expectedType-suspendedPod', namespace: 'a', replicas: 0 },
+    ]);
+
+    await statusChecker();
+
+    expect(updateStatusMock.mock.calls).toMatchSnapshot();
+  });
+
+  it('updates stack records with unavailable for scaled up deployments with no pods', async () => {
+    getStacksMock.mockResolvedValue([]);
+    getStacksDeployments.mockResolvedValueOnce([
+      { name: 'expectedType-missingPod', namespace: 'a', replicas: 1 },
+    ]);
+
+    await statusChecker();
+
+    expect(updateStatusMock).toHaveBeenCalledWith({
+      name: 'missingPod',
+      namespace: 'a',
+      status: 'unavailable',
+      type: 'expectedType',
+    });
+  });
+
+  it('updates stack record for Running stack', async () => {
     getStacksMock.mockReturnValue(Promise.resolve([
       { name: 'expectedType-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },
     ]));
 
     expect(updateStatusMock).not.toHaveBeenCalled();
-    return statusChecker().then(() => {
-      expect(updateStatusMock).toHaveBeenCalledTimes(1);
-      expect(updateStatusMock).toHaveBeenCalledWith({
-        name: 'expectedPodName',
-        namespace: 'expectedNamespace',
-        status: 'ready',
-        type: 'expectedType',
-      });
+    await statusChecker();
+
+    expect(updateStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateStatusMock).toHaveBeenCalledWith({
+      name: 'expectedPodName',
+      namespace: 'expectedNamespace',
+      status: 'ready',
+      type: 'expectedType',
     });
   });
 
-  it('updates stack record for Requested stack', () => {
-    getStacksMock.mockReturnValue(Promise.resolve([
+  it('updates stack record for Requested stack', async () => {
+    getStacksMock.mockResolvedValue([
       { name: 'expectedType-expectedPodName', status: 'Pending', namespace: 'expectedNamespace' },
-    ]));
+    ]);
 
     expect(updateStatusMock).not.toHaveBeenCalled();
-    return statusChecker().then(() => {
-      expect(updateStatusMock).toHaveBeenCalledTimes(1);
-      expect(updateStatusMock).toHaveBeenCalledWith({
-        name: 'expectedPodName',
-        namespace: 'expectedNamespace',
-        status: 'requested',
-        type: 'expectedType',
-      });
+    await statusChecker();
+
+    expect(updateStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateStatusMock).toHaveBeenCalledWith({
+      name: 'expectedPodName',
+      namespace: 'expectedNamespace',
+      status: 'requested',
+      type: 'expectedType',
     });
   });
 
-  it('updates stack record for Creating stack', () => {
-    getStacksMock.mockReturnValue(Promise.resolve([
+  it('updates stack record for Creating stack', async () => {
+    getStacksMock.mockResolvedValue([
       { name: 'expectedType-expectedPodName', status: 'CrashLoopBackOff', namespace: 'expectedNamespace' },
-    ]));
+    ]);
 
     expect(updateStatusMock).not.toHaveBeenCalled();
-    return statusChecker().then(() => {
-      expect(updateStatusMock).toHaveBeenCalledTimes(1);
-      expect(updateStatusMock).toHaveBeenCalledWith({
-        name: 'expectedPodName',
-        namespace: 'expectedNamespace',
-        status: 'unavailable',
-        type: 'expectedType',
-      });
+    await statusChecker();
+
+    expect(updateStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateStatusMock).toHaveBeenCalledWith({
+      name: 'expectedPodName',
+      namespace: 'expectedNamespace',
+      status: 'unavailable',
+      type: 'expectedType',
     });
   });
 });

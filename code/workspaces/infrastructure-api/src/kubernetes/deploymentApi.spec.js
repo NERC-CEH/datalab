@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import config from '../config/config';
-import deploymentApi from './deploymentApi';
+import deploymentApi, { getStacksDeployments } from './deploymentApi';
 
 const mock = new MockAdapter(axios);
 
@@ -41,6 +41,44 @@ describe('Kubernetes Deployment API', () => {
         .then((response) => {
           expect(response).toBeUndefined();
         });
+    });
+  });
+
+  describe('getStacksDeployments', () => {
+    it('should return only stack deployments', async () => {
+      const stackDeployment = createDeployment();
+      stackDeployment.spec = {
+        replicas: 0,
+        template: {
+          metadata: {
+            labels: {
+              name: 'stackDeployment',
+              'user-pod': 'jupyterlab',
+            },
+          },
+        },
+      };
+      stackDeployment.metadata.namespace = 'testnamespace';
+      const notStackDeployment = createDeployment();
+      const allDeployments = {
+        kind: 'DeploymentList',
+        items: [
+          stackDeployment,
+          notStackDeployment,
+        ],
+      };
+      mock.onGet(`${API_BASE}/apis/apps/v1/deployments`).reply(200, allDeployments);
+
+      const stackDeployments = await getStacksDeployments();
+
+      expect(stackDeployments).toHaveLength(1);
+      expect(stackDeployments[0]).toEqual({
+        deploymentName: 'test-deployment',
+        name: 'stackDeployment',
+        namespace: 'testnamespace',
+        replicas: 0,
+        type: 'jupyterlab',
+      });
     });
   });
 

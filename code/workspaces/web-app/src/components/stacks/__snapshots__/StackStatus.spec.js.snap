@@ -54,6 +54,22 @@ exports[`StackStatus creates correct snapshot for status types 4`] = `
   className="StackStatus-stackStatus-1"
   style={
     Object {
+      "backgroundColor": "hsl(190, 55%, 85%)",
+      "color": "hsl(190, 90%, 15%)",
+    }
+  }
+  type="caption"
+>
+  Suspended
+</WithStyles(ForwardRef(Typography))>
+`;
+
+exports[`StackStatus creates correct snapshot for status types 5`] = `
+<WithStyles(ForwardRef(Typography))
+  align="center"
+  className="StackStatus-stackStatus-1"
+  style={
+    Object {
       "backgroundColor": "hsl(355, 65%, 90%)",
       "color": "hsl(355, 100%, 22%)",
     }

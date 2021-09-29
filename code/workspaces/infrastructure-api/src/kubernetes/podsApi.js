@@ -2,7 +2,7 @@ import axios from 'axios';
 import { get } from 'lodash';
 import { stackList } from 'common/src/config/images';
 import config from '../config/config';
-import { SELECTOR_LABEL } from '../stacks/Stacks';
+import { SELECTOR_LABEL } from '../stacks/StackConstants';
 
 const API_BASE = config.get('kubernetesApi');
 const PODS_URL = `${API_BASE}/api/v1/pods`;

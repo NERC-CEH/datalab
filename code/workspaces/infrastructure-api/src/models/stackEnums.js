@@ -3,6 +3,7 @@ export const status = Object.freeze({
   CREATING: 'creating',
   UNAVAILABLE: 'unavailable',
   READY: 'ready',
+  SUSPENDED: 'suspended',
 });
 
 export const category = Object.freeze({
