@@ -62,6 +62,7 @@ export {
   CREATING,
   READY,
   REQUESTED,
+  SUSPENDED,
   UNAVAILABLE,
   getStatusKeys,
   getStatusProps,
