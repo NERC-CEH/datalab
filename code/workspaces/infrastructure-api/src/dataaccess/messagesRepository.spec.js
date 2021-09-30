@@ -16,9 +16,6 @@ const createMessageRequest = () => ({
   message: 'This is a message',
   expiry: '2021-10-10T10:00:00.000Z',
 });
-const deleteMessageRequest = () => ({
-  id: '1234',
-});
 const messageDocument = () => ({
   ...createMessageRequest(),
   _id: '1234',
@@ -45,14 +42,11 @@ describe('messagesRepository', () => {
 
   describe('deleteMessage', () => {
     it('deletes a message', async () => {
-      // Arrange
-      const request = deleteMessageRequest();
-
       // Act
-      await messagesRepository.deleteMessage(request);
+      await messagesRepository.deleteMessage('1234');
 
       // Assert
-      expect(messageModelMock.deleteOne).toHaveBeenCalledWith({ id: '1234' });
+      expect(messageModelMock.deleteOne).toHaveBeenCalledWith({ _id: '1234' });
       expect(messageModelMock.exec).toHaveBeenCalledWith();
     });
   });
