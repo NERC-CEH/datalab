@@ -141,6 +141,16 @@ async function restartDeployment(name, namespace) {
   return response;
 }
 
+const scaleDownDeployment = async (name, namespace) => {
+  logger.info('Scaling down deployment: %s in namespace: %s', name, namespace);
+  return setSpecReplicas(name, namespace, 0);
+};
+
+const scaleUpDeployment = async (name, namespace) => {
+  logger.info('Scaling up deployment: %s in namespace: %s', name, namespace);
+  return setSpecReplicas(name, namespace, 1);
+};
+
 export default {
   getDeployment,
   createDeployment,
@@ -149,5 +159,7 @@ export default {
   createOrUpdateDeployment,
   mergePatchDeployment,
   restartDeployment,
+  scaleDownDeployment,
+  scaleUpDeployment,
   getStacksDeployments,
 };

@@ -241,6 +241,56 @@ describe('Kubernetes Deployment API', () => {
       await expect(deploymentApi.restartDeployment(DEPLOYMENT_NAME, NAMESPACE)).rejects.toThrow('Request failed with status code 400');
     });
   });
+
+  describe('scale deployment', () => {
+    it('should scale down replicas to 0 on scale down', async () => {
+      const patchSpy = jest.fn();
+      mock.onPatch(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply((requestConfig) => {
+        patchSpy(JSON.parse(requestConfig.data));
+        return [204];
+      });
+
+      const getSpy = jest.fn();
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(0, 1)]; // downscale incomplete
+        });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(0, 0)]; // downscale complete
+        });
+
+      await deploymentApi.scaleDownDeployment(DEPLOYMENT_NAME, NAMESPACE);
+      expect(patchSpy).toHaveBeenCalledTimes(1);
+      expect(patchSpy).toHaveBeenNthCalledWith(1, { spec: { replicas: 0 } });
+    });
+
+    it('should scale up replicas to 1 on scale up', async () => {
+      const patchSpy = jest.fn();
+      mock.onPatch(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`).reply((requestConfig) => {
+        patchSpy(JSON.parse(requestConfig.data));
+        return [204];
+      });
+
+      const getSpy = jest.fn();
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(1, 0)]; // upscale incomplete
+        });
+      mock.onGet(`${DEPLOYMENT_URL}/${DEPLOYMENT_NAME}/scale`)
+        .replyOnce((requestConfig) => {
+          getSpy(requestConfig);
+          return [200, createScale(1, 1)]; // upscale complete
+        });
+
+      await deploymentApi.scaleUpDeployment(DEPLOYMENT_NAME, NAMESPACE);
+      expect(patchSpy).toHaveBeenCalledTimes(1);
+      expect(patchSpy).toHaveBeenNthCalledWith(1, { spec: { replicas: 1 } });
+    });
+  });
 });
 
 function createDeployment() {

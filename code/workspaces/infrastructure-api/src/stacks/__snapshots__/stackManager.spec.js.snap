@@ -58,12 +58,6 @@ Array [
 ]
 `;
 
-exports[`Stack Controller deleteStack failed Stack.delete requests are caught 1`] = `
-Object {
-  "message": "No stack definition for type jupyter",
-}
-`;
-
 exports[`Stack Controller mountAssetsOnStack applies the correct patch when there are initially assets and the assets are removed 1`] = `
 Array [
   "jupyterlab-teststack",

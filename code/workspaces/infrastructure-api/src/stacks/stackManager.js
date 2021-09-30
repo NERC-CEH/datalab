@@ -49,20 +49,40 @@ function url(projectKey, name, type) {
     : `https://${projectKey}-${name}.${domain}`;
 }
 
-function restartStack(params) {
+const restartStack = async (params) => {
   const { projectKey, name, type } = params;
-
-  // ensure type is valid
-  const stack = Stacks.getStack(type);
-  if (!stack) {
-    logger.error(`Could not restart stack ${name} in project ${projectKey}. No stack definition for type ${type}`);
-    return Promise.reject({ message: `No stack definition for type ${type}` });
-  }
+  validateStackType(params, 'restart');
 
   logger.info(`Restarting stack ${name} for project: ${projectKey}`);
   const k8sName = nameGenerator.deploymentName(name, type);
   return deploymentApi.restartDeployment(k8sName, projectKey);
-}
+};
+
+const validateStackType = (params, actionDescription) => {
+  const { projectKey, name, type } = params;
+  const stack = Stacks.getStack(type);
+  if (!stack) {
+    logger.error(`Could not ${actionDescription} stack ${name} in project ${projectKey}. No stack definition for type ${type}`);
+    throw new Error(`No stack definition for type ${type}`);
+  }
+};
+const scaleUpStack = async (params) => {
+  const { projectKey, name, type } = params;
+  validateStackType(params, 'scale up');
+
+  logger.info(`Scaling up stack ${name} for project: ${projectKey}`);
+  const k8sName = nameGenerator.deploymentName(name, type);
+  return deploymentApi.scaleUpDeployment(k8sName, projectKey);
+};
+
+const scaleDownStack = async (params) => {
+  const { projectKey, name, type } = params;
+  validateStackType(params, 'scale down');
+
+  logger.info(`Scaling down stack ${name} for project: ${projectKey}`);
+  const k8sName = nameGenerator.deploymentName(name, type);
+  return deploymentApi.scaleDownDeployment(k8sName, projectKey);
+};
 
 function deleteStack(user, params) {
   const { projectKey, name, type } = params;
@@ -89,4 +109,4 @@ async function mountAssetsOnStack({ projectKey, name, type, assetIds }) {
   await mountAssetsOnDeployment({ projectKey, deploymentName, containerNameWithMounts, assetIds });
 }
 
-export default { createStack, restartStack, deleteStack, mountAssetsOnStack, url };
+export default { createStack, scaleUpStack, scaleDownStack, restartStack, deleteStack, mountAssetsOnStack, url };
