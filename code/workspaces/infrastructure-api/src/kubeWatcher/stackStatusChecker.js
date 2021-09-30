@@ -31,7 +31,6 @@ const statusChecker = async () => {
     await setStatus(stackPodsGroupedByName);
     logger.debug('Status checker: complete');
   } catch (error) {
-    console.log('error', error);
     logger.error(`Error getting stack status -> ${error}`);
   }
 };
