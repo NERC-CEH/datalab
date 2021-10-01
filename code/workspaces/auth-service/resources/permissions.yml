@@ -25,6 +25,7 @@ projectRoles:
         - list
         - open
         - edit
+        - scale
     - name: storage
       permissions:
         - create
@@ -39,6 +40,7 @@ projectRoles:
         - list
         - open
         - edit
+        - scale
     - name: users
       permissions:
         - list

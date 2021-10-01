@@ -4,6 +4,7 @@ const DELETE = 'delete';
 const LIST = 'list';
 const OPEN = 'open';
 const EDIT = 'edit';
+const SCALE = 'scale';
 const ADMIN = 'admin';
 const MANAGER = 'manager';
 
@@ -66,6 +67,11 @@ const elements = {
   PROJECTS,
 };
 
+const elementsThatCanBeScaled = {
+  STACKS,
+  CLUSTERS,
+};
+
 const PROJECT_KEY = `${PROJECT_NAMESPACE}${permissionDelimiter}${KEY_TOKEN}`;
 const projectKeys = {
   PROJECT_KEY,
@@ -83,7 +89,10 @@ const flatMapPermissions = (outer, inner) => Object.entries(outer)
   .reduce((previous, current) => [...previous, ...current], [])
   .reduce((previous, current) => Object.assign(previous, current), {});
 
-const elementPermissions = flatMapPermissions(elements, elementsPermissionList);
+const elementPermissions = {
+  ...flatMapPermissions(elements, elementsPermissionList),
+  ...flatMapPermissions(elementsThatCanBeScaled, { SCALE }),
+};
 
 const usersPermissions = flatMapPermissions({ USERS }, usersPermissionList);
 
