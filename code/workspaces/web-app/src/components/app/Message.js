@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import ErrorOutline from '@material-ui/icons/ErrorOutline';
+import PropTypes from 'prop-types';
 import messagesActions from '../../actions/messagesActions';
 
 const styles = theme => ({
@@ -35,6 +36,16 @@ const Message = ({ classes, message }) => {
     <Button onClick={() => dispatch(messagesActions.dismissMessage(message.id))} color={'secondary'}>Dismiss</Button>
   </div>
   );
+};
+
+Message.propTypes = {
+  classes: PropTypes.object.isRequired,
+  message: PropTypes.shape({
+    id: PropTypes.string,
+    message: PropTypes.string.isRequired,
+    expiry: PropTypes.string,
+    created: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(styles)(Message);
