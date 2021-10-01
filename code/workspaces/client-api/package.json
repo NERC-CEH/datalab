@@ -44,9 +44,11 @@
     "shx": "^0.3.2"
   },
   "scripts": {
-    "test": "LOG_LEVEL=emerg jest --watch",
+    "test": "DEPLOYED_IN_CLUSTER=true LOG_LEVEL=emerg jest --watch",
+    "test-coverage": "DEPLOYED_IN_CLUSTER=true LOG_LEVEL=emerg jest --coverage",
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
     "build": "shx rm -rf dist && shx mkdir -p resources && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist --copy-files",
     "start": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/server.js",
     "mock": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/mockServer.js"

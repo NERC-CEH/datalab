@@ -39,18 +39,16 @@ describe('stackUrlService', () => {
     };
     const loginUrl = `${stack.internalEndpoint}/api/login`;
 
-    it('to request login cookie from zeppelin', () => {
-      getStackSecretsMock.mockImplementationOnce(() => (Promise.resolve({
+    it('to request login cookie from zeppelin', async () => {
+      getStackSecretsMock.mockResolvedValueOnce({
         username: 'datalab',
         password: 'password',
-      })));
+      });
 
       mock.onPost(loginUrl).reply(200, { message: 'message' }, getSuccessfulLoginResponse());
 
-      return stackUrlService(projectKey, stack)
-        .then((url) => {
-          expect(url).toEqual('http://zeppelin.datalab/connect?token=8214bf3f-3988-45f2-a33c-58d4be09f02b');
-        });
+      const url = await stackUrlService(projectKey, stack);
+      expect(url).toEqual('http://zeppelin.datalab/connect?token=8214bf3f-3988-45f2-a33c-58d4be09f02b');
     });
 
     it('to return undefined and log error if keys are not returned', () => {

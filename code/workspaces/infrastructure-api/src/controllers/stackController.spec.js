@@ -393,6 +393,71 @@ describe('Stack Controller', () => {
     });
   });
 
+  describe('scale stacks', () => {
+    let response;
+    beforeEach(async () => {
+      await createValidatedRequest({ projectKey: 'expectedProjectKey', name: 'notebookId', type: 'jupyter' }, stackController.scaleStackValidator);
+
+      response = httpMocks.createResponse();
+    });
+
+    describe('down', () => {
+      it('should process a valid request', async () => {
+        stackManager.scaleDownStack.mockResolvedValue('success');
+
+        await stackController.scaleDownStack(request, response);
+
+        expect(response.statusCode).toEqual(200);
+      });
+
+      it('should return 500 for failed request', async () => {
+        stackManager.scaleDownStack.mockRejectedValue({ message: 'error' });
+
+        await stackController.scaleDownStack(request, response);
+
+        expect(response.statusCode).toEqual(500);
+        expect(response._getData()).toEqual({ error: 'error', message: 'Error scaling down stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+      });
+
+      it('should return 500 if user not allowed to scale down stack', async () => {
+        userCanRestartStackMock.mockResolvedValueOnce(false);
+
+        await stackController.scaleDownStack(request, response);
+
+        expect(response.statusCode).toEqual(500);
+        expect(response._getData()).toEqual({ error: 'User cannot scale down stack.', message: 'Error scaling down stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+      });
+    });
+
+    describe('up', () => {
+      it('should process a valid request', async () => {
+        stackManager.scaleUpStack.mockResolvedValue('success');
+
+        await stackController.scaleUpStack(request, response);
+
+        expect(response.statusCode).toEqual(200);
+      });
+
+      it('should return 500 for failed request', async () => {
+        stackManager.scaleUpStack.mockRejectedValue({ message: 'error' });
+
+        await stackController.scaleUpStack(request, response);
+
+        expect(response.statusCode).toEqual(500);
+        expect(response._getData()).toEqual({ error: 'error', message: 'Error scaling up stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+      });
+
+      it('should return 500 if user not allowed to scale down stack', async () => {
+        userCanRestartStackMock.mockResolvedValueOnce(false);
+
+        await stackController.scaleUpStack(request, response);
+
+        expect(response.statusCode).toEqual(500);
+        expect(response._getData()).toEqual({ error: 'User cannot scale up stack.', message: 'Error scaling up stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+      });
+    });
+  });
+
   describe('getOneById', () => {
     beforeEach(() => createValidatedRequest({ projectKey: 'expectedProjectKey', id: 'abcd1234' }, stackController.withIdValidator));
 

@@ -49,6 +49,16 @@ function restartStack(projectKey, stack, { token }) {
     .then(response => response.data);
 }
 
+const scaleUpStack = async (projectKey, stack, { token }) => {
+  const response = await axios.put(`${API_URL_BASE}/stack/${projectKey}/scaleup`, stack, generateOptions(token));
+  return response.data;
+};
+
+const scaleDownStack = async (projectKey, stack, { token }) => {
+  const response = await axios.put(`${API_URL_BASE}/stack/${projectKey}/scaledown`, stack, generateOptions(token));
+  return response.data;
+};
+
 const generateOptions = (token, data) => ({
   headers: {
     authorization: token,
@@ -56,4 +66,4 @@ const generateOptions = (token, data) => ({
   data,
 });
 
-export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack, updateStack, restartStack };
+export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack, updateStack, restartStack, scaleUpStack, scaleDownStack };

@@ -75,6 +75,12 @@ type Mutation {
     # Restart a stack
     restartStack(stack: StackRestartRequest): Stack
 
+    # Scale up a stack
+    scaleupStack(stack: StackScaleRequest): GeneralResponseMessage
+
+    # Scale down a stack
+    scaledownStack(stack: StackScaleRequest): GeneralResponseMessage
+
     # Create a new data store
     createDataStore(projectKey: String!, dataStore: DataStorageCreationRequest): DataStore
 
@@ -231,6 +237,13 @@ input StackDeletionRequest {
 
 # Type to describe the mutation for restarting a Stack.
 input StackRestartRequest {
+    projectKey: String
+    name: String
+    type: String
+}
+
+# Type to describe the mutation for scaling a Stack.
+input StackScaleRequest {
     projectKey: String
     name: String
     type: String
@@ -448,4 +461,8 @@ type Message {
 input MessageCreationRequest {
     message: String!
     expiry: String!
+}
+
+type GeneralResponseMessage {
+    message: String
 }

@@ -52,10 +52,28 @@ const restartStackPayloadGenerator = stack => (Promise.resolve({
 const sendRestartRequest = context => stackPayload => stackService.restartStack(stackPayload.projectKey, stackPayload, context)
   .then(response => response);
 
+const scaleUpStack = async (context, stack) => {
+  try {
+    logPayload('scale up')(stack);
+    return await stackService.scaleUpStack(stack.projectKey, stack, context);
+  } catch (error) {
+    return axiosErrorHandler('Unable to scale up stack')(error);
+  }
+};
+
+const scaleDownStack = async (context, stack) => {
+  try {
+    logPayload('scale down')(stack);
+    return await stackService.scaleDownStack(stack.projectKey, stack, context);
+  } catch (error) {
+    return axiosErrorHandler('Unable to scale down stack')(error);
+  }
+};
+
 const logPayload = protocolName => (payload) => {
   logger.info(`Requesting stack ${protocolName} request for ${payload.name}`);
   logger.debug(`${protocolName} request payload: ${JSON.stringify(payload)}`);
   return payload;
 };
 
-export default { createStack, deleteStack, updateStack, restartStack };
+export default { createStack, deleteStack, updateStack, restartStack, scaleUpStack, scaleDownStack };

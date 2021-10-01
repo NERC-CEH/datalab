@@ -156,4 +156,41 @@ describe('Stack API', () => {
       expect(logger.getErrorMessages()).toMatchSnapshot();
     }
   });
+
+  describe('scaleUpStack', () => {
+    beforeEach(() => {
+      stackService.scaleUpStack.mockResolvedValue('expectedPayload');
+    });
+
+    it('should make correct API request for scale up', async () => {
+      const response = await stackApi.scaleUpStack(context, stack);
+
+      expect(stackService.scaleUpStack).toHaveBeenCalledWith(stack.projectKey, { ...stack }, context);
+      expect(response).toEqual('expectedPayload');
+    });
+
+    it('should log action on successful scale up request', async () => {
+      await stackApi.scaleUpStack(context, stack);
+
+      expect(logger.getInfoMessages()).toEqual([logMessage('Requesting stack scale up request for expectedName')]);
+      expect(logger.getDebugMessages()).toEqual([
+        logMessage('scale up request payload: {"name":"expectedName","type":"expectedType","projectKey":"project"}'),
+      ]);
+      expect(logger.getErrorMessages()).toEqual([]);
+    });
+
+    it('should log error detail on failed scale up request', async () => {
+      stackService.scaleUpStack.mockRejectedValueOnce(new Error('failedRequest'));
+
+      await expect(stackApi.scaleUpStack(context, stack)).rejects.toEqual(new Error('Unable to scale up stack Error: failedRequest'));
+
+      expect(logger.getInfoMessages()).toEqual([logMessage('Requesting stack scale up request for expectedName')]);
+      expect(logger.getDebugMessages()).toEqual([
+        logMessage('scale up request payload: {"name":"expectedName","type":"expectedType","projectKey":"project"}'),
+      ]);
+      expect(logger.getErrorMessages()).toEqual([logMessage(new Error('failedRequest'))]);
+    });
+  });
+
+  const logMessage = message => ({ data: undefined, message, metadata: undefined });
 });

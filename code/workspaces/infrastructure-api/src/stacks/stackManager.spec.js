@@ -18,9 +18,6 @@ jest.mock('../config/config');
 const origConfig = jest.requireActual('../config/config');
 config.get = jest.fn().mockImplementation(s => origConfig.default.default(s));
 
-const getStackMock = jest.fn();
-Stacks.getStack = getStackMock;
-
 const createOrUpdateMock = jest.fn().mockReturnValue(Promise.resolve());
 const deleteStackMock = jest.fn().mockReturnValue(Promise.resolve());
 stackRepository.default = {
@@ -47,6 +44,8 @@ const user = 'username';
 describe('Stack Controller', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+
+    Stacks.getStack.mockReturnValue(StackResolve);
   });
 
   describe('createStack', () => {
@@ -69,21 +68,15 @@ describe('Stack Controller', () => {
     });
 
     it('calls Stack.create with correct parameters', async () => {
-      getStackMock.mockReturnValue(StackResolve);
-
       const response = await stackManager.createStack(user, params);
       expect(response).toMatchSnapshot();
     });
 
-    it('calls stack repository with correct parameters', () => {
-      getStackMock.mockReturnValue(StackResolve);
-
-      return stackManager.createStack(user, params)
-        .then(() => expect(createOrUpdateMock.mock.calls).toMatchSnapshot());
-    });
+    it('calls stack repository with correct parameters', () => stackManager.createStack(user, params)
+      .then(() => expect(createOrUpdateMock.mock.calls).toMatchSnapshot()));
 
     it('failed Stack.create requests are caught', () => {
-      getStackMock.mockReturnValue(null);
+      Stacks.getStack.mockReturnValueOnce(null);
 
       return stackManager.createStack(user, params)
         .catch(err => expect(err).toMatchSnapshot());
@@ -92,40 +85,62 @@ describe('Stack Controller', () => {
 
   describe('restartStack', () => {
     it('calls deploymentApi.restartDeployment with correct parameters', async () => {
-      // Arrange
-      getStackMock.mockReturnValue(StackResolve);
       const restartDeploymentMock = jest.fn().mockResolvedValue('success');
       deploymentApi.restartDeployment = restartDeploymentMock;
 
-      // Act
       const response = await stackManager.restartStack(params);
 
-      // Assert
       expect(restartDeploymentMock).toBeCalledWith('jupyter-expectedName', 'project');
       expect(response).toEqual('success');
     });
   });
 
+  describe('scaleUpStack', () => {
+    it('calls deploymentApi.scaleUpDeployment with correct parameters', async () => {
+      deploymentApi.scaleUpDeployment.mockResolvedValueOnce('success');
+
+      const response = await stackManager.scaleUpStack(params);
+
+      expect(deploymentApi.scaleUpDeployment).toBeCalledWith('jupyter-expectedName', 'project');
+      expect(response).toEqual('success');
+    });
+
+    it('throws if the stack cannot be found', async () => {
+      Stacks.getStack.mockReturnValueOnce(null);
+      await expect(stackManager.scaleUpStack(params)).rejects.toEqual(new Error('No stack definition for type jupyter'));
+    });
+  });
+
+  describe('scaleDownStack', () => {
+    it('calls deploymentApi.scaleDownDeployment with correct parameters', async () => {
+      deploymentApi.scaleDownDeployment.mockResolvedValueOnce('success');
+
+      const response = await stackManager.scaleDownStack(params);
+
+      expect(deploymentApi.scaleDownDeployment).toBeCalledWith('jupyter-expectedName', 'project');
+      expect(response).toEqual('success');
+    });
+
+    it('throws if the stack cannot be found', async () => {
+      Stacks.getStack.mockReturnValueOnce(null);
+      await expect(stackManager.scaleDownStack(params)).rejects.toEqual(new Error('No stack definition for type jupyter'));
+    });
+  });
+
   describe('deleteStack', () => {
-    it('calls Stack.delete with correct parameters', () => {
-      getStackMock.mockReturnValue(StackResolve);
-
-      return stackManager.deleteStack(user, params)
-        .then(response => expect(response).toMatchSnapshot());
+    it('calls Stack.delete with correct parameters', async () => {
+      const response = await stackManager.deleteStack(user, params);
+      expect(response).toMatchSnapshot();
     });
 
-    it('calls stack repository with correct parameters', () => {
-      getStackMock.mockReturnValue(StackResolve);
-
-      return stackManager.deleteStack(user, params)
-        .then(() => expect(deleteStackMock.mock.calls).toMatchSnapshot());
+    it('calls stack repository with correct parameters', async () => {
+      await stackManager.deleteStack(user, params);
+      expect(deleteStackMock.mock.calls).toMatchSnapshot();
     });
 
-    it('failed Stack.delete requests are caught', () => {
-      getStackMock.mockReturnValue(null);
-
-      return stackManager.deleteStack(user, params)
-        .catch(err => expect(err).toMatchSnapshot());
+    it('failed Stack.delete requests are caught', async () => {
+      Stacks.getStack.mockReturnValueOnce(null);
+      await expect(stackManager.deleteStack(user, params)).rejects.toEqual({ message: 'No stack definition for type jupyter' });
     });
   });
 

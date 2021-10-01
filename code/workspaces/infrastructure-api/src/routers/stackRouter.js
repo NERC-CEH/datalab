@@ -45,6 +45,18 @@ stackRouter.put(
   stack.restartStackValidator,
   ew(stack.restartStack),
 );
+stackRouter.put(
+  '/:projectKey/scaledown',
+  permissionMiddleware(PROJECT_KEY_STACKS_EDIT),
+  stack.scaleStackValidator,
+  ew(stack.scaleDownStack),
+);
+stackRouter.put(
+  '/:projectKey/scaleup',
+  permissionMiddleware(PROJECT_KEY_STACKS_EDIT),
+  stack.scaleStackValidator,
+  ew(stack.scaleUpStack),
+);
 stackRouter.delete(
   '/:projectKey',
   permissionMiddleware(PROJECT_KEY_STACKS_DELETE),

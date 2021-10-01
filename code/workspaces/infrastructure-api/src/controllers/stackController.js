@@ -21,6 +21,16 @@ function restartStack(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, restartStackExec);
 }
 
+const scaleDownStack = (request, response) => {
+  const errorMessage = 'Invalid stack scale down request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, scaleDownStackExec);
+};
+
+const scaleUpStack = (request, response) => {
+  const errorMessage = 'Invalid stack scale up request';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, scaleUpStackExec);
+};
+
 function deleteStack(request, response) {
   const errorMessage = 'Invalid stack deletion request';
   return controllerHelper.validateAndExecute(request, response, errorMessage, deleteStackExec);
@@ -127,6 +137,44 @@ function restartStackExec(request, response) {
     .catch(controllerHelper.handleError(response, 'restarting', TYPE, params.name));
 }
 
+const scaleDownStackExec = async (req, res) => {
+  // Build request params
+  const { user } = req;
+  const params = matchedData(req);
+
+  const { projectKey, name } = params;
+
+  try {
+    const canScaleStack = await stackRepository.userCanRestartStack(projectKey, user, name);
+    if (!canScaleStack) {
+      throw new Error('User cannot scale down stack.');
+    }
+    await stackManager.scaleDownStack(params);
+    controllerHelper.sendSuccessfulScale(res);
+  } catch (error) {
+    controllerHelper.handleError(res, 'scaling down', TYPE, params.name)(error);
+  }
+};
+
+const scaleUpStackExec = async (req, res) => {
+  // Build request params
+  const { user } = req;
+  const params = matchedData(req);
+
+  const { projectKey, name } = params;
+
+  try {
+    const canScaleStack = await stackRepository.userCanRestartStack(projectKey, user, name);
+    if (!canScaleStack) {
+      throw new Error('User cannot scale up stack.');
+    }
+    await stackManager.scaleUpStack(params);
+    controllerHelper.sendSuccessfulScale(res);
+  } catch (error) {
+    controllerHelper.handleError(res, 'scaling up', TYPE, params.name)(error);
+  }
+};
+
 function deleteStackExec(request, response) {
   // Build request params
   const { user } = request;
@@ -180,6 +228,11 @@ const deleteStackValidator = [
 ];
 
 const restartStackValidator = [
+  ...withNameValidator,
+  checkExistsWithMsg('type'),
+];
+
+const scaleStackValidator = [
   ...withNameValidator,
   checkExistsWithMsg('type'),
 ];
@@ -246,8 +299,9 @@ const validators = {
   createStackValidator,
   updateStackValidator,
   restartStackValidator,
+  scaleStackValidator,
 };
 
-const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack };
+const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack, scaleDownStack, scaleUpStack };
 
 export default { ...validators, ...controllers };
