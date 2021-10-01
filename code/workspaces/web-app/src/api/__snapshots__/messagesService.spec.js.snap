@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`messagesService createMessage should build the correct mutation and unpack the results 1`] = `
+"
+    CreateMessage($cluster: ClusterCreationRequest!) {
+      createMessage(cluster: $cluster) {
+        id
+        message
+        expiry
+        created
+      }
+    }
+  "
+`;
+
+exports[`messagesService deleteMessage should build the correct mutation and unpack the results 1`] = `
+"
+    DeleteMessage($messageId: ID!) {
+      deleteMessage(messageId: $messageId) {
+        id
+      }
+    }"
+`;
+
+exports[`messagesService getAllMessages should build the correct query and unpack the results 1`] = `
+"
+    GetAllMessages {
+      allMessages {
+        id
+        message
+        expiry
+        created
+      }
+    }
+  "
+`;
+
+exports[`messagesService getMessages should build the correct query and unpack the results 1`] = `
+"
+    GetMessages {
+      messages {
+        id
+        message
+        expiry
+        created
+      }
+    }
+  "
+`;
