@@ -23,11 +23,12 @@ export const getDismissedMessages = () => {
 };
 
 export const getMessagesToDisplay = (messages) => {
-  // Only display messages that have not been dismissed.
-  const dismissed = getDismissedMessages();
   if (!messages) {
     return [];
   }
+
+  // Only display messages that have not been dismissed.
+  const dismissed = getDismissedMessages();
 
   return messages.filter(m => !dismissed.includes(m.id));
 };
