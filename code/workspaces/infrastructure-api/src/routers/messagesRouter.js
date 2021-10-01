@@ -1,10 +1,10 @@
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import { service } from 'service-chassis';
 import express from 'express';
 import { permissionTypes } from 'common';
 import messagesController from '../controllers/messagesController';
 import permissionMiddleware from '../auth/permissionMiddleware';
-import validators from '../validators/messageValidators';
+import { messageValidator, messageIdValidator } from '../validators/messageValidators';
 
 const {
   SYSTEM_INSTANCE_ADMIN,
@@ -17,13 +17,14 @@ const messagesRouter = express.Router();
 messagesRouter.post(
   '/',
   permissionMiddleware(SYSTEM_INSTANCE_ADMIN),
-  validators.messageValidator(body),
+  messageValidator(body),
   errorWrapper(messagesController.createMessage),
 );
 
 messagesRouter.delete(
   '/:id',
   permissionMiddleware(SYSTEM_INSTANCE_ADMIN),
+  messageIdValidator(param),
   errorWrapper(messagesController.deleteMessage),
 );
 

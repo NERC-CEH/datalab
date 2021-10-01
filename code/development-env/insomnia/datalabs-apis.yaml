@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-09-17T13:34:14.126Z
+__export_date: 2021-09-29T09:46:12.740Z
 __export_source: insomnia.desktop.app:v2021.5.3
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
@@ -247,7 +247,7 @@ resources:
     _type: request
   - _id: req_09e0efcf4b0f4a8e90a820f3a4c35e2e
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1632903635361
     created: 1575988247734
     url: "{{ client_api_url  }}/api"
     name: logs
@@ -315,7 +315,7 @@ resources:
     _type: request
   - _id: req_fd40b641d5de46da8cfa9eab9968c4f5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616664014410
+    modified: 1632901402241
     created: 1568024223786
     url: "{{ client_api_url  }}/api"
     name: Stacks
@@ -435,7 +435,7 @@ resources:
     _type: request
   - _id: req_62f3cb4b31c84181884cf475dc5185a5
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1632903659834
     created: 1568396058200
     url: "{{ client_api_url  }}/api"
     name: Volumes
@@ -583,7 +583,7 @@ resources:
     _type: request
   - _id: req_957c83a53645464e9edd5cd83c340c87
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616587014613
+    modified: 1632903719894
     created: 1568027279146
     url: "{{ client_api_url  }}/api"
     name: Storage
@@ -646,7 +646,7 @@ resources:
     _type: request
   - _id: req_9dd25c2245294667aa561c46ca3a250b
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1632904523553
     created: 1568906791713
     url: "{{ client_api_url  }}/api"
     name: deleteProject
@@ -942,7 +942,7 @@ resources:
     _type: request
   - _id: req_26dad2999d1a421e8dbfdc7e4dcf0f45
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1632903649034
     created: 1606922876464
     url: "{{ client_api_url  }}/api"
     name: Set catalogueRole
@@ -1099,7 +1099,7 @@ resources:
     _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1631885464296
+    modified: 1632904300826
     created: 1614703552507
     url: "{{ _.client_api_url }}/api"
     name: createCluster
@@ -1132,7 +1132,7 @@ resources:
     _type: request
   - _id: req_0e377823d23b4edfab7e98061dc3c92d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1631885643730
+    modified: 1632904285658
     created: 1631885470142
     url: "{{ _.client_api_url }}/api"
     name: createSparkCluster
@@ -1166,7 +1166,7 @@ resources:
     _type: request
   - _id: req_c184d66da7f24915872f0feb73db4789
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1632903675140
     created: 1615219461776
     url: "{{ _.client_api_url }}/api"
     name: createVanillaCluster
@@ -1198,7 +1198,7 @@ resources:
     _type: request
   - _id: req_947e99a84c20483a9d2b49ce448176f4
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1619513995501
+    modified: 1632903705499
     created: 1614863475203
     url: "{{ _.client_api_url }}/api"
     name: clusters
@@ -1217,6 +1217,123 @@ resources:
       type: bearer
       token: "{{ _.access_token }}"
     metaSortKey: 2800
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3f39aa2f21784bf19bffead05b1d21f6
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1632908661510
+    created: 1632904265190
+    url: "{{ client_api_url  }}/api"
+    name: createMessage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  createMessage(message: {\n    message: \"My
+        message\",\n\t  expiry: \"2021-12-25\",\n  })
+        {\n    id\n    message\n    expiry\n    created\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_dc335243109146858fbc472a4d19cd45
+    authentication:
+      type: bearer
+      token: "{{access_token}}"
+    metaSortKey: 2825
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c6b73d473603423aab3bb564f479c78e
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1632908660820
+    created: 1632904344455
+    url: "{{ client_api_url  }}/api"
+    name: deleteMessage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  deleteMessage(messageId:
+        \"615431dceeb1380072fc1a4b\") {\n    id\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_dc335243109146858fbc472a4d19cd45
+    authentication:
+      type: bearer
+      token: "{{access_token}}"
+    metaSortKey: 2837.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1edf3a27fc9c422d845011aaf9428b98
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1632908664084
+    created: 1632903628086
+    url: "{{ client_api_url  }}/api"
+    name: messages
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  messages
+        {\n    id\n    message\n    expiry\n    created\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_dc335243109146858fbc472a4d19cd45
+    authentication:
+      type: bearer
+      token: "{{access_token}}"
+    metaSortKey: 2850
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d0e40efb8c6642a49f15e6bf3c750b85
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1632908663580
+    created: 1632904247777
+    url: "{{ client_api_url  }}/api"
+    name: allMessages
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  allMessages
+        {\n    id\n    message\n    expiry\n    created\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_dc335243109146858fbc472a4d19cd45
+    authentication:
+      type: bearer
+      token: "{{access_token}}"
+    metaSortKey: 2900
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -1390,7 +1507,7 @@ resources:
     _type: request
   - _id: req_0f421969720d4f21bdf04bde23f5c69e
     parentId: fld_95ba8cf102e2423ab9fd93af9dd84fae
-    modified: 1617287591287
+    modified: 1632837442642
     created: 1614694712335
     url: "{{ infra_api_url  }}/clusters/"
     name: Create Cluster
@@ -1517,6 +1634,117 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1611784495108.25
     _type: request_group
+  - _id: req_372157733f2846da9e18aa88a32cea43
+    parentId: fld_e93ed5cb800e48c89b142e0829c1d1be
+    modified: 1632837577779
+    created: 1632837144431
+    url: "{{ infra_api_url  }}/messages/all"
+    name: Get All Messages
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ internal_token }}"
+    metaSortKey: -1632837144431
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_e93ed5cb800e48c89b142e0829c1d1be
+    parentId: fld_998699fb7271407c91200bc860ef8beb
+    modified: 1632837155668
+    created: 1632837113973
+    name: Messages
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1610683470058.875
+    _type: request_group
+  - _id: req_5cb9793cbc434e2696683b3ca81377ac
+    parentId: fld_e93ed5cb800e48c89b142e0829c1d1be
+    modified: 1632837452775
+    created: 1632837139459
+    url: "{{ infra_api_url  }}/messages/"
+    name: Get Active Messages
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ internal_token }}"
+    metaSortKey: -1632837139459
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_586a1f38c0fe46a78e0dc21499cee05f
+    parentId: fld_e93ed5cb800e48c89b142e0829c1d1be
+    modified: 1632905911659
+    created: 1632837130140
+    url: "{{ infra_api_url  }}/messages/615426582fe43e01ce00f4b9"
+    name: Delete Message
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ internal_token }}"
+    metaSortKey: -1632837130140
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_aa5f998955c241a48c3f8251c74082fc
+    parentId: fld_e93ed5cb800e48c89b142e0829c1d1be
+    modified: 1632901433732
+    created: 1632837121766
+    url: "{{ infra_api_url  }}/messages/"
+    name: Create Message
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"message": "My message",
+        	"expiry": "2021-12-25T12:00:00+00:00"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_eef86df711f44dbc944ad41f39cbef67
+    authentication:
+      type: bearer
+      token: "{{ internal_token }}"
+    metaSortKey: -1632837121766
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_21517ac2a05e45d5af9813d3d84c98d7
     parentId: fld_5e6448fbd48f422ab34cfdce676516c9
     modified: 1605698364033

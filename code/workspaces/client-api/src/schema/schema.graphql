@@ -53,6 +53,12 @@ type Query {
 
     # List of clusters in a project
     clusters(projectKey: String!): [Cluster]
+
+    # Get a list of the active (non-expired) messages
+    messages: [Message]
+
+    # Get a list of all the messages
+    allMessages: [Message]
 }
 
 # Root mutation methods for Datalabs.
@@ -70,10 +76,10 @@ type Mutation {
     restartStack(stack: StackRestartRequest): Stack
 
     # Scale up a stack
-    scaleupStack(stack: StackScaleRequest): Message
+    scaleupStack(stack: StackScaleRequest): GeneralResponseMessage
 
     # Scale down a stack
-    scaledownStack(stack: StackScaleRequest): Message
+    scaledownStack(stack: StackScaleRequest): GeneralResponseMessage
 
     # Create a new data store
     createDataStore(projectKey: String!, dataStore: DataStorageCreationRequest): DataStore
@@ -125,6 +131,12 @@ type Mutation {
 
     # Delete a cluster
     deleteCluster(cluster: ClusterDeletionRequest!): Cluster!
+
+    # Create a message
+    createMessage(message: MessageCreationRequest!): Message!
+
+    # Delete a message
+    deleteMessage(messageId: ID!): Message
 }
 
 # Type to describe the mutation for creating a new data store
@@ -438,6 +450,19 @@ type Cluster {
     schedulerAddress: String
 }
 
+# Type to describe a message
 type Message {
+    id: ID!
+    message: String
+    expiry: String
+    created: String
+}
+
+input MessageCreationRequest {
+    message: String!
+    expiry: String!
+}
+
+type GeneralResponseMessage {
     message: String
 }

@@ -22,5 +22,10 @@ const messageValidator = (checkFunction) => {
   return service.middleware.validator(validationChains, logger);
 };
 
-export default { messageValidator };
+const messageIdValidation = checkFunction => new ValidationChainHelper(checkFunction('id'))
+  .exists()
+  .notEmpty()
+  .getValidationChain();
+const messageIdValidator = checkFunction => service.middleware.validator([messageIdValidation(checkFunction)], logger);
 
+export { messageValidator, messageIdValidator };
