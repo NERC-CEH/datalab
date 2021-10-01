@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmationDialog renders to match snapshot 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  maxWidth="md"
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Dialog title
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      Dialog body
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <PrimaryActionButton
+      icon="check"
+      onClick={[MockFunction onSubmit]}
+    >
+      Confirm
+    </PrimaryActionButton>
+    <SecondaryActionButton
+      icon="clear"
+      onClick={[MockFunction onCancel]}
+    >
+      Cancel
+    </SecondaryActionButton>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;
