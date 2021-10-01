@@ -1,13 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, useTheme } from '@material-ui/core/styles';
 import TopBar from './TopBar';
+import MessageBanner from './MessageBanner';
 
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
-    height: `calc(100vh - ${theme.shape.topBarHeight}px)`,
     paddingTop: theme.shape.topBarHeight,
   },
   appFrame: {
@@ -17,23 +18,32 @@ const styles = theme => ({
     zIndex: 1,
   },
   pageContainer: {
+    backgroundColor: theme.palette.backgroundColor,
     overflow: 'auto',
+    flexDirection: 'column',
     width: '100%',
-    height: '100%',
     display: 'flex',
   },
 });
 
-const Navigation = ({ classes, children, identity, userPermissions }) => (
-  <div className={classes.container}>
-    <div className={classes.appFrame}>
-      <TopBar identity={identity} userPermissions={userPermissions} />
-      <main className={classes.pageContainer}>
-        {children}
-      </main>
+const Navigation = ({ classes, children, identity, userPermissions }) => {
+  const messageCount = useSelector(s => s.messages.value).length;
+  const theme = useTheme();
+  const messagesHeight = messageCount * theme.shape.messageHeight;
+  const heightDiff = theme.shape.topBarHeight + messagesHeight;
+
+  return (
+    <div className={classes.container} style={{ height: `calc(100vh - ${heightDiff}px)` }}>
+      <div className={classes.appFrame}>
+        <TopBar identity={identity} userPermissions={userPermissions} />
+        <main className={classes.pageContainer} style={{ height: `calc(100% + ${messagesHeight}px)` }}>
+          <MessageBanner/>
+          {children}
+        </main>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
