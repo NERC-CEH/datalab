@@ -5,6 +5,7 @@ import authentication from './authReducer';
 import dataStorage from './dataStorageReducer';
 import projects from './projectsReducer';
 import stacks from './stacksReducer';
+import messages from './messagesReducer';
 import modal from './modelDialogReducer';
 import users from './usersReducer';
 import roles from './rolesReducer';
@@ -18,6 +19,7 @@ const rootReducer = history => combineReducers({
   dataStorage,
   projects,
   stacks,
+  messages,
   modal,
   users,
   roles,
