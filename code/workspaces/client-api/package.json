@@ -44,8 +44,8 @@
     "shx": "^0.3.2"
   },
   "scripts": {
-    "test": "LOG_LEVEL=emerg jest --watch",
-    "test-coverage": "LOG_LEVEL=emerg jest --coverage",
+    "test": "DEPLOYED_IN_CLUSTER=true LOG_LEVEL=emerg jest --watch",
+    "test-coverage": "DEPLOYED_IN_CLUSTER=true LOG_LEVEL=emerg jest --coverage",
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",

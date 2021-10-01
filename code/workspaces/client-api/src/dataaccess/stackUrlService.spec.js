@@ -37,7 +37,7 @@ describe('stackUrlService', () => {
       url: 'http://zeppelin.datalab',
       internalEndpoint: 'http://zeppelin',
     };
-    const loginUrl = `${stack.url}/api/login`;
+    const loginUrl = `${stack.internalEndpoint}/api/login`;
 
     it('to request login cookie from zeppelin', async () => {
       getStackSecretsMock.mockResolvedValueOnce({
