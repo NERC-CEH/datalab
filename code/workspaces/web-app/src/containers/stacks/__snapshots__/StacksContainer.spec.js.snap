@@ -14,6 +14,7 @@ Array [
   "updateStackShareStatus",
   "editStack",
   "restartStack",
+  "scaleStack",
   "openModalDialog",
   "closeModalDialog",
   "listUsers",
@@ -67,6 +68,8 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
   openPermission="projects:project-key:stacks:open"
   openStack={[Function]}
   restartStack={[Function]}
+  scalePermission="projects:project-key:stacks:scale"
+  scaleStack={[Function]}
   shareStack={[Function]}
   showCreateButton={true}
   stacks={

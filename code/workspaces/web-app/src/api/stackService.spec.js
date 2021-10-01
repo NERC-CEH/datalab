@@ -135,4 +135,43 @@ describe('stackService', () => {
       });
     });
   });
+
+  describe('scaleStack', () => {
+    it('should build the correct mutation to scale up', async () => {
+      const data = { stack: { name: 'name', projectKey: 'test', type: 'jupyter' } };
+      mockClient.prepareSuccess(data);
+
+      const response = await stackService.scaleStack(data.stack, 1);
+      expect(response).toEqual(data.scaleupStack);
+      expect(mockClient.lastQuery()).toEqual(`
+    ScaleStack($stack: StackScaleRequest) {
+      scaleupStack(stack: $stack) {
+        message
+      }
+    }`);
+      expect(mockClient.lastOptions()).toEqual(data);
+    });
+
+    it('should build the correct mutation to scale down', async () => {
+      const data = { stack: { name: 'name', projectKey: 'test', type: 'jupyter' } };
+      mockClient.prepareSuccess(data);
+
+      const response = await stackService.scaleStack(data.stack, 0);
+      expect(response).toEqual(data.scaleupStack);
+      expect(mockClient.lastQuery()).toEqual(`
+    ScaleStack($stack: StackScaleRequest) {
+      scaledownStack(stack: $stack) {
+        message
+      }
+    }`);
+      expect(mockClient.lastOptions()).toEqual(data);
+    });
+
+    it('should throw an error if the mutation fails', async () => {
+      const data = { stack: { name: 'name', projectKey: 'test', type: 'jupyter' } };
+      mockClient.prepareFailure('error');
+
+      await expect(stackService.scaleStack(data.stack, 1)).rejects.toEqual({ error: 'error' });
+    });
+  });
 });

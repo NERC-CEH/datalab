@@ -89,8 +89,8 @@ function styles(theme) {
   });
 }
 
-const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, typeName,
-  userPermissions, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippets }) => {
+const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, scaleStack, typeName,
+  userPermissions, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets }) => {
   const users = useUsers();
   const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
   const description = getDescription(stack, typeName);
@@ -129,6 +129,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           deleteStack={deleteStack}
           editStack={editStack}
           restartStack={restartStack}
+          scaleStack={scaleStack}
           getLogs={getLogs}
           copySnippets={copySnippets}
           userPermissions={userPermissions}
@@ -136,6 +137,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           deletePermission={deletePermission}
           shareStack={shareStack}
           editPermission={editPermission}
+          scalePermission={scalePermission}
         />
       </div>
     </div>
@@ -159,12 +161,14 @@ StackCard.propTypes = {
   getLogs: PropTypes.func,
   editStack: PropTypes.func,
   restartStack: PropTypes.func,
+  scaleStack: PropTypes.func,
   shareStack: PropTypes.func,
   typeName: PropTypes.string.isRequired,
   userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,
   editPermission: PropTypes.string,
+  scalePermission: PropTypes.string,
   copySnippets: PropTypes.objectOf(PropTypes.func),
 };
 

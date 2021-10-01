@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import RestartStackDialog from './RestartStackDialog';
+import ConfirmationDialog from './ConfirmationDialog';
 
-describe('RestartStackDialog', () => {
+describe('ConfirmationDialog', () => {
   const shallowRender = props => shallow(
-    <RestartStackDialog {...props} />,
+    <ConfirmationDialog {...props} />,
   );
 
   it('renders to match snapshot', () => {

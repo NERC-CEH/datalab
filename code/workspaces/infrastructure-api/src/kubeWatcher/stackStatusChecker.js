@@ -26,7 +26,15 @@ const statusChecker = async () => {
         status: d.replicas === 0 ? stackStatus.SUSPENDED : 'unknown',
       }));
 
-    const stackPodsGroupedByName = groupStatusByName([...stackPods, ...missingPods]);
+    // pods still exist but the deployment has been scaled down
+    const terminatingPods = stackDeployments
+      .filter(d => stackPods.findIndex(p => d.name === p.name) > -1 && d.replicas === 0)
+      .map(d => ({
+        ...d,
+        status: stackStatus.SUSPENDED,
+      }));
+
+    const stackPodsGroupedByName = groupStatusByName([...stackPods, ...missingPods, ...terminatingPods]);
 
     await setStatus(stackPodsGroupedByName);
     logger.debug('Status checker: complete');
@@ -67,14 +75,14 @@ const setStatus = pods => Promise.mapSeries(Object.values(pods), (podInfo) => {
 });
 
 const getStatus = (statusArray) => {
-  if (arraysIncludes(statusArray, kubeUpStatus)) {
+  if (arraysIncludes(statusArray, kubeSuspendedStatus)) {
+    return stackStatus.SUSPENDED;
+  } if (arraysIncludes(statusArray, kubeUpStatus)) {
     return stackStatus.READY;
   } if (arraysIncludes(statusArray, kubeCreateStatus)) {
     return stackStatus.CREATING;
   } if (arraysIncludes(statusArray, kubeRequestStatus)) {
     return stackStatus.REQUESTED;
-  } if (arraysIncludes(statusArray, kubeSuspendedStatus)) {
-    return stackStatus.SUSPENDED;
   }
 
   return stackStatus.UNAVAILABLE;

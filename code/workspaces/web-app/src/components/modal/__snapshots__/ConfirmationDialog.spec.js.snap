@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RestartStackDialog renders to match snapshot 1`] = `
+exports[`ConfirmationDialog renders to match snapshot 1`] = `
 <WithStyles(ForwardRef(Dialog))
   maxWidth="md"
   open={true}

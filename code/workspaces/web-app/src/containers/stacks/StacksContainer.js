@@ -4,8 +4,8 @@ import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { permissionTypes } from 'common';
-import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
+import { permissionTypes, statusTypes } from 'common';
+import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SCALE_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
 import currentProjectSelectors from '../../selectors/currentProjectSelectors';
@@ -15,7 +15,9 @@ import userActions from '../../actions/userActions';
 
 const refreshTimeout = 15000;
 
-const { projectPermissions: { PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_EDIT }, projectKeyPermission } = permissionTypes;
+const { projectPermissions: {
+  PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_EDIT, PROJECT_KEY_STACKS_SCALE,
+}, projectKeyPermission } = permissionTypes;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -134,6 +136,37 @@ class StacksContainer extends Component {
     },
   )
 
+  scaleStack = async (stack, replicas) => {
+    this.props.actions.closeModalDialog();
+
+    try {
+      await this.props.actions.scaleStack(stack, replicas);
+      notify.success(`${this.props.typeName} ${replicas > 0 ? 'started' : 'suspended'}`);
+    } catch (error) {
+      notify.error(`Unable to scale ${this.props.typeName}`);
+    } finally {
+      this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType);
+    }
+  };
+
+  confirmScaleStack = async (stack) => {
+    if (stack.status === statusTypes.SUSPENDED) {
+      this.scaleStack(stack, 1);
+      return;
+    }
+
+    this.props.actions.openModalDialog(
+      MODAL_TYPE_SCALE_STACK,
+      {
+        title: `Suspend ${stack.displayName}?`,
+        body: `Would you like to suspend the ${this.props.typeName} "${stack.displayName}"?
+          Any unsaved work in the ${this.props.typeName} could be lost.`,
+        onSubmit: () => this.scaleStack(stack, 0),
+        onCancel: this.props.actions.closeModalDialog,
+      },
+    );
+  }
+
   loadStack() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     if (this.props.modifyData) {
@@ -205,13 +238,15 @@ class StacksContainer extends Component {
         shareStack={this.props.modifyData ? this.confirmShareStack : undefined}
         editStack={this.props.modifyData ? this.openEditForm : undefined}
         restartStack={this.props.modifyData ? this.confirmRestartStack : undefined}
+        scaleStack={this.props.modifyData ? this.confirmScaleStack : undefined}
         openCreationForm={this.props.modifyData ? this.openCreationForm : undefined}
         showCreateButton={this.props.modifyData}
         userPermissions={() => this.props.userPermissions}
         createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
         openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey.value)}
         deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey.value)}
-        editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey.value)} />
+        editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey.value)}
+        scalePermission={projectKeyPermission(PROJECT_KEY_STACKS_SCALE, this.props.projectKey.value)}/>
     );
   }
 }

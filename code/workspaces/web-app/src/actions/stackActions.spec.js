@@ -160,6 +160,22 @@ describe('stackActions', () => {
       expect(output.type).toBe('RESTART_STACK');
       expect(output.payload).toBe('expectedStackPayload');
     });
+
+    it('scaleStack', () => {
+      const stack = {
+        name: 'stackname',
+        projectKey: 'test',
+        type: 'expectedType',
+      };
+      stackService.scaleStack.mockReturnValue('expectedStackPayload');
+
+      const output = stackActions.scaleStack(stack, 0);
+
+      expect(stackService.scaleStack).toHaveBeenCalledTimes(1);
+      expect(stackService.scaleStack).toBeCalledWith(stack, 0);
+      expect(output.type).toBe('SCALE_STACK');
+      expect(output.payload).toBe('expectedStackPayload');
+    });
   });
 
   describe('exports correct values for', () => {

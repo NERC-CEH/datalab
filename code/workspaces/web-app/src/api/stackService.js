@@ -84,6 +84,19 @@ function restartStack(stack) {
     .then(errorHandler('data.stack'));
 }
 
+const scaleStack = async (stack, replicas) => {
+  const operation = replicas > 0 ? 'scaleupStack' : 'scaledownStack';
+  const mutation = `
+    ScaleStack($stack: StackScaleRequest) {
+      ${operation}(stack: $stack) {
+        message
+      }
+    }`;
+
+  const response = await gqlMutation(mutation, { stack });
+  return errorHandler(`data.${replicas > 0 ? 'scaleupStack' : 'scaledownStack'}`)(response);
+};
+
 function getLogs(projectKey, name) {
   const query = `
     Logs($projectKey: String!, $name: String!) {
@@ -124,4 +137,5 @@ export default {
   getLogs,
   editStack,
   restartStack,
+  scaleStack,
 };

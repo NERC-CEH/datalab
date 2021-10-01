@@ -95,6 +95,7 @@ Object {
   "edit": true,
   "logs": true,
   "restart": true,
+  "scale": true,
   "share": true,
 }
 `;
@@ -106,6 +107,7 @@ Object {
   "edit": true,
   "logs": true,
   "restart": true,
+  "scale": true,
   "share": true,
 }
 `;
@@ -117,6 +119,7 @@ Object {
   "edit": true,
   "logs": false,
   "restart": true,
+  "scale": true,
   "share": true,
 }
 `;

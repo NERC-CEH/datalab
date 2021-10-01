@@ -10,6 +10,7 @@ const {
   projectPermissions: {
     PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_CREATE,
     PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_EDIT,
+    PROJECT_KEY_STACKS_SCALE,
   },
 } = permissionTypes;
 
@@ -47,13 +48,13 @@ stackRouter.put(
 );
 stackRouter.put(
   '/:projectKey/scaledown',
-  permissionMiddleware(PROJECT_KEY_STACKS_EDIT),
+  permissionMiddleware(PROJECT_KEY_STACKS_SCALE),
   stack.scaleStackValidator,
   ew(stack.scaleDownStack),
 );
 stackRouter.put(
   '/:projectKey/scaleup',
-  permissionMiddleware(PROJECT_KEY_STACKS_EDIT),
+  permissionMiddleware(PROJECT_KEY_STACKS_SCALE),
   stack.scaleStackValidator,
   ew(stack.scaleUpStack),
 );

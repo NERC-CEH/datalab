@@ -117,6 +117,7 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
         Share
       </ForwardRef>
       <ForwardRef
+        disabled={false}
         onClick={[Function]}
         requiredPermission="edit"
         shouldRender={true}
@@ -129,6 +130,20 @@ exports[`PureStackCardActions Should not render edit/delete buttons if functions
         }
       >
         Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="scale"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Suspend
       </ForwardRef>
       <ForwardRef
         key="Python"
@@ -314,6 +329,7 @@ exports[`PureStackCardActions Should render Open as disabled if stack is not rea
         Share
       </ForwardRef>
       <ForwardRef
+        disabled={false}
         onClick={[Function]}
         requiredPermission="edit"
         shouldRender={true}
@@ -326,6 +342,20 @@ exports[`PureStackCardActions Should render Open as disabled if stack is not rea
         }
       >
         Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="scale"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Suspend
       </ForwardRef>
       <ForwardRef
         key="Python"
@@ -477,6 +507,7 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
         Share
       </ForwardRef>
       <ForwardRef
+        disabled={false}
         onClick={[Function]}
         requiredPermission="edit"
         shouldRender={true}
@@ -489,6 +520,20 @@ exports[`PureStackCardActions creates correct snapshot 1`] = `
         }
       >
         Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="scale"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Suspend
       </ForwardRef>
       <ForwardRef
         key="Python"
@@ -640,6 +685,7 @@ exports[`PureStackCardActions creates correct snapshot if there are multiple cop
         Share
       </ForwardRef>
       <ForwardRef
+        disabled={false}
         onClick={[Function]}
         requiredPermission="edit"
         shouldRender={true}
@@ -652,6 +698,20 @@ exports[`PureStackCardActions creates correct snapshot if there are multiple cop
         }
       >
         Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="scale"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Suspend
       </ForwardRef>
       <ForwardRef
         key="Python"
@@ -817,6 +877,7 @@ exports[`PureStackCardActions should not render button if userAction for that bu
         Share
       </ForwardRef>
       <ForwardRef
+        disabled={false}
         onClick={[Function]}
         requiredPermission="edit"
         shouldRender={true}
@@ -829,6 +890,20 @@ exports[`PureStackCardActions should not render button if userAction for that bu
         }
       >
         Restart
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        requiredPermission="scale"
+        shouldRender={false}
+        userPermissions={
+          Array [
+            "open",
+            "delete",
+            "edit",
+          ]
+        }
+      >
+        Suspend
       </ForwardRef>
       <ForwardRef
         key="Python"
@@ -884,6 +959,7 @@ exports[`StackCardActions passes props down to child component as well as curren
   openPermission="open"
   openStack={[MockFunction openStack]}
   restartStack={[MockFunction restartStack]}
+  scalePermission="scale"
   shareStack={[MockFunction shareStack]}
   stack={
     Object {
@@ -903,6 +979,7 @@ exports[`StackCardActions passes props down to child component as well as curren
       "edit": true,
       "logs": true,
       "restart": true,
+      "scale": true,
       "share": true,
     }
   }
