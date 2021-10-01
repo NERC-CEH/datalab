@@ -12,7 +12,7 @@ import ShareStackDialog from '../../components/modal/ShareStackDialog';
 import EditNotebookDialog from '../../components/modal/EditNotebookDialog';
 import EditSiteDialog from '../../components/modal/EditSiteDialog';
 import Logs from '../../components/modal/SiteLogs';
-import RestartStackDialog from '../../components/modal/RestartStackDialog';
+import ConfirmationDialog from '../../components/modal/ConfirmationDialog';
 import CreateClusterDialog from '../../components/modal/CreateClusterDialog';
 import EditAssetDialog from '../../components/modal/EditAssetDialog';
 
@@ -29,6 +29,7 @@ import {
   MODAL_TYPE_EDIT_NOTEBOOK,
   MODAL_TYPE_EDIT_SITE,
   MODAL_TYPE_RESTART_STACK,
+  MODAL_TYPE_SCALE_STACK,
   MODAL_TYPE_CREATE_CLUSTER,
   MODAL_TYPE_EDIT_ASSET,
 } from '../../constants/modaltypes';
@@ -45,7 +46,8 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_SHARE_STACK]: ShareStackDialog,
   [MODAL_TYPE_EDIT_NOTEBOOK]: EditNotebookDialog,
   [MODAL_TYPE_EDIT_SITE]: EditSiteDialog,
-  [MODAL_TYPE_RESTART_STACK]: RestartStackDialog,
+  [MODAL_TYPE_RESTART_STACK]: ConfirmationDialog,
+  [MODAL_TYPE_SCALE_STACK]: ConfirmationDialog,
   [MODAL_TYPE_CREATE_CLUSTER]: CreateClusterDialog,
   [MODAL_TYPE_EDIT_ASSET]: EditAssetDialog,
 };

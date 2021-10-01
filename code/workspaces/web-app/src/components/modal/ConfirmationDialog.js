@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
-const RestartStackDialog = ({ onSubmit, title, body, onCancel }) => (
+const ConfirmationDialog = ({ onSubmit, title, body, onCancel }) => (
   <Dialog open={true} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
@@ -21,11 +21,11 @@ const RestartStackDialog = ({ onSubmit, title, body, onCancel }) => (
   </Dialog>
 );
 
-RestartStackDialog.propTypes = {
+ConfirmationDialog.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
 };
 
-export default RestartStackDialog;
+export default ConfirmationDialog;
