@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageBanner renders correct snapshot 1`] = `
+<div>
+  <WithStyles(Message)
+    key="id1"
+    message={
+      Object {
+        "created": "2021-10-31",
+        "expiry": "2021-12-25",
+        "id": "id1",
+        "message": "Test message",
+      }
+    }
+  />
+  <WithStyles(Message)
+    key="id2"
+    message={
+      Object {
+        "created": "2021-11-31",
+        "expiry": "2021-12-26",
+        "id": "id2",
+        "message": "Other message",
+      }
+    }
+  />
+</div>
+`;
