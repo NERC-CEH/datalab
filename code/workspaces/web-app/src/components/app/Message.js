@@ -13,7 +13,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.messageBackground,
     color: theme.palette.message,
     alignItems: 'center',
-    borderRadius: '10px',
+    borderRadius: theme.shape.borderRadius,
   },
   text: {
     flexGrow: 1,

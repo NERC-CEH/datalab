@@ -78,7 +78,6 @@ const theme = createMuiTheme({
     topBarPaddingTopBottom: spacing,
     topBarPaddingLeftRight: 2 * spacing,
     borderRadius: 5,
-    messageHeight: 40,
   },
   spacing,
   cardImageSize,
