@@ -285,7 +285,7 @@ resources:
     _type: request_group
   - _id: req_67241f2b3eda4593a73273e07248f4f9
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1619081319346
+    modified: 1632996530661
     created: 1566905934976
     url: "{{ client_api_url  }}/api"
     name: project
@@ -323,7 +323,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n  stacks(projectKey: \"project\")
+      text: '{"query":"query {\n  stacks(projectKey: \"ray\")
         {\n    id\n    name\n    displayName\n    description\n    type\n    url\n    internalEndpoint\n    sourcePath\n    isPublic\n    redirectUrl\n    volumeMount\n    status\n    assets
         { assetId, name, version, fileLocation }\n  }\n}"}'
     parameters: []
@@ -345,7 +345,7 @@ resources:
     _type: request
   - _id: req_36f4719980c94dae848ad779a7c79c94
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616664058447
+    modified: 1632996862274
     created: 1616663402544
     url: "{{ client_api_url  }}/api/"
     name: Stack delete
@@ -365,6 +365,66 @@ resources:
       token: "{{ access_token  }}"
       type: bearer
     metaSortKey: 225
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_148f76f480e84815af1e08e15b20e6d2
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1632999306599
+    created: 1632996869818
+    url: "{{ client_api_url  }}/api/"
+    name: Stack scale up
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  scaleupStack(stack: {\n    projectKey:
+        \"ray\"\n    name: \"ray2\",\n    type: \"jupyterlab\"\n  })
+        {\n    message\n  }\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 237.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6464a9760a57448ab8cf81e512a09eb8
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1633001098770
+    created: 1632997852856
+    url: "{{ client_api_url  }}/api/"
+    name: Stack scale down
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  scaledownStack(stack: {\n    projectKey:
+        \"ray\"\n    name: \"ray2\",\n    type: \"jupyterlab\"\n  })
+        {\n    message\n  }\n}"}'
+    parameters: []
+    headers:
+      - id: pair_420491f04c4d4360a1d824ef4dcbf6d8
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 243.75
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -406,7 +466,7 @@ resources:
     _type: request
   - _id: req_1bb07662812b4c49b19edc6c195a781d
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
-    modified: 1616581236980
+    modified: 1632996903110
     created: 1568644168939
     url: "{{ client_api_url  }}/api"
     name: projects
@@ -2073,6 +2133,38 @@ resources:
       token: "{{ internal_token  }}"
       type: bearer
     metaSortKey: -1568712933543.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ec756aa2d7574af19448f38205ed0913
+    parentId: fld_541180f583704c469aaea72ca36c35be
+    modified: 1632998143839
+    created: 1632998126532
+    url: "{{ infra_api_url  }}/stack/ray/scaleup"
+    name: Scale up stack
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "ray2",
+        	"type": "jupyterlab"
+        }
+    parameters: []
+    headers:
+      - id: pair_ab5a02265f1848799a822c475f3d8942
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933537.25
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
