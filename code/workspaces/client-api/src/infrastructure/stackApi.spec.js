@@ -172,9 +172,9 @@ describe('Stack API', () => {
     it('should log action on successful scale up request', async () => {
       await stackApi.scaleUpStack(context, stack);
 
-      expect(logger.getInfoMessages()).toEqual([logMeesage('Requesting stack scale up request for expectedName')]);
+      expect(logger.getInfoMessages()).toEqual([logMessage('Requesting stack scale up request for expectedName')]);
       expect(logger.getDebugMessages()).toEqual([
-        logMeesage('scale up request payload: {"name":"expectedName","type":"expectedType","projectKey":"project"}'),
+        logMessage('scale up request payload: {"name":"expectedName","type":"expectedType","projectKey":"project"}'),
       ]);
       expect(logger.getErrorMessages()).toEqual([]);
     });
@@ -184,13 +184,13 @@ describe('Stack API', () => {
 
       await expect(stackApi.scaleUpStack(context, stack)).rejects.toEqual(new Error('Unable to scale up stack Error: failedRequest'));
 
-      expect(logger.getInfoMessages()).toEqual([logMeesage('Requesting stack scale up request for expectedName')]);
+      expect(logger.getInfoMessages()).toEqual([logMessage('Requesting stack scale up request for expectedName')]);
       expect(logger.getDebugMessages()).toEqual([
-        logMeesage('scale up request payload: {"name":"expectedName","type":"expectedType","projectKey":"project"}'),
+        logMessage('scale up request payload: {"name":"expectedName","type":"expectedType","projectKey":"project"}'),
       ]);
-      expect(logger.getErrorMessages()).toEqual([logMeesage(new Error('failedRequest'))]);
+      expect(logger.getErrorMessages()).toEqual([logMessage(new Error('failedRequest'))]);
     });
   });
 
-  const logMeesage = message => ({ data: undefined, message, metadata: undefined });
+  const logMessage = message => ({ data: undefined, message, metadata: undefined });
 });
