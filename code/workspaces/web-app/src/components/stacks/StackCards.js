@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const StackCards = (
-  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, getLogs, shareStack, copySnippets = undefined },
+  { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, scaleStack, openCreationForm, showCreateButton,
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets = undefined },
 ) => {
   const classes = useStyles();
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
@@ -41,11 +41,13 @@ const StackCards = (
         deleteStack={deleteStack}
         editStack={editStack}
         restartStack={restartStack}
+        scaleStack={scaleStack}
         shareStack={shareStack}
         userPermissions={userPermissions(stack)}
         openPermission={openPermission}
         deletePermission={deletePermission}
         editPermission={editPermission}
+        scalePermission={scalePermission}
         getLogs={getLogs}
         copySnippets={copySnippets}
       />))
@@ -82,6 +84,7 @@ StackCards.propTypes = {
   shareStack: PropTypes.func,
   editStack: PropTypes.func,
   restartStack: PropTypes.func,
+  scaleStack: PropTypes.func,
   getLogs: PropTypes.func,
   openCreationForm: PropTypes.func,
   userPermissions: PropTypes.func.isRequired,
@@ -89,5 +92,6 @@ StackCards.propTypes = {
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,
   editPermission: PropTypes.string,
+  scalePermission: PropTypes.string,
   copySnippets: PropTypes.objectOf(PropTypes.func),
 };

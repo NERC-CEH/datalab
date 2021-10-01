@@ -57,7 +57,7 @@ function calculateUserActionsForType(type) {
 }
 
 function getActionDefaults() {
-  const possibleActions = ['share', 'edit', 'restart', 'delete', 'logs', 'copySnippets'];
+  const possibleActions = ['share', 'edit', 'restart', 'delete', 'logs', 'copySnippets', 'scale'];
   const defaultValue = true;
   return possibleActions.reduce(
     (returnValue, actionName) => {

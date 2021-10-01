@@ -13,7 +13,7 @@ import SecondaryActionButton from '../../common/buttons/SecondaryActionButton';
 import StackMoreMenuItem from './StackMoreMenuItem';
 import { getUserActionsForType } from '../../../config/images';
 
-const { READY } = statusTypes;
+const { READY, SUSPENDED } = statusTypes;
 const MORE_ICON = 'more_vert';
 
 const styles = theme => ({
@@ -40,8 +40,8 @@ const StackCardActions = (props) => {
   />;
 };
 
-export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, copySnippets, userActions,
-  userPermissions, openPermission, deletePermission, editPermission, currentUserId, classes, getLogs, shareStack }) => {
+export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, scaleStack, copySnippets, userActions,
+  userPermissions, openPermission, deletePermission, editPermission, scalePermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
@@ -62,6 +62,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const shouldRenderEdit = userActions.edit && editStack !== undefined;
   const shouldRenderShare = userActions.share && shareStack !== undefined;
   const shouldRenderRestart = userActions.restart && restartStack !== undefined;
+  const shouldRenderScale = userActions.scale && scaleStack !== undefined;
   const shouldRenderDelete = userActions.delete && deleteStack !== undefined;
   const shouldRenderCopySnippet = userActions.copySnippets && copySnippets !== undefined;
   const shouldRenderMenuItems = shouldRenderLogs
@@ -138,8 +139,17 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           onClick={() => restartStack(stack)}
           userPermissions={userPermissions}
           requiredPermission={editPermission}
+          disabled={stack.status === SUSPENDED}
         >
           Restart
+        </StackMoreMenuItem>
+        <StackMoreMenuItem
+          shouldRender={shouldRenderScale}
+          onClick={() => scaleStack(stack)}
+          userPermissions={userPermissions}
+          requiredPermission={scalePermission}
+        >
+          {stack.status === SUSPENDED ? 'Turn On' : 'Suspend'}
         </StackMoreMenuItem>
         {copySnippets !== undefined && Object.keys(copySnippets).map(k => <StackMoreMenuItem
           shouldRender={shouldRenderCopySnippet}
@@ -175,6 +185,7 @@ const sharedPropTypes = {
   deleteStack: PropTypes.func,
   editStack: PropTypes.func,
   restartStack: PropTypes.func,
+  scaleStack: PropTypes.func,
   getLogs: PropTypes.func,
   shareStack: PropTypes.func,
   copySnippets: PropTypes.objectOf(PropTypes.func),
@@ -182,6 +193,7 @@ const sharedPropTypes = {
   openPermission: PropTypes.string,
   deletePermission: PropTypes.string,
   editPermission: PropTypes.string,
+  scalePermission: PropTypes.string,
 };
 
 StackCardActions.propTypes = sharedPropTypes;

@@ -37,6 +37,7 @@ const generateProps = () => ({
   openPermission: 'open',
   deletePermission: 'delete',
   editPermission: 'edit',
+  scalePermission: 'scale',
   classes: {
     cardActions: 'cardActions',
     buttonWrapper: 'buttonWrapper',
@@ -47,6 +48,7 @@ const generateProps = () => ({
     restart: true,
     delete: true,
     logs: true,
+    scale: true,
   },
 });
 
