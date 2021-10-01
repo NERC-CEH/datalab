@@ -71,6 +71,24 @@ describe('Stack Status Checker', () => {
     });
   });
 
+  it('updates stack records with suspended for scaled down deployments with pods being terminated', async () => {
+    getStacksMock.mockResolvedValue([
+      { name: 'expectedType-firstPod', namespace: 'a', status: 'Running' },
+    ]);
+    getStacksDeployments.mockResolvedValueOnce([
+      { name: 'expectedType-firstPod', namespace: 'a', replicas: 0 },
+    ]);
+
+    await statusChecker();
+
+    expect(updateStatusMock).toHaveBeenCalledWith({
+      name: 'firstPod',
+      namespace: 'a',
+      status: 'suspended',
+      type: 'expectedType',
+    });
+  });
+
   it('updates stack record for Running stack', async () => {
     getStacksMock.mockReturnValue(Promise.resolve([
       { name: 'expectedType-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },

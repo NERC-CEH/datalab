@@ -9,6 +9,7 @@ import { status } from '../models/stackEnums';
 import nameGenerator from '../common/nameGenerators';
 import deploymentApi from '../kubernetes/deploymentApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
+import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
 
 const { isSingleHostName, basePath } = stackTypes;
 
@@ -72,7 +73,11 @@ const scaleUpStack = async (params) => {
 
   logger.info(`Scaling up stack ${name} for project: ${projectKey}`);
   const k8sName = nameGenerator.deploymentName(name, type);
-  return deploymentApi.scaleUpDeployment(k8sName, projectKey);
+  const response = await deploymentApi.scaleUpDeployment(k8sName, projectKey);
+
+  // trigger a stack status check to push it into a creating state
+  await stackStatusChecker();
+  return response;
 };
 
 const scaleDownStack = async (params) => {
@@ -81,7 +86,11 @@ const scaleDownStack = async (params) => {
 
   logger.info(`Scaling down stack ${name} for project: ${projectKey}`);
   const k8sName = nameGenerator.deploymentName(name, type);
-  return deploymentApi.scaleDownDeployment(k8sName, projectKey);
+  const response = await deploymentApi.scaleDownDeployment(k8sName, projectKey);
+
+  // trigger a stack status check to push it into a suspended state
+  await stackStatusChecker();
+  return response;
 };
 
 function deleteStack(user, params) {
