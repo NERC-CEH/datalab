@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -26,6 +26,9 @@ const styles = theme => ({
 
 const Message = ({ classes, message }) => {
   const dispatch = useDispatch();
+  const handleClick = useCallback(() => {
+    dispatch(messagesActions.dismissMessage(message.id));
+  }, [dispatch, message]);
 
   return (
   <div className={classes.message}>
@@ -33,7 +36,7 @@ const Message = ({ classes, message }) => {
     <div className={classes.text}>
       {message.message}
     </div>
-    <Button onClick={() => dispatch(messagesActions.dismissMessage(message.id))} color={'secondary'}>Dismiss</Button>
+    <Button onClick={handleClick} color={'secondary'}>Dismiss</Button>
   </div>
   );
 };
