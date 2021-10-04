@@ -3,6 +3,11 @@ import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
 import NavigationContainer, { PureNavigationContainer } from './NavigationContainer';
 
+jest.mock('../../components/app/Navigation', () => ({
+  __esModule: true,
+  default: jest.fn().mockReturnValue(<>Navigation</>),
+}));
+
 describe('NavigationContainer', () => {
   describe('is a connected component which', () => {
     function shallowRenderConnected() {

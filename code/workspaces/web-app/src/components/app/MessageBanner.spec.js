@@ -4,6 +4,10 @@ import { createShallow } from '@material-ui/core/test-utils';
 import MessageBanner from './MessageBanner';
 
 jest.mock('react-redux');
+jest.mock('./Message', () => ({
+  __esModule: true,
+  default: jest.fn().mockReturnValue(<>Message</>),
+}));
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 
 const message1 = {

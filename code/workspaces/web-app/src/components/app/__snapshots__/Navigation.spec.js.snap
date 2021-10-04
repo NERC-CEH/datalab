@@ -22,7 +22,7 @@ exports[`DescribeDatalabs renders correct snapshot 1`] = `
     <main
       className="Navigation-pageContainer-3"
     >
-      <MessageBanner />
+      <mockConstructor />
       <span>
         Content
       </span>

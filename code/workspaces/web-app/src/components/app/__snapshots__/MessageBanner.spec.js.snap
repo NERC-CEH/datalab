@@ -2,7 +2,7 @@
 
 exports[`MessageBanner renders correct snapshot 1`] = `
 <div>
-  <WithStyles(Message)
+  <mockConstructor
     key="id1"
     message={
       Object {
@@ -13,7 +13,7 @@ exports[`MessageBanner renders correct snapshot 1`] = `
       }
     }
   />
-  <WithStyles(Message)
+  <mockConstructor
     key="id2"
     message={
       Object {

@@ -10,9 +10,12 @@ exports[`Message renders correct snapshot 1`] = `
   <div
     className="Message-text-2"
   >
-    Test message
+    <mockConstructor>
+      Test message
+    </mockConstructor>
   </div>
   <WithStyles(ForwardRef(Button))
+    className="Message-button-4"
     color="secondary"
     onClick={[Function]}
   >
