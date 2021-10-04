@@ -1,7 +1,7 @@
 import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
-function createMessage(message) {
+async function createMessage(message) {
   const mutation = `
     CreateMessage($cluster: ClusterCreationRequest!) {
       createMessage(cluster: $cluster) {
@@ -13,11 +13,11 @@ function createMessage(message) {
     }
   `;
 
-  return gqlMutation(mutation, { message })
-    .then(errorHandler('data.createMessage'));
+  const response = await gqlMutation(mutation, { message });
+  return errorHandler('data.createMessage')(response);
 }
 
-function deleteMessage(messageId) {
+async function deleteMessage(messageId) {
   const mutation = `
     DeleteMessage($messageId: ID!) {
       deleteMessage(messageId: $messageId) {
@@ -25,11 +25,11 @@ function deleteMessage(messageId) {
       }
     }`;
 
-  return gqlMutation(mutation, { messageId })
-    .then(errorHandler('data'));
+  const response = await gqlMutation(mutation, { messageId });
+  return errorHandler('data')(response);
 }
 
-function getMessages() {
+async function getMessages() {
   const query = `
     GetMessages {
       messages {
@@ -41,11 +41,11 @@ function getMessages() {
     }
   `;
 
-  return gqlQuery(query)
-    .then(errorHandler('data'));
+  const response = await gqlQuery(query);
+  return errorHandler('data')(response);
 }
 
-function getAllMessages() {
+async function getAllMessages() {
   const query = `
     GetAllMessages {
       allMessages {
@@ -57,8 +57,8 @@ function getAllMessages() {
     }
   `;
 
-  return gqlQuery(query)
-    .then(errorHandler('data'));
+  const response = await gqlQuery(query);
+  return errorHandler('data')(response);
 }
 
 export default { createMessage, deleteMessage, getMessages, getAllMessages };
