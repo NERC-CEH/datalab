@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TopBar from './TopBar';
+import MessageBanner from './MessageBanner';
 
 const styles = theme => ({
   container: {
@@ -17,7 +18,9 @@ const styles = theme => ({
     zIndex: 1,
   },
   pageContainer: {
+    backgroundColor: theme.palette.backgroundColor,
     overflow: 'auto',
+    flexDirection: 'column',
     width: '100%',
     height: '100%',
     display: 'flex',
@@ -25,14 +28,15 @@ const styles = theme => ({
 });
 
 const Navigation = ({ classes, children, identity, userPermissions }) => (
-  <div className={classes.container}>
-    <div className={classes.appFrame}>
-      <TopBar identity={identity} userPermissions={userPermissions} />
-      <main className={classes.pageContainer}>
-        {children}
-      </main>
+    <div className={classes.container}>
+      <div className={classes.appFrame}>
+        <TopBar identity={identity} userPermissions={userPermissions} />
+        <main className={classes.pageContainer}>
+          <MessageBanner/>
+          {children}
+        </main>
+      </div>
     </div>
-  </div>
 );
 
 Navigation.propTypes = {

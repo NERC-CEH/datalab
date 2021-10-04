@@ -21,6 +21,9 @@ const highlightMonoTransparent = 'rgba(248, 248, 248, 0.25)';
 const text = backgroundDark;
 const textLight = 'hsl(0, 0%, 40%)';
 
+const message = 'rgba(64, 64, 191, 1.0)';
+const messageBackground = 'rgba(189, 221, 255, 0.5)';
+
 // Lengths
 const spacing = 5;
 const navBarHeight = 8 * spacing;
@@ -41,6 +44,8 @@ const theme = createMuiTheme({
     sideBarBackground,
     highlightMono,
     highlightMonoTransparent,
+    message,
+    messageBackground,
   },
   typography: {
     color: text,
