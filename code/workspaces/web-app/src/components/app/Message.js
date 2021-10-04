@@ -22,6 +22,9 @@ const styles = theme => ({
   icon: {
     padding: '5px',
   },
+  button: {
+    minWidth: '70px',
+  },
 });
 
 const Message = ({ classes, message }) => {
@@ -38,7 +41,7 @@ const Message = ({ classes, message }) => {
         {message.message}
       </ReactMarkdown>
     </div>
-    <Button onClick={handleClick} color={'secondary'}>Dismiss</Button>
+    <Button className={classes.button} onClick={handleClick} color={'secondary'}>Dismiss</Button>
   </div>
   );
 };
