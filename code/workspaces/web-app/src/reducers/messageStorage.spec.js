@@ -1,4 +1,4 @@
-import { setDismissedMessage, getDismissedMessages, getMessagesToDisplay, getUpdatedMessages } from './messageStorage';
+import { setDismissedMessage, getDismissedMessages, filterExpiredMessages, getMessagesToDisplay, getUpdatedMessages } from './messageStorage';
 import LocalStorageMock from '../core/LocalStorageMock';
 
 const storageMock = new LocalStorageMock();
@@ -52,6 +52,16 @@ describe('messageStorage', () => {
       const dismissed = getDismissedMessages();
 
       expect(dismissed).toEqual(messages);
+    });
+  });
+
+  describe('filterExpiredMessages', () => {
+    it('clears any expired messages from the cache and returns the remaining ones', () => {
+      const original = JSON.stringify([...messages, 'old', 'older']);
+      storageMock.setItem(key, original);
+
+      const activeDismissedMessages = filterExpiredMessages(apiMessages);
+      expect(activeDismissedMessages).toEqual(messages);
     });
   });
 
