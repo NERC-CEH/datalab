@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core';
 const style = () => ({
   projectNavigation: {
     display: 'flex',
-    height: '100%',
     width: '100%',
+    flexGrow: '1',
   },
   contentArea: {
     display: 'flex',

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message renders correct snapshot 1`] = `
+<div
+  className="Message-message-1"
+>
+  <ErrorOutlineIcon
+    className="Message-icon-3"
+  />
+  <div
+    className="Message-text-2"
+  >
+    <mockConstructor>
+      Test message
+    </mockConstructor>
+  </div>
+  <WithStyles(ForwardRef(Button))
+    className="Message-button-4"
+    color="secondary"
+    onClick={[Function]}
+  >
+    Dismiss
+  </WithStyles(ForwardRef(Button))>
+</div>
+`;
