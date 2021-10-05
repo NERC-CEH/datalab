@@ -1,11 +1,24 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render, fireEvent, screen, within } from '@testing-library/react';
 import { useCurrentUserId } from '../../../hooks/authHooks';
-import StackCardActions, { PureStackCardActions } from './StackCardActions';
+import StackCardActions from './StackCardActions';
 import { getUserActionsForType } from '../../../config/images';
 
 jest.mock('../../../hooks/authHooks');
 jest.mock('../../../config/images');
+// eslint-disable-next-line global-require
+jest.mock('./StackMoreMenuItem', () => require('react').forwardRef(({ onClick, children, requiredPermission, userPermissions, tooltipText, disableTooltip, disabled }, ref) => (
+  <div
+    onClick={onClick}
+    requiredpermission={requiredPermission}
+    userpermissions={userPermissions.toString()}
+    tooltiptext={tooltipText}
+    disabletooltip={disableTooltip ? disableTooltip.toString() : disableTooltip}
+    disabled={disabled ? disabled.toString() : disabled}
+  >
+    {children}
+  </div>)));
+
 getUserActionsForType.mockReturnValue([]);
 
 const openStackMock = jest.fn().mockName('openStack');
@@ -26,7 +39,6 @@ const generateProps = () => ({
     users: ['owner-id'],
     shared: 'private',
   },
-  currentUserId: 'owner-id',
   openStack: openStackMock,
   deleteStack: deleteStackMock,
   editStack: editStackMock,
@@ -42,45 +54,22 @@ const generateProps = () => ({
     cardActions: 'cardActions',
     buttonWrapper: 'buttonWrapper',
   },
-  userActions: {
-    share: true,
-    edit: true,
-    restart: true,
-    delete: true,
-    logs: true,
-    scale: true,
-  },
 });
 
 describe('StackCardActions', () => {
-  useCurrentUserId.mockReturnValue('expected-user-id');
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
-  it('passes props down to child component as well as current user id', () => {
-    const props = generateProps();
-    delete props.classes;
-
-    expect(shallow(<StackCardActions {...props} />)).toMatchSnapshot();
-  });
-});
-
-describe('PureStackCardActions', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
-  function shallowRender(props) {
-    return shallow(<PureStackCardActions {...props} />);
-  }
-
   beforeEach(() => {
     jest.clearAllMocks();
+
+    useCurrentUserId.mockReturnValue('owner-id');
+    getUserActionsForType.mockReturnValue({
+      share: true,
+      edit: true,
+      restart: true,
+      delete: true,
+      logs: true,
+      scale: true,
+      copySnippets: false,
+    });
   });
 
   it('creates correct snapshot', () => {
@@ -88,14 +77,28 @@ describe('PureStackCardActions', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
+
+    const menu = screen.getByRole('menu');
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(wrapper.container).toMatchSnapshot();
+    expect(menu).toMatchSnapshot();
   });
 
   it('creates correct snapshot if there are multiple copy snippets', () => {
     // Arrange
+    getUserActionsForType.mockReturnValueOnce({
+      share: true,
+      edit: true,
+      restart: true,
+      delete: true,
+      logs: true,
+      scale: true,
+      copySnippets: true,
+    });
+
     const props = {
       ...generateProps(),
       copySnippets: {
@@ -105,10 +108,11 @@ describe('PureStackCardActions', () => {
     };
 
     // Act
-    const output = shallowRender(props);
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(screen.getByRole('menu')).toMatchSnapshot();
   });
 
   it('Should render Open as disabled if stack is not ready', () => {
@@ -116,10 +120,11 @@ describe('PureStackCardActions', () => {
     const baseProps = generateProps();
     const props = { ...baseProps, stack: { status: 'requested' } };
     // Act
-    const output = shallowRender(props);
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(wrapper.getByText('Open').closest('button').hasAttribute('disabled')).toBeTruthy();
   });
 
   it('Open button onClick function calls openStack with correct props', () => {
@@ -127,12 +132,11 @@ describe('PureStackCardActions', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    const onClick = output.find({ children: 'Open' }).prop('onClick');
+    const wrapper = render(<StackCardActions {...props} />);
 
     // Assert
     expect(openStackMock).not.toHaveBeenCalled();
-    onClick();
+    fireEvent.click(wrapper.getByText('Open'));
     expect(openStackMock).toHaveBeenCalledTimes(1);
     expect(openStackMock).toHaveBeenCalledWith({
       displayName: 'expectedDisplayName',
@@ -149,12 +153,15 @@ describe('PureStackCardActions', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    const onClick = output.find({ children: 'Delete' }).prop('onClick');
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
+
+    const menu = screen.getByRole('menu');
 
     // Assert
     expect(deleteStackMock).not.toHaveBeenCalled();
-    onClick();
+    fireEvent.click(within(menu).getByText('Delete'));
+
     expect(deleteStackMock).toHaveBeenCalledTimes(1);
     expect(deleteStackMock).toHaveBeenCalledWith({
       displayName: 'expectedDisplayName',
@@ -171,12 +178,14 @@ describe('PureStackCardActions', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    const onClick = output.find({ children: 'Edit' }).prop('onClick');
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
+    const menu = screen.getByRole('menu');
 
     // Assert
     expect(editStackMock).not.toHaveBeenCalled();
-    onClick();
+    fireEvent.click(within(menu).getByText('Edit'));
+
     expect(editStackMock).toHaveBeenCalledTimes(1);
     expect(editStackMock).toHaveBeenCalledWith({
       displayName: 'expectedDisplayName',
@@ -190,8 +199,10 @@ describe('PureStackCardActions', () => {
 
   it('Should not render edit/delete/share/restart buttons if current user is not the owner', () => {
     const props = generateProps();
-    props.currentUserId = 'not-the-owner-id';
-    expect(shallowRender(props)).toMatchSnapshot();
+    useCurrentUserId.mockReturnValue('not-the-owner-id');
+
+    const wrapper = render(<StackCardActions {...props} />);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('Should not render edit/delete buttons if functions not defined', () => {
@@ -200,13 +211,30 @@ describe('PureStackCardActions', () => {
       editStack: undefined,
       deleteStack: undefined,
     };
-    expect(shallowRender(props)).toMatchSnapshot();
+
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
+    const menu = screen.getByRole('menu');
+    expect(within(menu).queryByText('Edit')).toBeNull();
+    expect(within(menu).queryByText('Delete')).toBeNull();
   });
 
   it('should not render button if userAction for that button is false', () => {
     const props = generateProps();
     // edit action is false so now the shouldRender prop of the edit button should be false
-    props.userActions.edit = false;
-    expect(shallowRender(props)).toMatchSnapshot();
+    getUserActionsForType.mockReturnValue({
+      share: true,
+      edit: false,
+      restart: true,
+      delete: true,
+      logs: true,
+      scale: true,
+      copySnippets: false,
+    });
+
+    const wrapper = render(<StackCardActions {...props} />);
+    fireEvent.click(wrapper.getByText('more_vert'));
+    const menu = screen.getByRole('menu');
+    expect(within(menu).queryByText('Edit')).toBeNull();
   });
 });
