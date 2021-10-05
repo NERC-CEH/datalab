@@ -18,11 +18,12 @@
         "logs": false
       }
     },
-    "INFRASTRUCTURE": {}
+    "INFRASTRUCTURE": {},
+    "COMPUTE": {}
   },
   "types": {
     "dask": {
-      "category": "INFRASTRUCTURE",
+      "category": "COMPUTE",
       "versions": [
         {
           "image": "daskdev/dask:2021.6.2"
@@ -106,7 +107,7 @@
       ]
     },
     "spark": {
-      "category": "INFRASTRUCTURE",
+      "category": "COMPUTE",
       "versions": [
         {
           "image": "nerc/spark-k8s:3.1.2"
