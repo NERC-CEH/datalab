@@ -65,12 +65,43 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const shouldRenderScale = userActions.scale && scaleStack !== undefined;
   const shouldRenderDelete = userActions.delete && deleteStack !== undefined;
   const shouldRenderCopySnippet = userActions.copySnippets && copySnippets !== undefined;
-  const shouldRenderMenuItems = shouldRenderLogs
-    || shouldRenderEdit
-    || shouldRenderShare
-    || shouldRenderRestart
-    || shouldRenderDelete
-    || shouldRenderCopySnippet;
+
+  const copySnippetMenuItems = shouldRenderCopySnippet ? Object.keys(copySnippets).map(k => ({
+    onClick: () => { handleMoreMenuClose(); copySnippets[k](stack); },
+    requiredPermission: openPermission,
+    name: `Copy ${k} snippet`,
+  })) : [];
+  const stackMenuItems = [
+    shouldRenderLogs && { onClick: () => getLogs(stack), requiredPermission: deletePermission, name: 'Logs' },
+    shouldRenderEdit && { onClick: () => editStack(stack), requiredPermission: editPermission, name: 'Edit' },
+    shouldRenderShare && {
+      onClick: () => shareStack(stack, 'project'),
+      requiredPermission: deletePermission,
+      name: 'Share',
+      tooltipText: 'Resource is already shared within the project',
+      disableTooltip: !shared,
+      disabled: shared,
+    },
+    shouldRenderRestart && {
+      onClick: () => restartStack(stack),
+      requiredPermission: editPermission,
+      name: 'Restart',
+      disabled: stack.status === SUSPENDED,
+    },
+    shouldRenderScale && {
+      onClick: () => scaleStack(stack),
+      requiredPermission: scalePermission,
+      name: stack.status === SUSPENDED ? 'Turn On' : 'Suspend',
+    },
+    ...copySnippetMenuItems,
+    shouldRenderDelete && {
+      onClick: () => deleteStack(stack),
+      requiredPermission: deletePermission,
+      name: 'Delete',
+    },
+  ].filter(m => !!m);
+
+  const shouldRenderMenuItems = stackMenuItems.length > 0;
 
   return (
     <div className={classes.cardActions}>
@@ -107,67 +138,14 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
         open={Boolean(anchorEl)}
         onClose={handleMoreMenuClose}
       >
-        <StackMoreMenuItem
-          shouldRender={shouldRenderLogs}
-          onClick={() => getLogs(stack)}
-          userPermissions={userPermissions}
-          requiredPermission={deletePermission}
-        >
-          Logs
-        </StackMoreMenuItem>
-        <StackMoreMenuItem
-          shouldRender={shouldRenderEdit}
-          onClick={() => editStack(stack)}
-          userPermissions={userPermissions}
-          requiredPermission={editPermission}
-        >
-          Edit
-        </StackMoreMenuItem>
-        <StackMoreMenuItem
-          shouldRender={shouldRenderShare}
-          onClick={() => shareStack(stack, 'project')}
-          userPermissions={userPermissions}
-          requiredPermission={deletePermission}
-          tooltipText="Resource is already shared within the project"
-          disableTooltip={!shared}
-          disabled={shared}
-        >
-          Share
-        </StackMoreMenuItem>
-        <StackMoreMenuItem
-          shouldRender={shouldRenderRestart}
-          onClick={() => restartStack(stack)}
-          userPermissions={userPermissions}
-          requiredPermission={editPermission}
-          disabled={stack.status === SUSPENDED}
-        >
-          Restart
-        </StackMoreMenuItem>
-        <StackMoreMenuItem
-          shouldRender={shouldRenderScale}
-          onClick={() => scaleStack(stack)}
-          userPermissions={userPermissions}
-          requiredPermission={scalePermission}
-        >
-          {stack.status === SUSPENDED ? 'Turn On' : 'Suspend'}
-        </StackMoreMenuItem>
-        {copySnippets !== undefined && Object.keys(copySnippets).map(k => <StackMoreMenuItem
-          shouldRender={shouldRenderCopySnippet}
-          onClick={() => { handleMoreMenuClose(); copySnippets[k](stack); }}
-          userPermissions={userPermissions}
-          requiredPermission={openPermission}
-          key={k}
-        >
-          {`Copy ${k} snippet`}
-        </StackMoreMenuItem>)}
-        <StackMoreMenuItem
-          shouldRender={shouldRenderDelete}
-          onClick={() => deleteStack(stack)}
-          userPermissions={userPermissions}
-          requiredPermission={deletePermission}
-        >
-          Delete
-        </StackMoreMenuItem>
+        {stackMenuItems.map(m => (<StackMoreMenuItem
+            shouldRender={true}
+            userPermissions={userPermissions}
+            {...m}
+            key={m.name}
+          >
+            {m.name}
+          </StackMoreMenuItem>))}
       </Menu>
       </PermissionWrapper>}
     </div>
