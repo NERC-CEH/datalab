@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { get } from 'lodash';
-import { stackList } from 'common/src/config/images';
+import { stackAndClusterList } from 'common/src/config/images';
 import logger from '../config/logger';
 import config from '../config/config';
 import { handleCreateError, handleDeleteError } from './core';
@@ -50,7 +50,7 @@ export const getStacksDeployments = async () => {
     deploymentName: get(deployment, 'metadata.name'),
   }));
 
-  return deployments.filter(({ type }) => stackList().includes(type));
+  return deployments.filter(({ type }) => stackAndClusterList().includes(type));
 };
 
 function createDeployment(name, namespace, manifest) {

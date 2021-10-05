@@ -1,12 +1,12 @@
 import * as k8s from '@kubernetes/client-node';
 import { find } from 'lodash';
-import { stackList } from 'common/src/config/images';
+import { stackAndClusterList } from 'common/src/config/images';
 import logger from '../config/logger';
 import kubeConfig from '../kubernetes/kubeConfig';
-import stackRepository from '../dataaccess/stacksRepository';
 import { parsePodLabels } from './kubernetesHelpers';
 import { status } from '../models/stackEnums';
 import { SELECTOR_LABEL } from '../stacks/StackConstants';
+import { getStatusUpdateFn } from './stackStatusChecker';
 
 const watchUrl = '/api/v1/pods';
 const selector = { labelSelector: SELECTOR_LABEL };
@@ -56,12 +56,13 @@ export function podAddedWatcher(event) {
 
   let output = Promise.resolve();
 
-  if (stackList().includes(type) && !isPodRunning(event)) {
-    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
+  if (stackAndClusterList().includes(type.toLowerCase()) && !isPodRunning(event)) {
+    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks and clusters should
     // have their status updated.
     // Additionally ensure that pod is not already running as JS Kubernetes Client
     // issues ADDED events for all current pods on startup by default
-    output = stackRepository.updateStatus({ name, type, status: status.CREATING })
+    const updateStatus = getStatusUpdateFn(type);
+    output = updateStatus({ name, type, status: status.CREATING })
       .then(() => logger.info(`Updated status record for "${kubeName}" to "${status.CREATING}"`));
   }
 
@@ -73,12 +74,13 @@ export function podReadyWatcher(event) {
 
   let output = Promise.resolve();
 
-  if (isPodRunning(event) && stackList().includes(type)) {
-    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks should
+  if (isPodRunning(event) && stackAndClusterList().includes(type)) {
+    // Minio containers, like Stacks, are tagged with 'user-pod' but are not recorded in stacks DB. Only Stacks and clusters should
     // have their status updated.
     logger.debug(`Pod ready -- name: "${kubeName}", type: "${type}"`);
 
-    output = stackRepository.updateStatus({ name, type, status: status.READY })
+    const updateStatus = getStatusUpdateFn(type);
+    output = updateStatus({ name, type, status: status.READY })
       .then(() => logger.info(`Updated status record for "${name}" to "${status.READY}"`));
   }
 

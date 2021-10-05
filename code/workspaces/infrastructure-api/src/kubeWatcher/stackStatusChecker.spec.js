@@ -1,23 +1,32 @@
+import { clusterList } from 'common/src/config/images';
 import logger from '../config/logger';
 import statusChecker from './stackStatusChecker';
 import * as podsApi from '../kubernetes/podsApi';
 import * as stackRepository from '../dataaccess/stacksRepository';
+import * as clustersRepository from '../dataaccess/clustersRepository';
 import { getStacksDeployments } from '../kubernetes/deploymentApi';
 
+jest.mock('common/src/config/images');
 jest.mock('../config/logger');
 jest.mock('../kubernetes/podsApi');
 jest.mock('../kubernetes/deploymentApi');
 jest.mock('../dataaccess/stacksRepository');
+jest.mock('../dataaccess/clustersRepository');
 
 const getStacksMock = jest.fn();
-const updateStatusMock = jest.fn();
+const updateStackStatusMock = jest.fn();
+const updateClusterStatusMock = jest.fn();
 
 podsApi.default = {
   getStacks: getStacksMock,
 };
 
 stackRepository.default = {
-  updateStatus: updateStatusMock,
+  updateStatus: updateStackStatusMock,
+};
+
+clustersRepository.default = {
+  updateStatus: updateClusterStatusMock,
 };
 
 const stacks = [
@@ -29,19 +38,21 @@ const stacks = [
 ];
 
 getStacksMock.mockResolvedValue(stacks);
-updateStatusMock.mockResolvedValue({ n: 1 });
+updateStackStatusMock.mockResolvedValue({ n: 1 });
+updateClusterStatusMock.mockResolvedValue({ n: 1 });
 
 describe('Stack Status Checker', () => {
   beforeEach(() => {
     logger.clearMessages();
     jest.clearAllMocks();
+    clusterList.mockReturnValue(['cluster']);
 
     getStacksDeployments.mockResolvedValue([]);
   });
 
   it('updates stack records with correct status', async () => {
     await statusChecker();
-    expect(updateStatusMock.mock.calls).toMatchSnapshot();
+    expect(updateStackStatusMock.mock.calls).toMatchSnapshot();
   });
 
   it('updates stack records with suspended stacks as well', async () => {
@@ -52,7 +63,7 @@ describe('Stack Status Checker', () => {
 
     await statusChecker();
 
-    expect(updateStatusMock.mock.calls).toMatchSnapshot();
+    expect(updateStackStatusMock.mock.calls).toMatchSnapshot();
   });
 
   it('updates stack records with unavailable for scaled up deployments with no pods', async () => {
@@ -63,7 +74,7 @@ describe('Stack Status Checker', () => {
 
     await statusChecker();
 
-    expect(updateStatusMock).toHaveBeenCalledWith({
+    expect(updateStackStatusMock).toHaveBeenCalledWith({
       name: 'missingPod',
       namespace: 'a',
       status: 'unavailable',
@@ -81,7 +92,7 @@ describe('Stack Status Checker', () => {
 
     await statusChecker();
 
-    expect(updateStatusMock).toHaveBeenCalledWith({
+    expect(updateStackStatusMock).toHaveBeenCalledWith({
       name: 'firstPod',
       namespace: 'a',
       status: 'suspended',
@@ -94,11 +105,11 @@ describe('Stack Status Checker', () => {
       { name: 'expectedType-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },
     ]));
 
-    expect(updateStatusMock).not.toHaveBeenCalled();
+    expect(updateStackStatusMock).not.toHaveBeenCalled();
     await statusChecker();
 
-    expect(updateStatusMock).toHaveBeenCalledTimes(1);
-    expect(updateStatusMock).toHaveBeenCalledWith({
+    expect(updateStackStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateStackStatusMock).toHaveBeenCalledWith({
       name: 'expectedPodName',
       namespace: 'expectedNamespace',
       status: 'ready',
@@ -111,11 +122,11 @@ describe('Stack Status Checker', () => {
       { name: 'expectedType-expectedPodName', status: 'Pending', namespace: 'expectedNamespace' },
     ]);
 
-    expect(updateStatusMock).not.toHaveBeenCalled();
+    expect(updateStackStatusMock).not.toHaveBeenCalled();
     await statusChecker();
 
-    expect(updateStatusMock).toHaveBeenCalledTimes(1);
-    expect(updateStatusMock).toHaveBeenCalledWith({
+    expect(updateStackStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateStackStatusMock).toHaveBeenCalledWith({
       name: 'expectedPodName',
       namespace: 'expectedNamespace',
       status: 'requested',
@@ -128,15 +139,32 @@ describe('Stack Status Checker', () => {
       { name: 'expectedType-expectedPodName', status: 'CrashLoopBackOff', namespace: 'expectedNamespace' },
     ]);
 
-    expect(updateStatusMock).not.toHaveBeenCalled();
+    expect(updateStackStatusMock).not.toHaveBeenCalled();
     await statusChecker();
 
-    expect(updateStatusMock).toHaveBeenCalledTimes(1);
-    expect(updateStatusMock).toHaveBeenCalledWith({
+    expect(updateStackStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateStackStatusMock).toHaveBeenCalledWith({
       name: 'expectedPodName',
       namespace: 'expectedNamespace',
       status: 'unavailable',
       type: 'expectedType',
+    });
+  });
+
+  it('updates cluster record for Running cluster', async () => {
+    getStacksMock.mockResolvedValue([
+      { name: 'cluster-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },
+    ]);
+
+    expect(updateClusterStatusMock).not.toHaveBeenCalled();
+    await statusChecker();
+
+    expect(updateClusterStatusMock).toHaveBeenCalledTimes(1);
+    expect(updateClusterStatusMock).toHaveBeenCalledWith({
+      name: 'expectedPodName',
+      namespace: 'expectedNamespace',
+      status: 'ready',
+      type: 'cluster',
     });
   });
 });
