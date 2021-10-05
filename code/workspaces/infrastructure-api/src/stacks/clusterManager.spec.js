@@ -68,6 +68,7 @@ describe('clusterManager', () => {
       };
       const clusterParams = {
         type: 'dask',
+        clusterName: 'DASK-cluster-name',
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
@@ -135,6 +136,7 @@ describe('clusterManager', () => {
       };
       const clusterParams = {
         type: 'spark',
+        clusterName: 'SPARK-cluster-name',
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,
@@ -202,6 +204,7 @@ describe('clusterManager', () => {
       };
       const clusterParams = {
         type: 'dask',
+        clusterName: 'DASK-cluster-name',
         projectKey: cluster.projectKey,
         volumeMount: cluster.volumeMount,
         condaPath: cluster.condaPath,

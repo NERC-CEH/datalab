@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         spark-infra: {{schedulerPodLabel}}
+        name: {{ clusterName }}
+        user-pod: {{ type }}
     spec:
       containers:
         - image: {{{sparkImage}}}

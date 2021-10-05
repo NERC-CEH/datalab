@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         dask-infra: {{schedulerPodLabel}}
+        name: {{ clusterName }}
+        user-pod: {{ type }}
     spec:
       containers:
         - image: {{{daskImage}}}

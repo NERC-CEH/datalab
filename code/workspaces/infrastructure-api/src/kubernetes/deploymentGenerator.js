@@ -41,9 +41,12 @@ function createJupyterDeployment({ projectKey, deploymentName, name, type, volum
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
-function createDatalabDaskSchedulerDeployment({ deploymentName, condaPath, clusterImage, jupyterLabImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
+function createDatalabDaskSchedulerDeployment({ deploymentName, clusterName, type, condaPath, clusterImage, jupyterLabImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu,
+  volumeMount }) {
   const context = {
     name: deploymentName,
+    clusterName,
+    type,
     daskImage: (volumeMount && condaPath) ? jupyterLabImage : clusterImage,
     schedulerPath: (volumeMount && condaPath) ? `${condaPath}/bin/dask-scheduler` : 'dask-scheduler',
     schedulerPodLabel,
@@ -73,9 +76,11 @@ function createDatalabDaskWorkerDeployment({ deploymentName, condaPath, clusterI
   return generateManifest(context, DeploymentTemplates.DATALAB_DASK_WORKER_DEPLOYMENT);
 }
 
-function createDatalabSparkSchedulerDeployment({ deploymentName, clusterImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
+function createDatalabSparkSchedulerDeployment({ deploymentName, clusterName, type, clusterImage, schedulerPodLabel, schedulerContainerName, schedulerMemory, schedulerCpu, volumeMount }) {
   const context = {
     name: deploymentName,
+    clusterName,
+    type,
     sparkImage: clusterImage,
     schedulerPodLabel,
     schedulerContainerName,

@@ -16,6 +16,8 @@ const getLowerType = type => type.toLowerCase();
 const getSchedulerName = name => `scheduler-${name}`;
 const getWorkerName = name => `worker-${name}`;
 
+const getClusterName = (name, type) => `${type}-${name}`;
+
 export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
 
 export const getSchedulerAddress = (schedulerServiceName, type) => {
@@ -68,6 +70,7 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
 
   const clusterParams = {
     type: lowerType,
+    clusterName: getClusterName(name, type),
     projectKey,
     volumeMount,
     condaPath,
