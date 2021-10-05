@@ -72,7 +72,7 @@ describe('StackCardActions', () => {
     });
   });
 
-  it('creates correct snapshot', async () => {
+  it('creates correct snapshot', () => {
     // Arrange
     const props = generateProps();
 
@@ -89,8 +89,6 @@ describe('StackCardActions', () => {
 
   it('creates correct snapshot if there are multiple copy snippets', () => {
     // Arrange
-    const baseProps = generateProps();
-
     getUserActionsForType.mockReturnValueOnce({
       share: true,
       edit: true,
@@ -102,7 +100,7 @@ describe('StackCardActions', () => {
     });
 
     const props = {
-      ...baseProps,
+      ...generateProps(),
       copySnippets: {
         Python: jest.fn().mockName('copyPythonSnippet'),
         R: jest.fn().mockName('copyRSnippet'),
