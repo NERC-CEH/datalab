@@ -1,6 +1,13 @@
 import { matchedData } from 'express-validator';
 import clustersRepository from '../dataaccess/clustersRepository';
-import { getSchedulerServiceName, getSchedulerAddress, createClusterStack, deleteClusterStack } from '../stacks/clusterManager';
+import {
+  getSchedulerServiceName,
+  getSchedulerAddress,
+  createClusterStack,
+  deleteClusterStack,
+  scaleDownClusterExec,
+  scaleUpClusterExec,
+} from '../stacks/clusterManager';
 
 function requestCluster(request) {
   const params = matchedData(request);
@@ -84,9 +91,35 @@ async function listByMount(request, response, next) {
   }
 }
 
+const scaleDownCluster = async (request, response, next) => {
+  const { projectKey, name, type } = matchedData(request);
+
+  try {
+    await scaleDownClusterExec({ projectKey, name, type });
+
+    return response.status(200).send({ message: 'OK' });
+  } catch (error) {
+    return next(new Error(`Error scaling down cluster: ${error.message}`));
+  }
+};
+
+const scaleUpCluster = async (request, response, next) => {
+  const { projectKey, name, type } = matchedData(request);
+
+  try {
+    await scaleUpClusterExec({ projectKey, name, type });
+
+    return response.status(200).send({ message: 'OK' });
+  } catch (error) {
+    return next(new Error(`Error scaling up cluster: ${error.message}`));
+  }
+};
+
 export default {
   createCluster,
   deleteCluster,
   listByProject,
   listByMount,
+  scaleUpCluster,
+  scaleDownCluster,
 };

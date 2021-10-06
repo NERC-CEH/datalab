@@ -8,6 +8,8 @@ clusterManager.createClusterStack = jest.fn().mockResolvedValue();
 clusterManager.deleteClusterStack = jest.fn().mockResolvedValue();
 clusterManager.getSchedulerServiceName = jest.fn().mockReturnValue('dask-scheduler-cluster');
 clusterManager.getSchedulerAddress = jest.fn().mockReturnValue('tcp://dask-scheduler-cluster:8786');
+clusterManager.scaleDownClusterExec = jest.fn().mockResolvedValue();
+clusterManager.scaleUpClusterExec = jest.fn().mockResolvedValue();
 
 jest.mock('../dataaccess/clustersRepository');
 
@@ -227,6 +229,52 @@ describe('clustersController', () => {
 
       // Assert
       expect(nextMock).toHaveBeenCalledWith(new Error('Error listing clusters: Expected test error'));
+    });
+  });
+
+  describe('scaleDownCluster', () => {
+    const { scaleDownCluster } = clustersController;
+
+    it('scales down the specified cluster', async () => {
+      const requestMock = { projectKey: 'test-proj', name: 'cluster-name', type: 'DASK' };
+
+      const response = await scaleDownCluster(requestMock, responseMock, nextMock);
+
+      expect(response).toEqual(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith({ message: 'OK' });
+    });
+
+    it('calls next with an error if there is an error when scaling down', async () => {
+      const requestMock = {};
+      clusterManager.scaleDownClusterExec.mockRejectedValueOnce(Error('Expected test error'));
+
+      await scaleDownCluster(requestMock, responseMock, nextMock);
+
+      expect(nextMock).toHaveBeenCalledWith(new Error('Error scaling down cluster: Expected test error'));
+    });
+  });
+
+  describe('scaleUpCluster', () => {
+    const { scaleUpCluster } = clustersController;
+
+    it('scales up the specified cluster', async () => {
+      const requestMock = { projectKey: 'test-proj', name: 'cluster-name', type: 'DASK' };
+
+      const response = await scaleUpCluster(requestMock, responseMock, nextMock);
+
+      expect(response).toEqual(responseMock);
+      expect(responseMock.status).toHaveBeenCalledWith(200);
+      expect(responseMock.send).toHaveBeenCalledWith({ message: 'OK' });
+    });
+
+    it('calls next with an error if there is an error when scaling up', async () => {
+      const requestMock = {};
+      clusterManager.scaleUpClusterExec.mockRejectedValueOnce(Error('Expected test error'));
+
+      await scaleUpCluster(requestMock, responseMock, nextMock);
+
+      expect(nextMock).toHaveBeenCalledWith(new Error('Error scaling up cluster: Expected test error'));
     });
   });
 });
