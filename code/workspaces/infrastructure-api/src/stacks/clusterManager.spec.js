@@ -1,6 +1,6 @@
 import clustersConfig from 'common/src/config/clusters';
 import { defaultImage } from 'common/src/config/images';
-import { createClusterStack, deleteClusterStack, getSchedulerAddress } from './clusterManager';
+import { createClusterStack, deleteClusterStack, getSchedulerAddress, scaleDownClusterExec, scaleUpClusterExec } from './clusterManager';
 import * as stackBuilders from './stackBuilders';
 import deploymentGenerator from '../kubernetes/deploymentGenerator';
 import autoScalerApi from '../kubernetes/autoScalerApi';
@@ -8,6 +8,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
+import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
 
 jest.mock('./stackBuilders');
 stackBuilders.createNetworkPolicy = jest.fn().mockReturnValue(() => {});
@@ -20,6 +21,8 @@ autoScalerApi.deleteAutoScaler = jest.fn().mockResolvedValue();
 
 jest.mock('../kubernetes/deploymentApi');
 deploymentApi.deleteDeployment = jest.fn().mockResolvedValue();
+deploymentApi.scaleDownDeployment = jest.fn();
+deploymentApi.scaleUpDeployment = jest.fn();
 
 jest.mock('../kubernetes/networkPolicyApi');
 networkPolicyApi.deleteNetworkPolicy = jest.fn().mockResolvedValue();
@@ -30,6 +33,8 @@ serviceApi.deleteService = jest.fn().mockResolvedValue();
 jest.mock('./assets/assetManager', () => ({
   mountAssetsOnDeployment: jest.fn().mockResolvedValue(),
 }));
+
+jest.mock('../kubeWatcher/stackStatusChecker');
 
 describe('clusterManager', () => {
   beforeEach(() => {
@@ -264,6 +269,48 @@ describe('clusterManager', () => {
       expect(deploymentApi.deleteDeployment).toHaveBeenNthCalledWith(1, 'dask-scheduler-cluster-name', 'project-key');
       expect(deploymentApi.deleteDeployment).toHaveBeenNthCalledWith(2, 'dask-worker-cluster-name', 'project-key');
       expect(networkPolicyApi.deleteNetworkPolicy).toBeCalledWith('dask-scheduler-cluster-name-netpol', 'project-key');
+    });
+  });
+
+  describe('scaleDownClusterExec', () => {
+    it('scales a cluster down', async () => {
+      const okMessage = { message: 'OK' };
+      deploymentApi.scaleDownDeployment.mockResolvedValue(okMessage);
+      const cluster = {
+        type: 'DASK',
+        projectKey: 'project-key',
+        name: 'cluster-name',
+      };
+      const expectedResponse = [okMessage, okMessage];
+
+      const response = await scaleDownClusterExec(cluster);
+
+      expect(response).toEqual(expectedResponse);
+      expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledTimes(2);
+      expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
+      expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
+      expect(stackStatusChecker).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('scaleUpClusterExec', () => {
+    it('scales a cluster up', async () => {
+      const okMessage = { message: 'OK' };
+      deploymentApi.scaleUpDeployment.mockResolvedValue(okMessage);
+      const cluster = {
+        type: 'DASK',
+        projectKey: 'project-key',
+        name: 'cluster-name',
+      };
+      const expectedResponse = [okMessage, okMessage];
+
+      const response = await scaleUpClusterExec(cluster);
+
+      expect(response).toEqual(expectedResponse);
+      expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledTimes(2);
+      expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
+      expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
+      expect(stackStatusChecker).toHaveBeenCalledTimes(1);
     });
   });
 });

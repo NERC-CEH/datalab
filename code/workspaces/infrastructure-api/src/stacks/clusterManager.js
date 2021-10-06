@@ -8,6 +8,8 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
+import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
+import logger from '../config/logger';
 
 // DASK -> dask; SPARK -> spark
 const getLowerType = type => type.toLowerCase();
@@ -151,3 +153,44 @@ export async function deleteClusterStack({ type, projectKey, name }) {
   // delete network policy last, for security
   await networkPolicyApi.deleteNetworkPolicy(schedulerNetworkPolicyK8sName, projectKey);
 }
+
+export const scaleDownClusterExec = async ({ projectKey, name, type }) => {
+  logger.info(`Scaling down cluster ${name} for project: ${projectKey}`);
+
+  const lowerType = getLowerType(type);
+  const schedulerName = getSchedulerName(name);
+  const workerName = getWorkerName(name);
+
+  const workerDeploymentK8sName = nameGenerator.deploymentName(workerName, lowerType);
+  const schedulerDeploymentK8sName = nameGenerator.deploymentName(schedulerName, lowerType);
+
+  const responses = await Promise.all([
+    deploymentApi.scaleDownDeployment(schedulerDeploymentK8sName, projectKey),
+    deploymentApi.scaleDownDeployment(workerDeploymentK8sName, projectKey),
+  ]);
+
+  // trigger a status check to push it into a suspended state
+  await stackStatusChecker();
+  return responses;
+};
+
+export const scaleUpClusterExec = async ({ projectKey, name, type }) => {
+  logger.info(`Scaling up cluster ${name} for project: ${projectKey}`);
+
+  const lowerType = getLowerType(type);
+  const schedulerName = getSchedulerName(name);
+  const workerName = getWorkerName(name);
+
+  const workerDeploymentK8sName = nameGenerator.deploymentName(workerName, lowerType);
+  const schedulerDeploymentK8sName = nameGenerator.deploymentName(schedulerName, lowerType);
+
+  const responses = await Promise.all([
+    deploymentApi.scaleUpDeployment(schedulerDeploymentK8sName, projectKey),
+    deploymentApi.scaleUpDeployment(workerDeploymentK8sName, projectKey),
+  ]);
+
+  // trigger a status check to push it into a creating state
+  await stackStatusChecker();
+  return responses;
+};
+
