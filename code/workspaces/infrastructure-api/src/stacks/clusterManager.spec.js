@@ -291,6 +291,22 @@ describe('clusterManager', () => {
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
       expect(stackStatusChecker).toHaveBeenCalledTimes(1);
     });
+
+    it('returns an error if the scale down fails', async () => {
+      deploymentApi.scaleDownDeployment.mockRejectedValueOnce(Error('Expected test error'));
+      const cluster = {
+        type: 'DASK',
+        projectKey: 'project-key',
+        name: 'cluster-name',
+      };
+
+      await expect(scaleDownClusterExec(cluster)).rejects.toThrowError('Expected test error');
+
+      expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledTimes(2);
+      expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
+      expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
+      expect(stackStatusChecker).toHaveBeenCalledTimes(0);
+    });
   });
 
   describe('scaleUpClusterExec', () => {
@@ -311,6 +327,22 @@ describe('clusterManager', () => {
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
       expect(stackStatusChecker).toHaveBeenCalledTimes(1);
+    });
+
+    it('returns an error if the scale up fails', async () => {
+      deploymentApi.scaleUpDeployment.mockRejectedValueOnce(Error('Expected test error'));
+      const cluster = {
+        type: 'DASK',
+        projectKey: 'project-key',
+        name: 'cluster-name',
+      };
+
+      await expect(scaleUpClusterExec(cluster)).rejects.toThrowError('Expected test error');
+
+      expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledTimes(2);
+      expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
+      expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
+      expect(stackStatusChecker).toHaveBeenCalledTimes(0);
     });
   });
 });
