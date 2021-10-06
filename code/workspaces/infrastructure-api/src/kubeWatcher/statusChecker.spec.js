@@ -4,7 +4,7 @@ import statusChecker from './statusChecker';
 import * as podsApi from '../kubernetes/podsApi';
 import * as stackRepository from '../dataaccess/stacksRepository';
 import * as clustersRepository from '../dataaccess/clustersRepository';
-import { getStacksDeployments } from '../kubernetes/deploymentApi';
+import { getStacksAndClustersDeployments } from '../kubernetes/deploymentApi';
 
 jest.mock('common/src/config/images');
 jest.mock('../config/logger');
@@ -13,12 +13,12 @@ jest.mock('../kubernetes/deploymentApi');
 jest.mock('../dataaccess/stacksRepository');
 jest.mock('../dataaccess/clustersRepository');
 
-const getStacksMock = jest.fn();
+const getStacksAndClustersMock = jest.fn();
 const updateStackStatusMock = jest.fn();
 const updateClusterStatusMock = jest.fn();
 
 podsApi.default = {
-  getStacks: getStacksMock,
+  getStacksAndClusters: getStacksAndClustersMock,
 };
 
 stackRepository.default = {
@@ -37,7 +37,7 @@ const stacks = [
   { name: 'expectedType-fourthPod', namespace: 'b', status: 'Init:0/2' },
 ];
 
-getStacksMock.mockResolvedValue(stacks);
+getStacksAndClustersMock.mockResolvedValue(stacks);
 updateStackStatusMock.mockResolvedValue({ n: 1 });
 updateClusterStatusMock.mockResolvedValue({ n: 1 });
 
@@ -47,7 +47,7 @@ describe('Stack Status Checker', () => {
     jest.clearAllMocks();
     clusterList.mockReturnValue(['cluster']);
 
-    getStacksDeployments.mockResolvedValue([]);
+    getStacksAndClustersDeployments.mockResolvedValue([]);
   });
 
   it('updates stack records with correct status', async () => {
@@ -57,7 +57,7 @@ describe('Stack Status Checker', () => {
 
   it('updates stack records with suspended stacks as well', async () => {
     // return a deployment not in the pods list with 0 replicas to simulate a suspended notebook
-    getStacksDeployments.mockResolvedValueOnce([
+    getStacksAndClustersDeployments.mockResolvedValueOnce([
       { name: 'expectedType-suspendedPod', namespace: 'a', replicas: 0 },
     ]);
 
@@ -67,8 +67,8 @@ describe('Stack Status Checker', () => {
   });
 
   it('updates stack records with unavailable for scaled up deployments with no pods', async () => {
-    getStacksMock.mockResolvedValue([]);
-    getStacksDeployments.mockResolvedValueOnce([
+    getStacksAndClustersMock.mockResolvedValue([]);
+    getStacksAndClustersDeployments.mockResolvedValueOnce([
       { name: 'expectedType-missingPod', namespace: 'a', replicas: 1 },
     ]);
 
@@ -83,10 +83,10 @@ describe('Stack Status Checker', () => {
   });
 
   it('updates stack records with suspended for scaled down deployments with pods being terminated', async () => {
-    getStacksMock.mockResolvedValue([
+    getStacksAndClustersMock.mockResolvedValue([
       { name: 'expectedType-firstPod', namespace: 'a', status: 'Running' },
     ]);
-    getStacksDeployments.mockResolvedValueOnce([
+    getStacksAndClustersDeployments.mockResolvedValueOnce([
       { name: 'expectedType-firstPod', namespace: 'a', replicas: 0 },
     ]);
 
@@ -101,7 +101,7 @@ describe('Stack Status Checker', () => {
   });
 
   it('updates stack record for Running stack', async () => {
-    getStacksMock.mockReturnValue(Promise.resolve([
+    getStacksAndClustersMock.mockReturnValue(Promise.resolve([
       { name: 'expectedType-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },
     ]));
 
@@ -118,7 +118,7 @@ describe('Stack Status Checker', () => {
   });
 
   it('updates stack record for Requested stack', async () => {
-    getStacksMock.mockResolvedValue([
+    getStacksAndClustersMock.mockResolvedValue([
       { name: 'expectedType-expectedPodName', status: 'Pending', namespace: 'expectedNamespace' },
     ]);
 
@@ -135,7 +135,7 @@ describe('Stack Status Checker', () => {
   });
 
   it('updates stack record for Creating stack', async () => {
-    getStacksMock.mockResolvedValue([
+    getStacksAndClustersMock.mockResolvedValue([
       { name: 'expectedType-expectedPodName', status: 'CrashLoopBackOff', namespace: 'expectedNamespace' },
     ]);
 
@@ -152,7 +152,7 @@ describe('Stack Status Checker', () => {
   });
 
   it('updates cluster record for Running cluster', async () => {
-    getStacksMock.mockResolvedValue([
+    getStacksAndClustersMock.mockResolvedValue([
       { name: 'cluster-expectedPodName', status: 'Running', namespace: 'expectedNamespace' },
     ]);
 

@@ -40,7 +40,7 @@ function getDeployment(name, namespace) {
     .catch(() => undefined);
 }
 
-export const getStacksDeployments = async () => {
+export const getStacksAndClustersDeployments = async () => {
   const deploymentResponse = await axios.get(allDeploymentsUrl);
   const deployments = deploymentResponse.data.items.map(deployment => ({
     name: get(deployment, 'spec.template.metadata.labels.name'),
@@ -161,5 +161,5 @@ export default {
   restartDeployment,
   scaleDownDeployment,
   scaleUpDeployment,
-  getStacksDeployments,
+  getStacksAndClustersDeployments,
 };

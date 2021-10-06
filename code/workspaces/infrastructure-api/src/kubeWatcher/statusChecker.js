@@ -6,7 +6,7 @@ import clustersRepository from '../dataaccess/clustersRepository';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';
 import { status as stackStatus } from '../models/stackEnums';
-import { getStacksDeployments } from '../kubernetes/deploymentApi';
+import { getStacksAndClustersDeployments } from '../kubernetes/deploymentApi';
 
 const kubeUpStatus = ['Running'];
 const kubeCreateStatus = ['ContainerCreating', /^Init:/, 'PodInitializing'];
@@ -17,8 +17,8 @@ const statusChecker = async () => {
   logger.debug('Status checker: starting');
 
   try {
-    const stackPods = await podsApi.getStacks();
-    const stackDeployments = await getStacksDeployments();
+    const stackPods = await podsApi.getStacksAndClusters();
+    const stackDeployments = await getStacksAndClustersDeployments();
 
     // find scaled down deployments
     const missingPods = stackDeployments

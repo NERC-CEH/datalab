@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import config from '../config/config';
-import deploymentApi, { getStacksDeployments } from './deploymentApi';
+import deploymentApi, { getStacksAndClustersDeployments } from './deploymentApi';
 
 const mock = new MockAdapter(axios);
 
@@ -44,7 +44,7 @@ describe('Kubernetes Deployment API', () => {
     });
   });
 
-  describe('getStacksDeployments', () => {
+  describe('getStacksAndClustersDeployments', () => {
     it('should return only stack deployments', async () => {
       const stackDeployment = createDeployment();
       stackDeployment.spec = {
@@ -69,7 +69,7 @@ describe('Kubernetes Deployment API', () => {
       };
       mock.onGet(`${API_BASE}/apis/apps/v1/deployments`).reply(200, allDeployments);
 
-      const stackDeployments = await getStacksDeployments();
+      const stackDeployments = await getStacksAndClustersDeployments();
 
       expect(stackDeployments).toHaveLength(1);
       expect(stackDeployments[0]).toEqual({

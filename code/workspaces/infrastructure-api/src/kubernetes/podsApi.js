@@ -13,7 +13,7 @@ function getPods() {
     .then(handlePodlist);
 }
 
-async function getStacks() {
+async function getStacksAndClusters() {
   const pods = await getPods();
   return pods.filter(({ type }) => stackAndClusterList().includes(type));
 }
@@ -51,4 +51,4 @@ const getContainerStateReason = (containers, targetState) => {
   return undefined;
 };
 
-export default { getStacks, getPodName };
+export default { getStacksAndClusters, getPodName };
