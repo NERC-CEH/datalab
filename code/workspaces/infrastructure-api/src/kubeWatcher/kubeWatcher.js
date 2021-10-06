@@ -6,7 +6,7 @@ import kubeConfig from '../kubernetes/kubeConfig';
 import { parsePodLabels } from './kubernetesHelpers';
 import { status } from '../models/stackEnums';
 import { SELECTOR_LABEL } from '../stacks/StackConstants';
-import { getStatusUpdateFn } from './stackStatusChecker';
+import { getStatusUpdateFn } from './statusChecker';
 
 const watchUrl = '/api/v1/pods';
 const selector = { labelSelector: SELECTOR_LABEL };

@@ -8,7 +8,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
-import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
+import statusChecker from '../kubeWatcher/statusChecker';
 
 jest.mock('./stackBuilders');
 stackBuilders.createNetworkPolicy = jest.fn().mockReturnValue(() => {});
@@ -34,7 +34,7 @@ jest.mock('./assets/assetManager', () => ({
   mountAssetsOnDeployment: jest.fn().mockResolvedValue(),
 }));
 
-jest.mock('../kubeWatcher/stackStatusChecker');
+jest.mock('../kubeWatcher/statusChecker');
 
 describe('clusterManager', () => {
   beforeEach(() => {
@@ -289,7 +289,7 @@ describe('clusterManager', () => {
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledTimes(2);
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
-      expect(stackStatusChecker).toHaveBeenCalledTimes(1);
+      expect(statusChecker).toHaveBeenCalledTimes(1);
     });
 
     it('returns an error if the scale down fails', async () => {
@@ -305,7 +305,7 @@ describe('clusterManager', () => {
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledTimes(2);
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
       expect(deploymentApi.scaleDownDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
-      expect(stackStatusChecker).toHaveBeenCalledTimes(0);
+      expect(statusChecker).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -326,7 +326,7 @@ describe('clusterManager', () => {
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledTimes(2);
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
-      expect(stackStatusChecker).toHaveBeenCalledTimes(1);
+      expect(statusChecker).toHaveBeenCalledTimes(1);
     });
 
     it('returns an error if the scale up fails', async () => {
@@ -342,7 +342,7 @@ describe('clusterManager', () => {
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledTimes(2);
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-scheduler-cluster-name', 'project-key');
       expect(deploymentApi.scaleUpDeployment).toHaveBeenCalledWith('dask-worker-cluster-name', 'project-key');
-      expect(stackStatusChecker).toHaveBeenCalledTimes(0);
+      expect(statusChecker).toHaveBeenCalledTimes(0);
     });
   });
 });

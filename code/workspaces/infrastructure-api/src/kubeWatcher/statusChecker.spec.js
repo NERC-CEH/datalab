@@ -1,6 +1,6 @@
 import { clusterList } from 'common/src/config/images';
 import logger from '../config/logger';
-import statusChecker from './stackStatusChecker';
+import statusChecker from './statusChecker';
 import * as podsApi from '../kubernetes/podsApi';
 import * as stackRepository from '../dataaccess/stacksRepository';
 import * as clustersRepository from '../dataaccess/clustersRepository';

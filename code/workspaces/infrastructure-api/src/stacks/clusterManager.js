@@ -8,7 +8,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
-import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
+import statusChecker from '../kubeWatcher/statusChecker';
 import logger from '../config/logger';
 
 // DASK -> dask; SPARK -> spark
@@ -170,7 +170,7 @@ export const scaleDownClusterExec = async ({ projectKey, name, type }) => {
   ]);
 
   // trigger a status check to push it into a suspended state
-  await stackStatusChecker();
+  await statusChecker();
   return responses;
 };
 
@@ -190,7 +190,7 @@ export const scaleUpClusterExec = async ({ projectKey, name, type }) => {
   ]);
 
   // trigger a status check to push it into a creating state
-  await stackStatusChecker();
+  await statusChecker();
   return responses;
 };
 
