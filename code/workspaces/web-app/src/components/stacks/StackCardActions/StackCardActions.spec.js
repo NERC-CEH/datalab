@@ -205,6 +205,15 @@ describe('StackCardActions', () => {
     expect(wrapper.container).toMatchSnapshot();
   });
 
+  it('Should render edit/delete/share/restart buttons if current user is not owner but is instance admin', () => {
+    const props = generateProps();
+    props.userPermissions = [...props.userPermissions, 'system:instance:admin'];
+    useCurrentUserId.mockReturnValue('not-the-owner-id');
+
+    const wrapper = render(<StackCardActions {...props} />);
+    expect(wrapper.getByText('more_vert')).not.toBeNull();
+  });
+
   it('Should not render edit/delete buttons if functions not defined', () => {
     const props = {
       ...generateProps(),
