@@ -9,6 +9,7 @@ const clusterModelMock = {
   in: jest.fn().mockReturnThis(),
   or: jest.fn().mockReturnThis(),
   updateMany: jest.fn().mockReturnThis(),
+  updateOne: jest.fn().mockReturnThis(),
   where: jest.fn().mockReturnThis(),
   remove: jest.fn().mockReturnThis(),
 };
@@ -137,6 +138,28 @@ describe('clustersRepository', () => {
 
       // Assert
       expect(clusterModelMock.find).toHaveBeenCalledWith({ projectKey, volumeMount });
+      expect(response).toEqual([document]);
+    });
+  });
+
+  describe('updateStatus', () => {
+    it('updates the status of a cluster', async () => {
+      // Arrange
+      const request = {
+        type: 'DASK',
+        namespace: 'test-project',
+        name: 'cluster',
+        status: 'ready',
+      };
+      const document = clusterDocument();
+      clusterModelMock.exec.mockReturnValueOnce([document]);
+
+      // Act
+      const response = await clustersRepository.updateStatus(request);
+
+      // Assert
+      expect(clusterModelMock.where).toHaveBeenCalledWith({ name: 'cluster', type: 'DASK', projectKey: 'test-project' });
+      expect(clusterModelMock.updateOne).toHaveBeenCalledWith({ status: 'ready' });
       expect(response).toEqual([document]);
     });
   });

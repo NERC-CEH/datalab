@@ -13,6 +13,7 @@ const {
     PROJECT_KEY_CLUSTERS_LIST,
     PROJECT_KEY_CLUSTERS_DELETE,
     PROJECT_KEY_STORAGE_LIST,
+    PROJECT_KEY_STACKS_SCALE,
   },
 } = permissionTypes;
 
@@ -50,6 +51,24 @@ clustersRouter.delete(
   clusterTypeValidator(param),
   nameValidator(param),
   errorWrapper(clustersController.deleteCluster),
+);
+
+clustersRouter.put(
+  '/:projectKey/scaledown',
+  permissionMiddleware(PROJECT_KEY_STACKS_SCALE),
+  projectKeyValidator(param),
+  nameValidator(body),
+  clusterTypeValidator(body),
+  errorWrapper(clustersController.scaleDownCluster),
+);
+
+clustersRouter.put(
+  '/:projectKey/scaleup',
+  permissionMiddleware(PROJECT_KEY_STACKS_SCALE),
+  projectKeyValidator(param),
+  nameValidator(body),
+  clusterTypeValidator(body),
+  errorWrapper(clustersController.scaleUpCluster),
 );
 
 export default clustersRouter;

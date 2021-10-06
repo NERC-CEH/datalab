@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { getEnumValues, status } from './stackEnums';
 
 const modelName = 'Cluster';
 const DASK = 'DASK';
@@ -17,6 +18,7 @@ const ClusterSchema = new Schema({
   maxWorkerCpu: { type: Number, required: true },
   schedulerAddress: String,
   assetIds: { type: [String], default: () => [] },
+  status: { type: String, enum: getEnumValues(status), default: status.REQUESTED },
 });
 
 model(modelName, ClusterSchema);

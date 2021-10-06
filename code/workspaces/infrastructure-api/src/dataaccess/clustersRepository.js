@@ -42,6 +42,16 @@ function getByVolumeMount(projectKey, mount) {
     .exec();
 }
 
+// Function is used by kube-watcher to update stacks status. This will require an
+// update when kube-watcher updated to handle projectKey.
+function updateStatus(stack) {
+  const { name, namespace, type, status } = stack;
+  return ClusterModel()
+    .where({ name, type, projectKey: namespace })
+    .updateOne({ status })
+    .exec();
+}
+
 export default {
   createCluster,
   deleteCluster,
@@ -49,4 +59,5 @@ export default {
   listByProject,
   getByVolumeMount,
   getAll,
+  updateStatus,
 };

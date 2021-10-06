@@ -15,7 +15,7 @@ describe('podsApi', () => {
     mock.onGet(PODS_URL).reply(200, pods);
 
     // Act
-    const stacks = await podsApi.getStacks();
+    const stacks = await podsApi.getStacksAndClusters();
 
     // Assert
     expect(stacks).toEqual([

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { get } from 'lodash';
-import { stackList } from 'common/src/config/images';
+import { stackAndClusterList } from 'common/src/config/images';
 import config from '../config/config';
 import { SELECTOR_LABEL } from '../stacks/StackConstants';
 
@@ -13,9 +13,9 @@ function getPods() {
     .then(handlePodlist);
 }
 
-async function getStacks() {
+async function getStacksAndClusters() {
   const pods = await getPods();
-  return pods.filter(({ type }) => stackList().includes(type));
+  return pods.filter(({ type }) => stackAndClusterList().includes(type));
 }
 
 async function getPodName(deploymentName, namespaceName) {
@@ -51,4 +51,4 @@ const getContainerStateReason = (containers, targetState) => {
   return undefined;
 };
 
-export default { getStacks, getPodName };
+export default { getStacksAndClusters, getPodName };

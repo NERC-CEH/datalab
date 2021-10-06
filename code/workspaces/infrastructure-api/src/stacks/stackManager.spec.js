@@ -7,7 +7,7 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import nameGenerators from '../common/nameGenerators';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import config from '../config/config';
-import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
+import statusChecker from '../kubeWatcher/statusChecker';
 
 jest.mock('common/src/config/catalogue');
 jest.mock('./Stacks');
@@ -15,7 +15,7 @@ jest.mock('../dataaccess/stacksRepository');
 jest.mock('../kubernetes/deploymentApi');
 jest.mock('../dataaccess/centralAssetRepoRepository');
 jest.mock('../config/config');
-jest.mock('../kubeWatcher/stackStatusChecker');
+jest.mock('../kubeWatcher/statusChecker');
 
 const origConfig = jest.requireActual('../config/config');
 config.get = jest.fn().mockImplementation(s => origConfig.default.default(s));
@@ -104,7 +104,7 @@ describe('Stack Controller', () => {
       const response = await stackManager.scaleUpStack(params);
 
       expect(deploymentApi.scaleUpDeployment).toBeCalledWith('jupyter-expectedName', 'project');
-      expect(stackStatusChecker).toHaveBeenCalledTimes(1);
+      expect(statusChecker).toHaveBeenCalledTimes(1);
       expect(response).toEqual('success');
     });
 
@@ -121,7 +121,7 @@ describe('Stack Controller', () => {
       const response = await stackManager.scaleDownStack(params);
 
       expect(deploymentApi.scaleDownDeployment).toBeCalledWith('jupyter-expectedName', 'project');
-      expect(stackStatusChecker).toHaveBeenCalledTimes(1);
+      expect(statusChecker).toHaveBeenCalledTimes(1);
       expect(response).toEqual('success');
     });
 

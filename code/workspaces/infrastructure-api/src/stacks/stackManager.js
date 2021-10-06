@@ -9,7 +9,7 @@ import { status } from '../models/stackEnums';
 import nameGenerator from '../common/nameGenerators';
 import deploymentApi from '../kubernetes/deploymentApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
-import stackStatusChecker from '../kubeWatcher/stackStatusChecker';
+import statusChecker from '../kubeWatcher/statusChecker';
 
 const { isSingleHostName, basePath } = stackTypes;
 
@@ -76,7 +76,7 @@ const scaleUpStack = async (params) => {
   const response = await deploymentApi.scaleUpDeployment(k8sName, projectKey);
 
   // trigger a stack status check to push it into a creating state
-  await stackStatusChecker();
+  await statusChecker();
   return response;
 };
 
@@ -89,7 +89,7 @@ const scaleDownStack = async (params) => {
   const response = await deploymentApi.scaleDownDeployment(k8sName, projectKey);
 
   // trigger a stack status check to push it into a suspended state
-  await stackStatusChecker();
+  await statusChecker();
   return response;
 };
 
