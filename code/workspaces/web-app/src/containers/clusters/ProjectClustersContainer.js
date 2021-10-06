@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { permissionTypes } from 'common';
+import { permissionTypes, statusTypes } from 'common';
 import { projectKeyPermission } from 'common/src/permissionTypes';
 import { reset } from 'redux-form';
 import StackCards from '../../components/stacks/StackCards';
@@ -16,6 +16,8 @@ import dataStorageActions from '../../actions/dataStorageActions';
 import notify from '../../components/common/notify';
 import { CLUSTER_TYPE_NAME, CLUSTER_TYPE_NAME_PLURAL } from './clusterTypeName';
 import assetRepoActions from '../../actions/assetRepoActions';
+
+const refreshInterval = 15000;
 
 const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT, PROJECT_KEY_CLUSTERS_OPEN } } = permissionTypes;
 
@@ -41,6 +43,32 @@ const confirmDeleteCluster = dispatch => cluster => dispatch(modalDialogActions.
   onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
 }));
 
+const scaleCluster = async (dispatch, cluster, replicas) => {
+  try {
+    dispatch(modalDialogActions.closeModalDialog());
+    await dispatch(clusterActions.scaleCluster(cluster, replicas));
+    notify.success(`Cluster ${replicas > 0 ? 'started' : 'suspended'}`);
+  } catch (error) {
+    notify.error('Unable to scale cluster');
+  } finally {
+    dispatch(clusterActions.loadClusters(cluster.projectKey));
+  }
+};
+
+export const confirmScaleCluster = dispatch => async (cluster) => {
+  if (cluster.status === statusTypes.SUSPENDED) {
+    scaleCluster(dispatch, cluster, 1);
+    return;
+  }
+
+  dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+    title: `Suspend ${cluster.displayName} cluster?`,
+    body: `Would you like to suspend the ${cluster.displayName} cluster?`,
+    onSubmit: () => scaleCluster(dispatch, cluster, 0),
+    onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
+  }));
+};
+
 const getOpenCreationForm = (dispatch, projectKey, clusterType, dataStores) => {
   if (clusterType) {
     const createClusterDialogProps = getDialogProps(dispatch, projectKey, clusterType, dataStores);
@@ -62,25 +90,38 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
       dispatch(dataStorageActions.loadDataStorage(projectKey));
       dispatch(assetRepoActions.loadVisibleAssets(projectKey));
     }
-  }, [dispatch, projectKey, modifyData]);
+
+    // After an interval, update the clusters list in case of any status changes.
+    // This uses "updateClusters" to avoid flickering.
+    const interval = setInterval(() => {
+      if (projectKey && modifyData) {
+        dispatch(clusterActions.updateClusters(projectKey));
+        dispatch(dataStorageActions.loadDataStorage(projectKey));
+        dispatch(assetRepoActions.loadVisibleAssets(projectKey));
+      }
+    }, refreshInterval);
+
+    return () => clearInterval(interval);
+  }, [dispatch, modifyData, projectKey]);
 
   const openCreationForm = getOpenCreationForm(dispatch, projectKey, clusterType, dataStores);
 
   return (
-      <StackCards
-        stacks={clusters}
-        typeName={CLUSTER_TYPE_NAME}
-        typeNamePlural={CLUSTER_TYPE_NAME_PLURAL}
-        userPermissions={() => userPermissions}
-        openCreationForm={openCreationForm}
-        createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
-        showCreateButton={modifyData}
-        deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
-        copySnippets={copySnippets}
-        deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
-        editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
-        openPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_OPEN, projectKey)}
-      />
+    <StackCards
+      stacks={clusters}
+      typeName={CLUSTER_TYPE_NAME}
+      typeNamePlural={CLUSTER_TYPE_NAME_PLURAL}
+      userPermissions={() => userPermissions}
+      openCreationForm={openCreationForm}
+      createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
+      showCreateButton={modifyData}
+      deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
+      scaleStack={modifyData ? confirmScaleCluster(dispatch) : undefined}
+      copySnippets={copySnippets}
+      deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
+      editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
+      openPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_OPEN, projectKey)}
+    />
   );
 };
 

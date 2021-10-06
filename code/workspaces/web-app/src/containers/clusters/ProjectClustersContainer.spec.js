@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { useDispatch } from 'react-redux';
 import { reset } from 'redux-form';
-import ProjectClustersContainer, { getDialogProps } from './ProjectClustersContainer';
+import ProjectClustersContainer, { confirmScaleCluster, getDialogProps } from './ProjectClustersContainer';
 import notify from '../../components/common/notify';
 
 import * as mockAuthHooks from '../../hooks/authHooks';
@@ -28,6 +28,7 @@ useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 const mockLoadClustersAction = jest.fn();
 const mockCreateClusterAction = jest.fn();
 const mockCloseModalDialogAction = jest.fn();
+const mockOpenModalDialogAction = jest.fn();
 
 const setMocks = () => {
   mockAuthHooks.useCurrentUserId.mockReturnValue({ value: 'test-user' });
@@ -59,6 +60,7 @@ const setMocks = () => {
   mockClusterActions.loadClusters = mockLoadClustersAction;
   mockClusterActions.createCluster = mockCreateClusterAction;
   mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
+  mockModalDialogActions.openModalDialog = mockOpenModalDialogAction;
 };
 
 const copyMock = {
@@ -221,5 +223,59 @@ describe('getDialogProps', () => {
       expect(mockCloseModalDialogAction).toHaveBeenCalledWith();
       expect(mockDispatch).toHaveBeenCalledWith('close-modal');
     });
+  });
+});
+
+describe('confirmScaleCluster', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => jest.clearAllMocks());
+
+  it('scales cluster up when existing status is suspended', async () => {
+    const cluster = {
+      status: 'suspended',
+      displayName: 'cluster-name',
+    };
+
+    await confirmScaleCluster(dispatch)(cluster);
+
+    expect(notify.success).toHaveBeenCalledWith('Cluster started');
+    expect(notify.error).not.toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledTimes(3);
+  });
+
+  it('notifies on error if scale up fails', async () => {
+    dispatch.mockImplementationOnce(() => { throw Error('Expected test error'); });
+    const cluster = {
+      status: 'suspended',
+      displayName: 'cluster-name',
+    };
+
+    await confirmScaleCluster(dispatch)(cluster);
+
+    expect(notify.success).not.toHaveBeenCalled();
+    expect(notify.error).toHaveBeenCalledWith('Unable to scale cluster');
+    expect(dispatch).toHaveBeenCalledTimes(2);
+  });
+
+  it('scales cluster down when existing status is not suspended', async () => {
+    setMocks();
+    const cluster = {
+      status: 'ready',
+      displayName: 'cluster-name',
+    };
+
+    await confirmScaleCluster(dispatch)(cluster);
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(mockOpenModalDialogAction).toHaveBeenCalledWith(
+      'MODAL_TYPE_CONFIRMATION',
+      {
+        title: 'Suspend cluster-name cluster?',
+        body: 'Would you like to suspend the cluster-name cluster?',
+        onSubmit: expect.any(Function),
+        onCancel: expect.any(Function),
+      },
+    );
   });
 });

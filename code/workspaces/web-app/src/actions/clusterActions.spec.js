@@ -1,5 +1,11 @@
 import clusterService from '../api/clusterService';
-import clusterActions, { CREATE_CLUSTER_ACTION, DELETE_CLUSTER_ACTION, LOAD_CLUSTERS_ACTION, SCALE_CLUSTER_ACTION } from './clusterActions';
+import clusterActions, {
+  CREATE_CLUSTER_ACTION,
+  DELETE_CLUSTER_ACTION,
+  LOAD_CLUSTERS_ACTION,
+  SCALE_CLUSTER_ACTION,
+  UPDATE_CLUSTERS_ACTION,
+} from './clusterActions';
 
 jest.mock('../api/clusterService');
 
@@ -80,6 +86,20 @@ describe('clusterActions', () => {
     });
   });
 
+  describe('updateClusters', () => {
+    it('makes correct call to service function and provides result in action payload', async () => {
+      const projectKey = 'project-key';
+      const loadClustersMockReturnValue = 'clusters-loaded';
+      loadClustersMock.mockResolvedValueOnce(loadClustersMockReturnValue);
+
+      const actionReturn = clusterActions.updateClusters(projectKey);
+
+      expect(loadClustersMock).toHaveBeenCalledWith(projectKey);
+      expect(actionReturn.type).toEqual(UPDATE_CLUSTERS_ACTION);
+      expect(await actionReturn.payload).toEqual({ clusters: loadClustersMockReturnValue, projectKey });
+    });
+  });
+
   describe('scaleCluster', () => {
     it('makes correct call to service function and provides result in action payload', async () => {
       const scaleClusterMockReturnValue = 'cluster-scaled';
@@ -105,6 +125,10 @@ describe('clusterActions', () => {
 
     it('LOAD_CLUSTERS', () => {
       expect(LOAD_CLUSTERS_ACTION).toEqual('LOAD_CLUSTERS_ACTION');
+    });
+
+    it('UPDATE_CLUSTERS', () => {
+      expect(UPDATE_CLUSTERS_ACTION).toEqual('UPDATE_CLUSTERS_ACTION');
     });
 
     it('SCALE_CLUSTERS', () => {
