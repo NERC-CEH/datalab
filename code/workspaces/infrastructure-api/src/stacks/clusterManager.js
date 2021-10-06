@@ -8,6 +8,8 @@ import deploymentApi from '../kubernetes/deploymentApi';
 import networkPolicyApi from '../kubernetes/networkPolicyApi';
 import serviceApi from '../kubernetes/serviceApi';
 import { mountAssetsOnDeployment } from './assets/assetManager';
+import statusChecker from '../kubeWatcher/statusChecker';
+import logger from '../config/logger';
 
 // DASK -> dask; SPARK -> spark
 const getLowerType = type => type.toLowerCase();
@@ -15,6 +17,8 @@ const getLowerType = type => type.toLowerCase();
 // distinguish between the scheduler and the worker deployments
 const getSchedulerName = name => `scheduler-${name}`;
 const getWorkerName = name => `worker-${name}`;
+
+const getClusterName = (name, type) => `${type}-${name}`;
 
 export const getSchedulerServiceName = (name, type) => nameGenerator.deploymentName(getSchedulerName(name), getLowerType(type));
 
@@ -68,6 +72,7 @@ export async function createClusterStack({ type, volumeMount, condaPath, maxWork
 
   const clusterParams = {
     type: lowerType,
+    clusterName: getClusterName(name, type),
     projectKey,
     volumeMount,
     condaPath,
@@ -148,3 +153,44 @@ export async function deleteClusterStack({ type, projectKey, name }) {
   // delete network policy last, for security
   await networkPolicyApi.deleteNetworkPolicy(schedulerNetworkPolicyK8sName, projectKey);
 }
+
+export const scaleDownClusterExec = async ({ projectKey, name, type }) => {
+  logger.info(`Scaling down cluster ${name} for project: ${projectKey}`);
+
+  const lowerType = getLowerType(type);
+  const schedulerName = getSchedulerName(name);
+  const workerName = getWorkerName(name);
+
+  const workerDeploymentK8sName = nameGenerator.deploymentName(workerName, lowerType);
+  const schedulerDeploymentK8sName = nameGenerator.deploymentName(schedulerName, lowerType);
+
+  const responses = await Promise.all([
+    deploymentApi.scaleDownDeployment(schedulerDeploymentK8sName, projectKey),
+    deploymentApi.scaleDownDeployment(workerDeploymentK8sName, projectKey),
+  ]);
+
+  // trigger a status check to push it into a suspended state
+  await statusChecker();
+  return responses;
+};
+
+export const scaleUpClusterExec = async ({ projectKey, name, type }) => {
+  logger.info(`Scaling up cluster ${name} for project: ${projectKey}`);
+
+  const lowerType = getLowerType(type);
+  const schedulerName = getSchedulerName(name);
+  const workerName = getWorkerName(name);
+
+  const workerDeploymentK8sName = nameGenerator.deploymentName(workerName, lowerType);
+  const schedulerDeploymentK8sName = nameGenerator.deploymentName(schedulerName, lowerType);
+
+  const responses = await Promise.all([
+    deploymentApi.scaleUpDeployment(schedulerDeploymentK8sName, projectKey),
+    deploymentApi.scaleUpDeployment(workerDeploymentK8sName, projectKey),
+  ]);
+
+  // trigger a status check to push it into a creating state
+  await statusChecker();
+  return responses;
+};
+

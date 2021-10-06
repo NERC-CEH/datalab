@@ -10,6 +10,8 @@ describe('deploymentGenerator', () => {
   describe('createDatalabDaskSchedulerDeployment', () => {
     const params = {
       deploymentName: 'deployment-name',
+      clusterName: 'DASK-deployment-name',
+      type: 'dask',
       clusterImage: 'dask-image',
       jupyterLabImage: 'lab-image',
       schedulerPodLabel: 'scheduler-pod-label',
@@ -82,6 +84,8 @@ describe('deploymentGenerator', () => {
   describe('createDatalabSparkSchedulerDeployment', () => {
     const params = {
       deploymentName: 'deployment-name',
+      clusterName: 'SPARK-deployment-name',
+      type: 'spark',
       clusterImage: 'spark-image',
       jupyterLabImage: 'lab-image',
       schedulerPodLabel: 'scheduler-pod-label',

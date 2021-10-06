@@ -1,10 +1,12 @@
 import Promise from 'bluebird';
+import { clusterList } from 'common/src/config/images';
 import logger from '../config/logger';
 import podsApi from '../kubernetes/podsApi';
+import clustersRepository from '../dataaccess/clustersRepository';
 import stackRepository from '../dataaccess/stacksRepository';
 import { parseKubeName } from './kubernetesHelpers';
 import { status as stackStatus } from '../models/stackEnums';
-import { getStacksDeployments } from '../kubernetes/deploymentApi';
+import { getStacksAndClustersDeployments } from '../kubernetes/deploymentApi';
 
 const kubeUpStatus = ['Running'];
 const kubeCreateStatus = ['ContainerCreating', /^Init:/, 'PodInitializing'];
@@ -15,8 +17,8 @@ const statusChecker = async () => {
   logger.debug('Status checker: starting');
 
   try {
-    const stackPods = await podsApi.getStacks();
-    const stackDeployments = await getStacksDeployments();
+    const stackPods = await podsApi.getStacksAndClusters();
+    const stackDeployments = await getStacksAndClustersDeployments();
 
     // find scaled down deployments
     const missingPods = stackDeployments
@@ -57,12 +59,22 @@ const groupStatusByName = pods => pods
     };
   }, {});
 
+export const getStatusUpdateFn = (type) => {
+  if (clusterList().includes(type.toLowerCase())) {
+    return clustersRepository.updateStatus;
+  }
+
+  return stackRepository.updateStatus;
+};
+
 const setStatus = pods => Promise.mapSeries(Object.values(pods), (podInfo) => {
   const { namespace, kubeName } = podInfo;
   const [type, name] = parseKubeName(kubeName);
   const status = getStatus(podInfo.status);
 
-  return stackRepository.updateStatus({ name, namespace, type, status })
+  const updateStatus = getStatusUpdateFn(type);
+
+  return updateStatus({ name, namespace, type, status })
     .then((result) => {
       if (result.n === 0) {
         logger.warn(`Tried to update record for "${name}" in project "${namespace}" but no such record exists.`);

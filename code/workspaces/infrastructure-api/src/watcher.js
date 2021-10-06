@@ -1,11 +1,11 @@
 import logger from './config/logger';
 import startKubeWatcher from './kubeWatcher/kubeWatcher';
-import stackStatusChecker from './kubeWatcher/stackStatusChecker';
+import statusChecker from './kubeWatcher/statusChecker';
 import config from './config/config';
 import database from './config/database';
 
 async function main() {
-  setInterval(stackStatusChecker, config.get('statusCheckInterval'));
+  setInterval(statusChecker, config.get('statusCheckInterval'));
   await connectToDatabase();
   startKubeWatcher();
 }

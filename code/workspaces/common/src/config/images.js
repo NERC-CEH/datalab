@@ -3,6 +3,7 @@ import data from './image_config.json';
 
 export const NOTEBOOK_CATEGORY = 'ANALYSIS';
 export const SITE_CATEGORY = 'PUBLISH';
+export const CLUSTER_CATEGORY = 'COMPUTE';
 
 export function imageConfig() {
   return data.types;
@@ -28,6 +29,10 @@ function byCategoryList(categories) {
     .filter(type => categories.includes(data.types[type].category));
 }
 
+export function stackAndClusterList() {
+  return byCategoryList([NOTEBOOK_CATEGORY, SITE_CATEGORY, CLUSTER_CATEGORY]);
+}
+
 export function stackList() {
   return byCategoryList([NOTEBOOK_CATEGORY, SITE_CATEGORY]);
 }
@@ -38,6 +43,10 @@ export function notebookList() {
 
 export function siteList() {
   return byCategoryList([SITE_CATEGORY]);
+}
+
+export function clusterList() {
+  return byCategoryList([CLUSTER_CATEGORY]);
 }
 
 export function versionList(type) {
