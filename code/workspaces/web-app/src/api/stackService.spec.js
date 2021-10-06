@@ -144,7 +144,7 @@ describe('stackService', () => {
       const response = await stackService.scaleStack(data.stack, 1);
       expect(response).toEqual(data.scaleupStack);
       expect(mockClient.lastQuery()).toEqual(`
-    ScaleStack($stack: StackScaleRequest) {
+    ScaleStack($stack: ScaleRequest) {
       scaleupStack(stack: $stack) {
         message
       }
@@ -159,7 +159,7 @@ describe('stackService', () => {
       const response = await stackService.scaleStack(data.stack, 0);
       expect(response).toEqual(data.scaleupStack);
       expect(mockClient.lastQuery()).toEqual(`
-    ScaleStack($stack: StackScaleRequest) {
+    ScaleStack($stack: ScaleRequest) {
       scaledownStack(stack: $stack) {
         message
       }

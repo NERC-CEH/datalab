@@ -69,6 +69,8 @@ const resolvers = {
     setCatalogueRole: (obj, { userId, catalogueRole }, { token }) => w(usersService.setCatalogueRole(userId, catalogueRole, token)),
     createCluster: (obj, { cluster }, { token }) => w(clustersService.createCluster(cluster, token)),
     deleteCluster: (obj, { cluster }, { token }) => w(clustersService.deleteCluster(cluster, token)),
+    scaleupCluster: (obj, { cluster }, { token }) => w(clustersService.scaleUpCluster(cluster, token)),
+    scaledownCluster: (obj, { cluster }, { token }) => w(clustersService.scaleDownCluster(cluster, token)),
     createMessage: (obj, { message }, { token }) => w(messagesService.createMessage(message, token)),
     deleteMessage: (obj, { messageId }, { token }) => w(messagesService.deleteMessage(messageId, token)),
   },
