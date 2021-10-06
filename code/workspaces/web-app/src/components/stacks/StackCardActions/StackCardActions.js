@@ -6,6 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { statusTypes } from 'common';
+import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import PermissionWrapper from '../../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../../common/buttons/PrimaryActionButton';
@@ -46,6 +47,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   // This is the case for projects which also use this component. This will mean that
   // projects rely solely on the permissions passed to determine correct rendering.
   const ownsStack = !stack.users || stack.users.includes(currentUserId);
+  const isInstanceAdmin = userPermissions.includes(SYSTEM_INSTANCE_ADMIN);
   const [anchorEl, setAnchorEl] = useState(null);
   const shared = ['project'].includes(stack.shared) || ['project', 'public'].includes(stack.visible);
 
@@ -101,7 +103,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
     },
   ].filter(m => !!m);
 
-  const shouldRenderMenuItems = stackMenuItems.length > 0;
+  const shouldRenderMenuItems = (ownsStack || isInstanceAdmin) && stackMenuItems.length > 0;
 
   return (
     <div className={classes.cardActions}>
@@ -121,7 +123,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           </div>
         </Tooltip>
       </PermissionWrapper>}
-      {ownsStack && shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
+      {shouldRenderMenuItems && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={deletePermission}>
         <SecondaryActionButton
           aria-controls="more-menu"
           aria-haspopup="true"

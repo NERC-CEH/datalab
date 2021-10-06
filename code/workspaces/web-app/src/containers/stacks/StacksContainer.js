@@ -234,11 +234,11 @@ class StacksContainer extends Component {
         typeNamePlural={this.props.typeNamePlural}
         getLogs={this.getLogs}
         openStack={this.openStack}
-        deleteStack={this.props.modifyData ? this.confirmDeleteStack : undefined}
-        shareStack={this.props.modifyData ? this.confirmShareStack : undefined}
-        editStack={this.props.modifyData ? this.openEditForm : undefined}
-        restartStack={this.props.modifyData ? this.confirmRestartStack : undefined}
-        scaleStack={this.props.modifyData ? this.confirmScaleStack : undefined}
+        deleteStack={this.confirmDeleteStack}
+        shareStack={this.confirmShareStack}
+        editStack={this.openEditForm}
+        restartStack={this.confirmRestartStack}
+        scaleStack={this.confirmScaleStack}
         openCreationForm={this.props.modifyData ? this.openCreationForm : undefined}
         showCreateButton={this.props.modifyData}
         userPermissions={() => this.props.userPermissions}
@@ -284,7 +284,7 @@ function mapStateToProps(state) {
   return {
     stacks: state.stacks,
     projectKey: currentProjectSelectors.currentProjectKey(state),
-    modifyData: true, // default
+    modifyData: true,
   };
 }
 
@@ -292,7 +292,7 @@ function mapProjectStateToProps(state) {
   return {
     stacks: state.stacks,
     // leave projectKey as a prop, rather than reading from state
-    modifyData: false, // don't load (or cause a load of) the stacks in this view, admin sees more
+    modifyData: false,
   };
 }
 
