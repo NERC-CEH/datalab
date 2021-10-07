@@ -10,7 +10,7 @@ import clusterActions from '../../actions/clusterActions';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import modalDialogActions from '../../actions/modalDialogActions';
 import { getClusterMaxWorkers, getWorkerCpuMax, getWorkerMemoryMax, getCondaRequired } from '../../config/clusters';
-import { MODAL_TYPE_CREATE_CLUSTER, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_CLUSTER, MODAL_TYPE_CONFIRMATION, MODAL_TYPE_SCALE_STACK } from '../../constants/modaltypes';
 import { useDataStorageForUserInProject } from '../../hooks/dataStorageHooks';
 import dataStorageActions from '../../actions/dataStorageActions';
 import notify from '../../components/common/notify';
@@ -61,7 +61,7 @@ export const confirmScaleCluster = dispatch => async (cluster) => {
     return;
   }
 
-  dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_CONFIRMATION, {
+  dispatch(modalDialogActions.openModalDialog(MODAL_TYPE_SCALE_STACK, {
     title: `Suspend ${cluster.displayName} cluster?`,
     body: `Would you like to suspend the ${cluster.displayName} cluster?`,
     onSubmit: () => scaleCluster(dispatch, cluster, 0),
