@@ -269,7 +269,7 @@ describe('confirmScaleCluster', () => {
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(mockOpenModalDialogAction).toHaveBeenCalledWith(
-      'MODAL_TYPE_CONFIRMATION',
+      'MODAL_TYPE_SCALE_STACK',
       {
         title: 'Suspend cluster-name cluster?',
         body: 'Would you like to suspend the cluster-name cluster?',
