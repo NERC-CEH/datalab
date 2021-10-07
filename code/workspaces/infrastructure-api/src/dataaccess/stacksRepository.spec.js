@@ -74,9 +74,10 @@ describe('stacksRepository', () => {
     expect(stack).toMatchSnapshot();
   }));
 
-  it('userCanRestartStack only if listed user', async () => {
+  it('userCanRestartStack only if listed user or instance admin', async () => {
     expect(await stacksRepository.userCanRestartStack(project, { sub: 'username' }, 'Stack 1')).toEqual(true);
     expect(await stacksRepository.userCanRestartStack(project, { sub: 'someone-else' }, 'Stack 1')).toEqual(false);
+    expect(await stacksRepository.userCanRestartStack(project, { sub: 'someone-else', roles: { instanceAdmin: true } }, 'Stack 1')).toEqual(true);
   });
 
   it('createOrUpdate should query for stacks with same name', () => {
