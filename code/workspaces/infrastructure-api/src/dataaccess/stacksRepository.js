@@ -139,7 +139,7 @@ function deleteStack(projectKey, user, stack) {
 
 async function userCanDeleteStack(projectKey, user, name) {
   const stack = await getOneByName(projectKey, user, name);
-  return stack.users && stack.users.includes(user.sub);
+  return (stack.users && stack.users.includes(user.sub)) || !!(user.roles && user.roles.instanceAdmin);
 }
 
 async function userCanRestartStack(projectKey, user, name) {
