@@ -44,6 +44,7 @@ function loadClusters(projectKey) {
         schedulerAddress
         condaPath
         maxWorkerMemoryGb
+        status
       }
     }
   `;
@@ -52,4 +53,17 @@ function loadClusters(projectKey) {
     .then(errorHandler('data.clusters'));
 }
 
-export default { createCluster, deleteCluster, loadClusters };
+const scaleCluster = async (cluster, replicas) => {
+  const operation = replicas > 0 ? 'scaleupCluster' : 'scaledownCluster';
+  const mutation = `
+    ScaleCluster($cluster: ScaleRequest) {
+      ${operation}(cluster: $cluster) {
+        message
+      }
+    }`;
+
+  const response = await gqlMutation(mutation, { cluster });
+  return errorHandler(`data.${replicas > 0 ? 'scaleupCluster' : 'scaledownCluster'}`)(response);
+};
+
+export default { createCluster, deleteCluster, loadClusters, scaleCluster };

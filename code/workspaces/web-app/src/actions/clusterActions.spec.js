@@ -1,5 +1,11 @@
 import clusterService from '../api/clusterService';
-import clusterActions, { CREATE_CLUSTER_ACTION, DELETE_CLUSTER_ACTION, LOAD_CLUSTERS_ACTION } from './clusterActions';
+import clusterActions, {
+  CREATE_CLUSTER_ACTION,
+  DELETE_CLUSTER_ACTION,
+  LOAD_CLUSTERS_ACTION,
+  SCALE_CLUSTER_ACTION,
+  UPDATE_CLUSTERS_ACTION,
+} from './clusterActions';
 
 jest.mock('../api/clusterService');
 
@@ -11,6 +17,9 @@ clusterService.deleteCluster = deleteClusterMock;
 
 const loadClustersMock = jest.fn();
 clusterService.loadClusters = loadClustersMock;
+
+const scaleClusterMock = jest.fn();
+clusterService.scaleCluster = scaleClusterMock;
 
 const getClusterCreationObject = () => ({
   displayName: 'Test Cluster',
@@ -24,7 +33,7 @@ const getClusterCreationObject = () => ({
   maxWorkerCpu: 1,
 });
 
-const getClusterDeletionObject = () => ({
+const getSimpleClusterObject = () => ({
   name: 'test-cluster',
   type: 'DASK',
   projectKey: 'test-project',
@@ -53,7 +62,7 @@ describe('clusterActions', () => {
     it('makes correct call to service function and provides result in action payload', () => {
       const deleteClusterMockReturnValue = 'cluster-deleted';
       deleteClusterMock.mockReturnValueOnce(deleteClusterMockReturnValue);
-      const clusterDeletionObject = getClusterDeletionObject();
+      const clusterDeletionObject = getSimpleClusterObject();
 
       const actionReturn = clusterActions.deleteCluster(clusterDeletionObject);
 
@@ -77,6 +86,34 @@ describe('clusterActions', () => {
     });
   });
 
+  describe('updateClusters', () => {
+    it('makes correct call to service function and provides result in action payload', async () => {
+      const projectKey = 'project-key';
+      const loadClustersMockReturnValue = 'clusters-loaded';
+      loadClustersMock.mockResolvedValueOnce(loadClustersMockReturnValue);
+
+      const actionReturn = clusterActions.updateClusters(projectKey);
+
+      expect(loadClustersMock).toHaveBeenCalledWith(projectKey);
+      expect(actionReturn.type).toEqual(UPDATE_CLUSTERS_ACTION);
+      expect(await actionReturn.payload).toEqual({ clusters: loadClustersMockReturnValue, projectKey });
+    });
+  });
+
+  describe('scaleCluster', () => {
+    it('makes correct call to service function and provides result in action payload', async () => {
+      const scaleClusterMockReturnValue = 'cluster-scaled';
+      scaleClusterMock.mockResolvedValueOnce(scaleClusterMockReturnValue);
+      const clusterScaleObject = getSimpleClusterObject();
+
+      const actionReturn = clusterActions.scaleCluster(clusterScaleObject, 0);
+
+      expect(scaleClusterMock).toHaveBeenCalledWith(clusterScaleObject, 0);
+      expect(actionReturn.type).toEqual(SCALE_CLUSTER_ACTION);
+      expect(await actionReturn.payload).toEqual(scaleClusterMockReturnValue);
+    });
+  });
+
   describe('exports correct values for', () => {
     it('CREATE_CLUSTER', () => {
       expect(CREATE_CLUSTER_ACTION).toEqual('CREATE_CLUSTER_ACTION');
@@ -88,6 +125,14 @@ describe('clusterActions', () => {
 
     it('LOAD_CLUSTERS', () => {
       expect(LOAD_CLUSTERS_ACTION).toEqual('LOAD_CLUSTERS_ACTION');
+    });
+
+    it('UPDATE_CLUSTERS', () => {
+      expect(UPDATE_CLUSTERS_ACTION).toEqual('UPDATE_CLUSTERS_ACTION');
+    });
+
+    it('SCALE_CLUSTERS', () => {
+      expect(SCALE_CLUSTER_ACTION).toEqual('SCALE_CLUSTER_ACTION');
     });
   });
 });

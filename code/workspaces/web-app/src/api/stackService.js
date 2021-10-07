@@ -87,7 +87,7 @@ function restartStack(stack) {
 const scaleStack = async (stack, replicas) => {
   const operation = replicas > 0 ? 'scaleupStack' : 'scaledownStack';
   const mutation = `
-    ScaleStack($stack: StackScaleRequest) {
+    ScaleStack($stack: ScaleRequest) {
       ${operation}(stack: $stack) {
         message
       }

@@ -76,10 +76,10 @@ type Mutation {
     restartStack(stack: StackRestartRequest): Stack
 
     # Scale up a stack
-    scaleupStack(stack: StackScaleRequest): GeneralResponseMessage
+    scaleupStack(stack: ScaleRequest): GeneralResponseMessage
 
     # Scale down a stack
-    scaledownStack(stack: StackScaleRequest): GeneralResponseMessage
+    scaledownStack(stack: ScaleRequest): GeneralResponseMessage
 
     # Create a new data store
     createDataStore(projectKey: String!, dataStore: DataStorageCreationRequest): DataStore
@@ -131,6 +131,12 @@ type Mutation {
 
     # Delete a cluster
     deleteCluster(cluster: ClusterDeletionRequest!): Cluster!
+
+    # Scale up a cluster
+    scaleupCluster(cluster: ScaleRequest): GeneralResponseMessage
+
+    # Scale down a cluster
+    scaledownCluster(cluster: ScaleRequest): GeneralResponseMessage
 
     # Create a message
     createMessage(message: MessageCreationRequest!): Message!
@@ -242,8 +248,8 @@ input StackRestartRequest {
     type: String
 }
 
-# Type to describe the mutation for scaling a Stack.
-input StackScaleRequest {
+# Type to describe the mutation for scaling a Stack or Cluster.
+input ScaleRequest {
     projectKey: String
     name: String
     type: String
@@ -448,6 +454,7 @@ type Cluster {
     maxWorkerMemoryGb: Float!
     maxWorkerCpu: Float!
     schedulerAddress: String
+    status: StatusType
 }
 
 # Type to describe a message

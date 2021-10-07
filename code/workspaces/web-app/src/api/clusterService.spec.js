@@ -98,4 +98,43 @@ describe('clusterService', () => {
       expect(error).toEqual({ error: 'expected error' });
     });
   });
+
+  describe('scaleCluster', () => {
+    it('should build the correct mutation to scale down', async () => {
+      const data = { cluster: { name: 'name', projectKey: 'test', type: 'DASK' } };
+      mockClient.prepareSuccess(data);
+
+      const response = await clusterService.scaleCluster(data.cluster, 0);
+      expect(response).toEqual(data.scaledownCluster);
+      expect(mockClient.lastQuery()).toEqual(`
+    ScaleCluster($cluster: ScaleRequest) {
+      scaledownCluster(cluster: $cluster) {
+        message
+      }
+    }`);
+      expect(mockClient.lastOptions()).toEqual(data);
+    });
+
+    it('should build the correct mutation to scale up', async () => {
+      const data = { cluster: { name: 'name', projectKey: 'test', type: 'DASK' } };
+      mockClient.prepareSuccess(data);
+
+      const response = await clusterService.scaleCluster(data.cluster, 1);
+      expect(response).toEqual(data.scaleupCluster);
+      expect(mockClient.lastQuery()).toEqual(`
+    ScaleCluster($cluster: ScaleRequest) {
+      scaleupCluster(cluster: $cluster) {
+        message
+      }
+    }`);
+      expect(mockClient.lastOptions()).toEqual(data);
+    });
+
+    it('should throw an error if the mutation fails', async () => {
+      const data = { cluster: { name: 'name', projectKey: 'test', type: 'DASK' } };
+      mockClient.prepareFailure('expected error');
+
+      await expect(clusterService.scaleCluster(data.cluster, 1)).rejects.toEqual({ error: 'expected error' });
+    });
+  });
 });

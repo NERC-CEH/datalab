@@ -126,4 +126,56 @@ describe('clustersService', () => {
       expect(getMock.headers.authorization).toEqual(token);
     });
   });
+
+  describe('scaleDownCluster', () => {
+    const clusterRequest = {
+      type: 'DASK',
+      projectKey: 'test-project',
+      name: 'cluster1',
+    };
+    const clusterResponse = {
+      message: 'OK',
+    };
+    const { scaleDownCluster } = clustersService;
+
+    it('calls infrastructure-api to scale down a cluster', async () => {
+      httpMock
+        .onPut(`${infrastructureApi}/clusters/test-project/scaledown`)
+        .reply(200, clusterResponse);
+
+      const returnValue = await scaleDownCluster(clusterRequest, token);
+
+      expect(returnValue).toEqual(clusterResponse);
+      expect(httpMock.history.put.length).toBe(1);
+      const [putMock] = httpMock.history.put;
+      expect(putMock.data).toEqual(JSON.stringify(clusterRequest));
+      expect(putMock.headers.authorization).toEqual(token);
+    });
+  });
+
+  describe('scaleUpCluster', () => {
+    const clusterRequest = {
+      type: 'DASK',
+      projectKey: 'test-project',
+      name: 'cluster1',
+    };
+    const clusterResponse = {
+      message: 'OK',
+    };
+    const { scaleUpCluster } = clustersService;
+
+    it('calls infrastructure-api to scale up a cluster', async () => {
+      httpMock
+        .onPut(`${infrastructureApi}/clusters/test-project/scaleup`)
+        .reply(200, clusterResponse);
+
+      const returnValue = await scaleUpCluster(clusterRequest, token);
+
+      expect(returnValue).toEqual(clusterResponse);
+      expect(httpMock.history.put.length).toBe(1);
+      const [putMock] = httpMock.history.put;
+      expect(putMock.data).toEqual(JSON.stringify(clusterRequest));
+      expect(putMock.headers.authorization).toEqual(token);
+    });
+  });
 });

@@ -40,9 +40,29 @@ async function getClustersByMount(projectKey, mount, token) {
   return data;
 }
 
+const scaleDownCluster = async (cluster, token) => {
+  const { data } = await infrastructureApi().put(
+    `/${cluster.projectKey}/scaledown`,
+    cluster,
+    requestConfig(token),
+  );
+  return data;
+};
+
+const scaleUpCluster = async (cluster, token) => {
+  const { data } = await infrastructureApi().put(
+    `/${cluster.projectKey}/scaleup`,
+    cluster,
+    requestConfig(token),
+  );
+  return data;
+};
+
 export default {
   createCluster: wrapWithAxiosErrorWrapper('Error creating cluster.', createCluster),
   deleteCluster: wrapWithAxiosErrorWrapper('Error deleting cluster.', deleteCluster),
   getClusters: wrapWithAxiosErrorWrapper('Error getting clusters.', getClusters),
   getClustersByMount: wrapWithAxiosErrorWrapper('Error getting clusters by mount.', getClustersByMount),
+  scaleDownCluster: wrapWithAxiosErrorWrapper('Error scaling down cluster.', scaleDownCluster),
+  scaleUpCluster: wrapWithAxiosErrorWrapper('Error scaling up cluster.', scaleUpCluster),
 };
