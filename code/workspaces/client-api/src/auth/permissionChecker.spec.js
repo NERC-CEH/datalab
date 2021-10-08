@@ -64,7 +64,7 @@ describe('Permission Checker', () => {
       await projectPermissionWrapper({ projectKey: 'project2' }, 'elementName:actionName', admin, done);
 
       expect(actionMock).toHaveBeenCalledTimes(1);
-      expect(actionMock).toHaveBeenCalledWith('value');
+      expect(actionMock).toHaveBeenCalledWith('value1');
     });
   });
 });
