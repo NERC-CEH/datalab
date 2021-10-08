@@ -1,3 +1,4 @@
 #!/bin/bash
 set -e
-cd ./docs && yarn audit --level=high --groups dependencies
+cd ./code && yarn audit --level=high --groups dependencies
+
