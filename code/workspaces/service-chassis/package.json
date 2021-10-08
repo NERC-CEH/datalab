@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "express-prometheus-middleware": "^0.6.1",
-    "express-validator": "6.1.1",
+    "express-validator": "6.12.2",
     "prom-client": "^11.5.3"
   },
   "devDependencies": {
