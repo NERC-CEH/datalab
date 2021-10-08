@@ -13,6 +13,7 @@ exports[`ProjectClustersContainer renders correct snapshot for Dask clusters 1`]
   editPermission="projects:project-key:clusters:edit"
   openCreationForm={[Function]}
   openPermission="projects:project-key:clusters:open"
+  scalePermission="projects:project-key:clusters:scale"
   scaleStack={[Function]}
   showCreateButton={true}
   stacks={
@@ -49,6 +50,7 @@ exports[`ProjectClustersContainer renders correct snapshot for Spark clusters 1`
   editPermission="projects:project-key:clusters:edit"
   openCreationForm={[Function]}
   openPermission="projects:project-key:clusters:open"
+  scalePermission="projects:project-key:clusters:scale"
   scaleStack={[Function]}
   showCreateButton={true}
   stacks={
@@ -84,6 +86,7 @@ exports[`ProjectClustersContainer renders correct snapshot for all clusters 1`] 
   deleteStack={[Function]}
   editPermission="projects:project-key:clusters:edit"
   openPermission="projects:project-key:clusters:open"
+  scalePermission="projects:project-key:clusters:scale"
   scaleStack={[Function]}
   showCreateButton={true}
   stacks={

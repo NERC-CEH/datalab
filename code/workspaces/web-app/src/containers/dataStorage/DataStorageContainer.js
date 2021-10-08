@@ -146,8 +146,8 @@ class DataStorageContainer extends Component {
         typeName={STORAGE_TYPE_NAME}
         typeNamePlural={STORAGE_TYPE_NAME_PLURAL}
         openStack={this.openDataStore}
-        deleteStack={this.props.modifyData ? this.chooseDialogue : undefined}
-        editStack={this.props.modifyData ? this.editDataStore : undefined}
+        deleteStack={this.chooseDialogue}
+        editStack={this.editDataStore}
         openCreationForm={this.openCreationForm}
         showCreateButton={this.props.modifyData}
         userPermissions={() => this.props.userPermissions}

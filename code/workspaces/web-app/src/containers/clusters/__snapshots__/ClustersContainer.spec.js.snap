@@ -13,6 +13,7 @@ exports[`ClustersContainer renders correct snapshot 1`] = `
   editPermission="projects:current-project:clusters:edit"
   openCreationForm={[Function]}
   openPermission="projects:current-project:clusters:open"
+  scalePermission="projects:current-project:clusters:scale"
   scaleStack={[Function]}
   showCreateButton={true}
   stacks={
