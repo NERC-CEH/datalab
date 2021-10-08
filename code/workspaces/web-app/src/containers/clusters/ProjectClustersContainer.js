@@ -19,7 +19,9 @@ import assetRepoActions from '../../actions/assetRepoActions';
 
 const refreshInterval = 15000;
 
-const { projectPermissions: { PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT, PROJECT_KEY_CLUSTERS_OPEN } } = permissionTypes;
+const { projectPermissions: {
+  PROJECT_KEY_CLUSTERS_CREATE, PROJECT_KEY_CLUSTERS_DELETE, PROJECT_KEY_CLUSTERS_EDIT, PROJECT_KEY_CLUSTERS_OPEN, PROJECT_KEY_CLUSTERS_SCALE,
+} } = permissionTypes;
 
 export const FORM_NAME = 'createCluster';
 
@@ -115,12 +117,13 @@ const ProjectClustersContainer = ({ clusterType, projectKey, userPermissions, mo
       openCreationForm={openCreationForm}
       createPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_CREATE, projectKey)}
       showCreateButton={modifyData}
-      deleteStack={modifyData ? confirmDeleteCluster(dispatch) : undefined}
-      scaleStack={modifyData ? confirmScaleCluster(dispatch) : undefined}
+      deleteStack={confirmDeleteCluster(dispatch)}
+      scaleStack={confirmScaleCluster(dispatch)}
       copySnippets={copySnippets}
       deletePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_DELETE, projectKey)}
       editPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_EDIT, projectKey)}
       openPermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_OPEN, projectKey)}
+      scalePermission={projectKeyPermission(PROJECT_KEY_CLUSTERS_SCALE, projectKey)}
     />
   );
 };
