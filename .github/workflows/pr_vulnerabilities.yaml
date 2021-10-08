@@ -1,0 +1,30 @@
+name: PR Yarn Audit
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/pr_api.yaml"
+      - "build/**"
+      - "code/yarn.lock"
+      - "code/workspaces/common/**"
+      - "code/workspaces/client-api/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ env.CONTAINER }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-cache-${{ env.CONTAINER }}-
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Check vulnerabilities
+        run: ./build/check-dependencies.sh
+        shell: bash
