@@ -1,7 +1,4 @@
-name: PR API action
-
-env:
-  CONTAINER: api
+name: PR Yarn Audit
 
 on:
   pull_request:
@@ -28,6 +25,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12"
-      - name: Validate build
-        run: ./build/validate-build.sh ${{ env.CONTAINER }}
+      - name: Check vulnerabilities
+        run: ./build/check-dependencies.sh
         shell: bash
