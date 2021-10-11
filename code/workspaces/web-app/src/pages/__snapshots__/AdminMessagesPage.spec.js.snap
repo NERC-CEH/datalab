@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminMessagesPage renders correct snapshot 1`] = `
+<WithStyles(Page)
+  title="Messages"
+>
+  <mockConstructor
+    userPermissions={
+      Array [
+        "expectedPermission",
+      ]
+    }
+  />
+</WithStyles(Page)>
+`;
