@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminMessage renders correctly 1`] = `
+<div>
+  <div
+    class="MuiGrid-root AdminMessage-grid-1 MuiGrid-container MuiGrid-spacing-xs-2"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+    >
+      <div>
+        some message
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Preview
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Delete
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="AdminMessage-date-2"
+      >
+        Expires: Sat, 25 Dec 2021 00:00:00 GMT
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      hidden=""
+      id="messagePreview"
+    >
+      Message
+    </div>
+  </div>
+</div>
+`;

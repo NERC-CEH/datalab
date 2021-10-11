@@ -12,6 +12,7 @@ const AdminSideBar = ({ classes }) => (
       <SideBarGroup title='Administration'>
         <SideBarButton to="/admin/resources" label="Resources" icon="dashboard"></SideBarButton>
         <SideBarButton to="/admin/users" label="Users" icon="people"></SideBarButton>
+        <SideBarButton to="/admin/messages" label="Messages" icon="notifications"></SideBarButton>
       </SideBarGroup>
     </List>
   </div>

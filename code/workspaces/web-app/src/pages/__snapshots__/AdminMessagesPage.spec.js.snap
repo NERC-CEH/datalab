@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminMessagesPage renders correct snapshot 1`] = `
+<div>
+  <div
+    class="Page-pageTemplate-1"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h4"
+    >
+      Messages
+    </h4>
+    <div
+      class="Page-contentArea-2"
+    >
+      AdminMessagesContainer
+    </div>
+    <div>
+      <hr
+        class="MuiDivider-root Footer-divider-33"
+      />
+      <p
+        class="MuiTypography-root Footer-versionText-34 MuiTypography-body2"
+      >
+        Version: undefined
+      </p>
+    </div>
+  </div>
+</div>
+`;

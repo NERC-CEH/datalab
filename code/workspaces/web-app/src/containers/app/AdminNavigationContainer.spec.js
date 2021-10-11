@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import AdminNavigationContainer from './AdminNavigationContainer';
 
+jest.mock('../../pages/AdminMessagesPage', () => () => (<>AdminMessagesPage</>));
+
 describe('AdminNavigationContainer', () => {
   const shallowRender = () => shallow(<AdminNavigationContainer />);
 

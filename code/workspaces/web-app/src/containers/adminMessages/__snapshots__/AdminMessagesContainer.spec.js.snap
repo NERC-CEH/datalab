@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminMessagesContainer renders correctly 1`] = `
+<div>
+  <div>
+    AdminMessage
+    AdminMessage
+  </div>
+</div>
+`;

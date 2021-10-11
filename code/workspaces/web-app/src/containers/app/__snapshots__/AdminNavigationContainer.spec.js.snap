@@ -17,6 +17,12 @@ exports[`AdminNavigationContainer renders to match snapshot passing correct prop
       path="/admin/users"
       permission="system:instance:admin"
     />
+    <RoutePermissionWrapper
+      component={[Function]}
+      exact={true}
+      path="/admin/messages"
+      permission="system:instance:admin"
+    />
     <Redirect
       exact={true}
       from="/admin"
