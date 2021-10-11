@@ -12,6 +12,7 @@ jest.mock('react-markdown', () => ({
 
 jest.mock('react-redux');
 jest.mock('../../actions/messagesActions');
+jest.mock('@material-ui/icons/ErrorOutline', () => () => (<div>ErrorOutlineIconMock</div>));
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 
 const message = {
