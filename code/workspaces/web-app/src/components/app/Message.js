@@ -41,7 +41,7 @@ const Message = ({ classes, message, allowDismiss = true }) => {
         {message.message}
       </ReactMarkdown>
     </div>
-    {allowDismiss ? <Button className={classes.button} onClick={handleClick} color={'secondary'}>Dismiss</Button> : undefined}
+    {allowDismiss && <Button className={classes.button} onClick={handleClick} color={'secondary'}>Dismiss</Button>}
   </div>
   );
 };
