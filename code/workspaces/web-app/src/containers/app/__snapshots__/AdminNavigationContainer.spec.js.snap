@@ -18,7 +18,7 @@ exports[`AdminNavigationContainer renders to match snapshot passing correct prop
       permission="system:instance:admin"
     />
     <RoutePermissionWrapper
-      component={[MockFunction]}
+      component={[Function]}
       exact={true}
       path="/admin/messages"
       permission="system:instance:admin"

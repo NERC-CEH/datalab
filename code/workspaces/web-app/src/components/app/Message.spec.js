@@ -5,10 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import Message from './Message';
 import messagesActions from '../../actions/messagesActions';
 
-jest.mock('react-markdown', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>React Markdown</>),
-}));
+jest.mock('react-markdown', () => jest.fn(() => (<>React Markdown</>)));
 
 jest.mock('react-redux');
 jest.mock('../../actions/messagesActions');

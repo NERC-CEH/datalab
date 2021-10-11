@@ -5,10 +5,7 @@ import Message from '../../components/app/Message';
 
 configure({ testIdAttribute: 'id' });
 
-jest.mock('../../components/app/Message', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>Message</>),
-}));
+jest.mock('../../components/app/Message', () => jest.fn(() => (<>Message</>)));
 
 const message = {
   message: 'some message',

@@ -2,10 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import AdminMessagesPage from './AdminMessagesPage';
 
-jest.mock('../containers/adminMessages/AdminMessagesContainer', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>AdminMessagesContainer</>),
-}));
+jest.mock('../containers/adminMessages/AdminMessagesContainer', () => () => (<>AdminMessagesContainer</>));
 
 const userPermissions = ['expectedPermission'];
 

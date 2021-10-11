@@ -5,10 +5,7 @@ import AdminMessagesContainer, { confirmDeleteMessage, deleteMessage } from './A
 import AdminMessage from './AdminMessage';
 import notify from '../../components/common/notify';
 
-jest.mock('./AdminMessage', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>AdminMessage</>),
-}));
+jest.mock('./AdminMessage', () => jest.fn(() => <>AdminMessage</>));
 
 jest.mock('react-redux');
 jest.mock('../../components/common/notify', () => ({ success: jest.fn(), error: jest.fn() }));
