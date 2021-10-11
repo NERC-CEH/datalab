@@ -72,3 +72,26 @@ that contains a token. This token is the `internal_token`. The value should be c
 pasted into the `Private Environment`.
 
 Once both tokens have been set all endpoint should be executable.
+
+### Set `internal_token` with Chaining
+
+Instead of needing to copy and paste the `internal_token` manually into the Environment
+variable each time, you can use
+[chaining](https://docs.insomnia.rest/insomnia/chaining-requests)
+in Insomnia to set it automatically from the response of the original token request.
+
+To do this, perform the following:
+
+* Go to your `Private Environment`
+* In the value for `internal_token`, start typing `resp..` -
+  this should make a dropdown appear (CTRL+Space should also work).
+* Choose `Response -> Body Attribute`
+* This will either open a modal form or show an error value -
+  clicking the error value will open the modal form
+* In this form, enter the following details:
+  * Request: `[Auth Service] GET Internal Authorise`
+  * Filter: `$.token`
+* Press `Done`
+
+Now, when you make the `GET Internal Authorise` request with your `access_token`,
+the `internal_token` field should be set automatically.
