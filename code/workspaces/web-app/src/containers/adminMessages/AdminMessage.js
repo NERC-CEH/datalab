@@ -31,7 +31,7 @@ const AdminMessage = ({ classes, message, deleteMessage }) => {
         <div>{message.message}</div>
       </Grid>
       <Grid item xs={1}>
-        <Button onClick={() => showPreview(!preview)} color={'secondary'}>Preview</Button>
+        <Button onClick={() => showPreview(!preview)} color={'primary'} variant={preview ? 'contained' : 'outlined'}>Preview</Button>
       </Grid>
       <Grid item xs={1}>
         <PrimaryActionButton onClick={() => deleteMessage(message)}>Delete</PrimaryActionButton>

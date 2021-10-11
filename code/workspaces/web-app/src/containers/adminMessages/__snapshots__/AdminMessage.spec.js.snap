@@ -16,7 +16,7 @@ exports[`AdminMessage renders correctly 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
         tabindex="0"
         type="button"
       >
