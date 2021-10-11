@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import AdminMessagesPage from './AdminMessagesPage';
 
 jest.mock('../containers/adminMessages/AdminMessagesContainer', () => ({
@@ -10,5 +10,6 @@ jest.mock('../containers/adminMessages/AdminMessagesContainer', () => ({
 const userPermissions = ['expectedPermission'];
 
 it('AdminMessagesPage renders correct snapshot', () => {
-  expect(shallow(<AdminMessagesPage userPermissions={userPermissions} />)).toMatchSnapshot();
+  const wrapper = render(<AdminMessagesPage userPermissions={userPermissions}/>);
+  expect(wrapper.container).toMatchSnapshot();
 });
