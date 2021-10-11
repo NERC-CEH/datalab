@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
@@ -20,11 +20,8 @@ const styles = theme => ({
   },
 });
 
-const AdminMessage = ({ classes, message }) => {
+const AdminMessage = ({ classes, message, deleteMessage }) => {
   const [preview, showPreview] = useState(false);
-  const handleClick = useCallback(() => {
-    console.log('deleting', message.id);
-  }, [message]);
 
   const expiryString = `Expires: ${new Date(message.expiry).toUTCString()}`;
 
@@ -37,7 +34,7 @@ const AdminMessage = ({ classes, message }) => {
         <Button onClick={() => showPreview(!preview)} color={'secondary'}>Preview</Button>
       </Grid>
       <Grid item xs={1}>
-        <PrimaryActionButton onClick={handleClick}>Delete</PrimaryActionButton>
+        <PrimaryActionButton onClick={() => deleteMessage(message)}>Delete</PrimaryActionButton>
       </Grid>
       <Grid item xs={12}>
         <div className={classes.date}>{expiryString}</div>
