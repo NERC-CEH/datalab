@@ -33,7 +33,7 @@ describe('secureRequest', () => {
 
     mock.onPost('http://localhost:8000/api')
       .reply((requestConfig) => {
-        expect(requestConfig.headers['Content-Type']).toBe('application/json;charset=utf-8');
+        expect(requestConfig.headers['Content-Type']).toBe('application/json');
         expect(requestConfig.headers.Authorization).toBe('Bearer expectedAccessToken');
         expect(requestConfig.headers.Identity).toBe(JSON.stringify(headerIdentity));
         return [200, { data: 'value' }];
