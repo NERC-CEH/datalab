@@ -8,6 +8,10 @@ on:
       - "code/yarn.lock"
       - "code/workspaces/common/**"
       - "code/workspaces/client-api/**"
+      - "code/workspaces/infrastructure-api/**"
+      - "code/workspaces/service-chassis/**"
+      - "code/workspaces/auth-service/**"
+      - "code/workspaces/web-app/**"
 
 jobs:
   build:
