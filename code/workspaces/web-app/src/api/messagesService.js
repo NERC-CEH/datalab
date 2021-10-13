@@ -3,8 +3,8 @@ import errorHandler from './graphqlErrorHandler';
 
 async function createMessage(message) {
   const mutation = `
-    CreateMessage($cluster: ClusterCreationRequest!) {
-      createMessage(cluster: $cluster) {
+    CreateMessage($message: MessageCreationRequest!) {
+      createMessage(message: $message) {
         id
         message
         expiry
