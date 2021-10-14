@@ -1,25 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Message renders correct snapshot 1`] = `
-<div
-  className="Message-message-1"
->
-  <ErrorOutlineIcon
-    className="Message-icon-3"
-  />
+<div>
   <div
-    className="Message-text-2"
+    class="Message-message-1"
   >
-    <mockConstructor>
-      Test message
-    </mockConstructor>
+    <div>
+      ErrorOutlineIconMock
+    </div>
+    <div
+      class="Message-text-2"
+    >
+      React Markdown
+    </div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text Message-button-4 MuiButton-textSecondary"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Dismiss
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>
-  <WithStyles(ForwardRef(Button))
-    className="Message-button-4"
-    color="secondary"
-    onClick={[Function]}
-  >
-    Dismiss
-  </WithStyles(ForwardRef(Button))>
 </div>
 `;

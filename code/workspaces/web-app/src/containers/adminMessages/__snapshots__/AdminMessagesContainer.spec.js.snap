@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminMessagesContainer renders correctly 1`] = `
+<div>
+  <div>
+    MessageCreator
+    <div>
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Existing Messages
+      </h5>
+      AdminMessage
+      AdminMessage
+    </div>
+  </div>
+</div>
+`;

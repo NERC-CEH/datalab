@@ -27,7 +27,7 @@ const styles = theme => ({
   },
 });
 
-const Message = ({ classes, message }) => {
+const Message = ({ classes, message, allowDismiss = true }) => {
   const dispatch = useDispatch();
   const handleClick = useCallback(() => {
     dispatch(messagesActions.dismissMessage(message.id));
@@ -41,7 +41,7 @@ const Message = ({ classes, message }) => {
         {message.message}
       </ReactMarkdown>
     </div>
-    <Button className={classes.button} onClick={handleClick} color={'secondary'}>Dismiss</Button>
+    {allowDismiss && <Button className={classes.button} onClick={handleClick} color={'secondary'}>Dismiss</Button>}
   </div>
   );
 };
@@ -54,6 +54,7 @@ Message.propTypes = {
     expiry: PropTypes.string,
     created: PropTypes.string,
   }).isRequired,
+  allowDismiss: PropTypes.bool,
 };
 
 export default withStyles(styles)(Message);

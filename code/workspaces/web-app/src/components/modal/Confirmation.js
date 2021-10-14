@@ -26,13 +26,13 @@ const bodyToContent = (body) => {
   );
 };
 
-const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm Deletion', confirmIcon = 'delete' }) => (
+const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm Deletion', confirmIcon = 'delete', danger = true }) => (
   <Dialog open={true} maxWidth="md">
     <DialogTitle>{title}</DialogTitle>
     {bodyToContent(body)}
     <DialogActions>
       <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
-      <IconButton danger onClick={onSubmit} icon={confirmIcon} disabled={onSubmit === undefined}>{confirmText}</IconButton>
+      <IconButton danger={danger} onClick={onSubmit} icon={confirmIcon} disabled={onSubmit === undefined}>{confirmText}</IconButton>
     </DialogActions>
   </Dialog>
 );

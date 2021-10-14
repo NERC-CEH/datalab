@@ -1,13 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import MessageBanner from './MessageBanner';
+import Message from './Message';
 
 jest.mock('react-redux');
-jest.mock('./Message', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>Message</>),
-}));
+jest.mock('./Message', () => jest.fn(() => (<>Message</>)));
+
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 
 const message1 = {
@@ -26,13 +25,12 @@ const messages = [message1, message2];
 useSelector.mockReturnValue(messages);
 
 describe('MessageBanner', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<MessageBanner/>)).toMatchSnapshot();
+    const wrapper = render(<MessageBanner/>);
+    expect(wrapper.container).toMatchSnapshot();
+
+    expect(Message).toHaveBeenCalledTimes(2);
+    expect(Message).toHaveBeenCalledWith({ message: message1 }, {});
+    expect(Message).toHaveBeenCalledWith({ message: message2 }, {});
   });
 });
