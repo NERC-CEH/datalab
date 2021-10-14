@@ -70,10 +70,10 @@ const ProjectSideBar = ({ classes }) => {
   );
 
   const isLoading = users.fetching.inProgress || users.value.length === 0;
-  const isInstanceAdmin = userPermissions.findIndex(p => p === permissionTypes.SYSTEM_INSTANCE_ADMIN) > -1;
+  const isInstanceAdmin = userPermissions.includes(permissionTypes.SYSTEM_INSTANCE_ADMIN);
 
   const isViewer = !isInstanceAdmin
-                   && (isLoading || (users && users.value && users.value.findIndex(u => u.userId === currentUserId && u.role === 'viewer') > -1));
+                   && (isLoading || (users && users.value && users.value.some(u => u.userId === currentUserId && u.role === 'viewer')));
 
   return (<div className={classes.sideBar}>
     <List className={classes.itemList}>
