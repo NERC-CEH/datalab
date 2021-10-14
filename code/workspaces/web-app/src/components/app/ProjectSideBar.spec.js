@@ -1,39 +1,76 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { permissionTypes } from 'common';
-import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
-import ProjectSideBar, { PureSideBar } from './ProjectSideBar';
+import {
+  renderWithState,
+  buildDefaultTestState,
+} from '../../testUtils/renderWithState';
+import ProjectSideBar from './ProjectSideBar';
 
-jest.mock('../../hooks/currentProjectHooks');
+jest.mock('./ProjectSwitcher', () => () => <div>Project Switcher Mock</div>);
+jest.mock('./SideBarButton', () => props => <div {...props}>{props.label}</div>);
 
 const { PROJECT_NAMESPACE } = permissionTypes;
 
-const classes = {
-  itemList: 'itemList',
-  sideBar: 'sideBar',
-};
-
-const userPermissions = [
-  `${PROJECT_NAMESPACE}:project99:storage:list`,
-  `${PROJECT_NAMESPACE}:project99:stacks:list`,
-  `${PROJECT_NAMESPACE}:project99:settings:list`,
-  `${PROJECT_NAMESPACE}:project99:clusters:list`,
-];
-
-const projectKey = { fetching: false, error: null, value: 'project99' };
-
-useCurrentProjectKey.mockReturnValue(projectKey);
-
 describe('SideBar', () => {
-  it('renders correctly passing props to children', () => {
-    const props = { userPermissions, projectKey, classes };
-    expect(shallow(<ProjectSideBar {...props} />)).toMatchSnapshot();
-  });
-});
+  let state;
+  let props;
 
-describe('PureSideBar', () => {
-  it('correctly renders correct snapshot', () => {
-    const props = { userPermissions, projectKey, classes };
-    expect(shallow(<PureSideBar {...props} />)).toMatchSnapshot();
+  beforeEach(() => {
+    state = buildDefaultTestState();
+    state.currentProject = {
+      value: {
+        key: 'project99',
+      },
+    };
+
+    const userPermissions = [
+      `${PROJECT_NAMESPACE}:project99:storage:list`,
+      `${PROJECT_NAMESPACE}:project99:stacks:list`,
+      `${PROJECT_NAMESPACE}:project99:settings:list`,
+      `${PROJECT_NAMESPACE}:project99:clusters:list`,
+    ];
+
+    state.authentication.permissions.value = userPermissions;
+
+    props = {
+      projectKey: 'project99',
+      classes: {
+        itemList: 'itemList',
+        sideBar: 'sideBar',
+      },
+    };
+  });
+
+  it('renders correctly passing props to children', () => {
+    const { wrapper } = renderWithState(state, ProjectSideBar, props);
+    expect(wrapper.container).toMatchSnapshot();
+  });
+
+  it('does not render menu items if loading', () => {
+    state.projectUsers.fetching.inProgress = true;
+
+    const { wrapper } = renderWithState(state, ProjectSideBar, props);
+    expect(wrapper.container).toMatchSnapshot();
+  });
+
+  it('does not render settings if not admin', () => {
+    state.authentication.permissions.value = [
+      `${PROJECT_NAMESPACE}:project99:storage:list`,
+      `${PROJECT_NAMESPACE}:project99:stacks:list`,
+      `${PROJECT_NAMESPACE}:project99:clusters:list`,
+    ];
+    const { wrapper } = renderWithState(state, ProjectSideBar, props);
+    expect(wrapper.queryByText('Settings')).toBeNull();
+  });
+
+  it('does not render analysis if viewer but still shows sites', () => {
+    state.authentication.permissions.value = [
+      `${PROJECT_NAMESPACE}:project99:stacks:list`,
+    ];
+    state.projectUsers.value[0].role = 'viewer';
+    const { wrapper } = renderWithState(state, ProjectSideBar, props);
+    expect(wrapper.queryByText('Analysis')).toBeNull();
+    expect(wrapper.queryByText('Notebooks')).toBeNull();
+    expect(wrapper.queryByText('Sites')).not.toBeNull();
   });
 });

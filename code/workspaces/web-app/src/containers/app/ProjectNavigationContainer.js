@@ -54,7 +54,7 @@ function PureProjectNavigationContainer({ path, promisedUserPermissions, project
 
   return (
     <SideBarNavigation sideBar={
-      <ProjectSideBar userPermissions={promisedUserPermissions.value} />
+      <ProjectSideBar />
     }>
       <Switch>
         <Route exact path={`${path}/info`}>

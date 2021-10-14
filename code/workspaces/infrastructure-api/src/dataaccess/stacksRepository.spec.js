@@ -4,19 +4,28 @@ import databaseMock from './testUtil/databaseMock';
 
 jest.mock('../config/database');
 
-const user = { sub: 'username' };
 const project = 'expectedProject';
+const user = {
+  sub: 'username',
+  roles: {
+    instanceAdmin: false,
+    projectRoles: [
+      { projectKey: project, role: 'admin' },
+      { projectKey: 'viewerOnlyProject', role: 'admin' },
+    ],
+  },
+};
 const testStacks = [
   { name: 'Stack 1', users: [user.sub] },
   { name: 'Stack 2' },
 ];
 
 const mockDatabase = databaseMock(testStacks);
-database.getModel = mockDatabase;
 
 describe('stacksRepository', () => {
   beforeEach(() => {
     mockDatabase().clear();
+    database.getModel = mockDatabase;
   });
 
   it('getAllByUser returns expected snapshot', () => stacksRepository.getAllByUser(user).then((stacks) => {
@@ -120,6 +129,70 @@ describe('stacksRepository', () => {
     expect(mockDatabase().project()).toBe('expectedProject');
     expect(mockDatabase().user()).toBe('username');
     expect(mockDatabase().entity()).toEqual(updatedValues);
+  });
+});
+
+const stacksWithViewableProject = [
+  { name: 'Stack 1', users: [user.sub] },
+  { name: 'Stack 2', users: [user.sub], projectKey: 'viewerOnlyProject', category: 'ANALYSIS' },
+  { name: 'Stack 3', users: [user.sub], projectKey: 'viewerOnlyProject', category: 'PUBLISH' },
+];
+
+const viewer = {
+  sub: 'username',
+  roles: {
+    instanceAdmin: false,
+    projectRoles: [
+      { projectKey: 'viewerOnlyProject', role: 'viewer' },
+    ],
+  },
+};
+
+describe('stacksRepository as viewer', () => {
+  beforeEach(() => {
+    const mockDatabaseWithViewableProject = databaseMock(stacksWithViewableProject);
+    database.getModel = mockDatabaseWithViewableProject;
+  });
+
+  it('getAllByUser filters analysis stacks the user is a viewer for', async () => {
+    const stacksAsAdmin = await stacksRepository.getAllByUser(user);
+    expect(stacksAsAdmin).toHaveLength(3);
+
+    const stacksAsViewer = await stacksRepository.getAllByUser(viewer);
+    expect(stacksAsViewer).toHaveLength(2);
+    expect(stacksAsViewer[0].name).toEqual('Stack 1');
+    expect(stacksAsViewer[1].name).toEqual('Stack 3');
+  });
+
+  it('getAllOwned filters analysis stacks the user is a viewer for', async () => {
+    const stacksAsAdmin = await stacksRepository.getAllOwned(user);
+    expect(stacksAsAdmin).toHaveLength(3);
+
+    const stacksAsViewer = await stacksRepository.getAllOwned(viewer);
+    expect(stacksAsViewer).toHaveLength(2);
+    expect(stacksAsViewer[0].name).toEqual('Stack 1');
+    expect(stacksAsViewer[1].name).toEqual('Stack 3');
+  });
+
+  it('getAllByProject filters analysis stacks the user is a viewer for', async () => {
+    database.getModel = databaseMock(stacksWithViewableProject.filter(s => s.projectKey === 'viewerOnlyProject'));
+
+    const stacksAsAdmin = await stacksRepository.getAllByProject('viewerOnlyProject', user);
+    expect(stacksAsAdmin).toHaveLength(2);
+
+    const stacksAsViewer = await stacksRepository.getAllByProject('viewerOnlyProject', viewer);
+    expect(stacksAsViewer).toHaveLength(1);
+    expect(stacksAsViewer[0].name).toEqual('Stack 3');
+  });
+
+  it('getAllByCategory filters analysis stacks the user is a viewer for', async () => {
+    database.getModel = databaseMock(stacksWithViewableProject.filter(s => s.projectKey === 'viewerOnlyProject' && s.category === 'ANALYSIS'));
+
+    const stacksAsAdmin = await stacksRepository.getAllByCategory('viewerOnlyProject', user, 'ANALYSIS');
+    expect(stacksAsAdmin).toHaveLength(1);
+
+    const stacksAsViewer = await stacksRepository.getAllByCategory('viewerOnlyProject', viewer, 'ANALYSIS');
+    expect(stacksAsViewer).toHaveLength(0);
   });
 });
 

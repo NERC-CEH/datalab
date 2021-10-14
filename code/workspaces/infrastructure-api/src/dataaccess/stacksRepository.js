@@ -1,14 +1,23 @@
+import { PROJECT_VIEWER_ROLE } from 'common/src/permissionTypes';
 import database from '../config/database';
 
 function Stack() {
   return database.getModel('Stack');
 }
 
-function getAllByUser(user) {
-  return Stack()
+const filterViewableStacks = (stacks, user) => {
+  const projectsWhereViewer = user.roles.instanceAdmin ? [] : user.roles.projectRoles.filter(r => r.role === PROJECT_VIEWER_ROLE).map(r => r.projectKey);
+  return stacks.filter(s => s.category === 'PUBLISH' || !projectsWhereViewer.includes(s.projectKey));
+};
+
+async function getAllByUser(user) {
+  const stacks = await Stack()
     .find()
     .filterByUserSharedVisible(user)
     .exec();
+
+  const viewableStacks = filterViewableStacks(stacks, user);
+  return viewableStacks;
 }
 
 function getAllStacks() {
@@ -17,28 +26,37 @@ function getAllStacks() {
     .exec();
 }
 
-function getAllOwned(user) {
-  return Stack()
+async function getAllOwned(user) {
+  const stacks = await Stack()
     .find()
     .filterByUser(user)
     .exec();
+
+  const viewableStacks = filterViewableStacks(stacks, user);
+  return viewableStacks;
 }
 
-function getAllByProject(projectKey, user) {
-  return Stack()
+async function getAllByProject(projectKey, user) {
+  const stacks = await Stack()
     .find()
     .filterByProject(projectKey)
     .filterByUserSharedVisible(user)
     .exec();
+
+  const viewableStacks = filterViewableStacks(stacks, user);
+  return viewableStacks;
 }
 
-function getAllByCategory(projectKey, user, category) {
-  return Stack()
+async function getAllByCategory(projectKey, user, category) {
+  const stacks = await Stack()
     .find()
     .filterByCategory(category)
     .filterByProject(projectKey)
     .filterByUserSharedVisible(user)
     .exec();
+
+  const viewableStacks = filterViewableStacks(stacks, user);
+  return viewableStacks;
 }
 
 function getAllByVolumeMount(projectKey, user, mount, lean = false) {

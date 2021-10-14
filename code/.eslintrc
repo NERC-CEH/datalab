@@ -33,7 +33,8 @@
       "error",
       {
         "devDependencies": [
-          "**/**.spec.js"
+          "**/**.spec.js",
+          "**/testUtils/renderWithState.js"
         ]
       }
     ],

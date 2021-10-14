@@ -1,59 +1,75 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import PermissionWrapper from './ComponentPermissionWrapper';
+import { render } from '@testing-library/react';
+import { renderWithState, buildDefaultTestState } from '../../testUtils/renderWithState';
+import PermissionWrapper, { CurrentUserPermissionWrapper } from './ComponentPermissionWrapper';
 
-describe('ComponentPermissionWrapper', () => {
-  function shallowRender(props) {
-    return shallow(
-      <PermissionWrapper {...props}>
-        <span>Has Permission</span>
-      </PermissionWrapper>,
-    );
-  }
+const renderBasicPermissionWrapper = props => render(
+  <PermissionWrapper {...props}>
+    <span>Has Permission</span>
+  </PermissionWrapper>,
+);
 
-  it('renders children if user has expected permission', () => {
-    // Arrange
-    const props = {
-      userPermissions: ['expected-permission', 'another-permission'],
+describe('PermissionWrapper', () => {
+  let props;
+  beforeEach(() => {
+    props = {
+      userPermissions: [],
       permission: 'expected-permission',
     };
+  });
 
-    // Act
-    const output = shallowRender(props);
+  it('renders children if user has expected permission', () => {
+    props.userPermissions = ['expected-permission', 'another-permission'];
 
-    // Assert
-    expect(output.children().length).toBe(1);
-    expect(output.childAt(0).type()).toBe('span');
-    expect(output.childAt(0).prop('children')).toBe('Has Permission');
+    const wrapper = renderBasicPermissionWrapper(props);
+
+    expect(wrapper.queryByText('Has Permission')).not.toBeNull();
   });
 
   it('renders children if user has instance admin permission', () => {
-    // Arrange
-    const props = {
-      userPermissions: ['system:instance:admin'],
-      permission: 'expected-permission',
-    };
+    props.userPermissions = ['system:instance:admin'];
 
-    // Act
-    const output = shallowRender(props);
+    const wrapper = renderBasicPermissionWrapper(props);
 
-    // Assert
-    expect(output.children().length).toBe(1);
-    expect(output.childAt(0).type()).toBe('span');
-    expect(output.childAt(0).prop('children')).toBe('Has Permission');
+    expect(wrapper.queryByText('Has Permission')).not.toBeNull();
   });
 
   it('renders null if permissions do not match', () => {
-    // Arrange
-    const props = {
-      userPermissions: ['not-matching-permission', 'another-permission'],
+    props.userPermissions = ['not-matching-permission', 'another-permission'];
+
+    const wrapper = renderBasicPermissionWrapper(props);
+
+    expect(wrapper.queryByText('Has Permission')).toBeNull();
+  });
+});
+
+describe('CurrentUserPermissionWrapper', () => {
+  let state;
+  let props;
+  beforeEach(() => {
+    state = buildDefaultTestState();
+
+    props = {
       permission: 'expected-permission',
+      children: [(<span key={test}>Has Current User Permission</span>)],
     };
+  });
 
-    // Act
-    const output = shallowRender(props);
+  it('renders children if permissions on the state are correct', () => {
+    state.authentication.permissions.value = ['expected-permission', 'another-permission'];
+    const { wrapper } = renderWithState(state, CurrentUserPermissionWrapper, props);
+    expect(wrapper.queryByText('Has Current User Permission')).not.toBeNull();
+  });
 
-    // Assert
-    expect(output.children().length).toBe(0);
+  it('renders children if permissions on the state indicate an instance admin', () => {
+    state.authentication.permissions.value = ['system:instance:admin'];
+    const { wrapper } = renderWithState(state, CurrentUserPermissionWrapper, props);
+    expect(wrapper.queryByText('Has Current User Permission')).not.toBeNull();
+  });
+
+  it('renders null if permissions on the state do not match', () => {
+    state.authentication.permissions.value = ['not-matching-permission', 'another-permission'];
+    const { wrapper } = renderWithState(state, CurrentUserPermissionWrapper, props);
+    expect(wrapper.queryByText('Has Current User Permission')).toBeNull();
   });
 });
