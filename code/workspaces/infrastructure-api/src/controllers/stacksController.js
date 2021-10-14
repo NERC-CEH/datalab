@@ -27,22 +27,28 @@ function listByMount(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, listByMountExec);
 }
 
-function listByProjectExec(request, response) {
+const listByProjectExec = async (request, response) => {
   const { user } = request;
   const params = matchedData(request);
-  return stackRepository.getAllByProject(params.projectKey, user)
-    .then(stacks => response.send(stacks))
-    .catch(controllerHelper.handleError(response, 'retrieving by project for', TYPE, undefined));
-}
+  try {
+    const stacks = await stackRepository.getAllByProject(params.projectKey, user);
+    response.send(stacks);
+  } catch (error) {
+    controllerHelper.handleError(response, 'retrieving by project for', TYPE, undefined)(error);
+  }
+};
 
-function listByCategoryExec(request, response) {
+const listByCategoryExec = async (request, response) => {
   const { user } = request;
   const params = matchedData(request);
 
-  return stackRepository.getAllByCategory(params.projectKey, user, params.category)
-    .then(stacks => response.send(stacks))
-    .catch(controllerHelper.handleError(response, 'retrieving by category for', TYPE, undefined));
-}
+  try {
+    const stacks = await stackRepository.getAllByCategory(params.projectKey, user, params.category);
+    response.send(stacks);
+  } catch (error) {
+    controllerHelper.handleError(response, 'retrieving by category for', TYPE, undefined)(error);
+  }
+};
 
 function listByMountExec(request, response) {
   const { user } = request;
