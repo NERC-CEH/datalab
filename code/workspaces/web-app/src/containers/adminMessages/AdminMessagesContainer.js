@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Typography from '@material-ui/core/Typography';
-import MomentUtils from '@date-io/moment';
 import messagesActions from '../../actions/messagesActions';
 import AdminMessage from './AdminMessage';
 import modalDialogActions from '../../actions/modalDialogActions';
@@ -68,13 +66,11 @@ const AdminMessagesContainer = () => {
 
   return (
     <div>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <MessageCreator createMessage={confirmCreateMessage(dispatch)}/>
-        <div>
-          <Typography variant="h5">Existing Messages</Typography>
-          {messages.map(m => <AdminMessage message={m} key={m.id} deleteMessage={confirmDeleteMessage(dispatch)}/>)}
-        </div>
-      </MuiPickersUtilsProvider>
+      <MessageCreator createMessage={confirmCreateMessage(dispatch)}/>
+      <div>
+        <Typography variant="h5">Existing Messages</Typography>
+        {messages.map(m => <AdminMessage message={m} key={m.id} deleteMessage={confirmDeleteMessage(dispatch)}/>)}
+      </div>
     </div>
   );
 };

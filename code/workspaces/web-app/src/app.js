@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 import configureStore from './store/configureStore';
 import theme from './theme';
 import Router from './router';
@@ -26,7 +28,9 @@ async function createApplication() {
   ReactDOM.render(
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
-        <Router />
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Router />
+        </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     </Provider>,
     document.getElementById('root'),
