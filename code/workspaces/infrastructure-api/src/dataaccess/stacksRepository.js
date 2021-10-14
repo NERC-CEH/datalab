@@ -1,3 +1,4 @@
+import { PROJECT_VIEWER_ROLE } from 'common/src/permissionTypes';
 import database from '../config/database';
 
 function Stack() {
@@ -5,7 +6,7 @@ function Stack() {
 }
 
 const filterViewableStacks = (stacks, user) => {
-  const projectsWhereViewer = user.roles.instanceAdmin ? [] : user.roles.projectRoles.filter(r => r.role === 'viewer').map(r => r.projectKey);
+  const projectsWhereViewer = user.roles.instanceAdmin ? [] : user.roles.projectRoles.filter(r => r.role === PROJECT_VIEWER_ROLE).map(r => r.projectKey);
   return stacks.filter(s => s.category === 'PUBLISH' || !projectsWhereViewer.includes(s.projectKey));
 };
 
