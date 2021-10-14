@@ -2,8 +2,8 @@
 
 exports[`messagesService createMessage should build the correct mutation and unpack the results 1`] = `
 "
-    CreateMessage($cluster: ClusterCreationRequest!) {
-      createMessage(cluster: $cluster) {
+    CreateMessage($message: MessageCreationRequest!) {
+      createMessage(message: $message) {
         id
         message
         expiry

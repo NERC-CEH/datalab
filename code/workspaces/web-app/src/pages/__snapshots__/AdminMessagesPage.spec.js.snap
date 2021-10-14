@@ -6,7 +6,7 @@ exports[`AdminMessagesPage renders correct snapshot 1`] = `
     class="Page-pageTemplate-1"
   >
     <h4
-      class="MuiTypography-root MuiTypography-h4"
+      class="MuiTypography-root Page-title-3 MuiTypography-h4"
     >
       Messages
     </h4>
@@ -17,10 +17,10 @@ exports[`AdminMessagesPage renders correct snapshot 1`] = `
     </div>
     <div>
       <hr
-        class="MuiDivider-root Footer-divider-33"
+        class="MuiDivider-root Footer-divider-34"
       />
       <p
-        class="MuiTypography-root Footer-versionText-34 MuiTypography-body2"
+        class="MuiTypography-root Footer-versionText-35 MuiTypography-body2"
       >
         Version: undefined
       </p>

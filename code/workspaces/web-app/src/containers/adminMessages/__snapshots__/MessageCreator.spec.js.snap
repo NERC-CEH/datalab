@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageCreator renders correctly 1`] = `
+<div>
+  <div
+    class="MessageCreator-creator-1"
+  >
+    <h5
+      class="MuiTypography-root MuiTypography-h5"
+    >
+      Create New Message
+    </h5>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+            data-shrink="false"
+          >
+            Message
+          </label>
+          <div
+            class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-multiline MuiInput-multiline"
+          >
+            <textarea
+              aria-invalid="false"
+              class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline MuiInput-inputMultiline"
+              rows="1"
+              style="height: 0px; overflow: hidden;"
+            />
+            <textarea
+              aria-hidden="true"
+              class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline MuiInput-inputMultiline"
+              readonly=""
+              style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); width: 100%;"
+              tabindex="-1"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root"
+          format="MMMM Do HH:mm"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+            data-shrink="true"
+          >
+            Expiry
+          </label>
+          <div
+            class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiInputBase-input MuiInput-input"
+              readonly=""
+              type="text"
+              value="January 8th 00:00"
+            />
+          </div>
+          
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Preview
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled Mui-disabled"
+          disabled=""
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Create
+          </span>
+        </button>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+        hidden=""
+        id="messagePreview"
+      >
+        Message
+      </div>
+    </div>
+  </div>
+</div>
+`;
