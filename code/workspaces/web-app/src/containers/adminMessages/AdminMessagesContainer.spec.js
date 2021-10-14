@@ -92,10 +92,12 @@ describe('confirmCreateMessage', () => {
   const dispatchMock = jest.fn();
 
   it('opens a modal dialog', async () => {
+    const expiryString = 'Fri Jan 01 2021 00:00:00';
+    expiry.toString = jest.fn(() => expiryString);
     const expectedBody = [
       'Would you like to create this message?',
       'Text: some message',
-      'Expiry: Fri Jan 01 2021 00:00:00 GMT+0000 (Greenwich Mean Time)',
+      `Expiry: ${expiryString}`,
     ];
 
     await confirmCreateMessage(dispatchMock)(msgText, expiry, clearData);
