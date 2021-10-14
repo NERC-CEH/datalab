@@ -59,6 +59,7 @@
     "build": "react-scripts build && shx rm -rf dist && shx mv build dist",
     "test": "react-scripts test",
     "test-ci": "CI=true react-scripts test",
+    "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "../../node_modules/.bin/eslint ./src",
     "lint-fix": "../../node_modules/.bin/eslint ./src --fix"
