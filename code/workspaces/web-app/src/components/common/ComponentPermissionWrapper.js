@@ -1,34 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
+import { useCurrentUserPermissions } from '../../hooks/authHooks';
 
-class ComponentWrapper extends Component {
-  hasPermission() {
-    const { userPermissions, permission } = this.props;
-    return userPermissions.includes(permission) || userPermissions.includes(SYSTEM_INSTANCE_ADMIN);
-  }
+export const ComponentWrapper = ({ permission, userPermissions, children, style = undefined, className = undefined }) => {
+  const hasPermission = userPermissions && (userPermissions.includes(permission) || userPermissions.includes(SYSTEM_INSTANCE_ADMIN));
 
-  render() {
-    if (this.hasPermission()) {
-      return (
-        <div style={this.props.style} className={this.props.className}>
-          {this.props.children}
-        </div>
-      );
-    }
+  return hasPermission ? (<div style={style} className={className}>{children}</div>) : null;
+};
 
-    return (null);
-  }
-}
-
-ComponentWrapper.propTypes = {
-  permission: PropTypes.string.isRequired,
-  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]).isRequired,
-  style: PropTypes.object,
+export const CurrentUserPermissionWrapper = (props) => {
+  const userPermissions = useCurrentUserPermissions();
+  return <ComponentWrapper userPermissions={userPermissions.value} {...props} />;
 };
 
 export default ComponentWrapper;
