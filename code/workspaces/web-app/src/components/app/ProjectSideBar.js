@@ -10,7 +10,7 @@ import SideBarButton from './SideBarButton';
 import ProjectSwitcher from './ProjectSwitcher';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
-import { useCurrentUserId } from '../../hooks/authHooks';
+import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
 import sideBarStyles from './sideBarStyles';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 
@@ -53,9 +53,10 @@ const MiscGroup = ({ projectKey }) => (
   </SideBarGroup>
 );
 
-const ProjectSideBar = ({ classes, userPermissions }) => {
+const ProjectSideBar = ({ classes }) => {
   const projectKey = useCurrentProjectKey();
   const currentUserId = useCurrentUserId();
+  const userPermissions = useCurrentUserPermissions().value;
   const users = useProjectUsers();
   const dispatch = useDispatch();
 
@@ -85,7 +86,6 @@ const ProjectSideBar = ({ classes, userPermissions }) => {
 
 ProjectSideBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(sideBarStyles)(ProjectSideBar);

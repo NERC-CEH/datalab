@@ -25,15 +25,7 @@ exports[`ProjectNavigationContainer renders to match snapshot passing correct pr
 
 exports[`PureProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
 <WithStyles(SideBarNavigation)
-  sideBar={
-    <ForwardRef(WithStyles)
-      userPermissions={
-        Array [
-          "projects:testproj:projects:read",
-        ]
-      }
-    />
-  }
+  sideBar={<ForwardRef(WithStyles) />}
 >
   <Switch>
     <Route

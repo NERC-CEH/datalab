@@ -33,7 +33,6 @@ describe('SideBar', () => {
     state.authentication.permissions.value = userPermissions;
 
     props = {
-      userPermissions,
       projectKey: 'project99',
       classes: {
         itemList: 'itemList',
