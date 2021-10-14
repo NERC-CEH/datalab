@@ -17,12 +17,16 @@ const style = theme => ({
   contentArea: {
     flexGrow: 1,
   },
+  title: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
+  },
 });
 
 function Page({ title, children, className, classes }) {
   return (
     <div className={getClassname(classes.pageTemplate, className)}>
-      {title ? <Typography variant="h4">{title}</Typography> : null}
+      {title ? <Typography variant="h4" className={classes.title}>{title}</Typography> : null}
       <div className={classes.contentArea}>
         {children}
       </div>

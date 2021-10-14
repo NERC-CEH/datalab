@@ -9,6 +9,8 @@ const styles = theme => ({
   title: {
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(2),
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
   },
   contentContainer: {
     margin: 'auto',

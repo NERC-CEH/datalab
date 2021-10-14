@@ -18,6 +18,7 @@ exports[`Page renders correctly when title is provided 1`] = `
   className="Page-pageTemplate-1"
 >
   <WithStyles(ForwardRef(Typography))
+    className="Page-title-3"
     variant="h4"
   >
     The Page Title

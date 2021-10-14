@@ -6,6 +6,7 @@ exports[`SettingsPage renders to match snapshot 1`] = `
     Object {
       "contentArea": "Page-contentArea-2",
       "pageTemplate": "Page-pageTemplate-1",
+      "title": "Page-title-3",
     }
   }
   title="Settings"
