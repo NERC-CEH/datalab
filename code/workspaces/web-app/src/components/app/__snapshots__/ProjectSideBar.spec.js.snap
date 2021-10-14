@@ -1,69 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PureSideBar correctly renders correct snapshot 1`] = `
-<div
-  className="sideBar"
->
-  <WithStyles(ForwardRef(List))
-    className="itemList"
+exports[`SideBar does not render menu items if loading 1`] = `
+<div>
+  <div
+    class="ProjectSideBar-sideBar-40 sideBar"
   >
-    <InfoGroup
-      classes={
-        Object {
-          "itemList": "itemList",
-          "sideBar": "sideBar",
-        }
-      }
-      projectKey="project99"
-    />
-    <AnalysisGroup
-      projectKey="project99"
-      userPermissions={
-        Array [
-          "projects:project99:storage:list",
-          "projects:project99:stacks:list",
-          "projects:project99:settings:list",
-          "projects:project99:clusters:list",
-        ]
-      }
-    />
-    <MiscGroup
-      projectKey="project99"
-      userPermissions={
-        Array [
-          "projects:project99:storage:list",
-          "projects:project99:stacks:list",
-          "projects:project99:settings:list",
-          "projects:project99:clusters:list",
-        ]
-      }
-    />
-  </WithStyles(ForwardRef(List))>
+    <ul
+      class="MuiList-root ProjectSideBar-itemList-39 itemList MuiList-padding"
+    >
+      <div
+        class="SideBarGroup-sidebarGroup-45"
+      >
+        <div>
+          Project Switcher Mock
+        </div>
+        <div
+          icon="info_outline"
+          label="Information"
+          to="/projects/project99/info"
+        >
+          Information
+        </div>
+      </div>
+    </ul>
+  </div>
 </div>
 `;
 
 exports[`SideBar renders correctly passing props to children 1`] = `
-<ProjectSideBar
-  classes={
-    Object {
-      "itemList": "ProjectSideBar-itemList-1 itemList",
-      "sideBar": "ProjectSideBar-sideBar-2 sideBar",
-    }
-  }
-  projectKey={
-    Object {
-      "error": null,
-      "fetching": false,
-      "value": "project99",
-    }
-  }
-  userPermissions={
-    Array [
-      "projects:project99:storage:list",
-      "projects:project99:stacks:list",
-      "projects:project99:settings:list",
-      "projects:project99:clusters:list",
-    ]
-  }
-/>
+<div>
+  <div
+    class="ProjectSideBar-sideBar-2 sideBar"
+  >
+    <ul
+      class="MuiList-root ProjectSideBar-itemList-1 itemList MuiList-padding"
+    >
+      <div
+        class="SideBarGroup-sidebarGroup-7"
+      >
+        <div>
+          Project Switcher Mock
+        </div>
+        <div
+          icon="info_outline"
+          label="Information"
+          to="/projects/project99/info"
+        >
+          Information
+        </div>
+      </div>
+      <div
+        class="SideBarGroup-sidebarGroup-7"
+      >
+        <h6
+          class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+        >
+          Analysis
+        </h6>
+        <div>
+          <div
+            icon="book"
+            label="Notebooks"
+            to="/projects/project99/notebooks"
+          >
+            Notebooks
+          </div>
+        </div>
+        <div>
+          <div
+            icon="apps"
+            label="Dask"
+            to="/projects/project99/dask"
+          >
+            Dask
+          </div>
+        </div>
+        <div>
+          <div
+            icon="apps"
+            label="Spark"
+            to="/projects/project99/spark"
+          >
+            Spark
+          </div>
+        </div>
+      </div>
+      <div
+        class="SideBarGroup-sidebarGroup-7"
+      >
+        <div>
+          <div
+            icon="storage"
+            label="Storage"
+            to="/projects/project99/storage"
+          >
+            Storage
+          </div>
+        </div>
+        <div>
+          <div
+            icon="web"
+            label="Sites"
+            to="/projects/project99/publishing"
+          >
+            Sites
+          </div>
+        </div>
+        <div>
+          <div
+            icon="settings"
+            label="Settings"
+            to="/projects/project99/settings"
+          >
+            Settings
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
 `;
