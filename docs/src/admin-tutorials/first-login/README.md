@@ -1,7 +1,7 @@
-# Logging in for the first time to Datalabs as an admin
+# Logging in for the first time
 
 In this tutorial you will log into a new instance of DataLabs for the first time and learn
-how to perform basic activities.
+how to perform basic administration activities.
 
 When setting up a new instance of DataLabs it's useful to familiarise yourself with the various
 functions.

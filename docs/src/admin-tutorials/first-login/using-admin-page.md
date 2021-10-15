@@ -16,7 +16,7 @@ The search bar allows you to search for an individual project if necessary.
 
 The other main function of the admin page is to edit permissions of users. From this tab you
 are able to search for a user either by name or using the pre-defined filters in order to
-see what resources are allocated to them. Additionally you can make them either an
+see what permissions are allocated to them. Additionally you can make them either an
 `Instance Admin` (i.e give them full admin rights to manage the site), or a `Data Manager`,
 which will give them access to the `Asset Repo` in order to add metadata records.
 
