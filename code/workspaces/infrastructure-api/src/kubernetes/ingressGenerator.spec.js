@@ -145,4 +145,27 @@ describe('Ingress generator', () => {
 
     return expect(template).resolves.toMatchSnapshot();
   });
+
+  it('should specify cluster issuer if defined', () => {
+    const options = {
+      name: 'name',
+      projectKey: 'project',
+      ingressName: 'name-ingress',
+      serviceName: 'name-service',
+      port: 80,
+      path: '/resource/project/name',
+    };
+
+    config.get.mockImplementation((s) => {
+      if (s === 'clusterIssuer') {
+        return 'letsencrypt-staging';
+      }
+
+      return origConfig.default.default(s);
+    });
+
+    const template = ingressGenerator.createIngress(options);
+
+    return expect(template).resolves.toMatchSnapshot();
+  });
 });
