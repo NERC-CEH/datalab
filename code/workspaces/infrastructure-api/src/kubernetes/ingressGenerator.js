@@ -19,6 +19,7 @@ function createIngress({ name, projectKey, ingressName, serviceName, port,
     service: { host, paths },
     privateEndpoint,
     proxyHeadersConfigMap,
+    clusterIssuer: config.get('clusterIssuer'),
   };
 
   return generateManifest(context, IngressTemplates.DEFAULT_INGRESS);
