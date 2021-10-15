@@ -99,6 +99,12 @@ const config = convict({
     default: '50g',
     env: 'MAX_BODY_SIZE',
   },
+  clusterIssuer: {
+    doc: 'The cluster issuer to use on ingress, if any',
+    format: 'String',
+    default: '',
+    env: 'CLUSTER_ISSUER',
+  },
 });
 
 export default config;
