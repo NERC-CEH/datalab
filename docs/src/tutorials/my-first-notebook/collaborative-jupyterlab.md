@@ -16,9 +16,11 @@ different colours).
 An example is shown below - user 1 (on the left) is currently typing, so their
 name "Anonymous Chaldene" appears for user 2 (on the right):
 
-![jupyterlab-collaborative-1](../../img/jupyterlab-collaborative-1.png "jupyterlab collaborative 1")
+![jupyterlab-collaborative-1](../../img/jupyterlab-collaborative-1.png
+"jupyterlab collaborative 1")
 
 Then, user 2 (on the right) starts typing, and for user 1 (on the left), they
 appear as "Anonymous Arche".
 
-![jupyterlab-collaborative-2](../../img/jupyterlab-collaborative-2.png "jupyterlab collaborative 2")
+![jupyterlab-collaborative-2](../../img/jupyterlab-collaborative-2.png
+"jupyterlab collaborative 2")
