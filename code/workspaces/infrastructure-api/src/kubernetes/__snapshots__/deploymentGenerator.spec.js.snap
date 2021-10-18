@@ -518,7 +518,8 @@ spec:
             \\"--NotebookApp.token=$(JUPYTER_TOKEN)\\",
             \\"--NotebookApp.allow_origin=project-key-notebook-name.datalabs.localhost\\",
             \\"--NotebookApp.notebook_dir=/data/notebooks/deployment-name\\",
-            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\"]
+            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\",
+            \\"--collaborative\\"]
           ports:
             - containerPort: 8888
               protocol: TCP
