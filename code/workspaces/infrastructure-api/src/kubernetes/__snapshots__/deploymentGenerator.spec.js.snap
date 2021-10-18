@@ -510,7 +510,7 @@ spec:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/jupyterlab:fbf2130-dask-2.30
+        - image: nerc/jupyterlab:a71db3cfe02f-spark-3.1.2
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"start.sh\\",
