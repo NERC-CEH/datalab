@@ -529,7 +529,7 @@ function mutationRequestBody() {
     description: 'long description',
     shared: 'private',
     visible: 'private',
-    version: 'Dask 2.30.0 support',
+    version: 'Dask 2021.6/Spark 3.1.2',
     assetIds: ['test-asset-one', 'test-asset-two'],
   };
 }

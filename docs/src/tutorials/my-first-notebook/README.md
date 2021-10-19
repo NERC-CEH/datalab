@@ -13,4 +13,5 @@ help you in your general use.
 1. [Create project storage](create-project-storage.md)
 1. [Create a JupyterLab](create-a-jupyterlab.md)
 1. [Start a Jupyter notebook](start-a-jupyter-notebook.md)
+1. [Collaborative JupyterLab](collaborative-jupyterlab.md)
 1. [Conclusion](conclusion.md)

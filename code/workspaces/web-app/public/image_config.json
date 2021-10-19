@@ -36,8 +36,8 @@
       "category": "ANALYSIS",
       "versions": [
         {
-          "displayName": "Dask 2.30.0 support",
-          "image": "nerc/jupyterlab:fbf2130-dask-2.30"
+          "displayName": "Dask 2021.6/Spark 3.1.2",
+          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
         }
       ]
     },
@@ -46,8 +46,8 @@
       "category": "ANALYSIS",
       "versions": [
         {
-          "displayName": "Dask 2.30.0 support",
-          "image": "nerc/jupyterlab:fbf2130-dask-2.30"
+          "displayName": "Dask 2021.6/Spark 3.1.2",
+          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
         }
       ]
     },

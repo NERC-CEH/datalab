@@ -510,7 +510,7 @@ spec:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/jupyterlab:fbf2130-dask-2.30
+        - image: nerc/jupyterlab:a71db3cfe02f-spark-3.1.2
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"start.sh\\",
@@ -518,7 +518,8 @@ spec:
             \\"--NotebookApp.token=$(JUPYTER_TOKEN)\\",
             \\"--NotebookApp.allow_origin=project-key-notebook-name.datalabs.localhost\\",
             \\"--NotebookApp.notebook_dir=/data/notebooks/deployment-name\\",
-            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\"]
+            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\",
+            \\"--collaborative\\"]
           ports:
             - containerPort: 8888
               protocol: TCP
