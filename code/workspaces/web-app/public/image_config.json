@@ -70,6 +70,16 @@
         }
       ]
     },
+    "panel": {
+      "displayName": "Panel",
+      "category": "PUBLISH",
+      "versions": [
+        {
+          "displayName": "Latest",
+          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+        }
+      ]
+    },
     "rshiny": {
       "displayName": "RShiny",
       "category": "PUBLISH",
@@ -116,6 +126,16 @@
       ],
       "masterAddress": "spark://spark-master:7077",
       "sharedRLibs": "/data/packages/R/%p/%v"
+    },
+    "voila": {
+      "displayName": "Voila",
+      "category": "PUBLISH",
+      "versions": [
+        {
+          "displayName": "Latest",
+          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+        }
+      ]
     },
     "zeppelin": {
       "displayName": "Zeppelin",
