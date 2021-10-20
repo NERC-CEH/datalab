@@ -15,6 +15,7 @@ const styles = theme => ({
 });
 
 export const getSevenDaysFromNow = () => moment().startOf('day').add(7, 'days').toDate();
+export const tomorrow = () => moment().startOf('day').add(1, 'days').toDate();
 
 const MessageCreator = ({ classes, createMessage }) => {
   const [preview, showPreview] = useState(false);
@@ -43,7 +44,7 @@ const MessageCreator = ({ classes, createMessage }) => {
         <Grid item xs={2}>
           <DateTimePicker
             variant="inline"
-            disablePast
+            minDate={tomorrow()}
             label={'Expiry'}
             value={selectedDate}
             onChange={handleDateChange}
