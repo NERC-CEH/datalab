@@ -43,6 +43,7 @@ const MessageCreator = ({ classes, createMessage }) => {
         <Grid item xs={2}>
           <DateTimePicker
             variant="inline"
+            disablePast
             label={'Expiry'}
             value={selectedDate}
             onChange={handleDateChange}
