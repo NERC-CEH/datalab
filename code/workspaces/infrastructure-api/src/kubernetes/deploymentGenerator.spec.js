@@ -181,4 +181,49 @@ describe('deploymentGenerator', () => {
       expect(manifest).toMatchSnapshot();
     });
   });
+
+  describe('createSiteDeployment', () => {
+    it('creates expected manifest', async () => {
+      const deploymentName = 'panel-name';
+      const sourcePath = 'notebooks/my-notebook';
+      const type = stackTypes.PANEL;
+      const volumeMount = 'volumeMount';
+      const version = undefined;
+
+      const manifest = await deploymentGenerator.createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version });
+
+      expect(manifest).toMatchSnapshot();
+    });
+
+    it('creates expected manifest for RShiny', async () => {
+      const deploymentName = 'rshiny-name';
+      const sourcePath = 'notebooks/my-notebook';
+      const type = stackTypes.RSHINY;
+      const volumeMount = 'volumeMount';
+      const version = '4.0.1';
+
+      const manifest = await deploymentGenerator.createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version });
+
+      expect(manifest).toMatchSnapshot();
+    });
+  });
+
+  describe('createSiteService', () => {
+    it('creates expected manifest', async () => {
+      const serviceName = 'panel-name';
+      const type = stackTypes.PANEL;
+
+      const manifest = await deploymentGenerator.createSiteService({ serviceName, type });
+
+      expect(manifest).toMatchSnapshot();
+    });
+
+    it('creates expected manifest for RShiny', async () => {
+      const serviceName = 'rshiny-name';
+      const type = stackTypes.RSHINY;
+      const manifest = await deploymentGenerator.createSiteService({ serviceName, type });
+
+      expect(manifest).toMatchSnapshot();
+    });
+  });
 });

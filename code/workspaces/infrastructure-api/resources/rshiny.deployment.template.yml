@@ -17,7 +17,7 @@ spec:
         user-pod: {{ type }}
     spec:
       containers:
-        - image: {{ &rshiny.image }}
+        - image: {{ &image }}
           imagePullPolicy: "IfNotPresent"
           name: {{ name }}
           ports:
