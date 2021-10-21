@@ -63,7 +63,7 @@ this means using tools such as [Conda environments](../tutorials/conda_environme
 or [Packrat](../tutorials/packrat.md).
 
 ## Is there a limit to the number of projects I can be a part of?
-
+<!--- TODO: Remove when this issue has been addressed https://jira.ceh.ac.uk/browse/NERCDL-1129 -->
 There is currently a limit of 50 projects that any individual user can be a part of
 (Admin/User/Viewer). If you are worried about hitting this limit please raise this with an
 administrator.
