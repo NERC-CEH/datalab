@@ -61,6 +61,12 @@ The main one concerns how packages are installed and persisted. Within DataLabs 
 runtime environment (i.e Python and R packages) must be stored alongside the code. Practically,
 this means using tools such as [Conda environments](../tutorials/conda_environments.md)
 or [Packrat](../tutorials/packrat.md).
+
+## Is there a limit to the number of projects I can be a part of?
+<!--- TODO: Remove after issue addressed https://jira.ceh.ac.uk/browse/NERCDL-1129 -->
+There is currently a limit of 50 projects that any individual user can be a part of
+(Admin/User/Viewer). If you are worried about hitting this limit please raise this with an
+administrator.
   
 ## I am having problems which I can't find the answer to here, how do I get help?
 
