@@ -24,9 +24,26 @@ spec:
           ports:
             - containerPort: 5006
               protocol: TCP
-          command: ["sh"]
+          command: ["/bin/bash"]
           args: ["-c",
-            "cd /notebooks && panel serve . --show"]
+            "cd /notebooks;
+            if [ -n \"$ENV_NAME\" ]; then
+              source activate $ENV_NAME;
+            fi;
+            if [ -n \"$FILENAME\" ]; then
+              panel serve $FILENAME;
+            else 
+              panel serve *.ipynb *.py --glob;
+            fi;"]
+          env:
+            - name: CONDA_ENV_DIR
+              value: "/data/conda/"
+            - name: JUPYTER_DATA_DIR
+              value: "/data/.jupyter"
+            - name: ENV_NAME
+              value: {{ &condaEnv }}
+            - name: FILENAME
+              value: {{ &serveFile }}
           livenessProbe:
             httpGet:
               path: /
@@ -38,6 +55,14 @@ spec:
             - name: persistentfsvol
               mountPath: /notebooks
               subPath: {{ &sourcePath }}
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/conda
+              subPath: conda
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/.jupyter
+              subPath: .jupyter
               readOnly: true
       volumes:
         - name: persistentfsvol
