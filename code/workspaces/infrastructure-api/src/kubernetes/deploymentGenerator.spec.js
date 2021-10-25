@@ -189,8 +189,10 @@ describe('deploymentGenerator', () => {
       const type = stackTypes.PANEL;
       const volumeMount = 'volumeMount';
       const version = undefined;
+      const condaPath = '/data/conda/my-env';
+      const filename = 'notebook.ipynb';
 
-      const manifest = await deploymentGenerator.createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version });
+      const manifest = await deploymentGenerator.createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version, condaPath, filename });
 
       expect(manifest).toMatchSnapshot();
     });
