@@ -24,14 +24,21 @@ spec:
           ports:
             - containerPort: 8866
               protocol: TCP
-          command: ["sh"]
+          command: ["/bin/bash"]
           args: ["-c",
-            "cd /notebooks && voila ."]
+            "cd /notebooks;
+            if [ -n \"$FILENAME\" ]; then
+              voila $FILENAME;
+            else 
+              voila .;
+            fi;"]
           env:
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
             - name: JUPYTER_DATA_DIR
               value: "/data/.jupyter"
+            - name: FILENAME
+              value: {{ &serveFile }}
           livenessProbe:
             httpGet:
               path: /
