@@ -43,7 +43,7 @@ spec:
             - name: CONDA_ENV
               value: {{ &condaPath }}
             - name: FILENAME
-              value: {{ &serveFile }}
+              value: {{ &filename }}
           livenessProbe:
             httpGet:
               path: /

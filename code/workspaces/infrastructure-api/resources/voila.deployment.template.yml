@@ -38,7 +38,7 @@ spec:
             - name: JUPYTER_DATA_DIR
               value: "/data/.jupyter"
             - name: FILENAME
-              value: {{ &serveFile }}
+              value: {{ &filename }}
           livenessProbe:
             httpGet:
               path: /
