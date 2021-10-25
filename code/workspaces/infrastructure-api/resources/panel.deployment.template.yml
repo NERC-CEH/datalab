@@ -27,8 +27,8 @@ spec:
           command: ["/bin/bash"]
           args: ["-c",
             "cd /notebooks;
-            if [ -n \"$ENV_NAME\" ]; then
-              source activate $ENV_NAME;
+            if [ -n \"$CONDA_ENV\" ]; then
+              source activate $CONDA_ENV;
             fi;
             if [ -n \"$FILENAME\" ]; then
               panel serve $FILENAME;
@@ -40,8 +40,8 @@ spec:
               value: "/data/conda/"
             - name: JUPYTER_DATA_DIR
               value: "/data/.jupyter"
-            - name: ENV_NAME
-              value: {{ &condaEnv }}
+            - name: CONDA_ENV
+              value: {{ &condaPath }}
             - name: FILENAME
               value: {{ &serveFile }}
           livenessProbe:
