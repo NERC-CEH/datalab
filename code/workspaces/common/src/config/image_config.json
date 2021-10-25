@@ -37,7 +37,7 @@
       "versions": [
         {
           "displayName": "Dask 2021.6/Spark 3.1.2",
-          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "versions": [
         {
           "displayName": "Dask 2021.6/Spark 3.1.2",
-          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
@@ -78,7 +78,7 @@
       "versions": [
         {
           "displayName": "Latest",
-          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
@@ -136,7 +136,7 @@
       "versions": [
         {
           "displayName": "Latest",
-          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
