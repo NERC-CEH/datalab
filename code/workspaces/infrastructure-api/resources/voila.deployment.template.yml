@@ -27,6 +27,11 @@ spec:
           command: ["sh"]
           args: ["-c",
             "cd /notebooks && voila ."]
+          env:
+            - name: CONDA_ENV_DIR
+              value: "/data/conda/"
+            - name: JUPYTER_DATA_DIR
+              value: "/data/.jupyter"
           livenessProbe:
             httpGet:
               path: /
@@ -35,12 +40,20 @@ spec:
             periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
-            - name: glusterfsvol
+            - name: persistentfsvol
               mountPath: /notebooks
               subPath: {{ &sourcePath }}
               readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/conda
+              subPath: conda
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/.jupyter
+              subPath: .jupyter
+              readOnly: false
       volumes:
-        - name: glusterfsvol
+        - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
 {{/volumeMount}}
