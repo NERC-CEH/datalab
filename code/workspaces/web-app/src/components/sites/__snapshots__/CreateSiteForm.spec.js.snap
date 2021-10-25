@@ -1,333 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateSiteForm creates correct snapshot for create Site Form when there are no version options 1`] = `
-<form>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Display Name"
-      name="displayName"
-      placeholder="Display Name"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Type"
-      name="type"
-      options={
-        Array [
-          Object {
-            "text": "RStudio",
-            "value": "RSTUDIO",
-          },
-        ]
-      }
-      placeholder="Site Type"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      endText=".datalabs.localhost"
-      label="URL Name"
-      name="name"
-      placeholder="Site Name for URLs"
-      startText="http://testproj-"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Data Store to Mount"
-      name="volumeMount"
-      options={
-        Array [
-          Object {
-            "text": "nfs",
-            "value": "5",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Source Path"
-      name="sourcePath"
-      placeholder="Source Directory for Site"
-      startText="/data/"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Description"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Visibility Status"
-      name="visible"
-      options={
-        Array [
-          Object {
-            "text": <SelectRichComponent
-              title="Private"
-              type="site"
-            />,
-            "value": "private",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Project"
-              type="site"
-            />,
-            "value": "project",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Public"
-              type="site"
-            />,
-            "value": "public",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      format={[Function]}
-      label="Assets"
-      name="assets"
-      parse={[Function]}
-      projectKey="testproj"
-    />
-  </div>
-  <CreateFormControls
-    onCancel={[MockFunction]}
-  />
-</form>
+exports[`CreateSiteForm creates correct snapshot for create Site Form when all optional fields are enabled 1`] = `
+<div>
+  <form>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"RStudio","value":"RSTUDIO"}],"placeholder":"Site Type"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"version","label":"Version","options":[{"text":"0.1.0","value":"0.1.0"}]}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Site Name for URLs","startText":"http://testproj-","endText":".datalabs.localhost"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"nfs","value":"5"}]}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"sourcePath","label":"Source Path","placeholder":"Source Directory for Site","startText":"/data/"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"filename","label":"Filename (optional)","helperText":"If no filename is specified, the whole directory will be used.","placeholder":"Filename in Source Directory"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"condaPath","label":"Path to Conda environment (optional)","helperText":"The file path to the conda environment to use.","placeholder":"/data/conda/conda-env"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"visible","label":"Visibility Status","options":[{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Private"},"_owner":null,"_store":{}},"value":"private"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Project"},"_owner":null,"_store":{}},"value":"project"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Public"},"_owner":null,"_store":{}},"value":"public"}]}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+      </div>
+    </div>
+    <div>
+      Controls
+    </div>
+  </form>
+</div>
 `;
 
-exports[`CreateSiteForm creates correct snapshot for create Site Form when there are version options 1`] = `
-<form>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Display Name"
-      name="displayName"
-      placeholder="Display Name"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Type"
-      name="type"
-      options={
-        Array [
-          Object {
-            "text": "RStudio",
-            "value": "RSTUDIO",
-          },
-        ]
-      }
-      placeholder="Site Type"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Version"
-      name="version"
-      options={
-        Array [
-          Object {
-            "text": "0.1.0",
-            "value": "0.1.0",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      endText=".datalabs.localhost"
-      label="URL Name"
-      name="name"
-      placeholder="Site Name for URLs"
-      startText="http://testproj-"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Data Store to Mount"
-      name="volumeMount"
-      options={
-        Array [
-          Object {
-            "text": "nfs",
-            "value": "5",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Source Path"
-      name="sourcePath"
-      placeholder="Source Directory for Site"
-      startText="/data/"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Description"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Visibility Status"
-      name="visible"
-      options={
-        Array [
-          Object {
-            "text": <SelectRichComponent
-              title="Private"
-              type="site"
-            />,
-            "value": "private",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Project"
-              type="site"
-            />,
-            "value": "project",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Public"
-              type="site"
-            />,
-            "value": "public",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      format={[Function]}
-      label="Assets"
-      name="assets"
-      parse={[Function]}
-      projectKey="testproj"
-    />
-  </div>
-  <CreateFormControls
-    onCancel={[MockFunction]}
-  />
-</form>
+exports[`CreateSiteForm creates correct snapshot for create Site Form when no optional fields are enabled 1`] = `
+<div>
+  <form>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"RStudio","value":"RSTUDIO"}],"placeholder":"Site Type"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Site Name for URLs","startText":"http://testproj-","endText":".datalabs.localhost"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"nfs","value":"5"}]}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"sourcePath","label":"Source Path","placeholder":"Source Directory for Site","startText":"/data/"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"visible","label":"Visibility Status","options":[{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Private"},"_owner":null,"_store":{}},"value":"private"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Project"},"_owner":null,"_store":{}},"value":"project"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Public"},"_owner":null,"_store":{}},"value":"public"}]}
+      </div>
+    </div>
+    <div>
+      <div>
+        {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+      </div>
+    </div>
+    <div>
+      Controls
+    </div>
+  </form>
+</div>
 `;

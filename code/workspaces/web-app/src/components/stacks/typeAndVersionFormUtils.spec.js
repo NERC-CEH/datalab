@@ -1,6 +1,6 @@
 import { change } from 'redux-form';
 import data from 'common/src/config/image_config.json';
-import { getTypeOptions, getVersionOptions, updateVersionOnTypeChange } from './typeAndVersionFormUtils';
+import { getTypeOptions, getVersionOptions, updateVersionOnTypeChange, getCanChooseFile, getCanChooseConda } from './typeAndVersionFormUtils';
 
 jest.mock('redux-form');
 
@@ -71,5 +71,29 @@ describe('updateVersionOnTypeChange', () => {
         fieldValue: '',
       });
     });
+  });
+});
+
+describe('getCanChooseFile', () => {
+  it('returns true for panel', () => {
+    expect(getCanChooseFile(data.types, 'panel')).toBeTruthy();
+  });
+  it('returns true for voila', () => {
+    expect(getCanChooseFile(data.types, 'voila')).toBeTruthy();
+  });
+  it('returns false for rshiny', () => {
+    expect(getCanChooseFile(data.types, 'rshiny')).toBeFalsy();
+  });
+});
+
+describe('getCanChooseConda', () => {
+  it('returns true for panel', () => {
+    expect(getCanChooseConda(data.types, 'panel')).toBeTruthy();
+  });
+  it('returns false for voila', () => {
+    expect(getCanChooseConda(data.types, 'voila')).toBeFalsy();
+  });
+  it('returns false for rshiny', () => {
+    expect(getCanChooseConda(data.types, 'rshiny')).toBeFalsy();
   });
 });
