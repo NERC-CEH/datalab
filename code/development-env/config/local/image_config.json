@@ -72,6 +72,8 @@
     "panel": {
       "displayName": "Panel",
       "category": "PUBLISH",
+      "userCanChooseFile": true,
+      "userCanChooseConda": true,
       "versions": [
         {
           "displayName": "Latest",
@@ -129,6 +131,7 @@
     "voila": {
       "displayName": "Voila",
       "category": "PUBLISH",
+      "userCanChooseFile": true,
       "versions": [
         {
           "displayName": "Latest",
