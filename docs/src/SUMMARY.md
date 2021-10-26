@@ -12,6 +12,7 @@
     * [Create project storage](tutorials/my-first-notebook/create-project-storage.md)
     * [Create a JupyterLab](tutorials/my-first-notebook/create-a-jupyterlab.md)
     * [Start a Jupyter notebook](tutorials/my-first-notebook/start-a-jupyter-notebook.md)
+    * [Collaborative JupyterLab](tutorials/my-first-notebook/collaborative-jupyterlab.md)
     * [Conclusion](tutorials/my-first-notebook/conclusion.md)
   * [My first RStudio Project](tutorials/getting-started-rstudio/README.md)
     * [Create new RStudio Project](tutorials/getting-started-rstudio/create-project.md)
