@@ -12,6 +12,8 @@ const containerInfo = imageConfig();
 const getSiteDeploymentTemplateName = siteType => `${siteType.toUpperCase()}_DEPLOYMENT`;
 const getSiteServiceTemplateName = siteType => `${siteType.toUpperCase()}_SERVICE`;
 
+const getSiteUrl = url => (url ? url.replace(/^(https:\/\/)/, '') : '');
+
 function getImage(type, version) {
   try {
     return version ? image(type, version) : defaultImage(type);
@@ -143,6 +145,7 @@ function createRStudioDeployment({ deploymentName, volumeMount, type, version })
 
 function createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version, condaPath, filename, url }) {
   const img = getImage(type, version);
+  const siteUrl = getSiteUrl(url);
   const context = {
     name: deploymentName,
     sourcePath,
@@ -151,7 +154,7 @@ function createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, v
     volumeMount,
     condaPath,
     filename,
-    url,
+    url: siteUrl,
   };
 
   const templateName = getSiteDeploymentTemplateName(type);

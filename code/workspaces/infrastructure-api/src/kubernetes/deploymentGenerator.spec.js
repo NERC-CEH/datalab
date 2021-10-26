@@ -191,7 +191,7 @@ describe('deploymentGenerator', () => {
       const version = undefined;
       const condaPath = '/data/conda/my-env';
       const filename = 'notebook.ipynb';
-      const url = 'project-panel.datalabs.nerc.ac.uk';
+      const url = 'https://project-panel.datalabs.nerc.ac.uk';
 
       const manifest = await deploymentGenerator.createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version, condaPath, filename, url });
 
