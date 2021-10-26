@@ -6,6 +6,7 @@ Object {
   "name": "expectedName",
   "projectKey": "project",
   "type": "jupyter",
+  "url": "https://testlab.datalabs.localhost/resource/project/expectedName",
 }
 `;
 

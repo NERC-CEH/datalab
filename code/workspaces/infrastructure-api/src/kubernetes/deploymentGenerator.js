@@ -141,7 +141,7 @@ function createRStudioDeployment({ deploymentName, volumeMount, type, version })
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
 }
 
-function createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version, condaPath, filename }) {
+function createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version, condaPath, filename, url }) {
   const img = getImage(type, version);
   const context = {
     name: deploymentName,
@@ -151,6 +151,7 @@ function createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, v
     volumeMount,
     condaPath,
     filename,
+    url,
   };
 
   const templateName = getSiteDeploymentTemplateName(type);

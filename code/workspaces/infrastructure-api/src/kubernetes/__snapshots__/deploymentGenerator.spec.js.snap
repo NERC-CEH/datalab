@@ -398,6 +398,8 @@ spec:
               value: /data/conda/my-env
             - name: FILENAME
               value: notebook.ipynb
+            - name: BOKEH_ALLOW_WS_ORIGIN
+              value: localhost:5006,project-panel.datalabs.nerc.ac.uk
           livenessProbe:
             httpGet:
               path: /

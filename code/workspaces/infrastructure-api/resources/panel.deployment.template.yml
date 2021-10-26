@@ -44,6 +44,8 @@ spec:
               value: {{ &condaPath }}
             - name: FILENAME
               value: {{ &filename }}
+            - name: BOKEH_ALLOW_WS_ORIGIN
+              value: localhost:5006,{{ &url }}
           livenessProbe:
             httpGet:
               path: /
