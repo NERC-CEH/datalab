@@ -7,4 +7,5 @@ validate.formatters[FORMATTER_NAME] = errors => errors.reduce(
   {},
 );
 
-export default (values, constraints) => validate(values, constraints, { format: FORMATTER_NAME });
+const reduxFormValidator = (values, constraints) => validate(values, constraints, { format: FORMATTER_NAME });
+export default reduxFormValidator;

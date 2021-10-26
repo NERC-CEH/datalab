@@ -23,4 +23,5 @@ function projectCardsToShow(roles, projectKey) {
   ) ? [projectKey] : [];
 }
 
-export default { dataStorageCardsToShow, notebookCardsToShow, projectCardsToShow, siteCardsToShow };
+const cardsToShow = { dataStorageCardsToShow, notebookCardsToShow, projectCardsToShow, siteCardsToShow };
+export default cardsToShow;

@@ -1,5 +1,7 @@
 const selectClusters = ({ clusters }) => clusters;
 
-export default {
+const clustersSelectors = {
   clusters: selectClusters,
 };
+
+export default clustersSelectors;

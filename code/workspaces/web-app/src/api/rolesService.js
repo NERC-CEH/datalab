@@ -64,4 +64,5 @@ async function setCatalogueRole(userId, catalogueRole) {
   return newCatalogueRole;
 }
 
-export default { getAllUsersAndRoles, setInstanceAdmin, setDataManager, setCatalogueRole };
+const rolesService = { getAllUsersAndRoles, setInstanceAdmin, setDataManager, setCatalogueRole };
+export default rolesService;

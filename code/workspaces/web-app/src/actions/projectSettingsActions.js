@@ -25,8 +25,10 @@ const removeUserPermission = (projectKey, user) => ({
     .then(() => user),
 });
 
-export default {
+const projectSettingsActions = {
   getProjectUserPermissions,
   addUserPermission,
   removeUserPermission,
 };
+
+export default projectSettingsActions;

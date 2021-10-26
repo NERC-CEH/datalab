@@ -11,4 +11,5 @@ function getUserPermissions() {
     .then(errorHandler('data.userPermissions'));
 }
 
-export default { getUserPermissions };
+const userPermissionsService = { getUserPermissions };
+export default userPermissionsService;

@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 import MessageBanner from './MessageBanner';
-import Message from './Message';
 
 jest.mock('react-redux');
 jest.mock('./Message', () => props => (<>{`Message: ${JSON.stringify(props.message)}`}</>));

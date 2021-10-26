@@ -128,7 +128,7 @@ function editStack(stackWithAssets) {
     .then(errorHandler('data.stack'));
 }
 
-export default {
+const stackService = {
   loadStacks,
   loadStacksByCategory,
   getUrl,
@@ -139,3 +139,4 @@ export default {
   restartStack,
   scaleStack,
 };
+export default stackService;

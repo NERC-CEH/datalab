@@ -27,7 +27,7 @@ const daskDescription = 'Dask natively scales Python across multiple workers, pr
 const sparkDescription = 'Spark is an open-source cluster-computing framework for large-scale data processing.';
 
 // NOTE: All other stack details should come from 'src/config/images'
-export default {
+const stackDescriptions = {
   [JUPYTER]: { description: jupyterDescription, logo: jupyterLogo },
   [JUPYTERLAB]: { description: jupyterlabDescription, logo: jupyterlabLogo },
   [ZEPPELIN]: { description: zeppelinDescription, logo: zeppelinLogo },
@@ -40,3 +40,4 @@ export default {
   [DASK]: { description: daskDescription, logo: daskLogo },
   [SPARK]: { description: sparkDescription, logo: sparkLogo },
 };
+export default stackDescriptions;

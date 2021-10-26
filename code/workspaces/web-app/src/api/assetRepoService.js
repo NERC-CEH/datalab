@@ -49,9 +49,10 @@ function loadAllAssets() {
     .then(errorHandler('data.centralAssets'));
 }
 
-export default {
+const assetRepoService = {
   addRepoMetadata,
   editRepoMetadata,
   loadVisibleAssets,
   loadAllAssets,
 };
+export default assetRepoService;

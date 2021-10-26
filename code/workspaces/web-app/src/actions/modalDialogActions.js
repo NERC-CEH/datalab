@@ -10,7 +10,9 @@ const closeModalDialog = () => ({
   type: CLOSE_MODAL_DIALOG_ACTION,
 });
 
-export default {
+const modalDialogActions = {
   openModalDialog,
   closeModalDialog,
 };
+
+export default modalDialogActions;

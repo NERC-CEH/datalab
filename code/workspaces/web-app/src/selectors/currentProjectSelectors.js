@@ -4,7 +4,9 @@ const selectCurrentProjectKey = ({ currentProject }) => ({
   value: currentProject.value.key,
 });
 
-export default {
+const currentProjectSelectors = {
   currentProject: selectCurrentProject,
   currentProjectKey: selectCurrentProjectKey,
 };
+
+export default currentProjectSelectors;

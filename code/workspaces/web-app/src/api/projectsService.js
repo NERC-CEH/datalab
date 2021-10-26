@@ -89,4 +89,5 @@ function checkProjectKeyUniqueness(projectKey) {
     .then(errorHandler('data.checkProjectKeyUniqueness'));
 }
 
-export default { loadProjects, getAllProjectsAndResources, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness, updateProject };
+const projectsService = { loadProjects, getAllProjectsAndResources, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness, updateProject };
+export default projectsService;

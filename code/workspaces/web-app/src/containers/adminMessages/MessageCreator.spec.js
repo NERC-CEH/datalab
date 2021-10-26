@@ -3,7 +3,6 @@ import { render, fireEvent, screen, configure } from '@testing-library/react';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import MessageCreator from './MessageCreator';
-import Message from '../../components/app/Message';
 
 jest.mock('../../components/app/Message', () => props => <div>{`Message: ${props.message.message}, AllowDismiss: ${props.allowDismiss.toString()}`}</div>);
 

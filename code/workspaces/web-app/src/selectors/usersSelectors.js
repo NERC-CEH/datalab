@@ -1,5 +1,7 @@
 const selectUsers = ({ users }) => users;
 
-export default {
+const usersSelectors = {
   users: selectUsers,
 };
+
+export default usersSelectors;

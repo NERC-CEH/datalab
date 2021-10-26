@@ -79,7 +79,7 @@ const scaleStack = ({ projectKey, name, type }, replicas) => ({
   payload: stackService.scaleStack({ projectKey, name, type }, replicas),
 });
 
-export default {
+const stackActions = {
   loadStacks,
   loadStacksByCategory,
   updateStacks,
@@ -94,3 +94,5 @@ export default {
   restartStack,
   scaleStack,
 };
+
+export default stackActions;

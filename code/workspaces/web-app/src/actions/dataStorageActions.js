@@ -50,7 +50,7 @@ const editDataStoreDetails = (projectKey, name, updatedDetails) => ({
   payload: dataStorageService.editDataStoreDetails(projectKey, name, updatedDetails),
 });
 
-export default {
+const dataStorageActions = {
   loadDataStorage,
   getCredentials,
   openMinioDataStore,
@@ -60,3 +60,5 @@ export default {
   removeUserFromDataStore,
   editDataStoreDetails,
 };
+
+export default dataStorageActions;

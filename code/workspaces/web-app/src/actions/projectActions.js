@@ -48,6 +48,8 @@ const updateProject = project => ({
   payload: projectsService.updateProject(project),
 });
 
-export default {
+const projectActions = {
   loadProjects, getAllProjectsAndResources, setCurrentProject, clearCurrentProject, createProject, deleteProject, checkProjectKeyUniqueness, updateProject,
 };
+
+export default projectActions;

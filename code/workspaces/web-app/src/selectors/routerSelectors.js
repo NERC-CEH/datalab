@@ -1,5 +1,6 @@
 const selectUrlSearch = ({ router: { location: { search } } }) => search;
 
-export default {
+const routerSelectors = {
   searchUrl: selectUrlSearch,
 };
+export default routerSelectors;

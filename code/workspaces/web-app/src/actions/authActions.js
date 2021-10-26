@@ -13,7 +13,9 @@ const getUserPermissions = () => ({
   payload: permissionsService.getUserPermissions(),
 });
 
-export default {
+const authActions = {
   userLogsIn,
   getUserPermissions,
 };
+
+export default authActions;
