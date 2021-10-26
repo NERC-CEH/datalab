@@ -8,9 +8,12 @@ jest.mock('../../../hooks/usersHooks');
 const userOne = { name: 'User One', userId: 'user-one-id' };
 const userTwo = { name: 'User Two', userId: 'user-two-id' };
 const users = [userOne, userTwo];
-useUsersSortedByName.mockReturnValue({ fetching: false, value: users });
 
 const setSelectedUsersMock = jest.fn().mockName('setSelectedUser');
+
+beforeEach(() => {
+  useUsersSortedByName.mockReturnValue({ fetching: false, value: users });
+});
 
 describe('UserSelect', () => {
   const shallowRender = ({

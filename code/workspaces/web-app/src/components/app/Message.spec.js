@@ -5,12 +5,11 @@ import ReactMarkdown from 'react-markdown';
 import Message from './Message';
 import messagesActions from '../../actions/messagesActions';
 
-jest.mock('react-markdown', () => jest.fn(() => (<>React Markdown</>)));
+jest.mock('react-markdown', () => props => (<>{`React Markdown: ${props.children}`}</>));
 
 jest.mock('react-redux');
 jest.mock('../../actions/messagesActions');
 jest.mock('@material-ui/icons/ErrorOutline', () => () => (<div>ErrorOutlineIconMock</div>));
-useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 
 const message = {
   id: 'id1',
@@ -18,6 +17,10 @@ const message = {
   expiry: '2021-12-25',
   created: '2021-10-31',
 };
+
+beforeEach(() => {
+  useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+});
 
 describe('Message', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -28,8 +31,6 @@ describe('Message', () => {
     expect(wrapper.container).toMatchSnapshot();
     expect(messagesActions.dismissMessage).toHaveBeenCalledTimes(0);
     expect(wrapper.queryByText('Dismiss')).not.toBeNull();
-    expect(ReactMarkdown).toHaveBeenCalledTimes(1);
-    expect(ReactMarkdown).toHaveBeenCalledWith({ children: 'Test message' }, {});
   });
 
   it('renders correct snapshot when dismiss is disabled', () => {

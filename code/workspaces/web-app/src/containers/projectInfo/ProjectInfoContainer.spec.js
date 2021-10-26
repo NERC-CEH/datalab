@@ -20,9 +20,11 @@ const currentProject = { fetching: false, value: testProj };
 const projectUsers = { fetching: false, value: [{ userId: 'user1', name: 'user1@test', role: 'user' }] };
 const dispatchMock = jest.fn().mockName('dispatch');
 
-useCurrentProject.mockReturnValue(currentProject);
-useProjectUsers.mockReturnValue(projectUsers);
-useDispatch.mockReturnValue(dispatchMock);
+beforeEach(() => {
+  useCurrentProject.mockReturnValue(currentProject);
+  useProjectUsers.mockReturnValue(projectUsers);
+  useDispatch.mockReturnValue(dispatchMock);
+});
 
 describe('ProjectInfoContainer', () => {
   it('renders correctly passing correct props to children', () => {

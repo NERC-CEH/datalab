@@ -3,9 +3,11 @@ import useShallowSelector from './useShallowSelector';
 import clustersSelectors from '../selectors/clustersSelectors';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('shallow-selector-return');
-
 jest.mock('../selectors/clustersSelectors');
+
+beforeEach(() => {
+  useShallowSelector.mockReturnValue('shallow-selector-return');
+});
 
 describe('useClusters', () => {
   it('returns useShallowSelector which has been called with the correct selector function', () => {

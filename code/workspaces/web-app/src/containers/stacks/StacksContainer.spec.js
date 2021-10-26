@@ -9,10 +9,8 @@ import listUsersService from '../../api/listUsersService';
 import notify from '../../components/common/notify';
 
 jest.mock('../../api/stackService');
-const loadStacksMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-stackService.loadStacksByCategory = loadStacksMock;
-const listUsersMock = jest.fn();
-listUsersService.listUsers = listUsersMock;
+let loadStacksMock;
+let listUsersMock;
 
 jest.mock('../../components/common/notify');
 const toastErrorMock = jest.fn();
@@ -21,6 +19,14 @@ notify.error = toastErrorMock;
 notify.success = toastSuccessMock;
 
 jest.useFakeTimers();
+
+beforeEach(() => {
+  loadStacksMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+  stackService.loadStacksByCategory = loadStacksMock;
+
+  listUsersMock = jest.fn();
+  listUsersService.listUsers = listUsersMock;
+});
 
 describe('StacksContainer', () => {
   describe('is a connected component which', () => {

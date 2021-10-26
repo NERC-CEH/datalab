@@ -25,8 +25,6 @@ const projectsPayload = {
     accessible: true,
   }],
 };
-const loadProjectsMock = jest.fn().mockResolvedValue(projectsPayload);
-projectsService.loadProjects = loadProjectsMock;
 
 function renderWithStore({
   projects = projectsPayload,
@@ -46,6 +44,12 @@ function renderWithStore({
 
   return { store, wrapper };
 }
+
+let loadProjectsMock;
+beforeEach(() => {
+  loadProjectsMock = jest.fn().mockResolvedValue(projectsPayload);
+  projectsService.loadProjects = loadProjectsMock;
+});
 
 describe('ProjectsContainer', () => {
   describe('is a component which', () => {
@@ -76,22 +80,28 @@ describe('ProjectsContainer', () => {
     const originalModalDialogActions = { ...modalDialogActions };
     const originalProjectActions = { ...projectActions };
 
-    const openModalDialogMock = jest.fn(() => 'openModalDialogMock').mockName('openModalDialog');
-    modalDialogActions.openModalDialog = openModalDialogMock;
-
-    const closeModalDialogMock = jest.fn(() => 'closeModalDialogMock').mockName('closeModalDialog');
-    modalDialogActions.closeModalDialog = closeModalDialogMock;
-
-    const createProjectMock = jest.fn(() => 'createProjectMock').mockName('createProject');
-    projectActions.createProject = createProjectMock;
-
-    const deleteProjectMock = jest.fn(() => 'deleteProjectMock').mockName('deleteProject');
-    projectActions.deleteProject = deleteProjectMock;
-
-    const dispatchMock = jest.fn().mockName('dispatch');
+    let openModalDialogMock;
+    let closeModalDialogMock;
+    let createProjectMock;
+    let deleteProjectMock;
+    let dispatchMock;
 
     beforeEach(() => {
       jest.clearAllMocks();
+
+      openModalDialogMock = jest.fn(() => 'openModalDialogMock').mockName('openModalDialog');
+      modalDialogActions.openModalDialog = openModalDialogMock;
+
+      closeModalDialogMock = jest.fn(() => 'closeModalDialogMock').mockName('closeModalDialog');
+      modalDialogActions.closeModalDialog = closeModalDialogMock;
+
+      createProjectMock = jest.fn(() => 'createProjectMock').mockName('createProject');
+      projectActions.createProject = createProjectMock;
+
+      deleteProjectMock = jest.fn(() => 'deleteProjectMock').mockName('deleteProject');
+      projectActions.deleteProject = deleteProjectMock;
+
+      dispatchMock = jest.fn().mockName('dispatch');
     });
 
     afterAll(() => {

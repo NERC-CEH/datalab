@@ -10,8 +10,8 @@ exports[`AdminMessagesContainer renders correctly 1`] = `
       >
         Existing Messages
       </h5>
-      AdminMessage
-      AdminMessage
+      AdminMessage: {"message":"some message","id":"1234"}
+      AdminMessage: {"message":"other message","id":"5678"}
     </div>
   </div>
 </div>

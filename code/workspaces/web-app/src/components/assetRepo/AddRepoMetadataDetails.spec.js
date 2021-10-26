@@ -6,10 +6,13 @@ import * as assetRepoHooks from '../../hooks/assetRepoHooks';
 
 jest.mock('../../hooks/reduxFormHooks');
 jest.mock('../../hooks/assetRepoHooks');
-reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('value');
-assetRepoHooks.useAssetRepo = jest.fn().mockReturnValue({ fetching: false, value: { createdAssetId: null } });
 
 describe('AddRepoMetadataDetails', () => {
+  beforeEach(() => {
+    reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('value');
+    assetRepoHooks.useAssetRepo = jest.fn().mockReturnValue({ fetching: false, value: { createdAssetId: null } });
+  });
+
   it('renders to match snapshot', () => {
     expect(shallow(
       <AddRepoMetadata

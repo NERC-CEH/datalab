@@ -10,9 +10,6 @@ jest.mock('../../../hooks/assetRepoHooks');
 const asset1 = { assetId: 'asset-1', name: 'Asset 1', version: 'v1' };
 const asset2 = { assetId: 'asset-2', name: 'Asset 2', version: 'v2' };
 
-useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
-useVisibleAssets.mockReturnValue({ fetching: false, value: { assets: [asset1, asset2] } });
-
 describe('AssetMultiSelect', () => {
   const shallowRender = () => {
     const props = {
@@ -24,6 +21,11 @@ describe('AssetMultiSelect', () => {
 
     return shallow(<AssetMultiSelect {...props} />);
   };
+
+  beforeEach(() => {
+    useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+    useVisibleAssets.mockReturnValue({ fetching: false, value: { assets: [asset1, asset2] } });
+  });
 
   it('renders to match snapshot passing correct props to children', () => {
     expect(shallowRender()).toMatchSnapshot();

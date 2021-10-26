@@ -5,14 +5,17 @@ import { storageDescription, storageDisplayValue } from '../../config/storage';
 
 jest.mock('../../hooks/usersHooks');
 jest.mock('../../config/storage');
-storageDescription.mockReturnValue('Network File System (NFS) volume to store data for Notebooks and Sites.');
-storageDisplayValue.mockReturnValue('NFS');
 
 function shallowRender(props) {
   const shallow = createShallow({ dive: true });
 
   return shallow(<StackCard {...props} />);
 }
+
+beforeEach(() => {
+  storageDescription.mockReturnValue('Network File System (NFS) volume to store data for Notebooks and Sites.');
+  storageDisplayValue.mockReturnValue('NFS');
+});
 
 describe('StackCard', () => {
   const permissionProps = {

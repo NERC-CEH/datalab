@@ -25,7 +25,7 @@ exports[`ProjectNavigationContainer renders to match snapshot passing correct pr
 
 exports[`PureProjectNavigationContainer renders correct snapshot passing props onto children 1`] = `
 <WithStyles(SideBarNavigation)
-  sideBar={<ForwardRef(WithStyles) />}
+  sideBar={<WithStyles(ProjectSideBar) />}
 >
   <Switch>
     <Route

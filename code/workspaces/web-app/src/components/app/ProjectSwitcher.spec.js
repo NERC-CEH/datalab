@@ -35,16 +35,14 @@ const state = {
 };
 
 describe('ProjectSwitcher', () => {
-  const dispatchMock = jest.fn().mockName('dispatch');
-  useDispatch.mockReturnValue(dispatchMock);
-
-  useLocation.mockReturnValue({ name: 'expected location value' });
-
-  useCurrentProject.mockReturnValue(state.currentProject);
-  useProjectsArray.mockReturnValue(state.projects);
-
   beforeEach(() => {
-    jest.clearAllMocks();
+    const dispatchMock = jest.fn().mockName('dispatch');
+    useDispatch.mockReturnValue(dispatchMock);
+
+    useLocation.mockReturnValue({ name: 'expected location value' });
+
+    useCurrentProject.mockReturnValue(state.currentProject);
+    useProjectsArray.mockReturnValue(state.projects);
   });
 
   it('renders to match snapshot passing correct parameters to children', () => {

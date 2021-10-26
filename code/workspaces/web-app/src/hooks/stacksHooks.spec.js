@@ -3,7 +3,10 @@ import stacksSelectors from '../selectors/stacksSelectors';
 import { useStacksArray } from './stacksHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
+
+beforeEach(() => {
+  useShallowSelector.mockReturnValue('expected-value');
+});
 
 describe('useStacksArray', () => {
   it('returns result of shallow selector with correct selector function', () => {

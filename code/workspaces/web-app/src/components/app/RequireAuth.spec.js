@@ -13,16 +13,20 @@ jest.mock('../../actions/authActions');
 
 const isAuthenticated = jest.fn();
 const getCurrentSession = jest.fn();
-getAuth.mockImplementation(() => ({
-  isAuthenticated,
-  getCurrentSession,
-}));
-
-useCurrentUserPermissions.mockReturnValue({ fetching: false, value: ['permission'] });
-useCurrentUserTokens.mockReturnValue({ token: 'expectedUserToken' });
 
 const mockDispatch = jest.fn().mockName('dispatch');
-useDispatch.mockReturnValue(mockDispatch);
+
+beforeEach(() => {
+  getAuth.mockImplementation(() => ({
+    isAuthenticated,
+    getCurrentSession,
+  }));
+
+  useCurrentUserPermissions.mockReturnValue({ fetching: false, value: ['permission'] });
+
+  useCurrentUserTokens.mockReturnValue({ token: 'expectedUserToken' });
+  useDispatch.mockReturnValue(mockDispatch);
+});
 
 describe('RequireAuth', () => {
   let shallow;

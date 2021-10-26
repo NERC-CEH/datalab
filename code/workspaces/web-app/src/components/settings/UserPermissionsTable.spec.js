@@ -28,16 +28,16 @@ jest.mock('../../hooks/useCurrentUserSystemAdmin');
 describe('UserPermissionsTable', () => {
   let shallow;
 
-  const dispatchMock = jest.fn().mockName('dispatch');
-  useDispatch.mockReturnValue(dispatchMock);
-
-  useProjectUsers.mockReturnValue('users');
-  useCurrentUserId.mockReturnValue('current-user-id');
-  useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
-  useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
-
   beforeEach(() => {
     shallow = createShallow({ dive: true });
+
+    const dispatchMock = jest.fn().mockName('dispatch');
+    useDispatch.mockReturnValue(dispatchMock);
+
+    useProjectUsers.mockReturnValue('users');
+    useCurrentUserId.mockReturnValue('current-user-id');
+    useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
+    useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
   });
 
   it('renders pure component with correct props', () => {

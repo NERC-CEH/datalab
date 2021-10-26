@@ -4,11 +4,14 @@ import HeroBar from './HeroBar';
 import { getAuth } from '../../config/auth';
 
 jest.mock('../../config/auth');
-getAuth.mockImplementation(() => ({
-  login: jest.fn(),
-  selfServiceSignUp: jest.fn(),
-  signUpConfig: jest.fn().mockReturnValue({ selfService: true }),
-}));
+
+beforeEach(() => {
+  getAuth.mockImplementation(() => ({
+    login: jest.fn(),
+    selfServiceSignUp: jest.fn(),
+    signUpConfig: jest.fn().mockReturnValue({ selfService: true }),
+  }));
+});
 
 describe('HeroBar', () => {
   let shallow;

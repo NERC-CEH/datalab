@@ -32,17 +32,19 @@ const roles = [
   { ...user2, instanceAdmin: false, dataManager: false, catalogueRole: 'user' },
 ];
 
-useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
-
-useUsers.mockReturnValue({ fetching: false, value: users });
-useRoles.mockReturnValue({ fetching: false, value: roles });
-useStacksArray.mockReturnValue({ fetching: false, value: [] });
-useDataStorageArray.mockReturnValue({ fetching: false, value: [] });
-useProjectsArray.mockReturnValue({ fetching: false, value: [] });
-useProjectsArray.mockReturnValue({ fetching: false, value: [] });
-getCatalogue.mockReturnValue({ available: true });
-
 describe('AdminUsersContainer', () => {
+  beforeEach(() => {
+    useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+
+    useUsers.mockReturnValue({ fetching: false, value: users });
+    useRoles.mockReturnValue({ fetching: false, value: roles });
+    useStacksArray.mockReturnValue({ fetching: false, value: [] });
+    useDataStorageArray.mockReturnValue({ fetching: false, value: [] });
+    useProjectsArray.mockReturnValue({ fetching: false, value: [] });
+    useProjectsArray.mockReturnValue({ fetching: false, value: [] });
+    getCatalogue.mockReturnValue({ available: true });
+  });
+
   it('renders correctly passing correct props to children', () => {
     expect(shallow(<AdminUsersContainer/>)).toMatchSnapshot();
   });

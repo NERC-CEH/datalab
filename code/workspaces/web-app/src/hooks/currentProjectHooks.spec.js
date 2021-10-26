@@ -3,10 +3,10 @@ import currentProjectSelectors from '../selectors/currentProjectSelectors';
 import { useCurrentProject, useCurrentProjectKey } from './currentProjectHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
 
 beforeEach(() => {
   jest.clearAllMocks();
+  useShallowSelector.mockReturnValue('expected-value');
 });
 
 describe('useCurrentProject', () => {

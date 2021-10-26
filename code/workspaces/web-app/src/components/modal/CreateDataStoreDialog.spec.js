@@ -4,7 +4,6 @@ import CreateDataStoreDialog from './CreateDataStoreDialog';
 import { storageCreationDefaultType } from '../../config/storage';
 
 jest.mock('../../config/storage');
-storageCreationDefaultType.mockReturnValue('NFS');
 
 describe('CreateDataStoreDialog dialog', () => {
   function shallowRender(props) {
@@ -20,6 +19,10 @@ describe('CreateDataStoreDialog dialog', () => {
     onSubmit: onSubmitMock,
     onCancel: onCancelMock,
     projectKey: 'test-proj',
+  });
+
+  beforeEach(() => {
+    storageCreationDefaultType.mockReturnValue('NFS');
   });
 
   it('creates correct snapshot', () => {

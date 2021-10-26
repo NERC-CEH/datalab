@@ -9,7 +9,10 @@ const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
 
 jest.mock('../../hooks/authHooks');
 jest.mock('../../config/catalogue');
-getCatalogue.mockReturnValue({ available: false });
+
+beforeEach(() => {
+  getCatalogue.mockReturnValue({ available: false });
+});
 
 describe('TopBar', () => {
   let shallow;

@@ -5,61 +5,61 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when all o
   <form>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"RStudio","value":"RSTUDIO"}],"placeholder":"Site Type"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"RStudio","value":"RSTUDIO"}],"placeholder":"Site Type"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"version","label":"Version","options":[{"text":"0.1.0","value":"0.1.0"}]}
+        Field: {"InputLabelProps":{"shrink":true},"name":"version","label":"Version","options":[{"text":"0.1.0","value":"0.1.0"}]}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Site Name for URLs","startText":"http://testproj-","endText":".datalabs.localhost"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Site Name for URLs","startText":"http://testproj-","endText":".datalabs.localhost"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"nfs","value":"5"}]}
+        Field: {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"nfs","value":"5"}]}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"sourcePath","label":"Source Path","placeholder":"Source Directory for Site","startText":"/data/"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"sourcePath","label":"Source Path","placeholder":"Source Directory for Site","startText":"/data/"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"filename","label":"Filename (optional)","helperText":"If no filename is specified, the whole directory will be used.","placeholder":"Filename in Source Directory"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"filename","label":"Filename (optional)","helperText":"If no filename is specified, the whole directory will be used.","placeholder":"Filename in Source Directory"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"condaPath","label":"Path to Conda environment (optional)","helperText":"The file path to the conda environment to use.","placeholder":"/data/conda/conda-env"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"condaPath","label":"Path to Conda environment (optional)","helperText":"The file path to the conda environment to use.","placeholder":"/data/conda/conda-env"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"visible","label":"Visibility Status","options":[{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Private"},"_owner":null,"_store":{}},"value":"private"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Project"},"_owner":null,"_store":{}},"value":"project"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Public"},"_owner":null,"_store":{}},"value":"public"}]}
+        Field: {"InputLabelProps":{"shrink":true},"name":"visible","label":"Visibility Status","options":[{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Private"},"_owner":null,"_store":{}},"value":"private"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Project"},"_owner":null,"_store":{}},"value":"project"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Public"},"_owner":null,"_store":{}},"value":"public"}]}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
       </div>
     </div>
     <div>
-      Controls
+      Controls: submitting - false
     </div>
   </form>
 </div>
@@ -70,46 +70,46 @@ exports[`CreateSiteForm creates correct snapshot for create Site Form when no op
   <form>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"RStudio","value":"RSTUDIO"}],"placeholder":"Site Type"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"RStudio","value":"RSTUDIO"}],"placeholder":"Site Type"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Site Name for URLs","startText":"http://testproj-","endText":".datalabs.localhost"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Site Name for URLs","startText":"http://testproj-","endText":".datalabs.localhost"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"nfs","value":"5"}]}
+        Field: {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"nfs","value":"5"}]}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"sourcePath","label":"Source Path","placeholder":"Source Directory for Site","startText":"/data/"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"sourcePath","label":"Source Path","placeholder":"Source Directory for Site","startText":"/data/"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"visible","label":"Visibility Status","options":[{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Private"},"_owner":null,"_store":{}},"value":"private"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Project"},"_owner":null,"_store":{}},"value":"project"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Public"},"_owner":null,"_store":{}},"value":"public"}]}
+        Field: {"InputLabelProps":{"shrink":true},"name":"visible","label":"Visibility Status","options":[{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Private"},"_owner":null,"_store":{}},"value":"private"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Project"},"_owner":null,"_store":{}},"value":"project"},{"text":{"key":null,"ref":null,"props":{"type":"site","title":"Public"},"_owner":null,"_store":{}},"value":"public"}]}
       </div>
     </div>
     <div>
       <div>
-        {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+        Field: {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
       </div>
     </div>
     <div>
-      Controls
+      Controls: submitting - false
     </div>
   </form>
 </div>

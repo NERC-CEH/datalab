@@ -110,7 +110,9 @@ exports[`MessageCreator renders correctly 1`] = `
         hidden=""
         id="messagePreview"
       >
-        Message
+        <div>
+          Message: , AllowDismiss: false
+        </div>
       </div>
     </div>
   </div>

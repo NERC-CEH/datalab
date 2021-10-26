@@ -3,10 +3,10 @@ import routerSelectors from '../selectors/routerSelectors';
 import { useSearchUrl } from './routerHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
 
 beforeEach(() => {
   jest.clearAllMocks();
+  useShallowSelector.mockReturnValue('expected-value');
 });
 
 describe('useSearchUrl', () => {

@@ -3,7 +3,10 @@ import dataStorageSelectors from '../selectors/dataStorageSelectors';
 import { useDataStorageArray, useDataStorageForUserInProject } from './dataStorageHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
+
+beforeEach(() => {
+  useShallowSelector.mockReturnValue('expected-value');
+});
 
 describe('useDataStorageArray', () => {
   it('returns result of shallow selector with correct selector function', () => {

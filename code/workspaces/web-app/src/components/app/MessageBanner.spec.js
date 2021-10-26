@@ -5,9 +5,7 @@ import MessageBanner from './MessageBanner';
 import Message from './Message';
 
 jest.mock('react-redux');
-jest.mock('./Message', () => jest.fn(() => (<>Message</>)));
-
-useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+jest.mock('./Message', () => props => (<>{`Message: ${JSON.stringify(props.message)}`}</>));
 
 const message1 = {
   id: 'id1',
@@ -22,15 +20,15 @@ const message2 = {
   created: '2021-11-31',
 };
 const messages = [message1, message2];
-useSelector.mockReturnValue(messages);
+
+beforeEach(() => {
+  useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+  useSelector.mockReturnValue(messages);
+});
 
 describe('MessageBanner', () => {
   it('renders correct snapshot', () => {
     const wrapper = render(<MessageBanner/>);
     expect(wrapper.container).toMatchSnapshot();
-
-    expect(Message).toHaveBeenCalledTimes(2);
-    expect(Message).toHaveBeenCalledWith({ message: message1 }, {});
-    expect(Message).toHaveBeenCalledWith({ message: message2 }, {});
   });
 });

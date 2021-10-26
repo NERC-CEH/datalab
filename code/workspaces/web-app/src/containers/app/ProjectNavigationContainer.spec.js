@@ -10,26 +10,24 @@ jest.mock('react-router');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/authHooks');
 
-const dispatchMock = jest.fn().mockName('dispatch');
-jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
-
 const match = { params: { projectKey: 'testproj' }, path: 'projects/:projectKey' };
-useParams.mockReturnValue(match.params);
-useRouteMatch.mockReturnValue(match);
 
 const testProjKey = { fetching: false, error: null, value: 'testproj' };
-useCurrentProjectKey.mockReturnValue(testProjKey);
 
 const promisedUserPermissions = {
   fetching: false,
   error: null,
   value: ['projects:testproj:projects:read'],
 };
-useCurrentUserPermissions.mockReturnValue(promisedUserPermissions);
 
 describe('ProjectNavigationContainer', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    const dispatchMock = jest.fn().mockName('dispatch');
+    jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
+    useParams.mockReturnValue(match.params);
+    useRouteMatch.mockReturnValue(match);
+    useCurrentProjectKey.mockReturnValue(testProjKey);
+    useCurrentUserPermissions.mockReturnValue(promisedUserPermissions);
   });
 
   it('renders to match snapshot passing correct project to children', () => {
@@ -38,6 +36,7 @@ describe('ProjectNavigationContainer', () => {
 });
 
 describe('PureProjectNavigationContainer', () => {
+  const dispatchMock = jest.fn().mockName('dispatch');
   const shallowRender = (props) => {
     const defaultProps = {
       path: match.path,
@@ -53,6 +52,14 @@ describe('PureProjectNavigationContainer', () => {
 
     return shallow(<PureProjectNavigationContainer {...renderProps} />);
   };
+
+  beforeEach(() => {
+    jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
+    useParams.mockReturnValue(match.params);
+    useRouteMatch.mockReturnValue(match);
+    useCurrentProjectKey.mockReturnValue(testProjKey);
+    useCurrentUserPermissions.mockReturnValue(promisedUserPermissions);
+  });
 
   describe('should redirect if', () => {
     it('user does not have read permission on project', () => {

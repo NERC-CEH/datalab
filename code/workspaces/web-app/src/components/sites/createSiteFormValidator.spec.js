@@ -3,14 +3,17 @@ import { getSiteInfo } from '../../config/images';
 
 jest.mock('../../actions/internalNameCheckerActions');
 jest.mock('../../config/images');
-getSiteInfo.mockReturnValue({
-  rshiny: { displayName: 'RShiny' },
-});
 
 const NAME_FIELD_NAME = 'name';
 const TYPE_FIELD_NAME = 'type';
 
 const componentProps = { projectKey: 'test-proj' };
+
+beforeEach(() => {
+  getSiteInfo.mockReturnValue({
+    rshiny: { displayName: 'RShiny' },
+  });
+});
 
 describe('New Site Form Validator', () => {
   describe('syncValidate', () => {

@@ -3,8 +3,8 @@
 exports[`MessageBanner renders correct snapshot 1`] = `
 <div>
   <div>
-    Message
-    Message
+    Message: {"id":"id1","message":"Test message","expiry":"2021-12-25","created":"2021-10-31"}
+    Message: {"id":"id2","message":"Other message","expiry":"2021-12-26","created":"2021-11-31"}
   </div>
 </div>
 `;

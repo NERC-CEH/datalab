@@ -23,8 +23,6 @@ jest.mock('../../config/clusters');
 jest.mock('../../actions/modalDialogActions');
 jest.mock('../../actions/clusterActions');
 
-useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
-
 const mockLoadClustersAction = jest.fn();
 const mockCreateClusterAction = jest.fn();
 const mockCloseModalDialogAction = jest.fn();
@@ -67,6 +65,10 @@ const copyMock = {
   Python: () => {},
 };
 
+beforeEach(() => {
+  useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+});
+
 describe('ProjectClustersContainer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -103,13 +105,15 @@ describe('ProjectClustersContainer', () => {
 });
 
 describe('getDialogProps', () => {
-  const mockDispatch = jest.fn().mockName('dispatch').mockImplementation(value => value);
+  let mockDispatch;
   const projectKey = 'testproj';
   const clusterType = 'DASK';
   const dataStores = [];
 
   beforeEach(() => {
     jest.clearAllMocks();
+    setMocks();
+    mockDispatch = jest.fn().mockName('dispatch').mockImplementation(value => value);
   });
 
   it('returns object of props matching snapshot', () => {

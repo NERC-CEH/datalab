@@ -1,15 +1,13 @@
 import React from 'react';
-import * as form from 'redux-form';
 import { render } from '@testing-library/react';
-import * as controls from '../common/form/controls';
 import { PureCreateSiteForm } from './CreateSiteForm';
 
 jest.mock('redux-form', () => ({
   reduxForm: jest.fn(() => jest.fn()),
-  Field: jest.fn(props => (<div>{JSON.stringify(props)}</div>)),
+  Field: props => (<div>{`Field: ${JSON.stringify(props)}`}</div>),
 }));
 jest.mock('../common/form/controls', () => ({
-  CreateFormControls: jest.fn(() => (<div>Controls</div>)),
+  CreateFormControls: ({ submitting }) => (<div>{`Controls: submitting - ${submitting}`}</div>),
 }));
 
 describe('CreateSiteForm', () => {
@@ -29,16 +27,6 @@ describe('CreateSiteForm', () => {
     condaField,
   });
 
-  beforeEach(() => jest.clearAllMocks());
-
-  const expectField = (name, called) => {
-    if (called) {
-      expect(form.Field).toHaveBeenCalledWith(expect.objectContaining({ name }), {});
-    } else {
-      expect(form.Field).not.toHaveBeenCalledWith(expect.objectContaining({ name }), {});
-    }
-  };
-
   it('creates correct snapshot for create Site Form when all optional fields are enabled', () => {
     // Arrange
     const versionOptions = [{ text: '0.1.0', value: '0.1.0' }];
@@ -49,8 +37,7 @@ describe('CreateSiteForm', () => {
 
     // Assert
     expect(wrapper.container).toMatchSnapshot();
-    expect(form.Field).toHaveBeenCalledTimes(11);
-    expect(controls.CreateFormControls).toHaveBeenCalledWith({ onCancel: onCancelMock, submitting }, {});
+    expect(wrapper.queryAllByText('Field', { exact: false })).toHaveLength(11);
   });
 
   it('creates correct snapshot for create Site Form when no optional fields are enabled', () => {
@@ -62,8 +49,7 @@ describe('CreateSiteForm', () => {
 
     // Assert
     expect(wrapper.container).toMatchSnapshot();
-    expect(form.Field).toHaveBeenCalledTimes(8);
-    expect(controls.CreateFormControls).toHaveBeenCalledWith({ onCancel: onCancelMock, submitting }, {});
+    expect(wrapper.queryAllByText('Field', { exact: false })).toHaveLength(8);
   });
 
   it('creates correct fields for create Site Form when there are version options', () => {
@@ -72,13 +58,13 @@ describe('CreateSiteForm', () => {
     const props = generateProps({ versionOptions });
 
     // Act
-    render(<PureCreateSiteForm {...props}/>);
+    const wrapper = render(<PureCreateSiteForm {...props}/>);
 
     // Assert
-    expect(form.Field).toHaveBeenCalledTimes(9);
-    expectField('version', true);
-    expectField('filename', false);
-    expectField('condaPath', false);
+    expect(wrapper.queryAllByText('Field', { exact: false })).toHaveLength(9);
+    expect(wrapper.queryAllByText(/Field: .*"name":"version"/, { exact: false })).toHaveLength(1);
+    expect(wrapper.queryAllByText(/Field: .*"name":"filename"/, { exact: false })).toHaveLength(0);
+    expect(wrapper.queryAllByText(/Field: .*"name":"condaPath"/, { exact: false })).toHaveLength(0);
   });
 
   it('creates correct fields for create Site Form when user can enter filename and condaPath', () => {
@@ -86,12 +72,12 @@ describe('CreateSiteForm', () => {
     const props = generateProps({}, true, true);
 
     // Act
-    render(<PureCreateSiteForm {...props}/>);
+    const wrapper = render(<PureCreateSiteForm {...props}/>);
 
     // Assert
-    expect(form.Field).toHaveBeenCalledTimes(10);
-    expectField('version', false);
-    expectField('filename', true);
-    expectField('condaPath', true);
+    expect(wrapper.queryAllByText('Field', { exact: false })).toHaveLength(10);
+    expect(wrapper.queryAllByText(/Field: .*"name":"version"/, { exact: false })).toHaveLength(0);
+    expect(wrapper.queryAllByText(/Field: .*"name":"filename"/, { exact: false })).toHaveLength(1);
+    expect(wrapper.queryAllByText(/Field: .*"name":"condaPath"/, { exact: false })).toHaveLength(1);
   });
 });
