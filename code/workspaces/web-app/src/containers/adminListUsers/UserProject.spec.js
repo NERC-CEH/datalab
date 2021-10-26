@@ -27,11 +27,6 @@ const site = { key: projectKey, name: siteName, type: RSHINY };
 const notebook = { key: projectKey, name: notebookName, type: JUPYTER };
 const storage = { key: projectKey, name: storageName };
 
-useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
-useProjectsArray.mockReturnValue({ fetching: false, value: [project] });
-useStacksArray.mockReturnValue({ fetching: false, value: [site, notebook] });
-useDataStorageArray.mockReturnValue({ fetching: false, value: [storage] });
-
 describe('UserProject', () => {
   const shallowRender = () => {
     const filters = {
@@ -58,6 +53,13 @@ describe('UserProject', () => {
 
     return shallow(<UserProject {...props} />);
   };
+
+  beforeEach(() => {
+    useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
+    useProjectsArray.mockReturnValue({ fetching: false, value: [project] });
+    useStacksArray.mockReturnValue({ fetching: false, value: [site, notebook] });
+    useDataStorageArray.mockReturnValue({ fetching: false, value: [storage] });
+  });
 
   it('renders to match snapshot passing correct props to children', () => {
     expect(shallowRender()).toMatchSnapshot();

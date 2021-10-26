@@ -5,17 +5,18 @@ import { getNotebookInfo } from '../../config/images';
 
 jest.mock('../../hooks/reduxFormHooks');
 jest.mock('../../config/images');
-getNotebookInfo.mockReturnValue({
-  jupyterLab: {
-    displayName: 'JupyterLab',
-  },
-});
 
 describe('Notebook dialog', () => {
   let shallow;
 
   beforeEach(() => {
     shallow = createShallow({ dive: true });
+
+    getNotebookInfo.mockReturnValue({
+      jupyterLab: {
+        displayName: 'JupyterLab',
+      },
+    });
   });
 
   function shallowRender(props) {

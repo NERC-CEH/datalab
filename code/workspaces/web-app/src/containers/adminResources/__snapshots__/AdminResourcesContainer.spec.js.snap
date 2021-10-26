@@ -20,7 +20,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     </span>
     <WithStyles(ForwardRef(FormControlLabel))
       control={
-        <ForwardRef(WithStyles)
+        <WithStyles(ForwardRef(Checkbox))
           checked={true}
           color="primary"
           name="notebooks"
@@ -31,7 +31,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     />
     <WithStyles(ForwardRef(FormControlLabel))
       control={
-        <ForwardRef(WithStyles)
+        <WithStyles(ForwardRef(Checkbox))
           checked={true}
           color="primary"
           name="sites"
@@ -42,7 +42,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     />
     <WithStyles(ForwardRef(FormControlLabel))
       control={
-        <ForwardRef(WithStyles)
+        <WithStyles(ForwardRef(Checkbox))
           checked={true}
           color="primary"
           name="clusters"
@@ -53,7 +53,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     />
     <WithStyles(ForwardRef(FormControlLabel))
       control={
-        <ForwardRef(WithStyles)
+        <WithStyles(ForwardRef(Checkbox))
           checked={true}
           color="primary"
           name="storage"

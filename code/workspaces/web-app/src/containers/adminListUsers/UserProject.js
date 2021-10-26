@@ -57,10 +57,10 @@ export default function UserProject({ userId, projectKey, filters, roles }) {
   const ProjectCheckbox = ({ label, checked, name }) => {
     const id = `project-checkbox-${userId}-${projectKey}-${name}`;
     return (
-    <>
-      <Typography id={id} variant="body1">{label}</Typography>
-      <Checkbox checked={checked} name={name} color="primary" disabled aria-labelledby={id} />
-    </>
+      <>
+        <Typography id={id} variant="body1">{label}</Typography>
+        <Checkbox checked={checked} name={name} color="primary" disabled aria-labelledby={id} />
+      </>
     );
   };
 
@@ -80,7 +80,7 @@ export default function UserProject({ userId, projectKey, filters, roles }) {
                   <ProjectCheckbox label="Project viewer" checked={roles.projectViewer.includes(projectKey)} name="projectViewer" />
                 </div>
                 <Projects projects={projects}/>
-               </>
+              </>
             )}
             {(filtersOff || filters.siteOwner) && sites.length > 0 && (
               <Sites sites={sites} />

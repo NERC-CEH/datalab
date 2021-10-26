@@ -5,10 +5,6 @@ import { getAuth } from '../../config/auth';
 
 jest.mock('../../config/auth');
 const logout = jest.fn();
-getAuth.mockImplementation(() => ({
-  logout,
-}));
-
 const closePopoverMock = jest.fn();
 
 const expectedProps = {
@@ -19,6 +15,12 @@ const expectedProps = {
   },
   closePopover: closePopoverMock,
 };
+
+beforeEach(() => {
+  getAuth.mockImplementation(() => ({
+    logout,
+  }));
+});
 
 describe('UserMenu', () => {
   beforeEach(() => {

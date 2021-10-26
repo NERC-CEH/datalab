@@ -6,16 +6,26 @@ import dataStorageService from '../../api/dataStorageService';
 import listUsersService from '../../api/listUsersService';
 
 jest.mock('../../api/dataStorageService');
-const loadDataStorageMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-dataStorageService.loadDataStorage = loadDataStorageMock;
-const addUserToDataStoreMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-dataStorageService.addUserToDataStore = addUserToDataStoreMock;
-const removeUserFromDataStoreMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-dataStorageService.removeUserFromDataStore = removeUserFromDataStoreMock;
-
 jest.mock('../../api/listUsersService');
-const listUsersMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-listUsersService.listUsers = listUsersMock;
+
+let loadDataStorageMock;
+let addUserToDataStoreMock;
+let removeUserFromDataStoreMock;
+let listUsersMock;
+
+beforeEach(() => {
+  loadDataStorageMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+  dataStorageService.loadDataStorage = loadDataStorageMock;
+
+  addUserToDataStoreMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+  dataStorageService.addUserToDataStore = addUserToDataStoreMock;
+
+  removeUserFromDataStoreMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+  dataStorageService.removeUserFromDataStore = removeUserFromDataStoreMock;
+
+  listUsersMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+  listUsersService.listUsers = listUsersMock;
+});
 
 describe('LoadUserManagement Modal Wrapper', () => {
   beforeEach(() => jest.clearAllMocks());

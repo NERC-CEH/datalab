@@ -3,10 +3,10 @@ import authSelectors from '../selectors/authSelectors';
 import { useCurrentUserId, useCurrentUserPermissions, useCurrentUserTokens } from './authHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
 
 beforeEach(() => {
   jest.clearAllMocks();
+  useShallowSelector.mockReturnValue('expected-value');
 });
 
 describe('useCurrentUserId', () => {

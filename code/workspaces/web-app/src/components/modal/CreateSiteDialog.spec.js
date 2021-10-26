@@ -5,11 +5,6 @@ import { getSiteInfo } from '../../config/images';
 
 jest.mock('../../hooks/reduxFormHooks');
 jest.mock('../../config/images');
-getSiteInfo.mockReturnValue({
-  nbviewer: {
-    displayName: 'NBViewer',
-  },
-});
 
 describe('Site dialog', () => {
   function shallowRender(props) {
@@ -27,6 +22,14 @@ describe('Site dialog', () => {
       { value: 'value' },
       { value: 'another value' },
     ],
+  });
+
+  beforeEach(() => {
+    getSiteInfo.mockReturnValue({
+      nbviewer: {
+        displayName: 'NBViewer',
+      },
+    });
   });
 
   it('creates correct snapshot', () => {

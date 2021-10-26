@@ -32,7 +32,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
     <Pagination
       items={
         Array [
-          <ForwardRef(WithStyles)
+          <WithStyles(StackCard)
             copySnippets={
               Object {
                 "Python": [MockFunction copyPythonSnippet],
@@ -62,7 +62,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
               ]
             }
           />,
-          <ForwardRef(WithStyles)
+          <WithStyles(StackCard)
             copySnippets={
               Object {
                 "Python": [MockFunction copyPythonSnippet],
@@ -92,7 +92,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
               ]
             }
           />,
-          <ForwardRef(WithStyles)
+          <WithStyles(StackCard)
             copySnippets={
               Object {
                 "Python": [MockFunction copyPythonSnippet],
@@ -171,11 +171,11 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
           <div
             className="makeStyles-placeholderCard-2"
           >
-            <ForwardRef(WithStyles)
+            <WithStyles(ForwardRef(Typography))
               variant="body1"
             >
               No items to display.
-            </ForwardRef(WithStyles)>
+            </WithStyles(ForwardRef(Typography))>
           </div>,
         ]
       }
@@ -239,7 +239,7 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
     <Pagination
       items={
         Array [
-          <ForwardRef(WithStyles)
+          <WithStyles(StackCard)
             copySnippets={
               Object {
                 "Python": [MockFunction copyPythonSnippet],
@@ -269,7 +269,7 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
               ]
             }
           />,
-          <ForwardRef(WithStyles)
+          <WithStyles(StackCard)
             copySnippets={
               Object {
                 "Python": [MockFunction copyPythonSnippet],
@@ -299,7 +299,7 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
               ]
             }
           />,
-          <ForwardRef(WithStyles)
+          <WithStyles(StackCard)
             copySnippets={
               Object {
                 "Python": [MockFunction copyPythonSnippet],

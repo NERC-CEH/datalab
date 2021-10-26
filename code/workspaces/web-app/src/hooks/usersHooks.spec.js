@@ -5,7 +5,6 @@ import usersSelectors from '../selectors/usersSelectors';
 
 jest.mock('../selectors/usersSelectors');
 jest.mock('./useShallowSelector');
-useShallowSelector.mockImplementation(selector => selector());
 
 const createUser = letter => ({ name: `User ${letter.toUpperCase()}`, userId: `user-${letter.toLowerCase()}` });
 
@@ -15,6 +14,10 @@ const userZ = createUser('z');
 
 const unsortedUsers = [userZ, userA, userB];
 const sortedUsers = [userA, userB, userZ];
+
+beforeEach(() => {
+  useShallowSelector.mockImplementation(selector => selector());
+});
 
 describe('useUsersSortedByName', () => {
   [false, true].forEach((fetching) => {

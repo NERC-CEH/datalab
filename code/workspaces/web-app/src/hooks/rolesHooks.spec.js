@@ -3,7 +3,10 @@ import rolesSelectors from '../selectors/rolesSelectors';
 import { useRoles } from './rolesHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
+
+beforeEach(() => {
+  useShallowSelector.mockReturnValue('expected-value');
+});
 
 describe('useRoles', () => {
   it('returns result of shallow selector with correct selector function', () => {

@@ -2,11 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 import AdminMessagesContainer, { confirmCreateMessage, confirmDeleteMessage, createMessage, deleteMessage } from './AdminMessagesContainer';
-import AdminMessage from './AdminMessage';
 import notify from '../../components/common/notify';
 
-jest.mock('./AdminMessage', () => jest.fn(() => <>AdminMessage</>));
-jest.mock('./MessageCreator', () => jest.fn(() => <>MessageCreator</>));
+jest.mock('./AdminMessage', () => props => <>{`AdminMessage: ${JSON.stringify(props.message)}`}</>);
+jest.mock('./MessageCreator', () => () => <>MessageCreator</>);
 
 jest.mock('react-redux');
 jest.mock('../../components/common/notify', () => ({ success: jest.fn(), error: jest.fn() }));
@@ -18,21 +17,24 @@ const clearData = jest.fn();
 const message1 = { message: 'some message', id: '1234' };
 const message2 = { message: 'other message', id: '5678' };
 
-beforeEach(() => jest.clearAllMocks());
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('AdminMessagesContainer', () => {
-  const dispatchMock = jest.fn().mockName('dispatch');
-  useDispatch.mockReturnValue(dispatchMock);
-  useSelector.mockReturnValue([message1, message2]);
+  let dispatchMock;
+
+  beforeEach(() => {
+    dispatchMock = jest.fn().mockName('dispatch');
+    useDispatch.mockReturnValue(dispatchMock);
+    useSelector.mockReturnValue([message1, message2]);
+  });
 
   it('renders correctly', () => {
     const wrapper = render(<AdminMessagesContainer />);
 
     expect(wrapper.container).toMatchSnapshot();
 
-    expect(AdminMessage).toHaveBeenCalledTimes(2);
-    expect(AdminMessage).toHaveBeenCalledWith({ deleteMessage: expect.any(Function), message: message1 }, {});
-    expect(AdminMessage).toHaveBeenCalledWith({ deleteMessage: expect.any(Function), message: message2 }, {});
     expect(useDispatch).toHaveBeenCalledTimes(1);
     expect(useSelector).toHaveBeenCalledTimes(1);
     expect(dispatchMock).toHaveBeenCalledTimes(1);

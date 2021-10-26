@@ -62,7 +62,7 @@ exports[`AdminMessage renders correctly 1`] = `
       hidden=""
       id="messagePreview"
     >
-      Message
+      Message: {"message":"some message","id":"1234","expiry":"2021/12/25","created":"2021/10/31"}, AllowDismiss: false
     </div>
   </div>
 </div>

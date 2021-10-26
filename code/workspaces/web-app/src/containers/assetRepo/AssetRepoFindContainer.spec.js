@@ -7,9 +7,6 @@ import { useAssetRepo } from '../../hooks/assetRepoHooks';
 jest.mock('react-router');
 jest.mock('../../hooks/assetRepoHooks');
 
-const dispatchMock = jest.fn().mockName('dispatch');
-jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
-
 const asset = {
   name: 'asset name',
   version: 'asset version',
@@ -21,10 +18,16 @@ const asset = {
   projects: [{ projectKey: 'project-1', name: 'project 1' }, { projectKey: 'project-2', name: 'project 2' }],
 };
 const assetRep = { fetching: false, error: null, value: { assets: [asset] } };
-useAssetRepo.mockReturnValue(assetRep);
 
 describe('AssetRepoFindContainer', () => {
   const shallowRender = () => shallow(<AssetRepoFindContainer />);
+
+  beforeEach(() => {
+    const dispatchMock = jest.fn().mockName('dispatch');
+    jest.spyOn(ReactRedux, 'useDispatch').mockImplementation(() => dispatchMock);
+
+    useAssetRepo.mockReturnValue(assetRep);
+  });
 
   it('renders to match snapshot passing correct props to children', () => {
     expect(shallowRender()).toMatchSnapshot();

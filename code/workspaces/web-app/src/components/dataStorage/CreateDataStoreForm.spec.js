@@ -4,12 +4,6 @@ import { PureCreateDataStoreForm } from './CreateDataStoreForm';
 import { storageCreationAllowedDisplayOptions } from '../../config/storage';
 
 jest.mock('../../config/storage');
-storageCreationAllowedDisplayOptions.mockReturnValue({
-  NFS: {
-    text: 'NFS',
-    value: 'NFS',
-  },
-});
 
 describe('CreateDataStoreForm', () => {
   function shallowRender(props) {
@@ -23,6 +17,15 @@ describe('CreateDataStoreForm', () => {
     onSubmit: onSubmitMock,
     cancel: onCancelMock,
     projectKey: 'test-proj',
+  });
+
+  beforeEach(() => {
+    storageCreationAllowedDisplayOptions.mockReturnValue({
+      NFS: {
+        text: 'NFS',
+        value: 'NFS',
+      },
+    });
   });
 
   it('creates correct snapshot for create Data Store Form', () => {

@@ -12,8 +12,11 @@ const assetRepoState = { value: {
   createdAssetId: 'created-1',
   assets: [publicAsset1, publicAsset2, project1Asset, project2Asset],
 } };
-useShallowSelector.mockReturnValue(assetRepoState);
-beforeEach(() => jest.clearAllMocks());
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  useShallowSelector.mockReturnValue(assetRepoState);
+});
 
 describe('useAssetRepo', () => {
   it('returns result of shallow selector with correct selector function', () => {

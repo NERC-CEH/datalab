@@ -3,9 +3,7 @@ import { render, fireEvent, screen, configure } from '@testing-library/react';
 import AdminMessage from './AdminMessage';
 import Message from '../../components/app/Message';
 
-configure({ testIdAttribute: 'id' });
-
-jest.mock('../../components/app/Message', () => jest.fn(() => (<>Message</>)));
+jest.mock('../../components/app/Message', () => props => (<>{`Message: ${JSON.stringify(props.message)}, AllowDismiss: ${props.allowDismiss.toString()}`}</>));
 
 const message = {
   message: 'some message',
@@ -15,14 +13,14 @@ const message = {
 };
 
 describe('AdminMessage', () => {
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => {
+    configure({ testIdAttribute: 'id' });
+  });
 
   it('renders correctly', () => {
     const wrapper = render(<AdminMessage message={message}/>);
 
     expect(wrapper.container).toMatchSnapshot();
-    expect(Message).toHaveBeenCalledTimes(1);
-    expect(Message).toHaveBeenCalledWith({ message, allowDismiss: false }, {});
   });
 
   it('shows preview when clicked', () => {

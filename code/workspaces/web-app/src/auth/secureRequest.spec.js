@@ -7,10 +7,13 @@ const mock = new MockAdapter(request);
 jest.mock('../config/auth');
 const getCurrentSession = jest.fn();
 const renewSession = jest.fn();
-getAuth.mockImplementation(() => ({
-  getCurrentSession,
-  renewSession,
-}));
+
+beforeEach(() => {
+  getAuth.mockImplementation(() => ({
+    getCurrentSession,
+    renewSession,
+  }));
+});
 
 describe('secureRequest', () => {
   beforeEach(() => mock.reset());

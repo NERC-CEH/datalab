@@ -5,8 +5,11 @@ import DataStorageContainer, { PureDataStorageContainer } from './DataStorageCon
 import dataStorageService from '../../api/dataStorageService';
 
 jest.mock('../../api/dataStorageService');
-const loadDataStorageServiceMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
-dataStorageService.loadDataStorage = loadDataStorageServiceMock;
+
+beforeEach(() => {
+  const loadDataStorageServiceMock = jest.fn().mockReturnValue(Promise.resolve('expectedPayload'));
+  dataStorageService.loadDataStorage = loadDataStorageServiceMock;
+});
 
 describe('DataStorageContainer', () => {
   describe('is a connected component which', () => {
@@ -79,7 +82,7 @@ describe('DataStorageContainer', () => {
     }
 
     const dataStorage = { fetching: false, value: [{ props: 'expectedPropValue', projectKey: 'project99' }] };
-    const loadDataStorageActionMock = jest.fn().mockResolvedValue({ payload: { projectKey: 'project99', storage: 'expectedPayload' } });
+    let loadDataStorageActionMock;
     const getCredentialsMock = jest.fn();
     const openMinioDataStoreMock = jest.fn();
     const openModalDialogMock = jest.fn();
@@ -139,7 +142,9 @@ describe('DataStorageContainer', () => {
       },
     });
 
-    beforeEach(() => jest.clearAllMocks());
+    beforeEach(() => {
+      loadDataStorageActionMock = jest.fn().mockResolvedValue({ payload: { projectKey: 'project99', storage: 'expectedPayload' } });
+    });
 
     it('calls loadDataStorage action when mounted', () => {
       // Arrange

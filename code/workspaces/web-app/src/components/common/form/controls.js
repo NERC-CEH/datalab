@@ -168,7 +168,7 @@ export const renderMultiSelectAutocompleteField = ({
             style={{ marginLeft: theme.spacing(2) }}
           />
         </Tooltip> }
-        </>
+      </>
     }
   />
   );

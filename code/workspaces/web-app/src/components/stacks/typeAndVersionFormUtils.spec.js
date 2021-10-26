@@ -5,12 +5,15 @@ import { getTypeOptions, getVersionOptions, updateVersionOnTypeChange } from './
 jest.mock('redux-form');
 
 const mockChangeActionType = 'MOCK_REDUX_FORM_CHANGE_ACTION';
-change.mockImplementation((formName, fieldName, fieldValue) => ({
-  type: mockChangeActionType,
-  formName,
-  fieldName,
-  fieldValue,
-}));
+
+beforeEach(() => {
+  change.mockImplementation((formName, fieldName, fieldValue) => ({
+    type: mockChangeActionType,
+    formName,
+    fieldName,
+    fieldValue,
+  }));
+});
 
 describe('getTypeOptions', () => {
   it('returns array of values from image options that contain text and value fields suitable for form drop-downs', () => {

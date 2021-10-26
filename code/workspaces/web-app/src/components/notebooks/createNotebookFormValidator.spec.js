@@ -3,15 +3,18 @@ import { getNotebookInfo } from '../../config/images';
 
 jest.mock('../../actions/internalNameCheckerActions');
 jest.mock('../../config/images');
-getNotebookInfo.mockReturnValue({
-  jupyter: { displayName: 'Jupyter' },
-  rstudio: { displayName: 'RStudio' },
-});
 
 const NAME_FIELD_NAME = 'name';
 const TYPE_FIELD_NAME = 'type';
 
 const componentProps = { projectKey: 'test-proj' };
+
+beforeEach(() => {
+  getNotebookInfo.mockReturnValue({
+    jupyter: { displayName: 'Jupyter' },
+    rstudio: { displayName: 'RStudio' },
+  });
+});
 
 describe('New Notebook Form Validator', () => {
   describe('syncValidate', () => {

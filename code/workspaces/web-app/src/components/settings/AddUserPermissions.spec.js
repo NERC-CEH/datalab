@@ -40,15 +40,15 @@ const classes = {
 describe('AddUserPermissions', () => {
   let shallow;
 
-  const dispatchMock = jest.fn().mockName('dispatch');
-  useDispatch.mockReturnValue(dispatchMock);
-
-  useCurrentUserId.mockReturnValue('current-user-id');
-  useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
-  useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
-
   beforeEach(() => {
     shallow = createShallow({ dive: true });
+
+    const dispatchMock = jest.fn().mockName('dispatch');
+    useDispatch.mockReturnValue(dispatchMock);
+
+    useCurrentUserId.mockReturnValue('current-user-id');
+    useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
+    useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
   });
 
   it('renders pure component with correct props', () => {

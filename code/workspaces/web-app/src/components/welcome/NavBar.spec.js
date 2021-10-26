@@ -4,9 +4,11 @@ import NavBar from './NavBar';
 import { getAuth } from '../../config/auth';
 
 jest.mock('../../config/auth');
-getAuth.mockImplementation(() => ({
-  login: jest.fn(),
-}));
+beforeEach(() => {
+  getAuth.mockImplementation(() => ({
+    login: jest.fn(),
+  }));
+});
 
 describe('NavBar', () => {
   let shallow;

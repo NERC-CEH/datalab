@@ -3,10 +3,10 @@ import projectUsersSelectors from '../selectors/projectUsersSelectors';
 import { useProjectUsers } from './projectUsersHooks';
 
 jest.mock('./useShallowSelector');
-useShallowSelector.mockReturnValue('expected-value');
 
 beforeEach(() => {
   jest.clearAllMocks();
+  useShallowSelector.mockReturnValue('expected-value');
 });
 
 describe('useProjectUsers', () => {

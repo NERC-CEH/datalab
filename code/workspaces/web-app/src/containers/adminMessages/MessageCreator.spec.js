@@ -5,16 +5,14 @@ import MomentUtils from '@date-io/moment';
 import MessageCreator from './MessageCreator';
 import Message from '../../components/app/Message';
 
-configure({ testIdAttribute: 'id' });
-
-jest.mock('../../components/app/Message', () => jest.fn(() => <>Message</>));
+jest.mock('../../components/app/Message', () => props => <div>{`Message: ${props.message.message}, AllowDismiss: ${props.allowDismiss.toString()}`}</div>);
 
 const createMessageFn = jest.fn();
 const d = new Date('2021/01/01 12:34:56');
 
 describe('MessageCreator', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    configure({ testIdAttribute: 'id' });
     Date.now = jest.fn(() => d);
   });
 
@@ -25,14 +23,13 @@ describe('MessageCreator', () => {
   );
 
   it('renders correctly', () => {
-    const wrapper = render(MessageCreatorWithProvider());
+    const wrapper = render(<MessageCreatorWithProvider />);
 
     expect(wrapper.container).toMatchSnapshot();
-    expect(Message).toHaveBeenCalledWith({ message: { message: '' }, allowDismiss: false }, {});
   });
 
   it('shows preview when clicked', () => {
-    const wrapper = render(MessageCreatorWithProvider());
+    const wrapper = render(<MessageCreatorWithProvider />);
     const previewedMessage = screen.getByTestId('messagePreview');
     const buttons = screen.getAllByRole('button');
 
@@ -49,15 +46,15 @@ describe('MessageCreator', () => {
   });
 
   it('Updates the Message preview when input box is typed in', () => {
-    const wrapper = render(MessageCreatorWithProvider());
+    const wrapper = render(<MessageCreatorWithProvider />);
 
     // Expect blank input before 'typing' into message box
-    expect(Message).toHaveBeenCalledWith({ message: { message: '' }, allowDismiss: false }, {});
+    expect(wrapper.queryByText('Message: , AllowDismiss: false')).not.toBeNull();
 
     const textBox = wrapper.getAllByRole('textbox')[0];
     fireEvent.change(textBox, { target: { value: 'test input value' } });
 
     // Expect actual input after 'typing' into message box
-    expect(Message).toHaveBeenCalledWith({ message: { message: 'test input value' }, allowDismiss: false }, {});
+    expect(wrapper.queryByText('Message: test input value, AllowDismiss: false')).not.toBeNull();
   });
 });
