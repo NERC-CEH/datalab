@@ -1,6 +1,7 @@
 # 1. Getting Ready
 
-A Panel site can be used to visualise a Jupyter notebook, so, before continuing, you will need the following:
+A Panel site can be used to visualise a Jupyter notebook, so, before continuing,
+you will need the following:
 
 * A project
 * Project storage
@@ -31,15 +32,15 @@ int_slider = pn.widgets.IntSlider(name='X value', start=-10, end=10, step=1, val
 @pn.depends(int_slider.param.value)
 def get_plot(x):
     y = x ** 2
-    
+
     if x not in xs:
         xs.append(x)
         ys.append(y)
-    
+
     plt.clf()
-    plt.plot(xs, ys, 'ro', markersize=5) 
+    plt.plot(xs, ys, 'ro', markersize=5)
     plt.plot(x, y, 'go', markersize=10)
-    
+
     return fig
 
 dashboard = pn.Row(
