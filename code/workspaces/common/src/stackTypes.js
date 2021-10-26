@@ -5,10 +5,12 @@ const DASK = 'DASK';
 const JUPYTER = 'jupyter';
 const JUPYTERLAB = 'jupyterlab';
 const NBVIEWER = 'nbviewer';
+const PANEL = 'panel';
 const PROJECT = 'project';
 const RSHINY = 'rshiny';
 const RSTUDIO = 'rstudio';
 const SPARK = 'SPARK';
+const VOILA = 'voila';
 const ZEPPELIN = 'zeppelin';
 const singleHostNameTypes = [JUPYTER, JUPYTERLAB, RSTUDIO];
 
@@ -25,10 +27,12 @@ export {
   JUPYTER,
   JUPYTERLAB,
   NBVIEWER,
+  PANEL,
   PROJECT,
   RSHINY,
   RSTUDIO,
   SPARK,
+  VOILA,
   ZEPPELIN,
   isSingleHostName,
   basePath,

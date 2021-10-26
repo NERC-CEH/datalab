@@ -27,6 +27,8 @@ describe('Site dialog', () => {
       { value: 'value' },
       { value: 'another value' },
     ],
+    fileField: true,
+    condaField: true,
   });
 
   it('creates correct snapshot', () => {

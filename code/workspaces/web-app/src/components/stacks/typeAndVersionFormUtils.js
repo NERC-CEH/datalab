@@ -34,3 +34,6 @@ export const updateVersionOnTypeChange = (formName, typeFieldName, versionFieldN
     );
   }
 };
+
+export const getCanChooseFile = (imageOptions, type) => imageOptions[type] && imageOptions[type].userCanChooseFile;
+export const getCanChooseConda = (imageOptions, type) => imageOptions[type] && imageOptions[type].userCanChooseConda;

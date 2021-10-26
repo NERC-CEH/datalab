@@ -222,6 +222,8 @@ input StackCreationRequest {
     shared: VisibilityType
     visible: VisibilityType
     assetIds: [String]
+    condaPath: String
+    filename: String
 }
 
 # Type to describe the mutation for updating a Stack.

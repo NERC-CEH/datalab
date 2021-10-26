@@ -22,28 +22,45 @@ spec:
           image: {{ &image }}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 5000
+            - containerPort: 8866
               protocol: TCP
-          args: ["python3",
-                "-m", "nbviewer",
-                "--localfiles=/notebooks",
-                "--debug",
-                "--logging=debug",
-                "--no-cache"]
+          command: ["/bin/bash"]
+          args: ["-c",
+            "cd /notebooks;
+            if [ -n \"$FILENAME\" ]; then
+              voila $FILENAME;
+            else 
+              voila .;
+            fi;"]
+          env:
+            - name: CONDA_ENV_DIR
+              value: "/data/conda/"
+            - name: JUPYTER_DATA_DIR
+              value: "/data/.jupyter"
+            - name: FILENAME
+              value: {{ &filename }}
           livenessProbe:
             httpGet:
               path: /
-              port: 5000
+              port: 8866
             initialDelaySeconds: 5
             periodSeconds: 10
 {{#volumeMount}}
           volumeMounts:
-            - name: glusterfsvol
+            - name: persistentfsvol
               mountPath: /notebooks
               subPath: {{ &sourcePath }}
               readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/conda
+              subPath: conda
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/.jupyter
+              subPath: .jupyter
+              readOnly: false
       volumes:
-        - name: glusterfsvol
+        - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
 {{/volumeMount}}

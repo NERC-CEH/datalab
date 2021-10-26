@@ -3,8 +3,7 @@ import { stackTypes } from 'common';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
 import zeppelinStack from './zeppelinStack';
-import rshinyStack from './rshinyStack';
-import nbviewerStack from './nbviewerStack';
+import siteStack from './siteStack';
 
 // NOTE: All other stack details should come from 'common/src/config/images'
 const STACKS = Object.freeze({
@@ -30,13 +29,23 @@ const STACKS = Object.freeze({
   },
   RSHINY: {
     type: stackTypes.RSHINY,
-    create: rshinyStack.createRShinyStack,
-    delete: rshinyStack.deleteRShinyStack,
+    create: siteStack.createSiteStack,
+    delete: siteStack.deleteSiteStack,
   },
   NBVIEWER: {
     type: stackTypes.NBVIEWER,
-    create: nbviewerStack.createNbViewerStack,
-    delete: nbviewerStack.deleteNbViewerStack,
+    create: siteStack.createSiteStack,
+    delete: siteStack.deleteSiteStack,
+  },
+  PANEL: {
+    type: stackTypes.PANEL,
+    create: siteStack.createSiteStack,
+    delete: siteStack.deleteSiteStack,
+  },
+  VOILA: {
+    type: stackTypes.VOILA,
+    create: siteStack.createSiteStack,
+    delete: siteStack.deleteSiteStack,
   },
 });
 

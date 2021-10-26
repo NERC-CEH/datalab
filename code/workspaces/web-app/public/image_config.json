@@ -37,7 +37,7 @@
       "versions": [
         {
           "displayName": "Dask 2021.6/Spark 3.1.2",
-          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "versions": [
         {
           "displayName": "Dask 2021.6/Spark 3.1.2",
-          "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
@@ -67,6 +67,18 @@
         {
           "displayName": "Latest",
           "image": "jupyter/nbviewer:latest"
+        }
+      ]
+    },
+    "panel": {
+      "displayName": "Panel",
+      "category": "PUBLISH",
+      "userCanChooseFile": true,
+      "userCanChooseConda": true,
+      "versions": [
+        {
+          "displayName": "Latest",
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
         }
       ]
     },
@@ -116,6 +128,17 @@
       ],
       "masterAddress": "spark://spark-master:7077",
       "sharedRLibs": "/data/packages/R/%p/%v"
+    },
+    "voila": {
+      "displayName": "Voila",
+      "category": "PUBLISH",
+      "userCanChooseFile": true,
+      "versions": [
+        {
+          "displayName": "Latest",
+          "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
+        }
+      ]
     },
     "zeppelin": {
       "displayName": "Zeppelin",

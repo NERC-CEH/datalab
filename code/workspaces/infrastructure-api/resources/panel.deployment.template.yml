@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ name }}
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+        user-pod: {{ type }}
+    spec:
+      # No init container need as the subPath variable only mounts the required directory. If the directory is missing
+      # this is automatically created.
+      containers:
+        - name: {{ name }}
+          image: {{ &image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5006
+              protocol: TCP
+          command: ["/bin/bash"]
+          args: ["-c",
+            "cd /notebooks;
+            if [ -n \"$CONDA_ENV\" ]; then
+              source activate $CONDA_ENV;
+            fi;
+            if [ -n \"$FILENAME\" ]; then
+              panel serve $FILENAME;
+            else 
+              panel serve *.ipynb *.py --glob;
+            fi;"]
+          env:
+            - name: CONDA_ENV_DIR
+              value: "/data/conda/"
+            - name: JUPYTER_DATA_DIR
+              value: "/data/.jupyter"
+            - name: CONDA_ENV
+              value: {{ &condaPath }}
+            - name: FILENAME
+              value: {{ &filename }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5006
+            initialDelaySeconds: 5
+            periodSeconds: 10
+{{#volumeMount}}
+          volumeMounts:
+            - name: persistentfsvol
+              mountPath: /notebooks
+              subPath: {{ &sourcePath }}
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/conda
+              subPath: conda
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/.jupyter
+              subPath: .jupyter
+              readOnly: true
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+{{/volumeMount}}

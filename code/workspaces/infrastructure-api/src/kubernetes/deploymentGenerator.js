@@ -9,6 +9,9 @@ const { basePath } = stackTypes;
 
 const containerInfo = imageConfig();
 
+const getSiteDeploymentTemplateName = siteType => `${siteType.toUpperCase()}_DEPLOYMENT`;
+const getSiteServiceTemplateName = siteType => `${siteType.toUpperCase()}_SERVICE`;
+
 function getImage(type, version) {
   try {
     return version ? image(type, version) : defaultImage(type);
@@ -138,34 +141,20 @@ function createRStudioDeployment({ deploymentName, volumeMount, type, version })
   return generateManifest(context, DeploymentTemplates.RSTUDIO_DEPLOYMENT);
 }
 
-function createRShinyDeployment({ deploymentName, sourcePath, type, volumeMount, version }) {
+function createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, version, condaPath, filename }) {
   const img = getImage(type, version);
   const context = {
     name: deploymentName,
     sourcePath,
-    rshiny: {
-      image: img.image,
-    },
+    image: img.image,
     type,
     volumeMount,
+    condaPath,
+    filename,
   };
 
-  return generateManifest(context, DeploymentTemplates.RSHINY_DEPLOYMENT);
-}
-
-function createNbViewerDeployment({ deploymentName, sourcePath, type, volumeMount, version }) {
-  const img = getImage(type, version);
-  const context = {
-    name: deploymentName,
-    sourcePath,
-    nbviewer: {
-      image: img.image,
-    },
-    type,
-    volumeMount,
-  };
-
-  return generateManifest(context, DeploymentTemplates.NBVIEWER_DEPLOYMENT);
+  const templateName = getSiteDeploymentTemplateName(type);
+  return generateManifest(context, DeploymentTemplates[templateName]);
 }
 
 function createMinioDeployment({ name, deploymentName, type, version }) {
@@ -217,14 +206,11 @@ function createRStudioService({ serviceName }) {
   return generateManifest(context, ServiceTemplates.RSTUDIO_SERVICE);
 }
 
-function createRShinyService({ serviceName }) {
+function createSiteService({ serviceName, type }) {
   const context = { name: serviceName };
-  return generateManifest(context, ServiceTemplates.RSHINY_SERVICE);
-}
 
-function createNbViewerService({ serviceName }) {
-  const context = { name: serviceName };
-  return generateManifest(context, ServiceTemplates.NBVIEWER_SERVICE);
+  const templateName = getSiteServiceTemplateName(type);
+  return generateManifest(context, ServiceTemplates[templateName]);
 }
 
 function createMinioService({ serviceName }) {
@@ -304,14 +290,12 @@ export default {
   createJupyterDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
-  createRShinyDeployment,
-  createNbViewerDeployment,
+  createSiteDeployment,
   createMinioDeployment,
   createJupyterService,
   createZeppelinService,
   createRStudioService,
-  createRShinyService,
-  createNbViewerService,
+  createSiteService,
   createMinioService,
   createSparkDriverHeadlessService,
   createPySparkConfigMap,
