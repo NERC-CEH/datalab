@@ -23,6 +23,10 @@ Array [
     "value": "nbviewer",
   },
   Object {
+    "text": "Panel",
+    "value": "panel",
+  },
+  Object {
     "text": "RShiny",
     "value": "rshiny",
   },
@@ -33,6 +37,10 @@ Array [
   Object {
     "text": undefined,
     "value": "spark",
+  },
+  Object {
+    "text": "Voila",
+    "value": "voila",
   },
   Object {
     "text": "Zeppelin",

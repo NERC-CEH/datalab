@@ -24,7 +24,8 @@ async function createStack(user, params) {
 
   logger.info(`Creating new ${type} stack with name: ${name} for project: ${projectKey}`);
 
-  const creationResponse = await stack.create(params);
+  const stackUrl = url(projectKey, name, type);
+  const creationResponse = await stack.create({ ...params, url: stackUrl });
   logger.info('About to mount assets');
   await mountAssetsOnStack(params);
   await stackRepository.createOrUpdate(
@@ -34,7 +35,7 @@ async function createStack(user, params) {
       ...params,
       category: imageCategory(type),
       status: status.REQUESTED,
-      url: url(projectKey, name, type),
+      url: stackUrl,
       internalEndpoint: `http://${params.type}-${name}.${projectKey}`,
     },
   );

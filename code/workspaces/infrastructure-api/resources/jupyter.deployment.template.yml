@@ -49,7 +49,8 @@ spec:
             "--NotebookApp.token=$(JUPYTER_TOKEN)",
             "--NotebookApp.allow_origin={{ domain }}",
             "--NotebookApp.notebook_dir=/data/notebooks/{{ name }}",
-            "--NotebookApp.base_url={{{ basePath }}}"]
+            "--NotebookApp.base_url={{{ basePath }}}",
+            "--collaborative"]
           ports:
             - containerPort: 8888
               protocol: TCP

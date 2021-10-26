@@ -22,6 +22,8 @@ describe('Site dialog', () => {
       { value: 'value' },
       { value: 'another value' },
     ],
+    fileField: true,
+    condaField: true,
   });
 
   beforeEach(() => {

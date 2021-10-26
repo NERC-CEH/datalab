@@ -290,6 +290,8 @@ const createStackValidator = [
   checkExistsWithMsg('displayName'),
   checkExistsWithMsg('volumeMount'),
   body('assetIds').optional().isArray().withMessage('must be an array of strings.'),
+  check('condaPath', 'condaPath must be a string if specified').optional().isString(),
+  check('filename', 'filename must be a string if specified').optional().isString(),
 ];
 
 const validators = {

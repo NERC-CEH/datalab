@@ -24,10 +24,16 @@ metadata:
 {{#proxyHeadersConfigMap}}
     nginx.ingress.kubernetes.io/proxy-set-headers: "{{ &proxyHeadersConfigMap }}"
 {{/proxyHeadersConfigMap}}
+{{#clusterIssuer}}
+    cert-manager.io/cluster-issuer: "{{ &clusterIssuer }}"
+{{/clusterIssuer}}
 spec:
   tls:
   - hosts:
     - {{ service.host }}
+    {{#clusterIssuer}}
+    secretName: "{{ name }}-tls-secret"
+    {{/clusterIssuer}}
   rules:
   - host: {{ service.host }}
     http:

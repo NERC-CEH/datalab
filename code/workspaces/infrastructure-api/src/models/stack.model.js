@@ -24,6 +24,8 @@ const StackSchema = new Schema({
   volumeMount: String,
   version: { type: String, default: null },
   assetIds: { type: [String], default: () => [] },
+  condaPath: String,
+  filename: String,
 });
 
 StackSchema.query.filterByProject = byProjectKey.filterFind;

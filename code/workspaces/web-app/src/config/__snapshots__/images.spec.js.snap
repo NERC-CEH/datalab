@@ -7,8 +7,8 @@ Object {
     "displayName": "Jupyter",
     "versions": Array [
       Object {
-        "displayName": "Dask 2.30.0 support",
-        "image": "nerc/jupyterlab:fbf2130-dask-2.30",
+        "displayName": "Dask 2021.6/Spark 3.1.2",
+        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
       },
     ],
   },
@@ -17,8 +17,8 @@ Object {
     "displayName": "JupyterLab",
     "versions": Array [
       Object {
-        "displayName": "Dask 2.30.0 support",
-        "image": "nerc/jupyterlab:fbf2130-dask-2.30",
+        "displayName": "Dask 2021.6/Spark 3.1.2",
+        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
       },
     ],
   },
@@ -66,6 +66,18 @@ Object {
       },
     ],
   },
+  "panel": Object {
+    "category": "PUBLISH",
+    "displayName": "Panel",
+    "userCanChooseConda": true,
+    "userCanChooseFile": true,
+    "versions": Array [
+      Object {
+        "displayName": "Latest",
+        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
+      },
+    ],
+  },
   "rshiny": Object {
     "category": "PUBLISH",
     "displayName": "RShiny",
@@ -82,6 +94,17 @@ Object {
       Object {
         "displayName": "3.5.3",
         "image": "nerc/rshiny:3.5.3",
+      },
+    ],
+  },
+  "voila": Object {
+    "category": "PUBLISH",
+    "displayName": "Voila",
+    "userCanChooseFile": true,
+    "versions": Array [
+      Object {
+        "displayName": "Latest",
+        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
       },
     ],
   },

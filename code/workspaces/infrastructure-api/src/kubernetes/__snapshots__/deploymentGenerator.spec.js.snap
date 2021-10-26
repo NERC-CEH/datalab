@@ -351,6 +351,172 @@ spec:
 "
 `;
 
+exports[`deploymentGenerator createSiteDeployment creates expected manifest 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: panel-name
+  name: panel-name
+spec:
+  selector:
+    matchLabels:
+      name: panel-name
+  template:
+    metadata:
+      labels:
+        name: panel-name
+        user-pod: panel
+    spec:
+      # No init container need as the subPath variable only mounts the required directory. If the directory is missing
+      # this is automatically created.
+      containers:
+        - name: panel-name
+          image: nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5006
+              protocol: TCP
+          command: [\\"/bin/bash\\"]
+          args: [\\"-c\\",
+            \\"cd /notebooks;
+            if [ -n \\\\\\"$CONDA_ENV\\\\\\" ]; then
+              source activate $CONDA_ENV;
+            fi;
+            if [ -n \\\\\\"$FILENAME\\\\\\" ]; then
+              panel serve $FILENAME;
+            else 
+              panel serve *.ipynb *.py --glob;
+            fi;\\"]
+          env:
+            - name: CONDA_ENV_DIR
+              value: \\"/data/conda/\\"
+            - name: JUPYTER_DATA_DIR
+              value: \\"/data/.jupyter\\"
+            - name: CONDA_ENV
+              value: /data/conda/my-env
+            - name: FILENAME
+              value: notebook.ipynb
+            - name: BOKEH_ALLOW_WS_ORIGIN
+              value: localhost:5006,project-panel.datalabs.nerc.ac.uk
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5006
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: persistentfsvol
+              mountPath: /notebooks
+              subPath: notebooks/my-notebook
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/conda
+              subPath: conda
+              readOnly: true
+            - name: persistentfsvol
+              mountPath: /data/.jupyter
+              subPath: .jupyter
+              readOnly: true
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: volumeMount-claim
+"
+`;
+
+exports[`deploymentGenerator createSiteDeployment creates expected manifest for RShiny 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: rshiny-name
+  name: rshiny-name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: rshiny-name
+  template:
+    metadata:
+      labels:
+        name: rshiny-name
+        user-pod: rshiny
+    spec:
+      containers:
+        - image: nerc/rshiny:4.0.1
+          imagePullPolicy: \\"IfNotPresent\\"
+          name: rshiny-name
+          ports:
+            - containerPort: 3838
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 2Gi
+          # Setting these custom values based on loadup times using packrat and
+          # experience with single threaded RShiny applications which can be
+          # slow to respond to polling (default timeout = 1 second)
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3838
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 10
+          volumeMounts:
+            - name: glusterfsvol
+              mountPath: /data
+              readOnly: true
+            - name: glusterfsvol
+              mountPath: /srv/shiny-server
+              subPath: notebooks/my-notebook
+      volumes:
+        - name: glusterfsvol
+          persistentVolumeClaim:
+            claimName: volumeMount-claim
+"
+`;
+
+exports[`deploymentGenerator createSiteService creates expected manifest 1`] = `
+"---
+apiVersion: v1
+kind: Service
+metadata:
+  name: panel-name
+spec:
+  ports:
+  - name: panel-name-web-ui
+    port: 80
+    targetPort: 5006
+  selector:
+    name: panel-name
+  type: NodePort
+"
+`;
+
+exports[`deploymentGenerator createSiteService creates expected manifest for RShiny 1`] = `
+"---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rshiny-name
+spec:
+  ports:
+    - name: rshiny-name-web-ui
+      port: 80
+      targetPort: 3838
+  selector:
+    name: rshiny-name
+  type: NodePort
+"
+`;
+
 exports[`deploymentGenerator generates createAutoScaler manifest 1`] = `
 "apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
@@ -510,7 +676,7 @@ spec:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/jupyterlab:fbf2130-dask-2.30
+        - image: nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"start.sh\\",
@@ -518,7 +684,8 @@ spec:
             \\"--NotebookApp.token=$(JUPYTER_TOKEN)\\",
             \\"--NotebookApp.allow_origin=project-key-notebook-name.datalabs.localhost\\",
             \\"--NotebookApp.notebook_dir=/data/notebooks/deployment-name\\",
-            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\"]
+            \\"--NotebookApp.base_url=/resource/project-key/notebook-name\\",
+            \\"--collaborative\\"]
           ports:
             - containerPort: 8888
               protocol: TCP

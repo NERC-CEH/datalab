@@ -18,7 +18,7 @@ const commonProps = {
 };
 
 const CreateSiteForm = ({
-  handleSubmit, cancel, submitting, dataStorageOptions, projectKey, typeOptions, versionOptions,
+  handleSubmit, cancel, submitting, dataStorageOptions, projectKey, typeOptions, versionOptions, fileField, condaField,
 }) => {
   const { startText, endText } = getUrlNameStartEndText(projectKey, window.location);
 
@@ -79,6 +79,24 @@ const CreateSiteForm = ({
           placeholder="Source Directory for Site"
           startText="/data/" />
       </div>
+      {fileField && <div>
+        <Field
+          { ...commonProps }
+          name="filename"
+          label="Filename (optional)"
+          helperText="If no filename is specified, the whole directory will be used."
+          placeholder="Filename in Source Directory"
+        />
+        </div>}
+      {condaField && <div>
+        <Field
+          {...commonProps}
+          name="condaPath"
+          label="Path to Conda environment (optional)"
+          helperText="The file path to the conda environment to use."
+          placeholder="/data/conda/conda-env"
+        />
+        </div>}
       <div>
         <Field
           { ...commonProps }
@@ -123,6 +141,8 @@ CreateSiteForm.propTypes = {
   projectKey: PropTypes.string.isRequired,
   typeOptions: dropDownOptionsType.isRequired,
   versionOptions: dropDownOptionsType.isRequired,
+  fileField: PropTypes.bool,
+  condaField: PropTypes.bool,
 };
 
 const CreateSiteReduxForm = reduxForm({
