@@ -7,4 +7,6 @@ const listUsers = () => ({
   payload: listUsersService.listUsers(),
 });
 
-export default { listUsers };
+const userActions = { listUsers };
+
+export default userActions;

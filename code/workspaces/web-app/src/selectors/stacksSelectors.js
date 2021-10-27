@@ -1,5 +1,6 @@
 const selectStacksArray = ({ stacks }) => stacks;
 
-export default {
+const stacksSelectors = {
   stacksArray: selectStacksArray,
 };
+export default stacksSelectors;

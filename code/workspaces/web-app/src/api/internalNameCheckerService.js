@@ -11,6 +11,7 @@ function checkNameUniqueness(projectKey, name) {
     .then(errorHandler('data.checkNameUniqueness'));
 }
 
-export default {
+const internalNameCheckerService = {
   checkNameUniqueness,
 };
+export default internalNameCheckerService;

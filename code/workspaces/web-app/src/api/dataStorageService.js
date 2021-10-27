@@ -95,7 +95,7 @@ function editDataStoreDetails(projectKey, name, updatedDetails) {
     .then(errorHandler('data.dataStorage'));
 }
 
-export default {
+const dataStorageService = {
   loadDataStorage,
   getCredentials,
   createDataStore,
@@ -104,3 +104,4 @@ export default {
   removeUserFromDataStore,
   editDataStoreDetails,
 };
+export default dataStorageService;

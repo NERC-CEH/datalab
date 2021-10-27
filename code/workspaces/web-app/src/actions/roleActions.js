@@ -25,4 +25,6 @@ const setCatalogueRole = (userId, catalogueRole) => ({
   payload: rolesService.setCatalogueRole(userId, catalogueRole),
 });
 
-export default { getAllUsersAndRoles, setInstanceAdmin, setDataManager, setCatalogueRole };
+const roleActions = { getAllUsersAndRoles, setInstanceAdmin, setDataManager, setCatalogueRole };
+
+export default roleActions;

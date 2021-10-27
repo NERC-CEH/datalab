@@ -10,4 +10,5 @@ import {
 
 const promiseTypeSuffixes = [PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE];
 
-export default [routerMiddleware(browserHistory), promise({ promiseTypeSuffixes })];
+const middleware = [routerMiddleware(browserHistory), promise({ promiseTypeSuffixes })];
+export default middleware;

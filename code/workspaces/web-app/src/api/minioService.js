@@ -11,4 +11,5 @@ function openStorage(storageUrl, token) {
     .then(() => window.open(storageUrl));
 }
 
-export default { openStorage };
+const minioService = { openStorage };
+export default minioService;

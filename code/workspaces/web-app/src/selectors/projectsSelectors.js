@@ -1,5 +1,7 @@
 const selectProjectArray = ({ projects }) => projects;
 
-export default {
+const projectSelectors = {
   projectArray: selectProjectArray,
 };
+
+export default projectSelectors;

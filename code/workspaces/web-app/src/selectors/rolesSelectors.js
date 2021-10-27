@@ -1,5 +1,7 @@
 const selectRoles = ({ roles }) => roles;
 
-export default {
+const rolesSelectors = {
   roles: selectRoles,
 };
+
+export default rolesSelectors;

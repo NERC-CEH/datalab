@@ -31,10 +31,11 @@ const loadAllAssets = () => ({
   payload: assetRepoService.loadAllAssets(),
 });
 
-export default {
+const assetRepoActions = {
   addRepoMetadata,
   editRepoMetadata,
   clearRepoMetadata,
   loadVisibleAssets,
   loadAllAssets,
 };
+export default assetRepoActions;

@@ -1,5 +1,7 @@
 const selectDataStorageArray = ({ dataStorage }) => dataStorage;
 
-export default {
+const dataStorageSelectors = {
   dataStorageArray: selectDataStorageArray,
 };
+
+export default dataStorageSelectors;

@@ -1,5 +1,7 @@
 const selectAssetRepo = ({ assetRepo }) => assetRepo;
 
-export default {
+const assetRepoSelectors = {
   assetRepo: selectAssetRepo,
 };
+
+export default assetRepoSelectors;

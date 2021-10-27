@@ -7,6 +7,8 @@ const checkNameUniqueness = (projectKey, internalName) => ({
   payload: internalNameCheckerService.checkNameUniqueness(projectKey, internalName),
 });
 
-export default {
+const internalNameCheckerActions = {
   checkNameUniqueness,
 };
+
+export default internalNameCheckerActions;

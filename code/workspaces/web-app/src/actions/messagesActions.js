@@ -31,4 +31,5 @@ const dismissMessage = messageId => ({
   payload: messageId,
 });
 
-export default { createMessage, deleteMessage, getMessages, getAllMessages, dismissMessage };
+const messagesActions = { createMessage, deleteMessage, getMessages, getAllMessages, dismissMessage };
+export default messagesActions;

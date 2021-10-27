@@ -1,5 +1,7 @@
 const selectProjectUsers = ({ projectUsers }) => projectUsers;
 
-export default {
+const projectUsersSelectors = {
   projectUsers: selectProjectUsers,
 };
+
+export default projectUsersSelectors;

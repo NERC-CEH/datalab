@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
-import ReactMarkdown from 'react-markdown';
 import Message from './Message';
 import messagesActions from '../../actions/messagesActions';
 

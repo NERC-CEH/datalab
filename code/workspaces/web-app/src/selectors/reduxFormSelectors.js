@@ -3,6 +3,8 @@ const selectReduxFormValue = (formName, fieldName) => (state) => {
   return formData && formData.values && formData.values[fieldName];
 };
 
-export default {
+const reduxFormSelectors = {
   reduxFormValue: selectReduxFormValue,
 };
+
+export default reduxFormSelectors;

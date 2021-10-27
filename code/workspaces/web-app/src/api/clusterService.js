@@ -66,4 +66,5 @@ const scaleCluster = async (cluster, replicas) => {
   return errorHandler(`data.${replicas > 0 ? 'scaleupCluster' : 'scaledownCluster'}`)(response);
 };
 
-export default { createCluster, deleteCluster, loadClusters, scaleCluster };
+const clusterService = { createCluster, deleteCluster, loadClusters, scaleCluster };
+export default clusterService;

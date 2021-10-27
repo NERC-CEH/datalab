@@ -19,4 +19,6 @@ function clearAccessToken() {
   cookies.remove(COOKIE_NAME, options);
 }
 
-export default { storeAccessToken, clearAccessToken };
+const authCookies = { storeAccessToken, clearAccessToken };
+export default authCookies;
+

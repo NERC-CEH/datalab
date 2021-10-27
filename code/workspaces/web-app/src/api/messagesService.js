@@ -61,4 +61,5 @@ async function getAllMessages() {
   return errorHandler('data')(response);
 }
 
-export default { createMessage, deleteMessage, getMessages, getAllMessages };
+const messagesService = { createMessage, deleteMessage, getMessages, getAllMessages };
+export default messagesService;

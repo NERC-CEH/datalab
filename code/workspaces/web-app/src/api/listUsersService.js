@@ -11,4 +11,5 @@ function listUsers() {
     .then(errorHandler('data.users'));
 }
 
-export default { listUsers };
+const listUsersService = { listUsers };
+export default listUsersService;

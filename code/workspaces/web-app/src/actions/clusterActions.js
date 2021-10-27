@@ -31,4 +31,5 @@ const scaleCluster = ({ projectKey, name, type }, replicas) => ({
   payload: clusterService.scaleCluster({ projectKey, name, type }, replicas),
 });
 
-export default { createCluster, loadClusters, updateClusters, deleteCluster, scaleCluster };
+const clusterActions = { createCluster, loadClusters, updateClusters, deleteCluster, scaleCluster };
+export default clusterActions;
