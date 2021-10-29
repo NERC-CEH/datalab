@@ -19,8 +19,9 @@ class Auth {
   }
 
   login() {
-    // Re-direct to login screen
-    this.oidcInit.signinRedirect({ state: { appRedirect: window.location.pathname } });
+    // Re-direct to login screen, maintaining any query parameters in the URL.
+    const redirectPath = `${window.location.pathname}${window.location.search}`;
+    this.oidcInit.signinRedirect({ state: { appRedirect: redirectPath } });
   }
 
   selfServiceSignUp() {
