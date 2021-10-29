@@ -4,6 +4,7 @@ import { permissionTypes } from 'common';
 import SideBarNavigation from '../../components/app/SideBarNavigation';
 import AssetRepoAddMetadataPage from '../../pages/AssetRepoAddMetadataPage';
 import AssetRepoFindPage from '../../pages/AssetRepoFindPage';
+import AddAssetsToNotebookPage from '../../pages/AddAssetsToNotebookPage';
 import RoutePermissions from '../../components/common/RoutePermissionWrapper';
 import NotFoundPage from '../../pages/NotFoundPage';
 import AssetRepoSideBar from '../../components/app/AssetRepoSideBar';
@@ -26,6 +27,12 @@ function AssetRepoNavigationContainer() {
           exact
           path="/assets/find"
           component={AssetRepoFindPage}
+          permission={SYSTEM_DATA_MANAGER}
+        />
+        <RoutePermissions
+          exact
+          path="/assets/add-to-notebook"
+          component={AddAssetsToNotebookPage}
           permission={SYSTEM_DATA_MANAGER}
         />
         <Redirect exact from="/assets" to="/assets/add-metadata" />

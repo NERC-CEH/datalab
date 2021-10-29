@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been selected 1`] = `
+<div>
+  <div>
+    <form
+      id="submit"
+    >
+      <div>
+        <div>
+          Field: {"name":"project","label":"Project","options":["project1","project2"]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"name":"notebook","label":"Notebook","options":["notebook1","notebook2"]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"name":"assets","label":"Assets","projectKey":"project1"}
+        </div>
+      </div>
+      <div
+        class="makeStyles-fromControlContainer-56"
+      >
+        <span
+          class="makeStyles-button-57"
+          title=""
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            tabindex="0"
+            type="submit"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Apply
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </span>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-57 MuiButton-outlinedSecondary"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Cancel
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookForm renders correctly when a project and notebook have been selected 1`] = `
+<div>
+  <div>
+    <form
+      id="submit"
+    >
+      <div>
+        <div>
+          Field: {"name":"project","label":"Project","options":["project1","project2"]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"name":"notebook","label":"Notebook","options":["notebook1","notebook2"]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"disabled":true,"placeholder":"","name":"existingAssets","label":"Existing Assets on Notebook","projectKey":"project1"}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"name":"assets","label":"Assets","projectKey":"project1"}
+        </div>
+      </div>
+      <div
+        class="makeStyles-fromControlContainer-1"
+      >
+        <span
+          class="makeStyles-button-2"
+          title=""
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            tabindex="0"
+            type="submit"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Apply
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </span>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-2 MuiButton-outlinedSecondary"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Cancel
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;

@@ -12,6 +12,7 @@ const AssetRepoSideBar = ({ classes }) => (
       <SideBarGroup title='Asset Repo'>
         <SideBarButton to="/assets/add-metadata" label="Add Metadata" icon="dashboard"/>
         <SideBarButton to="/assets/find" label="Find Asset" icon="dashboard"/>
+        <SideBarButton to="/assets/add-to-notebook" label="Add Assets to Notebook" icon="dashboard"/>
       </SideBarGroup>
     </List>
   </div>

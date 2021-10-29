@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAssetsToNotebookContainer passes the correct initialValues to the form 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}],"initialValues":{"project":"project1","notebook":"notebook1","assets":[{"assetId":"asset1"},{"assetId":"asset2"}]}}
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookContainer passes the correct props to the form when there are no projects or notebooks 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[],"notebookOptions":[],"initialValues":{"assets":[]}}
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookContainer passes the correct props to the form when there are projects and notebooks 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}],"initialValues":{"assets":[]}}
+  </div>
+</div>
+`;
