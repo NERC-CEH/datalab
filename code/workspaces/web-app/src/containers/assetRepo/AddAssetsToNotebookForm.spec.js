@@ -6,7 +6,7 @@ import { PureAddAssetsToNotebookForm, FORM_NAME, EXISTING_ASSETS_FIELD_NAME } fr
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 
 jest.mock('redux-form', () => ({
-  reduxForm: jest.fn(() => jest.fn()),
+  ...jest.requireActual('redux-form'),
   Field: props => (<div>{`Field: ${JSON.stringify(props)}`}</div>),
   change: jest.fn(),
   reset: jest.fn(),
@@ -30,8 +30,8 @@ describe('AddAssetsToNotebookForm', () => {
 
   const generateProps = () => ({
     handleSubmit,
-    projectOptions: ['project1', 'project2'],
-    notebookOptions: ['notebook1', 'notebook2'],
+    projectOptions: [{ text: 'project1', value: 'project1' }, { text: 'project2', value: 'project2' }],
+    notebookOptions: [{ text: 'notebook1', value: 'notebook1' }, { text: 'notebook2', value: 'notebook2' }],
   });
 
   it('renders correctly when a project and notebook have been selected', () => {
@@ -67,7 +67,7 @@ describe('AddAssetsToNotebookForm', () => {
 
     const wrapper = render(<PureAddAssetsToNotebookForm {...props}/>);
 
-    fireEvent.click(wrapper.getByText('Cancel'));
+    fireEvent.click(wrapper.getByText('Reset'));
     expect(dispatchMock).toHaveBeenCalledTimes(1);
     expect(dispatchMock).toHaveBeenCalledWith(resetDispatch);
     expect(reset).toHaveBeenCalledTimes(1);

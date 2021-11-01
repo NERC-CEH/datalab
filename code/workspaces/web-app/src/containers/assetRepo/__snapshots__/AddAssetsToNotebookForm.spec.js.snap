@@ -8,12 +8,12 @@ exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been s
     >
       <div>
         <div>
-          Field: {"name":"project","label":"Project","options":["project1","project2"]}
+          Field: {"name":"project","label":"Project","options":[{"text":"project1","value":"project1"},{"text":"project2","value":"project2"}]}
         </div>
       </div>
       <div>
         <div>
-          Field: {"name":"notebook","label":"Notebook","options":["notebook1","notebook2"]}
+          Field: {"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
         </div>
       </div>
       <div>
@@ -51,7 +51,7 @@ exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been s
           <span
             class="MuiButton-label"
           >
-            Cancel
+            Reset
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -71,12 +71,12 @@ exports[`AddAssetsToNotebookForm renders correctly when a project and notebook h
     >
       <div>
         <div>
-          Field: {"name":"project","label":"Project","options":["project1","project2"]}
+          Field: {"name":"project","label":"Project","options":[{"text":"project1","value":"project1"},{"text":"project2","value":"project2"}]}
         </div>
       </div>
       <div>
         <div>
-          Field: {"name":"notebook","label":"Notebook","options":["notebook1","notebook2"]}
+          Field: {"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
         </div>
       </div>
       <div>
@@ -119,7 +119,7 @@ exports[`AddAssetsToNotebookForm renders correctly when a project and notebook h
           <span
             class="MuiButton-label"
           >
-            Cancel
+            Reset
           </span>
           <span
             class="MuiTouchRipple-root"

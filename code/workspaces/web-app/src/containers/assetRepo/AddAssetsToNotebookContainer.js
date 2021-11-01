@@ -100,6 +100,7 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
   const notebooks = useSelector(s => s.stacks.value);
   const visibleAssets = useSelector(s => s.assetRepo.value.assets);
 
+  // Get any prefilled values from the URL, e.g. ?project=project&notebook=notebook&assets=asset1,asset2
   const { project, notebook, assets: assetIdString } = queryString.parse(search);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm, change, reset } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
@@ -12,6 +13,17 @@ export const NOTEBOOK_FIELD_NAME = 'notebook';
 export const EXISTING_ASSETS_FIELD_NAME = 'existingAssets';
 export const ASSETS_FIELD_NAME = 'assets';
 
+const getExistingAssets = (dispatch, stacks, projectValue, notebookValue) => {
+  // When a notebook in a project is selected, get the assets already on the notebook and display them.
+  if (projectValue && notebookValue) {
+    const notebook = stacks.find(s => s.projectKey === projectValue && s.name === notebookValue);
+    if (notebook) {
+      const assetsOnNotebook = notebook.assets;
+      dispatch(change(FORM_NAME, EXISTING_ASSETS_FIELD_NAME, assetsOnNotebook));
+    }
+  }
+};
+
 const AddAssetsToNotebookFormContent = ({ handleSubmit, projectOptions, notebookOptions }) => {
   const projectValue = useReduxFormValue(FORM_NAME, PROJECT_FIELD_NAME);
   const notebookValue = useReduxFormValue(FORM_NAME, NOTEBOOK_FIELD_NAME);
@@ -20,17 +32,15 @@ const AddAssetsToNotebookFormContent = ({ handleSubmit, projectOptions, notebook
   const stacks = useSelector(s => s.stacks.value);
 
   useEffect(() => {
-    // When a notebook in a project is selected, get the assets already on the notebook and display them.
-    if (projectValue && notebookValue) {
-      const notebook = stacks.find(s => s.projectKey === projectValue && s.name === notebookValue);
-      if (notebook) {
-        const assetsOnNotebook = notebook.assets;
-        dispatch(change(FORM_NAME, EXISTING_ASSETS_FIELD_NAME, assetsOnNotebook));
-      }
-    }
+    getExistingAssets(dispatch, stacks, projectValue, notebookValue);
   }, [dispatch, stacks, projectValue, notebookValue]);
 
-  const clearForm = () => dispatch(reset(FORM_NAME));
+  const clearForm = () => {
+    // "reset" will retain any prefilled project/notebook/asset values from the URL,
+    //  but we have to make sure the existing assets are still there if necessary.
+    dispatch(reset(FORM_NAME));
+    getExistingAssets(dispatch, stacks, projectValue, notebookValue);
+  };
 
   return (
     <div>
@@ -73,10 +83,25 @@ const AddAssetsToNotebookFormContent = ({ handleSubmit, projectOptions, notebook
             parse={formatAndParseMultiSelect}
           />
         </div>
-        <UpdateFormControls onCancel={clearForm}/>
+        <UpdateFormControls onCancel={clearForm} cancelButtonText={'Reset'}/>
       </form>
     </div>
   );
+};
+
+const options = PropTypes.shape({
+  text: PropTypes.string,
+  value: PropTypes.string,
+});
+
+const formPropTypes = {
+  projectOptions: PropTypes.arrayOf(options),
+  notebookOptions: PropTypes.arrayOf(options),
+};
+
+AddAssetsToNotebookFormContent.propTypes = {
+  ...formPropTypes,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 const AddAssetsToNotebookForm = reduxForm({
@@ -84,6 +109,16 @@ const AddAssetsToNotebookForm = reduxForm({
   enableReinitialize: true,
   validate: validator,
 })(AddAssetsToNotebookFormContent);
+
+AddAssetsToNotebookForm.propTypes = {
+  ...formPropTypes,
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape({
+    project: PropTypes.string,
+    notebook: PropTypes.string,
+    assets: PropTypes.array,
+  }),
+};
 
 export {
   AddAssetsToNotebookFormContent as PureAddAssetsToNotebookForm,
