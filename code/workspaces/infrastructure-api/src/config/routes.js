@@ -11,6 +11,7 @@ import secretRouter from '../routers/secretRouter';
 import centralAssetRepoRouter from '../routers/centralAssetRepoRouter';
 import clustersRouter from '../routers/clustersRouter';
 import messagesRouter from '../routers/messagesRouter';
+import notificationsRouter from '../notifications/notificationsRouter';
 
 function configureRoutes(app) {
   app.get('/status', status.status);
@@ -19,6 +20,7 @@ function configureRoutes(app) {
   app.use('/clusters', clustersRouter);
   app.use('/logs', logsRouter);
   app.use('/messages', messagesRouter);
+  app.use('/notifications', notificationsRouter);
   app.use('/projects', projectsRouter);
   app.use('/resources', resourcesRouter);
   app.use('/secrets', secretRouter);
