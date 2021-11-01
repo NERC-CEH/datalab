@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notificationsConfig has expected content 1`] = `
+Object {
+  "dev": true,
+  "email": Object {
+    "fromAddress": "support@example.com",
+    "fromDisplayName": "DataLabs Support",
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "secure": false,
+    "toAddresses": "admin1@example.com, admin2@example.com",
+    "username": "",
+  },
+}
+`;
