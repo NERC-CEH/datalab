@@ -99,6 +99,9 @@ type Mutation {
     # Create a new project
     createProject(project: ProjectCreationRequest): Project
 
+    # Request a new project if not an admin
+    requestProject(project: ProjectCreationRequest): Boolean
+
     # Update a project
     updateProject(project: ProjectUpdateRequest): Project
 

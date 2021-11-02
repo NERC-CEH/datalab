@@ -38,6 +38,18 @@ async function createProject(creationRequest, user, token) {
   return response.data;
 }
 
+async function requestProject(creationRequest, user, token) {
+  const project = projectActionRequestToProject(creationRequest);
+  project.owner = user.sub;
+
+  const newProjectNotification = {
+    title: 'New Project Request',
+    message: JSON.stringify(project, null, 2),
+    userIDs: project.owner,
+  };
+  await axios.post(`${infraServiceUrl}/notifications`, newProjectNotification, generateOptions(token));
+}
+
 async function updateProject(updateRequest, token) {
   const project = projectActionRequestToProject(updateRequest);
   const response = await axios.put(`${infraServiceUrl}/projects/${project.key}`, project, generateOptions(token));
@@ -95,6 +107,7 @@ export default {
   getProjectByKey,
   isProjectKeyUnique,
   createProject,
+  requestProject,
   updateProject,
   deleteProject,
   addProjectPermission,
