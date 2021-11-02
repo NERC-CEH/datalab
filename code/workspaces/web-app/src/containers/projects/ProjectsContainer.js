@@ -100,24 +100,29 @@ const projectUserPermissions = (project, userPermissions) => (
     : []
 );
 
-export const openCreationForm = dispatch => () => dispatch(
+export const openCreationForm = (dispatch, requestOnly) => () => dispatch(
   modalDialogActions.openModalDialog(
     MODAL_TYPE_CREATE_PROJECT,
     {
-      onSubmit: onCreateProjectSubmit(dispatch),
+      requestOnly,
+      onSubmit: onCreateProjectSubmit(dispatch, requestOnly),
       onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
     },
   ),
 );
 
-export const onCreateProjectSubmit = dispatch => async (project) => {
+export const onCreateProjectSubmit = (dispatch, requestOnly) => async (project) => {
   dispatch(modalDialogActions.closeModalDialog());
   try {
-    await dispatch(projectActions.createProject(project));
+    if (requestOnly) {
+      await dispatch(projectActions.requestProject(project));
+    } else {
+      await dispatch(projectActions.createProject(project));
+    }
     await reset(FORM_NAME);
-    notify.success(`${PROJECT_TYPE_NAME} created`);
+    notify.success(`${PROJECT_TYPE_NAME} ${requestOnly ? 'requested: a notification has been sent to the instance admins.' : 'created'}`);
   } catch (error) {
-    notify.error(`Unable to create ${PROJECT_TYPE_NAME}`);
+    notify.error(`Unable to ${requestOnly ? 'request' : 'create'} ${PROJECT_TYPE_NAME}`);
   } finally {
     await dispatch(projectActions.loadProjects());
   }
@@ -203,6 +208,8 @@ const ProjectsContainer = () => {
   );
   const userAccessibleStacks = filterProjectsByUser(filteredStacks, myProjectFilter);
 
+  const isAdmin = userPermissions.includes(SYSTEM_INSTANCE_ADMIN);
+
   return (
     <>
       <Controls
@@ -217,13 +224,14 @@ const ProjectsContainer = () => {
         typeNamePlural={PROJECT_TYPE_NAME_PLURAL}
         openStack={project => history.push(`/projects/${project.key}/info`)}
         deleteStack={confirmDeleteProject(dispatch)}
-        openCreationForm={openCreationForm(dispatch)}
+        openCreationForm={openCreationForm(dispatch, !isAdmin)}
         showCreateButton={true}
         userPermissions={project => [...projectUserPermissions(project, userPermissions), ...userPermissions]}
-        createPermission={SYSTEM_INSTANCE_ADMIN}
+        createPermission={userPermissions[0]}
         openPermission={PROJECT_OPEN_PERMISSION}
         deletePermission=""
         editPermission=""
+        actionButtonLabelPrefix={isAdmin ? null : 'Request'}
       />
     </>
   );

@@ -44,6 +44,18 @@ describe('StackCards', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('creates correct snapshot with different action button label prefix', () => {
+    const props = {
+      ...generateProps(),
+      stacks: { fetching: false, value: [] },
+      actionButtonLabelPrefix: 'Request',
+    };
+
+    const output = shallowRender(props);
+
+    expect(output).toMatchSnapshot();
+  });
+
   it('creates correct snapshot for an empty array', () => {
     // Arrange
     const props = { ...generateProps(), stacks: { fetching: false, value: [] } };

@@ -9,4 +9,12 @@ describe('CreateProjectDialog', () => {
       onCancel={jest.fn().mockName('onCancel')}
     />)).toMatchSnapshot();
   });
+
+  it('renders request form only if requestOnly is set', () => {
+    expect(shallow(<CreateProjectDialog
+      onSubmit={jest.fn().mockName('onSubmit')}
+      onCancel={jest.fn().mockName('onCancel')}
+      requestOnly={true}
+    />)).toMatchSnapshot();
+  });
 });

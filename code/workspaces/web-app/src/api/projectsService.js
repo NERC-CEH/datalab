@@ -59,6 +59,16 @@ function createProject(project) {
     .then(errorHandler('data.createProject'));
 }
 
+function requestProject(project) {
+  const mutation = `
+    RequestProject($project: ProjectCreationRequest) {
+      requestProject(project: $project)
+    }`;
+
+  return gqlMutation(mutation, { project })
+    .then(errorHandler('data.requestProject'));
+}
+
 function updateProject(project) {
   const mutation = `
     UpdateProject($project: ProjectUpdateRequest) {
@@ -89,5 +99,14 @@ function checkProjectKeyUniqueness(projectKey) {
     .then(errorHandler('data.checkProjectKeyUniqueness'));
 }
 
-const projectsService = { loadProjects, getAllProjectsAndResources, loadProjectInfo, createProject, deleteProject, checkProjectKeyUniqueness, updateProject };
+const projectsService = {
+  loadProjects,
+  getAllProjectsAndResources,
+  loadProjectInfo,
+  createProject,
+  requestProject,
+  deleteProject,
+  checkProjectKeyUniqueness,
+  updateProject,
+};
 export default projectsService;

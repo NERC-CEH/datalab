@@ -19,4 +19,15 @@ describe('CreateProjectForm', () => {
       />,
     )).toMatchSnapshot();
   });
+
+  it('renders request form correctly', () => {
+    expect(shallow(
+      <PureCreateProjectForm
+        handleSubmit={jest.fn().mockName('handleSubmit')}
+        onCancel={jest.fn().mockName('onCancel')}
+        classes={classes}
+        requestOnly={true}
+      />,
+    )).toMatchSnapshot();
+  });
 });

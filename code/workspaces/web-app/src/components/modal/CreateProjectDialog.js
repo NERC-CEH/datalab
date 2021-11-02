@@ -5,11 +5,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import CreateProjectForm from '../projects/CreateProjectForm';
 
-const CreateProjectDialog = ({ onSubmit, onCancel }) => (
+const CreateProjectDialog = ({ onSubmit, onCancel, requestOnly }) => (
   <Dialog open={true} fullWidth>
-    <DialogTitle>Create New Project</DialogTitle>
+    <DialogTitle>{`${requestOnly ? 'Request' : 'Create'} New Project`}</DialogTitle>
     <DialogContent>
-      <CreateProjectForm onSubmit={onSubmit} onCancel={onCancel} />
+      <CreateProjectForm onSubmit={onSubmit} onCancel={onCancel} requestOnly={requestOnly}/>
     </DialogContent>
   </Dialog>
 );

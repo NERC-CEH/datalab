@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PagePrimaryAction from '../common/buttons/PagePrimaryActionButton';
 
-const NewStackButton = ({ onClick, typeName }) => (
+const NewStackButton = ({ onClick, typeName, labelPrefix }) => (
   <PagePrimaryAction aria-label="add" onClick={onClick}>
-    {`Create ${typeName}`}
+    {`${labelPrefix || 'Create'} ${typeName}`}
   </PagePrimaryAction>
 );
 

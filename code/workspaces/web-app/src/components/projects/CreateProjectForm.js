@@ -25,7 +25,7 @@ const style = theme => ({
   },
 });
 
-const CreateProjectForm = ({ handleSubmit, onCancel, classes }) => (
+const CreateProjectForm = ({ handleSubmit, onCancel, classes, requestOnly }) => (
   <form
     className={classes.form}
     onSubmit={handleSubmit}
@@ -54,7 +54,7 @@ const CreateProjectForm = ({ handleSubmit, onCancel, classes }) => (
       component={renderTextField}
       className={classes.input}
     />
-    <CreateFormControls onCancel={() => onCancel()} fullWidthButtons />
+    <CreateFormControls onCancel={() => onCancel()} fullWidthButtons actionLabel={requestOnly ? 'Request' : 'Create'}/>
   </form>
 );
 

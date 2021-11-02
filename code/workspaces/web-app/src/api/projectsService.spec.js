@@ -82,6 +82,25 @@ describe('projectsService', () => {
     });
   });
 
+  describe('requestProject', () => {
+    const testProject = {
+      name: 'test',
+    };
+    it('should build the correct query', async () => {
+      mockClient.prepareSuccess({ requestProject: 'expectedValue' });
+
+      const response = await projectsService.requestProject(testProject);
+      expect(response).toEqual('expectedValue');
+      expect(mockClient.lastQuery().replace(/\s/g, '')).toEqual('RequestProject($project:ProjectCreationRequest){requestProject(project:$project)}');
+    });
+
+    it('should throw an error if the query fails', async () => {
+      mockClient.prepareFailure('error');
+
+      await expect(projectsService.requestProject(testProject)).rejects.toEqual({ error: 'error' });
+    });
+  });
+
   describe('deleteProject', () => {
     it('should build the correct query and unpack the results', () => {
       mockClient.prepareSuccess({ deleteProject: 'expectedValue' });

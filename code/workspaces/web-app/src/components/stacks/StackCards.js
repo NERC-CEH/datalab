@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, scaleStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets = undefined },
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets = undefined, actionButtonLabelPrefix = undefined },
 ) => {
   const classes = useStyles();
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
@@ -57,7 +57,7 @@ const StackCards = (
 
   const actionButton = showCreateButton ? (
     <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
-      <NewStackButton onClick={openCreationForm} typeName={typeName} />
+      <NewStackButton onClick={openCreationForm} typeName={typeName} labelPrefix={actionButtonLabelPrefix}/>
     </PermissionWrapper>
   ) : null;
 
