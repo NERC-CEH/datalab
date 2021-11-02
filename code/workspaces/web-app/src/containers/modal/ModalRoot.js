@@ -32,6 +32,7 @@ import {
   MODAL_TYPE_SCALE_STACK,
   MODAL_TYPE_CREATE_CLUSTER,
   MODAL_TYPE_EDIT_ASSET,
+  MODAL_TYPE_CONFIRM_CREATION,
 } from '../../constants/modaltypes';
 
 const MODAL_COMPONENTS = {
@@ -50,6 +51,7 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_SCALE_STACK]: ConfirmationDialog,
   [MODAL_TYPE_CREATE_CLUSTER]: CreateClusterDialog,
   [MODAL_TYPE_EDIT_ASSET]: EditAssetDialog,
+  [MODAL_TYPE_CONFIRM_CREATION]: ConfirmationDialog,
 };
 
 const ModalRoot = ({ modalType, props }) => {

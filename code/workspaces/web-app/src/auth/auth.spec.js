@@ -36,11 +36,13 @@ const MockAuth = {
 const auth = new Auth(MockAuth, MockAuth, authConfig);
 
 describe('auth', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
+  const defaultLocation = {
+    pathname: 'expectedPathname',
+  };
+  const setWindow = (loc = defaultLocation) => {
     const location = {
       ...window.location,
-      pathname: 'expectedPathname',
+      ...loc,
     };
 
     delete window.location;
@@ -49,6 +51,11 @@ describe('auth', () => {
       value: location,
       configurable: true,
     });
+  };
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    setWindow();
 
     signinRedirectCallbackMock.mockReturnValue(
       Promise.resolve({
@@ -75,6 +82,20 @@ describe('auth', () => {
     // Assert
     expect(signinRedirectMock.mock.calls.length).toBe(1);
     expect(signinRedirectMock).toBeCalledWith({ state: { appRedirect: 'expectedPathname' } });
+  });
+
+  it('login calls signinRedirect with correct props when there is a search string', () => {
+    setWindow({
+      pathname: 'expectedPathname',
+      search: '?expected=search',
+    });
+
+    // Act
+    auth.login();
+
+    // Assert
+    expect(signinRedirectMock.mock.calls.length).toBe(1);
+    expect(signinRedirectMock).toBeCalledWith({ state: { appRedirect: 'expectedPathname?expected=search' } });
   });
 
   it('logout calls clearSession and signoutRedirect', () => {

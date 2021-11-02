@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAssetsToNotebookPage renders correctly 1`] = `
+<div>
+  <div
+    class="Page-pageTemplate-1"
+  >
+    <h4
+      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+    >
+      Add Assets to Notebook
+    </h4>
+    <div
+      class="Page-contentArea-2"
+    >
+      <div>
+        AddAssetsToNotebookContainer: {"userPermissions":["expectedPermission"]}
+      </div>
+    </div>
+    <div>
+      <hr
+        class="MuiDivider-root Footer-divider-34"
+      />
+      <p
+        class="MuiTypography-root Footer-versionText-35 MuiTypography-body2"
+      >
+        Version: undefined
+      </p>
+    </div>
+  </div>
+</div>
+`;

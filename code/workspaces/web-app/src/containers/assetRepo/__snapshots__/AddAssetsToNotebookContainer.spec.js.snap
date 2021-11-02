@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAssetsToNotebookContainer initialises correctly when all properties are specified in the URL 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}]}
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookContainer initialises correctly when project and notebook are specified in the URL 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}]}
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookContainer passes the correct props to the form when there are no projects or notebooks 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[],"notebookOptions":[]}
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookContainer passes the correct props to the form when there are projects and notebooks and a project is selected 1`] = `
+<div>
+  <div>
+    Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}]}
+  </div>
+</div>
+`;

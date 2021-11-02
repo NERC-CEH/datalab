@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been selected 1`] = `
+<div>
+  <div>
+    <form
+      id="submit"
+    >
+      <div>
+        <div>
+          Field: {"name":"project","label":"Project","options":[{"text":"project1","value":"project1"},{"text":"project2","value":"project2"}]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"disabled":false,"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"disabled":true,"name":"assets","label":"Assets","projectKey":"project1"}
+        </div>
+      </div>
+      <div
+        class="makeStyles-fromControlContainer-56"
+      >
+        <span
+          class="makeStyles-button-57"
+          title=""
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            tabindex="0"
+            type="submit"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Apply
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </span>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-57 MuiButton-outlinedSecondary"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Reset
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`AddAssetsToNotebookForm renders correctly when a project and notebook have been selected 1`] = `
+<div>
+  <div>
+    <form
+      id="submit"
+    >
+      <div>
+        <div>
+          Field: {"name":"project","label":"Project","options":[{"text":"project1","value":"project1"},{"text":"project2","value":"project2"}]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"disabled":false,"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"disabled":true,"placeholder":"","name":"existingAssets","label":"Existing Assets on Notebook","projectKey":"project1"}
+        </div>
+      </div>
+      <div>
+        <div>
+          Field: {"disabled":false,"name":"assets","label":"Assets","projectKey":"project1"}
+        </div>
+      </div>
+      <div
+        class="makeStyles-fromControlContainer-1"
+      >
+        <span
+          class="makeStyles-button-2"
+          title=""
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            tabindex="0"
+            type="submit"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Apply
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </span>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-2 MuiButton-outlinedSecondary"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Reset
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
