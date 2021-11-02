@@ -1,19 +1,18 @@
 import React from 'react';
 import { render, fireEvent, configure } from '@testing-library/react';
-import { change, reset } from 'redux-form';
 import * as redux from 'react-redux';
-import { PureAddAssetsToNotebookForm, FORM_NAME, EXISTING_ASSETS_FIELD_NAME } from './AddAssetsToNotebookForm';
+import { PureAddAssetsToNotebookForm } from './AddAssetsToNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 
 jest.mock('redux-form', () => ({
   ...jest.requireActual('redux-form'),
   Field: props => (<div>{`Field: ${JSON.stringify(props)}`}</div>),
-  change: jest.fn(),
-  reset: jest.fn(),
 }));
 
 describe('AddAssetsToNotebookForm', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
+  const clearFn = jest.fn();
+  const handleClear = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -24,12 +23,14 @@ describe('AddAssetsToNotebookForm', () => {
     redux.useDispatch = jest.fn().mockReturnValue(dispatchMock);
     redux.useSelector = jest.fn().mockReturnValue([]);
     reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('dummyValue');
+    handleClear.mockReturnValue(clearFn);
   });
 
   const handleSubmit = jest.fn();
 
   const generateProps = () => ({
     handleSubmit,
+    handleClear,
     projectOptions: [{ text: 'project1', value: 'project1' }, { text: 'project2', value: 'project2' }],
     notebookOptions: [{ text: 'notebook1', value: 'notebook1' }, { text: 'notebook2', value: 'notebook2' }],
   });
@@ -60,18 +61,15 @@ describe('AddAssetsToNotebookForm', () => {
     expect(wrapper.queryAllByText('Field', { exact: false })).toHaveLength(3);
   });
 
-  it('dispatches reset when form is cleared', () => {
+  it('calls handleClear when form is cleared', () => {
     const props = generateProps();
-    const resetDispatch = jest.fn();
-    reset.mockReturnValueOnce(resetDispatch);
 
     const wrapper = render(<PureAddAssetsToNotebookForm {...props}/>);
 
     fireEvent.click(wrapper.getByText('Reset'));
-    expect(dispatchMock).toHaveBeenCalledTimes(1);
-    expect(dispatchMock).toHaveBeenCalledWith(resetDispatch);
-    expect(reset).toHaveBeenCalledTimes(1);
-    expect(reset).toHaveBeenCalledWith(FORM_NAME);
+    expect(handleClear).toHaveBeenCalledTimes(1);
+    expect(handleClear).toHaveBeenCalledWith([], 'dummyValue', 'dummyValue');
+    expect(clearFn).toHaveBeenCalledTimes(1);
   });
 
   it('calls submit function when the form is submitted', () => {
@@ -82,41 +80,5 @@ describe('AddAssetsToNotebookForm', () => {
     expect(handleSubmit).toHaveBeenCalledTimes(0);
     fireEvent.submit(wrapper.getByTestId('submit'));
     expect(handleSubmit).toHaveBeenCalledTimes(1);
-  });
-
-  it('displays existing assets when a notebook is selected', () => {
-    const props = generateProps();
-    reduxFormHooks.useReduxFormValue = jest.fn()
-      .mockReturnValueOnce('project1')
-      .mockReturnValueOnce('notebook1');
-    const changeDispatch = jest.fn();
-    change.mockReturnValueOnce(changeDispatch);
-
-    const assets = ['existing asset1', 'existing asset2'];
-    const stacks = [
-      {
-        projectKey: 'otherProject',
-        name: 'notebook1',
-        assets: ['not this asset'],
-      },
-      {
-        projectKey: 'project1',
-        name: 'notebook2',
-        assets: ['or this asset'],
-      },
-      {
-        projectKey: 'project1',
-        name: 'notebook1',
-        assets,
-      },
-    ];
-    redux.useSelector = jest.fn().mockReturnValue(stacks);
-
-    render(<PureAddAssetsToNotebookForm {...props}/>);
-
-    expect(dispatchMock).toHaveBeenCalledTimes(1);
-    expect(dispatchMock).toHaveBeenCalledWith(changeDispatch);
-    expect(change).toHaveBeenCalledTimes(1);
-    expect(change).toHaveBeenCalledWith(FORM_NAME, EXISTING_ASSETS_FIELD_NAME, assets);
   });
 });

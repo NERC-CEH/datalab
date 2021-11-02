@@ -13,12 +13,12 @@ exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been s
       </div>
       <div>
         <div>
-          Field: {"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
+          Field: {"disabled":false,"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
         </div>
       </div>
       <div>
         <div>
-          Field: {"name":"assets","label":"Assets","projectKey":"project1"}
+          Field: {"disabled":true,"name":"assets","label":"Assets","projectKey":"project1"}
         </div>
       </div>
       <div
@@ -76,7 +76,7 @@ exports[`AddAssetsToNotebookForm renders correctly when a project and notebook h
       </div>
       <div>
         <div>
-          Field: {"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
+          Field: {"disabled":false,"name":"notebook","label":"Notebook","options":[{"text":"notebook1","value":"notebook1"},{"text":"notebook2","value":"notebook2"}]}
         </div>
       </div>
       <div>
@@ -86,7 +86,7 @@ exports[`AddAssetsToNotebookForm renders correctly when a project and notebook h
       </div>
       <div>
         <div>
-          Field: {"name":"assets","label":"Assets","projectKey":"project1"}
+          Field: {"disabled":false,"name":"assets","label":"Assets","projectKey":"project1"}
         </div>
       </div>
       <div

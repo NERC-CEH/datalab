@@ -1,15 +1,17 @@
 import validate from 'validate.js';
 
-const constraints = () => ({
+const constraints = props => ({
   project: {
     presence: {
       allowEmpty: false,
     },
+    inclusion: props.projectOptions.map(o => o.value),
   },
   notebook: {
     presence: {
       allowEmpty: false,
     },
+    inclusion: props.notebookOptions.map(o => o.value),
   },
   assets: {
     presence: {
@@ -26,6 +28,6 @@ function errorReducer(accumulator, error) {
   return accumulator;
 }
 
-const syncValidate = values => validate(values, constraints(), { format: 'reduxForm' });
+const syncValidate = (values, props) => validate(values, constraints(props), { format: 'reduxForm' });
 
 export default syncValidate;
