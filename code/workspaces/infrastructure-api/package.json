@@ -22,6 +22,7 @@
     "lodash": "4.17.21",
     "mongoose": "5.13.10",
     "mustache": "3.0.1",
+    "nodemailer": "^6.7.0",
     "service-chassis": "^0.1.0",
     "uuid": "3.3.2",
     "winston": "3.2.1"
@@ -42,7 +43,8 @@
     "jest": "26.6.0",
     "node-mocks-http": "1.7.6",
     "nodemon": "^1.19.1",
-    "shx": "^0.3.2"
+    "shx": "^0.3.2",
+    "supertest": "^6.1.6"
   },
   "scripts": {
     "test": "LOG_LEVEL=emerg jest --watch",

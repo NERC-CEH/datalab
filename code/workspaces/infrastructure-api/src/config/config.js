@@ -105,6 +105,12 @@ const config = convict({
     default: '',
     env: 'CLUSTER_ISSUER',
   },
+  emailPassword: {
+    doc: 'The password for the email account linked to the email notifier',
+    format: 'String',
+    default: '',
+    env: 'EMAIL_NOTIFIER_PASSWORD',
+  },
 });
 
 export default config;
