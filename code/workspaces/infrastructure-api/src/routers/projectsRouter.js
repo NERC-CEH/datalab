@@ -39,7 +39,6 @@ projectsRouter.delete(
 );
 projectsRouter.get(
   '/:projectKey/isunique',
-  permissionMiddleware(),
   projects.actionWithKeyValidator(),
   ew(projects.projectKeyIsUnique),
 );

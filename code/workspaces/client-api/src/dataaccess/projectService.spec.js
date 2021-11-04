@@ -84,6 +84,30 @@ describe('projectService', () => {
     expect(result).toEqual(dummyResponse);
   });
 
+  it('requestProject makes an api call and returns', async () => {
+    const requestedProject = {
+      name: 'Test Name',
+      description: 'Test description',
+      collaborationLink: 'test-link',
+      key: 'test-key',
+      owner: 'username',
+    };
+
+    const expectedProjectNotification = {
+      title: 'New Project Request',
+      message: JSON.stringify(requestedProject, null, 2),
+      userIDs: 'username',
+    };
+
+    // this is actually the assert as there is no return from this method, it fails if the wrong body is sent
+    httpMock.onPost(`${infraServiceUrl}/notifications`, expectedProjectNotification).reply(200);
+
+    const creationRequest = { ...testProject, projectKey: testProject.key };
+    delete creationRequest.key;
+
+    await projectService.requestProject(creationRequest, user, { userName: 'user1' }, token);
+  });
+
   it('updateProject makes an api call and returns the response data', async () => {
     const { key } = testProject;
     const dummyResponse = { id: 'id', ...testProject };

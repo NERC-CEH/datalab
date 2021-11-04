@@ -8,3 +8,12 @@ exports[`New Stack Button creates correct snapshot 1`] = `
   Create Stack
 </PagePrimaryActionButton>
 `;
+
+exports[`New Stack Button uses labelPrefix if present 1`] = `
+<PagePrimaryActionButton
+  aria-label="add"
+  onClick={[Function]}
+>
+  Request Stack
+</PagePrimaryActionButton>
+`;

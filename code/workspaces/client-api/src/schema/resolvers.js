@@ -60,6 +60,7 @@ const resolvers = {
     addProjectPermission: (obj, { permission: { projectKey, userId, role } }, { token }) => w(projectService.addProjectPermission(projectKey, userId, role, token)),
     removeProjectPermission: (obj, { permission: { projectKey, userId } }, { token }) => w(projectService.removeProjectPermission(projectKey, userId, token)),
     createProject: (obj, { project }, { user, token }) => w(projectService.createProject(project, user, token)),
+    requestProject: (obj, { project }, { user, token }) => w(projectService.requestProject(project, user, token)),
     updateProject: (obj, { project }, { token }) => w(projectService.updateProject(project, token)),
     deleteProject: (obj, { project: { projectKey } }, { token }) => w(projectService.deleteProject(projectKey, token)),
     createCentralAssetMetadata: (obj, { metadata }, { token }) => w(centralAssetRepoService.createAssetMetadata(metadata, token)),

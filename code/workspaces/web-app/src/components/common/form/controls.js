@@ -174,7 +174,7 @@ export const renderMultiSelectAutocompleteField = ({
   );
 };
 
-export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons = false }) => {
+export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons = false, actionLabel = 'Create' }) => {
   const classes = useStyles();
 
   return (
@@ -184,7 +184,7 @@ export const CreateFormControls = ({ onCancel, submitting, fullWidthButtons = fa
         disabled={submitting}
         fullWidth={fullWidthButtons}
       >
-        Create
+        {actionLabel}
       </PrimaryActionButton>
       <SecondaryActionButton
         style={{ marginLeft: theme.spacing(1) }}

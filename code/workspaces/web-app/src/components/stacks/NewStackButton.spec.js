@@ -23,4 +23,13 @@ describe('New Stack Button', () => {
     // Assert
     expect(output).toMatchSnapshot();
   });
+
+  it('uses labelPrefix if present', () => {
+    const props = generateProps();
+    props.labelPrefix = 'Request';
+
+    const output = shallowRender(props);
+
+    expect(output).toMatchSnapshot();
+  });
 });

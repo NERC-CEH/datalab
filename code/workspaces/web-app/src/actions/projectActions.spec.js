@@ -4,6 +4,7 @@ import projectActions, {
   SET_CURRENT_PROJECT_ACTION,
   CLEAR_CURRENT_PROJECT_ACTION,
   CREATE_PROJECT_ACTION,
+  REQUEST_PROJECT_ACTION,
   DELETE_PROJECT_ACTION,
   CHECK_PROJECT_KEY_UNIQUE_ACTION,
 } from './projectActions';
@@ -66,6 +67,18 @@ describe('projectActions', () => {
       expect(projectsService.createProject).toHaveBeenCalledTimes(1);
       expect(projectsService.createProject).toHaveBeenCalledWith(project);
       expect(output.type).toEqual(CREATE_PROJECT_ACTION);
+      expect(output.payload).toEqual('expected-payload');
+    });
+
+    it('requestProject', () => {
+      const project = { name: 'project', key: 'project' };
+      projectsService.requestProject = jest.fn(() => 'expected-payload');
+
+      const output = projectActions.requestProject(project);
+
+      expect(projectsService.requestProject).toHaveBeenCalledTimes(1);
+      expect(projectsService.requestProject).toHaveBeenCalledWith(project);
+      expect(output.type).toEqual(REQUEST_PROJECT_ACTION);
       expect(output.payload).toEqual('expected-payload');
     });
 

@@ -142,6 +142,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           }
         >
           <NewStackButton
+            labelPrefix="Create"
             onClick={[MockFunction openCreationForm]}
             typeName="expectedTypeName"
           />
@@ -197,6 +198,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
           }
         >
           <NewStackButton
+            labelPrefix="Create"
             onClick={[MockFunction openCreationForm]}
             typeName="expectedTypeName"
           />
@@ -332,6 +334,62 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
         ]
       }
       paginationBarItems={null}
+    />
+  </PromisedContentWrapper>
+</div>
+`;
+
+exports[`StackCards creates correct snapshot with different action button label prefix 1`] = `
+<div
+  className="makeStyles-stackDiv-1"
+>
+  <PromisedContentWrapper
+    fetchingClassName="makeStyles-placeholderCard-2"
+    promise={
+      Object {
+        "fetching": false,
+        "value": Array [],
+      }
+    }
+  >
+    <Pagination
+      items={
+        Array [
+          <div
+            className="makeStyles-placeholderCard-2"
+          >
+            <WithStyles(ForwardRef(Typography))
+              variant="body1"
+            >
+              No items to display.
+            </WithStyles(ForwardRef(Typography))>
+          </div>,
+        ]
+      }
+      paginationBarItems={
+        <ComponentWrapper
+          permission="create"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+          userPermissions={
+            Array [
+              "open",
+              "delete",
+              "create",
+              "edit",
+            ]
+          }
+        >
+          <NewStackButton
+            labelPrefix="Request"
+            onClick={[MockFunction openCreationForm]}
+            typeName="expectedTypeName"
+          />
+        </ComponentWrapper>
+      }
     />
   </PromisedContentWrapper>
 </div>

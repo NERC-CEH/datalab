@@ -5,6 +5,7 @@ export const GET_ALL_PROJECTS_AND_RESOURCES_ACTION = 'GET_ALL_PROJECTS_AND_RESOU
 export const SET_CURRENT_PROJECT_ACTION = 'SET_CURRENT_PROJECT_ACTION';
 export const CLEAR_CURRENT_PROJECT_ACTION = 'CLEAR_CURRENT_PROJECT_ACTION';
 export const CREATE_PROJECT_ACTION = 'CREATE_PROJECT_ACTION';
+export const REQUEST_PROJECT_ACTION = 'REQUEST_PROJECT_ACTION';
 export const UPDATE_PROJECT_ACTION = 'UPDATE_PROJECT_ACTION';
 export const DELETE_PROJECT_ACTION = 'DELETE_PROJECT_ACTION';
 export const CHECK_PROJECT_KEY_UNIQUE_ACTION = 'CHECK_PROJECT_KEY_UNIQUE_ACTION';
@@ -33,6 +34,11 @@ const createProject = project => ({
   payload: projectsService.createProject(project),
 });
 
+const requestProject = project => ({
+  type: REQUEST_PROJECT_ACTION,
+  payload: projectsService.requestProject(project),
+});
+
 const deleteProject = projectKey => ({
   type: DELETE_PROJECT_ACTION,
   payload: projectsService.deleteProject(projectKey),
@@ -49,7 +55,7 @@ const updateProject = project => ({
 });
 
 const projectActions = {
-  loadProjects, getAllProjectsAndResources, setCurrentProject, clearCurrentProject, createProject, deleteProject, checkProjectKeyUniqueness, updateProject,
+  loadProjects, getAllProjectsAndResources, setCurrentProject, clearCurrentProject, createProject, requestProject, deleteProject, checkProjectKeyUniqueness, updateProject,
 };
 
 export default projectActions;

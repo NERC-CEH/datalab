@@ -28,7 +28,7 @@ const projectsPayload = {
 
 function renderWithStore({
   projects = projectsPayload,
-  userPermissionsArray = ['expected-user-permission'],
+  userPermissionsArray = ['expected-user-permission', 'system:instance:admin'],
 } = {}) {
   const middlewares = [];
   const initialState = {
@@ -67,6 +67,11 @@ describe('ProjectsContainer', () => {
 
   it('renders to match snapshot', () => {
     const { wrapper } = renderWithStore();
+    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
+  });
+
+  it('renders request button if not admin', () => {
+    const { wrapper } = renderWithStore({ userPermissionsArray: ['expected-user-permission'] });
     expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
   });
 
@@ -131,6 +136,14 @@ describe('ProjectsContainer', () => {
         expect(dispatchMock).toHaveBeenCalledWith('createProjectMock');
       });
 
+      it('calls action to request project with project info if not admin', async () => {
+        projectActions.requestProject = jest.fn(() => 'requestProjectMock');
+        await onCreateProjectSubmit(dispatchMock, true)(projectInfo);
+        expect(projectActions.requestProject).toHaveBeenCalledTimes(1);
+        expect(projectActions.requestProject).toHaveBeenCalledWith(projectInfo);
+        expect(dispatchMock).toHaveBeenCalledWith('requestProjectMock');
+      });
+
       describe('on successful creation', () => {
         it('calls to clear the form using form name', async () => {
           await onCreateProjectSubmit(dispatchMock)(projectInfo);
@@ -144,11 +157,34 @@ describe('ProjectsContainer', () => {
         });
       });
 
+      describe('on successful request', () => {
+        it('calls to clear the form using form name', async () => {
+          await onCreateProjectSubmit(dispatchMock, true)(projectInfo);
+          expect(reset).toHaveBeenCalledTimes(1);
+          expect(reset).toHaveBeenCalledWith('createProject');
+        });
+
+        it('notifies the success', async () => {
+          await onCreateProjectSubmit(dispatchMock, true)(projectInfo);
+          expect(notify.success).toHaveBeenCalledTimes(1);
+          expect(notify.success).toHaveBeenCalledWith('Project requested: a notification has been sent to the instance admins.');
+        });
+      });
+
       describe('on failed creation', () => {
         it('notifies of failure', async () => {
           createProjectMock.mockImplementationOnce(() => { throw new Error(); });
           await onCreateProjectSubmit(dispatchMock)(projectInfo);
           expect(notify.error).toHaveBeenCalledTimes(1);
+        });
+      });
+
+      describe('on failed request', () => {
+        it('notifies of failure', async () => {
+          projectActions.requestProject = jest.fn(() => { throw new Error(); });
+          await onCreateProjectSubmit(dispatchMock, true)(projectInfo);
+          expect(notify.error).toHaveBeenCalledTimes(1);
+          expect(notify.error).toHaveBeenCalledWith('Unable to request Project');
         });
       });
     });
