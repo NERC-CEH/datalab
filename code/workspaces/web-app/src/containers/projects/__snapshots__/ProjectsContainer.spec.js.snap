@@ -379,7 +379,6 @@ exports[`ProjectsContainer renders request button if not admin 1`] = `
   </Controls>
   <Component
     actionButtonLabelPrefix="Request"
-    createPermission="expected-user-permission"
     deletePermission=""
     deleteStack={[Function]}
     editPermission=""
@@ -425,7 +424,6 @@ exports[`ProjectsContainer renders request button if not admin 1`] = `
   "typeName": "Project",
   "typeNamePlural": "Projects",
   "showCreateButton": true,
-  "createPermission": "expected-user-permission",
   "openPermission": "project.open",
   "deletePermission": "",
   "editPermission": "",
@@ -798,7 +796,6 @@ exports[`ProjectsContainer renders to match snapshot 1`] = `
   </Controls>
   <Component
     actionButtonLabelPrefix="Create"
-    createPermission="expected-user-permission"
     deletePermission=""
     deleteStack={[Function]}
     editPermission=""
@@ -844,7 +841,6 @@ exports[`ProjectsContainer renders to match snapshot 1`] = `
   "typeName": "Project",
   "typeNamePlural": "Projects",
   "showCreateButton": true,
-  "createPermission": "expected-user-permission",
   "openPermission": "project.open",
   "deletePermission": "",
   "editPermission": "",
