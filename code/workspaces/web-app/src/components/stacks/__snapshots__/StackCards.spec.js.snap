@@ -142,6 +142,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           }
         >
           <NewStackButton
+            labelPrefix="Create"
             onClick={[MockFunction openCreationForm]}
             typeName="expectedTypeName"
           />
@@ -197,6 +198,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
           }
         >
           <NewStackButton
+            labelPrefix="Create"
             onClick={[MockFunction openCreationForm]}
             typeName="expectedTypeName"
           />
