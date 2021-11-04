@@ -5,6 +5,6 @@
   "dependencies": {
     "prettier": "^2.1.2",
     "puppeteer": "^5.4.1",
-    "lighthouse": "^6.4.1"
+    "lighthouse": "^8.6.0"
   }
 }
