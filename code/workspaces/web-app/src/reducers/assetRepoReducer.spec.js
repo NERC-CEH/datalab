@@ -1,5 +1,11 @@
 import { PROMISE_TYPE_FAILURE, PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS } from '../actions/actionTypes';
-import { ADD_REPO_METADATA_ACTION, CLEAR_REPO_METADATA_ACTION, LOAD_VISIBLE_ASSETS_ACTION, LOAD_ALL_ASSETS_ACTION } from '../actions/assetRepoActions';
+import {
+  ADD_REPO_METADATA_ACTION,
+  CLEAR_REPO_METADATA_ACTION,
+  LOAD_VISIBLE_ASSETS_ACTION,
+  LOAD_ALL_ASSETS_ACTION,
+  LOAD_ONLY_VISIBLE_ASSETS_ACTION,
+} from '../actions/assetRepoActions';
 import assetRepoReducer, { addNewAssets } from './assetRepoReducer';
 
 describe('assetRepoReducer', () => {
@@ -137,6 +143,56 @@ describe('assetRepoReducer', () => {
 
       // Assert
       expect(nextState).toEqual({ error: payload, fetching: false, value: null });
+    });
+  });
+
+  describe('LOAD_ONLY_VISIBLE_ASSETS_ACTION', () => {
+    const baseState = () => ({
+      fetching: false,
+      value: {
+        createdAssetId: null,
+        assets: [],
+      },
+      error: null,
+    });
+
+    it('should handle LOAD_ONLY_VISIBLE_ASSETS_ACTION_PENDING', () => {
+      // Arrange
+      const type = `${LOAD_ONLY_VISIBLE_ASSETS_ACTION}_${PROMISE_TYPE_PENDING}`;
+      const action = { type };
+
+      // Act
+      const nextState = assetRepoReducer(baseState(), action);
+
+      // Assert
+      expect(nextState).toEqual({ ...baseState(), fetching: true });
+    });
+
+    it('should handle LOAD_ONLY_VISIBLE_ASSETS_ACTION_ACTION_SUCCESS', () => {
+      // Arrange
+      const type = `${LOAD_ONLY_VISIBLE_ASSETS_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+      const payload = [{ assetId: 'asset-1234' }];
+      const action = { type, payload };
+      const state = baseState();
+
+      // Act
+      const nextState = assetRepoReducer(state, action);
+
+      // Assert
+      expect(nextState).toEqual({ ...state, value: { ...state.value, assets: action.payload } });
+    });
+
+    it('should handle LOAD_ONLY_VISIBLE_ASSETS_ACTION_FAILURE', () => {
+      // Arrange
+      const type = `${LOAD_ONLY_VISIBLE_ASSETS_ACTION}_${PROMISE_TYPE_FAILURE}`;
+      const payload = 'example error';
+      const action = { type, payload };
+
+      // Act
+      const nextState = assetRepoReducer(baseState(), action);
+
+      // Assert
+      expect(nextState).toEqual({ ...baseState(), error: payload });
     });
   });
 });

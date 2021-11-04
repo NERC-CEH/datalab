@@ -85,7 +85,7 @@ export const addAssets = (dispatch, history, data) => async () => {
     notify.error('Unable to add asset(s) to notebook.');
   } finally {
     await dispatch(stackActions.loadStacksByCategory(project, NOTEBOOK_CATEGORY));
-    await dispatch(assetRepoActions.loadVisibleAssets(project));
+    await dispatch(assetRepoActions.loadOnlyVisibleAssets(project));
   }
 };
 
@@ -142,7 +142,7 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
     dispatch(stackActions.loadStacksByCategory(selectedProject, NOTEBOOK_CATEGORY));
 
     if (selectedProject) {
-      dispatch(assetRepoActions.loadVisibleAssets(selectedProject));
+      dispatch(assetRepoActions.loadOnlyVisibleAssets(selectedProject));
     }
   }, [dispatch, selectedProject, resetForm]);
 
