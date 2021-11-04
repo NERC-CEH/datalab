@@ -797,7 +797,7 @@ exports[`ProjectsContainer renders to match snapshot 1`] = `
     </div>
   </Controls>
   <Component
-    actionButtonLabelPrefix={null}
+    actionButtonLabelPrefix="Create"
     createPermission="expected-user-permission"
     deletePermission=""
     deleteStack={[Function]}
@@ -848,7 +848,7 @@ exports[`ProjectsContainer renders to match snapshot 1`] = `
   "openPermission": "project.open",
   "deletePermission": "",
   "editPermission": "",
-  "actionButtonLabelPrefix": null
+  "actionButtonLabelPrefix": "Create"
 }
     </div>
   </Component>

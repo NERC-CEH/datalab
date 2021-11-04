@@ -8,6 +8,7 @@ import NewStackButton from './NewStackButton';
 import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import Pagination from './Pagination';
+import { PROJECT_TYPE_NAME } from '../../containers/projects/projectTypeName';
 
 const useStyles = makeStyles(theme => ({
   stackDiv: {
@@ -24,6 +25,18 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
 }));
+
+const buildCreateButton = ({ userPermissions, createPermission, openCreationForm, typeName, actionButtonLabelPrefix }) => {
+  if (typeName === PROJECT_TYPE_NAME) {
+    return <NewStackButton onClick={openCreationForm} typeName={typeName} labelPrefix={actionButtonLabelPrefix}/>;
+  }
+
+  return (
+    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
+      <NewStackButton onClick={openCreationForm} typeName={typeName} labelPrefix={actionButtonLabelPrefix}/>
+    </PermissionWrapper>
+  );
+};
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, scaleStack, openCreationForm, showCreateButton,
@@ -55,11 +68,7 @@ const StackCards = (
         <Typography variant="body1">{`No ${typeNamePlural || 'items'} to display.`}</Typography>
       </div>];
 
-  const actionButton = showCreateButton ? (
-    <PermissionWrapper style={{ width: '100%' }} userPermissions={userPermissions()} permission={createPermission}>
-      <NewStackButton onClick={openCreationForm} typeName={typeName} labelPrefix={actionButtonLabelPrefix}/>
-    </PermissionWrapper>
-  ) : null;
+  const actionButton = showCreateButton ? buildCreateButton({ userPermissions, createPermission, openCreationForm, typeName, actionButtonLabelPrefix }) : null;
 
   return (
     <div className={classes.stackDiv}>

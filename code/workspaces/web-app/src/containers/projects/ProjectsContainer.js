@@ -227,11 +227,10 @@ const ProjectsContainer = () => {
         openCreationForm={openCreationForm(dispatch, !isAdmin)}
         showCreateButton={true}
         userPermissions={project => [...projectUserPermissions(project, userPermissions), ...userPermissions]}
-        createPermission={userPermissions[0]}
         openPermission={PROJECT_OPEN_PERMISSION}
         deletePermission=""
         editPermission=""
-        actionButtonLabelPrefix={isAdmin ? null : 'Request'}
+        actionButtonLabelPrefix={isAdmin ? 'Create' : 'Request'}
       />
     </>
   );
