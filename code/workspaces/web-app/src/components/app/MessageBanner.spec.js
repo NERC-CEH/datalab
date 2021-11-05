@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
+import messagesActions from '../../actions/messagesActions';
 import MessageBanner from './MessageBanner';
 
 jest.mock('react-redux');
+jest.mock('../../actions/messagesActions');
 jest.mock('./Message', () => props => (<>{`Message: ${JSON.stringify(props.message)}`}</>));
 
 const message1 = {
@@ -28,6 +30,8 @@ beforeEach(() => {
 describe('MessageBanner', () => {
   it('renders correct snapshot', () => {
     const wrapper = render(<MessageBanner/>);
+
+    expect(messagesActions.getMessages).toHaveBeenCalled();
     expect(wrapper.container).toMatchSnapshot();
   });
 });

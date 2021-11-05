@@ -8,6 +8,7 @@ import * as addAssetsForm from './AddAssetsToNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 import stackActions from '../../actions/stackActions';
 import notify from '../../components/common/notify';
+import stackService from '../../api/stackService';
 
 const renderWithLocation = (location, ComponentToRender, props = {}) => render(
   <MemoryRouter initialEntries={[location]}>
@@ -21,6 +22,14 @@ jest.mock('redux-form', () => ({
   reset: jest.fn(),
   initialize: jest.fn(),
 }));
+
+jest.mock('../../api/projectsService');
+jest.mock('../../api/stackService');
+jest.mock('../../api/assetRepoService');
+
+beforeEach(() => {
+  stackService.loadStacksByCategory.mockResolvedValue([]);
+});
 
 describe('AddAssetsToNotebookContainer', () => {
   const dispatchMock = jest.fn().mockName('dispatch');
