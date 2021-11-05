@@ -13,11 +13,13 @@ import { initialiseImages } from './config/images';
 import { initialiseStorage } from './config/storage';
 import { initialiseVersion } from './config/version';
 import { initialiseClusters } from './config/clusters';
+import { initialiseFeatureFlags } from './config/featureFlags';
 
 async function createApplication() {
   const store = configureStore();
   await Promise.all([
     initialiseAuth(),
+    initialiseFeatureFlags(),
     initialiseCatalogue(),
     initialiseImages(),
     initialiseStorage(),

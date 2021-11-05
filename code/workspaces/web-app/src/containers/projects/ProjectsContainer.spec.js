@@ -4,6 +4,7 @@ import createStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import { reset } from 'redux-form';
 import notify from '../../components/common/notify';
+import { getFeatureFlags } from '../../config/featureFlags';
 
 import ProjectsContainer, { confirmDeleteProject, deleteProject, onCreateProjectSubmit, projectToStack, stackMatchesFilter } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
@@ -15,6 +16,7 @@ jest.mock('redux-form');
 jest.mock('../../api/projectsService');
 jest.mock('../../components/common/notify');
 jest.mock('../../components/stacks/StackCards', () => props => <div>StackCards Mock - props = {JSON.stringify(props, null, 2)}</div>);
+jest.mock('../../config/featureFlags');
 
 const projectsPayload = {
   value: [{
@@ -49,6 +51,8 @@ let loadProjectsMock;
 beforeEach(() => {
   loadProjectsMock = jest.fn().mockResolvedValue(projectsPayload);
   projectsService.loadProjects = loadProjectsMock;
+
+  getFeatureFlags.mockReturnValue({ requestProjects: true });
 });
 
 describe('ProjectsContainer', () => {
@@ -71,6 +75,12 @@ describe('ProjectsContainer', () => {
   });
 
   it('renders request button if not admin', () => {
+    const { wrapper } = renderWithStore({ userPermissionsArray: ['expected-user-permission'] });
+    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
+  });
+
+  it('passes admin permission if requestProjects feature flag is off', () => {
+    getFeatureFlags.mockReturnValue({ requestProjects: false });
     const { wrapper } = renderWithStore({ userPermissionsArray: ['expected-user-permission'] });
     expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
   });

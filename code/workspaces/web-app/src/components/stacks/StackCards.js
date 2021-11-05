@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const buildCreateButton = ({ userPermissions, createPermission, openCreationForm, typeName, actionButtonLabelPrefix }) => {
-  if (typeName === PROJECT_TYPE_NAME) {
+  if (typeName === PROJECT_TYPE_NAME && !createPermission) {
     return <NewStackButton onClick={openCreationForm} typeName={typeName} labelPrefix={actionButtonLabelPrefix}/>;
   }
 
