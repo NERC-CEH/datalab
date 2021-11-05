@@ -17,6 +17,425 @@ Array [
 ]
 `;
 
+exports[`ProjectsContainer passes admin permission if requestProjects feature flag is off 1`] = `
+<ProjectsContainer>
+  <Controls
+    myProjectsFilter={true}
+    onSearchTextChange={[Function]}
+    searchText=""
+    toggleMyProjectsFilter={[Function]}
+  >
+    <div
+      className="makeStyles-controlContainer-1"
+    >
+      <div
+        className="makeStyles-filters-5"
+      >
+        <WithStyles(ForwardRef(ListItem))
+          button={true}
+          className="makeStyles-active-3"
+          onClick={[Function]}
+        >
+          <ForwardRef(ListItem)
+            button={true}
+            className="makeStyles-active-3"
+            classes={
+              Object {
+                "alignItemsFlexStart": "MuiListItem-alignItemsFlexStart",
+                "button": "MuiListItem-button",
+                "container": "MuiListItem-container",
+                "dense": "MuiListItem-dense",
+                "disabled": "Mui-disabled",
+                "divider": "MuiListItem-divider",
+                "focusVisible": "Mui-focusVisible",
+                "gutters": "MuiListItem-gutters",
+                "root": "MuiListItem-root",
+                "secondaryAction": "MuiListItem-secondaryAction",
+                "selected": "Mui-selected",
+              }
+            }
+            onClick={[Function]}
+          >
+            <WithStyles(ForwardRef(ButtonBase))
+              className="MuiListItem-root makeStyles-active-3 MuiListItem-gutters MuiListItem-button"
+              component="div"
+              disabled={false}
+              focusVisibleClassName="Mui-focusVisible"
+              onClick={[Function]}
+            >
+              <ForwardRef(ButtonBase)
+                className="MuiListItem-root makeStyles-active-3 MuiListItem-gutters MuiListItem-button"
+                classes={
+                  Object {
+                    "disabled": "Mui-disabled",
+                    "focusVisible": "Mui-focusVisible",
+                    "root": "MuiButtonBase-root",
+                  }
+                }
+                component="div"
+                disabled={false}
+                focusVisibleClassName="Mui-focusVisible"
+                onClick={[Function]}
+              >
+                <div
+                  aria-disabled={false}
+                  className="MuiButtonBase-root MuiListItem-root makeStyles-active-3 MuiListItem-gutters MuiListItem-button"
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  role="button"
+                  tabIndex={0}
+                >
+                  My Projects
+                  <WithStyles(memo)
+                    center={false}
+                  >
+                    <ForwardRef(TouchRipple)
+                      center={false}
+                      classes={
+                        Object {
+                          "child": "MuiTouchRipple-child",
+                          "childLeaving": "MuiTouchRipple-childLeaving",
+                          "childPulsate": "MuiTouchRipple-childPulsate",
+                          "ripple": "MuiTouchRipple-ripple",
+                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                          "rippleVisible": "MuiTouchRipple-rippleVisible",
+                          "root": "MuiTouchRipple-root",
+                        }
+                      }
+                    >
+                      <span
+                        className="MuiTouchRipple-root"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component={null}
+                          exit={true}
+                        />
+                      </span>
+                    </ForwardRef(TouchRipple)>
+                  </WithStyles(memo)>
+                </div>
+              </ForwardRef(ButtonBase)>
+            </WithStyles(ForwardRef(ButtonBase))>
+          </ForwardRef(ListItem)>
+        </WithStyles(ForwardRef(ListItem))>
+      </div>
+      <WithStyles(ForwardRef(TextField))
+        InputProps={
+          Object {
+            "disableUnderline": true,
+            "style": Object {
+              "backgroundColor": "rgba(47, 62, 70, 0.2)",
+              "borderRadius": 5,
+            },
+          }
+        }
+        autoFocus={true}
+        className="makeStyles-searchTextField-2"
+        hiddenLabel={true}
+        id="search"
+        margin="dense"
+        onChange={[Function]}
+        placeholder="Filter projects..."
+        type="search"
+        value=""
+        variant="filled"
+      >
+        <ForwardRef(TextField)
+          InputProps={
+            Object {
+              "disableUnderline": true,
+              "style": Object {
+                "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                "borderRadius": 5,
+              },
+            }
+          }
+          autoFocus={true}
+          className="makeStyles-searchTextField-2"
+          classes={
+            Object {
+              "root": "MuiTextField-root",
+            }
+          }
+          hiddenLabel={true}
+          id="search"
+          margin="dense"
+          onChange={[Function]}
+          placeholder="Filter projects..."
+          type="search"
+          value=""
+          variant="filled"
+        >
+          <WithStyles(ForwardRef(FormControl))
+            className="MuiTextField-root makeStyles-searchTextField-2"
+            color="primary"
+            disabled={false}
+            error={false}
+            fullWidth={false}
+            hiddenLabel={true}
+            margin="dense"
+            required={false}
+            variant="filled"
+          >
+            <ForwardRef(FormControl)
+              className="MuiTextField-root makeStyles-searchTextField-2"
+              classes={
+                Object {
+                  "fullWidth": "MuiFormControl-fullWidth",
+                  "marginDense": "MuiFormControl-marginDense",
+                  "marginNormal": "MuiFormControl-marginNormal",
+                  "root": "MuiFormControl-root",
+                }
+              }
+              color="primary"
+              disabled={false}
+              error={false}
+              fullWidth={false}
+              hiddenLabel={true}
+              margin="dense"
+              required={false}
+              variant="filled"
+            >
+              <div
+                className="MuiFormControl-root MuiTextField-root makeStyles-searchTextField-2 MuiFormControl-marginDense"
+              >
+                <WithStyles(ForwardRef(FilledInput))
+                  autoFocus={true}
+                  disableUnderline={true}
+                  fullWidth={false}
+                  id="search"
+                  multiline={false}
+                  onChange={[Function]}
+                  placeholder="Filter projects..."
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                      "borderRadius": 5,
+                    }
+                  }
+                  type="search"
+                  value=""
+                >
+                  <ForwardRef(FilledInput)
+                    autoFocus={true}
+                    classes={
+                      Object {
+                        "adornedEnd": "MuiFilledInput-adornedEnd",
+                        "adornedStart": "MuiFilledInput-adornedStart",
+                        "colorSecondary": "MuiFilledInput-colorSecondary",
+                        "disabled": "Mui-disabled",
+                        "error": "Mui-error",
+                        "focused": "Mui-focused",
+                        "input": "MuiFilledInput-input",
+                        "inputAdornedEnd": "MuiFilledInput-inputAdornedEnd",
+                        "inputAdornedStart": "MuiFilledInput-inputAdornedStart",
+                        "inputHiddenLabel": "MuiFilledInput-inputHiddenLabel",
+                        "inputMarginDense": "MuiFilledInput-inputMarginDense",
+                        "inputMultiline": "MuiFilledInput-inputMultiline",
+                        "marginDense": "MuiFilledInput-marginDense",
+                        "multiline": "MuiFilledInput-multiline",
+                        "root": "MuiFilledInput-root",
+                        "underline": "MuiFilledInput-underline",
+                      }
+                    }
+                    disableUnderline={true}
+                    fullWidth={false}
+                    id="search"
+                    multiline={false}
+                    onChange={[Function]}
+                    placeholder="Filter projects..."
+                    style={
+                      Object {
+                        "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                        "borderRadius": 5,
+                      }
+                    }
+                    type="search"
+                    value=""
+                  >
+                    <WithStyles(ForwardRef(InputBase))
+                      autoFocus={true}
+                      classes={
+                        Object {
+                          "adornedEnd": "MuiFilledInput-adornedEnd",
+                          "adornedStart": "MuiFilledInput-adornedStart",
+                          "colorSecondary": "MuiFilledInput-colorSecondary",
+                          "disabled": "Mui-disabled",
+                          "error": "Mui-error",
+                          "focused": "Mui-focused",
+                          "input": "MuiFilledInput-input",
+                          "inputAdornedEnd": "MuiFilledInput-inputAdornedEnd",
+                          "inputAdornedStart": "MuiFilledInput-inputAdornedStart",
+                          "inputHiddenLabel": "MuiFilledInput-inputHiddenLabel",
+                          "inputMarginDense": "MuiFilledInput-inputMarginDense",
+                          "inputMultiline": "MuiFilledInput-inputMultiline",
+                          "marginDense": "MuiFilledInput-marginDense",
+                          "multiline": "MuiFilledInput-multiline",
+                          "root": "MuiFilledInput-root",
+                          "underline": null,
+                        }
+                      }
+                      fullWidth={false}
+                      id="search"
+                      inputComponent="input"
+                      multiline={false}
+                      onChange={[Function]}
+                      placeholder="Filter projects..."
+                      style={
+                        Object {
+                          "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                          "borderRadius": 5,
+                        }
+                      }
+                      type="search"
+                      value=""
+                    >
+                      <ForwardRef(InputBase)
+                        autoFocus={true}
+                        classes={
+                          Object {
+                            "adornedEnd": "MuiInputBase-adornedEnd MuiFilledInput-adornedEnd",
+                            "adornedStart": "MuiInputBase-adornedStart MuiFilledInput-adornedStart",
+                            "colorSecondary": "MuiInputBase-colorSecondary MuiFilledInput-colorSecondary",
+                            "disabled": "Mui-disabled Mui-disabled",
+                            "error": "Mui-error Mui-error",
+                            "focused": "Mui-focused Mui-focused",
+                            "formControl": "MuiInputBase-formControl",
+                            "fullWidth": "MuiInputBase-fullWidth",
+                            "input": "MuiInputBase-input MuiFilledInput-input",
+                            "inputAdornedEnd": "MuiInputBase-inputAdornedEnd MuiFilledInput-inputAdornedEnd",
+                            "inputAdornedStart": "MuiInputBase-inputAdornedStart MuiFilledInput-inputAdornedStart",
+                            "inputHiddenLabel": "MuiInputBase-inputHiddenLabel MuiFilledInput-inputHiddenLabel",
+                            "inputMarginDense": "MuiInputBase-inputMarginDense MuiFilledInput-inputMarginDense",
+                            "inputMultiline": "MuiInputBase-inputMultiline MuiFilledInput-inputMultiline",
+                            "inputTypeSearch": "MuiInputBase-inputTypeSearch",
+                            "marginDense": "MuiInputBase-marginDense MuiFilledInput-marginDense",
+                            "multiline": "MuiInputBase-multiline MuiFilledInput-multiline",
+                            "root": "MuiInputBase-root MuiFilledInput-root",
+                          }
+                        }
+                        fullWidth={false}
+                        id="search"
+                        inputComponent="input"
+                        multiline={false}
+                        onChange={[Function]}
+                        placeholder="Filter projects..."
+                        style={
+                          Object {
+                            "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                            "borderRadius": 5,
+                          }
+                        }
+                        type="search"
+                        value=""
+                      >
+                        <div
+                          className="MuiInputBase-root MuiFilledInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiFilledInput-marginDense"
+                          onClick={[Function]}
+                          style={
+                            Object {
+                              "backgroundColor": "rgba(47, 62, 70, 0.2)",
+                              "borderRadius": 5,
+                            }
+                          }
+                        >
+                          <input
+                            aria-invalid={false}
+                            autoFocus={true}
+                            className="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputHiddenLabel MuiFilledInput-inputHiddenLabel MuiInputBase-inputTypeSearch MuiInputBase-inputMarginDense MuiFilledInput-inputMarginDense"
+                            disabled={false}
+                            id="search"
+                            onAnimationStart={[Function]}
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            placeholder="Filter projects..."
+                            required={false}
+                            type="search"
+                            value=""
+                          />
+                        </div>
+                      </ForwardRef(InputBase)>
+                    </WithStyles(ForwardRef(InputBase))>
+                  </ForwardRef(FilledInput)>
+                </WithStyles(ForwardRef(FilledInput))>
+              </div>
+            </ForwardRef(FormControl)>
+          </WithStyles(ForwardRef(FormControl))>
+        </ForwardRef(TextField)>
+      </WithStyles(ForwardRef(TextField))>
+    </div>
+  </Controls>
+  <Component
+    actionButtonLabelPrefix="Request"
+    createPermission="system:instance:admin"
+    deletePermission=""
+    deleteStack={[Function]}
+    editPermission=""
+    openCreationForm={[Function]}
+    openPermission="project.open"
+    openStack={[Function]}
+    showCreateButton={true}
+    stacks={
+      Object {
+        "value": Array [
+          Object {
+            "accessible": true,
+            "description": "A project description",
+            "displayName": "A project name",
+            "id": 123,
+            "key": "project2",
+            "status": "ready",
+            "type": "project",
+          },
+        ],
+      }
+    }
+    typeName="Project"
+    typeNamePlural="Projects"
+    userPermissions={[Function]}
+  >
+    <div>
+      StackCards Mock - props = 
+      {
+  "stacks": {
+    "value": [
+      {
+        "id": 123,
+        "key": "project2",
+        "displayName": "A project name",
+        "description": "A project description",
+        "accessible": true,
+        "type": "project",
+        "status": "ready"
+      }
+    ]
+  },
+  "typeName": "Project",
+  "typeNamePlural": "Projects",
+  "showCreateButton": true,
+  "openPermission": "project.open",
+  "createPermission": "system:instance:admin",
+  "deletePermission": "",
+  "editPermission": "",
+  "actionButtonLabelPrefix": "Request"
+}
+    </div>
+  </Component>
+</ProjectsContainer>
+`;
+
 exports[`ProjectsContainer renders request button if not admin 1`] = `
 <ProjectsContainer>
   <Controls

@@ -15,6 +15,7 @@ import notify from '../../components/common/notify';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import { PROJECT_TYPE_NAME, PROJECT_TYPE_NAME_PLURAL } from './projectTypeName';
+import { getFeatureFlags } from '../../config/featureFlags';
 
 export const PROJECT_OPEN_PERMISSION = 'project.open';
 const FORM_NAME = 'createProject';
@@ -209,6 +210,7 @@ const ProjectsContainer = () => {
   const userAccessibleStacks = filterProjectsByUser(filteredStacks, myProjectFilter);
 
   const isAdmin = userPermissions.includes(SYSTEM_INSTANCE_ADMIN);
+  const featureFlags = getFeatureFlags();
 
   return (
     <>
@@ -228,6 +230,7 @@ const ProjectsContainer = () => {
         showCreateButton={true}
         userPermissions={project => [...projectUserPermissions(project, userPermissions), ...userPermissions]}
         openPermission={PROJECT_OPEN_PERMISSION}
+        createPermission={featureFlags.requestProjects ? undefined : SYSTEM_INSTANCE_ADMIN}
         deletePermission=""
         editPermission=""
         actionButtonLabelPrefix={isAdmin ? 'Create' : 'Request'}
