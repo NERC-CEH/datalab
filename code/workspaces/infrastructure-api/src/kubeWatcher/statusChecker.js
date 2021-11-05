@@ -36,7 +36,7 @@ const statusChecker = async () => {
         status: stackStatus.SUSPENDED,
       }));
 
-    const stackPodsGroupedByName = groupStatusByName([...stackPods, ...missingPods, ...terminatingPods]);
+    const stackPodsGroupedByName = groupStatusByName([...stackPods.sort((a, b) => a.creationTimestamp - b.creationTimestamp), ...missingPods, ...terminatingPods]);
 
     await setStatus(stackPodsGroupedByName);
     logger.debug('Status checker: complete');

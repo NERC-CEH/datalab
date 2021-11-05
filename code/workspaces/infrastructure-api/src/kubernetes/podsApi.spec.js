@@ -25,6 +25,7 @@ describe('podsApi', () => {
         type: 'jupyter',
         status: 'running',
         podName: 'jupyter-url-some-uuid',
+        creationTimestamp: Date.parse('2021-11-05T15:47:00Z'),
       },
       {
         name: 'nbviewer-url',
@@ -32,12 +33,13 @@ describe('podsApi', () => {
         type: 'nbviewer',
         status: 'running',
         podName: 'nbviewer-url-some-uuid',
+        creationTimestamp: Date.parse('2021-11-05T14:47:00Z'),
       },
     ]);
   });
 });
 
-function createPodItem(name, userPod, phase) {
+function createPodItem(name, userPod, phase, created) {
   return {
     metadata: {
       labels: {
@@ -46,6 +48,7 @@ function createPodItem(name, userPod, phase) {
       },
       namespace: 'test-namespace',
       name: `${name}-some-uuid`,
+      creationTimestamp: created,
     },
     status: {
       phase,
@@ -58,9 +61,9 @@ function createPods() {
     apiVersion: 'v1',
     kind: 'PodList',
     items: [
-      createPodItem('minio-store', 'minio', 'running'),
-      createPodItem('jupyter-url', 'jupyter', 'running'),
-      createPodItem('nbviewer-url', 'nbviewer', 'running'),
+      createPodItem('minio-store', 'minio', 'running', '2021-11-05T16:47:00Z'),
+      createPodItem('jupyter-url', 'jupyter', 'running', '2021-11-05T15:47:00Z'),
+      createPodItem('nbviewer-url', 'nbviewer', 'running', '2021-11-05T14:47:00Z'),
     ],
   };
 }

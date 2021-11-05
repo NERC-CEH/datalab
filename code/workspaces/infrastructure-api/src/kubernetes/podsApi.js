@@ -33,6 +33,7 @@ const handlePodlist = ({ items }) => items.map(pod => ({
   type: get(pod, `metadata.labels.${SELECTOR_LABEL}`),
   status: handlePodStatus(pod),
   podName: get(pod, 'metadata.name'),
+  creationTimestamp: Date.parse(get(pod, 'metadata.creationTimestamp')),
 }));
 
 const handlePodStatus = (pod) => {

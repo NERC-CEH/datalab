@@ -37,9 +37,11 @@ const stacks = [
   { name: 'expectedType-fourthPod', namespace: 'b', status: 'Init:0/2' },
 ];
 
-getStacksAndClustersMock.mockResolvedValue(stacks);
-updateStackStatusMock.mockResolvedValue({ n: 1 });
-updateClusterStatusMock.mockResolvedValue({ n: 1 });
+beforeEach(() => {
+  getStacksAndClustersMock.mockResolvedValue(stacks);
+  updateStackStatusMock.mockResolvedValue({ n: 1 });
+  updateClusterStatusMock.mockResolvedValue({ n: 1 });
+});
 
 describe('Stack Status Checker', () => {
   beforeEach(() => {
@@ -165,6 +167,25 @@ describe('Stack Status Checker', () => {
       namespace: 'expectedNamespace',
       status: 'ready',
       type: 'cluster',
+    });
+  });
+
+  it('updates stack record to creating when newest pod will not start', async () => {
+    // make sure pod info is returned in reverse order to emulate what's happening in the cluster
+    // for bug NERCDL-1142
+    const badStartingStack = [
+      { name: 'expectedType-firstPod', namespace: 'a', status: 'PodInitializing', creationTimestamp: Date.parse('2021-11-05T16:47:00Z') },
+      { name: 'expectedType-firstPod', namespace: 'a', status: 'Running', creationTimestamp: Date.parse('2021-11-04T16:47:00Z') },
+    ];
+    getStacksAndClustersMock.mockResolvedValue(badStartingStack);
+
+    await statusChecker();
+
+    expect(updateStackStatusMock).toHaveBeenCalledWith({
+      name: 'firstPod',
+      namespace: 'a',
+      status: 'creating',
+      type: 'expectedType',
     });
   });
 });
