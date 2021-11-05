@@ -33,6 +33,7 @@ describe('AddAssetsToNotebookForm', () => {
     handleClear,
     projectOptions: [{ text: 'project1', value: 'project1' }, { text: 'project2', value: 'project2' }],
     notebookOptions: [{ text: 'notebook1', value: 'notebook1' }, { text: 'notebook2', value: 'notebook2' }],
+    assetInfo: 'assetInfo',
   });
 
   it('renders correctly when a project and notebook have been selected', () => {
