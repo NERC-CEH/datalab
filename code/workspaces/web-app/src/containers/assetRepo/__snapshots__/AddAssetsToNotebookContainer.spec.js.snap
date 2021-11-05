@@ -6,10 +6,12 @@ exports[`AddAssetsToNotebookContainer initialises correctly when all properties 
     <p
       class="MuiTypography-root MuiTypography-body1"
     >
-      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added.
+      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
     <div>
-      Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}]}
+      <div>
+        Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}],"assetInfo":"Note: Non-public assets will only appear if an allowed project is selected."}
+      </div>
     </div>
   </div>
 </div>
@@ -21,10 +23,12 @@ exports[`AddAssetsToNotebookContainer initialises correctly when project and not
     <p
       class="MuiTypography-root MuiTypography-body1"
     >
-      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added.
+      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
     <div>
-      Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}]}
+      <div>
+        Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}],"assetInfo":"Note: Non-public assets will only appear if an allowed project is selected."}
+      </div>
     </div>
   </div>
 </div>
@@ -36,11 +40,9 @@ exports[`AddAssetsToNotebookContainer passes the correct props to the form when 
     <p
       class="MuiTypography-root MuiTypography-body1"
     >
-      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added.
+      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
-    <div>
-      Form: {"projectOptions":[],"notebookOptions":[]}
-    </div>
+    <div />
   </div>
 </div>
 `;
@@ -51,10 +53,12 @@ exports[`AddAssetsToNotebookContainer passes the correct props to the form when 
     <p
       class="MuiTypography-root MuiTypography-body1"
     >
-      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added.
+      Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
     <div>
-      Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}]}
+      <div>
+        Form: {"projectOptions":[{"value":"project1","text":"project1 (project1)"},{"value":"project2","text":"project2 (project2)"}],"notebookOptions":[{"value":"n1","text":"notebook1 (n1)"}],"assetInfo":"Note: Non-public assets will only appear if an allowed project is selected."}
+      </div>
     </div>
   </div>
 </div>

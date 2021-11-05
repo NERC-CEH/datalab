@@ -21,6 +21,9 @@ import {
 import modalDialogActions from '../../actions/modalDialogActions';
 import { MODAL_TYPE_CONFIRM_CREATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
+import { useVisibleAssets } from '../../hooks/assetRepoHooks';
+
+const assetInfo = 'Note: Non-public assets will only appear if an allowed project is selected.';
 
 const getProjectOptions = projects => projects.map(p => ({ value: p.key, text: `${p.name} (${p.key})` }));
 
@@ -129,7 +132,7 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
 
   const projects = useSelector(s => s.projects.value);
   const notebooks = useSelector(s => s.stacks.value);
-  const visibleAssets = useSelector(s => s.assetRepo.value.assets);
+  const visibleAssets = useVisibleAssets(selectedProject).value.assets;
 
   const [resetForm, setResetForm] = useState(true);
 
@@ -144,6 +147,8 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
 
     if (selectedProject) {
       dispatch(assetRepoActions.loadOnlyVisibleAssets(selectedProject));
+    } else {
+      dispatch(assetRepoActions.loadAllAssets());
     }
   }, [dispatch, selectedProject, resetForm]);
 
@@ -178,13 +183,17 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
       <Typography variant="body1">
         Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected.
         If any assets are selected that already exist on the notebook, these won't be re-added.
+        If you cannot see the form, then it likely means you are not part of any projects.
       </Typography>
-      <AddAssetsToNotebookForm
-        projectOptions={projectOptions}
-        notebookOptions={notebookOptions}
-        onSubmit={confirmAddAsset(dispatch, history)}
-        handleClear={clearForm(dispatch, setResetForm)}
-      />
+      <div>
+        {projectOptions.length > 0 ? <AddAssetsToNotebookForm
+            projectOptions={projectOptions}
+            notebookOptions={notebookOptions}
+            onSubmit={confirmAddAsset(dispatch, history)}
+            handleClear={clearForm(dispatch, setResetForm)}
+            assetInfo={assetInfo}
+          /> : undefined}
+      </div>
     </div>
   );
 };

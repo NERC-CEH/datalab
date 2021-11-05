@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 import { UpdateFormControls, formatAndParseMultiSelect, renderSelectField } from '../../components/common/form/controls';
@@ -13,7 +14,7 @@ export const NOTEBOOK_FIELD_NAME = 'notebook';
 export const EXISTING_ASSETS_FIELD_NAME = 'existingAssets';
 export const ASSETS_FIELD_NAME = 'assets';
 
-const AddAssetsToNotebookFormContent = ({ handleSubmit, projectOptions, notebookOptions, handleClear }) => {
+const AddAssetsToNotebookFormContent = ({ handleSubmit, projectOptions, notebookOptions, handleClear, assetInfo }) => {
   const selectedProject = useReduxFormValue(FORM_NAME, PROJECT_FIELD_NAME);
   const selectedNotebook = useReduxFormValue(FORM_NAME, NOTEBOOK_FIELD_NAME);
   const notebooks = useSelector(s => s.stacks.value);
@@ -51,6 +52,7 @@ const AddAssetsToNotebookFormContent = ({ handleSubmit, projectOptions, notebook
           />
         </div>}
         <div>
+          {assetInfo && <Typography variant="body2">{assetInfo}</Typography>}
           <Field
             disabled={!(selectedProject && selectedNotebook)}
             name={ASSETS_FIELD_NAME}
@@ -81,6 +83,7 @@ AddAssetsToNotebookFormContent.propTypes = {
   ...formPropTypes,
   handleSubmit: PropTypes.func.isRequired,
   handleClear: PropTypes.func.isRequired,
+  assetInfo: PropTypes.string,
 };
 
 const AddAssetsToNotebookForm = reduxForm({
