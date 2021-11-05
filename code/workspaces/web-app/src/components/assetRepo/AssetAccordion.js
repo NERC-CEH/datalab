@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { reset } from 'redux-form';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../common/ResourceAccordion';
 import AssetCard from './AssetCard';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 import modalDialogActions from '../../actions/modalDialogActions';
 import { MODAL_TYPE_EDIT_ASSET, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
 import EditRepoMetadataForm, { FORM_NAME } from './EditRepoMetadataForm';
@@ -14,6 +19,8 @@ import assetRepoActions from '../../actions/assetRepoActions';
 import notify from '../common/notify';
 import assetLabel from '../common/form/assetLabel';
 import { BY_PROJECT } from './assetVisibilities';
+
+const MORE_ICON = 'more_vert';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,6 +87,24 @@ export const onEditAssetConfirm = async (dispatch, asset) => {
 function AssetAccordion({ asset }) {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMoreButtonClick = (event) => {
+    event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleAddToNotebookClick = (event) => {
+    event.stopPropagation();
+    history.push(`/add-assets-to-notebook?assets=${asset.assetId}`);
+  };
+
+  const handleMenuClose = (event) => {
+    event.stopPropagation();
+    setAnchorEl(null);
+  };
+
   return (
     <div className={classes.root}>
       <ResourceAccordion defaultExpanded>
@@ -90,8 +115,28 @@ function AssetAccordion({ asset }) {
               aria-label="edit"
               onClick={(event) => { openEditForm(dispatch, asset); event.stopPropagation(); }}
             >
-            Edit
-          </PrimaryActionButton>
+              Edit
+            </PrimaryActionButton>
+            <SecondaryActionButton
+              aria-controls="more-menu"
+              aria-haspopup="true"
+              onClick={handleMoreButtonClick}
+              fullWidth
+            >
+              <Icon style={{ color: 'inherit' }}>{MORE_ICON}</Icon>
+            </SecondaryActionButton>
+            <Menu
+              id="more-menu"
+              anchorEl={anchorEl}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={handleAddToNotebookClick}>
+                Add to Notebook
+              </MenuItem>
+            </Menu>
           </div>
         </ResourceAccordionSummary>
         <ResourceAccordionDetails>
