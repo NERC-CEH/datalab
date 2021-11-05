@@ -8,7 +8,7 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 
 * [brew](https://brew.sh/)
 * [Node Version Manager](https://github.com/nvm-sh/nvm)
-* Node.js v12/Erbium: `nvm install lts/erbium`
+* Node.js v16.13.0: `nvm install 16.13.0`
 * [Yarn](https://yarnpkg.com/getting-started/install)
 * [Docker](https://docs.docker.com/get-docker/)
 * [Docker Compose](https://docs.docker.com/compose/install/) (installed with Docker for MacOS)

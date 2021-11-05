@@ -5,9 +5,11 @@ import {
   buildDefaultTestState,
 } from '../../testUtils/renderWithState';
 import ProjectSideBar from './ProjectSideBar';
+import projectSettingsActions from '../../actions/projectSettingsActions';
 
 jest.mock('./ProjectSwitcher', () => () => <div>Project Switcher Mock</div>);
 jest.mock('./SideBarButton', () => props => <div {...props}>{props.label}</div>);
+jest.mock('../../actions/projectSettingsActions');
 
 const { PROJECT_NAMESPACE } = permissionTypes;
 
@@ -16,6 +18,8 @@ describe('SideBar', () => {
   let props;
 
   beforeEach(() => {
+    projectSettingsActions.getProjectUserPermissions.mockReturnValue({ type: 'TEST_GET_PROJECT_USER_PERMISSIONS' });
+
     state = buildDefaultTestState();
     state.currentProject = {
       value: {

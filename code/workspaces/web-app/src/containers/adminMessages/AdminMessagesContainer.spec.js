@@ -9,6 +9,7 @@ jest.mock('./MessageCreator', () => () => <>MessageCreator</>);
 
 jest.mock('react-redux');
 jest.mock('../../components/common/notify', () => ({ success: jest.fn(), error: jest.fn() }));
+jest.mock('../../api/messagesService');
 
 const msgText = 'some message';
 const expiry = new Date('2021/01/01');
