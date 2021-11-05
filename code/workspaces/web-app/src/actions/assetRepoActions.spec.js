@@ -35,6 +35,48 @@ describe('assetRepoActions', () => {
       expect(output.payload).toBe('expectedPayload');
     });
 
+    it('loadVisibleAssets', () => {
+      // Arrange
+      const loadVisibleAssetsMock = jest.fn().mockReturnValue('expectedPayload');
+      assetRepoService.loadVisibleAssets = loadVisibleAssetsMock;
+
+      // Act
+      const output = assetRepoActions.loadVisibleAssets();
+
+      // Assert
+      expect(loadVisibleAssetsMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe('LOAD_VISIBLE_ASSETS_ACTION');
+      expect(output.payload).toBe('expectedPayload');
+    });
+
+    it('loadAllAssets', () => {
+      // Arrange
+      const loadAllAssetsMock = jest.fn().mockReturnValue('expectedPayload');
+      assetRepoService.loadAllAssets = loadAllAssetsMock;
+
+      // Act
+      const output = assetRepoActions.loadAllAssets();
+
+      // Assert
+      expect(loadAllAssetsMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe('LOAD_ALL_ASSETS_ACTION');
+      expect(output.payload).toBe('expectedPayload');
+    });
+
+    it('loadOnlyVisibleAssets', () => {
+      // Arrange
+      const loadVisibleAssetsMock = jest.fn().mockReturnValue('expectedPayload');
+      assetRepoService.loadVisibleAssets = loadVisibleAssetsMock;
+
+      // Act
+      const output = assetRepoActions.loadOnlyVisibleAssets();
+
+      // Assert
+      expect(loadVisibleAssetsMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe('LOAD_ONLY_VISIBLE_ASSETS_ACTION');
+      expect(output.payload).toBe('expectedPayload');
+    });
+
     describe('exports correct value for', () => {
       it('ADD_REPO_METADATA_ACTION', () => {
         expect(ADD_REPO_METADATA_ACTION).toBe('ADD_REPO_METADATA_ACTION');
