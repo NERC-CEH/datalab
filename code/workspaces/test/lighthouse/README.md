@@ -13,18 +13,18 @@ All endpoints were tested against https://testlab.test-datalabs.nerc.ac.uk unles
 
 | Endpoint                    | Report File                              | Accessibility (%) | Performance (%) | Best Practices (%) | SEO (%) |
 | --------------------------- | ---------------------------------------- | :---------------: | :-------------: | :----------------: | :-----: |
-| /                           | lhreport-.json                           |        98         |       11        |         93         |   82    |
-| /404                        | lhreport-404.json                        |        92         |       57        |         93         |   73    |
-| /admin/resources            | lhreport-admin-resources.json            |        71         |       27        |         86         |   73    |
-| /projects                   | lhreport-projects.json                   |        72         |       40        |         93         |   73    |
-| /projects/lhouse/dask       | lhreport-projects-lhouse-dask.json       |        88         |       51        |         93         |   73    |
-| /projects/lhouse/info       | lhreport-projects-lhouse-info.json       |        90         |       37        |         93         |   73    |
-| /projects/lhouse/notebooks  | lhreport-projects-lhouse-notebooks.json  |        71         |       24        |         93         |   73    |
-| /projects/lhouse/publishing | lhreport-projects-lhouse-publishing.json |        75         |       26        |         86         |   73    |
-| /projects/lhouse/settings   | lhreport-projects-lhouse-settings.json   |        72         |       28        |         93         |   73    |
-| /projects/lhouse/spark      | lhreport-projects-lhouse-spark.json      |        88         |       45        |         93         |   73    |
-| /projects/lhouse/storage    | lhreport-projects-lhouse-storage.json    |        75         |       36        |         93         |   73    |
-| /verify                     | lhreport-verify.json                     |        95         |       64        |         93         |   82    |
+| /                           | lhreport-.json                           |        97         |        0        |        100         |   82    |
+| /404                        | lhreport-404.json                        |        91         |       50        |        100         |   73    |
+| /admin/resources            | lhreport-admin-resources.json            |        70         |        0        |         93         |   73    |
+| /projects                   | lhreport-projects.json                   |        77         |        0        |        100         |   73    |
+| /projects/lhouse/dask       | lhreport-projects-lhouse-dask.json       |        87         |       66        |        100         |   73    |
+| /projects/lhouse/info       | lhreport-projects-lhouse-info.json       |        88         |        0        |        100         |   73    |
+| /projects/lhouse/notebooks  | lhreport-projects-lhouse-notebooks.json  |        80         |        0        |        100         |   73    |
+| /projects/lhouse/publishing | lhreport-projects-lhouse-publishing.json |        80         |        0        |        100         |   73    |
+| /projects/lhouse/settings   | lhreport-projects-lhouse-settings.json   |        77         |        0        |        100         |   73    |
+| /projects/lhouse/spark      | lhreport-projects-lhouse-spark.json      |        87         |       53        |        100         |   73    |
+| /projects/lhouse/storage    | lhreport-projects-lhouse-storage.json    |        87         |       53        |        100         |   73    |
+| /verify                     | lhreport-verify.json                     |        95         |        0        |        100         |   82    |
 
 ### Viewing more detailed results
 
@@ -33,6 +33,8 @@ These JSON files contain more information than is displayed in the summary table
 To view this extra detail, the contents of the JSON file can be dropped onto the [Lighthouse Report Viewer](https://googlechrome.github.io/lighthouse/viewer/) which renders a web-page built from the contents of the JSON file.
 
 ## Running Lighthouse tests
+
+> Note: The lighthouse tests now require a newer version of node than the services so you must run an updated version. This is easiest to do with `nvm` and allows you to switch versions when specifically running the lighthouse tests until we can upgrade the whole system. The latest run of the lighthouse tests used node v16.13.0.
 
 There is a script `lighthouse-testing.js` that handles running the Lighthouse tests.
 This uses the `lighthouse` NPM module as well as a test orchestration library called `puppetteer`.
@@ -48,6 +50,12 @@ The script should fail before trying to run any of the tests if it detects that 
 To run the tests you will need to have access to a node executable and Yarn.
 Before running the tests for the first time you will need to run `yarn install` to install the necessary modules.
 The tests can then be run using `node lighthouse-testing.js`.
+
+To securely run the lighthouse tests and avoid putting your email password in to the history, you can add the password to a `password.txt` file in this directory (which will be ignored by git). You can then run the tests using:
+
+```
+LIGHTHOUSE_TEST_PASSWORD="$(cat password.txt)" LIGHTHOUSE_TEST_USER_NAME={{insert your email here}} node lighthouse-testing.js
+```
 
 Once the Lighthouse tests have been run, the results are written in JSON format to the `reports` directory.
 Following this, the script used to generate this README is executed (see [Generating README](#generating-readme)).

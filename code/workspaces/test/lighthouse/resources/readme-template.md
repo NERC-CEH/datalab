@@ -18,6 +18,8 @@ To view this extra detail, the contents of the JSON file can be dropped onto the
 
 ## Running Lighthouse tests
 
+> Note: The lighthouse tests now require a newer version of node than the services so you must run an updated version. This is easiest to do with `nvm` and allows you to switch versions when specifically running the lighthouse tests until we can upgrade the whole system. The latest run of the lighthouse tests used node v16.13.0.
+
 There is a script `lighthouse-testing.js` that handles running the Lighthouse tests.
 This uses the `lighthouse` NPM module as well as a test orchestration library called `puppetteer`.
 At the top of this script a number of constants are defined that can be used to configure the tests being run.
@@ -32,6 +34,11 @@ The script should fail before trying to run any of the tests if it detects that 
 To run the tests you will need to have access to a node executable and Yarn.
 Before running the tests for the first time you will need to run `yarn install` to install the necessary modules.
 The tests can then be run using `node lighthouse-testing.js`.
+
+To securely run the lighthouse tests and avoid putting your email password in to the history, you can add the password to a `password.txt` file in this directory (which will be ignored by git). You can then run the tests using:
+```
+LIGHTHOUSE_TEST_PASSWORD="$(cat password.txt)" LIGHTHOUSE_TEST_USER_NAME={{insert your email here}} node lighthouse-testing.js
+```
 
 Once the Lighthouse tests have been run, the results are written in JSON format to the `reports` directory.
 Following this, the script used to generate this README is executed (see [Generating README](#generating-readme)).
