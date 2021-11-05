@@ -12,6 +12,10 @@ const styles = theme => ({
   creator: {
     padding: `${theme.spacing(4)}px 0`,
   },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
 });
 
 export const getSevenDaysFromNow = () => moment().startOf('day').add(7, 'days').toDate();
@@ -51,22 +55,22 @@ const MessageCreator = ({ classes, createMessage }) => {
             ampm={false}
           />
         </Grid>
-        <Grid item xs={1}>
-          <Button
-            onClick={() => showPreview(!preview)}
-            color={'primary'}
-            variant={preview ? 'contained' : 'outlined'}
-          >
-            Preview
-          </Button>
-        </Grid>
-        <Grid item xs={1}>
-          <PagePrimaryActionButton
-            onClick={() => createMessage(messageText, selectedDate, clearMessage)}
-            disabled={!messageText}
-          >
-            Create
-          </PagePrimaryActionButton>
+        <Grid item xs={2}>
+          <div className={classes.buttonContainer}>
+            <Button
+              onClick={() => showPreview(!preview)}
+              color={'primary'}
+              variant={preview ? 'contained' : 'outlined'}
+              >
+              Preview
+            </Button>
+            <PagePrimaryActionButton
+              onClick={() => createMessage(messageText, selectedDate, clearMessage)}
+              disabled={!messageText}
+              >
+              Create
+            </PagePrimaryActionButton>
+            </div>
         </Grid>
         <Grid item xs={12} hidden={!preview} id={'messagePreview'}>
           <Message message={{ message: messageText }} allowDismiss={false} />

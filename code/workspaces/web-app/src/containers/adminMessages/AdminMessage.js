@@ -18,6 +18,10 @@ const styles = theme => ({
     alignItems: 'center',
     color: theme.palette.secondary[400],
   },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
 });
 
 const AdminMessage = ({ classes, message, deleteMessage }) => {
@@ -30,11 +34,11 @@ const AdminMessage = ({ classes, message, deleteMessage }) => {
       <Grid item xs={10}>
         <div>{message.message}</div>
       </Grid>
-      <Grid item xs={1}>
-        <Button onClick={() => showPreview(!preview)} color={'primary'} variant={preview ? 'contained' : 'outlined'}>Preview</Button>
-      </Grid>
-      <Grid item xs={1}>
-        <PrimaryActionButton onClick={() => deleteMessage(message)}>Delete</PrimaryActionButton>
+      <Grid item xs={2}>
+        <div className={classes.buttonContainer}>
+          <Button onClick={() => showPreview(!preview)} color={'primary'} variant={preview ? 'contained' : 'outlined'}>Preview</Button>
+          <PrimaryActionButton onClick={() => deleteMessage(message)}>Delete</PrimaryActionButton>
+        </div>
       </Grid>
       <Grid item xs={12}>
         <div className={classes.date}>{expiryString}</div>

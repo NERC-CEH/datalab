@@ -72,38 +72,38 @@ exports[`MessageCreator renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
       >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
-          tabindex="0"
-          type="button"
+        <div
+          class="MessageCreator-buttonContainer-2"
         >
-          <span
-            class="MuiButton-label"
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            tabindex="0"
+            type="button"
           >
-            Preview
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
-        </button>
-      </div>
-      <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-1"
-      >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled Mui-disabled"
-          disabled=""
-          tabindex="-1"
-          type="button"
-        >
-          <span
-            class="MuiButton-label"
+            <span
+              class="MuiButton-label"
+            >
+              Preview
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled Mui-disabled"
+            disabled=""
+            tabindex="-1"
+            type="button"
           >
-            Create
-          </span>
-        </button>
+            <span
+              class="MuiButton-label"
+            >
+              Create
+            </span>
+          </button>
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
