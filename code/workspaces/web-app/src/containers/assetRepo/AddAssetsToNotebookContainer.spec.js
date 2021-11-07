@@ -6,7 +6,9 @@ import { change, reset, initialize } from 'redux-form';
 import { AddAssetsToNotebookContainer, confirmAddAsset, addAssets, getExistingAssets, clearForm } from './AddAssetsToNotebookContainer';
 import * as addAssetsForm from './AddAssetsToNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
+import * as assetRepoHooks from '../../hooks/assetRepoHooks';
 import stackActions from '../../actions/stackActions';
+import assetRepoActions from '../../actions/assetRepoActions';
 import notify from '../../components/common/notify';
 import stackService from '../../api/stackService';
 
@@ -72,12 +74,17 @@ describe('AddAssetsToNotebookContainer', () => {
     jest.mock('react-redux');
     jest.mock('react-router');
     jest.mock('../../hooks/reduxFormHooks');
+    jest.mock('../../hooks/assetRepoHooks');
+    jest.mock('../../actions/assetRepoActions');
     jest.mock('./AddAssetsToNotebookForm');
     addAssetsForm.AddAssetsToNotebookForm = jest.fn(props => <div>{`Form: ${JSON.stringify(props)}`}</div>);
 
     redux.useDispatch = jest.fn().mockReturnValue(dispatchMock);
     redux.useSelector = selectorMock.mockReturnValue([]);
     reduxFormHooks.useReduxFormValue = jest.fn();
+    assetRepoHooks.useVisibleAssets = jest.fn().mockReturnValue({ value: { assets: [] } });
+    assetRepoActions.loadAllAssets = jest.fn();
+    assetRepoActions.loadOnlyVisibleAssets = jest.fn();
   });
 
   it('passes the correct props to the form when there are no projects or notebooks', () => {
@@ -87,7 +94,8 @@ describe('AddAssetsToNotebookContainer', () => {
     const wrapper = renderWithLocation(location, AddAssetsToNotebookContainer, props);
 
     expect(wrapper.container).toMatchSnapshot();
-    expect(dispatchMock).toHaveBeenCalledTimes(4);
+    expect(dispatchMock).toHaveBeenCalledTimes(5);
+    expect(assetRepoActions.loadAllAssets).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledWith('addAssetsToNotebook', { project: undefined, notebook: undefined });
     expect(change).toHaveBeenCalledTimes(1);
@@ -107,6 +115,8 @@ describe('AddAssetsToNotebookContainer', () => {
 
     expect(wrapper.container).toMatchSnapshot();
     expect(dispatchMock).toHaveBeenCalledTimes(5);
+    expect(assetRepoActions.loadOnlyVisibleAssets).toHaveBeenCalledTimes(1);
+    expect(assetRepoActions.loadOnlyVisibleAssets).toHaveBeenCalledWith('project1');
     expect(initialize).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledWith('addAssetsToNotebook', { project: undefined, notebook: undefined });
     expect(change).toHaveBeenCalledTimes(1);
@@ -122,15 +132,17 @@ describe('AddAssetsToNotebookContainer', () => {
     };
 
     reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('project1');
+    assetRepoHooks.useVisibleAssets = jest.fn().mockReturnValue({ value: { assets } });
     selectorMock
       .mockReturnValueOnce(projects)
-      .mockReturnValueOnce(notebooks)
-      .mockReturnValueOnce(assets);
+      .mockReturnValueOnce(notebooks);
 
     const wrapper = renderWithLocation(location, AddAssetsToNotebookContainer, props);
 
     expect(wrapper.container).toMatchSnapshot();
     expect(dispatchMock).toHaveBeenCalledTimes(5);
+    expect(assetRepoActions.loadOnlyVisibleAssets).toHaveBeenCalledTimes(1);
+    expect(assetRepoActions.loadOnlyVisibleAssets).toHaveBeenCalledWith('project1');
     expect(initialize).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledWith('addAssetsToNotebook', { project: 'project1', notebook: 'notebook1' });
     expect(change).toHaveBeenCalledTimes(1);
@@ -146,15 +158,17 @@ describe('AddAssetsToNotebookContainer', () => {
     };
 
     reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('project1');
+    assetRepoHooks.useVisibleAssets = jest.fn().mockReturnValue({ value: { assets } });
     selectorMock
       .mockReturnValueOnce(projects)
-      .mockReturnValueOnce(notebooks)
-      .mockReturnValueOnce(assets);
+      .mockReturnValueOnce(notebooks);
 
     const wrapper = renderWithLocation(location, AddAssetsToNotebookContainer, props);
 
     expect(wrapper.container).toMatchSnapshot();
     expect(dispatchMock).toHaveBeenCalledTimes(5);
+    expect(assetRepoActions.loadOnlyVisibleAssets).toHaveBeenCalledTimes(1);
+    expect(assetRepoActions.loadOnlyVisibleAssets).toHaveBeenCalledWith('project1');
     expect(initialize).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledWith('addAssetsToNotebook', { project: 'project1', notebook: 'notebook1' });
     expect(change).toHaveBeenCalledTimes(1);

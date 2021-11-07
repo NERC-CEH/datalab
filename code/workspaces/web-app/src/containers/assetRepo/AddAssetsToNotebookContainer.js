@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { change, reset, initialize } from 'redux-form';
 import queryString from 'query-string';
 import { NOTEBOOK_CATEGORY } from 'common/src/config/images';
+import { Typography } from '@material-ui/core';
 import projectActions from '../../actions/projectActions';
 import stackActions from '../../actions/stackActions';
 import assetRepoActions from '../../actions/assetRepoActions';
@@ -20,6 +21,9 @@ import {
 import modalDialogActions from '../../actions/modalDialogActions';
 import { MODAL_TYPE_CONFIRM_CREATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
+import { useVisibleAssets } from '../../hooks/assetRepoHooks';
+
+const assetInfo = 'Note: Non-public assets will only appear if an allowed project is selected.';
 
 const getProjectOptions = projects => projects.map(p => ({ value: p.key, text: `${p.name} (${p.key})` }));
 
@@ -85,7 +89,7 @@ export const addAssets = (dispatch, history, data) => async () => {
     notify.error('Unable to add asset(s) to notebook.');
   } finally {
     await dispatch(stackActions.loadStacksByCategory(project, NOTEBOOK_CATEGORY));
-    await dispatch(assetRepoActions.loadVisibleAssets(project));
+    await dispatch(assetRepoActions.loadOnlyVisibleAssets(project));
   }
 };
 
@@ -128,7 +132,7 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
 
   const projects = useSelector(s => s.projects.value);
   const notebooks = useSelector(s => s.stacks.value);
-  const visibleAssets = useSelector(s => s.assetRepo.value.assets);
+  const visibleAssets = useVisibleAssets(selectedProject).value.assets;
 
   const [resetForm, setResetForm] = useState(true);
 
@@ -142,7 +146,9 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
     dispatch(stackActions.loadStacksByCategory(selectedProject, NOTEBOOK_CATEGORY));
 
     if (selectedProject) {
-      dispatch(assetRepoActions.loadVisibleAssets(selectedProject));
+      dispatch(assetRepoActions.loadOnlyVisibleAssets(selectedProject));
+    } else {
+      dispatch(assetRepoActions.loadAllAssets());
     }
   }, [dispatch, selectedProject, resetForm]);
 
@@ -173,11 +179,21 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
   const notebookOptions = getNotebookOptions(notebooks || [], selectedProject);
 
   return (
-    <AddAssetsToNotebookForm
-      projectOptions={projectOptions}
-      notebookOptions={notebookOptions}
-      onSubmit={confirmAddAsset(dispatch, history)}
-      handleClear={clearForm(dispatch, setResetForm)}
-    />
+    <div>
+      <Typography variant="body1">
+        Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected.
+        If any assets are selected that already exist on the notebook, these won't be re-added.
+        If you cannot see the form, then it likely means you are not part of any projects.
+      </Typography>
+      <div>
+        {projectOptions.length > 0 ? <AddAssetsToNotebookForm
+            projectOptions={projectOptions}
+            notebookOptions={notebookOptions}
+            onSubmit={confirmAddAsset(dispatch, history)}
+            handleClear={clearForm(dispatch, setResetForm)}
+            assetInfo={assetInfo}
+          /> : undefined}
+      </div>
+    </div>
   );
 };

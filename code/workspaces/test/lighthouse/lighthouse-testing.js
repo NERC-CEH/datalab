@@ -82,7 +82,14 @@ async function runLighthouseForEndpoints(endpoints, outputFormat, results = {}) 
     output: outputFormat,
     port: CHROME_PORT,
     disableStorageReset: true, // keeps login information across lighthouse tests
-    emulatedFormFactor: 'desktop', // test desktop size as that is our main use case
+    formFactor: 'desktop', // test desktop size as that is our main use case
+    screenEmulation: {
+      mobile: false,
+      width: 1350,
+      height: 940,
+      deviceScaleFactor: 1,
+      disabled: false,
+    }
   };
 
   // build and return object with endpoint as key and report as value

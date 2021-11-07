@@ -1,72 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AssetAccordion renders to match snapshot passing correct props to children 1`] = `
-<div
-  className="makeStyles-root-1"
+exports[`AssetAccordion opens the more menu when the button is clicked 1`] = `
+<li
+  aria-disabled="false"
+  class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button Mui-focusVisible Mui-focusVisible"
+  role="menuitem"
+  tabindex="0"
 >
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-    defaultExpanded={true}
+  Add to Notebook
+  <span
+    class="MuiTouchRipple-root"
+  />
+</li>
+`;
+
+exports[`AssetAccordion renders to match snapshot passing correct props to children 1`] = `
+<div>
+  <div
+    class="makeStyles-root-1"
   >
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-5 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-6 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-heading-3"
-        variant="h5"
-      >
-        asset name
-        : 
-        asset version
-      </WithStyles(ForwardRef(Typography))>
       <div
-        className="makeStyles-buttonDiv-4"
+        aria-disabled="false"
+        aria-expanded="true"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-39 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41"
+        role="button"
+        tabindex="0"
       >
-        <PrimaryActionButton
-          aria-label="edit"
-          onClick={[Function]}
+        <div
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-42 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41"
         >
-          Edit
-        </PrimaryActionButton>
+          <h5
+            class="MuiTypography-root makeStyles-heading-3 MuiTypography-h5"
+          >
+            asset name
+            : 
+            asset version
+          </h5>
+          <div
+            class="makeStyles-buttonDiv-4"
+          >
+            <button
+              aria-label="edit"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Edit
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-controls="more-menu"
+              aria-haspopup="true"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root"
+                >
+                  more_vert
+                </span>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-40 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </div>
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
       <div
-        className="makeStyles-resources-2"
+        class="MuiCollapse-container MuiCollapse-entered"
+        style="min-height: 0px;"
       >
-        <AssetCard
-          asset={
-            Object {
-              "assetId": "asset-1",
-              "fileLocation": "file location",
-              "masterUrl": "master URL",
-              "name": "asset name",
-              "owners": Array [
-                Object {
-                  "name": "name 1",
-                  "userId": "owner-1",
-                },
-                Object {
-                  "name": "name 2",
-                  "userId": "owner-2",
-                },
-              ],
-              "projects": Array [
-                Object {
-                  "name": "project 1",
-                  "projectKey": "project-1",
-                },
-                Object {
-                  "name": "project 2",
-                  "projectKey": "project-2",
-                },
-              ],
-              "version": "asset version",
-              "visibility": "BY_PROJECT",
-            }
-          }
-        />
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-147"
+              >
+                <div
+                  class="makeStyles-resources-2"
+                >
+                  Asset: {"name":"asset name","version":"asset version","assetId":"asset-1","fileLocation":"file location","masterUrl":"master URL","owners":[{"userId":"owner-1","name":"name 1"},{"userId":"owner-2","name":"name 2"}],"visibility":"BY_PROJECT","projects":[{"projectKey":"project-1","name":"project 1"},{"projectKey":"project-2","name":"project 2"}]}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+    </div>
+  </div>
 </div>
 `;
