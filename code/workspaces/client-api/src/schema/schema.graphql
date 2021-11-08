@@ -51,6 +51,9 @@ type Query {
     # Return all central asset repo metadata items that are available to given project
     centralAssetsAvailableToProject(projectKey: String!): [CentralAssetMetadata]
 
+    # Return all central asset repo metadata items that are available to the requesting user
+    centralAssetsAvailableToUser: [CentralAssetMetadata]
+
     # List of clusters in a project
     clusters(projectKey: String!): [Cluster]
 

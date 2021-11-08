@@ -40,6 +40,7 @@ const resolvers = {
     logs: (obj, args, { token }) => w(logsService.getLogsByName(args.projectKey, args.name, token)),
     centralAssets: (obj, args, { token }) => w(centralAssetRepoService.listCentralAssets(token)),
     centralAssetsAvailableToProject: (obj, { projectKey }, { token }) => w(centralAssetRepoService.listCentralAssetsAvailableToProject(projectKey, token)),
+    centralAssetsAvailableToUser: (obj, args, { token }) => w(centralAssetRepoService.listCentralAssetsAvailableToUser(token)),
     clusters: (obj, args, { token }) => w(clustersService.getClusters(args.projectKey, token)),
     messages: (obj, args, { token }) => w(messagesService.getMessages(token)),
     allMessages: (obj, args, { token }) => w(messagesService.getAllMessages(token)),
