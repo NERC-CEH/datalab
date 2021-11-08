@@ -41,7 +41,7 @@ function loadAssetsForUser() {
   const query = `
     CentralAssetsAvailableToUser {
       centralAssetsAvailableToUser {
-        assetId, name, version, fileLocation, visible, projects {key, name}, owners {userId}
+        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate
       }
     }`;
 
