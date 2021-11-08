@@ -1,6 +1,7 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
 import { render, fireEvent, screen, within } from '@testing-library/react';
+import { permissionTypes } from 'common';
 import AssetAccordion from './AssetAccordion';
 import { useCurrentUserPermissions, useCurrentUserId } from '../../hooks/authHooks';
 
@@ -26,7 +27,7 @@ describe('AssetAccordion', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useCurrentUserPermissions.mockReturnValue({ value: ['permission'] });
+    useCurrentUserPermissions.mockReturnValue({ value: [permissionTypes.SYSTEM_DATA_MANAGER] });
     useCurrentUserId.mockReturnValue('owner-1');
   });
 
@@ -36,8 +37,8 @@ describe('AssetAccordion', () => {
     expect(wrapper.container).toMatchSnapshot();
   });
 
-  it('renders without an Edit button when user is not a data manager or asset owner', () => {
-    useCurrentUserId.mockReturnValueOnce('another-owner');
+  it('renders without an Edit button when user is not a data manager', () => {
+    useCurrentUserPermissions.mockReturnValueOnce({ value: [] });
     const wrapper = render(<AssetAccordion asset={asset}/>);
 
     expect(wrapper.container).toMatchSnapshot();

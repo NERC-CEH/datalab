@@ -89,12 +89,12 @@ export const onEditAssetConfirm = async (dispatch, asset) => {
 };
 
 const allowEdit = (userId, userPermissions, asset) => {
-  // Only Data Managers and asset owners can edit an asset.
+  // For now, only Data Managers can edit an asset.
   if (userPermissions.value && userPermissions.value.includes(SYSTEM_DATA_MANAGER)) {
     return true;
   }
 
-  return asset.owners && asset.owners.filter(o => o.userId === userId).length > 0;
+  return false;
 };
 
 function AssetAccordion({ asset }) {

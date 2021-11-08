@@ -135,7 +135,7 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
 </div>
 `;
 
-exports[`AssetAccordion renders without an Edit button when user is not a data manager or asset owner 1`] = `
+exports[`AssetAccordion renders without an Edit button when user is not a data manager 1`] = `
 <div>
   <div
     class="makeStyles-root-178"
