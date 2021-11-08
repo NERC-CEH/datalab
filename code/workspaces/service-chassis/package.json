@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.16.0",
     "express-prometheus-middleware": "^0.6.1",
     "express-validator": "6.1.1",
     "prom-client": "^11.5.3"

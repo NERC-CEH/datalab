@@ -6,6 +6,7 @@
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.16.0",
     "@kubernetes/client-node": "^0.10.2",
     "axios": "0.22.0",
     "bluebird": "3.5.5",
@@ -33,7 +34,6 @@
     "@babel/node": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
-    "@babel/runtime": "^7.16.0",
     "axios-mock-adapter": "1.17.0",
     "concurrently": "4.1.1",
     "core-js": "^3.2.1",
