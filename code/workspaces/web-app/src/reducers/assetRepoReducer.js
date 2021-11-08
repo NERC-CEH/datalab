@@ -10,6 +10,7 @@ import {
   LOAD_VISIBLE_ASSETS_ACTION,
   LOAD_ALL_ASSETS_ACTION,
   LOAD_ONLY_VISIBLE_ASSETS_ACTION,
+  LOAD_ASSETS_FOR_USER_ACTION,
 } from '../actions/assetRepoActions';
 
 const initialState = {
@@ -51,6 +52,11 @@ export default typeToReducer({
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: { ...state.value, assets: action.payload } }),
   },
   [LOAD_ONLY_VISIBLE_ASSETS_ACTION]: {
+    [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, fetching: true }),
+    [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, value: state.value, error: action.payload }),
+    [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: { ...state.value, assets: action.payload } }),
+  },
+  [LOAD_ASSETS_FOR_USER_ACTION]: {
     [PROMISE_TYPE_PENDING]: state => ({ ...initialState, value: state.value, fetching: true }),
     [PROMISE_TYPE_FAILURE]: (state, action) => ({ ...initialState, value: state.value, error: action.payload }),
     [PROMISE_TYPE_SUCCESS]: (state, action) => ({ ...initialState, value: { ...state.value, assets: action.payload } }),

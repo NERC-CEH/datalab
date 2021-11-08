@@ -37,6 +37,18 @@ function loadVisibleAssets(projectKey) {
     .then(errorHandler('data.centralAssetsAvailableToProject'));
 }
 
+function loadAssetsForUser() {
+  const query = `
+    CentralAssetsAvailableToUser {
+      centralAssetsAvailableToUser {
+        assetId, name, version, fileLocation, visible, projects {key, name}, owners {userId}
+      }
+    }`;
+
+  return gqlQuery(query)
+    .then(errorHandler('data.centralAssetsAvailableToUser'));
+}
+
 function loadAllAssets() {
   const query = `
     CentralAssets {
@@ -54,5 +66,6 @@ const assetRepoService = {
   editRepoMetadata,
   loadVisibleAssets,
   loadAllAssets,
+  loadAssetsForUser,
 };
 export default assetRepoService;
