@@ -180,6 +180,55 @@ describe('listAssetMetadata', () => {
   });
 });
 
+describe('getAllMetadata', () => {
+  const { getAllMetadata } = centralAssetRepoController;
+
+  it('calls to list metadata and returns response configured with 200 status and array of metadata when user is admin', async () => {
+    const requestMock = { user: { roles: { instanceAdmin: true } } };
+    const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
+    centralAssetRepoRepository.listMetadata.mockResolvedValueOnce(availableMetadata);
+
+    const returnValue = await getAllMetadata(requestMock, responseMock, nextMock);
+
+    expect(returnValue).toBe(responseMock);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
+  });
+
+  it('calls to list metadata and returns response configured with 200 status and array of metadata when user is data manager', async () => {
+    const requestMock = { user: { roles: { dataManager: true } } };
+    const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
+    centralAssetRepoRepository.listMetadata.mockResolvedValueOnce(availableMetadata);
+
+    const returnValue = await getAllMetadata(requestMock, responseMock, nextMock);
+
+    expect(returnValue).toBe(responseMock);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
+  });
+
+  it('calls to get metadata available to user and returns response configured with 200 status and array of metadata when user is not admin or data manager', async () => {
+    const roles = ['some role'];
+    const requestMock = { user: { sub: 'userId', roles: { projectRoles: roles } } };
+    const availableMetadata = [{ ...getMinimalMetadata(), assetId: 'asset-id' }];
+    centralAssetRepoRepository.metadataAvailableToUser.mockResolvedValueOnce(availableMetadata);
+
+    const returnValue = await getAllMetadata(requestMock, responseMock, nextMock);
+
+    expect(returnValue).toBe(responseMock);
+    expect(centralAssetRepoRepository.metadataAvailableToUser).toHaveBeenCalledWith('userId', roles);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(availableMetadata);
+  });
+
+  it('calls next with an error if there is an error when getting the metadata', async () => {
+    const requestMock = { user: { roles: { instanceAdmin: true } } };
+    centralAssetRepoRepository.listMetadata.mockRejectedValueOnce(new Error('Expected test error'));
+    await getAllMetadata(requestMock, responseMock, nextMock);
+    expect(nextMock).toHaveBeenCalledWith(new Error('Error getting asset metadata: Expected test error'));
+  });
+});
+
 describe('getAssetById', () => {
   const { getAssetById } = centralAssetRepoController;
 
