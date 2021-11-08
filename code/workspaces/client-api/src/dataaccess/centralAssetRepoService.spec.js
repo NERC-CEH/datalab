@@ -100,6 +100,23 @@ describe('listCentralAssetsAvailableToProject', () => {
   });
 });
 
+describe('listCentralAssetsAvailableToUser', () => {
+  const { listCentralAssetsAvailableToUser } = centralAssetRepoService;
+
+  it('calls infrastructure-api to get metadata of assets visible to the calling user', async () => {
+    httpMock
+      .onGet(`${infrastructureApi}/centralAssetRepo/allowedMetadata`)
+      .reply(200, [metadataResponse]);
+
+    const returnValue = await listCentralAssetsAvailableToUser(token);
+
+    expect(returnValue).toEqual([metadataResponse]);
+    expect(httpMock.history.get.length).toBe(1);
+    const [getMock] = httpMock.history.get;
+    expect(getMock.headers.authorization).toEqual(token);
+  });
+});
+
 describe('getAssetByIdAndProjectKey', () => {
   const { getAssetByIdAndProjectKey } = centralAssetRepoService;
   const assetId = 'test-asset-id';

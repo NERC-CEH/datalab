@@ -37,6 +37,12 @@ centralAssetRepoRouter.get(
   errorWrapper(centralAssetRepo.listAssetMetadata),
 );
 
+// No permission middleware on this as we handle specific cases on metadata retrieval at the DB level.
+centralAssetRepoRouter.get(
+  '/allowedMetadata',
+  errorWrapper(centralAssetRepo.getAllMetadata),
+);
+
 // Use /metadata/:assetId?projectKey=<projectKey value> to filter by metadata available to project
 // When projectKey query added, user's project permissions are checked, otherwise requires system permission to access
 centralAssetRepoRouter.get(

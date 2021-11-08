@@ -93,6 +93,19 @@ async function listAssetMetadata(request, response, next) {
   }
 }
 
+const getAllMetadata = async (request, response, next) => {
+  const { user: { sub, roles } } = request;
+
+  try {
+    const metadata = (roles.instanceAdmin || roles.dataManager)
+      ? await centralAssetRepoRepository.listMetadata()
+      : await centralAssetRepoRepository.metadataAvailableToUser(sub, roles.projectRoles);
+    return response.status(200).send(metadata);
+  } catch (error) {
+    return next(new Error(`Error getting asset metadata: ${error.message}`));
+  }
+};
+
 function handleMissingResourceLocator(metadata, response) {
   const { fileLocation, masterUrl } = metadata;
   if (!(fileLocation || masterUrl)) {
@@ -123,4 +136,5 @@ export default {
   stackCanUseAsset,
   getAssetById,
   listAssetMetadata,
+  getAllMetadata,
 };

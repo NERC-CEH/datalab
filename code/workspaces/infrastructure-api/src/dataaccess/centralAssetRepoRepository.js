@@ -1,8 +1,11 @@
+import { permissionTypes } from 'common';
 import database from '../config/database';
 import centralAssetMetadataModel from '../models/centralAssetMetadata.model';
 
 const { PUBLIC, BY_PROJECT } = centralAssetMetadataModel;
 const TYPE = 'centralAssetMetadata';
+
+const { PROJECT_ADMIN_ROLE, PROJECT_USER_ROLE } = permissionTypes;
 
 const CentralAssetMetadata = () => database.getModel(centralAssetMetadataModel.modelName);
 
@@ -30,6 +33,20 @@ async function metadataAvailableToProject(projectKey) {
     .or([
       { visible: PUBLIC },
       { visible: BY_PROJECT, projectKeys: { $elemMatch: { $eq: projectKey } } },
+    ])
+    .exec();
+}
+
+async function metadataAvailableToUser(userId, userRoles) {
+  // Get a list of projects where this user is a user or admin.
+  const allowedProjects = userRoles.map(r => (r.role === PROJECT_ADMIN_ROLE || r.role === PROJECT_USER_ROLE) && r.projectKey).filter(r => !!r);
+
+  return CentralAssetMetadata()
+    .find()
+    .or([
+      { visible: PUBLIC },
+      { ownerUserIds: userId },
+      { visible: BY_PROJECT, projectKeys: { $elemMatch: { $in: allowedProjects } } },
     ])
     .exec();
 }
@@ -101,6 +118,7 @@ export default {
   listMetadata,
   getMetadataWithIds,
   metadataAvailableToProject,
+  metadataAvailableToUser,
   metadataExists,
   assetIdExists,
   setLastAddedDateToNow,

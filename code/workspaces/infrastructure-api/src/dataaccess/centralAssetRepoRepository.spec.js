@@ -102,6 +102,30 @@ describe('metadataAvailableToProject', () => {
   });
 });
 
+describe('metadataAvailableToUser', () => {
+  it('performs correct query on central asset metadata model and returns the result', async () => {
+    const metadata = getMinimalMetadata();
+    centralAssetMetadataModelMock.exec.mockResolvedValueOnce([metadata]);
+    const projectRoles = [
+      { projectKey: 'test-project', role: 'admin' },
+      { projectKey: 'test-project2', role: 'user' },
+      { projectKey: 'test-project3', role: 'viewer' },
+    ];
+    const expectedAllowedProjects = ['test-project', 'test-project2'];
+
+    const returnValue = await centralAssetRepoRepository.metadataAvailableToUser('user', projectRoles);
+
+    expect(returnValue).toEqual([metadata]);
+    expect(centralAssetMetadataModelMock.find).toHaveBeenCalledWith();
+    expect(centralAssetMetadataModelMock.or).toHaveBeenCalledWith([
+      { visible: 'PUBLIC' },
+      { ownerUserIds: 'user' },
+      { visible: 'BY_PROJECT', projectKeys: { $elemMatch: { $in: expectedAllowedProjects } } },
+    ]);
+    expect(centralAssetMetadataModelMock.exec).toHaveBeenCalledWith();
+  });
+});
+
 describe('getMetadataWithIds', () => {
   it('performs correct query on central asset metadata model and returns the result', async () => {
     const metadata = getMinimalMetadata();
