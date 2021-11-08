@@ -39,7 +39,7 @@ function AssetRepoFindContainer({ userPermissions }) {
     : sortByName(assetRepo.value.assets);
 
   useEffect(() => {
-    dispatch(assetRepoActions.loadAllAssets());
+    dispatch(assetRepoActions.loadAssetsForUser());
     dispatch(projectsActions.loadProjects()); // needed for Asset Edit
     dispatch(userActions.listUsers()); // needed for Asset Edit
   }, [dispatch]);
