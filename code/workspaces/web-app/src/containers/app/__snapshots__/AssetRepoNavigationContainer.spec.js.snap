@@ -15,12 +15,12 @@ exports[`AssetRepoNavigationContainer renders to match snapshot passing correct 
       component={[Function]}
       exact={true}
       path="/assets/find"
-      permission="system:data:manager"
+      permission=""
     />
     <Redirect
       exact={true}
       from="/assets"
-      to="/assets/add-metadata"
+      to="/assets/find"
     />
     <Route
       component={[Function]}

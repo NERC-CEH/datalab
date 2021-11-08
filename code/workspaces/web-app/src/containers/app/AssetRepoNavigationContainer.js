@@ -26,9 +26,9 @@ function AssetRepoNavigationContainer() {
           exact
           path="/assets/find"
           component={AssetRepoFindPage}
-          permission={SYSTEM_DATA_MANAGER}
+          permission={''}
         />
-        <Redirect exact from="/assets" to="/assets/add-metadata" />
+        <Redirect exact from="/assets" to="/assets/find" />
         <Route component={NotFoundPage} />
       </Switch>
     </SideBarNavigation>
