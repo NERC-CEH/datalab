@@ -26,6 +26,7 @@ exports[`AssetMultiSelect renders to match snapshot passing correct props to chi
     }
     renderInput={[Function]}
     renderOption={[Function]}
+    renderTags={[Function]}
     style={
       Object {
         "marginBottom": 10,
