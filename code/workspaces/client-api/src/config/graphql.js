@@ -4,7 +4,7 @@ import { join } from 'path';
 
 import resolvers from '../schema/resolvers';
 
-function configureGraphQL(app) {
+async function configureGraphQL(app) {
   const typeDefs = importSchema(join(__dirname, '..', 'schema', 'schema.graphql'));
 
   const server = new ApolloServer({
@@ -18,6 +18,7 @@ function configureGraphQL(app) {
     playground: process.env.NODE_ENV !== 'production',
   });
 
+  await server.start();
   server.applyMiddleware({ app, path: '/api' });
 }
 
