@@ -21,21 +21,28 @@ async function createAssetMetadata(request, response, next) {
 }
 
 async function updateAssetMetadata(request, response, next) {
+  const { user: { sub, roles } } = request;
   const { assetId } = matchedData(request, { locations: ['params'] });
   const { ownerUserIds, visible, projectKeys } = matchedData(request, { locations: ['body'] });
 
   try {
-    const exists = await centralAssetRepoRepository.assetIdExists(assetId);
-    if (!exists) {
-      next(new Error(`Can not update asset metadata - no document exists with assetId ${assetId}`));
-    } else {
-      await updateStacksForAsset(assetId, visible, projectKeys);
-      // do db updates last in case k8s updates fail
-      const updatedAsset = await centralAssetRepoRepository.updateMetadata({ assetId, ownerUserIds, visible, projectKeys });
-      response.status(200).send(updatedAsset);
+    const matchingAssets = await centralAssetRepoRepository.getMetadataWithIds([assetId]);
+    if (!matchingAssets || matchingAssets.length === 0) {
+      return next(new Error(`Can not update asset metadata - no document exists with assetId ${assetId}`));
     }
+
+    const currentOwners = matchingAssets[0].ownerUserIds;
+    if (!currentOwners.includes(sub) && !roles.instanceAdmin && !roles.dataManager) {
+      // Only Data Managers, Admins, or asset owners can update an asset.
+      return next(new Error(`User does not have permission to update asset metadata for assetId ${assetId}`));
+    }
+
+    await updateStacksForAsset(assetId, visible, projectKeys);
+    // do db updates last in case k8s updates fail
+    const updatedAsset = await centralAssetRepoRepository.updateMetadata({ assetId, ownerUserIds, visible, projectKeys });
+    return response.status(200).send(updatedAsset);
   } catch (error) {
-    next(new Error(`Error updating asset metadata - failed to update document: ${error.message}`));
+    return next(new Error(`Error updating asset metadata - failed to update document: ${error.message}`));
   }
 }
 
