@@ -58,3 +58,12 @@ exports[`projectsService loadProjects should build the correct query and unpack 
       }
     }"
 `;
+
+exports[`projectsService loadProjectsForUser should build the correct query and unpack the results 1`] = `
+"
+    LoadProjectsForUser {
+      projectsForUser {
+        id, key, name, description, accessible
+      }
+    }"
+`;

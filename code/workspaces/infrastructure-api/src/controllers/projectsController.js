@@ -14,6 +14,21 @@ async function listProjects(request, response, next) {
   }
 }
 
+async function listProjectsForUser(request, response, next) {
+  // Function to only get projects where the requesting user is at least a viewer (or is a system admin).
+  const { user: { roles } } = request;
+  const allowedProjects = roles.projectRoles.map(r => r.projectKey);
+
+  try {
+    const projects = roles.instanceAdmin
+      ? await projectsRepository.getAll()
+      : await projectsRepository.getProjectsWithIds(allowedProjects);
+    response.send(projects);
+  } catch (error) {
+    next(new Error(`Error listing projects: ${error.message}`));
+  }
+}
+
 async function getProjectByKey(request, response, next) {
   const { projectKey } = matchedData(request);
 
@@ -147,6 +162,7 @@ const urlAndBodyProjectKeyMatchValidator = () => service.middleware.validator([
 
 export default {
   listProjects,
+  listProjectsForUser,
   getProjectByKey,
   createProject,
   createOrUpdateProject,

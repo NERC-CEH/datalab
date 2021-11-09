@@ -34,6 +34,7 @@ const resolvers = {
     checkNameUniqueness: (obj, args, { token }) => w(internalNameChecker(args.projectKey, args.name, token)),
     users: (obj, args, { token }) => w(usersService.getAll({ token })),
     projects: (obj, args, { token }) => w(projectService.listProjects(token)),
+    projectsForUser: (obj, args, { token }) => w(projectService.listProjectsForUser(token)),
     allProjectsAndResources: (obj, args, { token }) => w(projectService.getAllProjectsAndResources(token)),
     project: (obj, args, { token }) => w(projectService.getProjectByKey(args.projectKey, token)),
     checkProjectKeyUniqueness: (obj, { projectKey }, { token }) => w(projectService.isProjectKeyUnique(projectKey, token)),
