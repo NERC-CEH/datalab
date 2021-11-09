@@ -17,9 +17,7 @@ describe('AssetRepoSideBar', () => {
   it('renders correctly when user has no permissions', () => {
     const props = { classes };
 
-    const state = {
-      ...buildDefaultTestState(),
-    };
+    const state = buildDefaultTestState();
 
     const { wrapper } = renderWithState(state, AssetRepoSideBar, props);
 
@@ -29,17 +27,8 @@ describe('AssetRepoSideBar', () => {
   it('renders correctly when user is a Data Manager', () => {
     const props = { classes };
 
-    const defaultState = buildDefaultTestState();
-    const state = {
-      ...defaultState,
-      authentication: {
-        ...defaultState.authentication,
-        permissions: {
-          ...defaultState.permissions,
-          value: [permissionTypes.SYSTEM_DATA_MANAGER],
-        },
-      },
-    };
+    const state = buildDefaultTestState();
+    state.authentication.permissions.value = [permissionTypes.SYSTEM_DATA_MANAGER];
 
     const { wrapper } = renderWithState(state, AssetRepoSideBar, props);
 
