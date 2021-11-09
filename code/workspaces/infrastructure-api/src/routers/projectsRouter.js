@@ -14,6 +14,10 @@ projectsRouter.get(
   '/',
   ew(projects.listProjects),
 );
+projectsRouter.get(
+  '/forUser',
+  ew(projects.listProjectsForUser),
+);
 projectsRouter.post(
   '/',
   permissionMiddleware(),

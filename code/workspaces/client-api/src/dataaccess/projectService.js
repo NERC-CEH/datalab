@@ -10,6 +10,11 @@ async function listProjects(token) {
   return response.data;
 }
 
+async function listProjectsForUser(token) {
+  const response = await axios.get(`${infraServiceUrl}/projects/forUser`, generateOptions(token));
+  return response.data;
+}
+
 async function getAllProjectsAndResources(token) {
   const response = await axios.get(`${infraServiceUrl}/resources`, generateOptions(token));
   return response.data;
@@ -103,6 +108,7 @@ export function projectActionRequestToProject(actionRequest) {
 
 export default {
   listProjects,
+  listProjectsForUser,
   getAllProjectsAndResources,
   getProjectByKey,
   isProjectKeyUnique,

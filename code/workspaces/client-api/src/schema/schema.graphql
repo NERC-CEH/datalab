@@ -33,8 +33,11 @@ type Query {
     # List of users within the current DataLab
     users: [User]
 
-    # List of projects where the user is a member
+    # List of projects
     projects: [Project]
+
+    # List of projects where the user is a member
+    projectsForUser: [Project]
 
     # Details of a single project
     project(projectKey: String!): Project
