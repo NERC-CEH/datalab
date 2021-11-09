@@ -94,7 +94,7 @@ describe('AddAssetsToNotebookContainer', () => {
     const wrapper = renderWithLocation(location, AddAssetsToNotebookContainer, props);
 
     expect(wrapper.container).toMatchSnapshot();
-    expect(dispatchMock).toHaveBeenCalledTimes(5);
+    expect(dispatchMock).toHaveBeenCalledTimes(4);
     expect(assetRepoActions.loadAllAssets).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledTimes(1);
     expect(initialize).toHaveBeenCalledWith('addAssetsToNotebook', { project: undefined, notebook: undefined });
