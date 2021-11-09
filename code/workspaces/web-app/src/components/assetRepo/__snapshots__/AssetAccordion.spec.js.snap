@@ -134,3 +134,109 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
   </div>
 </div>
 `;
+
+exports[`AssetAccordion renders without an Edit button when user is not a data manager 1`] = `
+<div>
+  <div
+    class="makeStyles-root-178"
+  >
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-182 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-183 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        aria-disabled="false"
+        aria-expanded="true"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-216 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-218"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-219 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-218"
+        >
+          <h5
+            class="MuiTypography-root makeStyles-heading-180 MuiTypography-h5"
+          >
+            asset name
+            : 
+            asset version
+          </h5>
+          <div
+            class="makeStyles-buttonDiv-181"
+          >
+            <button
+              aria-controls="more-menu"
+              aria-haspopup="true"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root"
+                >
+                  more_vert
+                </span>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-217 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-218 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiCollapse-container MuiCollapse-entered"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-324"
+              >
+                <div
+                  class="makeStyles-resources-179"
+                >
+                  Asset: {"name":"asset name","version":"asset version","assetId":"asset-1","fileLocation":"file location","masterUrl":"master URL","owners":[{"userId":"owner-1","name":"name 1"},{"userId":"owner-2","name":"name 2"}],"visibility":"BY_PROJECT","projects":[{"projectKey":"project-1","name":"project 1"},{"projectKey":"project-2","name":"project 2"}]}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

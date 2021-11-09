@@ -77,6 +77,20 @@ describe('assetRepoActions', () => {
       expect(output.payload).toBe('expectedPayload');
     });
 
+    it('loadAssetsForUser', () => {
+      // Arrange
+      const loadAssetsForUserMock = jest.fn().mockReturnValue('expectedPayload');
+      assetRepoService.loadAssetsForUser = loadAssetsForUserMock;
+
+      // Act
+      const output = assetRepoActions.loadAssetsForUser();
+
+      // Assert
+      expect(loadAssetsForUserMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe('LOAD_ASSETS_FOR_USER_ACTION');
+      expect(output.payload).toBe('expectedPayload');
+    });
+
     describe('exports correct value for', () => {
       it('ADD_REPO_METADATA_ACTION', () => {
         expect(ADD_REPO_METADATA_ACTION).toBe('ADD_REPO_METADATA_ACTION');

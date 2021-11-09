@@ -5,6 +5,7 @@ import {
   LOAD_VISIBLE_ASSETS_ACTION,
   LOAD_ALL_ASSETS_ACTION,
   LOAD_ONLY_VISIBLE_ASSETS_ACTION,
+  LOAD_ASSETS_FOR_USER_ACTION,
 } from '../actions/assetRepoActions';
 import assetRepoReducer, { addNewAssets } from './assetRepoReducer';
 
@@ -185,6 +186,56 @@ describe('assetRepoReducer', () => {
     it('should handle LOAD_ONLY_VISIBLE_ASSETS_ACTION_FAILURE', () => {
       // Arrange
       const type = `${LOAD_ONLY_VISIBLE_ASSETS_ACTION}_${PROMISE_TYPE_FAILURE}`;
+      const payload = 'example error';
+      const action = { type, payload };
+
+      // Act
+      const nextState = assetRepoReducer(baseState(), action);
+
+      // Assert
+      expect(nextState).toEqual({ ...baseState(), error: payload });
+    });
+  });
+
+  describe('LOAD_ASSETS_FOR_USER_ACTION', () => {
+    const baseState = () => ({
+      fetching: false,
+      value: {
+        createdAssetId: null,
+        assets: [],
+      },
+      error: null,
+    });
+
+    it('should handle LOAD_ASSETS_FOR_USER_ACTION_PENDING', () => {
+      // Arrange
+      const type = `${LOAD_ASSETS_FOR_USER_ACTION}_${PROMISE_TYPE_PENDING}`;
+      const action = { type };
+
+      // Act
+      const nextState = assetRepoReducer(baseState(), action);
+
+      // Assert
+      expect(nextState).toEqual({ ...baseState(), fetching: true });
+    });
+
+    it('should handle LOAD_ASSETS_FOR_USER_ACTION_ACTION_SUCCESS', () => {
+      // Arrange
+      const type = `${LOAD_ASSETS_FOR_USER_ACTION}_${PROMISE_TYPE_SUCCESS}`;
+      const payload = [{ assetId: 'asset-1234' }];
+      const action = { type, payload };
+      const state = baseState();
+
+      // Act
+      const nextState = assetRepoReducer(state, action);
+
+      // Assert
+      expect(nextState).toEqual({ ...state, value: { ...state.value, assets: action.payload } });
+    });
+
+    it('should handle LOAD_ASSETS_FOR_USER_ACTION_FAILURE', () => {
+      // Arrange
+      const type = `${LOAD_ASSETS_FOR_USER_ACTION}_${PROMISE_TYPE_FAILURE}`;
       const payload = 'example error';
       const action = { type, payload };
 

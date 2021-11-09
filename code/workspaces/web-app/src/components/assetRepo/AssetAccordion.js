@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { reset } from 'redux-form';
+import { permissionTypes } from 'common';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../common/ResourceAccordion';
 import AssetCard from './AssetCard';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
@@ -19,8 +20,11 @@ import assetRepoActions from '../../actions/assetRepoActions';
 import notify from '../common/notify';
 import assetLabel from '../common/form/assetLabel';
 import { BY_PROJECT } from './assetVisibilities';
+import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
 
 const MORE_ICON = 'more_vert';
+
+const { SYSTEM_DATA_MANAGER } = permissionTypes;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,11 +88,22 @@ export const onEditAssetConfirm = async (dispatch, asset) => {
   }
 };
 
+const allowEdit = (userId, userPermissions, asset) => {
+  // For now, only Data Managers can edit an asset.
+  if (userPermissions.value && userPermissions.value.includes(SYSTEM_DATA_MANAGER)) {
+    return true;
+  }
+
+  return false;
+};
+
 function AssetAccordion({ asset }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
+  const userPermissions = useCurrentUserPermissions();
+  const userId = useCurrentUserId();
 
   const handleMoreButtonClick = (event) => {
     event.stopPropagation();
@@ -105,18 +120,20 @@ function AssetAccordion({ asset }) {
     setAnchorEl(null);
   };
 
+  const editable = allowEdit(userId, userPermissions, asset);
+
   return (
     <div className={classes.root}>
       <ResourceAccordion defaultExpanded>
         <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography variant="h5" className={classes.heading}>{asset.name}: {asset.version}</Typography>
           <div className={classes.buttonDiv}>
-            <PrimaryActionButton
+            {editable && <PrimaryActionButton
               aria-label="edit"
               onClick={(event) => { openEditForm(dispatch, asset); event.stopPropagation(); }}
             >
               Edit
-            </PrimaryActionButton>
+            </PrimaryActionButton>}
             <SecondaryActionButton
               aria-controls="more-menu"
               aria-haspopup="true"
