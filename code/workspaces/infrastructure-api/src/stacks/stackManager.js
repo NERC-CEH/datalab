@@ -117,6 +117,10 @@ async function mountAssetsOnStack({ projectKey, name, type, assetIds }) {
   // rather than a supporting container. This is the container that needs to have the volumeMounts updated.
   const containerNameWithMounts = deploymentName;
   await mountAssetsOnDeployment({ projectKey, deploymentName, containerNameWithMounts, assetIds });
+  const patchDelayInMilliseconds = 500;
+  // eslint-disable-next-line no-await-in-loop
+  await new Promise(resolve => setTimeout(resolve, patchDelayInMilliseconds));
+  await statusChecker();
 }
 
 export default { createStack, scaleUpStack, scaleDownStack, restartStack, deleteStack, mountAssetsOnStack, url };
