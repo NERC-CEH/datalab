@@ -10,6 +10,9 @@ import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 
 export const FORM_NAME = 'editAssetDetails';
 
+export const OWNERS_FIELD_NAME = 'owners';
+export const VISIBLE_FIELD_NAME = 'visible';
+
 const formPropTypes = {
   onCancel: PropTypes.func.isRequired,
 };
@@ -19,25 +22,43 @@ const commonProps = {
   InputLabelProps: { shrink: true },
 };
 
+const getFixedOptions = (editPermissions, initialValues) => {
+  if (!editPermissions[OWNERS_FIELD_NAME]) {
+    // If the user doesn't have edit permissions on the field, lock all existing options
+    //  (this still allows for adding new entries).
+    return initialValues.owners;
+  }
+
+  if (!editPermissions.ownId) {
+    return [];
+  }
+
+  // Lock entries matching the user's ID so they cannot remove themselves.
+  return initialValues.owners.filter(o => o.userId === editPermissions.ownId);
+};
+
 const EditRepoMetadataForm = ({
-  handleSubmit, reset, pristine, onCancel,
+  handleSubmit, reset, pristine, onCancel, editPermissions, initialValues,
 }) => {
-  const visibleValue = useReduxFormValue(FORM_NAME, 'visible');
+  const visibleValue = useReduxFormValue(FORM_NAME, VISIBLE_FIELD_NAME);
+  const fixedOptions = getFixedOptions(editPermissions, initialValues);
 
   return (
   <form onSubmit={handleSubmit}>
     <Field
       { ...commonProps }
-      name="owners"
+      name={OWNERS_FIELD_NAME}
       component={UserMultiSelect}
       label="Owners"
       selectedTip="User is an owner"
       format={formatAndParseMultiSelect}
       parse={formatAndParseMultiSelect}
+      fixedOptions={fixedOptions}
   />
     <Field
       { ...commonProps }
-      name="visible"
+      name={VISIBLE_FIELD_NAME}
+      disabled={!editPermissions[VISIBLE_FIELD_NAME]}
       label="Visibility"
       component={renderSelectField}
       options={visibleOptions}
@@ -62,6 +83,11 @@ EditRepoMetadataForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
+  editPermissions: PropTypes.shape({
+    [OWNERS_FIELD_NAME]: PropTypes.bool,
+    [VISIBLE_FIELD_NAME]: PropTypes.bool,
+    ownId: PropTypes.string,
+  }).isRequired,
 };
 
 const EditRepoMetadataReduxForm = reduxForm({

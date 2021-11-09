@@ -15,7 +15,7 @@ import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
 import modalDialogActions from '../../actions/modalDialogActions';
 import { MODAL_TYPE_EDIT_ASSET, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
-import EditRepoMetadataForm, { FORM_NAME } from './EditRepoMetadataForm';
+import EditRepoMetadataForm, { FORM_NAME, OWNERS_FIELD_NAME, VISIBLE_FIELD_NAME } from './EditRepoMetadataForm';
 import assetRepoActions from '../../actions/assetRepoActions';
 import notify from '../common/notify';
 import assetLabel from '../common/form/assetLabel';
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const openEditForm = (dispatch, asset) => dispatch(
+export const openEditForm = (dispatch, asset, editPermissions) => dispatch(
   modalDialogActions.openModalDialog(
     MODAL_TYPE_EDIT_ASSET,
     {
@@ -52,6 +52,7 @@ export const openEditForm = (dispatch, asset) => dispatch(
       onCancel: () => dispatch(modalDialogActions.closeModalDialog()),
       asset,
       formComponent: EditRepoMetadataForm,
+      editPermissions,
     },
   ),
 );
@@ -84,17 +85,37 @@ export const onEditAssetConfirm = async (dispatch, asset) => {
   } catch (error) {
     notify.error('Unable to update asset');
   } finally {
-    await dispatch(assetRepoActions.loadAllAssets());
+    await dispatch(assetRepoActions.loadAssetsForUser());
   }
 };
 
-const allowEdit = (userId, userPermissions, asset) => {
-  // For now, only Data Managers can edit an asset.
+const getEditPermissions = (userId, userPermissions, asset) => {
+  const basePermissions = {
+    [OWNERS_FIELD_NAME]: false,
+    [VISIBLE_FIELD_NAME]: false,
+    ownId: userId,
+  };
+
+  // Data Managers can edit any field.
   if (userPermissions.value && userPermissions.value.includes(SYSTEM_DATA_MANAGER)) {
-    return true;
+    return {
+      ...basePermissions,
+      [OWNERS_FIELD_NAME]: true,
+      [VISIBLE_FIELD_NAME]: true,
+      ownId: null,
+    };
   }
 
-  return false;
+  // Data Owners cannot remove themselves from the owners list.
+  if (asset.owners && asset.owners.filter(o => o.userId === userId).length > 0) {
+    return {
+      ...basePermissions,
+      [OWNERS_FIELD_NAME]: true,
+      [VISIBLE_FIELD_NAME]: true,
+    };
+  }
+
+  return basePermissions;
 };
 
 function AssetAccordion({ asset }) {
@@ -120,7 +141,8 @@ function AssetAccordion({ asset }) {
     setAnchorEl(null);
   };
 
-  const editable = allowEdit(userId, userPermissions, asset);
+  const editPermissions = getEditPermissions(userId, userPermissions, asset);
+  const editable = Object.values(editPermissions).some(p => p === true);
 
   return (
     <div className={classes.root}>
@@ -130,7 +152,7 @@ function AssetAccordion({ asset }) {
           <div className={classes.buttonDiv}>
             {editable && <PrimaryActionButton
               aria-label="edit"
-              onClick={(event) => { openEditForm(dispatch, asset); event.stopPropagation(); }}
+              onClick={(event) => { openEditForm(dispatch, asset, editPermissions); event.stopPropagation(); }}
             >
               Edit
             </PrimaryActionButton>}

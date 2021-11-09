@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import EditAssetDialog from './EditAssetDialog';
 
 describe('EditAssetDialog', () => {
@@ -12,18 +12,29 @@ describe('EditAssetDialog', () => {
     visible: 'PUBLIC',
   };
 
-  const shallowRender = ({
-    title = 'Title',
-    onSubmit = jest.fn().mockName('onSubmit'),
-    onCancel = jest.fn().mockName('onCancel'),
-    asset = mockAsset,
-    formComponent,
-  }) => shallow(
-    <EditAssetDialog {...{ title, onSubmit, onCancel, asset, formComponent }} />,
-  );
+  const onSubmit = jest.fn().mockName('onSubmit');
+  const onCancel = jest.fn().mockName('onCancel');
+
+  const generateProps = () => ({
+    title: 'Title',
+    onSubmit,
+    onCancel,
+    asset: mockAsset,
+    editPermissions: {},
+  });
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('renders correctly passing values to provided from component', () => {
-    const FormComponent = () => <div />;
-    expect(shallowRender({ formComponent: FormComponent })).toMatchSnapshot();
+    const FormComponent = props => (<div>{`Form: ${JSON.stringify(props)}`}</div>);
+    const props = generateProps();
+    props.formComponent = FormComponent;
+
+    const wrapper = render(<EditAssetDialog {...props}/>);
+
+    // Use baseElement instead of container as it's a Modal Dialog.
+    expect(wrapper.baseElement).toMatchSnapshot();
   });
 });

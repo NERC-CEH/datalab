@@ -37,11 +37,26 @@ describe('AssetAccordion', () => {
     expect(wrapper.container).toMatchSnapshot();
   });
 
-  it('renders without an Edit button when user is not a data manager', () => {
+  it('renders with an Edit button when user is not a data manager but is an owner', () => {
     useCurrentUserPermissions.mockReturnValueOnce({ value: [] });
     const wrapper = render(<AssetAccordion asset={asset}/>);
 
-    expect(wrapper.container).toMatchSnapshot();
+    expect(wrapper.queryAllByText('Edit').length).toEqual(1);
+  });
+
+  it('renders with an Edit button when user is a data manager but is not an owner', () => {
+    useCurrentUserId.mockReturnValueOnce('other-owner');
+    const wrapper = render(<AssetAccordion asset={asset}/>);
+
+    expect(wrapper.queryAllByText('Edit').length).toEqual(1);
+  });
+
+  it('renders without an Edit button when user is not a data manager or an owner', () => {
+    useCurrentUserPermissions.mockReturnValueOnce({ value: [] });
+    useCurrentUserId.mockReturnValueOnce('other-owner');
+    const wrapper = render(<AssetAccordion asset={asset}/>);
+
+    expect(wrapper.queryAllByText('Edit').length).toEqual(0);
   });
 
   it('opens the more menu when the button is clicked', () => {
