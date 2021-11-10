@@ -17,6 +17,8 @@ jest.mock('../../api/projectsService');
 jest.mock('../../components/common/notify');
 jest.mock('../../components/stacks/StackCards', () => props => <div>StackCards Mock - props = {JSON.stringify(props, null, 2)}</div>);
 jest.mock('../../config/featureFlags');
+jest.mock('@material-ui/core/Switch', () => props => (<div>{`Switch mock - checked: ${props.checked}`}</div>));
+jest.mock('@material-ui/core/FormControlLabel', () => props => (<div>{`Form control label mock - label: ${props.label}`}{props.control}</div>));
 
 const projectsPayload = {
   value: [{
