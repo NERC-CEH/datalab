@@ -20,9 +20,9 @@ centralAssetRepoRouter.post(
   errorWrapper(centralAssetRepo.createAssetMetadata),
 );
 
+// No permission middleware on this as we have to check owner IDs in the DB.
 centralAssetRepoRouter.put(
   '/metadata/:assetId',
-  permissionMiddleware(SYSTEM_DATA_MANAGER),
   assetIdValidator(param),
   updateValidator(body),
   errorWrapper(centralAssetRepo.updateAssetMetadata),

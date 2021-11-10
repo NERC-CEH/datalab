@@ -36,6 +36,14 @@ const getUpdateMetadata = () => ({
   projectKeys: ['projKey'],
 });
 
+const getUpdateRequest = metadata => ({
+  ...metadata,
+  user: {
+    sub: 'userId',
+    roles: {},
+  },
+});
+
 beforeEach(() => {
   jest.clearAllMocks();
 });
@@ -102,24 +110,53 @@ describe('updateAssetMetadata', () => {
   const { updateAssetMetadata } = centralAssetRepoController;
 
   it('calls matched data to get the metadata information', async () => {
-    const requestMock = { };
+    const requestMock = getUpdateRequest(getUpdateMetadata());
     await updateAssetMetadata(requestMock, responseMock, nextMock);
     expect(matchedDataMock).toHaveBeenNthCalledWith(1, requestMock, { locations: ['params'] });
     expect(matchedDataMock).toHaveBeenNthCalledWith(2, requestMock, { locations: ['body'] });
   });
 
   it('updates metadata document and returns the newly updated document with 200 status', async () => {
-    const requestMock = getUpdateMetadata();
-    const updatedMetaDocument = { ...getMinimalMetadata(), ...requestMock };
+    const requestMetadata = getUpdateMetadata();
+    const requestMock = getUpdateRequest(requestMetadata);
+    requestMock.user.roles.instanceAdmin = true;
+
+    const existingMetadata = getMinimalMetadata();
+    const updatedMetaDocument = { ...getMinimalMetadata(), ...requestMetadata };
     const stack = { _id: 'id', assetIds: ['asset-id', 'asset-id2'] };
-    centralAssetRepoRepository.assetIdExists.mockResolvedValueOnce(true);
+    centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([existingMetadata]);
     centralAssetRepoRepository.updateMetadata.mockResolvedValueOnce(updatedMetaDocument);
     stacksRepository.getAllByAsset.mockResolvedValueOnce([stack]);
     stackManager.mountAssetsOnStack.mockResolvedValueOnce();
 
     await updateAssetMetadata(requestMock, responseMock, nextMock);
 
-    expect(centralAssetRepoRepository.updateMetadata).toHaveBeenCalledWith(requestMock);
+    expect(centralAssetRepoRepository.updateMetadata).toHaveBeenCalledWith(requestMetadata);
+    expect(stacksRepository.getAllByAsset).toHaveBeenCalledWith('asset-id');
+    expect(stackManager.mountAssetsOnStack).toHaveBeenCalledWith({ _id: 'id', assetIds: ['asset-id2'] });
+    expect(stacksRepository.updateAssets).toHaveBeenCalledWith('id', ['asset-id2']);
+    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.send).toHaveBeenCalledWith(updatedMetaDocument);
+  });
+
+  it('updates metadata document if user is not admin but is a data owner', async () => {
+    const requestMetadata = getUpdateMetadata();
+    const requestMock = getUpdateRequest(requestMetadata);
+
+    const existingMetadata = {
+      ...getMinimalMetadata(),
+      ownerUserIds: ['userId'],
+    };
+    const updatedMetaDocument = { ...getMinimalMetadata(), ...requestMetadata };
+    const stack = { _id: 'id', assetIds: ['asset-id', 'asset-id2'] };
+    centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([existingMetadata]);
+    centralAssetRepoRepository.updateMetadata.mockResolvedValueOnce(updatedMetaDocument);
+    stacksRepository.getAllByAsset.mockResolvedValueOnce([stack]);
+    stackManager.mountAssetsOnStack.mockResolvedValueOnce();
+
+    await updateAssetMetadata(requestMock, responseMock, nextMock);
+
+    expect(centralAssetRepoRepository.updateMetadata).toHaveBeenCalledWith(requestMetadata);
     expect(stacksRepository.getAllByAsset).toHaveBeenCalledWith('asset-id');
     expect(stackManager.mountAssetsOnStack).toHaveBeenCalledWith({ _id: 'id', assetIds: ['asset-id2'] });
     expect(stacksRepository.updateAssets).toHaveBeenCalledWith('id', ['asset-id2']);
@@ -128,18 +165,31 @@ describe('updateAssetMetadata', () => {
   });
 
   it('calls next with an error if the document does not exist', async () => {
-    const requestMock = getUpdateMetadata();
-    centralAssetRepoRepository.assetIdExists.mockResolvedValueOnce(false);
+    const requestMock = getUpdateRequest(getUpdateMetadata());
+    centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([]);
+
     await updateAssetMetadata(requestMock, responseMock, nextMock);
     expect(nextMock).toHaveBeenCalledWith(new Error('Can not update asset metadata - no document exists with assetId asset-id'));
   });
 
+  it('calls next with an error if the requesting user does not have permission to update', async () => {
+    const requestMock = getUpdateRequest(getUpdateMetadata());
+    const existingMetadata = getMinimalMetadata();
+    centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([existingMetadata]);
+
+    await updateAssetMetadata(requestMock, responseMock, nextMock);
+    expect(nextMock).toHaveBeenCalledWith(new Error('User does not have permission to update asset metadata for assetId asset-id'));
+  });
+
   it('calls next with an error if there is an error when updating the metadata document', async () => {
-    const requestMock = getUpdateMetadata();
+    const requestMock = getUpdateRequest(getUpdateMetadata());
+    requestMock.user.roles.instanceAdmin = true;
+    const existingMetadata = getMinimalMetadata();
     const stack = { _id: 'id', assetIds: ['asset-id', 'asset-id2'] };
-    centralAssetRepoRepository.assetIdExists.mockResolvedValueOnce(true);
+    centralAssetRepoRepository.getMetadataWithIds.mockResolvedValueOnce([existingMetadata]);
     stacksRepository.getAllByAsset.mockResolvedValueOnce([stack]);
     stackManager.mountAssetsOnStack.mockRejectedValueOnce(new Error('Expected test error'));
+
     await updateAssetMetadata(requestMock, responseMock, nextMock);
     expect(nextMock).toHaveBeenCalledWith(new Error('Error updating asset metadata - failed to update document: Expected test error'));
   });

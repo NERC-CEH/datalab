@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Tooltip from '@material-ui/core/Tooltip';
+import Chip from '@material-ui/core/Chip';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import { makeStyles } from '@material-ui/core/styles';
 import { fieldStyle, fieldStyleProps, multilineFieldStyleProps } from './controlStyles';
@@ -108,7 +109,9 @@ export const renderSelectField = ({ input, label, meta: { touched, error }, opti
 export const formatAndParseMultiSelect = val => val || [];
 
 export const renderMultiSelectAutocompleteField = ({
-  input, currentValue, setCurrentValue, meta, options, label, placeholder, getOptionLabel, getOptionSelected, loading, selectedTip, InputLabelProps, ...custom
+  input, currentValue, setCurrentValue, meta, options, label, placeholder,
+  getOptionLabel, getOptionSelected, loading, selectedTip, InputLabelProps,
+  fixedOptions = [], ...custom
 }) => {
   const touched = meta ? meta.touched : false;
   const error = meta ? meta.error : false;
@@ -138,6 +141,12 @@ export const renderMultiSelectAutocompleteField = ({
     onChange={onChange}
     onBlur={onBlur}
     {...custom}
+    renderTags={(tagValue, getTagProps) => tagValue.map((option, index) => (
+      <Chip
+        label={getOptionLabel(option)}
+        {...getTagProps({ index })}
+        disabled={fixedOptions.includes(option)}
+      />))}
     renderInput={params => (
       <TextField
         {...params}
