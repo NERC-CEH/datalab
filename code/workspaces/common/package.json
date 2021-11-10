@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.16.0",
-    "express-validator": "6.1.1",
+    "express-validator": "^6.13.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

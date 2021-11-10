@@ -1,9 +1,5 @@
-import * as expressValidator from 'express-validator';
 import ValidationChainHelper from './ValidationChainHelper';
 import { assetIdValidator, createValidator, updateValidator } from './centralAssetRepoValidators';
-
-const bodyMock = jest
-  .spyOn(expressValidator, 'body');
 
 const mockHelperChainMethod = () => jest.fn().mockImplementation(() => mockHelperChain);
 const mockHelperChain = {
@@ -24,9 +20,15 @@ beforeEach(() => {
 });
 
 describe('centralAssetRepoValidators', () => {
+  let bodyMock;
+
+  beforeEach(() => {
+    bodyMock = jest.fn(() => mockHelperChain);
+  });
+
   describe('calls helper methods with correct argument on internal validation chain', () => {
     it('assetIdValidator', () => {
-      assetIdValidator(expressValidator.body);
+      assetIdValidator(bodyMock);
       expect(bodyMock).toHaveBeenCalledWith('assetId');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
       expect(mockHelperChain.isUUIDv4).toHaveBeenCalled();
@@ -35,12 +37,12 @@ describe('centralAssetRepoValidators', () => {
 
   describe('calls validators for right parameters', () => {
     it('createValidator', () => {
-      createValidator(expressValidator.body);
+      createValidator(bodyMock);
       expect(bodyMock.mock.calls).toEqual([['name'], ['version'], ['fileLocation'], ['masterUrl'], ['ownerUserIds'], ['visible'], ['projectKeys']]);
     });
 
     it('updateValidator', () => {
-      updateValidator(expressValidator.body);
+      updateValidator(bodyMock);
       expect(bodyMock.mock.calls).toEqual([['ownerUserIds'], ['visible'], ['projectKeys']]);
     });
   });

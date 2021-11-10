@@ -1,4 +1,4 @@
-import { check, matchedData, sanitize } from 'express-validator';
+import { check, matchedData, body } from 'express-validator';
 import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
@@ -71,7 +71,7 @@ const withCategoryValidator = [
     .exists()
     .isIn([NOTEBOOK_CATEGORY, SITE_CATEGORY])
     .trim(),
-  sanitize(),
+  body(),
 ];
 
 const withMountValidator = [

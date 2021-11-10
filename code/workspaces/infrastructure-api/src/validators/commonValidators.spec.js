@@ -1,9 +1,5 @@
-import * as expressValidator from 'express-validator';
 import { nameValidator, projectKeyValidator, optionalProjectKeyValidator } from './commonValidators';
 import ValidationChainHelper from './ValidationChainHelper';
-
-const paramMock = jest
-  .spyOn(expressValidator, 'param');
 
 const mockHelperChainMethod = () => jest.fn().mockImplementation(() => mockHelperChain);
 const mockHelperChain = {
@@ -17,24 +13,28 @@ jest.mock('./ValidationChainHelper');
 ValidationChainHelper.mockImplementation(() => (mockHelperChain));
 
 describe('commonValidators', () => {
+  let paramMock;
+
   beforeEach(() => {
     jest.clearAllMocks();
+    paramMock = jest.fn(() => mockHelperChain);
   });
+
   describe('calls helper methods with correct argument on internal validation chain', () => {
     it('nameValidator', () => {
-      nameValidator(expressValidator.param);
+      nameValidator(paramMock);
       expect(paramMock).toHaveBeenCalledWith('name');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
       expect(mockHelperChain.isName).toHaveBeenCalledWith();
     });
     it('projectKeyValidator', () => {
-      projectKeyValidator(expressValidator.param);
+      projectKeyValidator(paramMock);
       expect(paramMock).toHaveBeenCalledWith('projectKey');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
       expect(mockHelperChain.notEmpty).toHaveBeenCalledWith();
     });
     it('optionalProjectKeyValidator', () => {
-      optionalProjectKeyValidator(expressValidator.param);
+      optionalProjectKeyValidator(paramMock);
       expect(paramMock).toHaveBeenCalledWith('projectKey');
       expect(mockHelperChain.optional).toHaveBeenCalledWith();
       expect(mockHelperChain.notEmpty).toHaveBeenCalledWith();

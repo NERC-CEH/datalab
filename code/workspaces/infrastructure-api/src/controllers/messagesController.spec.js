@@ -2,6 +2,7 @@ import * as expressValidator from 'express-validator';
 import messagesRepository from '../dataaccess/messagesRepository';
 import messagesController from './messagesController';
 
+jest.mock('express-validator');
 jest.mock('../dataaccess/messagesRepository');
 
 const matchedDataMock = jest

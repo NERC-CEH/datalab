@@ -5,6 +5,7 @@ import centralAssetRepoController from './centralAssetRepoController';
 import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 import stackManager from '../stacks/stackManager';
 
+jest.mock('express-validator');
 jest.mock('../dataaccess/centralAssetRepoRepository');
 jest.mock('../dataaccess/stacksRepository');
 jest.mock('../stacks/stackManager');

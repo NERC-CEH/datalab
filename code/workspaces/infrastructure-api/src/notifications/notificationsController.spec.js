@@ -5,6 +5,7 @@ import notificationsController from './notificationsController';
 import config from '../config/config';
 import emailNotificiationAdapter from './adapters/emailNotificationAdapter';
 
+jest.mock('express-validator');
 jest.mock('./notificationsRepository');
 jest.mock('./adapters/emailNotificationAdapter');
 jest.mock('../config/config');
