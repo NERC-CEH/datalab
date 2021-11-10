@@ -1157,6 +1157,69 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_12f8cd16f8b24db28a60a1ad8099e882
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1636531815999
+    created: 1636370440256
+    url: "{{ _.client_api_url }}/api"
+    name: centralAssetMetadataAvailableToUser
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  centralAssetsAvailableToUser
+        {\n    assetId\n    name\n    version\n    projects {key,
+        name}\n    visible\n    registrationDate\n    owners {userId,
+        name}\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_bd504b415b124fe897d4835b18931abe
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: 2525
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d0098984a260430fae842ac64633cb6c
+    parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
+    modified: 1635337394712
+    created: 1635322367835
+    url: "{{ client_api_url  }}/api"
+    name: addAssetToStack
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  updateStack(stack: { \n    projectKey: \"project\",
+        \n    name: \"jupyter\",\n    assetIds:
+        [\"85e76212-319d-4d62-b1a1-2e4a6091fe64\"]\n  })
+        {\n    id\n    name\n    description\n    assets
+        {\n      assetId\n      name      \n    }\n  }\n} "}'
+    parameters: []
+    headers:
+      - id: pair_57ece199c6814d9b82e04a41480b77bb
+        name: Content-Type
+        value: application/json
+    authentication:
+      token: "{{ access_token  }}"
+      type: bearer
+    metaSortKey: 2550
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_c37ed0cb33c74ad4bd016ed7e517169a
     parentId: fld_93c229dfaaf045de8b9e9f7f51c56d41
     modified: 1632904300826
@@ -1621,6 +1684,29 @@ resources:
       token: "{{ internal_token  }}"
       type: bearer
     metaSortKey: -1568712933612.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ddc12e0ec26946d78a79cc8aa012099d
+    parentId: fld_c5fd5b1d05e24c349febad830d984362
+    modified: 1636370205089
+    created: 1636368082975
+    url: "{{ infra_api_url  }}/centralAssetRepo/allowedMetadata"
+    name: Get Assets Visible To User
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933610.6875
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
