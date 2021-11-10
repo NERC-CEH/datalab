@@ -3,6 +3,7 @@ import clustersRepository from '../dataaccess/clustersRepository';
 import clustersController from './clustersController';
 import * as clusterManager from '../stacks/clusterManager';
 
+jest.mock('express-validator');
 jest.mock('../stacks/clusterManager');
 clusterManager.createClusterStack = jest.fn().mockResolvedValue();
 clusterManager.deleteClusterStack = jest.fn().mockResolvedValue();

@@ -1,9 +1,5 @@
-import * as expressValidator from 'express-validator';
 import ValidationChainHelper from './ValidationChainHelper';
 import { clusterTypeValidator, mountValidator } from './clusterValidators';
-
-const bodyMock = jest
-  .spyOn(expressValidator, 'body');
 
 const mockHelperChainMethod = () => jest.fn().mockImplementation(() => mockHelperChain);
 const mockHelperChain = {
@@ -15,16 +11,22 @@ jest.mock('./ValidationChainHelper');
 ValidationChainHelper.mockImplementation(() => (mockHelperChain));
 
 describe('clusterValidators', () => {
+  let bodyMock;
+
+  beforeEach(() => {
+    bodyMock = jest.fn(() => mockHelperChain);
+  });
+
   describe('calls helper methods with correct argument on internal validation chain', () => {
     it('clusterTypeValidator', () => {
-      clusterTypeValidator(expressValidator.body);
+      clusterTypeValidator(bodyMock);
       expect(bodyMock).toHaveBeenCalledWith('type');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
       expect(mockHelperChain.isIn).toHaveBeenCalledWith(['DASK', 'SPARK']);
     });
 
     it('mountValidator', () => {
-      mountValidator(expressValidator.body);
+      mountValidator(bodyMock);
       expect(bodyMock).toHaveBeenCalledWith('volumeMount');
       expect(mockHelperChain.exists).toHaveBeenCalledWith();
     });

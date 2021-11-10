@@ -7,7 +7,7 @@
   "dependencies": {
     "@babel/runtime": "^7.16.0",
     "express-prometheus-middleware": "^0.6.1",
-    "express-validator": "6.1.1",
+    "express-validator": "^6.13.0",
     "prom-client": "^11.5.3"
   },
   "devDependencies": {

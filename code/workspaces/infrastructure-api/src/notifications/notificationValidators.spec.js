@@ -1,9 +1,5 @@
-import * as expressValidator from 'express-validator';
 import ValidationChainHelper from '../validators/ValidationChainHelper';
 import { notificationValidator, notificationIdValidator } from './notificationValidators';
-
-const bodyMock = jest.spyOn(expressValidator, 'body');
-const paramMock = jest.spyOn(expressValidator, 'param');
 
 jest.mock('../validators/ValidationChainHelper');
 
@@ -24,7 +20,8 @@ describe('notificationValidators', () => {
     });
 
     it('notificationValidator', () => {
-      notificationValidator(expressValidator.body);
+      const bodyMock = jest.fn(() => mockHelperChain);
+      notificationValidator(bodyMock);
       expect(bodyMock).toHaveBeenCalledWith('message');
       expect(bodyMock).toHaveBeenCalledWith('title');
       expect(bodyMock).toHaveBeenCalledWith('userIDs');
@@ -33,7 +30,8 @@ describe('notificationValidators', () => {
     });
 
     it('notificationIdValidator', () => {
-      notificationIdValidator(expressValidator.param);
+      const paramMock = jest.fn(() => mockHelperChain);
+      notificationIdValidator(paramMock);
       expect(paramMock).toHaveBeenCalledWith('id');
       expect(mockHelperChain.exists).toHaveBeenCalledTimes(1);
       expect(mockHelperChain.notEmpty).toHaveBeenCalledTimes(1);
