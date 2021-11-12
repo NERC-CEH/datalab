@@ -1,10 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import createStore from 'redux-mock-store';
-import { mount } from 'enzyme';
 import { reset } from 'redux-form';
+import { within } from '@testing-library/react';
 import notify from '../../components/common/notify';
 import { getFeatureFlags } from '../../config/featureFlags';
+import { renderWithState, buildDefaultTestState } from '../../testUtils/renderWithState';
 
 import ProjectsContainer, { confirmDeleteProject, deleteProject, onCreateProjectSubmit, projectToStack, stackMatchesFilter } from './ProjectsContainer';
 import projectsService from '../../api/projectsService';
@@ -17,6 +16,8 @@ jest.mock('../../api/projectsService');
 jest.mock('../../components/common/notify');
 jest.mock('../../components/stacks/StackCards', () => props => <div>StackCards Mock - props = {JSON.stringify(props, null, 2)}</div>);
 jest.mock('../../config/featureFlags');
+jest.mock('@material-ui/core/Switch', () => props => (<div>{`Switch mock - checked: ${props.checked}`}</div>));
+jest.mock('@material-ui/core/FormControlLabel', () => props => (<div>{`Form control label mock - label: ${props.label}`}{props.control}</div>));
 
 const projectsPayload = {
   value: [{
@@ -27,25 +28,6 @@ const projectsPayload = {
     accessible: true,
   }],
 };
-
-function renderWithStore({
-  projects = projectsPayload,
-  userPermissionsArray = ['expected-user-permission', 'system:instance:admin'],
-} = {}) {
-  const middlewares = [];
-  const initialState = {
-    authentication: { permissions: { value: userPermissionsArray } },
-    projects,
-  };
-  const store = createStore(middlewares)(initialState);
-  const wrapper = mount(
-    <Provider store={store}>
-      <ProjectsContainer/>
-    </Provider>,
-  );
-
-  return { store, wrapper };
-}
 
 let loadProjectsMock;
 beforeEach(() => {
@@ -70,25 +52,42 @@ describe('ProjectsContainer', () => {
   });
 
   it('renders to match snapshot', () => {
-    const { wrapper } = renderWithStore();
-    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
+    const state = buildDefaultTestState();
+    state.projects = projectsPayload;
+    state.authentication.permissions.value = ['expected-user-permission', 'system:instance:admin'];
+
+    const { wrapper } = renderWithState(state, ProjectsContainer);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
-  it('renders request button if not admin', () => {
-    const { wrapper } = renderWithStore({ userPermissionsArray: ['expected-user-permission'] });
-    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
+  it('renders request button if not admin', async () => {
+    const state = buildDefaultTestState();
+    state.projects = projectsPayload;
+    state.authentication.permissions.value = ['expected-user-permission'];
+
+    const { wrapper } = renderWithState(state, ProjectsContainer);
+    await expect(wrapper.findAllByText('Request Project')).not.toBeNull();
   });
 
-  it('passes admin permission if requestProjects feature flag is off', () => {
+  it('passes admin permission if requestProjects feature flag is off', async () => {
     getFeatureFlags.mockReturnValue({ requestProjects: false });
-    const { wrapper } = renderWithStore({ userPermissionsArray: ['expected-user-permission'] });
-    expect(wrapper.find(ProjectsContainer)).toMatchSnapshot();
+    const state = buildDefaultTestState();
+    state.projects = projectsPayload;
+    state.authentication.permissions.value = ['expected-user-permission'];
+
+    const { wrapper } = renderWithState(state, ProjectsContainer);
+
+    const stackCardsMock = await wrapper.getByText('StackCards Mock', { exact: false });
+    await expect(within(stackCardsMock).findByText('"createPermission": "system:instance:admin"', { exact: false })).not.toBeNull();
   });
 
   it('loads projects when it is rendered', () => {
-    const { store } = renderWithStore();
-    const actions = store.getActions();
-    expect(actions).toEqual([projectActions.loadProjects()]);
+    const state = buildDefaultTestState();
+    state.projects = projectsPayload;
+    state.authentication.permissions.value = ['expected-user-permission', 'system:instance:admin'];
+
+    const { store } = renderWithState(state, ProjectsContainer);
+    expect(store.getActions()[0]).toEqual({ type: 'LOAD_PROJECTS_PENDING' });
   });
 
   describe('has methods', () => {

@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { reset } from 'redux-form';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import ListItem from '@material-ui/core/ListItem';
 import { permissionTypes, stackTypes } from 'common';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
 import modalDialogActions from '../../actions/modalDialogActions';
@@ -162,15 +163,18 @@ const Controls = ({ myProjectsFilter, toggleMyProjectsFilter, searchText, onSear
   const classes = useStyles();
   return (
     <div className={classes.controlContainer}>
-      <div className={classes.filters}>
-        <ListItem
-          button={true}
-          onClick={toggleMyProjectsFilter}
-          className={myProjectsFilter ? classes.active : classes.inactive}
-        >
-          My Projects
-        </ListItem>
-      </div>
+      <FormControlLabel
+        className={classes.filters}
+        control={
+          <Switch
+            checked={!myProjectsFilter}
+            onChange={toggleMyProjectsFilter}
+            name="projectToggle"
+            color="primary"
+          />
+        }
+        label="All Projects"
+      />
       <TextField
         id="search"
         className={classes.searchTextField}
