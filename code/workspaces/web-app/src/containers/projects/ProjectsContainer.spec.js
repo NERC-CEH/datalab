@@ -60,16 +60,16 @@ describe('ProjectsContainer', () => {
     expect(wrapper.container).toMatchSnapshot();
   });
 
-  it('renders request button if not admin', () => {
+  it('renders request button if not admin', async () => {
     const state = buildDefaultTestState();
     state.projects = projectsPayload;
     state.authentication.permissions.value = ['expected-user-permission'];
 
     const { wrapper } = renderWithState(state, ProjectsContainer);
-    expect(wrapper.findAllByText('Request Project')).not.toBeNull();
+    await expect(wrapper.findAllByText('Request Project')).not.toBeNull();
   });
 
-  it('passes admin permission if requestProjects feature flag is off', () => {
+  it('passes admin permission if requestProjects feature flag is off', async () => {
     getFeatureFlags.mockReturnValue({ requestProjects: false });
     const state = buildDefaultTestState();
     state.projects = projectsPayload;
@@ -77,8 +77,8 @@ describe('ProjectsContainer', () => {
 
     const { wrapper } = renderWithState(state, ProjectsContainer);
 
-    const stackCardsMock = wrapper.findByText('StackCards Mock');
-    expect(within(stackCardsMock).findByText('"createPermission": "system:instance:admin"')).not.toBeNull();
+    const stackCardsMock = await wrapper.getByText('StackCards Mock', { exact: false });
+    await expect(within(stackCardsMock).findByText('"createPermission": "system:instance:admin"', { exact: false })).not.toBeNull();
   });
 
   it('loads projects when it is rendered', () => {
