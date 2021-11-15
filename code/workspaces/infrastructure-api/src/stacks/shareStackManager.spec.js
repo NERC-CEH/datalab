@@ -30,12 +30,14 @@ const expectCalls = ({
   createJob = 0,
   patchIngress = 0,
   createStackCredentialSecret = 0,
+  getDeployment = 0,
   restartDeployment = 0,
   generateNewShiroIni = 0,
 }) => {
   expect(jobApi.createJob).toHaveBeenCalledTimes(createJob);
   expect(ingressApi.patchIngress).toHaveBeenCalledTimes(patchIngress);
   expect(secretManager.createStackCredentialSecret).toHaveBeenCalledTimes(createStackCredentialSecret);
+  expect(deploymentApi.getDeployment).toHaveBeenCalledTimes(getDeployment);
   expect(deploymentApi.restartDeployment).toHaveBeenCalledTimes(restartDeployment);
   expect(zeppelin.generateNewShiroIni).toHaveBeenCalledTimes(generateNewShiroIni);
 };
@@ -53,6 +55,7 @@ describe('handleSharedChange', () => {
     secretManager.createStackCredentialSecret = jest.fn();
     jobApi.createJob = jest.fn();
     ingressApi.patchIngress = jest.fn();
+    deploymentApi.getDeployment = jest.fn();
     deploymentApi.restartDeployment = jest.fn();
     zeppelin.generateNewShiroIni = jest.fn();
   });
@@ -156,14 +159,35 @@ describe('handleSharedChange', () => {
       type: JUPYTERLAB,
     };
 
+    deploymentApi.getDeployment.mockResolvedValueOnce({
+      spec: {
+        template: {
+          spec: {
+            containers: [
+              {
+                name: 'jupyterlab-stackname',
+                env: [
+                  {
+                    name: 'JUPYTER_DATA_DIR',
+                    value: '/data/notebooks/jupyterlab-stackname/.jupyter',
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      },
+    });
+
     const expectedCredentials = expect.objectContaining({
       token: expect.any(String),
     });
 
     await handleSharedChange(getParams(), existing, 'private');
 
-    expectCalls({ createJob: 1, createStackCredentialSecret: 1 });
+    expectCalls({ createJob: 1, createStackCredentialSecret: 1, getDeployment: 1 });
     expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, JUPYTERLAB, projectKey, expectedCredentials);
+    expect(deploymentApi.getDeployment).toHaveBeenCalledWith('jupyterlab-stackname', projectKey);
     expect(jobApi.createJob).toHaveBeenCalledWith(name, projectKey, expect.any(String));
     expect(jobApi.createJob.mock.calls[0][2]).toMatchSnapshot();
   });

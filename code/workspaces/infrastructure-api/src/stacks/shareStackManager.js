@@ -15,7 +15,29 @@ const { JUPYTER, JUPYTERLAB, ZEPPELIN } = stackTypes;
 
 const mountPath = '/mnt/persistentfs';
 
-const getJupyterCookiePath = deployment => `${mountPath}/notebooks/${deployment}/.jupyter/runtime/jupyter_cookie_secret`;
+const getJupyterCookiePath = jupyterDirectory => `${jupyterDirectory}/runtime/jupyter_cookie_secret`;
+
+const jupyterDirectoryEnvName = 'JUPYTER_DATA_DIR';
+
+// Find the location of the .jupyter directory based on the environment variables in the deployment.
+const getJupyterDirectory = (deployment, deploymentData) => {
+  const { containers } = deploymentData.spec.template.spec;
+  const defaultDirectory = `${mountPath}/notebooks/${deployment}/.jupyter`;
+
+  const container = containers.find(c => c.name === deployment);
+  if (!container) {
+    return defaultDirectory;
+  }
+
+  const { env } = container;
+
+  const envVar = env.find(e => e.name === jupyterDirectoryEnvName);
+  if (!envVar || !envVar.value) {
+    return defaultDirectory;
+  }
+
+  return envVar.value.replace('/data', mountPath);
+};
 
 const getIngressPatch = authValue => ({
   metadata: {
@@ -32,8 +54,11 @@ export const makeJupyterPrivate = async (name, type, projectKey, volumeMount) =>
 
   const deployment = deploymentName(name, type);
 
+  const deploymentData = await deploymentApi.getDeployment(deployment, projectKey);
+  const jupyterDirectory = getJupyterDirectory(deployment, deploymentData);
+
   // Trigger a job to remove a cookie file from the volume and restart the notebook pod
-  const runCommand = `rm -f ${getJupyterCookiePath(deployment)}`;
+  const runCommand = `rm -f ${getJupyterCookiePath(jupyterDirectory)}`;
   const kubectlCommand = `kubectl rollout restart deployment/${deployment}`;
 
   const manifest = await createKubectlJob({ name, runCommand, kubectlCommand, volumeMount, mountPath });
