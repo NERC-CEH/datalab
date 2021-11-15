@@ -1,0 +1,35 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ name }}
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    spec:
+      containers:
+      - name: {{ name }}
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ["sh"]
+        args: ["-c", "{{{ runCommand }}}"]
+        {{#volumeMount}}
+        volumeMounts:
+          - mountPath: {{{ mountPath }}}
+            name: persistentfsvol
+        {{/volumeMount}}
+      {{#kubectlCommand}}
+      - name: kubectl-job
+        image: bitnami/kubectl
+        imagePullPolicy: IfNotPresent
+        command: ["sh"]
+        args: ["-c", "{{{ kubectlCommand }}}"]
+      {{/kubectlCommand}}
+      volumes:
+        {{#volumeMount}}
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+        {{/volumeMount}}
+      restartPolicy: Never
+    
