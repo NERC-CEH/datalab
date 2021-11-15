@@ -1,8 +1,9 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { createJob } from './jobApi';
-
+import jobApi from './jobApi';
 import config from '../config/config';
+
+const { createJob } = jobApi;
 
 const mock = new MockAdapter(axios);
 

@@ -12,7 +12,7 @@ const getJobUrl = (namespace, name) => {
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
 
-export const createJob = async (name, namespace, manifest) => {
+const createJob = async (name, namespace, manifest) => {
   logger.info('Creating job: %s in namespace: %s', name, namespace);
 
   try {
