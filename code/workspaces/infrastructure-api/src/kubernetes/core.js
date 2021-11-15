@@ -21,6 +21,16 @@ export const handleDeleteError = (type, name) => (error) => {
   throw createError(error.message);
 };
 
+export const handlePatchError = (type, name) => (error) => {
+  if (has(error, 'response.status') && get(error, 'response.status') === 404) {
+    logger.warn(`Kubernetes API: Could not find ${type}: ${name} to patch it`);
+    return Promise.resolve();
+  }
+
+  logger.error(`Error patching ${type}: ${name}`);
+  throw createError(error.message);
+};
+
 function createError(message) {
   return new Error(`Kubernetes API: ${message}`);
 }
