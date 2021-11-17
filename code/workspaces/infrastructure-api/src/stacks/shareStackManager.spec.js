@@ -8,6 +8,12 @@ import ingressApi from '../kubernetes/ingressApi';
 import deploymentApi from '../kubernetes/deploymentApi';
 import zeppelin from './zeppelinStack';
 
+jest.mock('../credentials/secretManager');
+jest.mock('../kubernetes/jobApi');
+jest.mock('../kubernetes/ingressApi');
+jest.mock('../kubernetes/deploymentApi');
+jest.mock('./zeppelinStack');
+
 const projectKey = 'project';
 const name = 'stackname';
 
@@ -45,19 +51,6 @@ const expectCalls = ({
 describe('handleSharedChange', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-
-    jest.mock('../credentials/secretManager');
-    jest.mock('../kubernetes/jobApi');
-    jest.mock('../kubernetes/ingressApi');
-    jest.mock('../kubernetes/deploymentApi');
-    jest.mock('./zeppelinStack');
-
-    secretManager.createStackCredentialSecret = jest.fn();
-    jobApi.createJob = jest.fn();
-    ingressApi.patchIngress = jest.fn();
-    deploymentApi.getDeployment = jest.fn();
-    deploymentApi.restartDeployment = jest.fn();
-    zeppelin.generateNewShiroIni = jest.fn();
   });
 
   it('does nothing if the old status is private', async () => {
@@ -159,6 +152,7 @@ describe('handleSharedChange', () => {
       type: JUPYTERLAB,
     };
 
+    secretManager.createNewJupyterCredentials = jest.fn(() => ({ token: 'token' }));
     deploymentApi.getDeployment.mockResolvedValueOnce({
       spec: {
         template: {
@@ -179,14 +173,10 @@ describe('handleSharedChange', () => {
       },
     });
 
-    const expectedCredentials = expect.objectContaining({
-      token: expect.any(String),
-    });
-
     await handleSharedChange(getParams(), existing, 'private');
 
     expectCalls({ createJob: 1, createStackCredentialSecret: 1, getDeployment: 1 });
-    expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, JUPYTERLAB, projectKey, expectedCredentials);
+    expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, JUPYTERLAB, projectKey, { token: 'token' });
     expect(deploymentApi.getDeployment).toHaveBeenCalledWith('jupyterlab-stackname', projectKey);
     expect(jobApi.createJob).toHaveBeenCalledWith(name, projectKey, expect.any(String));
     expect(jobApi.createJob.mock.calls[0][2]).toMatchSnapshot();
@@ -199,17 +189,17 @@ describe('handleSharedChange', () => {
       type: ZEPPELIN,
     };
 
+    const expectedCredentials = {
+      username: 'datalab',
+      password: 'password',
+    };
+    secretManager.createNewUserCredentials = jest.fn(() => expectedCredentials);
     zeppelin.generateNewShiroIni.mockResolvedValueOnce({ 'shiro.ini': 'shiro' });
 
-    const expectedCredentials = expect.objectContaining({
-      username: 'datalab',
-      password: expect.any(String),
-    });
-    const expectedFullCredentials = expect.objectContaining({
+    const expectedFullCredentials = {
       'shiro.ini': 'shiro',
-      username: 'datalab',
-      password: expect.any(String),
-    });
+      ...expectedCredentials,
+    };
 
     await handleSharedChange(getParams(), existing, 'private');
 
