@@ -19,8 +19,15 @@ afterAll(() => {
   mock.restore();
 });
 
+const createPatchBody = () => `
+metadata:
+  annotations:
+    my-annotation: value
+`;
+
 const manifest = createManifest();
 const ingress = createIngress();
+const patchBody = createPatchBody();
 
 describe('Kubernetes Ingress API', () => {
   describe('get ingress', () => {
@@ -90,6 +97,26 @@ describe('Kubernetes Ingress API', () => {
       } catch (error) {
         expect(error.toString()).toEqual('Error: Kubernetes API: Unable to create kubernetes ingress \'test-ingress\' - error-message');
       }
+    });
+  });
+
+  describe('patch ingress', () => {
+    it('should PATCH payload to resource URL', async () => {
+      mock.onPatch(`${INGRESS_URL}/${INGRESS_NAME}`, patchBody).reply((requestConfig) => {
+        expect(requestConfig.headers['Content-Type']).toBe('application/merge-patch+json');
+        return [200, ingress];
+      });
+
+      const response = await ingressApi.patchIngress(INGRESS_NAME, NAMESPACE, patchBody);
+      expect(response.data).toEqual(ingress);
+    });
+
+    it('should return an error if the patch fails', async () => {
+      mock.onPatch(`${INGRESS_URL}/${INGRESS_NAME}`).reply(400, { message: 'error-message' });
+
+      await expect(ingressApi.patchIngress(INGRESS_NAME, NAMESPACE, patchBody)).rejects.toThrowError(
+        'Kubernetes API: Request failed with status code 400',
+      );
     });
   });
 

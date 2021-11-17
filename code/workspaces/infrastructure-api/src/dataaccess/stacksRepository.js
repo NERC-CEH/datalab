@@ -184,12 +184,18 @@ function updateAssets(_id, assetIds) {
 }
 
 function update(projectKey, user, name, updatedValues) {
+  // Make sure the visible field is kept in sync with the shared field.
+  const updatedWithVisible = updatedValues.shared ? {
+    ...updatedValues,
+    visible: updatedValues.shared,
+  } : updatedValues;
+
   // Filter exclusively by owner (User)
   return Stack()
     .find()
     .filterByUser(user)
     .filterByProject(projectKey)
-    .findOneAndUpdate({ name }, updatedValues, { new: true, omitUndefined: true })
+    .findOneAndUpdate({ name }, updatedWithVisible, { new: true, omitUndefined: true })
     .exec();
 }
 

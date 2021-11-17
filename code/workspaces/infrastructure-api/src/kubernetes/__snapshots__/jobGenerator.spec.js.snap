@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createKubectlJob creates a job to match the snapshot 1`] = `
+"---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-job
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    spec:
+      containers:
+      - name: job-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"echo \\"Hello, World!\\"\\"]
+      volumes:
+      restartPolicy: Never
+    
+"
+`;
+
+exports[`createKubectlJob creates a job to match the snapshot when a kubectl command is supplied 1`] = `
+"---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-job
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    spec:
+      containers:
+      - name: job-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"echo \\"Hello, World!\\"\\"]
+      - name: kubectl-job
+        image: bitnami/kubectl
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"kubectl get pods\\"]
+      volumes:
+      restartPolicy: Never
+    
+"
+`;
+
+exports[`createKubectlJob creates a job to match the snapshot when a volume and path is supplied 1`] = `
+"---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-job
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    spec:
+      containers:
+      - name: job-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"echo \\"Hello, World!\\"\\"]
+        volumeMounts:
+          - mountPath: /mnt/data
+            name: persistentfsvol
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: volume-claim
+      restartPolicy: Never
+    
+"
+`;

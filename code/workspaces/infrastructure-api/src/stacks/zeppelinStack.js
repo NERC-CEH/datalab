@@ -43,4 +43,4 @@ function generateNewShiroIni(credentials) {
     .then(body => ({ 'shiro.ini': body }));
 }
 
-export default { createZeppelinStack, deleteZeppelinStack };
+export default { createZeppelinStack, deleteZeppelinStack, generateNewShiroIni };

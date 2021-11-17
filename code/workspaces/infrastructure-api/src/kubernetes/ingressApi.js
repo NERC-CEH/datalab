@@ -1,7 +1,7 @@
 import axios from 'axios';
 import logger from '../config/logger';
 import config from '../config/config';
-import { handleCreateError, handleDeleteError } from './core';
+import { handleCreateError, handleDeleteError, handlePatchError } from './core';
 
 const API_BASE = config.get('kubernetesApi');
 
@@ -11,6 +11,8 @@ const getIngressUrl = (namespace, name) => {
 };
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
+
+const PATCH_CONTENT_HEADER = { headers: { 'Content-Type': 'application/merge-patch+json' } };
 
 function createOrUpdateIngress(name, namespace, manifest) {
   return getIngress(name, namespace)
@@ -43,6 +45,19 @@ function updateIngress(name, namespace, manifest) {
     .catch(handleCreateError('ingress', name));
 }
 
+async function patchIngress(name, namespace, patchBody) {
+  logger.info(`Patching ingress ${name} in namespace ${namespace}`);
+  try {
+    return await axios.patch(
+      getIngressUrl(namespace, name),
+      patchBody,
+      PATCH_CONTENT_HEADER,
+    );
+  } catch (error) {
+    return handlePatchError('ingress', name)(error);
+  }
+}
+
 function deleteIngress(name, namespace) {
   logger.info('Deleting ingress: %s in namespace %s', name, namespace);
   return axios.delete(getIngressUrl(namespace, name))
@@ -50,4 +65,4 @@ function deleteIngress(name, namespace) {
     .catch(handleDeleteError('ingress', name));
 }
 
-export default { getIngress, createIngress, deleteIngress, updateIngress, createOrUpdateIngress };
+export default { getIngress, createIngress, deleteIngress, updateIngress, patchIngress, createOrUpdateIngress };
