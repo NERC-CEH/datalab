@@ -4,7 +4,7 @@ import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { permissionTypes, statusTypes } from 'common';
+import { permissionTypes, statusTypes, visibilityTypes } from 'common';
 import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SCALE_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
@@ -18,6 +18,8 @@ const refreshTimeout = 15000;
 const { projectPermissions: {
   PROJECT_KEY_STACKS_CREATE, PROJECT_KEY_STACKS_DELETE, PROJECT_KEY_STACKS_OPEN, PROJECT_KEY_STACKS_EDIT, PROJECT_KEY_STACKS_SCALE,
 }, projectKeyPermission } = permissionTypes;
+
+const { PRIVATE, PROJECT } = visibilityTypes;
 
 class StacksContainer extends Component {
   constructor(props, context) {
@@ -69,17 +71,39 @@ class StacksContainer extends Component {
     }
   }
 
-  shareStack = (stack, shared) => Promise.resolve(this.props.actions.closeModalDialog())
-    .then(() => this.props.actions.updateStackShareStatus({ ...stack, shared }))
-    .then(() => notify.success(`Resource: ${stack.name} is now shared`))
-    .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
+  shareStack = async (stack, shared) => {
+    this.props.actions.closeModalDialog();
+
+    try {
+      await this.props.actions.updateStackShareStatus({ ...stack, shared });
+      notify.success(`Resource: Access level for ${stack.name} set to ${shared}`);
+    } catch (error) {
+      notify.error(`Unable to changed shared status of ${stack.name}`);
+    } finally {
+      this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType);
+    }
+  };
+
+  getConfirmShareMessage = (stack, shared) => {
+    if (shared === PRIVATE) {
+      return `Please confirm you wish to make the ${stack.displayName} ${this.props.typeName} private.
+        This will stop all other users from being able to access it.`;
+    }
+
+    if (shared === PROJECT) {
+      return `Please confirm you wish to share the ${stack.displayName} ${this.props.typeName} with other users within the project.
+        It will not be accessible to users outside DataLab.`;
+    }
+
+    return `Please confirm you wish to share the ${stack.displayName} ${this.props.typeName} publicly.
+      It will be accessible to users outside DataLab.`;
+  };
 
   confirmShareStack = (stack, shared) => this.props.actions.openModalDialog(MODAL_TYPE_SHARE_STACK, {
     title: `Share ${this.props.typeName}`,
-    body: `Please confirm you wish to share the ${stack.displayName} ${this.props.typeName} with other users within the project.
-      WARNING: This action cannot currently be reversed.`,
+    body: this.getConfirmShareMessage(stack, shared),
     onCancel: this.props.actions.closeModalDialog,
-    onSubmit: () => this.shareStack(stack, 'project'),
+    onSubmit: () => this.shareStack(stack, shared),
   });
 
   openCreationForm = () => this.props.actions.openModalDialog(this.props.dialogAction, {

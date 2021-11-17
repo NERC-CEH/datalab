@@ -93,8 +93,8 @@ describe('StacksContainer', () => {
     const stacks = {
       fetching: false,
       value: [
-        { prop: 'prop1', projectKey: 'project-key', type: JUPYTER, category: NOTEBOOK_CATEGORY },
-        { prop: 'prop2', projectKey: 'project-key', type: JUPYTER, category: NOTEBOOK_CATEGORY },
+        { prop: 'prop1', projectKey: 'project-key', type: JUPYTER, category: NOTEBOOK_CATEGORY, shared: 'private' },
+        { prop: 'prop2', projectKey: 'project-key', type: JUPYTER, category: NOTEBOOK_CATEGORY, shared: 'project' },
       ],
     };
 
@@ -284,7 +284,24 @@ describe('StacksContainer', () => {
       expect(firstMockCall[0]).toBe('MODAL_TYPE_SHARE_STACK');
     });
 
-    it('confirmShareStack generates correct dialog', () => {
+    it('confirmShareStack generates correct dialog for setting access to private', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const shareStack = output.prop('shareStack');
+      shareStack(stack, 'private');
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, body, onCancel } = firstMockCall[1];
+      expect({ title, body }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('confirmShareStack generates correct dialog for setting access to project', () => {
       // Arrange
       const props = generateProps();
       const stack = { displayName: 'expectedDisplayName' };
@@ -301,7 +318,24 @@ describe('StacksContainer', () => {
       expect(onCancel).toBe(closeModalDialogMock);
     });
 
-    it('confirmShareStack - onSubmit calls shareStack with correct value', () => {
+    it('confirmShareStack generates correct dialog for setting access to public', () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      // Act
+      const output = shallowRenderPure(props);
+      const shareStack = output.prop('shareStack');
+      shareStack(stack, 'public');
+
+      // Assert
+      const firstMockCall = openModalDialogMock.mock.calls[0];
+      const { title, body, onCancel } = firstMockCall[1];
+      expect({ title, body }).toMatchSnapshot();
+      expect(onCancel).toBe(closeModalDialogMock);
+    });
+
+    it('confirmShareStack - onSubmit calls shareStack with correct value', async () => {
       // Arrange
       const props = generateProps();
       const stack = { displayName: 'expectedDisplayName' };
@@ -314,11 +348,35 @@ describe('StacksContainer', () => {
 
       // Assert
       expect(updateStackShareStatusMock).not.toHaveBeenCalled();
-      return onSubmit()
-        .then(() => {
-          expect(updateStackShareStatusMock).toHaveBeenCalledTimes(1);
-          expect(updateStackShareStatusMock).toHaveBeenCalledWith({ ...stack, shared: 'project' });
-        });
+
+      await onSubmit();
+      expect(updateStackShareStatusMock).toHaveBeenCalledTimes(1);
+      expect(updateStackShareStatusMock).toHaveBeenCalledWith({ ...stack, shared: 'project' });
+      expect(toastSuccessMock).toHaveBeenCalledTimes(1);
+      expect(toastErrorMock).toHaveBeenCalledTimes(0);
+    });
+
+    it('confirmShareStack - notifies error if shareStack fails', async () => {
+      // Arrange
+      const props = generateProps();
+      const stack = { displayName: 'expectedDisplayName' };
+
+      updateStackShareStatusMock.mockImplementationOnce(() => { throw Error('expected test error'); });
+
+      // Act
+      const output = shallowRenderPure(props);
+      const shareStack = output.prop('shareStack');
+      shareStack(stack, 'project');
+      const { onSubmit } = openModalDialogMock.mock.calls[0][1];
+
+      // Assert
+      expect(updateStackShareStatusMock).not.toHaveBeenCalled();
+
+      await onSubmit();
+      expect(updateStackShareStatusMock).toHaveBeenCalledTimes(1);
+      expect(updateStackShareStatusMock).toHaveBeenCalledWith({ ...stack, shared: 'project' });
+      expect(toastSuccessMock).toHaveBeenCalledTimes(0);
+      expect(toastErrorMock).toHaveBeenCalledTimes(1);
     });
 
     it('openCreationForm calls openModalDialog with correct action', () => {
