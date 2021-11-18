@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
-import promise from 'redux-promise-middleware';
+import { createPromise } from 'redux-promise-middleware';
 import {
   PROMISE_TYPE_PENDING,
   PROMISE_TYPE_SUCCESS,
@@ -37,7 +37,7 @@ export const renderWithState = (
   props = {},
   renderOptions = {},
 ) => {
-  const mockStore = configureStore([promise({ promiseTypeSuffixes })]);
+  const mockStore = configureStore([createPromise({ promiseTypeSuffixes })]);
   const store = mockStore(initialState);
 
   const wrapper = render(
