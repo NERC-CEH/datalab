@@ -12,10 +12,7 @@ const storageName = 'storage name';
 
 jest.mock('react-redux');
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
-jest.mock('./UserProject', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>user project</>),
-}));
+jest.mock('./UserProject', () => () => (<>user project</>));
 jest.mock('../../config/catalogue');
 
 describe('UserResources', () => {

@@ -16,10 +16,12 @@ jest.mock('../../hooks/stacksHooks');
 jest.mock('../../hooks/dataStorageHooks');
 jest.mock('../../hooks/projectsHooks');
 jest.mock('../../config/catalogue');
-jest.mock('./UserResources', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>user resources</>),
-}));
+// jest.mock('./UserResources', () => ({
+//   __esModule: true,
+//   default: jest.fn().mockReturnValue(<>user resources</>),
+// }));
+
+jest.mock('./UserResources', () => () => (<>user resources</>));
 
 const user1 = { userId: 'user1', name: 'Test User 1' };
 const user2 = { userId: 'user2', name: 'Test User 2' };

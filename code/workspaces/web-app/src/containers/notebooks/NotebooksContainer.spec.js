@@ -5,14 +5,8 @@ import NotebooksContainer from './NotebooksContainer';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 jest.mock('react-redux');
-jest.mock('../stacks/StacksContainer', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>stacks container</>),
-}));
-jest.mock('../../components/notebooks/EditNotebookForm', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>notebook form</>),
-}));
+jest.mock('../stacks/StacksContainer', () => () => (<>stacks container</>));
+jest.mock('../../components/notebooks/EditNotebookForm', () => () => (<>notebook form</>));
 jest.mock('../../hooks/currentProjectHooks');
 
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));

@@ -5,14 +5,8 @@ import SitesContainer from './SitesContainer';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 
 jest.mock('react-redux');
-jest.mock('../stacks/StacksContainer', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>stacks container</>),
-}));
-jest.mock('../../components/sites/EditSiteForm', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>site form</>),
-}));
+jest.mock('../stacks/StacksContainer', () => () => (<>stacks container</>));
+jest.mock('../../components/sites/EditSiteForm', () => () => (<>site form</>));
 jest.mock('../../hooks/currentProjectHooks');
 
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));

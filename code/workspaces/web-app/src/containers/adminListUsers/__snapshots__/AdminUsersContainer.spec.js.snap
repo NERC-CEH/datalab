@@ -108,7 +108,7 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
       <Pagination
         items={
           Array [
-            <mockConstructor
+            <Unknown
               filters={
                 Object {
                   "catalogueAdmin": false,
@@ -147,7 +147,7 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
                 }
               }
             />,
-            <mockConstructor
+            <Unknown
               filters={
                 Object {
                   "catalogueAdmin": false,
@@ -323,7 +323,7 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
       <Pagination
         items={
           Array [
-            <mockConstructor
+            <Unknown
               filters={
                 Object {
                   "catalogueAdmin": false,
@@ -362,7 +362,7 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
                 }
               }
             />,
-            <mockConstructor
+            <Unknown
               filters={
                 Object {
                   "catalogueAdmin": false,
