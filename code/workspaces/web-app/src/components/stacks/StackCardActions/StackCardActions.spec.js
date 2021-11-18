@@ -1,22 +1,21 @@
 import React from 'react';
 import { render, fireEvent, screen, within } from '@testing-library/react';
+import { SITE_CATEGORY } from 'common/src/config/images';
 import { useCurrentUserId } from '../../../hooks/authHooks';
-import StackCardActions from './StackCardActions';
+import StackCardActions, { getSharedButtons } from './StackCardActions';
 import { getUserActionsForType } from '../../../config/images';
 
 jest.mock('../../../hooks/authHooks');
 jest.mock('../../../config/images');
 // eslint-disable-next-line global-require
-jest.mock('./StackMoreMenuItem', () => require('react').forwardRef(({ onClick, children, requiredPermission, userPermissions, tooltipText, disableTooltip, disabled }, ref) => (
+jest.mock('./StackMoreMenuItem', () => require('react').forwardRef(({ onClick, children, requiredPermission, userPermissions, disabled }, ref) => (
   <div
     onClick={onClick}
     requiredpermission={requiredPermission}
     userpermissions={userPermissions.toString()}
-    tooltiptext={tooltipText}
-    disabletooltip={disableTooltip ? disableTooltip.toString() : disableTooltip}
-    disabled={disabled ? disabled.toString() : disabled}
   >
     {children}
+    {`disabled: ${disabled}`}
   </div>)));
 
 getUserActionsForType.mockReturnValue([]);
@@ -30,15 +29,18 @@ const copySnippetsMock = {
   Python: jest.fn().mockName('copyPythonSnippet'),
 };
 
+const getStack = () => ({
+  id: 'abc1234',
+  displayName: 'expectedDisplayName',
+  type: 'expectedType',
+  status: 'ready',
+  users: ['owner-id'],
+  shared: 'private',
+  category: 'category',
+});
+
 const generateProps = () => ({
-  stack: {
-    id: 'abc1234',
-    displayName: 'expectedDisplayName',
-    type: 'expectedType',
-    status: 'ready',
-    users: ['owner-id'],
-    shared: 'private',
-  },
+  stack: getStack(),
   openStack: openStackMock,
   deleteStack: deleteStackMock,
   editStack: editStackMock,
@@ -145,6 +147,7 @@ describe('StackCardActions', () => {
       status: 'ready',
       users: ['owner-id'],
       shared: 'private',
+      category: 'category',
     });
   });
 
@@ -160,7 +163,7 @@ describe('StackCardActions', () => {
 
     // Assert
     expect(deleteStackMock).not.toHaveBeenCalled();
-    fireEvent.click(within(menu).getByText('Delete'));
+    fireEvent.click(within(menu).getByText('Delete', { exact: false }));
 
     expect(deleteStackMock).toHaveBeenCalledTimes(1);
     expect(deleteStackMock).toHaveBeenCalledWith({
@@ -170,6 +173,7 @@ describe('StackCardActions', () => {
       status: 'ready',
       users: ['owner-id'],
       shared: 'private',
+      category: 'category',
     });
   });
 
@@ -184,7 +188,7 @@ describe('StackCardActions', () => {
 
     // Assert
     expect(editStackMock).not.toHaveBeenCalled();
-    fireEvent.click(within(menu).getByText('Edit'));
+    fireEvent.click(within(menu).getByText('Edit', { exact: false }));
 
     expect(editStackMock).toHaveBeenCalledTimes(1);
     expect(editStackMock).toHaveBeenCalledWith({
@@ -194,6 +198,7 @@ describe('StackCardActions', () => {
       status: 'ready',
       users: ['owner-id'],
       shared: 'private',
+      category: 'category',
     });
   });
 
@@ -245,5 +250,70 @@ describe('StackCardActions', () => {
     fireEvent.click(wrapper.getByText('more_vert'));
     const menu = screen.getByRole('menu');
     expect(within(menu).queryByText('Edit')).toBeNull();
+  });
+});
+
+describe('getSharedButtons', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  const permission = 'permission';
+
+  const privateButton = disabled => ({
+    onClick: expect.any(Function),
+    requiredPermission: permission,
+    name: 'Set Access: Private',
+    disabled,
+  });
+  const projectButton = disabled => ({
+    onClick: expect.any(Function),
+    requiredPermission: permission,
+    name: 'Set Access: Project',
+    disabled,
+  });
+  const publicButton = disabled => ({
+    onClick: expect.any(Function),
+    requiredPermission: permission,
+    name: 'Set Access: Public',
+    disabled,
+  });
+
+  it('creates the correct buttons for a private stack', () => {
+    const stack = getStack();
+    const buttons = getSharedButtons(stack, jest.fn(), permission);
+
+    expect(buttons).toEqual([privateButton(true), projectButton(false), undefined]);
+  });
+
+  it('creates the correct buttons for a project stack', () => {
+    const stack = {
+      ...getStack(),
+      shared: 'project',
+    };
+    const buttons = getSharedButtons(stack, jest.fn(), permission);
+
+    expect(buttons).toEqual([privateButton(false), projectButton(true), undefined]);
+  });
+
+  it('creates the correct buttons for a public stack', () => {
+    const stack = {
+      ...getStack(),
+      shared: 'public',
+      category: SITE_CATEGORY,
+    };
+    const buttons = getSharedButtons(stack, jest.fn(), permission);
+
+    expect(buttons).toEqual([privateButton(false), projectButton(false), publicButton(true)]);
+  });
+
+  it('creates the correct buttons for a private site', () => {
+    const stack = {
+      ...getStack(),
+      shared: 'private',
+      category: SITE_CATEGORY,
+    };
+    const buttons = getSharedButtons(stack, jest.fn(), permission);
+
+    expect(buttons).toEqual([privateButton(true), projectButton(false), publicButton(false)]);
   });
 });
