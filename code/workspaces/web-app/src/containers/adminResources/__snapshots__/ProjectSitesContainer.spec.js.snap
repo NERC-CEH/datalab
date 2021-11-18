@@ -27,7 +27,6 @@ exports[`ProjectSitesContainer renders to match snapshot passing correct props t
         "updateUnregisteredFields": false,
         "validate": [Function],
       },
-      "displayName": "ReduxForm",
       "propTypes": Object {
         "initialValues": [Function],
         "onCancel": [Function],

@@ -7,13 +7,9 @@ jest.mock('react-redux');
 useDispatch.mockReturnValue(jest.fn().mockName('dispatch'));
 
 jest.mock('../stacks/StacksContainer', () => ({
-  __esModule: true,
-  ProjectStacksContainer: jest.fn().mockReturnValue(<>project stacks container</>),
+  ProjectStacksContainer: () => (<>project stacks container</>),
 }));
-jest.mock('../../components/notebooks/EditNotebookForm', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>notebook form</>),
-}));
+jest.mock('../../components/notebooks/EditNotebookForm', () => () => (<>notebook form</>));
 
 describe('ProjectNotebooksContainer', () => {
   const shallowRender = () => {

@@ -85,7 +85,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
       <Pagination
         items={
           Array [
-            <mockConstructor
+            <Unknown
               project={
                 Object {
                   "key": "testproj1",
@@ -101,7 +101,7 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
                 }
               }
             />,
-            <mockConstructor
+            <Unknown
               project={
                 Object {
                   "key": "testproj2",

@@ -89,7 +89,6 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
     component={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "displayName": "Link",
         "propTypes": Object {
           "innerRef": [Function],
           "onClick": [Function],
@@ -124,7 +123,6 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
     component={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "displayName": "Link",
         "propTypes": Object {
           "innerRef": [Function],
           "onClick": [Function],

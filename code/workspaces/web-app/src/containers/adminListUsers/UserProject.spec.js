@@ -11,10 +11,10 @@ jest.mock('react-redux');
 jest.mock('../../hooks/projectsHooks');
 jest.mock('../../hooks/stacksHooks');
 jest.mock('../../hooks/dataStorageHooks');
-jest.mock('./Projects', () => ({ __esModule: true, default: jest.fn().mockReturnValue(<>PROJECTS_COMPONENT</>) }));
-jest.mock('./Sites', () => ({ __esModule: true, default: jest.fn().mockReturnValue(<>SITES_COMPONENT</>) }));
-jest.mock('./Notebooks', () => ({ __esModule: true, default: jest.fn().mockReturnValue(<>NOTEBOOKS_COMPONENT</>) }));
-jest.mock('./DataStores', () => ({ __esModule: true, default: jest.fn().mockReturnValue(<>DATASTORES_COMPONENT</>) }));
+jest.mock('./Projects', () => () => (<>PROJECTS_COMPONENT</>));
+jest.mock('./Sites', () => () => (<>SITES_COMPONENT</>));
+jest.mock('./Notebooks', () => () => (<>NOTEBOOKS_COMPONENT</>));
+jest.mock('./DataStores', () => () => (<>DATASTORES_COMPONENT</>));
 
 const projectKey = 'proj-1234';
 const projectName = 'project name';

@@ -40,7 +40,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
             name="projectViewer"
           />
         </div>
-        <mockConstructor
+        <Component
           projects={
             Array [
               Object {
@@ -50,7 +50,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
             ]
           }
         />
-        <mockConstructor
+        <Component
           sites={
             Array [
               Object {
@@ -61,7 +61,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
             ]
           }
         />
-        <mockConstructor
+        <Component
           notebooks={
             Array [
               Object {
@@ -72,7 +72,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
             ]
           }
         />
-        <mockConstructor
+        <Component
           dataStores={
             Array [
               Object {

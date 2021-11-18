@@ -6,10 +6,7 @@ import { useProjectsArray } from '../../hooks/projectsHooks';
 
 jest.mock('react-redux');
 jest.mock('../../hooks/projectsHooks');
-jest.mock('./ProjectResources', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue(<>project resources</>),
-}));
+jest.mock('./ProjectResources', () => () => (<>project resources</>));
 
 const project1 = { key: 'testproj1', name: 'Test Project 1' };
 const project2 = { key: 'testproj2', name: 'Test Project 2' };

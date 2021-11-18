@@ -1,5 +1,5 @@
 import { routerMiddleware } from 'connected-react-router';
-import promise from 'redux-promise-middleware';
+import { createPromise } from 'redux-promise-middleware';
 import browserHistory from './browserHistory';
 
 import {
@@ -10,5 +10,5 @@ import {
 
 const promiseTypeSuffixes = [PROMISE_TYPE_PENDING, PROMISE_TYPE_SUCCESS, PROMISE_TYPE_FAILURE];
 
-const middleware = [routerMiddleware(browserHistory), promise({ promiseTypeSuffixes })];
+const middleware = [routerMiddleware(browserHistory), createPromise({ promiseTypeSuffixes })];
 export default middleware;

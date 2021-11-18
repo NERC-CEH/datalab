@@ -58,7 +58,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         <Pagination
           items={
             Array [
-              <mockConstructor
+              <Unknown
                 filters={
                   Object {
                     "dataManager": false,
@@ -164,7 +164,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
         <Pagination
           items={
             Array [
-              <mockConstructor
+              <Unknown
                 filters={
                   Object {
                     "dataManager": false,
