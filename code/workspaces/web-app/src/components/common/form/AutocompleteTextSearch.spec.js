@@ -1,18 +1,10 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render, fireEvent } from '@testing-library/react';
 import AutocompleteTextSearch from './AutocompleteTextSearch';
 
+jest.mock('@material-ui/core/Chip', () => props => (<div>Chip mock {JSON.stringify(props)}</div>));
+
 describe('AutocompleteTextSearch', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
-  function shallowRender(props) {
-    return shallow(<AutocompleteTextSearch {...props} />);
-  }
-
   it('generates correct snapshot', () => {
     // Arrange
     const suggestions = [
@@ -24,15 +16,15 @@ describe('AutocompleteTextSearch', () => {
     ];
 
     // Act
-    const output = shallowRender({
+    const props = {
       suggestions,
       selectedItems,
       addItem: () => {},
       removeItem: () => {},
       placeholder: 'Expected placerholder text',
-    });
-
-    // Assert
-    expect(output).toMatchSnapshot();
+    };
+    const wrapper = render(<AutocompleteTextSearch {...props} />);
+    fireEvent.change(wrapper.getByPlaceholderText('Expected placerholder text'), { target: { value: 'exp' } });
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

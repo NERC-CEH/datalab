@@ -1,38 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
-<DownshiftMultiple
-  addItem={[Function]}
-  classes={
-    Object {
-      "chip": "DownshiftMultiple-chip-4",
-      "container": "DownshiftMultiple-container-2",
-      "inputRoot": "DownshiftMultiple-inputRoot-5",
-      "paper": "DownshiftMultiple-paper-3",
-      "root": "DownshiftMultiple-root-1",
-    }
-  }
-  placeholder="Expected placerholder text"
-  removeItem={[Function]}
-  selectedItems={
-    Array [
-      Object {
-        "label": "expectedLabelTwo",
-        "value": "expectedValueTwo",
-      },
-    ]
-  }
-  suggestions={
-    Array [
-      Object {
-        "label": "expectedLabelOne",
-        "value": "expectedValueOne",
-      },
-      Object {
-        "label": "expectedLabelTwo",
-        "value": "expectedValueTwo",
-      },
-    ]
-  }
-/>
+<div>
+  <div
+    aria-expanded="true"
+    aria-haspopup="listbox"
+    aria-labelledby="downshift-0-label"
+    aria-owns="downshift-0-menu"
+    class="DownshiftMultiple-container-2"
+    role="combobox"
+  >
+    <div
+      class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+    >
+      <div
+        aria-autocomplete="list"
+        aria-controls="downshift-0-menu"
+        aria-labelledby="downshift-0-label"
+        class="MuiInputBase-root MuiInput-root DownshiftMultiple-inputRoot-5 MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
+      >
+        <div>
+          Chip mock 
+          {"tabIndex":-1,"label":"expectedLabelTwo","className":"DownshiftMultiple-chip-4"}
+        </div>
+        <input
+          aria-invalid="false"
+          autocomplete="off"
+          class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart"
+          id="downshift-0-input"
+          placeholder="Expected placerholder text"
+          type="text"
+          value="exp"
+        />
+      </div>
+    </div>
+    <div
+      class="MuiPaper-root DownshiftMultiple-paper-3 MuiPaper-elevation1"
+    >
+      <div
+        aria-disabled="false"
+        aria-selected="false"
+        class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+        id="downshift-0-item-0"
+        role="option"
+        style="font-weight: 400;"
+        tabindex="-1"
+      >
+        expectedLabelOne
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+      <div
+        aria-disabled="false"
+        aria-selected="false"
+        class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+        id="downshift-0-item-1"
+        role="option"
+        style="font-weight: 500;"
+        tabindex="-1"
+      >
+        expectedLabelTwo
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </div>
+  </div>
+</div>
 `;
