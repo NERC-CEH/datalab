@@ -264,18 +264,24 @@ describe('getSharedButtons', () => {
     requiredPermission: permission,
     name: 'Set Access: Private',
     disabled,
+    tooltipText: 'Access already set to private',
+    disableTooltip: !disabled,
   });
   const projectButton = disabled => ({
     onClick: expect.any(Function),
     requiredPermission: permission,
     name: 'Set Access: Project',
     disabled,
+    tooltipText: 'Access already set to project',
+    disableTooltip: !disabled,
   });
   const publicButton = disabled => ({
     onClick: expect.any(Function),
     requiredPermission: permission,
     name: 'Set Access: Public',
     disabled,
+    tooltipText: 'Access already set to public',
+    disableTooltip: !disabled,
   });
 
   it('creates the correct buttons for a private stack', () => {

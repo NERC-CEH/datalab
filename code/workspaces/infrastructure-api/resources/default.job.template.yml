@@ -6,9 +6,9 @@ metadata:
 spec:
   ttlSecondsAfterFinished: 0
   template:
-    securityContext:
-      runAsUser: 1000
     spec:
+      securityContext:
+        runAsUser: 1000
       containers:
       - name: {{ name }}
         image: busybox
