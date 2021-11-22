@@ -1,23 +1,17 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import Page from './Page';
 
+jest.mock('../components/app/Footer', () => () => (<div>Footer mock</div>));
+
 describe('Page', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   it('renders correctly when title is provided', () => {
-    expect(
-      shallow(<Page title="The Page Title">Page Content</Page>),
-    ).toMatchSnapshot();
+    const wrapper = render(<Page title="The Page Title">Page Content</Page>);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('renders correctly when title is not provided', () => {
-    expect(
-      shallow(<Page>Page Content</Page>),
-    ).toMatchSnapshot();
+    const wrapper = render(<Page>Page Content</Page>);
+    expect(wrapper.container).toMatchSnapshot();
   });
 });
