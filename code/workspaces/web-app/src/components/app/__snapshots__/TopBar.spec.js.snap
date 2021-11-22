@@ -1,221 +1,189 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TopBar correctly renders correct snapshot 1`] = `
-<div
-  className="TopBar-appBar-1"
->
+<div>
   <div
-    className="TopBar-toolBar-2"
+    class="TopBar-appBar-1"
   >
-    <img
-      alt="datalabs-logo"
-      className="TopBar-datalabsLogo-3"
-      src="datalabs-hori.png"
-    />
     <div
-      className="TopBar-buttons-4"
+      class="TopBar-toolBar-2"
     >
-      <WithStyles(TopBarButton)
-        label="Asset Repo"
-        to="/assets"
+      <img
+        alt="datalabs-logo"
+        class="TopBar-datalabsLogo-3"
+        src="datalabs-hori.png"
       />
-      <WithStyles(TopBarButton)
-        label="Projects"
-        to="/projects"
+      <div
+        class="TopBar-buttons-4"
+      >
+        <div>
+          TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"to":"/projects","label":"Projects"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Slack"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Help"}
+        </div>
+      </div>
+      <div
+        style="flex: 1;"
       />
-      <WithStyles(TopBarButton)
-        key="nav-link-Slack"
-        label="Slack"
-        onClick={[Function]}
-      />
-      <WithStyles(TopBarButton)
-        key="nav-link-Help"
-        label="Help"
-        onClick={[Function]}
-      />
+      <div>
+        UserIcon mock 
+        {"identity":{"expected":"identity","picture":"expectedUrl"}}
+      </div>
     </div>
-    <div
-      style={
-        Object {
-          "flex": 1,
-        }
-      }
-    />
-    <WithStyles(UserIcon)
-      identity={
-        Object {
-          "expected": "identity",
-          "picture": "expectedUrl",
-        }
-      }
-    />
   </div>
 </div>
 `;
 
 exports[`TopBar correctly renders correct snapshot for data manager permission 1`] = `
-<div
-  className="TopBar-appBar-1"
->
+<div>
   <div
-    className="TopBar-toolBar-2"
+    class="TopBar-appBar-9"
   >
-    <img
-      alt="datalabs-logo"
-      className="TopBar-datalabsLogo-3"
-      src="datalabs-hori.png"
-    />
     <div
-      className="TopBar-buttons-4"
+      class="TopBar-toolBar-10"
     >
-      <WithStyles(TopBarButton)
-        label="Asset Repo"
-        to="/assets"
+      <img
+        alt="datalabs-logo"
+        class="TopBar-datalabsLogo-11"
+        src="datalabs-hori.png"
       />
-      <WithStyles(TopBarButton)
-        label="Projects"
-        to="/projects"
+      <div
+        class="TopBar-buttons-12"
+      >
+        <div>
+          TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"to":"/projects","label":"Projects"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Slack"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Help"}
+        </div>
+      </div>
+      <div
+        style="flex: 1;"
       />
-      <WithStyles(TopBarButton)
-        key="nav-link-Slack"
-        label="Slack"
-        onClick={[Function]}
-      />
-      <WithStyles(TopBarButton)
-        key="nav-link-Help"
-        label="Help"
-        onClick={[Function]}
-      />
+      <div>
+        UserIcon mock 
+        {"identity":{"expected":"identity","picture":"expectedUrl"}}
+      </div>
     </div>
-    <div
-      style={
-        Object {
-          "flex": 1,
-        }
-      }
-    />
-    <WithStyles(UserIcon)
-      identity={
-        Object {
-          "expected": "identity",
-          "picture": "expectedUrl",
-        }
-      }
-    />
   </div>
 </div>
 `;
 
 exports[`TopBar correctly renders correct snapshot for instance admin permission 1`] = `
-<div
-  className="TopBar-appBar-1"
->
+<div>
   <div
-    className="TopBar-toolBar-2"
+    class="TopBar-appBar-5"
   >
-    <img
-      alt="datalabs-logo"
-      className="TopBar-datalabsLogo-3"
-      src="datalabs-hori.png"
-    />
     <div
-      className="TopBar-buttons-4"
+      class="TopBar-toolBar-6"
     >
-      <WithStyles(TopBarButton)
-        label="Admin"
-        to="/admin"
+      <img
+        alt="datalabs-logo"
+        class="TopBar-datalabsLogo-7"
+        src="datalabs-hori.png"
       />
-      <WithStyles(TopBarButton)
-        label="Asset Repo"
-        to="/assets"
+      <div
+        class="TopBar-buttons-8"
+      >
+        <div>
+          TopBarButton mock 
+          {"to":"/admin","label":"Admin"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"to":"/projects","label":"Projects"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Slack"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Help"}
+        </div>
+      </div>
+      <div
+        style="flex: 1;"
       />
-      <WithStyles(TopBarButton)
-        label="Projects"
-        to="/projects"
-      />
-      <WithStyles(TopBarButton)
-        key="nav-link-Slack"
-        label="Slack"
-        onClick={[Function]}
-      />
-      <WithStyles(TopBarButton)
-        key="nav-link-Help"
-        label="Help"
-        onClick={[Function]}
-      />
+      <div>
+        UserIcon mock 
+        {"identity":{"expected":"identity","picture":"expectedUrl"}}
+      </div>
     </div>
-    <div
-      style={
-        Object {
-          "flex": 1,
-        }
-      }
-    />
-    <WithStyles(UserIcon)
-      identity={
-        Object {
-          "expected": "identity",
-          "picture": "expectedUrl",
-        }
-      }
-    />
   </div>
 </div>
 `;
 
 exports[`TopBar correctly renders correct snapshot if catalogue exists 1`] = `
-<div
-  className="TopBar-appBar-1"
->
+<div>
   <div
-    className="TopBar-toolBar-2"
+    class="TopBar-appBar-13"
   >
-    <img
-      alt="datalabs-logo"
-      className="TopBar-datalabsLogo-3"
-      src="datalabs-hori.png"
-    />
     <div
-      className="TopBar-buttons-4"
+      class="TopBar-toolBar-14"
     >
-      <WithStyles(TopBarButton)
-        label="Asset Repo"
-        to="/assets"
+      <img
+        alt="datalabs-logo"
+        class="TopBar-datalabsLogo-15"
+        src="datalabs-hori.png"
       />
-      <WithStyles(TopBarButton)
-        label="Projects"
-        to="/projects"
+      <div
+        class="TopBar-buttons-16"
+      >
+        <div>
+          TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"to":"/projects","label":"Projects"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Catalogue"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Slack"}
+        </div>
+        <div>
+          TopBarButton mock 
+          {"label":"Help"}
+        </div>
+      </div>
+      <div
+        style="flex: 1;"
       />
-      <WithStyles(TopBarButton)
-        label="Catalogue"
-        onClick={[Function]}
-      />
-      <WithStyles(TopBarButton)
-        key="nav-link-Slack"
-        label="Slack"
-        onClick={[Function]}
-      />
-      <WithStyles(TopBarButton)
-        key="nav-link-Help"
-        label="Help"
-        onClick={[Function]}
-      />
+      <div>
+        UserIcon mock 
+        {"identity":{"expected":"identity","picture":"expectedUrl"}}
+      </div>
     </div>
-    <div
-      style={
-        Object {
-          "flex": 1,
-        }
-      }
-    />
-    <WithStyles(UserIcon)
-      identity={
-        Object {
-          "expected": "identity",
-          "picture": "expectedUrl",
-        }
-      }
-    />
   </div>
 </div>
 `;

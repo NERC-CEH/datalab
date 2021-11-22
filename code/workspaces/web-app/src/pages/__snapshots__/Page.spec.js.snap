@@ -1,33 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Page renders correctly when title is not provided 1`] = `
-<div
-  className="Page-pageTemplate-1"
->
+<div>
   <div
-    className="Page-contentArea-2"
+    class="Page-pageTemplate-34"
   >
-    Page Content
+    <div
+      class="Page-contentArea-35"
+    >
+      Page Content
+    </div>
+    <div>
+      Footer mock
+    </div>
   </div>
-  <WithStyles(Footer) />
 </div>
 `;
 
 exports[`Page renders correctly when title is provided 1`] = `
-<div
-  className="Page-pageTemplate-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="Page-title-3"
-    variant="h4"
-  >
-    The Page Title
-  </WithStyles(ForwardRef(Typography))>
+<div>
   <div
-    className="Page-contentArea-2"
+    class="Page-pageTemplate-1"
   >
-    Page Content
+    <h4
+      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+    >
+      The Page Title
+    </h4>
+    <div
+      class="Page-contentArea-2"
+    >
+      Page Content
+    </div>
+    <div>
+      Footer mock
+    </div>
   </div>
-  <WithStyles(Footer) />
 </div>
 `;

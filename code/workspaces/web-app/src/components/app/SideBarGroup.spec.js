@@ -1,39 +1,29 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import SideBarGroup from './SideBarGroup';
 
 describe('SideBarGroup', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   describe('when no children provided', () => {
     it('renders nothing when no title provided', () => {
-      expect(
-        shallow(<SideBarGroup />),
-      ).toMatchSnapshot();
+      const wrapper = render(<SideBarGroup />);
+      expect(wrapper.container).toMatchSnapshot();
     });
 
     it('renders nothing when title provided', () => {
-      expect(
-        shallow(<SideBarGroup title='Group Title' />),
-      ).toMatchSnapshot();
+      const wrapper = render(<SideBarGroup title='Group Title' />);
+      expect(wrapper.container).toMatchSnapshot();
     });
   });
 
   describe('when children provided', () => {
     it('renders children when no title provided', () => {
-      expect(
-        shallow(<SideBarGroup><div>test div content</div></SideBarGroup>),
-      ).toMatchSnapshot();
+      const wrapper = render(<SideBarGroup><div>test div content</div></SideBarGroup>);
+      expect(wrapper.container).toMatchSnapshot();
     });
 
     it('renders children and title when title provided', () => {
-      expect(
-        shallow(<SideBarGroup title='Test Group'><div>test div content</div></SideBarGroup>),
-      ).toMatchSnapshot();
+      const wrapper = render(<SideBarGroup title='Test Group'><div>test div content</div></SideBarGroup>);
+      expect(wrapper.container).toMatchSnapshot();
     });
   });
 });

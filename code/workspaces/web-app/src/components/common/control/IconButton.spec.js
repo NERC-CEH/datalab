@@ -1,12 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import IconButton from './IconButton';
-
-function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
-  return shallow(<IconButton {...props} />);
-}
 
 describe('IconButton', () => {
   const generateProps = () => ({
@@ -16,27 +10,17 @@ describe('IconButton', () => {
   });
 
   it('creates correct snapshot for required props', () => {
-    // Arrange
-    const props = generateProps();
-
-    // Act
-    const output = shallowRender(props);
-
-    // Assert
-    expect(output).toMatchSnapshot();
+    const wrapper = render(<IconButton {...generateProps()} />);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('creates correct snapshot for danger styled button', () => {
-    // Arrange
     const props = {
       ...generateProps(),
       danger: true,
     };
 
-    // Act
-    const output = shallowRender(props);
-
-    // Assert
-    expect(output).toMatchSnapshot();
+    const wrapper = render(<IconButton {...props} />);
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

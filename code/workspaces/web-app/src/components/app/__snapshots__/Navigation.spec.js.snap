@@ -1,32 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeDatalabs renders correct snapshot 1`] = `
-<div
-  className="Navigation-container-1"
->
+<div>
   <div
-    className="Navigation-appFrame-2"
+    class="Navigation-container-1"
   >
-    <WithStyles(TopBar)
-      identity={
-        Object {
-          "expected": "identity",
-        }
-      }
-      userPermissions={
-        Array [
-          "expectedPermission",
-        ]
-      }
-    />
-    <main
-      className="Navigation-pageContainer-3"
+    <div
+      class="Navigation-appFrame-2"
     >
-      <mockConstructor />
-      <span>
-        Content
-      </span>
-    </main>
+      Top Bar Mock 
+      {"identity":{"expected":"identity"},"userPermissions":["expectedPermission"]}
+      <main
+        class="Navigation-pageContainer-3"
+      >
+        MessageBanner Mock
+        <span>
+          Content
+        </span>
+      </main>
+    </div>
   </div>
 </div>
 `;

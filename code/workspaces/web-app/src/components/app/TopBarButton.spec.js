@@ -1,17 +1,14 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
+import { Router } from 'react-router';
+import { createMemoryHistory } from 'history';
 import TopBarButton from './TopBarButton';
 
 describe('TopBarButton', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
+  const history = createMemoryHistory();
 
   it('correctly passes props to wrapped component', () => {
-    expect(
-      shallow(<TopBarButton label='Test Label' to='/testendpoint'/>),
-    ).toMatchSnapshot();
+    const wrapper = render(<Router history={history}><TopBarButton label='Test Label' to='/testendpoint'/></Router>);
+    expect(wrapper.container).toMatchSnapshot();
   });
 });
