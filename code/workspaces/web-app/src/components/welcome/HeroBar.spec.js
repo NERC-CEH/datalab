@@ -1,5 +1,5 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import HeroBar from './HeroBar';
 import { getAuth } from '../../config/auth';
 
@@ -14,13 +14,7 @@ beforeEach(() => {
 });
 
 describe('HeroBar', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<HeroBar />)).toMatchSnapshot();
+    expect(render(<HeroBar />).container).toMatchSnapshot();
   });
 });

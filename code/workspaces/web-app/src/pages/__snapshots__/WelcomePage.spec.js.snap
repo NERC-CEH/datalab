@@ -1,14 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WelcomePage renders correct snapshot 1`] = `
-<div
-  className="WelcomePage-page-1"
->
-  <WithStyles(HeroBar) />
-  <WithStyles(PublicNavBarContent) />
-  <DescribeDatalabs />
-  <WithStyles(Footer)
-    invert={true}
-  />
+<div>
+  <div
+    class="WelcomePage-page-1"
+  >
+    <div>
+      HeroBar mock
+    </div>
+    <div>
+      NavBar mock
+    </div>
+    <div>
+      DescribeDatalabs mock
+    </div>
+    <div>
+      Footer mock 
+      {"invert":true}
+    </div>
+  </div>
 </div>
 `;

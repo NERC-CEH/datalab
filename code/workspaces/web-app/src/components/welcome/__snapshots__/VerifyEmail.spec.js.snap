@@ -1,49 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VerifyEmail renders correct snapshot 1`] = `
-<div
-  className="makeStyles-container-1"
->
-  <img
-    alt="DataLabs-Logo"
-    className="makeStyles-logo-2"
-    src="datalabs-vert.png"
-  />
+<div>
   <div
-    className="makeStyles-textContainer-3"
+    class="makeStyles-container-1"
   >
-    <WithStyles(ForwardRef(Typography))
-      className="makeStyles-text-4"
-      variant="h5"
+    <img
+      alt="DataLabs-Logo"
+      class="makeStyles-logo-2"
+      src="datalabs-vert.png"
+    />
+    <div
+      class="makeStyles-textContainer-3"
     >
-      Verify Email
-    </WithStyles(ForwardRef(Typography))>
-    <WithStyles(ForwardRef(Typography))
-      className="makeStyles-text-4"
-      variant="body1"
-    >
-      Before logging in you need to verify your e-mail address. Please use the
+      <h5
+        class="MuiTypography-root makeStyles-text-4 MuiTypography-h5"
+      >
+        Verify Email
+      </h5>
+      <p
+        class="MuiTypography-root makeStyles-text-4 MuiTypography-body1"
+      >
+        Before logging in you need to verify your e-mail address. Please use the
   link in the e-mail which will be sent to you shortly. Note that you may have to check
   your spam folder. Once verified, please click the button below.
-    </WithStyles(ForwardRef(Typography))>
-  </div>
-  <div
-    className="makeStyles-buttons-5"
-  >
-    <PrimaryActionButton
-      className="makeStyles-button-6"
-      color="primary"
-      onClick={[Function]}
+      </p>
+    </div>
+    <div
+      class="makeStyles-buttons-5"
     >
-      Home
-    </PrimaryActionButton>
-    <PagePrimaryActionButton
-      className="makeStyles-button-6"
-      color="primary"
-      onClick={[MockFunction login]}
-    >
-      I've verified my email
-    </PagePrimaryActionButton>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-6 MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Home
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-6 MuiButton-containedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          I've verified my email
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;

@@ -1,46 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar renders correct snapshot 1`] = `
-<div
-  className="PublicNavBarContent-appBar-3"
->
+<div>
   <div
-    className="PublicNavBarContent-toolBar-4"
+    class="PublicNavBarContent-appBar-3"
   >
-    <img
-      alt="DataLabs-Logo"
-      className="PublicNavBarContent-logo-1"
-      src="datalabs-hori.png"
-    />
     <div
-      className="PublicNavBarContent-spacer-2"
-    />
-    <div
-      className="PublicNavBarContent-buttons-5"
+      class="PublicNavBarContent-toolBar-4"
     >
-      <WithStyles(TopBarButton)
-        key="Slack"
-        label="Slack"
-        onClick={[Function]}
+      <img
+        alt="DataLabs-Logo"
+        class="PublicNavBarContent-logo-1"
+        src="datalabs-hori.png"
       />
-      <WithStyles(TopBarButton)
-        key="GitHub"
-        label="GitHub"
-        onClick={[Function]}
+      <div
+        class="PublicNavBarContent-spacer-2"
       />
-      <WithStyles(TopBarButton)
-        key="Docker Hub"
-        label="Docker Hub"
-        onClick={[Function]}
-      />
+      <div
+        class="PublicNavBarContent-buttons-5"
+      >
+        <li
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiListItem-root TopBarButton-inactive-7 MuiListItem-gutters MuiListItem-button"
+          role="button"
+          tabindex="0"
+        >
+          Slack
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </li>
+        <li
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiListItem-root TopBarButton-inactive-7 MuiListItem-gutters MuiListItem-button"
+          role="button"
+          tabindex="0"
+        >
+          GitHub
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </li>
+        <li
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiListItem-root TopBarButton-inactive-7 MuiListItem-gutters MuiListItem-button"
+          role="button"
+          tabindex="0"
+        >
+          Docker Hub
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </li>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined PublicNavBarContent-login-6 MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Log In
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
     </div>
-    <PrimaryActionButton
-      className="PublicNavBarContent-login-6"
-      color="primary"
-      onClick={[MockFunction]}
-    >
-      Log In
-    </PrimaryActionButton>
   </div>
 </div>
 `;

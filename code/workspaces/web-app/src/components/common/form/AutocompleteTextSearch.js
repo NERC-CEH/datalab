@@ -154,7 +154,6 @@ function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, sele
 }
 
 function getSuggestions(searchValue, suggestions) {
-  console.log('GET SUGGESTIONS', suggestions, searchValue);
   let count = 0;
 
   return suggestions.filter((suggestion) => {

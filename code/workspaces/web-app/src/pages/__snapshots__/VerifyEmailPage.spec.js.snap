@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VerifyEmailPage renders correct snapshot 1`] = `
-<div
-  className="makeStyles-page-1"
->
-  <VerifyEmail />
+<div>
+  <div
+    class="makeStyles-page-1"
+  >
+    <div>
+      VerifyEmail mock
+    </div>
+  </div>
 </div>
 `;
