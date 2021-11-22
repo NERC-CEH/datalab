@@ -569,6 +569,9 @@ function createValidatedRequest(body, validators) {
   request = httpMocks.createRequest({
     method: 'GET',
     body,
+    headers: {
+      authorization: 'token',
+    },
   });
 
   const vals = validators.map(createValidationPromise(request));

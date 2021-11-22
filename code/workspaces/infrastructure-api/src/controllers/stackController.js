@@ -92,7 +92,7 @@ async function createStackExec(request, response) {
 
 async function updateStackExec(request, response) {
   // Build request params
-  const { user } = request;
+  const { user, headers } = request;
   const params = matchedData(request);
   const { projectKey, name } = params;
 
@@ -119,9 +119,10 @@ async function updateStackExec(request, response) {
           error: 'Cannot set notebooks to Public',
         });
       }
+      const { authorization: userToken } = headers;
 
       // If the request changes the shared property, then handle the change accordingly.
-      await handleSharedChange(params, existing, params.shared);
+      await handleSharedChange(params, existing, params.shared, userToken);
     }
 
     await stackManager.mountAssetsOnStack({ ...params, type });

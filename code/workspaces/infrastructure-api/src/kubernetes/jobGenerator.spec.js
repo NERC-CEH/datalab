@@ -1,23 +1,24 @@
-import { createKubectlJob } from './jobGenerator';
+import { createCurlJob } from './jobGenerator';
 
 const getInputs = () => ({
   name: 'job',
   runCommand: 'echo "Hello, World!"',
 });
 
-describe('createKubectlJob', () => {
+describe('createCurlJob', () => {
   it('creates a job to match the snapshot', async () => {
-    const manifest = await createKubectlJob(getInputs());
+    const manifest = await createCurlJob(getInputs());
 
     expect(manifest).toMatchSnapshot();
   });
 
-  it('creates a job to match the snapshot when a kubectl command is supplied', async () => {
+  it('creates a job to match the snapshot when a curl command is supplied', async () => {
     const inputs = {
       ...getInputs(),
-      kubectlCommand: 'kubectl get pods',
+      curlCommand: 'curl -X PUT localhost:8000/restart',
+      userToken: 'Bearer token',
     };
-    const manifest = await createKubectlJob(inputs);
+    const manifest = await createCurlJob(inputs);
 
     expect(manifest).toMatchSnapshot();
   });
@@ -28,7 +29,7 @@ describe('createKubectlJob', () => {
       volumeMount: 'volume',
       mountPath: '/mnt/data',
     };
-    const manifest = await createKubectlJob(inputs);
+    const manifest = await createCurlJob(inputs);
 
     expect(manifest).toMatchSnapshot();
   });

@@ -2,7 +2,7 @@ import { stackTypes } from 'common';
 import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import config from '../config/config';
 import secretManager from '../credentials/secretManager';
-import { createKubectlJob } from '../kubernetes/jobGenerator';
+import { createCurlJob } from '../kubernetes/jobGenerator';
 import jobApi from '../kubernetes/jobApi';
 import ingressApi from '../kubernetes/ingressApi';
 import deploymentApi from '../kubernetes/deploymentApi';
@@ -39,6 +39,31 @@ const getJupyterDirectory = (deployment, deploymentData) => {
   return envVar.value.replace('/data', mountPath);
 };
 
+export const getCurlCommand = (projectKey, name, type) => {
+  const {
+    apiPort,
+    deployedNamespace,
+    deployedInCluster,
+  } = config.get();
+
+  // Send Curl request to the infrastructure service, either on the cluster or when running locally.
+  const infrastructureUrl = deployedInCluster
+    ? `infrastructure-api-service.${deployedNamespace}.svc.cluster.local:${apiPort}`
+    : `host.docker.internal:${apiPort}`;
+  const restartRoute = `/stack/${projectKey}/restart`;
+  const bearerHeader = '-H "Authorization: $TOKEN"';
+  const contentHeader = '-H "Content-Type: application/json"';
+
+  const data = {
+    projectKey,
+    name,
+    type,
+  };
+  const stringData = `-d ''${JSON.stringify(data)}''`;
+
+  return `curl -X PUT ${infrastructureUrl}${restartRoute} ${bearerHeader} ${contentHeader} ${stringData}`;
+};
+
 const getIngressPatch = authValue => ({
   metadata: {
     annotations: {
@@ -47,7 +72,7 @@ const getIngressPatch = authValue => ({
   },
 });
 
-export const makeJupyterPrivate = async (name, type, projectKey, volumeMount) => {
+export const makeJupyterPrivate = async (name, type, projectKey, volumeMount, userToken) => {
   // Changing a Jupyter notebook to private requires a token refresh, and to remove a file from the notebook's storage.
   const credentials = secretManager.createNewJupyterCredentials();
   await secretManager.createStackCredentialSecret(name, type, projectKey, credentials);
@@ -59,9 +84,9 @@ export const makeJupyterPrivate = async (name, type, projectKey, volumeMount) =>
 
   // Trigger a job to remove a cookie file from the volume and restart the notebook pod
   const runCommand = `rm -f ${getJupyterCookiePath(jupyterDirectory)}`;
-  const kubectlCommand = `kubectl rollout restart deployment/${deployment}`;
+  const curlCommand = getCurlCommand(projectKey, name, type);
 
-  const manifest = await createKubectlJob({ name, runCommand, kubectlCommand, volumeMount, mountPath });
+  const manifest = await createCurlJob({ name, runCommand, curlCommand, volumeMount, mountPath, userToken });
   await jobApi.createJob(name, projectKey, manifest);
 };
 
@@ -75,7 +100,7 @@ export const makeZeppelinPrivate = async (name, type, projectKey) => {
   await deploymentApi.restartDeployment(deployment, projectKey);
 };
 
-export const handleSharedChange = async (params, existing, newSharedStatus) => {
+export const handleSharedChange = async (params, existing, newSharedStatus, userToken) => {
   const { category, shared, type, volumeMount, visible } = existing;
 
   const oldSharedStatus = shared || visible;
@@ -106,7 +131,7 @@ export const handleSharedChange = async (params, existing, newSharedStatus) => {
 
   if (category === NOTEBOOK_CATEGORY && newSharedStatus === visibility.PRIVATE) {
     if (type === JUPYTER || type === JUPYTERLAB) {
-      await makeJupyterPrivate(name, type, projectKey, volumeMount);
+      await makeJupyterPrivate(name, type, projectKey, volumeMount, userToken);
     }
 
     if (type === ZEPPELIN) {
