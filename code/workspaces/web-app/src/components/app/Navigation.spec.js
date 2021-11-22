@@ -1,21 +1,18 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import Navigation from './Navigation';
 
-jest.mock('./MessageBanner', () => jest.fn(() => (<>MessageBanner</>)));
+jest.mock('./MessageBanner', () => () => (<>MessageBanner Mock</>));
+jest.mock('./TopBar', () => props => (<>Top Bar Mock {JSON.stringify(props)}</>));
 
 describe('DescribeDatalabs', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(
+    const wrapper = render(
       <Navigation identity={{ expected: 'identity' }} userPermissions={['expectedPermission']} >
         <span>Content</span>
       </Navigation>,
-    )).toMatchSnapshot();
+    );
+
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

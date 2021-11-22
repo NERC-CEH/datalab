@@ -1,26 +1,17 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import SideBarNavigation from './SideBarNavigation';
 
 describe('ProjectNavigation', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
-  const SideBar = () => (
-  <div>
-  </div>
-  );
+  const SideBar = () => (<div>SideBar mock</div>);
 
   it('renders the correct snapshot', () => {
-    expect(
-      shallow(
-        <SideBarNavigation sideBar={SideBar}>
-          <span>Content</span>
-        </SideBarNavigation>,
-      ),
-    ).toMatchSnapshot();
+    const wrapper = render(
+      <SideBarNavigation sideBar={<SideBar />}>
+        <span>Content</span>
+      </SideBarNavigation>,
+    );
+
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

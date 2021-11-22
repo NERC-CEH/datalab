@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectNavigation renders the correct snapshot 1`] = `
-<div
-  className="SideBarNavigation-projectNavigation-1"
->
-  <Component />
+<div>
   <div
-    className="SideBarNavigation-contentArea-2"
+    class="SideBarNavigation-projectNavigation-1"
   >
-    <span>
-      Content
-    </span>
+    <div>
+      SideBar mock
+    </div>
+    <div
+      class="SideBarNavigation-contentArea-2"
+    >
+      <span>
+        Content
+      </span>
+    </div>
   </div>
 </div>
 `;

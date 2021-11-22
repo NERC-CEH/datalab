@@ -1,31 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideBarGroup when children provided renders children and title when title provided 1`] = `
-<div
-  className="SideBarGroup-sidebarGroup-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="SideBarGroup-title-2"
-    variant="h6"
+<div>
+  <div
+    class="SideBarGroup-sidebarGroup-7"
   >
-    Test Group
-  </WithStyles(ForwardRef(Typography))>
-  <div>
-    test div content
+    <h6
+      class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+    >
+      Test Group
+    </h6>
+    <div>
+      test div content
+    </div>
   </div>
 </div>
 `;
 
 exports[`SideBarGroup when children provided renders children when no title provided 1`] = `
-<div
-  className="SideBarGroup-sidebarGroup-1"
->
-  <div>
-    test div content
+<div>
+  <div
+    class="SideBarGroup-sidebarGroup-5"
+  >
+    <div>
+      test div content
+    </div>
   </div>
 </div>
 `;
 
-exports[`SideBarGroup when no children provided renders nothing when no title provided 1`] = `""`;
+exports[`SideBarGroup when no children provided renders nothing when no title provided 1`] = `<div />`;
 
-exports[`SideBarGroup when no children provided renders nothing when title provided 1`] = `""`;
+exports[`SideBarGroup when no children provided renders nothing when title provided 1`] = `<div />`;
