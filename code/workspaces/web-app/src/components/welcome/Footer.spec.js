@@ -1,15 +1,13 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import Footer from './Footer';
+import { getVersion } from '../../config/version';
+
+jest.mock('../../config/version');
 
 describe('Footer', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<Footer />)).toMatchSnapshot();
+    getVersion.mockReturnValue('jest test 1.23456');
+    expect(render(<Footer />).container).toMatchSnapshot();
   });
 });

@@ -1,37 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeroBar renders correct snapshot 1`] = `
-<div
-  className="HeroBar-bar-1"
->
-  <img
-    alt="DataLabs-Logo"
-    className="HeroBar-logo-2"
-    src="datalabs-vert.png"
-  />
-  <WithStyles(ForwardRef(Typography))
-    className="HeroBar-tagLine-3"
-    variant="h6"
-  >
-    DataLabs provides you with tools to power your research and share the results
-  </WithStyles(ForwardRef(Typography))>
+<div>
   <div
-    className="HeroBar-buttons-4"
+    class="HeroBar-bar-1"
   >
-    <PagePrimaryActionButton
-      className="HeroBar-button-5"
-      color="primary"
-      onClick={[Function]}
+    <img
+      alt="DataLabs-Logo"
+      class="HeroBar-logo-2"
+      src="datalabs-vert.png"
+    />
+    <h6
+      class="MuiTypography-root HeroBar-tagLine-3 MuiTypography-h6"
     >
-      Sign Up
-    </PagePrimaryActionButton>
-    <PrimaryActionButton
-      className="HeroBar-button-5"
-      color="primary"
-      onClick={[MockFunction]}
+      DataLabs provides you with tools to power your research and share the results
+    </h6>
+    <div
+      class="HeroBar-buttons-4"
     >
-      Log In
-    </PrimaryActionButton>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained HeroBar-button-5 MuiButton-containedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Sign Up
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined HeroBar-button-5 MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Log In
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;

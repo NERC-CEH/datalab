@@ -1,15 +1,9 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import NavBarLinkButton from './NavBarLinkButton';
 
 describe('NavBarLinkButton', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<NavBarLinkButton>{'expectedChildren'}</NavBarLinkButton>)).toMatchSnapshot();
+    expect(render(<NavBarLinkButton>{'expectedChildren'}</NavBarLinkButton>).container).toMatchSnapshot();
   });
 });

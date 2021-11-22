@@ -1,27 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer renders correct snapshot 1`] = `
-<div
-  className="Footer-footer-1"
->
+<div>
   <div
-    className="Footer-logoCopyRightContainer-3"
+    class="Footer-footer-1"
   >
-    <img
-      alt="DataLabs-Logo"
-      className="Footer-logo-4"
-      src="datalabs-mono.png"
-    />
-    <WithStyles(ForwardRef(Typography))
-      variant="caption"
+    <div
+      class="Footer-logoCopyRightContainer-3"
     >
-      © Copyright NERC 2017—2019
-    </WithStyles(ForwardRef(Typography))>
+      <img
+        alt="DataLabs-Logo"
+        class="Footer-logo-4"
+        src="datalabs-mono.png"
+      />
+      <span
+        class="MuiTypography-root MuiTypography-caption"
+      >
+        © Copyright NERC 2017—2019
+      </span>
+    </div>
+    <p
+      class="MuiTypography-root MuiTypography-body2"
+    >
+      Version: jest test 1.23456
+    </p>
   </div>
-  <WithStyles(ForwardRef(Typography))
-    variant="body2"
-  >
-    Version: undefined
-  </WithStyles(ForwardRef(Typography))>
 </div>
 `;

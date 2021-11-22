@@ -1,9 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBarLinkButton renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(Button))
-  className="NavBarLinkButton-linkButton-1"
->
-  expectedChildren
-</WithStyles(ForwardRef(Button))>
+<div>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text NavBarLinkButton-linkButton-1"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      expectedChildren
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
 `;
