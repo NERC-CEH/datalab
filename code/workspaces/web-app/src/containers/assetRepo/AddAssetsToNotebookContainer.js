@@ -138,14 +138,13 @@ export const AddAssetsToNotebookContainer = ({ userPermissions }) => {
 
   useEffect(() => {
     // On page load, get projects.
-    dispatch(projectActions.loadProjects());
+    dispatch(projectActions.loadProjectsForUser());
   }, [dispatch, projects.isFetching]);
 
   useEffect(() => {
     // On project selection, get possible notebooks and assets.
-    dispatch(stackActions.loadStacksByCategory(selectedProject, NOTEBOOK_CATEGORY));
-
     if (selectedProject) {
+      dispatch(stackActions.loadStacksByCategory(selectedProject, NOTEBOOK_CATEGORY));
       dispatch(assetRepoActions.loadOnlyVisibleAssets(selectedProject));
     } else {
       dispatch(assetRepoActions.loadAllAssets());

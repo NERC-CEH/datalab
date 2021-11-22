@@ -5,8 +5,9 @@ import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { statusTypes } from 'common';
+import { statusTypes, visibilityTypes } from 'common';
 import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
+import { SITE_CATEGORY } from 'common/src/config/images';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import PermissionWrapper from '../../common/ComponentPermissionWrapper';
 import PrimaryActionButton from '../../common/buttons/PrimaryActionButton';
@@ -15,6 +16,7 @@ import StackMoreMenuItem from './StackMoreMenuItem';
 import { getUserActionsForType } from '../../../config/images';
 
 const { READY, SUSPENDED } = statusTypes;
+const { PRIVATE, PROJECT, PUBLIC } = visibilityTypes;
 const MORE_ICON = 'more_vert';
 
 const styles = theme => ({
@@ -41,6 +43,27 @@ const StackCardActions = (props) => {
   />;
 };
 
+const getShareButton = (stack, shareStack, permission) => (newStatus, label, disabled) => ({
+  onClick: () => shareStack(stack, newStatus),
+  requiredPermission: permission,
+  name: label,
+  disabled,
+});
+
+export const getSharedButtons = (stack, shareStack, permission) => {
+  // Function to get the different "Share" buttons available to the stack
+  const isSite = stack.category === SITE_CATEGORY;
+  const shareButton = getShareButton(stack, shareStack, permission);
+
+  const shared = stack.shared || stack.visible;
+
+  return [
+    shareButton(PRIVATE, 'Set Access: Private', shared === PRIVATE),
+    shareButton(PROJECT, 'Set Access: Project', shared === PROJECT),
+    isSite ? shareButton(PUBLIC, 'Set Access: Public', shared === PUBLIC) : undefined,
+  ];
+};
+
 export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack, restartStack, scaleStack, copySnippets, userActions,
   userPermissions, openPermission, deletePermission, editPermission, scalePermission, currentUserId, classes, getLogs, shareStack }) => {
   // Treat user as owner if 'users' not a defined field on stack.
@@ -49,7 +72,6 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   const ownsStack = !stack.users || stack.users.includes(currentUserId);
   const isInstanceAdmin = userPermissions.includes(SYSTEM_INSTANCE_ADMIN);
   const [anchorEl, setAnchorEl] = useState(null);
-  const shared = ['project'].includes(stack.shared) || ['project', 'public'].includes(stack.visible);
 
   const handleMoreButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -73,17 +95,13 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
     requiredPermission: openPermission,
     name: `Copy ${k} snippet`,
   })) : [];
+
+  const shareMenuItems = shouldRenderShare ? getSharedButtons(stack, shareStack, deletePermission) : [];
+
   const stackMenuItems = [
     shouldRenderLogs && { onClick: () => getLogs(stack), requiredPermission: deletePermission, name: 'Logs' },
     shouldRenderEdit && { onClick: () => editStack(stack), requiredPermission: editPermission, name: 'Edit' },
-    shouldRenderShare && {
-      onClick: () => shareStack(stack, 'project'),
-      requiredPermission: deletePermission,
-      name: 'Share',
-      tooltipText: 'Resource is already shared within the project',
-      disableTooltip: !shared,
-      disabled: shared,
-    },
+    ...shareMenuItems,
     shouldRenderRestart && {
       onClick: () => restartStack(stack),
       requiredPermission: editPermission,
@@ -159,6 +177,7 @@ const sharedPropTypes = {
     id: PropTypes.string,
     displayName: PropTypes.string,
     type: PropTypes.string,
+    category: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
   openStack: PropTypes.func,

@@ -1,11 +1,13 @@
 import { body, check, matchedData } from 'express-validator';
 import { isBoolean, indexOf } from 'lodash';
-import { notebookList, stackList, siteList, versionList } from 'common/src/config/images';
+import { notebookList, stackList, siteList, versionList, NOTEBOOK_CATEGORY } from 'common/src/config/images';
+
 import controllerHelper from './controllerHelper';
 import stackRepository from '../dataaccess/stacksRepository';
 import stackManager from '../stacks/stackManager';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import { visibility, getEnumValues } from '../models/stackEnums';
+import { handleSharedChange } from '../stacks/shareStackManager';
 
 const TYPE = 'stack';
 const USER_UPDATEABLE_FIELDS = ['displayName', 'description', 'shared', 'assetIds'];
@@ -90,7 +92,7 @@ async function createStackExec(request, response) {
 
 async function updateStackExec(request, response) {
   // Build request params
-  const { user } = request;
+  const { user, headers } = request;
   const params = matchedData(request);
   const { projectKey, name } = params;
 
@@ -106,14 +108,28 @@ async function updateStackExec(request, response) {
   // Handle request
   await updateLinkedAssets(params, response);
 
-  const { type } = await stackRepository.getOneByName(projectKey, user, name);
+  const existing = await stackRepository.getOneByName(projectKey, user, name);
+  const { type, category } = existing;
 
   try {
+    if (params.shared) {
+      if (params.shared === visibility.PUBLIC && category === NOTEBOOK_CATEGORY) {
+        response.status(405);
+        return response.send({
+          error: 'Cannot set notebooks to Public',
+        });
+      }
+      const { authorization: userToken } = headers;
+
+      // If the request changes the shared property, then handle the change accordingly.
+      await handleSharedChange(params, existing, params.shared, userToken);
+    }
+
     await stackManager.mountAssetsOnStack({ ...params, type });
     const updateResult = await stackRepository.update(projectKey, user, name, updatedDetails);
-    response.send(updateResult);
+    return response.send(updateResult);
   } catch (error) {
-    controllerHelper.handleError(response, 'updating', TYPE, name)(error);
+    return controllerHelper.handleError(response, 'updating', TYPE, name)(error);
   }
 }
 

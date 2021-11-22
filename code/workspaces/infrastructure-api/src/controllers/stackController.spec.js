@@ -6,6 +6,7 @@ import stackController from './stackController';
 import stackManager from '../stacks/stackManager';
 import * as stackRepository from '../dataaccess/stacksRepository';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
+import * as shareStackManager from '../stacks/shareStackManager';
 
 jest.mock('../stacks/stackManager');
 jest.mock('../dataaccess/stacksRepository');
@@ -224,8 +225,11 @@ describe('Stack Controller', () => {
       assetIds: ['test-update-asset-one', 'test-update-asset-two'],
     });
 
+    const shareStackMock = jest.spyOn(shareStackManager, 'handleSharedChange');
+
     beforeEach(async () => {
       updateMock.mockClear();
+      jest.clearAllMocks();
       await createValidatedRequest(
         getRequestBody(),
         stackController.updateStackValidator,
@@ -250,6 +254,31 @@ describe('Stack Controller', () => {
         .then(() => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error updating stack: abcd1234' }); // eslint-disable-line no-underscore-dangle
+        })
+        .catch(() => {
+          expect(true).toBeFalsy();
+        });
+    });
+
+    it('should return 405 for disallowed request', async () => {
+      const projectKey = 'projectKey';
+      const name = 'stackname';
+      const requestBody = {
+        name,
+        projectKey,
+        shared: 'public',
+      };
+
+      await createValidatedRequest(requestBody, stackController.updateStackValidator);
+
+      const response = httpMocks.createResponse();
+      getOneByNameMock.mockResolvedValueOnce({ type: 'expected-type', category: 'ANALYSIS' });
+
+      return stackController.updateStack(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(405);
+          expect(response._getData()).toEqual({ error: 'Cannot set notebooks to Public' }); // eslint-disable-line no-underscore-dangle
+          expect(shareStackMock).toHaveBeenCalledTimes(0);
         })
         .catch(() => {
           expect(true).toBeFalsy();
@@ -328,6 +357,7 @@ describe('Stack Controller', () => {
 
       expect(updateMock).toBeCalledTimes(1);
       expect(updateMock).toBeCalledWith(projectKey, request.user, name, userUpdateableDetails);
+      expect(shareStackMock).toHaveBeenCalledTimes(1);
     });
 
     it('should not pass undefined or null values to update but should pass other falsy values', async () => {
@@ -348,6 +378,7 @@ describe('Stack Controller', () => {
 
       expect(updateMock).toBeCalledTimes(1);
       expect(updateMock).toBeCalledWith(projectKey, request.user, name, { displayName: '' });
+      expect(shareStackMock).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -538,6 +569,9 @@ function createValidatedRequest(body, validators) {
   request = httpMocks.createRequest({
     method: 'GET',
     body,
+    headers: {
+      authorization: 'token',
+    },
   });
 
   const vals = validators.map(createValidationPromise(request));

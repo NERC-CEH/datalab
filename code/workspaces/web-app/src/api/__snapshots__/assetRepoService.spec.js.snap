@@ -27,6 +27,15 @@ exports[`assetRepoService loadAllAssets should build the correct query and unpac
     }"
 `;
 
+exports[`assetRepoService loadAssetsForUser should build the correct query and unpack the results 1`] = `
+"
+    CentralAssetsAvailableToUser {
+      centralAssetsAvailableToUser {
+        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate
+      }
+    }"
+`;
+
 exports[`assetRepoService loadVisibleAssets should build the correct query and unpack the results 1`] = `
 "
     CentralAssetsAvailableToProject($projectKey: String!) {

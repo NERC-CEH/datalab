@@ -1,0 +1,40 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ name }}
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    securityContext:
+      runAsUser: 1000
+    spec:
+      containers:
+      - name: {{ name }}
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ["sh"]
+        args: ["-c", "{{{ runCommand }}}"]
+        {{#volumeMount}}
+        volumeMounts:
+          - mountPath: {{{ mountPath }}}
+            name: persistentfsvol
+        {{/volumeMount}}
+      {{#curlCommand}}
+      - name: curl-job
+        image: curlimages/curl
+        imagePullPolicy: IfNotPresent
+        command: ["sh"]
+        # Command in single quotes as there are double quotes in the command itself
+        args: ["-c", '{{{ curlCommand }}}']
+        env:
+        - name: TOKEN
+          value: "{{{ userToken }}}"
+      {{/curlCommand}}
+      volumes:
+        {{#volumeMount}}
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+        {{/volumeMount}}
+      restartPolicy: Never

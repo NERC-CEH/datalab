@@ -1,5 +1,6 @@
 import projectActions, {
   LOAD_PROJECTS_ACTION,
+  LOAD_PROJECTS_FOR_USER_ACTION,
   GET_ALL_PROJECTS_AND_RESOURCES_ACTION,
   SET_CURRENT_PROJECT_ACTION,
   CLEAR_CURRENT_PROJECT_ACTION,
@@ -28,6 +29,20 @@ describe('projectActions', () => {
       expect(loadProjectsMock).toHaveBeenCalledTimes(1);
       expect(output.type).toBe(LOAD_PROJECTS_ACTION);
       expect(output.payload).toBe('expectedProjectsPayload');
+    });
+
+    it('loadProjectsForUser', () => {
+      // Arrange
+      const loadProjectsForUserMock = jest.fn().mockReturnValue('expectedProjectsForUserPayload');
+      projectsService.loadProjectsForUser = loadProjectsForUserMock;
+
+      // Act
+      const output = projectActions.loadProjectsForUser();
+
+      // Assert
+      expect(loadProjectsForUserMock).toHaveBeenCalledTimes(1);
+      expect(output.type).toBe(LOAD_PROJECTS_FOR_USER_ACTION);
+      expect(output.payload).toBe('expectedProjectsForUserPayload');
     });
 
     it('getAllProjectsAndResources', () => {

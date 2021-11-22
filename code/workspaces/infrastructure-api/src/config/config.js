@@ -34,6 +34,18 @@ const config = convict({
     default: 'http://localhost:8001',
     env: 'KUBERNETES_API',
   },
+  deployedNamespace: {
+    doc: 'The namespace the infrastructure API is deployed in Kubernetes',
+    format: 'String',
+    default: 'test',
+    env: 'KUBERNETES_NAMESPACE',
+  },
+  deployedInCluster: {
+    doc: 'If the service is running in the cluster',
+    format: 'Boolean',
+    default: false,
+    env: 'DEPLOYED_IN_CLUSTER',
+  },
   authSigninUrl: {
     doc: 'The sign in URL',
     format: 'url',

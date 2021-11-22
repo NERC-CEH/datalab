@@ -100,26 +100,35 @@ exports[`StackCardActions creates correct snapshot 2`] = `
     userpermissions="open,delete,edit"
   >
     Edit
+    disabled: undefined
   </div>
   <div
-    disabletooltip="true"
     requiredpermission="delete"
-    tooltiptext="Resource is already shared within the project"
     userpermissions="open,delete,edit"
   >
-    Share
+    Set Access: Private
+    disabled: true
+  </div>
+  <div
+    requiredpermission="delete"
+    userpermissions="open,delete,edit"
+  >
+    Set Access: Project
+    disabled: false
   </div>
   <div
     requiredpermission="edit"
     userpermissions="open,delete,edit"
   >
     Restart
+    disabled: false
   </div>
   <div
     requiredpermission="delete"
     userpermissions="open,delete,edit"
   >
     Delete
+    disabled: undefined
   </div>
 </ul>
 `;
@@ -135,38 +144,49 @@ exports[`StackCardActions creates correct snapshot if there are multiple copy sn
     userpermissions="open,delete,edit"
   >
     Edit
+    disabled: undefined
   </div>
   <div
-    disabletooltip="true"
     requiredpermission="delete"
-    tooltiptext="Resource is already shared within the project"
     userpermissions="open,delete,edit"
   >
-    Share
+    Set Access: Private
+    disabled: true
+  </div>
+  <div
+    requiredpermission="delete"
+    userpermissions="open,delete,edit"
+  >
+    Set Access: Project
+    disabled: false
   </div>
   <div
     requiredpermission="edit"
     userpermissions="open,delete,edit"
   >
     Restart
+    disabled: false
   </div>
   <div
     requiredpermission="open"
     userpermissions="open,delete,edit"
   >
     Copy Python snippet
+    disabled: undefined
   </div>
   <div
     requiredpermission="open"
     userpermissions="open,delete,edit"
   >
     Copy R snippet
+    disabled: undefined
   </div>
   <div
     requiredpermission="delete"
     userpermissions="open,delete,edit"
   >
     Delete
+    disabled: undefined
   </div>
 </ul>
 `;

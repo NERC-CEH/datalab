@@ -13,14 +13,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const EditAssetDialog = ({ onSubmit, onCancel, asset, formComponent: Form }) => {
+const EditAssetDialog = ({ onSubmit, onCancel, asset, formComponent: Form, editPermissions }) => {
   const classes = useStyles();
   return (
   <Dialog open={true} maxWidth="md">
     <DialogTitle>Edit Asset</DialogTitle>
     <DialogContent>
       <Typography variant="h5" className={classes.root}>{assetLabel(asset)}</Typography>
-      <Form onSubmit={onSubmit} onCancel={onCancel} initialValues={asset} />
+      <Form onSubmit={onSubmit} onCancel={onCancel} initialValues={asset} editPermissions={editPermissions} />
     </DialogContent>
   </Dialog>
   );
@@ -35,6 +35,7 @@ EditAssetDialog.propTypes = {
     visible: PropTypes.string.isRequired,
   }),
   formComponent: PropTypes.elementType.isRequired,
+  editPermissions: PropTypes.object.isRequired,
 };
 
 export default EditAssetDialog;

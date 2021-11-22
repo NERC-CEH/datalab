@@ -7,6 +7,14 @@ async function getAll() {
   return Project().find().exec();
 }
 
+async function getProjectsWithIds(projectIds) {
+  return Project()
+    .find()
+    .where('key')
+    .in(projectIds)
+    .exec();
+}
+
 async function getByKey(projectKey) {
   return Project().findOne({ key: projectKey }).exec();
 }
@@ -38,6 +46,7 @@ async function deleteByKey(projectKey) {
 
 export default {
   getAll,
+  getProjectsWithIds,
   getByKey,
   exists,
   create,

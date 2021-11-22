@@ -3,7 +3,7 @@ import { renderMultiSelectAutocompleteField } from './controls';
 import { useUsers } from '../../../hooks/usersHooks';
 import sortByName from '../sortByName';
 
-function UserMultiSelect({ input, meta = null, ...custom }) {
+function UserMultiSelect({ input, meta = null, fixedOptions = [], ...custom }) {
   const users = useUsers();
   const sortedUsers = sortByName(users.value);
   const [currentValue, setCurrentValue] = useState(input.value || []); // use to give current value to onBlur
@@ -24,6 +24,7 @@ function UserMultiSelect({ input, meta = null, ...custom }) {
           getOptionSelected: (option, val) => option.userId === val.userId,
           loading: users.fetching,
           selectedTip: 'User selected',
+          fixedOptions,
           ...custom,
         },
       )

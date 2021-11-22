@@ -15,7 +15,7 @@ const testProject = {
 };
 
 const ProjectMock = {};
-const methods = ['find', 'findOne', 'findOneAndUpdate', 'exec', 'exists', 'create', 'deleteOne'];
+const methods = ['find', 'findOne', 'findOneAndUpdate', 'exec', 'exists', 'create', 'deleteOne', 'where', 'in'];
 methods.forEach((name) => {
   ProjectMock[name] = jest.fn();
   // relies on fact ProjectMock returned by reference and not copied. Allows function chaining.
@@ -32,6 +32,14 @@ describe('projectsRepository', () => {
   it('getAll calls correct methods with correct arguments', async () => {
     await projectsRepository.getAll();
     expectToHaveBeenCalledOnceWith(ProjectMock.find);
+    expectToHaveBeenCalledOnceWith(ProjectMock.exec);
+  });
+
+  it('getProjectsWithIds calls correct methods with correct arguments', async () => {
+    await projectsRepository.getProjectsWithIds(['id1']);
+    expectToHaveBeenCalledOnceWith(ProjectMock.find);
+    expectToHaveBeenCalledOnceWith(ProjectMock.where, 'key');
+    expectToHaveBeenCalledOnceWith(ProjectMock.in, ['id1']);
     expectToHaveBeenCalledOnceWith(ProjectMock.exec);
   });
 

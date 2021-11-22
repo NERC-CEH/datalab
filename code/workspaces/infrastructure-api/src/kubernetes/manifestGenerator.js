@@ -36,6 +36,10 @@ const IngressTemplates = Object.freeze({
   DEFAULT_INGRESS: 'default.ingress.template.yml',
 });
 
+const JobTemplates = Object.freeze({
+  DEFAULT_JOB: 'default.job.template.yml',
+});
+
 const VolumeTemplates = Object.freeze({
   DEFAULT_VOLUME: 'default.pvc.template.yml',
 });
@@ -67,4 +71,4 @@ function generateManifest(context, template) {
     .then(templateContent => render(templateContent, context));
 }
 
-export { ServiceTemplates, DeploymentTemplates, IngressTemplates, VolumeTemplates, ConfigTemplates, ConfigMapTemplates, NetworkPolicyTemplates, AutoScalerTemplates, generateManifest };
+export { ServiceTemplates, DeploymentTemplates, IngressTemplates, JobTemplates, VolumeTemplates, ConfigTemplates, ConfigMapTemplates, NetworkPolicyTemplates, AutoScalerTemplates, generateManifest };

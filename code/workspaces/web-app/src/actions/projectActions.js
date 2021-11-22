@@ -1,6 +1,7 @@
 import projectsService from '../api/projectsService';
 
 export const LOAD_PROJECTS_ACTION = 'LOAD_PROJECTS';
+export const LOAD_PROJECTS_FOR_USER_ACTION = 'LOAD_PROJECTS_FOR_USER_ACTION';
 export const GET_ALL_PROJECTS_AND_RESOURCES_ACTION = 'GET_ALL_PROJECTS_AND_RESOURCES_ACTION';
 export const SET_CURRENT_PROJECT_ACTION = 'SET_CURRENT_PROJECT_ACTION';
 export const CLEAR_CURRENT_PROJECT_ACTION = 'CLEAR_CURRENT_PROJECT_ACTION';
@@ -13,6 +14,11 @@ export const CHECK_PROJECT_KEY_UNIQUE_ACTION = 'CHECK_PROJECT_KEY_UNIQUE_ACTION'
 const loadProjects = () => ({
   type: LOAD_PROJECTS_ACTION,
   payload: projectsService.loadProjects(),
+});
+
+const loadProjectsForUser = () => ({
+  type: LOAD_PROJECTS_FOR_USER_ACTION,
+  payload: projectsService.loadProjectsForUser(),
 });
 
 const getAllProjectsAndResources = () => ({
@@ -55,7 +61,16 @@ const updateProject = project => ({
 });
 
 const projectActions = {
-  loadProjects, getAllProjectsAndResources, setCurrentProject, clearCurrentProject, createProject, requestProject, deleteProject, checkProjectKeyUniqueness, updateProject,
+  loadProjects,
+  loadProjectsForUser,
+  getAllProjectsAndResources,
+  setCurrentProject,
+  clearCurrentProject,
+  createProject,
+  requestProject,
+  deleteProject,
+  checkProjectKeyUniqueness,
+  updateProject,
 };
 
 export default projectActions;

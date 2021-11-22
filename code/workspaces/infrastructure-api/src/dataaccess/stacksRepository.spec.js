@@ -120,15 +120,29 @@ describe('stacksRepository', () => {
     expect(mockDatabase().entity()).toEqual({ assetIds: ['asset-id'] });
   });
 
-  it('update should query for stacks of the same name', async () => {
-    const name = 'stack';
-    const updatedValues = { displayName: 'Display Name' };
+  describe('update', () => {
+    it('should query for stacks of the same name', async () => {
+      const name = 'stack';
+      const updatedValues = { displayName: 'Display Name' };
 
-    await stacksRepository.update(project, user, name, updatedValues);
-    expect(mockDatabase().queries()).toContainEqual({ name });
-    expect(mockDatabase().project()).toBe('expectedProject');
-    expect(mockDatabase().user()).toBe('username');
-    expect(mockDatabase().entity()).toEqual(updatedValues);
+      await stacksRepository.update(project, user, name, updatedValues);
+      expect(mockDatabase().queries()).toContainEqual({ name });
+      expect(mockDatabase().project()).toBe('expectedProject');
+      expect(mockDatabase().user()).toBe('username');
+      expect(mockDatabase().entity()).toEqual(updatedValues);
+    });
+
+    it('should update visible status if shared is changed', async () => {
+      const name = 'stack';
+      const updatedValues = { displayName: 'Display Name', shared: 'private' };
+      const expectedUpdatedValues = { displayName: 'Display Name', shared: 'private', visible: 'private' };
+
+      await stacksRepository.update(project, user, name, updatedValues);
+      expect(mockDatabase().queries()).toContainEqual({ name });
+      expect(mockDatabase().project()).toBe('expectedProject');
+      expect(mockDatabase().user()).toBe('username');
+      expect(mockDatabase().entity()).toEqual(expectedUpdatedValues);
+    });
   });
 });
 

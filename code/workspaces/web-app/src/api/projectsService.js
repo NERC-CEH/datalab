@@ -13,6 +13,18 @@ function loadProjects() {
     .then(errorHandler('data.projects'));
 }
 
+function loadProjectsForUser() {
+  const query = `
+    LoadProjectsForUser {
+      projectsForUser {
+        id, key, name, description, accessible
+      }
+    }`;
+
+  return gqlQuery(query)
+    .then(errorHandler('data.projectsForUser'));
+}
+
 async function getAllProjectsAndResources() {
   const query = `
     GetAllProjectsAndResources {
@@ -101,6 +113,7 @@ function checkProjectKeyUniqueness(projectKey) {
 
 const projectsService = {
   loadProjects,
+  loadProjectsForUser,
   getAllProjectsAndResources,
   loadProjectInfo,
   createProject,

@@ -1,12 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AssetRepoSideBar renders correctly passing props to children 1`] = `
-<AssetRepoSideBar
-  classes={
-    Object {
-      "itemList": "AssetRepoSideBar-itemList-1 itemList",
-      "sideBar": "AssetRepoSideBar-sideBar-2 sideBar",
-    }
-  }
-/>
+exports[`AssetRepoSideBar renders correctly when user has no permissions 1`] = `
+<div>
+  <div
+    class="AssetRepoSideBar-sideBar-2 sideBar"
+  >
+    <ul
+      class="MuiList-root AssetRepoSideBar-itemList-1 itemList MuiList-padding"
+    >
+      <div
+        class="SideBarGroup-sidebarGroup-7"
+      >
+        <h6
+          class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+        >
+          Asset Repo
+        </h6>
+        <div
+          icon="dashboard"
+          label="Find Asset"
+          to="/assets/find"
+        >
+          Find Asset
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`AssetRepoSideBar renders correctly when user is a Data Manager 1`] = `
+<div>
+  <div
+    class="AssetRepoSideBar-sideBar-40 sideBar"
+  >
+    <ul
+      class="MuiList-root AssetRepoSideBar-itemList-39 itemList MuiList-padding"
+    >
+      <div
+        class="SideBarGroup-sidebarGroup-45"
+      >
+        <h6
+          class="MuiTypography-root SideBarGroup-title-46 MuiTypography-h6"
+        >
+          Asset Repo
+        </h6>
+        <div>
+          <div
+            icon="dashboard"
+            label="Add Metadata"
+            to="/assets/add-metadata"
+          >
+            Add Metadata
+          </div>
+        </div>
+        <div
+          icon="dashboard"
+          label="Find Asset"
+          to="/assets/find"
+        >
+          Find Asset
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
 `;

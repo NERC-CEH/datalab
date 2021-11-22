@@ -30,4 +30,6 @@ exports[`getProjectByKey calls next with an error if error thrown while retrievi
 
 exports[`listProjects calls next with error if error thrown getting data from database and does not call send 1`] = `[Error: Error listing projects: expected error message text]`;
 
+exports[`listProjectsForUser calls next with error if error thrown getting data from database and does not call send 1`] = `[Error: Error listing projects: expected error message text]`;
+
 exports[`projectKeyIsUnique calls next with an error if error thrown while checking existence and does not call send 1`] = `[Error: Error checking project key uniqueness: expected error message text]`;

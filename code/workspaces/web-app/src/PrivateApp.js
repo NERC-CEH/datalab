@@ -12,7 +12,7 @@ import AddAssetsToNotebookPage from './pages/AddAssetsToNotebookPage';
 import RoutePermissions from './components/common/RoutePermissionWrapper';
 import { useCurrentUserPermissions } from './hooks/authHooks';
 
-const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
+const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
 const PrivateApp = () => {
   const userPermissions = useCurrentUserPermissions().value;
@@ -28,7 +28,7 @@ const PrivateApp = () => {
         <RoutePermissions
           path="/assets"
           component={AssetRepoNavigationContainer}
-          permission={SYSTEM_DATA_MANAGER}
+          permission={''}
           alt={NotFoundPage}
         />
         <RoutePermissions

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createCurlJob creates a job to match the snapshot 1`] = `
+"---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-job
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    securityContext:
+      runAsUser: 1000
+    spec:
+      containers:
+      - name: job-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"echo \\"Hello, World!\\"\\"]
+      volumes:
+      restartPolicy: Never
+"
+`;
+
+exports[`createCurlJob creates a job to match the snapshot when a curl command is supplied 1`] = `
+"---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-job
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    securityContext:
+      runAsUser: 1000
+    spec:
+      containers:
+      - name: job-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"echo \\"Hello, World!\\"\\"]
+      - name: curl-job
+        image: curlimages/curl
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        # Command in single quotes as there are double quotes in the command itself
+        args: [\\"-c\\", 'curl -X PUT localhost:8000/restart']
+        env:
+        - name: TOKEN
+          value: \\"Bearer token\\"
+      volumes:
+      restartPolicy: Never
+"
+`;
+
+exports[`createCurlJob creates a job to match the snapshot when a volume and path is supplied 1`] = `
+"---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-job
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    securityContext:
+      runAsUser: 1000
+    spec:
+      containers:
+      - name: job-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: [\\"sh\\"]
+        args: [\\"-c\\", \\"echo \\"Hello, World!\\"\\"]
+        volumeMounts:
+          - mountPath: /mnt/data
+            name: persistentfsvol
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: volume-claim
+      restartPolicy: Never
+"
+`;

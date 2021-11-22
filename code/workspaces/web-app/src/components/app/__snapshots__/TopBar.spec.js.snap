@@ -18,6 +18,10 @@ exports[`TopBar correctly renders correct snapshot 1`] = `
       >
         <div>
           TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
+        <div>
+          TopBarButton mock 
           {"to":"/projects","label":"Projects"}
         </div>
         <div>
@@ -108,6 +112,10 @@ exports[`TopBar correctly renders correct snapshot for instance admin permission
         </div>
         <div>
           TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
+        <div>
+          TopBarButton mock 
           {"to":"/projects","label":"Projects"}
         </div>
         <div>
@@ -147,6 +155,10 @@ exports[`TopBar correctly renders correct snapshot if catalogue exists 1`] = `
       <div
         class="TopBar-buttons-16"
       >
+        <div>
+          TopBarButton mock 
+          {"to":"/assets","label":"Asset Repo"}
+        </div>
         <div>
           TopBarButton mock 
           {"to":"/projects","label":"Projects"}

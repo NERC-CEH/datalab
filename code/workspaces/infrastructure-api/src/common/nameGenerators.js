@@ -28,6 +28,9 @@ const rStudioConfigMap = deploymentName => `${deploymentName}-proxy-headers-conf
 const sparkDriverHeadlessService = deploymentServiceName => `${deploymentServiceName}-spark-driver-headless-service`;
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
+// Jobs
+const jobName = name => `job-${name}`;
+
 export default {
   assetVolume,
   isAssetVolume,
@@ -50,4 +53,5 @@ export default {
   sparkDriverHeadlessService,
   sparkJob,
   stackCredentialSecret,
+  jobName,
 };

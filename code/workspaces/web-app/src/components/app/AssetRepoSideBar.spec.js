@@ -1,6 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { permissionTypes } from 'common';
+import {
+  renderWithState,
+  buildDefaultTestState,
+} from '../../testUtils/renderWithState';
 import AssetRepoSideBar from './AssetRepoSideBar';
+
+jest.mock('./SideBarButton', () => props => <div {...props}>{props.label}</div>);
 
 const classes = {
   itemList: 'itemList',
@@ -8,8 +14,24 @@ const classes = {
 };
 
 describe('AssetRepoSideBar', () => {
-  it('renders correctly passing props to children', () => {
+  it('renders correctly when user has no permissions', () => {
     const props = { classes };
-    expect(shallow(<AssetRepoSideBar {...props} />)).toMatchSnapshot();
+
+    const state = buildDefaultTestState();
+
+    const { wrapper } = renderWithState(state, AssetRepoSideBar, props);
+
+    expect(wrapper.container).toMatchSnapshot();
+  });
+
+  it('renders correctly when user is a Data Manager', () => {
+    const props = { classes };
+
+    const state = buildDefaultTestState();
+    state.authentication.permissions.value = [permissionTypes.SYSTEM_DATA_MANAGER];
+
+    const { wrapper } = renderWithState(state, AssetRepoSideBar, props);
+
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

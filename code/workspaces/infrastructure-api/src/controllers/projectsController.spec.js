@@ -47,6 +47,61 @@ describe('listProjects', () => {
   });
 });
 
+describe('listProjectsForUser', () => {
+  it('returns the array of projects returned from the database if user is an admin', async () => {
+    const request = {
+      user: {
+        roles: {
+          instanceAdmin: true,
+          projectRoles: [],
+        },
+      },
+    };
+    const databaseProjects = [
+      { key: 'project-one', name: 'Project One' },
+      { key: 'project-two', name: 'Project Two' },
+    ];
+    projectsRepository.getAll = jest.fn(() => databaseProjects);
+
+    await projectsController.listProjectsForUser(request, responseMock, nextMock);
+    expectToBeCalledOnceWith(responseMock.send, databaseProjects);
+    expectToBeCalledOnceWith(projectsRepository.getAll);
+  });
+
+  it('returns an array of viewable projects if user is not an admin', async () => {
+    const request = {
+      user: {
+        roles: {
+          instanceAdmin: false,
+          projectRoles: [{ projectKey: 'project-one' }],
+        },
+      },
+    };
+    const databaseProjects = [
+      { key: 'project-one', name: 'Project One' },
+    ];
+    projectsRepository.getProjectsWithIds = jest.fn(() => databaseProjects);
+
+    await projectsController.listProjectsForUser(request, responseMock, nextMock);
+    expectToBeCalledOnceWith(responseMock.send, databaseProjects);
+    expectToBeCalledOnceWith(projectsRepository.getProjectsWithIds, ['project-one']);
+  });
+
+  it('calls next with error if error thrown getting data from database and does not call send', async () => {
+    const request = {
+      user: {
+        roles: {
+          instanceAdmin: true,
+          projectRoles: [],
+        },
+      },
+    };
+    projectsRepository.getAll = throwErrorMock;
+    await projectsController.listProjectsForUser(request, responseMock, nextMock);
+    checkNextCalledWithErrorAndSendNotCalled(nextMock, responseMock);
+  });
+});
+
 describe('getProjectByKey', () => {
   it('uses matchedData key to get by key', async () => {
     projectsRepository.getByKey = jest.fn();

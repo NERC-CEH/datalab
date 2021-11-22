@@ -43,6 +43,14 @@ describe('projectService', () => {
     expect(result).toEqual(testProjects);
   });
 
+  it('listProjectsForUser makes an api call and returns response data', async () => {
+    httpMock.onGet(`${infraServiceUrl}/projects/forUser`)
+      .reply(200, testProjects);
+
+    const result = await projectService.listProjectsForUser(token);
+    expect(result).toEqual(testProjects);
+  });
+
   it('getAllProjectsAndResources makes an api call and returns response data', async () => {
     httpMock.onGet(`${infraServiceUrl}/resources`)
       .reply(200, testProjects);

@@ -20,9 +20,9 @@ centralAssetRepoRouter.post(
   errorWrapper(centralAssetRepo.createAssetMetadata),
 );
 
+// No permission middleware on this as we have to check owner IDs in the DB.
 centralAssetRepoRouter.put(
   '/metadata/:assetId',
-  permissionMiddleware(SYSTEM_DATA_MANAGER),
   assetIdValidator(param),
   updateValidator(body),
   errorWrapper(centralAssetRepo.updateAssetMetadata),
@@ -35,6 +35,12 @@ centralAssetRepoRouter.get(
   permissionMiddleware(PROJECT_KEY_STACKS_CREATE, SYSTEM_DATA_MANAGER),
   optionalProjectKeyValidator(query),
   errorWrapper(centralAssetRepo.listAssetMetadata),
+);
+
+// No permission middleware on this as we handle specific cases on metadata retrieval at the DB level.
+centralAssetRepoRouter.get(
+  '/allowedMetadata',
+  errorWrapper(centralAssetRepo.getAllMetadata),
 );
 
 // Use /metadata/:assetId?projectKey=<projectKey value> to filter by metadata available to project

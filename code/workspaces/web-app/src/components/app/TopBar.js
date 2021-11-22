@@ -10,7 +10,7 @@ import navBarLinks from '../../constants/navBarLinks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import { getCatalogue } from '../../config/catalogue';
 
-const { SYSTEM_INSTANCE_ADMIN, SYSTEM_DATA_MANAGER } = permissionTypes;
+const { SYSTEM_INSTANCE_ADMIN } = permissionTypes;
 
 const styles = theme => createStyles({
   appBar: {
@@ -53,9 +53,7 @@ const TopBar = ({ classes, identity }) => {
           {userPermissions.includes(SYSTEM_INSTANCE_ADMIN)
           && <TopBarButton to="/admin" label="Admin"/>
           }
-          {userPermissions.includes(SYSTEM_DATA_MANAGER)
-          && <TopBarButton to="/assets" label="Asset Repo"/>
-          }
+          <TopBarButton to="/assets" label="Asset Repo"/>
           <TopBarButton to="/projects" label="Projects"/>
           {catalogue.available
           && catalogue.url
