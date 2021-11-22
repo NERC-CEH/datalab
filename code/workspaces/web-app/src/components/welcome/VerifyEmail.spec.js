@@ -1,24 +1,29 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render, fireEvent } from '@testing-library/react';
 import VerifyEmail from './VerifyEmail';
 import { getAuth } from '../../config/auth';
 
 jest.mock('../../config/auth');
 
-beforeEach(() => {
-  getAuth.mockImplementation(() => ({
-    login: jest.fn().mockName('login'),
-  }));
-});
-
 describe('VerifyEmail', () => {
-  let shallow;
+  const login = jest.fn();
 
   beforeEach(() => {
-    shallow = createShallow();
+    jest.clearAllMocks();
+    getAuth.mockReturnValue({
+      login,
+    });
   });
 
   it('renders correct snapshot', () => {
-    expect(shallow(<VerifyEmail />)).toMatchSnapshot();
+    expect(render(<VerifyEmail />).container).toMatchSnapshot();
+  });
+
+  it('calls login if user clicks on verified email button', () => {
+    expect(login).not.toHaveBeenCalled();
+    const wrapper = render(<VerifyEmail />);
+    fireEvent.click(wrapper.getByText("I've verified my email").closest('button'));
+
+    expect(login).toHaveBeenCalled();
   });
 });

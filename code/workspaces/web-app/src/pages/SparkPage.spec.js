@@ -1,16 +1,12 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import SparkPage, { getPythonMessage, getRMessage } from './SparkPage';
 
+jest.mock('../containers/clusters/ClustersContainer', () => props => (<div>ClustersContainer mock {JSON.stringify(props)}</div>));
+
 describe('SparkPage', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<SparkPage />)).toMatchSnapshot();
+    expect(render(<SparkPage />).container).toMatchSnapshot();
   });
 });
 

@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SignUpPage renders correct snapshot 1`] = `
-<div
-  className="makeStyles-page-1"
->
-  <SignUp />
+<div>
+  <div
+    class="makeStyles-page-1"
+  >
+    <div>
+      SignUp mock
+    </div>
+  </div>
 </div>
 `;

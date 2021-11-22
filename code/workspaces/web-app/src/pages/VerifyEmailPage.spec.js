@@ -1,15 +1,11 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import VerifyEmailPage from './VerifyEmailPage';
 
+jest.mock('../components/welcome/VerifyEmail', () => () => (<div>VerifyEmail mock</div>));
+
 describe('VerifyEmailPage', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<VerifyEmailPage />)).toMatchSnapshot();
+    expect(render(<VerifyEmailPage />).container).toMatchSnapshot();
   });
 });

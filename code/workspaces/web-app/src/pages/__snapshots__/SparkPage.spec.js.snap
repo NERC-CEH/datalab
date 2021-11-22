@@ -1,36 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SparkPage renders correct snapshot 1`] = `
-<WithStyles(Page)
-  className=""
-  title="Spark"
->
-  <WithStyles(ForwardRef(Typography))
-    variant="body1"
-  >
-    <ExternalLink
-      href="https://spark.apache.org/"
-    >
-      Apache Spark
-    </ExternalLink>
-     is an open-source cluster-computing framework.
-    <br />
-    DataLabs supports usage of Spark via Kubernetes which allows Spark executors to be deployed across the cluster.
-  </WithStyles(ForwardRef(Typography))>
+<div>
   <div
-    className="makeStyles-clusterList-1"
+    class="Page-pageTemplate-2"
   >
-    <ClustersContainer
-      clusterType="SPARK"
-      copySnippets={
-        Object {
-          "Python": [Function],
-          "R": [Function],
-        }
-      }
-    />
+    <h4
+      class="MuiTypography-root Page-title-4 MuiTypography-h4"
+    >
+      Spark
+    </h4>
+    <div
+      class="Page-contentArea-3"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        <a
+          href="https://spark.apache.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Apache Spark
+        </a>
+         is an open-source cluster-computing framework.
+        <br />
+        DataLabs supports usage of Spark via Kubernetes which allows Spark executors to be deployed across the cluster.
+      </p>
+      <div
+        class="makeStyles-clusterList-1"
+      >
+        <div>
+          ClustersContainer mock 
+          {"clusterType":"SPARK","copySnippets":{}}
+        </div>
+      </div>
+    </div>
+    <div>
+      <hr
+        class="MuiDivider-root Footer-divider-35"
+      />
+      <p
+        class="MuiTypography-root Footer-versionText-36 MuiTypography-body2"
+      >
+        Version: undefined
+      </p>
+    </div>
   </div>
-</WithStyles(Page)>
+</div>
 `;
 
 exports[`getPythonMessage returns the correct message 1`] = `

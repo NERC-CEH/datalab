@@ -1,5 +1,5 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import SignUp from './SignUp';
 import { getAuth } from '../../config/auth';
 
@@ -12,13 +12,7 @@ beforeEach(() => {
 });
 
 describe('SignUp', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<SignUp />)).toMatchSnapshot();
+    expect(render(<SignUp />).container).toMatchSnapshot();
   });
 });
