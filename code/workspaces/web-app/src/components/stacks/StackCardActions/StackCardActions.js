@@ -48,6 +48,8 @@ const getShareButton = (stack, shareStack, permission) => (newStatus, label, dis
   requiredPermission: permission,
   name: label,
   disabled,
+  tooltipText: `Access already set to ${newStatus}`,
+  disableTooltip: !disabled,
 });
 
 export const getSharedButtons = (stack, shareStack, permission) => {
