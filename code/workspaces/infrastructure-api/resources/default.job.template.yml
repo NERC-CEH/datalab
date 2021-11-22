@@ -6,6 +6,8 @@ metadata:
 spec:
   ttlSecondsAfterFinished: 0
   template:
+    securityContext:
+      runAsUser: 1000
     spec:
       containers:
       - name: {{ name }}
