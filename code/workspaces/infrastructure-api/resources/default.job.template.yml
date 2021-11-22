@@ -20,13 +20,17 @@ spec:
           - mountPath: {{{ mountPath }}}
             name: persistentfsvol
         {{/volumeMount}}
-      {{#kubectlCommand}}
-      - name: kubectl-job
-        image: bitnami/kubectl
+      {{#curlCommand}}
+      - name: curl-job
+        image: curlimages/curl
         imagePullPolicy: IfNotPresent
         command: ["sh"]
-        args: ["-c", "{{{ kubectlCommand }}}"]
-      {{/kubectlCommand}}
+        # Command in single quotes as there are double quotes in the command itself
+        args: ["-c", '{{{ curlCommand }}}']
+        env:
+        - name: TOKEN
+          value: "{{{ userToken }}}"
+      {{/curlCommand}}
       volumes:
         {{#volumeMount}}
         - name: persistentfsvol
@@ -34,4 +38,3 @@ spec:
             claimName: {{ volumeMount }}-claim
         {{/volumeMount}}
       restartPolicy: Never
-    

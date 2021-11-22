@@ -3,20 +3,21 @@ import nameGenerators from '../common/nameGenerators';
 
 const { jobName } = nameGenerators;
 
-export const createKubectlJob = ({ name, runCommand, kubectlCommand, volumeMount, mountPath }) => {
+export const createCurlJob = ({ name, runCommand, curlCommand, volumeMount, mountPath, userToken }) => {
   const job = jobName(name);
 
   const context = {
     name: job,
     runCommand,
-    kubectlCommand,
+    curlCommand,
     volumeMount,
     mountPath,
+    userToken,
   };
 
   return generateManifest(context, JobTemplates.DEFAULT_JOB);
 };
 
 export default {
-  createKubectlJob,
+  createCurlJob,
 };

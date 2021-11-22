@@ -1,6 +1,6 @@
 import { stackTypes } from 'common';
 import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
-import { handleSharedChange } from './shareStackManager';
+import { getCurlCommand, handleSharedChange } from './shareStackManager';
 import config from '../config/config';
 import secretManager from '../credentials/secretManager';
 import jobApi from '../kubernetes/jobApi';
@@ -30,6 +30,7 @@ const getExisting = () => ({
   visible: 'project',
   volumeMount,
 });
+const userToken = 'Bearer token';
 
 // Function to help 'expect' numbers of calls for certain functions (so we don't need to replicate this several times).
 const expectCalls = ({
@@ -58,7 +59,7 @@ describe('handleSharedChange', () => {
       ...getExisting(),
       shared: 'private',
     };
-    await handleSharedChange(getParams(), existing, 'project');
+    await handleSharedChange(getParams(), existing, 'project', userToken);
 
     expectCalls({});
   });
@@ -74,7 +75,7 @@ describe('handleSharedChange', () => {
       ...getExisting(),
       category: 'other',
     };
-    await handleSharedChange(getParams(), existing, 'public');
+    await handleSharedChange(getParams(), existing, 'public', userToken);
 
     expectCalls({});
   });
@@ -85,7 +86,7 @@ describe('handleSharedChange', () => {
       category: NOTEBOOK_CATEGORY,
       type: RSTUDIO,
     };
-    await handleSharedChange(getParams(), existing, 'private');
+    await handleSharedChange(getParams(), existing, 'private', userToken);
 
     expectCalls({});
   });
@@ -96,7 +97,7 @@ describe('handleSharedChange', () => {
       category: SITE_CATEGORY,
       type: RSHINY,
     };
-    await handleSharedChange(getParams(), existing, 'private');
+    await handleSharedChange(getParams(), existing, 'private', userToken);
 
     expectCalls({});
   });
@@ -115,7 +116,7 @@ describe('handleSharedChange', () => {
       },
     };
 
-    await handleSharedChange(getParams(), existing, 'public');
+    await handleSharedChange(getParams(), existing, 'public', userToken);
 
     expectCalls({ patchIngress: 1 });
     expect(ingressApi.patchIngress).toHaveBeenCalledWith('rshiny-stackname', projectKey, expectedPatch);
@@ -139,7 +140,7 @@ describe('handleSharedChange', () => {
       },
     };
 
-    await handleSharedChange(getParams(), existing, 'project');
+    await handleSharedChange(getParams(), existing, 'project', userToken);
 
     expectCalls({ patchIngress: 1 });
     expect(ingressApi.patchIngress).toHaveBeenCalledWith('rshiny-stackname', projectKey, expectedPatch);
@@ -173,7 +174,7 @@ describe('handleSharedChange', () => {
       },
     });
 
-    await handleSharedChange(getParams(), existing, 'private');
+    await handleSharedChange(getParams(), existing, 'private', userToken);
 
     expectCalls({ createJob: 1, createStackCredentialSecret: 1, getDeployment: 1 });
     expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, JUPYTERLAB, projectKey, { token: 'token' });
@@ -201,12 +202,46 @@ describe('handleSharedChange', () => {
       ...expectedCredentials,
     };
 
-    await handleSharedChange(getParams(), existing, 'private');
+    await handleSharedChange(getParams(), existing, 'private', userToken);
 
     expectCalls({ createStackCredentialSecret: 1, restartDeployment: 1, generateNewShiroIni: 1 });
     expect(zeppelin.generateNewShiroIni).toHaveBeenCalledWith(expectedCredentials);
     expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, ZEPPELIN, projectKey, expectedFullCredentials);
     expect(deploymentApi.restartDeployment).toHaveBeenCalledWith('zeppelin-stackname', projectKey);
+  });
+});
+
+describe('getCurlCommand', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('formats the request correctly', () => {
+    const mockConfig = {
+      apiPort: 8000,
+      deployedNamespace: 'test',
+      deployedInCluster: true,
+    };
+    jest.spyOn(config, 'get').mockReturnValueOnce(mockConfig);
+
+    // eslint-disable-next-line max-len
+    const expected = 'curl -X PUT infrastructure-api-service.test.svc.cluster.local:8000/stack/project/restart -H "Authorization: $TOKEN" -H "Content-Type: application/json" -d \'\'{"projectKey":"project","name":"stackname","type":"jupyterlab"}\'\'';
+
+    expect(getCurlCommand('project', 'stackname', 'jupyterlab')).toEqual(expected);
+  });
+
+  it('formats the request correctly for running locally', () => {
+    const mockConfig = {
+      apiPort: 8000,
+      deployedNamespace: 'test',
+      deployedInCluster: false,
+    };
+    jest.spyOn(config, 'get').mockReturnValueOnce(mockConfig);
+
+    // eslint-disable-next-line max-len
+    const expected = 'curl -X PUT host.docker.internal:8000/stack/project/restart -H "Authorization: $TOKEN" -H "Content-Type: application/json" -d \'\'{"projectKey":"project","name":"stackname","type":"jupyterlab"}\'\'';
+
+    expect(getCurlCommand('project', 'stackname', 'jupyterlab')).toEqual(expected);
   });
 });
 

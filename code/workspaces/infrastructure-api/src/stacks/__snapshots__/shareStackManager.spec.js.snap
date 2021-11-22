@@ -9,6 +9,8 @@ metadata:
 spec:
   ttlSecondsAfterFinished: 0
   template:
+    securityContext:
+      runAsUser: 1000
     spec:
       containers:
       - name: job-stackname
@@ -19,16 +21,19 @@ spec:
         volumeMounts:
           - mountPath: /mnt/persistentfs
             name: persistentfsvol
-      - name: kubectl-job
-        image: bitnami/kubectl
+      - name: curl-job
+        image: curlimages/curl
         imagePullPolicy: IfNotPresent
         command: [\\"sh\\"]
-        args: [\\"-c\\", \\"kubectl rollout restart deployment/jupyterlab-stackname\\"]
+        # Command in single quotes as there are double quotes in the command itself
+        args: [\\"-c\\", 'curl -X PUT host.docker.internal:undefined/stack/project/restart -H \\"Authorization: $TOKEN\\" -H \\"Content-Type: application/json\\" -d ''{\\"projectKey\\":\\"project\\",\\"name\\":\\"stackname\\",\\"type\\":\\"jupyterlab\\"}''']
+        env:
+        - name: TOKEN
+          value: \\"Bearer token\\"
       volumes:
         - name: persistentfsvol
           persistentVolumeClaim:
             claimName: volume-claim
       restartPolicy: Never
-    
 "
 `;
