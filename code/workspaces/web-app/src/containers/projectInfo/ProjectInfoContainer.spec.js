@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import ProjectInfoContainer, { PureProjectInfoContainer, CollaborationLink } from './ProjectInfoContainer';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
+import projectSettingsActions from '../../actions/projectSettingsActions';
 
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/projectUsersHooks');
+jest.mock('../../actions/projectSettingsActions');
 jest.mock('react-redux');
 
 const testProj = {
@@ -24,11 +26,24 @@ beforeEach(() => {
   useCurrentProject.mockReturnValue(currentProject);
   useProjectUsers.mockReturnValue(projectUsers);
   useDispatch.mockReturnValue(dispatchMock);
+  projectSettingsActions.getProjectUserPermissions.mockReturnValue({});
 });
 
 describe('ProjectInfoContainer', () => {
   it('renders correctly passing correct props to children', () => {
-    expect(shallow(<ProjectInfoContainer/>)).toMatchSnapshot();
+    expect(render(<ProjectInfoContainer/>).container).toMatchSnapshot();
+  });
+  it('renders correctly when there are multiple users', () => {
+    useProjectUsers.mockReturnValueOnce({
+      fetching: false,
+      value: [
+        { userId: 'user1', name: 'user1@test', role: 'user' },
+        { userId: 'user2', name: 'user2@test', role: 'viewer' },
+        { userId: 'user3', name: 'user3@test', role: 'user' },
+        { userId: 'user4', name: 'user4@test', role: 'admin' },
+      ],
+    });
+    expect(render(<ProjectInfoContainer/>).container).toMatchSnapshot();
   });
 });
 
@@ -36,7 +51,7 @@ describe('PureProjectInfoContainer', () => {
   describe('renders correctly to match snapshot', () => {
     it('when there is a collaboration link', () => {
       expect(
-        shallow(<PureProjectInfoContainer currentProject={currentProject} />),
+        render(<PureProjectInfoContainer currentProject={currentProject} />).container,
       ).toMatchSnapshot();
     });
 
@@ -49,7 +64,7 @@ describe('PureProjectInfoContainer', () => {
         },
       };
       expect(
-        shallow(<PureProjectInfoContainer currentProject={project} />),
+        render(<PureProjectInfoContainer currentProject={project} />).container,
       ).toMatchSnapshot();
     });
   });
@@ -59,13 +74,13 @@ describe('CollaborationLink', () => {
   describe('renders correctly to match snapshot', () => {
     it('when there is a collaboration link', () => {
       expect(
-        shallow(<CollaborationLink link={testProj.collaborationLink} />),
+        render(<CollaborationLink link={testProj.collaborationLink} />).container,
       ).toMatchSnapshot();
     });
 
     it('when there is not a collaboration link', () => {
       expect(
-        shallow(<CollaborationLink link={undefined} />),
+        render(<CollaborationLink link={undefined} />).container,
       ).toMatchSnapshot();
     });
   });

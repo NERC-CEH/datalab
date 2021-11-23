@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 import { reset } from 'redux-form';
 import ProjectClustersContainer, { confirmScaleCluster, getDialogProps } from './ProjectClustersContainer';
@@ -11,10 +11,13 @@ import * as mockClustersHooks from '../../hooks/clustersHooks';
 import * as mockCluster from '../../config/clusters';
 import mockModalDialogActions from '../../actions/modalDialogActions';
 import mockClusterActions from '../../actions/clusterActions';
+import mockDataStorageActions from '../../actions/dataStorageActions';
+import mockAssetRepoActions from '../../actions/assetRepoActions';
 
 jest.mock('redux-form', () => ({ reset: jest.fn().mockName('reset') }));
 jest.mock('react-redux');
 jest.mock('../../components/common/notify', () => ({ success: jest.fn(), error: jest.fn() }));
+jest.mock('../../components/stacks/StackCards', () => props => (<>StackCards {JSON.stringify(props, null, 2)}</>));
 jest.mock('../../hooks/authHooks');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/dataStorageHooks');
@@ -22,11 +25,14 @@ jest.mock('../../hooks/clustersHooks');
 jest.mock('../../config/clusters');
 jest.mock('../../actions/modalDialogActions');
 jest.mock('../../actions/clusterActions');
+jest.mock('../../actions/assetRepoActions');
 
 const mockLoadClustersAction = jest.fn();
 const mockCreateClusterAction = jest.fn();
 const mockCloseModalDialogAction = jest.fn();
 const mockOpenModalDialogAction = jest.fn();
+const mockLoadDataStorage = jest.fn();
+const mockLoadVisibleAssets = jest.fn();
 
 const setMocks = () => {
   mockAuthHooks.useCurrentUserId.mockReturnValue({ value: 'test-user' });
@@ -59,6 +65,8 @@ const setMocks = () => {
   mockClusterActions.createCluster = mockCreateClusterAction;
   mockModalDialogActions.closeModalDialog = mockCloseModalDialogAction;
   mockModalDialogActions.openModalDialog = mockOpenModalDialogAction;
+  mockDataStorageActions.loadDataStorage = mockLoadDataStorage;
+  mockAssetRepoActions.loadVisibleAssets = mockLoadVisibleAssets;
 };
 
 const copyMock = {
@@ -76,13 +84,13 @@ describe('ProjectClustersContainer', () => {
   });
 
   it('renders correct snapshot for all clusters', () => {
-    const getShallowRender = () => shallow(<ProjectClustersContainer projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
-    expect(getShallowRender()).toMatchSnapshot();
+    const wrapper = render(<ProjectClustersContainer projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('renders correct snapshot for Dask clusters', () => {
-    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
-    expect(getShallowRender()).toMatchSnapshot();
+    const wrapper = render(<ProjectClustersContainer clusterType="DASK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('renders correct snapshot for Spark clusters', () => {
@@ -99,8 +107,8 @@ describe('ProjectClustersContainer', () => {
       ],
     }));
 
-    const getShallowRender = () => shallow(<ProjectClustersContainer clusterType="SPARK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
-    expect(getShallowRender()).toMatchSnapshot();
+    const wrapper = render(<ProjectClustersContainer clusterType="SPARK" projectKey="project-key" userPermissions={[]} modifyData copySnippets={copyMock}/>);
+    expect(wrapper.container).toMatchSnapshot();
   });
 });
 
