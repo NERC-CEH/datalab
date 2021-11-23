@@ -1,8 +1,9 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import UserMenu from './UserMenu';
 import { getAuth } from '../../config/auth';
 
+jest.mock('@material-ui/core/Avatar', () => props => (<div>Avatar mock {JSON.stringify(props)}</div>));
 jest.mock('../../config/auth');
 const logout = jest.fn();
 const closePopoverMock = jest.fn();
@@ -27,20 +28,14 @@ describe('UserMenu', () => {
     jest.clearAllMocks();
   });
 
-  function shallowRender(props) {
-    const shallow = createShallow({ dive: true });
-
-    return shallow(<UserMenu {...props} />);
-  }
-
   it('renders correct snapshot', () => {
-    expect(shallowRender(expectedProps)).toMatchSnapshot();
+    expect(render(<UserMenu {...expectedProps} />).container).toMatchSnapshot();
   });
 
   it('wraps auth.logout with closePopover wrapper', () => {
     expect(closePopoverMock).not.toHaveBeenCalled();
 
-    shallowRender(expectedProps);
+    render(<UserMenu {...expectedProps} />);
 
     expect(closePopoverMock).toHaveBeenCalledWith(logout);
   });

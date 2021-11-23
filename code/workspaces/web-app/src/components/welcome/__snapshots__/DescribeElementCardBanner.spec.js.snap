@@ -1,36 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardBanner renders correct snapshot 1`] = `
-<div
-  className="DescribeElementCardBanner-contentContainer-2"
->
+<div>
   <div
-    className="DescribeElementCardBanner-iconContainer-5"
+    class="DescribeElementCardBanner-contentContainer-2"
   >
-    <WithStyles(ForwardRef(Icon))
-      className="DescribeElementCardBanner-icon-4"
+    <div
+      class="DescribeElementCardBanner-iconContainer-5"
     >
-      people
-    </WithStyles(ForwardRef(Icon))>
+      <span
+        aria-hidden="true"
+        class="material-icons MuiIcon-root DescribeElementCardBanner-icon-4"
+      >
+        people
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root DescribeElementCardBanner-cardTitle-1 MuiTypography-h5"
+    >
+      expectedTitle
+    </h5>
   </div>
-  <WithStyles(ForwardRef(Typography))
-    className="DescribeElementCardBanner-cardTitle-1"
-    variant="h5"
-  >
-    expectedTitle
-  </WithStyles(ForwardRef(Typography))>
 </div>
 `;
 
 exports[`DescribeElementCardBanner renders correct snapshot with switches 1`] = `
-<div
-  className="DescribeElementCardBanner-contentContainer-2"
->
-  <WithStyles(ForwardRef(Typography))
-    className="DescribeElementCardBanner-cardTitle-1"
-    variant="h5"
+<div>
+  <div
+    class="DescribeElementCardBanner-contentContainer-46"
   >
-    expectedTitle
-  </WithStyles(ForwardRef(Typography))>
+    <h5
+      class="MuiTypography-root DescribeElementCardBanner-cardTitle-45 MuiTypography-h5"
+    >
+      expectedTitle
+    </h5>
+  </div>
 </div>
 `;

@@ -1,83 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElement renders correct snapshot 1`] = `
-<WithStyles(DescribeElementSegment)>
-  <div
-    className="DescribeElement-contentContainer-2"
-  >
-    <WithStyles(ForwardRef(Typography))
-      className="DescribeElement-title-1"
-      variant="h4"
-    >
-      cardTitle
-    </WithStyles(ForwardRef(Typography))>
+<div>
+  <div>
     <div
-      className="DescribeElement-cardContainer-3"
+      class="DescribeElementSegment-inner-6"
     >
-      <WithStyles(DescribeElementCard)
-        content="expectedContent"
-        icon="people"
-        key="card-0"
-        title="expectedTitle"
-      />
-      <WithStyles(DescribeElementCard)
-        content="moreContent"
-        key="card-1"
-        links={
-          Array [
-            Object {
-              "displayName": "displayName",
-              "href": "address",
-            },
-          ]
-        }
-        title="anotherTitle"
-      />
+      <div
+        class="DescribeElement-contentContainer-2"
+      >
+        <h4
+          class="MuiTypography-root DescribeElement-title-1 MuiTypography-h4"
+        >
+          cardTitle
+        </h4>
+        <div
+          class="DescribeElement-cardContainer-3"
+        >
+          <div>
+            DescribeElementCard mock 
+            {"icon":"people","title":"expectedTitle","content":"expectedContent"}
+          </div>
+          <div>
+            DescribeElementCard mock 
+            {"title":"anotherTitle","content":"moreContent","links":[{"displayName":"displayName","href":"address"}]}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</WithStyles(DescribeElementSegment)>
+</div>
 `;
 
 exports[`DescribeElement renders correct snapshot with switches 1`] = `
-<WithStyles(DescribeElementSegment)
-  invert={true}
->
+<div>
   <div
-    className="DescribeElement-contentContainer-2"
+    class="DescribeElementSegment-outerDark-40"
   >
-    <WithStyles(ForwardRef(Typography))
-      className="DescribeElement-title-1"
-      variant="h4"
-    >
-      cardTitle
-    </WithStyles(ForwardRef(Typography))>
     <div
-      className="DescribeElement-cardContainer-3"
+      class="DescribeElementSegment-inner-42"
     >
-      <WithStyles(DescribeElementCard)
-        content="expectedContent"
-        icon="people"
-        key="card-0"
-        media={true}
-        quote={true}
-        title="expectedTitle"
-      />
-      <WithStyles(DescribeElementCard)
-        content="moreContent"
-        key="card-1"
-        links={
-          Array [
-            Object {
-              "displayName": "displayName",
-              "href": "address",
-            },
-          ]
-        }
-        media={true}
-        quote={true}
-        title="anotherTitle"
-      />
+      <div
+        class="DescribeElement-contentContainer-38"
+      >
+        <h4
+          class="MuiTypography-root DescribeElement-title-37 MuiTypography-h4"
+        >
+          cardTitle
+        </h4>
+        <div
+          class="DescribeElement-cardContainer-39"
+        >
+          <div>
+            DescribeElementCard mock 
+            {"icon":"people","title":"expectedTitle","content":"expectedContent","quote":true,"media":true}
+          </div>
+          <div>
+            DescribeElementCard mock 
+            {"title":"anotherTitle","content":"moreContent","links":[{"displayName":"displayName","href":"address"}],"quote":true,"media":true}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</WithStyles(DescribeElementSegment)>
+</div>
 `;

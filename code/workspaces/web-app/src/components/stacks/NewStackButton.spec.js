@@ -1,11 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import NewStackButton from './NewStackButton';
-
-function shallowRender(props) {
-  const shallow = createShallow();
-  return shallow(<NewStackButton {...props} />);
-}
 
 describe('New Stack Button', () => {
   const generateProps = () => ({
@@ -18,7 +13,7 @@ describe('New Stack Button', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    const output = render(<NewStackButton {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -28,7 +23,7 @@ describe('New Stack Button', () => {
     const props = generateProps();
     props.labelPrefix = 'Request';
 
-    const output = shallowRender(props);
+    const output = render(<NewStackButton {...props} />).container;
 
     expect(output).toMatchSnapshot();
   });

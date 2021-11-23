@@ -1,54 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCard renders correct snapshot 1`] = `
-<div
-  className="DescribeElementCard-shadedCard-2"
->
+<div>
   <div
-    className="DescribeElementCard-cardContentWrapper-3"
+    class="DescribeElementCard-shadedCard-2"
   >
-    <WithStyles(DescribeElementCardBanner)
-      icon="people"
-      key="card-banner"
-      title="expectedTitle"
-    />
-    <WithStyles(DescribeElementCardBody)
-      content="expectedContent"
-      key="card-body"
-    />
+    <div
+      class="DescribeElementCard-cardContentWrapper-3"
+    >
+      <div>
+        DescribeElementCardBanner mock 
+        {"icon":"people","title":"expectedTitle"}
+      </div>
+      <div>
+        DescribeElementCardBody mock 
+        {"content":"expectedContent"}
+      </div>
+    </div>
   </div>
 </div>
 `;
 
 exports[`DescribeElementCard renders correct snapshot with switches 1`] = `
-<div
-  className="DescribeElementCard-card-1"
->
+<div>
   <div
-    className="DescribeElementCard-quoteCardContentWrapper-4"
+    class="DescribeElementCard-card-5"
   >
-    <WithStyles(DescribeElementCardBody)
-      content="moreContent"
-      key="card-body"
-      media={true}
-      quote={true}
-    />
-    <WithStyles(DescribeElementCardBanner)
-      key="card-banner"
-      quote={true}
-      title="expectedTitle"
-    />
-    <DescribeElementCardLinks
-      key="card-links"
-      links={
-        Array [
-          Object {
-            "displayName": "displayName",
-            "href": "address",
-          },
-        ]
-      }
-    />
+    <div
+      class="DescribeElementCard-quoteCardContentWrapper-8"
+    >
+      <div>
+        DescribeElementCardBody mock 
+        {"content":"moreContent","media":true,"quote":true}
+      </div>
+      <div>
+        DescribeElementCardBanner mock 
+        {"title":"expectedTitle","quote":true}
+      </div>
+      <div>
+        DescribeElementCardLinks mock 
+        {"links":[{"displayName":"displayName","href":"address"}]}
+      </div>
+    </div>
   </div>
 </div>
 `;

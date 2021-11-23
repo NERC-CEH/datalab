@@ -1,66 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Notebook dialog creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  class="CreateNotebookDialog-dialogDiv-1"
 >
   <div
-    className="CreateNotebookDialog-dialogDiv-1"
+    class="MuiDialogTitle-root"
   >
-    <WithStyles(ForwardRef(DialogTitle))>
+    <h2
+      class="MuiTypography-root MuiTypography-h6"
+    >
       Title
-    </WithStyles(ForwardRef(DialogTitle))>
-    <WithStyles(ForwardRef(DialogContent))>
-      <ReduxForm
-        asyncBlurFields={
-          Array [
-            "name",
-            "type",
-          ]
-        }
-        asyncValidate={[Function]}
-        cancel={[MockFunction]}
-        dataStorageOptions={
-          Array [
-            Object {
-              "value": "value",
-            },
-            Object {
-              "value": "another value",
-            },
-          ]
-        }
-        destroyOnUnmount={false}
-        enableReinitialize={false}
-        forceUnregisterOnUnmount={false}
-        form="createNotebook"
-        getFormState={[Function]}
-        keepDirtyOnReinitialize={false}
-        onChange={[Function]}
-        onSubmit={[MockFunction]}
-        persistentSubmitErrors={false}
-        pure={true}
-        shouldAsyncValidate={[Function]}
-        shouldError={[Function]}
-        shouldValidate={[Function]}
-        shouldWarn={[Function]}
-        submitAsSideEffect={false}
-        touchOnBlur={true}
-        touchOnChange={false}
-        typeOptions={
-          Array [
-            Object {
-              "text": "JupyterLab",
-              "value": "jupyterLab",
-            },
-          ]
-        }
-        updateUnregisteredFields={false}
-        validate={[Function]}
-        versionOptions={Array []}
-      />
-    </WithStyles(ForwardRef(DialogContent))>
+    </h2>
   </div>
-</WithStyles(ForwardRef(Dialog))>
+  <div
+    class="MuiDialogContent-root"
+  >
+    <div>
+      CreateNotebookForm mock
+      {"dataStorageOptions":[{"value":"value"},{"value":"another value"}],"typeOptions":[{"value":"jupyterLab","text":"JupyterLab"}],"versionOptions":[]}
+      onSubmit result: submit called
+      onCancel result: onCancel called
+    </div>
+  </div>
+</div>
 `;

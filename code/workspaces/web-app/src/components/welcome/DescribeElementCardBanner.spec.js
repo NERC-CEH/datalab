@@ -1,12 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import DescribeElementCardBanner from './DescribeElementCardBanner';
-
-function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
-  return shallow(<DescribeElementCardBanner {...props} />);
-}
 
 describe('DescribeElementCardBanner', () => {
   it('renders correct snapshot', () => {
@@ -15,7 +9,7 @@ describe('DescribeElementCardBanner', () => {
       icon: 'people',
     };
 
-    expect(shallowRender(props)).toMatchSnapshot();
+    expect(render(<DescribeElementCardBanner {...props} />).container).toMatchSnapshot();
   });
 
   it('renders correct snapshot with switches', () => {
@@ -23,6 +17,6 @@ describe('DescribeElementCardBanner', () => {
       title: 'expectedTitle',
     };
 
-    expect(shallowRender(props)).toMatchSnapshot();
+    expect(render(<DescribeElementCardBanner {...props} />).container).toMatchSnapshot();
   });
 });

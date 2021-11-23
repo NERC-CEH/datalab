@@ -1,22 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardBody renders correct snapshot 1`] = `
-<div
-  className="DescribeElementCardBody-cardContent-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="DescribeElementCardBody-bodyText-2"
-    variant="body2"
+<div>
+  <div
+    class="DescribeElementCardBody-cardContent-1"
   >
-    expectedContent
-  </WithStyles(ForwardRef(Typography))>
+    <p
+      class="MuiTypography-root DescribeElementCardBody-bodyText-2 MuiTypography-body2"
+    >
+      expectedContent
+    </p>
+  </div>
 </div>
 `;
 
 exports[`DescribeElementCardBody renders correct snapshot with switches 1`] = `
-<WithStyles(ForwardRef(CardMedia))
-  className="DescribeElementCardBody-cardImage-4"
-  image="moreContent"
-  key="card-body"
-/>
+<div>
+  <div
+    class="MuiCardMedia-root DescribeElementCardBody-cardImage-38"
+    style="background-image: url(moreContent);"
+  />
+</div>
 `;

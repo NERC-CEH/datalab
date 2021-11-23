@@ -1,12 +1,8 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import DescribeElement from './DescribeElement';
 
-function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
-  return shallow(<DescribeElement {...props} />);
-}
+jest.mock('./DescribeElementCard', () => props => (<div>DescribeElementCard mock {JSON.stringify(props)}</div>));
 
 describe('DescribeElement', () => {
   const links = [
@@ -24,7 +20,7 @@ describe('DescribeElement', () => {
       descriptions: content,
     };
 
-    expect(shallowRender(props)).toMatchSnapshot();
+    expect(render(<DescribeElement {...props} />).container).toMatchSnapshot();
   });
 
   it('renders correct snapshot with switches', () => {
@@ -36,6 +32,6 @@ describe('DescribeElement', () => {
       media: true,
     };
 
-    expect(shallowRender(props)).toMatchSnapshot();
+    expect(render(<DescribeElement {...props} />).container).toMatchSnapshot();
   });
 });

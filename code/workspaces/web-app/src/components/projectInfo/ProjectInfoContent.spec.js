@@ -1,5 +1,5 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import ProjectInfoContent from './ProjectInfoContent';
 
 describe('ProjectInfoContent', () => {
@@ -9,14 +9,8 @@ describe('ProjectInfoContent', () => {
     description: 'This is the second project.',
   };
 
-  function shallowRender() {
-    const shallow = createShallow();
-    const props = { projectInfo };
-
-    return shallow(<ProjectInfoContent {...props} />);
-  }
-
   it('correctly renders correct snapshot', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    const props = { projectInfo };
+    expect(render(<ProjectInfoContent {...props} />).container).toMatchSnapshot();
   });
 });

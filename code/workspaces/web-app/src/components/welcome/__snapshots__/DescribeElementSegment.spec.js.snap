@@ -2,26 +2,30 @@
 
 exports[`DescribeElementSegment renders correct snapshot 1`] = `
 <div>
-  <div
-    className="DescribeElementSegment-inner-3"
-  >
-    <span>
-      'expectedChild'
-    </span>
+  <div>
+    <div
+      class="DescribeElementSegment-inner-3"
+    >
+      <span>
+        'expectedChild'
+      </span>
+    </div>
   </div>
 </div>
 `;
 
 exports[`DescribeElementSegment renders correct snapshot with invert switch 1`] = `
-<div
-  className="DescribeElementSegment-outerDark-1"
->
+<div>
   <div
-    className="DescribeElementSegment-inner-3"
+    class="DescribeElementSegment-outerDark-4"
   >
-    <span>
-      'expectedChild'
-    </span>
+    <div
+      class="DescribeElementSegment-inner-6"
+    >
+      <span>
+        'expectedChild'
+      </span>
+    </div>
   </div>
 </div>
 `;

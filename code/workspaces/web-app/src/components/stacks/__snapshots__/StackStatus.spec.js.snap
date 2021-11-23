@@ -1,81 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackStatus creates correct snapshot for status types 1`] = `
-<WithStyles(ForwardRef(Typography))
-  align="center"
-  className="StackStatus-stackStatus-1"
-  style={
-    Object {
-      "backgroundColor": "hsl(190, 55%, 85%)",
-      "color": "hsl(190, 90%, 15%)",
-    }
-  }
-  type="caption"
->
-  Requested
-</WithStyles(ForwardRef(Typography))>
+<div>
+  <p
+    class="MuiTypography-root StackStatus-stackStatus-1 MuiTypography-body1 MuiTypography-alignCenter"
+    style="background-color: rgb(196, 196, 196); color: rgb(4, 4, 4);"
+    type="caption"
+  >
+    Requested
+  </p>
+</div>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 2`] = `
-<WithStyles(ForwardRef(Typography))
-  align="center"
-  className="StackStatus-stackStatus-1"
-  style={
-    Object {
-      "backgroundColor": "hsl(65, 70%, 80%)",
-      "color": "hsl(65, 100%, 12%)",
-    }
-  }
-  type="caption"
->
-  Creating
-</WithStyles(ForwardRef(Typography))>
+<div>
+  <p
+    class="MuiTypography-root StackStatus-stackStatus-1 MuiTypography-body1 MuiTypography-alignCenter"
+    style="background-color: rgb(168, 168, 168); color: rgb(0, 0, 0);"
+    type="caption"
+  >
+    Creating
+  </p>
+</div>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 3`] = `
-<WithStyles(ForwardRef(Typography))
-  align="center"
-  className="StackStatus-stackStatus-1"
-  style={
-    Object {
-      "backgroundColor": "hsl(120, 55%, 80%)",
-      "color": "hsl(120, 90%, 12%)",
-    }
-  }
-  type="caption"
->
-  Ready
-</WithStyles(ForwardRef(Typography))>
+<div>
+  <p
+    class="MuiTypography-root StackStatus-stackStatus-1 MuiTypography-body1 MuiTypography-alignCenter"
+    style="background-color: rgb(176, 176, 176); color: rgb(3, 3, 3);"
+    type="caption"
+  >
+    Ready
+  </p>
+</div>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 4`] = `
-<WithStyles(ForwardRef(Typography))
-  align="center"
-  className="StackStatus-stackStatus-1"
-  style={
-    Object {
-      "backgroundColor": "hsl(190, 55%, 85%)",
-      "color": "hsl(190, 90%, 15%)",
-    }
-  }
-  type="caption"
->
-  Suspended
-</WithStyles(ForwardRef(Typography))>
+<div>
+  <p
+    class="MuiTypography-root StackStatus-stackStatus-1 MuiTypography-body1 MuiTypography-alignCenter"
+    style="background-color: rgb(196, 196, 196); color: rgb(4, 4, 4);"
+    type="caption"
+  >
+    Suspended
+  </p>
+</div>
 `;
 
 exports[`StackStatus creates correct snapshot for status types 5`] = `
-<WithStyles(ForwardRef(Typography))
-  align="center"
-  className="StackStatus-stackStatus-1"
-  style={
-    Object {
-      "backgroundColor": "hsl(355, 65%, 90%)",
-      "color": "hsl(355, 100%, 22%)",
-    }
-  }
-  type="caption"
->
-  Unavailable
-</WithStyles(ForwardRef(Typography))>
+<div>
+  <p
+    class="MuiTypography-root StackStatus-stackStatus-1 MuiTypography-body1 MuiTypography-alignCenter"
+    style="background-color: rgb(213, 213, 213); color: rgb(0, 0, 0);"
+    type="caption"
+  >
+    Unavailable
+  </p>
+</div>
 `;

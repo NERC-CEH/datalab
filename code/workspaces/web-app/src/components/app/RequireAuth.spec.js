@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
+import { Router } from 'react-router';
+import { createMemoryHistory } from 'history';
 import { getAuth } from '../../config/auth';
 import { useCurrentUserPermissions, useCurrentUserTokens } from '../../hooks/authHooks';
 import RequireAuth, { effectFn } from './RequireAuth';
@@ -29,13 +31,9 @@ beforeEach(() => {
 });
 
 describe('RequireAuth', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   const shallowRender = (props = {}) => {
+    const history = createMemoryHistory();
+    history.push('/path');
     const defaultProps = {
       PrivateComponent: componentProps => <div {...componentProps}>Private Component Mock</div>,
       PublicComponent: componentProps => <div {...componentProps}>Public Component Mock</div>,
@@ -44,7 +42,11 @@ describe('RequireAuth', () => {
       strict: true,
     };
 
-    return shallow(<RequireAuth {...{ ...defaultProps, ...props }} />);
+    return render(
+      <Router history={history}>
+        <RequireAuth {...{ ...defaultProps, ...props }} />
+      </Router>,
+    ).container;
   };
 
   it('renders passing correct props to returned Route', () => {
@@ -54,23 +56,22 @@ describe('RequireAuth', () => {
   describe('passes function to returned Route that renders', () => {
     it('CircularProgress when permissions fetching', () => {
       useCurrentUserPermissions.mockReturnValueOnce({ fetching: true });
-      const render = shallowRender();
-      expect(render).toMatchSnapshot();
+      expect(shallowRender()).toMatchSnapshot();
     });
 
     it('PrivateComponent when user has tokens', () => {
-      const render = shallowRender({
+      const container = shallowRender({
         PrivateComponent: props => <span {...props}>PrivateComponent</span>,
       });
-      expect(render).toMatchSnapshot();
+      expect(container).toMatchSnapshot();
     });
 
     it('PublicComponent when user has no tokens', () => {
       useCurrentUserTokens.mockReturnValueOnce({});
-      const render = shallowRender({
+      const container = shallowRender({
         PublicComponent: props => <span {...props}>PublicComponent</span>,
       });
-      expect(render).toMatchSnapshot();
+      expect(container).toMatchSnapshot();
     });
   });
 });

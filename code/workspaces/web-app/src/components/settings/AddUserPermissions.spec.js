@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createShallow } from '@material-ui/core/test-utils';
-import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import { render, fireEvent } from '@testing-library/react';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserId } from '../../hooks/authHooks';
 import useCurrentUserSystemAdmin from '../../hooks/useCurrentUserSystemAdmin';
@@ -18,6 +17,9 @@ jest.mock('../../hooks/usersHooks');
 jest.mock('../../hooks/authHooks');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/useCurrentUserSystemAdmin');
+
+jest.mock('../common/input/UserSelect', () => props => (<div>UserSelect mock {JSON.stringify(props)}</div>));
+jest.mock('../../api/listUsersService');
 
 const permissionLevels = ['Admin', 'User', 'Viewer'];
 const userOne = { name: 'Test User One', userId: 'test-user-one' };
@@ -38,11 +40,7 @@ const classes = {
 };
 
 describe('AddUserPermissions', () => {
-  let shallow;
-
   beforeEach(() => {
-    shallow = createShallow({ dive: true });
-
     const dispatchMock = jest.fn().mockName('dispatch');
     useDispatch.mockReturnValue(dispatchMock);
 
@@ -52,20 +50,14 @@ describe('AddUserPermissions', () => {
   });
 
   it('renders pure component with correct props', () => {
-    expect(shallow(<AddUserPermission />)).toMatchSnapshot();
+    expect(render(<AddUserPermission />).container).toMatchSnapshot();
   });
 });
 
 describe('PureAddUserPermission', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders to match snapshot', () => {
     expect(
-      shallow(
+      render(
         <PureAddUserPermission
           projectKey="projectKey"
           permissionLevels={permissionLevels}
@@ -76,42 +68,30 @@ describe('PureAddUserPermission', () => {
           dispatch={jest.fn().mockName('dispatch')}
           classes={classes}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 });
 
 describe('PermissionsSelector', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders to match snapshot', () => {
     expect(
-      shallow(
+      render(
         <PermissionsSelector
           permissionLevels={permissionLevels}
           selectedPermissions={'Viewer'}
           setSelectedPermissions={jest.fn()}
           classes={classes}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 });
 
 describe('AddUserButton', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities', () => {
     expect(
-      shallow(
+      render(
         <AddUserButton
           userInformation={initialUsers.value}
           selectedUserName={'not a user name'}
@@ -120,7 +100,7 @@ describe('AddUserButton', () => {
           onClickFn={jest.fn()}
           classes={classes}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 
@@ -128,7 +108,7 @@ describe('AddUserButton', () => {
     it('renders as not disabled when the current user is system admin', () => {
       const currentUser = userOne;
       expect(
-        shallow(
+        render(
           <AddUserButton
             userInformation={initialUsers.value}
             selectedUser={currentUser}
@@ -139,14 +119,14 @@ describe('AddUserButton', () => {
             onClickFn={jest.fn()}
             classes={classes}
           />,
-        ),
+        ).container,
       ).toMatchSnapshot();
     });
 
     it('renders as disabled with explanatory tooltip when the current user is not system admin', () => {
       const currentUser = userOne;
       expect(
-        shallow(
+        render(
           <AddUserButton
             userInformation={initialUsers.value}
             selectedUser={currentUser}
@@ -157,7 +137,7 @@ describe('AddUserButton', () => {
             onClickFn={jest.fn()}
             classes={classes}
           />,
-        ),
+        ).container,
       ).toMatchSnapshot();
     });
   });
@@ -165,7 +145,7 @@ describe('AddUserButton', () => {
   describe('when the selected user is not the current user', () => {
     it('renders as not disabled when the selected user name is in the list of possibilities', () => {
       expect(
-        shallow(
+        render(
           <AddUserButton
             userInformation={initialUsers.value}
             selectedUser={userOne}
@@ -174,7 +154,7 @@ describe('AddUserButton', () => {
             onClickFn={jest.fn()}
             classes={classes}
           />,
-        ),
+        ).container,
       ).toMatchSnapshot();
     });
   });
@@ -187,7 +167,7 @@ describe('AddUserButton', () => {
     const onClickFnMock = jest.fn();
     const dispatch = jest.fn();
 
-    const render = shallow(
+    const wrapper = render(
       <AddUserButton
         userInformation={userInformation}
         selectedUser={selectedUser}
@@ -198,7 +178,8 @@ describe('AddUserButton', () => {
         classes={classes}
       />,
     );
-    render.find(PrimaryActionButton).simulate('click');
+    fireEvent.click(wrapper.getByText('Add'));
+
     expect(onClickFnMock).toHaveBeenCalledTimes(1);
     expect(onClickFnMock)
       .toHaveBeenCalledWith(projectKey, selectedUser, selectedPermissions, dispatch);

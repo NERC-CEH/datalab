@@ -1,19 +1,13 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import DescribeElementSegment from './DescribeElementSegment';
 
 describe('DescribeElementSegment', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow({ dive: true });
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<DescribeElementSegment>{<span>'expectedChild'</span>}</DescribeElementSegment>)).toMatchSnapshot();
+    expect(render(<DescribeElementSegment>{<span>'expectedChild'</span>}</DescribeElementSegment>).container).toMatchSnapshot();
   });
 
   it('renders correct snapshot with invert switch', () => {
-    expect(shallow(<DescribeElementSegment invert>{<span>'expectedChild'</span>}</DescribeElementSegment>)).toMatchSnapshot();
+    expect(render(<DescribeElementSegment invert>{<span>'expectedChild'</span>}</DescribeElementSegment>).container).toMatchSnapshot();
   });
 });
