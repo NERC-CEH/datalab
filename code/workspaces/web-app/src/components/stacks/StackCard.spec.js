@@ -1,16 +1,13 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import StackCard from './StackCard';
 import { storageDescription, storageDisplayValue } from '../../config/storage';
 
 jest.mock('../../hooks/usersHooks');
 jest.mock('../../config/storage');
 
-function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
-  return shallow(<StackCard {...props} />);
-}
+jest.mock('./StackCardActions/StackCardActions', () => props => (<div>StackCardActions mock {JSON.stringify(props)} </div>));
+jest.mock('./StackStatus', () => props => (<div>StackStatus mock {JSON.stringify(props)}</div>));
 
 beforeEach(() => {
   storageDescription.mockReturnValue('Network File System (NFS) volume to store data for Notebooks and Sites.');
@@ -49,7 +46,7 @@ describe('StackCard', () => {
     const props = generateProps('jupyter');
 
     // Act
-    const output = shallowRender(props);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -60,7 +57,7 @@ describe('StackCard', () => {
     const props = generateProps('zeppelin');
 
     // Act
-    const output = shallowRender(props);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -71,7 +68,7 @@ describe('StackCard', () => {
     const props = { ...generateProps('GLUSTERFS'), typeName: 'Data Store' };
 
     // Act
-    const output = shallowRender(props);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -82,7 +79,7 @@ describe('StackCard', () => {
     const props = generateProps('jupyter', 'ready');
 
     // Act
-    const output = shallowRender(props);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();

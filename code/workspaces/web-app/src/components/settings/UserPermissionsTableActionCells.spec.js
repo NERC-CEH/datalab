@@ -1,12 +1,9 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { PERMISSION_VALUES, PERMISSIONS } from '../../constants/permissions';
 import { CheckboxCell, PermissionsCheckbox, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
 
-jest.mock('@material-ui/core/Checkbox', () => props => (<div>CheckBox mock {JSON.stringify(props)}</div>));
+jest.mock('@material-ui/core/Checkbox', () => props => (<div onClick={props.onClick}>CheckBox mock {JSON.stringify(props)}</div>));
 
 describe('CheckboxCell', () => {
   const classes = {
@@ -41,16 +38,10 @@ describe('CheckboxCell', () => {
 });
 
 describe('PermissionsCheckbox', () => {
-  let shallow;
-
   const classes = {
     activeSelection: 'active',
     implicitSelection: 'implicit',
   };
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
 
   describe('when user has rights equal to CheckboxSpec', () => {
     const user = { role: PERMISSIONS.ADMIN };
@@ -141,7 +132,7 @@ describe('PermissionsCheckbox', () => {
     const checkboxSpec = { name: PERMISSIONS.ADMIN, value: PERMISSION_VALUES.ADMIN };
 
     it('dispatches update action with correct user and new permission level', () => {
-      const wrapper = shallow(
+      const wrapper = render(
         <PermissionsCheckbox
           user={user}
           isCurrentUser={true}
@@ -152,7 +143,7 @@ describe('PermissionsCheckbox', () => {
           dispatch={mockDispatch}
         />,
       );
-      wrapper.find(Checkbox).simulate('click');
+      fireEvent.click(wrapper.getByText('CheckBox mock', { exact: false }));
       expect(mockActions.addUserPermission).toHaveBeenCalledTimes(1);
       expect(mockActions.addUserPermission).toHaveBeenCalledWith(projectKey, user, checkboxSpec.name, mockDispatch);
     });
@@ -162,12 +153,6 @@ describe('PermissionsCheckbox', () => {
 describe('RemoveUserButtonCell', () => {
   const classes = { tableCell: 'tableCell' };
   const user = { name: 'User One', userId: 'user-one-id' };
-
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
 
   it('renders as disabled when on the row of the current user', () => {
     expect(
@@ -190,16 +175,24 @@ describe('RemoveUserButtonCell', () => {
 
   it('sets the remove user dialog state so it opens when clicked', () => {
     const mockSetRemoveUserDialogState = jest.fn();
-    const wrapper = shallow(
+    const wrapper = render(
+      <table>
+          <tbody>
+            <tr>
       <RemoveUserButtonCell
         user={user}
         isCurrentUser={true}
+        currentUserSystemAdmin={true}
         classes={classes}
         setRemoveUserDialogState={mockSetRemoveUserDialogState}
-      />,
+      />
+      </tr>
+        </tbody>
+        </table>,
     );
 
-    wrapper.find(IconButton).simulate('click');
+    fireEvent.click(wrapper.getByRole('button'));
+
     expect(mockSetRemoveUserDialogState).toHaveBeenCalledTimes(1);
     expect(mockSetRemoveUserDialogState).toHaveBeenCalledWith({ user, open: true });
   });

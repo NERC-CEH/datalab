@@ -1,59 +1,46 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render, screen, fireEvent } from '@testing-library/react';
 import RemoveUserDialog from './RemoveUserDialog';
 
 describe('RemoveUserDialog', () => {
   const classes = { dialogDeleteUserButton: 'dialogDeleteUserButton' };
 
   describe('when the dialog state has open equal to false', () => {
-    let shallow;
-
-    beforeEach(() => {
-      shallow = createShallow();
-    });
-
     it('renders as null', () => {
-      expect(
-        shallow(
-          <RemoveUserDialog
-            classes={classes}
-            state={{ user: null, open: false }}
-            setState={jest.fn()}
-            onRemoveConfirmationFn={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
+      render(
+        <RemoveUserDialog
+          classes={classes}
+          state={{ user: null, open: false }}
+          setState={jest.fn()}
+          onRemoveConfirmationFn={jest.fn()}
+          dispatch={jest.fn()}
+        />,
+      );
+      expect(screen.queryByText('Remove User Permissions?')).toBeNull();
     });
   });
 
   describe('when the dialog state has open equal to true and a user set', () => {
-    let shallow;
-
-    beforeEach(() => {
-      shallow = createShallow();
-    });
-
     const openState = { user: { name: 'User One', userId: 'user-one-id' }, open: true };
 
     it('renders to match snapshot', () => {
-      expect(
-        shallow(
-          <RemoveUserDialog
-            classes={classes}
-            state={openState}
-            setState={jest.fn()}
-            onRemoveConfirmationFn={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
-      ).toMatchSnapshot();
+      render(
+        <RemoveUserDialog
+          classes={classes}
+          state={openState}
+          setState={jest.fn()}
+          onRemoveConfirmationFn={jest.fn()}
+          dispatch={jest.fn()}
+        />,
+      );
+
+      expect(screen.getByText('Remove User Permissions?').parentElement.parentElement.parentElement).toMatchSnapshot();
     });
 
     it('closes when the cancel button is pressed and does not call confirmation function', () => {
       const mockSetState = jest.fn();
       const mockOnRemoveConfirmationFn = jest.fn();
-      const render = shallow(
+      render(
         <RemoveUserDialog
           classes={classes}
           state={openState}
@@ -62,7 +49,7 @@ describe('RemoveUserDialog', () => {
           dispatch={jest.fn()}
         />,
       );
-      render.find('#cancel-button').simulate('click');
+      fireEvent.click(document.querySelector('[id="cancel-button"]'));
 
       expect(mockSetState).toHaveBeenCalledTimes(1);
       expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
@@ -74,7 +61,7 @@ describe('RemoveUserDialog', () => {
       const mockOnRemoveConfirmationFn = jest.fn();
       const mockDispatch = jest.fn();
       const projectKey = 'project';
-      const render = shallow(
+      render(
         <RemoveUserDialog
           classes={classes}
           state={openState}
@@ -84,7 +71,7 @@ describe('RemoveUserDialog', () => {
           dispatch={mockDispatch}
         />,
       );
-      render.find('#remove-button').simulate('click');
+      fireEvent.click(document.querySelector('[id="remove-button"]'));
 
       expect(mockSetState).toHaveBeenCalledTimes(1);
       expect(mockSetState).toHaveBeenCalledWith({ open: false, user: null });
