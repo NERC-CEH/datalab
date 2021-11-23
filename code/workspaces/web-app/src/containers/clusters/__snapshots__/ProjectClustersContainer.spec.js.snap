@@ -1,113 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectClustersContainer renders correct snapshot for Dask clusters 1`] = `
-<StackCards
-  copySnippets={
-    Object {
-      "Python": [Function],
-    }
-  }
-  createPermission="projects:project-key:clusters:create"
-  deletePermission="projects:project-key:clusters:delete"
-  deleteStack={[Function]}
-  editPermission="projects:project-key:clusters:edit"
-  openCreationForm={[Function]}
-  openPermission="projects:project-key:clusters:open"
-  scalePermission="projects:project-key:clusters:scale"
-  scaleStack={[Function]}
-  showCreateButton={true}
-  stacks={
-    Object {
-      "fetching": false,
-      "value": Array [
-        Object {
-          "description": "tcp://dask-scheduler-test-cluster:8786 is the scheduler address.",
-          "displayName": "Test Cluster",
-          "name": "test-cluster",
-          "projectKey": "project-key",
-          "schedulerAddress": "tcp://dask-scheduler-test-cluster:8786",
-          "type": "DASK",
-        },
-      ],
-    }
-  }
-  typeName="Cluster"
-  typeNamePlural="Clusters"
-  userPermissions={[Function]}
-/>
+<div>
+  StackCards 
+  {
+  "stacks": {
+    "fetching": false,
+    "value": [
+      {
+        "name": "test-cluster",
+        "type": "DASK",
+        "displayName": "Test Cluster",
+        "schedulerAddress": "tcp://dask-scheduler-test-cluster:8786",
+        "projectKey": "project-key",
+        "description": "tcp://dask-scheduler-test-cluster:8786 is the scheduler address."
+      }
+    ]
+  },
+  "typeName": "Cluster",
+  "typeNamePlural": "Clusters",
+  "createPermission": "projects:project-key:clusters:create",
+  "showCreateButton": true,
+  "copySnippets": {},
+  "deletePermission": "projects:project-key:clusters:delete",
+  "editPermission": "projects:project-key:clusters:edit",
+  "openPermission": "projects:project-key:clusters:open",
+  "scalePermission": "projects:project-key:clusters:scale"
+}
+</div>
 `;
 
 exports[`ProjectClustersContainer renders correct snapshot for Spark clusters 1`] = `
-<StackCards
-  copySnippets={
-    Object {
-      "Python": [Function],
-    }
-  }
-  createPermission="projects:project-key:clusters:create"
-  deletePermission="projects:project-key:clusters:delete"
-  deleteStack={[Function]}
-  editPermission="projects:project-key:clusters:edit"
-  openCreationForm={[Function]}
-  openPermission="projects:project-key:clusters:open"
-  scalePermission="projects:project-key:clusters:scale"
-  scaleStack={[Function]}
-  showCreateButton={true}
-  stacks={
-    Object {
-      "fetching": false,
-      "value": Array [
-        Object {
-          "description": "spark://spark-scheduler-test-cluster:7077 is the scheduler address.",
-          "displayName": "Test Spark Cluster",
-          "name": "test-spark-cluster",
-          "projectKey": "project-key",
-          "schedulerAddress": "spark://spark-scheduler-test-cluster:7077",
-          "type": "SPARK",
-        },
-      ],
-    }
-  }
-  typeName="Cluster"
-  typeNamePlural="Clusters"
-  userPermissions={[Function]}
-/>
+<div>
+  StackCards 
+  {
+  "stacks": {
+    "fetching": false,
+    "value": [
+      {
+        "name": "test-spark-cluster",
+        "type": "SPARK",
+        "displayName": "Test Spark Cluster",
+        "schedulerAddress": "spark://spark-scheduler-test-cluster:7077",
+        "projectKey": "project-key",
+        "description": "spark://spark-scheduler-test-cluster:7077 is the scheduler address."
+      }
+    ]
+  },
+  "typeName": "Cluster",
+  "typeNamePlural": "Clusters",
+  "createPermission": "projects:project-key:clusters:create",
+  "showCreateButton": true,
+  "copySnippets": {},
+  "deletePermission": "projects:project-key:clusters:delete",
+  "editPermission": "projects:project-key:clusters:edit",
+  "openPermission": "projects:project-key:clusters:open",
+  "scalePermission": "projects:project-key:clusters:scale"
+}
+</div>
 `;
 
 exports[`ProjectClustersContainer renders correct snapshot for all clusters 1`] = `
-<StackCards
-  copySnippets={
-    Object {
-      "Python": [Function],
-    }
-  }
-  createPermission="projects:project-key:clusters:create"
-  deletePermission="projects:project-key:clusters:delete"
-  deleteStack={[Function]}
-  editPermission="projects:project-key:clusters:edit"
-  openPermission="projects:project-key:clusters:open"
-  scalePermission="projects:project-key:clusters:scale"
-  scaleStack={[Function]}
-  showCreateButton={true}
-  stacks={
-    Object {
-      "fetching": false,
-      "value": Array [
-        Object {
-          "description": "tcp://dask-scheduler-test-cluster:8786 is the scheduler address.",
-          "displayName": "Test Cluster",
-          "name": "test-cluster",
-          "projectKey": "project-key",
-          "schedulerAddress": "tcp://dask-scheduler-test-cluster:8786",
-          "type": undefined,
-        },
-      ],
-    }
-  }
-  typeName="Cluster"
-  typeNamePlural="Clusters"
-  userPermissions={[Function]}
-/>
+<div>
+  StackCards 
+  {
+  "stacks": {
+    "fetching": false,
+    "value": [
+      {
+        "name": "test-cluster",
+        "displayName": "Test Cluster",
+        "schedulerAddress": "tcp://dask-scheduler-test-cluster:8786",
+        "projectKey": "project-key",
+        "description": "tcp://dask-scheduler-test-cluster:8786 is the scheduler address."
+      }
+    ]
+  },
+  "typeName": "Cluster",
+  "typeNamePlural": "Clusters",
+  "createPermission": "projects:project-key:clusters:create",
+  "showCreateButton": true,
+  "copySnippets": {},
+  "deletePermission": "projects:project-key:clusters:delete",
+  "editPermission": "projects:project-key:clusters:edit",
+  "openPermission": "projects:project-key:clusters:open",
+  "scalePermission": "projects:project-key:clusters:scale"
+}
+</div>
 `;
 
 exports[`getDialogProps returns object of props matching snapshot 1`] = `

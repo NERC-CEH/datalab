@@ -1,38 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ClustersContainer renders correct snapshot 1`] = `
-<StackCards
-  copySnippets={
-    Object {
-      "Python": [Function],
-    }
-  }
-  createPermission="projects:current-project:clusters:create"
-  deletePermission="projects:current-project:clusters:delete"
-  deleteStack={[Function]}
-  editPermission="projects:current-project:clusters:edit"
-  openCreationForm={[Function]}
-  openPermission="projects:current-project:clusters:open"
-  scalePermission="projects:current-project:clusters:scale"
-  scaleStack={[Function]}
-  showCreateButton={true}
-  stacks={
-    Object {
-      "fetching": false,
-      "value": Array [
-        Object {
-          "description": "tcp://dask-scheduler-test-cluster:8786 is the scheduler address.",
-          "displayName": "Test Cluster",
-          "name": "test-cluster",
-          "projectKey": "current-project",
-          "schedulerAddress": "tcp://dask-scheduler-test-cluster:8786",
-          "type": "DASK",
-        },
-      ],
-    }
-  }
-  typeName="Cluster"
-  typeNamePlural="Clusters"
-  userPermissions={[Function]}
-/>
+<div>
+  ProjectClustersContainer Mock 
+  {"clusterType":"DASK","projectKey":"current-project","userPermissions":["expectedPermission"],"modifyData":true,"copySnippets":{}}
+</div>
 `;

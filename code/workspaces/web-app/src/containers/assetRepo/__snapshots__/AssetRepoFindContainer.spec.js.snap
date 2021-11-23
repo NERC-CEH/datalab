@@ -1,96 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AssetRepoFindContainer renders to match snapshot passing correct props to children 1`] = `
-<Fragment>
-  <AssetMultiSelect
-    input={
-      Object {
-        "onChange": [Function],
-        "value": Array [],
+<div>
+  AssetMultiSelect 
+  <div>
+    <div>
+      AssetAccordion 
+      {
+  "asset": {
+    "name": "asset name",
+    "version": "asset version",
+    "assetId": "asset-1",
+    "fileLocation": "file location",
+    "masterUrl": "master URL",
+    "owners": [
+      {
+        "userId": "owner-1",
+        "name": "name 1"
+      },
+      {
+        "userId": "owner-2",
+        "name": "name 2"
       }
-    }
-    showAllAssets={true}
-  />
-  <PromisedContentWrapper
-    fetchingClassName="makeStyles-root-1"
-    promise={
-      Object {
-        "error": null,
-        "fetching": false,
-        "value": Object {
-          "assets": Array [
-            Object {
-              "assetId": "asset-1",
-              "fileLocation": "file location",
-              "masterUrl": "master URL",
-              "name": "asset name",
-              "owners": Array [
-                Object {
-                  "name": "name 1",
-                  "userId": "owner-1",
-                },
-                Object {
-                  "name": "name 2",
-                  "userId": "owner-2",
-                },
-              ],
-              "projects": Array [
-                Object {
-                  "name": "project 1",
-                  "projectKey": "project-1",
-                },
-                Object {
-                  "name": "project 2",
-                  "projectKey": "project-2",
-                },
-              ],
-              "version": "asset version",
-              "visibility": "BY_PROJECT",
-            },
-          ],
-        },
+    ],
+    "visibility": "BY_PROJECT",
+    "projects": [
+      {
+        "projectKey": "project-1",
+        "name": "project 1"
+      },
+      {
+        "projectKey": "project-2",
+        "name": "project 2"
       }
-    }
-  >
-    <Pagination
-      items={
-        Array [
-          <AssetAccordion
-            asset={
-              Object {
-                "assetId": "asset-1",
-                "fileLocation": "file location",
-                "masterUrl": "master URL",
-                "name": "asset name",
-                "owners": Array [
-                  Object {
-                    "name": "name 1",
-                    "userId": "owner-1",
-                  },
-                  Object {
-                    "name": "name 2",
-                    "userId": "owner-2",
-                  },
-                ],
-                "projects": Array [
-                  Object {
-                    "name": "project 1",
-                    "projectKey": "project-1",
-                  },
-                  Object {
-                    "name": "project 2",
-                    "projectKey": "project-2",
-                  },
-                ],
-                "version": "asset version",
-                "visibility": "BY_PROJECT",
-              }
-            }
-          />,
-        ]
-      }
-      itemsPerPage={5}
-    />
-  </PromisedContentWrapper>
-</Fragment>
+    ]
+  }
+}
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AssetRepoFindContainer renders to match snapshot when there are no assets 1`] = `
+<div>
+  AssetMultiSelect 
+  <div>
+    <div>
+      <div
+        class="makeStyles-root-3"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1"
+        >
+          No assets to display.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 `;
