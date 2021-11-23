@@ -37,14 +37,7 @@ exports[`SparkPage renders correct snapshot 1`] = `
       </div>
     </div>
     <div>
-      <hr
-        class="MuiDivider-root Footer-divider-35"
-      />
-      <p
-        class="MuiTypography-root Footer-versionText-36 MuiTypography-body2"
-      >
-        Version: undefined
-      </p>
+      Footer mock
     </div>
   </div>
 </div>

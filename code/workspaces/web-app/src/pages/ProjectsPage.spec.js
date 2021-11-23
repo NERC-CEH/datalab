@@ -1,7 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import ProjectsPage from './ProjectsPage';
 
+jest.mock('../containers/projects/ProjectsContainer', () => props => (<div>ProjectsContainer mock {JSON.stringify(props)}</div>));
+jest.mock('../components/app/Footer', () => () => (<div>Footer mock</div>));
+
 it('ProjectsPage renders correct snapshot', () => {
-  expect(shallow(<ProjectsPage userPermissions={['expectedPermission']} />)).toMatchSnapshot();
+  expect(render(<ProjectsPage userPermissions={['expectedPermission']} />).container).toMatchSnapshot();
 });

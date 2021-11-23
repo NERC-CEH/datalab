@@ -1,9 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AssetRepoFindPage renders correct snapshot 1`] = `
-<WithStyles(Page)
-  title="Find Asset"
->
-  <AssetRepoFindContainer />
-</WithStyles(Page)>
+<div>
+  <div
+    class="Page-pageTemplate-1"
+  >
+    <h4
+      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+    >
+      Find Asset
+    </h4>
+    <div
+      class="Page-contentArea-2"
+    >
+      <div>
+        AssetRepoFindContainer mock 
+        {"userPermissions":["expectedPermission"]}
+      </div>
+    </div>
+    <div>
+      Footer mock
+    </div>
+  </div>
+</div>
 `;

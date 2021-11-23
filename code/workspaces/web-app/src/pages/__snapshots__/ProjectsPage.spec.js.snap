@@ -1,15 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectsPage renders correct snapshot 1`] = `
-<WithStyles(Page)
-  title="Projects"
->
-  <ProjectsContainer
-    userPermissions={
-      Array [
-        "expectedPermission",
-      ]
-    }
-  />
-</WithStyles(Page)>
+<div>
+  <div
+    class="Page-pageTemplate-1"
+  >
+    <h4
+      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+    >
+      Projects
+    </h4>
+    <div
+      class="Page-contentArea-2"
+    >
+      <div>
+        ProjectsContainer mock 
+        {"userPermissions":["expectedPermission"]}
+      </div>
+    </div>
+    <div>
+      Footer mock
+    </div>
+  </div>
+</div>
 `;
