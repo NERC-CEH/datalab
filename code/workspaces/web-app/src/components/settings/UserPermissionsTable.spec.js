@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserId } from '../../hooks/authHooks';
@@ -24,34 +24,43 @@ jest.mock('../../hooks/projectUsersHooks');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/authHooks');
 jest.mock('../../hooks/useCurrentUserSystemAdmin');
+jest.mock('../../api/projectSettingsService');
+
+jest.mock('./RemoveUserDialog', () => props => (<div>RemoveUserDialog mock {JSON.stringify(props)}</div>));
+jest.mock('./UserPermissionsTableActionCells', () => ({
+  CheckboxCell: props => (<td>CheckboxCell mock {JSON.stringify(props)}</td>),
+  RemoveUserButtonCell: props => (<td>RemoveUserButtonCell mock {JSON.stringify(props)}</td>),
+}));
 
 describe('UserPermissionsTable', () => {
-  let shallow;
-
   beforeEach(() => {
-    shallow = createShallow({ dive: true });
-
     const dispatchMock = jest.fn().mockName('dispatch');
     useDispatch.mockReturnValue(dispatchMock);
 
-    useProjectUsers.mockReturnValue('users');
+    const initialUsers = {
+      error: null,
+      fetching: {
+        inProgress: false,
+        error: false,
+      },
+      updating: {
+        inProgress: false,
+        error: false,
+      },
+      value: [],
+    };
+    useProjectUsers.mockReturnValue(initialUsers);
     useCurrentUserId.mockReturnValue('current-user-id');
     useCurrentUserSystemAdmin.mockReturnValue('current-user-system-admin');
     useCurrentProjectKey.mockReturnValue({ value: 'testproj' });
   });
 
   it('renders pure component with correct props', () => {
-    expect(shallow(<UserPermissionsTable />)).toMatchSnapshot();
+    expect(render(<UserPermissionsTable />).container).toMatchSnapshot();
   });
 });
 
 describe('PureUserPermissionsTable', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   const classes = {
     activeSelection: 'activeSelection',
     implicitSelection: 'implicitSelection',
@@ -74,24 +83,18 @@ describe('PureUserPermissionsTable', () => {
 
   it('renders correctly passing props to children', () => {
     expect(
-      shallow(
+      render(
         <PureUserPermissionsTable
           users={initialUsers}
           classes={classes}
           colHeadings={columnHeadings}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 });
 
 describe('UserPermissionsTableBody', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   const classes = {
     activeSelection: 'activeSelection',
     implicitSelection: 'implicitSelection',
@@ -120,14 +123,19 @@ describe('UserPermissionsTableBody', () => {
 
     it('renders correctly displaying there is an error', () => {
       expect(
-        shallow(
-          <UserPermissionsTableBody
-            users={users}
-            classes={classes}
-            colHeadings={columnHeadings}
-            numCols={columnHeadings.length}
-          />,
-        ),
+        render(
+          <table>
+            <tbody>
+            <UserPermissionsTableBody
+              users={users}
+              classes={classes}
+              colHeadings={columnHeadings}
+              numCols={columnHeadings.length}
+            />
+            </tbody>
+          </table>
+          ,
+        ).getByRole('row'),
       ).toMatchSnapshot();
     });
   });
@@ -140,14 +148,18 @@ describe('UserPermissionsTableBody', () => {
 
     it('renders progress indicator', () => {
       expect(
-        shallow(
+        render(
+          <table>
+            <tbody>
           <UserPermissionsTableBody
             users={users}
             classes={classes}
             colHeadings={columnHeadings}
             numCols={columnHeadings.length}
-          />,
-        ),
+          />
+          </tbody>
+          </table>,
+        ).getByRole('row'),
       ).toMatchSnapshot();
     });
   });
@@ -164,7 +176,9 @@ describe('UserPermissionsTableBody', () => {
 
     it('correctly renders row for each user', () => {
       expect(
-        shallow(
+        render(
+          <table>
+            <tbody>
           <UserPermissionsTableBody
             users={users}
             currentUserId="admin-user-id"
@@ -174,54 +188,46 @@ describe('UserPermissionsTableBody', () => {
             numCols={columnHeadings.length}
             setRemoveUserDialogState={jest.fn()}
             dispatch={jest.fn()}
-          />,
-        ),
+          />
+          </tbody>
+          </table>,
+        ).container,
       ).toMatchSnapshot();
     });
   });
 });
 
 describe('FullWidthRow', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('returns a table row with correct colSpan and content', () => {
     expect(
-      shallow(
+      render(
+        <table>
+            <tbody>
         <FullWidthRow numCols={4}>
           <div>row content</div>
-        </FullWidthRow>,
-      ),
+        </FullWidthRow>
+        </tbody>
+          </table>,
+      ).container,
     ).toMatchSnapshot();
   });
 });
 
 describe('FullWidthTextRow', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('returns a table row with correct colSpan and text wrapped in Typography', () => {
     expect(
-      shallow(
-        <FullWidthTextRow numCols={4}>{'Text to go in row.'}</FullWidthTextRow>,
-      ),
+      render(
+        <table>
+          <tbody>
+            <FullWidthTextRow numCols={4}>{'Text to go in row.'}</FullWidthTextRow>
+          </tbody>
+        </table>,
+      ).container,
     ).toMatchSnapshot();
   });
 });
 
 describe('UserPermissionsTableRow', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   const classes = {
     activeSelection: 'activeSelection',
     implicitSelection: 'implicitSelection',
@@ -233,17 +239,21 @@ describe('UserPermissionsTableRow', () => {
 
     it('correctly renders passing props to children when not current user', () => {
       expect(
-        shallow(
-          <UserPermissionsTableRow
-            user={user}
-            isCurrentUser={false}
-            index={2}
-            projectKey="projectKey"
-            classes={classes}
-            setRemoveUserDialogState={jest.fn()}
-            dispatch={jest.fn()}
-          />,
-        ),
+        render(
+          <table>
+            <tbody>
+              <UserPermissionsTableRow
+                user={user}
+                isCurrentUser={false}
+                index={2}
+                projectKey="projectKey"
+                classes={classes}
+                setRemoveUserDialogState={jest.fn()}
+                dispatch={jest.fn()}
+              />
+            </tbody>
+          </table>,
+        ).container,
       ).toMatchSnapshot();
     });
   });
@@ -267,17 +277,15 @@ describe('UserPermissionsTableHead', () => {
     },
   ];
 
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct header bar based on column headings', () => {
     expect(
-      shallow(
-        <UserPermissionsTableHead headings={headings} classes={classes} />,
-      ),
+      render(
+        <table>
+          <tbody>
+            <UserPermissionsTableHead headings={headings} classes={classes} />
+          </tbody>
+        </table>,
+      ).container,
     ).toMatchSnapshot();
   });
 });

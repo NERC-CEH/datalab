@@ -1,316 +1,201 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
-<div
-  className="StackCard-cardDiv-1"
->
+<div>
   <div
-    className="StackCard-imageDiv-2"
-  >
-    <img
-      alt="jupyter logo"
-      className="StackCard-cardImage-8"
-      src="jupyter-logo.svg"
-    />
-  </div>
-  <div
-    className="StackCard-textDiv-3"
+    class="StackCard-cardDiv-1"
   >
     <div
-      className="StackCard-displayNameContainer-5"
+      class="StackCard-imageDiv-2"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="StackCard-displayName-4"
-        noWrap={true}
-        variant="h5"
-      >
-        name1
-      </WithStyles(ForwardRef(Typography))>
-      <ResourceInfo />
+      <img
+        alt="jupyter logo"
+        class="StackCard-cardImage-8"
+        src="jupyter-logo.svg"
+      />
     </div>
-    <WithStyles(ForwardRef(Tooltip))
-      placement="bottom-start"
-      title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+    <div
+      class="StackCard-textDiv-3"
     >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        variant="body1"
+      <div
+        class="StackCard-displayNameContainer-5"
+      >
+        <h5
+          class="MuiTypography-root StackCard-displayName-4 MuiTypography-h5 MuiTypography-noWrap"
+        >
+          name1
+        </h5>
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+        title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(ForwardRef(Tooltip))>
-  </div>
-  <div
-    className="StackCard-actionsDiv-6"
-  >
-    <WithStyles(StackCardActions)
-      copySnippets={
-        Object {
-          "Python": [MockFunction copyPythonSnippet],
-        }
-      }
-      deletePermission="delete"
-      deleteStack={[MockFunction deleteStack]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[MockFunction openStack]}
-      restartStack={[MockFunction restartStack]}
-      shareStack={[MockFunction shareStack]}
-      stack={
-        Object {
-          "displayName": "name1",
-          "id": "100",
-          "shared": "private",
-          "status": undefined,
-          "type": "jupyter",
-        }
-      }
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    />
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-6"
+    >
+      <div>
+        StackCardActions mock 
+        {"stack":{"id":"100","displayName":"name1","type":"jupyter","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+         
+      </div>
+    </div>
   </div>
 </div>
 `;
 
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
-<div
-  className="StackCard-cardDiv-1"
->
+<div>
   <div
-    className="StackCard-imageDiv-2"
-  >
-    <img
-      alt="zeppelin logo"
-      className="StackCard-cardImage-8"
-      src="zeppelin-logo.svg"
-    />
-  </div>
-  <div
-    className="StackCard-textDiv-3"
+    class="StackCard-cardDiv-53"
   >
     <div
-      className="StackCard-displayNameContainer-5"
+      class="StackCard-imageDiv-54"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="StackCard-displayName-4"
-        noWrap={true}
-        variant="h5"
-      >
-        name1
-      </WithStyles(ForwardRef(Typography))>
-      <ResourceInfo />
+      <img
+        alt="zeppelin logo"
+        class="StackCard-cardImage-60"
+        src="zeppelin-logo.svg"
+      />
     </div>
-    <WithStyles(ForwardRef(Tooltip))
-      placement="bottom-start"
-      title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+    <div
+      class="StackCard-textDiv-55"
     >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        variant="body1"
+      <div
+        class="StackCard-displayNameContainer-57"
+      >
+        <h5
+          class="MuiTypography-root StackCard-displayName-56 MuiTypography-h5 MuiTypography-noWrap"
+        >
+          name1
+        </h5>
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+        title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
       >
         Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(ForwardRef(Tooltip))>
-  </div>
-  <div
-    className="StackCard-actionsDiv-6"
-  >
-    <WithStyles(StackCardActions)
-      copySnippets={
-        Object {
-          "Python": [MockFunction copyPythonSnippet],
-        }
-      }
-      deletePermission="delete"
-      deleteStack={[MockFunction deleteStack]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[MockFunction openStack]}
-      restartStack={[MockFunction restartStack]}
-      shareStack={[MockFunction shareStack]}
-      stack={
-        Object {
-          "displayName": "name1",
-          "id": "100",
-          "shared": "private",
-          "status": undefined,
-          "type": "zeppelin",
-        }
-      }
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    />
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-58"
+    >
+      <div>
+        StackCardActions mock 
+        {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+         
+      </div>
+    </div>
   </div>
 </div>
 `;
 
 exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
-<div
-  className="StackCard-cardDiv-1"
->
+<div>
   <div
-    className="StackCard-imageDiv-2"
-  >
-    <WithStyles(ForwardRef(Icon))
-      className="StackCard-cardIcon-9"
-    >
-      save
-    </WithStyles(ForwardRef(Icon))>
-  </div>
-  <div
-    className="StackCard-textDiv-3"
+    class="StackCard-cardDiv-105"
   >
     <div
-      className="StackCard-displayNameContainer-5"
+      class="StackCard-imageDiv-106"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="StackCard-displayName-4"
-        noWrap={true}
-        variant="h5"
+      <span
+        aria-hidden="true"
+        class="material-icons MuiIcon-root StackCard-cardIcon-113"
       >
-        name1
-      </WithStyles(ForwardRef(Typography))>
-      <ResourceInfo />
+        save
+      </span>
     </div>
-    <WithStyles(ForwardRef(Tooltip))
-      placement="bottom-start"
-      title="Network File System (NFS) volume to store data for Notebooks and Sites."
+    <div
+      class="StackCard-textDiv-107"
     >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        variant="body1"
+      <div
+        class="StackCard-displayNameContainer-109"
+      >
+        <h5
+          class="MuiTypography-root StackCard-displayName-108 MuiTypography-h5 MuiTypography-noWrap"
+        >
+          name1
+        </h5>
+        <span
+          class=" makeStyles-root-155"
+        >
+          (
+          NFS
+          )
+        </span>
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+        title="Network File System (NFS) volume to store data for Notebooks and Sites."
       >
         Network File System (NFS) volume to store data for Notebooks and Sites.
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(ForwardRef(Tooltip))>
-  </div>
-  <div
-    className="StackCard-actionsDiv-6"
-  >
-    <WithStyles(StackCardActions)
-      copySnippets={
-        Object {
-          "Python": [MockFunction copyPythonSnippet],
-        }
-      }
-      deletePermission="delete"
-      deleteStack={[MockFunction deleteStack]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[MockFunction openStack]}
-      restartStack={[MockFunction restartStack]}
-      shareStack={[MockFunction shareStack]}
-      stack={
-        Object {
-          "displayName": "name1",
-          "id": "100",
-          "shared": "private",
-          "status": undefined,
-          "type": "GLUSTERFS",
-        }
-      }
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    />
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-110"
+    >
+      <div>
+        StackCardActions mock 
+        {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+         
+      </div>
+    </div>
   </div>
 </div>
 `;
 
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
-<div
-  className="StackCard-cardDiv-1"
->
+<div>
   <div
-    className="StackCard-imageDiv-2"
-  >
-    <img
-      alt="jupyter logo"
-      className="StackCard-cardImage-8"
-      src="jupyter-logo.svg"
-    />
-  </div>
-  <div
-    className="StackCard-textDiv-3"
+    class="StackCard-cardDiv-167"
   >
     <div
-      className="StackCard-displayNameContainer-5"
+      class="StackCard-imageDiv-168"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="StackCard-displayName-4"
-        noWrap={true}
-        variant="h5"
-      >
-        name1
-      </WithStyles(ForwardRef(Typography))>
-      <ResourceInfo />
-    </div>
-    <WithStyles(ForwardRef(Tooltip))
-      placement="bottom-start"
-      title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
-    >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        variant="body1"
-      >
-        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(ForwardRef(Tooltip))>
-  </div>
-  <div
-    className="StackCard-actionsDiv-6"
-  >
-    <div
-      className="StackCard-statusDiv-7"
-    >
-      <WithStyles(StackStatus)
-        status="ready"
+      <img
+        alt="jupyter logo"
+        class="StackCard-cardImage-174"
+        src="jupyter-logo.svg"
       />
     </div>
-    <WithStyles(StackCardActions)
-      copySnippets={
-        Object {
-          "Python": [MockFunction copyPythonSnippet],
-        }
-      }
-      deletePermission="delete"
-      deleteStack={[MockFunction deleteStack]}
-      editPermission="edit"
-      openPermission="open"
-      openStack={[MockFunction openStack]}
-      restartStack={[MockFunction restartStack]}
-      shareStack={[MockFunction shareStack]}
-      stack={
-        Object {
-          "displayName": "name1",
-          "id": "100",
-          "shared": "private",
-          "status": "ready",
-          "type": "jupyter",
-        }
-      }
-      userPermissions={
-        Array [
-          "open",
-          "delete",
-          "edit",
-        ]
-      }
-    />
+    <div
+      class="StackCard-textDiv-169"
+    >
+      <div
+        class="StackCard-displayNameContainer-171"
+      >
+        <h5
+          class="MuiTypography-root StackCard-displayName-170 MuiTypography-h5 MuiTypography-noWrap"
+        >
+          name1
+        </h5>
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+        title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+      >
+        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-172"
+    >
+      <div
+        class="StackCard-statusDiv-173"
+      >
+        <div>
+          StackStatus mock 
+          {"status":"ready"}
+        </div>
+      </div>
+      <div>
+        StackCardActions mock 
+        {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+         
+      </div>
+    </div>
   </div>
 </div>
 `;

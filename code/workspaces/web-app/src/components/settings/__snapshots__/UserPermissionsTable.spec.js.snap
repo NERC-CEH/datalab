@@ -1,396 +1,450 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FullWidthRow returns a table row with correct colSpan and content 1`] = `
-<WithStyles(ForwardRef(TableRow))>
-  <WithStyles(ForwardRef(TableCell))
-    align="center"
-    colSpan={4}
-  >
-    <div>
-      row content
-    </div>
-  </WithStyles(ForwardRef(TableCell))>
-</WithStyles(ForwardRef(TableRow))>
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-alignCenter"
+          colspan="4"
+        >
+          <div>
+            row content
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;
 
 exports[`FullWidthTextRow returns a table row with correct colSpan and text wrapped in Typography 1`] = `
-<FullWidthRow
-  numCols={4}
->
-  <WithStyles(ForwardRef(Typography))
-    variant="body1"
-  >
-    Text to go in row.
-  </WithStyles(ForwardRef(Typography))>
-</FullWidthRow>
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-alignCenter"
+          colspan="4"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            Text to go in row.
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;
 
 exports[`PureUserPermissionsTable renders correctly passing props to children 1`] = `
 <div>
-  <WithStyles(ForwardRef(Table))>
-    <WithStyles(ForwardRef(TableHead))>
-      <UserPermissionsTableHead
-        classes={
-          Object {
-            "activeSelection": "activeSelection",
-            "implicitSelection": "implicitSelection",
-            "tableCell": "tableCell",
-            "tableHeader": "tableHeader",
-          }
-        }
-        headings={
-          Array [
-            Object {
-              "checkBoxCol": false,
-              "heading": "User Name",
-            },
-            Object {
-              "checkBoxCol": true,
-              "heading": "Admin",
-            },
-            Object {
-              "checkBoxCol": true,
-              "heading": "User",
-            },
-            Object {
-              "checkBoxCol": true,
-              "heading": "Viewer",
-            },
-            Object {
-              "checkBoxCol": true,
-              "heading": "",
-            },
-          ]
-        }
-      />
-    </WithStyles(ForwardRef(TableHead))>
-    <WithStyles(ForwardRef(TableBody))>
-      <UserPermissionsTableBody
-        classes={
-          Object {
-            "activeSelection": "activeSelection",
-            "implicitSelection": "implicitSelection",
-            "tableCell": "tableCell",
-            "tableHeader": "tableHeader",
-          }
-        }
-        numCols={5}
-        users={
-          Object {
-            "error": null,
-            "fetching": Object {
-              "error": false,
-              "inProgress": false,
-            },
-            "updating": Object {
-              "error": false,
-              "inProgress": false,
-            },
-            "value": Array [],
-          }
-        }
-      />
-    </WithStyles(ForwardRef(TableBody))>
-  </WithStyles(ForwardRef(Table))>
-  <RemoveUserDialog
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-        "tableHeader": "tableHeader",
-      }
-    }
-  />
+  <div>
+    <table
+      class="MuiTable-root"
+    >
+      <thead
+        class="MuiTableHead-root"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
+        >
+          <th
+            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignLeft"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root tableHeader MuiTypography-body1"
+            >
+              User Name
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root tableHeader MuiTypography-body1"
+            >
+              Admin
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root tableHeader MuiTypography-body1"
+            >
+              User
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root tableHeader MuiTypography-body1"
+            >
+              Viewer
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root tableHeader MuiTypography-body1"
+            />
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
+      >
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter"
+            colspan="5"
+          >
+            <div
+              class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+              role="progressbar"
+              style="width: 40px; height: 40px;"
+            >
+              <svg
+                class="MuiCircularProgress-svg"
+                viewBox="22 22 44 44"
+              >
+                <circle
+                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  cx="44"
+                  cy="44"
+                  fill="none"
+                  r="20.2"
+                  stroke-width="3.6"
+                />
+              </svg>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      RemoveUserDialog mock 
+      {"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+    </div>
+  </div>
 </div>
 `;
 
 exports[`UserPermissionsTable renders pure component with correct props 1`] = `
-<PureUserPermissionsTable
-  actions={
-    Object {
-      "addUserPermission": [Function],
-      "removeUserPermission": [Function],
-    }
-  }
-  classes={
-    Object {
-      "activeSelection": "UserPermissionsTable-activeSelection-1",
-      "dialogDeleteUserButton": "UserPermissionsTable-dialogDeleteUserButton-5",
-      "implicitSelection": "UserPermissionsTable-implicitSelection-2",
-      "tableCell": "UserPermissionsTable-tableCell-4",
-      "tableHeader": "UserPermissionsTable-tableHeader-3",
-    }
-  }
-  colHeadings={
-    Array [
-      Object {
-        "checkBoxCol": false,
-        "heading": "User Name",
-      },
-      Object {
-        "checkBoxCol": true,
-        "heading": "Admin",
-      },
-      Object {
-        "checkBoxCol": true,
-        "heading": "User",
-      },
-      Object {
-        "checkBoxCol": true,
-        "heading": "Viewer",
-      },
-      Object {
-        "checkBoxCol": true,
-        "heading": "",
-      },
-    ]
-  }
-  currentUserId="current-user-id"
-  currentUserSystemAdmin="current-user-system-admin"
-  dispatch={[MockFunction dispatch]}
-  onRemoveUserDialogConfirmationFn={[Function]}
-  projectKey="testproj"
-  removeUserDialogState={
-    Object {
-      "open": false,
-      "user": null,
-    }
-  }
-  setRemoveUserDialogState={[Function]}
-  users="users"
-/>
+<div>
+  <div>
+    <table
+      class="MuiTable-root"
+    >
+      <thead
+        class="MuiTableHead-root"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
+        >
+          <th
+            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignLeft"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+            >
+              User Name
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+            >
+              Admin
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+            >
+              User
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+            >
+              Viewer
+            </p>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            scope="col"
+          >
+            <p
+              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+            />
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
+      >
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter"
+            colspan="5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+            >
+              No users have project permissions.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      RemoveUserDialog mock 
+      {"classes":{"activeSelection":"UserPermissionsTable-activeSelection-1","implicitSelection":"UserPermissionsTable-implicitSelection-2","tableHeader":"UserPermissionsTable-tableHeader-3","tableCell":"UserPermissionsTable-tableCell-4","dialogDeleteUserButton":"UserPermissionsTable-dialogDeleteUserButton-5"},"state":{"open":false,"user":null},"projectKey":"testproj"}
+    </div>
+  </div>
+</div>
 `;
 
 exports[`UserPermissionsTableBody when fetching data renders progress indicator 1`] = `
-<FullWidthRow
-  numCols={5}
+<tr
+  class="MuiTableRow-root"
 >
-  <WithStyles(ForwardRef(CircularProgress)) />
-</FullWidthRow>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignCenter"
+    colspan="5"
+  >
+    <div
+      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style="width: 40px; height: 40px;"
+    >
+      <svg
+        class="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx="44"
+          cy="44"
+          fill="none"
+          r="20.2"
+          stroke-width="3.6"
+        />
+      </svg>
+    </div>
+  </td>
+</tr>
 `;
 
 exports[`UserPermissionsTableBody when there are users correctly renders row for each user 1`] = `
-Array [
-  <UserPermissionsTableRow
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-        "tableHeader": "tableHeader",
-      }
-    }
-    dispatch={[MockFunction]}
-    index={0}
-    isCurrentUser={true}
-    key="row-admin-user-id"
-    projectKey="projectKey"
-    setRemoveUserDialogState={[MockFunction]}
-    user={
-      Object {
-        "name": "admin name",
-        "role": "admin",
-        "userId": "admin-user-id",
-      }
-    }
-  />,
-  <UserPermissionsTableRow
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-        "tableHeader": "tableHeader",
-      }
-    }
-    dispatch={[MockFunction]}
-    index={1}
-    isCurrentUser={false}
-    key="row-user-user-id"
-    projectKey="projectKey"
-    setRemoveUserDialogState={[MockFunction]}
-    user={
-      Object {
-        "name": "user name",
-        "role": "user",
-        "userId": "user-user-id",
-      }
-    }
-  />,
-  <UserPermissionsTableRow
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-        "tableHeader": "tableHeader",
-      }
-    }
-    dispatch={[MockFunction]}
-    index={2}
-    isCurrentUser={false}
-    key="row-viewer-user-id"
-    projectKey="projectKey"
-    setRemoveUserDialogState={[MockFunction]}
-    user={
-      Object {
-        "name": "viewer name",
-        "role": "viewer",
-        "userId": "viewer-user-id",
-      }
-    }
-  />,
-]
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root tableCell"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            admin name
+          </p>
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-admin"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-user"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-viewer"}
+        </td>
+        <td>
+          RemoveUserButtonCell mock 
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root tableCell"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            user name
+          </p>
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-admin"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-user"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-viewer"}
+        </td>
+        <td>
+          RemoveUserButtonCell mock 
+          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root tableCell"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            viewer name
+          </p>
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-admin"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-user"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-viewer"}
+        </td>
+        <td>
+          RemoveUserButtonCell mock 
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;
 
 exports[`UserPermissionsTableBody when there is an error fetching renders correctly displaying there is an error 1`] = `
-<FullWidthTextRow
-  numCols={5}
+<tr
+  class="MuiTableRow-root"
 >
-  Error fetching data. Please try refreshing the page.
-</FullWidthTextRow>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignCenter"
+    colspan="5"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      Error fetching data. Please try refreshing the page.
+    </p>
+  </td>
+</tr>
 `;
 
 exports[`UserPermissionsTableHead renders correct header bar based on column headings 1`] = `
-<WithStyles(ForwardRef(TableRow))>
-  <WithStyles(ForwardRef(TableCell))
-    align="left"
-    className="tableCell"
-    key="header-0"
-    padding={null}
-  >
-    <WithStyles(ForwardRef(Typography))
-      className="tableHeader"
-      variant="body1"
-    >
-      not check box
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(TableCell))>
-  <WithStyles(ForwardRef(TableCell))
-    align="center"
-    className="tableCell"
-    key="header-1"
-    padding="checkbox"
-  >
-    <WithStyles(ForwardRef(Typography))
-      className="tableHeader"
-      variant="body1"
-    >
-      check box col
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(TableCell))>
-</WithStyles(ForwardRef(TableRow))>
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root tableCell MuiTableCell-alignLeft"
+        >
+          <p
+            class="MuiTypography-root tableHeader MuiTypography-body1"
+          >
+            not check box
+          </p>
+        </td>
+        <td
+          class="MuiTableCell-root tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+        >
+          <p
+            class="MuiTypography-root tableHeader MuiTypography-body1"
+          >
+            check box col
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;
 
 exports[`UserPermissionsTableRow for a given user correctly renders passing props to children when not current user 1`] = `
-<WithStyles(ForwardRef(TableRow))
-  key="row-2"
->
-  <WithStyles(ForwardRef(TableCell))
-    className="tableCell"
-    key="row-2-username"
-  >
-    <WithStyles(ForwardRef(Typography))
-      variant="body1"
-    >
-      admin name
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(TableCell))>
-  <CheckboxCell
-    cellKey="row-2-admin"
-    checkboxSpec={
-      Object {
-        "name": "admin",
-        "value": 2,
-      }
-    }
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-      }
-    }
-    dispatch={[MockFunction]}
-    isCurrentUser={false}
-    key="row-2-admin"
-    projectKey="projectKey"
-    user={
-      Object {
-        "name": "admin name",
-        "role": "admin",
-      }
-    }
-  />
-  <CheckboxCell
-    cellKey="row-2-user"
-    checkboxSpec={
-      Object {
-        "name": "user",
-        "value": 1,
-      }
-    }
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-      }
-    }
-    dispatch={[MockFunction]}
-    isCurrentUser={false}
-    key="row-2-user"
-    projectKey="projectKey"
-    user={
-      Object {
-        "name": "admin name",
-        "role": "admin",
-      }
-    }
-  />
-  <CheckboxCell
-    cellKey="row-2-viewer"
-    checkboxSpec={
-      Object {
-        "name": "viewer",
-        "value": 0,
-      }
-    }
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-      }
-    }
-    dispatch={[MockFunction]}
-    isCurrentUser={false}
-    key="row-2-viewer"
-    projectKey="projectKey"
-    user={
-      Object {
-        "name": "admin name",
-        "role": "admin",
-      }
-    }
-  />
-  <RemoveUserButtonCell
-    classes={
-      Object {
-        "activeSelection": "activeSelection",
-        "implicitSelection": "implicitSelection",
-        "tableCell": "tableCell",
-      }
-    }
-    isCurrentUser={false}
-    setRemoveUserDialogState={[MockFunction]}
-    user={
-      Object {
-        "name": "admin name",
-        "role": "admin",
-      }
-    }
-  />
-</WithStyles(ForwardRef(TableRow))>
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root tableCell"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            admin name
+          </p>
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-admin"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-user"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-viewer"}
+        </td>
+        <td>
+          RemoveUserButtonCell mock 
+          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;

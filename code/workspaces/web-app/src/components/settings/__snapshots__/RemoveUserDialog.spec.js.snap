@@ -1,34 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RemoveUserDialog when the dialog state has open equal to false renders as null 1`] = `""`;
-
 exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  open={true}
+<div
+  class="MuiDialog-container MuiDialog-scrollPaper"
+  role="none presentation"
+  style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  tabindex="-1"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
-    Remove User Permissions?
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))>
-      Are you sure you want to remove all project permissions for User One?
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(DangerButton)
-      className="dialogDeleteUserButton"
-      id="remove-button"
-      onClick={[Function]}
-      variant="outlined"
+  <div
+    class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiPaper-elevation24 MuiPaper-rounded"
+    role="dialog"
+  >
+    <div
+      class="MuiDialogTitle-root"
     >
-      Remove
-    </WithStyles(DangerButton)>
-    <SecondaryActionButton
-      id="cancel-button"
-      onClick={[Function]}
+      <h2
+        class="MuiTypography-root MuiTypography-h6"
+      >
+        Remove User Permissions?
+      </h2>
+    </div>
+    <div
+      class="MuiDialogContent-root"
     >
-      Cancel
-    </SecondaryActionButton>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
+      <p
+        class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      >
+        Are you sure you want to remove all project permissions for User One?
+      </p>
+    </div>
+    <div
+      class="MuiDialogActions-root MuiDialogActions-spacing"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined dialogDeleteUserButton"
+        id="remove-button"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Remove
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        id="cancel-button"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
 `;
