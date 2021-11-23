@@ -1,7 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import AssetRepoFindPage from './AssetRepoFindPage';
 
+const userPermissions = ['expectedPermission'];
+
+jest.mock('../containers/assetRepo/AssetRepoFindContainer', () => props => (<div>AssetRepoFindContainer mock {JSON.stringify(props)}</div>));
+jest.mock('../components/app/Footer', () => () => (<div>Footer mock</div>));
+
 it('AssetRepoFindPage renders correct snapshot', () => {
-  expect(shallow(<AssetRepoFindPage/>)).toMatchSnapshot();
+  expect(render(<AssetRepoFindPage userPermissions={userPermissions}/>).container).toMatchSnapshot();
 });

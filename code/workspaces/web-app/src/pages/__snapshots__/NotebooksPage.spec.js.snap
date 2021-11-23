@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PublishingPage renders correct snapshot 1`] = `
+exports[`NotebooksPage renders correct snapshot 1`] = `
 <div>
   <div
     class="Page-pageTemplate-1"
@@ -8,13 +8,13 @@ exports[`PublishingPage renders correct snapshot 1`] = `
     <h4
       class="MuiTypography-root Page-title-3 MuiTypography-h4"
     >
-      Sites
+      Notebooks
     </h4>
     <div
       class="Page-contentArea-2"
     >
       <div>
-        SitesContainer mock 
+        NotebooksContainer mock 
         {"userPermissions":["expectedPermission"]}
       </div>
     </div>

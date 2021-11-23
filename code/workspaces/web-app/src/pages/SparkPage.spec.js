@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import SparkPage, { getPythonMessage, getRMessage } from './SparkPage';
 
 jest.mock('../containers/clusters/ClustersContainer', () => props => (<div>ClustersContainer mock {JSON.stringify(props)}</div>));
+jest.mock('../components/app/Footer', () => () => (<div>Footer mock</div>));
 
 describe('SparkPage', () => {
   it('renders correct snapshot', () => {

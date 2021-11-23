@@ -1,10 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectInfoPage renders correct snapshot 1`] = `
-<WithStyles(Page)
-  className="makeStyles-infoPage-1"
-  title="Information"
->
-  <ProjectInfoContainer />
-</WithStyles(Page)>
+<div>
+  <div
+    class="Page-pageTemplate-2 makeStyles-infoPage-1"
+  >
+    <h4
+      class="MuiTypography-root Page-title-4 MuiTypography-h4"
+    >
+      Information
+    </h4>
+    <div
+      class="Page-contentArea-3"
+    >
+      <div>
+        ProjectInfoContainer mock
+      </div>
+    </div>
+    <div>
+      Footer mock
+    </div>
+  </div>
+</div>
 `;
