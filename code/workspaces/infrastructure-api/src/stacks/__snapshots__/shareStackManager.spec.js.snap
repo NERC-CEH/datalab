@@ -5,7 +5,7 @@ exports[`handleSharedChange handles Jupyter notebooks changing to private 1`] = 
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-stackname
+  name: job-stackname-1609459200
 spec:
   ttlSecondsAfterFinished: 0
   template:
@@ -13,7 +13,7 @@ spec:
       securityContext:
         runAsUser: 1000
       containers:
-      - name: job-stackname
+      - name: job-stackname-1609459200
         image: busybox
         imagePullPolicy: IfNotPresent
         command: [\\"sh\\"]

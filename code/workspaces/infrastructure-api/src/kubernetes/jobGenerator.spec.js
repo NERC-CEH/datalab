@@ -6,6 +6,11 @@ const getInputs = () => ({
 });
 
 describe('createCurlJob', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.spyOn(Date, 'now').mockReturnValue(1609459200);
+  });
+
   it('creates a job to match the snapshot', async () => {
     const manifest = await createCurlJob(getInputs());
 
