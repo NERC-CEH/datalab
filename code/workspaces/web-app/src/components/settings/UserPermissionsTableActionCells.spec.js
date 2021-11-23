@@ -144,7 +144,6 @@ describe('PermissionsCheckbox', () => {
         />,
       );
       fireEvent.click(wrapper.getByText('CheckBox mock', { exact: false }));
-      // render.find(Checkbox).simulate('click');
       expect(mockActions.addUserPermission).toHaveBeenCalledTimes(1);
       expect(mockActions.addUserPermission).toHaveBeenCalledWith(projectKey, user, checkboxSpec.name, mockDispatch);
     });
