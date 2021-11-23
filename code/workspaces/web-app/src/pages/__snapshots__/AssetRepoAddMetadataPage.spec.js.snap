@@ -1,9 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AssetRepoAddMetadataPage renders correct snapshot 1`] = `
-<WithStyles(Page)
-  title="Add Metadata"
->
-  <AddRepoMetadataDetails />
-</WithStyles(Page)>
+<div>
+  <div
+    class="Page-pageTemplate-1"
+  >
+    <h4
+      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+    >
+      Add Metadata
+    </h4>
+    <div
+      class="Page-contentArea-2"
+    >
+      <div>
+        AddRepoMetadataDetails mock
+      </div>
+    </div>
+    <div>
+      Footer mock
+    </div>
+  </div>
+</div>
 `;

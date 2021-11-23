@@ -1,7 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import AssetRepoAddMetadataPage from './AssetRepoAddMetadataPage';
 
+jest.mock('../components/assetRepo/AddRepoMetadataDetails', () => () => (<div>AddRepoMetadataDetails mock</div>));
+jest.mock('../components/app/Footer', () => () => (<div>Footer mock</div>));
+
 it('AssetRepoAddMetadataPage renders correct snapshot', () => {
-  expect(shallow(<AssetRepoAddMetadataPage/>)).toMatchSnapshot();
+  expect(render(<AssetRepoAddMetadataPage/>).container).toMatchSnapshot();
 });

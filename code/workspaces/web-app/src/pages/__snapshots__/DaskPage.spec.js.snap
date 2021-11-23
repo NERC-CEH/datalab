@@ -1,37 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DaskPage renders correct snapshot 1`] = `
-<WithStyles(Page)
-  className=""
-  title="Dask"
->
-  <WithStyles(ForwardRef(Typography))
-    variant="body1"
+<div>
+  <div
+    class="Page-pageTemplate-2"
   >
-    <ExternalLink
-      href="https://dask.org/"
+    <h4
+      class="MuiTypography-root Page-title-4 MuiTypography-h4"
     >
       Dask
-    </ExternalLink>
-     is a flexible parallel computing library for analytic computing in Python. DataLabs allows users to create Dask clusters for use within projects. These clusters can be utilised from notebooks using the 
-    <ExternalLink
-      href="https://kubernetes.dask.org/en/latest/"
+    </h4>
+    <div
+      class="Page-contentArea-3"
     >
-      Dask Kubernetes
-    </ExternalLink>
-     package when configured to use the specified scheduler address for the cluster. Dask can only be used with Python.
-  </WithStyles(ForwardRef(Typography))>
-  <div
-    className="makeStyles-clusterList-1"
-  >
-    <ClustersContainer
-      clusterType="DASK"
-      copySnippets={
-        Object {
-          "Python": [Function],
-        }
-      }
-    />
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        <a
+          href="https://dask.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Dask
+        </a>
+         is a flexible parallel computing library for analytic computing in Python. DataLabs allows users to create Dask clusters for use within projects. These clusters can be utilised from notebooks using the 
+        <a
+          href="https://kubernetes.dask.org/en/latest/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Dask Kubernetes
+        </a>
+         package when configured to use the specified scheduler address for the cluster. Dask can only be used with Python.
+      </p>
+      <div
+        class="makeStyles-clusterList-1"
+      >
+        <div>
+          ClustersContainer mock 
+          {"clusterType":"DASK","copySnippets":{}}
+        </div>
+      </div>
+    </div>
+    <div>
+      Footer mock
+    </div>
   </div>
-</WithStyles(Page)>
+</div>
 `;
