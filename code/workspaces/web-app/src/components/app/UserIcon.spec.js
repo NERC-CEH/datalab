@@ -1,53 +1,51 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import Avatar from '@material-ui/core/Avatar';
-import Popover from '@material-ui/core/Popover';
-import UserMenu from './UserMenu';
+import { render, screen, fireEvent } from '@testing-library/react';
 import UserIcon from './UserIcon';
+import { getAuth } from '../../config/auth';
+
+jest.mock('../../config/auth');
+
+const logout = jest.fn();
 
 const expectedProps = {
   identity: {
     picture: 'expectedPicture',
+    nickname: 'test nickname',
+    name: 'test name',
   },
 };
 
-describe('UserIcon', () => {
-  let shallow;
+beforeEach(() => {
+  getAuth.mockImplementation(() => ({
+    logout,
+  }));
+});
 
+describe('UserIcon', () => {
   beforeEach(() => {
-    shallow = createShallow({ dive: true });
+    jest.clearAllMocks();
   });
 
-  function shallowRender(props) {
-    return shallow(<UserIcon {...props} />);
-  }
-
   it('renders correct snapshot', () => {
-    expect(shallowRender(expectedProps)).toMatchSnapshot();
+    const wrapper = render(<UserIcon {...expectedProps} />);
+    fireEvent.click(wrapper.getByRole('img'));
+    expect(screen.getByRole('img').parentElement.parentElement.parentElement).toMatchSnapshot();
   });
 
   it('onClick function changes popover open prop', () => {
-    const output = shallowRender(expectedProps);
-    const onClickFunction = output.find(Avatar).prop('onClick');
+    const wrapper = render(<UserIcon {...expectedProps} />);
+    fireEvent.click(wrapper.getByRole('img'));
 
-    // Due to changes to state, the same node need to be used for the expect checks.
-    expect(output.find(Popover).prop('open')).toBe(false);
-    onClickFunction();
-    expect(output.find(Popover).prop('open')).toBe(true);
+    expect(screen.getByText('test name')).not.toBeNull();
   });
 
   it('closeOnClick function changes popover open prop', () => {
-    const output = shallowRender(expectedProps);
-    const onClickFunction = output.find(Avatar).prop('onClick');
-    const nextMock = jest.fn();
-    const closeFunct = output.find(UserMenu).prop('closePopover')(nextMock);
+    const wrapper = render(<UserIcon {...expectedProps} />);
+    fireEvent.click(wrapper.getByRole('img'));
 
-    // Due to changes to state, the same node need to be used for the expect checks.
-    onClickFunction(); // should open popover
-    expect(output.find(Popover).prop('open')).toBe(true);
-    expect(nextMock).not.toHaveBeenCalled();
-    closeFunct(); // should close popover
-    expect(output.find(Popover).prop('open')).toBe(false);
-    expect(nextMock).toHaveBeenCalledTimes(1);
+    // need to query by role here as queryByText will still find the "aria-hidden" items
+    expect(screen.queryByRole('button')).not.toBeNull();
+    fireEvent.click(wrapper.getByText('Logout'));
+    expect(screen.queryByRole('button')).toBeNull();
   });
 });

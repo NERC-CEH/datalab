@@ -1,27 +1,25 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render, screen } from '@testing-library/react';
 import CreateNotebookDialog from './CreateNotebookDialog';
 import { getNotebookInfo } from '../../config/images';
 
 jest.mock('../../hooks/reduxFormHooks');
 jest.mock('../../config/images');
+jest.mock('../notebooks/CreateNotebookForm', () => props => (<div>
+    CreateNotebookForm mock
+    {JSON.stringify(props)}
+    {`onSubmit result: ${props.onSubmit()}`}
+    {`onCancel result: ${props.cancel()}`}
+  </div>));
 
 describe('Notebook dialog', () => {
-  let shallow;
-
   beforeEach(() => {
-    shallow = createShallow({ dive: true });
-
     getNotebookInfo.mockReturnValue({
       jupyterLab: {
         displayName: 'JupyterLab',
       },
     });
   });
-
-  function shallowRender(props) {
-    return shallow(<CreateNotebookDialog {...props} />);
-  }
 
   const onSubmitMock = jest.fn();
   const onCancelMock = jest.fn();
@@ -39,37 +37,32 @@ describe('Notebook dialog', () => {
   it('creates correct snapshot', () => {
     // Arrange
     const props = generateProps();
+    props.onSubmit.mockReturnValue('submit called');
+    props.onCancel.mockReturnValue('onCancel called');
 
-    // Act
-    const output = shallowRender(props);
+    render(<CreateNotebookDialog {...props} />);
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(screen.getByText('Title').parentElement.parentElement).toMatchSnapshot();
   });
 
   it('wires up cancel function correctly', () => {
-    // Arrange
     const props = generateProps();
+    props.onSubmit.mockReturnValue('submit called');
+    props.onCancel.mockReturnValue('onCancel called');
 
-    // Act
-    const output = shallowRender(props);
-    const cancelFunction = output.find('ReduxForm').prop('cancel');
-    cancelFunction();
+    render(<CreateNotebookDialog {...props} />);
 
-    // Assert
-    expect(onCancelMock).toHaveBeenCalled();
+    expect(screen.getByText('onCancel result: onCancel called', { exact: false })).not.toBeNull();
   });
 
   it('wires up submit function correctly', () => {
-    // Arrange
     const props = generateProps();
+    props.onSubmit.mockReturnValue('submit called');
+    props.onCancel.mockReturnValue('onCancel called');
 
-    // Act
-    const output = shallowRender(props);
-    const submitFunction = output.find('ReduxForm').prop('onSubmit');
-    submitFunction();
+    render(<CreateNotebookDialog {...props} />);
 
-    // Assert
-    expect(onSubmitMock).toHaveBeenCalled();
+    expect(screen.getByText('onSubmit result: submit called', { exact: false })).not.toBeNull();
   });
 });

@@ -1,35 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UserMenu renders correct snapshot 1`] = `
-<div
-  className="UserMenu-container-1"
->
+<div>
   <div
-    className="UserMenu-identity-2"
+    class="UserMenu-container-1"
   >
-    <WithStyles(ForwardRef(Avatar))
-      className="UserMenu-userImage-3"
-      src="expectedPicture"
-    />
     <div
-      className="UserMenu-userInfo-4"
+      class="UserMenu-identity-2"
     >
-      <WithStyles(ForwardRef(Typography))
-        variant="body1"
+      <div>
+        Avatar mock 
+        {"className":"UserMenu-userImage-3","src":"expectedPicture"}
+      </div>
+      <div
+        class="UserMenu-userInfo-4"
       >
-        expectedNickname
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        variant="body1"
-      >
-        expectedName
-      </WithStyles(ForwardRef(Typography))>
+        <p
+          class="MuiTypography-root MuiTypography-body1"
+        >
+          expectedNickname
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body1"
+        >
+          expectedName
+        </p>
+      </div>
     </div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Logout
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>
-  <WithStyles(ForwardRef(Button))
-    color="primary"
-  >
-    Logout
-  </WithStyles(ForwardRef(Button))>
 </div>
 `;

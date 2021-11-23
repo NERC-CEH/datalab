@@ -1,12 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import DescribeElementCardBody from './DescribeElementCardBody';
-
-function shallowRender(props) {
-  const shallow = createShallow({ dive: true });
-
-  return shallow(<DescribeElementCardBody {...props} />);
-}
 
 describe('DescribeElementCardBody', () => {
   it('renders correct snapshot', () => {
@@ -14,7 +8,7 @@ describe('DescribeElementCardBody', () => {
       content: 'expectedContent',
     };
 
-    expect(shallowRender(props)).toMatchSnapshot();
+    expect(render(<DescribeElementCardBody {...props} />).container).toMatchSnapshot();
   });
 
   it('renders correct snapshot with switches', () => {
@@ -24,6 +18,6 @@ describe('DescribeElementCardBody', () => {
       media: true,
     };
 
-    expect(shallowRender(props)).toMatchSnapshot();
+    expect(render(<DescribeElementCardBody {...props} />).container).toMatchSnapshot();
   });
 });

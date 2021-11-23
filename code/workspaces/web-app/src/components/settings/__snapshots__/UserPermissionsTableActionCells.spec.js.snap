@@ -1,85 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CheckboxCell renders correctly passing props to PermissionsCheckbox in TableCell 1`] = `
-<WithStyles(ForwardRef(TableCell))
-  align="center"
-  key="key"
-  padding="checkbox"
->
-  <PermissionsCheckbox
-    checkboxSpec={
-      Object {
-        "name": "admin",
-        "value": 2,
-      }
-    }
-    classes={
-      Object {
-        "activeSelection": "active",
-        "implicitSelection": "implicit",
-      }
-    }
-    dispatch={[MockFunction]}
-    isCurrentUser={false}
-    projectKey="projectKey"
-    user={
-      Object {
-        "role": "admin",
-      }
-    }
-  />
-</WithStyles(ForwardRef(TableCell))>
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+        >
+          <div>
+            CheckBox mock 
+            {"checked":true,"color":"default","className":"active"}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;
 
 exports[`PermissionsCheckbox when checkbox user is the current user renders with correct check status and as disabled 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={true}
-  className="implicit"
-  color="default"
-  disabled={true}
-  onClick={[Function]}
-/>
+<div>
+  <div>
+    CheckBox mock 
+    {"checked":true,"color":"default","className":"implicit","disabled":true}
+  </div>
+</div>
 `;
 
 exports[`PermissionsCheckbox when user has rights equal to CheckboxSpec returns an checked active selection check box 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={true}
-  className="active"
-  color="default"
-  onClick={[Function]}
-/>
+<div>
+  <div>
+    CheckBox mock 
+    {"checked":true,"color":"default","className":"active"}
+  </div>
+</div>
 `;
 
 exports[`PermissionsCheckbox when user has rights greater than CheckboxSpec returns an checked implicit selection check box 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={true}
-  className="implicit"
-  color="default"
-  onClick={[Function]}
-/>
+<div>
+  <div>
+    CheckBox mock 
+    {"checked":true,"color":"default","className":"implicit"}
+  </div>
+</div>
 `;
 
 exports[`PermissionsCheckbox when user has rights less than CheckboxSpec returns an unchecked check box 1`] = `
-<WithStyles(ForwardRef(Checkbox))
-  checked={false}
-  color="default"
-  onClick={[Function]}
-/>
+<div>
+  <div>
+    CheckBox mock 
+    {"checked":false,"color":"default"}
+  </div>
+</div>
 `;
 
 exports[`RemoveUserButtonCell renders as disabled when on the row of the current user 1`] = `
-<WithStyles(ForwardRef(TableCell))
-  align="center"
-  className="tableCell"
-  padding="checkbox"
->
-  <WithStyles(ForwardRef(IconButton))
-    disabled={true}
-    onClick={[Function]}
-  >
-    <WithStyles(ForwardRef(Icon))>
-      remove_circle_outline
-    </WithStyles(ForwardRef(Icon))>
-  </WithStyles(ForwardRef(IconButton))>
-</WithStyles(ForwardRef(TableCell))>
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="MuiTableCell-root tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+        >
+          <button
+            class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+            disabled=""
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                remove_circle_outline
+              </span>
+            </span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;

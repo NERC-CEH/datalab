@@ -1,19 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`New Stack Button creates correct snapshot 1`] = `
-<PagePrimaryActionButton
-  aria-label="add"
-  onClick={[Function]}
->
-  Create Stack
-</PagePrimaryActionButton>
+<div>
+  <button
+    aria-label="add"
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Create Stack
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
 `;
 
 exports[`New Stack Button uses labelPrefix if present 1`] = `
-<PagePrimaryActionButton
-  aria-label="add"
-  onClick={[Function]}
->
-  Request Stack
-</PagePrimaryActionButton>
+<div>
+  <button
+    aria-label="add"
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Request Stack
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
 `;

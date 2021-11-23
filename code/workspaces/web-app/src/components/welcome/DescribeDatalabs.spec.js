@@ -1,15 +1,11 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { render } from '@testing-library/react';
 import DescribeDatalabs from './DescribeDatalabs';
 
+jest.mock('./DescribeElement', () => props => (<div>DescribeElement mock {JSON.stringify(props)}</div>));
+
 describe('DescribeDatalabs', () => {
-  let shallow;
-
-  beforeEach(() => {
-    shallow = createShallow();
-  });
-
   it('renders correct snapshot', () => {
-    expect(shallow(<DescribeDatalabs/>)).toMatchSnapshot();
+    expect(render(<DescribeDatalabs/>).container).toMatchSnapshot();
   });
 });

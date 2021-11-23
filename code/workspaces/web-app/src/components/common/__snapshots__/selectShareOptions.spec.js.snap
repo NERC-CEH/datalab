@@ -1,108 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotebookSharingOptions-private correctly renders correct snapshot 1`] = `
-<div
-  className="makeStyles-select-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-title-2"
-    variant="body1"
+<div>
+  <div
+    class="makeStyles-select-1"
   >
-    Private
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-description-3"
-    variant="body1"
-  >
-    Only you can view and interact with this notebook.
-  </WithStyles(ForwardRef(Typography))>
+    <p
+      class="MuiTypography-root makeStyles-title-2 MuiTypography-body1"
+    >
+      Private
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-description-3 MuiTypography-body1"
+    >
+      Only you can view and interact with this notebook.
+    </p>
+  </div>
 </div>
 `;
 
 exports[`NotebookSharingOptions-project correctly renders correct snapshot 1`] = `
-<div
-  className="makeStyles-select-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-title-2"
-    variant="body1"
+<div>
+  <div
+    class="makeStyles-select-35"
   >
-    Project
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-description-3"
-    variant="body1"
-  >
-    Anyone in this project can view and interact with this notebook.
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-warning-4"
-    variant="body1"
-  >
-    NOTE: This option will allow multiple users to view and edit notebooks at the same time. As real-time collaboration is not currently supported this may result in corruption, hence this option should be chosen primarily for notebooks that are being viewed/run rather than edited.
-  </WithStyles(ForwardRef(Typography))>
+    <p
+      class="MuiTypography-root makeStyles-title-36 MuiTypography-body1"
+    >
+      Project
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-description-37 MuiTypography-body1"
+    >
+      Anyone in this project can view and interact with this notebook.
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-warning-38 MuiTypography-body1"
+    >
+      NOTE: This option will allow multiple users to view and edit notebooks at the same time. As real-time collaboration is not currently supported this may result in corruption, hence this option should be chosen primarily for notebooks that are being viewed/run rather than edited.
+    </p>
+  </div>
 </div>
 `;
 
 exports[`SiteVisibilityOptions-private correctly renders correct snapshot 1`] = `
-<div
-  className="makeStyles-select-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-title-2"
-    variant="body1"
+<div>
+  <div
+    class="makeStyles-select-69"
   >
-    Private
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-description-3"
-    variant="body1"
-  >
-    Only you can can view and interact with this site.
-  </WithStyles(ForwardRef(Typography))>
+    <p
+      class="MuiTypography-root makeStyles-title-70 MuiTypography-body1"
+    >
+      Private
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-description-71 MuiTypography-body1"
+    >
+      Only you can can view and interact with this site.
+    </p>
+  </div>
 </div>
 `;
 
 exports[`SiteVisibilityOptions-project correctly renders correct snapshot 1`] = `
-<div
-  className="makeStyles-select-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-title-2"
-    variant="body1"
+<div>
+  <div
+    class="makeStyles-select-103"
   >
-    Project
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-description-3"
-    variant="body1"
-  >
-    Anyone in this project can view and interact with this site.
-  </WithStyles(ForwardRef(Typography))>
+    <p
+      class="MuiTypography-root makeStyles-title-104 MuiTypography-body1"
+    >
+      Project
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-description-105 MuiTypography-body1"
+    >
+      Anyone in this project can view and interact with this site.
+    </p>
+  </div>
 </div>
 `;
 
 exports[`SiteVisibilityOptions-public correctly renders correct snapshot 1`] = `
-<div
-  className="makeStyles-select-1"
->
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-title-2"
-    variant="body1"
+<div>
+  <div
+    class="makeStyles-select-137"
   >
-    Public
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-description-3"
-    variant="body1"
-  >
-    Anyone can view and interact with this site.
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-warning-4"
-    variant="body1"
-  >
-    NOTE: This will make the site available (via URL) to anyone including those external to the DataLabs platform. Hence please ensure any security considerations have been implemented before proceeding.
-  </WithStyles(ForwardRef(Typography))>
+    <p
+      class="MuiTypography-root makeStyles-title-138 MuiTypography-body1"
+    >
+      Public
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-description-139 MuiTypography-body1"
+    >
+      Anyone can view and interact with this site.
+    </p>
+    <p
+      class="MuiTypography-root makeStyles-warning-140 MuiTypography-body1"
+    >
+      NOTE: This will make the site available (via URL) to anyone including those external to the DataLabs platform. Hence please ensure any security considerations have been implemented before proceeding.
+    </p>
+  </div>
 </div>
 `;

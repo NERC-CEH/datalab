@@ -1,44 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RequireAuth passes function to returned Route that renders CircularProgress when permissions fetching 1`] = `
-<Route
-  exact={true}
-  path="/path"
-  strict={true}
->
-  <WithStyles(ForwardRef(CircularProgress))
-    className="makeStyles-circularProgress-1"
-    size={70}
-  />
-</Route>
+<div>
+  <div
+    class="MuiCircularProgress-root makeStyles-circularProgress-2 MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    role="progressbar"
+    style="width: 70px; height: 70px;"
+  >
+    <svg
+      class="MuiCircularProgress-svg"
+      viewBox="22 22 44 44"
+    >
+      <circle
+        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+        cx="44"
+        cy="44"
+        fill="none"
+        r="20.2"
+        stroke-width="3.6"
+      />
+    </svg>
+  </div>
+</div>
 `;
 
 exports[`RequireAuth passes function to returned Route that renders PrivateComponent when user has tokens 1`] = `
-<Route
-  exact={true}
-  path="/path"
-  strict={true}
->
-  <PrivateComponent />
-</Route>
+<div>
+  <span>
+    PrivateComponent
+  </span>
+</div>
 `;
 
 exports[`RequireAuth passes function to returned Route that renders PublicComponent when user has no tokens 1`] = `
-<Route
-  exact={true}
-  path="/path"
-  strict={true}
->
-  <PublicComponent />
-</Route>
+<div>
+  <span>
+    PublicComponent
+  </span>
+</div>
 `;
 
 exports[`RequireAuth renders passing correct props to returned Route 1`] = `
-<Route
-  exact={true}
-  path="/path"
-  strict={true}
->
-  <PrivateComponent />
-</Route>
+<div>
+  <div>
+    Private Component Mock
+  </div>
+</div>
 `;

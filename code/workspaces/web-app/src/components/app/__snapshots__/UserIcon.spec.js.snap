@@ -1,31 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UserIcon renders correct snapshot 1`] = `
-<div>
-  <WithStyles(ForwardRef(Avatar))
-    className="UserIcon-avatar-1"
-    onClick={[Function]}
-    src="expectedPicture"
-  />
-  <WithStyles(ForwardRef(Popover))
-    anchorEl={null}
-    anchorOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "bottom",
-      }
-    }
-    onClose={[Function]}
-    open={false}
+<div
+  class="UserMenu-container-39"
+>
+  <div
+    class="UserMenu-identity-40"
   >
-    <WithStyles(UserMenu)
-      closePopover={[Function]}
-      identity={
-        Object {
-          "picture": "expectedPicture",
-        }
-      }
+    <div
+      class="MuiAvatar-root MuiAvatar-circle UserMenu-userImage-41"
+    >
+      <img
+        class="MuiAvatar-img"
+        src="expectedPicture"
+      />
+    </div>
+    <div
+      class="UserMenu-userInfo-42"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        test nickname
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        test name
+      </p>
+    </div>
+  </div>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Logout
+    </span>
+    <span
+      class="MuiTouchRipple-root"
     />
-  </WithStyles(ForwardRef(Popover))>
+  </button>
 </div>
 `;

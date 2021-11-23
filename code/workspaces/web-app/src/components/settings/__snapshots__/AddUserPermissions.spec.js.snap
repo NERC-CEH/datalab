@@ -1,191 +1,304 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddUserButton renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  placement="top"
-  title="Please enter a registered user's email."
->
-  <div>
-    <PrimaryActionButton
-      className="addButton"
-      disabled={true}
-      onClick={[Function]}
+<div>
+  <div
+    class=""
+    title="Please enter a registered user's email."
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined addButton MuiButton-outlinedPrimary Mui-disabled Mui-disabled"
+      disabled=""
+      tabindex="-1"
+      type="button"
     >
-      Add
-    </PrimaryActionButton>
+      <span
+        class="MuiButton-label"
+      >
+        Add
+      </span>
+    </button>
   </div>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`AddUserButton when selected user is the current user renders as disabled with explanatory tooltip when the current user is not system admin 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  placement="top"
-  title="You can not add permissions for yourself."
->
-  <div>
-    <PrimaryActionButton
-      className="addButton"
-      disabled={true}
-      onClick={[Function]}
+<div>
+  <div
+    class=""
+    title="You can not add permissions for yourself."
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined addButton MuiButton-outlinedPrimary Mui-disabled Mui-disabled"
+      disabled=""
+      tabindex="-1"
+      type="button"
     >
-      Add
-    </PrimaryActionButton>
+      <span
+        class="MuiButton-label"
+      >
+        Add
+      </span>
+    </button>
   </div>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`AddUserButton when selected user is the current user renders as not disabled when the current user is system admin 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  placement="top"
-  title=""
->
-  <div>
-    <PrimaryActionButton
-      className="addButton"
-      disabled={false}
-      onClick={[Function]}
+<div>
+  <div
+    class=""
+    title=""
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined addButton MuiButton-outlinedPrimary"
+      tabindex="0"
+      type="button"
     >
-      Add
-    </PrimaryActionButton>
+      <span
+        class="MuiButton-label"
+      >
+        Add
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`AddUserButton when the selected user is not the current user renders as not disabled when the selected user name is in the list of possibilities 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  placement="top"
-  title=""
->
-  <div>
-    <PrimaryActionButton
-      className="addButton"
-      disabled={false}
-      onClick={[Function]}
+<div>
+  <div
+    class=""
+    title=""
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined addButton MuiButton-outlinedPrimary"
+      tabindex="0"
+      type="button"
     >
-      Add
-    </PrimaryActionButton>
+      <span
+        class="MuiButton-label"
+      >
+        Add
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`AddUserPermissions renders pure component with correct props 1`] = `
-<PureAddUserPermission
-  classes={
-    Object {
-      "addButton": "AddUserPermission-addButton-6",
-      "addUserPermission": "AddUserPermission-addUserPermission-1",
-      "dropDownClosed": "AddUserPermission-dropDownClosed-2",
-      "dropDownOpen": "AddUserPermission-dropDownOpen-3",
-      "permissionsSelector": "AddUserPermission-permissionsSelector-4",
-      "usersAutofill": "AddUserPermission-usersAutofill-5",
-    }
-  }
-  currentUserId="current-user-id"
-  currentUserSystemAdmin="current-user-system-admin"
-  dispatch={[MockFunction dispatch]}
-  permissionLevels={
-    Array [
-      "Admin",
-      "User",
-      "Viewer",
-    ]
-  }
-  projectKey="testproj"
-  selectedPermissions="Viewer"
-  selectedUser={null}
-  setSelectedPermissions={[Function]}
-  setSelectedUser={[Function]}
-/>
+<div>
+  <div
+    class="AddUserPermission-addUserPermission-1"
+  >
+    <div>
+      UserSelect mock 
+      {"className":"AddUserPermission-usersAutofill-5","selectedUsers":null,"label":"Add User","placeholder":"Type user's email..."}
+    </div>
+    <div
+      class="MuiFormControl-root MuiTextField-root AddUserPermission-permissionsSelector-4 MuiFormControl-marginDense"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+        data-shrink="true"
+      >
+        Permissions
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <div
+          aria-haspopup="listbox"
+          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          role="button"
+          tabindex="0"
+        >
+          Viewer
+        </div>
+        <input
+          type="hidden"
+          value="Viewer"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-88 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-90 PrivateNotchedOutline-legendNotched-91"
+          >
+            <span>
+              Permissions
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <div
+      class=""
+      title="Please enter a registered user's email."
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined AddUserPermission-addButton-6 MuiButton-outlinedPrimary Mui-disabled Mui-disabled"
+        disabled=""
+        tabindex="-1"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Add
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`PermissionsSelector renders to match snapshot 1`] = `
-<StyledTextField
-  className="permissionsSelector"
-  label="Permissions"
-  onChange={[Function]}
-  select={true}
-  value="Viewer"
->
-  <WithStyles(ForwardRef(MenuItem))
-    key="Admin"
-    value="Admin"
+<div>
+  <div
+    class="MuiFormControl-root MuiTextField-root permissionsSelector MuiFormControl-marginDense"
   >
-    Admin
-  </WithStyles(ForwardRef(MenuItem))>
-  <WithStyles(ForwardRef(MenuItem))
-    key="User"
-    value="User"
-  >
-    User
-  </WithStyles(ForwardRef(MenuItem))>
-  <WithStyles(ForwardRef(MenuItem))
-    key="Viewer"
-    value="Viewer"
-  >
-    Viewer
-  </WithStyles(ForwardRef(MenuItem))>
-</StyledTextField>
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+      data-shrink="true"
+    >
+      Permissions
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    >
+      <div
+        aria-haspopup="listbox"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        role="button"
+        tabindex="0"
+      >
+        Viewer
+      </div>
+      <input
+        type="hidden"
+        value="Viewer"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="PrivateNotchedOutline-root-354 MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="PrivateNotchedOutline-legendLabelled-356 PrivateNotchedOutline-legendNotched-357"
+        >
+          <span>
+            Permissions
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`PureAddUserPermission renders to match snapshot 1`] = `
-<div
-  className="addUserPermission"
->
-  <UserSelect
-    className="usersAutofill"
-    label="Add User"
-    placeholder="Type user's email..."
-    selectedUsers={
-      Object {
-        "name": "Test User One",
-        "userId": "test-user-one",
-      }
-    }
-    setSelectedUsers={[MockFunction setSelectedUser]}
-  />
-  <PermissionsSelector
-    className="permissionsSelector"
-    classes={
-      Object {
-        "addButton": "addButton",
-        "addUserPermission": "addUserPermission",
-        "dropDownClosed": "dropDownClosed",
-        "dropDownOpen": "dropDownOpen",
-        "permissionsSelector": "permissionsSelector",
-        "usersAutofill": "usersAutofill",
-      }
-    }
-    permissionLevels={
-      Array [
-        "Admin",
-        "User",
-        "Viewer",
-      ]
-    }
-    selectedPermissions="Viewer"
-    setSelectedPermissions={[MockFunction setSelectedPermissions]}
-  />
-  <AddUserButton
-    classes={
-      Object {
-        "addButton": "addButton",
-        "addUserPermission": "addUserPermission",
-        "dropDownClosed": "dropDownClosed",
-        "dropDownOpen": "dropDownOpen",
-        "permissionsSelector": "permissionsSelector",
-        "usersAutofill": "usersAutofill",
-      }
-    }
-    dispatch={[MockFunction dispatch]}
-    onClickFn={[Function]}
-    projectKey="projectKey"
-    selectedPermissions="Viewer"
-    selectedUser={
-      Object {
-        "name": "Test User One",
-        "userId": "test-user-one",
-      }
-    }
-  />
+<div>
+  <div
+    class="addUserPermission"
+  >
+    <div>
+      UserSelect mock 
+      {"className":"usersAutofill","selectedUsers":{"name":"Test User One","userId":"test-user-one"},"label":"Add User","placeholder":"Type user's email..."}
+    </div>
+    <div
+      class="MuiFormControl-root MuiTextField-root permissionsSelector MuiFormControl-marginDense"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+        data-shrink="true"
+      >
+        Permissions
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <div
+          aria-haspopup="listbox"
+          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          role="button"
+          tabindex="0"
+        >
+          Viewer
+        </div>
+        <input
+          type="hidden"
+          value="Viewer"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-216 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-218 PrivateNotchedOutline-legendNotched-219"
+          >
+            <span>
+              Permissions
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <div
+      class=""
+      title=""
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined addButton MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Add
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
 </div>
 `;

@@ -2,17 +2,19 @@
 
 exports[`ProjectInfoContent correctly renders correct snapshot 1`] = `
 <div>
-  <WithStyles(ForwardRef(Typography))
-    variant="h5"
-  >
-    project2
-    : 
-    "project2" is the ID of this
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    variant="body1"
-  >
-    This is the second project.
-  </WithStyles(ForwardRef(Typography))>
+  <div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5"
+    >
+      project2
+      : 
+      "project2" is the ID of this
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      This is the second project.
+    </p>
+  </div>
 </div>
 `;
