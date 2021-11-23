@@ -29,7 +29,8 @@ const sparkDriverHeadlessService = deploymentServiceName => `${deploymentService
 const sparkJob = deploymentName => `${deploymentName}-spark-job`;
 
 // Jobs
-const jobName = name => `job-${name}`;
+// Add the timestamp to the job name so we don't have duplicate names in case old jobs are not cleared.
+const jobName = name => `job-${name}-${Date.now()}`;
 
 export default {
   assetVolume,

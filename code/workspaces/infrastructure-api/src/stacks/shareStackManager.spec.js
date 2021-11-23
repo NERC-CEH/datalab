@@ -152,6 +152,7 @@ describe('handleSharedChange', () => {
       category: NOTEBOOK_CATEGORY,
       type: JUPYTERLAB,
     };
+    jest.spyOn(Date, 'now').mockReturnValue(1609459200);
 
     secretManager.createNewJupyterCredentials = jest.fn(() => ({ token: 'token' }));
     deploymentApi.getDeployment.mockResolvedValueOnce({
