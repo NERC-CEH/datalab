@@ -1,250 +1,340 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CollaborationLink renders correctly to match snapshot when there is a collaboration link 1`] = `
-<div
-  className="makeStyles-collaborationLink-5"
->
-  <WithStyles(ForwardRef(Typography))
-    className="makeStyles-collaborationLinkHeading-6"
+<div>
+  <div
+    class="makeStyles-collaborationLink-281"
   >
-    Collaboration Link
-  </WithStyles(ForwardRef(Typography))>
-  <WithStyles(ForwardRef(Typography))
-    variant="body1"
-  >
-    <a
-      href="https://testlab.test-datalabs.nerc.ac.uk"
-      rel="noopener noreferrer"
-      target="_blank"
+    <p
+      class="MuiTypography-root makeStyles-collaborationLinkHeading-282 MuiTypography-body1"
     >
-      https://testlab.test-datalabs.nerc.ac.uk
-    </a>
-  </WithStyles(ForwardRef(Typography))>
+      Collaboration Link
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      <a
+        href="https://testlab.test-datalabs.nerc.ac.uk"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        https://testlab.test-datalabs.nerc.ac.uk
+      </a>
+    </p>
+  </div>
 </div>
 `;
 
-exports[`CollaborationLink renders correctly to match snapshot when there is not a collaboration link 1`] = `""`;
+exports[`CollaborationLink renders correctly to match snapshot when there is not a collaboration link 1`] = `<div />`;
 
 exports[`ProjectInfoContainer renders correctly passing correct props to children 1`] = `
-<PureProjectInfoContainer
-  currentProject={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
-      },
-    }
-  }
-/>
+<div>
+  <div>
+    <div
+      class="makeStyles-projectTitleWrapper-3"
+    >
+      <h5
+        class="MuiTypography-root makeStyles-projectTitle-1 MuiTypography-h5"
+      >
+        Test Project
+      </h5>
+      <span
+        class="makeStyles-ResourceInfoSpan-4 makeStyles-root-39"
+      >
+        (testproj)
+      </span>
+    </div>
+    <p
+      class="MuiTypography-root makeStyles-description-2 MuiTypography-body1"
+    >
+      A description about Test Project.
+    </p>
+    <div
+      class="makeStyles-collaborationLink-5"
+    >
+      <p
+        class="MuiTypography-root makeStyles-collaborationLinkHeading-6 MuiTypography-body1"
+      >
+        Collaboration Link
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        <a
+          href="https://testlab.test-datalabs.nerc.ac.uk"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          https://testlab.test-datalabs.nerc.ac.uk
+        </a>
+      </p>
+    </div>
+    <div
+      class="makeStyles-userBlock-7"
+    >
+      <div>
+        <div />
+        <div>
+          <h6
+            class="MuiTypography-root makeStyles-chipTitle-8 MuiTypography-h6"
+          >
+            user
+            s
+          </h6>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user1@test
+            </span>
+          </div>
+        </div>
+        <div />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ProjectInfoContainer renders correctly when there are multiple users 1`] = `
+<div>
+  <div>
+    <div
+      class="makeStyles-projectTitleWrapper-72"
+    >
+      <h5
+        class="MuiTypography-root makeStyles-projectTitle-70 MuiTypography-h5"
+      >
+        Test Project
+      </h5>
+      <span
+        class="makeStyles-ResourceInfoSpan-73 makeStyles-root-108"
+      >
+        (testproj)
+      </span>
+    </div>
+    <p
+      class="MuiTypography-root makeStyles-description-71 MuiTypography-body1"
+    >
+      A description about Test Project.
+    </p>
+    <div
+      class="makeStyles-collaborationLink-74"
+    >
+      <p
+        class="MuiTypography-root makeStyles-collaborationLinkHeading-75 MuiTypography-body1"
+      >
+        Collaboration Link
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        <a
+          href="https://testlab.test-datalabs.nerc.ac.uk"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          https://testlab.test-datalabs.nerc.ac.uk
+        </a>
+      </p>
+    </div>
+    <div
+      class="makeStyles-userBlock-76"
+    >
+      <div>
+        <div>
+          <h6
+            class="MuiTypography-root makeStyles-chipTitle-77 MuiTypography-h6"
+          >
+            admin
+            s
+          </h6>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user4@test
+            </span>
+          </div>
+        </div>
+        <div>
+          <h6
+            class="MuiTypography-root makeStyles-chipTitle-77 MuiTypography-h6"
+          >
+            user
+            s
+          </h6>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user1@test
+            </span>
+          </div>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user3@test
+            </span>
+          </div>
+        </div>
+        <div>
+          <h6
+            class="MuiTypography-root makeStyles-chipTitle-77 MuiTypography-h6"
+          >
+            viewer
+            s
+          </h6>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user2@test
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is a collaboration link 1`] = `
-<PromisedContentWrapper
-  promise={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": "https://testlab.test-datalabs.nerc.ac.uk",
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
-      },
-    }
-  }
->
+<div>
   <div>
     <div
-      className="makeStyles-projectTitleWrapper-3"
+      class="makeStyles-projectTitleWrapper-141"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-projectTitle-1"
-        variant="h5"
+      <h5
+        class="MuiTypography-root makeStyles-projectTitle-139 MuiTypography-h5"
       >
         Test Project
-      </WithStyles(ForwardRef(Typography))>
-      <ResourceInfoSpan
-        className="makeStyles-ResourceInfoSpan-4"
+      </h5>
+      <span
+        class="makeStyles-ResourceInfoSpan-142 makeStyles-root-177"
       >
         (testproj)
-      </ResourceInfoSpan>
+      </span>
     </div>
-    <WithStyles(ForwardRef(Typography))
-      className="makeStyles-description-2"
-      variant="body1"
+    <p
+      class="MuiTypography-root makeStyles-description-140 MuiTypography-body1"
     >
       A description about Test Project.
-    </WithStyles(ForwardRef(Typography))>
-    <CollaborationLink
-      link="https://testlab.test-datalabs.nerc.ac.uk"
-    />
+    </p>
     <div
-      className="makeStyles-userBlock-7"
+      class="makeStyles-collaborationLink-143"
+    >
+      <p
+        class="MuiTypography-root makeStyles-collaborationLinkHeading-144 MuiTypography-body1"
+      >
+        Collaboration Link
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        <a
+          href="https://testlab.test-datalabs.nerc.ac.uk"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          https://testlab.test-datalabs.nerc.ac.uk
+        </a>
+      </p>
+    </div>
+    <div
+      class="makeStyles-userBlock-145"
     >
       <div>
-        <UserBlock
-          classes={
-            Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
-              "chipTitle": "makeStyles-chipTitle-8",
-              "collaborationLink": "makeStyles-collaborationLink-5",
-              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-              "description": "makeStyles-description-2",
-              "projectTitle": "makeStyles-projectTitle-1",
-              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-              "userBlock": "makeStyles-userBlock-7",
-            }
-          }
-          name="admin"
-          users={Array []}
-        />
-        <UserBlock
-          classes={
-            Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
-              "chipTitle": "makeStyles-chipTitle-8",
-              "collaborationLink": "makeStyles-collaborationLink-5",
-              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-              "description": "makeStyles-description-2",
-              "projectTitle": "makeStyles-projectTitle-1",
-              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-              "userBlock": "makeStyles-userBlock-7",
-            }
-          }
-          name="user"
-          users={
-            Array [
-              Object {
-                "name": "user1@test",
-                "role": "user",
-                "userId": "user1",
-              },
-            ]
-          }
-        />
-        <UserBlock
-          classes={
-            Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
-              "chipTitle": "makeStyles-chipTitle-8",
-              "collaborationLink": "makeStyles-collaborationLink-5",
-              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-              "description": "makeStyles-description-2",
-              "projectTitle": "makeStyles-projectTitle-1",
-              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-              "userBlock": "makeStyles-userBlock-7",
-            }
-          }
-          name="viewer"
-          users={Array []}
-        />
+        <div />
+        <div>
+          <h6
+            class="MuiTypography-root makeStyles-chipTitle-146 MuiTypography-h6"
+          >
+            user
+            s
+          </h6>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user1@test
+            </span>
+          </div>
+        </div>
+        <div />
       </div>
     </div>
   </div>
-</PromisedContentWrapper>
+</div>
 `;
 
 exports[`PureProjectInfoContainer renders correctly to match snapshot when there is not a collaboration link 1`] = `
-<PromisedContentWrapper
-  promise={
-    Object {
-      "fetching": false,
-      "value": Object {
-        "collaborationLink": undefined,
-        "description": "A description about Test Project.",
-        "key": "testproj",
-        "name": "Test Project",
-      },
-    }
-  }
->
+<div>
   <div>
     <div
-      className="makeStyles-projectTitleWrapper-3"
+      class="makeStyles-projectTitleWrapper-210"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-projectTitle-1"
-        variant="h5"
+      <h5
+        class="MuiTypography-root makeStyles-projectTitle-208 MuiTypography-h5"
       >
         Test Project
-      </WithStyles(ForwardRef(Typography))>
-      <ResourceInfoSpan
-        className="makeStyles-ResourceInfoSpan-4"
+      </h5>
+      <span
+        class="makeStyles-ResourceInfoSpan-211 makeStyles-root-246"
       >
         (testproj)
-      </ResourceInfoSpan>
+      </span>
     </div>
-    <WithStyles(ForwardRef(Typography))
-      className="makeStyles-description-2"
-      variant="body1"
+    <p
+      class="MuiTypography-root makeStyles-description-209 MuiTypography-body1"
     >
       A description about Test Project.
-    </WithStyles(ForwardRef(Typography))>
-    <CollaborationLink />
+    </p>
     <div
-      className="makeStyles-userBlock-7"
+      class="makeStyles-userBlock-214"
     >
       <div>
-        <UserBlock
-          classes={
-            Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
-              "chipTitle": "makeStyles-chipTitle-8",
-              "collaborationLink": "makeStyles-collaborationLink-5",
-              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-              "description": "makeStyles-description-2",
-              "projectTitle": "makeStyles-projectTitle-1",
-              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-              "userBlock": "makeStyles-userBlock-7",
-            }
-          }
-          name="admin"
-          users={Array []}
-        />
-        <UserBlock
-          classes={
-            Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
-              "chipTitle": "makeStyles-chipTitle-8",
-              "collaborationLink": "makeStyles-collaborationLink-5",
-              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-              "description": "makeStyles-description-2",
-              "projectTitle": "makeStyles-projectTitle-1",
-              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-              "userBlock": "makeStyles-userBlock-7",
-            }
-          }
-          name="user"
-          users={
-            Array [
-              Object {
-                "name": "user1@test",
-                "role": "user",
-                "userId": "user1",
-              },
-            ]
-          }
-        />
-        <UserBlock
-          classes={
-            Object {
-              "ResourceInfoSpan": "makeStyles-ResourceInfoSpan-4",
-              "chipTitle": "makeStyles-chipTitle-8",
-              "collaborationLink": "makeStyles-collaborationLink-5",
-              "collaborationLinkHeading": "makeStyles-collaborationLinkHeading-6",
-              "description": "makeStyles-description-2",
-              "projectTitle": "makeStyles-projectTitle-1",
-              "projectTitleWrapper": "makeStyles-projectTitleWrapper-3",
-              "userBlock": "makeStyles-userBlock-7",
-            }
-          }
-          name="viewer"
-          users={Array []}
-        />
+        <div />
+        <div>
+          <h6
+            class="MuiTypography-root makeStyles-chipTitle-215 MuiTypography-h6"
+          >
+            user
+            s
+          </h6>
+          <div
+            class="MuiChip-root"
+            tabindex="-1"
+          >
+            <span
+              class="MuiChip-label"
+            >
+              user1@test
+            </span>
+          </div>
+        </div>
+        <div />
       </div>
     </div>
   </div>
-</PromisedContentWrapper>
+</div>
 `;

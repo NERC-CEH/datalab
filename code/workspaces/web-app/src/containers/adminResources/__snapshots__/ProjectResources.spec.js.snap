@@ -1,196 +1,321 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectResources shows clusters 1`] = `
-<div
-  className="makeStyles-root-1"
->
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-    defaultExpanded={true}
-    key="test-project"
+<div>
+  <div
+    class="makeStyles-root-231"
   >
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-234 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-235 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-root-3"
-        variant="h5"
-      >
-        Test Project
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
       <div
-        className="makeStyles-root-2"
+        aria-disabled="false"
+        aria-expanded="true"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-268 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-270"
+        role="button"
+        tabindex="0"
       >
-        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-          defaultExpanded={true}
+        <div
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-271 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-270"
         >
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-            expandIcon={<Memo(ExpandMoreIcon) />}
+          <h5
+            class="MuiTypography-root makeStyles-root-233 MuiTypography-h5"
           >
-            <WithStyles(ForwardRef(Typography))
-              variant="h6"
+            Test Project
+          </h5>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-269 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-270 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              Clusters
-            </WithStyles(ForwardRef(Typography))>
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-            <ProjectClustersContainer
-              modifyData={false}
-              projectKey="test-project"
-            />
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </div>
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      <div
+        class="MuiCollapse-container MuiCollapse-entered"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-334"
+              >
+                <div
+                  class="makeStyles-root-232"
+                >
+                  ProjectClusters Mock 
+                  {"project":{"key":"test-project","name":"Test Project"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`ProjectResources shows notebooks 1`] = `
-<div
-  className="makeStyles-root-1"
->
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-    defaultExpanded={true}
-    key="test-project"
+<div>
+  <div
+    class="makeStyles-root-1"
   >
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-4 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-5 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-root-3"
-        variant="h5"
-      >
-        Test Project
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
       <div
-        className="makeStyles-root-2"
+        aria-disabled="false"
+        aria-expanded="true"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-38 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-40"
+        role="button"
+        tabindex="0"
       >
-        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-          defaultExpanded={true}
+        <div
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-41 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-40"
         >
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-            expandIcon={<Memo(ExpandMoreIcon) />}
+          <h5
+            class="MuiTypography-root makeStyles-root-3 MuiTypography-h5"
           >
-            <WithStyles(ForwardRef(Typography))
-              variant="h6"
+            Test Project
+          </h5>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-39 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-40 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              Notebooks
-            </WithStyles(ForwardRef(Typography))>
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-            <ProjectNotebooksContainer
-              project={
-                Object {
-                  "key": "test-project",
-                  "name": "Test Project",
-                }
-              }
-            />
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </div>
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      <div
+        class="MuiCollapse-container MuiCollapse-entered"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-104"
+              >
+                <div
+                  class="makeStyles-root-2"
+                >
+                  ProjectNotebooks Mock 
+                  {"project":{"key":"test-project","name":"Test Project"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`ProjectResources shows sites 1`] = `
-<div
-  className="makeStyles-root-1"
->
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-    defaultExpanded={true}
-    key="test-project"
+<div>
+  <div
+    class="makeStyles-root-116"
   >
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-119 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-120 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-root-3"
-        variant="h5"
-      >
-        Test Project
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
       <div
-        className="makeStyles-root-2"
+        aria-disabled="false"
+        aria-expanded="true"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-153 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-155"
+        role="button"
+        tabindex="0"
       >
-        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-          defaultExpanded={true}
+        <div
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-156 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-155"
         >
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-            expandIcon={<Memo(ExpandMoreIcon) />}
+          <h5
+            class="MuiTypography-root makeStyles-root-118 MuiTypography-h5"
           >
-            <WithStyles(ForwardRef(Typography))
-              variant="h6"
+            Test Project
+          </h5>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-154 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-155 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              Sites
-            </WithStyles(ForwardRef(Typography))>
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-            <ProjectSitesContainer
-              project={
-                Object {
-                  "key": "test-project",
-                  "name": "Test Project",
-                }
-              }
-            />
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </div>
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      <div
+        class="MuiCollapse-container MuiCollapse-entered"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-219"
+              >
+                <div
+                  class="makeStyles-root-117"
+                >
+                  ProjectSites Mock 
+                  {"project":{"key":"test-project","name":"Test Project"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`ProjectResources shows storage 1`] = `
-<div
-  className="makeStyles-root-1"
->
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-    defaultExpanded={true}
-    key="test-project"
+<div>
+  <div
+    class="makeStyles-root-346"
   >
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-349 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-350 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-root-3"
-        variant="h5"
-      >
-        Test Project
-      </WithStyles(ForwardRef(Typography))>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
       <div
-        className="makeStyles-root-2"
+        aria-disabled="false"
+        aria-expanded="true"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-383 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-385"
+        role="button"
+        tabindex="0"
       >
-        <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))
-          defaultExpanded={true}
+        <div
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-386 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-385"
         >
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-            expandIcon={<Memo(ExpandMoreIcon) />}
+          <h5
+            class="MuiTypography-root makeStyles-root-348 MuiTypography-h5"
           >
-            <WithStyles(ForwardRef(Typography))
-              variant="h6"
+            Test Project
+          </h5>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-384 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-385 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              Storage
-            </WithStyles(ForwardRef(Typography))>
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-          <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-            <Connect(DataStorageContainer)
-              projectKey="test-project"
-            />
-          </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-        </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </div>
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      <div
+        class="MuiCollapse-container MuiCollapse-entered"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-449"
+              >
+                <div
+                  class="makeStyles-root-347"
+                >
+                  ProjectStorage Mock 
+                  {"project":{"key":"test-project","name":"Test Project"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;

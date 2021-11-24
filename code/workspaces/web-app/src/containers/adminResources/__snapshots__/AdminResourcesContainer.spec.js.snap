@@ -1,128 +1,183 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AdminResourcesContainer renders correctly passing correct props to children 1`] = `
-<Fragment>
-  <ProjectMultiSelect
-    input={
-      Object {
-        "onChange": [Function],
-        "value": Array [],
-      }
-    }
-  />
+<div>
+  ProjectMultiSelect 
+  {"input":{"value":[]}}
   <div
-    className="makeStyles-root-1"
+    class="makeStyles-root-1"
   >
     <span
-      className="makeStyles-root-2"
+      class="makeStyles-root-2"
     >
       Show
     </span>
-    <WithStyles(ForwardRef(FormControlLabel))
-      control={
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          color="primary"
-          name="notebooks"
-          onChange={[Function]}
+    <label
+      class="MuiFormControlLabel-root"
+    >
+      <span
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <input
+            checked=""
+            class="PrivateSwitchBase-input-19"
+            data-indeterminate="false"
+            name="notebooks"
+            type="checkbox"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
         />
-      }
-      label="Notebooks"
-    />
-    <WithStyles(ForwardRef(FormControlLabel))
-      control={
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          color="primary"
-          name="sites"
-          onChange={[Function]}
+      </span>
+      <span
+        class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+      >
+        Notebooks
+      </span>
+    </label>
+    <label
+      class="MuiFormControlLabel-root"
+    >
+      <span
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <input
+            checked=""
+            class="PrivateSwitchBase-input-19"
+            data-indeterminate="false"
+            name="sites"
+            type="checkbox"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
         />
-      }
-      label="Sites"
-    />
-    <WithStyles(ForwardRef(FormControlLabel))
-      control={
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          color="primary"
-          name="clusters"
-          onChange={[Function]}
+      </span>
+      <span
+        class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+      >
+        Sites
+      </span>
+    </label>
+    <label
+      class="MuiFormControlLabel-root"
+    >
+      <span
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <input
+            checked=""
+            class="PrivateSwitchBase-input-19"
+            data-indeterminate="false"
+            name="clusters"
+            type="checkbox"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
         />
-      }
-      label="Clusters"
-    />
-    <WithStyles(ForwardRef(FormControlLabel))
-      control={
-        <WithStyles(ForwardRef(Checkbox))
-          checked={true}
-          color="primary"
-          name="storage"
-          onChange={[Function]}
+      </span>
+      <span
+        class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+      >
+        Clusters
+      </span>
+    </label>
+    <label
+      class="MuiFormControlLabel-root"
+    >
+      <span
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <input
+            checked=""
+            class="PrivateSwitchBase-input-19"
+            data-indeterminate="false"
+            name="storage"
+            type="checkbox"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
         />
-      }
-      label="Storage"
-    />
+      </span>
+      <span
+        class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+      >
+        Storage
+      </span>
+    </label>
   </div>
   <div>
-    <PromisedContentWrapper
-      fetchingClassName="makeStyles-root-3"
-      promise={
-        Object {
-          "fetching": false,
-          "value": Array [
-            Object {
-              "key": "testproj1",
-              "name": "Test Project 1",
-            },
-            Object {
-              "key": "testproj2",
-              "name": "Test Project 2",
-            },
-          ],
-        }
-      }
-    >
-      <Pagination
-        items={
-          Array [
-            <Unknown
-              project={
-                Object {
-                  "key": "testproj1",
-                  "name": "Test Project 1",
-                }
-              }
-              show={
-                Object {
-                  "clusters": true,
-                  "notebooks": true,
-                  "sites": true,
-                  "storage": true,
-                }
-              }
-            />,
-            <Unknown
-              project={
-                Object {
-                  "key": "testproj2",
-                  "name": "Test Project 2",
-                }
-              }
-              show={
-                Object {
-                  "clusters": true,
-                  "notebooks": true,
-                  "sites": true,
-                  "storage": true,
-                }
-              }
-            />,
-          ]
-        }
-        itemsName="Projects"
-        itemsPerPage={5}
-      />
-    </PromisedContentWrapper>
+    <div>
+      <div>
+        project resources 
+        {"project":{"key":"testproj1","name":"Test Project 1"},"show":{"notebooks":true,"sites":true,"clusters":true,"storage":true}}
+        project resources 
+        {"project":{"key":"testproj2","name":"Test Project 2"},"show":{"notebooks":true,"sites":true,"clusters":true,"storage":true}}
+      </div>
+    </div>
   </div>
-</Fragment>
+</div>
 `;
