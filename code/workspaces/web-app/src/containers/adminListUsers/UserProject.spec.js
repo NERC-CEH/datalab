@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 import { RSHINY, JUPYTER } from 'common/src/stackTypes';
 import UserProject from './UserProject';
@@ -28,30 +28,26 @@ const notebook = { key: projectKey, name: notebookName, type: JUPYTER };
 const storage = { key: projectKey, name: storageName };
 
 describe('UserProject', () => {
-  const shallowRender = () => {
-    const filters = {
-      instanceAdmin: false,
-      projectAdmin: false,
-      projectUser: false,
-      projectViewer: false,
-      siteOwner: false,
-      notebookOwner: false,
-      storageAccess: false,
-    };
-    const roles = {
-      instanceAdmin: true,
-      projectAdmin: [projectKey],
-      projectUser: [projectKey],
-      projectViewer: [projectKey],
-      siteOwner: [{ projectKey, name: siteName }],
-      notebookOwner: [{ projectKey, name: notebookName }],
-      storageAccess: [{ projectKey, name: storageName }],
-    };
-    const props = {
-      projectKey, filters, roles,
-    };
-
-    return shallow(<UserProject {...props} />);
+  const filters = {
+    instanceAdmin: false,
+    projectAdmin: false,
+    projectUser: false,
+    projectViewer: false,
+    siteOwner: false,
+    notebookOwner: false,
+    storageAccess: false,
+  };
+  const roles = {
+    instanceAdmin: true,
+    projectAdmin: [projectKey],
+    projectUser: [projectKey],
+    projectViewer: [projectKey],
+    siteOwner: [{ projectKey, name: siteName }],
+    notebookOwner: [{ projectKey, name: notebookName }],
+    storageAccess: [{ projectKey, name: storageName }],
+  };
+  const props = {
+    projectKey, filters, roles,
   };
 
   beforeEach(() => {
@@ -62,6 +58,6 @@ describe('UserProject', () => {
   });
 
   it('renders to match snapshot passing correct props to children', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    expect(render(<UserProject {...props} />).container).toMatchSnapshot();
   });
 });

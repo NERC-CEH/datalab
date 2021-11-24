@@ -1,225 +1,391 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UserResources renders to match snapshot passing correct props to children when catalogue is available 1`] = `
-<div
-  className="makeStyles-container-1"
->
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+<div>
+  <div
+    class="makeStyles-container-1"
+  >
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-9 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
       <div
-        className="makeStyles-summary-4"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="makeStyles-heading-3"
-          variant="h5"
-        >
-          user name
-        </WithStyles(ForwardRef(Typography))>
-        <WithStyles(ForwardRef(Typography))
-          variant="body2"
-        >
-          1 project, 1 site, 1 notebook, 1 data store
-        </WithStyles(ForwardRef(Typography))>
-      </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-      <div
-        className="makeStyles-resources-2"
+        aria-disabled="false"
+        aria-expanded="false"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-43"
+        role="button"
+        tabindex="0"
       >
         <div
-          className="makeStyles-systemRoles-5"
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-46"
         >
-          <SystemCheckbox
-            checked={true}
-            disabled={false}
-            label="Instance admin"
-            name="instanceAdmin"
-          />
-          <SystemCheckbox
-            checked={true}
-            label="Data manager"
-            name="dataManager"
-          />
-          <SystemSelect
-            itemPrefix="Catalogue"
-            items={
-              Array [
-                "admin",
-                "publisher",
-                "editor",
-                "user",
-              ]
-            }
-            name="catalogue"
+          <div
+            class="makeStyles-summary-4"
+          >
+            <h5
+              class="MuiTypography-root makeStyles-heading-3 MuiTypography-h5"
+            >
+              user name
+            </h5>
+            <p
+              class="MuiTypography-root MuiTypography-body2"
+            >
+              1 project, 1 site, 1 notebook, 1 data store
+            </p>
+          </div>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-44 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
           />
         </div>
-        <Pagination
-          items={
-            Array [
-              <Unknown
-                filters={
-                  Object {
-                    "dataManager": false,
-                    "instanceAdmin": false,
-                    "notebookOwner": false,
-                    "projectAdmin": false,
-                    "projectUser": false,
-                    "projectViewer": false,
-                    "siteOwner": false,
-                    "storageAccess": false,
-                  }
-                }
-                projectKey="proj-1234"
-                roles={
-                  Object {
-                    "dataManager": true,
-                    "instanceAdmin": true,
-                    "notebookOwner": Array [
-                      Object {
-                        "name": "notebook name",
-                        "projectKey": "proj-1234",
-                      },
-                    ],
-                    "projectAdmin": Array [
-                      "proj-1234",
-                    ],
-                    "projectUser": Array [
-                      "proj-1234",
-                    ],
-                    "projectViewer": Array [
-                      "proj-1234",
-                    ],
-                    "siteOwner": Array [
-                      Object {
-                        "name": "site name",
-                        "projectKey": "proj-1234",
-                      },
-                    ],
-                    "storageAccess": Array [
-                      Object {
-                        "name": "storage name",
-                        "projectKey": "proj-1234",
-                      },
-                    ],
-                  }
-                }
-                userId="uid1"
-              />,
-            ]
-          }
-          itemsName="Projects"
-          itemsPerPage={5}
-        />
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      <div
+        class="MuiCollapse-container MuiCollapse-hidden"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-109"
+              >
+                <div
+                  class="makeStyles-resources-2"
+                >
+                  <div
+                    class="makeStyles-systemRoles-5"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1"
+                      id="system-checkbox-uid1-instanceAdmin"
+                    >
+                      Instance admin
+                    </p>
+                    <span
+                      aria-disabled="false"
+                      aria-labelledby="system-checkbox-uid1-instanceAdmin"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-117 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-118 Mui-checked MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          checked=""
+                          class="PrivateSwitchBase-input-120"
+                          data-indeterminate="false"
+                          name="instanceAdmin"
+                          type="checkbox"
+                          value=""
+                        />
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <p
+                      class="MuiTypography-root MuiTypography-body1"
+                      id="system-checkbox-uid1-dataManager"
+                    >
+                      Data manager
+                    </p>
+                    <span
+                      aria-disabled="false"
+                      aria-labelledby="system-checkbox-uid1-dataManager"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-117 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-118 Mui-checked MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          checked=""
+                          class="PrivateSwitchBase-input-120"
+                          data-indeterminate="false"
+                          name="dataManager"
+                          type="checkbox"
+                          value=""
+                        />
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <div
+                      class="makeStyles-systemSelect-8"
+                    >
+                      <div
+                        aria-label="Catalogue role"
+                        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                      >
+                        <div
+                          aria-haspopup="listbox"
+                          aria-labelledby="mui-component-select-catalogue"
+                          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                          id="mui-component-select-catalogue"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <span>
+                            ​
+                          </span>
+                        </div>
+                        <input
+                          name="catalogue"
+                          type="hidden"
+                          value=""
+                        />
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M7 10l5 5 5-5z"
+                          />
+                        </svg>
+                        <fieldset
+                          aria-hidden="true"
+                          class="PrivateNotchedOutline-root-168 MuiOutlinedInput-notchedOutline"
+                          style="padding-left: 8px;"
+                        >
+                          <legend
+                            class="PrivateNotchedOutline-legend-169"
+                            style="width: 0.01px;"
+                          >
+                            <span>
+                              ​
+                            </span>
+                          </legend>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      user project
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`UserResources renders to match snapshot passing correct props to children when catalogue is not available 1`] = `
-<div
-  className="makeStyles-container-1"
->
-  <WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))
-      expandIcon={<Memo(ExpandMoreIcon) />}
+<div>
+  <div
+    class="makeStyles-container-183"
+  >
+    <div
+      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-191 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
     >
       <div
-        className="makeStyles-summary-4"
-      >
-        <WithStyles(ForwardRef(Typography))
-          className="makeStyles-heading-3"
-          variant="h5"
-        >
-          user name
-        </WithStyles(ForwardRef(Typography))>
-        <WithStyles(ForwardRef(Typography))
-          variant="body2"
-        >
-          1 project, 1 site, 1 notebook, 1 data store
-        </WithStyles(ForwardRef(Typography))>
-      </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelSummary)))>
-    <WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-      <div
-        className="makeStyles-resources-2"
+        aria-disabled="false"
+        aria-expanded="false"
+        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-225"
+        role="button"
+        tabindex="0"
       >
         <div
-          className="makeStyles-systemRoles-5"
+          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-228"
         >
-          <SystemCheckbox
-            checked={true}
-            disabled={false}
-            label="Instance admin"
-            name="instanceAdmin"
-          />
-          <SystemCheckbox
-            checked={true}
-            label="Data manager"
-            name="dataManager"
+          <div
+            class="makeStyles-summary-186"
+          >
+            <h5
+              class="MuiTypography-root makeStyles-heading-185 MuiTypography-h5"
+            >
+              user name
+            </h5>
+            <p
+              class="MuiTypography-root MuiTypography-body2"
+            >
+              1 project, 1 site, 1 notebook, 1 data store
+            </p>
+          </div>
+        </div>
+        <div
+          aria-disabled="false"
+          aria-hidden="true"
+          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-226 MuiIconButton-edgeEnd"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
           />
         </div>
-        <Pagination
-          items={
-            Array [
-              <Unknown
-                filters={
-                  Object {
-                    "dataManager": false,
-                    "instanceAdmin": false,
-                    "notebookOwner": false,
-                    "projectAdmin": false,
-                    "projectUser": false,
-                    "projectViewer": false,
-                    "siteOwner": false,
-                    "storageAccess": false,
-                  }
-                }
-                projectKey="proj-1234"
-                roles={
-                  Object {
-                    "dataManager": true,
-                    "instanceAdmin": true,
-                    "notebookOwner": Array [
-                      Object {
-                        "name": "notebook name",
-                        "projectKey": "proj-1234",
-                      },
-                    ],
-                    "projectAdmin": Array [
-                      "proj-1234",
-                    ],
-                    "projectUser": Array [
-                      "proj-1234",
-                    ],
-                    "projectViewer": Array [
-                      "proj-1234",
-                    ],
-                    "siteOwner": Array [
-                      Object {
-                        "name": "site name",
-                        "projectKey": "proj-1234",
-                      },
-                    ],
-                    "storageAccess": Array [
-                      Object {
-                        "name": "storage name",
-                        "projectKey": "proj-1234",
-                      },
-                    ],
-                  }
-                }
-                userId="uid1"
-              />,
-            ]
-          }
-          itemsName="Projects"
-          itemsPerPage={5}
-        />
       </div>
-    </WithStyles(WithStyles(ForwardRef(ExpansionPanelDetails)))>
-  </WithStyles(WithStyles(ForwardRef(ExpansionPanel)))>
+      <div
+        class="MuiCollapse-container MuiCollapse-hidden"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              role="region"
+            >
+              <div
+                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-291"
+              >
+                <div
+                  class="makeStyles-resources-184"
+                >
+                  <div
+                    class="makeStyles-systemRoles-187"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1"
+                      id="system-checkbox-uid1-instanceAdmin"
+                    >
+                      Instance admin
+                    </p>
+                    <span
+                      aria-disabled="false"
+                      aria-labelledby="system-checkbox-uid1-instanceAdmin"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-299 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-300 Mui-checked MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          checked=""
+                          class="PrivateSwitchBase-input-302"
+                          data-indeterminate="false"
+                          name="instanceAdmin"
+                          type="checkbox"
+                          value=""
+                        />
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <p
+                      class="MuiTypography-root MuiTypography-body1"
+                      id="system-checkbox-uid1-dataManager"
+                    >
+                      Data manager
+                    </p>
+                    <span
+                      aria-disabled="false"
+                      aria-labelledby="system-checkbox-uid1-dataManager"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-299 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-300 Mui-checked MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          checked=""
+                          class="PrivateSwitchBase-input-302"
+                          data-indeterminate="false"
+                          name="dataManager"
+                          type="checkbox"
+                          value=""
+                        />
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <div>
+                      user project
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;

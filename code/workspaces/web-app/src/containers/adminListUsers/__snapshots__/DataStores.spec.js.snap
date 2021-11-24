@@ -1,16 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataStores renders to match snapshot passing correct props to children 1`] = `
-<ResourceStackCards
-  resources={
-    Array [
-      Object {
-        "key": "test-key",
-        "name": "Test Name",
-      },
-    ]
-  }
-  typeName="Data Store"
-  typeNamePlural="Data Stores"
-/>
+<div>
+  ResourceStackCards Mock 
+  {"resources":[{"key":"test-key","name":"Test Name"}],"typeName":"Data Store","typeNamePlural":"Data Stores"}
+</div>
 `;
