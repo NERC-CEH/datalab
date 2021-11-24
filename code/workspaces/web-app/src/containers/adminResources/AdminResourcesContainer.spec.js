@@ -10,6 +10,7 @@ jest.mock('react-redux');
 jest.mock('../../hooks/projectsHooks');
 jest.mock('../../actions/projectActions');
 jest.mock('../../actions/userActions');
+jest.mock('../../components/common/form/ProjectMultiSelect', () => props => (<>ProjectMultiSelect {JSON.stringify(props)}</>));
 jest.mock('./ProjectResources', () => props => (<>project resources {JSON.stringify(props)}</>));
 
 const project1 = { key: 'testproj1', name: 'Test Project 1' };

@@ -2,108 +2,8 @@
 
 exports[`AdminResourcesContainer renders correctly passing correct props to children 1`] = `
 <div>
-  <div
-    aria-expanded="false"
-    class="MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon"
-    role="combobox"
-    style="min-width: 250px; margin-bottom: 10px;"
-  >
-    <div
-      class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
-    >
-      <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-        data-shrink="false"
-        for="mui-89184"
-        id="mui-89184-label"
-      >
-        Projects
-      </label>
-      <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-      >
-        <input
-          aria-autocomplete="list"
-          aria-invalid="false"
-          autocapitalize="none"
-          autocomplete="off"
-          class="MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-          id="mui-89184"
-          placeholder="Filter by project"
-          spellcheck="false"
-          type="text"
-          value=""
-        />
-        <div
-          class="MuiAutocomplete-endAdornment"
-        >
-          <button
-            aria-label="Clear"
-            class="MuiButtonBase-root MuiIconButton-root MuiAutocomplete-clearIndicator"
-            tabindex="-1"
-            title="Clear"
-            type="button"
-          >
-            <span
-              class="MuiIconButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-          <button
-            aria-label="Open"
-            class="MuiButtonBase-root MuiIconButton-root MuiAutocomplete-popupIndicator"
-            tabindex="-1"
-            title="Open"
-            type="button"
-          >
-            <span
-              class="MuiIconButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7 10l5 5 5-5z"
-                />
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <fieldset
-          aria-hidden="true"
-          class="PrivateNotchedOutline-root-107 MuiOutlinedInput-notchedOutline"
-        >
-          <legend
-            class="PrivateNotchedOutline-legendLabelled-109"
-          >
-            <span>
-              Projects
-            </span>
-          </legend>
-        </fieldset>
-      </div>
-      
-    </div>
-  </div>
+  ProjectMultiSelect 
+  {"input":{"value":[]}}
   <div
     class="makeStyles-root-1"
   >
@@ -117,14 +17,14 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     >
       <span
         aria-disabled="false"
-        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-123 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-124 Mui-checked MuiIconButton-colorPrimary"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
       >
         <span
           class="MuiIconButton-label"
         >
           <input
             checked=""
-            class="PrivateSwitchBase-input-126"
+            class="PrivateSwitchBase-input-19"
             data-indeterminate="false"
             name="notebooks"
             type="checkbox"
@@ -156,14 +56,14 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     >
       <span
         aria-disabled="false"
-        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-123 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-124 Mui-checked MuiIconButton-colorPrimary"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
       >
         <span
           class="MuiIconButton-label"
         >
           <input
             checked=""
-            class="PrivateSwitchBase-input-126"
+            class="PrivateSwitchBase-input-19"
             data-indeterminate="false"
             name="sites"
             type="checkbox"
@@ -195,14 +95,14 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     >
       <span
         aria-disabled="false"
-        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-123 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-124 Mui-checked MuiIconButton-colorPrimary"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
       >
         <span
           class="MuiIconButton-label"
         >
           <input
             checked=""
-            class="PrivateSwitchBase-input-126"
+            class="PrivateSwitchBase-input-19"
             data-indeterminate="false"
             name="clusters"
             type="checkbox"
@@ -234,14 +134,14 @@ exports[`AdminResourcesContainer renders correctly passing correct props to chil
     >
       <span
         aria-disabled="false"
-        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-123 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-124 Mui-checked MuiIconButton-colorPrimary"
+        class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorPrimary"
       >
         <span
           class="MuiIconButton-label"
         >
           <input
             checked=""
-            class="PrivateSwitchBase-input-126"
+            class="PrivateSwitchBase-input-19"
             data-indeterminate="false"
             name="storage"
             type="checkbox"
