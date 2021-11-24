@@ -1,27 +1,27 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import ProjectSitesContainer from './ProjectSitesContainer';
 
-describe('ProjectSitesContainer', () => {
-  const shallowRender = () => {
-    const promisedUserPermissions = {
-      fetching: false,
-      error: null,
-      value: ['some-permission'],
-    };
-    const project = {
-      key: 'testproj',
-      name: 'Test Project',
-    };
-    const props = {
-      promisedUserPermissions,
-      project,
-    };
+jest.mock('../stacks/StacksContainer', () => ({
+  ProjectStacksContainer: props => (<>ProjectStacksContainer Mock {JSON.stringify(props, null, 2)}</>),
+}));
 
-    return shallow(<ProjectSitesContainer {...props} />);
+describe('ProjectSitesContainer', () => {
+  const promisedUserPermissions = {
+    fetching: false,
+    error: null,
+    value: ['some-permission'],
+  };
+  const project = {
+    key: 'testproj',
+    name: 'Test Project',
+  };
+  const props = {
+    promisedUserPermissions,
+    project,
   };
 
   it('renders to match snapshot passing correct props to children', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    expect(render(<ProjectSitesContainer {...props} />).container).toMatchSnapshot();
   });
 });
