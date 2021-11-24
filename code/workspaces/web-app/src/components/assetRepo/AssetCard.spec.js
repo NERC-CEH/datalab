@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import AssetCard from './AssetCard';
 
 describe('AssetCard', () => {
@@ -14,10 +14,10 @@ describe('AssetCard', () => {
       visibility: 'BY_PROJECT',
       projects: [{ projectKey: 'project-1', name: 'project 1' }, { projectKey: 'project-2', name: 'project 2' }],
     };
-    expect(shallow(
+    expect(render(
       <AssetCard
         asset={asset}
       />,
-    )).toMatchSnapshot();
+    ).container).toMatchSnapshot();
   });
 });

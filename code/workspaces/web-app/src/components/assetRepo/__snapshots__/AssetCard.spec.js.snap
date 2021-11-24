@@ -1,47 +1,140 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AssetCard renders to match snapshot 1`] = `
-<Fragment>
-  <AssetCardKeyValue
-    rowKey="Name"
-    rowValue="asset name"
-  />
-  <AssetCardKeyValue
-    rowKey="Version"
-    rowValue="asset version"
-  />
-  <AssetCardKeyValue
-    rowKey="Asset Id"
-    rowValue="asset-1"
-  />
-  <AssetCardKeyValue
-    rowKey="File location"
-    rowValue="file location"
-  />
-  <AssetCardHyperlink
-    rowKey="Master URL"
-    rowValue="master URL"
-  />
-  <AssetCardKeyList
-    rowKey="Owners"
-    rowList={
-      Array [
-        "name 1",
-        "name 2",
-      ]
-    }
-  />
-  <AssetCardKeyValue
-    rowKey="Visibility"
-  />
-  <AssetCardKeyList
-    rowKey="Projects"
-    rowList={
-      Array [
-        "project 1",
-        "project 2",
-      ]
-    }
-  />
-</Fragment>
+<div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Name
+    </div>
+    <div
+      class="makeStyles-value-3"
+    >
+      asset name
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Version
+    </div>
+    <div
+      class="makeStyles-value-3"
+    >
+      asset version
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Asset Id
+    </div>
+    <div
+      class="makeStyles-value-3"
+    >
+      asset-1
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      File location
+    </div>
+    <div
+      class="makeStyles-value-3"
+    >
+      file location
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Master URL
+    </div>
+    <div
+      class="makeStyles-value-3"
+    >
+      <a
+        href="master URL"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        master URL
+      </a>
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Owners
+    </div>
+    <div
+      class="makeStyles-list-4"
+    >
+      <div
+        class="makeStyles-value-3"
+      >
+        name 1
+      </div>
+      <div
+        class="makeStyles-value-3"
+      >
+        name 2
+      </div>
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Visibility
+    </div>
+    <div
+      class="makeStyles-value-3"
+    />
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Projects
+    </div>
+    <div
+      class="makeStyles-list-4"
+    >
+      <div
+        class="makeStyles-value-3"
+      >
+        project 1
+      </div>
+      <div
+        class="makeStyles-value-3"
+      >
+        project 2
+      </div>
+    </div>
+  </div>
+</div>
 `;

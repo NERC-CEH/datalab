@@ -1,45 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GridSkeleton correctly constructs final class name from default class names and provided class name when when class name is provided 1`] = `"mockMakeStyles-grid test-class-name"`;
-
-exports[`GridSkeleton correctly constructs final class name from default class names and provided class name when when no class name is provided 1`] = `"mockMakeStyles-grid"`;
-
 exports[`GridSkeleton renders correct children passing down provided props to children 1`] = `
-<WithStyles(ForwardRef(Skeleton))
-  key="0"
-  variant="text"
->
-  <WithStyles(ForwardRef(Typography))
-    variant="h5"
+<div>
+  <div
+    class="makeStyles-grid-44 makeStyles-grid-45"
   >
-    Test sizing text
-  </WithStyles(ForwardRef(Typography))>
-</WithStyles(ForwardRef(Skeleton))>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5"
+      >
+        Test sizing text
+      </h5>
+    </span>
+  </div>
+</div>
 `;
 
 exports[`GridSkeleton renders to match snapshot for 1 x 2 grid 1`] = `
-<div
-  className="mockMakeStyles-grid"
->
-  <WithStyles(ForwardRef(Skeleton))
-    key="0"
-    variant="text"
+<div>
+  <div
+    class="makeStyles-grid-87 makeStyles-grid-88"
   >
-    <WithStyles(ForwardRef(Typography))
-      variant="body1"
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
     >
-      Text to infer size from
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(Skeleton))>
-  <WithStyles(ForwardRef(Skeleton))
-    key="1"
-    variant="text"
-  >
-    <WithStyles(ForwardRef(Typography))
-      variant="body1"
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        Text to infer size from
+      </p>
+    </span>
+    <span
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
     >
-      Text to infer size from
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(Skeleton))>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        Text to infer size from
+      </p>
+    </span>
+  </div>
 </div>
 `;

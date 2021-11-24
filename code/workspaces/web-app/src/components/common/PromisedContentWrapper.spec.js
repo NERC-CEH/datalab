@@ -1,16 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import PromisedContentWrapper, { ClassWrapper, SizeWrapper, createClassName } from './PromisedContentWrapper';
 
 describe('PromisedContentWrapper', () => {
   function shallowRender(props) {
-    return shallow(
+    return render(
       <PromisedContentWrapper {...props}>
         <span>
           {props.promise.value}
         </span>
       </PromisedContentWrapper>,
-    );
+    ).container;
   }
 
   describe('with no classNames or widths', () => {
@@ -91,7 +91,7 @@ describe('PromisedContentWrapper', () => {
 });
 
 describe('ClassWrapper', () => {
-  const shallowRender = props => shallow(<ClassWrapper {...props} />);
+  const shallowRender = props => render(<ClassWrapper {...props} />).container;
 
   describe('renders with correct class name when', () => {
     describe('className and fetchingClassName are defined and is', () => {
@@ -141,35 +141,35 @@ describe('ClassWrapper', () => {
   });
 
   it('correctly renders with children', () => {
-    expect(shallow(
+    expect(render(
       <ClassWrapper className="className">
         <span>Child Content</span>
       </ClassWrapper>,
-    )).toMatchSnapshot();
+    ).container).toMatchSnapshot();
   });
 });
 
 describe('SizeWrapper', () => {
   describe('renders with correct classname when', () => {
     it('is fullWidth', () => {
-      expect(shallow(<SizeWrapper fullWidth />)).toMatchSnapshot();
+      expect(render(<SizeWrapper fullWidth />).container).toMatchSnapshot();
     });
 
     it('is fullHeight', () => {
-      expect(shallow(<SizeWrapper fullHeight />)).toMatchSnapshot();
+      expect(render(<SizeWrapper fullHeight />).container).toMatchSnapshot();
     });
 
     it('is fullHeight and fullWidth', () => {
-      expect(shallow(<SizeWrapper fullHeight fullWidth />)).toMatchSnapshot();
+      expect(render(<SizeWrapper fullHeight fullWidth />).container).toMatchSnapshot();
     });
   });
 
   it('correctly renders with children', () => {
-    expect(shallow(
+    expect(render(
       <SizeWrapper fullHeight fullWidth >
         <span>Child Content</span>
       </SizeWrapper>,
-    )).toMatchSnapshot();
+    ).container).toMatchSnapshot();
   });
 });
 

@@ -1,107 +1,248 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
-<form
-  className="makeStyles-form-1"
-  onSubmit={[MockFunction handleSubmit]}
->
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
-    label="Name"
-    margin="dense"
-    name="name"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
-    label="Version"
-    margin="dense"
-    name="version"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
-    label="File location on server.  Can be omitted if the repo is not hosting a local copy."
-    margin="dense"
-    name="fileLocation"
-    placeholder="/file/path/"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
-    label="Master URL.  Can be omitted if the asset is only stored in the repo."
-    margin="dense"
-    name="masterUrl"
-    placeholder="https://"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
-    format={[Function]}
-    label="Owners"
-    margin="dense"
-    name="owners"
-    parse={[Function]}
-    selectedTip="User is an owner"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="makeStyles-input-2"
-    component={[Function]}
-    disabled={false}
-    label="Visibility"
-    margin="dense"
-    name="visible"
-    options={
-      Array [
-        Object {
-          "text": "Public: Asset will be visible to all projects",
-          "value": "PUBLIC",
-        },
-        Object {
-          "text": "By project: Asset is only visible to selected projects",
-          "value": "BY_PROJECT",
-        },
-      ]
-    }
-  />
-  <UpdateFormControls
-    onCancel={[MockFunction onCancel]}
-  />
-</form>
+<div>
+  <form
+    class="makeStyles-form-1"
+  >
+    <div
+      class="MuiFormControl-root MuiTextField-root makeStyles-input-2 MuiFormControl-marginDense MuiFormControl-fullWidth"
+      style="min-width: 250px; margin-bottom: 10px;"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+        data-shrink="true"
+      >
+        Name
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          name="name"
+          type="text"
+          value=""
+        />
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-63 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-65 PrivateNotchedOutline-legendNotched-66"
+          >
+            <span>
+              Name
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div
+      class="MuiFormControl-root MuiTextField-root makeStyles-input-2 MuiFormControl-marginDense MuiFormControl-fullWidth"
+      style="min-width: 250px; margin-bottom: 10px;"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+        data-shrink="true"
+      >
+        Version
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          name="version"
+          type="text"
+          value=""
+        />
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-63 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-65 PrivateNotchedOutline-legendNotched-66"
+          >
+            <span>
+              Version
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div
+      class="MuiFormControl-root MuiTextField-root makeStyles-input-2 MuiFormControl-marginDense MuiFormControl-fullWidth"
+      style="min-width: 250px; margin-bottom: 10px;"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+        data-shrink="true"
+      >
+        File location on server.  Can be omitted if the repo is not hosting a local copy.
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          name="fileLocation"
+          placeholder="/file/path/"
+          type="text"
+          value=""
+        />
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-63 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-65 PrivateNotchedOutline-legendNotched-66"
+          >
+            <span>
+              File location on server.  Can be omitted if the repo is not hosting a local copy.
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div
+      class="MuiFormControl-root MuiTextField-root makeStyles-input-2 MuiFormControl-marginDense MuiFormControl-fullWidth"
+      style="min-width: 250px; margin-bottom: 10px;"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+        data-shrink="true"
+      >
+        Master URL.  Can be omitted if the asset is only stored in the repo.
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          name="masterUrl"
+          placeholder="https://"
+          type="text"
+          value=""
+        />
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-63 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-65 PrivateNotchedOutline-legendNotched-66"
+          >
+            <span>
+              Master URL.  Can be omitted if the asset is only stored in the repo.
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div>
+      UserMultiSelect mock 
+      {"input":{"name":"owners","value":[]},"meta":{"active":false,"asyncValidating":false,"autofilled":false,"dirty":false,"form":"test form","invalid":false,"pristine":true,"submitting":false,"submitFailed":false,"touched":false,"valid":true,"visited":false},"className":"makeStyles-input-2","margin":"dense","disabled":false,"InputLabelProps":{"shrink":true},"label":"Owners","selectedTip":"User is an owner"}
+    </div>
+    <div
+      class="MuiFormControl-root MuiTextField-root makeStyles-input-2 MuiFormControl-marginDense MuiFormControl-fullWidth"
+      style="min-width: 250px; margin-bottom: 10px;"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+        data-shrink="true"
+      >
+        Visibility
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <div
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-visible"
+          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          id="mui-component-select-visible"
+          role="button"
+          tabindex="0"
+        >
+          <span>
+            ​
+          </span>
+        </div>
+        <input
+          name="visible"
+          type="hidden"
+          value=""
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-63 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-65 PrivateNotchedOutline-legendNotched-66"
+          >
+            <span>
+              Visibility
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-90"
+    >
+      <span
+        class="makeStyles-button-91"
+        title=""
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+          tabindex="0"
+          type="submit"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Apply
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </span>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-91 MuiButton-outlinedSecondary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;

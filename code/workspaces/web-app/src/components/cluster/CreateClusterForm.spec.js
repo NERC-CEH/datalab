@@ -1,9 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { PureCreateClusterForm, removeNoneOptions } from './CreateClusterForm';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 
 jest.mock('../../hooks/reduxFormHooks');
+jest.mock('redux-form', () => ({
+  Field: props => (<div>Field mock {JSON.stringify(props)}</div>),
+}));
 
 const getProps = () => ({
   handleSubmit: jest.fn().mockName('handleSubmit'),
@@ -22,22 +25,22 @@ describe('CreateClusterForm', () => {
     it('without condaPath field when volumeMount field has no value', () => {
       useReduxFormValue.mockReturnValueOnce(null);
       const props = getProps();
-      const render = shallow(<PureCreateClusterForm {...props} />);
-      expect(render).toMatchSnapshot();
+      const wrapper = render(<PureCreateClusterForm {...props} />).container;
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('without condaPath field when volumeMount field is set as None option', () => {
       useReduxFormValue.mockReturnValueOnce('--none--');
       const props = getProps();
-      const render = shallow(<PureCreateClusterForm {...props} />);
-      expect(render).toMatchSnapshot();
+      const wrapper = render(<PureCreateClusterForm {...props} />).container;
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('with condaPath field when volumeMount field is set', () => {
       useReduxFormValue.mockReturnValueOnce('teststore');
       const props = getProps();
-      const render = shallow(<PureCreateClusterForm {...props} />);
-      expect(render).toMatchSnapshot();
+      const wrapper = render(<PureCreateClusterForm {...props} />).container;
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('when conda is required and volumeMount field is set', () => {
@@ -46,8 +49,8 @@ describe('CreateClusterForm', () => {
         ...getProps(),
         condaRequired: true,
       };
-      const render = shallow(<PureCreateClusterForm {...props} />);
-      expect(render).toMatchSnapshot();
+      const wrapper = render(<PureCreateClusterForm {...props} />).container;
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

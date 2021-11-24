@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import PromisedContentSkeletonWrapper from './PromisedContentSkeletonWrapper';
 
-const TestSkeleton = props => <div {...props}>This is a test SKELETON component.</div>;
-const TestChild = props => <div{...props}>This is a test CHILD component.</div>;
+const TestSkeleton = props => <div>This is a test SKELETON component. props:{JSON.stringify(props)}</div>;
+const TestChild = props => <div>This is a test CHILD component. props:{JSON.stringify(props)}</div>;
 
 const createPromises = (...fetchingValues) => {
   if (fetchingValues.length === 0) throw new Error('Must provide at lease one fetching value');
@@ -13,11 +13,11 @@ const createPromises = (...fetchingValues) => {
 
 const expectRenderToMatchSnapshotWithFetchingValues = (...fetchingValues) => {
   const promises = createPromises(...fetchingValues);
-  const wrapper = shallow(
+  const wrapper = render(
     <PromisedContentSkeletonWrapper promises={promises} skeletonComponent={TestSkeleton}>
       <TestChild />
     </PromisedContentSkeletonWrapper>,
-  );
+  ).container;
   expect(wrapper).toMatchSnapshot();
 };
 
@@ -48,7 +48,7 @@ describe('PromisedContentSkeletonWrapper', () => {
 
   it('passes skeletonProps to skeletonComponent when it is being rendered', () => {
     const promise = createPromises(true);
-    const wrapper = shallow(
+    const wrapper = render(
         <PromisedContentSkeletonWrapper
           promises={promise}
           skeletonComponent={TestSkeleton}
@@ -56,7 +56,7 @@ describe('PromisedContentSkeletonWrapper', () => {
         >
           <TestChild />
         </PromisedContentSkeletonWrapper>,
-    );
+    ).container;
     expect(wrapper).toMatchSnapshot();
   });
 });
