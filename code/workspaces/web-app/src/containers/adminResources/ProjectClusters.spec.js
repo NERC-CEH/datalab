@@ -1,27 +1,25 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import ProjectClusters from './ProjectClusters';
 
-describe('ProjectClusters', () => {
-  const shallowRender = () => {
-    const promisedUserPermissions = {
-      fetching: false,
-      error: null,
-      value: ['some-permission'],
-    };
-    const project = {
-      key: 'test-project',
-      name: 'Test Project',
-    };
-    const props = {
-      promisedUserPermissions,
-      project,
-    };
+jest.mock('../clusters/ProjectClustersContainer', () => props => (<>ProjectClustersContainer Mock {JSON.stringify(props)}</>));
 
-    return shallow(<ProjectClusters {...props} />);
+describe('ProjectClusters', () => {
+  const promisedUserPermissions = {
+    fetching: false,
+    error: null,
+    value: ['some-permission'],
+  };
+  const project = {
+    key: 'test-project',
+    name: 'Test Project',
+  };
+  const props = {
+    promisedUserPermissions,
+    project,
   };
 
   it('renders to match snapshot passing correct props to children', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    expect(render(<ProjectClusters {...props} />).container).toMatchSnapshot();
   });
 });

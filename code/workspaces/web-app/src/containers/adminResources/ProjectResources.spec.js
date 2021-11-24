@@ -1,9 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import ProjectResources from './ProjectResources';
 
+jest.mock('./ProjectNotebooks', () => props => (<>ProjectNotebooks Mock {JSON.stringify(props)}</>));
+jest.mock('./ProjectSites', () => props => (<>ProjectSites Mock {JSON.stringify(props)}</>));
+jest.mock('./ProjectClusters', () => props => (<>ProjectClusters Mock {JSON.stringify(props)}</>));
+jest.mock('./ProjectStorage', () => props => (<>ProjectStorage Mock {JSON.stringify(props)}</>));
+
 describe('ProjectResources', () => {
-  const shallowRender = (notebooks, sites, clusters, storage) => {
+  const renderResources = (notebooks, sites, clusters, storage) => {
     const promisedUserPermissions = {
       fetching: false,
       error: null,
@@ -25,22 +30,22 @@ describe('ProjectResources', () => {
       show,
     };
 
-    return shallow(<ProjectResources {...props} />);
+    return render(<ProjectResources {...props} />).container;
   };
 
   it('shows notebooks', () => {
-    expect(shallowRender(true, false, false, false)).toMatchSnapshot();
+    expect(renderResources(true, false, false, false)).toMatchSnapshot();
   });
 
   it('shows sites', () => {
-    expect(shallowRender(false, true, false, false)).toMatchSnapshot();
+    expect(renderResources(false, true, false, false)).toMatchSnapshot();
   });
 
   it('shows clusters', () => {
-    expect(shallowRender(false, false, true, false)).toMatchSnapshot();
+    expect(renderResources(false, false, true, false)).toMatchSnapshot();
   });
 
   it('shows storage', () => {
-    expect(shallowRender(false, false, false, true)).toMatchSnapshot();
+    expect(renderResources(false, false, false, true)).toMatchSnapshot();
   });
 });
