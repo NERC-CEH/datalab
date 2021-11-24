@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
+import { render } from '@testing-library/react';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectSwitcher, {
@@ -15,6 +15,12 @@ jest.mock('react-router');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/projectsHooks');
 jest.mock('../../actions/projectActions');
+
+// import { Link, useLocation } from 'react-router-dom';
+jest.mock('react-router-dom', () => ({
+  useLocation: jest.fn(),
+  Link: props => (<div>Link mock {JSON.stringify(props)}</div>),
+}));
 
 const testProj = { key: 'testproj', name: 'Test Project', accessible: true };
 const state = {
@@ -39,14 +45,17 @@ describe('ProjectSwitcher', () => {
     const dispatchMock = jest.fn().mockName('dispatch');
     useDispatch.mockReturnValue(dispatchMock);
 
-    useLocation.mockReturnValue({ name: 'expected location value' });
+    useLocation.mockReturnValue({
+      name: 'expected location value',
+      pathname: '/projects/testproj/info',
+    });
 
     useCurrentProject.mockReturnValue(state.currentProject);
     useProjectsArray.mockReturnValue(state.projects);
   });
 
   it('renders to match snapshot passing correct parameters to children', () => {
-    expect(shallow(<ProjectSwitcher />).dive()).toMatchSnapshot();
+    expect(render(<ProjectSwitcher />).container).toMatchSnapshot();
   });
 });
 
@@ -64,40 +73,40 @@ describe('Switcher', () => {
 
   it('renders to match snapshot when there are accessible projects', () => {
     expect(
-      shallow(
+      render(
         <Switcher
           switcherProjects={getSwitcherProjects(state.projects, state.currentProject)}
           currentProject={state.currentProject}
           location={location}
           classes={classes}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 
   it('renders to match snapshot when there are no projects to display', () => {
     expect(
-      shallow(
+      render(
         <Switcher
           switcherProjects={{ value: [] }}
           currentProject={{}}
           location={location}
           classes={classes}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 
   it('renders to match snapshot when switcherProjects is fetching', () => {
     expect(
-      shallow(
+      render(
         <Switcher
           switcherProjects={{ fetching: true, value: [] }}
           currentProject={state.currentProject}
           location={location}
           classes={classes}
         />,
-      ),
+      ).container,
     ).toMatchSnapshot();
   });
 });

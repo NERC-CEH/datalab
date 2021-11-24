@@ -1,144 +1,237 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ClassWrapper correctly renders with children 1`] = `
-<div
-  className="className"
->
-  <span>
-    Child Content
-  </span>
+<div>
+  <div
+    class="className"
+  >
+    <span>
+      Child Content
+    </span>
+  </div>
 </div>
 `;
 
 exports[`ClassWrapper renders with correct class name when className and fetchingClassName are defined and is fetching 1`] = `
-<div
-  className="className fetchingClassName"
-/>
+<div>
+  <div
+    class="className fetchingClassName"
+  />
+</div>
 `;
 
 exports[`ClassWrapper renders with correct class name when className and fetchingClassName are defined and is not fetching 1`] = `
-<div
-  className="className"
-/>
+<div>
+  <div
+    class="className"
+  />
+</div>
 `;
 
 exports[`ClassWrapper renders with correct class name when only className is defined and is fetching 1`] = `
-<div
-  className="className"
-/>
+<div>
+  <div
+    class="className"
+  />
+</div>
 `;
 
 exports[`ClassWrapper renders with correct class name when only className is defined and is notFetching 1`] = `
-<div
-  className="className"
-/>
+<div>
+  <div
+    class="className"
+  />
+</div>
 `;
 
 exports[`ClassWrapper renders with correct class name when only fetchingClassNameDefined and is fetching 1`] = `
-<div
-  className="fetchingClassName"
-/>
+<div>
+  <div
+    class="fetchingClassName"
+  />
+</div>
 `;
 
 exports[`ClassWrapper renders with correct class name when only fetchingClassNameDefined and is not fetching 1`] = `
-<div
-  className=""
-/>
+<div>
+  <div
+    class=""
+  />
+</div>
 `;
 
 exports[`PromisedContentWrapper with a className renders content inside a ClassWrapper when fetching 1`] = `
-<ClassWrapper
-  className="className"
-  fetchingClassName="fetchingClassName"
-  isFetching={true}
->
-  <WithStyles(ForwardRef(CircularProgress))
-    size={40}
-  />
-</ClassWrapper>
+<div>
+  <div
+    class="className fetchingClassName"
+  >
+    <div
+      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style="width: 40px; height: 40px;"
+    >
+      <svg
+        class="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx="44"
+          cy="44"
+          fill="none"
+          r="20.2"
+          stroke-width="3.6"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`PromisedContentWrapper with a className renders content inside a ClassWrapper when not fetching 1`] = `
-<ClassWrapper
-  className="className"
-  fetchingClassName="fetchingClassName"
-  isFetching={false}
->
-  <span>
-    Promise Value
-  </span>
-</ClassWrapper>
+<div>
+  <div
+    class="className"
+  >
+    <span>
+      Promise Value
+    </span>
+  </div>
+</div>
 `;
 
 exports[`PromisedContentWrapper with a width setting renders content inside a SizeWrapper when it is fetching 1`] = `
-<SizeWrapper
-  fullHeight={false}
-  fullWidth={true}
->
-  <WithStyles(ForwardRef(CircularProgress))
-    size={40}
-  />
-</SizeWrapper>
+<div>
+  <div
+    class="makeStyles-fullSizeBase-13 makeStyles-fullWidth-14"
+  >
+    <div
+      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style="width: 40px; height: 40px;"
+    >
+      <svg
+        class="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx="44"
+          cy="44"
+          fill="none"
+          r="20.2"
+          stroke-width="3.6"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`PromisedContentWrapper with a width setting renders without SizeWrapper when it is resolved 1`] = `
-<span>
-  Promise Value
-</span>
-`;
-
-exports[`PromisedContentWrapper with both className and width value renders to wrap content in both Size and Class Wrappers when fetching 1`] = `
-<SizeWrapper
-  fullHeight={false}
-  fullWidth={true}
->
-  <ClassWrapper
-    className="className"
-    isFetching={true}
-  >
-    <WithStyles(ForwardRef(CircularProgress))
-      size={40}
-    />
-  </ClassWrapper>
-</SizeWrapper>
-`;
-
-exports[`PromisedContentWrapper with no classNames or widths renders children if the promise is resolved 1`] = `
-<span>
-  PromisedValue
-</span>
-`;
-
-exports[`PromisedContentWrapper with no classNames or widths renders spinner if fetching 1`] = `
-<WithStyles(ForwardRef(CircularProgress))
-  size={40}
-/>
-`;
-
-exports[`SizeWrapper correctly renders with children 1`] = `
-<div
-  className="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2 makeStyles-fullHeight-3"
->
+<div>
   <span>
-    Child Content
+    Promise Value
   </span>
 </div>
 `;
 
+exports[`PromisedContentWrapper with both className and width value renders to wrap content in both Size and Class Wrappers when fetching 1`] = `
+<div>
+  <div
+    class="makeStyles-fullSizeBase-40 makeStyles-fullWidth-41"
+  >
+    <div
+      class="className"
+    >
+      <div
+        class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+        role="progressbar"
+        style="width: 40px; height: 40px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20.2"
+            stroke-width="3.6"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PromisedContentWrapper with no classNames or widths renders children if the promise is resolved 1`] = `
+<div>
+  <span>
+    PromisedValue
+  </span>
+</div>
+`;
+
+exports[`PromisedContentWrapper with no classNames or widths renders spinner if fetching 1`] = `
+<div>
+  <div
+    class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    role="progressbar"
+    style="width: 40px; height: 40px;"
+  >
+    <svg
+      class="MuiCircularProgress-svg"
+      viewBox="22 22 44 44"
+    >
+      <circle
+        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+        cx="44"
+        cy="44"
+        fill="none"
+        r="20.2"
+        stroke-width="3.6"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`SizeWrapper correctly renders with children 1`] = `
+<div>
+  <div
+    class="makeStyles-fullSizeBase-64 makeStyles-fullWidth-65 makeStyles-fullHeight-66"
+  >
+    <span>
+      Child Content
+    </span>
+  </div>
+</div>
+`;
+
 exports[`SizeWrapper renders with correct classname when is fullHeight 1`] = `
-<div
-  className="makeStyles-fullSizeBase-1 makeStyles-fullHeight-3"
-/>
+<div>
+  <div
+    class="makeStyles-fullSizeBase-58 makeStyles-fullHeight-60"
+  />
+</div>
 `;
 
 exports[`SizeWrapper renders with correct classname when is fullHeight and fullWidth 1`] = `
-<div
-  className="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2 makeStyles-fullHeight-3"
-/>
+<div>
+  <div
+    class="makeStyles-fullSizeBase-61 makeStyles-fullWidth-62 makeStyles-fullHeight-63"
+  />
+</div>
 `;
 
 exports[`SizeWrapper renders with correct classname when is fullWidth 1`] = `
-<div
-  className="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2"
-/>
+<div>
+  <div
+    class="makeStyles-fullSizeBase-55 makeStyles-fullWidth-56"
+  />
+</div>
 `;

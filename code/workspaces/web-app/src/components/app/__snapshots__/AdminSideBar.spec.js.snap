@@ -1,12 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AdminSideBar renders correctly passing props to children 1`] = `
-<AdminSideBar
-  classes={
-    Object {
-      "itemList": "AdminSideBar-itemList-1 itemList",
-      "sideBar": "AdminSideBar-sideBar-2 sideBar",
-    }
-  }
-/>
+<div>
+  <div
+    class="AdminSideBar-sideBar-2 sideBar"
+  >
+    <ul
+      class="MuiList-root AdminSideBar-itemList-1 itemList MuiList-padding"
+    >
+      <div
+        class="SideBarGroup-sidebarGroup-7"
+      >
+        <h6
+          class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+        >
+          Administration
+        </h6>
+        <div>
+          SideBarButton mock 
+          {"to":"/admin/resources","label":"Resources","icon":"dashboard"}
+        </div>
+        <div>
+          SideBarButton mock 
+          {"to":"/admin/users","label":"Users","icon":"people"}
+        </div>
+        <div>
+          SideBarButton mock 
+          {"to":"/admin/messages","label":"Messages","icon":"notifications"}
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
 `;

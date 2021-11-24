@@ -1,173 +1,247 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectSwitcher renders to match snapshot passing correct parameters to children 1`] = `
-<PromisedContentWrapper
-  className="ProjectSwitcher-promisedContent-2"
-  promise={
-    Object {
-      "fetching": false,
-    }
-  }
->
-  <Switcher
-    classes={
-      Object {
-        "dropdownProgress": "ProjectSwitcher-dropdownProgress-3",
-        "itemContent": "ProjectSwitcher-itemContent-4",
-        "itemKey": "ProjectSwitcher-itemKey-5",
-        "promisedContent": "ProjectSwitcher-promisedContent-2",
-        "switcher": "ProjectSwitcher-switcher-1",
-      }
-    }
-    currentProject={
-      Object {
-        "error": null,
-        "fetching": false,
-        "value": Object {
-          "accessible": true,
-          "key": "testproj",
-          "name": "Test Project",
-        },
-      }
-    }
-    location={
-      Object {
-        "name": "expected location value",
-      }
-    }
-    switcherProjects={
-      Object {
-        "error": null,
-        "fetching": false,
-        "value": Array [
-          Object {
-            "accessible": true,
-            "key": "projthree",
-            "name": "Project Three",
-          },
-          Object {
-            "accessible": true,
-            "key": "testproj",
-            "name": "Test Project",
-          },
-        ],
-      }
-    }
-  />
-</PromisedContentWrapper>
+<div>
+  <div
+    class="ProjectSwitcher-promisedContent-2"
+  >
+    <div
+      class="MuiFormControl-root MuiTextField-root ProjectSwitcher-switcher-1 MuiFormControl-marginDense MuiFormControl-fullWidth"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+        data-shrink="true"
+      >
+        Current Project
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      >
+        <div
+          aria-haspopup="listbox"
+          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="ProjectSwitcher-itemContent-4"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+            >
+              Test Project
+            </p>
+            <p
+              class="MuiTypography-root ProjectSwitcher-itemKey-5 MuiTypography-body1"
+            >
+              (testproj)
+            </p>
+          </div>
+        </div>
+        <input
+          type="hidden"
+          value="testproj"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="PrivateNotchedOutline-root-117 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="PrivateNotchedOutline-legendLabelled-119 PrivateNotchedOutline-legendNotched-120"
+          >
+            <span>
+              Current Project
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Switcher renders to match snapshot when switcherProjects is fetching 1`] = `
-<WithStyles(ForwardRef(TextField))
-  className="switcher"
-  fullWidth={true}
-  label="Current Project"
-  margin="dense"
-  select={true}
-  value=""
-  variant="outlined"
->
+<div>
   <div
-    className="dropdownProgress"
+    class="MuiFormControl-root MuiTextField-root switcher MuiFormControl-marginDense MuiFormControl-fullWidth"
   >
-    <WithStyles(ForwardRef(CircularProgress)) />
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+      data-shrink="false"
+    >
+      Current Project
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    >
+      <div
+        aria-haspopup="listbox"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        role="button"
+        tabindex="0"
+      >
+        <span>
+          ​
+        </span>
+      </div>
+      <input
+        type="hidden"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="PrivateNotchedOutline-root-402 MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="PrivateNotchedOutline-legendLabelled-404"
+        >
+          <span>
+            Current Project
+          </span>
+        </legend>
+      </fieldset>
+    </div>
   </div>
-</WithStyles(ForwardRef(TextField))>
+</div>
 `;
 
 exports[`Switcher renders to match snapshot when there are accessible projects 1`] = `
-<WithStyles(ForwardRef(TextField))
-  className="switcher"
-  fullWidth={true}
-  label="Current Project"
-  margin="dense"
-  select={true}
-  value="testproj"
-  variant="outlined"
->
-  <WithStyles(ForwardRef(MenuItem))
-    component={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "innerRef": [Function],
-          "onClick": [Function],
-          "replace": [Function],
-          "target": [Function],
-          "to": [Function],
-        },
-        "render": [Function],
-      }
-    }
-    key="testproj"
-    to="/projects/testproj/info"
-    value="testproj"
+<div>
+  <div
+    class="MuiFormControl-root MuiTextField-root switcher MuiFormControl-marginDense MuiFormControl-fullWidth"
   >
-    <div
-      className="itemContent"
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+      data-shrink="true"
     >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        variant="body1"
-      >
-        Test Project
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        className="itemKey"
-      >
-        (testproj)
-      </WithStyles(ForwardRef(Typography))>
-    </div>
-  </WithStyles(ForwardRef(MenuItem))>
-  <WithStyles(ForwardRef(MenuItem))
-    component={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "innerRef": [Function],
-          "onClick": [Function],
-          "replace": [Function],
-          "target": [Function],
-          "to": [Function],
-        },
-        "render": [Function],
-      }
-    }
-    key="projthree"
-    to="/projects/projthree/info"
-    value="projthree"
-  >
+      Current Project
+    </label>
     <div
-      className="itemContent"
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     >
-      <WithStyles(ForwardRef(Typography))
-        noWrap={true}
-        variant="body1"
+      <div
+        aria-haspopup="listbox"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        role="button"
+        tabindex="0"
       >
-        Project Three
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        className="itemKey"
+        <div
+          class="itemContent"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+          >
+            Test Project
+          </p>
+          <p
+            class="MuiTypography-root itemKey MuiTypography-body1"
+          >
+            (testproj)
+          </p>
+        </div>
+      </div>
+      <input
+        type="hidden"
+        value="testproj"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        (projthree)
-      </WithStyles(ForwardRef(Typography))>
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="PrivateNotchedOutline-root-232 MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="PrivateNotchedOutline-legendLabelled-234 PrivateNotchedOutline-legendNotched-235"
+        >
+          <span>
+            Current Project
+          </span>
+        </legend>
+      </fieldset>
     </div>
-  </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(TextField))>
+  </div>
+</div>
 `;
 
 exports[`Switcher renders to match snapshot when there are no projects to display 1`] = `
-<WithStyles(ForwardRef(TextField))
-  className="switcher"
-  fullWidth={true}
-  label="Current Project"
-  margin="dense"
-  select={true}
-  value=""
-  variant="outlined"
->
-  <WithStyles(ForwardRef(MenuItem))>
-    No Projects Accessible
-  </WithStyles(ForwardRef(MenuItem))>
-</WithStyles(ForwardRef(TextField))>
+<div>
+  <div
+    class="MuiFormControl-root MuiTextField-root switcher MuiFormControl-marginDense MuiFormControl-fullWidth"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+      data-shrink="false"
+    >
+      Current Project
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    >
+      <div
+        aria-haspopup="listbox"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        role="button"
+        tabindex="0"
+      >
+        <span>
+          ​
+        </span>
+      </div>
+      <input
+        type="hidden"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="PrivateNotchedOutline-root-317 MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="PrivateNotchedOutline-legendLabelled-319"
+        >
+          <span>
+            Current Project
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+</div>
 `;

@@ -1,537 +1,281 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateClusterForm it renders to match snapshot when conda is required and volumeMount field is set 1`] = `
-<form>
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Internal Name"
-    name="name"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Data Store to Mount"
-    name="volumeMount"
-    options={
-      Array [
-        Object {
-          "text": "Test Store",
-          "value": "teststore",
-        },
-      ]
-    }
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    helperText="The file path to the conda environment on the selected Data Store to be used by the workers."
-    label="Path to Conda environment"
-    name="condaPath"
-    placeholder="/data/conda/conda-env"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 1,
-          "step": 1,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=1 max=8 default=4"
-    label="Maximum number of workers"
-    name="maxWorkers"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=8 default=4"
-    label="Maximum worker memory (GB)"
-    name="maxWorkerMemoryGb"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 2,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=2 default=0.5"
-    label="Maximum worker CPU use"
-    name="maxWorkerCpu"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    format={[Function]}
-    label="Assets"
-    name="assets"
-    parse={[Function]}
-  />
-  <CreateFormControls
-    onCancel={[MockFunction cancel]}
-    submitting={false}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"Internal Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"Test Store","value":"teststore"}]}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"condaPath","label":"Path to Conda environment","helperText":"The file path to the conda environment on the selected Data Store to be used by the workers.","placeholder":"/data/conda/conda-env"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkers","label":"Maximum number of workers","type":"number","InputProps":{"inputProps":{"min":1,"max":8,"step":1}},"helperText":"Value range: min=1 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerMemoryGb","label":"Maximum worker memory (GB)","type":"number","InputProps":{"inputProps":{"min":0.5,"max":8,"step":0.5}},"helperText":"Value range: min=0.5 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerCpu","label":"Maximum worker CPU use","type":"number","InputProps":{"inputProps":{"min":0.5,"max":2,"step":0.5}},"helperText":"Value range: min=0.5 max=2 default=0.5"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-133"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="submit"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Create
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        style="margin-left: 5px;"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;
 
 exports[`CreateClusterForm it renders to match snapshot with condaPath field when volumeMount field is set 1`] = `
-<form>
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Internal Name"
-    name="name"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Data Store to Mount (optional)"
-    name="volumeMount"
-    options={
-      Array [
-        Object {
-          "text": "None",
-          "value": "--none--",
-        },
-        Object {
-          "text": "Test Store",
-          "value": "teststore",
-        },
-      ]
-    }
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    helperText="The file path to the conda environment on the selected Data Store to be used by the workers."
-    label="Path to Conda environment (optional)"
-    name="condaPath"
-    placeholder="/data/conda/conda-env"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 1,
-          "step": 1,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=1 max=8 default=4"
-    label="Maximum number of workers"
-    name="maxWorkers"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=8 default=4"
-    label="Maximum worker memory (GB)"
-    name="maxWorkerMemoryGb"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 2,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=2 default=0.5"
-    label="Maximum worker CPU use"
-    name="maxWorkerCpu"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    format={[Function]}
-    label="Assets"
-    name="assets"
-    parse={[Function]}
-  />
-  <CreateFormControls
-    onCancel={[MockFunction cancel]}
-    submitting={false}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"Internal Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount (optional)","options":[{"text":"None","value":"--none--"},{"text":"Test Store","value":"teststore"}]}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"condaPath","label":"Path to Conda environment (optional)","helperText":"The file path to the conda environment on the selected Data Store to be used by the workers.","placeholder":"/data/conda/conda-env"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkers","label":"Maximum number of workers","type":"number","InputProps":{"inputProps":{"min":1,"max":8,"step":1}},"helperText":"Value range: min=1 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerMemoryGb","label":"Maximum worker memory (GB)","type":"number","InputProps":{"inputProps":{"min":0.5,"max":8,"step":0.5}},"helperText":"Value range: min=0.5 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerCpu","label":"Maximum worker CPU use","type":"number","InputProps":{"inputProps":{"min":0.5,"max":2,"step":0.5}},"helperText":"Value range: min=0.5 max=2 default=0.5"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-89"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="submit"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Create
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        style="margin-left: 5px;"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;
 
 exports[`CreateClusterForm it renders to match snapshot without condaPath field when volumeMount field has no value 1`] = `
-<form>
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Internal Name"
-    name="name"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Data Store to Mount (optional)"
-    name="volumeMount"
-    options={
-      Array [
-        Object {
-          "text": "None",
-          "value": "--none--",
-        },
-        Object {
-          "text": "Test Store",
-          "value": "teststore",
-        },
-      ]
-    }
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 1,
-          "step": 1,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=1 max=8 default=4"
-    label="Maximum number of workers"
-    name="maxWorkers"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=8 default=4"
-    label="Maximum worker memory (GB)"
-    name="maxWorkerMemoryGb"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 2,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=2 default=0.5"
-    label="Maximum worker CPU use"
-    name="maxWorkerCpu"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    format={[Function]}
-    label="Assets"
-    name="assets"
-    parse={[Function]}
-  />
-  <CreateFormControls
-    onCancel={[MockFunction cancel]}
-    submitting={false}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"Internal Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount (optional)","options":[{"text":"None","value":"--none--"},{"text":"Test Store","value":"teststore"}]}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkers","label":"Maximum number of workers","type":"number","InputProps":{"inputProps":{"min":1,"max":8,"step":1}},"helperText":"Value range: min=1 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerMemoryGb","label":"Maximum worker memory (GB)","type":"number","InputProps":{"inputProps":{"min":0.5,"max":8,"step":0.5}},"helperText":"Value range: min=0.5 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerCpu","label":"Maximum worker CPU use","type":"number","InputProps":{"inputProps":{"min":0.5,"max":2,"step":0.5}},"helperText":"Value range: min=0.5 max=2 default=0.5"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-1"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="submit"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Create
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        style="margin-left: 5px;"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;
 
 exports[`CreateClusterForm it renders to match snapshot without condaPath field when volumeMount field is set as None option 1`] = `
-<form>
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Internal Name"
-    name="name"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Data Store to Mount (optional)"
-    name="volumeMount"
-    options={
-      Array [
-        Object {
-          "text": "None",
-          "value": "--none--",
-        },
-        Object {
-          "text": "Test Store",
-          "value": "teststore",
-        },
-      ]
-    }
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 1,
-          "step": 1,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=1 max=8 default=4"
-    label="Maximum number of workers"
-    name="maxWorkers"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 8,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=8 default=4"
-    label="Maximum worker memory (GB)"
-    name="maxWorkerMemoryGb"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    InputProps={
-      Object {
-        "inputProps": Object {
-          "max": 2,
-          "min": 0.5,
-          "step": 0.5,
-        },
-      }
-    }
-    component={[Function]}
-    helperText="Value range: min=0.5 max=2 default=0.5"
-    label="Maximum worker CPU use"
-    name="maxWorkerCpu"
-    parse={[Function]}
-    type="number"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    format={[Function]}
-    label="Assets"
-    name="assets"
-    parse={[Function]}
-  />
-  <CreateFormControls
-    onCancel={[MockFunction cancel]}
-    submitting={false}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"Internal Name"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount (optional)","options":[{"text":"None","value":"--none--"},{"text":"Test Store","value":"teststore"}]}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkers","label":"Maximum number of workers","type":"number","InputProps":{"inputProps":{"min":1,"max":8,"step":1}},"helperText":"Value range: min=1 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerMemoryGb","label":"Maximum worker memory (GB)","type":"number","InputProps":{"inputProps":{"min":0.5,"max":8,"step":0.5}},"helperText":"Value range: min=0.5 max=8 default=4"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"maxWorkerCpu","label":"Maximum worker CPU use","type":"number","InputProps":{"inputProps":{"min":0.5,"max":2,"step":0.5}},"helperText":"Value range: min=0.5 max=2 default=0.5"}
+    </div>
+    <div>
+      Field mock 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-45"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        tabindex="0"
+        type="submit"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Create
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        style="margin-left: 5px;"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;
