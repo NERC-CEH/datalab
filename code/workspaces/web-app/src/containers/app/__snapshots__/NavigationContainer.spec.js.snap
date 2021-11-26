@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavigationContainer is a container which passes correct props to Navigation 1`] = `
-<Component
-  anotherProp="something"
-  identity={
-    Object {
-      "expected": "Identity",
-    }
-  }
-/>
+<div>
+  Navigation Mock 
+  {"identity":{"expected":"Identity"},"anotherProp":"something"}
+</div>
 `;
