@@ -1,10 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import PaginationControlButton, { PREVIOUS_PAGE, NEXT_PAGE } from './PaginationControlButton';
 
+jest.mock('@material-ui/icons/NavigateBeforeRounded', () => () => (<>NavigateBeforeRoundedIcon Mock</>));
+jest.mock('@material-ui/icons/NavigateNextRounded', () => () => (<>NavigateNextRoundedIcon Mock</>));
+
 describe('PaginationControlButton', () => {
-  function shallowRender(props) {
-    return shallow(<PaginationControlButton {...props} />);
+  function renderComponent(props) {
+    return render(<PaginationControlButton {...props} />);
   }
 
   function generateProps({
@@ -17,25 +20,25 @@ describe('PaginationControlButton', () => {
 
   it(`renders correctly when variant is "${PREVIOUS_PAGE}" and it is not disabled`, () => {
     const props = generateProps({ variant: PREVIOUS_PAGE });
-    const render = shallowRender(props);
-    expect(render).toMatchSnapshot();
+    const wrapper = renderComponent(props);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it(`renders correctly when variant is "${PREVIOUS_PAGE}" and it is disabled`, () => {
     const props = generateProps({ variant: PREVIOUS_PAGE, disabled: true });
-    const render = shallowRender(props);
-    expect(render).toMatchSnapshot();
+    const wrapper = renderComponent(props);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it(`renders correctly when variant is "${NEXT_PAGE}" and it is not disabled`, () => {
     const props = generateProps({ variant: NEXT_PAGE });
-    const render = shallowRender(props);
-    expect(render).toMatchSnapshot();
+    const wrapper = renderComponent(props);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it(`renders correctly when variant is "${NEXT_PAGE}" and it is disabled`, () => {
     const props = generateProps({ variant: NEXT_PAGE, disabled: true });
-    const render = shallowRender(props);
-    expect(render).toMatchSnapshot();
+    const wrapper = renderComponent(props);
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

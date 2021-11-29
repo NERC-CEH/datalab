@@ -1,16 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescribeElementCardLinks renders correct snapshot 1`] = `
-<WithStyles(ForwardRef(CardActions))>
-  <Link
-    displayName="displayName"
-    href="address"
-    key="link-0"
-  />
-  <Link
-    displayName="anotherDisplayName"
-    href="anotherAddress"
-    key="link-1"
-  />
-</WithStyles(ForwardRef(CardActions))>
+<div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+      style="font-size: larger;"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        displayName &gt;
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+      style="font-size: larger;"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        anotherDisplayName &gt;
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
 `;

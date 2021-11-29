@@ -1,99 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PaginationControls has a PaginationControlTextField that renders with pageInputValue prop of pageNum + 1 1`] = `
-<PaginationControlTextField
-  changePageToUserInput={[Function]}
-  pageInputValue={1}
-  setPageInputValue={[Function]}
-/>
-`;
-
-exports[`PaginationControls has a next page button that renders as disabled when on the last page 1`] = `
-<PaginationControlButton
-  disabled={true}
-  id="next-page"
-  onClick={[Function]}
-  variant="next"
-/>
-`;
-
-exports[`PaginationControls has a next page button that renders as not disabled when not on last page 1`] = `
-<PaginationControlButton
-  disabled={false}
-  id="next-page"
-  onClick={[Function]}
-  variant="next"
-/>
-`;
-
-exports[`PaginationControls has a previous page button that renders as disabled when on page 0 1`] = `
-<PaginationControlButton
-  disabled={true}
-  id="previous-page"
-  onClick={[Function]}
-  variant="previous"
-/>
-`;
-
-exports[`PaginationControls has a previous page button that renders as not disabled when not on page 0 1`] = `
-<PaginationControlButton
-  disabled={false}
-  id="previous-page"
-  onClick={[Function]}
-  variant="previous"
-/>
-`;
-
-exports[`PaginationControls has page text that renders as "Page" by default 1`] = `
-<div
-  className="makeStyles-controlText-2"
-  id="page-text"
->
-  Page
-</div>
-`;
-
-exports[`PaginationControls has page text that renders as "Somethings page" if you ask for it 1`] = `
-<div
-  className="makeStyles-controlText-2"
-  id="page-text"
->
-  Somethings page
-</div>
-`;
-
 exports[`PaginationControls renders with children in correct order 1`] = `
-<div
-  className="makeStyles-paginationControlsContainer-1"
->
-  <PaginationControlButton
-    disabled={true}
-    id="previous-page"
-    onClick={[Function]}
-    variant="previous"
-  />
+<div>
   <div
-    className="makeStyles-controlText-2"
-    id="page-text"
+    class="makeStyles-paginationControlsContainer-1"
   >
-    Page
+    PaginationControlButton Mock 
+    {"id":"previous-page","disabled":true}
+    <div
+      class="makeStyles-controlText-2"
+      id="page-text"
+    >
+      Page
+    </div>
+    PaginationControlTextField Mock 
+    {"pageInputValue":1}
+    <div
+      class="makeStyles-controlText-2"
+    >
+      of 
+      5
+    </div>
+    PaginationControlButton Mock 
+    {"id":"next-page","disabled":false}
   </div>
-  <PaginationControlTextField
-    changePageToUserInput={[Function]}
-    pageInputValue={1}
-    setPageInputValue={[Function]}
-  />
-  <div
-    className="makeStyles-controlText-2"
-  >
-    of 
-    5
-  </div>
-  <PaginationControlButton
-    disabled={false}
-    id="next-page"
-    onClick={[Function]}
-    variant="next"
-  />
 </div>
 `;

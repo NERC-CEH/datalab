@@ -1,46 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditSiteForm renders to match snapshot 1`] = `
-<form
-  onSubmit={[MockFunction handleSubmit]}
->
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    label="Description"
-    name="description"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    component={[Function]}
-    format={[Function]}
-    label="Assets"
-    name="assets"
-    parse={[Function]}
-    projectKey="projectKey"
-  />
-  <UpdateFormControls
-    onCancel={[MockFunction onCancel]}
-    onClearChanges={[MockFunction reset]}
-    pristine={true}
-  />
-</form>
+<div>
+  <form>
+    Field Mock: 
+    {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name"}
+    Field Mock: 
+    {"InputLabelProps":{"shrink":true},"name":"description","label":"Description"}
+    Field Mock: 
+    {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"projectKey"}
+    UpdateFormControls Mock 
+    {"pristine":true}
+  </form>
+</div>
 `;

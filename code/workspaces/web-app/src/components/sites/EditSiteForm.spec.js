@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { PureEditSiteForm } from './EditSiteForm';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 
@@ -7,8 +7,16 @@ jest.mock('../../hooks/currentProjectHooks');
 const currentProject = { fetching: false, value: { key: 'projectKey' } };
 useCurrentProject.mockReturnValue(currentProject);
 
+jest.mock('../common/form/controls', () => ({
+  UpdateFormControls: props => (<>UpdateFormControls Mock {JSON.stringify(props)}</>),
+}));
+jest.mock('redux-form', () => ({
+  ...jest.requireActual('redux-form'),
+  Field: props => (<>Field Mock: {JSON.stringify(props)}</>),
+}));
+
 describe('EditSiteForm', () => {
-  const shallowRender = () => shallow(
+  const renderComponent = () => render(
     <PureEditSiteForm
       handleSubmit={jest.fn().mockName('handleSubmit')}
       reset={jest.fn().mockName('reset')}
@@ -19,7 +27,6 @@ describe('EditSiteForm', () => {
   );
 
   it('renders to match snapshot', () => {
-    const pristine = true;
-    expect(shallowRender(pristine)).toMatchSnapshot();
+    expect(renderComponent().container).toMatchSnapshot();
   });
 });

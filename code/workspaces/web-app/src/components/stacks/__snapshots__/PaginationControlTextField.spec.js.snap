@@ -1,22 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PaginationControlTextField renders with the provided pageInputValue as the value 1`] = `
-<WithStyles(ForwardRef(TextField))
-  className="makeStyles-pageNumberInput-1"
-  inputProps={
-    Object {
-      "style": Object {
-        "padding": 5,
-        "textAlign": "center",
-      },
-    }
-  }
-  margin="dense"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onKeyPress={[Function]}
-  size="small"
-  value={5}
-  variant="outlined"
-/>
+<div>
+  <div
+    class="MuiFormControl-root MuiTextField-root makeStyles-pageNumberInput-1 MuiFormControl-marginDense"
+  >
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        style="text-align: center; padding: 5px;"
+        type="text"
+        value="5"
+      />
+      <fieldset
+        aria-hidden="true"
+        class="PrivateNotchedOutline-root-40 MuiOutlinedInput-notchedOutline"
+        style="padding-left: 8px;"
+      >
+        <legend
+          class="PrivateNotchedOutline-legend-41"
+          style="width: 0.01px;"
+        >
+          <span>
+            ​
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+</div>
 `;
