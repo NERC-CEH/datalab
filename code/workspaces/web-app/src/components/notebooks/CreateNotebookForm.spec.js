@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { JUPYTER } from 'common/src/stackTypes';
 import { PureCreateNotebookForm } from './CreateNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
@@ -7,9 +7,20 @@ import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 jest.mock('../../hooks/reduxFormHooks');
 reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue('value');
 
+jest.mock('../common/form/controls', () => ({
+  CreateFormControls: props => (<>CreateFormControls Mock {JSON.stringify(props)}</>),
+}));
+jest.mock('redux-form', () => ({
+  ...jest.requireActual('redux-form'),
+  Field: props => (<>Field Mock: {JSON.stringify(props)}</>),
+}));
+jest.mock('../common/selectShareOptions', () => ({
+  notebookSharingOptions: [{ text: 'Private', value: 'private' }, { text: 'Public', value: 'public' }],
+}));
+
 describe('CreateNotebookForm', () => {
-  function shallowRender(props) {
-    return shallow(<PureCreateNotebookForm {...props} />);
+  function renderComponent(props) {
+    return render(<PureCreateNotebookForm {...props} />);
   }
 
   const onSubmitMock = jest.fn();
@@ -40,10 +51,10 @@ describe('CreateNotebookForm', () => {
     const props = generateProps({ versionOptions });
 
     // Act
-    const output = shallowRender(props);
+    const wrapper = renderComponent(props);
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('creates correct snapshot for create Notebook Form when there are not version options', () => {
@@ -51,10 +62,10 @@ describe('CreateNotebookForm', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    const wrapper = renderComponent(props);
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('creates correct snapshot for create Notebook Form when the type supports single hostname', () => {
@@ -63,9 +74,9 @@ describe('CreateNotebookForm', () => {
     reduxFormHooks.useReduxFormValue = jest.fn().mockReturnValue(JUPYTER);
 
     // Act
-    const output = shallowRender(props);
+    const wrapper = renderComponent(props);
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(wrapper.container).toMatchSnapshot();
   });
 });

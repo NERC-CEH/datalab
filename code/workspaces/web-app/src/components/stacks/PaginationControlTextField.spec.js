@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
 import PaginationControlTextField from './PaginationControlTextField';
 
 describe('PaginationControlTextField', () => {
-  function shallowRender(props) {
-    return shallow(<PaginationControlTextField {...props} />);
+  function renderComponent(props) {
+    return render(<PaginationControlTextField {...props} />);
   }
 
   function generateProps({
@@ -17,28 +17,28 @@ describe('PaginationControlTextField', () => {
 
   it('renders with the provided pageInputValue as the value', () => {
     const props = generateProps({ pageInputValue: 5 });
-    const render = shallowRender(props);
-    expect(render).toMatchSnapshot();
+    const wrapper = renderComponent(props);
+    expect(wrapper.container).toMatchSnapshot();
   });
 
   it('calls setPageInputValue with the new value when the input changes', () => {
     const setPageInputValueMock = jest.fn();
     const props = generateProps({ setPageInputValue: setPageInputValueMock });
-    const render = shallowRender(props);
+    const wrapper = renderComponent(props);
 
     const valueChangedTo = 5;
-    render.simulate('change', { target: { value: valueChangedTo } });
+    fireEvent.change(wrapper.getByRole('textbox'), { target: { value: valueChangedTo } });
 
     expect(setPageInputValueMock.mock.calls.length).toBe(1);
-    expect(setPageInputValueMock.mock.calls[0][0]).toBe(5);
+    expect(setPageInputValueMock.mock.calls[0][0]).toBe('5');
   });
 
   it('calls changePageToUserInput when blurred', () => {
     const changePageToUserInputMock = jest.fn();
     const props = generateProps({ changePageToUserInput: changePageToUserInputMock });
-    const render = shallowRender(props);
+    const wrapper = renderComponent(props);
 
-    render.simulate('blur');
+    fireEvent.blur(wrapper.getByRole('textbox'));
 
     expect(changePageToUserInputMock.mock.calls.length).toBe(1);
   });
@@ -46,9 +46,9 @@ describe('PaginationControlTextField', () => {
   it('calls changePageToUserInput when Enter key is pressed', () => {
     const changePageToUserInputMock = jest.fn();
     const props = generateProps({ changePageToUserInput: changePageToUserInputMock });
-    const render = shallowRender(props);
+    const wrapper = renderComponent(props);
 
-    render.simulate('keyPress', { key: 'Enter' });
+    fireEvent.keyPress(wrapper.getByRole('textbox'), { key: 'Enter', code: 13, charCode: 13 });
 
     expect(changePageToUserInputMock.mock.calls.length).toBe(1);
   });

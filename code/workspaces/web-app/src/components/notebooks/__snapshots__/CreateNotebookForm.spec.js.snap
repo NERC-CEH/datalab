@@ -1,475 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateNotebookForm creates correct snapshot for create Notebook Form when the type supports single hostname 1`] = `
-<form>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Display Name"
-      name="displayName"
-      placeholder="Display Name"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Type"
-      name="type"
-      options={
-        Array [
-          Object {
-            "text": "JupyterLab",
-            "value": "JUPYTER_LAB",
-          },
-          Object {
-            "text": "Jupyter",
-            "value": "JUPYTER",
-          },
-          Object {
-            "text": "RStudio",
-            "value": "RSTUDIO",
-          },
-          Object {
-            "text": "Zeppelin",
-            "value": "ZEPPELIN",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      endText=""
-      label="URL Name"
-      name="name"
-      placeholder="Notebook Name for URL"
-      startText="http://localhost/resource/testproj/"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Data Store to Mount"
-      name="volumeMount"
-      options={
-        Array [
-          Object {
-            "text": "First Data Store",
-            "value": "alpha",
-          },
-          Object {
-            "text": "Second Data Store",
-            "value": "beta",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Description"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Sharing Status"
-      name="shared"
-      options={
-        Array [
-          Object {
-            "text": <SelectRichComponent
-              title="Private"
-              type="notebook"
-            />,
-            "value": "private",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Project"
-              type="notebook"
-            />,
-            "value": "project",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      format={[Function]}
-      label="Assets"
-      name="assets"
-      parse={[Function]}
-      projectKey="testproj"
-    />
-  </div>
-  <CreateFormControls
-    onCancel={[MockFunction]}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"JupyterLab","value":"JUPYTER_LAB"},{"text":"Jupyter","value":"JUPYTER"},{"text":"RStudio","value":"RSTUDIO"},{"text":"Zeppelin","value":"ZEPPELIN"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Notebook Name for URL","startText":"http://localhost/resource/testproj/","endText":""}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"First Data Store","value":"alpha"},{"text":"Second Data Store","value":"beta"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"shared","label":"Sharing Status","options":[{"text":"Private","value":"private"},{"text":"Public","value":"public"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+    </div>
+    CreateFormControls Mock 
+    {}
+  </form>
+</div>
 `;
 
 exports[`CreateNotebookForm creates correct snapshot for create Notebook Form when there are not version options 1`] = `
-<form>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Display Name"
-      name="displayName"
-      placeholder="Display Name"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Type"
-      name="type"
-      options={
-        Array [
-          Object {
-            "text": "JupyterLab",
-            "value": "JUPYTER_LAB",
-          },
-          Object {
-            "text": "Jupyter",
-            "value": "JUPYTER",
-          },
-          Object {
-            "text": "RStudio",
-            "value": "RSTUDIO",
-          },
-          Object {
-            "text": "Zeppelin",
-            "value": "ZEPPELIN",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      endText=".datalabs.localhost"
-      label="URL Name"
-      name="name"
-      placeholder="Notebook Name for URL"
-      startText="http://testproj-"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Data Store to Mount"
-      name="volumeMount"
-      options={
-        Array [
-          Object {
-            "text": "First Data Store",
-            "value": "alpha",
-          },
-          Object {
-            "text": "Second Data Store",
-            "value": "beta",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Description"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Sharing Status"
-      name="shared"
-      options={
-        Array [
-          Object {
-            "text": <SelectRichComponent
-              title="Private"
-              type="notebook"
-            />,
-            "value": "private",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Project"
-              type="notebook"
-            />,
-            "value": "project",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      format={[Function]}
-      label="Assets"
-      name="assets"
-      parse={[Function]}
-      projectKey="testproj"
-    />
-  </div>
-  <CreateFormControls
-    onCancel={[MockFunction]}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"JupyterLab","value":"JUPYTER_LAB"},{"text":"Jupyter","value":"JUPYTER"},{"text":"RStudio","value":"RSTUDIO"},{"text":"Zeppelin","value":"ZEPPELIN"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Notebook Name for URL","startText":"http://testproj-","endText":".datalabs.localhost"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"First Data Store","value":"alpha"},{"text":"Second Data Store","value":"beta"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"shared","label":"Sharing Status","options":[{"text":"Private","value":"private"},{"text":"Public","value":"public"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+    </div>
+    CreateFormControls Mock 
+    {}
+  </form>
+</div>
 `;
 
 exports[`CreateNotebookForm creates correct snapshot for create Notebook Form when there are version options 1`] = `
-<form>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Display Name"
-      name="displayName"
-      placeholder="Display Name"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Type"
-      name="type"
-      options={
-        Array [
-          Object {
-            "text": "JupyterLab",
-            "value": "JUPYTER_LAB",
-          },
-          Object {
-            "text": "Jupyter",
-            "value": "JUPYTER",
-          },
-          Object {
-            "text": "RStudio",
-            "value": "RSTUDIO",
-          },
-          Object {
-            "text": "Zeppelin",
-            "value": "ZEPPELIN",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Version"
-      name="version"
-      options={
-        Array [
-          Object {
-            "text": "0.1.0",
-            "value": "0.1.0",
-          },
-          Object {
-            "text": "0.2.0",
-            "value": "0.2.0",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      endText=".datalabs.localhost"
-      label="URL Name"
-      name="name"
-      placeholder="Notebook Name for URL"
-      startText="http://testproj-"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Data Store to Mount"
-      name="volumeMount"
-      options={
-        Array [
-          Object {
-            "text": "First Data Store",
-            "value": "alpha",
-          },
-          Object {
-            "text": "Second Data Store",
-            "value": "beta",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Description"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      label="Sharing Status"
-      name="shared"
-      options={
-        Array [
-          Object {
-            "text": <SelectRichComponent
-              title="Private"
-              type="notebook"
-            />,
-            "value": "private",
-          },
-          Object {
-            "text": <SelectRichComponent
-              title="Project"
-              type="notebook"
-            />,
-            "value": "project",
-          },
-        ]
-      }
-    />
-  </div>
-  <div>
-    <Field
-      InputLabelProps={
-        Object {
-          "shrink": true,
-        }
-      }
-      component={[Function]}
-      format={[Function]}
-      label="Assets"
-      name="assets"
-      parse={[Function]}
-      projectKey="testproj"
-    />
-  </div>
-  <CreateFormControls
-    onCancel={[MockFunction]}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"type","label":"Type","options":[{"text":"JupyterLab","value":"JUPYTER_LAB"},{"text":"Jupyter","value":"JUPYTER"},{"text":"RStudio","value":"RSTUDIO"},{"text":"Zeppelin","value":"ZEPPELIN"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"version","label":"Version","options":[{"text":"0.1.0","value":"0.1.0"},{"text":"0.2.0","value":"0.2.0"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"name","label":"URL Name","placeholder":"Notebook Name for URL","startText":"http://testproj-","endText":".datalabs.localhost"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"volumeMount","label":"Data Store to Mount","options":[{"text":"First Data Store","value":"alpha"},{"text":"Second Data Store","value":"beta"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"Description"}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"shared","label":"Sharing Status","options":[{"text":"Private","value":"private"},{"text":"Public","value":"public"}]}
+    </div>
+    <div>
+      Field Mock: 
+      {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets","projectKey":"testproj"}
+    </div>
+    CreateFormControls Mock 
+    {}
+  </form>
+</div>
 `;
