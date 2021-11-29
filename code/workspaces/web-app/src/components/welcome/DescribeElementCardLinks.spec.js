@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import DescribeElementCardLinks from './DescribeElementCardLinks';
 
 describe('DescribeElementCardLinks', () => {
@@ -9,6 +9,6 @@ describe('DescribeElementCardLinks', () => {
       { displayName: 'anotherDisplayName', href: 'anotherAddress' },
     ];
 
-    expect(shallow(<DescribeElementCardLinks links={links} />)).toMatchSnapshot();
+    expect(render(<DescribeElementCardLinks links={links} />).container).toMatchSnapshot();
   });
 });

@@ -1,75 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateProjectForm renders request form correctly 1`] = `
-<form
-  className="form"
-  onSubmit={[MockFunction handleSubmit]}
->
-  <Field
-    className="input"
-    component={[Function]}
-    label="Name"
-    name="name"
-  />
-  <Field
-    className="input"
-    component={[Function]}
-    label="Project Key"
-    name="projectKey"
-  />
-  <Field
-    className="input"
-    component={[Function]}
-    label="Description"
-    name="description"
-  />
-  <Field
-    className="input"
-    component={[Function]}
-    label="Collaboration Link"
-    name="collaborationLink"
-  />
-  <CreateFormControls
-    actionLabel="Request"
-    fullWidthButtons={true}
-    onCancel={[Function]}
-  />
-</form>
+<div>
+  <form
+    class="form"
+  >
+    Field Mock: 
+    {"name":"name","label":"Name","className":"input"}
+    Field Mock: 
+    {"name":"projectKey","label":"Project Key","className":"input"}
+    Field Mock: 
+    {"name":"description","label":"Description","className":"input"}
+    Field Mock: 
+    {"name":"collaborationLink","label":"Collaboration Link","className":"input"}
+    CreateFormControls Mock 
+    {"fullWidthButtons":true,"actionLabel":"Request"}
+  </form>
+</div>
 `;
 
 exports[`CreateProjectForm renders to match snapshot 1`] = `
-<form
-  className="form"
-  onSubmit={[MockFunction handleSubmit]}
->
-  <Field
-    className="input"
-    component={[Function]}
-    label="Name"
-    name="name"
-  />
-  <Field
-    className="input"
-    component={[Function]}
-    label="Project Key"
-    name="projectKey"
-  />
-  <Field
-    className="input"
-    component={[Function]}
-    label="Description"
-    name="description"
-  />
-  <Field
-    className="input"
-    component={[Function]}
-    label="Collaboration Link"
-    name="collaborationLink"
-  />
-  <CreateFormControls
-    actionLabel="Create"
-    fullWidthButtons={true}
-    onCancel={[Function]}
-  />
-</form>
+<div>
+  <form
+    class="form"
+  >
+    Field Mock: 
+    {"name":"name","label":"Name","className":"input"}
+    Field Mock: 
+    {"name":"projectKey","label":"Project Key","className":"input"}
+    Field Mock: 
+    {"name":"description","label":"Description","className":"input"}
+    Field Mock: 
+    {"name":"collaborationLink","label":"Collaboration Link","className":"input"}
+    CreateFormControls Mock 
+    {"fullWidthButtons":true,"actionLabel":"Create"}
+  </form>
+</div>
 `;

@@ -1,51 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditProjectDetails renders to match snapshot 1`] = `
-<form
-  className="form"
-  onSubmit={[MockFunction handleSubmit]}
->
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="input"
-    component={[Function]}
-    label="Name"
-    margin="dense"
-    name="name"
-    placeholder="test-project"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="input"
-    component={[Function]}
-    label="Description"
-    margin="dense"
-    name="description"
-    placeholder="description"
-  />
-  <Field
-    InputLabelProps={
-      Object {
-        "shrink": true,
-      }
-    }
-    className="input"
-    component={[Function]}
-    label="Collaboration Link"
-    margin="dense"
-    name="collaborationLink"
-    placeholder="example.com"
-  />
-  <UpdateFormControls
-    onCancel={[MockFunction onCancel]}
-  />
-</form>
+<div>
+  <form
+    class="form"
+  >
+    Field Mock: 
+    {"className":"input","margin":"dense","InputLabelProps":{"shrink":true},"name":"name","label":"Name","placeholder":"test-project"}
+    Field Mock: 
+    {"className":"input","margin":"dense","InputLabelProps":{"shrink":true},"name":"description","label":"Description","placeholder":"description"}
+    Field Mock: 
+    {"className":"input","margin":"dense","InputLabelProps":{"shrink":true},"name":"collaborationLink","label":"Collaboration Link","placeholder":"example.com"}
+    UpdateFormControls Mock 
+    {}
+  </form>
+</div>
 `;

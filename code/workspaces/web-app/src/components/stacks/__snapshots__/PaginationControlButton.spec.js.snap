@@ -1,69 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PaginationControlButton renders correctly when variant is "next" and it is disabled 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  title="No next page"
->
-  <span>
+<div>
+  <span
+    class=""
+    title="No next page"
+  >
      
-    <WithStyles(ForwardRef(IconButton))
-      disabled={true}
-      onClick={[MockFunction onClick]}
-      size="small"
+    <button
+      class="MuiButtonBase-root MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+      disabled=""
+      tabindex="-1"
+      type="button"
     >
-      <NavigateNextRoundedIcon />
-    </WithStyles(ForwardRef(IconButton))>
+      <span
+        class="MuiIconButton-label"
+      >
+        NavigateNextRoundedIcon Mock
+      </span>
+    </button>
   </span>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`PaginationControlButton renders correctly when variant is "next" and it is not disabled 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  title="Next page"
->
-  <span>
+<div>
+  <span
+    class=""
+    title="Next page"
+  >
      
-    <WithStyles(ForwardRef(IconButton))
-      disabled={false}
-      onClick={[MockFunction onClick]}
-      size="small"
+    <button
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      tabindex="0"
+      type="button"
     >
-      <NavigateNextRoundedIcon />
-    </WithStyles(ForwardRef(IconButton))>
+      <span
+        class="MuiIconButton-label"
+      >
+        NavigateNextRoundedIcon Mock
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </span>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`PaginationControlButton renders correctly when variant is "previous" and it is disabled 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  title="No previous page"
->
-  <span>
+<div>
+  <span
+    class=""
+    title="No previous page"
+  >
      
-    <WithStyles(ForwardRef(IconButton))
-      disabled={true}
-      onClick={[MockFunction onClick]}
-      size="small"
+    <button
+      class="MuiButtonBase-root MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+      disabled=""
+      tabindex="-1"
+      type="button"
     >
-      <NavigateBeforeRoundedIcon />
-    </WithStyles(ForwardRef(IconButton))>
+      <span
+        class="MuiIconButton-label"
+      >
+        NavigateBeforeRoundedIcon Mock
+      </span>
+    </button>
   </span>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;
 
 exports[`PaginationControlButton renders correctly when variant is "previous" and it is not disabled 1`] = `
-<WithStyles(ForwardRef(Tooltip))
-  title="Previous page"
->
-  <span>
+<div>
+  <span
+    class=""
+    title="Previous page"
+  >
      
-    <WithStyles(ForwardRef(IconButton))
-      disabled={false}
-      onClick={[MockFunction onClick]}
-      size="small"
+    <button
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      tabindex="0"
+      type="button"
     >
-      <NavigateBeforeRoundedIcon />
-    </WithStyles(ForwardRef(IconButton))>
+      <span
+        class="MuiIconButton-label"
+      >
+        NavigateBeforeRoundedIcon Mock
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </span>
-</WithStyles(ForwardRef(Tooltip))>
+</div>
 `;

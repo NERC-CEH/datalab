@@ -3,39 +3,29 @@
 exports[`Pagination renders array of additional items in control bar after pagination controls in own div 1`] = `
 <div>
   <div>
-    <div
-      key="0"
-    >
-      Item 
-      0
-    </div>
-    <div
-      key="1"
-    >
-      Item 
-      1
-    </div>
-  </div>
-  <div
-    className="makeStyles-paginationControlBar-1"
-  >
-    <PaginationControls
-      itemsName="bar items"
-      numPages={2}
-      pageNum={0}
-      setPageNum={[Function]}
-    />
     <div>
-      <span
-        key="0"
-      >
-        Bar Item 1
-      </span>
-      <span
-        key="1"
-      >
-        Bar Item 1
-      </span>
+      <div>
+        Item 
+        0
+      </div>
+      <div>
+        Item 
+        1
+      </div>
+    </div>
+    <div
+      class="makeStyles-paginationControlBar-3"
+    >
+      PaginationControls Mock 
+      {"pageNum":0,"numPages":2,"itemsName":"bar items"}
+      <div>
+        <span>
+          Bar Item 1
+        </span>
+        <span>
+          Bar Item 1
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -44,32 +34,26 @@ exports[`Pagination renders array of additional items in control bar after pagin
 exports[`Pagination renders single additional item in control bar after pagination controls in own div 1`] = `
 <div>
   <div>
-    <div
-      key="0"
-    >
-      Item 
-      0
-    </div>
-    <div
-      key="1"
-    >
-      Item 
-      1
-    </div>
-  </div>
-  <div
-    className="makeStyles-paginationControlBar-1"
-  >
-    <PaginationControls
-      itemsName="bar items"
-      numPages={2}
-      pageNum={0}
-      setPageNum={[Function]}
-    />
     <div>
-      <span>
-        Bar Item
-      </span>
+      <div>
+        Item 
+        0
+      </div>
+      <div>
+        Item 
+        1
+      </div>
+    </div>
+    <div
+      class="makeStyles-paginationControlBar-2"
+    >
+      PaginationControls Mock 
+      {"pageNum":0,"numPages":2,"itemsName":"bar items"}
+      <div>
+        <span>
+          Bar Item
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -78,46 +62,34 @@ exports[`Pagination renders single additional item in control bar after paginati
 exports[`Pagination renders the correct number of items from the start of the array on the first page 1`] = `
 <div>
   <div>
-    <div
-      key="0"
-    >
-      Item 
-      0
+    <div>
+      <div>
+        Item 
+        0
+      </div>
+      <div>
+        Item 
+        1
+      </div>
+      <div>
+        Item 
+        2
+      </div>
+      <div>
+        Item 
+        3
+      </div>
+      <div>
+        Item 
+        4
+      </div>
     </div>
     <div
-      key="1"
+      class="makeStyles-paginationControlBar-1"
     >
-      Item 
-      1
+      PaginationControls Mock 
+      {"pageNum":0,"numPages":2,"itemsName":null}
     </div>
-    <div
-      key="2"
-    >
-      Item 
-      2
-    </div>
-    <div
-      key="3"
-    >
-      Item 
-      3
-    </div>
-    <div
-      key="4"
-    >
-      Item 
-      4
-    </div>
-  </div>
-  <div
-    className="makeStyles-paginationControlBar-1"
-  >
-    <PaginationControls
-      itemsName={null}
-      numPages={2}
-      pageNum={0}
-      setPageNum={[Function]}
-    />
   </div>
 </div>
 `;
@@ -125,17 +97,15 @@ exports[`Pagination renders the correct number of items from the start of the ar
 exports[`Pagination skips div for pagination controls and bar item if only one page and no bar item 1`] = `
 <div>
   <div>
-    <div
-      key="0"
-    >
-      Item 
-      0
-    </div>
-    <div
-      key="1"
-    >
-      Item 
-      1
+    <div>
+      <div>
+        Item 
+        0
+      </div>
+      <div>
+        Item 
+        1
+      </div>
     </div>
   </div>
 </div>
