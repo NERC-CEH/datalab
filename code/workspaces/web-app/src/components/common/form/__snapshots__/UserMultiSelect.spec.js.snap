@@ -1,48 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UserMultiSelect renders to match snapshot passing correct props to children 1`] = `
-<Fragment>
-  <WithStyles(ForwardRef(Autocomplete))
-    autoHighlight={true}
-    getOptionLabel={[Function]}
-    getOptionSelected={[Function]}
-    loading={false}
-    multiple={true}
-    onBlur={[Function]}
-    onChange={[Function]}
-    options={
-      Array [
-        Object {
-          "name": "User 1",
-          "userId": "user-1",
-        },
-        Object {
-          "name": "User 2",
-          "userId": "user-2",
-        },
-      ]
-    }
-    renderInput={[Function]}
-    renderOption={[Function]}
-    renderTags={[Function]}
-    style={
-      Object {
-        "marginBottom": 10,
-        "minWidth": 250,
-      }
-    }
-    value={
-      Array [
-        Object {
-          "name": "User 1",
-          "userId": "user-1",
-        },
-        Object {
-          "name": "User 2",
-          "userId": "user-2",
-        },
-      ]
-    }
-  />
-</Fragment>
+<div>
+  <div>
+    Autocomplete mock 
+    {"style":{"minWidth":250,"marginBottom":10},"multiple":true,"options":[{"userId":"user-1","name":"User 1"},{"userId":"user-2","name":"User 2"}],"autoHighlight":true,"loading":false,"value":[{"userId":"user-1","name":"User 1"},{"userId":"user-2","name":"User 2"}]}
+  </div>
+</div>
 `;

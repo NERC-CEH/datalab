@@ -1,35 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StyledTextField renders components passed as children 1`] = `
-<WithStyles(ForwardRef(TextField))
-  margin="dense"
-  variant="outlined"
->
-  <span>
-    Child Content
-  </span>
-</WithStyles(ForwardRef(TextField))>
+<div>
+  <div>
+    TextField mock 
+    {"margin":"dense","variant":"outlined","children":{"type":"span","key":null,"ref":null,"props":{"children":"Child Content"},"_owner":null,"_store":{}}}
+  </div>
+</div>
 `;
 
 exports[`StyledTextField renders to match snapshot forwarding passed props to child component 1`] = `
-<WithStyles(ForwardRef(TextField))
-  className="class-name"
-  margin="dense"
-  otherProp="value"
-  variant="outlined"
-/>
+<div>
+  <div>
+    TextField mock 
+    {"margin":"dense","variant":"outlined","className":"class-name","otherProp":"value"}
+  </div>
+</div>
 `;
 
 exports[`StyledTextField renders to match snapshot overriding default prop value if provide different value 1`] = `
-<WithStyles(ForwardRef(TextField))
-  margin="normal"
-  variant="outlined"
-/>
+<div>
+  <div>
+    TextField mock 
+    {"margin":"normal","variant":"outlined"}
+  </div>
+</div>
 `;
 
 exports[`StyledTextField renders to match snapshot when no extra props are provided 1`] = `
-<WithStyles(ForwardRef(TextField))
-  margin="dense"
-  variant="outlined"
-/>
+<div>
+  <div>
+    TextField mock 
+    {"margin":"dense","variant":"outlined"}
+  </div>
+</div>
 `;

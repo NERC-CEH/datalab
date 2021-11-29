@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { useProjectsArray } from '../../../hooks/projectsHooks';
 import ProjectMultiSelect from './ProjectMultiSelect';
 
 jest.mock('react-redux');
 jest.mock('../../../hooks/projectsHooks');
+
+jest.mock('@material-ui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
 
 const project1 = { key: 'test-proj1', name: 'Test Project 1' };
 const project2 = { key: 'test-proj2', name: 'Test Project 2' };
@@ -19,7 +21,7 @@ describe('ProjectMultiSelect', () => {
       },
     };
 
-    return shallow(<ProjectMultiSelect {...props} />);
+    return render(<ProjectMultiSelect {...props} />).container;
   };
 
   beforeEach(() => {

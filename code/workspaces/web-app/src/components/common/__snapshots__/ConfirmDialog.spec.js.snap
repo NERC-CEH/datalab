@@ -1,34 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ConfirmDialog renders to match snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  role="dialog"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
-    Example Title
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))>
+  <div
+    class="MuiDialogTitle-root"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6"
+    >
+      Example Title
+    </h2>
+  </div>
+  <div
+    class="MuiDialogContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+    >
       Warning about editing this project accidentally
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <PrimaryActionButton
-      onClick={[MockFunction onSubmit]}
+    </p>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+      tabindex="0"
+      type="button"
     >
-      Confirm
-    </PrimaryActionButton>
-    <SecondaryActionButton
-      onClick={[MockFunction onCancel]}
-      style={
-        Object {
-          "marginLeft": 5,
-        }
-      }
+      <span
+        class="MuiButton-label"
+      >
+        Confirm
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+      style="margin-left: 5px;"
+      tabindex="0"
+      type="button"
     >
-      Cancel
-    </SecondaryActionButton>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
+      <span
+        class="MuiButton-label"
+      >
+        Cancel
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
 `;

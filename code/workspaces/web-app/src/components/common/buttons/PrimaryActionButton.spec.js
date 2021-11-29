@@ -1,13 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import PrimaryActionButton from './PrimaryActionButton';
-
-function shallowRender(props) {
-  return shallow(<PrimaryActionButton {...props} />);
-}
 
 describe('PrimaryActionButton', () => {
   it('overrides variant and color props', () => {
-    expect(shallowRender({ variant: 'contained', color: 'secondary' })).toMatchSnapshot();
+    const props = { variant: 'contained', color: 'secondary' };
+    expect(render(<PrimaryActionButton {...props}><div>Test Child</div></PrimaryActionButton>).container).toMatchSnapshot();
   });
 });
