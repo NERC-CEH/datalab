@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import AdminUsersContainer from './AdminUsersContainer';
 import { useUsers } from '../../hooks/usersHooks';
 import { useRoles } from '../../hooks/rolesHooks';
@@ -8,6 +8,8 @@ import { useStacksArray } from '../../hooks/stacksHooks';
 import { useDataStorageArray } from '../../hooks/dataStorageHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { getCatalogue } from '../../config/catalogue';
+import projectActions from '../../actions/projectActions';
+import roleActions from '../../actions/roleActions';
 
 jest.mock('react-redux');
 jest.mock('../../hooks/usersHooks');
@@ -16,7 +18,11 @@ jest.mock('../../hooks/stacksHooks');
 jest.mock('../../hooks/dataStorageHooks');
 jest.mock('../../hooks/projectsHooks');
 jest.mock('../../config/catalogue');
-jest.mock('./UserResources', () => () => (<>user resources</>));
+jest.mock('./UserResources', () => props => (<>UserResources Mock {JSON.stringify(props, null, 2)}</>));
+jest.mock('../../components/common/input/UserSelect', () => props => (<>UserSelect Mock {JSON.stringify(props)}</>));
+
+jest.mock('../../actions/projectActions');
+jest.mock('../../actions/roleActions');
 
 const user1 = { userId: 'user1', name: 'Test User 1' };
 const user2 = { userId: 'user2', name: 'Test User 2' };
@@ -40,14 +46,16 @@ describe('AdminUsersContainer', () => {
     useProjectsArray.mockReturnValue({ fetching: false, value: [] });
     useProjectsArray.mockReturnValue({ fetching: false, value: [] });
     getCatalogue.mockReturnValue({ available: true });
+    projectActions.getAllProjectsAndResources = jest.fn();
+    roleActions.getAllUsersAndRoles = jest.fn();
   });
 
   it('renders correctly passing correct props to children', () => {
-    expect(shallow(<AdminUsersContainer/>)).toMatchSnapshot();
+    expect(render(<AdminUsersContainer/>).container).toMatchSnapshot();
   });
 
   it('does not render catalogue permission filters when there is no catalogue available', () => {
     getCatalogue.mockReturnValueOnce({ available: false });
-    expect(shallow(<AdminUsersContainer/>)).toMatchSnapshot();
+    expect(render(<AdminUsersContainer/>).container).toMatchSnapshot();
   });
 });

@@ -1,36 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AdminNavigationContainer renders to match snapshot passing correct props to children 1`] = `
-<WithStyles(SideBarNavigation)
-  sideBar={<WithStyles(AdminSideBar) />}
->
-  <Switch>
-    <RoutePermissionWrapper
-      component={[Function]}
-      exact={true}
-      path="/admin/resources"
-      permission="system:instance:admin"
-    />
-    <RoutePermissionWrapper
-      component={[Function]}
-      exact={true}
-      path="/admin/users"
-      permission="system:instance:admin"
-    />
-    <RoutePermissionWrapper
-      component={[Function]}
-      exact={true}
-      path="/admin/messages"
-      permission="system:instance:admin"
-    />
-    <Redirect
-      exact={true}
-      from="/admin"
-      to="/admin/resources"
-    />
-    <Route
-      component={[Function]}
-    />
-  </Switch>
-</WithStyles(SideBarNavigation)>
+<div>
+  <div
+    class="SideBarNavigation-projectNavigation-1"
+  >
+    <div
+      class="AdminSideBar-sideBar-4"
+    >
+      <ul
+        class="MuiList-root AdminSideBar-itemList-3 MuiList-padding"
+      >
+        <div
+          class="SideBarGroup-sidebarGroup-9"
+        >
+          <h6
+            class="MuiTypography-root SideBarGroup-title-10 MuiTypography-h6"
+          >
+            Administration
+          </h6>
+          <a
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            href="/admin/resources"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="MuiListItemIcon-root Link-listIcon-43"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                dashboard
+              </span>
+            </div>
+            Resources
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+          <a
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            href="/admin/users"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="MuiListItemIcon-root Link-listIcon-43"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                people
+              </span>
+            </div>
+            Users
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+          <a
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            href="/admin/messages"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="MuiListItemIcon-root Link-listIcon-43"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                notifications
+              </span>
+            </div>
+            Messages
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+        </div>
+      </ul>
+    </div>
+    <div
+      class="SideBarNavigation-contentArea-2"
+    >
+      <div
+        class="Page-pageTemplate-69"
+      >
+        <h4
+          class="MuiTypography-root Page-title-71 MuiTypography-h4"
+        >
+          404 – Page Not Found
+        </h4>
+        <div
+          class="Page-contentArea-70"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            <a
+              href="/"
+            >
+              Go to homepage
+            </a>
+          </p>
+        </div>
+        <div>
+          Footer mock
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;

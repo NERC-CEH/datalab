@@ -1,21 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import Sites from './Sites';
 
-describe('Sites', () => {
-  const shallowRender = () => {
-    const sites = [{
-      key: 'test-key',
-      name: 'Test Name',
-    }];
-    const props = {
-      sites,
-    };
+jest.mock('./ResourceStackCards', () => props => (<>ResourceStackCards Mock {JSON.stringify(props)}</>));
 
-    return shallow(<Sites {...props} />);
+describe('Sites', () => {
+  const sites = [{
+    key: 'test-key',
+    name: 'Test Name',
+  }];
+  const props = {
+    sites,
   };
 
   it('renders to match snapshot passing correct props to children', () => {
-    expect(shallowRender()).toMatchSnapshot();
+    expect(render(<Sites {...props} />).container).toMatchSnapshot();
   });
 });

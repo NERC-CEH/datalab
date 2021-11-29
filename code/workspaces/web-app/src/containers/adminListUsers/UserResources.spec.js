@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import UserResources from './UserResources';
 import { getCatalogue } from '../../config/catalogue';
 
@@ -16,43 +16,39 @@ jest.mock('./UserProject', () => () => (<>user project</>));
 jest.mock('../../config/catalogue');
 
 describe('UserResources', () => {
-  const shallowRender = () => {
-    const filters = {
-      instanceAdmin: false,
-      dataManager: false,
-      projectAdmin: false,
-      projectUser: false,
-      projectViewer: false,
-      siteOwner: false,
-      notebookOwner: false,
-      storageAccess: false,
-    };
-    const roles = {
-      instanceAdmin: true,
-      dataManager: true,
-      projectAdmin: [projectKey],
-      projectUser: [projectKey],
-      projectViewer: [projectKey],
-      siteOwner: [{ projectKey, name: siteName }],
-      notebookOwner: [{ projectKey, name: notebookName }],
-      storageAccess: [{ projectKey, name: storageName }],
-    };
-    const props = {
-      user, filters, roles,
-    };
-
-    return shallow(<UserResources {...props} />);
+  const filters = {
+    instanceAdmin: false,
+    dataManager: false,
+    projectAdmin: false,
+    projectUser: false,
+    projectViewer: false,
+    siteOwner: false,
+    notebookOwner: false,
+    storageAccess: false,
+  };
+  const roles = {
+    instanceAdmin: true,
+    dataManager: true,
+    projectAdmin: [projectKey],
+    projectUser: [projectKey],
+    projectViewer: [projectKey],
+    siteOwner: [{ projectKey, name: siteName }],
+    notebookOwner: [{ projectKey, name: notebookName }],
+    storageAccess: [{ projectKey, name: storageName }],
+  };
+  const props = {
+    user, filters, roles,
   };
 
   describe('renders to match snapshot passing correct props to children', () => {
     it('when catalogue is available', () => {
       getCatalogue.mockReturnValueOnce({ available: true });
-      expect(shallowRender()).toMatchSnapshot();
+      expect(render(<UserResources {...props} />).container).toMatchSnapshot();
     });
 
     it('when catalogue is not available', () => {
       getCatalogue.mockReturnValueOnce({ available: false });
-      expect(shallowRender()).toMatchSnapshot();
+      expect(render(<UserResources {...props} />).container).toMatchSnapshot();
     });
   });
 });

@@ -1,30 +1,102 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AssetRepoNavigationContainer renders to match snapshot passing correct props to children 1`] = `
-<WithStyles(SideBarNavigation)
-  sideBar={<WithStyles(AssetRepoSideBar) />}
->
-  <Switch>
-    <RoutePermissionWrapper
-      component={[Function]}
-      exact={true}
-      path="/assets/add-metadata"
-      permission="system:data:manager"
-    />
-    <RoutePermissionWrapper
-      component={[Function]}
-      exact={true}
-      path="/assets/find"
-      permission=""
-    />
-    <Redirect
-      exact={true}
-      from="/assets"
-      to="/assets/find"
-    />
-    <Route
-      component={[Function]}
-    />
-  </Switch>
-</WithStyles(SideBarNavigation)>
+<div>
+  <div
+    class="SideBarNavigation-projectNavigation-1"
+  >
+    <div
+      class="AssetRepoSideBar-sideBar-4"
+    >
+      <ul
+        class="MuiList-root AssetRepoSideBar-itemList-3 MuiList-padding"
+      >
+        <div
+          class="SideBarGroup-sidebarGroup-9"
+        >
+          <h6
+            class="MuiTypography-root SideBarGroup-title-10 MuiTypography-h6"
+          >
+            Asset Repo
+          </h6>
+          <div>
+            <a
+              aria-disabled="false"
+              class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+              href="/assets/add-metadata"
+              role="button"
+              tabindex="0"
+            >
+              <div
+                class="MuiListItemIcon-root Link-listIcon-43"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root"
+                >
+                  dashboard
+                </span>
+              </div>
+              Add Metadata
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </a>
+          </div>
+          <a
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            href="/assets/find"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="MuiListItemIcon-root Link-listIcon-43"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                dashboard
+              </span>
+            </div>
+            Find Asset
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+        </div>
+      </ul>
+    </div>
+    <div
+      class="SideBarNavigation-contentArea-2"
+    >
+      <div
+        class="Page-pageTemplate-69"
+      >
+        <h4
+          class="MuiTypography-root Page-title-71 MuiTypography-h4"
+        >
+          404 – Page Not Found
+        </h4>
+        <div
+          class="Page-contentArea-70"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            <a
+              href="/"
+            >
+              Go to homepage
+            </a>
+          </p>
+        </div>
+        <div>
+          Footer mock
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
