@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import ConfirmDialog from './ConfirmDialog';
 
 describe('ConfirmDialog', () => {
@@ -11,7 +11,7 @@ describe('ConfirmDialog', () => {
   const body = 'Warning about editing this project accidentally';
 
   it('renders to match snapshot', () => {
-    expect(shallow(
+    render(
       <ConfirmDialog
         onSubmit={jest.fn().mockName('onSubmit')}
         onCancel={jest.fn().mockName('onCancel')}
@@ -19,6 +19,8 @@ describe('ConfirmDialog', () => {
         title={title}
         body={body}
       />,
-    )).toMatchSnapshot();
+    );
+
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });

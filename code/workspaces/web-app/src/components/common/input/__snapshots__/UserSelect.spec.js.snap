@@ -1,83 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input renders to match snapshot when loading 1`] = `
-<StyledTextField
-  InputProps={
-    Object {
-      "endAdornment": <React.Fragment>
-        <WithStyles(ForwardRef(CircularProgress))
-          size={30}
-        />
-        expected-endAdornment
-      </React.Fragment>,
-      "fromParamsInputProps": "expected-value",
-    }
-  }
-  fromParams="expected-value"
-  fullWidth={true}
-  label="expected-label"
-  placeholder="expected-placeholder"
-/>
+<div>
+  <div>
+    TextField mock 
+    label=expected-label
+     
+    placeholder=expected-placeholder
+  </div>
+</div>
 `;
 
 exports[`Input renders to match snapshot when not loading 1`] = `
-<StyledTextField
-  InputProps={
-    Object {
-      "endAdornment": <React.Fragment>
-        expected-endAdornment
-      </React.Fragment>,
-      "fromParamsInputProps": "expected-value",
-    }
-  }
-  fromParams="expected-value"
-  fullWidth={true}
-  label="expected-label"
-  placeholder="expected-placeholder"
-/>
+<div>
+  <div>
+    TextField mock 
+    label=expected-label
+     
+    placeholder=expected-placeholder
+  </div>
+</div>
 `;
 
 exports[`Option renders to match snapshot when user is not selected 1`] = `
-<Fragment>
+<div>
   User One
-</Fragment>
+</div>
 `;
 
 exports[`Option renders to match snapshot when user is selected 1`] = `
-<Fragment>
+<div>
   User One
-  <WithStyles(ForwardRef(Tooltip))
-    placement="right"
+  <svg
+    class="MuiSvgIcon-root makeStyles-userSelectedIcon-2 MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeSmall"
+    focusable="false"
+    role="img"
     title="User selected"
+    viewBox="0 0 24 24"
   >
-    <CheckCircleRoundedIcon
-      className="makeStyles-userSelectedIcon-1"
-      color="primary"
-      fontSize="small"
-      titleAccess="User selected"
+    <path
+      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7a.9959.9959 0 010-1.41c.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z"
     />
-  </WithStyles(ForwardRef(Tooltip))>
-</Fragment>
-`;
-
-exports[`UserSelect renders input component to match snapshot forwarding required props 1`] = `
-<Input
-  label="expected-label"
-  loading={false}
-  params="expected-params"
-  placeholder="expected-placeholder"
-/>
-`;
-
-exports[`UserSelect renders option component to match snapshot forwarding required props 1`] = `
-<Option
-  option={
-    Object {
-      "name": "User One",
-      "userId": "user-one-id",
-    }
-  }
-  selected={true}
-  userSelectedToolTip="User Selected"
-/>
+    <title>
+      User selected
+    </title>
+  </svg>
+</div>
 `;

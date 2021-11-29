@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { useUsers } from '../../../hooks/usersHooks';
 import UserMultiSelect from './UserMultiSelect';
 
 jest.mock('react-redux');
 jest.mock('../../../hooks/usersHooks');
+jest.mock('@material-ui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
 
 const user1 = { userId: 'user-1', name: 'User 1' };
 const user2 = { userId: 'user-2', name: 'User 2' };
@@ -19,7 +20,7 @@ describe('UserMultiSelect', () => {
       },
     };
 
-    return shallow(<UserMultiSelect {...props} />);
+    return render(<UserMultiSelect {...props} />).container;
   };
 
   beforeEach(() => {

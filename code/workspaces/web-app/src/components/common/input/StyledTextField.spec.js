@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import StyledTextField from './StyledTextField';
 
-const shallowRender = props => shallow(<StyledTextField {...props} />);
+jest.mock('@material-ui/core/TextField', () => props => (<div>TextField mock {JSON.stringify(props)}</div>));
+
+const shallowRender = props => render(<StyledTextField {...props} />).container;
 const expectShallowRenderToMatchSnapshot = props => expect(shallowRender(props)).toMatchSnapshot();
 
 describe('StyledTextField', () => {
@@ -19,11 +21,11 @@ describe('StyledTextField', () => {
   });
 
   it('renders components passed as children', () => {
-    const wrapper = shallow(
+    const wrapper = render(
       <StyledTextField>
         <span>Child Content</span>
       </StyledTextField>,
-    );
+    ).container;
     expect(wrapper).toMatchSnapshot();
   });
 });
