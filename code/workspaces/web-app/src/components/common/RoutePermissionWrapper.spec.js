@@ -1,7 +1,6 @@
 import React from 'react';
 import { MemoryRouter, Route, useHistory, useLocation } from 'react-router-dom';
-import { mount, shallow } from 'enzyme';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { render } from '@testing-library/react';
 import RoutePermissions from './RoutePermissionWrapper';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 
@@ -9,9 +8,11 @@ jest.mock('../../hooks/authHooks');
 
 describe('RoutePermissionWrapper', () => {
   function shallowRender(props) {
-    return shallow(
-      <RoutePermissions {...props} />,
-    );
+    return render(
+      <MemoryRouter initialEntries={[props.path]} >
+        <RoutePermissions {...props} />
+      </MemoryRouter>,
+    ).container;
   }
 
   function fullRender(props) {
@@ -24,7 +25,7 @@ describe('RoutePermissionWrapper', () => {
       return null;
     };
 
-    const wrapper = mount(
+    const wrapper = render(
       <MemoryRouter initialEntries={[props.path]} >
         <RoutePermissions {...props} />
         <Route path="*">
@@ -62,7 +63,6 @@ describe('RoutePermissionWrapper', () => {
   });
 
   it('renders spinner when fetching permissions', () => {
-    // Arrange
     useCurrentUserPermissions.mockReturnValueOnce({
       error: null,
       fetching: true,
@@ -70,16 +70,11 @@ describe('RoutePermissionWrapper', () => {
     });
     const props = generateProps();
 
-    // Act
     const { wrapper } = fullRender(props);
-    const matchingNodes = wrapper.find(CircularProgress);
-
-    // Assert
-    expect(matchingNodes.length).toBe(1);
+    expect(wrapper.getByRole('progressbar')).not.toBeNull();
   });
 
   it('renders given component when permissions match', () => {
-    // Arrange
     useCurrentUserPermissions.mockReturnValueOnce({
       error: null,
       fetching: false,
@@ -87,16 +82,11 @@ describe('RoutePermissionWrapper', () => {
     });
     const props = generateProps();
 
-    // Act
     const { wrapper } = fullRender(props);
-    const matchingNodes = wrapper.find('span');
-
-    // Assert
-    expect(matchingNodes.prop('children')).toBe('Has Permission');
+    expect(wrapper.getByText('Has Permission')).not.toBeNull();
   });
 
   it('renders given component when instance admin', () => {
-    // Arrange
     useCurrentUserPermissions.mockReturnValueOnce({
       error: null,
       fetching: false,
@@ -104,16 +94,11 @@ describe('RoutePermissionWrapper', () => {
     });
     const props = generateProps();
 
-    // Act
     const { wrapper } = fullRender(props);
-    const matchingNodes = wrapper.find('span');
-
-    // Assert
-    expect(matchingNodes.prop('children')).toBe('Has Permission');
+    expect(wrapper.getByText('Has Permission')).not.toBeNull();
   });
 
   it('renders given component when no permissions required', () => {
-    // Arrange
     useCurrentUserPermissions.mockReturnValueOnce({
       error: null,
       fetching: false,
@@ -122,12 +107,8 @@ describe('RoutePermissionWrapper', () => {
     const props = generateProps();
     props.permission = '';
 
-    // Act
     const { wrapper, testLocation: { pathname } } = fullRender(props);
-    const matchingNodes = wrapper.find('span');
-
-    // Assert
-    expect(matchingNodes.prop('children')).toBe('Has Permission');
+    expect(wrapper.getByText('Has Permission')).not.toBeNull();
     expect(pathname).toEqual(props.path);
   });
 
@@ -147,7 +128,6 @@ describe('RoutePermissionWrapper', () => {
   });
 
   it('renders alt component when permissions do not match', () => {
-    // Arrange
     useCurrentUserPermissions.mockReturnValueOnce({
       error: null,
       fetching: false,
@@ -155,12 +135,10 @@ describe('RoutePermissionWrapper', () => {
     });
     const props = generateProps();
 
-    // Act
     const { wrapper, testLocation: { pathname } } = fullRender(props);
-    const matchingNodes = wrapper.find('span');
 
-    // Assert
-    expect(matchingNodes.prop('children')).toBe('Missing Permission');
+    expect(wrapper.queryByText('Has Permission')).toBeNull();
+    expect(wrapper.getByText('Missing Permission')).not.toBeNull();
     expect(pathname).toEqual(props.path);
   });
 
@@ -175,10 +153,7 @@ describe('RoutePermissionWrapper', () => {
 
     // Act
     const { wrapper, testLocation: { pathname } } = fullRender(props);
-    const matchingNodes = wrapper.children();
-
-    // Assert
-    expect(matchingNodes.isEmptyRender()).toBe(true);
+    expect(wrapper.container.firstChild).toBeNull();
     expect(pathname).toEqual(props.path);
   });
 });

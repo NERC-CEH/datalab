@@ -1,10 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import StackCards from './StackCards';
+
+jest.mock('./StackCard', () => props => (<div>StackCard mock {JSON.stringify(props)}</div>));
 
 describe('StackCards', () => {
   function shallowRender(props) {
-    return shallow(<StackCards {...props} />);
+    return render(<StackCards {...props} />).container;
   }
 
   const generateProps = () => ({

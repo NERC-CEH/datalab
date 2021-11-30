@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import EditDataStoreDialog, { getOnDetailsEditSubmit } from './EditDataStoreDialog';
 import modalDialogActions from '../../actions/modalDialogActions';
 import dataStorageActions from '../../actions/dataStorageActions';
+
+jest.mock('../dataStorage/editDataStoreForm', () => props => (<div>EditDataStoreForm mock {JSON.stringify(props)}</div>));
 
 const editDataStoreDetailsMock = jest.fn();
 const loadDataStorageMock = jest.fn();
@@ -11,12 +13,12 @@ dataStorageActions.loadDataStorage = loadDataStorageMock;
 
 describe('Edit data store dialog', () => {
   function shallowRender(props) {
-    return shallow(<EditDataStoreDialog {...props} />);
+    return render(<EditDataStoreDialog {...props} />).container;
   }
 
   it('creates correct snapshot', () => {
     // Arrange / Act
-    const output = shallowRender({
+    shallowRender({
       onCancel: jest.fn().mockName('onCancel'),
       title: 'expectedTitle',
       currentUsers: [{ label: 'expectedLabelOne', value: 'expectedValueOne' }],
@@ -32,7 +34,7 @@ describe('Edit data store dialog', () => {
     });
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });
 

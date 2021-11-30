@@ -1,37 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Logs creates correct snapshot for logs dialog 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  onClose={[MockFunction]}
-  open={true}
+<div
+  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  role="dialog"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
-    Title
-  </WithStyles(ForwardRef(DialogTitle))>
-  <PromisedContentWrapper
-    promise={
-      Object {
-        "fetching": true,
-      }
-    }
+  <div
+    class="MuiDialogTitle-root"
   >
-    <WithStyles(ForwardRef(DialogContent))>
-      <WithStyles(ForwardRef(DialogContentText))
-        style={
-          Object {
-            "whiteSpace": "pre",
-          }
-        }
-      />
-    </WithStyles(ForwardRef(DialogContent))>
-  </PromisedContentWrapper>
-  <WithStyles(ForwardRef(DialogActions))>
-    <PrimaryActionButton
-      onClick={[MockFunction]}
+    <h2
+      class="MuiTypography-root MuiTypography-h6"
     >
-      Close
-    </PrimaryActionButton>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
+      Title
+    </h2>
+  </div>
+  <div
+    class="makeStyles-fullSizeBase-77 makeStyles-fullWidth-78"
+  >
+    <div
+      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style="width: 40px; height: 40px;"
+    >
+      <svg
+        class="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx="44"
+          cy="44"
+          fill="none"
+          r="20.2"
+          stroke-width="3.6"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Close
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
 `;

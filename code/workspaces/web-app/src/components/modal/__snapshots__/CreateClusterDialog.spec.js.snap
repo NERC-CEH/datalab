@@ -1,53 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateClusterDialog renders correctly passing props to child components 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  role="dialog"
 >
   <div
-    className="makeStyles-dialogDiv-1"
+    class="makeStyles-dialogDiv-1"
   >
-    <WithStyles(ForwardRef(DialogTitle))>
-      Create Cluster Dialog Title
-    </WithStyles(ForwardRef(DialogTitle))>
-    <WithStyles(ForwardRef(DialogContent))>
-      <CreateClusterForm
-        cancel={[MockFunction onCancel]}
-        clusterMaxWorkers={
-          Object {
-            "default": 4,
-            "lowerLimit": 1,
-            "upperLimit": 8,
-          }
-        }
-        dataStorageOptions={Array []}
-        formName="createCluster"
-        initialValues={
-          Object {
-            "maxWorkerCpu": 0.5,
-            "maxWorkerMemoryGb": 4,
-            "maxWorkers": 4,
-          }
-        }
-        onSubmit={[MockFunction onSubmit]}
-        projectKey="testproj"
-        workerMaxCpu={
-          Object {
-            "default": 0.5,
-            "lowerLimit": 0.5,
-            "upperLimit": 2,
-          }
-        }
-        workerMaxMemory={
-          Object {
-            "default": 4,
-            "lowerLimit": 0.5,
-            "upperLimit": 8,
-          }
-        }
-      />
-    </WithStyles(ForwardRef(DialogContent))>
+    <div
+      class="MuiDialogTitle-root"
+    >
+      <h2
+        class="MuiTypography-root MuiTypography-h6"
+      >
+        Create Cluster Dialog Title
+      </h2>
+    </div>
+    <div
+      class="MuiDialogContent-root"
+    >
+      <div>
+        CreateClusterForm mock 
+        {"formName":"createCluster","clusterMaxWorkers":{"lowerLimit":1,"default":4,"upperLimit":8},"workerMaxMemory":{"lowerLimit":0.5,"default":4,"upperLimit":8},"workerMaxCpu":{"lowerLimit":0.5,"default":0.5,"upperLimit":2},"dataStorageOptions":[],"initialValues":{"maxWorkers":4,"maxWorkerMemoryGb":4,"maxWorkerCpu":0.5},"projectKey":"testproj","condaRequired":true}
+      </div>
+    </div>
   </div>
-</WithStyles(ForwardRef(Dialog))>
+</div>
 `;

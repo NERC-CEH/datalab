@@ -1,7 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import createStore from 'redux-mock-store';
+import { render } from '@testing-library/react';
 import PreviewDataStoreCard, { PurePreviewDataStoreCard } from './PreviewDataStoreCard';
+import { renderWithState, buildDefaultTestState } from '../../testUtils/renderWithState';
+
+jest.mock('../stacks/StackCard', () => props => <div>StackCard mock {JSON.stringify(props)}</div>);
 
 const stack = { name: 'Name' };
 
@@ -21,7 +24,11 @@ describe('PreviewDataStoreCard', () => {
         PublicComponent: () => {},
       };
 
-      return shallow(<PreviewDataStoreCard {...props} />).find('PreviewDataStoreCard');
+      const state = buildDefaultTestState();
+      state.modalDialog = { open: false };
+      state.form = { createDataStore: { values: stack } };
+      const { wrapper } = renderWithState(state, PreviewDataStoreCard, props);
+      return wrapper;
     }
 
     it('extracts the form values from the redux state', () => {
@@ -29,17 +36,15 @@ describe('PreviewDataStoreCard', () => {
         modalDialog: { open: false },
       });
 
-      const output = shallowRenderConnected(store);
-
-      expect(output.prop('stack')).toEqual({});
+      const wrapper = shallowRenderConnected(store);
+      expect(wrapper.getByText('"stack":{}', { exact: false })).not.toBeNull();
     });
 
     it('provides empty notebook if the form does not yet exist in the redux state', () => {
       const store = createDefaultStore();
 
-      const output = shallowRenderConnected(store);
-
-      expect(output.prop('stack')).toEqual(stack);
+      const wrapper = shallowRenderConnected(store);
+      expect(wrapper.getByText('"stack":{"name":"Name"}', { exact: false })).not.toBeNull();
     });
   });
 
@@ -49,7 +54,7 @@ describe('PreviewDataStoreCard', () => {
         stack: 'expectedStack',
       };
 
-      return shallow(<PurePreviewDataStoreCard {...props} />);
+      return render(<PurePreviewDataStoreCard {...props} />).container;
     }
     it('passes correct props to StackCards', () => {
       expect(shallowRenderPure()).toMatchSnapshot();

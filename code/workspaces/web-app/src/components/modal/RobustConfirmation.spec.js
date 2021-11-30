@@ -1,12 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import TextField from '@material-ui/core/TextField';
+import { render, screen, fireEvent } from '@testing-library/react';
 import RobustConfirmation from './RobustConfirmation';
-import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
-import DangerButton from '../common/buttons/DangerButton';
 
 function shallowRender(props) {
-  return shallow(<RobustConfirmation {...props} />);
+  return render(<RobustConfirmation {...props} />).container;
 }
 
 describe('Robust Confirmation', () => {
@@ -31,10 +28,10 @@ describe('Robust Confirmation', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    shallowRender(props);
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 
   it('wires up cancel function correctly', () => {
@@ -42,10 +39,8 @@ describe('Robust Confirmation', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    const buttons = output.find(SecondaryActionButton);
-    const cancelFunction = buttons.find({ children: 'Cancel' }).prop('onClick');
-    cancelFunction();
+    shallowRender(props);
+    fireEvent.click(screen.getByText('Cancel'));
 
     // Assert
     expect(onCancelMock).toHaveBeenCalled();
@@ -56,10 +51,9 @@ describe('Robust Confirmation', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    const buttons = output.find(DangerButton);
-    const submitFunction = buttons.find({ children: 'Delete' }).prop('onClick');
-    submitFunction();
+    shallowRender(props);
+    fireEvent.change(screen.getByRole('dialog').querySelector('[id="name"]'), { target: { value: 'alpha' } });
+    fireEvent.click(screen.getByText('Delete'));
 
     // Assert
     expect(onSubmitMock).toHaveBeenCalled();
@@ -70,13 +64,10 @@ describe('Robust Confirmation', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    const textOnChange = output.find(TextField).prop('onChange');
+    shallowRender(props);
+    expect(screen.getByText('Delete').closest('button').getAttribute('disabled')).not.toBeNull();
 
-    // Assert
-    // Due to changes state, for this test, the same node need to be used for the expect checks.
-    expect(output.find(DangerButton).find({ children: 'Delete' }).prop('disabled')).toBe(true);
-    textOnChange({ target: { value: 'alpha' } });
-    expect(output.find(DangerButton).find({ children: 'Delete' }).prop('disabled')).toBe(false);
+    fireEvent.change(screen.getByRole('dialog').querySelector('[id="name"]'), { target: { value: 'alpha' } });
+    expect(screen.getByText('Delete').closest('button').getAttribute('disabled')).toBeNull();
   });
 });
