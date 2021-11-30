@@ -1,77 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  role="dialog"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
-    Title
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))>
+  <div
+    class="MuiDialogTitle-root"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6"
+    >
+      Title
+    </h2>
+  </div>
+  <div
+    class="MuiDialogContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+    >
       Body
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(IconButton)
-      icon="clear"
-      onClick={[MockFunction]}
+    </p>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-button-82"
+      tabindex="0"
+      type="button"
     >
-      Cancel
-    </WithStyles(IconButton)>
-    <WithStyles(IconButton)
-      danger={true}
-      disabled={false}
-      icon="delete"
-      onClick={[MockFunction]}
+      <span
+        class="MuiButton-label"
+      >
+        Cancel
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root IconButton-icon-84"
+        >
+          clear
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-buttonDanger-83"
+      tabindex="0"
+      type="button"
     >
-      Confirm Deletion
-    </WithStyles(IconButton)>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
+      <span
+        class="MuiButton-label"
+      >
+        Confirm Deletion
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root IconButton-icon-84"
+        >
+          delete
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
 `;
 
 exports[`Confirmation creates correct snapshot for confirmation dialog with array in body 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  role="dialog"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
-    Title
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogContentText))
-      key="0"
+  <div
+    class="MuiDialogTitle-root"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6"
+    >
+      Title
+    </h2>
+  </div>
+  <div
+    class="MuiDialogContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
     >
       Body
-    </WithStyles(ForwardRef(DialogContentText))>
-    <WithStyles(ForwardRef(DialogContentText))
-      key="1"
+    </p>
+    <p
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
     >
       Next line
-    </WithStyles(ForwardRef(DialogContentText))>
-    <WithStyles(ForwardRef(DialogContentText))
-      key="2"
+    </p>
+    <p
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
     >
       Final line
-    </WithStyles(ForwardRef(DialogContentText))>
-  </WithStyles(ForwardRef(DialogContent))>
-  <WithStyles(ForwardRef(DialogActions))>
-    <WithStyles(IconButton)
-      icon="clear"
-      onClick={[MockFunction]}
+    </p>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-button-217"
+      tabindex="0"
+      type="button"
     >
-      Cancel
-    </WithStyles(IconButton)>
-    <WithStyles(IconButton)
-      danger={true}
-      disabled={false}
-      icon="delete"
-      onClick={[MockFunction]}
+      <span
+        class="MuiButton-label"
+      >
+        Cancel
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root IconButton-icon-219"
+        >
+          clear
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-buttonDanger-218"
+      tabindex="0"
+      type="button"
     >
-      Confirm Deletion
-    </WithStyles(IconButton)>
-  </WithStyles(ForwardRef(DialogActions))>
-</WithStyles(ForwardRef(Dialog))>
+      <span
+        class="MuiButton-label"
+      >
+        Confirm Deletion
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root IconButton-icon-219"
+        >
+          delete
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
 `;
