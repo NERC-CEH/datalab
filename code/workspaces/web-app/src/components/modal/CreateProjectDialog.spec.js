@@ -1,20 +1,24 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import CreateProjectDialog from './CreateProjectDialog';
+
+jest.mock('../projects/CreateProjectForm', () => props => (<div>CreateProjectForm mock {JSON.stringify(props)}</div>));
 
 describe('CreateProjectDialog', () => {
   it('renders to match snapshot passing function props to form', () => {
-    expect(shallow(<CreateProjectDialog
+    render(<CreateProjectDialog
       onSubmit={jest.fn().mockName('onSubmit')}
       onCancel={jest.fn().mockName('onCancel')}
-    />)).toMatchSnapshot();
+    />);
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 
   it('renders request form only if requestOnly is set', () => {
-    expect(shallow(<CreateProjectDialog
+    render(<CreateProjectDialog
       onSubmit={jest.fn().mockName('onSubmit')}
       onCancel={jest.fn().mockName('onCancel')}
       requestOnly={true}
-    />)).toMatchSnapshot();
+    />);
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });

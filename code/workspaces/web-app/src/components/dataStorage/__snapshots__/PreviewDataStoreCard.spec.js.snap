@@ -1,17 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PreviewDataStoreCard is a component which passes correct props to StackCards 1`] = `
-<WithStyles(StackCard)
-  deletePermission="delete"
-  editPermission="edit"
-  openPermission="open"
-  stack="expectedStack"
-  typeName="Data Store"
-  userPermissions={
-    Array [
-      "open",
-      "delete",
-    ]
-  }
-/>
+<div>
+  <div>
+    StackCard mock 
+    {"stack":"expectedStack","typeName":"Data Store","userPermissions":["open","delete"],"editPermission":"edit","openPermission":"open","deletePermission":"delete"}
+  </div>
+</div>
 `;

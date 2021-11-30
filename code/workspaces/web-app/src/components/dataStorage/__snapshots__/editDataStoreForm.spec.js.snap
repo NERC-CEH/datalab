@@ -1,45 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditDataStoreForm renders to match snapshot 1`] = `
-<form
-  onSubmit={[MockFunction handleSubmit]}
->
-  <Field
-    component={[Function]}
-    label="Display Name"
-    name="displayName"
-  />
-  <Field
-    component={[Function]}
-    label="Description"
-    name="description"
-  />
-  <Field
-    component={[Function]}
-    getOptionLabel={[Function]}
-    getOptionSelected={[Function]}
-    label="Users with access to data store"
-    loading={false}
-    name="users"
-    options={
-      Array [
-        Object {
-          "label": "User 1",
-          "value": "user1",
-        },
-        Object {
-          "label": "User 2",
-          "value": "user2",
-        },
-      ]
-    }
-    placeholder="Type user's email address"
-    selectedTip="User has access"
-  />
-  <UpdateFormControls
-    onCancel={[MockFunction onCancel]}
-    onClearChanges={[MockFunction reset]}
-    pristine={true}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      Field mock 
+      {"name":"displayName","label":"Display Name"}
+    </div>
+    <div>
+      Field mock 
+      {"name":"description","label":"Description"}
+    </div>
+    <div>
+      Field mock 
+      {"name":"users","label":"Users with access to data store","placeholder":"Type user's email address","selectedTip":"User has access","options":[{"label":"User 1","value":"user1"},{"label":"User 2","value":"user2"}],"loading":false}
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-1"
+    >
+      <span
+        class="makeStyles-button-2"
+        title="No changes to apply"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary Mui-disabled Mui-disabled"
+          disabled=""
+          tabindex="-1"
+          type="submit"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Apply
+          </span>
+        </button>
+      </span>
+      <span
+        class="makeStyles-button-2"
+        title="No changes to clear"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary Mui-disabled Mui-disabled"
+          disabled=""
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Clear Changes
+          </span>
+        </button>
+      </span>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-2 MuiButton-outlinedSecondary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Cancel
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;

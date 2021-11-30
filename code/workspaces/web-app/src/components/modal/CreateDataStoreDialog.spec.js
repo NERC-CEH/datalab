@@ -1,13 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import CreateDataStoreDialog from './CreateDataStoreDialog';
 import { storageCreationDefaultType } from '../../config/storage';
 
 jest.mock('../../config/storage');
+jest.mock('../dataStorage/CreateDataStoreForm', () => props => (<div>CreateDataStoreForm mock {JSON.stringify(props)}</div>));
+jest.mock('../dataStorage/PreviewDataStoreCard', () => () => (<div>PreviewDataStoreCard mock</div>));
 
 describe('CreateDataStoreDialog dialog', () => {
   function shallowRender(props) {
-    return shallow(<CreateDataStoreDialog {...props} />);
+    render(<CreateDataStoreDialog {...props} />);
+    return screen.getByRole('dialog');
   }
 
   const onSubmitMock = jest.fn();
@@ -34,31 +37,5 @@ describe('CreateDataStoreDialog dialog', () => {
 
     // Assert
     expect(output).toMatchSnapshot();
-  });
-
-  it('wires up cancel function correctly', () => {
-    // Arrange
-    const props = generateProps();
-
-    // Act
-    const output = shallowRender(props);
-    const cancelFunction = output.find('ReduxForm').prop('cancel');
-    cancelFunction();
-
-    // Assert
-    expect(onCancelMock).toHaveBeenCalled();
-  });
-
-  it('wires up submit function correctly', () => {
-    // Arrange
-    const props = generateProps();
-
-    // Act
-    const output = shallowRender(props);
-    const submitFunction = output.find('ReduxForm').prop('onSubmit');
-    submitFunction();
-
-    // Assert
-    expect(onSubmitMock).toHaveBeenCalled();
   });
 });

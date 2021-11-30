@@ -1,25 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditSiteDialog renders correctly passing values to provided from component 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  role="dialog"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
-    Title
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <FormComponent
-      initialValues={
-        Object {
-          "description": "description",
-          "displayName": "Display Name",
-          "name": "stackname",
-        }
-      }
-      onCancel={[MockFunction onCancel]}
-      onSubmit={[MockFunction onSubmit]}
-    />
-  </WithStyles(ForwardRef(DialogContent))>
-</WithStyles(ForwardRef(Dialog))>
+  <div
+    class="MuiDialogTitle-root"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6"
+    >
+      Title
+    </h2>
+  </div>
+  <div
+    class="MuiDialogContent-root"
+  >
+    <div />
+  </div>
+</div>
 `;
