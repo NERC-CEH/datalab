@@ -7,7 +7,6 @@ import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import { PureProjectNavigationContainer } from './ProjectNavigationContainer';
 
-// jest.mock('react-router');
 jest.mock('../../hooks/currentProjectHooks');
 jest.mock('../../hooks/authHooks');
 
