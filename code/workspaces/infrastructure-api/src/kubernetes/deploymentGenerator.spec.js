@@ -150,7 +150,7 @@ describe('deploymentGenerator', () => {
     expect(manifest).toMatchSnapshot();
   });
 
-  it('generates createJupyterDeployment manifest', async () => {
+  describe('createJupyterDeployment', () => {
     const params = {
       projectKey: 'project-key',
       deploymentName: 'deployment-name',
@@ -158,8 +158,17 @@ describe('deploymentGenerator', () => {
       type: 'jupyterlab',
       volumeMount: 'volume-mount',
     };
-    const manifest = await deploymentGenerator.createJupyterDeployment(params);
-    expect(manifest).toMatchSnapshot();
+    it('generates JupyterLab manifest', async () => {
+      const manifest = await deploymentGenerator.createJupyterDeployment(params);
+      expect(manifest).toMatchSnapshot();
+    });
+    it('generates Jupyter Notebook manifest', async () => {
+      const manifest = await deploymentGenerator.createJupyterDeployment({
+        ...params,
+        type: 'jupyter',
+      });
+      expect(manifest).toMatchSnapshot();
+    });
   });
 
   describe('createRStudioConfigMap', () => {
