@@ -82,7 +82,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
     setAnchorEl(null);
   };
 
-  const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton innerRef={ref} {...props} />);
+  const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton ref={ref} {...props} />);
 
   const shouldRenderLogs = userActions.logs && getLogs !== undefined;
   const shouldRenderEdit = userActions.edit && editStack !== undefined;
