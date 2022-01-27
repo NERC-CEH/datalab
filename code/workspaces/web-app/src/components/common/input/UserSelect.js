@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Autocomplete } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
@@ -29,7 +29,7 @@ const UserSelect = ({ selectedUsers, setSelectedUsers, label, placeholder, multi
       loading={loading}
       autoHighlight
       renderInput={params => <Input params={params} label={label} placeholder={placeholder} loading={loading} />}
-      renderOption={(option, { selected }) => <Option option={option} selected={selected} userSelectedToolTip={userSelectedToolTip} />}
+      renderOption={(props, option, { selected }) => <li {...props}><Option option={option} selected={selected} userSelectedToolTip={userSelectedToolTip} /></li>}
     />
   );
 };

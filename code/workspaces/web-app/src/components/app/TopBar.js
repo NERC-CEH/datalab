@@ -29,7 +29,7 @@ const styles = theme => createStyles({
     maxHeight: theme.shape.topBarContentHeight,
   },
   datalabsLogo: {
-    height: theme.shape.topBarContentHeight - theme.spacing(0.5),
+    height: theme.shape.topBarContentHeight,
     width: 'auto',
   },
   buttons: {

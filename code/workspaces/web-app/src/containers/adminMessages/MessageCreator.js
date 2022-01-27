@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, TextField } from '@mui/material';
 import withStyles from '@mui/styles/withStyles';
-import { DateTimePicker } from '@material-ui/pickers';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
@@ -53,6 +53,9 @@ const MessageCreator = ({ classes, createMessage }) => {
             label={'Expiry'}
             value={selectedDate}
             onChange={handleDateChange}
+            renderInput={props => (
+              <TextField {...props}/>
+            )}
             ampm={false}
           />
         </Grid>

@@ -167,16 +167,18 @@ export const renderMultiSelectAutocompleteField = ({
           {...fieldStyleProps}
         />)}
       renderOption={
-        (option, { selected }) => <>
-          { getOptionLabel(option) }
-          { selected && <Tooltip title={selectedTip} placement="right">
-            <CheckCircleRoundedIcon
-              titleAccess={selectedTip}
-              color="primary"
-              fontSize="small"
-              style={{ marginLeft: theme.spacing(2) }}
-            />
-          </Tooltip> }
+        (props, option, { selected }) => <>
+          <li {...props}>
+            { getOptionLabel(option) }
+            { selected && <Tooltip title={selectedTip} placement="right">
+              <CheckCircleRoundedIcon
+                titleAccess={selectedTip}
+                color="primary"
+                fontSize="small"
+                style={{ marginLeft: theme.spacing(2) }}
+              />
+            </Tooltip> }
+          </li>
         </>
       }
     />

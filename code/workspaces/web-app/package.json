@@ -21,6 +21,7 @@
     "connected-react-router": "^6.9.1",
     "copy-to-clipboard": "^3.3.1",
     "cross-storage": "1.0.0",
+    "date-fns": "^2.28.0",
     "downshift": "^2.0.10",
     "history": "4.6.1",
     "jquery": "^3.5.0",

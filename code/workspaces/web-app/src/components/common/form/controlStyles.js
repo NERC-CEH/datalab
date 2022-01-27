@@ -15,6 +15,5 @@ export const multilineFieldStyleProps = {
   ...fieldStyleProps,
   InputProps: {
     rows: 3,
-    rowsMax: 10,
   },
 };

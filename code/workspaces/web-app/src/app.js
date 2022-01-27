@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider as MuiThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import configureStore from './store/configureStore';
 import theme from './theme';
 import Router from './router';
@@ -31,9 +31,9 @@ async function createApplication() {
     <Provider store={store}>
       <StyledEngineProvider injectFirst>
         <MuiThemeProvider theme={theme}>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Router />
-          </MuiPickersUtilsProvider>
+          </LocalizationProvider>
         </MuiThemeProvider>
       </StyledEngineProvider>
     </Provider>,
