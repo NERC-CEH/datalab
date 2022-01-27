@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { startCase } from 'lodash';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Tooltip } from '@material-ui/core';
+import withStyles from '@mui/styles/withStyles';
+import MenuItem from '@mui/material/MenuItem';
+import { Tooltip } from '@mui/material';
 import userActions from '../../actions/userActions';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import { SORTED_PERMISSIONS } from '../../constants/permissions';

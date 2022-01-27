@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Autocomplete } from '@material-ui/lab';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Tooltip from '@material-ui/core/Tooltip';
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import { Autocomplete } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import Tooltip from '@mui/material/Tooltip';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import makeStyles from '@mui/styles/makeStyles';
 import { useUsersSortedByName } from '../../../hooks/usersHooks';
 import StyledTextField from './StyledTextField';
 
@@ -23,7 +23,7 @@ const UserSelect = ({ selectedUsers, setSelectedUsers, label, placeholder, multi
       multiple={multiselect}
       options={users}
       getOptionLabel={getOptionLabel}
-      getOptionSelected={val => (multiselect ? selectedUsers.includes(val) : selectedUsers === val)}
+      isOptionEqualToValue={val => (multiselect ? selectedUsers.includes(val) : selectedUsers === val)}
       value={selectedUsers}
       onChange={(event, newValue) => setSelectedUsers(newValue)}
       loading={loading}

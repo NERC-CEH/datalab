@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
-import Popover from '@material-ui/core/Popover';
-import { withStyles } from '@material-ui/core/styles';
+import Avatar from '@mui/material/Avatar';
+import Popover from '@mui/material/Popover';
+import withStyles from '@mui/styles/withStyles';
 import UserMenu from './UserMenu';
 
 const styles = theme => ({

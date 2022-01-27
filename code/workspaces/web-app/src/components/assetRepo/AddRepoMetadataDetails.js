@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, reset } from 'redux-form';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
 import addRepoMetadataValidator from './addRepoMetadataValidator';
 import { formatAndParseMultiSelect, renderTextField, renderSelectField, UpdateFormControls } from '../common/form/controls';
 import ConfirmDialog from '../common/ConfirmDialog';

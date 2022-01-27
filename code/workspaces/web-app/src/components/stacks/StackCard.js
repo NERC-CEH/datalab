@@ -1,9 +1,10 @@
-import { withStyles, createStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
+import withStyles from '@mui/styles/withStyles';
+import createStyles from '@mui/styles/createStyles';
+import Icon from '@mui/material/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import ResourceInfoSpan from '../common/typography/ResourceInfoSpan';
 import StackCardActions from './StackCardActions/StackCardActions';
 import stackDescriptions from './stackDescriptions';
@@ -22,7 +23,7 @@ function styles(theme) {
       flexDirection: 'row',
       justifyContent: 'flex-start',
       borderTop: `1px solid ${theme.palette.divider}`,
-      padding: `${theme.spacing(3)}px 0`,
+      padding: `${theme.spacing(3)} 0`,
       '&:last-child': {
         borderBottom: `1px solid ${theme.palette.divider}`,
       },

@@ -1,10 +1,10 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core';
+import Typography from '@mui/material/Typography';
+import withStyles from '@mui/styles/withStyles';
 
 const styles = theme => ({
   sidebarGroup: {
-    padding: `${theme.spacing(3)}px 0`,
+    padding: `${theme.spacing(3)} 0`,
     '& + &': {
       borderTop: `1px solid ${theme.palette.divider}`,
     },

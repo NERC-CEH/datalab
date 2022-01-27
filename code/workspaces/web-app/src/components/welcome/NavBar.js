@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
 import datalabsLogo from '../../assets/images/datalabs-hori.png';
 import { getAuth } from '../../config/auth';
 import navBarLinks from '../../constants/navBarLinks';

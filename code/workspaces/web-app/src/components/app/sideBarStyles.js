@@ -14,7 +14,7 @@ export default function sideBarStyles(theme) {
       minWidth: drawerWidth,
       borderRight: `1px solid ${theme.palette.divider}`,
       overflow: 'auto',
-      padding: `0 ${theme.spacing(2)}px`,
+      padding: `0 ${theme.spacing(2)}`,
     },
   };
 }

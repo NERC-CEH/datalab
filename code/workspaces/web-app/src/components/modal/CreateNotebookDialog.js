@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import { withStyles } from '@material-ui/core/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import withStyles from '@mui/styles/withStyles';
 import CreateNotebookForm, { FORM_NAME, TYPE_FIELD_NAME, VERSION_FIELD_NAME } from '../notebooks/CreateNotebookForm';
 import { getNotebookInfo } from '../../config/images';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';

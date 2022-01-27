@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
-import Tooltip from '@material-ui/core/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
 import PermissionWrapper from '../../common/ComponentPermissionWrapper';
 
 // Uses forwardRef to forward ref from menu onto MenuItem as functional components cannot be given refs.

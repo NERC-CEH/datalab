@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
+import createStyles from '@mui/styles/createStyles';
 import { permissionTypes } from 'common';
 import UserIcon from './UserIcon';
 import datalabsLogo from '../../assets/images/datalabs-hori.png';

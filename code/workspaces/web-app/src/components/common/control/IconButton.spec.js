@@ -10,7 +10,7 @@ describe('IconButton', () => {
   });
 
   it('creates correct snapshot for required props', () => {
-    const wrapper = render(<IconButton {...generateProps()} />);
+    const wrapper = render(<IconButton {...generateProps()} size="large" />);
     expect(wrapper.container).toMatchSnapshot();
   });
 
@@ -20,7 +20,7 @@ describe('IconButton', () => {
       danger: true,
     };
 
-    const wrapper = render(<IconButton {...props} />);
+    const wrapper = render(<IconButton {...props} size="large" />);
     expect(wrapper.container).toMatchSnapshot();
   });
 });

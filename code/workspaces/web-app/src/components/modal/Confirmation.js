@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 import IconButton from '../common/control/IconButton';
 
 const bodyToContent = (body) => {
@@ -31,8 +31,13 @@ const Confirmation = ({ title, body, onSubmit, onCancel, confirmText = 'Confirm 
     <DialogTitle>{title}</DialogTitle>
     {bodyToContent(body)}
     <DialogActions>
-      <IconButton onClick={onCancel} icon="clear">Cancel</IconButton>
-      <IconButton danger={danger} onClick={onSubmit} icon={confirmIcon} disabled={onSubmit === undefined}>{confirmText}</IconButton>
+      <IconButton onClick={onCancel} icon="clear" size="large">Cancel</IconButton>
+      <IconButton
+        danger={danger}
+        onClick={onSubmit}
+        icon={confirmIcon}
+        disabled={onSubmit === undefined}
+        size="large">{confirmText}</IconButton>
     </DialogActions>
   </Dialog>
 );

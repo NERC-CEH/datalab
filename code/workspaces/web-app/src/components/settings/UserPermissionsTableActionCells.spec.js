@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { PERMISSION_VALUES, PERMISSIONS } from '../../constants/permissions';
 import { CheckboxCell, PermissionsCheckbox, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
 
-jest.mock('@material-ui/core/Checkbox', () => props => (<div onClick={props.onClick}>CheckBox mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/material/Checkbox', () => props => (<div onClick={props.onClick}>CheckBox mock {JSON.stringify(props)}</div>));
 
 describe('CheckboxCell', () => {
   const classes = {

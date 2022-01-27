@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
 import sortByName from '../../components/common/sortByName';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import Pagination from '../../components/stacks/Pagination';

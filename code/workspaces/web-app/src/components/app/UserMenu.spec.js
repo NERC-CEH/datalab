@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import UserMenu from './UserMenu';
 import { getAuth } from '../../config/auth';
 
-jest.mock('@material-ui/core/Avatar', () => props => (<div>Avatar mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/material/Avatar', () => props => (<div>Avatar mock {JSON.stringify(props)}</div>));
 jest.mock('../../config/auth');
 const logout = jest.fn();
 const closePopoverMock = jest.fn();

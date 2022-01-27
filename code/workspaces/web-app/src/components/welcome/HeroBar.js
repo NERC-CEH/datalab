@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import withStyles from '@mui/styles/withStyles';
+import Typography from '@mui/material/Typography';
 import { useHistory } from 'react-router-dom';
 import datalabsLogo from '../../assets/images/datalabs-vert.png';
 import { getAuth } from '../../config/auth';
@@ -13,7 +13,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.backgroundDark,
     textAlign: 'center',
     zIndex: 2,
-    padding: `${theme.spacing(14)}px ${theme.spacing(2)}px`,
+    padding: `${theme.spacing(14)} ${theme.spacing(2)}`,
   },
   logo: {
     height: 300,
@@ -25,7 +25,7 @@ const styles = theme => ({
   buttons: {
     display: 'flex',
     justifyContent: 'center',
-    margin: `${theme.spacing(4)}px ${theme.spacing(1)}px`,
+    margin: `${theme.spacing(4)} ${theme.spacing(1)}`,
     marginBottom: 0,
   },
   button: {
