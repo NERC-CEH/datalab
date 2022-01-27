@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Grid, TextField, withStyles } from '@material-ui/core';
+import { Grid, TextField } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import { DateTimePicker } from '@material-ui/pickers';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import Message from '../../components/app/Message';
@@ -10,7 +11,7 @@ import PagePrimaryActionButton from '../../components/common/buttons/PagePrimary
 
 const styles = theme => ({
   creator: {
-    padding: `${theme.spacing(4)}px 0`,
+    padding: `${theme.spacing(4)} 0`,
   },
   buttonContainer: {
     display: 'flex',

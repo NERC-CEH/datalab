@@ -1,7 +1,7 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import makeStyles from '@mui/styles/makeStyles';
 import ProjectNotebooks from './ProjectNotebooks';
 import ProjectSites from './ProjectSites';
 import ProjectClusters from './ProjectClusters';

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';

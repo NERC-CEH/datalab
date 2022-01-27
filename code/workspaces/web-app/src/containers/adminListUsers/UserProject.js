@@ -1,8 +1,8 @@
 import React from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@mui/material/Checkbox';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import makeStyles from '@mui/styles/makeStyles';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../../components/common/ResourceAccordion';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';

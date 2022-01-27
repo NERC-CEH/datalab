@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { withStyles } from '@material-ui/core';
+import withStyles from '@mui/styles/withStyles';
 import { syncValidate, asyncValidate } from './newProjectFormValidator';
 import { renderTextField, renderTextArea, CreateFormControls } from '../common/form/controls';
 

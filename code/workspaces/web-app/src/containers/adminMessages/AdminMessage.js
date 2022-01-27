@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Grid, withStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import { Grid } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
+import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import Message from '../../components/app/Message';
 import PrimaryActionButton from '../../components/common/buttons/PrimaryActionButton';
@@ -8,7 +9,7 @@ import PrimaryActionButton from '../../components/common/buttons/PrimaryActionBu
 const styles = theme => ({
   grid: {
     borderTop: `1px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing(3)}px 0`,
+    padding: `${theme.spacing(3)} 0`,
     '&:last-child': {
       borderBottom: `1px solid ${theme.palette.divider}`,
     },

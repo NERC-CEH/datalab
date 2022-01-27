@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import withStyles from '@mui/styles/withStyles';
 import { getAuth } from '../../config/auth';
 
 const styles = theme => ({

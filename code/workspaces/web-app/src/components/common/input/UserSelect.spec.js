@@ -4,10 +4,10 @@ import UserSelect, { Input, Option } from './UserSelect';
 import { useUsersSortedByName } from '../../../hooks/usersHooks';
 
 jest.mock('../../../hooks/usersHooks');
-jest.mock('@material-ui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
-jest.mock('@material-ui/core/CircularProgress', () => props => (<div>CircularProgress mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/material/CircularProgress', () => props => (<div>CircularProgress mock {JSON.stringify(props)}</div>));
 
-jest.mock('@material-ui/core/TextField/TextField', () => props => (<div>TextField mock {`label=${props.label}`} {`placeholder=${props.placeholder}`}</div>));
+jest.mock('@mui/material/TextField/TextField', () => props => (<div>TextField mock {`label=${props.label}`} {`placeholder=${props.placeholder}`}</div>));
 
 const userOne = { name: 'User One', userId: 'user-one-id' };
 const userTwo = { name: 'User Two', userId: 'user-two-id' };

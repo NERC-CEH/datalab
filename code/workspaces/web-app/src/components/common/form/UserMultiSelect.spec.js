@@ -6,7 +6,7 @@ import UserMultiSelect from './UserMultiSelect';
 
 jest.mock('react-redux');
 jest.mock('../../../hooks/usersHooks');
-jest.mock('@material-ui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
 
 const user1 = { userId: 'user-1', name: 'User 1' };
 const user2 = { userId: 'user-2', name: 'User 2' };

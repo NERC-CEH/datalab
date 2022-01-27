@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Typography from '@material-ui/core/Typography';
+import withStyles from '@mui/styles/withStyles';
+import Icon from '@mui/material/Icon';
+import Typography from '@mui/material/Typography';
 import theme from '../../theme';
 
 const contentContainer = {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  margin: `${theme.spacing(2)}px 0`,
+  margin: `${theme.spacing(2)} 0`,
 };
 
 const styles = injectedTheme => ({

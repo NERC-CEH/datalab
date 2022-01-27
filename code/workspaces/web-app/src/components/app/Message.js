@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { withStyles } from '@material-ui/core';
+import withStyles from '@mui/styles/withStyles';
 import ReactMarkdown from 'react-markdown';
-import Button from '@material-ui/core/Button';
-import ErrorOutline from '@material-ui/icons/ErrorOutline';
+import Button from '@mui/material/Button';
+import ErrorOutline from '@mui/icons-material/ErrorOutline';
 import PropTypes from 'prop-types';
 import messagesActions from '../../actions/messagesActions';
 

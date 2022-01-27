@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import configureStore from './store/configureStore';
@@ -29,11 +29,13 @@ async function createApplication() {
 
   ReactDOM.render(
     <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <Router />
-        </MuiPickersUtilsProvider>
-      </MuiThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <MuiThemeProvider theme={theme}>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <Router />
+          </MuiPickersUtilsProvider>
+        </MuiThemeProvider>
+      </StyledEngineProvider>
     </Provider>,
     document.getElementById('root'),
   );

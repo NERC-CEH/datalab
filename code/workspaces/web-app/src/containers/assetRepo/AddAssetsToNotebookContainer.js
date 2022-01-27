@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { change, reset, initialize } from 'redux-form';
 import queryString from 'query-string';
 import { NOTEBOOK_CATEGORY } from 'common/src/config/images';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import projectActions from '../../actions/projectActions';
 import stackActions from '../../actions/stackActions';
 import assetRepoActions from '../../actions/assetRepoActions';

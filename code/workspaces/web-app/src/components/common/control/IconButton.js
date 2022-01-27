@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import { withStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import Icon from '@mui/material/Icon';
+import withStyles from '@mui/styles/withStyles';
 
 function styles(theme) {
   const buttonBaseStyle = {

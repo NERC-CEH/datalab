@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import makeStyles from '@mui/styles/makeStyles';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles(() => ({
   fullSizeBase: {
