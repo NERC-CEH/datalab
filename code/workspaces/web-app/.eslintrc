@@ -38,7 +38,7 @@
       {
         "devDependencies": [
           "**/**.spec.js",
-          "**/testUtils/renderWithState.js"
+          "**/testUtils/*.js"
         ]
       }
     ],
@@ -58,7 +58,7 @@
   },
   "settings": {
     "react": {
-      "version": "16.8"
+      "version": "17.0"
     }
   },
   "parserOptions": {

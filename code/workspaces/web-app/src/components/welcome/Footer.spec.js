@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import Footer from './Footer';
 import { getVersion } from '../../config/version';
+import { render } from '../../testUtils/renderTests';
 
 jest.mock('../../config/version');
 
