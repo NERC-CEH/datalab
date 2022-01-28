@@ -63,8 +63,8 @@ function styles(theme) {
       minWidth: 150,
     },
     cardImage: {
-      height: theme.cardImageSize + theme.spacing(1),
-      width: theme.cardImageSize + theme.spacing(1),
+      height: theme.cardImageSize,
+      width: theme.cardImageSize,
       border: `1px solid ${theme.palette.divider}`,
       borderRadius: theme.shape.borderRadius,
     },
