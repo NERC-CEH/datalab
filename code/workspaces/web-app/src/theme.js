@@ -31,7 +31,7 @@ const spacing = 5;
 const navBarHeight = 8 * spacing;
 const cardImageSize = 13 * spacing;
 
-const theme = createTheme(adaptV4Theme({
+const theme = createTheme({
   palette: {
     primary,
     primaryTransparent,
@@ -83,18 +83,20 @@ const theme = createTheme(adaptV4Theme({
   },
   spacing,
   cardImageSize,
-  overrides: {
+  components: {
     MuiButton: {
-      root: {
-        textTransform: 'none',
-        fontWeight: '400',
-      },
-      contained: {
-        boxShadow: 'none',
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: '400',
+        },
+        contained: {
+          boxShadow: 'none',
+        },
       },
     },
   },
-}));
+});
 
 export const publicAppTheme = outerTheme => ({
   ...theme,
