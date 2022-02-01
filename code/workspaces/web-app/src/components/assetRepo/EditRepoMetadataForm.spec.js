@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '../../testUtils/renderTests';
 import { PUBLIC } from './assetVisibilities';
 import { PureEditRepoMetadataForm } from './EditRepoMetadataForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';

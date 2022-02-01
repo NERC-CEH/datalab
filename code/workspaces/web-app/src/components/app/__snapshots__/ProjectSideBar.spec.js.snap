@@ -3,13 +3,13 @@
 exports[`SideBar does not render menu items if loading 1`] = `
 <div>
   <div
-    class="ProjectSideBar-sideBar-40 sideBar"
+    class="ProjectSideBar-sideBar-6 sideBar"
   >
     <ul
-      class="MuiList-root ProjectSideBar-itemList-39 itemList MuiList-padding"
+      class="MuiList-root MuiList-padding ProjectSideBar-itemList-5 itemList css-h4y409-MuiList-root"
     >
       <div
-        class="SideBarGroup-sidebarGroup-45"
+        class="SideBarGroup-sidebarGroup-7"
       >
         <div>
           Project Switcher Mock
@@ -33,10 +33,10 @@ exports[`SideBar renders correctly passing props to children 1`] = `
     class="ProjectSideBar-sideBar-2 sideBar"
   >
     <ul
-      class="MuiList-root ProjectSideBar-itemList-1 itemList MuiList-padding"
+      class="MuiList-root MuiList-padding ProjectSideBar-itemList-1 itemList css-h4y409-MuiList-root"
     >
       <div
-        class="SideBarGroup-sidebarGroup-7"
+        class="SideBarGroup-sidebarGroup-3"
       >
         <div>
           Project Switcher Mock
@@ -50,10 +50,10 @@ exports[`SideBar renders correctly passing props to children 1`] = `
         </div>
       </div>
       <div
-        class="SideBarGroup-sidebarGroup-7"
+        class="SideBarGroup-sidebarGroup-3"
       >
         <h6
-          class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+          class="MuiTypography-root MuiTypography-h6 SideBarGroup-title-4 css-161uzub-MuiTypography-root"
         >
           Analysis
         </h6>
@@ -86,7 +86,7 @@ exports[`SideBar renders correctly passing props to children 1`] = `
         </div>
       </div>
       <div
-        class="SideBarGroup-sidebarGroup-7"
+        class="SideBarGroup-sidebarGroup-3"
       >
         <div>
           <div

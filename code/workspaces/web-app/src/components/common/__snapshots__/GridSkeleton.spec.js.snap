@@ -3,85 +3,85 @@
 exports[`GridSkeleton renders correct children passing down provided props to children 1`] = `
 <div>
   <div
-    class="makeStyles-grid-44 makeStyles-grid-45"
+    class="makeStyles-grid-3 makeStyles-grid-4"
   >
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Test sizing text
       </h5>
@@ -93,22 +93,22 @@ exports[`GridSkeleton renders correct children passing down provided props to ch
 exports[`GridSkeleton renders to match snapshot for 1 x 2 grid 1`] = `
 <div>
   <div
-    class="makeStyles-grid-87 makeStyles-grid-88"
+    class="makeStyles-grid-5 makeStyles-grid-6"
   >
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
       >
         Text to infer size from
       </p>
     </span>
     <span
-      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto MuiSkeleton-pulse"
+      class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-2six7l-MuiSkeleton-root"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
       >
         Text to infer size from
       </p>

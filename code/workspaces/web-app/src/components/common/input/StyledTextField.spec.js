@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../../testUtils/renderTests';
 import StyledTextField from './StyledTextField';
 
 jest.mock('@mui/material/TextField', () => props => (<div>TextField mock {JSON.stringify(props)}</div>));

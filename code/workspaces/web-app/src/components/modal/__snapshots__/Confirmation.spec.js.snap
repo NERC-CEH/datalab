@@ -2,68 +2,58 @@
 
 exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-1"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Title
-    </h2>
-  </div>
+    Title
+  </h2>
   <div
-    class="MuiDialogContent-root"
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <p
-      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-1k6zr5f-MuiTypography-root-MuiDialogContentText-root"
     >
       Body
     </p>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-button-82"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root IconButton-button-1 css-4dagr2-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Cancel
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium IconButton-icon-3 css-kp9ftd-MuiIcon-root"
       >
-        Cancel
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root IconButton-icon-84"
-        >
-          clear
-        </span>
+        clear
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-buttonDanger-83"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root IconButton-buttonDanger-2 css-4dagr2-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Confirm Deletion
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium IconButton-icon-3 css-kp9ftd-MuiIcon-root"
       >
-        Confirm Deletion
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root IconButton-icon-84"
-        >
-          delete
-        </span>
+        delete
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
@@ -72,78 +62,68 @@ exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
 
 exports[`Confirmation creates correct snapshot for confirmation dialog with array in body 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-2"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-2"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Title
-    </h2>
-  </div>
+    Title
+  </h2>
   <div
-    class="MuiDialogContent-root"
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <p
-      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-1k6zr5f-MuiTypography-root-MuiDialogContentText-root"
     >
       Body
     </p>
     <p
-      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-1k6zr5f-MuiTypography-root-MuiDialogContentText-root"
     >
       Next line
     </p>
     <p
-      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-1k6zr5f-MuiTypography-root-MuiDialogContentText-root"
     >
       Final line
     </p>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-button-217"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root IconButton-button-4 css-4dagr2-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Cancel
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium IconButton-icon-6 css-kp9ftd-MuiIcon-root"
       >
-        Cancel
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root IconButton-icon-219"
-        >
-          clear
-        </span>
+        clear
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-buttonDanger-218"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root IconButton-buttonDanger-5 css-4dagr2-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Confirm Deletion
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium IconButton-icon-6 css-kp9ftd-MuiIcon-root"
       >
-        Confirm Deletion
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root IconButton-icon-219"
-        >
-          delete
-        </span>
+        delete
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

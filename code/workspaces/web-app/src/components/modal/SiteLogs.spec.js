@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '../../testUtils/renderTests';
 import Logs from './SiteLogs';
 
 function shallowRender(props) {

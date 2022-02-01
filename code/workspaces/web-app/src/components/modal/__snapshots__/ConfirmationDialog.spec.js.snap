@@ -2,58 +2,48 @@
 
 exports[`ConfirmationDialog renders to match snapshot 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-1"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Dialog title
-    </h2>
-  </div>
+    Dialog title
+  </h2>
   <div
-    class="MuiDialogContent-root"
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       Dialog body
     </p>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       icon="check"
       tabindex="0"
       type="button"
     >
+      Confirm
       <span
-        class="MuiButton-label"
-      >
-        Confirm
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+      class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-4eo762-MuiButtonBase-root-MuiButton-root"
       icon="clear"
       tabindex="0"
       type="button"
     >
+      Cancel
       <span
-        class="MuiButton-label"
-      >
-        Cancel
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

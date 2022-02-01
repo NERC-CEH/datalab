@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import PromisedContentSkeletonWrapper from './PromisedContentSkeletonWrapper';
 
 const TestSkeleton = props => <div>This is a test SKELETON component. props:{JSON.stringify(props)}</div>;

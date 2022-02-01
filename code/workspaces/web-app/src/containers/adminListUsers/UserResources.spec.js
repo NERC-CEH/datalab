@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import UserResources from './UserResources';
 import { getCatalogue } from '../../config/catalogue';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen, within } from '@testing-library/react';
 import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
+import { render, fireEvent, screen, within } from '../../../testUtils/renderTests';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import StackCardActions, { getSharedButtons } from './StackCardActions';
 import { getUserActionsForType } from '../../../config/images';

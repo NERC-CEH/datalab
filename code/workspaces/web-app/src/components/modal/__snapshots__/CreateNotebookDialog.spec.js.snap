@@ -2,25 +2,28 @@
 
 exports[`Notebook dialog creates correct snapshot 1`] = `
 <div
-  class="CreateNotebookDialog-dialogDiv-1"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
 >
   <div
-    class="MuiDialogTitle-root"
+    class="CreateNotebookDialog-dialogDiv-1"
   >
     <h2
-      class="MuiTypography-root MuiTypography-h6"
+      class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+      id="mui-1"
     >
       Title
     </h2>
-  </div>
-  <div
-    class="MuiDialogContent-root"
-  >
-    <div>
-      CreateNotebookForm mock
-      {"dataStorageOptions":[{"value":"value"},{"value":"another value"}],"typeOptions":[{"value":"jupyterLab","text":"JupyterLab"}],"versionOptions":[]}
-      onSubmit result: submit called
-      onCancel result: onCancel called
+    <div
+      class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+    >
+      <div>
+        CreateNotebookForm mock
+        {"dataStorageOptions":[{"value":"value"},{"value":"another value"}],"typeOptions":[{"value":"jupyterLab","text":"JupyterLab"}],"versionOptions":[]}
+        onSubmit result: submit called
+        onCancel result: onCancel called
+      </div>
     </div>
   </div>
 </div>

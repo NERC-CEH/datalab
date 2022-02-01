@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { JUPYTER } from 'common/src/stackTypes';
+import { render } from '../../testUtils/renderTests';
 import { PureCreateNotebookForm } from './CreateNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import * as redux from 'react-redux';
 import { MemoryRouter } from 'react-router';
 import { change, reset, initialize } from 'redux-form';
+import { render } from '../../testUtils/renderTests';
 import { AddAssetsToNotebookContainer, confirmAddAsset, addAssets, getExistingAssets, clearForm } from './AddAssetsToNotebookContainer';
 import * as addAssetsForm from './AddAssetsToNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';

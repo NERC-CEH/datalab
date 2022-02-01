@@ -3,26 +3,24 @@
 exports[`StackCardActions Should not render edit/delete/share/restart buttons if current user is not the owner 1`] = `
 <div>
   <div
-    class="StackCardActions-cardActions-601 cardActions"
+    class="StackCardActions-cardActions-13 cardActions"
   >
     <div
-      class="StackCardActions-buttonWrapper-602 buttonWrapper"
+      class="StackCardActions-buttonWrapper-14 buttonWrapper"
     >
       <div
+        aria-label="Cannot be opened until resource is ready"
         class=""
+        data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-fullWidth"
+          class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButtonBase-root  css-1xb5c10-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
+          Open
           <span
-            class="MuiButton-label"
-          >
-            Open
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -42,20 +40,18 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       class="StackCardActions-buttonWrapper-2 buttonWrapper"
     >
       <div
+        aria-label="Cannot be opened until resource is ready"
         class=""
+        data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-fullWidth"
+          class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButtonBase-root  css-1xb5c10-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
+          Open
           <span
-            class="MuiButton-label"
-          >
-            Open
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -66,22 +62,18 @@ exports[`StackCardActions creates correct snapshot 1`] = `
       <button
         aria-controls="more-menu"
         aria-haspopup="true"
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-fullWidth"
+        class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButtonBase-root  css-1gfot13-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiButton-label"
+          aria-hidden="true"
+          class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
         >
-          <span
-            aria-hidden="true"
-            class="material-icons MuiIcon-root"
-          >
-            more_vert
-          </span>
+          more_vert
         </span>
         <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
@@ -91,7 +83,7 @@ exports[`StackCardActions creates correct snapshot 1`] = `
 
 exports[`StackCardActions creates correct snapshot 2`] = `
 <ul
-  class="MuiList-root MuiMenu-list MuiList-padding"
+  class="MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list"
   role="menu"
   tabindex="-1"
 >
@@ -128,7 +120,7 @@ exports[`StackCardActions creates correct snapshot 2`] = `
 
 exports[`StackCardActions creates correct snapshot if there are multiple copy snippets 1`] = `
 <ul
-  class="MuiList-root MuiMenu-list MuiList-padding"
+  class="MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list"
   role="menu"
   tabindex="-1"
 >

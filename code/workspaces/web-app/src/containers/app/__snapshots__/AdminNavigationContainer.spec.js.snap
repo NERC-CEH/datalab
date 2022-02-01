@@ -9,80 +9,74 @@ exports[`AdminNavigationContainer renders to match snapshot passing correct prop
       class="AdminSideBar-sideBar-4"
     >
       <ul
-        class="MuiList-root AdminSideBar-itemList-3 MuiList-padding"
+        class="MuiList-root MuiList-padding AdminSideBar-itemList-3 css-h4y409-MuiList-root"
       >
         <div
-          class="SideBarGroup-sidebarGroup-9"
+          class="SideBarGroup-sidebarGroup-5"
         >
           <h6
-            class="MuiTypography-root SideBarGroup-title-10 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 SideBarGroup-title-6 css-161uzub-MuiTypography-root"
           >
             Administration
           </h6>
           <a
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button SideBarButton-inactive-7 css-1khrr4s-MuiButtonBase-root-MuiListItem-root"
             href="/admin/resources"
-            role="button"
             tabindex="0"
           >
             <div
-              class="MuiListItemIcon-root Link-listIcon-43"
+              class="MuiListItemIcon-root Link-listIcon-9 css-cveggr-MuiListItemIcon-root"
             >
               <span
                 aria-hidden="true"
-                class="material-icons MuiIcon-root"
+                class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
               >
                 dashboard
               </span>
             </div>
             Resources
             <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </a>
           <a
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button SideBarButton-inactive-7 css-1khrr4s-MuiButtonBase-root-MuiListItem-root"
             href="/admin/users"
-            role="button"
             tabindex="0"
           >
             <div
-              class="MuiListItemIcon-root Link-listIcon-43"
+              class="MuiListItemIcon-root Link-listIcon-9 css-cveggr-MuiListItemIcon-root"
             >
               <span
                 aria-hidden="true"
-                class="material-icons MuiIcon-root"
+                class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
               >
                 people
               </span>
             </div>
             Users
             <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </a>
           <a
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button SideBarButton-inactive-7 css-1khrr4s-MuiButtonBase-root-MuiListItem-root"
             href="/admin/messages"
-            role="button"
             tabindex="0"
           >
             <div
-              class="MuiListItemIcon-root Link-listIcon-43"
+              class="MuiListItemIcon-root Link-listIcon-9 css-cveggr-MuiListItemIcon-root"
             >
               <span
                 aria-hidden="true"
-                class="material-icons MuiIcon-root"
+                class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
               >
                 notifications
               </span>
             </div>
             Messages
             <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </a>
         </div>
@@ -92,18 +86,18 @@ exports[`AdminNavigationContainer renders to match snapshot passing correct prop
       class="SideBarNavigation-contentArea-2"
     >
       <div
-        class="Page-pageTemplate-69"
+        class="Page-pageTemplate-10"
       >
         <h4
-          class="MuiTypography-root Page-title-71 MuiTypography-h4"
+          class="MuiTypography-root MuiTypography-h4 Page-title-12 css-1yqx3hy-MuiTypography-root"
         >
           404 – Page Not Found
         </h4>
         <div
-          class="Page-contentArea-70"
+          class="Page-contentArea-11"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             <a
               href="/"

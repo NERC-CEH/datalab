@@ -2,32 +2,30 @@
 
 exports[`Logs creates correct snapshot for logs dialog 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-1"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Title
-    </h2>
-  </div>
+    Title
+  </h2>
   <div
-    class="makeStyles-fullSizeBase-77 makeStyles-fullWidth-78"
+    class="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2"
   >
-    <div
-      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    <span
+      class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
       role="progressbar"
       style="width: 40px; height: 40px;"
     >
       <svg
-        class="MuiCircularProgress-svg"
+        class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
         viewBox="22 22 44 44"
       >
         <circle
-          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
           cx="44"
           cy="44"
           fill="none"
@@ -35,23 +33,19 @@ exports[`Logs creates correct snapshot for logs dialog 1`] = `
           stroke-width="3.6"
         />
       </svg>
-    </div>
+    </span>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Close
       <span
-        class="MuiButton-label"
-      >
-        Close
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

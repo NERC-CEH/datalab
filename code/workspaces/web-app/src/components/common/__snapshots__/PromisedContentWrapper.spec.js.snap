@@ -65,17 +65,17 @@ exports[`PromisedContentWrapper with a className renders content inside a ClassW
   <div
     class="className fetchingClassName"
   >
-    <div
-      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    <span
+      class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
       role="progressbar"
       style="width: 40px; height: 40px;"
     >
       <svg
-        class="MuiCircularProgress-svg"
+        class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
         viewBox="22 22 44 44"
       >
         <circle
-          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
           cx="44"
           cy="44"
           fill="none"
@@ -83,7 +83,7 @@ exports[`PromisedContentWrapper with a className renders content inside a ClassW
           stroke-width="3.6"
         />
       </svg>
-    </div>
+    </span>
   </div>
 </div>
 `;
@@ -103,19 +103,19 @@ exports[`PromisedContentWrapper with a className renders content inside a ClassW
 exports[`PromisedContentWrapper with a width setting renders content inside a SizeWrapper when it is fetching 1`] = `
 <div>
   <div
-    class="makeStyles-fullSizeBase-13 makeStyles-fullWidth-14"
+    class="makeStyles-fullSizeBase-1 makeStyles-fullWidth-2"
   >
-    <div
-      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    <span
+      class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
       role="progressbar"
       style="width: 40px; height: 40px;"
     >
       <svg
-        class="MuiCircularProgress-svg"
+        class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
         viewBox="22 22 44 44"
       >
         <circle
-          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
           cx="44"
           cy="44"
           fill="none"
@@ -123,7 +123,7 @@ exports[`PromisedContentWrapper with a width setting renders content inside a Si
           stroke-width="3.6"
         />
       </svg>
-    </div>
+    </span>
   </div>
 </div>
 `;
@@ -139,22 +139,22 @@ exports[`PromisedContentWrapper with a width setting renders without SizeWrapper
 exports[`PromisedContentWrapper with both className and width value renders to wrap content in both Size and Class Wrappers when fetching 1`] = `
 <div>
   <div
-    class="makeStyles-fullSizeBase-40 makeStyles-fullWidth-41"
+    class="makeStyles-fullSizeBase-4 makeStyles-fullWidth-5"
   >
     <div
       class="className"
     >
-      <div
-        class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      <span
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
         role="progressbar"
         style="width: 40px; height: 40px;"
       >
         <svg
-          class="MuiCircularProgress-svg"
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
           viewBox="22 22 44 44"
         >
           <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
             cx="44"
             cy="44"
             fill="none"
@@ -162,7 +162,7 @@ exports[`PromisedContentWrapper with both className and width value renders to w
             stroke-width="3.6"
           />
         </svg>
-      </div>
+      </span>
     </div>
   </div>
 </div>
@@ -178,17 +178,17 @@ exports[`PromisedContentWrapper with no classNames or widths renders children if
 
 exports[`PromisedContentWrapper with no classNames or widths renders spinner if fetching 1`] = `
 <div>
-  <div
-    class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+  <span
+    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
     role="progressbar"
     style="width: 40px; height: 40px;"
   >
     <svg
-      class="MuiCircularProgress-svg"
+      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
       viewBox="22 22 44 44"
     >
       <circle
-        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
         cx="44"
         cy="44"
         fill="none"
@@ -196,14 +196,14 @@ exports[`PromisedContentWrapper with no classNames or widths renders spinner if 
         stroke-width="3.6"
       />
     </svg>
-  </div>
+  </span>
 </div>
 `;
 
 exports[`SizeWrapper correctly renders with children 1`] = `
 <div>
   <div
-    class="makeStyles-fullSizeBase-64 makeStyles-fullWidth-65 makeStyles-fullHeight-66"
+    class="makeStyles-fullSizeBase-16 makeStyles-fullWidth-17 makeStyles-fullHeight-18"
   >
     <span>
       Child Content
@@ -215,7 +215,7 @@ exports[`SizeWrapper correctly renders with children 1`] = `
 exports[`SizeWrapper renders with correct classname when is fullHeight 1`] = `
 <div>
   <div
-    class="makeStyles-fullSizeBase-58 makeStyles-fullHeight-60"
+    class="makeStyles-fullSizeBase-10 makeStyles-fullHeight-12"
   />
 </div>
 `;
@@ -223,7 +223,7 @@ exports[`SizeWrapper renders with correct classname when is fullHeight 1`] = `
 exports[`SizeWrapper renders with correct classname when is fullHeight and fullWidth 1`] = `
 <div>
   <div
-    class="makeStyles-fullSizeBase-61 makeStyles-fullWidth-62 makeStyles-fullHeight-63"
+    class="makeStyles-fullSizeBase-13 makeStyles-fullWidth-14 makeStyles-fullHeight-15"
   />
 </div>
 `;
@@ -231,7 +231,7 @@ exports[`SizeWrapper renders with correct classname when is fullHeight and fullW
 exports[`SizeWrapper renders with correct classname when is fullWidth 1`] = `
 <div>
   <div
-    class="makeStyles-fullSizeBase-55 makeStyles-fullWidth-56"
+    class="makeStyles-fullSizeBase-7 makeStyles-fullWidth-8"
   />
 </div>
 `;

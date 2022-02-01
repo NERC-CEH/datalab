@@ -4,7 +4,7 @@ exports[`AddAssetsToNotebookContainer initialises correctly when all properties 
 <div>
   <div>
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
@@ -21,7 +21,7 @@ exports[`AddAssetsToNotebookContainer initialises correctly when project and not
 <div>
   <div>
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
@@ -38,7 +38,7 @@ exports[`AddAssetsToNotebookContainer passes the correct props to the form when 
 <div>
   <div>
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>
@@ -51,7 +51,7 @@ exports[`AddAssetsToNotebookContainer passes the correct props to the form when 
 <div>
   <div>
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       Add one or multiple assets to a notebook. To choose assets, a project and notebook must first be selected. If any assets are selected that already exist on the notebook, these won't be re-added. If you cannot see the form, then it likely means you are not part of any projects.
     </p>

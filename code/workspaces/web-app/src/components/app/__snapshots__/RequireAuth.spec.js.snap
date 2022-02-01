@@ -2,17 +2,17 @@
 
 exports[`RequireAuth passes function to returned Route that renders CircularProgress when permissions fetching 1`] = `
 <div>
-  <div
-    class="MuiCircularProgress-root makeStyles-circularProgress-2 MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+  <span
+    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary makeStyles-circularProgress-2 css-1a30p6q-MuiCircularProgress-root"
     role="progressbar"
     style="width: 70px; height: 70px;"
   >
     <svg
-      class="MuiCircularProgress-svg"
+      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
       viewBox="22 22 44 44"
     >
       <circle
-        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
         cx="44"
         cy="44"
         fill="none"
@@ -20,7 +20,7 @@ exports[`RequireAuth passes function to returned Route that renders CircularProg
         stroke-width="3.6"
       />
     </svg>
-  </div>
+  </span>
 </div>
 `;
 

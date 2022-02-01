@@ -3,15 +3,13 @@
 exports[`TopBarButton correctly passes props to wrapped component 1`] = `
 <div>
   <a
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root TopBarButton-inactive-1 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button TopBarButton-inactive-1 css-1khrr4s-MuiButtonBase-root-MuiListItem-root"
     href="/testendpoint"
-    role="button"
     tabindex="0"
   >
     Test Label
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </a>
 </div>

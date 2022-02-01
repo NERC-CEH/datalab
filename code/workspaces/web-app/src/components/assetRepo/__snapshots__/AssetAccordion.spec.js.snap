@@ -2,14 +2,13 @@
 
 exports[`AssetAccordion opens the more menu when the button is clicked 1`] = `
 <li
-  aria-disabled="false"
-  class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button Mui-focusVisible Mui-focusVisible"
+  class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root Mui-focusVisible css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
   role="menuitem"
   tabindex="0"
 >
   Add to Notebook
   <span
-    class="MuiTouchRipple-root"
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
   />
 </li>
 `;
@@ -20,20 +19,19 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
     class="makeStyles-root-1"
   >
     <div
-      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-5 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-6 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-5 MuiAccordion-root MuiAccordion-rounded ForwardRef(Accordion)-expanded-6 Mui-expanded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
-        aria-disabled="false"
         aria-expanded="true"
-        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-39 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41"
+        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-7 MuiAccordionSummary-root ForwardRef(AccordionSummary)-expanded-9 Mui-expanded MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-42 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41"
+          class="ForwardRef(AccordionSummary)-content-10 MuiAccordionSummary-content ForwardRef(AccordionSummary)-expanded-9 Mui-expanded MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
-            class="MuiTypography-root makeStyles-heading-3 MuiTypography-h5"
+            class="MuiTypography-root MuiTypography-h5 makeStyles-heading-3 css-k8n68h-MuiTypography-root"
           >
             asset name
             : 
@@ -44,81 +42,66 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
           >
             <button
               aria-label="edit"
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+              class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-o0h1hg-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
+              Edit
               <span
-                class="MuiButton-label"
-              >
-                Edit
-              </span>
-              <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <button
               aria-controls="more-menu"
               aria-haspopup="true"
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-fullWidth"
+              class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButtonBase-root  css-1gfot13-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-label"
+                aria-hidden="true"
+                class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
               >
-                <span
-                  aria-hidden="true"
-                  class="material-icons MuiIcon-root"
-                >
-                  more_vert
-                </span>
+                more_vert
               </span>
               <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
         </div>
         <div
-          aria-disabled="false"
-          aria-hidden="true"
-          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-40 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41 MuiIconButton-edgeEnd"
+          class="MuiAccordionSummary-expandIconWrapper ForwardRef(AccordionSummary)-expanded-9 Mui-expanded css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
-          <span
-            class="MuiIconButton-label"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ExpandMoreIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-              />
-            </svg>
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
+            <path
+              d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
         </div>
       </div>
       <div
-        class="MuiCollapse-container MuiCollapse-entered"
+        class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
         style="min-height: 0px;"
       >
         <div
-          class="MuiCollapse-wrapper"
+          class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
         >
           <div
-            class="MuiCollapse-wrapperInner"
+            class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
           >
             <div
+              class="MuiAccordion-region"
               role="region"
             >
               <div
-                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-147"
+                class="ForwardRef(AccordionDetails)-root-11 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-resources-2"

@@ -6,7 +6,7 @@ exports[`ProjectInfoPage renders correct snapshot 1`] = `
     class="Page-pageTemplate-2 makeStyles-infoPage-1"
   >
     <h4
-      class="MuiTypography-root Page-title-4 MuiTypography-h4"
+      class="MuiTypography-root MuiTypography-h4 Page-title-4 css-1yqx3hy-MuiTypography-root"
     >
       Information
     </h4>

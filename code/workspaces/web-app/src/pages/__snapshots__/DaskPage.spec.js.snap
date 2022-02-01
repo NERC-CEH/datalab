@@ -6,7 +6,7 @@ exports[`DaskPage renders correct snapshot 1`] = `
     class="Page-pageTemplate-2"
   >
     <h4
-      class="MuiTypography-root Page-title-4 MuiTypography-h4"
+      class="MuiTypography-root MuiTypography-h4 Page-title-4 css-1yqx3hy-MuiTypography-root"
     >
       Dask
     </h4>
@@ -14,7 +14,7 @@ exports[`DaskPage renders correct snapshot 1`] = `
       class="Page-contentArea-3"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
       >
         <a
           href="https://dask.org/"

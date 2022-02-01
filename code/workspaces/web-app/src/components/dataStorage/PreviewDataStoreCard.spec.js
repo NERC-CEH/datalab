@@ -1,6 +1,6 @@
 import React from 'react';
 import createStore from 'redux-mock-store';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import PreviewDataStoreCard, { PurePreviewDataStoreCard } from './PreviewDataStoreCard';
 import { renderWithState, buildDefaultTestState } from '../../testUtils/renderWithState';
 

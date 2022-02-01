@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, within } from '@testing-library/react';
+import { render, within } from '../../testUtils/renderTests';
 import GridSkeleton from './GridSkeleton';
 
 describe('GridSkeleton', () => {
@@ -24,12 +24,12 @@ describe('GridSkeleton', () => {
   describe('correctly constructs final class name from default class names and provided class name when', () => {
     it('when no class name is provided', () => {
       const wrapper = render(<GridSkeleton />).container;
-      expect(wrapper.firstChild.className).toEqual('makeStyles-grid-130 makeStyles-grid-131');
+      expect(wrapper.firstChild.className).toEqual('makeStyles-grid-7 makeStyles-grid-8');
     });
 
     it('when class name is provided', () => {
       const wrapper = render(<GridSkeleton className="test-class-name"/>).container;
-      expect(wrapper.firstChild.className).toEqual('makeStyles-grid-173 makeStyles-grid-174 test-class-name');
+      expect(wrapper.firstChild.className).toEqual('makeStyles-grid-9 makeStyles-grid-10 test-class-name');
     });
   });
 });

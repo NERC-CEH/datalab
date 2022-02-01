@@ -10,13 +10,13 @@ exports[`DescribeElementCardBanner renders correct snapshot 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root DescribeElementCardBanner-icon-4"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium DescribeElementCardBanner-icon-4 css-kp9ftd-MuiIcon-root"
       >
         people
       </span>
     </div>
     <h5
-      class="MuiTypography-root DescribeElementCardBanner-cardTitle-1 MuiTypography-h5"
+      class="MuiTypography-root MuiTypography-h5 DescribeElementCardBanner-cardTitle-1 css-k8n68h-MuiTypography-root"
     >
       expectedTitle
     </h5>
@@ -27,10 +27,10 @@ exports[`DescribeElementCardBanner renders correct snapshot 1`] = `
 exports[`DescribeElementCardBanner renders correct snapshot with switches 1`] = `
 <div>
   <div
-    class="DescribeElementCardBanner-contentContainer-46"
+    class="DescribeElementCardBanner-contentContainer-7"
   >
     <h5
-      class="MuiTypography-root DescribeElementCardBanner-cardTitle-45 MuiTypography-h5"
+      class="MuiTypography-root MuiTypography-h5 DescribeElementCardBanner-cardTitle-6 css-k8n68h-MuiTypography-root"
     >
       expectedTitle
     </h5>

@@ -1,8 +1,8 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
 import { Router } from 'react-router';
-import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+import { render } from '../../testUtils/renderTests';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import { PureProjectNavigationContainer } from './ProjectNavigationContainer';

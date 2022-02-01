@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import AdminMessagesContainer, { confirmCreateMessage, confirmDeleteMessage, createMessage, deleteMessage } from './AdminMessagesContainer';
 import notify from '../../components/common/notify';
 

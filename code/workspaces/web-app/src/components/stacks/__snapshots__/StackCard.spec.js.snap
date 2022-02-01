@@ -21,14 +21,15 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
         class="StackCard-displayNameContainer-5"
       >
         <h5
-          class="MuiTypography-root StackCard-displayName-4 MuiTypography-h5 MuiTypography-noWrap"
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-4 css-ltmxt9-MuiTypography-root"
         >
           name1
         </h5>
       </div>
       <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        aria-label="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </p>
@@ -49,38 +50,39 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 <div>
   <div
-    class="StackCard-cardDiv-53"
+    class="StackCard-cardDiv-12"
   >
     <div
-      class="StackCard-imageDiv-54"
+      class="StackCard-imageDiv-13"
     >
       <img
         alt="zeppelin logo"
-        class="StackCard-cardImage-60"
+        class="StackCard-cardImage-19"
         src="zeppelin-logo.svg"
       />
     </div>
     <div
-      class="StackCard-textDiv-55"
+      class="StackCard-textDiv-14"
     >
       <div
-        class="StackCard-displayNameContainer-57"
+        class="StackCard-displayNameContainer-16"
       >
         <h5
-          class="MuiTypography-root StackCard-displayName-56 MuiTypography-h5 MuiTypography-noWrap"
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-15 css-ltmxt9-MuiTypography-root"
         >
           name1
         </h5>
       </div>
       <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+        aria-label="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
       >
         Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
       </p>
     </div>
     <div
-      class="StackCard-actionsDiv-58"
+      class="StackCard-actionsDiv-17"
     >
       <div>
         StackCardActions mock 
@@ -95,31 +97,31 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
 <div>
   <div
-    class="StackCard-cardDiv-105"
+    class="StackCard-cardDiv-23"
   >
     <div
-      class="StackCard-imageDiv-106"
+      class="StackCard-imageDiv-24"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root StackCard-cardIcon-113"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium StackCard-cardIcon-31 css-kp9ftd-MuiIcon-root"
       >
         save
       </span>
     </div>
     <div
-      class="StackCard-textDiv-107"
+      class="StackCard-textDiv-25"
     >
       <div
-        class="StackCard-displayNameContainer-109"
+        class="StackCard-displayNameContainer-27"
       >
         <h5
-          class="MuiTypography-root StackCard-displayName-108 MuiTypography-h5 MuiTypography-noWrap"
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-26 css-ltmxt9-MuiTypography-root"
         >
           name1
         </h5>
         <span
-          class=" makeStyles-root-155"
+          class=" makeStyles-root-34"
         >
           (
           NFS
@@ -127,14 +129,15 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
         </span>
       </div>
       <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Network File System (NFS) volume to store data for Notebooks and Sites."
+        aria-label="Network File System (NFS) volume to store data for Notebooks and Sites."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
       >
         Network File System (NFS) volume to store data for Notebooks and Sites.
       </p>
     </div>
     <div
-      class="StackCard-actionsDiv-110"
+      class="StackCard-actionsDiv-28"
     >
       <div>
         StackCardActions mock 
@@ -149,41 +152,42 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
 <div>
   <div
-    class="StackCard-cardDiv-167"
+    class="StackCard-cardDiv-35"
   >
     <div
-      class="StackCard-imageDiv-168"
+      class="StackCard-imageDiv-36"
     >
       <img
         alt="jupyter logo"
-        class="StackCard-cardImage-174"
+        class="StackCard-cardImage-42"
         src="jupyter-logo.svg"
       />
     </div>
     <div
-      class="StackCard-textDiv-169"
+      class="StackCard-textDiv-37"
     >
       <div
-        class="StackCard-displayNameContainer-171"
+        class="StackCard-displayNameContainer-39"
       >
         <h5
-          class="MuiTypography-root StackCard-displayName-170 MuiTypography-h5 MuiTypography-noWrap"
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-38 css-ltmxt9-MuiTypography-root"
         >
           name1
         </h5>
       </div>
       <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        aria-label="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
       >
         Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
       </p>
     </div>
     <div
-      class="StackCard-actionsDiv-172"
+      class="StackCard-actionsDiv-40"
     >
       <div
-        class="StackCard-statusDiv-173"
+        class="StackCard-statusDiv-41"
       >
         <div>
           StackStatus mock 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import EditSiteDialog from './EditSiteDialog';
 
 describe('EditSiteDialog', () => {

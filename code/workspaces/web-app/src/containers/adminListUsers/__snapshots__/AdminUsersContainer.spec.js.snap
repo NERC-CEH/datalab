@@ -5,328 +5,288 @@ exports[`AdminUsersContainer does not render catalogue permission filters when t
   UserSelect Mock 
   {"multiselect":true,"selectedUsers":[],"label":"Users","placeholder":"Filter by user"}
   <div
-    class="makeStyles-filterControls-84"
+    class="makeStyles-filterControls-7"
   >
     <div
-      class="makeStyles-filterColumn-85"
+      class="makeStyles-filterColumn-8"
     >
       <span
-        class="makeStyles-filterText-86"
+        class="makeStyles-filterText-9"
       >
         Filter
       </span>
     </div>
     <div
-      class="makeStyles-filterColumn-85"
+      class="makeStyles-filterColumn-8"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="instanceAdmin"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="instanceAdmin"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Instance admin
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="dataManager"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="dataManager"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Data manager
         </span>
       </label>
     </div>
     <div
-      class="makeStyles-filterColumn-85"
+      class="makeStyles-filterColumn-8"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="projectAdmin"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="projectAdmin"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Project admin
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="projectUser"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="projectUser"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Project user
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="projectViewer"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="projectViewer"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Project viewer
         </span>
       </label>
     </div>
     <div
-      class="makeStyles-filterColumn-85"
+      class="makeStyles-filterColumn-8"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="siteOwner"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="siteOwner"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Site owner
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="notebookOwner"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="notebookOwner"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Notebook owner
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-101 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="storageAccess"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-104"
-              data-indeterminate="false"
-              name="storageAccess"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Storage access
         </span>
@@ -430,77 +390,67 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
       class="makeStyles-filterColumn-2"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="instanceAdmin"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="instanceAdmin"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Instance admin
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="dataManager"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="dataManager"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Data manager
         </span>
@@ -510,115 +460,100 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
       class="makeStyles-filterColumn-2"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="catalogueAdmin"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="catalogueAdmin"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Catalogue admin
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="cataloguePublisher"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="cataloguePublisher"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Catalogue publisher
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="catalogueEditor"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="catalogueEditor"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Catalogue editor
         </span>
@@ -628,115 +563,100 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
       class="makeStyles-filterColumn-2"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="projectAdmin"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="projectAdmin"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Project admin
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="projectUser"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="projectUser"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Project user
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="projectViewer"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="projectViewer"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Project viewer
         </span>
@@ -746,115 +666,100 @@ exports[`AdminUsersContainer renders correctly passing correct props to children
       class="makeStyles-filterColumn-2"
     >
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="siteOwner"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="siteOwner"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Site owner
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="notebookOwner"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="notebookOwner"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Notebook owner
         </span>
       </label>
       <label
-        class="MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-yql927-MuiButtonBase-root-MuiCheckbox-root"
         >
-          <span
-            class="MuiIconButton-label"
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            data-indeterminate="false"
+            name="storageAccess"
+            type="checkbox"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CheckBoxOutlineBlankIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <input
-              class="PrivateSwitchBase-input-21"
-              data-indeterminate="false"
-              name="storageAccess"
-              type="checkbox"
-              value=""
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-              />
-            </svg>
-          </span>
+          </svg>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </span>
         <span
-          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-12gb3o9-MuiTypography-root"
         >
           Storage access
         </span>

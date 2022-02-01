@@ -3,21 +3,18 @@
 exports[`PaginationControlButton renders correctly when variant is "next" and it is disabled 1`] = `
 <div>
   <span
+    aria-label="No next page"
     class=""
-    title="No next page"
+    data-mui-internal-clone-element="true"
   >
      
     <button
-      class="MuiButtonBase-root MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+      class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
       disabled=""
       tabindex="-1"
       type="button"
     >
-      <span
-        class="MuiIconButton-label"
-      >
-        NavigateNextRoundedIcon Mock
-      </span>
+      NavigateNextRoundedIcon Mock
     </button>
   </span>
 </div>
@@ -26,22 +23,19 @@ exports[`PaginationControlButton renders correctly when variant is "next" and it
 exports[`PaginationControlButton renders correctly when variant is "next" and it is not disabled 1`] = `
 <div>
   <span
+    aria-label="Next page"
     class=""
-    title="Next page"
+    data-mui-internal-clone-element="true"
   >
      
     <button
-      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
       tabindex="0"
       type="button"
     >
+      NavigateNextRoundedIcon Mock
       <span
-        class="MuiIconButton-label"
-      >
-        NavigateNextRoundedIcon Mock
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </span>
@@ -51,21 +45,18 @@ exports[`PaginationControlButton renders correctly when variant is "next" and it
 exports[`PaginationControlButton renders correctly when variant is "previous" and it is disabled 1`] = `
 <div>
   <span
+    aria-label="No previous page"
     class=""
-    title="No previous page"
+    data-mui-internal-clone-element="true"
   >
      
     <button
-      class="MuiButtonBase-root MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+      class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
       disabled=""
       tabindex="-1"
       type="button"
     >
-      <span
-        class="MuiIconButton-label"
-      >
-        NavigateBeforeRoundedIcon Mock
-      </span>
+      NavigateBeforeRoundedIcon Mock
     </button>
   </span>
 </div>
@@ -74,22 +65,19 @@ exports[`PaginationControlButton renders correctly when variant is "previous" an
 exports[`PaginationControlButton renders correctly when variant is "previous" and it is not disabled 1`] = `
 <div>
   <span
+    aria-label="Previous page"
     class=""
-    title="Previous page"
+    data-mui-internal-clone-element="true"
   >
      
     <button
-      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
       tabindex="0"
       type="button"
     >
+      NavigateBeforeRoundedIcon Mock
       <span
-        class="MuiIconButton-label"
-      >
-        NavigateBeforeRoundedIcon Mock
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </span>

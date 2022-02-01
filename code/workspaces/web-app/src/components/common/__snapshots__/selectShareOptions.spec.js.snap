@@ -6,12 +6,12 @@ exports[`NotebookSharingOptions-private correctly renders correct snapshot 1`] =
     class="makeStyles-select-1"
   >
     <p
-      class="MuiTypography-root makeStyles-title-2 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-title-2 css-12gb3o9-MuiTypography-root"
     >
       Private
     </p>
     <p
-      class="MuiTypography-root makeStyles-description-3 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-3 css-12gb3o9-MuiTypography-root"
     >
       Only you can view and interact with this notebook.
     </p>
@@ -22,20 +22,20 @@ exports[`NotebookSharingOptions-private correctly renders correct snapshot 1`] =
 exports[`NotebookSharingOptions-project correctly renders correct snapshot 1`] = `
 <div>
   <div
-    class="makeStyles-select-35"
+    class="makeStyles-select-5"
   >
     <p
-      class="MuiTypography-root makeStyles-title-36 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-title-6 css-12gb3o9-MuiTypography-root"
     >
       Project
     </p>
     <p
-      class="MuiTypography-root makeStyles-description-37 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-7 css-12gb3o9-MuiTypography-root"
     >
       Anyone in this project can view and interact with this notebook.
     </p>
     <p
-      class="MuiTypography-root makeStyles-warning-38 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-warning-8 css-12gb3o9-MuiTypography-root"
     >
       NOTE: This option will allow multiple users to view and edit notebooks at the same time. As real-time collaboration is not currently supported this may result in corruption, hence this option should be chosen primarily for notebooks that are being viewed/run rather than edited.
     </p>
@@ -46,15 +46,15 @@ exports[`NotebookSharingOptions-project correctly renders correct snapshot 1`] =
 exports[`SiteVisibilityOptions-private correctly renders correct snapshot 1`] = `
 <div>
   <div
-    class="makeStyles-select-69"
+    class="makeStyles-select-9"
   >
     <p
-      class="MuiTypography-root makeStyles-title-70 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-title-10 css-12gb3o9-MuiTypography-root"
     >
       Private
     </p>
     <p
-      class="MuiTypography-root makeStyles-description-71 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-11 css-12gb3o9-MuiTypography-root"
     >
       Only you can can view and interact with this site.
     </p>
@@ -65,15 +65,15 @@ exports[`SiteVisibilityOptions-private correctly renders correct snapshot 1`] = 
 exports[`SiteVisibilityOptions-project correctly renders correct snapshot 1`] = `
 <div>
   <div
-    class="makeStyles-select-103"
+    class="makeStyles-select-13"
   >
     <p
-      class="MuiTypography-root makeStyles-title-104 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-title-14 css-12gb3o9-MuiTypography-root"
     >
       Project
     </p>
     <p
-      class="MuiTypography-root makeStyles-description-105 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-15 css-12gb3o9-MuiTypography-root"
     >
       Anyone in this project can view and interact with this site.
     </p>
@@ -84,20 +84,20 @@ exports[`SiteVisibilityOptions-project correctly renders correct snapshot 1`] = 
 exports[`SiteVisibilityOptions-public correctly renders correct snapshot 1`] = `
 <div>
   <div
-    class="makeStyles-select-137"
+    class="makeStyles-select-17"
   >
     <p
-      class="MuiTypography-root makeStyles-title-138 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-title-18 css-12gb3o9-MuiTypography-root"
     >
       Public
     </p>
     <p
-      class="MuiTypography-root makeStyles-description-139 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-19 css-12gb3o9-MuiTypography-root"
     >
       Anyone can view and interact with this site.
     </p>
     <p
-      class="MuiTypography-root makeStyles-warning-140 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-warning-20 css-12gb3o9-MuiTypography-root"
     >
       NOTE: This will make the site available (via URL) to anyone including those external to the DataLabs platform. Hence please ensure any security considerations have been implemented before proceeding.
     </p>

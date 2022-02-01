@@ -3,10 +3,10 @@
 exports[`Page renders correctly when title is not provided 1`] = `
 <div>
   <div
-    class="Page-pageTemplate-34"
+    class="Page-pageTemplate-4"
   >
     <div
-      class="Page-contentArea-35"
+      class="Page-contentArea-5"
     >
       Page Content
     </div>
@@ -23,7 +23,7 @@ exports[`Page renders correctly when title is provided 1`] = `
     class="Page-pageTemplate-1"
   >
     <h4
-      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+      class="MuiTypography-root MuiTypography-h4 Page-title-3 css-1yqx3hy-MuiTypography-root"
     >
       The Page Title
     </h4>

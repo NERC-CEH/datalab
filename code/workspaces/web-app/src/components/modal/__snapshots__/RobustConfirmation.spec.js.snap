@@ -2,32 +2,30 @@
 
 exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-1"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Title
-    </h2>
-  </div>
+    Title
+  </h2>
   <div
-    class="MuiDialogContent-root"
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <p
-      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-1k6zr5f-MuiTypography-root-MuiDialogContentText-root"
     >
       Body
     </p>
     <form>
       <div
-        class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+        class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root css-1z10yd4-MuiFormControl-root-MuiTextField-root"
       >
         <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+          class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-1icpd2s-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="false"
           for="name"
           id="name-label"
@@ -35,21 +33,21 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
           FieldLabel
         </label>
         <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <input
             aria-invalid="false"
-            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+            class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id="name"
             type="text"
             value=""
           />
           <fieldset
             aria-hidden="true"
-            class="PrivateNotchedOutline-root-138 MuiOutlinedInput-notchedOutline"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
           >
             <legend
-              class="PrivateNotchedOutline-legendLabelled-140"
+              class="css-173wfxe"
             >
               <span>
                 FieldLabel
@@ -61,32 +59,24 @@ exports[`Robust Confirmation creates correct snapshot for confirmation dialog 1`
     </form>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined DangerButton-button-144 Mui-disabled Mui-disabled"
+      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root Mui-disabled DangerButton-button-1 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       disabled=""
       tabindex="-1"
       type="button"
     >
-      <span
-        class="MuiButton-label"
-      >
-        Delete
-      </span>
+      Delete
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+      class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-4eo762-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Cancel
       <span
-        class="MuiButton-label"
-      >
-        Cancel
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import PaginationControlButton, { PREVIOUS_PAGE, NEXT_PAGE } from './PaginationControlButton';
 
 jest.mock('@mui/icons-material/NavigateBeforeRounded', () => () => (<>NavigateBeforeRoundedIcon Mock</>));

@@ -30,17 +30,13 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           >
             <button
               aria-label="add"
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1qiowgr-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
+              Create expectedTypeName
               <span
-                class="MuiButton-label"
-              >
-                Create expectedTypeName
-              </span>
-              <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
@@ -54,22 +50,22 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
 exports[`StackCards creates correct snapshot for an empty array 1`] = `
 <div>
   <div
-    class="makeStyles-stackDiv-125"
+    class="makeStyles-stackDiv-11"
   >
     <div>
       <div>
         <div
-          class="makeStyles-placeholderCard-126"
+          class="makeStyles-placeholderCard-12"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             No items to display.
           </p>
         </div>
       </div>
       <div
-        class="makeStyles-paginationControlBar-127"
+        class="makeStyles-paginationControlBar-13"
       >
         <div />
         <div>
@@ -78,17 +74,13 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
           >
             <button
               aria-label="add"
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1qiowgr-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
+              Create expectedTypeName
               <span
-                class="MuiButton-label"
-              >
-                Create expectedTypeName
-              </span>
-              <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
@@ -102,7 +94,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
 exports[`StackCards creates correct snapshot when no create button 1`] = `
 <div>
   <div
-    class="makeStyles-stackDiv-202"
+    class="makeStyles-stackDiv-16"
   >
     <div>
       <div>
@@ -127,22 +119,22 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
 exports[`StackCards creates correct snapshot with different action button label prefix 1`] = `
 <div>
   <div
-    class="makeStyles-stackDiv-48"
+    class="makeStyles-stackDiv-6"
   >
     <div>
       <div>
         <div
-          class="makeStyles-placeholderCard-49"
+          class="makeStyles-placeholderCard-7"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             No items to display.
           </p>
         </div>
       </div>
       <div
-        class="makeStyles-paginationControlBar-50"
+        class="makeStyles-paginationControlBar-8"
       >
         <div />
         <div>
@@ -151,17 +143,13 @@ exports[`StackCards creates correct snapshot with different action button label 
           >
             <button
               aria-label="add"
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1qiowgr-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
+              Request expectedTypeName
               <span
-                class="MuiButton-label"
-              >
-                Request expectedTypeName
-              </span>
-              <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>

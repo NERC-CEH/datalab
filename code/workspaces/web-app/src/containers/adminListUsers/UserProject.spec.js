@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 import { RSHINY, JUPYTER } from 'common/src/stackTypes';
+import { render } from '../../testUtils/renderTests';
 import UserProject from './UserProject';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useStacksArray } from '../../hooks/stacksHooks';

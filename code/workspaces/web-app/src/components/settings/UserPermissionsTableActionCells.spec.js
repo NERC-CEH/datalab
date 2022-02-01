@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '../../testUtils/renderTests';
 import { PERMISSION_VALUES, PERMISSIONS } from '../../constants/permissions';
 import { CheckboxCell, PermissionsCheckbox, RemoveUserButtonCell } from './UserPermissionsTableActionCells';
 

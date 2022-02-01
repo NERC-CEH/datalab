@@ -1,6 +1,6 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import AssetRepoFindContainer from './AssetRepoFindContainer';
 import { useAssetRepo } from '../../hooks/assetRepoHooks';
 import assetRepoActions from '../../actions/assetRepoActions';

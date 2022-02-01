@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../testUtils/renderTests';
 import AssetRepoAddMetadataPage from './AssetRepoAddMetadataPage';
 
 jest.mock('../components/assetRepo/AddRepoMetadataDetails', () => () => (<div>AddRepoMetadataDetails mock</div>));
