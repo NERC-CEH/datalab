@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import CreateClusterDialog from './CreateClusterDialog';
 
 jest.mock('../cluster/CreateClusterForm', () => props => (<div>CreateClusterForm mock {JSON.stringify(props)}</div>));

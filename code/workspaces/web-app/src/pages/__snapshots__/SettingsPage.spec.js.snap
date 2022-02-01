@@ -7,7 +7,7 @@ exports[`SettingsPage renders to match snapshot 1`] = `
     title: Settings
      
     <h5
-      class="MuiTypography-root MuiTypography-h5"
+      class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
     >
       Project Details
     </h5>
@@ -15,7 +15,7 @@ exports[`SettingsPage renders to match snapshot 1`] = `
       EditProjectDetails mock
     </div>
     <h5
-      class="MuiTypography-root MuiTypography-h5"
+      class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
     >
       User Permissions
     </h5>

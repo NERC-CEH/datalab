@@ -3,36 +3,28 @@
 exports[`DescribeElementCardLinks renders correct snapshot 1`] = `
 <div>
   <div
-    class="MuiCardActions-root MuiCardActions-spacing"
+    class="MuiCardActions-root MuiCardActions-spacing css-1t6e9jv-MuiCardActions-root"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-4dagr2-MuiButtonBase-root-MuiButton-root"
       style="font-size: larger;"
       tabindex="0"
       type="button"
     >
+      displayName &gt;
       <span
-        class="MuiButton-label"
-      >
-        displayName &gt;
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-4dagr2-MuiButtonBase-root-MuiButton-root"
       style="font-size: larger;"
       tabindex="0"
       type="button"
     >
+      anotherDisplayName &gt;
       <span
-        class="MuiButton-label"
-      >
-        anotherDisplayName &gt;
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

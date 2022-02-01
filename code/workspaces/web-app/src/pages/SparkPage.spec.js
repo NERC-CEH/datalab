@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../testUtils/renderTests';
 import SparkPage, { getPythonMessage, getRMessage } from './SparkPage';
 
 jest.mock('../containers/clusters/ClustersContainer', () => props => (<div>ClustersContainer mock {JSON.stringify(props)}</div>));

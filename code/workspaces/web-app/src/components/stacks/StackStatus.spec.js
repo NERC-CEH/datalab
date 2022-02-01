@@ -1,6 +1,6 @@
 import React from 'react';
 import { statusTypes } from 'common';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import StackStatus from './StackStatus';
 
 const { getStatusKeys } = statusTypes;

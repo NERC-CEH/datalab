@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import ProjectClusters from './ProjectClusters';
 
 jest.mock('../clusters/ProjectClustersContainer', () => props => (<>ProjectClustersContainer Mock {JSON.stringify(props)}</>));

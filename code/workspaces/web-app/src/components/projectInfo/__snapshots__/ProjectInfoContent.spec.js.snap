@@ -4,14 +4,14 @@ exports[`ProjectInfoContent correctly renders correct snapshot 1`] = `
 <div>
   <div>
     <h5
-      class="MuiTypography-root MuiTypography-h5"
+      class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
     >
       project2
       : 
       "project2" is the ID of this
     </h5>
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       This is the second project.
     </p>

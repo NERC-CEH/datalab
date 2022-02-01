@@ -6,7 +6,7 @@ exports[`AdminMessagesContainer renders correctly 1`] = `
     MessageCreator
     <div>
       <h5
-        class="MuiTypography-root MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 css-k8n68h-MuiTypography-root"
       >
         Existing Messages
       </h5>

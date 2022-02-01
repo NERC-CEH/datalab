@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import { notebookSharingOptions, siteVisibilityOptions } from './selectShareOptions';
 
 describe('NotebookSharingOptions-private', () => {

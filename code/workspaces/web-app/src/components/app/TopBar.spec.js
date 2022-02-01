@@ -1,6 +1,6 @@
 import React from 'react';
 import { permissionTypes } from 'common';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import TopBar from './TopBar';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 import { getCatalogue } from '../../config/catalogue';

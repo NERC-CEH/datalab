@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import ResourceStackCards from './ResourceStackCards';
 
 jest.mock('../../components/stacks/StackCards', () => props => (<>StackCards Mock {JSON.stringify(props, null, 2)}</>));

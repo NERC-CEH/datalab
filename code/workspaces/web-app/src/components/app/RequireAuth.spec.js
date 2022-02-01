@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render } from '@testing-library/react';
 import { Router } from 'react-router';
 import { createMemoryHistory } from 'history';
+import { render } from '../../testUtils/renderTests';
 import { getAuth } from '../../config/auth';
 import { useCurrentUserPermissions, useCurrentUserTokens } from '../../hooks/authHooks';
 import RequireAuth, { effectFn } from './RequireAuth';

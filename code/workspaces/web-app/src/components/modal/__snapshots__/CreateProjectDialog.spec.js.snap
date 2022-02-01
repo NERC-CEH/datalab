@@ -2,20 +2,18 @@
 
 exports[`CreateProjectDialog renders request form only if requestOnly is set 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-2"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth css-1b0zdj3-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-2"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Request New Project
-    </h2>
-  </div>
+    Request New Project
+  </h2>
   <div
-    class="MuiDialogContent-root"
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <div>
       CreateProjectForm mock 
@@ -27,20 +25,18 @@ exports[`CreateProjectDialog renders request form only if requestOnly is set 1`]
 
 exports[`CreateProjectDialog renders to match snapshot passing function props to form 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth css-1b0zdj3-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
-  <div
-    class="MuiDialogTitle-root"
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-1"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h6"
-    >
-      Create New Project
-    </h2>
-  </div>
+    Create New Project
+  </h2>
   <div
-    class="MuiDialogContent-root"
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <div>
       CreateProjectForm mock 

@@ -5,10 +5,10 @@ exports[`FullWidthRow returns a table row with correct colSpan and content 1`] =
   <table>
     <tbody>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root MuiTableCell-alignCenter"
+          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-sizeMedium css-1ougeao-MuiTableCell-root"
           colspan="4"
         >
           <div>
@@ -26,14 +26,14 @@ exports[`FullWidthTextRow returns a table row with correct colSpan and text wrap
   <table>
     <tbody>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root MuiTableCell-alignCenter"
+          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-sizeMedium css-1ougeao-MuiTableCell-root"
           colspan="4"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             Text to go in row.
           </p>
@@ -48,85 +48,85 @@ exports[`PureUserPermissionsTable renders correctly passing props to children 1`
 <div>
   <div>
     <table
-      class="MuiTable-root"
+      class="MuiTable-root css-o7s2gy-MuiTable-root"
     >
       <thead
-        class="MuiTableHead-root"
+        class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
       >
         <tr
-          class="MuiTableRow-root MuiTableRow-head"
+          class="MuiTableRow-root MuiTableRow-head css-xbnhev-MuiTableRow-root"
         >
           <th
-            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignLeft"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium tableCell css-1mofire-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root tableHeader MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
             >
               User Name
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium tableCell css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root tableHeader MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
             >
               Admin
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium tableCell css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root tableHeader MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
             >
               User
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium tableCell css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root tableHeader MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
             >
               Viewer
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium tableCell css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root tableHeader MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
             />
           </th>
         </tr>
       </thead>
       <tbody
-        class="MuiTableBody-root"
+        class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
       >
         <tr
-          class="MuiTableRow-root"
+          class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter MuiTableCell-sizeMedium css-z0f9zk-MuiTableCell-root"
             colspan="5"
           >
-            <div
-              class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
               role="progressbar"
               style="width: 40px; height: 40px;"
             >
               <svg
-                class="MuiCircularProgress-svg"
+                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx="44"
                   cy="44"
                   fill="none"
@@ -134,7 +134,7 @@ exports[`PureUserPermissionsTable renders correctly passing props to children 1`
                   stroke-width="3.6"
                 />
               </svg>
-            </div>
+            </span>
           </td>
         </tr>
       </tbody>
@@ -151,76 +151,76 @@ exports[`UserPermissionsTable renders pure component with correct props 1`] = `
 <div>
   <div>
     <table
-      class="MuiTable-root"
+      class="MuiTable-root css-o7s2gy-MuiTable-root"
     >
       <thead
-        class="MuiTableHead-root"
+        class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
       >
         <tr
-          class="MuiTableRow-root MuiTableRow-head"
+          class="MuiTableRow-root MuiTableRow-head css-xbnhev-MuiTableRow-root"
         >
           <th
-            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignLeft"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium UserPermissionsTable-tableCell-4 css-1mofire-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 UserPermissionsTable-tableHeader-3 css-12gb3o9-MuiTypography-root"
             >
               User Name
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium UserPermissionsTable-tableCell-4 css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 UserPermissionsTable-tableHeader-3 css-12gb3o9-MuiTypography-root"
             >
               Admin
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium UserPermissionsTable-tableCell-4 css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 UserPermissionsTable-tableHeader-3 css-12gb3o9-MuiTypography-root"
             >
               User
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium UserPermissionsTable-tableCell-4 css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 UserPermissionsTable-tableHeader-3 css-12gb3o9-MuiTypography-root"
             >
               Viewer
             </p>
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head UserPermissionsTable-tableCell-4 MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium UserPermissionsTable-tableCell-4 css-sdy6gp-MuiTableCell-root"
             scope="col"
           >
             <p
-              class="MuiTypography-root UserPermissionsTable-tableHeader-3 MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 UserPermissionsTable-tableHeader-3 css-12gb3o9-MuiTypography-root"
             />
           </th>
         </tr>
       </thead>
       <tbody
-        class="MuiTableBody-root"
+        class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
       >
         <tr
-          class="MuiTableRow-root"
+          class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter MuiTableCell-sizeMedium css-z0f9zk-MuiTableCell-root"
             colspan="5"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
             >
               No users have project permissions.
             </p>
@@ -238,23 +238,23 @@ exports[`UserPermissionsTable renders pure component with correct props 1`] = `
 
 exports[`UserPermissionsTableBody when fetching data renders progress indicator 1`] = `
 <tr
-  class="MuiTableRow-root"
+  class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
 >
   <td
-    class="MuiTableCell-root MuiTableCell-alignCenter"
+    class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-sizeMedium css-1ougeao-MuiTableCell-root"
     colspan="5"
   >
-    <div
-      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    <span
+      class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1a30p6q-MuiCircularProgress-root"
       role="progressbar"
       style="width: 40px; height: 40px;"
     >
       <svg
-        class="MuiCircularProgress-svg"
+        class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
         viewBox="22 22 44 44"
       >
         <circle
-          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
           cx="44"
           cy="44"
           fill="none"
@@ -262,7 +262,7 @@ exports[`UserPermissionsTableBody when fetching data renders progress indicator 
           stroke-width="3.6"
         />
       </svg>
-    </div>
+    </span>
   </td>
 </tr>
 `;
@@ -272,13 +272,13 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
   <table>
     <tbody>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root tableCell"
+          class="MuiTableCell-root MuiTableCell-sizeMedium tableCell css-1yyjf55-MuiTableCell-root"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             admin name
           </p>
@@ -301,13 +301,13 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
         </td>
       </tr>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root tableCell"
+          class="MuiTableCell-root MuiTableCell-sizeMedium tableCell css-1yyjf55-MuiTableCell-root"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             user name
           </p>
@@ -330,13 +330,13 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
         </td>
       </tr>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root tableCell"
+          class="MuiTableCell-root MuiTableCell-sizeMedium tableCell css-1yyjf55-MuiTableCell-root"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             viewer name
           </p>
@@ -365,14 +365,14 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
 
 exports[`UserPermissionsTableBody when there is an error fetching renders correctly displaying there is an error 1`] = `
 <tr
-  class="MuiTableRow-root"
+  class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
 >
   <td
-    class="MuiTableCell-root MuiTableCell-alignCenter"
+    class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-sizeMedium css-1ougeao-MuiTableCell-root"
     colspan="5"
   >
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       Error fetching data. Please try refreshing the page.
     </p>
@@ -385,22 +385,22 @@ exports[`UserPermissionsTableHead renders correct header bar based on column hea
   <table>
     <tbody>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root tableCell MuiTableCell-alignLeft"
+          class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium tableCell css-1yyjf55-MuiTableCell-root"
         >
           <p
-            class="MuiTypography-root tableHeader MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
           >
             not check box
           </p>
         </td>
         <td
-          class="MuiTableCell-root tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium tableCell css-1h6bb6-MuiTableCell-root"
         >
           <p
-            class="MuiTypography-root tableHeader MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 tableHeader css-12gb3o9-MuiTypography-root"
           >
             check box col
           </p>
@@ -416,13 +416,13 @@ exports[`UserPermissionsTableRow for a given user correctly renders passing prop
   <table>
     <tbody>
       <tr
-        class="MuiTableRow-root"
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
       >
         <td
-          class="MuiTableCell-root tableCell"
+          class="MuiTableCell-root MuiTableCell-sizeMedium tableCell css-1yyjf55-MuiTableCell-root"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             admin name
           </p>

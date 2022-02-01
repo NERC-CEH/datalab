@@ -3,28 +3,29 @@
 exports[`PaginationControlTextField renders with the provided pageInputValue as the value 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiTextField-root makeStyles-pageNumberInput-1 MuiFormControl-marginDense"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root makeStyles-pageNumberInput-1 css-4mzek5-MuiFormControl-root-MuiTextField-root"
   >
     <div
-      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+        id="mui-1"
         style="text-align: center; padding: 5px;"
         type="text"
         value="5"
       />
       <fieldset
         aria-hidden="true"
-        class="PrivateNotchedOutline-root-40 MuiOutlinedInput-notchedOutline"
-        style="padding-left: 8px;"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="PrivateNotchedOutline-legend-41"
-          style="width: 0.01px;"
+          class="css-nnbavb"
         >
-          <span>
+          <span
+            class="notranslate"
+          >
             ​
           </span>
         </legend>

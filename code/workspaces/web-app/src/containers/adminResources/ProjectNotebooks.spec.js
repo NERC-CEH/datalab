@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import ProjectNotebooks from './ProjectNotebooks';
 
 jest.mock('./ProjectNotebooksContainer', () => props => (<>ProjectNotebooksContainer Mock {JSON.stringify(props)}</>));

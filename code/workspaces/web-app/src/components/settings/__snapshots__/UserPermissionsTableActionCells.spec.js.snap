@@ -6,7 +6,7 @@ exports[`CheckboxCell renders correctly passing props to PermissionsCheckbox in 
     <tbody>
       <tr>
         <td
-          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium css-1h6bb6-MuiTableCell-root"
         >
           <div>
             CheckBox mock 
@@ -61,23 +61,19 @@ exports[`RemoveUserButtonCell renders as disabled when on the row of the current
     <tbody>
       <tr>
         <td
-          class="MuiTableCell-root tableCell MuiTableCell-alignCenter MuiTableCell-paddingCheckbox"
+          class="MuiTableCell-root MuiTableCell-alignCenter MuiTableCell-paddingCheckbox MuiTableCell-sizeMedium tableCell css-1h6bb6-MuiTableCell-root"
         >
           <button
-            class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+            class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-sizeLarge css-mf1cb5-MuiButtonBase-root-MuiIconButton-root"
             disabled=""
             tabindex="-1"
             type="button"
           >
             <span
-              class="MuiIconButton-label"
+              aria-hidden="true"
+              class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
             >
-              <span
-                aria-hidden="true"
-                class="material-icons MuiIcon-root"
-              >
-                remove_circle_outline
-              </span>
+              remove_circle_outline
             </span>
           </button>
         </td>

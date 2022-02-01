@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../testUtils/renderTests';
 import SignUpPage from './SignUpPage';
 
 jest.mock('../components/welcome/SignUp', () => () => (<div>SignUp mock</div>));

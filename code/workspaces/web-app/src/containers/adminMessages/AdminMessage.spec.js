@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen, configure } from '@testing-library/react';
+// import { render, fireEvent, screen, configure } from '@testing-library/react';
+import { render, fireEvent, screen, configure } from '../../testUtils/renderTests';
 import AdminMessage from './AdminMessage';
 
 jest.mock('../../components/app/Message', () => props => (<>{`Message: ${JSON.stringify(props.message)}, AllowDismiss: ${props.allowDismiss.toString()}`}</>));

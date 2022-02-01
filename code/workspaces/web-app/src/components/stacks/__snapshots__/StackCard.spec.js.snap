@@ -18,6 +18,7 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
       <div
         class="StackCard-textDiv-3"
       >
+<<<<<<< HEAD
         <div
           class="StackCard-displayNameContainer-5"
         >
@@ -30,12 +31,23 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
           title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+=======
+        <h5
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-4 css-ltmxt9-MuiTypography-root"
+>>>>>>> feat: fix remaining tests
         >
           Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
         </p>
       </div>
+<<<<<<< HEAD
       <div
         class="StackCard-actionsDiv-6"
+=======
+      <p
+        aria-label="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
+>>>>>>> feat: fix remaining tests
       >
         <div>
           StackCardActions mock 
@@ -50,6 +62,7 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
 
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 <div>
+<<<<<<< HEAD
   <div>
     <div
       class="StackCard-cardDiv-53"
@@ -78,10 +91,33 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
         <p
           class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
           title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+=======
+  <div
+    class="StackCard-cardDiv-12"
+  >
+    <div
+      class="StackCard-imageDiv-13"
+    >
+      <img
+        alt="zeppelin logo"
+        class="StackCard-cardImage-19"
+        src="zeppelin-logo.svg"
+      />
+    </div>
+    <div
+      class="StackCard-textDiv-14"
+    >
+      <div
+        class="StackCard-displayNameContainer-16"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-15 css-ltmxt9-MuiTypography-root"
+>>>>>>> feat: fix remaining tests
         >
           Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
         </p>
       </div>
+<<<<<<< HEAD
       <div
         class="StackCard-actionsDiv-58"
       >
@@ -90,6 +126,23 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
           {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
+=======
+      <p
+        aria-label="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
+      >
+        Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-17"
+    >
+      <div>
+        StackCardActions mock 
+        {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+         
+>>>>>>> feat: fix remaining tests
       </div>
     </div>
   </div>
@@ -98,6 +151,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 
 exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
 <div>
+<<<<<<< HEAD
   <div>
     <div
       class="StackCard-cardDiv-105"
@@ -108,10 +162,39 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
         <span
           aria-hidden="true"
           class="material-icons MuiIcon-root StackCard-cardIcon-113"
+=======
+  <div
+    class="StackCard-cardDiv-23"
+  >
+    <div
+      class="StackCard-imageDiv-24"
+    >
+      <span
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium StackCard-cardIcon-31 css-kp9ftd-MuiIcon-root"
+      >
+        save
+      </span>
+    </div>
+    <div
+      class="StackCard-textDiv-25"
+    >
+      <div
+        class="StackCard-displayNameContainer-27"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-26 css-ltmxt9-MuiTypography-root"
+        >
+          name1
+        </h5>
+        <span
+          class=" makeStyles-root-34"
+>>>>>>> feat: fix remaining tests
         >
           save
         </span>
       </div>
+<<<<<<< HEAD
       <div
         class="StackCard-textDiv-107"
       >
@@ -146,6 +229,23 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
           {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
+=======
+      <p
+        aria-label="Network File System (NFS) volume to store data for Notebooks and Sites."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
+      >
+        Network File System (NFS) volume to store data for Notebooks and Sites.
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-28"
+    >
+      <div>
+        StackCardActions mock 
+        {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+         
+>>>>>>> feat: fix remaining tests
       </div>
     </div>
   </div>
@@ -154,6 +254,7 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
 
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
 <div>
+<<<<<<< HEAD
   <div>
     <div
       class="StackCard-cardDiv-167"
@@ -188,6 +289,45 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
       </div>
       <div
         class="StackCard-actionsDiv-172"
+=======
+  <div
+    class="StackCard-cardDiv-35"
+  >
+    <div
+      class="StackCard-imageDiv-36"
+    >
+      <img
+        alt="jupyter logo"
+        class="StackCard-cardImage-42"
+        src="jupyter-logo.svg"
+      />
+    </div>
+    <div
+      class="StackCard-textDiv-37"
+    >
+      <div
+        class="StackCard-displayNameContainer-39"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-38 css-ltmxt9-MuiTypography-root"
+        >
+          name1
+        </h5>
+      </div>
+      <p
+        aria-label="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+        data-mui-internal-clone-element="true"
+      >
+        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+      </p>
+    </div>
+    <div
+      class="StackCard-actionsDiv-40"
+    >
+      <div
+        class="StackCard-statusDiv-41"
+>>>>>>> feat: fix remaining tests
       >
         <div
           class="StackCard-statusDiv-173"

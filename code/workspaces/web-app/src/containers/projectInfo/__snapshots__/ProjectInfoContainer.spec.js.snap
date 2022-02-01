@@ -3,15 +3,15 @@
 exports[`CollaborationLink renders correctly to match snapshot when there is a collaboration link 1`] = `
 <div>
   <div
-    class="makeStyles-collaborationLink-281"
+    class="makeStyles-collaborationLink-41"
   >
     <p
-      class="MuiTypography-root makeStyles-collaborationLinkHeading-282 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-42 css-12gb3o9-MuiTypography-root"
     >
       Collaboration Link
     </p>
     <p
-      class="MuiTypography-root MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
     >
       <a
         href="https://testlab.test-datalabs.nerc.ac.uk"
@@ -34,18 +34,18 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
       class="makeStyles-projectTitleWrapper-3"
     >
       <h5
-        class="MuiTypography-root makeStyles-projectTitle-1 MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-1 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-4 makeStyles-root-39"
+        class="makeStyles-ResourceInfoSpan-4 makeStyles-root-9"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root makeStyles-description-2 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-2 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
@@ -53,12 +53,12 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
       class="makeStyles-collaborationLink-5"
     >
       <p
-        class="MuiTypography-root makeStyles-collaborationLinkHeading-6 MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-6 css-12gb3o9-MuiTypography-root"
       >
         Collaboration Link
       </p>
       <p
-        class="MuiTypography-root MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
       >
         <a
           href="https://testlab.test-datalabs.nerc.ac.uk"
@@ -76,17 +76,17 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
         <div />
         <div>
           <h6
-            class="MuiTypography-root makeStyles-chipTitle-8 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-8 css-161uzub-MuiTypography-root"
           >
             user
             s
           </h6>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user1@test
             </span>
@@ -103,34 +103,34 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
 <div>
   <div>
     <div
-      class="makeStyles-projectTitleWrapper-72"
+      class="makeStyles-projectTitleWrapper-12"
     >
       <h5
-        class="MuiTypography-root makeStyles-projectTitle-70 MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-10 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-73 makeStyles-root-108"
+        class="makeStyles-ResourceInfoSpan-13 makeStyles-root-18"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root makeStyles-description-71 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-11 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
     <div
-      class="makeStyles-collaborationLink-74"
+      class="makeStyles-collaborationLink-14"
     >
       <p
-        class="MuiTypography-root makeStyles-collaborationLinkHeading-75 MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-15 css-12gb3o9-MuiTypography-root"
       >
         Collaboration Link
       </p>
       <p
-        class="MuiTypography-root MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
       >
         <a
           href="https://testlab.test-datalabs.nerc.ac.uk"
@@ -142,22 +142,22 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
       </p>
     </div>
     <div
-      class="makeStyles-userBlock-76"
+      class="makeStyles-userBlock-16"
     >
       <div>
         <div>
           <h6
-            class="MuiTypography-root makeStyles-chipTitle-77 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-17 css-161uzub-MuiTypography-root"
           >
             admin
             s
           </h6>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user4@test
             </span>
@@ -165,27 +165,27 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
         </div>
         <div>
           <h6
-            class="MuiTypography-root makeStyles-chipTitle-77 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-17 css-161uzub-MuiTypography-root"
           >
             user
             s
           </h6>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user1@test
             </span>
           </div>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user3@test
             </span>
@@ -193,17 +193,17 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
         </div>
         <div>
           <h6
-            class="MuiTypography-root makeStyles-chipTitle-77 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-17 css-161uzub-MuiTypography-root"
           >
             viewer
             s
           </h6>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user2@test
             </span>
@@ -219,34 +219,34 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 <div>
   <div>
     <div
-      class="makeStyles-projectTitleWrapper-141"
+      class="makeStyles-projectTitleWrapper-21"
     >
       <h5
-        class="MuiTypography-root makeStyles-projectTitle-139 MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-19 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-142 makeStyles-root-177"
+        class="makeStyles-ResourceInfoSpan-22 makeStyles-root-27"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root makeStyles-description-140 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-20 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
     <div
-      class="makeStyles-collaborationLink-143"
+      class="makeStyles-collaborationLink-23"
     >
       <p
-        class="MuiTypography-root makeStyles-collaborationLinkHeading-144 MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-24 css-12gb3o9-MuiTypography-root"
       >
         Collaboration Link
       </p>
       <p
-        class="MuiTypography-root MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
       >
         <a
           href="https://testlab.test-datalabs.nerc.ac.uk"
@@ -258,23 +258,23 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
       </p>
     </div>
     <div
-      class="makeStyles-userBlock-145"
+      class="makeStyles-userBlock-25"
     >
       <div>
         <div />
         <div>
           <h6
-            class="MuiTypography-root makeStyles-chipTitle-146 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-26 css-161uzub-MuiTypography-root"
           >
             user
             s
           </h6>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user1@test
             </span>
@@ -291,42 +291,42 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 <div>
   <div>
     <div
-      class="makeStyles-projectTitleWrapper-210"
+      class="makeStyles-projectTitleWrapper-30"
     >
       <h5
-        class="MuiTypography-root makeStyles-projectTitle-208 MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-28 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-211 makeStyles-root-246"
+        class="makeStyles-ResourceInfoSpan-31 makeStyles-root-36"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root makeStyles-description-209 MuiTypography-body1"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-29 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
     <div
-      class="makeStyles-userBlock-214"
+      class="makeStyles-userBlock-34"
     >
       <div>
         <div />
         <div>
           <h6
-            class="MuiTypography-root makeStyles-chipTitle-215 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-35 css-161uzub-MuiTypography-root"
           >
             user
             s
           </h6>
           <div
-            class="MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-17el4er-MuiChip-root"
             tabindex="-1"
           >
             <span
-              class="MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
             >
               user1@test
             </span>

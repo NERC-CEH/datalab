@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import { PureNavigationContainer } from './NavigationContainer';
 
 jest.mock('../../components/app/Navigation', () => props => (<>Navigation Mock {JSON.stringify(props)}</>));

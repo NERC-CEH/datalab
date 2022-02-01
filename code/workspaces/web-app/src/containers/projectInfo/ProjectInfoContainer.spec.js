@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import ProjectInfoContainer, { PureProjectInfoContainer, CollaborationLink } from './ProjectInfoContainer';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';

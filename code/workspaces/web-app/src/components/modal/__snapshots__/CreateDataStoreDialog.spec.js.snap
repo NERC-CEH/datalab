@@ -2,24 +2,22 @@
 
 exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
 <div
-  class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation24 MuiPaper-rounded"
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
   <div
     style="margin: 10px; display: flex; flex-direction: row;"
   >
     <div>
-      <div
-        class="MuiDialogTitle-root"
+      <h2
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+        id="mui-1"
       >
-        <h2
-          class="MuiTypography-root MuiTypography-h6"
-        >
-          Title
-        </h2>
-      </div>
+        Title
+      </h2>
       <div
-        class="MuiDialogContent-root"
+        class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
       >
         <div>
           CreateDataStoreForm mock 
@@ -30,15 +28,12 @@ exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
     <div
       style="width: 320px;"
     >
-      <div
-        class="MuiDialogTitle-root"
+      <h2
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+        id="mui-1"
       >
-        <h2
-          class="MuiTypography-root MuiTypography-h6"
-        >
-          Data Store Preview
-        </h2>
-      </div>
+        Data Store Preview
+      </h2>
       <div
         style="width: 90%; margin: 0px auto;"
       >

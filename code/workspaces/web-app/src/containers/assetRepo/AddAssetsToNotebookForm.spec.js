@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, fireEvent, configure } from '@testing-library/react';
+// import { render, fireEvent, configure } from '@testing-library/react';
 import * as redux from 'react-redux';
+import { render, fireEvent, configure } from '../../testUtils/renderTests';
 import { PureAddAssetsToNotebookForm } from './AddAssetsToNotebookForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
 

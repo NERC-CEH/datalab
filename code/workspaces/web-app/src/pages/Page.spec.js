@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../testUtils/renderTests';
 import Page from './Page';
 
 jest.mock('../components/app/Footer', () => () => (<div>Footer mock</div>));

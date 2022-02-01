@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import PromisedContentWrapper, { ClassWrapper, SizeWrapper, createClassName } from './PromisedContentWrapper';
 
 describe('PromisedContentWrapper', () => {

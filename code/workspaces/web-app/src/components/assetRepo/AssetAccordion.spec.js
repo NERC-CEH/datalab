@@ -1,8 +1,8 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
 import { reset } from 'redux-form';
-import { render, fireEvent, screen, within } from '@testing-library/react';
 import { permissionTypes } from 'common';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import AssetAccordion, { onEditAssetConfirm, onEditAssetSubmit, openEditForm } from './AssetAccordion';
 import { useCurrentUserPermissions, useCurrentUserId } from '../../hooks/authHooks';
 import notify from '../common/notify';
