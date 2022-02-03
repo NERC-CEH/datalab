@@ -25,6 +25,7 @@ function getImage(type, version) {
 
 function createJupyterDeployment({ projectKey, deploymentName, name, type, volumeMount, version }) {
   const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
+  const collaborative = type === 'jupyterlab';
   const img = getImage(type, version);
   const context = {
     name: deploymentName,
@@ -41,6 +42,7 @@ function createJupyterDeployment({ projectKey, deploymentName, name, type, volum
     type,
     startCmd,
     volumeMount,
+    collaborative,
   };
 
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
