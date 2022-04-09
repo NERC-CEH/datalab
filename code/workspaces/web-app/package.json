@@ -19,7 +19,7 @@
     "history": "4.6.1",
     "jquery": "^3.5.0",
     "lodash": "4.17.21",
-    "moment": "2.21.0",
+    "moment": "2.29.2",
     "moxios": "0.4.0",
     "oidc-client": "^1.10.1",
     "prop-types": "15.7.2",
