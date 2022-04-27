@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen, within } from '@testing-library/react';
-import { SITE_CATEGORY } from 'common/src/config/images';
+import { NOTEBOOK_CATEGORY, SITE_CATEGORY } from 'common/src/config/images';
 import { useCurrentUserId } from '../../../hooks/authHooks';
 import StackCardActions, { getSharedButtons } from './StackCardActions';
 import { getUserActionsForType } from '../../../config/images';
@@ -285,20 +285,24 @@ describe('getSharedButtons', () => {
   });
 
   it('creates the correct buttons for a private stack', () => {
-    const stack = getStack();
+    const stack = {
+      ...getStack(),
+      category: NOTEBOOK_CATEGORY,
+    };
     const buttons = getSharedButtons(stack, jest.fn(), permission);
 
-    expect(buttons).toEqual([privateButton(true), projectButton(false), undefined]);
+    expect(buttons).toEqual([undefined, projectButton(false), undefined]);
   });
 
   it('creates the correct buttons for a project stack', () => {
     const stack = {
       ...getStack(),
       shared: 'project',
+      category: NOTEBOOK_CATEGORY,
     };
     const buttons = getSharedButtons(stack, jest.fn(), permission);
 
-    expect(buttons).toEqual([privateButton(false), projectButton(true), undefined]);
+    expect(buttons).toEqual([undefined, projectButton(true), undefined]);
   });
 
   it('creates the correct buttons for a public stack', () => {

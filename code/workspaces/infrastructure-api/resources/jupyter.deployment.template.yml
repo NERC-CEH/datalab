@@ -67,7 +67,7 @@ spec:
             - name: R_LIBS_USER
               value: "/data/packages/R/%p/%v"
             - name: JUPYTER_DATA_DIR
-              value: "/data/notebooks/{{ name }}/.jupyter"
+              value: "/data/.jupyter"
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
             - name: JUPYTER_ALLOW_INSECURE_WRITES
