@@ -11,7 +11,7 @@ import { visibility } from '../models/stackEnums';
 import zeppelin from './zeppelinStack';
 
 const { deploymentName } = nameGenerators;
-const { JUPYTER, JUPYTERLAB, ZEPPELIN } = stackTypes;
+const { ZEPPELIN } = stackTypes;
 
 const mountPath = '/mnt/persistentfs';
 
@@ -100,8 +100,8 @@ export const makeZeppelinPrivate = async (name, type, projectKey) => {
   await deploymentApi.restartDeployment(deployment, projectKey);
 };
 
-export const handleSharedChange = async (params, existing, newSharedStatus, userToken) => {
-  const { category, shared, type, volumeMount, visible } = existing;
+export const handleSharedChange = async (params, existing, newSharedStatus) => {
+  const { category, shared, type, visible } = existing;
 
   const oldSharedStatus = shared || visible;
 
@@ -126,13 +126,13 @@ export const handleSharedChange = async (params, existing, newSharedStatus, user
     }
 
     // No backend changes needed for other status changes
-    return;
   }
 
   if (category === NOTEBOOK_CATEGORY && newSharedStatus === visibility.PRIVATE) {
-    if (type === JUPYTER || type === JUPYTERLAB) {
-      await makeJupyterPrivate(name, type, projectKey, volumeMount, userToken);
-    }
+    // Temporarily disable Jupyter private option due to Conda issue (NERCDL-1188)
+    // if (type === JUPYTER || type === JUPYTERLAB) {
+    //   await makeJupyterPrivate(name, type, projectKey, volumeMount, userToken);
+    // }
 
     if (type === ZEPPELIN) {
       await makeZeppelinPrivate(name, type, projectKey);
