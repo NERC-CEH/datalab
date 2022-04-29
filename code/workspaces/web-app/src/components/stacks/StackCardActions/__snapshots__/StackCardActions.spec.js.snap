@@ -106,13 +106,6 @@ exports[`StackCardActions creates correct snapshot 2`] = `
     requiredpermission="delete"
     userpermissions="open,delete,edit"
   >
-    Set Access: Private
-    disabled: true
-  </div>
-  <div
-    requiredpermission="delete"
-    userpermissions="open,delete,edit"
-  >
     Set Access: Project
     disabled: false
   </div>
@@ -145,13 +138,6 @@ exports[`StackCardActions creates correct snapshot if there are multiple copy sn
   >
     Edit
     disabled: undefined
-  </div>
-  <div
-    requiredpermission="delete"
-    userpermissions="open,delete,edit"
-  >
-    Set Access: Private
-    disabled: true
   </div>
   <div
     requiredpermission="delete"

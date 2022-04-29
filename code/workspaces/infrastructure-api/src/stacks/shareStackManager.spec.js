@@ -19,7 +19,7 @@ const name = 'stackname';
 
 const volumeMount = 'volume';
 
-const { JUPYTERLAB, ZEPPELIN, RSTUDIO, RSHINY } = stackTypes;
+const { ZEPPELIN, RSTUDIO, RSHINY } = stackTypes;
 
 const getParams = () => ({
   projectKey,
@@ -146,43 +146,44 @@ describe('handleSharedChange', () => {
     expect(ingressApi.patchIngress).toHaveBeenCalledWith('rshiny-stackname', projectKey, expectedPatch);
   });
 
-  it('handles Jupyter notebooks changing to private', async () => {
-    const existing = {
-      ...getExisting(),
-      category: NOTEBOOK_CATEGORY,
-      type: JUPYTERLAB,
-    };
-    jest.spyOn(Date, 'now').mockReturnValue(1609459200);
+  // Disable tests for making Jupyter/Zepplin private for the moment
+  //   it('handles Jupyter notebooks changing to private', async () => {
+  //     const existing = {
+  //       ...getExisting(),
+  //       category: NOTEBOOK_CATEGORY,
+  //       type: JUPYTERLAB,
+  //     };
+  //     jest.spyOn(Date, 'now').mockReturnValue(1609459200);
 
-    secretManager.createNewJupyterCredentials = jest.fn(() => ({ token: 'token' }));
-    deploymentApi.getDeployment.mockResolvedValueOnce({
-      spec: {
-        template: {
-          spec: {
-            containers: [
-              {
-                name: 'jupyterlab-stackname',
-                env: [
-                  {
-                    name: 'JUPYTER_DATA_DIR',
-                    value: '/data/notebooks/jupyterlab-stackname/.jupyter',
-                  },
-                ],
-              },
-            ],
-          },
-        },
-      },
-    });
+  //     secretManager.createNewJupyterCredentials = jest.fn(() => ({ token: 'token' }));
+  //     deploymentApi.getDeployment.mockResolvedValueOnce({
+  //       spec: {
+  //         template: {
+  //           spec: {
+  //             containers: [
+  //               {
+  //                 name: 'jupyterlab-stackname',
+  //                 env: [
+  //                   {
+  //                     name: 'JUPYTER_DATA_DIR',
+  //                     value: '/data/notebooks/jupyterlab-stackname/.jupyter',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         },
+  //       },
+  //     });
 
-    await handleSharedChange(getParams(), existing, 'private', userToken);
+  //     await handleSharedChange(getParams(), existing, 'private', userToken);
 
-    expectCalls({ createJob: 1, createStackCredentialSecret: 1, getDeployment: 1 });
-    expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, JUPYTERLAB, projectKey, { token: 'token' });
-    expect(deploymentApi.getDeployment).toHaveBeenCalledWith('jupyterlab-stackname', projectKey);
-    expect(jobApi.createJob).toHaveBeenCalledWith(name, projectKey, expect.any(String));
-    expect(jobApi.createJob.mock.calls[0][2]).toMatchSnapshot();
-  });
+  //     expectCalls({ createJob: 1, createStackCredentialSecret: 1, getDeployment: 1 });
+  //     expect(secretManager.createStackCredentialSecret).toHaveBeenCalledWith(name, JUPYTERLAB, projectKey, { token: 'token' });
+  //     expect(deploymentApi.getDeployment).toHaveBeenCalledWith('jupyterlab-stackname', projectKey);
+  //     expect(jobApi.createJob).toHaveBeenCalledWith(name, projectKey, expect.any(String));
+  //     expect(jobApi.createJob.mock.calls[0][2]).toMatchSnapshot();
+  //   });
 
   it('handles Zeppelin notebooks changing to private', async () => {
     const existing = {

@@ -60,7 +60,7 @@ export const getSharedButtons = (stack, shareStack, permission) => {
   const shared = stack.shared || stack.visible;
 
   return [
-    shareButton(PRIVATE, 'Set Access: Private', shared === PRIVATE),
+    isSite ? shareButton(PRIVATE, 'Set Access: Private', shared === PRIVATE) : undefined,
     shareButton(PROJECT, 'Set Access: Project', shared === PROJECT),
     isSite ? shareButton(PUBLIC, 'Set Access: Public', shared === PUBLIC) : undefined,
   ];
