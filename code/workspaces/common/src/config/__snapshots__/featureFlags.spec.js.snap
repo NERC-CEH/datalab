@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`featureFlagsConfig has expected content 1`] = `
+Object {
+  "expireUnusedNotebooks": Object {
+    "accessTimeLimit": 31,
+    "accessTimeWarning": 14,
+  },
+  "requestProjects": false,
+}
+`;

@@ -23,6 +23,12 @@ stackRouter.get(
   ew(stack.getOneById),
 );
 stackRouter.get(
+  '/:projectKey/name/:name/access',
+  permissionMiddleware(PROJECT_KEY_STACKS_OPEN),
+  stack.withNameValidator,
+  ew(stack.updateAccessTime),
+);
+stackRouter.get(
   '/:projectKey/name/:name',
   permissionMiddleware(PROJECT_KEY_STACKS_CREATE),
   stack.withNameValidator,

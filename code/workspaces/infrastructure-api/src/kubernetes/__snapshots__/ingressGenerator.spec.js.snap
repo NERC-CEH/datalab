@@ -2,7 +2,7 @@
 
 exports[`Ingress generator should add auth-url for privateEndpoints 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -19,15 +19,18 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;
 
 exports[`Ingress generator should add proxy-request-buffering option if supplied 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -45,15 +48,18 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;
 
 exports[`Ingress generator should add proxy-set-headers option if supplied 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -71,15 +77,18 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;
 
 exports[`Ingress generator should add proxy-timeout options if supplied 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -100,19 +109,25 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
       - path: /connect
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 8000
+          service:
+            name: name-service
+            port:
+              number: 8000
 "
 `;
 
 exports[`Ingress generator should add rewrite target if supplied 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -130,19 +145,25 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
       - path: /connect
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 8000
+          service:
+            name: name-service
+            port:
+              number: 8000
 "
 `;
 
 exports[`Ingress generator should generate a single path if connect port is not supplied 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -159,15 +180,18 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;
 
 exports[`Ingress generator should generate multiple paths if connect port is supplied 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -184,19 +208,25 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
       - path: /connect
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 8000
+          service:
+            name: name-service
+            port:
+              number: 8000
 "
 `;
 
 exports[`Ingress generator should not add auth-url for a non-private endpoints 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -212,15 +242,18 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;
 
 exports[`Ingress generator should specify cluster issuer if defined 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -239,15 +272,18 @@ spec:
     http:
       paths:
       - path: /resource/project/name
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;
 
 exports[`Ingress generator should use datalab hostname and custom path for single hostname type 1`] = `
 "---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: name-ingress
@@ -264,8 +300,11 @@ spec:
     http:
       paths:
       - path: /resource/project/name
+        pathType: ImplementationSpecific
         backend:
-          serviceName: name-service
-          servicePort: 80
+          service:
+            name: name-service
+            port:
+              number: 80
 "
 `;

@@ -39,7 +39,8 @@ class StacksContainer extends Component {
   openStack(stack) {
     return this.props.actions.getUrl(this.props.projectKey.value, stack.id)
       .then(payload => this.props.actions.openStack(payload.value.redirectUrl))
-      .catch(err => notify.error(`Unable to open ${this.props.typeName}`));
+      .catch(err => notify.error(`Unable to open ${this.props.typeName}`))
+      .finally(() => this.props.actions.loadStacksByCategory(this.props.projectKey.value, this.props.containerType));
   }
 
   getLogs = stack => this.props.actions.openModalDialog(MODAL_TYPE_LOGS, {

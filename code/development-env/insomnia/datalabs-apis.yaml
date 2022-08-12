@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-02T11:06:07.463Z
-__export_source: insomnia.desktop.app:v2021.6.0
+__export_date: 2022-08-25T14:17:06.487Z
+__export_source: insomnia.desktop.app:v2022.5.1
 resources:
   - _id: req_096786f5e88746f8b2d4eabe27e09694
     parentId: fld_aedf6e0439314b319e879aec69a4f251
-    modified: 1635842058821
+    modified: 1661436700052
     created: 1567085050735
     url: "{{ auth_url  }}/authorise"
     name: Internal Authorise
@@ -1198,8 +1198,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"mutation {\n  updateStack(stack: { \n    projectKey: \"project\",
-        \n    name: \"jupyter\",\n    assetIds:
+      text: '{"query":"mutation {\n  updateStack(stack: { \n    projectKey:
+        \"project\", \n    name: \"jupyter\",\n    assetIds:
         [\"85e76212-319d-4d62-b1a1-2e4a6091fe64\"]\n  })
         {\n    id\n    name\n    description\n    assets
         {\n      assetId\n      name      \n    }\n  }\n} "}'
@@ -2207,7 +2207,7 @@ resources:
     _type: request_group
   - _id: req_8fa42e7ccf224c929e99fffc3a5777fe
     parentId: fld_541180f583704c469aaea72ca36c35be
-    modified: 1601542444187
+    modified: 1661436703301
     created: 1601542322175
     url: "{{ infra_api_url  }}/stacks/"
     name: Get Stacks
@@ -2238,9 +2238,32 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1569236392035.875
     _type: request_group
+  - _id: req_f732df797edb40a3af075f848e303377
+    parentId: fld_541180f583704c469aaea72ca36c35be
+    modified: 1661437005331
+    created: 1661436556765
+    url: "{{ infra_api_url  }}/stack/project/name/jupyter/access"
+    name: Update Access Time
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      token: "{{ internal_token  }}"
+      type: bearer
+    metaSortKey: -1568712933600.5312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_09e96586d8a54b6dbdaee3c86aef15bb
     parentId: fld_541180f583704c469aaea72ca36c35be
-    modified: 1601542792099
+    modified: 1661436560747
     created: 1601542494672
     url: "{{ infra_api_url  }}/stack/project/name/jupyter"
     name: Get Stack by Stack Name
@@ -2263,7 +2286,7 @@ resources:
     _type: request
   - _id: req_3d02cb70952b4c55a061a905edf1a5c6
     parentId: fld_541180f583704c469aaea72ca36c35be
-    modified: 1614694607875
+    modified: 1661436536061
     created: 1568734025772
     url: "{{ infra_api_url  }}/stacks/asdf/isUnique"
     name: Name is Unique
@@ -2541,15 +2564,15 @@ resources:
     _type: request_group
   - _id: env_2014cd721e3244c198b46a159e1352b9
     parentId: wrk_19ed8d51a0ec4d659f9962bcf31a741b
-    modified: 1568395956241
+    modified: 1661437004784
     created: 1519239116902
     name: New Environment
     data:
-      access_token: setup private sub environment
       auth_url: http://localhost:9000
       client_api_url: http://localhost:8000
       infra_api_url: http://localhost:8003
-      internal_token: setup private sub environment
+      access_token: access_token here
+      internal_token: internal_token here
     dataPropertyOrder:
       "&":
         - auth_url

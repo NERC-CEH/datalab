@@ -1,0 +1,30 @@
+version: "3.7"
+
+x-common-variables: &common
+  AUTHORISATION_SERVICE: http://datalab-auth:9000
+  AUTH_SIGNIN_URL: http://datalabs.localhost
+  AUTHORISATION_SERVICE_FOR_INGRESS: ${AUTHORISATION_SERVICE_FOR_INGRESS:-http://10.0.2.2:9000}
+  DATABASE_HOST: mongodb
+  INFRASTRUCTURE_API: http://datalab-infra:8003
+  KUBERNETES_API: http://host.docker.internal:8001
+  LOG_LEVEL: ${LOG_LEVEL:-info}
+  NODE_OPTIONS: "--max-http-header-size=81920"
+  DEPLOYED_IN_CLUSTER: "false"
+  NODE_EXTRA_CA_CERTS: /usr/src/rootCA.pem
+  DATALAB_DOMAIN: ${DATALAB_DOMAIN:-datalabs.internal}
+
+services:
+  datalab-infra:
+    image: node:lts
+    working_dir: /usr/src/app/workspaces/infrastructure-api
+    command: ["sh", "-c", "yarn expireNotebooks"]
+    environment:
+      <<: *common
+      BABEL_DISABLE_CACHE: 1
+    ports:
+      - 8003:8003
+    volumes:
+      - $PWD/..:/usr/src/app/:ro
+      - $PWD/config/local/image_config.json:/usr/src/app/workspaces/common/src/config/image_config.json:ro
+      - $PWD/config/local/storage_config.json:/usr/src/app/workspaces/common/src/config/storage_config.json:ro
+      - ${PWD}/config/ca/rootCA.pem:/usr/src/rootCA.pem

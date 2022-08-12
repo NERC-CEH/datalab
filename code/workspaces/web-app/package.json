@@ -67,6 +67,12 @@
     "lint": "../../node_modules/.bin/eslint ./src",
     "lint-fix": "../../node_modules/.bin/eslint ./src --fix"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": ["node_modules/(?!react-markdown)/"]
+  },
   "browserslist": {
     "production": [
       ">1%",

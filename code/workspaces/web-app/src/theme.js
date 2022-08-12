@@ -24,6 +24,8 @@ const textLight = 'hsl(0, 0%, 40%)';
 const message = 'rgba(64, 64, 191, 1.0)';
 const messageBackground = 'rgba(189, 221, 255, 0.5)';
 
+const warningBackground = '#FDF0E6';
+
 // Lengths
 const spacing = 5;
 const navBarHeight = 8 * spacing;
@@ -46,6 +48,7 @@ const theme = createMuiTheme({
     highlightMonoTransparent,
     message,
     messageBackground,
+    warningBackground,
   },
   typography: {
     color: text,

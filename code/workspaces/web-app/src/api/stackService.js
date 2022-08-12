@@ -17,7 +17,7 @@ function loadStacksByCategory(projectKey, category) {
   const query = `
     GetStacksByCategory($params: StacksByCategoryRequest) {
       stacksByCategory(params: $params) {
-        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }
+        id, projectKey, displayName, name, users, type, category, description, status, shared, visible, version, assets { assetId, name, version, fileLocation }, accessTime
       }
     }`;
 

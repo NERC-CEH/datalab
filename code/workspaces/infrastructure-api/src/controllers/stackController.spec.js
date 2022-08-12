@@ -24,6 +24,8 @@ const getOneByIdMock = jest.fn().mockResolvedValue('expectedPayload');
 const getOneByNameMock = jest.fn().mockResolvedValue('expectedPayload');
 const userCanDeleteStackMock = jest.fn().mockResolvedValue(true);
 const userCanRestartStackMock = jest.fn().mockResolvedValue(true);
+const updateAccessTimeToNowMock = jest.fn().mockResolvedValue('expectedPayload');
+const resetAccessTimeMock = jest.fn().mockResolvedValue('expectedPayload');
 
 stackManager.createStack = createStackMock;
 stackManager.deleteStack = deleteStackMock;
@@ -35,6 +37,8 @@ stackRepository.default = {
   userCanRestartStack: userCanRestartStackMock,
   updateShareStatus: updateShareStatusMock,
   update: updateMock,
+  updateAccessTimeToNow: updateAccessTimeToNowMock,
+  resetAccessTime: resetAccessTimeMock,
 };
 
 let request;
@@ -431,6 +435,9 @@ describe('Stack Controller', () => {
 
       response = httpMocks.createResponse();
     });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
     describe('down', () => {
       it('should process a valid request', async () => {
@@ -458,6 +465,14 @@ describe('Stack Controller', () => {
         expect(response.statusCode).toEqual(500);
         expect(response._getData()).toEqual({ error: 'User cannot scale down stack.', message: 'Error scaling down stack: notebookId' }); // eslint-disable-line no-underscore-dangle
       });
+
+      it('should reset the accessTime if scaled down', async () => {
+        stackManager.scaleDownStack.mockResolvedValue('success');
+
+        await stackController.scaleDownStack(request, response);
+
+        expect(resetAccessTimeMock).toHaveBeenCalled();
+      });
     });
 
     describe('up', () => {
@@ -478,13 +493,21 @@ describe('Stack Controller', () => {
         expect(response._getData()).toEqual({ error: 'error', message: 'Error scaling up stack: notebookId' }); // eslint-disable-line no-underscore-dangle
       });
 
-      it('should return 500 if user not allowed to scale down stack', async () => {
+      it('should return 500 if user not allowed to scale up stack', async () => {
         userCanRestartStackMock.mockResolvedValueOnce(false);
 
         await stackController.scaleUpStack(request, response);
 
         expect(response.statusCode).toEqual(500);
         expect(response._getData()).toEqual({ error: 'User cannot scale up stack.', message: 'Error scaling up stack: notebookId' }); // eslint-disable-line no-underscore-dangle
+      });
+
+      it('should set the accessTime if scaled up', async () => {
+        stackManager.scaleUpStack.mockResolvedValue('success');
+
+        await stackController.scaleUpStack(request, response);
+
+        expect(updateAccessTimeToNowMock).toHaveBeenCalled();
       });
     });
   });
@@ -545,6 +568,31 @@ describe('Stack Controller', () => {
         .then(() => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error matching Name for stack' }); // eslint-disable-line no-underscore-dangle
+        });
+    });
+  });
+
+  describe('updateAccessTime', () => {
+    beforeEach(() => {
+      request = { projectKey: 'projectKey', name: 'name' };
+    });
+    it('should process a valid request', () => {
+      const response = httpMocks.createResponse();
+
+      return stackController.updateAccessTime(request, response)
+        .catch(() => {
+          expect(response.statusCode).toBe(204);
+        });
+    });
+
+    it('should return 500 for failed request', () => {
+      updateAccessTimeToNowMock.mockReturnValue(Promise.reject({ message: 'error' }));
+
+      const response = httpMocks.createResponse();
+
+      return stackController.updateAccessTime(request, response)
+        .then(() => {
+          expect(response.statusCode).toBe(500);
         });
     });
   });

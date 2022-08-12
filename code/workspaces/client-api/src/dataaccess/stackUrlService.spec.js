@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import logger from 'winston';
 import rstudioTokenService from './login/rstudioTokenService';
 import stackUrlService from './stackUrlService';
+import stackService from './stackService';
 import secrets from './secrets/secrets';
 
 const mock = new MockAdapter(axios);
@@ -11,7 +12,8 @@ jest.mock('winston');
 
 const getStackSecretsMock = jest.fn();
 secrets.getStackSecret = getStackSecretsMock;
-
+const updateAccessTimeMock = jest.fn();
+stackService.updateAccessTime = updateAccessTimeMock;
 const rstudioTokenServiceMock = jest.fn();
 rstudioTokenService.rstudioLogin = rstudioTokenServiceMock;
 
@@ -171,6 +173,21 @@ describe('stackUrlService', () => {
 
       return stackUrlService(projectKey, notebook)
         .then(url => expect(url).toEqual(notebook.url));
+    });
+  });
+
+  describe('Logging accessTime for all types', () => {
+    it('returns url for unspecified type with example accessTime', () => {
+      const notebook = {
+        name: 'Unknown',
+        type: 'unknown',
+        url: 'http://unknown.datalab',
+        internalEndpoint: 'http://unknown',
+        accessTime: '1660566084869',
+      };
+
+      stackUrlService(projectKey, notebook);
+      expect(updateAccessTimeMock).toHaveBeenCalled();
     });
   });
 });

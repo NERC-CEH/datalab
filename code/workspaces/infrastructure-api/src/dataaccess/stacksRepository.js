@@ -199,6 +199,20 @@ function update(projectKey, user, name, updatedValues) {
     .exec();
 }
 
+async function updateAccessTimeToNow(projectKey, name) {
+  const stack = await Stack()
+    .findOneAndUpdate({ projectKey, name }, { accessTime: new Date().getTime() }, { upsert: true })
+    .exec();
+  return stack;
+}
+
+async function resetAccessTime(projectKey, name) {
+  const stack = await Stack()
+    .findOneAndUpdate({ projectKey, name }, { accessTime: '' }, { upsert: true })
+    .exec();
+  return stack;
+}
+
 export default {
   getAllByUser,
   getAllStacks,
@@ -216,6 +230,8 @@ export default {
   deleteStack,
   userCanDeleteStack,
   userCanRestartStack,
+  updateAccessTimeToNow,
+  resetAccessTime,
   updateStatus,
   updateAssets,
   update,
