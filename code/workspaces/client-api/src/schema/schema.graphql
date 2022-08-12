@@ -210,6 +210,7 @@ type Stack {
     visible: VisibilityType
     version: String
     assets: [CentralAssetMetadata]
+    lastAccessTime: String
 }
 
 input StacksByCategoryRequest {

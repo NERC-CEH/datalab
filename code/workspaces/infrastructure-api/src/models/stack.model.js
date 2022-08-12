@@ -26,6 +26,7 @@ const StackSchema = new Schema({
   assetIds: { type: [String], default: () => [] },
   condaPath: String,
   filename: String,
+  lastAccessTime: String,
 });
 
 StackSchema.query.filterByProject = byProjectKey.filterFind;

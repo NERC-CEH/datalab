@@ -9,6 +9,7 @@ const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
 const RSTUDIO_USERNAME = 'datalab';
 
 export default function notebookUrlService(projectKey, notebook, userToken) {
+  logAccessRequest(notebook);
   if (notebook.type === ZEPPELIN) {
     return requestZeppelinToken(projectKey, notebook, userToken)
       .then(createZeppelinUrl(notebook));
@@ -63,3 +64,6 @@ function requestRStudioToken(projectKey, stack, userToken) {
     });
 }
 
+async function logAccessRequest(stack) {
+  logger.info(`User attempted to access ${JSON.stringify(stack)}`);
+}
