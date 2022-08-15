@@ -551,30 +551,25 @@ describe('Stack Controller', () => {
     });
   });
 
-  describe('stackAccessTime', () => {
-    beforeEach(() => createValidatedRequest(
-      { name: 'expectedName', projectKey: 'expectedProject' },
-      stackController.withNameValidator,
-    ));
+  describe('updateAccessTime', () => {
+    beforeEach(() => {
+      request = { projectKey: 'projectKey', name: 'name' };
+    });
     it('should process a valid request', () => {
-      const projectKey = 'projectKey';
-      const name = 'name';
       const response = httpMocks.createResponse();
 
-      return stackController.stackAccessTime(projectKey, name)
+      return stackController.updateAccessTime(request, response)
         .catch(() => {
           expect(response.statusCode).toBe(204);
         });
     });
 
     it('should return 500 for failed request', () => {
-      const projectKey = 'projectKey';
-      const name = 'name';
       updateAccessTimeToNowMock.mockReturnValue(Promise.reject({ message: 'error' }));
 
       const response = httpMocks.createResponse();
 
-      return stackController.stackUpdateAccessTime(projectKey, name)
+      return stackController.updateAccessTime(request, response)
         .then(() => {
           expect(response.statusCode).toBe(500);
         });

@@ -16,6 +16,7 @@ Array [
     "project",
     "username",
     Object {
+      "accessTime": 1660578569705,
       "another": "field",
       "category": "ANALYSIS",
       "internalEndpoint": "http://jupyter-expectedName.project",
