@@ -53,9 +53,9 @@ function getOneByName(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByNameExec);
 }
 
-function stackAccessRequest(request, response) {
+function stackUpdateAccessTime(request, response) {
   const errorMessage = 'Invalid stack creation request';
-  return controllerHelper.validateAndExecute(request, response, errorMessage, stackAccessRequestExec);
+  return controllerHelper.validateAndExecute(request, response, errorMessage, stackUpdateAccessTimeExec);
 }
 
 function getOneByIdExec(request, response) {
@@ -227,11 +227,11 @@ async function updateLinkedAssets({ assetIds }, response) {
   }
 }
 
-async function stackAccessRequestExec(request, response) {
+async function stackUpdateAccessTimeExec(request, response) {
   const params = matchedData(request);
 
   try {
-    const stack = await stackRepository.updateLastAccessTimeToNow(params.projectKey, params.name);
+    const stack = await stackRepository.updateAccessTimeToNow(params.projectKey, params.name);
     response.send(stack);
   } catch (error) {
     controllerHelper.handleError(response, 'matching Name for', TYPE, undefined);
@@ -336,6 +336,6 @@ const validators = {
   scaleStackValidator,
 };
 
-const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack, scaleDownStack, scaleUpStack, stackAccessRequest };
+const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack, scaleDownStack, scaleUpStack, stackUpdateAccessTime };
 
 export default { ...validators, ...controllers };

@@ -24,6 +24,7 @@ const getOneByIdMock = jest.fn().mockResolvedValue('expectedPayload');
 const getOneByNameMock = jest.fn().mockResolvedValue('expectedPayload');
 const userCanDeleteStackMock = jest.fn().mockResolvedValue(true);
 const userCanRestartStackMock = jest.fn().mockResolvedValue(true);
+const updateAccessTimeToNowMock = jest.fn().mockResolvedValue('expectedPayload');
 
 stackManager.createStack = createStackMock;
 stackManager.deleteStack = deleteStackMock;
@@ -35,6 +36,7 @@ stackRepository.default = {
   userCanRestartStack: userCanRestartStackMock,
   updateShareStatus: updateShareStatusMock,
   update: updateMock,
+  updateAccessTimeToNow: updateAccessTimeToNowMock,
 };
 
 let request;
@@ -545,6 +547,36 @@ describe('Stack Controller', () => {
         .then(() => {
           expect(response.statusCode).toBe(500);
           expect(response._getData()).toEqual({ error: 'error', message: 'Error matching Name for stack' }); // eslint-disable-line no-underscore-dangle
+        });
+    });
+  });
+
+  describe('stackAccessTime', () => {
+    beforeEach(() => createValidatedRequest(
+      { name: 'expectedName', projectKey: 'expectedProject' },
+      stackController.withNameValidator,
+    ));
+    it('should process a valid request', () => {
+      const projectKey = 'projectKey';
+      const name = 'name';
+      const response = httpMocks.createResponse();
+
+      return stackController.stackAccessTime(projectKey, name)
+        .catch(() => {
+          expect(response.statusCode).toBe(204);
+        });
+    });
+
+    it('should return 500 for failed request', () => {
+      const projectKey = 'projectKey';
+      const name = 'name';
+      updateAccessTimeToNowMock.mockReturnValue(Promise.reject({ message: 'error' }));
+
+      const response = httpMocks.createResponse();
+
+      return stackController.stackUpdateAccessTime(projectKey, name)
+        .then(() => {
+          expect(response.statusCode).toBe(500);
         });
     });
   });

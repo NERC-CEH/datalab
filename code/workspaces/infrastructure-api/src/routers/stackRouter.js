@@ -26,7 +26,7 @@ stackRouter.get(
   '/:projectKey/name/:name/access',
   permissionMiddleware(PROJECT_KEY_STACKS_OPEN),
   stack.withNameValidator,
-  ew(stack.stackAccessRequest),
+  ew(stack.stackUpdateAccessTime),
 );
 stackRouter.get(
   '/:projectKey/name/:name',

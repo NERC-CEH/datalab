@@ -36,6 +36,7 @@ async function createStack(user, params) {
       category: imageCategory(type),
       status: status.REQUESTED,
       url: stackUrl,
+      accessTime: Date.now(),
       internalEndpoint: `http://${params.type}-${name}.${projectKey}`,
     },
   );
