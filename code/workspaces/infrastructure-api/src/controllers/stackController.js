@@ -231,8 +231,8 @@ async function updateAccessTimeExec(request, response) {
   const params = matchedData(request);
 
   try {
-    const stack = await stackRepository.updateAccessTimeToNow(params.projectKey, params.name);
-    response.send(stack);
+    await stackRepository.updateAccessTimeToNow(params.projectKey, params.name);
+    controllerHelper.sendSuccessfulAccessTimeUpdate(response);
   } catch (error) {
     controllerHelper.handleError(response, 'matching Name for', TYPE, undefined)(error);
   }

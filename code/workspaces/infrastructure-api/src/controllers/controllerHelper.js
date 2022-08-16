@@ -34,6 +34,11 @@ const sendSuccessfulScale = (response) => {
   response.send({ message: 'OK' });
 };
 
+const sendSuccessfulAccessTimeUpdate = (response) => {
+  response.status(200);
+  response.send({ message: 'OK' });
+};
+
 const handleError = (response, action, type, name) => (error) => {
   const message = name ? `Error ${action} ${type}: ${name}` : `Error ${action} ${type}`;
   logger.error(error);
@@ -44,4 +49,4 @@ const handleError = (response, action, type, name) => (error) => {
   });
 };
 
-export default { validateAndExecute, sendSuccessfulCreation, sendSuccessfulDeletion, sendSuccessfulRestart, sendSuccessfulScale, handleError };
+export default { validateAndExecute, sendSuccessfulCreation, sendSuccessfulDeletion, sendSuccessfulRestart, sendSuccessfulScale, sendSuccessfulAccessTimeUpdate, handleError };
