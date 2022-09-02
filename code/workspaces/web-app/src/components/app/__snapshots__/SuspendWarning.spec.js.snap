@@ -22,6 +22,31 @@ exports[`SuspendWarning renders correct snapshot 1`] = `
         message
       </p>
     </div>
+    <div
+      class="SuspendWarning-info-4"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit"
+            href="http://localhost:undefined/howto/suspend-and-restart-resources"
+            style="text-decoration: none;"
+            target="_blank"
+          >
+            MORE
+          </a>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;

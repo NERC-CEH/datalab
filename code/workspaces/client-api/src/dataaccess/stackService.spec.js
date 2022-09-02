@@ -104,7 +104,7 @@ describe('stackService', () => {
   });
 
   it('updateAccessTime makes an api request', async () => {
-    httpMock.onGet('http://localhost:8003/stack/project/name/notebook/access').reply(200, responseMessage);
+    httpMock.onPut('http://localhost:8003/stack/project/name/notebook/access').reply(200, responseMessage);
 
     const response = await stackService.updateAccessTime('project', 'notebook', context.token);
     expect(response).toEqual(responseMessage);

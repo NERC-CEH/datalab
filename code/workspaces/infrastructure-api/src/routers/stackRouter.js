@@ -22,7 +22,7 @@ stackRouter.get(
   stack.withIdValidator,
   ew(stack.getOneById),
 );
-stackRouter.get(
+stackRouter.put(
   '/:projectKey/name/:name/access',
   permissionMiddleware(PROJECT_KEY_STACKS_OPEN),
   stack.withNameValidator,

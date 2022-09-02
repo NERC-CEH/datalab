@@ -60,7 +60,7 @@ const scaleDownStack = async (projectKey, stack, { token }) => {
 };
 
 async function updateAccessTime(projectKey, name, token) {
-  const response = await axios.get(`${API_URL_BASE}/stack/${projectKey}/name/${name}/access`, generateOptions(token));
+  const response = await axios.put(`${API_URL_BASE}/stack/${projectKey}/name/${name}/access`, name, generateOptions(token));
   return response.data;
 }
 
