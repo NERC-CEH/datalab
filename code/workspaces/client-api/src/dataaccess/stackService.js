@@ -59,6 +59,11 @@ const scaleDownStack = async (projectKey, stack, { token }) => {
   return response.data;
 };
 
+async function updateAccessTime(projectKey, name, token) {
+  const response = await axios.put(`${API_URL_BASE}/stack/${projectKey}/name/${name}/access`, name, generateOptions(token));
+  return response.data;
+}
+
 const generateOptions = (token, data) => ({
   headers: {
     authorization: token,
@@ -66,4 +71,4 @@ const generateOptions = (token, data) => ({
   data,
 });
 
-export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack, updateStack, restartStack, scaleUpStack, scaleDownStack };
+export default { getAll, getAllByCategory, getAllByVolumeMount, getById, getByName, createStack, deleteStack, updateStack, restartStack, scaleUpStack, scaleDownStack, updateAccessTime };

@@ -53,6 +53,11 @@ function getOneByName(request, response) {
   return controllerHelper.validateAndExecute(request, response, errorMessage, getOneByNameExec);
 }
 
+function updateAccessTime(request, response) {
+  const errorMessage = 'Invalid request to update access time';
+  return controllerHelper.validateAndExecute(request, response, errorMessage, updateAccessTimeExec);
+}
+
 function getOneByIdExec(request, response) {
   // Build request params
   const { user } = request;
@@ -166,6 +171,7 @@ const scaleDownStackExec = async (req, res) => {
       throw new Error('User cannot scale down stack.');
     }
     await stackManager.scaleDownStack(params);
+    await stackRepository.resetAccessTime(projectKey, name);
     controllerHelper.sendSuccessfulScale(res);
   } catch (error) {
     controllerHelper.handleError(res, 'scaling down', TYPE, params.name)(error);
@@ -185,6 +191,7 @@ const scaleUpStackExec = async (req, res) => {
       throw new Error('User cannot scale up stack.');
     }
     await stackManager.scaleUpStack(params);
+    await stackRepository.updateAccessTimeToNow(projectKey, name);
     controllerHelper.sendSuccessfulScale(res);
   } catch (error) {
     controllerHelper.handleError(res, 'scaling up', TYPE, params.name)(error);
@@ -219,6 +226,17 @@ async function updateLinkedAssets({ assetIds }, response) {
     await centralAssetRepoRepository.setLastAddedDateToNow(assetIds);
   } catch (error) {
     controllerHelper.handleError(response, 'updating', centralAssetRepoRepository.TYPE, assetIds)(error);
+  }
+}
+
+async function updateAccessTimeExec(request, response) {
+  const params = matchedData(request);
+
+  try {
+    await stackRepository.updateAccessTimeToNow(params.projectKey, params.name);
+    controllerHelper.sendSuccessfulAccessTimeUpdate(response);
+  } catch (error) {
+    controllerHelper.handleError(response, 'matching Name for', TYPE, undefined)(error);
   }
 }
 
@@ -320,6 +338,6 @@ const validators = {
   scaleStackValidator,
 };
 
-const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack, scaleDownStack, scaleUpStack };
+const controllers = { getOneById, getOneByName, createStack, restartStack, deleteStack, updateStack, scaleDownStack, scaleUpStack, updateAccessTime };
 
 export default { ...validators, ...controllers };

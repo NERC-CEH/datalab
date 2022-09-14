@@ -3,12 +3,14 @@ import { stackTypes } from 'common';
 import rstudioTokenService from './login/rstudioTokenService';
 import zeppelinLogin from './login/zeppelinLogin';
 import secrets from './secrets/secrets';
+import stackService from './stackService';
 
 // NOTE: All other stack details should come from 'common/src/config/images'
 const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
 const RSTUDIO_USERNAME = 'datalab';
 
 export default function notebookUrlService(projectKey, notebook, userToken) {
+  updateAccessTime(projectKey, notebook.name, userToken);
   if (notebook.type === ZEPPELIN) {
     return requestZeppelinToken(projectKey, notebook, userToken)
       .then(createZeppelinUrl(notebook));
@@ -63,3 +65,12 @@ function requestRStudioToken(projectKey, stack, userToken) {
     });
 }
 
+async function updateAccessTime(projectKey, name, userToken) {
+  logger.info(`Updating access time for: Project: ${projectKey}, Notebook: ${name}`);
+  try {
+    await stackService.updateAccessTime(projectKey, name, userToken);
+  } catch (error) {
+    logger.error(error);
+  }
+  return true;
+}

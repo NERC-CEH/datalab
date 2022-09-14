@@ -1,3 +1,7 @@
 {
-  "requestProjects": false
+  "requestProjects": false,
+  "expireUnusedNotebooks": {
+    "accessTimeWarning": 14,
+    "accessTimeLimit": 31
+  }
 }

@@ -2,44 +2,46 @@
 
 exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
 <div>
-  <div
-    class="StackCard-cardDiv-1"
-  >
+  <div>
     <div
-      class="StackCard-imageDiv-2"
-    >
-      <img
-        alt="jupyter logo"
-        class="StackCard-cardImage-8"
-        src="jupyter-logo.svg"
-      />
-    </div>
-    <div
-      class="StackCard-textDiv-3"
+      class="StackCard-cardDiv-1"
     >
       <div
-        class="StackCard-displayNameContainer-5"
+        class="StackCard-imageDiv-2"
       >
-        <h5
-          class="MuiTypography-root StackCard-displayName-4 MuiTypography-h5 MuiTypography-noWrap"
-        >
-          name1
-        </h5>
+        <img
+          alt="jupyter logo"
+          class="StackCard-cardImage-8"
+          src="jupyter-logo.svg"
+        />
       </div>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+      <div
+        class="StackCard-textDiv-3"
       >
-        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-      </p>
-    </div>
-    <div
-      class="StackCard-actionsDiv-6"
-    >
-      <div>
-        StackCardActions mock 
-        {"stack":{"id":"100","displayName":"name1","type":"jupyter","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-         
+        <div
+          class="StackCard-displayNameContainer-5"
+        >
+          <h5
+            class="MuiTypography-root StackCard-displayName-4 MuiTypography-h5 MuiTypography-noWrap"
+          >
+            name1
+          </h5>
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+          title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        >
+          Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+        </p>
+      </div>
+      <div
+        class="StackCard-actionsDiv-6"
+      >
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"jupyter","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
       </div>
     </div>
   </div>
@@ -48,44 +50,46 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
 
 exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 <div>
-  <div
-    class="StackCard-cardDiv-53"
-  >
+  <div>
     <div
-      class="StackCard-imageDiv-54"
-    >
-      <img
-        alt="zeppelin logo"
-        class="StackCard-cardImage-60"
-        src="zeppelin-logo.svg"
-      />
-    </div>
-    <div
-      class="StackCard-textDiv-55"
+      class="StackCard-cardDiv-53"
     >
       <div
-        class="StackCard-displayNameContainer-57"
+        class="StackCard-imageDiv-54"
       >
-        <h5
-          class="MuiTypography-root StackCard-displayName-56 MuiTypography-h5 MuiTypography-noWrap"
-        >
-          name1
-        </h5>
+        <img
+          alt="zeppelin logo"
+          class="StackCard-cardImage-60"
+          src="zeppelin-logo.svg"
+        />
       </div>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+      <div
+        class="StackCard-textDiv-55"
       >
-        Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
-      </p>
-    </div>
-    <div
-      class="StackCard-actionsDiv-58"
-    >
-      <div>
-        StackCardActions mock 
-        {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-         
+        <div
+          class="StackCard-displayNameContainer-57"
+        >
+          <h5
+            class="MuiTypography-root StackCard-displayName-56 MuiTypography-h5 MuiTypography-noWrap"
+          >
+            name1
+          </h5>
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+          title="Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more."
+        >
+          Web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
+        </p>
+      </div>
+      <div
+        class="StackCard-actionsDiv-58"
+      >
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
       </div>
     </div>
   </div>
@@ -94,52 +98,54 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
 
 exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
 <div>
-  <div
-    class="StackCard-cardDiv-105"
-  >
+  <div>
     <div
-      class="StackCard-imageDiv-106"
-    >
-      <span
-        aria-hidden="true"
-        class="material-icons MuiIcon-root StackCard-cardIcon-113"
-      >
-        save
-      </span>
-    </div>
-    <div
-      class="StackCard-textDiv-107"
+      class="StackCard-cardDiv-105"
     >
       <div
-        class="StackCard-displayNameContainer-109"
+        class="StackCard-imageDiv-106"
       >
-        <h5
-          class="MuiTypography-root StackCard-displayName-108 MuiTypography-h5 MuiTypography-noWrap"
-        >
-          name1
-        </h5>
         <span
-          class=" makeStyles-root-155"
+          aria-hidden="true"
+          class="material-icons MuiIcon-root StackCard-cardIcon-113"
         >
-          (
-          NFS
-          )
+          save
         </span>
       </div>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Network File System (NFS) volume to store data for Notebooks and Sites."
+      <div
+        class="StackCard-textDiv-107"
       >
-        Network File System (NFS) volume to store data for Notebooks and Sites.
-      </p>
-    </div>
-    <div
-      class="StackCard-actionsDiv-110"
-    >
-      <div>
-        StackCardActions mock 
-        {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-         
+        <div
+          class="StackCard-displayNameContainer-109"
+        >
+          <h5
+            class="MuiTypography-root StackCard-displayName-108 MuiTypography-h5 MuiTypography-noWrap"
+          >
+            name1
+          </h5>
+          <span
+            class=" makeStyles-root-155"
+          >
+            (
+            NFS
+            )
+          </span>
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+          title="Network File System (NFS) volume to store data for Notebooks and Sites."
+        >
+          Network File System (NFS) volume to store data for Notebooks and Sites.
+        </p>
+      </div>
+      <div
+        class="StackCard-actionsDiv-110"
+      >
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
       </div>
     </div>
   </div>
@@ -148,52 +154,54 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
 
 exports[`StackCard should show status ad buttons when status is ready 1`] = `
 <div>
-  <div
-    class="StackCard-cardDiv-167"
-  >
+  <div>
     <div
-      class="StackCard-imageDiv-168"
-    >
-      <img
-        alt="jupyter logo"
-        class="StackCard-cardImage-174"
-        src="jupyter-logo.svg"
-      />
-    </div>
-    <div
-      class="StackCard-textDiv-169"
+      class="StackCard-cardDiv-167"
     >
       <div
-        class="StackCard-displayNameContainer-171"
+        class="StackCard-imageDiv-168"
       >
-        <h5
-          class="MuiTypography-root StackCard-displayName-170 MuiTypography-h5 MuiTypography-noWrap"
+        <img
+          alt="jupyter logo"
+          class="StackCard-cardImage-174"
+          src="jupyter-logo.svg"
+        />
+      </div>
+      <div
+        class="StackCard-textDiv-169"
+      >
+        <div
+          class="StackCard-displayNameContainer-171"
         >
-          name1
-        </h5>
-      </div>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-        title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
-      >
-        Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-      </p>
-    </div>
-    <div
-      class="StackCard-actionsDiv-172"
-    >
-      <div
-        class="StackCard-statusDiv-173"
-      >
-        <div>
-          StackStatus mock 
-          {"status":"ready"}
+          <h5
+            class="MuiTypography-root StackCard-displayName-170 MuiTypography-h5 MuiTypography-noWrap"
+          >
+            name1
+          </h5>
         </div>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+          title="Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text."
+        >
+          Web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+        </p>
       </div>
-      <div>
-        StackCardActions mock 
-        {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-         
+      <div
+        class="StackCard-actionsDiv-172"
+      >
+        <div
+          class="StackCard-statusDiv-173"
+        >
+          <div>
+            StackStatus mock 
+            {"status":"ready"}
+          </div>
+        </div>
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
       </div>
     </div>
   </div>

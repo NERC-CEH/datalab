@@ -7,7 +7,7 @@ const API_BASE = config.get('kubernetesApi');
 
 const getIngressUrl = (namespace, name) => {
   const nameComponent = name ? `/${name}` : '';
-  return `${API_BASE}/apis/networking.k8s.io/v1beta1/namespaces/${namespace}/ingresses${nameComponent}`;
+  return `${API_BASE}/apis/networking.k8s.io/v1/namespaces/${namespace}/ingresses${nameComponent}`;
 };
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };

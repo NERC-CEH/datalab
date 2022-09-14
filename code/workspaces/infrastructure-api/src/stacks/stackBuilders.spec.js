@@ -66,7 +66,7 @@ data:
       const val = await createIngressRule({ name, projectKey, type: stackTypes.RSTUDIO, rewriteTarget, pathPattern }, ingressGenerator.createIngress)(service);
       expect(val).toEqual(service);
       expect(ingressApi.createOrUpdateIngress).toBeCalledWith('rstudio-name', 'projectKey', `---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rstudio-name
@@ -84,9 +84,12 @@ spec:
     http:
       paths:
       - path: /resource/projectKey/name(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
-          serviceName: service-name
-          servicePort: 80
+          service:
+            name: service-name
+            port:
+              number: 80
 `);
     });
   });
@@ -96,7 +99,7 @@ spec:
       const val = await createConnectIngressRule({ name, projectKey, type: stackTypes.RSTUDIO, pathPattern }, ingressGenerator.createIngress)(service);
       expect(val).toEqual(service);
       expect(ingressApi.createOrUpdateIngress).toBeCalledWith('rstudio-name-connect', 'projectKey', `---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rstudio-name-connect
@@ -113,9 +116,12 @@ spec:
     http:
       paths:
       - path: /resource/projectKey/name/connect(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
-          serviceName: service-name
-          servicePort: 8000
+          service:
+            name: service-name
+            port:
+              number: 8000
 `);
     });
   });
@@ -125,7 +131,7 @@ spec:
       const val = await createIngressRuleWithConnect({ name, projectKey, type: 'minio', rewriteTarget: '/' }, ingressGenerator.createIngress)(service);
       expect(val).toEqual(service);
       expect(ingressApi.createOrUpdateIngress).toBeCalledWith('minio-name', 'projectKey', `---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minio-name
@@ -143,13 +149,19 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: service-name
-          servicePort: 80
+          service:
+            name: service-name
+            port:
+              number: 80
       - path: /connect
+        pathType: ImplementationSpecific
         backend:
-          serviceName: service-name
-          servicePort: 8000
+          service:
+            name: service-name
+            port:
+              number: 8000
 `);
     });
   });

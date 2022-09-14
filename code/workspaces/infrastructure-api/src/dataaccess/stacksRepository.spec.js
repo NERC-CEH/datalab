@@ -3,6 +3,10 @@ import database from '../config/database';
 import databaseMock from './testUtil/databaseMock';
 
 jest.mock('../config/database');
+jest.spyOn(Date, 'now').mockImplementation(() => new Date('2022-01-01').getTime());
+
+const mockDate = new Date('2022-01-01');
+jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
 
 const project = 'expectedProject';
 const user = {
@@ -118,6 +122,24 @@ describe('stacksRepository', () => {
     await stacksRepository.updateAssets('id', ['asset-id']);
     expect(mockDatabase().queries()).toContainEqual({ _id: 'id' });
     expect(mockDatabase().entity()).toEqual({ assetIds: ['asset-id'] });
+  });
+
+  it('updateAccessTimeToNow should update accessTime', async () => {
+    const name = 'stack';
+    const projectKey = 'projectKey';
+
+    await stacksRepository.updateAccessTimeToNow(projectKey, name);
+    expect(mockDatabase().query()).toEqual({ projectKey, name });
+    expect(mockDatabase().entity()).toEqual({ accessTime: new Date().getTime() });
+  });
+
+  it('resetAccessTime should update accessTime', async () => {
+    const name = 'stack';
+    const projectKey = 'projectKey';
+
+    await stacksRepository.resetAccessTime(projectKey, name);
+    expect(mockDatabase().query()).toEqual({ projectKey, name });
+    expect(mockDatabase().entity()).toEqual({ accessTime: '' });
   });
 
   describe('update', () => {

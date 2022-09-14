@@ -14,6 +14,8 @@ import { NOTEBOOK_TYPE_NAME } from '../../containers/notebooks/notebookTypeName'
 import { PROJECT_TYPE_NAME } from '../../containers/projects/projectTypeName';
 import { SITE_TYPE_NAME } from '../../containers/sites/siteTypeName';
 import { STORAGE_TYPE_NAME } from '../../containers/dataStorage/storageTypeName';
+import SuspendWarning from '../app/SuspendWarning';
+import { getFeatureFlags } from '../../config/featureFlags';
 
 function styles(theme) {
   return createStyles({
@@ -89,11 +91,33 @@ function styles(theme) {
   });
 }
 
+function daysSinceCreation(accessTime) {
+  const timeDiff = new Date().getTime() - accessTime;
+  return Math.ceil((timeDiff) / (1000 * 60 * 60 * 24));
+}
+
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, scaleStack, typeName,
   userPermissions, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets }) => {
   const users = useUsers();
   const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
   const description = getDescription(stack, typeName);
+  const expireStacks = getFeatureFlags().expireUnusedNotebooks;
+
+  const generateWarningMessage = () => {
+    if (expireStacks && stack.accessTime) {
+      const { accessTimeWarning } = expireStacks;
+      const daysSinceAccess = daysSinceCreation(stack.accessTime);
+      const warn = (daysSinceAccess > accessTimeWarning);
+
+      if (warn) {
+        return `This notebook has not been accessed for some time (${daysSinceAccess} days), please consider suspending
+          if not required. This warning will be dismissed if the notebook is opened.`;
+      }
+    }
+    return '';
+  };
+
+  const warningMessage = generateWarningMessage();
 
   const ResourceInfo = () => {
     if (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME) {
@@ -107,39 +131,42 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
   };
 
   return (
-    <div className={classes.cardDiv}>
-      <div className={classes.imageDiv}>
-        {generateGetImage(classes, typeName)(stack)}
-      </div>
-      <div className={classes.textDiv}>
-        <div className={classes.displayNameContainer}>
-          <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
-          <ResourceInfo/>
+    <div>
+      <div className={classes.cardDiv}>
+        <div className={classes.imageDiv}>
+          {generateGetImage(classes, typeName)(stack)}
         </div>
-        <Tooltip title={description} placement='bottom-start'>
-          <Typography variant="body1" noWrap>{description}</Typography>
-        </Tooltip>
-        {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
+        <div className={classes.textDiv}>
+          <div className={classes.displayNameContainer}>
+            <Typography variant="h5" className={classes.displayName} noWrap>{getDisplayName(stack)}</Typography>
+            <ResourceInfo/>
+          </div>
+          <Tooltip title={description} placement='bottom-start'>
+            <Typography variant="body1" noWrap>{description}</Typography>
+          </Tooltip>
+          {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
+        </div>
+        <div className={classes.actionsDiv}>
+          {typeName !== STORAGE_TYPE_NAME && typeName !== PROJECT_TYPE_NAME && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
+          <StackCardActions
+            stack={stack}
+            openStack={openStack}
+            deleteStack={deleteStack}
+            editStack={editStack}
+            restartStack={restartStack}
+            scaleStack={scaleStack}
+            getLogs={getLogs}
+            copySnippets={copySnippets}
+            userPermissions={userPermissions}
+            openPermission={openPermission}
+            deletePermission={deletePermission}
+            shareStack={shareStack}
+            editPermission={editPermission}
+            scalePermission={scalePermission}
+          />
+        </div>
       </div>
-      <div className={classes.actionsDiv}>
-        {typeName !== STORAGE_TYPE_NAME && typeName !== PROJECT_TYPE_NAME && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
-        <StackCardActions
-          stack={stack}
-          openStack={openStack}
-          deleteStack={deleteStack}
-          editStack={editStack}
-          restartStack={restartStack}
-          scaleStack={scaleStack}
-          getLogs={getLogs}
-          copySnippets={copySnippets}
-          userPermissions={userPermissions}
-          openPermission={openPermission}
-          deletePermission={deletePermission}
-          shareStack={shareStack}
-          editPermission={editPermission}
-          scalePermission={scalePermission}
-        />
-      </div>
+      {NOTEBOOK_TYPE_NAME === typeName && warningMessage && <SuspendWarning message={warningMessage} />}
     </div>
   );
 };
@@ -177,9 +204,9 @@ function getDisplayName(stack) {
 }
 
 const renderShareInfo = (typeName, stack) => stack.users
-    && stack.users.length !== 0
-    && (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME)
-    && (stack.shared === 'project' || stack.visible === 'project' || stack.visible === 'public');
+  && stack.users.length !== 0
+  && (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME)
+  && (stack.shared === 'project' || stack.visible === 'project' || stack.visible === 'public');
 
 function getUserEmail(stackUsers, userList, typeName) {
   const owner = userList.value.find(user => user.userId === stackUsers[0]);
