@@ -272,7 +272,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/notebooks/deployment-name\\"]
+          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/notebooks/deployment-name && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -396,7 +396,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/notebooks/deployment-name\\"]
+          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/notebooks/deployment-name && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -530,7 +530,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"chmod 777 /data/notebooks && chmod 777 /data/notebooks/rstudio-name\\"]
+          args: [\\"-c\\", \\"chmod 777 /data/notebooks && chmod 777 /data/notebooks/rstudio-name && ln -sfn /assets /data/notebooks/rstudio-name/assets\\"]
           volumeMounts:
             - mountPath: /data
               name: persistentfsvol
