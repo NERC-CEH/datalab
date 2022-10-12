@@ -33,7 +33,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chmod 777 /data/notebooks && chmod 777 /data/notebooks/{{ name }}"]
+          args: ["-c", "chmod 777 /data/notebooks && chmod 777 /data/notebooks/{{ name }} && ln -sfn /assets /data/notebooks/{{ name }}/assets"]
           volumeMounts:
             - mountPath: /data
               name: persistentfsvol
