@@ -41,9 +41,13 @@ If you have found an asset you would like to utilize. You can use it by either;
 
 ![asset repo attach](../../img/asset-repo-attach.png "asset repo attach")
 
-Once an asset is attached to a notebook, it will be accessible under the `/assets/` mount.
-One simple way to access this via the Jupyter or RStudio browser is to create a symbolic
-link so it appears in the file pane. This can be done using a terminal as so;
+Once an asset is attached to a notebook, it will be accessible under within the `assets`
+folder at the base of the notebook. By default this will be done for all newly created
+notebooks.
+
+Note when adding an asset to an older notebook prior to the release of the asset repo
+this can be replicated by creating a symbolic link yourself from the base of the notebook
+to the `/assets` folder as described below.
 
 ```bash
 cd <Base Directory>
