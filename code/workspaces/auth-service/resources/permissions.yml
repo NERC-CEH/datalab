@@ -67,6 +67,7 @@ projectRoles:
         - list
         - open
         - edit
+        - scale
     - name: storage
       permissions:
         - list
