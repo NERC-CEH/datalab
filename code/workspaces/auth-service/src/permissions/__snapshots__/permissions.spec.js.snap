@@ -34,6 +34,7 @@ Array [
   "projects:secondProjectKey:stacks:list",
   "projects:secondProjectKey:stacks:open",
   "projects:secondProjectKey:stacks:edit",
+  "projects:secondProjectKey:stacks:scale",
   "projects:secondProjectKey:storage:list",
   "projects:secondProjectKey:storage:open",
   "projects:secondProjectKey:clusters:list",
