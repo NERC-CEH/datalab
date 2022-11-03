@@ -19,7 +19,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
       class="HeroBar-buttons-4"
     >
       <button
-        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root HeroBar-button-5 css-1qiowgr-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium HeroBar-button-5 css-1qiowgr-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -29,7 +29,7 @@ exports[`HeroBar renders correct snapshot 1`] = `
         />
       </button>
       <button
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root HeroBar-button-5 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium HeroBar-button-5 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >

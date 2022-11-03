@@ -51,7 +51,7 @@ exports[`NavBar renders correct snapshot 1`] = `
         </li>
       </div>
       <button
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root PublicNavBarContent-login-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium PublicNavBarContent-login-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >

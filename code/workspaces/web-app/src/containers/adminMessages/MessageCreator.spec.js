@@ -1,6 +1,4 @@
 import React from 'react';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
 import { render, fireEvent, screen, configure } from '../../testUtils/renderTests';
 import MessageCreator from './MessageCreator';
 
@@ -16,9 +14,7 @@ describe('MessageCreator', () => {
   });
 
   const MessageCreatorWithProvider = () => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
-      <MessageCreator createMessage={createMessageFn}/>
-    </MuiPickersUtilsProvider>
+    <MessageCreator createMessage={createMessageFn}/>
   );
 
   it('renders correctly', () => {

@@ -6,16 +6,16 @@ exports[`UserResources renders to match snapshot passing correct props to childr
     class="makeStyles-container-1"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-9 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-9 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="false"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-11 MuiAccordionSummary-root MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-11 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-14 MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-14 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <div
             class="makeStyles-summary-4"
@@ -63,7 +63,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-15 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-15 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-resources-2"
@@ -79,7 +79,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-instanceAdmin"
-                      class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root Mui-checked css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""
@@ -111,7 +111,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-dataManager"
-                      class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root Mui-checked css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""
@@ -140,13 +140,13 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     >
                       <div
                         aria-label="Catalogue role"
-                        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
+                        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary  css-di4u0j-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
                       >
                         <div
                           aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-labelledby="mui-component-select-catalogue"
-                          class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-1f6u0wk-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1f6u0wk-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                           id="mui-component-select-catalogue"
                           role="button"
                           tabindex="0"
@@ -180,7 +180,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-nnbavb"
+                            class="css-ihdtdm"
                           >
                             <span
                               class="notranslate"
@@ -214,16 +214,16 @@ exports[`UserResources renders to match snapshot passing correct props to childr
     class="makeStyles-container-17"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-25 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-25 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="false"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-27 MuiAccordionSummary-root MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-27 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-30 MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-30 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <div
             class="makeStyles-summary-20"
@@ -271,7 +271,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-31 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-31 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-resources-18"
@@ -287,7 +287,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-instanceAdmin"
-                      class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root Mui-checked css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""
@@ -319,7 +319,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-dataManager"
-                      class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root Mui-checked css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""

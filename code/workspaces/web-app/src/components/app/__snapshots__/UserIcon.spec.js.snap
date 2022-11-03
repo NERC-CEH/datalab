@@ -31,7 +31,7 @@ exports[`UserIcon renders correct snapshot 1`] = `
     </div>
   </div>
   <button
-    class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-4dagr2-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-4dagr2-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >

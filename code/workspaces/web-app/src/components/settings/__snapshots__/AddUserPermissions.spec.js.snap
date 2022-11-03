@@ -8,7 +8,7 @@ exports[`AddUserButton renders as disabled with explanatory tooltip when the sel
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root Mui-disabled addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       disabled=""
       tabindex="-1"
       type="button"
@@ -27,7 +27,7 @@ exports[`AddUserButton when selected user is the current user renders as disable
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root Mui-disabled addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       disabled=""
       tabindex="-1"
       type="button"
@@ -46,7 +46,7 @@ exports[`AddUserButton when selected user is the current user renders as not dis
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -67,7 +67,7 @@ exports[`AddUserButton when the selected user is not the current user renders as
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -93,7 +93,7 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root AddUserPermission-permissionsSelector-4 css-4mzek5-MuiFormControl-root-MuiTextField-root"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-1"
         id="mui-1-label"
@@ -101,13 +101,13 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
         Permissions
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-labelledby="mui-1-label mui-1"
-          class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-1"
           role="button"
           tabindex="0"
@@ -136,7 +136,7 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               Permissions
@@ -151,7 +151,7 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
       data-mui-internal-clone-element="true"
     >
       <button
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root Mui-disabled AddUserPermission-addButton-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium AddUserPermission-addButton-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         disabled=""
         tabindex="-1"
         type="button"
@@ -169,7 +169,7 @@ exports[`PermissionsSelector renders to match snapshot 1`] = `
     class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root permissionsSelector css-4mzek5-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
       for="mui-5"
       id="mui-5-label"
@@ -177,13 +177,13 @@ exports[`PermissionsSelector renders to match snapshot 1`] = `
       Permissions
     </label>
     <div
-      class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
     >
       <div
         aria-expanded="false"
         aria-haspopup="listbox"
         aria-labelledby="mui-5-label mui-5"
-        class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
         id="mui-5"
         role="button"
         tabindex="0"
@@ -212,7 +212,7 @@ exports[`PermissionsSelector renders to match snapshot 1`] = `
         class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="css-1z7n62"
+          class="css-14lo706"
         >
           <span>
             Permissions
@@ -237,7 +237,7 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root permissionsSelector css-4mzek5-MuiFormControl-root-MuiTextField-root"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-3"
         id="mui-3-label"
@@ -245,13 +245,13 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
         Permissions
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-labelledby="mui-3-label mui-3"
-          class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-3"
           role="button"
           tabindex="0"
@@ -280,7 +280,7 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               Permissions
@@ -295,7 +295,7 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
       data-mui-internal-clone-element="true"
     >
       <button
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >

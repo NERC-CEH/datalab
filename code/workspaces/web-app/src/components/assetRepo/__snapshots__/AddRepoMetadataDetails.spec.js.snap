@@ -10,7 +10,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
       style="min-width: 250px; margin-bottom: 10px;"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-1"
         id="mui-1-label"
@@ -18,11 +18,11 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         Name
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <input
           aria-invalid="false"
-          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-1"
           name="name"
           type="text"
@@ -33,7 +33,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               Name
@@ -48,7 +48,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
       style="min-width: 250px; margin-bottom: 10px;"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-2"
         id="mui-2-label"
@@ -56,11 +56,11 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         Version
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <input
           aria-invalid="false"
-          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-2"
           name="version"
           type="text"
@@ -71,7 +71,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               Version
@@ -86,7 +86,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
       style="min-width: 250px; margin-bottom: 10px;"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-3"
         id="mui-3-label"
@@ -94,11 +94,11 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         File location on server.  Can be omitted if the repo is not hosting a local copy.
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <input
           aria-invalid="false"
-          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-3"
           name="fileLocation"
           placeholder="/file/path/"
@@ -110,7 +110,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               File location on server.  Can be omitted if the repo is not hosting a local copy.
@@ -125,7 +125,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
       style="min-width: 250px; margin-bottom: 10px;"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-4"
         id="mui-4-label"
@@ -133,11 +133,11 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         Master URL.  Can be omitted if the asset is only stored in the repo.
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <input
           aria-invalid="false"
-          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-4"
           name="masterUrl"
           placeholder="https://"
@@ -149,7 +149,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               Master URL.  Can be omitted if the asset is only stored in the repo.
@@ -168,7 +168,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
       style="min-width: 250px; margin-bottom: 10px;"
     >
       <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
         for="mui-5"
         id="mui-5-label"
@@ -176,13 +176,13 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         Visibility
       </label>
       <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-labelledby="mui-5-label mui-5"
-          class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-5"
           role="button"
           tabindex="0"
@@ -216,7 +216,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-1z7n62"
+            class="css-14lo706"
           >
             <span>
               Visibility
@@ -235,7 +235,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="submit"
         >
@@ -246,7 +246,7 @@ exports[`AddRepoMetadataDetails renders to match snapshot 1`] = `
         </button>
       </span>
       <button
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root makeStyles-button-6 css-4eo762-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium makeStyles-button-6 css-4eo762-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >

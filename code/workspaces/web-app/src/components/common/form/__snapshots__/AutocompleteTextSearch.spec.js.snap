@@ -17,7 +17,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
         aria-autocomplete="list"
         aria-controls="downshift-0-menu"
         aria-labelledby="downshift-0-label"
-        class="DownshiftMultiple-inputRoot-5 MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart css-195h1tr-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root DownshiftMultiple-inputRoot-5 MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart css-195h1tr-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div>
           Chip mock 
@@ -26,7 +26,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
         <input
           aria-invalid="false"
           autocomplete="off"
-          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart css-1ua80n0-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart css-1ua80n0-MuiInputBase-input-MuiOutlinedInput-input"
           id="downshift-0-input"
           placeholder="Expected placerholder text"
           type="text"
@@ -37,7 +37,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
           class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-nnbavb"
+            class="css-ihdtdm"
           >
             <span
               class="notranslate"
@@ -53,7 +53,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
     >
       <div
         aria-selected="false"
-        class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
         id="downshift-0-item-0"
         role="option"
         style="font-weight: 400;"
@@ -66,7 +66,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
       </div>
       <div
         aria-selected="false"
-        class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
         id="downshift-0-item-1"
         role="option"
         style="font-weight: 500;"

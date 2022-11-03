@@ -2,7 +2,7 @@
 
 exports[`AssetAccordion opens the more menu when the button is clicked 1`] = `
 <li
-  class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root Mui-focusVisible css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
+  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-focusVisible MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
   role="menuitem"
   tabindex="0"
 >
@@ -19,16 +19,16 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
     class="makeStyles-root-1"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-5 MuiAccordion-root MuiAccordion-rounded ForwardRef(Accordion)-expanded-6 Mui-expanded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-5 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-6 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="true"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-7 MuiAccordionSummary-root ForwardRef(AccordionSummary)-expanded-9 Mui-expanded MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-7 Mui-expanded ForwardRef(AccordionSummary)-expanded-9 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-10 MuiAccordionSummary-content ForwardRef(AccordionSummary)-expanded-9 Mui-expanded MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-10 Mui-expanded ForwardRef(AccordionSummary)-expanded-9 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
             class="MuiTypography-root MuiTypography-h5 makeStyles-heading-3 css-k8n68h-MuiTypography-root"
@@ -42,7 +42,7 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
           >
             <button
               aria-label="edit"
-              class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -54,7 +54,7 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
             <button
               aria-controls="more-menu"
               aria-haspopup="true"
-              class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButtonBase-root  css-1gfot13-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-1gfot13-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -71,7 +71,7 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
           </div>
         </div>
         <div
-          class="MuiAccordionSummary-expandIconWrapper ForwardRef(AccordionSummary)-expanded-9 Mui-expanded css-yw020d-MuiAccordionSummary-expandIconWrapper"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-9 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
           <svg
             aria-hidden="true"
@@ -101,7 +101,7 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-11 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-11 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-resources-2"

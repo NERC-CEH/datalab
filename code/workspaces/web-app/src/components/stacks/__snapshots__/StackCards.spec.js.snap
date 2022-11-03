@@ -30,7 +30,7 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
           >
             <button
               aria-label="add"
-              class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1qiowgr-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1qiowgr-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -74,7 +74,7 @@ exports[`StackCards creates correct snapshot for an empty array 1`] = `
           >
             <button
               aria-label="add"
-              class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1qiowgr-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1qiowgr-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -143,7 +143,7 @@ exports[`StackCards creates correct snapshot with different action button label 
           >
             <button
               aria-label="add"
-              class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1qiowgr-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1qiowgr-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >

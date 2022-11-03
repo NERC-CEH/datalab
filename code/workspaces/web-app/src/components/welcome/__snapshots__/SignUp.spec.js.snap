@@ -37,7 +37,7 @@ exports[`SignUp renders correct snapshot 1`] = `
       class="makeStyles-buttons-5"
     >
       <button
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root makeStyles-button-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium makeStyles-button-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -47,7 +47,7 @@ exports[`SignUp renders correct snapshot 1`] = `
         />
       </button>
       <a
-        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root makeStyles-button-6 css-1qiowgr-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium makeStyles-button-6 css-1qiowgr-MuiButtonBase-root-MuiButton-root"
         href="mailto:test@test.com"
         tabindex="0"
       >

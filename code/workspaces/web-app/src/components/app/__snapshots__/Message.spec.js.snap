@@ -14,7 +14,7 @@ exports[`Message renders correct snapshot 1`] = `
       React Markdown: Test message
     </div>
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Message-button-4 css-93z2bw-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeMedium MuiButton-textSizeMedium Message-button-4 css-93z2bw-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >

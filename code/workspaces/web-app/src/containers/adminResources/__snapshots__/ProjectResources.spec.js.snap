@@ -6,16 +6,16 @@ exports[`ProjectResources shows clusters 1`] = `
     class="makeStyles-root-21"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-24 MuiAccordion-root MuiAccordion-rounded ForwardRef(Accordion)-expanded-25 Mui-expanded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-24 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-25 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="true"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-26 MuiAccordionSummary-root ForwardRef(AccordionSummary)-expanded-28 Mui-expanded MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-26 Mui-expanded ForwardRef(AccordionSummary)-expanded-28 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-29 MuiAccordionSummary-content ForwardRef(AccordionSummary)-expanded-28 Mui-expanded MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-29 Mui-expanded ForwardRef(AccordionSummary)-expanded-28 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
             class="MuiTypography-root MuiTypography-h5 makeStyles-root-23 css-k8n68h-MuiTypography-root"
@@ -24,7 +24,7 @@ exports[`ProjectResources shows clusters 1`] = `
           </h5>
         </div>
         <div
-          class="MuiAccordionSummary-expandIconWrapper ForwardRef(AccordionSummary)-expanded-28 Mui-expanded css-yw020d-MuiAccordionSummary-expandIconWrapper"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-28 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
           <svg
             aria-hidden="true"
@@ -54,7 +54,7 @@ exports[`ProjectResources shows clusters 1`] = `
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-30 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-30 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-root-22"
@@ -78,16 +78,16 @@ exports[`ProjectResources shows notebooks 1`] = `
     class="makeStyles-root-1"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-4 MuiAccordion-root MuiAccordion-rounded ForwardRef(Accordion)-expanded-5 Mui-expanded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-4 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-5 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="true"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-6 MuiAccordionSummary-root ForwardRef(AccordionSummary)-expanded-8 Mui-expanded MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-6 Mui-expanded ForwardRef(AccordionSummary)-expanded-8 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-9 MuiAccordionSummary-content ForwardRef(AccordionSummary)-expanded-8 Mui-expanded MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-9 Mui-expanded ForwardRef(AccordionSummary)-expanded-8 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
             class="MuiTypography-root MuiTypography-h5 makeStyles-root-3 css-k8n68h-MuiTypography-root"
@@ -96,7 +96,7 @@ exports[`ProjectResources shows notebooks 1`] = `
           </h5>
         </div>
         <div
-          class="MuiAccordionSummary-expandIconWrapper ForwardRef(AccordionSummary)-expanded-8 Mui-expanded css-yw020d-MuiAccordionSummary-expandIconWrapper"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-8 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
           <svg
             aria-hidden="true"
@@ -126,7 +126,7 @@ exports[`ProjectResources shows notebooks 1`] = `
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-10 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-10 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-root-2"
@@ -150,16 +150,16 @@ exports[`ProjectResources shows sites 1`] = `
     class="makeStyles-root-11"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-14 MuiAccordion-root MuiAccordion-rounded ForwardRef(Accordion)-expanded-15 Mui-expanded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-14 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-15 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="true"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-16 MuiAccordionSummary-root ForwardRef(AccordionSummary)-expanded-18 Mui-expanded MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-16 Mui-expanded ForwardRef(AccordionSummary)-expanded-18 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-19 MuiAccordionSummary-content ForwardRef(AccordionSummary)-expanded-18 Mui-expanded MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-19 Mui-expanded ForwardRef(AccordionSummary)-expanded-18 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
             class="MuiTypography-root MuiTypography-h5 makeStyles-root-13 css-k8n68h-MuiTypography-root"
@@ -168,7 +168,7 @@ exports[`ProjectResources shows sites 1`] = `
           </h5>
         </div>
         <div
-          class="MuiAccordionSummary-expandIconWrapper ForwardRef(AccordionSummary)-expanded-18 Mui-expanded css-yw020d-MuiAccordionSummary-expandIconWrapper"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-18 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
           <svg
             aria-hidden="true"
@@ -198,7 +198,7 @@ exports[`ProjectResources shows sites 1`] = `
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-20 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-20 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-root-12"
@@ -222,16 +222,16 @@ exports[`ProjectResources shows storage 1`] = `
     class="makeStyles-root-31"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 ForwardRef(Accordion)-root-34 MuiAccordion-root MuiAccordion-rounded ForwardRef(Accordion)-expanded-35 Mui-expanded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-34 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-35 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="true"
-        class="MuiButtonBase-root ForwardRef(AccordionSummary)-root-36 MuiAccordionSummary-root ForwardRef(AccordionSummary)-expanded-38 Mui-expanded MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-36 Mui-expanded ForwardRef(AccordionSummary)-expanded-38 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="ForwardRef(AccordionSummary)-content-39 MuiAccordionSummary-content ForwardRef(AccordionSummary)-expanded-38 Mui-expanded MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-39 Mui-expanded ForwardRef(AccordionSummary)-expanded-38 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
             class="MuiTypography-root MuiTypography-h5 makeStyles-root-33 css-k8n68h-MuiTypography-root"
@@ -240,7 +240,7 @@ exports[`ProjectResources shows storage 1`] = `
           </h5>
         </div>
         <div
-          class="MuiAccordionSummary-expandIconWrapper ForwardRef(AccordionSummary)-expanded-38 Mui-expanded css-yw020d-MuiAccordionSummary-expandIconWrapper"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-38 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
           <svg
             aria-hidden="true"
@@ -270,7 +270,7 @@ exports[`ProjectResources shows storage 1`] = `
               role="region"
             >
               <div
-                class="ForwardRef(AccordionDetails)-root-40 MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-40 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-root-32"

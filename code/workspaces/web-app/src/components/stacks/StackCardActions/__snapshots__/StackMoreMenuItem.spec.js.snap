@@ -10,7 +10,7 @@ exports[`StackMoreMenuItem should render to match snapshot 1`] = `
     >
        
       <li
-        class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
         role="menuitem"
         tabindex="-1"
       >
