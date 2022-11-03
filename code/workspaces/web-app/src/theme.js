@@ -84,6 +84,11 @@ const theme = createTheme({
   spacing,
   cardImageSize,
   components: {
+    MuiTextField: {
+      defaultProps: {
+        size: 'small',
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
