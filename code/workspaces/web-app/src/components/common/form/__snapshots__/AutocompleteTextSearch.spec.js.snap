@@ -17,7 +17,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
         aria-autocomplete="list"
         aria-controls="downshift-0-menu"
         aria-labelledby="downshift-0-label"
-        class="DownshiftMultiple-inputRoot-5 MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-195h1tr-MuiInputBase-root-MuiOutlinedInput-root"
+        class="DownshiftMultiple-inputRoot-5 MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart css-195h1tr-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div>
           Chip mock 
@@ -26,7 +26,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
         <input
           aria-invalid="false"
           autocomplete="off"
-          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart css-1ua80n0-MuiInputBase-input-MuiOutlinedInput-input"
           id="downshift-0-input"
           placeholder="Expected placerholder text"
           type="text"

@@ -32,12 +32,12 @@ exports[`ProjectsContainer renders to match snapshot 1`] = `
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root makeStyles-searchTextField-2 css-4mzek5-MuiFormControl-root-MuiTextField-root"
     >
       <div
-        class="MuiFilledInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl MuiInputBase-hiddenLabel css-gzq2ps-MuiInputBase-root-MuiFilledInput-root"
+        class="MuiFilledInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-hiddenLabel css-gzq2ps-MuiInputBase-root-MuiFilledInput-root"
         style="background-color: rgba(47, 62, 70, 0.2); border-radius: 5px;"
       >
         <input
           aria-invalid="false"
-          class="MuiFilledInput-input MuiInputBase-input MuiInputBase-inputTypeSearch MuiInputBase-inputHiddenLabel css-jg5re1-MuiInputBase-input-MuiFilledInput-input"
+          class="MuiFilledInput-input MuiInputBase-input MuiInputBase-inputTypeSearch MuiInputBase-inputSizeSmall MuiInputBase-inputHiddenLabel css-17o2qze-MuiInputBase-input-MuiFilledInput-input"
           id="search"
           placeholder="Filter projects..."
           type="search"
