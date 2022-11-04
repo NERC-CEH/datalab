@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, TextField } from '@mui/material';
 import withStyles from '@mui/styles/withStyles';
-import DateTimePicker from '@mui/lab/DateTimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';

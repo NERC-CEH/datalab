@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent, screen, within, configure } from '@testing-library/react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import theme from '../theme';
 
 const AllTheProviders = ({ children }) => (
