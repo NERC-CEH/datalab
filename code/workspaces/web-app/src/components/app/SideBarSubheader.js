@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import withStyles from '@mui/styles/withStyles';
+import ListSubheader from '@mui/material/ListSubheader';
 
 const styles = theme => ({
   subheader: {

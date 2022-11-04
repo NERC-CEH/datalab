@@ -1,14 +1,14 @@
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import { statusTypes } from 'common';
 
 const { getStatusKeys, getStatusProps } = statusTypes;
 
 const styles = theme => ({
   stackStatus: {
-    padding: `${theme.spacing(0.5)}px 0`,
+    padding: `${theme.spacing(0.5)} 0`,
     borderRadius: 50, // make round
     userSelect: 'none',
     marginBottom: theme.spacing(2),

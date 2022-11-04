@@ -3,23 +3,19 @@
 exports[`IconButton creates correct snapshot for danger styled button 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-buttonDanger-56"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium IconButton-buttonDanger-5 css-4dagr2-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
+    buttonText
     <span
-      class="MuiButton-label"
+      aria-hidden="true"
+      class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium IconButton-icon-6 css-kp9ftd-MuiIcon-root"
     >
-      buttonText
-      <span
-        aria-hidden="true"
-        class="material-icons MuiIcon-root IconButton-icon-57"
-      >
-        store
-      </span>
+      store
     </span>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
 </div>
@@ -28,23 +24,19 @@ exports[`IconButton creates correct snapshot for danger styled button 1`] = `
 exports[`IconButton creates correct snapshot for required props 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text IconButton-button-1"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium IconButton-button-1 css-4dagr2-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
+    buttonText
     <span
-      class="MuiButton-label"
+      aria-hidden="true"
+      class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium IconButton-icon-3 css-kp9ftd-MuiIcon-root"
     >
-      buttonText
-      <span
-        aria-hidden="true"
-        class="material-icons MuiIcon-root IconButton-icon-3"
-      >
-        store
-      </span>
+      store
     </span>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
 </div>

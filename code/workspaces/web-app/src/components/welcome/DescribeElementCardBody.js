@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import withStyles from '@mui/styles/withStyles';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 import theme from '../../theme';
 
 const cardContent = {

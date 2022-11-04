@@ -29,15 +29,15 @@ exports[`ProjectsContainer renders to match snapshot 1`] = `
       </div>
     </div>
     <div
-      class="MuiFormControl-root MuiTextField-root makeStyles-searchTextField-2 MuiFormControl-marginDense"
+      class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root makeStyles-searchTextField-2 css-4mzek5-MuiFormControl-root-MuiTextField-root"
     >
       <div
-        class="MuiInputBase-root MuiFilledInput-root Mui-focused Mui-focused MuiInputBase-formControl MuiInputBase-marginDense MuiFilledInput-marginDense"
+        class="MuiInputBase-root MuiFilledInput-root MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-hiddenLabel css-gzq2ps-MuiInputBase-root-MuiFilledInput-root"
         style="background-color: rgba(47, 62, 70, 0.2); border-radius: 5px;"
       >
         <input
           aria-invalid="false"
-          class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputHiddenLabel MuiFilledInput-inputHiddenLabel MuiInputBase-inputTypeSearch MuiInputBase-inputMarginDense MuiFilledInput-inputMarginDense"
+          class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputTypeSearch MuiInputBase-inputSizeSmall MuiInputBase-inputHiddenLabel css-17o2qze-MuiInputBase-input-MuiFilledInput-input"
           id="search"
           placeholder="Filter projects..."
           type="search"

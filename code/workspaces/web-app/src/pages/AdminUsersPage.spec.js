@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../testUtils/renderTests';
 import AdminUsersPage from './AdminUsersPage';
 
 jest.mock('../containers/adminListUsers/AdminUsersContainer', () => () => (<div>AdminUsersContainer mock</div>));

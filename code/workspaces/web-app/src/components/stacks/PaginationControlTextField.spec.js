@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '../../testUtils/renderTests';
 import PaginationControlTextField from './PaginationControlTextField';
 
 describe('PaginationControlTextField', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
 import { useCurrentProjectKey } from '../../hooks/currentProjectHooks';
 import { useCurrentUserId } from '../../hooks/authHooks';

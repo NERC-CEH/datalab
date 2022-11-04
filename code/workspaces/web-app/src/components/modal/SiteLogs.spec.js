@@ -1,10 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen, fireEvent } from '../../testUtils/renderTests';
 import Logs from './SiteLogs';
-import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 
 function shallowRender(props) {
-  return shallow(<Logs {...props} />);
+  return render(<Logs {...props} />);
 }
 
 describe('Logs', () => {
@@ -26,10 +25,10 @@ describe('Logs', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    shallowRender(props);
 
     // Assert
-    expect(output).toMatchSnapshot();
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 
   it('wires up close function correctly', () => {
@@ -37,8 +36,8 @@ describe('Logs', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
-    output.find(PrimaryActionButton).simulate('click');
+    shallowRender(props);
+    fireEvent.click(screen.getByText('Close'));
 
     // Assert
     expect(onCancelMock).toHaveBeenCalled();

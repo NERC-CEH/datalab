@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import messagesActions from '../../actions/messagesActions';
 import AdminMessage from './AdminMessage';
 import modalDialogActions from '../../actions/modalDialogActions';

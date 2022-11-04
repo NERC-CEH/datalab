@@ -6,72 +6,64 @@ exports[`UserResources renders to match snapshot passing correct props to childr
     class="makeStyles-container-1"
   >
     <div
-      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-9 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-9 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
-        aria-disabled="false"
         aria-expanded="false"
-        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-43"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-11 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-46"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-14 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <div
             class="makeStyles-summary-4"
           >
             <h5
-              class="MuiTypography-root makeStyles-heading-3 MuiTypography-h5"
+              class="MuiTypography-root MuiTypography-h5 makeStyles-heading-3 css-k8n68h-MuiTypography-root"
             >
               user name
             </h5>
             <p
-              class="MuiTypography-root MuiTypography-body2"
+              class="MuiTypography-root MuiTypography-body2 css-1o1pkbg-MuiTypography-root"
             >
               1 project, 1 site, 1 notebook, 1 data store
             </p>
           </div>
         </div>
         <div
-          aria-disabled="false"
-          aria-hidden="true"
-          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-44 MuiIconButton-edgeEnd"
+          class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
-          <span
-            class="MuiIconButton-label"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ExpandMoreIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-              />
-            </svg>
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
+            <path
+              d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
         </div>
       </div>
       <div
-        class="MuiCollapse-container MuiCollapse-hidden"
+        class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
         style="min-height: 0px;"
       >
         <div
-          class="MuiCollapse-wrapper"
+          class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
         >
           <div
-            class="MuiCollapse-wrapperInner"
+            class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
           >
             <div
+              class="MuiAccordion-region"
               role="region"
             >
               <div
-                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-109"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-15 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-resources-2"
@@ -80,77 +72,67 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     class="makeStyles-systemRoles-5"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="system-checkbox-uid1-instanceAdmin"
                     >
                       Instance admin
                     </p>
                     <span
-                      aria-disabled="false"
                       aria-labelledby="system-checkbox-uid1-instanceAdmin"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-117 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-118 Mui-checked MuiIconButton-colorPrimary"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        name="instanceAdmin"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-120"
-                          data-indeterminate="false"
-                          name="instanceAdmin"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                       <span
-                        class="MuiTouchRipple-root"
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
                     </span>
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="system-checkbox-uid1-dataManager"
                     >
                       Data manager
                     </p>
                     <span
-                      aria-disabled="false"
                       aria-labelledby="system-checkbox-uid1-dataManager"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-117 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-118 Mui-checked MuiIconButton-colorPrimary"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        name="dataManager"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-120"
-                          data-indeterminate="false"
-                          name="dataManager"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                       <span
-                        class="MuiTouchRipple-root"
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
                     </span>
                     <div
@@ -158,28 +140,34 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     >
                       <div
                         aria-label="Catalogue role"
-                        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary  css-di4u0j-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
                       >
                         <div
+                          aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-labelledby="mui-component-select-catalogue"
-                          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1f6u0wk-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                           id="mui-component-select-catalogue"
                           role="button"
                           tabindex="0"
                         >
-                          <span>
+                          <span
+                            class="notranslate"
+                          >
                             ​
                           </span>
                         </div>
                         <input
+                          aria-hidden="true"
+                          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
                           name="catalogue"
-                          type="hidden"
+                          tabindex="-1"
                           value=""
                         />
                         <svg
                           aria-hidden="true"
-                          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+                          data-testid="ArrowDropDownIcon"
                           focusable="false"
                           viewBox="0 0 24 24"
                         >
@@ -189,14 +177,14 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                         </svg>
                         <fieldset
                           aria-hidden="true"
-                          class="PrivateNotchedOutline-root-168 MuiOutlinedInput-notchedOutline"
-                          style="padding-left: 8px;"
+                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="PrivateNotchedOutline-legend-169"
-                            style="width: 0.01px;"
+                            class="css-ihdtdm"
                           >
-                            <span>
+                            <span
+                              class="notranslate"
+                            >
                               ​
                             </span>
                           </legend>
@@ -223,154 +211,136 @@ exports[`UserResources renders to match snapshot passing correct props to childr
 exports[`UserResources renders to match snapshot passing correct props to children when catalogue is not available 1`] = `
 <div>
   <div
-    class="makeStyles-container-183"
+    class="makeStyles-container-17"
   >
     <div
-      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-191 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-25 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
-        aria-disabled="false"
         aria-expanded="false"
-        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-225"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-27 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-228"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-30 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <div
-            class="makeStyles-summary-186"
+            class="makeStyles-summary-20"
           >
             <h5
-              class="MuiTypography-root makeStyles-heading-185 MuiTypography-h5"
+              class="MuiTypography-root MuiTypography-h5 makeStyles-heading-19 css-k8n68h-MuiTypography-root"
             >
               user name
             </h5>
             <p
-              class="MuiTypography-root MuiTypography-body2"
+              class="MuiTypography-root MuiTypography-body2 css-1o1pkbg-MuiTypography-root"
             >
               1 project, 1 site, 1 notebook, 1 data store
             </p>
           </div>
         </div>
         <div
-          aria-disabled="false"
-          aria-hidden="true"
-          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-226 MuiIconButton-edgeEnd"
+          class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
-          <span
-            class="MuiIconButton-label"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ExpandMoreIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-              />
-            </svg>
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
+            <path
+              d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
         </div>
       </div>
       <div
-        class="MuiCollapse-container MuiCollapse-hidden"
+        class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
         style="min-height: 0px;"
       >
         <div
-          class="MuiCollapse-wrapper"
+          class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
         >
           <div
-            class="MuiCollapse-wrapperInner"
+            class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
           >
             <div
+              class="MuiAccordion-region"
               role="region"
             >
               <div
-                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-291"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-31 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
-                  class="makeStyles-resources-184"
+                  class="makeStyles-resources-18"
                 >
                   <div
-                    class="makeStyles-systemRoles-187"
+                    class="makeStyles-systemRoles-21"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="system-checkbox-uid1-instanceAdmin"
                     >
                       Instance admin
                     </p>
                     <span
-                      aria-disabled="false"
                       aria-labelledby="system-checkbox-uid1-instanceAdmin"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-299 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-300 Mui-checked MuiIconButton-colorPrimary"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        name="instanceAdmin"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-302"
-                          data-indeterminate="false"
-                          name="instanceAdmin"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                       <span
-                        class="MuiTouchRipple-root"
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
                     </span>
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="system-checkbox-uid1-dataManager"
                     >
                       Data manager
                     </p>
                     <span
-                      aria-disabled="false"
                       aria-labelledby="system-checkbox-uid1-dataManager"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-299 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-300 Mui-checked MuiIconButton-colorPrimary"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        name="dataManager"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-302"
-                          data-indeterminate="false"
-                          name="dataManager"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                       <span
-                        class="MuiTouchRipple-root"
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
                     </span>
                   </div>

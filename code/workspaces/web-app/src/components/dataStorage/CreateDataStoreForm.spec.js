@@ -1,13 +1,17 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '../../testUtils/renderTests';
 import { PureCreateDataStoreForm } from './CreateDataStoreForm';
 import { storageCreationAllowedDisplayOptions } from '../../config/storage';
 
 jest.mock('../../config/storage');
+jest.mock('redux-form', () => ({
+  ...jest.requireActual('redux-form'),
+  Field: props => (<div>Field mock {JSON.stringify(props)}</div>),
+}));
 
 describe('CreateDataStoreForm', () => {
   function shallowRender(props) {
-    return shallow(<PureCreateDataStoreForm {...props} />);
+    return render(<PureCreateDataStoreForm {...props} />).container;
   }
 
   const onSubmitMock = jest.fn();

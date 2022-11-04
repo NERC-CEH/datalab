@@ -1,64 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Site dialog creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
 >
   <div>
-    <WithStyles(ForwardRef(DialogTitle))>
+    <h2
+      class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+      id="mui-1"
+    >
       Title
-    </WithStyles(ForwardRef(DialogTitle))>
-    <WithStyles(ForwardRef(DialogContent))>
-      <ReduxForm
-        asyncBlurFields={
-          Array [
-            "name",
-            "type",
-          ]
-        }
-        asyncValidate={[Function]}
-        cancel={[MockFunction]}
-        dataStorageOptions={
-          Array [
-            Object {
-              "value": "value",
-            },
-            Object {
-              "value": "another value",
-            },
-          ]
-        }
-        destroyOnUnmount={false}
-        enableReinitialize={false}
-        forceUnregisterOnUnmount={false}
-        form="createSite"
-        getFormState={[Function]}
-        keepDirtyOnReinitialize={false}
-        onChange={[Function]}
-        onSubmit={[MockFunction]}
-        persistentSubmitErrors={false}
-        pure={true}
-        shouldAsyncValidate={[Function]}
-        shouldError={[Function]}
-        shouldValidate={[Function]}
-        shouldWarn={[Function]}
-        submitAsSideEffect={false}
-        touchOnBlur={true}
-        touchOnChange={false}
-        typeOptions={
-          Array [
-            Object {
-              "text": "NBViewer",
-              "value": "nbviewer",
-            },
-          ]
-        }
-        updateUnregisteredFields={false}
-        validate={[Function]}
-        versionOptions={Array []}
-      />
-    </WithStyles(ForwardRef(DialogContent))>
+    </h2>
+    <div
+      class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+    >
+      <div>
+        CreateSiteForm mock 
+        {"dataStorageOptions":[{"value":"value"},{"value":"another value"}],"typeOptions":[{"value":"nbviewer","text":"NBViewer"}],"versionOptions":[]}
+      </div>
+    </div>
   </div>
-</WithStyles(ForwardRef(Dialog))>
+</div>
 `;

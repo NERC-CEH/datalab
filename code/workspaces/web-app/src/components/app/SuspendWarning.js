@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link, withStyles, Button } from '@material-ui/core';
+// import { Link, withStyles, Button } from '@material-ui/core';
+import { Link, Button } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import ReactMarkdown from 'react-markdown';
-import ErrorOutline from '@material-ui/icons/ErrorOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+// import ErrorOutline from '@material-ui/icons/ErrorOutline';
 import PropTypes from 'prop-types';
 import { extendSubdomain } from '../../core/getDomainInfo';
 
@@ -26,7 +29,7 @@ const styles = theme => ({
 
 const SuspendWarning = ({ classes, message }) => (
   <div className={classes.message}>
-    <ErrorOutline className={classes.icon} />
+    <ErrorOutlineIcon className={classes.icon} />
     <div className={classes.text}>
       <ReactMarkdown>
         {message}

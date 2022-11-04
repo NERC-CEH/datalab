@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import { SYSTEM_INSTANCE_ADMIN } from 'common/src/permissionTypes';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 

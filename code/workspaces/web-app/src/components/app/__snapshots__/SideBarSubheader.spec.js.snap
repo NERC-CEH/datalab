@@ -3,7 +3,7 @@
 exports[`SideBarSubheader renders correct snapshot 1`] = `
 <div>
   <li
-    class="MuiListSubheader-root SideBarSubheader-subheader-1 MuiListSubheader-gutters"
+    class="MuiListSubheader-root MuiListSubheader-gutters SideBarSubheader-subheader-1 css-x9njn-MuiListSubheader-root"
   >
     expectedChild
   </li>

@@ -50,7 +50,7 @@ exports[`AssetRepoFindContainer renders to match snapshot when there are no asse
         class="makeStyles-root-3"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
         >
           No assets to display.
         </p>

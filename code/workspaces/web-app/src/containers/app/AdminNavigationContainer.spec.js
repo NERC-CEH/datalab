@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { permissionTypes } from 'common';
+import { render } from '../../testUtils/renderTests';
 import AdminNavigationContainer from './AdminNavigationContainer';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
 

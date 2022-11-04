@@ -1,9 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import PaginationControlButton, { PREVIOUS_PAGE, NEXT_PAGE } from './PaginationControlButton';
 
-jest.mock('@material-ui/icons/NavigateBeforeRounded', () => () => (<>NavigateBeforeRoundedIcon Mock</>));
-jest.mock('@material-ui/icons/NavigateNextRounded', () => () => (<>NavigateNextRoundedIcon Mock</>));
+jest.mock('@mui/icons-material/NavigateBeforeRounded', () => () => (<>NavigateBeforeRoundedIcon Mock</>));
+jest.mock('@mui/icons-material/NavigateNextRounded', () => () => (<>NavigateNextRoundedIcon Mock</>));
 
 describe('PaginationControlButton', () => {
   function renderComponent(props) {

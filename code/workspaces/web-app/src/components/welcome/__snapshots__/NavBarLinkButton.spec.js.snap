@@ -3,17 +3,13 @@
 exports[`NavBarLinkButton renders correct snapshot 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text NavBarLinkButton-linkButton-1"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium NavBarLinkButton-linkButton-1 css-4dagr2-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
+    expectedChildren
     <span
-      class="MuiButton-label"
-    >
-      expectedChildren
-    </span>
-    <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
 </div>

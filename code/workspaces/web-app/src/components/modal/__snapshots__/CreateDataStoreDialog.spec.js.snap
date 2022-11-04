@@ -1,80 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateDataStoreDialog dialog creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
 >
   <div
-    style={
-      Object {
-        "display": "flex",
-        "flexDirection": "row",
-        "margin": 10,
-      }
-    }
+    style="margin: 10px; display: flex; flex-direction: row;"
   >
     <div>
-      <WithStyles(ForwardRef(DialogTitle))>
+      <h2
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+        id="mui-1"
+      >
         Title
-      </WithStyles(ForwardRef(DialogTitle))>
-      <WithStyles(ForwardRef(DialogContent))>
-        <ReduxForm
-          asyncBlurFields={
-            Array [
-              "name",
-            ]
-          }
-          asyncValidate={[Function]}
-          cancel={[MockFunction]}
-          destroyOnUnmount={false}
-          enableReinitialize={true}
-          forceUnregisterOnUnmount={false}
-          form="createDataStore"
-          getFormState={[Function]}
-          initialValues={
-            Object {
-              "type": "NFS",
-            }
-          }
-          keepDirtyOnReinitialize={false}
-          onSubmit={[MockFunction]}
-          persistentSubmitErrors={false}
-          projectKey="test-proj"
-          pure={true}
-          shouldAsyncValidate={[Function]}
-          shouldError={[Function]}
-          shouldValidate={[Function]}
-          shouldWarn={[Function]}
-          submitAsSideEffect={false}
-          touchOnBlur={true}
-          touchOnChange={false}
-          updateUnregisteredFields={false}
-          validate={[Function]}
-        />
-      </WithStyles(ForwardRef(DialogContent))>
+      </h2>
+      <div
+        class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+      >
+        <div>
+          CreateDataStoreForm mock 
+          {"projectKey":"test-proj","initialValues":{"type":"NFS"}}
+        </div>
+      </div>
     </div>
     <div
-      style={
-        Object {
-          "width": 320,
-        }
-      }
+      style="width: 320px;"
     >
-      <WithStyles(ForwardRef(DialogTitle))>
-        Data Store Preview
-      </WithStyles(ForwardRef(DialogTitle))>
-      <div
-        style={
-          Object {
-            "margin": "0 auto",
-            "width": "90%",
-          }
-        }
+      <h2
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+        id="mui-1"
       >
-        <Connect(PreviewDataStoreCard) />
+        Data Store Preview
+      </h2>
+      <div
+        style="width: 90%; margin: 0px auto;"
+      >
+        <div>
+          PreviewDataStoreCard mock
+        </div>
       </div>
     </div>
   </div>
-</WithStyles(ForwardRef(Dialog))>
+</div>
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import AdminUsersContainer from './AdminUsersContainer';
 import { useUsers } from '../../hooks/usersHooks';
 import { useRoles } from '../../hooks/rolesHooks';

@@ -14,12 +14,12 @@ exports[`SignUp renders correct snapshot 1`] = `
       class="makeStyles-textContainer-3"
     >
       <h5
-        class="MuiTypography-root makeStyles-text-4 MuiTypography-h5"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-text-4 css-k8n68h-MuiTypography-root"
       >
         Sign Up
       </h5>
       <p
-        class="MuiTypography-root makeStyles-text-4 MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-text-4 css-12gb3o9-MuiTypography-root"
       >
         In order to use DataLabs, please email
          
@@ -37,33 +37,24 @@ exports[`SignUp renders correct snapshot 1`] = `
       class="makeStyles-buttons-5"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-6 MuiButton-outlinedPrimary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium makeStyles-button-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
+        Home
         <span
-          class="MuiButton-label"
-        >
-          Home
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
       <a
-        aria-disabled="false"
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-6 MuiButton-containedPrimary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium makeStyles-button-6 css-1qiowgr-MuiButtonBase-root-MuiButton-root"
         href="mailto:test@test.com"
         tabindex="0"
       >
+        Email 
+        test@test.com
         <span
-          class="MuiButton-label"
-        >
-          Email 
-          test@test.com
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </a>
     </div>

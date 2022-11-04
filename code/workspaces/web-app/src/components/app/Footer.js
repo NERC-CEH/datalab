@@ -1,7 +1,7 @@
 import React from 'react';
-import Divider from '@material-ui/core/Divider';
-import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import Divider from '@mui/material/Divider';
+import withStyles from '@mui/styles/withStyles';
+import { Typography } from '@mui/material';
 import { getVersion } from '../../config/version';
 
 const styles = theme => ({
@@ -9,7 +9,7 @@ const styles = theme => ({
     marginTop: theme.spacing(8),
   },
   versionText: {
-    margin: `${theme.spacing(2)}px 0`,
+    margin: `${theme.spacing(2)} 0`,
   },
 });
 

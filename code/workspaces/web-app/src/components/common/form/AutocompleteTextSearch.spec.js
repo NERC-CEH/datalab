@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '../../../testUtils/renderTests';
 import AutocompleteTextSearch from './AutocompleteTextSearch';
 
-jest.mock('@material-ui/core/Chip', () => props => (<div>Chip mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/material/Chip', () => props => (<div>Chip mock {JSON.stringify(props)}</div>));
 
 describe('AutocompleteTextSearch', () => {
   it('generates correct snapshot', () => {

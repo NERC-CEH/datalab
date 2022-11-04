@@ -36,35 +36,27 @@ exports[`CreateClusterForm it renders to match snapshot when conda is required a
       {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
     </div>
     <div
-      class="makeStyles-fromControlContainer-133"
+      class="makeStyles-fromControlContainer-7"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="submit"
       >
+        Create
         <span
-          class="MuiButton-label"
-        >
-          Create
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-4eo762-MuiButtonBase-root-MuiButton-root"
         style="margin-left: 5px;"
         tabindex="0"
         type="button"
       >
+        Cancel
         <span
-          class="MuiButton-label"
-        >
-          Cancel
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
@@ -108,35 +100,27 @@ exports[`CreateClusterForm it renders to match snapshot with condaPath field whe
       {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
     </div>
     <div
-      class="makeStyles-fromControlContainer-89"
+      class="makeStyles-fromControlContainer-5"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="submit"
       >
+        Create
         <span
-          class="MuiButton-label"
-        >
-          Create
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-4eo762-MuiButtonBase-root-MuiButton-root"
         style="margin-left: 5px;"
         tabindex="0"
         type="button"
       >
+        Cancel
         <span
-          class="MuiButton-label"
-        >
-          Cancel
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
@@ -179,32 +163,24 @@ exports[`CreateClusterForm it renders to match snapshot without condaPath field 
       class="makeStyles-fromControlContainer-1"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="submit"
       >
+        Create
         <span
-          class="MuiButton-label"
-        >
-          Create
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-4eo762-MuiButtonBase-root-MuiButton-root"
         style="margin-left: 5px;"
         tabindex="0"
         type="button"
       >
+        Cancel
         <span
-          class="MuiButton-label"
-        >
-          Cancel
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
@@ -244,35 +220,27 @@ exports[`CreateClusterForm it renders to match snapshot without condaPath field 
       {"InputLabelProps":{"shrink":true},"name":"assets","label":"Assets"}
     </div>
     <div
-      class="makeStyles-fromControlContainer-45"
+      class="makeStyles-fromControlContainer-3"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="submit"
       >
+        Create
         <span
-          class="MuiButton-label"
-        >
-          Create
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-4eo762-MuiButtonBase-root-MuiButton-root"
         style="margin-left: 5px;"
         tabindex="0"
         type="button"
       >
+        Cancel
         <span
-          class="MuiButton-label"
-        >
-          Cancel
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>

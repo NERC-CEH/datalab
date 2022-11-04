@@ -6,20 +6,25 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
     class="ProjectSwitcher-promisedContent-2"
   >
     <div
-      class="MuiFormControl-root MuiTextField-root ProjectSwitcher-switcher-1 MuiFormControl-marginDense MuiFormControl-fullWidth"
+      class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root ProjectSwitcher-switcher-1 css-1z10yd4-MuiFormControl-root-MuiTextField-root"
     >
       <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
+        for="mui-1"
+        id="mui-1-label"
       >
         Current Project
       </label>
       <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
+          aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+          aria-labelledby="mui-1-label mui-1"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-1"
           role="button"
           tabindex="0"
         >
@@ -27,24 +32,27 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
             class="ProjectSwitcher-itemContent-4"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
             >
               Test Project
             </p>
             <p
-              class="MuiTypography-root ProjectSwitcher-itemKey-5 MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-body1 ProjectSwitcher-itemKey-5 css-12gb3o9-MuiTypography-root"
             >
               (testproj)
             </p>
           </div>
         </div>
         <input
-          type="hidden"
+          aria-hidden="true"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          tabindex="-1"
           value="testproj"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
@@ -54,10 +62,10 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
         </svg>
         <fieldset
           aria-hidden="true"
-          class="PrivateNotchedOutline-root-117 MuiOutlinedInput-notchedOutline"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="PrivateNotchedOutline-legendLabelled-119 PrivateNotchedOutline-legendNotched-120"
+            class="css-14lo706"
           >
             <span>
               Current Project
@@ -73,34 +81,44 @@ exports[`ProjectSwitcher renders to match snapshot passing correct parameters to
 exports[`Switcher renders to match snapshot when switcherProjects is fetching 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiTextField-root switcher MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root switcher css-1z10yd4-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1fuztnd-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="false"
+      for="mui-4"
+      id="mui-4-label"
     >
       Current Project
     </label>
     <div
-      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
     >
       <div
+        aria-expanded="false"
         aria-haspopup="listbox"
-        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        aria-labelledby="mui-4-label mui-4"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id="mui-4"
         role="button"
         tabindex="0"
       >
-        <span>
+        <span
+          class="notranslate"
+        >
           ​
         </span>
       </div>
       <input
-        type="hidden"
+        aria-hidden="true"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        tabindex="-1"
         value=""
       />
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
@@ -110,10 +128,10 @@ exports[`Switcher renders to match snapshot when switcherProjects is fetching 1`
       </svg>
       <fieldset
         aria-hidden="true"
-        class="PrivateNotchedOutline-root-402 MuiOutlinedInput-notchedOutline"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="PrivateNotchedOutline-legendLabelled-404"
+          class="css-yjsfm1"
         >
           <span>
             Current Project
@@ -128,20 +146,25 @@ exports[`Switcher renders to match snapshot when switcherProjects is fetching 1`
 exports[`Switcher renders to match snapshot when there are accessible projects 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiTextField-root switcher MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root switcher css-1z10yd4-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined MuiFormLabel-filled"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
+      for="mui-2"
+      id="mui-2-label"
     >
       Current Project
     </label>
     <div
-      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
     >
       <div
+        aria-expanded="false"
         aria-haspopup="listbox"
-        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        aria-labelledby="mui-2-label mui-2"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id="mui-2"
         role="button"
         tabindex="0"
       >
@@ -149,24 +172,27 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
           class="itemContent"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
           >
             Test Project
           </p>
           <p
-            class="MuiTypography-root itemKey MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 itemKey css-12gb3o9-MuiTypography-root"
           >
             (testproj)
           </p>
         </div>
       </div>
       <input
-        type="hidden"
+        aria-hidden="true"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        tabindex="-1"
         value="testproj"
       />
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
@@ -176,10 +202,10 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
       </svg>
       <fieldset
         aria-hidden="true"
-        class="PrivateNotchedOutline-root-232 MuiOutlinedInput-notchedOutline"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="PrivateNotchedOutline-legendLabelled-234 PrivateNotchedOutline-legendNotched-235"
+          class="css-14lo706"
         >
           <span>
             Current Project
@@ -194,34 +220,44 @@ exports[`Switcher renders to match snapshot when there are accessible projects 1
 exports[`Switcher renders to match snapshot when there are no projects to display 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiTextField-root switcher MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root switcher css-1z10yd4-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1fuztnd-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="false"
+      for="mui-3"
+      id="mui-3-label"
     >
       Current Project
     </label>
     <div
-      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-16ss1o8-MuiInputBase-root-MuiOutlinedInput-root"
     >
       <div
+        aria-expanded="false"
         aria-haspopup="listbox"
-        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        aria-labelledby="mui-3-label mui-3"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id="mui-3"
         role="button"
         tabindex="0"
       >
-        <span>
+        <span
+          class="notranslate"
+        >
           ​
         </span>
       </div>
       <input
-        type="hidden"
+        aria-hidden="true"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        tabindex="-1"
         value=""
       />
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
@@ -231,10 +267,10 @@ exports[`Switcher renders to match snapshot when there are no projects to displa
       </svg>
       <fieldset
         aria-hidden="true"
-        class="PrivateNotchedOutline-root-317 MuiOutlinedInput-notchedOutline"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="PrivateNotchedOutline-legendLabelled-319"
+          class="css-yjsfm1"
         >
           <span>
             Current Project

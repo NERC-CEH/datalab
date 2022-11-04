@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
 import { UpdateFormControls, formatAndParseMultiSelect, renderSelectField } from '../../components/common/form/controls';

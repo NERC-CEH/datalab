@@ -2,67 +2,75 @@
 
 exports[`RemoveUserDialog when the dialog state has open equal to true and a user set renders to match snapshot 1`] = `
 <div
-  class="MuiDialog-container MuiDialog-scrollPaper"
-  role="none presentation"
-  style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
-  tabindex="-1"
+  class="MuiDialog-root MuiModal-root css-zw3mfo-MuiModal-root-MuiDialog-root"
+  role="presentation"
 >
   <div
-    class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiPaper-elevation24 MuiPaper-rounded"
-    role="dialog"
+    aria-hidden="true"
+    class="MuiBackdrop-root css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  />
+  <div
+    data-testid="sentinelStart"
+    tabindex="0"
+  />
+  <div
+    class="MuiDialog-container MuiDialog-scrollPaper css-hz1bth-MuiDialog-container"
+    role="presentation"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+    tabindex="-1"
   >
     <div
-      class="MuiDialogTitle-root"
+      aria-labelledby="mui-1"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-1s9m6is-MuiPaper-root-MuiDialog-paper"
+      role="dialog"
     >
       <h2
-        class="MuiTypography-root MuiTypography-h6"
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+        id="mui-1"
       >
         Remove User Permissions?
       </h2>
-    </div>
-    <div
-      class="MuiDialogContent-root"
-    >
-      <p
-        class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+      <div
+        class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
       >
-        Are you sure you want to remove all project permissions for User One?
-      </p>
-    </div>
-    <div
-      class="MuiDialogActions-root MuiDialogActions-spacing"
-    >
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined dialogDeleteUserButton"
-        id="remove-button"
-        tabindex="0"
-        type="button"
+        <p
+          class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiDialogContentText-root css-1k6zr5f-MuiTypography-root-MuiDialogContentText-root"
+        >
+          Are you sure you want to remove all project permissions for User One?
+        </p>
+      </div>
+      <div
+        class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
       >
-        <span
-          class="MuiButton-label"
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium dialogDeleteUserButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+          id="remove-button"
+          tabindex="0"
+          type="button"
         >
           Remove
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
-        id="cancel-button"
-        tabindex="0"
-        type="button"
-      >
-        <span
-          class="MuiButton-label"
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-4eo762-MuiButtonBase-root-MuiButton-root"
+          id="cancel-button"
+          tabindex="0"
+          type="button"
         >
           Cancel
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
     </div>
   </div>
+  <div
+    data-testid="sentinelEnd"
+    tabindex="0"
+  />
 </div>
 `;

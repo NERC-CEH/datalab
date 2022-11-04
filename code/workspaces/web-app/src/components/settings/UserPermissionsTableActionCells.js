@@ -1,8 +1,8 @@
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import TableCell from '@mui/material/TableCell';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import Icon from '@mui/material/Icon';
 import { PERMISSION_VALUES } from '../../constants/permissions';
 
 export function CheckboxCell({ user, isCurrentUser, currentUserSystemAdmin, checkboxSpec, projectKey, classes, cellKey, actions, dispatch }) {
@@ -50,7 +50,7 @@ export function RemoveUserButtonCell({ user, isCurrentUser, currentUserSystemAdm
         onClick={() => {
           setRemoveUserDialogState({ user, open: true });
         }}
-      >
+        size="large">
         <Icon>{'remove_circle_outline'}</Icon>
       </IconButton>
     </TableCell>

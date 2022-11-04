@@ -1,13 +1,13 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import MenuItem from '@material-ui/core/MenuItem';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Tooltip from '@material-ui/core/Tooltip';
-import Chip from '@material-ui/core/Chip';
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
+import Autocomplete from '@mui/material/Autocomplete';
+import CircularProgress from '@mui/material/CircularProgress';
+import Tooltip from '@mui/material/Tooltip';
+import Chip from '@mui/material/Chip';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import makeStyles from '@mui/styles/makeStyles';
 import { fieldStyle, fieldStyleProps, multilineFieldStyleProps } from './controlStyles';
 import theme from '../../../theme';
 import PrimaryActionButton from '../buttons/PrimaryActionButton';
@@ -18,7 +18,7 @@ const useStyles = makeStyles(injectedTheme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     width: '100%',
-    margin: `${theme.spacing(2)}px 0`,
+    margin: `${theme.spacing(2)} 0`,
   },
   button: {
     '& + &': {
@@ -129,57 +129,59 @@ export const renderMultiSelectAutocompleteField = ({
     typeof input.onBlur === 'function' && typeof setCurrentValue === 'function' && input.onBlur(currentValue);
   };
   return (
-  <Autocomplete
-    style={fieldStyle}
-    multiple
-    options={options}
-    getOptionLabel={getOptionLabel}
-    getOptionSelected={getOptionSelected}
-    autoHighlight
-    loading={loading}
-    {...input} // onChange and onBlur overridden below
-    onChange={onChange}
-    onBlur={onBlur}
-    {...custom}
-    renderTags={(tagValue, getTagProps) => tagValue.map((option, index) => (
-      <Chip
-        label={getOptionLabel(option)}
-        {...getTagProps({ index })}
-        disabled={fixedOptions.includes(option)}
-      />))}
-    renderInput={params => (
-      <TextField
-        {...params}
-        InputLabelProps={InputLabelProps}
-        helperText={touched ? error : ''}
-        error={error && touched}
-        label={label}
-        placeholder={placeholder}
-        InputProps={{
-          ...params.InputProps,
-          endAdornment: (
-            <>
-              {loading && <CircularProgress size={30}/>}
-              {params.InputProps.endAdornment}
-            </>
-          ),
-        }}
-        {...fieldStyleProps}
-      />)}
-    renderOption={
-      (option, { selected }) => <>
-        { getOptionLabel(option) }
-        { selected && <Tooltip title={selectedTip} placement="right">
-          <CheckCircleRoundedIcon
-            titleAccess={selectedTip}
-            color="primary"
-            fontSize="small"
-            style={{ marginLeft: theme.spacing(2) }}
-          />
-        </Tooltip> }
-      </>
-    }
-  />
+    <Autocomplete
+      style={fieldStyle}
+      multiple
+      options={options}
+      getOptionLabel={getOptionLabel}
+      isOptionEqualToValue={getOptionSelected}
+      autoHighlight
+      loading={loading}
+      {...input} // onChange and onBlur overridden below
+      onChange={onChange}
+      onBlur={onBlur}
+      {...custom}
+      renderTags={(tagValue, getTagProps) => tagValue.map((option, index) => (
+        <Chip
+          label={getOptionLabel(option)}
+          {...getTagProps({ index })}
+          disabled={fixedOptions.includes(option)}
+        />))}
+      renderInput={params => (
+        <TextField
+          {...params}
+          InputLabelProps={InputLabelProps}
+          helperText={touched ? error : ''}
+          error={error && touched}
+          label={label}
+          placeholder={placeholder}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading && <CircularProgress size={30}/>}
+                {params.InputProps.endAdornment}
+              </>
+            ),
+          }}
+          {...fieldStyleProps}
+        />)}
+      renderOption={
+        (props, option, { selected }) => <>
+          <li {...props}>
+            { getOptionLabel(option) }
+            { selected && <Tooltip title={selectedTip} placement="right">
+              <CheckCircleRoundedIcon
+                titleAccess={selectedTip}
+                color="primary"
+                fontSize="small"
+                style={{ marginLeft: theme.spacing(2) }}
+              />
+            </Tooltip> }
+          </li>
+        </>
+      }
+    />
   );
 };
 

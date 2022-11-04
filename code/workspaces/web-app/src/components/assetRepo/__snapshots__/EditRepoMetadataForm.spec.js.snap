@@ -46,51 +46,41 @@ exports[`EditRepoMetadataForm renders to match snapshot 1`] = `
       class="makeStyles-fromControlContainer-1"
     >
       <span
+        aria-label="No changes to apply"
         class="makeStyles-button-2"
-        title="No changes to apply"
+        data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary Mui-disabled Mui-disabled"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
           disabled=""
           tabindex="-1"
           type="submit"
         >
-          <span
-            class="MuiButton-label"
-          >
-            Apply
-          </span>
+          Apply
         </button>
       </span>
       <span
+        aria-label="No changes to clear"
         class="makeStyles-button-2"
-        title="No changes to clear"
+        data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary Mui-disabled Mui-disabled"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-4eo762-MuiButtonBase-root-MuiButton-root"
           disabled=""
           tabindex="-1"
           type="button"
         >
-          <span
-            class="MuiButton-label"
-          >
-            Clear Changes
-          </span>
+          Clear Changes
         </button>
       </span>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-2 MuiButton-outlinedSecondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium makeStyles-button-2 css-4eo762-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
+        Cancel
         <span
-          class="MuiButton-label"
-        >
-          Cancel
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>

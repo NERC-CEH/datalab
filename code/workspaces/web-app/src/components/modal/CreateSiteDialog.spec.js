@@ -1,14 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import CreateSiteDialog from './CreateSiteDialog';
 import { getSiteInfo } from '../../config/images';
 
 jest.mock('../../hooks/reduxFormHooks');
 jest.mock('../../config/images');
+jest.mock('../sites/CreateSiteForm', () => props => (<div>CreateSiteForm mock {JSON.stringify(props)}</div>));
 
 describe('Site dialog', () => {
   function shallowRender(props) {
-    return shallow(<CreateSiteDialog {...props} />);
+    return render(<CreateSiteDialog {...props} />);
   }
 
   const onSubmitMock = jest.fn();
@@ -39,35 +40,9 @@ describe('Site dialog', () => {
     const props = generateProps();
 
     // Act
-    const output = shallowRender(props);
+    shallowRender(props);
 
     // Assert
-    expect(output).toMatchSnapshot();
-  });
-
-  it('wires up cancel function correctly', () => {
-    // Arrange
-    const props = generateProps();
-
-    // Act
-    const output = shallowRender(props);
-    const cancelFunction = output.find('ReduxForm').prop('cancel');
-    cancelFunction();
-
-    // Assert
-    expect(onCancelMock).toHaveBeenCalled();
-  });
-
-  it('wires up submit function correctly', () => {
-    // Arrange
-    const props = generateProps();
-
-    // Act
-    const output = shallowRender(props);
-    const submitFunction = output.find('ReduxForm').prop('onSubmit');
-    submitFunction();
-
-    // Assert
-    expect(onSubmitMock).toHaveBeenCalled();
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });

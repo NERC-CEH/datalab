@@ -1,63 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Edit data store dialog creates correct snapshot 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  fullWidth={true}
-  maxWidth="md"
-  open={true}
+<div
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiDialog-paperFullWidth css-1rdmmlq-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
 >
-  <WithStyles(ForwardRef(DialogTitle))>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+    id="mui-1"
+  >
     expectedTitle
-  </WithStyles(ForwardRef(DialogTitle))>
-  <WithStyles(ForwardRef(DialogContent))>
-    <ReduxForm
-      destroyOnUnmount={true}
-      enableReinitialize={true}
-      forceUnregisterOnUnmount={false}
-      form="editDataStoreDetails"
-      getFormState={[Function]}
-      initialValues={
-        Object {
-          "description": "Stack description",
-          "displayName": "Stack Display Name",
-          "users": Array [
-            Object {
-              "label": "expectedLabelOne",
-              "value": "expectedValueOne",
-            },
-          ],
-        }
-      }
-      keepDirtyOnReinitialize={false}
-      loadUsersPromise={
-        Object {
-          "error": null,
-          "fetching": false,
-          "value": Array [],
-        }
-      }
-      onCancel={[MockFunction onCancel]}
-      onSubmit={[Function]}
-      persistentSubmitErrors={false}
-      pure={true}
-      shouldAsyncValidate={[Function]}
-      shouldError={[Function]}
-      shouldValidate={[Function]}
-      shouldWarn={[Function]}
-      submitAsSideEffect={false}
-      touchOnBlur={true}
-      touchOnChange={false}
-      updateUnregisteredFields={false}
-      userList={
-        Array [
-          Object {
-            "label": "expectedLabelTwo",
-            "value": "expectedValueTwo",
-          },
-        ]
-      }
-      validate={[Function]}
-    />
-  </WithStyles(ForwardRef(DialogContent))>
-</WithStyles(ForwardRef(Dialog))>
+  </h2>
+  <div
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+  >
+    <div>
+      EditDataStoreForm mock 
+      {"userList":[{"label":"expectedLabelTwo","value":"expectedValueTwo"}],"loadUsersPromise":{"error":null,"fetching":false,"value":[]},"initialValues":{"displayName":"Stack Display Name","description":"Stack description","users":[{"label":"expectedLabelOne","value":"expectedValueOne"}]}}
+    </div>
+  </div>
+</div>
 `;

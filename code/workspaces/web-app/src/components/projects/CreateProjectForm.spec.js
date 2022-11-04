@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import { PureCreateProjectForm } from './CreateProjectForm';
 
 jest.mock('../common/form/controls', () => ({

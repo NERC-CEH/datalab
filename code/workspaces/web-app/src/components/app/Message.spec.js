@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '../../testUtils/renderTests';
 import Message from './Message';
 import messagesActions from '../../actions/messagesActions';
 
@@ -8,7 +8,7 @@ jest.mock('react-markdown', () => props => (<>{`React Markdown: ${props.children
 
 jest.mock('react-redux');
 jest.mock('../../actions/messagesActions');
-jest.mock('@material-ui/icons/ErrorOutline', () => () => (<div>ErrorOutlineIconMock</div>));
+jest.mock('@mui/icons-material/ErrorOutline', () => () => (<div>ErrorOutlineIconMock</div>));
 
 const message = {
   id: 'id1',

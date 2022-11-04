@@ -1,20 +1,21 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import ConfirmationDialog from './ConfirmationDialog';
 
 describe('ConfirmationDialog', () => {
-  const shallowRender = props => shallow(
-    <ConfirmationDialog {...props} />,
-  );
+  const shallowRender = (props) => {
+    render(<ConfirmationDialog {...props} />);
+    return screen.getByRole('dialog');
+  };
 
   it('renders to match snapshot', () => {
-    const render = shallowRender({
+    const container = shallowRender({
       onSubmit: jest.fn().mockName('onSubmit'),
       title: 'Dialog title',
       body: 'Dialog body',
       onCancel: jest.fn().mockName('onCancel'),
     });
 
-    expect(render).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

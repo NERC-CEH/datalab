@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, withStyles } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import Footer from '../components/app/Footer';
 
 const style = theme => ({
@@ -8,7 +9,7 @@ const style = theme => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    padding: `0 ${theme.spacing(4)}px`,
+    padding: `0 ${theme.spacing(4)}`,
     margin: '0 auto',
     width: '100%',
     minWidth: '400px',

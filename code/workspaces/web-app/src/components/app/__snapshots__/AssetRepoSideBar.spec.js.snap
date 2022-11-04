@@ -6,13 +6,13 @@ exports[`AssetRepoSideBar renders correctly when user has no permissions 1`] = `
     class="AssetRepoSideBar-sideBar-2 sideBar"
   >
     <ul
-      class="MuiList-root AssetRepoSideBar-itemList-1 itemList MuiList-padding"
+      class="MuiList-root MuiList-padding AssetRepoSideBar-itemList-1 itemList css-h4y409-MuiList-root"
     >
       <div
-        class="SideBarGroup-sidebarGroup-7"
+        class="SideBarGroup-sidebarGroup-3"
       >
         <h6
-          class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+          class="MuiTypography-root MuiTypography-h6 SideBarGroup-title-4 css-161uzub-MuiTypography-root"
         >
           Asset Repo
         </h6>
@@ -32,16 +32,16 @@ exports[`AssetRepoSideBar renders correctly when user has no permissions 1`] = `
 exports[`AssetRepoSideBar renders correctly when user is a Data Manager 1`] = `
 <div>
   <div
-    class="AssetRepoSideBar-sideBar-40 sideBar"
+    class="AssetRepoSideBar-sideBar-6 sideBar"
   >
     <ul
-      class="MuiList-root AssetRepoSideBar-itemList-39 itemList MuiList-padding"
+      class="MuiList-root MuiList-padding AssetRepoSideBar-itemList-5 itemList css-h4y409-MuiList-root"
     >
       <div
-        class="SideBarGroup-sidebarGroup-45"
+        class="SideBarGroup-sidebarGroup-7"
       >
         <h6
-          class="MuiTypography-root SideBarGroup-title-46 MuiTypography-h6"
+          class="MuiTypography-root MuiTypography-h6 SideBarGroup-title-8 css-161uzub-MuiTypography-root"
         >
           Asset Repo
         </h6>

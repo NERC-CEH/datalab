@@ -1,68 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateDataStoreForm creates correct snapshot for create Data Store Form 1`] = `
-<form>
-  <div>
-    <Field
-      component={[Function]}
-      label="Display Name"
-      name="displayName"
-      placeholder="Display Name"
-    />
-  </div>
-  <div>
-    <Field
-      component={[Function]}
-      label="Storage Type"
-      name="type"
-      options={
-        Object {
-          "NFS": Object {
-            "text": "NFS",
-            "value": "NFS",
-          },
-        }
-      }
-      placeholder="Storage Type"
-    />
-  </div>
-  <div>
-    <Field
-      InputProps={
-        Object {
-          "inputProps": Object {
-            "max": 200,
-            "min": 5,
-          },
-        }
-      }
-      component={[Function]}
-      label="Storage Size (GB)"
-      name="volumeSize"
-      parse={[Function]}
-      placeholder="GB"
-      type="number"
-    />
-  </div>
-  <div>
-    <Field
-      component={[Function]}
-      label="Internal Name"
-      name="name"
-      placeholder="Internal Name"
-    />
-  </div>
-  <div>
-    <Field
-      component={[Function]}
-      label="Description"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
-  <CreateFormControls
-    fullWidthButtons={true}
-    onCancel={[MockFunction]}
-  />
-</form>
+<div>
+  <form>
+    <div>
+      <div>
+        Field mock 
+        {"name":"displayName","label":"Display Name","placeholder":"Display Name"}
+      </div>
+    </div>
+    <div>
+      <div>
+        Field mock 
+        {"name":"type","label":"Storage Type","placeholder":"Storage Type","options":{"NFS":{"text":"NFS","value":"NFS"}}}
+      </div>
+    </div>
+    <div>
+      <div>
+        Field mock 
+        {"name":"volumeSize","label":"Storage Size (GB)","placeholder":"GB","type":"number","InputProps":{"inputProps":{"min":5,"max":200}}}
+      </div>
+    </div>
+    <div>
+      <div>
+        Field mock 
+        {"name":"name","label":"Internal Name","placeholder":"Internal Name"}
+      </div>
+    </div>
+    <div>
+      <div>
+        Field mock 
+        {"name":"description","label":"Description","placeholder":"Description"}
+      </div>
+    </div>
+    <div
+      class="makeStyles-fromControlContainer-1"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-1xb5c10-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="submit"
+      >
+        Create
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-1gfot13-MuiButtonBase-root-MuiButton-root"
+        style="margin-left: 5px;"
+        tabindex="0"
+        type="button"
+      >
+        Cancel
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </form>
+</div>
 `;

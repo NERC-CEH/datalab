@@ -10,7 +10,7 @@ exports[`DescribeElement renders correct snapshot 1`] = `
         class="DescribeElement-contentContainer-2"
       >
         <h4
-          class="MuiTypography-root DescribeElement-title-1 MuiTypography-h4"
+          class="MuiTypography-root MuiTypography-h4 DescribeElement-title-1 css-1yqx3hy-MuiTypography-root"
         >
           cardTitle
         </h4>
@@ -35,21 +35,21 @@ exports[`DescribeElement renders correct snapshot 1`] = `
 exports[`DescribeElement renders correct snapshot with switches 1`] = `
 <div>
   <div
-    class="DescribeElementSegment-outerDark-40"
+    class="DescribeElementSegment-outerDark-10"
   >
     <div
-      class="DescribeElementSegment-inner-42"
+      class="DescribeElementSegment-inner-12"
     >
       <div
-        class="DescribeElement-contentContainer-38"
+        class="DescribeElement-contentContainer-8"
       >
         <h4
-          class="MuiTypography-root DescribeElement-title-37 MuiTypography-h4"
+          class="MuiTypography-root MuiTypography-h4 DescribeElement-title-7 css-1yqx3hy-MuiTypography-root"
         >
           cardTitle
         </h4>
         <div
-          class="DescribeElement-cardContainer-39"
+          class="DescribeElement-cardContainer-9"
         >
           <div>
             DescribeElementCard mock 

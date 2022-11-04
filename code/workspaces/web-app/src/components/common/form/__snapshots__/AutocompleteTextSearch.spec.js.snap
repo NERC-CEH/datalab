@@ -11,13 +11,13 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
     role="combobox"
   >
     <div
-      class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
     >
       <div
         aria-autocomplete="list"
         aria-controls="downshift-0-menu"
         aria-labelledby="downshift-0-label"
-        class="MuiInputBase-root MuiInput-root DownshiftMultiple-inputRoot-5 MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
+        class="MuiInputBase-root MuiOutlinedInput-root DownshiftMultiple-inputRoot-5 MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart css-195h1tr-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div>
           Chip mock 
@@ -26,21 +26,34 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
         <input
           aria-invalid="false"
           autocomplete="off"
-          class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart css-1ua80n0-MuiInputBase-input-MuiOutlinedInput-input"
           id="downshift-0-input"
           placeholder="Expected placerholder text"
           type="text"
           value="exp"
         />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
       </div>
     </div>
     <div
-      class="MuiPaper-root DownshiftMultiple-paper-3 MuiPaper-elevation1"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 DownshiftMultiple-paper-3 css-4z9bxz-MuiPaper-root"
     >
       <div
-        aria-disabled="false"
         aria-selected="false"
-        class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
         id="downshift-0-item-0"
         role="option"
         style="font-weight: 400;"
@@ -48,13 +61,12 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
       >
         expectedLabelOne
         <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </div>
       <div
-        aria-disabled="false"
         aria-selected="false"
-        class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
         id="downshift-0-item-1"
         role="option"
         style="font-weight: 500;"
@@ -62,7 +74,7 @@ exports[`AutocompleteTextSearch generates correct snapshot 1`] = `
       >
         expectedLabelTwo
         <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </div>
     </div>

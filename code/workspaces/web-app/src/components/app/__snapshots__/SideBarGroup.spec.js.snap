@@ -6,7 +6,7 @@ exports[`SideBarGroup when children provided renders children and title when tit
     class="SideBarGroup-sidebarGroup-7"
   >
     <h6
-      class="MuiTypography-root SideBarGroup-title-8 MuiTypography-h6"
+      class="MuiTypography-root MuiTypography-h6 SideBarGroup-title-8 css-161uzub-MuiTypography-root"
     >
       Test Group
     </h6>

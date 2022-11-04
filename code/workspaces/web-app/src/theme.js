@@ -1,5 +1,5 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { blueGrey, red } from '@material-ui/core/colors';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { blueGrey, red } from '@mui/material/colors';
 
 const primary = { main: 'rgba(36, 166, 154, 1.0)' };
 const primaryTransparent = 'rgba(36, 166, 154, 0.4)';
@@ -31,7 +31,7 @@ const spacing = 5;
 const navBarHeight = 8 * spacing;
 const cardImageSize = 13 * spacing;
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary,
     primaryTransparent,
@@ -83,14 +83,21 @@ const theme = createMuiTheme({
   },
   spacing,
   cardImageSize,
-  overrides: {
-    MuiButton: {
-      root: {
-        textTransform: 'none',
-        fontWeight: '400',
+  components: {
+    MuiTextField: {
+      defaultProps: {
+        size: 'small',
       },
-      contained: {
-        boxShadow: 'none',
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: '400',
+        },
+        contained: {
+          boxShadow: 'none',
+        },
       },
     },
   },

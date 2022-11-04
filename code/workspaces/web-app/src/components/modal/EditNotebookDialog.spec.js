@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import EditNotebookDialog from './EditNotebookDialog';
 
 describe('EditNotebookDialog', () => {
@@ -9,12 +9,13 @@ describe('EditNotebookDialog', () => {
     onCancel = jest.fn().mockName('onCancel'),
     stack = { name: 'stack name', displayName: 'Display Name', description: 'description', assets: [] },
     formComponent,
-  }) => shallow(
+  }) => render(
     <EditNotebookDialog {...{ title, onSubmit, onCancel, stack, formComponent }} />,
   );
 
   it('renders correctly passing values to provided from component', () => {
     const FormComponent = () => <div />;
-    expect(shallowRender({ formComponent: FormComponent })).toMatchSnapshot();
+    shallowRender({ formComponent: FormComponent });
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });

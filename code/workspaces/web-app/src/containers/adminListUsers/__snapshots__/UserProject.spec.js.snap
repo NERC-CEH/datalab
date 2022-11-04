@@ -6,63 +6,55 @@ exports[`UserProject renders to match snapshot passing correct props to children
     class="makeStyles-container-1"
   >
     <div
-      class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-5 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-6 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-5 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-6 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
-        aria-disabled="false"
         aria-expanded="true"
-        class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-39 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-7 Mui-expanded ForwardRef(AccordionSummary)-expanded-9 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-42 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-10 Mui-expanded ForwardRef(AccordionSummary)-expanded-9 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
-            class="MuiTypography-root makeStyles-heading-3 MuiTypography-h5"
+            class="MuiTypography-root MuiTypography-h5 makeStyles-heading-3 css-k8n68h-MuiTypography-root"
           >
             project name
           </h5>
         </div>
         <div
-          aria-disabled="false"
-          aria-hidden="true"
-          class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-40 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-41 MuiIconButton-edgeEnd"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-9 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
-          <span
-            class="MuiIconButton-label"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ExpandMoreIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-              />
-            </svg>
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
+            <path
+              d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
         </div>
       </div>
       <div
-        class="MuiCollapse-container MuiCollapse-entered"
+        class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
         style="min-height: 0px;"
       >
         <div
-          class="MuiCollapse-wrapper"
+          class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
         >
           <div
-            class="MuiCollapse-wrapperInner"
+            class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
           >
             <div
+              class="MuiAccordion-region"
               role="region"
             >
               <div
-                class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-105"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-11 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
                   class="makeStyles-resources-2"
@@ -71,7 +63,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     class="makeStyles-projectRoles-4"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="project-checkbox-undefined-proj-1234-projectAdmin"
                     >
                       Project admin
@@ -79,35 +71,31 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     <span
                       aria-disabled="true"
                       aria-labelledby="project-checkbox-undefined-proj-1234-projectAdmin"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-113 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-114 Mui-checked PrivateSwitchBase-disabled-115 Mui-disabled MuiIconButton-colorPrimary Mui-disabled Mui-disabled"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                       tabindex="-1"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        disabled=""
+                        name="projectAdmin"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-116"
-                          data-indeterminate="false"
-                          disabled=""
-                          name="projectAdmin"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                     </span>
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="project-checkbox-undefined-proj-1234-projectUser"
                     >
                       Project user
@@ -115,35 +103,31 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     <span
                       aria-disabled="true"
                       aria-labelledby="project-checkbox-undefined-proj-1234-projectUser"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-113 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-114 Mui-checked PrivateSwitchBase-disabled-115 Mui-disabled MuiIconButton-colorPrimary Mui-disabled Mui-disabled"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                       tabindex="-1"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        disabled=""
+                        name="projectUser"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-116"
-                          data-indeterminate="false"
-                          disabled=""
-                          name="projectUser"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                     </span>
                     <p
-                      class="MuiTypography-root MuiTypography-body1"
+                      class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
                       id="project-checkbox-undefined-proj-1234-projectViewer"
                     >
                       Project viewer
@@ -151,32 +135,28 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     <span
                       aria-disabled="true"
                       aria-labelledby="project-checkbox-undefined-proj-1234-projectViewer"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-113 MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-checked-114 Mui-checked PrivateSwitchBase-disabled-115 Mui-disabled MuiIconButton-colorPrimary Mui-disabled Mui-disabled"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                       tabindex="-1"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input css-1m9pwf3"
+                        data-indeterminate="false"
+                        disabled=""
+                        name="projectViewer"
+                        type="checkbox"
+                      />
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CheckBoxIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
                       >
-                        <input
-                          checked=""
-                          class="PrivateSwitchBase-input-116"
-                          data-indeterminate="false"
-                          disabled=""
-                          name="projectViewer"
-                          type="checkbox"
-                          value=""
+                        <path
+                          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                         />
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          />
-                        </svg>
-                      </span>
+                      </svg>
                     </span>
                   </div>
                   PROJECTS_COMPONENT

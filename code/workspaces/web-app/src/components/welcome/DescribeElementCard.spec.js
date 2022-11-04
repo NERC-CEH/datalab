@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import DescribeElementCard from './DescribeElementCard';
 
 jest.mock('./DescribeElementCardBanner', () => props => (<div>DescribeElementCardBanner mock {JSON.stringify(props)}</div>));

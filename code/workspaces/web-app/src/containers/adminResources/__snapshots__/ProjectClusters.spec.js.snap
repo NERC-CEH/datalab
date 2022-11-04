@@ -3,63 +3,55 @@
 exports[`ProjectClusters renders to match snapshot passing correct props to children 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiExpansionPanel-root WithStyles(ForwardRef(ExpansionPanel))-root-1 Mui-expanded WithStyles(ForwardRef(ExpansionPanel))-expanded-2 MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-1 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-2 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
   >
     <div
-      aria-disabled="false"
       aria-expanded="true"
-      class="MuiButtonBase-root MuiExpansionPanelSummary-root WithStyles(ForwardRef(ExpansionPanelSummary))-root-35 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-37"
+      class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-3 Mui-expanded ForwardRef(AccordionSummary)-expanded-5 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
       role="button"
       tabindex="0"
     >
       <div
-        class="MuiExpansionPanelSummary-content WithStyles(ForwardRef(ExpansionPanelSummary))-content-38 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-37"
+        class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-6 Mui-expanded ForwardRef(AccordionSummary)-expanded-5 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6"
+          class="MuiTypography-root MuiTypography-h6 css-161uzub-MuiTypography-root"
         >
           Clusters
         </h6>
       </div>
       <div
-        aria-disabled="false"
-        aria-hidden="true"
-        class="MuiButtonBase-root MuiIconButton-root MuiExpansionPanelSummary-expandIcon WithStyles(ForwardRef(ExpansionPanelSummary))-expandIcon-36 Mui-expanded WithStyles(ForwardRef(ExpansionPanelSummary))-expanded-37 MuiIconButton-edgeEnd"
+        class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-5 css-yw020d-MuiAccordionSummary-expandIconWrapper"
       >
-        <span
-          class="MuiIconButton-label"
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="ExpandMoreIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-            />
-          </svg>
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
+          <path
+            d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+          />
+        </svg>
       </div>
     </div>
     <div
-      class="MuiCollapse-container MuiCollapse-entered"
+      class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
       style="min-height: 0px;"
     >
       <div
-        class="MuiCollapse-wrapper"
+        class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
       >
         <div
-          class="MuiCollapse-wrapperInner"
+          class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
         >
           <div
+            class="MuiAccordion-region"
             role="region"
           >
             <div
-              class="MuiExpansionPanelDetails-root WithStyles(ForwardRef(ExpansionPanelDetails))-root-101"
+              class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-7 css-1l0wl9e-MuiAccordionDetails-root"
             >
               ProjectClustersContainer Mock 
               {"projectKey":"test-project","modifyData":false}

@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../../testUtils/renderTests';
 import StyledTextField from './StyledTextField';
 
-jest.mock('@material-ui/core/TextField', () => props => (<div>TextField mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/material/TextField', () => props => (<div>TextField mock {JSON.stringify(props)}</div>));
 
 const shallowRender = props => render(<StyledTextField {...props} />).container;
 const expectShallowRenderToMatchSnapshot = props => expect(shallowRender(props)).toMatchSnapshot();

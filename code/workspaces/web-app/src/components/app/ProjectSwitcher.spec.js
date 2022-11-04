@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import ProjectSwitcher, {

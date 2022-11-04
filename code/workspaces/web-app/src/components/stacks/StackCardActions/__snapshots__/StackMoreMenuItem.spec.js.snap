@@ -1,28 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackMoreMenuItem should render to match snapshot 1`] = `
-<ComponentWrapper
-  permission="stack:edit"
-  userPermissions={
-    Array [
-      "stack:edit",
-      "stack:create",
-    ]
-  }
->
-  <WithStyles(ForwardRef(Tooltip))
-    disableHoverListener={false}
-    title=""
-  >
-    <div>
+<div>
+  <div>
+    <div
+      aria-label=""
+      class=""
+      data-mui-internal-clone-element="true"
+    >
        
-      <WithStyles(ForwardRef(MenuItem))
-        disabled={false}
-        onClick={[MockFunction onClick]}
+      <li
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-19w6vag-MuiButtonBase-root-MuiMenuItem-root"
+        role="menuitem"
+        tabindex="-1"
       >
         Item Text
-      </WithStyles(ForwardRef(MenuItem))>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </li>
     </div>
-  </WithStyles(ForwardRef(Tooltip))>
-</ComponentWrapper>
+  </div>
+</div>
 `;

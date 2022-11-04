@@ -16,29 +16,25 @@ exports[`UserMenu renders correct snapshot 1`] = `
         class="UserMenu-userInfo-4"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
         >
           expectedNickname
         </p>
         <p
-          class="MuiTypography-root MuiTypography-body1"
+          class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
         >
           expectedName
         </p>
       </div>
     </div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-4dagr2-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      Logout
       <span
-        class="MuiButton-label"
-      >
-        Logout
-      </span>
-      <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

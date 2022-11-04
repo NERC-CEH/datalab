@@ -18,7 +18,7 @@ exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been s
       </div>
       <div>
         <p
-          class="MuiTypography-root MuiTypography-body2"
+          class="MuiTypography-root MuiTypography-body2 css-1o1pkbg-MuiTypography-root"
         >
           assetInfo
         </p>
@@ -27,39 +27,32 @@ exports[`AddAssetsToNotebookForm renders correctly when a no notebook has been s
         </div>
       </div>
       <div
-        class="makeStyles-fromControlContainer-116"
+        class="makeStyles-fromControlContainer-3"
       >
         <span
-          class="makeStyles-button-117"
-          title=""
+          aria-label=""
+          class="makeStyles-button-4"
+          data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="submit"
           >
+            Apply
             <span
-              class="MuiButton-label"
-            >
-              Apply
-            </span>
-            <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </span>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-117 MuiButton-outlinedSecondary"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium makeStyles-button-4 css-4eo762-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
+          Reset
           <span
-            class="MuiButton-label"
-          >
-            Reset
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -91,7 +84,7 @@ exports[`AddAssetsToNotebookForm renders correctly when a project and notebook h
       </div>
       <div>
         <p
-          class="MuiTypography-root MuiTypography-body2"
+          class="MuiTypography-root MuiTypography-body2 css-1o1pkbg-MuiTypography-root"
         >
           assetInfo
         </p>
@@ -100,39 +93,32 @@ exports[`AddAssetsToNotebookForm renders correctly when a project and notebook h
         </div>
       </div>
       <div
-        class="makeStyles-fromControlContainer-31"
+        class="makeStyles-fromControlContainer-1"
       >
         <span
-          class="makeStyles-button-32"
-          title=""
+          aria-label=""
+          class="makeStyles-button-2"
+          data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="submit"
           >
+            Apply
             <span
-              class="MuiButton-label"
-            >
-              Apply
-            </span>
-            <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </span>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-32 MuiButton-outlinedSecondary"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium makeStyles-button-2 css-4eo762-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
+          Reset
           <span
-            class="MuiButton-label"
-          >
-            Reset
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>

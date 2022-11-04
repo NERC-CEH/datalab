@@ -6,7 +6,7 @@ exports[`NotebooksPage renders correct snapshot 1`] = `
     class="Page-pageTemplate-1"
   >
     <h4
-      class="MuiTypography-root Page-title-3 MuiTypography-h4"
+      class="MuiTypography-root MuiTypography-h4 Page-title-3 css-1yqx3hy-MuiTypography-root"
     >
       Notebooks
     </h4>

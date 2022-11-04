@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import ShareStackDialog from './ShareStackDialog';
 
 describe('ShareStackDialog', () => {
@@ -11,7 +11,7 @@ describe('ShareStackDialog', () => {
   const body = 'Warning about sharing this resource';
 
   it('renders to match snapshot', () => {
-    expect(shallow(
+    render(
       <ShareStackDialog
         onSubmit={jest.fn().mockName('onSubmit')}
         onCancel={jest.fn().mockName('onCancel')}
@@ -19,6 +19,7 @@ describe('ShareStackDialog', () => {
         title={title}
         body={body}
       />,
-    )).toMatchSnapshot();
+    );
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });

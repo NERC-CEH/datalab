@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, reset } from 'redux-form';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import projectActions from '../../actions/projectActions';
 import syncValidate from '../projects/updateProjectFormValidator';

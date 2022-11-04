@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import StackCard from './StackCard';
 import { storageDescription, storageDisplayValue } from '../../config/storage';
 

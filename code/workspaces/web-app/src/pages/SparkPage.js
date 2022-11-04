@@ -1,6 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import copy from 'copy-to-clipboard';
 import Page from './Page';
 import ClustersContainer from '../containers/clusters/ClustersContainer';

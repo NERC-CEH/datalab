@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../testUtils/renderTests';
 import messagesActions from '../../actions/messagesActions';
 import MessageBanner from './MessageBanner';
 

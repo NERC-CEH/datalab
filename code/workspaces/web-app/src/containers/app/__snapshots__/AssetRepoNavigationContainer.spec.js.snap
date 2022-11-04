@@ -9,60 +9,56 @@ exports[`AssetRepoNavigationContainer renders to match snapshot passing correct 
       class="AssetRepoSideBar-sideBar-4"
     >
       <ul
-        class="MuiList-root AssetRepoSideBar-itemList-3 MuiList-padding"
+        class="MuiList-root MuiList-padding AssetRepoSideBar-itemList-3 css-h4y409-MuiList-root"
       >
         <div
-          class="SideBarGroup-sidebarGroup-9"
+          class="SideBarGroup-sidebarGroup-5"
         >
           <h6
-            class="MuiTypography-root SideBarGroup-title-10 MuiTypography-h6"
+            class="MuiTypography-root MuiTypography-h6 SideBarGroup-title-6 css-161uzub-MuiTypography-root"
           >
             Asset Repo
           </h6>
           <div>
             <a
-              aria-disabled="false"
-              class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+              class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button SideBarButton-inactive-7 css-1khrr4s-MuiButtonBase-root-MuiListItem-root"
               href="/assets/add-metadata"
-              role="button"
               tabindex="0"
             >
               <div
-                class="MuiListItemIcon-root Link-listIcon-43"
+                class="MuiListItemIcon-root Link-listIcon-9 css-cveggr-MuiListItemIcon-root"
               >
                 <span
                   aria-hidden="true"
-                  class="material-icons MuiIcon-root"
+                  class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
                 >
                   dashboard
                 </span>
               </div>
               Add Metadata
               <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </a>
           </div>
           <a
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root SideBarButton-inactive-41 MuiListItem-gutters MuiListItem-button"
+            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button SideBarButton-inactive-7 css-1khrr4s-MuiButtonBase-root-MuiListItem-root"
             href="/assets/find"
-            role="button"
             tabindex="0"
           >
             <div
-              class="MuiListItemIcon-root Link-listIcon-43"
+              class="MuiListItemIcon-root Link-listIcon-9 css-cveggr-MuiListItemIcon-root"
             >
               <span
                 aria-hidden="true"
-                class="material-icons MuiIcon-root"
+                class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
               >
                 dashboard
               </span>
             </div>
             Find Asset
             <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </a>
         </div>
@@ -72,18 +68,18 @@ exports[`AssetRepoNavigationContainer renders to match snapshot passing correct 
       class="SideBarNavigation-contentArea-2"
     >
       <div
-        class="Page-pageTemplate-69"
+        class="Page-pageTemplate-10"
       >
         <h4
-          class="MuiTypography-root Page-title-71 MuiTypography-h4"
+          class="MuiTypography-root MuiTypography-h4 Page-title-12 css-1yqx3hy-MuiTypography-root"
         >
           404 – Page Not Found
         </h4>
         <div
-          class="Page-contentArea-70"
+          class="Page-contentArea-11"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             <a
               href="/"

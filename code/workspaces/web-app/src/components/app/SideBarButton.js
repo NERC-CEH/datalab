@@ -1,11 +1,11 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import withStyles from '@mui/styles/withStyles';
 import NavLink from './NavLink';
 
 const styles = (theme) => {
   const coreStyle = {
-    padding: `${theme.spacing(1)}px ${theme.spacing(1)}px`,
-    margin: `${theme.spacing(0.5)}px 0`,
+    padding: `${theme.spacing(1)} ${theme.spacing(1)}`,
+    margin: `${theme.spacing(0.5)} 0`,
     borderRadius: theme.shape.borderRadius,
   };
 

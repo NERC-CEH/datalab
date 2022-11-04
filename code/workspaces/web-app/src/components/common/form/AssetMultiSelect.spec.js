@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render } from '../../../testUtils/renderTests';
 import { useVisibleAssets } from '../../../hooks/assetRepoHooks';
 import AssetMultiSelect from './AssetMultiSelect';
 
 jest.mock('react-redux');
 jest.mock('../../../hooks/assetRepoHooks');
 
-jest.mock('@material-ui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
+jest.mock('@mui/lab/Autocomplete', () => props => (<div>Autocomplete mock {JSON.stringify(props)}</div>));
 
 const asset1 = { assetId: 'asset-1', name: 'Asset 1', version: 'v1' };
 const asset2 = { assetId: 'asset-2', name: 'Asset 2', version: 'v2' };

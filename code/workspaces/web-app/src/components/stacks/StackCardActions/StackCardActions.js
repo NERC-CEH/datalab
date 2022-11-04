@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { withStyles } from '@material-ui/core/styles';
-import Menu from '@material-ui/core/Menu';
-import Icon from '@material-ui/core/Icon';
-import Tooltip from '@material-ui/core/Tooltip';
+import withStyles from '@mui/styles/withStyles';
+import Menu from '@mui/material/Menu';
+import Icon from '@mui/material/Icon';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { statusTypes, visibilityTypes } from 'common';
@@ -82,7 +82,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
     setAnchorEl(null);
   };
 
-  const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton innerRef={ref} {...props} />);
+  const OpenButton = React.forwardRef((props, ref) => <PrimaryActionButton ref={ref} {...props} />);
 
   const shouldRenderLogs = userActions.logs && getLogs !== undefined;
   const shouldRenderEdit = userActions.edit && editStack !== undefined;

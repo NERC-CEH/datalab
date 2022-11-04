@@ -1,7 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen, configure } from '@testing-library/react';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import { render, fireEvent, screen, configure } from '../../testUtils/renderTests';
 import MessageCreator from './MessageCreator';
 
 jest.mock('../../components/app/Message', () => props => <div>{`Message: ${props.message.message}, AllowDismiss: ${props.allowDismiss.toString()}`}</div>);
@@ -16,9 +14,7 @@ describe('MessageCreator', () => {
   });
 
   const MessageCreatorWithProvider = () => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
-      <MessageCreator createMessage={createMessageFn}/>
-    </MuiPickersUtilsProvider>
+    <MessageCreator createMessage={createMessageFn}/>
   );
 
   it('renders correctly', () => {

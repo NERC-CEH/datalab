@@ -1,7 +1,7 @@
-import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import withStyles from '@mui/styles/withStyles';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 import theme from '../../theme';
 
 const ResourceAccordion = withStyles({
@@ -18,7 +18,7 @@ const ResourceAccordion = withStyles({
   },
   expanded: {
   },
-})(ExpansionPanel);
+})(Accordion);
 
 const ResourceAccordionSummary = withStyles({
   root: {
@@ -44,7 +44,7 @@ const ResourceAccordionSummary = withStyles({
       margin: 0,
     },
   },
-})(ExpansionPanelSummary);
+})(AccordionSummary);
 
 const ResourceAccordionDetails = withStyles({
   root: {
@@ -52,6 +52,6 @@ const ResourceAccordionDetails = withStyles({
     flexDirection: 'column',
     padding: 0,
   },
-})(ExpansionPanelDetails);
+})(AccordionDetails);
 
 export { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails };

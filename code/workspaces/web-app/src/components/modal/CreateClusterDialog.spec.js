@@ -1,6 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
 import CreateClusterDialog from './CreateClusterDialog';
+
+jest.mock('../cluster/CreateClusterForm', () => props => (<div>CreateClusterForm mock {JSON.stringify(props)}</div>));
 
 describe('CreateClusterDialog', () => {
   const getProps = () => ({
@@ -13,11 +15,12 @@ describe('CreateClusterDialog', () => {
     workerMaxMemory: { lowerLimit: 0.5, default: 4, upperLimit: 8 },
     workerMaxCpu: { lowerLimit: 0.5, default: 0.5, upperLimit: 2 },
     projectKey: 'testproj',
+    condaRequired: true,
   });
 
   it('renders correctly passing props to child components', () => {
     const props = getProps();
-    const render = shallow(<CreateClusterDialog {...props} />);
-    expect(render).toMatchSnapshot();
+    render(<CreateClusterDialog {...props} />);
+    expect(screen.getByRole('dialog')).toMatchSnapshot();
   });
 });

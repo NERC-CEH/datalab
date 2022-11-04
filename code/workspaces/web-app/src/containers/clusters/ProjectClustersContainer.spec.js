@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 import { reset } from 'redux-form';
+import { render } from '../../testUtils/renderTests';
 import ProjectClustersContainer, { confirmScaleCluster, getDialogProps } from './ProjectClustersContainer';
 import notify from '../../components/common/notify';
 

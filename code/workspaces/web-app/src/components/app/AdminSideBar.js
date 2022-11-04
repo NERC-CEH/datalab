@@ -1,5 +1,5 @@
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+import withStyles from '@mui/styles/withStyles';
+import List from '@mui/material/List';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideBarGroup from './SideBarGroup';

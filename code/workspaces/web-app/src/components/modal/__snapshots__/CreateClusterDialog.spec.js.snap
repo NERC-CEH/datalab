@@ -1,53 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateClusterDialog renders correctly passing props to child components 1`] = `
-<WithStyles(ForwardRef(Dialog))
-  maxWidth="md"
-  open={true}
+<div
+  aria-labelledby="mui-1"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-rx25b2-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
 >
   <div
-    className="makeStyles-dialogDiv-1"
+    class="makeStyles-dialogDiv-1"
   >
-    <WithStyles(ForwardRef(DialogTitle))>
+    <h2
+      class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-xq3hxg-MuiTypography-root-MuiDialogTitle-root"
+      id="mui-1"
+    >
       Create Cluster Dialog Title
-    </WithStyles(ForwardRef(DialogTitle))>
-    <WithStyles(ForwardRef(DialogContent))>
-      <CreateClusterForm
-        cancel={[MockFunction onCancel]}
-        clusterMaxWorkers={
-          Object {
-            "default": 4,
-            "lowerLimit": 1,
-            "upperLimit": 8,
-          }
-        }
-        dataStorageOptions={Array []}
-        formName="createCluster"
-        initialValues={
-          Object {
-            "maxWorkerCpu": 0.5,
-            "maxWorkerMemoryGb": 4,
-            "maxWorkers": 4,
-          }
-        }
-        onSubmit={[MockFunction onSubmit]}
-        projectKey="testproj"
-        workerMaxCpu={
-          Object {
-            "default": 0.5,
-            "lowerLimit": 0.5,
-            "upperLimit": 2,
-          }
-        }
-        workerMaxMemory={
-          Object {
-            "default": 4,
-            "lowerLimit": 0.5,
-            "upperLimit": 8,
-          }
-        }
-      />
-    </WithStyles(ForwardRef(DialogContent))>
+    </h2>
+    <div
+      class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+    >
+      <div>
+        CreateClusterForm mock 
+        {"formName":"createCluster","clusterMaxWorkers":{"lowerLimit":1,"default":4,"upperLimit":8},"workerMaxMemory":{"lowerLimit":0.5,"default":4,"upperLimit":8},"workerMaxCpu":{"lowerLimit":0.5,"default":0.5,"upperLimit":2},"dataStorageOptions":[],"initialValues":{"maxWorkers":4,"maxWorkerMemoryGb":4,"maxWorkerCpu":0.5},"projectKey":"testproj","condaRequired":true}
+      </div>
+    </div>
   </div>
-</WithStyles(ForwardRef(Dialog))>
+</div>
 `;
