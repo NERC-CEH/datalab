@@ -1,4 +1,4 @@
-import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { blueGrey, red } from '@mui/material/colors';
 
 const primary = { main: 'rgba(36, 166, 154, 1.0)' };
