@@ -29,15 +29,15 @@ describe('MessageCreator', () => {
     const buttons = screen.getAllByRole('button');
 
     expect(previewedMessage.hidden).toBeTruthy();
-    expect(buttons[0].className).not.toEqual(expect.stringContaining('contained'));
-    expect(buttons[0].className).toEqual(expect.stringContaining('outlined'));
+    expect(buttons[1].className).not.toEqual(expect.stringContaining('contained'));
+    expect(buttons[1].className).toEqual(expect.stringContaining('outlined'));
 
     // "Click" the preview button
     fireEvent.click(wrapper.getByText('Preview'));
 
     expect(previewedMessage.hidden).toBeFalsy();
-    expect(buttons[0].className).toEqual(expect.stringContaining('contained'));
-    expect(buttons[0].className).not.toEqual(expect.stringContaining('outlined'));
+    expect(buttons[1].className).toEqual(expect.stringContaining('contained'));
+    expect(buttons[1].className).not.toEqual(expect.stringContaining('outlined'));
   });
 
   it('Updates the Message preview when input box is typed in', () => {
