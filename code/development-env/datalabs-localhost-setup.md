@@ -1,6 +1,6 @@
 # `datalabs.localhost` Setup
 
-## Enable ingress
+## Enable ingress (Minikube Only)
 
 For ingress into the cluster to work, you need to enable the minikube ingress addon.
 
