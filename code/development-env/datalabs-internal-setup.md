@@ -43,7 +43,43 @@ kubectl delete secret tls-secret -n devtest
 kubectl create secret tls tls-secret --key ./config/ca/datalabs.internal.key --cert ./config/ca/datalabs.internal.crt -n devtest
 ```
 
-## Install ingress controller for minikube
+## Install ingress controller (k3s)
+
+As k3s is a minimal distribution of Kubernetes the recommended
+way to set up ingress is through the bare metal deployment option.
+Documentation for this is found [here](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal).
+
+Once deployed, manually add a load balancer for the cluster.
+
+```yaml
+cat << EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-nginx-controller-loadbalancer
+  namespace: ingress-nginx
+spec:
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 443
+  type: LoadBalancer
+EOF
+```
+
+At this point it should be possible to deploy Ingress resources as expected.
+
+## Install ingress controller (Minikube)
 
 Due to the need to configure the arguments of the ingress controller, it is not possible to use the minikube ingress addon.
 Therefore, the ingress is installed using the [`ingress-nginx` helm chart](https://kubernetes.github.io/ingress-nginx/deploy/#using-helm).
@@ -115,6 +151,8 @@ If you enter the IP address into a web browser, you should be served an NGINX 40
 
 We need to resolve the `datalabs.internal` domain to the external IP of the ingress `LoadBalancer`.
 For this, we will use `dnsmasq` (which can be installed using `brew install dnsmasq` on Mac).
+
+**NOTE: A simple alternative to using dnsmasq is managing ingress endpoints with entrys in `/etc/hosts` which works reasonably well as most notebooks are no longer subdomains.**
 
 There are two ways of configuring `dnsmasq`.
 For both approaches, we are aiming to configure the `datalabs.internal` endpoint to resolve to `10.110.232.162` which, in this example, is the external IP of the ingress `ingress-nginx-controller` `LoadBalancer` as given in the following output of `kubectl -n devtest get services`.

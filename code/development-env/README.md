@@ -13,10 +13,10 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 * [Docker](https://docs.docker.com/get-docker/)
 * [Docker Compose](https://docs.docker.com/compose/install/) (installed with Docker for MacOS)
 * An development environment capable of running Kubernetes
-  * Option 1
+  * Option 1 (Recommended for Mac)
     * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
     * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-  * Option 2
+  * Option 2 (Recommended for Linux)
     * [k3s](https://k3s.io/)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html): `brew install dnsmasq`
@@ -257,9 +257,13 @@ KUBERNETES_API: http://192.168.1.60:8001
 ```
 
 - Once configured Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
+Depending on using Minikube or K3s the following command should the be run.
 
 ```bash
+# Minikube (including extra proxy)
 docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up --remove-orphans
+# K3s
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml --remove-orphans
 ```
 
 You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
