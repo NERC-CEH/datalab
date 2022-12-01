@@ -12,8 +12,8 @@ exports[`AssetMultiSelect renders to match snapshot passing correct props to chi
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
-        for="mui-2"
-        id="mui-2-label"
+        for="mui-1"
+        id="mui-1-label"
       >
         Assets
       </label>
@@ -73,7 +73,7 @@ exports[`AssetMultiSelect renders to match snapshot passing correct props to chi
           autocapitalize="none"
           autocomplete="off"
           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-12yjm75-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-2"
+          id="mui-1"
           placeholder="Filter by asset name or location"
           role="combobox"
           spellcheck="false"
