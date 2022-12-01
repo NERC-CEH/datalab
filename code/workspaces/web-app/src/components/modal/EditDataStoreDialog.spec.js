@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
+import { render, screen } from '../../testUtils/renderTests';
 import EditDataStoreDialog, { getOnDetailsEditSubmit } from './EditDataStoreDialog';
 import modalDialogActions from '../../actions/modalDialogActions';
 import dataStorageActions from '../../actions/dataStorageActions';
