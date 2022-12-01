@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen, within } from '../../testUtils/renderTests';
+import { render, screen } from '../../testUtils/renderTests';
 import ConfirmDialog from './ConfirmDialog';
 
 describe('ConfirmDialog', () => {
