@@ -42,7 +42,7 @@ kernels will be visible which correspond to the newly created Conda environment.
 There is a corresponding command;
 
 ```bash
-env-control del environment-name
+env-control remove environment-name
 ```
 
 This will remove a Conda environment called `environment-name`, and is useful in
