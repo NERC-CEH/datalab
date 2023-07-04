@@ -7,8 +7,8 @@ Object {
     "displayName": "Jupyter",
     "versions": Array [
       Object {
-        "displayName": "Dask 2021.6/Spark 3.1.2",
-        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
+        "displayName": "Dask 2023.1/Spark 3.3.0",
+        "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0",
       },
     ],
   },
@@ -17,8 +17,8 @@ Object {
     "displayName": "JupyterLab",
     "versions": Array [
       Object {
-        "displayName": "Dask 2021.6/Spark 3.1.2",
-        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
+        "displayName": "Dask 2023.1/Spark 3.3.0",
+        "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0",
       },
     ],
   },
@@ -73,8 +73,8 @@ Object {
     "userCanChooseFile": true,
     "versions": Array [
       Object {
-        "displayName": "Latest",
-        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
+        "displayName": "Dask 2023.1/Spark 3.3.0",
+        "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0",
       },
     ],
   },
@@ -103,8 +103,8 @@ Object {
     "userCanChooseFile": true,
     "versions": Array [
       Object {
-        "displayName": "Latest",
-        "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2",
+        "displayName": "Dask 2023.1/Spark 3.3.0",
+        "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0",
       },
     ],
   },
