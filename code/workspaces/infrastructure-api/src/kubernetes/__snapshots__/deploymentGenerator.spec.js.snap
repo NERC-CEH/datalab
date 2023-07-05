@@ -277,7 +277,7 @@ spec:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2
+        - image: nerc/jupyterlab:ee1e157f36f5-spark-3.3.0
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"start.sh\\",
@@ -401,7 +401,7 @@ spec:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2
+        - image: nerc/jupyterlab:ee1e157f36f5-spark-3.3.0
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"start.sh\\",
@@ -623,7 +623,7 @@ spec:
       # this is automatically created.
       containers:
         - name: panel-name
-          image: nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2
+          image: nerc/jupyterlab:ee1e157f36f5-spark-3.3.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5006
