@@ -28,9 +28,9 @@ spec:
           args: ["-c",
             "cd /notebooks;
             if [ -n \"$FILENAME\" ]; then
-              voila $FILENAME;
+              voila $FILENAME --Voila.ip='0.0.0.0';
             else 
-              voila .;
+              voila . --Voila.ip='0.0.0.0';
             fi;"]
           env:
             - name: CONDA_ENV_DIR
