@@ -22,7 +22,7 @@
     "js-yaml": "3.13.1",
     "jwks-rsa": "1.6.0",
     "lodash": "4.17.21",
-    "mongoose": "5.13.10",
+    "mongoose": "5.13.20",
     "mustache": "3.0.1",
     "nodemailer": "^6.7.0",
     "service-chassis": "^0.1.0",
