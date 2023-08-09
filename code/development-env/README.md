@@ -6,18 +6,22 @@ Unless stated otherwise, the following instructions are for MacOS Catalina.
 
 ### Essential
 
-* [brew](https://brew.sh/)
+* [brew](https://brew.sh/) (Mac only)
 * [Node Version Manager](https://github.com/nvm-sh/nvm)
-* Node.js v16.13.0: `nvm install 16.13.0`
+* Node.js LTS: `nvm install lts`
 * [Yarn](https://yarnpkg.com/getting-started/install)
 * [Docker](https://docs.docker.com/get-docker/)
 * [Docker Compose](https://docs.docker.com/compose/install/) (installed with Docker for MacOS)
-* [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* An development environment capable of running Kubernetes
+  * Option 1 (Recommended for Mac)
+    * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+    * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+  * Option 2 (Recommended for Linux)
+    * [k3s](https://k3s.io/)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html): `brew install dnsmasq`
 
-### Recommended
+### Recommended depending on environment
 
 * [direnv](https://direnv.net/docs/installation.html)
 * [kubectx + kubens](https://github.com/ahmetb/kubectx)
@@ -60,6 +64,31 @@ When you cd into the .envrc folder (or one of its children), you should see
 ```bash
 direnv: loading /.envrc
 direnv: export +AUTHORISATION_SERVICE_FOR_INGRESS +DEPLOYED_IN_CLUSTER
+```
+### k3s
+
+In this folder:
+
+```bash
+# Follow quick start guide here to set up k3s, but make sure
+# to disable traefik and use nginx
+# https://docs.k3s.io/quick-start
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" sh -s -
+
+# Deploy the ingress-nginx Helm Chart
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
+
+# Create devtest namespace
+kubectl apply -f ./config/manifests/minikube-namespace.yml
+
+# k3s includes its own default Storage Class - 'local-path'
+# Create PVC
+kubectl apply -f ./config/manifests/k3s-pvc.yaml
+
+# Create compute submission cluster role
+kubectl apply -f ./config/manifests/minikube-compute-submission-role.yml
 ```
 
 ### minikube
@@ -136,9 +165,7 @@ than `*.localhost` is used for local development a local DNS must be set-up to
 resolve from a browser. See README in `./config/dnsmasq`.
 
 Development TLS certificates have been generated and stored in the `./config/ca` directory.
-These provide TLS certificates for the `*.datalabs.localhost` and `*.datalabs.internal` subdomains.
-If a different subdomain is used, new certificates will need to be generated using the
-same root certificate. See README in `./config/ca`.
+These provide TLS certificates for the `*.datalabs.localhost` domain.
 
 * Open `keychain access` and from Finder drag `./config/ca/rootCA.pem` file into window
 * Double click the newly install DataLabs certificate and set trust to `Always Trust`
@@ -169,7 +196,12 @@ The URL that is used in the ingress rule can be configured using the following e
 AUTHORISATION_SERVICE_FOR_INGRESS=<url-to-access-auth-service>
 ```
 
-where `<url-to-access-auth-service>` needs to be configured to use the IP address and port through which a service in the cluster can access the authorisation service running on `localhost`.
+where `<url-to-access-auth-service>` needs to be configured to use the IP address and port through which a service in the cluster can access the authorisation service running on `localhost`. This can be found through;
+
+ ```bash 
+kubectl get nodes -o wide
+``` 
+
 From VirtualBox, this is expected to be `http://10.0.2.2:9000` as `10.0.2.2` is the IP through which items running in VirtualBox can access the host machine, and the auth service is configured to run on port `9000` by default.
 
 ### Correctly resolving and accessing notebooks
@@ -207,16 +239,37 @@ recommended as linting error will still be caught with the CI server.
 
 ## Running
 
+* Install docker-compose if not installed already
+
+```
+ sudo curl -SL https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+ ```
+
 * Start minikube proxy, in separate terminal
 
 ```bash
 kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 ```
 
-* Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
+*  Ensure that the Kubernetes API setting is configured correctly as per below.
 
 ```bash
+# For Mac the setting should be the following;
+KUBERNETES_API: http://host.docker.internal:8001
+# For Linux it will be the same IP Address that is found
+# when doing
+# kubectl get nodes -o wide e.g
+KUBERNETES_API: http://192.168.1.60:8001
+```
+
+- Once configured Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
+Depending on using Minikube or K3s the following command should the be run.
+
+```bash
+# Minikube (including extra proxy)
 docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up --remove-orphans
+# K3s
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml --remove-orphans
 ```
 
 You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`

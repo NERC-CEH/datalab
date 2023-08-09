@@ -10,7 +10,7 @@ spec:
     port: 3000
     targetPort: 3000
   type: ExternalName
-  externalName: 10.0.2.2
+  externalName: 192.168.0.61
 ---
 kind: Service
 apiVersion: v1
@@ -23,14 +23,15 @@ spec:
     port: 8000
     targetPort: 8000
   type: ExternalName
-  externalName: 10.0.2.2
+  externalName: 192.168.0.61
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: datalab-app-ingress
   namespace: devtest
 spec:
+  ingressClassName: nginx
   tls:
   - hosts:
     - testlab.datalabs.localhost
@@ -40,10 +41,16 @@ spec:
     http:
       paths:
       - path: /api
+        pathType: Prefix
         backend:
-          serviceName: datalab-api-proxy
-          servicePort: 8000
+          service:
+            name: datalab-api-proxy
+            port:
+              number: 8000
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: datalab-app-proxy
-          servicePort: 3000
+          service:
+            name: datalab-app-proxy
+            port:
+              number: 3000
