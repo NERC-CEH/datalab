@@ -78,7 +78,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" sh -s -
 # Deploy the ingress-nginx Helm Chart
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
- helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
 
 # Create devtest namespace
 kubectl apply -f ./config/manifests/minikube-namespace.yml
@@ -238,6 +238,12 @@ may be disabled using the `--no-verify` flag with `git commit`, this is not
 recommended as linting error will still be caught with the CI server.
 
 ## Running
+
+* Install docker-compose if not installed already
+
+```
+ sudo curl -SL https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+ ```
 
 * Start minikube proxy, in separate terminal
 
