@@ -4,7 +4,7 @@ metadata:
   name: {{ quote $.Values.fluentdServiceAccount }}
   namespace: {{ quote $.Values.namespace }}
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ quote $.Values.fluentdServiceAccount }}
@@ -18,7 +18,7 @@ subjects:
   namespace: {{ quote $.Values.namespace }}
 ---
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ quote $.Values.fluentdServiceAccount }}
 rules:
@@ -31,7 +31,7 @@ rules:
       - watch
       - list
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
