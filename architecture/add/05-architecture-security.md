@@ -276,7 +276,7 @@ below shows the path a request takes through the system when the Kubernetes `Ing
 is annotated with the following authorisation annotations
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: svcName
