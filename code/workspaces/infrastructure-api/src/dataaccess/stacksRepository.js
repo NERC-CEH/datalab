@@ -173,10 +173,15 @@ async function userCanRestartStack(projectKey, user, name) {
   return userCanDeleteStack(projectKey, user, name);
 }
 
+function isUserPartOfProject(user, projectName) {
+  const projectList = user.roles.projectRoles.map(project => project.projectKey);
+  return projectList.includes(projectName);
+}
+
 async function userCanScaleUpStack(projectKey, user, name) {
   // can scale if user is a member of a project and the stack is shared
   const stack = await getSharedVisibleByName(projectKey, user, name);
-  return Boolean(stack) || !!(user.roles && user.roles.instanceAdmin);
+  return (Boolean(stack) && isUserPartOfProject(user, projectKey)) || !!(user.roles && user.roles.instanceAdmin);
 }
 
 // Function is used by kube-watcher to update stacks status. This will require an

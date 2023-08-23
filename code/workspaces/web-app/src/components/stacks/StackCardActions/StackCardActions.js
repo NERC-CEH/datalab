@@ -128,19 +128,29 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
 
   return (
     <div className={classes.cardActions}>
-      {openStack && stack.status !== SUSPENDED && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
+      {openStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
         <Tooltip
           title='Cannot be opened until resource is ready' placement='bottom-start'
           disableHoverListener={isReady(stack)}
         >
           <div>
-            <OpenButton
+            {stack.status !== SUSPENDED
+            && <OpenButton
               disabled={!isReady(stack)}
               onClick={() => openStack(stack)}
               fullWidth
             >
               Open
             </OpenButton>
+            }
+            {stack.status === SUSPENDED
+            && <SecondaryActionButton
+              onClick={() => scaleStack(stack, scaleOption)}
+              fullWidth
+            >
+              Turn On
+            </SecondaryActionButton>
+            }
           </div>
         </Tooltip>
       </PermissionWrapper>}

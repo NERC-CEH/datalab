@@ -64,8 +64,8 @@
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
     "build": "react-scripts build && shx rm -rf dist && shx mv build dist",
-    "test": "react-scripts test",
-    "test-ci": "CI=true react-scripts test --maxWorkers=50%",
+    "test": "react-scripts test --maxWorkers=50%",
+    "test-ci": "CI=true react-scripts test --watchAll=false --runInBand",
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "../../node_modules/.bin/eslint ./src",
