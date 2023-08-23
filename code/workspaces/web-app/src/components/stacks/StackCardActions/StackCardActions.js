@@ -99,6 +99,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   })) : [];
 
   const shareMenuItems = shouldRenderShare ? getSharedButtons(stack, shareStack, deletePermission) : [];
+  const scaleOption = stack.status === SUSPENDED ? 1 : 0;
 
   const stackMenuItems = [
     shouldRenderLogs && { onClick: () => getLogs(stack), requiredPermission: deletePermission, name: 'Logs' },
@@ -111,7 +112,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
       disabled: stack.status === SUSPENDED,
     },
     shouldRenderScale && {
-      onClick: () => scaleStack(stack),
+      onClick: () => scaleStack(stack, scaleOption),
       requiredPermission: scalePermission,
       name: stack.status === SUSPENDED ? 'Turn On' : 'Suspend',
     },
@@ -127,7 +128,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
 
   return (
     <div className={classes.cardActions}>
-      {openStack && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
+      {openStack && stack.status !== SUSPENDED && <PermissionWrapper className={classes.buttonWrapper} userPermissions={userPermissions} permission={openPermission}>
         <Tooltip
           title='Cannot be opened until resource is ready' placement='bottom-start'
           disableHoverListener={isReady(stack)}

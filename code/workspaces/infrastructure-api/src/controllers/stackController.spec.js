@@ -24,6 +24,7 @@ const getOneByIdMock = jest.fn().mockResolvedValue('expectedPayload');
 const getOneByNameMock = jest.fn().mockResolvedValue('expectedPayload');
 const userCanDeleteStackMock = jest.fn().mockResolvedValue(true);
 const userCanRestartStackMock = jest.fn().mockResolvedValue(true);
+const userCanScaleUpStackMock = jest.fn().mockResolvedValue(true);
 const updateAccessTimeToNowMock = jest.fn().mockResolvedValue('expectedPayload');
 const resetAccessTimeMock = jest.fn().mockResolvedValue('expectedPayload');
 
@@ -35,6 +36,7 @@ stackRepository.default = {
   getOneByName: getOneByNameMock,
   userCanDeleteStack: userCanDeleteStackMock,
   userCanRestartStack: userCanRestartStackMock,
+  userCanScaleUpStack: userCanScaleUpStackMock,
   updateShareStatus: updateShareStatusMock,
   update: updateMock,
   updateAccessTimeToNow: updateAccessTimeToNowMock,
@@ -494,7 +496,7 @@ describe('Stack Controller', () => {
       });
 
       it('should return 500 if user not allowed to scale up stack', async () => {
-        userCanRestartStackMock.mockResolvedValueOnce(false);
+        userCanScaleUpStackMock.mockResolvedValueOnce(false);
 
         await stackController.scaleUpStack(request, response);
 
