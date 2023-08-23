@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import withStyles from '@mui/styles/withStyles';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown/react-markdown.min';
 import Button from '@mui/material/Button';
 import ErrorOutline from '@mui/icons-material/ErrorOutline';
 import PropTypes from 'prop-types';

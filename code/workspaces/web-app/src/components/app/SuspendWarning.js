@@ -2,7 +2,7 @@ import React from 'react';
 // import { Link, withStyles, Button } from '@material-ui/core';
 import { Link, Button } from '@mui/material';
 import withStyles from '@mui/styles/withStyles';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown/react-markdown.min';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 // import ErrorOutline from '@material-ui/icons/ErrorOutline';
 import PropTypes from 'prop-types';
