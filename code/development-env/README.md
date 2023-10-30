@@ -87,6 +87,7 @@ sudo chown -R $(whoami) /etc/rancher/k3s/
 # Deploy the ingress-nginx Helm Chart
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
+kubectl create ns ingress-nginx
 helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --set controller.ingressClassResource.default=true --set controller.watchIngressWithoutClass=true
 
 # Create devtest namespace
