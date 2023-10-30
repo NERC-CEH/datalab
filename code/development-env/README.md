@@ -82,7 +82,7 @@ In this folder:
 # to disable traefik and use nginx
 # https://docs.k3s.io/quick-start
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" sh -s -
-sudo chown -R $(id) /etc/rancher/k3s/
+sudo chown -R $(whoami) /etc/rancher/k3s/
 
 # Deploy the ingress-nginx Helm Chart
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
