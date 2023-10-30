@@ -50,11 +50,19 @@ The variables in the `.envrc` file will be set when in the directory containing 
 directory one level above the datalab repository's directory on your machine (helps
 avoid accidentally committing the file).
 
-Set your `.envrc` file to be:
+Set your `.envrc` file to be (replacing `VM_IP` with the development environment IP address (or `10.0.2.2`
+for if using VirtualBox gateway)):
 
 ```bash
-export AUTHORISATION_SERVICE_FOR_INGRESS=http://10.0.2.2:9000
+export AUTHORISATION_SERVICE_FOR_INGRESS=http://<VM_IP>:9000
 export DEPLOYED_IN_CLUSTER="false"
+export KUBERNETES_API=http://<VM_IP>:8001
+```
+
+Note if using k3s then add the following in addition;
+
+```bash
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
 (These environment variables are explained in more detail below).
@@ -74,11 +82,12 @@ In this folder:
 # to disable traefik and use nginx
 # https://docs.k3s.io/quick-start
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" sh -s -
+sudo chown -R $(id) /etc/rancher/k3s/
 
 # Deploy the ingress-nginx Helm Chart
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --set controller.ingressClassResource.default=true --set controller.watchIngressWithoutClass=true
 
 # Create devtest namespace
 kubectl apply -f ./config/manifests/minikube-namespace.yml
@@ -267,9 +276,9 @@ Depending on using Minikube or K3s the following command should the be run.
 
 ```bash
 # Minikube (including extra proxy)
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up --remove-orphans
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up
 # K3s
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml --remove-orphans
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml up
 ```
 
 You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
