@@ -73,6 +73,7 @@ When you cd into the .envrc folder (or one of its children), you should see
 direnv: loading /.envrc
 direnv: export +AUTHORISATION_SERVICE_FOR_INGRESS +DEPLOYED_IN_CLUSTER
 ```
+
 ### k3s
 
 In this folder:
@@ -145,11 +146,13 @@ kubectl apply -f ./config/manifests/minikube-compute-submission-role.yml
 If using Docker Desktop with Kubernetes instead of minikube, there are some alternative steps to the ones listed above.
 
 To get the IP address, run:
+
 ```bash
 kubectl get nodes -o wide
 ```
 
 Which will return something like:
+
 ```
 NAME             STATUS   ROLES    AGE   VERSION  INTERNAL-IP   EXTERNAL-IP  OS-IMAGE  KERNEL-VERSION CONTAINER-RUNTIME
 docker-desktop   Ready    master   ...  ...       192.168.65.3  ...          ...       ...            ...
@@ -167,32 +170,32 @@ In addition, the default context name is `docker-desktop`, instead of `minikube`
 
 Follow the instructions in [config/dnsmasq](config/dnsmasq).
 
-### Wildcard DNS & Certificate Authority
+### Wildcard DNS
 
 Chrome and FireFox will resolve sub-domains on the localhost domain (i.e. `*.localhost`) to
 the host machine; other browsers may not respond the same way. If a domain other
 than `*.localhost` is used for local development a local DNS must be set-up to
 resolve from a browser. See README in `./config/dnsmasq`.
 
+### Certificate Authority
+
+Quickstart: If you are happy to use pregenerated test certificates (for development ONLY)
+follow the relevant guide below, if you would like to generate your own see `./config/ca/`.
+
+For MacOS, you can configure access to be through `.datalabs.internal` (see [datalabs-internal-setup.md](./datalabs-internal-setup.md)).
+For Linux, you can configure access to be through `.datalabs.localhost` (see [datalabs-localhost-setup.md](./datalabs-localhost-setup.md)).
+
 Development TLS certificates have been generated and stored in the `./config/ca` directory.
 These provide TLS certificates for the `*.datalabs.localhost` domain.
 
-* Open `keychain access` and from Finder drag `./config/ca/rootCA.pem` file into window
-* Double click the newly install DataLabs certificate and set trust to `Always Trust`
-* FireFox doesn't use the machine's trusted certificate authorities by default. An option
-  needs to be turned on in Firefox to make this happen. This can be done by entering
-  `about:config` into the address bar and then setting `security.enterprise_roots.enabled`
-  to true ([reference](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox)).
+Ensure that your browser trusts the authority certificate as well (usually found in
+Settings > Security).
 
 The Client API might give SSL/TLS errors when trying to communicate with services running within minikube.
 If this is the case, provide node the path to the `rootCA.pem` file using the environment variable `NODE_EXTRA_CA_CERTS`.
 If you are running the client api with docker, the pem file will need to be mounted into the container and the value of `NODE_EXTRA_CA_CERTS` will need to be the path to the pem file from within the container.
 
 ### Enabling access to cluster from host machine
-
-There are two domains through which you can access the cluster from the host machine (once configured) that configuration information is provided for.
-For MacOS, you can configure access to be through `.datalabs.internal` (see [datalabs-internal-setup.md](./datalabs-internal-setup.md)).
-For Linux, you can configure access to be through `.datalabs.localhost` (see [datalabs-localhost-setup.md](./datalabs-localhost-setup.md)).
 
 ### Configuring ingress auth
 
@@ -208,9 +211,9 @@ AUTHORISATION_SERVICE_FOR_INGRESS=<url-to-access-auth-service>
 
 where `<url-to-access-auth-service>` needs to be configured to use the IP address and port through which a service in the cluster can access the authorisation service running on `localhost`. This can be found through;
 
- ```bash 
+ ```bash
 kubectl get nodes -o wide
-``` 
+```
 
 From VirtualBox, this is expected to be `http://10.0.2.2:9000` as `10.0.2.2` is the IP through which items running in VirtualBox can access the host machine, and the auth service is configured to run on port `9000` by default.
 
@@ -261,7 +264,7 @@ recommended as linting error will still be caught with the CI server.
 kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 ```
 
-*  Ensure that the Kubernetes API setting is configured correctly as per below.
+* Ensure that the Kubernetes API setting is configured correctly as per below.
 
 ```bash
 # For Mac the setting should be the following;
@@ -272,7 +275,7 @@ KUBERNETES_API: http://host.docker.internal:8001
 KUBERNETES_API: http://192.168.1.60:8001
 ```
 
-- Once configured Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
+* Once configured Start Mongo, DataLab App, DataLab Api, Infrastructure Api and Auth services.
 Depending on using Minikube or K3s the following command should the be run.
 
 ```bash
