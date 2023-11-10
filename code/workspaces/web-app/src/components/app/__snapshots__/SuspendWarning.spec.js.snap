@@ -32,7 +32,7 @@ exports[`SuspendWarning renders correct snapshot 1`] = `
         type="button"
       >
         <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1cghntr-MuiTypography-root-MuiLink-root"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
           href="http://localhost:undefined/howto/suspend-and-restart-resources"
           style="text-decoration: none;"
           target="_blank"

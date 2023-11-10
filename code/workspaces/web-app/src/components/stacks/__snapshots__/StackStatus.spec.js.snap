@@ -15,7 +15,7 @@ exports[`StackStatus creates correct snapshot for status types 1`] = `
 exports[`StackStatus creates correct snapshot for status types 2`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-1 css-atadlh-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-2 css-atadlh-MuiTypography-root"
     style="background-color: rgb(168, 168, 168); color: rgb(0, 0, 0);"
     type="caption"
   >
@@ -27,7 +27,7 @@ exports[`StackStatus creates correct snapshot for status types 2`] = `
 exports[`StackStatus creates correct snapshot for status types 3`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-1 css-atadlh-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-3 css-atadlh-MuiTypography-root"
     style="background-color: rgb(176, 176, 176); color: rgb(3, 3, 3);"
     type="caption"
   >
@@ -39,7 +39,7 @@ exports[`StackStatus creates correct snapshot for status types 3`] = `
 exports[`StackStatus creates correct snapshot for status types 4`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-1 css-atadlh-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-4 css-atadlh-MuiTypography-root"
     style="background-color: rgb(196, 196, 196); color: rgb(4, 4, 4);"
     type="caption"
   >
@@ -51,7 +51,7 @@ exports[`StackStatus creates correct snapshot for status types 4`] = `
 exports[`StackStatus creates correct snapshot for status types 5`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-1 css-atadlh-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter StackStatus-stackStatus-5 css-atadlh-MuiTypography-root"
     style="background-color: rgb(213, 213, 213); color: rgb(0, 0, 0);"
     type="caption"
   >

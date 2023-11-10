@@ -82,7 +82,7 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
             s
           </h6>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span
@@ -153,7 +153,7 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
             s
           </h6>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span
@@ -171,7 +171,7 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
             s
           </h6>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span
@@ -181,7 +181,7 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
             </span>
           </div>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span
@@ -199,7 +199,7 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
             s
           </h6>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span
@@ -270,7 +270,7 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
             s
           </h6>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span
@@ -322,7 +322,7 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
             s
           </h6>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-9fl7s3-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
             tabindex="-1"
           >
             <span

@@ -22,7 +22,7 @@ exports[`Confirmation creates correct snapshot for confirmation dialog 1`] = `
     </p>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
   >
     <button
       class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium IconButton-button-1 css-4dagr2-MuiButtonBase-root-MuiButton-root"
@@ -92,7 +92,7 @@ exports[`Confirmation creates correct snapshot for confirmation dialog with arra
     </p>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
   >
     <button
       class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium IconButton-button-4 css-4dagr2-MuiButtonBase-root-MuiButton-root"
