@@ -71,7 +71,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     <span
                       aria-disabled="true"
                       aria-labelledby="project-checkbox-undefined-proj-1234-projectAdmin"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                       tabindex="-1"
                     >
                       <input
@@ -103,7 +103,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     <span
                       aria-disabled="true"
                       aria-labelledby="project-checkbox-undefined-proj-1234-projectUser"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                       tabindex="-1"
                     >
                       <input
@@ -135,7 +135,7 @@ exports[`UserProject renders to match snapshot passing correct props to children
                     <span
                       aria-disabled="true"
                       aria-labelledby="project-checkbox-undefined-proj-1234-projectViewer"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-disabled PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked Mui-disabled MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                       tabindex="-1"
                     >
                       <input

@@ -93,10 +93,10 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root AddUserPermission-permissionsSelector-4 css-4mzek5-MuiFormControl-root-MuiTextField-root"
     >
       <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-14b30wl-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
-        for="mui-1"
-        id="mui-1-label"
+        for="mui-2"
+        id="mui-2-label"
       >
         Permissions
       </label>
@@ -104,18 +104,20 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
+          aria-controls="mui-1"
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-1-label mui-1"
+          aria-labelledby="mui-2-label mui-2"
           class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-1"
-          role="button"
+          id="mui-2"
+          role="combobox"
           tabindex="0"
         >
           Viewer
         </div>
         <input
           aria-hidden="true"
+          aria-invalid="false"
           class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
           tabindex="-1"
           value="Viewer"
@@ -169,10 +171,10 @@ exports[`PermissionsSelector renders to match snapshot 1`] = `
     class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root permissionsSelector css-4mzek5-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-14b30wl-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
-      for="mui-5"
-      id="mui-5-label"
+      for="mui-8"
+      id="mui-8-label"
     >
       Permissions
     </label>
@@ -180,18 +182,20 @@ exports[`PermissionsSelector renders to match snapshot 1`] = `
       class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
     >
       <div
+        aria-controls="mui-7"
         aria-expanded="false"
         aria-haspopup="listbox"
-        aria-labelledby="mui-5-label mui-5"
+        aria-labelledby="mui-8-label mui-8"
         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-        id="mui-5"
-        role="button"
+        id="mui-8"
+        role="combobox"
         tabindex="0"
       >
         Viewer
       </div>
       <input
         aria-hidden="true"
+        aria-invalid="false"
         class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
         tabindex="-1"
         value="Viewer"
@@ -237,10 +241,10 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root permissionsSelector css-4mzek5-MuiFormControl-root-MuiTextField-root"
     >
       <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1w68iww-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-14b30wl-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
-        for="mui-3"
-        id="mui-3-label"
+        for="mui-5"
+        id="mui-5-label"
       >
         Permissions
       </label>
@@ -248,18 +252,20 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-xwwn4r-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
+          aria-controls="mui-4"
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-3-label mui-3"
+          aria-labelledby="mui-5-label mui-5"
           class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-qehn2n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-3"
-          role="button"
+          id="mui-5"
+          role="combobox"
           tabindex="0"
         >
           Viewer
         </div>
         <input
           aria-hidden="true"
+          aria-invalid="false"
           class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
           tabindex="-1"
           value="Viewer"

@@ -99,6 +99,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
   })) : [];
 
   const shareMenuItems = shouldRenderShare ? getSharedButtons(stack, shareStack, deletePermission) : [];
+  const scaleOption = stack.status === SUSPENDED ? 1 : 0;
 
   const stackMenuItems = [
     shouldRenderLogs && { onClick: () => getLogs(stack), requiredPermission: deletePermission, name: 'Logs' },
@@ -111,7 +112,7 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
       disabled: stack.status === SUSPENDED,
     },
     shouldRenderScale && {
-      onClick: () => scaleStack(stack),
+      onClick: () => scaleStack(stack, scaleOption),
       requiredPermission: scalePermission,
       name: stack.status === SUSPENDED ? 'Turn On' : 'Suspend',
     },
@@ -133,13 +134,23 @@ export const PureStackCardActions = ({ stack, openStack, deleteStack, editStack,
           disableHoverListener={isReady(stack)}
         >
           <div>
-            <OpenButton
+            {stack.status !== SUSPENDED
+            && <OpenButton
               disabled={!isReady(stack)}
               onClick={() => openStack(stack)}
               fullWidth
             >
               Open
             </OpenButton>
+            }
+            {stack.status === SUSPENDED
+            && <SecondaryActionButton
+              onClick={() => scaleStack(stack, scaleOption)}
+              fullWidth
+            >
+              Turn On
+            </SecondaryActionButton>
+            }
           </div>
         </Tooltip>
       </PermissionWrapper>}
