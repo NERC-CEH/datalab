@@ -46,7 +46,7 @@ const config = convict({
   oidcProviderDomain: {
     doc: 'URL of the OpenID Connect provider domain',
     format: 'String',
-    default: 'mjbr.eu.auth0.com',
+    default: 'login.datalabs.ceh.ac.uk',
     env: 'OIDC_PROVIDER_DOMAIN',
   },
   oidcProviderAudience: {
