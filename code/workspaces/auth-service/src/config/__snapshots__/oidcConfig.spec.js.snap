@@ -2,8 +2,8 @@
 
 exports[`getOidcConfig returns config from environment to match snapshot when configuration endpoint requests fail 1`] = `
 Object {
-  "issuer": "https://mjbr.eu.auth0.com/",
-  "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
-  "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token",
+  "issuer": "https://login.datalabs.ceh.ac.uk/",
+  "jwks_uri": "https://login.datalabs.ceh.ac.uk/.well-known/jwks.json",
+  "token_endpoint": "https://login.datalabs.ceh.ac.uk/oauth/token",
 }
 `;
