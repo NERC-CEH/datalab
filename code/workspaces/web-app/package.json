@@ -64,20 +64,12 @@
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
     "build": "react-scripts build && shx rm -rf dist && shx mv build dist",
-    "test": "react-scripts test",
-    "test-ci": "CI=true react-scripts test",
+    "test": "react-scripts test --maxWorkers=50%",
+    "test-ci": "CI=true react-scripts test --watchAll=false --runInBand",
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "../../node_modules/.bin/eslint ./src",
     "lint-fix": "../../node_modules/.bin/eslint ./src --fix"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!react-markdown)/"
-    ]
   },
   "browserslist": {
     "production": [
@@ -90,5 +82,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+	"plugins": [
+		[
+		  "@babel/plugin-transform-react-jsx", {
+			  "throwIfNamespace": false
+			}
+		]
+	]
 }

@@ -186,7 +186,7 @@ const scaleUpStackExec = async (req, res) => {
   const { projectKey, name } = params;
 
   try {
-    const canScaleStack = await stackRepository.userCanRestartStack(projectKey, user, name);
+    const canScaleStack = await stackRepository.userCanScaleUpStack(projectKey, user, name);
     if (!canScaleStack) {
       throw new Error('User cannot scale up stack.');
     }

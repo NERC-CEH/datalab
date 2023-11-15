@@ -173,6 +173,6 @@ function createIngress() {
 }
 
 function createManifest() {
-  return 'apiVersion: extensions/v1beta1\n'
+  return 'apiVersion: apps/v1\n'
     + 'kind: Ingress';
 }

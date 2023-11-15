@@ -132,6 +132,14 @@ function getOneByNameUserAndCategory(projectKey, user, name, category) {
     .exec();
 }
 
+function getSharedVisibleByName(projectKey, user, name) {
+  return Stack()
+    .find()
+    .findOne({ name })
+    .filterOneByUserSharedVisible(projectKey)
+    .exec();
+}
+
 function createOrUpdate(projectKey, user, stack) {
   return Stack()
     .find()
@@ -163,6 +171,17 @@ async function userCanDeleteStack(projectKey, user, name) {
 async function userCanRestartStack(projectKey, user, name) {
   // same as delete - only users in list can restart stack
   return userCanDeleteStack(projectKey, user, name);
+}
+
+function isUserPartOfProject(user, projectName) {
+  const projectList = user.roles.projectRoles.map(project => project.projectKey);
+  return projectList.includes(projectName);
+}
+
+async function userCanScaleUpStack(projectKey, user, name) {
+  // can scale if user is a member of a project and the stack is shared
+  const stack = await getSharedVisibleByName(projectKey, user, name);
+  return (Boolean(stack) && isUserPartOfProject(user, projectKey)) || !!(user.roles && user.roles.instanceAdmin);
 }
 
 // Function is used by kube-watcher to update stacks status. This will require an
@@ -230,6 +249,7 @@ export default {
   deleteStack,
   userCanDeleteStack,
   userCanRestartStack,
+  userCanScaleUpStack,
   updateAccessTimeToNow,
   resetAccessTime,
   updateStatus,

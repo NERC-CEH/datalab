@@ -79,7 +79,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-instanceAdmin"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""
@@ -111,7 +111,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-dataManager"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""
@@ -143,12 +143,13 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary  css-di4u0j-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
                       >
                         <div
+                          aria-controls="mui-1"
                           aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-labelledby="mui-component-select-catalogue"
                           class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1f6u0wk-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                           id="mui-component-select-catalogue"
-                          role="button"
+                          role="combobox"
                           tabindex="0"
                         >
                           <span
@@ -159,6 +160,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                         </div>
                         <input
                           aria-hidden="true"
+                          aria-invalid="false"
                           class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
                           name="catalogue"
                           tabindex="-1"
@@ -287,7 +289,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-instanceAdmin"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""
@@ -319,7 +321,7 @@ exports[`UserResources renders to match snapshot passing correct props to childr
                     </p>
                     <span
                       aria-labelledby="system-checkbox-uid1-dataManager"
-                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary css-yql927-MuiButtonBase-root-MuiCheckbox-root"
+                      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium Mui-checked MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-yql927-MuiButtonBase-root-MuiCheckbox-root"
                     >
                       <input
                         checked=""

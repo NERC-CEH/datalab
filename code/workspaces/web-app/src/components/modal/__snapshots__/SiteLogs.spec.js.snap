@@ -36,7 +36,7 @@ exports[`Logs creates correct snapshot for logs dialog 1`] = `
     </span>
   </div>
   <div
-    class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
   >
     <button
       class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-o0h1hg-MuiButtonBase-root-MuiButton-root"
