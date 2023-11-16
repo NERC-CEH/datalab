@@ -2,11 +2,17 @@ import { find } from 'lodash';
 import { stackTypes } from 'common';
 import jupyterStack from './jupyterStack';
 import rstudioStack from './rstudioStack';
+import vscodeStack from './vscodeStack';
 import zeppelinStack from './zeppelinStack';
 import siteStack from './siteStack';
 
 // NOTE: All other stack details should come from 'common/src/config/images'
 const STACKS = Object.freeze({
+  VSCODE: {
+    type: stackTypes.VSCODE,
+    create: vscodeStack.createVSCode,
+    delete: vscodeStack.deleteVSCode,
+  },
   JUPYTER: {
     type: stackTypes.JUPYTER,
     create: jupyterStack.createJupyterNotebook,

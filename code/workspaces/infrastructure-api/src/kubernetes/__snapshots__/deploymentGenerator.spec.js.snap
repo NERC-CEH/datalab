@@ -767,6 +767,222 @@ spec:
 "
 `;
 
+exports[`deploymentGenerator createVSCodeDeployment generates Jupyter Notebook manifest 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: deployment-name
+  name: deployment-name
+spec:
+  selector:
+    matchLabels:
+      name: deployment-name
+  template:
+    metadata:
+      labels:
+        name: deployment-name
+        user-pod: vscode
+    spec:
+      securityContext:
+        runAsUser: 0
+      serviceAccountName: project-key-compute-submission-account
+      initContainers:
+        # This container will generate the expected folder structure, which has a workspace folder for vscode and conda folder for conda.
+        # As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/vscode/deployment-name/workspace && mkdir -p /mnt/persistentfs/vscode/deployment-name/conda\\"]
+          volumeMounts:
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated workspace and conda directories to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\"]
+          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/vscode/deployment-name && chmod 777 /mnt/persistentfs/vscode/deployment-name/workspace && chmod 777 /mnt/persistentfs/vscode/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/vscode/deployment-name/assets\\"]
+          volumeMounts:
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+      containers:
+        - image: nerc/vscode-server:fb79ef9019894b9129ff5083eba6388574e737b7-0.0.1
+          imagePullPolicy : \\"IfNotPresent\\"
+          name: deployment-name
+          command: [\\"/bin/sh\\",
+            \\"-c\\",
+            \\"exec=/home/.openvscode-server/bin/openvscode-server\\"
+            \\"--host=0.0.0.0\\"
+            \\"--connection-token=ACCESS_TOKEN\\"]
+          ]
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: deployment-name
+                  key: token
+            - name: GRANT_SUDO
+              value: \\"yes\\"
+            # - name: JUPYTER_DATA_DIR
+            #   value: \\"/data/.jupyter\\"
+            - name: CONDA_ENV_DIR
+              value: \\"/data/conda/\\"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 8Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: persistentfsvol
+              mountPath: /data
+            # - name: spark-kubernetes-properties
+            #   # /usr/local/spark is default value of $SPARK_HOME set in the
+            #   # base jupyter/pyspark-notebook Dockerfile
+            #   mountPath: /usr/local/spark/conf/spark-defaults.conf
+            #   subPath: spark-defaults.conf
+            # - name: dask-kubernetes-properties
+            #   mountPath: /opt/conda/etc/dask/dask.yaml
+            #   subPath: dask.yaml
+            # - name: jupyter-notebook-config
+            #   mountPath: /home/datalab/.jupyter/jupyter_notebook_config.py
+            #   subPath: jupyter-notebook-config.py
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: volume-mount-claim
+        # - name: jupyter-notebook-config
+        #   configMap:
+        #     name: 
+        #     items:
+        #     - key: config
+        #       path: jupyter-notebook-config.py
+"
+`;
+
+exports[`deploymentGenerator createVSCodeDeployment generates VSCode manifest 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: deployment-name
+  name: deployment-name
+spec:
+  selector:
+    matchLabels:
+      name: deployment-name
+  template:
+    metadata:
+      labels:
+        name: deployment-name
+        user-pod: vscode
+    spec:
+      securityContext:
+        runAsUser: 0
+      serviceAccountName: project-key-compute-submission-account
+      initContainers:
+        # This container will generate the expected folder structure, which has a workspace folder for vscode and conda folder for conda.
+        # As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/vscode/deployment-name/workspace && mkdir -p /mnt/persistentfs/vscode/deployment-name/conda\\"]
+          volumeMounts:
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated workspace and conda directories to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: [\\"sh\\"]
+          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/vscode/deployment-name && chmod 777 /mnt/persistentfs/vscode/deployment-name/workspace && chmod 777 /mnt/persistentfs/vscode/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/vscode/deployment-name/assets\\"]
+          volumeMounts:
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+      containers:
+        - image: nerc/vscode-server:fb79ef9019894b9129ff5083eba6388574e737b7-0.0.1
+          imagePullPolicy : \\"IfNotPresent\\"
+          name: deployment-name
+          command: [\\"/bin/sh\\",
+            \\"-c\\",
+            \\"exec=/home/.openvscode-server/bin/openvscode-server\\"
+            \\"--host=0.0.0.0\\"
+            \\"--connection-token=ACCESS_TOKEN\\"]
+          ]
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: deployment-name
+                  key: token
+            - name: GRANT_SUDO
+              value: \\"yes\\"
+            # - name: JUPYTER_DATA_DIR
+            #   value: \\"/data/.jupyter\\"
+            - name: CONDA_ENV_DIR
+              value: \\"/data/conda/\\"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 8Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: persistentfsvol
+              mountPath: /data
+            # - name: spark-kubernetes-properties
+            #   # /usr/local/spark is default value of $SPARK_HOME set in the
+            #   # base jupyter/pyspark-notebook Dockerfile
+            #   mountPath: /usr/local/spark/conf/spark-defaults.conf
+            #   subPath: spark-defaults.conf
+            # - name: dask-kubernetes-properties
+            #   mountPath: /opt/conda/etc/dask/dask.yaml
+            #   subPath: dask.yaml
+            # - name: jupyter-notebook-config
+            #   mountPath: /home/datalab/.jupyter/jupyter_notebook_config.py
+            #   subPath: jupyter-notebook-config.py
+      volumes:
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: volume-mount-claim
+        # - name: jupyter-notebook-config
+        #   configMap:
+        #     name: 
+        #     items:
+        #     - key: config
+        #       path: jupyter-notebook-config.py
+"
+`;
+
 exports[`deploymentGenerator generates createAutoScaler manifest 1`] = `
 "apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler

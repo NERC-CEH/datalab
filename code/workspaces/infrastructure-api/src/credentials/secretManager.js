@@ -3,6 +3,12 @@ import metadataGenerators from '../common/metadataGenerators';
 import k8sSecretApi from '../kubernetes/secretApi';
 import nameGenerators from '../common/nameGenerators';
 
+function createNewVSCodeCredentials() {
+  return {
+    token: tokenGenerator.generateUUID(),
+  };
+}
+
 function createNewJupyterCredentials() {
   return {
     token: tokenGenerator.generateUUID(),
@@ -35,6 +41,7 @@ function deleteStackCredentialSecret(stackName, stackType, projectKey) {
 }
 
 export default {
+  createNewVSCodeCredentials,
   createNewJupyterCredentials,
   createNewMinioCredentials,
   createNewUserCredentials,

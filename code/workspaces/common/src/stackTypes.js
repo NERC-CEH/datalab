@@ -11,6 +11,7 @@ const RSHINY = 'rshiny';
 const RSTUDIO = 'rstudio';
 const SPARK = 'SPARK';
 const VOILA = 'voila';
+const VSCODE = 'vscode';
 const ZEPPELIN = 'zeppelin';
 const singleHostNameTypes = [JUPYTER, JUPYTERLAB, RSTUDIO];
 
@@ -33,6 +34,7 @@ export {
   RSTUDIO,
   SPARK,
   VOILA,
+  VSCODE,
   ZEPPELIN,
   isSingleHostName,
   basePath,

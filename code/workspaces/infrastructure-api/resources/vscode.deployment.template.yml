@@ -1,0 +1,108 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ name }}
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+        user-pod: {{ type }}
+    spec:
+      securityContext:
+        runAsUser: 0
+      serviceAccountName: {{ serviceAccount }}
+      initContainers:
+        # This container will generate the expected folder structure, which has a workspace folder for vscode and conda folder for conda.
+        # As the container runs a root these directories are owned by root and can
+        # not be written to by datalabs:users (user:group; 1000:100).
+        - name: create-notebook-folders
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "mkdir -p /mnt/persistentfs/vscode/{{ name }}/workspace && mkdir -p /mnt/persistentfs/vscode/{{ name }}/conda"]
+          volumeMounts:
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+        # This container sets the folder permissions for the generated workspace and conda directories to be usable by
+        # datalabs:users.
+        - name: set-directory-permissions
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/vscode/{{ name }} && chmod 777 /mnt/persistentfs/vscode/{{ name }}/workspace && chmod 777 /mnt/persistentfs/vscode/{{ name }}/conda && ln -sfn /assets /mnt/persistentfs/vscode/{{ name }}/assets"]
+          volumeMounts:
+            - mountPath: /mnt/persistentfs
+              name: persistentfsvol
+      containers:
+        - image: {{ &vscode.image }}
+          imagePullPolicy : "IfNotPresent"
+          name: {{ name }}
+          command: ["/bin/sh",
+            "-c",
+            "exec=/home/.openvscode-server/bin/openvscode-server"
+            "--host=0.0.0.0"
+            "--connection-token=ACCESS_TOKEN"]
+          ]
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ name }}
+                  key: token
+            - name: GRANT_SUDO
+              value: "{{ grantSudo }}"
+            # - name: JUPYTER_DATA_DIR
+            #   value: "/data/.jupyter"
+            - name: CONDA_ENV_DIR
+              value: "/data/conda/"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 8Gi
+          livenessProbe:
+            httpGet:
+              path: {{{ basePath }}}
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            {{#volumeMount}}
+            - name: persistentfsvol
+              mountPath: /data
+            {{/volumeMount}}
+            # - name: spark-kubernetes-properties
+            #   # /usr/local/spark is default value of $SPARK_HOME set in the
+            #   # base jupyter/pyspark-notebook Dockerfile
+            #   mountPath: /usr/local/spark/conf/spark-defaults.conf
+            #   subPath: spark-defaults.conf
+            # - name: dask-kubernetes-properties
+            #   mountPath: /opt/conda/etc/dask/dask.yaml
+            #   subPath: dask.yaml
+            # - name: jupyter-notebook-config
+            #   mountPath: /home/datalab/.jupyter/jupyter_notebook_config.py
+            #   subPath: jupyter-notebook-config.py
+      volumes:
+        {{#volumeMount}}
+        - name: persistentfsvol
+          persistentVolumeClaim:
+            claimName: {{ volumeMount }}-claim
+        {{/volumeMount}}
+        # - name: jupyter-notebook-config
+        #   configMap:
+        #     name: {{ jupyterConfigMapName }}
+        #     items:
+        #     - key: config
+        #       path: jupyter-notebook-config.py
