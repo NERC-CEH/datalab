@@ -26,7 +26,7 @@ class Auth {
 
   selfServiceSignUp() {
     // Re-direct to login screen
-    this.oidcInit.signinRedirect();
+    this.oidcInit.signinRedirect({ login_hint: 'signUp' });
   }
 
   signUpConfig() {
