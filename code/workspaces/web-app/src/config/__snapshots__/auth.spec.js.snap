@@ -4,7 +4,7 @@ exports[`auth returns correct configuration 1`] = `
 Object {
   "oidc": Object {
     "userManager": Object {
-      "authority": "https://mjbr.eu.auth0.com",
+      "authority": "https://login.datalabs.ceh.ac.uk",
       "automaticSilentRenew": true,
       "client_id": "Xf62MEzjqxfaId1DVWnFul61D9oA3eMt",
       "extraQueryParams": Object {
@@ -13,12 +13,12 @@ Object {
       "filterProtocolClaims": true,
       "loadUserInfo": true,
       "metadata": Object {
-        "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
-        "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://testlab.datalabs.localhost/&client_id=Xf62MEzjqxfaId1DVWnFul61D9oA3eMt",
-        "issuer": "https://mjbr.eu.auth0.com/",
-        "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
-        "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token",
-        "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
+        "authorization_endpoint": "https://login.datalabs.ceh.ac.uk/authorize",
+        "end_session_endpoint": "https://login.datalabs.ceh.ac.uk/v2/logout?returnTo=https://testlab.datalabs.localhost/&client_id=Xf62MEzjqxfaId1DVWnFul61D9oA3eMt",
+        "issuer": "https://login.datalabs.ceh.ac.uk/",
+        "jwks_uri": "https://login.datalabs.ceh.ac.uk/.well-known/jwks.json",
+        "token_endpoint": "https://login.datalabs.ceh.ac.uk/oauth/token",
+        "userinfo_endpoint": "https://login.datalabs.ceh.ac.uk/userinfo",
       },
       "redirect_uri": "http://localhost/callback",
       "response_type": "code",
