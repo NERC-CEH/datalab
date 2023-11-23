@@ -6,7 +6,7 @@ import secrets from './secrets/secrets';
 import stackService from './stackService';
 
 // NOTE: All other stack details should come from 'common/src/config/images'
-const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER } = stackTypes;
+const { JUPYTER, JUPYTERLAB, ZEPPELIN, RSTUDIO, NBVIEWER, VSCODE } = stackTypes;
 const RSTUDIO_USERNAME = 'datalab';
 
 export default function notebookUrlService(projectKey, notebook, userToken) {
@@ -15,16 +15,21 @@ export default function notebookUrlService(projectKey, notebook, userToken) {
     return requestZeppelinToken(projectKey, notebook, userToken)
       .then(createZeppelinUrl(notebook));
   } if (notebook.type === JUPYTER || notebook.type === JUPYTERLAB) {
-    return requestJupyterToken(projectKey, notebook, userToken)
+    return requestStackToken(projectKey, notebook, userToken)
       .then(createJupyterUrl(notebook));
   } if (notebook.type === RSTUDIO) {
     return requestRStudioToken(projectKey, notebook, userToken)
       .then(createRStudioUrl(notebook));
   } if (notebook.type === NBVIEWER) {
     return Promise.resolve(`${notebook.url}/localfile`);
+  } if (notebook.type === VSCODE) {
+    return requestStackToken(projectKey, notebook, userToken)
+      .then(createVscodeUrl(notebook));
   }
   return Promise.resolve(notebook.url);
 }
+
+const createVscodeUrl = notebook => token => (token ? `${notebook.url}?tkn=${token}` : undefined);
 
 const createZeppelinUrl = notebook => token => (token ? `${notebook.url}/connect?token=${token}` : undefined);
 
@@ -51,7 +56,7 @@ function requestZeppelinToken(projectKey, stack, userToken) {
     });
 }
 
-function requestJupyterToken(projectKey, stack, userToken) {
+function requestStackToken(projectKey, stack, userToken) {
   return secrets.getStackSecret(stack, projectKey, userToken)
     .then(response => response.token);
 }
