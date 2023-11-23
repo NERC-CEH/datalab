@@ -129,6 +129,16 @@
       "masterAddress": "spark://spark-master:7077",
       "sharedRLibs": "/data/packages/R/%p/%v"
     },
+    "vscode": {
+      "displayName": "VS Code Server",
+      "category": "ANALYSIS",
+      "versions": [
+        {
+          "displayName": "Miniconda3",
+          "image": "nerc/vscode-server:fb79ef9019894b9129ff5083eba6388574e737b7-0.0.1"
+        }
+      ]
+    },
     "voila": {
       "displayName": "Voila",
       "category": "PUBLISH",

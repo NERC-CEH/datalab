@@ -171,6 +171,28 @@ describe('deploymentGenerator', () => {
     });
   });
 
+  describe('createVSCodeDeployment', () => {
+    const params = {
+      projectKey: 'project-key',
+      deploymentName: 'deployment-name',
+      name: 'notebook-name',
+      type: stackTypes.VSCODE,
+      version: 'Miniconda3',
+      volumeMount: 'volume-mount',
+    };
+    it('generates VSCode manifest', async () => {
+      const manifest = await deploymentGenerator.createVSCodeDeployment(params);
+      expect(manifest).toMatchSnapshot();
+    });
+    it('generates Jupyter Notebook manifest', async () => {
+      const manifest = await deploymentGenerator.createVSCodeDeployment({
+        ...params,
+        type: stackTypes.VSCODE,
+      });
+      expect(manifest).toMatchSnapshot();
+    });
+  });
+
   describe('createRStudioConfigMap', () => {
     it('produces expected configmap', async () => {
       const manifest = await deploymentGenerator.createRStudioConfigMap('configmap-name', '/base/path');

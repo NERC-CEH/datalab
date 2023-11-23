@@ -2,6 +2,7 @@ import fs from 'fs-extra-promise';
 import { render } from 'mustache';
 
 const ServiceTemplates = Object.freeze({
+  VSCODE_SERVICE: 'vscode.service.template.yml',
   JUPYTER_SERVICE: 'jupyter.service.template.yml',
   JUPYTERLAB_SERVICE: 'jupyterlab.service.template.yml',
   ZEPPELIN_SERVICE: 'zeppelin.service.template.yml',
@@ -17,6 +18,7 @@ const ServiceTemplates = Object.freeze({
 });
 
 const DeploymentTemplates = Object.freeze({
+  VSCODE_DEPLOYMENT: 'vscode.deployment.template.yml',
   JUPYTER_DEPLOYMENT: 'jupyter.deployment.template.yml',
   JUPYTERLAB_DEPLOYMENT: 'jupyterlab.deployment.template.yml',
   ZEPPELIN_DEPLOYMENT: 'zeppelin.deployment.template.yml',

@@ -23,6 +23,31 @@ function getImage(type, version) {
   }
 }
 
+function createVSCodeDeployment({ projectKey, deploymentName, name, type, volumeMount, version }) {
+  // const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
+  // const collaborative = type === 'jupyterlab';
+  const img = getImage(type, version);
+  const context = {
+    name: deploymentName,
+    grantSudo: 'yes',
+    domain: `${projectKey}-${name}.${config.get('datalabDomain')}`,
+    basePath: basePath(type, projectKey, name),
+    vscode: {
+      image: img.image,
+    },
+    serviceAccount: nameGenerator.computeSubmissionServiceAccount(projectKey),
+    // pySparkConfigMapName: nameGenerator.pySparkConfigMap(deploymentName),
+    // daskConfigMapName: nameGenerator.daskConfigMap(deploymentName),
+    // jupyterConfigMapName: nameGenerator.jupyterConfigMap(deploymentName),
+    type,
+    // startCmd,
+    volumeMount,
+    // collaborative,
+  };
+
+  return generateManifest(context, DeploymentTemplates.VSCODE_DEPLOYMENT);
+}
+
 function createJupyterDeployment({ projectKey, deploymentName, name, type, volumeMount, version }) {
   const startCmd = type === 'jupyterlab' ? 'lab' : 'notebook';
   const collaborative = type === 'jupyterlab';
@@ -181,6 +206,11 @@ function createMinioDeployment({ name, deploymentName, type, version }) {
   return generateManifest(context, DeploymentTemplates.MINIO_DEPLOYMENT);
 }
 
+function createVSCodeService({ serviceName }) {
+  const context = { name: serviceName };
+  return generateManifest(context, ServiceTemplates.VSCODE_SERVICE);
+}
+
 function createJupyterService({ serviceName }) {
   const context = { name: serviceName };
   return generateManifest(context, ServiceTemplates.JUPYTER_SERVICE);
@@ -293,6 +323,8 @@ function createAutoScaler({ autoScalerName, scaleDeploymentName, maxReplicas, ta
 }
 
 export default {
+  createVSCodeDeployment,
+  createVSCodeService,
   createJupyterDeployment,
   createZeppelinDeployment,
   createRStudioDeployment,
