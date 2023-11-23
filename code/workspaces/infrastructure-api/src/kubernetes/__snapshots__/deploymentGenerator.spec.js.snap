@@ -816,9 +816,7 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec=/home/.openvscode-server/bin/openvscode-server\\"
-            \\"--host=0.0.0.0\\"
-            \\"--connection-token=ACCESS_TOKEN\\"]
+            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)\\"
           ]
           ports:
             - containerPort: 3000
@@ -924,9 +922,7 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec=/home/.openvscode-server/bin/openvscode-server\\"
-            \\"--host=0.0.0.0\\"
-            \\"--connection-token=ACCESS_TOKEN\\"]
+            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)\\"
           ]
           ports:
             - containerPort: 3000

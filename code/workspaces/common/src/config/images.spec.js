@@ -3,13 +3,13 @@ import { getImageInfoForType, imageCategory, notebookList, siteList, stackList }
 
 describe('stackList', () => {
   it('returns list of NOTEBOOKs and SITEs', () => {
-    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'panel', 'rshiny', 'rstudio', 'voila', 'zeppelin']);
+    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'panel', 'rshiny', 'rstudio', 'voila', 'vscode', 'zeppelin']);
   });
 });
 
 describe('notebookList', () => {
   it('returns list of NOTEBOOKs and SITEs', () => {
-    expect(notebookList().sort()).toEqual(['jupyter', 'jupyterlab', 'rstudio', 'zeppelin']);
+    expect(notebookList().sort()).toEqual(['jupyter', 'jupyterlab', 'rstudio', 'vscode', 'zeppelin']);
   });
 });
 

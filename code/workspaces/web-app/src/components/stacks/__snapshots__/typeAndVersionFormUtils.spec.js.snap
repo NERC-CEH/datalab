@@ -39,6 +39,10 @@ Array [
     "value": "spark",
   },
   Object {
+    "text": "VS Code Server",
+    "value": "vscode",
+  },
+  Object {
     "text": "Voila",
     "value": "voila",
   },

@@ -45,7 +45,7 @@ function createVSCodeDeployment({ projectKey, deploymentName, name, type, volume
     // collaborative,
   };
 
-return generateManifest(context, DeploymentTemplates.VSCODE_DEPLOYMENT);
+  return generateManifest(context, DeploymentTemplates.VSCODE_DEPLOYMENT);
 }
 
 function createJupyterDeployment({ projectKey, deploymentName, name, type, volumeMount, version }) {
@@ -69,7 +69,7 @@ function createJupyterDeployment({ projectKey, deploymentName, name, type, volum
     volumeMount,
     collaborative,
   };
-  
+
   return generateManifest(context, DeploymentTemplates.JUPYTER_DEPLOYMENT);
 }
 
