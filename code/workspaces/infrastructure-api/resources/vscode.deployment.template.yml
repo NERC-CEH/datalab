@@ -16,7 +16,7 @@ spec:
         user-pod: {{ type }}
     spec:
       securityContext:
-        runAsUser: 0
+        runAsUser: 1000
       serviceAccountName: {{ serviceAccount }}
       initContainers:
         # This container will generate the expected folder structure, which has a workspace folder for vscode and conda folder for conda.
@@ -59,8 +59,6 @@ spec:
                   key: token
             - name: GRANT_SUDO
               value: "{{ grantSudo }}"
-            # - name: JUPYTER_DATA_DIR
-            #   value: "/data/.jupyter"
             - name: CONDA_ENV_DIR
               value: "/data/conda/"
           resources:
@@ -81,26 +79,9 @@ spec:
             - name: persistentfsvol
               mountPath: /data
             {{/volumeMount}}
-            # - name: spark-kubernetes-properties
-            #   # /usr/local/spark is default value of $SPARK_HOME set in the
-            #   # base jupyter/pyspark-notebook Dockerfile
-            #   mountPath: /usr/local/spark/conf/spark-defaults.conf
-            #   subPath: spark-defaults.conf
-            # - name: dask-kubernetes-properties
-            #   mountPath: /opt/conda/etc/dask/dask.yaml
-            #   subPath: dask.yaml
-            # - name: jupyter-notebook-config
-            #   mountPath: /home/datalab/.jupyter/jupyter_notebook_config.py
-            #   subPath: jupyter-notebook-config.py
       volumes:
         {{#volumeMount}}
         - name: persistentfsvol
           persistentVolumeClaim:
             claimName: {{ volumeMount }}-claim
         {{/volumeMount}}
-        # - name: jupyter-notebook-config
-        #   configMap:
-        #     name: {{ jupyterConfigMapName }}
-        #     items:
-        #     - key: config
-        #       path: jupyter-notebook-config.py
