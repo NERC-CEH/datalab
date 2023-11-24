@@ -796,7 +796,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/vscode/deployment-name/workspace && mkdir -p /mnt/persistentfs/vscode/deployment-name/conda\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda /assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -806,7 +806,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/vscode/deployment-name && chmod 777 /mnt/persistentfs/vscode/deployment-name/workspace && chmod 777 /mnt/persistentfs/vscode/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/vscode/deployment-name/assets\\"]
+          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks/deployment-name /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -839,11 +839,13 @@ spec:
               cpu: 2
               memory: 8Gi
           livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
+            failureThreshold: 5
             initialDelaySeconds: 5
             periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 5
           volumeMounts:
             - name: persistentfsvol
               mountPath: /data
@@ -883,7 +885,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/vscode/deployment-name/workspace && mkdir -p /mnt/persistentfs/vscode/deployment-name/conda\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda /assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -893,7 +895,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/vscode/deployment-name && chmod 777 /mnt/persistentfs/vscode/deployment-name/workspace && chmod 777 /mnt/persistentfs/vscode/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/vscode/deployment-name/assets\\"]
+          args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks/deployment-name /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -926,11 +928,13 @@ spec:
               cpu: 2
               memory: 8Gi
           livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
+            failureThreshold: 5
             initialDelaySeconds: 5
             periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 5
           volumeMounts:
             - name: persistentfsvol
               mountPath: /data

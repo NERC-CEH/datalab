@@ -26,7 +26,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "mkdir -p /mnt/persistentfs/vscode/{{ name }}/workspace && mkdir -p /mnt/persistentfs/vscode/{{ name }}/conda"]
+          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda /assets"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -36,7 +36,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks && chmod 777 /mnt/persistentfs/vscode/{{ name }} && chmod 777 /mnt/persistentfs/vscode/{{ name }}/workspace && chmod 777 /mnt/persistentfs/vscode/{{ name }}/conda && ln -sfn /assets /mnt/persistentfs/vscode/{{ name }}/assets"]
+          args: ["-c", "chmod 777 /mnt/persistentfs/notebooks/{{ name }} /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda && ln -sfn /assets /mnt/persistentfs/notebooks/{{ name }}/assets"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -69,11 +69,13 @@ spec:
               cpu: 2
               memory: 8Gi
           livenessProbe:
-            httpGet:
-              path: {{{ basePath }}}
-              port: 3000
+            failureThreshold: 5
             initialDelaySeconds: 5
             periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 5
           volumeMounts:
             {{#volumeMount}}
             - name: persistentfsvol
