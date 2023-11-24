@@ -26,7 +26,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda /assets"]
+          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
