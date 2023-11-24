@@ -796,7 +796,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda /assets\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -885,7 +885,7 @@ spec:
           image: busybox
           imagePullPolicy: IfNotPresent
           command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda /assets\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
