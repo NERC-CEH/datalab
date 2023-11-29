@@ -25,8 +25,8 @@ spec:
         - name: create-notebook-folders
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: ["sh"]
-          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda"]
+          command: ["bash"]
+          args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}/{workspace,conda} /mnt/persistentfs/notebooks/{{ name }}/.vscode/{extensions,data}"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -35,7 +35,7 @@ spec:
         - name: set-directory-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: ["sh"]
+          command: ["bash"]
           args: ["-c", "chmod 777 /mnt/persistentfs/notebooks/{{ name }} /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda && ln -sfn /assets /mnt/persistentfs/notebooks/{{ name }}/assets"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
@@ -46,7 +46,8 @@ spec:
           name: {{ name }}
           command: ["/bin/sh",
             "-c",
-            "exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)"
+            "exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/{{ name }}/.vscode/data  --extensions-dir
+          /data/notebooks/{{ name }}/.vscode/extensions"
           ]
           ports:
             - containerPort: 3000

@@ -795,8 +795,8 @@ spec:
         - name: create-notebook-folders
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda\\"]
+          command: [\\"bash\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/{workspace,conda} /mnt/persistentfs/notebooks/deployment-name/.vscode/{extensions,data}\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -805,7 +805,7 @@ spec:
         - name: set-directory-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
+          command: [\\"bash\\"]
           args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks/deployment-name /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
@@ -816,7 +816,8 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)\\"
+            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data  --extensions-dir
+          /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
@@ -884,8 +885,8 @@ spec:
         - name: create-notebook-folders
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda\\"]
+          command: [\\"bash\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/{workspace,conda} /mnt/persistentfs/notebooks/deployment-name/.vscode/{extensions,data}\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
@@ -894,7 +895,7 @@ spec:
         - name: set-directory-permissions
           image: busybox
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
+          command: [\\"bash\\"]
           args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks/deployment-name /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
@@ -905,7 +906,8 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)\\"
+            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data  --extensions-dir
+          /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
