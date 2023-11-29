@@ -136,7 +136,7 @@
         {
           "default": true,
           "displayName": "Miniconda3",
-          "image": "nerc/vscode-server:fb79ef9019894b9129ff5083eba6388574e737b7-0.0.1"
+          "image": "nerc/vscode-server:2b96491b4620-0.0.2"
         }
       ]
     },
