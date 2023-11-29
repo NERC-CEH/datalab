@@ -23,7 +23,7 @@ spec:
         # As the container runs a root these directories are owned by root and can
         # not be written to by datalabs:users (user:group; 1000:100).
         - name: create-notebook-folders
-          image: busybox
+          image: bash
           imagePullPolicy: IfNotPresent
           command: ["bash"]
           args: ["-c", "mkdir -p /mnt/persistentfs/notebooks/{{ name }}/{workspace,conda} /mnt/persistentfs/notebooks/{{ name }}/.vscode/{extensions,data}"]
@@ -33,7 +33,7 @@ spec:
         # This container sets the folder permissions for the generated workspace and conda directories to be usable by
         # datalabs:users.
         - name: set-directory-permissions
-          image: busybox
+          image: bash
           imagePullPolicy: IfNotPresent
           command: ["bash"]
           args: ["-c", "chmod 777 /mnt/persistentfs/notebooks/{{ name }} /mnt/persistentfs/notebooks/{{ name }}/workspace /mnt/persistentfs/notebooks/{{ name }}/conda && ln -sfn /assets /mnt/persistentfs/notebooks/{{ name }}/assets"]
@@ -46,8 +46,7 @@ spec:
           name: {{ name }}
           command: ["/bin/sh",
             "-c",
-            "exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/{{ name }}/.vscode/data  --extensions-dir
-          /data/notebooks/{{ name }}/.vscode/extensions"
+            "exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/{{ name }}/.vscode/data --extensions-dir /data/notebooks/{{ name }}/.vscode/extensions"
           ]
           ports:
             - containerPort: 3000
