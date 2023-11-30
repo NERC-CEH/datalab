@@ -793,30 +793,30 @@ spec:
         # As the container runs a root these directories are owned by root and can
         # not be written to by datalabs:users (user:group; 1000:100).
         - name: create-notebook-folders
-          image: busybox
+          image: bash
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda\\"]
+          command: [\\"bash\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/{workspace,conda} /mnt/persistentfs/notebooks/deployment-name/.vscode/{extensions,data}\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
         # This container sets the folder permissions for the generated workspace and conda directories to be usable by
         # datalabs:users.
         - name: set-directory-permissions
-          image: busybox
+          image: bash
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
+          command: [\\"bash\\"]
           args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks/deployment-name /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/vscode-server:fb79ef9019894b9129ff5083eba6388574e737b7-0.0.1
+        - image: nerc/vscode-server:2b96491b4620-0.0.2
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)\\"
+            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
@@ -882,30 +882,30 @@ spec:
         # As the container runs a root these directories are owned by root and can
         # not be written to by datalabs:users (user:group; 1000:100).
         - name: create-notebook-folders
-          image: busybox
+          image: bash
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
-          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda\\"]
+          command: [\\"bash\\"]
+          args: [\\"-c\\", \\"mkdir -p /mnt/persistentfs/notebooks/deployment-name/{workspace,conda} /mnt/persistentfs/notebooks/deployment-name/.vscode/{extensions,data}\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
         # This container sets the folder permissions for the generated workspace and conda directories to be usable by
         # datalabs:users.
         - name: set-directory-permissions
-          image: busybox
+          image: bash
           imagePullPolicy: IfNotPresent
-          command: [\\"sh\\"]
+          command: [\\"bash\\"]
           args: [\\"-c\\", \\"chmod 777 /mnt/persistentfs/notebooks/deployment-name /mnt/persistentfs/notebooks/deployment-name/workspace /mnt/persistentfs/notebooks/deployment-name/conda && ln -sfn /assets /mnt/persistentfs/notebooks/deployment-name/assets\\"]
           volumeMounts:
             - mountPath: /mnt/persistentfs
               name: persistentfsvol
       containers:
-        - image: nerc/vscode-server:fb79ef9019894b9129ff5083eba6388574e737b7-0.0.1
+        - image: nerc/vscode-server:2b96491b4620-0.0.2
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN)\\"
+            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
