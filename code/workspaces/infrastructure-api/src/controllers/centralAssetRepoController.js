@@ -23,7 +23,7 @@ async function createAssetMetadata(request, response, next) {
 async function updateAssetMetadata(request, response, next) {
   const { user: { sub, roles } } = request;
   const { assetId } = matchedData(request, { locations: ['params'] });
-  const { ownerUserIds, visible, projectKeys } = matchedData(request, { locations: ['body'] });
+  const { ownerUserIds, visible, projectKeys, citationString, license, publisher } = matchedData(request, { locations: ['body'] });
 
   try {
     const matchingAssets = await centralAssetRepoRepository.getMetadataWithIds([assetId]);
@@ -39,7 +39,7 @@ async function updateAssetMetadata(request, response, next) {
 
     await updateStacksForAsset(assetId, visible, projectKeys);
     // do db updates last in case k8s updates fail
-    const updatedAsset = await centralAssetRepoRepository.updateMetadata({ assetId, ownerUserIds, visible, projectKeys });
+    const updatedAsset = await centralAssetRepoRepository.updateMetadata({ assetId, ownerUserIds, visible, projectKeys, citationString, license, publisher });
     return response.status(200).send(updatedAsset);
   } catch (error) {
     return next(new Error(`Error updating asset metadata - failed to update document: ${error.message}`));

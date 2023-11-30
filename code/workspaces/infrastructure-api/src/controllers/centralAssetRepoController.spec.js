@@ -1,9 +1,9 @@
 import * as expressValidator from 'express-validator';
 import centralAssetRepoRepository from '../dataaccess/centralAssetRepoRepository';
 import stacksRepository from '../dataaccess/stacksRepository';
-import centralAssetRepoController from './centralAssetRepoController';
 import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 import stackManager from '../stacks/stackManager';
+import centralAssetRepoController from './centralAssetRepoController';
 
 jest.mock('express-validator');
 jest.mock('../dataaccess/centralAssetRepoRepository');
@@ -35,6 +35,9 @@ const getUpdateMetadata = () => ({
   ownerUserIds: ['user1'],
   visible: 'BY_PROJECT',
   projectKeys: ['projKey'],
+  citationString: 'CitationString',
+  license: 'OGL',
+  publisher: 'EIDC',
 });
 
 const getUpdateRequest = metadata => ({
