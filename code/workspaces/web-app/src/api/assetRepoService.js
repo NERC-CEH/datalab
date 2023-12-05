@@ -1,4 +1,4 @@
-import { gqlQuery, gqlMutation } from './graphqlClient';
+import { gqlMutation, gqlQuery } from './graphqlClient';
 import errorHandler from './graphqlErrorHandler';
 
 function addRepoMetadata(metadata) {
@@ -29,7 +29,7 @@ function loadVisibleAssets(projectKey) {
   const query = `
     CentralAssetsAvailableToProject($projectKey: String!) {
       centralAssetsAvailableToProject(projectKey: $projectKey) {
-        assetId, name, version, fileLocation, visible, projects {key, name}
+        assetId, name, version, fileLocation, visible, projects {key, name}, citationString, license, publisher
       }
     }`;
 
@@ -41,7 +41,7 @@ function loadAssetsForUser() {
   const query = `
     CentralAssetsAvailableToUser {
       centralAssetsAvailableToUser {
-        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate
+        assetId, name, version, fileLocation, masterUrl, owners {userId, name}, visible, projects {key, name}, registrationDate, citationString, license, publisher
       }
     }`;
 

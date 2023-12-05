@@ -16,10 +16,10 @@ async function createAssetMetadata(metadata, token) {
   return data;
 }
 
-async function updateAssetMetadata({ assetId, ownerUserIds, visible, projectKeys }, token) {
+async function updateAssetMetadata({ assetId, ownerUserIds, visible, projectKeys, citationString, license, publisher }, token) {
   const { data } = await infrastructureApi().put(
     `/metadata/${assetId}`,
-    { ownerUserIds, visible, projectKeys },
+    { ownerUserIds, visible, projectKeys, citationString, license, publisher },
     requestConfig(token),
   );
   return data;

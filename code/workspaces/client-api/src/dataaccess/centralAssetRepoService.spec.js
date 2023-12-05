@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import centralAssetRepoService from './centralAssetRepoService';
 import config from '../config';
+import centralAssetRepoService from './centralAssetRepoService';
 
 const httpMock = new MockAdapter(axios);
 const infrastructureApi = config.get('infrastructureApi');
@@ -13,6 +13,9 @@ const metadata = {
   type: 'DATA',
   visible: 'PUBLIC',
   fileLocation: 'path/to/file',
+  citationString: 'Citation String',
+  license: 'OGL',
+  publisher: 'EIDC',
 };
 const metadataResponse = {
   ...metadata,

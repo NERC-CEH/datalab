@@ -14,10 +14,10 @@ async function createMetadata(metadata) {
   return document;
 }
 
-async function updateMetadata({ assetId, ownerUserIds, visible, projectKeys }) {
+async function updateMetadata({ assetId, ownerUserIds, visible, projectKeys, citationString, license, publisher }) {
   const document = await CentralAssetMetadata().findOneAndUpdate(
     { assetId },
-    { ownerUserIds, visible, projectKeys },
+    { ownerUserIds, visible, projectKeys, citationString, license, publisher },
     { new: true },
   );
   return document;

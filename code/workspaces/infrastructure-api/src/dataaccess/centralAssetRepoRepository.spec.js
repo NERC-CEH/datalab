@@ -1,5 +1,5 @@
-import centralAssetRepoRepository from './centralAssetRepoRepository';
 import database from '../config/database';
+import centralAssetRepoRepository from './centralAssetRepoRepository';
 
 const nowMockTime = 'Date.now() timestamp';
 jest.spyOn(Date, 'now').mockReturnValue(nowMockTime);
@@ -31,6 +31,9 @@ const getUpdateMetadata = () => ({
   ownerUserIds: ['user1'],
   visible: 'BY_PROJECT',
   projectKeys: ['projKey'],
+  citationString: 'CitationString',
+  license: 'OGL',
+  publisher: 'EIDC',
 });
 
 const { createMetadata, updateMetadata, metadataExists, assetIdExists } = centralAssetRepoRepository;

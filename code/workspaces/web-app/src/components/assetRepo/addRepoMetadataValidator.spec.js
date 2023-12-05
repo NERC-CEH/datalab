@@ -8,6 +8,9 @@ const values = {
   masterUrl: 'http://master.url',
   owners: [{ userId: 'user-123' }],
   visible: 'Visible',
+  citationString: 'Citation String',
+  license: 'OGL',
+  publisher: 'EIDC',
 };
 
 describe('addRepoMetadataValidator', () => {
