@@ -7,11 +7,12 @@ const useStyles = makeStyles(theme => ({
   },
   key: {
     fontWeight: 'lighter',
-    width: theme.spacing(20),
+    width: theme.spacing(30),
     marginBottom: theme.spacing(1),
   },
   value: {
     marginBottom: theme.spacing(1),
+    width: '80%',
   },
   list: {
     display: 'flex',
@@ -59,13 +60,15 @@ function AssetCard({ asset }) {
   return (
     <>
       <AssetCardKeyValue rowKey="Name" rowValue={asset.name} />
-      <AssetCardKeyValue rowKey="Version" rowValue={asset.version} />
       <AssetCardKeyValue rowKey="Asset Id" rowValue={asset.assetId} />
       <AssetCardKeyValue rowKey="File location" rowValue={asset.fileLocation} />
       <AssetCardHyperlink rowKey="Master URL" rowValue={asset.masterUrl} />
-      <AssetCardKeyList rowKey="Owners" rowList={asset.owners ? asset.owners.map(owner => owner.name) : []} />
+      <AssetCardKeyList rowKey="Responsible User" rowList={asset.owners ? asset.owners.map(owner => owner.name) : []} />
       <AssetCardKeyValue rowKey="Visibility" rowValue={visibility[asset.visible]} />
       <AssetCardKeyList rowKey="Projects" rowList={asset.projects ? asset.projects.map(project => project.name) : []} />
+      <AssetCardKeyValue rowKey="License" rowValue={asset.license} />
+      <AssetCardKeyValue rowKey="Citation String" rowValue={asset.citationString} />
+      <AssetCardKeyValue rowKey="Publisher" rowValue={asset.publisher} />
     </>
   );
 }

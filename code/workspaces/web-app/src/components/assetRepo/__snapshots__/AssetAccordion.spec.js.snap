@@ -19,26 +19,24 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
     class="makeStyles-root-1"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-5 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-6 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-7 MuiAccordion-rounded Mui-expanded ForwardRef(Accordion)-expanded-8 MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
     >
       <div
         aria-expanded="true"
-        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-7 Mui-expanded ForwardRef(AccordionSummary)-expanded-9 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+        class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-9 Mui-expanded ForwardRef(AccordionSummary)-expanded-11 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
         role="button"
         tabindex="0"
       >
         <div
-          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-10 Mui-expanded ForwardRef(AccordionSummary)-expanded-9 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+          class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-12 Mui-expanded ForwardRef(AccordionSummary)-expanded-11 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
         >
           <h5
-            class="MuiTypography-root MuiTypography-h5 makeStyles-heading-3 css-k8n68h-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 makeStyles-heading-5 css-k8n68h-MuiTypography-root"
           >
             asset name
-            : 
-            asset version
           </h5>
           <div
-            class="makeStyles-buttonDiv-4"
+            class="makeStyles-buttonDiv-6"
           >
             <button
               aria-label="edit"
@@ -71,7 +69,7 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
           </div>
         </div>
         <div
-          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-9 css-yw020d-MuiAccordionSummary-expandIconWrapper"
+          class="MuiAccordionSummary-expandIconWrapper Mui-expanded ForwardRef(AccordionSummary)-expanded-11 css-yw020d-MuiAccordionSummary-expandIconWrapper"
         >
           <svg
             aria-hidden="true"
@@ -101,10 +99,10 @@ exports[`AssetAccordion renders to match snapshot passing correct props to child
               role="region"
             >
               <div
-                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-11 css-1l0wl9e-MuiAccordionDetails-root"
+                class="MuiAccordionDetails-root ForwardRef(AccordionDetails)-root-13 css-1l0wl9e-MuiAccordionDetails-root"
               >
                 <div
-                  class="makeStyles-resources-2"
+                  class="makeStyles-resources-4"
                 >
                   Asset: {"name":"asset name","version":"asset version","assetId":"asset-1","fileLocation":"file location","masterUrl":"master URL","owners":[{"userId":"owner-1","name":"name 1"},{"userId":"owner-2","name":"name 2"}],"visibility":"BY_PROJECT","projects":[{"projectKey":"project-1","name":"project 1"},{"projectKey":"project-2","name":"project 2"}]}
                 </div>

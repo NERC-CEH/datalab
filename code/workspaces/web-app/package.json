@@ -83,11 +83,12 @@
       "last 1 safari version"
     ]
   },
-	"plugins": [
-		[
-		  "@babel/plugin-transform-react-jsx", {
-			  "throwIfNamespace": false
-			}
-		]
-	]
+  "plugins": [
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "throwIfNamespace": false
+      }
+    ]
+  ]
 }
