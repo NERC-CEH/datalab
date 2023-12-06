@@ -8,6 +8,15 @@ Array [
   <div>
     Field: {"InputLabelProps":{"shrink":true},"name":"visible","disabled":true,"label":"Visibility","options":[{"value":"PUBLIC","text":"Public: Asset will be visible to all projects"},{"value":"BY_PROJECT","text":"By project: Asset is only visible to selected projects"}]}
   </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"citationString","label":"Citation String"}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"license","label":"License","options":[{"value":"OGL","text":"OGL"},{"value":null,"text":"No license"}]}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"publisher","label":"Publisher","options":[{"value":"EIDC","text":"EIDC"},{"value":null,"text":"No publisher"}]}
+  </div>,
 ]
 `;
 
@@ -18,6 +27,15 @@ Array [
   </div>,
   <div>
     Field: {"InputLabelProps":{"shrink":true},"name":"visible","disabled":true,"label":"Visibility","options":[{"value":"PUBLIC","text":"Public: Asset will be visible to all projects"},{"value":"BY_PROJECT","text":"By project: Asset is only visible to selected projects"}]}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"citationString","label":"Citation String"}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"license","label":"License","options":[{"value":"OGL","text":"OGL"},{"value":null,"text":"No license"}]}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"publisher","label":"Publisher","options":[{"value":"EIDC","text":"EIDC"},{"value":null,"text":"No publisher"}]}
   </div>,
 ]
 `;
@@ -30,6 +48,15 @@ Array [
   <div>
     Field: {"InputLabelProps":{"shrink":true},"name":"visible","disabled":true,"label":"Visibility","options":[{"value":"PUBLIC","text":"Public: Asset will be visible to all projects"},{"value":"BY_PROJECT","text":"By project: Asset is only visible to selected projects"}]}
   </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"citationString","label":"Citation String"}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"license","label":"License","options":[{"value":"OGL","text":"OGL"},{"value":null,"text":"No license"}]}
+  </div>,
+  <div>
+    Field: {"InputLabelProps":{"shrink":true},"name":"publisher","label":"Publisher","options":[{"value":"EIDC","text":"EIDC"},{"value":null,"text":"No publisher"}]}
+  </div>,
 ]
 `;
 
@@ -41,6 +68,15 @@ exports[`EditRepoMetadataForm renders to match snapshot 1`] = `
     </div>
     <div>
       Field: {"InputLabelProps":{"shrink":true},"name":"visible","disabled":true,"label":"Visibility","options":[{"value":"PUBLIC","text":"Public: Asset will be visible to all projects"},{"value":"BY_PROJECT","text":"By project: Asset is only visible to selected projects"}]}
+    </div>
+    <div>
+      Field: {"InputLabelProps":{"shrink":true},"name":"citationString","label":"Citation String"}
+    </div>
+    <div>
+      Field: {"InputLabelProps":{"shrink":true},"name":"license","label":"License","options":[{"value":"OGL","text":"OGL"},{"value":null,"text":"No license"}]}
+    </div>
+    <div>
+      Field: {"InputLabelProps":{"shrink":true},"name":"publisher","label":"Publisher","options":[{"value":"EIDC","text":"EIDC"},{"value":null,"text":"No publisher"}]}
     </div>
     <div
       class="makeStyles-fromControlContainer-1"

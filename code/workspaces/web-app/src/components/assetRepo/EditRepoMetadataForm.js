@@ -1,17 +1,19 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { formatAndParseMultiSelect, renderTextField, UpdateFormControls, renderSelectField } from '../common/form/controls';
-import { syncValidate } from './editRepoMetadataValidator';
-import UserMultiSelect from '../common/form/UserMultiSelect';
-import ProjectMultiSelect from '../common/form/ProjectMultiSelect';
-import { visibleOptions, BY_PROJECT } from './assetVisibilities';
 import { useReduxFormValue } from '../../hooks/reduxFormHooks';
+import ProjectMultiSelect from '../common/form/ProjectMultiSelect';
+import UserMultiSelect from '../common/form/UserMultiSelect';
+import { UpdateFormControls, formatAndParseMultiSelect, renderSelectField, renderTextField } from '../common/form/controls';
+import { BY_PROJECT, visibleOptions } from './assetVisibilities';
+import { syncValidate } from './editRepoMetadataValidator';
 
 export const FORM_NAME = 'editAssetDetails';
 
 export const OWNERS_FIELD_NAME = 'owners';
 export const VISIBLE_FIELD_NAME = 'visible';
+export const CITATIONSTRING_FIELD_NAME = 'citationString';
+export const LICENSE_FIELD_NAME = 'license';
+export const PUBLISHER_FIELD_NAME = 'publisher';
 
 const formPropTypes = {
   onCancel: PropTypes.func.isRequired,
@@ -42,6 +44,8 @@ const EditRepoMetadataForm = ({
 }) => {
   const visibleValue = useReduxFormValue(FORM_NAME, VISIBLE_FIELD_NAME);
   const fixedOptions = getFixedOptions(editPermissions, initialValues);
+  const licenseOptions = [{ value: 'OGL', text: 'OGL' }, { value: null, text: 'No license' }];
+  const publisherOptions = [{ value: 'EIDC', text: 'EIDC' }, { value: null, text: 'No publisher' }];
 
   return (
   <form onSubmit={handleSubmit}>
@@ -72,7 +76,25 @@ const EditRepoMetadataForm = ({
             parse={formatAndParseMultiSelect}
             />
       }
-
+    <Field
+      { ...commonProps }
+      name={CITATIONSTRING_FIELD_NAME}
+      label="Citation String"
+  />
+    <Field
+      { ...commonProps }
+      name={LICENSE_FIELD_NAME}
+      label="License"
+      component={renderSelectField}
+      options={licenseOptions}
+  />
+    <Field
+      { ...commonProps }
+      name={PUBLISHER_FIELD_NAME}
+      label="Publisher"
+      component={renderSelectField}
+      options={publisherOptions}
+  />
     <UpdateFormControls onClearChanges={reset} onCancel={onCancel} pristine={pristine} />
   </form>
   );
@@ -102,6 +124,9 @@ EditRepoMetadataReduxForm.propTypes = {
     owners: PropTypes.arrayOf(PropTypes.object).isRequired,
     projects: PropTypes.arrayOf(PropTypes.object).isRequired,
     visible: PropTypes.string.isRequired,
+    citationString: PropTypes.string,
+    license: PropTypes.string,
+    publisher: PropTypes.string,
   }),
 };
 
