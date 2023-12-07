@@ -38,10 +38,11 @@ const ResourceAccordionSummary = withStyles({
   expanded: {
   },
   content: {
+    alignItems: 'center',
     flexGrow: 0,
-    margin: 0,
+    marginBottom: `0 0 ${theme.spacing(1)} 0`,
     '&$expanded': {
-      margin: 0,
+      marginBottom: `0 0 ${theme.spacing(1)} 0`,
     },
   },
 })(AccordionSummary);

@@ -1,6 +1,160 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AssetCard renders to match snapshot 1`] = `
+exports[`AssetCard EIDC asset renders to match snapshot 1`] = `
+<div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Name
+    </div>
+    <div
+      class="makeStyles-value-7"
+    >
+      asset name
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Asset Id
+    </div>
+    <div
+      class="makeStyles-value-7"
+    >
+      asset-1
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      File location
+    </div>
+    <div
+      class="makeStyles-value-7"
+    >
+      file location
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Master URL
+    </div>
+    <div
+      class="makeStyles-value-7"
+    >
+      <a
+        href="master URL"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        master URL
+      </a>
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Responsible User
+    </div>
+    <div
+      class="makeStyles-list-8"
+    />
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Visibility
+    </div>
+    <div
+      class="makeStyles-value-7"
+    />
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Projects
+    </div>
+    <div
+      class="makeStyles-list-8"
+    >
+      <div
+        class="makeStyles-value-7"
+      >
+        project 1
+      </div>
+      <div
+        class="makeStyles-value-7"
+      >
+        project 2
+      </div>
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      License
+    </div>
+    <div
+      class="makeStyles-value-7"
+    >
+      license
+    </div>
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Citation String
+    </div>
+    <div
+      class="makeStyles-value-7"
+    />
+  </div>
+  <div
+    class="makeStyles-row-5"
+  >
+    <div
+      class="makeStyles-key-6"
+    >
+      Publisher
+    </div>
+    <div
+      class="makeStyles-value-7"
+    >
+      EIDC
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AssetCard Non-EIDC asset renders to match snapshot 1`] = `
 <div>
   <div
     class="makeStyles-row-1"
@@ -14,20 +168,6 @@ exports[`AssetCard renders to match snapshot 1`] = `
       class="makeStyles-value-3"
     >
       asset name
-    </div>
-  </div>
-  <div
-    class="makeStyles-row-1"
-  >
-    <div
-      class="makeStyles-key-2"
-    >
-      Version
-    </div>
-    <div
-      class="makeStyles-value-3"
-    >
-      asset version
     </div>
   </div>
   <div
@@ -84,7 +224,7 @@ exports[`AssetCard renders to match snapshot 1`] = `
     <div
       class="makeStyles-key-2"
     >
-      Owners
+      Responsible User
     </div>
     <div
       class="makeStyles-list-4"
@@ -135,6 +275,42 @@ exports[`AssetCard renders to match snapshot 1`] = `
         project 2
       </div>
     </div>
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      License
+    </div>
+    <div
+      class="makeStyles-value-3"
+    />
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Citation String
+    </div>
+    <div
+      class="makeStyles-value-3"
+    />
+  </div>
+  <div
+    class="makeStyles-row-1"
+  >
+    <div
+      class="makeStyles-key-2"
+    >
+      Publisher
+    </div>
+    <div
+      class="makeStyles-value-3"
+    />
   </div>
 </div>
 `;
