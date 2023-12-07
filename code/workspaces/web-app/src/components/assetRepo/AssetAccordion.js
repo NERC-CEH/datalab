@@ -7,6 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Icon from '@mui/material/Icon';
 import makeStyles from '@mui/styles/makeStyles';
+import { Box } from '@mui/material';
 import { reset } from 'redux-form';
 import { permissionTypes } from 'common';
 import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../common/ResourceAccordion';
@@ -21,6 +22,7 @@ import notify from '../common/notify';
 import assetLabel from '../common/form/assetLabel';
 import { BY_PROJECT } from './assetVisibilities';
 import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
+import eidcLogo from '../../assets/images/eidc.png';
 
 const MORE_ICON = 'more_vert';
 
@@ -30,17 +32,30 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginBottom: theme.spacing(3),
   },
+  eidcAsset: {
+    border: 3,
+    borderColor: theme.palette.primary.main,
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    padding: theme.spacing(2),
+  },
+  eidcLogo: {
+    maxHeight: 40,
+    marginLeft: theme.spacing(2),
+  },
   resources: {
     marginLeft: theme.spacing(8),
   },
   heading: {
-    margin: `${theme.spacing(2)}, 0`,
+    margin: `${theme.spacing(2)} 0`,
   },
   buttonDiv: {
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: theme.spacing(8),
     paddingTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
 }));
 
@@ -143,12 +158,20 @@ function AssetAccordion({ asset }) {
 
   const editPermissions = getEditPermissions(userId, userPermissions, asset);
   const editable = Object.values(editPermissions).some(p => p === true);
+  const isEIDCAsset = (asset.publisher === 'EIDC');
 
   return (
     <div className={classes.root}>
-      <ResourceAccordion defaultExpanded>
+      <ResourceAccordion defaultExpanded className={isEIDCAsset ? classes.eidcAsset : ''}>
         <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" className={classes.heading}>{asset.name}: {asset.version}</Typography>
+          <Typography variant="h5" className={classes.heading}>{asset.name}</Typography>
+
+          {isEIDCAsset && <Box className={classes.eidcLogo}
+            component='img'
+            alt='EIDC logo'
+            src={eidcLogo}
+          />}
+
           <div className={classes.buttonDiv}>
             {editable && <PrimaryActionButton
               aria-label="edit"
