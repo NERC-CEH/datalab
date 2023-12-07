@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, reset } from 'redux-form';
-import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
-import addRepoMetadataValidator from './addRepoMetadataValidator';
-import { formatAndParseMultiSelect, renderTextField, renderSelectField, UpdateFormControls } from '../common/form/controls';
-import ConfirmDialog from '../common/ConfirmDialog';
-import notify from '../common/notify';
-import { useReduxFormValue } from '../../hooks/reduxFormHooks';
-import userActions from '../../actions/userActions';
-import projectActions from '../../actions/projectActions';
 import assetRepoActions from '../../actions/assetRepoActions';
-import UserMultiSelect from '../common/form/UserMultiSelect';
-import ProjectMultiSelect from '../common/form/ProjectMultiSelect';
+import projectActions from '../../actions/projectActions';
+import userActions from '../../actions/userActions';
 import { useAssetRepo } from '../../hooks/assetRepoHooks';
+import { useReduxFormValue } from '../../hooks/reduxFormHooks';
+import ConfirmDialog from '../common/ConfirmDialog';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
+import ProjectMultiSelect from '../common/form/ProjectMultiSelect';
+import UserMultiSelect from '../common/form/UserMultiSelect';
+import { UpdateFormControls, formatAndParseMultiSelect, renderSelectField, renderTextField } from '../common/form/controls';
+import notify from '../common/notify';
+import addRepoMetadataValidator from './addRepoMetadataValidator';
 import { BY_PROJECT, visibleOptions } from './assetVisibilities';
 
 const FORM_NAME = 'addRepoMetadata';
@@ -110,6 +110,8 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
   const visibleValue = useReduxFormValue(FORM_NAME, 'visible');
   const assetRepo = useAssetRepo();
   const disabled = !!assetRepo.value.createdAssetId;
+  const licenseOptions = [{ value: 'OGL', text: 'OGL' }];
+  const publisherOptions = [{ value: 'EIDC', text: 'EIDC' }];
 
   const commonProps = {
     component: renderTextField,
@@ -171,6 +173,26 @@ export function AddRepoMetadata({ handleSubmit, onCancel }) {
             parse={formatAndParseMultiSelect}
             />
       }
+      <Typography variant="h6">Optional Values for DOI Datasets</Typography>
+      <Field
+        { ...commonProps }
+        name="citationString"
+        label="Citation String"
+      />
+      <Field
+        { ...commonProps }
+        name="license"
+        label="License"
+        component={renderSelectField}
+        options={licenseOptions}
+      />
+      <Field
+        { ...commonProps }
+        name="publisher"
+        label="Publisher"
+        component={renderSelectField}
+        options={publisherOptions}
+      />
       { !disabled
         && <UpdateFormControls onCancel={onCancel}/>
       }

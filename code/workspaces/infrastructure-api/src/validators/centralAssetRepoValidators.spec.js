@@ -38,12 +38,12 @@ describe('centralAssetRepoValidators', () => {
   describe('calls validators for right parameters', () => {
     it('createValidator', () => {
       createValidator(bodyMock);
-      expect(bodyMock.mock.calls).toEqual([['name'], ['version'], ['fileLocation'], ['masterUrl'], ['ownerUserIds'], ['visible'], ['projectKeys']]);
+      expect(bodyMock.mock.calls).toEqual([['name'], ['version'], ['fileLocation'], ['masterUrl'], ['ownerUserIds'], ['visible'], ['projectKeys'], ['license'], ['publisher'], ['citationString']]);
     });
 
     it('updateValidator', () => {
       updateValidator(bodyMock);
-      expect(bodyMock.mock.calls).toEqual([['ownerUserIds'], ['visible'], ['projectKeys']]);
+      expect(bodyMock.mock.calls).toEqual([['ownerUserIds'], ['visible'], ['projectKeys'], ['license'], ['publisher'], ['citationString']]);
     });
   });
 });

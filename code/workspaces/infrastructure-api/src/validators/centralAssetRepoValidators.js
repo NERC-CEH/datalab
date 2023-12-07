@@ -1,6 +1,6 @@
 import { service } from 'service-chassis';
-import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 import logger from '../config/logger';
+import centralAssetRepoModel from '../models/centralAssetMetadata.model';
 import ValidationChainHelper from './ValidationChainHelper';
 
 const assetIdValidation = checkFunction => new ValidationChainHelper(checkFunction('assetId'))
@@ -33,6 +33,15 @@ export const createValidator = (checkFunction) => {
     new ValidationChainHelper(checkFunction('projectKeys'))
       .optional()
       .isArray(),
+    new ValidationChainHelper(checkFunction('license'))
+      .optional()
+      .isIn(centralAssetRepoModel.possibleLicenseValues()),
+    new ValidationChainHelper(checkFunction('publisher'))
+      .optional()
+      .isIn(centralAssetRepoModel.possiblePublisherValues),
+    new ValidationChainHelper(checkFunction('citationString'))
+      .optional()
+      .notEmpty(),
   ];
 
   const validationChains = validations.map((validation) => {
@@ -56,6 +65,15 @@ export const updateValidator = (checkFunction) => {
     new ValidationChainHelper(checkFunction('projectKeys'))
       .optional()
       .isArray(),
+    new ValidationChainHelper(checkFunction('license'))
+      .optional()
+      .isIn(centralAssetRepoModel.possibleLicenseValues()),
+    new ValidationChainHelper(checkFunction('publisher'))
+      .optional()
+      .isIn(centralAssetRepoModel.possiblePublisherValues),
+    new ValidationChainHelper(checkFunction('citationString'))
+      .optional()
+      .notEmpty(),
   ];
 
   const validationChains = validations.map((validation) => {

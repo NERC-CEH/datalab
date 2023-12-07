@@ -415,6 +415,9 @@ type CentralAssetMetadata {
     visible: String!
     projects: [Project]
     registrationDate: String!
+    citationString: String
+    license: String
+    publisher: String
 }
 
 input CentralAssetMetadataCreationRequest {
@@ -425,6 +428,9 @@ input CentralAssetMetadataCreationRequest {
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]
+    citationString: String
+    license: String
+    publisher: String
 }
 
 input CentralAssetMetadataUpdateRequest {
@@ -432,6 +438,9 @@ input CentralAssetMetadataUpdateRequest {
     ownerUserIds: [String]!
     visible: String!
     projectKeys: [String]
+    citationString: String
+    license: String
+    publisher: String
 }
 
 input ClusterCreationRequest {
