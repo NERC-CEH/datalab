@@ -10,7 +10,6 @@ import { permissionTypes } from 'common';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { reset } from 'redux-form';
 import assetRepoActions from '../../actions/assetRepoActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_EDIT_ASSET } from '../../constants/modaltypes';
@@ -23,7 +22,6 @@ import notify from '../common/notify';
 import AssetCard from './AssetCard';
 import EditRepoMetadataForm, { FORM_NAME, OWNERS_FIELD_NAME, VISIBLE_FIELD_NAME } from './EditRepoMetadataForm';
 import { BY_PROJECT } from './assetVisibilities';
-import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
 import eidcLogo from '../../assets/images/eidc.png';
 
 const MORE_ICON = 'more_vert';
