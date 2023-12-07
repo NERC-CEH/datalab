@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, fireEvent } from '../../testUtils/renderTests';
-import { PUBLIC } from './assetVisibilities';
-import { PureEditRepoMetadataForm } from './EditRepoMetadataForm';
 import * as reduxFormHooks from '../../hooks/reduxFormHooks';
+import { fireEvent, render } from '../../testUtils/renderTests';
+import { PureEditRepoMetadataForm } from './EditRepoMetadataForm';
+import { PUBLIC } from './assetVisibilities';
 
 jest.mock('redux-form', () => ({
   ...jest.requireActual('redux-form'),
@@ -17,6 +17,9 @@ describe('EditRepoMetadataForm', () => {
     owners: [],
     projects: [],
     visible: PUBLIC,
+    citationString: 'Citation String',
+    license: 'OGL',
+    publisher: 'EIDC',
   };
 
   const handleSubmit = jest.fn().mockName('handleSubmit');

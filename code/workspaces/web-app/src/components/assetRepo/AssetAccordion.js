@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Icon from '@mui/material/Icon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Icon from '@mui/material/Icon';
+import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 import { Box } from '@mui/material';
 import { reset } from 'redux-form';
 import { permissionTypes } from 'common';
-import { ResourceAccordion, ResourceAccordionSummary, ResourceAccordionDetails } from '../common/ResourceAccordion';
-import AssetCard from './AssetCard';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import assetRepoActions from '../../actions/assetRepoActions';
+import modalDialogActions from '../../actions/modalDialogActions';
+import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_EDIT_ASSET } from '../../constants/modaltypes';
+import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
+import { ResourceAccordion, ResourceAccordionDetails, ResourceAccordionSummary } from '../common/ResourceAccordion';
 import PrimaryActionButton from '../common/buttons/PrimaryActionButton';
 import SecondaryActionButton from '../common/buttons/SecondaryActionButton';
-import modalDialogActions from '../../actions/modalDialogActions';
-import { MODAL_TYPE_EDIT_ASSET, MODAL_TYPE_CONFIRMATION } from '../../constants/modaltypes';
-import EditRepoMetadataForm, { FORM_NAME, OWNERS_FIELD_NAME, VISIBLE_FIELD_NAME } from './EditRepoMetadataForm';
-import assetRepoActions from '../../actions/assetRepoActions';
-import notify from '../common/notify';
 import assetLabel from '../common/form/assetLabel';
+import notify from '../common/notify';
+import AssetCard from './AssetCard';
+import EditRepoMetadataForm, { FORM_NAME, OWNERS_FIELD_NAME, VISIBLE_FIELD_NAME } from './EditRepoMetadataForm';
 import { BY_PROJECT } from './assetVisibilities';
-import { useCurrentUserId, useCurrentUserPermissions } from '../../hooks/authHooks';
 import eidcLogo from '../../assets/images/eidc.png';
 
 const MORE_ICON = 'more_vert';
@@ -93,6 +93,9 @@ export const onEditAssetConfirm = async (dispatch, asset) => {
       ownerUserIds: asset.owners ? asset.owners.map(owner => owner.userId) : [],
       visible: asset.visible,
       projectKeys: (asset.visible === BY_PROJECT && asset.projects) ? asset.projects.map(project => project.key) : [],
+      ...(asset.citationString) && { citationString: asset.citationString },
+      ...(asset.license) && { license: asset.license },
+      ...(asset.publisher) && { publisher: asset.publisher },
     };
     await dispatch(assetRepoActions.editRepoMetadata(assetUpdate));
     await reset(FORM_NAME);
