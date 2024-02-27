@@ -24,7 +24,7 @@
     "lodash": "4.17.21",
     "mongoose": "5.13.21",
     "mustache": "3.0.1",
-    "nodemailer": "^6.7.0",
+    "nodemailer": "^6.9.9",
     "service-chassis": "^0.1.0",
     "uuid": "3.3.2",
     "winston": "3.3.3"
