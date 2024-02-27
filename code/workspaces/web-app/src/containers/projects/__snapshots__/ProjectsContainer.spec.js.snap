@@ -17,6 +17,17 @@ Array [
 ]
 `;
 
+exports[`ProjectsContainer has methods onCreateProjectSubmit on successful request notifies the success 1`] = `
+Array [
+  "MODAL_TYPE_INFO",
+  Object {
+    "body": "The Project was successfully requested. An admin will review your request shortly. If it is not created within 72 hours, please contact DataLabs support.",
+    "onClick": [Function],
+    "title": "Project requested",
+  },
+]
+`;
+
 exports[`ProjectsContainer renders to match snapshot 1`] = `
 <div>
   <div

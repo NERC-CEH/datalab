@@ -175,8 +175,9 @@ describe('ProjectsContainer', () => {
 
         it('notifies the success', async () => {
           await onCreateProjectSubmit(dispatchMock, true)(projectInfo);
-          expect(notify.success).toHaveBeenCalledTimes(1);
-          expect(notify.success).toHaveBeenCalledWith('Project requested: a notification has been sent to the instance admins.');
+          expect(modalDialogActions.openModalDialog).toHaveBeenCalledTimes(1);
+          expect(openModalDialogMock.mock.calls[0]).toMatchSnapshot();
+          expect(dispatchMock).toHaveBeenCalledWith('openModalDialogMock');
         });
       });
 
