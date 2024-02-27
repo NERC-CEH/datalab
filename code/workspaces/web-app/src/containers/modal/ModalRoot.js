@@ -15,6 +15,7 @@ import Logs from '../../components/modal/SiteLogs';
 import ConfirmationDialog from '../../components/modal/ConfirmationDialog';
 import CreateClusterDialog from '../../components/modal/CreateClusterDialog';
 import EditAssetDialog from '../../components/modal/EditAssetDialog';
+import InfoDialog from '../../components/modal/InfoDialog';
 
 import {
   MODAL_TYPE_CREATE_NOTEBOOK,
@@ -33,6 +34,7 @@ import {
   MODAL_TYPE_CREATE_CLUSTER,
   MODAL_TYPE_EDIT_ASSET,
   MODAL_TYPE_CONFIRM_CREATION,
+  MODAL_TYPE_INFO,
 } from '../../constants/modaltypes';
 
 const MODAL_COMPONENTS = {
@@ -52,6 +54,7 @@ const MODAL_COMPONENTS = {
   [MODAL_TYPE_CREATE_CLUSTER]: CreateClusterDialog,
   [MODAL_TYPE_EDIT_ASSET]: EditAssetDialog,
   [MODAL_TYPE_CONFIRM_CREATION]: ConfirmationDialog,
+  [MODAL_TYPE_INFO]: InfoDialog,
 };
 
 const ModalRoot = ({ modalType, props }) => {
