@@ -9,7 +9,7 @@ const emailSettings = configMapSettings.email;
 const emailNotificationAdapter = {
   send: async (notification) => {
     const { dev } = configMapSettings;
-    const accountSettings = dev ? await nodemailer.createTestAccount() : { user: emailSettings.username, pass: config.emailPassword };
+    const accountSettings = dev ? await nodemailer.createTestAccount() : { user: config.emailUsername, pass: config.emailPassword };
 
     const transporter = nodemailer.createTransport({
       host: emailSettings.host,
@@ -21,12 +21,13 @@ const emailNotificationAdapter = {
       },
     });
 
-    const receivers = dev ? 'someone@example.com' : notification.userEmails;
+    // Don't cc the person who has requested the project initially
+    // Awaiting review for cookie/fair usage agreement
+    // const receivers = dev ? 'someone@example.com' : notification.userEmails;
 
     const info = await transporter.sendMail({
       from: `"${emailSettings.fromDisplayName}" <${emailSettings.fromAddress}>`,
       to: emailSettings.toAddresses,
-      cc: receivers,
       subject: notification.title,
       text: notification.message,
     });
