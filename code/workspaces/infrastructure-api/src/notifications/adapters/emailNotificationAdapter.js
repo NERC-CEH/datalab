@@ -9,7 +9,9 @@ const emailSettings = configMapSettings.email;
 const emailNotificationAdapter = {
   send: async (notification) => {
     const { dev } = configMapSettings;
-    const accountSettings = dev ? await nodemailer.createTestAccount() : { user: config.emailUsername, pass: config.emailPassword };
+    const username = config.get('emailUsername');
+    const password = config.get('emailPassword');
+    const accountSettings = dev ? await nodemailer.createTestAccount() : { user: username, pass: password };
 
     const transporter = nodemailer.createTransport({
       host: emailSettings.host,
@@ -28,7 +30,7 @@ const emailNotificationAdapter = {
     const info = await transporter.sendMail({
       from: `"${emailSettings.fromDisplayName}" <${emailSettings.fromAddress}>`,
       to: emailSettings.toAddresses,
-      subject: notification.title,
+      subject: `${notification.title} - ${notification.userEmails}`,
       text: notification.message,
     });
 
