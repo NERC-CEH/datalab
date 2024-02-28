@@ -302,6 +302,7 @@ type User {
     userId: ID
     name: String!
     permissions: [Permission!]!
+    verified: Boolean!
 }
 
 type Project {
