@@ -5,6 +5,7 @@ Object {
   "expireUnusedNotebooks": Object {
     "accessTimeLimit": 31,
     "accessTimeWarning": 14,
+    "inUseTimeWarning": 8,
   },
   "requestProjects": false,
 }
