@@ -48,7 +48,7 @@ exports[`StackCard a recently opened vscode notebook that should NOT have a RECE
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"vscode","status":"ready","shared":"private","accessTime":1709295853611},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"vscode","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -106,7 +106,7 @@ exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warn
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1707575053588},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1555142400000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -129,7 +129,7 @@ exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warn
         class="SuspendWarning-text-73"
       >
         <p>
-          This notebook has not been accessed for some time (21 days), please consider suspending
+          This notebook has not been accessed for some time (20 days), please consider suspending
 if not required. This warning will be dismissed if the notebook is opened.
         </p>
       </div>
@@ -207,7 +207,7 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1709295853539},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -230,7 +230,7 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         class="SuspendWarning-text-58"
       >
         <p>
-          This notebook was opened 3 hours ago and may still be in use.  Please be aware that opening
+          This notebook was opened 2 hours ago and may still be in use.  Please be aware that opening
 it will close it for the other user.
         </p>
       </div>

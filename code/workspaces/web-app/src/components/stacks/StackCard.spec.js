@@ -14,6 +14,8 @@ jest.mock('../../config/storage');
 jest.mock('./StackCardActions/StackCardActions', () => props => (<div>StackCardActions mock {JSON.stringify(props)} </div>));
 jest.mock('./StackStatus', () => props => (<div>StackStatus mock {JSON.stringify(props)}</div>));
 
+let mockDateNow;
+
 beforeEach(async () => {
   storageDescription.mockReturnValue('Network File System (NFS) volume to store data for Notebooks and Sites.');
   storageDisplayValue.mockReturnValue('NFS');
@@ -26,6 +28,14 @@ beforeEach(async () => {
     },
   }]);
   await initialiseFeatureFlags();
+  const NOW = '2019-05-03T08:00:00.000Z';
+  mockDateNow = jest
+    .spyOn(global.Date, 'now')
+    .mockImplementation(() => new Date(NOW).getTime());
+});
+
+afterEach(() => {
+  mockDateNow.mockRestore();
 });
 
 describe('StackCard', () => {

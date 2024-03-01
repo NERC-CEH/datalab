@@ -94,12 +94,12 @@ function styles(theme) {
 }
 
 function daysSinceCreation(accessTime) {
-  const timeDiff = new Date().getTime() - accessTime;
+  const timeDiff = Date.now() - accessTime;
   return Math.ceil((timeDiff) / (1000 * 60 * 60 * 24));
 }
 
 function hoursSinceCreation(accessTime) {
-  const timeDiff = new Date().getTime() - accessTime;
+  const timeDiff = Date.now() - accessTime;
   return Math.ceil((timeDiff) / (1000 * 60 * 60));
 }
 
