@@ -107,7 +107,7 @@ describe('StackCard', () => {
     const props = generateProps('rstudio', 'ready', lastAccessTime);
 
     // Act
-    const output = render(<StackCard {...props} />);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -120,7 +120,7 @@ describe('StackCard', () => {
     const props = generateProps('rstudio', 'ready', lastAccessTime);
 
     // Act
-    const output = render(<StackCard {...props} />);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
@@ -133,7 +133,7 @@ describe('StackCard', () => {
     const props = generateProps('vscode', 'ready', lastAccessTime);
 
     // Act
-    const output = render(<StackCard {...props} />);
+    const output = render(<StackCard {...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();
