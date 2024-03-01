@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { stackTypes } from 'common';
 import ResourceInfoSpan from '../common/typography/ResourceInfoSpan';
 import StackCardActions from './StackCardActions/StackCardActions';
 import stackDescriptions from './stackDescriptions';
@@ -97,6 +98,11 @@ function daysSinceCreation(accessTime) {
   return Math.ceil((timeDiff) / (1000 * 60 * 60 * 24));
 }
 
+function hoursSinceCreation(accessTime) {
+  const timeDiff = new Date().getTime() - accessTime;
+  return Math.ceil((timeDiff) / (1000 * 60 * 60));
+}
+
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, scaleStack, typeName,
   userPermissions, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets }) => {
   const users = useUsers();
@@ -105,12 +111,18 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
   const expireStacks = getFeatureFlags().expireUnusedNotebooks;
 
   const generateWarningMessage = () => {
-    if (expireStacks && stack.accessTime) {
-      const { accessTimeWarning } = expireStacks;
+    if (expireStacks && stack.accessTime && stack.type) {
+      const { accessTimeWarning, inUseTimeWarning } = expireStacks;
       const daysSinceAccess = daysSinceCreation(stack.accessTime);
+      const hoursSinceAccess = hoursSinceCreation(stack.accessTime);
       const warn = (daysSinceAccess > accessTimeWarning);
-
-      if (warn) {
+      const inUseWarn = (hoursSinceAccess < inUseTimeWarning) && (stackTypes.RSTUDIO === stack.type);
+      if (!warn) {
+        if (inUseWarn) {
+          return `This notebook was opened ${hoursSinceAccess} hours ago and may still be in use.  Please be aware that opening
+          it will close it for the other user.`;
+        }
+      } else {
         return `This notebook has not been accessed for some time (${daysSinceAccess} days), please consider suspending
           if not required. This warning will be dismissed if the notebook is opened.`;
       }
