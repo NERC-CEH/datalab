@@ -95,12 +95,12 @@ function styles(theme) {
 
 function daysSinceCreation(accessTime) {
   const timeDiff = Date.now() - accessTime;
-  return Math.ceil((timeDiff) / (1000 * 60 * 60 * 24));
+  return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 }
 
 function hoursSinceCreation(accessTime) {
   const timeDiff = Date.now() - accessTime;
-  return Math.ceil((timeDiff) / (1000 * 60 * 60));
+  return Math.ceil(timeDiff / (1000 * 60 * 60));
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, scaleStack, typeName,
@@ -111,7 +111,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
   const expireStacks = getFeatureFlags().expireUnusedNotebooks;
 
   const generateWarningMessage = () => {
-    if (expireStacks && stack.accessTime && stack.type) {
+    if (expireStacks && stack.accessTime) {
       const { accessTimeWarning, inUseTimeWarning } = expireStacks;
       const daysSinceAccess = daysSinceCreation(stack.accessTime);
       const hoursSinceAccess = hoursSinceCreation(stack.accessTime);
