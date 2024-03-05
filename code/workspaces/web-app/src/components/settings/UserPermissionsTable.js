@@ -201,7 +201,7 @@ export function UserPermissionsTableRow({ user, isCurrentUser, currentUserSystem
   return (
     <TableRow key={rowKey}>
       <TableCell className={classes.tableCell} key={`${rowKey}-username`}>
-        <Typography variant="body1">{user.name}</Typography>
+        <Typography variant="body1">{user.name} ({(user.verified ? 'verified' : 'not verified')})</Typography>
       </TableCell>
       {checkBoxColumnOrder.map(permission => (
         <CheckboxCell

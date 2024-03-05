@@ -134,7 +134,6 @@ export function AddUserButton({ currentUserId, currentUserSystemAdmin, selectedU
       <div>
         <PrimaryActionButton
           className={classes.addButton}
-          disabled={!!disabledMessage}
           onClick={() => onClickFn(projectKey, selectedUser, selectedPermissions, dispatch)}
         >
           Add

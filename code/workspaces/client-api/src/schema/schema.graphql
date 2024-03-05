@@ -349,6 +349,7 @@ type ProjectUser {
     userId: ID!
     name: String!
     role: ProjectRole!
+    verified: Boolean!
 }
 
 type Resource {
