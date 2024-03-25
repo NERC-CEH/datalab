@@ -28,16 +28,28 @@ function addDefaults(roles) {
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    roles = await addRecordForNewUser(userId, userName);
+    roles = await createNonVerifiedUserRecord(userId, userName);
   }
 
   return addDefaults(roles);
 }
 
+// User has logged in for the first time, set up userRoles database record if does not exist
+// and set the user as verified
+async function createNonVerifiedUserRecord(userId, userName) {
+  return addRecordForNewUser(userId, userName, true);
+}
+
+// User has not logged in, however their e-mail is being added to an existing project, hence
+// set up userRoles record and set as not verified
+async function createVerifiedUserRecord(userId, userName) {
+  return addRecordForNewUser(userId, userName, false);
+}
+
 function convertToUser(roles) {
   const userRoles = roles.toObject();
   const userName = userRoles.userName ? userRoles.userName : 'Unknown user name';
-  const user = { userId: userRoles.userId, name: userName };
+  const user = { userId: userRoles.userId, name: userName, verified: userRoles.verified };
   return user;
 }
 
@@ -94,23 +106,40 @@ async function getProjectUsers(projectKey) {
   return projectUsers.map(addDefaults);
 }
 
-async function addRecordForNewUser(userId, userName) {
+async function addRecordForNewUser(userId, userName, verified = true) {
   const allRoles = await UserRoles().find().exec();
-  if (allRoles.filter(roles => roles.userId === userId).length > 0) {
-    throw new Error(`Creating new user for ${userId} ${userName}, but they already exist`);
+  if (doesUserIdExist(allRoles, userId)) {
+    throw new Error(`Creating new user for userId: ${userId} ${userName}, but they already exist`);
   }
-  const user = {
+
+  // Create user - explictly overriding only userId & verified fields
+  const overrideFields = {
     userId,
-    userName,
-    projectRoles: [],
+    verified,
   };
+
   if (allRoles.length === 0) {
     // Make the first ever user an instanceAdmin.
     logger.info(`${userName} is first user, so making instanceAdmin`);
-    user.instanceAdmin = true;
+    overrideFields.instanceAdmin = true;
   }
-  const roles = await UserRoles().create(user);
-  return roles;
+
+  // findAndUpdate used over create as user record may legitimately either
+  // - Not exist
+  // - Exist with set permissions prior to login
+  // Hence upsert based on userName overriding userId explictly.
+  return UserRoles().findOneAndUpdate(
+    { userName },
+    {
+      $set: overrideFields,
+      $setOnInsert: { projectRoles: [] },
+    },
+    { new: true, upsert: true },
+  );
+}
+
+function doesUserIdExist(allUsers, userId) {
+  return allUsers.filter(roles => roles.userId === userId).length > 0;
 }
 
 // Note - roleKey must exist in UserRolesSchema in userRoles.model.js
@@ -130,10 +159,11 @@ async function setSystemRole(userId, roleKey, roleValue) {
 async function addRole(userId, projectKey, role) {
   // Load existing user
   const query = { userId };
-  const user = await UserRoles().findOne(query).exec();
-
+  let user = await UserRoles().findOne(query).exec();
   if (!user) {
-    throw new Error(`Unrecognised user ${userId}`);
+    // If a role is added to a non-existant user, set verfied
+    await createVerifiedUserRecord(userId, userId);
+    user = await UserRoles().findOne(query).exec();
   }
   // Either add role or update existing role
   const { projectRoles } = user;
@@ -170,8 +200,11 @@ async function userIsMember(userId, projectKey) {
   return UserRoles().exists(query);
 }
 
-export default { combineRoles,
+export default {
+  combineRoles,
   getRoles,
+  createNonVerifiedUserRecord,
+  createVerifiedUserRecord,
   addRecordForNewUser,
   getUser,
   getUsers,
@@ -180,4 +213,5 @@ export default { combineRoles,
   setSystemRole,
   addRole,
   removeRole,
-  userIsMember };
+  userIsMember,
+};

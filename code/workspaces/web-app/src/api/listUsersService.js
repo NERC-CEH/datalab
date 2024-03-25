@@ -4,7 +4,7 @@ import errorHandler from './graphqlErrorHandler';
 function listUsers() {
   const query = `
   Users {
-      users { name userId }
+      users { name userId verified }
   }`;
 
   return gqlQuery(query)

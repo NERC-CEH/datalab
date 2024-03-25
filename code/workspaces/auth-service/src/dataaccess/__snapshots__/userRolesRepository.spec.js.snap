@@ -18,6 +18,7 @@ Array [
     ],
     "userId": "uid1",
     "userName": "user1",
+    "verified": true,
   },
   Object {
     "catalogueRole": "publisher",
@@ -35,6 +36,7 @@ Array [
     ],
     "userId": "uid2",
     "userName": "user2",
+    "verified": true,
   },
 ]
 `;
@@ -57,6 +59,7 @@ Array [
     ],
     "userId": "uid1",
     "userName": "user1",
+    "verified": true,
   },
   Object {
     "catalogueRole": "publisher",
@@ -70,6 +73,7 @@ Array [
     ],
     "userId": "uid2",
     "userName": "user2",
+    "verified": true,
   },
   Object {
     "catalogueRole": "user",
@@ -83,6 +87,7 @@ Array [
     ],
     "userId": "uid2",
     "userName": "user2",
+    "verified": true,
   },
   Object {
     "catalogueRole": "user",
@@ -103,6 +108,7 @@ exports[`userRolesRepository read operations getUser returns expected snapshot 1
 Object {
   "name": "user1",
   "userId": "uid1",
+  "verified": true,
 }
 `;
 
@@ -111,10 +117,12 @@ Array [
   Object {
     "name": "user1",
     "userId": "uid1",
+    "verified": true,
   },
   Object {
     "name": "user2",
     "userId": "uid2",
+    "verified": true,
   },
 ]
 `;

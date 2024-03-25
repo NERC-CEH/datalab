@@ -21,10 +21,12 @@ const UserSelect = ({ selectedUsers, setSelectedUsers, label, placeholder, multi
     <Autocomplete
       {...otherProps}
       multiple={multiselect}
+      freeSolo={true}
       options={users}
       getOptionLabel={getOptionLabel}
       isOptionEqualToValue={val => (multiselect ? selectedUsers.includes(val) : selectedUsers === val)}
       value={selectedUsers}
+      onInputChange={(event, newValue) => setSelectedUsers({ name: newValue, userId: newValue })}
       onChange={(event, newValue) => setSelectedUsers(newValue)}
       loading={loading}
       autoHighlight
