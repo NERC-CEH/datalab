@@ -15,7 +15,7 @@
     "convict": "^6.2.4",
     "convict-format-with-validator": "^6.2.0",
     "cross-storage": "1.0.0",
-    "express": "4.17.3",
+    "express": "4.19.2",
     "express-jwt": "^6.1.2",
     "graphql": "^14.5.4",
     "graphql-import": "^0.7.1",
