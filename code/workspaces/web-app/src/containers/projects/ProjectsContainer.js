@@ -11,7 +11,7 @@ import theme from '../../theme';
 import projectActions from '../../actions/projectActions';
 import modalDialogActions from '../../actions/modalDialogActions';
 import StackCards from '../../components/stacks/StackCards';
-import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
+import { MODAL_TYPE_CREATE_PROJECT, MODAL_TYPE_INFO, MODAL_TYPE_ROBUST_CONFIRMATION } from '../../constants/modaltypes';
 import notify from '../../components/common/notify';
 import { useProjectsArray } from '../../hooks/projectsHooks';
 import { useCurrentUserPermissions } from '../../hooks/authHooks';
@@ -122,7 +122,18 @@ export const onCreateProjectSubmit = (dispatch, requestOnly) => async (project) 
       await dispatch(projectActions.createProject(project));
     }
     await reset(FORM_NAME);
-    notify.success(`${PROJECT_TYPE_NAME} ${requestOnly ? 'requested: a notification has been sent to the instance admins.' : 'created'}`);
+    if (requestOnly) {
+      dispatch(modalDialogActions.openModalDialog(
+        MODAL_TYPE_INFO,
+        {
+          title: `${PROJECT_TYPE_NAME} requested`,
+          body: `The ${PROJECT_TYPE_NAME} was successfully requested. An admin will review your request shortly. If it is not created within 72 hours, please contact DataLabs support.`,
+          onClick: () => dispatch(modalDialogActions.closeModalDialog()),
+        },
+      ));
+    } else {
+      notify.success(`${PROJECT_TYPE_NAME} created`);
+    }
   } catch (error) {
     notify.error(`Unable to ${requestOnly ? 'request' : 'create'} ${PROJECT_TYPE_NAME}`);
   } finally {
