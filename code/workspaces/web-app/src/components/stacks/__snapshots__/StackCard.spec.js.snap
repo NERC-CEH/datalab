@@ -163,25 +163,25 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
 <div>
   <div>
     <div
-      class="StackCard-cardDiv-46"
+      class="StackCard-cardDiv-1"
     >
       <div
-        class="StackCard-imageDiv-47"
+        class="StackCard-imageDiv-2"
       >
         <img
           alt="rstudio logo"
-          class="StackCard-cardImage-53"
+          class="StackCard-cardImage-8"
           src="rstudio-logo.png"
         />
       </div>
       <div
-        class="StackCard-textDiv-48"
+        class="StackCard-textDiv-3"
       >
         <div
-          class="StackCard-displayNameContainer-50"
+          class="StackCard-displayNameContainer-5"
         >
           <h5
-            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-49 css-ltmxt9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-4 css-ltmxt9-MuiTypography-root"
           >
             name1
           </h5>
@@ -195,10 +195,10 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         </p>
       </div>
       <div
-        class="StackCard-actionsDiv-51"
+        class="StackCard-actionsDiv-6"
       >
         <div
-          class="StackCard-statusDiv-52"
+          class="StackCard-statusDiv-7"
         >
           <div>
             StackStatus mock 
@@ -213,11 +213,11 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
       </div>
     </div>
     <div
-      class="SuspendWarning-message-57"
+      class="SuspendWarning-message-12"
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-59 css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-14 css-i4bv87-MuiSvgIcon-root"
         data-testid="ErrorOutlineIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -227,7 +227,7 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         />
       </svg>
       <div
-        class="SuspendWarning-text-58"
+        class="SuspendWarning-text-13"
       >
         <p>
           This notebook was opened 2 hours ago and may still be in use.  Please be aware that opening
@@ -235,7 +235,7 @@ it will close it for the other user.
         </p>
       </div>
       <div
-        class="SuspendWarning-info-60"
+        class="SuspendWarning-info-15"
       >
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
@@ -244,7 +244,7 @@ it will close it for the other user.
         >
           <a
             class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-            href="http://localhost:undefined/howto/suspend-and-restart-resources"
+            href="http://localhost:undefined/howto/rstudio-single-user-explanation"
             style="text-decoration: none;"
             target="_blank"
           >
