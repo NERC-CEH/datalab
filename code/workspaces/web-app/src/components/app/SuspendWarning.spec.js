@@ -4,7 +4,7 @@ import SuspendWarning from './SuspendWarning';
 
 describe('SuspendWarning', () => {
   it('renders correct snapshot', () => {
-    const wrapper = render(<SuspendWarning message="message">{'expectedChild'}</SuspendWarning>);
+    const wrapper = render(<SuspendWarning message="message" docId="docId">{'expectedChild'}</SuspendWarning>);
     expect(wrapper.container).toMatchSnapshot();
   });
 });
