@@ -27,7 +27,7 @@ const styles = theme => ({
   },
 });
 
-const SuspendWarning = ({ classes, message }) => (
+const SuspendWarning = ({ classes, message, docId }) => (
   <div className={classes.message}>
     <ErrorOutlineIcon className={classes.icon} />
     <div className={classes.text}>
@@ -41,7 +41,7 @@ const SuspendWarning = ({ classes, message }) => (
           style={{ textDecoration: 'none' }}
           target="_blank"
           color="inherit"
-          href={`${extendSubdomain('docs')}/howto/suspend-and-restart-resources`}
+          href={`${extendSubdomain('docs')}/howto/${docId}`}
         >
             MORE
         </Link>
@@ -53,6 +53,7 @@ const SuspendWarning = ({ classes, message }) => (
 SuspendWarning.propTypes = {
   classes: PropTypes.object.isRequired,
   message: PropTypes.string.isRequired,
+  docId: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(SuspendWarning);

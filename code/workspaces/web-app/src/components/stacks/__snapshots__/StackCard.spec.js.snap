@@ -244,7 +244,7 @@ it will close it for the other user.
         >
           <a
             class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-            href="http://localhost:undefined/howto/suspend-and-restart-resources"
+            href="http://localhost:undefined/howto/rstudio-single-user-explanation"
             style="text-decoration: none;"
             target="_blank"
           >

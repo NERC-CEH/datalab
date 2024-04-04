@@ -110,7 +110,8 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
   const description = getDescription(stack, typeName);
   const expireStacks = getFeatureFlags().expireUnusedNotebooks;
 
-  const generateWarningMessage = () => {
+  const generateWarning = () => {
+    const warning = { message: '', docId: '' };
     if (expireStacks && stack.accessTime) {
       const { accessTimeWarning, inUseTimeWarning } = expireStacks;
       const daysSinceAccess = daysSinceCreation(stack.accessTime);
@@ -119,18 +120,20 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
       const inUseWarn = (hoursSinceAccess < inUseTimeWarning) && (stackTypes.RSTUDIO === stack.type);
       if (!warn) {
         if (inUseWarn) {
-          return `This notebook was opened ${hoursSinceAccess} hours ago and may still be in use.  Please be aware that opening
+          warning.message = `This notebook was opened ${hoursSinceAccess} hours ago and may still be in use.  Please be aware that opening
           it will close it for the other user.`;
+          warning.docId = 'rstudio-single-user-explanation';
         }
       } else {
-        return `This notebook has not been accessed for some time (${daysSinceAccess} days), please consider suspending
-          if not required. This warning will be dismissed if the notebook is opened.`;
+        warning.message = `This notebook has not been accessed for some time (${daysSinceAccess} days), please consider suspending
+        if not required. This warning will be dismissed if the notebook is opened.`;
+        warning.docId = 'suspend-and-restart-resources';
       }
     }
-    return '';
+    return warning;
   };
 
-  const warningMessage = generateWarningMessage();
+  const warning = generateWarning();
 
   const ResourceInfo = () => {
     if (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME) {
@@ -179,7 +182,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           />
         </div>
       </div>
-      {NOTEBOOK_TYPE_NAME === typeName && warningMessage && <SuspendWarning message={warningMessage} />}
+      {NOTEBOOK_TYPE_NAME === typeName && warning.message && <SuspendWarning {...warning}/>}
     </div>
   );
 };
