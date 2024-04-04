@@ -42,18 +42,18 @@ exports[`StackCard a recently opened vscode notebook that should NOT have a RECE
           class="StackCard-statusDiv-82"
         >
           <div>
-            StackStatus mock
+            StackStatus mock 
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock
+          StackCardActions mock 
           {"stack":{"id":"100","displayName":"name1","type":"vscode","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-
+           
         </div>
       </div>
     </div>
-
+    
   </div>
 </div>
 `;
@@ -100,14 +100,14 @@ exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warn
           class="StackCard-statusDiv-67"
         >
           <div>
-            StackStatus mock
+            StackStatus mock 
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock
+          StackCardActions mock 
           {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1555142400000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-
+           
         </div>
       </div>
     </div>
@@ -201,14 +201,14 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
           class="StackCard-statusDiv-52"
         >
           <div>
-            StackStatus mock
+            StackStatus mock 
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock
+          StackCardActions mock 
           {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-
+           
         </div>
       </div>
     </div>
@@ -349,13 +349,13 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
         class="StackCard-actionsDiv-17"
       >
         <div>
-          StackCardActions mock
+          StackCardActions mock 
           {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-
+           
         </div>
       </div>
     </div>
-
+    
   </div>
 </div>
 `;
@@ -407,9 +407,9 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
         class="StackCard-actionsDiv-28"
       >
         <div>
-          StackCardActions mock
+          StackCardActions mock 
           {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-
+           
         </div>
       </div>
     </div>
@@ -459,18 +459,18 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
           class="StackCard-statusDiv-41"
         >
           <div>
-            StackStatus mock
+            StackStatus mock 
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock
+          StackCardActions mock 
           {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-
+           
         </div>
       </div>
     </div>
-
+    
   </div>
 </div>
 `;
