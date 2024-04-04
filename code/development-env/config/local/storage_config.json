@@ -1,15 +1,5 @@
 {
   "types": {
-    "1": {
-      "displayValue": "GlusterFS",
-      "description": "Gluster File System (GlusterFS) volume to store data for Notebooks and Sites.",
-      "storageClass": "glusterfs-storage"
-    },
-    "GLUSTERFS": {
-      "displayValue": "GlusterFS",
-      "description": "Gluster File System (GlusterFS) volume to store data for Notebooks and Sites.",
-      "storageClass": "glusterfs-storage"
-    },
     "NFS": {
       "displayValue": "NFS",
       "description": "Network File System (NFS) volume to store data for Notebooks and Sites.",
@@ -18,9 +8,8 @@
   },
   "creationOptions": {
     "allowedTypes": [
-      "GLUSTERFS",
       "NFS"
     ],
-    "defaultType": "GLUSTERFS"
+    "defaultType": "NFS"
   }
 }

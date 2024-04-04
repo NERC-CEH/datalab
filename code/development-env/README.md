@@ -141,6 +141,24 @@ kubectl apply -f ./config/manifests/minikube-compute-submission-role.yml
 
 ```
 
+### Storage
+
+In order to emulate storage correctly in your development environment you can add a
+local RWX (ReadWriteMany) storage provisioner through the following. Note no data will
+be persisted in this configuration but pods should load correctly.
+
+```bash
+sudo apt install nfs-common
+
+# Deploy a local RWX (NFS Based) Storage Solution
+helm repo add nfs-ganesha-server-and-external-provisioner https://kubernetes-sigs.github.io/nfs-ganesha-server-and-external-provisioner/
+helm install nfs-server-provisioner nfs-ganesha-server-and-external-provisioner/nfs-server-provisioner \
+ --set storageClass.name="nfs-storage" \
+ --set storageClass.defaultClass=true \
+ --namespace nfs-server-provisioner \
+ --create-namespace
+```
+
 ### Docker Desktop
 
 If using Docker Desktop with Kubernetes instead of minikube, there are some alternative steps to the ones listed above.
