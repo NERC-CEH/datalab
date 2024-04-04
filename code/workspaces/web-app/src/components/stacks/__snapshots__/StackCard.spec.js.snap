@@ -42,18 +42,18 @@ exports[`StackCard a recently opened vscode notebook that should NOT have a RECE
           class="StackCard-statusDiv-82"
         >
           <div>
-            StackStatus mock 
+            StackStatus mock
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock 
+          StackCardActions mock
           {"stack":{"id":"100","displayName":"name1","type":"vscode","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-           
+
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 `;
@@ -100,14 +100,14 @@ exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warn
           class="StackCard-statusDiv-67"
         >
           <div>
-            StackStatus mock 
+            StackStatus mock
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock 
+          StackCardActions mock
           {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1555142400000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-           
+
         </div>
       </div>
     </div>
@@ -163,25 +163,25 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
 <div>
   <div>
     <div
-      class="StackCard-cardDiv-1"
+      class="StackCard-cardDiv-46"
     >
       <div
-        class="StackCard-imageDiv-2"
+        class="StackCard-imageDiv-47"
       >
         <img
           alt="rstudio logo"
-          class="StackCard-cardImage-8"
+          class="StackCard-cardImage-53"
           src="rstudio-logo.png"
         />
       </div>
       <div
-        class="StackCard-textDiv-3"
+        class="StackCard-textDiv-48"
       >
         <div
-          class="StackCard-displayNameContainer-5"
+          class="StackCard-displayNameContainer-50"
         >
           <h5
-            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-4 css-ltmxt9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-49 css-ltmxt9-MuiTypography-root"
           >
             name1
           </h5>
@@ -195,29 +195,29 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         </p>
       </div>
       <div
-        class="StackCard-actionsDiv-6"
+        class="StackCard-actionsDiv-51"
       >
         <div
-          class="StackCard-statusDiv-7"
+          class="StackCard-statusDiv-52"
         >
           <div>
-            StackStatus mock 
+            StackStatus mock
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock 
+          StackCardActions mock
           {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-           
+
         </div>
       </div>
     </div>
     <div
-      class="SuspendWarning-message-12"
+      class="SuspendWarning-message-57"
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-14 css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-59 css-i4bv87-MuiSvgIcon-root"
         data-testid="ErrorOutlineIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -227,7 +227,7 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         />
       </svg>
       <div
-        class="SuspendWarning-text-13"
+        class="SuspendWarning-text-58"
       >
         <p>
           This notebook was opened 2 hours ago and may still be in use.  Please be aware that opening
@@ -235,7 +235,7 @@ it will close it for the other user.
         </p>
       </div>
       <div
-        class="SuspendWarning-info-15"
+        class="SuspendWarning-info-60"
       >
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
@@ -349,13 +349,13 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
         class="StackCard-actionsDiv-17"
       >
         <div>
-          StackCardActions mock 
+          StackCardActions mock
           {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-           
+
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 `;
@@ -407,9 +407,9 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
         class="StackCard-actionsDiv-28"
       >
         <div>
-          StackCardActions mock 
+          StackCardActions mock
           {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-           
+
         </div>
       </div>
     </div>
@@ -459,18 +459,18 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
           class="StackCard-statusDiv-41"
         >
           <div>
-            StackStatus mock 
+            StackStatus mock
             {"status":"ready"}
           </div>
         </div>
         <div>
-          StackCardActions mock 
+          StackCardActions mock
           {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
-           
+
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 `;
