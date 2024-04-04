@@ -182,7 +182,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           />
         </div>
       </div>
-      {NOTEBOOK_TYPE_NAME === typeName && warning.message && <SuspendWarning message={warning.message} docId={warning.docId}/>}
+      {NOTEBOOK_TYPE_NAME === typeName && warning.message && <SuspendWarning {...warning}/>}
     </div>
   );
 };
