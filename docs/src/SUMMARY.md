@@ -68,6 +68,7 @@
 * [How to...](howto/README.md)
   * [Use the Asset Repo](howto/use-the-asset-repo/README.md)
   * [Suspend and Restart Resources](howto/suspend-and-restart-resources/README.md)
+  * [Collaborate on an RStudio notebook](howto/rstudio-single-user-explanation/README.md)
   * [Managing packages within R](r-libs/README.md)
     * [Packrat on Spark](r-libs/packrat_on_spark.md)
     * [Packrat within RStudio](r-libs/packrat_within_rstudio.md)
