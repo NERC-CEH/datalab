@@ -15,6 +15,7 @@ const ServiceTemplates = Object.freeze({
   SPARK_DRIVER_HEADLESS_SERVICE: 'spark-driver.headless-service.template.yml',
   DATALAB_DASK_SCHEDULER_SERVICE: 'datalab-dask-scheduler.service.template.yml',
   DATALAB_SPARK_SCHEDULER_SERVICE: 'datalab-spark-scheduler.service.template.yml',
+  STREAMLIT_SERVICE: 'streamlit.service.template.yml',
 });
 
 const DeploymentTemplates = Object.freeze({
@@ -32,6 +33,7 @@ const DeploymentTemplates = Object.freeze({
   DATALAB_DASK_WORKER_DEPLOYMENT: 'datalab-dask-worker.deployment.template.yml',
   DATALAB_SPARK_SCHEDULER_DEPLOYMENT: 'datalab-spark-scheduler.deployment.template.yml',
   DATALAB_SPARK_WORKER_DEPLOYMENT: 'datalab-spark-worker.deployment.template.yml',
+  STREAMLIT_DEPLOYMENT: 'streamlit.deployment.template.yml',
 });
 
 const IngressTemplates = Object.freeze({

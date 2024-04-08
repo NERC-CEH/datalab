@@ -733,6 +733,69 @@ spec:
 "
 `;
 
+exports[`deploymentGenerator createSiteDeployment creates expected manifest for streamlit 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: streamlit-name
+  name: streamlit-name
+spec:
+  selector:
+    matchLabels:
+      name: streamlit-name
+  template:
+    metadata:
+      labels:
+        name: streamlit-name
+        user-pod: streamlit
+    spec:
+      containers:
+      - name: streamlit-name
+        image: nerc/jupyterlab:ee1e157f36f5-spark-3.3.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8501
+          protocol: TCP
+        command: [\\"/bin/bash\\"]
+        args:
+        - -c
+        - |
+          cd /notebooks
+          [ -n \\"$CONDA_ENV\\" ] && source activate \\"$CONDA_ENV\\"
+          streamlit run $FILENAME --server.headless=true
+        env:
+        - name: CONDA_ENV
+          value: /data/conda/my-env
+        - name: FILENAME
+          value: streamlit.py
+        livenessProb:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: persistentfsvol
+          mountPath: /notebooks
+          subPath: notebooks/my-notebook
+          readOnly: true
+        - name: persistentfsvol
+          mountPath: /data/conda
+          subPath: conda
+          readOnly: true
+        - name: persistentfsvol
+          mountPath: /data/.jupyter
+          subPath: .jupyter
+          readOnly: true
+      volumes:
+      - name: persistentfsvol
+        persistentVolumeClaim:
+          claimName: volumeMount-claim
+"
+`;
+
 exports[`deploymentGenerator createSiteService creates expected manifest 1`] = `
 "---
 apiVersion: v1
@@ -763,6 +826,23 @@ spec:
       targetPort: 3838
   selector:
     name: rshiny-name
+  type: NodePort
+"
+`;
+
+exports[`deploymentGenerator createSiteService creates expected manifest for streamlit 1`] = `
+"---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamlit-name
+spec:
+  ports:
+  - name: streamlit-name-web-ui
+    port: 80
+    targetPort: 8501
+  selector:
+    name: streamlit-name
   type: NodePort
 "
 `;

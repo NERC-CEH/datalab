@@ -129,6 +129,17 @@
       "masterAddress": "spark://spark-master:7077",
       "sharedRLibs": "/data/packages/R/%p/%v"
     },
+    "streamlit": {
+      "category": "PUBLISH",
+      "userCanChooseFile": true,
+      "userCanChooseConda": true,
+      "versions": [
+        {
+          "displayName": "Dask 2023.1/Spark 3.3.0",
+          "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
+        }
+      ]
+    },
     "vscode": {
       "displayName": "VS Code Server",
       "category": "ANALYSIS",

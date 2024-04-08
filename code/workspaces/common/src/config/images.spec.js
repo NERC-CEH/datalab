@@ -3,7 +3,7 @@ import { getImageInfoForType, imageCategory, notebookList, siteList, stackList }
 
 describe('stackList', () => {
   it('returns list of NOTEBOOKs and SITEs', () => {
-    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'panel', 'rshiny', 'rstudio', 'voila', 'vscode', 'zeppelin']);
+    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'panel', 'rshiny', 'rstudio', 'streamlit', 'voila', 'vscode', 'zeppelin']);
   });
 });
 
@@ -15,7 +15,7 @@ describe('notebookList', () => {
 
 describe('siteList', () => {
   it('returns list of SITEs', () => {
-    expect(siteList().sort()).toEqual(['nbviewer', 'panel', 'rshiny', 'voila']);
+    expect(siteList().sort()).toEqual(['nbviewer', 'panel', 'rshiny', 'streamlit', 'voila']);
   });
 });
 

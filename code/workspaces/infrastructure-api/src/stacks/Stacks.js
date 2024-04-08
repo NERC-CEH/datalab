@@ -53,6 +53,11 @@ const STACKS = Object.freeze({
     create: siteStack.createSiteStack,
     delete: siteStack.deleteSiteStack,
   },
+  STREAMLIT: {
+    type: stackTypes.STREAMLIT,
+    create: siteStack.createSiteStack,
+    delete: siteStack.deleteSiteStack,
+  },
 });
 
 const getStack = type => find(STACKS, ['type', type]);

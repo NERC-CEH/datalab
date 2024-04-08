@@ -10,6 +10,7 @@ const PROJECT = 'project';
 const RSHINY = 'rshiny';
 const RSTUDIO = 'rstudio';
 const SPARK = 'SPARK';
+const STREAMLIT = 'streamlit';
 const VOILA = 'voila';
 const VSCODE = 'vscode';
 const ZEPPELIN = 'zeppelin';
@@ -33,6 +34,7 @@ export {
   RSHINY,
   RSTUDIO,
   SPARK,
+  STREAMLIT,
   VOILA,
   VSCODE,
   ZEPPELIN,
