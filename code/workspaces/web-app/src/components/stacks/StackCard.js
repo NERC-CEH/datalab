@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { stackTypes } from 'common';
+import { stackTypes, statusTypes } from 'common';
 import ResourceInfoSpan from '../common/typography/ResourceInfoSpan';
 import StackCardActions from './StackCardActions/StackCardActions';
 import stackDescriptions from './stackDescriptions';
@@ -117,7 +117,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
       const daysSinceAccess = daysSinceCreation(stack.accessTime);
       const hoursSinceAccess = hoursSinceCreation(stack.accessTime);
       const warn = (daysSinceAccess > accessTimeWarning);
-      const inUseWarn = (hoursSinceAccess < inUseTimeWarning) && (stackTypes.RSTUDIO === stack.type);
+      const inUseWarn = (stackTypes.RSTUDIO === stack.type) && (statusTypes.READY === stack.status) && (hoursSinceAccess < inUseTimeWarning);
       if (!warn) {
         if (inUseWarn) {
           warning.message = `This notebook was opened ${hoursSinceAccess} hours ago and may still be in use.  Please be aware that opening
