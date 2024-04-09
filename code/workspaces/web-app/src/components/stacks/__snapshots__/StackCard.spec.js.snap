@@ -58,6 +58,64 @@ exports[`StackCard a recently opened vscode notebook that should NOT have a RECE
 </div>
 `;
 
+exports[`StackCard an rstudio notebook in "requested" state should NOT  have a RECENTLY OPENED warning 1`] = `
+<div>
+  <div>
+    <div
+      class="StackCard-cardDiv-87"
+    >
+      <div
+        class="StackCard-imageDiv-88"
+      >
+        <img
+          alt="rstudio logo"
+          class="StackCard-cardImage-94"
+          src="rstudio-logo.png"
+        />
+      </div>
+      <div
+        class="StackCard-textDiv-89"
+      >
+        <div
+          class="StackCard-displayNameContainer-91"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-90 css-ltmxt9-MuiTypography-root"
+          >
+            name1
+          </h5>
+        </div>
+        <p
+          aria-label="RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management."
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+          data-mui-internal-clone-element="true"
+        >
+          RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+        </p>
+      </div>
+      <div
+        class="StackCard-actionsDiv-92"
+      >
+        <div
+          class="StackCard-statusDiv-93"
+        >
+          <div>
+            StackStatus mock 
+            {"status":"requested"}
+          </div>
+        </div>
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"requested","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+`;
+
 exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warning 1`] = `
 <div>
   <div>

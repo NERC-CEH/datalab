@@ -1,6 +1,7 @@
 import React from 'react';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
+import { statusTypes } from 'common';
 import { render } from '../../testUtils/renderTests';
 import StackCard from './StackCard';
 import { storageDescription, storageDisplayValue } from '../../config/storage';
@@ -101,7 +102,7 @@ describe('StackCard', () => {
 
   it('should show status ad buttons when status is ready', () => {
     // Arrange
-    const props = generateProps('jupyter', 'ready');
+    const props = generateProps('jupyter', statusTypes.READY);
 
     // Act
     const output = render(<StackCard {...props} />).container;
@@ -114,7 +115,7 @@ describe('StackCard', () => {
     // Arrange
     const hoursSinceLastAccessed = 2;
     const lastAccessTime = Date.now() - (1000 * 60 * 60 * hoursSinceLastAccessed);
-    const props = generateProps('rstudio', 'ready', lastAccessTime);
+    const props = generateProps('rstudio', statusTypes.READY, lastAccessTime);
 
     // Act
     const output = render(<StackCard {...props} />).container;
@@ -127,7 +128,7 @@ describe('StackCard', () => {
     // Arrange
     const daysSinceLastAccessed = 20;
     const lastAccessTime = Date.now() - (1000 * 60 * 60 * 24 * daysSinceLastAccessed);
-    const props = generateProps('rstudio', 'ready', lastAccessTime);
+    const props = generateProps('rstudio', statusTypes.READY, lastAccessTime);
 
     // Act
     const output = render(<StackCard {...props} />).container;
@@ -140,7 +141,20 @@ describe('StackCard', () => {
     // Arrange
     const hoursSinceLastAccessed = 2;
     const lastAccessTime = Date.now() - (1000 * 60 * 60 * hoursSinceLastAccessed);
-    const props = generateProps('vscode', 'ready', lastAccessTime);
+    const props = generateProps('vscode', statusTypes.READY, lastAccessTime);
+
+    // Act
+    const output = render(<StackCard {...props} />).container;
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('an rstudio notebook in "requested" state should NOT  have a RECENTLY OPENED warning', async () => {
+    // Arrange
+    const hoursSinceLastAccessed = 2;
+    const lastAccessTime = Date.now() - (1000 * 60 * 60 * hoursSinceLastAccessed);
+    const props = generateProps('rstudio', statusTypes.REQUESTED, lastAccessTime);
 
     // Act
     const output = render(<StackCard {...props} />).container;
