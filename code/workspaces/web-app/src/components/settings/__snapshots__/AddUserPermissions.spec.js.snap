@@ -8,12 +8,14 @@ exports[`AddUserButton renders as disabled with explanatory tooltip when the sel
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
-      disabled=""
-      tabindex="-1"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
       type="button"
     >
       Add
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
     </button>
   </div>
 </div>
@@ -27,12 +29,14 @@ exports[`AddUserButton when selected user is the current user renders as disable
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
-      disabled=""
-      tabindex="-1"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
       type="button"
     >
       Add
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
     </button>
   </div>
 </div>
@@ -153,12 +157,14 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
       data-mui-internal-clone-element="true"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium AddUserPermission-addButton-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
-        disabled=""
-        tabindex="-1"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium AddUserPermission-addButton-6 css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
         type="button"
       >
         Add
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
       </button>
     </div>
   </div>

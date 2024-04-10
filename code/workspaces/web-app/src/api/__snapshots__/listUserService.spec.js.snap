@@ -3,6 +3,6 @@
 exports[`listUserService listUsers should build the correct query and unpack the results 1`] = `
 "
   Users {
-      users { name userId }
+      users { name userId verified }
   }"
 `;
