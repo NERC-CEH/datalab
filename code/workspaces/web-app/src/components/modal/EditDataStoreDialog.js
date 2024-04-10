@@ -44,7 +44,7 @@ const EditDataStoreDialog = ({
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
       <EditDataStoreForm
-        userList={sortUsersByLabel(userList)}
+        userList={sortUsersByLabel(userList.filter(user => user.verified))}
         loadUsersPromise={loadUsersPromise}
         onSubmit={getOnDetailsEditSubmit(projectKey, stack.name, typeName)}
         onCancel={onCancel}

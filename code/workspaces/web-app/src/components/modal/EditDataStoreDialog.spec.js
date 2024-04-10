@@ -21,8 +21,8 @@ describe('Edit data store dialog', () => {
     shallowRender({
       onCancel: jest.fn().mockName('onCancel'),
       title: 'expectedTitle',
-      currentUsers: [{ label: 'expectedLabelOne', value: 'expectedValueOne' }],
-      userList: [{ label: 'expectedLabelTwo', value: 'expectedValueTwo' }],
+      currentUsers: [{ label: 'expectedLabelOne', value: 'expectedValueOne', verified: true }],
+      userList: [{ label: 'expectedLabelTwo', value: 'expectedValueTwo', verified: true }, { label: 'expectedLabelThree', value: 'expectedValueThree', verified: false }],
       loadUsersPromise: {
         error: null,
         fetching: false,
