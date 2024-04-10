@@ -12,7 +12,7 @@ const wrapUser = user => ({
 // flatten to ensure that the return is simply the record itself
 function flattenUpdateEntity(entity) {
   const flatObj = {};
-  Object.keys(entity).forEach(key => {
+  Object.keys(entity).forEach((key) => {
     if (key === '$set' || key === '$setOnInsert') {
       Object.assign(flatObj, entity[key]);
     } else {

@@ -213,7 +213,7 @@ describe('userRolesRepository', () => {
         params: { new: true, upsert: true },
       });
       expect(unwrapUser(userRoles)).toEqual({
-        userId: 'uid999', verified: true, instanceAdmin: true, projectRoles: []
+        userId: 'uid999', verified: true, instanceAdmin: true, projectRoles: [],
       });
     });
   });
