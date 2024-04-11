@@ -28,21 +28,18 @@ function addDefaults(roles) {
 async function getRoles(userId, userName) {
   let roles = await UserRoles().findOne({ userId }).exec();
   if (!roles) {
-    roles = await createNonVerifiedUserRecord(userId, userName);
+    // User has logged in and roles are being retrieved hence they are verified
+    roles = await createVerifiedUserRecord(userId, userName);
   }
 
   return addDefaults(roles);
 }
 
-// User has logged in for the first time, set up userRoles database record if does not exist
-// and set the user as verified
-async function createNonVerifiedUserRecord(userId, userName) {
+async function createVerifiedUserRecord(userId, userName) {
   return addRecordForNewUser(userId, userName, true);
 }
 
-// User has not logged in, however their e-mail is being added to an existing project, hence
-// set up userRoles record and set as not verified
-async function createVerifiedUserRecord(userId, userName) {
+async function createNonVerifiedUserRecord(userId, userName) {
   return addRecordForNewUser(userId, userName, false);
 }
 
@@ -161,9 +158,8 @@ async function addRole(userId, projectKey, role) {
   const query = { userId };
   let user = await UserRoles().findOne(query).exec();
   if (!user) {
-    // If a role is added to a non-existant user, set verfied
-    await createVerifiedUserRecord(userId, userId);
-    user = await UserRoles().findOne(query).exec();
+    // If a user record does not exist, generate it with verified field set to false
+    user = await createNonVerifiedUserRecord(userId, userId);
   }
   // Either add role or update existing role
   const { projectRoles } = user;

@@ -165,6 +165,29 @@ describe('userRolesRepository', () => {
         ],
       });
     });
+
+    it('should add userRole record with verified: false if user does not exist', async () => {
+      mockDatabase().setFindOneReturn(false);
+      jest.spyOn(userRoleRepository, 'createNonVerifiedUserRecord').mockReturnValue({
+        ...user1,
+        verified: false,
+      });
+
+      const addRole = await userRoleRepository.addRole(user1.userName, 'project 10', 'admin');
+
+      expect(addRole).toEqual(true);
+      expect(mockDatabase().query()).toEqual({
+        userId: user1.userName,
+      });
+
+      expect(unwrapUser(mockDatabase().entity())).toEqual({
+        userId: user1.userName,
+        verified: false,
+        projectRoles: [
+          { projectKey: 'project 10', role: 'admin' },
+        ],
+      });
+    });
   });
 
   describe('addRecordForNewUser', () => {
