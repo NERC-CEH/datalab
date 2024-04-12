@@ -128,7 +128,6 @@ export function AddUserButton({ currentUserId, currentUserSystemAdmin, selectedU
   } else if (selectedUser.userId === currentUserId && !currentUserSystemAdmin) {
     disabledMessage = 'You can not add permissions for yourself.';
   }
-  const disabled = selectedUser ? '' : 'disabled';
 
   return (
     <Tooltip title={disabledMessage} placement="top">
@@ -136,7 +135,7 @@ export function AddUserButton({ currentUserId, currentUserSystemAdmin, selectedU
         <PrimaryActionButton
           className={classes.addButton}
           onClick={() => onClickFn(projectKey, selectedUser, selectedPermissions, dispatch)}
-          disabled={disabled}
+          disabled={!selectedUser}
         >
           Add
         </PrimaryActionButton>
