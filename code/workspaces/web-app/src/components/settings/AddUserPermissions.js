@@ -124,10 +124,11 @@ export function AddUserButton({ currentUserId, currentUserSystemAdmin, selectedU
   let disabledMessage = ''; // empty string stops tooltip displaying
 
   if (!selectedUser) {
-    disabledMessage = "Please enter a registered user's email.";
+    disabledMessage = "Please enter a user's email.";
   } else if (selectedUser.userId === currentUserId && !currentUserSystemAdmin) {
     disabledMessage = 'You can not add permissions for yourself.';
   }
+  const disabled = selectedUser ? '' : 'disabled';
 
   return (
     <Tooltip title={disabledMessage} placement="top">
@@ -135,6 +136,7 @@ export function AddUserButton({ currentUserId, currentUserSystemAdmin, selectedU
         <PrimaryActionButton
           className={classes.addButton}
           onClick={() => onClickFn(projectKey, selectedUser, selectedPermissions, dispatch)}
+          disabled={disabled}
         >
           Add
         </PrimaryActionButton>
