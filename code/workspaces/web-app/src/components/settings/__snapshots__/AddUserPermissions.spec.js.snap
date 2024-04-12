@@ -27,14 +27,12 @@ exports[`AddUserButton when selected user is the current user renders as disable
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
-      tabindex="0"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      disabled=""
+      tabindex="-1"
       type="button"
     >
       Add
-      <span
-        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
     </button>
   </div>
 </div>
