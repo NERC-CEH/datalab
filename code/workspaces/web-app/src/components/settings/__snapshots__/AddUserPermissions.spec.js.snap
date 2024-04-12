@@ -3,19 +3,17 @@
 exports[`AddUserButton renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities 1`] = `
 <div>
   <div
-    aria-label="Please enter a registered user's email."
+    aria-label="Please enter a user's email."
     class=""
     data-mui-internal-clone-element="true"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
-      tabindex="0"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium addButton css-o0h1hg-MuiButtonBase-root-MuiButton-root"
+      disabled=""
+      tabindex="-1"
       type="button"
     >
       Add
-      <span
-        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
     </button>
   </div>
 </div>
