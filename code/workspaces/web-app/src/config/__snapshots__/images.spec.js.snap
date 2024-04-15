@@ -110,11 +110,12 @@ Object {
   },
   "streamlit": Object {
     "category": "PUBLISH",
+    "displayName": "Streamlit",
     "userCanChooseConda": true,
     "userCanChooseFile": true,
     "versions": Array [
       Object {
-        "displayName": "Dask 2023.1/Spark 3.3.0",
+        "displayName": "Streamlit",
         "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0",
       },
     ],
