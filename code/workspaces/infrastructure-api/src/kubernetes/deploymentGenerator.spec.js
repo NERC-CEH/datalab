@@ -240,6 +240,19 @@ describe('deploymentGenerator', () => {
 
       expect(manifest).toMatchSnapshot();
     });
+
+    it('creates expected manifest for streamlit', async () => {
+      const deploymentName = 'streamlit-name';
+      const sourcePath = 'notebooks/my-notebook';
+      const type = stackTypes.STREAMLIT;
+      const volumeMount = 'volumeMount';
+      const condaPath = '/data/conda/my-env';
+      const filename = 'streamlit.py';
+
+      const manifest = await deploymentGenerator.createSiteDeployment({ deploymentName, sourcePath, type, volumeMount, condaPath, filename });
+
+      expect(manifest).toMatchSnapshot();
+    });
   });
 
   describe('createSiteService', () => {
@@ -255,6 +268,15 @@ describe('deploymentGenerator', () => {
     it('creates expected manifest for RShiny', async () => {
       const serviceName = 'rshiny-name';
       const type = stackTypes.RSHINY;
+      const manifest = await deploymentGenerator.createSiteService({ serviceName, type });
+
+      expect(manifest).toMatchSnapshot();
+    });
+
+    it('creates expected manifest for streamlit', async () => {
+      const serviceName = 'streamlit-name';
+      const type = stackTypes.STREAMLIT;
+
       const manifest = await deploymentGenerator.createSiteService({ serviceName, type });
 
       expect(manifest).toMatchSnapshot();

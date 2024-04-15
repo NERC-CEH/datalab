@@ -39,6 +39,10 @@ Array [
     "value": "spark",
   },
   Object {
+    "text": undefined,
+    "value": "streamlit",
+  },
+  Object {
     "text": "VS Code Server",
     "value": "vscode",
   },

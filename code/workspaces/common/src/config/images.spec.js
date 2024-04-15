@@ -3,19 +3,19 @@ import { getImageInfoForType, imageCategory, notebookList, siteList, stackList }
 
 describe('stackList', () => {
   it('returns list of NOTEBOOKs and SITEs', () => {
-    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'panel', 'rshiny', 'rstudio', 'voila', 'vscode', 'zeppelin']);
+    expect(stackList().sort()).toEqual(['jupyter', 'jupyterlab', 'nbviewer', 'panel', 'rshiny', 'rstudio', 'streamlit', 'voila', 'vscode', 'zeppelin']);
   });
 });
 
 describe('notebookList', () => {
-  it('returns list of NOTEBOOKs and SITEs', () => {
+  it('returns list of NOTEBOOKs', () => {
     expect(notebookList().sort()).toEqual(['jupyter', 'jupyterlab', 'rstudio', 'vscode', 'zeppelin']);
   });
 });
 
 describe('siteList', () => {
-  it('returns list of NOTEBOOKs and SITEs', () => {
-    expect(siteList().sort()).toEqual(['nbviewer', 'panel', 'rshiny', 'voila']);
+  it('returns list of SITEs', () => {
+    expect(siteList().sort()).toEqual(['nbviewer', 'panel', 'rshiny', 'streamlit', 'voila']);
   });
 });
 
@@ -42,12 +42,6 @@ describe('getImageInfoForType', () => {
   });
 
   it('throws an error when the specified type does not exist', () => {
-    try {
-      getImageInfoForType('does not exist');
-      // if gets to following line the not thrown error so fail test
-      expect(true).toBe(false);
-    } catch (error) {
-      expect(error.message).toEqual('Unable to find config for image of type "does not exist"');
-    }
+    expect(() => getImageInfoForType('does not exist')).toThrow('Unable to find config for image of type "does not exist"');
   });
 });

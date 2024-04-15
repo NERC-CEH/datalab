@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ name }}
+  name: {{ name  }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ name }}
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+        user-pod: {{ type }}
+    spec:
+      containers:
+      - name: {{ name }}
+        image: {{ &image }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8501
+          protocol: TCP
+        command: ["/bin/bash"]
+        args:
+        - -c
+        - |
+          cd /notebooks
+          [ -n "$CONDA_ENV" ] && source activate "$CONDA_ENV"
+          streamlit run $FILENAME --server.headless=true
+        env:
+        - name: CONDA_ENV
+          value: {{ &condaPath }}
+        - name: FILENAME
+          value: {{ &filename }}
+        livenessProb:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 10
+{{#volumeMount}}
+        volumeMounts:
+        - name: persistentfsvol
+          mountPath: /notebooks
+          subPath: {{ &sourcePath }}
+          readOnly: true
+        - name: persistentfsvol
+          mountPath: /data/conda
+          subPath: conda
+          readOnly: true
+        - name: persistentfsvol
+          mountPath: /data/.jupyter
+          subPath: .jupyter
+          readOnly: true
+      volumes:
+      - name: persistentfsvol
+        persistentVolumeClaim:
+          claimName: {{ volumeMount }}-claim
+{{/volumeMount}}
