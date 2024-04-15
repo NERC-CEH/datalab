@@ -3,7 +3,7 @@
 exports[`AddUserButton renders as disabled with explanatory tooltip when the selected user name is not in the list of possibilities 1`] = `
 <div>
   <div
-    aria-label="Please enter a registered user's email."
+    aria-label="Please enter a user's email."
     class=""
     data-mui-internal-clone-element="true"
   >
@@ -148,7 +148,7 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
       </div>
     </div>
     <div
-      aria-label="Please enter a registered user's email."
+      aria-label="Please enter a user's email."
       class=""
       data-mui-internal-clone-element="true"
     >

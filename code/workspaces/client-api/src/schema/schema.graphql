@@ -302,6 +302,7 @@ type User {
     userId: ID
     name: String!
     permissions: [Permission!]!
+    verified: Boolean!
 }
 
 type Project {
@@ -348,6 +349,7 @@ type ProjectUser {
     userId: ID!
     name: String!
     role: ProjectRole!
+    verified: Boolean!
 }
 
 type Resource {

@@ -20,6 +20,7 @@ async function getUserRoles(req, res) {
   const mappedUsers = userPermissions.map(user => ({
     userId: user.userId,
     role: find(user.projectRoles, { projectKey }).role,
+    verified: user.verified,
   }));
 
   res.send(mappedUsers);

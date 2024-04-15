@@ -3,7 +3,7 @@
 exports[`projectSettingsService addProjectUserPermission should build correct query and unpack the result 1`] = `
 "
     AddProjectPermission($permission: PermissionAddRequest) {
-      addProjectPermission(permission: $permission) { 
+      addProjectPermission(permission: $permission) {
         projectKey, role
       }
     }"
@@ -13,8 +13,8 @@ exports[`projectSettingsService getProjectUsers should build correct query and u
 "
     GetProjectUsers($projectKey: String!) {
       project(projectKey: $projectKey) {
-        projectUsers { 
-          userId, name, role
+        projectUsers {
+          userId, name, role, verified
         },
       }
     }"

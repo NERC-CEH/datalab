@@ -5,8 +5,8 @@ export function getProjectUsers(projectKey) {
   const query = `
     GetProjectUsers($projectKey: String!) {
       project(projectKey: $projectKey) {
-        projectUsers { 
-          userId, name, role
+        projectUsers {
+          userId, name, role, verified
         },
       }
     }`;
@@ -18,7 +18,7 @@ export function getProjectUsers(projectKey) {
 export function addProjectUserPermission(projectKey, userId, role) {
   const mutation = `
     AddProjectPermission($permission: PermissionAddRequest) {
-      addProjectPermission(permission: $permission) { 
+      addProjectPermission(permission: $permission) {
         projectKey, role
       }
     }`;

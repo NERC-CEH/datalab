@@ -1,7 +1,7 @@
 import { permissionTypes } from 'common';
-import userRoleRepository from './userRolesRepository';
 import database from '../config/database';
 import databaseMock from './testUtil/databaseMock';
+import userRoleRepository from './userRolesRepository';
 
 const { INSTANCE_ADMIN_ROLE_KEY } = permissionTypes;
 
@@ -10,6 +10,7 @@ const user1 = {
   userName: 'user1',
   instanceAdmin: false,
   dataManager: false,
+  verified: true,
   projectRoles: [
     { projectKey: 'project 1', role: 'admin' },
     { projectKey: 'project 2', role: 'user' },
@@ -21,6 +22,7 @@ const user2 = {
   userName: 'user2',
   instanceAdmin: true,
   dataManager: true,
+  verified: true,
   catalogueRole: 'publisher',
   projectRoles: [
     { projectKey: 'project 2', role: 'viewer' },
@@ -30,6 +32,7 @@ const user2 = {
 const duplicateUser2 = {
   userId: 'uid2',
   userName: 'user2',
+  verified: true,
   projectRoles: [
     { projectKey: 'project 3', role: 'admin' },
   ],
@@ -117,12 +120,6 @@ describe('userRolesRepository', () => {
       mockDatabase().clear();
     });
 
-    it('should reject if the user is not in roles collection', async () => {
-      mockDatabase = databaseMock([]);
-      database.getModel = mockDatabase;
-      await expect(userRoleRepository.addRole('uid1', 'project', 'admin')).rejects.toThrow('Unrecognised user uid1');
-    });
-
     it('should add role to existing user if the user has no role on project', async () => {
       mockDatabase().setFindOneReturn(user1);
       const addRole = await userRoleRepository.addRole('uid1', 'project', 'admin');
@@ -139,6 +136,7 @@ describe('userRolesRepository', () => {
           userName: 'user1',
           instanceAdmin: false,
           dataManager: false,
+          verified: true,
           projectRoles: [
             { projectKey: 'project 1', role: 'admin' },
             { projectKey: 'project 2', role: 'user' },
@@ -160,9 +158,33 @@ describe('userRolesRepository', () => {
         userName: 'user1',
         instanceAdmin: false,
         dataManager: false,
+        verified: true,
         projectRoles: [
           { projectKey: 'project 1', role: 'admin' },
           { projectKey: 'project 2', role: 'admin' },
+        ],
+      });
+    });
+
+    it('should add userRole record with verified: false if user does not exist', async () => {
+      mockDatabase().setFindOneReturn(false);
+      jest.spyOn(userRoleRepository, 'createNonVerifiedUserRecord').mockReturnValue({
+        ...user1,
+        verified: false,
+      });
+
+      const addRole = await userRoleRepository.addRole(user1.userName, 'project 10', 'admin');
+
+      expect(addRole).toEqual(true);
+      expect(mockDatabase().query()).toEqual({
+        userId: user1.userName,
+      });
+
+      expect(unwrapUser(mockDatabase().entity())).toEqual({
+        userId: user1.userName,
+        verified: false,
+        projectRoles: [
+          { projectKey: 'project 10', role: 'admin' },
         ],
       });
     });
@@ -176,25 +198,25 @@ describe('userRolesRepository', () => {
     });
 
     it('throws an error if the user already exists', async () => {
-      await expect(userRoleRepository.addRecordForNewUser('uid1', 'user1')).rejects.toThrow(new Error('Creating new user for uid1 user1, but they already exist'));
+      await expect(userRoleRepository.addRecordForNewUser('uid1', 'user1')).rejects.toThrow(new Error('Creating new user for userId: uid1 user1, but they already exist'));
     });
 
     it('adds an empty record for a new user that does not exist', async () => {
       // Act
-      const userRoles = await userRoleRepository.addRecordForNewUser('uid999', 'user999');
+      const userRoles = await userRoleRepository.addRecordForNewUser('uid999', 'user999', true);
 
       // Assert
       expect(mockDatabase().invocation()).toEqual({
         // create a user
-        query: undefined,
-        entity: { userId: 'uid999', userName: 'user999', projectRoles: [] },
-        params: undefined,
+        query: { userName: 'user999' },
+        entity: { $set: { userId: 'uid999', verified: true }, $setOnInsert: { projectRoles: [] } },
+        params: { new: true, upsert: true },
       });
       expect(unwrapUser(userRoles)).toEqual({
-        // created roles
+        // created update
         userId: 'uid999',
-        userName: 'user999',
         projectRoles: [],
+        verified: true,
       });
     });
 
@@ -209,16 +231,12 @@ describe('userRolesRepository', () => {
       // Assert
       expect(mockDatabase().invocation()).toEqual({
         // create a user
-        query: undefined,
-        entity: { userId: 'uid999', userName: 'user999', projectRoles: [], instanceAdmin: true },
-        params: undefined,
+        query: { userName: 'user999' },
+        entity: { $set: { userId: 'uid999', verified: true, instanceAdmin: true }, $setOnInsert: { projectRoles: [] } },
+        params: { new: true, upsert: true },
       });
       expect(unwrapUser(userRoles)).toEqual({
-        // created roles
-        userId: 'uid999',
-        userName: 'user999',
-        projectRoles: [],
-        instanceAdmin: true,
+        userId: 'uid999', verified: true, instanceAdmin: true, projectRoles: [],
       });
     });
   });
@@ -258,18 +276,18 @@ describe('userRolesRepository', () => {
       // Assert
       expect(mockDatabase().invocation()).toEqual({
         // create a user
-        query: undefined,
-        entity: { userId: 'uid999', userName: 'user999', projectRoles: [] },
-        params: undefined,
+        query: { userName: 'user999' },
+        entity: { $set: { userId: 'uid999', verified: true }, $setOnInsert: { projectRoles: [] } },
+        params: { new: true, upsert: true },
       });
       expect(userRoles).toEqual({
         // add default roles
         userId: 'uid999',
-        userName: 'user999',
         catalogueRole: 'user',
         instanceAdmin: false,
         dataManager: false,
         projectRoles: [],
+        verified: true,
       });
     });
 
@@ -284,14 +302,14 @@ describe('userRolesRepository', () => {
       // Assert
       expect(mockDatabase().invocation()).toEqual({
         // create a user
-        query: undefined,
-        entity: { userId: 'uid999', userName: 'user999', projectRoles: [], instanceAdmin: true },
-        params: undefined,
+        query: { userName: 'user999' },
+        entity: { $set: { userId: 'uid999', verified: true, instanceAdmin: true }, $setOnInsert: { projectRoles: [] } },
+        params: { new: true, upsert: true },
       });
       expect(userRoles).toEqual({
         // add default roles
         userId: 'uid999',
-        userName: 'user999',
+        verified: true,
         catalogueRole: 'user',
         instanceAdmin: true,
         dataManager: false,
@@ -315,6 +333,7 @@ describe('userRolesRepository', () => {
         userName: 'user1',
         instanceAdmin: false,
         dataManager: false,
+        verified: true,
         projectRoles: [
           { projectKey: 'project 1', role: 'admin' },
         ],

@@ -5,6 +5,7 @@ import sortByName from '../sortByName';
 
 function UserMultiSelect({ input, meta = null, fixedOptions = [], ...custom }) {
   const users = useUsers();
+
   const sortedUsers = sortByName(users.value);
   const [currentValue, setCurrentValue] = useState(input.value || []); // use to give current value to onBlur
 
@@ -17,7 +18,7 @@ function UserMultiSelect({ input, meta = null, fixedOptions = [], ...custom }) {
           meta,
           currentValue,
           setCurrentValue,
-          options: sortedUsers,
+          options: sortedUsers.filter(user => user.verified),
           label: 'Users',
           placeholder: "Type user's email address",
           getOptionLabel: val => val.name,

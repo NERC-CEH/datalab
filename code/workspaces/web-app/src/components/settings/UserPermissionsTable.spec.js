@@ -168,9 +168,10 @@ describe('UserPermissionsTableBody', () => {
     const users = {
       ...initialUsers,
       value: [
-        { name: 'admin name', userId: 'admin-user-id', role: 'admin' },
-        { name: 'user name', userId: 'user-user-id', role: 'user' },
-        { name: 'viewer name', userId: 'viewer-user-id', role: 'viewer' },
+        { name: 'admin name', userId: 'admin-user-id', role: 'admin', verified: true },
+        { name: 'user name', userId: 'user-user-id', role: 'user', verified: true },
+        { name: 'viewer name', userId: 'viewer-user-id', role: 'viewer', verified: true },
+        { name: 'unverified viewer name', userId: 'unverified-viewer-user-id', role: 'viewer', verified: false },
       ],
     };
 
@@ -235,7 +236,7 @@ describe('UserPermissionsTableRow', () => {
   };
 
   describe('for a given user', () => {
-    const user = { name: 'admin name', role: 'admin' };
+    const user = { name: 'admin name', role: 'admin', verified: true };
 
     it('correctly renders passing props to children when not current user', () => {
       expect(
@@ -296,7 +297,7 @@ describe('dispatchAddUserPermissions', () => {
     projectSettingsActions.addUserPermission.mockReturnValue('expected-result');
 
     const projectKey = 'project';
-    const user = { name: 'User One', userId: 'user-one-id' };
+    const user = { name: 'User One', userId: 'user-one-id', verified: true };
     const role = PERMISSIONS.ADMIN;
     const mockDispatch = jest.fn();
 
@@ -317,7 +318,7 @@ describe('dispatchRemoveUserPermissions', () => {
     projectSettingsActions.removeUserPermission.mockReturnValue('expected-result');
 
     const projectKey = 'project';
-    const user = { name: 'User One', userId: 'user-one-id' };
+    const user = { name: 'User One', userId: 'user-one-id', verified: true };
     const mockDispatch = jest.fn();
 
     dispatchRemoveUserPermissions(projectKey, user, mockDispatch);

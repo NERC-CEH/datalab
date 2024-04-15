@@ -8,6 +8,20 @@ const wrapUser = user => ({
   toObject: () => user,
 });
 
+// For specific findAndUpdate queries things are either set explictly on insert or updated
+// flatten to ensure that the return is simply the record itself
+function flattenUpdateEntity(entity) {
+  const flatObj = {};
+  Object.keys(entity).forEach((key) => {
+    if (key === '$set' || key === '$setOnInsert') {
+      Object.assign(flatObj, entity[key]);
+    } else {
+      flatObj[key] = entity[key];
+    }
+  });
+  return flatObj;
+}
+
 function createDatabaseMock(users) {
   const documents = users.map(cloneUser).map(wrapUser);
   let lastInvocation;
@@ -23,8 +37,9 @@ function createDatabaseMock(users) {
       return { exec: () => Promise.resolve(findOneReturn) };
     },
     findOneAndUpdate: (query, entity, params) => {
+      const updatedEntity = wrapUser(cloneUser(flattenUpdateEntity(entity)));
       lastInvocation = { query, entity, params };
-      return Promise.resolve(entity);
+      return Promise.resolve(updatedEntity);
     },
     remove: (query) => {
       lastInvocation = { query };

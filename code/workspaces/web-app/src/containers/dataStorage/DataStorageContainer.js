@@ -120,6 +120,7 @@ class DataStorageContainer extends Component {
       userKeysMapping: {
         name: 'label',
         userId: 'value',
+        verified: 'verified',
       },
       stack,
       typeName: STORAGE_TYPE_NAME,

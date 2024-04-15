@@ -281,23 +281,26 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
             class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             admin name
+             (
+            verified
+            )
           </p>
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-admin"}
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin","verified":true},"isCurrentUser":true,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-admin"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-user"}
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin","verified":true},"isCurrentUser":true,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-user"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-viewer"}
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin","verified":true},"isCurrentUser":true,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-0-viewer"}
         </td>
         <td>
           RemoveUserButtonCell mock 
-          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin"},"isCurrentUser":true,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+          {"user":{"name":"admin name","userId":"admin-user-id","role":"admin","verified":true},"isCurrentUser":true,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
         </td>
       </tr>
       <tr
@@ -310,23 +313,26 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
             class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             user name
+             (
+            verified
+            )
           </p>
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-admin"}
+          {"user":{"name":"user name","userId":"user-user-id","role":"user","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-admin"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-user"}
+          {"user":{"name":"user name","userId":"user-user-id","role":"user","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-user"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-viewer"}
+          {"user":{"name":"user name","userId":"user-user-id","role":"user","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-1-viewer"}
         </td>
         <td>
           RemoveUserButtonCell mock 
-          {"user":{"name":"user name","userId":"user-user-id","role":"user"},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+          {"user":{"name":"user name","userId":"user-user-id","role":"user","verified":true},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
         </td>
       </tr>
       <tr
@@ -339,23 +345,58 @@ exports[`UserPermissionsTableBody when there are users correctly renders row for
             class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             viewer name
+             (
+            verified
+            )
           </p>
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-admin"}
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-admin"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-user"}
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-user"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-viewer"}
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-2-viewer"}
         </td>
         <td>
           RemoveUserButtonCell mock 
-          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer"},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+          {"user":{"name":"viewer name","userId":"viewer-user-id","role":"viewer","verified":true},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root css-xbnhev-MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-sizeMedium tableCell css-1yyjf55-MuiTableCell-root"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
+          >
+            unverified viewer name
+             (
+            not verified
+            )
+          </p>
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"unverified viewer name","userId":"unverified-viewer-user-id","role":"viewer","verified":false},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-3-admin"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"unverified viewer name","userId":"unverified-viewer-user-id","role":"viewer","verified":false},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-3-user"}
+        </td>
+        <td>
+          CheckboxCell mock 
+          {"user":{"name":"unverified viewer name","userId":"unverified-viewer-user-id","role":"viewer","verified":false},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"},"cellKey":"row-3-viewer"}
+        </td>
+        <td>
+          RemoveUserButtonCell mock 
+          {"user":{"name":"unverified viewer name","userId":"unverified-viewer-user-id","role":"viewer","verified":false},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableHeader":"tableHeader","tableCell":"tableCell"}}
         </td>
       </tr>
     </tbody>
@@ -425,23 +466,26 @@ exports[`UserPermissionsTableRow for a given user correctly renders passing prop
             class="MuiTypography-root MuiTypography-body1 css-12gb3o9-MuiTypography-root"
           >
             admin name
+             (
+            verified
+            )
           </p>
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-admin"}
+          {"user":{"name":"admin name","role":"admin","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"admin","value":2},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-admin"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-user"}
+          {"user":{"name":"admin name","role":"admin","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"user","value":1},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-user"}
         </td>
         <td>
           CheckboxCell mock 
-          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-viewer"}
+          {"user":{"name":"admin name","role":"admin","verified":true},"isCurrentUser":false,"checkboxSpec":{"name":"viewer","value":0},"projectKey":"projectKey","classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"},"cellKey":"row-2-viewer"}
         </td>
         <td>
           RemoveUserButtonCell mock 
-          {"user":{"name":"admin name","role":"admin"},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"}}
+          {"user":{"name":"admin name","role":"admin","verified":true},"isCurrentUser":false,"classes":{"activeSelection":"activeSelection","implicitSelection":"implicitSelection","tableCell":"tableCell"}}
         </td>
       </tr>
     </tbody>
