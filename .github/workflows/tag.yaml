@@ -2,7 +2,8 @@ name: Tag action
 
 on:
   push:
-    branches: ["master"]
+    tags:
+      - '*'
 
 jobs:
   build:
