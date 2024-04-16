@@ -31,13 +31,16 @@
 	},
 	"settings": {
 		"editor.codeActionsOnSave": {
-			"source.fixAll": true
+			"source.fixAll": "explicit"
 		},
 		"editor.formatOnSave": true,
 		"editor.tabSize": 2,
 		"eslint.workingDirectories": [
 			"./code"
 		],
+		"jest": {
+			"runMode": "on-demand"
+		}
 		"eslint.format.enable": true,
 		"jest.disabledWorkspaceFolders": [
 			"datalab"
@@ -89,6 +92,7 @@
 			"setup",
 			"signin",
 			"signout",
+			"streamlit",
 			"unmount",
 			"updateable",
 			"uppercase",
