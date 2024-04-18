@@ -16,7 +16,7 @@ async function createVolume(request, response, next) {
   const { user } = request;
 
   try {
-    await dataStorageRepository.create(user, params);
+    await dataStorageRepository.create(user, params.projectKey, params);
     await volumeManager.createVolume(user, params);
     response.status(201);
     response.send({ message: 'OK' });
