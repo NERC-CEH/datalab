@@ -33,8 +33,8 @@ function getById({ sub }, projectKey, id) {
   return DataStorage().findOne(query).exec();
 }
 
-function create({ sub }, requestedDataStore) {
-  const query = filterByUser(sub, { name: requestedDataStore.name });
+function create({ sub }, projectKey, requestedDataStore) {
+  const query = filterByUser(sub, { name: requestedDataStore.name, projectKey });
   const dataStore = {
     ...requestedDataStore,
     ...createStorageUrls(requestedDataStore),

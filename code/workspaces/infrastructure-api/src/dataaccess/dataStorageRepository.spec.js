@@ -61,12 +61,13 @@ describe('dataStorageRepository', () => {
   }));
 
   it('create should query for data store with same name', () => {
-    const dataStore = { name: 'newVolume', type: 'nfs' };
+    const dataStore = { name: 'newVolume', type: 'nfs', projectKey: 'project' };
 
-    return dataStorageRepository.create(user, dataStore)
+    return dataStorageRepository.create(user, dataStore.projectKey, dataStore)
       .then((createdDataStore) => {
         expect(mockDatabase().query()).toEqual({
           name: createdDataStore.name,
+          projectKey: createdDataStore.projectKey,
           users: { $elemMatch: { $eq: 'username' } },
         });
         expect(mockDatabase().entity()).toEqual(createdDataStore);
