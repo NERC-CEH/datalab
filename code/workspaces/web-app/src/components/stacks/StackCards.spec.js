@@ -33,6 +33,7 @@ describe('StackCards', () => {
     createPermission: 'create',
     editPermission: 'edit',
     showCreateButton: true,
+    showUsernames: false,
   });
 
   it('creates correct snapshot for an array of stacks', () => {

@@ -48,7 +48,7 @@ exports[`StackCard a recently opened vscode notebook that should NOT have a RECE
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"vscode","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"vscode","status":"ready","shared":"private","accessTime":1556863200000,"users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -106,7 +106,7 @@ exports[`StackCard an rstudio notebook in "requested" state should NOT  have a R
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"requested","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"requested","shared":"private","accessTime":1556863200000,"users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -164,7 +164,7 @@ exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warn
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1555142400000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1555142400000,"users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -289,7 +289,7 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1556863200000},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","status":"ready","shared":"private","accessTime":1556863200000,"users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -406,7 +406,7 @@ exports[`StackCard creates correct snapshot for Jupyter stack type 1`] = `
       >
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"jupyter","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"jupyter","shared":"private","users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -456,7 +456,7 @@ exports[`StackCard creates correct snapshot for Zeppelin stack type 1`] = `
       >
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"zeppelin","shared":"private","users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -514,7 +514,7 @@ exports[`StackCard creates correct snapshot for glusterfs stack type 1`] = `
       >
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"GLUSTERFS","shared":"private","users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>
@@ -571,7 +571,119 @@ exports[`StackCard should show status ad buttons when status is ready 1`] = `
         </div>
         <div>
           StackCardActions mock 
-          {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private"},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+          {"stack":{"id":"100","displayName":"name1","type":"jupyter","status":"ready","shared":"private","users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+`;
+
+exports[`StackCard when showUsernames is set to false username should be hidden 1`] = `
+<div>
+  <div>
+    <div
+      class="StackCard-cardDiv-98"
+    >
+      <div
+        class="StackCard-imageDiv-99"
+      >
+        <img
+          alt="rstudio logo"
+          class="StackCard-cardImage-105"
+          src="rstudio-logo.png"
+        />
+      </div>
+      <div
+        class="StackCard-textDiv-100"
+      >
+        <div
+          class="StackCard-displayNameContainer-102"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-101 css-ltmxt9-MuiTypography-root"
+          >
+            name1
+          </h5>
+        </div>
+        <p
+          aria-label="RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management."
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+          data-mui-internal-clone-element="true"
+        >
+          RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body1 StackCard-shareStatus-108 css-12gb3o9-MuiTypography-root"
+        >
+          Shared by 
+          ******
+        </p>
+      </div>
+      <div
+        class="StackCard-actionsDiv-103"
+      >
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","shared":"project","users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
+           
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+`;
+
+exports[`StackCard when showUsernames is set to true username should be shown 1`] = `
+<div>
+  <div>
+    <div
+      class="StackCard-cardDiv-109"
+    >
+      <div
+        class="StackCard-imageDiv-110"
+      >
+        <img
+          alt="rstudio logo"
+          class="StackCard-cardImage-116"
+          src="rstudio-logo.png"
+        />
+      </div>
+      <div
+        class="StackCard-textDiv-111"
+      >
+        <div
+          class="StackCard-displayNameContainer-113"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-112 css-ltmxt9-MuiTypography-root"
+          >
+            name1
+          </h5>
+        </div>
+        <p
+          aria-label="RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management."
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-yth3u7-MuiTypography-root"
+          data-mui-internal-clone-element="true"
+        >
+          RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body1 StackCard-shareStatus-119 css-12gb3o9-MuiTypography-root"
+        >
+          Shared by 
+          user1@example.com
+        </p>
+      </div>
+      <div
+        class="StackCard-actionsDiv-114"
+      >
+        <div>
+          StackCardActions mock 
+          {"stack":{"id":"100","displayName":"name1","type":"rstudio","shared":"project","users":["user1@example.com","user2@example.com"]},"copySnippets":{},"userPermissions":["open","delete","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit"}
            
         </div>
       </div>

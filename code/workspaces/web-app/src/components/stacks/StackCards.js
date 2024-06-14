@@ -9,6 +9,8 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import Pagination from './Pagination';
 import { PROJECT_TYPE_NAME } from '../../containers/projects/projectTypeName';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const useStyles = makeStyles(theme => ({
   stackDiv: {
@@ -40,13 +42,15 @@ const buildCreateButton = ({ userPermissions, createPermission, openCreationForm
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, scaleStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets = undefined, actionButtonLabelPrefix = 'Create' },
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack,
+    copySnippets = undefined, actionButtonLabelPrefix = 'Create', showUsernames },
 ) => {
   const classes = useStyles();
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
   const renderedStacks = sortedStacks && sortedStacks.length > 0
     ? sortedStacks.map(stack => (
       <StackCard
+        showUsernames={showUsernames}
         key={stack.id}
         stack={stack}
         typeName={typeName}
@@ -103,4 +107,5 @@ StackCards.propTypes = {
   editPermission: PropTypes.string,
   scalePermission: PropTypes.string,
   copySnippets: PropTypes.objectOf(PropTypes.func),
+  showUsernames: PropTypes.bool.isRequired,
 };

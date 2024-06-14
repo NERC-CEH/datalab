@@ -7,6 +7,7 @@ import StacksContainer, { PureStacksContainer } from './StacksContainer';
 import stackService from '../../api/stackService';
 import listUsersService from '../../api/listUsersService';
 import notify from '../../components/common/notify';
+import StackCards from '../../components/stacks/StackCards';
 
 jest.mock('../../api/stackService');
 let loadStacksMock;
@@ -86,6 +87,10 @@ describe('StacksContainer', () => {
   });
 
   describe('is a container which', () => {
+    function shallowRenderPureStackCards(props) {
+      return shallow(<PureStacksContainer {...props} />).find('StackCards');
+    }
+
     function shallowRenderPure(props) {
       return shallow(<PureStacksContainer {...props} />);
     }
@@ -149,7 +154,7 @@ describe('StacksContainer', () => {
       const props = generateProps();
 
       // Act
-      shallowRenderPure(props);
+      shallowRenderPureStackCards(props);
 
       // Assert
       expect(loadStacksMock).toHaveBeenCalledTimes(1);
@@ -160,14 +165,14 @@ describe('StacksContainer', () => {
       const props = generateProps();
 
       // Act
-      expect(shallowRenderPure(props)).toMatchSnapshot();
+      expect(shallowRenderPureStackCards(props)).toMatchSnapshot();
     });
 
     it('openNotebook method calls openNotebook action on resolved getUrl', () => {
       // Arrange
       getUrlMock.mockReturnValue(Promise.resolve({ value: { redirectUrl: 'expectedUrl' } }));
       const props = generateProps();
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const openStack = output.prop('openStack');
 
       // Act/Assert
@@ -186,7 +191,7 @@ describe('StacksContainer', () => {
       // Arrange
       getUrlMock.mockReturnValue(Promise.reject(new Error('no url')));
       const props = generateProps();
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const openStack = output.prop('openStack');
 
       // Act/Assert
@@ -207,7 +212,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act/Assert
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const deleteStack = output.prop('deleteStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       deleteStack(stack);
@@ -222,7 +227,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
 
@@ -239,7 +244,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const deleteStack = output.prop('deleteStack');
       deleteStack(stack);
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
@@ -259,7 +264,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act/Assert
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const shareStack = output.prop('shareStack');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       shareStack(stack, 'project');
@@ -274,7 +279,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const shareStack = output.prop('shareStack');
       shareStack(stack, 'private');
 
@@ -291,7 +296,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const shareStack = output.prop('shareStack');
       shareStack(stack, 'project');
 
@@ -308,7 +313,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const shareStack = output.prop('shareStack');
       shareStack(stack, 'public');
 
@@ -325,7 +330,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const shareStack = output.prop('shareStack');
       shareStack(stack, 'project');
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
@@ -348,7 +353,7 @@ describe('StacksContainer', () => {
       updateStackShareStatusMock.mockImplementationOnce(() => { throw Error('expected test error'); });
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const shareStack = output.prop('shareStack');
       shareStack(stack, 'project');
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
@@ -369,7 +374,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act/Assert
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const openCreationForm = output.prop('openCreationForm');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       openCreationForm(stack);
@@ -384,7 +389,7 @@ describe('StacksContainer', () => {
       const stack = { displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const openCreationForm = output.prop('openCreationForm');
       expect(openModalDialogMock).not.toHaveBeenCalled();
       openCreationForm(stack);
@@ -402,7 +407,7 @@ describe('StacksContainer', () => {
       const stack = { projectKey: 'project-key', displayName: 'expectedDisplayName' };
 
       // Act
-      const output = shallowRenderPure(props);
+      const output = shallowRenderPureStackCards(props);
       const openCreationForm = output.prop('openCreationForm');
       openCreationForm();
       const { onSubmit } = openModalDialogMock.mock.calls[0][1];
@@ -427,7 +432,7 @@ describe('StacksContainer', () => {
         const stack = { displayName: 'expectedDisplayName' };
 
         // Act/Assert
-        const output = shallowRenderPure(props);
+        const output = shallowRenderPureStackCards(props);
         const openEditForm = output.prop('editStack');
         expect(openModalDialogMock).not.toHaveBeenCalled();
         openEditForm(stack);
@@ -442,7 +447,8 @@ describe('StacksContainer', () => {
         const inputStack = { displayName: 'expectedDisplayName' };
 
         // Act
-        const output = shallowRenderPure(props);
+        const output = shallowRenderPureStackCards(props);
+        const toplevel = shallowRenderPure(props);
         const openEditForm = output.prop('editStack');
         expect(openModalDialogMock).not.toHaveBeenCalled();
         openEditForm(inputStack);
@@ -451,7 +457,7 @@ describe('StacksContainer', () => {
         const firstMockCall = openModalDialogMock.mock.calls[0];
         const { title, onSubmit, onCancel, formComponent, stack } = firstMockCall[1];
         expect({ title }).toMatchSnapshot();
-        expect(onSubmit).toBe(output.instance().editStack);
+        expect(onSubmit.toString()).toEqual(toplevel.instance().editStack.toString());
         expect(onCancel).toBe(closeModalDialogMock);
         expect(formComponent).toBe(FormComponent);
         expect(stack).toBe(inputStack);
@@ -463,7 +469,7 @@ describe('StacksContainer', () => {
         const stack = { projectKey: 'project-key', displayName: 'expectedDisplayName' };
 
         // Act
-        const output = shallowRenderPure(props);
+        const output = shallowRenderPureStackCards(props);
         const openEditForm = output.prop('editStack');
         openEditForm();
         const { onSubmit } = openModalDialogMock.mock.calls[0][1];
@@ -489,7 +495,7 @@ describe('StacksContainer', () => {
         const stack = { displayName: 'expectedDisplayName' };
 
         // Act/Assert
-        const output = shallowRenderPure(props);
+        const output = shallowRenderPureStackCards(props);
         const confirmRestartStack = output.prop('restartStack');
         expect(openModalDialogMock).not.toHaveBeenCalled();
         confirmRestartStack(stack);
@@ -509,7 +515,7 @@ describe('StacksContainer', () => {
         };
 
         // Act
-        const output = shallowRenderPure(props);
+        const output = shallowRenderPureStackCards(props);
         const confirmRestartStack = output.prop('restartStack');
         expect(openModalDialogMock).not.toHaveBeenCalled();
         confirmRestartStack(stack);
@@ -527,7 +533,7 @@ describe('StacksContainer', () => {
         const stack = { projectKey: 'project-key', name: 'stackName', type: 'jupyter' };
 
         // Act
-        const output = shallowRenderPure(props);
+        const output = shallowRenderPureStackCards(props);
         const confirmRestartStack = output.prop('restartStack');
         confirmRestartStack(stack);
         const { onSubmit } = openModalDialogMock.mock.calls[0][1];

@@ -5,6 +5,7 @@ import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { permissionTypes, statusTypes, visibilityTypes } from 'common';
+import Switch from '@mui/material/Switch';
 import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SCALE_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
@@ -12,6 +13,7 @@ import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import stackActions from '../../actions/stackActions';
 import StackCards from '../../components/stacks/StackCards';
 import userActions from '../../actions/userActions';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const refreshTimeout = 15000;
 
@@ -34,6 +36,11 @@ class StacksContainer extends Component {
     this.loadStack = this.loadStack.bind(this);
     this.updateStack = this.updateStack.bind(this);
     this.setUpdateTimeout = this.setUpdateTimeout.bind(this);
+    this.state = { showUsernames: false };
+  }
+
+  handleShowUsernameToggle = () => {
+    this.setState({ showUsernames: !this.state.showUsernames });
   }
 
   openStack(stack) {
@@ -253,25 +260,41 @@ class StacksContainer extends Component {
       value: this.props.stacks.value.filter(stack => (stack.projectKey === this.props.projectKey.value) && (stack.category === this.props.containerType)),
     };
     return (
-      <StackCards
-        stacks={stacksUpdatedFetching}
-        typeName={this.props.typeName}
-        typeNamePlural={this.props.typeNamePlural}
-        getLogs={this.getLogs}
-        openStack={this.openStack}
-        deleteStack={this.confirmDeleteStack}
-        shareStack={this.confirmShareStack}
-        editStack={this.openEditForm}
-        restartStack={this.confirmRestartStack}
-        scaleStack={this.confirmScaleStack}
-        openCreationForm={this.props.modifyData ? this.openCreationForm : undefined}
-        showCreateButton={this.props.modifyData}
-        userPermissions={() => this.props.userPermissions}
-        createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
-        openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey.value)}
-        deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey.value)}
-        editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey.value)}
-        scalePermission={projectKeyPermission(PROJECT_KEY_STACKS_SCALE, this.props.projectKey.value)}/>
+      <div>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={this.state.showUsernames}
+              onChange={this.handleShowUsernameToggle}
+              name="usernameToggle"
+              color="primary"
+            />
+          }
+          label="Show Usernames"
+          style={{ display: 'flex', justifyContent: 'flex-end' }}
+        />
+        <StackCards
+          showUsernames={this.state.showUsernames}
+          stacks={stacksUpdatedFetching}
+          typeName={this.props.typeName}
+          typeNamePlural={this.props.typeNamePlural}
+          getLogs={this.getLogs}
+          openStack={this.openStack}
+          deleteStack={this.confirmDeleteStack}
+          shareStack={this.confirmShareStack}
+          editStack={this.openEditForm}
+          restartStack={this.confirmRestartStack}
+          scaleStack={this.confirmScaleStack}
+          openCreationForm={this.props.modifyData ? this.openCreationForm : undefined}
+          showCreateButton={this.props.modifyData}
+          userPermissions={() => this.props.userPermissions}
+          createPermission={projectKeyPermission(PROJECT_KEY_STACKS_CREATE, this.props.projectKey.value)}
+          openPermission={projectKeyPermission(PROJECT_KEY_STACKS_OPEN, this.props.projectKey.value)}
+          deletePermission={projectKeyPermission(PROJECT_KEY_STACKS_DELETE, this.props.projectKey.value)}
+          editPermission={projectKeyPermission(PROJECT_KEY_STACKS_EDIT, this.props.projectKey.value)}
+          scalePermission={projectKeyPermission(PROJECT_KEY_STACKS_SCALE, this.props.projectKey.value)}
+        />
+      </div>
     );
   }
 }
