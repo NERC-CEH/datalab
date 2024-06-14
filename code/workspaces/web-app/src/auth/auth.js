@@ -20,7 +20,13 @@ class Auth {
 
   login() {
     // Re-direct to login screen, maintaining any query parameters in the URL.
-    const redirectPath = `${window.location.pathname}${window.location.search}`;
+    // New users come from /verify, hence redirect as it does not exist in the private app.
+    let redirectPath;
+    if (window.location.pathname === '/verify') {
+      redirectPath = '/';
+    } else {
+      redirectPath = `${window.location.pathname}${window.location.search}`;
+    }
     this.oidcInit.signinRedirect({ state: { appRedirect: redirectPath } });
   }
 
