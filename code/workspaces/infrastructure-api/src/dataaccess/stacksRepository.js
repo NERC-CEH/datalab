@@ -180,8 +180,15 @@ function isUserPartOfProject(user, projectName) {
 
 async function userCanScaleUpStack(projectKey, user, name) {
   // can scale if user is a member of a project and the stack is shared
-  const stack = await getSharedVisibleByName(projectKey, user, name);
-  return (Boolean(stack) && isUserPartOfProject(user, projectKey)) || !!(user.roles && user.roles.instanceAdmin);
+  const stackShared = await getSharedVisibleByName(projectKey, user, name);
+  // can scale if user owns the stack
+  const stackOwned = await getOneByName(projectKey, user, name);
+
+  return (
+    (Boolean(stackShared) && isUserPartOfProject(user, projectKey))
+    || !!(user.roles && user.roles.instanceAdmin)
+    || (stackOwned.users && stackOwned.users.includes(user.sub))
+  );
 }
 
 // Function is used by kube-watcher to update stacks status. This will require an
