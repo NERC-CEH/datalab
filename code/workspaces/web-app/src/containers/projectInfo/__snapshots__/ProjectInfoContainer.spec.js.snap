@@ -3,10 +3,10 @@
 exports[`CollaborationLink renders correctly to match snapshot when there is a collaboration link 1`] = `
 <div>
   <div
-    class="makeStyles-collaborationLink-41"
+    class="makeStyles-collaborationLink-65"
   >
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-42 css-12gb3o9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-66 css-12gb3o9-MuiTypography-root"
     >
       Collaboration Link
     </p>
@@ -73,26 +73,74 @@ exports[`ProjectInfoContainer renders correctly passing correct props to childre
       class="makeStyles-userBlock-7"
     >
       <div>
-        <div />
-        <div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-8 css-161uzub-MuiTypography-root"
-          >
-            user
-            s
-          </h6>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-10 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+        >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-12 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+            role="button"
+            tabindex="0"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-15 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
             >
-              user1@test
-            </span>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-8 css-161uzub-MuiTypography-root"
+              >
+                user
+                s
+              </h6>
+            </div>
+            <div
+              class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ExpandMoreIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+            style="min-height: 0px;"
+          >
+            <div
+              class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+            >
+              <div
+                class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+              >
+                <div
+                  class="MuiAccordion-region"
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                  >
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user1@test
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div />
       </div>
     </div>
   </div>
@@ -103,29 +151,29 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
 <div>
   <div>
     <div
-      class="makeStyles-projectTitleWrapper-12"
+      class="makeStyles-projectTitleWrapper-18"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-10 css-k8n68h-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-16 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-13 makeStyles-root-18"
+        class="makeStyles-ResourceInfoSpan-19 makeStyles-root-24"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-description-11 css-12gb3o9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-17 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
     <div
-      class="makeStyles-collaborationLink-14"
+      class="makeStyles-collaborationLink-20"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-15 css-12gb3o9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-21 css-12gb3o9-MuiTypography-root"
       >
         Collaboration Link
       </p>
@@ -142,71 +190,221 @@ exports[`ProjectInfoContainer renders correctly when there are multiple users 1`
       </p>
     </div>
     <div
-      class="makeStyles-userBlock-16"
+      class="makeStyles-userBlock-22"
     >
       <div>
-        <div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-17 css-161uzub-MuiTypography-root"
-          >
-            admin
-            s
-          </h6>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-25 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+        >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-27 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+            role="button"
+            tabindex="0"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-30 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
             >
-              user4@test
-            </span>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-23 css-161uzub-MuiTypography-root"
+              >
+                admin
+                s
+              </h6>
+            </div>
+            <div
+              class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ExpandMoreIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+            style="min-height: 0px;"
+          >
+            <div
+              class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+            >
+              <div
+                class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+              >
+                <div
+                  class="MuiAccordion-region"
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                  >
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user4@test
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-17 css-161uzub-MuiTypography-root"
-          >
-            user
-            s
-          </h6>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-25 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+        >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-27 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+            role="button"
+            tabindex="0"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-30 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
             >
-              user1@test
-            </span>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-23 css-161uzub-MuiTypography-root"
+              >
+                user
+                s
+              </h6>
+            </div>
+            <div
+              class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ExpandMoreIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                />
+              </svg>
+            </div>
           </div>
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+            style="min-height: 0px;"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
             >
-              user3@test
-            </span>
+              <div
+                class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+              >
+                <div
+                  class="MuiAccordion-region"
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                  >
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user1@test
+                      </span>
+                    </div>
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user3@test
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-17 css-161uzub-MuiTypography-root"
-          >
-            viewer
-            s
-          </h6>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-25 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+        >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-27 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+            role="button"
+            tabindex="0"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-30 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
             >
-              user2@test
-            </span>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-23 css-161uzub-MuiTypography-root"
+              >
+                viewer
+                s
+              </h6>
+            </div>
+            <div
+              class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ExpandMoreIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+            style="min-height: 0px;"
+          >
+            <div
+              class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+            >
+              <div
+                class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+              >
+                <div
+                  class="MuiAccordion-region"
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                  >
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user2@test
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -219,29 +417,29 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 <div>
   <div>
     <div
-      class="makeStyles-projectTitleWrapper-21"
+      class="makeStyles-projectTitleWrapper-33"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-19 css-k8n68h-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-31 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-22 makeStyles-root-27"
+        class="makeStyles-ResourceInfoSpan-34 makeStyles-root-39"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-description-20 css-12gb3o9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-32 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
     <div
-      class="makeStyles-collaborationLink-23"
+      class="makeStyles-collaborationLink-35"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-24 css-12gb3o9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-collaborationLinkHeading-36 css-12gb3o9-MuiTypography-root"
       >
         Collaboration Link
       </p>
@@ -258,29 +456,77 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
       </p>
     </div>
     <div
-      class="makeStyles-userBlock-25"
+      class="makeStyles-userBlock-37"
     >
       <div>
-        <div />
-        <div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-26 css-161uzub-MuiTypography-root"
-          >
-            user
-            s
-          </h6>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-40 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+        >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-42 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+            role="button"
+            tabindex="0"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-45 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
             >
-              user1@test
-            </span>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-38 css-161uzub-MuiTypography-root"
+              >
+                user
+                s
+              </h6>
+            </div>
+            <div
+              class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ExpandMoreIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+            style="min-height: 0px;"
+          >
+            <div
+              class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+            >
+              <div
+                class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+              >
+                <div
+                  class="MuiAccordion-region"
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                  >
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user1@test
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div />
       </div>
     </div>
   </div>
@@ -291,48 +537,96 @@ exports[`PureProjectInfoContainer renders correctly to match snapshot when there
 <div>
   <div>
     <div
-      class="makeStyles-projectTitleWrapper-30"
+      class="makeStyles-projectTitleWrapper-48"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-28 css-k8n68h-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-h5 makeStyles-projectTitle-46 css-k8n68h-MuiTypography-root"
       >
         Test Project
       </h5>
       <span
-        class="makeStyles-ResourceInfoSpan-31 makeStyles-root-36"
+        class="makeStyles-ResourceInfoSpan-49 makeStyles-root-54"
       >
         (testproj)
       </span>
     </div>
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-description-29 css-12gb3o9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 makeStyles-description-47 css-12gb3o9-MuiTypography-root"
     >
       A description about Test Project.
     </p>
     <div
-      class="makeStyles-userBlock-34"
+      class="makeStyles-userBlock-52"
     >
       <div>
-        <div />
-        <div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-35 css-161uzub-MuiTypography-root"
-          >
-            user
-            s
-          </h6>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root ForwardRef(Accordion)-root-55 MuiAccordion-rounded MuiAccordion-gutters css-16rgl2j-MuiPaper-root-MuiAccordion-root"
+        >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
-            tabindex="-1"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root ForwardRef(AccordionSummary)-root-57 MuiAccordionSummary-gutters css-ezupba-MuiButtonBase-root-MuiAccordionSummary-root"
+            role="button"
+            tabindex="0"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            <div
+              class="MuiAccordionSummary-content ForwardRef(AccordionSummary)-content-60 MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
             >
-              user1@test
-            </span>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 makeStyles-chipTitle-53 css-161uzub-MuiTypography-root"
+              >
+                user
+                s
+              </h6>
+            </div>
+            <div
+              class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ExpandMoreIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+            style="min-height: 0px;"
+          >
+            <div
+              class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+            >
+              <div
+                class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+              >
+                <div
+                  class="MuiAccordion-region"
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionDetails-root css-1l0wl9e-MuiAccordionDetails-root"
+                  >
+                    <div
+                      class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-1eroic6-MuiChip-root"
+                      tabindex="-1"
+                    >
+                      <span
+                        class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+                      >
+                        user1@test
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div />
       </div>
     </div>
   </div>

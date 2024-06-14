@@ -3,11 +3,14 @@ import { useDispatch } from 'react-redux';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccordionDetails from '@mui/material/AccordionDetails';
 import PromisedContentWrapper from '../../components/common/PromisedContentWrapper';
 import { useCurrentProject } from '../../hooks/currentProjectHooks';
 import { useProjectUsers } from '../../hooks/projectUsersHooks';
 import projectSettingsActions from '../../actions/projectSettingsActions';
 import ResourceInfoSpan from '../../components/common/typography/ResourceInfoSpan';
+import { ResourceAccordion, ResourceAccordionSummary } from '../../components/common/ResourceAccordion';
 
 const useStyles = makeStyles(theme => ({
   projectTitle: {
@@ -86,11 +89,18 @@ export const PureProjectInfoContainer = ({ currentProject }) => {
   );
 };
 
-export const UserBlock = ({ name, users, classes }) => <div>
-  {users.length > 0
-    && <Typography className={classes.chipTitle} variant="h6">{name}s</Typography>}
-  {users.map(user => <Chip key={user.userId} tabIndex={-1} label={user.name} />)}
-</div>;
+export const UserBlock = ({ name, users, classes }) => (users.length === 0 ? null
+  : <ResourceAccordion>
+      <ResourceAccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography className={classes.chipTitle} variant="h6">{name}s</Typography>
+      </ResourceAccordionSummary>
+      {/* ResourceAccordionDetails sets display: flex making the user
+          chips format weirdly, so we use a regular mui AccordionDetails */}
+      <AccordionDetails>
+        {users.map(user => <Chip key={user.userId} tabIndex={-1} label={user.name} />)}
+      </AccordionDetails>
+    </ResourceAccordion>
+);
 
 export const CollaborationLink = ({ link }) => {
   const classes = useStyles();
