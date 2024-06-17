@@ -262,4 +262,5 @@ export default {
   updateStatus,
   updateAssets,
   update,
+  getSharedVisibleByName,
 };

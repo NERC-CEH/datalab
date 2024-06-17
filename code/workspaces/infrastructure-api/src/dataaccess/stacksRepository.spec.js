@@ -290,3 +290,35 @@ describe('anonymiseStack', () => {
     expect(response).toEqual(expected);
   });
 });
+
+describe('userCanScaleUpStack', () => {
+  const projectKey = 'projectKey';
+  const adminUser = {
+    sub: 'admin',
+    roles: {
+      instanceAdmin: true,
+      projectRoles: [],
+    },
+  };
+
+  it('returns true if the user is a member of a project and the stack is shared', async () => {
+    const sharedStack = { name: 'sharedStack', users: ['otherUser'] };
+    jest.spyOn(stacksRepository, 'getSharedVisibleByName').mockResolvedValueOnce(sharedStack);
+
+    const canScaleUp = await stacksRepository.userCanScaleUpStack(projectKey, user, 'sharedStack');
+    expect(canScaleUp).toBe(true);
+  });
+
+  it('returns true if the user is the owner of the stack', async () => {
+    const ownedStack = { name: 'ownedStack', users: [user.sub] };
+    jest.spyOn(stacksRepository, 'getOneByName').mockResolvedValueOnce(ownedStack);
+
+    const canScaleUp = await stacksRepository.userCanScaleUpStack(projectKey, user, 'ownedStack');
+    expect(canScaleUp).toBe(true);
+  });
+
+  it('returns true if the user is an instance admin', async () => {
+    const canScaleUp = await stacksRepository.userCanScaleUpStack(projectKey, adminUser, 'anyStack');
+    expect(canScaleUp).toBe(true);
+  });
+});
