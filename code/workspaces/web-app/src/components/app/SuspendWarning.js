@@ -32,9 +32,8 @@ const styles = theme => ({
 const SuspendWarning = ({ classes, message, docId }) => {
   const [showMessage, setShowMessage] = useState(true);
   const onHide = () => setShowMessage(false);
-  return (
-    <div>
-      { showMessage ? <div className={classes.message}>
+  return ((!showMessage) ? null
+    : <div className={classes.message}>
         <ErrorOutlinedIcon className={classes.icon}/>
         <div className={classes.text}>
           <ReactMarkdown>
@@ -58,9 +57,7 @@ const SuspendWarning = ({ classes, message, docId }) => {
             <CloseOutlinedIcon className={classes.hide} />
           </Button>
         </div>
-      </div> : null
-      }
-    </div>
+      </div>
   );
 };
 

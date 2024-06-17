@@ -169,74 +169,72 @@ exports[`StackCard an rstudio notebook that should only have a NOT ACCESSED warn
         </div>
       </div>
     </div>
-    <div>
-      <div
-        class="SuspendWarning-message-73"
+    <div
+      class="SuspendWarning-message-73"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-75 css-i4bv87-MuiSvgIcon-root"
+        data-testid="ErrorOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-75 css-i4bv87-MuiSvgIcon-root"
-          data-testid="ErrorOutlinedIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
-          />
-        </svg>
-        <div
-          class="SuspendWarning-text-74"
-        >
-          <p>
-            This notebook has not been accessed for some time (20 days), please consider suspending
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+        />
+      </svg>
+      <div
+        class="SuspendWarning-text-74"
+      >
+        <p>
+          This notebook has not been accessed for some time (20 days), please consider suspending
 if not required. This warning will be dismissed if the notebook is opened.
-          </p>
-        </div>
-        <div
-          class="SuspendWarning-info-76"
+        </p>
+      </div>
+      <div
+        class="SuspendWarning-info-76"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
-            tabindex="0"
-            type="button"
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
+            href="http://localhost:undefined/howto/suspend-and-restart-resources"
+            style="text-decoration: none;"
+            target="_blank"
           >
-            <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-              href="http://localhost:undefined/howto/suspend-and-restart-resources"
-              style="text-decoration: none;"
-              target="_blank"
-            >
-              MORE
-            </a>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <div
-          class="SuspendWarning-info-76"
+            MORE
+          </a>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="SuspendWarning-info-76"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
-            tabindex="0"
-            type="button"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-hide-77 css-i4bv87-MuiSvgIcon-root"
+            data-testid="CloseOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-hide-77 css-i4bv87-MuiSvgIcon-root"
-              data-testid="CloseOutlinedIcon"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-              />
-            </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            <path
+              d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
             />
-          </button>
-        </div>
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
       </div>
     </div>
   </div>
@@ -296,74 +294,72 @@ exports[`StackCard an rstudio notebook that should only have a RECENTLY OPENED w
         </div>
       </div>
     </div>
-    <div>
-      <div
-        class="SuspendWarning-message-57"
+    <div
+      class="SuspendWarning-message-57"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-59 css-i4bv87-MuiSvgIcon-root"
+        data-testid="ErrorOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-59 css-i4bv87-MuiSvgIcon-root"
-          data-testid="ErrorOutlinedIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
-          />
-        </svg>
-        <div
-          class="SuspendWarning-text-58"
-        >
-          <p>
-            This notebook was opened 2 hours ago and may still be in use.  Please be aware that opening
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+        />
+      </svg>
+      <div
+        class="SuspendWarning-text-58"
+      >
+        <p>
+          This notebook was opened 2 hours ago and may still be in use.  Please be aware that opening
 it will close it for the other user.
-          </p>
-        </div>
-        <div
-          class="SuspendWarning-info-60"
+        </p>
+      </div>
+      <div
+        class="SuspendWarning-info-60"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
-            tabindex="0"
-            type="button"
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
+            href="http://localhost:undefined/howto/rstudio-single-user-explanation"
+            style="text-decoration: none;"
+            target="_blank"
           >
-            <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-              href="http://localhost:undefined/howto/rstudio-single-user-explanation"
-              style="text-decoration: none;"
-              target="_blank"
-            >
-              MORE
-            </a>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <div
-          class="SuspendWarning-info-60"
+            MORE
+          </a>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="SuspendWarning-info-60"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
-            tabindex="0"
-            type="button"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-hide-61 css-i4bv87-MuiSvgIcon-root"
+            data-testid="CloseOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-hide-61 css-i4bv87-MuiSvgIcon-root"
-              data-testid="CloseOutlinedIcon"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-              />
-            </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            <path
+              d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
             />
-          </button>
-        </div>
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
       </div>
     </div>
   </div>
