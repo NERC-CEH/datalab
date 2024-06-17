@@ -2,47 +2,73 @@
 
 exports[`SuspendWarning renders correct snapshot 1`] = `
 <div>
-  <div
-    class="SuspendWarning-message-1"
-  >
-    <svg
-      aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-3 css-i4bv87-MuiSvgIcon-root"
-      data-testid="ErrorOutlineIcon"
-      focusable="false"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-      />
-    </svg>
+  <div>
     <div
-      class="SuspendWarning-text-2"
+      class="SuspendWarning-message-1"
     >
-      <p>
-        message
-      </p>
-    </div>
-    <div
-      class="SuspendWarning-info-4"
-    >
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-icon-3 css-i4bv87-MuiSvgIcon-root"
+        data-testid="ErrorOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-          href="http://localhost:undefined/howto/docId"
-          style="text-decoration: none;"
-          target="_blank"
-        >
-          MORE
-        </a>
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
         />
-      </button>
+      </svg>
+      <div
+        class="SuspendWarning-text-2"
+      >
+        <p>
+          message
+        </p>
+      </div>
+      <div
+        class="SuspendWarning-info-4"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
+            href="http://localhost:undefined/howto/docId"
+            style="text-decoration: none;"
+            target="_blank"
+          >
+            MORE
+          </a>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="SuspendWarning-info-4"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lwtx1x-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium SuspendWarning-hide-5 css-i4bv87-MuiSvgIcon-root"
+            data-testid="CloseOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </div>
