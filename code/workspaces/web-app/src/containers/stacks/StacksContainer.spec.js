@@ -7,7 +7,6 @@ import StacksContainer, { PureStacksContainer } from './StacksContainer';
 import stackService from '../../api/stackService';
 import listUsersService from '../../api/listUsersService';
 import notify from '../../components/common/notify';
-import StackCards from '../../components/stacks/StackCards';
 
 jest.mock('../../api/stackService');
 let loadStacksMock;

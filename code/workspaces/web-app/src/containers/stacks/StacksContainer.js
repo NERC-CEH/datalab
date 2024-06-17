@@ -4,8 +4,9 @@ import { reset } from 'redux-form';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { permissionTypes, statusTypes, visibilityTypes } from 'common';
 import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { permissionTypes, statusTypes, visibilityTypes } from 'common';
 import { MODAL_TYPE_CONFIRMATION, MODAL_TYPE_LOGS, MODAL_TYPE_RESTART_STACK, MODAL_TYPE_SCALE_STACK, MODAL_TYPE_SHARE_STACK } from '../../constants/modaltypes';
 import modalDialogActions from '../../actions/modalDialogActions';
 import notify from '../../components/common/notify';
@@ -13,7 +14,6 @@ import currentProjectSelectors from '../../selectors/currentProjectSelectors';
 import stackActions from '../../actions/stackActions';
 import StackCards from '../../components/stacks/StackCards';
 import userActions from '../../actions/userActions';
-import FormControlLabel from '@mui/material/FormControlLabel';
 
 const refreshTimeout = 15000;
 

@@ -9,8 +9,6 @@ import PermissionWrapper from '../common/ComponentPermissionWrapper';
 import PromisedContentWrapper from '../common/PromisedContentWrapper';
 import Pagination from './Pagination';
 import { PROJECT_TYPE_NAME } from '../../containers/projects/projectTypeName';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
 
 const useStyles = makeStyles(theme => ({
   stackDiv: {
