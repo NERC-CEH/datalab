@@ -1,5 +1,10 @@
 {
   "types": {
+    "1": {
+      "displayValue": "NFS",
+      "description": "Network File System (NFS) volume to store data for Notebooks and Sites.",
+      "storageClass": "nfs-storage"
+    },
     "NFS": {
       "displayValue": "NFS",
       "description": "Network File System (NFS) volume to store data for Notebooks and Sites.",
