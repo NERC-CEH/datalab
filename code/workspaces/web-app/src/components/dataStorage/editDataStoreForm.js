@@ -13,16 +13,12 @@ const formPropTypes = {
       value: PropTypes.string,
     }),
   ).isRequired,
-  loadUsersPromise: PropTypes.shape({
-    error: PropTypes.any,
-    fetching: PropTypes.bool.isRequired,
-    value: PropTypes.array.isRequired,
-  }).isRequired,
+  usersFetching: PropTypes.bool.isRequired,
 };
 
 const EditDataStoreForm = ({
   handleSubmit, reset, pristine, // from redux form
-  userList, loadUsersPromise, onCancel, // user provided
+  userList, usersFetching, onCancel, // user provided
 }) => (
   <form onSubmit={handleSubmit}>
     <Field
@@ -44,7 +40,7 @@ const EditDataStoreForm = ({
       options={userList}
       getOptionLabel={option => option.label}
       getOptionSelected={(option, value) => option.value === value.value}
-      loading={loadUsersPromise.fetching}
+      loading={usersFetching}
     />
     <UpdateFormControls onClearChanges={reset} onCancel={onCancel} pristine={pristine}/>
   </form>

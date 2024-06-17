@@ -15,7 +15,7 @@ describe('EditDataStoreForm', () => {
       pristine={true}
       onCancel={jest.fn().mockName('onCancel')}
       userList={[{ label: 'User 1', value: 'user1' }, { label: 'User 2', value: 'user2' }]}
-      loadUsersPromise={{ error: null, fetching: false, value: [] }}
+      usersFetching={false}
     />,
   ).container;
 

@@ -17,7 +17,7 @@ exports[`Edit data store dialog creates correct snapshot 1`] = `
   >
     <div>
       EditDataStoreForm mock 
-      {"userList":[{"label":"expectedLabelTwo","value":"expectedValueTwo","verified":true}],"loadUsersPromise":{"error":null,"fetching":false,"value":[]},"initialValues":{"displayName":"Stack Display Name","description":"Stack description","users":[{"label":"expectedLabelOne","value":"expectedValueOne","verified":true}]}}
+      {"userList":[{"label":"expectedLabelTwo","value":"expectedValueTwo","verified":true}],"usersFetching":false,"initialValues":{"displayName":"Stack Display Name","description":"Stack description","users":[{"label":"expectedLabelOne","value":"expectedValueOne","verified":true}]}}
     </div>
   </div>
 </div>

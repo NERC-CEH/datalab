@@ -23,11 +23,7 @@ describe('Edit data store dialog', () => {
       title: 'expectedTitle',
       currentUsers: [{ label: 'expectedLabelOne', value: 'expectedValueOne', verified: true }],
       userList: [{ label: 'expectedLabelTwo', value: 'expectedValueTwo', verified: true }, { label: 'expectedLabelThree', value: 'expectedValueThree', verified: false }],
-      loadUsersPromise: {
-        error: null,
-        fetching: false,
-        value: [],
-      },
+      usersFetching: false,
       stack: { name: 'stackName', displayName: 'Stack Display Name', description: 'Stack description' },
       projectKey: 'project99',
       typeName: 'Data Store',
