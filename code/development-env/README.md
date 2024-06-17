@@ -298,9 +298,9 @@ Depending on using Minikube or K3s the following command should the be run.
 
 ```bash
 # Minikube (including extra proxy)
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up
+docker compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml up
 # K3s
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml up
+docker compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml up
 ```
 
 You should eventually see a message from the web-app saying `You can now view datalab-app in the browser.`
@@ -308,7 +308,6 @@ You should eventually see a message from the web-app saying `You can now view da
 Note:
 
 * The services can be run in the background by running docker-compose with the -d flag.
-* If you want to maintain the state of your previous run, omit `docker-compose-mongo-import.yml`.
 
 ### Running with Keycloak
 
@@ -326,7 +325,7 @@ Keycloak must be resolvable both by the auth service as well as your local deskt
 Finally, use the following command to start the app in place of the final one used above. When setting up for the first time it may take a minute before login is available as the OIDC client is set up for the first time.
 
 ```bash
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-mongo-import.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up
+docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up
 ```
 
 ### Accessing the database
