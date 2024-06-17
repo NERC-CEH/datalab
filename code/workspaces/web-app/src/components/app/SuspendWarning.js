@@ -53,12 +53,11 @@ const SuspendWarning = ({ classes, message, docId }) => {
             </Link>
           </Button>
         </div>
-        { showMessage ? <div className={classes.info}>
-            <Button color="inherit" onClick={onHide}>
-              <CloseOutlinedIcon className={classes.hide} />
-            </Button>
-          </div> : null
-        }
+        <div className={classes.info}>
+          <Button color="inherit" onClick={onHide}>
+            <CloseOutlinedIcon className={classes.hide} />
+          </Button>
+        </div>
       </div> : null
       }
     </div>
