@@ -325,7 +325,7 @@ Keycloak must be resolvable both by the auth service as well as your local deskt
 Finally, use the following command to start the app in place of the final one used above. When setting up for the first time it may take a minute before login is available as the OIDC client is set up for the first time.
 
 ```bash
-docker-compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up
+docker compose -f ./docker/docker-compose-mongo.yml -f ./docker/docker-compose-app.yml -f ./docker/docker-compose-proxy.yml -f ./docker/docker-compose-keycloak.yml up
 ```
 
 ### Accessing the database
