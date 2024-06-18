@@ -1,7 +1,9 @@
 # 1. Getting Ready
 
-A Panel site can be used to visualise a Jupyter notebook, so, before continuing,
-you will need the following:
+A [Panel][panel] site can be used to visualise a Jupyter notebook, so,
+before continuing, you will need the following:
+
+[panel]: https://panel.holoviz.org/getting_started/
 
 * A project
 * Project storage

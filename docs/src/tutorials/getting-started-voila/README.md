@@ -1,7 +1,9 @@
 # My first Voilà Site
 
-In this tutorial you will create a *Voilà* site within Datalabs, allowing you to
+In this tutorial you will create a *[Voilà][voila]* site within Datalabs, allowing you to
 visualise and interact with a notebook.
+
+[voila]: https://github.com/voila-dashboards/voila
 
 1. [Getting ready](01-getting-ready.md)
 2. [Create a Voilà site](02-create-voila-site.md)

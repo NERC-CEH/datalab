@@ -1,7 +1,9 @@
 # 1. Getting Ready
 
-A Voilà site can be used to visualise a Jupyter notebook, so,
+A [Voilà][voila] site can be used to visualise a Jupyter notebook, so,
 before continuing, you will need the following:
+
+[voila]: https://github.com/voila-dashboards/voila
 
 * A project
 * Project storage

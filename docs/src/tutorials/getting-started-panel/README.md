@@ -1,7 +1,9 @@
 # My first Panel Site
 
-In this tutorial you will create a *Panel* site within Datalabs, allowing you to
+In this tutorial you will create a *[Panel][panel]* site within Datalabs, allowing you to
 visualise and interact with a notebook.
+
+[panel]: https://panel.holoviz.org/getting_started/
 
 1. [Getting ready](01-getting-ready.md)
 2. [Create a Panel site](02-create-panel-site.md)
