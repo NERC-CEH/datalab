@@ -1,10 +1,9 @@
-import React from 'react';
-// import { Link, withStyles, Button } from '@material-ui/core';
+import React, { useState } from 'react';
 import { Link, Button } from '@mui/material';
 import withStyles from '@mui/styles/withStyles';
 import ReactMarkdown from 'react-markdown/react-markdown.min';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-// import ErrorOutline from '@material-ui/icons/ErrorOutline';
+import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import PropTypes from 'prop-types';
 import { extendSubdomain } from '../../core/getDomainInfo';
 
@@ -25,30 +24,42 @@ const styles = theme => ({
   info: {
     padding: '5px',
   },
+  hide: {
+    padding: 0,
+  },
 });
 
-const SuspendWarning = ({ classes, message, docId }) => (
-  <div className={classes.message}>
-    <ErrorOutlineIcon className={classes.icon} />
-    <div className={classes.text}>
-      <ReactMarkdown>
-        {message}
-      </ReactMarkdown>
-    </div>
-    <div className={classes.info}>
-      <Button color="inherit">
-        <Link
-          style={{ textDecoration: 'none' }}
-          target="_blank"
-          color="inherit"
-          href={`${extendSubdomain('docs')}/howto/${docId}`}
-        >
-            MORE
-        </Link>
-      </Button>
-    </div>
-  </div>
-);
+const SuspendWarning = ({ classes, message, docId }) => {
+  const [showMessage, setShowMessage] = useState(true);
+  const onHide = () => setShowMessage(false);
+  return ((!showMessage) ? null
+    : <div className={classes.message}>
+        <ErrorOutlinedIcon className={classes.icon}/>
+        <div className={classes.text}>
+          <ReactMarkdown>
+            {message}
+          </ReactMarkdown>
+        </div>
+        <div className={classes.info}>
+          <Button color="inherit">
+            <Link
+                style={{ textDecoration: 'none' }}
+                target="_blank"
+                color="inherit"
+                href={`${extendSubdomain('docs')}/howto/${docId}`}
+            >
+              MORE
+            </Link>
+          </Button>
+        </div>
+        <div className={classes.info}>
+          <Button color="inherit" onClick={onHide}>
+            <CloseOutlinedIcon className={classes.hide} />
+          </Button>
+        </div>
+      </div>
+  );
+};
 
 SuspendWarning.propTypes = {
   classes: PropTypes.object.isRequired,
