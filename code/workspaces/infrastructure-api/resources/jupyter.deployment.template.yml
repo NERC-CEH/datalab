@@ -44,6 +44,7 @@ spec:
         - image: {{ &jupyter.image }}
           imagePullPolicy : "IfNotPresent"
           name: {{ name }}
+          workingDir: /data/notebooks/{{ name }}
           command: ["start.sh",
             "jupyter", "{{ startCmd }}",
             "--NotebookApp.token=$(JUPYTER_TOKEN)",
