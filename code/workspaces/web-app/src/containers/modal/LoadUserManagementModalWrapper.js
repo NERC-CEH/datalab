@@ -3,17 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { mapKeys, get, find } from 'lodash';
-import dataStorageActions from '../../actions/dataStorageActions';
 import userActions from '../../actions/userActions';
-import notify from '../../components/common/notify';
 
 class LoadUserManagementModalWrapper extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.addUser = this.addUser.bind(this);
-    this.removeUser = this.removeUser.bind(this);
-  }
-
   componentDidMount() {
     // Added .catch to prevent unhandled promise error, when lacking permission to view content
     this.props.actions.listUsers()
@@ -23,24 +15,6 @@ class LoadUserManagementModalWrapper extends Component {
   shouldComponentUpdate(nextProps) {
     const isFetching = nextProps.dataStorage.fetching;
     return !isFetching;
-  }
-
-  addUser({ value }) {
-    const { name } = this.getDataStore();
-    this.props.actions.addUserToDataStore(this.props.projectKey, { name, users: [value] })
-      .then(() => notify.success('User added to data store'))
-      .then(() => this.props.actions.loadDataStorage(this.props.projectKey));
-  }
-
-  removeUser({ value }) {
-    if (this.props.loginUserId !== value) {
-      const { name } = this.getDataStore();
-      this.props.actions.removeUserFromDataStore(this.props.projectKey, { name, users: [value] })
-        .then(() => notify.success('User removed from data store'))
-        .then(() => this.props.actions.loadDataStorage(this.props.projectKey));
-    } else {
-      notify.error('Unable to remove self');
-    }
   }
 
   remapKeys(users) {
@@ -82,8 +56,6 @@ class LoadUserManagementModalWrapper extends Component {
         currentUsers={this.getCurrentUsers()}
         userList={this.remapKeys(this.props.users.value)}
         loadUsersPromise={this.props.users}
-        addUser={this.addUser}
-        removeUser={this.removeUser}
         stack={this.props.stack}
         typeName={this.props.typeName}
         projectKey={this.props.projectKey}
@@ -101,14 +73,13 @@ LoadUserManagementModalWrapper.propTypes = {
   userKeysMapping: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ authentication: { identity: { sub } }, dataStorage, users }) {
-  return { loginUserId: sub, dataStorage, users };
+function mapStateToProps({ dataStorage, users }) {
+  return { dataStorage, users };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      ...dataStorageActions,
       ...userActions,
     }, dispatch),
   };
