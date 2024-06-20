@@ -1,5 +1,5 @@
 # Build library dependencies
-FROM node:16.13.0-alpine as common
+FROM node:18.20.3-alpine as common
 
 ARG LIBRARY
 
@@ -18,8 +18,6 @@ RUN ./buildLibraries
 FROM node:lts-alpine
 
 ARG WORKSPACE
-
-LABEL maintainer "joshua.foster@stfc.ac.uk"
 
 RUN mkdir -p /usr/src/app/resources && mkdir -p /usr/src/common
 

@@ -7,7 +7,7 @@ EXIT_CRITICAL=16;
 
 SEVERITY=$EXIT_HIGH
 
-(cd ./code && yarn audit --level=high --groups dependencies)
+(cd ./code && yarn set version stable && yarn npm audit --severity=high -R)
 t1=$?
 echo "Yarn audit result $t1"
 if [ $t1 -ge $SEVERITY ]; then

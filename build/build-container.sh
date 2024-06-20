@@ -7,6 +7,7 @@ set -e
 # git fetch --deepen=1
 GIT_DESCRIBE=`git describe --tags --always`
 echo "git describe $GIT_DESCRIBE"
+yarn set version stable
 
 if [[ ($# -eq 1 || $# -eq 2 && $2 == "--push" ) ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|common|chassis)$ ]]; then
   case "$1" in
