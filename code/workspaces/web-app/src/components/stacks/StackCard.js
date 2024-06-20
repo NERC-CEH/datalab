@@ -214,7 +214,7 @@ StackCard.propTypes = {
   editPermission: PropTypes.string,
   scalePermission: PropTypes.string,
   copySnippets: PropTypes.objectOf(PropTypes.func),
-  showUsernames: PropTypes.bool.isRequired,
+  showUsernames: PropTypes.bool,
 };
 
 function getDisplayName(stack) {
