@@ -52,8 +52,8 @@
     "test-ci": "CI=true jest",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
-    "build": "shx rm -rf dist && shx mkdir -p resources && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist --copy-files",
-    "start": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/server.js",
-    "mock": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/mockServer.js"
+    "build": "shx rm -rf dist && shx mkdir -p resources && babel src --root-mode upward-optional --ignore '**/__mocks__/,**/*.spec.js' --out-dir dist --copy-files",
+    "start": "nodemon --watch src --ignore '**/*.spec.js' --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/server.js",
+    "mock": "nodemon --watch src --ignore '**/*.spec.js' --exec babel-node --root-mode upward --ignore='../../node_modules' ./src/mockServer.js"
   }
 }

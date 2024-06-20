@@ -55,8 +55,8 @@
     "lint-fix": "eslint ./src --fix",
     "build": "shx rm -rf dist && shx mkdir -p resources && babel src --root-mode upward-optional --ignore **/__mocks__/,**/*.spec.js --out-dir dist",
     "start": "concurrently -p \"[{name}]\" -n \"API,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold\"  \"yarn api\" \"yarn watcher\"",
-    "api": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' src/server.js",
-    "watcher": "nodemon --watch src --ignore **/*.spec.js --exec babel-node --root-mode upward --ignore='../../node_modules' src/watcher.js",
+    "api": "nodemon --watch src '--ignore **/*.spec.js' --exec babel-node --root-mode upward --ignore='../../node_modules' src/server.js",
+    "watcher": "nodemon --watch src '--ignore **/*.spec.js' --exec babel-node --root-mode upward --ignore='../../node_modules' src/watcher.js",
     "expireNotebooks": "babel-node --root-mode upward --ignore='../../node_modules' src/expireNotebooks.js"
   }
 }
