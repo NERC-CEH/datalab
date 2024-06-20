@@ -1,5 +1,4 @@
 import httpMocks from 'node-mocks-http';
-import { ANALYSIS, PUBLISH } from 'common/src/stackTypes';
 import resourcesController from './resourcesController';
 import dataStorageRepository from '../dataaccess/dataStorageRepository';
 import stacksRepository from '../dataaccess/stacksRepository';
@@ -43,8 +42,8 @@ const storage = [
   { name: 'no key' },
 ];
 const stacks = [
-  { category: ANALYSIS, projectKey: 'project-99', name: 'notebook-99' },
-  { category: PUBLISH, projectKey: 'project-99', name: 'site-99' },
+  { category: 'ANALYSIS', projectKey: 'project-99', name: 'notebook-99' },
+  { category: 'PUBLISH', projectKey: 'project-99', name: 'site-99' },
   { name: 'no key' },
 ];
 const clusters = [

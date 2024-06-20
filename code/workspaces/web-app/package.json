@@ -51,8 +51,10 @@
     "axios-mock-adapter": "1.17.0",
     "enzyme": "3.10.0",
     "enzyme-to-json": "3.3.5",
+    "eslint": "^7.11.0",
     "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "jest-enzyme": "7.0.2",
@@ -68,8 +70,8 @@
     "test-ci": "CI=true react-scripts test --watchAll=false --runInBand",
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "../../node_modules/.bin/eslint ./src",
-    "lint-fix": "../../node_modules/.bin/eslint ./src --fix"
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix"
   },
   "browserslist": {
     "production": [

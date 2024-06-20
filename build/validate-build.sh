@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+yarn set version stable
 if [[ $# -eq 1 ]] && [[ "$1" =~ ^(docs|api|app|infrastructure|authorisation|common|chassis)$ ]]; then
   case "$1" in
     docs)
