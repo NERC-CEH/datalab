@@ -585,25 +585,25 @@ exports[`StackCard when showUsernames is set to false username should be hidden 
 <div>
   <div>
     <div
-      class="StackCard-cardDiv-98"
+      class="StackCard-cardDiv-100"
     >
       <div
-        class="StackCard-imageDiv-99"
+        class="StackCard-imageDiv-101"
       >
         <img
           alt="rstudio logo"
-          class="StackCard-cardImage-105"
+          class="StackCard-cardImage-107"
           src="rstudio-logo.png"
         />
       </div>
       <div
-        class="StackCard-textDiv-100"
+        class="StackCard-textDiv-102"
       >
         <div
-          class="StackCard-displayNameContainer-102"
+          class="StackCard-displayNameContainer-104"
         >
           <h5
-            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-101 css-ltmxt9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-103 css-ltmxt9-MuiTypography-root"
           >
             name1
           </h5>
@@ -616,14 +616,14 @@ exports[`StackCard when showUsernames is set to false username should be hidden 
           RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
         </p>
         <p
-          class="MuiTypography-root MuiTypography-body1 StackCard-shareStatus-108 css-12gb3o9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 StackCard-shareStatus-110 css-12gb3o9-MuiTypography-root"
         >
           Shared by 
           ******
         </p>
       </div>
       <div
-        class="StackCard-actionsDiv-103"
+        class="StackCard-actionsDiv-105"
       >
         <div>
           StackCardActions mock 
@@ -641,25 +641,25 @@ exports[`StackCard when showUsernames is set to true username should be shown 1`
 <div>
   <div>
     <div
-      class="StackCard-cardDiv-109"
+      class="StackCard-cardDiv-111"
     >
       <div
-        class="StackCard-imageDiv-110"
+        class="StackCard-imageDiv-112"
       >
         <img
           alt="rstudio logo"
-          class="StackCard-cardImage-116"
+          class="StackCard-cardImage-118"
           src="rstudio-logo.png"
         />
       </div>
       <div
-        class="StackCard-textDiv-111"
+        class="StackCard-textDiv-113"
       >
         <div
-          class="StackCard-displayNameContainer-113"
+          class="StackCard-displayNameContainer-115"
         >
           <h5
-            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-112 css-ltmxt9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap StackCard-displayName-114 css-ltmxt9-MuiTypography-root"
           >
             name1
           </h5>
@@ -672,14 +672,14 @@ exports[`StackCard when showUsernames is set to true username should be shown 1`
           RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
         </p>
         <p
-          class="MuiTypography-root MuiTypography-body1 StackCard-shareStatus-119 css-12gb3o9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 StackCard-shareStatus-121 css-12gb3o9-MuiTypography-root"
         >
           Shared by 
           user1@example.com
         </p>
       </div>
       <div
-        class="StackCard-actionsDiv-114"
+        class="StackCard-actionsDiv-116"
       >
         <div>
           StackCardActions mock 
