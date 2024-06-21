@@ -84,6 +84,7 @@ export function PureAddUserPermission({
         setSelectedUsers={setSelectedUser}
         label="Add User"
         placeholder="Type user's email..."
+        isDropdownHidden={true}
       />
       <PermissionsSelector
         className={classes.permissionsSelector}
