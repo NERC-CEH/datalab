@@ -280,6 +280,7 @@ spec:
         - image: nerc/jupyterlab:ee1e157f36f5-spark-3.3.0
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
+          workingDir: /data/notebooks/deployment-name
           command: [\\"start.sh\\",
             \\"jupyter\\", \\"notebook\\",
             \\"--NotebookApp.token=$(JUPYTER_TOKEN)\\",
@@ -404,6 +405,7 @@ spec:
         - image: nerc/jupyterlab:ee1e157f36f5-spark-3.3.0
           imagePullPolicy : \\"IfNotPresent\\"
           name: deployment-name
+          workingDir: /data/notebooks/deployment-name
           command: [\\"start.sh\\",
             \\"jupyter\\", \\"lab\\",
             \\"--NotebookApp.token=$(JUPYTER_TOKEN)\\",
@@ -896,7 +898,7 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
+            \\"ln -s /data/notebooks/deployment-name/ /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
@@ -985,7 +987,7 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
+            \\"ln -s /data/notebooks/deployment-name/ /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
