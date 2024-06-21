@@ -40,13 +40,15 @@ const buildCreateButton = ({ userPermissions, createPermission, openCreationForm
 
 const StackCards = (
   { stacks, typeName, typeNamePlural, openStack, deleteStack, editStack, restartStack, scaleStack, openCreationForm, showCreateButton,
-    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets = undefined, actionButtonLabelPrefix = 'Create' },
+    userPermissions, createPermission, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack,
+    copySnippets = undefined, actionButtonLabelPrefix = 'Create', showUsernames },
 ) => {
   const classes = useStyles();
   const sortedStacks = stacks.fetching ? [] : sortBy(stacks.value, stack => stack.displayName.toLowerCase());
   const renderedStacks = sortedStacks && sortedStacks.length > 0
     ? sortedStacks.map(stack => (
       <StackCard
+        showUsernames={showUsernames}
         key={stack.id}
         stack={stack}
         typeName={typeName}
@@ -103,4 +105,5 @@ StackCards.propTypes = {
   editPermission: PropTypes.string,
   scalePermission: PropTypes.string,
   copySnippets: PropTypes.objectOf(PropTypes.func),
+  showUsernames: PropTypes.bool,
 };

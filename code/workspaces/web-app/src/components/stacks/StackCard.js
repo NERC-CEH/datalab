@@ -104,7 +104,7 @@ function hoursSinceCreation(accessTime) {
 }
 
 const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartStack, scaleStack, typeName,
-  userPermissions, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets }) => {
+  userPermissions, openPermission, deletePermission, editPermission, scalePermission, getLogs, shareStack, copySnippets, showUsernames }) => {
   const users = useUsers();
   const storeDisplayValue = (typeName === STORAGE_TYPE_NAME && stack.type) ? storageDisplayValue(stack.type) : '';
   const description = getDescription(stack, typeName);
@@ -134,6 +134,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
   };
 
   const warning = generateWarning();
+  const sharedUser = showUsernames ? getUserEmail(stack.users, users) : '******';
 
   const ResourceInfo = () => {
     if (typeName === NOTEBOOK_TYPE_NAME || typeName === SITE_TYPE_NAME) {
@@ -160,7 +161,7 @@ const StackCard = ({ classes, stack, openStack, deleteStack, editStack, restartS
           <Tooltip title={description} placement='bottom-start'>
             <Typography variant="body1" noWrap>{description}</Typography>
           </Tooltip>
-          {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {getUserEmail(stack.users, users)}</Typography>}
+          {renderShareInfo(typeName, stack) && <Typography variant="body1" className={classes.shareStatus}>Shared by {sharedUser}</Typography>}
         </div>
         <div className={classes.actionsDiv}>
           {typeName !== STORAGE_TYPE_NAME && typeName !== PROJECT_TYPE_NAME && stack.status && <div className={classes.statusDiv}><StackStatus status={stack.status}/></div>}
@@ -213,6 +214,7 @@ StackCard.propTypes = {
   editPermission: PropTypes.string,
   scalePermission: PropTypes.string,
   copySnippets: PropTypes.objectOf(PropTypes.func),
+  showUsernames: PropTypes.bool,
 };
 
 function getDisplayName(stack) {

@@ -9,7 +9,12 @@ import { initialiseFeatureFlags } from '../../config/featureFlags';
 
 const httpMock = new MockAdapter(axios);
 
-jest.mock('../../hooks/usersHooks');
+// jest.mock('../../hooks/usersHooks');
+jest.mock('../../hooks/usersHooks', () => ({
+  useUsers: () => ({ value: [
+    { userId: 'user1@example.com', name: 'user1@example.com' },
+    { userId: 'user2@example.com', name: 'user2@example.com' }] }),
+}));
 jest.mock('../../config/storage');
 
 jest.mock('./StackCardActions/StackCardActions', () => props => (<div>StackCardActions mock {JSON.stringify(props)} </div>));
@@ -55,6 +60,7 @@ describe('StackCard', () => {
       status,
       shared: 'private',
       accessTime,
+      users: ['user1@example.com', 'user2@example.com'],
     },
     openStack: jest.fn().mockName('openStack'),
     deleteStack: jest.fn().mockName('deleteStack'),
@@ -64,6 +70,7 @@ describe('StackCard', () => {
       Python: jest.fn().mockName('copyPythonSnippet'),
     },
     typeName: 'Notebook',
+    showUsernames: false,
     ...permissionProps,
   });
 
@@ -158,6 +165,32 @@ describe('StackCard', () => {
 
     // Act
     const output = render(<StackCard {...props} />).container;
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('when showUsernames is set to false username should be hidden', async () => {
+    // Arrange
+    const props = generateProps('rstudio');
+    props.showUsernames = false;
+    props.stack.shared = 'project';
+
+    // Act
+    const output = render(<StackCard { ...props} />).container;
+
+    // Assert
+    expect(output).toMatchSnapshot();
+  });
+
+  it('when showUsernames is set to true username should be shown', async () => {
+    // Arrange
+    const props = generateProps('rstudio');
+    props.showUsernames = true;
+    props.stack.shared = 'project';
+
+    // Act
+    const output = render(<StackCard { ...props} />).container;
 
     // Assert
     expect(output).toMatchSnapshot();

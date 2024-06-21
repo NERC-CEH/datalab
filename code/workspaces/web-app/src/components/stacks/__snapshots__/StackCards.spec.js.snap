@@ -9,15 +9,15 @@ exports[`StackCards creates correct snapshot for an array of stacks 1`] = `
       <div>
         <div>
           StackCard mock 
-          {"stack":{"displayName":"name1","id":"1","type":"type1"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
+          {"showUsernames":false,"stack":{"displayName":"name1","id":"1","type":"type1"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
         </div>
         <div>
           StackCard mock 
-          {"stack":{"displayName":"name2","id":"2","type":"type2"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
+          {"showUsernames":false,"stack":{"displayName":"name2","id":"2","type":"type2"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
         </div>
         <div>
           StackCard mock 
-          {"stack":{"displayName":"name3","id":"3","type":"type3"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
+          {"showUsernames":false,"stack":{"displayName":"name3","id":"3","type":"type3"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
         </div>
       </div>
       <div
@@ -100,15 +100,15 @@ exports[`StackCards creates correct snapshot when no create button 1`] = `
       <div>
         <div>
           StackCard mock 
-          {"stack":{"displayName":"name1","id":"1","type":"type1"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
+          {"showUsernames":false,"stack":{"displayName":"name1","id":"1","type":"type1"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
         </div>
         <div>
           StackCard mock 
-          {"stack":{"displayName":"name2","id":"2","type":"type2"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
+          {"showUsernames":false,"stack":{"displayName":"name2","id":"2","type":"type2"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
         </div>
         <div>
           StackCard mock 
-          {"stack":{"displayName":"name3","id":"3","type":"type3"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
+          {"showUsernames":false,"stack":{"displayName":"name3","id":"3","type":"type3"},"typeName":"expectedTypeName","userPermissions":["open","delete","create","edit"],"openPermission":"open","deletePermission":"delete","editPermission":"edit","copySnippets":{}}
         </div>
       </div>
     </div>

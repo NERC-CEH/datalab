@@ -88,6 +88,7 @@ exports[`StacksContainer is a container which passes correct props to StackCard 
   scaleStack={[Function]}
   shareStack={[Function]}
   showCreateButton={true}
+  showUsernames={false}
   stacks={
     Object {
       "fetching": false,
