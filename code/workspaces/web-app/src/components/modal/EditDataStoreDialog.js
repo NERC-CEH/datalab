@@ -38,14 +38,14 @@ export const getOnDetailsEditSubmit = (projectKey, stackName, typeName) => async
 };
 
 const EditDataStoreDialog = ({
-  onCancel, title, currentUsers, userList, loadUsersPromise, stack, projectKey, typeName,
+  onCancel, title, currentUsers, userList, usersFetching, stack, projectKey, typeName,
 }) => (
   <Dialog open={true} maxWidth="md" fullWidth>
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
       <EditDataStoreForm
         userList={sortUsersByLabel(userList.filter(user => user.verified))}
-        loadUsersPromise={loadUsersPromise}
+        usersFetching={usersFetching}
         onSubmit={getOnDetailsEditSubmit(projectKey, stack.name, typeName)}
         onCancel={onCancel}
         initialValues={{
@@ -73,11 +73,7 @@ EditDataStoreDialog.propTypes = {
       value: PropTypes.string,
     }),
   ).isRequired,
-  loadUsersPromise: PropTypes.shape({
-    error: PropTypes.any,
-    fetching: PropTypes.bool.isRequired,
-    value: PropTypes.array.isRequired,
-  }).isRequired,
+  usersFetching: PropTypes.bool.isRequired,
   stack: PropTypes.shape({
     name: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,

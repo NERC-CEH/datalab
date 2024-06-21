@@ -2,29 +2,16 @@
 
 exports[`LoadUserManagement Modal Wrapper is a container which creates correct snapshot 1`] = `
 <Dialog
-  addUser={[Function]}
   currentUsers={
     Array [
-      Object {},
+      Object {
+        "label": "expectedName",
+        "value": "expectedId",
+      },
     ]
-  }
-  loadUsersPromise={
-    Object {
-      "value": Array [
-        Object {
-          "name": "expectedName",
-          "userId": "expectedId",
-        },
-        Object {
-          "name": "anotherExpectedName",
-          "userId": "anotherExpectedId",
-        },
-      ],
-    }
   }
   onCancel={[MockFunction]}
   projectKey="project99"
-  removeUser={[Function]}
   stack={
     Object {
       "description": "description",
@@ -45,5 +32,6 @@ exports[`LoadUserManagement Modal Wrapper is a container which creates correct s
       },
     ]
   }
+  usersFetching={false}
 />
 `;
