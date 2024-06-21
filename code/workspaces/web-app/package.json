@@ -62,8 +62,8 @@
     "shx": "^0.3.2"
   },
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
-    "build": "react-scripts build && shx rm -rf dist && shx mv build dist",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && shx rm -rf dist && shx mv build dist",
     "test": "react-scripts test --maxWorkers=50%",
     "test-ci": "CI=true react-scripts test --watchAll=false --runInBand",
     "test-coverage": "react-scripts test --coverage --watchAll=false",
