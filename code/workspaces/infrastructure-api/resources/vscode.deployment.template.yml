@@ -46,7 +46,7 @@ spec:
           name: {{ name }}
           command: ["/bin/sh",
             "-c",
-            "ln -s /data/notebooks/{{ name }}/ /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/{{ name }}/.vscode/data --extensions-dir /data/notebooks/{{ name }}/.vscode/extensions"
+            "ln -s /data/notebooks/{{ name }}/* /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/{{ name }}/.vscode/data --extensions-dir /data/notebooks/{{ name }}/.vscode/extensions"
           ]
           ports:
             - containerPort: 3000

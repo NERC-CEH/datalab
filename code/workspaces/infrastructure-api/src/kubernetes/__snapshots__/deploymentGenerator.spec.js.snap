@@ -898,7 +898,7 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"ln -s /data/notebooks/deployment-name/ /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
+            \\"ln -s /data/notebooks/deployment-name/* /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
@@ -987,7 +987,7 @@ spec:
           name: deployment-name
           command: [\\"/bin/sh\\",
             \\"-c\\",
-            \\"ln -s /data/notebooks/deployment-name/ /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
+            \\"ln -s /data/notebooks/deployment-name/* /home/workspace && exec /home/.openvscode-server/bin/openvscode-server --host 0.0.0.0 --connection-token $(ACCESS_TOKEN) --user-data-dir /data/notebooks/deployment-name/.vscode/data --extensions-dir /data/notebooks/deployment-name/.vscode/extensions\\"
           ]
           ports:
             - containerPort: 3000
