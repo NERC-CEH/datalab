@@ -7,7 +7,7 @@ const API_BASE = config.get('kubernetesApi');
 
 const getAutoScalerUrl = (namespace, name) => {
   const nameComponent = name ? `/${name}` : '';
-  return `${API_BASE}/apis/autoscaling/v2beta2/namespaces/${namespace}/horizontalpodautoscalers${nameComponent}`;
+  return `${API_BASE}/apis/autoscaling/v2/namespaces/${namespace}/horizontalpodautoscalers${nameComponent}`;
 };
 
 const YAML_CONTENT_HEADER = { headers: { 'Content-Type': 'application/yaml' } };
