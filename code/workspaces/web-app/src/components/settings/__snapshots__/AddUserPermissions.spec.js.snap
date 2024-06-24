@@ -87,7 +87,7 @@ exports[`AddUserPermissions renders pure component with correct props 1`] = `
   >
     <div>
       UserSelect mock 
-      {"className":"AddUserPermission-usersAutofill-5","selectedUsers":null,"label":"Add User","placeholder":"Type user's email..."}
+      {"className":"AddUserPermission-usersAutofill-5","selectedUsers":null,"label":"Add User","placeholder":"Type user's email...","isDropdownHidden":true}
     </div>
     <div
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root AddUserPermission-permissionsSelector-4 css-4mzek5-MuiFormControl-root-MuiTextField-root"
@@ -235,7 +235,7 @@ exports[`PureAddUserPermission renders to match snapshot 1`] = `
   >
     <div>
       UserSelect mock 
-      {"className":"usersAutofill","selectedUsers":{"name":"Test User One","userId":"test-user-one"},"label":"Add User","placeholder":"Type user's email..."}
+      {"className":"usersAutofill","selectedUsers":{"name":"Test User One","userId":"test-user-one"},"label":"Add User","placeholder":"Type user's email...","isDropdownHidden":true}
     </div>
     <div
       class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root permissionsSelector css-4mzek5-MuiFormControl-root-MuiTextField-root"

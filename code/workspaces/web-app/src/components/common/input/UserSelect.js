@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,19 +14,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UserSelect = ({ selectedUsers, setSelectedUsers, label, placeholder, multiselect = false, userSelectedToolTip = 'User Selected', ...otherProps }) => {
+const UserSelect = ({ selectedUsers, setSelectedUsers, label, placeholder, multiselect = false, userSelectedToolTip = 'User Selected', isDropdownHidden = false, ...otherProps }) => {
   const { value: users, fetching: loading } = useUsersSortedByName();
+  const [currentInput, setCurrentInput] = useState('');
 
   return (
     <Autocomplete
       {...otherProps}
+      filterOptions={options => options.filter(opt => (isDropdownHidden ? opt.name === currentInput : opt.name.includes(currentInput)))}
       multiple={multiselect}
       freeSolo={true}
       options={users}
       getOptionLabel={getOptionLabel}
       isOptionEqualToValue={val => (multiselect ? selectedUsers.includes(val) : selectedUsers === val)}
       value={selectedUsers}
-      onInputChange={(event, newValue) => setSelectedUsers({ name: newValue, userId: newValue })}
+      onInputChange={(event, newValue) => {
+        setCurrentInput(newValue);
+        if (isDropdownHidden) {
+          setSelectedUsers({ name: newValue, userId: newValue });
+        }
+      }}
       onChange={(event, newValue) => setSelectedUsers(newValue)}
       loading={loading}
       autoHighlight
@@ -69,14 +76,14 @@ export const Option = ({ option, selected, userSelectedToolTip }) => {
     <>
       {getOptionLabel(option)}
       {selected
-      && <Tooltip title={userSelectedToolTip} placement="right">
-        <CheckCircleRoundedIcon
-          className={classes.userSelectedIcon}
-          titleAccess={userSelectedToolTip}
-          color="primary"
-          fontSize="small"
-        />
-      </Tooltip>
+        && <Tooltip title={userSelectedToolTip} placement="right">
+          <CheckCircleRoundedIcon
+            className={classes.userSelectedIcon}
+            titleAccess={userSelectedToolTip}
+            color="primary"
+            fontSize="small"
+          />
+        </Tooltip>
       }
     </>
   );
