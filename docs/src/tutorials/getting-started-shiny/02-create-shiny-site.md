@@ -31,7 +31,23 @@ Next from DataLabs, on the left-hand side, select **Sites**.
 Select **Create Site** and fill out the form. In this form, the `Source Path`
 should point to where your app.R code exists within your Project Storage,
 for example `/data/notebooks/rstudio-notebook/tutorial`. (Assuming the project
-created in RStudio was called tutorial)
+created in RStudio was called tutorial).
+
+When creating a site you can select a visibility status depending on the target
+audience. These are as follows;
+
+* Private - This option should be chosen when working alone with no need to share
+access to the site.
+* Project - When you wish to share access to the site with others within the project
+in which you are working.
+* Public - If you wish there to be no authentication in place - allowing you to share
+access with the site with anyone on the internet.
+
+Note that if you wish to change the visibility status after the notebook this is also
+possible.
+
+At this stage it is also possible to attach assets to your site, see
+[this page](../../howto/use-the-asset-repo/) for further information.
 
 By default, the Shiny site will look for app.R or main.R/server.R. If nothing
 is present it will simply show a blank index page. The site will still be able to
