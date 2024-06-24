@@ -1,6 +1,6 @@
 # 3. Launch Shiny
 
-In this section you will launch a Panel site.
+In this section you will launch a Shiny site.
 
 Starting point: you should be logged in to DataLabs, in a project you have at least
 viewer permissions for. This project should contain a Shiny site connected to a
