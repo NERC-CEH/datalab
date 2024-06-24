@@ -6,7 +6,7 @@ import autoScalerApi from './autoScalerApi';
 const mockAxios = new MockAdapter(axios);
 const apiBase = config.get('kubernetesApi');
 const namespace = 'namespace';
-const hpaUrl = `${apiBase}/apis/autoscaling/v2beta2/namespaces/${namespace}/horizontalpodautoscalers`;
+const hpaUrl = `${apiBase}/apis/autoscaling/v2/namespaces/${namespace}/horizontalpodautoscalers`;
 const hpaName = 'hpa-name';
 
 const hpaResource = {
