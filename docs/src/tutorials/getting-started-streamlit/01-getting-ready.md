@@ -7,12 +7,14 @@ following:
 * A project
 * A data store
 * A Conda environment
-* A notebook or web IDE to edit code in the project storage
+* A notebook or web IDE to edit code in the project storage (e.g JupyterLab
+or Visual Studio Code)
 
 You can see tutorials to get started at:
 
 * [My First Notebook](../my-first-notebook/)
 * [My first Jupyter project](../getting-started-jupyter/)
+* [My first Visual Studio Code project](../getting-started-vscode/)
 * [Conda Environments Quick-Start-Guide](../../conda-pkgs/)
 
 You'll need to have Streamlit installed in your Conda environment, so
