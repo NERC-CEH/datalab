@@ -75,3 +75,8 @@ out.
 ## Can I restrict assets data to my own project? ##
 
 Yes, assets can be configured to be only accessible via specific projects if required.
+
+## Can I use assets within sites? ##
+
+Yes, assets can be attached to sites and detached from sites.  
+[Click to see the details](attach-asset-to-site.md)  
