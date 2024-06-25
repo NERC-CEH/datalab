@@ -5,9 +5,9 @@ In this tutorial, you will attach an asset during and after site creation
 
 It is recommended that you should already be familiar
  with any one of the materials in the tutorial.  
-[My first Panel site](../../tutorials/getting-started-panel/README.md)  
-or [My first Voilà site](../../tutorials/getting-started-voila/README.md)  
-or [My first Streamlit site](../../tutorials/getting-started-streamlit/README.md)
+[My first Panel site](../../tutorials/getting-started-panel/index.html)  
+or [My first Voilà site](../../tutorials/getting-started-voila/index.html)  
+or [My first Streamlit site](../../tutorials/getting-started-streamlit/index.html)
 
 ## Attach an asset in creating site
 
