@@ -15,7 +15,7 @@
     "convict": "^6.2.4",
     "cookie-parser": "^1.4.4",
     "express": "^4.19.2",
-    "express-jwt": "^6.1.2",
+    "express-jwt": "^7.7.8",
     "express-validator": "^6.13.0",
     "fs-extra-promise": "1.0.1",
     "js-yaml": "^3.13.1",
