@@ -154,5 +154,5 @@ function createManifest() {
     + 'metadata:\n'
     + '  name: test-service\n'
     + 'spec:\n'
-    + '  type: NodePort\n';
+    + '  type: ClusterIP\n';
 }

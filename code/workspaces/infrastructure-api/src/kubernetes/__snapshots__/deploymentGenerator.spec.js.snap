@@ -811,7 +811,7 @@ spec:
     targetPort: 5006
   selector:
     name: panel-name
-  type: NodePort
+  type: ClusterIP
 "
 `;
 
@@ -828,7 +828,7 @@ spec:
       targetPort: 3838
   selector:
     name: rshiny-name
-  type: NodePort
+  type: ClusterIP
 "
 `;
 
@@ -845,7 +845,7 @@ spec:
     targetPort: 8501
   selector:
     name: streamlit-name
-  type: NodePort
+  type: ClusterIP
 "
 `;
 
