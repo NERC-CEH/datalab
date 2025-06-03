@@ -89,7 +89,8 @@ sudo chown -R $(whoami) /etc/rancher/k3s/
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 kubectl create ns ingress-nginx
-helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --set controller.ingressClassResource.default=true --set controller.watchIngressWithoutClass=true
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --set controller.ingressClassResource.default=true --set controller.watchIngressWithoutClass=true --set controller.admissionWebhooks.enabled=false
+
 
 # Create devtest namespace
 kubectl apply -f ./config/manifests/minikube-namespace.yml
