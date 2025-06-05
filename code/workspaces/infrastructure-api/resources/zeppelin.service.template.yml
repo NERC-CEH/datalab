@@ -13,4 +13,4 @@ spec:
       targetPort: 8000
   selector:
     name: {{ name }}
-  type: NodePort
+  type: ClusterIP

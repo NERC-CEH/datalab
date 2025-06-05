@@ -10,4 +10,4 @@ spec:
     targetPort: 8866
   selector:
     name: {{ name }}
-  type: NodePort
+  type: ClusterIP

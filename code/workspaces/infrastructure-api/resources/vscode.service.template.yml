@@ -10,4 +10,4 @@ spec:
     targetPort: 3000
   selector:
     name: {{ name }}
-  type: NodePort
+  type: ClusterIP
